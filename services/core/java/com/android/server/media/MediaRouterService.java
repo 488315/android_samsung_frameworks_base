@@ -45,6 +45,7 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.TimeUtils;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
@@ -55,12 +56,10 @@ import com.android.server.LocalServices;
 import com.android.server.VcnManagementService$$ExternalSyntheticOutline0;
 import com.android.server.Watchdog;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.media.AudioPlayerStateMonitor;
-import com.android.server.media.MediaRouter2ServiceImpl;
-import com.android.server.media.RemoteDisplayProviderProxy;
-import com.android.server.media.RemoteDisplayProviderWatcher;
 import com.android.server.pm.UserManagerInternal;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -90,39 +89,49 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
     public int mCurrentActiveUserId = -1;
     public final IntArray mActivePlayerMinPriorityQueue = new IntArray();
     public final IntArray mActivePlayerUidMinPriorityQueue = new IntArray();
-    public final MediaRouterServiceBroadcastReceiver mReceiver = new MediaRouterServiceBroadcastReceiver();
+    public final MediaRouterServiceBroadcastReceiver mReceiver =
+            new MediaRouterServiceBroadcastReceiver();
     public int mAudioRouteMainType = 0;
     public boolean mGlobalBluetoothA2dpOn = false;
     public boolean mForceBluetoothA2dpOn = false;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class AudioPlayerActiveStateChangedListenerImpl implements AudioPlayerStateMonitor.OnAudioPlayerActiveStateChangedListener {
-        public final MediaRouterService$AudioPlayerActiveStateChangedListenerImpl$$ExternalSyntheticLambda0 mRestoreBluetoothA2dpRunnable;
+    public final class AudioPlayerActiveStateChangedListenerImpl
+            implements AudioPlayerStateMonitor.OnAudioPlayerActiveStateChangedListener {
+        public final
+        MediaRouterService$AudioPlayerActiveStateChangedListenerImpl$$ExternalSyntheticLambda0
+                mRestoreBluetoothA2dpRunnable;
 
         /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.media.MediaRouterService$AudioPlayerActiveStateChangedListenerImpl$$ExternalSyntheticLambda0] */
         public AudioPlayerActiveStateChangedListenerImpl() {
-            this.mRestoreBluetoothA2dpRunnable = new Runnable() { // from class: com.android.server.media.MediaRouterService$AudioPlayerActiveStateChangedListenerImpl$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MediaRouterService.this.restoreBluetoothA2dp();
-                }
-            };
+            this.mRestoreBluetoothA2dpRunnable =
+                    new Runnable() { // from class:
+                                     // com.android.server.media.MediaRouterService$AudioPlayerActiveStateChangedListenerImpl$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MediaRouterService.this.restoreBluetoothA2dp();
+                        }
+                    };
         }
 
         @Override // com.android.server.media.AudioPlayerStateMonitor.OnAudioPlayerActiveStateChangedListener
-        public final void onAudioPlayerActiveStateChanged(AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z) {
+        public final void onAudioPlayerActiveStateChanged(
+                AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z) {
             int i;
             ClientRecord clientRecord;
             ArrayList arrayList;
             boolean z2 = !z && audioPlaybackConfiguration.isActive();
             int clientUid = audioPlaybackConfiguration.getClientUid();
-            int indexOf = MediaRouterService.this.mActivePlayerMinPriorityQueue.indexOf(audioPlaybackConfiguration.getPlayerInterfaceId());
+            int indexOf =
+                    MediaRouterService.this.mActivePlayerMinPriorityQueue.indexOf(
+                            audioPlaybackConfiguration.getPlayerInterfaceId());
             if (indexOf >= 0) {
                 MediaRouterService.this.mActivePlayerMinPriorityQueue.remove(indexOf);
                 MediaRouterService.this.mActivePlayerUidMinPriorityQueue.remove(indexOf);
             }
             if (z2) {
-                MediaRouterService.this.mActivePlayerMinPriorityQueue.add(audioPlaybackConfiguration.getPlayerInterfaceId());
+                MediaRouterService.this.mActivePlayerMinPriorityQueue.add(
+                        audioPlaybackConfiguration.getPlayerInterfaceId());
                 MediaRouterService.this.mActivePlayerUidMinPriorityQueue.add(clientUid);
                 i = clientUid;
             } else if (MediaRouterService.this.mActivePlayerUidMinPriorityQueue.size() > 0) {
@@ -133,20 +142,31 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
             }
             MediaRouterService.this.mHandler.removeCallbacks(this.mRestoreBluetoothA2dpRunnable);
             if (i < 0) {
-                MediaRouterService.this.mHandler.postDelayed(this.mRestoreBluetoothA2dpRunnable, 500L);
+                MediaRouterService.this.mHandler.postDelayed(
+                        this.mRestoreBluetoothA2dpRunnable, 500L);
                 int i2 = MediaRouterService.$r8$clinit;
-                Slog.d("MediaRouterService", "onAudioPlayerActiveStateChanged: uid=" + clientUid + ", active=" + z2 + ", delaying");
+                Slog.d(
+                        "MediaRouterService",
+                        "onAudioPlayerActiveStateChanged: uid="
+                                + clientUid
+                                + ", active="
+                                + z2
+                                + ", delaying");
                 return;
             }
             MediaRouterService mediaRouterService = MediaRouterService.this;
             synchronized (mediaRouterService.mLock) {
                 try {
-                    UserRecord userRecord = (UserRecord) mediaRouterService.mUserRecords.get(UserHandle.getUserHandleForUid(i).getIdentifier());
+                    UserRecord userRecord =
+                            (UserRecord)
+                                    mediaRouterService.mUserRecords.get(
+                                            UserHandle.getUserHandleForUid(i).getIdentifier());
                     if (userRecord != null && (arrayList = userRecord.mClientRecords) != null) {
                         Iterator it = arrayList.iterator();
                         while (it.hasNext()) {
                             clientRecord = (ClientRecord) it.next();
-                            if (mediaRouterService.validatePackageName$1(i, clientRecord.mPackageName)) {
+                            if (mediaRouterService.validatePackageName$1(
+                                    i, clientRecord.mPackageName)) {
                                 break;
                             }
                         }
@@ -160,7 +180,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                 try {
                     clientRecord.mClient.onRestoreRoute();
                 } catch (RemoteException unused) {
-                    Slog.w("MediaRouterService", "Failed to call onRestoreRoute. Client probably died.");
+                    Slog.w(
+                            "MediaRouterService",
+                            "Failed to call onRestoreRoute. Client probably died.");
                 }
             } else {
                 mediaRouterService.restoreBluetoothA2dp();
@@ -177,25 +199,31 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioRoutesObserverImpl extends IAudioRoutesObserver.Stub {
-        public AudioRoutesObserverImpl() {
-        }
+        public AudioRoutesObserverImpl() {}
 
         public final void dispatchAudioRoutesChanged(AudioRoutesInfo audioRoutesInfo) {
             synchronized (MediaRouterService.this.mLock) {
                 try {
                     boolean z = true;
-                    if ("BT".equals(audioRoutesInfo.getSetForcePath()) && audioRoutesInfo.bluetoothName != null) {
+                    if ("BT".equals(audioRoutesInfo.getSetForcePath())
+                            && audioRoutesInfo.bluetoothName != null) {
                         MediaRouterService.this.mForceBluetoothA2dpOn = true;
                     } else if ("OTHERS".equals(audioRoutesInfo.getSetForcePath())) {
                         MediaRouterService.this.mForceBluetoothA2dpOn = false;
                     }
-                    Log.i("MediaRouterService", "dispatchAudioRoutesChanged setForcePath = " + audioRoutesInfo.getSetForcePath() + " mForceBluetoothA2dpOn = " + MediaRouterService.this.mForceBluetoothA2dpOn);
+                    Log.i(
+                            "MediaRouterService",
+                            "dispatchAudioRoutesChanged setForcePath = "
+                                    + audioRoutesInfo.getSetForcePath()
+                                    + " mForceBluetoothA2dpOn = "
+                                    + MediaRouterService.this.mForceBluetoothA2dpOn);
                     int i = audioRoutesInfo.mainType;
                     MediaRouterService mediaRouterService = MediaRouterService.this;
                     if (i != mediaRouterService.mAudioRouteMainType) {
                         if ((i & 19) == 0) {
                             CharSequence charSequence = audioRoutesInfo.bluetoothName;
-                            if (charSequence == null && mediaRouterService.mActiveBluetoothDevice == null) {
+                            if (charSequence == null
+                                    && mediaRouterService.mActiveBluetoothDevice == null) {
                                 z = false;
                             }
                             mediaRouterService.mGlobalBluetoothA2dpOn = z;
@@ -235,7 +263,13 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         public final int mUid;
         public final UserRecord mUserRecord;
 
-        public ClientRecord(UserRecord userRecord, IMediaRouterClient iMediaRouterClient, int i, int i2, String str, boolean z) {
+        public ClientRecord(
+                UserRecord userRecord,
+                IMediaRouterClient iMediaRouterClient,
+                int i,
+                int i2,
+                String str,
+                boolean z) {
             this.mUserRecord = userRecord;
             this.mClient = iMediaRouterClient;
             this.mUid = i;
@@ -262,13 +296,17 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MediaRouterServiceBroadcastReceiver extends BroadcastReceiver {
-        public MediaRouterServiceBroadcastReceiver() {
-        }
+        public MediaRouterServiceBroadcastReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals("android.bluetooth.a2dp.profile.action.ACTIVE_DEVICE_CHANGED")) {
-                BluetoothDevice bluetoothDevice = (BluetoothDevice) intent.getParcelableExtra("android.bluetooth.device.extra.DEVICE", BluetoothDevice.class);
+            if (intent.getAction()
+                    .equals("android.bluetooth.a2dp.profile.action.ACTIVE_DEVICE_CHANGED")) {
+                BluetoothDevice bluetoothDevice =
+                        (BluetoothDevice)
+                                intent.getParcelableExtra(
+                                        "android.bluetooth.device.extra.DEVICE",
+                                        BluetoothDevice.class);
                 synchronized (MediaRouterService.this.mLock) {
                     MediaRouterService mediaRouterService = MediaRouterService.this;
                     mediaRouterService.mActiveBluetoothDevice = bluetoothDevice;
@@ -279,7 +317,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class UserHandler extends Handler implements RemoteDisplayProviderWatcher.Callback, RemoteDisplayProviderProxy.Callback {
+    public final class UserHandler extends Handler
+            implements RemoteDisplayProviderWatcher.Callback, RemoteDisplayProviderProxy.Callback {
         public boolean mClientStateUpdateScheduled;
         public int mConnectionPhase;
         public int mConnectionTimeoutReason;
@@ -303,7 +342,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
 
             public ProviderRecord(RemoteDisplayProviderProxy remoteDisplayProviderProxy) {
                 this.mProvider = remoteDisplayProviderProxy;
-                this.mUniquePrefix = remoteDisplayProviderProxy.mComponentName.flattenToShortString() + ":";
+                this.mUniquePrefix =
+                        remoteDisplayProviderProxy.mComponentName.flattenToShortString() + ":";
             }
 
             public final String toString() {
@@ -423,7 +463,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                 Lc3:
                     return r1
                 */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.media.MediaRouterService.UserHandler.ProviderRecord.updateDescriptor(android.media.RemoteDisplayState):boolean");
+                throw new UnsupportedOperationException(
+                        "Method not decompiled:"
+                            + " com.android.server.media.MediaRouterService.UserHandler.ProviderRecord.updateDescriptor(android.media.RemoteDisplayState):boolean");
             }
         }
 
@@ -448,7 +490,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                 return AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, this.mMutableInfo.id, ")");
             }
 
-            public final boolean updateDescriptor(RemoteDisplayState.RemoteDisplayInfo remoteDisplayInfo) {
+            public final boolean updateDescriptor(
+                    RemoteDisplayState.RemoteDisplayInfo remoteDisplayInfo) {
                 boolean z;
                 boolean z2 = false;
                 z2 = false;
@@ -536,7 +579,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
             }
         }
 
-        public UserHandler(MediaRouterService mediaRouterService, UserRecord userRecord, Looper looper) {
+        public UserHandler(
+                MediaRouterService mediaRouterService, UserRecord userRecord, Looper looper) {
             super(looper, null, true);
             this.mProviderRecords = new ArrayList();
             this.mTempClients = new ArrayList();
@@ -544,13 +588,15 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
             this.mConnectionPhase = -1;
             this.mService = mediaRouterService;
             this.mUserRecord = userRecord;
-            this.mWatcher = new RemoteDisplayProviderWatcher(mediaRouterService.mContext, this, this, userRecord.mUserId);
+            this.mWatcher =
+                    new RemoteDisplayProviderWatcher(
+                            mediaRouterService.mContext, this, this, userRecord.mUserId);
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:16:0x0028, code lost:
-        
-            if (r0 != 6) goto L22;
-         */
+
+           if (r0 != 6) goto L22;
+        */
         /* JADX WARN: Removed duplicated region for block: B:19:0x0034 A[ADDED_TO_REGION] */
         /* JADX WARN: Removed duplicated region for block: B:24:0x004d A[RETURN] */
         /* JADX WARN: Removed duplicated region for block: B:25:0x004e  */
@@ -652,7 +698,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                 r8.updateConnectionTimeout(r4)
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.media.MediaRouterService.UserHandler.checkSelectedRouteState():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.media.MediaRouterService.UserHandler.checkSelectedRouteState():void");
         }
 
         @Override // android.os.Handler
@@ -681,10 +729,22 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                         return;
                     }
                     remoteDisplayProviderWatcher.mRunning = true;
-                    IntentFilter m = VcnManagementService$$ExternalSyntheticOutline0.m("android.intent.action.PACKAGE_ADDED", "android.intent.action.PACKAGE_REMOVED", "android.intent.action.PACKAGE_CHANGED", "android.intent.action.PACKAGE_REPLACED", "android.intent.action.PACKAGE_RESTARTED");
+                    IntentFilter m =
+                            VcnManagementService$$ExternalSyntheticOutline0.m(
+                                    "android.intent.action.PACKAGE_ADDED",
+                                    "android.intent.action.PACKAGE_REMOVED",
+                                    "android.intent.action.PACKAGE_CHANGED",
+                                    "android.intent.action.PACKAGE_REPLACED",
+                                    "android.intent.action.PACKAGE_RESTARTED");
                     m.addDataScheme("package");
-                    remoteDisplayProviderWatcher.mContext.registerReceiverAsUser(remoteDisplayProviderWatcher.mScanPackagesReceiver, new UserHandle(remoteDisplayProviderWatcher.mUserId), m, null, remoteDisplayProviderWatcher.mHandler);
-                    remoteDisplayProviderWatcher.mHandler.post(remoteDisplayProviderWatcher.mScanPackagesRunnable);
+                    remoteDisplayProviderWatcher.mContext.registerReceiverAsUser(
+                            remoteDisplayProviderWatcher.mScanPackagesReceiver,
+                            new UserHandle(remoteDisplayProviderWatcher.mUserId),
+                            m,
+                            null,
+                            remoteDisplayProviderWatcher.mHandler);
+                    remoteDisplayProviderWatcher.mHandler.post(
+                            remoteDisplayProviderWatcher.mScanPackagesRunnable);
                     return;
                 case 2:
                     if (this.mRunning) {
@@ -693,10 +753,16 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                         RemoteDisplayProviderWatcher remoteDisplayProviderWatcher2 = this.mWatcher;
                         if (remoteDisplayProviderWatcher2.mRunning) {
                             remoteDisplayProviderWatcher2.mRunning = false;
-                            remoteDisplayProviderWatcher2.mContext.unregisterReceiver(remoteDisplayProviderWatcher2.mScanPackagesReceiver);
-                            remoteDisplayProviderWatcher2.mHandler.removeCallbacks(remoteDisplayProviderWatcher2.mScanPackagesRunnable);
-                            for (int size = remoteDisplayProviderWatcher2.mProviders.size() - 1; size >= 0; size--) {
-                                ((RemoteDisplayProviderProxy) remoteDisplayProviderWatcher2.mProviders.get(size)).stop();
+                            remoteDisplayProviderWatcher2.mContext.unregisterReceiver(
+                                    remoteDisplayProviderWatcher2.mScanPackagesReceiver);
+                            remoteDisplayProviderWatcher2.mHandler.removeCallbacks(
+                                    remoteDisplayProviderWatcher2.mScanPackagesRunnable);
+                            for (int size = remoteDisplayProviderWatcher2.mProviders.size() - 1;
+                                    size >= 0;
+                                    size--) {
+                                ((RemoteDisplayProviderProxy)
+                                                remoteDisplayProviderWatcher2.mProviders.get(size))
+                                        .stop();
                             }
                             return;
                         }
@@ -710,7 +776,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                             i = 0;
                             z = false;
                             for (int i5 = 0; i5 < size2; i5++) {
-                                ClientRecord clientRecord = (ClientRecord) this.mUserRecord.mClientRecords.get(i5);
+                                ClientRecord clientRecord =
+                                        (ClientRecord) this.mUserRecord.mClientRecords.get(i5);
                                 i |= clientRecord.mRouteTypes;
                                 z |= clientRecord.mActiveScan;
                             }
@@ -726,7 +793,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                         this.mDiscoveryMode = i3;
                         int size3 = this.mProviderRecords.size();
                         while (i4 < size3) {
-                            ((ProviderRecord) this.mProviderRecords.get(i4)).mProvider.setDiscoveryMode(this.mDiscoveryMode);
+                            ((ProviderRecord) this.mProviderRecords.get(i4))
+                                    .mProvider.setDiscoveryMode(this.mDiscoveryMode);
                             i4++;
                         }
                         return;
@@ -742,12 +810,14 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                             while (true) {
                                 routeRecord = null;
                                 if (i6 < size4) {
-                                    ProviderRecord providerRecord = (ProviderRecord) this.mProviderRecords.get(i6);
+                                    ProviderRecord providerRecord =
+                                            (ProviderRecord) this.mProviderRecords.get(i6);
                                     int size5 = providerRecord.mRoutes.size();
                                     int i7 = 0;
                                     while (true) {
                                         if (i7 < size5) {
-                                            RouteRecord routeRecord4 = (RouteRecord) providerRecord.mRoutes.get(i7);
+                                            RouteRecord routeRecord4 =
+                                                    (RouteRecord) providerRecord.mRoutes.get(i7);
                                             if (routeRecord4.mMutableInfo.id.equals(str3)) {
                                                 routeRecord = routeRecord4;
                                             } else {
@@ -765,7 +835,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                                 Slog.i("MediaRouterService", "Selected route:" + routeRecord);
                                 this.mSelectedRouteRecord = routeRecord;
                                 checkSelectedRouteState();
-                                routeRecord.mProviderRecord.mProvider.setSelectedDisplay(routeRecord.mDescriptorId);
+                                routeRecord.mProviderRecord.mProvider.setSelectedDisplay(
+                                        routeRecord.mDescriptorId);
                                 scheduleUpdateClientState();
                                 return;
                             }
@@ -776,7 +847,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                     return;
                 case 5:
                     String str4 = (String) message.obj;
-                    if (str4 == null || (routeRecord2 = this.mSelectedRouteRecord) == null || !str4.equals(routeRecord2.mMutableInfo.id)) {
+                    if (str4 == null
+                            || (routeRecord2 = this.mSelectedRouteRecord) == null
+                            || !str4.equals(routeRecord2.mMutableInfo.id)) {
                         return;
                     }
                     unselectSelectedRoute();
@@ -788,17 +861,23 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                     if (routeRecord5 == null || !str5.equals(routeRecord5.mMutableInfo.id)) {
                         return;
                     }
-                    RemoteDisplayProviderProxy remoteDisplayProviderProxy = this.mSelectedRouteRecord.mProviderRecord.mProvider;
-                    if (!remoteDisplayProviderProxy.mConnectionReady || (str = remoteDisplayProviderProxy.mSelectedDisplayId) == null) {
+                    RemoteDisplayProviderProxy remoteDisplayProviderProxy =
+                            this.mSelectedRouteRecord.mProviderRecord.mProvider;
+                    if (!remoteDisplayProviderProxy.mConnectionReady
+                            || (str = remoteDisplayProviderProxy.mSelectedDisplayId) == null) {
                         return;
                     }
-                    RemoteDisplayProviderProxy.Connection connection = remoteDisplayProviderProxy.mActiveConnection;
+                    RemoteDisplayProviderProxy.Connection connection =
+                            remoteDisplayProviderProxy.mActiveConnection;
                     connection.getClass();
                     try {
                         connection.mProvider.setVolume(str, i8);
                         return;
                     } catch (RemoteException e) {
-                        Slog.e("RemoteDisplayProvider", "Failed to deliver request to set display volume.", e);
+                        Slog.e(
+                                "RemoteDisplayProvider",
+                                "Failed to deliver request to set display volume.",
+                                e);
                         return;
                     }
                 case 7:
@@ -808,17 +887,23 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                     if (routeRecord6 == null || !str6.equals(routeRecord6.mMutableInfo.id)) {
                         return;
                     }
-                    RemoteDisplayProviderProxy remoteDisplayProviderProxy2 = this.mSelectedRouteRecord.mProviderRecord.mProvider;
-                    if (!remoteDisplayProviderProxy2.mConnectionReady || (str2 = remoteDisplayProviderProxy2.mSelectedDisplayId) == null) {
+                    RemoteDisplayProviderProxy remoteDisplayProviderProxy2 =
+                            this.mSelectedRouteRecord.mProviderRecord.mProvider;
+                    if (!remoteDisplayProviderProxy2.mConnectionReady
+                            || (str2 = remoteDisplayProviderProxy2.mSelectedDisplayId) == null) {
                         return;
                     }
-                    RemoteDisplayProviderProxy.Connection connection2 = remoteDisplayProviderProxy2.mActiveConnection;
+                    RemoteDisplayProviderProxy.Connection connection2 =
+                            remoteDisplayProviderProxy2.mActiveConnection;
                     connection2.getClass();
                     try {
                         connection2.mProvider.adjustVolume(str2, i9);
                         return;
                     } catch (RemoteException e2) {
-                        Slog.e("RemoteDisplayProvider", "Failed to deliver request to adjust display volume.", e2);
+                        Slog.e(
+                                "RemoteDisplayProvider",
+                                "Failed to deliver request to adjust display volume.",
+                                e2);
                         return;
                     }
                 case 8:
@@ -826,13 +911,17 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                     MediaRouterClientState mediaRouterClientState = new MediaRouterClientState();
                     int size6 = this.mProviderRecords.size();
                     for (int i10 = 0; i10 < size6; i10++) {
-                        ProviderRecord providerRecord2 = (ProviderRecord) this.mProviderRecords.get(i10);
+                        ProviderRecord providerRecord2 =
+                                (ProviderRecord) this.mProviderRecords.get(i10);
                         int size7 = providerRecord2.mRoutes.size();
                         for (int i11 = 0; i11 < size7; i11++) {
                             ArrayList arrayList = mediaRouterClientState.routes;
-                            RouteRecord routeRecord7 = (RouteRecord) providerRecord2.mRoutes.get(i11);
+                            RouteRecord routeRecord7 =
+                                    (RouteRecord) providerRecord2.mRoutes.get(i11);
                             if (routeRecord7.mImmutableInfo == null) {
-                                routeRecord7.mImmutableInfo = new MediaRouterClientState.RouteInfo(routeRecord7.mMutableInfo);
+                                routeRecord7.mImmutableInfo =
+                                        new MediaRouterClientState.RouteInfo(
+                                                routeRecord7.mMutableInfo);
                             }
                             arrayList.add(routeRecord7.mImmutableInfo);
                         }
@@ -844,7 +933,11 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                                 userRecord.mRouterState = mediaRouterClientState;
                                 int size8 = userRecord.mClientRecords.size();
                                 for (int i12 = 0; i12 < size8; i12++) {
-                                    this.mTempClients.add(((ClientRecord) this.mUserRecord.mClientRecords.get(i12)).mClient);
+                                    this.mTempClients.add(
+                                            ((ClientRecord)
+                                                            this.mUserRecord.mClientRecords.get(
+                                                                    i12))
+                                                    .mClient);
                                 }
                             } finally {
                             }
@@ -854,7 +947,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                             try {
                                 ((IMediaRouterClient) this.mTempClients.get(i4)).onStateChanged();
                             } catch (RemoteException unused) {
-                                Slog.w("MediaRouterService", "Failed to call onStateChanged. Client probably died.");
+                                Slog.w(
+                                        "MediaRouterService",
+                                        "Failed to call onStateChanged. Client probably died.");
                             }
                             i4++;
                         }
@@ -868,13 +963,30 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                         return;
                     }
                     if (i13 == 1) {
-                        Slog.i("MediaRouterService", "Selected route no longer available: " + this.mSelectedRouteRecord);
+                        Slog.i(
+                                "MediaRouterService",
+                                "Selected route no longer available: " + this.mSelectedRouteRecord);
                     } else if (i13 == 2) {
-                        Slog.i("MediaRouterService", "Selected route connection lost: " + this.mSelectedRouteRecord);
+                        Slog.i(
+                                "MediaRouterService",
+                                "Selected route connection lost: " + this.mSelectedRouteRecord);
                     } else if (i13 == 3) {
-                        Slog.i("MediaRouterService", "Selected route timed out while waiting for connection attempt to begin after " + (SystemClock.uptimeMillis() - this.mConnectionTimeoutStartTime) + " ms: " + this.mSelectedRouteRecord);
+                        Slog.i(
+                                "MediaRouterService",
+                                "Selected route timed out while waiting for connection attempt to"
+                                    + " begin after "
+                                        + (SystemClock.uptimeMillis()
+                                                - this.mConnectionTimeoutStartTime)
+                                        + " ms: "
+                                        + this.mSelectedRouteRecord);
                     } else if (i13 == 4) {
-                        Slog.i("MediaRouterService", "Selected route timed out while connecting after " + (SystemClock.uptimeMillis() - this.mConnectionTimeoutStartTime) + " ms: " + this.mSelectedRouteRecord);
+                        Slog.i(
+                                "MediaRouterService",
+                                "Selected route timed out while connecting after "
+                                        + (SystemClock.uptimeMillis()
+                                                - this.mConnectionTimeoutStartTime)
+                                        + " ms: "
+                                        + this.mSelectedRouteRecord);
                     }
                     this.mConnectionTimeoutReason = 0;
                     unselectSelectedRoute();
@@ -884,22 +996,31 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                     try {
                         synchronized (this.mService.mLock) {
                             try {
-                                ClientGroup clientGroup = (ClientGroup) this.mUserRecord.mClientGroupMap.get(str7);
+                                ClientGroup clientGroup =
+                                        (ClientGroup) this.mUserRecord.mClientGroupMap.get(str7);
                                 if (clientGroup != null) {
                                     String str8 = clientGroup.mSelectedRouteId;
                                     int size10 = ((ArrayList) clientGroup.mClientRecords).size();
                                     for (int i14 = 0; i14 < size10; i14++) {
-                                        ClientRecord clientRecord2 = (ClientRecord) ((ArrayList) clientGroup.mClientRecords).get(i14);
-                                        if (!TextUtils.equals(str8, clientRecord2.mSelectedRouteId)) {
+                                        ClientRecord clientRecord2 =
+                                                (ClientRecord)
+                                                        ((ArrayList) clientGroup.mClientRecords)
+                                                                .get(i14);
+                                        if (!TextUtils.equals(
+                                                str8, clientRecord2.mSelectedRouteId)) {
                                             this.mTempClients.add(clientRecord2.mClient);
                                         }
                                     }
                                     int size11 = this.mTempClients.size();
                                     while (i4 < size11) {
                                         try {
-                                            ((IMediaRouterClient) this.mTempClients.get(i4)).onGroupRouteSelected(str8);
+                                            ((IMediaRouterClient) this.mTempClients.get(i4))
+                                                    .onGroupRouteSelected(str8);
                                         } catch (RemoteException unused2) {
-                                            Slog.w("MediaRouterService", "Failed to call onSelectedRouteChanged. Client probably died.");
+                                            Slog.w(
+                                                    "MediaRouterService",
+                                                    "Failed to call onSelectedRouteChanged. Client"
+                                                        + " probably died.");
                                         }
                                         i4++;
                                     }
@@ -978,89 +1099,196 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                     ClientRecord clientRecord = (ClientRecord) this.mClientRecords.get(i);
                     clientRecord.getClass();
                     printWriter.println("  " + clientRecord);
-                    StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("    mTrusted="), clientRecord.mTrusted, printWriter, "    mRouteTypes=0x");
+                    StringBuilder m =
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("    mTrusted="),
+                                    clientRecord.mTrusted,
+                                    printWriter,
+                                    "    mRouteTypes=0x");
                     m.append(Integer.toHexString(clientRecord.mRouteTypes));
                     printWriter.println(m.toString());
-                    StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("    mActiveScan="), clientRecord.mActiveScan, printWriter, "    mSelectedRouteId=");
+                    StringBuilder m2 =
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("    mActiveScan="),
+                                    clientRecord.mActiveScan,
+                                    printWriter,
+                                    "    mSelectedRouteId=");
                     m2.append(clientRecord.mSelectedRouteId);
                     printWriter.println(m2.toString());
                 }
             } else {
                 printWriter.println("  <no clients>");
             }
-            StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "  State", "  mRouterState=");
+            StringBuilder m$1 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                            printWriter, "  State", "  mRouterState=");
             m$1.append(this.mRouterState);
             printWriter.println(m$1.toString());
-            if (this.mHandler.runWithScissors(new Runnable() { // from class: com.android.server.media.MediaRouterService.UserRecord.1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    UserHandler userHandler = UserRecord.this.mHandler;
-                    PrintWriter printWriter2 = printWriter;
-                    String str2 = str;
-                    userHandler.getClass();
-                    printWriter2.println(str2 + "Handler");
-                    String str3 = str2 + "  ";
-                    StringBuilder m3 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(Preconditions$$ExternalSyntheticOutline0.m(str3, "mRunning="), userHandler.mRunning, printWriter2, str3, "mDiscoveryMode="), userHandler.mDiscoveryMode, printWriter2, str3, "mSelectedRouteRecord=");
-                    m3.append(userHandler.mSelectedRouteRecord);
-                    printWriter2.println(m3.toString());
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(str3);
-                    sb.append("mConnectionPhase=");
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb, userHandler.mConnectionPhase, printWriter2, str3, "mConnectionTimeoutReason="), userHandler.mConnectionTimeoutReason, printWriter2, str3, "mConnectionTimeoutStartTime="), userHandler.mConnectionTimeoutReason != 0 ? TimeUtils.formatUptime(userHandler.mConnectionTimeoutStartTime) : "<n/a>", printWriter2);
-                    RemoteDisplayProviderWatcher remoteDisplayProviderWatcher = userHandler.mWatcher;
-                    remoteDisplayProviderWatcher.getClass();
-                    printWriter2.println(str2 + "Watcher");
-                    StringBuilder sb2 = new StringBuilder();
-                    sb2.append(str2);
-                    sb2.append("  mUserId=");
-                    StringBuilder m4 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb2, remoteDisplayProviderWatcher.mUserId, printWriter2, str2, "  mRunning="), remoteDisplayProviderWatcher.mRunning, printWriter2, str2, "  mProviders.size()=");
-                    m4.append(remoteDisplayProviderWatcher.mProviders.size());
-                    printWriter2.println(m4.toString());
-                    int size2 = userHandler.mProviderRecords.size();
-                    if (size2 == 0) {
-                        printWriter2.println(str3 + "<no providers>");
-                        return;
-                    }
-                    for (int i2 = 0; i2 < size2; i2++) {
-                        UserHandler.ProviderRecord providerRecord = (UserHandler.ProviderRecord) userHandler.mProviderRecords.get(i2);
-                        providerRecord.getClass();
-                        printWriter2.println(str2 + providerRecord);
-                        String str4 = str2 + "  ";
-                        RemoteDisplayProviderProxy remoteDisplayProviderProxy = providerRecord.mProvider;
-                        remoteDisplayProviderProxy.getClass();
-                        printWriter2.println(str4 + "Proxy");
-                        StringBuilder sb3 = new StringBuilder();
-                        sb3.append(str4);
-                        sb3.append("  mUserId=");
-                        StringBuilder m5 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb3, remoteDisplayProviderProxy.mUserId, printWriter2, str4, "  mRunning="), remoteDisplayProviderProxy.mRunning, printWriter2, str4, "  mBound="), remoteDisplayProviderProxy.mBound, printWriter2, str4, "  mActiveConnection=");
-                        m5.append(remoteDisplayProviderProxy.mActiveConnection);
-                        printWriter2.println(m5.toString());
-                        StringBuilder sb4 = new StringBuilder();
-                        sb4.append(str4);
-                        sb4.append("  mConnectionReady=");
-                        StringBuilder m6 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb4, remoteDisplayProviderProxy.mConnectionReady, printWriter2, str4, "  mDiscoveryMode="), remoteDisplayProviderProxy.mDiscoveryMode, printWriter2, str4, "  mSelectedDisplayId=");
-                        m6.append(remoteDisplayProviderProxy.mSelectedDisplayId);
-                        printWriter2.println(m6.toString());
-                        printWriter2.println(str4 + "  mDisplayState=" + remoteDisplayProviderProxy.mDisplayState);
-                        int size3 = providerRecord.mRoutes.size();
-                        if (size3 != 0) {
-                            for (int i3 = 0; i3 < size3; i3++) {
-                                UserHandler.RouteRecord routeRecord = (UserHandler.RouteRecord) providerRecord.mRoutes.get(i3);
-                                routeRecord.getClass();
-                                printWriter2.println(str4 + routeRecord);
-                                String str5 = str4 + "  ";
-                                StringBuilder m7 = Preconditions$$ExternalSyntheticOutline0.m(str5, "mMutableInfo=");
-                                m7.append(routeRecord.mMutableInfo);
-                                printWriter2.println(m7.toString());
-                                printWriter2.println(str5 + "mDescriptorId=" + routeRecord.mDescriptorId);
-                                printWriter2.println(str5 + "mDescriptor=" + routeRecord.mDescriptor);
+            if (this.mHandler.runWithScissors(
+                    new Runnable() { // from class:
+                        // com.android.server.media.MediaRouterService.UserRecord.1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            UserHandler userHandler = UserRecord.this.mHandler;
+                            PrintWriter printWriter2 = printWriter;
+                            String str2 = str;
+                            userHandler.getClass();
+                            printWriter2.println(str2 + "Handler");
+                            String str3 = str2 + "  ";
+                            StringBuilder m3 =
+                                    MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                                            MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                    .m(
+                                                            Preconditions$$ExternalSyntheticOutline0
+                                                                    .m(str3, "mRunning="),
+                                                            userHandler.mRunning,
+                                                            printWriter2,
+                                                            str3,
+                                                            "mDiscoveryMode="),
+                                            userHandler.mDiscoveryMode,
+                                            printWriter2,
+                                            str3,
+                                            "mSelectedRouteRecord=");
+                            m3.append(userHandler.mSelectedRouteRecord);
+                            printWriter2.println(m3.toString());
+                            StringBuilder sb = new StringBuilder();
+                            sb.append(str3);
+                            sb.append("mConnectionPhase=");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                                            MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                    .m(
+                                                            sb,
+                                                            userHandler.mConnectionPhase,
+                                                            printWriter2,
+                                                            str3,
+                                                            "mConnectionTimeoutReason="),
+                                            userHandler.mConnectionTimeoutReason,
+                                            printWriter2,
+                                            str3,
+                                            "mConnectionTimeoutStartTime="),
+                                    userHandler.mConnectionTimeoutReason != 0
+                                            ? TimeUtils.formatUptime(
+                                                    userHandler.mConnectionTimeoutStartTime)
+                                            : "<n/a>",
+                                    printWriter2);
+                            RemoteDisplayProviderWatcher remoteDisplayProviderWatcher =
+                                    userHandler.mWatcher;
+                            remoteDisplayProviderWatcher.getClass();
+                            printWriter2.println(str2 + "Watcher");
+                            StringBuilder sb2 = new StringBuilder();
+                            sb2.append(str2);
+                            sb2.append("  mUserId=");
+                            StringBuilder m4 =
+                                    MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                                            MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                    .m(
+                                                            sb2,
+                                                            remoteDisplayProviderWatcher.mUserId,
+                                                            printWriter2,
+                                                            str2,
+                                                            "  mRunning="),
+                                            remoteDisplayProviderWatcher.mRunning,
+                                            printWriter2,
+                                            str2,
+                                            "  mProviders.size()=");
+                            m4.append(remoteDisplayProviderWatcher.mProviders.size());
+                            printWriter2.println(m4.toString());
+                            int size2 = userHandler.mProviderRecords.size();
+                            if (size2 == 0) {
+                                printWriter2.println(str3 + "<no providers>");
+                                return;
                             }
-                        } else {
-                            printWriter2.println(str4 + "<no routes>");
+                            for (int i2 = 0; i2 < size2; i2++) {
+                                UserHandler.ProviderRecord providerRecord =
+                                        (UserHandler.ProviderRecord)
+                                                userHandler.mProviderRecords.get(i2);
+                                providerRecord.getClass();
+                                printWriter2.println(str2 + providerRecord);
+                                String str4 = str2 + "  ";
+                                RemoteDisplayProviderProxy remoteDisplayProviderProxy =
+                                        providerRecord.mProvider;
+                                remoteDisplayProviderProxy.getClass();
+                                printWriter2.println(str4 + "Proxy");
+                                StringBuilder sb3 = new StringBuilder();
+                                sb3.append(str4);
+                                sb3.append("  mUserId=");
+                                StringBuilder m5 =
+                                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                .m(
+                                                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                                .m(
+                                                                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                                                .m(
+                                                                                        sb3,
+                                                                                        remoteDisplayProviderProxy
+                                                                                                .mUserId,
+                                                                                        printWriter2,
+                                                                                        str4,
+                                                                                        "  mRunning="),
+                                                                        remoteDisplayProviderProxy
+                                                                                .mRunning,
+                                                                        printWriter2,
+                                                                        str4,
+                                                                        "  mBound="),
+                                                        remoteDisplayProviderProxy.mBound,
+                                                        printWriter2,
+                                                        str4,
+                                                        "  mActiveConnection=");
+                                m5.append(remoteDisplayProviderProxy.mActiveConnection);
+                                printWriter2.println(m5.toString());
+                                StringBuilder sb4 = new StringBuilder();
+                                sb4.append(str4);
+                                sb4.append("  mConnectionReady=");
+                                StringBuilder m6 =
+                                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                .m(
+                                                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                                .m(
+                                                                        sb4,
+                                                                        remoteDisplayProviderProxy
+                                                                                .mConnectionReady,
+                                                                        printWriter2,
+                                                                        str4,
+                                                                        "  mDiscoveryMode="),
+                                                        remoteDisplayProviderProxy.mDiscoveryMode,
+                                                        printWriter2,
+                                                        str4,
+                                                        "  mSelectedDisplayId=");
+                                m6.append(remoteDisplayProviderProxy.mSelectedDisplayId);
+                                printWriter2.println(m6.toString());
+                                printWriter2.println(
+                                        str4
+                                                + "  mDisplayState="
+                                                + remoteDisplayProviderProxy.mDisplayState);
+                                int size3 = providerRecord.mRoutes.size();
+                                if (size3 != 0) {
+                                    for (int i3 = 0; i3 < size3; i3++) {
+                                        UserHandler.RouteRecord routeRecord =
+                                                (UserHandler.RouteRecord)
+                                                        providerRecord.mRoutes.get(i3);
+                                        routeRecord.getClass();
+                                        printWriter2.println(str4 + routeRecord);
+                                        String str5 = str4 + "  ";
+                                        StringBuilder m7 =
+                                                Preconditions$$ExternalSyntheticOutline0.m(
+                                                        str5, "mMutableInfo=");
+                                        m7.append(routeRecord.mMutableInfo);
+                                        printWriter2.println(m7.toString());
+                                        printWriter2.println(
+                                                str5
+                                                        + "mDescriptorId="
+                                                        + routeRecord.mDescriptorId);
+                                        printWriter2.println(
+                                                str5 + "mDescriptor=" + routeRecord.mDescriptor);
+                                    }
+                                } else {
+                                    printWriter2.println(str4 + "<no routes>");
+                                }
+                            }
                         }
-                    }
-                }
-            }, 1000L)) {
+                    },
+                    1000L)) {
                 return;
             }
             printWriter.println("  <could not dump handler state>");
@@ -1096,22 +1324,36 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         Watchdog.getInstance().addMonitor(this);
         Resources resources = context.getResources();
         this.mDefaultAudioRouteId = resources.getString(R.string.global_action_logout);
-        this.mBluetoothA2dpRouteId = resources.getString(R.string.config_defaultWearableSensingService);
-        this.mUserManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
-        IAudioService asInterface = IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
+        this.mBluetoothA2dpRouteId =
+                resources.getString(R.string.config_defaultWearableSensingService);
+        this.mUserManagerInternal =
+                (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+        IAudioService asInterface =
+                IAudioService.Stub.asInterface(ServiceManager.getService("audio"));
         this.mAudioService = asInterface;
-        AudioPlayerStateMonitor audioPlayerStateMonitor = AudioPlayerStateMonitor.getInstance(context);
+        AudioPlayerStateMonitor audioPlayerStateMonitor =
+                AudioPlayerStateMonitor.getInstance(context);
         this.mAudioPlayerStateMonitor = audioPlayerStateMonitor;
-        audioPlayerStateMonitor.registerListener(new AudioPlayerActiveStateChangedListenerImpl(), handler);
+        audioPlayerStateMonitor.registerListener(
+                new AudioPlayerActiveStateChangedListenerImpl(), handler);
         try {
             asInterface.startWatchingRoutes(new AudioRoutesObserverImpl());
         } catch (RemoteException unused) {
             Slog.w("MediaRouterService", "RemoteException in the audio service.");
         }
-        context.registerReceiverAsUser(this.mReceiver, UserHandle.ALL, new IntentFilter("android.bluetooth.a2dp.profile.action.ACTIVE_DEVICE_CHANGED"), null, null);
+        context.registerReceiverAsUser(
+                this.mReceiver,
+                UserHandle.ALL,
+                new IntentFilter("android.bluetooth.a2dp.profile.action.ACTIVE_DEVICE_CHANGED"),
+                null,
+                null);
     }
 
-    public final void deselectRouteWithManager(IMediaRouter2Manager iMediaRouter2Manager, int i, String str, MediaRoute2Info mediaRoute2Info) {
+    public final void deselectRouteWithManager(
+            IMediaRouter2Manager iMediaRouter2Manager,
+            int i,
+            String str,
+            MediaRoute2Info mediaRoute2Info) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2Manager, "manager must not be null");
@@ -1122,14 +1364,16 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.deselectRouteWithManagerLocked(iMediaRouter2Manager, i, str, mediaRoute2Info);
+                mediaRouter2ServiceImpl.deselectRouteWithManagerLocked(
+                        iMediaRouter2Manager, i, str, mediaRoute2Info);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void deselectRouteWithRouter2(IMediaRouter2 iMediaRouter2, String str, MediaRoute2Info mediaRoute2Info) {
+    public final void deselectRouteWithRouter2(
+            IMediaRouter2 iMediaRouter2, String str, MediaRoute2Info mediaRoute2Info) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2, "router must not be null");
@@ -1140,7 +1384,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.deselectRouteWithRouter2Locked(iMediaRouter2, str, mediaRoute2Info);
+                mediaRouter2ServiceImpl.deselectRouteWithRouter2Locked(
+                        iMediaRouter2, str, mediaRoute2Info);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1150,19 +1395,22 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
     public final void disposeUserIfNeededLocked(UserRecord userRecord) {
         UserManagerInternal userManagerInternal = this.mUserManagerInternal;
         int i = userRecord.mUserId;
-        if (userManagerInternal.getProfileParentId(i) != this.mCurrentActiveUserId && userRecord.mClientRecords.isEmpty()) {
+        if (userManagerInternal.getProfileParentId(i) != this.mCurrentActiveUserId
+                && userRecord.mClientRecords.isEmpty()) {
             Slog.d("MediaRouterService", userRecord + ": Disposed");
             this.mUserRecords.remove(i);
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         int i;
         if (DumpUtils.checkDumpPermission(this.mContext, "MediaRouterService", printWriter)) {
             printWriter.println("MEDIA ROUTER SERVICE (dumpsys media_router)");
             printWriter.println();
             printWriter.println("Global state");
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("  mCurrentUserId="), this.mCurrentActiveUserId, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("  mCurrentUserId="), this.mCurrentActiveUserId, printWriter);
             synchronized (this.mLock) {
                 try {
                     int size = this.mUserRecords.size();
@@ -1180,15 +1428,21 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
             printWriter.println("MediaRouter2ServiceImpl");
             synchronized (mediaRouter2ServiceImpl.mLock) {
                 try {
-                    printWriter.println("  mNextRouterOrManagerId=" + mediaRouter2ServiceImpl.mNextRouterOrManagerId.get());
-                    printWriter.println("  mCurrentActiveUserId=" + mediaRouter2ServiceImpl.mCurrentActiveUserId);
+                    printWriter.println(
+                            "  mNextRouterOrManagerId="
+                                    + mediaRouter2ServiceImpl.mNextRouterOrManagerId.get());
+                    printWriter.println(
+                            "  mCurrentActiveUserId="
+                                    + mediaRouter2ServiceImpl.mCurrentActiveUserId);
                     StringBuilder sb = new StringBuilder();
                     sb.append("  ");
                     sb.append("UserRecords:");
                     printWriter.println(sb.toString());
                     if (mediaRouter2ServiceImpl.mUserRecords.size() > 0) {
                         for (i = 0; i < mediaRouter2ServiceImpl.mUserRecords.size(); i++) {
-                            ((MediaRouter2ServiceImpl.UserRecord) mediaRouter2ServiceImpl.mUserRecords.valueAt(i)).dump(printWriter, "    ");
+                            ((MediaRouter2ServiceImpl.UserRecord)
+                                            mediaRouter2ServiceImpl.mUserRecords.valueAt(i))
+                                    .dump(printWriter, "    ");
                         }
                     } else {
                         printWriter.println("    <no user records>");
@@ -1207,7 +1461,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                remoteSessionsLocked = mediaRouter2ServiceImpl.getRemoteSessionsLocked(iMediaRouter2Manager);
+                remoteSessionsLocked =
+                        mediaRouter2ServiceImpl.getRemoteSessionsLocked(iMediaRouter2Manager);
             }
             return remoteSessionsLocked;
         } finally {
@@ -1220,7 +1475,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mLock) {
-                ClientRecord clientRecord = (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
+                ClientRecord clientRecord =
+                        (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
                 mediaRouterClientState = null;
                 if (clientRecord != null && clientRecord.mTrusted) {
                     mediaRouterClientState = clientRecord.mUserRecord.mRouterState;
@@ -1244,26 +1500,43 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         int callingPid = Binder.getCallingPid();
         int identifier = UserHandle.getUserHandleForUid(callingUid).getIdentifier();
         boolean z2 = false;
-        if (z ? mediaRouter2ServiceImpl.checkMediaContentControlPermission(callingUid, callingPid) || mediaRouter2ServiceImpl.checkMediaRoutingControlPermission(callingUid, callingPid, str) : mediaRouter2ServiceImpl.mContext.checkPermission("android.permission.MODIFY_AUDIO_ROUTING", callingPid, callingUid) == 0 || mediaRouter2ServiceImpl.checkCallerHasBluetoothPermissions(callingPid, callingUid)) {
+        if (z
+                ? mediaRouter2ServiceImpl.checkMediaContentControlPermission(callingUid, callingPid)
+                        || mediaRouter2ServiceImpl.checkMediaRoutingControlPermission(
+                                callingUid, callingPid, str)
+                : mediaRouter2ServiceImpl.mContext.checkPermission(
+                                        "android.permission.MODIFY_AUDIO_ROUTING",
+                                        callingPid,
+                                        callingUid)
+                                == 0
+                        || mediaRouter2ServiceImpl.checkCallerHasBluetoothPermissions(
+                                callingPid, callingUid)) {
             z2 = true;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
                 try {
-                    MediaRouter2ServiceImpl.UserRecord orCreateUserRecordLocked = mediaRouter2ServiceImpl.getOrCreateUserRecordLocked(identifier);
+                    MediaRouter2ServiceImpl.UserRecord orCreateUserRecordLocked =
+                            mediaRouter2ServiceImpl.getOrCreateUserRecordLocked(identifier);
                     if (z2) {
-                        MediaRoute2ProviderInfo mediaRoute2ProviderInfo = orCreateUserRecordLocked.mHandler.mSystemProvider.mProviderInfo;
+                        MediaRoute2ProviderInfo mediaRoute2ProviderInfo =
+                                orCreateUserRecordLocked.mHandler.mSystemProvider.mProviderInfo;
                         if (mediaRoute2ProviderInfo != null) {
                             collection2 = mediaRoute2ProviderInfo.getRoutes();
                         } else {
                             Collection emptyList = Collections.emptyList();
-                            emptyList.add(orCreateUserRecordLocked.mHandler.mSystemProvider.mDefaultRoute);
+                            emptyList.add(
+                                    orCreateUserRecordLocked
+                                            .mHandler
+                                            .mSystemProvider
+                                            .mDefaultRoute);
                             collection = emptyList;
                         }
                     } else {
                         ArrayList arrayList = new ArrayList();
-                        arrayList.add(orCreateUserRecordLocked.mHandler.mSystemProvider.mDefaultRoute);
+                        arrayList.add(
+                                orCreateUserRecordLocked.mHandler.mSystemProvider.mDefaultRoute);
                         collection = arrayList;
                     }
                     collection2 = collection;
@@ -1291,14 +1564,17 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         synchronized (this.mLock) {
             try {
                 UserRecord userRecord = (UserRecord) this.mUserRecords.get(identifier);
-                Iterator it = (userRecord != null ? userRecord.mClientRecords : Collections.emptyList()).iterator();
+                Iterator it =
+                        (userRecord != null ? userRecord.mClientRecords : Collections.emptyList())
+                                .iterator();
                 while (true) {
                     if (!it.hasNext()) {
                         z = false;
                         break;
                     }
                     ClientRecord clientRecord = (ClientRecord) it.next();
-                    if (TextUtils.equals(clientRecord.mPackageName, str2) && this.mDefaultAudioRouteId.equals(clientRecord.mSelectedRouteId)) {
+                    if (TextUtils.equals(clientRecord.mPackageName, str2)
+                            && this.mDefaultAudioRouteId.equals(clientRecord.mSelectedRouteId)) {
                         z = true;
                         break;
                     }
@@ -1315,7 +1591,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mLock) {
-                clientRecord = (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
+                clientRecord =
+                        (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
             }
             if (clientRecord != null) {
                 return this.mAudioPlayerStateMonitor.isPlaybackActive(clientRecord.mUid);
@@ -1333,18 +1610,25 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void registerClientAsUser(IMediaRouterClient iMediaRouterClient, String str, int i) {
+    public final void registerClientAsUser(
+            IMediaRouterClient iMediaRouterClient, String str, int i) {
         int callingUid = Binder.getCallingUid();
         if (!validatePackageName$1(callingUid, str)) {
             throw new SecurityException("packageName must match the calling uid");
         }
         int callingPid = Binder.getCallingPid();
-        int handleIncomingUser = ActivityManager.handleIncomingUser(callingPid, callingUid, i, false, true, "registerClientAsUser", str);
-        boolean z = this.mContext.checkCallingOrSelfPermission("android.permission.CONFIGURE_WIFI_DISPLAY") == 0;
+        int handleIncomingUser =
+                ActivityManager.handleIncomingUser(
+                        callingPid, callingUid, i, false, true, "registerClientAsUser", str);
+        boolean z =
+                this.mContext.checkCallingOrSelfPermission(
+                                "android.permission.CONFIGURE_WIFI_DISPLAY")
+                        == 0;
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mLock) {
-                registerClientLocked(iMediaRouterClient, callingUid, callingPid, str, handleIncomingUser, z);
+                registerClientLocked(
+                        iMediaRouterClient, callingUid, callingPid, str, handleIncomingUser, z);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1352,8 +1636,12 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
     }
 
     public final void registerClientGroupId(IMediaRouterClient iMediaRouterClient, String str) {
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.CONFIGURE_WIFI_DISPLAY") != 0) {
-            Log.w("MediaRouterService", "Ignoring client group request because the client doesn't have the CONFIGURE_WIFI_DISPLAY permission.");
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.CONFIGURE_WIFI_DISPLAY")
+                != 0) {
+            Log.w(
+                    "MediaRouterService",
+                    "Ignoring client group request because the client doesn't have the"
+                        + " CONFIGURE_WIFI_DISPLAY permission.");
             return;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -1366,10 +1654,14 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void registerClientGroupIdLocked(IMediaRouterClient iMediaRouterClient, String str) {
-        ClientRecord clientRecord = (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
+    public final void registerClientGroupIdLocked(
+            IMediaRouterClient iMediaRouterClient, String str) {
+        ClientRecord clientRecord =
+                (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
         if (clientRecord == null) {
-            Log.w("MediaRouterService", "Ignoring group id register request of a unregistered client.");
+            Log.w(
+                    "MediaRouterService",
+                    "Ignoring group id register request of a unregistered client.");
             return;
         }
         if (TextUtils.equals(clientRecord.mGroupId, str)) {
@@ -1392,7 +1684,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void registerClientLocked(IMediaRouterClient iMediaRouterClient, int i, int i2, String str, int i3, boolean z) {
+    public final void registerClientLocked(
+            IMediaRouterClient iMediaRouterClient, int i, int i2, String str, int i3, boolean z) {
         UserRecord userRecord;
         boolean z2;
         IBinder asBinder = iMediaRouterClient.asBinder();
@@ -1405,13 +1698,15 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                 userRecord = userRecord2;
                 z2 = false;
             }
-            ClientRecord clientRecord = new ClientRecord(userRecord, iMediaRouterClient, i, i2, str, z);
+            ClientRecord clientRecord =
+                    new ClientRecord(userRecord, iMediaRouterClient, i, i2, str, z);
             try {
                 asBinder.linkToDeath(clientRecord, 0);
                 if (z2) {
                     this.mUserRecords.put(i3, userRecord);
                     Slog.d("MediaRouterService", userRecord + ": Initialized");
-                    if (this.mUserManagerInternal.getProfileParentId(userRecord.mUserId) == this.mCurrentActiveUserId) {
+                    if (this.mUserManagerInternal.getProfileParentId(userRecord.mUserId)
+                            == this.mCurrentActiveUserId) {
                         userRecord.mHandler.sendEmptyMessage(1);
                     }
                 }
@@ -1437,20 +1732,28 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         int callingUid = Binder.getCallingUid();
         int callingPid = Binder.getCallingPid();
         UserHandle callingUserHandle = Binder.getCallingUserHandle();
-        if (!mediaRouter2ServiceImpl.checkMediaContentControlPermission(callingUid, callingPid) && !mediaRouter2ServiceImpl.checkMediaRoutingControlPermission(callingUid, callingPid, str)) {
-            throw new SecurityException("Must hold MEDIA_CONTENT_CONTROL or MEDIA_ROUTING_CONTROL permissions.");
+        if (!mediaRouter2ServiceImpl.checkMediaContentControlPermission(callingUid, callingPid)
+                && !mediaRouter2ServiceImpl.checkMediaRoutingControlPermission(
+                        callingUid, callingPid, str)) {
+            throw new SecurityException(
+                    "Must hold MEDIA_CONTENT_CONTROL or MEDIA_ROUTING_CONTROL permissions.");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.registerManagerLocked(iMediaRouter2Manager, callingUid, callingPid, str, null, callingUserHandle);
+                mediaRouter2ServiceImpl.registerManagerLocked(
+                        iMediaRouter2Manager, callingUid, callingPid, str, null, callingUserHandle);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void registerProxyRouter(IMediaRouter2Manager iMediaRouter2Manager, String str, String str2, UserHandle userHandle) {
+    public final void registerProxyRouter(
+            IMediaRouter2Manager iMediaRouter2Manager,
+            String str,
+            String str2,
+            UserHandle userHandle) {
         if (!validatePackageName$1(Binder.getCallingUid(), str)) {
             throw new SecurityException("callerPackageName must match the calling uid");
         }
@@ -1465,16 +1768,31 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         int callingPid = Binder.getCallingPid();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            if (!mediaRouter2ServiceImpl.checkMediaContentControlPermission(callingUid, callingPid) && !mediaRouter2ServiceImpl.checkMediaRoutingControlPermission(callingUid, callingPid, str)) {
-                throw new SecurityException("Must hold MEDIA_CONTENT_CONTROL or MEDIA_ROUTING_CONTROL permissions.");
+            if (!mediaRouter2ServiceImpl.checkMediaContentControlPermission(callingUid, callingPid)
+                    && !mediaRouter2ServiceImpl.checkMediaRoutingControlPermission(
+                            callingUid, callingPid, str)) {
+                throw new SecurityException(
+                        "Must hold MEDIA_CONTENT_CONTROL or MEDIA_ROUTING_CONTROL permissions.");
             }
             if (userHandle.getIdentifier() != UserHandle.getUserId(callingUid)) {
-                mediaRouter2ServiceImpl.mContext.enforcePermission("android.permission.INTERACT_ACROSS_USERS_FULL", callingPid, callingUid, "Must hold INTERACT_ACROSS_USERS_FULL to control an app in a different userId.");
+                mediaRouter2ServiceImpl.mContext.enforcePermission(
+                        "android.permission.INTERACT_ACROSS_USERS_FULL",
+                        callingPid,
+                        callingUid,
+                        "Must hold INTERACT_ACROSS_USERS_FULL to control an app in a different"
+                            + " userId.");
             }
             try {
-                mediaRouter2ServiceImpl.mContext.getPackageManager().getPackageInfoAsUser(str2, PackageManager.PackageInfoFlags.of(0L), userHandle.getIdentifier());
+                mediaRouter2ServiceImpl
+                        .mContext
+                        .getPackageManager()
+                        .getPackageInfoAsUser(
+                                str2,
+                                PackageManager.PackageInfoFlags.of(0L),
+                                userHandle.getIdentifier());
                 synchronized (mediaRouter2ServiceImpl.mLock) {
-                    mediaRouter2ServiceImpl.registerManagerLocked(iMediaRouter2Manager, callingUid, callingPid, str, str2, userHandle);
+                    mediaRouter2ServiceImpl.registerManagerLocked(
+                            iMediaRouter2Manager, callingUid, callingPid, str, str2, userHandle);
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } catch (PackageManager.NameNotFoundException unused) {
@@ -1499,21 +1817,40 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         int callingUid = Binder.getCallingUid();
         int callingPid = Binder.getCallingPid();
         int identifier = UserHandle.getUserHandleForUid(callingUid).getIdentifier();
-        boolean z = mediaRouter2ServiceImpl.mContext.checkCallingOrSelfPermission("android.permission.CONFIGURE_WIFI_DISPLAY") == 0;
-        boolean z2 = mediaRouter2ServiceImpl.mContext.checkPermission("android.permission.MODIFY_AUDIO_ROUTING", callingPid, callingUid) == 0;
-        boolean checkMediaContentControlPermission = mediaRouter2ServiceImpl.checkMediaContentControlPermission(callingUid, callingPid);
-        boolean checkMediaRoutingControlPermission = mediaRouter2ServiceImpl.checkMediaRoutingControlPermission(callingUid, callingPid, str);
+        boolean z =
+                mediaRouter2ServiceImpl.mContext.checkCallingOrSelfPermission(
+                                "android.permission.CONFIGURE_WIFI_DISPLAY")
+                        == 0;
+        boolean z2 =
+                mediaRouter2ServiceImpl.mContext.checkPermission(
+                                "android.permission.MODIFY_AUDIO_ROUTING", callingPid, callingUid)
+                        == 0;
+        boolean checkMediaContentControlPermission =
+                mediaRouter2ServiceImpl.checkMediaContentControlPermission(callingUid, callingPid);
+        boolean checkMediaRoutingControlPermission =
+                mediaRouter2ServiceImpl.checkMediaRoutingControlPermission(
+                        callingUid, callingPid, str);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.registerRouter2Locked(iMediaRouter2, callingUid, callingPid, str, identifier, z, z2, checkMediaContentControlPermission, checkMediaRoutingControlPermission);
+                mediaRouter2ServiceImpl.registerRouter2Locked(
+                        iMediaRouter2,
+                        callingUid,
+                        callingPid,
+                        str,
+                        identifier,
+                        z,
+                        z2,
+                        checkMediaContentControlPermission,
+                        checkMediaRoutingControlPermission);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void releaseSessionWithManager(IMediaRouter2Manager iMediaRouter2Manager, int i, String str) {
+    public final void releaseSessionWithManager(
+            IMediaRouter2Manager iMediaRouter2Manager, int i, String str) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2Manager, "manager must not be null");
@@ -1523,7 +1860,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.releaseSessionWithManagerLocked(iMediaRouter2Manager, i, str);
+                mediaRouter2ServiceImpl.releaseSessionWithManagerLocked(
+                        iMediaRouter2Manager, i, str);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1547,7 +1885,13 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void requestCreateSessionWithManager(IMediaRouter2Manager iMediaRouter2Manager, int i, RoutingSessionInfo routingSessionInfo, MediaRoute2Info mediaRoute2Info, UserHandle userHandle, String str) {
+    public final void requestCreateSessionWithManager(
+            IMediaRouter2Manager iMediaRouter2Manager,
+            int i,
+            RoutingSessionInfo routingSessionInfo,
+            MediaRoute2Info mediaRoute2Info,
+            UserHandle userHandle,
+            String str) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2Manager, "manager must not be null");
@@ -1557,14 +1901,26 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.requestCreateSessionWithManagerLocked(iMediaRouter2Manager, i, routingSessionInfo, mediaRoute2Info, userHandle, str);
+                mediaRouter2ServiceImpl.requestCreateSessionWithManagerLocked(
+                        iMediaRouter2Manager,
+                        i,
+                        routingSessionInfo,
+                        mediaRoute2Info,
+                        userHandle,
+                        str);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void requestCreateSessionWithRouter2(IMediaRouter2 iMediaRouter2, int i, long j, RoutingSessionInfo routingSessionInfo, MediaRoute2Info mediaRoute2Info, Bundle bundle) {
+    public final void requestCreateSessionWithRouter2(
+            IMediaRouter2 iMediaRouter2,
+            int i,
+            long j,
+            RoutingSessionInfo routingSessionInfo,
+            MediaRoute2Info mediaRoute2Info,
+            Bundle bundle) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2, "router must not be null");
@@ -1573,7 +1929,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.requestCreateSessionWithRouter2Locked(iMediaRouter2, i, j, routingSessionInfo, mediaRoute2Info, bundle);
+                mediaRouter2ServiceImpl.requestCreateSessionWithRouter2Locked(
+                        iMediaRouter2, i, j, routingSessionInfo, mediaRoute2Info, bundle);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1585,7 +1942,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mLock) {
-                ClientRecord clientRecord = (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
+                ClientRecord clientRecord =
+                        (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
                 if (clientRecord != null) {
                     clientRecord.mUserRecord.mHandler.obtainMessage(6, i, 0, str).sendToTarget();
                 }
@@ -1595,12 +1953,14 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void requestUpdateVolume(IMediaRouterClient iMediaRouterClient, String str, int i) {
+    public final void requestUpdateVolume(
+            IMediaRouterClient iMediaRouterClient, String str, int i) {
         Objects.requireNonNull(str, "routeId must not be null");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mLock) {
-                ClientRecord clientRecord = (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
+                ClientRecord clientRecord =
+                        (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
                 if (clientRecord != null) {
                     clientRecord.mUserRecord.mHandler.obtainMessage(7, i, 0, str).sendToTarget();
                 }
@@ -1638,7 +1998,11 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void selectRouteWithManager(IMediaRouter2Manager iMediaRouter2Manager, int i, String str, MediaRoute2Info mediaRoute2Info) {
+    public final void selectRouteWithManager(
+            IMediaRouter2Manager iMediaRouter2Manager,
+            int i,
+            String str,
+            MediaRoute2Info mediaRoute2Info) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2Manager, "manager must not be null");
@@ -1649,14 +2013,16 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.selectRouteWithManagerLocked(iMediaRouter2Manager, i, str, mediaRoute2Info);
+                mediaRouter2ServiceImpl.selectRouteWithManagerLocked(
+                        iMediaRouter2Manager, i, str, mediaRoute2Info);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void selectRouteWithRouter2(IMediaRouter2 iMediaRouter2, String str, MediaRoute2Info mediaRoute2Info) {
+    public final void selectRouteWithRouter2(
+            IMediaRouter2 iMediaRouter2, String str, MediaRoute2Info mediaRoute2Info) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2, "router must not be null");
@@ -1667,7 +2033,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.selectRouteWithRouter2Locked(iMediaRouter2, str, mediaRoute2Info);
+                mediaRouter2ServiceImpl.selectRouteWithRouter2Locked(
+                        iMediaRouter2, str, mediaRoute2Info);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1683,7 +2050,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
             try {
                 this.mAudioService.setBluetoothA2dpOn(z);
             } catch (RemoteException unused) {
-                Slog.w("MediaRouterService", "RemoteException while calling setBluetoothA2dpOn. on=" + z);
+                Slog.w(
+                        "MediaRouterService",
+                        "RemoteException while calling setBluetoothA2dpOn. on=" + z);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1701,8 +2070,10 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void setDiscoveryRequestLocked(IMediaRouterClient iMediaRouterClient, int i, boolean z) {
-        ClientRecord clientRecord = (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
+    public final void setDiscoveryRequestLocked(
+            IMediaRouterClient iMediaRouterClient, int i, boolean z) {
+        ClientRecord clientRecord =
+                (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
         if (clientRecord != null) {
             if (!clientRecord.mTrusted) {
                 i &= -5;
@@ -1710,14 +2081,21 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
             if (clientRecord.mRouteTypes == i && clientRecord.mActiveScan == z) {
                 return;
             }
-            Slog.d("MediaRouterService", clientRecord + ": Set discovery request, routeTypes=0x" + Integer.toHexString(i) + ", activeScan=" + z);
+            Slog.d(
+                    "MediaRouterService",
+                    clientRecord
+                            + ": Set discovery request, routeTypes=0x"
+                            + Integer.toHexString(i)
+                            + ", activeScan="
+                            + z);
             clientRecord.mRouteTypes = i;
             clientRecord.mActiveScan = z;
             clientRecord.mUserRecord.mHandler.sendEmptyMessage(3);
         }
     }
 
-    public final void setDiscoveryRequestWithRouter2(IMediaRouter2 iMediaRouter2, RouteDiscoveryPreference routeDiscoveryPreference) {
+    public final void setDiscoveryRequestWithRouter2(
+            IMediaRouter2 iMediaRouter2, RouteDiscoveryPreference routeDiscoveryPreference) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2, "router must not be null");
@@ -1725,11 +2103,17 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                MediaRouter2ServiceImpl.RouterRecord routerRecord = (MediaRouter2ServiceImpl.RouterRecord) mediaRouter2ServiceImpl.mAllRouterRecords.get(iMediaRouter2.asBinder());
+                MediaRouter2ServiceImpl.RouterRecord routerRecord =
+                        (MediaRouter2ServiceImpl.RouterRecord)
+                                mediaRouter2ServiceImpl.mAllRouterRecords.get(
+                                        iMediaRouter2.asBinder());
                 if (routerRecord == null) {
-                    Slog.w("MR2ServiceImpl", "Ignoring updating discoveryRequest of null routerRecord.");
+                    Slog.w(
+                            "MR2ServiceImpl",
+                            "Ignoring updating discoveryRequest of null routerRecord.");
                 } else {
-                    MediaRouter2ServiceImpl.setDiscoveryRequestWithRouter2Locked(routerRecord, routeDiscoveryPreference);
+                    MediaRouter2ServiceImpl.setDiscoveryRequestWithRouter2Locked(
+                            routerRecord, routeDiscoveryPreference);
                 }
             }
         } finally {
@@ -1737,27 +2121,45 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void setRouteListingPreference(IMediaRouter2 iMediaRouter2, RouteListingPreference routeListingPreference) {
+    public final void setRouteListingPreference(
+            IMediaRouter2 iMediaRouter2, RouteListingPreference routeListingPreference) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
-        ComponentName linkedItemComponentName = routeListingPreference != null ? routeListingPreference.getLinkedItemComponentName() : null;
+        ComponentName linkedItemComponentName =
+                routeListingPreference != null
+                        ? routeListingPreference.getLinkedItemComponentName()
+                        : null;
         if (linkedItemComponentName != null) {
-            MediaServerUtils.enforcePackageName(mediaRouter2ServiceImpl.mContext, linkedItemComponentName.getPackageName(), Binder.getCallingUid());
+            MediaServerUtils.enforcePackageName(
+                    mediaRouter2ServiceImpl.mContext,
+                    linkedItemComponentName.getPackageName(),
+                    Binder.getCallingUid());
             Context context = mediaRouter2ServiceImpl.mContext;
             UserHandle callingUserHandle = Binder.getCallingUserHandle();
             new Intent("android.media.action.TRANSFER_MEDIA").setComponent(linkedItemComponentName);
-            if (!(!context.getPackageManager().queryIntentActivitiesAsUser(r4, 0, callingUserHandle).isEmpty())) {
-                throw new IllegalArgumentException("Unable to resolve " + linkedItemComponentName + " to a valid activity for android.media.action.TRANSFER_MEDIA");
+            if (!(!context.getPackageManager()
+                    .queryIntentActivitiesAsUser(r4, 0, callingUserHandle)
+                    .isEmpty())) {
+                throw new IllegalArgumentException(
+                        "Unable to resolve "
+                                + linkedItemComponentName
+                                + " to a valid activity for android.media.action.TRANSFER_MEDIA");
             }
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                MediaRouter2ServiceImpl.RouterRecord routerRecord = (MediaRouter2ServiceImpl.RouterRecord) mediaRouter2ServiceImpl.mAllRouterRecords.get(iMediaRouter2.asBinder());
+                MediaRouter2ServiceImpl.RouterRecord routerRecord =
+                        (MediaRouter2ServiceImpl.RouterRecord)
+                                mediaRouter2ServiceImpl.mAllRouterRecords.get(
+                                        iMediaRouter2.asBinder());
                 if (routerRecord == null) {
-                    Slog.w("MR2ServiceImpl", "Ignoring updating route listing of null routerRecord.");
+                    Slog.w(
+                            "MR2ServiceImpl",
+                            "Ignoring updating route listing of null routerRecord.");
                 } else {
-                    MediaRouter2ServiceImpl.setRouteListingPreferenceLocked(routerRecord, routeListingPreference);
+                    MediaRouter2ServiceImpl.setRouteListingPreferenceLocked(
+                            routerRecord, routeListingPreference);
                 }
             }
         } finally {
@@ -1765,7 +2167,11 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void setRouteVolumeWithManager(IMediaRouter2Manager iMediaRouter2Manager, int i, MediaRoute2Info mediaRoute2Info, int i2) {
+    public final void setRouteVolumeWithManager(
+            IMediaRouter2Manager iMediaRouter2Manager,
+            int i,
+            MediaRoute2Info mediaRoute2Info,
+            int i2) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2Manager, "manager must not be null");
@@ -1773,14 +2179,16 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.setRouteVolumeWithManagerLocked(iMediaRouter2Manager, i, mediaRoute2Info, i2);
+                mediaRouter2ServiceImpl.setRouteVolumeWithManagerLocked(
+                        iMediaRouter2Manager, i, mediaRoute2Info, i2);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void setRouteVolumeWithRouter2(IMediaRouter2 iMediaRouter2, MediaRoute2Info mediaRoute2Info, int i) {
+    public final void setRouteVolumeWithRouter2(
+            IMediaRouter2 iMediaRouter2, MediaRoute2Info mediaRoute2Info, int i) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2, "router must not be null");
@@ -1788,14 +2196,16 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.setRouteVolumeWithRouter2Locked(iMediaRouter2, mediaRoute2Info, i);
+                mediaRouter2ServiceImpl.setRouteVolumeWithRouter2Locked(
+                        iMediaRouter2, mediaRoute2Info, i);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void setSelectedRoute(IMediaRouterClient iMediaRouterClient, String str, boolean z) {
+    public final void setSelectedRoute(
+            IMediaRouterClient iMediaRouterClient, String str, boolean z) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mLock) {
@@ -1806,11 +2216,18 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void setSelectedRouteLocked(IMediaRouterClient iMediaRouterClient, String str, boolean z) {
+    public final void setSelectedRouteLocked(
+            IMediaRouterClient iMediaRouterClient, String str, boolean z) {
         ClientGroup clientGroup;
-        ClientRecord clientRecord = (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
+        ClientRecord clientRecord =
+                (ClientRecord) this.mAllClientRecords.get(iMediaRouterClient.asBinder());
         if (clientRecord != null) {
-            String str2 = (this.mDefaultAudioRouteId.equals(clientRecord.mSelectedRouteId) || this.mBluetoothA2dpRouteId.equals(clientRecord.mSelectedRouteId)) ? null : clientRecord.mSelectedRouteId;
+            String str2 =
+                    (this.mDefaultAudioRouteId.equals(clientRecord.mSelectedRouteId)
+                                    || this.mBluetoothA2dpRouteId.equals(
+                                            clientRecord.mSelectedRouteId))
+                            ? null
+                            : clientRecord.mSelectedRouteId;
             clientRecord.mSelectedRouteId = str;
             if (this.mDefaultAudioRouteId.equals(str) || this.mBluetoothA2dpRouteId.equals(str)) {
                 str = null;
@@ -1818,12 +2235,29 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
             if (Objects.equals(str, str2)) {
                 return;
             }
-            Slog.d("MediaRouterService", clientRecord + ": Set selected route, routeId=" + str + ", oldRouteId=" + str2 + ", explicit=" + z);
+            Slog.d(
+                    "MediaRouterService",
+                    clientRecord
+                            + ": Set selected route, routeId="
+                            + str
+                            + ", oldRouteId="
+                            + str2
+                            + ", explicit="
+                            + z);
             if (z && clientRecord.mTrusted) {
-                if (KnoxCustomManagerService.SMARTMIRRORING_PACKAGE_NAME.equals(clientRecord.mPackageName)) {
-                    clientRecord.mUserRecord.mHandler.obtainMessage(20, Boolean.TRUE).sendToTarget();
+                if (KnoxCustomManagerService.SMARTMIRRORING_PACKAGE_NAME.equals(
+                        clientRecord.mPackageName)) {
+                    clientRecord
+                            .mUserRecord
+                            .mHandler
+                            .obtainMessage(20, Boolean.TRUE)
+                            .sendToTarget();
                 } else {
-                    clientRecord.mUserRecord.mHandler.obtainMessage(20, Boolean.FALSE).sendToTarget();
+                    clientRecord
+                            .mUserRecord
+                            .mHandler
+                            .obtainMessage(20, Boolean.FALSE)
+                            .sendToTarget();
                 }
                 if (str2 != null) {
                     clientRecord.mUserRecord.mHandler.obtainMessage(5, str2).sendToTarget();
@@ -1832,16 +2266,25 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                     clientRecord.mUserRecord.mHandler.obtainMessage(4, str).sendToTarget();
                 }
                 String str3 = clientRecord.mGroupId;
-                if (str3 == null || (clientGroup = (ClientGroup) clientRecord.mUserRecord.mClientGroupMap.get(str3)) == null) {
+                if (str3 == null
+                        || (clientGroup =
+                                        (ClientGroup)
+                                                clientRecord.mUserRecord.mClientGroupMap.get(str3))
+                                == null) {
                     return;
                 }
                 clientGroup.mSelectedRouteId = str;
-                clientRecord.mUserRecord.mHandler.obtainMessage(10, clientRecord.mGroupId).sendToTarget();
+                clientRecord
+                        .mUserRecord
+                        .mHandler
+                        .obtainMessage(10, clientRecord.mGroupId)
+                        .sendToTarget();
             }
         }
     }
 
-    public final void setSessionVolumeWithManager(IMediaRouter2Manager iMediaRouter2Manager, int i, String str, int i2) {
+    public final void setSessionVolumeWithManager(
+            IMediaRouter2Manager iMediaRouter2Manager, int i, String str, int i2) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2Manager, "manager must not be null");
@@ -1851,7 +2294,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.setSessionVolumeWithManagerLocked(iMediaRouter2Manager, i, str, i2);
+                mediaRouter2ServiceImpl.setSessionVolumeWithManagerLocked(
+                        iMediaRouter2Manager, i, str, i2);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1876,7 +2320,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final boolean showMediaOutputSwitcherWithProxyRouter(IMediaRouter2Manager iMediaRouter2Manager) {
+    public final boolean showMediaOutputSwitcherWithProxyRouter(
+            IMediaRouter2Manager iMediaRouter2Manager) {
         boolean showOutputSwitcher;
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
@@ -1884,12 +2329,18 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                MediaRouter2ServiceImpl.ManagerRecord managerRecord = (MediaRouter2ServiceImpl.ManagerRecord) mediaRouter2ServiceImpl.mAllManagerRecords.get(iMediaRouter2Manager.asBinder());
+                MediaRouter2ServiceImpl.ManagerRecord managerRecord =
+                        (MediaRouter2ServiceImpl.ManagerRecord)
+                                mediaRouter2ServiceImpl.mAllManagerRecords.get(
+                                        iMediaRouter2Manager.asBinder());
                 String str = managerRecord.mTargetPackageName;
                 if (str == null) {
-                    throw new UnsupportedOperationException("Only proxy routers can show the Output Switcher.");
+                    throw new UnsupportedOperationException(
+                            "Only proxy routers can show the Output Switcher.");
                 }
-                showOutputSwitcher = mediaRouter2ServiceImpl.showOutputSwitcher(str, UserHandle.of(managerRecord.mUserRecord.mUserId));
+                showOutputSwitcher =
+                        mediaRouter2ServiceImpl.showOutputSwitcher(
+                                str, UserHandle.of(managerRecord.mUserRecord.mUserId));
             }
             return showOutputSwitcher;
         } finally {
@@ -1912,7 +2363,13 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         }
     }
 
-    public final void transferToRouteWithManager(IMediaRouter2Manager iMediaRouter2Manager, int i, String str, MediaRoute2Info mediaRoute2Info, UserHandle userHandle, String str2) {
+    public final void transferToRouteWithManager(
+            IMediaRouter2Manager iMediaRouter2Manager,
+            int i,
+            String str,
+            MediaRoute2Info mediaRoute2Info,
+            UserHandle userHandle,
+            String str2) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2Manager, "manager must not be null");
@@ -1925,14 +2382,16 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.transferToRouteWithManagerLocked(iMediaRouter2Manager, i, str, mediaRoute2Info, userHandle, str2);
+                mediaRouter2ServiceImpl.transferToRouteWithManagerLocked(
+                        iMediaRouter2Manager, i, str, mediaRoute2Info, userHandle, str2);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void transferToRouteWithRouter2(IMediaRouter2 iMediaRouter2, String str, MediaRoute2Info mediaRoute2Info) {
+    public final void transferToRouteWithRouter2(
+            IMediaRouter2 iMediaRouter2, String str, MediaRoute2Info mediaRoute2Info) {
         MediaRouter2ServiceImpl mediaRouter2ServiceImpl = this.mService2;
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2, "router must not be null");
@@ -1944,7 +2403,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (mediaRouter2ServiceImpl.mLock) {
-                mediaRouter2ServiceImpl.transferToRouteWithRouter2Locked(iMediaRouter2, callingUserHandle, str, mediaRoute2Info);
+                mediaRouter2ServiceImpl.transferToRouteWithRouter2Locked(
+                        iMediaRouter2, callingUserHandle, str, mediaRoute2Info);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1963,7 +2423,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
     }
 
     public final void unregisterClientLocked(IMediaRouterClient iMediaRouterClient, boolean z) {
-        ClientRecord clientRecord = (ClientRecord) this.mAllClientRecords.remove(iMediaRouterClient.asBinder());
+        ClientRecord clientRecord =
+                (ClientRecord) this.mAllClientRecords.remove(iMediaRouterClient.asBinder());
         if (clientRecord != null) {
             UserRecord userRecord = clientRecord.mUserRecord;
             userRecord.mClientRecords.remove(clientRecord);
@@ -2023,7 +2484,8 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
                     for (int i3 = 0; i3 < clone.size(); i3++) {
                         int keyAt = clone.keyAt(i3);
                         UserRecord userRecord = (UserRecord) clone.valueAt(i3);
-                        if (this.mUserManagerInternal.getProfileParentId(keyAt) == this.mCurrentActiveUserId) {
+                        if (this.mUserManagerInternal.getProfileParentId(keyAt)
+                                == this.mCurrentActiveUserId) {
                             userRecord.mHandler.sendEmptyMessage(1);
                         } else {
                             userRecord.mHandler.sendEmptyMessage(2);
@@ -2038,18 +2500,31 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         synchronized (mediaRouter2ServiceImpl.mLock) {
             try {
                 if (mediaRouter2ServiceImpl.mCurrentActiveUserId != i) {
-                    Slog.i("MR2ServiceImpl", TextUtils.formatSimple("switchUser | user: %d", new Object[]{Integer.valueOf(i)}));
+                    Slog.i(
+                            "MR2ServiceImpl",
+                            TextUtils.formatSimple(
+                                    "switchUser | user: %d", new Object[] {Integer.valueOf(i)}));
                     mediaRouter2ServiceImpl.mCurrentActiveUserId = i;
                     SparseArray clone2 = mediaRouter2ServiceImpl.mUserRecords.clone();
                     for (i2 = 0; i2 < clone2.size(); i2++) {
                         int keyAt2 = clone2.keyAt(i2);
-                        MediaRouter2ServiceImpl.UserRecord userRecord2 = (MediaRouter2ServiceImpl.UserRecord) clone2.valueAt(i2);
-                        if (mediaRouter2ServiceImpl.mUserManagerInternal.getProfileParentId(keyAt2) == mediaRouter2ServiceImpl.mCurrentActiveUserId) {
+                        MediaRouter2ServiceImpl.UserRecord userRecord2 =
+                                (MediaRouter2ServiceImpl.UserRecord) clone2.valueAt(i2);
+                        if (mediaRouter2ServiceImpl.mUserManagerInternal.getProfileParentId(keyAt2)
+                                == mediaRouter2ServiceImpl.mCurrentActiveUserId) {
                             MediaRouter2ServiceImpl.UserHandler userHandler = userRecord2.mHandler;
-                            userHandler.sendMessage(PooledLambda.obtainMessage(new MediaRouter2ServiceImpl$$ExternalSyntheticLambda5(2), userHandler));
+                            userHandler.sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new MediaRouter2ServiceImpl$$ExternalSyntheticLambda5(
+                                                    2),
+                                            userHandler));
                         } else {
                             MediaRouter2ServiceImpl.UserHandler userHandler2 = userRecord2.mHandler;
-                            userHandler2.sendMessage(PooledLambda.obtainMessage(new MediaRouter2ServiceImpl$$ExternalSyntheticLambda5(1), userHandler2));
+                            userHandler2.sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new MediaRouter2ServiceImpl$$ExternalSyntheticLambda5(
+                                                    1),
+                                            userHandler2));
                             mediaRouter2ServiceImpl.disposeUserIfNeededLocked(userRecord2);
                         }
                     }
@@ -2064,7 +2539,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2Manager, "manager must not be null");
         if (i != 0 && i != 1 && i != 2) {
-            throw new IllegalArgumentException(TextUtils.formatSimple("Scanning state %d is not valid.", new Object[]{Integer.valueOf(i)}));
+            throw new IllegalArgumentException(
+                    TextUtils.formatSimple(
+                            "Scanning state %d is not valid.", new Object[] {Integer.valueOf(i)}));
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -2081,7 +2558,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
         mediaRouter2ServiceImpl.getClass();
         Objects.requireNonNull(iMediaRouter2, "router must not be null");
         if (i != 0 && i != 1 && i != 2) {
-            throw new IllegalArgumentException(TextUtils.formatSimple("Scanning state %d is not valid.", new Object[]{Integer.valueOf(i)}));
+            throw new IllegalArgumentException(
+                    TextUtils.formatSimple(
+                            "Scanning state %d is not valid.", new Object[] {Integer.valueOf(i)}));
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -2095,7 +2574,9 @@ public final class MediaRouterService extends IMediaRouterService.Stub implement
 
     public final boolean validatePackageName$1(int i, String str) {
         String[] packagesForUid;
-        if (str != null && (packagesForUid = this.mContext.getPackageManager().getPackagesForUid(i)) != null) {
+        if (str != null
+                && (packagesForUid = this.mContext.getPackageManager().getPackagesForUid(i))
+                        != null) {
             for (String str2 : packagesForUid) {
                 if (str2.equals(str)) {
                     return true;

@@ -22,7 +22,14 @@ public class NegativeFilter extends Filter {
         super(name);
         this.mTileSize = 640;
         this.mTarget = 0;
-        this.mNegativeShader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  gl_FragColor = vec4(1.0 - color.rgb, color.a);\n}\n";
+        this.mNegativeShader =
+                "precision mediump float;\n"
+                        + "uniform sampler2D tex_sampler_0;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                        + "  gl_FragColor = vec4(1.0 - color.rgb, color.a);\n"
+                        + "}\n";
     }
 
     @Override // android.filterfw.core.Filter
@@ -39,13 +46,23 @@ public class NegativeFilter extends Filter {
     public void initProgram(FilterContext context, int target) {
         switch (target) {
             case 3:
-                ShaderProgram shaderProgram = new ShaderProgram(context, "precision mediump float;\nuniform sampler2D tex_sampler_0;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  gl_FragColor = vec4(1.0 - color.rgb, color.a);\n}\n");
+                ShaderProgram shaderProgram =
+                        new ShaderProgram(
+                                context,
+                                "precision mediump float;\n"
+                                        + "uniform sampler2D tex_sampler_0;\n"
+                                        + "varying vec2 v_texcoord;\n"
+                                        + "void main() {\n"
+                                        + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                                        + "  gl_FragColor = vec4(1.0 - color.rgb, color.a);\n"
+                                        + "}\n");
                 shaderProgram.setMaximumTileSize(this.mTileSize);
                 this.mProgram = shaderProgram;
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter Sharpen does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Sharpen does not support frames of target " + target + "!");
         }
     }
 

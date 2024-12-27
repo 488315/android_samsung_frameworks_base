@@ -3,6 +3,7 @@ package com.android.server.notification;
 import android.app.PendingIntent;
 import android.os.Binder;
 import android.util.Slog;
+
 import java.util.Date;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,7 +13,8 @@ public final /* synthetic */ class SnoozeHelper$$ExternalSyntheticLambda0 implem
     public final /* synthetic */ String f$1;
     public final /* synthetic */ long f$2;
 
-    public /* synthetic */ SnoozeHelper$$ExternalSyntheticLambda0(SnoozeHelper snoozeHelper, String str, long j) {
+    public /* synthetic */ SnoozeHelper$$ExternalSyntheticLambda0(
+            SnoozeHelper snoozeHelper, String str, long j) {
         this.f$0 = snoozeHelper;
         this.f$1 = str;
         this.f$2 = j;

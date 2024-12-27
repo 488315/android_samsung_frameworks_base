@@ -10,9 +10,10 @@ import android.os.PowerManager;
 import android.util.Log;
 import android.util.Slog;
 import android.util.jar.StrictJarFile;
+
 import com.android.server.pm.PackageDexOptimizer;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
-import com.android.server.pm.dex.PackageDexUsage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,7 +48,9 @@ public final class DexManager {
         }
 
         public final String toString() {
-            return this.mOwningPackageName + PackageManagerShellCommandDataLoader.STDIN_PATH + this.mOutcome;
+            return this.mOwningPackageName
+                    + PackageManagerShellCommandDataLoader.STDIN_PATH
+                    + this.mOutcome;
         }
     }
 
@@ -94,10 +97,13 @@ public final class DexManager {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class RegisterDexModuleResult {
-    }
+    public final class RegisterDexModuleResult {}
 
-    public DexManager(Context context, PackageDexOptimizer packageDexOptimizer, DynamicCodeLogger dynamicCodeLogger, IPackageManager iPackageManager) {
+    public DexManager(
+            Context context,
+            PackageDexOptimizer packageDexOptimizer,
+            DynamicCodeLogger dynamicCodeLogger,
+            IPackageManager iPackageManager) {
         this.mPowerManager = null;
         this.mContext = context;
         this.mDynamicCodeLogger = dynamicCodeLogger;
@@ -110,7 +116,8 @@ public final class DexManager {
         if (powerManager == null) {
             Slog.wtf("DexManager", "Power Manager is unavailable at time of Dex Manager start");
         }
-        this.mCriticalBatteryLevel = context.getResources().getInteger(R.integer.config_defaultRefreshRate);
+        this.mCriticalBatteryLevel =
+                context.getResources().getInteger(R.integer.config_defaultRefreshRate);
     }
 
     public static boolean auditUncompressedDexInApk(String str) {
@@ -125,9 +132,19 @@ public final class DexManager {
                         ZipEntry zipEntry = (ZipEntry) it.next();
                         if (zipEntry.getName().endsWith(".dex")) {
                             if (zipEntry.getMethod() != 0) {
-                                Slog.w("DexManager", "APK " + str + " has compressed dex code " + zipEntry.getName());
+                                Slog.w(
+                                        "DexManager",
+                                        "APK "
+                                                + str
+                                                + " has compressed dex code "
+                                                + zipEntry.getName());
                             } else if ((zipEntry.getDataOffset() & 3) != 0) {
-                                Slog.w("DexManager", "APK " + str + " has unaligned dex code " + zipEntry.getName());
+                                Slog.w(
+                                        "DexManager",
+                                        "APK "
+                                                + str
+                                                + " has unaligned dex code "
+                                                + zipEntry.getName());
                             }
                             z = false;
                         }
@@ -166,11 +183,13 @@ public final class DexManager {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void cachePackageCodeLocation(String str, String str2, String[] strArr, String[] strArr2, int i) {
+    public final void cachePackageCodeLocation(
+            String str, String str2, String[] strArr, String[] strArr2, int i) {
         synchronized (this.mPackageCodeLocationsCache) {
             try {
                 Map map = this.mPackageCodeLocationsCache;
-                PackageCodeLocations packageCodeLocations = new PackageCodeLocations(strArr, str, str2);
+                PackageCodeLocations packageCodeLocations =
+                        new PackageCodeLocations(strArr, str, str2);
                 Object putIfAbsent = ((HashMap) map).putIfAbsent(str, packageCodeLocations);
                 if (putIfAbsent != 0) {
                     packageCodeLocations = putIfAbsent;
@@ -230,7 +249,16 @@ public final class DexManager {
             int intValue = num.intValue();
             for (PackageInfo packageInfo : list) {
                 ApplicationInfo applicationInfo = packageInfo.applicationInfo;
-                cachePackageCodeLocation(packageInfo.packageName, applicationInfo.sourceDir, applicationInfo.splitSourceDirs, new String[]{applicationInfo.dataDir, applicationInfo.deviceProtectedDataDir, applicationInfo.credentialProtectedDataDir}, intValue);
+                cachePackageCodeLocation(
+                        packageInfo.packageName,
+                        applicationInfo.sourceDir,
+                        applicationInfo.splitSourceDirs,
+                        new String[] {
+                            applicationInfo.dataDir,
+                            applicationInfo.deviceProtectedDataDir,
+                            applicationInfo.credentialProtectedDataDir
+                        },
+                        intValue);
                 String str = packageInfo.packageName;
                 HashSet hashSet = new HashSet();
                 Object putIfAbsent = hashMap.putIfAbsent(str, hashSet);
@@ -258,25 +286,28 @@ public final class DexManager {
         } catch (RuntimeException e) {
             synchronized (packageDexUsage.mPackageUseInfoMap) {
                 ((HashMap) packageDexUsage.mPackageUseInfoMap).clear();
-                Slog.w("DexManager", "Exception while loading package dex usage. Starting with a fresh state.", e);
+                Slog.w(
+                        "DexManager",
+                        "Exception while loading package dex usage. Starting with a fresh state.",
+                        e);
             }
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:53:0x01d6, code lost:
-    
-        r8 = r20.mDynamicCodeLogger;
-        r16 = 0;
-        r19 = r9;
-     */
+
+       r8 = r20.mDynamicCodeLogger;
+       r16 = 0;
+       r19 = r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:54:0x01f0, code lost:
-    
-        if (r8.mPackageDynamicCodeLoading.record(68, r24, r0.mOwningPackageName, r9, r21.packageName) == false) goto L106;
-     */
+
+       if (r8.mPackageDynamicCodeLoading.record(68, r24, r0.mOwningPackageName, r9, r21.packageName) == false) goto L106;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x01f2, code lost:
-    
-        r8.mPackageDynamicCodeLoading.maybeWriteAsync(null);
-     */
+
+       r8.mPackageDynamicCodeLoading.maybeWriteAsync(null);
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:139:0x035b A[SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:143:0x00d4  */
@@ -287,12 +318,20 @@ public final class DexManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void notifyDexLoadInternal(android.content.pm.ApplicationInfo r21, java.util.Map r22, java.lang.String r23, int r24, boolean r25) {
+    public void notifyDexLoadInternal(
+            android.content.pm.ApplicationInfo r21,
+            java.util.Map r22,
+            java.lang.String r23,
+            int r24,
+            boolean r25) {
         /*
             Method dump skipped, instructions count: 920
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.dex.DexManager.notifyDexLoadInternal(android.content.pm.ApplicationInfo, java.util.Map, java.lang.String, int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.dex.DexManager.notifyDexLoadInternal(android.content.pm.ApplicationInfo,"
+                    + " java.util.Map, java.lang.String, int, boolean):void");
     }
 
     public final void notifyPackageUpdated(String[] strArr, String str, String str2) {
@@ -301,12 +340,15 @@ public final class DexManager {
         PackageDexUsage packageDexUsage = this.mPackageDexUsage;
         synchronized (packageDexUsage.mPackageUseInfoMap) {
             try {
-                PackageDexUsage.PackageUseInfo packageUseInfo = (PackageDexUsage.PackageUseInfo) ((HashMap) packageDexUsage.mPackageUseInfoMap).get(str);
+                PackageDexUsage.PackageUseInfo packageUseInfo =
+                        (PackageDexUsage.PackageUseInfo)
+                                ((HashMap) packageDexUsage.mPackageUseInfoMap).get(str);
                 z = false;
                 if (packageUseInfo != null) {
                     ArrayList arrayList = new ArrayList(1);
                     arrayList.add(packageUseInfo.mPackageName);
-                    Iterator it = ((HashMap) packageUseInfo.mPrimaryCodePaths).entrySet().iterator();
+                    Iterator it =
+                            ((HashMap) packageUseInfo.mPrimaryCodePaths).entrySet().iterator();
                     while (it.hasNext()) {
                         if (((Set) ((Map.Entry) it.next()).getValue()).retainAll(arrayList)) {
                             z = true;

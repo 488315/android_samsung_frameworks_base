@@ -1,6 +1,5 @@
 package android.media;
 
-import android.media.Tokenizer;
 import java.util.Vector;
 
 /* compiled from: WebVttRenderer.java */
@@ -28,12 +27,10 @@ class UnstyledTextExtractor implements Tokenizer.OnTokenListener {
     }
 
     @Override // android.media.Tokenizer.OnTokenListener
-    public void onStart(String tag, String[] classes, String annotation) {
-    }
+    public void onStart(String tag, String[] classes, String annotation) {}
 
     @Override // android.media.Tokenizer.OnTokenListener
-    public void onEnd(String tag) {
-    }
+    public void onEnd(String tag) {}
 
     @Override // android.media.Tokenizer.OnTokenListener
     public void onTimeStamp(long timestampMs) {

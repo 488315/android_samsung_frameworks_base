@@ -13,6 +13,7 @@ import android.view.InputEventReceiver;
 import android.view.InputMonitor;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -44,7 +45,12 @@ public class MCInputEventReceiver extends InputEventReceiver {
         BOTTOM
     }
 
-    public MCInputEventReceiver(Context context, int displayId, InputMonitor inputMonitor, InputChannel inputChannel, Looper looper) {
+    public MCInputEventReceiver(
+            Context context,
+            int displayId,
+            InputMonitor inputMonitor,
+            InputChannel inputChannel,
+            Looper looper) {
         super(inputChannel, looper);
         this.TAG_PREFIX = SemMultiControlManager.TAG_PREFIX;
         this.TAG = SemMultiControlManager.TAG_PREFIX + MCInputEventReceiver.class.getSimpleName();
@@ -99,20 +105,16 @@ public class MCInputEventReceiver extends InputEventReceiver {
         Rect displayRect = this.mWindowManager.getMaximumWindowMetrics().getBounds();
         switch (direction) {
             case RIGHT:
-                if (x >= displayRect.right - 5) {
-                }
+                if (x >= displayRect.right - 5) {}
                 break;
             case LEFT:
-                if (x <= displayRect.left) {
-                }
+                if (x <= displayRect.left) {}
                 break;
             case TOP:
-                if (y <= displayRect.top) {
-                }
+                if (y <= displayRect.top) {}
                 break;
             case BOTTOM:
-                if (y >= displayRect.bottom - 5) {
-                }
+                if (y >= displayRect.bottom - 5) {}
                 break;
         }
         return true;
@@ -145,7 +147,8 @@ public class MCInputEventReceiver extends InputEventReceiver {
                 }
                 break;
         }
-        return this.countX > ((float) this.triggerThreshold) || this.countY > ((float) this.triggerThreshold);
+        return this.countX > ((float) this.triggerThreshold)
+                || this.countY > ((float) this.triggerThreshold);
     }
 
     private void handleInput(MotionEvent motionEvent) {
@@ -162,13 +165,18 @@ public class MCInputEventReceiver extends InputEventReceiver {
                         this.countX = 0.0f;
                         this.countY = 0.0f;
                         try {
-                            Intent intent = new Intent("com.samsung.android.inputshare.action.ACTION_TRIGGERED");
+                            Intent intent =
+                                    new Intent(
+                                            "com.samsung.android.inputshare.action.ACTION_TRIGGERED");
                             intent.putExtra("displayId", this.mDisplayId);
                             intent.putExtra("direction", direction.name());
                             intent.putExtra("y", y);
                             intent.putExtra("x", x);
                             intent.setPackage("com.samsung.android.inputshare");
-                            this.mContext.sendBroadcastAsUser(intent, UserHandle.SEM_CURRENT, Manifest.permission.MULTI_CONTROL_RECEIVER_PERMISSION);
+                            this.mContext.sendBroadcastAsUser(
+                                    intent,
+                                    UserHandle.SEM_CURRENT,
+                                    Manifest.permission.MULTI_CONTROL_RECEIVER_PERMISSION);
                             Log.i(this.TAG, "sendBroadcast - ACTION_TRIGGERED");
                             return;
                         } catch (Exception e) {

@@ -2,6 +2,7 @@ package com.samsung.android.sume.core.descriptor;
 
 import com.samsung.android.sume.core.filter.MediaMuxerFilter;
 import com.samsung.android.sume.core.types.MediaType;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,14 +20,24 @@ public class MediaMuxerDescriptor extends MFDescriptorBase {
     }
 
     public void setMediaTypeToNotifyEvent(MediaType... mediaTypes) {
-        this.mediaTypesToNotifyEvent.addAll((Collection) Arrays.stream(mediaTypes).map(new Function() { // from class: com.samsung.android.sume.core.descriptor.MediaMuxerDescriptor$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Integer valueOf;
-                valueOf = Integer.valueOf(((MediaType) obj).rank().getValue());
-                return valueOf;
-            }
-        }).collect(Collectors.toList()));
+        this.mediaTypesToNotifyEvent.addAll(
+                (Collection)
+                        Arrays.stream(mediaTypes)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.descriptor.MediaMuxerDescriptor$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                Integer valueOf;
+                                                valueOf =
+                                                        Integer.valueOf(
+                                                                ((MediaType) obj)
+                                                                        .rank()
+                                                                        .getValue());
+                                                return valueOf;
+                                            }
+                                        })
+                                .collect(Collectors.toList()));
     }
 
     public boolean isMediaTypeToNotifyEvent(MediaType mediaType) {
@@ -37,7 +48,8 @@ public class MediaMuxerDescriptor extends MFDescriptorBase {
         return this.outputFormat;
     }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
+    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+              // com.samsung.android.sume.core.descriptor.MFDescriptor
     public String getFilterId() {
         return MediaMuxerFilter.class.getName();
     }

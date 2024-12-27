@@ -3,6 +3,7 @@ package com.android.server.pm.permission;
 import android.content.pm.PackageManager;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +22,8 @@ public final class UidPermissionState {
             int size = uidPermissionState.mPermissions.size();
             for (int i = 0; i < size; i++) {
                 String str = (String) uidPermissionState.mPermissions.keyAt(i);
-                PermissionState permissionState = (PermissionState) uidPermissionState.mPermissions.valueAt(i);
+                PermissionState permissionState =
+                        (PermissionState) uidPermissionState.mPermissions.valueAt(i);
                 ArrayMap arrayMap = this.mPermissions;
                 PermissionState permissionState2 = new PermissionState(permissionState.mPermission);
                 permissionState2.mGranted = permissionState.mGranted;
@@ -77,7 +79,9 @@ public final class UidPermissionState {
     }
 
     public final List getPermissionStates() {
-        return this.mPermissions == null ? Collections.emptyList() : new ArrayList(this.mPermissions.values());
+        return this.mPermissions == null
+                ? Collections.emptyList()
+                : new ArrayList(this.mPermissions.values());
     }
 
     public final boolean grantPermission(Permission permission) {

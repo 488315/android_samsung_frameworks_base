@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.descriptor;
 
 import com.samsung.android.sume.core.filter.MediaFilter;
+
 import java.util.Optional;
 
 /* loaded from: classes6.dex */
@@ -43,6 +44,8 @@ public abstract class MFDescriptorBase extends MediaFilter.Option implements MFD
 
     @Override // com.samsung.android.sume.core.descriptor.MFDescriptor
     public Class<?> getFilterType() {
-        return (Class) Optional.ofNullable(getAll().get(Integer.valueOf(FILTER_TYPE))).orElse(MediaFilter.class);
+        return (Class)
+                Optional.ofNullable(getAll().get(Integer.valueOf(FILTER_TYPE)))
+                        .orElse(MediaFilter.class);
     }
 }

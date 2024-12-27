@@ -10,7 +10,13 @@ import java.util.function.Predicate;
 /* loaded from: classes3.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_GET_DEVICE_CROSS_AKM_ROAMING_SUPPORT, Flags.FLAG_LEGACY_KEYSTORE_TO_WIFI_BLOBSTORE_MIGRATION, Flags.FLAG_NETWORK_PROVIDER_BATTERY_CHARGING_STATUS, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(
+                    Arrays.asList(
+                            Flags.FLAG_GET_DEVICE_CROSS_AKM_ROAMING_SUPPORT,
+                            Flags.FLAG_LEGACY_KEYSTORE_TO_WIFI_BLOBSTORE_MIGRATION,
+                            Flags.FLAG_NETWORK_PROVIDER_BATTERY_CHARGING_STATUS,
+                            ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,32 +24,41 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // android.net.wifi.flags.FeatureFlags
     public boolean getDeviceCrossAkmRoamingSupport() {
-        return getValue(Flags.FLAG_GET_DEVICE_CROSS_AKM_ROAMING_SUPPORT, new Predicate() { // from class: android.net.wifi.flags.CustomFeatureFlags$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).getDeviceCrossAkmRoamingSupport();
-            }
-        });
+        return getValue(
+                Flags.FLAG_GET_DEVICE_CROSS_AKM_ROAMING_SUPPORT,
+                new Predicate() { // from class:
+                                  // android.net.wifi.flags.CustomFeatureFlags$$ExternalSyntheticLambda2
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).getDeviceCrossAkmRoamingSupport();
+                    }
+                });
     }
 
     @Override // android.net.wifi.flags.FeatureFlags
     public boolean legacyKeystoreToWifiBlobstoreMigration() {
-        return getValue(Flags.FLAG_LEGACY_KEYSTORE_TO_WIFI_BLOBSTORE_MIGRATION, new Predicate() { // from class: android.net.wifi.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).legacyKeystoreToWifiBlobstoreMigration();
-            }
-        });
+        return getValue(
+                Flags.FLAG_LEGACY_KEYSTORE_TO_WIFI_BLOBSTORE_MIGRATION,
+                new Predicate() { // from class:
+                                  // android.net.wifi.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).legacyKeystoreToWifiBlobstoreMigration();
+                    }
+                });
     }
 
     @Override // android.net.wifi.flags.FeatureFlags
     public boolean networkProviderBatteryChargingStatus() {
-        return getValue(Flags.FLAG_NETWORK_PROVIDER_BATTERY_CHARGING_STATUS, new Predicate() { // from class: android.net.wifi.flags.CustomFeatureFlags$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).networkProviderBatteryChargingStatus();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NETWORK_PROVIDER_BATTERY_CHARGING_STATUS,
+                new Predicate() { // from class:
+                                  // android.net.wifi.flags.CustomFeatureFlags$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).networkProviderBatteryChargingStatus();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {
@@ -62,6 +77,9 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     public List<String> getFlagNames() {
-        return Arrays.asList(Flags.FLAG_GET_DEVICE_CROSS_AKM_ROAMING_SUPPORT, Flags.FLAG_LEGACY_KEYSTORE_TO_WIFI_BLOBSTORE_MIGRATION, Flags.FLAG_NETWORK_PROVIDER_BATTERY_CHARGING_STATUS);
+        return Arrays.asList(
+                Flags.FLAG_GET_DEVICE_CROSS_AKM_ROAMING_SUPPORT,
+                Flags.FLAG_LEGACY_KEYSTORE_TO_WIFI_BLOBSTORE_MIGRATION,
+                Flags.FLAG_NETWORK_PROVIDER_BATTERY_CHARGING_STATUS);
     }
 }

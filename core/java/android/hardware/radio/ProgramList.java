@@ -1,14 +1,12 @@
 package android.hardware.radio;
 
 import android.annotation.SystemApi;
-import android.hardware.radio.ProgramList;
-import android.hardware.radio.ProgramSelector;
-import android.hardware.radio.RadioManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -25,7 +23,10 @@ public final class ProgramList implements AutoCloseable {
     private boolean mIsComplete;
     private OnCloseListener mOnCloseListener;
     private final Object mLock = new Object();
-    private final ArrayMap<ProgramSelector.Identifier, ArrayMap<UniqueProgramIdentifier, RadioManager.ProgramInfo>> mPrograms = new ArrayMap<>();
+    private final ArrayMap<
+                    ProgramSelector.Identifier,
+                    ArrayMap<UniqueProgramIdentifier, RadioManager.ProgramInfo>>
+            mPrograms = new ArrayMap<>();
     private final List<ListCallback> mListCallbacks = new ArrayList();
     private final List<OnCompleteListener> mOnCompleteListeners = new ArrayList();
 
@@ -37,15 +38,12 @@ public final class ProgramList implements AutoCloseable {
         void onComplete();
     }
 
-    ProgramList() {
-    }
+    ProgramList() {}
 
-    public static abstract class ListCallback {
-        public void onItemChanged(ProgramSelector.Identifier id) {
-        }
+    public abstract static class ListCallback {
+        public void onItemChanged(ProgramSelector.Identifier id) {}
 
-        public void onItemRemoved(ProgramSelector.Identifier id) {
-        }
+        public void onItemRemoved(ProgramSelector.Identifier id) {}
     }
 
     /* renamed from: android.hardware.radio.ProgramList$1, reason: invalid class name */
@@ -62,24 +60,28 @@ public final class ProgramList implements AutoCloseable {
         public void onItemChanged(final ProgramSelector.Identifier id) {
             Executor executor = this.val$executor;
             final ListCallback listCallback = this.val$callback;
-            executor.execute(new Runnable() { // from class: android.hardware.radio.ProgramList$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ProgramList.ListCallback.this.onItemChanged(id);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.radio.ProgramList$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ProgramList.ListCallback.this.onItemChanged(id);
+                        }
+                    });
         }
 
         @Override // android.hardware.radio.ProgramList.ListCallback
         public void onItemRemoved(final ProgramSelector.Identifier id) {
             Executor executor = this.val$executor;
             final ListCallback listCallback = this.val$callback;
-            executor.execute(new Runnable() { // from class: android.hardware.radio.ProgramList$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ProgramList.ListCallback.this.onItemRemoved(id);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.hardware.radio.ProgramList$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ProgramList.ListCallback.this.onItemRemoved(id);
+                        }
+                    });
         }
     }
 
@@ -105,23 +107,28 @@ public final class ProgramList implements AutoCloseable {
         }
     }
 
-    static /* synthetic */ void lambda$addOnCompleteListener$0(Executor executor, final OnCompleteListener listener) {
+    static /* synthetic */ void lambda$addOnCompleteListener$0(
+            Executor executor, final OnCompleteListener listener) {
         Objects.requireNonNull(listener);
-        executor.execute(new Runnable() { // from class: android.hardware.radio.ProgramList$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ProgramList.OnCompleteListener.this.onComplete();
-            }
-        });
+        executor.execute(
+                new Runnable() { // from class:
+                    // android.hardware.radio.ProgramList$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ProgramList.OnCompleteListener.this.onComplete();
+                    }
+                });
     }
 
     public void addOnCompleteListener(final Executor executor, final OnCompleteListener listener) {
-        addOnCompleteListener(new OnCompleteListener() { // from class: android.hardware.radio.ProgramList$$ExternalSyntheticLambda1
-            @Override // android.hardware.radio.ProgramList.OnCompleteListener
-            public final void onComplete() {
-                ProgramList.lambda$addOnCompleteListener$0(executor, listener);
-            }
-        });
+        addOnCompleteListener(
+                new OnCompleteListener() { // from class:
+                    // android.hardware.radio.ProgramList$$ExternalSyntheticLambda1
+                    @Override // android.hardware.radio.ProgramList.OnCompleteListener
+                    public final void onComplete() {
+                        ProgramList.lambda$addOnCompleteListener$0(executor, listener);
+                    }
+                });
     }
 
     public void addOnCompleteListener(OnCompleteListener listener) {
@@ -186,9 +193,17 @@ public final class ProgramList implements AutoCloseable {
             this.mIsComplete = false;
             List<ListCallback> listCallbacksCopied = new ArrayList<>(this.mListCallbacks);
             if (chunk.isPurge()) {
-                Iterator<Map.Entry<ProgramSelector.Identifier, ArrayMap<UniqueProgramIdentifier, RadioManager.ProgramInfo>>> programsIterator = this.mPrograms.entrySet().iterator();
+                Iterator<
+                                Map.Entry<
+                                        ProgramSelector.Identifier,
+                                        ArrayMap<
+                                                UniqueProgramIdentifier, RadioManager.ProgramInfo>>>
+                        programsIterator = this.mPrograms.entrySet().iterator();
                 while (programsIterator.hasNext()) {
-                    Map.Entry<ProgramSelector.Identifier, ArrayMap<UniqueProgramIdentifier, RadioManager.ProgramInfo>> removed = programsIterator.next();
+                    Map.Entry<
+                                    ProgramSelector.Identifier,
+                                    ArrayMap<UniqueProgramIdentifier, RadioManager.ProgramInfo>>
+                            removed = programsIterator.next();
                     if (removed.getValue() != null) {
                         removedList.add(removed.getKey());
                     }
@@ -225,9 +240,11 @@ public final class ProgramList implements AutoCloseable {
         }
     }
 
-    private void putLocked(RadioManager.ProgramInfo value, Set<ProgramSelector.Identifier> changedIdentifierSet) {
+    private void putLocked(
+            RadioManager.ProgramInfo value, Set<ProgramSelector.Identifier> changedIdentifierSet) {
         UniqueProgramIdentifier key = new UniqueProgramIdentifier(value.getSelector());
-        ProgramSelector.Identifier primaryKey = (ProgramSelector.Identifier) Objects.requireNonNull(key.getPrimaryId());
+        ProgramSelector.Identifier primaryKey =
+                (ProgramSelector.Identifier) Objects.requireNonNull(key.getPrimaryId());
         if (!this.mPrograms.containsKey(primaryKey)) {
             this.mPrograms.put(primaryKey, new ArrayMap<>());
         }
@@ -235,12 +252,15 @@ public final class ProgramList implements AutoCloseable {
         changedIdentifierSet.add(primaryKey);
     }
 
-    private void removeLocked(UniqueProgramIdentifier key, List<ProgramSelector.Identifier> removedIdentifierList) {
-        ProgramSelector.Identifier primaryKey = (ProgramSelector.Identifier) Objects.requireNonNull(key.getPrimaryId());
+    private void removeLocked(
+            UniqueProgramIdentifier key, List<ProgramSelector.Identifier> removedIdentifierList) {
+        ProgramSelector.Identifier primaryKey =
+                (ProgramSelector.Identifier) Objects.requireNonNull(key.getPrimaryId());
         if (!this.mPrograms.containsKey(primaryKey)) {
             return;
         }
-        Map<UniqueProgramIdentifier, RadioManager.ProgramInfo> entries = this.mPrograms.get(primaryKey);
+        Map<UniqueProgramIdentifier, RadioManager.ProgramInfo> entries =
+                this.mPrograms.get(primaryKey);
         RadioManager.ProgramInfo removed = entries.remove(Objects.requireNonNull(key));
         if (removed != null && entries.size() == 0) {
             removedIdentifierList.add(primaryKey);
@@ -251,7 +271,8 @@ public final class ProgramList implements AutoCloseable {
         List<RadioManager.ProgramInfo> list = new ArrayList<>();
         synchronized (this.mLock) {
             for (int index = 0; index < this.mPrograms.size(); index++) {
-                ArrayMap<UniqueProgramIdentifier, RadioManager.ProgramInfo> entries = this.mPrograms.valueAt(index);
+                ArrayMap<UniqueProgramIdentifier, RadioManager.ProgramInfo> entries =
+                        this.mPrograms.valueAt(index);
                 list.addAll(entries.values());
             }
         }
@@ -262,7 +283,9 @@ public final class ProgramList implements AutoCloseable {
     public RadioManager.ProgramInfo get(ProgramSelector.Identifier id) {
         Map<UniqueProgramIdentifier, RadioManager.ProgramInfo> entries;
         synchronized (this.mLock) {
-            entries = this.mPrograms.get(Objects.requireNonNull(id, "Primary identifier can not be null"));
+            entries =
+                    this.mPrograms.get(
+                            Objects.requireNonNull(id, "Primary identifier can not be null"));
         }
         if (entries == null) {
             return null;
@@ -283,26 +306,32 @@ public final class ProgramList implements AutoCloseable {
     }
 
     public static final class Filter implements Parcelable {
-        public static final Parcelable.Creator<Filter> CREATOR = new Parcelable.Creator<Filter>() { // from class: android.hardware.radio.ProgramList.Filter.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Filter createFromParcel(Parcel in) {
-                return new Filter(in);
-            }
+        public static final Parcelable.Creator<Filter> CREATOR =
+                new Parcelable.Creator<
+                        Filter>() { // from class: android.hardware.radio.ProgramList.Filter.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Filter createFromParcel(Parcel in) {
+                        return new Filter(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Filter[] newArray(int size) {
-                return new Filter[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Filter[] newArray(int size) {
+                        return new Filter[size];
+                    }
+                };
         private final boolean mExcludeModifications;
         private final Set<Integer> mIdentifierTypes;
         private final Set<ProgramSelector.Identifier> mIdentifiers;
         private final boolean mIncludeCategories;
         private final Map<String, String> mVendorFilter;
 
-        public Filter(Set<Integer> identifierTypes, Set<ProgramSelector.Identifier> identifiers, boolean includeCategories, boolean excludeModifications) {
+        public Filter(
+                Set<Integer> identifierTypes,
+                Set<ProgramSelector.Identifier> identifiers,
+                boolean includeCategories,
+                boolean excludeModifications) {
             this.mIdentifierTypes = (Set) Objects.requireNonNull(identifierTypes);
             this.mIdentifiers = (Set) Objects.requireNonNull(identifiers);
             this.mIncludeCategories = includeCategories;
@@ -369,7 +398,11 @@ public final class ProgramList implements AutoCloseable {
         }
 
         public int hashCode() {
-            return Objects.hash(this.mIdentifierTypes, this.mIdentifiers, Boolean.valueOf(this.mIncludeCategories), Boolean.valueOf(this.mExcludeModifications));
+            return Objects.hash(
+                    this.mIdentifierTypes,
+                    this.mIdentifiers,
+                    Boolean.valueOf(this.mIncludeCategories),
+                    Boolean.valueOf(this.mExcludeModifications));
         }
 
         public boolean equals(Object obj) {
@@ -380,34 +413,51 @@ public final class ProgramList implements AutoCloseable {
                 return false;
             }
             Filter other = (Filter) obj;
-            return this.mIncludeCategories == other.mIncludeCategories && this.mExcludeModifications == other.mExcludeModifications && Objects.equals(this.mIdentifierTypes, other.mIdentifierTypes) && Objects.equals(this.mIdentifiers, other.mIdentifiers);
+            return this.mIncludeCategories == other.mIncludeCategories
+                    && this.mExcludeModifications == other.mExcludeModifications
+                    && Objects.equals(this.mIdentifierTypes, other.mIdentifierTypes)
+                    && Objects.equals(this.mIdentifiers, other.mIdentifiers);
         }
 
         public String toString() {
-            return "Filter [mIdentifierTypes=" + this.mIdentifierTypes + ", mIdentifiers=" + this.mIdentifiers + ", mIncludeCategories=" + this.mIncludeCategories + ", mExcludeModifications=" + this.mExcludeModifications + NavigationBarInflaterView.SIZE_MOD_END;
+            return "Filter [mIdentifierTypes="
+                    + this.mIdentifierTypes
+                    + ", mIdentifiers="
+                    + this.mIdentifiers
+                    + ", mIncludeCategories="
+                    + this.mIncludeCategories
+                    + ", mExcludeModifications="
+                    + this.mExcludeModifications
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
     }
 
     public static final class Chunk implements Parcelable {
-        public static final Parcelable.Creator<Chunk> CREATOR = new Parcelable.Creator<Chunk>() { // from class: android.hardware.radio.ProgramList.Chunk.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Chunk createFromParcel(Parcel in) {
-                return new Chunk(in);
-            }
+        public static final Parcelable.Creator<Chunk> CREATOR =
+                new Parcelable.Creator<
+                        Chunk>() { // from class: android.hardware.radio.ProgramList.Chunk.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Chunk createFromParcel(Parcel in) {
+                        return new Chunk(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Chunk[] newArray(int size) {
-                return new Chunk[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Chunk[] newArray(int size) {
+                        return new Chunk[size];
+                    }
+                };
         private final boolean mComplete;
         private final Set<RadioManager.ProgramInfo> mModified;
         private final boolean mPurge;
         private final Set<UniqueProgramIdentifier> mRemoved;
 
-        public Chunk(boolean purge, boolean complete, Set<RadioManager.ProgramInfo> modified, Set<UniqueProgramIdentifier> removed) {
+        public Chunk(
+                boolean purge,
+                boolean complete,
+                Set<RadioManager.ProgramInfo> modified,
+                Set<UniqueProgramIdentifier> removed) {
             this.mPurge = purge;
             this.mComplete = complete;
             this.mModified = modified != null ? modified : Collections.emptySet();
@@ -458,11 +508,22 @@ public final class ProgramList implements AutoCloseable {
                 return false;
             }
             Chunk other = (Chunk) obj;
-            return this.mPurge == other.mPurge && this.mComplete == other.mComplete && Objects.equals(this.mModified, other.mModified) && Objects.equals(this.mRemoved, other.mRemoved);
+            return this.mPurge == other.mPurge
+                    && this.mComplete == other.mComplete
+                    && Objects.equals(this.mModified, other.mModified)
+                    && Objects.equals(this.mRemoved, other.mRemoved);
         }
 
         public String toString() {
-            return "Chunk [mPurge=" + this.mPurge + ", mComplete=" + this.mComplete + ", mModified=" + this.mModified + ", mRemoved=" + this.mRemoved + NavigationBarInflaterView.SIZE_MOD_END;
+            return "Chunk [mPurge="
+                    + this.mPurge
+                    + ", mComplete="
+                    + this.mComplete
+                    + ", mModified="
+                    + this.mModified
+                    + ", mRemoved="
+                    + this.mRemoved
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
     }
 }

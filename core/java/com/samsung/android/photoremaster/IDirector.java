@@ -3,6 +3,7 @@ package com.samsung.android.photoremaster;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */

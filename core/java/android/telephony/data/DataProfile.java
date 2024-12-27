@@ -5,8 +5,8 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.TelephonyManager;
-import android.telephony.data.ApnSetting;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -14,19 +14,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class DataProfile implements Parcelable {
-    public static final Parcelable.Creator<DataProfile> CREATOR = new Parcelable.Creator<DataProfile>() { // from class: android.telephony.data.DataProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataProfile createFromParcel(Parcel source) {
-            return new DataProfile(source);
-        }
+    public static final Parcelable.Creator<DataProfile> CREATOR =
+            new Parcelable.Creator<
+                    DataProfile>() { // from class: android.telephony.data.DataProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataProfile createFromParcel(Parcel source) {
+                    return new DataProfile(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataProfile[] newArray(int size) {
-            return new DataProfile[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataProfile[] newArray(int size) {
+                    return new DataProfile[size];
+                }
+            };
     public static final int TYPE_3GPP = 1;
     public static final int TYPE_3GPP2 = 2;
     public static final int TYPE_COMMON = 0;
@@ -39,8 +41,7 @@ public final class DataProfile implements Parcelable {
     private final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     private DataProfile(Builder builder) {
         this.mApnSetting = builder.mApnSetting;
@@ -52,9 +53,11 @@ public final class DataProfile implements Parcelable {
             int networkTypes = this.mApnSetting.getNetworkTypeBitmask();
             if (networkTypes == 0) {
                 this.mType = 0;
-            } else if ((networkTypes & TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP2) == networkTypes) {
+            } else if ((networkTypes & TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP2)
+                    == networkTypes) {
                 this.mType = 2;
-            } else if ((networkTypes & TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP) == networkTypes) {
+            } else if ((networkTypes & TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP)
+                    == networkTypes) {
                 this.mType = 1;
             } else {
                 this.mType = 0;
@@ -68,8 +71,13 @@ public final class DataProfile implements Parcelable {
 
     private DataProfile(Parcel source) {
         this.mType = source.readInt();
-        this.mApnSetting = (ApnSetting) source.readParcelable(ApnSetting.class.getClassLoader(), ApnSetting.class);
-        this.mTrafficDescriptor = (TrafficDescriptor) source.readParcelable(TrafficDescriptor.class.getClassLoader(), TrafficDescriptor.class);
+        this.mApnSetting =
+                (ApnSetting)
+                        source.readParcelable(ApnSetting.class.getClassLoader(), ApnSetting.class);
+        this.mTrafficDescriptor =
+                (TrafficDescriptor)
+                        source.readParcelable(
+                                TrafficDescriptor.class.getClassLoader(), TrafficDescriptor.class);
         this.mPreferred = source.readBoolean();
         this.mSetupTimestamp = source.readLong();
         this.mCid = source.readInt();
@@ -253,7 +261,8 @@ public final class DataProfile implements Parcelable {
     }
 
     public boolean canSatisfy(int networkCapability) {
-        return this.mApnSetting != null && this.mApnSetting.canHandleType(networkCapabilityToApnType(networkCapability));
+        return this.mApnSetting != null
+                && this.mApnSetting.canHandleType(networkCapabilityToApnType(networkCapability));
     }
 
     private static int networkCapabilityToApnType(int networkCapability) {
@@ -307,7 +316,19 @@ public final class DataProfile implements Parcelable {
     }
 
     public String toString() {
-        return "[DataProfile=" + this.mApnSetting + ", " + this.mTrafficDescriptor + ", preferred=" + this.mPreferred + ", cid=" + this.mCid + ", profileId=" + this.mProfileId + ", mSetupTimestamp: " + this.mSetupTimestamp + NavigationBarInflaterView.SIZE_MOD_END;
+        return "[DataProfile="
+                + this.mApnSetting
+                + ", "
+                + this.mTrafficDescriptor
+                + ", preferred="
+                + this.mPreferred
+                + ", cid="
+                + this.mCid
+                + ", profileId="
+                + this.mProfileId
+                + ", mSetupTimestamp: "
+                + this.mSetupTimestamp
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.os.Parcelable
@@ -329,7 +350,9 @@ public final class DataProfile implements Parcelable {
             return false;
         }
         DataProfile that = (DataProfile) o;
-        if (this.mType == that.mType && Objects.equals(this.mApnSetting, that.mApnSetting) && Objects.equals(this.mTrafficDescriptor, that.mTrafficDescriptor)) {
+        if (this.mType == that.mType
+                && Objects.equals(this.mApnSetting, that.mApnSetting)
+                && Objects.equals(this.mTrafficDescriptor, that.mTrafficDescriptor)) {
             return true;
         }
         return false;
@@ -470,10 +493,27 @@ public final class DataProfile implements Parcelable {
 
         public DataProfile build() {
             if (this.mApnSetting == null && this.mApn != null) {
-                this.mApnSetting = new ApnSetting.Builder().setEntryName(this.mApn).setApnName(this.mApn).setApnTypeBitmask(this.mSupportedApnTypesBitmask).setAuthType(this.mAuthType).setCarrierEnabled(this.mEnabled).setModemCognitive(this.mPersistent).setMtuV4(this.mMtuV4).setMtuV6(this.mMtuV6).setNetworkTypeBitmask(this.mBearerBitmask).setProfileId(this.mProfileId).setPassword(this.mPassword).setProtocol(this.mProtocolType).setRoamingProtocol(this.mRoamingProtocolType).setUser(this.mUserName).build();
+                this.mApnSetting =
+                        new ApnSetting.Builder()
+                                .setEntryName(this.mApn)
+                                .setApnName(this.mApn)
+                                .setApnTypeBitmask(this.mSupportedApnTypesBitmask)
+                                .setAuthType(this.mAuthType)
+                                .setCarrierEnabled(this.mEnabled)
+                                .setModemCognitive(this.mPersistent)
+                                .setMtuV4(this.mMtuV4)
+                                .setMtuV6(this.mMtuV6)
+                                .setNetworkTypeBitmask(this.mBearerBitmask)
+                                .setProfileId(this.mProfileId)
+                                .setPassword(this.mPassword)
+                                .setProtocol(this.mProtocolType)
+                                .setRoamingProtocol(this.mRoamingProtocolType)
+                                .setUser(this.mUserName)
+                                .build();
             }
             if (this.mApnSetting == null && this.mTrafficDescriptor == null) {
-                throw new IllegalArgumentException("APN setting and traffic descriptor can't be both null.");
+                throw new IllegalArgumentException(
+                        "APN setting and traffic descriptor can't be both null.");
             }
             return new DataProfile(this);
         }

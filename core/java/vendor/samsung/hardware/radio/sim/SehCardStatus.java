@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehCardStatus implements Parcelable {
-    public static final Parcelable.Creator<SehCardStatus> CREATOR = new Parcelable.Creator<SehCardStatus>() { // from class: vendor.samsung.hardware.radio.sim.SehCardStatus.1
-        @Override // android.os.Parcelable.Creator
-        public SehCardStatus createFromParcel(Parcel _aidl_source) {
-            SehCardStatus _aidl_out = new SehCardStatus();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehCardStatus> CREATOR =
+            new Parcelable.Creator<
+                    SehCardStatus>() { // from class:
+                                       // vendor.samsung.hardware.radio.sim.SehCardStatus.1
+                @Override // android.os.Parcelable.Creator
+                public SehCardStatus createFromParcel(Parcel _aidl_source) {
+                    SehCardStatus _aidl_out = new SehCardStatus();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehCardStatus[] newArray(int _aidl_size) {
-            return new SehCardStatus[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehCardStatus[] newArray(int _aidl_size) {
+                    return new SehCardStatus[_aidl_size];
+                }
+            };
     public SehAppStatus[] applications;
     public String atr;
     public String eid;
@@ -111,7 +114,8 @@ public class SehCardStatus implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.applications = (SehAppStatus[]) _aidl_parcel.createTypedArray(SehAppStatus.CREATOR);
+            this.applications =
+                    (SehAppStatus[]) _aidl_parcel.createTypedArray(SehAppStatus.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -143,7 +147,8 @@ public class SehCardStatus implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.slotMap = (SehSlotPortMapping) _aidl_parcel.readTypedObject(SehSlotPortMapping.CREATOR);
+            this.slotMap =
+                    (SehSlotPortMapping) _aidl_parcel.readTypedObject(SehSlotPortMapping.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

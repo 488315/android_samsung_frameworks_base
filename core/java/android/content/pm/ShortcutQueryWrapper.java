@@ -2,29 +2,32 @@ package android.content.pm;
 
 import android.content.ComponentName;
 import android.content.LocusId;
-import android.content.pm.LauncherApps;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes.dex */
 public final class ShortcutQueryWrapper extends LauncherApps.ShortcutQuery implements Parcelable {
-    public static final Parcelable.Creator<ShortcutQueryWrapper> CREATOR = new Parcelable.Creator<ShortcutQueryWrapper>() { // from class: android.content.pm.ShortcutQueryWrapper.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ShortcutQueryWrapper[] newArray(int size) {
-            return new ShortcutQueryWrapper[size];
-        }
+    public static final Parcelable.Creator<ShortcutQueryWrapper> CREATOR =
+            new Parcelable.Creator<ShortcutQueryWrapper>() { // from class:
+                // android.content.pm.ShortcutQueryWrapper.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ShortcutQueryWrapper[] newArray(int size) {
+                    return new ShortcutQueryWrapper[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ShortcutQueryWrapper createFromParcel(Parcel in) {
-            return new ShortcutQueryWrapper(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ShortcutQueryWrapper createFromParcel(Parcel in) {
+                    return new ShortcutQueryWrapper(in);
+                }
+            };
 
     public ShortcutQueryWrapper(LauncherApps.ShortcutQuery query) {
         this();
@@ -60,8 +63,7 @@ public final class ShortcutQueryWrapper extends LauncherApps.ShortcutQuery imple
         return this.mQueryFlags;
     }
 
-    public ShortcutQueryWrapper() {
-    }
+    public ShortcutQueryWrapper() {}
 
     public String toString() {
         return "ShortcutQueryWrapper {  }";
@@ -115,7 +117,8 @@ public final class ShortcutQueryWrapper extends LauncherApps.ShortcutQuery imple
             arrayList = new ArrayList();
             in.readParcelableList(arrayList, LocusId.class.getClassLoader(), LocusId.class);
         }
-        ComponentName activity = (flg & 16) == 0 ? null : (ComponentName) in.readTypedObject(ComponentName.CREATOR);
+        ComponentName activity =
+                (flg & 16) == 0 ? null : (ComponentName) in.readTypedObject(ComponentName.CREATOR);
         int queryFlags = in.readInt();
         this.mChangedSince = changedSince;
         this.mPackage = pkg;
@@ -123,10 +126,12 @@ public final class ShortcutQueryWrapper extends LauncherApps.ShortcutQuery imple
         this.mLocusIds = arrayList;
         this.mActivity = activity;
         this.mQueryFlags = queryFlags;
-        AnnotationValidations.validate((Class<? extends Annotation>) LauncherApps.ShortcutQuery.QueryFlags.class, (Annotation) null, this.mQueryFlags);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) LauncherApps.ShortcutQuery.QueryFlags.class,
+                (Annotation) null,
+                this.mQueryFlags);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

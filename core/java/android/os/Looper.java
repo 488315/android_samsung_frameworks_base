@@ -5,6 +5,7 @@ import android.util.PerfLog;
 import android.util.Printer;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -101,7 +102,9 @@ public final class Looper {
             Method dump skipped, instructions count: 508
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.Looper.loopOnce(android.os.Looper, long, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.Looper.loopOnce(android.os.Looper, long,"
+                    + " int):boolean");
     }
 
     public static void loop() {
@@ -110,34 +113,69 @@ public final class Looper {
             throw new RuntimeException("No Looper; Looper.prepare() wasn't called on this thread.");
         }
         if (me.mInLoop) {
-            Slog.w(TAG, "Loop again would have the queued messages be executed before this one completed.");
+            Slog.w(
+                    TAG,
+                    "Loop again would have the queued messages be executed before this one"
+                        + " completed.");
         }
         me.mInLoop = true;
         Binder.clearCallingIdentity();
         long ident = Binder.clearCallingIdentity();
         int thresholdOverride = getThresholdOverride();
         me.mSlowDeliveryDetected = false;
-        while (loopOnce(me, ident, thresholdOverride)) {
-        }
+        while (loopOnce(me, ident, thresholdOverride)) {}
     }
 
     private static int getThresholdOverride() {
-        return SystemProperties.getInt("log.looper." + Process.myUid() + MediaMetrics.SEPARATOR + Thread.currentThread().getName() + ".slow", -1);
+        return SystemProperties.getInt(
+                "log.looper."
+                        + Process.myUid()
+                        + MediaMetrics.SEPARATOR
+                        + Thread.currentThread().getName()
+                        + ".slow",
+                -1);
     }
 
     private static int getThresholdOverride$ravenwood() {
         return -1;
     }
 
-    private static boolean showSlowLog(long threshold, long measureStart, long measureEnd, String what, Message msg) {
+    private static boolean showSlowLog(
+            long threshold, long measureStart, long measureEnd, String what, Message msg) {
         long actualTime = measureEnd - measureStart;
         if (actualTime < threshold) {
             return false;
         }
         boolean perfLogEnable = myLooper().isPerfLogEnable();
-        Slog.w(TAG, "Slow " + what + " took " + actualTime + "ms " + Thread.currentThread().getName() + " h=" + msg.target.getClass().getName() + " c=" + msg.callback + " m=" + msg.what);
+        Slog.w(
+                TAG,
+                "Slow "
+                        + what
+                        + " took "
+                        + actualTime
+                        + "ms "
+                        + Thread.currentThread().getName()
+                        + " h="
+                        + msg.target.getClass().getName()
+                        + " c="
+                        + msg.callback
+                        + " m="
+                        + msg.what);
         if (perfLogEnable) {
-            PerfLog.d(6, " Slow" + what + " took " + actualTime + "ms " + Thread.currentThread().getName() + " h=" + msg.target.getClass().getName() + " c=" + msg.callback + " m=" + msg.what);
+            PerfLog.d(
+                    6,
+                    " Slow"
+                            + what
+                            + " took "
+                            + actualTime
+                            + "ms "
+                            + Thread.currentThread().getName()
+                            + " h="
+                            + msg.target.getClass().getName()
+                            + " c="
+                            + msg.callback
+                            + " m="
+                            + msg.what);
             return true;
         }
         return true;
@@ -209,6 +247,12 @@ public final class Looper {
     }
 
     public String toString() {
-        return "Looper (" + this.mThread.getName() + ", tid " + this.mThread.getId() + ") {" + Integer.toHexString(System.identityHashCode(this)) + "}";
+        return "Looper ("
+                + this.mThread.getName()
+                + ", tid "
+                + this.mThread.getId()
+                + ") {"
+                + Integer.toHexString(System.identityHashCode(this))
+                + "}";
     }
 }

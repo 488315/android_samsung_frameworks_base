@@ -12,8 +12,7 @@ public interface INetworkRecommendationProvider extends IInterface {
 
     public static class Default implements INetworkRecommendationProvider {
         @Override // android.net.INetworkRecommendationProvider
-        public void requestScores(NetworkKey[] networks) throws RemoteException {
-        }
+        public void requestScores(NetworkKey[] networks) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface INetworkRecommendationProvider extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkRecommendationProvider {
+    public abstract static class Stub extends Binder implements INetworkRecommendationProvider {
         public static final String DESCRIPTOR = "android.net.INetworkRecommendationProvider";
         static final int TRANSACTION_requestScores = 1;
 
@@ -60,7 +59,8 @@ public interface INetworkRecommendationProvider extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

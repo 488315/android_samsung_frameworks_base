@@ -34,8 +34,7 @@ public interface ScanCallback {
 
     void onSymbolRatesReported(int[] iArr);
 
-    default void onUnlocked() {
-    }
+    default void onUnlocked() {}
 
     default void onFrequenciesLongReported(long[] frequencies) {
         int[] intFrequencies = new int[frequencies.length];
@@ -45,15 +44,11 @@ public interface ScanCallback {
         onFrequenciesReported(intFrequencies);
     }
 
-    default void onModulationReported(int modulation) {
-    }
+    default void onModulationReported(int modulation) {}
 
-    default void onPriorityReported(boolean isHighPriority) {
-    }
+    default void onPriorityReported(boolean isHighPriority) {}
 
-    default void onDvbcAnnexReported(int dvbcAnnex) {
-    }
+    default void onDvbcAnnexReported(int dvbcAnnex) {}
 
-    default void onDvbtCellIdsReported(int[] dvbtCellIds) {
-    }
+    default void onDvbtCellIdsReported(int[] dvbtCellIds) {}
 }

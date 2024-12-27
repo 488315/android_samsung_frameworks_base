@@ -21,7 +21,8 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda3 implements Con
         this.f$1 = true;
     }
 
-    public /* synthetic */ Task$$ExternalSyntheticLambda3(boolean z, ActivityRecord activityRecord) {
+    public /* synthetic */ Task$$ExternalSyntheticLambda3(
+            boolean z, ActivityRecord activityRecord) {
         this.$r8$classId = 0;
         this.f$0 = activityRecord;
         this.f$1 = z;
@@ -40,6 +41,8 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda3 implements Con
             Method dump skipped, instructions count: 412
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.Task$$ExternalSyntheticLambda3.accept(java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.Task$$ExternalSyntheticLambda3.accept(java.lang.Object):void");
     }
 }

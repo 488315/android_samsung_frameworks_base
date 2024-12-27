@@ -15,8 +15,8 @@ public interface IKeyEventListener extends IInterface {
 
     public static class Default implements IKeyEventListener {
         @Override // com.samsung.android.multiwindow.IKeyEventListener
-        public void sendShortcutKeyWithFocusedTask(int taskId, KeyEvent key) throws RemoteException {
-        }
+        public void sendShortcutKeyWithFocusedTask(int taskId, KeyEvent key)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IKeyEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyEventListener {
+    public abstract static class Stub extends Binder implements IKeyEventListener {
         static final int TRANSACTION_sendShortcutKeyWithFocusedTask = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IKeyEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKeyEventListener.DESCRIPTOR);
             }
@@ -99,7 +100,8 @@ public interface IKeyEventListener extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IKeyEventListener
-            public void sendShortcutKeyWithFocusedTask(int taskId, KeyEvent key) throws RemoteException {
+            public void sendShortcutKeyWithFocusedTask(int taskId, KeyEvent key)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKeyEventListener.DESCRIPTOR);

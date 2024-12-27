@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import java.util.Arrays;
 
 /* loaded from: classes5.dex */

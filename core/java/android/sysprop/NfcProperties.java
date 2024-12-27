@@ -2,6 +2,7 @@ package android.sysprop;
 
 import android.os.SystemProperties;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,8 +13,7 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class NfcProperties {
-    private NfcProperties() {
-    }
+    private NfcProperties() {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
@@ -186,7 +186,8 @@ public final class NfcProperties {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -222,11 +223,13 @@ public final class NfcProperties {
 
     public static Optional<snoop_log_mode_values> snoop_log_mode() {
         String value = SystemProperties.get("persist.nfc.snoop_log_mode");
-        return Optional.ofNullable((snoop_log_mode_values) tryParseEnum(snoop_log_mode_values.class, value));
+        return Optional.ofNullable(
+                (snoop_log_mode_values) tryParseEnum(snoop_log_mode_values.class, value));
     }
 
     public static void snoop_log_mode(snoop_log_mode_values value) {
-        SystemProperties.set("persist.nfc.snoop_log_mode", value == null ? "" : value.getPropValue());
+        SystemProperties.set(
+                "persist.nfc.snoop_log_mode", value == null ? "" : value.getPropValue());
     }
 
     public static Optional<Boolean> vendor_debug_enabled() {
@@ -235,13 +238,17 @@ public final class NfcProperties {
     }
 
     public static void vendor_debug_enabled(Boolean value) {
-        SystemProperties.set("persist.nfc.vendor_debug_enabled", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "persist.nfc.vendor_debug_enabled", value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> skipNdefRead() {
         String value = SystemProperties.get("nfc.dta.skip_ndef_read");
         if ("".equals(value)) {
-            Log.v("NfcProperties", "prop nfc.dta.skip_ndef_read doesn't exist; fallback to legacy prop nfc.dta.skipNdefRead");
+            Log.v(
+                    "NfcProperties",
+                    "prop nfc.dta.skip_ndef_read doesn't exist; fallback to legacy prop"
+                        + " nfc.dta.skipNdefRead");
             value = SystemProperties.get("nfc.dta.skipNdefRead");
         }
         return Optional.ofNullable(tryParseBoolean(value));

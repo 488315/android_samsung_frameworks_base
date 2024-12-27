@@ -36,6 +36,7 @@ import com.android.internal.org.bouncycastle.crypto.params.ECDomainParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ECNamedDomainParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.RSAKeyParameters;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
@@ -58,31 +59,36 @@ public class PublicKeyFactory {
     }
 
     public static AsymmetricKeyParameter createKey(byte[] keyInfoData) throws IOException {
-        return createKey(SubjectPublicKeyInfo.getInstance(ASN1Primitive.fromByteArray(keyInfoData)));
+        return createKey(
+                SubjectPublicKeyInfo.getInstance(ASN1Primitive.fromByteArray(keyInfoData)));
     }
 
     public static AsymmetricKeyParameter createKey(InputStream inStr) throws IOException {
         return createKey(SubjectPublicKeyInfo.getInstance(new ASN1InputStream(inStr).readObject()));
     }
 
-    public static AsymmetricKeyParameter createKey(SubjectPublicKeyInfo keyInfo) throws IOException {
+    public static AsymmetricKeyParameter createKey(SubjectPublicKeyInfo keyInfo)
+            throws IOException {
         return createKey(keyInfo, null);
     }
 
-    public static AsymmetricKeyParameter createKey(SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
+    public static AsymmetricKeyParameter createKey(
+            SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
         AlgorithmIdentifier algID = keyInfo.getAlgorithm();
-        SubjectPublicKeyInfoConverter converter = (SubjectPublicKeyInfoConverter) converters.get(algID.getAlgorithm());
+        SubjectPublicKeyInfoConverter converter =
+                (SubjectPublicKeyInfoConverter) converters.get(algID.getAlgorithm());
         if (converter == null) {
-            throw new IOException("algorithm identifier in public key not recognised: " + algID.getAlgorithm());
+            throw new IOException(
+                    "algorithm identifier in public key not recognised: " + algID.getAlgorithm());
         }
         return converter.getPublicKeyParameters(keyInfo, defaultParams);
     }
 
-    private static abstract class SubjectPublicKeyInfoConverter {
-        abstract AsymmetricKeyParameter getPublicKeyParameters(SubjectPublicKeyInfo subjectPublicKeyInfo, Object obj) throws IOException;
+    private abstract static class SubjectPublicKeyInfoConverter {
+        abstract AsymmetricKeyParameter getPublicKeyParameters(
+                SubjectPublicKeyInfo subjectPublicKeyInfo, Object obj) throws IOException;
 
-        private SubjectPublicKeyInfoConverter() {
-        }
+        private SubjectPublicKeyInfoConverter() {}
     }
 
     private static class RSAConverter extends SubjectPublicKeyInfoConverter {
@@ -91,7 +97,8 @@ public class PublicKeyFactory {
         }
 
         @Override // com.android.internal.org.bouncycastle.crypto.util.PublicKeyFactory.SubjectPublicKeyInfoConverter
-        AsymmetricKeyParameter getPublicKeyParameters(SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
+        AsymmetricKeyParameter getPublicKeyParameters(
+                SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
             RSAPublicKey pubKey = RSAPublicKey.getInstance(keyInfo.parsePublicKey());
             return new RSAKeyParameters(false, pubKey.getModulus(), pubKey.getPublicExponent());
         }
@@ -103,12 +110,14 @@ public class PublicKeyFactory {
         }
 
         @Override // com.android.internal.org.bouncycastle.crypto.util.PublicKeyFactory.SubjectPublicKeyInfoConverter
-        AsymmetricKeyParameter getPublicKeyParameters(SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
+        AsymmetricKeyParameter getPublicKeyParameters(
+                SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
             BigInteger j;
             DHValidationParameters validation;
             DHPublicKey dhPublicKey = DHPublicKey.getInstance(keyInfo.parsePublicKey());
             BigInteger y = dhPublicKey.getY();
-            DomainParameters dhParams = DomainParameters.getInstance(keyInfo.getAlgorithm().getParameters());
+            DomainParameters dhParams =
+                    DomainParameters.getInstance(keyInfo.getAlgorithm().getParameters());
             BigInteger p = dhParams.getP();
             BigInteger g = dhParams.getG();
             BigInteger q = dhParams.getQ();
@@ -124,7 +133,8 @@ public class PublicKeyFactory {
             } else {
                 byte[] seed = dhValidationParms.getSeed();
                 BigInteger pgenCounter = dhValidationParms.getPgenCounter();
-                DHValidationParameters validation2 = new DHValidationParameters(seed, pgenCounter.intValue());
+                DHValidationParameters validation2 =
+                        new DHValidationParameters(seed, pgenCounter.intValue());
                 validation = validation2;
             }
             return new DHPublicKeyParameters(y, new DHParameters(p, g, q, j, validation));
@@ -137,7 +147,8 @@ public class PublicKeyFactory {
         }
 
         @Override // com.android.internal.org.bouncycastle.crypto.util.PublicKeyFactory.SubjectPublicKeyInfoConverter
-        AsymmetricKeyParameter getPublicKeyParameters(SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
+        AsymmetricKeyParameter getPublicKeyParameters(
+                SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
             DHParameter params = DHParameter.getInstance(keyInfo.getAlgorithm().getParameters());
             ASN1Integer derY = (ASN1Integer) keyInfo.parsePublicKey();
             BigInteger lVal = params.getL();
@@ -153,7 +164,8 @@ public class PublicKeyFactory {
         }
 
         @Override // com.android.internal.org.bouncycastle.crypto.util.PublicKeyFactory.SubjectPublicKeyInfoConverter
-        AsymmetricKeyParameter getPublicKeyParameters(SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
+        AsymmetricKeyParameter getPublicKeyParameters(
+                SubjectPublicKeyInfo keyInfo, Object defaultParams) throws IOException {
             ASN1Integer derY = (ASN1Integer) keyInfo.parsePublicKey();
             ASN1Encodable de = keyInfo.getAlgorithm().getParameters();
             DSAParameters parameters = null;
@@ -171,9 +183,11 @@ public class PublicKeyFactory {
         }
 
         @Override // com.android.internal.org.bouncycastle.crypto.util.PublicKeyFactory.SubjectPublicKeyInfoConverter
-        AsymmetricKeyParameter getPublicKeyParameters(SubjectPublicKeyInfo keyInfo, Object defaultParams) {
+        AsymmetricKeyParameter getPublicKeyParameters(
+                SubjectPublicKeyInfo keyInfo, Object defaultParams) {
             ECDomainParameters dParams;
-            X962Parameters params = X962Parameters.getInstance(keyInfo.getAlgorithm().getParameters());
+            X962Parameters params =
+                    X962Parameters.getInstance(keyInfo.getAlgorithm().getParameters());
             if (params.isNamedCurve()) {
                 ASN1ObjectIdentifier oid = (ASN1ObjectIdentifier) params.getParameters();
                 X9ECParameters x9 = CustomNamedCurves.getByOID(oid);
@@ -184,7 +198,8 @@ public class PublicKeyFactory {
             } else if (params.isImplicitlyCA()) {
                 dParams = (ECDomainParameters) defaultParams;
             } else {
-                dParams = new ECDomainParameters(X9ECParameters.getInstance(params.getParameters()));
+                dParams =
+                        new ECDomainParameters(X9ECParameters.getInstance(params.getParameters()));
             }
             DERBitString bits = keyInfo.getPublicKeyData();
             byte[] data = bits.getBytes();
@@ -204,7 +219,8 @@ public class PublicKeyFactory {
         }
     }
 
-    private static byte[] getRawKey(SubjectPublicKeyInfo keyInfo, Object defaultParams, int expectedSize) {
+    private static byte[] getRawKey(
+            SubjectPublicKeyInfo keyInfo, Object defaultParams, int expectedSize) {
         byte[] result = keyInfo.getPublicKeyData().getOctets();
         if (expectedSize != result.length) {
             throw new RuntimeException("public key encoding has incorrect length");

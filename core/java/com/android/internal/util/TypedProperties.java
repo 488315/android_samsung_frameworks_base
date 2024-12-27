@@ -3,6 +3,7 @@ package com.android.internal.util;
 import android.app.slice.SliceItem;
 import android.hardware.scontext.SContextConstants;
 import android.widget.SemRemoteViewsValueAnimation;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
@@ -89,7 +90,8 @@ public class TypedProperties extends HashMap<String, Object> {
 
     static void parse(Reader r, Map<String, Object> map) throws ParseException, IOException {
         StreamTokenizer st = initTokenizer(r);
-        Pattern propertyNamePattern = Pattern.compile("([a-zA-Z_$][0-9a-zA-Z_$]*\\.)*[a-zA-Z_$][0-9a-zA-Z_$]*");
+        Pattern propertyNamePattern =
+                Pattern.compile("([a-zA-Z_$][0-9a-zA-Z_$]*\\.)*[a-zA-Z_$][0-9a-zA-Z_$]*");
         do {
             int token = st.nextToken();
             if (token != -1) {
@@ -124,7 +126,8 @@ public class TypedProperties extends HashMap<String, Object> {
                     Object value = parseValue(st, type);
                     Object oldValue = map.remove(propertyName);
                     if (oldValue != null && value.getClass() != oldValue.getClass()) {
-                        throw new ParseException(st, "(property previously declared as a different type)");
+                        throw new ParseException(
+                                st, "(property previously declared as a different type)");
                     }
                     map.put(propertyName, value);
                 }
@@ -178,7 +181,8 @@ public class TypedProperties extends HashMap<String, Object> {
                         }
                         return Long.valueOf(value);
                     default:
-                        throw new IllegalStateException("Internal error; unexpected integer type width " + width);
+                        throw new IllegalStateException(
+                                "Internal error; unexpected integer type width " + width);
                 }
             } catch (NumberFormatException e) {
                 throw new ParseException(st, "integer constant");
@@ -203,7 +207,11 @@ public class TypedProperties extends HashMap<String, Object> {
             double value2 = Double.parseDouble(st.sval);
             if (((type >> 8) & 255) == 4) {
                 double absValue = Math.abs(value2);
-                if (absValue != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && !Double.isInfinite(value2) && !Double.isNaN(value2) && (absValue < 1.401298464324817E-45d || absValue > 3.4028234663852886E38d)) {
+                if (absValue != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                        && !Double.isInfinite(value2)
+                        && !Double.isNaN(value2)
+                        && (absValue < 1.401298464324817E-45d
+                                || absValue > 3.4028234663852886E38d)) {
                     throw new ParseException(st, "32-bit float constant");
                 }
                 return Float.valueOf((float) value2);

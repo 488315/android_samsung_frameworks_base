@@ -8,6 +8,7 @@ import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
 import com.android.internal.widget.remotecompose.core.operations.paint.PaintBundle;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -36,8 +37,7 @@ public class PaintData extends PaintOperation implements VariableSupport {
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {
@@ -62,7 +62,8 @@ public class PaintData extends PaintOperation implements VariableSupport {
         }
     }
 
-    @Override // com.android.internal.widget.remotecompose.core.PaintOperation, com.android.internal.widget.remotecompose.core.Operation
+    @Override // com.android.internal.widget.remotecompose.core.PaintOperation,
+              // com.android.internal.widget.remotecompose.core.Operation
     public String deepToString(String indent) {
         return indent + toString();
     }

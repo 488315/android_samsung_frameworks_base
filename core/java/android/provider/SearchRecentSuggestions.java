@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.sec.enterprise.content.SecContentProviderURI;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.concurrent.Semaphore;
 
 /* loaded from: classes3.dex */
@@ -22,8 +23,12 @@ public class SearchRecentSuggestions {
     private final Context mContext;
     private final Uri mSuggestionsUri;
     private final boolean mTwoLineDisplay;
-    public static final String[] QUERIES_PROJECTION_1LINE = {"_id", "date", "query", SuggestionColumns.DISPLAY1};
-    public static final String[] QUERIES_PROJECTION_2LINE = {"_id", "date", "query", SuggestionColumns.DISPLAY1, SuggestionColumns.DISPLAY2};
+    public static final String[] QUERIES_PROJECTION_1LINE = {
+        "_id", "date", "query", SuggestionColumns.DISPLAY1
+    };
+    public static final String[] QUERIES_PROJECTION_2LINE = {
+        "_id", "date", "query", SuggestionColumns.DISPLAY1, SuggestionColumns.DISPLAY2
+    };
     private static final Semaphore sWritesInProgress = new Semaphore(0);
 
     private static class SuggestionColumns implements BaseColumns {
@@ -32,8 +37,7 @@ public class SearchRecentSuggestions {
         public static final String DISPLAY2 = "display2";
         public static final String QUERY = "query";
 
-        private SuggestionColumns() {
-        }
+        private SuggestionColumns() {}
     }
 
     public SearchRecentSuggestions(Context context, String authority, int mode) {
@@ -43,7 +47,8 @@ public class SearchRecentSuggestions {
         this.mTwoLineDisplay = (mode & 2) != 0;
         this.mContext = context;
         this.mAuthority = new String(authority);
-        this.mSuggestionsUri = Uri.parse(SecContentProviderURI.CONTENT + this.mAuthority + "/suggestions");
+        this.mSuggestionsUri =
+                Uri.parse(SecContentProviderURI.CONTENT + this.mAuthority + "/suggestions");
     }
 
     /* JADX WARN: Type inference failed for: r0v2, types: [android.provider.SearchRecentSuggestions$1] */
@@ -100,7 +105,10 @@ public class SearchRecentSuggestions {
         String selection = null;
         if (maxEntries > 0) {
             try {
-                selection = "_id IN (SELECT _id FROM suggestions ORDER BY date DESC LIMIT -1 OFFSET " + String.valueOf(maxEntries) + NavigationBarInflaterView.KEY_CODE_END;
+                selection =
+                        "_id IN (SELECT _id FROM suggestions ORDER BY date DESC LIMIT -1 OFFSET "
+                                + String.valueOf(maxEntries)
+                                + NavigationBarInflaterView.KEY_CODE_END;
             } catch (RuntimeException e) {
                 Log.e(LOG_TAG, "truncateHistory", e);
                 return;

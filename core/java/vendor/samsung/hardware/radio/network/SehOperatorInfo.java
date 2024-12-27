@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehOperatorInfo implements Parcelable {
-    public static final Parcelable.Creator<SehOperatorInfo> CREATOR = new Parcelable.Creator<SehOperatorInfo>() { // from class: vendor.samsung.hardware.radio.network.SehOperatorInfo.1
-        @Override // android.os.Parcelable.Creator
-        public SehOperatorInfo createFromParcel(Parcel _aidl_source) {
-            SehOperatorInfo _aidl_out = new SehOperatorInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehOperatorInfo> CREATOR =
+            new Parcelable.Creator<
+                    SehOperatorInfo>() { // from class:
+                                         // vendor.samsung.hardware.radio.network.SehOperatorInfo.1
+                @Override // android.os.Parcelable.Creator
+                public SehOperatorInfo createFromParcel(Parcel _aidl_source) {
+                    SehOperatorInfo _aidl_out = new SehOperatorInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehOperatorInfo[] newArray(int _aidl_size) {
-            return new SehOperatorInfo[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehOperatorInfo[] newArray(int _aidl_size) {
+                    return new SehOperatorInfo[_aidl_size];
+                }
+            };
     public static final int STATUS_AVAILABLE = 1;
     public static final int STATUS_CURRENT = 2;
     public static final int STATUS_FORBIDDEN = 3;

@@ -17,6 +17,7 @@ import android.security.Flags;
 import android.service.persistentdata.IPersistentDataBlockService;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
@@ -27,6 +28,9 @@ import com.android.server.SystemService;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.UserManagerInternal;
+
+import libcore.io.IoUtils;
+
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -48,7 +52,6 @@ import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -79,17 +82,25 @@ public class PersistentDataBlockService extends SystemService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.pdb.PersistentDataBlockService$1, reason: invalid class name */
     public final class AnonymousClass1 extends IPersistentDataBlockService.Stub {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
-        public static void printFrpDataFileContents(PrintWriter printWriter, String str, boolean z) {
+        public static void printFrpDataFileContents(
+                PrintWriter printWriter, String str, boolean z) {
             if (Files.exists(Paths.get(str, new String[0]), new LinkOption[0])) {
                 if (!z) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "FRP secret file ", str, " exists, contents omitted.");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "FRP secret file ", str, " exists, contents omitted.");
                     return;
                 }
                 try {
-                    printWriter.println("FRP secret in " + str + ": " + HexFormat.of().formatHex(Files.readAllBytes(Paths.get(str, new String[0]))));
+                    printWriter.println(
+                            "FRP secret in "
+                                    + str
+                                    + ": "
+                                    + HexFormat.of()
+                                            .formatHex(
+                                                    Files.readAllBytes(
+                                                            Paths.get(str, new String[0]))));
                 } catch (IOException e) {
                     Slog.e("PersistentDataBlockService", "Failed to read " + str, e);
                 }
@@ -98,30 +109,57 @@ public class PersistentDataBlockService extends SystemService {
 
         public final boolean deactivateFactoryResetProtection(byte[] bArr) {
             PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
-            if (persistentDataBlockService.mFrpEnforced && persistentDataBlockService.mContext.checkCallingOrSelfPermission("android.permission.CONFIGURE_FACTORY_RESET_PROTECTION") == -1) {
-                throw new SecurityException("Can't configure Factory Reset Protection. Requires CONFIGURE_FACTORY_RESET_PROTECTION");
+            if (persistentDataBlockService.mFrpEnforced
+                    && persistentDataBlockService.mContext.checkCallingOrSelfPermission(
+                                    "android.permission.CONFIGURE_FACTORY_RESET_PROTECTION")
+                            == -1) {
+                throw new SecurityException(
+                        "Can't configure Factory Reset Protection. Requires"
+                            + " CONFIGURE_FACTORY_RESET_PROTECTION");
             }
             return PersistentDataBlockService.this.deactivateFrp(bArr);
         }
 
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-            if (DumpUtils.checkDumpPermission(PersistentDataBlockService.this.mContext, "PersistentDataBlockService", printWriter)) {
-                StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, PersistentDataBlockService.this.mDataBlockFile, "mIsFileBacked: ", new StringBuilder("mDataBlockFile: ")), PersistentDataBlockService.this.mIsFileBacked, printWriter, "mInitDoneSignal: ");
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+            if (DumpUtils.checkDumpPermission(
+                    PersistentDataBlockService.this.mContext,
+                    "PersistentDataBlockService",
+                    printWriter)) {
+                StringBuilder m =
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        printWriter,
+                                        PersistentDataBlockService.this.mDataBlockFile,
+                                        "mIsFileBacked: ",
+                                        new StringBuilder("mDataBlockFile: ")),
+                                PersistentDataBlockService.this.mIsFileBacked,
+                                printWriter,
+                                "mInitDoneSignal: ");
                 m.append(PersistentDataBlockService.this.mInitDoneSignal);
                 printWriter.println(m.toString());
-                StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mAllowedUid: "), PersistentDataBlockService.this.mAllowedUid, printWriter, "mBlockDeviceSize: ");
+                StringBuilder m2 =
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("mAllowedUid: "),
+                                PersistentDataBlockService.this.mAllowedUid,
+                                printWriter,
+                                "mBlockDeviceSize: ");
                 m2.append(PersistentDataBlockService.this.mBlockDeviceSize);
                 printWriter.println(m2.toString());
                 synchronized (PersistentDataBlockService.this.mLock) {
-                    printWriter.println("mIsWritable: " + PersistentDataBlockService.this.mIsWritable);
+                    printWriter.println(
+                            "mIsWritable: " + PersistentDataBlockService.this.mIsWritable);
                 }
                 printFrpStatus(printWriter, false);
             }
         }
 
         public final void enforcePersistentDataBlockAccess() {
-            if (PersistentDataBlockService.this.mContext.checkCallingPermission("android.permission.ACCESS_PDB_STATE") != 0) {
-                PersistentDataBlockService.m745$$Nest$menforceUid(PersistentDataBlockService.this, Binder.getCallingUid());
+            if (PersistentDataBlockService.this.mContext.checkCallingPermission(
+                            "android.permission.ACCESS_PDB_STATE")
+                    != 0) {
+                PersistentDataBlockService.m745$$Nest$menforceUid(
+                        PersistentDataBlockService.this, Binder.getCallingUid());
             }
         }
 
@@ -129,12 +167,18 @@ public class PersistentDataBlockService extends SystemService {
             int readInt;
             enforcePersistentDataBlockAccess();
             try {
-                DataInputStream dataInputStream = new DataInputStream(new FileInputStream(new File(PersistentDataBlockService.this.mDataBlockFile)));
+                DataInputStream dataInputStream =
+                        new DataInputStream(
+                                new FileInputStream(
+                                        new File(PersistentDataBlockService.this.mDataBlockFile)));
                 try {
                     synchronized (PersistentDataBlockService.this.mLock) {
                         PersistentDataBlockService.this.getClass();
                         dataInputStream.skipBytes(32);
-                        readInt = dataInputStream.readInt() == 428873843 ? dataInputStream.readInt() : 0;
+                        readInt =
+                                dataInputStream.readInt() == 428873843
+                                        ? dataInputStream.readInt()
+                                        : 0;
                     }
                     return readInt;
                 } catch (IOException unused) {
@@ -150,7 +194,8 @@ public class PersistentDataBlockService extends SystemService {
         }
 
         public final int getFlashLockState() {
-            PersistentDataBlockService.m744$$Nest$menforceOemUnlockReadPermission(PersistentDataBlockService.this);
+            PersistentDataBlockService.m744$$Nest$menforceOemUnlockReadPermission(
+                    PersistentDataBlockService.this);
             String str = SystemProperties.get("ro.boot.flash.locked");
             str.getClass();
             if (str.equals("0")) {
@@ -160,30 +205,39 @@ public class PersistentDataBlockService extends SystemService {
         }
 
         public final long getMaximumDataBlockSize() {
-            PersistentDataBlockService.m745$$Nest$menforceUid(PersistentDataBlockService.this, Binder.getCallingUid());
-            return PersistentDataBlockService.m743$$Nest$mdoGetMaximumDataBlockSize(PersistentDataBlockService.this);
+            PersistentDataBlockService.m745$$Nest$menforceUid(
+                    PersistentDataBlockService.this, Binder.getCallingUid());
+            return PersistentDataBlockService.m743$$Nest$mdoGetMaximumDataBlockSize(
+                    PersistentDataBlockService.this);
         }
 
         public final boolean getOemUnlockEnabled() {
-            PersistentDataBlockService.m744$$Nest$menforceOemUnlockReadPermission(PersistentDataBlockService.this);
+            PersistentDataBlockService.m744$$Nest$menforceOemUnlockReadPermission(
+                    PersistentDataBlockService.this);
             return PersistentDataBlockService.this.doGetOemUnlockEnabled();
         }
 
         public final String getPersistentDataPackageName() {
             enforcePersistentDataBlockAccess();
-            return PersistentDataBlockService.this.mContext.getString(R.string.ext_media_move_specific_title);
+            return PersistentDataBlockService.this.mContext.getString(
+                    R.string.ext_media_move_specific_title);
         }
 
         public final boolean hasFrpCredentialHandle() {
             PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
             if (!persistentDataBlockService.mFrpEnforced) {
                 enforcePersistentDataBlockAccess();
-            } else if (persistentDataBlockService.mContext.checkCallingOrSelfPermission("android.permission.CONFIGURE_FACTORY_RESET_PROTECTION") == -1) {
+            } else if (persistentDataBlockService.mContext.checkCallingOrSelfPermission(
+                            "android.permission.CONFIGURE_FACTORY_RESET_PROTECTION")
+                    == -1) {
                 enforcePersistentDataBlockAccess();
             }
             try {
                 InternalService internalService = PersistentDataBlockService.this.mInternalService;
-                return internalService.readInternal(PersistentDataBlockService.MAX_FRP_CREDENTIAL_HANDLE_SIZE, PersistentDataBlockService.this.getFrpCredentialDataOffset()) != null;
+                return internalService.readInternal(
+                                PersistentDataBlockService.MAX_FRP_CREDENTIAL_HANDLE_SIZE,
+                                PersistentDataBlockService.this.getFrpCredentialDataOffset())
+                        != null;
             } catch (IllegalStateException e) {
                 Slog.e("PersistentDataBlockService", "error reading frp handle", e);
                 throw new UnsupportedOperationException("cannot read frp credential");
@@ -195,9 +249,16 @@ public class PersistentDataBlockService extends SystemService {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
             if (PersistentDataBlockService.this.mFrpEnforced) {
-                new ShellCommand() { // from class: com.android.server.pdb.PersistentDataBlockService.1.1
+                new ShellCommand() { // from class:
+                    // com.android.server.pdb.PersistentDataBlockService.1.1
                     public static byte[] hashSecretString(String str) {
                         try {
                             return MessageDigest.getInstance("SHA-256").digest(str.getBytes());
@@ -216,13 +277,26 @@ public class PersistentDataBlockService extends SystemService {
                         switch (str) {
                             case "deactivate":
                                 byte[] hashSecretString = hashSecretString(getNextArg());
-                                outPrintWriter.println("Attempting to deactivate with: " + HexFormat.of().formatHex(hashSecretString));
-                                outPrintWriter.println("Deactivation ".concat(PersistentDataBlockService.this.deactivateFrp(hashSecretString) ? "succeeded" : "failed"));
-                                AnonymousClass1.this.printFrpStatus(outPrintWriter, !PersistentDataBlockService.this.mFrpActive);
+                                outPrintWriter.println(
+                                        "Attempting to deactivate with: "
+                                                + HexFormat.of().formatHex(hashSecretString));
+                                outPrintWriter.println(
+                                        "Deactivation "
+                                                .concat(
+                                                        PersistentDataBlockService.this
+                                                                        .deactivateFrp(
+                                                                                hashSecretString)
+                                                                ? "succeeded"
+                                                                : "failed"));
+                                AnonymousClass1.this.printFrpStatus(
+                                        outPrintWriter,
+                                        !PersistentDataBlockService.this.mFrpActive);
                                 return 1;
                             case "activate":
                                 PersistentDataBlockService.this.activateFrp();
-                                AnonymousClass1.this.printFrpStatus(outPrintWriter, !PersistentDataBlockService.this.mFrpActive);
+                                AnonymousClass1.this.printFrpStatus(
+                                        outPrintWriter,
+                                        !PersistentDataBlockService.this.mFrpActive);
                                 return 1;
                             case "set_secret":
                                 byte[] bArr = new byte[32];
@@ -233,16 +307,29 @@ public class PersistentDataBlockService extends SystemService {
                                 StringBuilder sb = new StringBuilder("Setting FRP secret to: ");
                                 sb.append(HexFormat.of().formatHex(bArr));
                                 sb.append(" length: ");
-                                AccessibilityManagerService$$ExternalSyntheticOutline0.m(sb, bArr.length, outPrintWriter);
+                                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                        sb, bArr.length, outPrintWriter);
                                 AnonymousClass1.this.setFactoryResetProtectionSecret(bArr);
-                                AnonymousClass1.this.printFrpStatus(outPrintWriter, !PersistentDataBlockService.this.mFrpActive);
+                                AnonymousClass1.this.printFrpStatus(
+                                        outPrintWriter,
+                                        !PersistentDataBlockService.this.mFrpActive);
                                 return 1;
                             case "status":
-                                AnonymousClass1.this.printFrpStatus(outPrintWriter, !PersistentDataBlockService.this.mFrpActive);
+                                AnonymousClass1.this.printFrpStatus(
+                                        outPrintWriter,
+                                        !PersistentDataBlockService.this.mFrpActive);
                                 return 1;
                             case "auto_deactivate":
-                                outPrintWriter.println("Automatic deactivation ".concat(PersistentDataBlockService.this.automaticallyDeactivateFrpIfPossible() ? "succeeded" : "failed"));
-                                AnonymousClass1.this.printFrpStatus(outPrintWriter, !PersistentDataBlockService.this.mFrpActive);
+                                outPrintWriter.println(
+                                        "Automatic deactivation "
+                                                .concat(
+                                                        PersistentDataBlockService.this
+                                                                        .automaticallyDeactivateFrpIfPossible()
+                                                                ? "succeeded"
+                                                                : "failed"));
+                                AnonymousClass1.this.printFrpStatus(
+                                        outPrintWriter,
+                                        !PersistentDataBlockService.this.mFrpActive);
                                 return 1;
                             default:
                                 return handleDefaultCommands(str);
@@ -252,30 +339,60 @@ public class PersistentDataBlockService extends SystemService {
                     public final void onHelp() {
                         PrintWriter outPrintWriter = getOutPrintWriter();
                         outPrintWriter.println("Commands");
-                        outPrintWriter.println("status: Print the FRP state and associated information.");
+                        outPrintWriter.println(
+                                "status: Print the FRP state and associated information.");
                         outPrintWriter.println("activate:  Put FRP into \"active\" mode.");
-                        outPrintWriter.println("deactivate <secret>:  Deactivate with a hash of 'secret'.");
-                        outPrintWriter.println("auto_deactivate: Deactivate with the stored secret or the default");
-                        outPrintWriter.println("set_secret <secret>:  Set the stored secret to a hash of `secret`");
+                        outPrintWriter.println(
+                                "deactivate <secret>:  Deactivate with a hash of 'secret'.");
+                        outPrintWriter.println(
+                                "auto_deactivate: Deactivate with the stored secret or the"
+                                    + " default");
+                        outPrintWriter.println(
+                                "set_secret <secret>:  Set the stored secret to a hash of"
+                                    + " `secret`");
                     }
-                }.exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+                }.exec(
+                        this,
+                        fileDescriptor,
+                        fileDescriptor2,
+                        fileDescriptor3,
+                        strArr,
+                        shellCallback,
+                        resultReceiver);
             } else {
-                super.onShellCommand(fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+                super.onShellCommand(
+                        fileDescriptor,
+                        fileDescriptor2,
+                        fileDescriptor3,
+                        strArr,
+                        shellCallback,
+                        resultReceiver);
             }
         }
 
         public final void printFrpStatus(PrintWriter printWriter, boolean z) {
             boolean equals;
-            PersistentDataBlockService.m745$$Nest$menforceUid(PersistentDataBlockService.this, Binder.getCallingUid());
+            PersistentDataBlockService.m745$$Nest$menforceUid(
+                    PersistentDataBlockService.this, Binder.getCallingUid());
             printWriter.println("FRP state");
             printWriter.println("=========");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Enforcement enabled: "), PersistentDataBlockService.this.mFrpEnforced, printWriter, "FRP state: "), PersistentDataBlockService.this.mFrpActive, printWriter);
-            printFrpDataFileContents(printWriter, PersistentDataBlockService.this.mFrpSecretFile, z);
-            printFrpDataFileContents(printWriter, PersistentDataBlockService.this.mFrpSecretTmpFile, z);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Enforcement enabled: "),
+                            PersistentDataBlockService.this.mFrpEnforced,
+                            printWriter,
+                            "FRP state: "),
+                    PersistentDataBlockService.this.mFrpActive,
+                    printWriter);
+            printFrpDataFileContents(
+                    printWriter, PersistentDataBlockService.this.mFrpSecretFile, z);
+            printFrpDataFileContents(
+                    printWriter, PersistentDataBlockService.this.mFrpSecretTmpFile, z);
             PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
             long frpSecretMagicOffset = persistentDataBlockService.getFrpSecretMagicOffset();
             byte[] bArr = PersistentDataBlockService.FRP_SECRET_MAGIC;
-            byte[] readDataBlock = persistentDataBlockService.readDataBlock(frpSecretMagicOffset, bArr.length);
+            byte[] readDataBlock =
+                    persistentDataBlockService.readDataBlock(frpSecretMagicOffset, bArr.length);
             if (readDataBlock == null) {
                 Slog.e("PersistentDataBlockService", "Failed to read FRP magic region.");
                 equals = false;
@@ -287,32 +404,44 @@ public class PersistentDataBlockService extends SystemService {
             } else if (z) {
                 StringBuilder sb = new StringBuilder("FRP secret in PDB: ");
                 HexFormat of = HexFormat.of();
-                PersistentDataBlockService persistentDataBlockService2 = PersistentDataBlockService.this;
-                sb.append(of.formatHex(persistentDataBlockService2.readDataBlock(persistentDataBlockService2.getFrpSecretDataOffset(), 32)));
+                PersistentDataBlockService persistentDataBlockService2 =
+                        PersistentDataBlockService.this;
+                sb.append(
+                        of.formatHex(
+                                persistentDataBlockService2.readDataBlock(
+                                        persistentDataBlockService2.getFrpSecretDataOffset(), 32)));
                 printWriter.println(sb.toString());
             } else {
                 printWriter.println("FRP secret present but omitted.");
             }
             printWriter.println("OEM unlock state: " + getOemUnlockEnabled());
             printWriter.println("Bootloader lock state: " + getFlashLockState());
-            printWriter.println("Verified boot state: " + SystemProperties.get("ro.boot.verifiedbootstate"));
+            printWriter.println(
+                    "Verified boot state: " + SystemProperties.get("ro.boot.verifiedbootstate"));
             printWriter.println("Has FRP credential handle: " + hasFrpCredentialHandle());
             printWriter.println("FRP challenge block size: " + getDataBlockSize());
         }
 
         public final byte[] read() {
-            PersistentDataBlockService.m745$$Nest$menforceUid(PersistentDataBlockService.this, Binder.getCallingUid());
+            PersistentDataBlockService.m745$$Nest$menforceUid(
+                    PersistentDataBlockService.this, Binder.getCallingUid());
             if (!PersistentDataBlockService.this.enforceChecksumValidity()) {
                 return new byte[0];
             }
             try {
-                DataInputStream dataInputStream = new DataInputStream(new FileInputStream(new File(PersistentDataBlockService.this.mDataBlockFile)));
+                DataInputStream dataInputStream =
+                        new DataInputStream(
+                                new FileInputStream(
+                                        new File(PersistentDataBlockService.this.mDataBlockFile)));
                 try {
                     try {
                         synchronized (PersistentDataBlockService.this.mLock) {
                             PersistentDataBlockService.this.getClass();
                             dataInputStream.skipBytes(32);
-                            int readInt = dataInputStream.readInt() == 428873843 ? dataInputStream.readInt() : 0;
+                            int readInt =
+                                    dataInputStream.readInt() == 428873843
+                                            ? dataInputStream.readInt()
+                                            : 0;
                             if (readInt == 0) {
                                 return new byte[0];
                             }
@@ -322,15 +451,24 @@ public class PersistentDataBlockService extends SystemService {
                                 try {
                                     dataInputStream.close();
                                 } catch (IOException unused) {
-                                    Slog.e("PersistentDataBlockService", "failed to close OutputStream");
+                                    Slog.e(
+                                            "PersistentDataBlockService",
+                                            "failed to close OutputStream");
                                 }
                                 return bArr;
                             }
-                            Slog.e("PersistentDataBlockService", "failed to read entire data block. bytes read: " + read + "/" + readInt);
+                            Slog.e(
+                                    "PersistentDataBlockService",
+                                    "failed to read entire data block. bytes read: "
+                                            + read
+                                            + "/"
+                                            + readInt);
                             try {
                                 dataInputStream.close();
                             } catch (IOException unused2) {
-                                Slog.e("PersistentDataBlockService", "failed to close OutputStream");
+                                Slog.e(
+                                        "PersistentDataBlockService",
+                                        "failed to close OutputStream");
                             }
                             return null;
                         }
@@ -358,19 +496,35 @@ public class PersistentDataBlockService extends SystemService {
 
         public final boolean setFactoryResetProtectionSecret(byte[] bArr) {
             PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
-            if (persistentDataBlockService.mFrpEnforced && persistentDataBlockService.mContext.checkCallingOrSelfPermission("android.permission.CONFIGURE_FACTORY_RESET_PROTECTION") == -1) {
-                throw new SecurityException("Can't configure Factory Reset Protection. Requires CONFIGURE_FACTORY_RESET_PROTECTION");
+            if (persistentDataBlockService.mFrpEnforced
+                    && persistentDataBlockService.mContext.checkCallingOrSelfPermission(
+                                    "android.permission.CONFIGURE_FACTORY_RESET_PROTECTION")
+                            == -1) {
+                throw new SecurityException(
+                        "Can't configure Factory Reset Protection. Requires"
+                            + " CONFIGURE_FACTORY_RESET_PROTECTION");
             }
-            PersistentDataBlockService.m745$$Nest$menforceUid(PersistentDataBlockService.this, Binder.getCallingUid());
+            PersistentDataBlockService.m745$$Nest$menforceUid(
+                    PersistentDataBlockService.this, Binder.getCallingUid());
             if (bArr == null || bArr.length != 32) {
-                throw new IllegalArgumentException("Invalid FRP secret: " + HexFormat.of().formatHex(bArr));
+                throw new IllegalArgumentException(
+                        "Invalid FRP secret: " + HexFormat.of().formatHex(bArr));
             }
             PersistentDataBlockService.this.enforceFactoryResetProtectionInactive();
-            PersistentDataBlockService persistentDataBlockService2 = PersistentDataBlockService.this;
+            PersistentDataBlockService persistentDataBlockService2 =
+                    PersistentDataBlockService.this;
             persistentDataBlockService2.getClass();
             try {
-                Files.write(Paths.get(persistentDataBlockService2.mFrpSecretTmpFile, new String[0]), bArr, StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.SYNC);
-                if (!persistentDataBlockService2.mInternalService.writeDataBuffer(persistentDataBlockService2.getFrpSecretDataOffset(), ByteBuffer.wrap(bArr))) {
+                Files.write(
+                        Paths.get(persistentDataBlockService2.mFrpSecretTmpFile, new String[0]),
+                        bArr,
+                        StandardOpenOption.WRITE,
+                        StandardOpenOption.CREATE,
+                        StandardOpenOption.TRUNCATE_EXISTING,
+                        StandardOpenOption.SYNC);
+                if (!persistentDataBlockService2.mInternalService.writeDataBuffer(
+                        persistentDataBlockService2.getFrpSecretDataOffset(),
+                        ByteBuffer.wrap(bArr))) {
                     return false;
                 }
                 persistentDataBlockService2.moveFrpTempFileToPrimary();
@@ -385,15 +539,20 @@ public class PersistentDataBlockService extends SystemService {
             if (ActivityManager.isUserAMonkey()) {
                 return;
             }
-            PersistentDataBlockService.this.mContext.enforceCallingOrSelfPermission("android.permission.OEM_UNLOCK_STATE", "Can't modify OEM unlock state");
+            PersistentDataBlockService.this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.OEM_UNLOCK_STATE", "Can't modify OEM unlock state");
             PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
             persistentDataBlockService.getClass();
-            if (!UserManager.get(persistentDataBlockService.mContext).isUserAdmin(UserHandle.getCallingUserId())) {
-                throw new SecurityException("Only the Admin user is allowed to change OEM unlock state");
+            if (!UserManager.get(persistentDataBlockService.mContext)
+                    .isUserAdmin(UserHandle.getCallingUserId())) {
+                throw new SecurityException(
+                        "Only the Admin user is allowed to change OEM unlock state");
             }
             if (z) {
-                PersistentDataBlockService.m746$$Nest$menforceUserRestriction(PersistentDataBlockService.this, "no_oem_unlock");
-                PersistentDataBlockService.m746$$Nest$menforceUserRestriction(PersistentDataBlockService.this, "no_factory_reset");
+                PersistentDataBlockService.m746$$Nest$menforceUserRestriction(
+                        PersistentDataBlockService.this, "no_oem_unlock");
+                PersistentDataBlockService.m746$$Nest$menforceUserRestriction(
+                        PersistentDataBlockService.this, "no_factory_reset");
             }
             synchronized (PersistentDataBlockService.this.mLock) {
                 PersistentDataBlockService.this.doSetOemUnlockEnabledLocked(z);
@@ -404,31 +563,43 @@ public class PersistentDataBlockService extends SystemService {
         public final void wipe() {
             int i;
             PersistentDataBlockService.this.enforceFactoryResetProtectionInactive();
-            PersistentDataBlockService.this.mContext.enforceCallingOrSelfPermission("android.permission.OEM_UNLOCK_STATE", "Can't modify OEM unlock state");
+            PersistentDataBlockService.this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.OEM_UNLOCK_STATE", "Can't modify OEM unlock state");
             synchronized (PersistentDataBlockService.this.mLock) {
-                PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
+                PersistentDataBlockService persistentDataBlockService =
+                        PersistentDataBlockService.this;
                 if (persistentDataBlockService.mIsFileBacked) {
                     try {
-                        Files.write(Paths.get(persistentDataBlockService.mDataBlockFile, new String[0]), new byte[PersistentDataBlockService.MAX_DATA_BLOCK_SIZE], StandardOpenOption.TRUNCATE_EXISTING);
+                        Files.write(
+                                Paths.get(persistentDataBlockService.mDataBlockFile, new String[0]),
+                                new byte[PersistentDataBlockService.MAX_DATA_BLOCK_SIZE],
+                                StandardOpenOption.TRUNCATE_EXISTING);
                         i = 0;
                     } catch (IOException unused) {
                         i = -1;
                     }
                 } else {
-                    i = persistentDataBlockService.nativeWipe(persistentDataBlockService.mDataBlockFile);
+                    i =
+                            persistentDataBlockService.nativeWipe(
+                                    persistentDataBlockService.mDataBlockFile);
                 }
                 if (i < 0) {
                     Slog.e("PersistentDataBlockService", "failed to wipe persistent partition");
                 } else {
                     PersistentDataBlockService.this.mIsWritable = false;
-                    Slog.i("PersistentDataBlockService", "persistent partition now wiped and unwritable");
+                    Slog.i(
+                            "PersistentDataBlockService",
+                            "persistent partition now wiped and unwritable");
                 }
             }
         }
 
         public final int write(byte[] bArr) {
-            PersistentDataBlockService.m745$$Nest$menforceUid(PersistentDataBlockService.this, Binder.getCallingUid());
-            long m743$$Nest$mdoGetMaximumDataBlockSize = PersistentDataBlockService.m743$$Nest$mdoGetMaximumDataBlockSize(PersistentDataBlockService.this);
+            PersistentDataBlockService.m745$$Nest$menforceUid(
+                    PersistentDataBlockService.this, Binder.getCallingUid());
+            long m743$$Nest$mdoGetMaximumDataBlockSize =
+                    PersistentDataBlockService.m743$$Nest$mdoGetMaximumDataBlockSize(
+                            PersistentDataBlockService.this);
             if (bArr.length > m743$$Nest$mdoGetMaximumDataBlockSize) {
                 return (int) (-m743$$Nest$mdoGetMaximumDataBlockSize);
             }
@@ -439,13 +610,16 @@ public class PersistentDataBlockService extends SystemService {
             allocate.put(bArr);
             allocate.flip();
             synchronized (PersistentDataBlockService.this.mLock) {
-                PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
+                PersistentDataBlockService persistentDataBlockService =
+                        PersistentDataBlockService.this;
                 if (!persistentDataBlockService.mIsWritable) {
                     return -1;
                 }
                 try {
                     persistentDataBlockService.enforceFactoryResetProtectionInactive();
-                    FileChannel channel = new RandomAccessFile(persistentDataBlockService.mDataBlockFile, "rw").getChannel();
+                    FileChannel channel =
+                            new RandomAccessFile(persistentDataBlockService.mDataBlockFile, "rw")
+                                    .getChannel();
                     try {
                         channel.write(allocate);
                         channel.force(true);
@@ -465,7 +639,10 @@ public class PersistentDataBlockService extends SystemService {
                         throw th;
                     }
                 } catch (IOException e) {
-                    Slog.e("PersistentDataBlockService", "failed writing to the persistent data block", e);
+                    Slog.e(
+                            "PersistentDataBlockService",
+                            "failed writing to the persistent data block",
+                            e);
                     return -1;
                 }
             }
@@ -474,16 +651,24 @@ public class PersistentDataBlockService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InternalService implements PersistentDataBlockManagerInternal {
-        public InternalService() {
-        }
+        public InternalService() {}
 
         public final void clearTestHarnessModeData() {
             PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
-            byte[] readInternal = readInternal(PersistentDataBlockService.MAX_TEST_MODE_DATA_SIZE, persistentDataBlockService.getTestHarnessModeDataOffset());
+            byte[] readInternal =
+                    readInternal(
+                            PersistentDataBlockService.MAX_TEST_MODE_DATA_SIZE,
+                            persistentDataBlockService.getTestHarnessModeDataOffset());
             if (readInternal == null) {
                 readInternal = new byte[0];
             }
-            writeDataBuffer(persistentDataBlockService.getTestHarnessModeDataOffset(), ByteBuffer.allocate(Math.min(PersistentDataBlockService.MAX_TEST_MODE_DATA_SIZE, readInternal.length) + 4));
+            writeDataBuffer(
+                    persistentDataBlockService.getTestHarnessModeDataOffset(),
+                    ByteBuffer.allocate(
+                            Math.min(
+                                            PersistentDataBlockService.MAX_TEST_MODE_DATA_SIZE,
+                                            readInternal.length)
+                                    + 4));
         }
 
         public final byte[] readInternal(int i, long j) {
@@ -491,7 +676,10 @@ public class PersistentDataBlockService extends SystemService {
                 throw new IllegalStateException("invalid checksum");
             }
             try {
-                DataInputStream dataInputStream = new DataInputStream(new FileInputStream(new File(PersistentDataBlockService.this.mDataBlockFile)));
+                DataInputStream dataInputStream =
+                        new DataInputStream(
+                                new FileInputStream(
+                                        new File(PersistentDataBlockService.this.mDataBlockFile)));
                 try {
                     try {
                         synchronized (PersistentDataBlockService.this.mLock) {
@@ -518,13 +706,16 @@ public class PersistentDataBlockService extends SystemService {
 
         public final boolean writeDataBuffer(long j, ByteBuffer byteBuffer) {
             synchronized (PersistentDataBlockService.this.mLock) {
-                PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
+                PersistentDataBlockService persistentDataBlockService =
+                        PersistentDataBlockService.this;
                 if (!persistentDataBlockService.mIsWritable) {
                     return false;
                 }
                 try {
                     persistentDataBlockService.enforceFactoryResetProtectionInactive();
-                    FileChannel channel = new RandomAccessFile(persistentDataBlockService.mDataBlockFile, "rw").getChannel();
+                    FileChannel channel =
+                            new RandomAccessFile(persistentDataBlockService.mDataBlockFile, "rw")
+                                    .getChannel();
                     try {
                         channel.position(j);
                         channel.write(byteBuffer);
@@ -542,7 +733,10 @@ public class PersistentDataBlockService extends SystemService {
                         throw th;
                     }
                 } catch (IOException e) {
-                    Slog.e("PersistentDataBlockService", "unable to access persistent partition", e);
+                    Slog.e(
+                            "PersistentDataBlockService",
+                            "unable to access persistent partition",
+                            e);
                     return false;
                 }
             }
@@ -550,7 +744,8 @@ public class PersistentDataBlockService extends SystemService {
 
         public final void writeInternal(long j, byte[] bArr, int i) {
             boolean z = true;
-            Preconditions.checkArgument(bArr == null || bArr.length > 0, "data must be null or non-empty");
+            Preconditions.checkArgument(
+                    bArr == null || bArr.length > 0, "data must be null or non-empty");
             if (bArr != null && bArr.length > i) {
                 z = false;
             }
@@ -566,8 +761,14 @@ public class PersistentDataBlockService extends SystemService {
     }
 
     /* renamed from: -$$Nest$mdoGetMaximumDataBlockSize, reason: not valid java name */
-    public static long m743$$Nest$mdoGetMaximumDataBlockSize(PersistentDataBlockService persistentDataBlockService) {
-        long blockDeviceSize = ((persistentDataBlockService.getBlockDeviceSize() - 10040) - (persistentDataBlockService.mFrpEnforced ? FRP_SECRET_MAGIC.length + 32 : 0L)) - 1001;
+    public static long m743$$Nest$mdoGetMaximumDataBlockSize(
+            PersistentDataBlockService persistentDataBlockService) {
+        long blockDeviceSize =
+                ((persistentDataBlockService.getBlockDeviceSize() - 10040)
+                                - (persistentDataBlockService.mFrpEnforced
+                                        ? FRP_SECRET_MAGIC.length + 32
+                                        : 0L))
+                        - 1001;
         if (blockDeviceSize <= 102400) {
             return blockDeviceSize;
         }
@@ -575,23 +776,36 @@ public class PersistentDataBlockService extends SystemService {
     }
 
     /* renamed from: -$$Nest$menforceOemUnlockReadPermission, reason: not valid java name */
-    public static void m744$$Nest$menforceOemUnlockReadPermission(PersistentDataBlockService persistentDataBlockService) {
-        if (persistentDataBlockService.mContext.checkCallingOrSelfPermission("android.permission.READ_OEM_UNLOCK_STATE") == -1 && persistentDataBlockService.mContext.checkCallingOrSelfPermission("android.permission.OEM_UNLOCK_STATE") == -1) {
-            throw new SecurityException("Can't access OEM unlock state. Requires READ_OEM_UNLOCK_STATE or OEM_UNLOCK_STATE permission.");
+    public static void m744$$Nest$menforceOemUnlockReadPermission(
+            PersistentDataBlockService persistentDataBlockService) {
+        if (persistentDataBlockService.mContext.checkCallingOrSelfPermission(
+                                "android.permission.READ_OEM_UNLOCK_STATE")
+                        == -1
+                && persistentDataBlockService.mContext.checkCallingOrSelfPermission(
+                                "android.permission.OEM_UNLOCK_STATE")
+                        == -1) {
+            throw new SecurityException(
+                    "Can't access OEM unlock state. Requires READ_OEM_UNLOCK_STATE or"
+                        + " OEM_UNLOCK_STATE permission.");
         }
     }
 
     /* renamed from: -$$Nest$menforceUid, reason: not valid java name */
-    public static void m745$$Nest$menforceUid(PersistentDataBlockService persistentDataBlockService, int i) {
+    public static void m745$$Nest$menforceUid(
+            PersistentDataBlockService persistentDataBlockService, int i) {
         if (i != persistentDataBlockService.mAllowedUid && i != 0) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "uid ", " not allowed to access PDB"));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "uid ", " not allowed to access PDB"));
         }
     }
 
     /* renamed from: -$$Nest$menforceUserRestriction, reason: not valid java name */
-    public static void m746$$Nest$menforceUserRestriction(PersistentDataBlockService persistentDataBlockService, String str) {
+    public static void m746$$Nest$menforceUserRestriction(
+            PersistentDataBlockService persistentDataBlockService, String str) {
         if (UserManager.get(persistentDataBlockService.mContext).hasUserRestriction(str)) {
-            throw new SecurityException("OEM unlock is disallowed by user restriction: ".concat(str));
+            throw new SecurityException(
+                    "OEM unlock is disallowed by user restriction: ".concat(str));
         }
     }
 
@@ -620,7 +834,8 @@ public class PersistentDataBlockService extends SystemService {
         }
     }
 
-    public PersistentDataBlockService(Context context, boolean z, String str, long j, boolean z2, String str2, String str3) {
+    public PersistentDataBlockService(
+            Context context, boolean z, String str, long j, boolean z2, String str2, String str3) {
         super(context);
         this.mLock = new Object();
         this.mInitDoneSignal = new CountDownLatch(1);
@@ -658,20 +873,28 @@ public class PersistentDataBlockService extends SystemService {
                 if (deactivateFrpWithFileSecret(this.mFrpSecretFile)) {
                     return true;
                 }
-                Slog.w("PersistentDataBlockService", "Failed to deactivate with primary secret file, trying backup.");
+                Slog.w(
+                        "PersistentDataBlockService",
+                        "Failed to deactivate with primary secret file, trying backup.");
                 if (deactivateFrpWithFileSecret(this.mFrpSecretTmpFile)) {
                     moveFrpTempFileToPrimary();
                     return true;
                 }
-                Slog.w("PersistentDataBlockService", "Failed to deactivate with backup secret file, trying default secret.");
+                Slog.w(
+                        "PersistentDataBlockService",
+                        "Failed to deactivate with backup secret file, trying default secret.");
                 if (deactivateFrp(new byte[32])) {
                     return true;
                 }
                 if (!isUpgradingFromPreVRelease()) {
-                    Slog.e("PersistentDataBlockService", "Did not find valid FRP secret, FRP remains active.");
+                    Slog.e(
+                            "PersistentDataBlockService",
+                            "Did not find valid FRP secret, FRP remains active.");
                     return false;
                 }
-                Slog.w("PersistentDataBlockService", "Upgrading from Android 14 or lower, defaulting FRP secret");
+                Slog.w(
+                        "PersistentDataBlockService",
+                        "Upgrading from Android 14 or lower, defaulting FRP secret");
                 writeFrpMagicAndDefaultSecret();
                 this.mFrpActive = false;
                 setOldSettingForBackworkCompatibility(false);
@@ -774,13 +997,17 @@ public class PersistentDataBlockService extends SystemService {
             android.util.Slog.e(r0, r7, r6)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pdb.PersistentDataBlockService.computeDigestLocked(byte[]):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pdb.PersistentDataBlockService.computeDigestLocked(byte[]):byte[]");
     }
 
     public final boolean deactivateFrp(byte[] bArr) {
         boolean equals;
         if (bArr == null || bArr.length != 32) {
-            Slog.w("PersistentDataBlockService", "Attempted to deactivate FRP with a null or incorrectly-sized secret");
+            Slog.w(
+                    "PersistentDataBlockService",
+                    "Attempted to deactivate FRP with a null or incorrectly-sized secret");
             return false;
         }
         synchronized (this.mLock) {
@@ -795,7 +1022,9 @@ public class PersistentDataBlockService extends SystemService {
                     equals = Arrays.equals(readDataBlock, bArr2);
                 }
                 if (!equals) {
-                    Slog.i("PersistentDataBlockService", "No FRP secret magic, system must have been upgraded.");
+                    Slog.i(
+                            "PersistentDataBlockService",
+                            "No FRP secret magic, system must have been upgraded.");
                     writeFrpMagicAndDefaultSecret();
                 }
             } catch (Throwable th) {
@@ -804,7 +1033,9 @@ public class PersistentDataBlockService extends SystemService {
         }
         byte[] readDataBlock2 = readDataBlock(getFrpSecretDataOffset(), 32);
         if (readDataBlock2 == null || readDataBlock2.length != 32) {
-            Slog.e("PersistentDataBlockService", "Failed to read FRP secret from persistent data partition");
+            Slog.e(
+                    "PersistentDataBlockService",
+                    "Failed to read FRP secret from persistent data partition");
             return false;
         }
         if (MessageDigest.isEqual(bArr, readDataBlock2)) {
@@ -813,7 +1044,9 @@ public class PersistentDataBlockService extends SystemService {
             setOldSettingForBackworkCompatibility(this.mFrpActive);
             return true;
         }
-        Slog.e("PersistentDataBlockService", "FRP deactivation failed with secret " + HexFormat.of().formatHex(bArr));
+        Slog.e(
+                "PersistentDataBlockService",
+                "FRP deactivation failed with secret " + HexFormat.of().formatHex(bArr));
         return false;
     }
 
@@ -821,7 +1054,9 @@ public class PersistentDataBlockService extends SystemService {
         try {
             return deactivateFrp(Files.readAllBytes(Paths.get(str, new String[0])));
         } catch (IOException e) {
-            StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Failed to read FRP secret file: ", str, " ");
+            StringBuilder m =
+                    DumpUtils$$ExternalSyntheticOutline0.m(
+                            "Failed to read FRP secret file: ", str, " ");
             m.append(e.getClass().getSimpleName());
             Slog.i("PersistentDataBlockService", m.toString());
             return false;
@@ -831,7 +1066,8 @@ public class PersistentDataBlockService extends SystemService {
     public final boolean doGetOemUnlockEnabled() {
         boolean z;
         try {
-            DataInputStream dataInputStream = new DataInputStream(new FileInputStream(new File(this.mDataBlockFile)));
+            DataInputStream dataInputStream =
+                    new DataInputStream(new FileInputStream(new File(this.mDataBlockFile)));
             try {
                 synchronized (this.mLock) {
                     dataInputStream.skip(getBlockDeviceSize() - 1);
@@ -898,7 +1134,9 @@ public class PersistentDataBlockService extends SystemService {
 
     public final void enforceFactoryResetProtectionInactive() {
         if (this.mFrpEnforced && isFrpActive()) {
-            Slog.w("PersistentDataBlockService", "Attempt to update PDB was blocked because FRP is active.");
+            Slog.w(
+                    "PersistentDataBlockService",
+                    "Attempt to update PDB was blocked because FRP is active.");
             throw new SecurityException("FRP is active");
         }
     }
@@ -918,7 +1156,9 @@ public class PersistentDataBlockService extends SystemService {
                 int blockDeviceSize = (int) getBlockDeviceSize();
                 boolean z2 = this.mFrpEnforced;
                 if (z2) {
-                    allocate = ByteBuffer.allocate(((blockDeviceSize - 10040) - FRP_SECRET_MAGIC.length) - 1033);
+                    allocate =
+                            ByteBuffer.allocate(
+                                    ((blockDeviceSize - 10040) - FRP_SECRET_MAGIC.length) - 1033);
                 } else {
                     allocate = ByteBuffer.allocate(blockDeviceSize - 11041);
                 }
@@ -988,7 +1228,9 @@ public class PersistentDataBlockService extends SystemService {
     }
 
     public int getMaximumFrpDataSize() {
-        return (int) ((getTestHarnessModeDataOffset() - 40) - (this.mFrpEnforced ? FRP_SECRET_MAGIC.length + 32 : 0L));
+        return (int)
+                ((getTestHarnessModeDataOffset() - 40)
+                        - (this.mFrpEnforced ? FRP_SECRET_MAGIC.length + 32 : 0L));
     }
 
     public long getOemUnlockDataOffset() {
@@ -1008,7 +1250,8 @@ public class PersistentDataBlockService extends SystemService {
     }
 
     public boolean isUpgradingFromPreVRelease() {
-        PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
         if (packageManagerInternal == null) {
             Slog.e("PersistentDataBlockService", "Unable to retrieve PackageManagerInternal");
             return false;
@@ -1019,9 +1262,15 @@ public class PersistentDataBlockService extends SystemService {
 
     public final void moveFrpTempFileToPrimary() {
         try {
-            Files.move(Paths.get(this.mFrpSecretTmpFile, new String[0]), Paths.get(this.mFrpSecretFile, new String[0]), StandardCopyOption.REPLACE_EXISTING);
+            Files.move(
+                    Paths.get(this.mFrpSecretTmpFile, new String[0]),
+                    Paths.get(this.mFrpSecretFile, new String[0]),
+                    StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            Slog.e("PersistentDataBlockService", "Error moving FRP backup file to primary (ignored)", e);
+            Slog.e(
+                    "PersistentDataBlockService",
+                    "Error moving FRP backup file to primary (ignored)",
+                    e);
         }
     }
 
@@ -1031,28 +1280,43 @@ public class PersistentDataBlockService extends SystemService {
         if (i == 500) {
             try {
                 if (!this.mInitDoneSignal.await(10L, TimeUnit.SECONDS)) {
-                    throw new IllegalStateException("Service PersistentDataBlockService init timeout");
+                    throw new IllegalStateException(
+                            "Service PersistentDataBlockService init timeout");
                 }
-                int mainUserId = ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class)).getMainUserId();
+                int mainUserId =
+                        ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class))
+                                .getMainUserId();
                 if (mainUserId < 0) {
                     mainUserId = 0;
                 }
-                String string = this.mContext.getResources().getString(R.string.ext_media_move_specific_title);
+                String string =
+                        this.mContext
+                                .getResources()
+                                .getString(R.string.ext_media_move_specific_title);
                 if (!TextUtils.isEmpty(string)) {
                     try {
-                        packageUidAsUser = this.mContext.getPackageManager().getPackageUidAsUser(string, 1048576, mainUserId);
+                        packageUidAsUser =
+                                this.mContext
+                                        .getPackageManager()
+                                        .getPackageUidAsUser(string, 1048576, mainUserId);
                     } catch (PackageManager.NameNotFoundException e) {
-                        Slog.e("PersistentDataBlockService", "not able to find package " + string, e);
+                        Slog.e(
+                                "PersistentDataBlockService",
+                                "not able to find package " + string,
+                                e);
                     }
                     this.mAllowedUid = packageUidAsUser;
-                    LocalServices.addService(PersistentDataBlockManagerInternal.class, this.mInternalService);
+                    LocalServices.addService(
+                            PersistentDataBlockManagerInternal.class, this.mInternalService);
                 }
                 packageUidAsUser = -1;
                 this.mAllowedUid = packageUidAsUser;
-                LocalServices.addService(PersistentDataBlockManagerInternal.class, this.mInternalService);
+                LocalServices.addService(
+                        PersistentDataBlockManagerInternal.class, this.mInternalService);
             } catch (InterruptedException e2) {
                 Thread.currentThread().interrupt();
-                throw new IllegalStateException("Service PersistentDataBlockService init interrupted", e2);
+                throw new IllegalStateException(
+                        "Service PersistentDataBlockService init interrupted", e2);
             }
         }
         super.onBootPhase(i);
@@ -1060,34 +1324,44 @@ public class PersistentDataBlockService extends SystemService {
 
     @Override // com.android.server.SystemService
     public final void onStart() {
-        SystemServerInitThreadPool.submit("PersistentDataBlockService.onStart", new Runnable() { // from class: com.android.server.pdb.PersistentDataBlockService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                PersistentDataBlockService persistentDataBlockService = PersistentDataBlockService.this;
-                persistentDataBlockService.enforceChecksumValidity();
-                if (persistentDataBlockService.mFrpEnforced) {
-                    persistentDataBlockService.automaticallyDeactivateFrpIfPossible();
-                    persistentDataBlockService.setOemUnlockEnabledProperty(persistentDataBlockService.doGetOemUnlockEnabled());
-                    persistentDataBlockService.setOldSettingForBackworkCompatibility(persistentDataBlockService.mFrpActive);
-                } else {
-                    boolean doGetOemUnlockEnabled = persistentDataBlockService.doGetOemUnlockEnabled();
-                    if (doGetOemUnlockEnabled) {
-                        synchronized (persistentDataBlockService.mLock) {
-                            persistentDataBlockService.formatPartitionLocked(true);
+        SystemServerInitThreadPool.submit(
+                "PersistentDataBlockService.onStart",
+                new Runnable() { // from class:
+                                 // com.android.server.pdb.PersistentDataBlockService$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        PersistentDataBlockService persistentDataBlockService =
+                                PersistentDataBlockService.this;
+                        persistentDataBlockService.enforceChecksumValidity();
+                        if (persistentDataBlockService.mFrpEnforced) {
+                            persistentDataBlockService.automaticallyDeactivateFrpIfPossible();
+                            persistentDataBlockService.setOemUnlockEnabledProperty(
+                                    persistentDataBlockService.doGetOemUnlockEnabled());
+                            persistentDataBlockService.setOldSettingForBackworkCompatibility(
+                                    persistentDataBlockService.mFrpActive);
+                        } else {
+                            boolean doGetOemUnlockEnabled =
+                                    persistentDataBlockService.doGetOemUnlockEnabled();
+                            if (doGetOemUnlockEnabled) {
+                                synchronized (persistentDataBlockService.mLock) {
+                                    persistentDataBlockService.formatPartitionLocked(true);
+                                }
+                            }
+                            persistentDataBlockService.setOemUnlockEnabledProperty(
+                                    doGetOemUnlockEnabled);
                         }
+                        persistentDataBlockService.publishBinderService(
+                                "persistent_data_block", persistentDataBlockService.mService);
+                        persistentDataBlockService.signalInitDone();
                     }
-                    persistentDataBlockService.setOemUnlockEnabledProperty(doGetOemUnlockEnabled);
-                }
-                persistentDataBlockService.publishBinderService("persistent_data_block", persistentDataBlockService.mService);
-                persistentDataBlockService.signalInitDone();
-            }
-        });
+                });
     }
 
     public byte[] readDataBlock(long j, int i) {
         byte[] bArr;
         try {
-            DataInputStream dataInputStream = new DataInputStream(new FileInputStream(new File(this.mDataBlockFile)));
+            DataInputStream dataInputStream =
+                    new DataInputStream(new FileInputStream(new File(this.mDataBlockFile)));
             try {
                 synchronized (this.mLock) {
                     dataInputStream.skip(j);
@@ -1114,7 +1388,8 @@ public class PersistentDataBlockService extends SystemService {
     public final void setOldSettingForBackworkCompatibility(boolean z) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            Settings.Global.putInt(this.mContext.getContentResolver(), "secure_frp_mode", z ? 1 : 0);
+            Settings.Global.putInt(
+                    this.mContext.getContentResolver(), "secure_frp_mode", z ? 1 : 0);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }

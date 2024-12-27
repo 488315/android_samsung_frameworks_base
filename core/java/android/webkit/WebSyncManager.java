@@ -12,29 +12,22 @@ abstract class WebSyncManager implements Runnable {
 
     abstract void syncFromRamToFlash();
 
-    protected WebSyncManager(Context context, String name) {
-    }
+    protected WebSyncManager(Context context, String name) {}
 
     protected Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException("doesn't implement Cloneable");
     }
 
     @Override // java.lang.Runnable
-    public void run() {
-    }
+    public void run() {}
 
-    public void sync() {
-    }
+    public void sync() {}
 
-    public void resetSync() {
-    }
+    public void resetSync() {}
 
-    public void startSync() {
-    }
+    public void startSync() {}
 
-    public void stopSync() {
-    }
+    public void stopSync() {}
 
-    protected void onSyncInit() {
-    }
+    protected void onSyncInit() {}
 }

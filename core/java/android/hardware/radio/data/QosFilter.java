@@ -3,27 +3,30 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class QosFilter implements Parcelable {
-    public static final Parcelable.Creator<QosFilter> CREATOR = new Parcelable.Creator<QosFilter>() { // from class: android.hardware.radio.data.QosFilter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QosFilter createFromParcel(Parcel _aidl_source) {
-            QosFilter _aidl_out = new QosFilter();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<QosFilter> CREATOR =
+            new Parcelable.Creator<
+                    QosFilter>() { // from class: android.hardware.radio.data.QosFilter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QosFilter createFromParcel(Parcel _aidl_source) {
+                    QosFilter _aidl_out = new QosFilter();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QosFilter[] newArray(int _aidl_size) {
-            return new QosFilter[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QosFilter[] newArray(int _aidl_size) {
+                    return new QosFilter[_aidl_size];
+                }
+            };
     public static final byte DIRECTION_BIDIRECTIONAL = 2;
     public static final byte DIRECTION_DOWNLINK = 0;
     public static final byte DIRECTION_UPLINK = 1;
@@ -122,7 +125,9 @@ public class QosFilter implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.tos = (QosFilterTypeOfService) _aidl_parcel.readTypedObject(QosFilterTypeOfService.CREATOR);
+            this.tos =
+                    (QosFilterTypeOfService)
+                            _aidl_parcel.readTypedObject(QosFilterTypeOfService.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -130,7 +135,9 @@ public class QosFilter implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.flowLabel = (QosFilterIpv6FlowLabel) _aidl_parcel.readTypedObject(QosFilterIpv6FlowLabel.CREATOR);
+            this.flowLabel =
+                    (QosFilterIpv6FlowLabel)
+                            _aidl_parcel.readTypedObject(QosFilterIpv6FlowLabel.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -186,7 +193,11 @@ public class QosFilter implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.localPort);
-        return _mask | describeContents(this.remotePort) | describeContents(this.tos) | describeContents(this.flowLabel) | describeContents(this.spi);
+        return _mask
+                | describeContents(this.remotePort)
+                | describeContents(this.tos)
+                | describeContents(this.flowLabel)
+                | describeContents(this.spi);
     }
 
     private int describeContents(Object _v) {

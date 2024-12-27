@@ -5,14 +5,18 @@ import java.lang.reflect.Constructor;
 /* loaded from: classes2.dex */
 public class EffectFactory {
     public static final String EFFECT_AUTOFIX = "android.media.effect.effects.AutoFixEffect";
-    public static final String EFFECT_BACKDROPPER = "android.media.effect.effects.BackDropperEffect";
-    public static final String EFFECT_BITMAPOVERLAY = "android.media.effect.effects.BitmapOverlayEffect";
+    public static final String EFFECT_BACKDROPPER =
+            "android.media.effect.effects.BackDropperEffect";
+    public static final String EFFECT_BITMAPOVERLAY =
+            "android.media.effect.effects.BitmapOverlayEffect";
     public static final String EFFECT_BLACKWHITE = "android.media.effect.effects.BlackWhiteEffect";
     public static final String EFFECT_BRIGHTNESS = "android.media.effect.effects.BrightnessEffect";
     public static final String EFFECT_CONTRAST = "android.media.effect.effects.ContrastEffect";
     public static final String EFFECT_CROP = "android.media.effect.effects.CropEffect";
-    public static final String EFFECT_CROSSPROCESS = "android.media.effect.effects.CrossProcessEffect";
-    public static final String EFFECT_DOCUMENTARY = "android.media.effect.effects.DocumentaryEffect";
+    public static final String EFFECT_CROSSPROCESS =
+            "android.media.effect.effects.CrossProcessEffect";
+    public static final String EFFECT_DOCUMENTARY =
+            "android.media.effect.effects.DocumentaryEffect";
     public static final String EFFECT_DUOTONE = "android.media.effect.effects.DuotoneEffect";
     public static final String EFFECT_FILLLIGHT = "android.media.effect.effects.FillLightEffect";
     public static final String EFFECT_FISHEYE = "android.media.effect.effects.FisheyeEffect";
@@ -30,7 +34,8 @@ public class EffectFactory {
     public static final String EFFECT_SEPIA = "android.media.effect.effects.SepiaEffect";
     public static final String EFFECT_SHARPEN = "android.media.effect.effects.SharpenEffect";
     public static final String EFFECT_STRAIGHTEN = "android.media.effect.effects.StraightenEffect";
-    public static final String EFFECT_TEMPERATURE = "android.media.effect.effects.ColorTemperatureEffect";
+    public static final String EFFECT_TEMPERATURE =
+            "android.media.effect.effects.ColorTemperatureEffect";
     public static final String EFFECT_TINT = "android.media.effect.effects.TintEffect";
     public static final String EFFECT_VIGNETTE = "android.media.effect.effects.VignetteEffect";
     private EffectContext mEffectContext;
@@ -42,7 +47,8 @@ public class EffectFactory {
     public Effect createEffect(String effectName) {
         Class effectClass = getEffectClassByName(effectName);
         if (effectClass == null) {
-            throw new IllegalArgumentException("Cannot instantiate unknown effect '" + effectName + "'!");
+            throw new IllegalArgumentException(
+                    "Cannot instantiate unknown effect '" + effectName + "'!");
         }
         return instantiateEffect(effectClass, effectName);
     }
@@ -68,18 +74,27 @@ public class EffectFactory {
 
     private Effect instantiateEffect(Class effectClass, String name) {
         if (!Effect.class.isAssignableFrom(effectClass)) {
-            throw new IllegalArgumentException("Attempting to allocate effect '" + effectClass + "' which is not a subclass of Effect!");
+            throw new IllegalArgumentException(
+                    "Attempting to allocate effect '"
+                            + effectClass
+                            + "' which is not a subclass of Effect!");
         }
         try {
-            Constructor effectConstructor = effectClass.getConstructor(EffectContext.class, String.class);
+            Constructor effectConstructor =
+                    effectClass.getConstructor(EffectContext.class, String.class);
             try {
                 Effect effect = (Effect) effectConstructor.newInstance(this.mEffectContext, name);
                 return effect;
             } catch (Throwable t) {
-                throw new RuntimeException("There was an error constructing the effect '" + effectClass + "'!", t);
+                throw new RuntimeException(
+                        "There was an error constructing the effect '" + effectClass + "'!", t);
             }
         } catch (NoSuchMethodException e) {
-            throw new RuntimeException("The effect class '" + effectClass + "' does not have the required constructor.", e);
+            throw new RuntimeException(
+                    "The effect class '"
+                            + effectClass
+                            + "' does not have the required constructor.",
+                    e);
         }
     }
 }

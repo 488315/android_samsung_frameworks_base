@@ -2,6 +2,7 @@ package com.samsung.android.sdk.sfe;
 
 import android.os.Build;
 import android.util.Log;
+
 import com.samsung.android.sdk.sfe.font.FontManager;
 
 /* loaded from: classes6.dex */

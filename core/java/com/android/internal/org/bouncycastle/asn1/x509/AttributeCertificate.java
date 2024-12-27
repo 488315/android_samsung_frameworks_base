@@ -23,7 +23,10 @@ public class AttributeCertificate extends ASN1Object {
         return null;
     }
 
-    public AttributeCertificate(AttributeCertificateInfo acinfo, AlgorithmIdentifier signatureAlgorithm, DERBitString signatureValue) {
+    public AttributeCertificate(
+            AttributeCertificateInfo acinfo,
+            AlgorithmIdentifier signatureAlgorithm,
+            DERBitString signatureValue) {
         this.acinfo = acinfo;
         this.signatureAlgorithm = signatureAlgorithm;
         this.signatureValue = signatureValue;
@@ -50,7 +53,8 @@ public class AttributeCertificate extends ASN1Object {
         return this.signatureValue;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         v.add(this.acinfo);

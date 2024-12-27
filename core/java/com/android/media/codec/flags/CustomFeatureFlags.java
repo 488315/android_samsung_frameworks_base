@@ -10,7 +10,13 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_AIDL_HAL, Flags.FLAG_CODEC_IMPORTANCE, Flags.FLAG_LARGE_AUDIO_FRAME, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(
+                    Arrays.asList(
+                            Flags.FLAG_AIDL_HAL,
+                            Flags.FLAG_CODEC_IMPORTANCE,
+                            Flags.FLAG_LARGE_AUDIO_FRAME,
+                            ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,32 +24,41 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.media.codec.flags.FeatureFlags
     public boolean aidlHal() {
-        return getValue(Flags.FLAG_AIDL_HAL, new Predicate() { // from class: com.android.media.codec.flags.CustomFeatureFlags$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).aidlHal();
-            }
-        });
+        return getValue(
+                Flags.FLAG_AIDL_HAL,
+                new Predicate() { // from class:
+                                  // com.android.media.codec.flags.CustomFeatureFlags$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).aidlHal();
+                    }
+                });
     }
 
     @Override // com.android.media.codec.flags.FeatureFlags
     public boolean codecImportance() {
-        return getValue(Flags.FLAG_CODEC_IMPORTANCE, new Predicate() { // from class: com.android.media.codec.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).codecImportance();
-            }
-        });
+        return getValue(
+                Flags.FLAG_CODEC_IMPORTANCE,
+                new Predicate() { // from class:
+                                  // com.android.media.codec.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).codecImportance();
+                    }
+                });
     }
 
     @Override // com.android.media.codec.flags.FeatureFlags
     public boolean largeAudioFrame() {
-        return getValue(Flags.FLAG_LARGE_AUDIO_FRAME, new Predicate() { // from class: com.android.media.codec.flags.CustomFeatureFlags$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).largeAudioFrame();
-            }
-        });
+        return getValue(
+                Flags.FLAG_LARGE_AUDIO_FRAME,
+                new Predicate() { // from class:
+                                  // com.android.media.codec.flags.CustomFeatureFlags$$ExternalSyntheticLambda2
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).largeAudioFrame();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {
@@ -62,6 +77,7 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     public List<String> getFlagNames() {
-        return Arrays.asList(Flags.FLAG_AIDL_HAL, Flags.FLAG_CODEC_IMPORTANCE, Flags.FLAG_LARGE_AUDIO_FRAME);
+        return Arrays.asList(
+                Flags.FLAG_AIDL_HAL, Flags.FLAG_CODEC_IMPORTANCE, Flags.FLAG_LARGE_AUDIO_FRAME);
     }
 }

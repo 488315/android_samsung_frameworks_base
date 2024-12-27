@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.io.Streams;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -27,7 +28,8 @@ public class BEROctetStringParser implements ASN1OctetStringParser {
         try {
             return getLoadedObject();
         } catch (IOException e) {
-            throw new ASN1ParsingException("IOException converting stream to byte array: " + e.getMessage(), e);
+            throw new ASN1ParsingException(
+                    "IOException converting stream to byte array: " + e.getMessage(), e);
         }
     }
 }

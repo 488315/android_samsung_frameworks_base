@@ -10,10 +10,11 @@ import android.os.BatteryStatsInternal;
 import android.os.ServiceManager;
 import android.permission.PermissionManager;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.app.IAppOpsService;
 import com.android.server.LocalServices;
-import com.android.server.am.AppRestrictionController;
 import com.android.server.pm.UserManagerInternal;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -51,8 +52,7 @@ public abstract class BaseAppStateTracker {
 
     public abstract void dump(PrintWriter printWriter, String str);
 
-    public void dumpAsProto(int i, ProtoOutputStream protoOutputStream) {
-    }
+    public void dumpAsProto(int i, ProtoOutputStream protoOutputStream) {}
 
     public byte[] getTrackerInfoForStatsd(int i) {
         return null;
@@ -65,7 +65,8 @@ public abstract class BaseAppStateTracker {
             try {
                 int size = this.mStateListeners.size();
                 for (int i3 = 0; i3 < size; i3++) {
-                    ((AppBatteryExemptionTracker) this.mStateListeners.get(i3)).onStateChange(i, i2, j, str, z);
+                    ((AppBatteryExemptionTracker) this.mStateListeners.get(i3))
+                            .onStateChange(i, i2, j, str, z);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -73,47 +74,46 @@ public abstract class BaseAppStateTracker {
         }
     }
 
-    public void onBackgroundRestrictionChanged(int i, boolean z) {
-    }
+    public void onBackgroundRestrictionChanged(int i, boolean z) {}
 
-    public void onLockedBootCompleted() {
-    }
+    public void onLockedBootCompleted() {}
 
     public void onSystemReady() {
         Injector injector = this.mInjector;
         injector.getClass();
-        injector.mActivityManagerInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
-        injector.mBatteryManagerInternal = (BatteryManagerInternal) LocalServices.getService(BatteryManagerInternal.class);
-        injector.mBatteryStatsInternal = (BatteryStatsInternal) LocalServices.getService(BatteryStatsInternal.class);
-        injector.mUserManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
-        injector.mPackageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        injector.mActivityManagerInternal =
+                (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
+        injector.mBatteryManagerInternal =
+                (BatteryManagerInternal) LocalServices.getService(BatteryManagerInternal.class);
+        injector.mBatteryStatsInternal =
+                (BatteryStatsInternal) LocalServices.getService(BatteryStatsInternal.class);
+        injector.mUserManagerInternal =
+                (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+        injector.mPackageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
         Context context = injector.mAppStatePolicy.mTracker.mContext;
         injector.mPackageManager = context.getPackageManager();
-        injector.mMediaSessionManager = (MediaSessionManager) context.getSystemService(MediaSessionManager.class);
-        injector.mPermissionManager = (PermissionManager) context.getSystemService(PermissionManager.class);
-        injector.mIAppOpsService = IAppOpsService.Stub.asInterface(ServiceManager.getService("appops"));
+        injector.mMediaSessionManager =
+                (MediaSessionManager) context.getSystemService(MediaSessionManager.class);
+        injector.mPermissionManager =
+                (PermissionManager) context.getSystemService(PermissionManager.class);
+        injector.mIAppOpsService =
+                IAppOpsService.Stub.asInterface(ServiceManager.getService("appops"));
         injector.mContext = context;
         injector.mAppStatePolicy.onSystemReady();
     }
 
-    public void onUidGone(int i) {
-    }
+    public void onUidGone(int i) {}
 
-    public void onUidProcStateChanged(int i, int i2) {
-    }
+    public void onUidProcStateChanged(int i, int i2) {}
 
-    public void onUidRemoved(int i) {
-    }
+    public void onUidRemoved(int i) {}
 
-    public void onUserInteractionStarted(String str, int i) {
-    }
+    public void onUserInteractionStarted(String str, int i) {}
 
-    public void onUserRemoved(int i) {
-    }
+    public void onUserRemoved(int i) {}
 
-    public void onUserStarted(int i) {
-    }
+    public void onUserStarted(int i) {}
 
-    public void onUserStopped(int i) {
-    }
+    public void onUserStopped(int i) {}
 }

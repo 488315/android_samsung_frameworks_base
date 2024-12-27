@@ -4,9 +4,9 @@ package com.android.server.permission.jarjar.kotlin.ranges;
 /* loaded from: classes2.dex */
 public final class IntRange extends IntProgression {
     /* JADX WARN: Code restructure failed: missing block: B:6:0x0011, code lost:
-    
-        if (r1.first > r1.last) goto L13;
-     */
+
+       if (r1.first > r1.last) goto L13;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -39,7 +39,9 @@ public final class IntRange extends IntProgression {
         L21:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.permission.jarjar.kotlin.ranges.IntRange.equals(java.lang.Object):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.permission.jarjar.kotlin.ranges.IntRange.equals(java.lang.Object):boolean");
     }
 
     public final int hashCode() {

@@ -15,6 +15,7 @@ import android.transition.TransitionUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import java.util.List;
 import java.util.Map;
 
@@ -22,36 +23,45 @@ import java.util.Map;
 public abstract class SharedElementCallback {
     private static final String BUNDLE_SNAPSHOT_BITMAP = "sharedElement:snapshot:bitmap";
     private static final String BUNDLE_SNAPSHOT_COLOR_SPACE = "sharedElement:snapshot:colorSpace";
-    private static final String BUNDLE_SNAPSHOT_HARDWARE_BUFFER = "sharedElement:snapshot:hardwareBuffer";
+    private static final String BUNDLE_SNAPSHOT_HARDWARE_BUFFER =
+            "sharedElement:snapshot:hardwareBuffer";
     private static final String BUNDLE_SNAPSHOT_IMAGE_MATRIX = "sharedElement:snapshot:imageMatrix";
-    private static final String BUNDLE_SNAPSHOT_IMAGE_SCALETYPE = "sharedElement:snapshot:imageScaleType";
-    static final SharedElementCallback NULL_CALLBACK = new SharedElementCallback() { // from class: android.app.SharedElementCallback.1
-    };
+    private static final String BUNDLE_SNAPSHOT_IMAGE_SCALETYPE =
+            "sharedElement:snapshot:imageScaleType";
+    static final SharedElementCallback NULL_CALLBACK =
+            new SharedElementCallback() { // from class: android.app.SharedElementCallback.1
+            };
     private Matrix mTempMatrix;
 
     public interface OnSharedElementsReadyListener {
         void onSharedElementsReady();
     }
 
-    public void onSharedElementStart(List<String> sharedElementNames, List<View> sharedElements, List<View> sharedElementSnapshots) {
-    }
+    public void onSharedElementStart(
+            List<String> sharedElementNames,
+            List<View> sharedElements,
+            List<View> sharedElementSnapshots) {}
 
-    public void onSharedElementEnd(List<String> sharedElementNames, List<View> sharedElements, List<View> sharedElementSnapshots) {
-    }
+    public void onSharedElementEnd(
+            List<String> sharedElementNames,
+            List<View> sharedElements,
+            List<View> sharedElementSnapshots) {}
 
-    public void onRejectSharedElements(List<View> rejectedSharedElements) {
-    }
+    public void onRejectSharedElements(List<View> rejectedSharedElements) {}
 
-    public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {
-    }
+    public void onMapSharedElements(List<String> names, Map<String, View> sharedElements) {}
 
-    public Parcelable onCaptureSharedElementSnapshot(View sharedElement, Matrix viewToGlobalMatrix, RectF screenBounds) {
+    public Parcelable onCaptureSharedElementSnapshot(
+            View sharedElement, Matrix viewToGlobalMatrix, RectF screenBounds) {
         Bitmap bitmap;
         if (sharedElement instanceof ImageView) {
             ImageView imageView = (ImageView) sharedElement;
             Drawable d = imageView.getDrawable();
             Drawable bg = imageView.getBackground();
-            if (d != null && ((bg == null || bg.getAlpha() == 0) && (bitmap = TransitionUtils.createDrawableBitmap(d, imageView)) != null)) {
+            if (d != null
+                    && ((bg == null || bg.getAlpha() == 0)
+                            && (bitmap = TransitionUtils.createDrawableBitmap(d, imageView))
+                                    != null)) {
                 Bundle bundle = new Bundle();
                 if (bitmap.getConfig() != Bitmap.Config.HARDWARE) {
                     bundle.putParcelable(BUNDLE_SNAPSHOT_BITMAP, bitmap);
@@ -63,7 +73,8 @@ public abstract class SharedElementCallback {
                         bundle.putInt(BUNDLE_SNAPSHOT_COLOR_SPACE, cs.getId());
                     }
                 }
-                bundle.putString(BUNDLE_SNAPSHOT_IMAGE_SCALETYPE, imageView.getScaleType().toString());
+                bundle.putString(
+                        BUNDLE_SNAPSHOT_IMAGE_SCALETYPE, imageView.getScaleType().toString());
                 if (imageView.getScaleType() == ImageView.ScaleType.MATRIX) {
                     Matrix matrix = imageView.getImageMatrix();
                     float[] values = new float[9];
@@ -79,13 +90,17 @@ public abstract class SharedElementCallback {
             this.mTempMatrix.set(viewToGlobalMatrix);
         }
         ViewGroup parent = (ViewGroup) sharedElement.getParent();
-        return TransitionUtils.createViewBitmap(sharedElement, this.mTempMatrix, screenBounds, parent);
+        return TransitionUtils.createViewBitmap(
+                sharedElement, this.mTempMatrix, screenBounds, parent);
     }
 
     public View onCreateSnapshotView(Context context, Parcelable snapshot) {
         if (snapshot instanceof Bundle) {
             Bundle bundle = (Bundle) snapshot;
-            HardwareBuffer buffer = (HardwareBuffer) bundle.getParcelable(BUNDLE_SNAPSHOT_HARDWARE_BUFFER, HardwareBuffer.class);
+            HardwareBuffer buffer =
+                    (HardwareBuffer)
+                            bundle.getParcelable(
+                                    BUNDLE_SNAPSHOT_HARDWARE_BUFFER, HardwareBuffer.class);
             Bitmap bitmap = (Bitmap) bundle.getParcelable(BUNDLE_SNAPSHOT_BITMAP, Bitmap.class);
             if (buffer == null && bitmap == null) {
                 return null;
@@ -100,7 +115,8 @@ public abstract class SharedElementCallback {
             }
             ImageView imageView = new ImageView(context);
             imageView.setImageBitmap(bitmap);
-            imageView.setScaleType(ImageView.ScaleType.valueOf(bundle.getString(BUNDLE_SNAPSHOT_IMAGE_SCALETYPE)));
+            imageView.setScaleType(
+                    ImageView.ScaleType.valueOf(bundle.getString(BUNDLE_SNAPSHOT_IMAGE_SCALETYPE)));
             if (imageView.getScaleType() != ImageView.ScaleType.MATRIX) {
                 return imageView;
             }
@@ -119,7 +135,10 @@ public abstract class SharedElementCallback {
         return view;
     }
 
-    public void onSharedElementsArrived(List<String> sharedElementNames, List<View> sharedElements, OnSharedElementsReadyListener listener) {
+    public void onSharedElementsArrived(
+            List<String> sharedElementNames,
+            List<View> sharedElements,
+            OnSharedElementsReadyListener listener) {
         listener.onSharedElementsReady();
     }
 }

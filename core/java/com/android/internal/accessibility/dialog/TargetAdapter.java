@@ -14,10 +14,8 @@ abstract class TargetAdapter extends BaseAdapter {
         TextView mLabelView;
         TextView mStatusView;
 
-        ViewHolder() {
-        }
+        ViewHolder() {}
     }
 
-    TargetAdapter() {
-    }
+    TargetAdapter() {}
 }

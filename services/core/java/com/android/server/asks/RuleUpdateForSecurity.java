@@ -5,8 +5,10 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.os.SystemProperties;
 import android.util.Slog;
 import android.util.jar.StrictJarFile;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -34,7 +36,8 @@ public final class RuleUpdateForSecurity {
         this.mContainer = rUFSContainer;
     }
 
-    public static void checkTargetAndRemoveIfNot(String str, String str2, String str3, String str4) {
+    public static void checkTargetAndRemoveIfNot(
+            String str, String str2, String str3, String str4) {
         if (str3 == null || str4 == null) {
             return;
         }
@@ -55,14 +58,25 @@ public final class RuleUpdateForSecurity {
         }
         String str7 = SystemProperties.get("ro.product.model");
         String str8 = SystemProperties.get("ro.csc.sales_code");
-        if (!arrayList.contains("ALL") || arrayList.size() != 1 ? !(!arrayList.contains(str7) || ((!arrayList2.contains("ALL") || arrayList2.size() != 1) && !arrayList2.contains(str8))) : !((!arrayList2.contains("ALL") || arrayList2.size() != 1) && !arrayList2.contains(str8))) {
+        if (!arrayList.contains("ALL") || arrayList.size() != 1
+                ? !(!arrayList.contains(str7)
+                        || ((!arrayList2.contains("ALL") || arrayList2.size() != 1)
+                                && !arrayList2.contains(str8)))
+                : !((!arrayList2.contains("ALL") || arrayList2.size() != 1)
+                        && !arrayList2.contains(str8))) {
             z = true;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m("checkTargetModelAndCarrier() : result = ", "AASA_RuleUpdateForSecurity_RUFS", z);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                "checkTargetModelAndCarrier() : result = ", "AASA_RuleUpdateForSecurity_RUFS", z);
         if (z) {
             return;
         }
-        File file = new File(AudioOffloadInfo$$ExternalSyntheticOutline0.m(BootReceiver$$ExternalSyntheticOutline0.m(str), File.separator, str2));
+        File file =
+                new File(
+                        AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                BootReceiver$$ExternalSyntheticOutline0.m(str),
+                                File.separator,
+                                str2));
         if (file.exists()) {
             Slog.v("AASA_RuleUpdateForSecurity_RUFS", str2.concat(" is not target here"));
             file.delete();
@@ -71,7 +85,9 @@ public final class RuleUpdateForSecurity {
 
     public static void copyFile(File file, File file2) {
         if (!file2.exists() && !file2.createNewFile()) {
-            Slog.e("AASA_RuleUpdateForSecurity_RUFS", "Failed to create new file: " + file2.getAbsolutePath());
+            Slog.e(
+                    "AASA_RuleUpdateForSecurity_RUFS",
+                    "Failed to create new file: " + file2.getAbsolutePath());
             throw new IOException("Failed to create new file");
         }
         FileChannel channel = new FileInputStream(file).getChannel();
@@ -104,7 +120,9 @@ public final class RuleUpdateForSecurity {
         if (file.isDirectory() && (listFiles = file.listFiles()) != null) {
             for (File file2 : listFiles) {
                 if (!deleteDirectoryWithContents(file2)) {
-                    Slog.e("AASA_RuleUpdateForSecurity_RUFS", "Filed to delete: " + file2.getAbsolutePath());
+                    Slog.e(
+                            "AASA_RuleUpdateForSecurity_RUFS",
+                            "Filed to delete: " + file2.getAbsolutePath());
                     return false;
                 }
             }
@@ -179,9 +197,9 @@ public final class RuleUpdateForSecurity {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:9:0x0020, code lost:
-    
-        r3 = r1.group(1);
-     */
+
+       r3 = r1.group(1);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -220,7 +238,9 @@ public final class RuleUpdateForSecurity {
         L35:
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.asks.RuleUpdateForSecurity.extractVersionFromFile(java.io.File):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.asks.RuleUpdateForSecurity.extractVersionFromFile(java.io.File):java.lang.String");
     }
 
     public static String getScpmPolicyVersion() {
@@ -282,12 +302,15 @@ public final class RuleUpdateForSecurity {
     public static ZipEntry getTargetInfoEntry(int i, StrictJarFile strictJarFile) {
         if (i == 1) {
             ZipEntry findEntry = strictJarFile.findEntry("SEC-INF/targetinfo");
-            return findEntry == null ? strictJarFile.findEntry("META-INF/SEC-INF/targetinfo") : findEntry;
+            return findEntry == null
+                    ? strictJarFile.findEntry("META-INF/SEC-INF/targetinfo")
+                    : findEntry;
         }
         if (i == 2) {
             return strictJarFile.findEntry("targetinfo");
         }
-        throw new IllegalStateException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unexpected value: "));
+        throw new IllegalStateException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unexpected value: "));
     }
 
     /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:58:0x0032 -> B:15:0x0062). Please report as a decompilation issue!!! */
@@ -390,7 +413,10 @@ public final class RuleUpdateForSecurity {
         boolean z = false;
         RUFSContainer rUFSContainer = this.mContainer;
         if (rUFSContainer != null) {
-            String str2 = rUFSContainer.mIsDelta ? rUFSContainer.mRUFSpolicyDeltaVersion : rUFSContainer.mRUFSpolicyVersion;
+            String str2 =
+                    rUFSContainer.mIsDelta
+                            ? rUFSContainer.mRUFSpolicyDeltaVersion
+                            : rUFSContainer.mRUFSpolicyVersion;
             if (str2 != null && str2.length() > 0) {
                 try {
                     Slog.i("AASA_RuleUpdateForSecurity_RUFS", "token:" + str2 + " device:" + str);
@@ -400,7 +426,9 @@ public final class RuleUpdateForSecurity {
                         this.mVersionFromToken = str2;
                         Slog.i("AASA_RuleUpdateForSecurity_RUFS", " Now try to update");
                     } else {
-                        Slog.i("AASA_RuleUpdateForSecurity_RUFS", "Current policy is latest version.");
+                        Slog.i(
+                                "AASA_RuleUpdateForSecurity_RUFS",
+                                "Current policy is latest version.");
                     }
                 } catch (NumberFormatException unused) {
                     Slog.e("AASA_RuleUpdateForSecurity_RUFS", "The version format is wrong !!");
@@ -412,13 +440,13 @@ public final class RuleUpdateForSecurity {
 
     /* JADX WARN: Can't wrap try/catch for region: R(13:17|18|19|20|21|(1:22)|(8:24|25|(2:27|28)(1:(3:228|229|(2:231|(1:233))(1:235))(1:236))|29|30|(28:32|(1:34)|35|36|37|38|39|40|41|(3:43|(3:44|45|(4:47|48|49|51))|194)|201|202|203|204|161|162|59|(2:61|(9:63|64|65|66|67|68|(4:72|(3:75|76|73)|77|78)|80|(1:82)(2:84|85)))|92|(3:94|(3:97|(3:99|(2:101|(2:103|104)(2:106|107))(3:108|109|111)|105)(3:134|(4:136|137|138|(4:141|142|143|(2:145|146)(1:147)))(1:158)|105)|95)|159)|160|114|(2:116|(3:118|(1:120)(1:122)|121)(1:123))|124|(1:(3:127|128|(2:130|131)))(1:133)|132|128|(0))(1:223)|90|91)(1:237)|234|29|30|(0)(0)|90|91) */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x0223, code lost:
-    
-        if (r7 == null) goto L85;
-     */
+
+       if (r7 == null) goto L85;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:83:0x028f, code lost:
-    
-        if (r3 == false) goto L191;
-     */
+
+       if (r3 == false) goto L191;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:116:0x036d  */
     /* JADX WARN: Removed duplicated region for block: B:126:0x03d8  */
@@ -451,6 +479,9 @@ public final class RuleUpdateForSecurity {
             Method dump skipped, instructions count: 1079
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.asks.RuleUpdateForSecurity.updatePolicy(int, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.asks.RuleUpdateForSecurity.updatePolicy(int,"
+                    + " java.lang.String):boolean");
     }
 }

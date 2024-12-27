@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.x509.DigestInfo;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -57,7 +58,8 @@ public class MacData extends ASN1Object {
         return this.iterationCount;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         v.add(this.digInfo);

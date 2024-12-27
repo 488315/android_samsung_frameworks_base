@@ -3,24 +3,26 @@ package android.media;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes2.dex */
 public final class Rating implements Parcelable {
-    public static final Parcelable.Creator<Rating> CREATOR = new Parcelable.Creator<Rating>() { // from class: android.media.Rating.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Rating createFromParcel(Parcel p) {
-            return new Rating(p.readInt(), p.readFloat());
-        }
+    public static final Parcelable.Creator<Rating> CREATOR =
+            new Parcelable.Creator<Rating>() { // from class: android.media.Rating.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Rating createFromParcel(Parcel p) {
+                    return new Rating(p.readInt(), p.readFloat());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Rating[] newArray(int size) {
-            return new Rating[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Rating[] newArray(int size) {
+                    return new Rating[size];
+                }
+            };
     public static final int RATING_3_STARS = 3;
     public static final int RATING_4_STARS = 4;
     public static final int RATING_5_STARS = 5;
@@ -34,12 +36,10 @@ public final class Rating implements Parcelable {
     private final float mRatingValue;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StarStyle {
-    }
+    public @interface StarStyle {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Style {
-    }
+    public @interface Style {}
 
     private Rating(int ratingStyle, float rating) {
         this.mRatingStyle = ratingStyle;
@@ -47,7 +47,10 @@ public final class Rating implements Parcelable {
     }
 
     public String toString() {
-        return "Rating:style=" + this.mRatingStyle + " rating=" + (this.mRatingValue < 0.0f ? "unrated" : String.valueOf(this.mRatingValue));
+        return "Rating:style="
+                + this.mRatingStyle
+                + " rating="
+                + (this.mRatingValue < 0.0f ? "unrated" : String.valueOf(this.mRatingValue));
     }
 
     @Override // android.os.Parcelable

@@ -6,11 +6,12 @@ import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.InputChannel;
 import android.view.MotionEvent;
-import android.view.inputmethod.ImeTracker;
+
 import com.android.internal.inputmethod.IConnectionlessHandwritingCallback;
 import com.android.internal.inputmethod.IInlineSuggestionsRequestCallback;
 import com.android.internal.inputmethod.IInputMethod;
 import com.android.internal.inputmethod.InlineSuggestionsRequestInfo;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -21,8 +22,7 @@ public interface InputMethod {
     public static final String SERVICE_META_DATA = "android.view.im";
     public static final int SHOW_EXPLICIT = 1;
 
-    @Deprecated
-    public static final int SHOW_FORCED = 2;
+    @Deprecated public static final int SHOW_FORCED = 2;
     public static final String TAG = "InputMethod";
 
     public interface SessionCallback {
@@ -30,8 +30,7 @@ public interface InputMethod {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ShowFlags {
-    }
+    public @interface ShowFlags {}
 
     void attachToken(IBinder iBinder);
 
@@ -59,7 +58,8 @@ public interface InputMethod {
         attachToken(params.token);
     }
 
-    default void onCreateInlineSuggestionsRequest(InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback cb) {
+    default void onCreateInlineSuggestionsRequest(
+            InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback cb) {
         try {
             cb.onInlineSuggestionsUnsupported();
         } catch (RemoteException e) {
@@ -67,7 +67,8 @@ public interface InputMethod {
         }
     }
 
-    default void dispatchStartInput(InputConnection inputConnection, IInputMethod.StartInputParams params) {
+    default void dispatchStartInput(
+            InputConnection inputConnection, IInputMethod.StartInputParams params) {
         if (params.restarting) {
             restartInput(inputConnection, params.editorInfo);
         } else {
@@ -75,47 +76,48 @@ public interface InputMethod {
         }
     }
 
-    default void onNavButtonFlagsChanged(int navButtonFlags) {
-    }
+    default void onNavButtonFlagsChanged(int navButtonFlags) {}
 
-    default void showSoftInputWithToken(int flags, ResultReceiver resultReceiver, IBinder showInputToken, ImeTracker.Token statsToken) {
+    default void showSoftInputWithToken(
+            int flags,
+            ResultReceiver resultReceiver,
+            IBinder showInputToken,
+            ImeTracker.Token statsToken) {
         showSoftInput(flags, resultReceiver);
     }
 
-    default void hideSoftInputWithToken(int flags, ResultReceiver resultReceiver, IBinder hideInputToken, ImeTracker.Token statsToken) {
+    default void hideSoftInputWithToken(
+            int flags,
+            ResultReceiver resultReceiver,
+            IBinder hideInputToken,
+            ImeTracker.Token statsToken) {
         hideSoftInput(flags, resultReceiver);
     }
 
-    default void canStartStylusHandwriting(int requestId, IConnectionlessHandwritingCallback connectionlessCallback, CursorAnchorInfo cursorAnchorInfo, boolean isConnectionlessForDelegation) {
-    }
+    default void canStartStylusHandwriting(
+            int requestId,
+            IConnectionlessHandwritingCallback connectionlessCallback,
+            CursorAnchorInfo cursorAnchorInfo,
+            boolean isConnectionlessForDelegation) {}
 
-    default void updateEditorToolType(int toolType) {
-    }
+    default void updateEditorToolType(int toolType) {}
 
-    default void startStylusHandwriting(int requestId, InputChannel channel, List<MotionEvent> events) {
-    }
+    default void startStylusHandwriting(
+            int requestId, InputChannel channel, List<MotionEvent> events) {}
 
-    default void commitHandwritingDelegationTextIfAvailable() {
-    }
+    default void commitHandwritingDelegationTextIfAvailable() {}
 
-    default void discardHandwritingDelegationText() {
-    }
+    default void discardHandwritingDelegationText() {}
 
-    default void initInkWindow() {
-    }
+    default void initInkWindow() {}
 
-    default void finishStylusHandwriting() {
-    }
+    default void finishStylusHandwriting() {}
 
-    default void removeStylusHandwritingWindow() {
-    }
+    default void removeStylusHandwritingWindow() {}
 
-    default void setStylusWindowIdleTimeoutForTest(long timeout) {
-    }
+    default void setStylusWindowIdleTimeoutForTest(long timeout) {}
 
-    default void minimizeSoftInput(int height) {
-    }
+    default void minimizeSoftInput(int height) {}
 
-    default void unMinimizeSoftInput() {
-    }
+    default void unMinimizeSoftInput() {}
 }

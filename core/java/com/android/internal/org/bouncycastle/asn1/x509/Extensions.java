@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -24,7 +25,8 @@ public class Extensions extends ASN1Object {
         return extensions.getExtension(oid);
     }
 
-    public static ASN1Encodable getExtensionParsedValue(Extensions extensions, ASN1ObjectIdentifier oid) {
+    public static ASN1Encodable getExtensionParsedValue(
+            Extensions extensions, ASN1ObjectIdentifier oid) {
         if (extensions == null) {
             return null;
         }
@@ -86,7 +88,8 @@ public class Extensions extends ASN1Object {
         return null;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector vec = new ASN1EncodableVector(this.ordering.size());
         Enumeration e = this.ordering.elements();

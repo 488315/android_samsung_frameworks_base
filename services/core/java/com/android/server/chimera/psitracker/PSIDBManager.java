@@ -3,6 +3,7 @@ package com.android.server.chimera.psitracker;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.lang.ref.WeakReference;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -19,8 +20,12 @@ public final class PSIDBManager {
             return;
         }
         PSIDBHelper pSIDBHelper = new PSIDBHelper(context, "PSITracker.db", null, 3);
-        pSIDBHelper.CREATE_AVAIL_MEM_TABLE = "create table if not exists psi_Available_Mem(id integer primary key autoincrement,availMem integer, cached integer, running integer,checkTime integer)";
-        pSIDBHelper.DATABASE_UPDATE_TEAM_1 = "ALTER TABLE psi_Available_Mem ADD COLUMN running integer";
+        pSIDBHelper.CREATE_AVAIL_MEM_TABLE =
+                "create table if not exists psi_Available_Mem(id integer primary key"
+                    + " autoincrement,availMem integer, cached integer, running integer,checkTime"
+                    + " integer)";
+        pSIDBHelper.DATABASE_UPDATE_TEAM_1 =
+                "ALTER TABLE psi_Available_Mem ADD COLUMN running integer";
         new WeakReference(context);
         this.mDB = pSIDBHelper.getWritableDatabase();
     }

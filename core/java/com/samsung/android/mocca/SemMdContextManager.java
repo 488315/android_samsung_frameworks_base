@@ -5,8 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
-import com.samsung.android.mocca.IMoccaEventListener;
-import com.samsung.android.mocca.SemMdContextManager;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +16,10 @@ public class SemMdContextManager {
     public static final String CONTEXT_TYPE_ALL = "all-context type";
     public static final String CONTEXT_TYPE_CAR_CRASH = "ccd";
     private static final String TAG = "SemMdContextManager";
-    private HashMap<AvailabilityCallback, MoccaListenerTransport> mAvailabilityCallbacks = new HashMap<>();
-    private HashMap<ContextEventCallback, MoccaListenerTransport> mContextEventCallbacks = new HashMap<>();
+    private HashMap<AvailabilityCallback, MoccaListenerTransport> mAvailabilityCallbacks =
+            new HashMap<>();
+    private HashMap<ContextEventCallback, MoccaListenerTransport> mContextEventCallbacks =
+            new HashMap<>();
     private IMoccaService mService;
 
     public interface AvailabilityCallback {
@@ -63,17 +64,29 @@ public class SemMdContextManager {
         synchronized (this.mAvailabilityCallbacks) {
             try {
                 try {
-                    MoccaListenerTransport transport = this.mAvailabilityCallbacks.computeIfAbsent(callback, new Function() { // from class: com.samsung.android.mocca.SemMdContextManager$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            return SemMdContextManager.lambda$registerAvailabilityCallback$0((SemMdContextManager.AvailabilityCallback) obj);
-                        }
-                    });
+                    MoccaListenerTransport transport =
+                            this.mAvailabilityCallbacks.computeIfAbsent(
+                                    callback,
+                                    new Function() { // from class:
+                                                     // com.samsung.android.mocca.SemMdContextManager$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            return SemMdContextManager
+                                                    .lambda$registerAvailabilityCallback$0(
+                                                            (SemMdContextManager
+                                                                            .AvailabilityCallback)
+                                                                    obj);
+                                        }
+                                    });
                     if (CONTEXT_TYPE_ALL.equals(contextType)) {
                         return this.mService.registerContextAvailabilityListener(transport, null);
                     }
-                    return this.mService.registerContextAvailabilityListener(transport, contextType);
-                } catch (RemoteException | ClassCastException | NullPointerException | UnsupportedOperationException e) {
+                    return this.mService.registerContextAvailabilityListener(
+                            transport, contextType);
+                } catch (RemoteException
+                        | ClassCastException
+                        | NullPointerException
+                        | UnsupportedOperationException e) {
                     Log.e(TAG, "registerAvailabilityCallbackImpl : " + e.getMessage(), e);
                     return false;
                 }
@@ -83,7 +96,8 @@ public class SemMdContextManager {
         }
     }
 
-    static /* synthetic */ MoccaListenerTransport lambda$registerAvailabilityCallback$0(AvailabilityCallback cb) {
+    static /* synthetic */ MoccaListenerTransport lambda$registerAvailabilityCallback$0(
+            AvailabilityCallback cb) {
         return new MoccaListenerTransport(cb, null);
     }
 
@@ -117,7 +131,8 @@ public class SemMdContextManager {
         }
     }
 
-    public boolean registerContextEventCallback(ContextEventCallback callback, String contextType, Bundle param) {
+    public boolean registerContextEventCallback(
+            ContextEventCallback callback, String contextType, Bundle param) {
         if (this.mService == null) {
             Log.e(TAG, "registerContextEventCallback- SemMdContextService is not supported");
             return false;
@@ -132,15 +147,28 @@ public class SemMdContextManager {
         synchronized (this.mContextEventCallbacks) {
             try {
                 try {
-                    MoccaListenerTransport transport = this.mContextEventCallbacks.computeIfAbsent(callback, new Function() { // from class: com.samsung.android.mocca.SemMdContextManager$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            return SemMdContextManager.lambda$registerContextEventCallback$1((SemMdContextManager.ContextEventCallback) obj);
-                        }
-                    });
-                    this.mService.registerContextListener(transport, contextType, param != null ? new ContextParam(param) : null);
+                    MoccaListenerTransport transport =
+                            this.mContextEventCallbacks.computeIfAbsent(
+                                    callback,
+                                    new Function() { // from class:
+                                                     // com.samsung.android.mocca.SemMdContextManager$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            return SemMdContextManager
+                                                    .lambda$registerContextEventCallback$1(
+                                                            (SemMdContextManager
+                                                                            .ContextEventCallback)
+                                                                    obj);
+                                        }
+                                    });
+                    this.mService.registerContextListener(
+                            transport, contextType, param != null ? new ContextParam(param) : null);
                 } catch (RemoteException e) {
-                    Log.e(TAG, "registerContextEventCallback-registerContextListener : " + e.getMessage(), e);
+                    Log.e(
+                            TAG,
+                            "registerContextEventCallback-registerContextListener : "
+                                    + e.getMessage(),
+                            e);
                     return false;
                 }
             } catch (Throwable th) {
@@ -150,7 +178,8 @@ public class SemMdContextManager {
         return true;
     }
 
-    static /* synthetic */ MoccaListenerTransport lambda$registerContextEventCallback$1(ContextEventCallback cb) {
+    static /* synthetic */ MoccaListenerTransport lambda$registerContextEventCallback$1(
+            ContextEventCallback cb) {
         return new MoccaListenerTransport(null, cb);
     }
 
@@ -192,14 +221,18 @@ public class SemMdContextManager {
         private static final int MSG_CONTEXT_UNAVAILABLE = 4;
         private AvailabilityCallback mAvailabilityCallback;
         private ContextEventCallback mContextEventCallback;
-        private final Handler mListenerHandler = new Handler() { // from class: com.samsung.android.mocca.SemMdContextManager.MoccaListenerTransport.1
-            @Override // android.os.Handler
-            public void handleMessage(Message msg) {
-                MoccaListenerTransport.this._handleMessage(msg);
-            }
-        };
+        private final Handler mListenerHandler =
+                new Handler() { // from class:
+                                // com.samsung.android.mocca.SemMdContextManager.MoccaListenerTransport.1
+                    @Override // android.os.Handler
+                    public void handleMessage(Message msg) {
+                        MoccaListenerTransport.this._handleMessage(msg);
+                    }
+                };
 
-        MoccaListenerTransport(AvailabilityCallback availabilityCallback, ContextEventCallback contextEventCallback) {
+        MoccaListenerTransport(
+                AvailabilityCallback availabilityCallback,
+                ContextEventCallback contextEventCallback) {
             this.mAvailabilityCallback = availabilityCallback;
             this.mContextEventCallback = contextEventCallback;
         }
@@ -230,7 +263,8 @@ public class SemMdContextManager {
                 case 1:
                     if (this.mContextEventCallback != null) {
                         ContextEvent evt = (ContextEvent) msg.obj;
-                        this.mContextEventCallback.onContextChanged(new SemMdContextEvent(evt.timestamp, evt.type, evt.data));
+                        this.mContextEventCallback.onContextChanged(
+                                new SemMdContextEvent(evt.timestamp, evt.type, evt.data));
                         break;
                     }
                     break;

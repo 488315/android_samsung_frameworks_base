@@ -3,6 +3,7 @@ package org.apache.http.conn.ssl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import javax.security.auth.x500.X500Principal;
 
 @Deprecated
@@ -30,7 +31,9 @@ final class AndroidDistinguishedNameParser {
         }
         this.beg = this.pos;
         this.pos++;
-        while (this.pos < this.length && this.chars[this.pos] != '=' && this.chars[this.pos] != ' ') {
+        while (this.pos < this.length
+                && this.chars[this.pos] != '='
+                && this.chars[this.pos] != ' ') {
             this.pos++;
         }
         if (this.pos >= this.length) {
@@ -38,7 +41,9 @@ final class AndroidDistinguishedNameParser {
         }
         this.end = this.pos;
         if (this.chars[this.pos] == ' ') {
-            while (this.pos < this.length && this.chars[this.pos] != '=' && this.chars[this.pos] == ' ') {
+            while (this.pos < this.length
+                    && this.chars[this.pos] != '='
+                    && this.chars[this.pos] == ' ') {
                 this.pos++;
             }
             if (this.chars[this.pos] != '=' || this.pos == this.length) {
@@ -49,7 +54,12 @@ final class AndroidDistinguishedNameParser {
         while (this.pos < this.length && this.chars[this.pos] == ' ') {
             this.pos++;
         }
-        if (this.end - this.beg > 4 && this.chars[this.beg + 3] == '.' && ((this.chars[this.beg] == 'O' || this.chars[this.beg] == 'o') && ((this.chars[this.beg + 1] == 'I' || this.chars[this.beg + 1] == 'i') && (this.chars[this.beg + 2] == 'D' || this.chars[this.beg + 2] == 'd')))) {
+        if (this.end - this.beg > 4
+                && this.chars[this.beg + 3] == '.'
+                && ((this.chars[this.beg] == 'O' || this.chars[this.beg] == 'o')
+                        && ((this.chars[this.beg + 1] == 'I' || this.chars[this.beg + 1] == 'i')
+                                && (this.chars[this.beg + 2] == 'D'
+                                        || this.chars[this.beg + 2] == 'd')))) {
             this.beg += 4;
         }
         return new String(this.chars, this.beg, this.end - this.beg);
@@ -85,7 +95,10 @@ final class AndroidDistinguishedNameParser {
         }
         this.beg = this.pos;
         this.pos++;
-        while (this.pos != this.length && this.chars[this.pos] != '+' && this.chars[this.pos] != ',' && this.chars[this.pos] != ';') {
+        while (this.pos != this.length
+                && this.chars[this.pos] != '+'
+                && this.chars[this.pos] != ','
+                && this.chars[this.pos] != ';') {
             if (this.chars[this.pos] == ' ') {
                 this.end = this.pos;
                 this.pos++;
@@ -113,8 +126,7 @@ final class AndroidDistinguishedNameParser {
         }
         this.end = this.pos;
         hexLen = this.end - this.beg;
-        if (hexLen >= 5) {
-        }
+        if (hexLen >= 5) {}
         throw new IllegalStateException("Unexpected end of DN: " + this.dn);
     }
 
@@ -137,7 +149,10 @@ final class AndroidDistinguishedNameParser {
                         cArr2[i2] = ' ';
                         this.pos++;
                     }
-                    if (this.pos != this.length && this.chars[this.pos] != ',' && this.chars[this.pos] != '+' && this.chars[this.pos] != ';') {
+                    if (this.pos != this.length
+                            && this.chars[this.pos] != ','
+                            && this.chars[this.pos] != '+'
+                            && this.chars[this.pos] != ';') {
                         break;
                     } else {
                         return new String(this.chars, this.beg, this.cur - this.beg);
@@ -292,7 +307,9 @@ final class AndroidDistinguishedNameParser {
             if (this.pos >= this.length) {
                 return null;
             }
-            if (this.chars[this.pos] != ',' && this.chars[this.pos] != ';' && this.chars[this.pos] != '+') {
+            if (this.chars[this.pos] != ','
+                    && this.chars[this.pos] != ';'
+                    && this.chars[this.pos] != '+') {
                 throw new IllegalStateException("Malformed DN: " + this.dn);
             }
             this.pos++;
@@ -336,7 +353,9 @@ final class AndroidDistinguishedNameParser {
                 result.add(attValue);
             }
             if (this.pos < this.length) {
-                if (this.chars[this.pos] != ',' && this.chars[this.pos] != ';' && this.chars[this.pos] != '+') {
+                if (this.chars[this.pos] != ','
+                        && this.chars[this.pos] != ';'
+                        && this.chars[this.pos] != '+') {
                     throw new IllegalStateException("Malformed DN: " + this.dn);
                 }
                 this.pos++;

@@ -17,7 +17,11 @@ public final class IntentCreationResult {
         OEM_UI_CONFIG_SPECIFIED_FOUND_BUT_NOT_ENABLED
     }
 
-    private IntentCreationResult(Intent intent, String fallbackUiPackageName, String oemUiPackageName, OemUiUsageStatus oemUiUsageStatus) {
+    private IntentCreationResult(
+            Intent intent,
+            String fallbackUiPackageName,
+            String oemUiPackageName,
+            OemUiUsageStatus oemUiUsageStatus) {
         this.mIntent = intent;
         this.mFallbackUiPackageName = fallbackUiPackageName;
         this.mOemUiPackageName = oemUiPackageName;
@@ -66,7 +70,11 @@ public final class IntentCreationResult {
         }
 
         public IntentCreationResult build() {
-            return new IntentCreationResult(this.mIntent, this.mFallbackUiPackageName, this.mOemUiPackageName, this.mOemUiUsageStatus);
+            return new IntentCreationResult(
+                    this.mIntent,
+                    this.mFallbackUiPackageName,
+                    this.mOemUiPackageName,
+                    this.mOemUiUsageStatus);
         }
     }
 }

@@ -3,6 +3,7 @@ package android.media.tv.tuner;
 import android.annotation.SystemApi;
 import android.media.tv.tuner.filter.Filter;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -18,8 +19,7 @@ public class Descrambler implements AutoCloseable {
     private long mNativeContext;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PidType {
-    }
+    public @interface PidType {}
 
     private native int nativeAddPid(int i, int i2, Filter filter);
 
@@ -29,8 +29,7 @@ public class Descrambler implements AutoCloseable {
 
     private native int nativeSetKeyToken(byte[] bArr);
 
-    private Descrambler() {
-    }
+    private Descrambler() {}
 
     public int addPid(int pidType, int pid, Filter filter) {
         int nativeAddPid;

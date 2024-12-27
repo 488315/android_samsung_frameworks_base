@@ -3,7 +3,9 @@ package com.android.server.timedetector;
 import android.content.Context;
 import android.provider.DeviceConfig;
 import android.util.ArrayMap;
+
 import com.android.server.timezonedetector.StateChangeListener;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,37 +25,42 @@ public final class ServerFlags {
     public static final Object SLOCK = new Object();
 
     public ServerFlags(Context context) {
-        DeviceConfig.addOnPropertiesChangedListener("system_time", context.getMainExecutor(), new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.timedetector.ServerFlags$$ExternalSyntheticLambda0
-            public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                ArrayList arrayList;
-                ServerFlags serverFlags = ServerFlags.this;
-                synchronized (serverFlags.mListeners) {
-                    try {
-                        arrayList = new ArrayList(serverFlags.mListeners.size());
-                        for (Map.Entry entry : serverFlags.mListeners.entrySet()) {
-                            HashSet hashSet = (HashSet) entry.getValue();
-                            Iterator it = properties.getKeyset().iterator();
-                            while (true) {
-                                if (it.hasNext()) {
-                                    if (hashSet.contains((String) it.next())) {
-                                        arrayList.add((StateChangeListener) entry.getKey());
-                                        break;
+        DeviceConfig.addOnPropertiesChangedListener(
+                "system_time",
+                context.getMainExecutor(),
+                new DeviceConfig
+                        .OnPropertiesChangedListener() { // from class:
+                                                         // com.android.server.timedetector.ServerFlags$$ExternalSyntheticLambda0
+                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                        ArrayList arrayList;
+                        ServerFlags serverFlags = ServerFlags.this;
+                        synchronized (serverFlags.mListeners) {
+                            try {
+                                arrayList = new ArrayList(serverFlags.mListeners.size());
+                                for (Map.Entry entry : serverFlags.mListeners.entrySet()) {
+                                    HashSet hashSet = (HashSet) entry.getValue();
+                                    Iterator it = properties.getKeyset().iterator();
+                                    while (true) {
+                                        if (it.hasNext()) {
+                                            if (hashSet.contains((String) it.next())) {
+                                                arrayList.add((StateChangeListener) entry.getKey());
+                                                break;
+                                            }
+                                        } else {
+                                            break;
+                                        }
                                     }
-                                } else {
-                                    break;
                                 }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
+                        Iterator it2 = arrayList.iterator();
+                        while (it2.hasNext()) {
+                            ((StateChangeListener) it2.next()).onChange();
+                        }
                     }
-                }
-                Iterator it2 = arrayList.iterator();
-                while (it2.hasNext()) {
-                    ((StateChangeListener) it2.next()).onChange();
-                }
-            }
-        });
+                });
     }
 
     public static Duration getDurationFromMillis(String str, Duration duration) {

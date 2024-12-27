@@ -1,8 +1,8 @@
 package android.animation;
 
-import android.animation.Keyframes;
 import android.graphics.Path;
 import android.graphics.PointF;
+
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -80,8 +80,7 @@ public class PathKeyframes implements Keyframes {
     }
 
     @Override // android.animation.Keyframes
-    public void setEvaluator(TypeEvaluator evaluator) {
-    }
+    public void setEvaluator(TypeEvaluator evaluator) {}
 
     @Override // android.animation.Keyframes
     public Class getType() {
@@ -152,13 +151,11 @@ public class PathKeyframes implements Keyframes {
         };
     }
 
-    private static abstract class SimpleKeyframes implements Keyframes {
-        private SimpleKeyframes() {
-        }
+    private abstract static class SimpleKeyframes implements Keyframes {
+        private SimpleKeyframes() {}
 
         @Override // android.animation.Keyframes
-        public void setEvaluator(TypeEvaluator evaluator) {
-        }
+        public void setEvaluator(TypeEvaluator evaluator) {}
 
         @Override // android.animation.Keyframes
         public ArrayList<Keyframe> getKeyframes() {
@@ -177,7 +174,8 @@ public class PathKeyframes implements Keyframes {
         }
     }
 
-    static abstract class IntKeyframesBase extends SimpleKeyframes implements Keyframes.IntKeyframes {
+    abstract static class IntKeyframesBase extends SimpleKeyframes
+            implements Keyframes.IntKeyframes {
         IntKeyframesBase() {
             super();
         }
@@ -193,7 +191,8 @@ public class PathKeyframes implements Keyframes {
         }
     }
 
-    static abstract class FloatKeyframesBase extends SimpleKeyframes implements Keyframes.FloatKeyframes {
+    abstract static class FloatKeyframesBase extends SimpleKeyframes
+            implements Keyframes.FloatKeyframes {
         FloatKeyframesBase() {
             super();
         }

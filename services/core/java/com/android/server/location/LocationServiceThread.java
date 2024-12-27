@@ -3,7 +3,9 @@ package com.android.server.location;
 import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.os.Looper;
+
 import com.android.server.ServiceThread;
+
 import java.util.concurrent.Executor;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,7 +18,8 @@ public final class LocationServiceThread extends ServiceThread {
     public static synchronized void ensureThreadLocked() {
         synchronized (LocationServiceThread.class) {
             if (sInstance == null) {
-                LocationServiceThread locationServiceThread = new LocationServiceThread(0, "LocationProviderManagerThread", true);
+                LocationServiceThread locationServiceThread =
+                        new LocationServiceThread(0, "LocationProviderManagerThread", true);
                 sInstance = locationServiceThread;
                 locationServiceThread.start();
                 Looper looper = sInstance.getLooper();

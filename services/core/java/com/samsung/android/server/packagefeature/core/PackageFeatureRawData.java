@@ -1,6 +1,7 @@
 package com.samsung.android.server.packagefeature.core;
 
 import com.samsung.android.server.packagefeature.PackageFeatureData;
+
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Iterator;

@@ -2,7 +2,9 @@ package com.android.server.am.mars.filter.filter;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;
+
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,12 +67,15 @@ public final class AllowListFilter implements IFilter {
     }
 
     public final void setCarrierAllowList() {
-        TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService(TelephonyManager.class);
+        TelephonyManager telephonyManager =
+                (TelephonyManager) this.mContext.getSystemService(TelephonyManager.class);
         if (telephonyManager != null) {
-            List carrierPrivilegedPackagesForAllActiveSubscriptions = telephonyManager.getCarrierPrivilegedPackagesForAllActiveSubscriptions();
+            List carrierPrivilegedPackagesForAllActiveSubscriptions =
+                    telephonyManager.getCarrierPrivilegedPackagesForAllActiveSubscriptions();
             synchronized (this.mCarrierAllowList) {
                 ((ArrayList) this.mCarrierAllowList).clear();
-                ((ArrayList) this.mCarrierAllowList).addAll(carrierPrivilegedPackagesForAllActiveSubscriptions);
+                ((ArrayList) this.mCarrierAllowList)
+                        .addAll(carrierPrivilegedPackagesForAllActiveSubscriptions);
             }
         }
     }

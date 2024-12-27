@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
-import com.android.internal.widget.RecyclerView;
 
 /* loaded from: classes5.dex */
 public class LinearSmoothScroller extends RecyclerView.SmoothScroller {
@@ -27,15 +26,16 @@ public class LinearSmoothScroller extends RecyclerView.SmoothScroller {
     protected int mInterimTargetDy = 0;
 
     public LinearSmoothScroller(Context context) {
-        this.MILLISECONDS_PER_PX = calculateSpeedPerPixel(context.getResources().getDisplayMetrics());
+        this.MILLISECONDS_PER_PX =
+                calculateSpeedPerPixel(context.getResources().getDisplayMetrics());
     }
 
     @Override // com.android.internal.widget.RecyclerView.SmoothScroller
-    protected void onStart() {
-    }
+    protected void onStart() {}
 
     @Override // com.android.internal.widget.RecyclerView.SmoothScroller
-    protected void onTargetFound(View targetView, RecyclerView.State state, RecyclerView.SmoothScroller.Action action) {
+    protected void onTargetFound(
+            View targetView, RecyclerView.State state, RecyclerView.SmoothScroller.Action action) {
         int dx = calculateDxToMakeVisible(targetView, getHorizontalSnapPreference());
         int dy = calculateDyToMakeVisible(targetView, getVerticalSnapPreference());
         int distance = (int) Math.sqrt((dx * dx) + (dy * dy));
@@ -46,7 +46,8 @@ public class LinearSmoothScroller extends RecyclerView.SmoothScroller {
     }
 
     @Override // com.android.internal.widget.RecyclerView.SmoothScroller
-    protected void onSeekTargetStep(int dx, int dy, RecyclerView.State state, RecyclerView.SmoothScroller.Action action) {
+    protected void onSeekTargetStep(
+            int dx, int dy, RecyclerView.State state, RecyclerView.SmoothScroller.Action action) {
         if (getChildCount() == 0) {
             stop();
             return;
@@ -103,7 +104,11 @@ public class LinearSmoothScroller extends RecyclerView.SmoothScroller {
             this.mInterimTargetDx = (int) (scrollVector.x * 10000.0f);
             this.mInterimTargetDy = (int) (scrollVector.y * 10000.0f);
             int time = calculateTimeForScrolling(10000);
-            action.update((int) (this.mInterimTargetDx * 1.2f), (int) (this.mInterimTargetDy * 1.2f), (int) (time * 1.2f), this.mLinearInterpolator);
+            action.update(
+                    (int) (this.mInterimTargetDx * 1.2f),
+                    (int) (this.mInterimTargetDy * 1.2f),
+                    (int) (time * 1.2f),
+                    this.mLinearInterpolator);
         }
     }
 
@@ -115,7 +120,8 @@ public class LinearSmoothScroller extends RecyclerView.SmoothScroller {
         return tmpDt2;
     }
 
-    public int calculateDtToFit(int viewStart, int viewEnd, int boxStart, int boxEnd, int snapPreference) {
+    public int calculateDtToFit(
+            int viewStart, int viewEnd, int boxStart, int boxEnd, int snapPreference) {
         switch (snapPreference) {
             case -1:
                 return boxStart - viewStart;
@@ -132,7 +138,9 @@ public class LinearSmoothScroller extends RecyclerView.SmoothScroller {
             case 1:
                 return boxEnd - viewEnd;
             default:
-                throw new IllegalArgumentException("snap preference should be one of the constants defined in SmoothScroller, starting with SNAP_");
+                throw new IllegalArgumentException(
+                        "snap preference should be one of the constants defined in SmoothScroller,"
+                            + " starting with SNAP_");
         }
     }
 
@@ -165,9 +173,15 @@ public class LinearSmoothScroller extends RecyclerView.SmoothScroller {
     public PointF computeScrollVectorForPosition(int targetPosition) {
         Object layoutManager = getLayoutManager();
         if (layoutManager instanceof RecyclerView.SmoothScroller.ScrollVectorProvider) {
-            return ((RecyclerView.SmoothScroller.ScrollVectorProvider) layoutManager).computeScrollVectorForPosition(targetPosition);
+            return ((RecyclerView.SmoothScroller.ScrollVectorProvider) layoutManager)
+                    .computeScrollVectorForPosition(targetPosition);
         }
-        Log.w(TAG, "You should override computeScrollVectorForPosition when the LayoutManager does not implement " + RecyclerView.SmoothScroller.ScrollVectorProvider.class.getCanonicalName());
+        Log.w(
+                TAG,
+                "You should override computeScrollVectorForPosition when the LayoutManager does not"
+                    + " implement "
+                        + RecyclerView.SmoothScroller.ScrollVectorProvider.class
+                                .getCanonicalName());
         return null;
     }
 }

@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CellIdentityCdma implements Parcelable {
-    public static final Parcelable.Creator<CellIdentityCdma> CREATOR = new Parcelable.Creator<CellIdentityCdma>() { // from class: android.hardware.radio.network.CellIdentityCdma.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityCdma createFromParcel(Parcel _aidl_source) {
-            CellIdentityCdma _aidl_out = new CellIdentityCdma();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CellIdentityCdma> CREATOR =
+            new Parcelable.Creator<CellIdentityCdma>() { // from class:
+                // android.hardware.radio.network.CellIdentityCdma.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityCdma createFromParcel(Parcel _aidl_source) {
+                    CellIdentityCdma _aidl_out = new CellIdentityCdma();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityCdma[] newArray(int _aidl_size) {
-            return new CellIdentityCdma[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityCdma[] newArray(int _aidl_size) {
+                    return new CellIdentityCdma[_aidl_size];
+                }
+            };
     public OperatorInfo operatorNames;
     public int networkId = 0;
     public int systemId = 0;
@@ -104,7 +107,8 @@ public class CellIdentityCdma implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.operatorNames = (OperatorInfo) _aidl_parcel.readTypedObject(OperatorInfo.CREATOR);
+                this.operatorNames =
+                        (OperatorInfo) _aidl_parcel.readTypedObject(OperatorInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

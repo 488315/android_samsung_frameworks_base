@@ -2,6 +2,7 @@ package android.hardware.fingerprint;
 
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -18,18 +19,26 @@ public class FingerprintSensorProperties extends SensorProperties {
     final int mSensorType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SensorType {
-    }
+    public @interface SensorType {}
 
-    public static FingerprintSensorProperties from(FingerprintSensorPropertiesInternal internalProp) {
+    public static FingerprintSensorProperties from(
+            FingerprintSensorPropertiesInternal internalProp) {
         List<SensorProperties.ComponentInfo> componentInfo = new ArrayList<>();
         for (ComponentInfoInternal internalComp : internalProp.componentInfo) {
             componentInfo.add(SensorProperties.ComponentInfo.from(internalComp));
         }
-        return new FingerprintSensorProperties(internalProp.sensorId, internalProp.sensorStrength, componentInfo, internalProp.sensorType);
+        return new FingerprintSensorProperties(
+                internalProp.sensorId,
+                internalProp.sensorStrength,
+                componentInfo,
+                internalProp.sensorType);
     }
 
-    public FingerprintSensorProperties(int sensorId, int sensorStrength, List<SensorProperties.ComponentInfo> componentInfo, int sensorType) {
+    public FingerprintSensorProperties(
+            int sensorId,
+            int sensorStrength,
+            List<SensorProperties.ComponentInfo> componentInfo,
+            int sensorType) {
         super(sensorId, sensorStrength, componentInfo);
         this.mSensorType = sensorType;
     }

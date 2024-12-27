@@ -2,7 +2,6 @@ package android.os.health;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.health.HealthKeys;
 import android.util.ArrayMap;
 
 /* loaded from: classes3.dex */
@@ -148,7 +147,8 @@ public class HealthStatsWriter {
         return count;
     }
 
-    private static void writeHealthStatsWriterMap(Parcel out, ArrayMap<String, HealthStatsWriter> map) {
+    private static void writeHealthStatsWriterMap(
+            Parcel out, ArrayMap<String, HealthStatsWriter> map) {
         int N = map.size();
         out.writeInt(N);
         for (int i = 0; i < N; i++) {
@@ -157,7 +157,8 @@ public class HealthStatsWriter {
         }
     }
 
-    private static <T extends Parcelable> void writeParcelableMap(Parcel out, ArrayMap<String, T> map) {
+    private static <T extends Parcelable> void writeParcelableMap(
+            Parcel out, ArrayMap<String, T> map) {
         int N = map.size();
         out.writeInt(N);
         for (int i = 0; i < N; i++) {

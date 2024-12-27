@@ -1,6 +1,7 @@
 package com.android.server.backup.utils;
 
 import com.android.server.backup.BackupPasswordManager;
+
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -12,7 +13,8 @@ public final class DataStreamFileCodec {
     public final BackupPasswordManager.PasswordHashFileCodec mCodec;
     public final File mFile;
 
-    public DataStreamFileCodec(File file, BackupPasswordManager.PasswordHashFileCodec passwordHashFileCodec) {
+    public DataStreamFileCodec(
+            File file, BackupPasswordManager.PasswordHashFileCodec passwordHashFileCodec) {
         this.mFile = file;
         this.mCodec = passwordHashFileCodec;
     }
@@ -26,7 +28,8 @@ public final class DataStreamFileCodec {
                 try {
                     switch (this.mCodec.$r8$classId) {
                         case 0:
-                            BackupPasswordManager.BackupPasswordHash backupPasswordHash = (BackupPasswordManager.BackupPasswordHash) obj;
+                            BackupPasswordManager.BackupPasswordHash backupPasswordHash =
+                                    (BackupPasswordManager.BackupPasswordHash) obj;
                             dataOutputStream.writeInt(backupPasswordHash.salt.length);
                             dataOutputStream.write(backupPasswordHash.salt);
                             dataOutputStream.writeUTF(backupPasswordHash.hash);

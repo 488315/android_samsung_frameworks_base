@@ -8,19 +8,23 @@ import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import android.util.Slog;
+
 import com.android.internal.pm.parsing.IPackageCacher;
 import com.android.internal.pm.parsing.PackageParser2;
 import com.android.internal.pm.parsing.pkg.PackageImpl;
 import com.android.internal.pm.parsing.pkg.ParsedPackage;
 import com.android.internal.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.server.pm.ApexManager;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.server.pm.install.PackageCacherUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -38,7 +42,8 @@ public final class PackageCacher implements IPackageCacher {
         return fromCacheEntryStatic(bArr, null);
     }
 
-    public static ParsedPackage fromCacheEntryStatic(byte[] bArr, ParsingPackageUtils.Callback callback) {
+    public static ParsedPackage fromCacheEntryStatic(
+            byte[] bArr, ParsingPackageUtils.Callback callback) {
         Parcel obtain = Parcel.obtain();
         obtain.unmarshall(bArr, 0, bArr.length);
         obtain.setDataPosition(0);
@@ -58,12 +63,15 @@ public final class PackageCacher implements IPackageCacher {
             if (file.toPath().startsWith(Environment.getApexDirectory().toPath())) {
                 File backingApexFile = ApexManager.getInstance().getBackingApexFile(file);
                 if (backingApexFile == null) {
-                    Slog.w("PackageCacher", "Failed to find APEX file backing " + file.getAbsolutePath());
+                    Slog.w(
+                            "PackageCacher",
+                            "Failed to find APEX file backing " + file.getAbsolutePath());
                 } else {
                     file = backingApexFile;
                 }
             }
-            return Os.stat(file.getAbsolutePath()).st_mtime < Os.stat(file2.getAbsolutePath()).st_mtime;
+            return Os.stat(file.getAbsolutePath()).st_mtime
+                    < Os.stat(file2.getAbsolutePath()).st_mtime;
         } catch (ErrnoException e) {
             if (e.errno != OsConstants.ENOENT) {
                 Slog.w("Error while stating package cache : ", e);
@@ -74,7 +82,8 @@ public final class PackageCacher implements IPackageCacher {
 
     public static byte[] toCacheEntryStatic(ParsedPackage parsedPackage) {
         Parcel obtain = Parcel.obtain();
-        PackageParserCacheHelper.WriteHelper writeHelper = new PackageParserCacheHelper.WriteHelper(obtain);
+        PackageParserCacheHelper.WriteHelper writeHelper =
+                new PackageParserCacheHelper.WriteHelper(obtain);
         ((PackageImpl) parsedPackage).writeToParcel(obtain, 0);
         writeHelper.finishAndUninstall();
         byte[] marshall = obtain.marshall();
@@ -118,12 +127,16 @@ public final class PackageCacher implements IPackageCacher {
 
     public final void cleanCachedResult(File file) {
         final String name = file.getName();
-        for (File file2 : FileUtils.listFilesOrEmpty(this.mCacheDir, new FilenameFilter() { // from class: com.android.server.pm.parsing.PackageCacher$$ExternalSyntheticLambda0
-            @Override // java.io.FilenameFilter
-            public final boolean accept(File file3, String str) {
-                return str.startsWith(name);
-            }
-        })) {
+        for (File file2 :
+                FileUtils.listFilesOrEmpty(
+                        this.mCacheDir,
+                        new FilenameFilter() { // from class:
+                                               // com.android.server.pm.parsing.PackageCacher$$ExternalSyntheticLambda0
+                            @Override // java.io.FilenameFilter
+                            public final boolean accept(File file3, String str) {
+                                return str.startsWith(name);
+                            }
+                        })) {
             if (!file2.delete()) {
                 Slog.e("PackageCacher", "Unable to clean cache file: " + file2);
             }
@@ -140,7 +153,8 @@ public final class PackageCacher implements IPackageCacher {
             if (!isCacheUpToDate(file, file2)) {
                 return null;
             }
-            ParsedPackage fromCacheEntry = fromCacheEntry(IoUtils.readFileAsByteArray(file2.getAbsolutePath()));
+            ParsedPackage fromCacheEntry =
+                    fromCacheEntry(IoUtils.readFileAsByteArray(file2.getAbsolutePath()));
             if (file.getAbsolutePath().equals(fromCacheEntry.getPath())) {
                 return fromCacheEntry;
             }

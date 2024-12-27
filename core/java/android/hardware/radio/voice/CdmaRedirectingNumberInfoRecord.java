@@ -3,26 +3,30 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaRedirectingNumberInfoRecord implements Parcelable {
-    public static final Parcelable.Creator<CdmaRedirectingNumberInfoRecord> CREATOR = new Parcelable.Creator<CdmaRedirectingNumberInfoRecord>() { // from class: android.hardware.radio.voice.CdmaRedirectingNumberInfoRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaRedirectingNumberInfoRecord createFromParcel(Parcel _aidl_source) {
-            CdmaRedirectingNumberInfoRecord _aidl_out = new CdmaRedirectingNumberInfoRecord();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaRedirectingNumberInfoRecord> CREATOR =
+            new Parcelable.Creator<CdmaRedirectingNumberInfoRecord>() { // from class:
+                // android.hardware.radio.voice.CdmaRedirectingNumberInfoRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaRedirectingNumberInfoRecord createFromParcel(Parcel _aidl_source) {
+                    CdmaRedirectingNumberInfoRecord _aidl_out =
+                            new CdmaRedirectingNumberInfoRecord();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaRedirectingNumberInfoRecord[] newArray(int _aidl_size) {
-            return new CdmaRedirectingNumberInfoRecord[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaRedirectingNumberInfoRecord[] newArray(int _aidl_size) {
+                    return new CdmaRedirectingNumberInfoRecord[_aidl_size];
+                }
+            };
     public static final int REDIRECTING_REASON_CALLED_DTE_OUT_OF_ORDER = 9;
     public static final int REDIRECTING_REASON_CALL_FORWARDING_BUSY = 1;
     public static final int REDIRECTING_REASON_CALL_FORWARDING_BY_THE_CALLED_DTE = 10;
@@ -64,7 +68,9 @@ public class CdmaRedirectingNumberInfoRecord implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.redirectingNumber = (CdmaNumberInfoRecord) _aidl_parcel.readTypedObject(CdmaNumberInfoRecord.CREATOR);
+            this.redirectingNumber =
+                    (CdmaNumberInfoRecord)
+                            _aidl_parcel.readTypedObject(CdmaNumberInfoRecord.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

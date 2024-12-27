@@ -18,7 +18,13 @@ public class DrmInfo {
         this.mMimeType = mimeType;
         this.mData = data;
         if (!isValid()) {
-            String msg = "infoType: " + infoType + ",mimeType: " + mimeType + ",data: " + Arrays.toString(data);
+            String msg =
+                    "infoType: "
+                            + infoType
+                            + ",mimeType: "
+                            + mimeType
+                            + ",data: "
+                            + Arrays.toString(data);
             throw new IllegalArgumentException(msg);
         }
     }
@@ -32,7 +38,13 @@ public class DrmInfo {
             this.mData = null;
         }
         if (!isValid()) {
-            String str = "infoType: " + infoType + ",mimeType: " + mimeType + ",data: " + Arrays.toString(this.mData);
+            String str =
+                    "infoType: "
+                            + infoType
+                            + ",mimeType: "
+                            + mimeType
+                            + ",data: "
+                            + Arrays.toString(this.mData);
             throw new IllegalArgumentException();
         }
     }
@@ -66,6 +78,12 @@ public class DrmInfo {
     }
 
     boolean isValid() {
-        return (this.mMimeType == null || this.mMimeType.equals("") || this.mData == null || this.mData.length <= 0 || !DrmInfoRequest.isValidType(this.mInfoType)) ? false : true;
+        return (this.mMimeType == null
+                        || this.mMimeType.equals("")
+                        || this.mData == null
+                        || this.mData.length <= 0
+                        || !DrmInfoRequest.isValidType(this.mInfoType))
+                ? false
+                : true;
     }
 }

@@ -2,7 +2,6 @@ package android.hardware.devicestate;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.hardware.devicestate.IDeviceStateManagerCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -22,7 +21,8 @@ public interface IDeviceStateManager extends IInterface {
 
     void onStateRequestOverlayDismissed(boolean z) throws RemoteException;
 
-    void registerCallback(IDeviceStateManagerCallback iDeviceStateManagerCallback) throws RemoteException;
+    void registerCallback(IDeviceStateManagerCallback iDeviceStateManagerCallback)
+            throws RemoteException;
 
     void requestBaseStateOverride(IBinder iBinder, int i, int i2) throws RemoteException;
 
@@ -35,28 +35,24 @@ public interface IDeviceStateManager extends IInterface {
         }
 
         @Override // android.hardware.devicestate.IDeviceStateManager
-        public void registerCallback(IDeviceStateManagerCallback callback) throws RemoteException {
-        }
+        public void registerCallback(IDeviceStateManagerCallback callback) throws RemoteException {}
 
         @Override // android.hardware.devicestate.IDeviceStateManager
-        public void requestState(IBinder token, int state, int flags) throws RemoteException {
-        }
+        public void requestState(IBinder token, int state, int flags) throws RemoteException {}
 
         @Override // android.hardware.devicestate.IDeviceStateManager
-        public void cancelStateRequest() throws RemoteException {
-        }
+        public void cancelStateRequest() throws RemoteException {}
 
         @Override // android.hardware.devicestate.IDeviceStateManager
-        public void requestBaseStateOverride(IBinder token, int state, int flags) throws RemoteException {
-        }
+        public void requestBaseStateOverride(IBinder token, int state, int flags)
+                throws RemoteException {}
 
         @Override // android.hardware.devicestate.IDeviceStateManager
-        public void cancelBaseStateOverride() throws RemoteException {
-        }
+        public void cancelBaseStateOverride() throws RemoteException {}
 
         @Override // android.hardware.devicestate.IDeviceStateManager
-        public void onStateRequestOverlayDismissed(boolean shouldCancelRequest) throws RemoteException {
-        }
+        public void onStateRequestOverlayDismissed(boolean shouldCancelRequest)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -64,7 +60,7 @@ public interface IDeviceStateManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceStateManager {
+    public abstract static class Stub extends Binder implements IDeviceStateManager {
         static final int TRANSACTION_cancelBaseStateOverride = 6;
         static final int TRANSACTION_cancelStateRequest = 4;
         static final int TRANSACTION_getDeviceStateInfo = 1;
@@ -84,7 +80,9 @@ public interface IDeviceStateManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IDeviceStateManager asInterface(IBinder obj) {
@@ -130,7 +128,8 @@ public interface IDeviceStateManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDeviceStateManager.DESCRIPTOR);
             }
@@ -146,7 +145,8 @@ public interface IDeviceStateManager extends IInterface {
                     return true;
                 case 2:
                     IBinder _arg0 = data.readStrongBinder();
-                    IDeviceStateManagerCallback _arg02 = IDeviceStateManagerCallback.Stub.asInterface(_arg0);
+                    IDeviceStateManagerCallback _arg02 =
+                            IDeviceStateManagerCallback.Stub.asInterface(_arg0);
                     data.enforceNoDataAvail();
                     registerCallback(_arg02);
                     reply.writeNoException();
@@ -210,7 +210,8 @@ public interface IDeviceStateManager extends IInterface {
                     _data.writeInterfaceToken(IDeviceStateManager.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    DeviceStateInfo _result = (DeviceStateInfo) _reply.readTypedObject(DeviceStateInfo.CREATOR);
+                    DeviceStateInfo _result =
+                            (DeviceStateInfo) _reply.readTypedObject(DeviceStateInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -219,7 +220,8 @@ public interface IDeviceStateManager extends IInterface {
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
-            public void registerCallback(IDeviceStateManagerCallback callback) throws RemoteException {
+            public void registerCallback(IDeviceStateManagerCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -265,7 +267,8 @@ public interface IDeviceStateManager extends IInterface {
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
-            public void requestBaseStateOverride(IBinder token, int state, int flags) throws RemoteException {
+            public void requestBaseStateOverride(IBinder token, int state, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -296,7 +299,8 @@ public interface IDeviceStateManager extends IInterface {
             }
 
             @Override // android.hardware.devicestate.IDeviceStateManager
-            public void onStateRequestOverlayDismissed(boolean shouldCancelRequest) throws RemoteException {
+            public void onStateRequestOverlayDismissed(boolean shouldCancelRequest)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -312,7 +316,8 @@ public interface IDeviceStateManager extends IInterface {
         }
 
         protected void onStateRequestOverlayDismissed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DEVICE_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DEVICE_STATE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

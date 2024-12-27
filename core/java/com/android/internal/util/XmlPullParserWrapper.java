@@ -1,11 +1,12 @@
 package com.android.internal.util;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class XmlPullParserWrapper implements XmlPullParser {
@@ -41,7 +42,8 @@ public class XmlPullParserWrapper implements XmlPullParser {
     }
 
     @Override // org.xmlpull.v1.XmlPullParser
-    public void setInput(InputStream inputStream, String inputEncoding) throws XmlPullParserException {
+    public void setInput(InputStream inputStream, String inputEncoding)
+            throws XmlPullParserException {
         this.mWrapped.setInput(inputStream, inputEncoding);
     }
 
@@ -51,7 +53,8 @@ public class XmlPullParserWrapper implements XmlPullParser {
     }
 
     @Override // org.xmlpull.v1.XmlPullParser
-    public void defineEntityReplacementText(String entityName, String replacementText) throws XmlPullParserException {
+    public void defineEntityReplacementText(String entityName, String replacementText)
+            throws XmlPullParserException {
         this.mWrapped.defineEntityReplacementText(entityName, replacementText);
     }
 
@@ -186,7 +189,8 @@ public class XmlPullParserWrapper implements XmlPullParser {
     }
 
     @Override // org.xmlpull.v1.XmlPullParser
-    public void require(int type, String namespace, String name) throws XmlPullParserException, IOException {
+    public void require(int type, String namespace, String name)
+            throws XmlPullParserException, IOException {
         this.mWrapped.require(type, namespace, name);
     }
 

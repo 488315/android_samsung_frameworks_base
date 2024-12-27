@@ -7,25 +7,30 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.SurfaceControl;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class PictureInPictureSurfaceTransaction implements Parcelable {
-    public static final Parcelable.Creator<PictureInPictureSurfaceTransaction> CREATOR = new Parcelable.Creator<PictureInPictureSurfaceTransaction>() { // from class: android.window.PictureInPictureSurfaceTransaction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PictureInPictureSurfaceTransaction createFromParcel(Parcel in) {
-            return new PictureInPictureSurfaceTransaction(in);
-        }
+    public static final Parcelable.Creator<PictureInPictureSurfaceTransaction> CREATOR =
+            new Parcelable.Creator<
+                    PictureInPictureSurfaceTransaction>() { // from class:
+                                                            // android.window.PictureInPictureSurfaceTransaction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PictureInPictureSurfaceTransaction createFromParcel(Parcel in) {
+                    return new PictureInPictureSurfaceTransaction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PictureInPictureSurfaceTransaction[] newArray(int size) {
-            return new PictureInPictureSurfaceTransaction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PictureInPictureSurfaceTransaction[] newArray(int size) {
+                    return new PictureInPictureSurfaceTransaction[size];
+                }
+            };
     private static final float NOT_SET = -1.0f;
     public final float mAlpha;
     public final float mCornerRadius;
@@ -48,7 +53,14 @@ public final class PictureInPictureSurfaceTransaction implements Parcelable {
         this.mShouldDisableCanAffectSystemUiFlags = in.readBoolean();
     }
 
-    private PictureInPictureSurfaceTransaction(float alpha, PointF position, float[] float9, float rotation, float cornerRadius, float shadowRadius, Rect windowCrop) {
+    private PictureInPictureSurfaceTransaction(
+            float alpha,
+            PointF position,
+            float[] float9,
+            float rotation,
+            float cornerRadius,
+            float shadowRadius,
+            Rect windowCrop) {
         this.mAlpha = alpha;
         this.mPosition = position;
         if (float9 == null) {
@@ -65,7 +77,14 @@ public final class PictureInPictureSurfaceTransaction implements Parcelable {
     }
 
     public PictureInPictureSurfaceTransaction(PictureInPictureSurfaceTransaction other) {
-        this(other.mAlpha, other.mPosition, other.mFloat9, other.mRotation, other.mCornerRadius, other.mShadowRadius, other.mWindowCrop);
+        this(
+                other.mAlpha,
+                other.mPosition,
+                other.mFloat9,
+                other.mRotation,
+                other.mCornerRadius,
+                other.mShadowRadius,
+                other.mWindowCrop);
         this.mShouldDisableCanAffectSystemUiFlags = other.mShouldDisableCanAffectSystemUiFlags;
     }
 
@@ -99,11 +118,29 @@ public final class PictureInPictureSurfaceTransaction implements Parcelable {
             return false;
         }
         PictureInPictureSurfaceTransaction that = (PictureInPictureSurfaceTransaction) o;
-        return Objects.equals(Float.valueOf(this.mAlpha), Float.valueOf(that.mAlpha)) && Objects.equals(this.mPosition, that.mPosition) && Arrays.equals(this.mFloat9, that.mFloat9) && Objects.equals(Float.valueOf(this.mRotation), Float.valueOf(that.mRotation)) && Objects.equals(Float.valueOf(this.mCornerRadius), Float.valueOf(that.mCornerRadius)) && Objects.equals(Float.valueOf(this.mShadowRadius), Float.valueOf(that.mShadowRadius)) && Objects.equals(this.mWindowCrop, that.mWindowCrop) && this.mShouldDisableCanAffectSystemUiFlags == that.mShouldDisableCanAffectSystemUiFlags;
+        return Objects.equals(Float.valueOf(this.mAlpha), Float.valueOf(that.mAlpha))
+                && Objects.equals(this.mPosition, that.mPosition)
+                && Arrays.equals(this.mFloat9, that.mFloat9)
+                && Objects.equals(Float.valueOf(this.mRotation), Float.valueOf(that.mRotation))
+                && Objects.equals(
+                        Float.valueOf(this.mCornerRadius), Float.valueOf(that.mCornerRadius))
+                && Objects.equals(
+                        Float.valueOf(this.mShadowRadius), Float.valueOf(that.mShadowRadius))
+                && Objects.equals(this.mWindowCrop, that.mWindowCrop)
+                && this.mShouldDisableCanAffectSystemUiFlags
+                        == that.mShouldDisableCanAffectSystemUiFlags;
     }
 
     public int hashCode() {
-        return Objects.hash(Float.valueOf(this.mAlpha), this.mPosition, Integer.valueOf(Arrays.hashCode(this.mFloat9)), Float.valueOf(this.mRotation), Float.valueOf(this.mCornerRadius), Float.valueOf(this.mShadowRadius), this.mWindowCrop, Boolean.valueOf(this.mShouldDisableCanAffectSystemUiFlags));
+        return Objects.hash(
+                Float.valueOf(this.mAlpha),
+                this.mPosition,
+                Integer.valueOf(Arrays.hashCode(this.mFloat9)),
+                Float.valueOf(this.mRotation),
+                Float.valueOf(this.mCornerRadius),
+                Float.valueOf(this.mShadowRadius),
+                this.mWindowCrop,
+                Boolean.valueOf(this.mShouldDisableCanAffectSystemUiFlags));
     }
 
     @Override // android.os.Parcelable
@@ -125,23 +162,51 @@ public final class PictureInPictureSurfaceTransaction implements Parcelable {
 
     public String toString() {
         Matrix matrix = getMatrix();
-        return "PictureInPictureSurfaceTransaction( alpha=" + this.mAlpha + " position=" + this.mPosition + " matrix=" + matrix.toShortString() + " rotation=" + this.mRotation + " cornerRadius=" + this.mCornerRadius + " shadowRadius=" + this.mShadowRadius + " crop=" + this.mWindowCrop + " shouldDisableCanAffectSystemUiFlags" + this.mShouldDisableCanAffectSystemUiFlags + NavigationBarInflaterView.KEY_CODE_END;
+        return "PictureInPictureSurfaceTransaction( alpha="
+                + this.mAlpha
+                + " position="
+                + this.mPosition
+                + " matrix="
+                + matrix.toShortString()
+                + " rotation="
+                + this.mRotation
+                + " cornerRadius="
+                + this.mCornerRadius
+                + " shadowRadius="
+                + this.mShadowRadius
+                + " crop="
+                + this.mWindowCrop
+                + " shouldDisableCanAffectSystemUiFlags"
+                + this.mShouldDisableCanAffectSystemUiFlags
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
-    public static void apply(PictureInPictureSurfaceTransaction surfaceTransaction, SurfaceControl surfaceControl, SurfaceControl.Transaction tx) {
+    public static void apply(
+            PictureInPictureSurfaceTransaction surfaceTransaction,
+            SurfaceControl surfaceControl,
+            SurfaceControl.Transaction tx) {
         Matrix matrix = surfaceTransaction.getMatrix();
         tx.setMatrix(surfaceControl, matrix, new float[9]);
         if (surfaceTransaction.mPosition != null) {
-            tx.setPosition(surfaceControl, surfaceTransaction.mPosition.x, surfaceTransaction.mPosition.y);
+            tx.setPosition(
+                    surfaceControl, surfaceTransaction.mPosition.x, surfaceTransaction.mPosition.y);
         }
         if (surfaceTransaction.mWindowCrop != null) {
             tx.setWindowCrop(surfaceControl, surfaceTransaction.mWindowCrop);
         }
         if (surfaceTransaction.hasCornerRadiusSet()) {
-            tx.setCornerRadius(surfaceControl, CoreRune.MW_PIP_DISABLE_ROUNDED_CORNER ? 0.0f : surfaceTransaction.mCornerRadius);
+            tx.setCornerRadius(
+                    surfaceControl,
+                    CoreRune.MW_PIP_DISABLE_ROUNDED_CORNER
+                            ? 0.0f
+                            : surfaceTransaction.mCornerRadius);
         }
         if (surfaceTransaction.hasShadowRadiusSet()) {
-            tx.setShadowRadius(surfaceControl, CoreRune.MW_PIP_DISABLE_ROUNDED_CORNER ? 0.0f : surfaceTransaction.mShadowRadius);
+            tx.setShadowRadius(
+                    surfaceControl,
+                    CoreRune.MW_PIP_DISABLE_ROUNDED_CORNER
+                            ? 0.0f
+                            : surfaceTransaction.mShadowRadius);
         }
         if (surfaceTransaction.mAlpha != -1.0f) {
             tx.setAlpha(surfaceControl, surfaceTransaction.mAlpha);
@@ -189,7 +254,14 @@ public final class PictureInPictureSurfaceTransaction implements Parcelable {
         }
 
         public PictureInPictureSurfaceTransaction build() {
-            return new PictureInPictureSurfaceTransaction(this.mAlpha, this.mPosition, this.mFloat9, this.mRotation, this.mCornerRadius, this.mShadowRadius, this.mWindowCrop);
+            return new PictureInPictureSurfaceTransaction(
+                    this.mAlpha,
+                    this.mPosition,
+                    this.mFloat9,
+                    this.mRotation,
+                    this.mCornerRadius,
+                    this.mShadowRadius,
+                    this.mWindowCrop);
         }
     }
 }

@@ -23,11 +23,11 @@ import android.util.SparseBooleanArray;
 import android.util.SparseLongArray;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.FrameworkStatsLog;
-import com.android.server.am.AppRestrictionController;
-import com.android.server.am.BaseAppStateTracker;
 import com.android.server.pm.UserManagerInternal;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -93,40 +93,70 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         public final SparseLongArray mLastInteractionTime;
         public final Object mLock;
 
-        public AppBatteryPolicy(BaseAppStateTracker.Injector injector, AppBatteryTracker appBatteryTracker) {
-            super(injector, appBatteryTracker, "bg_current_drain_monitor_enabled", appBatteryTracker.mContext.getResources().getBoolean(R.bool.config_biometricFrrNotificationEnabled));
+        public AppBatteryPolicy(
+                BaseAppStateTracker.Injector injector, AppBatteryTracker appBatteryTracker) {
+            super(
+                    injector,
+                    appBatteryTracker,
+                    "bg_current_drain_monitor_enabled",
+                    appBatteryTracker
+                            .mContext
+                            .getResources()
+                            .getBoolean(R.bool.config_biometricFrrNotificationEnabled));
             this.mBgCurrentDrainRestrictedBucketThreshold = new float[2];
             this.mBgCurrentDrainBgRestrictedThreshold = new float[2];
             this.mHighBgBatteryPackages = new SparseArray();
             this.mLastInteractionTime = new SparseLongArray();
             this.mLock = appBatteryTracker.mLock;
             Resources resources = appBatteryTracker.mContext.getResources();
-            float[] floatArray = getFloatArray(resources.obtainTypedArray(R.array.config_primaryCredentialProviderService));
+            float[] floatArray =
+                    getFloatArray(
+                            resources.obtainTypedArray(
+                                    R.array.config_primaryCredentialProviderService));
             float f = ActivityManager.isLowRamDeviceStatic() ? floatArray[1] : floatArray[0];
             this.mDefaultBgCurrentDrainRestrictedBucket = f;
-            float[] floatArray2 = getFloatArray(resources.obtainTypedArray(R.array.config_perDeviceStateRotationLockDefaults));
+            float[] floatArray2 =
+                    getFloatArray(
+                            resources.obtainTypedArray(
+                                    R.array.config_perDeviceStateRotationLockDefaults));
             float f2 = ActivityManager.isLowRamDeviceStatic() ? floatArray2[1] : floatArray2[0];
             this.mDefaultBgCurrentDrainBgRestrictedThreshold = f2;
             long integer = resources.getInteger(R.integer.config_datause_throttle_kbitsps) * 1000;
             this.mDefaultBgCurrentDrainWindowMs = integer;
             this.mDefaultBgCurrentDrainInteractionGracePeriodMs = integer;
-            float[] floatArray3 = getFloatArray(resources.obtainTypedArray(R.array.config_packagesExemptFromSuspension));
+            float[] floatArray3 =
+                    getFloatArray(
+                            resources.obtainTypedArray(
+                                    R.array.config_packagesExemptFromSuspension));
             float f3 = ActivityManager.isLowRamDeviceStatic() ? floatArray3[1] : floatArray3[0];
             this.mDefaultBgCurrentDrainRestrictedBucketHighThreshold = f3;
-            float[] floatArray4 = getFloatArray(resources.obtainTypedArray(R.array.config_openDeviceStates));
+            float[] floatArray4 =
+                    getFloatArray(resources.obtainTypedArray(R.array.config_openDeviceStates));
             float f4 = ActivityManager.isLowRamDeviceStatic() ? floatArray4[1] : floatArray4[0];
             this.mDefaultBgCurrentDrainBgRestrictedHighThreshold = f4;
-            long integer2 = resources.getInteger(R.integer.config_datagram_wait_for_connected_state_timeout_millis) * 1000;
+            long integer2 =
+                    resources.getInteger(
+                                    R.integer
+                                            .config_datagram_wait_for_connected_state_timeout_millis)
+                            * 1000;
             this.mDefaultBgCurrentDrainMediaPlaybackMinDuration = integer2;
-            long integer3 = resources.getInteger(R.integer.config_customizedMaxCachedProcesses) * 1000;
+            long integer3 =
+                    resources.getInteger(R.integer.config_customizedMaxCachedProcesses) * 1000;
             this.mDefaultBgCurrentDrainLocationMinDuration = integer3;
-            this.mDefaultBgCurrentDrainEventDurationBasedThresholdEnabled = resources.getBoolean(R.bool.config_bg_prompt_abusive_apps_to_bg_restricted);
-            this.mDefaultBgCurrentDrainAutoRestrictAbusiveAppsEnabled = resources.getBoolean(R.bool.config_bg_current_drain_monitor_enabled);
-            this.mDefaultCurrentDrainTypesToRestrictedBucket = resources.getInteger(R.integer.config_datause_threshold_bytes);
-            this.mDefaultBgCurrentDrainTypesToBgRestricted = resources.getInteger(R.integer.config_datause_polling_period_sec);
-            this.mDefaultBgCurrentDrainPowerComponent = resources.getInteger(R.integer.config_datause_notification_type);
-            this.mDefaultBgCurrentDrainExemptedTypes = resources.getInteger(R.integer.config_cursorWindowSize);
-            this.mDefaultBgCurrentDrainHighThresholdByBgLocation = resources.getBoolean(R.bool.config_bg_prompt_fgs_with_noti_to_bg_restricted);
+            this.mDefaultBgCurrentDrainEventDurationBasedThresholdEnabled =
+                    resources.getBoolean(R.bool.config_bg_prompt_abusive_apps_to_bg_restricted);
+            this.mDefaultBgCurrentDrainAutoRestrictAbusiveAppsEnabled =
+                    resources.getBoolean(R.bool.config_bg_current_drain_monitor_enabled);
+            this.mDefaultCurrentDrainTypesToRestrictedBucket =
+                    resources.getInteger(R.integer.config_datause_threshold_bytes);
+            this.mDefaultBgCurrentDrainTypesToBgRestricted =
+                    resources.getInteger(R.integer.config_datause_polling_period_sec);
+            this.mDefaultBgCurrentDrainPowerComponent =
+                    resources.getInteger(R.integer.config_datause_notification_type);
+            this.mDefaultBgCurrentDrainExemptedTypes =
+                    resources.getInteger(R.integer.config_cursorWindowSize);
+            this.mDefaultBgCurrentDrainHighThresholdByBgLocation =
+                    resources.getBoolean(R.bool.config_bg_prompt_fgs_with_noti_to_bg_restricted);
             this.mBgCurrentDrainRestrictedBucketThreshold[0] = f;
             this.mBgCurrentDrainRestrictedBucketThreshold[1] = f3;
             this.mBgCurrentDrainBgRestrictedThreshold[0] = f2;
@@ -167,11 +197,17 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             return sb.toString();
         }
 
-        public static String formatHighBgBatteryRecord(long j, long j2, ImmutableBatteryUsage immutableBatteryUsage) {
+        public static String formatHighBgBatteryRecord(
+                long j, long j2, ImmutableBatteryUsage immutableBatteryUsage) {
             if (j <= 0 || immutableBatteryUsage == null) {
                 return "0";
             }
-            return TimeUtils.formatTime(j, j2) + " " + immutableBatteryUsage.toString() + " (" + immutableBatteryUsage.percentageToString() + ")";
+            return TimeUtils.formatTime(j, j2)
+                    + " "
+                    + immutableBatteryUsage.toString()
+                    + " ("
+                    + immutableBatteryUsage.percentageToString()
+                    + ")";
         }
 
         public static float[] getFloatArray(TypedArray typedArray) {
@@ -212,13 +248,29 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                 printWriter.print(str2);
                 printWriter.print("bg_current_drain_window");
                 printWriter.print('=');
-                ActivityManagerConstants$$ExternalSyntheticOutline0.m(this.mBgCurrentDrainWindowMs, printWriter, str2, "bg_current_drain_interaction_grace_period");
+                ActivityManagerConstants$$ExternalSyntheticOutline0.m(
+                        this.mBgCurrentDrainWindowMs,
+                        printWriter,
+                        str2,
+                        "bg_current_drain_interaction_grace_period");
                 printWriter.print('=');
-                ActivityManagerConstants$$ExternalSyntheticOutline0.m(this.mBgCurrentDrainInteractionGracePeriodMs, printWriter, str2, "bg_current_drain_media_playback_min_duration");
+                ActivityManagerConstants$$ExternalSyntheticOutline0.m(
+                        this.mBgCurrentDrainInteractionGracePeriodMs,
+                        printWriter,
+                        str2,
+                        "bg_current_drain_media_playback_min_duration");
                 printWriter.print('=');
-                ActivityManagerConstants$$ExternalSyntheticOutline0.m(this.mBgCurrentDrainMediaPlaybackMinDuration, printWriter, str2, "bg_current_drain_location_min_duration");
+                ActivityManagerConstants$$ExternalSyntheticOutline0.m(
+                        this.mBgCurrentDrainMediaPlaybackMinDuration,
+                        printWriter,
+                        str2,
+                        "bg_current_drain_location_min_duration");
                 printWriter.print('=');
-                ActivityManagerConstants$$ExternalSyntheticOutline0.m(this.mBgCurrentDrainLocationMinDuration, printWriter, str2, "bg_current_drain_event_duration_based_threshold_enabled");
+                ActivityManagerConstants$$ExternalSyntheticOutline0.m(
+                        this.mBgCurrentDrainLocationMinDuration,
+                        printWriter,
+                        str2,
+                        "bg_current_drain_event_duration_based_threshold_enabled");
                 printWriter.print('=');
                 printWriter.println(this.mBgCurrentDrainEventDurationBasedThresholdEnabled);
                 printWriter.print(str2);
@@ -228,11 +280,13 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                 printWriter.print(str2);
                 printWriter.print("bg_current_drain_types_to_restricted_bucket");
                 printWriter.print('=');
-                printWriter.println(batteryUsageTypesToString(this.mBgCurrentDrainRestrictedBucketTypes));
+                printWriter.println(
+                        batteryUsageTypesToString(this.mBgCurrentDrainRestrictedBucketTypes));
                 printWriter.print(str2);
                 printWriter.print("bg_current_drain_types_to_bg_restricted");
                 printWriter.print('=');
-                printWriter.println(batteryUsageTypesToString(this.mBgCurrentDrainBgRestrictedTypes));
+                printWriter.println(
+                        batteryUsageTypesToString(this.mBgCurrentDrainBgRestrictedTypes));
                 printWriter.print(str2);
                 printWriter.print("bg_current_drain_power_components");
                 printWriter.print('=');
@@ -276,7 +330,11 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                 printWriter.print(str2);
                 printWriter.print("bg_current_drain_high_threshold_by_bg_location");
                 printWriter.print('=');
-                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, str2, "Full charge capacity=", this.mBgCurrentDrainHighThresholdByBgLocation);
+                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                        printWriter,
+                        str2,
+                        "Full charge capacity=",
+                        this.mBgCurrentDrainHighThresholdByBgLocation);
                 printWriter.print(this.mBatteryFullChargeMah);
                 printWriter.println(" mAh");
                 printWriter.print(str2);
@@ -292,9 +350,31 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                                 int keyAt = this.mHighBgBatteryPackages.keyAt(i2);
                                 Pair pair = (Pair) this.mHighBgBatteryPackages.valueAt(i2);
                                 long[] jArr = (long[]) pair.first;
-                                ImmutableBatteryUsage[] immutableBatteryUsageArr = (ImmutableBatteryUsage[]) pair.second;
-                                int currentDrainThresholdIndex = getCurrentDrainThresholdIndex(keyAt, elapsedRealtime, this.mBgCurrentDrainWindowMs);
-                                printWriter.format("%s%s: (threshold=%4.2f%%/%4.2f%%) %s / %s\n", str3, UserHandle.formatUid(keyAt), Float.valueOf(this.mBgCurrentDrainRestrictedBucketThreshold[currentDrainThresholdIndex]), Float.valueOf(this.mBgCurrentDrainBgRestrictedThreshold[currentDrainThresholdIndex]), formatHighBgBatteryRecord(jArr[c], elapsedRealtime, immutableBatteryUsageArr[c]), formatHighBgBatteryRecord(jArr[1], elapsedRealtime, immutableBatteryUsageArr[1]));
+                                ImmutableBatteryUsage[] immutableBatteryUsageArr =
+                                        (ImmutableBatteryUsage[]) pair.second;
+                                int currentDrainThresholdIndex =
+                                        getCurrentDrainThresholdIndex(
+                                                keyAt,
+                                                elapsedRealtime,
+                                                this.mBgCurrentDrainWindowMs);
+                                printWriter.format(
+                                        "%s%s: (threshold=%4.2f%%/%4.2f%%) %s / %s\n",
+                                        str3,
+                                        UserHandle.formatUid(keyAt),
+                                        Float.valueOf(
+                                                this.mBgCurrentDrainRestrictedBucketThreshold[
+                                                        currentDrainThresholdIndex]),
+                                        Float.valueOf(
+                                                this.mBgCurrentDrainBgRestrictedThreshold[
+                                                        currentDrainThresholdIndex]),
+                                        formatHighBgBatteryRecord(
+                                                jArr[c],
+                                                elapsedRealtime,
+                                                immutableBatteryUsageArr[c]),
+                                        formatHighBgBatteryRecord(
+                                                jArr[1],
+                                                elapsedRealtime,
+                                                immutableBatteryUsageArr[1]));
                                 i2++;
                                 str3 = str3;
                                 elapsedRealtime = elapsedRealtime;
@@ -311,9 +391,9 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:4:0x003e, code lost:
-        
-            if (java.lang.Math.max(r10.mInjector.mAppMediaSessionTracker.getTotalDurationsSince(r16, 0, r11, r17), r10.mInjector.mAppFGSTracker.getTotalDurationsSince(r16, com.android.server.am.AppFGSTracker.foregroundServiceTypeToIndex(2), r11, r17)) >= r15.mBgCurrentDrainMediaPlaybackMinDuration) goto L18;
-         */
+
+           if (java.lang.Math.max(r10.mInjector.mAppMediaSessionTracker.getTotalDurationsSince(r16, 0, r11, r17), r10.mInjector.mAppFGSTracker.getTotalDurationsSince(r16, com.android.server.am.AppFGSTracker.foregroundServiceTypeToIndex(2), r11, r17)) >= r15.mBgCurrentDrainMediaPlaybackMinDuration) goto L18;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -395,7 +475,10 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             L87:
                 return r0
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppBatteryTracker.AppBatteryPolicy.getCurrentDrainThresholdIndex(int, long, long):int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.AppBatteryTracker.AppBatteryPolicy.getCurrentDrainThresholdIndex(int,"
+                        + " long, long):int");
         }
 
         @Override // com.android.server.am.BaseAppStatePolicy
@@ -411,7 +494,11 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                         long j = this.mLastInteractionTime.get(i, 0L);
                         long[] jArr = (long[]) pair.first;
                         boolean z2 = jArr[0] > j + this.mBgCurrentDrainInteractionGracePeriodMs;
-                        if (((AppBatteryTracker) this.mTracker).mAppRestrictionController.mConstantsObserver.mBgAutoRestrictAbusiveApps && this.mBgCurrentDrainAutoRestrictAbusiveAppsEnabled) {
+                        if (((AppBatteryTracker) this.mTracker)
+                                        .mAppRestrictionController
+                                        .mConstantsObserver
+                                        .mBgAutoRestrictAbusiveApps
+                                && this.mBgCurrentDrainAutoRestrictAbusiveAppsEnabled) {
                             z = true;
                         }
                         int i3 = (z2 && z) ? 40 : 30;
@@ -431,12 +518,14 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             }
         }
 
-        public final void handleUidBatteryUsage(int i, ImmutableBatteryUsage immutableBatteryUsage) {
+        public final void handleUidBatteryUsage(
+                int i, ImmutableBatteryUsage immutableBatteryUsage) {
             boolean z;
             boolean z2;
             long[] jArr;
             ImmutableBatteryUsage[] immutableBatteryUsageArr;
-            if (this.mTracker.mAppRestrictionController.getBackgroundRestrictionExemptionReason(i) != -1) {
+            if (this.mTracker.mAppRestrictionController.getBackgroundRestrictionExemptionReason(i)
+                    != -1) {
                 return;
             }
             double[] dArr = immutableBatteryUsage.mPercentage;
@@ -459,26 +548,36 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             }
             synchronized (this.mLock) {
                 try {
-                    int restrictionLevel = ((AppBatteryTracker) this.mTracker).mAppRestrictionController.mRestrictionSettings.getRestrictionLevel(i);
+                    int restrictionLevel =
+                            ((AppBatteryTracker) this.mTracker)
+                                    .mAppRestrictionController.mRestrictionSettings
+                                            .getRestrictionLevel(i);
                     if (restrictionLevel >= 50) {
                         return;
                     }
                     long j = this.mLastInteractionTime.get(i, 0L);
                     long elapsedRealtime = SystemClock.elapsedRealtime();
-                    int currentDrainThresholdIndex = getCurrentDrainThresholdIndex(i, elapsedRealtime, this.mBgCurrentDrainWindowMs);
+                    int currentDrainThresholdIndex =
+                            getCurrentDrainThresholdIndex(
+                                    i, elapsedRealtime, this.mBgCurrentDrainWindowMs);
                     int indexOfKey = this.mHighBgBatteryPackages.indexOfKey(i);
                     boolean z3 = this.mBgCurrentDrainDecoupleThresholds;
-                    double d3 = this.mBgCurrentDrainRestrictedBucketThreshold[currentDrainThresholdIndex];
+                    double d3 =
+                            this.mBgCurrentDrainRestrictedBucketThreshold[
+                                    currentDrainThresholdIndex];
                     double d4 = d2;
-                    double d5 = this.mBgCurrentDrainBgRestrictedThreshold[currentDrainThresholdIndex];
+                    double d5 =
+                            this.mBgCurrentDrainBgRestrictedThreshold[currentDrainThresholdIndex];
                     boolean z4 = false;
                     if (indexOfKey < 0) {
                         if (d >= d3) {
-                            if (elapsedRealtime > j + this.mBgCurrentDrainInteractionGracePeriodMs) {
-                                jArr = new long[]{elapsedRealtime, 0};
+                            if (elapsedRealtime
+                                    > j + this.mBgCurrentDrainInteractionGracePeriodMs) {
+                                jArr = new long[] {elapsedRealtime, 0};
                                 immutableBatteryUsageArr = new ImmutableBatteryUsage[2];
                                 immutableBatteryUsageArr[0] = immutableBatteryUsage;
-                                this.mHighBgBatteryPackages.put(i, Pair.create(jArr, immutableBatteryUsageArr));
+                                this.mHighBgBatteryPackages.put(
+                                        i, Pair.create(jArr, immutableBatteryUsageArr));
                                 z4 = true;
                             } else {
                                 jArr = null;
@@ -494,7 +593,8 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                             if (jArr == null) {
                                 jArr = new long[2];
                                 immutableBatteryUsageArr = new ImmutableBatteryUsage[2];
-                                this.mHighBgBatteryPackages.put(i, Pair.create(jArr, immutableBatteryUsageArr));
+                                this.mHighBgBatteryPackages.put(
+                                        i, Pair.create(jArr, immutableBatteryUsageArr));
                             }
                             jArr[1] = elapsedRealtime;
                             immutableBatteryUsageArr[1] = immutableBatteryUsage;
@@ -506,10 +606,12 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                         long[] jArr2 = (long[]) pair.first;
                         long j2 = jArr2[0];
                         if (d >= d3) {
-                            if (elapsedRealtime > j + this.mBgCurrentDrainInteractionGracePeriodMs) {
+                            if (elapsedRealtime
+                                    > j + this.mBgCurrentDrainInteractionGracePeriodMs) {
                                 if (j2 == 0) {
                                     jArr2[0] = elapsedRealtime;
-                                    ((ImmutableBatteryUsage[]) pair.second)[0] = immutableBatteryUsage;
+                                    ((ImmutableBatteryUsage[]) pair.second)[0] =
+                                            immutableBatteryUsage;
                                 }
                                 z = true;
                             } else {
@@ -521,7 +623,10 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                             z2 = false;
                         }
                         if (d4 >= d5) {
-                            if (z3 || (restrictionLevel == 40 && elapsedRealtime > j2 + this.mBgCurrentDrainWindowMs)) {
+                            if (z3
+                                    || (restrictionLevel == 40
+                                            && elapsedRealtime
+                                                    > j2 + this.mBgCurrentDrainWindowMs)) {
                                 z4 = true;
                             }
                             if (z4) {
@@ -536,7 +641,13 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                         }
                     }
                     if (z2 && z4) {
-                        ((AppBatteryTracker) this.mTracker).mAppRestrictionController.refreshAppRestrictionLevelForUid(i, FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM, 2, true);
+                        ((AppBatteryTracker) this.mTracker)
+                                .mAppRestrictionController.refreshAppRestrictionLevelForUid(
+                                        i,
+                                        FrameworkStatsLog
+                                                .APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM,
+                                        2,
+                                        true);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -548,13 +659,25 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         public final void onPropertiesChanged(String str) {
             switch (str) {
                 case "bg_current_drain_event_duration_based_threshold_enabled":
-                    this.mBgCurrentDrainEventDurationBasedThresholdEnabled = DeviceConfig.getBoolean("activity_manager", "bg_current_drain_event_duration_based_threshold_enabled", this.mDefaultBgCurrentDrainEventDurationBasedThresholdEnabled);
+                    this.mBgCurrentDrainEventDurationBasedThresholdEnabled =
+                            DeviceConfig.getBoolean(
+                                    "activity_manager",
+                                    "bg_current_drain_event_duration_based_threshold_enabled",
+                                    this.mDefaultBgCurrentDrainEventDurationBasedThresholdEnabled);
                     break;
                 case "bg_current_drain_decouple_thresholds":
-                    this.mBgCurrentDrainDecoupleThresholds = DeviceConfig.getBoolean("activity_manager", "bg_current_drain_decouple_thresholds", true);
+                    this.mBgCurrentDrainDecoupleThresholds =
+                            DeviceConfig.getBoolean(
+                                    "activity_manager",
+                                    "bg_current_drain_decouple_thresholds",
+                                    true);
                     break;
                 case "bg_current_drain_media_playback_min_duration":
-                    this.mBgCurrentDrainMediaPlaybackMinDuration = DeviceConfig.getLong("activity_manager", "bg_current_drain_media_playback_min_duration", this.mDefaultBgCurrentDrainMediaPlaybackMinDuration);
+                    this.mBgCurrentDrainMediaPlaybackMinDuration =
+                            DeviceConfig.getLong(
+                                    "activity_manager",
+                                    "bg_current_drain_media_playback_min_duration",
+                                    this.mDefaultBgCurrentDrainMediaPlaybackMinDuration);
                     break;
                 case "bg_current_drain_power_components":
                 case "bg_current_drain_high_threshold_to_restricted_bucket":
@@ -567,19 +690,39 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                     updateCurrentDrainThreshold();
                     break;
                 case "bg_current_drain_location_min_duration":
-                    this.mBgCurrentDrainLocationMinDuration = DeviceConfig.getLong("activity_manager", "bg_current_drain_location_min_duration", this.mDefaultBgCurrentDrainLocationMinDuration);
+                    this.mBgCurrentDrainLocationMinDuration =
+                            DeviceConfig.getLong(
+                                    "activity_manager",
+                                    "bg_current_drain_location_min_duration",
+                                    this.mDefaultBgCurrentDrainLocationMinDuration);
                     break;
                 case "bg_current_drain_auto_restrict_abusive_apps_enabled":
-                    this.mBgCurrentDrainAutoRestrictAbusiveAppsEnabled = DeviceConfig.getBoolean("activity_manager", "bg_current_drain_auto_restrict_abusive_apps_enabled", this.mDefaultBgCurrentDrainAutoRestrictAbusiveAppsEnabled);
+                    this.mBgCurrentDrainAutoRestrictAbusiveAppsEnabled =
+                            DeviceConfig.getBoolean(
+                                    "activity_manager",
+                                    "bg_current_drain_auto_restrict_abusive_apps_enabled",
+                                    this.mDefaultBgCurrentDrainAutoRestrictAbusiveAppsEnabled);
                     break;
                 case "bg_current_drain_interaction_grace_period":
-                    this.mBgCurrentDrainInteractionGracePeriodMs = DeviceConfig.getLong("activity_manager", "bg_current_drain_interaction_grace_period", this.mDefaultBgCurrentDrainInteractionGracePeriodMs);
+                    this.mBgCurrentDrainInteractionGracePeriodMs =
+                            DeviceConfig.getLong(
+                                    "activity_manager",
+                                    "bg_current_drain_interaction_grace_period",
+                                    this.mDefaultBgCurrentDrainInteractionGracePeriodMs);
                     break;
                 case "bg_current_drain_exempted_types":
-                    this.mBgCurrentDrainExemptedTypes = DeviceConfig.getInt("activity_manager", "bg_current_drain_exempted_types", this.mDefaultBgCurrentDrainExemptedTypes);
+                    this.mBgCurrentDrainExemptedTypes =
+                            DeviceConfig.getInt(
+                                    "activity_manager",
+                                    "bg_current_drain_exempted_types",
+                                    this.mDefaultBgCurrentDrainExemptedTypes);
                     break;
                 case "bg_current_drain_window":
-                    this.mBgCurrentDrainWindowMs = DeviceConfig.getLong("activity_manager", "bg_current_drain_window", this.mDefaultBgCurrentDrainWindowMs);
+                    this.mBgCurrentDrainWindowMs =
+                            DeviceConfig.getLong(
+                                    "activity_manager",
+                                    "bg_current_drain_window",
+                                    this.mDefaultBgCurrentDrainWindowMs);
                     break;
                 default:
                     if (this.mKeyTrackerEnabled.equals(str)) {
@@ -592,30 +735,65 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
 
         @Override // com.android.server.am.BaseAppStatePolicy
         public final void onSystemReady() {
-            this.mBatteryFullChargeMah = this.mInjector.mBatteryManagerInternal.getBatteryFullCharge() / 1000;
+            this.mBatteryFullChargeMah =
+                    this.mInjector.mBatteryManagerInternal.getBatteryFullCharge() / 1000;
             updateTrackerEnabled();
             updateCurrentDrainThreshold();
-            this.mBgCurrentDrainWindowMs = DeviceConfig.getLong("activity_manager", "bg_current_drain_window", this.mDefaultBgCurrentDrainWindowMs);
-            this.mBgCurrentDrainInteractionGracePeriodMs = DeviceConfig.getLong("activity_manager", "bg_current_drain_interaction_grace_period", this.mDefaultBgCurrentDrainInteractionGracePeriodMs);
-            this.mBgCurrentDrainMediaPlaybackMinDuration = DeviceConfig.getLong("activity_manager", "bg_current_drain_media_playback_min_duration", this.mDefaultBgCurrentDrainMediaPlaybackMinDuration);
-            this.mBgCurrentDrainLocationMinDuration = DeviceConfig.getLong("activity_manager", "bg_current_drain_location_min_duration", this.mDefaultBgCurrentDrainLocationMinDuration);
-            this.mBgCurrentDrainEventDurationBasedThresholdEnabled = DeviceConfig.getBoolean("activity_manager", "bg_current_drain_event_duration_based_threshold_enabled", this.mDefaultBgCurrentDrainEventDurationBasedThresholdEnabled);
-            this.mBgCurrentDrainExemptedTypes = DeviceConfig.getInt("activity_manager", "bg_current_drain_exempted_types", this.mDefaultBgCurrentDrainExemptedTypes);
-            this.mBgCurrentDrainDecoupleThresholds = DeviceConfig.getBoolean("activity_manager", "bg_current_drain_decouple_thresholds", true);
-            this.mBgCurrentDrainAutoRestrictAbusiveAppsEnabled = DeviceConfig.getBoolean("activity_manager", "bg_current_drain_auto_restrict_abusive_apps_enabled", this.mDefaultBgCurrentDrainAutoRestrictAbusiveAppsEnabled);
+            this.mBgCurrentDrainWindowMs =
+                    DeviceConfig.getLong(
+                            "activity_manager",
+                            "bg_current_drain_window",
+                            this.mDefaultBgCurrentDrainWindowMs);
+            this.mBgCurrentDrainInteractionGracePeriodMs =
+                    DeviceConfig.getLong(
+                            "activity_manager",
+                            "bg_current_drain_interaction_grace_period",
+                            this.mDefaultBgCurrentDrainInteractionGracePeriodMs);
+            this.mBgCurrentDrainMediaPlaybackMinDuration =
+                    DeviceConfig.getLong(
+                            "activity_manager",
+                            "bg_current_drain_media_playback_min_duration",
+                            this.mDefaultBgCurrentDrainMediaPlaybackMinDuration);
+            this.mBgCurrentDrainLocationMinDuration =
+                    DeviceConfig.getLong(
+                            "activity_manager",
+                            "bg_current_drain_location_min_duration",
+                            this.mDefaultBgCurrentDrainLocationMinDuration);
+            this.mBgCurrentDrainEventDurationBasedThresholdEnabled =
+                    DeviceConfig.getBoolean(
+                            "activity_manager",
+                            "bg_current_drain_event_duration_based_threshold_enabled",
+                            this.mDefaultBgCurrentDrainEventDurationBasedThresholdEnabled);
+            this.mBgCurrentDrainExemptedTypes =
+                    DeviceConfig.getInt(
+                            "activity_manager",
+                            "bg_current_drain_exempted_types",
+                            this.mDefaultBgCurrentDrainExemptedTypes);
+            this.mBgCurrentDrainDecoupleThresholds =
+                    DeviceConfig.getBoolean(
+                            "activity_manager", "bg_current_drain_decouple_thresholds", true);
+            this.mBgCurrentDrainAutoRestrictAbusiveAppsEnabled =
+                    DeviceConfig.getBoolean(
+                            "activity_manager",
+                            "bg_current_drain_auto_restrict_abusive_apps_enabled",
+                            this.mDefaultBgCurrentDrainAutoRestrictAbusiveAppsEnabled);
         }
 
         @Override // com.android.server.am.BaseAppStatePolicy
         public final void onTrackerEnabled(boolean z) {
             AppBatteryTracker appBatteryTracker = (AppBatteryTracker) this.mTracker;
             if (z) {
-                if (appBatteryTracker.mBgHandler.hasCallbacks(appBatteryTracker.mBgBatteryUsageStatsPolling)) {
+                if (appBatteryTracker.mBgHandler.hasCallbacks(
+                        appBatteryTracker.mBgBatteryUsageStatsPolling)) {
                     return;
                 }
-                appBatteryTracker.mBgHandler.postDelayed(appBatteryTracker.mBgBatteryUsageStatsPolling, appBatteryTracker.mBatteryUsageStatsPollingIntervalMs);
+                appBatteryTracker.mBgHandler.postDelayed(
+                        appBatteryTracker.mBgBatteryUsageStatsPolling,
+                        appBatteryTracker.mBatteryUsageStatsPollingIntervalMs);
                 return;
             }
-            appBatteryTracker.mBgHandler.removeCallbacks(appBatteryTracker.mBgBatteryUsageStatsPolling);
+            appBatteryTracker.mBgHandler.removeCallbacks(
+                    appBatteryTracker.mBgBatteryUsageStatsPolling);
             synchronized (appBatteryTracker.mLock) {
                 if (appBatteryTracker.mBatteryUsageStatsUpdatePending) {
                     try {
@@ -638,22 +816,55 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         }
 
         public final void updateCurrentDrainThreshold() {
-            this.mBgCurrentDrainRestrictedBucketThreshold[0] = DeviceConfig.getFloat("activity_manager", "bg_current_drain_threshold_to_restricted_bucket", this.mDefaultBgCurrentDrainRestrictedBucket);
-            this.mBgCurrentDrainRestrictedBucketThreshold[1] = DeviceConfig.getFloat("activity_manager", "bg_current_drain_high_threshold_to_restricted_bucket", this.mDefaultBgCurrentDrainRestrictedBucketHighThreshold);
-            this.mBgCurrentDrainBgRestrictedThreshold[0] = DeviceConfig.getFloat("activity_manager", "bg_current_drain_threshold_to_bg_restricted", this.mDefaultBgCurrentDrainBgRestrictedThreshold);
-            this.mBgCurrentDrainBgRestrictedThreshold[1] = DeviceConfig.getFloat("activity_manager", "bg_current_drain_high_threshold_to_bg_restricted", this.mDefaultBgCurrentDrainBgRestrictedHighThreshold);
-            this.mBgCurrentDrainRestrictedBucketTypes = DeviceConfig.getInt("activity_manager", "bg_current_drain_types_to_restricted_bucket", this.mDefaultCurrentDrainTypesToRestrictedBucket);
-            this.mBgCurrentDrainBgRestrictedTypes = DeviceConfig.getInt("activity_manager", "bg_current_drain_types_to_bg_restricted", this.mDefaultBgCurrentDrainTypesToBgRestricted);
-            this.mBgCurrentDrainPowerComponents = DeviceConfig.getInt("activity_manager", "bg_current_drain_power_components", this.mDefaultBgCurrentDrainPowerComponent);
+            this.mBgCurrentDrainRestrictedBucketThreshold[0] =
+                    DeviceConfig.getFloat(
+                            "activity_manager",
+                            "bg_current_drain_threshold_to_restricted_bucket",
+                            this.mDefaultBgCurrentDrainRestrictedBucket);
+            this.mBgCurrentDrainRestrictedBucketThreshold[1] =
+                    DeviceConfig.getFloat(
+                            "activity_manager",
+                            "bg_current_drain_high_threshold_to_restricted_bucket",
+                            this.mDefaultBgCurrentDrainRestrictedBucketHighThreshold);
+            this.mBgCurrentDrainBgRestrictedThreshold[0] =
+                    DeviceConfig.getFloat(
+                            "activity_manager",
+                            "bg_current_drain_threshold_to_bg_restricted",
+                            this.mDefaultBgCurrentDrainBgRestrictedThreshold);
+            this.mBgCurrentDrainBgRestrictedThreshold[1] =
+                    DeviceConfig.getFloat(
+                            "activity_manager",
+                            "bg_current_drain_high_threshold_to_bg_restricted",
+                            this.mDefaultBgCurrentDrainBgRestrictedHighThreshold);
+            this.mBgCurrentDrainRestrictedBucketTypes =
+                    DeviceConfig.getInt(
+                            "activity_manager",
+                            "bg_current_drain_types_to_restricted_bucket",
+                            this.mDefaultCurrentDrainTypesToRestrictedBucket);
+            this.mBgCurrentDrainBgRestrictedTypes =
+                    DeviceConfig.getInt(
+                            "activity_manager",
+                            "bg_current_drain_types_to_bg_restricted",
+                            this.mDefaultBgCurrentDrainTypesToBgRestricted);
+            this.mBgCurrentDrainPowerComponents =
+                    DeviceConfig.getInt(
+                            "activity_manager",
+                            "bg_current_drain_power_components",
+                            this.mDefaultBgCurrentDrainPowerComponent);
             if (this.mBgCurrentDrainPowerComponents == -1) {
                 this.mBatteryDimensions = BatteryUsage.BATT_DIMENS;
             } else {
                 this.mBatteryDimensions = new BatteryConsumer.Dimensions[5];
                 for (int i = 0; i < 5; i++) {
-                    this.mBatteryDimensions[i] = new BatteryConsumer.Dimensions(this.mBgCurrentDrainPowerComponents, i);
+                    this.mBatteryDimensions[i] =
+                            new BatteryConsumer.Dimensions(this.mBgCurrentDrainPowerComponents, i);
                 }
             }
-            this.mBgCurrentDrainHighThresholdByBgLocation = DeviceConfig.getBoolean("activity_manager", "bg_current_drain_high_threshold_by_bg_location", this.mDefaultBgCurrentDrainHighThresholdByBgLocation);
+            this.mBgCurrentDrainHighThresholdByBgLocation =
+                    DeviceConfig.getBoolean(
+                            "activity_manager",
+                            "bg_current_drain_high_threshold_by_bg_location",
+                            this.mDefaultBgCurrentDrainHighThresholdByBgLocation);
         }
 
         @Override // com.android.server.am.BaseAppStatePolicy
@@ -669,12 +880,18 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class BatteryUsage {
-        public static final BatteryConsumer.Dimensions[] BATT_DIMENS = {new BatteryConsumer.Dimensions(-1, 0), new BatteryConsumer.Dimensions(-1, 1), new BatteryConsumer.Dimensions(-1, 2), new BatteryConsumer.Dimensions(-1, 3), new BatteryConsumer.Dimensions(-1, 4)};
+        public static final BatteryConsumer.Dimensions[] BATT_DIMENS = {
+            new BatteryConsumer.Dimensions(-1, 0),
+            new BatteryConsumer.Dimensions(-1, 1),
+            new BatteryConsumer.Dimensions(-1, 2),
+            new BatteryConsumer.Dimensions(-1, 3),
+            new BatteryConsumer.Dimensions(-1, 4)
+        };
         public double[] mPercentage;
         public double[] mUsage;
 
         public BatteryUsage() {
-            this.mUsage = new double[]{0.0d, 0.0d, 0.0d, 0.0d, 0.0d};
+            this.mUsage = new double[] {0.0d, 0.0d, 0.0d, 0.0d, 0.0d};
         }
 
         public BatteryUsage(BatteryUsage batteryUsage) {
@@ -715,14 +932,20 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             }
             double[] dArr3 = this.mPercentage;
             if (i > 0) {
-                batteryUsage = (BatteryUsage) ((AppBatteryTracker) appBatteryPolicy.mTracker).mDebugUidPercentages.get(i);
+                batteryUsage =
+                        (BatteryUsage)
+                                ((AppBatteryTracker) appBatteryPolicy.mTracker)
+                                        .mDebugUidPercentages.get(i);
             } else {
                 appBatteryPolicy.getClass();
                 batteryUsage = null;
             }
             double[] dArr4 = batteryUsage != null ? batteryUsage.mPercentage : null;
             for (int i2 = 0; i2 < dArr2.length; i2++) {
-                dArr3[i2] = dArr4 != null ? dArr4[i2] : (dArr2[i2] / appBatteryPolicy.mBatteryFullChargeMah) * 100.0d;
+                dArr3[i2] =
+                        dArr4 != null
+                                ? dArr4[i2]
+                                : (dArr2[i2] / appBatteryPolicy.mBatteryFullChargeMah) * 100.0d;
             }
         }
 
@@ -776,7 +999,13 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
 
         public final String percentageToString() {
             double[] dArr = this.mPercentage;
-            return String.format("%4.2f%% %4.2f%% %4.2f%% %4.2f%% %4.2f%%", Double.valueOf(dArr[0]), Double.valueOf(dArr[1]), Double.valueOf(dArr[2]), Double.valueOf(dArr[3]), Double.valueOf(dArr[4]));
+            return String.format(
+                    "%4.2f%% %4.2f%% %4.2f%% %4.2f%% %4.2f%%",
+                    Double.valueOf(dArr[0]),
+                    Double.valueOf(dArr[1]),
+                    Double.valueOf(dArr[2]),
+                    Double.valueOf(dArr[3]),
+                    Double.valueOf(dArr[4]));
         }
 
         public final void scaleInternal(double d) {
@@ -806,7 +1035,13 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
 
         public final String toString() {
             double[] dArr = this.mUsage;
-            return String.format("%.3f %.3f %.3f %.3f %.3f mAh", Double.valueOf(dArr[0]), Double.valueOf(dArr[1]), Double.valueOf(dArr[2]), Double.valueOf(dArr[3]), Double.valueOf(dArr[4]));
+            return String.format(
+                    "%.3f %.3f %.3f %.3f %.3f mAh",
+                    Double.valueOf(dArr[0]),
+                    Double.valueOf(dArr[1]),
+                    Double.valueOf(dArr[2]),
+                    Double.valueOf(dArr[3]),
+                    Double.valueOf(dArr[4]));
         }
     }
 
@@ -828,49 +1063,55 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
     public AppBatteryTracker(Context context, AppRestrictionController appRestrictionController) {
         super(context, appRestrictionController);
         final int i = 0;
-        this.mBgBatteryUsageStatsPolling = new Runnable(this) { // from class: com.android.server.am.AppBatteryTracker$$ExternalSyntheticLambda0
-            public final /* synthetic */ AppBatteryTracker f$0;
+        this.mBgBatteryUsageStatsPolling =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.am.AppBatteryTracker$$ExternalSyntheticLambda0
+                    public final /* synthetic */ AppBatteryTracker f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i2 = i;
-                AppBatteryTracker appBatteryTracker = this.f$0;
-                switch (i2) {
-                    case 0:
-                        appBatteryTracker.updateBatteryUsageStatsAndCheck();
-                        break;
-                    default:
-                        appBatteryTracker.checkBatteryUsageStats();
-                        break;
-                }
-            }
-        };
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i2 = i;
+                        AppBatteryTracker appBatteryTracker = this.f$0;
+                        switch (i2) {
+                            case 0:
+                                appBatteryTracker.updateBatteryUsageStatsAndCheck();
+                                break;
+                            default:
+                                appBatteryTracker.checkBatteryUsageStats();
+                                break;
+                        }
+                    }
+                };
         final int i2 = 1;
-        this.mBgBatteryUsageStatsCheck = new Runnable(this) { // from class: com.android.server.am.AppBatteryTracker$$ExternalSyntheticLambda0
-            public final /* synthetic */ AppBatteryTracker f$0;
+        this.mBgBatteryUsageStatsCheck =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.am.AppBatteryTracker$$ExternalSyntheticLambda0
+                    public final /* synthetic */ AppBatteryTracker f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i22 = i2;
-                AppBatteryTracker appBatteryTracker = this.f$0;
-                switch (i22) {
-                    case 0:
-                        appBatteryTracker.updateBatteryUsageStatsAndCheck();
-                        break;
-                    default:
-                        appBatteryTracker.checkBatteryUsageStats();
-                        break;
-                }
-            }
-        };
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i22 = i2;
+                        AppBatteryTracker appBatteryTracker = this.f$0;
+                        switch (i22) {
+                            case 0:
+                                appBatteryTracker.updateBatteryUsageStatsAndCheck();
+                                break;
+                            default:
+                                appBatteryTracker.checkBatteryUsageStats();
+                                break;
+                        }
+                    }
+                };
         this.mActiveUserIdStates = new SparseBooleanArray();
         this.mUidBatteryUsage = new SparseArray();
         this.mUidBatteryUsageInWindow = new SparseArray();
@@ -890,15 +1131,19 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
     public static void copyUidBatteryUsage(SparseArray sparseArray, SparseArray sparseArray2) {
         sparseArray2.clear();
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
-            sparseArray2.put(sparseArray.keyAt(size), new ImmutableBatteryUsage((BatteryUsage) sparseArray.valueAt(size)));
+            sparseArray2.put(
+                    sparseArray.keyAt(size),
+                    new ImmutableBatteryUsage((BatteryUsage) sparseArray.valueAt(size)));
         }
     }
 
-    public static void copyUidBatteryUsage(SparseArray sparseArray, SparseArray sparseArray2, double d) {
+    public static void copyUidBatteryUsage(
+            SparseArray sparseArray, SparseArray sparseArray2, double d) {
         sparseArray2.clear();
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
             int keyAt = sparseArray.keyAt(size);
-            ImmutableBatteryUsage immutableBatteryUsage = new ImmutableBatteryUsage((BatteryUsage) sparseArray.valueAt(size));
+            ImmutableBatteryUsage immutableBatteryUsage =
+                    new ImmutableBatteryUsage((BatteryUsage) sparseArray.valueAt(size));
             immutableBatteryUsage.scaleInternal(d);
             sparseArray2.put(keyAt, immutableBatteryUsage);
         }
@@ -914,7 +1159,8 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         protoOutputStream.end(start);
     }
 
-    public static void dumpUidStats(ProtoOutputStream protoOutputStream, int i, BatteryUsage batteryUsage) {
+    public static void dumpUidStats(
+            ProtoOutputStream protoOutputStream, int i, BatteryUsage batteryUsage) {
         if (batteryUsage.mUsage == null) {
             return;
         }
@@ -946,17 +1192,26 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
                 int keyAt = sparseArray.keyAt(i);
-                ImmutableBatteryUsage immutableBatteryUsage = (ImmutableBatteryUsage) sparseArray.valueAt(i);
-                ImmutableBatteryUsage uidBatteryExemptedUsageSince = this.mAppRestrictionController.getUidBatteryExemptedUsageSince(keyAt, appBatteryPolicy.mBgCurrentDrainExemptedTypes, max, elapsedRealtime);
+                ImmutableBatteryUsage immutableBatteryUsage =
+                        (ImmutableBatteryUsage) sparseArray.valueAt(i);
+                ImmutableBatteryUsage uidBatteryExemptedUsageSince =
+                        this.mAppRestrictionController.getUidBatteryExemptedUsageSince(
+                                keyAt,
+                                appBatteryPolicy.mBgCurrentDrainExemptedTypes,
+                                max,
+                                elapsedRealtime);
                 immutableBatteryUsage.getClass();
                 BatteryUsage batteryUsage = new BatteryUsage(immutableBatteryUsage);
                 batteryUsage.subtract(uidBatteryExemptedUsageSince);
                 batteryUsage.calcPercentage(keyAt, appBatteryPolicy);
-                appBatteryPolicy.handleUidBatteryUsage(keyAt, new ImmutableBatteryUsage(batteryUsage));
+                appBatteryPolicy.handleUidBatteryUsage(
+                        keyAt, new ImmutableBatteryUsage(batteryUsage));
             }
             int size2 = this.mDebugUidPercentages.size();
             for (int i2 = 0; i2 < size2; i2++) {
-                appBatteryPolicy.handleUidBatteryUsage(this.mDebugUidPercentages.keyAt(i2), (ImmutableBatteryUsage) this.mDebugUidPercentages.valueAt(i2));
+                appBatteryPolicy.handleUidBatteryUsage(
+                        this.mDebugUidPercentages.keyAt(i2),
+                        (ImmutableBatteryUsage) this.mDebugUidPercentages.valueAt(i2));
             }
             scheduleBatteryUsageStatsUpdateIfNecessary(this.mBatteryUsageStatsPollingIntervalMs);
         } catch (Throwable th) {
@@ -973,13 +1228,19 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         updateBatteryUsageStatsIfNecessary(System.currentTimeMillis(), true);
         scheduleBgBatteryUsageStatsCheck();
         final CountDownLatch countDownLatch = new CountDownLatch(1);
-        this.mBgHandler.getLooper().getQueue().addIdleHandler(new MessageQueue.IdleHandler() { // from class: com.android.server.am.AppBatteryTracker$$ExternalSyntheticLambda2
-            @Override // android.os.MessageQueue.IdleHandler
-            public final boolean queueIdle() {
-                countDownLatch.countDown();
-                return false;
-            }
-        });
+        this.mBgHandler
+                .getLooper()
+                .getQueue()
+                .addIdleHandler(
+                        new MessageQueue
+                                .IdleHandler() { // from class:
+                                                 // com.android.server.am.AppBatteryTracker$$ExternalSyntheticLambda2
+                            @Override // android.os.MessageQueue.IdleHandler
+                            public final boolean queueIdle() {
+                                countDownLatch.countDown();
+                                return false;
+                            }
+                        });
         try {
             countDownLatch.await();
         } catch (InterruptedException unused) {
@@ -994,7 +1255,8 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                 printWriter.print("  " + str);
                 printWriter.print("Battery usage over last ");
                 String str2 = "    " + str;
-                AppBatteryPolicy appBatteryPolicy = (AppBatteryPolicy) this.mInjector.mAppStatePolicy;
+                AppBatteryPolicy appBatteryPolicy =
+                        (AppBatteryPolicy) this.mInjector.mAppStatePolicy;
                 long elapsedRealtime = SystemClock.elapsedRealtime();
                 long max = Math.max(0L, elapsedRealtime - appBatteryPolicy.mBgCurrentDrainWindowMs);
                 printWriter.println(TimeUtils.formatDuration(elapsedRealtime - max));
@@ -1006,14 +1268,36 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                     int i = 0;
                     while (i < size) {
                         int keyAt = sparseArray.keyAt(i);
-                        ImmutableBatteryUsage immutableBatteryUsage = (ImmutableBatteryUsage) sparseArray.valueAt(i);
+                        ImmutableBatteryUsage immutableBatteryUsage =
+                                (ImmutableBatteryUsage) sparseArray.valueAt(i);
                         immutableBatteryUsage.calcPercentage(keyAt, appBatteryPolicy);
-                        ImmutableBatteryUsage uidBatteryExemptedUsageSince = this.mAppRestrictionController.getUidBatteryExemptedUsageSince(keyAt, appBatteryPolicy.mBgCurrentDrainExemptedTypes, max, elapsedRealtime);
+                        ImmutableBatteryUsage uidBatteryExemptedUsageSince =
+                                this.mAppRestrictionController.getUidBatteryExemptedUsageSince(
+                                        keyAt,
+                                        appBatteryPolicy.mBgCurrentDrainExemptedTypes,
+                                        max,
+                                        elapsedRealtime);
                         uidBatteryExemptedUsageSince.calcPercentage(keyAt, appBatteryPolicy);
                         BatteryUsage batteryUsage = new BatteryUsage(immutableBatteryUsage);
                         batteryUsage.subtract(uidBatteryExemptedUsageSince);
                         batteryUsage.calcPercentage(keyAt, appBatteryPolicy);
-                        printWriter.format("%s%s: [%s] %s (%s) | %s (%s) | %s (%s) | %s\n", str2, UserHandle.formatUid(keyAt), PowerExemptionManager.reasonCodeToString(appBatteryPolicy.mTracker.mAppRestrictionController.getBackgroundRestrictionExemptionReason(keyAt)), immutableBatteryUsage.toString(), immutableBatteryUsage.percentageToString(), uidBatteryExemptedUsageSince.toString(), uidBatteryExemptedUsageSince.percentageToString(), batteryUsage.toString(), batteryUsage.percentageToString(), ((BatteryUsage) this.mUidBatteryUsage.get(keyAt, BATTERY_USAGE_NONE)).toString());
+                        printWriter.format(
+                                "%s%s: [%s] %s (%s) | %s (%s) | %s (%s) | %s\n",
+                                str2,
+                                UserHandle.formatUid(keyAt),
+                                PowerExemptionManager.reasonCodeToString(
+                                        appBatteryPolicy.mTracker.mAppRestrictionController
+                                                .getBackgroundRestrictionExemptionReason(keyAt)),
+                                immutableBatteryUsage.toString(),
+                                immutableBatteryUsage.percentageToString(),
+                                uidBatteryExemptedUsageSince.toString(),
+                                uidBatteryExemptedUsageSince.percentageToString(),
+                                batteryUsage.toString(),
+                                batteryUsage.percentageToString(),
+                                ((BatteryUsage)
+                                                this.mUidBatteryUsage.get(
+                                                        keyAt, BATTERY_USAGE_NONE))
+                                        .toString());
                         i++;
                         size = size;
                         sparseArray = sparseArray;
@@ -1041,7 +1325,10 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                 } else {
                     int size = sparseArray.size();
                     for (int i2 = 0; i2 < size; i2++) {
-                        dumpUidStats(protoOutputStream, sparseArray.keyAt(i2), (BatteryUsage) sparseArray.valueAt(i2));
+                        dumpUidStats(
+                                protoOutputStream,
+                                sparseArray.keyAt(i2),
+                                (BatteryUsage) sparseArray.valueAt(i2));
                     }
                 }
             } catch (Throwable th) {
@@ -1134,7 +1421,12 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         synchronized (appBatteryPolicy.mLock) {
             try {
                 appBatteryPolicy.mLastInteractionTime.put(i, SystemClock.elapsedRealtime());
-                if (((AppBatteryTracker) appBatteryPolicy.mTracker).mAppRestrictionController.mRestrictionSettings.getRestrictionLevel(i, str) != 50 && (indexOfKey = appBatteryPolicy.mHighBgBatteryPackages.indexOfKey(i)) >= 0) {
+                if (((AppBatteryTracker) appBatteryPolicy.mTracker)
+                                        .mAppRestrictionController.mRestrictionSettings
+                                                .getRestrictionLevel(i, str)
+                                != 50
+                        && (indexOfKey = appBatteryPolicy.mHighBgBatteryPackages.indexOfKey(i))
+                                >= 0) {
                     appBatteryPolicy.mHighBgBatteryPackages.removeAt(indexOfKey);
                     z = true;
                 }
@@ -1144,7 +1436,12 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             }
         }
         if (z) {
-            ((AppBatteryTracker) appBatteryPolicy.mTracker).mAppRestrictionController.refreshAppRestrictionLevelForUid(i, FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_USAGE, 3, true);
+            ((AppBatteryTracker) appBatteryPolicy.mTracker)
+                    .mAppRestrictionController.refreshAppRestrictionLevelForUid(
+                            i,
+                            FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_USAGE,
+                            3,
+                            true);
         }
     }
 
@@ -1163,14 +1460,21 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                         this.mUidBatteryUsageInWindow.removeAt(size2);
                     }
                 }
-                AppBatteryPolicy appBatteryPolicy = (AppBatteryPolicy) this.mInjector.mAppStatePolicy;
-                for (int size3 = appBatteryPolicy.mHighBgBatteryPackages.size() - 1; size3 >= 0; size3--) {
-                    if (UserHandle.getUserId(appBatteryPolicy.mHighBgBatteryPackages.keyAt(size3)) == i) {
+                AppBatteryPolicy appBatteryPolicy =
+                        (AppBatteryPolicy) this.mInjector.mAppStatePolicy;
+                for (int size3 = appBatteryPolicy.mHighBgBatteryPackages.size() - 1;
+                        size3 >= 0;
+                        size3--) {
+                    if (UserHandle.getUserId(appBatteryPolicy.mHighBgBatteryPackages.keyAt(size3))
+                            == i) {
                         appBatteryPolicy.mHighBgBatteryPackages.removeAt(size3);
                     }
                 }
-                for (int size4 = appBatteryPolicy.mLastInteractionTime.size() - 1; size4 >= 0; size4--) {
-                    if (UserHandle.getUserId(appBatteryPolicy.mLastInteractionTime.keyAt(size4)) == i) {
+                for (int size4 = appBatteryPolicy.mLastInteractionTime.size() - 1;
+                        size4 >= 0;
+                        size4--) {
+                    if (UserHandle.getUserId(appBatteryPolicy.mLastInteractionTime.keyAt(size4))
+                            == i) {
                         appBatteryPolicy.mLastInteractionTime.removeAt(size4);
                     }
                 }
@@ -1219,7 +1523,9 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             long elapsedRealtime = SystemClock.elapsedRealtime();
             synchronized (this.mLock) {
                 try {
-                    if (elapsedRealtime - this.mLastReportTime >= ((AppBatteryPolicy) this.mInjector.mAppStatePolicy).mBgCurrentDrainWindowMs) {
+                    if (elapsedRealtime - this.mLastReportTime
+                            >= ((AppBatteryPolicy) this.mInjector.mAppStatePolicy)
+                                    .mBgCurrentDrainWindowMs) {
                         this.mLastReportTime = elapsedRealtime;
                         this.mInjector.getClass();
                         updateBatteryUsageStatsIfNecessary(System.currentTimeMillis(), true);
@@ -1228,8 +1534,24 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                                 int size = this.mUidBatteryUsageInWindow.size();
                                 for (int i = 0; i < size; i++) {
                                     int keyAt = this.mUidBatteryUsageInWindow.keyAt(i);
-                                    if ((UserHandle.isCore(keyAt) || UserHandle.isApp(keyAt)) && !BATTERY_USAGE_NONE.equals(this.mUidBatteryUsageInWindow.valueAt(i))) {
-                                        FrameworkStatsLog.write(FrameworkStatsLog.APP_BACKGROUND_RESTRICTIONS_INFO, keyAt, 0, 0, 0, (byte[]) null, getTrackerInfoForStatsd(keyAt), (byte[]) null, (byte[]) null, 0, 0, 0, ActivityManager.isLowRamDeviceStatic(), 0);
+                                    if ((UserHandle.isCore(keyAt) || UserHandle.isApp(keyAt))
+                                            && !BATTERY_USAGE_NONE.equals(
+                                                    this.mUidBatteryUsageInWindow.valueAt(i))) {
+                                        FrameworkStatsLog.write(
+                                                FrameworkStatsLog.APP_BACKGROUND_RESTRICTIONS_INFO,
+                                                keyAt,
+                                                0,
+                                                0,
+                                                0,
+                                                (byte[]) null,
+                                                getTrackerInfoForStatsd(keyAt),
+                                                (byte[]) null,
+                                                (byte[]) null,
+                                                0,
+                                                0,
+                                                0,
+                                                ActivityManager.isLowRamDeviceStatic(),
+                                                0);
                                     }
                                 }
                             } finally {
@@ -1244,7 +1566,8 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
 
     public final void scheduleBgBatteryUsageStatsCheck() {
         AppRestrictionController.BgHandler bgHandler = this.mBgHandler;
-        AppBatteryTracker$$ExternalSyntheticLambda0 appBatteryTracker$$ExternalSyntheticLambda0 = this.mBgBatteryUsageStatsCheck;
+        AppBatteryTracker$$ExternalSyntheticLambda0 appBatteryTracker$$ExternalSyntheticLambda0 =
+                this.mBgBatteryUsageStatsCheck;
         if (bgHandler.hasCallbacks(appBatteryTracker$$ExternalSyntheticLambda0)) {
             return;
         }
@@ -1259,7 +1582,9 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             return;
         }
         synchronized (this.mLock) {
-            scheduleBatteryUsageStatsUpdateIfNecessary((this.mLastBatteryUsageSamplingTs + this.mBatteryUsageStatsPollingMinIntervalMs) - currentTimeMillis);
+            scheduleBatteryUsageStatsUpdateIfNecessary(
+                    (this.mLastBatteryUsageSamplingTs + this.mBatteryUsageStatsPollingMinIntervalMs)
+                            - currentTimeMillis);
         }
     }
 
@@ -1267,7 +1592,9 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         boolean z2;
         synchronized (this.mLock) {
             try {
-                if (this.mLastBatteryUsageSamplingTs + this.mBatteryUsageStatsPollingMinIntervalMs >= j && !z) {
+                if (this.mLastBatteryUsageSamplingTs + this.mBatteryUsageStatsPollingMinIntervalMs
+                                >= j
+                        && !z) {
                     return false;
                 }
                 if (this.mBatteryUsageStatsUpdatePending) {
@@ -1320,13 +1647,31 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
             } finally {
             }
         }
-        BatteryUsageStats updateBatteryUsageStatsOnceInternal = updateBatteryUsageStatsOnceInternal(0L, sparseArray, new BatteryUsageStatsQuery.Builder().includeProcessStateData().setMaxStatsAgeMs(0L), arraySet, batteryStatsInternal);
-        long statsStartTimestamp = updateBatteryUsageStatsOnceInternal != null ? updateBatteryUsageStatsOnceInternal.getStatsStartTimestamp() : 0L;
-        long statsEndTimestamp = (updateBatteryUsageStatsOnceInternal != null ? updateBatteryUsageStatsOnceInternal.getStatsEndTimestamp() : j) - statsStartTimestamp;
+        BatteryUsageStats updateBatteryUsageStatsOnceInternal =
+                updateBatteryUsageStatsOnceInternal(
+                        0L,
+                        sparseArray,
+                        new BatteryUsageStatsQuery.Builder()
+                                .includeProcessStateData()
+                                .setMaxStatsAgeMs(0L),
+                        arraySet,
+                        batteryStatsInternal);
+        long statsStartTimestamp =
+                updateBatteryUsageStatsOnceInternal != null
+                        ? updateBatteryUsageStatsOnceInternal.getStatsStartTimestamp()
+                        : 0L;
+        long statsEndTimestamp =
+                (updateBatteryUsageStatsOnceInternal != null
+                                ? updateBatteryUsageStatsOnceInternal.getStatsEndTimestamp()
+                                : j)
+                        - statsStartTimestamp;
         if (statsEndTimestamp >= j6) {
             synchronized (this.mLock) {
                 j2 = j6;
-                copyUidBatteryUsage(sparseArray, this.mUidBatteryUsageInWindow, (j6 * 1.0d) / statsEndTimestamp);
+                copyUidBatteryUsage(
+                        sparseArray,
+                        this.mUidBatteryUsageInWindow,
+                        (j6 * 1.0d) / statsEndTimestamp);
             }
             z = false;
         } else {
@@ -1341,7 +1686,15 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         if (statsStartTimestamp <= j3 || j3 <= 0) {
             j4 = statsEndTimestamp;
         } else {
-            BatteryUsageStats updateBatteryUsageStatsOnceInternal2 = updateBatteryUsageStatsOnceInternal(0L, sparseArray, new BatteryUsageStatsQuery.Builder().includeProcessStateData().aggregateSnapshots(j3, statsStartTimestamp), arraySet, batteryStatsInternal);
+            BatteryUsageStats updateBatteryUsageStatsOnceInternal2 =
+                    updateBatteryUsageStatsOnceInternal(
+                            0L,
+                            sparseArray,
+                            new BatteryUsageStatsQuery.Builder()
+                                    .includeProcessStateData()
+                                    .aggregateSnapshots(j3, statsStartTimestamp),
+                            arraySet,
+                            batteryStatsInternal);
             j4 = (statsStartTimestamp - j3) + statsEndTimestamp;
             try {
                 if (updateBatteryUsageStatsOnceInternal2 != null) {
@@ -1368,10 +1721,13 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                 for (int i = 0; i < size2; i++) {
                     int keyAt = sparseArray.keyAt(i);
                     int indexOfKey = this.mUidBatteryUsage.indexOfKey(keyAt);
-                    BatteryUsage batteryUsage = (BatteryUsage) this.mLastUidBatteryUsage.get(keyAt, BATTERY_USAGE_NONE);
+                    BatteryUsage batteryUsage =
+                            (BatteryUsage) this.mLastUidBatteryUsage.get(keyAt, BATTERY_USAGE_NONE);
                     BatteryUsage batteryUsage2 = (BatteryUsage) sparseArray.valueAt(i);
                     if (indexOfKey >= 0) {
-                        ((BatteryUsage) this.mUidBatteryUsage.valueAt(indexOfKey)).subtract(batteryUsage).add(batteryUsage2);
+                        ((BatteryUsage) this.mUidBatteryUsage.valueAt(indexOfKey))
+                                .subtract(batteryUsage)
+                                .add(batteryUsage2);
                     } else {
                         this.mUidBatteryUsage.put(keyAt, batteryUsage2);
                     }
@@ -1384,7 +1740,14 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         if (z) {
             long j7 = j - j5;
             long j8 = j3 - 1;
-            updateBatteryUsageStatsOnceInternal(j8 - j7, sparseArray, new BatteryUsageStatsQuery.Builder().includeProcessStateData().aggregateSnapshots(j7, j8), arraySet, batteryStatsInternal);
+            updateBatteryUsageStatsOnceInternal(
+                    j8 - j7,
+                    sparseArray,
+                    new BatteryUsageStatsQuery.Builder()
+                            .includeProcessStateData()
+                            .aggregateSnapshots(j7, j8),
+                    arraySet,
+                    batteryStatsInternal);
             synchronized (this.mLock) {
                 copyUidBatteryUsage(sparseArray, this.mUidBatteryUsageInWindow);
             }
@@ -1400,7 +1763,12 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         }
     }
 
-    public final BatteryUsageStats updateBatteryUsageStatsOnceInternal(long j, SparseArray sparseArray, BatteryUsageStatsQuery.Builder builder, ArraySet arraySet, BatteryStatsInternal batteryStatsInternal) {
+    public final BatteryUsageStats updateBatteryUsageStatsOnceInternal(
+            long j,
+            SparseArray sparseArray,
+            BatteryUsageStatsQuery.Builder builder,
+            ArraySet arraySet,
+            BatteryStatsInternal batteryStatsInternal) {
         double d;
         double d2;
         double d3;
@@ -1410,7 +1778,8 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         for (int i = 0; i < size; i++) {
             builder.addUser((UserHandle) arraySet.valueAt(i));
         }
-        List batteryUsageStats = batteryStatsInternal.getBatteryUsageStats(Arrays.asList(builder.build()));
+        List batteryUsageStats =
+                batteryStatsInternal.getBatteryUsageStats(Arrays.asList(builder.build()));
         if (ArrayUtils.isEmpty(batteryUsageStats)) {
             return null;
         }
@@ -1428,7 +1797,14 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
         }
         List<UidBatteryConsumer> uidBatteryConsumers = batteryUsageStats2.getUidBatteryConsumers();
         if (uidBatteryConsumers != null) {
-            double min = j > 0 ? Math.min((j * 1.0d) / (batteryUsageStats2.getStatsEndTimestamp() - batteryUsageStats2.getStatsStartTimestamp()), 1.0d) : 1.0d;
+            double min =
+                    j > 0
+                            ? Math.min(
+                                    (j * 1.0d)
+                                            / (batteryUsageStats2.getStatsEndTimestamp()
+                                                    - batteryUsageStats2.getStatsStartTimestamp()),
+                                    1.0d)
+                            : 1.0d;
             AppBatteryPolicy appBatteryPolicy = (AppBatteryPolicy) this.mInjector.mAppStatePolicy;
             for (UidBatteryConsumer uidBatteryConsumer : uidBatteryConsumers) {
                 int uid = uidBatteryConsumer.getUid();
@@ -1438,7 +1814,8 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                         uid = UserHandle.getUid(0, appIdFromSharedAppGid);
                     }
                     BatteryUsage batteryUsage = new BatteryUsage();
-                    BatteryConsumer.Dimensions[] dimensionsArr = appBatteryPolicy.mBatteryDimensions;
+                    BatteryConsumer.Dimensions[] dimensionsArr =
+                            appBatteryPolicy.mBatteryDimensions;
                     double d5 = 0.0d;
                     try {
                         d = uidBatteryConsumer.getConsumedPower(dimensionsArr[0]);
@@ -1464,7 +1841,7 @@ public final class AppBatteryTracker extends BaseAppStateTracker {
                         d5 = uidBatteryConsumer.getConsumedPower(dimensionsArr[4]);
                     } catch (IllegalArgumentException unused6) {
                     }
-                    batteryUsage.mUsage = new double[]{d, d2, d3, d4, d5};
+                    batteryUsage.mUsage = new double[] {d, d2, d3, d4, d5};
                     batteryUsage.scaleInternal(min);
                     int indexOfKey = sparseArray.indexOfKey(uid);
                     if (indexOfKey < 0) {

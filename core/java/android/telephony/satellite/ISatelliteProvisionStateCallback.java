@@ -5,24 +5,27 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteProvisionStateCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.ISatelliteProvisionStateCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.ISatelliteProvisionStateCallback";
 
     void onSatelliteProvisionStateChanged(boolean z) throws RemoteException;
 
-    void onSatelliteSubscriptionProvisionStateChanged(List<SatelliteSubscriberProvisionStatus> list) throws RemoteException;
+    void onSatelliteSubscriptionProvisionStateChanged(List<SatelliteSubscriberProvisionStatus> list)
+            throws RemoteException;
 
     public static class Default implements ISatelliteProvisionStateCallback {
         @Override // android.telephony.satellite.ISatelliteProvisionStateCallback
-        public void onSatelliteProvisionStateChanged(boolean provisioned) throws RemoteException {
-        }
+        public void onSatelliteProvisionStateChanged(boolean provisioned) throws RemoteException {}
 
         @Override // android.telephony.satellite.ISatelliteProvisionStateCallback
-        public void onSatelliteSubscriptionProvisionStateChanged(List<SatelliteSubscriberProvisionStatus> satelliteSubscriberProvisionStatus) throws RemoteException {
-        }
+        public void onSatelliteSubscriptionProvisionStateChanged(
+                List<SatelliteSubscriberProvisionStatus> satelliteSubscriberProvisionStatus)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +33,7 @@ public interface ISatelliteProvisionStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteProvisionStateCallback {
+    public abstract static class Stub extends Binder implements ISatelliteProvisionStateCallback {
         static final int TRANSACTION_onSatelliteProvisionStateChanged = 1;
         static final int TRANSACTION_onSatelliteSubscriptionProvisionStateChanged = 2;
 
@@ -71,7 +74,8 @@ public interface ISatelliteProvisionStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteProvisionStateCallback.DESCRIPTOR);
             }
@@ -86,7 +90,8 @@ public interface ISatelliteProvisionStateCallback extends IInterface {
                     onSatelliteProvisionStateChanged(_arg0);
                     return true;
                 case 2:
-                    List<SatelliteSubscriberProvisionStatus> _arg02 = data.createTypedArrayList(SatelliteSubscriberProvisionStatus.CREATOR);
+                    List<SatelliteSubscriberProvisionStatus> _arg02 =
+                            data.createTypedArrayList(SatelliteSubscriberProvisionStatus.CREATOR);
                     data.enforceNoDataAvail();
                     onSatelliteSubscriptionProvisionStateChanged(_arg02);
                     return true;
@@ -112,7 +117,8 @@ public interface ISatelliteProvisionStateCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteProvisionStateCallback
-            public void onSatelliteProvisionStateChanged(boolean provisioned) throws RemoteException {
+            public void onSatelliteProvisionStateChanged(boolean provisioned)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteProvisionStateCallback.DESCRIPTOR);
@@ -124,7 +130,9 @@ public interface ISatelliteProvisionStateCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteProvisionStateCallback
-            public void onSatelliteSubscriptionProvisionStateChanged(List<SatelliteSubscriberProvisionStatus> satelliteSubscriberProvisionStatus) throws RemoteException {
+            public void onSatelliteSubscriptionProvisionStateChanged(
+                    List<SatelliteSubscriberProvisionStatus> satelliteSubscriberProvisionStatus)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteProvisionStateCallback.DESCRIPTOR);

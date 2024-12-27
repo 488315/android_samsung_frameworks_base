@@ -7,13 +7,16 @@ import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import com.android.internal.util.FunctionalUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda4 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda4
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -33,16 +36,38 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                     try {
                         HashMap hashMap = new HashMap();
                         for (int i2 = 0; i2 < devicePolicyEngine.mLocalPolicies.size(); i2++) {
-                            UserHandle of = UserHandle.of(devicePolicyEngine.mLocalPolicies.keyAt(i2));
+                            UserHandle of =
+                                    UserHandle.of(devicePolicyEngine.mLocalPolicies.keyAt(i2));
                             hashMap.put(of, new HashMap());
-                            for (PolicyKey policyKey : ((Map) devicePolicyEngine.mLocalPolicies.valueAt(i2)).keySet()) {
-                                ((Map) hashMap.get(of)).put(policyKey, ((PolicyState) ((Map) devicePolicyEngine.mLocalPolicies.valueAt(i2)).get(policyKey)).getParcelablePolicyState());
+                            for (PolicyKey policyKey :
+                                    ((Map) devicePolicyEngine.mLocalPolicies.valueAt(i2))
+                                            .keySet()) {
+                                ((Map) hashMap.get(of))
+                                        .put(
+                                                policyKey,
+                                                ((PolicyState)
+                                                                ((Map)
+                                                                                devicePolicyEngine
+                                                                                        .mLocalPolicies
+                                                                                        .valueAt(
+                                                                                                i2))
+                                                                        .get(policyKey))
+                                                        .getParcelablePolicyState());
                             }
                         }
                         if (!((HashMap) devicePolicyEngine.mGlobalPolicies).isEmpty()) {
                             hashMap.put(UserHandle.ALL, new HashMap());
-                            for (PolicyKey policyKey2 : ((HashMap) devicePolicyEngine.mGlobalPolicies).keySet()) {
-                                ((Map) hashMap.get(UserHandle.ALL)).put(policyKey2, ((PolicyState) ((HashMap) devicePolicyEngine.mGlobalPolicies).get(policyKey2)).getParcelablePolicyState());
+                            for (PolicyKey policyKey2 :
+                                    ((HashMap) devicePolicyEngine.mGlobalPolicies).keySet()) {
+                                ((Map) hashMap.get(UserHandle.ALL))
+                                        .put(
+                                                policyKey2,
+                                                ((PolicyState)
+                                                                ((HashMap)
+                                                                                devicePolicyEngine
+                                                                                        .mGlobalPolicies)
+                                                                        .get(policyKey2))
+                                                        .getParcelablePolicyState());
                             }
                         }
                         devicePolicyState = new DevicePolicyState(hashMap);
@@ -53,10 +78,20 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 return devicePolicyState;
             case 1:
                 Context context = (Context) obj;
-                return Boolean.valueOf(context.getSystemService(UsbManager.class) != null && ((UsbManager) context.getSystemService(UsbManager.class)).getUsbHalVersion() >= 13);
+                return Boolean.valueOf(
+                        context.getSystemService(UsbManager.class) != null
+                                && ((UsbManager) context.getSystemService(UsbManager.class))
+                                                .getUsbHalVersion()
+                                        >= 13);
             default:
                 ContentResolver contentResolver = (ContentResolver) obj;
-                return Boolean.valueOf(Settings.Secure.getIntForUser(contentResolver, "managed_provisioning_dpc_downloaded", 0, contentResolver.getUserId()) == 1);
+                return Boolean.valueOf(
+                        Settings.Secure.getIntForUser(
+                                        contentResolver,
+                                        "managed_provisioning_dpc_downloaded",
+                                        0,
+                                        contentResolver.getUserId())
+                                == 1);
         }
     }
 }

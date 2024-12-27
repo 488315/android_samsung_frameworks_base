@@ -1,22 +1,22 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class CpuStatsInfo implements Parcelable {
-    public static final Parcelable.Creator<CpuStatsInfo> CREATOR = new Parcelable.Creator<CpuStatsInfo>() { // from class: android.os.CpuStatsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CpuStatsInfo createFromParcel(Parcel in) {
-            return new CpuStatsInfo(in);
-        }
+    public static final Parcelable.Creator<CpuStatsInfo> CREATOR =
+            new Parcelable.Creator<CpuStatsInfo>() { // from class: android.os.CpuStatsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CpuStatsInfo createFromParcel(Parcel in) {
+                    return new CpuStatsInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CpuStatsInfo[] newArray(int size) {
-            return new CpuStatsInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CpuStatsInfo[] newArray(int size) {
+                    return new CpuStatsInfo[size];
+                }
+            };
     public String name;
     public int pid;
     public long rel_stime;
@@ -24,8 +24,7 @@ public class CpuStatsInfo implements Parcelable {
     public int tid;
     public int uid;
 
-    public CpuStatsInfo() {
-    }
+    public CpuStatsInfo() {}
 
     public CpuStatsInfo(Parcel in) {
         this.name = in.readString();

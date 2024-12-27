@@ -6,14 +6,15 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.ArraySet;
 import android.view.SurfaceControl;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
-import com.android.server.wm.InputMonitor;
-import com.android.server.wm.WindowManagerService;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda6 implements Consumer {
+public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda6
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -35,20 +36,27 @@ public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda
                 windowManagerService.getClass();
                 if (displayContent.mDisplay.getType() == 1) {
                     displayContent.mMaxUiWidth = windowManagerService.mMaxUiWidth;
-                    displayContent.updateBaseDisplayMetrics(displayContent.mBaseDisplayWidth, displayContent.mBaseDisplayHeight, displayContent.mBaseDisplayDensity, displayContent.mBaseDisplayPhysicalXDpi, displayContent.mBaseDisplayPhysicalYDpi);
+                    displayContent.updateBaseDisplayMetrics(
+                            displayContent.mBaseDisplayWidth,
+                            displayContent.mBaseDisplayHeight,
+                            displayContent.mBaseDisplayDensity,
+                            displayContent.mBaseDisplayPhysicalXDpi,
+                            displayContent.mBaseDisplayPhysicalYDpi);
                     break;
                 }
                 break;
             case 1:
                 DisplayContent displayContent2 = (DisplayContent) obj;
-                WindowManagerService.this.mDisplayWindowSettings.applySettingsToDisplayLocked(displayContent2, true);
+                WindowManagerService.this.mDisplayWindowSettings.applySettingsToDisplayLocked(
+                        displayContent2, true);
                 displayContent2.reconfigureDisplayLocked();
                 break;
             case 2:
                 int i3 = WindowManagerService.MY_PID;
                 InputMonitor inputMonitor = ((DisplayContent) obj).mInputMonitor;
                 Handler handler = inputMonitor.mHandler;
-                InputMonitor.UpdateInputWindows updateInputWindows = inputMonitor.mUpdateInputWindows;
+                InputMonitor.UpdateInputWindows updateInputWindows =
+                        inputMonitor.mUpdateInputWindows;
                 handler.removeCallbacks(updateInputWindows);
                 inputMonitor.mUpdateInputWindowsImmediately = true;
                 updateInputWindows.run();
@@ -59,13 +67,19 @@ public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda
                 ArraySet arraySet = (ArraySet) obj2;
                 ActivityRecord activityRecord = (ActivityRecord) obj;
                 int i4 = WindowManagerService.MY_PID;
-                if (!arraySet.contains(activityRecord.mActivityComponent) && activityRecord.mVisible && (remoteCallbackList = activityRecord.mCaptureCallbacks) != null && remoteCallbackList.getRegisteredCallbackCount() > 0) {
+                if (!arraySet.contains(activityRecord.mActivityComponent)
+                        && activityRecord.mVisible
+                        && (remoteCallbackList = activityRecord.mCaptureCallbacks) != null
+                        && remoteCallbackList.getRegisteredCallbackCount() > 0) {
                     RemoteCallbackList remoteCallbackList2 = activityRecord.mCaptureCallbacks;
                     if (remoteCallbackList2 != null) {
                         int beginBroadcast = remoteCallbackList2.beginBroadcast();
                         for (int i5 = 0; i5 < beginBroadcast; i5++) {
                             try {
-                                activityRecord.mCaptureCallbacks.getBroadcastItem(i5).onScreenCaptured();
+                                activityRecord
+                                        .mCaptureCallbacks
+                                        .getBroadcastItem(i5)
+                                        .onScreenCaptured();
                             } catch (RemoteException unused) {
                             }
                         }
@@ -76,7 +90,8 @@ public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda
                 }
                 break;
             default:
-                WindowManagerService.LocalService localService = (WindowManagerService.LocalService) obj2;
+                WindowManagerService.LocalService localService =
+                        (WindowManagerService.LocalService) obj2;
                 WindowState windowState = (WindowState) obj;
                 localService.getClass();
                 boolean isVisible = windowState.isVisible();
@@ -85,13 +100,24 @@ public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda
                     int i6 = WindowManagerService.MY_PID;
                     windowManagerService2.showToastIfBlockingScreenCapture(windowState);
                     break;
-                } else if (Flags.sensitiveContentRecentsScreenshotBugfix() && windowState.getTask() != null) {
-                    if (windowManagerService2.mSensitiveContentPackages.shouldBlockScreenCaptureForApp(windowState.mOwnerUid, windowState.mClient.asBinder(), windowState.mAttrs.packageName)) {
+                } else if (Flags.sensitiveContentRecentsScreenshotBugfix()
+                        && windowState.getTask() != null) {
+                    if (windowManagerService2.mSensitiveContentPackages
+                            .shouldBlockScreenCaptureForApp(
+                                    windowState.mOwnerUid,
+                                    windowState.mClient.asBinder(),
+                                    windowState.mAttrs.packageName)) {
                         Task task = windowState.getTask();
-                        windowManagerService2.mTaskSnapshotController.removeAndDeleteSnapshot(task.mTaskId, task.mUserId);
-                        TaskChangeNotificationController taskChangeNotificationController = task.mAtmService.mTaskChangeNotificationController;
-                        Message obtainMessage = taskChangeNotificationController.mHandler.obtainMessage(29, task.mTaskId, 0);
-                        taskChangeNotificationController.forAllLocalListeners(taskChangeNotificationController.mNotifyTaskSnapshotInvalidated, obtainMessage);
+                        windowManagerService2.mTaskSnapshotController.removeAndDeleteSnapshot(
+                                task.mTaskId, task.mUserId);
+                        TaskChangeNotificationController taskChangeNotificationController =
+                                task.mAtmService.mTaskChangeNotificationController;
+                        Message obtainMessage =
+                                taskChangeNotificationController.mHandler.obtainMessage(
+                                        29, task.mTaskId, 0);
+                        taskChangeNotificationController.forAllLocalListeners(
+                                taskChangeNotificationController.mNotifyTaskSnapshotInvalidated,
+                                obtainMessage);
                         obtainMessage.sendToTarget();
                         break;
                     }

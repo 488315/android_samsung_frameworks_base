@@ -7,20 +7,21 @@ public final class AppMonitor {
     private volatile boolean isMonitoringOn;
     private volatile EndpointMonitorInternal mInternal;
 
-    private AppMonitor() {
-    }
+    private AppMonitor() {}
 
     public static AppMonitor get() {
         return InstanceHolder.INSTANCE;
     }
 
-    public void reportApplicationBinding(long bindingTime, int pid, int uid, String procName, String label) {
+    public void reportApplicationBinding(
+            long bindingTime, int pid, int uid, String procName, String label) {
         if (getEndpointMonitor() != null) {
             this.mInternal.reportApplicationBinding(bindingTime, pid, uid, procName, label);
         }
     }
 
-    public void reportApplicationDying(long dyingTime, int pid, int uid, String procName, long cpuTime) {
+    public void reportApplicationDying(
+            long dyingTime, int pid, int uid, String procName, long cpuTime) {
         if (getEndpointMonitor() != null) {
             this.mInternal.reportApplicationDying(dyingTime, pid, uid, procName, cpuTime);
         }
@@ -30,7 +31,9 @@ public final class AppMonitor {
         if (this.mInternal == null) {
             synchronized (this) {
                 if (this.mInternal == null) {
-                    this.mInternal = (EndpointMonitorInternal) LocalServices.getService(EndpointMonitorInternal.class);
+                    this.mInternal =
+                            (EndpointMonitorInternal)
+                                    LocalServices.getService(EndpointMonitorInternal.class);
                 }
             }
         }
@@ -48,7 +51,6 @@ public final class AppMonitor {
     private static class InstanceHolder {
         private static final AppMonitor INSTANCE = new AppMonitor();
 
-        private InstanceHolder() {
-        }
+        private InstanceHolder() {}
     }
 }

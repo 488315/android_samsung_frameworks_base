@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class AnalysisResult implements Parcelable {
-    public static final Parcelable.Creator<AnalysisResult> CREATOR = new Parcelable.Creator<AnalysisResult>() { // from class: com.samsung.android.knox.mtd.AnalysisResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AnalysisResult createFromParcel(Parcel in) {
-            return new AnalysisResult(in);
-        }
+    public static final Parcelable.Creator<AnalysisResult> CREATOR =
+            new Parcelable.Creator<
+                    AnalysisResult>() { // from class: com.samsung.android.knox.mtd.AnalysisResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AnalysisResult createFromParcel(Parcel in) {
+                    return new AnalysisResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AnalysisResult[] newArray(int size) {
-            return new AnalysisResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AnalysisResult[] newArray(int size) {
+                    return new AnalysisResult[size];
+                }
+            };
     double confidence;
     String givenInput;
     long inferenceTime;

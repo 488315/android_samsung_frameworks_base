@@ -1,6 +1,7 @@
 package com.android.server.net.watchlist;
 
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.security.MessageDigest;
@@ -12,7 +13,8 @@ public abstract class DigestUtils {
         FileInputStream fileInputStream = new FileInputStream(file);
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA256");
-            byte[] bArr = new byte[EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION];
+            byte[] bArr =
+                    new byte[EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION];
             while (true) {
                 int read = fileInputStream.read(bArr);
                 if (read < 0) {

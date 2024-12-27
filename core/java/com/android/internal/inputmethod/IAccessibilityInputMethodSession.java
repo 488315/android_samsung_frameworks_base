@@ -6,36 +6,47 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.inputmethod.EditorInfo;
-import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 
 /* loaded from: classes5.dex */
 public interface IAccessibilityInputMethodSession extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.inputmethod.IAccessibilityInputMethodSession";
+    public static final String DESCRIPTOR =
+            "com.android.internal.inputmethod.IAccessibilityInputMethodSession";
 
     void finishInput() throws RemoteException;
 
     void finishSession() throws RemoteException;
 
-    void invalidateInput(EditorInfo editorInfo, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i) throws RemoteException;
+    void invalidateInput(
+            EditorInfo editorInfo,
+            IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+            int i)
+            throws RemoteException;
 
     void updateSelection(int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException;
 
     public static class Default implements IAccessibilityInputMethodSession {
         @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
-        public void updateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd, int candidatesStart, int candidatesEnd) throws RemoteException {
-        }
+        public void updateSelection(
+                int oldSelStart,
+                int oldSelEnd,
+                int newSelStart,
+                int newSelEnd,
+                int candidatesStart,
+                int candidatesEnd)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
-        public void finishInput() throws RemoteException {
-        }
+        public void finishInput() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
-        public void finishSession() throws RemoteException {
-        }
+        public void finishSession() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
-        public void invalidateInput(EditorInfo editorInfo, IRemoteAccessibilityInputConnection connection, int sessionId) throws RemoteException {
-        }
+        public void invalidateInput(
+                EditorInfo editorInfo,
+                IRemoteAccessibilityInputConnection connection,
+                int sessionId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +54,7 @@ public interface IAccessibilityInputMethodSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccessibilityInputMethodSession {
+    public abstract static class Stub extends Binder implements IAccessibilityInputMethodSession {
         static final int TRANSACTION_finishInput = 2;
         static final int TRANSACTION_finishSession = 3;
         static final int TRANSACTION_invalidateInput = 4;
@@ -90,7 +101,8 @@ public interface IAccessibilityInputMethodSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAccessibilityInputMethodSession.DESCRIPTOR);
             }
@@ -117,7 +129,9 @@ public interface IAccessibilityInputMethodSession extends IInterface {
                     return true;
                 case 4:
                     EditorInfo _arg02 = (EditorInfo) data.readTypedObject(EditorInfo.CREATOR);
-                    IRemoteAccessibilityInputConnection _arg12 = IRemoteAccessibilityInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAccessibilityInputConnection _arg12 =
+                            IRemoteAccessibilityInputConnection.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
                     invalidateInput(_arg02, _arg12, _arg22);
@@ -144,7 +158,14 @@ public interface IAccessibilityInputMethodSession extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
-            public void updateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd, int candidatesStart, int candidatesEnd) throws RemoteException {
+            public void updateSelection(
+                    int oldSelStart,
+                    int oldSelEnd,
+                    int newSelStart,
+                    int newSelEnd,
+                    int candidatesStart,
+                    int candidatesEnd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);
@@ -183,7 +204,11 @@ public interface IAccessibilityInputMethodSession extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IAccessibilityInputMethodSession
-            public void invalidateInput(EditorInfo editorInfo, IRemoteAccessibilityInputConnection connection, int sessionId) throws RemoteException {
+            public void invalidateInput(
+                    EditorInfo editorInfo,
+                    IRemoteAccessibilityInputConnection connection,
+                    int sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAccessibilityInputMethodSession.DESCRIPTOR);

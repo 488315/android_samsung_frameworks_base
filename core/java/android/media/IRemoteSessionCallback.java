@@ -17,12 +17,11 @@ public interface IRemoteSessionCallback extends IInterface {
 
     public static class Default implements IRemoteSessionCallback {
         @Override // android.media.IRemoteSessionCallback
-        public void onVolumeChanged(MediaSession.Token sessionToken, int flags) throws RemoteException {
-        }
+        public void onVolumeChanged(MediaSession.Token sessionToken, int flags)
+                throws RemoteException {}
 
         @Override // android.media.IRemoteSessionCallback
-        public void onSessionChanged(MediaSession.Token sessionToken) throws RemoteException {
-        }
+        public void onSessionChanged(MediaSession.Token sessionToken) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IRemoteSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteSessionCallback {
+    public abstract static class Stub extends Binder implements IRemoteSessionCallback {
         static final int TRANSACTION_onSessionChanged = 2;
         static final int TRANSACTION_onVolumeChanged = 1;
 
@@ -71,7 +70,8 @@ public interface IRemoteSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteSessionCallback.DESCRIPTOR);
             }
@@ -81,13 +81,15 @@ public interface IRemoteSessionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    MediaSession.Token _arg0 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg0 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     onVolumeChanged(_arg0, _arg1);
                     return true;
                 case 2:
-                    MediaSession.Token _arg02 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg02 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     data.enforceNoDataAvail();
                     onSessionChanged(_arg02);
                     return true;
@@ -113,7 +115,8 @@ public interface IRemoteSessionCallback extends IInterface {
             }
 
             @Override // android.media.IRemoteSessionCallback
-            public void onVolumeChanged(MediaSession.Token sessionToken, int flags) throws RemoteException {
+            public void onVolumeChanged(MediaSession.Token sessionToken, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteSessionCallback.DESCRIPTOR);

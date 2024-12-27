@@ -1,8 +1,10 @@
 package com.android.internal.org.bouncycastle.x509;
 
 import android.media.MediaMetrics;
+
 import com.android.internal.org.bouncycastle.util.Selector;
 import com.android.internal.org.bouncycastle.util.Store;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.cert.CertSelector;
 import java.security.cert.CertStore;
@@ -45,7 +47,8 @@ public class ExtendedPKIXParameters extends PKIXParameters {
 
     public static ExtendedPKIXParameters getInstance(PKIXParameters pkixParams) {
         try {
-            ExtendedPKIXParameters params = new ExtendedPKIXParameters(pkixParams.getTrustAnchors());
+            ExtendedPKIXParameters params =
+                    new ExtendedPKIXParameters(pkixParams.getTrustAnchors());
             params.setParams(pkixParams);
             return params;
         } catch (Exception e) {
@@ -72,7 +75,8 @@ public class ExtendedPKIXParameters extends PKIXParameters {
                 this.validityModel = _params.validityModel;
                 this.useDeltas = _params.useDeltas;
                 this.additionalLocationsEnabled = _params.additionalLocationsEnabled;
-                this.selector = _params.selector == null ? null : (Selector) _params.selector.clone();
+                this.selector =
+                        _params.selector == null ? null : (Selector) _params.selector.clone();
                 this.stores = new ArrayList(_params.stores);
                 this.additionalStores = new ArrayList(_params.additionalStores);
                 this.trustedACIssuers = new HashSet(_params.trustedACIssuers);
@@ -115,7 +119,9 @@ public class ExtendedPKIXParameters extends PKIXParameters {
         Iterator i = stores.iterator();
         while (i.hasNext()) {
             if (!(i.next() instanceof Store)) {
-                throw new ClassCastException("All elements of list must be of type com.android.internal.org.bouncycastle.util.Store.");
+                throw new ClassCastException(
+                        "All elements of list must be of type"
+                            + " com.android.internal.org.bouncycastle.util.Store.");
             }
         }
         this.stores = new ArrayList(stores);
@@ -205,7 +211,10 @@ public class ExtendedPKIXParameters extends PKIXParameters {
         Iterator it = trustedACIssuers.iterator();
         while (it.hasNext()) {
             if (!(it.next() instanceof TrustAnchor)) {
-                throw new ClassCastException("All elements of set must be of type " + TrustAnchor.class.getName() + MediaMetrics.SEPARATOR);
+                throw new ClassCastException(
+                        "All elements of set must be of type "
+                                + TrustAnchor.class.getName()
+                                + MediaMetrics.SEPARATOR);
             }
         }
         this.trustedACIssuers.clear();
@@ -262,7 +271,10 @@ public class ExtendedPKIXParameters extends PKIXParameters {
         Iterator it = attrCertCheckers.iterator();
         while (it.hasNext()) {
             if (!(it.next() instanceof PKIXAttrCertChecker)) {
-                throw new ClassCastException("All elements of set must be of type " + PKIXAttrCertChecker.class.getName() + MediaMetrics.SEPARATOR);
+                throw new ClassCastException(
+                        "All elements of set must be of type "
+                                + PKIXAttrCertChecker.class.getName()
+                                + MediaMetrics.SEPARATOR);
             }
         }
         this.attrCertCheckers.clear();

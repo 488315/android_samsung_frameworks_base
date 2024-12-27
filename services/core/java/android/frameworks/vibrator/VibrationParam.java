@@ -18,7 +18,9 @@ public final class VibrationParam implements Parcelable {
             VibrationParam vibrationParam = new VibrationParam();
             int readInt = parcel.readInt();
             if (readInt != 0) {
-                throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(readInt, "union: unknown tag: "));
+                throw new IllegalArgumentException(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                readInt, "union: unknown tag: "));
             }
             ScaleParam scaleParam = (ScaleParam) parcel.readTypedObject(ScaleParam.CREATOR);
             vibrationParam._tag = readInt;
@@ -49,7 +51,8 @@ public final class VibrationParam implements Parcelable {
         if (i == 0) {
             throw new IllegalStateException("bad access: scale, scale is available.");
         }
-        throw new IllegalStateException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "unknown field: "));
+        throw new IllegalStateException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "unknown field: "));
     }
 
     public final int getStability() {

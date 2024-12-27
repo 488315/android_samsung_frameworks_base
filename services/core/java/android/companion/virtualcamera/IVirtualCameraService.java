@@ -25,7 +25,8 @@ public interface IVirtualCameraService extends IInterface {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.companion.virtualcamera.IVirtualCameraService");
+                    obtain.writeInterfaceToken(
+                            "android.companion.virtualcamera.IVirtualCameraService");
                     obtain.writeStrongBinder(iBinder);
                     this.mRemote.transact(3, obtain, obtain2, 0);
                     obtain2.readException();
@@ -36,11 +37,13 @@ public interface IVirtualCameraService extends IInterface {
                 }
             }
 
-            public final boolean registerCamera(IBinder iBinder, VirtualCameraConfiguration virtualCameraConfiguration, int i) {
+            public final boolean registerCamera(
+                    IBinder iBinder, VirtualCameraConfiguration virtualCameraConfiguration, int i) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.companion.virtualcamera.IVirtualCameraService");
+                    obtain.writeInterfaceToken(
+                            "android.companion.virtualcamera.IVirtualCameraService");
                     obtain.writeStrongBinder(iBinder);
                     obtain.writeTypedObject(virtualCameraConfiguration, 0);
                     obtain.writeInt(i);
@@ -57,7 +60,8 @@ public interface IVirtualCameraService extends IInterface {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("android.companion.virtualcamera.IVirtualCameraService");
+                    obtain.writeInterfaceToken(
+                            "android.companion.virtualcamera.IVirtualCameraService");
                     obtain.writeStrongBinder(iBinder);
                     this.mRemote.transact(2, obtain, obtain2, 0);
                     obtain2.readException();
@@ -69,8 +73,11 @@ public interface IVirtualCameraService extends IInterface {
         }
 
         public static IVirtualCameraService asInterface(IBinder iBinder) {
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("android.companion.virtualcamera.IVirtualCameraService");
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVirtualCameraService)) {
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(
+                            "android.companion.virtualcamera.IVirtualCameraService");
+            if (queryLocalInterface != null
+                    && (queryLocalInterface instanceof IVirtualCameraService)) {
                 return (IVirtualCameraService) queryLocalInterface;
             }
             Proxy proxy = new Proxy();

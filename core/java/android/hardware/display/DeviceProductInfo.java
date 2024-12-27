@@ -2,6 +2,7 @@ package android.hardware.display;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -12,19 +13,21 @@ public final class DeviceProductInfo implements Parcelable {
     public static final int CONNECTION_TO_SINK_DIRECT = 2;
     public static final int CONNECTION_TO_SINK_TRANSITIVE = 3;
     public static final int CONNECTION_TO_SINK_UNKNOWN = 0;
-    public static final Parcelable.Creator<DeviceProductInfo> CREATOR = new Parcelable.Creator<DeviceProductInfo>() { // from class: android.hardware.display.DeviceProductInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DeviceProductInfo createFromParcel(Parcel in) {
-            return new DeviceProductInfo(in);
-        }
+    public static final Parcelable.Creator<DeviceProductInfo> CREATOR =
+            new Parcelable.Creator<DeviceProductInfo>() { // from class:
+                // android.hardware.display.DeviceProductInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DeviceProductInfo createFromParcel(Parcel in) {
+                    return new DeviceProductInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DeviceProductInfo[] newArray(int size) {
-            return new DeviceProductInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DeviceProductInfo[] newArray(int size) {
+                    return new DeviceProductInfo[size];
+                }
+            };
     private final int mConnectionToSinkType;
     private final ManufactureDate mManufactureDate;
     private final String mManufacturerPnpId;
@@ -33,10 +36,15 @@ public final class DeviceProductInfo implements Parcelable {
     private final String mProductId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConnectionToSinkType {
-    }
+    public @interface ConnectionToSinkType {}
 
-    public DeviceProductInfo(String name, String manufacturerPnpId, String productId, Integer modelYear, ManufactureDate manufactureDate, int connectionToSinkType) {
+    public DeviceProductInfo(
+            String name,
+            String manufacturerPnpId,
+            String productId,
+            Integer modelYear,
+            ManufactureDate manufactureDate,
+            int connectionToSinkType) {
         this.mName = name;
         this.mManufacturerPnpId = manufacturerPnpId;
         this.mProductId = productId;
@@ -45,7 +53,12 @@ public final class DeviceProductInfo implements Parcelable {
         this.mConnectionToSinkType = connectionToSinkType;
     }
 
-    public DeviceProductInfo(String name, String manufacturerPnpId, String productId, int modelYear, int connectionToSinkType) {
+    public DeviceProductInfo(
+            String name,
+            String manufacturerPnpId,
+            String productId,
+            int modelYear,
+            int connectionToSinkType) {
         this.mName = name;
         this.mManufacturerPnpId = (String) Objects.requireNonNull(manufacturerPnpId);
         this.mProductId = (String) Objects.requireNonNull(productId);
@@ -105,7 +118,19 @@ public final class DeviceProductInfo implements Parcelable {
     }
 
     public String toString() {
-        return "DeviceProductInfo{name=" + this.mName + ", manufacturerPnpId=" + this.mManufacturerPnpId + ", productId=" + this.mProductId + ", modelYear=" + this.mModelYear + ", manufactureDate=" + this.mManufactureDate + ", connectionToSinkType=" + this.mConnectionToSinkType + '}';
+        return "DeviceProductInfo{name="
+                + this.mName
+                + ", manufacturerPnpId="
+                + this.mManufacturerPnpId
+                + ", productId="
+                + this.mProductId
+                + ", modelYear="
+                + this.mModelYear
+                + ", manufactureDate="
+                + this.mManufactureDate
+                + ", connectionToSinkType="
+                + this.mConnectionToSinkType
+                + '}';
     }
 
     public boolean equals(Object o) {
@@ -116,14 +141,25 @@ public final class DeviceProductInfo implements Parcelable {
             return false;
         }
         DeviceProductInfo that = (DeviceProductInfo) o;
-        if (Objects.equals(this.mName, that.mName) && Objects.equals(this.mManufacturerPnpId, that.mManufacturerPnpId) && Objects.equals(this.mProductId, that.mProductId) && Objects.equals(this.mModelYear, that.mModelYear) && Objects.equals(this.mManufactureDate, that.mManufactureDate) && this.mConnectionToSinkType == that.mConnectionToSinkType) {
+        if (Objects.equals(this.mName, that.mName)
+                && Objects.equals(this.mManufacturerPnpId, that.mManufacturerPnpId)
+                && Objects.equals(this.mProductId, that.mProductId)
+                && Objects.equals(this.mModelYear, that.mModelYear)
+                && Objects.equals(this.mManufactureDate, that.mManufactureDate)
+                && this.mConnectionToSinkType == that.mConnectionToSinkType) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mName, this.mManufacturerPnpId, this.mProductId, this.mModelYear, this.mManufactureDate, Integer.valueOf(this.mConnectionToSinkType));
+        return Objects.hash(
+                this.mName,
+                this.mManufacturerPnpId,
+                this.mProductId,
+                this.mModelYear,
+                this.mManufactureDate,
+                Integer.valueOf(this.mConnectionToSinkType));
     }
 
     @Override // android.os.Parcelable
@@ -142,19 +178,21 @@ public final class DeviceProductInfo implements Parcelable {
     }
 
     public static class ManufactureDate implements Parcelable {
-        public static final Parcelable.Creator<ManufactureDate> CREATOR = new Parcelable.Creator<ManufactureDate>() { // from class: android.hardware.display.DeviceProductInfo.ManufactureDate.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ManufactureDate createFromParcel(Parcel in) {
-                return new ManufactureDate(in);
-            }
+        public static final Parcelable.Creator<ManufactureDate> CREATOR =
+                new Parcelable.Creator<ManufactureDate>() { // from class:
+                    // android.hardware.display.DeviceProductInfo.ManufactureDate.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ManufactureDate createFromParcel(Parcel in) {
+                        return new ManufactureDate(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ManufactureDate[] newArray(int size) {
-                return new ManufactureDate[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ManufactureDate[] newArray(int size) {
+                        return new ManufactureDate[size];
+                    }
+                };
         private final Integer mWeek;
         private final Integer mYear;
 

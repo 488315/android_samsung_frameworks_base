@@ -13,14 +13,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.policy.KeyCustomizationInfoXmlUtils;
-import com.android.server.policy.SideKeyDoublePress;
+
 import com.samsung.android.rune.InputRune;
 import com.samsung.android.view.SemWindowManager;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -54,9 +55,11 @@ public final class KeyCustomizationInfoManager {
         this.mContext = context;
     }
 
-    public static void dumpKeyCustomizationInfoKeyCodeMap(PrintWriter printWriter, SparseArray sparseArray) {
+    public static void dumpKeyCustomizationInfoKeyCodeMap(
+            PrintWriter printWriter, SparseArray sparseArray) {
         for (int i = 0; i < sparseArray.size(); i++) {
-            SemWindowManager.KeyCustomizationInfo keyCustomizationInfo = (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i);
+            SemWindowManager.KeyCustomizationInfo keyCustomizationInfo =
+                    (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i);
             if (keyCustomizationInfo != null) {
                 printWriter.print("    ");
                 printWriter.print("      ");
@@ -64,7 +67,8 @@ public final class KeyCustomizationInfoManager {
                 printWriter.print(", keyCode: ");
                 printWriter.print(keyCustomizationInfo.keyCode);
                 printWriter.print(", ");
-                printWriter.print(KeyCustomizationManager.actionToString(keyCustomizationInfo.action));
+                printWriter.print(
+                        KeyCustomizationManager.actionToString(keyCustomizationInfo.action));
                 int i2 = keyCustomizationInfo.dispatching;
                 if (i2 == -1) {
                     printWriter.print(", dispatching: ");
@@ -96,7 +100,11 @@ public final class KeyCustomizationInfoManager {
                 if (intent != null) {
                     if (intent.getExtras() != null) {
                         printWriter.print(", showOnKeyguard: ");
-                        printWriter.println(keyCustomizationInfo.intent.getExtras().getBoolean("show_on_keyguard"));
+                        printWriter.println(
+                                keyCustomizationInfo
+                                        .intent
+                                        .getExtras()
+                                        .getBoolean("show_on_keyguard"));
                         printWriter.print("    ");
                         printWriter.print("        ");
                     }
@@ -111,7 +119,10 @@ public final class KeyCustomizationInfoManager {
 
     public static SemWindowManager.KeyCustomizationInfo getKodiakPttInfo(int i, String str) {
         Intent intent;
-        String str2 = i != 1015 ? i != 1079 ? null : "com.mcx.intent.action.CRITICAL_COMMUNICATION_SOS_KEY" : "com.mcx.intent.action.CRITICAL_COMMUNICATION_CONTROL_KEY";
+        String str2 =
+                i != 1015
+                        ? i != 1079 ? null : "com.mcx.intent.action.CRITICAL_COMMUNICATION_SOS_KEY"
+                        : "com.mcx.intent.action.CRITICAL_COMMUNICATION_CONTROL_KEY";
         if (TextUtils.isEmpty(str2)) {
             intent = null;
         } else {
@@ -126,12 +137,20 @@ public final class KeyCustomizationInfoManager {
         return new SemWindowManager.KeyCustomizationInfo(3, 951, i, 2, intent);
     }
 
-    public static SemWindowManager.KeyCustomizationInfo getXCoverTopKeyCustomizationInfo(int i, int i2, String str) {
+    public static SemWindowManager.KeyCustomizationInfo getXCoverTopKeyCustomizationInfo(
+            int i, int i2, String str) {
         ComponentName unflattenFromString;
-        if (TextUtils.isEmpty(str) || (unflattenFromString = ComponentName.unflattenFromString(str)) == null) {
+        if (TextUtils.isEmpty(str)
+                || (unflattenFromString = ComponentName.unflattenFromString(str)) == null) {
             return null;
         }
-        int i3 = ("torch/torch".equals(str) || "home/home".equals(str) || "back/back".equals(str) || "quickMessageSender/quickMessageSender".equals(str)) ? 0 : 1;
+        int i3 =
+                ("torch/torch".equals(str)
+                                || "home/home".equals(str)
+                                || "back/back".equals(str)
+                                || "quickMessageSender/quickMessageSender".equals(str))
+                        ? 0
+                        : 1;
         Intent intent = new Intent("android.intent.action.MAIN");
         intent.addCategory("android.intent.category.LAUNCHER");
         intent.addFlags(270532608);
@@ -162,9 +181,14 @@ public final class KeyCustomizationInfoManager {
         }
         ArrayList arrayList = new ArrayList();
         for (int i2 = 0; i2 < sparseArray.size(); i2++) {
-            SemWindowManager.KeyCustomizationInfo keyCustomizationInfo = (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i2);
-            if (keyCustomizationInfo != null && (i = keyCustomizationInfo.id) != 10 && i != 30 && i != 50) {
-                NetworkScoreService$$ExternalSyntheticOutline0.m(i, "checkHomeLongPressInfo, id=", " added", "KeyCustomizationInfoManager");
+            SemWindowManager.KeyCustomizationInfo keyCustomizationInfo =
+                    (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i2);
+            if (keyCustomizationInfo != null
+                    && (i = keyCustomizationInfo.id) != 10
+                    && i != 30
+                    && i != 50) {
+                NetworkScoreService$$ExternalSyntheticOutline0.m(
+                        i, "checkHomeLongPressInfo, id=", " added", "KeyCustomizationInfoManager");
                 arrayList.add(Integer.valueOf(keyCustomizationInfo.id));
             }
         }
@@ -175,8 +199,11 @@ public final class KeyCustomizationInfoManager {
         Iterator it = arrayList.iterator();
         while (it.hasNext()) {
             Integer num = (Integer) it.next();
-            SemWindowManager.KeyCustomizationInfo keyCustomizationInfo2 = (SemWindowManager.KeyCustomizationInfo) sparseArray.get(num.intValue());
-            Log.d("KeyCustomizationInfoManager", "checkHomeLongPressInfo, remove " + keyCustomizationInfo2);
+            SemWindowManager.KeyCustomizationInfo keyCustomizationInfo2 =
+                    (SemWindowManager.KeyCustomizationInfo) sparseArray.get(num.intValue());
+            Log.d(
+                    "KeyCustomizationInfoManager",
+                    "checkHomeLongPressInfo, remove " + keyCustomizationInfo2);
             if (keyCustomizationInfo2 != null) {
                 sparseArray.remove(num.intValue());
                 if (num.intValue() == 2003) {
@@ -185,9 +212,12 @@ public final class KeyCustomizationInfoManager {
                     StringBuilder sb = new StringBuilder("Remove home key long press info, ID(");
                     sb.append(num);
                     sb.append("), ownerPackage=");
-                    VpnManagerService$$ExternalSyntheticOutline0.m(sb, str, "KeyCustomizationInfoManager");
+                    VpnManagerService$$ExternalSyntheticOutline0.m(
+                            sb, str, "KeyCustomizationInfoManager");
                 } else {
-                    Log.d("KeyCustomizationInfoManager", "Remove home key long press info, ID(" + num + ")");
+                    Log.d(
+                            "KeyCustomizationInfoManager",
+                            "Remove home key long press info, ID(" + num + ")");
                 }
                 z = true;
             }
@@ -199,11 +229,16 @@ public final class KeyCustomizationInfoManager {
         synchronized (this.mLock) {
             try {
                 SparseArray sparseArray = (SparseArray) getInfoMapLocked(i2).get(i3);
-                SemWindowManager.KeyCustomizationInfo keyCustomizationInfo = sparseArray == null ? null : (SemWindowManager.KeyCustomizationInfo) sparseArray.get(i);
+                SemWindowManager.KeyCustomizationInfo keyCustomizationInfo =
+                        sparseArray == null
+                                ? null
+                                : (SemWindowManager.KeyCustomizationInfo) sparseArray.get(i);
                 if (keyCustomizationInfo == null) {
                     return null;
                 }
-                if (i != 2003 || (!TextUtils.isEmpty(str) && str.equals(keyCustomizationInfo.ownerPackage))) {
+                if (i != 2003
+                        || (!TextUtils.isEmpty(str)
+                                && str.equals(keyCustomizationInfo.ownerPackage))) {
                     return keyCustomizationInfo;
                 }
                 return null;
@@ -231,13 +266,15 @@ public final class KeyCustomizationInfoManager {
         if ((i & 64) != 0) {
             return this.mQuintupleMap;
         }
-        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Can not find infoMap. which="));
+        throw new IllegalArgumentException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Can not find infoMap. which="));
     }
 
     public final SemWindowManager.KeyCustomizationInfo getLast(int i, int i2) {
         SemWindowManager.KeyCustomizationInfo keyCustomizationInfo;
         synchronized (this.mLock) {
-            keyCustomizationInfo = (SemWindowManager.KeyCustomizationInfo) getLastInfoLocked(i).get(i2);
+            keyCustomizationInfo =
+                    (SemWindowManager.KeyCustomizationInfo) getLastInfoLocked(i).get(i2);
         }
         return keyCustomizationInfo;
     }
@@ -261,12 +298,14 @@ public final class KeyCustomizationInfoManager {
         if ((i & 64) != 0) {
             return this.mLastQuintupleInfo;
         }
-        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Can not find lastInfo. which="));
+        throw new IllegalArgumentException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Can not find lastInfo. which="));
     }
 
     public final SemWindowManager.KeyCustomizationInfo getQuickLaunchCameraInfoFromSetting(int i) {
         int i2 = Settings.System.getInt(this.mContext.getContentResolver(), "double_tab_launch", 2);
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "getQuickLaunchCameraInfoFromSetting behavior=", "KeyCustomizationInfoManager");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i2, "getQuickLaunchCameraInfoFromSetting behavior=", "KeyCustomizationInfoManager");
         if (i2 == 2 || i2 == 0) {
             return null;
         }
@@ -276,15 +315,27 @@ public final class KeyCustomizationInfoManager {
     public final SemWindowManager.KeyCustomizationInfo getSideKeyDoubleInfoFromGlobalSetting() {
         SideKeyDoublePress.Behavior behavior;
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        boolean z = Settings.Global.getInt(contentResolver, "function_key_config_doublepress", 1) == 1;
+        boolean z =
+                Settings.Global.getInt(contentResolver, "function_key_config_doublepress", 1) == 1;
         if (!z) {
             return null;
         }
         int i = Settings.Global.getInt(contentResolver, "function_key_config_doublepress_type", 0);
-        String string = Settings.Global.getString(contentResolver, "function_key_config_doublepress_value");
-        VpnManagerService$$ExternalSyntheticOutline0.m(AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "getSideKeyDoubleInfoFromGlobalSetting enabled=", " type=", " appInfo=", z), string, "KeyCustomizationInfoManager");
+        String string =
+                Settings.Global.getString(contentResolver, "function_key_config_doublepress_value");
+        VpnManagerService$$ExternalSyntheticOutline0.m(
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i,
+                        "getSideKeyDoubleInfoFromGlobalSetting enabled=",
+                        " type=",
+                        " appInfo=",
+                        z),
+                string,
+                "KeyCustomizationInfoManager");
         if (i == 0) {
-            behavior = SideKeyDoublePress.getBehavior("com.sec.android.app.camera/com.sec.android.app.camera.Camera");
+            behavior =
+                    SideKeyDoublePress.getBehavior(
+                            "com.sec.android.app.camera/com.sec.android.app.camera.Camera");
         } else if (i == 2) {
             behavior = SideKeyDoublePress.getBehavior(string);
         } else if (i == 3) {
@@ -298,7 +349,8 @@ public final class KeyCustomizationInfoManager {
         if (behavior == null) {
             return null;
         }
-        return new SemWindowManager.KeyCustomizationInfo(8, 1104, 26, behavior.getAction(), behavior.getIntent());
+        return new SemWindowManager.KeyCustomizationInfo(
+                8, 1104, 26, behavior.getAction(), behavior.getIntent());
     }
 
     /* JADX WARN: Removed duplicated region for block: B:10:0x0043 A[RETURN] */
@@ -307,7 +359,8 @@ public final class KeyCustomizationInfoManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.view.SemWindowManager.KeyCustomizationInfo getSideKeyLongInfoFromGlobalSetting() {
+    public final com.samsung.android.view.SemWindowManager.KeyCustomizationInfo
+            getSideKeyLongInfoFromGlobalSetting() {
         /*
             r11 = this;
             android.content.Context r11 = r11.mContext
@@ -366,19 +419,22 @@ public final class KeyCustomizationInfoManager {
             r5.<init>(r6, r7, r8, r9, r10)
             return r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.policy.KeyCustomizationInfoManager.getSideKeyLongInfoFromGlobalSetting():com.samsung.android.view.SemWindowManager$KeyCustomizationInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.policy.KeyCustomizationInfoManager.getSideKeyLongInfoFromGlobalSetting():com.samsung.android.view.SemWindowManager$KeyCustomizationInfo");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0060, code lost:
-    
-        if (r11.equals("com.sprint.sdcplus") == false) goto L14;
-     */
+
+       if (r11.equals("com.sprint.sdcplus") == false) goto L14;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.view.SemWindowManager.KeyCustomizationInfo getXCoverKeyB2BDeltaInfoFromSetting(int r12) {
+    public final com.samsung.android.view.SemWindowManager.KeyCustomizationInfo
+            getXCoverKeyB2BDeltaInfoFromSetting(int r12) {
         /*
             r11 = this;
             r0 = 1
@@ -519,7 +575,9 @@ public final class KeyCustomizationInfoManager {
         Lc7:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.policy.KeyCustomizationInfoManager.getXCoverKeyB2BDeltaInfoFromSetting(int):com.samsung.android.view.SemWindowManager$KeyCustomizationInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.policy.KeyCustomizationInfoManager.getXCoverKeyB2BDeltaInfoFromSetting(int):com.samsung.android.view.SemWindowManager$KeyCustomizationInfo");
     }
 
     public final void init(int i, boolean z) {
@@ -528,7 +586,16 @@ public final class KeyCustomizationInfoManager {
             try {
                 long uptimeMillis = SystemClock.uptimeMillis();
                 this.mXmlUtils.loadSettingsLocked(i);
-                Log.d("KeyCustomizationInfoManager", "loadSettings duration=" + (SystemClock.uptimeMillis() - uptimeMillis) + " version=" + this.mXmlUtils.mXmlVersion + " userId=" + i + " userSwitching=" + z);
+                Log.d(
+                        "KeyCustomizationInfoManager",
+                        "loadSettings duration="
+                                + (SystemClock.uptimeMillis() - uptimeMillis)
+                                + " version="
+                                + this.mXmlUtils.mXmlVersion
+                                + " userId="
+                                + i
+                                + " userSwitching="
+                                + z);
                 long uptimeMillis2 = SystemClock.uptimeMillis();
                 KeyCustomizationInfoXmlUtils.ErrorCode errorCode = this.mXmlUtils.xmlFileErrorCode;
                 if (errorCode == KeyCustomizationInfoXmlUtils.ErrorCode.FILE_NOT_FOUND) {
@@ -555,14 +622,21 @@ public final class KeyCustomizationInfoManager {
                         keyCustomizationInfoXmlUtils.saveSettingsLocked(i);
                     }
                 } else if (errorCode == KeyCustomizationInfoXmlUtils.ErrorCode.SUCCESS) {
-                    boolean checkHomeLongPressInfo = InputRune.PWM_HOME_KEY_LONG_PRESS_SEARCLE ? checkHomeLongPressInfo() : false;
+                    boolean checkHomeLongPressInfo =
+                            InputRune.PWM_HOME_KEY_LONG_PRESS_SEARCLE
+                                    ? checkHomeLongPressInfo()
+                                    : false;
                     if (!z) {
                         KeyCustomizationInfoXmlUtils keyCustomizationInfoXmlUtils2 = this.mXmlUtils;
                         if (Float.compare(keyCustomizationInfoXmlUtils2.mXmlVersion, 4.1f) == 0) {
                             String str = KeyCustomizationConstants.VOLD_DECRYPT;
                             z2 = false;
                         } else {
-                            Log.d("KeyCustomizationInfoXmlUtils", "updateXmlVersion old=" + keyCustomizationInfoXmlUtils2.mXmlVersion + " new=4.1");
+                            Log.d(
+                                    "KeyCustomizationInfoXmlUtils",
+                                    "updateXmlVersion old="
+                                            + keyCustomizationInfoXmlUtils2.mXmlVersion
+                                            + " new=4.1");
                             keyCustomizationInfoXmlUtils2.mXmlVersion = 4.1f;
                             z2 = true;
                         }
@@ -578,9 +652,15 @@ public final class KeyCustomizationInfoManager {
                         }
                     }
                 } else {
-                    Log.e("KeyCustomizationInfoManager", "Xml file error code was wrong. code=" + this.mXmlUtils.xmlFileErrorCode);
+                    Log.e(
+                            "KeyCustomizationInfoManager",
+                            "Xml file error code was wrong. code="
+                                    + this.mXmlUtils.xmlFileErrorCode);
                 }
-                Log.d("KeyCustomizationInfoManager", "initKeyCustomizationInfo duration=" + (SystemClock.uptimeMillis() - uptimeMillis2));
+                Log.d(
+                        "KeyCustomizationInfoManager",
+                        "initKeyCustomizationInfo duration="
+                                + (SystemClock.uptimeMillis() - uptimeMillis2));
             } catch (Throwable th) {
                 throw th;
             }
@@ -588,13 +668,13 @@ public final class KeyCustomizationInfoManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0037, code lost:
-    
-        if (r4 != false) goto L109;
-     */
+
+       if (r4 != false) goto L109;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x007f, code lost:
-    
-        if (r4 != false) goto L45;
-     */
+
+       if (r4 != false) goto L45;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -604,26 +684,29 @@ public final class KeyCustomizationInfoManager {
             Method dump skipped, instructions count: 506
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.policy.KeyCustomizationInfoManager.initKeyCustomizationInfoLocked(int, int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.policy.KeyCustomizationInfoManager.initKeyCustomizationInfoLocked(int,"
+                    + " int, boolean):void");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0081, code lost:
-    
-        if ("VPP".equals(r6) == false) goto L56;
-     */
+
+       if ("VPP".equals(r6) == false) goto L56;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x0092, code lost:
-    
-        if ("AIO".equals(r6) == false) goto L56;
-     */
+
+       if ("AIO".equals(r6) == false) goto L56;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x00ab, code lost:
-    
-        if ("ASR".equals(r6) == false) goto L56;
-     */
+
+       if ("ASR".equals(r6) == false) goto L56;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x00b4, code lost:
-    
-        if ("BMC".equals(r6) != false) goto L52;
-     */
+
+       if ("BMC".equals(r6) != false) goto L52;
+    */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /* JADX WARN: Removed duplicated region for block: B:33:0x00b8 A[SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:37:0x00e2 A[SYNTHETIC] */
@@ -631,12 +714,16 @@ public final class KeyCustomizationInfoManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean initKodiakDedicatedPttApp(com.samsung.android.view.SemWindowManager.KeyCustomizationInfo r13, int r14) {
+    public final boolean initKodiakDedicatedPttApp(
+            com.samsung.android.view.SemWindowManager.KeyCustomizationInfo r13, int r14) {
         /*
             Method dump skipped, instructions count: 260
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.policy.KeyCustomizationInfoManager.initKodiakDedicatedPttApp(com.samsung.android.view.SemWindowManager$KeyCustomizationInfo, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.policy.KeyCustomizationInfoManager.initKodiakDedicatedPttApp(com.samsung.android.view.SemWindowManager$KeyCustomizationInfo,"
+                    + " int):boolean");
     }
 
     public final void put(SemWindowManager.KeyCustomizationInfo keyCustomizationInfo, boolean z) {
@@ -659,15 +746,19 @@ public final class KeyCustomizationInfoManager {
                 } else if (i3 >= 1000 && (size = sparseArray.size()) > 0) {
                     ArrayList arrayList = new ArrayList();
                     for (int i5 = 0; i5 < size; i5++) {
-                        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo2 = (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i5);
-                        if (keyCustomizationInfo2 != null && (i = keyCustomizationInfo2.id) >= 1000) {
+                        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo2 =
+                                (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i5);
+                        if (keyCustomizationInfo2 != null
+                                && (i = keyCustomizationInfo2.id) >= 1000) {
                             arrayList.add(Integer.valueOf(i));
                         }
                     }
                     Iterator it = arrayList.iterator();
                     while (it.hasNext()) {
                         Integer num = (Integer) it.next();
-                        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo3 = (SemWindowManager.KeyCustomizationInfo) sparseArray.get(num.intValue());
+                        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo3 =
+                                (SemWindowManager.KeyCustomizationInfo)
+                                        sparseArray.get(num.intValue());
                         if (keyCustomizationInfo3 != null) {
                             String str2 = keyCustomizationInfo3.ownerPackage;
                             sparseArray.remove(num.intValue());
@@ -698,12 +789,18 @@ public final class KeyCustomizationInfoManager {
                 if (sparseArray == null) {
                     return false;
                 }
-                SemWindowManager.KeyCustomizationInfo keyCustomizationInfo = (SemWindowManager.KeyCustomizationInfo) sparseArray.get(i);
+                SemWindowManager.KeyCustomizationInfo keyCustomizationInfo =
+                        (SemWindowManager.KeyCustomizationInfo) sparseArray.get(i);
                 if (keyCustomizationInfo == null) {
                     return false;
                 }
-                if (i == 2003 && !TextUtils.isEmpty(str) && !str.equals(keyCustomizationInfo.ownerPackage)) {
-                    Slog.d("KeyCustomizationInfoManager", "Can not remove data, There is no matched with ownerPackage=".concat(str));
+                if (i == 2003
+                        && !TextUtils.isEmpty(str)
+                        && !str.equals(keyCustomizationInfo.ownerPackage)) {
+                    Slog.d(
+                            "KeyCustomizationInfoManager",
+                            "Can not remove data, There is no matched with ownerPackage="
+                                    .concat(str));
                     return false;
                 }
                 sparseArray.remove(i);
@@ -732,8 +829,11 @@ public final class KeyCustomizationInfoManager {
                 SparseArray sparseArray = (SparseArray) infoMapLocked.valueAt(i2);
                 if (sparseArray != null) {
                     for (int i3 = 0; i3 < sparseArray.size(); i3++) {
-                        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo = (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i3);
-                        if (keyCustomizationInfo != null && keyCustomizationInfo.id == 2003 && str.equals(keyCustomizationInfo.ownerPackage)) {
+                        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo =
+                                (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i3);
+                        if (keyCustomizationInfo != null
+                                && keyCustomizationInfo.id == 2003
+                                && str.equals(keyCustomizationInfo.ownerPackage)) {
                             return;
                         }
                     }
@@ -752,7 +852,13 @@ public final class KeyCustomizationInfoManager {
         try {
             int currentUser = ActivityManager.getCurrentUser();
             if (this.mUserId != currentUser) {
-                Slog.d("KeyCustomizationInfoManager", "saveSettingsLocked, userId(" + this.mUserId + ") is no matched with newId(" + currentUser + ")");
+                Slog.d(
+                        "KeyCustomizationInfoManager",
+                        "saveSettingsLocked, userId("
+                                + this.mUserId
+                                + ") is no matched with newId("
+                                + currentUser
+                                + ")");
                 this.mUserId = currentUser;
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -772,7 +878,8 @@ public final class KeyCustomizationInfoManager {
             } else {
                 int i5 = 2004;
                 for (int i6 = 0; i6 < sparseArray.size(); i6++) {
-                    SemWindowManager.KeyCustomizationInfo keyCustomizationInfo = (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i6);
+                    SemWindowManager.KeyCustomizationInfo keyCustomizationInfo =
+                            (SemWindowManager.KeyCustomizationInfo) sparseArray.valueAt(i6);
                     if (keyCustomizationInfo != null && i5 > (i4 = keyCustomizationInfo.id)) {
                         i5 = i4;
                     }
@@ -788,7 +895,10 @@ public final class KeyCustomizationInfoManager {
             return;
         }
         SparseArray sparseArray2 = (SparseArray) getInfoMapLocked(i).get(i2);
-        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo2 = sparseArray2 == null ? null : (SemWindowManager.KeyCustomizationInfo) sparseArray2.get(i3);
+        SemWindowManager.KeyCustomizationInfo keyCustomizationInfo2 =
+                sparseArray2 == null
+                        ? null
+                        : (SemWindowManager.KeyCustomizationInfo) sparseArray2.get(i3);
         if (keyCustomizationInfo2 == null) {
             return;
         }

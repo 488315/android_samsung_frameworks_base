@@ -9,11 +9,13 @@ import android.util.ArraySet;
 import android.util.DebugUtils;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
+
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.SystemConfig;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,13 +42,19 @@ public final class UserSystemPackageInstaller {
         Arrays.sort(strArr);
         this.mUserTypes = strArr;
         if (size <= 64) {
-            this.mWhitelistedPackagesForUserTypes = determineWhitelistedPackagesForUserTypes(SystemConfig.getInstance());
+            this.mWhitelistedPackagesForUserTypes =
+                    determineWhitelistedPackagesForUserTypes(SystemConfig.getInstance());
             return;
         }
-        throw new IllegalArgumentException("Device contains " + arrayMap.size() + " user types. However, UserSystemPackageInstaller does not work if there are more than 64 user types.");
+        throw new IllegalArgumentException(
+                "Device contains "
+                        + arrayMap.size()
+                        + " user types. However, UserSystemPackageInstaller does not work if there"
+                        + " are more than 64 user types.");
     }
 
-    public UserSystemPackageInstaller(UserManagerService userManagerService, ArrayMap arrayMap, String[] strArr) {
+    public UserSystemPackageInstaller(
+            UserManagerService userManagerService, ArrayMap arrayMap, String[] strArr) {
         this.mUm = userManagerService;
         this.mUserTypes = strArr;
         this.mWhitelistedPackagesForUserTypes = arrayMap;
@@ -54,19 +62,35 @@ public final class UserSystemPackageInstaller {
 
     public static int getWhitelistMode() {
         int i = SystemProperties.getInt("persist.debug.user.package_whitelist_mode", -1);
-        return i != -1 ? i : Resources.getSystem().getInteger(R.integer.device_idle_motion_inactive_to_ms);
+        return i != -1
+                ? i
+                : Resources.getSystem().getInteger(R.integer.device_idle_motion_inactive_to_ms);
     }
 
     public static String modeToString(int i) {
-        return i != -1000 ? i != -1 ? DebugUtils.flagsToString(UserSystemPackageInstaller.class, "USER_TYPE_PACKAGE_WHITELIST_MODE_", i) : "DEVICE_DEFAULT" : "NONE";
+        return i != -1000
+                ? i != -1
+                        ? DebugUtils.flagsToString(
+                                UserSystemPackageInstaller.class,
+                                "USER_TYPE_PACKAGE_WHITELIST_MODE_",
+                                i)
+                        : "DEVICE_DEFAULT"
+                : "NONE";
     }
 
-    public static boolean shouldInstallPackage(AndroidPackage androidPackage, ArrayMap arrayMap, Set set, boolean z) {
-        String overlayTarget = androidPackage.isOverlayIsStatic() ? androidPackage.getOverlayTarget() : androidPackage.getManifestPackageName();
-        return (z && !arrayMap.containsKey(overlayTarget)) || set.contains(overlayTarget) || androidPackage.isApex();
+    public static boolean shouldInstallPackage(
+            AndroidPackage androidPackage, ArrayMap arrayMap, Set set, boolean z) {
+        String overlayTarget =
+                androidPackage.isOverlayIsStatic()
+                        ? androidPackage.getOverlayTarget()
+                        : androidPackage.getManifestPackageName();
+        return (z && !arrayMap.containsKey(overlayTarget))
+                || set.contains(overlayTarget)
+                || androidPackage.isApex();
     }
 
-    public static void showIssues(IndentingPrintWriter indentingPrintWriter, boolean z, List list, String str) {
+    public static void showIssues(
+            IndentingPrintWriter indentingPrintWriter, boolean z, List list, String str) {
         int size = list.size();
         if (size == 0) {
             if (z) {
@@ -102,15 +126,18 @@ public final class UserSystemPackageInstaller {
             }
             String str = strArr[i];
             UserManagerService userManagerService = this.mUm;
-            UserTypeDetails userTypeDetails = (UserTypeDetails) userManagerService.mUserTypes.get(str);
+            UserTypeDetails userTypeDetails =
+                    (UserTypeDetails) userManagerService.mUserTypes.get(str);
             if (userTypeDetails != null && (userTypeDetails.mBaseType & 1024) != 0) {
                 j |= 1 << i;
             }
-            UserTypeDetails userTypeDetails2 = (UserTypeDetails) userManagerService.mUserTypes.get(strArr[i]);
+            UserTypeDetails userTypeDetails2 =
+                    (UserTypeDetails) userManagerService.mUserTypes.get(strArr[i]);
             if (userTypeDetails2 != null && (userTypeDetails2.mBaseType & 2048) != 0) {
                 j2 |= 1 << i;
             }
-            UserTypeDetails userTypeDetails3 = (UserTypeDetails) userManagerService.mUserTypes.get(strArr[i]);
+            UserTypeDetails userTypeDetails3 =
+                    (UserTypeDetails) userManagerService.mUserTypes.get(strArr[i]);
             if (userTypeDetails3 != null && userTypeDetails3.isProfile()) {
                 j3 |= 1 << i;
             }
@@ -202,7 +229,8 @@ public final class UserSystemPackageInstaller {
         indentingPrintWriter.decreaseIndent();
     }
 
-    public final void dumpPackageWhitelistProblems(IndentingPrintWriter indentingPrintWriter, int i, boolean z, boolean z2) {
+    public final void dumpPackageWhitelistProblems(
+            IndentingPrintWriter indentingPrintWriter, int i, boolean z, boolean z2) {
         if (i == -1000) {
             i = getWhitelistMode();
         } else if (i == -1) {
@@ -211,7 +239,9 @@ public final class UserSystemPackageInstaller {
         if (z2) {
             i &= -3;
         }
-        Slog.v("UserSystemPackageInstaller", "dumpPackageWhitelistProblems(): using mode " + modeToString(i));
+        Slog.v(
+                "UserSystemPackageInstaller",
+                "dumpPackageWhitelistProblems(): using mode " + modeToString(i));
         showIssues(indentingPrintWriter, z, getPackagesWhitelistErrors(i), "errors");
         if (z2) {
             return;
@@ -225,24 +255,46 @@ public final class UserSystemPackageInstaller {
         if ((whitelistMode & 1) == 0) {
             return null;
         }
-        final boolean z = ((whitelistMode & 4) == 0 && ((whitelistMode & 8) == 0 || (userTypeDetails = (UserTypeDetails) this.mUm.mUserTypes.get(str)) == null || (userTypeDetails.mBaseType & 2048) == 0)) ? false : true;
+        final boolean z =
+                ((whitelistMode & 4) == 0
+                                && ((whitelistMode & 8) == 0
+                                        || (userTypeDetails =
+                                                        (UserTypeDetails)
+                                                                this.mUm.mUserTypes.get(str))
+                                                == null
+                                        || (userTypeDetails.mBaseType & 2048) == 0))
+                        ? false
+                        : true;
         final Set whitelistedPackagesForUserType = getWhitelistedPackagesForUserType(str);
         final ArraySet arraySet = new ArraySet();
-        ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class)).forEachPackageState(new Consumer() { // from class: com.android.server.pm.UserSystemPackageInstaller$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                UserSystemPackageInstaller userSystemPackageInstaller = UserSystemPackageInstaller.this;
-                Set set = whitelistedPackagesForUserType;
-                boolean z2 = z;
-                Set set2 = arraySet;
-                PackageStateInternal packageStateInternal = (PackageStateInternal) obj;
-                userSystemPackageInstaller.getClass();
-                AndroidPackage androidPackage = packageStateInternal.getAndroidPackage();
-                if (androidPackage != null && packageStateInternal.isSystem() && UserSystemPackageInstaller.shouldInstallPackage(androidPackage, userSystemPackageInstaller.mWhitelistedPackagesForUserTypes, set, z2)) {
-                    set2.add(androidPackage.getPackageName());
-                }
-            }
-        });
+        ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class))
+                .forEachPackageState(
+                        new Consumer() { // from class:
+                                         // com.android.server.pm.UserSystemPackageInstaller$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                UserSystemPackageInstaller userSystemPackageInstaller =
+                                        UserSystemPackageInstaller.this;
+                                Set set = whitelistedPackagesForUserType;
+                                boolean z2 = z;
+                                Set set2 = arraySet;
+                                PackageStateInternal packageStateInternal =
+                                        (PackageStateInternal) obj;
+                                userSystemPackageInstaller.getClass();
+                                AndroidPackage androidPackage =
+                                        packageStateInternal.getAndroidPackage();
+                                if (androidPackage != null
+                                        && packageStateInternal.isSystem()
+                                        && UserSystemPackageInstaller.shouldInstallPackage(
+                                                androidPackage,
+                                                userSystemPackageInstaller
+                                                        .mWhitelistedPackagesForUserTypes,
+                                                set,
+                                                z2)) {
+                                    set2.add(androidPackage.getPackageName());
+                                }
+                            }
+                        });
         return arraySet;
     }
 
@@ -252,35 +304,50 @@ public final class UserSystemPackageInstaller {
         }
         final ArrayList arrayList = new ArrayList();
         final Set keySet = this.mWhitelistedPackagesForUserTypes.keySet();
-        final PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
-        packageManagerInternal.forEachPackageState(new Consumer() { // from class: com.android.server.pm.UserSystemPackageInstaller$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                Set set = keySet;
-                PackageManagerInternal packageManagerInternal2 = packageManagerInternal;
-                List list = arrayList;
-                PackageStateInternal packageStateInternal = (PackageStateInternal) obj;
-                AndroidPackage androidPackage = packageStateInternal.getAndroidPackage();
-                if (androidPackage == null || !packageStateInternal.isSystem() || androidPackage.isApex()) {
-                    return;
-                }
-                String manifestPackageName = androidPackage.getManifestPackageName();
-                if (set.contains(manifestPackageName) || packageManagerInternal2.getPackage(manifestPackageName).isOverlayIsStatic()) {
-                    return;
-                }
-                list.add("System package " + manifestPackageName + " is not whitelisted using 'install-in-user-type' in SystemConfig for any user types!");
-            }
-        });
+        final PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        packageManagerInternal.forEachPackageState(
+                new Consumer() { // from class:
+                    // com.android.server.pm.UserSystemPackageInstaller$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        Set set = keySet;
+                        PackageManagerInternal packageManagerInternal2 = packageManagerInternal;
+                        List list = arrayList;
+                        PackageStateInternal packageStateInternal = (PackageStateInternal) obj;
+                        AndroidPackage androidPackage = packageStateInternal.getAndroidPackage();
+                        if (androidPackage == null
+                                || !packageStateInternal.isSystem()
+                                || androidPackage.isApex()) {
+                            return;
+                        }
+                        String manifestPackageName = androidPackage.getManifestPackageName();
+                        if (set.contains(manifestPackageName)
+                                || packageManagerInternal2
+                                        .getPackage(manifestPackageName)
+                                        .isOverlayIsStatic()) {
+                            return;
+                        }
+                        list.add(
+                                "System package "
+                                        + manifestPackageName
+                                        + " is not whitelisted using 'install-in-user-type' in"
+                                        + " SystemConfig for any user types!");
+                    }
+                });
         return arrayList;
     }
 
     public final List getPackagesWhitelistWarnings() {
         Set<String> keySet = this.mWhitelistedPackagesForUserTypes.keySet();
         ArrayList arrayList = new ArrayList();
-        PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
         for (String str : keySet) {
-            PackageStateInternal packageStateInternal = packageManagerInternal.getPackageStateInternal(str);
-            AndroidPackage androidPackage = packageStateInternal == null ? null : packageStateInternal.getAndroidPackage();
+            PackageStateInternal packageStateInternal =
+                    packageManagerInternal.getPackageStateInternal(str);
+            AndroidPackage androidPackage =
+                    packageStateInternal == null ? null : packageStateInternal.getAndroidPackage();
             if (androidPackage == null) {
                 arrayList.add(str + " is allowlisted but not present.");
             } else if (!packageStateInternal.isSystem()) {
@@ -305,7 +372,10 @@ public final class UserSystemPackageInstaller {
                 if (userTypeMask != 0) {
                     j |= userTypeMask;
                 } else {
-                    HeimdAllFsService$$ExternalSyntheticOutline0.m("SystemConfig contained an invalid user type: ", str, "UserSystemPackageInstaller");
+                    HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                            "SystemConfig contained an invalid user type: ",
+                            str,
+                            "UserSystemPackageInstaller");
                 }
             }
         }
@@ -324,7 +394,9 @@ public final class UserSystemPackageInstaller {
         ArraySet arraySet = new ArraySet(this.mWhitelistedPackagesForUserTypes.size());
         for (int i = 0; i < this.mWhitelistedPackagesForUserTypes.size(); i++) {
             String str2 = (String) this.mWhitelistedPackagesForUserTypes.keyAt(i);
-            if ((((Long) this.mWhitelistedPackagesForUserTypes.valueAt(i)).longValue() & userTypeMask) != 0) {
+            if ((((Long) this.mWhitelistedPackagesForUserTypes.valueAt(i)).longValue()
+                            & userTypeMask)
+                    != 0) {
                 arraySet.add(str2);
             }
         }

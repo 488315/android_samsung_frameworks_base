@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.IHwBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.SemBiometricFeature;
 import com.android.server.biometrics.log.BiometricContext;
@@ -25,9 +26,11 @@ import com.android.server.biometrics.sensors.fingerprint.aidl.AidlSession;
 import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvider;
 import com.android.server.biometrics.sensors.fingerprint.aidl.SemFpAidlResponseHandler;
 import com.android.server.biometrics.sensors.fingerprint.aidl.Sensor;
+
+import vendor.samsung.hardware.biometrics.fingerprint.V3_0.ISehBiometricsFingerprint;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import vendor.samsung.hardware.biometrics.fingerprint.V3_0.ISehBiometricsFingerprint;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -44,9 +47,9 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.hidl.HidlToAidlSensorAdapter$1, reason: invalid class name */
-    public final class AnonymousClass1 implements AidlResponseHandler$AidlResponseHandlerCallback, UserSwitchProvider {
-        public /* synthetic */ AnonymousClass1() {
-        }
+    public final class AnonymousClass1
+            implements AidlResponseHandler$AidlResponseHandlerCallback, UserSwitchProvider {
+        public /* synthetic */ AnonymousClass1() {}
 
         @Override // com.android.server.biometrics.sensors.UserSwitchProvider
         public StartUserClient getStartUserClient(int i) {
@@ -57,13 +60,25 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
         public StopUserClient getStopUserClient(int i) {
             HidlToAidlSensorAdapter hidlToAidlSensorAdapter = HidlToAidlSensorAdapter.this;
             Context context = hidlToAidlSensorAdapter.mContext;
-            return new HidlToAidlSensorAdapter$2$1(context, new HidlToAidlSensorAdapter$$ExternalSyntheticLambda3(hidlToAidlSensorAdapter, 0), null, i, hidlToAidlSensorAdapter.mSensorProperties.sensorId, BiometricLogger.ofUnknown(context), hidlToAidlSensorAdapter.mBiometricContext, new HidlToAidlSensorAdapter$$ExternalSyntheticLambda0(this));
+            return new HidlToAidlSensorAdapter$2$1(
+                    context,
+                    new HidlToAidlSensorAdapter$$ExternalSyntheticLambda3(
+                            hidlToAidlSensorAdapter, 0),
+                    null,
+                    i,
+                    hidlToAidlSensorAdapter.mSensorProperties.sensorId,
+                    BiometricLogger.ofUnknown(context),
+                    hidlToAidlSensorAdapter.mBiometricContext,
+                    new HidlToAidlSensorAdapter$$ExternalSyntheticLambda0(this));
         }
 
         @Override // com.android.server.biometrics.sensors.fingerprint.aidl.AidlResponseHandler$AidlResponseHandlerCallback
         public void onEnrollSuccess() {
             HidlToAidlSensorAdapter hidlToAidlSensorAdapter = HidlToAidlSensorAdapter.this;
-            hidlToAidlSensorAdapter.mScheduler.scheduleClientMonitor(hidlToAidlSensorAdapter.getFingerprintUpdateActiveUserClient(hidlToAidlSensorAdapter.mCurrentUserId, true), null);
+            hidlToAidlSensorAdapter.mScheduler.scheduleClientMonitor(
+                    hidlToAidlSensorAdapter.getFingerprintUpdateActiveUserClient(
+                            hidlToAidlSensorAdapter.mCurrentUserId, true),
+                    null);
         }
 
         @Override // com.android.server.biometrics.sensors.fingerprint.aidl.AidlResponseHandler$AidlResponseHandlerCallback
@@ -75,15 +90,35 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
         }
     }
 
-    public HidlToAidlSensorAdapter(FingerprintProvider fingerprintProvider, Context context, Handler handler, SensorProps sensorProps, LockoutResetDispatcher lockoutResetDispatcher, BiometricContext biometricContext, boolean z, Runnable runnable, AuthSessionCoordinator authSessionCoordinator, IBiometricsFingerprint iBiometricsFingerprint, AidlResponseHandler$AidlResponseHandlerCallback aidlResponseHandler$AidlResponseHandlerCallback) {
-        super(fingerprintProvider, context, handler, Sensor.getFingerprintSensorPropertiesInternal(sensorProps, new ArrayList(), z), biometricContext);
+    public HidlToAidlSensorAdapter(
+            FingerprintProvider fingerprintProvider,
+            Context context,
+            Handler handler,
+            SensorProps sensorProps,
+            LockoutResetDispatcher lockoutResetDispatcher,
+            BiometricContext biometricContext,
+            boolean z,
+            Runnable runnable,
+            AuthSessionCoordinator authSessionCoordinator,
+            IBiometricsFingerprint iBiometricsFingerprint,
+            AidlResponseHandler$AidlResponseHandlerCallback
+                    aidlResponseHandler$AidlResponseHandlerCallback) {
+        super(
+                fingerprintProvider,
+                context,
+                handler,
+                Sensor.getFingerprintSensorPropertiesInternal(sensorProps, new ArrayList(), z),
+                biometricContext);
         this.mCurrentUserId = -10000;
         this.mUserStartedCallback = new HidlToAidlSensorAdapter$$ExternalSyntheticLambda0(this);
         this.mLockoutResetDispatcher = lockoutResetDispatcher;
         this.mInternalCleanupRunnable = runnable;
         this.mAuthSessionCoordinator = authSessionCoordinator;
         this.mDaemon = iBiometricsFingerprint;
-        this.mAidlResponseHandlerCallback = aidlResponseHandler$AidlResponseHandlerCallback == null ? new AnonymousClass1() : aidlResponseHandler$AidlResponseHandlerCallback;
+        this.mAidlResponseHandlerCallback =
+                aidlResponseHandler$AidlResponseHandlerCallback == null
+                        ? new AnonymousClass1()
+                        : aidlResponseHandler$AidlResponseHandlerCallback;
         if (iBiometricsFingerprint == null) {
             handler.post(new HidlToAidlSensorAdapter$$ExternalSyntheticLambda1(this, 0));
         }
@@ -109,13 +144,17 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
     public IBiometricsFingerprint getDaemon() {
         FingerprintProvider fingerprintProvider = this.mProvider;
         if (fingerprintProvider.mTestHalEnabled) {
-            return SemBiometricFeature.FP_FEATURE_USE_AOSP_HAL ? new TestHal(this.mContext, this.mSensorProperties.sensorId) : new SehTestHal(this.mContext, this.mSensorProperties.sensorId, false);
+            return SemBiometricFeature.FP_FEATURE_USE_AOSP_HAL
+                    ? new TestHal(this.mContext, this.mSensorProperties.sensorId)
+                    : new SehTestHal(this.mContext, this.mSensorProperties.sensorId, false);
         }
         if (fingerprintProvider.mTpaHalModeEnabled) {
             return new SehTestHal(this.mContext, this.mSensorProperties.sensorId, true);
         }
         try {
-            return SemBiometricFeature.FP_FEATURE_USE_AOSP_HAL ? IBiometricsFingerprint.getService() : ISehBiometricsFingerprint.getService();
+            return SemBiometricFeature.FP_FEATURE_USE_AOSP_HAL
+                    ? IBiometricsFingerprint.getService()
+                    : ISehBiometricsFingerprint.getService();
         } catch (RemoteException e) {
             Slog.e("HidlToAidlSensorAdapter", "Failed to get fingerprint HAL", e);
             return null;
@@ -125,9 +164,23 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
         }
     }
 
-    public final FingerprintUpdateActiveUserClient getFingerprintUpdateActiveUserClient(int i, boolean z) {
+    public final FingerprintUpdateActiveUserClient getFingerprintUpdateActiveUserClient(
+            int i, boolean z) {
         Context context = this.mContext;
-        return new FingerprintUpdateActiveUserClient(context, new HidlToAidlSensorAdapter$$ExternalSyntheticLambda3(this, 3), i, this.mSensorProperties.sensorId, BiometricLogger.ofUnknown(context), this.mBiometricContext, new HidlToAidlSensorAdapter$$ExternalSyntheticLambda3(this, 4), !FingerprintUtils.getInstance(this.mSensorProperties.sensorId).getBiometricsForUser(this.mContext, i).isEmpty(), this.mAuthenticatorIds, z, this.mUserStartedCallback);
+        return new FingerprintUpdateActiveUserClient(
+                context,
+                new HidlToAidlSensorAdapter$$ExternalSyntheticLambda3(this, 3),
+                i,
+                this.mSensorProperties.sensorId,
+                BiometricLogger.ofUnknown(context),
+                this.mBiometricContext,
+                new HidlToAidlSensorAdapter$$ExternalSyntheticLambda3(this, 4),
+                !FingerprintUtils.getInstance(this.mSensorProperties.sensorId)
+                        .getBiometricsForUser(this.mContext, i)
+                        .isEmpty(),
+                this.mAuthenticatorIds,
+                z,
+                this.mUserStartedCallback);
     }
 
     public synchronized IBiometricsFingerprint getIBiometricsFingerprint() {
@@ -168,12 +221,30 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
         if (aidlSession != null && this.mDaemon != null) {
             return aidlSession;
         }
-        HidlToAidlSensorAdapter$$ExternalSyntheticLambda3 hidlToAidlSensorAdapter$$ExternalSyntheticLambda3 = new HidlToAidlSensorAdapter$$ExternalSyntheticLambda3(this, 2);
+        HidlToAidlSensorAdapter$$ExternalSyntheticLambda3
+                hidlToAidlSensorAdapter$$ExternalSyntheticLambda3 =
+                        new HidlToAidlSensorAdapter$$ExternalSyntheticLambda3(this, 2);
         int i = this.mCurrentUserId;
         Context context = this.mContext;
         BiometricScheduler biometricScheduler = this.mScheduler;
-        FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal = this.mSensorProperties;
-        AidlSession aidlSession2 = new AidlSession(hidlToAidlSensorAdapter$$ExternalSyntheticLambda3, i, new SemFpAidlResponseHandler(context, biometricScheduler, fingerprintSensorPropertiesInternal.sensorId, this.mCurrentUserId, this.mLockoutTracker, this.mLockoutResetDispatcher, this.mAuthSessionCoordinator, this.mAidlResponseHandlerCallback, this.mProvider.mCallbackDispatcher, this.mLockoutHalImpl, fingerprintSensorPropertiesInternal));
+        FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal =
+                this.mSensorProperties;
+        AidlSession aidlSession2 =
+                new AidlSession(
+                        hidlToAidlSensorAdapter$$ExternalSyntheticLambda3,
+                        i,
+                        new SemFpAidlResponseHandler(
+                                context,
+                                biometricScheduler,
+                                fingerprintSensorPropertiesInternal.sensorId,
+                                this.mCurrentUserId,
+                                this.mLockoutTracker,
+                                this.mLockoutResetDispatcher,
+                                this.mAuthSessionCoordinator,
+                                this.mAidlResponseHandlerCallback,
+                                this.mProvider.mCallbackDispatcher,
+                                this.mLockoutHalImpl,
+                                fingerprintSensorPropertiesInternal));
         this.mSession = aidlSession2;
         return aidlSession2;
     }
@@ -197,7 +268,10 @@ public final class HidlToAidlSensorAdapter extends Sensor implements IHwBinder.D
     }
 
     public void handleUserChanged(int i) {
-        AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "User changed. Current user for fingerprint sensor is ", "HidlToAidlSensorAdapter");
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                i,
+                "User changed. Current user for fingerprint sensor is ",
+                "HidlToAidlSensorAdapter");
         this.mSession = null;
         this.mCurrentUserId = i;
     }

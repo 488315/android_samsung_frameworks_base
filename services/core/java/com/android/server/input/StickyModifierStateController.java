@@ -4,6 +4,7 @@ import android.hardware.input.IStickyModifierStateListener;
 import android.os.IBinder;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +18,8 @@ public final class StickyModifierStateController {
         public final IStickyModifierStateListener mListener;
         public final int mPid;
 
-        public StickyModifierStateListenerRecord(int i, IStickyModifierStateListener iStickyModifierStateListener) {
+        public StickyModifierStateListenerRecord(
+                int i, IStickyModifierStateListener iStickyModifierStateListener) {
             this.mPid = i;
             this.mListener = iStickyModifierStateListener;
         }
@@ -25,9 +27,14 @@ public final class StickyModifierStateController {
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (StickyModifierStateController.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Sticky modifier state listener for pid "), this.mPid, " died.", "ModifierStateController");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Sticky modifier state listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "ModifierStateController");
             }
-            StickyModifierStateController stickyModifierStateController = StickyModifierStateController.this;
+            StickyModifierStateController stickyModifierStateController =
+                    StickyModifierStateController.this;
             int i = this.mPid;
             synchronized (stickyModifierStateController.mStickyModifierStateListenerRecords) {
                 stickyModifierStateController.mStickyModifierStateListenerRecords.remove(i);

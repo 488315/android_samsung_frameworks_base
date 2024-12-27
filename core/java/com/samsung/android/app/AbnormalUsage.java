@@ -5,6 +5,7 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.util.Slog;
 import android.view.View;
+
 import dalvik.system.VMDebug;
 
 /* loaded from: classes5.dex */
@@ -28,10 +29,12 @@ public class AbnormalUsage {
 
     private void checkViewUsage() {
         this.mCurrStopCount++;
-        long allocatedMemory = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024;
+        long allocatedMemory =
+                (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024;
         long cnt = 0;
         boolean excessiveUsage = false;
-        if ((allocatedMemory >= RUNTIME_USED_WARM_LIMIT && (this.mCurrStopCount & 7) == 1) || allocatedMemory >= RUNTIME_USED_LIMIT) {
+        if ((allocatedMemory >= RUNTIME_USED_WARM_LIMIT && (this.mCurrStopCount & 7) == 1)
+                || allocatedMemory >= RUNTIME_USED_LIMIT) {
             cnt = VMDebug.countInstancesOfClass(View.class, false);
             if (cnt > VIEW_COUNT_WARM_LIMIT) {
                 excessiveUsage = true;
@@ -43,7 +46,16 @@ public class AbnormalUsage {
             } catch (RemoteException e) {
                 Slog.e(TAG, "ViewCount: report abnormal resource usage: " + e.getMessage());
             }
-            Slog.e(TAG, "report abnormal resource usage: PID " + Process.myPid() + " view count : " + cnt + " memory usage : " + allocatedMemory + " stop count : " + this.mCurrStopCount);
+            Slog.e(
+                    TAG,
+                    "report abnormal resource usage: PID "
+                            + Process.myPid()
+                            + " view count : "
+                            + cnt
+                            + " memory usage : "
+                            + allocatedMemory
+                            + " stop count : "
+                            + this.mCurrStopCount);
         }
     }
 }

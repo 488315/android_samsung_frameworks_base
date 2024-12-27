@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.ByteArrayOutputStream;
 import java.security.AlgorithmParameters;
 import java.security.InvalidKeyException;
@@ -18,6 +19,7 @@ import java.security.PrivateKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.CipherSpi;
 import javax.crypto.IllegalBlockSizeException;
@@ -35,8 +37,7 @@ public abstract class BaseCipherSpi extends CipherSpi {
     protected AlgorithmParameters engineParams = null;
     protected Wrapper wrapEngine = null;
 
-    protected BaseCipherSpi() {
-    }
+    protected BaseCipherSpi() {}
 
     @Override // javax.crypto.CipherSpi
     protected int engineGetBlockSize() {
@@ -63,7 +64,8 @@ public abstract class BaseCipherSpi extends CipherSpi {
         return null;
     }
 
-    protected final AlgorithmParameters createParametersInstance(String algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
+    protected final AlgorithmParameters createParametersInstance(String algorithm)
+            throws NoSuchAlgorithmException, NoSuchProviderException {
         return this.helper.createAlgorithmParameters(algorithm);
     }
 
@@ -94,7 +96,8 @@ public abstract class BaseCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected Key engineUnwrap(byte[] wrappedKey, String wrappedKeyAlgorithm, int wrappedKeyType) throws InvalidKeyException {
+    protected Key engineUnwrap(byte[] wrappedKey, String wrappedKeyAlgorithm, int wrappedKeyType)
+            throws InvalidKeyException {
         byte[] encoded;
         try {
             if (this.wrapEngine == null) {
@@ -112,7 +115,10 @@ public abstract class BaseCipherSpi extends CipherSpi {
                     if (privKey != null) {
                         return privKey;
                     }
-                    throw new InvalidKeyException("algorithm " + in.getPrivateKeyAlgorithm().getAlgorithm() + " not supported");
+                    throw new InvalidKeyException(
+                            "algorithm "
+                                    + in.getPrivateKeyAlgorithm().getAlgorithm()
+                                    + " not supported");
                 } catch (Exception e) {
                     throw new InvalidKeyException("Invalid key encoding.");
                 }
@@ -136,7 +142,9 @@ public abstract class BaseCipherSpi extends CipherSpi {
         } catch (InvalidCipherTextException e5) {
             throw new InvalidKeyException(e5.getMessage());
         } catch (BadPaddingException e6) {
-            throw new InvalidKeyException("unable to unwrap") { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseCipherSpi.1
+            throw new InvalidKeyException(
+                    "unable to unwrap") { // from class:
+                                          // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseCipherSpi.1
                 @Override // java.lang.Throwable
                 public synchronized Throwable getCause() {
                     return e6;

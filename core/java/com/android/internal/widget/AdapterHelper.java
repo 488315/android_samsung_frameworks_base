@@ -3,8 +3,7 @@ package com.android.internal.widget;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
 import android.util.Pools;
-import com.android.internal.widget.OpReorderer;
-import com.android.internal.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -251,7 +250,8 @@ class AdapterHelper implements OpReorderer.Callback {
                 return;
             case 3:
             default:
-                throw new IllegalArgumentException("only remove and update ops can be dispatched in first pass");
+                throw new IllegalArgumentException(
+                        "only remove and update ops can be dispatched in first pass");
             case 4:
                 this.mCallback.markViewHoldersUpdated(offsetStart, op.itemCount, op.payload);
                 return;
@@ -357,7 +357,8 @@ class AdapterHelper implements OpReorderer.Callback {
                 this.mCallback.offsetPositionsForAdd(op.positionStart, op.itemCount);
                 return;
             case 2:
-                this.mCallback.offsetPositionsForRemovingLaidOutOrNewView(op.positionStart, op.itemCount);
+                this.mCallback.offsetPositionsForRemovingLaidOutOrNewView(
+                        op.positionStart, op.itemCount);
                 return;
             case 4:
                 this.mCallback.markViewHoldersUpdated(op.positionStart, op.itemCount, op.payload);
@@ -465,11 +466,13 @@ class AdapterHelper implements OpReorderer.Callback {
                     break;
                 case 2:
                     this.mCallback.onDispatchSecondPass(op);
-                    this.mCallback.offsetPositionsForRemovingInvisible(op.positionStart, op.itemCount);
+                    this.mCallback.offsetPositionsForRemovingInvisible(
+                            op.positionStart, op.itemCount);
                     break;
                 case 4:
                     this.mCallback.onDispatchSecondPass(op);
-                    this.mCallback.markViewHoldersUpdated(op.positionStart, op.itemCount, op.payload);
+                    this.mCallback.markViewHoldersUpdated(
+                            op.positionStart, op.itemCount, op.payload);
                     break;
                 case 8:
                     this.mCallback.onDispatchSecondPass(op);
@@ -565,7 +568,16 @@ class AdapterHelper implements OpReorderer.Callback {
         }
 
         public String toString() {
-            return Integer.toHexString(System.identityHashCode(this)) + NavigationBarInflaterView.SIZE_MOD_START + cmdToString() + ",s:" + this.positionStart + "c:" + this.itemCount + ",p:" + this.payload + NavigationBarInflaterView.SIZE_MOD_END;
+            return Integer.toHexString(System.identityHashCode(this))
+                    + NavigationBarInflaterView.SIZE_MOD_START
+                    + cmdToString()
+                    + ",s:"
+                    + this.positionStart
+                    + "c:"
+                    + this.itemCount
+                    + ",p:"
+                    + this.payload
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         public boolean equals(Object o) {
@@ -579,7 +591,10 @@ class AdapterHelper implements OpReorderer.Callback {
             if (this.cmd != op.cmd) {
                 return false;
             }
-            if (this.cmd == 8 && Math.abs(this.itemCount - this.positionStart) == 1 && this.itemCount == op.positionStart && this.positionStart == op.itemCount) {
+            if (this.cmd == 8
+                    && Math.abs(this.itemCount - this.positionStart) == 1
+                    && this.itemCount == op.positionStart
+                    && this.positionStart == op.itemCount) {
                 return true;
             }
             if (this.itemCount != op.itemCount || this.positionStart != op.positionStart) {

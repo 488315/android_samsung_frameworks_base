@@ -13,10 +13,10 @@ import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.view.InsetsFrameProvider;
 import android.view.SurfaceControl;
-import android.window.ITaskFragmentOrganizer;
-import android.window.TaskFragmentOperation;
+
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.wallpaperbackup.GenerateXML;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,19 +30,22 @@ public final class WindowContainerTransaction implements Parcelable {
     public static final int CHANGE_TRANSIT_REQUEST_FULLSCREEN_TO_SPLIT_ROTATION = 3;
     public static final int CHANGE_TRANSIT_REQUEST_SPLIT_TO_FULLSCREEN = 2;
     public static final int CHANGE_TRANSIT_REQUEST_UNDEFINED = 0;
-    public static final Parcelable.Creator<WindowContainerTransaction> CREATOR = new Parcelable.Creator<WindowContainerTransaction>() { // from class: android.window.WindowContainerTransaction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContainerTransaction createFromParcel(Parcel in) {
-            return new WindowContainerTransaction(in);
-        }
+    public static final Parcelable.Creator<WindowContainerTransaction> CREATOR =
+            new Parcelable.Creator<
+                    WindowContainerTransaction>() { // from class:
+                                                    // android.window.WindowContainerTransaction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContainerTransaction createFromParcel(Parcel in) {
+                    return new WindowContainerTransaction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContainerTransaction[] newArray(int size) {
-            return new WindowContainerTransaction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContainerTransaction[] newArray(int size) {
+                    return new WindowContainerTransaction[size];
+                }
+            };
     public static final int TRANSACTION_TYPE_DISMISS_SPLIT_WITH_ALL_APPS = 7;
     public static final int TRANSACTION_TYPE_DISMISS_SPLIT_WITH_FREEFORM = 6;
     public static final int TRANSACTION_TYPE_START_INTENTS = 1;
@@ -68,11 +71,9 @@ public final class WindowContainerTransaction implements Parcelable {
     private ArrayList<IBinder> mTransferTransitionTokens;
     private int mType;
 
-    public @interface AdditionalFlags {
-    }
+    public @interface AdditionalFlags {}
 
-    public @interface ChangeTransitRequest {
-    }
+    public @interface ChangeTransitRequest {}
 
     public static String changeTransitRequestToString(int changeTransitRequest) {
         switch (changeTransitRequest) {
@@ -132,7 +133,8 @@ public final class WindowContainerTransaction implements Parcelable {
         in.readMap(this.mChanges, null);
         in.readTypedList(this.mHierarchyOps, HierarchyOp.CREATOR);
         this.mErrorCallbackToken = in.readStrongBinder();
-        this.mTaskFragmentOrganizer = ITaskFragmentOrganizer.Stub.asInterface(in.readStrongBinder());
+        this.mTaskFragmentOrganizer =
+                ITaskFragmentOrganizer.Stub.asInterface(in.readStrongBinder());
         this.mType = in.readInt();
         this.mPositionChange = in.readBoolean();
         this.mDismissSplit = in.readBoolean();
@@ -157,7 +159,8 @@ public final class WindowContainerTransaction implements Parcelable {
         }
     }
 
-    public WindowContainerTransaction orderedSetWindowingMode(WindowContainerToken container, int windowingMode) {
+    public WindowContainerTransaction orderedSetWindowingMode(
+            WindowContainerToken container, int windowingMode) {
         ContainerChange cc = new ContainerChange();
         cc.mToken = container.asBinder();
         cc.mChange = new Change();
@@ -166,7 +169,8 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction orderedSetChangeTransitMode(WindowContainerToken container, int changeTransitMode, String reason) {
+    public WindowContainerTransaction orderedSetChangeTransitMode(
+            WindowContainerToken container, int changeTransitMode, String reason) {
         ContainerChange cc = new ContainerChange();
         cc.mToken = container.asBinder();
         cc.mChange = new Change();
@@ -213,7 +217,8 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setScreenSizeDp(WindowContainerToken container, int w, int h) {
+    public WindowContainerTransaction setScreenSizeDp(
+            WindowContainerToken container, int w, int h) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mConfiguration.screenWidthDp = w;
         chg.mConfiguration.screenHeightDp = h;
@@ -221,21 +226,24 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setDensityDpi(WindowContainerToken container, int densityDpi) {
+    public WindowContainerTransaction setDensityDpi(
+            WindowContainerToken container, int densityDpi) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mConfiguration.densityDpi = densityDpi;
         chg.mConfigSetMask |= 4096;
         return this;
     }
 
-    public WindowContainerTransaction scheduleFinishEnterPip(WindowContainerToken container, Rect bounds) {
+    public WindowContainerTransaction scheduleFinishEnterPip(
+            WindowContainerToken container, Rect bounds) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mPinnedBounds = new Rect(bounds);
         chg.mChangeMask |= 4;
         return this;
     }
 
-    public WindowContainerTransaction setStagePosition(WindowContainerToken container, int stagePosition) {
+    public WindowContainerTransaction setStagePosition(
+            WindowContainerToken container, int stagePosition) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mConfiguration.windowConfiguration.setStagePosition(stagePosition);
         chg.mConfigSetMask |= 536870912;
@@ -243,7 +251,8 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setEmbedActivityMode(WindowContainerToken container, int embedActivityMode) {
+    public WindowContainerTransaction setEmbedActivityMode(
+            WindowContainerToken container, int embedActivityMode) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mConfiguration.windowConfiguration.setEmbedActivityMode(embedActivityMode);
         chg.mConfigSetMask |= 536870912;
@@ -251,14 +260,16 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setBoundsChangeTransaction(WindowContainerToken container, SurfaceControl.Transaction t) {
+    public WindowContainerTransaction setBoundsChangeTransaction(
+            WindowContainerToken container, SurfaceControl.Transaction t) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mBoundsChangeTransaction = t;
         chg.mChangeMask |= 2;
         return this;
     }
 
-    public WindowContainerTransaction setBoundsChangeTransaction(WindowContainerToken task, Rect surfaceBounds) {
+    public WindowContainerTransaction setBoundsChangeTransaction(
+            WindowContainerToken task, Rect surfaceBounds) {
         Change chg = getOrCreateChange(task.asBinder());
         if (chg.mBoundsChangeSurfaceBounds == null) {
             chg.mBoundsChangeSurfaceBounds = new Rect();
@@ -268,19 +279,22 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setActivityWindowingMode(WindowContainerToken container, int windowingMode) {
+    public WindowContainerTransaction setActivityWindowingMode(
+            WindowContainerToken container, int windowingMode) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mActivityWindowingMode = windowingMode;
         return this;
     }
 
-    public WindowContainerTransaction setWindowingMode(WindowContainerToken container, int windowingMode) {
+    public WindowContainerTransaction setWindowingMode(
+            WindowContainerToken container, int windowingMode) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mWindowingMode = windowingMode;
         return this;
     }
 
-    public WindowContainerTransaction setFocusable(WindowContainerToken container, boolean focusable) {
+    public WindowContainerTransaction setFocusable(
+            WindowContainerToken container, boolean focusable) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mFocusable = focusable;
         chg.mChangeMask |= 1;
@@ -294,28 +308,32 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setSmallestScreenWidthDp(WindowContainerToken container, int widthDp) {
+    public WindowContainerTransaction setSmallestScreenWidthDp(
+            WindowContainerToken container, int widthDp) {
         Change cfg = getOrCreateChange(container.asBinder());
         cfg.mConfiguration.smallestScreenWidthDp = widthDp;
         cfg.mConfigSetMask |= 2048;
         return this;
     }
 
-    public WindowContainerTransaction setIgnoreOrientationRequest(WindowContainerToken container, boolean ignoreOrientationRequest) {
+    public WindowContainerTransaction setIgnoreOrientationRequest(
+            WindowContainerToken container, boolean ignoreOrientationRequest) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mIgnoreOrientationRequest = ignoreOrientationRequest;
         chg.mChangeMask |= 32;
         return this;
     }
 
-    public WindowContainerTransaction setForceTranslucent(WindowContainerToken container, boolean forceTranslucent) {
+    public WindowContainerTransaction setForceTranslucent(
+            WindowContainerToken container, boolean forceTranslucent) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mForceTranslucent = forceTranslucent;
         chg.mChangeMask |= 128;
         return this;
     }
 
-    public WindowContainerTransaction setFreeformTranslucent(WindowContainerToken container, int translucent) {
+    public WindowContainerTransaction setFreeformTranslucent(
+            WindowContainerToken container, int translucent) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mConfiguration.windowConfiguration.setFreeformTranslucent(translucent);
         chg.mConfigSetMask |= 536870912;
@@ -329,7 +347,8 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setRelativeBounds(WindowContainerToken container, Rect relBounds) {
+    public WindowContainerTransaction setRelativeBounds(
+            WindowContainerToken container, Rect relBounds) {
         Change chg = getOrCreateChange(container.asBinder());
         if (chg.mRelativeBounds == null) {
             chg.mRelativeBounds = new Rect();
@@ -341,8 +360,11 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction reparent(WindowContainerToken child, WindowContainerToken parent, boolean onTop) {
-        this.mHierarchyOps.add(HierarchyOp.createForReparent(child.asBinder(), parent == null ? null : parent.asBinder(), onTop));
+    public WindowContainerTransaction reparent(
+            WindowContainerToken child, WindowContainerToken parent, boolean onTop) {
+        this.mHierarchyOps.add(
+                HierarchyOp.createForReparent(
+                        child.asBinder(), parent == null ? null : parent.asBinder(), onTop));
         return this;
     }
 
@@ -350,37 +372,64 @@ public final class WindowContainerTransaction implements Parcelable {
         return reorder(child, onTop, false);
     }
 
-    public WindowContainerTransaction reorder(WindowContainerToken child, boolean onTop, boolean includingParents) {
-        this.mHierarchyOps.add(HierarchyOp.createForReorder(child.asBinder(), onTop, includingParents));
+    public WindowContainerTransaction reorder(
+            WindowContainerToken child, boolean onTop, boolean includingParents) {
+        this.mHierarchyOps.add(
+                HierarchyOp.createForReorder(child.asBinder(), onTop, includingParents));
         return this;
     }
 
-    public WindowContainerTransaction reparentTasks(WindowContainerToken currentParent, WindowContainerToken newParent, int[] windowingModes, int[] activityTypes, boolean onTop, boolean reparentTopOnly) {
-        this.mHierarchyOps.add(HierarchyOp.createForChildrenTasksReparent(currentParent != null ? currentParent.asBinder() : null, newParent != null ? newParent.asBinder() : null, windowingModes, activityTypes, onTop, reparentTopOnly));
+    public WindowContainerTransaction reparentTasks(
+            WindowContainerToken currentParent,
+            WindowContainerToken newParent,
+            int[] windowingModes,
+            int[] activityTypes,
+            boolean onTop,
+            boolean reparentTopOnly) {
+        this.mHierarchyOps.add(
+                HierarchyOp.createForChildrenTasksReparent(
+                        currentParent != null ? currentParent.asBinder() : null,
+                        newParent != null ? newParent.asBinder() : null,
+                        windowingModes,
+                        activityTypes,
+                        onTop,
+                        reparentTopOnly));
         return this;
     }
 
-    public WindowContainerTransaction reparentTasks(WindowContainerToken currentParent, WindowContainerToken newParent, int[] windowingModes, int[] activityTypes, boolean onTop) {
+    public WindowContainerTransaction reparentTasks(
+            WindowContainerToken currentParent,
+            WindowContainerToken newParent,
+            int[] windowingModes,
+            int[] activityTypes,
+            boolean onTop) {
         return reparentTasks(currentParent, newParent, windowingModes, activityTypes, onTop, false);
     }
 
-    public WindowContainerTransaction setLaunchRoot(WindowContainerToken container, int[] windowingModes, int[] activityTypes) {
-        this.mHierarchyOps.add(HierarchyOp.createForSetLaunchRoot(container.asBinder(), windowingModes, activityTypes));
+    public WindowContainerTransaction setLaunchRoot(
+            WindowContainerToken container, int[] windowingModes, int[] activityTypes) {
+        this.mHierarchyOps.add(
+                HierarchyOp.createForSetLaunchRoot(
+                        container.asBinder(), windowingModes, activityTypes));
         return this;
     }
 
-    public WindowContainerTransaction setAdjacentRoots(WindowContainerToken root1, WindowContainerToken root2) {
-        this.mHierarchyOps.add(HierarchyOp.createForAdjacentRoots(root1.asBinder(), root2.asBinder()));
+    public WindowContainerTransaction setAdjacentRoots(
+            WindowContainerToken root1, WindowContainerToken root2) {
+        this.mHierarchyOps.add(
+                HierarchyOp.createForAdjacentRoots(root1.asBinder(), root2.asBinder()));
         return this;
     }
 
     public WindowContainerTransaction setLaunchAdjacentFlagRoot(WindowContainerToken container) {
-        this.mHierarchyOps.add(HierarchyOp.createForSetLaunchAdjacentFlagRoot(container.asBinder(), false));
+        this.mHierarchyOps.add(
+                HierarchyOp.createForSetLaunchAdjacentFlagRoot(container.asBinder(), false));
         return this;
     }
 
     public WindowContainerTransaction clearLaunchAdjacentFlagRoot(WindowContainerToken container) {
-        this.mHierarchyOps.add(HierarchyOp.createForSetLaunchAdjacentFlagRoot(container.asBinder(), true));
+        this.mHierarchyOps.add(
+                HierarchyOp.createForSetLaunchAdjacentFlagRoot(container.asBinder(), true));
         return this;
     }
 
@@ -399,25 +448,38 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setDragResizing(WindowContainerToken container, boolean dragResizing) {
+    public WindowContainerTransaction setDragResizing(
+            WindowContainerToken container, boolean dragResizing) {
         Change change = getOrCreateChange(container.asBinder());
         change.mChangeMask |= 256;
         change.mDragResizing = dragResizing;
         return this;
     }
 
-    public WindowContainerTransaction sendPendingIntent(PendingIntent sender, Intent intent, Bundle options) {
-        this.mHierarchyOps.add(new HierarchyOp.Builder(7).setLaunchOptions(options).setPendingIntent(sender).setActivityIntent(intent).build());
+    public WindowContainerTransaction sendPendingIntent(
+            PendingIntent sender, Intent intent, Bundle options) {
+        this.mHierarchyOps.add(
+                new HierarchyOp.Builder(7)
+                        .setLaunchOptions(options)
+                        .setPendingIntent(sender)
+                        .setActivityIntent(intent)
+                        .build());
         return this;
     }
 
-    public WindowContainerTransaction startShortcut(String callingPackage, ShortcutInfo shortcutInfo, Bundle options) {
-        this.mHierarchyOps.add(HierarchyOp.createForStartShortcut(callingPackage, shortcutInfo, options));
+    public WindowContainerTransaction startShortcut(
+            String callingPackage, ShortcutInfo shortcutInfo, Bundle options) {
+        this.mHierarchyOps.add(
+                HierarchyOp.createForStartShortcut(callingPackage, shortcutInfo, options));
         return this;
     }
 
-    public WindowContainerTransaction createTaskFragment(TaskFragmentCreationParams taskFragmentCreationParams) {
-        TaskFragmentOperation operation = new TaskFragmentOperation.Builder(0).setTaskFragmentCreationParams(taskFragmentCreationParams).build();
+    public WindowContainerTransaction createTaskFragment(
+            TaskFragmentCreationParams taskFragmentCreationParams) {
+        TaskFragmentOperation operation =
+                new TaskFragmentOperation.Builder(0)
+                        .setTaskFragmentCreationParams(taskFragmentCreationParams)
+                        .build();
         return addTaskFragmentOperation(taskFragmentCreationParams.getFragmentToken(), operation);
     }
 
@@ -426,18 +488,34 @@ public final class WindowContainerTransaction implements Parcelable {
         return addTaskFragmentOperation(fragmentToken, operation);
     }
 
-    public WindowContainerTransaction startActivityInTaskFragment(IBinder fragmentToken, IBinder callerToken, Intent activityIntent, Bundle activityOptions) {
-        TaskFragmentOperation operation = new TaskFragmentOperation.Builder(2).setActivityToken(callerToken).setActivityIntent(activityIntent).setBundle(activityOptions).build();
+    public WindowContainerTransaction startActivityInTaskFragment(
+            IBinder fragmentToken,
+            IBinder callerToken,
+            Intent activityIntent,
+            Bundle activityOptions) {
+        TaskFragmentOperation operation =
+                new TaskFragmentOperation.Builder(2)
+                        .setActivityToken(callerToken)
+                        .setActivityIntent(activityIntent)
+                        .setBundle(activityOptions)
+                        .build();
         return addTaskFragmentOperation(fragmentToken, operation);
     }
 
-    public WindowContainerTransaction reparentActivityToTaskFragment(IBinder fragmentToken, IBinder activityToken) {
-        TaskFragmentOperation operation = new TaskFragmentOperation.Builder(3).setActivityToken(activityToken).build();
+    public WindowContainerTransaction reparentActivityToTaskFragment(
+            IBinder fragmentToken, IBinder activityToken) {
+        TaskFragmentOperation operation =
+                new TaskFragmentOperation.Builder(3).setActivityToken(activityToken).build();
         return addTaskFragmentOperation(fragmentToken, operation);
     }
 
-    public WindowContainerTransaction setAdjacentTaskFragments(IBinder fragmentToken1, IBinder fragmentToken2, TaskFragmentAdjacentParams params) {
-        TaskFragmentOperation operation = new TaskFragmentOperation.Builder(4).setSecondaryFragmentToken(fragmentToken2).setBundle(params != null ? params.toBundle() : null).build();
+    public WindowContainerTransaction setAdjacentTaskFragments(
+            IBinder fragmentToken1, IBinder fragmentToken2, TaskFragmentAdjacentParams params) {
+        TaskFragmentOperation operation =
+                new TaskFragmentOperation.Builder(4)
+                        .setSecondaryFragmentToken(fragmentToken2)
+                        .setBundle(params != null ? params.toBundle() : null)
+                        .build();
         return addTaskFragmentOperation(fragmentToken1, operation);
     }
 
@@ -447,19 +525,43 @@ public final class WindowContainerTransaction implements Parcelable {
     }
 
     public WindowContainerTransaction restoreTransientOrder(WindowContainerToken container) {
-        HierarchyOp hierarchyOp = new HierarchyOp.Builder(9).setContainer(container.asBinder()).build();
+        HierarchyOp hierarchyOp =
+                new HierarchyOp.Builder(9).setContainer(container.asBinder()).build();
         this.mHierarchyOps.add(hierarchyOp);
         return this;
     }
 
-    public WindowContainerTransaction addInsetsSource(WindowContainerToken receiver, IBinder owner, int index, int type, Rect frame, Rect[] boundingRects, int flags) {
-        HierarchyOp hierarchyOp = new HierarchyOp.Builder(10).setContainer(receiver.asBinder()).setInsetsFrameProvider(new InsetsFrameProvider(owner, index, type).setSource(3).setArbitraryRectangle(frame).setBoundingRects(boundingRects).setFlags(flags)).setInsetsFrameOwner(owner).build();
+    public WindowContainerTransaction addInsetsSource(
+            WindowContainerToken receiver,
+            IBinder owner,
+            int index,
+            int type,
+            Rect frame,
+            Rect[] boundingRects,
+            int flags) {
+        HierarchyOp hierarchyOp =
+                new HierarchyOp.Builder(10)
+                        .setContainer(receiver.asBinder())
+                        .setInsetsFrameProvider(
+                                new InsetsFrameProvider(owner, index, type)
+                                        .setSource(3)
+                                        .setArbitraryRectangle(frame)
+                                        .setBoundingRects(boundingRects)
+                                        .setFlags(flags))
+                        .setInsetsFrameOwner(owner)
+                        .build();
         this.mHierarchyOps.add(hierarchyOp);
         return this;
     }
 
-    public WindowContainerTransaction removeInsetsSource(WindowContainerToken receiver, IBinder owner, int index, int type) {
-        HierarchyOp hierarchyOp = new HierarchyOp.Builder(11).setContainer(receiver.asBinder()).setInsetsFrameProvider(new InsetsFrameProvider(owner, index, type)).setInsetsFrameOwner(owner).build();
+    public WindowContainerTransaction removeInsetsSource(
+            WindowContainerToken receiver, IBinder owner, int index, int type) {
+        HierarchyOp hierarchyOp =
+                new HierarchyOp.Builder(11)
+                        .setContainer(receiver.asBinder())
+                        .setInsetsFrameProvider(new InsetsFrameProvider(owner, index, type))
+                        .setInsetsFrameOwner(owner)
+                        .build();
         this.mHierarchyOps.add(hierarchyOp);
         return this;
     }
@@ -475,21 +577,35 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setCompanionTaskFragment(IBinder fragmentToken, IBinder companionFragmentToken) {
-        TaskFragmentOperation operation = new TaskFragmentOperation.Builder(7).setSecondaryFragmentToken(companionFragmentToken).build();
+    public WindowContainerTransaction setCompanionTaskFragment(
+            IBinder fragmentToken, IBinder companionFragmentToken) {
+        TaskFragmentOperation operation =
+                new TaskFragmentOperation.Builder(7)
+                        .setSecondaryFragmentToken(companionFragmentToken)
+                        .build();
         return addTaskFragmentOperation(fragmentToken, operation);
     }
 
-    public WindowContainerTransaction addTaskFragmentOperation(IBinder fragmentToken, TaskFragmentOperation taskFragmentOperation) {
+    public WindowContainerTransaction addTaskFragmentOperation(
+            IBinder fragmentToken, TaskFragmentOperation taskFragmentOperation) {
         Objects.requireNonNull(fragmentToken);
         Objects.requireNonNull(taskFragmentOperation);
-        HierarchyOp hierarchyOp = new HierarchyOp.Builder(17).setContainer(fragmentToken).setTaskFragmentOperation(taskFragmentOperation).build();
+        HierarchyOp hierarchyOp =
+                new HierarchyOp.Builder(17)
+                        .setContainer(fragmentToken)
+                        .setTaskFragmentOperation(taskFragmentOperation)
+                        .build();
         this.mHierarchyOps.add(hierarchyOp);
         return this;
     }
 
-    public WindowContainerTransaction setAlwaysOnTop(WindowContainerToken windowContainer, boolean alwaysOnTop) {
-        HierarchyOp hierarchyOp = new HierarchyOp.Builder(12).setContainer(windowContainer.asBinder()).setAlwaysOnTop(alwaysOnTop).build();
+    public WindowContainerTransaction setAlwaysOnTop(
+            WindowContainerToken windowContainer, boolean alwaysOnTop) {
+        HierarchyOp hierarchyOp =
+                new HierarchyOp.Builder(12)
+                        .setContainer(windowContainer.asBinder())
+                        .setAlwaysOnTop(alwaysOnTop)
+                        .build();
         this.mHierarchyOps.add(hierarchyOp);
         return this;
     }
@@ -512,14 +628,24 @@ public final class WindowContainerTransaction implements Parcelable {
         return this;
     }
 
-    public WindowContainerTransaction setReparentLeafTaskIfRelaunch(WindowContainerToken windowContainer, boolean reparentLeafTaskIfRelaunch) {
-        HierarchyOp hierarchyOp = new HierarchyOp.Builder(16).setContainer(windowContainer.asBinder()).setReparentLeafTaskIfRelaunch(reparentLeafTaskIfRelaunch).build();
+    public WindowContainerTransaction setReparentLeafTaskIfRelaunch(
+            WindowContainerToken windowContainer, boolean reparentLeafTaskIfRelaunch) {
+        HierarchyOp hierarchyOp =
+                new HierarchyOp.Builder(16)
+                        .setContainer(windowContainer.asBinder())
+                        .setReparentLeafTaskIfRelaunch(reparentLeafTaskIfRelaunch)
+                        .build();
         this.mHierarchyOps.add(hierarchyOp);
         return this;
     }
 
-    public WindowContainerTransaction movePipActivityToPinnedRootTask(WindowContainerToken parentToken, Rect bounds) {
-        this.mHierarchyOps.add(new HierarchyOp.Builder(18).setContainer(parentToken.asBinder()).setBounds(bounds).build());
+    public WindowContainerTransaction movePipActivityToPinnedRootTask(
+            WindowContainerToken parentToken, Rect bounds) {
+        this.mHierarchyOps.add(
+                new HierarchyOp.Builder(18)
+                        .setContainer(parentToken.asBinder())
+                        .setBounds(bounds)
+                        .build());
         return this;
     }
 
@@ -544,9 +670,14 @@ public final class WindowContainerTransaction implements Parcelable {
         }
         int n2 = other.mHierarchyOps.size();
         for (int i2 = 0; i2 < n2; i2++) {
-            this.mHierarchyOps.add(transfer ? other.mHierarchyOps.get(i2) : new HierarchyOp(other.mHierarchyOps.get(i2)));
+            this.mHierarchyOps.add(
+                    transfer
+                            ? other.mHierarchyOps.get(i2)
+                            : new HierarchyOp(other.mHierarchyOps.get(i2)));
         }
-        if (this.mErrorCallbackToken != null && other.mErrorCallbackToken != null && this.mErrorCallbackToken != other.mErrorCallbackToken) {
+        if (this.mErrorCallbackToken != null
+                && other.mErrorCallbackToken != null
+                && this.mErrorCallbackToken != other.mErrorCallbackToken) {
             throw new IllegalArgumentException("Can't merge two WCTs with different error token");
         }
         if (this.mTaskFragmentOrganizer != null) {
@@ -554,9 +685,13 @@ public final class WindowContainerTransaction implements Parcelable {
         } else {
             taskFragmentOrganizerAsBinder = null;
         }
-        IBinder otherTaskFragmentOrganizerAsBinder = other.mTaskFragmentOrganizer != null ? other.mTaskFragmentOrganizer.asBinder() : null;
+        IBinder otherTaskFragmentOrganizerAsBinder =
+                other.mTaskFragmentOrganizer != null
+                        ? other.mTaskFragmentOrganizer.asBinder()
+                        : null;
         if (!Objects.equals(taskFragmentOrganizerAsBinder, otherTaskFragmentOrganizerAsBinder)) {
-            throw new IllegalArgumentException("Can't merge two WCTs from different TaskFragmentOrganizers");
+            throw new IllegalArgumentException(
+                    "Can't merge two WCTs from different TaskFragmentOrganizers");
         }
         if (this.mErrorCallbackToken != null) {
             iBinder = this.mErrorCallbackToken;
@@ -658,7 +793,8 @@ public final class WindowContainerTransaction implements Parcelable {
         return this.mMergedTransitionTokens;
     }
 
-    public void setTaskViewTaskOrganizerTaskId(WindowContainerToken container, int organizerTaskId) {
+    public void setTaskViewTaskOrganizerTaskId(
+            WindowContainerToken container, int organizerTaskId) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mTaskViewTaskOrganizerTaskId = organizerTaskId;
     }
@@ -666,9 +802,20 @@ public final class WindowContainerTransaction implements Parcelable {
     public String toString() {
         String extraStr = "";
         if (CoreRune.MW_SHELL_CHANGE_TRANSITION && changeTransitionRequested()) {
-            extraStr = " changeTransitRequest=" + changeTransitRequestToString(this.mChangeTransitionRequest);
+            extraStr =
+                    " changeTransitRequest="
+                            + changeTransitRequestToString(this.mChangeTransitionRequest);
         }
-        return "WindowContainerTransaction { changes = " + this.mChanges + " hops = " + this.mHierarchyOps + " errorCallbackToken=" + this.mErrorCallbackToken + " taskFragmentOrganizer=" + this.mTaskFragmentOrganizer + extraStr + " }";
+        return "WindowContainerTransaction { changes = "
+                + this.mChanges
+                + " hops = "
+                + this.mHierarchyOps
+                + " errorCallbackToken="
+                + this.mErrorCallbackToken
+                + " taskFragmentOrganizer="
+                + this.mTaskFragmentOrganizer
+                + extraStr
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -718,20 +865,23 @@ public final class WindowContainerTransaction implements Parcelable {
         return this.mChangeTransitionRequest;
     }
 
-    public WindowContainerTransaction setChangeTransitMode(WindowContainerToken container, int changeTransitMode, String reason) {
+    public WindowContainerTransaction setChangeTransitMode(
+            WindowContainerToken container, int changeTransitMode, String reason) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mChangeTransitMode = changeTransitMode;
         chg.mChangeTransitReason = reason;
         return this;
     }
 
-    public WindowContainerTransaction addChangeTransitFlags(WindowContainerToken container, int changeTransitFlags) {
+    public WindowContainerTransaction addChangeTransitFlags(
+            WindowContainerToken container, int changeTransitFlags) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mChangeTransitFlags |= changeTransitFlags;
         return this;
     }
 
-    public WindowContainerTransaction setChangeTransitStartBounds(WindowContainerToken container, Rect startBounds) {
+    public WindowContainerTransaction setChangeTransitStartBounds(
+            WindowContainerToken container, Rect startBounds) {
         Change chg = getOrCreateChange(container.asBinder());
         if (chg.mChangeTransitStartBounds == null) {
             chg.mChangeTransitStartBounds = new Rect();
@@ -757,13 +907,15 @@ public final class WindowContainerTransaction implements Parcelable {
         return this.mDisplayChangeTransitionReason;
     }
 
-    public WindowContainerTransaction setChangeFreeformStashMode(WindowContainerToken container, int changeFreeformStashMode) {
+    public WindowContainerTransaction setChangeFreeformStashMode(
+            WindowContainerToken container, int changeFreeformStashMode) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mChangeFreeformStashMode = changeFreeformStashMode;
         return this;
     }
 
-    public WindowContainerTransaction setChangeFreeformStashScale(WindowContainerToken container, float changeFreeformStashScale) {
+    public WindowContainerTransaction setChangeFreeformStashScale(
+            WindowContainerToken container, float changeFreeformStashScale) {
         Change chg = getOrCreateChange(container.asBinder());
         chg.mChangeFreeformStashScale = changeFreeformStashScale;
         return this;
@@ -786,19 +938,22 @@ public final class WindowContainerTransaction implements Parcelable {
         public static final int CHANGE_IGNORE_ORIENTATION_REQUEST = 32;
         public static final int CHANGE_PIP_CALLBACK = 4;
         public static final int CHANGE_RELATIVE_BOUNDS = 512;
-        public static final Parcelable.Creator<Change> CREATOR = new Parcelable.Creator<Change>() { // from class: android.window.WindowContainerTransaction.Change.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Change createFromParcel(Parcel in) {
-                return new Change(in);
-            }
+        public static final Parcelable.Creator<Change> CREATOR =
+                new Parcelable.Creator<
+                        Change>() { // from class:
+                                    // android.window.WindowContainerTransaction.Change.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Change createFromParcel(Parcel in) {
+                        return new Change(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Change[] newArray(int size) {
-                return new Change[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Change[] newArray(int size) {
+                        return new Change[size];
+                    }
+                };
         private int mActivityWindowingMode;
         private Rect mBoundsChangeSurfaceBounds;
         private SurfaceControl.Transaction mBoundsChangeTransaction;
@@ -880,7 +1035,8 @@ public final class WindowContainerTransaction implements Parcelable {
                 this.mPinnedBounds.readFromParcel(in);
             }
             if ((this.mChangeMask & 2) != 0) {
-                this.mBoundsChangeTransaction = SurfaceControl.Transaction.CREATOR.createFromParcel(in);
+                this.mBoundsChangeTransaction =
+                        SurfaceControl.Transaction.CREATOR.createFromParcel(in);
             }
             if ((this.mChangeMask & 16) != 0) {
                 this.mBoundsChangeSurfaceBounds = new Rect();
@@ -908,7 +1064,8 @@ public final class WindowContainerTransaction implements Parcelable {
         public void merge(Change other, boolean transfer) {
             Rect rect;
             Rect rect2;
-            this.mConfiguration.setTo(other.mConfiguration, other.mConfigSetMask, other.mWindowSetMask);
+            this.mConfiguration.setTo(
+                    other.mConfiguration, other.mConfigSetMask, other.mWindowSetMask);
             this.mConfigSetMask |= other.mConfigSetMask;
             this.mWindowSetMask |= other.mWindowSetMask;
             if ((other.mChangeMask & 1) != 0) {
@@ -941,7 +1098,10 @@ public final class WindowContainerTransaction implements Parcelable {
                 this.mWindowingMode = other.mWindowingMode;
             }
             if (other.mBoundsChangeSurfaceBounds != null) {
-                this.mBoundsChangeSurfaceBounds = transfer ? other.mBoundsChangeSurfaceBounds : new Rect(other.mBoundsChangeSurfaceBounds);
+                this.mBoundsChangeSurfaceBounds =
+                        transfer
+                                ? other.mBoundsChangeSurfaceBounds
+                                : new Rect(other.mBoundsChangeSurfaceBounds);
             }
             if (other.mRelativeBounds != null) {
                 if (transfer) {
@@ -951,7 +1111,8 @@ public final class WindowContainerTransaction implements Parcelable {
                 }
                 this.mRelativeBounds = rect2;
             }
-            this.mConfigAtTransitionEnd = this.mConfigAtTransitionEnd || other.mConfigAtTransitionEnd;
+            this.mConfigAtTransitionEnd =
+                    this.mConfigAtTransitionEnd || other.mConfigAtTransitionEnd;
             if (CoreRune.MW_SHELL_CHANGE_TRANSITION && other.hasChangeTransitMode()) {
                 this.mChangeTransitMode = other.mChangeTransitMode;
                 this.mChangeTransitReason = other.mChangeTransitReason;
@@ -1009,21 +1170,25 @@ public final class WindowContainerTransaction implements Parcelable {
 
         public boolean getIgnoreOrientationRequest() {
             if ((this.mChangeMask & 32) == 0) {
-                throw new RuntimeException("IgnoreOrientationRequest not set. Check CHANGE_IGNORE_ORIENTATION_REQUEST first");
+                throw new RuntimeException(
+                        "IgnoreOrientationRequest not set. Check CHANGE_IGNORE_ORIENTATION_REQUEST"
+                            + " first");
             }
             return this.mIgnoreOrientationRequest;
         }
 
         public boolean getForceTranslucent() {
             if ((this.mChangeMask & 128) == 0) {
-                throw new RuntimeException("Force translucent not set. Check CHANGE_FORCE_TRANSLUCENT first");
+                throw new RuntimeException(
+                        "Force translucent not set. Check CHANGE_FORCE_TRANSLUCENT first");
             }
             return this.mForceTranslucent;
         }
 
         public boolean getDragResizing() {
             if ((this.mChangeMask & 256) == 0) {
-                throw new RuntimeException("Drag resizing not set. Check CHANGE_DRAG_RESIZING first");
+                throw new RuntimeException(
+                        "Drag resizing not set. Check CHANGE_DRAG_RESIZING first");
             }
             return this.mDragResizing;
         }
@@ -1109,8 +1274,14 @@ public final class WindowContainerTransaction implements Parcelable {
         }
 
         public String toString() {
-            boolean changesBounds = ((this.mConfigSetMask & 536870912) == 0 || (this.mWindowSetMask & 1) == 0) ? false : true;
-            boolean changesAppBounds = ((536870912 & this.mConfigSetMask) == 0 || (this.mWindowSetMask & 2) == 0) ? false : true;
+            boolean changesBounds =
+                    ((this.mConfigSetMask & 536870912) == 0 || (this.mWindowSetMask & 1) == 0)
+                            ? false
+                            : true;
+            boolean changesAppBounds =
+                    ((536870912 & this.mConfigSetMask) == 0 || (this.mWindowSetMask & 2) == 0)
+                            ? false
+                            : true;
             boolean changesSs = (this.mConfigSetMask & 1024) != 0;
             boolean changesSss = (this.mConfigSetMask & 2048) != 0;
             boolean changesStagePosition = (this.mWindowSetMask & 2097152) != 0;
@@ -1120,13 +1291,21 @@ public final class WindowContainerTransaction implements Parcelable {
                 sb.append("bounds:" + this.mConfiguration.windowConfiguration.getBounds() + ",");
             }
             if (changesAppBounds) {
-                sb.append("appbounds:" + this.mConfiguration.windowConfiguration.getAppBounds() + ",");
+                sb.append(
+                        "appbounds:"
+                                + this.mConfiguration.windowConfiguration.getAppBounds()
+                                + ",");
             }
             if (changesSss) {
                 sb.append("ssw:" + this.mConfiguration.smallestScreenWidthDp + ",");
             }
             if (changesSs) {
-                sb.append("sw/h:" + this.mConfiguration.screenWidthDp + "x" + this.mConfiguration.screenHeightDp + ",");
+                sb.append(
+                        "sw/h:"
+                                + this.mConfiguration.screenWidthDp
+                                + "x"
+                                + this.mConfiguration.screenHeightDp
+                                + ",");
             }
             if ((1 & this.mChangeMask) != 0) {
                 sb.append("focusable:" + this.mFocusable + ",");
@@ -1153,7 +1332,10 @@ public final class WindowContainerTransaction implements Parcelable {
                 sb.append("configAtTransitionEnd").append(",");
             }
             if (changesStagePosition) {
-                sb.append("stagePosition" + this.mConfiguration.windowConfiguration.getStagePositionToString() + ",");
+                sb.append(
+                        "stagePosition"
+                                + this.mConfiguration.windowConfiguration.getStagePositionToString()
+                                + ",");
             }
             if (CoreRune.MW_SHELL_CHANGE_TRANSITION) {
                 if (hasChangeTransitMode()) {
@@ -1221,19 +1403,22 @@ public final class WindowContainerTransaction implements Parcelable {
     }
 
     public static final class HierarchyOp implements Parcelable {
-        public static final Parcelable.Creator<HierarchyOp> CREATOR = new Parcelable.Creator<HierarchyOp>() { // from class: android.window.WindowContainerTransaction.HierarchyOp.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public HierarchyOp createFromParcel(Parcel in) {
-                return new HierarchyOp(in);
-            }
+        public static final Parcelable.Creator<HierarchyOp> CREATOR =
+                new Parcelable.Creator<
+                        HierarchyOp>() { // from class:
+                                         // android.window.WindowContainerTransaction.HierarchyOp.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public HierarchyOp createFromParcel(Parcel in) {
+                        return new HierarchyOp(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public HierarchyOp[] newArray(int size) {
-                return new HierarchyOp[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public HierarchyOp[] newArray(int size) {
+                        return new HierarchyOp[size];
+                    }
+                };
         public static final int HIERARCHY_OP_TYPE_ADD_INSETS_FRAME_PROVIDER = 10;
         public static final int HIERARCHY_OP_TYPE_ADD_TASK_FRAGMENT_OPERATION = 17;
         public static final int HIERARCHY_OP_TYPE_CHILDREN_TASKS_REPARENT = 2;
@@ -1254,7 +1439,8 @@ public final class WindowContainerTransaction implements Parcelable {
         public static final int HIERARCHY_OP_TYPE_SET_LAUNCH_ROOT = 3;
         public static final int HIERARCHY_OP_TYPE_SET_REPARENT_LEAF_TASK_IF_RELAUNCH = 16;
         public static final int HIERARCHY_OP_TYPE_START_SHORTCUT = 8;
-        public static final String LAUNCH_KEY_SHORTCUT_CALLING_PACKAGE = "android:transaction.hop.shortcut_calling_package";
+        public static final String LAUNCH_KEY_SHORTCUT_CALLING_PACKAGE =
+                "android:transaction.hop.shortcut_calling_package";
         public static final String LAUNCH_KEY_TASK_ID = "android:transaction.hop.taskId";
         private Intent mActivityIntent;
         private int[] mActivityTypes;
@@ -1275,20 +1461,49 @@ public final class WindowContainerTransaction implements Parcelable {
         private final int mType;
         private int[] mWindowingModes;
 
-        public static HierarchyOp createForReparent(IBinder container, IBinder reparent, boolean toTop) {
-            return new Builder(0).setContainer(container).setReparentContainer(reparent).setToTop(toTop).build();
+        public static HierarchyOp createForReparent(
+                IBinder container, IBinder reparent, boolean toTop) {
+            return new Builder(0)
+                    .setContainer(container)
+                    .setReparentContainer(reparent)
+                    .setToTop(toTop)
+                    .build();
         }
 
-        public static HierarchyOp createForReorder(IBinder container, boolean toTop, boolean includingParents) {
-            return new Builder(1).setContainer(container).setReparentContainer(container).setToTop(toTop).setIncludingParents(includingParents).build();
+        public static HierarchyOp createForReorder(
+                IBinder container, boolean toTop, boolean includingParents) {
+            return new Builder(1)
+                    .setContainer(container)
+                    .setReparentContainer(container)
+                    .setToTop(toTop)
+                    .setIncludingParents(includingParents)
+                    .build();
         }
 
-        public static HierarchyOp createForChildrenTasksReparent(IBinder currentParent, IBinder newParent, int[] windowingModes, int[] activityTypes, boolean onTop, boolean reparentTopOnly) {
-            return new Builder(2).setContainer(currentParent).setReparentContainer(newParent).setWindowingModes(windowingModes).setActivityTypes(activityTypes).setToTop(onTop).setReparentTopOnly(reparentTopOnly).build();
+        public static HierarchyOp createForChildrenTasksReparent(
+                IBinder currentParent,
+                IBinder newParent,
+                int[] windowingModes,
+                int[] activityTypes,
+                boolean onTop,
+                boolean reparentTopOnly) {
+            return new Builder(2)
+                    .setContainer(currentParent)
+                    .setReparentContainer(newParent)
+                    .setWindowingModes(windowingModes)
+                    .setActivityTypes(activityTypes)
+                    .setToTop(onTop)
+                    .setReparentTopOnly(reparentTopOnly)
+                    .build();
         }
 
-        public static HierarchyOp createForSetLaunchRoot(IBinder container, int[] windowingModes, int[] activityTypes) {
-            return new Builder(3).setContainer(container).setWindowingModes(windowingModes).setActivityTypes(activityTypes).build();
+        public static HierarchyOp createForSetLaunchRoot(
+                IBinder container, int[] windowingModes, int[] activityTypes) {
+            return new Builder(3)
+                    .setContainer(container)
+                    .setWindowingModes(windowingModes)
+                    .setActivityTypes(activityTypes)
+                    .build();
         }
 
         public static HierarchyOp createForAdjacentRoots(IBinder root1, IBinder root2) {
@@ -1301,13 +1516,18 @@ public final class WindowContainerTransaction implements Parcelable {
             return new Builder(5).setToTop(true).setLaunchOptions(fullOptions).build();
         }
 
-        public static HierarchyOp createForStartShortcut(String callingPackage, ShortcutInfo shortcutInfo, Bundle options) {
+        public static HierarchyOp createForStartShortcut(
+                String callingPackage, ShortcutInfo shortcutInfo, Bundle options) {
             Bundle fullOptions = options == null ? new Bundle() : options;
             fullOptions.putString(LAUNCH_KEY_SHORTCUT_CALLING_PACKAGE, callingPackage);
-            return new Builder(8).setShortcutInfo(shortcutInfo).setLaunchOptions(fullOptions).build();
+            return new Builder(8)
+                    .setShortcutInfo(shortcutInfo)
+                    .setLaunchOptions(fullOptions)
+                    .build();
         }
 
-        public static HierarchyOp createForSetLaunchAdjacentFlagRoot(IBinder container, boolean clearRoot) {
+        public static HierarchyOp createForSetLaunchAdjacentFlagRoot(
+                IBinder container, boolean clearRoot) {
             return new Builder(6).setContainer(container).setToTop(clearRoot).build();
         }
 
@@ -1354,7 +1574,8 @@ public final class WindowContainerTransaction implements Parcelable {
             this.mBounds = (Rect) in.readTypedObject(Rect.CREATOR);
             this.mIncludingParents = in.readBoolean();
             this.mReparent = in.readStrongBinder();
-            this.mInsetsFrameProvider = (InsetsFrameProvider) in.readTypedObject(InsetsFrameProvider.CREATOR);
+            this.mInsetsFrameProvider =
+                    (InsetsFrameProvider) in.readTypedObject(InsetsFrameProvider.CREATOR);
             this.mInsetsFrameOwner = in.readStrongBinder();
             this.mToTop = in.readBoolean();
             this.mReparentTopOnly = in.readBoolean();
@@ -1362,7 +1583,8 @@ public final class WindowContainerTransaction implements Parcelable {
             this.mActivityTypes = in.createIntArray();
             this.mLaunchOptions = in.readBundle();
             this.mActivityIntent = (Intent) in.readTypedObject(Intent.CREATOR);
-            this.mTaskFragmentOperation = (TaskFragmentOperation) in.readTypedObject(TaskFragmentOperation.CREATOR);
+            this.mTaskFragmentOperation =
+                    (TaskFragmentOperation) in.readTypedObject(TaskFragmentOperation.CREATOR);
             this.mPendingIntent = (PendingIntent) in.readTypedObject(PendingIntent.CREATOR);
             this.mShortcutInfo = (ShortcutInfo) in.readTypedObject(ShortcutInfo.CREATOR);
             this.mAlwaysOnTop = in.readBoolean();
@@ -1497,38 +1719,76 @@ public final class WindowContainerTransaction implements Parcelable {
             sb.append("{").append(hopToString(this.mType)).append(": ");
             switch (this.mType) {
                 case 0:
-                    sb.append(this.mContainer).append(" to ").append(this.mToTop ? "top of " : "bottom of ").append(this.mReparent);
+                    sb.append(this.mContainer)
+                            .append(" to ")
+                            .append(this.mToTop ? "top of " : "bottom of ")
+                            .append(this.mReparent);
                     break;
                 case 1:
-                    sb.append(this.mContainer).append(" to ").append(this.mToTop ? GenerateXML.TOP : GenerateXML.BOTTOM);
+                    sb.append(this.mContainer)
+                            .append(" to ")
+                            .append(this.mToTop ? GenerateXML.TOP : GenerateXML.BOTTOM);
                     break;
                 case 2:
-                    sb.append("from=").append(this.mContainer).append(" to=").append(this.mReparent).append(" mToTop=").append(this.mToTop).append(" mReparentTopOnly=").append(this.mReparentTopOnly).append(" mWindowingMode=").append(Arrays.toString(this.mWindowingModes)).append(" mActivityType=").append(Arrays.toString(this.mActivityTypes));
+                    sb.append("from=")
+                            .append(this.mContainer)
+                            .append(" to=")
+                            .append(this.mReparent)
+                            .append(" mToTop=")
+                            .append(this.mToTop)
+                            .append(" mReparentTopOnly=")
+                            .append(this.mReparentTopOnly)
+                            .append(" mWindowingMode=")
+                            .append(Arrays.toString(this.mWindowingModes))
+                            .append(" mActivityType=")
+                            .append(Arrays.toString(this.mActivityTypes));
                     break;
                 case 3:
-                    sb.append("container=").append(this.mContainer).append(" mWindowingMode=").append(Arrays.toString(this.mWindowingModes)).append(" mActivityType=").append(Arrays.toString(this.mActivityTypes));
+                    sb.append("container=")
+                            .append(this.mContainer)
+                            .append(" mWindowingMode=")
+                            .append(Arrays.toString(this.mWindowingModes))
+                            .append(" mActivityType=")
+                            .append(Arrays.toString(this.mActivityTypes));
                     break;
                 case 4:
-                    sb.append("container=").append(this.mContainer).append(" adjacentRoot=").append(this.mReparent);
+                    sb.append("container=")
+                            .append(this.mContainer)
+                            .append(" adjacentRoot=")
+                            .append(this.mReparent);
                     break;
                 case 5:
                     sb.append(this.mLaunchOptions);
                     break;
                 case 6:
-                    sb.append("container=").append(this.mContainer).append(" clearRoot=").append(this.mToTop);
+                    sb.append("container=")
+                            .append(this.mContainer)
+                            .append(" clearRoot=")
+                            .append(this.mToTop);
                     break;
                 case 7:
                     sb.append("options=").append(this.mLaunchOptions);
                     break;
                 case 8:
-                    sb.append("options=").append(this.mLaunchOptions).append(" info=").append(this.mShortcutInfo);
+                    sb.append("options=")
+                            .append(this.mLaunchOptions)
+                            .append(" info=")
+                            .append(this.mShortcutInfo);
                     break;
                 case 10:
                 case 11:
-                    sb.append("container=").append(this.mContainer).append(" provider=").append(this.mInsetsFrameProvider).append(" owner=").append(this.mInsetsFrameOwner);
+                    sb.append("container=")
+                            .append(this.mContainer)
+                            .append(" provider=")
+                            .append(this.mInsetsFrameProvider)
+                            .append(" owner=")
+                            .append(this.mInsetsFrameOwner);
                     break;
                 case 12:
-                    sb.append("container=").append(this.mContainer).append(" alwaysOnTop=").append(this.mAlwaysOnTop);
+                    sb.append("container=")
+                            .append(this.mContainer)
+                            .append(" alwaysOnTop=")
+                            .append(this.mAlwaysOnTop);
                     break;
                 case 13:
                 case 100:
@@ -1541,13 +1801,28 @@ public final class WindowContainerTransaction implements Parcelable {
                     sb.append("container=").append(this.mContainer);
                     break;
                 case 16:
-                    sb.append("container= ").append(this.mContainer).append(" reparentLeafTaskIfRelaunch= ").append(this.mReparentLeafTaskIfRelaunch);
+                    sb.append("container= ")
+                            .append(this.mContainer)
+                            .append(" reparentLeafTaskIfRelaunch= ")
+                            .append(this.mReparentLeafTaskIfRelaunch);
                     break;
                 case 17:
-                    sb.append("fragmentToken= ").append(this.mContainer).append(" operation= ").append(this.mTaskFragmentOperation);
+                    sb.append("fragmentToken= ")
+                            .append(this.mContainer)
+                            .append(" operation= ")
+                            .append(this.mTaskFragmentOperation);
                     break;
                 default:
-                    sb.append("container=").append(this.mContainer).append(" reparent=").append(this.mReparent).append(" mToTop=").append(this.mToTop).append(" mWindowingMode=").append(Arrays.toString(this.mWindowingModes)).append(" mActivityType=").append(Arrays.toString(this.mActivityTypes));
+                    sb.append("container=")
+                            .append(this.mContainer)
+                            .append(" reparent=")
+                            .append(this.mReparent)
+                            .append(" mToTop=")
+                            .append(this.mToTop)
+                            .append(" mWindowingMode=")
+                            .append(Arrays.toString(this.mWindowingModes))
+                            .append(" mActivityType=")
+                            .append(Arrays.toString(this.mActivityTypes));
                     break;
             }
             return sb.append("}").toString();
@@ -1700,7 +1975,10 @@ public final class WindowContainerTransaction implements Parcelable {
                     iArr = null;
                 }
                 hierarchyOp.mWindowingModes = iArr;
-                hierarchyOp.mActivityTypes = this.mActivityTypes != null ? Arrays.copyOf(this.mActivityTypes, this.mActivityTypes.length) : null;
+                hierarchyOp.mActivityTypes =
+                        this.mActivityTypes != null
+                                ? Arrays.copyOf(this.mActivityTypes, this.mActivityTypes.length)
+                                : null;
                 hierarchyOp.mInsetsFrameProvider = this.mInsetsFrameProvider;
                 hierarchyOp.mInsetsFrameOwner = this.mInsetsFrameOwner;
                 hierarchyOp.mToTop = this.mToTop;
@@ -1720,17 +1998,20 @@ public final class WindowContainerTransaction implements Parcelable {
     }
 
     public static class TaskFragmentAdjacentParams {
-        private static final String DELAY_PRIMARY_LAST_ACTIVITY_REMOVAL = "android:transaction.adjacent.option.delay_primary_removal";
-        private static final String DELAY_SECONDARY_LAST_ACTIVITY_REMOVAL = "android:transaction.adjacent.option.delay_secondary_removal";
+        private static final String DELAY_PRIMARY_LAST_ACTIVITY_REMOVAL =
+                "android:transaction.adjacent.option.delay_primary_removal";
+        private static final String DELAY_SECONDARY_LAST_ACTIVITY_REMOVAL =
+                "android:transaction.adjacent.option.delay_secondary_removal";
         private boolean mDelayPrimaryLastActivityRemoval;
         private boolean mDelaySecondaryLastActivityRemoval;
 
-        public TaskFragmentAdjacentParams() {
-        }
+        public TaskFragmentAdjacentParams() {}
 
         public TaskFragmentAdjacentParams(Bundle bundle) {
-            this.mDelayPrimaryLastActivityRemoval = bundle.getBoolean(DELAY_PRIMARY_LAST_ACTIVITY_REMOVAL);
-            this.mDelaySecondaryLastActivityRemoval = bundle.getBoolean(DELAY_SECONDARY_LAST_ACTIVITY_REMOVAL);
+            this.mDelayPrimaryLastActivityRemoval =
+                    bundle.getBoolean(DELAY_PRIMARY_LAST_ACTIVITY_REMOVAL);
+            this.mDelaySecondaryLastActivityRemoval =
+                    bundle.getBoolean(DELAY_SECONDARY_LAST_ACTIVITY_REMOVAL);
         }
 
         public void setShouldDelayPrimaryLastActivityRemoval(boolean delay) {
@@ -1751,31 +2032,35 @@ public final class WindowContainerTransaction implements Parcelable {
 
         Bundle toBundle() {
             Bundle b = new Bundle();
-            b.putBoolean(DELAY_PRIMARY_LAST_ACTIVITY_REMOVAL, this.mDelayPrimaryLastActivityRemoval);
-            b.putBoolean(DELAY_SECONDARY_LAST_ACTIVITY_REMOVAL, this.mDelaySecondaryLastActivityRemoval);
+            b.putBoolean(
+                    DELAY_PRIMARY_LAST_ACTIVITY_REMOVAL, this.mDelayPrimaryLastActivityRemoval);
+            b.putBoolean(
+                    DELAY_SECONDARY_LAST_ACTIVITY_REMOVAL, this.mDelaySecondaryLastActivityRemoval);
             return b;
         }
     }
 
     public static final class ContainerChange implements Parcelable {
-        public static final Parcelable.Creator<ContainerChange> CREATOR = new Parcelable.Creator<ContainerChange>() { // from class: android.window.WindowContainerTransaction.ContainerChange.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ContainerChange createFromParcel(Parcel in) {
-                return new ContainerChange(in);
-            }
+        public static final Parcelable.Creator<ContainerChange> CREATOR =
+                new Parcelable.Creator<
+                        ContainerChange>() { // from class:
+                                             // android.window.WindowContainerTransaction.ContainerChange.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ContainerChange createFromParcel(Parcel in) {
+                        return new ContainerChange(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ContainerChange[] newArray(int size) {
-                return new ContainerChange[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ContainerChange[] newArray(int size) {
+                        return new ContainerChange[size];
+                    }
+                };
         Change mChange;
         IBinder mToken;
 
-        public ContainerChange() {
-        }
+        public ContainerChange() {}
 
         protected ContainerChange(Parcel in) {
             this.mToken = in.readStrongBinder();

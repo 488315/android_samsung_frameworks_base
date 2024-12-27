@@ -7,8 +7,10 @@ import android.os.Build;
 import android.security.identity.Util;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.nio.ByteBuffer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,7 +23,8 @@ public final class EnterpriseSpecificIdCalculator {
 
     public EnterpriseSpecificIdCalculator(Context context) {
         String str;
-        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(TelephonyManager.class);
+        TelephonyManager telephonyManager =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
         Preconditions.checkState(telephonyManager != null, "Unable to access telephony service");
         String str2 = null;
         try {
@@ -54,7 +57,9 @@ public final class EnterpriseSpecificIdCalculator {
     }
 
     public static String getPaddedTruncatedString(int i, String str) {
-        return String.format(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "%", "s"), str).substring(0, i);
+        return String.format(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "%", "s"), str)
+                .substring(0, i);
     }
 
     public final String calculateEnterpriseId(String str, String str2) {
@@ -80,7 +85,8 @@ public final class EnterpriseSpecificIdCalculator {
         String str5 = this.mMeid;
         byte[] bytes3 = getPaddedTruncatedString(16, str5 != null ? str5 : "").getBytes();
         byte[] bytes4 = this.mMacAddress.getBytes();
-        ByteBuffer allocate = ByteBuffer.allocate(bytes.length + bytes2.length + bytes3.length + bytes4.length);
+        ByteBuffer allocate =
+                ByteBuffer.allocate(bytes.length + bytes2.length + bytes3.length + bytes4.length);
         allocate.put(bytes);
         allocate.put(bytes2);
         allocate.put(bytes3);
@@ -90,7 +96,15 @@ public final class EnterpriseSpecificIdCalculator {
         ByteBuffer allocate2 = ByteBuffer.allocate(bytes5.length + bytes6.length);
         allocate2.put(bytes5);
         allocate2.put(bytes6);
-        ByteBuffer wrap = ByteBuffer.wrap(Util.computeHkdf("HMACSHA256", allocate.array(), (byte[]) null, allocate2.array(), 16));
-        return new VerifierDeviceIdentity(wrap.getLong()).toString() + new VerifierDeviceIdentity(wrap.getLong()).toString();
+        ByteBuffer wrap =
+                ByteBuffer.wrap(
+                        Util.computeHkdf(
+                                "HMACSHA256",
+                                allocate.array(),
+                                (byte[]) null,
+                                allocate2.array(),
+                                16));
+        return new VerifierDeviceIdentity(wrap.getLong()).toString()
+                + new VerifierDeviceIdentity(wrap.getLong()).toString();
     }
 }

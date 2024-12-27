@@ -16,11 +16,13 @@ public class SharpenFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "scale")
     private float mScale;
+
     private final String mSharpenShader;
     private int mTarget;
 
     @GenerateFieldPort(hasDefault = true, name = "tile_size")
     private int mTileSize;
+
     private int mWidth;
 
     public SharpenFilter(String name) {
@@ -30,7 +32,31 @@ public class SharpenFilter extends Filter {
         this.mWidth = 0;
         this.mHeight = 0;
         this.mTarget = 0;
-        this.mSharpenShader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform float scale;\nuniform float stepsizeX;\nuniform float stepsizeY;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec3 nbr_color = vec3(0.0, 0.0, 0.0);\n  vec2 coord;\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  coord.x = v_texcoord.x - 0.5 * stepsizeX;\n  coord.y = v_texcoord.y - stepsizeY;\n  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n  coord.x = v_texcoord.x - stepsizeX;\n  coord.y = v_texcoord.y + 0.5 * stepsizeY;\n  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n  coord.x = v_texcoord.x + stepsizeX;\n  coord.y = v_texcoord.y - 0.5 * stepsizeY;\n  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n  coord.x = v_texcoord.x + stepsizeX;\n  coord.y = v_texcoord.y + 0.5 * stepsizeY;\n  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n  gl_FragColor = vec4(color.rgb - 2.0 * scale * nbr_color, color.a);\n}\n";
+        this.mSharpenShader =
+                "precision mediump float;\n"
+                        + "uniform sampler2D tex_sampler_0;\n"
+                        + "uniform float scale;\n"
+                        + "uniform float stepsizeX;\n"
+                        + "uniform float stepsizeY;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  vec3 nbr_color = vec3(0.0, 0.0, 0.0);\n"
+                        + "  vec2 coord;\n"
+                        + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                        + "  coord.x = v_texcoord.x - 0.5 * stepsizeX;\n"
+                        + "  coord.y = v_texcoord.y - stepsizeY;\n"
+                        + "  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n"
+                        + "  coord.x = v_texcoord.x - stepsizeX;\n"
+                        + "  coord.y = v_texcoord.y + 0.5 * stepsizeY;\n"
+                        + "  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n"
+                        + "  coord.x = v_texcoord.x + stepsizeX;\n"
+                        + "  coord.y = v_texcoord.y - 0.5 * stepsizeY;\n"
+                        + "  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n"
+                        + "  coord.x = v_texcoord.x + stepsizeX;\n"
+                        + "  coord.y = v_texcoord.y + 0.5 * stepsizeY;\n"
+                        + "  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n"
+                        + "  gl_FragColor = vec4(color.rgb - 2.0 * scale * nbr_color, color.a);\n"
+                        + "}\n";
     }
 
     @Override // android.filterfw.core.Filter
@@ -47,13 +73,45 @@ public class SharpenFilter extends Filter {
     public void initProgram(FilterContext context, int target) {
         switch (target) {
             case 3:
-                ShaderProgram shaderProgram = new ShaderProgram(context, "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform float scale;\nuniform float stepsizeX;\nuniform float stepsizeY;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec3 nbr_color = vec3(0.0, 0.0, 0.0);\n  vec2 coord;\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  coord.x = v_texcoord.x - 0.5 * stepsizeX;\n  coord.y = v_texcoord.y - stepsizeY;\n  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n  coord.x = v_texcoord.x - stepsizeX;\n  coord.y = v_texcoord.y + 0.5 * stepsizeY;\n  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n  coord.x = v_texcoord.x + stepsizeX;\n  coord.y = v_texcoord.y - 0.5 * stepsizeY;\n  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n  coord.x = v_texcoord.x + stepsizeX;\n  coord.y = v_texcoord.y + 0.5 * stepsizeY;\n  nbr_color += texture2D(tex_sampler_0, coord).rgb - color.rgb;\n  gl_FragColor = vec4(color.rgb - 2.0 * scale * nbr_color, color.a);\n}\n");
+                ShaderProgram shaderProgram =
+                        new ShaderProgram(
+                                context,
+                                "precision mediump float;\n"
+                                    + "uniform sampler2D tex_sampler_0;\n"
+                                    + "uniform float scale;\n"
+                                    + "uniform float stepsizeX;\n"
+                                    + "uniform float stepsizeY;\n"
+                                    + "varying vec2 v_texcoord;\n"
+                                    + "void main() {\n"
+                                    + "  vec3 nbr_color = vec3(0.0, 0.0, 0.0);\n"
+                                    + "  vec2 coord;\n"
+                                    + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                                    + "  coord.x = v_texcoord.x - 0.5 * stepsizeX;\n"
+                                    + "  coord.y = v_texcoord.y - stepsizeY;\n"
+                                    + "  nbr_color += texture2D(tex_sampler_0, coord).rgb -"
+                                    + " color.rgb;\n"
+                                    + "  coord.x = v_texcoord.x - stepsizeX;\n"
+                                    + "  coord.y = v_texcoord.y + 0.5 * stepsizeY;\n"
+                                    + "  nbr_color += texture2D(tex_sampler_0, coord).rgb -"
+                                    + " color.rgb;\n"
+                                    + "  coord.x = v_texcoord.x + stepsizeX;\n"
+                                    + "  coord.y = v_texcoord.y - 0.5 * stepsizeY;\n"
+                                    + "  nbr_color += texture2D(tex_sampler_0, coord).rgb -"
+                                    + " color.rgb;\n"
+                                    + "  coord.x = v_texcoord.x + stepsizeX;\n"
+                                    + "  coord.y = v_texcoord.y + 0.5 * stepsizeY;\n"
+                                    + "  nbr_color += texture2D(tex_sampler_0, coord).rgb -"
+                                    + " color.rgb;\n"
+                                    + "  gl_FragColor = vec4(color.rgb - 2.0 * scale * nbr_color,"
+                                    + " color.a);\n"
+                                    + "}\n");
                 shaderProgram.setMaximumTileSize(this.mTileSize);
                 this.mProgram = shaderProgram;
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter Sharpen does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Sharpen does not support frames of target " + target + "!");
         }
     }
 

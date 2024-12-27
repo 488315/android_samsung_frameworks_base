@@ -34,16 +34,14 @@ public final class Telecom {
         public static final int UNKNOWN_DIRECTION = 0;
         public static final int UNKNOWN_STATUS = 0;
 
-        public Call() {
-        }
+        public Call() {}
 
         public final class Origin {
             public static final long APP_ICON = 1151051235330L;
             public static final long CALLER_ID = 1138166333441L;
             public static final long FACILITATOR = 1146756268035L;
 
-            public Origin() {
-            }
+            public Origin() {}
         }
     }
 
@@ -51,24 +49,21 @@ public final class Telecom {
         public static final long CONTROL_ACTION = 1146756268034L;
         public static final long CREATE_ACTION = 1146756268033L;
 
-        public Request() {
-        }
+        public Request() {}
 
         public final class CreateAction {
             public static final long ADDRESS = 1138166333442L;
             public static final long FACILITATOR = 1146756268035L;
             public static final long ID = 1138166333441L;
 
-            public CreateAction() {
-            }
+            public CreateAction() {}
         }
 
         public final class ControlAction {
             public static final long CONTROL = 1159641169922L;
             public static final long ID = 1138166333441L;
 
-            public ControlAction() {
-            }
+            public ControlAction() {}
         }
     }
 
@@ -77,7 +72,6 @@ public final class Telecom {
         public static final long IDENTIFIER = 1138166333442L;
         public static final long NAME = 1138166333441L;
 
-        public CallFacilitator() {
-        }
+        public CallFacilitator() {}
     }
 }

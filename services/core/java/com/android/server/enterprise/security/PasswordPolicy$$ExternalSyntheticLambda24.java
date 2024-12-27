@@ -5,16 +5,20 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
+
 import com.samsung.android.knox.ContainerProxy;
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class PasswordPolicy$$ExternalSyntheticLambda24 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class PasswordPolicy$$ExternalSyntheticLambda24
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -35,7 +39,16 @@ public final /* synthetic */ class PasswordPolicy$$ExternalSyntheticLambda24 imp
                     return bool;
                 }
                 ((PersonaManagerAdapter) passwordPolicy.mPersonaManagerAdapter).getClass();
-                if (SemPersonaManager.isDoEnabled(0) && (deviceOwnerComponentOnCallingUser = passwordPolicy.mDpm.getDeviceOwnerComponentOnCallingUser()) != null && (passwordPolicy.mDpm.getPasswordQuality(deviceOwnerComponentOnCallingUser, 0) > 0 || passwordPolicy.mDpm.getPasswordMinimumLength(deviceOwnerComponentOnCallingUser, 0) > 0)) {
+                if (SemPersonaManager.isDoEnabled(0)
+                        && (deviceOwnerComponentOnCallingUser =
+                                        passwordPolicy.mDpm.getDeviceOwnerComponentOnCallingUser())
+                                != null
+                        && (passwordPolicy.mDpm.getPasswordQuality(
+                                                deviceOwnerComponentOnCallingUser, 0)
+                                        > 0
+                                || passwordPolicy.mDpm.getPasswordMinimumLength(
+                                                deviceOwnerComponentOnCallingUser, 0)
+                                        > 0)) {
                     Log.d("PasswordPolicy", "isClearLockAllowed - false due to DO and pwd policy");
                     bool = Boolean.FALSE;
                 }
@@ -46,13 +59,33 @@ public final /* synthetic */ class PasswordPolicy$$ExternalSyntheticLambda24 imp
                     for (int i2 = 0; i2 < users.size(); i2++) {
                         UserInfo userInfo = (UserInfo) users.get(i2);
                         if (userInfo.isManagedProfile()) {
-                            ComponentName profileOwnerAsUser = passwordPolicy.mDpm.getProfileOwnerAsUser(userInfo.id);
-                            if (profileOwnerAsUser != null && (passwordPolicy.mService.getPasswordQuality(profileOwnerAsUser, userInfo.id, true) > 0 || passwordPolicy.mService.getPasswordMinimumLength(profileOwnerAsUser, userInfo.id, true) > 0)) {
-                                Log.d("PasswordPolicy", "isClearLockAllowed - false due to PO and parent pwd policy");
+                            ComponentName profileOwnerAsUser =
+                                    passwordPolicy.mDpm.getProfileOwnerAsUser(userInfo.id);
+                            if (profileOwnerAsUser != null
+                                    && (passwordPolicy.mService.getPasswordQuality(
+                                                            profileOwnerAsUser, userInfo.id, true)
+                                                    > 0
+                                            || passwordPolicy.mService.getPasswordMinimumLength(
+                                                            profileOwnerAsUser, userInfo.id, true)
+                                                    > 0)) {
+                                Log.d(
+                                        "PasswordPolicy",
+                                        "isClearLockAllowed - false due to PO and parent pwd"
+                                            + " policy");
                                 bool = Boolean.FALSE;
                             }
-                            if (((ArrayList) allOneLockedChildUsers).contains(Integer.valueOf(userInfo.id)) && profileOwnerAsUser != null && (passwordPolicy.mDpm.getPasswordQuality(profileOwnerAsUser, userInfo.id) > 0 || passwordPolicy.mDpm.getPasswordMinimumLength(profileOwnerAsUser, userInfo.id) > 0)) {
-                                Log.d("PasswordPolicy", "isClearLockAllowed - false due to PO and one lock");
+                            if (((ArrayList) allOneLockedChildUsers)
+                                            .contains(Integer.valueOf(userInfo.id))
+                                    && profileOwnerAsUser != null
+                                    && (passwordPolicy.mDpm.getPasswordQuality(
+                                                            profileOwnerAsUser, userInfo.id)
+                                                    > 0
+                                            || passwordPolicy.mDpm.getPasswordMinimumLength(
+                                                            profileOwnerAsUser, userInfo.id)
+                                                    > 0)) {
+                                Log.d(
+                                        "PasswordPolicy",
+                                        "isClearLockAllowed - false due to PO and one lock");
                                 bool = Boolean.FALSE;
                             }
                         }
@@ -61,10 +94,13 @@ public final /* synthetic */ class PasswordPolicy$$ExternalSyntheticLambda24 imp
                 if (passwordPolicy.getMaximumFailedPasswordsForDisable(0) <= 0) {
                     return bool;
                 }
-                Log.d("PasswordPolicy", "isClearLockAllowed - false due to FailedPasswordsForDisable policy");
+                Log.d(
+                        "PasswordPolicy",
+                        "isClearLockAllowed - false due to FailedPasswordsForDisable policy");
                 return Boolean.FALSE;
             default:
-                return ContainerProxy.sendPolicyUpdate("knox.container.proxy.POLICY_ADMIN_LOCK", (Bundle) obj);
+                return ContainerProxy.sendPolicyUpdate(
+                        "knox.container.proxy.POLICY_ADMIN_LOCK", (Bundle) obj);
         }
     }
 }

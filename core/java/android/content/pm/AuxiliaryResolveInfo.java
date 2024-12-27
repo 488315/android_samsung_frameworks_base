@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -17,7 +18,12 @@ public final class AuxiliaryResolveInfo {
     public final boolean needsPhaseTwo;
     public final String token;
 
-    public AuxiliaryResolveInfo(String token, boolean needsPhase2, Intent failureIntent, List<AuxiliaryFilter> filters, int[] hostDigestPrefix) {
+    public AuxiliaryResolveInfo(
+            String token,
+            boolean needsPhase2,
+            Intent failureIntent,
+            List<AuxiliaryFilter> filters,
+            int[] hostDigestPrefix) {
         this.token = token;
         this.needsPhaseTwo = needsPhase2;
         this.failureIntent = failureIntent;
@@ -26,7 +32,8 @@ public final class AuxiliaryResolveInfo {
         this.hostDigestPrefixSecure = hostDigestPrefix;
     }
 
-    public AuxiliaryResolveInfo(ComponentName failureActivity, Intent failureIntent, List<AuxiliaryFilter> filters) {
+    public AuxiliaryResolveInfo(
+            ComponentName failureActivity, Intent failureIntent, List<AuxiliaryFilter> filters) {
         this.installFailureActivity = failureActivity;
         this.filters = filters;
         this.token = null;
@@ -35,8 +42,13 @@ public final class AuxiliaryResolveInfo {
         this.hostDigestPrefixSecure = null;
     }
 
-    public AuxiliaryResolveInfo(ComponentName failureActivity, String packageName, long versionCode, String splitName) {
-        this(failureActivity, null, Collections.singletonList(new AuxiliaryFilter(packageName, versionCode, splitName)));
+    public AuxiliaryResolveInfo(
+            ComponentName failureActivity, String packageName, long versionCode, String splitName) {
+        this(
+                failureActivity,
+                null,
+                Collections.singletonList(
+                        new AuxiliaryFilter(packageName, versionCode, splitName)));
     }
 
     public static final class AuxiliaryFilter extends IntentFilter {
@@ -46,7 +58,11 @@ public final class AuxiliaryResolveInfo {
         public final String splitName;
         public final long versionCode;
 
-        public AuxiliaryFilter(IntentFilter orig, InstantAppResolveInfo resolveInfo, String splitName, Bundle extras) {
+        public AuxiliaryFilter(
+                IntentFilter orig,
+                InstantAppResolveInfo resolveInfo,
+                String splitName,
+                Bundle extras) {
             super(orig);
             this.resolveInfo = resolveInfo;
             this.packageName = resolveInfo.getPackageName();
@@ -72,7 +88,15 @@ public final class AuxiliaryResolveInfo {
         }
 
         public String toString() {
-            return "AuxiliaryFilter{packageName='" + this.packageName + DateFormat.QUOTE + ", versionCode=" + this.versionCode + ", splitName='" + this.splitName + DateFormat.QUOTE + '}';
+            return "AuxiliaryFilter{packageName='"
+                    + this.packageName
+                    + DateFormat.QUOTE
+                    + ", versionCode="
+                    + this.versionCode
+                    + ", splitName='"
+                    + this.splitName
+                    + DateFormat.QUOTE
+                    + '}';
         }
     }
 }

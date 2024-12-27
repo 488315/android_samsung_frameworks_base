@@ -18,15 +18,18 @@ import android.os.storage.VolumeInfo;
 import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.R;
-import com.android.internal.content.NativeLibraryHelper;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.media.AudioParameter;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
-import libcore.io.IoUtils;
 
 /* loaded from: classes5.dex */
 public class InstallLocationUtils {
@@ -45,7 +48,7 @@ public class InstallLocationUtils {
     private static final String TAG = "PackageHelper";
     private static TestableInterface sDefaultTestableInterface = null;
 
-    public static abstract class TestableInterface {
+    public abstract static class TestableInterface {
         public abstract boolean getAllow3rdPartyOnInternalConfig(Context context);
 
         public abstract File getDataDirectory();
@@ -70,37 +73,48 @@ public class InstallLocationUtils {
         TestableInterface testableInterface;
         synchronized (InstallLocationUtils.class) {
             if (sDefaultTestableInterface == null) {
-                sDefaultTestableInterface = new TestableInterface() { // from class: com.android.internal.content.InstallLocationUtils.1
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public StorageManager getStorageManager(Context context) {
-                        return (StorageManager) context.getSystemService(StorageManager.class);
-                    }
+                sDefaultTestableInterface =
+                        new TestableInterface() { // from class:
+                                                  // com.android.internal.content.InstallLocationUtils.1
+                            @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                            public StorageManager getStorageManager(Context context) {
+                                return (StorageManager)
+                                        context.getSystemService(StorageManager.class);
+                            }
 
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public boolean getForceAllowOnExternalSetting(Context context) {
-                        return Settings.Global.getInt(context.getContentResolver(), Settings.Global.FORCE_ALLOW_ON_EXTERNAL, 0) != 0;
-                    }
+                            @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                            public boolean getForceAllowOnExternalSetting(Context context) {
+                                return Settings.Global.getInt(
+                                                context.getContentResolver(),
+                                                Settings.Global.FORCE_ALLOW_ON_EXTERNAL,
+                                                0)
+                                        != 0;
+                            }
 
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public boolean getAllow3rdPartyOnInternalConfig(Context context) {
-                        return context.getResources().getBoolean(R.bool.config_allow3rdPartyAppOnInternal);
-                    }
+                            @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                            public boolean getAllow3rdPartyOnInternalConfig(Context context) {
+                                return context.getResources()
+                                        .getBoolean(R.bool.config_allow3rdPartyAppOnInternal);
+                            }
 
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public ApplicationInfo getExistingAppInfo(Context context, String packageName) {
-                        try {
-                            ApplicationInfo existingInfo = context.getPackageManager().getApplicationInfo(packageName, 4194304);
-                            return existingInfo;
-                        } catch (PackageManager.NameNotFoundException e) {
-                            return null;
-                        }
-                    }
+                            @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                            public ApplicationInfo getExistingAppInfo(
+                                    Context context, String packageName) {
+                                try {
+                                    ApplicationInfo existingInfo =
+                                            context.getPackageManager()
+                                                    .getApplicationInfo(packageName, 4194304);
+                                    return existingInfo;
+                                } catch (PackageManager.NameNotFoundException e) {
+                                    return null;
+                                }
+                            }
 
-                    @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
-                    public File getDataDirectory() {
-                        return Environment.getDataDirectory();
-                    }
-                };
+                            @Override // com.android.internal.content.InstallLocationUtils.TestableInterface
+                            public File getDataDirectory() {
+                                return Environment.getDataDirectory();
+                            }
+                        };
             }
             testableInterface = sDefaultTestableInterface;
         }
@@ -108,7 +122,13 @@ public class InstallLocationUtils {
     }
 
     @Deprecated
-    public static String resolveInstallVolume(Context context, String packageName, int installLocation, long sizeBytes, TestableInterface testInterface) throws IOException {
+    public static String resolveInstallVolume(
+            Context context,
+            String packageName,
+            int installLocation,
+            long sizeBytes,
+            TestableInterface testInterface)
+            throws IOException {
         PackageInstaller.SessionParams params = new PackageInstaller.SessionParams(-1);
         params.appPackageName = packageName;
         params.installLocation = installLocation;
@@ -116,12 +136,20 @@ public class InstallLocationUtils {
         return resolveInstallVolume(context, params, testInterface);
     }
 
-    public static String resolveInstallVolume(Context context, PackageInstaller.SessionParams params) throws IOException {
+    public static String resolveInstallVolume(
+            Context context, PackageInstaller.SessionParams params) throws IOException {
         TestableInterface testableInterface = getDefaultTestableInterface();
-        return resolveInstallVolume(context, params.appPackageName, params.installLocation, params.sizeBytes, testableInterface);
+        return resolveInstallVolume(
+                context,
+                params.appPackageName,
+                params.installLocation,
+                params.sizeBytes,
+                testableInterface);
     }
 
-    private static boolean checkFitOnVolume(StorageManager storageManager, String volumePath, PackageInstaller.SessionParams params) throws IOException {
+    private static boolean checkFitOnVolume(
+            StorageManager storageManager, String volumePath, PackageInstaller.SessionParams params)
+            throws IOException {
         if (volumePath == null) {
             return false;
         }
@@ -135,11 +163,14 @@ public class InstallLocationUtils {
         return params.sizeBytes <= availBytes + cacheClearable;
     }
 
-    public static String resolveInstallVolume(Context context, PackageInstaller.SessionParams params, TestableInterface testInterface) throws IOException {
+    public static String resolveInstallVolume(
+            Context context, PackageInstaller.SessionParams params, TestableInterface testInterface)
+            throws IOException {
         StorageManager storageManager = testInterface.getStorageManager(context);
         boolean forceAllowOnExternal = testInterface.getForceAllowOnExternalSetting(context);
         boolean allow3rdPartyOnInternal = testInterface.getAllow3rdPartyOnInternalConfig(context);
-        ApplicationInfo existingInfo = testInterface.getExistingAppInfo(context, params.appPackageName);
+        ApplicationInfo existingInfo =
+                testInterface.getExistingAppInfo(context, params.appPackageName);
         ArrayMap<String, String> volumePaths = new ArrayMap<>();
         String internalVolumePath = null;
         for (VolumeInfo vol : storageManager.getVolumes()) {
@@ -157,11 +188,23 @@ public class InstallLocationUtils {
             if (checkFitOnVolume(storageManager, internalVolumePath, params)) {
                 return StorageManager.UUID_PRIVATE_INTERNAL;
             }
-            throw new IOException("Not enough space on existing volume " + existingInfo.volumeUuid + " for system app " + params.appPackageName + " upgrade");
+            throw new IOException(
+                    "Not enough space on existing volume "
+                            + existingInfo.volumeUuid
+                            + " for system app "
+                            + params.appPackageName
+                            + " upgrade");
         }
         if (!forceAllowOnExternal && params.installLocation == 1) {
-            if (existingInfo != null && !Objects.equals(existingInfo.volumeUuid, StorageManager.UUID_PRIVATE_INTERNAL)) {
-                throw new IOException("Cannot automatically move " + params.appPackageName + " from " + existingInfo.volumeUuid + " to internal storage");
+            if (existingInfo != null
+                    && !Objects.equals(
+                            existingInfo.volumeUuid, StorageManager.UUID_PRIVATE_INTERNAL)) {
+                throw new IOException(
+                        "Cannot automatically move "
+                                + params.appPackageName
+                                + " from "
+                                + existingInfo.volumeUuid
+                                + " to internal storage");
             }
             if (!allow3rdPartyOnInternal) {
                 throw new IOException("Not allowed to install non-system apps on internal storage");
@@ -182,7 +225,12 @@ public class InstallLocationUtils {
             if (checkFitOnVolume(storageManager, existingVolumePath, params)) {
                 return existingInfo.volumeUuid;
             }
-            throw new IOException("Not enough space on existing volume " + existingInfo.volumeUuid + " for " + params.appPackageName + " upgrade");
+            throw new IOException(
+                    "Not enough space on existing volume "
+                            + existingInfo.volumeUuid
+                            + " for "
+                            + params.appPackageName
+                            + " upgrade");
         }
         String bestCandidate = !volumePaths.isEmpty() ? volumePaths.keyAt(0) : null;
         if (volumePaths.size() == 1) {
@@ -194,7 +242,9 @@ public class InstallLocationUtils {
             for (String vol2 : volumePaths.keySet()) {
                 String volumePath = volumePaths.get(vol2);
                 UUID target = storageManager.getUuidForPath(new File(volumePath));
-                long availBytes = storageManager.getAllocatableBytes(target, translateAllocateFlags(params.installFlags));
+                long availBytes =
+                        storageManager.getAllocatableBytes(
+                                target, translateAllocateFlags(params.installFlags));
                 if (availBytes >= bestCandidateAvailBytes) {
                     bestCandidateAvailBytes = availBytes;
                     bestCandidate = vol2;
@@ -204,13 +254,19 @@ public class InstallLocationUtils {
                 return bestCandidate;
             }
         }
-        if (!volumePaths.isEmpty() && 2147483647L == params.sizeBytes && SystemProperties.getBoolean("debug.pm.install_skip_size_check_for_maxint", false)) {
+        if (!volumePaths.isEmpty()
+                && 2147483647L == params.sizeBytes
+                && SystemProperties.getBoolean(
+                        "debug.pm.install_skip_size_check_for_maxint", false)) {
             return bestCandidate;
         }
-        throw new IOException("No special requests, but no room on allowed volumes.  allow3rdPartyOnInternal? " + allow3rdPartyOnInternal);
+        throw new IOException(
+                "No special requests, but no room on allowed volumes.  allow3rdPartyOnInternal? "
+                        + allow3rdPartyOnInternal);
     }
 
-    public static boolean fitsOnInternal(Context context, PackageInstaller.SessionParams params) throws IOException {
+    public static boolean fitsOnInternal(Context context, PackageInstaller.SessionParams params)
+            throws IOException {
         StorageManager storage = (StorageManager) context.getSystemService(StorageManager.class);
         UUID target = storage.getUuidForPath(Environment.getDataDirectory());
         int flags = translateAllocateFlags(params.installFlags);
@@ -231,7 +287,10 @@ public class InstallLocationUtils {
             for (StorageVolume volume : storageVolumes) {
                 if ("sd".equals(volume.getSubSystem()) && volume.isRemovable()) {
                     Log.d(TAG, "getExternalStorageSdPath: " + volume.getPath());
-                    return params.sizeBytes > 0 && !emulated && params.sizeBytes <= storage.getStorageBytesUntilLow(volume.getPathFile());
+                    return params.sizeBytes > 0
+                            && !emulated
+                            && params.sizeBytes
+                                    <= storage.getStorageBytesUntilLow(volume.getPathFile());
                 }
             }
             Log.e(TAG, "Cannot find fitsOnExternal volume");
@@ -255,12 +314,14 @@ public class InstallLocationUtils {
         return false;
     }
 
-    public static int resolveInstallLocation(Context context, PackageInstaller.SessionParams params) throws IOException {
+    public static int resolveInstallLocation(Context context, PackageInstaller.SessionParams params)
+            throws IOException {
         int prefer;
         boolean checkBoth;
         ApplicationInfo existingInfo = null;
         try {
-            existingInfo = context.getPackageManager().getApplicationInfo(params.appPackageName, 4194304);
+            existingInfo =
+                    context.getPackageManager().getApplicationInfo(params.appPackageName, 4194304);
         } catch (PackageManager.NameNotFoundException e) {
         }
         boolean ephemeral = false;
@@ -335,18 +396,24 @@ public class InstallLocationUtils {
     }
 
     @Deprecated
-    public static long calculateInstalledSize(PackageLite pkg, boolean isForwardLocked, String abiOverride) throws IOException {
+    public static long calculateInstalledSize(
+            PackageLite pkg, boolean isForwardLocked, String abiOverride) throws IOException {
         return calculateInstalledSize(pkg, abiOverride);
     }
 
-    public static long calculateInstalledSize(PackageLite pkg, String abiOverride) throws IOException {
+    public static long calculateInstalledSize(PackageLite pkg, String abiOverride)
+            throws IOException {
         return calculateInstalledSize(pkg, abiOverride, (FileDescriptor) null);
     }
 
-    public static long calculateInstalledSize(PackageLite pkg, String abiOverride, FileDescriptor fd) throws IOException {
+    public static long calculateInstalledSize(
+            PackageLite pkg, String abiOverride, FileDescriptor fd) throws IOException {
         NativeLibraryHelper.Handle handle = null;
         try {
-            handle = fd != null ? NativeLibraryHelper.Handle.createFd(pkg, fd) : NativeLibraryHelper.Handle.create(pkg);
+            handle =
+                    fd != null
+                            ? NativeLibraryHelper.Handle.createFd(pkg, fd)
+                            : NativeLibraryHelper.Handle.create(pkg);
             return calculateInstalledSize(pkg, handle, abiOverride);
         } finally {
             IoUtils.closeQuietly(handle);
@@ -354,11 +421,18 @@ public class InstallLocationUtils {
     }
 
     @Deprecated
-    public static long calculateInstalledSize(PackageLite pkg, boolean isForwardLocked, NativeLibraryHelper.Handle handle, String abiOverride) throws IOException {
+    public static long calculateInstalledSize(
+            PackageLite pkg,
+            boolean isForwardLocked,
+            NativeLibraryHelper.Handle handle,
+            String abiOverride)
+            throws IOException {
         return calculateInstalledSize(pkg, handle, abiOverride);
     }
 
-    public static long calculateInstalledSize(PackageLite pkg, NativeLibraryHelper.Handle handle, String abiOverride) throws IOException {
+    public static long calculateInstalledSize(
+            PackageLite pkg, NativeLibraryHelper.Handle handle, String abiOverride)
+            throws IOException {
         long sizeBytes = 0;
         for (String codePath : pkg.getAllApkPaths()) {
             File codeFile = new File(codePath);
@@ -366,7 +440,8 @@ public class InstallLocationUtils {
         }
         long sizeBytes2 = sizeBytes + DexMetadataHelper.getPackageDexMetadataSize(pkg);
         if (pkg.isExtractNativeLibs()) {
-            return sizeBytes2 + NativeLibraryHelper.sumNativeBinariesWithOverride(handle, abiOverride);
+            return sizeBytes2
+                    + NativeLibraryHelper.sumNativeBinariesWithOverride(handle, abiOverride);
         }
         return sizeBytes2;
     }
@@ -385,7 +460,12 @@ public class InstallLocationUtils {
         return 0;
     }
 
-    public static int installLocationPolicy(int installLocation, int recommendedInstallLocation, int installFlags, boolean installedPkgIsSystem, boolean installedPackageOnExternal) {
+    public static int installLocationPolicy(
+            int installLocation,
+            int recommendedInstallLocation,
+            int installFlags,
+            boolean installedPkgIsSystem,
+            boolean installedPackageOnExternal) {
         if ((installFlags & 2) == 0) {
             return -4;
         }

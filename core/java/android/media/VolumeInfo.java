@@ -1,31 +1,32 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.media.IAudioService;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class VolumeInfo implements Parcelable {
-    public static final Parcelable.Creator<VolumeInfo> CREATOR = new Parcelable.Creator<VolumeInfo>() { // from class: android.media.VolumeInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumeInfo createFromParcel(Parcel p) {
-            return new VolumeInfo(p);
-        }
+    public static final Parcelable.Creator<VolumeInfo> CREATOR =
+            new Parcelable.Creator<VolumeInfo>() { // from class: android.media.VolumeInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumeInfo createFromParcel(Parcel p) {
+                    return new VolumeInfo(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumeInfo[] newArray(int size) {
-            return new VolumeInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumeInfo[] newArray(int size) {
+                    return new VolumeInfo[size];
+                }
+            };
     public static final int INDEX_NOT_SET = -100;
     private static final String TAG = "VolumeInfo";
     private static VolumeInfo sDefaultVolumeInfo;
@@ -39,7 +40,15 @@ public final class VolumeInfo implements Parcelable {
     private final android.media.audiopolicy.AudioVolumeGroup mVolGroup;
     private final int mVolIndex;
 
-    private VolumeInfo(boolean usesStreamType, boolean hasMuteCommand, boolean isMuted, int volIndex, int minVolIndex, int maxVolIndex, android.media.audiopolicy.AudioVolumeGroup volGroup, int streamType) {
+    private VolumeInfo(
+            boolean usesStreamType,
+            boolean hasMuteCommand,
+            boolean isMuted,
+            int volIndex,
+            int minVolIndex,
+            int maxVolIndex,
+            android.media.audiopolicy.AudioVolumeGroup volGroup,
+            int streamType) {
         this.mUsesStreamType = usesStreamType;
         this.mHasMuteCommand = hasMuteCommand;
         this.mIsMuted = isMuted;
@@ -199,21 +208,51 @@ public final class VolumeInfo implements Parcelable {
         public VolumeInfo build() {
             if (this.mVolIndex != -100) {
                 if (this.mMinVolIndex != -100 && this.mVolIndex < this.mMinVolIndex) {
-                    throw new IllegalArgumentException("Volume index:" + this.mVolIndex + " lower than min index:" + this.mMinVolIndex);
+                    throw new IllegalArgumentException(
+                            "Volume index:"
+                                    + this.mVolIndex
+                                    + " lower than min index:"
+                                    + this.mMinVolIndex);
                 }
                 if (this.mMaxVolIndex != -100 && this.mVolIndex > this.mMaxVolIndex) {
-                    throw new IllegalArgumentException("Volume index:" + this.mVolIndex + " greater than max index:" + this.mMaxVolIndex);
+                    throw new IllegalArgumentException(
+                            "Volume index:"
+                                    + this.mVolIndex
+                                    + " greater than max index:"
+                                    + this.mMaxVolIndex);
                 }
             }
-            if (this.mMinVolIndex != -100 && this.mMaxVolIndex != -100 && this.mMinVolIndex > this.mMaxVolIndex) {
-                throw new IllegalArgumentException("Min volume index:" + this.mMinVolIndex + " greater than max index:" + this.mMaxVolIndex);
+            if (this.mMinVolIndex != -100
+                    && this.mMaxVolIndex != -100
+                    && this.mMinVolIndex > this.mMaxVolIndex) {
+                throw new IllegalArgumentException(
+                        "Min volume index:"
+                                + this.mMinVolIndex
+                                + " greater than max index:"
+                                + this.mMaxVolIndex);
             }
-            return new VolumeInfo(this.mUsesStreamType, this.mHasMuteCommand, this.mIsMuted, this.mVolIndex, this.mMinVolIndex, this.mMaxVolIndex, this.mVolGroup, this.mStreamType);
+            return new VolumeInfo(
+                    this.mUsesStreamType,
+                    this.mHasMuteCommand,
+                    this.mIsMuted,
+                    this.mVolIndex,
+                    this.mMinVolIndex,
+                    this.mMaxVolIndex,
+                    this.mVolGroup,
+                    this.mStreamType);
         }
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mUsesStreamType), Boolean.valueOf(this.mHasMuteCommand), Integer.valueOf(this.mStreamType), Boolean.valueOf(this.mIsMuted), Integer.valueOf(this.mVolIndex), Integer.valueOf(this.mMinVolIndex), Integer.valueOf(this.mMaxVolIndex), this.mVolGroup);
+        return Objects.hash(
+                Boolean.valueOf(this.mUsesStreamType),
+                Boolean.valueOf(this.mHasMuteCommand),
+                Integer.valueOf(this.mStreamType),
+                Boolean.valueOf(this.mIsMuted),
+                Integer.valueOf(this.mVolIndex),
+                Integer.valueOf(this.mMinVolIndex),
+                Integer.valueOf(this.mMaxVolIndex),
+                this.mVolGroup);
     }
 
     public boolean equals(Object o) {
@@ -224,14 +263,29 @@ public final class VolumeInfo implements Parcelable {
             return false;
         }
         VolumeInfo that = (VolumeInfo) o;
-        if (this.mUsesStreamType == that.mUsesStreamType && this.mStreamType == that.mStreamType && this.mHasMuteCommand == that.mHasMuteCommand && this.mIsMuted == that.mIsMuted && this.mVolIndex == that.mVolIndex && this.mMinVolIndex == that.mMinVolIndex && this.mMaxVolIndex == that.mMaxVolIndex && Objects.equals(this.mVolGroup, that.mVolGroup)) {
+        if (this.mUsesStreamType == that.mUsesStreamType
+                && this.mStreamType == that.mStreamType
+                && this.mHasMuteCommand == that.mHasMuteCommand
+                && this.mIsMuted == that.mIsMuted
+                && this.mVolIndex == that.mVolIndex
+                && this.mMinVolIndex == that.mMinVolIndex
+                && this.mMaxVolIndex == that.mMaxVolIndex
+                && Objects.equals(this.mVolGroup, that.mVolGroup)) {
             return true;
         }
         return false;
     }
 
     public String toString() {
-        return new String("VolumeInfo:" + (this.mUsesStreamType ? " streamType:" + this.mStreamType : " volGroup:" + this.mVolGroup) + (this.mHasMuteCommand ? " muted:" + this.mIsMuted : "[no mute cmd]") + (this.mVolIndex != -100 ? " volIndex:" + this.mVolIndex : "") + (this.mMinVolIndex != -100 ? " min:" + this.mMinVolIndex : "") + (this.mMaxVolIndex != -100 ? " max:" + this.mMaxVolIndex : ""));
+        return new String(
+                "VolumeInfo:"
+                        + (this.mUsesStreamType
+                                ? " streamType:" + this.mStreamType
+                                : " volGroup:" + this.mVolGroup)
+                        + (this.mHasMuteCommand ? " muted:" + this.mIsMuted : "[no mute cmd]")
+                        + (this.mVolIndex != -100 ? " volIndex:" + this.mVolIndex : "")
+                        + (this.mMinVolIndex != -100 ? " min:" + this.mMinVolIndex : "")
+                        + (this.mMaxVolIndex != -100 ? " max:" + this.mMaxVolIndex : ""));
     }
 
     @Override // android.os.Parcelable
@@ -262,7 +316,8 @@ public final class VolumeInfo implements Parcelable {
         this.mMinVolIndex = in.readInt();
         this.mMaxVolIndex = in.readInt();
         if (!this.mUsesStreamType) {
-            this.mVolGroup = android.media.audiopolicy.AudioVolumeGroup.CREATOR.createFromParcel(in);
+            this.mVolGroup =
+                    android.media.audiopolicy.AudioVolumeGroup.CREATOR.createFromParcel(in);
         } else {
             this.mVolGroup = null;
         }

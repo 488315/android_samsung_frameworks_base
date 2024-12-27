@@ -12,7 +12,13 @@ public class Atsc3FrontendCapabilities extends FrontendCapabilities {
     private final int mModulationCap;
     private final int mTimeInterleaveModeCap;
 
-    private Atsc3FrontendCapabilities(int bandwidthCap, int modulationCap, int timeInterleaveModeCap, int codeRateCap, int fecCap, int demodOutputFormatCap) {
+    private Atsc3FrontendCapabilities(
+            int bandwidthCap,
+            int modulationCap,
+            int timeInterleaveModeCap,
+            int codeRateCap,
+            int fecCap,
+            int demodOutputFormatCap) {
         this.mBandwidthCap = bandwidthCap;
         this.mModulationCap = modulationCap;
         this.mTimeInterleaveModeCap = timeInterleaveModeCap;

@@ -3,7 +3,9 @@ package android.window;
 import android.os.SystemProperties;
 import android.util.MathUtils;
 import android.view.RemoteAnimationTarget;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes4.dex */
@@ -19,8 +21,10 @@ public class BackTouchTracker {
     private float mStartThresholdX;
     private int mSwipeEdge;
     private boolean mTriggerBack;
-    private static final String PREDICTIVE_BACK_LINEAR_DISTANCE_PROP = "persist.wm.debug.predictive_back_linear_distance";
-    private static final int LINEAR_DISTANCE = SystemProperties.getInt(PREDICTIVE_BACK_LINEAR_DISTANCE_PROP, -1);
+    private static final String PREDICTIVE_BACK_LINEAR_DISTANCE_PROP =
+            "persist.wm.debug.predictive_back_linear_distance";
+    private static final int LINEAR_DISTANCE =
+            SystemProperties.getInt(PREDICTIVE_BACK_LINEAR_DISTANCE_PROP, -1);
     private float mLinearDistance = LINEAR_DISTANCE;
     private boolean mShouldUpdateStartLocation = false;
     private TouchTrackerState mState = TouchTrackerState.INITIAL;
@@ -32,9 +36,11 @@ public class BackTouchTracker {
     }
 
     public void update(float touchX, float touchY, float velocityX, float velocityY) {
-        if ((touchX < this.mStartThresholdX && this.mSwipeEdge == 0) || (touchX > this.mStartThresholdX && this.mSwipeEdge == 1)) {
+        if ((touchX < this.mStartThresholdX && this.mSwipeEdge == 0)
+                || (touchX > this.mStartThresholdX && this.mSwipeEdge == 1)) {
             this.mStartThresholdX = touchX;
-            if ((this.mSwipeEdge == 0 && this.mStartThresholdX < this.mInitTouchX) || (this.mSwipeEdge == 1 && this.mStartThresholdX > this.mInitTouchX)) {
+            if ((this.mSwipeEdge == 0 && this.mStartThresholdX < this.mInitTouchX)
+                    || (this.mSwipeEdge == 1 && this.mStartThresholdX > this.mInitTouchX)) {
                 this.mInitTouchX = this.mStartThresholdX;
             }
         }
@@ -106,7 +112,15 @@ public class BackTouchTracker {
     }
 
     public BackMotionEvent createStartEvent(RemoteAnimationTarget target) {
-        return new BackMotionEvent(this.mInitTouchX, this.mInitTouchY, 0.0f, 0.0f, 0.0f, this.mTriggerBack, this.mSwipeEdge, target);
+        return new BackMotionEvent(
+                this.mInitTouchX,
+                this.mInitTouchY,
+                0.0f,
+                0.0f,
+                0.0f,
+                this.mTriggerBack,
+                this.mSwipeEdge,
+                target);
     }
 
     public BackMotionEvent createProgressEvent() {
@@ -136,7 +150,8 @@ public class BackTouchTracker {
             } else {
                 float progress2 = deltaX - linearDistance;
                 float nonLinearProgress = progress2 / nonLinearDistance;
-                float currentTarget = MathUtils.lerp(initialTarget, maxDistance2, nonLinearProgress);
+                float currentTarget =
+                        MathUtils.lerp(initialTarget, maxDistance2, nonLinearProgress);
                 progress = deltaX / currentTarget;
             }
         } else {
@@ -158,10 +173,19 @@ public class BackTouchTracker {
     }
 
     public BackMotionEvent createProgressEvent(float progress) {
-        return new BackMotionEvent(this.mLatestTouchX, this.mLatestTouchY, progress, this.mLatestVelocityX, this.mLatestVelocityY, this.mTriggerBack, this.mSwipeEdge, null);
+        return new BackMotionEvent(
+                this.mLatestTouchX,
+                this.mLatestTouchY,
+                progress,
+                this.mLatestVelocityX,
+                this.mLatestVelocityY,
+                this.mTriggerBack,
+                this.mSwipeEdge,
+                null);
     }
 
-    public void setProgressThresholds(float linearDistance, float maxDistance, float nonLinearFactor) {
+    public void setProgressThresholds(
+            float linearDistance, float maxDistance, float nonLinearFactor) {
         if (LINEAR_DISTANCE >= 0) {
             this.mLinearDistance = LINEAR_DISTANCE;
         } else {

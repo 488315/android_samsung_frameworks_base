@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextPedometer extends SContextEventContext {
-    public static final Parcelable.Creator<SContextPedometer> CREATOR = new Parcelable.Creator<SContextPedometer>() { // from class: android.hardware.scontext.SContextPedometer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextPedometer createFromParcel(Parcel in) {
-            return new SContextPedometer(in);
-        }
+    public static final Parcelable.Creator<SContextPedometer> CREATOR =
+            new Parcelable.Creator<SContextPedometer>() { // from class:
+                // android.hardware.scontext.SContextPedometer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextPedometer createFromParcel(Parcel in) {
+                    return new SContextPedometer(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextPedometer[] newArray(int size) {
-            return new SContextPedometer[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextPedometer[] newArray(int size) {
+                    return new SContextPedometer[size];
+                }
+            };
     private Bundle mContext;
     private int mMode;
 
@@ -271,7 +273,8 @@ public class SContextPedometer extends SContextEventContext {
         return res;
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
         this.mMode = this.mContext.getInt("Mode");

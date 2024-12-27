@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,45 +32,62 @@ public final class WifiDisplay implements Parcelable {
     private String mScreenSharingHashedDi;
     private int mState = 6;
     public static final WifiDisplay[] EMPTY_ARRAY = new WifiDisplay[0];
-    public static final Parcelable.Creator<WifiDisplay> CREATOR = new Parcelable.Creator<WifiDisplay>() { // from class: android.hardware.display.WifiDisplay.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WifiDisplay createFromParcel(Parcel in) {
-            String deviceAddress = in.readString();
-            String deviceName = in.readString();
-            String deviceAlias = in.readString();
-            boolean isAvailable = in.readInt() != 0;
-            boolean canConnect = in.readInt() != 0;
-            boolean isRemembered = in.readInt() != 0;
-            String deviceType = in.readString();
-            WifiDisplay wifiDisplay = new WifiDisplay(deviceAddress, deviceName, deviceAlias, isAvailable, canConnect, isRemembered, deviceType);
-            String btMac = in.readString();
-            wifiDisplay.setBluetoothMacAddress(btMac);
-            wifiDisplay.setScreenSharingHashedDi(in.readString());
-            wifiDisplay.setSamsungDeviceType(in.readInt());
-            wifiDisplay.setSamsungDeviceIcon(in.readInt());
-            boolean isEmptySurface = in.readInt() != 0;
-            wifiDisplay.setEmptySurface(isEmptySurface);
-            wifiDisplay.setFlags(in.readInt());
-            wifiDisplay.setMode(in.readInt());
-            wifiDisplay.setDeviceInfo(in.readInt());
-            int parameterMapSize = in.readInt();
-            for (int i = 0; i < parameterMapSize; i++) {
-                String key = in.readString();
-                String value = (String) in.readValue(String.class.getClassLoader());
-                wifiDisplay.addParameter(key, value);
-            }
-            return wifiDisplay;
-        }
+    public static final Parcelable.Creator<WifiDisplay> CREATOR =
+            new Parcelable.Creator<
+                    WifiDisplay>() { // from class: android.hardware.display.WifiDisplay.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WifiDisplay createFromParcel(Parcel in) {
+                    String deviceAddress = in.readString();
+                    String deviceName = in.readString();
+                    String deviceAlias = in.readString();
+                    boolean isAvailable = in.readInt() != 0;
+                    boolean canConnect = in.readInt() != 0;
+                    boolean isRemembered = in.readInt() != 0;
+                    String deviceType = in.readString();
+                    WifiDisplay wifiDisplay =
+                            new WifiDisplay(
+                                    deviceAddress,
+                                    deviceName,
+                                    deviceAlias,
+                                    isAvailable,
+                                    canConnect,
+                                    isRemembered,
+                                    deviceType);
+                    String btMac = in.readString();
+                    wifiDisplay.setBluetoothMacAddress(btMac);
+                    wifiDisplay.setScreenSharingHashedDi(in.readString());
+                    wifiDisplay.setSamsungDeviceType(in.readInt());
+                    wifiDisplay.setSamsungDeviceIcon(in.readInt());
+                    boolean isEmptySurface = in.readInt() != 0;
+                    wifiDisplay.setEmptySurface(isEmptySurface);
+                    wifiDisplay.setFlags(in.readInt());
+                    wifiDisplay.setMode(in.readInt());
+                    wifiDisplay.setDeviceInfo(in.readInt());
+                    int parameterMapSize = in.readInt();
+                    for (int i = 0; i < parameterMapSize; i++) {
+                        String key = in.readString();
+                        String value = (String) in.readValue(String.class.getClassLoader());
+                        wifiDisplay.addParameter(key, value);
+                    }
+                    return wifiDisplay;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WifiDisplay[] newArray(int size) {
-            return size == 0 ? WifiDisplay.EMPTY_ARRAY : new WifiDisplay[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WifiDisplay[] newArray(int size) {
+                    return size == 0 ? WifiDisplay.EMPTY_ARRAY : new WifiDisplay[size];
+                }
+            };
 
-    public WifiDisplay(String deviceAddress, String deviceName, String deviceAlias, boolean available, boolean canConnect, boolean remembered, String deviceType) {
+    public WifiDisplay(
+            String deviceAddress,
+            String deviceName,
+            String deviceAlias,
+            boolean available,
+            boolean canConnect,
+            boolean remembered,
+            String deviceType) {
         if (deviceAddress == null) {
             throw new IllegalArgumentException("deviceAddress must not be null");
         }
@@ -194,7 +212,12 @@ public final class WifiDisplay implements Parcelable {
             return false;
         }
         if (type == 0) {
-            return Build.VERSION.SEM_PLATFORM_INT < 150100 || !((dmrMetaCheck = this.mParameters.get(SemWifiDisplayParameter.KEY_DMR_META_CHECK)) == null || dmrMetaCheck.equals("none"));
+            return Build.VERSION.SEM_PLATFORM_INT < 150100
+                    || !((dmrMetaCheck =
+                                            this.mParameters.get(
+                                                    SemWifiDisplayParameter.KEY_DMR_META_CHECK))
+                                    == null
+                            || dmrMetaCheck.equals("none"));
         }
         String value = this.mParameters.get(SemWifiDisplayParameter.KEY_DMR_SUPPORT_TYPE);
         if (TextUtils.isEmpty(value)) {
@@ -204,7 +227,8 @@ public final class WifiDisplay implements Parcelable {
             return value.contains("image");
         }
         if (type == 4) {
-            return value.contains(SemWifiDisplayParameter.VALUE_DMR_SUPPORT_TYPE_VIDEO_HEVC_SUPER_SLOW_MOTION);
+            return value.contains(
+                    SemWifiDisplayParameter.VALUE_DMR_SUPPORT_TYPE_VIDEO_HEVC_SUPER_SLOW_MOTION);
         }
         return false;
     }
@@ -266,7 +290,10 @@ public final class WifiDisplay implements Parcelable {
     }
 
     public boolean equals(WifiDisplay other) {
-        return other != null && this.mDeviceAddress.equals(other.mDeviceAddress) && this.mDeviceName.equals(other.mDeviceName) && Objects.equals(this.mDeviceAlias, other.mDeviceAlias);
+        return other != null
+                && this.mDeviceAddress.equals(other.mDeviceAddress)
+                && this.mDeviceName.equals(other.mDeviceName)
+                && Objects.equals(this.mDeviceAlias, other.mDeviceAlias);
     }
 
     public boolean hasSameAddress(WifiDisplay other) {
@@ -308,10 +335,36 @@ public final class WifiDisplay implements Parcelable {
     }
 
     public String toString() {
-        String result = this.mDeviceName + " (" + this.mDeviceAddress + NavigationBarInflaterView.KEY_CODE_END;
+        String result =
+                this.mDeviceName
+                        + " ("
+                        + this.mDeviceAddress
+                        + NavigationBarInflaterView.KEY_CODE_END;
         if (this.mDeviceAlias != null) {
             result = result + ", alias " + this.mDeviceAlias;
         }
-        return result + ", isAvailable " + this.mIsAvailable + ", canConnect " + this.mCanConnect + ", isRemembered " + this.mIsRemembered + ", deviceType " + this.mDeviceType + ", samsungDeviceType " + this.mSamsungDeviceType + ", samsungDeviceIcon " + this.mSamsungDeviceIcon + ", isEmptySurface " + this.mIsEmptySurface + ", flags " + this.mFlags + ", mode " + this.mMode + ", DeviceInfo " + this.mDeviceInfo + ", paramters " + this.mParameters.toString();
+        return result
+                + ", isAvailable "
+                + this.mIsAvailable
+                + ", canConnect "
+                + this.mCanConnect
+                + ", isRemembered "
+                + this.mIsRemembered
+                + ", deviceType "
+                + this.mDeviceType
+                + ", samsungDeviceType "
+                + this.mSamsungDeviceType
+                + ", samsungDeviceIcon "
+                + this.mSamsungDeviceIcon
+                + ", isEmptySurface "
+                + this.mIsEmptySurface
+                + ", flags "
+                + this.mFlags
+                + ", mode "
+                + this.mMode
+                + ", DeviceInfo "
+                + this.mDeviceInfo
+                + ", paramters "
+                + this.mParameters.toString();
     }
 }

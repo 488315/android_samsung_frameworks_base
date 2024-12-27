@@ -5,7 +5,9 @@ import android.graphics.Rect;
 import android.graphics.text.LineBreakConfig;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.style.MetricAffectingSpan;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -31,8 +33,7 @@ public class PrecomputedText implements Spannable {
         private final TextDirectionHeuristic mTextDir;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface CheckResultUsableResult {
-        }
+        public @interface CheckResultUsableResult {}
 
         public static class Builder {
             private int mBreakStrategy;
@@ -82,11 +83,21 @@ public class PrecomputedText implements Spannable {
             }
 
             public Params build() {
-                return new Params(this.mPaint, this.mLineBreakConfig, this.mTextDir, this.mBreakStrategy, this.mHyphenationFrequency);
+                return new Params(
+                        this.mPaint,
+                        this.mLineBreakConfig,
+                        this.mTextDir,
+                        this.mBreakStrategy,
+                        this.mHyphenationFrequency);
             }
         }
 
-        public Params(TextPaint paint, LineBreakConfig lineBreakConfig, TextDirectionHeuristic textDir, int strategy, int frequency) {
+        public Params(
+                TextPaint paint,
+                LineBreakConfig lineBreakConfig,
+                TextDirectionHeuristic textDir,
+                int strategy,
+                int frequency) {
             this.mPaint = paint;
             this.mTextDir = textDir;
             this.mBreakStrategy = strategy;
@@ -114,8 +125,16 @@ public class PrecomputedText implements Spannable {
             return this.mLineBreakConfig;
         }
 
-        public int checkResultUsable(TextPaint paint, TextDirectionHeuristic textDir, int strategy, int frequency, LineBreakConfig lbConfig) {
-            if (this.mBreakStrategy == strategy && this.mHyphenationFrequency == frequency && this.mLineBreakConfig.equals(lbConfig) && this.mPaint.equalsForTextMeasurement(paint)) {
+        public int checkResultUsable(
+                TextPaint paint,
+                TextDirectionHeuristic textDir,
+                int strategy,
+                int frequency,
+                LineBreakConfig lbConfig) {
+            if (this.mBreakStrategy == strategy
+                    && this.mHyphenationFrequency == frequency
+                    && this.mLineBreakConfig.equals(lbConfig)
+                    && this.mPaint.equalsForTextMeasurement(paint)) {
                 return this.mTextDir == textDir ? 2 : 1;
             }
             return 0;
@@ -129,18 +148,67 @@ public class PrecomputedText implements Spannable {
                 return false;
             }
             Params param = (Params) o;
-            if (checkResultUsable(param.mPaint, param.mTextDir, param.mBreakStrategy, param.mHyphenationFrequency, param.mLineBreakConfig) == 2) {
+            if (checkResultUsable(
+                            param.mPaint,
+                            param.mTextDir,
+                            param.mBreakStrategy,
+                            param.mHyphenationFrequency,
+                            param.mLineBreakConfig)
+                    == 2) {
                 return true;
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(Float.valueOf(this.mPaint.getTextSize()), Float.valueOf(this.mPaint.getTextScaleX()), Float.valueOf(this.mPaint.getTextSkewX()), Float.valueOf(this.mPaint.getLetterSpacing()), Float.valueOf(this.mPaint.getWordSpacing()), Integer.valueOf(this.mPaint.getFlags()), this.mPaint.getTextLocales(), this.mPaint.getTypeface(), this.mPaint.getFontVariationSettings(), Boolean.valueOf(this.mPaint.isElegantTextHeight()), this.mTextDir, Integer.valueOf(this.mBreakStrategy), Integer.valueOf(this.mHyphenationFrequency), Integer.valueOf(LineBreakConfig.getResolvedLineBreakStyle(this.mLineBreakConfig)), Integer.valueOf(LineBreakConfig.getResolvedLineBreakWordStyle(this.mLineBreakConfig)));
+            return Objects.hash(
+                    Float.valueOf(this.mPaint.getTextSize()),
+                    Float.valueOf(this.mPaint.getTextScaleX()),
+                    Float.valueOf(this.mPaint.getTextSkewX()),
+                    Float.valueOf(this.mPaint.getLetterSpacing()),
+                    Float.valueOf(this.mPaint.getWordSpacing()),
+                    Integer.valueOf(this.mPaint.getFlags()),
+                    this.mPaint.getTextLocales(),
+                    this.mPaint.getTypeface(),
+                    this.mPaint.getFontVariationSettings(),
+                    Boolean.valueOf(this.mPaint.isElegantTextHeight()),
+                    this.mTextDir,
+                    Integer.valueOf(this.mBreakStrategy),
+                    Integer.valueOf(this.mHyphenationFrequency),
+                    Integer.valueOf(
+                            LineBreakConfig.getResolvedLineBreakStyle(this.mLineBreakConfig)),
+                    Integer.valueOf(
+                            LineBreakConfig.getResolvedLineBreakWordStyle(this.mLineBreakConfig)));
         }
 
         public String toString() {
-            return "{textSize=" + this.mPaint.getTextSize() + ", textScaleX=" + this.mPaint.getTextScaleX() + ", textSkewX=" + this.mPaint.getTextSkewX() + ", letterSpacing=" + this.mPaint.getLetterSpacing() + ", textLocale=" + this.mPaint.getTextLocales() + ", typeface=" + this.mPaint.getTypeface() + ", variationSettings=" + this.mPaint.getFontVariationSettings() + ", elegantTextHeight=" + this.mPaint.isElegantTextHeight() + ", textDir=" + this.mTextDir + ", breakStrategy=" + this.mBreakStrategy + ", hyphenationFrequency=" + this.mHyphenationFrequency + ", lineBreakStyle=" + LineBreakConfig.getResolvedLineBreakStyle(this.mLineBreakConfig) + ", lineBreakWordStyle=" + LineBreakConfig.getResolvedLineBreakWordStyle(this.mLineBreakConfig) + "}";
+            return "{textSize="
+                    + this.mPaint.getTextSize()
+                    + ", textScaleX="
+                    + this.mPaint.getTextScaleX()
+                    + ", textSkewX="
+                    + this.mPaint.getTextSkewX()
+                    + ", letterSpacing="
+                    + this.mPaint.getLetterSpacing()
+                    + ", textLocale="
+                    + this.mPaint.getTextLocales()
+                    + ", typeface="
+                    + this.mPaint.getTypeface()
+                    + ", variationSettings="
+                    + this.mPaint.getFontVariationSettings()
+                    + ", elegantTextHeight="
+                    + this.mPaint.isElegantTextHeight()
+                    + ", textDir="
+                    + this.mTextDir
+                    + ", breakStrategy="
+                    + this.mBreakStrategy
+                    + ", hyphenationFrequency="
+                    + this.mHyphenationFrequency
+                    + ", lineBreakStyle="
+                    + LineBreakConfig.getResolvedLineBreakStyle(this.mLineBreakConfig)
+                    + ", lineBreakWordStyle="
+                    + LineBreakConfig.getResolvedLineBreakWordStyle(this.mLineBreakConfig)
+                    + "}";
         }
     }
 
@@ -159,11 +227,20 @@ public class PrecomputedText implements Spannable {
         if (text instanceof PrecomputedText) {
             PrecomputedText hintPct = (PrecomputedText) text;
             Params hintParams = hintPct.getParams();
-            int checkResult = hintParams.checkResultUsable(params.mPaint, params.mTextDir, params.mBreakStrategy, params.mHyphenationFrequency, params.mLineBreakConfig);
+            int checkResult =
+                    hintParams.checkResultUsable(
+                            params.mPaint,
+                            params.mTextDir,
+                            params.mBreakStrategy,
+                            params.mHyphenationFrequency,
+                            params.mLineBreakConfig);
             switch (checkResult) {
                 case 1:
-                    if (params.getBreakStrategy() == hintParams.getBreakStrategy() && params.getHyphenationFrequency() == hintParams.getHyphenationFrequency()) {
-                        paraInfo = createMeasuredParagraphsFromPrecomputedText(hintPct, params, true);
+                    if (params.getBreakStrategy() == hintParams.getBreakStrategy()
+                            && params.getHyphenationFrequency()
+                                    == hintParams.getHyphenationFrequency()) {
+                        paraInfo =
+                                createMeasuredParagraphsFromPrecomputedText(hintPct, params, true);
                         break;
                     }
                     break;
@@ -181,11 +258,15 @@ public class PrecomputedText implements Spannable {
         return frequency == 4 || frequency == 3;
     }
 
-    private static ParagraphInfo[] createMeasuredParagraphsFromPrecomputedText(PrecomputedText pct, Params params, boolean computeLayout) {
+    private static ParagraphInfo[] createMeasuredParagraphsFromPrecomputedText(
+            PrecomputedText pct, Params params, boolean computeLayout) {
         int hyphenationMode;
         LineBreakConfig config;
         int i;
-        boolean needHyphenation = (params.getBreakStrategy() == 0 || params.getHyphenationFrequency() == 0) ? false : true;
+        boolean needHyphenation =
+                (params.getBreakStrategy() == 0 || params.getHyphenationFrequency() == 0)
+                        ? false
+                        : true;
         if (needHyphenation) {
             if (isFastHyphenation(params.getHyphenationFrequency())) {
                 i = 2;
@@ -206,19 +287,42 @@ public class PrecomputedText implements Spannable {
         for (int i2 = 0; i2 < pct.getParagraphCount(); i2++) {
             int paraStart = pct.getParagraphStart(i2);
             int paraEnd = pct.getParagraphEnd(i2);
-            result.add(new ParagraphInfo(paraEnd, MeasuredParagraph.buildForStaticLayout(params.getTextPaint(), config, pct, paraStart, paraEnd, params.getTextDirection(), hyphenationMode, computeLayout, true, pct.getMeasuredParagraph(i2), null)));
+            result.add(
+                    new ParagraphInfo(
+                            paraEnd,
+                            MeasuredParagraph.buildForStaticLayout(
+                                    params.getTextPaint(),
+                                    config,
+                                    pct,
+                                    paraStart,
+                                    paraEnd,
+                                    params.getTextDirection(),
+                                    hyphenationMode,
+                                    computeLayout,
+                                    true,
+                                    pct.getMeasuredParagraph(i2),
+                                    null)));
         }
         return (ParagraphInfo[]) result.toArray(new ParagraphInfo[result.size()]);
     }
 
-    public static ParagraphInfo[] createMeasuredParagraphs(CharSequence text, Params params, int start, int end, boolean computeLayout, boolean computeBounds) {
+    public static ParagraphInfo[] createMeasuredParagraphs(
+            CharSequence text,
+            Params params,
+            int start,
+            int end,
+            boolean computeLayout,
+            boolean computeBounds) {
         int paraEnd;
         ArrayList<ParagraphInfo> result = new ArrayList<>();
         Preconditions.checkNotNull(text);
         Preconditions.checkNotNull(params);
         int i = 0;
         int hyphenationMode = 1;
-        boolean needHyphenation = (params.getBreakStrategy() == 0 || params.getHyphenationFrequency() == 0) ? false : true;
+        boolean needHyphenation =
+                (params.getBreakStrategy() == 0 || params.getHyphenationFrequency() == 0)
+                        ? false
+                        : true;
         int paraEnd2 = 2;
         if (needHyphenation) {
             if (isFastHyphenation(params.getHyphenationFrequency())) {
@@ -238,13 +342,32 @@ public class PrecomputedText implements Spannable {
             }
             if (config == null) {
                 config = params.getLineBreakConfig();
-                if (config.getLineBreakWordStyle() == paraEnd2 && (paraStart != start || paraEnd != end)) {
-                    config = new LineBreakConfig.Builder().merge(config).setLineBreakWordStyle(i).build();
+                if (config.getLineBreakWordStyle() == paraEnd2
+                        && (paraStart != start || paraEnd != end)) {
+                    config =
+                            new LineBreakConfig.Builder()
+                                    .merge(config)
+                                    .setLineBreakWordStyle(i)
+                                    .build();
                 }
             }
             LineBreakConfig config2 = config;
             int paraEnd4 = paraEnd;
-            result.add(new ParagraphInfo(paraEnd4, MeasuredParagraph.buildForStaticLayout(params.getTextPaint(), config2, text, paraStart, paraEnd, params.getTextDirection(), hyphenationMode, computeLayout, computeBounds, null, null)));
+            result.add(
+                    new ParagraphInfo(
+                            paraEnd4,
+                            MeasuredParagraph.buildForStaticLayout(
+                                    params.getTextPaint(),
+                                    config2,
+                                    text,
+                                    paraStart,
+                                    paraEnd,
+                                    params.getTextDirection(),
+                                    hyphenationMode,
+                                    computeLayout,
+                                    computeBounds,
+                                    null,
+                                    null)));
             paraStart = paraEnd4;
             config = config2;
             i = 0;
@@ -253,7 +376,8 @@ public class PrecomputedText implements Spannable {
         return (ParagraphInfo[]) result.toArray(new ParagraphInfo[result.size()]);
     }
 
-    private PrecomputedText(CharSequence text, int start, int end, Params params, ParagraphInfo[] paraInfo) {
+    private PrecomputedText(
+            CharSequence text, int start, int end, Params params, ParagraphInfo[] paraInfo) {
         this.mText = new SpannableString(text, true);
         this.mStart = start;
         this.mEnd = end;
@@ -299,7 +423,14 @@ public class PrecomputedText implements Spannable {
         return this.mParagraphInfo;
     }
 
-    public int checkResultUsable(int start, int end, TextDirectionHeuristic textDir, TextPaint paint, int strategy, int frequency, LineBreakConfig lbConfig) {
+    public int checkResultUsable(
+            int start,
+            int end,
+            TextDirectionHeuristic textDir,
+            TextPaint paint,
+            int strategy,
+            int frequency,
+            LineBreakConfig lbConfig) {
         if (this.mStart != start || this.mEnd != end) {
             return 0;
         }
@@ -312,11 +443,16 @@ public class PrecomputedText implements Spannable {
                 return i;
             }
         }
-        throw new IndexOutOfBoundsException("pos must be less than " + this.mParagraphInfo[this.mParagraphInfo.length - 1].paragraphEnd + ", gave " + pos);
+        throw new IndexOutOfBoundsException(
+                "pos must be less than "
+                        + this.mParagraphInfo[this.mParagraphInfo.length - 1].paragraphEnd
+                        + ", gave "
+                        + pos);
     }
 
     public float getWidth(int start, int end) {
-        Preconditions.checkArgument(start >= 0 && start <= this.mText.length(), "invalid start offset");
+        Preconditions.checkArgument(
+                start >= 0 && start <= this.mText.length(), "invalid start offset");
         Preconditions.checkArgument(end >= 0 && end <= this.mText.length(), "invalid end offset");
         Preconditions.checkArgument(start <= end, "start offset can not be larger than end offset");
         if (start == end) {
@@ -326,13 +462,23 @@ public class PrecomputedText implements Spannable {
         int paraStart = getParagraphStart(paraIndex);
         int paraEnd = getParagraphEnd(paraIndex);
         if (start < paraStart || paraEnd < end) {
-            throw new IllegalArgumentException("Cannot measured across the paragraph:para: (" + paraStart + ", " + paraEnd + "), request: (" + start + ", " + end + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "Cannot measured across the paragraph:para: ("
+                            + paraStart
+                            + ", "
+                            + paraEnd
+                            + "), request: ("
+                            + start
+                            + ", "
+                            + end
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         return getMeasuredParagraph(paraIndex).getWidth(start - paraStart, end - paraStart);
     }
 
     public void getBounds(int start, int end, Rect bounds) {
-        Preconditions.checkArgument(start >= 0 && start <= this.mText.length(), "invalid start offset");
+        Preconditions.checkArgument(
+                start >= 0 && start <= this.mText.length(), "invalid start offset");
         Preconditions.checkArgument(end >= 0 && end <= this.mText.length(), "invalid end offset");
         Preconditions.checkArgument(start <= end, "start offset can not be larger than end offset");
         Preconditions.checkNotNull(bounds);
@@ -344,13 +490,23 @@ public class PrecomputedText implements Spannable {
         int paraStart = getParagraphStart(paraIndex);
         int paraEnd = getParagraphEnd(paraIndex);
         if (start < paraStart || paraEnd < end) {
-            throw new IllegalArgumentException("Cannot measured across the paragraph:para: (" + paraStart + ", " + paraEnd + "), request: (" + start + ", " + end + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "Cannot measured across the paragraph:para: ("
+                            + paraStart
+                            + ", "
+                            + paraEnd
+                            + "), request: ("
+                            + start
+                            + ", "
+                            + end
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         getMeasuredParagraph(paraIndex).getBounds(start - paraStart, end - paraStart, bounds);
     }
 
     public void getFontMetricsInt(int start, int end, Paint.FontMetricsInt outMetrics) {
-        Preconditions.checkArgument(start >= 0 && start <= this.mText.length(), "invalid start offset");
+        Preconditions.checkArgument(
+                start >= 0 && start <= this.mText.length(), "invalid start offset");
         Preconditions.checkArgument(end >= 0 && end <= this.mText.length(), "invalid end offset");
         Preconditions.checkArgument(start <= end, "start offset can not be larger than end offset");
         Objects.requireNonNull(outMetrics);
@@ -362,9 +518,19 @@ public class PrecomputedText implements Spannable {
         int paraStart = getParagraphStart(paraIndex);
         int paraEnd = getParagraphEnd(paraIndex);
         if (start < paraStart || paraEnd < end) {
-            throw new IllegalArgumentException("Cannot measured across the paragraph:para: (" + paraStart + ", " + paraEnd + "), request: (" + start + ", " + end + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "Cannot measured across the paragraph:para: ("
+                            + paraStart
+                            + ", "
+                            + paraEnd
+                            + "), request: ("
+                            + start
+                            + ", "
+                            + end
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
-        getMeasuredParagraph(paraIndex).getFontMetricsInt(start - paraStart, end - paraStart, outMetrics);
+        getMeasuredParagraph(paraIndex)
+                .getFontMetricsInt(start - paraStart, end - paraStart, outMetrics);
     }
 
     public float getCharWidthAt(int offset) {
@@ -386,7 +552,8 @@ public class PrecomputedText implements Spannable {
     @Override // android.text.Spannable
     public void setSpan(Object what, int start, int end, int flags) {
         if (what instanceof MetricAffectingSpan) {
-            throw new IllegalArgumentException("MetricAffectingSpan can not be set to PrecomputedText.");
+            throw new IllegalArgumentException(
+                    "MetricAffectingSpan can not be set to PrecomputedText.");
         }
         this.mText.setSpan(what, start, end, flags);
     }
@@ -394,7 +561,8 @@ public class PrecomputedText implements Spannable {
     @Override // android.text.Spannable
     public void removeSpan(Object what) {
         if (what instanceof MetricAffectingSpan) {
-            throw new IllegalArgumentException("MetricAffectingSpan can not be removed from PrecomputedText.");
+            throw new IllegalArgumentException(
+                    "MetricAffectingSpan can not be removed from PrecomputedText.");
         }
         this.mText.removeSpan(what);
     }

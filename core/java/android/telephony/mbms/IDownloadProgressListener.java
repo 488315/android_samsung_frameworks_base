@@ -8,12 +8,20 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface IDownloadProgressListener extends IInterface {
-    void onProgressUpdated(DownloadRequest downloadRequest, FileInfo fileInfo, int i, int i2, int i3, int i4) throws RemoteException;
+    void onProgressUpdated(
+            DownloadRequest downloadRequest, FileInfo fileInfo, int i, int i2, int i3, int i4)
+            throws RemoteException;
 
     public static class Default implements IDownloadProgressListener {
         @Override // android.telephony.mbms.IDownloadProgressListener
-        public void onProgressUpdated(DownloadRequest request, FileInfo fileInfo, int currentDownloadSize, int fullDownloadSize, int currentDecodedSize, int fullDecodedSize) throws RemoteException {
-        }
+        public void onProgressUpdated(
+                DownloadRequest request,
+                FileInfo fileInfo,
+                int currentDownloadSize,
+                int fullDownloadSize,
+                int currentDecodedSize,
+                int fullDecodedSize)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +29,7 @@ public interface IDownloadProgressListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDownloadProgressListener {
+    public abstract static class Stub extends Binder implements IDownloadProgressListener {
         public static final String DESCRIPTOR = "android.telephony.mbms.IDownloadProgressListener";
         static final int TRANSACTION_onProgressUpdated = 1;
 
@@ -60,7 +68,8 @@ public interface IDownloadProgressListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +79,8 @@ public interface IDownloadProgressListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    DownloadRequest _arg0 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    DownloadRequest _arg0 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
                     FileInfo _arg1 = (FileInfo) data.readTypedObject(FileInfo.CREATOR);
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
@@ -102,7 +112,14 @@ public interface IDownloadProgressListener extends IInterface {
             }
 
             @Override // android.telephony.mbms.IDownloadProgressListener
-            public void onProgressUpdated(DownloadRequest request, FileInfo fileInfo, int currentDownloadSize, int fullDownloadSize, int currentDecodedSize, int fullDecodedSize) throws RemoteException {
+            public void onProgressUpdated(
+                    DownloadRequest request,
+                    FileInfo fileInfo,
+                    int currentDownloadSize,
+                    int fullDownloadSize,
+                    int currentDecodedSize,
+                    int fullDecodedSize)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

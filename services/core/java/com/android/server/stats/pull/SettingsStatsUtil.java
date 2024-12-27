@@ -8,19 +8,36 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Slog;
 import android.util.StatsEvent;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.service.nano.StringListParamProto;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class SettingsStatsUtil {
-    public static final FlagsData[] GLOBAL_SETTINGS = {new FlagsData("GlobalFeature__boolean_whitelist", 1), new FlagsData("GlobalFeature__integer_whitelist", 2), new FlagsData("GlobalFeature__float_whitelist", 3), new FlagsData("GlobalFeature__string_whitelist", 4)};
-    public static final FlagsData[] SECURE_SETTINGS = {new FlagsData("SecureFeature__boolean_whitelist", 1), new FlagsData("SecureFeature__integer_whitelist", 2), new FlagsData("SecureFeature__float_whitelist", 3), new FlagsData("SecureFeature__string_whitelist", 4)};
-    public static final FlagsData[] SYSTEM_SETTINGS = {new FlagsData("SystemFeature__boolean_whitelist", 1), new FlagsData("SystemFeature__integer_whitelist", 2), new FlagsData("SystemFeature__float_whitelist", 3), new FlagsData("SystemFeature__string_whitelist", 4)};
+    public static final FlagsData[] GLOBAL_SETTINGS = {
+        new FlagsData("GlobalFeature__boolean_whitelist", 1),
+        new FlagsData("GlobalFeature__integer_whitelist", 2),
+        new FlagsData("GlobalFeature__float_whitelist", 3),
+        new FlagsData("GlobalFeature__string_whitelist", 4)
+    };
+    public static final FlagsData[] SECURE_SETTINGS = {
+        new FlagsData("SecureFeature__boolean_whitelist", 1),
+        new FlagsData("SecureFeature__integer_whitelist", 2),
+        new FlagsData("SecureFeature__float_whitelist", 3),
+        new FlagsData("SecureFeature__string_whitelist", 4)
+    };
+    public static final FlagsData[] SYSTEM_SETTINGS = {
+        new FlagsData("SystemFeature__boolean_whitelist", 1),
+        new FlagsData("SystemFeature__integer_whitelist", 2),
+        new FlagsData("SystemFeature__float_whitelist", 3),
+        new FlagsData("SystemFeature__string_whitelist", 4)
+    };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FlagsData {
@@ -40,24 +57,33 @@ public abstract class SettingsStatsUtil {
         boolean z = false;
         float f = FullScreenMagnificationGestureHandler.MAX_SCALE;
         if (isEmpty) {
-            writeString.writeInt(0).writeBoolean(false).writeInt(0).writeFloat(FullScreenMagnificationGestureHandler.MAX_SCALE).writeString("").writeInt(i2);
+            writeString
+                    .writeInt(0)
+                    .writeBoolean(false)
+                    .writeInt(0)
+                    .writeFloat(FullScreenMagnificationGestureHandler.MAX_SCALE)
+                    .writeString("")
+                    .writeInt(i2);
         } else {
             if (i3 != 1) {
                 if (i3 == 2) {
                     try {
                         i4 = Integer.parseInt(str2);
                     } catch (NumberFormatException unused) {
-                        HeimdAllFsService$$ExternalSyntheticOutline0.m("Can not parse value to float: ", str2, "SettingsStatsUtil");
+                        HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                                "Can not parse value to float: ", str2, "SettingsStatsUtil");
                     }
                     str2 = "";
                 } else if (i3 == 3) {
                     try {
                         f = Float.parseFloat(str2);
                     } catch (NumberFormatException unused2) {
-                        HeimdAllFsService$$ExternalSyntheticOutline0.m("Can not parse value to float: ", str2, "SettingsStatsUtil");
+                        HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                                "Can not parse value to float: ", str2, "SettingsStatsUtil");
                     }
                 } else if (i3 != 4) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(i3, "Unexpected value type ", "SettingsStatsUtil");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            i3, "Unexpected value type ", "SettingsStatsUtil");
                 } else {
                     i4 = 0;
                 }
@@ -69,7 +95,13 @@ public abstract class SettingsStatsUtil {
                 z = equals;
                 i4 = 0;
             }
-            writeString.writeInt(i3).writeBoolean(z).writeInt(i4).writeFloat(f).writeString(str2).writeInt(i2);
+            writeString
+                    .writeInt(i3)
+                    .writeBoolean(z)
+                    .writeInt(i4)
+                    .writeFloat(f)
+                    .writeString(str2)
+                    .writeInt(i2);
         }
         return writeString.build();
     }
@@ -96,7 +128,13 @@ public abstract class SettingsStatsUtil {
             StringListParamProto list = getList(flagsData.mFlagName);
             if (list != null) {
                 for (String str : list.element) {
-                    arrayList.add(createStatsEvent(i, i2, flagsData.mDataType, str, Settings.Global.getStringForUser(contentResolver, str, i2)));
+                    arrayList.add(
+                            createStatsEvent(
+                                    i,
+                                    i2,
+                                    flagsData.mDataType,
+                                    str,
+                                    Settings.Global.getStringForUser(contentResolver, str, i2)));
                 }
             }
         }
@@ -112,7 +150,13 @@ public abstract class SettingsStatsUtil {
             StringListParamProto list = getList(flagsData.mFlagName);
             if (list != null) {
                 for (String str : list.element) {
-                    arrayList.add(createStatsEvent(i, i2, flagsData.mDataType, str, Settings.Secure.getStringForUser(contentResolver, str, i2)));
+                    arrayList.add(
+                            createStatsEvent(
+                                    i,
+                                    i2,
+                                    flagsData.mDataType,
+                                    str,
+                                    Settings.Secure.getStringForUser(contentResolver, str, i2)));
                 }
             }
         }
@@ -128,7 +172,13 @@ public abstract class SettingsStatsUtil {
             StringListParamProto list = getList(flagsData.mFlagName);
             if (list != null) {
                 for (String str : list.element) {
-                    arrayList.add(createStatsEvent(i, i2, flagsData.mDataType, str, Settings.System.getStringForUser(contentResolver, str, i2)));
+                    arrayList.add(
+                            createStatsEvent(
+                                    i,
+                                    i2,
+                                    flagsData.mDataType,
+                                    str,
+                                    Settings.System.getStringForUser(contentResolver, str, i2)));
                 }
             }
         }

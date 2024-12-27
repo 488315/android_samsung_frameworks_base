@@ -54,13 +54,17 @@ public final class EGL15 {
 
     private static native void _nativeClassInit();
 
-    public static native int eglClientWaitSync(EGLDisplay eGLDisplay, EGLSync eGLSync, int i, long j);
+    public static native int eglClientWaitSync(
+            EGLDisplay eGLDisplay, EGLSync eGLSync, int i, long j);
 
-    public static native EGLImage eglCreateImage(EGLDisplay eGLDisplay, EGLContext eGLContext, int i, long j, long[] jArr, int i2);
+    public static native EGLImage eglCreateImage(
+            EGLDisplay eGLDisplay, EGLContext eGLContext, int i, long j, long[] jArr, int i2);
 
-    public static native EGLSurface eglCreatePlatformPixmapSurface(EGLDisplay eGLDisplay, EGLConfig eGLConfig, Buffer buffer, long[] jArr, int i);
+    public static native EGLSurface eglCreatePlatformPixmapSurface(
+            EGLDisplay eGLDisplay, EGLConfig eGLConfig, Buffer buffer, long[] jArr, int i);
 
-    public static native EGLSurface eglCreatePlatformWindowSurface(EGLDisplay eGLDisplay, EGLConfig eGLConfig, Buffer buffer, long[] jArr, int i);
+    public static native EGLSurface eglCreatePlatformWindowSurface(
+            EGLDisplay eGLDisplay, EGLConfig eGLConfig, Buffer buffer, long[] jArr, int i);
 
     public static native EGLSync eglCreateSync(EGLDisplay eGLDisplay, int i, long[] jArr, int i2);
 
@@ -70,12 +74,12 @@ public final class EGL15 {
 
     public static native EGLDisplay eglGetPlatformDisplay(int i, long j, long[] jArr, int i2);
 
-    public static native boolean eglGetSyncAttrib(EGLDisplay eGLDisplay, EGLSync eGLSync, int i, long[] jArr, int i2);
+    public static native boolean eglGetSyncAttrib(
+            EGLDisplay eGLDisplay, EGLSync eGLSync, int i, long[] jArr, int i2);
 
     public static native boolean eglWaitSync(EGLDisplay eGLDisplay, EGLSync eGLSync, int i);
 
-    private EGL15() {
-    }
+    private EGL15() {}
 
     static {
         _nativeClassInit();

@@ -16,12 +16,10 @@ public interface IAssistDataReceiver extends IInterface {
 
     public static class Default implements IAssistDataReceiver {
         @Override // android.app.IAssistDataReceiver
-        public void onHandleAssistData(Bundle resultData) throws RemoteException {
-        }
+        public void onHandleAssistData(Bundle resultData) throws RemoteException {}
 
         @Override // android.app.IAssistDataReceiver
-        public void onHandleAssistScreenshot(Bitmap screenshot) throws RemoteException {
-        }
+        public void onHandleAssistScreenshot(Bitmap screenshot) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IAssistDataReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAssistDataReceiver {
+    public abstract static class Stub extends Binder implements IAssistDataReceiver {
         public static final String DESCRIPTOR = "android.app.IAssistDataReceiver";
         static final int TRANSACTION_onHandleAssistData = 1;
         static final int TRANSACTION_onHandleAssistScreenshot = 2;
@@ -71,7 +69,8 @@ public interface IAssistDataReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

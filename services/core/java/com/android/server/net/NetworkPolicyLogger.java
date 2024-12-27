@@ -5,13 +5,14 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.net.NetworkPolicyManager;
 import android.os.PowerExemptionManager;
 import android.util.Log;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.ProcessList;
-import com.android.server.net.NetworkPolicyManagerService;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,7 +47,8 @@ public final class NetworkPolicyLogger {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogBuffer {
         public final int mMaxSize;
-        public static final SimpleDateFormat sFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:SSS");
+        public static final SimpleDateFormat sFormatter =
+                new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:SSS");
         public static final Date sDate = new Date();
         public final ArrayList mDataList = new ArrayList();
         public long mCursor = 0;
@@ -84,7 +86,11 @@ public final class NetworkPolicyLogger {
                             str = data.sfield1;
                             break;
                         case 1:
-                            str = data.ifield1 + PackageManagerShellCommandDataLoader.STDIN_PATH + NetworkPolicyManagerService.UidBlockedState.toString(data.ifield2, data.ifield3, data.ifield4);
+                            str =
+                                    data.ifield1
+                                            + PackageManagerShellCommandDataLoader.STDIN_PATH
+                                            + NetworkPolicyManagerService.UidBlockedState.toString(
+                                                    data.ifield2, data.ifield3, data.ifield4);
                             break;
                         case 2:
                             StringBuilder sb = new StringBuilder();
@@ -100,54 +106,111 @@ public final class NetworkPolicyLogger {
                             str = sb.toString();
                             break;
                         case 3:
-                            str = NetworkPolicyLogger.getPolicyChangedLog(data.ifield1, data.ifield2, data.ifield3);
+                            str =
+                                    NetworkPolicyLogger.getPolicyChangedLog(
+                                            data.ifield1, data.ifield2, data.ifield3);
                             break;
                         case 4:
-                            str = AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(data.ifield1, "Meteredness of netId=", " changed to ", data.bfield1);
+                            str =
+                                    AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0
+                                            .m(
+                                                    data.ifield1,
+                                                    "Meteredness of netId=",
+                                                    " changed to ",
+                                                    data.bfield1);
                             break;
                         case 5:
-                            str = VibrationParam$1$$ExternalSyntheticOutline0.m(data.ifield1, "Remove state for u");
+                            str =
+                                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                            data.ifield1, "Remove state for u");
                             break;
                         case 6:
-                            str = "Changed restrictBackground: " + data.bfield1 + "->" + data.bfield2;
+                            str =
+                                    "Changed restrictBackground: "
+                                            + data.bfield1
+                                            + "->"
+                                            + data.bfield2;
                             break;
                         case 7:
                             str = "DeviceIdleMode enabled: " + data.bfield1;
                             break;
                         case 8:
-                            str = AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(data.ifield1, "App idle state of uid ", ": ", data.bfield1);
+                            str =
+                                    AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0
+                                            .m(
+                                                    data.ifield1,
+                                                    "App idle state of uid ",
+                                                    ": ",
+                                                    data.bfield1);
                             break;
                         case 9:
                             str = "Parole state: " + data.bfield1;
                             break;
                         case 10:
-                            str = NetworkPolicyLogger.getTempPowerSaveWlChangedLog(data.ifield1, data.ifield2, data.sfield1, data.bfield1);
+                            str =
+                                    NetworkPolicyLogger.getTempPowerSaveWlChangedLog(
+                                            data.ifield1, data.ifield2, data.sfield1, data.bfield1);
                             break;
                         case 11:
-                            str = NetworkPolicyLogger.getUidFirewallRuleChangedLog(data.ifield1, data.ifield2, data.ifield3);
+                            str =
+                                    NetworkPolicyLogger.getUidFirewallRuleChangedLog(
+                                            data.ifield1, data.ifield2, data.ifield3);
                             break;
                         case 12:
                             int i4 = data.ifield1;
-                            str = "Firewall chain " + NetworkPolicyLogger.getFirewallChainName(i4) + " state: " + data.bfield1;
+                            str =
+                                    "Firewall chain "
+                                            + NetworkPolicyLogger.getFirewallChainName(i4)
+                                            + " state: "
+                                            + data.bfield1;
                             break;
                         case 13:
                         default:
                             str = String.valueOf(i);
                             break;
                         case 14:
-                            str = AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(data.ifield1, "App idle whitelist state of uid ", ": ", data.bfield1);
+                            str =
+                                    AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0
+                                            .m(
+                                                    data.ifield1,
+                                                    "App idle whitelist state of uid ",
+                                                    ": ",
+                                                    data.bfield1);
                             break;
                         case 15:
-                            str = AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(data.ifield1, "metered-allowlist for ", " changed to ", data.bfield1);
+                            str =
+                                    AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0
+                                            .m(
+                                                    data.ifield1,
+                                                    "metered-allowlist for ",
+                                                    " changed to ",
+                                                    data.bfield1);
                             break;
                         case 16:
-                            str = AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(data.ifield1, "metered-denylist for ", " changed to ", data.bfield1);
+                            str =
+                                    AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0
+                                            .m(
+                                                    data.ifield1,
+                                                    "metered-denylist for ",
+                                                    " changed to ",
+                                                    data.bfield1);
                             break;
                         case 17:
-                            str = AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(data.ifield1, "Roaming of netId=", " changed to ", data.bfield1);
+                            str =
+                                    AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0
+                                            .m(
+                                                    data.ifield1,
+                                                    "Roaming of netId=",
+                                                    " changed to ",
+                                                    data.bfield1);
                             break;
                         case 18:
-                            str = AccessibilityManagerService$$ExternalSyntheticOutline0.m(data.ifield1, "Interfaces of netId=", " changed to ", data.sfield1);
+                            str =
+                                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                            data.ifield1,
+                                            "Interfaces of netId=",
+                                            " changed to ",
+                                            data.sfield1);
                             break;
                     }
                     indentingPrintWriter.println(str);
@@ -199,7 +262,8 @@ public final class NetworkPolicyLogger {
     }
 
     public static String getPolicyChangedLog(int i, int i2, int i3) {
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Policy for ", " changed from ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(i, "Policy for ", " changed from ");
         m.append(NetworkPolicyManager.uidPoliciesToString(i2));
         m.append(" to ");
         m.append(NetworkPolicyManager.uidPoliciesToString(i3));
@@ -207,11 +271,23 @@ public final class NetworkPolicyLogger {
     }
 
     public static String getTempPowerSaveWlChangedLog(int i, int i2, String str, boolean z) {
-        return "temp-power-save whitelist for " + i + " changed to: " + z + "; reason=" + PowerExemptionManager.reasonCodeToString(i2) + " <" + str + ">";
+        return "temp-power-save whitelist for "
+                + i
+                + " changed to: "
+                + z
+                + "; reason="
+                + PowerExemptionManager.reasonCodeToString(i2)
+                + " <"
+                + str
+                + ">";
     }
 
     public static String getUidFirewallRuleChangedLog(int i, int i2, int i3) {
-        return String.format("Firewall rule changed: %d-%s-%s", Integer.valueOf(i2), getFirewallChainName(i), i3 != 0 ? i3 != 1 ? i3 != 2 ? String.valueOf(i3) : "deny" : "allow" : "default");
+        return String.format(
+                "Firewall rule changed: %d-%s-%s",
+                Integer.valueOf(i2),
+                getFirewallChainName(i),
+                i3 != 0 ? i3 != 1 ? i3 != 2 ? String.valueOf(i3) : "deny" : "allow" : "default");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0031 A[DONT_GENERATE] */
@@ -265,7 +341,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lc
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.appIdleStateChanged(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.appIdleStateChanged(int,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0031 A[DONT_GENERATE] */
@@ -319,7 +398,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lc
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.appIdleWlChanged(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.appIdleWlChanged(int,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x002a A[DONT_GENERATE] */
@@ -370,7 +452,9 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Ld
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.deviceIdleModeEnabled(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.deviceIdleModeEnabled(boolean):void");
     }
 
     public final void dumpLogs(IndentingPrintWriter indentingPrintWriter) {
@@ -446,7 +530,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Ld
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.firewallChainEnabled(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.firewallChainEnabled(int,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0046 A[DONT_GENERATE] */
@@ -504,7 +591,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L37
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.firewallRulesChanged(int, int[], int[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.firewallRulesChanged(int, int[],"
+                    + " int[]):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x003a A[DONT_GENERATE] */
@@ -559,7 +649,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Ld
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.interfacesChanged(int, android.util.ArraySet):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.interfacesChanged(int,"
+                    + " android.util.ArraySet):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
@@ -613,7 +706,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lc
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.meteredAllowlistChanged(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.meteredAllowlistChanged(int,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
@@ -667,7 +763,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lc
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.meteredDenylistChanged(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.meteredDenylistChanged(int,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x002a A[DONT_GENERATE] */
@@ -716,7 +815,9 @@ public final class NetworkPolicyLogger {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L1b
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.meteredRestrictedPkgsChanged(java.util.Set):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.meteredRestrictedPkgsChanged(java.util.Set):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
@@ -771,7 +872,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Ld
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.meterednessChanged(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.meterednessChanged(int,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x002d A[Catch: all -> 0x000e, TryCatch #0 {all -> 0x000e, blocks: (B:4:0x0005, B:6:0x0009, B:11:0x002d, B:14:0x006b, B:18:0x0036, B:19:0x004a, B:22:0x0059, B:23:0x0010), top: B:3:0x0005 }] */
@@ -780,7 +884,8 @@ public final class NetworkPolicyLogger {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void networkBlocked(int r6, com.android.server.net.NetworkPolicyManagerService.UidBlockedState r7) {
+    public final void networkBlocked(
+            int r6, com.android.server.net.NetworkPolicyManagerService.UidBlockedState r7) {
         /*
             r5 = this;
             java.lang.String r0 = "Blocked state of "
@@ -847,7 +952,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> Le
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.networkBlocked(int, com.android.server.net.NetworkPolicyManagerService$UidBlockedState):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.networkBlocked(int,"
+                    + " com.android.server.net.NetworkPolicyManagerService$UidBlockedState):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x002a A[DONT_GENERATE] */
@@ -898,7 +1006,9 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Ld
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.paroleStateChanged(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.paroleStateChanged(boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
@@ -953,7 +1063,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Ld
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.restrictBackgroundChanged(boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.restrictBackgroundChanged(boolean,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0032 A[DONT_GENERATE] */
@@ -1008,7 +1121,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Ld
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.roamingChanged(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.roamingChanged(int,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0023 A[DONT_GENERATE] */
@@ -1056,7 +1172,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L10
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.tempPowerSaveWlChanged(int, int, java.lang.String, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.tempPowerSaveWlChanged(int, int,"
+                    + " java.lang.String, boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x001f A[DONT_GENERATE] */
@@ -1104,7 +1223,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lc
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.uidFirewallRuleChanged(int, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.uidFirewallRuleChanged(int, int,"
+                    + " int):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x001f A[DONT_GENERATE] */
@@ -1152,7 +1274,10 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lc
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.uidPolicyChanged(int, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.uidPolicyChanged(int, int,"
+                    + " int):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0049 A[DONT_GENERATE] */
@@ -1216,6 +1341,9 @@ public final class NetworkPolicyLogger {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lc
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyLogger.uidStateChanged(int, int, int, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyLogger.uidStateChanged(int, int, int,"
+                    + " long):void");
     }
 }

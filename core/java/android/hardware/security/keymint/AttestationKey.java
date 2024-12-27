@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AttestationKey implements Parcelable {
-    public static final Parcelable.Creator<AttestationKey> CREATOR = new Parcelable.Creator<AttestationKey>() { // from class: android.hardware.security.keymint.AttestationKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AttestationKey createFromParcel(Parcel _aidl_source) {
-            AttestationKey _aidl_out = new AttestationKey();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AttestationKey> CREATOR =
+            new Parcelable.Creator<AttestationKey>() { // from class:
+                // android.hardware.security.keymint.AttestationKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AttestationKey createFromParcel(Parcel _aidl_source) {
+                    AttestationKey _aidl_out = new AttestationKey();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AttestationKey[] newArray(int _aidl_size) {
-            return new AttestationKey[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AttestationKey[] newArray(int _aidl_size) {
+                    return new AttestationKey[_aidl_size];
+                }
+            };
     public KeyParameter[] attestKeyParams;
     public byte[] issuerSubjectName;
     public byte[] keyBlob;
@@ -65,7 +67,8 @@ public class AttestationKey implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.attestKeyParams = (KeyParameter[]) _aidl_parcel.createTypedArray(KeyParameter.CREATOR);
+            this.attestKeyParams =
+                    (KeyParameter[]) _aidl_parcel.createTypedArray(KeyParameter.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

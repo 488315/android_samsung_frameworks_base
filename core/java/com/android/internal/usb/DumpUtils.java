@@ -10,22 +10,28 @@ import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 import android.media.midi.MidiDeviceInfo;
+
 import com.android.internal.util.dump.DualDumpOutputStream;
 
 /* loaded from: classes5.dex */
 public class DumpUtils {
-    public static void writeAccessory(DualDumpOutputStream dump, String idName, long id, UsbAccessory accessory) {
+    public static void writeAccessory(
+            DualDumpOutputStream dump, String idName, long id, UsbAccessory accessory) {
         long token = dump.start(idName, id);
-        dump.write(MidiDeviceInfo.PROPERTY_MANUFACTURER, 1138166333441L, accessory.getManufacturer());
+        dump.write(
+                MidiDeviceInfo.PROPERTY_MANUFACTURER, 1138166333441L, accessory.getManufacturer());
         dump.write("model", 1138166333442L, accessory.getModel());
-        com.android.internal.util.dump.DumpUtils.writeStringIfNotNull(dump, "description", 1138166333443L, accessory.getManufacturer());
+        com.android.internal.util.dump.DumpUtils.writeStringIfNotNull(
+                dump, "description", 1138166333443L, accessory.getManufacturer());
         dump.write("version", 1138166333444L, accessory.getVersion());
-        com.android.internal.util.dump.DumpUtils.writeStringIfNotNull(dump, "uri", 1138166333445L, accessory.getUri());
+        com.android.internal.util.dump.DumpUtils.writeStringIfNotNull(
+                dump, "uri", 1138166333445L, accessory.getUri());
         dump.write(Context.SERIAL_SERVICE, 1138166333446L, accessory.getSerial());
         dump.end(token);
     }
 
-    public static void writeDevice(DualDumpOutputStream dump, String idName, long id, UsbDevice device) {
+    public static void writeDevice(
+            DualDumpOutputStream dump, String idName, long id, UsbDevice device) {
         long token = dump.start(idName, id);
         dump.write("name", 1138166333441L, device.getDeviceName());
         dump.write("vendor_id", 1120986464258L, device.getVendorId());
@@ -44,7 +50,8 @@ public class DumpUtils {
         dump.end(token);
     }
 
-    private static void writeConfiguration(DualDumpOutputStream dump, String idName, long id, UsbConfiguration configuration) {
+    private static void writeConfiguration(
+            DualDumpOutputStream dump, String idName, long id, UsbConfiguration configuration) {
         long token = dump.start(idName, id);
         dump.write("id", 1120986464257L, configuration.getId());
         dump.write("name", 1138166333442L, configuration.getName());
@@ -57,7 +64,8 @@ public class DumpUtils {
         dump.end(token);
     }
 
-    private static void writeInterface(DualDumpOutputStream dump, String idName, long id, UsbInterface iface) {
+    private static void writeInterface(
+            DualDumpOutputStream dump, String idName, long id, UsbInterface iface) {
         long token = dump.start(idName, id);
         dump.write("id", 1120986464257L, iface.getId());
         dump.write("alternate_settings", 1120986464258L, iface.getAlternateSetting());
@@ -72,7 +80,8 @@ public class DumpUtils {
         dump.end(token);
     }
 
-    private static void writeEndpoint(DualDumpOutputStream dump, String idName, long id, UsbEndpoint endpoint) {
+    private static void writeEndpoint(
+            DualDumpOutputStream dump, String idName, long id, UsbEndpoint endpoint) {
         long token = dump.start(idName, id);
         dump.write("endpoint_number", 1120986464257L, endpoint.getEndpointNumber());
         dump.write("direction", 1159641169922L, endpoint.getDirection());
@@ -109,14 +118,16 @@ public class DumpUtils {
         } else {
             dump.write("supported_modes", 2259152797698L, UsbPort.modeToString(mode));
         }
-        dump.write("supports_compliance_warnings", 1133871366147L, port.supportsComplianceWarnings());
+        dump.write(
+                "supports_compliance_warnings", 1133871366147L, port.supportsComplianceWarnings());
         if (port.isAltModeSupported(1)) {
             dump.write("supported_alt_modes", 2259152797700L, 1);
         }
         dump.end(token);
     }
 
-    private static void writePowerRole(DualDumpOutputStream dump, String idName, long id, int powerRole) {
+    private static void writePowerRole(
+            DualDumpOutputStream dump, String idName, long id, int powerRole) {
         if (dump.isProto()) {
             dump.write(idName, id, powerRole);
         } else {
@@ -124,7 +135,8 @@ public class DumpUtils {
         }
     }
 
-    private static void writeDataRole(DualDumpOutputStream dump, String idName, long id, int dataRole) {
+    private static void writeDataRole(
+            DualDumpOutputStream dump, String idName, long id, int dataRole) {
         if (dump.isProto()) {
             dump.write(idName, id, dataRole);
         } else {
@@ -132,21 +144,27 @@ public class DumpUtils {
         }
     }
 
-    private static void writeContaminantPresenceStatus(DualDumpOutputStream dump, String idName, long id, int contaminantPresenceStatus) {
+    private static void writeContaminantPresenceStatus(
+            DualDumpOutputStream dump, String idName, long id, int contaminantPresenceStatus) {
         if (dump.isProto()) {
             dump.write(idName, id, contaminantPresenceStatus);
         } else {
-            dump.write(idName, id, UsbPort.contaminantPresenceStatusToString(contaminantPresenceStatus));
+            dump.write(
+                    idName,
+                    id,
+                    UsbPort.contaminantPresenceStatusToString(contaminantPresenceStatus));
         }
     }
 
-    public static void writePortStatus(DualDumpOutputStream dump, String idName, long id, UsbPortStatus status) {
+    public static void writePortStatus(
+            DualDumpOutputStream dump, String idName, long id, UsbPortStatus status) {
         long token = dump.start(idName, id);
         dump.write("connected", 1133871366145L, status.isConnected());
         if (dump.isProto()) {
             dump.write("current_mode", 1159641169922L, status.getCurrentMode());
         } else {
-            dump.write("current_mode", 1159641169922L, UsbPort.modeToString(status.getCurrentMode()));
+            dump.write(
+                    "current_mode", 1159641169922L, UsbPort.modeToString(status.getCurrentMode()));
         }
         writePowerRole(dump, "power_role", 1159641169923L, status.getCurrentPowerRole());
         writeDataRole(dump, "data_role", 1159641169924L, status.getCurrentDataRole());
@@ -161,14 +179,30 @@ public class DumpUtils {
             writeDataRole(dump, "data_role", 1159641169922L, dataRole);
             dump.end(roleCombinationToken);
         }
-        writeContaminantPresenceStatus(dump, "contaminant_presence_status", 1159641169926L, status.getContaminantDetectionStatus());
-        dump.write("usb_data_status", 1138166333447L, UsbPort.usbDataStatusToString(status.getUsbDataStatus()));
+        writeContaminantPresenceStatus(
+                dump,
+                "contaminant_presence_status",
+                1159641169926L,
+                status.getContaminantDetectionStatus());
+        dump.write(
+                "usb_data_status",
+                1138166333447L,
+                UsbPort.usbDataStatusToString(status.getUsbDataStatus()));
         dump.write("is_power_transfer_limited", 1133871366152L, status.isPowerTransferLimited());
-        dump.write("usb_power_brick_status", 1138166333449L, UsbPort.powerBrickConnectionStatusToString(status.getPowerBrickConnectionStatus()));
-        dump.write("compliance_warning_status", 1138166333450L, UsbPort.complianceWarningsToString(status.getComplianceWarnings()));
+        dump.write(
+                "usb_power_brick_status",
+                1138166333449L,
+                UsbPort.powerBrickConnectionStatusToString(status.getPowerBrickConnectionStatus()));
+        dump.write(
+                "compliance_warning_status",
+                1138166333450L,
+                UsbPort.complianceWarningsToString(status.getComplianceWarnings()));
         DisplayPortAltModeInfo displayPortAltModeInfo = status.getDisplayPortAltModeInfo();
         if (displayPortAltModeInfo != null) {
-            dump.write("displayport_alt_mode_status", 1138166333451L, status.getDisplayPortAltModeInfo().toString());
+            dump.write(
+                    "displayport_alt_mode_status",
+                    1138166333451L,
+                    status.getDisplayPortAltModeInfo().toString());
         }
         dump.end(token);
     }

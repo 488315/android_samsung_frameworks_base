@@ -4,7 +4,9 @@ import android.annotation.SystemApi;
 import android.content.ComponentName;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.util.Arrays;
 
 @SystemApi
@@ -27,7 +29,9 @@ public class LogMaker {
     }
 
     public LogMaker setCategory(int category) {
-        this.entries.put(MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_CATEGORY, Integer.valueOf(category));
+        this.entries.put(
+                MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_CATEGORY,
+                Integer.valueOf(category));
         return this;
     }
 
@@ -37,7 +41,8 @@ public class LogMaker {
     }
 
     public LogMaker setType(int type) {
-        this.entries.put(MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_TYPE, Integer.valueOf(type));
+        this.entries.put(
+                MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_TYPE, Integer.valueOf(type));
         return this;
     }
 
@@ -47,7 +52,9 @@ public class LogMaker {
     }
 
     public LogMaker setSubtype(int subtype) {
-        this.entries.put(MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_SUBTYPE, Integer.valueOf(subtype));
+        this.entries.put(
+                MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_SUBTYPE,
+                Integer.valueOf(subtype));
         return this;
     }
 
@@ -57,7 +64,9 @@ public class LogMaker {
     }
 
     public LogMaker setLatency(long milliseconds) {
-        this.entries.put(MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_LATENCY_MILLIS, Long.valueOf(milliseconds));
+        this.entries.put(
+                MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_LATENCY_MILLIS,
+                Long.valueOf(milliseconds));
         return this;
     }
 
@@ -88,7 +97,8 @@ public class LogMaker {
     }
 
     public LogMaker setProcessId(int pid) {
-        this.entries.put(MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_PID, Integer.valueOf(pid));
+        this.entries.put(
+                MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_PID, Integer.valueOf(pid));
         return this;
     }
 
@@ -98,7 +108,8 @@ public class LogMaker {
     }
 
     public LogMaker setUid(int uid) {
-        this.entries.put(MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_UID, Integer.valueOf(uid));
+        this.entries.put(
+                MetricsProto.MetricsEvent.RESERVED_FOR_LOGBUILDER_UID, Integer.valueOf(uid));
         return this;
     }
 
@@ -132,7 +143,8 @@ public class LogMaker {
             return clearTaggedData(tag);
         }
         if (!isValidValue(value)) {
-            throw new IllegalArgumentException("Value must be loggable type - int, long, float, String");
+            throw new IllegalArgumentException(
+                    "Value must be loggable type - int, long, float, String");
         }
         if (value.toString().getBytes().length > 4000) {
             Log.i(TAG, "Log value too long, omitted: " + value.toString());
@@ -148,7 +160,10 @@ public class LogMaker {
     }
 
     public boolean isValidValue(Object value) {
-        return (value instanceof Integer) || (value instanceof String) || (value instanceof Long) || (value instanceof Float);
+        return (value instanceof Integer)
+                || (value instanceof String)
+                || (value instanceof Long)
+                || (value instanceof Float);
     }
 
     public Object getTaggedData(int tag) {

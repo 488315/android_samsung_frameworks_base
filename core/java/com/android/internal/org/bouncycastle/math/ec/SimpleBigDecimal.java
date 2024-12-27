@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
 import android.media.MediaMetrics;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -23,7 +24,8 @@ class SimpleBigDecimal {
 
     private void checkScale(SimpleBigDecimal b) {
         if (this.scale != b.scale) {
-            throw new IllegalArgumentException("Only SimpleBigDecimal of same scale allowed in arithmetic operations");
+            throw new IllegalArgumentException(
+                    "Only SimpleBigDecimal of same scale allowed in arithmetic operations");
         }
     }
 

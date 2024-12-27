@@ -1,7 +1,9 @@
 package com.android.server.wallpapereffectsgeneration;
 
 import android.os.ShellCommand;
+
 import com.android.server.am.ActiveServices$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -9,7 +11,8 @@ import java.io.PrintWriter;
 public final class WallpaperEffectsGenerationManagerServiceShellCommand extends ShellCommand {
     public final WallpaperEffectsGenerationManagerService mService;
 
-    public WallpaperEffectsGenerationManagerServiceShellCommand(WallpaperEffectsGenerationManagerService wallpaperEffectsGenerationManagerService) {
+    public WallpaperEffectsGenerationManagerServiceShellCommand(
+            WallpaperEffectsGenerationManagerService wallpaperEffectsGenerationManagerService) {
         this.mService = wallpaperEffectsGenerationManagerService;
     }
 
@@ -33,7 +36,14 @@ public final class WallpaperEffectsGenerationManagerServiceShellCommand extends 
             }
             int parseInt2 = Integer.parseInt(getNextArgRequired());
             this.mService.setTemporaryService(parseInt, nextArg, parseInt2);
-            outPrintWriter.println(ActiveServices$$ExternalSyntheticOutline0.m(parseInt2, nextArg, " for ", "ms", new StringBuilder("WallpaperEffectsGenerationService temporarily set to ")));
+            outPrintWriter.println(
+                    ActiveServices$$ExternalSyntheticOutline0.m(
+                            parseInt2,
+                            nextArg,
+                            " for ",
+                            "ms",
+                            new StringBuilder(
+                                    "WallpaperEffectsGenerationService temporarily set to ")));
         }
         return 0;
     }
@@ -46,7 +56,8 @@ public final class WallpaperEffectsGenerationManagerServiceShellCommand extends 
             outPrintWriter.println("    Prints this help text.");
             outPrintWriter.println("");
             outPrintWriter.println("  set temporary-service USER_ID [COMPONENT_NAME DURATION]");
-            outPrintWriter.println("    Temporarily (for DURATION ms) changes the service implemtation.");
+            outPrintWriter.println(
+                    "    Temporarily (for DURATION ms) changes the service implemtation.");
             outPrintWriter.println("    To reset, call with just the USER_ID argument.");
             outPrintWriter.println("");
             outPrintWriter.close();

@@ -2,7 +2,7 @@ package com.android.server.power.stats;
 
 import com.android.internal.os.PowerProfile;
 import com.android.internal.os.PowerStats;
-import com.android.server.power.stats.PowerStatsProcessor;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -32,21 +32,30 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
     }
 
     public BluetoothPowerStatsProcessor(PowerProfile powerProfile) {
-        this.mRxPowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("bluetooth.controller.rx"));
-        this.mTxPowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("bluetooth.controller.tx"));
-        this.mIdlePowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("bluetooth.controller.idle"));
+        this.mRxPowerEstimator =
+                new UsageBasedPowerEstimator(
+                        powerProfile.getAveragePower("bluetooth.controller.rx"));
+        this.mTxPowerEstimator =
+                new UsageBasedPowerEstimator(
+                        powerProfile.getAveragePower("bluetooth.controller.tx"));
+        this.mIdlePowerEstimator =
+                new UsageBasedPowerEstimator(
+                        powerProfile.getAveragePower("bluetooth.controller.idle"));
     }
 
     @Override // com.android.server.power.stats.PowerStatsProcessor
-    public final void finish(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
+    public final void finish(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
         Iterator it;
         double d;
         double d2;
         double d3;
         double d4;
         Iterator it2;
-        PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats2 = powerComponentAggregatedPowerStats;
-        PowerStats.Descriptor descriptor = powerComponentAggregatedPowerStats2.mPowerStatsDescriptor;
+        PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats2 =
+                powerComponentAggregatedPowerStats;
+        PowerStats.Descriptor descriptor =
+                powerComponentAggregatedPowerStats2.mPowerStatsDescriptor;
         if (descriptor == null) {
             return;
         }
@@ -57,18 +66,26 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
             this.mTmpUidStatsArray = new long[descriptor.uidStatsArrayLength];
         }
         if (this.mPlan == null) {
-            this.mPlan = new PowerStatsProcessor.PowerEstimationPlan(powerComponentAggregatedPowerStats2.mConfig);
+            this.mPlan =
+                    new PowerStatsProcessor.PowerEstimationPlan(
+                            powerComponentAggregatedPowerStats2.mConfig);
         }
         boolean z = true;
-        for (int size = ((ArrayList) this.mPlan.deviceStateEstimations).size() - 1; size >= 0; size--) {
-            PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation = (PowerStatsProcessor.DeviceStateEstimation) ((ArrayList) this.mPlan.deviceStateEstimations).get(size);
+        for (int size = ((ArrayList) this.mPlan.deviceStateEstimations).size() - 1;
+                size >= 0;
+                size--) {
+            PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation =
+                    (PowerStatsProcessor.DeviceStateEstimation)
+                            ((ArrayList) this.mPlan.deviceStateEstimations).get(size);
             Intermediates intermediates = new Intermediates();
             deviceStateEstimation.intermediates = intermediates;
             long[] jArr = this.mTmpDeviceStatsArray;
             int[] iArr = deviceStateEstimation.stateValues;
             if (powerComponentAggregatedPowerStats2.getDeviceStats(iArr, jArr)) {
                 for (int i = this.mStatsLayout.mDeviceEnergyConsumerCount - 1; i >= 0; i--) {
-                    intermediates.consumedEnergy = this.mStatsLayout.getConsumedEnergy(i, this.mTmpDeviceStatsArray) + intermediates.consumedEnergy;
+                    intermediates.consumedEnergy =
+                            this.mStatsLayout.getConsumedEnergy(i, this.mTmpDeviceStatsArray)
+                                    + intermediates.consumedEnergy;
                 }
                 BluetoothPowerStatsLayout bluetoothPowerStatsLayout = this.mStatsLayout;
                 long[] jArr2 = this.mTmpDeviceStatsArray;
@@ -92,17 +109,29 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
         if (this.mStatsLayout.mDeviceEnergyConsumerCount != 0) {
             double d9 = 0.0d;
             long j5 = 0;
-            for (int size2 = ((ArrayList) this.mPlan.deviceStateEstimations).size() - 1; size2 >= 0; size2--) {
-                Intermediates intermediates2 = (Intermediates) ((PowerStatsProcessor.DeviceStateEstimation) ((ArrayList) this.mPlan.deviceStateEstimations).get(size2)).intermediates;
+            for (int size2 = ((ArrayList) this.mPlan.deviceStateEstimations).size() - 1;
+                    size2 >= 0;
+                    size2--) {
+                Intermediates intermediates2 =
+                        (Intermediates)
+                                ((PowerStatsProcessor.DeviceStateEstimation)
+                                                ((ArrayList) this.mPlan.deviceStateEstimations)
+                                                        .get(size2))
+                                        .intermediates;
                 d9 += intermediates2.rxPower + intermediates2.txPower + intermediates2.idlePower;
                 j5 += intermediates2.consumedEnergy;
             }
             double d10 = d9 == 0.0d ? 1.0d : (j5 * 2.777777777777778E-7d) / d9;
             if (d10 != 1.0d) {
-                for (int size3 = ((ArrayList) this.mPlan.deviceStateEstimations).size() - 1; size3 >= 0; size3--) {
-                    PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation2 = (PowerStatsProcessor.DeviceStateEstimation) ((ArrayList) this.mPlan.deviceStateEstimations).get(size3);
+                for (int size3 = ((ArrayList) this.mPlan.deviceStateEstimations).size() - 1;
+                        size3 >= 0;
+                        size3--) {
+                    PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation2 =
+                            (PowerStatsProcessor.DeviceStateEstimation)
+                                    ((ArrayList) this.mPlan.deviceStateEstimations).get(size3);
                     int[] iArr2 = deviceStateEstimation2.stateValues;
-                    Intermediates intermediates3 = (Intermediates) deviceStateEstimation2.intermediates;
+                    Intermediates intermediates3 =
+                            (Intermediates) deviceStateEstimation2.intermediates;
                     double d11 = intermediates3.rxPower * d10;
                     intermediates3.rxPower = d11;
                     double d12 = intermediates3.txPower * d10;
@@ -110,20 +139,29 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
                     double d13 = intermediates3.idlePower * d10;
                     intermediates3.idlePower = d13;
                     double d14 = d11 + d12 + d13;
-                    if (powerComponentAggregatedPowerStats2.getDeviceStats(iArr2, this.mTmpDeviceStatsArray)) {
+                    if (powerComponentAggregatedPowerStats2.getDeviceStats(
+                            iArr2, this.mTmpDeviceStatsArray)) {
                         this.mStatsLayout.setDevicePowerEstimate(this.mTmpDeviceStatsArray, d14);
-                        powerComponentAggregatedPowerStats2.setDeviceStats(iArr2, this.mTmpDeviceStatsArray);
+                        powerComponentAggregatedPowerStats2.setDeviceStats(
+                                iArr2, this.mTmpDeviceStatsArray);
                     }
                 }
             }
         }
-        for (int size4 = ((ArrayList) this.mPlan.combinedDeviceStateEstimations).size() - 1; size4 >= 0; size4--) {
-            PowerStatsProcessor.CombinedDeviceStateEstimate combinedDeviceStateEstimate = (PowerStatsProcessor.CombinedDeviceStateEstimate) ((ArrayList) this.mPlan.combinedDeviceStateEstimations).get(size4);
+        for (int size4 = ((ArrayList) this.mPlan.combinedDeviceStateEstimations).size() - 1;
+                size4 >= 0;
+                size4--) {
+            PowerStatsProcessor.CombinedDeviceStateEstimate combinedDeviceStateEstimate =
+                    (PowerStatsProcessor.CombinedDeviceStateEstimate)
+                            ((ArrayList) this.mPlan.combinedDeviceStateEstimations).get(size4);
             Intermediates intermediates4 = new Intermediates();
             combinedDeviceStateEstimate.intermediates = intermediates4;
             ArrayList arrayList = (ArrayList) combinedDeviceStateEstimate.deviceStateEstimations;
             for (int size5 = arrayList.size() - 1; size5 >= 0; size5--) {
-                Intermediates intermediates5 = (Intermediates) ((PowerStatsProcessor.DeviceStateEstimation) arrayList.get(size5)).intermediates;
+                Intermediates intermediates5 =
+                        (Intermediates)
+                                ((PowerStatsProcessor.DeviceStateEstimation) arrayList.get(size5))
+                                        .intermediates;
                 intermediates4.rxTime += intermediates5.rxTime;
                 intermediates4.rxBytes += intermediates5.rxBytes;
                 intermediates4.rxPower += intermediates5.rxPower;
@@ -142,16 +180,27 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
             while (it3.hasNext()) {
                 int intValue = ((Integer) it3.next()).intValue();
                 for (int i2 = 0; i2 < ((ArrayList) this.mPlan.uidStateEstimates).size(); i2++) {
-                    PowerStatsProcessor.UidStateEstimate uidStateEstimate = (PowerStatsProcessor.UidStateEstimate) ((ArrayList) this.mPlan.uidStateEstimates).get(i2);
-                    Intermediates intermediates6 = (Intermediates) uidStateEstimate.combinedDeviceStateEstimate.intermediates;
+                    PowerStatsProcessor.UidStateEstimate uidStateEstimate =
+                            (PowerStatsProcessor.UidStateEstimate)
+                                    ((ArrayList) this.mPlan.uidStateEstimates).get(i2);
+                    Intermediates intermediates6 =
+                            (Intermediates)
+                                    uidStateEstimate.combinedDeviceStateEstimate.intermediates;
                     Iterator it4 = ((ArrayList) uidStateEstimate.proportionalEstimates).iterator();
                     while (it4.hasNext()) {
-                        if (powerComponentAggregatedPowerStats2.getUidStats(intValue, ((PowerStatsProcessor.UidStateProportionalEstimate) it4.next()).stateValues, this.mTmpUidStatsArray)) {
+                        if (powerComponentAggregatedPowerStats2.getUidStats(
+                                intValue,
+                                ((PowerStatsProcessor.UidStateProportionalEstimate) it4.next())
+                                        .stateValues,
+                                this.mTmpUidStatsArray)) {
                             long j6 = intermediates6.rxBytes;
-                            BluetoothPowerStatsLayout bluetoothPowerStatsLayout2 = this.mStatsLayout;
+                            BluetoothPowerStatsLayout bluetoothPowerStatsLayout2 =
+                                    this.mStatsLayout;
                             long[] jArr3 = this.mTmpUidStatsArray;
-                            intermediates6.rxBytes = j6 + jArr3[bluetoothPowerStatsLayout2.mUidRxBytesPosition];
-                            intermediates6.txBytes += jArr3[bluetoothPowerStatsLayout2.mUidTxBytesPosition];
+                            intermediates6.rxBytes =
+                                    j6 + jArr3[bluetoothPowerStatsLayout2.mUidRxBytesPosition];
+                            intermediates6.txBytes +=
+                                    jArr3[bluetoothPowerStatsLayout2.mUidTxBytesPosition];
                         }
                     }
                 }
@@ -161,20 +210,33 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
                 int intValue2 = ((Integer) it5.next()).intValue();
                 int i3 = 0;
                 while (i3 < ((ArrayList) this.mPlan.uidStateEstimates).size()) {
-                    PowerStatsProcessor.UidStateEstimate uidStateEstimate2 = (PowerStatsProcessor.UidStateEstimate) ((ArrayList) this.mPlan.uidStateEstimates).get(i3);
-                    Intermediates intermediates7 = (Intermediates) uidStateEstimate2.combinedDeviceStateEstimate.intermediates;
+                    PowerStatsProcessor.UidStateEstimate uidStateEstimate2 =
+                            (PowerStatsProcessor.UidStateEstimate)
+                                    ((ArrayList) this.mPlan.uidStateEstimates).get(i3);
+                    Intermediates intermediates7 =
+                            (Intermediates)
+                                    uidStateEstimate2.combinedDeviceStateEstimate.intermediates;
                     long j7 = intermediates7.scanTime;
                     boolean z2 = j7 > intermediates7.rxTime ? z : false;
                     boolean z3 = j7 > intermediates7.txTime ? z : false;
                     Iterator it6 = ((ArrayList) uidStateEstimate2.proportionalEstimates).iterator();
                     while (it6.hasNext()) {
-                        PowerStatsProcessor.UidStateProportionalEstimate uidStateProportionalEstimate = (PowerStatsProcessor.UidStateProportionalEstimate) it6.next();
-                        if (powerComponentAggregatedPowerStats2.getUidStats(intValue2, uidStateProportionalEstimate.stateValues, this.mTmpUidStatsArray)) {
+                        PowerStatsProcessor.UidStateProportionalEstimate
+                                uidStateProportionalEstimate =
+                                        (PowerStatsProcessor.UidStateProportionalEstimate)
+                                                it6.next();
+                        if (powerComponentAggregatedPowerStats2.getUidStats(
+                                intValue2,
+                                uidStateProportionalEstimate.stateValues,
+                                this.mTmpUidStatsArray)) {
                             if (z2) {
                                 long j8 = intermediates7.scanTime;
                                 it = it6;
                                 if (j8 != 0) {
-                                    d2 = intermediates7.rxPower * this.mTmpUidStatsArray[this.mStatsLayout.mUidScanTimePosition];
+                                    d2 =
+                                            intermediates7.rxPower
+                                                    * this.mTmpUidStatsArray[
+                                                            this.mStatsLayout.mUidScanTimePosition];
                                     d3 = j8;
                                     d4 = (d2 / d3) + 0.0d;
                                 } else {
@@ -185,7 +247,10 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
                                 it = it6;
                                 long j9 = intermediates7.rxBytes;
                                 if (j9 != 0) {
-                                    d2 = intermediates7.rxPower * this.mTmpUidStatsArray[this.mStatsLayout.mUidRxBytesPosition];
+                                    d2 =
+                                            intermediates7.rxPower
+                                                    * this.mTmpUidStatsArray[
+                                                            this.mStatsLayout.mUidRxBytesPosition];
                                     d3 = j9;
                                     d4 = (d2 / d3) + 0.0d;
                                 } else {
@@ -197,7 +262,12 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
                                 long j10 = intermediates7.scanTime;
                                 if (j10 != 0) {
                                     it2 = it5;
-                                    d4 += (intermediates7.txPower * this.mTmpUidStatsArray[this.mStatsLayout.mUidScanTimePosition]) / j10;
+                                    d4 +=
+                                            (intermediates7.txPower
+                                                            * this.mTmpUidStatsArray[
+                                                                    this.mStatsLayout
+                                                                            .mUidScanTimePosition])
+                                                    / j10;
                                 } else {
                                     it2 = it5;
                                 }
@@ -205,12 +275,21 @@ public final class BluetoothPowerStatsProcessor extends PowerStatsProcessor {
                                 it2 = it5;
                                 long j11 = intermediates7.txBytes;
                                 if (j11 != 0) {
-                                    d4 += (intermediates7.txPower * this.mTmpUidStatsArray[this.mStatsLayout.mUidTxBytesPosition]) / j11;
+                                    d4 +=
+                                            (intermediates7.txPower
+                                                            * this.mTmpUidStatsArray[
+                                                                    this.mStatsLayout
+                                                                            .mUidTxBytesPosition])
+                                                    / j11;
                                 }
                             }
                             this.mStatsLayout.setUidPowerEstimate(this.mTmpUidStatsArray, d4);
-                            powerComponentAggregatedPowerStats.setUidStats(intValue2, uidStateProportionalEstimate.stateValues, this.mTmpUidStatsArray);
-                            powerComponentAggregatedPowerStats2 = powerComponentAggregatedPowerStats;
+                            powerComponentAggregatedPowerStats.setUidStats(
+                                    intValue2,
+                                    uidStateProportionalEstimate.stateValues,
+                                    this.mTmpUidStatsArray);
+                            powerComponentAggregatedPowerStats2 =
+                                    powerComponentAggregatedPowerStats;
                             it6 = it;
                             it5 = it2;
                             d8 = 0.0d;

@@ -9,11 +9,13 @@ import android.os.Binder;
 import android.os.CpuUsageInfo;
 import android.os.IHardwarePropertiesManager;
 import android.os.UserHandle;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.utils.ManagedApplicationService;
 import com.android.server.vr.VrManagerService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -43,9 +45,11 @@ public class HardwarePropertiesManagerService extends IHardwarePropertiesManager
 
     private static native void nativeInit();
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         String nameForUid;
-        if (DumpUtils.checkDumpPermission(this.mContext, "HardwarePropertiesManagerService", printWriter)) {
+        if (DumpUtils.checkDumpPermission(
+                this.mContext, "HardwarePropertiesManagerService", printWriter)) {
             printWriter.println("****** Dump of HardwarePropertiesManagerService ******");
             PackageManager packageManager = this.mContext.getPackageManager();
             int callingUid = Binder.getCallingUid();
@@ -65,7 +69,9 @@ public class HardwarePropertiesManagerService extends IHardwarePropertiesManager
             printWriter.println("Fan speed: " + Arrays.toString(getFanSpeeds(nameForUid)) + "\n");
             CpuUsageInfo[] cpuUsages = getCpuUsages(nameForUid);
             for (int i = 0; i < cpuUsages.length; i++) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Cpu usage of core: ", ", active = ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i, "Cpu usage of core: ", ", active = ");
                 m.append(cpuUsages[i].getActive());
                 m.append(", total = ");
                 m.append(cpuUsages[i].getTotal());
@@ -82,7 +88,8 @@ public class HardwarePropertiesManagerService extends IHardwarePropertiesManager
         dumpTempValues(str, printWriter, i, str2, "vr throttling temperatures: ", 3);
     }
 
-    public final void dumpTempValues(String str, PrintWriter printWriter, int i, String str2, String str3, int i2) {
+    public final void dumpTempValues(
+            String str, PrintWriter printWriter, int i, String str2, String str3, int i2) {
         StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(str2, str3);
         m.append(Arrays.toString(getDeviceTemperatures(str, i, i2)));
         printWriter.println(m.toString());
@@ -92,23 +99,35 @@ public class HardwarePropertiesManagerService extends IHardwarePropertiesManager
         DevicePolicyManager devicePolicyManager;
         this.mAppOps.checkPackage(Binder.getCallingUid(), str);
         int userId = UserHandle.getUserId(Binder.getCallingUid());
-        VrManagerService.LocalService localService = (VrManagerService.LocalService) LocalServices.getService(VrManagerService.LocalService.class);
+        VrManagerService.LocalService localService =
+                (VrManagerService.LocalService)
+                        LocalServices.getService(VrManagerService.LocalService.class);
         boolean z = false;
-        if (Flags.systemServerRoleControllerEnabled() && CompatChanges.isChangeEnabled(307233716L)) {
-            devicePolicyManager = (DevicePolicyManager) this.mContext.createContextAsUser(new UserHandle(userId), 0).getSystemService(DevicePolicyManager.class);
+        if (Flags.systemServerRoleControllerEnabled()
+                && CompatChanges.isChangeEnabled(307233716L)) {
+            devicePolicyManager =
+                    (DevicePolicyManager)
+                            this.mContext
+                                    .createContextAsUser(new UserHandle(userId), 0)
+                                    .getSystemService(DevicePolicyManager.class);
         } else {
-            devicePolicyManager = (DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class);
+            devicePolicyManager =
+                    (DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class);
         }
-        if (devicePolicyManager.isDeviceOwnerApp(str) || this.mContext.checkCallingOrSelfPermission("android.permission.DEVICE_POWER") == 0) {
+        if (devicePolicyManager.isDeviceOwnerApp(str)
+                || this.mContext.checkCallingOrSelfPermission("android.permission.DEVICE_POWER")
+                        == 0) {
             return;
         }
         if (localService != null) {
             VrManagerService vrManagerService = VrManagerService.this;
             synchronized (vrManagerService.mLock) {
                 try {
-                    ManagedApplicationService managedApplicationService = vrManagerService.mCurrentVrService;
+                    ManagedApplicationService managedApplicationService =
+                            vrManagerService.mCurrentVrService;
                     if (managedApplicationService != null) {
-                        if (managedApplicationService.mComponent.getPackageName().equals(str) && userId == vrManagerService.mCurrentVrService.mUserId) {
+                        if (managedApplicationService.mComponent.getPackageName().equals(str)
+                                && userId == vrManagerService.mCurrentVrService.mUserId) {
                             z = true;
                         }
                     }
@@ -119,7 +138,9 @@ public class HardwarePropertiesManagerService extends IHardwarePropertiesManager
                 return;
             }
         }
-        throw new SecurityException("The caller is neither a device owner, nor holding the DEVICE_POWER permission, nor the current VrListener.");
+        throw new SecurityException(
+                "The caller is neither a device owner, nor holding the DEVICE_POWER permission, nor"
+                    + " the current VrListener.");
     }
 
     public final CpuUsageInfo[] getCpuUsages(String str) {

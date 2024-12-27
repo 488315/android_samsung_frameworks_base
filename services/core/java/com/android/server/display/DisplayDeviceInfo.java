@@ -7,10 +7,13 @@ import android.view.DisplayCutout;
 import android.view.DisplayEventReceiver;
 import android.view.DisplayShape;
 import android.view.RoundedCorners;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -51,7 +54,8 @@ public final class DisplayDeviceInfo {
     public int rotation = 0;
     public int state = 2;
     public int committedState = 0;
-    public DisplayEventReceiver.FrameRateOverride[] frameRateOverrides = new DisplayEventReceiver.FrameRateOverride[0];
+    public DisplayEventReceiver.FrameRateOverride[] frameRateOverrides =
+            new DisplayEventReceiver.FrameRateOverride[0];
     public float hdrSdrRatio = Float.NaN;
     public int installOrientation = 0;
 
@@ -69,18 +73,60 @@ public final class DisplayDeviceInfo {
         if (this.rotation != displayDeviceInfo.rotation) {
             i |= 32;
         }
-        if (this.renderFrameRate != displayDeviceInfo.renderFrameRate || this.presentationDeadlineNanos != displayDeviceInfo.presentationDeadlineNanos || this.appVsyncOffsetNanos != displayDeviceInfo.appVsyncOffsetNanos) {
+        if (this.renderFrameRate != displayDeviceInfo.renderFrameRate
+                || this.presentationDeadlineNanos != displayDeviceInfo.presentationDeadlineNanos
+                || this.appVsyncOffsetNanos != displayDeviceInfo.appVsyncOffsetNanos) {
             i |= 64;
         }
         if (this.modeId != displayDeviceInfo.modeId) {
             i |= 128;
         }
-        return (Objects.equals(this.name, displayDeviceInfo.name) && Objects.equals(this.uniqueId, displayDeviceInfo.uniqueId) && this.width == displayDeviceInfo.width && this.height == displayDeviceInfo.height && this.defaultModeId == displayDeviceInfo.defaultModeId && this.userPreferredModeId == displayDeviceInfo.userPreferredModeId && Arrays.equals(this.supportedModes, displayDeviceInfo.supportedModes) && Arrays.equals(this.supportedColorModes, displayDeviceInfo.supportedColorModes) && Objects.equals(this.hdrCapabilities, displayDeviceInfo.hdrCapabilities) && this.allmSupported == displayDeviceInfo.allmSupported && this.gameContentTypeSupported == displayDeviceInfo.gameContentTypeSupported && this.densityDpi == displayDeviceInfo.densityDpi && this.xDpi == displayDeviceInfo.xDpi && this.yDpi == displayDeviceInfo.yDpi && this.flags == displayDeviceInfo.flags && Objects.equals(this.displayCutout, displayDeviceInfo.displayCutout) && this.touch == displayDeviceInfo.touch && this.type == displayDeviceInfo.type && Objects.equals(this.address, displayDeviceInfo.address) && Objects.equals(this.deviceProductInfo, displayDeviceInfo.deviceProductInfo) && this.ownerUid == displayDeviceInfo.ownerUid && Objects.equals(this.ownerPackageName, displayDeviceInfo.ownerPackageName) && Arrays.equals(this.frameRateOverrides, displayDeviceInfo.frameRateOverrides) && BrightnessSynchronizer.floatEquals(FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE) && BrightnessSynchronizer.floatEquals(this.brightnessMaximum, displayDeviceInfo.brightnessMaximum) && BrightnessSynchronizer.floatEquals(this.brightnessDefault, displayDeviceInfo.brightnessDefault) && Objects.equals(this.roundedCorners, displayDeviceInfo.roundedCorners) && this.installOrientation == displayDeviceInfo.installOrientation && Objects.equals(this.displayShape, displayDeviceInfo.displayShape)) ? i : i | 1;
+        return (Objects.equals(this.name, displayDeviceInfo.name)
+                        && Objects.equals(this.uniqueId, displayDeviceInfo.uniqueId)
+                        && this.width == displayDeviceInfo.width
+                        && this.height == displayDeviceInfo.height
+                        && this.defaultModeId == displayDeviceInfo.defaultModeId
+                        && this.userPreferredModeId == displayDeviceInfo.userPreferredModeId
+                        && Arrays.equals(this.supportedModes, displayDeviceInfo.supportedModes)
+                        && Arrays.equals(
+                                this.supportedColorModes, displayDeviceInfo.supportedColorModes)
+                        && Objects.equals(this.hdrCapabilities, displayDeviceInfo.hdrCapabilities)
+                        && this.allmSupported == displayDeviceInfo.allmSupported
+                        && this.gameContentTypeSupported
+                                == displayDeviceInfo.gameContentTypeSupported
+                        && this.densityDpi == displayDeviceInfo.densityDpi
+                        && this.xDpi == displayDeviceInfo.xDpi
+                        && this.yDpi == displayDeviceInfo.yDpi
+                        && this.flags == displayDeviceInfo.flags
+                        && Objects.equals(this.displayCutout, displayDeviceInfo.displayCutout)
+                        && this.touch == displayDeviceInfo.touch
+                        && this.type == displayDeviceInfo.type
+                        && Objects.equals(this.address, displayDeviceInfo.address)
+                        && Objects.equals(
+                                this.deviceProductInfo, displayDeviceInfo.deviceProductInfo)
+                        && this.ownerUid == displayDeviceInfo.ownerUid
+                        && Objects.equals(this.ownerPackageName, displayDeviceInfo.ownerPackageName)
+                        && Arrays.equals(
+                                this.frameRateOverrides, displayDeviceInfo.frameRateOverrides)
+                        && BrightnessSynchronizer.floatEquals(
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE)
+                        && BrightnessSynchronizer.floatEquals(
+                                this.brightnessMaximum, displayDeviceInfo.brightnessMaximum)
+                        && BrightnessSynchronizer.floatEquals(
+                                this.brightnessDefault, displayDeviceInfo.brightnessDefault)
+                        && Objects.equals(this.roundedCorners, displayDeviceInfo.roundedCorners)
+                        && this.installOrientation == displayDeviceInfo.installOrientation
+                        && Objects.equals(this.displayShape, displayDeviceInfo.displayShape))
+                ? i
+                : i | 1;
     }
 
     public final boolean equals(Object obj) {
         DisplayDeviceInfo displayDeviceInfo;
-        return (obj instanceof DisplayDeviceInfo) && (displayDeviceInfo = (DisplayDeviceInfo) obj) != null && diff(displayDeviceInfo) == 0;
+        return (obj instanceof DisplayDeviceInfo)
+                && (displayDeviceInfo = (DisplayDeviceInfo) obj) != null
+                && diff(displayDeviceInfo) == 0;
     }
 
     public final int hashCode() {
@@ -132,7 +178,12 @@ public final class DisplayDeviceInfo {
         }
         sb.append(", touch ");
         int i = this.touch;
-        sb.append(i != 0 ? i != 1 ? i != 2 ? i != 3 ? Integer.toString(i) : "VIRTUAL" : "EXTERNAL" : "INTERNAL" : "NONE");
+        sb.append(
+                i != 0
+                        ? i != 1
+                                ? i != 2 ? i != 3 ? Integer.toString(i) : "VIRTUAL" : "EXTERNAL"
+                                : "INTERNAL"
+                        : "NONE");
         sb.append(", rotation ");
         sb.append(this.rotation);
         sb.append(", type ");

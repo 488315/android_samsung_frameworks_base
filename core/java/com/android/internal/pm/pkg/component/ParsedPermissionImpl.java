@@ -4,13 +4,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import com.android.internal.util.Parcelling;
+
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
 
 /* loaded from: classes5.dex */
-public class ParsedPermissionImpl extends ParsedComponentImpl implements ParsedPermission, Parcelable {
+public class ParsedPermissionImpl extends ParsedComponentImpl
+        implements ParsedPermission, Parcelable {
     private String backgroundPermission;
     private String group;
     private Set<String> knownCerts;
@@ -18,23 +21,27 @@ public class ParsedPermissionImpl extends ParsedComponentImpl implements ParsedP
     private int protectionLevel;
     private int requestRes;
     private boolean tree;
-    private static final Parcelling.BuiltIn.ForStringSet sForStringSet = (Parcelling.BuiltIn.ForStringSet) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
-    public static final Parcelable.Creator<ParsedPermissionImpl> CREATOR = new Parcelable.Creator<ParsedPermissionImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedPermissionImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedPermissionImpl createFromParcel(Parcel source) {
-            return new ParsedPermissionImpl(source);
-        }
+    private static final Parcelling.BuiltIn.ForStringSet sForStringSet =
+            (Parcelling.BuiltIn.ForStringSet)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
+    public static final Parcelable.Creator<ParsedPermissionImpl> CREATOR =
+            new Parcelable.Creator<
+                    ParsedPermissionImpl>() { // from class:
+                                              // com.android.internal.pm.pkg.component.ParsedPermissionImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedPermissionImpl createFromParcel(Parcel source) {
+                    return new ParsedPermissionImpl(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedPermissionImpl[] newArray(int size) {
-            return new ParsedPermissionImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedPermissionImpl[] newArray(int size) {
+                    return new ParsedPermissionImpl[size];
+                }
+            };
 
-    public ParsedPermissionImpl() {
-    }
+    public ParsedPermissionImpl() {}
 
     @Override // com.android.internal.pm.pkg.component.ParsedPermission
     public ParsedPermissionGroup getParsedPermissionGroup() {
@@ -63,7 +70,11 @@ public class ParsedPermissionImpl extends ParsedComponentImpl implements ParsedP
     }
 
     public String toString() {
-        return "Permission{" + Integer.toHexString(System.identityHashCode(this)) + " " + getName() + "}";
+        return "Permission{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + getName()
+                + "}";
     }
 
     @Override // com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
@@ -90,11 +101,22 @@ public class ParsedPermissionImpl extends ParsedComponentImpl implements ParsedP
         this.requestRes = in.readInt();
         this.protectionLevel = in.readInt();
         this.tree = in.readBoolean();
-        this.parsedPermissionGroup = (ParsedPermissionGroup) in.readParcelable(ParsedPermissionGroupImpl.class.getClassLoader(), ParsedPermissionGroupImpl.class);
+        this.parsedPermissionGroup =
+                (ParsedPermissionGroup)
+                        in.readParcelable(
+                                ParsedPermissionGroupImpl.class.getClassLoader(),
+                                ParsedPermissionGroupImpl.class);
         this.knownCerts = sForStringSet.unparcel(in);
     }
 
-    public ParsedPermissionImpl(String backgroundPermission, String group, int requestRes, int protectionLevel, boolean tree, ParsedPermissionGroup parsedPermissionGroup, Set<String> knownCerts) {
+    public ParsedPermissionImpl(
+            String backgroundPermission,
+            String group,
+            int requestRes,
+            int protectionLevel,
+            boolean tree,
+            ParsedPermissionGroup parsedPermissionGroup,
+            Set<String> knownCerts) {
         this.backgroundPermission = backgroundPermission;
         this.group = group;
         this.requestRes = requestRes;
@@ -160,6 +182,5 @@ public class ParsedPermissionImpl extends ParsedComponentImpl implements ParsedP
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

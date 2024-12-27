@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+
 import com.android.internal.view.menu.ListMenuItemView;
 import com.android.internal.view.menu.MenuAdapter;
 import com.android.internal.view.menu.MenuBuilder;
@@ -85,7 +86,8 @@ public class MenuPopupWindow extends ListPopupWindow implements MenuItemHoverLis
             setNextSelectedPositionInt(-1);
         }
 
-        @Override // android.widget.ListView, android.widget.AbsListView, android.view.View, android.view.KeyEvent.Callback
+        @Override // android.widget.ListView, android.widget.AbsListView, android.view.View,
+                  // android.view.KeyEvent.Callback
         public boolean onKeyDown(int keyCode, KeyEvent event) {
             MenuAdapter menuAdapter;
             ListMenuItemView selectedItem = (ListMenuItemView) getSelectedView();
@@ -128,7 +130,10 @@ public class MenuPopupWindow extends ListPopupWindow implements MenuItemHoverLis
                     menuAdapter = (MenuAdapter) adapter;
                 }
                 MenuItem menuItem = null;
-                if (ev.getAction() != 10 && (position = pointToPosition((int) ev.getX(), (int) ev.getY())) != -1 && (itemPosition = position - headersCount) >= 0 && itemPosition < menuAdapter.getCount()) {
+                if (ev.getAction() != 10
+                        && (position = pointToPosition((int) ev.getX(), (int) ev.getY())) != -1
+                        && (itemPosition = position - headersCount) >= 0
+                        && itemPosition < menuAdapter.getCount()) {
                     menuItem = menuAdapter.getItem(itemPosition);
                 }
                 MenuItem oldMenuItem = this.mHoveredMenuItem;

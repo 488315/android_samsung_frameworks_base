@@ -5,13 +5,16 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public interface ISemAutohotspotMcf extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.mcf.autohotspot.ISemAutohotspotMcf";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.mcf.autohotspot.ISemAutohotspotMcf";
 
-    int connectToMcfMHS(String str, int i, int i2, int i3, String str2, String str3, int i4) throws RemoteException;
+    int connectToMcfMHS(String str, int i, int i2, int i3, String str2, String str3, int i4)
+            throws RemoteException;
 
     int genericCommand(String str) throws RemoteException;
 
@@ -35,7 +38,15 @@ public interface ISemAutohotspotMcf extends IInterface {
         }
 
         @Override // com.samsung.android.mcf.autohotspot.ISemAutohotspotMcf
-        public int connectToMcfMHS(String deviceId, int type, int mmhidden, int mmSecurity, String mhs_wifi_mac, String Username, int ver) throws RemoteException {
+        public int connectToMcfMHS(
+                String deviceId,
+                int type,
+                int mmhidden,
+                int mmSecurity,
+                String mhs_wifi_mac,
+                String Username,
+                int ver)
+                throws RemoteException {
             return 0;
         }
 
@@ -60,7 +71,7 @@ public interface ISemAutohotspotMcf extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemAutohotspotMcf {
+    public abstract static class Stub extends Binder implements ISemAutohotspotMcf {
         static final int TRANSACTION_connectToMcfMHS = 3;
         static final int TRANSACTION_genericCommand = 6;
         static final int TRANSACTION_getMcfConnectedStatus = 4;
@@ -113,7 +124,8 @@ public interface ISemAutohotspotMcf extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemAutohotspotMcf.DESCRIPTOR);
             }
@@ -143,7 +155,8 @@ public interface ISemAutohotspotMcf extends IInterface {
                     String _arg5 = data.readString();
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result3 = connectToMcfMHS(_arg02, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
+                    int _result3 =
+                            connectToMcfMHS(_arg02, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeInt(_result3);
                     return true;
@@ -223,7 +236,15 @@ public interface ISemAutohotspotMcf extends IInterface {
             }
 
             @Override // com.samsung.android.mcf.autohotspot.ISemAutohotspotMcf
-            public int connectToMcfMHS(String deviceId, int type, int mmhidden, int mmSecurity, String mhs_wifi_mac, String Username, int ver) throws RemoteException {
+            public int connectToMcfMHS(
+                    String deviceId,
+                    int type,
+                    int mmhidden,
+                    int mmSecurity,
+                    String mhs_wifi_mac,
+                    String Username,
+                    int ver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

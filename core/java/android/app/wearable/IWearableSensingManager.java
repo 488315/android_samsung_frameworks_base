@@ -1,7 +1,6 @@
 package android.app.wearable;
 
 import android.app.PendingIntent;
-import android.app.wearable.IWearableSensingCallback;
 import android.content.ComponentName;
 import android.os.Binder;
 import android.os.IBinder;
@@ -17,48 +16,74 @@ import android.os.SharedMemory;
 public interface IWearableSensingManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.wearable.IWearableSensingManager";
 
-    void provideConnection(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException;
+    void provideConnection(
+            ParcelFileDescriptor parcelFileDescriptor,
+            IWearableSensingCallback iWearableSensingCallback,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void provideData(PersistableBundle persistableBundle, SharedMemory sharedMemory, RemoteCallback remoteCallback) throws RemoteException;
+    void provideData(
+            PersistableBundle persistableBundle,
+            SharedMemory sharedMemory,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException;
+    void provideDataStream(
+            ParcelFileDescriptor parcelFileDescriptor,
+            IWearableSensingCallback iWearableSensingCallback,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void registerDataRequestObserver(int i, PendingIntent pendingIntent, RemoteCallback remoteCallback) throws RemoteException;
+    void registerDataRequestObserver(
+            int i, PendingIntent pendingIntent, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void startHotwordRecognition(ComponentName componentName, RemoteCallback remoteCallback) throws RemoteException;
+    void startHotwordRecognition(ComponentName componentName, RemoteCallback remoteCallback)
+            throws RemoteException;
 
     void stopHotwordRecognition(RemoteCallback remoteCallback) throws RemoteException;
 
-    void unregisterDataRequestObserver(int i, PendingIntent pendingIntent, RemoteCallback remoteCallback) throws RemoteException;
+    void unregisterDataRequestObserver(
+            int i, PendingIntent pendingIntent, RemoteCallback remoteCallback)
+            throws RemoteException;
 
     public static class Default implements IWearableSensingManager {
         @Override // android.app.wearable.IWearableSensingManager
-        public void provideConnection(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback wearableSensingCallback, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void provideConnection(
+                ParcelFileDescriptor parcelFileDescriptor,
+                IWearableSensingCallback wearableSensingCallback,
+                RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.app.wearable.IWearableSensingManager
-        public void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback wearableSensingCallback, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void provideDataStream(
+                ParcelFileDescriptor parcelFileDescriptor,
+                IWearableSensingCallback wearableSensingCallback,
+                RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.app.wearable.IWearableSensingManager
-        public void provideData(PersistableBundle data, SharedMemory sharedMemory, RemoteCallback callback) throws RemoteException {
-        }
+        public void provideData(
+                PersistableBundle data, SharedMemory sharedMemory, RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.wearable.IWearableSensingManager
-        public void registerDataRequestObserver(int dataType, PendingIntent dataRequestPendingIntent, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void registerDataRequestObserver(
+                int dataType, PendingIntent dataRequestPendingIntent, RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.app.wearable.IWearableSensingManager
-        public void unregisterDataRequestObserver(int dataType, PendingIntent dataRequestPendingIntent, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void unregisterDataRequestObserver(
+                int dataType, PendingIntent dataRequestPendingIntent, RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.app.wearable.IWearableSensingManager
-        public void startHotwordRecognition(ComponentName targetVisComponentName, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void startHotwordRecognition(
+                ComponentName targetVisComponentName, RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.app.wearable.IWearableSensingManager
-        public void stopHotwordRecognition(RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void stopHotwordRecognition(RemoteCallback statusCallback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -66,7 +91,7 @@ public interface IWearableSensingManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWearableSensingManager {
+    public abstract static class Stub extends Binder implements IWearableSensingManager {
         static final int TRANSACTION_provideConnection = 1;
         static final int TRANSACTION_provideData = 3;
         static final int TRANSACTION_provideDataStream = 2;
@@ -122,7 +147,8 @@ public interface IWearableSensingManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWearableSensingManager.DESCRIPTOR);
             }
@@ -132,54 +158,71 @@ public interface IWearableSensingManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWearableSensingCallback _arg1 = IWearableSensingCallback.Stub.asInterface(data.readStrongBinder());
-                    RemoteCallback _arg2 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    IWearableSensingCallback _arg1 =
+                            IWearableSensingCallback.Stub.asInterface(data.readStrongBinder());
+                    RemoteCallback _arg2 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     provideConnection(_arg0, _arg1, _arg2);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    ParcelFileDescriptor _arg02 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWearableSensingCallback _arg12 = IWearableSensingCallback.Stub.asInterface(data.readStrongBinder());
-                    RemoteCallback _arg22 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    ParcelFileDescriptor _arg02 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    IWearableSensingCallback _arg12 =
+                            IWearableSensingCallback.Stub.asInterface(data.readStrongBinder());
+                    RemoteCallback _arg22 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     provideDataStream(_arg02, _arg12, _arg22);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    PersistableBundle _arg03 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg03 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     SharedMemory _arg13 = (SharedMemory) data.readTypedObject(SharedMemory.CREATOR);
-                    RemoteCallback _arg23 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg23 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     provideData(_arg03, _arg13, _arg23);
                     reply.writeNoException();
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    PendingIntent _arg14 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    RemoteCallback _arg24 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    PendingIntent _arg14 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    RemoteCallback _arg24 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     registerDataRequestObserver(_arg04, _arg14, _arg24);
                     reply.writeNoException();
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    PendingIntent _arg15 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    RemoteCallback _arg25 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    PendingIntent _arg15 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    RemoteCallback _arg25 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     unregisterDataRequestObserver(_arg05, _arg15, _arg25);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    ComponentName _arg06 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    RemoteCallback _arg16 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    ComponentName _arg06 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    RemoteCallback _arg16 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     startHotwordRecognition(_arg06, _arg16);
                     reply.writeNoException();
                     return true;
                 case 7:
-                    RemoteCallback _arg07 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg07 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     stopHotwordRecognition(_arg07);
                     reply.writeNoException();
@@ -206,7 +249,11 @@ public interface IWearableSensingManager extends IInterface {
             }
 
             @Override // android.app.wearable.IWearableSensingManager
-            public void provideConnection(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback wearableSensingCallback, RemoteCallback statusCallback) throws RemoteException {
+            public void provideConnection(
+                    ParcelFileDescriptor parcelFileDescriptor,
+                    IWearableSensingCallback wearableSensingCallback,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -223,7 +270,11 @@ public interface IWearableSensingManager extends IInterface {
             }
 
             @Override // android.app.wearable.IWearableSensingManager
-            public void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback wearableSensingCallback, RemoteCallback statusCallback) throws RemoteException {
+            public void provideDataStream(
+                    ParcelFileDescriptor parcelFileDescriptor,
+                    IWearableSensingCallback wearableSensingCallback,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -240,7 +291,9 @@ public interface IWearableSensingManager extends IInterface {
             }
 
             @Override // android.app.wearable.IWearableSensingManager
-            public void provideData(PersistableBundle data, SharedMemory sharedMemory, RemoteCallback callback) throws RemoteException {
+            public void provideData(
+                    PersistableBundle data, SharedMemory sharedMemory, RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -257,7 +310,11 @@ public interface IWearableSensingManager extends IInterface {
             }
 
             @Override // android.app.wearable.IWearableSensingManager
-            public void registerDataRequestObserver(int dataType, PendingIntent dataRequestPendingIntent, RemoteCallback statusCallback) throws RemoteException {
+            public void registerDataRequestObserver(
+                    int dataType,
+                    PendingIntent dataRequestPendingIntent,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -274,7 +331,11 @@ public interface IWearableSensingManager extends IInterface {
             }
 
             @Override // android.app.wearable.IWearableSensingManager
-            public void unregisterDataRequestObserver(int dataType, PendingIntent dataRequestPendingIntent, RemoteCallback statusCallback) throws RemoteException {
+            public void unregisterDataRequestObserver(
+                    int dataType,
+                    PendingIntent dataRequestPendingIntent,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -291,7 +352,9 @@ public interface IWearableSensingManager extends IInterface {
             }
 
             @Override // android.app.wearable.IWearableSensingManager
-            public void startHotwordRecognition(ComponentName targetVisComponentName, RemoteCallback statusCallback) throws RemoteException {
+            public void startHotwordRecognition(
+                    ComponentName targetVisComponentName, RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -307,7 +370,8 @@ public interface IWearableSensingManager extends IInterface {
             }
 
             @Override // android.app.wearable.IWearableSensingManager
-            public void stopHotwordRecognition(RemoteCallback statusCallback) throws RemoteException {
+            public void stopHotwordRecognition(RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

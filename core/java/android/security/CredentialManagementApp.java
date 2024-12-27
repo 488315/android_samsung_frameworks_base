@@ -1,11 +1,13 @@
 package android.security;
 
 import android.util.Log;
-import java.io.IOException;
-import java.util.Objects;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
+
+import java.io.IOException;
+import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public class CredentialManagementApp {
@@ -14,7 +16,8 @@ public class CredentialManagementApp {
     private AppUriAuthenticationPolicy mAuthenticationPolicy;
     private final String mPackageName;
 
-    public CredentialManagementApp(String packageName, AppUriAuthenticationPolicy authenticationPolicy) {
+    public CredentialManagementApp(
+            String packageName, AppUriAuthenticationPolicy authenticationPolicy) {
         Objects.requireNonNull(packageName);
         Objects.requireNonNull(authenticationPolicy);
         this.mPackageName = packageName;

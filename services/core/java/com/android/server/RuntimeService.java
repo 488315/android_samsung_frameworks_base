@@ -3,9 +3,11 @@ package com.android.server;
 import android.content.Context;
 import android.os.Binder;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.i18n.timezone.DebugInfo;
 import com.android.i18n.timezone.I18nModuleDebug;
 import com.android.internal.util.DumpUtils;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -19,9 +21,11 @@ public final class RuntimeService extends Binder {
     }
 
     @Override // android.os.Binder
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         ProtoOutputStream protoOutputStream;
-        if (DumpUtils.checkDumpAndUsageStatsPermission(this.mContext, "RuntimeService", printWriter)) {
+        if (DumpUtils.checkDumpAndUsageStatsPermission(
+                this.mContext, "RuntimeService", printWriter)) {
             int length = strArr.length;
             boolean z = false;
             int i = 0;

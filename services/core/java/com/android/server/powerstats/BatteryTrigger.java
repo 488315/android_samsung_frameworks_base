@@ -15,21 +15,26 @@ public final class BatteryTrigger extends PowerStatsLogTrigger {
     public BatteryTrigger(Context context, PowerStatsLogger powerStatsLogger) {
         super(context, powerStatsLogger);
         this.mBatteryLevel = 0;
-        Intent registerReceiver = context.registerReceiver(new BroadcastReceiver() { // from class: com.android.server.powerstats.BatteryTrigger.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    int intExtra = intent.getIntExtra("level", 0);
-                    BatteryTrigger batteryTrigger = BatteryTrigger.this;
-                    if (intExtra < batteryTrigger.mBatteryLevel) {
-                        Message.obtain(batteryTrigger.mPowerStatsLogger, 0).sendToTarget();
-                    }
-                    BatteryTrigger.this.mBatteryLevel = intExtra;
-                }
-            }
-        }, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
+        Intent registerReceiver =
+                context.registerReceiver(
+                        new BroadcastReceiver() { // from class:
+                                                  // com.android.server.powerstats.BatteryTrigger.1
+                            @Override // android.content.BroadcastReceiver
+                            public final void onReceive(Context context2, Intent intent) {
+                                String action = intent.getAction();
+                                action.getClass();
+                                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                                    int intExtra = intent.getIntExtra("level", 0);
+                                    BatteryTrigger batteryTrigger = BatteryTrigger.this;
+                                    if (intExtra < batteryTrigger.mBatteryLevel) {
+                                        Message.obtain(batteryTrigger.mPowerStatsLogger, 0)
+                                                .sendToTarget();
+                                    }
+                                    BatteryTrigger.this.mBatteryLevel = intExtra;
+                                }
+                            }
+                        },
+                        new IntentFilter("android.intent.action.BATTERY_CHANGED"));
         if (registerReceiver != null) {
             this.mBatteryLevel = registerReceiver.getIntExtra("level", 0);
         }

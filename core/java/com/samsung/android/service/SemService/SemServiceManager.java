@@ -7,8 +7,9 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
+
 import com.android.internal.midi.MidiConstants;
-import com.samsung.android.service.SemService.ISemService;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -48,22 +49,42 @@ public final class SemServiceManager {
     private Context mContext;
     private ISemService mSemService;
     public static final String ERROR_NO_PERMISSION_STRING = null;
-    private static final char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F'};
+    private static final char[] HEX_CHARS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F'
+    };
     private static boolean isSupportSemServiceManager = true;
     private static String cosName = "JCOP7.0U";
 
     /* renamed from: -$$Nest$fgetmContext, reason: not valid java name */
-    static /* bridge */ /* synthetic */ Context m9085$$Nest$fgetmContext(SemServiceManager semServiceManager) {
+    static /* bridge */ /* synthetic */ Context m9085$$Nest$fgetmContext(
+            SemServiceManager semServiceManager) {
         return semServiceManager.mContext;
     }
 
     /* renamed from: -$$Nest$mAIDDeactivation, reason: not valid java name */
-    static /* bridge */ /* synthetic */ int m9086$$Nest$mAIDDeactivation(SemServiceManager semServiceManager, ArrayList arrayList) {
+    static /* bridge */ /* synthetic */ int m9086$$Nest$mAIDDeactivation(
+            SemServiceManager semServiceManager, ArrayList arrayList) {
         return semServiceManager.AIDDeactivation(arrayList);
     }
 
     /* renamed from: -$$Nest$mparseList, reason: not valid java name */
-    static /* bridge */ /* synthetic */ ArrayList m9087$$Nest$mparseList(SemServiceManager semServiceManager, byte[] bArr, int i) {
+    static /* bridge */ /* synthetic */ ArrayList m9087$$Nest$mparseList(
+            SemServiceManager semServiceManager, byte[] bArr, int i) {
         return semServiceManager.parseList(bArr, i);
     }
 
@@ -73,7 +94,8 @@ public final class SemServiceManager {
             isSupportSemServiceManager = false;
         }
         if (isSupportSemServiceManager) {
-            this.mSemService = ISemService.Stub.asInterface(ServiceManager.getService("SemService"));
+            this.mSemService =
+                    ISemService.Stub.asInterface(ServiceManager.getService("SemService"));
             if (this.mSemService == null) {
                 Log.w(TAG, this.mContext.getPackageName() + " connects to SemService is failed.");
                 return;
@@ -355,14 +377,16 @@ public final class SemServiceManager {
         }
     }
 
-    public int deactivateCards(int RequestType, String[] package_name, int[] package_len, int arrayLen) {
+    public int deactivateCards(
+            int RequestType, String[] package_name, int[] package_len, int arrayLen) {
         Log.i(TAG, "deactivateCards is called.");
         if (!isSupportSemServiceManager) {
             Log.i(TAG, "SemService is not supported");
             return -92;
         }
         try {
-            return this.mSemService.deactivate_Cards(RequestType, package_name, package_len, arrayLen);
+            return this.mSemService.deactivate_Cards(
+                    RequestType, package_name, package_len, arrayLen);
         } catch (NullPointerException npe) {
             Log.e(TAG, "Failed to connect service.");
             npe.printStackTrace();
@@ -379,14 +403,16 @@ public final class SemServiceManager {
         }
     }
 
-    public int deactivateCardsAID(int RequestType, int bean, String[] package_name, int[] package_len, int arrayLen) {
+    public int deactivateCardsAID(
+            int RequestType, int bean, String[] package_name, int[] package_len, int arrayLen) {
         Log.i(TAG, "deactivateCardsAID is called.");
         if (!isSupportSemServiceManager) {
             Log.i(TAG, "SemService is not supported");
             return -92;
         }
         try {
-            return this.mSemService.deactivate_CardsAID(RequestType, bean, package_name, package_len, arrayLen);
+            return this.mSemService.deactivate_CardsAID(
+                    RequestType, bean, package_name, package_len, arrayLen);
         } catch (NoClassDefFoundError e) {
             e.printStackTrace();
             return -90;
@@ -406,7 +432,9 @@ public final class SemServiceManager {
     public int getSCRSVersion() {
         int ret;
         String factoryProp;
-        byte[] selectSCRSCmd = {0, -92, 4, 0, 9, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 1, 81, 67, 82, 83, 0};
+        byte[] selectSCRSCmd = {
+            0, -92, 4, 0, 9, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 1, 81, 67, 82, 83, 0
+        };
         byte[] getVersionCmd = {Byte.MIN_VALUE, -54, 0, -16, 0};
         String scrsVersion = null;
         boolean isOpen = false;
@@ -445,13 +473,23 @@ public final class SemServiceManager {
         byte[] baRsp = send(selectSCRSCmd);
         if (baRsp != null && baRsp.length >= 2) {
             int baRspLen = baRsp.length;
-            Log.i(TAG, "Select SW : " + byteToHex(baRsp[baRspLen - 2]) + byteToHex(baRsp[baRspLen - 1]));
+            Log.i(
+                    TAG,
+                    "Select SW : "
+                            + byteToHex(baRsp[baRspLen - 2])
+                            + byteToHex(baRsp[baRspLen - 1]));
             if (baRspLen >= 2 && baRsp[baRspLen - 2] == -112 && baRsp[baRspLen - 1] == 0) {
                 byte[] baRsp2 = send(getVersionCmd);
                 if (baRsp2 != null && baRsp2.length >= 2) {
                     int baRspLen2 = baRsp2.length;
-                    Log.i(TAG, "RSP SW : " + byteToHex(baRsp2[baRspLen2 - 2]) + byteToHex(baRsp2[baRspLen2 - 1]));
-                    if (baRspLen2 > 3 && baRsp2[baRspLen2 - 2] == -112 && baRsp2[baRspLen2 - 1] == 0) {
+                    Log.i(
+                            TAG,
+                            "RSP SW : "
+                                    + byteToHex(baRsp2[baRspLen2 - 2])
+                                    + byteToHex(baRsp2[baRspLen2 - 1]));
+                    if (baRspLen2 > 3
+                            && baRsp2[baRspLen2 - 2] == -112
+                            && baRsp2[baRspLen2 - 1] == 0) {
                         String scrsVersion2 = byteToHex(baRsp2[2]);
                         scrsVersion = scrsVersion2 + byteToHex(baRsp2[3]);
                         if (scrsVersion != null) {
@@ -483,19 +521,19 @@ public final class SemServiceManager {
     }
 
     /*  JADX ERROR: Types fix failed
-        java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
-        */
+    java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
+    */
     /* JADX WARN: Failed to apply debug info
     java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
     	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
@@ -523,7 +561,10 @@ public final class SemServiceManager {
             Method dump skipped, instructions count: 707
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.service.SemService.SemServiceManager.addSCRSList(java.lang.String, java.util.ArrayList):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.service.SemService.SemServiceManager.addSCRSList(java.lang.String,"
+                    + " java.util.ArrayList):int");
     }
 
     public int deactivateSCRSList(final String inputFlag, final ArrayList<String> inputAid) {
@@ -531,77 +572,82 @@ public final class SemServiceManager {
             Log.i(TAG, "SemService is not supported");
             return -92;
         }
-        new Thread(new Runnable() { // from class: com.samsung.android.service.SemService.SemServiceManager.1
-            /*  JADX ERROR: Types fix failed
-                java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-                	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-                	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-                	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-                	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-                	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-                	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-                	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
-                	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
-                	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
-                	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
-                	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
-                */
-            /* JADX WARN: Failed to apply debug info
-            java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-            	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-            	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-            	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-            	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-            	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-            	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-            	at jadx.core.dex.visitors.typeinference.TypeUpdate.applyWithWiderIgnoreUnknown(TypeUpdate.java:74)
-            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:137)
-            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:133)
-            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.searchAndApplyVarDebugInfo(DebugInfoApplyVisitor.java:75)
-            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.lambda$applyDebugInfo$0(DebugInfoApplyVisitor.java:68)
-            	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
-            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
-             */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c37: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:533:0x0c36 */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c43: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:529:0x0c42 */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c4f: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:531:0x0c4e */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c5b: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:525:0x0c5a */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c67: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:527:0x0c66 */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d4e: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:592:0x0d4d */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d55: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:588:0x0d54 */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d5c: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:590:0x0d5b */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d64: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:584:0x0d63 */
-            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d6c: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:586:0x0d6b */
-            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c39: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:533:0x0c36 */
-            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c45: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:529:0x0c42 */
-            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c51: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:531:0x0c4e */
-            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c5d: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:525:0x0c5a */
-            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c69: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:527:0x0c66 */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c3b: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:533:0x0c36 */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c47: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:529:0x0c42 */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c53: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:531:0x0c4e */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c5f: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:525:0x0c5a */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c6b: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:527:0x0c66 */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d50: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:592:0x0d4d */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d57: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:588:0x0d54 */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d5e: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:590:0x0d5b */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d66: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:584:0x0d63 */
-            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d6e: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:586:0x0d6b */
-            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c3d: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:533:0x0c36 */
-            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c49: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:529:0x0c42 */
-            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c55: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:531:0x0c4e */
-            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c61: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:525:0x0c5a */
-            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c6d: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:527:0x0c66 */
-            @Override // java.lang.Runnable
-            public void run() {
-                /*
-                    Method dump skipped, instructions count: 3797
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.service.SemService.SemServiceManager.AnonymousClass1.run():void");
-            }
-        }).start();
+        new Thread(
+                        new Runnable() { // from class:
+                            // com.samsung.android.service.SemService.SemServiceManager.1
+                            /*  JADX ERROR: Types fix failed
+                            java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
+                            	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
+                            	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
+                            	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
+                            	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
+                            */
+                            /* JADX WARN: Failed to apply debug info
+                            java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+                            	at jadx.core.dex.visitors.typeinference.TypeUpdate.applyWithWiderIgnoreUnknown(TypeUpdate.java:74)
+                            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:137)
+                            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:133)
+                            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.searchAndApplyVarDebugInfo(DebugInfoApplyVisitor.java:75)
+                            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.lambda$applyDebugInfo$0(DebugInfoApplyVisitor.java:68)
+                            	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+                            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.applyDebugInfo(DebugInfoApplyVisitor.java:68)
+                            	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
+                             */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c37: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:533:0x0c36 */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c43: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:529:0x0c42 */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c4f: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:531:0x0c4e */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c5b: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:525:0x0c5a */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0c67: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:527:0x0c66 */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d4e: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:592:0x0d4d */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d55: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:588:0x0d54 */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d5c: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:590:0x0d5b */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d64: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:584:0x0d63 */
+                            /* JADX WARN: Not initialized variable reg: 22, insn: 0x0d6c: MOVE (r10 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r22 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('aidListByteDataLen' int)]), block:B:586:0x0d6b */
+                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c39: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:533:0x0c36 */
+                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c45: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:529:0x0c42 */
+                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c51: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:531:0x0c4e */
+                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c5d: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:525:0x0c5a */
+                            /* JADX WARN: Not initialized variable reg: 24, insn: 0x0c69: MOVE (r14 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isOpen' boolean)]), block:B:527:0x0c66 */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c3b: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:533:0x0c36 */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c47: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:529:0x0c42 */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c53: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:531:0x0c4e */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c5f: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:525:0x0c5a */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0c6b: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:527:0x0c66 */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d50: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:592:0x0d4d */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d57: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:588:0x0d54 */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d5e: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:590:0x0d5b */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d66: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:584:0x0d63 */
+                            /* JADX WARN: Not initialized variable reg: 25, insn: 0x0d6e: MOVE (r15 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r25 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isMoreData' boolean)]), block:B:586:0x0d6b */
+                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c3d: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:533:0x0c36 */
+                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c49: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:529:0x0c42 */
+                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c55: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:531:0x0c4e */
+                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c61: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:525:0x0c5a */
+                            /* JADX WARN: Not initialized variable reg: 26, insn: 0x0c6d: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r26 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('ret' int)]), block:B:527:0x0c66 */
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                /*
+                                    Method dump skipped, instructions count: 3797
+                                    To view this dump change 'Code comments level' option to 'DEBUG'
+                                */
+                                throw new UnsupportedOperationException(
+                                        "Method not decompiled:"
+                                            + " com.samsung.android.service.SemService.SemServiceManager.AnonymousClass1.run():void");
+                            }
+                        })
+                .start();
         return 0;
     }
 
@@ -619,16 +665,24 @@ public final class SemServiceManager {
                 String appletAID = AID.get(i);
                 int tempLen = appletAID.length() / 2;
                 String aidlen = String.format("%02x", Integer.valueOf(tempLen));
-                String strDeactivationListCmd = "80F80002" + String.format("%02x", Integer.valueOf(tempLen + 1));
-                byte[] deactivationListCmd = hexToBytes(((strDeactivationListCmd + aidlen) + appletAID) + "00");
+                String strDeactivationListCmd =
+                        "80F80002" + String.format("%02x", Integer.valueOf(tempLen + 1));
+                byte[] deactivationListCmd =
+                        hexToBytes(((strDeactivationListCmd + aidlen) + appletAID) + "00");
                 byte[] baRsp = send(deactivationListCmd);
                 if (baRsp == null || baRsp.length < 2) {
                     Log.e(TAG, "Aid Deactivation Error");
                     failFlag++;
                 } else {
                     int baRspLen = baRsp.length;
-                    Log.i(TAG, "DEAID SW : " + byteToHex(baRsp[baRspLen - 2]) + byteToHex(baRsp[baRspLen - 1]));
-                    if (baRspLen >= 2 && ((baRsp[baRspLen - 2] == -112 && baRsp[baRspLen - 1] == 0) || (baRsp[baRspLen - 2] == 99 && baRsp[baRspLen - 1] == 8))) {
+                    Log.i(
+                            TAG,
+                            "DEAID SW : "
+                                    + byteToHex(baRsp[baRspLen - 2])
+                                    + byteToHex(baRsp[baRspLen - 1]));
+                    if (baRspLen >= 2
+                            && ((baRsp[baRspLen - 2] == -112 && baRsp[baRspLen - 1] == 0)
+                                    || (baRsp[baRspLen - 2] == 99 && baRsp[baRspLen - 1] == 8))) {
                         Log.i(TAG, "deactivate list success");
                     } else {
                         Log.e(TAG, "deactivate list fail");
@@ -1162,14 +1216,16 @@ public final class SemServiceManager {
         }
     }
 
-    public int startRequestCredentials(byte[] appletAid, byte[] associatedAid, String serviceName, byte[] key_blob) {
+    public int startRequestCredentials(
+            byte[] appletAid, byte[] associatedAid, String serviceName, byte[] key_blob) {
         Log.i(TAG, "startRequestCredentials() is called.");
         if (!isSupportSemServiceManager) {
             Log.i(TAG, "SemService is not supported");
             return -92;
         }
         try {
-            return this.mSemService.start_request_credentials(appletAid, associatedAid, serviceName, key_blob);
+            return this.mSemService.start_request_credentials(
+                    appletAid, associatedAid, serviceName, key_blob);
         } catch (NullPointerException npe) {
             Log.e(TAG, "Failed to connect service.");
             npe.printStackTrace();

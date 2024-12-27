@@ -4,8 +4,7 @@ package android.animation;
 public class FloatArrayEvaluator implements TypeEvaluator<float[]> {
     private float[] mArray;
 
-    public FloatArrayEvaluator() {
-    }
+    public FloatArrayEvaluator() {}
 
     public FloatArrayEvaluator(float[] reuseArray) {
         this.mArray = reuseArray;

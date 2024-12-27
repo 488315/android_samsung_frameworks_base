@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioHalVolumeCurve implements Parcelable {
-    public static final Parcelable.Creator<AudioHalVolumeCurve> CREATOR = new Parcelable.Creator<AudioHalVolumeCurve>() { // from class: android.media.audio.common.AudioHalVolumeCurve.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalVolumeCurve createFromParcel(Parcel _aidl_source) {
-            AudioHalVolumeCurve _aidl_out = new AudioHalVolumeCurve();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioHalVolumeCurve> CREATOR =
+            new Parcelable.Creator<AudioHalVolumeCurve>() { // from class:
+                // android.media.audio.common.AudioHalVolumeCurve.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalVolumeCurve createFromParcel(Parcel _aidl_source) {
+                    AudioHalVolumeCurve _aidl_out = new AudioHalVolumeCurve();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalVolumeCurve[] newArray(int _aidl_size) {
-            return new AudioHalVolumeCurve[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalVolumeCurve[] newArray(int _aidl_size) {
+                    return new AudioHalVolumeCurve[_aidl_size];
+                }
+            };
     public CurvePoint[] curvePoints;
     public byte deviceCategory = 1;
 
@@ -103,7 +106,10 @@ public class AudioHalVolumeCurve implements Parcelable {
             return false;
         }
         AudioHalVolumeCurve that = (AudioHalVolumeCurve) other;
-        if (Objects.deepEquals(java.lang.Byte.valueOf(this.deviceCategory), java.lang.Byte.valueOf(that.deviceCategory)) && Objects.deepEquals(this.curvePoints, that.curvePoints)) {
+        if (Objects.deepEquals(
+                        java.lang.Byte.valueOf(this.deviceCategory),
+                        java.lang.Byte.valueOf(that.deviceCategory))
+                && Objects.deepEquals(this.curvePoints, that.curvePoints)) {
             return true;
         }
         return false;
@@ -111,7 +117,9 @@ public class AudioHalVolumeCurve implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(java.lang.Byte.valueOf(this.deviceCategory), this.curvePoints).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(java.lang.Byte.valueOf(this.deviceCategory), this.curvePoints)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable
@@ -138,21 +146,23 @@ public class AudioHalVolumeCurve implements Parcelable {
     }
 
     public static class CurvePoint implements Parcelable {
-        public static final Parcelable.Creator<CurvePoint> CREATOR = new Parcelable.Creator<CurvePoint>() { // from class: android.media.audio.common.AudioHalVolumeCurve.CurvePoint.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CurvePoint createFromParcel(Parcel _aidl_source) {
-                CurvePoint _aidl_out = new CurvePoint();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<CurvePoint> CREATOR =
+                new Parcelable.Creator<CurvePoint>() { // from class:
+                    // android.media.audio.common.AudioHalVolumeCurve.CurvePoint.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CurvePoint createFromParcel(Parcel _aidl_source) {
+                        CurvePoint _aidl_out = new CurvePoint();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CurvePoint[] newArray(int _aidl_size) {
-                return new CurvePoint[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CurvePoint[] newArray(int _aidl_size) {
+                        return new CurvePoint[_aidl_size];
+                    }
+                };
         public static final byte MAX_INDEX = 100;
         public static final byte MIN_INDEX = 0;
         public byte index = 0;

@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.media.AudioFormat;
 import android.media.AudioTrack;
 import android.util.Log;
+
 import java.nio.ByteBuffer;
 
 @SystemApi
@@ -68,7 +69,8 @@ public final class AudioInjection {
         int sizeWrite;
         synchronized (this.mLock) {
             if (this.mAudioTrack != null && !this.mIsSilent) {
-                sizeWrite = this.mAudioTrack.write(audioData, offsetInBytes, sizeInBytes, writeMode);
+                sizeWrite =
+                        this.mAudioTrack.write(audioData, offsetInBytes, sizeInBytes, writeMode);
             } else {
                 sizeWrite = 0;
             }
@@ -104,7 +106,8 @@ public final class AudioInjection {
         int sizeWrite;
         synchronized (this.mLock) {
             if (this.mAudioTrack != null && !this.mIsSilent) {
-                sizeWrite = this.mAudioTrack.write(audioData, offsetInFloats, sizeInFloats, writeMode);
+                sizeWrite =
+                        this.mAudioTrack.write(audioData, offsetInFloats, sizeInFloats, writeMode);
             } else {
                 sizeWrite = 0;
             }
@@ -120,7 +123,8 @@ public final class AudioInjection {
         int sizeWrite;
         synchronized (this.mLock) {
             if (this.mAudioTrack != null && !this.mIsSilent) {
-                sizeWrite = this.mAudioTrack.write(audioData, offsetInShorts, sizeInShorts, writeMode);
+                sizeWrite =
+                        this.mAudioTrack.write(audioData, offsetInShorts, sizeInShorts, writeMode);
             } else {
                 sizeWrite = 0;
             }

@@ -4,24 +4,28 @@ import android.annotation.NonNull;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class CreateCredentialResponse implements Parcelable {
-    public static final Parcelable.Creator<CreateCredentialResponse> CREATOR = new Parcelable.Creator<CreateCredentialResponse>() { // from class: android.credentials.CreateCredentialResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateCredentialResponse[] newArray(int size) {
-            return new CreateCredentialResponse[size];
-        }
+    public static final Parcelable.Creator<CreateCredentialResponse> CREATOR =
+            new Parcelable.Creator<CreateCredentialResponse>() { // from class:
+                // android.credentials.CreateCredentialResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateCredentialResponse[] newArray(int size) {
+                    return new CreateCredentialResponse[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateCredentialResponse createFromParcel(Parcel in) {
-            return new CreateCredentialResponse(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateCredentialResponse createFromParcel(Parcel in) {
+                    return new CreateCredentialResponse(in);
+                }
+            };
     private final Bundle mData;
 
     public Bundle getData() {
@@ -49,6 +53,7 @@ public final class CreateCredentialResponse implements Parcelable {
     private CreateCredentialResponse(Parcel in) {
         Bundle data = in.readBundle();
         this.mData = data;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mData);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mData);
     }
 }

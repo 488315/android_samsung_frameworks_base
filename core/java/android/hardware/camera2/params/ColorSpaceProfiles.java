@@ -3,6 +3,7 @@ package android.hardware.camera2.params;
 import android.graphics.ColorSpace;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +15,10 @@ public final class ColorSpaceProfiles {
 
     public ColorSpaceProfiles(long[] elements) {
         if (elements.length % 3 != 0) {
-            throw new IllegalArgumentException("Color space profile map length " + elements.length + " is not divisible by 3!");
+            throw new IllegalArgumentException(
+                    "Color space profile map length "
+                            + elements.length
+                            + " is not divisible by 3!");
         }
         for (int i = 0; i < elements.length; i += 3) {
             int colorSpace = (int) elements[i];
@@ -28,12 +32,19 @@ public final class ColorSpaceProfiles {
             }
             if (!this.mProfileMap.get(namedColorSpace).containsKey(Integer.valueOf(imageFormat))) {
                 ArraySet<Long> dynamicRangeProfiles = new ArraySet<>();
-                this.mProfileMap.get(namedColorSpace).put(Integer.valueOf(imageFormat), dynamicRangeProfiles);
+                this.mProfileMap
+                        .get(namedColorSpace)
+                        .put(Integer.valueOf(imageFormat), dynamicRangeProfiles);
             }
             if (dynamicRangeProfileBitmap != 0) {
-                for (long dynamicRangeProfile = 1; dynamicRangeProfile < 4096; dynamicRangeProfile <<= 1) {
+                for (long dynamicRangeProfile = 1;
+                        dynamicRangeProfile < 4096;
+                        dynamicRangeProfile <<= 1) {
                     if ((dynamicRangeProfileBitmap & dynamicRangeProfile) != 0) {
-                        this.mProfileMap.get(namedColorSpace).get(Integer.valueOf(imageFormat)).add(Long.valueOf(dynamicRangeProfile));
+                        this.mProfileMap
+                                .get(namedColorSpace)
+                                .get(Integer.valueOf(imageFormat))
+                                .add(Long.valueOf(dynamicRangeProfile));
                     }
                 }
             }
@@ -89,7 +100,8 @@ public final class ColorSpaceProfiles {
         return imageFormatMap.keySet();
     }
 
-    public Set<Long> getSupportedDynamicRangeProfiles(ColorSpace.Named colorSpace, int imageFormat) {
+    public Set<Long> getSupportedDynamicRangeProfiles(
+            ColorSpace.Named colorSpace, int imageFormat) {
         Set<Long> dynamicRangeProfiles;
         Map<Integer, Set<Long>> imageFormatMap = this.mProfileMap.get(colorSpace);
         if (imageFormatMap == null) {
@@ -100,7 +112,8 @@ public final class ColorSpaceProfiles {
             Iterator<Integer> it = imageFormatMap.keySet().iterator();
             while (it.hasNext()) {
                 int supportedImageFormat = it.next().intValue();
-                Set<Long> supportedDynamicRangeProfiles = imageFormatMap.get(Integer.valueOf(supportedImageFormat));
+                Set<Long> supportedDynamicRangeProfiles =
+                        imageFormatMap.get(Integer.valueOf(supportedImageFormat));
                 for (Long supportedDynamicRangeProfile : supportedDynamicRangeProfiles) {
                     dynamicRangeProfiles.add(supportedDynamicRangeProfile);
                 }
@@ -114,7 +127,8 @@ public final class ColorSpaceProfiles {
         return dynamicRangeProfiles;
     }
 
-    public Set<ColorSpace.Named> getSupportedColorSpacesForDynamicRange(int imageFormat, long dynamicRangeProfile) {
+    public Set<ColorSpace.Named> getSupportedColorSpacesForDynamicRange(
+            int imageFormat, long dynamicRangeProfile) {
         ArraySet<ColorSpace.Named> supportedColorSpaceProfiles = new ArraySet<>();
         for (ColorSpace.Named colorSpace : this.mProfileMap.keySet()) {
             Map<Integer, Set<Long>> imageFormatMap = this.mProfileMap.get(colorSpace);
@@ -122,7 +136,8 @@ public final class ColorSpaceProfiles {
                 Iterator<Integer> it = imageFormatMap.keySet().iterator();
                 while (it.hasNext()) {
                     int supportedImageFormat = it.next().intValue();
-                    Set<Long> dynamicRangeProfiles = imageFormatMap.get(Integer.valueOf(supportedImageFormat));
+                    Set<Long> dynamicRangeProfiles =
+                            imageFormatMap.get(Integer.valueOf(supportedImageFormat));
                     if (dynamicRangeProfiles.contains(Long.valueOf(dynamicRangeProfile))) {
                         supportedColorSpaceProfiles.add(colorSpace);
                     }

@@ -2,20 +2,25 @@ package com.android.server.display;
 
 import android.os.Binder;
 import android.os.RemoteException;
+
 import com.android.server.display.mode.RefreshRateController;
 import com.android.server.display.mode.RefreshRateToken;
 import com.android.server.power.PowerManagerUtil;
 import com.android.server.power.Slog;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DisplayManagerService$$ExternalSyntheticLambda8 implements Consumer {
+public final /* synthetic */ class DisplayManagerService$$ExternalSyntheticLambda8
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DisplayManagerService f$0;
 
-    public /* synthetic */ DisplayManagerService$$ExternalSyntheticLambda8(DisplayManagerService displayManagerService, int i) {
+    public /* synthetic */ DisplayManagerService$$ExternalSyntheticLambda8(
+            DisplayManagerService displayManagerService, int i) {
         this.$r8$classId = i;
         this.f$0 = displayManagerService;
     }
@@ -32,12 +37,16 @@ public final /* synthetic */ class DisplayManagerService$$ExternalSyntheticLambd
                 boolean booleanValue = ((Boolean) obj).booleanValue();
                 synchronized (displayManagerService.mSyncRoot) {
                     try {
-                        if (CoreRune.FW_VRR_REFRESH_RATE_TOKEN && displayManagerService.mBrightnessAnimStarted != booleanValue) {
-                            Slog.d("DisplayManagerService", "handleBrightnessAnimation: started=" + booleanValue);
+                        if (CoreRune.FW_VRR_REFRESH_RATE_TOKEN
+                                && displayManagerService.mBrightnessAnimStarted != booleanValue) {
+                            Slog.d(
+                                    "DisplayManagerService",
+                                    "handleBrightnessAnimation: started=" + booleanValue);
                             displayManagerService.mBrightnessAnimStarted = booleanValue;
                             if (!booleanValue) {
                                 try {
-                                    RefreshRateToken refreshRateToken = displayManagerService.mBrightnessAnimRefreshRateToken;
+                                    RefreshRateToken refreshRateToken =
+                                            displayManagerService.mBrightnessAnimRefreshRateToken;
                                     if (refreshRateToken != null) {
                                         refreshRateToken.release();
                                     }
@@ -45,13 +54,23 @@ public final /* synthetic */ class DisplayManagerService$$ExternalSyntheticLambd
                                     Slog.d("DisplayManagerService", "Exception occur : " + e);
                                 }
                             } else if (PowerManagerUtil.SEC_FEATURE_LCD_SUPPORT_PASSIVE_MODE) {
-                                displayManagerService.mBrightnessAnimRefreshRateToken = displayManagerService.mDisplayModeDirector.mRefreshRateModeManager.getController().createPassiveModeToken(new Binder(), "BrightnessAnim");
+                                displayManagerService.mBrightnessAnimRefreshRateToken =
+                                        displayManagerService
+                                                .mDisplayModeDirector
+                                                .mRefreshRateModeManager
+                                                .getController()
+                                                .createPassiveModeToken(
+                                                        new Binder(), "BrightnessAnim");
                             } else {
-                                RefreshRateController controller = displayManagerService.mDisplayModeDirector.mRefreshRateModeManager.getController();
+                                RefreshRateController controller =
+                                        displayManagerService.mDisplayModeDirector
+                                                .mRefreshRateModeManager.getController();
                                 Binder binder = new Binder();
                                 int i2 = PowerManagerUtil.BRIGHTNESS_ANIMATION_MIN_LIMIT_HZ;
                                 controller.getClass();
-                                displayManagerService.mBrightnessAnimRefreshRateToken = RefreshRateController.createRefreshRateMinLimitToken(i2, binder, "BrightnessAnim");
+                                displayManagerService.mBrightnessAnimRefreshRateToken =
+                                        RefreshRateController.createRefreshRateMinLimitToken(
+                                                i2, binder, "BrightnessAnim");
                             }
                         }
                     } catch (Throwable th) {
@@ -73,7 +92,11 @@ public final /* synthetic */ class DisplayManagerService$$ExternalSyntheticLambd
                 if (logicalDisplay2.getDisplayInfoLocked().type != 1) {
                     return;
                 }
-                displayManagerService.setBrightnessConfigurationForDisplayInternal(null, logicalDisplay2.mPrimaryDisplayDevice.mUniqueId, displayManagerService.mContext.getUserId(), displayManagerService.mContext.getPackageName());
+                displayManagerService.setBrightnessConfigurationForDisplayInternal(
+                        null,
+                        logicalDisplay2.mPrimaryDisplayDevice.mUniqueId,
+                        displayManagerService.mContext.getUserId(),
+                        displayManagerService.mContext.getPackageName());
                 return;
         }
     }

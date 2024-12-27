@@ -4,9 +4,8 @@ import android.annotation.SystemApi;
 import android.hardware.gnss.GnssSignalType;
 import android.net.Uri;
 import android.os.Bundle;
-import android.telecom.Call;
-import android.telecom.Connection;
 import android.util.ArraySet;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,84 +36,71 @@ public abstract class Conference extends Conferenceable {
     private String mTelecomCallId;
     private final Set<Listener> mListeners = new CopyOnWriteArraySet();
     private final List<Connection> mChildConnections = new CopyOnWriteArrayList();
-    private final List<Connection> mUnmodifiableChildConnections = Collections.unmodifiableList(this.mChildConnections);
+    private final List<Connection> mUnmodifiableChildConnections =
+            Collections.unmodifiableList(this.mChildConnections);
     private final List<Connection> mConferenceableConnections = new ArrayList();
-    private final List<Connection> mUnmodifiableConferenceableConnections = Collections.unmodifiableList(this.mConferenceableConnections);
+    private final List<Connection> mUnmodifiableConferenceableConnections =
+            Collections.unmodifiableList(this.mConferenceableConnections);
     private int mState = 1;
     private long mConnectTimeMillis = 0;
     private long mConnectionStartElapsedRealTime = 0;
     private final Object mExtrasLock = new Object();
     private boolean mRingbackRequested = false;
     private boolean mIsMultiparty = true;
-    private final Connection.Listener mConnectionDeathListener = new Connection.Listener() { // from class: android.telecom.Conference.1
-        @Override // android.telecom.Connection.Listener
-        public void onDestroyed(Connection c) {
-            if (Conference.this.mConferenceableConnections.remove(c)) {
-                Conference.this.fireOnConferenceableConnectionsChanged();
-            }
-        }
-    };
+    private final Connection.Listener mConnectionDeathListener =
+            new Connection.Listener() { // from class: android.telecom.Conference.1
+                @Override // android.telecom.Connection.Listener
+                public void onDestroyed(Connection c) {
+                    if (Conference.this.mConferenceableConnections.remove(c)) {
+                        Conference.this.fireOnConferenceableConnectionsChanged();
+                    }
+                }
+            };
 
-    static abstract class Listener {
-        Listener() {
-        }
+    abstract static class Listener {
+        Listener() {}
 
-        public void onStateChanged(Conference conference, int oldState, int newState) {
-        }
+        public void onStateChanged(Conference conference, int oldState, int newState) {}
 
-        public void onDisconnected(Conference conference, DisconnectCause disconnectCause) {
-        }
+        public void onDisconnected(Conference conference, DisconnectCause disconnectCause) {}
 
-        public void onConnectionAdded(Conference conference, Connection connection) {
-        }
+        public void onConnectionAdded(Conference conference, Connection connection) {}
 
-        public void onConnectionRemoved(Conference conference, Connection connection) {
-        }
+        public void onConnectionRemoved(Conference conference, Connection connection) {}
 
-        public void onConferenceableConnectionsChanged(Conference conference, List<Connection> conferenceableConnections) {
-        }
+        public void onConferenceableConnectionsChanged(
+                Conference conference, List<Connection> conferenceableConnections) {}
 
-        public void onDestroyed(Conference conference) {
-        }
+        public void onDestroyed(Conference conference) {}
 
-        public void onConnectionCapabilitiesChanged(Conference conference, int connectionCapabilities) {
-        }
+        public void onConnectionCapabilitiesChanged(
+                Conference conference, int connectionCapabilities) {}
 
-        public void onConnectionPropertiesChanged(Conference conference, int connectionProperties) {
-        }
+        public void onConnectionPropertiesChanged(
+                Conference conference, int connectionProperties) {}
 
-        public void onVideoStateChanged(Conference c, int videoState) {
-        }
+        public void onVideoStateChanged(Conference c, int videoState) {}
 
-        public void onVideoProviderChanged(Conference c, Connection.VideoProvider videoProvider) {
-        }
+        public void onVideoProviderChanged(Conference c, Connection.VideoProvider videoProvider) {}
 
-        public void onStatusHintsChanged(Conference conference, StatusHints statusHints) {
-        }
+        public void onStatusHintsChanged(Conference conference, StatusHints statusHints) {}
 
-        public void onExtrasChanged(Conference c, Bundle extras) {
-        }
+        public void onExtrasChanged(Conference c, Bundle extras) {}
 
-        public void onExtrasRemoved(Conference c, List<String> keys) {
-        }
+        public void onExtrasRemoved(Conference c, List<String> keys) {}
 
-        public void onConferenceStateChanged(Conference c, boolean isConference) {
-        }
+        public void onConferenceStateChanged(Conference c, boolean isConference) {}
 
-        public void onAddressChanged(Conference c, Uri newAddress, int presentation) {
-        }
+        public void onAddressChanged(Conference c, Uri newAddress, int presentation) {}
 
-        public void onConnectionEvent(Conference c, String event, Bundle extras) {
-        }
+        public void onConnectionEvent(Conference c, String event, Bundle extras) {}
 
-        public void onCallerDisplayNameChanged(Conference c, String callerDisplayName, int presentation) {
-        }
+        public void onCallerDisplayNameChanged(
+                Conference c, String callerDisplayName, int presentation) {}
 
-        public void onCallDirectionChanged(Conference c, int callDirection) {
-        }
+        public void onCallDirectionChanged(Conference c, int callDirection) {}
 
-        public void onRingbackRequested(Conference c, boolean ringback) {
-        }
+        public void onRingbackRequested(Conference c, boolean ringback) {}
     }
 
     public Conference(PhoneAccountHandle phoneAccount) {
@@ -177,66 +163,48 @@ public abstract class Conference extends Conferenceable {
         return 0;
     }
 
-    public void onDisconnect() {
-    }
+    public void onDisconnect() {}
 
-    public void onSeparate(Connection connection) {
-    }
+    public void onSeparate(Connection connection) {}
 
-    public void onMerge(Connection connection) {
-    }
+    public void onMerge(Connection connection) {}
 
-    public void onHold() {
-    }
+    public void onHold() {}
 
-    public void onUnhold() {
-    }
+    public void onUnhold() {}
 
-    public void onMerge() {
-    }
+    public void onMerge() {}
 
-    public void onSwap() {
-    }
+    public void onSwap() {}
 
-    public void onPlayDtmfTone(char c) {
-    }
+    public void onPlayDtmfTone(char c) {}
 
-    public void onStopDtmfTone() {
-    }
+    public void onStopDtmfTone() {}
 
     @SystemApi
     @Deprecated
-    public void onAudioStateChanged(AudioState state) {
-    }
+    public void onAudioStateChanged(AudioState state) {}
 
     @Deprecated
-    public void onCallAudioStateChanged(CallAudioState state) {
-    }
+    public void onCallAudioStateChanged(CallAudioState state) {}
 
-    public void onCallEndpointChanged(CallEndpoint callEndpoint) {
-    }
+    public void onCallEndpointChanged(CallEndpoint callEndpoint) {}
 
-    public void onAvailableCallEndpointsChanged(List<CallEndpoint> availableEndpoints) {
-    }
+    public void onAvailableCallEndpointsChanged(List<CallEndpoint> availableEndpoints) {}
 
-    public void onMuteStateChanged(boolean isMuted) {
-    }
+    public void onMuteStateChanged(boolean isMuted) {}
 
-    public void onConnectionAdded(Connection connection) {
-    }
+    public void onConnectionAdded(Connection connection) {}
 
-    public void onAddConferenceParticipants(List<Uri> participants) {
-    }
+    public void onAddConferenceParticipants(List<Uri> participants) {}
 
-    public void onAnswer(int videoState) {
-    }
+    public void onAnswer(int videoState) {}
 
     public final void onAnswer() {
         onAnswer(0);
     }
 
-    public void onReject() {
-    }
+    public void onReject() {}
 
     public final void setOnHold() {
         setState(5);
@@ -287,7 +255,9 @@ public abstract class Conference extends Conferenceable {
 
     public final boolean addConnection(Connection connection) {
         Log.d(this, "Connection=%s, connection=", connection);
-        if (connection != null && !this.mChildConnections.contains(connection) && connection.setConference(this)) {
+        if (connection != null
+                && !this.mChildConnections.contains(connection)
+                && connection.setConference(this)) {
             this.mChildConnections.add(connection);
             onConnectionAdded(connection);
             for (Listener l : this.mListeners) {
@@ -329,14 +299,24 @@ public abstract class Conference extends Conferenceable {
     }
 
     public final void setVideoState(Connection c, int videoState) {
-        Log.d(this, "setVideoState Conference: %s Connection: %s VideoState: %s", this, c, Integer.valueOf(videoState));
+        Log.d(
+                this,
+                "setVideoState Conference: %s Connection: %s VideoState: %s",
+                this,
+                c,
+                Integer.valueOf(videoState));
         for (Listener l : this.mListeners) {
             l.onVideoStateChanged(this, videoState);
         }
     }
 
     public final void setVideoProvider(Connection c, Connection.VideoProvider videoProvider) {
-        Log.d(this, "setVideoProvider Conference: %s Connection: %s VideoState: %s", this, c, videoProvider);
+        Log.d(
+                this,
+                "setVideoProvider Conference: %s Connection: %s VideoState: %s",
+                this,
+                c,
+                videoProvider);
         for (Listener l : this.mListeners) {
             l.onVideoProviderChanged(this, videoProvider);
         }
@@ -380,7 +360,8 @@ public abstract class Conference extends Conferenceable {
 
     @SystemApi
     public Connection getPrimaryConnection() {
-        if (this.mUnmodifiableChildConnections == null || this.mUnmodifiableChildConnections.isEmpty()) {
+        if (this.mUnmodifiableChildConnections == null
+                || this.mUnmodifiableChildConnections.isEmpty()) {
             return null;
         }
         return this.mUnmodifiableChildConnections.get(0);
@@ -455,7 +436,8 @@ public abstract class Conference extends Conferenceable {
     private static class FailureSignalingConference extends Conference {
         private boolean mImmutable;
 
-        public FailureSignalingConference(DisconnectCause disconnectCause, PhoneAccountHandle phoneAccount) {
+        public FailureSignalingConference(
+                DisconnectCause disconnectCause, PhoneAccountHandle phoneAccount) {
             super(phoneAccount);
             this.mImmutable = false;
             setDisconnected(disconnectCause);
@@ -469,7 +451,8 @@ public abstract class Conference extends Conferenceable {
         }
     }
 
-    public static Conference createFailedConference(DisconnectCause disconnectCause, PhoneAccountHandle phoneAccount) {
+    public static Conference createFailedConference(
+            DisconnectCause disconnectCause, PhoneAccountHandle phoneAccount) {
         return new FailureSignalingConference(disconnectCause, phoneAccount);
     }
 
@@ -481,7 +464,16 @@ public abstract class Conference extends Conferenceable {
     }
 
     public String toString() {
-        return String.format(Locale.US, "[State: %s,Capabilites: %s, VideoState: %s, VideoProvider: %s,isRingbackRequested: %s, ThisObject %s]", Connection.stateToString(this.mState), Call.Details.capabilitiesToString(this.mConnectionCapabilities), Integer.valueOf(getVideoState()), getVideoProvider(), isRingbackRequested() ? GnssSignalType.CODE_TYPE_Y : GnssSignalType.CODE_TYPE_N, super.toString());
+        return String.format(
+                Locale.US,
+                "[State: %s,Capabilites: %s, VideoState: %s, VideoProvider: %s,isRingbackRequested:"
+                    + " %s, ThisObject %s]",
+                Connection.stateToString(this.mState),
+                Call.Details.capabilitiesToString(this.mConnectionCapabilities),
+                Integer.valueOf(getVideoState()),
+                getVideoProvider(),
+                isRingbackRequested() ? GnssSignalType.CODE_TYPE_Y : GnssSignalType.CODE_TYPE_N,
+                super.toString());
     }
 
     public final void setStatusHints(StatusHints statusHints) {
@@ -579,8 +571,7 @@ public abstract class Conference extends Conferenceable {
         return this.mExtras;
     }
 
-    public void onExtrasChanged(Bundle extras) {
-    }
+    public void onExtrasChanged(Bundle extras) {}
 
     @SystemApi
     public void setConferenceState(boolean isConference) {

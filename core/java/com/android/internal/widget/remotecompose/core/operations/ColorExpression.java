@@ -2,11 +2,13 @@ package com.android.internal.widget.remotecompose.core.operations;
 
 import android.hardware.scontext.SContextConstants;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -159,7 +161,11 @@ public class ColorExpression implements Operation, VariableSupport {
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void apply(RemoteContext context) {
         if (this.mMode == 4) {
-            context.loadColor(this.mId, (this.mAlpha << 24) | (Utils.hsvToRgb(this.mOutHue, this.mOutSat, this.mOutValue) & 16777215));
+            context.loadColor(
+                    this.mId,
+                    (this.mAlpha << 24)
+                            | (Utils.hsvToRgb(this.mOutHue, this.mOutSat, this.mOutValue)
+                                    & 16777215));
             return;
         }
         if (this.mOutTween == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
@@ -172,7 +178,8 @@ public class ColorExpression implements Operation, VariableSupport {
         if ((this.mMode & 2) == 2) {
             this.mOutColor2 = context.getColor(this.mColor2);
         }
-        context.loadColor(this.mId, Utils.interpolateColor(this.mOutColor1, this.mOutColor2, this.mOutTween));
+        context.loadColor(
+                this.mId, Utils.interpolateColor(this.mOutColor1, this.mOutColor2, this.mOutTween));
     }
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
@@ -183,16 +190,41 @@ public class ColorExpression implements Operation, VariableSupport {
 
     public String toString() {
         if (this.mMode == 4) {
-            return "ColorExpression[" + this.mId + "] = hsv (" + Utils.floatToString(this.mHue) + ", " + Utils.floatToString(this.mSat) + ", " + Utils.floatToString(this.mValue) + NavigationBarInflaterView.KEY_CODE_END;
+            return "ColorExpression["
+                    + this.mId
+                    + "] = hsv ("
+                    + Utils.floatToString(this.mHue)
+                    + ", "
+                    + Utils.floatToString(this.mSat)
+                    + ", "
+                    + Utils.floatToString(this.mValue)
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
-        String c1 = (this.mMode & 1) == 1 ? NavigationBarInflaterView.SIZE_MOD_START + this.mColor1 + NavigationBarInflaterView.SIZE_MOD_END : Utils.colorInt(this.mColor1);
-        String c2 = (this.mMode & 2) == 2 ? NavigationBarInflaterView.SIZE_MOD_START + this.mColor2 + NavigationBarInflaterView.SIZE_MOD_END : Utils.colorInt(this.mColor2);
-        return "ColorExpression[" + this.mId + "] = tween(" + c1 + ", " + c2 + ", " + Utils.floatToString(this.mTween) + NavigationBarInflaterView.KEY_CODE_END;
+        String c1 =
+                (this.mMode & 1) == 1
+                        ? NavigationBarInflaterView.SIZE_MOD_START
+                                + this.mColor1
+                                + NavigationBarInflaterView.SIZE_MOD_END
+                        : Utils.colorInt(this.mColor1);
+        String c2 =
+                (this.mMode & 2) == 2
+                        ? NavigationBarInflaterView.SIZE_MOD_START
+                                + this.mColor2
+                                + NavigationBarInflaterView.SIZE_MOD_END
+                        : Utils.colorInt(this.mColor2);
+        return "ColorExpression["
+                + this.mId
+                + "] = tween("
+                + c1
+                + ", "
+                + c2
+                + ", "
+                + Utils.floatToString(this.mTween)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {
@@ -204,7 +236,8 @@ public class ColorExpression implements Operation, VariableSupport {
             return 134;
         }
 
-        public void apply(WireBuffer buffer, int id, int mode, int color1, int color2, float tween) {
+        public void apply(
+                WireBuffer buffer, int id, int mode, int color1, int color2, float tween) {
             buffer.start(134);
             buffer.writeInt(id);
             buffer.writeInt(mode);

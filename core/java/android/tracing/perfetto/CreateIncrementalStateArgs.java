@@ -1,6 +1,5 @@
 package android.tracing.perfetto;
 
-import android.tracing.perfetto.DataSourceInstance;
 
 /* loaded from: classes4.dex */
 public class CreateIncrementalStateArgs<DataSourceInstanceType extends DataSourceInstance> {

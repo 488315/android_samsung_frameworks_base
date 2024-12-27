@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class MediaInfoParcel implements Parcelable {
-    public static final Parcelable.Creator<MediaInfoParcel> CREATOR = new Parcelable.Creator<MediaInfoParcel>() { // from class: com.samsung.android.media.MediaInfoParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaInfoParcel createFromParcel(Parcel _aidl_source) {
-            MediaInfoParcel _aidl_out = new MediaInfoParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MediaInfoParcel> CREATOR =
+            new Parcelable.Creator<
+                    MediaInfoParcel>() { // from class: com.samsung.android.media.MediaInfoParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaInfoParcel createFromParcel(Parcel _aidl_source) {
+                    MediaInfoParcel _aidl_out = new MediaInfoParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaInfoParcel[] newArray(int _aidl_size) {
-            return new MediaInfoParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaInfoParcel[] newArray(int _aidl_size) {
+                    return new MediaInfoParcel[_aidl_size];
+                }
+            };
     public AudioInfoParcel a;
     public int subType;
     public VideoInfoParcel v;

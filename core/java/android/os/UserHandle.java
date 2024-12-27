@@ -1,10 +1,10 @@
 package android.os;
 
 import android.annotation.SystemApi;
-import android.os.Parcelable;
 import android.provider.Telephony;
 import android.text.format.DateFormat;
 import android.util.SparseArray;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,25 +36,20 @@ public final class UserHandle implements Parcelable {
     public static final int USER_CURRENT_OR_SELF = -3;
     public static final int USER_NULL = -10000;
 
-    @Deprecated
-    public static final int USER_OWNER = 0;
+    @Deprecated public static final int USER_OWNER = 0;
     public static final int USER_SERIAL_SYSTEM = 0;
     public static final int USER_SYSTEM = 0;
     final int mHandle;
 
-    @SystemApi
-    public static final UserHandle ALL = new UserHandle(-1);
+    @SystemApi public static final UserHandle ALL = new UserHandle(-1);
 
-    @SystemApi
-    public static final UserHandle CURRENT = new UserHandle(-2);
+    @SystemApi public static final UserHandle CURRENT = new UserHandle(-2);
     public static final UserHandle CURRENT_OR_SELF = new UserHandle(-3);
     private static final UserHandle NULL = new UserHandle(-10000);
 
-    @Deprecated
-    public static final UserHandle OWNER = new UserHandle(0);
+    @Deprecated public static final UserHandle OWNER = new UserHandle(0);
 
-    @SystemApi
-    public static final UserHandle SYSTEM = new UserHandle(0);
+    @SystemApi public static final UserHandle SYSTEM = new UserHandle(0);
     private static final UserHandle[] CACHED_USER_HANDLES = new UserHandle[8];
     public static final SparseArray<UserHandle> sExtraUserHandleCache = new SparseArray<>(0);
 
@@ -62,19 +57,20 @@ public final class UserHandle implements Parcelable {
         for (int i = 0; i < CACHED_USER_HANDLES.length; i++) {
             CACHED_USER_HANDLES[i] = new UserHandle(i + 10);
         }
-        CREATOR = new Parcelable.Creator<UserHandle>() { // from class: android.os.UserHandle.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public UserHandle createFromParcel(Parcel in) {
-                return UserHandle.of(in.readInt());
-            }
+        CREATOR =
+                new Parcelable.Creator<UserHandle>() { // from class: android.os.UserHandle.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public UserHandle createFromParcel(Parcel in) {
+                        return UserHandle.of(in.readInt());
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public UserHandle[] newArray(int size) {
-                return new UserHandle[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public UserHandle[] newArray(int size) {
+                        return new UserHandle[size];
+                    }
+                };
         SEM_ALL = ALL;
         SEM_OWNER = OWNER;
         SEM_CURRENT = CURRENT;

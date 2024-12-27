@@ -14,12 +14,12 @@ public interface IStrongAuthTracker extends IInterface {
 
     public static class Default implements IStrongAuthTracker {
         @Override // android.app.trust.IStrongAuthTracker
-        public void onStrongAuthRequiredChanged(int strongAuthRequired, int userId) throws RemoteException {
-        }
+        public void onStrongAuthRequiredChanged(int strongAuthRequired, int userId)
+                throws RemoteException {}
 
         @Override // android.app.trust.IStrongAuthTracker
-        public void onIsNonStrongBiometricAllowedChanged(boolean allowed, int userId) throws RemoteException {
-        }
+        public void onIsNonStrongBiometricAllowedChanged(boolean allowed, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +27,7 @@ public interface IStrongAuthTracker extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStrongAuthTracker {
+    public abstract static class Stub extends Binder implements IStrongAuthTracker {
         public static final String DESCRIPTOR = "android.app.trust.IStrongAuthTracker";
         static final int TRANSACTION_onIsNonStrongBiometricAllowedChanged = 2;
         static final int TRANSACTION_onStrongAuthRequiredChanged = 1;
@@ -69,7 +69,8 @@ public interface IStrongAuthTracker extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -112,7 +113,8 @@ public interface IStrongAuthTracker extends IInterface {
             }
 
             @Override // android.app.trust.IStrongAuthTracker
-            public void onStrongAuthRequiredChanged(int strongAuthRequired, int userId) throws RemoteException {
+            public void onStrongAuthRequiredChanged(int strongAuthRequired, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -125,7 +127,8 @@ public interface IStrongAuthTracker extends IInterface {
             }
 
             @Override // android.app.trust.IStrongAuthTracker
-            public void onIsNonStrongBiometricAllowedChanged(boolean allowed, int userId) throws RemoteException {
+            public void onIsNonStrongBiometricAllowedChanged(boolean allowed, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -1,6 +1,7 @@
 package com.android.server.power.stats;
 
 import android.os.BatteryConsumer;
+
 import com.android.internal.os.PowerProfile;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,25 +18,43 @@ public final class WifiPowerCalculator extends PowerCalculator {
     public final double mWifiPowerPerPacket;
 
     public WifiPowerCalculator(PowerProfile powerProfile) {
-        this.mPowerOnPowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.on"));
-        this.mScanPowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.scan"));
-        this.mBatchScanPowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.batchedscan"));
-        UsageBasedPowerEstimator usageBasedPowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.controller.idle"));
+        this.mPowerOnPowerEstimator =
+                new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.on"));
+        this.mScanPowerEstimator =
+                new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.scan"));
+        this.mBatchScanPowerEstimator =
+                new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.batchedscan"));
+        UsageBasedPowerEstimator usageBasedPowerEstimator =
+                new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.controller.idle"));
         this.mIdlePowerEstimator = usageBasedPowerEstimator;
-        UsageBasedPowerEstimator usageBasedPowerEstimator2 = new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.controller.tx"));
+        UsageBasedPowerEstimator usageBasedPowerEstimator2 =
+                new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.controller.tx"));
         this.mTxPowerEstimator = usageBasedPowerEstimator2;
-        UsageBasedPowerEstimator usageBasedPowerEstimator3 = new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.controller.rx"));
+        UsageBasedPowerEstimator usageBasedPowerEstimator3 =
+                new UsageBasedPowerEstimator(powerProfile.getAveragePower("wifi.controller.rx"));
         this.mRxPowerEstimator = usageBasedPowerEstimator3;
-        this.mWifiPowerPerPacket = (powerProfile.getAveragePower("wifi.active") / 3600.0d) / 61.03515625d;
-        this.mHasWifiPowerController = (usageBasedPowerEstimator.mAveragePowerMahPerMs == 0.0d || usageBasedPowerEstimator2.mAveragePowerMahPerMs == 0.0d || usageBasedPowerEstimator3.mAveragePowerMahPerMs == 0.0d) ? false : true;
+        this.mWifiPowerPerPacket =
+                (powerProfile.getAveragePower("wifi.active") / 3600.0d) / 61.03515625d;
+        this.mHasWifiPowerController =
+                (usageBasedPowerEstimator.mAveragePowerMahPerMs == 0.0d
+                                || usageBasedPowerEstimator2.mAveragePowerMahPerMs == 0.0d
+                                || usageBasedPowerEstimator3.mAveragePowerMahPerMs == 0.0d)
+                        ? false
+                        : true;
     }
 
     public final double calcPowerFromControllerDataMah(long j, long j2, long j3) {
-        return (this.mIdlePowerEstimator.mAveragePowerMahPerMs * j3) + (this.mTxPowerEstimator.mAveragePowerMahPerMs * j2) + (this.mRxPowerEstimator.mAveragePowerMahPerMs * j);
+        return (this.mIdlePowerEstimator.mAveragePowerMahPerMs * j3)
+                + (this.mTxPowerEstimator.mAveragePowerMahPerMs * j2)
+                + (this.mRxPowerEstimator.mAveragePowerMahPerMs * j);
     }
 
-    public final double calcPowerWithoutControllerDataMah(long j, long j2, long j3, long j4, long j5) {
-        return (this.mBatchScanPowerEstimator.mAveragePowerMahPerMs * j5) + (this.mScanPowerEstimator.mAveragePowerMahPerMs * j4) + (this.mPowerOnPowerEstimator.mAveragePowerMahPerMs * j3) + ((j + j2) * this.mWifiPowerPerPacket);
+    public final double calcPowerWithoutControllerDataMah(
+            long j, long j2, long j3, long j4, long j5) {
+        return (this.mBatchScanPowerEstimator.mAveragePowerMahPerMs * j5)
+                + (this.mScanPowerEstimator.mAveragePowerMahPerMs * j4)
+                + (this.mPowerOnPowerEstimator.mAveragePowerMahPerMs * j3)
+                + ((j + j2) * this.mWifiPowerPerPacket);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:37:0x0188  */
@@ -50,12 +69,21 @@ public final class WifiPowerCalculator extends PowerCalculator {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void calculate(android.os.BatteryUsageStats.Builder r43, android.os.BatteryStats r44, long r45, long r47, android.os.BatteryUsageStatsQuery r49) {
+    public final void calculate(
+            android.os.BatteryUsageStats.Builder r43,
+            android.os.BatteryStats r44,
+            long r45,
+            long r47,
+            android.os.BatteryUsageStatsQuery r49) {
         /*
             Method dump skipped, instructions count: 627
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.WifiPowerCalculator.calculate(android.os.BatteryUsageStats$Builder, android.os.BatteryStats, long, long, android.os.BatteryUsageStatsQuery):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.WifiPowerCalculator.calculate(android.os.BatteryUsageStats$Builder,"
+                    + " android.os.BatteryStats, long, long,"
+                    + " android.os.BatteryUsageStatsQuery):void");
     }
 
     @Override // com.android.server.power.stats.PowerCalculator

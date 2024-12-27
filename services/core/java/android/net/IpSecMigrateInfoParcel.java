@@ -44,7 +44,15 @@ public class IpSecMigrateInfoParcel implements Parcelable {
         private int interfaceId = 0;
 
         public IpSecMigrateInfoParcel build() {
-            return new IpSecMigrateInfoParcel(this.requestId, this.selAddrFamily, this.direction, this.oldSourceAddress, this.oldDestinationAddress, this.newSourceAddress, this.newDestinationAddress, this.interfaceId);
+            return new IpSecMigrateInfoParcel(
+                    this.requestId,
+                    this.selAddrFamily,
+                    this.direction,
+                    this.oldSourceAddress,
+                    this.oldDestinationAddress,
+                    this.newSourceAddress,
+                    this.newDestinationAddress,
+                    this.interfaceId);
         }
 
         public Builder setDirection(int i) {
@@ -88,7 +96,8 @@ public class IpSecMigrateInfoParcel implements Parcelable {
         }
     }
 
-    public IpSecMigrateInfoParcel(int i, int i2, int i3, String str, String str2, String str3, String str4, int i4) {
+    public IpSecMigrateInfoParcel(
+            int i, int i2, int i3, String str, String str2, String str3, String str4, int i4) {
         this.requestId = i;
         this.selAddrFamily = i2;
         this.direction = i3;
@@ -107,7 +116,8 @@ public class IpSecMigrateInfoParcel implements Parcelable {
         try {
         } finally {
             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                BadParcelableException badParcelableException = new BadParcelableException("Overflow in the size of parcelable");
+                BadParcelableException badParcelableException =
+                        new BadParcelableException("Overflow in the size of parcelable");
             }
             parcel.setDataPosition(dataPosition + readInt);
             return builder.build();
@@ -148,33 +158,38 @@ public class IpSecMigrateInfoParcel implements Parcelable {
                         if (parcel.dataPosition() - dataPosition >= readInt) {
                             builder.build();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else {
                             builder.setOldDestinationAddress(parcel.readString());
                             if (parcel.dataPosition() - dataPosition >= readInt) {
                                 builder.build();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else {
                                 builder.setNewSourceAddress(parcel.readString());
                                 if (parcel.dataPosition() - dataPosition >= readInt) {
                                     builder.build();
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else {
                                     builder.setNewDestinationAddress(parcel.readString());
                                     if (parcel.dataPosition() - dataPosition >= readInt) {
                                         builder.build();
                                         if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else {
                                         builder.setInterfaceId(parcel.readInt());
                                         if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     }
                                 }
@@ -204,7 +219,9 @@ public class IpSecMigrateInfoParcel implements Parcelable {
         parcel.writeString(this.oldDestinationAddress);
         parcel.writeString(this.newSourceAddress);
         parcel.writeString(this.newDestinationAddress);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.interfaceId, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.interfaceId, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

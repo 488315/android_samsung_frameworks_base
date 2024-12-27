@@ -3,8 +3,10 @@ package com.android.server.wm;
 import android.graphics.Point;
 import android.view.SurfaceControl;
 import android.view.WindowInsets;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
+
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -17,7 +19,8 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda8 impl
     public final /* synthetic */ Object f$2;
     public final /* synthetic */ int f$3;
 
-    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda8(SurfaceControl.Transaction transaction, int i, int i2, boolean z) {
+    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda8(
+            SurfaceControl.Transaction transaction, int i, int i2, boolean z) {
         this.$r8$classId = 1;
         this.f$2 = transaction;
         this.f$1 = i;
@@ -59,30 +62,50 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda8 impl
                 int i4 = this.f$3;
                 boolean z2 = this.f$0;
                 WindowState windowState = (WindowState) obj;
-                if (windowState.isVisibleNow() && !windowState.mIsWallpaper && !windowState.mToken.hasFixedRotationTransform() && ((task = windowState.getTask()) == null || !task.inPinnedWindowingMode())) {
+                if (windowState.isVisibleNow()
+                        && !windowState.mIsWallpaper
+                        && !windowState.mToken.hasFixedRotationTransform()
+                        && ((task = windowState.getTask()) == null
+                                || !task.inPinnedWindowingMode())) {
                     SeamlessRotator seamlessRotator = windowState.mPendingSeamlessRotate;
                     if (seamlessRotator != null) {
                         i3 = seamlessRotator.mOldRotation;
                     }
-                    InsetsSourceProvider insetsSourceProvider = windowState.mControllableInsetProvider;
-                    if ((insetsSourceProvider == null || insetsSourceProvider.mSource.getType() != WindowInsets.Type.ime()) && (windowState.mForceSeamlesslyRotate || z2)) {
-                        InsetsSourceProvider insetsSourceProvider2 = windowState.mControllableInsetProvider;
-                        if (insetsSourceProvider2 != null && !insetsSourceProvider2.mSeamlessRotating) {
+                    InsetsSourceProvider insetsSourceProvider =
+                            windowState.mControllableInsetProvider;
+                    if ((insetsSourceProvider == null
+                                    || insetsSourceProvider.mSource.getType()
+                                            != WindowInsets.Type.ime())
+                            && (windowState.mForceSeamlesslyRotate || z2)) {
+                        InsetsSourceProvider insetsSourceProvider2 =
+                                windowState.mControllableInsetProvider;
+                        if (insetsSourceProvider2 != null
+                                && !insetsSourceProvider2.mSeamlessRotating) {
                             insetsSourceProvider2.mSeamlessRotating = true;
                             insetsSourceProvider2.mWindowContainer.cancelAnimation();
                         }
-                        windowState.mPendingSeamlessRotate = new SeamlessRotator(i3, i4, windowState.getDisplayInfo(), false);
+                        windowState.mPendingSeamlessRotate =
+                                new SeamlessRotator(i3, i4, windowState.getDisplayInfo(), false);
                         Point point = windowState.mLastSurfacePosition;
                         Point point2 = windowState.mSurfacePosition;
                         point.set(point2.x, point2.y);
                         windowState.mPendingSeamlessRotate.unrotate(transaction, windowState);
-                        windowState.getDisplayContent().mDisplayRotation.markForSeamlessRotation(windowState, true);
-                        windowState.applyWithNextDraw(0, windowState.mSeamlessRotationFinishedConsumer);
+                        windowState
+                                .getDisplayContent()
+                                .mDisplayRotation
+                                .markForSeamlessRotation(windowState, true);
+                        windowState.applyWithNextDraw(
+                                0, windowState.mSeamlessRotationFinishedConsumer);
                     }
                 }
                 if (!z2 && windowState.mHasSurface) {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ORIENTATION_enabled[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ORIENTATION, 2632363530212357762L, 0, null, String.valueOf(windowState));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_ORIENTATION,
+                                2632363530212357762L,
+                                0,
+                                null,
+                                String.valueOf(windowState));
                     }
                     windowState.setOrientationChanging(true);
                     break;

@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Base64;
 import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Externalizable;
@@ -23,19 +24,21 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class DownloadRequest implements Parcelable {
-    public static final Parcelable.Creator<DownloadRequest> CREATOR = new Parcelable.Creator<DownloadRequest>() { // from class: android.telephony.mbms.DownloadRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DownloadRequest createFromParcel(Parcel in) {
-            return new DownloadRequest(in);
-        }
+    public static final Parcelable.Creator<DownloadRequest> CREATOR =
+            new Parcelable.Creator<
+                    DownloadRequest>() { // from class: android.telephony.mbms.DownloadRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DownloadRequest createFromParcel(Parcel in) {
+                    return new DownloadRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DownloadRequest[] newArray(int size) {
-            return new DownloadRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DownloadRequest[] newArray(int size) {
+                    return new DownloadRequest[size];
+                }
+            };
     private static final int CURRENT_VERSION = 1;
     private static final String LOG_TAG = "MbmsDownloadRequest";
     public static final int MAX_APP_INTENT_SIZE = 50000;
@@ -55,8 +58,7 @@ public final class DownloadRequest implements Parcelable {
         private int subscriptionId;
         private int version;
 
-        public SerializationDataContainer() {
-        }
+        public SerializationDataContainer() {}
 
         SerializationDataContainer(DownloadRequest request) {
             this.fileServiceId = request.fileServiceId;
@@ -97,7 +99,10 @@ public final class DownloadRequest implements Parcelable {
         private int version = 1;
 
         public static Builder fromDownloadRequest(DownloadRequest other) {
-            Builder result = new Builder(other.sourceUri, other.destinationUri).setServiceId(other.fileServiceId).setSubscriptionId(other.subscriptionId);
+            Builder result =
+                    new Builder(other.sourceUri, other.destinationUri)
+                            .setServiceId(other.fileServiceId)
+                            .setSubscriptionId(other.subscriptionId);
             result.appIntent = other.serializedResultIntentForApp;
             return result;
         }
@@ -105,7 +110,8 @@ public final class DownloadRequest implements Parcelable {
         public static Builder fromSerializedRequest(byte[] data) {
             try {
                 ObjectInputStream stream = new ObjectInputStream(new ByteArrayInputStream(data));
-                SerializationDataContainer dataContainer = (SerializationDataContainer) stream.readObject();
+                SerializationDataContainer dataContainer =
+                        (SerializationDataContainer) stream.readObject();
                 Builder builder = new Builder(dataContainer.source, dataContainer.destination);
                 builder.version = dataContainer.version;
                 builder.appIntent = dataContainer.appIntent;
@@ -116,7 +122,9 @@ public final class DownloadRequest implements Parcelable {
                 Log.e(DownloadRequest.LOG_TAG, "Got IOException trying to parse opaque data");
                 throw new IllegalArgumentException(e);
             } catch (ClassNotFoundException e2) {
-                Log.e(DownloadRequest.LOG_TAG, "Got ClassNotFoundException trying to parse opaque data");
+                Log.e(
+                        DownloadRequest.LOG_TAG,
+                        "Got ClassNotFoundException trying to parse opaque data");
                 throw new IllegalArgumentException(e2);
             }
         }
@@ -154,11 +162,23 @@ public final class DownloadRequest implements Parcelable {
         }
 
         public DownloadRequest build() {
-            return new DownloadRequest(this.fileServiceId, this.source, this.destination, this.subscriptionId, this.appIntent, this.version);
+            return new DownloadRequest(
+                    this.fileServiceId,
+                    this.source,
+                    this.destination,
+                    this.subscriptionId,
+                    this.appIntent,
+                    this.version);
         }
     }
 
-    private DownloadRequest(String fileServiceId, Uri source, Uri destination, int sub, String appIntent, int version) {
+    private DownloadRequest(
+            String fileServiceId,
+            Uri source,
+            Uri destination,
+            int sub,
+            String appIntent,
+            int version) {
         this.fileServiceId = fileServiceId;
         this.sourceUri = source;
         this.subscriptionId = sub;
@@ -248,7 +268,8 @@ public final class DownloadRequest implements Parcelable {
                 digest.update(this.sourceUri.toString().getBytes(StandardCharsets.UTF_8));
                 digest.update(this.destinationUri.toString().getBytes(StandardCharsets.UTF_8));
                 if (this.serializedResultIntentForApp != null) {
-                    digest.update(this.serializedResultIntentForApp.getBytes(StandardCharsets.UTF_8));
+                    digest.update(
+                            this.serializedResultIntentForApp.getBytes(StandardCharsets.UTF_8));
                 }
             }
             return Base64.encodeToString(digest.digest(), 10);
@@ -265,13 +286,25 @@ public final class DownloadRequest implements Parcelable {
             return false;
         }
         DownloadRequest request = (DownloadRequest) o;
-        if (this.subscriptionId == request.subscriptionId && this.version == request.version && Objects.equals(this.fileServiceId, request.fileServiceId) && Objects.equals(this.sourceUri, request.sourceUri) && Objects.equals(this.destinationUri, request.destinationUri) && Objects.equals(this.serializedResultIntentForApp, request.serializedResultIntentForApp)) {
+        if (this.subscriptionId == request.subscriptionId
+                && this.version == request.version
+                && Objects.equals(this.fileServiceId, request.fileServiceId)
+                && Objects.equals(this.sourceUri, request.sourceUri)
+                && Objects.equals(this.destinationUri, request.destinationUri)
+                && Objects.equals(
+                        this.serializedResultIntentForApp, request.serializedResultIntentForApp)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.fileServiceId, this.sourceUri, this.destinationUri, Integer.valueOf(this.subscriptionId), this.serializedResultIntentForApp, Integer.valueOf(this.version));
+        return Objects.hash(
+                this.fileServiceId,
+                this.sourceUri,
+                this.destinationUri,
+                Integer.valueOf(this.subscriptionId),
+                this.serializedResultIntentForApp,
+                Integer.valueOf(this.version));
     }
 }

@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.format.DateFormat;
 import android.widget.RemoteViews;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -19,19 +20,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class SmartspaceTarget implements Parcelable {
-    public static final Parcelable.Creator<SmartspaceTarget> CREATOR = new Parcelable.Creator<SmartspaceTarget>() { // from class: android.app.smartspace.SmartspaceTarget.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartspaceTarget createFromParcel(Parcel source) {
-            return new SmartspaceTarget(source);
-        }
+    public static final Parcelable.Creator<SmartspaceTarget> CREATOR =
+            new Parcelable.Creator<
+                    SmartspaceTarget>() { // from class: android.app.smartspace.SmartspaceTarget.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartspaceTarget createFromParcel(Parcel source) {
+                    return new SmartspaceTarget(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartspaceTarget[] newArray(int size) {
-            return new SmartspaceTarget[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartspaceTarget[] newArray(int size) {
+                    return new SmartspaceTarget[size];
+                }
+            };
     public static final int FEATURE_ALARM = 7;
     public static final int FEATURE_BEDTIME_ROUTINE = 16;
     public static final int FEATURE_BLAZE_BUILD_PROGRESS = 40;
@@ -103,12 +106,10 @@ public final class SmartspaceTarget implements Parcelable {
     private final AppWidgetProviderInfo mWidget;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FeatureType {
-    }
+    public @interface FeatureType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UiTemplateType {
-    }
+    public @interface UiTemplateType {}
 
     private SmartspaceTarget(Parcel in) {
         this.mSmartspaceTargetId = in.readString();
@@ -132,7 +133,26 @@ public final class SmartspaceTarget implements Parcelable {
         this.mRemoteViews = (RemoteViews) in.readTypedObject(RemoteViews.CREATOR);
     }
 
-    private SmartspaceTarget(String smartspaceTargetId, SmartspaceAction headerAction, SmartspaceAction baseAction, long creationTimeMillis, long expiryTimeMillis, float score, List<SmartspaceAction> actionChips, List<SmartspaceAction> iconGrid, int featureType, boolean sensitive, boolean shouldShowExpanded, String sourceNotificationKey, ComponentName componentName, UserHandle userHandle, String associatedSmartspaceTargetId, Uri sliceUri, AppWidgetProviderInfo widget, BaseTemplateData templateData, RemoteViews remoteViews) {
+    private SmartspaceTarget(
+            String smartspaceTargetId,
+            SmartspaceAction headerAction,
+            SmartspaceAction baseAction,
+            long creationTimeMillis,
+            long expiryTimeMillis,
+            float score,
+            List<SmartspaceAction> actionChips,
+            List<SmartspaceAction> iconGrid,
+            int featureType,
+            boolean sensitive,
+            boolean shouldShowExpanded,
+            String sourceNotificationKey,
+            ComponentName componentName,
+            UserHandle userHandle,
+            String associatedSmartspaceTargetId,
+            Uri sliceUri,
+            AppWidgetProviderInfo widget,
+            BaseTemplateData templateData,
+            RemoteViews remoteViews) {
         this.mSmartspaceTargetId = smartspaceTargetId;
         this.mHeaderAction = headerAction;
         this.mBaseAction = baseAction;
@@ -259,7 +279,48 @@ public final class SmartspaceTarget implements Parcelable {
     }
 
     public String toString() {
-        return "SmartspaceTarget{mSmartspaceTargetId='" + this.mSmartspaceTargetId + DateFormat.QUOTE + ", mHeaderAction=" + this.mHeaderAction + ", mBaseAction=" + this.mBaseAction + ", mCreationTimeMillis=" + this.mCreationTimeMillis + ", mExpiryTimeMillis=" + this.mExpiryTimeMillis + ", mScore=" + this.mScore + ", mActionChips=" + this.mActionChips + ", mIconGrid=" + this.mIconGrid + ", mFeatureType=" + this.mFeatureType + ", mSensitive=" + this.mSensitive + ", mShouldShowExpanded=" + this.mShouldShowExpanded + ", mSourceNotificationKey='" + this.mSourceNotificationKey + DateFormat.QUOTE + ", mComponentName=" + this.mComponentName + ", mUserHandle=" + this.mUserHandle + ", mAssociatedSmartspaceTargetId='" + this.mAssociatedSmartspaceTargetId + DateFormat.QUOTE + ", mSliceUri=" + this.mSliceUri + ", mWidget=" + this.mWidget + ", mTemplateData=" + this.mTemplateData + ", mRemoteViews=" + this.mRemoteViews + '}';
+        return "SmartspaceTarget{mSmartspaceTargetId='"
+                + this.mSmartspaceTargetId
+                + DateFormat.QUOTE
+                + ", mHeaderAction="
+                + this.mHeaderAction
+                + ", mBaseAction="
+                + this.mBaseAction
+                + ", mCreationTimeMillis="
+                + this.mCreationTimeMillis
+                + ", mExpiryTimeMillis="
+                + this.mExpiryTimeMillis
+                + ", mScore="
+                + this.mScore
+                + ", mActionChips="
+                + this.mActionChips
+                + ", mIconGrid="
+                + this.mIconGrid
+                + ", mFeatureType="
+                + this.mFeatureType
+                + ", mSensitive="
+                + this.mSensitive
+                + ", mShouldShowExpanded="
+                + this.mShouldShowExpanded
+                + ", mSourceNotificationKey='"
+                + this.mSourceNotificationKey
+                + DateFormat.QUOTE
+                + ", mComponentName="
+                + this.mComponentName
+                + ", mUserHandle="
+                + this.mUserHandle
+                + ", mAssociatedSmartspaceTargetId='"
+                + this.mAssociatedSmartspaceTargetId
+                + DateFormat.QUOTE
+                + ", mSliceUri="
+                + this.mSliceUri
+                + ", mWidget="
+                + this.mWidget
+                + ", mTemplateData="
+                + this.mTemplateData
+                + ", mRemoteViews="
+                + this.mRemoteViews
+                + '}';
     }
 
     public boolean equals(Object o) {
@@ -270,14 +331,52 @@ public final class SmartspaceTarget implements Parcelable {
             return false;
         }
         SmartspaceTarget that = (SmartspaceTarget) o;
-        if (this.mCreationTimeMillis == that.mCreationTimeMillis && this.mExpiryTimeMillis == that.mExpiryTimeMillis && Float.compare(that.mScore, this.mScore) == 0 && this.mFeatureType == that.mFeatureType && this.mSensitive == that.mSensitive && this.mShouldShowExpanded == that.mShouldShowExpanded && this.mSmartspaceTargetId.equals(that.mSmartspaceTargetId) && Objects.equals(this.mHeaderAction, that.mHeaderAction) && Objects.equals(this.mBaseAction, that.mBaseAction) && Objects.equals(this.mActionChips, that.mActionChips) && Objects.equals(this.mIconGrid, that.mIconGrid) && Objects.equals(this.mSourceNotificationKey, that.mSourceNotificationKey) && this.mComponentName.equals(that.mComponentName) && this.mUserHandle.equals(that.mUserHandle) && Objects.equals(this.mAssociatedSmartspaceTargetId, that.mAssociatedSmartspaceTargetId) && Objects.equals(this.mSliceUri, that.mSliceUri) && Objects.equals(this.mWidget, that.mWidget) && Objects.equals(this.mTemplateData, that.mTemplateData) && Objects.equals(this.mRemoteViews, that.mRemoteViews)) {
+        if (this.mCreationTimeMillis == that.mCreationTimeMillis
+                && this.mExpiryTimeMillis == that.mExpiryTimeMillis
+                && Float.compare(that.mScore, this.mScore) == 0
+                && this.mFeatureType == that.mFeatureType
+                && this.mSensitive == that.mSensitive
+                && this.mShouldShowExpanded == that.mShouldShowExpanded
+                && this.mSmartspaceTargetId.equals(that.mSmartspaceTargetId)
+                && Objects.equals(this.mHeaderAction, that.mHeaderAction)
+                && Objects.equals(this.mBaseAction, that.mBaseAction)
+                && Objects.equals(this.mActionChips, that.mActionChips)
+                && Objects.equals(this.mIconGrid, that.mIconGrid)
+                && Objects.equals(this.mSourceNotificationKey, that.mSourceNotificationKey)
+                && this.mComponentName.equals(that.mComponentName)
+                && this.mUserHandle.equals(that.mUserHandle)
+                && Objects.equals(
+                        this.mAssociatedSmartspaceTargetId, that.mAssociatedSmartspaceTargetId)
+                && Objects.equals(this.mSliceUri, that.mSliceUri)
+                && Objects.equals(this.mWidget, that.mWidget)
+                && Objects.equals(this.mTemplateData, that.mTemplateData)
+                && Objects.equals(this.mRemoteViews, that.mRemoteViews)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mSmartspaceTargetId, this.mHeaderAction, this.mBaseAction, Long.valueOf(this.mCreationTimeMillis), Long.valueOf(this.mExpiryTimeMillis), Float.valueOf(this.mScore), this.mActionChips, this.mIconGrid, Integer.valueOf(this.mFeatureType), Boolean.valueOf(this.mSensitive), Boolean.valueOf(this.mShouldShowExpanded), this.mSourceNotificationKey, this.mComponentName, this.mUserHandle, this.mAssociatedSmartspaceTargetId, this.mSliceUri, this.mWidget, this.mTemplateData, this.mRemoteViews);
+        return Objects.hash(
+                this.mSmartspaceTargetId,
+                this.mHeaderAction,
+                this.mBaseAction,
+                Long.valueOf(this.mCreationTimeMillis),
+                Long.valueOf(this.mExpiryTimeMillis),
+                Float.valueOf(this.mScore),
+                this.mActionChips,
+                this.mIconGrid,
+                Integer.valueOf(this.mFeatureType),
+                Boolean.valueOf(this.mSensitive),
+                Boolean.valueOf(this.mShouldShowExpanded),
+                this.mSourceNotificationKey,
+                this.mComponentName,
+                this.mUserHandle,
+                this.mAssociatedSmartspaceTargetId,
+                this.mSliceUri,
+                this.mWidget,
+                this.mTemplateData,
+                this.mRemoteViews);
     }
 
     @SystemApi
@@ -302,7 +401,8 @@ public final class SmartspaceTarget implements Parcelable {
         private List<SmartspaceAction> mActionChips = new ArrayList();
         private List<SmartspaceAction> mIconGrid = new ArrayList();
 
-        public Builder(String smartspaceTargetId, ComponentName componentName, UserHandle userHandle) {
+        public Builder(
+                String smartspaceTargetId, ComponentName componentName, UserHandle userHandle) {
             this.mSmartspaceTargetId = smartspaceTargetId;
             this.mComponentName = componentName;
             this.mUserHandle = userHandle;
@@ -375,7 +475,8 @@ public final class SmartspaceTarget implements Parcelable {
 
         public Builder setWidget(AppWidgetProviderInfo widget) {
             if (this.mRemoteViews != null) {
-                throw new IllegalStateException("Widget providers and RemoteViews cannot be used at the same time.");
+                throw new IllegalStateException(
+                        "Widget providers and RemoteViews cannot be used at the same time.");
             }
             this.mWidget = widget;
             return this;
@@ -388,17 +489,39 @@ public final class SmartspaceTarget implements Parcelable {
 
         public Builder setRemoteViews(RemoteViews remoteViews) {
             if (this.mWidget != null) {
-                throw new IllegalStateException("Widget providers and RemoteViews cannot be used at the same time.");
+                throw new IllegalStateException(
+                        "Widget providers and RemoteViews cannot be used at the same time.");
             }
             this.mRemoteViews = remoteViews;
             return this;
         }
 
         public SmartspaceTarget build() {
-            if (this.mSmartspaceTargetId == null || this.mComponentName == null || this.mUserHandle == null) {
+            if (this.mSmartspaceTargetId == null
+                    || this.mComponentName == null
+                    || this.mUserHandle == null) {
                 throw new IllegalStateException("Please assign a value to all @NonNull args.");
             }
-            return new SmartspaceTarget(this.mSmartspaceTargetId, this.mHeaderAction, this.mBaseAction, this.mCreationTimeMillis, this.mExpiryTimeMillis, this.mScore, this.mActionChips, this.mIconGrid, this.mFeatureType, this.mSensitive, this.mShouldShowExpanded, this.mSourceNotificationKey, this.mComponentName, this.mUserHandle, this.mAssociatedSmartspaceTargetId, this.mSliceUri, this.mWidget, this.mTemplateData, this.mRemoteViews);
+            return new SmartspaceTarget(
+                    this.mSmartspaceTargetId,
+                    this.mHeaderAction,
+                    this.mBaseAction,
+                    this.mCreationTimeMillis,
+                    this.mExpiryTimeMillis,
+                    this.mScore,
+                    this.mActionChips,
+                    this.mIconGrid,
+                    this.mFeatureType,
+                    this.mSensitive,
+                    this.mShouldShowExpanded,
+                    this.mSourceNotificationKey,
+                    this.mComponentName,
+                    this.mUserHandle,
+                    this.mAssociatedSmartspaceTargetId,
+                    this.mSliceUri,
+                    this.mWidget,
+                    this.mTemplateData,
+                    this.mRemoteViews);
         }
     }
 }

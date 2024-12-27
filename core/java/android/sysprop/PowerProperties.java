@@ -1,6 +1,7 @@
 package android.sysprop;
 
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class PowerProperties {
-    private PowerProperties() {
-    }
+    private PowerProperties() {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
@@ -185,7 +185,8 @@ public final class PowerProperties {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -206,7 +207,8 @@ public final class PowerProperties {
     }
 
     public static void battery_input_suspended(Boolean value) {
-        SystemProperties.set("power.battery_input.suspended", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "power.battery_input.suspended", value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> permissionless_turn_screen_on() {
@@ -215,7 +217,8 @@ public final class PowerProperties {
     }
 
     public static void permissionless_turn_screen_on(Boolean value) {
-        SystemProperties.set("debug.power.permissionless_turn_screen_on", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "debug.power.permissionless_turn_screen_on", value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> waive_target_sdk_check_for_turn_screen_on() {

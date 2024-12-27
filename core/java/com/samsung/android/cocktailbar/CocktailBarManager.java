@@ -17,24 +17,27 @@ import android.os.ServiceManager;
 import android.util.Log;
 import android.view.DragEvent;
 import android.widget.RemoteViews;
-import com.samsung.android.cocktailbar.CocktailInfo;
-import com.samsung.android.cocktailbar.ICocktailBarService;
-import com.samsung.android.cocktailbar.ICocktailBarStateCallback;
-import com.samsung.android.cocktailbar.ISystemUiVisibilityCallback;
-import com.samsung.android.cocktailbar.SemCocktailBarManager;
+
 import com.samsung.android.util.SemLog;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /* loaded from: classes5.dex */
 public class CocktailBarManager extends SemCocktailBarManager {
-    public static final String ACTION_COCKTAIL_BAR_COCKTAIL_UNINSTALLED = "com.samsung.android.app.cocktailbarservice.action.COCKTAIL_BAR_COCKTAIL_UNINSTALLED";
-    public static final String ACTION_COCKTAIL_DISABLED = "com.samsung.android.cocktail.action.COCKTAIL_DISABLED";
-    public static final String ACTION_COCKTAIL_ENABLED = "com.samsung.android.cocktail.action.COCKTAIL_ENABLED";
-    public static final String ACTION_COCKTAIL_UPDATE = "com.samsung.android.cocktail.action.COCKTAIL_UPDATE";
-    public static final String ACTION_COCKTAIL_UPDATE_V2 = "com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE";
-    public static final String ACTION_COCKTAIL_VISIBILITY_CHANGED = "com.samsung.android.cocktail.action.COCKTAIL_VISIBILITY_CHANGED";
+    public static final String ACTION_COCKTAIL_BAR_COCKTAIL_UNINSTALLED =
+            "com.samsung.android.app.cocktailbarservice.action.COCKTAIL_BAR_COCKTAIL_UNINSTALLED";
+    public static final String ACTION_COCKTAIL_DISABLED =
+            "com.samsung.android.cocktail.action.COCKTAIL_DISABLED";
+    public static final String ACTION_COCKTAIL_ENABLED =
+            "com.samsung.android.cocktail.action.COCKTAIL_ENABLED";
+    public static final String ACTION_COCKTAIL_UPDATE =
+            "com.samsung.android.cocktail.action.COCKTAIL_UPDATE";
+    public static final String ACTION_COCKTAIL_UPDATE_V2 =
+            "com.samsung.android.cocktail.v2.action.COCKTAIL_UPDATE";
+    public static final String ACTION_COCKTAIL_VISIBILITY_CHANGED =
+            "com.samsung.android.cocktail.action.COCKTAIL_VISIBILITY_CHANGED";
     public static final int COCKTAIL_CATEGORY_CONTEXTUAL = 65536;
     public static final int COCKTAIL_CATEGORY_GLOBAL = 1;
     public static final int COCKTAIL_CATEGORY_LOCKSCREEN = 16;
@@ -50,15 +53,19 @@ public class CocktailBarManager extends SemCocktailBarManager {
     public static final String EXTRA_COCKTAIL_IDS = "cocktailIds";
     public static final String EXTRA_COCKTAIL_VISIBILITY = "cocktailVisibility";
     public static final int INVALID_COCKTAIL_ID = 0;
-    public static final String META_DATA_COCKTAIL_PROVIDER = "com.samsung.android.cocktail.provider";
-    public static final String PERMISSION_ACCESS_PANEL = "com.samsung.android.app.cocktailbarservice.permission.ACCESS_PANEL";
+    public static final String META_DATA_COCKTAIL_PROVIDER =
+            "com.samsung.android.cocktail.provider";
+    public static final String PERMISSION_ACCESS_PANEL =
+            "com.samsung.android.app.cocktailbarservice.permission.ACCESS_PANEL";
     private static final String TAG = CocktailBarManager.class.getSimpleName();
     public static final int TYPE_WAKEUP_GESTURE_PICKUP = 1;
     public static final int TYPE_WAKEUP_GESTURE_RUB = 2;
     private int mCocktailBarSize;
-    private final CopyOnWriteArrayList<CocktailBarStateListenerDelegate> mCocktailBarStateListenerDelegates;
+    private final CopyOnWriteArrayList<CocktailBarStateListenerDelegate>
+            mCocktailBarStateListenerDelegates;
     private final Object mStateListnerDelegatesLock;
-    private final CopyOnWriteArrayList<SystemUiVisibilityListenerDelegate> mSystemUiVisibilityListenerDelegates;
+    private final CopyOnWriteArrayList<SystemUiVisibilityListenerDelegate>
+            mSystemUiVisibilityListenerDelegates;
     private final Object mSystemUiVisibilityListenerDelegatesLock;
 
     public interface CocktailBarStateChangedListener {
@@ -82,18 +89,15 @@ public class CocktailBarManager extends SemCocktailBarManager {
         public static final int WINDOW_TYPE_SCOVER = 7;
         public static final int WINDOW_TYPE_STATUS_BAR = 3;
 
-        private WindowTypes() {
-        }
+        private WindowTypes() {}
     }
 
     @Deprecated
     public static class States {
 
-        @Deprecated
-        public static final int COCKTAIL_BAR_FULLSCREEN_TYPE = 2;
+        @Deprecated public static final int COCKTAIL_BAR_FULLSCREEN_TYPE = 2;
 
-        @Deprecated
-        public static final int COCKTAIL_BAR_MINIMIZE_TYPE = 1;
+        @Deprecated public static final int COCKTAIL_BAR_MINIMIZE_TYPE = 1;
         public static final int COCKTAIL_BAR_POSITION_BOTTOM = 4;
         public static final int COCKTAIL_BAR_POSITION_LEFT = 1;
         public static final int COCKTAIL_BAR_POSITION_RIGHT = 2;
@@ -105,8 +109,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
         public static final int COCKTAIL_BAR_TYPE_MINIMIZE = 1;
         public static final int COCKTAIL_BAR_UNKNOWN_TYPE = 0;
 
-        private States() {
-        }
+        private States() {}
     }
 
     public static class WakeUp {
@@ -116,8 +119,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
         public static final int REASON_BY_SCREEN_TURN_ON = 2;
         public static final int REASON_BY_WINDOW_POLICY = 1;
 
-        private WakeUp() {
-        }
+        private WakeUp() {}
     }
 
     public static CocktailBarManager getInstance(Context context) {
@@ -196,14 +198,26 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Override // com.samsung.android.cocktailbar.SemCocktailBarManager
-    public void updateCocktail(int cocktailId, int displayPolicy, int category, RemoteViews contentView, RemoteViews helpView) {
+    public void updateCocktail(
+            int cocktailId,
+            int displayPolicy,
+            int category,
+            RemoteViews contentView,
+            RemoteViews helpView) {
         if (getService() == null) {
             SemLog.w(TAG, "updateCocktail : service is not running " + cocktailId);
             return;
         }
         Configuration configuration = this.mContext.getResources().getConfiguration();
         try {
-            CocktailInfo cocktailInfo = new CocktailInfo.Builder(this.mContext).setOrientation(configuration.orientation).setDiplayPolicy(displayPolicy).setCategory(category).setContentView(contentView).setHelpView(helpView).build();
+            CocktailInfo cocktailInfo =
+                    new CocktailInfo.Builder(this.mContext)
+                            .setOrientation(configuration.orientation)
+                            .setDiplayPolicy(displayPolicy)
+                            .setCategory(category)
+                            .setContentView(contentView)
+                            .setHelpView(helpView)
+                            .build();
             this.mService.updateCocktail(this.mPackageName, cocktailInfo, cocktailId);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);
@@ -211,7 +225,13 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Override // com.samsung.android.cocktailbar.SemCocktailBarManager
-    public void updateCocktail(int cocktailId, int displayPolicy, int category, Class<? extends SemAbsCocktailLoadablePanel> panelClass, Bundle contentInfo, RemoteViews helpView) {
+    public void updateCocktail(
+            int cocktailId,
+            int displayPolicy,
+            int category,
+            Class<? extends SemAbsCocktailLoadablePanel> panelClass,
+            Bundle contentInfo,
+            RemoteViews helpView) {
         if (getService() == null) {
             SemLog.w(TAG, "updateCocktail : service is not running " + cocktailId);
             return;
@@ -219,7 +239,15 @@ public class CocktailBarManager extends SemCocktailBarManager {
         ComponentName classInfo = new ComponentName(getContext(), panelClass);
         Configuration configuration = this.mContext.getResources().getConfiguration();
         try {
-            CocktailInfo cocktailInfo = new CocktailInfo.Builder(this.mContext).setOrientation(configuration.orientation).setDiplayPolicy(displayPolicy).setCategory(category).setHelpView(helpView).setContentInfo(contentInfo).setClassloader(classInfo).build();
+            CocktailInfo cocktailInfo =
+                    new CocktailInfo.Builder(this.mContext)
+                            .setOrientation(configuration.orientation)
+                            .setDiplayPolicy(displayPolicy)
+                            .setCategory(category)
+                            .setHelpView(helpView)
+                            .setContentInfo(contentInfo)
+                            .setClassloader(classInfo)
+                            .build();
             this.mService.updateCocktail(this.mPackageName, cocktailInfo, cocktailId);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);
@@ -227,13 +255,25 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void updateCocktail(int cocktailId, int displayPolicy, int category, RemoteViews contentView, Bundle contentInfo) {
+    public void updateCocktail(
+            int cocktailId,
+            int displayPolicy,
+            int category,
+            RemoteViews contentView,
+            Bundle contentInfo) {
         if (getService() == null) {
             return;
         }
         Configuration configuration = this.mContext.getResources().getConfiguration();
         try {
-            CocktailInfo cocktailInfo = new CocktailInfo.Builder(this.mContext).setOrientation(configuration.orientation).setDiplayPolicy(displayPolicy).setCategory(category).setContentView(contentView).setContentInfo(contentInfo).build();
+            CocktailInfo cocktailInfo =
+                    new CocktailInfo.Builder(this.mContext)
+                            .setOrientation(configuration.orientation)
+                            .setDiplayPolicy(displayPolicy)
+                            .setCategory(category)
+                            .setContentView(contentView)
+                            .setContentInfo(contentInfo)
+                            .build();
             this.mService.updateCocktail(this.mPackageName, cocktailInfo, cocktailId);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);
@@ -241,13 +281,27 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void updateCocktail(int cocktailId, int displayPolicy, int category, RemoteViews contentView, RemoteViews helpView, Bundle contentInfo) {
+    public void updateCocktail(
+            int cocktailId,
+            int displayPolicy,
+            int category,
+            RemoteViews contentView,
+            RemoteViews helpView,
+            Bundle contentInfo) {
         if (getService() == null) {
             return;
         }
         Configuration configuration = this.mContext.getResources().getConfiguration();
         try {
-            CocktailInfo cocktailInfo = new CocktailInfo.Builder(this.mContext).setOrientation(configuration.orientation).setDiplayPolicy(displayPolicy).setCategory(category).setContentView(contentView).setHelpView(helpView).setContentInfo(contentInfo).build();
+            CocktailInfo cocktailInfo =
+                    new CocktailInfo.Builder(this.mContext)
+                            .setOrientation(configuration.orientation)
+                            .setDiplayPolicy(displayPolicy)
+                            .setCategory(category)
+                            .setContentView(contentView)
+                            .setHelpView(helpView)
+                            .setContentInfo(contentInfo)
+                            .build();
             this.mService.updateCocktail(this.mPackageName, cocktailInfo, cocktailId);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);
@@ -255,13 +309,29 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void updateCocktail(int cocktailId, int displayPolicy, int category, RemoteViews contentView, RemoteViews helpView, Bundle contentInfo, ComponentName classInfo) {
+    public void updateCocktail(
+            int cocktailId,
+            int displayPolicy,
+            int category,
+            RemoteViews contentView,
+            RemoteViews helpView,
+            Bundle contentInfo,
+            ComponentName classInfo) {
         if (getService() == null) {
             return;
         }
         Configuration configuration = this.mContext.getResources().getConfiguration();
         try {
-            CocktailInfo cocktailInfo = new CocktailInfo.Builder(this.mContext).setOrientation(configuration.orientation).setDiplayPolicy(displayPolicy).setCategory(category).setContentView(contentView).setHelpView(helpView).setContentInfo(contentInfo).setClassloader(classInfo).build();
+            CocktailInfo cocktailInfo =
+                    new CocktailInfo.Builder(this.mContext)
+                            .setOrientation(configuration.orientation)
+                            .setDiplayPolicy(displayPolicy)
+                            .setCategory(category)
+                            .setContentView(contentView)
+                            .setHelpView(helpView)
+                            .setContentInfo(contentInfo)
+                            .setClassloader(classInfo)
+                            .build();
             this.mService.updateCocktail(this.mPackageName, cocktailInfo, cocktailId);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);
@@ -369,7 +439,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
             return;
         }
         try {
-            this.mService.setOnPullPendingIntent(this.mPackageName, cocktailId, viewId, pendingIntent);
+            this.mService.setOnPullPendingIntent(
+                    this.mPackageName, cocktailId, viewId, pendingIntent);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);
         }
@@ -499,8 +570,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void setDisableTickerView(int state) {
-    }
+    public void setDisableTickerView(int state) {}
 
     public void notifyCocktailVisibiltyChanged(int cocktailId, int visibility) {
         if (getService() == null) {
@@ -519,20 +589,31 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void sendDragEvent(int cocktailId, DragEvent event) {
-    }
+    public void sendDragEvent(int cocktailId, DragEvent event) {}
 
     @Deprecated
     public boolean isAllowTransientBarCocktailBar() {
         return false;
     }
 
-    public boolean bindRemoteViewsService(Context context, int appWidgetId, Intent intent, IServiceConnection connection, int flags) {
+    public boolean bindRemoteViewsService(
+            Context context,
+            int appWidgetId,
+            Intent intent,
+            IServiceConnection connection,
+            int flags) {
         if (getService() == null) {
             return false;
         }
         try {
-            return this.mService.bindRemoteViewsService(context.getOpPackageName(), appWidgetId, intent, context.getIApplicationThread(), context.getActivityToken(), connection, flags);
+            return this.mService.bindRemoteViewsService(
+                    context.getOpPackageName(),
+                    appWidgetId,
+                    intent,
+                    context.getIApplicationThread(),
+                    context.getActivityToken(),
+                    connection,
+                    flags);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);
         }
@@ -578,23 +659,18 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void updateLongpressGesture(boolean bEnable) {
-    }
+    public void updateLongpressGesture(boolean bEnable) {}
 
     @Deprecated
-    public void updateSysfsDeadZone(int deadzone) {
-    }
+    public void updateSysfsDeadZone(int deadzone) {}
 
     @Deprecated
-    public void updateSysfsBarLength(int barLength) {
-    }
+    public void updateSysfsBarLength(int barLength) {}
 
     @Deprecated
-    public void updateSysfsGripDisable(boolean bDisable) {
-    }
+    public void updateSysfsGripDisable(boolean bDisable) {}
 
-    public void wakeupCocktailBar(boolean bEnable, int keyCode, int reason) {
-    }
+    public void wakeupCocktailBar(boolean bEnable, int keyCode, int reason) {}
 
     public void setCocktailBarWakeUpState(boolean enable) {
         if (getService() == null) {
@@ -629,8 +705,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void switchDefaultCocktail() {
-    }
+    public void switchDefaultCocktail() {}
 
     @Deprecated
     public void sendExtraDataToCocktailBar(Bundle extraData) {
@@ -656,12 +731,10 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void cocktailBarshutdown() {
-    }
+    public void cocktailBarshutdown() {}
 
     @Deprecated
-    public void cocktailBarreboot() {
-    }
+    public void cocktailBarreboot() {}
 
     @Deprecated
     public int getCocktailBarVisibility() {
@@ -688,12 +761,10 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void showAndLockCocktailBar() {
-    }
+    public void showAndLockCocktailBar() {}
 
     @Deprecated
-    public void unlockCocktailBar(int visibility) {
-    }
+    public void unlockCocktailBar(int visibility) {}
 
     @Deprecated
     public void activateCocktailBar() {
@@ -731,12 +802,10 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Deprecated
-    public void updateCocktailBarStateFromSystem(int windowType) {
-    }
+    public void updateCocktailBarStateFromSystem(int windowType) {}
 
     @Deprecated
-    public void setCocktailBarStatus(boolean shift, boolean transparent) {
-    }
+    public void setCocktailBarStatus(boolean shift, boolean transparent) {}
 
     public void updateCocktailBarPosition(int position) {
         if (getService() == null) {
@@ -771,7 +840,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
         synchronized (this.mStateListnerDelegatesLock) {
             CocktailBarStateListenerDelegate listenerDelegate = null;
-            Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
+            Iterator<CocktailBarStateListenerDelegate> it =
+                    this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -786,9 +856,14 @@ public class CocktailBarManager extends SemCocktailBarManager {
                 listenerDelegate = new CocktailBarStateListenerDelegate(listener, (Handler) null);
                 this.mCocktailBarStateListenerDelegates.add(listenerDelegate);
             }
-            ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+            ComponentName cm =
+                    new ComponentName(
+                            this.mContext.getPackageName(), getClass().getCanonicalName());
             try {
-                SemLog.i(TAG, "registerListener : registerCocktailBarStateListenerCallback " + this.mContext.getPackageName());
+                SemLog.i(
+                        TAG,
+                        "registerListener : registerCocktailBarStateListenerCallback "
+                                + this.mContext.getPackageName());
                 this.mService.registerCocktailBarStateListenerCallback(listenerDelegate, cm);
             } catch (RemoteException e) {
                 SemLog.e(TAG, "registerListener : RemoteException : ", e);
@@ -807,7 +882,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
         synchronized (this.mStateListnerDelegatesLock) {
             CocktailBarStateListenerDelegate listenerDelegate = null;
-            Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
+            Iterator<CocktailBarStateListenerDelegate> it =
+                    this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -823,7 +899,10 @@ public class CocktailBarManager extends SemCocktailBarManager {
                 return;
             }
             try {
-                SemLog.i(TAG, "unregisterListener : unregisterCocktailBarStateListenerCallback " + this.mContext.getPackageName());
+                SemLog.i(
+                        TAG,
+                        "unregisterListener : unregisterCocktailBarStateListenerCallback "
+                                + this.mContext.getPackageName());
                 this.mService.unregisterCocktailBarStateListenerCallback(listenerDelegate);
                 this.mCocktailBarStateListenerDelegates.remove(listenerDelegate);
                 listenerDelegate.onDestroy();
@@ -834,7 +913,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Override // com.samsung.android.cocktailbar.SemCocktailBarManager
-    public void registerStateListener(SemCocktailBarManager.CocktailBarStateChangedListener semStateChangedlistener) {
+    public void registerStateListener(
+            SemCocktailBarManager.CocktailBarStateChangedListener semStateChangedlistener) {
         if (getService() == null) {
             return;
         }
@@ -844,25 +924,39 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
         synchronized (this.mStateListnerDelegatesLock) {
             CocktailBarStateListenerDelegate listenerDelegate = null;
-            Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
+            Iterator<CocktailBarStateListenerDelegate> it =
+                    this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
                 }
                 CocktailBarStateListenerDelegate temp = it.next();
-                if (temp != null && (temp.getStateChangedListener() instanceof SemManagerStateChangedListenerWrapper) && semStateChangedlistener.equals(((SemManagerStateChangedListenerWrapper) temp.getStateChangedListener()).mSemlistener)) {
+                if (temp != null
+                        && (temp.getStateChangedListener()
+                                instanceof SemManagerStateChangedListenerWrapper)
+                        && semStateChangedlistener.equals(
+                                ((SemManagerStateChangedListenerWrapper)
+                                                temp.getStateChangedListener())
+                                        .mSemlistener)) {
                     listenerDelegate = temp;
                     break;
                 }
             }
             if (listenerDelegate == null) {
-                SemManagerStateChangedListenerWrapper stateChangedlistener = new SemManagerStateChangedListenerWrapper(semStateChangedlistener);
-                listenerDelegate = new CocktailBarStateListenerDelegate(stateChangedlistener, (Handler) null);
+                SemManagerStateChangedListenerWrapper stateChangedlistener =
+                        new SemManagerStateChangedListenerWrapper(semStateChangedlistener);
+                listenerDelegate =
+                        new CocktailBarStateListenerDelegate(stateChangedlistener, (Handler) null);
                 this.mCocktailBarStateListenerDelegates.add(listenerDelegate);
             }
-            ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+            ComponentName cm =
+                    new ComponentName(
+                            this.mContext.getPackageName(), getClass().getCanonicalName());
             try {
-                SemLog.i(TAG, "registerListener : registerCocktailBarStateListenerCallback " + this.mContext.getPackageName());
+                SemLog.i(
+                        TAG,
+                        "registerListener : registerCocktailBarStateListenerCallback "
+                                + this.mContext.getPackageName());
                 this.mService.registerCocktailBarStateListenerCallback(listenerDelegate, cm);
             } catch (RemoteException e) {
                 SemLog.e(TAG, "registerListener : RemoteException : ", e);
@@ -871,7 +965,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     @Override // com.samsung.android.cocktailbar.SemCocktailBarManager
-    public void unregisterStateListener(SemCocktailBarManager.CocktailBarStateChangedListener stateChangedlistener) {
+    public void unregisterStateListener(
+            SemCocktailBarManager.CocktailBarStateChangedListener stateChangedlistener) {
         if (getService() == null) {
             return;
         }
@@ -881,13 +976,20 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
         synchronized (this.mStateListnerDelegatesLock) {
             CocktailBarStateListenerDelegate listenerDelegate = null;
-            Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
+            Iterator<CocktailBarStateListenerDelegate> it =
+                    this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
                 }
                 CocktailBarStateListenerDelegate temp = it.next();
-                if (temp != null && (temp.getStateChangedListener() instanceof SemManagerStateChangedListenerWrapper) && stateChangedlistener.equals(((SemManagerStateChangedListenerWrapper) temp.getStateChangedListener()).mSemlistener)) {
+                if (temp != null
+                        && (temp.getStateChangedListener()
+                                instanceof SemManagerStateChangedListenerWrapper)
+                        && stateChangedlistener.equals(
+                                ((SemManagerStateChangedListenerWrapper)
+                                                temp.getStateChangedListener())
+                                        .mSemlistener)) {
                     listenerDelegate = temp;
                     break;
                 }
@@ -897,7 +999,10 @@ public class CocktailBarManager extends SemCocktailBarManager {
                 return;
             }
             try {
-                SemLog.i(TAG, "unregisterListener : unregisterCocktailBarStateListenerCallback " + this.mContext.getPackageName());
+                SemLog.i(
+                        TAG,
+                        "unregisterListener : unregisterCocktailBarStateListenerCallback "
+                                + this.mContext.getPackageName());
                 this.mService.unregisterCocktailBarStateListenerCallback(listenerDelegate);
                 this.mCocktailBarStateListenerDelegates.remove(listenerDelegate);
                 listenerDelegate.onDestroy();
@@ -917,7 +1022,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
         synchronized (this.mStateListnerDelegatesLock) {
             CocktailBarStateListenerDelegate listenerDelegate = null;
-            Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
+            Iterator<CocktailBarStateListenerDelegate> it =
+                    this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -929,12 +1035,18 @@ public class CocktailBarManager extends SemCocktailBarManager {
                 }
             }
             if (listenerDelegate == null) {
-                listenerDelegate = new CocktailBarStateListenerDelegate(stateChangedlistener, (Handler) null);
+                listenerDelegate =
+                        new CocktailBarStateListenerDelegate(stateChangedlistener, (Handler) null);
                 this.mCocktailBarStateListenerDelegates.add(listenerDelegate);
             }
-            ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+            ComponentName cm =
+                    new ComponentName(
+                            this.mContext.getPackageName(), getClass().getCanonicalName());
             try {
-                SemLog.i(TAG, "registerListener : registerCocktailBarStateListenerCallback " + this.mContext.getPackageName());
+                SemLog.i(
+                        TAG,
+                        "registerListener : registerCocktailBarStateListenerCallback "
+                                + this.mContext.getPackageName());
                 this.mService.registerCocktailBarStateListenerCallback(listenerDelegate, cm);
             } catch (RemoteException e) {
                 SemLog.e(TAG, "registerListener : RemoteException : ", e);
@@ -952,7 +1064,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
         synchronized (this.mStateListnerDelegatesLock) {
             CocktailBarStateListenerDelegate listenerDelegate = null;
-            Iterator<CocktailBarStateListenerDelegate> it = this.mCocktailBarStateListenerDelegates.iterator();
+            Iterator<CocktailBarStateListenerDelegate> it =
+                    this.mCocktailBarStateListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -968,7 +1081,10 @@ public class CocktailBarManager extends SemCocktailBarManager {
                 return;
             }
             try {
-                SemLog.i(TAG, "unregisterListener : unregisterCocktailBarStateListenerCallback " + this.mContext.getPackageName());
+                SemLog.i(
+                        TAG,
+                        "unregisterListener : unregisterCocktailBarStateListenerCallback "
+                                + this.mContext.getPackageName());
                 this.mService.unregisterCocktailBarStateListenerCallback(listenerDelegate);
                 this.mCocktailBarStateListenerDelegates.remove(listenerDelegate);
                 listenerDelegate.onDestroy();
@@ -982,54 +1098,74 @@ public class CocktailBarManager extends SemCocktailBarManager {
         private static final int MSG_LISTEN_COCKTAIL_BAR_STATE_CHANGE = 0;
         private Handler mHandler;
 
-        @Deprecated
-        private CocktailBarStateListener mListener;
+        @Deprecated private CocktailBarStateListener mListener;
         private CocktailBarStateChangedListener mStateChangedListener;
 
         @Deprecated
-        public CocktailBarStateListenerDelegate(CocktailBarStateListener listener, Handler handler) {
+        public CocktailBarStateListenerDelegate(
+                CocktailBarStateListener listener, Handler handler) {
             this.mListener = listener;
             this.mStateChangedListener = null;
-            Looper looper = handler == null ? CocktailBarManager.this.mContext.getMainLooper() : handler.getLooper();
-            this.mHandler = new Handler(looper) { // from class: com.samsung.android.cocktailbar.CocktailBarManager.CocktailBarStateListenerDelegate.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    if (CocktailBarStateListenerDelegate.this.mListener == null || msg.what != 0) {
-                        return;
-                    }
-                    CocktailBarStateInfo stateInfo = (CocktailBarStateInfo) msg.obj;
-                    if (stateInfo.changeFlag == 0) {
-                        return;
-                    }
-                    CocktailBarStateListenerDelegate.this.mListener.onCocktailBarStateChanged(stateInfo);
-                    if ((stateInfo.changeFlag & 1) != 0) {
-                        CocktailBarStateListenerDelegate.this.mListener.onCocktailBarVisibilityChanged(stateInfo.visibility);
-                    }
-                    if ((stateInfo.changeFlag & 4) != 0) {
-                        CocktailBarStateListenerDelegate.this.mListener.onCocktailBarPositionChanged(stateInfo.position);
-                    }
-                    if ((stateInfo.changeFlag & 128) != 0) {
-                        CocktailBarStateListenerDelegate.this.mListener.onCocktailBarWindowTypeChanged(stateInfo.windowType);
-                    }
-                }
-            };
+            Looper looper =
+                    handler == null
+                            ? CocktailBarManager.this.mContext.getMainLooper()
+                            : handler.getLooper();
+            this.mHandler =
+                    new Handler(
+                            looper) { // from class:
+                                      // com.samsung.android.cocktailbar.CocktailBarManager.CocktailBarStateListenerDelegate.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            if (CocktailBarStateListenerDelegate.this.mListener == null
+                                    || msg.what != 0) {
+                                return;
+                            }
+                            CocktailBarStateInfo stateInfo = (CocktailBarStateInfo) msg.obj;
+                            if (stateInfo.changeFlag == 0) {
+                                return;
+                            }
+                            CocktailBarStateListenerDelegate.this.mListener
+                                    .onCocktailBarStateChanged(stateInfo);
+                            if ((stateInfo.changeFlag & 1) != 0) {
+                                CocktailBarStateListenerDelegate.this.mListener
+                                        .onCocktailBarVisibilityChanged(stateInfo.visibility);
+                            }
+                            if ((stateInfo.changeFlag & 4) != 0) {
+                                CocktailBarStateListenerDelegate.this.mListener
+                                        .onCocktailBarPositionChanged(stateInfo.position);
+                            }
+                            if ((stateInfo.changeFlag & 128) != 0) {
+                                CocktailBarStateListenerDelegate.this.mListener
+                                        .onCocktailBarWindowTypeChanged(stateInfo.windowType);
+                            }
+                        }
+                    };
         }
 
-        public CocktailBarStateListenerDelegate(CocktailBarStateChangedListener stateChangedListener, Handler handler) {
+        public CocktailBarStateListenerDelegate(
+                CocktailBarStateChangedListener stateChangedListener, Handler handler) {
             this.mStateChangedListener = stateChangedListener;
             this.mListener = null;
-            Looper looper = handler == null ? CocktailBarManager.this.mContext.getMainLooper() : handler.getLooper();
-            this.mHandler = new Handler(looper) { // from class: com.samsung.android.cocktailbar.CocktailBarManager.CocktailBarStateListenerDelegate.2
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    if (CocktailBarStateListenerDelegate.this.mStateChangedListener != null && msg.what == 0) {
-                        CocktailBarStateInfo stateInfo = (CocktailBarStateInfo) msg.obj;
-                        if (stateInfo.changeFlag != 0) {
-                            CocktailBarStateListenerDelegate.this.mStateChangedListener.onCocktailBarStateChanged(stateInfo);
+            Looper looper =
+                    handler == null
+                            ? CocktailBarManager.this.mContext.getMainLooper()
+                            : handler.getLooper();
+            this.mHandler =
+                    new Handler(
+                            looper) { // from class:
+                                      // com.samsung.android.cocktailbar.CocktailBarManager.CocktailBarStateListenerDelegate.2
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            if (CocktailBarStateListenerDelegate.this.mStateChangedListener != null
+                                    && msg.what == 0) {
+                                CocktailBarStateInfo stateInfo = (CocktailBarStateInfo) msg.obj;
+                                if (stateInfo.changeFlag != 0) {
+                                    CocktailBarStateListenerDelegate.this.mStateChangedListener
+                                            .onCocktailBarStateChanged(stateInfo);
+                                }
+                            }
                         }
-                    }
-                }
-            };
+                    };
         }
 
         @Deprecated
@@ -1042,7 +1178,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
 
         @Override // com.samsung.android.cocktailbar.ICocktailBarStateCallback
-        public void onCocktailBarStateChanged(CocktailBarStateInfo stateInfo) throws RemoteException {
+        public void onCocktailBarStateChanged(CocktailBarStateInfo stateInfo)
+                throws RemoteException {
             Message.obtain(this.mHandler, 0, stateInfo).sendToTarget();
         }
 
@@ -1053,10 +1190,12 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
     }
 
-    public static class SemManagerStateChangedListenerWrapper implements CocktailBarStateChangedListener {
+    public static class SemManagerStateChangedListenerWrapper
+            implements CocktailBarStateChangedListener {
         public final SemCocktailBarManager.CocktailBarStateChangedListener mSemlistener;
 
-        public SemManagerStateChangedListenerWrapper(SemCocktailBarManager.CocktailBarStateChangedListener listener) {
+        public SemManagerStateChangedListenerWrapper(
+                SemCocktailBarManager.CocktailBarStateChangedListener listener) {
             this.mSemlistener = listener;
         }
 
@@ -1072,20 +1211,17 @@ public class CocktailBarManager extends SemCocktailBarManager {
 
     @Deprecated
     public static class CocktailBarStateListener {
-        public void onCocktailBarStateChanged(CocktailBarStateInfo stateInfo) {
-        }
+        public void onCocktailBarStateChanged(CocktailBarStateInfo stateInfo) {}
 
-        public void onCocktailBarVisibilityChanged(int visibility) {
-        }
+        public void onCocktailBarVisibilityChanged(int visibility) {}
 
-        public void onCocktailBarPositionChanged(int position) {
-        }
+        public void onCocktailBarPositionChanged(int position) {}
 
-        public void onCocktailBarWindowTypeChanged(int windowType) {
-        }
+        public void onCocktailBarWindowTypeChanged(int windowType) {}
     }
 
-    public void registerSystemUiVisibilityListener(SystemUiVisibilityListener systemUiVisibilitylistener) {
+    public void registerSystemUiVisibilityListener(
+            SystemUiVisibilityListener systemUiVisibilitylistener) {
         if (getService() == null) {
             return;
         }
@@ -1095,7 +1231,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
         synchronized (this.mSystemUiVisibilityListenerDelegatesLock) {
             SystemUiVisibilityListenerDelegate listenerDelegate = null;
-            Iterator<SystemUiVisibilityListenerDelegate> it = this.mSystemUiVisibilityListenerDelegates.iterator();
+            Iterator<SystemUiVisibilityListenerDelegate> it =
+                    this.mSystemUiVisibilityListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -1107,12 +1244,18 @@ public class CocktailBarManager extends SemCocktailBarManager {
                 }
             }
             if (listenerDelegate == null) {
-                listenerDelegate = new SystemUiVisibilityListenerDelegate(systemUiVisibilitylistener, null);
+                listenerDelegate =
+                        new SystemUiVisibilityListenerDelegate(systemUiVisibilitylistener, null);
                 this.mSystemUiVisibilityListenerDelegates.add(listenerDelegate);
             }
-            ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+            ComponentName cm =
+                    new ComponentName(
+                            this.mContext.getPackageName(), getClass().getCanonicalName());
             try {
-                SemLog.i(TAG, "registerListener : registerSystemUiVisibilityListenerCallback " + this.mContext.getPackageName());
+                SemLog.i(
+                        TAG,
+                        "registerListener : registerSystemUiVisibilityListenerCallback "
+                                + this.mContext.getPackageName());
                 this.mService.registerSystemUiVisibilityListenerCallback(listenerDelegate, cm);
             } catch (RemoteException e) {
                 SemLog.e(TAG, "registerListener : RemoteException : ", e);
@@ -1120,7 +1263,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
     }
 
-    public void unregisterSystemUiVisibilityListener(SystemUiVisibilityListener systemUiVisibilitylistener) {
+    public void unregisterSystemUiVisibilityListener(
+            SystemUiVisibilityListener systemUiVisibilitylistener) {
         if (getService() == null) {
             return;
         }
@@ -1130,7 +1274,8 @@ public class CocktailBarManager extends SemCocktailBarManager {
         }
         synchronized (this.mSystemUiVisibilityListenerDelegatesLock) {
             SystemUiVisibilityListenerDelegate listenerDelegate = null;
-            Iterator<SystemUiVisibilityListenerDelegate> it = this.mSystemUiVisibilityListenerDelegates.iterator();
+            Iterator<SystemUiVisibilityListenerDelegate> it =
+                    this.mSystemUiVisibilityListenerDelegates.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -1146,7 +1291,10 @@ public class CocktailBarManager extends SemCocktailBarManager {
                 return;
             }
             try {
-                SemLog.i(TAG, "unregisterListener : unregisterSystemUiVisibilityListenerCallback " + this.mContext.getPackageName());
+                SemLog.i(
+                        TAG,
+                        "unregisterListener : unregisterSystemUiVisibilityListenerCallback "
+                                + this.mContext.getPackageName());
                 this.mService.unregisterSystemUiVisibilityListenerCallback(listenerDelegate);
                 this.mSystemUiVisibilityListenerDelegates.remove(listenerDelegate);
                 listenerDelegate.onDestroy();
@@ -1161,17 +1309,26 @@ public class CocktailBarManager extends SemCocktailBarManager {
         private Handler mHandler;
         private SystemUiVisibilityListener mListener;
 
-        public SystemUiVisibilityListenerDelegate(SystemUiVisibilityListener listener, Handler handler) {
+        public SystemUiVisibilityListenerDelegate(
+                SystemUiVisibilityListener listener, Handler handler) {
             this.mListener = listener;
-            Looper looper = handler == null ? CocktailBarManager.this.mContext.getMainLooper() : handler.getLooper();
-            this.mHandler = new Handler(looper) { // from class: com.samsung.android.cocktailbar.CocktailBarManager.SystemUiVisibilityListenerDelegate.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    if (SystemUiVisibilityListenerDelegate.this.mListener != null && msg.what == 1) {
-                        SystemUiVisibilityListenerDelegate.this.mListener.onSystemUiVisibilityChanged(msg.arg1);
-                    }
-                }
-            };
+            Looper looper =
+                    handler == null
+                            ? CocktailBarManager.this.mContext.getMainLooper()
+                            : handler.getLooper();
+            this.mHandler =
+                    new Handler(
+                            looper) { // from class:
+                                      // com.samsung.android.cocktailbar.CocktailBarManager.SystemUiVisibilityListenerDelegate.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            if (SystemUiVisibilityListenerDelegate.this.mListener != null
+                                    && msg.what == 1) {
+                                SystemUiVisibilityListenerDelegate.this.mListener
+                                        .onSystemUiVisibilityChanged(msg.arg1);
+                            }
+                        }
+                    };
         }
 
         public SystemUiVisibilityListener getListener() {
@@ -1190,8 +1347,7 @@ public class CocktailBarManager extends SemCocktailBarManager {
     }
 
     public static class SystemUiVisibilityListener {
-        public void onSystemUiVisibilityChanged(int visibility) {
-        }
+        public void onSystemUiVisibilityChanged(int visibility) {}
     }
 
     @Deprecated
@@ -1221,12 +1377,10 @@ public class CocktailBarManager extends SemCocktailBarManager {
     @Deprecated
     public static class CocktailBarFeedsListener {
         @Deprecated
-        public CocktailBarFeedsListener() {
-        }
+        public CocktailBarFeedsListener() {}
 
         @Deprecated
-        public void onFeedsUpdated(int cocktailId, List<FeedsInfo> feedsInfoList) {
-        }
+        public void onFeedsUpdated(int cocktailId, List<FeedsInfo> feedsInfoList) {}
     }
 
     public int getConfigVersion() {

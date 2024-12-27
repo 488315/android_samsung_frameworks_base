@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -24,9 +25,11 @@ public class NotificationMaxHeightFrameLayout extends FrameLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public NotificationMaxHeightFrameLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NotificationMaxHeightFrameLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        this.mNotificationMaxHeight = getFontScaledHeight(this.mContext, R.dimen.notification_min_height);
+        this.mNotificationMaxHeight =
+                getFontScaledHeight(this.mContext, R.dimen.notification_min_height);
     }
 
     @Override // android.widget.FrameLayout, android.view.View
@@ -40,7 +43,11 @@ public class NotificationMaxHeightFrameLayout extends FrameLayout {
 
     private static int getFontScaledHeight(Context context, int dimenId) {
         int dimensionPixelSize = context.getResources().getDimensionPixelSize(dimenId);
-        float factor = Math.max(1.0f, context.getResources().getDisplayMetrics().scaledDensity / context.getResources().getDisplayMetrics().density);
+        float factor =
+                Math.max(
+                        1.0f,
+                        context.getResources().getDisplayMetrics().scaledDensity
+                                / context.getResources().getDisplayMetrics().density);
         return (int) (dimensionPixelSize * factor);
     }
 }

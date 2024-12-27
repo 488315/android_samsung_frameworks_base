@@ -30,8 +30,10 @@ import android.view.ViewConfiguration;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.PathInterpolator;
+
 import com.android.internal.R;
 import com.android.internal.view.FloatingActionMode;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -50,14 +52,15 @@ public class MultiSelectPopupWindow {
     private Drawable mSelectHandleLeft;
     private Drawable mSelectHandleRight;
     private SelectionController mSelectionController;
-    private final Runnable mShowFloatingToolbar = new Runnable() { // from class: android.widget.MultiSelectPopupWindow.1
-        @Override // java.lang.Runnable
-        public void run() {
-            if (MultiSelectPopupWindow.sTextActionMode != null) {
-                MultiSelectPopupWindow.sTextActionMode.hide(0L);
-            }
-        }
-    };
+    private final Runnable mShowFloatingToolbar =
+            new Runnable() { // from class: android.widget.MultiSelectPopupWindow.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    if (MultiSelectPopupWindow.sTextActionMode != null) {
+                        MultiSelectPopupWindow.sTextActionMode.hide(0L);
+                    }
+                }
+            };
 
     private interface CursorController extends ViewTreeObserver.OnTouchModeChangeListener {
         void hide();
@@ -155,13 +158,17 @@ public class MultiSelectPopupWindow {
 
         public TextActionModeCallback(boolean hasSelection) {
             if (hasSelection) {
-                SelectionController selectionController = MultiSelectPopupWindow.this.getSelectionController();
+                SelectionController selectionController =
+                        MultiSelectPopupWindow.this.getSelectionController();
                 if (selectionController != null && selectionController.mStartHandle == null) {
                     selectionController.initDrawables();
                     selectionController.initHandles();
                     selectionController.hide();
                 }
-                this.mHandleHeight = Math.max(MultiSelectPopupWindow.this.mSelectHandleLeft.getMinimumHeight(), MultiSelectPopupWindow.this.mSelectHandleRight.getMinimumHeight());
+                this.mHandleHeight =
+                        Math.max(
+                                MultiSelectPopupWindow.this.mSelectHandleLeft.getMinimumHeight(),
+                                MultiSelectPopupWindow.this.mSelectHandleRight.getMinimumHeight());
             }
         }
 
@@ -179,21 +186,60 @@ public class MultiSelectPopupWindow {
 
         private void populateMenuWithItems(Menu menu) {
             updateSelectAllItem(menu);
-            menu.add(0, R.id.floatingToolbarClose, 0, R.string.close).setIcon(MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_close));
+            menu.add(0, R.id.floatingToolbarClose, 0, R.string.close)
+                    .setIcon(
+                            MultiSelectPopupWindow.sTextView
+                                    .getContext()
+                                    .getResources()
+                                    .getDrawable(R.drawable.tw_floating_popup_button_ic_close));
             if (!MultiSelectPopupWindow.sTextView.isClipboardDisallowedByKnox()) {
-                menu.add(0, R.id.multiSelectCopy, 2, 17039361).setIcon(MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_copy)).setShowAsAction(2);
+                menu.add(0, R.id.multiSelectCopy, 2, 17039361)
+                        .setIcon(
+                                MultiSelectPopupWindow.sTextView
+                                        .getContext()
+                                        .getResources()
+                                        .getDrawable(R.drawable.tw_floating_popup_button_ic_copy))
+                        .setShowAsAction(2);
             }
             if (MultiSelectPopupWindow.this.isShareViaEnable()) {
-                menu.add(0, R.id.multiSelectShare, 3, R.string.share).setIcon(MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_share)).setShowAsAction(1);
+                menu.add(0, R.id.multiSelectShare, 3, R.string.share)
+                        .setIcon(
+                                MultiSelectPopupWindow.sTextView
+                                        .getContext()
+                                        .getResources()
+                                        .getDrawable(R.drawable.tw_floating_popup_button_ic_share))
+                        .setShowAsAction(1);
             }
             PackageManager pm = MultiSelectPopupWindow.sTextView.getContext().getPackageManager();
-            List<ResolveInfo> activities = pm.queryIntentActivities(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"), 0);
+            List<ResolveInfo> activities =
+                    pm.queryIntentActivities(
+                            new Intent()
+                                    .setAction(Intent.ACTION_PROCESS_TEXT)
+                                    .setType("text/plain"),
+                            0);
             int i = 0;
             if (!MultiSelectPopupWindow.this.isEmergencyMode()) {
                 for (ResolveInfo resolveInfo : activities) {
                     ComponentInfo info = resolveInfo.getComponentInfo();
-                    if (info.packageName.contains("com.sec.android.app.translator") || info.packageName.contains("com.google.android.apps.translate")) {
-                        menu.add(0, R.id.multiSelectTranslate, i + 5, resolveInfo.loadLabel(pm)).setIcon(MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_translate)).setIntent(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain").putExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, true).setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name)).setShowAsAction(1);
+                    if (info.packageName.contains("com.sec.android.app.translator")
+                            || info.packageName.contains("com.google.android.apps.translate")) {
+                        menu.add(0, R.id.multiSelectTranslate, i + 5, resolveInfo.loadLabel(pm))
+                                .setIcon(
+                                        MultiSelectPopupWindow.sTextView
+                                                .getContext()
+                                                .getResources()
+                                                .getDrawable(
+                                                        R.drawable
+                                                                .tw_floating_popup_button_ic_translate))
+                                .setIntent(
+                                        new Intent()
+                                                .setAction(Intent.ACTION_PROCESS_TEXT)
+                                                .setType("text/plain")
+                                                .putExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, true)
+                                                .setClassName(
+                                                        resolveInfo.activityInfo.packageName,
+                                                        resolveInfo.activityInfo.name))
+                                .setShowAsAction(1);
                         i++;
                     }
                 }
@@ -210,7 +256,14 @@ public class MultiSelectPopupWindow {
             boolean selectAllItemExists = menu.findItem(R.id.multiSelectAll) != null;
             boolean selectAllEnable = MultiSelectPopupWindow.this.isSelectAllEnable();
             if (selectAllEnable && !selectAllItemExists) {
-                menu.add(0, R.id.multiSelectAll, 1, 17039373).setIcon(MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(R.drawable.tw_floating_popup_button_ic_selectall)).setShowAsAction(1);
+                menu.add(0, R.id.multiSelectAll, 1, 17039373)
+                        .setIcon(
+                                MultiSelectPopupWindow.sTextView
+                                        .getContext()
+                                        .getResources()
+                                        .getDrawable(
+                                                R.drawable.tw_floating_popup_button_ic_selectall))
+                        .setShowAsAction(1);
             } else if (!selectAllEnable && selectAllItemExists) {
                 menu.removeItem(R.id.multiSelectAll);
             }
@@ -237,12 +290,19 @@ public class MultiSelectPopupWindow {
 
         @Override // android.view.ActionMode.Callback2
         public void onGetContentRect(ActionMode mode, View view, Rect outRect) {
-            if (!view.equals(MultiSelectPopupWindow.sTextView) || MultiSelectPopupWindow.sTextView.getLayout() == null) {
+            if (!view.equals(MultiSelectPopupWindow.sTextView)
+                    || MultiSelectPopupWindow.sTextView.getLayout() == null) {
                 super.onGetContentRect(mode, view, outRect);
                 return;
             }
-            int popupTopMargin = MultiSelectPopupWindow.sTextView.getResources().getDimensionPixelSize(R.dimen.tw_floating_popup_top_margin);
-            int popupBottomMargin = MultiSelectPopupWindow.sTextView.getResources().getDimensionPixelSize(R.dimen.tw_floating_popup_bottom_margin);
+            int popupTopMargin =
+                    MultiSelectPopupWindow.sTextView
+                            .getResources()
+                            .getDimensionPixelSize(R.dimen.tw_floating_popup_top_margin);
+            int popupBottomMargin =
+                    MultiSelectPopupWindow.sTextView
+                            .getResources()
+                            .getDimensionPixelSize(R.dimen.tw_floating_popup_bottom_margin);
             CharSequence text = MultiSelectPopupWindow.sTextView.getTextForMultiSelection();
             if (text == null) {
                 Log.e(MultiSelectPopupWindow.TAG, "getTextFormultiSelection() text is null");
@@ -250,14 +310,25 @@ public class MultiSelectPopupWindow {
             }
             if (MultiSelection.getSelectionStart(text) != MultiSelection.getSelectionEnd(text)) {
                 this.mSelectionPath.reset();
-                MultiSelectPopupWindow.sTextView.getLayout().getSelectionPath(MultiSelection.getSelectionStart(text), MultiSelection.getSelectionEnd(text), this.mSelectionPath);
+                MultiSelectPopupWindow.sTextView
+                        .getLayout()
+                        .getSelectionPath(
+                                MultiSelection.getSelectionStart(text),
+                                MultiSelection.getSelectionEnd(text),
+                                this.mSelectionPath);
                 this.mSelectionPath.computeBounds(this.mSelectionBounds, true);
                 this.mSelectionBounds.top -= popupBottomMargin;
                 this.mSelectionBounds.bottom += this.mHandleHeight + popupTopMargin;
             }
-            int textHorizontalOffset = MultiSelectPopupWindow.sTextView.viewportToContentHorizontalOffset();
-            int textVerticalOffset = MultiSelectPopupWindow.sTextView.viewportToContentVerticalOffset();
-            outRect.set((int) Math.floor(this.mSelectionBounds.left + textHorizontalOffset), (int) Math.floor(this.mSelectionBounds.top + textVerticalOffset), (int) Math.ceil(this.mSelectionBounds.right + textHorizontalOffset), (int) Math.ceil(this.mSelectionBounds.bottom + textVerticalOffset));
+            int textHorizontalOffset =
+                    MultiSelectPopupWindow.sTextView.viewportToContentHorizontalOffset();
+            int textVerticalOffset =
+                    MultiSelectPopupWindow.sTextView.viewportToContentVerticalOffset();
+            outRect.set(
+                    (int) Math.floor(this.mSelectionBounds.left + textHorizontalOffset),
+                    (int) Math.floor(this.mSelectionBounds.top + textVerticalOffset),
+                    (int) Math.ceil(this.mSelectionBounds.right + textHorizontalOffset),
+                    (int) Math.ceil(this.mSelectionBounds.bottom + textVerticalOffset));
         }
     }
 
@@ -265,7 +336,10 @@ public class MultiSelectPopupWindow {
     public boolean isSelectAllEnable() {
         CharSequence text = sTextView.getTextForMultiSelection();
         if (text != null) {
-            return (MultiSelection.getSelectionStart(text) == 0 && MultiSelection.getSelectionEnd(text) == text.length()) ? false : true;
+            return (MultiSelection.getSelectionStart(text) == 0
+                            && MultiSelection.getSelectionEnd(text) == text.length())
+                    ? false
+                    : true;
         }
         Log.e(TAG, "getTextFormultiSelection() text is null");
         return false;
@@ -281,17 +355,22 @@ public class MultiSelectPopupWindow {
 
     private boolean isDictionaryEnable() {
         PackageManager pm = sTextView.getContext().getPackageManager();
-        List<ResolveInfo> activities = pm.queryIntentActivities(new Intent("com.sec.android.app.dictionary.SEARCH"), 0);
+        List<ResolveInfo> activities =
+                pm.queryIntentActivities(new Intent("com.sec.android.app.dictionary.SEARCH"), 0);
         return (activities.size() == 0 || isEmergencyMode()) ? false : true;
     }
 
     private boolean isTranslatorEnable() {
         PackageManager pm = sTextView.getContext().getPackageManager();
-        List<ResolveInfo> activities = pm.queryIntentActivities(new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"), 0);
+        List<ResolveInfo> activities =
+                pm.queryIntentActivities(
+                        new Intent().setAction(Intent.ACTION_PROCESS_TEXT).setType("text/plain"),
+                        0);
         if (activities.size() != 0 && !isEmergencyMode()) {
             for (ResolveInfo resolveInfo : activities) {
                 String resolveInfoString = resolveInfo.toString();
-                if (resolveInfoString.contains("com.sec.android.app.translator") || resolveInfoString.contains("com.google.android.apps.translate")) {
+                if (resolveInfoString.contains("com.sec.android.app.translator")
+                        || resolveInfoString.contains("com.google.android.apps.translate")) {
                     return true;
                 }
             }
@@ -301,8 +380,18 @@ public class MultiSelectPopupWindow {
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean isEmergencyMode() {
-        boolean isEmergencyMode = Settings.System.getInt(sTextView.getContext().getContentResolver(), Settings.System.SEM_EMERGENCY_MODE, 0) == 1;
-        boolean isUPSMode = Settings.System.getInt(sTextView.getContext().getContentResolver(), Settings.System.SEM_ULTRA_POWERSAVING_MODE, 0) == 1;
+        boolean isEmergencyMode =
+                Settings.System.getInt(
+                                sTextView.getContext().getContentResolver(),
+                                Settings.System.SEM_EMERGENCY_MODE,
+                                0)
+                        == 1;
+        boolean isUPSMode =
+                Settings.System.getInt(
+                                sTextView.getContext().getContentResolver(),
+                                Settings.System.SEM_ULTRA_POWERSAVING_MODE,
+                                0)
+                        == 1;
         if (!isEmergencyMode && !isUPSMode) {
             return false;
         }
@@ -423,7 +512,11 @@ public class MultiSelectPopupWindow {
             for (int i = 0; i < 2; i++) {
                 TextViewPositionListener positionListener = this.mPositionListeners[i];
                 if (positionListener != null) {
-                    positionListener.updatePosition(this.mPositionX, this.mPositionY, this.mPositionHasChanged, this.mScrollHasChanged);
+                    positionListener.updatePosition(
+                            this.mPositionX,
+                            this.mPositionY,
+                            this.mPositionHasChanged,
+                            this.mScrollHasChanged);
                 }
             }
             this.mScrollHasChanged = false;
@@ -434,7 +527,13 @@ public class MultiSelectPopupWindow {
             MultiSelectPopupWindow.sTextView.getLocationInWindow(this.mTempCoords);
             this.mNewRect[0] = MultiSelectPopupWindow.sTextView.getWidth();
             this.mNewRect[1] = MultiSelectPopupWindow.sTextView.getHeight();
-            this.mPositionHasChanged = (this.mTempCoords[0] == this.mPositionX && this.mTempCoords[1] == this.mPositionY && this.mRect[0] == this.mNewRect[0] && this.mRect[1] == this.mNewRect[1]) ? false : true;
+            this.mPositionHasChanged =
+                    (this.mTempCoords[0] == this.mPositionX
+                                    && this.mTempCoords[1] == this.mPositionY
+                                    && this.mRect[0] == this.mNewRect[0]
+                                    && this.mRect[1] == this.mNewRect[1])
+                            ? false
+                            : true;
             this.mPositionX = this.mTempCoords[0];
             this.mPositionY = this.mTempCoords[1];
             this.mRect[0] = this.mNewRect[0];
@@ -450,8 +549,7 @@ public class MultiSelectPopupWindow {
         private SelectionEndHandleView mEndHandle;
         private SelectionStartHandleView mStartHandle;
 
-        private SelectionController() {
-        }
+        private SelectionController() {}
 
         @Override // android.widget.MultiSelectPopupWindow.CursorController
         public void show() {
@@ -462,20 +560,38 @@ public class MultiSelectPopupWindow {
         /* JADX INFO: Access modifiers changed from: private */
         public void initDrawables() {
             if (MultiSelectPopupWindow.this.mSelectHandleLeft == null) {
-                MultiSelectPopupWindow.this.mSelectHandleLeft = MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(MultiSelectPopupWindow.sTextView.mTextSelectHandleLeftRes);
+                MultiSelectPopupWindow.this.mSelectHandleLeft =
+                        MultiSelectPopupWindow.sTextView
+                                .getContext()
+                                .getResources()
+                                .getDrawable(
+                                        MultiSelectPopupWindow.sTextView.mTextSelectHandleLeftRes);
             }
             if (MultiSelectPopupWindow.this.mSelectHandleRight == null) {
-                MultiSelectPopupWindow.this.mSelectHandleRight = MultiSelectPopupWindow.sTextView.getContext().getResources().getDrawable(MultiSelectPopupWindow.sTextView.mTextSelectHandleRightRes);
+                MultiSelectPopupWindow.this.mSelectHandleRight =
+                        MultiSelectPopupWindow.sTextView
+                                .getContext()
+                                .getResources()
+                                .getDrawable(
+                                        MultiSelectPopupWindow.sTextView.mTextSelectHandleRightRes);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public void initHandles() {
             if (this.mStartHandle == null) {
-                this.mStartHandle = MultiSelectPopupWindow.this.new SelectionStartHandleView(MultiSelectPopupWindow.this.mSelectHandleLeft, MultiSelectPopupWindow.this.mSelectHandleRight);
+                this.mStartHandle =
+                        MultiSelectPopupWindow.this
+                        .new SelectionStartHandleView(
+                                MultiSelectPopupWindow.this.mSelectHandleLeft,
+                                MultiSelectPopupWindow.this.mSelectHandleRight);
             }
             if (this.mEndHandle == null) {
-                this.mEndHandle = MultiSelectPopupWindow.this.new SelectionEndHandleView(MultiSelectPopupWindow.this.mSelectHandleRight, MultiSelectPopupWindow.this.mSelectHandleLeft);
+                this.mEndHandle =
+                        MultiSelectPopupWindow.this
+                        .new SelectionEndHandleView(
+                                MultiSelectPopupWindow.this.mSelectHandleRight,
+                                MultiSelectPopupWindow.this.mSelectHandleLeft);
             }
             this.mStartHandle.show();
             this.mEndHandle.show();
@@ -577,9 +693,14 @@ public class MultiSelectPopupWindow {
             this.mResetAnimator = null;
             this.mMagnifySizeAnimator = null;
             this.mHandleType = 0;
-            LinearLayout contentHolder = new LinearLayout(MultiSelectPopupWindow.sTextView.getContext());
+            LinearLayout contentHolder =
+                    new LinearLayout(MultiSelectPopupWindow.sTextView.getContext());
             contentHolder.setGravity(3);
-            this.mContainer = new PopupWindow(MultiSelectPopupWindow.sTextView.getContext(), (AttributeSet) null, 16843464);
+            this.mContainer =
+                    new PopupWindow(
+                            MultiSelectPopupWindow.sTextView.getContext(),
+                            (AttributeSet) null,
+                            16843464);
             this.mContainer.setSplitTouchEnabled(true);
             this.mContainer.setClippingEnabled(false);
             this.mContainer.setWindowLayoutType(1002);
@@ -589,14 +710,21 @@ public class MultiSelectPopupWindow {
             this.mDrawableRtl = drawableRtl;
             updateDrawable();
             recalHandleView();
-            this.mMinSize = MultiSelectPopupWindow.sTextView.getContext().getResources().getDimensionPixelSize(R.dimen.text_handle_min_size);
-            this.mContainer.setWidth(Math.max((int) (this.mDrawable.getIntrinsicWidth() * 1.5f), this.mMinSize));
-            this.mContainer.setHeight(Math.max((int) (this.mDrawable.getIntrinsicHeight() * 1.5f), this.mMinSize));
+            this.mMinSize =
+                    MultiSelectPopupWindow.sTextView
+                            .getContext()
+                            .getResources()
+                            .getDimensionPixelSize(R.dimen.text_handle_min_size);
+            this.mContainer.setWidth(
+                    Math.max((int) (this.mDrawable.getIntrinsicWidth() * 1.5f), this.mMinSize));
+            this.mContainer.setHeight(
+                    Math.max((int) (this.mDrawable.getIntrinsicHeight() * 1.5f), this.mMinSize));
         }
 
         protected void updateDrawable() {
             int offset = getCurrentCursorOffset();
-            boolean isRtlCharAtOffset = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(offset);
+            boolean isRtlCharAtOffset =
+                    MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(offset);
             this.mDrawable = isRtlCharAtOffset ? this.mDrawableRtl : this.mDrawableLtr;
             this.mHotspotX = getHotspotX(this.mDrawable, isRtlCharAtOffset);
             this.mHorizontalGravity = getHorizontalGravity(isRtlCharAtOffset);
@@ -637,13 +765,16 @@ public class MultiSelectPopupWindow {
                     offset = (width * 3) / 4;
                     break;
             }
-            return new Rect(left - (offset - hotspot), 0, (left - (offset - hotspot)) + width, height);
+            return new Rect(
+                    left - (offset - hotspot), 0, (left - (offset - hotspot)) + width, height);
         }
 
         @Override // android.view.View
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             if (this.mIsDragging || this.mIsResetAnimating) {
-                setMeasuredDimension((int) Math.ceil(getPreferredWidth() * 1.5f), (int) Math.ceil(getPreferredHeight() * 1.5f));
+                setMeasuredDimension(
+                        (int) Math.ceil(getPreferredWidth() * 1.5f),
+                        (int) Math.ceil(getPreferredHeight() * 1.5f));
             } else {
                 setMeasuredDimension(getPreferredWidth(), getPreferredHeight());
             }
@@ -673,21 +804,30 @@ public class MultiSelectPopupWindow {
             int gapX = screen[0] - window[0];
             int gapY = screen[1] - window[1];
             if (isShowing()) {
-                if (MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != null && MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != MultiSelectPopupWindow.sTextView.getWindowToken()) {
+                if (MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != null
+                        && MultiSelectPopupWindow.sTextView.getApplicationWindowToken()
+                                != MultiSelectPopupWindow.sTextView.getWindowToken()) {
                     positionX += gapX;
                     positionY += gapY;
                 }
                 this.mContainer.update(positionX, positionY, -1, -1);
                 return;
             }
-            if (MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != null && MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != MultiSelectPopupWindow.sTextView.getWindowToken()) {
+            if (MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != null
+                    && MultiSelectPopupWindow.sTextView.getApplicationWindowToken()
+                            != MultiSelectPopupWindow.sTextView.getWindowToken()) {
                 this.mContainer.setLayoutInScreenEnabled(true);
-                this.mContainer.showAtLocation(MultiSelectPopupWindow.sTextView.getApplicationWindowToken(), 0, positionX + gapX, positionY + gapY);
+                this.mContainer.showAtLocation(
+                        MultiSelectPopupWindow.sTextView.getApplicationWindowToken(),
+                        0,
+                        positionX + gapX,
+                        positionY + gapY);
                 return;
             }
             this.mContainer.setLayoutInScreenEnabled(false);
             try {
-                this.mContainer.showAtLocation(MultiSelectPopupWindow.sTextView, 0, positionX, positionY);
+                this.mContainer.showAtLocation(
+                        MultiSelectPopupWindow.sTextView, 0, positionX, positionY);
             } catch (WindowManager.BadTokenException e) {
                 MultiSelectPopupWindow.sTextView.clearAllMultiSelection();
                 Log.e(MultiSelectPopupWindow.TAG, "showAtLocation occur BadTokenException");
@@ -729,7 +869,10 @@ public class MultiSelectPopupWindow {
                         position[0] = position[0] - view.getScrollX();
                         position[1] = position[1] - view.getScrollY();
                     }
-                    if (position[0] + this.mContainer.getWidth() >= 0.0f && position[1] >= 0.0f && position[0] <= view.getWidth() && position[1] <= view.getHeight()) {
+                    if (position[0] + this.mContainer.getWidth() >= 0.0f
+                            && position[1] >= 0.0f
+                            && position[0] <= view.getWidth()
+                            && position[1] <= view.getHeight()) {
                         if (!view.getMatrix().isIdentity()) {
                             view.getMatrix().mapPoints(position);
                         }
@@ -748,7 +891,8 @@ public class MultiSelectPopupWindow {
             }
         }
 
-        protected void positionAtCursorOffset(int offset, boolean parentPositionChanged, boolean parentScrolled) {
+        protected void positionAtCursorOffset(
+                int offset, boolean parentPositionChanged, boolean parentScrolled) {
             Layout layout = MultiSelectPopupWindow.sTextView.getLayout();
             if (layout == null) {
                 return;
@@ -760,23 +904,35 @@ public class MultiSelectPopupWindow {
                 }
                 int line = layout.getLineForOffset(offset);
                 float compensation = layout.getParagraphDirection(line) == -1 ? 0.5f : -0.5f;
-                this.mPositionX = (int) (((layout.getPrimaryHorizontal(offset) + compensation) - this.mHotspotX) - getHorizontalOffset());
+                this.mPositionX =
+                        (int)
+                                (((layout.getPrimaryHorizontal(offset) + compensation)
+                                                - this.mHotspotX)
+                                        - getHorizontalOffset());
                 this.mPositionY = layout.getLineBottom(line);
                 this.mBaselineY = layout.getLineBaseline(line);
-                this.mPositionX += MultiSelectPopupWindow.sTextView.viewportToContentHorizontalOffset();
-                this.mPositionY += MultiSelectPopupWindow.sTextView.viewportToContentVerticalOffset();
-                this.mBaselineY += MultiSelectPopupWindow.sTextView.viewportToContentVerticalOffset();
+                this.mPositionX +=
+                        MultiSelectPopupWindow.sTextView.viewportToContentHorizontalOffset();
+                this.mPositionY +=
+                        MultiSelectPopupWindow.sTextView.viewportToContentVerticalOffset();
+                this.mBaselineY +=
+                        MultiSelectPopupWindow.sTextView.viewportToContentVerticalOffset();
                 this.mPreviousOffset = offset;
                 this.mPositionHasChanged = true;
             }
         }
 
         @Override // android.widget.MultiSelectPopupWindow.TextViewPositionListener
-        public void updatePosition(int parentPositionX, int parentPositionY, boolean parentPositionChanged, boolean parentScrolled) {
+        public void updatePosition(
+                int parentPositionX,
+                int parentPositionY,
+                boolean parentPositionChanged,
+                boolean parentScrolled) {
             positionAtCursorOffset(getCurrentCursorOffset(), parentPositionChanged, parentScrolled);
             if (parentPositionChanged || this.mPositionHasChanged) {
                 if (this.mIsDragging) {
-                    if (parentPositionX != this.mLastParentX || parentPositionY != this.mLastParentY) {
+                    if (parentPositionX != this.mLastParentX
+                            || parentPositionY != this.mLastParentY) {
                         this.mTouchToWindowOffsetX += parentPositionX - this.mLastParentX;
                         this.mTouchToWindowOffsetY += parentPositionY - this.mLastParentY;
                         this.mLastParentX = parentPositionX;
@@ -794,21 +950,32 @@ public class MultiSelectPopupWindow {
                     int positionX = this.mPositionX + parentPositionX;
                     int positionY = this.mPositionY + parentPositionY;
                     if (isShowing()) {
-                        if (MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != null && MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != MultiSelectPopupWindow.sTextView.getWindowToken()) {
+                        if (MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != null
+                                && MultiSelectPopupWindow.sTextView.getApplicationWindowToken()
+                                        != MultiSelectPopupWindow.sTextView.getWindowToken()) {
                             positionX += gapX;
                             positionY += gapY;
                         }
                         this.mContainer.update(positionX, positionY, -1, -1);
-                    } else if (MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != null && MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != MultiSelectPopupWindow.sTextView.getWindowToken()) {
+                    } else if (MultiSelectPopupWindow.sTextView.getApplicationWindowToken() != null
+                            && MultiSelectPopupWindow.sTextView.getApplicationWindowToken()
+                                    != MultiSelectPopupWindow.sTextView.getWindowToken()) {
                         this.mContainer.setLayoutInScreenEnabled(true);
-                        this.mContainer.showAtLocation(MultiSelectPopupWindow.sTextView.getApplicationWindowToken(), 0, positionX + gapX, positionY + gapY);
+                        this.mContainer.showAtLocation(
+                                MultiSelectPopupWindow.sTextView.getApplicationWindowToken(),
+                                0,
+                                positionX + gapX,
+                                positionY + gapY);
                     } else {
                         this.mContainer.setLayoutInScreenEnabled(false);
                         try {
-                            this.mContainer.showAtLocation(MultiSelectPopupWindow.sTextView, 0, positionX, positionY);
+                            this.mContainer.showAtLocation(
+                                    MultiSelectPopupWindow.sTextView, 0, positionX, positionY);
                         } catch (WindowManager.BadTokenException e) {
                             MultiSelectPopupWindow.sTextView.clearAllMultiSelection();
-                            Log.e(MultiSelectPopupWindow.TAG, "showAtLocation occur BadTokenException");
+                            Log.e(
+                                    MultiSelectPopupWindow.TAG,
+                                    "showAtLocation occur BadTokenException");
                         }
                     }
                 } else if (isShowing()) {
@@ -823,16 +990,17 @@ public class MultiSelectPopupWindow {
             int drawWidth = this.mDrawable.getIntrinsicWidth();
             int left = getHorizontalOffset();
             if (!this.mIsDragging && !this.mIsResetAnimating) {
-                this.mDrawable.setBounds(left, 0, left + drawWidth, this.mDrawable.getIntrinsicHeight());
+                this.mDrawable.setBounds(
+                        left, 0, left + drawWidth, this.mDrawable.getIntrinsicHeight());
             }
             this.mDrawable.draw(c);
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:25:0x00fc, code lost:
-        
-            return true;
-         */
+
+           return true;
+        */
         @Override // android.view.View
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -843,18 +1011,18 @@ public class MultiSelectPopupWindow {
                 Method dump skipped, instructions count: 266
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.MultiSelectPopupWindow.HandleView.onTouchEvent(android.view.MotionEvent):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.widget.MultiSelectPopupWindow.HandleView.onTouchEvent(android.view.MotionEvent):boolean");
         }
 
         public boolean isDragging() {
             return this.mIsDragging;
         }
 
-        void onHandleMoved() {
-        }
+        void onHandleMoved() {}
 
-        public void onDetached() {
-        }
+        public void onDetached() {}
 
         protected boolean calculateForSwitchingCursor() {
             return true;
@@ -880,26 +1048,40 @@ public class MultiSelectPopupWindow {
             int drawableStartHeight = this.mDrawable.getIntrinsicHeight();
             final int drawableTargetWidth = (int) (drawableStartWidth * 1.5f);
             final int drawableTargetHeight = (int) (drawableStartHeight * 1.5f);
-            PropertyValuesHolder[] holders = {PropertyValuesHolder.ofInt("width", drawableStartWidth, drawableTargetWidth), PropertyValuesHolder.ofInt("height", drawableStartHeight, drawableTargetHeight)};
+            PropertyValuesHolder[] holders = {
+                PropertyValuesHolder.ofInt("width", drawableStartWidth, drawableTargetWidth),
+                PropertyValuesHolder.ofInt("height", drawableStartHeight, drawableTargetHeight)
+            };
             this.mMagnifySizeAnimator = ValueAnimator.ofPropertyValuesHolder(holders);
             this.mMagnifySizeAnimator.setDuration(250L);
-            this.mMagnifySizeAnimator.setInterpolator(new PathInterpolator(0.25f, 0.46f, 0.45f, 1.0f));
-            this.mMagnifySizeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.MultiSelectPopupWindow.HandleView.1
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    int width = ((Integer) animation.getAnimatedValue("width")).intValue();
-                    int height = ((Integer) animation.getAnimatedValue("height")).intValue();
-                    HandleView.this.mDrawable.setBounds(HandleView.this.getDrawableBounds(width, height));
-                    HandleView.this.invalidate();
-                }
-            });
-            this.mMagnifySizeAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.widget.MultiSelectPopupWindow.HandleView.2
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    HandleView.this.mDrawable.setBounds(HandleView.this.getDrawableBounds(drawableTargetWidth, drawableTargetHeight));
-                    HandleView.this.invalidate();
-                }
-            });
+            this.mMagnifySizeAnimator.setInterpolator(
+                    new PathInterpolator(0.25f, 0.46f, 0.45f, 1.0f));
+            this.mMagnifySizeAnimator.addUpdateListener(
+                    new ValueAnimator
+                            .AnimatorUpdateListener() { // from class:
+                                                        // android.widget.MultiSelectPopupWindow.HandleView.1
+                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            int width = ((Integer) animation.getAnimatedValue("width")).intValue();
+                            int height =
+                                    ((Integer) animation.getAnimatedValue("height")).intValue();
+                            HandleView.this.mDrawable.setBounds(
+                                    HandleView.this.getDrawableBounds(width, height));
+                            HandleView.this.invalidate();
+                        }
+                    });
+            this.mMagnifySizeAnimator.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // android.widget.MultiSelectPopupWindow.HandleView.2
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            HandleView.this.mDrawable.setBounds(
+                                    HandleView.this.getDrawableBounds(
+                                            drawableTargetWidth, drawableTargetHeight));
+                            HandleView.this.invalidate();
+                        }
+                    });
             this.mMagnifySizeAnimator.start();
         }
 
@@ -912,33 +1094,44 @@ public class MultiSelectPopupWindow {
             int drawableStartHeight = r.bottom - r.top;
             int drawableTargetWidth = this.mDrawable.getIntrinsicWidth();
             int drawableTargetHeight = this.mDrawable.getIntrinsicHeight();
-            PropertyValuesHolder[] holders = {PropertyValuesHolder.ofInt("width", drawableStartWidth, drawableTargetWidth), PropertyValuesHolder.ofInt("height", drawableStartHeight, drawableTargetHeight)};
+            PropertyValuesHolder[] holders = {
+                PropertyValuesHolder.ofInt("width", drawableStartWidth, drawableTargetWidth),
+                PropertyValuesHolder.ofInt("height", drawableStartHeight, drawableTargetHeight)
+            };
             this.mResetAnimator = ValueAnimator.ofPropertyValuesHolder(holders);
             this.mResetAnimator.setDuration(250L);
             this.mResetAnimator.setInterpolator(new PathInterpolator(0.25f, 0.46f, 0.45f, 1.0f));
-            this.mResetAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.MultiSelectPopupWindow.HandleView.3
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    if (!HandleView.this.mIsResetAnimating) {
-                        return;
-                    }
-                    int width = ((Integer) animation.getAnimatedValue("width")).intValue();
-                    int height = ((Integer) animation.getAnimatedValue("height")).intValue();
-                    HandleView.this.mDrawable.setBounds(HandleView.this.getDrawableBounds(width, height));
-                    HandleView.this.invalidate();
-                }
-            });
-            this.mResetAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.widget.MultiSelectPopupWindow.HandleView.4
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    if (!HandleView.this.mIsResetAnimating) {
-                        return;
-                    }
-                    HandleView.this.mIsResetAnimating = false;
-                    HandleView.this.requestLayout();
-                    HandleView.this.invalidate();
-                }
-            });
+            this.mResetAnimator.addUpdateListener(
+                    new ValueAnimator
+                            .AnimatorUpdateListener() { // from class:
+                                                        // android.widget.MultiSelectPopupWindow.HandleView.3
+                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            if (!HandleView.this.mIsResetAnimating) {
+                                return;
+                            }
+                            int width = ((Integer) animation.getAnimatedValue("width")).intValue();
+                            int height =
+                                    ((Integer) animation.getAnimatedValue("height")).intValue();
+                            HandleView.this.mDrawable.setBounds(
+                                    HandleView.this.getDrawableBounds(width, height));
+                            HandleView.this.invalidate();
+                        }
+                    });
+            this.mResetAnimator.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // android.widget.MultiSelectPopupWindow.HandleView.4
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            if (!HandleView.this.mIsResetAnimating) {
+                                return;
+                            }
+                            HandleView.this.mIsResetAnimating = false;
+                            HandleView.this.requestLayout();
+                            HandleView.this.invalidate();
+                        }
+                    });
             this.mResetAnimator.start();
         }
     }
@@ -973,7 +1166,8 @@ public class MultiSelectPopupWindow {
                 Log.e(MultiSelectPopupWindow.TAG, "getTextFormultiSelection() text is null");
                 return;
             }
-            MultiSelection.setSelection((Spannable) text, offset, MultiSelection.getSelectionEnd(text));
+            MultiSelection.setSelection(
+                    (Spannable) text, offset, MultiSelection.getSelectionEnd(text));
             updateDrawable();
             if (MultiSelectPopupWindow.sTextActionMode != null) {
                 MultiSelectPopupWindow.sTextActionMode.invalidate();
@@ -995,7 +1189,8 @@ public class MultiSelectPopupWindow {
         }
 
         @Override // android.widget.MultiSelectPopupWindow.HandleView
-        protected void positionAtCursorOffset(int offset, boolean parentPositionChanged, boolean parentScrolled) {
+        protected void positionAtCursorOffset(
+                int offset, boolean parentPositionChanged, boolean parentScrolled) {
             super.positionAtCursorOffset(offset, parentPositionChanged, parentScrolled);
             calculateForSwitchingCursor();
             this.mPositionHasChanged = true;
@@ -1023,7 +1218,10 @@ public class MultiSelectPopupWindow {
             }
             updateDrawable();
             Layout layout = MultiSelectPopupWindow.sTextView.getLayout();
-            this.mPositionX = (int) ((layout.getPrimaryHorizontal(getCurrentCursorOffset()) - 0.5f) - this.mHotspotX);
+            this.mPositionX =
+                    (int)
+                            ((layout.getPrimaryHorizontal(getCurrentCursorOffset()) - 0.5f)
+                                    - this.mHotspotX);
             this.mPositionX += MultiSelectPopupWindow.sTextView.viewportToContentHorizontalOffset();
             return true;
         }
@@ -1032,7 +1230,8 @@ public class MultiSelectPopupWindow {
         protected void updateDrawable() {
             int offset = getCurrentCursorOffset();
             Drawable oldDrawable = this.mDrawable;
-            boolean isRtlCharAtOffset = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(offset);
+            boolean isRtlCharAtOffset =
+                    MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(offset);
             if (this.mbSwitchCursor) {
                 isRtlCharAtOffset = !isRtlCharAtOffset;
             }
@@ -1048,7 +1247,10 @@ public class MultiSelectPopupWindow {
         private boolean isHandleViewScreenOut() {
             PositionListener positionListener = MultiSelectPopupWindow.this.getPositionListener();
             int iconSize = this.mDrawableRtl.getIntrinsicWidth() / 2;
-            return (((this.mPositionX + positionListener.getPositionX()) + this.mHotspotX) + getHorizontalOffset()) - iconSize < 0;
+            return (((this.mPositionX + positionListener.getPositionX()) + this.mHotspotX)
+                                    + getHorizontalOffset())
+                            - iconSize
+                    < 0;
         }
     }
 
@@ -1082,7 +1284,8 @@ public class MultiSelectPopupWindow {
                 Log.e(MultiSelectPopupWindow.TAG, "getTextFormultiSelection() text is null");
                 return;
             }
-            MultiSelection.setSelection((Spannable) text, MultiSelection.getSelectionStart(text), offset);
+            MultiSelection.setSelection(
+                    (Spannable) text, MultiSelection.getSelectionStart(text), offset);
             updateDrawable();
             if (MultiSelectPopupWindow.sTextActionMode != null) {
                 MultiSelectPopupWindow.sTextActionMode.invalidate();
@@ -1104,7 +1307,8 @@ public class MultiSelectPopupWindow {
         }
 
         @Override // android.widget.MultiSelectPopupWindow.HandleView
-        protected void positionAtCursorOffset(int offset, boolean parentPositionChanged, boolean parentScrolled) {
+        protected void positionAtCursorOffset(
+                int offset, boolean parentPositionChanged, boolean parentScrolled) {
             super.positionAtCursorOffset(offset, parentPositionChanged, parentScrolled);
             if (!this.mIsDragging) {
                 calculateForSwitchingCursor();
@@ -1134,7 +1338,10 @@ public class MultiSelectPopupWindow {
             }
             updateDrawable();
             Layout layout = MultiSelectPopupWindow.sTextView.getLayout();
-            this.mPositionX = (int) ((layout.getPrimaryHorizontal(getCurrentCursorOffset()) - 0.5f) - this.mHotspotX);
+            this.mPositionX =
+                    (int)
+                            ((layout.getPrimaryHorizontal(getCurrentCursorOffset()) - 0.5f)
+                                    - this.mHotspotX);
             this.mPositionX += MultiSelectPopupWindow.sTextView.viewportToContentHorizontalOffset();
             return true;
         }
@@ -1143,7 +1350,8 @@ public class MultiSelectPopupWindow {
         protected void updateDrawable() {
             int offset = getCurrentCursorOffset();
             Drawable oldDrawable = this.mDrawable;
-            boolean isRtlCharAtOffset = MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(offset);
+            boolean isRtlCharAtOffset =
+                    MultiSelectPopupWindow.sTextView.getLayout().isRtlCharAt(offset);
             if (this.mbSwitchCursor) {
                 isRtlCharAtOffset = !isRtlCharAtOffset;
             }
@@ -1160,7 +1368,10 @@ public class MultiSelectPopupWindow {
             DisplayMetrics displayMetrics = this.mContext.getResources().getDisplayMetrics();
             PositionListener positionListener = MultiSelectPopupWindow.this.getPositionListener();
             int iconSize = this.mDrawableRtl.getIntrinsicWidth() / 2;
-            return (((this.mPositionX + positionListener.getPositionX()) + this.mHotspotX) + getHorizontalOffset()) + iconSize > displayMetrics.widthPixels;
+            return (((this.mPositionX + positionListener.getPositionX()) + this.mHotspotX)
+                                    + getHorizontalOffset())
+                            + iconSize
+                    > displayMetrics.widthPixels;
         }
     }
 }

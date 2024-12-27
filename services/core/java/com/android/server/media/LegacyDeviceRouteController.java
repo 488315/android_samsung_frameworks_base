@@ -10,7 +10,9 @@ import android.media.MediaRoute2Info;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.media.flags.Flags;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -27,22 +29,30 @@ public final class LegacyDeviceRouteController implements DeviceRouteController 
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioRoutesObserver extends IAudioRoutesObserver.Stub {
-        public AudioRoutesObserver() {
-        }
+        public AudioRoutesObserver() {}
 
         public final void dispatchAudioRoutesChanged(AudioRoutesInfo audioRoutesInfo) {
             LegacyDeviceRouteController legacyDeviceRouteController;
-            MediaRoute2Info createRouteFromAudioInfo = LegacyDeviceRouteController.this.createRouteFromAudioInfo(audioRoutesInfo);
+            MediaRoute2Info createRouteFromAudioInfo =
+                    LegacyDeviceRouteController.this.createRouteFromAudioInfo(audioRoutesInfo);
             synchronized (LegacyDeviceRouteController.this) {
                 legacyDeviceRouteController = LegacyDeviceRouteController.this;
                 legacyDeviceRouteController.mDeviceRoute = createRouteFromAudioInfo;
             }
-            SystemMediaRoute2Provider systemMediaRoute2Provider = legacyDeviceRouteController.mOnDeviceRouteChangedListener.f$0;
-            systemMediaRoute2Provider.mHandler.post(new SystemMediaRoute2Provider$$ExternalSyntheticLambda1(systemMediaRoute2Provider, 2));
+            SystemMediaRoute2Provider systemMediaRoute2Provider =
+                    legacyDeviceRouteController.mOnDeviceRouteChangedListener.f$0;
+            systemMediaRoute2Provider.mHandler.post(
+                    new SystemMediaRoute2Provider$$ExternalSyntheticLambda1(
+                            systemMediaRoute2Provider, 2));
         }
     }
 
-    public LegacyDeviceRouteController(Context context, AudioManager audioManager, IAudioService iAudioService, SystemMediaRoute2Provider$$ExternalSyntheticLambda2 systemMediaRoute2Provider$$ExternalSyntheticLambda2) {
+    public LegacyDeviceRouteController(
+            Context context,
+            AudioManager audioManager,
+            IAudioService iAudioService,
+            SystemMediaRoute2Provider$$ExternalSyntheticLambda2
+                    systemMediaRoute2Provider$$ExternalSyntheticLambda2) {
         AudioRoutesInfo audioRoutesInfo;
         int integer;
         AudioRoutesObserver audioRoutesObserver = new AudioRoutesObserver();
@@ -53,14 +63,24 @@ public final class LegacyDeviceRouteController implements DeviceRouteController 
         this.mOnDeviceRouteChangedListener = systemMediaRoute2Provider$$ExternalSyntheticLambda2;
         this.mAudioManager = audioManager;
         int i = 0;
-        if (Flags.enableBuiltInSpeakerRouteSuitabilityStatuses() && ((integer = context.getResources().getInteger(R.integer.config_ntpPollingIntervalShorter)) == 0 || integer == 1 || integer == 2)) {
+        if (Flags.enableBuiltInSpeakerRouteSuitabilityStatuses()
+                && ((integer =
+                                        context.getResources()
+                                                .getInteger(
+                                                        R.integer.config_ntpPollingIntervalShorter))
+                                == 0
+                        || integer == 1
+                        || integer == 2)) {
             i = integer;
         }
         this.mBuiltInSpeakerSuitabilityStatus = i;
         try {
             audioRoutesInfo = iAudioService.startWatchingRoutes(audioRoutesObserver);
         } catch (RemoteException e) {
-            Slog.w("LDeviceRouteController", "Cannot connect to audio service to start listen to routes", e);
+            Slog.w(
+                    "LDeviceRouteController",
+                    "Cannot connect to audio service to start listen to routes",
+                    e);
             audioRoutesInfo = null;
         }
         this.mDeviceRoute = createRouteFromAudioInfo(audioRoutesInfo);
@@ -71,7 +91,8 @@ public final class LegacyDeviceRouteController implements DeviceRouteController 
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.media.MediaRoute2Info createRouteFromAudioInfo(android.media.AudioRoutesInfo r7) {
+    public final android.media.MediaRoute2Info createRouteFromAudioInfo(
+            android.media.AudioRoutesInfo r7) {
         /*
             r6 = this;
             r0 = 3
@@ -150,7 +171,9 @@ public final class LegacyDeviceRouteController implements DeviceRouteController 
             monitor-exit(r6)     // Catch: java.lang.Throwable -> L8b
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.media.LegacyDeviceRouteController.createRouteFromAudioInfo(android.media.AudioRoutesInfo):android.media.MediaRoute2Info");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.media.LegacyDeviceRouteController.createRouteFromAudioInfo(android.media.AudioRoutesInfo):android.media.MediaRoute2Info");
     }
 
     @Override // com.android.server.media.DeviceRouteController
@@ -164,16 +187,13 @@ public final class LegacyDeviceRouteController implements DeviceRouteController 
     }
 
     @Override // com.android.server.media.DeviceRouteController
-    public final void start(UserHandle userHandle) {
-    }
+    public final void start(UserHandle userHandle) {}
 
     @Override // com.android.server.media.DeviceRouteController
-    public final void stop() {
-    }
+    public final void stop() {}
 
     @Override // com.android.server.media.DeviceRouteController
-    public final synchronized void transferTo(String str) {
-    }
+    public final synchronized void transferTo(String str) {}
 
     @Override // com.android.server.media.DeviceRouteController
     public final synchronized boolean updateVolume(int i) {

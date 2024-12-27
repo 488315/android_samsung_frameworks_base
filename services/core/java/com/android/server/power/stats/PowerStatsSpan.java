@@ -5,14 +5,16 @@ import android.util.ArraySet;
 import android.util.IndentingPrintWriter;
 import android.util.SparseBooleanArray;
 import android.util.TimeUtils;
+
 import com.android.internal.os.PowerStats;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0;
-import com.android.server.power.stats.AggregatedPowerStatsConfig;
-import com.android.server.power.stats.PowerComponentAggregatedPowerStats;
-import com.android.server.power.stats.PowerStatsStore;
+
 import com.google.android.collect.Sets;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,18 +27,19 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class PowerStatsSpan {
-    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
+    public static final DateTimeFormatter DATE_FORMAT =
+            DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
     public final Metadata mMetadata;
     public final List mSections;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Metadata {
-        public static final Comparator COMPARATOR = Comparator.comparing(new PowerStatsSpan$Metadata$$ExternalSyntheticLambda0());
+        public static final Comparator COMPARATOR =
+                Comparator.comparing(new PowerStatsSpan$Metadata$$ExternalSyntheticLambda0());
         public final long mId;
         public final List mTimeFrames = new ArrayList();
         public final List mSections = new ArrayList();
@@ -48,21 +51,39 @@ public final class PowerStatsSpan {
         public static Metadata read(TypedXmlPullParser typedXmlPullParser) {
             int eventType = typedXmlPullParser.getEventType();
             Metadata metadata = null;
-            while (eventType != 1 && (eventType != 3 || !typedXmlPullParser.getName().equals("metadata"))) {
+            while (eventType != 1
+                    && (eventType != 3 || !typedXmlPullParser.getName().equals("metadata"))) {
                 if (eventType == 2) {
                     String name = typedXmlPullParser.getName();
                     if (name.equals("metadata")) {
-                        int attributeInt = typedXmlPullParser.getAttributeInt((String) null, "version");
+                        int attributeInt =
+                                typedXmlPullParser.getAttributeInt((String) null, "version");
                         DateTimeFormatter dateTimeFormatter = PowerStatsSpan.DATE_FORMAT;
                         if (attributeInt != 2) {
-                            FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(attributeInt, "Incompatible version ", "; expected 2", "PowerStatsStore");
+                            FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0
+                                    .m(
+                                            attributeInt,
+                                            "Incompatible version ",
+                                            "; expected 2",
+                                            "PowerStatsStore");
                             return null;
                         }
-                        metadata = new Metadata(typedXmlPullParser.getAttributeLong((String) null, "id"));
+                        metadata =
+                                new Metadata(
+                                        typedXmlPullParser.getAttributeLong((String) null, "id"));
                     } else if (metadata != null && name.equals("timeframe")) {
-                        ((ArrayList) metadata.mTimeFrames).add(new TimeFrame(typedXmlPullParser.getAttributeLong((String) null, "monotonic"), typedXmlPullParser.getAttributeLong((String) null, "start"), typedXmlPullParser.getAttributeLong((String) null, "duration")));
+                        ((ArrayList) metadata.mTimeFrames)
+                                .add(
+                                        new TimeFrame(
+                                                typedXmlPullParser.getAttributeLong(
+                                                        (String) null, "monotonic"),
+                                                typedXmlPullParser.getAttributeLong(
+                                                        (String) null, "start"),
+                                                typedXmlPullParser.getAttributeLong(
+                                                        (String) null, "duration")));
                     } else if (metadata != null && name.equals("section")) {
-                        String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "type");
+                        String attributeValue =
+                                typedXmlPullParser.getAttributeValue((String) null, "type");
                         if (!((ArrayList) metadata.mSections).contains(attributeValue)) {
                             ((ArrayList) metadata.mSections).add(attributeValue);
                         }
@@ -129,8 +150,7 @@ public final class PowerStatsSpan {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface SectionReader {
-    }
+    public interface SectionReader {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TimeFrame {
@@ -172,7 +192,11 @@ public final class PowerStatsSpan {
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Failed to find 'out' block for switch in B:80:0x0161. Please report as an issue. */
     /* JADX WARN: Multi-variable type inference failed */
-    public static PowerStatsSpan read(InputStream inputStream, TypedXmlPullParser typedXmlPullParser, SectionReader sectionReader, String... strArr) {
+    public static PowerStatsSpan read(
+            InputStream inputStream,
+            TypedXmlPullParser typedXmlPullParser,
+            SectionReader sectionReader,
+            String... strArr) {
         String str;
         Section section;
         String str2;
@@ -211,58 +235,96 @@ public final class PowerStatsSpan {
                 if (eventType == i2) {
                     String name = typedXmlPullParser.getName();
                     if (name.equals("section")) {
-                        final String attributeValue = typedXmlPullParser.getAttributeValue(str4, "type");
+                        final String attributeValue =
+                                typedXmlPullParser.getAttributeValue(str4, "type");
                         if (!z || newArraySet.contains(attributeValue)) {
-                            PowerStatsStore.DefaultSectionReader defaultSectionReader = (PowerStatsStore.DefaultSectionReader) sectionReader;
+                            PowerStatsStore.DefaultSectionReader defaultSectionReader =
+                                    (PowerStatsStore.DefaultSectionReader) sectionReader;
                             defaultSectionReader.getClass();
                             attributeValue.getClass();
                             if (attributeValue.equals("battery-usage-stats")) {
                                 str = str4;
-                                section = new BatteryUsageStatsSection(BatteryUsageStats.createFromXml(typedXmlPullParser));
+                                section =
+                                        new BatteryUsageStatsSection(
+                                                BatteryUsageStats.createFromXml(
+                                                        typedXmlPullParser));
                             } else if (attributeValue.equals("aggregated-power-stats")) {
                                 SparseBooleanArray sparseBooleanArray = new SparseBooleanArray();
-                                AggregatedPowerStatsConfig aggregatedPowerStatsConfig = defaultSectionReader.mAggregatedPowerStatsConfig;
-                                AggregatedPowerStats aggregatedPowerStats = new AggregatedPowerStats(aggregatedPowerStatsConfig, sparseBooleanArray);
+                                AggregatedPowerStatsConfig aggregatedPowerStatsConfig =
+                                        defaultSectionReader.mAggregatedPowerStatsConfig;
+                                AggregatedPowerStats aggregatedPowerStats =
+                                        new AggregatedPowerStats(
+                                                aggregatedPowerStatsConfig, sparseBooleanArray);
                                 int eventType2 = typedXmlPullParser.getEventType();
                                 boolean z2 = false;
                                 int i7 = 0;
-                                while (eventType2 != i4 && (eventType2 != i3 || !typedXmlPullParser.getName().equals("agg-power-stats"))) {
+                                while (eventType2 != i4
+                                        && (eventType2 != i3
+                                                || !typedXmlPullParser
+                                                        .getName()
+                                                        .equals("agg-power-stats"))) {
                                     if (!z2 && eventType2 == i2) {
                                         String name2 = typedXmlPullParser.getName();
                                         name2.getClass();
                                         if (name2.equals("power_component")) {
                                             if (i7 != 0) {
-                                                int attributeInt = typedXmlPullParser.getAttributeInt(str4, "id");
-                                                PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats = (PowerComponentAggregatedPowerStats) aggregatedPowerStats.mPowerComponentStats.get(attributeInt);
-                                                if (powerComponentAggregatedPowerStats == null && (createPowerComponent = aggregatedPowerStatsConfig.createPowerComponent(attributeInt)) != null) {
-                                                    powerComponentAggregatedPowerStats = new PowerComponentAggregatedPowerStats(aggregatedPowerStats, createPowerComponent);
-                                                    aggregatedPowerStats.mPowerComponentStats.put(attributeInt, powerComponentAggregatedPowerStats);
+                                                int attributeInt =
+                                                        typedXmlPullParser.getAttributeInt(
+                                                                str4, "id");
+                                                PowerComponentAggregatedPowerStats
+                                                        powerComponentAggregatedPowerStats =
+                                                                (PowerComponentAggregatedPowerStats)
+                                                                        aggregatedPowerStats
+                                                                                .mPowerComponentStats
+                                                                                .get(attributeInt);
+                                                if (powerComponentAggregatedPowerStats == null
+                                                        && (createPowerComponent =
+                                                                        aggregatedPowerStatsConfig
+                                                                                .createPowerComponent(
+                                                                                        attributeInt))
+                                                                != null) {
+                                                    powerComponentAggregatedPowerStats =
+                                                            new PowerComponentAggregatedPowerStats(
+                                                                    aggregatedPowerStats,
+                                                                    createPowerComponent);
+                                                    aggregatedPowerStats.mPowerComponentStats.put(
+                                                            attributeInt,
+                                                            powerComponentAggregatedPowerStats);
                                                 }
                                                 if (powerComponentAggregatedPowerStats != null) {
                                                     String name3 = typedXmlPullParser.getName();
-                                                    int eventType3 = typedXmlPullParser.getEventType();
-                                                    while (eventType3 != i4 && (eventType3 != 3 || !typedXmlPullParser.getName().equals(name3))) {
+                                                    int eventType3 =
+                                                            typedXmlPullParser.getEventType();
+                                                    while (eventType3 != i4
+                                                            && (eventType3 != 3
+                                                                    || !typedXmlPullParser
+                                                                            .getName()
+                                                                            .equals(name3))) {
                                                         if (eventType3 == i2) {
-                                                            String name4 = typedXmlPullParser.getName();
+                                                            String name4 =
+                                                                    typedXmlPullParser.getName();
                                                             name4.getClass();
                                                             str3 = name3;
                                                             switch (name4.hashCode()) {
                                                                 case -2016846232:
-                                                                    if (name4.equals("device-stats")) {
+                                                                    if (name4.equals(
+                                                                            "device-stats")) {
                                                                         c = 0;
                                                                         break;
                                                                     }
                                                                     c = 65535;
                                                                     break;
                                                                 case -748366993:
-                                                                    if (name4.equals("descriptor")) {
+                                                                    if (name4.equals(
+                                                                            "descriptor")) {
                                                                         c = 1;
                                                                         break;
                                                                     }
                                                                     c = 65535;
                                                                     break;
                                                                 case 103033955:
-                                                                    if (name4.equals("state-stats")) {
+                                                                    if (name4.equals(
+                                                                            "state-stats")) {
                                                                         c = 2;
                                                                         break;
                                                                     }
@@ -282,59 +344,110 @@ public final class PowerStatsSpan {
                                                             switch (c) {
                                                                 case 0:
                                                                     str2 = null;
-                                                                    if (powerComponentAggregatedPowerStats.mDeviceStats == null) {
-                                                                        powerComponentAggregatedPowerStats.createDeviceStats(-1L);
+                                                                    if (powerComponentAggregatedPowerStats
+                                                                                    .mDeviceStats
+                                                                            == null) {
+                                                                        powerComponentAggregatedPowerStats
+                                                                                .createDeviceStats(
+                                                                                        -1L);
                                                                     }
-                                                                    if (!powerComponentAggregatedPowerStats.mDeviceStats.readFromXml(typedXmlPullParser)) {
+                                                                    if (!powerComponentAggregatedPowerStats
+                                                                            .mDeviceStats
+                                                                            .readFromXml(
+                                                                                    typedXmlPullParser)) {
                                                                         z2 = true;
                                                                         break;
                                                                     } else {
-                                                                        eventType3 = typedXmlPullParser.next();
+                                                                        eventType3 =
+                                                                                typedXmlPullParser
+                                                                                        .next();
                                                                         name3 = str3;
                                                                         i2 = 2;
                                                                         i4 = 1;
                                                                     }
                                                                 case 1:
                                                                     str2 = null;
-                                                                    PowerStats.Descriptor createFromXml = PowerStats.Descriptor.createFromXml(typedXmlPullParser);
-                                                                    powerComponentAggregatedPowerStats.mPowerStatsDescriptor = createFromXml;
+                                                                    PowerStats.Descriptor
+                                                                            createFromXml =
+                                                                                    PowerStats
+                                                                                            .Descriptor
+                                                                                            .createFromXml(
+                                                                                                    typedXmlPullParser);
+                                                                    powerComponentAggregatedPowerStats
+                                                                                    .mPowerStatsDescriptor =
+                                                                            createFromXml;
                                                                     if (createFromXml == null) {
                                                                         z2 = true;
                                                                         break;
                                                                     } else {
-                                                                        eventType3 = typedXmlPullParser.next();
+                                                                        eventType3 =
+                                                                                typedXmlPullParser
+                                                                                        .next();
                                                                         name3 = str3;
                                                                         i2 = 2;
                                                                         i4 = 1;
                                                                     }
                                                                 case 2:
                                                                     str2 = null;
-                                                                    int attributeInt2 = typedXmlPullParser.getAttributeInt((String) null, "key");
-                                                                    MultiStateStats multiStateStats = (MultiStateStats) powerComponentAggregatedPowerStats.mStateStats.get(attributeInt2);
+                                                                    int attributeInt2 =
+                                                                            typedXmlPullParser
+                                                                                    .getAttributeInt(
+                                                                                            (String)
+                                                                                                    null,
+                                                                                            "key");
+                                                                    MultiStateStats
+                                                                            multiStateStats =
+                                                                                    (MultiStateStats)
+                                                                                            powerComponentAggregatedPowerStats
+                                                                                                    .mStateStats
+                                                                                                    .get(
+                                                                                                            attributeInt2);
                                                                     if (multiStateStats == null) {
-                                                                        multiStateStats = powerComponentAggregatedPowerStats.createStateStats(attributeInt2);
+                                                                        multiStateStats =
+                                                                                powerComponentAggregatedPowerStats
+                                                                                        .createStateStats(
+                                                                                                attributeInt2);
                                                                     }
-                                                                    if (!multiStateStats.readFromXml(typedXmlPullParser)) {
+                                                                    if (!multiStateStats
+                                                                            .readFromXml(
+                                                                                    typedXmlPullParser)) {
                                                                         z2 = true;
                                                                         break;
                                                                     } else {
-                                                                        eventType3 = typedXmlPullParser.next();
+                                                                        eventType3 =
+                                                                                typedXmlPullParser
+                                                                                        .next();
                                                                         name3 = str3;
                                                                         i2 = 2;
                                                                         i4 = 1;
                                                                     }
                                                                 case 3:
-                                                                    PowerComponentAggregatedPowerStats.UidStats uidStats = powerComponentAggregatedPowerStats.getUidStats(typedXmlPullParser.getAttributeInt((String) null, "uid"));
+                                                                    PowerComponentAggregatedPowerStats
+                                                                                    .UidStats
+                                                                            uidStats =
+                                                                                    powerComponentAggregatedPowerStats
+                                                                                            .getUidStats(
+                                                                                                    typedXmlPullParser
+                                                                                                            .getAttributeInt(
+                                                                                                                    (String)
+                                                                                                                            null,
+                                                                                                                    "uid"));
                                                                     if (uidStats.stats == null) {
-                                                                        powerComponentAggregatedPowerStats.createUidStats(uidStats, -1L);
+                                                                        powerComponentAggregatedPowerStats
+                                                                                .createUidStats(
+                                                                                        uidStats,
+                                                                                        -1L);
                                                                     }
-                                                                    if (!uidStats.stats.readFromXml(typedXmlPullParser)) {
+                                                                    if (!uidStats.stats.readFromXml(
+                                                                            typedXmlPullParser)) {
                                                                         str2 = null;
                                                                         z2 = true;
                                                                         break;
                                                                     }
                                                                 default:
-                                                                    eventType3 = typedXmlPullParser.next();
+                                                                    eventType3 =
+                                                                            typedXmlPullParser
+                                                                                    .next();
                                                                     name3 = str3;
                                                                     i2 = 2;
                                                                     i4 = 1;
@@ -379,18 +492,26 @@ public final class PowerStatsSpan {
                             }
                             if (section == 0) {
                                 if (z) {
-                                    throw new XmlPullParserException("Unsupported PowerStatsStore section type: ".concat(attributeValue));
+                                    throw new XmlPullParserException(
+                                            "Unsupported PowerStatsStore section type: "
+                                                    .concat(attributeValue));
                                 }
-                                section = new Section(attributeValue) { // from class: com.android.server.power.stats.PowerStatsSpan.1
-                                    @Override // com.android.server.power.stats.PowerStatsSpan.Section
-                                    public final void dump(IndentingPrintWriter indentingPrintWriter) {
-                                        indentingPrintWriter.println("Unsupported PowerStatsStore section type: " + attributeValue);
-                                    }
+                                section =
+                                        new Section(
+                                                attributeValue) { // from class:
+                                                                  // com.android.server.power.stats.PowerStatsSpan.1
+                                            @Override // com.android.server.power.stats.PowerStatsSpan.Section
+                                            public final void dump(
+                                                    IndentingPrintWriter indentingPrintWriter) {
+                                                indentingPrintWriter.println(
+                                                        "Unsupported PowerStatsStore section type: "
+                                                                + attributeValue);
+                                            }
 
-                                    @Override // com.android.server.power.stats.PowerStatsSpan.Section
-                                    public final void write(TypedXmlSerializer typedXmlSerializer) {
-                                    }
-                                };
+                                            @Override // com.android.server.power.stats.PowerStatsSpan.Section
+                                            public final void write(
+                                                    TypedXmlSerializer typedXmlSerializer) {}
+                                        };
                             }
                             Metadata metadata = powerStatsSpan.mMetadata;
                             ArrayList arrayList = (ArrayList) metadata.mSections;
@@ -433,7 +554,8 @@ public final class PowerStatsSpan {
         }
     }
 
-    public void writeXml(OutputStream outputStream, TypedXmlSerializer typedXmlSerializer) throws IOException {
+    public void writeXml(OutputStream outputStream, TypedXmlSerializer typedXmlSerializer)
+            throws IOException {
         typedXmlSerializer.setOutput(outputStream, StandardCharsets.UTF_8.name());
         typedXmlSerializer.startDocument((String) null, Boolean.TRUE);
         Metadata metadata = this.mMetadata;
@@ -447,7 +569,8 @@ public final class PowerStatsSpan {
             timeFrame.getClass();
             typedXmlSerializer.startTag((String) null, "timeframe");
             typedXmlSerializer.attributeLong((String) null, "start", timeFrame.startTime);
-            typedXmlSerializer.attributeLong((String) null, "monotonic", timeFrame.startMonotonicTime);
+            typedXmlSerializer.attributeLong(
+                    (String) null, "monotonic", timeFrame.startMonotonicTime);
             typedXmlSerializer.attributeLong((String) null, "duration", timeFrame.duration);
             typedXmlSerializer.endTag((String) null, "timeframe");
         }

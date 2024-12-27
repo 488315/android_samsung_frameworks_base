@@ -3,6 +3,7 @@ package com.android.server.power.stats;
 import android.os.BatteryStats;
 import android.os.BatteryUsageStats;
 import android.os.BatteryUsageStatsQuery;
+
 import com.android.internal.os.PowerProfile;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -19,13 +20,22 @@ public final class IdlePowerCalculator extends PowerCalculator {
     }
 
     @Override // com.android.server.power.stats.PowerCalculator
-    public final void calculate(BatteryUsageStats.Builder builder, BatteryStats batteryStats, long j, long j2, BatteryUsageStatsQuery batteryUsageStatsQuery) {
+    public final void calculate(
+            BatteryUsageStats.Builder builder,
+            BatteryStats batteryStats,
+            long j,
+            long j2,
+            BatteryUsageStatsQuery batteryUsageStatsQuery) {
         long computeBatteryRealtime = batteryStats.computeBatteryRealtime(j, 0);
-        double computeBatteryUptime = (batteryStats.computeBatteryUptime(j2, 0) * this.mAveragePowerCpuIdleMahPerUs) + (computeBatteryRealtime * this.mAveragePowerCpuSuspendMahPerUs);
+        double computeBatteryUptime =
+                (batteryStats.computeBatteryUptime(j2, 0) * this.mAveragePowerCpuIdleMahPerUs)
+                        + (computeBatteryRealtime * this.mAveragePowerCpuSuspendMahPerUs);
         this.mPowerMah = computeBatteryUptime;
         this.mDurationMs = computeBatteryRealtime / 1000;
         if (computeBatteryUptime != 0.0d) {
-            builder.getAggregateBatteryConsumerBuilder(0).setConsumedPower(16, this.mPowerMah).setUsageDurationMillis(16, this.mDurationMs);
+            builder.getAggregateBatteryConsumerBuilder(0)
+                    .setConsumedPower(16, this.mPowerMah)
+                    .setUsageDurationMillis(16, this.mDurationMs);
         }
     }
 

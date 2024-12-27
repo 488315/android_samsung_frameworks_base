@@ -3,6 +3,7 @@ package android.telephony;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -17,29 +18,33 @@ public final class VisualVoicemailSmsFilterSettings implements Parcelable {
     public final List<String> originatingNumbers;
     public final String packageName;
     public static final List<String> DEFAULT_ORIGINATING_NUMBERS = Collections.emptyList();
-    public static final Parcelable.Creator<VisualVoicemailSmsFilterSettings> CREATOR = new Parcelable.Creator<VisualVoicemailSmsFilterSettings>() { // from class: android.telephony.VisualVoicemailSmsFilterSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualVoicemailSmsFilterSettings createFromParcel(Parcel in) {
-            Builder builder = new Builder();
-            builder.setClientPrefix(in.readString());
-            builder.setOriginatingNumbers(in.createStringArrayList());
-            builder.setDestinationPort(in.readInt());
-            builder.setPackageName(in.readString());
-            return builder.build();
-        }
+    public static final Parcelable.Creator<VisualVoicemailSmsFilterSettings> CREATOR =
+            new Parcelable.Creator<
+                    VisualVoicemailSmsFilterSettings>() { // from class:
+                                                          // android.telephony.VisualVoicemailSmsFilterSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualVoicemailSmsFilterSettings createFromParcel(Parcel in) {
+                    Builder builder = new Builder();
+                    builder.setClientPrefix(in.readString());
+                    builder.setOriginatingNumbers(in.createStringArrayList());
+                    builder.setDestinationPort(in.readInt());
+                    builder.setPackageName(in.readString());
+                    return builder.build();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualVoicemailSmsFilterSettings[] newArray(int size) {
-            return new VisualVoicemailSmsFilterSettings[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualVoicemailSmsFilterSettings[] newArray(int size) {
+                    return new VisualVoicemailSmsFilterSettings[size];
+                }
+            };
 
     public static class Builder {
         private String mPackageName;
         private String mClientPrefix = VisualVoicemailSmsFilterSettings.DEFAULT_CLIENT_PREFIX;
-        private List<String> mOriginatingNumbers = VisualVoicemailSmsFilterSettings.DEFAULT_ORIGINATING_NUMBERS;
+        private List<String> mOriginatingNumbers =
+                VisualVoicemailSmsFilterSettings.DEFAULT_ORIGINATING_NUMBERS;
         private int mDestinationPort = -1;
 
         public VisualVoicemailSmsFilterSettings build() {
@@ -94,6 +99,12 @@ public final class VisualVoicemailSmsFilterSettings implements Parcelable {
     }
 
     public String toString() {
-        return "[VisualVoicemailSmsFilterSettings clientPrefix=" + this.clientPrefix + ", originatingNumbers=" + this.originatingNumbers + ", destinationPort=" + this.destinationPort + NavigationBarInflaterView.SIZE_MOD_END;
+        return "[VisualVoicemailSmsFilterSettings clientPrefix="
+                + this.clientPrefix
+                + ", originatingNumbers="
+                + this.originatingNumbers
+                + ", destinationPort="
+                + this.destinationPort
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

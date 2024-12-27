@@ -9,7 +9,8 @@ import android.os.RemoteException;
 /* loaded from: classes2.dex */
 public interface IGnssGeofenceCallback extends IInterface {
     public static final int AVAILABLE = 2;
-    public static final String DESCRIPTOR = "android$hardware$gnss$IGnssGeofenceCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IGnssGeofenceCallback".replace('$', '.');
     public static final int ENTERED = 1;
     public static final int ERROR_GENERIC = -149;
     public static final int ERROR_ID_EXISTS = -101;
@@ -37,32 +38,30 @@ public interface IGnssGeofenceCallback extends IInterface {
 
     void gnssGeofenceStatusCb(int i, GnssLocation gnssLocation) throws RemoteException;
 
-    void gnssGeofenceTransitionCb(int i, GnssLocation gnssLocation, int i2, long j) throws RemoteException;
+    void gnssGeofenceTransitionCb(int i, GnssLocation gnssLocation, int i2, long j)
+            throws RemoteException;
 
     public static class Default implements IGnssGeofenceCallback {
         @Override // android.hardware.gnss.IGnssGeofenceCallback
-        public void gnssGeofenceTransitionCb(int geofenceId, GnssLocation location, int transition, long timestampMillis) throws RemoteException {
-        }
+        public void gnssGeofenceTransitionCb(
+                int geofenceId, GnssLocation location, int transition, long timestampMillis)
+                throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofenceCallback
-        public void gnssGeofenceStatusCb(int availability, GnssLocation lastLocation) throws RemoteException {
-        }
+        public void gnssGeofenceStatusCb(int availability, GnssLocation lastLocation)
+                throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofenceCallback
-        public void gnssGeofenceAddCb(int geofenceId, int status) throws RemoteException {
-        }
+        public void gnssGeofenceAddCb(int geofenceId, int status) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofenceCallback
-        public void gnssGeofenceRemoveCb(int geofenceId, int status) throws RemoteException {
-        }
+        public void gnssGeofenceRemoveCb(int geofenceId, int status) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofenceCallback
-        public void gnssGeofencePauseCb(int geofenceId, int status) throws RemoteException {
-        }
+        public void gnssGeofencePauseCb(int geofenceId, int status) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofenceCallback
-        public void gnssGeofenceResumeCb(int geofenceId, int status) throws RemoteException {
-        }
+        public void gnssGeofenceResumeCb(int geofenceId, int status) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssGeofenceCallback
         public int getInterfaceVersion() {
@@ -80,7 +79,7 @@ public interface IGnssGeofenceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssGeofenceCallback {
+    public abstract static class Stub extends Binder implements IGnssGeofenceCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_gnssGeofenceAddCb = 3;
@@ -140,7 +139,8 @@ public interface IGnssGeofenceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -228,7 +228,9 @@ public interface IGnssGeofenceCallback extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssGeofenceCallback
-            public void gnssGeofenceTransitionCb(int geofenceId, GnssLocation location, int transition, long timestampMillis) throws RemoteException {
+            public void gnssGeofenceTransitionCb(
+                    int geofenceId, GnssLocation location, int transition, long timestampMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -239,7 +241,8 @@ public interface IGnssGeofenceCallback extends IInterface {
                     _data.writeLong(timestampMillis);
                     boolean _status = this.mRemote.transact(1, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method gnssGeofenceTransitionCb is unimplemented.");
+                        throw new RemoteException(
+                                "Method gnssGeofenceTransitionCb is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -249,7 +252,8 @@ public interface IGnssGeofenceCallback extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssGeofenceCallback
-            public void gnssGeofenceStatusCb(int availability, GnssLocation lastLocation) throws RemoteException {
+            public void gnssGeofenceStatusCb(int availability, GnssLocation lastLocation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

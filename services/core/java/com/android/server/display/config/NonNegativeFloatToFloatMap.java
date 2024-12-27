@@ -9,22 +9,23 @@ public final class NonNegativeFloatToFloatMap {
     public List point;
 
     /* JADX WARN: Code restructure failed: missing block: B:49:0x0086, code lost:
-    
-        if (r1 != 3) goto L32;
-     */
+
+       if (r1 != 3) goto L32;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x0088, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:52:0x0090, code lost:
-    
-        throw new javax.xml.datatype.DatatypeConfigurationException("NonNegativeFloatToFloatMap is not closed");
-     */
+
+       throw new javax.xml.datatype.DatatypeConfigurationException("NonNegativeFloatToFloatMap is not closed");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.display.config.NonNegativeFloatToFloatMap read(org.xmlpull.v1.XmlPullParser r7) {
+    public static com.android.server.display.config.NonNegativeFloatToFloatMap read(
+            org.xmlpull.v1.XmlPullParser r7) {
         /*
             com.android.server.display.config.NonNegativeFloatToFloatMap r0 = new com.android.server.display.config.NonNegativeFloatToFloatMap
             r0.<init>()
@@ -98,7 +99,9 @@ public final class NonNegativeFloatToFloatMap {
             r7.<init>(r0)
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.config.NonNegativeFloatToFloatMap.read(org.xmlpull.v1.XmlPullParser):com.android.server.display.config.NonNegativeFloatToFloatMap");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.config.NonNegativeFloatToFloatMap.read(org.xmlpull.v1.XmlPullParser):com.android.server.display.config.NonNegativeFloatToFloatMap");
     }
 
     public final List getPoint() {

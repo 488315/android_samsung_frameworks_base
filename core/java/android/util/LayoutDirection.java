@@ -8,6 +8,5 @@ public final class LayoutDirection {
     public static final int RTL = 1;
     public static final int UNDEFINED = -1;
 
-    private LayoutDirection() {
-    }
+    private LayoutDirection() {}
 }

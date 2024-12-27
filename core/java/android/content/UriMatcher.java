@@ -191,6 +191,7 @@ public class UriMatcher {
             int r3 = r2.mCode
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.UriMatcher.match(android.net.Uri):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.content.UriMatcher.match(android.net.Uri):int");
     }
 }

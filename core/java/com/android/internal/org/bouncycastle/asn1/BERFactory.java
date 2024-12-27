@@ -5,8 +5,7 @@ class BERFactory {
     static final BERSequence EMPTY_SEQUENCE = new BERSequence();
     static final BERSet EMPTY_SET = new BERSet();
 
-    BERFactory() {
-    }
+    BERFactory() {}
 
     static BERSequence createSequence(ASN1EncodableVector v) {
         if (v.size() < 1) {

@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException;
 import com.android.internal.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
@@ -31,7 +32,8 @@ public class OAEPEncoding implements AsymmetricBlockCipher {
         this(cipher, hash, hash, encodingParams);
     }
 
-    public OAEPEncoding(AsymmetricBlockCipher cipher, Digest hash, Digest mgf1Hash, byte[] encodingParams) {
+    public OAEPEncoding(
+            AsymmetricBlockCipher cipher, Digest hash, Digest mgf1Hash, byte[] encodingParams) {
         this.engine = cipher;
         this.mgf1Hash = mgf1Hash;
         this.defHash = new byte[hash.getDigestSize()];
@@ -94,12 +96,18 @@ public class OAEPEncoding implements AsymmetricBlockCipher {
         System.arraycopy(this.defHash, 0, block, this.defHash.length, this.defHash.length);
         byte[] seed = new byte[this.defHash.length];
         this.random.nextBytes(seed);
-        byte[] mask = maskGeneratorFunction1(seed, 0, seed.length, block.length - this.defHash.length);
+        byte[] mask =
+                maskGeneratorFunction1(seed, 0, seed.length, block.length - this.defHash.length);
         for (int i = this.defHash.length; i != block.length; i++) {
             block[i] = (byte) (block[i] ^ mask[i - this.defHash.length]);
         }
         System.arraycopy(seed, 0, block, 0, this.defHash.length);
-        byte[] mask2 = maskGeneratorFunction1(block, this.defHash.length, block.length - this.defHash.length, this.defHash.length);
+        byte[] mask2 =
+                maskGeneratorFunction1(
+                        block,
+                        this.defHash.length,
+                        block.length - this.defHash.length,
+                        this.defHash.length);
         for (int i2 = 0; i2 != this.defHash.length; i2++) {
             block[i2] = (byte) (block[i2] ^ mask2[i2]);
         }
@@ -116,11 +124,18 @@ public class OAEPEncoding implements AsymmetricBlockCipher {
             System.arraycopy(data, 0, block, 0, block.length);
             wrongData = true;
         }
-        byte[] mask = maskGeneratorFunction1(block, this.defHash.length, block.length - this.defHash.length, this.defHash.length);
+        byte[] mask =
+                maskGeneratorFunction1(
+                        block,
+                        this.defHash.length,
+                        block.length - this.defHash.length,
+                        this.defHash.length);
         for (int i = 0; i != this.defHash.length; i++) {
             block[i] = (byte) (block[i] ^ mask[i]);
         }
-        byte[] mask2 = maskGeneratorFunction1(block, 0, this.defHash.length, block.length - this.defHash.length);
+        byte[] mask2 =
+                maskGeneratorFunction1(
+                        block, 0, this.defHash.length, block.length - this.defHash.length);
         for (int i2 = this.defHash.length; i2 != block.length; i2++) {
             block[i2] = (byte) (block[i2] ^ mask2[i2 - this.defHash.length]);
         }
@@ -175,7 +190,12 @@ public class OAEPEncoding implements AsymmetricBlockCipher {
             this.mgf1Hash.update(Z, zOff, zLen);
             this.mgf1Hash.update(C, 0, C.length);
             this.mgf1Hash.doFinal(hashBuf, 0);
-            System.arraycopy(hashBuf, 0, mask, hashBuf.length * counter, mask.length - (hashBuf.length * counter));
+            System.arraycopy(
+                    hashBuf,
+                    0,
+                    mask,
+                    hashBuf.length * counter,
+                    mask.length - (hashBuf.length * counter));
         }
         return mask;
     }

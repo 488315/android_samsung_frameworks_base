@@ -6,7 +6,9 @@ import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import android.system.VmSocketAddress;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.EOFException;
 import java.io.FileDescriptor;
 import java.io.InterruptedIOException;
@@ -20,7 +22,8 @@ import java.util.function.Consumer;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class EmulatorClipboardMonitor implements Consumer {
-    public static final boolean LOG_CLIBOARD_ACCESS = SystemProperties.getBoolean("ro.boot.qemu.log_clipboard_access", false);
+    public static final boolean LOG_CLIBOARD_ACCESS =
+            SystemProperties.getBoolean("ro.boot.qemu.log_clipboard_access", false);
     public FileDescriptor mPipe;
 
     public static FileDescriptor openPipe() {
@@ -67,7 +70,9 @@ public final class EmulatorClipboardMonitor implements Consumer {
         wrap.order(ByteOrder.LITTLE_ENDIAN);
         int i4 = wrap.getInt();
         if (i4 < 0 || i4 > 134217728) {
-            throw new ProtocolException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i4, "Clipboard message length: ", " out of bounds."));
+            throw new ProtocolException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i4, "Clipboard message length: ", " out of bounds."));
         }
         byte[] bArr2 = new byte[i4];
         while (i4 > 0) {
@@ -112,10 +117,15 @@ public final class EmulatorClipboardMonitor implements Consumer {
         }
         if (fileDescriptor != null) {
             String str = "";
-            if (clipData != null && clipData.getItemCount() != 0 && (text = clipData.getItemAt(0).getText()) != null) {
+            if (clipData != null
+                    && clipData.getItemCount() != 0
+                    && (text = clipData.getItemAt(0).getText()) != null) {
                 str = text.toString();
             }
-            new Thread(new EmulatorClipboardMonitor$$ExternalSyntheticLambda0(1, str, fileDescriptor)).start();
+            new Thread(
+                            new EmulatorClipboardMonitor$$ExternalSyntheticLambda0(
+                                    1, str, fileDescriptor))
+                    .start();
         }
     }
 }

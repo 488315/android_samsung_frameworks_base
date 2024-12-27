@@ -1,6 +1,7 @@
 package android.util;
 
 import android.os.Parcel;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
 import com.android.internal.util.Preconditions;
@@ -141,7 +142,8 @@ public class LongSparseLongArray implements Cloneable {
         return buffer.toString();
     }
 
-    public static class Parcelling implements com.android.internal.util.Parcelling<LongSparseLongArray> {
+    public static class Parcelling
+            implements com.android.internal.util.Parcelling<LongSparseLongArray> {
         @Override // com.android.internal.util.Parcelling
         public void parcel(LongSparseLongArray array, Parcel dest, int parcelFlags) {
             if (array == null) {

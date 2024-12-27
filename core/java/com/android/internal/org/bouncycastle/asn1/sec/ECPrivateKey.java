@@ -13,6 +13,7 @@ import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 import java.util.Enumeration;
 
@@ -58,7 +59,8 @@ public class ECPrivateKey extends ASN1Object {
         this(orderBitLength, key, null, parameters);
     }
 
-    public ECPrivateKey(int orderBitLength, BigInteger key, DERBitString publicKey, ASN1Encodable parameters) {
+    public ECPrivateKey(
+            int orderBitLength, BigInteger key, DERBitString publicKey, ASN1Encodable parameters) {
         byte[] bytes = BigIntegers.asUnsignedByteArray((orderBitLength + 7) / 8, key);
         ASN1EncodableVector v = new ASN1EncodableVector(4);
         v.add(new ASN1Integer(1L));
@@ -99,7 +101,8 @@ public class ECPrivateKey extends ASN1Object {
         return null;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.seq;
     }

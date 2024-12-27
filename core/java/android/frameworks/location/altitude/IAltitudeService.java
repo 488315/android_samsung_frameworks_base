@@ -8,13 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IAltitudeService extends IInterface {
-    public static final String DESCRIPTOR = "android$frameworks$location$altitude$IAltitudeService".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$frameworks$location$altitude$IAltitudeService".replace('$', '.');
     public static final String HASH = "e47d23f579ff7a897fb03e7e7f1c3006cfc6036b";
     public static final int VERSION = 2;
 
-    AddMslAltitudeToLocationResponse addMslAltitudeToLocation(AddMslAltitudeToLocationRequest addMslAltitudeToLocationRequest) throws RemoteException;
+    AddMslAltitudeToLocationResponse addMslAltitudeToLocation(
+            AddMslAltitudeToLocationRequest addMslAltitudeToLocationRequest) throws RemoteException;
 
-    GetGeoidHeightResponse getGeoidHeight(GetGeoidHeightRequest getGeoidHeightRequest) throws RemoteException;
+    GetGeoidHeightResponse getGeoidHeight(GetGeoidHeightRequest getGeoidHeightRequest)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
@@ -22,12 +25,14 @@ public interface IAltitudeService extends IInterface {
 
     public static class Default implements IAltitudeService {
         @Override // android.frameworks.location.altitude.IAltitudeService
-        public AddMslAltitudeToLocationResponse addMslAltitudeToLocation(AddMslAltitudeToLocationRequest request) throws RemoteException {
+        public AddMslAltitudeToLocationResponse addMslAltitudeToLocation(
+                AddMslAltitudeToLocationRequest request) throws RemoteException {
             return null;
         }
 
         @Override // android.frameworks.location.altitude.IAltitudeService
-        public GetGeoidHeightResponse getGeoidHeight(GetGeoidHeightRequest request) throws RemoteException {
+        public GetGeoidHeightResponse getGeoidHeight(GetGeoidHeightRequest request)
+                throws RemoteException {
             return null;
         }
 
@@ -47,7 +52,7 @@ public interface IAltitudeService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAltitudeService {
+    public abstract static class Stub extends Binder implements IAltitudeService {
         static final int TRANSACTION_addMslAltitudeToLocation = 1;
         static final int TRANSACTION_getGeoidHeight = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -95,7 +100,8 @@ public interface IAltitudeService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -116,14 +122,18 @@ public interface IAltitudeService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AddMslAltitudeToLocationRequest _arg0 = (AddMslAltitudeToLocationRequest) data.readTypedObject(AddMslAltitudeToLocationRequest.CREATOR);
+                    AddMslAltitudeToLocationRequest _arg0 =
+                            (AddMslAltitudeToLocationRequest)
+                                    data.readTypedObject(AddMslAltitudeToLocationRequest.CREATOR);
                     data.enforceNoDataAvail();
                     AddMslAltitudeToLocationResponse _result = addMslAltitudeToLocation(_arg0);
                     reply.writeNoException();
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    GetGeoidHeightRequest _arg02 = (GetGeoidHeightRequest) data.readTypedObject(GetGeoidHeightRequest.CREATOR);
+                    GetGeoidHeightRequest _arg02 =
+                            (GetGeoidHeightRequest)
+                                    data.readTypedObject(GetGeoidHeightRequest.CREATOR);
                     data.enforceNoDataAvail();
                     GetGeoidHeightResponse _result2 = getGeoidHeight(_arg02);
                     reply.writeNoException();
@@ -153,7 +163,8 @@ public interface IAltitudeService extends IInterface {
             }
 
             @Override // android.frameworks.location.altitude.IAltitudeService
-            public AddMslAltitudeToLocationResponse addMslAltitudeToLocation(AddMslAltitudeToLocationRequest request) throws RemoteException {
+            public AddMslAltitudeToLocationResponse addMslAltitudeToLocation(
+                    AddMslAltitudeToLocationRequest request) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -161,10 +172,14 @@ public interface IAltitudeService extends IInterface {
                     _data.writeTypedObject(request, 0);
                     boolean _status = this.mRemote.transact(1, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method addMslAltitudeToLocation is unimplemented.");
+                        throw new RemoteException(
+                                "Method addMslAltitudeToLocation is unimplemented.");
                     }
                     _reply.readException();
-                    AddMslAltitudeToLocationResponse _result = (AddMslAltitudeToLocationResponse) _reply.readTypedObject(AddMslAltitudeToLocationResponse.CREATOR);
+                    AddMslAltitudeToLocationResponse _result =
+                            (AddMslAltitudeToLocationResponse)
+                                    _reply.readTypedObject(
+                                            AddMslAltitudeToLocationResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -173,7 +188,8 @@ public interface IAltitudeService extends IInterface {
             }
 
             @Override // android.frameworks.location.altitude.IAltitudeService
-            public GetGeoidHeightResponse getGeoidHeight(GetGeoidHeightRequest request) throws RemoteException {
+            public GetGeoidHeightResponse getGeoidHeight(GetGeoidHeightRequest request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -184,7 +200,9 @@ public interface IAltitudeService extends IInterface {
                         throw new RemoteException("Method getGeoidHeight is unimplemented.");
                     }
                     _reply.readException();
-                    GetGeoidHeightResponse _result = (GetGeoidHeightResponse) _reply.readTypedObject(GetGeoidHeightResponse.CREATOR);
+                    GetGeoidHeightResponse _result =
+                            (GetGeoidHeightResponse)
+                                    _reply.readTypedObject(GetGeoidHeightResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

@@ -9,7 +9,9 @@ import android.util.Log;
 import android.util.Pools;
 import android.view.InputEventConsistencyVerifier;
 import android.view.KeyEvent;
+
 import com.android.server.HeapdumpWatcher$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,7 +44,8 @@ public final class KeyEventDispatcher implements Handler.Callback {
 
     public KeyEventDispatcher(Handler handler, Object obj, PowerManager powerManager) {
         if (InputEventConsistencyVerifier.isInstrumentationEnabled()) {
-            this.mSentEventsVerifier = new InputEventConsistencyVerifier(this, 0, "KeyEventDispatcher");
+            this.mSentEventsVerifier =
+                    new InputEventConsistencyVerifier(this, 0, "KeyEventDispatcher");
         } else {
             this.mSentEventsVerifier = null;
         }
@@ -56,16 +59,20 @@ public final class KeyEventDispatcher implements Handler.Callback {
     @Override // android.os.Handler.Callback
     public final boolean handleMessage(Message message) {
         if (message.what != 1) {
-            HeapdumpWatcher$$ExternalSyntheticOutline0.m(new StringBuilder("Unknown message: "), message.what, "KeyEventDispatcher");
+            HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Unknown message: "), message.what, "KeyEventDispatcher");
             return false;
         }
-        Log.i("KeyEventDispatcher", "KeyEventDispatcher handleMessage cannot receive setOnKeyEventResult");
+        Log.i(
+                "KeyEventDispatcher",
+                "KeyEventDispatcher handleMessage cannot receive setOnKeyEventResult");
         PendingKeyEvent pendingKeyEvent = (PendingKeyEvent) message.obj;
         synchronized (this.mLock) {
             try {
                 Iterator it = ((ArrayMap) this.mPendingEventsMap).values().iterator();
-                while (it.hasNext() && (!((ArrayList) it.next()).remove(pendingKeyEvent) || !removeReferenceToPendingEventLocked(pendingKeyEvent))) {
-                }
+                while (it.hasNext()
+                        && (!((ArrayList) it.next()).remove(pendingKeyEvent)
+                                || !removeReferenceToPendingEventLocked(pendingKeyEvent))) {}
             } finally {
             }
         }
@@ -94,7 +101,8 @@ public final class KeyEventDispatcher implements Handler.Callback {
                     pendingKeyEvent.referenceCount = 0;
                     pendingKeyEvent.handled = false;
                 }
-                ArrayList arrayList2 = (ArrayList) ((ArrayMap) this.mPendingEventsMap).get(keyEventFilter);
+                ArrayList arrayList2 =
+                        (ArrayList) ((ArrayMap) this.mPendingEventsMap).get(keyEventFilter);
                 if (arrayList2 == null) {
                     arrayList2 = new ArrayList();
                     ((ArrayMap) this.mPendingEventsMap).put(keyEventFilter, arrayList2);
@@ -108,7 +116,8 @@ public final class KeyEventDispatcher implements Handler.Callback {
             obtain.recycle();
             return false;
         }
-        this.mKeyEventTimeoutHandler.sendMessageDelayed(this.mKeyEventTimeoutHandler.obtainMessage(1, pendingKeyEvent), 500L);
+        this.mKeyEventTimeoutHandler.sendMessageDelayed(
+                this.mKeyEventTimeoutHandler.obtainMessage(1, pendingKeyEvent), 500L);
         return true;
     }
 
@@ -126,7 +135,13 @@ public final class KeyEventDispatcher implements Handler.Callback {
             if (inputEventConsistencyVerifier != null) {
                 inputEventConsistencyVerifier.onKeyEvent(pendingKeyEvent.event, 0);
             }
-            this.mHandlerToSendKeyEventsToInputFilter.obtainMessage(this.mMessageTypeForSendKeyEvent, pendingKeyEvent.policyFlags | 1073741824, 0, pendingKeyEvent.event).sendToTarget();
+            this.mHandlerToSendKeyEventsToInputFilter
+                    .obtainMessage(
+                            this.mMessageTypeForSendKeyEvent,
+                            pendingKeyEvent.policyFlags | 1073741824,
+                            0,
+                            pendingKeyEvent.event)
+                    .sendToTarget();
         }
         this.mPendingEventPool.release(pendingKeyEvent);
         return true;
@@ -156,7 +171,8 @@ public final class KeyEventDispatcher implements Handler.Callback {
                         pendingKeyEvent.handled = z;
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            this.mPowerManager.userActivity(pendingKeyEvent.event.getEventTime(), 3, 0);
+                            this.mPowerManager.userActivity(
+                                    pendingKeyEvent.event.getEventTime(), 3, 0);
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         } catch (Throwable th) {
                             Binder.restoreCallingIdentity(clearCallingIdentity);

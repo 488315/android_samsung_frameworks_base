@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.cms;
 
 import com.android.internal.org.bouncycastle.util.Iterable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -54,7 +55,8 @@ public class SignerInformationStore implements Iterable<SignerInformation> {
     public Collection<SignerInformation> getSigners(SignerId selector) {
         if (selector.getIssuer() != null && selector.getSubjectKeyIdentifier() != null) {
             List results = new ArrayList();
-            Collection match1 = getSigners(new SignerId(selector.getIssuer(), selector.getSerialNumber()));
+            Collection match1 =
+                    getSigners(new SignerId(selector.getIssuer(), selector.getSerialNumber()));
             if (match1 != null) {
                 results.addAll(match1);
             }

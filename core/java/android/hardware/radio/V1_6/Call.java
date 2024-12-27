@@ -3,6 +3,7 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -19,14 +20,17 @@ public final class Call {
             return false;
         }
         Call other = (Call) otherObject;
-        if (HidlSupport.deepEquals(this.base, other.base) && HidlSupport.deepEquals(this.forwardedNumber, other.forwardedNumber)) {
+        if (HidlSupport.deepEquals(this.base, other.base)
+                && HidlSupport.deepEquals(this.forwardedNumber, other.forwardedNumber)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.base)), Integer.valueOf(HidlSupport.deepHashCode(this.forwardedNumber)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.base)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.forwardedNumber)));
     }
 
     public final String toString() {
@@ -42,7 +46,8 @@ public final class Call {
         ArrayList<Call> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 112, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 112, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             Call _hidl_vec_element = new Call();
@@ -52,10 +57,15 @@ public final class Call {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.base.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 0);
         this.forwardedNumber = _hidl_blob.getString(_hidl_offset + 96);
-        parcel.readEmbeddedBuffer(this.forwardedNumber.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 96 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.forwardedNumber.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 96 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {

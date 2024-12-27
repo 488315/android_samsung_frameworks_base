@@ -8,7 +8,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.SparseArray;
 import android.util.sysfwutil.Slog;
+
 import com.android.internal.util.dump.DualDumpOutputStream;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -44,9 +46,13 @@ public final class UsbPermissionManager {
         UsbUserPermissionManager usbUserPermissionManager;
         synchronized (this.mPermissionsByUser) {
             try {
-                usbUserPermissionManager = (UsbUserPermissionManager) this.mPermissionsByUser.get(i);
+                usbUserPermissionManager =
+                        (UsbUserPermissionManager) this.mPermissionsByUser.get(i);
                 if (usbUserPermissionManager == null) {
-                    usbUserPermissionManager = new UsbUserPermissionManager(this.mContext.createContextAsUser(UserHandle.of(i), 0), this.mUsbService.mSettingsManager.getSettingsForUser(i));
+                    usbUserPermissionManager =
+                            new UsbUserPermissionManager(
+                                    this.mContext.createContextAsUser(UserHandle.of(i), 0),
+                                    this.mUsbService.mSettingsManager.getSettingsForUser(i));
                     this.mPermissionsByUser.put(i, usbUserPermissionManager);
                 }
             } catch (Throwable th) {
@@ -60,9 +66,11 @@ public final class UsbPermissionManager {
         synchronized (this.mPermissionsByUser) {
             for (int i = 0; i < this.mPermissionsByUser.size(); i++) {
                 try {
-                    UsbUserPermissionManager usbUserPermissionManager = (UsbUserPermissionManager) this.mPermissionsByUser.valueAt(i);
+                    UsbUserPermissionManager usbUserPermissionManager =
+                            (UsbUserPermissionManager) this.mPermissionsByUser.valueAt(i);
                     synchronized (usbUserPermissionManager.mLock) {
-                        usbUserPermissionManager.mDevicePermissionMap.remove(usbDevice.getDeviceName());
+                        usbUserPermissionManager.mDevicePermissionMap.remove(
+                                usbDevice.getDeviceName());
                     }
                 } catch (Throwable th) {
                     throw th;

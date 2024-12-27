@@ -4,7 +4,7 @@ import android.graphics.Rect;
 import android.os.CancellationSignal;
 import android.util.MathUtils;
 import android.webkit.WebView;
-import com.android.internal.view.ScrollCaptureViewHelper;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes5.dex */
@@ -16,13 +16,24 @@ public class WebViewCaptureHelper implements ScrollCaptureViewHelper<WebView> {
     private final Rect mWebViewBounds = new Rect();
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
-    public /* bridge */ /* synthetic */ void onScrollRequested(WebView webView, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
-        onScrollRequested2(webView, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
+    public /* bridge */ /* synthetic */ void onScrollRequested(
+            WebView webView,
+            Rect rect,
+            Rect rect2,
+            CancellationSignal cancellationSignal,
+            Consumer consumer) {
+        onScrollRequested2(
+                webView,
+                rect,
+                rect2,
+                cancellationSignal,
+                (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
     public boolean onAcceptSession(WebView view) {
-        return view.isVisibleToUser() && ((float) view.getContentHeight()) * view.getScale() > ((float) view.getHeight());
+        return view.isVisibleToUser()
+                && ((float) view.getContentHeight()) * view.getScale() > ((float) view.getHeight());
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
@@ -32,7 +43,12 @@ public class WebViewCaptureHelper implements ScrollCaptureViewHelper<WebView> {
     }
 
     /* renamed from: onScrollRequested, reason: avoid collision after fix types in other method */
-    public void onScrollRequested2(WebView view, Rect scrollBounds, Rect requestRect, CancellationSignal cancellationSignal, Consumer<ScrollCaptureViewHelper.ScrollResult> resultConsumer) {
+    public void onScrollRequested2(
+            WebView view,
+            Rect scrollBounds,
+            Rect requestRect,
+            CancellationSignal cancellationSignal,
+            Consumer<ScrollCaptureViewHelper.ScrollResult> resultConsumer) {
         int scrollDelta = view.getScrollY() - this.mOriginScrollY;
         ScrollCaptureViewHelper.ScrollResult result = new ScrollCaptureViewHelper.ScrollResult();
         result.requestedArea = new Rect(requestRect);

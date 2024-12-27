@@ -10,12 +10,19 @@ import android.telecom.CallScreeningService;
 
 /* loaded from: classes5.dex */
 public interface ICallScreeningAdapter extends IInterface {
-    void onScreeningResponse(String str, ComponentName componentName, CallScreeningService.ParcelableCallResponse parcelableCallResponse) throws RemoteException;
+    void onScreeningResponse(
+            String str,
+            ComponentName componentName,
+            CallScreeningService.ParcelableCallResponse parcelableCallResponse)
+            throws RemoteException;
 
     public static class Default implements ICallScreeningAdapter {
         @Override // com.android.internal.telecom.ICallScreeningAdapter
-        public void onScreeningResponse(String callId, ComponentName componentName, CallScreeningService.ParcelableCallResponse response) throws RemoteException {
-        }
+        public void onScreeningResponse(
+                String callId,
+                ComponentName componentName,
+                CallScreeningService.ParcelableCallResponse response)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,8 +30,9 @@ public interface ICallScreeningAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallScreeningAdapter {
-        public static final String DESCRIPTOR = "com.android.internal.telecom.ICallScreeningAdapter";
+    public abstract static class Stub extends Binder implements ICallScreeningAdapter {
+        public static final String DESCRIPTOR =
+                "com.android.internal.telecom.ICallScreeningAdapter";
         static final int TRANSACTION_onScreeningResponse = 1;
 
         public Stub() {
@@ -62,7 +70,8 @@ public interface ICallScreeningAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -73,8 +82,12 @@ public interface ICallScreeningAdapter extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    CallScreeningService.ParcelableCallResponse _arg2 = (CallScreeningService.ParcelableCallResponse) data.readTypedObject(CallScreeningService.ParcelableCallResponse.CREATOR);
+                    ComponentName _arg1 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    CallScreeningService.ParcelableCallResponse _arg2 =
+                            (CallScreeningService.ParcelableCallResponse)
+                                    data.readTypedObject(
+                                            CallScreeningService.ParcelableCallResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onScreeningResponse(_arg0, _arg1, _arg2);
                     return true;
@@ -100,7 +113,11 @@ public interface ICallScreeningAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallScreeningAdapter
-            public void onScreeningResponse(String callId, ComponentName componentName, CallScreeningService.ParcelableCallResponse response) throws RemoteException {
+            public void onScreeningResponse(
+                    String callId,
+                    ComponentName componentName,
+                    CallScreeningService.ParcelableCallResponse response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

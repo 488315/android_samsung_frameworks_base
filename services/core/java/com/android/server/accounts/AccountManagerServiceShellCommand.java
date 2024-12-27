@@ -3,7 +3,9 @@ package com.android.server.accounts;
 import android.app.ActivityManager;
 import android.os.ShellCommand;
 import android.os.UserHandle;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +28,10 @@ public final class AccountManagerServiceShellCommand extends ShellCommand {
             }
             PrintWriter outPrintWriter = getOutPrintWriter();
             AccountManagerService accountManagerService = this.mService;
-            outPrintWriter.println(Boolean.toString(accountManagerService.mAuthenticatorCache.getBindInstantServiceAllowed(parseUserId.intValue())));
+            outPrintWriter.println(
+                    Boolean.toString(
+                            accountManagerService.mAuthenticatorCache.getBindInstantServiceAllowed(
+                                    parseUserId.intValue())));
             return 0;
         }
         if (!str.equals("set-bind-instant-service-allowed")) {
@@ -37,7 +42,8 @@ public final class AccountManagerServiceShellCommand extends ShellCommand {
             String nextArgRequired = getNextArgRequired();
             if (nextArgRequired != null) {
                 AccountManagerService accountManagerService2 = this.mService;
-                accountManagerService2.mAuthenticatorCache.setBindInstantServiceAllowed(parseUserId2.intValue(), Boolean.parseBoolean(nextArgRequired));
+                accountManagerService2.mAuthenticatorCache.setBindInstantServiceAllowed(
+                        parseUserId2.intValue(), Boolean.parseBoolean(nextArgRequired));
                 return 0;
             }
             getErrPrintWriter().println("Error: no true/false specified");
@@ -50,8 +56,15 @@ public final class AccountManagerServiceShellCommand extends ShellCommand {
         outPrintWriter.println("Account manager service commands:");
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
-        outPrintWriter.println("  set-bind-instant-service-allowed [--user <USER_ID> (current user if not specified)] true|false ");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Set whether binding to services provided by instant apps is allowed.", "  get-bind-instant-service-allowed [--user <USER_ID> (current user if not specified)]", "    Get whether binding to services provided by instant apps is allowed.");
+        outPrintWriter.println(
+                "  set-bind-instant-service-allowed [--user <USER_ID> (current user if not"
+                    + " specified)] true|false ");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Set whether binding to services provided by instant apps is allowed.",
+                "  get-bind-instant-service-allowed [--user <USER_ID> (current user if not"
+                    + " specified)]",
+                "    Get whether binding to services provided by instant apps is allowed.");
     }
 
     public final Integer parseUserId() {
@@ -74,7 +87,8 @@ public final class AccountManagerServiceShellCommand extends ShellCommand {
         if (parseUserArg >= 0) {
             return Integer.valueOf(parseUserArg);
         }
-        AccountManagerServiceShellCommand$$ExternalSyntheticOutline0.m(getErrPrintWriter(), "Invalid user: ", parseUserArg);
+        AccountManagerServiceShellCommand$$ExternalSyntheticOutline0.m(
+                getErrPrintWriter(), "Invalid user: ", parseUserArg);
         return null;
     }
 }

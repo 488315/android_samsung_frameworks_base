@@ -17,7 +17,13 @@ public final class EventData {
     public final EventPrivacy privacy;
     public final EventSeverity severity;
 
-    public EventData(EventMessage eventMessage, EventComponent eventComponent, EventPrivacy eventPrivacy, EventSeverity eventSeverity, EventGroup eventGroup, EventOutcome eventOutcome) {
+    public EventData(
+            EventMessage eventMessage,
+            EventComponent eventComponent,
+            EventPrivacy eventPrivacy,
+            EventSeverity eventSeverity,
+            EventGroup eventGroup,
+            EventOutcome eventOutcome) {
         this.message = eventMessage;
         this.privacy = eventPrivacy;
         this.component = eventComponent;
@@ -27,6 +33,12 @@ public final class EventData {
     }
 
     public static EventData createEvent(int i, int i2, int i3, String str, String str2, int i4) {
-        return new EventData(new EventMessage(str, 0), new EventComponent(str2, 0), new EventPrivacy(i), new EventSeverity(i2), new EventGroup(i3), new EventOutcome(i4));
+        return new EventData(
+                new EventMessage(str, 0),
+                new EventComponent(str2, 0),
+                new EventPrivacy(i),
+                new EventSeverity(i2),
+                new EventGroup(i3),
+                new EventOutcome(i4));
     }
 }

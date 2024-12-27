@@ -9,7 +9,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.internal.logging.MetricsLogger;
+
 import com.sec.android.allshare.iface.message.EventMsg;
 
 /* loaded from: classes5.dex */
@@ -29,31 +31,50 @@ public final class ColorTemperatureController {
     public ColorTemperatureController(Context context, int userId) {
         this.mContext = context.getApplicationContext();
         this.mUserId = userId;
-        this.mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) { // from class: com.android.internal.app.ColorTemperatureController.1
-            @Override // android.database.ContentObserver
-            public void onChange(boolean selfChange, Uri uri) {
-                super.onChange(selfChange, uri);
-                String setting = uri == null ? null : uri.getLastPathSegment();
-                if (setting != null) {
-                    ColorTemperatureController.this.onSettingChanged(setting);
-                }
-            }
-        };
+        this.mContentObserver =
+                new ContentObserver(
+                        new Handler(
+                                Looper
+                                        .getMainLooper())) { // from class:
+                                                             // com.android.internal.app.ColorTemperatureController.1
+                    @Override // android.database.ContentObserver
+                    public void onChange(boolean selfChange, Uri uri) {
+                        super.onChange(selfChange, uri);
+                        String setting = uri == null ? null : uri.getLastPathSegment();
+                        if (setting != null) {
+                            ColorTemperatureController.this.onSettingChanged(setting);
+                        }
+                    }
+                };
     }
 
     public boolean isActivated() {
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.COLOR_TEMP_DISPLAY_ACTIVATED, 0, this.mUserId) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.COLOR_TEMP_DISPLAY_ACTIVATED,
+                        0,
+                        this.mUserId)
+                == 1;
     }
 
     public boolean setActivated(boolean z) {
         if (!z) {
             setColorTempLevel(getDefaultColorTempLevel());
         }
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.COLOR_TEMP_DISPLAY_ACTIVATED, z ? 1 : 0, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.COLOR_TEMP_DISPLAY_ACTIVATED,
+                z ? 1 : 0,
+                this.mUserId);
     }
 
     public int getColorTempLevel() {
-        int colorTempLevel = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.COLOR_TEMP_DISPLAY_TEMP_LEVEL, -1, this.mUserId);
+        int colorTempLevel =
+                Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.COLOR_TEMP_DISPLAY_TEMP_LEVEL,
+                        -1,
+                        this.mUserId);
         if (colorTempLevel == -1) {
             Slog.d(TAG, "Using default value for setting: color_temp_display_temp_level");
             return getDefaultColorTempLevel();
@@ -62,7 +83,11 @@ public final class ColorTemperatureController {
     }
 
     public boolean setColorTempLevel(int level) {
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.COLOR_TEMP_DISPLAY_TEMP_LEVEL, level, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.COLOR_TEMP_DISPLAY_TEMP_LEVEL,
+                level,
+                this.mUserId);
     }
 
     public int getMinimumColorTempLevel() {
@@ -121,8 +146,16 @@ public final class ColorTemperatureController {
                 this.mContext.getContentResolver().unregisterContentObserver(this.mContentObserver);
             } else if (oldCallback == null) {
                 ContentResolver cr = this.mContext.getContentResolver();
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.COLOR_TEMP_DISPLAY_ACTIVATED), false, this.mContentObserver, this.mUserId);
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.COLOR_TEMP_DISPLAY_TEMP_LEVEL), false, this.mContentObserver, this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.COLOR_TEMP_DISPLAY_ACTIVATED),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.COLOR_TEMP_DISPLAY_TEMP_LEVEL),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
             }
         }
     }
@@ -139,10 +172,8 @@ public final class ColorTemperatureController {
     }
 
     public interface Callback {
-        default void onActivated(boolean activated) {
-        }
+        default void onActivated(boolean activated) {}
 
-        default void onColorTempLevelChanged(int level) {
-        }
+        default void onColorTempLevelChanged(int level) {}
     }
 }

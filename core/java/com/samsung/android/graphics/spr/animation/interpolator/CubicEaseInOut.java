@@ -6,11 +6,9 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes6.dex */
 public class CubicEaseInOut implements Interpolator {
-    public CubicEaseInOut() {
-    }
+    public CubicEaseInOut() {}
 
-    public CubicEaseInOut(Context context, AttributeSet attrs) {
-    }
+    public CubicEaseInOut(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float t) {

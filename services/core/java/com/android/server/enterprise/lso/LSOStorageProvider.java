@@ -5,12 +5,14 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
 import com.samsung.android.knox.lockscreen.LSOAttributeSet;
 import com.samsung.android.knox.lockscreen.LSOConstants;
 import com.samsung.android.knox.lockscreen.LSOItemContainer;
@@ -19,12 +21,32 @@ import com.samsung.android.knox.lockscreen.LSOItemData;
 import com.samsung.android.knox.lockscreen.LSOItemImage;
 import com.samsung.android.knox.lockscreen.LSOItemText;
 import com.samsung.android.knox.lockscreen.LSOItemWidget;
+
 import java.security.InvalidParameterException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class LSOStorageProvider extends EdmStorageProvider {
-    public static final String[] tblColumns = {"Item_RowId", "Item_Type", "Item_Id", "Item_Width", "Item_Height", "Item_Weight", "Item_Bg_Color", "Item_Gravity", "Item_TxtColor_or_PollingInterval", "Item_Txt_or_ImgPath", "Item_TxtStyle_or_ScaleType", "Item_TxtSize", "Item_Url", "Item_Orientation", "Item_PackageName", "Item_Attributes", "Item_Layer", "Item_ParentId"};
+    public static final String[] tblColumns = {
+        "Item_RowId",
+        "Item_Type",
+        "Item_Id",
+        "Item_Width",
+        "Item_Height",
+        "Item_Weight",
+        "Item_Bg_Color",
+        "Item_Gravity",
+        "Item_TxtColor_or_PollingInterval",
+        "Item_Txt_or_ImgPath",
+        "Item_TxtStyle_or_ScaleType",
+        "Item_TxtSize",
+        "Item_Url",
+        "Item_Orientation",
+        "Item_PackageName",
+        "Item_Attributes",
+        "Item_Layer",
+        "Item_ParentId"
+    };
 
     public final void deleteRecord(String[] strArr) {
         SQLiteDatabase writableDatabase = this.mEdmDbHelper.getWritableDatabase();
@@ -45,7 +67,8 @@ public final class LSOStorageProvider extends EdmStorageProvider {
         SQLiteDatabase writableDatabase = this.mEdmDbHelper.getWritableDatabase();
         long insert = writableDatabase.insert(str, null, contentValues);
         if (insert == -1) {
-            StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(str, ": Failed to insert record - ");
+            StringBuilder m2 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, ": Failed to insert record - ");
             m2.append(contentValues.toString());
             Log.e("LSOStorageProvider", m2.toString());
             writableDatabase.close();
@@ -159,7 +182,8 @@ public final class LSOStorageProvider extends EdmStorageProvider {
             try {
                 if (cursor2.getCount() != 0) {
                     while (cursor2.moveToNext()) {
-                        LSOItemData createItem = LSOItemCreator.createItem((byte) cursor2.getInt(1));
+                        LSOItemData createItem =
+                                LSOItemCreator.createItem((byte) cursor2.getInt(1));
                         if (createItem != null) {
                             loadItemData(createItem, cursor2);
                             lSOItemContainer.addItem(createItem);
@@ -167,7 +191,9 @@ public final class LSOStorageProvider extends EdmStorageProvider {
                     }
                 }
             } catch (SQLException e) {
-                Log.e("LSOStorageProvider", "Exception occurred accessing Enterprise db " + e.getMessage());
+                Log.e(
+                        "LSOStorageProvider",
+                        "Exception occurred accessing Enterprise db " + e.getMessage());
             }
         } finally {
             cursor2.close();
@@ -178,27 +204,35 @@ public final class LSOStorageProvider extends EdmStorageProvider {
         int i2;
         wipeLayerData(i);
         String[] strArr = {"LOCKSCREEN_OVERLAY"};
-        Cursor rawQuery = this.mEdmDbHelper.getWritableDatabase().rawQuery("SELECT COUNT(*) from LOCKSCREEN_OVERLAY", null);
+        Cursor rawQuery =
+                this.mEdmDbHelper
+                        .getWritableDatabase()
+                        .rawQuery("SELECT COUNT(*) from LOCKSCREEN_OVERLAY", null);
         if (rawQuery == null) {
             i2 = 0;
         } else {
             rawQuery.moveToNext();
             i2 = rawQuery.getInt(0);
             rawQuery.close();
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "getCount(LOCKSCREEN_OVERLAY) - ", "LSOStorageProvider");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i2, "getCount(LOCKSCREEN_OVERLAY) - ", "LSOStorageProvider");
         }
         if (i2 == 0) {
             deleteRecord(strArr);
         }
-        Log.d("LSOStorageProvider", "resetOverlayData() LOCKSCREEN_OVERLAY - resetted layer : " + LSOConstants.getLayerName(i));
+        Log.d(
+                "LSOStorageProvider",
+                "resetOverlayData() LOCKSCREEN_OVERLAY - resetted layer : "
+                        + LSOConstants.getLayerName(i));
     }
 
     public final void resetWallpaperData() {
-        deleteRecord(new String[]{"LOCKSCREEN_WALLPAPER"});
+        deleteRecord(new String[] {"LOCKSCREEN_WALLPAPER"});
         Log.d("LSOStorageProvider", "resetWallpaperData() LOCKSCREEN_WALLPAPER - resetted");
     }
 
-    public final boolean setOverlayData(long j, LSOItemData lSOItemData, int i, LSOAttributeSet lSOAttributeSet) {
+    public final boolean setOverlayData(
+            long j, LSOItemData lSOItemData, int i, LSOAttributeSet lSOAttributeSet) {
         if (lSOItemData == null || j == -1) {
             throw new InvalidParameterException("Parameter cannot be null");
         }
@@ -208,7 +242,9 @@ public final class LSOStorageProvider extends EdmStorageProvider {
         if (!overlayData) {
             resetOverlayData(0);
         } else if (adminUid != j) {
-            ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("policyName", "LOCKSCREEN_OVERLAY");
+            ContentValues m =
+                    AccountManagerService$$ExternalSyntheticOutline0.m(
+                            "policyName", "LOCKSCREEN_OVERLAY");
             m.put("adminUid", Long.valueOf(j));
             if (lSOAttributeSet != null) {
                 m.put("accountObject", lSOAttributeSet.toByteArray());
@@ -260,7 +296,8 @@ public final class LSOStorageProvider extends EdmStorageProvider {
                     } else if (i5 == 256) {
                         contentValues.put(strArr[8], Integer.valueOf(lSOItemText.getTextColor()));
                     } else if (i5 == 512) {
-                        contentValues.put(strArr[11], Float.valueOf(lSOItemText.getTextSizeAsFloat()));
+                        contentValues.put(
+                                strArr[11], Float.valueOf(lSOItemText.getTextSizeAsFloat()));
                     } else if (i5 == 1024) {
                         contentValues.put(strArr[10], Integer.valueOf(lSOItemText.getTextStyle()));
                     }
@@ -270,14 +307,22 @@ public final class LSOStorageProvider extends EdmStorageProvider {
                         contentValues.put(strArr[9], lSOItemImage.getImagePath());
                     } else if (i5 == 256) {
                         contentValues.put(strArr[12], lSOItemImage.getUrl());
-                        contentValues.put(strArr[8], Long.valueOf(lSOItemImage.getPollingInterval()));
+                        contentValues.put(
+                                strArr[8], Long.valueOf(lSOItemImage.getPollingInterval()));
                     } else if (i5 == 512) {
-                        contentValues.put(strArr[10], Integer.valueOf(lSOItemImage.getScaleTypeAsInteger()));
+                        contentValues.put(
+                                strArr[10], Integer.valueOf(lSOItemImage.getScaleTypeAsInteger()));
                     }
                 } else if (type == 4) {
                     LSOItemContainer lSOItemContainer = (LSOItemContainer) lSOItemData;
                     if (i5 == 128) {
-                        contentValues.put(strArr[13], Integer.valueOf(lSOItemContainer.getOrientation() == LSOItemContainer.ORIENTATION.VERTICAL ? 0 : 1));
+                        contentValues.put(
+                                strArr[13],
+                                Integer.valueOf(
+                                        lSOItemContainer.getOrientation()
+                                                        == LSOItemContainer.ORIENTATION.VERTICAL
+                                                ? 0
+                                                : 1));
                     } else if (i5 == 256) {
                         contentValues.put(strArr[9], lSOItemContainer.getBGImagePath());
                     }
@@ -317,7 +362,9 @@ public final class LSOStorageProvider extends EdmStorageProvider {
             i6++;
         }
         if (!z2) {
-            Log.e("LSOStorageProvider", "Failed to store LSOItemData for " + i6 + " with ParendId: " + insertRecord);
+            Log.e(
+                    "LSOStorageProvider",
+                    "Failed to store LSOItemData for " + i6 + " with ParendId: " + insertRecord);
         }
         return z2;
     }
@@ -326,8 +373,13 @@ public final class LSOStorageProvider extends EdmStorageProvider {
         if (i == 0) {
             delete("LOCKSCREEN_OVERLAY", null);
         } else {
-            deleteDataByFields("LOCKSCREEN_OVERLAY", new String[]{"Item_Layer"}, new String[]{String.valueOf(i)});
+            deleteDataByFields(
+                    "LOCKSCREEN_OVERLAY",
+                    new String[] {"Item_Layer"},
+                    new String[] {String.valueOf(i)});
         }
-        Log.d("LSOStorageProvider", "wipeLayerData() - LOCKSCREEN_OVERLAY - cleaned : " + LSOConstants.getLayerName(i));
+        Log.d(
+                "LSOStorageProvider",
+                "wipeLayerData() - LOCKSCREEN_OVERLAY - cleaned : " + LSOConstants.getLayerName(i));
     }
 }

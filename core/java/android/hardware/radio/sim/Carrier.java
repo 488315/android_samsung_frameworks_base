@@ -3,26 +3,28 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Carrier implements Parcelable {
-    public static final Parcelable.Creator<Carrier> CREATOR = new Parcelable.Creator<Carrier>() { // from class: android.hardware.radio.sim.Carrier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Carrier createFromParcel(Parcel _aidl_source) {
-            Carrier _aidl_out = new Carrier();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Carrier> CREATOR =
+            new Parcelable.Creator<Carrier>() { // from class: android.hardware.radio.sim.Carrier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Carrier createFromParcel(Parcel _aidl_source) {
+                    Carrier _aidl_out = new Carrier();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Carrier[] newArray(int _aidl_size) {
-            return new Carrier[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Carrier[] newArray(int _aidl_size) {
+                    return new Carrier[_aidl_size];
+                }
+            };
     public static final int MATCH_TYPE_ALL = 0;
     public static final int MATCH_TYPE_GID1 = 3;
     public static final int MATCH_TYPE_GID2 = 4;

@@ -3,12 +3,15 @@ package com.android.server.storage;
 import android.os.FileUtils;
 import android.os.ParcelFileDescriptor;
 import android.util.SparseArray;
+
 import com.android.internal.os.FuseUnavailableMountException;
 import com.android.internal.util.Preconditions;
 import com.android.server.AppFuseMountException;
 import com.android.server.StorageManagerService;
-import java.util.concurrent.CountDownLatch;
+
 import libcore.io.IoUtils;
+
+import java.util.concurrent.CountDownLatch;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -45,7 +48,8 @@ public class AppFuseBridge implements Runnable {
 
     private native void native_unlock();
 
-    public final ParcelFileDescriptor addBridge(MountScope mountScope) throws FuseUnavailableMountException, AppFuseMountException {
+    public final ParcelFileDescriptor addBridge(MountScope mountScope)
+            throws FuseUnavailableMountException, AppFuseMountException {
         ParcelFileDescriptor adoptFd;
         native_lock();
         try {
@@ -55,7 +59,8 @@ public class AppFuseBridge implements Runnable {
                 if (j == 0) {
                     throw new FuseUnavailableMountException(mountScope.mountId);
                 }
-                int native_add_bridge = native_add_bridge(j, mountScope.mountId, mountScope.open().detachFd());
+                int native_add_bridge =
+                        native_add_bridge(j, mountScope.mountId, mountScope.open().detachFd());
                 if (native_add_bridge == -1) {
                     throw new FuseUnavailableMountException(mountScope.mountId);
                 }
@@ -92,7 +97,8 @@ public class AppFuseBridge implements Runnable {
         }
     }
 
-    public final ParcelFileDescriptor openFile(int i, int i2, int i3) throws FuseUnavailableMountException, InterruptedException {
+    public final ParcelFileDescriptor openFile(int i, int i2, int i3)
+            throws FuseUnavailableMountException, InterruptedException {
         MountScope mountScope;
         synchronized (this) {
             mountScope = (MountScope) this.mScopes.get(i);
@@ -106,11 +112,14 @@ public class AppFuseBridge implements Runnable {
         }
         try {
             int translateModePfdToPosix = FileUtils.translateModePfdToPosix(i3);
-            StorageManagerService.AppFuseMountScope appFuseMountScope = (StorageManagerService.AppFuseMountScope) mountScope;
+            StorageManagerService.AppFuseMountScope appFuseMountScope =
+                    (StorageManagerService.AppFuseMountScope) mountScope;
             StorageManagerService.this.getClass();
             StorageManagerService.extendWatchdogTimeout("#openFile might be slow");
             try {
-                return new ParcelFileDescriptor(StorageManagerService.this.mVold.openAppFuseFile(appFuseMountScope.uid, i, i2, translateModePfdToPosix));
+                return new ParcelFileDescriptor(
+                        StorageManagerService.this.mVold.openAppFuseFile(
+                                appFuseMountScope.uid, i, i2, translateModePfdToPosix));
             } catch (Exception e) {
                 throw new AppFuseMountException("Failed to open", e);
             }

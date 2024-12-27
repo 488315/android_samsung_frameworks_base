@@ -6,6 +6,5 @@ import java.util.function.Consumer;
 /* loaded from: classes.dex */
 public final class ArcClipboardMonitor implements Consumer {
     @Override // java.util.function.Consumer
-    public final /* bridge */ /* synthetic */ void accept(Object obj) {
-    }
+    public final /* bridge */ /* synthetic */ void accept(Object obj) {}
 }

@@ -4,9 +4,11 @@ import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -61,17 +63,20 @@ public final class WallPaperFilter implements IFilter {
 
     public final void setWallPaperInfoFromWM(int i) {
         try {
-            WallpaperInfo wallpaperInfo = WallpaperManager.getInstance(this.mContext).getWallpaperInfo(i);
+            WallpaperInfo wallpaperInfo =
+                    WallpaperManager.getInstance(this.mContext).getWallpaperInfo(i);
             if (wallpaperInfo != null) {
                 synchronized (this.mWallpaperPackageList) {
                     this.mWallpaperPackageList.add(wallpaperInfo.getPackageName());
-                    MARsUtils.addFilterDebugInfoToHistory("FILTER 10", wallpaperInfo.getPackageName());
+                    MARsUtils.addFilterDebugInfoToHistory(
+                            "FILTER 10", wallpaperInfo.getPackageName());
                 }
                 return;
             }
             Slog.w("MARs:WallPaperFilter", "ignore in case of " + i + " image wallpaper");
         } catch (Exception e) {
-            BootReceiver$$ExternalSyntheticOutline0.m(e, "getWallpaperPackage() exception ", "MARs:WallPaperFilter");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    e, "getWallpaperPackage() exception ", "MARs:WallPaperFilter");
         }
     }
 }

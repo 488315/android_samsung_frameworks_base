@@ -23,6 +23,7 @@ import android.util.EventLog;
 import android.util.Slog;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.app.procstats.ProcessState;
 import com.android.internal.app.procstats.ProcessStats;
 import com.android.internal.os.Zygote;
@@ -32,10 +33,10 @@ import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.FgThread;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.am.OomAdjusterModernImpl;
 import com.android.server.chimera.umr.KernelMemoryProxy$ReclaimerLog;
 import com.android.server.wm.BackgroundLaunchProcessController;
 import com.android.server.wm.WindowProcessController;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -145,9 +146,9 @@ public final class ProcessRecord {
     public final int userId;
 
     /* JADX WARN: Code restructure failed: missing block: B:15:0x009b, code lost:
-    
-        if (r1.nativeHeapZeroInitialized == (-1)) goto L21;
-     */
+
+       if (r1.nativeHeapZeroInitialized == (-1)) goto L21;
+    */
     /* JADX WARN: Removed duplicated region for block: B:23:0x00d3  */
     /* JADX WARN: Removed duplicated region for block: B:30:0x00de  */
     /* JADX WARN: Removed duplicated region for block: B:8:0x008d  */
@@ -155,12 +156,23 @@ public final class ProcessRecord {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public ProcessRecord(com.android.server.am.ActivityManagerService r14, android.content.pm.ApplicationInfo r15, java.lang.String r16, int r17, java.lang.String r18, int r19, java.lang.String r20) {
+    public ProcessRecord(
+            com.android.server.am.ActivityManagerService r14,
+            android.content.pm.ApplicationInfo r15,
+            java.lang.String r16,
+            int r17,
+            java.lang.String r18,
+            int r19,
+            java.lang.String r20) {
         /*
             Method dump skipped, instructions count: 323
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ProcessRecord.<init>(com.android.server.am.ActivityManagerService, android.content.pm.ApplicationInfo, java.lang.String, int, java.lang.String, int, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ProcessRecord.<init>(com.android.server.am.ActivityManagerService,"
+                    + " android.content.pm.ApplicationInfo, java.lang.String, int,"
+                    + " java.lang.String, int, java.lang.String):void");
     }
 
     public static void updateProcessRecordNodes(ProcessRecord processRecord) {
@@ -169,7 +181,8 @@ public final class ProcessRecord {
         }
         int i = 0;
         while (true) {
-            OomAdjusterModernImpl.ProcessRecordNode[] processRecordNodeArr = processRecord.mLinkedNodes;
+            OomAdjusterModernImpl.ProcessRecordNode[] processRecordNodeArr =
+                    processRecord.mLinkedNodes;
             if (i >= processRecordNodeArr.length) {
                 return;
             }
@@ -178,22 +191,31 @@ public final class ProcessRecord {
         }
     }
 
-    public final void addOrUpdateBackgroundStartPrivileges(Binder binder, BackgroundStartPrivileges backgroundStartPrivileges) {
+    public final void addOrUpdateBackgroundStartPrivileges(
+            Binder binder, BackgroundStartPrivileges backgroundStartPrivileges) {
         Objects.requireNonNull(binder, "entity");
         Objects.requireNonNull(backgroundStartPrivileges, "backgroundStartPrivileges");
-        Preconditions.checkArgument(backgroundStartPrivileges.allowsAny(), "backgroundStartPrivileges does not allow anything");
+        Preconditions.checkArgument(
+                backgroundStartPrivileges.allowsAny(),
+                "backgroundStartPrivileges does not allow anything");
         WindowProcessController windowProcessController = this.mWindowProcessController;
         windowProcessController.getClass();
-        Preconditions.checkArgument(backgroundStartPrivileges.allowsAny(), "backgroundStartPrivileges does not allow anything");
-        BackgroundLaunchProcessController backgroundLaunchProcessController = windowProcessController.mBgLaunchController;
+        Preconditions.checkArgument(
+                backgroundStartPrivileges.allowsAny(),
+                "backgroundStartPrivileges does not allow anything");
+        BackgroundLaunchProcessController backgroundLaunchProcessController =
+                windowProcessController.mBgLaunchController;
         backgroundLaunchProcessController.getClass();
-        Preconditions.checkArgument(backgroundStartPrivileges.allowsAny(), "backgroundStartPrivileges does not allow anything");
+        Preconditions.checkArgument(
+                backgroundStartPrivileges.allowsAny(),
+                "backgroundStartPrivileges does not allow anything");
         synchronized (backgroundLaunchProcessController) {
             try {
                 if (backgroundLaunchProcessController.mBackgroundStartPrivileges == null) {
                     backgroundLaunchProcessController.mBackgroundStartPrivileges = new ArrayMap();
                 }
-                backgroundLaunchProcessController.mBackgroundStartPrivileges.put(binder, backgroundStartPrivileges);
+                backgroundLaunchProcessController.mBackgroundStartPrivileges.put(
+                        binder, backgroundStartPrivileges);
             } catch (Throwable th) {
                 throw th;
             }
@@ -208,14 +230,18 @@ public final class ProcessRecord {
                     if (this.mPkgList.containsKey(str)) {
                         return;
                     }
-                    ProcessStats.ProcessStateHolder processStateHolder = new ProcessStats.ProcessStateHolder(j);
+                    ProcessStats.ProcessStateHolder processStateHolder =
+                            new ProcessStats.ProcessStateHolder(j);
                     ProcessState processState = this.mProfile.mBaseProcessTracker;
                     if (processState != null) {
                         int i = this.info.uid;
                         String str2 = this.processName;
-                        ProcessStats.PackageState packageStateLocked = processStatsService.mProcessStats.getPackageStateLocked(str, i, j);
+                        ProcessStats.PackageState packageStateLocked =
+                                processStatsService.mProcessStats.getPackageStateLocked(str, i, j);
                         processStateHolder.pkg = packageStateLocked;
-                        processStateHolder.state = processStatsService.mProcessStats.getProcessStateLocked(packageStateLocked, str2);
+                        processStateHolder.state =
+                                processStatsService.mProcessStats.getProcessStateLocked(
+                                        packageStateLocked, str2);
                         this.mPkgList.put(str, processStateHolder);
                         ProcessState processState2 = processStateHolder.state;
                         if (processState2 != processState) {
@@ -264,10 +290,18 @@ public final class ProcessRecord {
                 }
             }
             if (this.processInfo.gwpAsanMode != -1) {
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "    ", "  gwpAsanMode="), this.processInfo.gwpAsanMode, printWriter);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                printWriter, "    ", "  gwpAsanMode="),
+                        this.processInfo.gwpAsanMode,
+                        printWriter);
             }
             if (this.processInfo.memtagMode != -1) {
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "    ", "  memtagMode="), this.processInfo.memtagMode, printWriter);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                printWriter, "    ", "  memtagMode="),
+                        this.processInfo.memtagMode,
+                        printWriter);
             }
         }
         printWriter.print("    ");
@@ -332,7 +366,8 @@ public final class ProcessRecord {
         printWriter.println(this.mThread);
         printWriter.print("    ");
         printWriter.print("pid=");
-        BroadcastStats$$ExternalSyntheticOutline0.m(this.mPid, printWriter, "    ", "lastActivityTime=");
+        BroadcastStats$$ExternalSyntheticOutline0.m(
+                this.mPid, printWriter, "    ", "lastActivityTime=");
         TimeUtils.formatDuration(this.mLastActivityTime, uptimeMillis, printWriter);
         printWriter.print("    ");
         printWriter.print("startUpTime=");
@@ -360,8 +395,10 @@ public final class ProcessRecord {
         }
         printWriter.print("    ");
         printWriter.print("startSeq=");
-        ActivityManagerConstants$$ExternalSyntheticOutline0.m(this.mStartSeq, printWriter, "    ", "mountMode=");
-        printWriter.println(DebugUtils.valueToString(Zygote.class, "MOUNT_EXTERNAL_", this.mMountMode));
+        ActivityManagerConstants$$ExternalSyntheticOutline0.m(
+                this.mStartSeq, printWriter, "    ", "mountMode=");
+        printWriter.println(
+                DebugUtils.valueToString(Zygote.class, "MOUNT_EXTERNAL_", this.mMountMode));
         if (this.mKilled || this.mKilledByAm || this.mWaitingToKill != null) {
             printWriter.print("    ");
             printWriter.print("killed=");
@@ -374,7 +411,8 @@ public final class ProcessRecord {
         if (this.mIsolatedEntryPoint != null || this.mIsolatedEntryPointArgs != null) {
             printWriter.print("    ");
             printWriter.print("isolatedEntryPoint=");
-            ProcessList$$ExternalSyntheticOutline0.m(printWriter, this.mIsolatedEntryPoint, "    ", "isolatedEntryPointArgs=");
+            ProcessList$$ExternalSyntheticOutline0.m(
+                    printWriter, this.mIsolatedEntryPoint, "    ", "isolatedEntryPointArgs=");
             printWriter.println(Arrays.toString(this.mIsolatedEntryPointArgs));
         }
         if (this.mState.mSetProcState > 10) {
@@ -395,41 +433,49 @@ public final class ProcessRecord {
                 if (processProfileRecord2.mService.mAppProfiler.isProfilingPss()) {
                     printWriter.print("    ");
                     printWriter.print("lastPssTime=");
-                    TimeUtils.formatDuration(processProfileRecord2.mLastPssTime, uptimeMillis, printWriter);
+                    TimeUtils.formatDuration(
+                            processProfileRecord2.mLastPssTime, uptimeMillis, printWriter);
                     printWriter.print(" pssProcState=");
                     printWriter.print(processProfileRecord2.mPssProcState);
                     printWriter.print(" pssStatType=");
                     printWriter.print(processProfileRecord2.mPssStatType);
                     printWriter.print(" nextPssTime=");
-                    TimeUtils.formatDuration(processProfileRecord2.mNextPssTime, uptimeMillis, printWriter);
+                    TimeUtils.formatDuration(
+                            processProfileRecord2.mNextPssTime, uptimeMillis, printWriter);
                     printWriter.println();
                     printWriter.print("    ");
                     printWriter.print("lastPss=");
                     DebugUtils.printSizeValue(printWriter, processProfileRecord2.mLastPss * 1024);
                     printWriter.print(" lastSwapPss=");
-                    DebugUtils.printSizeValue(printWriter, processProfileRecord2.mLastSwapPss * 1024);
+                    DebugUtils.printSizeValue(
+                            printWriter, processProfileRecord2.mLastSwapPss * 1024);
                     printWriter.print(" lastCachedPss=");
-                    DebugUtils.printSizeValue(printWriter, processProfileRecord2.mLastCachedPss * 1024);
+                    DebugUtils.printSizeValue(
+                            printWriter, processProfileRecord2.mLastCachedPss * 1024);
                     printWriter.print(" lastCachedSwapPss=");
-                    DebugUtils.printSizeValue(printWriter, processProfileRecord2.mLastCachedSwapPss * 1024);
+                    DebugUtils.printSizeValue(
+                            printWriter, processProfileRecord2.mLastCachedSwapPss * 1024);
                     printWriter.print(" lastRss=");
                     DebugUtils.printSizeValue(printWriter, processProfileRecord2.mLastRss * 1024);
                 } else {
                     printWriter.print("    ");
                     printWriter.print("lastRssTime=");
-                    TimeUtils.formatDuration(processProfileRecord2.mLastPssTime, uptimeMillis, printWriter);
+                    TimeUtils.formatDuration(
+                            processProfileRecord2.mLastPssTime, uptimeMillis, printWriter);
                     printWriter.print(" rssProcState=");
                     printWriter.print(processProfileRecord2.mPssProcState);
                     printWriter.print(" rssStatType=");
                     printWriter.print(processProfileRecord2.mPssStatType);
                     printWriter.print(" nextRssTime=");
-                    TimeUtils.formatDuration(processProfileRecord2.mNextPssTime, uptimeMillis, printWriter);
+                    TimeUtils.formatDuration(
+                            processProfileRecord2.mNextPssTime, uptimeMillis, printWriter);
                     printWriter.println();
                     printWriter.print("    ");
                     printWriter.print("lastRss=");
                     DebugUtils.printSizeValue(printWriter, processProfileRecord2.mLastRss * 1024);
                     printWriter.print(" lastCachedRss=");
-                    DebugUtils.printSizeValue(printWriter, processProfileRecord2.mLastCachedRss * 1024);
+                    DebugUtils.printSizeValue(
+                            printWriter, processProfileRecord2.mLastCachedRss * 1024);
                 }
                 printWriter.println();
                 printWriter.print("    ");
@@ -440,9 +486,11 @@ public final class ProcessRecord {
                 processProfileRecord2.mProcStateMemTracker.dumpLine(printWriter);
                 printWriter.print("    ");
                 printWriter.print("lastRequestedGc=");
-                TimeUtils.formatDuration(processProfileRecord2.mLastRequestedGc, uptimeMillis, printWriter);
+                TimeUtils.formatDuration(
+                        processProfileRecord2.mLastRequestedGc, uptimeMillis, printWriter);
                 printWriter.print(" lastLowMemory=");
-                TimeUtils.formatDuration(processProfileRecord2.mLastLowMemory, uptimeMillis, printWriter);
+                TimeUtils.formatDuration(
+                        processProfileRecord2.mLastLowMemory, uptimeMillis, printWriter);
                 printWriter.print(" reportLowMemory=");
                 printWriter.println(processProfileRecord2.mReportLowMemory);
             } finally {
@@ -450,9 +498,11 @@ public final class ProcessRecord {
         }
         printWriter.print("    ");
         printWriter.print("currentHostingComponentTypes=0x");
-        printWriter.print(Integer.toHexString(processProfileRecord2.mCurrentHostingComponentTypes.get()));
+        printWriter.print(
+                Integer.toHexString(processProfileRecord2.mCurrentHostingComponentTypes.get()));
         printWriter.print(" historicalHostingComponentTypes=0x");
-        printWriter.println(Integer.toHexString(processProfileRecord2.mHistoricalHostingComponentTypes.get()));
+        printWriter.println(
+                Integer.toHexString(processProfileRecord2.mHistoricalHostingComponentTypes.get()));
         ProcessStateRecord processStateRecord = this.mState;
         if (processStateRecord.mReportedInteraction || processStateRecord.mFgInteractionTime != 0) {
             printWriter.print("    ");
@@ -460,11 +510,17 @@ public final class ProcessRecord {
             printWriter.print(processStateRecord.mReportedInteraction);
             if (processStateRecord.mInteractionEventTime != 0) {
                 printWriter.print(" time=");
-                TimeUtils.formatDuration(processStateRecord.mInteractionEventTime, SystemClock.elapsedRealtime(), printWriter);
+                TimeUtils.formatDuration(
+                        processStateRecord.mInteractionEventTime,
+                        SystemClock.elapsedRealtime(),
+                        printWriter);
             }
             if (processStateRecord.mFgInteractionTime != 0) {
                 printWriter.print(" fgInteractionTime=");
-                TimeUtils.formatDuration(processStateRecord.mFgInteractionTime, SystemClock.elapsedRealtime(), printWriter);
+                TimeUtils.formatDuration(
+                        processStateRecord.mFgInteractionTime,
+                        SystemClock.elapsedRealtime(),
+                        printWriter);
             }
             printWriter.println();
         }
@@ -473,7 +529,8 @@ public final class ProcessRecord {
         printWriter.print(processStateRecord.mAdjSeq);
         printWriter.print(" lruSeq=");
         ProcessRecord processRecord = processStateRecord.mApp;
-        BroadcastStats$$ExternalSyntheticOutline0.m(processRecord.mLruSeq, printWriter, "    ", "oom adj: max=");
+        BroadcastStats$$ExternalSyntheticOutline0.m(
+                processRecord.mLruSeq, printWriter, "    ", "oom adj: max=");
         printWriter.print(processStateRecord.mMaxAdj);
         printWriter.print(" curRaw=");
         printWriter.print(processStateRecord.mCurRawAdj);
@@ -482,12 +539,14 @@ public final class ProcessRecord {
         printWriter.print(" cur=");
         printWriter.print(processStateRecord.mCurAdj);
         printWriter.print(" set=");
-        BroadcastStats$$ExternalSyntheticOutline0.m(processStateRecord.mSetAdj, printWriter, "    ", "mCurSchedGroup=");
+        BroadcastStats$$ExternalSyntheticOutline0.m(
+                processStateRecord.mSetAdj, printWriter, "    ", "mCurSchedGroup=");
         printWriter.print(processStateRecord.mCurSchedGroup);
         printWriter.print(" setSchedGroup=");
         printWriter.print(processStateRecord.mSetSchedGroup);
         printWriter.print(" systemNoUi=");
-        AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "    ", "curProcState=", processStateRecord.mSystemNoUi);
+        AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                printWriter, "    ", "curProcState=", processStateRecord.mSystemNoUi);
         printWriter.print(processStateRecord.mCurProcState);
         printWriter.print(" mRepProcState=");
         printWriter.print(processStateRecord.mRepProcState);
@@ -539,7 +598,9 @@ public final class ProcessRecord {
             }
             printWriter.println(processRecord.mProfile.mInitialIdlePssOrRss);
         }
-        if (processStateRecord.mHasTopUi || processStateRecord.mHasOverlayUi || processStateRecord.mRunningRemoteAnimation) {
+        if (processStateRecord.mHasTopUi
+                || processStateRecord.mHasOverlayUi
+                || processStateRecord.mRunningRemoteAnimation) {
             printWriter.print("    ");
             printWriter.print("hasTopUi=");
             printWriter.print(processStateRecord.mHasTopUi);
@@ -548,7 +609,8 @@ public final class ProcessRecord {
             printWriter.print(" runningRemoteAnimation=");
             printWriter.println(processStateRecord.mRunningRemoteAnimation);
         }
-        if (processStateRecord.mHasForegroundActivities || processStateRecord.mRepForegroundActivities) {
+        if (processStateRecord.mHasForegroundActivities
+                || processStateRecord.mRepForegroundActivities) {
             printWriter.print("    ");
             printWriter.print("foregroundActivities=");
             printWriter.print(processStateRecord.mHasForegroundActivities);
@@ -559,7 +621,8 @@ public final class ProcessRecord {
         if (processStateRecord.mSetProcState > 10) {
             printWriter.print("    ");
             printWriter.print("whenUnimportant=");
-            TimeUtils.formatDuration(processStateRecord.mWhenUnimportant - uptimeMillis, printWriter);
+            TimeUtils.formatDuration(
+                    processStateRecord.mWhenUnimportant - uptimeMillis, printWriter);
             printWriter.println();
         }
         if (processStateRecord.mLastTopTime > 0) {
@@ -574,7 +637,10 @@ public final class ProcessRecord {
             printWriter.print("lastInvisibleTime=");
             long elapsedRealtime2 = SystemClock.elapsedRealtime();
             long currentTimeMillis = System.currentTimeMillis();
-            TimeUtils.dumpTimeWithDelta(printWriter, (currentTimeMillis - elapsedRealtime2) + processStateRecord.mLastInvisibleTime, currentTimeMillis);
+            TimeUtils.dumpTimeWithDelta(
+                    printWriter,
+                    (currentTimeMillis - elapsedRealtime2) + processStateRecord.mLastInvisibleTime,
+                    currentTimeMillis);
             printWriter.println();
         }
         if (processStateRecord.mHasStartedServices) {
@@ -588,12 +654,12 @@ public final class ProcessRecord {
         synchronized (activityManagerGlobalLock) {
             try {
                 if (!processErrorStateRecord.mCrashing) {
-                    ErrorDialogController errorDialogController = processErrorStateRecord.mDialogController;
+                    ErrorDialogController errorDialogController =
+                            processErrorStateRecord.mDialogController;
                     if (errorDialogController.mCrashDialogs == null) {
                         if (!processErrorStateRecord.mNotResponding) {
                             if (errorDialogController.mAnrDialogs == null) {
-                                if (processErrorStateRecord.mBad) {
-                                }
+                                if (processErrorStateRecord.mBad) {}
                             }
                         }
                     }
@@ -606,7 +672,8 @@ public final class ProcessRecord {
                 printWriter.print(" bad=" + processErrorStateRecord.mBad);
                 if (processErrorStateRecord.mErrorReportReceiver != null) {
                     printWriter.print(" errorReportReceiver=");
-                    printWriter.print(processErrorStateRecord.mErrorReportReceiver.flattenToShortString());
+                    printWriter.print(
+                            processErrorStateRecord.mErrorReportReceiver.flattenToShortString());
                 }
                 printWriter.println();
             } finally {
@@ -624,14 +691,18 @@ public final class ProcessRecord {
             printWriter.print(" forcingToImportant=");
             printWriter.println(processRecord2.mState.mForcingToImportant);
         }
-        if (processServiceRecord.mHasTopStartedAlmostPerceptibleServices || processServiceRecord.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs > 0) {
+        if (processServiceRecord.mHasTopStartedAlmostPerceptibleServices
+                || processServiceRecord.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs > 0) {
             printWriter.print("    ");
             printWriter.print("mHasTopStartedAlmostPerceptibleServices=");
             printWriter.print(processServiceRecord.mHasTopStartedAlmostPerceptibleServices);
             printWriter.print(" mLastTopStartedAlmostPerceptibleBindRequestUptimeMs=");
-            printWriter.println(processServiceRecord.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs);
+            printWriter.println(
+                    processServiceRecord.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs);
         }
-        if (processServiceRecord.mHasClientActivities || processServiceRecord.mHasAboveClient || processServiceRecord.mTreatLikeActivity) {
+        if (processServiceRecord.mHasClientActivities
+                || processServiceRecord.mHasAboveClient
+                || processServiceRecord.mTreatLikeActivity) {
             printWriter.print("    ");
             printWriter.print("hasClientActivities=");
             printWriter.print(processServiceRecord.mHasClientActivities);
@@ -640,7 +711,8 @@ public final class ProcessRecord {
             printWriter.print(" treatLikeActivity=");
             printWriter.println(processServiceRecord.mTreatLikeActivity);
         }
-        if (processServiceRecord.mConnectionService != null || processServiceRecord.mConnectionGroup != 0) {
+        if (processServiceRecord.mConnectionService != null
+                || processServiceRecord.mConnectionGroup != 0) {
             printWriter.print("    ");
             printWriter.print("connectionGroup=");
             printWriter.print(processServiceRecord.mConnectionGroup);
@@ -694,7 +766,8 @@ public final class ProcessRecord {
         if (processProviderRecord.mLastProviderTime > 0) {
             printWriter.print("    ");
             printWriter.print("lastProviderTime=");
-            TimeUtils.formatDuration(processProviderRecord.mLastProviderTime, uptimeMillis, printWriter);
+            TimeUtils.formatDuration(
+                    processProviderRecord.mLastProviderTime, uptimeMillis, printWriter);
             printWriter.println();
         }
         if (processProviderRecord.mPubProviders.size() > 0) {
@@ -704,7 +777,11 @@ public final class ProcessRecord {
             for (int i8 = 0; i8 < size5; i8++) {
                 printWriter.print("    ");
                 printWriter.print("  - ");
-                ProcessList$$ExternalSyntheticOutline0.m(printWriter, (String) processProviderRecord.mPubProviders.keyAt(i8), "    ", "    -> ");
+                ProcessList$$ExternalSyntheticOutline0.m(
+                        printWriter,
+                        (String) processProviderRecord.mPubProviders.keyAt(i8),
+                        "    ",
+                        "    -> ");
                 printWriter.println(processProviderRecord.mPubProviders.valueAt(i8));
             }
         }
@@ -715,7 +792,8 @@ public final class ProcessRecord {
             for (int i9 = 0; i9 < size6; i9++) {
                 printWriter.print("    ");
                 printWriter.print("  - ");
-                ContentProviderConnection contentProviderConnection = (ContentProviderConnection) processProviderRecord.mConProviders.get(i9);
+                ContentProviderConnection contentProviderConnection =
+                        (ContentProviderConnection) processProviderRecord.mConProviders.get(i9);
                 StringBuilder sb = new StringBuilder(128);
                 sb.append(contentProviderConnection.provider.toShortString());
                 sb.append("->");
@@ -760,8 +838,15 @@ public final class ProcessRecord {
         printWriter.print(" isPendingFreeze=");
         printWriter.print(processCachedOptimizerRecord.mPendingFreeze);
         printWriter.print(" isFrozen=");
-        AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "    ", "earliestFreezableTimeMs=", processCachedOptimizerRecord.mFrozen);
-        TimeUtils.formatDuration(processCachedOptimizerRecord.mEarliestFreezableTimeMillis, uptimeMillis, printWriter);
+        AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                printWriter,
+                "    ",
+                "earliestFreezableTimeMs=",
+                processCachedOptimizerRecord.mFrozen);
+        TimeUtils.formatDuration(
+                processCachedOptimizerRecord.mEarliestFreezableTimeMillis,
+                uptimeMillis,
+                printWriter);
         printWriter.println();
         this.mWindowProcessController.dump(printWriter, "    ");
         if (!"<empty>".equals(this.callStack)) {
@@ -802,7 +887,10 @@ public final class ProcessRecord {
                 if (this.mBackgroundStartPrivilegesMerged == null) {
                     this.mBackgroundStartPrivilegesMerged = BackgroundStartPrivileges.NONE;
                     for (int size = this.mBackgroundStartPrivileges.size() - 1; size >= 0; size--) {
-                        this.mBackgroundStartPrivilegesMerged = this.mBackgroundStartPrivilegesMerged.merge((BackgroundStartPrivileges) this.mBackgroundStartPrivileges.valueAt(size));
+                        this.mBackgroundStartPrivilegesMerged =
+                                this.mBackgroundStartPrivilegesMerged.merge(
+                                        (BackgroundStartPrivileges)
+                                                this.mBackgroundStartPrivileges.valueAt(size));
                     }
                 }
                 backgroundStartPrivileges = this.mBackgroundStartPrivilegesMerged;
@@ -815,9 +903,12 @@ public final class ProcessRecord {
 
     public final ApplicationInfo getClientInfoForSdkSandbox() {
         if (!this.isSdkSandbox || this.sdkSandboxClientAppPackage == null) {
-            throw new IllegalStateException("getClientInfoForSdkSandbox called for non-sandbox process");
+            throw new IllegalStateException(
+                    "getClientInfoForSdkSandbox called for non-sandbox process");
         }
-        return this.mService.getPackageManagerInternal().getApplicationInfo(1000, this.userId, 0L, this.sdkSandboxClientAppPackage);
+        return this.mService
+                .getPackageManagerInternal()
+                .getApplicationInfo(1000, this.userId, 0L, this.sdkSandboxClientAppPackage);
     }
 
     public List getLruProcessList() {
@@ -834,7 +925,12 @@ public final class ProcessRecord {
                 }
                 ArrayList arrayList = new ArrayList();
                 for (int i = 0; i < size; i++) {
-                    arrayList.add(new VersionedPackage((String) packageList.mPkgList.keyAt(i), ((ProcessStats.ProcessStateHolder) packageList.mPkgList.valueAt(i)).appVersion));
+                    arrayList.add(
+                            new VersionedPackage(
+                                    (String) packageList.mPkgList.keyAt(i),
+                                    ((ProcessStats.ProcessStateHolder)
+                                                    packageList.mPkgList.valueAt(i))
+                                            .appVersion));
                 }
                 return arrayList;
             } finally {
@@ -869,13 +965,17 @@ public final class ProcessRecord {
             return false;
         }
         ApplicationInfo clientInfoForSdkSandbox = getClientInfoForSdkSandbox();
-        return (clientInfoForSdkSandbox == null || (clientInfoForSdkSandbox.flags & 2) == 0) ? false : true;
+        return (clientInfoForSdkSandbox == null || (clientInfoForSdkSandbox.flags & 2) == 0)
+                ? false
+                : true;
     }
 
     public final boolean isFreezable() {
         if (this.mService.mOomAdjuster.mCachedAppOptimizer.useFreezer()) {
             ProcessCachedOptimizerRecord processCachedOptimizerRecord = this.mOptRecord;
-            if (!processCachedOptimizerRecord.mFreezeExempt && !processCachedOptimizerRecord.mShouldNotFreeze && this.mState.mCurAdj >= 850) {
+            if (!processCachedOptimizerRecord.mFreezeExempt
+                    && !processCachedOptimizerRecord.mShouldNotFreeze
+                    && this.mState.mCurAdj >= 850) {
                 return true;
             }
         }
@@ -883,9 +983,9 @@ public final class ProcessRecord {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0059, code lost:
-    
-        return true;
-     */
+
+       return true;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -959,7 +1059,9 @@ public final class ProcessRecord {
             com.android.server.wm.WindowManagerService.resetPriorityAfterLockedSection()
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ProcessRecord.isInterestingToUserLocked():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ProcessRecord.isInterestingToUserLocked():boolean");
     }
 
     public final boolean isThreadReady() {
@@ -976,28 +1078,37 @@ public final class ProcessRecord {
             }
             final int i4 = this.mPid;
             this.mTGLCallbackPosted = true;
-            this.mService.mHandler.postDelayed(new Runnable() { // from class: com.android.server.am.ProcessRecord$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ProcessRecord processRecord = this;
-                    int i5 = i4;
-                    ActivityManagerService activityManagerService = processRecord.mService;
-                    ActivityManagerService.boostPriorityForLockedSection();
-                    synchronized (activityManagerService) {
-                        try {
-                            if (!processRecord.mKilled && processRecord.mPid == i5) {
-                                ActivityManagerService activityManagerService2 = processRecord.mService;
-                                activityManagerService2.getClass();
-                                activityManagerService2.appDiedLocked(processRecord, processRecord.mPid, processRecord.mThread, false, "TGL@");
+            this.mService.mHandler.postDelayed(
+                    new Runnable() { // from class:
+                                     // com.android.server.am.ProcessRecord$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ProcessRecord processRecord = this;
+                            int i5 = i4;
+                            ActivityManagerService activityManagerService = processRecord.mService;
+                            ActivityManagerService.boostPriorityForLockedSection();
+                            synchronized (activityManagerService) {
+                                try {
+                                    if (!processRecord.mKilled && processRecord.mPid == i5) {
+                                        ActivityManagerService activityManagerService2 =
+                                                processRecord.mService;
+                                        activityManagerService2.getClass();
+                                        activityManagerService2.appDiedLocked(
+                                                processRecord,
+                                                processRecord.mPid,
+                                                processRecord.mThread,
+                                                false,
+                                                "TGL@");
+                                    }
+                                } catch (Throwable th) {
+                                    ActivityManagerService.resetPriorityAfterLockedSection();
+                                    throw th;
+                                }
                             }
-                        } catch (Throwable th) {
                             ActivityManagerService.resetPriorityAfterLockedSection();
-                            throw th;
                         }
-                    }
-                    ActivityManagerService.resetPriorityAfterLockedSection();
-                }
-            }, 1000L);
+                    },
+                    1000L);
             return;
         }
         if (this.mKilledByAm) {
@@ -1012,7 +1123,9 @@ public final class ProcessRecord {
             str3 = m.toString();
         }
         if (this.mService != null && (z || this.info.uid == this.mService.mCurOomAdjUid)) {
-            this.mService.reportUidInfoMessageLocked(this.info.uid, "Killing " + toShortString() + " (adj " + this.mState.mSetAdj + "): " + str);
+            this.mService.reportUidInfoMessageLocked(
+                    this.info.uid,
+                    "Killing " + toShortString() + " (adj " + this.mState.mSetAdj + "): " + str);
         }
         ProcessCachedOptimizerRecord processCachedOptimizerRecord = this.mOptRecord;
         processCachedOptimizerRecord.mPendingFreeze = false;
@@ -1024,8 +1137,16 @@ public final class ProcessRecord {
             String str4 = this.processName;
             Integer valueOf3 = Integer.valueOf(this.mState.mSetAdj);
             long[] rss = Process.getRss(this.mPid);
-            EventLog.writeEvent(30023, valueOf, valueOf2, str4, valueOf3, str, Long.valueOf((rss == null || rss.length <= 0) ? 0L : rss[0]));
-            KernelMemoryProxy$ReclaimerLog.write("B|killProcessQuiet comm=" + this.processName + "(" + this.mPid + ")", false);
+            EventLog.writeEvent(
+                    30023,
+                    valueOf,
+                    valueOf2,
+                    str4,
+                    valueOf3,
+                    str,
+                    Long.valueOf((rss == null || rss.length <= 0) ? 0L : rss[0]));
+            KernelMemoryProxy$ReclaimerLog.write(
+                    "B|killProcessQuiet comm=" + this.processName + "(" + this.mPid + ")", false);
             long j = this.mProfile.mLastPss;
             Process.killProcessQuiet(this.mPid);
             killProcessGroupIfNecessaryLocked(z2);
@@ -1058,7 +1179,9 @@ public final class ProcessRecord {
     public final void killProcessGroupIfNecessaryLocked(boolean z) {
         boolean z2;
         boolean z3 = true;
-        if (this.mHostingRecord != null && (this.mHostingRecord.mHostingZygote == 1 || this.mHostingRecord.mHostingZygote == 2)) {
+        if (this.mHostingRecord != null
+                && (this.mHostingRecord.mHostingZygote == 1
+                        || this.mHostingRecord.mHostingZygote == 2)) {
             synchronized (this) {
                 try {
                     z2 = this.mProcessGroupCreated;
@@ -1078,7 +1201,8 @@ public final class ProcessRecord {
         }
     }
 
-    public final void makeActive(IApplicationThread iApplicationThread, final ProcessStatsService processStatsService) {
+    public final void makeActive(
+            IApplicationThread iApplicationThread, final ProcessStatsService processStatsService) {
         final ProcessProfileRecord processProfileRecord = this.mProfile;
         if (processProfileRecord.mThread == null) {
             synchronized (processProfileRecord.mProfilerLock) {
@@ -1087,47 +1211,71 @@ public final class ProcessRecord {
                     PackageList packageList = processProfileRecord.mApp.mPkgList;
                     if (processState != null) {
                         synchronized (packageList) {
-                            processState.setState(-1, processStatsService.getMemFactorLocked(), SystemClock.uptimeMillis(), packageList.mPkgList);
+                            processState.setState(
+                                    -1,
+                                    processStatsService.getMemFactorLocked(),
+                                    SystemClock.uptimeMillis(),
+                                    packageList.mPkgList);
                         }
                         processState.makeInactive();
                     }
                     ApplicationInfo applicationInfo = processProfileRecord.mApp.info;
                     ProcessRecord processRecord = processProfileRecord.mApp;
-                    final int i = Process.isIsolatedUid(processRecord.uid) ? processRecord.info.uid : processRecord.uid;
-                    final ProcessState processStateLocked = processStatsService.mProcessStats.getProcessStateLocked(applicationInfo.packageName, i, applicationInfo.longVersionCode, processProfileRecord.mApp.processName);
+                    final int i =
+                            Process.isIsolatedUid(processRecord.uid)
+                                    ? processRecord.info.uid
+                                    : processRecord.uid;
+                    final ProcessState processStateLocked =
+                            processStatsService.mProcessStats.getProcessStateLocked(
+                                    applicationInfo.packageName,
+                                    i,
+                                    applicationInfo.longVersionCode,
+                                    processProfileRecord.mApp.processName);
                     processProfileRecord.mBaseProcessTracker = processStateLocked;
                     processStateLocked.makeActive();
-                    BiConsumer biConsumer = new BiConsumer() { // from class: com.android.server.am.ProcessProfileRecord$$ExternalSyntheticLambda1
-                        @Override // java.util.function.BiConsumer
-                        public final void accept(Object obj, Object obj2) {
-                            ProcessProfileRecord processProfileRecord2 = ProcessProfileRecord.this;
-                            ProcessState processState2 = processState;
-                            ProcessStatsService processStatsService2 = processStatsService;
-                            int i2 = i;
-                            ProcessState processState3 = processStateLocked;
-                            String str = (String) obj;
-                            ProcessStats.ProcessStateHolder processStateHolder = (ProcessStats.ProcessStateHolder) obj2;
-                            processProfileRecord2.getClass();
-                            ProcessState processState4 = processStateHolder.state;
-                            if (processState4 != null && processState4 != processState2) {
-                                processState4.makeInactive();
-                            }
-                            long j = processProfileRecord2.mApp.info.longVersionCode;
-                            String str2 = processProfileRecord2.mApp.processName;
-                            ProcessStats.PackageState packageStateLocked = processStatsService2.mProcessStats.getPackageStateLocked(str, i2, j);
-                            processStateHolder.pkg = packageStateLocked;
-                            ProcessState processStateLocked2 = processStatsService2.mProcessStats.getProcessStateLocked(packageStateLocked, str2);
-                            processStateHolder.state = processStateLocked2;
-                            if (processStateLocked2 != processState3) {
-                                processStateLocked2.makeActive();
-                            }
-                        }
-                    };
+                    BiConsumer biConsumer =
+                            new BiConsumer() { // from class:
+                                               // com.android.server.am.ProcessProfileRecord$$ExternalSyntheticLambda1
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    ProcessProfileRecord processProfileRecord2 =
+                                            ProcessProfileRecord.this;
+                                    ProcessState processState2 = processState;
+                                    ProcessStatsService processStatsService2 = processStatsService;
+                                    int i2 = i;
+                                    ProcessState processState3 = processStateLocked;
+                                    String str = (String) obj;
+                                    ProcessStats.ProcessStateHolder processStateHolder =
+                                            (ProcessStats.ProcessStateHolder) obj2;
+                                    processProfileRecord2.getClass();
+                                    ProcessState processState4 = processStateHolder.state;
+                                    if (processState4 != null && processState4 != processState2) {
+                                        processState4.makeInactive();
+                                    }
+                                    long j = processProfileRecord2.mApp.info.longVersionCode;
+                                    String str2 = processProfileRecord2.mApp.processName;
+                                    ProcessStats.PackageState packageStateLocked =
+                                            processStatsService2.mProcessStats
+                                                    .getPackageStateLocked(str, i2, j);
+                                    processStateHolder.pkg = packageStateLocked;
+                                    ProcessState processStateLocked2 =
+                                            processStatsService2.mProcessStats
+                                                    .getProcessStateLocked(
+                                                            packageStateLocked, str2);
+                                    processStateHolder.state = processStateLocked2;
+                                    if (processStateLocked2 != processState3) {
+                                        processStateLocked2.makeActive();
+                                    }
+                                }
+                            };
                     synchronized (packageList) {
                         try {
                             int size = packageList.mPkgList.size();
                             for (int i2 = 0; i2 < size; i2++) {
-                                biConsumer.accept((String) packageList.mPkgList.keyAt(i2), (ProcessStats.ProcessStateHolder) packageList.mPkgList.valueAt(i2));
+                                biConsumer.accept(
+                                        (String) packageList.mPkgList.keyAt(i2),
+                                        (ProcessStats.ProcessStateHolder)
+                                                packageList.mPkgList.valueAt(i2));
                             }
                         } finally {
                         }
@@ -1142,7 +1290,8 @@ public final class ProcessRecord {
         }
         this.mThread = iApplicationThread;
         if (this.mPid == Process.myPid()) {
-            this.mOnewayThread = new SameProcessApplicationThread(iApplicationThread, FgThread.getHandler());
+            this.mOnewayThread =
+                    new SameProcessApplicationThread(iApplicationThread, FgThread.getHandler());
         } else {
             this.mOnewayThread = iApplicationThread;
         }
@@ -1152,25 +1301,30 @@ public final class ProcessRecord {
         }
     }
 
-    public final boolean onCleanupApplicationRecordLSP(ProcessStatsService processStatsService, boolean z, boolean z2) {
+    public final boolean onCleanupApplicationRecordLSP(
+            ProcessStatsService processStatsService, boolean z, boolean z2) {
         ActivityManagerService activityManagerService;
         ProcessRecord processRecord;
         ProcessErrorStateRecord processErrorStateRecord = this.mErrorState;
         ErrorDialogController errorDialogController = processErrorStateRecord.mDialogController;
         List list = errorDialogController.mCrashDialogs;
         if (list != null) {
-            errorDialogController.scheduleForAllDialogs(list, new ErrorDialogController$$ExternalSyntheticLambda0(0));
+            errorDialogController.scheduleForAllDialogs(
+                    list, new ErrorDialogController$$ExternalSyntheticLambda0(0));
             errorDialogController.mCrashDialogs = null;
         }
         errorDialogController.clearAnrDialogs();
         List list2 = errorDialogController.mViolationDialogs;
         if (list2 != null) {
-            errorDialogController.scheduleForAllDialogs(list2, new ErrorDialogController$$ExternalSyntheticLambda0(0));
+            errorDialogController.scheduleForAllDialogs(
+                    list2, new ErrorDialogController$$ExternalSyntheticLambda0(0));
             errorDialogController.mViolationDialogs = null;
         }
         AppWaitingForDebuggerDialog appWaitingForDebuggerDialog = errorDialogController.mWaitDialog;
         if (appWaitingForDebuggerDialog != null) {
-            errorDialogController.mService.mUiHandler.post(new ErrorDialogController$$ExternalSyntheticLambda2(2, appWaitingForDebuggerDialog));
+            errorDialogController.mService.mUiHandler.post(
+                    new ErrorDialogController$$ExternalSyntheticLambda2(
+                            2, appWaitingForDebuggerDialog));
             errorDialogController.mWaitDialog = null;
         }
         processErrorStateRecord.mCrashing = false;
@@ -1193,23 +1347,30 @@ public final class ProcessRecord {
                 if (processState != null) {
                     PackageList packageList = processProfileRecord.mApp.mPkgList;
                     synchronized (packageList) {
-                        processState.setState(-1, processStatsService.getMemFactorLocked(), SystemClock.uptimeMillis(), packageList.mPkgList);
+                        processState.setState(
+                                -1,
+                                processStatsService.getMemFactorLocked(),
+                                SystemClock.uptimeMillis(),
+                                packageList.mPkgList);
                     }
                     processState.makeInactive();
                     processProfileRecord.mBaseProcessTracker = null;
-                    packageList.forEachPackageProcessStats(new Consumer() { // from class: com.android.server.am.ProcessProfileRecord$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            ProcessState processState2 = processState;
-                            ProcessStats.ProcessStateHolder processStateHolder = (ProcessStats.ProcessStateHolder) obj;
-                            ProcessState processState3 = processStateHolder.state;
-                            if (processState3 != null && processState3 != processState2) {
-                                processState3.makeInactive();
-                            }
-                            processStateHolder.pkg = null;
-                            processStateHolder.state = null;
-                        }
-                    });
+                    packageList.forEachPackageProcessStats(
+                            new Consumer() { // from class:
+                                             // com.android.server.am.ProcessProfileRecord$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ProcessState processState2 = processState;
+                                    ProcessStats.ProcessStateHolder processStateHolder =
+                                            (ProcessStats.ProcessStateHolder) obj;
+                                    ProcessState processState3 = processStateHolder.state;
+                                    if (processState3 != null && processState3 != processState2) {
+                                        processState3.makeInactive();
+                                    }
+                                    processStateHolder.pkg = null;
+                                    processStateHolder.state = null;
+                                }
+                            });
                 }
                 processProfileRecord.mThread = null;
             }
@@ -1250,7 +1411,8 @@ public final class ProcessRecord {
         processServiceRecord.mApp.mWindowProcessController.mHasClientActivities = false;
         ProcessReceiverRecord processReceiverRecord = this.mReceivers;
         for (int size = processReceiverRecord.mReceivers.size() - 1; size >= 0; size--) {
-            processReceiverRecord.mService.removeReceiverLocked((ReceiverList) processReceiverRecord.mReceivers.valueAt(size));
+            processReceiverRecord.mService.removeReceiverLocked(
+                    (ReceiverList) processReceiverRecord.mReceivers.valueAt(size));
         }
         processReceiverRecord.mReceivers.clear();
         this.mService.mOomAdjuster.onProcessEndLocked(this);
@@ -1263,11 +1425,17 @@ public final class ProcessRecord {
             if (size2 < 0) {
                 break;
             }
-            ContentProviderRecord contentProviderRecord = (ContentProviderRecord) processProviderRecord.mPubProviders.valueAt(size2);
+            ContentProviderRecord contentProviderRecord =
+                    (ContentProviderRecord) processProviderRecord.mPubProviders.valueAt(size2);
             if (contentProviderRecord.proc == processRecord) {
                 boolean z4 = processRecord.mErrorState.mBad || !z;
-                boolean removeDyingProviderLocked = activityManagerService.mCpHelper.removeDyingProviderLocked(processRecord, contentProviderRecord, z4);
-                if (!z4 && removeDyingProviderLocked && (!contentProviderRecord.connections.isEmpty() || contentProviderRecord.hasExternalProcessHandles())) {
+                boolean removeDyingProviderLocked =
+                        activityManagerService.mCpHelper.removeDyingProviderLocked(
+                                processRecord, contentProviderRecord, z4);
+                if (!z4
+                        && removeDyingProviderLocked
+                        && (!contentProviderRecord.connections.isEmpty()
+                                || contentProviderRecord.hasExternalProcessHandles())) {
                     z3 = true;
                 }
                 contentProviderRecord.provider = null;
@@ -1276,13 +1444,15 @@ public final class ProcessRecord {
             size2--;
         }
         processProviderRecord.mPubProviders.clear();
-        if (activityManagerService.mCpHelper.cleanupAppInLaunchingProvidersLocked(processRecord, false)) {
+        if (activityManagerService.mCpHelper.cleanupAppInLaunchingProvidersLocked(
+                processRecord, false)) {
             activityManagerService.mProcessList.noteProcessDiedLocked(processRecord);
             z3 = true;
         }
         if (!processProviderRecord.mConProviders.isEmpty()) {
             for (int size3 = processProviderRecord.mConProviders.size() - 1; size3 >= 0; size3--) {
-                ContentProviderConnection contentProviderConnection = (ContentProviderConnection) processProviderRecord.mConProviders.get(size3);
+                ContentProviderConnection contentProviderConnection =
+                        (ContentProviderConnection) processProviderRecord.mConProviders.get(size3);
                 contentProviderConnection.provider.connections.remove(contentProviderConnection);
                 int i2 = processRecord.uid;
                 String str = processRecord.processName;
@@ -1302,7 +1472,8 @@ public final class ProcessRecord {
         Objects.requireNonNull(binder, "entity");
         WindowProcessController windowProcessController = this.mWindowProcessController;
         windowProcessController.getClass();
-        BackgroundLaunchProcessController backgroundLaunchProcessController = windowProcessController.mBgLaunchController;
+        BackgroundLaunchProcessController backgroundLaunchProcessController =
+                windowProcessController.mBgLaunchController;
         backgroundLaunchProcessController.getClass();
         synchronized (backgroundLaunchProcessController) {
             try {
@@ -1324,28 +1495,41 @@ public final class ProcessRecord {
                 try {
                     int size = this.mPkgList.size();
                     if (processState != null) {
-                        processState.setState(-1, processStatsService.getMemFactorLocked(), SystemClock.uptimeMillis(), this.mPkgList.mPkgList);
+                        processState.setState(
+                                -1,
+                                processStatsService.getMemFactorLocked(),
+                                SystemClock.uptimeMillis(),
+                                this.mPkgList.mPkgList);
                         if (size != 1) {
-                            this.mPkgList.forEachPackageProcessStats(new Consumer() { // from class: com.android.server.am.ProcessRecord$$ExternalSyntheticLambda0
-                                @Override // java.util.function.Consumer
-                                public final void accept(Object obj) {
-                                    ProcessState processState2 = processState;
-                                    ProcessState processState3 = ((ProcessStats.ProcessStateHolder) obj).state;
-                                    if (processState3 == null || processState3 == processState2) {
-                                        return;
-                                    }
-                                    processState3.makeInactive();
-                                }
-                            });
+                            this.mPkgList.forEachPackageProcessStats(
+                                    new Consumer() { // from class:
+                                                     // com.android.server.am.ProcessRecord$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ProcessState processState2 = processState;
+                                            ProcessState processState3 =
+                                                    ((ProcessStats.ProcessStateHolder) obj).state;
+                                            if (processState3 == null
+                                                    || processState3 == processState2) {
+                                                return;
+                                            }
+                                            processState3.makeInactive();
+                                        }
+                                    });
                             this.mPkgList.clear();
-                            ProcessStats.ProcessStateHolder processStateHolder = new ProcessStats.ProcessStateHolder(this.info.longVersionCode);
+                            ProcessStats.ProcessStateHolder processStateHolder =
+                                    new ProcessStats.ProcessStateHolder(this.info.longVersionCode);
                             String str = this.info.packageName;
                             int i = this.info.uid;
                             long j = this.info.longVersionCode;
                             String str2 = this.processName;
-                            ProcessStats.PackageState packageStateLocked = processStatsService.mProcessStats.getPackageStateLocked(str, i, j);
+                            ProcessStats.PackageState packageStateLocked =
+                                    processStatsService.mProcessStats.getPackageStateLocked(
+                                            str, i, j);
                             processStateHolder.pkg = packageStateLocked;
-                            processStateHolder.state = processStatsService.mProcessStats.getProcessStateLocked(packageStateLocked, str2);
+                            processStateHolder.state =
+                                    processStatsService.mProcessStats.getProcessStateLocked(
+                                            packageStateLocked, str2);
                             this.mPkgList.put(this.info.packageName, processStateHolder);
                             ProcessState processState2 = processStateHolder.state;
                             if (processState2 != processState) {
@@ -1354,7 +1538,9 @@ public final class ProcessRecord {
                         }
                     } else if (size != 1) {
                         this.mPkgList.clear();
-                        this.mPkgList.put(this.info.packageName, new ProcessStats.ProcessStateHolder(this.info.longVersionCode));
+                        this.mPkgList.put(
+                                this.info.packageName,
+                                new ProcessStats.ProcessStateHolder(this.info.longVersionCode));
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -1377,14 +1563,15 @@ public final class ProcessRecord {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0018, code lost:
-    
-        if (r4 != ((android.app.BackgroundStartPrivileges) r2.mBackgroundStartPrivileges.put(r3, r4))) goto L12;
-     */
+
+       if (r4 != ((android.app.BackgroundStartPrivileges) r2.mBackgroundStartPrivileges.put(r3, r4))) goto L12;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setBackgroundStartPrivileges(android.os.Binder r3, android.app.BackgroundStartPrivileges r4) {
+    public final void setBackgroundStartPrivileges(
+            android.os.Binder r3, android.app.BackgroundStartPrivileges r4) {
         /*
             r2 = this;
             android.util.ArrayMap r0 = r2.mBackgroundStartPrivileges
@@ -1412,7 +1599,10 @@ public final class ProcessRecord {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Le
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ProcessRecord.setBackgroundStartPrivileges(android.os.Binder, android.app.BackgroundStartPrivileges):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ProcessRecord.setBackgroundStartPrivileges(android.os.Binder,"
+                    + " android.app.BackgroundStartPrivileges):void");
     }
 
     public final void setPendingUiClean(boolean z) {
@@ -1553,6 +1743,8 @@ public final class ProcessRecord {
 
     public final boolean useFifoUiScheduling() {
         ActivityManagerService activityManagerService = this.mService;
-        return activityManagerService.mUseFifoUiScheduling || (activityManagerService.mAllowSpecifiedFifoScheduling && this.mWindowProcessController.mUseFifoUiScheduling);
+        return activityManagerService.mUseFifoUiScheduling
+                || (activityManagerService.mAllowSpecifiedFifoScheduling
+                        && this.mWindowProcessController.mUseFifoUiScheduling);
     }
 }

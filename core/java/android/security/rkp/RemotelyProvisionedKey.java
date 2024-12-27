@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class RemotelyProvisionedKey implements Parcelable {
-    public static final Parcelable.Creator<RemotelyProvisionedKey> CREATOR = new Parcelable.Creator<RemotelyProvisionedKey>() { // from class: android.security.rkp.RemotelyProvisionedKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemotelyProvisionedKey createFromParcel(Parcel _aidl_source) {
-            RemotelyProvisionedKey _aidl_out = new RemotelyProvisionedKey();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RemotelyProvisionedKey> CREATOR =
+            new Parcelable.Creator<
+                    RemotelyProvisionedKey>() { // from class:
+                                                // android.security.rkp.RemotelyProvisionedKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemotelyProvisionedKey createFromParcel(Parcel _aidl_source) {
+                    RemotelyProvisionedKey _aidl_out = new RemotelyProvisionedKey();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemotelyProvisionedKey[] newArray(int _aidl_size) {
-            return new RemotelyProvisionedKey[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemotelyProvisionedKey[] newArray(int _aidl_size) {
+                    return new RemotelyProvisionedKey[_aidl_size];
+                }
+            };
     public byte[] encodedCertChain;
     public byte[] keyBlob;
 

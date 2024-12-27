@@ -1,9 +1,10 @@
 package com.android.server.wm;
 
 import android.util.ArraySet;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
-import com.android.server.wm.Transition;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
@@ -35,11 +36,19 @@ public final /* synthetic */ class Transition$$ExternalSyntheticLambda11 impleme
                         transition.mConfigAtEndActivities.add(activityRecord);
                         int i2 = activityRecord.mPauseConfigurationDispatchCount + 1;
                         activityRecord.mPauseConfigurationDispatchCount = i2;
-                        if (i2 == 1 && ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_MIN_enabled[1]) {
-                            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS_MIN, 2612201759169917322L, 0, "Pausing configuration dispatch for  %s", String.valueOf(activityRecord));
+                        if (i2 == 1
+                                && ProtoLogImpl_54989576.Cache
+                                        .WM_DEBUG_WINDOW_TRANSITIONS_MIN_enabled[1]) {
+                            ProtoLogImpl_54989576.v(
+                                    ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS_MIN,
+                                    2612201759169917322L,
+                                    0,
+                                    "Pausing configuration dispatch for  %s",
+                                    String.valueOf(activityRecord));
                         }
                         transition.snapshotStartState(activityRecord);
-                        ((Transition.ChangeInfo) transition.mChanges.get(activityRecord)).mFlags |= 64;
+                        ((Transition.ChangeInfo) transition.mChanges.get(activityRecord)).mFlags |=
+                                64;
                         break;
                     }
                 }

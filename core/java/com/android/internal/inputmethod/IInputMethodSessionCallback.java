@@ -5,18 +5,17 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.inputmethod.IInputMethodSession;
 
 /* loaded from: classes5.dex */
 public interface IInputMethodSessionCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.inputmethod.IInputMethodSessionCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.inputmethod.IInputMethodSessionCallback";
 
     void sessionCreated(IInputMethodSession iInputMethodSession) throws RemoteException;
 
     public static class Default implements IInputMethodSessionCallback {
         @Override // com.android.internal.inputmethod.IInputMethodSessionCallback
-        public void sessionCreated(IInputMethodSession session) throws RemoteException {
-        }
+        public void sessionCreated(IInputMethodSession session) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface IInputMethodSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputMethodSessionCallback {
+    public abstract static class Stub extends Binder implements IInputMethodSessionCallback {
         static final int TRANSACTION_sessionCreated = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface IInputMethodSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputMethodSessionCallback.DESCRIPTOR);
             }
@@ -72,7 +72,8 @@ public interface IInputMethodSessionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IInputMethodSession _arg0 = IInputMethodSession.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodSession _arg0 =
+                            IInputMethodSession.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sessionCreated(_arg0);
                     return true;

@@ -5,19 +5,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class PackageInfo implements Parcelable {
-    public static final Parcelable.Creator<PackageInfo> CREATOR = new Parcelable.Creator<PackageInfo>() { // from class: android.content.pm.PackageInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageInfo createFromParcel(Parcel source) {
-            return new PackageInfo(source);
-        }
+    public static final Parcelable.Creator<PackageInfo> CREATOR =
+            new Parcelable.Creator<PackageInfo>() { // from class: android.content.pm.PackageInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageInfo createFromParcel(Parcel source) {
+                    return new PackageInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageInfo[] newArray(int size) {
-            return new PackageInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageInfo[] newArray(int size) {
+                    return new PackageInfo[size];
+                }
+            };
     public static final int INSTALL_LOCATION_AUTO = 0;
     public static final int INSTALL_LOCATION_INTERNAL_ONLY = 1;
     public static final int INSTALL_LOCATION_PREFER_EXTERNAL = 2;
@@ -63,15 +64,13 @@ public class PackageInfo implements Parcelable {
     public String sharedUserId;
     public int sharedUserLabel;
 
-    @Deprecated
-    public Signature[] signatures;
+    @Deprecated public Signature[] signatures;
     public SigningInfo signingInfo;
     public String[] splitNames;
     public int[] splitRevisionCodes;
     public String targetOverlayableName;
 
-    @Deprecated
-    public int versionCode;
+    @Deprecated public int versionCode;
     public int versionCodeMajor;
     public String versionName;
 
@@ -117,7 +116,11 @@ public class PackageInfo implements Parcelable {
     }
 
     public String toString() {
-        return "PackageInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.packageName + "}";
+        return "PackageInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.packageName
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -211,12 +214,14 @@ public class PackageInfo implements Parcelable {
         this.receivers = (ActivityInfo[]) source.createTypedArray(ActivityInfo.CREATOR);
         this.services = (ServiceInfo[]) source.createTypedArray(ServiceInfo.CREATOR);
         this.providers = (ProviderInfo[]) source.createTypedArray(ProviderInfo.CREATOR);
-        this.instrumentation = (InstrumentationInfo[]) source.createTypedArray(InstrumentationInfo.CREATOR);
+        this.instrumentation =
+                (InstrumentationInfo[]) source.createTypedArray(InstrumentationInfo.CREATOR);
         this.permissions = (PermissionInfo[]) source.createTypedArray(PermissionInfo.CREATOR);
         this.requestedPermissions = source.createString8Array();
         this.requestedPermissionsFlags = source.createIntArray();
         this.signatures = (Signature[]) source.createTypedArray(Signature.CREATOR);
-        this.configPreferences = (ConfigurationInfo[]) source.createTypedArray(ConfigurationInfo.CREATOR);
+        this.configPreferences =
+                (ConfigurationInfo[]) source.createTypedArray(ConfigurationInfo.CREATOR);
         this.reqFeatures = (FeatureInfo[]) source.createTypedArray(FeatureInfo.CREATOR);
         this.featureGroups = (FeatureGroupInfo[]) source.createTypedArray(FeatureGroupInfo.CREATOR);
         this.attributions = (Attribution[]) source.createTypedArray(Attribution.CREATOR);

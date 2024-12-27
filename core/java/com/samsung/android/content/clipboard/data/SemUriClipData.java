@@ -12,7 +12,9 @@ import android.sec.clipboard.data.ClipboardConstants;
 import android.sec.clipboard.util.FileHelper;
 import android.sec.clipboard.util.Log;
 import android.text.TextUtils;
+
 import com.samsung.android.content.clipboard.provider.SemImageClipDataProvider;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
@@ -134,7 +136,7 @@ public class SemUriClipData extends SemClipData {
         private final String[] extensions;
 
         private ImageFileFilter() {
-            this.extensions = new String[]{"jpg", "png", "gif", "jpeg"};
+            this.extensions = new String[] {"jpg", "png", "gif", "jpeg"};
         }
 
         @Override // java.io.FileFilter
@@ -185,16 +187,16 @@ public class SemUriClipData extends SemClipData {
     }
 
     public String toString() {
-        return "SemUriClipData class. Value is " + ((Object) (this.mValue.length() > 20 ? this.mValue.subSequence(0, 20) : this.mValue));
+        return "SemUriClipData class. Value is "
+                + ((Object)
+                        (this.mValue.length() > 20 ? this.mValue.subSequence(0, 20) : this.mValue));
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void toSave() {
-    }
+    public void toSave() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void toLoad() {
-    }
+    public void toLoad() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
     public String createThumbnailFromData(Context context) {
@@ -203,7 +205,8 @@ public class SemUriClipData extends SemClipData {
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
     public void convertForRemote() {
-        String imageName = this.mThumbnailFilePath.substring(this.mThumbnailFilePath.lastIndexOf("/"));
+        String imageName =
+                this.mThumbnailFilePath.substring(this.mThumbnailFilePath.lastIndexOf("/"));
         if (setThumbnailPath(ClipboardConstants.CLIPBOARD_REMOTE_PATH + imageName)) {
             Log.d(TAG, "success converting");
         }
@@ -216,7 +219,9 @@ public class SemUriClipData extends SemClipData {
             try {
                 ContentValues values = new ContentValues();
                 values.put("_data", path);
-                Uri contentUri = context.getContentResolver().insert(SemImageClipDataProvider.CONTENT_URI, values);
+                Uri contentUri =
+                        context.getContentResolver()
+                                .insert(SemImageClipDataProvider.CONTENT_URI, values);
                 setUri(contentUri);
             } catch (Exception e) {
                 Log.e(TAG, "Exception occurs because " + e.getMessage());

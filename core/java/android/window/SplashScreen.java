@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.util.Singleton;
 import android.util.Slog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -25,8 +26,7 @@ public interface SplashScreen {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SplashScreenStyle {
-    }
+    public @interface SplashScreenStyle {}
 
     void clearOnExitAnimationListener();
 
@@ -74,13 +74,19 @@ public interface SplashScreen {
                 Log.w(TAG, "Couldn't persist the starting theme. This instance is not an Activity");
                 return;
             }
-            Activity activity = ActivityThread.currentActivityThread().getActivity(this.mActivityToken);
+            Activity activity =
+                    ActivityThread.currentActivityThread().getActivity(this.mActivityToken);
             if (activity == null) {
                 return;
             }
-            String themeName = themeId != 0 ? activity.getResources().getResourceName(themeId) : null;
+            String themeName =
+                    themeId != 0 ? activity.getResources().getResourceName(themeId) : null;
             try {
-                AppGlobals.getPackageManager().setSplashScreenTheme(activity.getComponentName().getPackageName(), themeName, activity.getUserId());
+                AppGlobals.getPackageManager()
+                        .setSplashScreenTheme(
+                                activity.getComponentName().getPackageName(),
+                                themeName,
+                                activity.getUserId());
             } catch (RemoteException e) {
                 Log.w(TAG, "Couldn't persist the starting theme", e);
             }
@@ -89,14 +95,17 @@ public interface SplashScreen {
 
     public static class SplashScreenManagerGlobal {
         private static final String TAG = SplashScreen.class.getSimpleName();
-        private static final Singleton<SplashScreenManagerGlobal> sInstance = new Singleton<SplashScreenManagerGlobal>() { // from class: android.window.SplashScreen.SplashScreenManagerGlobal.1
-            /* JADX INFO: Access modifiers changed from: protected */
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.util.Singleton
-            public SplashScreenManagerGlobal create() {
-                return new SplashScreenManagerGlobal();
-            }
-        };
+        private static final Singleton<SplashScreenManagerGlobal> sInstance =
+                new Singleton<
+                        SplashScreenManagerGlobal>() { // from class:
+                                                       // android.window.SplashScreen.SplashScreenManagerGlobal.1
+                    /* JADX INFO: Access modifiers changed from: protected */
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.util.Singleton
+                    public SplashScreenManagerGlobal create() {
+                        return new SplashScreenManagerGlobal();
+                    }
+                };
         private final Object mGlobalLock;
         private final ArrayList<SplashScreenImpl> mImpls;
 

@@ -16,12 +16,11 @@ public interface ISoundDoseCallback extends IInterface {
 
     public static class Default implements ISoundDoseCallback {
         @Override // android.media.ISoundDoseCallback
-        public void onMomentaryExposure(float currentMel, int deviceId) throws RemoteException {
-        }
+        public void onMomentaryExposure(float currentMel, int deviceId) throws RemoteException {}
 
         @Override // android.media.ISoundDoseCallback
-        public void onNewCsdValue(float currentCsd, SoundDoseRecord[] records) throws RemoteException {
-        }
+        public void onNewCsdValue(float currentCsd, SoundDoseRecord[] records)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface ISoundDoseCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundDoseCallback {
+    public abstract static class Stub extends Binder implements ISoundDoseCallback {
         static final int TRANSACTION_onMomentaryExposure = 1;
         static final int TRANSACTION_onNewCsdValue = 2;
 
@@ -54,7 +53,8 @@ public interface ISoundDoseCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISoundDoseCallback.DESCRIPTOR);
             }
@@ -71,7 +71,8 @@ public interface ISoundDoseCallback extends IInterface {
                     return true;
                 case 2:
                     float _arg02 = data.readFloat();
-                    SoundDoseRecord[] _arg12 = (SoundDoseRecord[]) data.createTypedArray(SoundDoseRecord.CREATOR);
+                    SoundDoseRecord[] _arg12 =
+                            (SoundDoseRecord[]) data.createTypedArray(SoundDoseRecord.CREATOR);
                     data.enforceNoDataAvail();
                     onNewCsdValue(_arg02, _arg12);
                     return true;
@@ -110,7 +111,8 @@ public interface ISoundDoseCallback extends IInterface {
             }
 
             @Override // android.media.ISoundDoseCallback
-            public void onNewCsdValue(float currentCsd, SoundDoseRecord[] records) throws RemoteException {
+            public void onNewCsdValue(float currentCsd, SoundDoseRecord[] records)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundDoseCallback.DESCRIPTOR);

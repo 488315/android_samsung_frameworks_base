@@ -1,8 +1,8 @@
 package android.media;
 
-import android.media.IMediaHTTPService;
 import android.os.IBinder;
 import android.util.Log;
+
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookieStore;
@@ -45,11 +45,22 @@ public class MediaHTTPService extends IMediaHTTPService.Stub {
                             }
                         }
                     } else {
-                        Log.w(TAG, "makeHTTPConnection: The installed CookieHandler is not a CookieManager. Can’t add the provided cookies to the cookie store.");
+                        Log.w(
+                                TAG,
+                                "makeHTTPConnection: The installed CookieHandler is not a"
+                                    + " CookieManager. Can’t add the provided cookies to the cookie"
+                                    + " store.");
                     }
                 }
                 this.mCookieStoreInitialized = true;
-                Log.v(TAG, "makeHTTPConnection(" + this + "): cookieHandler: " + cookieHandler + " Cookies: " + this.mCookies);
+                Log.v(
+                        TAG,
+                        "makeHTTPConnection("
+                                + this
+                                + "): cookieHandler: "
+                                + cookieHandler
+                                + " Cookies: "
+                                + this.mCookies);
             }
         }
         return new MediaHTTPConnection();

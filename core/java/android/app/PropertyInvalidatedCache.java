@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -70,7 +71,7 @@ public class PropertyInvalidatedCache<Query, Result> {
     private static volatile boolean sTesting = false;
     private static final HashMap<String, Long> sTestingPropertyMap = new HashMap<>();
 
-    public static abstract class QueryHandler<Q, R> {
+    public abstract static class QueryHandler<Q, R> {
         public abstract R apply(Q q);
 
         public boolean shouldBypassCache(Q query) {
@@ -136,7 +137,7 @@ public class PropertyInvalidatedCache<Query, Result> {
         this.mLock = new Object();
         this.mHits = 0L;
         this.mMisses = 0L;
-        this.mSkips = new long[]{0, 0, 0, 0};
+        this.mSkips = new long[] {0, 0, 0, 0};
         this.mMissOverflow = 0L;
         this.mHighWaterMark = 0L;
         this.mClears = 0L;
@@ -150,11 +151,16 @@ public class PropertyInvalidatedCache<Query, Result> {
         registerCache();
     }
 
-    public PropertyInvalidatedCache(int maxEntries, String module, String api, String cacheName, QueryHandler<Query, Result> computer) {
+    public PropertyInvalidatedCache(
+            int maxEntries,
+            String module,
+            String api,
+            String cacheName,
+            QueryHandler<Query, Result> computer) {
         this.mLock = new Object();
         this.mHits = 0L;
         this.mMisses = 0L;
-        this.mSkips = new long[]{0, 0, 0, 0};
+        this.mSkips = new long[] {0, 0, 0, 0};
         this.mMissOverflow = 0L;
         this.mHighWaterMark = 0L;
         this.mClears = 0L;
@@ -169,7 +175,8 @@ public class PropertyInvalidatedCache<Query, Result> {
     }
 
     private LinkedHashMap<Query, Result> createMap() {
-        return new LinkedHashMap<Query, Result>(2, 0.75f, true) { // from class: android.app.PropertyInvalidatedCache.1
+        return new LinkedHashMap<Query, Result>(
+                2, 0.75f, true) { // from class: android.app.PropertyInvalidatedCache.1
             @Override // java.util.LinkedHashMap
             protected boolean removeEldestEntry(Map.Entry eldest) {
                 int size = size();
@@ -408,8 +415,7 @@ public class PropertyInvalidatedCache<Query, Result> {
     private static final class NoPreloadHolder {
         private static final AtomicLong sNextNonce = new AtomicLong(new Random().nextLong());
 
-        private NoPreloadHolder() {
-        }
+        private NoPreloadHolder() {}
 
         public static long next() {
             return sNextNonce.getAndIncrement();
@@ -533,8 +539,13 @@ public class PropertyInvalidatedCache<Query, Result> {
                     PropertyInvalidatedCache.corkInvalidations(this.mPropertyName);
                 } else {
                     synchronized (PropertyInvalidatedCache.sCorkLock) {
-                        long count = ((Long) PropertyInvalidatedCache.sCorkedInvalidates.getOrDefault(this.mPropertyName, 0L)).longValue();
-                        PropertyInvalidatedCache.sCorkedInvalidates.put(this.mPropertyName, Long.valueOf(1 + count));
+                        long count =
+                                ((Long)
+                                                PropertyInvalidatedCache.sCorkedInvalidates
+                                                        .getOrDefault(this.mPropertyName, 0L))
+                                        .longValue();
+                        PropertyInvalidatedCache.sCorkedInvalidates.put(
+                                this.mPropertyName, Long.valueOf(1 + count));
                     }
                 }
             }
@@ -559,12 +570,14 @@ public class PropertyInvalidatedCache<Query, Result> {
 
         private Handler getHandlerLocked() {
             if (this.mHandler == null) {
-                this.mHandler = new Handler(Looper.getMainLooper()) { // from class: android.app.PropertyInvalidatedCache.AutoCorker.1
-                    @Override // android.os.Handler
-                    public void handleMessage(Message msg) {
-                        AutoCorker.this.handleMessage(msg);
-                    }
-                };
+                this.mHandler =
+                        new Handler(Looper.getMainLooper()) { // from class:
+                            // android.app.PropertyInvalidatedCache.AutoCorker.1
+                            @Override // android.os.Handler
+                            public void handleMessage(Message msg) {
+                                AutoCorker.this.handleMessage(msg);
+                            }
+                        };
             }
             return this.mHandler;
         }
@@ -617,7 +630,10 @@ public class PropertyInvalidatedCache<Query, Result> {
 
     private static boolean anyDetailed(String[] args) {
         for (String a : args) {
-            if (a.startsWith(NAME_CONTAINS) || a.startsWith(NAME_LIKE) || a.startsWith(PROPERTY_CONTAINS) || a.startsWith(PROPERTY_LIKE)) {
+            if (a.startsWith(NAME_CONTAINS)
+                    || a.startsWith(NAME_LIKE)
+                    || a.startsWith(PROPERTY_CONTAINS)
+                    || a.startsWith(PROPERTY_LIKE)) {
                 return true;
             }
         }
@@ -637,7 +653,10 @@ public class PropertyInvalidatedCache<Query, Result> {
 
     private boolean showDetailed(String[] args) {
         for (String a : args) {
-            if (chooses(a, NAME_CONTAINS, cacheName(), true) || chooses(a, NAME_LIKE, cacheName(), false) || chooses(a, PROPERTY_CONTAINS, this.mPropertyName, true) || chooses(a, PROPERTY_LIKE, this.mPropertyName, false)) {
+            if (chooses(a, NAME_CONTAINS, cacheName(), true)
+                    || chooses(a, NAME_LIKE, cacheName(), false)
+                    || chooses(a, PROPERTY_CONTAINS, this.mPropertyName, true)
+                    || chooses(a, PROPERTY_LIKE, this.mPropertyName, false)) {
                 return true;
             }
         }
@@ -671,11 +690,37 @@ public class PropertyInvalidatedCache<Query, Result> {
                 th = th2;
             }
             try {
-                pw.println(TextUtils.formatSimple("    Hits: %d, Misses: %d, Skips: %d, Clears: %d", Long.valueOf(this.mHits), Long.valueOf(this.mMisses), Long.valueOf(skips), Long.valueOf(this.mClears)));
-                pw.println(TextUtils.formatSimple("    Skip-corked: %d, Skip-unset: %d, Skip-bypass: %d, Skip-other: %d", Long.valueOf(this.mSkips[2]), Long.valueOf(this.mSkips[0]), Long.valueOf(this.mSkips[3]), Long.valueOf(this.mSkips[1])));
-                pw.println(TextUtils.formatSimple("    Nonce: 0x%016x, Invalidates: %d, CorkedInvalidates: %d", Long.valueOf(this.mLastSeenNonce), Long.valueOf(invalidateCount), Long.valueOf(corkedInvalidates)));
-                pw.println(TextUtils.formatSimple("    Current Size: %d, Max Size: %d, HW Mark: %d, Overflows: %d", Integer.valueOf(this.mCache.size()), Integer.valueOf(this.mMaxEntries), Long.valueOf(this.mHighWaterMark), Long.valueOf(this.mMissOverflow)));
-                pw.println(TextUtils.formatSimple("    Enabled: %s", this.mDisabled ? "false" : "true"));
+                pw.println(
+                        TextUtils.formatSimple(
+                                "    Hits: %d, Misses: %d, Skips: %d, Clears: %d",
+                                Long.valueOf(this.mHits),
+                                Long.valueOf(this.mMisses),
+                                Long.valueOf(skips),
+                                Long.valueOf(this.mClears)));
+                pw.println(
+                        TextUtils.formatSimple(
+                                "    Skip-corked: %d, Skip-unset: %d, Skip-bypass: %d, Skip-other:"
+                                        + " %d",
+                                Long.valueOf(this.mSkips[2]),
+                                Long.valueOf(this.mSkips[0]),
+                                Long.valueOf(this.mSkips[3]),
+                                Long.valueOf(this.mSkips[1])));
+                pw.println(
+                        TextUtils.formatSimple(
+                                "    Nonce: 0x%016x, Invalidates: %d, CorkedInvalidates: %d",
+                                Long.valueOf(this.mLastSeenNonce),
+                                Long.valueOf(invalidateCount),
+                                Long.valueOf(corkedInvalidates)));
+                pw.println(
+                        TextUtils.formatSimple(
+                                "    Current Size: %d, Max Size: %d, HW Mark: %d, Overflows: %d",
+                                Integer.valueOf(this.mCache.size()),
+                                Integer.valueOf(this.mMaxEntries),
+                                Long.valueOf(this.mHighWaterMark),
+                                Long.valueOf(this.mMissOverflow)));
+                pw.println(
+                        TextUtils.formatSimple(
+                                "    Enabled: %s", this.mDisabled ? "false" : "true"));
                 pw.println("");
                 if (detailed) {
                     Set<Map.Entry<Query, Result>> cacheEntries = this.mCache.entrySet();
@@ -686,7 +731,9 @@ public class PropertyInvalidatedCache<Query, Result> {
                     for (Map.Entry<Query, Result> entry : cacheEntries) {
                         String key = Objects.toString(entry.getKey());
                         String value = Objects.toString(entry.getValue());
-                        pw.println(TextUtils.formatSimple("      Key: %s\n      Value: %s\n", key, value));
+                        pw.println(
+                                TextUtils.formatSimple(
+                                        "      Key: %s\n      Value: %s\n", key, value));
                     }
                 }
             } catch (Throwable th3) {
@@ -703,7 +750,10 @@ public class PropertyInvalidatedCache<Query, Result> {
             pw.println("  Corking Status:");
             for (int i = 0; i < activeCorks.size(); i++) {
                 Map.Entry<String, Integer> entry = activeCorks.get(i);
-                pw.println(TextUtils.formatSimple("    Property Name: %s Count: %d", entry.getKey(), entry.getValue()));
+                pw.println(
+                        TextUtils.formatSimple(
+                                "    Property Name: %s Count: %d",
+                                entry.getKey(), entry.getValue()));
             }
         }
     }

@@ -1,7 +1,5 @@
 package android.app.appfunctions;
 
-import android.app.appfunctions.ICancellationCallback;
-import android.app.appfunctions.IExecuteAppFunctionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -12,12 +10,21 @@ import android.os.RemoteException;
 public interface IAppFunctionService extends IInterface {
     public static final String DESCRIPTOR = "android.app.appfunctions.IAppFunctionService";
 
-    void executeAppFunction(ExecuteAppFunctionRequest executeAppFunctionRequest, String str, ICancellationCallback iCancellationCallback, IExecuteAppFunctionCallback iExecuteAppFunctionCallback) throws RemoteException;
+    void executeAppFunction(
+            ExecuteAppFunctionRequest executeAppFunctionRequest,
+            String str,
+            ICancellationCallback iCancellationCallback,
+            IExecuteAppFunctionCallback iExecuteAppFunctionCallback)
+            throws RemoteException;
 
     public static class Default implements IAppFunctionService {
         @Override // android.app.appfunctions.IAppFunctionService
-        public void executeAppFunction(ExecuteAppFunctionRequest request, String callingPackage, ICancellationCallback cancellationCallback, IExecuteAppFunctionCallback callback) throws RemoteException {
-        }
+        public void executeAppFunction(
+                ExecuteAppFunctionRequest request,
+                String callingPackage,
+                ICancellationCallback cancellationCallback,
+                IExecuteAppFunctionCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +32,7 @@ public interface IAppFunctionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppFunctionService {
+    public abstract static class Stub extends Binder implements IAppFunctionService {
         static final int TRANSACTION_executeAppFunction = 1;
 
         public Stub() {
@@ -63,7 +70,8 @@ public interface IAppFunctionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppFunctionService.DESCRIPTOR);
             }
@@ -73,10 +81,14 @@ public interface IAppFunctionService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ExecuteAppFunctionRequest _arg0 = (ExecuteAppFunctionRequest) data.readTypedObject(ExecuteAppFunctionRequest.CREATOR);
+                    ExecuteAppFunctionRequest _arg0 =
+                            (ExecuteAppFunctionRequest)
+                                    data.readTypedObject(ExecuteAppFunctionRequest.CREATOR);
                     String _arg1 = data.readString();
-                    ICancellationCallback _arg2 = ICancellationCallback.Stub.asInterface(data.readStrongBinder());
-                    IExecuteAppFunctionCallback _arg3 = IExecuteAppFunctionCallback.Stub.asInterface(data.readStrongBinder());
+                    ICancellationCallback _arg2 =
+                            ICancellationCallback.Stub.asInterface(data.readStrongBinder());
+                    IExecuteAppFunctionCallback _arg3 =
+                            IExecuteAppFunctionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     executeAppFunction(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -102,7 +114,12 @@ public interface IAppFunctionService extends IInterface {
             }
 
             @Override // android.app.appfunctions.IAppFunctionService
-            public void executeAppFunction(ExecuteAppFunctionRequest request, String callingPackage, ICancellationCallback cancellationCallback, IExecuteAppFunctionCallback callback) throws RemoteException {
+            public void executeAppFunction(
+                    ExecuteAppFunctionRequest request,
+                    String callingPackage,
+                    ICancellationCallback cancellationCallback,
+                    IExecuteAppFunctionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAppFunctionService.DESCRIPTOR);

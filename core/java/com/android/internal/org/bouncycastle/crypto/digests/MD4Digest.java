@@ -60,7 +60,11 @@ public class MD4Digest extends GeneralDigest {
         int[] iArr = this.X;
         int i = this.xOff;
         this.xOff = i + 1;
-        iArr[i] = (in[inOff] & 255) | ((in[inOff + 1] & 255) << 8) | ((in[inOff + 2] & 255) << 16) | ((in[inOff + 3] & 255) << 24);
+        iArr[i] =
+                (in[inOff] & 255)
+                        | ((in[inOff + 1] & 255) << 8)
+                        | ((in[inOff + 2] & 255) << 16)
+                        | ((in[inOff + 3] & 255) << 24);
         if (this.xOff == 16) {
             processBlock();
         }
@@ -93,7 +97,8 @@ public class MD4Digest extends GeneralDigest {
         return 16;
     }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.digests.GeneralDigest, com.android.internal.org.bouncycastle.crypto.Digest
+    @Override // com.android.internal.org.bouncycastle.crypto.digests.GeneralDigest,
+              // com.android.internal.org.bouncycastle.crypto.Digest
     public void reset() {
         super.reset();
         this.H1 = 1732584193;

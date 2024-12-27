@@ -1,7 +1,9 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
 import android.content.Context;
+
 import com.android.internal.R;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsManager;
 import com.samsung.android.globalactions.presentation.features.FeatureFactory;
@@ -30,7 +32,11 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
     private final SamsungGlobalActionsAnalytics mSAnalytics;
     UtilFactory mUtilFactory;
 
-    public DefaultActionViewModelFactory(UtilFactory defaultUtilFactory, ResourceFactory resourceFactory, ConditionChecker conditionChecker, SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics) {
+    public DefaultActionViewModelFactory(
+            UtilFactory defaultUtilFactory,
+            ResourceFactory resourceFactory,
+            ConditionChecker conditionChecker,
+            SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics) {
         this.mUtilFactory = defaultUtilFactory;
         this.mResourceFactory = resourceFactory;
         this.mConditionChecker = conditionChecker;
@@ -46,8 +52,11 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
     }
 
     public String getResString(int stringID, int intID) {
-        int resInt = ((Context) this.mUtilFactory.get(Context.class)).getResources().getInteger(intID);
-        return ((Context) this.mUtilFactory.get(Context.class)).getResources().getString(stringID, Integer.valueOf(resInt));
+        int resInt =
+                ((Context) this.mUtilFactory.get(Context.class)).getResources().getInteger(intID);
+        return ((Context) this.mUtilFactory.get(Context.class))
+                .getResources()
+                .getString(stringID, Integer.valueOf(resInt));
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -55,7 +64,8 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
     public ActionViewModel createActionViewModel(SamsungGlobalActions globalActions, String type) {
         char c;
         ActionInfo actionInfo = new ActionInfo();
-        boolean isTabletDevice = this.mConditionChecker.isEnabled(SystemConditions.IS_TABLET_DEVICE);
+        boolean isTabletDevice =
+                this.mConditionChecker.isEnabled(SystemConditions.IS_TABLET_DEVICE);
         switch (type.hashCode()) {
             case -1250803636:
                 if (type.equals(DefaultActionNames.ACTION_EMERGENCY_CALL)) {
@@ -140,37 +150,85 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
         }
         switch (c) {
             case 0:
-                ActionViewModel viewModel = new PowerActionViewModel(globalActions, this.mConditionChecker, this.mSAnalytics, (SamsungGlobalActionsManager) this.mUtilFactory.get(SamsungGlobalActionsManager.class), this.mFeatureFactory, (ToastController) this.mUtilFactory.get(ToastController.class), (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (UsageStatsWrapper) this.mUtilFactory.get(UsageStatsWrapper.class));
+                ActionViewModel viewModel =
+                        new PowerActionViewModel(
+                                globalActions,
+                                this.mConditionChecker,
+                                this.mSAnalytics,
+                                (SamsungGlobalActionsManager)
+                                        this.mUtilFactory.get(SamsungGlobalActionsManager.class),
+                                this.mFeatureFactory,
+                                (ToastController) this.mUtilFactory.get(ToastController.class),
+                                (KeyGuardManagerWrapper)
+                                        this.mUtilFactory.get(KeyGuardManagerWrapper.class),
+                                (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class),
+                                (UsageStatsWrapper) this.mUtilFactory.get(UsageStatsWrapper.class));
                 actionInfo.setName("power");
                 actionInfo.setLabel(getResString(R.string.samsung_global_action_power_off));
-                int descriptionResID = isTabletDevice ? R.string.global_action_confirm_msg_poweroff_tablet : R.string.global_action_confirm_msg_poweroff;
+                int descriptionResID =
+                        isTabletDevice
+                                ? R.string.global_action_confirm_msg_poweroff_tablet
+                                : R.string.global_action_confirm_msg_poweroff;
                 actionInfo.setDescription(getResString(descriptionResID));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_POWEROFF));
                 actionInfo.setViewType(ViewType.CENTER_ICON_1P_VIEW);
                 viewModel.setActionInfo(actionInfo);
                 return viewModel;
             case 1:
-                ActionViewModel viewModel2 = new SafeModeActionViewModel(globalActions, (SamsungGlobalActionsManager) this.mUtilFactory.get(SamsungGlobalActionsManager.class), this.mConditionChecker, (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (ToastController) this.mUtilFactory.get(ToastController.class), this.mSAnalytics);
+                ActionViewModel viewModel2 =
+                        new SafeModeActionViewModel(
+                                globalActions,
+                                (SamsungGlobalActionsManager)
+                                        this.mUtilFactory.get(SamsungGlobalActionsManager.class),
+                                this.mConditionChecker,
+                                (KeyGuardManagerWrapper)
+                                        this.mUtilFactory.get(KeyGuardManagerWrapper.class),
+                                (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class),
+                                (ToastController) this.mUtilFactory.get(ToastController.class),
+                                this.mSAnalytics);
                 actionInfo.setName(DefaultActionNames.ACTION_SAFE_MODE);
                 actionInfo.setLabel(getResString(R.string.global_action_safemode));
-                int descriptionResID2 = isTabletDevice ? R.string.global_action_confirm_msg_safemode_tablet : R.string.global_action_confirm_msg_safemode;
+                int descriptionResID2 =
+                        isTabletDevice
+                                ? R.string.global_action_confirm_msg_safemode_tablet
+                                : R.string.global_action_confirm_msg_safemode;
                 actionInfo.setDescription(getResString(descriptionResID2));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_SAFEMODE));
                 actionInfo.setViewType(ViewType.CENTER_ICON_1P_VIEW);
                 viewModel2.setActionInfo(actionInfo);
                 return viewModel2;
             case 2:
-                ActionViewModel viewModel3 = new RestartActionViewModel(globalActions, this.mConditionChecker, this.mSAnalytics, (SamsungGlobalActionsManager) this.mUtilFactory.get(SamsungGlobalActionsManager.class), this.mFeatureFactory, (ToastController) this.mUtilFactory.get(ToastController.class), (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (UsageStatsWrapper) this.mUtilFactory.get(UsageStatsWrapper.class));
+                ActionViewModel viewModel3 =
+                        new RestartActionViewModel(
+                                globalActions,
+                                this.mConditionChecker,
+                                this.mSAnalytics,
+                                (SamsungGlobalActionsManager)
+                                        this.mUtilFactory.get(SamsungGlobalActionsManager.class),
+                                this.mFeatureFactory,
+                                (ToastController) this.mUtilFactory.get(ToastController.class),
+                                (KeyGuardManagerWrapper)
+                                        this.mUtilFactory.get(KeyGuardManagerWrapper.class),
+                                (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class),
+                                (UsageStatsWrapper) this.mUtilFactory.get(UsageStatsWrapper.class));
                 actionInfo.setName(DefaultActionNames.ACTION_RESTART);
                 actionInfo.setLabel(getResString(R.string.samsung_global_action_restart));
-                int descriptionResID3 = isTabletDevice ? R.string.global_action_confirm_msg_restart_tablet : R.string.global_action_confirm_msg_restart;
+                int descriptionResID3 =
+                        isTabletDevice
+                                ? R.string.global_action_confirm_msg_restart_tablet
+                                : R.string.global_action_confirm_msg_restart;
                 actionInfo.setDescription(getResString(descriptionResID3));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_RESTART));
                 actionInfo.setViewType(ViewType.CENTER_ICON_3P_VIEW);
                 viewModel3.setActionInfo(actionInfo);
                 return viewModel3;
             case 3:
-                ActionViewModel viewModel4 = new EmergencyCallActionViewModel((Context) this.mUtilFactory.get(Context.class), globalActions, this.mSAnalytics, (SystemController) this.mUtilFactory.get(SystemController.class));
+                ActionViewModel viewModel4 =
+                        new EmergencyCallActionViewModel(
+                                (Context) this.mUtilFactory.get(Context.class),
+                                globalActions,
+                                this.mSAnalytics,
+                                (SystemController) this.mUtilFactory.get(SystemController.class));
                 actionInfo.setName(DefaultActionNames.ACTION_EMERGENCY_CALL);
                 actionInfo.setLabel(getResString(R.string.global_action_emergency_call));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_EMERGENCY_CALL));
@@ -178,7 +236,12 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 viewModel4.setActionInfo(actionInfo);
                 return viewModel4;
             case 4:
-                ActionViewModel viewModel5 = new MedicalInfoActionViewModel((Context) this.mUtilFactory.get(Context.class), globalActions, this.mSAnalytics, (SystemController) this.mUtilFactory.get(SystemController.class));
+                ActionViewModel viewModel5 =
+                        new MedicalInfoActionViewModel(
+                                (Context) this.mUtilFactory.get(Context.class),
+                                globalActions,
+                                this.mSAnalytics,
+                                (SystemController) this.mUtilFactory.get(SystemController.class));
                 actionInfo.setName(DefaultActionNames.ACTION_MEDICAL_INFO);
                 actionInfo.setLabel(getResString(R.string.global_action_medical_info));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_MEDICAL_INFO));
@@ -186,7 +249,17 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 viewModel5.setActionInfo(actionInfo);
                 return viewModel5;
             case 5:
-                ActionViewModel viewModel6 = new EmergencyActionViewModel(globalActions, this.mConditionChecker, this.mSAnalytics, (SystemController) this.mUtilFactory.get(SystemController.class), this.mFeatureFactory, (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class), (ToastController) this.mUtilFactory.get(ToastController.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class));
+                ActionViewModel viewModel6 =
+                        new EmergencyActionViewModel(
+                                globalActions,
+                                this.mConditionChecker,
+                                this.mSAnalytics,
+                                (SystemController) this.mUtilFactory.get(SystemController.class),
+                                this.mFeatureFactory,
+                                (KeyGuardManagerWrapper)
+                                        this.mUtilFactory.get(KeyGuardManagerWrapper.class),
+                                (ToastController) this.mUtilFactory.get(ToastController.class),
+                                (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class));
                 actionInfo.setName("emergency");
                 actionInfo.setLabel(getResString(R.string.global_action_toggle_emergency_mode));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_EMERGENCY));
@@ -194,10 +267,17 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 viewModel6.setActionInfo(actionInfo);
                 return viewModel6;
             case 6:
-                ActionViewModel viewModel7 = new BugReportActionViewModel(globalActions, (SystemController) this.mUtilFactory.get(SystemController.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class));
+                ActionViewModel viewModel7 =
+                        new BugReportActionViewModel(
+                                globalActions,
+                                (SystemController) this.mUtilFactory.get(SystemController.class),
+                                (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class));
                 actionInfo.setName("bug_report");
                 actionInfo.setLabel(getResString(R.string.samsung_bugreport_title));
-                actionInfo.setStateLabel(((SystemPropertiesWrapper) this.mUtilFactory.get(SystemPropertiesWrapper.class)).getBugReportStatus());
+                actionInfo.setStateLabel(
+                        ((SystemPropertiesWrapper)
+                                        this.mUtilFactory.get(SystemPropertiesWrapper.class))
+                                .getBugReportStatus());
                 actionInfo.setIcon(-1);
                 actionInfo.setViewType(ViewType.BOTTOM_BTN_LIST_VIEW);
                 viewModel7.setActionInfo(actionInfo);
@@ -205,13 +285,28 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
             case 7:
                 ActionViewModel viewModel8 = new ForceRestartMessageActionViewModel();
                 actionInfo.setName(DefaultActionNames.ACTION_FORCE_RESTART_MESSAGE);
-                actionInfo.setStateLabel(getResString(R.string.global_action_force_restart_message, this.mResourceFactory.get(ResourceType.INTEGER_FORCE_RESTART_TIME)));
+                actionInfo.setStateLabel(
+                        getResString(
+                                R.string.global_action_force_restart_message,
+                                this.mResourceFactory.get(
+                                        ResourceType.INTEGER_FORCE_RESTART_TIME)));
                 actionInfo.setIcon(-1);
                 actionInfo.setViewType(ViewType.BOTTOM_FORCE_RESTART_MSG_VIEW);
                 viewModel8.setActionInfo(actionInfo);
                 return viewModel8;
             case '\b':
-                ActionViewModel viewModel9 = new DataModeActionViewModel(globalActions, this.mConditionChecker, this.mSAnalytics, (SystemController) this.mUtilFactory.get(SystemController.class), (AlertDialogFactory) this.mUtilFactory.get(AlertDialogFactory.class), this.mFeatureFactory, (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (KeyGuardManagerWrapper) this.mUtilFactory.get(KeyGuardManagerWrapper.class));
+                ActionViewModel viewModel9 =
+                        new DataModeActionViewModel(
+                                globalActions,
+                                this.mConditionChecker,
+                                this.mSAnalytics,
+                                (SystemController) this.mUtilFactory.get(SystemController.class),
+                                (AlertDialogFactory)
+                                        this.mUtilFactory.get(AlertDialogFactory.class),
+                                this.mFeatureFactory,
+                                (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class),
+                                (KeyGuardManagerWrapper)
+                                        this.mUtilFactory.get(KeyGuardManagerWrapper.class));
                 actionInfo.setName(DefaultActionNames.ACTION_DATA_MODE);
                 actionInfo.setLabel(getResString(R.string.global_action_toggle_data_mode));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_DATAMODE));
@@ -219,7 +314,12 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 viewModel9.setActionInfo(actionInfo);
                 return viewModel9;
             case '\t':
-                ActionViewModel viewModel10 = new LockdownModeActionViewModel(this.mSAnalytics, (LockPatternUtilsWrapper) this.mUtilFactory.get(LockPatternUtilsWrapper.class), globalActions);
+                ActionViewModel viewModel10 =
+                        new LockdownModeActionViewModel(
+                                this.mSAnalytics,
+                                (LockPatternUtilsWrapper)
+                                        this.mUtilFactory.get(LockPatternUtilsWrapper.class),
+                                globalActions);
                 actionInfo.setName(DefaultActionNames.ACTION_LOCKDOWN_MODE);
                 actionInfo.setLabel(getResString(R.string.global_action_lockdown_mode));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_LOCKDOWN));
@@ -227,7 +327,11 @@ public class DefaultActionViewModelFactory implements ActionViewModelFactory {
                 viewModel10.setActionInfo(actionInfo);
                 return viewModel10;
             case '\n':
-                ActionViewModel viewModel11 = new LogoutActionViewModel(globalActions, (HandlerUtil) this.mUtilFactory.get(HandlerUtil.class), (LogWrapper) this.mUtilFactory.get(LogWrapper.class));
+                ActionViewModel viewModel11 =
+                        new LogoutActionViewModel(
+                                globalActions,
+                                (HandlerUtil) this.mUtilFactory.get(HandlerUtil.class),
+                                (LogWrapper) this.mUtilFactory.get(LogWrapper.class));
                 actionInfo.setName(DefaultActionNames.ACTION_LOGOUT);
                 actionInfo.setLabel(getResString(R.string.global_action_logout));
                 actionInfo.setIcon(this.mResourceFactory.get(ResourceType.DRAWABLE_ENDSESSION));

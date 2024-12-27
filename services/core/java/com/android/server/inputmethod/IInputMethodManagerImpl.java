@@ -10,6 +10,7 @@ import android.view.inputmethod.ImeTracker;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 import android.window.ImeOnBackInvokedDispatcher;
+
 import com.android.internal.inputmethod.IBooleanListener;
 import com.android.internal.inputmethod.IConnectionlessHandwritingCallback;
 import com.android.internal.inputmethod.IImeTracker;
@@ -19,6 +20,7 @@ import com.android.internal.inputmethod.IRemoteInputConnection;
 import com.android.internal.inputmethod.InputBindResult;
 import com.android.internal.inputmethod.InputMethodInfoSafeList;
 import com.android.internal.view.IInputMethodManager;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
@@ -30,11 +32,21 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Callback {
-        boolean acceptStylusHandwritingDelegation(IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2);
+        boolean acceptStylusHandwritingDelegation(
+                IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2);
 
-        void acceptStylusHandwritingDelegationAsync(IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2, IBooleanListener iBooleanListener);
+        void acceptStylusHandwritingDelegationAsync(
+                IInputMethodClient iInputMethodClient,
+                int i,
+                String str,
+                String str2,
+                int i2,
+                IBooleanListener iBooleanListener);
 
-        void addClient(IInputMethodClient iInputMethodClient, IRemoteInputConnection iRemoteInputConnection, int i);
+        void addClient(
+                IInputMethodClient iInputMethodClient,
+                IRemoteInputConnection iRemoteInputConnection,
+                int i);
 
         void addVirtualStylusIdForTestSession(IInputMethodClient iInputMethodClient);
 
@@ -72,7 +84,13 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
 
         void handleVoiceHWKey();
 
-        boolean hideSoftInput(IInputMethodClient iInputMethodClient, IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver, int i2);
+        boolean hideSoftInput(
+                IInputMethodClient iInputMethodClient,
+                IBinder iBinder,
+                ImeTracker.Token token,
+                int i,
+                ResultReceiver resultReceiver,
+                int i2);
 
         void hideSoftInputFromServerForTest();
 
@@ -90,9 +108,17 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
 
         boolean minimizeSoftInput(IInputMethodClient iInputMethodClient, int i);
 
-        void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver, Binder binder);
+        void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver,
+                Binder binder);
 
-        void prepareStylusHandwritingDelegation(IInputMethodClient iInputMethodClient, int i, String str, String str2);
+        void prepareStylusHandwritingDelegation(
+                IInputMethodClient iInputMethodClient, int i, String str, String str2);
 
         void removeImeSurface();
 
@@ -100,7 +126,8 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
 
         void reportPerceptibleAsync(IBinder iBinder, boolean z);
 
-        void setAdditionalInputMethodSubtypes(String str, InputMethodSubtype[] inputMethodSubtypeArr, int i);
+        void setAdditionalInputMethodSubtypes(
+                String str, InputMethodSubtype[] inputMethodSubtypeArr, int i);
 
         void setExplicitlyEnabledInputMethodSubtypes(String str, int[] iArr, int i);
 
@@ -112,15 +139,53 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
 
         void showInputMethodPickerFromSystem(int i, int i2);
 
-        boolean showSoftInput(IInputMethodClient iInputMethodClient, IBinder iBinder, ImeTracker.Token token, int i, int i2, ResultReceiver resultReceiver, int i3);
+        boolean showSoftInput(
+                IInputMethodClient iInputMethodClient,
+                IBinder iBinder,
+                ImeTracker.Token token,
+                int i,
+                int i2,
+                ResultReceiver resultReceiver,
+                int i3);
 
-        void startConnectionlessStylusHandwriting(IInputMethodClient iInputMethodClient, int i, CursorAnchorInfo cursorAnchorInfo, String str, String str2, IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback);
+        void startConnectionlessStylusHandwriting(
+                IInputMethodClient iInputMethodClient,
+                int i,
+                CursorAnchorInfo cursorAnchorInfo,
+                String str,
+                String str2,
+                IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback);
 
         void startImeTrace();
 
-        InputBindResult startInputOrWindowGainedFocus(int i, IInputMethodClient iInputMethodClient, IBinder iBinder, int i2, int i3, int i4, EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i5, int i6, ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher);
+        InputBindResult startInputOrWindowGainedFocus(
+                int i,
+                IInputMethodClient iInputMethodClient,
+                IBinder iBinder,
+                int i2,
+                int i3,
+                int i4,
+                EditorInfo editorInfo,
+                IRemoteInputConnection iRemoteInputConnection,
+                IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+                int i5,
+                int i6,
+                ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher);
 
-        void startInputOrWindowGainedFocusAsync(int i, IInputMethodClient iInputMethodClient, IBinder iBinder, int i2, int i3, int i4, EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i5, int i6, ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher, int i7);
+        void startInputOrWindowGainedFocusAsync(
+                int i,
+                IInputMethodClient iInputMethodClient,
+                IBinder iBinder,
+                int i2,
+                int i3,
+                int i4,
+                EditorInfo editorInfo,
+                IRemoteInputConnection iRemoteInputConnection,
+                IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+                int i5,
+                int i6,
+                ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher,
+                int i7);
 
         void startProtoDump(byte[] bArr, int i, String str);
 
@@ -135,15 +200,27 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
         this.mCallback = callback;
     }
 
-    public final boolean acceptStylusHandwritingDelegation(IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2) {
-        return this.mCallback.acceptStylusHandwritingDelegation(iInputMethodClient, i, str, str2, i2);
+    public final boolean acceptStylusHandwritingDelegation(
+            IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2) {
+        return this.mCallback.acceptStylusHandwritingDelegation(
+                iInputMethodClient, i, str, str2, i2);
     }
 
-    public final void acceptStylusHandwritingDelegationAsync(IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2, IBooleanListener iBooleanListener) {
-        this.mCallback.acceptStylusHandwritingDelegationAsync(iInputMethodClient, i, str, str2, i2, iBooleanListener);
+    public final void acceptStylusHandwritingDelegationAsync(
+            IInputMethodClient iInputMethodClient,
+            int i,
+            String str,
+            String str2,
+            int i2,
+            IBooleanListener iBooleanListener) {
+        this.mCallback.acceptStylusHandwritingDelegationAsync(
+                iInputMethodClient, i, str, str2, i2, iBooleanListener);
     }
 
-    public final void addClient(IInputMethodClient iInputMethodClient, IRemoteInputConnection iRemoteInputConnection, int i) {
+    public final void addClient(
+            IInputMethodClient iInputMethodClient,
+            IRemoteInputConnection iRemoteInputConnection,
+            int i) {
         this.mCallback.addClient(iInputMethodClient, iRemoteInputConnection, i);
     }
 
@@ -156,7 +233,8 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
         this.mCallback.dismissAndShowAgainInputMethodPicker();
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         this.mCallback.dump(fileDescriptor, printWriter, strArr);
     }
 
@@ -220,8 +298,15 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
         this.mCallback.handleVoiceHWKey();
     }
 
-    public final boolean hideSoftInput(IInputMethodClient iInputMethodClient, IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver, int i2) {
-        return this.mCallback.hideSoftInput(iInputMethodClient, iBinder, token, i, resultReceiver, i2);
+    public final boolean hideSoftInput(
+            IInputMethodClient iInputMethodClient,
+            IBinder iBinder,
+            ImeTracker.Token token,
+            int i,
+            ResultReceiver resultReceiver,
+            int i2) {
+        return this.mCallback.hideSoftInput(
+                iInputMethodClient, iBinder, token, i, resultReceiver, i2);
     }
 
     public final void hideSoftInputFromServerForTest() {
@@ -259,11 +344,25 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-        this.mCallback.onShellCommand(fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver, this);
+    public final void onShellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver) {
+        this.mCallback.onShellCommand(
+                fileDescriptor,
+                fileDescriptor2,
+                fileDescriptor3,
+                strArr,
+                shellCallback,
+                resultReceiver,
+                this);
     }
 
-    public final void prepareStylusHandwritingDelegation(IInputMethodClient iInputMethodClient, int i, String str, String str2) {
+    public final void prepareStylusHandwritingDelegation(
+            IInputMethodClient iInputMethodClient, int i, String str, String str2) {
         this.mCallback.prepareStylusHandwritingDelegation(iInputMethodClient, i, str, str2);
     }
 
@@ -280,7 +379,8 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
         this.mCallback.reportPerceptibleAsync(iBinder, z);
     }
 
-    public final void setAdditionalInputMethodSubtypes(String str, InputMethodSubtype[] inputMethodSubtypeArr, int i) {
+    public final void setAdditionalInputMethodSubtypes(
+            String str, InputMethodSubtype[] inputMethodSubtypeArr, int i) {
         this.mCallback.setAdditionalInputMethodSubtypes(str, inputMethodSubtypeArr, i);
     }
 
@@ -288,16 +388,19 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
         this.mCallback.setExplicitlyEnabledInputMethodSubtypes(str, iArr, i);
     }
 
-    public final void setInputMethodSwitchDisable(IInputMethodClient iInputMethodClient, boolean z) {
+    public final void setInputMethodSwitchDisable(
+            IInputMethodClient iInputMethodClient, boolean z) {
         this.mCallback.setInputMethodSwitchDisable(iInputMethodClient, z);
     }
 
-    public final void setStylusWindowIdleTimeoutForTest(IInputMethodClient iInputMethodClient, long j) {
+    public final void setStylusWindowIdleTimeoutForTest(
+            IInputMethodClient iInputMethodClient, long j) {
         setStylusWindowIdleTimeoutForTest_enforcePermission();
         this.mCallback.setStylusWindowIdleTimeoutForTest(iInputMethodClient, j);
     }
 
-    public final void showInputMethodPickerFromClient(IInputMethodClient iInputMethodClient, int i) {
+    public final void showInputMethodPickerFromClient(
+            IInputMethodClient iInputMethodClient, int i) {
         this.mCallback.showInputMethodPickerFromClient(iInputMethodClient, i);
     }
 
@@ -306,12 +409,32 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
         this.mCallback.showInputMethodPickerFromSystem(i, i2);
     }
 
-    public final boolean showSoftInput(IInputMethodClient iInputMethodClient, IBinder iBinder, ImeTracker.Token token, int i, int i2, ResultReceiver resultReceiver, int i3) {
-        return this.mCallback.showSoftInput(iInputMethodClient, iBinder, token, i, i2, resultReceiver, i3);
+    public final boolean showSoftInput(
+            IInputMethodClient iInputMethodClient,
+            IBinder iBinder,
+            ImeTracker.Token token,
+            int i,
+            int i2,
+            ResultReceiver resultReceiver,
+            int i3) {
+        return this.mCallback.showSoftInput(
+                iInputMethodClient, iBinder, token, i, i2, resultReceiver, i3);
     }
 
-    public final void startConnectionlessStylusHandwriting(IInputMethodClient iInputMethodClient, int i, CursorAnchorInfo cursorAnchorInfo, String str, String str2, IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback) {
-        this.mCallback.startConnectionlessStylusHandwriting(iInputMethodClient, i, cursorAnchorInfo, str, str2, iConnectionlessHandwritingCallback);
+    public final void startConnectionlessStylusHandwriting(
+            IInputMethodClient iInputMethodClient,
+            int i,
+            CursorAnchorInfo cursorAnchorInfo,
+            String str,
+            String str2,
+            IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback) {
+        this.mCallback.startConnectionlessStylusHandwriting(
+                iInputMethodClient,
+                i,
+                cursorAnchorInfo,
+                str,
+                str2,
+                iConnectionlessHandwritingCallback);
     }
 
     public final void startImeTrace() {
@@ -319,12 +442,62 @@ public final class IInputMethodManagerImpl extends IInputMethodManager.Stub {
         this.mCallback.startImeTrace();
     }
 
-    public final InputBindResult startInputOrWindowGainedFocus(int i, IInputMethodClient iInputMethodClient, IBinder iBinder, int i2, int i3, int i4, EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i5, int i6, ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher) {
-        return this.mCallback.startInputOrWindowGainedFocus(i, iInputMethodClient, iBinder, i2, i3, i4, editorInfo, iRemoteInputConnection, iRemoteAccessibilityInputConnection, i5, i6, imeOnBackInvokedDispatcher);
+    public final InputBindResult startInputOrWindowGainedFocus(
+            int i,
+            IInputMethodClient iInputMethodClient,
+            IBinder iBinder,
+            int i2,
+            int i3,
+            int i4,
+            EditorInfo editorInfo,
+            IRemoteInputConnection iRemoteInputConnection,
+            IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+            int i5,
+            int i6,
+            ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher) {
+        return this.mCallback.startInputOrWindowGainedFocus(
+                i,
+                iInputMethodClient,
+                iBinder,
+                i2,
+                i3,
+                i4,
+                editorInfo,
+                iRemoteInputConnection,
+                iRemoteAccessibilityInputConnection,
+                i5,
+                i6,
+                imeOnBackInvokedDispatcher);
     }
 
-    public final void startInputOrWindowGainedFocusAsync(int i, IInputMethodClient iInputMethodClient, IBinder iBinder, int i2, int i3, int i4, EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i5, int i6, ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher, int i7) {
-        this.mCallback.startInputOrWindowGainedFocusAsync(i, iInputMethodClient, iBinder, i2, i3, i4, editorInfo, iRemoteInputConnection, iRemoteAccessibilityInputConnection, i5, i6, imeOnBackInvokedDispatcher, i7);
+    public final void startInputOrWindowGainedFocusAsync(
+            int i,
+            IInputMethodClient iInputMethodClient,
+            IBinder iBinder,
+            int i2,
+            int i3,
+            int i4,
+            EditorInfo editorInfo,
+            IRemoteInputConnection iRemoteInputConnection,
+            IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+            int i5,
+            int i6,
+            ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher,
+            int i7) {
+        this.mCallback.startInputOrWindowGainedFocusAsync(
+                i,
+                iInputMethodClient,
+                iBinder,
+                i2,
+                i3,
+                i4,
+                editorInfo,
+                iRemoteInputConnection,
+                iRemoteAccessibilityInputConnection,
+                i5,
+                i6,
+                imeOnBackInvokedDispatcher,
+                i7);
     }
 
     public final void startProtoDump(byte[] bArr, int i, String str) {

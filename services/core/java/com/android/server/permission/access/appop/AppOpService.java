@@ -13,6 +13,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.appop.AppOpsCheckingServiceInterface;
@@ -38,7 +39,9 @@ import com.android.server.permission.jarjar.kotlin.Triple;
 import com.android.server.permission.jarjar.kotlin.Unit;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Ref$BooleanRef;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -62,56 +65,72 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
     public final class OnAppIdAppOpModeChangedListener {
         public final LongSparseArray pendingChanges = new LongSparseArray();
 
-        public OnAppIdAppOpModeChangedListener() {
-        }
+        public OnAppIdAppOpModeChangedListener() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class OnPackageAppOpModeChangedListener {
         public final ArrayMap pendingChanges = new ArrayMap();
 
-        public OnPackageAppOpModeChangedListener() {
-        }
+        public OnPackageAppOpModeChangedListener() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class OnPermissionFlagsChangedListener implements AppIdPermissionPolicy.OnPermissionFlagsChangedListener, DevicePermissionPolicy.OnDevicePermissionFlagsChangedListener {
+    public final class OnPermissionFlagsChangedListener
+            implements AppIdPermissionPolicy.OnPermissionFlagsChangedListener,
+                    DevicePermissionPolicy.OnDevicePermissionFlagsChangedListener {
         public final ArrayMap pendingChanges = new ArrayMap();
 
-        public OnPermissionFlagsChangedListener() {
-        }
+        public OnPermissionFlagsChangedListener() {}
 
-        public final void addPendingChangedModeIfNeeded(int i, int i2, String str, int i3, int i4, int i5, int i6, int i7) {
+        public final void addPendingChangedModeIfNeeded(
+                int i, int i2, String str, int i3, int i4, int i5, int i6, int i7) {
             AppOpService.this.getClass();
-            int evaluateModeFromPermissionFlags = AppOpService.evaluateModeFromPermissionFlags(i4, i5);
-            int evaluateModeFromPermissionFlags2 = AppOpService.evaluateModeFromPermissionFlags(i6, i7);
+            int evaluateModeFromPermissionFlags =
+                    AppOpService.evaluateModeFromPermissionFlags(i4, i5);
+            int evaluateModeFromPermissionFlags2 =
+                    AppOpService.evaluateModeFromPermissionFlags(i6, i7);
             if (evaluateModeFromPermissionFlags != evaluateModeFromPermissionFlags2) {
-                this.pendingChanges.put(new Triple(Integer.valueOf(UserHandle.getUid(i2, i)), str, Integer.valueOf(i3)), Integer.valueOf(evaluateModeFromPermissionFlags2));
+                this.pendingChanges.put(
+                        new Triple(
+                                Integer.valueOf(UserHandle.getUid(i2, i)),
+                                str,
+                                Integer.valueOf(i3)),
+                        Integer.valueOf(evaluateModeFromPermissionFlags2));
             }
         }
 
         @Override // com.android.server.permission.access.permission.DevicePermissionPolicy.OnDevicePermissionFlagsChangedListener
-        public final void onDevicePermissionFlagsChanged(int i, int i2, int i3, String str, String str2, int i4) {
+        public final void onDevicePermissionFlagsChanged(
+                int i, int i2, int i3, String str, String str2, int i4) {
             Integer num;
             Integer num2;
             int i5;
             AppOpService appOpService = AppOpService.this;
-            ArraySet arraySet = (ArraySet) appOpService.backgroundToForegroundPermissionNames.get(str2);
+            ArraySet arraySet =
+                    (ArraySet) appOpService.backgroundToForegroundPermissionNames.get(str2);
             Unit unit = null;
             if (arraySet == null) {
                 String str3 = (String) appOpService.foregroundToBackgroundPermissionName.get(str2);
-                if (str3 != null && (num2 = (Integer) appOpService.runtimePermissionNameToAppOp.get(str2)) != null) {
+                if (str3 != null
+                        && (num2 = (Integer) appOpService.runtimePermissionNameToAppOp.get(str2))
+                                != null) {
                     AccessState accessState = appOpService.service.state;
                     if (accessState == null) {
-                        Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                        Intrinsics.throwUninitializedPropertyAccessException(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                         throw null;
                     }
                     appOpService.permissionPolicy.getClass();
-                    int permissionFlags = AppIdPermissionPolicy.getPermissionFlags(accessState, i, i2, str3);
-                    addPendingChangedModeIfNeeded(i, i2, str, num2.intValue(), i3, permissionFlags, i4, permissionFlags);
+                    int permissionFlags =
+                            AppIdPermissionPolicy.getPermissionFlags(accessState, i, i2, str3);
+                    addPendingChangedModeIfNeeded(
+                            i, i2, str, num2.intValue(), i3, permissionFlags, i4, permissionFlags);
                     unit = Unit.INSTANCE;
                 }
-                if (unit != null || (num = (Integer) appOpService.runtimePermissionNameToAppOp.get(str2)) == null) {
+                if (unit != null
+                        || (num = (Integer) appOpService.runtimePermissionNameToAppOp.get(str2))
+                                == null) {
                     return;
                 }
                 addPendingChangedModeIfNeeded(i, i2, str, num.intValue(), i3, 16, i4, 16);
@@ -125,13 +144,23 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
                 if (num3 != null) {
                     AccessState accessState2 = appOpService.service.state;
                     if (accessState2 == null) {
-                        Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                        Intrinsics.throwUninitializedPropertyAccessException(
+                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                         throw null;
                     }
                     appOpService.permissionPolicy.getClass();
-                    int permissionFlags2 = AppIdPermissionPolicy.getPermissionFlags(accessState2, i, i2, str4);
+                    int permissionFlags2 =
+                            AppIdPermissionPolicy.getPermissionFlags(accessState2, i, i2, str4);
                     i5 = i6;
-                    addPendingChangedModeIfNeeded(i, i2, str, num3.intValue(), permissionFlags2, i3, permissionFlags2, i4);
+                    addPendingChangedModeIfNeeded(
+                            i,
+                            i2,
+                            str,
+                            num3.intValue(),
+                            permissionFlags2,
+                            i3,
+                            permissionFlags2,
+                            i4);
                 } else {
                     i5 = i6;
                 }
@@ -155,7 +184,11 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
                 Triple triple = (Triple) keyAt;
                 int size2 = arraySet.size();
                 for (int i2 = 0; i2 < size2; i2++) {
-                    ((AppOpsService.AnonymousClass2) arraySet.valueAt(i2)).onUidModeChanged(((Number) triple.getFirst()).intValue(), ((Number) triple.getThird()).intValue(), (String) triple.getSecond());
+                    ((AppOpsService.AnonymousClass2) arraySet.valueAt(i2))
+                            .onUidModeChanged(
+                                    ((Number) triple.getFirst()).intValue(),
+                                    ((Number) triple.getThird()).intValue(),
+                                    (String) triple.getSecond());
                 }
             }
             this.pendingChanges.clear();
@@ -164,18 +197,54 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
 
     public AppOpService(AccessCheckingService accessCheckingService) {
         this.service = accessCheckingService;
-        SchemePolicy schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar = accessCheckingService.getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar("package", "app-op");
-        Intrinsics.checkNotNull("null cannot be cast to non-null type com.android.server.permission.access.appop.PackageAppOpPolicy", schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar);
-        this.packagePolicy = (PackageAppOpPolicy) schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar;
-        SchemePolicy schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar2 = accessCheckingService.getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar("uid", "app-op");
-        Intrinsics.checkNotNull("null cannot be cast to non-null type com.android.server.permission.access.appop.AppIdAppOpPolicy", schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar2);
-        this.appIdPolicy = (AppIdAppOpPolicy) schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar2;
-        SchemePolicy schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar3 = accessCheckingService.getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar("uid", "permission");
-        Intrinsics.checkNotNull("null cannot be cast to non-null type com.android.server.permission.access.permission.AppIdPermissionPolicy", schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar3);
-        this.permissionPolicy = (AppIdPermissionPolicy) schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar3;
-        SchemePolicy schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar4 = accessCheckingService.getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar("uid", "device-permission");
-        Intrinsics.checkNotNull("null cannot be cast to non-null type com.android.server.permission.access.permission.DevicePermissionPolicy", schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar4);
-        this.devicePermissionPolicy = (DevicePermissionPolicy) schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar4;
+        SchemePolicy
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar =
+                        accessCheckingService
+                                .getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                                        "package", "app-op");
+        Intrinsics.checkNotNull(
+                "null cannot be cast to non-null type"
+                    + " com.android.server.permission.access.appop.PackageAppOpPolicy",
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar);
+        this.packagePolicy =
+                (PackageAppOpPolicy)
+                        schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar;
+        SchemePolicy
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar2 =
+                        accessCheckingService
+                                .getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                                        "uid", "app-op");
+        Intrinsics.checkNotNull(
+                "null cannot be cast to non-null type"
+                    + " com.android.server.permission.access.appop.AppIdAppOpPolicy",
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar2);
+        this.appIdPolicy =
+                (AppIdAppOpPolicy)
+                        schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar2;
+        SchemePolicy
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar3 =
+                        accessCheckingService
+                                .getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                                        "uid", "permission");
+        Intrinsics.checkNotNull(
+                "null cannot be cast to non-null type"
+                    + " com.android.server.permission.access.permission.AppIdPermissionPolicy",
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar3);
+        this.permissionPolicy =
+                (AppIdPermissionPolicy)
+                        schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar3;
+        SchemePolicy
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar4 =
+                        accessCheckingService
+                                .getSchemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                                        "uid", "device-permission");
+        Intrinsics.checkNotNull(
+                "null cannot be cast to non-null type"
+                    + " com.android.server.permission.access.permission.DevicePermissionPolicy",
+                schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar4);
+        this.devicePermissionPolicy =
+                (DevicePermissionPolicy)
+                        schemePolicy$frameworks__base__services__permission__android_common__services_permission_pre_jarjar4;
         this.context = accessCheckingService.getContext();
         this.runtimeAppOpToPermissionNames = new SparseArray();
         this.runtimePermissionNameToAppOp = new ArrayMap();
@@ -201,13 +270,16 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
         int size = arrayMap.size();
         for (int i = 0; i < size; i++) {
             Object keyAt = arrayMap.keyAt(i);
-            sparseIntArray.put(AppOpsManager.strOpToOp((String) keyAt), ((Number) arrayMap.valueAt(i)).intValue());
+            sparseIntArray.put(
+                    AppOpsManager.strOpToOp((String) keyAt),
+                    ((Number) arrayMap.valueAt(i)).intValue());
         }
         return sparseIntArray;
     }
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
-    public final boolean addAppOpsModeChangedListener(AppOpsService.AnonymousClass2 anonymousClass2) {
+    public final boolean addAppOpsModeChangedListener(
+            AppOpsService.AnonymousClass2 anonymousClass2) {
         boolean add;
         synchronized (this.listenersLock) {
             ArraySet arraySet = new ArraySet(this.listeners);
@@ -218,8 +290,7 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
     }
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
-    public final void clearAllModes() {
-    }
+    public final void clearAllModes() {}
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
     public final SparseBooleanArray getForegroundOps(int i) {
@@ -229,12 +300,19 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
         int userId = UserHandle.getUserId(i);
         AccessState accessState = this.service.state;
         if (accessState == null) {
-            Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+            Intrinsics.throwUninitializedPropertyAccessException(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
             throw null;
         }
         this.appIdPolicy.getClass();
-        MutableUserState mutableUserState = (MutableUserState) accessState.getUserStates().get(userId);
-        IndexedMap indexedMap = (mutableUserState == null || (appIdAppOpModes = mutableUserState.getAppIdAppOpModes()) == null) ? null : (IndexedMap) appIdAppOpModes.get(appId);
+        MutableUserState mutableUserState =
+                (MutableUserState) accessState.getUserStates().get(userId);
+        IndexedMap indexedMap =
+                (mutableUserState == null
+                                || (appIdAppOpModes = mutableUserState.getAppIdAppOpModes())
+                                        == null)
+                        ? null
+                        : (IndexedMap) appIdAppOpModes.get(appId);
         ArrayMap arrayMap = indexedMap != null ? indexedMap.map : null;
         if (arrayMap != null) {
             int size = arrayMap.size();
@@ -298,21 +376,31 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
         int userId = UserHandle.getUserId(i);
         AccessState accessState = this.service.state;
         if (accessState == null) {
-            Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+            Intrinsics.throwUninitializedPropertyAccessException(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
             throw null;
         }
         GetStateScope getStateScope = new GetStateScope(accessState);
         this.appIdPolicy.getClass();
-        MutableUserState mutableUserState = (MutableUserState) accessState.getUserStates().get(userId);
-        IndexedMap indexedMap = (mutableUserState == null || (appIdAppOpModes = mutableUserState.getAppIdAppOpModes()) == null) ? null : (IndexedMap) appIdAppOpModes.get(appId);
-        SparseIntArray opNameMapToOpSparseArray = opNameMapToOpSparseArray(indexedMap != null ? indexedMap.map : null);
+        MutableUserState mutableUserState =
+                (MutableUserState) accessState.getUserStates().get(userId);
+        IndexedMap indexedMap =
+                (mutableUserState == null
+                                || (appIdAppOpModes = mutableUserState.getAppIdAppOpModes())
+                                        == null)
+                        ? null
+                        : (IndexedMap) appIdAppOpModes.get(appId);
+        SparseIntArray opNameMapToOpSparseArray =
+                opNameMapToOpSparseArray(indexedMap != null ? indexedMap.map : null);
         if (Flags.runtimePermissionAppopsMappingEnabled()) {
             ArrayMap arrayMap = this.runtimePermissionNameToAppOp;
             int size = arrayMap.size();
             for (int i2 = 0; i2 < size; i2++) {
                 Object keyAt = arrayMap.keyAt(i2);
                 int intValue = ((Number) arrayMap.valueAt(i2)).intValue();
-                int uidModeFromPermissionState = getUidModeFromPermissionState(appId, userId, getStateScope, (String) keyAt, "default:0");
+                int uidModeFromPermissionState =
+                        getUidModeFromPermissionState(
+                                appId, userId, getStateScope, (String) keyAt, "default:0");
                 if (uidModeFromPermissionState != AppOpsManager.opToDefaultMode(intValue)) {
                     opNameMapToOpSparseArray.put(intValue, uidModeFromPermissionState);
                 }
@@ -328,27 +416,40 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
         AccessState accessState = this.service.state;
         IndexedMap indexedMap = null;
         if (accessState == null) {
-            Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+            Intrinsics.throwUninitializedPropertyAccessException(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
             throw null;
         }
         this.packagePolicy.getClass();
         MutableUserState mutableUserState = (MutableUserState) accessState.getUserStates().get(i2);
-        if (mutableUserState != null && (packageAppOpModes = mutableUserState.getPackageAppOpModes()) != null) {
+        if (mutableUserState != null
+                && (packageAppOpModes = mutableUserState.getPackageAppOpModes()) != null) {
             indexedMap = (IndexedMap) packageAppOpModes.get(str);
         }
-        return ((Number) IndexedMapExtensionsKt.getWithDefault(indexedMap, opToPublicName, Integer.valueOf(AppOpsManager.opToDefaultMode(opToPublicName)))).intValue();
+        return ((Number)
+                        IndexedMapExtensionsKt.getWithDefault(
+                                indexedMap,
+                                opToPublicName,
+                                Integer.valueOf(AppOpsManager.opToDefaultMode(opToPublicName))))
+                .intValue();
     }
 
     public final ArrayMap getPackageModes(int i, String str) {
         MutableIndexedReferenceMap packageAppOpModes;
         AccessState accessState = this.service.state;
         if (accessState == null) {
-            Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+            Intrinsics.throwUninitializedPropertyAccessException(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
             throw null;
         }
         this.packagePolicy.getClass();
         MutableUserState mutableUserState = (MutableUserState) accessState.getUserStates().get(i);
-        IndexedMap indexedMap = (mutableUserState == null || (packageAppOpModes = mutableUserState.getPackageAppOpModes()) == null) ? null : (IndexedMap) packageAppOpModes.get(str);
+        IndexedMap indexedMap =
+                (mutableUserState == null
+                                || (packageAppOpModes = mutableUserState.getPackageAppOpModes())
+                                        == null)
+                        ? null
+                        : (IndexedMap) packageAppOpModes.get(str);
         if (indexedMap != null) {
             return indexedMap.map;
         }
@@ -362,41 +463,56 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
         int userId = UserHandle.getUserId(i);
         String opToPublicName = AppOpsManager.opToPublicName(i2);
         String str2 = (String) this.runtimeAppOpToPermissionNames.get(i2);
-        boolean runtimePermissionAppopsMappingEnabled = Flags.runtimePermissionAppopsMappingEnabled();
+        boolean runtimePermissionAppopsMappingEnabled =
+                Flags.runtimePermissionAppopsMappingEnabled();
         AccessCheckingService accessCheckingService = this.service;
         IndexedMap indexedMap = null;
         if (runtimePermissionAppopsMappingEnabled && str2 != null) {
             AccessState accessState = accessCheckingService.state;
             if (accessState != null) {
-                return getUidModeFromPermissionState(appId, userId, new GetStateScope(accessState), str2, str);
+                return getUidModeFromPermissionState(
+                        appId, userId, new GetStateScope(accessState), str2, str);
             }
-            Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+            Intrinsics.throwUninitializedPropertyAccessException(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
             throw null;
         }
         AccessState accessState2 = accessCheckingService.state;
         if (accessState2 == null) {
-            Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+            Intrinsics.throwUninitializedPropertyAccessException(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
             throw null;
         }
         this.appIdPolicy.getClass();
-        MutableUserState mutableUserState = (MutableUserState) accessState2.getUserStates().get(userId);
-        if (mutableUserState != null && (appIdAppOpModes = mutableUserState.getAppIdAppOpModes()) != null) {
+        MutableUserState mutableUserState =
+                (MutableUserState) accessState2.getUserStates().get(userId);
+        if (mutableUserState != null
+                && (appIdAppOpModes = mutableUserState.getAppIdAppOpModes()) != null) {
             indexedMap = (IndexedMap) appIdAppOpModes.get(appId);
         }
-        return ((Number) IndexedMapExtensionsKt.getWithDefault(indexedMap, opToPublicName, Integer.valueOf(AppOpsManager.opToDefaultMode(opToPublicName)))).intValue();
+        return ((Number)
+                        IndexedMapExtensionsKt.getWithDefault(
+                                indexedMap,
+                                opToPublicName,
+                                Integer.valueOf(AppOpsManager.opToDefaultMode(opToPublicName))))
+                .intValue();
     }
 
-    public final int getUidModeFromPermissionState(int i, int i2, GetStateScope getStateScope, String str, String str2) {
+    public final int getUidModeFromPermissionState(
+            int i, int i2, GetStateScope getStateScope, String str, String str2) {
         int permissionFlags;
         int i3;
         String str3;
-        boolean z = !str2.equals("default:0") && PermissionManager.DEVICE_AWARE_PERMISSIONS.contains(str);
+        boolean z =
+                !str2.equals("default:0")
+                        && PermissionManager.DEVICE_AWARE_PERMISSIONS.contains(str);
         DevicePermissionPolicy devicePermissionPolicy = this.devicePermissionPolicy;
         AccessState accessState = getStateScope.state;
         AppIdPermissionPolicy appIdPermissionPolicy = this.permissionPolicy;
         if (z) {
             devicePermissionPolicy.getClass();
-            permissionFlags = DevicePermissionPolicy.getPermissionFlags(i, i2, getStateScope, str2, str);
+            permissionFlags =
+                    DevicePermissionPolicy.getPermissionFlags(i, i2, getStateScope, str2, str);
         } else {
             appIdPermissionPolicy.getClass();
             permissionFlags = AppIdPermissionPolicy.getPermissionFlags(accessState, i, i2, str);
@@ -412,12 +528,14 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
             i3 = AppIdPermissionPolicy.getPermissionFlags(accessState, i, i2, str4);
         }
         int evaluateModeFromPermissionFlags = evaluateModeFromPermissionFlags(permissionFlags, i3);
-        return (evaluateModeFromPermissionFlags == 1 && (str3 = (String) PermissionService.FULLER_PERMISSIONS.get(str)) != null) ? getUidModeFromPermissionState(i, i2, getStateScope, str3, str2) : evaluateModeFromPermissionFlags;
+        return (evaluateModeFromPermissionFlags == 1
+                        && (str3 = (String) PermissionService.FULLER_PERMISSIONS.get(str)) != null)
+                ? getUidModeFromPermissionState(i, i2, getStateScope, str3, str2)
+                : evaluateModeFromPermissionFlags;
     }
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
-    public final void readState() {
-    }
+    public final void readState() {}
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0073 A[Catch: all -> 0x00a9, TryCatch #0 {, blocks: (B:4:0x000c, B:6:0x0012, B:9:0x0058, B:11:0x0073, B:13:0x008c, B:22:0x002a, B:25:0x0041, B:26:0x00ab, B:27:0x00b2), top: B:3:0x000c }] */
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
@@ -516,7 +634,10 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
             monitor-exit(r2)
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.permission.access.appop.AppOpService.removePackage(int, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.permission.access.appop.AppOpService.removePackage(int,"
+                    + " java.lang.String):boolean");
     }
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
@@ -528,14 +649,26 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
         synchronized (accessCheckingService.stateLock) {
             AccessState accessState = accessCheckingService.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
             this.appIdPolicy.getClass();
             int indexOfKey2 = mutable.getUserStates().array.indexOfKey(userId);
-            if (indexOfKey2 >= 0 && (indexOfKey = ((MutableUserState) mutable.getUserStates().valueAt(indexOfKey2)).getAppIdAppOpModes().array.indexOfKey(appId)) >= 0) {
-                ((MutableIntReferenceMap) MutableAccessState.mutateUserStateAt$default(mutable, indexOfKey2).appIdAppOpModesReference.mutate()).removeAt$1(indexOfKey);
+            if (indexOfKey2 >= 0
+                    && (indexOfKey =
+                                    ((MutableUserState)
+                                                    mutable.getUserStates().valueAt(indexOfKey2))
+                                            .getAppIdAppOpModes()
+                                            .array
+                                            .indexOfKey(appId))
+                            >= 0) {
+                ((MutableIntReferenceMap)
+                                MutableAccessState.mutateUserStateAt$default(mutable, indexOfKey2)
+                                        .appIdAppOpModesReference
+                                        .mutate())
+                        .removeAt$1(indexOfKey);
             }
             accessCheckingService.persistence.write(mutable);
             accessCheckingService.state = mutable;
@@ -555,19 +688,33 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
     public final void setPackageMode(int i, int i2, int i3, String str) {
         String opToPublicName = AppOpsManager.opToPublicName(i);
-        if (Flags.runtimePermissionAppopsMappingEnabled() && this.runtimeAppOpToPermissionNames.contains(i)) {
-            Slog.w("AppOpService", AudioOffloadInfo$$ExternalSyntheticOutline0.m(StorageManagerService$$ExternalSyntheticOutline0.m(i3, "(packageName=", str, ", userId=", ")'s appop state for runtime op "), opToPublicName, " should not be set directly."), new RuntimeException());
+        if (Flags.runtimePermissionAppopsMappingEnabled()
+                && this.runtimeAppOpToPermissionNames.contains(i)) {
+            Slog.w(
+                    "AppOpService",
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                            StorageManagerService$$ExternalSyntheticOutline0.m(
+                                    i3,
+                                    "(packageName=",
+                                    str,
+                                    ", userId=",
+                                    ")'s appop state for runtime op "),
+                            opToPublicName,
+                            " should not be set directly."),
+                    new RuntimeException());
             return;
         }
         AccessCheckingService accessCheckingService = this.service;
         synchronized (accessCheckingService.stateLock) {
             AccessState accessState = accessCheckingService.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             MutableAccessState mutable = accessState.toMutable();
-            this.packagePolicy.setAppOpMode(new MutateStateScope(accessState, mutable), str, i3, opToPublicName, i2);
+            this.packagePolicy.setAppOpMode(
+                    new MutateStateScope(accessState, mutable), str, i3, opToPublicName, i2);
             accessCheckingService.persistence.write(mutable);
             accessCheckingService.state = mutable;
             IndexedMap indexedMap = accessCheckingService.policy.schemePolicies;
@@ -590,17 +737,25 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
         int userId = UserHandle.getUserId(i);
         String opToPublicName = AppOpsManager.opToPublicName(i2);
         IndexedMap indexedMap = null;
-        if (!Flags.runtimePermissionAppopsMappingEnabled() || !this.runtimeAppOpToPermissionNames.contains(i2)) {
+        if (!Flags.runtimePermissionAppopsMappingEnabled()
+                || !this.runtimeAppOpToPermissionNames.contains(i2)) {
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
             AccessCheckingService accessCheckingService = this.service;
             synchronized (accessCheckingService.stateLock) {
                 AccessState accessState = accessCheckingService.state;
                 if (accessState == null) {
-                    Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                    Intrinsics.throwUninitializedPropertyAccessException(
+                            LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                     throw null;
                 }
                 MutableAccessState mutable = accessState.toMutable();
-                ref$BooleanRef.element = this.appIdPolicy.setAppOpMode(new MutateStateScope(accessState, mutable), appId, userId, opToPublicName, i3);
+                ref$BooleanRef.element =
+                        this.appIdPolicy.setAppOpMode(
+                                new MutateStateScope(accessState, mutable),
+                                appId,
+                                userId,
+                                opToPublicName,
+                                i3);
                 accessCheckingService.persistence.write(mutable);
                 accessCheckingService.state = mutable;
                 IndexedMap indexedMap2 = accessCheckingService.policy.schemePolicies;
@@ -618,15 +773,25 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
         }
         AccessState accessState2 = this.service.state;
         if (accessState2 == null) {
-            Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+            Intrinsics.throwUninitializedPropertyAccessException(
+                    LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
             throw null;
         }
         this.appIdPolicy.getClass();
-        MutableUserState mutableUserState = (MutableUserState) accessState2.getUserStates().get(userId);
-        if (mutableUserState != null && (appIdAppOpModes = mutableUserState.getAppIdAppOpModes()) != null) {
+        MutableUserState mutableUserState =
+                (MutableUserState) accessState2.getUserStates().get(userId);
+        if (mutableUserState != null
+                && (appIdAppOpModes = mutableUserState.getAppIdAppOpModes()) != null) {
             indexedMap = (IndexedMap) appIdAppOpModes.get(appId);
         }
-        int intValue = ((Number) IndexedMapExtensionsKt.getWithDefault(indexedMap, opToPublicName, Integer.valueOf(AppOpsManager.opToDefaultMode(opToPublicName)))).intValue();
+        int intValue =
+                ((Number)
+                                IndexedMapExtensionsKt.getWithDefault(
+                                        indexedMap,
+                                        opToPublicName,
+                                        Integer.valueOf(
+                                                AppOpsManager.opToDefaultMode(opToPublicName))))
+                        .intValue();
         boolean z = intValue != i3;
         String str = z ? "Blocked" : "Ignored";
         String opToName = AppOpsManager.opToName(i2);
@@ -653,15 +818,15 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
     }
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
-    public void shutdown() {
-    }
+    public void shutdown() {}
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
     public final void systemReady() {
         if (Flags.runtimePermissionAppopsMappingEnabled()) {
             AccessState accessState = this.service.state;
             if (accessState == null) {
-                Intrinsics.throwUninitializedPropertyAccessException(LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                Intrinsics.throwUninitializedPropertyAccessException(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 throw null;
             }
             AppIdPermissionPolicy appIdPermissionPolicy = this.permissionPolicy;
@@ -669,7 +834,8 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
             IndexedMap permissions = accessState.getSystemState().getPermissions();
             for (int i = 0; i < 149; i++) {
                 String opToPermission = AppOpsManager.opToPermission(i);
-                if (opToPermission != null && i == AppOpsManager.permissionToOpCode(opToPermission)) {
+                if (opToPermission != null
+                        && i == AppOpsManager.permissionToOpCode(opToPermission)) {
                     Object obj = permissions.map.get(opToPermission);
                     Intrinsics.checkNotNull(obj);
                     Permission permission = (Permission) obj;
@@ -691,11 +857,14 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
                     }
                 }
             }
-            OnPermissionFlagsChangedListener onPermissionFlagsChangedListener = new OnPermissionFlagsChangedListener();
+            OnPermissionFlagsChangedListener onPermissionFlagsChangedListener =
+                    new OnPermissionFlagsChangedListener();
             synchronized (appIdPermissionPolicy.onPermissionFlagsChangedListenersLock) {
-                MutableIndexedListSet mutableIndexedListSet = appIdPermissionPolicy.onPermissionFlagsChangedListeners;
+                MutableIndexedListSet mutableIndexedListSet =
+                        appIdPermissionPolicy.onPermissionFlagsChangedListeners;
                 mutableIndexedListSet.getClass();
-                MutableIndexedListSet mutableIndexedListSet2 = new MutableIndexedListSet(new ArrayList(mutableIndexedListSet.list));
+                MutableIndexedListSet mutableIndexedListSet2 =
+                        new MutableIndexedListSet(new ArrayList(mutableIndexedListSet.list));
                 mutableIndexedListSet2.add(onPermissionFlagsChangedListener);
                 appIdPermissionPolicy.onPermissionFlagsChangedListeners = mutableIndexedListSet2;
             }
@@ -703,7 +872,8 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
             synchronized (devicePermissionPolicy.listenersLock) {
                 MutableIndexedListSet mutableIndexedListSet3 = devicePermissionPolicy.listeners;
                 mutableIndexedListSet3.getClass();
-                MutableIndexedListSet mutableIndexedListSet4 = new MutableIndexedListSet(new ArrayList(mutableIndexedListSet3.list));
+                MutableIndexedListSet mutableIndexedListSet4 =
+                        new MutableIndexedListSet(new ArrayList(mutableIndexedListSet3.list));
                 mutableIndexedListSet4.add(onPermissionFlagsChangedListener);
                 devicePermissionPolicy.listeners = mutableIndexedListSet4;
             }
@@ -711,6 +881,5 @@ public final class AppOpService implements AppOpsCheckingServiceInterface {
     }
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
-    public void writeState() {
-    }
+    public void writeState() {}
 }

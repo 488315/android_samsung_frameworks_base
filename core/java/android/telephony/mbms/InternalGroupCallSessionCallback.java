@@ -1,7 +1,7 @@
 package android.telephony.mbms;
 
 import android.os.Binder;
-import android.telephony.mbms.IMbmsGroupCallSessionCallback;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -11,7 +11,8 @@ public class InternalGroupCallSessionCallback extends IMbmsGroupCallSessionCallb
     private final Executor mExecutor;
     private volatile boolean mIsStopped = false;
 
-    public InternalGroupCallSessionCallback(MbmsGroupCallSessionCallback appCallback, Executor executor) {
+    public InternalGroupCallSessionCallback(
+            MbmsGroupCallSessionCallback appCallback, Executor executor) {
         this.mAppCallback = appCallback;
         this.mExecutor = executor;
     }
@@ -23,12 +24,15 @@ public class InternalGroupCallSessionCallback extends IMbmsGroupCallSessionCallb
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalGroupCallSessionCallback.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalGroupCallSessionCallback.this.mAppCallback.onError(errorCode, message);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalGroupCallSessionCallback.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalGroupCallSessionCallback.this.mAppCallback.onError(
+                                    errorCode, message);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -41,12 +45,15 @@ public class InternalGroupCallSessionCallback extends IMbmsGroupCallSessionCallb
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalGroupCallSessionCallback.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalGroupCallSessionCallback.this.mAppCallback.onAvailableSaisUpdated(currentSais, availableSais);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalGroupCallSessionCallback.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalGroupCallSessionCallback.this.mAppCallback
+                                    .onAvailableSaisUpdated(currentSais, availableSais);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -59,12 +66,15 @@ public class InternalGroupCallSessionCallback extends IMbmsGroupCallSessionCallb
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalGroupCallSessionCallback.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalGroupCallSessionCallback.this.mAppCallback.onServiceInterfaceAvailable(interfaceName, index);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalGroupCallSessionCallback.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalGroupCallSessionCallback.this.mAppCallback
+                                    .onServiceInterfaceAvailable(interfaceName, index);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -77,12 +87,14 @@ public class InternalGroupCallSessionCallback extends IMbmsGroupCallSessionCallb
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalGroupCallSessionCallback.4
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalGroupCallSessionCallback.this.mAppCallback.onMiddlewareReady();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalGroupCallSessionCallback.4
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalGroupCallSessionCallback.this.mAppCallback.onMiddlewareReady();
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }

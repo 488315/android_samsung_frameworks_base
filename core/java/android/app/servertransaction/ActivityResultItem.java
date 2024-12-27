@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Trace;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,19 +16,21 @@ import java.util.Objects;
 /* loaded from: classes.dex */
 public class ActivityResultItem extends ActivityTransactionItem {
     public static final long CALL_ACTIVITY_RESULT_BEFORE_RESUME = 78294732;
-    public static final Parcelable.Creator<ActivityResultItem> CREATOR = new Parcelable.Creator<ActivityResultItem>() { // from class: android.app.servertransaction.ActivityResultItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityResultItem createFromParcel(Parcel in) {
-            return new ActivityResultItem(in);
-        }
+    public static final Parcelable.Creator<ActivityResultItem> CREATOR =
+            new Parcelable.Creator<ActivityResultItem>() { // from class:
+                // android.app.servertransaction.ActivityResultItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityResultItem createFromParcel(Parcel in) {
+                    return new ActivityResultItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityResultItem[] newArray(int size) {
-            return new ActivityResultItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityResultItem[] newArray(int size) {
+                    return new ActivityResultItem[size];
+                }
+            };
     private List<ResultInfo> mResultInfoList;
 
     @Override // android.app.servertransaction.ClientTransactionItem
@@ -36,17 +39,21 @@ public class ActivityResultItem extends ActivityTransactionItem {
     }
 
     @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
+    public void execute(
+            ClientTransactionHandler client,
+            ActivityThread.ActivityClientRecord r,
+            PendingTransactionActions pendingActions) {
         Trace.traceBegin(64L, "activityDeliverResult");
         client.handleSendResult(r, this.mResultInfoList, "ACTIVITY_RESULT");
         Trace.traceEnd(64L);
     }
 
-    private ActivityResultItem() {
-    }
+    private ActivityResultItem() {}
 
-    public static ActivityResultItem obtain(IBinder activityToken, List<ResultInfo> resultInfoList) {
-        ActivityResultItem instance = (ActivityResultItem) ObjectPool.obtain(ActivityResultItem.class);
+    public static ActivityResultItem obtain(
+            IBinder activityToken, List<ResultInfo> resultInfoList) {
+        ActivityResultItem instance =
+                (ActivityResultItem) ObjectPool.obtain(ActivityResultItem.class);
         if (instance == null) {
             instance = new ActivityResultItem();
         }
@@ -55,7 +62,8 @@ public class ActivityResultItem extends ActivityTransactionItem {
         return instance;
     }
 
-    @Override // android.app.servertransaction.ActivityTransactionItem, android.app.servertransaction.ObjectPoolItem
+    @Override // android.app.servertransaction.ActivityTransactionItem,
+    // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
         super.recycle();
         this.mResultInfoList = null;
@@ -93,6 +101,10 @@ public class ActivityResultItem extends ActivityTransactionItem {
 
     @Override // android.app.servertransaction.ActivityTransactionItem
     public String toString() {
-        return "ActivityResultItem{" + super.toString() + ",resultInfoList=" + this.mResultInfoList + "}";
+        return "ActivityResultItem{"
+                + super.toString()
+                + ",resultInfoList="
+                + this.mResultInfoList
+                + "}";
     }
 }

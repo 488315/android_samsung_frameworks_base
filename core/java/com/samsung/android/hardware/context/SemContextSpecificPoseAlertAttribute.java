@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextSpecificPoseAlertAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextSpecificPoseAlertAttribute> CREATOR = new Parcelable.Creator<SemContextSpecificPoseAlertAttribute>() { // from class: com.samsung.android.hardware.context.SemContextSpecificPoseAlertAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSpecificPoseAlertAttribute createFromParcel(Parcel in) {
-            return new SemContextSpecificPoseAlertAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextSpecificPoseAlertAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextSpecificPoseAlertAttribute>() { // from class:
+                                                              // com.samsung.android.hardware.context.SemContextSpecificPoseAlertAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSpecificPoseAlertAttribute createFromParcel(Parcel in) {
+                    return new SemContextSpecificPoseAlertAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSpecificPoseAlertAttribute[] newArray(int size) {
-            return new SemContextSpecificPoseAlertAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSpecificPoseAlertAttribute[] newArray(int size) {
+                    return new SemContextSpecificPoseAlertAttribute[size];
+                }
+            };
     private static final String TAG = "SemContextSpecificPoseAlertAttribute";
     private int mMaximumAngle;
     private int mMinimumAngle;
@@ -42,7 +45,8 @@ public class SemContextSpecificPoseAlertAttribute extends SemContextAttribute {
         this.mMovingThrs = 1;
     }
 
-    public SemContextSpecificPoseAlertAttribute(int retentionTime, int minimumAngle, int maximumAngle, int movingThrs) {
+    public SemContextSpecificPoseAlertAttribute(
+            int retentionTime, int minimumAngle, int maximumAngle, int movingThrs) {
         this.mRetentionTime = 1;
         this.mMinimumAngle = -90;
         this.mMaximumAngle = 90;

@@ -7,12 +7,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.CalendarContract;
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.widget.MessagingMessage;
+
 import com.google.android.mms.ContentType;
-import com.samsung.android.allshare.ItemCreator;
 import com.samsung.android.wallpaperbackup.BnRConstants;
 import com.sec.android.allshare.iface.IBundleHolder;
 import com.sec.android.allshare.iface.message.AllShareKey;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,8 +58,7 @@ public abstract class Item implements Parcelable {
 
     public abstract boolean isRootFolder();
 
-    protected Item() {
-    }
+    protected Item() {}
 
     public enum MediaType {
         ITEM_FOLDER("ITEM_FOLDER"),
@@ -200,8 +201,7 @@ public abstract class Item implements Parcelable {
         @Deprecated
         public abstract Uri getURI();
 
-        protected Resource() {
-        }
+        protected Resource() {}
     }
 
     public static class LocalContentBuilder {
@@ -244,14 +244,28 @@ public abstract class Item implements Parcelable {
                 this.mSubtitlePath = null;
             }
             if (this.mFilepath.startsWith("content:")) {
-                return new BuilderGeneratedItem(ItemCreator.ConstructorType.LOCAL_CONTENT, this.mFilepath, this.mTitle, this.mSubtitlePath, this.mCaptionList, this.mContentAttribute, this.mMimetype);
+                return new BuilderGeneratedItem(
+                        ItemCreator.ConstructorType.LOCAL_CONTENT,
+                        this.mFilepath,
+                        this.mTitle,
+                        this.mSubtitlePath,
+                        this.mCaptionList,
+                        this.mContentAttribute,
+                        this.mMimetype);
             }
             MediaType type = Item.convertItemTypeFromMimeType(this.mMimetype);
             switch (type.ordinal()) {
                 case 1:
                 case 2:
                 case 3:
-                    return new BuilderGeneratedItem(ItemCreator.ConstructorType.LOCAL_CONTENT, this.mFilepath, this.mTitle, this.mSubtitlePath, this.mCaptionList, this.mContentAttribute, this.mMimetype);
+                    return new BuilderGeneratedItem(
+                            ItemCreator.ConstructorType.LOCAL_CONTENT,
+                            this.mFilepath,
+                            this.mTitle,
+                            this.mSubtitlePath,
+                            this.mCaptionList,
+                            this.mContentAttribute,
+                            this.mMimetype);
                 default:
                     DLog.e_api("Item", "build error!");
                     return null;
@@ -281,19 +295,22 @@ public abstract class Item implements Parcelable {
     }
 
     static class BuilderGeneratedItem extends Item implements IBundleHolder {
-        public static final Parcelable.Creator<BuilderGeneratedItem> CREATOR = new Parcelable.Creator<BuilderGeneratedItem>() { // from class: com.samsung.android.allshare.Item.BuilderGeneratedItem.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BuilderGeneratedItem createFromParcel(Parcel source) {
-                return new BuilderGeneratedItem(source);
-            }
+        public static final Parcelable.Creator<BuilderGeneratedItem> CREATOR =
+                new Parcelable.Creator<
+                        BuilderGeneratedItem>() { // from class:
+                                                  // com.samsung.android.allshare.Item.BuilderGeneratedItem.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BuilderGeneratedItem createFromParcel(Parcel source) {
+                        return new BuilderGeneratedItem(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BuilderGeneratedItem[] newArray(int size) {
-                return new BuilderGeneratedItem[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BuilderGeneratedItem[] newArray(int size) {
+                        return new BuilderGeneratedItem[size];
+                    }
+                };
         private String mAlbumTitle;
         private String mArtist;
         private ArrayList<Caption> mCaptionList;
@@ -308,7 +325,14 @@ public abstract class Item implements Parcelable {
         private String mItemTitle;
         private String mSubtitlePath;
 
-        private BuilderGeneratedItem(ItemCreator.ConstructorType conType, String filepath, String title, String subtitlePath, ArrayList<Caption> captionList, ContentAttributeType contentAttr, String mimeType) {
+        private BuilderGeneratedItem(
+                ItemCreator.ConstructorType conType,
+                String filepath,
+                String title,
+                String subtitlePath,
+                ArrayList<Caption> captionList,
+                ContentAttributeType contentAttr,
+                String mimeType) {
             this.mConType = ItemCreator.ConstructorType.UNKNOWN;
             this.mDeliveryMode = WebContentBuilder.DeliveryMode.UNKNOWN;
             this.mCaptionList = null;
@@ -328,7 +352,15 @@ public abstract class Item implements Parcelable {
             this.mContentAttribute = contentAttr;
         }
 
-        private BuilderGeneratedItem(ItemCreator.ConstructorType conType, Uri uri, String title, String mimeType, String subtitlePath, ArrayList<Caption> captionList, ContentAttributeType contentAttr, WebContentBuilder.DeliveryMode deliveryMode) {
+        private BuilderGeneratedItem(
+                ItemCreator.ConstructorType conType,
+                Uri uri,
+                String title,
+                String mimeType,
+                String subtitlePath,
+                ArrayList<Caption> captionList,
+                ContentAttributeType contentAttr,
+                WebContentBuilder.DeliveryMode deliveryMode) {
             this.mConType = ItemCreator.ConstructorType.UNKNOWN;
             this.mDeliveryMode = WebContentBuilder.DeliveryMode.UNKNOWN;
             this.mCaptionList = null;
@@ -348,7 +380,20 @@ public abstract class Item implements Parcelable {
             this.mContentAttribute = contentAttr;
         }
 
-        private BuilderGeneratedItem(ItemCreator.ConstructorType conType, Uri uri, String title, String mimeType, String subtitlePath, ArrayList<Caption> captionList, ContentAttributeType contentAttr, WebContentBuilder.DeliveryMode deliveryMode, String artist, String albumTitle, String genre, Date date, long duration) {
+        private BuilderGeneratedItem(
+                ItemCreator.ConstructorType conType,
+                Uri uri,
+                String title,
+                String mimeType,
+                String subtitlePath,
+                ArrayList<Caption> captionList,
+                ContentAttributeType contentAttr,
+                WebContentBuilder.DeliveryMode deliveryMode,
+                String artist,
+                String albumTitle,
+                String genre,
+                Date date,
+                long duration) {
             this.mConType = ItemCreator.ConstructorType.UNKNOWN;
             this.mDeliveryMode = WebContentBuilder.DeliveryMode.UNKNOWN;
             this.mCaptionList = null;
@@ -402,15 +447,22 @@ public abstract class Item implements Parcelable {
             bundle.putString(AllShareKey.BUNDLE_STRING_FILEPATH, this.mItemFilepath);
             bundle.putParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI, getURI());
             bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE, this.mItemMimetype);
-            bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY, this.mConType.enumToString());
-            bundle.putString(AllShareKey.BUNDLE_STRING_WEB_PLAY_MODE, this.mDeliveryMode.enumToString());
+            bundle.putString(
+                    AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY, this.mConType.enumToString());
+            bundle.putString(
+                    AllShareKey.BUNDLE_STRING_WEB_PLAY_MODE, this.mDeliveryMode.enumToString());
             bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_SUBTITLE_PATH, this.mSubtitlePath);
-            bundle.putParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ITEM_CAPTION_LIST, this.mCaptionList);
-            bundle.putString(AllShareKey.BUNDLE_STRING_CONTENT_ATTRIBUTE, this.mContentAttribute.enumToString());
+            bundle.putParcelableArrayList(
+                    AllShareKey.BUNDLE_PARCELABLE_ITEM_CAPTION_LIST, this.mCaptionList);
+            bundle.putString(
+                    AllShareKey.BUNDLE_STRING_CONTENT_ATTRIBUTE,
+                    this.mContentAttribute.enumToString());
             bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_ARTIST, this.mArtist);
             bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_ALBUM_TITLE, this.mAlbumTitle);
             bundle.putString(AllShareKey.BUNDLE_STRING_ITEM_GENRE, this.mGenre);
-            bundle.putLong(AllShareKey.BUNDLE_DATE_ITEM_DATE, this.mDate != null ? this.mDate.getTime() : 0L);
+            bundle.putLong(
+                    AllShareKey.BUNDLE_DATE_ITEM_DATE,
+                    this.mDate != null ? this.mDate.getTime() : 0L);
             bundle.putLong(AllShareKey.BUNDLE_LONG_ITEM_DURATION, this.mDuration);
             return bundle;
         }
@@ -653,7 +705,9 @@ public abstract class Item implements Parcelable {
                 if (this.mMimetype.equals(ContentType.VIDEO_UNSPECIFIED)) {
                     this.mMimetype = "video/mp4";
                 }
-                DLog.i_api("Item", "item build mime : " + this.mMimetype + " item build uri: " + this.mUri);
+                DLog.i_api(
+                        "Item",
+                        "item build mime : " + this.mMimetype + " item build uri: " + this.mUri);
                 if (this.mDeliveryMode == null) {
                     this.mDeliveryMode = DeliveryMode.UNKNOWN;
                 }
@@ -665,13 +719,29 @@ public abstract class Item implements Parcelable {
                             case 1:
                             case 2:
                             case 3:
-                                return new BuilderGeneratedItem(ItemCreator.ConstructorType.WEB_CONTENT, this.mUri, this.mTitle, this.mMimetype, this.mSubtitlePath, this.mCaptionList, this.mContentAttribute, this.mDeliveryMode, this.mArtist, this.mAlbumTitle, this.mGenre, this.mDate, this.mDuration);
+                                return new BuilderGeneratedItem(
+                                        ItemCreator.ConstructorType.WEB_CONTENT,
+                                        this.mUri,
+                                        this.mTitle,
+                                        this.mMimetype,
+                                        this.mSubtitlePath,
+                                        this.mCaptionList,
+                                        this.mContentAttribute,
+                                        this.mDeliveryMode,
+                                        this.mArtist,
+                                        this.mAlbumTitle,
+                                        this.mGenre,
+                                        this.mDate,
+                                        this.mDuration);
                             default:
                                 return null;
                         }
                     }
                 }
-                DLog.e_api("Item", "build error! scheme == null || scheme.contains(content) || scheme.contains(file)");
+                DLog.e_api(
+                        "Item",
+                        "build error! scheme == null || scheme.contains(content) ||"
+                            + " scheme.contains(file)");
                 return null;
             }
             DLog.e_api("Item", "build error! mUri == null || mMimetype == null");

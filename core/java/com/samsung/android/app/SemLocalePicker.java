@@ -1,15 +1,16 @@
 package com.samsung.android.app;
 
 import android.content.Context;
+
 import com.android.internal.app.LocalePicker;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 /* loaded from: classes5.dex */
 public class SemLocalePicker {
-    private SemLocalePicker() {
-    }
+    private SemLocalePicker() {}
 
     public static class LocaleInfo {
         String label;
@@ -32,7 +33,8 @@ public class SemLocalePicker {
     }
 
     public static List<LocaleInfo> getAllLocales(Context context) {
-        List<LocalePicker.LocaleInfo> localeListFromLocalePicker = LocalePicker.getAllAssetLocales(context, false);
+        List<LocalePicker.LocaleInfo> localeListFromLocalePicker =
+                LocalePicker.getAllAssetLocales(context, false);
         ArrayList<LocaleInfo> localeInfoList = new ArrayList<>();
         if (localeListFromLocalePicker == null || localeListFromLocalePicker.size() == 0) {
             return localeInfoList;

@@ -21,12 +21,13 @@ import android.util.ArraySet;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
-import com.android.server.pm.PackageManagerService;
+
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
 import com.android.server.pm.resolution.ComponentResolverApi;
 import com.android.server.pm.snapshot.PackageDataSnapshot;
 import com.android.server.utils.WatchedArrayMap;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
@@ -35,9 +36,15 @@ import java.util.Set;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public interface Computer extends PackageDataSnapshot {
-    boolean activitySupportsIntentAsUser(ComponentName componentName, ComponentName componentName2, Intent intent, String str, int i);
+    boolean activitySupportsIntentAsUser(
+            ComponentName componentName,
+            ComponentName componentName2,
+            Intent intent,
+            String str,
+            int i);
 
-    List applyPostResolutionFilter(List list, String str, boolean z, int i, boolean z2, int i2, Intent intent);
+    List applyPostResolutionFilter(
+            List list, String str, boolean z, int i, boolean z2, int i2, Intent intent);
 
     boolean canAccessComponent(int i, int i2, ComponentName componentName);
 
@@ -63,7 +70,8 @@ public interface Computer extends PackageDataSnapshot {
 
     int checkUidSignaturesForAllUsers(int i, int i2);
 
-    ResolveInfo createForwardingResolveInfoUnchecked(WatchedIntentFilter watchedIntentFilter, int i, int i2);
+    ResolveInfo createForwardingResolveInfoUnchecked(
+            WatchedIntentFilter watchedIntentFilter, int i, int i2);
 
     String[] currentToCanonicalPackageNames(String[] strArr);
 
@@ -71,15 +79,18 @@ public interface Computer extends PackageDataSnapshot {
 
     void dumpKeySet(DumpState dumpState, PrintWriter printWriter, String str);
 
-    void dumpPackages(PrintWriter printWriter, String str, ArraySet arraySet, DumpState dumpState, boolean z);
+    void dumpPackages(
+            PrintWriter printWriter, String str, ArraySet arraySet, DumpState dumpState, boolean z);
 
     void dumpPackagesProto(ProtoOutputStream protoOutputStream);
 
-    void dumpPermissions(PrintWriter printWriter, String str, ArraySet arraySet, DumpState dumpState);
+    void dumpPermissions(
+            PrintWriter printWriter, String str, ArraySet arraySet, DumpState dumpState);
 
     void dumpSharedLibrariesProto(ProtoOutputStream protoOutputStream);
 
-    void dumpSharedUsers(PrintWriter printWriter, String str, ArraySet arraySet, DumpState dumpState, boolean z);
+    void dumpSharedUsers(
+            PrintWriter printWriter, String str, ArraySet arraySet, DumpState dumpState, boolean z);
 
     void dumpSharedUsersProto(ProtoOutputStream protoOutputStream);
 
@@ -95,9 +106,20 @@ public interface Computer extends PackageDataSnapshot {
 
     String[] filterOnlySystemPackages(String... strArr);
 
-    ResolveInfo findPersistentPreferredActivity(Intent intent, String str, long j, List list, boolean z, int i);
+    ResolveInfo findPersistentPreferredActivity(
+            Intent intent, String str, long j, List list, boolean z, int i);
 
-    PackageManagerService.FindPreferredActivityBodyResult findPreferredActivityInternal2(Intent intent, String str, long j, List list, boolean z, boolean z2, boolean z3, int i, boolean z4, boolean z5);
+    PackageManagerService.FindPreferredActivityBodyResult findPreferredActivityInternal2(
+            Intent intent,
+            String str,
+            long j,
+            List list,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            int i,
+            boolean z4,
+            boolean z5);
 
     List findSharedNonSystemLibraries(PackageStateInternal packageStateInternal);
 
@@ -131,7 +153,8 @@ public interface Computer extends PackageDataSnapshot {
 
     ComponentResolverApi getComponentResolver();
 
-    CrossProfileDomainInfo getCrossProfileDomainPreferredLpr(Intent intent, String str, long j, int i, int i2);
+    CrossProfileDomainInfo getCrossProfileDomainPreferredLpr(
+            Intent intent, String str, long j, int i, int i2);
 
     ParceledListSlice getDeclaredSharedLibraries(String str, long j, int i);
 
@@ -323,9 +346,11 @@ public interface Computer extends PackageDataSnapshot {
 
     List queryIntentActivitiesInternal(Intent intent, String str, long j, int i, int i2);
 
-    List queryIntentActivitiesInternal(Intent intent, String str, long j, int i, int i2, int i3, boolean z, boolean z2);
+    List queryIntentActivitiesInternal(
+            Intent intent, String str, long j, int i, int i2, int i3, boolean z, boolean z2);
 
-    List queryIntentServicesInternal(Intent intent, String str, long j, int i, int i2, int i3, boolean z);
+    List queryIntentServicesInternal(
+            Intent intent, String str, long j, int i, int i2, int i3, boolean z);
 
     void querySyncProviders(List list, List list2, boolean z);
 
@@ -335,7 +360,8 @@ public interface Computer extends PackageDataSnapshot {
 
     boolean shouldFilterApplication(PackageStateInternal packageStateInternal, int i, int i2);
 
-    boolean shouldFilterApplicationIncludingUninstalled(PackageStateInternal packageStateInternal, int i, int i2);
+    boolean shouldFilterApplicationIncludingUninstalled(
+            PackageStateInternal packageStateInternal, int i, int i2);
 
     long updateFlagsForResolve(int i, int i2, long j, boolean z, boolean z2);
 

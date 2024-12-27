@@ -17,15 +17,18 @@ import android.util.AndroidRuntimeException;
 import android.util.Log;
 import android.util.Slog;
 import android.webkit.WebViewProviderInfo;
+
 import com.android.internal.util.XmlUtils;
 import com.android.server.LocalServices;
 import com.android.server.PinnerService;
 import com.android.server.flags.Flags;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -43,7 +46,10 @@ public final class SystemImpl {
         XmlResourceParser xmlResourceParser = null;
         try {
             try {
-                xml = AppGlobals.getInitialApplication().getResources().getXml(R.xml.irq_device_map);
+                xml =
+                        AppGlobals.getInitialApplication()
+                                .getResources()
+                                .getXml(R.xml.irq_device_map);
             } catch (IOException | XmlPullParserException e) {
                 e = e;
             }
@@ -58,28 +64,52 @@ public final class SystemImpl {
                         if (name == null) {
                             xml.close();
                             if (i == 0) {
-                                throw new AndroidRuntimeException("There must be at least one WebView package that is available by default");
+                                throw new AndroidRuntimeException(
+                                        "There must be at least one WebView package that is"
+                                            + " available by default");
                             }
-                            this.mWebViewProviderPackages = (WebViewProviderInfo[]) arrayList.toArray(new WebViewProviderInfo[arrayList.size()]);
+                            this.mWebViewProviderPackages =
+                                    (WebViewProviderInfo[])
+                                            arrayList.toArray(
+                                                    new WebViewProviderInfo[arrayList.size()]);
                             return;
                         }
                         if (name.equals("webviewprovider")) {
                             String attributeValue = xml.getAttributeValue(null, "packageName");
                             if (attributeValue == null) {
-                                throw new AndroidRuntimeException("WebView provider in framework resources missing package name");
+                                throw new AndroidRuntimeException(
+                                        "WebView provider in framework resources missing package"
+                                            + " name");
                             }
                             String attributeValue2 = xml.getAttributeValue(null, "description");
                             if (attributeValue2 == null) {
-                                throw new AndroidRuntimeException("WebView provider in framework resources missing description");
+                                throw new AndroidRuntimeException(
+                                        "WebView provider in framework resources missing"
+                                            + " description");
                             }
-                            WebViewProviderInfo webViewProviderInfo = new WebViewProviderInfo(attributeValue, attributeValue2, "true".equals(xml.getAttributeValue(null, "availableByDefault")), "true".equals(xml.getAttributeValue(null, "isFallback")), readSignatures(xml));
+                            WebViewProviderInfo webViewProviderInfo =
+                                    new WebViewProviderInfo(
+                                            attributeValue,
+                                            attributeValue2,
+                                            "true"
+                                                    .equals(
+                                                            xml.getAttributeValue(
+                                                                    null, "availableByDefault")),
+                                            "true"
+                                                    .equals(
+                                                            xml.getAttributeValue(
+                                                                    null, "isFallback")),
+                                            readSignatures(xml));
                             if (webViewProviderInfo.isFallback) {
                                 i2++;
                                 if (!webViewProviderInfo.availableByDefault) {
-                                    throw new AndroidRuntimeException("Each WebView fallback package must be available by default.");
+                                    throw new AndroidRuntimeException(
+                                            "Each WebView fallback package must be available by"
+                                                + " default.");
                                 }
                                 if (i2 > 1) {
-                                    throw new AndroidRuntimeException("There can be at most one WebView fallback package.");
+                                    throw new AndroidRuntimeException(
+                                            "There can be at most one WebView fallback package.");
                                 }
                             }
                             i = webViewProviderInfo.availableByDefault ? i + 1 : i;
@@ -113,7 +143,9 @@ public final class SystemImpl {
             if (xmlResourceParser.getName().equals("signature")) {
                 arrayList.add(xmlResourceParser.nextText());
             } else {
-                Log.e("SystemImpl", "Found an element in a webview provider that is not a signature");
+                Log.e(
+                        "SystemImpl",
+                        "Found an element in a webview provider that is not a signature");
             }
         }
         return (String[]) arrayList.toArray(new String[arrayList.size()]);
@@ -124,7 +156,8 @@ public final class SystemImpl {
         while (it.hasNext()) {
             int i = ((UserInfo) it.next()).id;
             try {
-                AppGlobals.getPackageManager().setApplicationEnabledSetting(str, 0, 0, i, (String) null);
+                AppGlobals.getPackageManager()
+                        .setApplicationEnabledSetting(str, 0, 0, i, (String) null);
             } catch (RemoteException | IllegalArgumentException e) {
                 Log.w("SystemImpl", "Tried to enable " + str + " for user " + i + ": " + e);
             }
@@ -132,7 +165,9 @@ public final class SystemImpl {
     }
 
     public final PackageInfo getPackageInfoForProvider(WebViewProviderInfo webViewProviderInfo) {
-        return AppGlobals.getInitialApplication().getPackageManager().getPackageInfo(webViewProviderInfo.packageName, 272630976);
+        return AppGlobals.getInitialApplication()
+                .getPackageManager()
+                .getPackageInfo(webViewProviderInfo.packageName, 272630976);
     }
 
     public final void killPackageDependents(String str) {
@@ -194,7 +229,8 @@ public final class SystemImpl {
             }
             boolean endsWith = str2.endsWith(".apk");
             pinnerService.mInjector.getClass();
-            PinnerService.PinnedFile pinFileInternal = PinnerService.pinFileInternal(i, str2, endsWith);
+            PinnerService.PinnedFile pinFileInternal =
+                    PinnerService.pinFileInternal(i, str2, endsWith);
             if (pinFileInternal == null) {
                 Slog.e("PinnerService", "Failed to pin file = ".concat(str2));
                 i2 = 0;

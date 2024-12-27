@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISignificantPlaceProviderManager extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.location.ISignificantPlaceProviderManager";
+    public static final String DESCRIPTOR =
+            "android.hardware.location.ISignificantPlaceProviderManager";
 
     void setInSignificantPlace(boolean z) throws RemoteException;
 
     public static class Default implements ISignificantPlaceProviderManager {
         @Override // android.hardware.location.ISignificantPlaceProviderManager
-        public void setInSignificantPlace(boolean inSignificantPlace) throws RemoteException {
-        }
+        public void setInSignificantPlace(boolean inSignificantPlace) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISignificantPlaceProviderManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISignificantPlaceProviderManager {
+    public abstract static class Stub extends Binder implements ISignificantPlaceProviderManager {
         static final int TRANSACTION_setInSignificantPlace = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISignificantPlaceProviderManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISignificantPlaceProviderManager.DESCRIPTOR);
             }

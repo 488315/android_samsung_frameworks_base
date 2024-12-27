@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.MemoryFile;
 import android.util.Log;
 import android.util.SparseArray;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -22,14 +23,11 @@ public abstract class SensorManager {
     public static final int AXIS_Z = 3;
     public static final int DATA_INJECTION = 1;
 
-    @Deprecated
-    public static final int DATA_X = 0;
+    @Deprecated public static final int DATA_X = 0;
 
-    @Deprecated
-    public static final int DATA_Y = 1;
+    @Deprecated public static final int DATA_Y = 1;
 
-    @Deprecated
-    public static final int DATA_Z = 2;
+    @Deprecated public static final int DATA_Z = 2;
     public static final float GRAVITY_DEATH_STAR_I = 3.5303614E-7f;
     public static final float GRAVITY_EARTH = 9.80665f;
     public static final float GRAVITY_JUPITER = 23.12f;
@@ -45,11 +43,9 @@ public abstract class SensorManager {
     public static final float GRAVITY_VENUS = 8.87f;
     public static final int HAL_BYPASS_REPLAY_DATA_INJECTION = 4;
 
-    @Deprecated
-    private static final int INJECT_MAIN_SCREEN_ON = 33572801;
+    @Deprecated private static final int INJECT_MAIN_SCREEN_ON = 33572801;
 
-    @Deprecated
-    private static final int INJECT_SUB_SCREEN_ON = 50350017;
+    @Deprecated private static final int INJECT_SUB_SCREEN_ON = 50350017;
     public static final float LIGHT_CLOUDY = 100.0f;
     public static final float LIGHT_FULLMOON = 0.25f;
     public static final float LIGHT_NO_MOON = 0.001f;
@@ -62,60 +58,45 @@ public abstract class SensorManager {
     public static final float MAGNETIC_FIELD_EARTH_MIN = 30.0f;
     public static final float PRESSURE_STANDARD_ATMOSPHERE = 1013.25f;
 
-    @Deprecated
-    public static final int RAW_DATA_INDEX = 3;
+    @Deprecated public static final int RAW_DATA_INDEX = 3;
 
-    @Deprecated
-    public static final int RAW_DATA_X = 3;
+    @Deprecated public static final int RAW_DATA_X = 3;
 
-    @Deprecated
-    public static final int RAW_DATA_Y = 4;
+    @Deprecated public static final int RAW_DATA_Y = 4;
 
-    @Deprecated
-    public static final int RAW_DATA_Z = 5;
+    @Deprecated public static final int RAW_DATA_Z = 5;
     public static final int REPLAY_DATA_INJECTION = 3;
 
-    @Deprecated
-    public static final int SENSOR_ACCELEROMETER = 2;
+    @Deprecated public static final int SENSOR_ACCELEROMETER = 2;
 
-    @Deprecated
-    public static final int SENSOR_ALL = 127;
+    @Deprecated public static final int SENSOR_ALL = 127;
     public static final int SENSOR_DELAY_FASTEST = 0;
     public static final int SENSOR_DELAY_GAME = 1;
     public static final int SENSOR_DELAY_NORMAL = 3;
     public static final int SENSOR_DELAY_UI = 2;
 
-    @Deprecated
-    public static final int SENSOR_LIGHT = 16;
+    @Deprecated public static final int SENSOR_LIGHT = 16;
 
-    @Deprecated
-    public static final int SENSOR_MAGNETIC_FIELD = 8;
+    @Deprecated public static final int SENSOR_MAGNETIC_FIELD = 8;
 
-    @Deprecated
-    public static final int SENSOR_MAX = 64;
+    @Deprecated public static final int SENSOR_MAX = 64;
 
-    @Deprecated
-    public static final int SENSOR_MIN = 1;
+    @Deprecated public static final int SENSOR_MIN = 1;
 
-    @Deprecated
-    public static final int SENSOR_ORIENTATION = 1;
+    @Deprecated public static final int SENSOR_ORIENTATION = 1;
 
-    @Deprecated
-    public static final int SENSOR_ORIENTATION_RAW = 128;
+    @Deprecated public static final int SENSOR_ORIENTATION_RAW = 128;
 
-    @Deprecated
-    public static final int SENSOR_PROXIMITY = 32;
+    @Deprecated public static final int SENSOR_PROXIMITY = 32;
     public static final int SENSOR_STATUS_ACCURACY_HIGH = 3;
     public static final int SENSOR_STATUS_ACCURACY_LOW = 1;
     public static final int SENSOR_STATUS_ACCURACY_MEDIUM = 2;
     public static final int SENSOR_STATUS_NO_CONTACT = -1;
     public static final int SENSOR_STATUS_UNRELIABLE = 0;
 
-    @Deprecated
-    public static final int SENSOR_TEMPERATURE = 4;
+    @Deprecated public static final int SENSOR_TEMPERATURE = 4;
 
-    @Deprecated
-    public static final int SENSOR_TRICORDER = 64;
+    @Deprecated public static final int SENSOR_TRICORDER = 64;
     public static final float STANDARD_GRAVITY = 9.80665f;
     protected static final String TAG = "SensorManager";
     private static final float[] sTempMatrix = new float[16];
@@ -123,14 +104,16 @@ public abstract class SensorManager {
     private final SparseArray<List<Sensor>> mSensorListByType = new SparseArray<>();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataInjectionMode {
-    }
+    public @interface DataInjectionMode {}
 
-    protected abstract boolean cancelTriggerSensorImpl(TriggerEventListener triggerEventListener, Sensor sensor, boolean z);
+    protected abstract boolean cancelTriggerSensorImpl(
+            TriggerEventListener triggerEventListener, Sensor sensor, boolean z);
 
-    protected abstract int configureDirectChannelImpl(SensorDirectChannel sensorDirectChannel, Sensor sensor, int i);
+    protected abstract int configureDirectChannelImpl(
+            SensorDirectChannel sensorDirectChannel, Sensor sensor, int i);
 
-    protected abstract SensorDirectChannel createDirectChannelImpl(MemoryFile memoryFile, HardwareBuffer hardwareBuffer);
+    protected abstract SensorDirectChannel createDirectChannelImpl(
+            MemoryFile memoryFile, HardwareBuffer hardwareBuffer);
 
     protected abstract void destroyDirectChannelImpl(SensorDirectChannel sensorDirectChannel);
 
@@ -144,17 +127,27 @@ public abstract class SensorManager {
 
     protected abstract boolean injectSensorDataImpl(Sensor sensor, float[] fArr, int i, long j);
 
-    protected abstract void registerDynamicSensorCallbackImpl(DynamicSensorCallback dynamicSensorCallback, Handler handler);
+    protected abstract void registerDynamicSensorCallbackImpl(
+            DynamicSensorCallback dynamicSensorCallback, Handler handler);
 
-    protected abstract boolean registerListenerImpl(SensorEventListener sensorEventListener, Sensor sensor, int i, Handler handler, int i2, int i3);
+    protected abstract boolean registerListenerImpl(
+            SensorEventListener sensorEventListener,
+            Sensor sensor,
+            int i,
+            Handler handler,
+            int i2,
+            int i3);
 
-    protected abstract boolean requestTriggerSensorImpl(TriggerEventListener triggerEventListener, Sensor sensor);
+    protected abstract boolean requestTriggerSensorImpl(
+            TriggerEventListener triggerEventListener, Sensor sensor);
 
     protected abstract boolean setOperationParameterImpl(SensorAdditionalInfo sensorAdditionalInfo);
 
-    protected abstract void unregisterDynamicSensorCallbackImpl(DynamicSensorCallback dynamicSensorCallback);
+    protected abstract void unregisterDynamicSensorCallbackImpl(
+            DynamicSensorCallback dynamicSensorCallback);
 
-    protected abstract void unregisterListenerImpl(SensorEventListener sensorEventListener, Sensor sensor);
+    protected abstract void unregisterListenerImpl(
+            SensorEventListener sensorEventListener, Sensor sensor);
 
     @Deprecated
     public int getSensors() {
@@ -211,7 +204,19 @@ public abstract class SensorManager {
     public Sensor getDefaultSensor(int type) {
         List<Sensor> l = getSensorList(type);
         boolean wakeUpSensor = false;
-        if (type == 8 || type == 17 || type == 22 || type == 23 || type == 24 || type == 25 || type == 34 || type == 26 || type == 65651 || type == 65653 || type == 32 || type == 36 || type == 8) {
+        if (type == 8
+                || type == 17
+                || type == 22
+                || type == 23
+                || type == 24
+                || type == 25
+                || type == 34
+                || type == 26
+                || type == 65651
+                || type == 65653
+                || type == 32
+                || type == 36
+                || type == 8) {
             wakeUpSensor = true;
         }
         for (Sensor sensor : l) {
@@ -293,21 +298,32 @@ public abstract class SensorManager {
         unregisterListenerImpl(listener, null);
     }
 
-    public boolean registerListener(SensorEventListener listener, Sensor sensor, int samplingPeriodUs) {
+    public boolean registerListener(
+            SensorEventListener listener, Sensor sensor, int samplingPeriodUs) {
         return registerListener(listener, sensor, samplingPeriodUs, (Handler) null);
     }
 
-    public boolean registerListener(SensorEventListener listener, Sensor sensor, int samplingPeriodUs, int maxReportLatencyUs) {
+    public boolean registerListener(
+            SensorEventListener listener,
+            Sensor sensor,
+            int samplingPeriodUs,
+            int maxReportLatencyUs) {
         int delay = getDelay(samplingPeriodUs);
         return registerListenerImpl(listener, sensor, delay, null, maxReportLatencyUs, 0);
     }
 
-    public boolean registerListener(SensorEventListener listener, Sensor sensor, int samplingPeriodUs, Handler handler) {
+    public boolean registerListener(
+            SensorEventListener listener, Sensor sensor, int samplingPeriodUs, Handler handler) {
         int delay = getDelay(samplingPeriodUs);
         return registerListenerImpl(listener, sensor, delay, handler, 0, 0);
     }
 
-    public boolean registerListener(SensorEventListener listener, Sensor sensor, int samplingPeriodUs, int maxReportLatencyUs, Handler handler) {
+    public boolean registerListener(
+            SensorEventListener listener,
+            Sensor sensor,
+            int samplingPeriodUs,
+            int maxReportLatencyUs,
+            Handler handler) {
         int delayUs = getDelay(samplingPeriodUs);
         return registerListenerImpl(listener, sensor, delayUs, handler, maxReportLatencyUs, 0);
     }
@@ -328,12 +344,10 @@ public abstract class SensorManager {
         destroyDirectChannelImpl(channel);
     }
 
-    public static abstract class DynamicSensorCallback {
-        public void onDynamicSensorConnected(Sensor sensor) {
-        }
+    public abstract static class DynamicSensorCallback {
+        public void onDynamicSensorConnected(Sensor sensor) {}
 
-        public void onDynamicSensorDisconnected(Sensor sensor) {
-        }
+        public void onDynamicSensorDisconnected(Sensor sensor) {}
     }
 
     public void registerDynamicSensorCallback(DynamicSensorCallback callback) {
@@ -353,7 +367,8 @@ public abstract class SensorManager {
         return sensors.size() > 0;
     }
 
-    public static boolean getRotationMatrix(float[] R, float[] I, float[] gravity, float[] geomagnetic) {
+    public static boolean getRotationMatrix(
+            float[] R, float[] I, float[] gravity, float[] geomagnetic) {
         float Ax = gravity[0];
         float Ay = gravity[1];
         float Az = gravity[2];
@@ -477,7 +492,12 @@ public abstract class SensorManager {
 
     private static boolean remapCoordinateSystemImpl(float[] inR, int X, int Y, float[] outR) {
         int length = outR.length;
-        if (inR.length != length || (X & 124) != 0 || (Y & 124) != 0 || (X & 3) == 0 || (Y & 3) == 0 || (X & 3) == (Y & 3)) {
+        if (inR.length != length
+                || (X & 124) != 0
+                || (Y & 124) != 0
+                || (X & 3) == 0
+                || (Y & 3) == 0
+                || (X & 3) == (Y & 3)) {
             return false;
         }
         int Z = X ^ Y;
@@ -712,7 +732,13 @@ public abstract class SensorManager {
         }
         int expectedNumValues = Sensor.getMaxLengthValuesArray(sensor, 23);
         if (values.length != expectedNumValues) {
-            throw new IllegalArgumentException("Wrong number of values for sensor " + sensor.getName() + " actual=" + values.length + " expected=" + expectedNumValues);
+            throw new IllegalArgumentException(
+                    "Wrong number of values for sensor "
+                            + sensor.getName()
+                            + " actual="
+                            + values.length
+                            + " expected="
+                            + expectedNumValues);
         }
         if (accuracy < -1 || accuracy > 3) {
             throw new IllegalArgumentException("Invalid sensor accuracy");
@@ -727,7 +753,10 @@ public abstract class SensorManager {
         LegacySensorManager legacySensorManager;
         synchronized (this.mSensorListByType) {
             if (this.mLegacySensorManager == null) {
-                Log.i(TAG, "This application is using deprecated SensorManager API which will be removed someday.  Please consider switching to the new API.");
+                Log.i(
+                        TAG,
+                        "This application is using deprecated SensorManager API which will be"
+                                + " removed someday.  Please consider switching to the new API.");
                 this.mLegacySensorManager = new LegacySensorManager(this);
             }
             legacySensorManager = this.mLegacySensorManager;
@@ -783,7 +812,8 @@ public abstract class SensorManager {
             if ((sensor.getVersion() & 2) != 0) {
                 Log.d(TAG, "Inject hysteresis info");
                 try {
-                    SensorAdditionalInfo info = SensorAdditionalInfo.createCustomInfo(sensor, 268435458, values);
+                    SensorAdditionalInfo info =
+                            SensorAdditionalInfo.createCustomInfo(sensor, 268435458, values);
                     if (!setOperationParameterImpl(info)) {
                         Log.d(TAG, "Inject hysteresis info failed ");
                         return;

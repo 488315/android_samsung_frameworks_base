@@ -1,6 +1,5 @@
 package android.util.jar;
 
-import android.util.jar.StrictJarManifest;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -27,7 +26,9 @@ class StrictJarManifestReader {
         this.endOfMainSection = this.pos;
     }
 
-    public void readEntries(Map<String, Attributes> entries, Map<String, StrictJarManifest.Chunk> chunks) throws IOException {
+    public void readEntries(
+            Map<String, Attributes> entries, Map<String, StrictJarManifest.Chunk> chunks)
+            throws IOException {
         int mark = this.pos;
         while (readHeader()) {
             if (!StrictJarManifest.ATTRIBUTE_NAME_NAME.equals(this.name)) {
@@ -43,7 +44,9 @@ class StrictJarManifestReader {
             }
             if (chunks != null) {
                 if (chunks.get(entryNameValue) != null) {
-                    throw new IOException("A jar verifier does not support more than one entry with the same name");
+                    throw new IOException(
+                            "A jar verifier does not support more than one entry with the same"
+                                + " name");
                 }
                 chunks.put(entryNameValue, new StrictJarManifest.Chunk(mark, this.pos));
                 mark = this.pos;
@@ -74,12 +77,15 @@ class StrictJarManifestReader {
             int i = this.pos;
             this.pos = i + 1;
             if (bArr[i] == 58) {
-                String nameString = new String(this.buf, mark, (this.pos - mark) - 1, StandardCharsets.US_ASCII);
+                String nameString =
+                        new String(
+                                this.buf, mark, (this.pos - mark) - 1, StandardCharsets.US_ASCII);
                 byte[] bArr2 = this.buf;
                 int i2 = this.pos;
                 this.pos = i2 + 1;
                 if (bArr2[i2] != 32) {
-                    throw new IOException(String.format("Invalid value for attribute '%s'", nameString));
+                    throw new IOException(
+                            String.format("Invalid value for attribute '%s'", nameString));
                 }
                 try {
                     this.name = this.attributeNameCache.get(nameString);
@@ -97,14 +103,14 @@ class StrictJarManifestReader {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0059, code lost:
-    
-        r7.valueBuffer.write(r7.buf, r1, r2 - r1);
-        r7.value = r7.valueBuffer.toString(java.nio.charset.StandardCharsets.UTF_8.name());
-     */
+
+       r7.valueBuffer.write(r7.buf, r1, r2 - r1);
+       r7.value = r7.valueBuffer.toString(java.nio.charset.StandardCharsets.UTF_8.name());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x0070, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -190,6 +196,7 @@ class StrictJarManifestReader {
             r7.value = r3
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.jar.StrictJarManifestReader.readValue():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.util.jar.StrictJarManifestReader.readValue():void");
     }
 }

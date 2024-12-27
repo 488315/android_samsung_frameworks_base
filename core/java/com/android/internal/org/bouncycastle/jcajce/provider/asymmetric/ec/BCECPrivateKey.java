@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.ec;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
@@ -23,6 +24,7 @@ import com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCa
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec;
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -33,7 +35,11 @@ import java.security.spec.EllipticCurve;
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
-public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bouncycastle.jce.interfaces.ECPrivateKey, PKCS12BagAttributeCarrier, ECPointEncoder {
+public class BCECPrivateKey
+        implements ECPrivateKey,
+                com.android.internal.org.bouncycastle.jce.interfaces.ECPrivateKey,
+                PKCS12BagAttributeCarrier,
+                ECPointEncoder {
     static final long serialVersionUID = 994553197664784084L;
     private String algorithm;
     private transient PKCS12BagAttributeCarrierImpl attrCarrier;
@@ -57,7 +63,8 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
         this.configuration = configuration;
     }
 
-    public BCECPrivateKey(String algorithm, ECPrivateKeySpec spec, ProviderConfiguration configuration) {
+    public BCECPrivateKey(
+            String algorithm, ECPrivateKeySpec spec, ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.algorithm = algorithm;
@@ -72,7 +79,10 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
         this.configuration = configuration;
     }
 
-    public BCECPrivateKey(String algorithm, java.security.spec.ECPrivateKeySpec spec, ProviderConfiguration configuration) {
+    public BCECPrivateKey(
+            String algorithm,
+            java.security.spec.ECPrivateKeySpec spec,
+            ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.algorithm = algorithm;
@@ -93,7 +103,12 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
         this.configuration = key.configuration;
     }
 
-    public BCECPrivateKey(String algorithm, ECPrivateKeyParameters params, BCECPublicKey pubKey, ECParameterSpec spec, ProviderConfiguration configuration) {
+    public BCECPrivateKey(
+            String algorithm,
+            ECPrivateKeyParameters params,
+            BCECPublicKey pubKey,
+            ECParameterSpec spec,
+            ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.algorithm = algorithm;
@@ -102,14 +117,24 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
         if (spec == null) {
             ECDomainParameters dp = params.getParameters();
             EllipticCurve ellipticCurve = EC5Util.convertCurve(dp.getCurve(), dp.getSeed());
-            this.ecSpec = new ECParameterSpec(ellipticCurve, EC5Util.convertPoint(dp.getG()), dp.getN(), dp.getH().intValue());
+            this.ecSpec =
+                    new ECParameterSpec(
+                            ellipticCurve,
+                            EC5Util.convertPoint(dp.getG()),
+                            dp.getN(),
+                            dp.getH().intValue());
         } else {
             this.ecSpec = spec;
         }
         this.publicKey = getPublicKeyDetails(pubKey);
     }
 
-    public BCECPrivateKey(String algorithm, ECPrivateKeyParameters params, BCECPublicKey pubKey, com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec spec, ProviderConfiguration configuration) {
+    public BCECPrivateKey(
+            String algorithm,
+            ECPrivateKeyParameters params,
+            BCECPublicKey pubKey,
+            com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec spec,
+            ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.algorithm = algorithm;
@@ -118,7 +143,12 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
         if (spec == null) {
             ECDomainParameters dp = params.getParameters();
             EllipticCurve ellipticCurve = EC5Util.convertCurve(dp.getCurve(), dp.getSeed());
-            this.ecSpec = new ECParameterSpec(ellipticCurve, EC5Util.convertPoint(dp.getG()), dp.getN(), dp.getH().intValue());
+            this.ecSpec =
+                    new ECParameterSpec(
+                            ellipticCurve,
+                            EC5Util.convertPoint(dp.getG()),
+                            dp.getN(),
+                            dp.getH().intValue());
         } else {
             EllipticCurve ellipticCurve2 = EC5Util.convertCurve(spec.getCurve(), spec.getSeed());
             this.ecSpec = EC5Util.convertSpec(ellipticCurve2, spec);
@@ -130,7 +160,8 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
         }
     }
 
-    public BCECPrivateKey(String algorithm, ECPrivateKeyParameters params, ProviderConfiguration configuration) {
+    public BCECPrivateKey(
+            String algorithm, ECPrivateKeyParameters params, ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.algorithm = algorithm;
@@ -139,7 +170,8 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
         this.configuration = configuration;
     }
 
-    BCECPrivateKey(String algorithm, PrivateKeyInfo info, ProviderConfiguration configuration) throws IOException {
+    BCECPrivateKey(String algorithm, PrivateKeyInfo info, ProviderConfiguration configuration)
+            throws IOException {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.algorithm = algorithm;
@@ -148,7 +180,8 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
     }
 
     private void populateFromPrivKeyInfo(PrivateKeyInfo info) throws IOException {
-        X962Parameters params = X962Parameters.getInstance(info.getPrivateKeyAlgorithm().getParameters());
+        X962Parameters params =
+                X962Parameters.getInstance(info.getPrivateKeyAlgorithm().getParameters());
         ECCurve curve = EC5Util.getCurve(this.configuration, params);
         this.ecSpec = EC5Util.convertToSpec(params, curve);
         ASN1Encodable privKey = info.parsePrivateKey();
@@ -156,7 +189,9 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
             ASN1Integer derD = ASN1Integer.getInstance(privKey);
             this.d = derD.getValue();
         } else {
-            com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey ec = com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey.getInstance(privKey);
+            com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey ec =
+                    com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey.getInstance(
+                            privKey);
             this.d = ec.getKey();
             this.publicKey = ec.getPublicKey();
         }
@@ -176,19 +211,28 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
     public byte[] getEncoded() {
         int orderBitLength;
         com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey keyStructure;
-        X962Parameters params = ECUtils.getDomainParametersFromName(this.ecSpec, this.withCompression);
+        X962Parameters params =
+                ECUtils.getDomainParametersFromName(this.ecSpec, this.withCompression);
         if (this.ecSpec == null) {
             orderBitLength = ECUtil.getOrderBitLength(this.configuration, null, getS());
         } else {
-            orderBitLength = ECUtil.getOrderBitLength(this.configuration, this.ecSpec.getOrder(), getS());
+            orderBitLength =
+                    ECUtil.getOrderBitLength(this.configuration, this.ecSpec.getOrder(), getS());
         }
         if (this.publicKey != null) {
-            keyStructure = new com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey(orderBitLength, getS(), this.publicKey, params);
+            keyStructure =
+                    new com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey(
+                            orderBitLength, getS(), this.publicKey, params);
         } else {
-            keyStructure = new com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey(orderBitLength, getS(), params);
+            keyStructure =
+                    new com.android.internal.org.bouncycastle.asn1.sec.ECPrivateKey(
+                            orderBitLength, getS(), params);
         }
         try {
-            PrivateKeyInfo info = new PrivateKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, params), keyStructure);
+            PrivateKeyInfo info =
+                    new PrivateKeyInfo(
+                            new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, params),
+                            keyStructure);
             return info.getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
             return null;
@@ -263,7 +307,8 @@ public class BCECPrivateKey implements ECPrivateKey, com.android.internal.org.bo
 
     private DERBitString getPublicKeyDetails(BCECPublicKey pub) {
         try {
-            SubjectPublicKeyInfo info = SubjectPublicKeyInfo.getInstance(ASN1Primitive.fromByteArray(pub.getEncoded()));
+            SubjectPublicKeyInfo info =
+                    SubjectPublicKeyInfo.getInstance(ASN1Primitive.fromByteArray(pub.getEncoded()));
             return info.getPublicKeyData();
         } catch (IOException e) {
             return null;

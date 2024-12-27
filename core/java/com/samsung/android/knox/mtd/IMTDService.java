@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.knox.mtd.IMtdCallback;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -19,9 +19,11 @@ public interface IMTDService extends IInterface {
 
     void analyzeFrameBuffers(List<FrameBuffersInfo> list) throws RemoteException;
 
-    void analyzeURL(String str, String str2, int i, boolean z, Intent intent) throws RemoteException;
+    void analyzeURL(String str, String str2, int i, boolean z, Intent intent)
+            throws RemoteException;
 
-    void analyzeURLs(List<String> list, IMtdCallback iMtdCallback, String str) throws RemoteException;
+    void analyzeURLs(List<String> list, IMtdCallback iMtdCallback, String str)
+            throws RemoteException;
 
     String getSystemProperty(String str) throws RemoteException;
 
@@ -29,28 +31,33 @@ public interface IMTDService extends IInterface {
 
     public static class Default implements IMTDService {
         @Override // com.samsung.android.knox.mtd.IMTDService
-        public void analyzeContent(String content, String pkgName, int userId, boolean isManagedProfile, int uid) throws RemoteException {
-        }
+        public void analyzeContent(
+                String content, String pkgName, int userId, boolean isManagedProfile, int uid)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IMTDService
-        public void analyzeURL(String url, String pkgName, int userId, boolean isManagedProfile, Intent launchIntent) throws RemoteException {
-        }
+        public void analyzeURL(
+                String url,
+                String pkgName,
+                int userId,
+                boolean isManagedProfile,
+                Intent launchIntent)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IMTDService
-        public void analyzeURLs(List<String> urls, IMtdCallback cb, String location) throws RemoteException {
-        }
+        public void analyzeURLs(List<String> urls, IMtdCallback cb, String location)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IMTDService
-        public void analyzeContents(List<String> contents, IMtdCallback cb) throws RemoteException {
-        }
+        public void analyzeContents(List<String> contents, IMtdCallback cb)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IMTDService
-        public void analyzeFrameBuffers(List<FrameBuffersInfo> frameBuffers) throws RemoteException {
-        }
+        public void analyzeFrameBuffers(List<FrameBuffersInfo> frameBuffers)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IMTDService
-        public void setSystemProperty(String key, String value) throws RemoteException {
-        }
+        public void setSystemProperty(String key, String value) throws RemoteException {}
 
         @Override // com.samsung.android.knox.mtd.IMTDService
         public String getSystemProperty(String key) throws RemoteException {
@@ -63,7 +70,7 @@ public interface IMTDService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMTDService {
+    public abstract static class Stub extends Binder implements IMTDService {
         static final int TRANSACTION_analyzeContent = 1;
         static final int TRANSACTION_analyzeContents = 4;
         static final int TRANSACTION_analyzeFrameBuffers = 5;
@@ -119,7 +126,8 @@ public interface IMTDService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMTDService.DESCRIPTOR);
             }
@@ -161,7 +169,8 @@ public interface IMTDService extends IInterface {
                     analyzeContents(_arg04, _arg14);
                     return true;
                 case 5:
-                    List<FrameBuffersInfo> _arg05 = data.createTypedArrayList(FrameBuffersInfo.CREATOR);
+                    List<FrameBuffersInfo> _arg05 =
+                            data.createTypedArrayList(FrameBuffersInfo.CREATOR);
                     data.enforceNoDataAvail();
                     analyzeFrameBuffers(_arg05);
                     reply.writeNoException();
@@ -201,7 +210,9 @@ public interface IMTDService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
-            public void analyzeContent(String content, String pkgName, int userId, boolean isManagedProfile, int uid) throws RemoteException {
+            public void analyzeContent(
+                    String content, String pkgName, int userId, boolean isManagedProfile, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMTDService.DESCRIPTOR);
@@ -217,7 +228,13 @@ public interface IMTDService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
-            public void analyzeURL(String url, String pkgName, int userId, boolean isManagedProfile, Intent launchIntent) throws RemoteException {
+            public void analyzeURL(
+                    String url,
+                    String pkgName,
+                    int userId,
+                    boolean isManagedProfile,
+                    Intent launchIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -236,7 +253,8 @@ public interface IMTDService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
-            public void analyzeURLs(List<String> urls, IMtdCallback cb, String location) throws RemoteException {
+            public void analyzeURLs(List<String> urls, IMtdCallback cb, String location)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMTDService.DESCRIPTOR);
@@ -250,7 +268,8 @@ public interface IMTDService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
-            public void analyzeContents(List<String> contents, IMtdCallback cb) throws RemoteException {
+            public void analyzeContents(List<String> contents, IMtdCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMTDService.DESCRIPTOR);
@@ -263,7 +282,8 @@ public interface IMTDService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mtd.IMTDService
-            public void analyzeFrameBuffers(List<FrameBuffersInfo> frameBuffers) throws RemoteException {
+            public void analyzeFrameBuffers(List<FrameBuffersInfo> frameBuffers)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

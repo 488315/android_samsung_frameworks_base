@@ -9,6 +9,7 @@ import android.view.WindowInsets;
 import android.view.WindowInsetsController;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes.dex */
@@ -29,7 +30,8 @@ public class BootProgressDialog extends ProgressDialog {
         }
         TextView t = (TextView) decor.findViewById(R.id.text_optimizing_apps);
         if (t != null) {
-            t.lambda$setTextAsync$0(this.mContext.getString(R.string.boot_progress_dialog_optimizing_apps_ing));
+            t.lambda$setTextAsync$0(
+                    this.mContext.getString(R.string.boot_progress_dialog_optimizing_apps_ing));
         }
         View v2 = decor.findViewById(R.id.body);
         if (v2 != null) {

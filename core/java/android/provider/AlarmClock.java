@@ -14,7 +14,8 @@ public final class AlarmClock {
     public static final String ALARM_SEARCH_MODE_NEXT = "android.next";
     public static final String ALARM_SEARCH_MODE_TIME = "android.time";
     public static final String EXTRA_ALARM_SEARCH_MODE = "android.intent.extra.alarm.SEARCH_MODE";
-    public static final String EXTRA_ALARM_SNOOZE_DURATION = "android.intent.extra.alarm.SNOOZE_DURATION";
+    public static final String EXTRA_ALARM_SNOOZE_DURATION =
+            "android.intent.extra.alarm.SNOOZE_DURATION";
     public static final String EXTRA_DAYS = "android.intent.extra.alarm.DAYS";
     public static final String EXTRA_HOUR = "android.intent.extra.alarm.HOUR";
     public static final String EXTRA_IS_PM = "android.intent.extra.alarm.IS_PM";

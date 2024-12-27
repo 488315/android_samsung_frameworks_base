@@ -27,9 +27,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -39,7 +42,8 @@ import java.util.Objects;
 public interface IRadio extends android.hardware.radio.V1_0.IRadio {
     public static final String kInterfaceName = "android.hardware.radio@1.1::IRadio";
 
-    @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase,
+    // android.os.IHwInterface
     IHwBinder asBinder();
 
     @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
@@ -66,7 +70,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
     @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
-    void setCarrierInfoForImsiEncryption(int i, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException;
+    void setCarrierInfoForImsiEncryption(int i, ImsiEncryptionInfo imsiEncryptionInfo)
+            throws RemoteException;
 
     @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
     void setHALInstrumentation() throws RemoteException;
@@ -138,7 +143,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -160,11 +166,16 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setResponseFunctions(android.hardware.radio.V1_0.IRadioResponse radioResponse, android.hardware.radio.V1_0.IRadioIndication radioIndication) throws RemoteException {
+        public void setResponseFunctions(
+                android.hardware.radio.V1_0.IRadioResponse radioResponse,
+                android.hardware.radio.V1_0.IRadioIndication radioIndication)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-            _hidl_request.writeStrongBinder(radioResponse == null ? null : radioResponse.asBinder());
-            _hidl_request.writeStrongBinder(radioIndication != null ? radioIndication.asBinder() : null);
+            _hidl_request.writeStrongBinder(
+                    radioResponse == null ? null : radioResponse.asBinder());
+            _hidl_request.writeStrongBinder(
+                    radioIndication != null ? radioIndication.asBinder() : null);
             HwParcel _hidl_reply = new HwParcel();
             try {
                 this.mRemote.transact(1, _hidl_request, _hidl_reply, 0);
@@ -206,7 +217,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void supplyIccPukForApp(int serial, String puk, String pin, String aid) throws RemoteException {
+        public void supplyIccPukForApp(int serial, String puk, String pin, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -223,7 +235,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void supplyIccPin2ForApp(int serial, String pin2, String aid) throws RemoteException {
+        public void supplyIccPin2ForApp(int serial, String pin2, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -239,7 +252,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void supplyIccPuk2ForApp(int serial, String puk2, String pin2, String aid) throws RemoteException {
+        public void supplyIccPuk2ForApp(int serial, String puk2, String pin2, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -256,7 +270,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void changeIccPinForApp(int serial, String oldPin, String newPin, String aid) throws RemoteException {
+        public void changeIccPinForApp(int serial, String oldPin, String newPin, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -273,7 +288,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void changeIccPin2ForApp(int serial, String oldPin2, String newPin2, String aid) throws RemoteException {
+        public void changeIccPin2ForApp(int serial, String oldPin2, String newPin2, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -290,7 +306,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void supplyNetworkDepersonalization(int serial, String netPin) throws RemoteException {
+        public void supplyNetworkDepersonalization(int serial, String netPin)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -564,7 +581,14 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setupDataCall(int serial, int radioTechnology, DataProfileInfo dataProfileInfo, boolean modemCognitive, boolean roamingAllowed, boolean isRoaming) throws RemoteException {
+        public void setupDataCall(
+                int serial,
+                int radioTechnology,
+                DataProfileInfo dataProfileInfo,
+                boolean modemCognitive,
+                boolean roamingAllowed,
+                boolean isRoaming)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -656,7 +680,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void getCallForwardStatus(int serial, CallForwardInfo callInfo) throws RemoteException {
+        public void getCallForwardStatus(int serial, CallForwardInfo callInfo)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -701,7 +726,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setCallWaiting(int serial, boolean enable, int serviceClass) throws RemoteException {
+        public void setCallWaiting(int serial, boolean enable, int serviceClass)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -717,7 +743,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void acknowledgeLastIncomingGsmSms(int serial, boolean success, int cause) throws RemoteException {
+        public void acknowledgeLastIncomingGsmSms(int serial, boolean success, int cause)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -747,7 +774,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void deactivateDataCall(int serial, int cid, boolean reasonRadioShutDown) throws RemoteException {
+        public void deactivateDataCall(int serial, int cid, boolean reasonRadioShutDown)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -763,7 +791,9 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void getFacilityLockForApp(int serial, String facility, String password, int serviceClass, String appId) throws RemoteException {
+        public void getFacilityLockForApp(
+                int serial, String facility, String password, int serviceClass, String appId)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -781,7 +811,14 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setFacilityLockForApp(int serial, String facility, boolean lockState, String password, int serviceClass, String appId) throws RemoteException {
+        public void setFacilityLockForApp(
+                int serial,
+                String facility,
+                boolean lockState,
+                String password,
+                int serviceClass,
+                String appId)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -800,7 +837,9 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setBarringPassword(int serial, String facility, String oldPassword, String newPassword) throws RemoteException {
+        public void setBarringPassword(
+                int serial, String facility, String oldPassword, String newPassword)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -845,7 +884,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setNetworkSelectionModeManual(int serial, String operatorNumeric) throws RemoteException {
+        public void setNetworkSelectionModeManual(int serial, String operatorNumeric)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1078,7 +1118,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void sendTerminalResponseToSim(int serial, String commandResponse) throws RemoteException {
+        public void sendTerminalResponseToSim(int serial, String commandResponse)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1093,7 +1134,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void handleStkCallSetupRequestFromSim(int serial, boolean accept) throws RemoteException {
+        public void handleStkCallSetupRequestFromSim(int serial, boolean accept)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1329,7 +1371,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void acknowledgeLastIncomingCdmaSms(int serial, CdmaSmsAck smsAck) throws RemoteException {
+        public void acknowledgeLastIncomingCdmaSms(int serial, CdmaSmsAck smsAck)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1358,7 +1401,9 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setGsmBroadcastConfig(int serial, ArrayList<GsmBroadcastSmsConfigInfo> configInfo) throws RemoteException {
+        public void setGsmBroadcastConfig(
+                int serial, ArrayList<GsmBroadcastSmsConfigInfo> configInfo)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1402,7 +1447,9 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setCdmaBroadcastConfig(int serial, ArrayList<CdmaBroadcastSmsConfigInfo> configInfo) throws RemoteException {
+        public void setCdmaBroadcastConfig(
+                int serial, ArrayList<CdmaBroadcastSmsConfigInfo> configInfo)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1417,7 +1464,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setCdmaBroadcastActivation(int serial, boolean activate) throws RemoteException {
+        public void setCdmaBroadcastActivation(int serial, boolean activate)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1591,7 +1639,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void acknowledgeIncomingGsmSmsWithPdu(int serial, boolean success, String ackPdu) throws RemoteException {
+        public void acknowledgeIncomingGsmSmsWithPdu(int serial, boolean success, String ackPdu)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1665,7 +1714,12 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setInitialAttachApn(int serial, DataProfileInfo dataProfileInfo, boolean modemCognitive, boolean isRoaming) throws RemoteException {
+        public void setInitialAttachApn(
+                int serial,
+                DataProfileInfo dataProfileInfo,
+                boolean modemCognitive,
+                boolean isRoaming)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1711,7 +1765,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void iccTransmitApduBasicChannel(int serial, SimApdu message) throws RemoteException {
+        public void iccTransmitApduBasicChannel(int serial, SimApdu message)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1757,7 +1812,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void iccTransmitApduLogicalChannel(int serial, SimApdu message) throws RemoteException {
+        public void iccTransmitApduLogicalChannel(int serial, SimApdu message)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1876,7 +1932,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void requestIccSimAuthentication(int serial, int authContext, String authData, String aid) throws RemoteException {
+        public void requestIccSimAuthentication(
+                int serial, int authContext, String authData, String aid) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1893,7 +1950,9 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setDataProfile(int serial, ArrayList<DataProfileInfo> profiles, boolean isRoaming) throws RemoteException {
+        public void setDataProfile(
+                int serial, ArrayList<DataProfileInfo> profiles, boolean isRoaming)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1952,7 +2011,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void startLceService(int serial, int reportInterval, boolean pullMode) throws RemoteException {
+        public void startLceService(int serial, int reportInterval, boolean pullMode)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2010,7 +2070,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setAllowedCarriers(int serial, boolean allAllowed, CarrierRestrictions carriers) throws RemoteException {
+        public void setAllowedCarriers(int serial, boolean allAllowed, CarrierRestrictions carriers)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2040,7 +2101,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void sendDeviceState(int serial, int deviceStateType, boolean state) throws RemoteException {
+        public void sendDeviceState(int serial, int deviceStateType, boolean state)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.radio.V1_0.IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2099,7 +2161,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_1.IRadio
-        public void setCarrierInfoForImsiEncryption(int serial, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException {
+        public void setCarrierInfoForImsiEncryption(
+                int serial, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2129,7 +2192,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.hardware.radio.V1_1.IRadio
-        public void startNetworkScan(int serial, NetworkScanRequest request) throws RemoteException {
+        public void startNetworkScan(int serial, NetworkScanRequest request)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2187,7 +2251,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -2203,7 +2268,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -2219,7 +2285,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -2235,7 +2302,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -2247,7 +2315,9 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -2261,7 +2331,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -2274,12 +2345,15 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -2293,7 +2367,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -2310,7 +2385,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -2323,51 +2399,165 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             }
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IRadio {
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IRadio {
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IRadio.kInterfaceName, android.hardware.radio.V1_0.IRadio.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            IRadio.kInterfaceName,
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName,
+                            IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IRadio.kInterfaceName;
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{-122, -5, 7, -102, SprAttributeBase.TYPE_DURATION, 11, 35, 1, -89, 82, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -99, -5, -4, 83, -104, 58, 121, 93, 117, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 17, -86, -68, -74, -125, 21, -95, -119, -10, -55, -94}, new byte[]{-49, -86, MidiConstants.STATUS_CONTROL_CHANGE, -28, 92, 93, 123, 53, -107, 3, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, 100, -99, -94, -98, -41, 18, -23, 32, -7, 86, -63, 54, 113, -17, -45, 86, 2, -6, -127, -55, 35}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                -122,
+                                -5,
+                                7,
+                                -102,
+                                SprAttributeBase.TYPE_DURATION,
+                                11,
+                                35,
+                                1,
+                                -89,
+                                82,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -99,
+                                -5,
+                                -4,
+                                83,
+                                -104,
+                                58,
+                                121,
+                                93,
+                                117,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80,
+                                17,
+                                -86,
+                                -68,
+                                -74,
+                                -125,
+                                21,
+                                -95,
+                                -119,
+                                -10,
+                                -55,
+                                -94
+                            },
+                            new byte[] {
+                                -49,
+                                -86,
+                                MidiConstants.STATUS_CONTROL_CHANGE,
+                                -28,
+                                92,
+                                93,
+                                123,
+                                53,
+                                -107,
+                                3,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                100,
+                                -99,
+                                -94,
+                                -98,
+                                -41,
+                                18,
+                                -23,
+                                32,
+                                -7,
+                                86,
+                                -63,
+                                54,
+                                113,
+                                -17,
+                                -45,
+                                86,
+                                2,
+                                -6,
+                                -127,
+                                -55,
+                                35
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -2376,12 +2566,14 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
             return info;
         }
 
-        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.radio.V1_1.IRadio, android.hardware.radio.V1_0.IRadio,
+        // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -2403,30 +2595,40 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
-                    android.hardware.radio.V1_0.IRadioResponse radioResponse = android.hardware.radio.V1_0.IRadioResponse.asInterface(_hidl_request.readStrongBinder());
-                    android.hardware.radio.V1_0.IRadioIndication radioIndication = android.hardware.radio.V1_0.IRadioIndication.asInterface(_hidl_request.readStrongBinder());
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    android.hardware.radio.V1_0.IRadioResponse radioResponse =
+                            android.hardware.radio.V1_0.IRadioResponse.asInterface(
+                                    _hidl_request.readStrongBinder());
+                    android.hardware.radio.V1_0.IRadioIndication radioIndication =
+                            android.hardware.radio.V1_0.IRadioIndication.asInterface(
+                                    _hidl_request.readStrongBinder());
                     setResponseFunctions(radioResponse, radioIndication);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.send();
                     return;
                 case 2:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial = _hidl_request.readInt32();
                     getIccCardStatus(serial);
                     return;
                 case 3:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial2 = _hidl_request.readInt32();
                     String pin = _hidl_request.readString();
                     String aid = _hidl_request.readString();
                     supplyIccPinForApp(serial2, pin, aid);
                     return;
                 case 4:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial3 = _hidl_request.readInt32();
                     String puk = _hidl_request.readString();
                     String pin2 = _hidl_request.readString();
@@ -2434,14 +2636,16 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     supplyIccPukForApp(serial3, puk, pin2, aid2);
                     return;
                 case 5:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial4 = _hidl_request.readInt32();
                     String pin22 = _hidl_request.readString();
                     String aid3 = _hidl_request.readString();
                     supplyIccPin2ForApp(serial4, pin22, aid3);
                     return;
                 case 6:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial5 = _hidl_request.readInt32();
                     String puk2 = _hidl_request.readString();
                     String pin23 = _hidl_request.readString();
@@ -2449,7 +2653,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     supplyIccPuk2ForApp(serial5, puk2, pin23, aid4);
                     return;
                 case 7:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial6 = _hidl_request.readInt32();
                     String oldPin = _hidl_request.readString();
                     String newPin = _hidl_request.readString();
@@ -2457,7 +2662,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     changeIccPinForApp(serial6, oldPin, newPin, aid5);
                     return;
                 case 8:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial7 = _hidl_request.readInt32();
                     String oldPin2 = _hidl_request.readString();
                     String newPin2 = _hidl_request.readString();
@@ -2465,113 +2671,133 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     changeIccPin2ForApp(serial7, oldPin2, newPin2, aid6);
                     return;
                 case 9:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial8 = _hidl_request.readInt32();
                     String netPin = _hidl_request.readString();
                     supplyNetworkDepersonalization(serial8, netPin);
                     return;
                 case 10:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial9 = _hidl_request.readInt32();
                     getCurrentCalls(serial9);
                     return;
                 case 11:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial10 = _hidl_request.readInt32();
                     Dial dialInfo = new Dial();
                     dialInfo.readFromParcel(_hidl_request);
                     dial(serial10, dialInfo);
                     return;
                 case 12:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial11 = _hidl_request.readInt32();
                     String aid7 = _hidl_request.readString();
                     getImsiForApp(serial11, aid7);
                     return;
                 case 13:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial12 = _hidl_request.readInt32();
                     int gsmIndex = _hidl_request.readInt32();
                     hangup(serial12, gsmIndex);
                     return;
                 case 14:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial13 = _hidl_request.readInt32();
                     hangupWaitingOrBackground(serial13);
                     return;
                 case 15:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial14 = _hidl_request.readInt32();
                     hangupForegroundResumeBackground(serial14);
                     return;
                 case 16:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial15 = _hidl_request.readInt32();
                     switchWaitingOrHoldingAndActive(serial15);
                     return;
                 case 17:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial16 = _hidl_request.readInt32();
                     conference(serial16);
                     return;
                 case 18:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial17 = _hidl_request.readInt32();
                     rejectCall(serial17);
                     return;
                 case 19:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial18 = _hidl_request.readInt32();
                     getLastCallFailCause(serial18);
                     return;
                 case 20:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial19 = _hidl_request.readInt32();
                     getSignalStrength(serial19);
                     return;
                 case 21:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial20 = _hidl_request.readInt32();
                     getVoiceRegistrationState(serial20);
                     return;
                 case 22:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial21 = _hidl_request.readInt32();
                     getDataRegistrationState(serial21);
                     return;
                 case 23:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial22 = _hidl_request.readInt32();
                     getOperator(serial22);
                     return;
                 case 24:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial23 = _hidl_request.readInt32();
                     boolean on = _hidl_request.readBool();
                     setRadioPower(serial23, on);
                     return;
                 case 25:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial24 = _hidl_request.readInt32();
                     String s = _hidl_request.readString();
                     sendDtmf(serial24, s);
                     return;
                 case 26:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial25 = _hidl_request.readInt32();
                     GsmSmsMessage message = new GsmSmsMessage();
                     message.readFromParcel(_hidl_request);
                     sendSms(serial25, message);
                     return;
                 case 27:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial26 = _hidl_request.readInt32();
                     GsmSmsMessage message2 = new GsmSmsMessage();
                     message2.readFromParcel(_hidl_request);
                     sendSMSExpectMore(serial26, message2);
                     return;
                 case 28:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial27 = _hidl_request.readInt32();
                     int radioTechnology = _hidl_request.readInt32();
                     DataProfileInfo dataProfileInfo = new DataProfileInfo();
@@ -2579,85 +2805,104 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     boolean modemCognitive = _hidl_request.readBool();
                     boolean roamingAllowed = _hidl_request.readBool();
                     boolean isRoaming = _hidl_request.readBool();
-                    setupDataCall(serial27, radioTechnology, dataProfileInfo, modemCognitive, roamingAllowed, isRoaming);
+                    setupDataCall(
+                            serial27,
+                            radioTechnology,
+                            dataProfileInfo,
+                            modemCognitive,
+                            roamingAllowed,
+                            isRoaming);
                     return;
                 case 29:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial28 = _hidl_request.readInt32();
                     IccIo iccIo = new IccIo();
                     iccIo.readFromParcel(_hidl_request);
                     iccIOForApp(serial28, iccIo);
                     return;
                 case 30:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial29 = _hidl_request.readInt32();
                     String ussd = _hidl_request.readString();
                     sendUssd(serial29, ussd);
                     return;
                 case 31:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial30 = _hidl_request.readInt32();
                     cancelPendingUssd(serial30);
                     return;
                 case 32:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial31 = _hidl_request.readInt32();
                     getClir(serial31);
                     return;
                 case 33:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial32 = _hidl_request.readInt32();
                     int status = _hidl_request.readInt32();
                     setClir(serial32, status);
                     return;
                 case 34:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial33 = _hidl_request.readInt32();
                     CallForwardInfo callInfo = new CallForwardInfo();
                     callInfo.readFromParcel(_hidl_request);
                     getCallForwardStatus(serial33, callInfo);
                     return;
                 case 35:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial34 = _hidl_request.readInt32();
                     CallForwardInfo callInfo2 = new CallForwardInfo();
                     callInfo2.readFromParcel(_hidl_request);
                     setCallForward(serial34, callInfo2);
                     return;
                 case 36:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial35 = _hidl_request.readInt32();
                     int serviceClass = _hidl_request.readInt32();
                     getCallWaiting(serial35, serviceClass);
                     return;
                 case 37:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial36 = _hidl_request.readInt32();
                     boolean enable = _hidl_request.readBool();
                     int serviceClass2 = _hidl_request.readInt32();
                     setCallWaiting(serial36, enable, serviceClass2);
                     return;
                 case 38:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial37 = _hidl_request.readInt32();
                     boolean success = _hidl_request.readBool();
                     int cause = _hidl_request.readInt32();
                     acknowledgeLastIncomingGsmSms(serial37, success, cause);
                     return;
                 case 39:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial38 = _hidl_request.readInt32();
                     acceptCall(serial38);
                     return;
                 case 40:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial39 = _hidl_request.readInt32();
                     int cid = _hidl_request.readInt32();
                     boolean reasonRadioShutDown = _hidl_request.readBool();
                     deactivateDataCall(serial39, cid, reasonRadioShutDown);
                     return;
                 case 41:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial40 = _hidl_request.readInt32();
                     String facility = _hidl_request.readString();
                     String password = _hidl_request.readString();
@@ -2666,17 +2911,20 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     getFacilityLockForApp(serial40, facility, password, serviceClass3, appId);
                     return;
                 case 42:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial41 = _hidl_request.readInt32();
                     String facility2 = _hidl_request.readString();
                     boolean lockState = _hidl_request.readBool();
                     String password2 = _hidl_request.readString();
                     int serviceClass4 = _hidl_request.readInt32();
                     String appId2 = _hidl_request.readString();
-                    setFacilityLockForApp(serial41, facility2, lockState, password2, serviceClass4, appId2);
+                    setFacilityLockForApp(
+                            serial41, facility2, lockState, password2, serviceClass4, appId2);
                     return;
                 case 43:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial42 = _hidl_request.readInt32();
                     String facility3 = _hidl_request.readString();
                     String oldPassword = _hidl_request.readString();
@@ -2684,191 +2932,225 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     setBarringPassword(serial42, facility3, oldPassword, newPassword);
                     return;
                 case 44:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial43 = _hidl_request.readInt32();
                     getNetworkSelectionMode(serial43);
                     return;
                 case 45:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial44 = _hidl_request.readInt32();
                     setNetworkSelectionModeAutomatic(serial44);
                     return;
                 case 46:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial45 = _hidl_request.readInt32();
                     String operatorNumeric = _hidl_request.readString();
                     setNetworkSelectionModeManual(serial45, operatorNumeric);
                     return;
                 case 47:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial46 = _hidl_request.readInt32();
                     getAvailableNetworks(serial46);
                     return;
                 case 48:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial47 = _hidl_request.readInt32();
                     String s2 = _hidl_request.readString();
                     startDtmf(serial47, s2);
                     return;
                 case 49:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial48 = _hidl_request.readInt32();
                     stopDtmf(serial48);
                     return;
                 case 50:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial49 = _hidl_request.readInt32();
                     getBasebandVersion(serial49);
                     return;
                 case 51:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial50 = _hidl_request.readInt32();
                     int gsmIndex2 = _hidl_request.readInt32();
                     separateConnection(serial50, gsmIndex2);
                     return;
                 case 52:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial51 = _hidl_request.readInt32();
                     boolean enable2 = _hidl_request.readBool();
                     setMute(serial51, enable2);
                     return;
                 case 53:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial52 = _hidl_request.readInt32();
                     getMute(serial52);
                     return;
                 case 54:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial53 = _hidl_request.readInt32();
                     getClip(serial53);
                     return;
                 case 55:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial54 = _hidl_request.readInt32();
                     getDataCallList(serial54);
                     return;
                 case 56:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial55 = _hidl_request.readInt32();
                     boolean enable3 = _hidl_request.readBool();
                     setSuppServiceNotifications(serial55, enable3);
                     return;
                 case 57:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial56 = _hidl_request.readInt32();
                     SmsWriteArgs smsWriteArgs = new SmsWriteArgs();
                     smsWriteArgs.readFromParcel(_hidl_request);
                     writeSmsToSim(serial56, smsWriteArgs);
                     return;
                 case 58:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial57 = _hidl_request.readInt32();
                     int index = _hidl_request.readInt32();
                     deleteSmsOnSim(serial57, index);
                     return;
                 case 59:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial58 = _hidl_request.readInt32();
                     int mode = _hidl_request.readInt32();
                     setBandMode(serial58, mode);
                     return;
                 case 60:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial59 = _hidl_request.readInt32();
                     getAvailableBandModes(serial59);
                     return;
                 case 61:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial60 = _hidl_request.readInt32();
                     String command = _hidl_request.readString();
                     sendEnvelope(serial60, command);
                     return;
                 case 62:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial61 = _hidl_request.readInt32();
                     String commandResponse = _hidl_request.readString();
                     sendTerminalResponseToSim(serial61, commandResponse);
                     return;
                 case 63:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial62 = _hidl_request.readInt32();
                     boolean accept = _hidl_request.readBool();
                     handleStkCallSetupRequestFromSim(serial62, accept);
                     return;
                 case 64:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial63 = _hidl_request.readInt32();
                     explicitCallTransfer(serial63);
                     return;
                 case 65:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial64 = _hidl_request.readInt32();
                     int nwType = _hidl_request.readInt32();
                     setPreferredNetworkType(serial64, nwType);
                     return;
                 case 66:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial65 = _hidl_request.readInt32();
                     getPreferredNetworkType(serial65);
                     return;
                 case 67:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial66 = _hidl_request.readInt32();
                     getNeighboringCids(serial66);
                     return;
                 case 68:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial67 = _hidl_request.readInt32();
                     boolean enable4 = _hidl_request.readBool();
                     setLocationUpdates(serial67, enable4);
                     return;
                 case 69:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial68 = _hidl_request.readInt32();
                     int cdmaSub = _hidl_request.readInt32();
                     setCdmaSubscriptionSource(serial68, cdmaSub);
                     return;
                 case 70:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial69 = _hidl_request.readInt32();
                     int type = _hidl_request.readInt32();
                     setCdmaRoamingPreference(serial69, type);
                     return;
                 case 71:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial70 = _hidl_request.readInt32();
                     getCdmaRoamingPreference(serial70);
                     return;
                 case 72:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial71 = _hidl_request.readInt32();
                     int mode2 = _hidl_request.readInt32();
                     setTTYMode(serial71, mode2);
                     return;
                 case 73:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial72 = _hidl_request.readInt32();
                     getTTYMode(serial72);
                     return;
                 case 74:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial73 = _hidl_request.readInt32();
                     boolean enable5 = _hidl_request.readBool();
                     setPreferredVoicePrivacy(serial73, enable5);
                     return;
                 case 75:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial74 = _hidl_request.readInt32();
                     getPreferredVoicePrivacy(serial74);
                     return;
                 case 76:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial75 = _hidl_request.readInt32();
                     String featureCode = _hidl_request.readString();
                     sendCDMAFeatureCode(serial75, featureCode);
                     return;
                 case 77:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial76 = _hidl_request.readInt32();
                     String dtmf = _hidl_request.readString();
                     int on2 = _hidl_request.readInt32();
@@ -2876,145 +3158,172 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     sendBurstDtmf(serial76, dtmf, on2, off);
                     return;
                 case 78:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial77 = _hidl_request.readInt32();
                     CdmaSmsMessage sms = new CdmaSmsMessage();
                     sms.readFromParcel(_hidl_request);
                     sendCdmaSms(serial77, sms);
                     return;
                 case 79:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial78 = _hidl_request.readInt32();
                     CdmaSmsAck smsAck = new CdmaSmsAck();
                     smsAck.readFromParcel(_hidl_request);
                     acknowledgeLastIncomingCdmaSms(serial78, smsAck);
                     return;
                 case 80:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial79 = _hidl_request.readInt32();
                     getGsmBroadcastConfig(serial79);
                     return;
                 case 81:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial80 = _hidl_request.readInt32();
-                    ArrayList<GsmBroadcastSmsConfigInfo> configInfo = GsmBroadcastSmsConfigInfo.readVectorFromParcel(_hidl_request);
+                    ArrayList<GsmBroadcastSmsConfigInfo> configInfo =
+                            GsmBroadcastSmsConfigInfo.readVectorFromParcel(_hidl_request);
                     setGsmBroadcastConfig(serial80, configInfo);
                     return;
                 case 82:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial81 = _hidl_request.readInt32();
                     boolean activate = _hidl_request.readBool();
                     setGsmBroadcastActivation(serial81, activate);
                     return;
                 case 83:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial82 = _hidl_request.readInt32();
                     getCdmaBroadcastConfig(serial82);
                     return;
                 case 84:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial83 = _hidl_request.readInt32();
-                    ArrayList<CdmaBroadcastSmsConfigInfo> configInfo2 = CdmaBroadcastSmsConfigInfo.readVectorFromParcel(_hidl_request);
+                    ArrayList<CdmaBroadcastSmsConfigInfo> configInfo2 =
+                            CdmaBroadcastSmsConfigInfo.readVectorFromParcel(_hidl_request);
                     setCdmaBroadcastConfig(serial83, configInfo2);
                     return;
                 case 85:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial84 = _hidl_request.readInt32();
                     boolean activate2 = _hidl_request.readBool();
                     setCdmaBroadcastActivation(serial84, activate2);
                     return;
                 case 86:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial85 = _hidl_request.readInt32();
                     getCDMASubscription(serial85);
                     return;
                 case 87:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial86 = _hidl_request.readInt32();
                     CdmaSmsWriteArgs cdmaSms = new CdmaSmsWriteArgs();
                     cdmaSms.readFromParcel(_hidl_request);
                     writeSmsToRuim(serial86, cdmaSms);
                     return;
                 case 88:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial87 = _hidl_request.readInt32();
                     int index2 = _hidl_request.readInt32();
                     deleteSmsOnRuim(serial87, index2);
                     return;
                 case 89:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial88 = _hidl_request.readInt32();
                     getDeviceIdentity(serial88);
                     return;
                 case 90:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial89 = _hidl_request.readInt32();
                     exitEmergencyCallbackMode(serial89);
                     return;
                 case 91:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial90 = _hidl_request.readInt32();
                     getSmscAddress(serial90);
                     return;
                 case 92:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial91 = _hidl_request.readInt32();
                     String smsc = _hidl_request.readString();
                     setSmscAddress(serial91, smsc);
                     return;
                 case 93:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial92 = _hidl_request.readInt32();
                     boolean available = _hidl_request.readBool();
                     reportSmsMemoryStatus(serial92, available);
                     return;
                 case 94:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial93 = _hidl_request.readInt32();
                     reportStkServiceIsRunning(serial93);
                     return;
                 case 95:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial94 = _hidl_request.readInt32();
                     getCdmaSubscriptionSource(serial94);
                     return;
                 case 96:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial95 = _hidl_request.readInt32();
                     String challenge = _hidl_request.readString();
                     requestIsimAuthentication(serial95, challenge);
                     return;
                 case 97:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial96 = _hidl_request.readInt32();
                     boolean success2 = _hidl_request.readBool();
                     String ackPdu = _hidl_request.readString();
                     acknowledgeIncomingGsmSmsWithPdu(serial96, success2, ackPdu);
                     return;
                 case 98:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial97 = _hidl_request.readInt32();
                     String contents = _hidl_request.readString();
                     sendEnvelopeWithStatus(serial97, contents);
                     return;
                 case 99:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial98 = _hidl_request.readInt32();
                     getVoiceRadioTechnology(serial98);
                     return;
                 case 100:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial99 = _hidl_request.readInt32();
                     getCellInfoList(serial99);
                     return;
                 case 101:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial100 = _hidl_request.readInt32();
                     int rate = _hidl_request.readInt32();
                     setCellInfoListRate(serial100, rate);
                     return;
                 case 102:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial101 = _hidl_request.readInt32();
                     DataProfileInfo dataProfileInfo2 = new DataProfileInfo();
                     dataProfileInfo2.readFromParcel(_hidl_request);
@@ -3023,89 +3332,103 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     setInitialAttachApn(serial101, dataProfileInfo2, modemCognitive2, isRoaming2);
                     return;
                 case 103:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial102 = _hidl_request.readInt32();
                     getImsRegistrationState(serial102);
                     return;
                 case 104:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial103 = _hidl_request.readInt32();
                     ImsSmsMessage message3 = new ImsSmsMessage();
                     message3.readFromParcel(_hidl_request);
                     sendImsSms(serial103, message3);
                     return;
                 case 105:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial104 = _hidl_request.readInt32();
                     SimApdu message4 = new SimApdu();
                     message4.readFromParcel(_hidl_request);
                     iccTransmitApduBasicChannel(serial104, message4);
                     return;
                 case 106:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial105 = _hidl_request.readInt32();
                     String aid8 = _hidl_request.readString();
                     int p2 = _hidl_request.readInt32();
                     iccOpenLogicalChannel(serial105, aid8, p2);
                     return;
                 case 107:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial106 = _hidl_request.readInt32();
                     int channelId = _hidl_request.readInt32();
                     iccCloseLogicalChannel(serial106, channelId);
                     return;
                 case 108:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial107 = _hidl_request.readInt32();
                     SimApdu message5 = new SimApdu();
                     message5.readFromParcel(_hidl_request);
                     iccTransmitApduLogicalChannel(serial107, message5);
                     return;
                 case 109:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial108 = _hidl_request.readInt32();
                     int itemId = _hidl_request.readInt32();
                     nvReadItem(serial108, itemId);
                     return;
                 case 110:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial109 = _hidl_request.readInt32();
                     NvWriteItem item = new NvWriteItem();
                     item.readFromParcel(_hidl_request);
                     nvWriteItem(serial109, item);
                     return;
                 case 111:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial110 = _hidl_request.readInt32();
                     ArrayList<Byte> prl = _hidl_request.readInt8Vector();
                     nvWriteCdmaPrl(serial110, prl);
                     return;
                 case 112:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial111 = _hidl_request.readInt32();
                     int resetType = _hidl_request.readInt32();
                     nvResetConfig(serial111, resetType);
                     return;
                 case 113:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial112 = _hidl_request.readInt32();
                     SelectUiccSub uiccSub = new SelectUiccSub();
                     uiccSub.readFromParcel(_hidl_request);
                     setUiccSubscription(serial112, uiccSub);
                     return;
                 case 114:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial113 = _hidl_request.readInt32();
                     boolean allow = _hidl_request.readBool();
                     setDataAllowed(serial113, allow);
                     return;
                 case 115:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial114 = _hidl_request.readInt32();
                     getHardwareConfig(serial114);
                     return;
                 case 116:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial115 = _hidl_request.readInt32();
                     int authContext = _hidl_request.readInt32();
                     String authData = _hidl_request.readString();
@@ -3113,53 +3436,63 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     requestIccSimAuthentication(serial115, authContext, authData, aid9);
                     return;
                 case 117:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial116 = _hidl_request.readInt32();
-                    ArrayList<DataProfileInfo> profiles = DataProfileInfo.readVectorFromParcel(_hidl_request);
+                    ArrayList<DataProfileInfo> profiles =
+                            DataProfileInfo.readVectorFromParcel(_hidl_request);
                     boolean isRoaming3 = _hidl_request.readBool();
                     setDataProfile(serial116, profiles, isRoaming3);
                     return;
                 case 118:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial117 = _hidl_request.readInt32();
                     requestShutdown(serial117);
                     return;
                 case 119:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial118 = _hidl_request.readInt32();
                     getRadioCapability(serial118);
                     return;
                 case 120:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial119 = _hidl_request.readInt32();
                     RadioCapability rc = new RadioCapability();
                     rc.readFromParcel(_hidl_request);
                     setRadioCapability(serial119, rc);
                     return;
                 case 121:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial120 = _hidl_request.readInt32();
                     int reportInterval = _hidl_request.readInt32();
                     boolean pullMode = _hidl_request.readBool();
                     startLceService(serial120, reportInterval, pullMode);
                     return;
                 case 122:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial121 = _hidl_request.readInt32();
                     stopLceService(serial121);
                     return;
                 case 123:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial122 = _hidl_request.readInt32();
                     pullLceData(serial122);
                     return;
                 case 124:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial123 = _hidl_request.readInt32();
                     getModemActivityInfo(serial123);
                     return;
                 case 125:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial124 = _hidl_request.readInt32();
                     boolean allAllowed = _hidl_request.readBool();
                     CarrierRestrictions carriers = new CarrierRestrictions();
@@ -3167,31 +3500,36 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                     setAllowedCarriers(serial124, allAllowed, carriers);
                     return;
                 case 126:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial125 = _hidl_request.readInt32();
                     getAllowedCarriers(serial125);
                     return;
                 case 127:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial126 = _hidl_request.readInt32();
                     int deviceStateType = _hidl_request.readInt32();
                     boolean state = _hidl_request.readBool();
                     sendDeviceState(serial126, deviceStateType, state);
                     return;
                 case 128:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial127 = _hidl_request.readInt32();
                     int indicationFilter = _hidl_request.readInt32();
                     setIndicationFilter(serial127, indicationFilter);
                     return;
                 case 129:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     int serial128 = _hidl_request.readInt32();
                     boolean powerUp = _hidl_request.readBool();
                     setSimCardPower(serial128, powerUp);
                     return;
                 case 130:
-                    _hidl_request.enforceInterface(android.hardware.radio.V1_0.IRadio.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.radio.V1_0.IRadio.kInterfaceName);
                     responseAcknowledgement();
                     return;
                 case 131:
@@ -3267,7 +3605,8 @@ public interface IRadio extends android.hardware.radio.V1_0.IRadio {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

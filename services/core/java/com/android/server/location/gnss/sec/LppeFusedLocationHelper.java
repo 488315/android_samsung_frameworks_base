@@ -17,8 +17,10 @@ import android.net.wifi.WifiScanner;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.location.gnss.hal.GnssNative;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -45,78 +47,117 @@ public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallb
     public Runnable mFlpTimeout = null;
     public boolean mIsCivicAddressRequested = false;
     public LppeFusedLocationHelper$$ExternalSyntheticLambda3 mCivicAddressTimeout = null;
-    public final AnonymousClass1 mLocationListener = new LocationListener() { // from class: com.android.server.location.gnss.sec.LppeFusedLocationHelper.1
-        @Override // android.location.LocationListener
-        public final void onLocationChanged(Location location) {
-            if (LppeFusedLocationHelper.this.mIsFlpRequested && "fused".equals(location.getProvider())) {
-                Log.d("LocationX", "LPPeFusedLocationListener : FUSED_PROVIDER");
-                LppeFusedLocationHelper lppeFusedLocationHelper = LppeFusedLocationHelper.this;
-                lppeFusedLocationHelper.getClass();
-                Log.d("LocationX", "LPPe handleUpdateLPPeFLPLocation");
-                int i = (location.hasAltitude() ? 2 : 0) | 1 | (location.hasSpeed() ? 4 : 0) | (location.hasBearing() ? 8 : 0) | (location.hasAccuracy() ? 16 : 0) | (location.hasVerticalAccuracy() ? 32 : 0) | (location.hasSpeedAccuracy() ? 64 : 0) | (location.hasBearingAccuracy() ? 128 : 0);
-                Log.d("LocationX", " location total flag : " + i);
-                if (!location.hasVerticalAccuracy()) {
-                    if (location.hasAltitude()) {
-                        location.setVerticalAccuracyMeters(100.0f);
-                    } else {
-                        location.setAltitude(1280000.0d);
-                        i |= 2;
-                        location.setVerticalAccuracyMeters(255.0f);
+    public final AnonymousClass1 mLocationListener =
+            new LocationListener() { // from class:
+                                     // com.android.server.location.gnss.sec.LppeFusedLocationHelper.1
+                @Override // android.location.LocationListener
+                public final void onLocationChanged(Location location) {
+                    if (LppeFusedLocationHelper.this.mIsFlpRequested
+                            && "fused".equals(location.getProvider())) {
+                        Log.d("LocationX", "LPPeFusedLocationListener : FUSED_PROVIDER");
+                        LppeFusedLocationHelper lppeFusedLocationHelper =
+                                LppeFusedLocationHelper.this;
+                        lppeFusedLocationHelper.getClass();
+                        Log.d("LocationX", "LPPe handleUpdateLPPeFLPLocation");
+                        int i =
+                                (location.hasAltitude() ? 2 : 0)
+                                        | 1
+                                        | (location.hasSpeed() ? 4 : 0)
+                                        | (location.hasBearing() ? 8 : 0)
+                                        | (location.hasAccuracy() ? 16 : 0)
+                                        | (location.hasVerticalAccuracy() ? 32 : 0)
+                                        | (location.hasSpeedAccuracy() ? 64 : 0)
+                                        | (location.hasBearingAccuracy() ? 128 : 0);
+                        Log.d("LocationX", " location total flag : " + i);
+                        if (!location.hasVerticalAccuracy()) {
+                            if (location.hasAltitude()) {
+                                location.setVerticalAccuracyMeters(100.0f);
+                            } else {
+                                location.setAltitude(1280000.0d);
+                                i |= 2;
+                                location.setVerticalAccuracyMeters(255.0f);
+                            }
+                            i |= 32;
+                        }
+                        Log.d(
+                                "LocationX",
+                                " Vertical Accuracy : "
+                                        + location.getVerticalAccuracyMeters()
+                                        + ", Horizontal Accuracy : "
+                                        + location.getAccuracy());
+                        lppeFusedLocationHelper.mGnssNative.injectFlpLocation(
+                                i,
+                                location.getLatitude(),
+                                location.getLongitude(),
+                                location.getAltitude(),
+                                location.getSpeed(),
+                                location.getBearing(),
+                                location.getAccuracy(),
+                                location.getVerticalAccuracyMeters(),
+                                location.getSpeedAccuracyMetersPerSecond(),
+                                location.getBearingAccuracyDegrees(),
+                                location.getTime());
+                        lppeFusedLocationHelper.mIsFlpRequested = false;
+                        LppeFusedLocationHelper lppeFusedLocationHelper2 =
+                                LppeFusedLocationHelper.this;
+                        Runnable runnable = lppeFusedLocationHelper2.mFlpTimeout;
+                        if (runnable != null) {
+                            lppeFusedLocationHelper2.mHandler.removeCallbacks(runnable);
+                            LppeFusedLocationHelper.this.mFlpTimeout = null;
+                        }
                     }
-                    i |= 32;
                 }
-                Log.d("LocationX", " Vertical Accuracy : " + location.getVerticalAccuracyMeters() + ", Horizontal Accuracy : " + location.getAccuracy());
-                lppeFusedLocationHelper.mGnssNative.injectFlpLocation(i, location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(), location.getBearing(), location.getAccuracy(), location.getVerticalAccuracyMeters(), location.getSpeedAccuracyMetersPerSecond(), location.getBearingAccuracyDegrees(), location.getTime());
-                lppeFusedLocationHelper.mIsFlpRequested = false;
-                LppeFusedLocationHelper lppeFusedLocationHelper2 = LppeFusedLocationHelper.this;
-                Runnable runnable = lppeFusedLocationHelper2.mFlpTimeout;
-                if (runnable != null) {
-                    lppeFusedLocationHelper2.mHandler.removeCallbacks(runnable);
-                    LppeFusedLocationHelper.this.mFlpTimeout = null;
-                }
-            }
-        }
 
-        @Override // android.location.LocationListener
-        public final void onProviderDisabled(String str) {
-        }
+                @Override // android.location.LocationListener
+                public final void onProviderDisabled(String str) {}
 
-        @Override // android.location.LocationListener
-        public final void onProviderEnabled(String str) {
-        }
-    };
+                @Override // android.location.LocationListener
+                public final void onProviderEnabled(String str) {}
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LppeWlanScanListener implements WifiScanner.ScanListener {
-        public LppeWlanScanListener() {
-        }
+        public LppeWlanScanListener() {}
 
         public final void onFailure(int i, String str) {
             LppeFusedLocationHelper lppeFusedLocationHelper = LppeFusedLocationHelper.this;
             if (lppeFusedLocationHelper.mIsWifiScanRequested) {
                 if (lppeFusedLocationHelper.mIsRetryWifiScan) {
-                    Log.d("LocationX", AccountManagerService$$ExternalSyntheticOutline0.m(i, "2nd wlan scan failure. reason = ", ", description = ", str, ". set wlan scan error."));
+                    Log.d(
+                            "LocationX",
+                            AccountManagerService$$ExternalSyntheticOutline0.m(
+                                    i,
+                                    "2nd wlan scan failure. reason = ",
+                                    ", description = ",
+                                    str,
+                                    ". set wlan scan error."));
                     LppeFusedLocationHelper.this.handleUpdateWlanError();
                     LppeFusedLocationHelper.this.mIsWifiScanRequested = false;
                     return;
                 }
-                Log.d("LocationX", AccountManagerService$$ExternalSyntheticOutline0.m(i, "wlan scan failure. reason = ", ", description = ", str, ". try to scan wlan again."));
+                Log.d(
+                        "LocationX",
+                        AccountManagerService$$ExternalSyntheticOutline0.m(
+                                i,
+                                "wlan scan failure. reason = ",
+                                ", description = ",
+                                str,
+                                ". try to scan wlan again."));
                 LppeFusedLocationHelper lppeFusedLocationHelper2 = LppeFusedLocationHelper.this;
                 lppeFusedLocationHelper2.getClass();
                 WifiScanner.ScanSettings scanSettings = new WifiScanner.ScanSettings();
                 scanSettings.band = 15;
                 scanSettings.type = 0;
                 scanSettings.ignoreLocationSettings = true;
-                lppeFusedLocationHelper2.mWifiScanner.startScan(scanSettings, lppeFusedLocationHelper2.new LppeWlanScanListener());
+                lppeFusedLocationHelper2.mWifiScanner.startScan(
+                        scanSettings, lppeFusedLocationHelper2.new LppeWlanScanListener());
                 LppeFusedLocationHelper.this.mIsRetryWifiScan = true;
             }
         }
 
-        public final void onFullResult(ScanResult scanResult) {
-        }
+        public final void onFullResult(ScanResult scanResult) {}
 
-        public final void onPeriodChanged(int i) {
-        }
+        public final void onPeriodChanged(int i) {}
 
         public final void onResults(WifiScanner.ScanData[] scanDataArr) {
             long j;
@@ -133,24 +174,45 @@ public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallb
                     long[] jArr = new long[min];
                     int[] iArr = new int[min];
                     int[] iArr2 = new int[min];
-                    Log.d("LocationX", "LPPeWiFiReceiver : the number of AP scanned : " + arrayList.size() + " used number : " + min);
-                    NetworkInfo networkInfo = lppeFusedLocationHelper.mConnectivityManager.getNetworkInfo(1);
-                    if (networkInfo == null || networkInfo.getType() != 1 || !networkInfo.isConnected() || (connectionInfo = lppeFusedLocationHelper.mWifiManager.getConnectionInfo()) == null) {
+                    Log.d(
+                            "LocationX",
+                            "LPPeWiFiReceiver : the number of AP scanned : "
+                                    + arrayList.size()
+                                    + " used number : "
+                                    + min);
+                    NetworkInfo networkInfo =
+                            lppeFusedLocationHelper.mConnectivityManager.getNetworkInfo(1);
+                    if (networkInfo == null
+                            || networkInfo.getType() != 1
+                            || !networkInfo.isConnected()
+                            || (connectionInfo =
+                                            lppeFusedLocationHelper.mWifiManager
+                                                    .getConnectionInfo())
+                                    == null) {
                         j = 0;
                     } else {
-                        j = LppeFusedLocationHelper.convertStringToHexLong(connectionInfo.getBSSID());
+                        j =
+                                LppeFusedLocationHelper.convertStringToHexLong(
+                                        connectionInfo.getBSSID());
                         jArr[0] = j;
                         iArr[0] = connectionInfo.getRssi();
-                        iArr2[0] = ScanResult.convertFrequencyMhzToChannelIfSupported(connectionInfo.getFrequency());
+                        iArr2[0] =
+                                ScanResult.convertFrequencyMhzToChannelIfSupported(
+                                        connectionInfo.getFrequency());
                     }
                     int i = j == 0 ? 0 : 1;
                     for (int i2 = 0; i2 < min - i; i2++) {
                         ScanResult scanResult = (ScanResult) arrayList.get(i2);
                         int i3 = i2 + i;
                         jArr[i3] = LppeFusedLocationHelper.convertStringToHexLong(scanResult.BSSID);
-                        if (i == 0 || j != LppeFusedLocationHelper.convertStringToHexLong(scanResult.BSSID)) {
+                        if (i == 0
+                                || j
+                                        != LppeFusedLocationHelper.convertStringToHexLong(
+                                                scanResult.BSSID)) {
                             iArr[i3] = scanResult.level;
-                            iArr2[i3] = ScanResult.convertFrequencyMhzToChannelIfSupported(scanResult.frequency);
+                            iArr2[i3] =
+                                    ScanResult.convertFrequencyMhzToChannelIfSupported(
+                                            scanResult.frequency);
                         } else {
                             i = 0;
                         }
@@ -166,18 +228,15 @@ public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallb
             }
         }
 
-        public final void onSuccess() {
-        }
+        public final void onSuccess() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UBPSensorEventListener implements SensorEventListener {
-        public UBPSensorEventListener() {
-        }
+        public UBPSensorEventListener() {}
 
         @Override // android.hardware.SensorEventListener
-        public final void onAccuracyChanged(Sensor sensor, int i) {
-        }
+        public final void onAccuracyChanged(Sensor sensor, int i) {}
 
         @Override // android.hardware.SensorEventListener
         public final void onSensorChanged(SensorEvent sensorEvent) {
@@ -187,7 +246,11 @@ public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallb
                 Log.d("LocationX", "UBPSensorEventListener : onSensorChanged() ");
                 LppeFusedLocationHelper lppeFusedLocationHelper = LppeFusedLocationHelper.this;
                 lppeFusedLocationHelper.getClass();
-                Log.d("LocationX", "handleUpdateUBPInfo = sensorMeasurement : " + i + " (Valid range  30000 ~ 115000)");
+                Log.d(
+                        "LocationX",
+                        "handleUpdateUBPInfo = sensorMeasurement : "
+                                + i
+                                + " (Valid range  30000 ~ 115000)");
                 GnssNative gnssNative = lppeFusedLocationHelper.mGnssNative;
                 if (i < 30000 || i > 115000) {
                     gnssNative.injectUbpError(4);
@@ -196,7 +259,8 @@ public final class LppeFusedLocationHelper implements GnssNative.LppeHelperCallb
                     gnssNative.injectUbpInfo(8, i);
                 }
                 lppeFusedLocationHelper.mIsUbpRequested = false;
-                lppeFusedLocationHelper.mSensorManager.unregisterListener(lppeFusedLocationHelper.mSensorEventListener);
+                lppeFusedLocationHelper.mSensorManager.unregisterListener(
+                        lppeFusedLocationHelper.mSensorEventListener);
                 LppeFusedLocationHelper lppeFusedLocationHelper2 = LppeFusedLocationHelper.this;
                 Runnable runnable = lppeFusedLocationHelper2.mUbpTimeout;
                 if (runnable != null) {

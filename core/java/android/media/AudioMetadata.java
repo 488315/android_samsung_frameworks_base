@@ -2,6 +2,7 @@ package android.media;
 
 import android.util.Log;
 import android.util.Pair;
+
 import java.lang.reflect.ParameterizedType;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
@@ -25,77 +26,104 @@ public final class AudioMetadata {
     private static final int AUDIO_METADATA_OBJ_TYPE_NONE = 0;
     private static final int AUDIO_METADATA_OBJ_TYPE_STRING = 5;
     private static final String TAG = "AudioMetadata";
-    private static final Map<Class, Integer> AUDIO_METADATA_OBJ_TYPES = Map.of(Integer.class, 1, Long.class, 2, Float.class, 3, Double.class, 4, String.class, 5, BaseMap.class, 6);
+    private static final Map<Class, Integer> AUDIO_METADATA_OBJ_TYPES =
+            Map.of(
+                    Integer.class,
+                    1,
+                    Long.class,
+                    2,
+                    Float.class,
+                    3,
+                    Double.class,
+                    4,
+                    String.class,
+                    5,
+                    BaseMap.class,
+                    6);
     private static final Charset AUDIO_METADATA_CHARSET = StandardCharsets.UTF_8;
-    private static final Map<Integer, DataPackage<?>> DATA_PACKAGES = Map.of(1, new DataPackage<Integer>() { // from class: android.media.AudioMetadata.2
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.media.AudioMetadata.DataPackage
-        public Integer unpack(ByteBuffer buffer) {
-            return Integer.valueOf(buffer.getInt());
-        }
+    private static final Map<Integer, DataPackage<?>> DATA_PACKAGES =
+            Map.of(
+                    1,
+                    new DataPackage<Integer>() { // from class: android.media.AudioMetadata.2
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public Integer unpack(ByteBuffer buffer) {
+                            return Integer.valueOf(buffer.getInt());
+                        }
 
-        @Override // android.media.AudioMetadata.DataPackage
-        public boolean pack(AutoGrowByteBuffer output, Integer obj) {
-            output.putInt(obj.intValue());
-            return true;
-        }
-    }, 2, new DataPackage<Long>() { // from class: android.media.AudioMetadata.3
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.media.AudioMetadata.DataPackage
-        public Long unpack(ByteBuffer buffer) {
-            return Long.valueOf(buffer.getLong());
-        }
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public boolean pack(AutoGrowByteBuffer output, Integer obj) {
+                            output.putInt(obj.intValue());
+                            return true;
+                        }
+                    },
+                    2,
+                    new DataPackage<Long>() { // from class: android.media.AudioMetadata.3
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public Long unpack(ByteBuffer buffer) {
+                            return Long.valueOf(buffer.getLong());
+                        }
 
-        @Override // android.media.AudioMetadata.DataPackage
-        public boolean pack(AutoGrowByteBuffer output, Long obj) {
-            output.putLong(obj.longValue());
-            return true;
-        }
-    }, 3, new DataPackage<Float>() { // from class: android.media.AudioMetadata.4
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.media.AudioMetadata.DataPackage
-        public Float unpack(ByteBuffer buffer) {
-            return Float.valueOf(buffer.getFloat());
-        }
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public boolean pack(AutoGrowByteBuffer output, Long obj) {
+                            output.putLong(obj.longValue());
+                            return true;
+                        }
+                    },
+                    3,
+                    new DataPackage<Float>() { // from class: android.media.AudioMetadata.4
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public Float unpack(ByteBuffer buffer) {
+                            return Float.valueOf(buffer.getFloat());
+                        }
 
-        @Override // android.media.AudioMetadata.DataPackage
-        public boolean pack(AutoGrowByteBuffer output, Float obj) {
-            output.putFloat(obj.floatValue());
-            return true;
-        }
-    }, 4, new DataPackage<Double>() { // from class: android.media.AudioMetadata.5
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.media.AudioMetadata.DataPackage
-        public Double unpack(ByteBuffer buffer) {
-            return Double.valueOf(buffer.getDouble());
-        }
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public boolean pack(AutoGrowByteBuffer output, Float obj) {
+                            output.putFloat(obj.floatValue());
+                            return true;
+                        }
+                    },
+                    4,
+                    new DataPackage<Double>() { // from class: android.media.AudioMetadata.5
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public Double unpack(ByteBuffer buffer) {
+                            return Double.valueOf(buffer.getDouble());
+                        }
 
-        @Override // android.media.AudioMetadata.DataPackage
-        public boolean pack(AutoGrowByteBuffer output, Double obj) {
-            output.putDouble(obj.doubleValue());
-            return true;
-        }
-    }, 5, new DataPackage<String>() { // from class: android.media.AudioMetadata.6
-        @Override // android.media.AudioMetadata.DataPackage
-        public String unpack(ByteBuffer buffer) {
-            int dataSize = buffer.getInt();
-            if (buffer.position() + dataSize > buffer.limit()) {
-                return null;
-            }
-            byte[] valueArr = new byte[dataSize];
-            buffer.get(valueArr);
-            String value = new String(valueArr, AudioMetadata.AUDIO_METADATA_CHARSET);
-            return value;
-        }
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public boolean pack(AutoGrowByteBuffer output, Double obj) {
+                            output.putDouble(obj.doubleValue());
+                            return true;
+                        }
+                    },
+                    5,
+                    new DataPackage<String>() { // from class: android.media.AudioMetadata.6
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public String unpack(ByteBuffer buffer) {
+                            int dataSize = buffer.getInt();
+                            if (buffer.position() + dataSize > buffer.limit()) {
+                                return null;
+                            }
+                            byte[] valueArr = new byte[dataSize];
+                            buffer.get(valueArr);
+                            String value =
+                                    new String(valueArr, AudioMetadata.AUDIO_METADATA_CHARSET);
+                            return value;
+                        }
 
-        @Override // android.media.AudioMetadata.DataPackage
-        public boolean pack(AutoGrowByteBuffer output, String obj) {
-            byte[] valueArr = obj.getBytes(AudioMetadata.AUDIO_METADATA_CHARSET);
-            output.putInt(valueArr.length);
-            output.put(valueArr);
-            return true;
-        }
-    }, 6, new BaseMapPackage());
+                        @Override // android.media.AudioMetadata.DataPackage
+                        public boolean pack(AutoGrowByteBuffer output, String obj) {
+                            byte[] valueArr = obj.getBytes(AudioMetadata.AUDIO_METADATA_CHARSET);
+                            output.putInt(valueArr.length);
+                            output.put(valueArr);
+                            return true;
+                        }
+                    },
+                    6,
+                    new BaseMapPackage());
     private static final ObjectPackage OBJECT_PACKAGE = new ObjectPackage();
 
     public interface Key<T> {
@@ -109,21 +137,31 @@ public final class AudioMetadata {
     }
 
     public static class Format {
-        public static final Key<Integer> KEY_BIT_RATE = AudioMetadata.createKey(MediaFormat.KEY_BIT_RATE, Integer.class);
-        public static final Key<Integer> KEY_CHANNEL_MASK = AudioMetadata.createKey(MediaFormat.KEY_CHANNEL_MASK, Integer.class);
+        public static final Key<Integer> KEY_BIT_RATE =
+                AudioMetadata.createKey(MediaFormat.KEY_BIT_RATE, Integer.class);
+        public static final Key<Integer> KEY_CHANNEL_MASK =
+                AudioMetadata.createKey(MediaFormat.KEY_CHANNEL_MASK, Integer.class);
         public static final Key<String> KEY_MIME = AudioMetadata.createKey("mime", String.class);
-        public static final Key<Integer> KEY_SAMPLE_RATE = AudioMetadata.createKey(MediaFormat.KEY_SAMPLE_RATE, Integer.class);
-        public static final Key<Integer> KEY_BIT_WIDTH = AudioMetadata.createKey("bit-width", Integer.class);
-        public static final Key<Boolean> KEY_ATMOS_PRESENT = AudioMetadata.createKey("atmos-present", Boolean.class);
-        public static final Key<Integer> KEY_HAS_ATMOS = AudioMetadata.createKey("has-atmos", Integer.class);
-        public static final Key<Integer> KEY_AUDIO_ENCODING = AudioMetadata.createKey("audio-encoding", Integer.class);
-        public static final Key<Integer> KEY_PRESENTATION_ID = AudioMetadata.createKey("presentation-id", Integer.class);
-        public static final Key<Integer> KEY_PROGRAM_ID = AudioMetadata.createKey("program-id", Integer.class);
-        public static final Key<Integer> KEY_PRESENTATION_CONTENT_CLASSIFIER = AudioMetadata.createKey("presentation-content-classifier", Integer.class);
-        public static final Key<String> KEY_PRESENTATION_LANGUAGE = AudioMetadata.createKey("presentation-language", String.class);
+        public static final Key<Integer> KEY_SAMPLE_RATE =
+                AudioMetadata.createKey(MediaFormat.KEY_SAMPLE_RATE, Integer.class);
+        public static final Key<Integer> KEY_BIT_WIDTH =
+                AudioMetadata.createKey("bit-width", Integer.class);
+        public static final Key<Boolean> KEY_ATMOS_PRESENT =
+                AudioMetadata.createKey("atmos-present", Boolean.class);
+        public static final Key<Integer> KEY_HAS_ATMOS =
+                AudioMetadata.createKey("has-atmos", Integer.class);
+        public static final Key<Integer> KEY_AUDIO_ENCODING =
+                AudioMetadata.createKey("audio-encoding", Integer.class);
+        public static final Key<Integer> KEY_PRESENTATION_ID =
+                AudioMetadata.createKey("presentation-id", Integer.class);
+        public static final Key<Integer> KEY_PROGRAM_ID =
+                AudioMetadata.createKey("program-id", Integer.class);
+        public static final Key<Integer> KEY_PRESENTATION_CONTENT_CLASSIFIER =
+                AudioMetadata.createKey("presentation-content-classifier", Integer.class);
+        public static final Key<String> KEY_PRESENTATION_LANGUAGE =
+                AudioMetadata.createKey("presentation-language", String.class);
 
-        private Format() {
-        }
+        private Format() {}
     }
 
     public static <T> Key<T> createKey(final String name, final Class<T> type) {
@@ -154,7 +192,8 @@ public final class AudioMetadata {
                     return false;
                 }
                 Key<?> other = (Key) obj;
-                return this.mName.equals(other.getName()) && this.mType.equals(other.getValueClass());
+                return this.mName.equals(other.getName())
+                        && this.mType.equals(other.getValueClass());
             }
 
             public int hashCode() {
@@ -164,7 +203,8 @@ public final class AudioMetadata {
     }
 
     public static class BaseMap implements AudioMetadataMap {
-        private final HashMap<Pair<String, Class<?>>, Pair<Key<?>, Object>> mHashMap = new HashMap<>();
+        private final HashMap<Pair<String, Class<?>>, Pair<Key<?>, Object>> mHashMap =
+                new HashMap<>();
 
         @Override // android.media.AudioMetadataReadMap
         public <T> boolean containsKey(Key<T> key) {
@@ -201,7 +241,8 @@ public final class AudioMetadata {
         @Override // android.media.AudioMetadataMap
         public <T> T set(Key<T> key, T t) {
             Objects.requireNonNull(t);
-            return (T) getValueFromValuePair(this.mHashMap.put(pairFromKey(key), new Pair<>(key, t)));
+            return (T)
+                    getValueFromValuePair(this.mHashMap.put(pairFromKey(key), new Pair<>(key, t)));
         }
 
         @Override // android.media.AudioMetadataReadMap
@@ -315,7 +356,8 @@ public final class AudioMetadata {
             if (this.mBuffer.remaining() < count) {
                 int newCapacity = this.mBuffer.position() + count;
                 if (newCapacity > 1073741823) {
-                    throw new IllegalStateException("Item memory requirements too large: " + newCapacity);
+                    throw new IllegalStateException(
+                            "Item memory requirements too large: " + newCapacity);
                 }
                 ByteBuffer buffer = ByteBuffer.allocateDirect(newCapacity << 1);
                 buffer.order(this.mBuffer.order());
@@ -332,19 +374,21 @@ public final class AudioMetadata {
         T unpack(ByteBuffer byteBuffer);
 
         default Class getMyType() {
-            return (Class) ((ParameterizedType) getClass().getGenericInterfaces()[0]).getActualTypeArguments()[0];
+            return (Class)
+                    ((ParameterizedType) getClass().getGenericInterfaces()[0])
+                            .getActualTypeArguments()[0];
         }
     }
 
     private static class ObjectPackage implements DataPackage<Pair<Class, Object>> {
-        private ObjectPackage() {
-        }
+        private ObjectPackage() {}
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.media.AudioMetadata.DataPackage
         public Pair<Class, Object> unpack(ByteBuffer buffer) {
             int dataType = buffer.getInt();
-            DataPackage dataPackage = (DataPackage) AudioMetadata.DATA_PACKAGES.get(Integer.valueOf(dataType));
+            DataPackage dataPackage =
+                    (DataPackage) AudioMetadata.DATA_PACKAGES.get(Integer.valueOf(dataType));
             if (dataPackage == null) {
                 Log.e(AudioMetadata.TAG, "Cannot find DataPackage for type:" + dataType);
                 return null;
@@ -388,8 +432,7 @@ public final class AudioMetadata {
     }
 
     private static class BaseMapPackage implements DataPackage<BaseMap> {
-        private BaseMapPackage() {
-        }
+        private BaseMapPackage() {}
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.media.AudioMetadata.DataPackage
@@ -412,10 +455,15 @@ public final class AudioMetadata {
                     Log.e(AudioMetadata.TAG, "Failed to unpack value for map");
                     return null;
                 }
-                if (key.equals(Format.KEY_HAS_ATMOS.getName()) && value.first == Format.KEY_HAS_ATMOS.getValueClass()) {
-                    ret.set(Format.KEY_ATMOS_PRESENT, Boolean.valueOf(((Integer) value.second).intValue() != 0));
+                if (key.equals(Format.KEY_HAS_ATMOS.getName())
+                        && value.first == Format.KEY_HAS_ATMOS.getValueClass()) {
+                    ret.set(
+                            Format.KEY_ATMOS_PRESENT,
+                            Boolean.valueOf(((Integer) value.second).intValue() != 0));
                 } else {
-                    ret.set(AudioMetadata.createKey(key, value.first), value.first.cast(value.second));
+                    ret.set(
+                            AudioMetadata.createKey(key, value.first),
+                            value.first.cast(value.second));
                 }
             }
             return ret;
@@ -441,7 +489,8 @@ public final class AudioMetadata {
                     Log.i(AudioMetadata.TAG, "Failed to pack key: " + next.getName());
                     return false;
                 }
-                if (!AudioMetadata.OBJECT_PACKAGE.pack(autoGrowByteBuffer, new Pair<>(next.getValueClass(), obj))) {
+                if (!AudioMetadata.OBJECT_PACKAGE.pack(
+                        autoGrowByteBuffer, new Pair<>(next.getValueClass(), obj))) {
                     Log.i(AudioMetadata.TAG, "Failed to pack value: " + baseMap.get(next));
                     return false;
                 }
@@ -478,6 +527,5 @@ public final class AudioMetadata {
         return output.getRawByteBuffer();
     }
 
-    private AudioMetadata() {
-    }
+    private AudioMetadata() {}
 }

@@ -1,7 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
-import android.app.IRequestFinishCallback;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -18,6 +16,7 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.view.RemoteAnimationDefinition;
 import android.window.SizeConfigurationBuckets;
+
 import com.android.internal.policy.IKeyguardDismissCallback;
 
 /* loaded from: classes.dex */
@@ -26,7 +25,8 @@ public interface IActivityClientController extends IInterface {
 
     void activityDestroyed(IBinder iBinder) throws RemoteException;
 
-    void activityIdle(IBinder iBinder, Configuration configuration, boolean z) throws RemoteException;
+    void activityIdle(IBinder iBinder, Configuration configuration, boolean z)
+            throws RemoteException;
 
     void activityLocalRelaunch(IBinder iBinder) throws RemoteException;
 
@@ -38,13 +38,21 @@ public interface IActivityClientController extends IInterface {
 
     void activityResumed(IBinder iBinder, boolean z) throws RemoteException;
 
-    void activityStopped(IBinder iBinder, Bundle bundle, PersistableBundle persistableBundle, CharSequence charSequence) throws RemoteException;
+    void activityStopped(
+            IBinder iBinder,
+            Bundle bundle,
+            PersistableBundle persistableBundle,
+            CharSequence charSequence)
+            throws RemoteException;
 
     void activityTopResumedStateLost() throws RemoteException;
 
-    void adjustPopOverOptions(IBinder iBinder, int[] iArr, int[] iArr2, Point[] pointArr, int[] iArr3) throws RemoteException;
+    void adjustPopOverOptions(
+            IBinder iBinder, int[] iArr, int[] iArr2, Point[] pointArr, int[] iArr3)
+            throws RemoteException;
 
-    int checkActivityCallerContentUriPermission(IBinder iBinder, IBinder iBinder2, Uri uri, int i, int i2) throws RemoteException;
+    int checkActivityCallerContentUriPermission(
+            IBinder iBinder, IBinder iBinder2, Uri uri, int i, int i2) throws RemoteException;
 
     void clearOverrideActivityTransition(IBinder iBinder, boolean z) throws RemoteException;
 
@@ -54,11 +62,16 @@ public interface IActivityClientController extends IInterface {
 
     boolean convertToTranslucent(IBinder iBinder, Bundle bundle) throws RemoteException;
 
-    void dismissKeyguard(IBinder iBinder, IKeyguardDismissCallback iKeyguardDismissCallback, CharSequence charSequence) throws RemoteException;
+    void dismissKeyguard(
+            IBinder iBinder,
+            IKeyguardDismissCallback iKeyguardDismissCallback,
+            CharSequence charSequence)
+            throws RemoteException;
 
     void enableTaskLocaleOverride(IBinder iBinder) throws RemoteException;
 
-    boolean enterPictureInPictureMode(IBinder iBinder, PictureInPictureParams pictureInPictureParams) throws RemoteException;
+    boolean enterPictureInPictureMode(
+            IBinder iBinder, PictureInPictureParams pictureInPictureParams) throws RemoteException;
 
     boolean finishActivity(IBinder iBinder, int i, Intent intent, int i2) throws RemoteException;
 
@@ -92,7 +105,8 @@ public interface IActivityClientController extends IInterface {
 
     boolean isImmersive(IBinder iBinder) throws RemoteException;
 
-    boolean isRequestedToLaunchInTaskFragment(IBinder iBinder, IBinder iBinder2) throws RemoteException;
+    boolean isRequestedToLaunchInTaskFragment(IBinder iBinder, IBinder iBinder2)
+            throws RemoteException;
 
     boolean isRootVoiceInteraction(IBinder iBinder) throws RemoteException;
 
@@ -100,25 +114,35 @@ public interface IActivityClientController extends IInterface {
 
     boolean moveActivityTaskToBack(IBinder iBinder, boolean z) throws RemoteException;
 
-    boolean navigateUpTo(IBinder iBinder, Intent intent, String str, int i, Intent intent2) throws RemoteException;
+    boolean navigateUpTo(IBinder iBinder, Intent intent, String str, int i, Intent intent2)
+            throws RemoteException;
 
-    void onBackPressed(IBinder iBinder, IRequestFinishCallback iRequestFinishCallback) throws RemoteException;
+    void onBackPressed(IBinder iBinder, IRequestFinishCallback iRequestFinishCallback)
+            throws RemoteException;
 
-    void overrideActivityTransition(IBinder iBinder, boolean z, int i, int i2, int i3) throws RemoteException;
+    void overrideActivityTransition(IBinder iBinder, boolean z, int i, int i2, int i3)
+            throws RemoteException;
 
-    void overridePendingTaskTransition(IBinder iBinder, String str, int i, int i2) throws RemoteException;
+    void overridePendingTaskTransition(IBinder iBinder, String str, int i, int i2)
+            throws RemoteException;
 
-    void overridePendingTransition(IBinder iBinder, String str, int i, int i2, int i3) throws RemoteException;
+    void overridePendingTransition(IBinder iBinder, String str, int i, int i2, int i3)
+            throws RemoteException;
 
-    void registerRemoteAnimations(IBinder iBinder, RemoteAnimationDefinition remoteAnimationDefinition) throws RemoteException;
+    void registerRemoteAnimations(
+            IBinder iBinder, RemoteAnimationDefinition remoteAnimationDefinition)
+            throws RemoteException;
 
     boolean releaseActivityInstance(IBinder iBinder) throws RemoteException;
 
     void reportActivityFullyDrawn(IBinder iBinder, boolean z) throws RemoteException;
 
-    void reportSizeConfigurations(IBinder iBinder, SizeConfigurationBuckets sizeConfigurationBuckets) throws RemoteException;
+    void reportSizeConfigurations(
+            IBinder iBinder, SizeConfigurationBuckets sizeConfigurationBuckets)
+            throws RemoteException;
 
-    void requestMultiwindowFullscreen(IBinder iBinder, int i, IRemoteCallback iRemoteCallback) throws RemoteException;
+    void requestMultiwindowFullscreen(IBinder iBinder, int i, IRemoteCallback iRemoteCallback)
+            throws RemoteException;
 
     void setActivityRecordInputSinkEnabled(IBinder iBinder, boolean z) throws RemoteException;
 
@@ -130,7 +154,8 @@ public interface IActivityClientController extends IInterface {
 
     void setInheritShowWhenLocked(IBinder iBinder, boolean z) throws RemoteException;
 
-    void setPictureInPictureParams(IBinder iBinder, PictureInPictureParams pictureInPictureParams) throws RemoteException;
+    void setPictureInPictureParams(IBinder iBinder, PictureInPictureParams pictureInPictureParams)
+            throws RemoteException;
 
     void setRecentsScreenshotEnabled(IBinder iBinder, boolean z) throws RemoteException;
 
@@ -140,7 +165,8 @@ public interface IActivityClientController extends IInterface {
 
     void setShowWhenLocked(IBinder iBinder, boolean z) throws RemoteException;
 
-    void setTaskDescription(IBinder iBinder, ActivityManager.TaskDescription taskDescription) throws RemoteException;
+    void setTaskDescription(IBinder iBinder, ActivityManager.TaskDescription taskDescription)
+            throws RemoteException;
 
     void setTurnScreenOn(IBinder iBinder, boolean z) throws RemoteException;
 
@@ -170,57 +196,64 @@ public interface IActivityClientController extends IInterface {
 
     public static class Default implements IActivityClientController {
         @Override // android.app.IActivityClientController
-        public void activityIdle(IBinder token, Configuration config, boolean stopProfiling) throws RemoteException {
-        }
+        public void activityIdle(IBinder token, Configuration config, boolean stopProfiling)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void activityResumed(IBinder token, boolean handleSplashScreenExit) throws RemoteException {
-        }
+        public void activityResumed(IBinder token, boolean handleSplashScreenExit)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void activityRefreshed(IBinder token) throws RemoteException {
-        }
+        public void activityRefreshed(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void activityTopResumedStateLost() throws RemoteException {
-        }
+        public void activityTopResumedStateLost() throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void activityPaused(IBinder token) throws RemoteException {
-        }
+        public void activityPaused(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void activityStopped(IBinder token, Bundle state, PersistableBundle persistentState, CharSequence description) throws RemoteException {
-        }
+        public void activityStopped(
+                IBinder token,
+                Bundle state,
+                PersistableBundle persistentState,
+                CharSequence description)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void activityDestroyed(IBinder token) throws RemoteException {
-        }
+        public void activityDestroyed(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void activityLocalRelaunch(IBinder token) throws RemoteException {
-        }
+        public void activityLocalRelaunch(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void activityRelaunched(IBinder token) throws RemoteException {
-        }
+        public void activityRelaunched(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void reportSizeConfigurations(IBinder token, SizeConfigurationBuckets sizeConfigurations) throws RemoteException {
-        }
+        public void reportSizeConfigurations(
+                IBinder token, SizeConfigurationBuckets sizeConfigurations)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public boolean moveActivityTaskToBack(IBinder token, boolean nonRoot) throws RemoteException {
+        public boolean moveActivityTaskToBack(IBinder token, boolean nonRoot)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityClientController
-        public boolean shouldUpRecreateTask(IBinder token, String destAffinity) throws RemoteException {
+        public boolean shouldUpRecreateTask(IBinder token, String destAffinity)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityClientController
-        public boolean navigateUpTo(IBinder token, Intent target, String resolvedType, int resultCode, Intent resultData) throws RemoteException {
+        public boolean navigateUpTo(
+                IBinder token,
+                Intent target,
+                String resolvedType,
+                int resultCode,
+                Intent resultData)
+                throws RemoteException {
             return false;
         }
 
@@ -230,7 +263,8 @@ public interface IActivityClientController extends IInterface {
         }
 
         @Override // android.app.IActivityClientController
-        public boolean finishActivity(IBinder token, int code, Intent data, int finishTask) throws RemoteException {
+        public boolean finishActivity(IBinder token, int code, Intent data, int finishTask)
+                throws RemoteException {
             return false;
         }
 
@@ -240,12 +274,11 @@ public interface IActivityClientController extends IInterface {
         }
 
         @Override // android.app.IActivityClientController
-        public void finishSubActivity(IBinder token, String resultWho, int requestCode) throws RemoteException {
-        }
+        public void finishSubActivity(IBinder token, String resultWho, int requestCode)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void setForceSendResultForMediaProjection(IBinder token) throws RemoteException {
-        }
+        public void setForceSendResultForMediaProjection(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
         public boolean isTopOfTask(IBinder token) throws RemoteException {
@@ -293,7 +326,8 @@ public interface IActivityClientController extends IInterface {
         }
 
         @Override // android.app.IActivityClientController
-        public int getActivityCallerUid(IBinder activityToken, IBinder callerToken) throws RemoteException {
+        public int getActivityCallerUid(IBinder activityToken, IBinder callerToken)
+                throws RemoteException {
             return 0;
         }
 
@@ -303,18 +337,21 @@ public interface IActivityClientController extends IInterface {
         }
 
         @Override // android.app.IActivityClientController
-        public String getActivityCallerPackage(IBinder activityToken, IBinder callerToken) throws RemoteException {
+        public String getActivityCallerPackage(IBinder activityToken, IBinder callerToken)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityClientController
-        public int checkActivityCallerContentUriPermission(IBinder activityToken, IBinder callerToken, Uri uri, int modeFlags, int userId) throws RemoteException {
+        public int checkActivityCallerContentUriPermission(
+                IBinder activityToken, IBinder callerToken, Uri uri, int modeFlags, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityClientController
-        public void setRequestedOrientation(IBinder token, int requestedOrientation) throws RemoteException {
-        }
+        public void setRequestedOrientation(IBinder token, int requestedOrientation)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
         public int getRequestedOrientation(IBinder token) throws RemoteException {
@@ -337,45 +374,41 @@ public interface IActivityClientController extends IInterface {
         }
 
         @Override // android.app.IActivityClientController
-        public void setImmersive(IBinder token, boolean immersive) throws RemoteException {
-        }
+        public void setImmersive(IBinder token, boolean immersive) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public boolean enterPictureInPictureMode(IBinder token, PictureInPictureParams params) throws RemoteException {
+        public boolean enterPictureInPictureMode(IBinder token, PictureInPictureParams params)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityClientController
-        public void setPictureInPictureParams(IBinder token, PictureInPictureParams params) throws RemoteException {
-        }
+        public void setPictureInPictureParams(IBinder token, PictureInPictureParams params)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void setShouldDockBigOverlays(IBinder token, boolean shouldDockBigOverlays) throws RemoteException {
-        }
+        public void setShouldDockBigOverlays(IBinder token, boolean shouldDockBigOverlays)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void toggleFreeformWindowingMode(IBinder token) throws RemoteException {
-        }
+        public void toggleFreeformWindowingMode(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void requestMultiwindowFullscreen(IBinder token, int request, IRemoteCallback callback) throws RemoteException {
-        }
+        public void requestMultiwindowFullscreen(
+                IBinder token, int request, IRemoteCallback callback) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void startLockTaskModeByToken(IBinder token) throws RemoteException {
-        }
+        public void startLockTaskModeByToken(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void stopLockTaskModeByToken(IBinder token) throws RemoteException {
-        }
+        public void stopLockTaskModeByToken(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void showLockTaskEscapeMessage(IBinder token) throws RemoteException {
-        }
+        public void showLockTaskEscapeMessage(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void setTaskDescription(IBinder token, ActivityManager.TaskDescription values) throws RemoteException {
-        }
+        public void setTaskDescription(IBinder token, ActivityManager.TaskDescription values)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
         public boolean showAssistFromActivity(IBinder token, Bundle args) throws RemoteException {
@@ -388,103 +421,105 @@ public interface IActivityClientController extends IInterface {
         }
 
         @Override // android.app.IActivityClientController
-        public void startLocalVoiceInteraction(IBinder token, Bundle options) throws RemoteException {
-        }
+        public void startLocalVoiceInteraction(IBinder token, Bundle options)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void stopLocalVoiceInteraction(IBinder token) throws RemoteException {
-        }
+        public void stopLocalVoiceInteraction(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void setShowWhenLocked(IBinder token, boolean showWhenLocked) throws RemoteException {
-        }
+        public void setShowWhenLocked(IBinder token, boolean showWhenLocked)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void setInheritShowWhenLocked(IBinder token, boolean setInheritShownWhenLocked) throws RemoteException {
-        }
+        public void setInheritShowWhenLocked(IBinder token, boolean setInheritShownWhenLocked)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void setTurnScreenOn(IBinder token, boolean turnScreenOn) throws RemoteException {
-        }
+        public void setTurnScreenOn(IBinder token, boolean turnScreenOn) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void setAllowCrossUidActivitySwitchFromBelow(IBinder token, boolean allowed) throws RemoteException {
-        }
+        public void setAllowCrossUidActivitySwitchFromBelow(IBinder token, boolean allowed)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void reportActivityFullyDrawn(IBinder token, boolean restoredFromBundle) throws RemoteException {
-        }
+        public void reportActivityFullyDrawn(IBinder token, boolean restoredFromBundle)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void overrideActivityTransition(IBinder token, boolean open, int enterAnim, int exitAnim, int backgroundColor) throws RemoteException {
-        }
+        public void overrideActivityTransition(
+                IBinder token, boolean open, int enterAnim, int exitAnim, int backgroundColor)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void clearOverrideActivityTransition(IBinder token, boolean open) throws RemoteException {
-        }
+        public void clearOverrideActivityTransition(IBinder token, boolean open)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void overridePendingTransition(IBinder token, String packageName, int enterAnim, int exitAnim, int backgroundColor) throws RemoteException {
-        }
+        public void overridePendingTransition(
+                IBinder token, String packageName, int enterAnim, int exitAnim, int backgroundColor)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public int setVrMode(IBinder token, boolean enabled, ComponentName packageName) throws RemoteException {
+        public int setVrMode(IBinder token, boolean enabled, ComponentName packageName)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityClientController
-        public void setRecentsScreenshotEnabled(IBinder token, boolean enabled) throws RemoteException {
-        }
+        public void setRecentsScreenshotEnabled(IBinder token, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void invalidateHomeTaskSnapshot(IBinder homeToken) throws RemoteException {
-        }
+        public void invalidateHomeTaskSnapshot(IBinder homeToken) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void dismissKeyguard(IBinder token, IKeyguardDismissCallback callback, CharSequence message) throws RemoteException {
-        }
+        public void dismissKeyguard(
+                IBinder token, IKeyguardDismissCallback callback, CharSequence message)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void registerRemoteAnimations(IBinder token, RemoteAnimationDefinition definition) throws RemoteException {
-        }
+        public void registerRemoteAnimations(IBinder token, RemoteAnimationDefinition definition)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void unregisterRemoteAnimations(IBinder token) throws RemoteException {
-        }
+        public void unregisterRemoteAnimations(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void onBackPressed(IBinder activityToken, IRequestFinishCallback callback) throws RemoteException {
-        }
+        public void onBackPressed(IBinder activityToken, IRequestFinishCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void splashScreenAttached(IBinder token) throws RemoteException {
-        }
+        public void splashScreenAttached(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void enableTaskLocaleOverride(IBinder token) throws RemoteException {
-        }
+        public void enableTaskLocaleOverride(IBinder token) throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public boolean isRequestedToLaunchInTaskFragment(IBinder activityToken, IBinder taskFragmentToken) throws RemoteException {
+        public boolean isRequestedToLaunchInTaskFragment(
+                IBinder activityToken, IBinder taskFragmentToken) throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityClientController
-        public void setActivityRecordInputSinkEnabled(IBinder activityToken, boolean enabled) throws RemoteException {
-        }
+        public void setActivityRecordInputSinkEnabled(IBinder activityToken, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public boolean convertFromTranslucentOp(IBinder token, boolean skipSetWindowOpaque) throws RemoteException {
+        public boolean convertFromTranslucentOp(IBinder token, boolean skipSetWindowOpaque)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityClientController
-        public void overridePendingTaskTransition(IBinder token, String packageName, int enterAnim, int exitAnim) throws RemoteException {
-        }
+        public void overridePendingTaskTransition(
+                IBinder token, String packageName, int enterAnim, int exitAnim)
+                throws RemoteException {}
 
         @Override // android.app.IActivityClientController
-        public void adjustPopOverOptions(IBinder token, int[] widthDp, int[] heightDp, Point[] marginDp, int[] position) throws RemoteException {
-        }
+        public void adjustPopOverOptions(
+                IBinder token, int[] widthDp, int[] heightDp, Point[] marginDp, int[] position)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -492,7 +527,7 @@ public interface IActivityClientController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityClientController {
+    public abstract static class Stub extends Binder implements IActivityClientController {
         static final int TRANSACTION_activityDestroyed = 7;
         static final int TRANSACTION_activityIdle = 1;
         static final int TRANSACTION_activityLocalRelaunch = 8;
@@ -743,7 +778,8 @@ public interface IActivityClientController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IActivityClientController.DESCRIPTOR);
             }
@@ -754,7 +790,8 @@ public interface IActivityClientController extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    Configuration _arg1 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg1 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     boolean _arg2 = data.readBoolean();
                     data.enforceNoDataAvail();
                     activityIdle(_arg0, _arg1, _arg2);
@@ -783,8 +820,10 @@ public interface IActivityClientController extends IInterface {
                 case 6:
                     IBinder _arg05 = data.readStrongBinder();
                     Bundle _arg13 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    PersistableBundle _arg22 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
-                    CharSequence _arg3 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    PersistableBundle _arg22 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    CharSequence _arg3 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     activityStopped(_arg05, _arg13, _arg22, _arg3);
                     return true;
@@ -805,7 +844,9 @@ public interface IActivityClientController extends IInterface {
                     return true;
                 case 10:
                     IBinder _arg09 = data.readStrongBinder();
-                    SizeConfigurationBuckets _arg14 = (SizeConfigurationBuckets) data.readTypedObject(SizeConfigurationBuckets.CREATOR);
+                    SizeConfigurationBuckets _arg14 =
+                            (SizeConfigurationBuckets)
+                                    data.readTypedObject(SizeConfigurationBuckets.CREATOR);
                     data.enforceNoDataAvail();
                     reportSizeConfigurations(_arg09, _arg14);
                     return true;
@@ -968,7 +1009,9 @@ public interface IActivityClientController extends IInterface {
                     int _arg34 = data.readInt();
                     int _arg42 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result19 = checkActivityCallerContentUriPermission(_arg030, _arg113, _arg26, _arg34, _arg42);
+                    int _result19 =
+                            checkActivityCallerContentUriPermission(
+                                    _arg030, _arg113, _arg26, _arg34, _arg42);
                     reply.writeNoException();
                     reply.writeInt(_result19);
                     return true;
@@ -1017,7 +1060,9 @@ public interface IActivityClientController extends IInterface {
                     return true;
                 case 38:
                     IBinder _arg037 = data.readStrongBinder();
-                    PictureInPictureParams _arg117 = (PictureInPictureParams) data.readTypedObject(PictureInPictureParams.CREATOR);
+                    PictureInPictureParams _arg117 =
+                            (PictureInPictureParams)
+                                    data.readTypedObject(PictureInPictureParams.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result24 = enterPictureInPictureMode(_arg037, _arg117);
                     reply.writeNoException();
@@ -1025,7 +1070,9 @@ public interface IActivityClientController extends IInterface {
                     return true;
                 case 39:
                     IBinder _arg038 = data.readStrongBinder();
-                    PictureInPictureParams _arg118 = (PictureInPictureParams) data.readTypedObject(PictureInPictureParams.CREATOR);
+                    PictureInPictureParams _arg118 =
+                            (PictureInPictureParams)
+                                    data.readTypedObject(PictureInPictureParams.CREATOR);
                     data.enforceNoDataAvail();
                     setPictureInPictureParams(_arg038, _arg118);
                     reply.writeNoException();
@@ -1045,7 +1092,8 @@ public interface IActivityClientController extends IInterface {
                 case 42:
                     IBinder _arg041 = data.readStrongBinder();
                     int _arg120 = data.readInt();
-                    IRemoteCallback _arg27 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg27 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestMultiwindowFullscreen(_arg041, _arg120, _arg27);
                     return true;
@@ -1066,7 +1114,9 @@ public interface IActivityClientController extends IInterface {
                     return true;
                 case 46:
                     IBinder _arg045 = data.readStrongBinder();
-                    ActivityManager.TaskDescription _arg121 = (ActivityManager.TaskDescription) data.readTypedObject(ActivityManager.TaskDescription.CREATOR);
+                    ActivityManager.TaskDescription _arg121 =
+                            (ActivityManager.TaskDescription)
+                                    data.readTypedObject(ActivityManager.TaskDescription.CREATOR);
                     data.enforceNoDataAvail();
                     setTaskDescription(_arg045, _arg121);
                     reply.writeNoException();
@@ -1158,7 +1208,8 @@ public interface IActivityClientController extends IInterface {
                 case 59:
                     IBinder _arg058 = data.readStrongBinder();
                     boolean _arg132 = data.readBoolean();
-                    ComponentName _arg210 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg210 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int _result27 = setVrMode(_arg058, _arg132, _arg210);
                     reply.writeNoException();
@@ -1178,15 +1229,19 @@ public interface IActivityClientController extends IInterface {
                     return true;
                 case 62:
                     IBinder _arg061 = data.readStrongBinder();
-                    IKeyguardDismissCallback _arg134 = IKeyguardDismissCallback.Stub.asInterface(data.readStrongBinder());
-                    CharSequence _arg211 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    IKeyguardDismissCallback _arg134 =
+                            IKeyguardDismissCallback.Stub.asInterface(data.readStrongBinder());
+                    CharSequence _arg211 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     dismissKeyguard(_arg061, _arg134, _arg211);
                     reply.writeNoException();
                     return true;
                 case 63:
                     IBinder _arg062 = data.readStrongBinder();
-                    RemoteAnimationDefinition _arg135 = (RemoteAnimationDefinition) data.readTypedObject(RemoteAnimationDefinition.CREATOR);
+                    RemoteAnimationDefinition _arg135 =
+                            (RemoteAnimationDefinition)
+                                    data.readTypedObject(RemoteAnimationDefinition.CREATOR);
                     data.enforceNoDataAvail();
                     registerRemoteAnimations(_arg062, _arg135);
                     reply.writeNoException();
@@ -1199,7 +1254,8 @@ public interface IActivityClientController extends IInterface {
                     return true;
                 case 65:
                     IBinder _arg064 = data.readStrongBinder();
-                    IRequestFinishCallback _arg136 = IRequestFinishCallback.Stub.asInterface(data.readStrongBinder());
+                    IRequestFinishCallback _arg136 =
+                            IRequestFinishCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onBackPressed(_arg064, _arg136);
                     return true;
@@ -1277,7 +1333,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void activityIdle(IBinder token, Configuration config, boolean stopProfiling) throws RemoteException {
+            public void activityIdle(IBinder token, Configuration config, boolean stopProfiling)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -1291,7 +1348,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void activityResumed(IBinder token, boolean handleSplashScreenExit) throws RemoteException {
+            public void activityResumed(IBinder token, boolean handleSplashScreenExit)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -1345,7 +1403,12 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void activityStopped(IBinder token, Bundle state, PersistableBundle persistentState, CharSequence description) throws RemoteException {
+            public void activityStopped(
+                    IBinder token,
+                    Bundle state,
+                    PersistableBundle persistentState,
+                    CharSequence description)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -1401,7 +1464,9 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void reportSizeConfigurations(IBinder token, SizeConfigurationBuckets sizeConfigurations) throws RemoteException {
+            public void reportSizeConfigurations(
+                    IBinder token, SizeConfigurationBuckets sizeConfigurations)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -1414,7 +1479,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean moveActivityTaskToBack(IBinder token, boolean nonRoot) throws RemoteException {
+            public boolean moveActivityTaskToBack(IBinder token, boolean nonRoot)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1432,7 +1498,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean shouldUpRecreateTask(IBinder token, String destAffinity) throws RemoteException {
+            public boolean shouldUpRecreateTask(IBinder token, String destAffinity)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1450,7 +1517,13 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean navigateUpTo(IBinder token, Intent target, String resolvedType, int resultCode, Intent resultData) throws RemoteException {
+            public boolean navigateUpTo(
+                    IBinder token,
+                    Intent target,
+                    String resolvedType,
+                    int resultCode,
+                    Intent resultData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1488,7 +1561,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean finishActivity(IBinder token, int code, Intent data, int finishTask) throws RemoteException {
+            public boolean finishActivity(IBinder token, int code, Intent data, int finishTask)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1525,7 +1599,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void finishSubActivity(IBinder token, String resultWho, int requestCode) throws RemoteException {
+            public void finishSubActivity(IBinder token, String resultWho, int requestCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1626,7 +1701,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public Configuration getTaskConfiguration(IBinder activityToken) throws RemoteException {
+            public Configuration getTaskConfiguration(IBinder activityToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1634,7 +1710,8 @@ public interface IActivityClientController extends IInterface {
                     _data.writeStrongBinder(activityToken);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    Configuration _result = (Configuration) _reply.readTypedObject(Configuration.CREATOR);
+                    Configuration _result =
+                            (Configuration) _reply.readTypedObject(Configuration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1668,7 +1745,8 @@ public interface IActivityClientController extends IInterface {
                     _data.writeStrongBinder(token);
                     this.mRemote.transact(25, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1711,7 +1789,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public int getActivityCallerUid(IBinder activityToken, IBinder callerToken) throws RemoteException {
+            public int getActivityCallerUid(IBinder activityToken, IBinder callerToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1746,7 +1825,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public String getActivityCallerPackage(IBinder activityToken, IBinder callerToken) throws RemoteException {
+            public String getActivityCallerPackage(IBinder activityToken, IBinder callerToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1764,7 +1844,9 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public int checkActivityCallerContentUriPermission(IBinder activityToken, IBinder callerToken, Uri uri, int modeFlags, int userId) throws RemoteException {
+            public int checkActivityCallerContentUriPermission(
+                    IBinder activityToken, IBinder callerToken, Uri uri, int modeFlags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1785,7 +1867,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setRequestedOrientation(IBinder token, int requestedOrientation) throws RemoteException {
+            public void setRequestedOrientation(IBinder token, int requestedOrientation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1835,7 +1918,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean convertToTranslucent(IBinder token, Bundle options) throws RemoteException {
+            public boolean convertToTranslucent(IBinder token, Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1886,7 +1970,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean enterPictureInPictureMode(IBinder token, PictureInPictureParams params) throws RemoteException {
+            public boolean enterPictureInPictureMode(IBinder token, PictureInPictureParams params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1904,7 +1989,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setPictureInPictureParams(IBinder token, PictureInPictureParams params) throws RemoteException {
+            public void setPictureInPictureParams(IBinder token, PictureInPictureParams params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1920,7 +2006,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setShouldDockBigOverlays(IBinder token, boolean shouldDockBigOverlays) throws RemoteException {
+            public void setShouldDockBigOverlays(IBinder token, boolean shouldDockBigOverlays)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -1948,7 +2035,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void requestMultiwindowFullscreen(IBinder token, int request, IRemoteCallback callback) throws RemoteException {
+            public void requestMultiwindowFullscreen(
+                    IBinder token, int request, IRemoteCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -1998,7 +2086,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setTaskDescription(IBinder token, ActivityManager.TaskDescription values) throws RemoteException {
+            public void setTaskDescription(IBinder token, ActivityManager.TaskDescription values)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2014,7 +2103,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean showAssistFromActivity(IBinder token, Bundle args) throws RemoteException {
+            public boolean showAssistFromActivity(IBinder token, Bundle args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2049,7 +2139,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void startLocalVoiceInteraction(IBinder token, Bundle options) throws RemoteException {
+            public void startLocalVoiceInteraction(IBinder token, Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2080,7 +2171,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setShowWhenLocked(IBinder token, boolean showWhenLocked) throws RemoteException {
+            public void setShowWhenLocked(IBinder token, boolean showWhenLocked)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2093,7 +2185,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setInheritShowWhenLocked(IBinder token, boolean setInheritShownWhenLocked) throws RemoteException {
+            public void setInheritShowWhenLocked(IBinder token, boolean setInheritShownWhenLocked)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2106,7 +2199,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setTurnScreenOn(IBinder token, boolean turnScreenOn) throws RemoteException {
+            public void setTurnScreenOn(IBinder token, boolean turnScreenOn)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2122,7 +2216,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setAllowCrossUidActivitySwitchFromBelow(IBinder token, boolean allowed) throws RemoteException {
+            public void setAllowCrossUidActivitySwitchFromBelow(IBinder token, boolean allowed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2135,7 +2230,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void reportActivityFullyDrawn(IBinder token, boolean restoredFromBundle) throws RemoteException {
+            public void reportActivityFullyDrawn(IBinder token, boolean restoredFromBundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2148,7 +2244,9 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void overrideActivityTransition(IBinder token, boolean open, int enterAnim, int exitAnim, int backgroundColor) throws RemoteException {
+            public void overrideActivityTransition(
+                    IBinder token, boolean open, int enterAnim, int exitAnim, int backgroundColor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2164,7 +2262,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void clearOverrideActivityTransition(IBinder token, boolean open) throws RemoteException {
+            public void clearOverrideActivityTransition(IBinder token, boolean open)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2177,7 +2276,13 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void overridePendingTransition(IBinder token, String packageName, int enterAnim, int exitAnim, int backgroundColor) throws RemoteException {
+            public void overridePendingTransition(
+                    IBinder token,
+                    String packageName,
+                    int enterAnim,
+                    int exitAnim,
+                    int backgroundColor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2196,7 +2301,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public int setVrMode(IBinder token, boolean enabled, ComponentName packageName) throws RemoteException {
+            public int setVrMode(IBinder token, boolean enabled, ComponentName packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2215,7 +2321,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setRecentsScreenshotEnabled(IBinder token, boolean enabled) throws RemoteException {
+            public void setRecentsScreenshotEnabled(IBinder token, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2243,7 +2350,9 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void dismissKeyguard(IBinder token, IKeyguardDismissCallback callback, CharSequence message) throws RemoteException {
+            public void dismissKeyguard(
+                    IBinder token, IKeyguardDismissCallback callback, CharSequence message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2265,7 +2374,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void registerRemoteAnimations(IBinder token, RemoteAnimationDefinition definition) throws RemoteException {
+            public void registerRemoteAnimations(
+                    IBinder token, RemoteAnimationDefinition definition) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2296,7 +2406,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void onBackPressed(IBinder activityToken, IRequestFinishCallback callback) throws RemoteException {
+            public void onBackPressed(IBinder activityToken, IRequestFinishCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2336,7 +2447,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean isRequestedToLaunchInTaskFragment(IBinder activityToken, IBinder taskFragmentToken) throws RemoteException {
+            public boolean isRequestedToLaunchInTaskFragment(
+                    IBinder activityToken, IBinder taskFragmentToken) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2354,7 +2466,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void setActivityRecordInputSinkEnabled(IBinder activityToken, boolean enabled) throws RemoteException {
+            public void setActivityRecordInputSinkEnabled(IBinder activityToken, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityClientController.DESCRIPTOR);
@@ -2367,7 +2480,8 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public boolean convertFromTranslucentOp(IBinder token, boolean skipSetWindowOpaque) throws RemoteException {
+            public boolean convertFromTranslucentOp(IBinder token, boolean skipSetWindowOpaque)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2385,7 +2499,9 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void overridePendingTaskTransition(IBinder token, String packageName, int enterAnim, int exitAnim) throws RemoteException {
+            public void overridePendingTaskTransition(
+                    IBinder token, String packageName, int enterAnim, int exitAnim)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2403,7 +2519,9 @@ public interface IActivityClientController extends IInterface {
             }
 
             @Override // android.app.IActivityClientController
-            public void adjustPopOverOptions(IBinder token, int[] widthDp, int[] heightDp, Point[] marginDp, int[] position) throws RemoteException {
+            public void adjustPopOverOptions(
+                    IBinder token, int[] widthDp, int[] heightDp, Point[] marginDp, int[] position)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

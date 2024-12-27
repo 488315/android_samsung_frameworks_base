@@ -199,7 +199,17 @@ public class ProgramStore extends BaseObj {
 
         public ProgramStore create() {
             this.mRS.validate();
-            long id = this.mRS.nProgramStoreCreate(this.mColorMaskR, this.mColorMaskG, this.mColorMaskB, this.mColorMaskA, this.mDepthMask, this.mDither, this.mBlendSrc.mID, this.mBlendDst.mID, this.mDepthFunc.mID);
+            long id =
+                    this.mRS.nProgramStoreCreate(
+                            this.mColorMaskR,
+                            this.mColorMaskG,
+                            this.mColorMaskB,
+                            this.mColorMaskA,
+                            this.mDepthMask,
+                            this.mDither,
+                            this.mBlendSrc.mID,
+                            this.mBlendDst.mID,
+                            this.mDepthFunc.mID);
             ProgramStore programStore = new ProgramStore(id, this.mRS);
             programStore.mDepthFunc = this.mDepthFunc;
             programStore.mDepthMask = this.mDepthMask;

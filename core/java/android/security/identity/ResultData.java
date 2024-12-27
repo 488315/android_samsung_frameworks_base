@@ -16,8 +16,7 @@ public abstract class ResultData {
     public static final int STATUS_USER_AUTHENTICATION_FAILED = 4;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     public abstract byte[] getAuthenticatedData();
 
@@ -35,8 +34,7 @@ public abstract class ResultData {
 
     public abstract int getStatus(String str, String str2);
 
-    protected ResultData() {
-    }
+    protected ResultData() {}
 
     byte[] getSignature() {
         throw new UnsupportedOperationException();

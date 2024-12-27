@@ -4,24 +4,27 @@ import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SharedMemory;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.io.IOException;
 
 /* loaded from: classes3.dex */
 public final class AdBuffer implements Parcelable {
-    public static final Parcelable.Creator<AdBuffer> CREATOR = new Parcelable.Creator<AdBuffer>() { // from class: android.media.tv.AdBuffer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AdBuffer[] newArray(int size) {
-            return new AdBuffer[size];
-        }
+    public static final Parcelable.Creator<AdBuffer> CREATOR =
+            new Parcelable.Creator<AdBuffer>() { // from class: android.media.tv.AdBuffer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AdBuffer[] newArray(int size) {
+                    return new AdBuffer[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AdBuffer createFromParcel(Parcel in) {
-            return new AdBuffer(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AdBuffer createFromParcel(Parcel in) {
+                    return new AdBuffer(in);
+                }
+            };
     private final SharedMemory mBuffer;
     private final int mFlags;
     private final int mId;
@@ -30,12 +33,21 @@ public final class AdBuffer implements Parcelable {
     private final int mOffset;
     private final long mPresentationTimeUs;
 
-    public AdBuffer(int id, String mimeType, SharedMemory buffer, int offset, int length, long presentationTimeUs, int flags) {
+    public AdBuffer(
+            int id,
+            String mimeType,
+            SharedMemory buffer,
+            int offset,
+            int length,
+            long presentationTimeUs,
+            int flags) {
         this.mId = id;
         this.mMimeType = mimeType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) mimeType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) mimeType);
         this.mBuffer = buffer;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) buffer);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) buffer);
         this.mOffset = offset;
         this.mLength = length;
         this.mPresentationTimeUs = presentationTimeUs;
@@ -46,7 +58,14 @@ public final class AdBuffer implements Parcelable {
         if (buffer == null) {
             return null;
         }
-        return new AdBuffer(buffer.mId, buffer.mMimeType, SharedMemory.fromFileDescriptor(buffer.mBuffer.getFdDup()), buffer.mOffset, buffer.mLength, buffer.mPresentationTimeUs, buffer.mFlags);
+        return new AdBuffer(
+                buffer.mId,
+                buffer.mMimeType,
+                SharedMemory.fromFileDescriptor(buffer.mBuffer.getFdDup()),
+                buffer.mOffset,
+                buffer.mLength,
+                buffer.mPresentationTimeUs,
+                buffer.mFlags);
     }
 
     public int getId() {
@@ -103,9 +122,11 @@ public final class AdBuffer implements Parcelable {
         int flags = in.readInt();
         this.mId = id;
         this.mMimeType = mimeType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMimeType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMimeType);
         this.mBuffer = buffer;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBuffer);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBuffer);
         this.mOffset = offset;
         this.mLength = length;
         this.mPresentationTimeUs = presentationTimeUs;

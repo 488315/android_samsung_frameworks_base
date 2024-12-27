@@ -30,7 +30,8 @@ public class AudioSolution {
 
     public native int VSPExe_buffered(long j, byte[] bArr, byte[] bArr2, int i);
 
-    public native int VSPExe_buffered2(long j, ByteBuffer byteBuffer, ByteBuffer byteBuffer2, int i);
+    public native int VSPExe_buffered2(
+            long j, ByteBuffer byteBuffer, ByteBuffer byteBuffer2, int i);
 
     public native void VSPInit(long j, int i, int i2);
 

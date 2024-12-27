@@ -29,6 +29,7 @@ public final class Category {
     }
 
     public final String toString() {
-        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder("Category{"), this.mName, "}");
+        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                new StringBuilder("Category{"), this.mName, "}");
     }
 }

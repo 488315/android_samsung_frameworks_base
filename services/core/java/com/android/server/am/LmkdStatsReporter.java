@@ -1,7 +1,9 @@
 package com.android.server.am;
 
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 
@@ -62,7 +64,10 @@ public abstract class LmkdStatsReporter {
                     i3 = 0;
                     break;
             }
-            FrameworkStatsLog.write(51, readInt, readUTF, readInt2, readLong, readLong2, readLong3, readLong4, readLong5, readLong6, readInt3, readInt4, readInt5, i3, readInt7, readInt8, i, i2);
+            FrameworkStatsLog.write(
+                    51, readInt, readUTF, readInt2, readLong, readLong2, readLong3, readLong4,
+                    readLong5, readLong6, readInt3, readInt4, readInt5, i3, readInt7, readInt8, i,
+                    i2);
             SecLmkdStats.noteLmkKillOccurred(readInt2, readInt9, readInt6);
         } catch (IOException unused) {
             Slog.e("ActivityManager", "Invalid buffer data. Failed to log LMK_KILL_OCCURRED");

@@ -1,8 +1,8 @@
 package com.android.server.desktopmode;
 
-import com.android.server.desktopmode.PendingUiCommands;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.DesktopModeUiConstants;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +22,8 @@ public final class PendingUiCommands {
         public int mWhere;
 
         public static boolean hasSameNotificationId(int i, int i2) {
-            if (!DesktopModeUiConstants.isNotificationType(i) || !DesktopModeUiConstants.isNotificationType(i2)) {
+            if (!DesktopModeUiConstants.isNotificationType(i)
+                    || !DesktopModeUiConstants.isNotificationType(i2)) {
                 return false;
             }
             int notificationId = DesktopModeUiConstants.getNotificationId(i2);
@@ -38,15 +39,26 @@ public final class PendingUiCommands {
                 return false;
             }
             UiCommand uiCommand = (UiCommand) obj;
-            return this.mCommand == uiCommand.mCommand && this.mType == uiCommand.mType && this.mWhere == uiCommand.mWhere;
+            return this.mCommand == uiCommand.mCommand
+                    && this.mType == uiCommand.mType
+                    && this.mWhere == uiCommand.mWhere;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mCommand), Integer.valueOf(this.mType), Integer.valueOf(this.mWhere));
+            return Objects.hash(
+                    Integer.valueOf(this.mCommand),
+                    Integer.valueOf(this.mType),
+                    Integer.valueOf(this.mWhere));
         }
 
         public final String toString() {
-            return "UiCommand(" + DesktopModeUiConstants.commandToString(this.mCommand) + ", " + DesktopModeUiConstants.typeToString(this.mType) + ", " + DesktopModeUiConstants.whereToString(this.mWhere) + ')';
+            return "UiCommand("
+                    + DesktopModeUiConstants.commandToString(this.mCommand)
+                    + ", "
+                    + DesktopModeUiConstants.typeToString(this.mType)
+                    + ", "
+                    + DesktopModeUiConstants.whereToString(this.mWhere)
+                    + ')';
         }
     }
 
@@ -70,26 +82,36 @@ public final class PendingUiCommands {
         uiCommand.mRunnable = runnable;
         if (i != 900) {
             if (i == 901) {
-                removeCommandsIf(new Function() { // from class: com.android.server.desktopmode.PendingUiCommands$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        boolean z;
-                        int i4;
-                        int i5;
-                        PendingUiCommands.UiCommand uiCommand2 = PendingUiCommands.UiCommand.this;
-                        PendingUiCommands.UiCommand uiCommand3 = (PendingUiCommands.UiCommand) obj;
-                        if (uiCommand3.mCommand == 900 && uiCommand2.mCommand == 901 && ((i4 = uiCommand3.mType) == (i5 = uiCommand2.mType) || ((Math.abs(i4 - i5) < 100 && (i5 == 0 || i5 == 111)) || PendingUiCommands.UiCommand.hasSameNotificationId(i4, i5)))) {
-                            int i6 = uiCommand3.mWhere;
-                            int i7 = uiCommand2.mWhere;
-                            if (i6 == i7 || i7 == -1 || i7 == 100 || i7 == 101) {
-                                z = true;
+                removeCommandsIf(
+                        new Function() { // from class:
+                                         // com.android.server.desktopmode.PendingUiCommands$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                boolean z;
+                                int i4;
+                                int i5;
+                                PendingUiCommands.UiCommand uiCommand2 =
+                                        PendingUiCommands.UiCommand.this;
+                                PendingUiCommands.UiCommand uiCommand3 =
+                                        (PendingUiCommands.UiCommand) obj;
+                                if (uiCommand3.mCommand == 900
+                                        && uiCommand2.mCommand == 901
+                                        && ((i4 = uiCommand3.mType) == (i5 = uiCommand2.mType)
+                                                || ((Math.abs(i4 - i5) < 100
+                                                                && (i5 == 0 || i5 == 111))
+                                                        || PendingUiCommands.UiCommand
+                                                                .hasSameNotificationId(i4, i5)))) {
+                                    int i6 = uiCommand3.mWhere;
+                                    int i7 = uiCommand2.mWhere;
+                                    if (i6 == i7 || i7 == -1 || i7 == 100 || i7 == 101) {
+                                        z = true;
+                                        return Boolean.valueOf(z);
+                                    }
+                                }
+                                z = false;
                                 return Boolean.valueOf(z);
                             }
-                        }
-                        z = false;
-                        return Boolean.valueOf(z);
-                    }
-                });
+                        });
                 if (!DesktopModeUiConstants.isNotificationType(i2) || runnable == null) {
                     return;
                 }
@@ -99,12 +121,16 @@ public final class PendingUiCommands {
             return;
         }
         if (DesktopModeUiConstants.isNotificationType(i2)) {
-            removeCommandsIf(new Function() { // from class: com.android.server.desktopmode.PendingUiCommands$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return Boolean.valueOf(PendingUiCommands.UiCommand.hasSameNotificationId(i2, ((PendingUiCommands.UiCommand) obj).mType));
-                }
-            });
+            removeCommandsIf(
+                    new Function() { // from class:
+                                     // com.android.server.desktopmode.PendingUiCommands$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            return Boolean.valueOf(
+                                    PendingUiCommands.UiCommand.hasSameNotificationId(
+                                            i2, ((PendingUiCommands.UiCommand) obj).mType));
+                        }
+                    });
             if (runnable != null) {
                 ((ArrayList) this.mUiCommands).add(uiCommand);
                 return;

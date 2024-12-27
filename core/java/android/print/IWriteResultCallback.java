@@ -20,20 +20,17 @@ public interface IWriteResultCallback extends IInterface {
 
     public static class Default implements IWriteResultCallback {
         @Override // android.print.IWriteResultCallback
-        public void onWriteStarted(ICancellationSignal cancellation, int sequence) throws RemoteException {
-        }
+        public void onWriteStarted(ICancellationSignal cancellation, int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IWriteResultCallback
-        public void onWriteFinished(PageRange[] pages, int sequence) throws RemoteException {
-        }
+        public void onWriteFinished(PageRange[] pages, int sequence) throws RemoteException {}
 
         @Override // android.print.IWriteResultCallback
-        public void onWriteFailed(CharSequence error, int sequence) throws RemoteException {
-        }
+        public void onWriteFailed(CharSequence error, int sequence) throws RemoteException {}
 
         @Override // android.print.IWriteResultCallback
-        public void onWriteCanceled(int sequence) throws RemoteException {
-        }
+        public void onWriteCanceled(int sequence) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,7 +38,7 @@ public interface IWriteResultCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWriteResultCallback {
+    public abstract static class Stub extends Binder implements IWriteResultCallback {
         public static final String DESCRIPTOR = "android.print.IWriteResultCallback";
         static final int TRANSACTION_onWriteCanceled = 4;
         static final int TRANSACTION_onWriteFailed = 3;
@@ -89,7 +86,8 @@ public interface IWriteResultCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -99,7 +97,8 @@ public interface IWriteResultCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICancellationSignal _arg0 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg0 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     onWriteStarted(_arg0, _arg1);
@@ -111,7 +110,8 @@ public interface IWriteResultCallback extends IInterface {
                     onWriteFinished(_arg02, _arg12);
                     return true;
                 case 3:
-                    CharSequence _arg03 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg03 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     onWriteFailed(_arg03, _arg13);
@@ -143,7 +143,8 @@ public interface IWriteResultCallback extends IInterface {
             }
 
             @Override // android.print.IWriteResultCallback
-            public void onWriteStarted(ICancellationSignal cancellation, int sequence) throws RemoteException {
+            public void onWriteStarted(ICancellationSignal cancellation, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

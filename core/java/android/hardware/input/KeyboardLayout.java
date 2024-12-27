@@ -4,6 +4,7 @@ import android.app.blob.XmlTags;
 import android.os.LocaleList;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -11,19 +12,21 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayout> {
-    public static final Parcelable.Creator<KeyboardLayout> CREATOR = new Parcelable.Creator<KeyboardLayout>() { // from class: android.hardware.input.KeyboardLayout.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyboardLayout createFromParcel(Parcel source) {
-            return new KeyboardLayout(source);
-        }
+    public static final Parcelable.Creator<KeyboardLayout> CREATOR =
+            new Parcelable.Creator<
+                    KeyboardLayout>() { // from class: android.hardware.input.KeyboardLayout.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyboardLayout createFromParcel(Parcel source) {
+                    return new KeyboardLayout(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyboardLayout[] newArray(int size) {
-            return new KeyboardLayout[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyboardLayout[] newArray(int size) {
+                    return new KeyboardLayout[size];
+                }
+            };
     public static final String LAYOUT_TYPE_AZERTY = "azerty";
     public static final String LAYOUT_TYPE_COLEMAK = "colemak";
     public static final String LAYOUT_TYPE_DVORAK = "dvorak";
@@ -96,7 +99,15 @@ public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayo
         }
     }
 
-    public KeyboardLayout(String descriptor, String label, String collection, int priority, LocaleList locales, int layoutValue, int vid, int pid) {
+    public KeyboardLayout(
+            String descriptor,
+            String label,
+            String collection,
+            int priority,
+            LocaleList locales,
+            int layoutValue,
+            int vid,
+            int pid) {
         this.mDescriptor = descriptor;
         this.mLabel = label;
         this.mCollection = collection;
@@ -149,7 +160,9 @@ public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayo
     public boolean isAnsiLayout() {
         for (int i = 0; i < this.mLocales.size(); i++) {
             Locale locale = this.mLocales.get(i);
-            if (locale != null && locale.getCountry().equalsIgnoreCase(XmlTags.ATTR_USER_ID) && this.mLayoutType != LayoutType.EXTENDED) {
+            if (locale != null
+                    && locale.getCountry().equalsIgnoreCase(XmlTags.ATTR_USER_ID)
+                    && this.mLayoutType != LayoutType.EXTENDED) {
                 return true;
             }
         }
@@ -200,7 +213,21 @@ public final class KeyboardLayout implements Parcelable, Comparable<KeyboardLayo
 
     public String toString() {
         String collectionString = this.mCollection.isEmpty() ? "" : " - " + this.mCollection;
-        return "KeyboardLayout " + this.mLabel + collectionString + ", descriptor: " + this.mDescriptor + ", priority: " + this.mPriority + ", locales: " + this.mLocales.toString() + ", layout type: " + this.mLayoutType.getName() + ", vendorId: " + this.mVendorId + ", productId: " + this.mProductId;
+        return "KeyboardLayout "
+                + this.mLabel
+                + collectionString
+                + ", descriptor: "
+                + this.mDescriptor
+                + ", priority: "
+                + this.mPriority
+                + ", locales: "
+                + this.mLocales.toString()
+                + ", layout type: "
+                + this.mLayoutType.getName()
+                + ", vendorId: "
+                + this.mVendorId
+                + ", productId: "
+                + this.mProductId;
     }
 
     public static boolean isLayoutTypeValid(String layoutName) {

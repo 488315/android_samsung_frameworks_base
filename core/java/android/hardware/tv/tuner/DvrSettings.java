@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DvrSettings implements Parcelable {
-    public static final Parcelable.Creator<DvrSettings> CREATOR = new Parcelable.Creator<DvrSettings>() { // from class: android.hardware.tv.tuner.DvrSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DvrSettings createFromParcel(Parcel _aidl_source) {
-            return new DvrSettings(_aidl_source);
-        }
+    public static final Parcelable.Creator<DvrSettings> CREATOR =
+            new Parcelable.Creator<
+                    DvrSettings>() { // from class: android.hardware.tv.tuner.DvrSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DvrSettings createFromParcel(Parcel _aidl_source) {
+                    return new DvrSettings(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DvrSettings[] newArray(int _aidl_size) {
-            return new DvrSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DvrSettings[] newArray(int _aidl_size) {
+                    return new DvrSettings[_aidl_size];
+                }
+            };
     public static final int playback = 1;
     public static final int record = 0;
     private int _tag;
@@ -94,11 +96,13 @@ public final class DvrSettings implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                RecordSettings _aidl_value = (RecordSettings) _aidl_parcel.readTypedObject(RecordSettings.CREATOR);
+                RecordSettings _aidl_value =
+                        (RecordSettings) _aidl_parcel.readTypedObject(RecordSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                PlaybackSettings _aidl_value2 = (PlaybackSettings) _aidl_parcel.readTypedObject(PlaybackSettings.CREATOR);
+                PlaybackSettings _aidl_value2 =
+                        (PlaybackSettings) _aidl_parcel.readTypedObject(PlaybackSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             default:
@@ -129,7 +133,12 @@ public final class DvrSettings implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

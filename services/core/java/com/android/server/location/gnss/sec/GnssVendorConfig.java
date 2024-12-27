@@ -2,6 +2,7 @@ package com.android.server.location.gnss.sec;
 
 import android.os.Build;
 import android.os.SystemProperties;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,7 +30,13 @@ public final class GnssVendorConfig {
     }
 
     public static boolean isIzatServiceEnabled() {
-        return (!"qcom".equals(Build.HARDWARE) || isBroadcomGnss() || isLsiGnss() || BatteryService$$ExternalSyntheticOutline0.m45m("vendor/etc/gnss/mnl.prop")) ? false : true;
+        return (!"qcom".equals(Build.HARDWARE)
+                        || isBroadcomGnss()
+                        || isLsiGnss()
+                        || BatteryService$$ExternalSyntheticOutline0.m45m(
+                                "vendor/etc/gnss/mnl.prop"))
+                ? false
+                : true;
     }
 
     public static boolean isLsiGnss() {
@@ -37,6 +44,8 @@ public final class GnssVendorConfig {
     }
 
     public static boolean isUnisocGnss() {
-        return SystemProperties.get("ro.hardware.chipname", "Unknown").toLowerCase().contains("unisoc");
+        return SystemProperties.get("ro.hardware.chipname", "Unknown")
+                .toLowerCase()
+                .contains("unisoc");
     }
 }

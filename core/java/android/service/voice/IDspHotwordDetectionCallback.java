@@ -16,12 +16,11 @@ public interface IDspHotwordDetectionCallback extends IInterface {
 
     public static class Default implements IDspHotwordDetectionCallback {
         @Override // android.service.voice.IDspHotwordDetectionCallback
-        public void onDetected(HotwordDetectedResult hotwordDetectedResult) throws RemoteException {
-        }
+        public void onDetected(HotwordDetectedResult hotwordDetectedResult)
+                throws RemoteException {}
 
         @Override // android.service.voice.IDspHotwordDetectionCallback
-        public void onRejected(HotwordRejectedResult result) throws RemoteException {
-        }
+        public void onRejected(HotwordRejectedResult result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IDspHotwordDetectionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDspHotwordDetectionCallback {
+    public abstract static class Stub extends Binder implements IDspHotwordDetectionCallback {
         static final int TRANSACTION_onDetected = 1;
         static final int TRANSACTION_onRejected = 2;
 
@@ -70,7 +69,8 @@ public interface IDspHotwordDetectionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDspHotwordDetectionCallback.DESCRIPTOR);
             }
@@ -80,12 +80,16 @@ public interface IDspHotwordDetectionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    HotwordDetectedResult _arg0 = (HotwordDetectedResult) data.readTypedObject(HotwordDetectedResult.CREATOR);
+                    HotwordDetectedResult _arg0 =
+                            (HotwordDetectedResult)
+                                    data.readTypedObject(HotwordDetectedResult.CREATOR);
                     data.enforceNoDataAvail();
                     onDetected(_arg0);
                     return true;
                 case 2:
-                    HotwordRejectedResult _arg02 = (HotwordRejectedResult) data.readTypedObject(HotwordRejectedResult.CREATOR);
+                    HotwordRejectedResult _arg02 =
+                            (HotwordRejectedResult)
+                                    data.readTypedObject(HotwordRejectedResult.CREATOR);
                     data.enforceNoDataAvail();
                     onRejected(_arg02);
                     return true;
@@ -111,7 +115,8 @@ public interface IDspHotwordDetectionCallback extends IInterface {
             }
 
             @Override // android.service.voice.IDspHotwordDetectionCallback
-            public void onDetected(HotwordDetectedResult hotwordDetectedResult) throws RemoteException {
+            public void onDetected(HotwordDetectedResult hotwordDetectedResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDspHotwordDetectionCallback.DESCRIPTOR);

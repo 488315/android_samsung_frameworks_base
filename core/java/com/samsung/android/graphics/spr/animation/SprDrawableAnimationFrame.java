@@ -2,6 +2,7 @@ package com.samsung.android.graphics.spr.animation;
 
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 
 /* loaded from: classes6.dex */
@@ -32,7 +33,10 @@ public class SprDrawableAnimationFrame extends SprDrawableAnimation {
         }
         int result2 = this.mCurrentFrameIndex;
         int index = result2 % (this.mFrameCount * 2);
-        int result3 = index < this.mFrameCount ? index : (this.mFrameCount - (index % this.mFrameCount)) - 1;
+        int result3 =
+                index < this.mFrameCount
+                        ? index
+                        : (this.mFrameCount - (index % this.mFrameCount)) - 1;
         return result3;
     }
 
@@ -41,7 +45,8 @@ public class SprDrawableAnimationFrame extends SprDrawableAnimation {
         this.mCurrentFrameIndex++;
         if (this.mDocument.mRepeatCount == 0 || this.mCurrentFrameIndex < this.mTotalFrameCount) {
             this.mDrawable.scheduleSelf(this, SystemClock.uptimeMillis() + this.mInterval);
-            if (this.mDocument.mRepeatCount == 0 && this.mCurrentFrameIndex > this.mFrameCount * 2) {
+            if (this.mDocument.mRepeatCount == 0
+                    && this.mCurrentFrameIndex > this.mFrameCount * 2) {
                 this.mCurrentFrameIndex -= this.mFrameCount * 2;
             }
         } else {

@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.MessageLite;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,17 +55,24 @@ public abstract class CodedInputStream {
 
     public abstract float readFloat() throws IOException;
 
-    public abstract <T extends MessageLite> T readGroup(int i, Parser<T> parser, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    public abstract <T extends MessageLite> T readGroup(
+            int i, Parser<T> parser, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
-    public abstract void readGroup(int i, MessageLite.Builder builder, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    public abstract void readGroup(
+            int i, MessageLite.Builder builder, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     public abstract int readInt32() throws IOException;
 
     public abstract long readInt64() throws IOException;
 
-    public abstract <T extends MessageLite> T readMessage(Parser<T> parser, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    public abstract <T extends MessageLite> T readMessage(
+            Parser<T> parser, ExtensionRegistryLite extensionRegistryLite) throws IOException;
 
-    public abstract void readMessage(MessageLite.Builder builder, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    public abstract void readMessage(
+            MessageLite.Builder builder, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     public abstract byte readRawByte() throws IOException;
 
@@ -108,7 +114,8 @@ public abstract class CodedInputStream {
     public abstract boolean skipField(int i) throws IOException;
 
     @Deprecated
-    public abstract boolean skipField(int i, CodedOutputStream codedOutputStream) throws IOException;
+    public abstract boolean skipField(int i, CodedOutputStream codedOutputStream)
+            throws IOException;
 
     public abstract void skipMessage() throws IOException;
 
@@ -180,7 +187,11 @@ public abstract class CodedInputStream {
 
     static CodedInputStream newInstance(ByteBuffer buf, boolean bufferIsImmutable) {
         if (buf.hasArray()) {
-            return newInstance(buf.array(), buf.arrayOffset() + buf.position(), buf.remaining(), bufferIsImmutable);
+            return newInstance(
+                    buf.array(),
+                    buf.arrayOffset() + buf.position(),
+                    buf.remaining(),
+                    bufferIsImmutable);
         }
         if (buf.isDirect() && UnsafeDirectNioDecoder.isSupported()) {
             return new UnsafeDirectNioDecoder(buf, bufferIsImmutable);
@@ -486,7 +497,11 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void readGroup(int fieldNumber, MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public void readGroup(
+                int fieldNumber,
+                MessageLite.Builder builder,
+                ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             checkRecursionLimit();
             this.recursionDepth++;
             builder.mergeFrom(this, extensionRegistry);
@@ -495,7 +510,9 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public <T extends MessageLite> T readGroup(int fieldNumber, Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T extends MessageLite> T readGroup(
+                int fieldNumber, Parser<T> parser, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             checkRecursionLimit();
             this.recursionDepth++;
             T result = parser.parsePartialFrom(this, extensionRegistry);
@@ -506,12 +523,15 @@ public abstract class CodedInputStream {
 
         @Override // com.android.framework.protobuf.CodedInputStream
         @Deprecated
-        public void readUnknownGroup(int fieldNumber, MessageLite.Builder builder) throws IOException {
+        public void readUnknownGroup(int fieldNumber, MessageLite.Builder builder)
+                throws IOException {
             readGroup(fieldNumber, builder, ExtensionRegistryLite.getEmptyRegistry());
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void readMessage(MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public void readMessage(
+                MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             int length = readRawVarint32();
             checkRecursionLimit();
             int oldLimit = pushLimit(length);
@@ -526,7 +546,8 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public <T extends MessageLite> T readMessage(Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T extends MessageLite> T readMessage(
+                Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
             int length = readRawVarint32();
             checkRecursionLimit();
             int oldLimit = pushLimit(length);
@@ -574,7 +595,9 @@ public abstract class CodedInputStream {
                 if (!this.immutable && this.enableAliasing) {
                     result = ByteBuffer.wrap(this.buffer, this.pos, size).slice();
                 } else {
-                    result = ByteBuffer.wrap(Arrays.copyOfRange(this.buffer, this.pos, this.pos + size));
+                    result =
+                            ByteBuffer.wrap(
+                                    Arrays.copyOfRange(this.buffer, this.pos, this.pos + size));
                 }
                 this.pos += size;
                 return result;
@@ -619,9 +642,9 @@ public abstract class CodedInputStream {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:32:0x0071, code lost:
-        
-            if (r1[r2] < 0) goto L33;
-         */
+
+           if (r1[r2] < 0) goto L33;
+        */
         @Override // com.android.framework.protobuf.CodedInputStream
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -717,7 +740,9 @@ public abstract class CodedInputStream {
                 r6.pos = r0
                 return r2
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.CodedInputStream.ArrayDecoder.readRawVarint32():int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.framework.protobuf.CodedInputStream.ArrayDecoder.readRawVarint32():int");
         }
 
         private void skipRawVarint() throws IOException {
@@ -750,9 +775,9 @@ public abstract class CodedInputStream {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:36:0x00bf, code lost:
-        
-            if (r1[r2] < 0) goto L37;
-         */
+
+           if (r1[r2] < 0) goto L37;
+        */
         @Override // com.android.framework.protobuf.CodedInputStream
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -763,7 +788,9 @@ public abstract class CodedInputStream {
                 Method dump skipped, instructions count: 203
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.CodedInputStream.ArrayDecoder.readRawVarint64():long");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.framework.protobuf.CodedInputStream.ArrayDecoder.readRawVarint64():long");
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -787,7 +814,10 @@ public abstract class CodedInputStream {
             }
             byte[] buffer = this.buffer;
             this.pos = tempPos + 4;
-            return (buffer[tempPos] & 255) | ((buffer[tempPos + 1] & 255) << 8) | ((buffer[tempPos + 2] & 255) << 16) | ((buffer[tempPos + 3] & 255) << 24);
+            return (buffer[tempPos] & 255)
+                    | ((buffer[tempPos + 1] & 255) << 8)
+                    | ((buffer[tempPos + 2] & 255) << 16)
+                    | ((buffer[tempPos + 3] & 255) << 24);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -798,7 +828,14 @@ public abstract class CodedInputStream {
             }
             byte[] buffer = this.buffer;
             this.pos = tempPos + 8;
-            return (buffer[tempPos] & 255) | ((buffer[tempPos + 1] & 255) << 8) | ((buffer[tempPos + 2] & 255) << 16) | ((buffer[tempPos + 3] & 255) << 24) | ((buffer[tempPos + 4] & 255) << 32) | ((buffer[tempPos + 5] & 255) << 40) | ((buffer[tempPos + 6] & 255) << 48) | ((buffer[tempPos + 7] & 255) << 56);
+            return (buffer[tempPos] & 255)
+                    | ((buffer[tempPos + 1] & 255) << 8)
+                    | ((buffer[tempPos + 2] & 255) << 16)
+                    | ((buffer[tempPos + 3] & 255) << 24)
+                    | ((buffer[tempPos + 4] & 255) << 32)
+                    | ((buffer[tempPos + 5] & 255) << 40)
+                    | ((buffer[tempPos + 6] & 255) << 48)
+                    | ((buffer[tempPos + 7] & 255) << 56);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -1119,7 +1156,11 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void readGroup(int fieldNumber, MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public void readGroup(
+                int fieldNumber,
+                MessageLite.Builder builder,
+                ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             checkRecursionLimit();
             this.recursionDepth++;
             builder.mergeFrom(this, extensionRegistry);
@@ -1128,7 +1169,9 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public <T extends MessageLite> T readGroup(int fieldNumber, Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T extends MessageLite> T readGroup(
+                int fieldNumber, Parser<T> parser, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             checkRecursionLimit();
             this.recursionDepth++;
             T result = parser.parsePartialFrom(this, extensionRegistry);
@@ -1139,12 +1182,15 @@ public abstract class CodedInputStream {
 
         @Override // com.android.framework.protobuf.CodedInputStream
         @Deprecated
-        public void readUnknownGroup(int fieldNumber, MessageLite.Builder builder) throws IOException {
+        public void readUnknownGroup(int fieldNumber, MessageLite.Builder builder)
+                throws IOException {
             readGroup(fieldNumber, builder, ExtensionRegistryLite.getEmptyRegistry());
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void readMessage(MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public void readMessage(
+                MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             int length = readRawVarint32();
             checkRecursionLimit();
             int oldLimit = pushLimit(length);
@@ -1159,7 +1205,8 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public <T extends MessageLite> T readMessage(Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T extends MessageLite> T readMessage(
+                Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
             int length = readRawVarint32();
             checkRecursionLimit();
             int oldLimit = pushLimit(length);
@@ -1406,7 +1453,9 @@ public abstract class CodedInputStream {
                                                 tempPos3 = tempPos8;
                                             } else {
                                                 long tempPos9 = tempPos8 + 1;
-                                                long x6 = ((UnsafeUtil.getByte(tempPos8) << 56) ^ x5) ^ 71499008037633920L;
+                                                long x6 =
+                                                        ((UnsafeUtil.getByte(tempPos8) << 56) ^ x5)
+                                                                ^ 71499008037633920L;
                                                 if (x6 >= 0) {
                                                     x = x6;
                                                     tempPos3 = tempPos9;
@@ -1452,7 +1501,10 @@ public abstract class CodedInputStream {
                 throw InvalidProtocolBufferException.truncatedMessage();
             }
             this.pos = 4 + tempPos;
-            return (UnsafeUtil.getByte(tempPos) & 255) | ((UnsafeUtil.getByte(1 + tempPos) & 255) << 8) | ((UnsafeUtil.getByte(2 + tempPos) & 255) << 16) | ((UnsafeUtil.getByte(3 + tempPos) & 255) << 24);
+            return (UnsafeUtil.getByte(tempPos) & 255)
+                    | ((UnsafeUtil.getByte(1 + tempPos) & 255) << 8)
+                    | ((UnsafeUtil.getByte(2 + tempPos) & 255) << 16)
+                    | ((UnsafeUtil.getByte(3 + tempPos) & 255) << 24);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -1462,7 +1514,14 @@ public abstract class CodedInputStream {
                 throw InvalidProtocolBufferException.truncatedMessage();
             }
             this.pos = 8 + tempPos;
-            return (UnsafeUtil.getByte(tempPos) & 255) | ((UnsafeUtil.getByte(1 + tempPos) & 255) << 8) | ((UnsafeUtil.getByte(2 + tempPos) & 255) << 16) | ((UnsafeUtil.getByte(3 + tempPos) & 255) << 24) | ((UnsafeUtil.getByte(4 + tempPos) & 255) << 32) | ((UnsafeUtil.getByte(5 + tempPos) & 255) << 40) | ((UnsafeUtil.getByte(6 + tempPos) & 255) << 48) | ((255 & UnsafeUtil.getByte(7 + tempPos)) << 56);
+            return (UnsafeUtil.getByte(tempPos) & 255)
+                    | ((UnsafeUtil.getByte(1 + tempPos) & 255) << 8)
+                    | ((UnsafeUtil.getByte(2 + tempPos) & 255) << 16)
+                    | ((UnsafeUtil.getByte(3 + tempPos) & 255) << 24)
+                    | ((UnsafeUtil.getByte(4 + tempPos) & 255) << 32)
+                    | ((UnsafeUtil.getByte(5 + tempPos) & 255) << 40)
+                    | ((UnsafeUtil.getByte(6 + tempPos) & 255) << 48)
+                    | ((255 & UnsafeUtil.getByte(7 + tempPos)) << 56);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -1582,7 +1641,8 @@ public abstract class CodedInputStream {
                     asBuffer.limit(bufferPos(end));
                     return this.buffer.slice();
                 } catch (IllegalArgumentException e) {
-                    InvalidProtocolBufferException ex = InvalidProtocolBufferException.truncatedMessage();
+                    InvalidProtocolBufferException ex =
+                            InvalidProtocolBufferException.truncatedMessage();
                     ex.initCause(e);
                     throw ex;
                 }
@@ -1620,7 +1680,8 @@ public abstract class CodedInputStream {
             this.totalBytesRetired = 0;
         }
 
-        private static int read(InputStream input, byte[] data, int offset, int length) throws IOException {
+        private static int read(InputStream input, byte[] data, int offset, int length)
+                throws IOException {
             try {
                 return input.read(data, offset, length);
             } catch (InvalidProtocolBufferException e) {
@@ -1770,15 +1831,22 @@ public abstract class CodedInputStream {
                 if (this.byteArrayStream == null) {
                     this.byteArrayStream = new ByteArrayOutputStream();
                 }
-                this.byteArrayStream.write(StreamDecoder.this.buffer, this.lastPos, StreamDecoder.this.pos - this.lastPos);
+                this.byteArrayStream.write(
+                        StreamDecoder.this.buffer,
+                        this.lastPos,
+                        StreamDecoder.this.pos - this.lastPos);
                 this.lastPos = 0;
             }
 
             ByteBuffer getSkippedData() {
                 if (this.byteArrayStream == null) {
-                    return ByteBuffer.wrap(StreamDecoder.this.buffer, this.lastPos, StreamDecoder.this.pos - this.lastPos);
+                    return ByteBuffer.wrap(
+                            StreamDecoder.this.buffer,
+                            this.lastPos,
+                            StreamDecoder.this.pos - this.lastPos);
                 }
-                this.byteArrayStream.write(StreamDecoder.this.buffer, this.lastPos, StreamDecoder.this.pos);
+                this.byteArrayStream.write(
+                        StreamDecoder.this.buffer, this.lastPos, StreamDecoder.this.pos);
                 return ByteBuffer.wrap(this.byteArrayStream.toByteArray());
             }
         }
@@ -1871,7 +1939,11 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void readGroup(int fieldNumber, MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public void readGroup(
+                int fieldNumber,
+                MessageLite.Builder builder,
+                ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             checkRecursionLimit();
             this.recursionDepth++;
             builder.mergeFrom(this, extensionRegistry);
@@ -1880,7 +1952,9 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public <T extends MessageLite> T readGroup(int fieldNumber, Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T extends MessageLite> T readGroup(
+                int fieldNumber, Parser<T> parser, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             checkRecursionLimit();
             this.recursionDepth++;
             T result = parser.parsePartialFrom(this, extensionRegistry);
@@ -1891,12 +1965,15 @@ public abstract class CodedInputStream {
 
         @Override // com.android.framework.protobuf.CodedInputStream
         @Deprecated
-        public void readUnknownGroup(int fieldNumber, MessageLite.Builder builder) throws IOException {
+        public void readUnknownGroup(int fieldNumber, MessageLite.Builder builder)
+                throws IOException {
             readGroup(fieldNumber, builder, ExtensionRegistryLite.getEmptyRegistry());
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void readMessage(MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public void readMessage(
+                MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             int length = readRawVarint32();
             checkRecursionLimit();
             int oldLimit = pushLimit(length);
@@ -1911,7 +1988,8 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public <T extends MessageLite> T readMessage(Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T extends MessageLite> T readMessage(
+                Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
             int length = readRawVarint32();
             checkRecursionLimit();
             int oldLimit = pushLimit(length);
@@ -1955,7 +2033,8 @@ public abstract class CodedInputStream {
         public ByteBuffer readByteBuffer() throws IOException {
             int size = readRawVarint32();
             if (size <= this.bufferSize - this.pos && size > 0) {
-                ByteBuffer result = ByteBuffer.wrap(Arrays.copyOfRange(this.buffer, this.pos, this.pos + size));
+                ByteBuffer result =
+                        ByteBuffer.wrap(Arrays.copyOfRange(this.buffer, this.pos, this.pos + size));
                 this.pos += size;
                 return result;
             }
@@ -1996,9 +2075,9 @@ public abstract class CodedInputStream {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:32:0x0071, code lost:
-        
-            if (r1[r2] < 0) goto L33;
-         */
+
+           if (r1[r2] < 0) goto L33;
+        */
         @Override // com.android.framework.protobuf.CodedInputStream
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -2094,7 +2173,9 @@ public abstract class CodedInputStream {
                 r6.pos = r0
                 return r2
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.CodedInputStream.StreamDecoder.readRawVarint32():int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.framework.protobuf.CodedInputStream.StreamDecoder.readRawVarint32():int");
         }
 
         private void skipRawVarint() throws IOException {
@@ -2127,9 +2208,9 @@ public abstract class CodedInputStream {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:36:0x00bf, code lost:
-        
-            if (r1[r2] < 0) goto L37;
-         */
+
+           if (r1[r2] < 0) goto L37;
+        */
         @Override // com.android.framework.protobuf.CodedInputStream
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -2140,7 +2221,9 @@ public abstract class CodedInputStream {
                 Method dump skipped, instructions count: 203
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.CodedInputStream.StreamDecoder.readRawVarint64():long");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.framework.protobuf.CodedInputStream.StreamDecoder.readRawVarint64():long");
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -2165,7 +2248,10 @@ public abstract class CodedInputStream {
             }
             byte[] buffer = this.buffer;
             this.pos = tempPos + 4;
-            return (buffer[tempPos] & 255) | ((buffer[tempPos + 1] & 255) << 8) | ((buffer[tempPos + 2] & 255) << 16) | ((buffer[tempPos + 3] & 255) << 24);
+            return (buffer[tempPos] & 255)
+                    | ((buffer[tempPos + 1] & 255) << 8)
+                    | ((buffer[tempPos + 2] & 255) << 16)
+                    | ((buffer[tempPos + 3] & 255) << 24);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -2177,12 +2263,18 @@ public abstract class CodedInputStream {
             }
             byte[] buffer = this.buffer;
             this.pos = tempPos + 8;
-            return (buffer[tempPos] & 255) | ((buffer[tempPos + 1] & 255) << 8) | ((buffer[tempPos + 2] & 255) << 16) | ((buffer[tempPos + 3] & 255) << 24) | ((buffer[tempPos + 4] & 255) << 32) | ((buffer[tempPos + 5] & 255) << 40) | ((buffer[tempPos + 6] & 255) << 48) | ((buffer[tempPos + 7] & 255) << 56);
+            return (buffer[tempPos] & 255)
+                    | ((buffer[tempPos + 1] & 255) << 8)
+                    | ((buffer[tempPos + 2] & 255) << 16)
+                    | ((buffer[tempPos + 3] & 255) << 24)
+                    | ((buffer[tempPos + 4] & 255) << 32)
+                    | ((buffer[tempPos + 5] & 255) << 40)
+                    | ((buffer[tempPos + 6] & 255) << 48)
+                    | ((buffer[tempPos + 7] & 255) << 56);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void enableAliasing(boolean enabled) {
-        }
+        public void enableAliasing(boolean enabled) {}
 
         @Override // com.android.framework.protobuf.CodedInputStream
         public void resetSizeCounter() {
@@ -2251,9 +2343,13 @@ public abstract class CodedInputStream {
 
         private boolean tryRefillBuffer(int n) throws IOException {
             if (this.pos + n <= this.bufferSize) {
-                throw new IllegalStateException("refillBuffer() called when " + n + " bytes were already available in buffer");
+                throw new IllegalStateException(
+                        "refillBuffer() called when "
+                                + n
+                                + " bytes were already available in buffer");
             }
-            if (n > (this.sizeLimit - this.totalBytesRetired) - this.pos || this.totalBytesRetired + this.pos + n > this.currentLimit) {
+            if (n > (this.sizeLimit - this.totalBytesRetired) - this.pos
+                    || this.totalBytesRetired + this.pos + n > this.currentLimit) {
                 return false;
             }
             if (this.refillCallback != null) {
@@ -2262,15 +2358,27 @@ public abstract class CodedInputStream {
             int tempPos = this.pos;
             if (tempPos > 0) {
                 if (this.bufferSize > tempPos) {
-                    System.arraycopy(this.buffer, tempPos, this.buffer, 0, this.bufferSize - tempPos);
+                    System.arraycopy(
+                            this.buffer, tempPos, this.buffer, 0, this.bufferSize - tempPos);
                 }
                 this.totalBytesRetired += tempPos;
                 this.bufferSize -= tempPos;
                 this.pos = 0;
             }
-            int bytesRead = read(this.input, this.buffer, this.bufferSize, Math.min(this.buffer.length - this.bufferSize, (this.sizeLimit - this.totalBytesRetired) - this.bufferSize));
+            int bytesRead =
+                    read(
+                            this.input,
+                            this.buffer,
+                            this.bufferSize,
+                            Math.min(
+                                    this.buffer.length - this.bufferSize,
+                                    (this.sizeLimit - this.totalBytesRetired) - this.bufferSize));
             if (bytesRead == 0 || bytesRead < -1 || bytesRead > this.buffer.length) {
-                throw new IllegalStateException(this.input.getClass() + "#read(byte[]) returned invalid result: " + bytesRead + "\nThe InputStream implementation is buggy.");
+                throw new IllegalStateException(
+                        this.input.getClass()
+                                + "#read(byte[]) returned invalid result: "
+                                + bytesRead
+                                + "\nThe InputStream implementation is buggy.");
             }
             if (bytesRead <= 0) {
                 return false;
@@ -2304,7 +2412,8 @@ public abstract class CodedInputStream {
             return readRawBytesSlowPath(size, false);
         }
 
-        private byte[] readRawBytesSlowPath(int size, boolean ensureNoLeakedReferences) throws IOException {
+        private byte[] readRawBytesSlowPath(int size, boolean ensureNoLeakedReferences)
+                throws IOException {
             byte[] result = readRawBytesSlowPathOneChunk(size);
             if (result != null) {
                 return ensureNoLeakedReferences ? (byte[]) result.clone() : result;
@@ -2434,7 +2543,11 @@ public abstract class CodedInputStream {
                     try {
                         long skipped = skip(this.input, toSkip);
                         if (skipped < 0 || skipped > toSkip) {
-                            throw new IllegalStateException(this.input.getClass() + "#skip returned invalid result: " + skipped + "\nThe InputStream implementation is buggy.");
+                            throw new IllegalStateException(
+                                    this.input.getClass()
+                                            + "#skip returned invalid result: "
+                                            + skipped
+                                            + "\nThe InputStream implementation is buggy.");
                         }
                         if (skipped == 0) {
                             break;
@@ -2478,7 +2591,8 @@ public abstract class CodedInputStream {
         private int totalBufferSize;
         private int totalBytesRead;
 
-        private IterableDirectByteBufferDecoder(Iterable<ByteBuffer> inputBufs, int size, boolean immutableFlag) {
+        private IterableDirectByteBufferDecoder(
+                Iterable<ByteBuffer> inputBufs, int size, boolean immutableFlag) {
             super();
             this.currentLimit = Integer.MAX_VALUE;
             this.totalBufferSize = size;
@@ -2507,7 +2621,8 @@ public abstract class CodedInputStream {
 
         private void tryGetNextByteBuffer() {
             this.currentByteBuffer = this.iterator.next();
-            this.totalBytesRead += (int) (this.currentByteBufferPos - this.currentByteBufferStartPos);
+            this.totalBytesRead +=
+                    (int) (this.currentByteBufferPos - this.currentByteBufferStartPos);
             this.currentByteBufferPos = this.currentByteBuffer.position();
             this.currentByteBufferStartPos = this.currentByteBufferPos;
             this.currentByteBufferLimit = this.currentByteBuffer.limit();
@@ -2716,7 +2831,11 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void readGroup(int fieldNumber, MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public void readGroup(
+                int fieldNumber,
+                MessageLite.Builder builder,
+                ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             checkRecursionLimit();
             this.recursionDepth++;
             builder.mergeFrom(this, extensionRegistry);
@@ -2725,7 +2844,9 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public <T extends MessageLite> T readGroup(int fieldNumber, Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T extends MessageLite> T readGroup(
+                int fieldNumber, Parser<T> parser, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             checkRecursionLimit();
             this.recursionDepth++;
             T result = parser.parsePartialFrom(this, extensionRegistry);
@@ -2736,12 +2857,15 @@ public abstract class CodedInputStream {
 
         @Override // com.android.framework.protobuf.CodedInputStream
         @Deprecated
-        public void readUnknownGroup(int fieldNumber, MessageLite.Builder builder) throws IOException {
+        public void readUnknownGroup(int fieldNumber, MessageLite.Builder builder)
+                throws IOException {
             readGroup(fieldNumber, builder, ExtensionRegistryLite.getEmptyRegistry());
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public void readMessage(MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public void readMessage(
+                MessageLite.Builder builder, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             int length = readRawVarint32();
             checkRecursionLimit();
             int oldLimit = pushLimit(length);
@@ -2756,7 +2880,8 @@ public abstract class CodedInputStream {
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
-        public <T extends MessageLite> T readMessage(Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public <T extends MessageLite> T readMessage(
+                Parser<T> parser, ExtensionRegistryLite extensionRegistry) throws IOException {
             int length = readRawVarint32();
             checkRecursionLimit();
             int oldLimit = pushLimit(length);
@@ -2826,7 +2951,9 @@ public abstract class CodedInputStream {
             if (size > 0 && size <= currentRemaining()) {
                 if (!this.immutable && this.enableAliasing) {
                     this.currentByteBufferPos += size;
-                    return slice((int) ((this.currentByteBufferPos - this.currentAddress) - size), (int) (this.currentByteBufferPos - this.currentAddress));
+                    return slice(
+                            (int) ((this.currentByteBufferPos - this.currentAddress) - size),
+                            (int) (this.currentByteBufferPos - this.currentAddress));
                 }
                 byte[] bytes = new byte[size];
                 UnsafeUtil.copyMemory(this.currentByteBufferPos, bytes, 0L, size);
@@ -3000,7 +3127,9 @@ public abstract class CodedInputStream {
                                                 tempPos3 = tempPos8;
                                             } else {
                                                 long tempPos9 = tempPos8 + 1;
-                                                long x6 = ((UnsafeUtil.getByte(tempPos8) << 56) ^ x5) ^ 71499008037633920L;
+                                                long x6 =
+                                                        ((UnsafeUtil.getByte(tempPos8) << 56) ^ x5)
+                                                                ^ 71499008037633920L;
                                                 if (x6 >= 0) {
                                                     x = x6;
                                                     tempPos3 = tempPos9;
@@ -3044,9 +3173,15 @@ public abstract class CodedInputStream {
             if (currentRemaining() >= 4) {
                 long tempPos = this.currentByteBufferPos;
                 this.currentByteBufferPos += 4;
-                return (UnsafeUtil.getByte(tempPos) & 255) | ((UnsafeUtil.getByte(1 + tempPos) & 255) << 8) | ((UnsafeUtil.getByte(2 + tempPos) & 255) << 16) | ((UnsafeUtil.getByte(3 + tempPos) & 255) << 24);
+                return (UnsafeUtil.getByte(tempPos) & 255)
+                        | ((UnsafeUtil.getByte(1 + tempPos) & 255) << 8)
+                        | ((UnsafeUtil.getByte(2 + tempPos) & 255) << 16)
+                        | ((UnsafeUtil.getByte(3 + tempPos) & 255) << 24);
             }
-            return (readRawByte() & 255) | ((readRawByte() & 255) << 8) | ((readRawByte() & 255) << 16) | ((readRawByte() & 255) << 24);
+            return (readRawByte() & 255)
+                    | ((readRawByte() & 255) << 8)
+                    | ((readRawByte() & 255) << 16)
+                    | ((readRawByte() & 255) << 24);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -3054,9 +3189,23 @@ public abstract class CodedInputStream {
             if (currentRemaining() >= 8) {
                 long tempPos = this.currentByteBufferPos;
                 this.currentByteBufferPos += 8;
-                return ((UnsafeUtil.getByte(7 + tempPos) & 255) << 56) | (UnsafeUtil.getByte(tempPos) & 255) | ((UnsafeUtil.getByte(1 + tempPos) & 255) << 8) | ((UnsafeUtil.getByte(2 + tempPos) & 255) << 16) | ((UnsafeUtil.getByte(3 + tempPos) & 255) << 24) | ((UnsafeUtil.getByte(4 + tempPos) & 255) << 32) | ((UnsafeUtil.getByte(5 + tempPos) & 255) << 40) | ((UnsafeUtil.getByte(6 + tempPos) & 255) << 48);
+                return ((UnsafeUtil.getByte(7 + tempPos) & 255) << 56)
+                        | (UnsafeUtil.getByte(tempPos) & 255)
+                        | ((UnsafeUtil.getByte(1 + tempPos) & 255) << 8)
+                        | ((UnsafeUtil.getByte(2 + tempPos) & 255) << 16)
+                        | ((UnsafeUtil.getByte(3 + tempPos) & 255) << 24)
+                        | ((UnsafeUtil.getByte(4 + tempPos) & 255) << 32)
+                        | ((UnsafeUtil.getByte(5 + tempPos) & 255) << 40)
+                        | ((UnsafeUtil.getByte(6 + tempPos) & 255) << 48);
             }
-            return ((readRawByte() & 255) << 56) | (readRawByte() & 255) | ((readRawByte() & 255) << 8) | ((readRawByte() & 255) << 16) | ((readRawByte() & 255) << 24) | ((readRawByte() & 255) << 32) | ((readRawByte() & 255) << 40) | ((readRawByte() & 255) << 48);
+            return ((readRawByte() & 255) << 56)
+                    | (readRawByte() & 255)
+                    | ((readRawByte() & 255) << 8)
+                    | ((readRawByte() & 255) << 16)
+                    | ((readRawByte() & 255) << 24)
+                    | ((readRawByte() & 255) << 32)
+                    | ((readRawByte() & 255) << 40)
+                    | ((readRawByte() & 255) << 48);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -3066,7 +3215,10 @@ public abstract class CodedInputStream {
 
         @Override // com.android.framework.protobuf.CodedInputStream
         public void resetSizeCounter() {
-            this.startOffset = (int) ((this.totalBytesRead + this.currentByteBufferPos) - this.currentByteBufferStartPos);
+            this.startOffset =
+                    (int)
+                            ((this.totalBytesRead + this.currentByteBufferPos)
+                                    - this.currentByteBufferStartPos);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -3111,12 +3263,16 @@ public abstract class CodedInputStream {
 
         @Override // com.android.framework.protobuf.CodedInputStream
         public boolean isAtEnd() throws IOException {
-            return (((long) this.totalBytesRead) + this.currentByteBufferPos) - this.currentByteBufferStartPos == ((long) this.totalBufferSize);
+            return (((long) this.totalBytesRead) + this.currentByteBufferPos)
+                            - this.currentByteBufferStartPos
+                    == ((long) this.totalBufferSize);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
         public int getTotalBytesRead() {
-            return (int) (((this.totalBytesRead - this.startOffset) + this.currentByteBufferPos) - this.currentByteBufferStartPos);
+            return (int)
+                    (((this.totalBytesRead - this.startOffset) + this.currentByteBufferPos)
+                            - this.currentByteBufferStartPos);
         }
 
         @Override // com.android.framework.protobuf.CodedInputStream
@@ -3159,7 +3315,8 @@ public abstract class CodedInputStream {
                         getNextByteBuffer();
                     }
                     int bytesToCopy = Math.min(l, (int) currentRemaining());
-                    UnsafeUtil.copyMemory(this.currentByteBufferPos, bytes, (length - l) + offset, bytesToCopy);
+                    UnsafeUtil.copyMemory(
+                            this.currentByteBufferPos, bytes, (length - l) + offset, bytesToCopy);
                     l -= bytesToCopy;
                     this.currentByteBufferPos += bytesToCopy;
                 }
@@ -3177,7 +3334,11 @@ public abstract class CodedInputStream {
 
         @Override // com.android.framework.protobuf.CodedInputStream
         public void skipRawBytes(int length) throws IOException {
-            if (length >= 0 && length <= ((this.totalBufferSize - this.totalBytesRead) - this.currentByteBufferPos) + this.currentByteBufferStartPos) {
+            if (length >= 0
+                    && length
+                            <= ((this.totalBufferSize - this.totalBytesRead)
+                                            - this.currentByteBufferPos)
+                                    + this.currentByteBufferStartPos) {
                 int l = length;
                 while (l > 0) {
                     if (currentRemaining() == 0) {
@@ -3205,7 +3366,9 @@ public abstract class CodedInputStream {
         }
 
         private int remaining() {
-            return (int) (((this.totalBufferSize - this.totalBytesRead) - this.currentByteBufferPos) + this.currentByteBufferStartPos);
+            return (int)
+                    (((this.totalBufferSize - this.totalBytesRead) - this.currentByteBufferPos)
+                            + this.currentByteBufferStartPos);
         }
 
         private long currentRemaining() {

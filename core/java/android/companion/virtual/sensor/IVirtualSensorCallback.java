@@ -9,11 +9,14 @@ import android.os.SharedMemory;
 
 /* loaded from: classes.dex */
 public interface IVirtualSensorCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.companion.virtual.sensor.IVirtualSensorCallback";
+    public static final String DESCRIPTOR =
+            "android.companion.virtual.sensor.IVirtualSensorCallback";
 
-    void onConfigurationChanged(VirtualSensor virtualSensor, boolean z, int i, int i2) throws RemoteException;
+    void onConfigurationChanged(VirtualSensor virtualSensor, boolean z, int i, int i2)
+            throws RemoteException;
 
-    void onDirectChannelConfigured(int i, VirtualSensor virtualSensor, int i2, int i3) throws RemoteException;
+    void onDirectChannelConfigured(int i, VirtualSensor virtualSensor, int i2, int i3)
+            throws RemoteException;
 
     void onDirectChannelCreated(int i, SharedMemory sharedMemory) throws RemoteException;
 
@@ -21,20 +24,24 @@ public interface IVirtualSensorCallback extends IInterface {
 
     public static class Default implements IVirtualSensorCallback {
         @Override // android.companion.virtual.sensor.IVirtualSensorCallback
-        public void onConfigurationChanged(VirtualSensor sensor, boolean enabled, int samplingPeriodMicros, int batchReportLatencyMicros) throws RemoteException {
-        }
+        public void onConfigurationChanged(
+                VirtualSensor sensor,
+                boolean enabled,
+                int samplingPeriodMicros,
+                int batchReportLatencyMicros)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.sensor.IVirtualSensorCallback
-        public void onDirectChannelCreated(int channelHandle, SharedMemory sharedMemory) throws RemoteException {
-        }
+        public void onDirectChannelCreated(int channelHandle, SharedMemory sharedMemory)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.sensor.IVirtualSensorCallback
-        public void onDirectChannelDestroyed(int channelHandle) throws RemoteException {
-        }
+        public void onDirectChannelDestroyed(int channelHandle) throws RemoteException {}
 
         @Override // android.companion.virtual.sensor.IVirtualSensorCallback
-        public void onDirectChannelConfigured(int channelHandle, VirtualSensor sensor, int rateLevel, int reportToken) throws RemoteException {
-        }
+        public void onDirectChannelConfigured(
+                int channelHandle, VirtualSensor sensor, int rateLevel, int reportToken)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +49,7 @@ public interface IVirtualSensorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualSensorCallback {
+    public abstract static class Stub extends Binder implements IVirtualSensorCallback {
         static final int TRANSACTION_onConfigurationChanged = 1;
         static final int TRANSACTION_onDirectChannelConfigured = 4;
         static final int TRANSACTION_onDirectChannelCreated = 2;
@@ -89,7 +96,8 @@ public interface IVirtualSensorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualSensorCallback.DESCRIPTOR);
             }
@@ -99,7 +107,8 @@ public interface IVirtualSensorCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    VirtualSensor _arg0 = (VirtualSensor) data.readTypedObject(VirtualSensor.CREATOR);
+                    VirtualSensor _arg0 =
+                            (VirtualSensor) data.readTypedObject(VirtualSensor.CREATOR);
                     boolean _arg1 = data.readBoolean();
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
@@ -119,7 +128,8 @@ public interface IVirtualSensorCallback extends IInterface {
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    VirtualSensor _arg13 = (VirtualSensor) data.readTypedObject(VirtualSensor.CREATOR);
+                    VirtualSensor _arg13 =
+                            (VirtualSensor) data.readTypedObject(VirtualSensor.CREATOR);
                     int _arg22 = data.readInt();
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
@@ -147,7 +157,12 @@ public interface IVirtualSensorCallback extends IInterface {
             }
 
             @Override // android.companion.virtual.sensor.IVirtualSensorCallback
-            public void onConfigurationChanged(VirtualSensor sensor, boolean enabled, int samplingPeriodMicros, int batchReportLatencyMicros) throws RemoteException {
+            public void onConfigurationChanged(
+                    VirtualSensor sensor,
+                    boolean enabled,
+                    int samplingPeriodMicros,
+                    int batchReportLatencyMicros)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
@@ -162,7 +177,8 @@ public interface IVirtualSensorCallback extends IInterface {
             }
 
             @Override // android.companion.virtual.sensor.IVirtualSensorCallback
-            public void onDirectChannelCreated(int channelHandle, SharedMemory sharedMemory) throws RemoteException {
+            public void onDirectChannelCreated(int channelHandle, SharedMemory sharedMemory)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);
@@ -187,7 +203,9 @@ public interface IVirtualSensorCallback extends IInterface {
             }
 
             @Override // android.companion.virtual.sensor.IVirtualSensorCallback
-            public void onDirectChannelConfigured(int channelHandle, VirtualSensor sensor, int rateLevel, int reportToken) throws RemoteException {
+            public void onDirectChannelConfigured(
+                    int channelHandle, VirtualSensor sensor, int rateLevel, int reportToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IVirtualSensorCallback.DESCRIPTOR);

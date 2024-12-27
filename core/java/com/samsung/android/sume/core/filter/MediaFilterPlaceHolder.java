@@ -5,6 +5,7 @@ import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
 import com.samsung.android.sume.core.functional.PlaceHolder;
+
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +23,8 @@ public class MediaFilterPlaceHolder implements MediaFilter, PlaceHolder<MediaFil
     private final List<Consumer<MediaFilter>> mediaFilterUpdaterList = new LinkedList();
     private WeakReference<MediaFilter> parent;
 
-    public MediaFilterPlaceHolder(MFDescriptor descriptor, Supplier<MediaFilter> mediaFilterProvider) {
+    public MediaFilterPlaceHolder(
+            MFDescriptor descriptor, Supplier<MediaFilter> mediaFilterProvider) {
         this.descriptor = descriptor;
         this.mediaFilterProvider = mediaFilterProvider;
     }
@@ -65,12 +67,14 @@ public class MediaFilterPlaceHolder implements MediaFilter, PlaceHolder<MediaFil
             Def.require(this.mediaFilterProvider != null, "duplicated replace call", new Object[0]);
             get();
         }
-        this.mediaFilterUpdaterList.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterPlaceHolder$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                MediaFilterPlaceHolder.this.m9138x59f5e82e((Consumer) obj);
-            }
-        });
+        this.mediaFilterUpdaterList.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.filter.MediaFilterPlaceHolder$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        MediaFilterPlaceHolder.this.m9138x59f5e82e((Consumer) obj);
+                    }
+                });
         if (this.mediaFilterRetriever != null) {
             this.mediaFilter.accept(this.mediaFilterRetriever, this.parent.get());
             this.mediaFilterRetriever = null;

@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.io.FileDescriptor;
 
 /* loaded from: classes2.dex */
@@ -35,15 +36,14 @@ public interface IMidiDeviceServer extends IInterface {
         }
 
         @Override // android.media.midi.IMidiDeviceServer
-        public void closePort(IBinder token) throws RemoteException {
-        }
+        public void closePort(IBinder token) throws RemoteException {}
 
         @Override // android.media.midi.IMidiDeviceServer
-        public void closeDevice() throws RemoteException {
-        }
+        public void closeDevice() throws RemoteException {}
 
         @Override // android.media.midi.IMidiDeviceServer
-        public int connectPorts(IBinder token, FileDescriptor fd, int outputPortNumber) throws RemoteException {
+        public int connectPorts(IBinder token, FileDescriptor fd, int outputPortNumber)
+                throws RemoteException {
             return 0;
         }
 
@@ -53,8 +53,7 @@ public interface IMidiDeviceServer extends IInterface {
         }
 
         @Override // android.media.midi.IMidiDeviceServer
-        public void setDeviceInfo(MidiDeviceInfo deviceInfo) throws RemoteException {
-        }
+        public void setDeviceInfo(MidiDeviceInfo deviceInfo) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -62,7 +61,7 @@ public interface IMidiDeviceServer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMidiDeviceServer {
+    public abstract static class Stub extends Binder implements IMidiDeviceServer {
         public static final String DESCRIPTOR = "android.media.midi.IMidiDeviceServer";
         static final int TRANSACTION_closeDevice = 4;
         static final int TRANSACTION_closePort = 3;
@@ -119,7 +118,8 @@ public interface IMidiDeviceServer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -168,7 +168,8 @@ public interface IMidiDeviceServer extends IInterface {
                     reply.writeTypedObject(_result4, 1);
                     return true;
                 case 7:
-                    MidiDeviceInfo _arg05 = (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo _arg05 =
+                            (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDeviceInfo(_arg05);
                     return true;
@@ -194,7 +195,8 @@ public interface IMidiDeviceServer extends IInterface {
             }
 
             @Override // android.media.midi.IMidiDeviceServer
-            public FileDescriptor openInputPort(IBinder token, int portNumber) throws RemoteException {
+            public FileDescriptor openInputPort(IBinder token, int portNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -212,7 +214,8 @@ public interface IMidiDeviceServer extends IInterface {
             }
 
             @Override // android.media.midi.IMidiDeviceServer
-            public FileDescriptor openOutputPort(IBinder token, int portNumber) throws RemoteException {
+            public FileDescriptor openOutputPort(IBinder token, int portNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -256,7 +259,8 @@ public interface IMidiDeviceServer extends IInterface {
             }
 
             @Override // android.media.midi.IMidiDeviceServer
-            public int connectPorts(IBinder token, FileDescriptor fd, int outputPortNumber) throws RemoteException {
+            public int connectPorts(IBinder token, FileDescriptor fd, int outputPortNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -282,7 +286,8 @@ public interface IMidiDeviceServer extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    MidiDeviceInfo _result = (MidiDeviceInfo) _reply.readTypedObject(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo _result =
+                            (MidiDeviceInfo) _reply.readTypedObject(MidiDeviceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

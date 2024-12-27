@@ -1,6 +1,7 @@
 package android.graphics.rendererpolicy;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,7 +15,11 @@ public class BlockItem {
     private final List<Integer> osVersions;
     private final String packageName;
 
-    public BlockItem(String packageName, List<String> modelNames, List<String> chipsetNames, List<Integer> osVersions) {
+    public BlockItem(
+            String packageName,
+            List<String> modelNames,
+            List<String> chipsetNames,
+            List<Integer> osVersions) {
         this.packageName = packageName;
         this.modelNames = modelNames;
         this.chipsetNames = chipsetNames;
@@ -34,7 +39,8 @@ public class BlockItem {
         }
         String lowerCaseQueryModel = queryModelName.toLowerCase();
         for (String configModel : this.modelNames) {
-            if (lowerCaseQueryModel.contains(configModel.toLowerCase()) || ALL_MODEL.equals(configModel)) {
+            if (lowerCaseQueryModel.contains(configModel.toLowerCase())
+                    || ALL_MODEL.equals(configModel)) {
                 return true;
             }
         }
@@ -47,7 +53,8 @@ public class BlockItem {
         }
         String lowerCaseQueryChipset = queryChipsetName.toLowerCase();
         for (String configChipset : this.chipsetNames) {
-            if (lowerCaseQueryChipset.contains(configChipset.toLowerCase()) || ALL_CHIPSET.equals(configChipset)) {
+            if (lowerCaseQueryChipset.contains(configChipset.toLowerCase())
+                    || ALL_CHIPSET.equals(configChipset)) {
                 return true;
             }
         }
@@ -73,7 +80,9 @@ public class BlockItem {
     }
 
     public boolean isBlockItemMatched(QueryInfo queryInfo) {
-        return isPackageNameMatched(queryInfo.getPackageName()) && isModelOrChipsetNameMatched(queryInfo.getModelName(), queryInfo.getChipsetName()) && isOsVersionMatched(queryInfo.getOsVersion());
+        return isPackageNameMatched(queryInfo.getPackageName())
+                && isModelOrChipsetNameMatched(queryInfo.getModelName(), queryInfo.getChipsetName())
+                && isOsVersionMatched(queryInfo.getOsVersion());
     }
 
     public String getPackageName() {
@@ -93,6 +102,14 @@ public class BlockItem {
     }
 
     public String toString() {
-        return NavigationBarInflaterView.KEY_CODE_START + this.packageName + ", " + this.modelNames + ", " + this.chipsetNames + ", " + this.osVersions + NavigationBarInflaterView.KEY_CODE_END;
+        return NavigationBarInflaterView.KEY_CODE_START
+                + this.packageName
+                + ", "
+                + this.modelNames
+                + ", "
+                + this.chipsetNames
+                + ", "
+                + this.osVersions
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

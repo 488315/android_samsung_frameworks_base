@@ -8,7 +8,9 @@ import android.telecom.VideoProfile;
 import android.telephony.emergency.EmergencyNumber;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -42,19 +44,21 @@ public final class ImsCallProfile implements Parcelable {
     public static final int CMC_TYPE_NONE = 0;
     public static final int CMC_TYPE_PD = 1;
     public static final int CMC_TYPE_SD = 2;
-    public static final Parcelable.Creator<ImsCallProfile> CREATOR = new Parcelable.Creator<ImsCallProfile>() { // from class: android.telephony.ims.ImsCallProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsCallProfile createFromParcel(Parcel in) {
-            return new ImsCallProfile(in);
-        }
+    public static final Parcelable.Creator<ImsCallProfile> CREATOR =
+            new Parcelable.Creator<
+                    ImsCallProfile>() { // from class: android.telephony.ims.ImsCallProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsCallProfile createFromParcel(Parcel in) {
+                    return new ImsCallProfile(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsCallProfile[] newArray(int size) {
-            return new ImsCallProfile[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsCallProfile[] newArray(int size) {
+                    return new ImsCallProfile[size];
+                }
+            };
     public static final int DIALSTRING_NORMAL = 0;
     public static final int DIALSTRING_SS_CONF = 1;
     public static final int DIALSTRING_USSD = 2;
@@ -63,17 +67,19 @@ public final class ImsCallProfile implements Parcelable {
     public static final String EMERGENCY_CALL_RAT_NR = "VoLTE";
     public static final String EVENT_IMSDC_UPDATE_TELECOM_CALLID = "IMSDC_UPDATE-TELECOM-CALLID";
     public static final String EXTRA_ADDITIONAL_CALL_INFO = "AdditionalCallInfo";
-    public static final String EXTRA_ADDITIONAL_SIP_INVITE_FIELDS = "android.telephony.ims.extra.ADDITIONAL_SIP_INVITE_FIELDS";
-    public static final String EXTRA_ASSERTED_DISPLAY_NAME = "android.telephony.ims.extra.ASSERTED_DISPLAY_NAME";
-    public static final String EXTRA_CALL_DISCONNECT_CAUSE = "android.telephony.ims.extra.CALL_DISCONNECT_CAUSE";
+    public static final String EXTRA_ADDITIONAL_SIP_INVITE_FIELDS =
+            "android.telephony.ims.extra.ADDITIONAL_SIP_INVITE_FIELDS";
+    public static final String EXTRA_ASSERTED_DISPLAY_NAME =
+            "android.telephony.ims.extra.ASSERTED_DISPLAY_NAME";
+    public static final String EXTRA_CALL_DISCONNECT_CAUSE =
+            "android.telephony.ims.extra.CALL_DISCONNECT_CAUSE";
     public static final String EXTRA_CALL_MODE_CHANGEABLE = "call_mode_changeable";
-    public static final String EXTRA_CALL_NETWORK_TYPE = "android.telephony.ims.extra.CALL_NETWORK_TYPE";
+    public static final String EXTRA_CALL_NETWORK_TYPE =
+            "android.telephony.ims.extra.CALL_NETWORK_TYPE";
 
-    @Deprecated
-    public static final String EXTRA_CALL_RAT_TYPE = "CallRadioTech";
+    @Deprecated public static final String EXTRA_CALL_RAT_TYPE = "CallRadioTech";
 
-    @Deprecated
-    public static final String EXTRA_CALL_RAT_TYPE_ALT = "callRadioTech";
+    @Deprecated public static final String EXTRA_CALL_RAT_TYPE_ALT = "callRadioTech";
     public static final String EXTRA_CALL_SUBJECT = "android.telephony.ims.extra.CALL_SUBJECT";
     public static final String EXTRA_CHILD_NUMBER = "ChildNum";
     public static final String EXTRA_CNA = "cna";
@@ -82,6 +88,7 @@ public final class ImsCallProfile implements Parcelable {
 
     @SystemApi
     public static final String EXTRA_CONFERENCE = "android.telephony.ims.extra.CONFERENCE";
+
     public static final String EXTRA_CONFERENCE_AUDIO_QUALITY = "audioQuality";
     public static final String EXTRA_CONFERENCE_AVAIL = "conference_avail";
     public static final String EXTRA_CONFERENCE_DEPRECATED = "conference";
@@ -93,14 +100,19 @@ public final class ImsCallProfile implements Parcelable {
     public static final String EXTRA_EMERGENCY_CALL = "e_call";
 
     @SystemApi
-    public static final String EXTRA_EXTENDING_TO_CONFERENCE_SUPPORTED = "android.telephony.ims.extra.EXTENDING_TO_CONFERENCE_SUPPORTED";
+    public static final String EXTRA_EXTENDING_TO_CONFERENCE_SUPPORTED =
+            "android.telephony.ims.extra.EXTENDING_TO_CONFERENCE_SUPPORTED";
+
     public static final String EXTRA_FEATURE_CAPABILITY = "feature_caps";
-    public static final String EXTRA_FORWARDED_NUMBER = "android.telephony.ims.extra.FORWARDED_NUMBER";
+    public static final String EXTRA_FORWARDED_NUMBER =
+            "android.telephony.ims.extra.FORWARDED_NUMBER";
     public static final String EXTRA_IMS_ECM_SUPPORT = "imsEcmSupport";
     public static final String EXTRA_IMS_EMERGENCY_CALL_RAT = "imsEmergencyRat";
-    public static final String EXTRA_IS_BUSINESS_CALL = "android.telephony.ims.extra.IS_BUSINESS_CALL";
+    public static final String EXTRA_IS_BUSINESS_CALL =
+            "android.telephony.ims.extra.IS_BUSINESS_CALL";
     public static final String EXTRA_IS_CALL_PULL = "CallPull";
-    public static final String EXTRA_IS_CROSS_SIM_CALL = "android.telephony.ims.extra.IS_CROSS_SIM_CALL";
+    public static final String EXTRA_IS_CROSS_SIM_CALL =
+            "android.telephony.ims.extra.IS_CROSS_SIM_CALL";
     public static final String EXTRA_IS_ECALL_CONVERTED_TO_NORMAL = "isECallConvertedToNormal";
     public static final String EXTRA_LOCATION = "android.telephony.ims.extra.LOCATION";
     public static final String EXTRA_OEM_EXTRAS = "android.telephony.ims.extra.OEM_EXTRAS";
@@ -110,8 +122,10 @@ public final class ImsCallProfile implements Parcelable {
     public static final String EXTRA_PRIORITY = "android.telephony.ims.extra.PRIORITY";
     public static final String EXTRA_REMOTE_URI = "remote_uri";
     public static final String EXTRA_RESUME_HOST_AND_MERGE = "ResumeHostAndMerge";
-    public static final String EXTRA_RETRY_CALL_FAIL_NETWORKTYPE = "android.telephony.ims.extra.RETRY_CALL_FAIL_NETWORKTYPE";
-    public static final String EXTRA_RETRY_CALL_FAIL_REASON = "android.telephony.ims.extra.RETRY_CALL_FAIL_REASON";
+    public static final String EXTRA_RETRY_CALL_FAIL_NETWORKTYPE =
+            "android.telephony.ims.extra.RETRY_CALL_FAIL_NETWORKTYPE";
+    public static final String EXTRA_RETRY_CALL_FAIL_REASON =
+            "android.telephony.ims.extra.RETRY_CALL_FAIL_REASON";
     public static final String EXTRA_USSD = "ussd";
     public static final String EXTRA_VMS = "vms";
     public static final int OIR_DEFAULT = 0;
@@ -144,12 +158,10 @@ public final class ImsCallProfile implements Parcelable {
     public int mServiceType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallRestrictCause {
-    }
+    public @interface CallRestrictCause {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VerificationStatus {
-    }
+    public @interface VerificationStatus {}
 
     public ImsCallProfile(Parcel in) {
         this.mRestrictCause = 0;
@@ -190,7 +202,8 @@ public final class ImsCallProfile implements Parcelable {
         this.mMediaProfile = new ImsStreamMediaProfile();
     }
 
-    public ImsCallProfile(int serviceType, int callType, Bundle callExtras, ImsStreamMediaProfile mediaProfile) {
+    public ImsCallProfile(
+            int serviceType, int callType, Bundle callExtras, ImsStreamMediaProfile mediaProfile) {
         this.mRestrictCause = 0;
         this.mEmergencyServiceCategories = 0;
         this.mEmergencyUrns = new ArrayList();
@@ -306,7 +319,31 @@ public final class ImsCallProfile implements Parcelable {
     }
 
     public String toString() {
-        return "{ serviceType=" + this.mServiceType + ", callType=" + this.mCallType + ", restrictCause=" + this.mRestrictCause + ", mediaProfile=" + (this.mMediaProfile != null ? this.mMediaProfile.toString() : "null") + ", emergencyServiceCategories=" + this.mEmergencyServiceCategories + ", emergencyUrns=" + this.mEmergencyUrns + ", emergencyCallRouting=" + this.mEmergencyCallRouting + ", emergencyCallTesting=" + this.mEmergencyCallTesting + ", hasKnownUserIntentEmergency=" + this.mHasKnownUserIntentEmergency + ", mRestrictCause=" + this.mRestrictCause + ", mCallerNumberVerstat= " + this.mCallerNumberVerificationStatus + ", mAcceptedRtpHeaderExtensions= " + this.mAcceptedRtpHeaderExtensionTypes + " }";
+        return "{ serviceType="
+                + this.mServiceType
+                + ", callType="
+                + this.mCallType
+                + ", restrictCause="
+                + this.mRestrictCause
+                + ", mediaProfile="
+                + (this.mMediaProfile != null ? this.mMediaProfile.toString() : "null")
+                + ", emergencyServiceCategories="
+                + this.mEmergencyServiceCategories
+                + ", emergencyUrns="
+                + this.mEmergencyUrns
+                + ", emergencyCallRouting="
+                + this.mEmergencyCallRouting
+                + ", emergencyCallTesting="
+                + this.mEmergencyCallTesting
+                + ", hasKnownUserIntentEmergency="
+                + this.mHasKnownUserIntentEmergency
+                + ", mRestrictCause="
+                + this.mRestrictCause
+                + ", mCallerNumberVerstat= "
+                + this.mCallerNumberVerificationStatus
+                + ", mAcceptedRtpHeaderExtensions= "
+                + this.mAcceptedRtpHeaderExtensionTypes
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -335,7 +372,11 @@ public final class ImsCallProfile implements Parcelable {
         this.mServiceType = in.readInt();
         this.mCallType = in.readInt();
         this.mCallExtras = in.readBundle();
-        this.mMediaProfile = (ImsStreamMediaProfile) in.readParcelable(ImsStreamMediaProfile.class.getClassLoader(), ImsStreamMediaProfile.class);
+        this.mMediaProfile =
+                (ImsStreamMediaProfile)
+                        in.readParcelable(
+                                ImsStreamMediaProfile.class.getClassLoader(),
+                                ImsStreamMediaProfile.class);
         this.mEmergencyServiceCategories = in.readInt();
         this.mEmergencyUrns = in.createStringArrayList();
         this.mEmergencyCallRouting = in.readInt();
@@ -343,13 +384,22 @@ public final class ImsCallProfile implements Parcelable {
         this.mHasKnownUserIntentEmergency = in.readBoolean();
         this.mRestrictCause = in.readInt();
         this.mCallerNumberVerificationStatus = in.readInt();
-        Object[] accepted = in.readArray(RtpHeaderExtensionType.class.getClassLoader(), RtpHeaderExtensionType.class);
-        this.mAcceptedRtpHeaderExtensionTypes = (Set) Arrays.stream(accepted).map(new Function() { // from class: android.telephony.ims.ImsCallProfile$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ImsCallProfile.lambda$readFromParcel$0(obj);
-            }
-        }).collect(Collectors.toSet());
+        Object[] accepted =
+                in.readArray(
+                        RtpHeaderExtensionType.class.getClassLoader(),
+                        RtpHeaderExtensionType.class);
+        this.mAcceptedRtpHeaderExtensionTypes =
+                (Set)
+                        Arrays.stream(accepted)
+                                .map(
+                                        new Function() { // from class:
+                                                         // android.telephony.ims.ImsCallProfile$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return ImsCallProfile.lambda$readFromParcel$0(obj);
+                                            }
+                                        })
+                                .collect(Collectors.toSet());
     }
 
     static /* synthetic */ RtpHeaderExtensionType lambda$readFromParcel$0(Object o) {
@@ -463,7 +513,12 @@ public final class ImsCallProfile implements Parcelable {
         Bundle filtered = TelephonyUtils.filterValues(extras);
         int endSize = filtered.size();
         if (startSize != endSize) {
-            Log.i(TAG, "maybeCleanseExtras: " + (startSize - endSize) + " extra values were removed - only primitive types and system parcelables are permitted.");
+            Log.i(
+                    TAG,
+                    "maybeCleanseExtras: "
+                            + (startSize - endSize)
+                            + " extra values were removed - only primitive types and system"
+                            + " parcelables are permitted.");
         }
         return filtered;
     }
@@ -524,7 +579,8 @@ public final class ImsCallProfile implements Parcelable {
         return this.mAcceptedRtpHeaderExtensionTypes;
     }
 
-    public void setAcceptedRtpHeaderExtensionTypes(Set<RtpHeaderExtensionType> rtpHeaderExtensions) {
+    public void setAcceptedRtpHeaderExtensionTypes(
+            Set<RtpHeaderExtensionType> rtpHeaderExtensions) {
         this.mAcceptedRtpHeaderExtensionTypes.clear();
         this.mAcceptedRtpHeaderExtensionTypes.addAll(rtpHeaderExtensions);
     }

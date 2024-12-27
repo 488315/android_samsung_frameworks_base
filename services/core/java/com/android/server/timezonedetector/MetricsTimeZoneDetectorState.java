@@ -2,6 +2,7 @@ package com.android.server.timezonedetector;
 
 import android.app.timezonedetector.ManualTimeZoneSuggestion;
 import android.app.timezonedetector.TelephonyTimeZoneSuggestion;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -34,7 +35,8 @@ public final class MetricsTimeZoneDetectorState {
                 return false;
             }
             MetricsTimeZoneSuggestion metricsTimeZoneSuggestion = (MetricsTimeZoneSuggestion) obj;
-            return Arrays.equals(this.mZoneIdOrdinals, metricsTimeZoneSuggestion.mZoneIdOrdinals) && Arrays.equals(this.mZoneIds, metricsTimeZoneSuggestion.mZoneIds);
+            return Arrays.equals(this.mZoneIdOrdinals, metricsTimeZoneSuggestion.mZoneIdOrdinals)
+                    && Arrays.equals(this.mZoneIds, metricsTimeZoneSuggestion.mZoneIds);
         }
 
         public final int hashCode() {
@@ -42,11 +44,21 @@ public final class MetricsTimeZoneDetectorState {
         }
 
         public final String toString() {
-            return "MetricsTimeZoneSuggestion{mZoneIdOrdinals=" + Arrays.toString(this.mZoneIdOrdinals) + ", mZoneIds=" + Arrays.toString(this.mZoneIds) + '}';
+            return "MetricsTimeZoneSuggestion{mZoneIdOrdinals="
+                    + Arrays.toString(this.mZoneIdOrdinals)
+                    + ", mZoneIds="
+                    + Arrays.toString(this.mZoneIds)
+                    + '}';
         }
     }
 
-    public MetricsTimeZoneDetectorState(ConfigurationInternal configurationInternal, int i, String str, MetricsTimeZoneSuggestion metricsTimeZoneSuggestion, MetricsTimeZoneSuggestion metricsTimeZoneSuggestion2, MetricsTimeZoneSuggestion metricsTimeZoneSuggestion3) {
+    public MetricsTimeZoneDetectorState(
+            ConfigurationInternal configurationInternal,
+            int i,
+            String str,
+            MetricsTimeZoneSuggestion metricsTimeZoneSuggestion,
+            MetricsTimeZoneSuggestion metricsTimeZoneSuggestion2,
+            MetricsTimeZoneSuggestion metricsTimeZoneSuggestion3) {
         Objects.requireNonNull(configurationInternal);
         this.mConfigurationInternal = configurationInternal;
         this.mDeviceTimeZoneIdOrdinal = i;
@@ -60,7 +72,13 @@ public final class MetricsTimeZoneDetectorState {
     /* JADX WARN: Type inference failed for: r8v0, types: [com.android.server.timezonedetector.MetricsTimeZoneDetectorState$MetricsTimeZoneSuggestion] */
     /* JADX WARN: Type inference failed for: r9v2, types: [com.android.server.timezonedetector.MetricsTimeZoneDetectorState$MetricsTimeZoneSuggestion] */
     /* JADX WARN: Type inference failed for: r9v4, types: [com.android.server.timezonedetector.MetricsTimeZoneDetectorState$MetricsTimeZoneSuggestion] */
-    public static MetricsTimeZoneDetectorState create(OrdinalGenerator ordinalGenerator, ConfigurationInternal configurationInternal, String str, ManualTimeZoneSuggestion manualTimeZoneSuggestion, TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestion, LocationAlgorithmEvent locationAlgorithmEvent) {
+    public static MetricsTimeZoneDetectorState create(
+            OrdinalGenerator ordinalGenerator,
+            ConfigurationInternal configurationInternal,
+            String str,
+            ManualTimeZoneSuggestion manualTimeZoneSuggestion,
+            TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestion,
+            LocationAlgorithmEvent locationAlgorithmEvent) {
         MetricsTimeZoneSuggestion metricsTimeZoneSuggestion;
         MetricsTimeZoneSuggestion metricsTimeZoneSuggestion2;
         GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion;
@@ -73,15 +91,24 @@ public final class MetricsTimeZoneDetectorState {
             metricsTimeZoneSuggestion = null;
         } else {
             String zoneId = manualTimeZoneSuggestion.getZoneId();
-            metricsTimeZoneSuggestion = new MetricsTimeZoneSuggestion(new int[]{ordinalGenerator.ordinal(zoneId)}, z ? new String[]{zoneId} : null);
+            metricsTimeZoneSuggestion =
+                    new MetricsTimeZoneSuggestion(
+                            new int[] {ordinalGenerator.ordinal(zoneId)},
+                            z ? new String[] {zoneId} : null);
         }
         if (telephonyTimeZoneSuggestion == null) {
             metricsTimeZoneSuggestion2 = null;
         } else {
             String zoneId2 = telephonyTimeZoneSuggestion.getZoneId();
-            metricsTimeZoneSuggestion2 = zoneId2 == null ? new MetricsTimeZoneSuggestion(null, null) : new MetricsTimeZoneSuggestion(new int[]{ordinalGenerator.ordinal(zoneId2)}, z ? new String[]{zoneId2} : null);
+            metricsTimeZoneSuggestion2 =
+                    zoneId2 == null
+                            ? new MetricsTimeZoneSuggestion(null, null)
+                            : new MetricsTimeZoneSuggestion(
+                                    new int[] {ordinalGenerator.ordinal(zoneId2)},
+                                    z ? new String[] {zoneId2} : null);
         }
-        if (locationAlgorithmEvent != null && (geolocationTimeZoneSuggestion = locationAlgorithmEvent.mSuggestion) != null) {
+        if (locationAlgorithmEvent != null
+                && (geolocationTimeZoneSuggestion = locationAlgorithmEvent.mSuggestion) != null) {
             List list = geolocationTimeZoneSuggestion.mZoneIds;
             if (list == null) {
                 strArr = new MetricsTimeZoneSuggestion(null, null);
@@ -96,7 +123,13 @@ public final class MetricsTimeZoneDetectorState {
             }
             r1 = strArr;
         }
-        return new MetricsTimeZoneDetectorState(configurationInternal, ordinal, str2, metricsTimeZoneSuggestion, metricsTimeZoneSuggestion2, r1);
+        return new MetricsTimeZoneDetectorState(
+                configurationInternal,
+                ordinal,
+                str2,
+                metricsTimeZoneSuggestion,
+                metricsTimeZoneSuggestion2,
+                r1);
     }
 
     public final boolean equals(Object obj) {
@@ -106,15 +139,48 @@ public final class MetricsTimeZoneDetectorState {
         if (obj == null || MetricsTimeZoneDetectorState.class != obj.getClass()) {
             return false;
         }
-        MetricsTimeZoneDetectorState metricsTimeZoneDetectorState = (MetricsTimeZoneDetectorState) obj;
-        return this.mDeviceTimeZoneIdOrdinal == metricsTimeZoneDetectorState.mDeviceTimeZoneIdOrdinal && Objects.equals(this.mDeviceTimeZoneId, metricsTimeZoneDetectorState.mDeviceTimeZoneId) && this.mConfigurationInternal.equals(metricsTimeZoneDetectorState.mConfigurationInternal) && Objects.equals(this.mLatestManualSuggestion, metricsTimeZoneDetectorState.mLatestManualSuggestion) && Objects.equals(this.mLatestTelephonySuggestion, metricsTimeZoneDetectorState.mLatestTelephonySuggestion) && Objects.equals(this.mLatestGeolocationSuggestion, metricsTimeZoneDetectorState.mLatestGeolocationSuggestion);
+        MetricsTimeZoneDetectorState metricsTimeZoneDetectorState =
+                (MetricsTimeZoneDetectorState) obj;
+        return this.mDeviceTimeZoneIdOrdinal
+                        == metricsTimeZoneDetectorState.mDeviceTimeZoneIdOrdinal
+                && Objects.equals(
+                        this.mDeviceTimeZoneId, metricsTimeZoneDetectorState.mDeviceTimeZoneId)
+                && this.mConfigurationInternal.equals(
+                        metricsTimeZoneDetectorState.mConfigurationInternal)
+                && Objects.equals(
+                        this.mLatestManualSuggestion,
+                        metricsTimeZoneDetectorState.mLatestManualSuggestion)
+                && Objects.equals(
+                        this.mLatestTelephonySuggestion,
+                        metricsTimeZoneDetectorState.mLatestTelephonySuggestion)
+                && Objects.equals(
+                        this.mLatestGeolocationSuggestion,
+                        metricsTimeZoneDetectorState.mLatestGeolocationSuggestion);
     }
 
     public final int hashCode() {
-        return Objects.hash(this.mConfigurationInternal, Integer.valueOf(this.mDeviceTimeZoneIdOrdinal), this.mDeviceTimeZoneId, this.mLatestManualSuggestion, this.mLatestTelephonySuggestion, this.mLatestGeolocationSuggestion);
+        return Objects.hash(
+                this.mConfigurationInternal,
+                Integer.valueOf(this.mDeviceTimeZoneIdOrdinal),
+                this.mDeviceTimeZoneId,
+                this.mLatestManualSuggestion,
+                this.mLatestTelephonySuggestion,
+                this.mLatestGeolocationSuggestion);
     }
 
     public final String toString() {
-        return "MetricsTimeZoneDetectorState{mConfigurationInternal=" + this.mConfigurationInternal + ", mDeviceTimeZoneIdOrdinal=" + this.mDeviceTimeZoneIdOrdinal + ", mDeviceTimeZoneId=" + this.mDeviceTimeZoneId + ", mLatestManualSuggestion=" + this.mLatestManualSuggestion + ", mLatestTelephonySuggestion=" + this.mLatestTelephonySuggestion + ", mLatestGeolocationSuggestion=" + this.mLatestGeolocationSuggestion + '}';
+        return "MetricsTimeZoneDetectorState{mConfigurationInternal="
+                + this.mConfigurationInternal
+                + ", mDeviceTimeZoneIdOrdinal="
+                + this.mDeviceTimeZoneIdOrdinal
+                + ", mDeviceTimeZoneId="
+                + this.mDeviceTimeZoneId
+                + ", mLatestManualSuggestion="
+                + this.mLatestManualSuggestion
+                + ", mLatestTelephonySuggestion="
+                + this.mLatestTelephonySuggestion
+                + ", mLatestGeolocationSuggestion="
+                + this.mLatestGeolocationSuggestion
+                + '}';
     }
 }

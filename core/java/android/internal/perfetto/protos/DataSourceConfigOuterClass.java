@@ -46,7 +46,6 @@ public final class DataSourceConfigOuterClass {
         public static final long V8_CONFIG = 1146756268159L;
         public static final long VULKAN_MEMORY_CONFIG = 1146756268144L;
 
-        public DataSourceConfig() {
-        }
+        public DataSourceConfig() {}
     }
 }

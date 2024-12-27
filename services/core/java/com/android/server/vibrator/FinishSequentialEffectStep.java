@@ -2,6 +2,7 @@ package com.android.server.vibrator;
 
 import android.os.Trace;
 import android.util.Slog;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,18 +25,25 @@ public final class FinishSequentialEffectStep extends Step {
     @Override // com.android.server.vibrator.Step
     public final void cancelImmediately() {
         VibrationStepConductor vibrationStepConductor = this.conductor;
-        vibrationStepConductor.vibratorManagerHooks.noteVibratorOff(vibrationStepConductor.mVibration.callerInfo.uid);
+        vibrationStepConductor.vibratorManagerHooks.noteVibratorOff(
+                vibrationStepConductor.mVibration.callerInfo.uid);
     }
 
     @Override // com.android.server.vibrator.Step
     public final List play() {
         Trace.traceBegin(8388608L, "FinishSequentialEffectStep");
         try {
-            Slog.d("VibrationThread", "FinishSequentialEffectStep for effect #" + this.startedStep.currentIndex);
+            Slog.d(
+                    "VibrationThread",
+                    "FinishSequentialEffectStep for effect #" + this.startedStep.currentIndex);
             VibrationStepConductor vibrationStepConductor = this.conductor;
-            vibrationStepConductor.vibratorManagerHooks.noteVibratorOff(vibrationStepConductor.mVibration.callerInfo.uid);
+            vibrationStepConductor.vibratorManagerHooks.noteVibratorOff(
+                    vibrationStepConductor.mVibration.callerInfo.uid);
             StartSequentialEffectStep nextStep = this.startedStep.nextStep();
-            List asList = nextStep == null ? VibrationStepConductor.EMPTY_STEP_LIST : Arrays.asList(nextStep);
+            List asList =
+                    nextStep == null
+                            ? VibrationStepConductor.EMPTY_STEP_LIST
+                            : Arrays.asList(nextStep);
             Trace.traceEnd(8388608L);
             return asList;
         } catch (Throwable th) {

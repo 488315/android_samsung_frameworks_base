@@ -2,6 +2,7 @@ package com.samsung.android.knoxguard.service.utils;
 
 import android.net.Uri;
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +25,13 @@ public final class Constants {
     public static final String ERROR_KGTA_RPMB_UNAVAILABLE = "1003";
     public static final String ERROR_LOCK_FROM_USER_PRESENT = "2003";
     public static final String ERROR_RETRY_LOCK_DEFAULT = "2002";
-    public static final String INTENT_KG_PACKAGE_ADDED = "com.samsung.kgclient.android.intent.action.KG_PACKAGE_ADDED";
+    public static final String INTENT_KG_PACKAGE_ADDED =
+            "com.samsung.kgclient.android.intent.action.KG_PACKAGE_ADDED";
     public static final String INTENT_RETRY_LOCK = "com.samsung.android.knoxguard.RETRY_LOCK";
-    public static final String INTENT_SECSETUPWIZARD_COMPLETE = "com.sec.android.app.secsetupwizard.SETUPWIZARD_COMPLETE";
-    public static final String INTENT_SETUPWIZARD_COMPLETE = "com.sec.android.app.setupwizard.SETUPWIZARD_COMPLETE";
+    public static final String INTENT_SECSETUPWIZARD_COMPLETE =
+            "com.sec.android.app.secsetupwizard.SETUPWIZARD_COMPLETE";
+    public static final String INTENT_SETUPWIZARD_COMPLETE =
+            "com.sec.android.app.setupwizard.SETUPWIZARD_COMPLETE";
     public static final boolean IS_FIRST_API_SUPPORT_SF_POLICY;
     public static final boolean IS_SUPPORT_KGTA;
     public static final String JSON_CLIENT_DATA_COMPANY = "companyName";
@@ -74,12 +78,20 @@ public final class Constants {
     public static final String UFS_UN_R = "/sys/class/sec/ufs/un";
     public static final String V3_OTP_BIT_KG_FUSED = "1";
     public static final String V3_OTP_BIT_KG_INITIAL = "0";
-    public static final Uri KG_LOG_URI = Uri.parse("content://com.samsung.android.kgclient.statusprovider/CONTENT_LOG");
+    public static final Uri KG_LOG_URI =
+            Uri.parse("content://com.samsung.android.kgclient.statusprovider/CONTENT_LOG");
     public static final String RLC_STATE_PRENORMAL = "Prenormal";
     public static final String RLC_STATE_CHECKING = "Checking";
     public static final String RLC_STATE_LOCKED = "Locked";
     public static final String RLC_STATE_COMPLETED = "Completed";
-    public static final String[] strState = {RLC_STATE_PRENORMAL, RLC_STATE_CHECKING, "Active", RLC_STATE_LOCKED, RLC_STATE_COMPLETED, "Error"};
+    public static final String[] strState = {
+        RLC_STATE_PRENORMAL,
+        RLC_STATE_CHECKING,
+        "Active",
+        RLC_STATE_LOCKED,
+        RLC_STATE_COMPLETED,
+        "Error"
+    };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LockResult {
@@ -99,7 +111,8 @@ public final class Constants {
 
     static {
         IS_SUPPORT_KGTA = SystemProperties.getInt("ro.product.first_api_level", 0) >= 30;
-        IS_FIRST_API_SUPPORT_SF_POLICY = SystemProperties.getInt("ro.product.first_api_level", 0) >= 35;
+        IS_FIRST_API_SUPPORT_SF_POLICY =
+                SystemProperties.getInt("ro.product.first_api_level", 0) >= 35;
         ArrayList arrayList = new ArrayList();
         PROTECTED_APP_OPS_LIST = arrayList;
         arrayList.add(63);

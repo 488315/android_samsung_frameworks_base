@@ -10,7 +10,9 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.secutil.Slog;
+
 import com.samsung.android.server.pm.appcategory.AppCategoryFilter;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -20,7 +22,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class AppCategoryHintHelper {
-    public static final String FILE_PATH = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(Environment.getDataDirectory().getPath() + "/system/", "package-appcategory.dat");
+    public static final String FILE_PATH =
+            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                    Environment.getDataDirectory().getPath() + "/system/",
+                    "package-appcategory.dat");
     public AppCategoryFilter mAppCategoryFilter;
     public HashMap mCategoryMap;
     public ArraySet mChangedByUserApp;
@@ -29,7 +34,8 @@ public final class AppCategoryHintHelper {
     public PackageManagerService mService;
 
     public static boolean isSystemServerOrShell() {
-        return (Binder.getCallingUid() == 1000 && Binder.getCallingPid() == Process.myPid()) || Binder.getCallingUid() == 2000;
+        return (Binder.getCallingUid() == 1000 && Binder.getCallingPid() == Process.myPid())
+                || Binder.getCallingUid() == 2000;
     }
 
     public final void clearAppCategoryHintUser(String str) {
@@ -37,8 +43,11 @@ public final class AppCategoryHintHelper {
             throw new RemoteException("calling uid is not system server!");
         }
         if (!this.mInit.get()) {
-            Slog.d("AppCategoryHintHelper", "AppCategoryHintHelper is not initialized, can't set category");
-            throw new RemoteException("AppCategoryHintHelper is not initialized, can't set category");
+            Slog.d(
+                    "AppCategoryHintHelper",
+                    "AppCategoryHintHelper is not initialized, can't set category");
+            throw new RemoteException(
+                    "AppCategoryHintHelper is not initialized, can't set category");
         }
         if (str == null || str.isEmpty()) {
             Slog.d("AppCategoryHintHelper", "packageName is null or empty!");
@@ -54,12 +63,17 @@ public final class AppCategoryHintHelper {
     public final int getAppCategoryHintUser(String str) {
         int intValue;
         if (!this.mInit.get()) {
-            Slog.d("AppCategoryHintHelper", "AppCategoryHintHelper is not initialized, can't get category");
+            Slog.d(
+                    "AppCategoryHintHelper",
+                    "AppCategoryHintHelper is not initialized, can't get category");
             return -1;
         }
         synchronized (this.mCategoryMap) {
             try {
-                intValue = this.mCategoryMap.containsKey(str) ? ((Integer) this.mCategoryMap.get(str)).intValue() : -1;
+                intValue =
+                        this.mCategoryMap.containsKey(str)
+                                ? ((Integer) this.mCategoryMap.get(str)).intValue()
+                                : -1;
             } catch (Throwable th) {
                 throw th;
             }
@@ -67,7 +81,10 @@ public final class AppCategoryHintHelper {
         return intValue;
     }
 
-    public final void onInit(PackageManagerService packageManagerService, Handler handler, AppCategoryFilter appCategoryFilter) {
+    public final void onInit(
+            PackageManagerService packageManagerService,
+            Handler handler,
+            AppCategoryFilter appCategoryFilter) {
         FileInputStream fileInputStream;
         if (this.mInit.get()) {
             return;
@@ -90,7 +107,8 @@ public final class AppCategoryHintHelper {
                     fileInputStream.close();
                     if (Build.isDebuggable()) {
                         Slog.d("AppCategoryHintHelper", "read AppCategoryHintUser");
-                        this.mCategoryMap.forEach(new AppCategoryHintHelper$$ExternalSyntheticLambda4(1));
+                        this.mCategoryMap.forEach(
+                                new AppCategoryHintHelper$$ExternalSyntheticLambda4(1));
                     }
                 } finally {
                 }
@@ -109,7 +127,10 @@ public final class AppCategoryHintHelper {
 
     public final void sendAppCategoryBroadcast(int i, String str) {
         if (!this.mInit.get()) {
-            Slog.d("AppCategoryHintHelper", "AppCategoryHintHelper is not initialized, sendAppCategoryBroadcast is not required.");
+            Slog.d(
+                    "AppCategoryHintHelper",
+                    "AppCategoryHintHelper is not initialized, sendAppCategoryBroadcast is not"
+                        + " required.");
             return;
         }
         Bundle bundle = new Bundle(2);
@@ -117,6 +138,12 @@ public final class AppCategoryHintHelper {
         bundle.putInt("app_category", i);
         PackageManagerService packageManagerService = this.mService;
         packageManagerService.getClass();
-        packageManagerService.mHandler.post(new PackageManagerService$$ExternalSyntheticLambda8(packageManagerService, "com.samsung.android.intent.action.SET_APPCATEGORY", str, bundle, null));
+        packageManagerService.mHandler.post(
+                new PackageManagerService$$ExternalSyntheticLambda8(
+                        packageManagerService,
+                        "com.samsung.android.intent.action.SET_APPCATEGORY",
+                        str,
+                        bundle,
+                        null));
     }
 }

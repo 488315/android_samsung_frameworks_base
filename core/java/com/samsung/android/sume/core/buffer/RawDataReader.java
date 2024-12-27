@@ -3,6 +3,7 @@ package com.samsung.android.sume.core.buffer;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.types.DataType;
+
 import java.nio.ByteBuffer;
 import java.util.Objects;
 import java.util.Optional;
@@ -28,7 +29,8 @@ public class RawDataReader implements MediaBufferReader<Number> {
     private Supplier<?> getRawDataRead(DataType dataType, final ByteBuffer byteBuffer) {
         if (dataType.isByte()) {
             Objects.requireNonNull(byteBuffer);
-            return new Supplier() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda0
+            return new Supplier() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda0
                 @Override // java.util.function.Supplier
                 public final Object get() {
                     return Byte.valueOf(byteBuffer.get());
@@ -36,7 +38,8 @@ public class RawDataReader implements MediaBufferReader<Number> {
             };
         }
         if (dataType.isShort()) {
-            return new Supplier() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda1
+            return new Supplier() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda1
                 @Override // java.util.function.Supplier
                 public final Object get() {
                     Object valueOf;
@@ -46,7 +49,8 @@ public class RawDataReader implements MediaBufferReader<Number> {
             };
         }
         if (dataType.isInt()) {
-            return new Supplier() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda2
+            return new Supplier() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda2
                 @Override // java.util.function.Supplier
                 public final Object get() {
                     Object valueOf;
@@ -56,7 +60,8 @@ public class RawDataReader implements MediaBufferReader<Number> {
             };
         }
         if (dataType.isLong()) {
-            return new Supplier() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda3
+            return new Supplier() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda3
                 @Override // java.util.function.Supplier
                 public final Object get() {
                     Object valueOf;
@@ -66,7 +71,8 @@ public class RawDataReader implements MediaBufferReader<Number> {
             };
         }
         if (dataType.isFloat()) {
-            return new Supplier() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda4
+            return new Supplier() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda4
                 @Override // java.util.function.Supplier
                 public final Object get() {
                     Object valueOf;
@@ -78,10 +84,12 @@ public class RawDataReader implements MediaBufferReader<Number> {
         throw new UnsupportedOperationException("not supported");
     }
 
-    private Function<Integer, ?> getRawDataReadByIndex(DataType dataType, final ByteBuffer byteBuffer) {
+    private Function<Integer, ?> getRawDataReadByIndex(
+            DataType dataType, final ByteBuffer byteBuffer) {
         if (dataType.isByte()) {
             Objects.requireNonNull(byteBuffer);
-            return new Function() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda7
+            return new Function() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda7
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
                     return Byte.valueOf(byteBuffer.get(((Integer) obj).intValue()));
@@ -89,41 +97,52 @@ public class RawDataReader implements MediaBufferReader<Number> {
             };
         }
         if (dataType.isShort()) {
-            return new Function() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda8
+            return new Function() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda8
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
                     Object valueOf;
-                    valueOf = Short.valueOf(byteBuffer.asShortBuffer().get(((Integer) obj).intValue()));
+                    valueOf =
+                            Short.valueOf(
+                                    byteBuffer.asShortBuffer().get(((Integer) obj).intValue()));
                     return valueOf;
                 }
             };
         }
         if (dataType.isInt()) {
-            return new Function() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda9
+            return new Function() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda9
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
                     Object valueOf;
-                    valueOf = Integer.valueOf(byteBuffer.asIntBuffer().get(((Integer) obj).intValue()));
+                    valueOf =
+                            Integer.valueOf(
+                                    byteBuffer.asIntBuffer().get(((Integer) obj).intValue()));
                     return valueOf;
                 }
             };
         }
         if (dataType.isLong()) {
-            return new Function() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda10
+            return new Function() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda10
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
                     Object valueOf;
-                    valueOf = Long.valueOf(byteBuffer.asLongBuffer().get(((Integer) obj).intValue()));
+                    valueOf =
+                            Long.valueOf(byteBuffer.asLongBuffer().get(((Integer) obj).intValue()));
                     return valueOf;
                 }
             };
         }
         if (dataType.isFloat()) {
-            return new Function() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda11
+            return new Function() { // from class:
+                                    // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda11
                 @Override // java.util.function.Function
                 public final Object apply(Object obj) {
                     Object valueOf;
-                    valueOf = Float.valueOf(byteBuffer.asFloatBuffer().get(((Integer) obj).intValue()));
+                    valueOf =
+                            Float.valueOf(
+                                    byteBuffer.asFloatBuffer().get(((Integer) obj).intValue()));
                     return valueOf;
                 }
             };
@@ -133,27 +152,45 @@ public class RawDataReader implements MediaBufferReader<Number> {
 
     public RawDataReader(MediaBuffer buffer) {
         final MediaFormat format = buffer.getFormat();
-        this.pixelRead = (Supplier) Optional.ofNullable((ByteBuffer) buffer.getTypedData(ByteBuffer.class)).map(new Function() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda5
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return RawDataReader.this.m9116lambda$new$8$comsamsungandroidsumecorebufferRawDataReader(format, (ByteBuffer) obj);
-            }
-        }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
-        this.pixelReadByIndex = (Function) Optional.ofNullable((ByteBuffer) buffer.getTypedData(ByteBuffer.class)).map(new Function() { // from class: com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda6
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return RawDataReader.this.m9117lambda$new$9$comsamsungandroidsumecorebufferRawDataReader(format, (ByteBuffer) obj);
-            }
-        }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
+        this.pixelRead =
+                (Supplier)
+                        Optional.ofNullable((ByteBuffer) buffer.getTypedData(ByteBuffer.class))
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda5
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return RawDataReader.this
+                                                        .m9116lambda$new$8$comsamsungandroidsumecorebufferRawDataReader(
+                                                                format, (ByteBuffer) obj);
+                                            }
+                                        })
+                                .orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
+        this.pixelReadByIndex =
+                (Function)
+                        Optional.ofNullable((ByteBuffer) buffer.getTypedData(ByteBuffer.class))
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.RawDataReader$$ExternalSyntheticLambda6
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return RawDataReader.this
+                                                        .m9117lambda$new$9$comsamsungandroidsumecorebufferRawDataReader(
+                                                                format, (ByteBuffer) obj);
+                                            }
+                                        })
+                                .orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
     }
 
     /* renamed from: lambda$new$8$com-samsung-android-sume-core-buffer-RawDataReader, reason: not valid java name */
-    /* synthetic */ Supplier m9116lambda$new$8$comsamsungandroidsumecorebufferRawDataReader(MediaFormat format, ByteBuffer it) {
+    /* synthetic */ Supplier m9116lambda$new$8$comsamsungandroidsumecorebufferRawDataReader(
+            MediaFormat format, ByteBuffer it) {
         return getRawDataRead(format.getDataType(), it);
     }
 
     /* renamed from: lambda$new$9$com-samsung-android-sume-core-buffer-RawDataReader, reason: not valid java name */
-    /* synthetic */ Function m9117lambda$new$9$comsamsungandroidsumecorebufferRawDataReader(MediaFormat format, ByteBuffer e) {
+    /* synthetic */ Function m9117lambda$new$9$comsamsungandroidsumecorebufferRawDataReader(
+            MediaFormat format, ByteBuffer e) {
         return getRawDataReadByIndex(format.getDataType(), e);
     }
 }

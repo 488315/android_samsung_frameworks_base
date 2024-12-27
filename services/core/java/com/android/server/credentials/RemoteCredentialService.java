@@ -11,8 +11,10 @@ import android.service.credentials.BeginCreateCredentialRequest;
 import android.service.credentials.BeginGetCredentialRequest;
 import android.service.credentials.ClearCredentialStateRequest;
 import android.util.Slog;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.infra.ServiceConnector;
+
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -39,7 +41,13 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
     }
 
     public RemoteCredentialService(Context context, ComponentName componentName, int i) {
-        super(context, new Intent("android.service.credentials.CredentialProviderService").setComponent(componentName), 0, i, new RemoteCredentialService$$ExternalSyntheticLambda6());
+        super(
+                context,
+                new Intent("android.service.credentials.CredentialProviderService")
+                        .setComponent(componentName),
+                0,
+                i,
+                new RemoteCredentialService$$ExternalSyntheticLambda6());
         this.mOngoingRequest = new AtomicBoolean(false);
         this.mComponentName = componentName;
     }
@@ -73,7 +81,8 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
         return this.mComponentName;
     }
 
-    public final void handleExecutionResponse(Object obj, Throwable th, AtomicReference atomicReference) {
+    public final void handleExecutionResponse(
+            Object obj, Throwable th, AtomicReference atomicReference) {
         if (th == null) {
             ProviderCallbacks providerCallbacks = this.mCallback;
             if (providerCallbacks != null) {
@@ -83,7 +92,9 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
             return;
         }
         if (th instanceof TimeoutException) {
-            Slog.i("CredentialManager", "Remote provider response timed tuo for: " + this.mComponentName);
+            Slog.i(
+                    "CredentialManager",
+                    "Remote provider response timed tuo for: " + this.mComponentName);
             if (this.mOngoingRequest.get()) {
                 dispatchCancellationSignal((ICancellationSignal) atomicReference.get());
                 if (this.mCallback != null) {
@@ -96,7 +107,9 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
             return;
         }
         if (th instanceof CancellationException) {
-            Slog.i("CredentialManager", "Cancellation exception for remote provider: " + this.mComponentName);
+            Slog.i(
+                    "CredentialManager",
+                    "Cancellation exception for remote provider: " + this.mComponentName);
             if (this.mOngoingRequest.get()) {
                 dispatchCancellationSignal((ICancellationSignal) atomicReference.get());
                 if (this.mCallback != null) {
@@ -130,7 +143,8 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
         }
     }
 
-    public final void onBeginCreateCredential(BeginCreateCredentialRequest beginCreateCredentialRequest) {
+    public final void onBeginCreateCredential(
+            BeginCreateCredentialRequest beginCreateCredentialRequest) {
         if (this.mCallback == null) {
             Slog.w("CredentialManager", "Callback is not set");
             return;
@@ -138,9 +152,17 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
         this.mOngoingRequest.set(true);
         AtomicReference atomicReference = new AtomicReference();
         AtomicReference atomicReference2 = new AtomicReference();
-        AndroidFuture orTimeout = postAsync(new RemoteCredentialService$$ExternalSyntheticLambda0(this, beginCreateCredentialRequest, atomicReference2, atomicReference)).orTimeout(3000L, TimeUnit.MILLISECONDS);
+        AndroidFuture orTimeout =
+                postAsync(
+                                new RemoteCredentialService$$ExternalSyntheticLambda0(
+                                        this,
+                                        beginCreateCredentialRequest,
+                                        atomicReference2,
+                                        atomicReference))
+                        .orTimeout(3000L, TimeUnit.MILLISECONDS);
         atomicReference2.set(orTimeout);
-        orTimeout.whenComplete(new RemoteCredentialService$$ExternalSyntheticLambda1(this, atomicReference, 0));
+        orTimeout.whenComplete(
+                new RemoteCredentialService$$ExternalSyntheticLambda1(this, atomicReference, 0));
     }
 
     public final void onBeginGetCredential(BeginGetCredentialRequest beginGetCredentialRequest) {
@@ -151,9 +173,17 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
         this.mOngoingRequest.set(true);
         AtomicReference atomicReference = new AtomicReference();
         AtomicReference atomicReference2 = new AtomicReference();
-        AndroidFuture orTimeout = postAsync(new RemoteCredentialService$$ExternalSyntheticLambda0(this, beginGetCredentialRequest, atomicReference2, atomicReference)).orTimeout(3000L, TimeUnit.MILLISECONDS);
+        AndroidFuture orTimeout =
+                postAsync(
+                                new RemoteCredentialService$$ExternalSyntheticLambda0(
+                                        this,
+                                        beginGetCredentialRequest,
+                                        atomicReference2,
+                                        atomicReference))
+                        .orTimeout(3000L, TimeUnit.MILLISECONDS);
         atomicReference2.set(orTimeout);
-        orTimeout.whenComplete(new RemoteCredentialService$$ExternalSyntheticLambda1(this, atomicReference, 1));
+        orTimeout.whenComplete(
+                new RemoteCredentialService$$ExternalSyntheticLambda1(this, atomicReference, 1));
     }
 
     public final void onBindingDied(ComponentName componentName) {
@@ -161,7 +191,8 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
         Slog.w("CredentialManager", "binding died for: " + componentName);
     }
 
-    public final void onClearCredentialState(ClearCredentialStateRequest clearCredentialStateRequest) {
+    public final void onClearCredentialState(
+            ClearCredentialStateRequest clearCredentialStateRequest) {
         if (this.mCallback == null) {
             Slog.w("CredentialManager", "Callback is not set");
             return;
@@ -169,9 +200,17 @@ public class RemoteCredentialService extends ServiceConnector.Impl {
         this.mOngoingRequest.set(true);
         AtomicReference atomicReference = new AtomicReference();
         AtomicReference atomicReference2 = new AtomicReference();
-        AndroidFuture orTimeout = postAsync(new RemoteCredentialService$$ExternalSyntheticLambda0(this, clearCredentialStateRequest, atomicReference2, atomicReference)).orTimeout(3000L, TimeUnit.MILLISECONDS);
+        AndroidFuture orTimeout =
+                postAsync(
+                                new RemoteCredentialService$$ExternalSyntheticLambda0(
+                                        this,
+                                        clearCredentialStateRequest,
+                                        atomicReference2,
+                                        atomicReference))
+                        .orTimeout(3000L, TimeUnit.MILLISECONDS);
         atomicReference2.set(orTimeout);
-        orTimeout.whenComplete(new RemoteCredentialService$$ExternalSyntheticLambda1(this, atomicReference, 2));
+        orTimeout.whenComplete(
+                new RemoteCredentialService$$ExternalSyntheticLambda1(this, atomicReference, 2));
     }
 
     public final void setCallback(ProviderSession providerSession) {

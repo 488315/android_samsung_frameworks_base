@@ -2,24 +2,29 @@ package android.view.inputmethod;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class ParcelableHandwritingGesture implements Parcelable {
-    public static final Parcelable.Creator<ParcelableHandwritingGesture> CREATOR = new Parcelable.Creator<ParcelableHandwritingGesture>() { // from class: android.view.inputmethod.ParcelableHandwritingGesture.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableHandwritingGesture createFromParcel(Parcel in) {
-            int gestureType = in.readInt();
-            return new ParcelableHandwritingGesture(ParcelableHandwritingGesture.createFromParcelInternal(gestureType, in));
-        }
+    public static final Parcelable.Creator<ParcelableHandwritingGesture> CREATOR =
+            new Parcelable.Creator<
+                    ParcelableHandwritingGesture>() { // from class:
+                                                      // android.view.inputmethod.ParcelableHandwritingGesture.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableHandwritingGesture createFromParcel(Parcel in) {
+                    int gestureType = in.readInt();
+                    return new ParcelableHandwritingGesture(
+                            ParcelableHandwritingGesture.createFromParcelInternal(gestureType, in));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableHandwritingGesture[] newArray(int size) {
-            return new ParcelableHandwritingGesture[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableHandwritingGesture[] newArray(int size) {
+                    return new ParcelableHandwritingGesture[size];
+                }
+            };
     private final HandwritingGesture mGesture;
     private final Parcelable mGestureAsParcelable;
 
@@ -30,7 +35,8 @@ public final class ParcelableHandwritingGesture implements Parcelable {
     }
 
     public static ParcelableHandwritingGesture of(HandwritingGesture gesture) {
-        return new ParcelableHandwritingGesture((HandwritingGesture) Objects.requireNonNull(gesture));
+        return new ParcelableHandwritingGesture(
+                (HandwritingGesture) Objects.requireNonNull(gesture));
     }
 
     public HandwritingGesture get() {

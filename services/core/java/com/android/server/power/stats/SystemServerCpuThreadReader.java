@@ -1,6 +1,7 @@
 package com.android.server.power.stats;
 
 import com.android.internal.os.KernelSingleProcessCpuThreadReader;
+
 import java.io.IOException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,11 +18,14 @@ public final class SystemServerCpuThreadReader {
         public long[] threadCpuTimesUs;
     }
 
-    public SystemServerCpuThreadReader(int i, KernelSingleProcessCpuThreadReader.CpuTimeInStateReader cpuTimeInStateReader) throws IOException {
+    public SystemServerCpuThreadReader(
+            int i, KernelSingleProcessCpuThreadReader.CpuTimeInStateReader cpuTimeInStateReader)
+            throws IOException {
         this(new KernelSingleProcessCpuThreadReader(i, cpuTimeInStateReader));
     }
 
-    public SystemServerCpuThreadReader(KernelSingleProcessCpuThreadReader kernelSingleProcessCpuThreadReader) {
+    public SystemServerCpuThreadReader(
+            KernelSingleProcessCpuThreadReader kernelSingleProcessCpuThreadReader) {
         this.mDeltaCpuThreadTimes = new SystemServiceCpuThreadTimes();
         this.mKernelCpuThreadReader = kernelSingleProcessCpuThreadReader;
     }
@@ -36,15 +40,18 @@ public final class SystemServerCpuThreadReader {
             systemServiceCpuThreadTimes.threadCpuTimesUs = new long[cpuFrequencyCount];
             systemServiceCpuThreadTimes.binderThreadCpuTimesUs = new long[cpuFrequencyCount];
         }
-        KernelSingleProcessCpuThreadReader.ProcessCpuUsage processCpuUsage = this.mKernelCpuThreadReader.getProcessCpuUsage();
+        KernelSingleProcessCpuThreadReader.ProcessCpuUsage processCpuUsage =
+                this.mKernelCpuThreadReader.getProcessCpuUsage();
         if (processCpuUsage == null) {
             return null;
         }
         for (int i = cpuFrequencyCount - 1; i >= 0; i--) {
             long j = processCpuUsage.threadCpuTimesMillis[i] * 1000;
             long j2 = processCpuUsage.selectedThreadCpuTimesMillis[i] * 1000;
-            systemServiceCpuThreadTimes.threadCpuTimesUs[i] = Math.max(0L, j - this.mLastThreadCpuTimesUs[i]);
-            systemServiceCpuThreadTimes.binderThreadCpuTimesUs[i] = Math.max(0L, j2 - this.mLastBinderThreadCpuTimesUs[i]);
+            systemServiceCpuThreadTimes.threadCpuTimesUs[i] =
+                    Math.max(0L, j - this.mLastThreadCpuTimesUs[i]);
+            systemServiceCpuThreadTimes.binderThreadCpuTimesUs[i] =
+                    Math.max(0L, j2 - this.mLastBinderThreadCpuTimesUs[i]);
             this.mLastThreadCpuTimesUs[i] = j;
             this.mLastBinderThreadCpuTimesUs[i] = j2;
         }

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.LocaleList;
 import android.util.Log;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
@@ -36,14 +37,25 @@ public class AppLocaleStore {
                 if (!hasInstallerInfo(context, packageName) && isSystemApp(context, packageName)) {
                     shouldFilterNotMatchingLocale = true;
                 }
-                Log.d(TAG, "filterNonMatchingLocale. , shouldFilterNotMatchingLocale: " + shouldFilterNotMatchingLocale + ", assetLocale size: " + assetLocale.size() + ", packageLocaleList size: " + packageLocaleList.size());
+                Log.d(
+                        TAG,
+                        "filterNonMatchingLocale. , shouldFilterNotMatchingLocale: "
+                                + shouldFilterNotMatchingLocale
+                                + ", assetLocale size: "
+                                + assetLocale.size()
+                                + ", packageLocaleList size: "
+                                + packageLocaleList.size());
                 for (int i = 0; i < packageLocaleList.size(); i++) {
                     appSupportedLocales.add(packageLocaleList.get(i));
                 }
                 if (shouldFilterNotMatchingLocale) {
                     appSupportedLocales = filterNotMatchingLocale(appSupportedLocales, assetLocale);
                 }
-                localeStatus = appSupportedLocales.size() > 0 ? AppLocaleResult.LocaleStatus.GET_SUPPORTED_LANGUAGE_FROM_LOCAL_CONFIG : AppLocaleResult.LocaleStatus.NO_SUPPORTED_LANGUAGE_IN_APP;
+                localeStatus =
+                        appSupportedLocales.size() > 0
+                                ? AppLocaleResult.LocaleStatus
+                                        .GET_SUPPORTED_LANGUAGE_FROM_LOCAL_CONFIG
+                                : AppLocaleResult.LocaleStatus.NO_SUPPORTED_LANGUAGE_IN_APP;
             } else if (localeConfig.getStatus() == 1) {
                 if (assetLocale.size() > 0) {
                     localeStatus = AppLocaleResult.LocaleStatus.GET_SUPPORTED_LANGUAGE_FROM_ASSET;
@@ -53,7 +65,14 @@ public class AppLocaleStore {
                 }
             }
         }
-        Log.d(TAG, "getAppSupportedLocales(). package: " + packageName + ", status: " + localeStatus + ", appSupportedLocales:" + appSupportedLocales.size());
+        Log.d(
+                TAG,
+                "getAppSupportedLocales(). package: "
+                        + packageName
+                        + ", status: "
+                        + localeStatus
+                        + ", appSupportedLocales:"
+                        + appSupportedLocales.size());
         return new AppLocaleResult(localeStatus, appSupportedLocales);
     }
 
@@ -61,11 +80,25 @@ public class AppLocaleStore {
         HashSet<Locale> result = new HashSet<>();
         try {
             PackageManager packageManager = context.getPackageManager();
-            String[] locales = packageManager.getResourcesForApplication(packageManager.getPackageInfo(packageName, 131072).applicationInfo).getAssets().getNonSystemLocales();
+            String[] locales =
+                    packageManager
+                            .getResourcesForApplication(
+                                    packageManager.getPackageInfo(packageName, 131072)
+                                            .applicationInfo)
+                            .getAssets()
+                            .getNonSystemLocales();
             if (locales == null) {
-                Log.i(TAG, NavigationBarInflaterView.SIZE_MOD_START + packageName + "] locales are null.");
+                Log.i(
+                        TAG,
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + packageName
+                                + "] locales are null.");
             } else if (locales.length <= 0) {
-                Log.i(TAG, NavigationBarInflaterView.SIZE_MOD_START + packageName + "] locales length is 0.");
+                Log.i(
+                        TAG,
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + packageName
+                                + "] locales length is 0.");
             } else {
                 for (String language : locales) {
                     result.add(Locale.forLanguageTag(language));
@@ -77,20 +110,31 @@ public class AppLocaleStore {
         return result;
     }
 
-    private static HashSet<Locale> filterNotMatchingLocale(HashSet<Locale> appSupportedLocales, final HashSet<Locale> assetLocale) {
-        return (HashSet) appSupportedLocales.stream().filter(new Predicate() { // from class: com.android.internal.app.AppLocaleStore$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean matchLanguageInSet;
-                matchLanguageInSet = AppLocaleStore.matchLanguageInSet((Locale) obj, assetLocale);
-                return matchLanguageInSet;
-            }
-        }).collect(Collectors.toCollection(new Supplier() { // from class: com.android.internal.app.AppLocaleStore$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return new HashSet();
-            }
-        }));
+    private static HashSet<Locale> filterNotMatchingLocale(
+            HashSet<Locale> appSupportedLocales, final HashSet<Locale> assetLocale) {
+        return (HashSet)
+                appSupportedLocales.stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.android.internal.app.AppLocaleStore$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        boolean matchLanguageInSet;
+                                        matchLanguageInSet =
+                                                AppLocaleStore.matchLanguageInSet(
+                                                        (Locale) obj, assetLocale);
+                                        return matchLanguageInSet;
+                                    }
+                                })
+                        .collect(
+                                Collectors.toCollection(
+                                        new Supplier() { // from class:
+                                                         // com.android.internal.app.AppLocaleStore$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Supplier
+                                            public final Object get() {
+                                                return new HashSet();
+                                            }
+                                        }));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -110,7 +154,8 @@ public class AppLocaleStore {
 
     private static boolean hasInstallerInfo(Context context, String packageName) {
         try {
-            InstallSourceInfo installSourceInfo = context.getPackageManager().getInstallSourceInfo(packageName);
+            InstallSourceInfo installSourceInfo =
+                    context.getPackageManager().getInstallSourceInfo(packageName);
             return installSourceInfo != null;
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Installer info not found for: " + packageName);
@@ -120,7 +165,9 @@ public class AppLocaleStore {
 
     private static boolean isSystemApp(Context context, String packageName) {
         try {
-            ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfoAsUser(packageName, 0, context.getUserId());
+            ApplicationInfo applicationInfo =
+                    context.getPackageManager()
+                            .getApplicationInfoAsUser(packageName, 0, context.getUserId());
             return applicationInfo.isSystemApp();
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Application info not found for: " + packageName);

@@ -1,7 +1,9 @@
 package android.media.tv;
 
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +19,8 @@ public final class TvContentRating {
     private final String mRatingSystem;
     private final String[] mSubRatings;
 
-    public static TvContentRating createRating(String domain, String ratingSystem, String rating, String... subRatings) {
+    public static TvContentRating createRating(
+            String domain, String ratingSystem, String rating, String... subRatings) {
         if (TextUtils.isEmpty(domain)) {
             throw new IllegalArgumentException("domain cannot be empty");
         }
@@ -46,7 +49,8 @@ public final class TvContentRating {
         return new TvContentRating(strs[0], strs[1], strs[2], null);
     }
 
-    private TvContentRating(String domain, String ratingSystem, String rating, String[] subRatings) {
+    private TvContentRating(
+            String domain, String ratingSystem, String rating, String[] subRatings) {
         this.mDomain = domain;
         this.mRatingSystem = ratingSystem;
         this.mRating = rating;
@@ -56,7 +60,8 @@ public final class TvContentRating {
             Arrays.sort(subRatings);
             this.mSubRatings = subRatings;
         }
-        this.mHashCode = (Objects.hash(this.mDomain, this.mRating) * 31) + Arrays.hashCode(this.mSubRatings);
+        this.mHashCode =
+                (Objects.hash(this.mDomain, this.mRating) * 31) + Arrays.hashCode(this.mSubRatings);
     }
 
     public String getDomain() {
@@ -96,7 +101,10 @@ public final class TvContentRating {
 
     public final boolean contains(TvContentRating rating) {
         Preconditions.checkNotNull(rating);
-        if (!rating.getMainRating().equals(this.mRating) || !rating.getDomain().equals(this.mDomain) || !rating.getRatingSystem().equals(this.mRatingSystem) || !rating.getMainRating().equals(this.mRating)) {
+        if (!rating.getMainRating().equals(this.mRating)
+                || !rating.getDomain().equals(this.mDomain)
+                || !rating.getRatingSystem().equals(this.mRatingSystem)
+                || !rating.getMainRating().equals(this.mRating)) {
             return false;
         }
         List<String> subRatings = getSubRatings();
@@ -118,7 +126,10 @@ public final class TvContentRating {
             return false;
         }
         TvContentRating other = (TvContentRating) obj;
-        if (this.mHashCode == other.mHashCode && TextUtils.equals(this.mDomain, other.mDomain) && TextUtils.equals(this.mRatingSystem, other.mRatingSystem) && TextUtils.equals(this.mRating, other.mRating)) {
+        if (this.mHashCode == other.mHashCode
+                && TextUtils.equals(this.mDomain, other.mDomain)
+                && TextUtils.equals(this.mRatingSystem, other.mRatingSystem)
+                && TextUtils.equals(this.mRating, other.mRating)) {
             return Arrays.equals(this.mSubRatings, other.mSubRatings);
         }
         return false;

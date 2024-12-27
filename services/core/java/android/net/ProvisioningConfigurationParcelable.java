@@ -8,6 +8,7 @@ import android.net.networkstack.aidl.dhcp.DhcpOption;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -27,11 +28,9 @@ public class ProvisioningConfigurationParcelable implements Parcelable {
     public ScanResultInfoParcelable scanResultInfo;
     public StaticIpConfiguration staticIpConfig;
 
-    @Deprecated
-    public boolean enableIPv4 = false;
+    @Deprecated public boolean enableIPv4 = false;
 
-    @Deprecated
-    public boolean enableIPv6 = false;
+    @Deprecated public boolean enableIPv6 = false;
     public boolean usingMultinetworkPolicyTracker = false;
     public boolean usingIpReachabilityMonitor = false;
     public int requestedPreDhcpActionMs = 0;
@@ -49,7 +48,8 @@ public class ProvisioningConfigurationParcelable implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            ProvisioningConfigurationParcelable provisioningConfigurationParcelable = new ProvisioningConfigurationParcelable();
+            ProvisioningConfigurationParcelable provisioningConfigurationParcelable =
+                    new ProvisioningConfigurationParcelable();
             provisioningConfigurationParcelable.readFromParcel(parcel);
             return provisioningConfigurationParcelable;
         }
@@ -80,7 +80,13 @@ public class ProvisioningConfigurationParcelable implements Parcelable {
 
     @Override // android.os.Parcelable
     public int describeContents() {
-        return describeContents(this.options) | describeContents(this.initialConfig) | describeContents(this.staticIpConfig) | describeContents(this.apfCapabilities) | describeContents(this.network) | describeContents(this.scanResultInfo) | describeContents(this.layer2Info);
+        return describeContents(this.options)
+                | describeContents(this.initialConfig)
+                | describeContents(this.staticIpConfig)
+                | describeContents(this.apfCapabilities)
+                | describeContents(this.network)
+                | describeContents(this.scanResultInfo)
+                | describeContents(this.layer2Info);
     }
 
     public final void readFromParcel(Parcel parcel) {
@@ -101,93 +107,235 @@ public class ProvisioningConfigurationParcelable implements Parcelable {
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 this.requestedPreDhcpActionMs = parcel.readInt();
                                 if (parcel.dataPosition() - dataPosition < readInt) {
-                                    this.initialConfig = (InitialConfigurationParcelable) parcel.readTypedObject(InitialConfigurationParcelable.CREATOR);
+                                    this.initialConfig =
+                                            (InitialConfigurationParcelable)
+                                                    parcel.readTypedObject(
+                                                            InitialConfigurationParcelable.CREATOR);
                                     if (parcel.dataPosition() - dataPosition < readInt) {
-                                        this.staticIpConfig = (StaticIpConfiguration) parcel.readTypedObject(StaticIpConfiguration.CREATOR);
+                                        this.staticIpConfig =
+                                                (StaticIpConfiguration)
+                                                        parcel.readTypedObject(
+                                                                StaticIpConfiguration.CREATOR);
                                         if (parcel.dataPosition() - dataPosition < readInt) {
-                                            this.apfCapabilities = (ApfCapabilities) parcel.readTypedObject(ApfCapabilities.CREATOR);
+                                            this.apfCapabilities =
+                                                    (ApfCapabilities)
+                                                            parcel.readTypedObject(
+                                                                    ApfCapabilities.CREATOR);
                                             if (parcel.dataPosition() - dataPosition < readInt) {
                                                 this.provisioningTimeoutMs = parcel.readInt();
-                                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                                if (parcel.dataPosition() - dataPosition
+                                                        < readInt) {
                                                     this.ipv6AddrGenMode = parcel.readInt();
-                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                        this.network = (Network) parcel.readTypedObject(Network.CREATOR);
-                                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                                    if (parcel.dataPosition() - dataPosition
+                                                            < readInt) {
+                                                        this.network =
+                                                                (Network)
+                                                                        parcel.readTypedObject(
+                                                                                Network.CREATOR);
+                                                        if (parcel.dataPosition() - dataPosition
+                                                                < readInt) {
                                                             this.displayName = parcel.readString();
-                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                this.enablePreconnection = parcel.readBoolean();
-                                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                    this.scanResultInfo = (ScanResultInfoParcelable) parcel.readTypedObject(ScanResultInfoParcelable.CREATOR);
-                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                        this.layer2Info = (Layer2InformationParcelable) parcel.readTypedObject(Layer2InformationParcelable.CREATOR);
-                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                            this.options = parcel.createTypedArrayList(DhcpOption.CREATOR);
-                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                this.ipv4ProvisioningMode = parcel.readInt();
-                                                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                    this.ipv6ProvisioningMode = parcel.readInt();
-                                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                        this.uniqueEui64AddressesOnly = parcel.readBoolean();
-                                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                            this.creatorUid = parcel.readInt();
-                                                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                                                this.hostnameSetting = parcel.readInt();
-                                                                                                if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                            if (parcel.dataPosition() - dataPosition
+                                                                    < readInt) {
+                                                                this.enablePreconnection =
+                                                                        parcel.readBoolean();
+                                                                if (parcel.dataPosition()
+                                                                                - dataPosition
+                                                                        < readInt) {
+                                                                    this.scanResultInfo =
+                                                                            (ScanResultInfoParcelable)
+                                                                                    parcel
+                                                                                            .readTypedObject(
+                                                                                                    ScanResultInfoParcelable
+                                                                                                            .CREATOR);
+                                                                    if (parcel.dataPosition()
+                                                                                    - dataPosition
+                                                                            < readInt) {
+                                                                        this.layer2Info =
+                                                                                (Layer2InformationParcelable)
+                                                                                        parcel
+                                                                                                .readTypedObject(
+                                                                                                        Layer2InformationParcelable
+                                                                                                                .CREATOR);
+                                                                        if (parcel.dataPosition()
+                                                                                        - dataPosition
+                                                                                < readInt) {
+                                                                            this.options =
+                                                                                    parcel
+                                                                                            .createTypedArrayList(
+                                                                                                    DhcpOption
+                                                                                                            .CREATOR);
+                                                                            if (parcel
+                                                                                                    .dataPosition()
+                                                                                            - dataPosition
+                                                                                    < readInt) {
+                                                                                this
+                                                                                                .ipv4ProvisioningMode =
+                                                                                        parcel
+                                                                                                .readInt();
+                                                                                if (parcel
+                                                                                                        .dataPosition()
+                                                                                                - dataPosition
+                                                                                        < readInt) {
+                                                                                    this
+                                                                                                    .ipv6ProvisioningMode =
+                                                                                            parcel
+                                                                                                    .readInt();
+                                                                                    if (parcel
+                                                                                                            .dataPosition()
+                                                                                                    - dataPosition
+                                                                                            < readInt) {
+                                                                                        this
+                                                                                                        .uniqueEui64AddressesOnly =
+                                                                                                parcel
+                                                                                                        .readBoolean();
+                                                                                        if (parcel
+                                                                                                                .dataPosition()
+                                                                                                        - dataPosition
+                                                                                                < readInt) {
+                                                                                            this
+                                                                                                            .creatorUid =
+                                                                                                    parcel
+                                                                                                            .readInt();
+                                                                                            if (parcel
+                                                                                                                    .dataPosition()
+                                                                                                            - dataPosition
+                                                                                                    < readInt) {
+                                                                                                this
+                                                                                                                .hostnameSetting =
+                                                                                                        parcel
+                                                                                                                .readInt();
+                                                                                                if (dataPosition
+                                                                                                        > Integer
+                                                                                                                        .MAX_VALUE
+                                                                                                                - readInt) {
+                                                                                                    throw new BadParcelableException(
+                                                                                                            "Overflow"
+                                                                                                                + " in the"
+                                                                                                                + " size"
+                                                                                                                + " of parcelable");
                                                                                                 }
-                                                                                                parcel.setDataPosition(dataPosition + readInt);
+                                                                                                parcel
+                                                                                                        .setDataPosition(
+                                                                                                                dataPosition
+                                                                                                                        + readInt);
                                                                                                 return;
                                                                                             }
-                                                                                            if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                            if (dataPosition
+                                                                                                    > Integer
+                                                                                                                    .MAX_VALUE
+                                                                                                            - readInt) {
+                                                                                                throw new BadParcelableException(
+                                                                                                        "Overflow"
+                                                                                                            + " in the"
+                                                                                                            + " size"
+                                                                                                            + " of parcelable");
                                                                                             }
-                                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                        } else if (dataPosition
+                                                                                                > Integer
+                                                                                                                .MAX_VALUE
+                                                                                                        - readInt) {
+                                                                                            throw new BadParcelableException(
+                                                                                                    "Overflow"
+                                                                                                        + " in the"
+                                                                                                        + " size"
+                                                                                                        + " of parcelable");
                                                                                         }
-                                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                    } else if (dataPosition
+                                                                                            > Integer
+                                                                                                            .MAX_VALUE
+                                                                                                    - readInt) {
+                                                                                        throw new BadParcelableException(
+                                                                                                "Overflow"
+                                                                                                    + " in the"
+                                                                                                    + " size"
+                                                                                                    + " of parcelable");
                                                                                     }
-                                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                                } else if (dataPosition
+                                                                                        > Integer
+                                                                                                        .MAX_VALUE
+                                                                                                - readInt) {
+                                                                                    throw new BadParcelableException(
+                                                                                            "Overflow"
+                                                                                                + " in the"
+                                                                                                + " size"
+                                                                                                + " of parcelable");
                                                                                 }
-                                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                            } else if (dataPosition
+                                                                                    > Integer
+                                                                                                    .MAX_VALUE
+                                                                                            - readInt) {
+                                                                                throw new BadParcelableException(
+                                                                                        "Overflow"
+                                                                                            + " in the"
+                                                                                            + " size"
+                                                                                            + " of parcelable");
                                                                             }
-                                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                        } else if (dataPosition
+                                                                                > Integer.MAX_VALUE
+                                                                                        - readInt) {
+                                                                            throw new BadParcelableException(
+                                                                                    "Overflow in"
+                                                                                        + " the size"
+                                                                                        + " of parcelable");
                                                                         }
-                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                    } else if (dataPosition
+                                                                            > Integer.MAX_VALUE
+                                                                                    - readInt) {
+                                                                        throw new BadParcelableException(
+                                                                                "Overflow in the"
+                                                                                    + " size of"
+                                                                                    + " parcelable");
                                                                     }
-                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                } else if (dataPosition
+                                                                        > Integer.MAX_VALUE
+                                                                                - readInt) {
+                                                                    throw new BadParcelableException(
+                                                                            "Overflow in the size"
+                                                                                + " of parcelable");
                                                                 }
-                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                            } else if (dataPosition
+                                                                    > Integer.MAX_VALUE - readInt) {
+                                                                throw new BadParcelableException(
+                                                                        "Overflow in the size of"
+                                                                            + " parcelable");
                                                             }
-                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                        } else if (dataPosition
+                                                                > Integer.MAX_VALUE - readInt) {
+                                                            throw new BadParcelableException(
+                                                                    "Overflow in the size of"
+                                                                        + " parcelable");
                                                         }
-                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                    } else if (dataPosition
+                                                            > Integer.MAX_VALUE - readInt) {
+                                                        throw new BadParcelableException(
+                                                                "Overflow in the size of"
+                                                                    + " parcelable");
                                                     }
-                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                } else if (dataPosition
+                                                        > Integer.MAX_VALUE - readInt) {
+                                                    throw new BadParcelableException(
+                                                            "Overflow in the size of parcelable");
                                                 }
                                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -217,24 +365,62 @@ public class ProvisioningConfigurationParcelable implements Parcelable {
         stringJoiner.add("enableIPv6: " + this.enableIPv6);
         stringJoiner.add("usingMultinetworkPolicyTracker: " + this.usingMultinetworkPolicyTracker);
         stringJoiner.add("usingIpReachabilityMonitor: " + this.usingIpReachabilityMonitor);
-        StringBuilder m = AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("requestedPreDhcpActionMs: "), this.requestedPreDhcpActionMs, stringJoiner, "initialConfig: ");
+        StringBuilder m =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("requestedPreDhcpActionMs: "),
+                        this.requestedPreDhcpActionMs,
+                        stringJoiner,
+                        "initialConfig: ");
         m.append(Objects.toString(this.initialConfig));
         stringJoiner.add(m.toString());
         stringJoiner.add("staticIpConfig: " + Objects.toString(this.staticIpConfig));
         stringJoiner.add("apfCapabilities: " + Objects.toString(this.apfCapabilities));
-        StringBuilder m2 = AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("provisioningTimeoutMs: "), this.provisioningTimeoutMs, stringJoiner, "ipv6AddrGenMode: "), this.ipv6AddrGenMode, stringJoiner, "network: ");
+        StringBuilder m2 =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("provisioningTimeoutMs: "),
+                                this.provisioningTimeoutMs,
+                                stringJoiner,
+                                "ipv6AddrGenMode: "),
+                        this.ipv6AddrGenMode,
+                        stringJoiner,
+                        "network: ");
         m2.append(Objects.toString(this.network));
         stringJoiner.add(m2.toString());
-        StringBuilder m3 = DabTableEntry$$ExternalSyntheticOutline0.m(this.displayName, "enablePreconnection: ", new StringBuilder("displayName: "), stringJoiner);
+        StringBuilder m3 =
+                DabTableEntry$$ExternalSyntheticOutline0.m(
+                        this.displayName,
+                        "enablePreconnection: ",
+                        new StringBuilder("displayName: "),
+                        stringJoiner);
         m3.append(this.enablePreconnection);
         stringJoiner.add(m3.toString());
         stringJoiner.add("scanResultInfo: " + Objects.toString(this.scanResultInfo));
         stringJoiner.add("layer2Info: " + Objects.toString(this.layer2Info));
         stringJoiner.add("options: " + Objects.toString(this.options));
-        StringBuilder m4 = AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("ipv4ProvisioningMode: "), this.ipv4ProvisioningMode, stringJoiner, "ipv6ProvisioningMode: "), this.ipv6ProvisioningMode, stringJoiner, "uniqueEui64AddressesOnly: ");
+        StringBuilder m4 =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("ipv4ProvisioningMode: "),
+                                this.ipv4ProvisioningMode,
+                                stringJoiner,
+                                "ipv6ProvisioningMode: "),
+                        this.ipv6ProvisioningMode,
+                        stringJoiner,
+                        "uniqueEui64AddressesOnly: ");
         m4.append(this.uniqueEui64AddressesOnly);
         stringJoiner.add(m4.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("creatorUid: "), this.creatorUid, stringJoiner, "hostnameSetting: "), this.hostnameSetting, stringJoiner, "ProvisioningConfigurationParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("creatorUid: "),
+                                this.creatorUid,
+                                stringJoiner,
+                                "hostnameSetting: "),
+                        this.hostnameSetting,
+                        stringJoiner,
+                        "ProvisioningConfigurationParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -270,7 +456,9 @@ public class ProvisioningConfigurationParcelable implements Parcelable {
         parcel.writeInt(this.ipv6ProvisioningMode);
         parcel.writeBoolean(this.uniqueEui64AddressesOnly);
         parcel.writeInt(this.creatorUid);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.hostnameSetting, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.hostnameSetting, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

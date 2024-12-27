@@ -38,7 +38,8 @@ public class BitUtils {
         return packed;
     }
 
-    public static void appendStringRepresentationOfBitMaskToStringBuilder(StringBuilder sb, long bitMask, NameOf nameFetcher, String separator) {
+    public static void appendStringRepresentationOfBitMaskToStringBuilder(
+            StringBuilder sb, long bitMask, NameOf nameFetcher, String separator) {
         int bitPos = 0;
         boolean firstElementAdded = false;
         while (bitMask != 0) {
@@ -65,7 +66,8 @@ public class BitUtils {
         StringBuilder sb = new StringBuilder();
         if (0 != removed) {
             sb.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
-            appendStringRepresentationOfBitMaskToStringBuilder(sb, removed, nameFetcher, NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+            appendStringRepresentationOfBitMaskToStringBuilder(
+                    sb, removed, nameFetcher, NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
         }
         if (0 != added) {
             sb.append("+");

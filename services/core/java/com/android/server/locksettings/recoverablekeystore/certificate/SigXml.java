@@ -1,5 +1,7 @@
 package com.android.server.locksettings.recoverablekeystore.certificate;
 
+import org.w3c.dom.Element;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
@@ -11,7 +13,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import org.w3c.dom.Element;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -28,13 +29,26 @@ public final class SigXml {
 
     public static SigXml parse(byte[] bArr) {
         Element xmlRootNode = CertUtils.getXmlRootNode(bArr);
-        List xmlNodeContents = CertUtils.getXmlNodeContents(0, xmlRootNode, "intermediates", "cert");
+        List xmlNodeContents =
+                CertUtils.getXmlNodeContents(0, xmlRootNode, "intermediates", "cert");
         ArrayList arrayList = new ArrayList();
         Iterator it = ((ArrayList) xmlNodeContents).iterator();
         while (it.hasNext()) {
             arrayList.add(CertUtils.decodeCert(CertUtils.decodeBase64((String) it.next())));
         }
-        return new SigXml(Collections.unmodifiableList(arrayList), CertUtils.decodeCert(CertUtils.decodeBase64((String) ((ArrayList) CertUtils.getXmlNodeContents(1, xmlRootNode, "certificate")).get(0))), CertUtils.decodeBase64((String) ((ArrayList) CertUtils.getXmlNodeContents(1, xmlRootNode, "value")).get(0)));
+        return new SigXml(
+                Collections.unmodifiableList(arrayList),
+                CertUtils.decodeCert(
+                        CertUtils.decodeBase64(
+                                (String)
+                                        ((ArrayList)
+                                                        CertUtils.getXmlNodeContents(
+                                                                1, xmlRootNode, "certificate"))
+                                                .get(0))),
+                CertUtils.decodeBase64(
+                        (String)
+                                ((ArrayList) CertUtils.getXmlNodeContents(1, xmlRootNode, "value"))
+                                        .get(0)));
     }
 
     public final void verifyFileSignature(X509Certificate x509Certificate, byte[] bArr, Date date) {

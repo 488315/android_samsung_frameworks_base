@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class TunerFrontendRequest implements Parcelable {
-    public static final Parcelable.Creator<TunerFrontendRequest> CREATOR = new Parcelable.Creator<TunerFrontendRequest>() { // from class: android.media.tv.tunerresourcemanager.TunerFrontendRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TunerFrontendRequest createFromParcel(Parcel _aidl_source) {
-            TunerFrontendRequest _aidl_out = new TunerFrontendRequest();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<TunerFrontendRequest> CREATOR =
+            new Parcelable.Creator<
+                    TunerFrontendRequest>() { // from class:
+                                              // android.media.tv.tunerresourcemanager.TunerFrontendRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TunerFrontendRequest createFromParcel(Parcel _aidl_source) {
+                    TunerFrontendRequest _aidl_out = new TunerFrontendRequest();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TunerFrontendRequest[] newArray(int _aidl_size) {
-            return new TunerFrontendRequest[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TunerFrontendRequest[] newArray(int _aidl_size) {
+                    return new TunerFrontendRequest[_aidl_size];
+                }
+            };
     public static final int DEFAULT_DESIRED_ID = -1;
     public int clientId = 0;
     public int frontendType = 0;

@@ -10,7 +10,9 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
+
 import com.android.internal.R;
+
 import java.util.HashMap;
 
 /* loaded from: classes4.dex */
@@ -25,7 +27,8 @@ public class RatingBar extends AbsSeekBar {
         void onRatingChanged(RatingBar ratingBar, float f, boolean z);
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<RatingBar> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<RatingBar> {
         private int mIsIndicatorId;
         private int mNumStarsId;
         private boolean mPropertiesMapped = false;
@@ -60,8 +63,11 @@ public class RatingBar extends AbsSeekBar {
     public RatingBar(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mNumStars = 5;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RatingBar, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.RatingBar, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.RatingBar, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.RatingBar, attrs, a, defStyleAttr, defStyleRes);
         int numStars = a.getInt(0, this.mNumStars);
         setIsIndicator(a.getBoolean(3, !this.mIsUserSeekable));
         float rating = a.getFloat(1, -1.0f);
@@ -179,7 +185,8 @@ public class RatingBar extends AbsSeekBar {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         if (this.mSampleWidth > 0) {
             int width = this.mSampleWidth * this.mNumStars;
-            setMeasuredDimension(resolveSizeAndState(width, widthMeasureSpec, 0), getMeasuredHeight());
+            setMeasuredDimension(
+                    resolveSizeAndState(width, widthMeasureSpec, 0), getMeasuredHeight());
         }
     }
 
@@ -232,7 +239,9 @@ public class RatingBar extends AbsSeekBar {
         HashMap<String, Object> params = new HashMap<>();
         params.put(PLURALS_RATING, Float.valueOf(getRating()));
         params.put("max", Float.valueOf(scaledMax));
-        info.setStateDescription(PluralsMessageFormatter.format(getContext().getResources(), params, R.string.rating_label));
+        info.setStateDescription(
+                PluralsMessageFormatter.format(
+                        getContext().getResources(), params, R.string.rating_label));
     }
 
     @Override // android.widget.AbsSeekBar

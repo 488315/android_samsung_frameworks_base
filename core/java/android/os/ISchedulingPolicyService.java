@@ -8,7 +8,8 @@ public interface ISchedulingPolicyService extends IInterface {
 
     public static class Default implements ISchedulingPolicyService {
         @Override // android.os.ISchedulingPolicyService
-        public int requestPriority(int pid, int tid, int prio, boolean isForApp) throws RemoteException {
+        public int requestPriority(int pid, int tid, int prio, boolean isForApp)
+                throws RemoteException {
             return 0;
         }
 
@@ -23,7 +24,7 @@ public interface ISchedulingPolicyService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISchedulingPolicyService {
+    public abstract static class Stub extends Binder implements ISchedulingPolicyService {
         public static final String DESCRIPTOR = "android.os.ISchedulingPolicyService";
         static final int TRANSACTION_requestCpusetBoost = 2;
         static final int TRANSACTION_requestPriority = 1;
@@ -65,7 +66,8 @@ public interface ISchedulingPolicyService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -114,7 +116,8 @@ public interface ISchedulingPolicyService extends IInterface {
             }
 
             @Override // android.os.ISchedulingPolicyService
-            public int requestPriority(int pid, int tid, int prio, boolean isForApp) throws RemoteException {
+            public int requestPriority(int pid, int tid, int prio, boolean isForApp)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

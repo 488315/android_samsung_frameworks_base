@@ -15,7 +15,7 @@ import android.os.Trace;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewRootImpl;
-import android.webkit.WebViewFactory;
+
 import com.android.internal.util.ArrayUtils;
 
 @SystemApi
@@ -26,16 +26,16 @@ public final class WebViewDelegate {
         void onTraceEnabledChange(boolean z);
     }
 
-    WebViewDelegate() {
-    }
+    WebViewDelegate() {}
 
     public void setOnTraceEnabledChangeListener(final OnTraceEnabledChangeListener listener) {
-        SystemProperties.addChangeCallback(new Runnable() { // from class: android.webkit.WebViewDelegate.1
-            @Override // java.lang.Runnable
-            public void run() {
-                listener.onTraceEnabledChange(WebViewDelegate.this.isTraceTagEnabled());
-            }
-        });
+        SystemProperties.addChangeCallback(
+                new Runnable() { // from class: android.webkit.WebViewDelegate.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        listener.onTraceEnabledChange(WebViewDelegate.this.isTraceTagEnabled());
+                    }
+                });
     }
 
     public boolean isTraceTagEnabled() {
@@ -48,7 +48,8 @@ public final class WebViewDelegate {
     }
 
     @Deprecated
-    public void invokeDrawGlFunctor(View containerView, long nativeDrawGLFunctor, boolean waitForCompletion) {
+    public void invokeDrawGlFunctor(
+            View containerView, long nativeDrawGLFunctor, boolean waitForCompletion) {
         throw new UnsupportedOperationException();
     }
 
@@ -58,13 +59,15 @@ public final class WebViewDelegate {
     }
 
     @Deprecated
-    public void callDrawGlFunction(Canvas canvas, long nativeDrawGLFunctor, Runnable releasedRunnable) {
+    public void callDrawGlFunction(
+            Canvas canvas, long nativeDrawGLFunctor, Runnable releasedRunnable) {
         throw new UnsupportedOperationException();
     }
 
     public void drawWebViewFunctor(Canvas canvas, int functor) {
         if (!(canvas instanceof RecordingCanvas)) {
-            throw new IllegalArgumentException(canvas.getClass().getName() + " is not a RecordingCanvas canvas");
+            throw new IllegalArgumentException(
+                    canvas.getClass().getName() + " is not a RecordingCanvas canvas");
         }
         ((RecordingCanvas) canvas).drawWebViewFunctor(functor);
     }
@@ -78,7 +81,8 @@ public final class WebViewDelegate {
     }
 
     public int getPackageId(Resources resources, String packageName) {
-        SparseArray<String> packageIdentifiers = resources.getAssets().getAssignedPackageIdentifiers();
+        SparseArray<String> packageIdentifiers =
+                resources.getAssets().getAssignedPackageIdentifiers();
         for (int i = 0; i < packageIdentifiers.size(); i++) {
             String name = packageIdentifiers.valueAt(i);
             if (packageName.equals(name)) {
@@ -100,15 +104,18 @@ public final class WebViewDelegate {
         if (android.content.res.Flags.registerResourcePaths()) {
             return;
         }
-        String[] newAssetPaths = WebViewFactory.getLoadedPackageInfo().applicationInfo.getAllApkPaths();
+        String[] newAssetPaths =
+                WebViewFactory.getLoadedPackageInfo().applicationInfo.getAllApkPaths();
         ApplicationInfo appInfo = context.getApplicationInfo();
         String[] newLibAssets = appInfo.sharedLibraryFiles;
         for (String newAssetPath : newAssetPaths) {
-            newLibAssets = (String[]) ArrayUtils.appendElement(String.class, newLibAssets, newAssetPath);
+            newLibAssets =
+                    (String[]) ArrayUtils.appendElement(String.class, newLibAssets, newAssetPath);
         }
         if (newLibAssets != appInfo.sharedLibraryFiles) {
             appInfo.sharedLibraryFiles = newLibAssets;
-            ResourcesManager.getInstance().appendLibAssetsForMainAssetPath(appInfo.getBaseResourcePath(), newAssetPaths);
+            ResourcesManager.getInstance()
+                    .appendLibAssetsForMainAssetPath(appInfo.getBaseResourcePath(), newAssetPaths);
         }
     }
 

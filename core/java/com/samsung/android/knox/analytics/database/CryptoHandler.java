@@ -7,8 +7,10 @@ import android.security.keystore.KeyProperties;
 import android.security.keystore.KeyProtection;
 import android.security.keystore.KeyStoreConnectException;
 import android.security.keystore2.AndroidKeyStoreSpi;
+
 import com.samsung.android.knox.analytics.util.Log;
 import com.samsung.android.security.mdf.MdfUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -21,6 +23,7 @@ import java.security.SecureRandom;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
 import java.util.List;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -38,8 +41,7 @@ class CryptoHandler {
     private SecretKey mKeyCache = null;
     private SecretKey mLegacyKeyCache = null;
 
-    CryptoHandler() {
-    }
+    CryptoHandler() {}
 
     private static class Constraints {
         static final String CHARSET_ENCODING = "UTF-8";
@@ -47,8 +49,7 @@ class CryptoHandler {
         static final String KEY_GENERATOR_ALGORITHM = "AES";
         private static final String SYNTHETIC_PASSWORD_KEY_PREFIX = "synthetic_password_";
 
-        private Constraints() {
-        }
+        private Constraints() {}
 
         static class GCM {
             static final String ALIAS = "synthetic_password_knox.analytics.service.cryptokey";
@@ -56,22 +57,22 @@ class CryptoHandler {
             static final String CIPHER_ALGORITHM = "AES/GCM/NoPadding";
             static final String ENCRYPTION_PADDING = "NoPadding";
             static final int IV_SIZE = 12;
-            static final String LEGACY_ALIAS = "com.samsung.android.knox.analytics.service.cryptokey";
+            static final String LEGACY_ALIAS =
+                    "com.samsung.android.knox.analytics.service.cryptokey";
             static final int TLEN_SIZE = 128;
 
-            GCM() {
-            }
+            GCM() {}
         }
 
         static class CBC {
-            static final String ALIAS = "synthetic_password_knox.analytics.service.compression.cryptokey";
+            static final String ALIAS =
+                    "synthetic_password_knox.analytics.service.compression.cryptokey";
             static final String BLOCK_MODE = "CBC";
             static final String CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding";
             static final String ENCRYPTION_PADDING = "PKCS7Padding";
             static final int IV_SIZE = 16;
 
-            CBC() {
-            }
+            CBC() {}
         }
     }
 
@@ -95,7 +96,8 @@ class CryptoHandler {
         }
     }
 
-    String decrypt(byte[] encText, boolean isLegacyKey) throws UnsupportedEncodingException, GeneralSecurityException {
+    String decrypt(byte[] encText, boolean isLegacyKey)
+            throws UnsupportedEncodingException, GeneralSecurityException {
         Log.d(TAG, "decrypt(): isLegacyKey = " + isLegacyKey);
         try {
             return decryptInternal(encText, isLegacyKey, false);
@@ -116,7 +118,11 @@ class CryptoHandler {
         }
     }
 
-    private String decryptInternal(byte[] encText, boolean isLegacyKey, boolean skipCache) throws UnsupportedEncodingException, GeneralSecurityException, DeadObjectException, KeyStoreConnectException {
+    private String decryptInternal(byte[] encText, boolean isLegacyKey, boolean skipCache)
+            throws UnsupportedEncodingException,
+                    GeneralSecurityException,
+                    DeadObjectException,
+                    KeyStoreConnectException {
         Cipher cipherDec = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE);
         int cipherTextSize = encText.length - 12;
         byte[] cipherText = new byte[cipherTextSize];
@@ -130,7 +136,8 @@ class CryptoHandler {
         return text;
     }
 
-    String decryptBulk(byte[] encText) throws GeneralSecurityException, UnsupportedEncodingException {
+    String decryptBulk(byte[] encText)
+            throws GeneralSecurityException, UnsupportedEncodingException {
         byte[] decText = decryptBlob(encText);
         return new String(decText, "UTF-8");
     }
@@ -181,7 +188,10 @@ class CryptoHandler {
                 Log.e(TAG, "encrypt(): DeadObjectException", e);
                 try {
                     return encryptInternal(text, true);
-                } catch (DeadObjectException | KeyStoreConnectException | UnsupportedEncodingException | GeneralSecurityException e1) {
+                } catch (DeadObjectException
+                        | KeyStoreConnectException
+                        | UnsupportedEncodingException
+                        | GeneralSecurityException e1) {
                     Log.e(TAG, "encrypt()", e1);
                     return null;
                 }
@@ -251,7 +261,8 @@ class CryptoHandler {
         return null;
     }
 
-    byte[] encryptBulkInternal(List<String> textList) throws GeneralSecurityException, UnsupportedEncodingException, IOException {
+    byte[] encryptBulkInternal(List<String> textList)
+            throws GeneralSecurityException, UnsupportedEncodingException, IOException {
         Cipher cipherEnc = Cipher.getInstance("AES/CBC/PKCS7Padding");
         cipherEnc.init(1, getCBCKey());
         byte[] tempIv = cipherEnc.getIV();
@@ -283,7 +294,11 @@ class CryptoHandler {
         return final_data;
     }
 
-    private byte[] encryptInternal(String text, boolean skipCache) throws UnsupportedEncodingException, GeneralSecurityException, DeadObjectException, KeyStoreConnectException {
+    private byte[] encryptInternal(String text, boolean skipCache)
+            throws UnsupportedEncodingException,
+                    GeneralSecurityException,
+                    DeadObjectException,
+                    KeyStoreConnectException {
         Cipher cipherEnc = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE);
         cipherEnc.init(1, getGCMKey(false, skipCache));
         byte[] tempiv = cipherEnc.getIV();
@@ -302,8 +317,15 @@ class CryptoHandler {
         SecretKey secretKey = keyGenerator.generateKey();
         KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
         keyStore.load(null);
-        KeyProtection.Builder builder = new KeyProtection.Builder(3).setBlockModes(KeyProperties.BLOCK_MODE_CBC).setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7).setCriticalToDeviceEncryption(true);
-        keyStore.setEntry("synthetic_password_knox.analytics.service.compression.cryptokey", new KeyStore.SecretKeyEntry(secretKey), builder.build());
+        KeyProtection.Builder builder =
+                new KeyProtection.Builder(3)
+                        .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                        .setCriticalToDeviceEncryption(true);
+        keyStore.setEntry(
+                "synthetic_password_knox.analytics.service.compression.cryptokey",
+                new KeyStore.SecretKeyEntry(secretKey),
+                builder.build());
     }
 
     private void generateGCMKeyInternal() throws IOException, GeneralSecurityException {
@@ -312,8 +334,15 @@ class CryptoHandler {
         SecretKey secretKey = keyGenerator.generateKey();
         KeyStore keyStore = KeyStore.getInstance(AndroidKeyStoreSpi.NAME);
         keyStore.load(null);
-        KeyProtection.Builder builder = new KeyProtection.Builder(3).setBlockModes("GCM").setEncryptionPaddings("NoPadding").setCriticalToDeviceEncryption(true);
-        keyStore.setEntry("synthetic_password_knox.analytics.service.cryptokey", new KeyStore.SecretKeyEntry(secretKey), builder.build());
+        KeyProtection.Builder builder =
+                new KeyProtection.Builder(3)
+                        .setBlockModes("GCM")
+                        .setEncryptionPaddings("NoPadding")
+                        .setCriticalToDeviceEncryption(true);
+        keyStore.setEntry(
+                "synthetic_password_knox.analytics.service.cryptokey",
+                new KeyStore.SecretKeyEntry(secretKey),
+                builder.build());
     }
 
     boolean generateGCMKey() {
@@ -341,7 +370,8 @@ class CryptoHandler {
         KeyStore ks = getKeyStore();
         if (ks != null) {
             try {
-                if (!ks.containsAlias("synthetic_password_knox.analytics.service.compression.cryptokey")) {
+                if (!ks.containsAlias(
+                        "synthetic_password_knox.analytics.service.compression.cryptokey")) {
                     generateCBCKeyInternal();
                 }
             } catch (IOException e) {
@@ -352,24 +382,36 @@ class CryptoHandler {
         }
     }
 
-    private SecretKey getCBCKey() throws KeyStoreException, UnrecoverableEntryException, NoSuchAlgorithmException {
+    private SecretKey getCBCKey()
+            throws KeyStoreException, UnrecoverableEntryException, NoSuchAlgorithmException {
         KeyStore ks = getKeyStore();
         if (ks == null) {
             return null;
         }
         if (!ks.containsAlias("synthetic_password_knox.analytics.service.compression.cryptokey")) {
-            Log.d(TAG, "getCBCKey() - synthetic_password_knox.analytics.service.compression.cryptokey is not on Keystore");
+            Log.d(
+                    TAG,
+                    "getCBCKey() - synthetic_password_knox.analytics.service.compression.cryptokey"
+                        + " is not on Keystore");
             return null;
         }
-        KeyStore.SecretKeyEntry secretKeyEntry = (KeyStore.SecretKeyEntry) ks.getEntry("synthetic_password_knox.analytics.service.compression.cryptokey", null);
+        KeyStore.SecretKeyEntry secretKeyEntry =
+                (KeyStore.SecretKeyEntry)
+                        ks.getEntry(
+                                "synthetic_password_knox.analytics.service.compression.cryptokey",
+                                null);
         if (secretKeyEntry == null) {
-            Log.d(TAG, "getCBCKey() - null synthetic_password_knox.analytics.service.compression.cryptokey");
+            Log.d(
+                    TAG,
+                    "getCBCKey() - null"
+                        + " synthetic_password_knox.analytics.service.compression.cryptokey");
             return null;
         }
         return secretKeyEntry.getSecretKey();
     }
 
-    private SecretKey getGCMKey(boolean isLegacyKey, boolean skipCache) throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
+    private SecretKey getGCMKey(boolean isLegacyKey, boolean skipCache)
+            throws UnrecoverableEntryException, NoSuchAlgorithmException, KeyStoreException {
         SecretKey cachedKey = isLegacyKey ? this.mLegacyKeyCache : this.mKeyCache;
         if (cachedKey != null && !skipCache) {
             return cachedKey;
@@ -385,10 +427,17 @@ class CryptoHandler {
         }
     }
 
-    private SecretKey getKeyStoreKey(boolean isLegacyKey) throws KeyStoreException, UnrecoverableEntryException, NoSuchAlgorithmException {
+    private SecretKey getKeyStoreKey(boolean isLegacyKey)
+            throws KeyStoreException, UnrecoverableEntryException, NoSuchAlgorithmException {
         KeyStore ks = getKeyStore();
-        String alias = isLegacyKey ? "com.samsung.android.knox.analytics.service.cryptokey" : "synthetic_password_knox.analytics.service.cryptokey";
-        String targetAlias = alias.equals("com.samsung.android.knox.analytics.service.cryptokey") ? "legacy key" : "key";
+        String alias =
+                isLegacyKey
+                        ? "com.samsung.android.knox.analytics.service.cryptokey"
+                        : "synthetic_password_knox.analytics.service.cryptokey";
+        String targetAlias =
+                alias.equals("com.samsung.android.knox.analytics.service.cryptokey")
+                        ? "legacy key"
+                        : "key";
         if (ks == null) {
             Log.d(TAG, "getKeyStore(): null");
             return null;
@@ -427,7 +476,8 @@ class CryptoHandler {
         KeyStore keyStore = getKeyStore();
         if (keyStore != null) {
             try {
-                if (!keyStore.containsAlias("com.samsung.android.knox.analytics.service.cryptokey")) {
+                if (!keyStore.containsAlias(
+                        "com.samsung.android.knox.analytics.service.cryptokey")) {
                     Log.d(TAG, "deleteAnalyticsLegacyKey(): Key already deleted");
                     this.mLegacyKeyCache = null;
                     return;

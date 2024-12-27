@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -11,26 +12,27 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class TimeZoneConfiguration implements Parcelable {
-    public static final Parcelable.Creator<TimeZoneConfiguration> CREATOR = new Parcelable.Creator<TimeZoneConfiguration>() { // from class: android.app.time.TimeZoneConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneConfiguration createFromParcel(Parcel in) {
-            return TimeZoneConfiguration.createFromParcel(in);
-        }
+    public static final Parcelable.Creator<TimeZoneConfiguration> CREATOR =
+            new Parcelable.Creator<TimeZoneConfiguration>() { // from class:
+                // android.app.time.TimeZoneConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneConfiguration createFromParcel(Parcel in) {
+                    return TimeZoneConfiguration.createFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneConfiguration[] newArray(int size) {
-            return new TimeZoneConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneConfiguration[] newArray(int size) {
+                    return new TimeZoneConfiguration[size];
+                }
+            };
     private static final String SETTING_AUTO_DETECTION_ENABLED = "autoDetectionEnabled";
     private static final String SETTING_GEO_DETECTION_ENABLED = "geoDetectionEnabled";
     private final Bundle mBundle;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Setting {
-    }
+    @interface Setting {}
 
     private TimeZoneConfiguration(Builder builder) {
         this.mBundle = (Bundle) Objects.requireNonNull(builder.mBundle);
@@ -102,8 +104,7 @@ public final class TimeZoneConfiguration implements Parcelable {
     public static final class Builder {
         private final Bundle mBundle = new Bundle();
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(TimeZoneConfiguration toCopy) {
             mergeProperties(toCopy);

@@ -7,7 +7,6 @@ import android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraOfflineSession;
 import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.impl.CameraDeviceImpl;
 import android.hardware.camera2.params.OutputConfiguration;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.hardware.camera2.utils.SurfaceUtils;
@@ -16,7 +15,9 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.Range;
 import android.view.Surface;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,25 +27,43 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 /* loaded from: classes2.dex */
-public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrainedHighSpeedCaptureSession implements CameraCaptureSessionCore {
+public class CameraConstrainedHighSpeedCaptureSessionImpl
+        extends CameraConstrainedHighSpeedCaptureSession implements CameraCaptureSessionCore {
     private final CameraCharacteristics mCharacteristics;
     private final CameraCaptureSessionImpl mSessionImpl;
     private final ConditionVariable mInitialized = new ConditionVariable();
     private final String TAG = "CameraConstrainedHighSpeedCaptureSessionImpl";
 
-    CameraConstrainedHighSpeedCaptureSessionImpl(int id, CameraCaptureSession.StateCallback callback, Executor stateExecutor, CameraDeviceImpl deviceImpl, Executor deviceStateExecutor, boolean configureSuccess, CameraCharacteristics characteristics) {
+    CameraConstrainedHighSpeedCaptureSessionImpl(
+            int id,
+            CameraCaptureSession.StateCallback callback,
+            Executor stateExecutor,
+            CameraDeviceImpl deviceImpl,
+            Executor deviceStateExecutor,
+            boolean configureSuccess,
+            CameraCharacteristics characteristics) {
         this.mCharacteristics = characteristics;
         CameraCaptureSession.StateCallback wrapperCallback = new WrapperCallback(callback);
-        this.mSessionImpl = new CameraCaptureSessionImpl(id, null, wrapperCallback, stateExecutor, deviceImpl, deviceStateExecutor, configureSuccess);
+        this.mSessionImpl =
+                new CameraCaptureSessionImpl(
+                        id,
+                        null,
+                        wrapperCallback,
+                        stateExecutor,
+                        deviceImpl,
+                        deviceStateExecutor,
+                        configureSuccess);
         this.mInitialized.open();
     }
 
     @Override // android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession
-    public List<CaptureRequest> createHighSpeedRequestList(CaptureRequest request) throws CameraAccessException {
+    public List<CaptureRequest> createHighSpeedRequestList(CaptureRequest request)
+            throws CameraAccessException {
         if (request == null) {
             throw new IllegalArgumentException("Input capture request must not be null");
         }
-        CameraCharacteristics.Key<StreamConfigurationMap> ck = CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP;
+        CameraCharacteristics.Key<StreamConfigurationMap> ck =
+                CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP;
         Integer sensorPixelMode = (Integer) request.get(CaptureRequest.SENSOR_PIXEL_MODE);
         if (sensorPixelMode != null && sensorPixelMode.intValue() == 1) {
             ck = CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP_MAXIMUM_RESOLUTION;
@@ -53,8 +72,12 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
         Range<Integer> fpsRange = (Range) request.get(CaptureRequest.CONTROL_AE_TARGET_FPS_RANGE);
         StreamConfigurationMap config = (StreamConfigurationMap) this.mCharacteristics.get(ck);
         SurfaceUtils.checkConstrainedHighSpeedSurfaces(outputSurfaces, fpsRange, config);
-        Range<Integer>[] highSpeedFpsRanges = config.getHighSpeedVideoFpsRangesFor(SurfaceUtils.getSurfaceSize(outputSurfaces.iterator().next()));
-        Log.v("CameraConstrainedHighSpeedCaptureSessionImpl", "High speed fps ranges: " + Arrays.toString(highSpeedFpsRanges));
+        Range<Integer>[] highSpeedFpsRanges =
+                config.getHighSpeedVideoFpsRangesFor(
+                        SurfaceUtils.getSurfaceSize(outputSurfaces.iterator().next()));
+        Log.v(
+                "CameraConstrainedHighSpeedCaptureSessionImpl",
+                "High speed fps ranges: " + Arrays.toString(highSpeedFpsRanges));
         int previewFps = Integer.MAX_VALUE;
         for (Range<Integer> range : highSpeedFpsRanges) {
             int rangeMin = range.getLower().intValue();
@@ -63,7 +86,9 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
             }
         }
         if (previewFps != 60 && previewFps != 30) {
-            Log.w("CameraConstrainedHighSpeedCaptureSessionImpl", "previewFps is neither 60 nor 30.");
+            Log.w(
+                    "CameraConstrainedHighSpeedCaptureSessionImpl",
+                    "previewFps is neither 60 nor 30.");
             previewFps = 30;
         }
         Log.v("CameraConstrainedHighSpeedCaptureSessionImpl", "previewFps: " + previewFps);
@@ -71,10 +96,14 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
         if (fpsRange.getUpper().intValue() > fpsRange.getLower().intValue()) {
             requestListSize = 1;
         }
-        Log.v("CameraConstrainedHighSpeedCaptureSessionImpl", "Request list size is: " + requestListSize);
+        Log.v(
+                "CameraConstrainedHighSpeedCaptureSessionImpl",
+                "Request list size is: " + requestListSize);
         List<CaptureRequest> requestList = new ArrayList<>();
         CameraMetadataNative requestMetadata = new CameraMetadataNative(request.getNativeCopy());
-        CaptureRequest.Builder singleTargetRequestBuilder = new CaptureRequest.Builder(requestMetadata, false, -1, request.getLogicalCameraId(), null);
+        CaptureRequest.Builder singleTargetRequestBuilder =
+                new CaptureRequest.Builder(
+                        requestMetadata, false, -1, request.getLogicalCameraId(), null);
         singleTargetRequestBuilder.setTag(request.getTag());
         Iterator<Surface> iterator = outputSurfaces.iterator();
         Surface firstSurface = iterator.next();
@@ -86,8 +115,11 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
         singleTargetRequestBuilder.setPartOfCHSRequestList(true);
         CaptureRequest.Builder doubleTargetRequestBuilder = null;
         if (outputSurfaces.size() == 2) {
-            CameraMetadataNative requestMetadata2 = new CameraMetadataNative(request.getNativeCopy());
-            doubleTargetRequestBuilder = new CaptureRequest.Builder(requestMetadata2, false, -1, request.getLogicalCameraId(), null);
+            CameraMetadataNative requestMetadata2 =
+                    new CameraMetadataNative(request.getNativeCopy());
+            doubleTargetRequestBuilder =
+                    new CaptureRequest.Builder(
+                            requestMetadata2, false, -1, request.getLogicalCameraId(), null);
             doubleTargetRequestBuilder.setTag(request.getTag());
             doubleTargetRequestBuilder.set(CaptureRequest.CONTROL_CAPTURE_INTENT, 3);
             doubleTargetRequestBuilder.addTarget(firstSurface);
@@ -143,53 +175,93 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int capture(CaptureRequest request, CameraCaptureSession.CaptureCallback listener, Handler handler) throws CameraAccessException {
-        throw new UnsupportedOperationException("Constrained high speed session doesn't support this method");
+    public int capture(
+            CaptureRequest request, CameraCaptureSession.CaptureCallback listener, Handler handler)
+            throws CameraAccessException {
+        throw new UnsupportedOperationException(
+                "Constrained high speed session doesn't support this method");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int captureSingleRequest(CaptureRequest request, Executor executor, CameraCaptureSession.CaptureCallback listener) throws CameraAccessException {
-        throw new UnsupportedOperationException("Constrained high speed session doesn't support this method");
+    public int captureSingleRequest(
+            CaptureRequest request,
+            Executor executor,
+            CameraCaptureSession.CaptureCallback listener)
+            throws CameraAccessException {
+        throw new UnsupportedOperationException(
+                "Constrained high speed session doesn't support this method");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int captureBurst(List<CaptureRequest> requests, CameraCaptureSession.CaptureCallback listener, Handler handler) throws CameraAccessException {
+    public int captureBurst(
+            List<CaptureRequest> requests,
+            CameraCaptureSession.CaptureCallback listener,
+            Handler handler)
+            throws CameraAccessException {
         if (!isConstrainedHighSpeedRequestList(requests)) {
-            throw new IllegalArgumentException("Only request lists created by createHighSpeedRequestList() can be submitted to a constrained high speed capture session");
+            throw new IllegalArgumentException(
+                    "Only request lists created by createHighSpeedRequestList() can be submitted to"
+                            + " a constrained high speed capture session");
         }
         return this.mSessionImpl.captureBurst(requests, listener, handler);
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int captureBurstRequests(List<CaptureRequest> requests, Executor executor, CameraCaptureSession.CaptureCallback listener) throws CameraAccessException {
+    public int captureBurstRequests(
+            List<CaptureRequest> requests,
+            Executor executor,
+            CameraCaptureSession.CaptureCallback listener)
+            throws CameraAccessException {
         if (!isConstrainedHighSpeedRequestList(requests)) {
-            throw new IllegalArgumentException("Only request lists created by createHighSpeedRequestList() can be submitted to a constrained high speed capture session");
+            throw new IllegalArgumentException(
+                    "Only request lists created by createHighSpeedRequestList() can be submitted to"
+                            + " a constrained high speed capture session");
         }
         return this.mSessionImpl.captureBurstRequests(requests, executor, listener);
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int setRepeatingRequest(CaptureRequest request, CameraCaptureSession.CaptureCallback listener, Handler handler) throws CameraAccessException {
-        throw new UnsupportedOperationException("Constrained high speed session doesn't support this method");
+    public int setRepeatingRequest(
+            CaptureRequest request, CameraCaptureSession.CaptureCallback listener, Handler handler)
+            throws CameraAccessException {
+        throw new UnsupportedOperationException(
+                "Constrained high speed session doesn't support this method");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int setSingleRepeatingRequest(CaptureRequest request, Executor executor, CameraCaptureSession.CaptureCallback listener) throws CameraAccessException {
-        throw new UnsupportedOperationException("Constrained high speed session doesn't support this method");
+    public int setSingleRepeatingRequest(
+            CaptureRequest request,
+            Executor executor,
+            CameraCaptureSession.CaptureCallback listener)
+            throws CameraAccessException {
+        throw new UnsupportedOperationException(
+                "Constrained high speed session doesn't support this method");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int setRepeatingBurst(List<CaptureRequest> requests, CameraCaptureSession.CaptureCallback listener, Handler handler) throws CameraAccessException {
+    public int setRepeatingBurst(
+            List<CaptureRequest> requests,
+            CameraCaptureSession.CaptureCallback listener,
+            Handler handler)
+            throws CameraAccessException {
         if (!isConstrainedHighSpeedRequestList(requests)) {
-            throw new IllegalArgumentException("Only request lists created by createHighSpeedRequestList() can be submitted to a constrained high speed capture session");
+            throw new IllegalArgumentException(
+                    "Only request lists created by createHighSpeedRequestList() can be submitted to"
+                            + " a constrained high speed capture session");
         }
         return this.mSessionImpl.setRepeatingBurst(requests, listener, handler);
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public int setRepeatingBurstRequests(List<CaptureRequest> requests, Executor executor, CameraCaptureSession.CaptureCallback listener) throws CameraAccessException {
+    public int setRepeatingBurstRequests(
+            List<CaptureRequest> requests,
+            Executor executor,
+            CameraCaptureSession.CaptureCallback listener)
+            throws CameraAccessException {
         if (!isConstrainedHighSpeedRequestList(requests)) {
-            throw new IllegalArgumentException("Only request lists created by createHighSpeedRequestList() can be submitted to a constrained high speed capture session");
+            throw new IllegalArgumentException(
+                    "Only request lists created by createHighSpeedRequestList() can be submitted to"
+                            + " a constrained high speed capture session");
         }
         return this.mSessionImpl.setRepeatingBurstRequests(requests, executor, listener);
     }
@@ -211,22 +283,30 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
 
     @Override // android.hardware.camera2.CameraCaptureSession
     public void updateOutputConfiguration(OutputConfiguration config) throws CameraAccessException {
-        throw new UnsupportedOperationException("Constrained high speed session doesn't support this method");
+        throw new UnsupportedOperationException(
+                "Constrained high speed session doesn't support this method");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public CameraOfflineSession switchToOffline(Collection<Surface> offlineOutputs, Executor executor, CameraOfflineSession.CameraOfflineSessionCallback listener) throws CameraAccessException {
-        throw new UnsupportedOperationException("Constrained high speed session doesn't support this method");
+    public CameraOfflineSession switchToOffline(
+            Collection<Surface> offlineOutputs,
+            Executor executor,
+            CameraOfflineSession.CameraOfflineSessionCallback listener)
+            throws CameraAccessException {
+        throw new UnsupportedOperationException(
+                "Constrained high speed session doesn't support this method");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
     public boolean supportsOfflineProcessing(Surface surface) {
-        throw new UnsupportedOperationException("Constrained high speed session doesn't support offline mode");
+        throw new UnsupportedOperationException(
+                "Constrained high speed session doesn't support offline mode");
     }
 
     @Override // android.hardware.camera2.impl.CameraCaptureSessionCore
     public void closeWithoutDraining() {
-        throw new UnsupportedOperationException("Constrained high speed session doesn't support this method");
+        throw new UnsupportedOperationException(
+                "Constrained high speed session doesn't support this method");
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession, java.lang.AutoCloseable
@@ -255,7 +335,8 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
     }
 
     @Override // android.hardware.camera2.CameraCaptureSession
-    public void finalizeOutputConfigurations(List<OutputConfiguration> deferredOutputConfigs) throws CameraAccessException {
+    public void finalizeOutputConfigurations(List<OutputConfiguration> deferredOutputConfigs)
+            throws CameraAccessException {
         this.mSessionImpl.finalizeOutputConfigurations(deferredOutputConfigs);
     }
 
@@ -300,7 +381,8 @@ public class CameraConstrainedHighSpeedCaptureSessionImpl extends CameraConstrai
 
         @Override // android.hardware.camera2.CameraCaptureSession.StateCallback
         public void onSurfacePrepared(CameraCaptureSession session, Surface surface) {
-            this.mCallback.onSurfacePrepared(CameraConstrainedHighSpeedCaptureSessionImpl.this, surface);
+            this.mCallback.onSurfacePrepared(
+                    CameraConstrainedHighSpeedCaptureSessionImpl.this, surface);
         }
     }
 }

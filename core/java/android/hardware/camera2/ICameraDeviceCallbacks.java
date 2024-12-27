@@ -33,36 +33,40 @@ public interface ICameraDeviceCallbacks extends IInterface {
 
     void onRequestQueueEmpty() throws RemoteException;
 
-    void onResultReceived(CameraMetadataNative cameraMetadataNative, CaptureResultExtras captureResultExtras, PhysicalCaptureResultInfo[] physicalCaptureResultInfoArr) throws RemoteException;
+    void onResultReceived(
+            CameraMetadataNative cameraMetadataNative,
+            CaptureResultExtras captureResultExtras,
+            PhysicalCaptureResultInfo[] physicalCaptureResultInfoArr)
+            throws RemoteException;
 
     public static class Default implements ICameraDeviceCallbacks {
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
-        public void onDeviceError(int errorCode, CaptureResultExtras resultExtras) throws RemoteException {
-        }
+        public void onDeviceError(int errorCode, CaptureResultExtras resultExtras)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
-        public void onDeviceIdle() throws RemoteException {
-        }
+        public void onDeviceIdle() throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
-        public void onCaptureStarted(CaptureResultExtras resultExtras, long timestamp) throws RemoteException {
-        }
+        public void onCaptureStarted(CaptureResultExtras resultExtras, long timestamp)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
-        public void onResultReceived(CameraMetadataNative result, CaptureResultExtras resultExtras, PhysicalCaptureResultInfo[] physicalCaptureResultInfos) throws RemoteException {
-        }
+        public void onResultReceived(
+                CameraMetadataNative result,
+                CaptureResultExtras resultExtras,
+                PhysicalCaptureResultInfo[] physicalCaptureResultInfos)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
-        public void onPrepared(int streamId) throws RemoteException {
-        }
+        public void onPrepared(int streamId) throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
-        public void onRepeatingRequestError(long lastFrameNumber, int repeatingRequestId) throws RemoteException {
-        }
+        public void onRepeatingRequestError(long lastFrameNumber, int repeatingRequestId)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceCallbacks
-        public void onRequestQueueEmpty() throws RemoteException {
-        }
+        public void onRequestQueueEmpty() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -70,7 +74,7 @@ public interface ICameraDeviceCallbacks extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICameraDeviceCallbacks {
+    public abstract static class Stub extends Binder implements ICameraDeviceCallbacks {
         public static final String DESCRIPTOR = "android.hardware.camera2.ICameraDeviceCallbacks";
         static final int TRANSACTION_onCaptureStarted = 3;
         static final int TRANSACTION_onDeviceError = 1;
@@ -127,7 +131,8 @@ public interface ICameraDeviceCallbacks extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -138,7 +143,8 @@ public interface ICameraDeviceCallbacks extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    CaptureResultExtras _arg1 = (CaptureResultExtras) data.readTypedObject(CaptureResultExtras.CREATOR);
+                    CaptureResultExtras _arg1 =
+                            (CaptureResultExtras) data.readTypedObject(CaptureResultExtras.CREATOR);
                     data.enforceNoDataAvail();
                     onDeviceError(_arg0, _arg1);
                     return true;
@@ -146,15 +152,21 @@ public interface ICameraDeviceCallbacks extends IInterface {
                     onDeviceIdle();
                     return true;
                 case 3:
-                    CaptureResultExtras _arg02 = (CaptureResultExtras) data.readTypedObject(CaptureResultExtras.CREATOR);
+                    CaptureResultExtras _arg02 =
+                            (CaptureResultExtras) data.readTypedObject(CaptureResultExtras.CREATOR);
                     long _arg12 = data.readLong();
                     data.enforceNoDataAvail();
                     onCaptureStarted(_arg02, _arg12);
                     return true;
                 case 4:
-                    CameraMetadataNative _arg03 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
-                    CaptureResultExtras _arg13 = (CaptureResultExtras) data.readTypedObject(CaptureResultExtras.CREATOR);
-                    PhysicalCaptureResultInfo[] _arg2 = (PhysicalCaptureResultInfo[]) data.createTypedArray(PhysicalCaptureResultInfo.CREATOR);
+                    CameraMetadataNative _arg03 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CaptureResultExtras _arg13 =
+                            (CaptureResultExtras) data.readTypedObject(CaptureResultExtras.CREATOR);
+                    PhysicalCaptureResultInfo[] _arg2 =
+                            (PhysicalCaptureResultInfo[])
+                                    data.createTypedArray(PhysicalCaptureResultInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onResultReceived(_arg03, _arg13, _arg2);
                     return true;
@@ -194,7 +206,8 @@ public interface ICameraDeviceCallbacks extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
-            public void onDeviceError(int errorCode, CaptureResultExtras resultExtras) throws RemoteException {
+            public void onDeviceError(int errorCode, CaptureResultExtras resultExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -218,7 +231,8 @@ public interface ICameraDeviceCallbacks extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
-            public void onCaptureStarted(CaptureResultExtras resultExtras, long timestamp) throws RemoteException {
+            public void onCaptureStarted(CaptureResultExtras resultExtras, long timestamp)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -231,7 +245,11 @@ public interface ICameraDeviceCallbacks extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
-            public void onResultReceived(CameraMetadataNative result, CaptureResultExtras resultExtras, PhysicalCaptureResultInfo[] physicalCaptureResultInfos) throws RemoteException {
+            public void onResultReceived(
+                    CameraMetadataNative result,
+                    CaptureResultExtras resultExtras,
+                    PhysicalCaptureResultInfo[] physicalCaptureResultInfos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -257,7 +275,8 @@ public interface ICameraDeviceCallbacks extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceCallbacks
-            public void onRepeatingRequestError(long lastFrameNumber, int repeatingRequestId) throws RemoteException {
+            public void onRepeatingRequestError(long lastFrameNumber, int repeatingRequestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

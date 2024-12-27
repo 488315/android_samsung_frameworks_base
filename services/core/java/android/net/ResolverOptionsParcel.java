@@ -59,7 +59,9 @@ public class ResolverOptionsParcel implements Parcelable {
                 throw new BadParcelableException("Parcelable too small");
             }
             if (parcel.dataPosition() - dataPosition < readInt) {
-                this.hosts = (ResolverHostsParcel[]) parcel.createTypedArray(ResolverHostsParcel.CREATOR);
+                this.hosts =
+                        (ResolverHostsParcel[])
+                                parcel.createTypedArray(ResolverHostsParcel.CREATOR);
                 if (parcel.dataPosition() - dataPosition < readInt) {
                     this.tcMode = parcel.readInt();
                     if (parcel.dataPosition() - dataPosition < readInt) {
@@ -98,6 +100,7 @@ public class ResolverOptionsParcel implements Parcelable {
         parcel.writeBoolean(this.enforceDnsUid);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

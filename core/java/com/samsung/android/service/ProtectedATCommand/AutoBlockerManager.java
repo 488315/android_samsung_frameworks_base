@@ -6,11 +6,12 @@ import android.util.Slog;
 
 /* loaded from: classes6.dex */
 class AutoBlockerManager {
-    AutoBlockerManager() {
-    }
+    AutoBlockerManager() {}
 
     static boolean isAutoBlockerOn(Context context) {
-        if (Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.RAMPART_BLOCKED_AT_CMD, 0) != 1) {
+        if (Settings.Secure.getInt(
+                        context.getContentResolver(), Settings.Secure.RAMPART_BLOCKED_AT_CMD, 0)
+                != 1) {
             return false;
         }
         Slog.d("PACMClassifier", "Auto Blocker is on");

@@ -24,20 +24,16 @@ public interface ISViewCoverBaseService extends IInterface {
 
     public static class Default implements ISViewCoverBaseService {
         @Override // com.samsung.android.cover.ISViewCoverBaseService
-        public void onSystemReady() throws RemoteException {
-        }
+        public void onSystemReady() throws RemoteException {}
 
         @Override // com.samsung.android.cover.ISViewCoverBaseService
-        public void onSViewCoverShow() throws RemoteException {
-        }
+        public void onSViewCoverShow() throws RemoteException {}
 
         @Override // com.samsung.android.cover.ISViewCoverBaseService
-        public void onSViewCoverHide() throws RemoteException {
-        }
+        public void onSViewCoverHide() throws RemoteException {}
 
         @Override // com.samsung.android.cover.ISViewCoverBaseService
-        public void updateCoverState(CoverState state) throws RemoteException {
-        }
+        public void updateCoverState(CoverState state) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ISViewCoverBaseService
         public boolean isCoverViewShowing() throws RemoteException {
@@ -55,7 +51,7 @@ public interface ISViewCoverBaseService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISViewCoverBaseService {
+    public abstract static class Stub extends Binder implements ISViewCoverBaseService {
         static final int TRANSACTION_isCoverViewShowing = 5;
         static final int TRANSACTION_onCoverAppCovered = 6;
         static final int TRANSACTION_onSViewCoverHide = 3;
@@ -108,7 +104,8 @@ public interface ISViewCoverBaseService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISViewCoverBaseService.DESCRIPTOR);
             }

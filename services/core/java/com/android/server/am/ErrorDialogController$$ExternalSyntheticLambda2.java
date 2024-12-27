@@ -5,7 +5,8 @@ import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class ErrorDialogController$$ExternalSyntheticLambda2 implements Runnable {
+public final /* synthetic */ class ErrorDialogController$$ExternalSyntheticLambda2
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -23,7 +24,8 @@ public final /* synthetic */ class ErrorDialogController$$ExternalSyntheticLambd
         switch (i) {
             case 0:
                 ErrorDialogController errorDialogController = (ErrorDialogController) obj;
-                ActivityManagerGlobalLock activityManagerGlobalLock = errorDialogController.mProcLock;
+                ActivityManagerGlobalLock activityManagerGlobalLock =
+                        errorDialogController.mProcLock;
                 ActivityManagerService.boostPriorityForProcLockedSection();
                 synchronized (activityManagerGlobalLock) {
                     try {
@@ -39,7 +41,8 @@ public final /* synthetic */ class ErrorDialogController$$ExternalSyntheticLambd
                 return;
             case 1:
                 ErrorDialogController errorDialogController2 = (ErrorDialogController) obj;
-                ActivityManagerGlobalLock activityManagerGlobalLock2 = errorDialogController2.mProcLock;
+                ActivityManagerGlobalLock activityManagerGlobalLock2 =
+                        errorDialogController2.mProcLock;
                 ActivityManagerService.boostPriorityForProcLockedSection();
                 synchronized (activityManagerGlobalLock2) {
                     try {

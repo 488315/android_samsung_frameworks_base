@@ -2,6 +2,7 @@ package android.os;
 
 import android.content.Context;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -21,12 +22,10 @@ public class HardwarePropertiesManager {
     private final IHardwarePropertiesManager mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceTemperatureType {
-    }
+    public @interface DeviceTemperatureType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TemperatureSource {
-    }
+    public @interface TemperatureSource {}
 
     public HardwarePropertiesManager(Context context, IHardwarePropertiesManager service) {
         this.mContext = context;
@@ -45,7 +44,8 @@ public class HardwarePropertiesManager {
                     case 2:
                     case 3:
                         try {
-                            return this.mService.getDeviceTemperatures(this.mContext.getOpPackageName(), type, source);
+                            return this.mService.getDeviceTemperatures(
+                                    this.mContext.getOpPackageName(), type, source);
                         } catch (RemoteException e) {
                             throw e.rethrowFromSystemServer();
                         }

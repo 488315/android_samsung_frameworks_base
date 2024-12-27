@@ -7,17 +7,22 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public interface IEdgeManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.edge.IEdgeManager";
 
-    void bindEdgeLightingService(IBinder iBinder, int i, ComponentName componentName) throws RemoteException;
+    void bindEdgeLightingService(IBinder iBinder, int i, ComponentName componentName)
+            throws RemoteException;
 
-    void cancelNotification(String str, String str2, int i, int i2, String str3) throws RemoteException;
+    void cancelNotification(String str, String str2, int i, int i2, String str3)
+            throws RemoteException;
 
-    void cancelNotificationByGroupKey(String str, String str2, int i, int i2, String str3, String str4) throws RemoteException;
+    void cancelNotificationByGroupKey(
+            String str, String str2, int i, int i2, String str3, String str4)
+            throws RemoteException;
 
     void disable(int i, String str, IBinder iBinder) throws RemoteException;
 
@@ -29,9 +34,11 @@ public interface IEdgeManager extends IInterface {
 
     boolean isPackageEnabled(String str, int i) throws RemoteException;
 
-    void registerEdgeLightingListener(IBinder iBinder, ComponentName componentName) throws RemoteException;
+    void registerEdgeLightingListener(IBinder iBinder, ComponentName componentName)
+            throws RemoteException;
 
-    void startEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, IBinder iBinder) throws RemoteException;
+    void startEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, IBinder iBinder)
+            throws RemoteException;
 
     void stopEdgeLighting(String str, IBinder iBinder) throws RemoteException;
 
@@ -41,40 +48,40 @@ public interface IEdgeManager extends IInterface {
 
     void updateEdgeLightingPackageList(String str, List<String> list) throws RemoteException;
 
-    void updateEdgeLightingPolicy(String str, EdgeLightingPolicy edgeLightingPolicy) throws RemoteException;
+    void updateEdgeLightingPolicy(String str, EdgeLightingPolicy edgeLightingPolicy)
+            throws RemoteException;
 
     public static class Default implements IEdgeManager {
         @Override // com.samsung.android.edge.IEdgeManager
-        public void bindEdgeLightingService(IBinder binder, int condition, ComponentName component) throws RemoteException {
-        }
+        public void bindEdgeLightingService(IBinder binder, int condition, ComponentName component)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void unbindEdgeLightingService(IBinder binder, String packageName) throws RemoteException {
-        }
+        public void unbindEdgeLightingService(IBinder binder, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void updateEdgeLightingPackageList(String callingPackage, List<String> list) throws RemoteException {
-        }
+        public void updateEdgeLightingPackageList(String callingPackage, List<String> list)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void updateEdgeLightingPolicy(String callingPackage, EdgeLightingPolicy policy) throws RemoteException {
-        }
+        public void updateEdgeLightingPolicy(String callingPackage, EdgeLightingPolicy policy)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void registerEdgeLightingListener(IBinder binder, ComponentName component) throws RemoteException {
-        }
+        public void registerEdgeLightingListener(IBinder binder, ComponentName component)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void unregisterEdgeLightingListener(IBinder binder, String packageName) throws RemoteException {
-        }
+        public void unregisterEdgeLightingListener(IBinder binder, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void startEdgeLighting(String packageName, SemEdgeLightingInfo info, IBinder token) throws RemoteException {
-        }
+        public void startEdgeLighting(String packageName, SemEdgeLightingInfo info, IBinder token)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void stopEdgeLighting(String packageName, IBinder token) throws RemoteException {
-        }
+        public void stopEdgeLighting(String packageName, IBinder token) throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
         public int getEdgeLightingState() throws RemoteException {
@@ -82,17 +89,18 @@ public interface IEdgeManager extends IInterface {
         }
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public boolean isEdgeLightingNotificationAllowed(String packageName) throws RemoteException {
+        public boolean isEdgeLightingNotificationAllowed(String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void disable(int what, String callingPackage, IBinder binder) throws RemoteException {
-        }
+        public void disable(int what, String callingPackage, IBinder binder)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void disableEdgeLightingNotification(String callingPackage, boolean disable) throws RemoteException {
-        }
+        public void disableEdgeLightingNotification(String callingPackage, boolean disable)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
         public boolean isPackageEnabled(String packageName, int userId) throws RemoteException {
@@ -100,12 +108,13 @@ public interface IEdgeManager extends IInterface {
         }
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void cancelNotification(String pkg, String tag, int id, int userId, String key) throws RemoteException {
-        }
+        public void cancelNotification(String pkg, String tag, int id, int userId, String key)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeManager
-        public void cancelNotificationByGroupKey(String pkg, String tag, int id, int userId, String key, String groupKey) throws RemoteException {
-        }
+        public void cancelNotificationByGroupKey(
+                String pkg, String tag, int id, int userId, String key, String groupKey)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -113,7 +122,7 @@ public interface IEdgeManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEdgeManager {
+    public abstract static class Stub extends Binder implements IEdgeManager {
         static final int TRANSACTION_bindEdgeLightingService = 1;
         static final int TRANSACTION_cancelNotification = 14;
         static final int TRANSACTION_cancelNotificationByGroupKey = 15;
@@ -193,7 +202,8 @@ public interface IEdgeManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEdgeManager.DESCRIPTOR);
             }
@@ -205,7 +215,8 @@ public interface IEdgeManager extends IInterface {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
                     int _arg1 = data.readInt();
-                    ComponentName _arg2 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg2 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     bindEdgeLightingService(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -226,14 +237,16 @@ public interface IEdgeManager extends IInterface {
                     return true;
                 case 4:
                     String _arg04 = data.readString();
-                    EdgeLightingPolicy _arg14 = (EdgeLightingPolicy) data.readTypedObject(EdgeLightingPolicy.CREATOR);
+                    EdgeLightingPolicy _arg14 =
+                            (EdgeLightingPolicy) data.readTypedObject(EdgeLightingPolicy.CREATOR);
                     data.enforceNoDataAvail();
                     updateEdgeLightingPolicy(_arg04, _arg14);
                     reply.writeNoException();
                     return true;
                 case 5:
                     IBinder _arg05 = data.readStrongBinder();
-                    ComponentName _arg15 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg15 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     registerEdgeLightingListener(_arg05, _arg15);
                     reply.writeNoException();
@@ -247,7 +260,8 @@ public interface IEdgeManager extends IInterface {
                     return true;
                 case 7:
                     String _arg07 = data.readString();
-                    SemEdgeLightingInfo _arg17 = (SemEdgeLightingInfo) data.readTypedObject(SemEdgeLightingInfo.CREATOR);
+                    SemEdgeLightingInfo _arg17 =
+                            (SemEdgeLightingInfo) data.readTypedObject(SemEdgeLightingInfo.CREATOR);
                     IBinder _arg22 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     startEdgeLighting(_arg07, _arg17, _arg22);
@@ -338,7 +352,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void bindEdgeLightingService(IBinder binder, int condition, ComponentName component) throws RemoteException {
+            public void bindEdgeLightingService(
+                    IBinder binder, int condition, ComponentName component) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -355,7 +370,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void unbindEdgeLightingService(IBinder binder, String packageName) throws RemoteException {
+            public void unbindEdgeLightingService(IBinder binder, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -371,7 +387,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void updateEdgeLightingPackageList(String callingPackage, List<String> list) throws RemoteException {
+            public void updateEdgeLightingPackageList(String callingPackage, List<String> list)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -387,7 +404,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void updateEdgeLightingPolicy(String callingPackage, EdgeLightingPolicy policy) throws RemoteException {
+            public void updateEdgeLightingPolicy(String callingPackage, EdgeLightingPolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -403,7 +421,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void registerEdgeLightingListener(IBinder binder, ComponentName component) throws RemoteException {
+            public void registerEdgeLightingListener(IBinder binder, ComponentName component)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -419,7 +438,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void unregisterEdgeLightingListener(IBinder binder, String packageName) throws RemoteException {
+            public void unregisterEdgeLightingListener(IBinder binder, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -435,7 +455,9 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void startEdgeLighting(String packageName, SemEdgeLightingInfo info, IBinder token) throws RemoteException {
+            public void startEdgeLighting(
+                    String packageName, SemEdgeLightingInfo info, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -484,7 +506,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public boolean isEdgeLightingNotificationAllowed(String packageName) throws RemoteException {
+            public boolean isEdgeLightingNotificationAllowed(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -501,7 +524,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void disable(int what, String callingPackage, IBinder binder) throws RemoteException {
+            public void disable(int what, String callingPackage, IBinder binder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -518,7 +542,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void disableEdgeLightingNotification(String callingPackage, boolean disable) throws RemoteException {
+            public void disableEdgeLightingNotification(String callingPackage, boolean disable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -552,7 +577,8 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void cancelNotification(String pkg, String tag, int id, int userId, String key) throws RemoteException {
+            public void cancelNotification(String pkg, String tag, int id, int userId, String key)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -571,7 +597,9 @@ public interface IEdgeManager extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeManager
-            public void cancelNotificationByGroupKey(String pkg, String tag, int id, int userId, String key, String groupKey) throws RemoteException {
+            public void cancelNotificationByGroupKey(
+                    String pkg, String tag, int id, int userId, String key, String groupKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

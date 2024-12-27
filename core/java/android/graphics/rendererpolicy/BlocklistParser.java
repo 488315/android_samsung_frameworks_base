@@ -3,6 +3,7 @@ package android.graphics.rendererpolicy;
 import android.util.JsonReader;
 import android.util.JsonToken;
 import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,8 +15,7 @@ class BlocklistParser {
     private static final String TAG = "BlocklistParser";
     public static final String UTF_8 = "UTF-8";
 
-    BlocklistParser() {
-    }
+    BlocklistParser() {}
 
     public boolean isValueNonNull(JsonReader reader) throws IOException {
         return reader.peek() != JsonToken.NULL;

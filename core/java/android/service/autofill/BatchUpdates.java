@@ -6,38 +6,46 @@ import android.os.Parcelable;
 import android.util.Pair;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class BatchUpdates implements Parcelable {
-    public static final Parcelable.Creator<BatchUpdates> CREATOR = new Parcelable.Creator<BatchUpdates>() { // from class: android.service.autofill.BatchUpdates.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BatchUpdates createFromParcel(Parcel parcel) {
-            Builder builder = new Builder();
-            int[] ids = parcel.createIntArray();
-            if (ids != null) {
-                InternalTransformation[] values = (InternalTransformation[]) parcel.readParcelableArray(null, InternalTransformation.class);
-                int size = ids.length;
-                for (int i = 0; i < size; i++) {
-                    builder.transformChild(ids[i], values[i]);
+    public static final Parcelable.Creator<BatchUpdates> CREATOR =
+            new Parcelable.Creator<
+                    BatchUpdates>() { // from class: android.service.autofill.BatchUpdates.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BatchUpdates createFromParcel(Parcel parcel) {
+                    Builder builder = new Builder();
+                    int[] ids = parcel.createIntArray();
+                    if (ids != null) {
+                        InternalTransformation[] values =
+                                (InternalTransformation[])
+                                        parcel.readParcelableArray(
+                                                null, InternalTransformation.class);
+                        int size = ids.length;
+                        for (int i = 0; i < size; i++) {
+                            builder.transformChild(ids[i], values[i]);
+                        }
+                    }
+                    RemoteViews updates =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    if (updates != null) {
+                        builder.updateTemplate(updates);
+                    }
+                    return builder.build();
                 }
-            }
-            RemoteViews updates = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            if (updates != null) {
-                builder.updateTemplate(updates);
-            }
-            return builder.build();
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BatchUpdates[] newArray(int size) {
-            return new BatchUpdates[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BatchUpdates[] newArray(int size) {
+                    return new BatchUpdates[size];
+                }
+            };
     private final ArrayList<Pair<Integer, InternalTransformation>> mTransformations;
     private final RemoteViews mUpdates;
 
@@ -67,17 +75,23 @@ public final class BatchUpdates implements Parcelable {
 
         public Builder transformChild(int id, Transformation transformation) {
             throwIfDestroyed();
-            Preconditions.checkArgument(transformation instanceof InternalTransformation, "not provided by Android System: %s", transformation);
+            Preconditions.checkArgument(
+                    transformation instanceof InternalTransformation,
+                    "not provided by Android System: %s",
+                    transformation);
             if (this.mTransformations == null) {
                 this.mTransformations = new ArrayList<>();
             }
-            this.mTransformations.add(new Pair<>(Integer.valueOf(id), (InternalTransformation) transformation));
+            this.mTransformations.add(
+                    new Pair<>(Integer.valueOf(id), (InternalTransformation) transformation));
             return this;
         }
 
         public BatchUpdates build() {
             throwIfDestroyed();
-            Preconditions.checkState((this.mUpdates == null && this.mTransformations == null) ? false : true, "must call either updateTemplate() or transformChild() at least once");
+            Preconditions.checkState(
+                    (this.mUpdates == null && this.mTransformations == null) ? false : true,
+                    "must call either updateTemplate() or transformChild() at least once");
             this.mDestroyed = true;
             return new BatchUpdates(this);
         }
@@ -91,7 +105,13 @@ public final class BatchUpdates implements Parcelable {
 
     public String toString() {
         if (Helper.sDebug) {
-            return "BatchUpdates: [, transformations=" + (this.mTransformations == null ? "N/A" : Integer.valueOf(this.mTransformations.size())) + ", updates=" + this.mUpdates + NavigationBarInflaterView.SIZE_MOD_END;
+            return "BatchUpdates: [, transformations="
+                    + (this.mTransformations == null
+                            ? "N/A"
+                            : Integer.valueOf(this.mTransformations.size()))
+                    + ", updates="
+                    + this.mUpdates
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
         return super.toString();
     }

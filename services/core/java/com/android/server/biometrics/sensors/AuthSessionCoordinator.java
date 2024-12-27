@@ -3,9 +3,10 @@ package com.android.server.biometrics.sensors;
 import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
-import com.android.server.biometrics.sensors.MultiBiometricLockoutState;
+
 import java.time.Clock;
 import java.util.Arrays;
 import java.util.Collections;
@@ -55,7 +56,9 @@ public final class AuthSessionCoordinator {
                         StringBuilder sb = new StringBuilder();
                         sb.append(str);
                         int i7 = i4 + 1;
-                        sb.append(String.format("#%-5d %s\n", Integer.valueOf(i4), this.mApiCalls[i6]));
+                        sb.append(
+                                String.format(
+                                        "#%-5d %s\n", Integer.valueOf(i4), this.mApiCalls[i6]));
                         str = sb.toString();
                         i4 = i7;
                     }
@@ -75,11 +78,14 @@ public final class AuthSessionCoordinator {
         if (((HashSet) this.mAuthOperations).contains(Integer.valueOf(i2))) {
             z = false;
         } else {
-            BootReceiver$$ExternalSyntheticOutline0.m("Error unable to find auth operation : ", str, "AuthSessionCoordinator");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "Error unable to find auth operation : ", str, "AuthSessionCoordinator");
             z = true;
         }
         if (i != this.mUserId) {
-            Slog.e("AuthSessionCoordinator", "Error mismatched userId, expected=" + this.mUserId + " for " + str);
+            Slog.e(
+                    "AuthSessionCoordinator",
+                    "Error mismatched userId, expected=" + this.mUserId + " for " + str);
             z = true;
         }
         if (z) {
@@ -87,45 +93,89 @@ public final class AuthSessionCoordinator {
         }
         ((HashSet) this.mAuthOperations).remove(Integer.valueOf(i2));
         if (this.mIsAuthenticating) {
-            Map unmodifiableMap = Collections.unmodifiableMap(this.mAuthResultCoordinator.mAuthenticatorState);
-            for (Integer num : Arrays.asList(4095, Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT), 15)) {
+            Map unmodifiableMap =
+                    Collections.unmodifiableMap(this.mAuthResultCoordinator.mAuthenticatorState);
+            for (Integer num :
+                    Arrays.asList(
+                            4095,
+                            Integer.valueOf(
+                                    IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT),
+                            15)) {
                 int intValue = num.intValue();
                 Integer num2 = (Integer) unmodifiableMap.get(num);
                 int intValue2 = num2.intValue() & 4;
-                MultiBiometricLockoutState multiBiometricLockoutState = this.mMultiBiometricLockoutState;
+                MultiBiometricLockoutState multiBiometricLockoutState =
+                        this.mMultiBiometricLockoutState;
                 if (intValue2 == 4) {
                     multiBiometricLockoutState.clearPermanentLockOut(this.mUserId, intValue);
                     multiBiometricLockoutState.clearTimedLockout(this.mUserId, intValue);
                 } else if ((num2.intValue() & 1) == 1) {
                     Map authMapForUser = multiBiometricLockoutState.getAuthMapForUser(this.mUserId);
                     if (intValue == 15) {
-                        ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser.get(15)).mPermanentlyLockedOut = true;
+                        ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser.get(15))
+                                        .mPermanentlyLockedOut =
+                                true;
                     } else if (intValue != 255) {
                         if (intValue != 4095) {
-                            NandswapManager$$ExternalSyntheticOutline0.m(intValue, "increaseLockoutTime called for invalid strength : ", "MultiBiometricLockoutState");
+                            NandswapManager$$ExternalSyntheticOutline0.m(
+                                    intValue,
+                                    "increaseLockoutTime called for invalid strength : ",
+                                    "MultiBiometricLockoutState");
                         } else {
-                            ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser.get(4095)).mPermanentlyLockedOut = true;
+                            ((MultiBiometricLockoutState.AuthenticatorState)
+                                                    authMapForUser.get(4095))
+                                            .mPermanentlyLockedOut =
+                                    true;
                         }
                     }
-                    ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser.get(Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT))).mPermanentlyLockedOut = true;
-                    ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser.get(4095)).mPermanentlyLockedOut = true;
+                    ((MultiBiometricLockoutState.AuthenticatorState)
+                                            authMapForUser.get(
+                                                    Integer.valueOf(
+                                                            IDnsResolverUnsolicitedEventListener
+                                                                    .DNS_HEALTH_RESULT_TIMEOUT)))
+                                    .mPermanentlyLockedOut =
+                            true;
+                    ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser.get(4095))
+                                    .mPermanentlyLockedOut =
+                            true;
                 } else if ((num2.intValue() & 2) == 2) {
-                    Map authMapForUser2 = multiBiometricLockoutState.getAuthMapForUser(this.mUserId);
+                    Map authMapForUser2 =
+                            multiBiometricLockoutState.getAuthMapForUser(this.mUserId);
                     if (intValue == 15) {
-                        ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser2.get(15)).mTimedLockout = true;
+                        ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser2.get(15))
+                                        .mTimedLockout =
+                                true;
                     } else if (intValue != 255) {
                         if (intValue != 4095) {
-                            NandswapManager$$ExternalSyntheticOutline0.m(intValue, "increaseLockoutTime called for invalid strength : ", "MultiBiometricLockoutState");
+                            NandswapManager$$ExternalSyntheticOutline0.m(
+                                    intValue,
+                                    "increaseLockoutTime called for invalid strength : ",
+                                    "MultiBiometricLockoutState");
                         } else {
-                            ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser2.get(4095)).mTimedLockout = true;
+                            ((MultiBiometricLockoutState.AuthenticatorState)
+                                                    authMapForUser2.get(4095))
+                                            .mTimedLockout =
+                                    true;
                         }
                     }
-                    ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser2.get(Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT))).mTimedLockout = true;
-                    ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser2.get(4095)).mTimedLockout = true;
+                    ((MultiBiometricLockoutState.AuthenticatorState)
+                                            authMapForUser2.get(
+                                                    Integer.valueOf(
+                                                            IDnsResolverUnsolicitedEventListener
+                                                                    .DNS_HEALTH_RESULT_TIMEOUT)))
+                                    .mTimedLockout =
+                            true;
+                    ((MultiBiometricLockoutState.AuthenticatorState) authMapForUser2.get(4095))
+                                    .mTimedLockout =
+                            true;
                 }
             }
             if (((HashSet) this.mAuthOperations).isEmpty()) {
-                this.mRingBuffer.addApiCall(AmFmBandRange$$ExternalSyntheticOutline0.m(this.mUserId, new StringBuilder("internal : onAuthSessionEnded("), ")"));
+                this.mRingBuffer.addApiCall(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                this.mUserId,
+                                new StringBuilder("internal : onAuthSessionEnded("),
+                                ")"));
                 this.mIsAuthenticating = false;
                 ((HashSet) this.mAuthOperations).clear();
             }
@@ -134,13 +184,25 @@ public final class AuthSessionCoordinator {
 
     public final synchronized void authEndedFor(long j, int i, int i2, int i3, boolean z) {
         try {
-            String str = "authEndedFor(userId=" + i + " ,biometricStrength=" + i2 + ", sensorId=" + i3 + ", requestId=" + j + ", wasSuccessful=" + z + ")";
+            String str =
+                    "authEndedFor(userId="
+                            + i
+                            + " ,biometricStrength="
+                            + i2
+                            + ", sensorId="
+                            + i3
+                            + ", requestId="
+                            + j
+                            + ", wasSuccessful="
+                            + z
+                            + ")";
             this.mRingBuffer.addApiCall(str);
             if (z) {
                 AuthResultCoordinator authResultCoordinator = this.mAuthResultCoordinator;
                 authResultCoordinator.getClass();
                 if (i2 == 15) {
-                    authResultCoordinator.updateState(i2, new AuthResultCoordinator$$ExternalSyntheticLambda0(2));
+                    authResultCoordinator.updateState(
+                            i2, new AuthResultCoordinator$$ExternalSyntheticLambda0(2));
                 }
             }
             attemptToFinish(i, i3, str);
@@ -151,18 +213,27 @@ public final class AuthSessionCoordinator {
 
     public final synchronized void authStartedFor(int i, int i2, long j) {
         try {
-            this.mRingBuffer.addApiCall("authStartedFor(userId=" + i + ", sensorId=" + i2 + ", requestId=" + j + ")");
+            this.mRingBuffer.addApiCall(
+                    "authStartedFor(userId=" + i + ", sensorId=" + i2 + ", requestId=" + j + ")");
             if (!this.mIsAuthenticating) {
                 onAuthSessionStarted(i);
             }
             if (((HashSet) this.mAuthOperations).contains(Integer.valueOf(i2))) {
-                Slog.e("AuthSessionCoordinator", "Error, authStartedFor(" + i2 + ") without being finished");
+                Slog.e(
+                        "AuthSessionCoordinator",
+                        "Error, authStartedFor(" + i2 + ") without being finished");
                 return;
             }
             if (this.mUserId == i) {
                 ((HashSet) this.mAuthOperations).add(Integer.valueOf(i2));
             } else {
-                Slog.e("AuthSessionCoordinator", "Error authStartedFor(" + i + ") Incorrect userId, expected" + this.mUserId + ", ignoring...");
+                Slog.e(
+                        "AuthSessionCoordinator",
+                        "Error authStartedFor("
+                                + i
+                                + ") Incorrect userId, expected"
+                                + this.mUserId
+                                + ", ignoring...");
             }
         } catch (Throwable th) {
             throw th;
@@ -170,20 +241,42 @@ public final class AuthSessionCoordinator {
     }
 
     public final synchronized void lockOutTimed(int i, int i2, int i3, long j, long j2) {
-        String str = "lockOutTimedFor(userId=" + i + ", biometricStrength=" + i2 + ", sensorId=" + i3 + ", time=" + j + ", requestId=" + j2 + ")";
+        String str =
+                "lockOutTimedFor(userId="
+                        + i
+                        + ", biometricStrength="
+                        + i2
+                        + ", sensorId="
+                        + i3
+                        + ", time="
+                        + j
+                        + ", requestId="
+                        + j2
+                        + ")";
         this.mRingBuffer.addApiCall(str);
         AuthResultCoordinator authResultCoordinator = this.mAuthResultCoordinator;
         authResultCoordinator.getClass();
-        authResultCoordinator.updateState(i2, new AuthResultCoordinator$$ExternalSyntheticLambda0(1));
+        authResultCoordinator.updateState(
+                i2, new AuthResultCoordinator$$ExternalSyntheticLambda0(1));
         attemptToFinish(i, i3, str);
     }
 
     public final synchronized void lockedOutFor(int i, int i2, int i3, long j) {
-        String str = "lockOutFor(userId=" + i + ", biometricStrength=" + i2 + ", sensorId=" + i3 + ", requestId=" + j + ")";
+        String str =
+                "lockOutFor(userId="
+                        + i
+                        + ", biometricStrength="
+                        + i2
+                        + ", sensorId="
+                        + i3
+                        + ", requestId="
+                        + j
+                        + ")";
         this.mRingBuffer.addApiCall(str);
         AuthResultCoordinator authResultCoordinator = this.mAuthResultCoordinator;
         authResultCoordinator.getClass();
-        authResultCoordinator.updateState(i2, new AuthResultCoordinator$$ExternalSyntheticLambda0(0));
+        authResultCoordinator.updateState(
+                i2, new AuthResultCoordinator$$ExternalSyntheticLambda0(0));
         attemptToFinish(i, i3, str);
     }
 
@@ -196,7 +289,14 @@ public final class AuthSessionCoordinator {
     }
 
     public final synchronized void resetLockoutFor(int i, int i2, long j) {
-        this.mRingBuffer.addApiCall("resetLockoutFor(userId=" + i + " ,biometricStrength=" + i2 + ", requestId=" + j + ")");
+        this.mRingBuffer.addApiCall(
+                "resetLockoutFor(userId="
+                        + i
+                        + " ,biometricStrength="
+                        + i2
+                        + ", requestId="
+                        + j
+                        + ")");
         if (i2 != 15) {
             this.mMultiBiometricLockoutState.clearTimedLockout(i, i2);
             return;

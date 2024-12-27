@@ -2,6 +2,7 @@ package com.android.server.hdmi;
 
 import android.hardware.hdmi.IHdmiControlCallback;
 import android.util.Slog;
+
 import com.android.server.FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -11,7 +12,10 @@ public final class RoutingControlAction extends HdmiCecFeatureAction {
     public int mCurrentRoutingPath;
     public final boolean mNotifyInputChange;
 
-    public RoutingControlAction(HdmiCecLocalDevice hdmiCecLocalDevice, int i, IHdmiControlCallback iHdmiControlCallback) {
+    public RoutingControlAction(
+            HdmiCecLocalDevice hdmiCecLocalDevice,
+            int i,
+            IHdmiControlCallback iHdmiControlCallback) {
         super(hdmiCecLocalDevice, iHdmiControlCallback);
         this.mCurrentRoutingPath = i;
         this.mNotifyInputChange = iHdmiControlCallback == null;
@@ -25,13 +29,20 @@ public final class RoutingControlAction extends HdmiCecFeatureAction {
             return;
         }
         if (i != 1) {
-            FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(i, "Invalid timeoutState (", ").", "CEC");
+            FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(
+                    i, "Invalid timeoutState (", ").", "CEC");
             return;
         }
         HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv = (HdmiCecLocalDeviceTv) this.mSource;
         hdmiCecLocalDeviceTv.setPrevPortId(hdmiCecLocalDeviceTv.getActivePortId());
         hdmiCecLocalDeviceTv.updateActiveInput(this.mCurrentRoutingPath, this.mNotifyInputChange);
-        this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), 15, 134, HdmiCecMessageBuilder.physicalAddressToParam(this.mCurrentRoutingPath)), null);
+        this.mService.sendCecCommand(
+                HdmiCecMessage.build(
+                        getSourceAddress(),
+                        15,
+                        134,
+                        HdmiCecMessageBuilder.physicalAddressToParam(this.mCurrentRoutingPath)),
+                null);
         finishWithCallback(0);
     }
 

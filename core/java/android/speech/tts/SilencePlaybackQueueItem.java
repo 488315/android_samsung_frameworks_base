@@ -1,14 +1,16 @@
 package android.speech.tts;
 
 import android.os.ConditionVariable;
-import android.speech.tts.TextToSpeechService;
 
 /* loaded from: classes3.dex */
 class SilencePlaybackQueueItem extends PlaybackQueueItem {
     private final ConditionVariable mCondVar;
     private final long mSilenceDurationMs;
 
-    SilencePlaybackQueueItem(TextToSpeechService.UtteranceProgressDispatcher dispatcher, Object callerIdentity, long silenceDurationMs) {
+    SilencePlaybackQueueItem(
+            TextToSpeechService.UtteranceProgressDispatcher dispatcher,
+            Object callerIdentity,
+            long silenceDurationMs) {
         super(dispatcher, callerIdentity);
         this.mCondVar = new ConditionVariable();
         this.mSilenceDurationMs = silenceDurationMs;

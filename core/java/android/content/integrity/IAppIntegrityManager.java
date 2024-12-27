@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -21,12 +22,15 @@ public interface IAppIntegrityManager extends IInterface {
 
     List<String> getWhitelistedRuleProviders() throws RemoteException;
 
-    void updateRuleSet(String str, ParceledListSlice<Rule> parceledListSlice, IntentSender intentSender) throws RemoteException;
+    void updateRuleSet(
+            String str, ParceledListSlice<Rule> parceledListSlice, IntentSender intentSender)
+            throws RemoteException;
 
     public static class Default implements IAppIntegrityManager {
         @Override // android.content.integrity.IAppIntegrityManager
-        public void updateRuleSet(String version, ParceledListSlice<Rule> rules, IntentSender statusReceiver) throws RemoteException {
-        }
+        public void updateRuleSet(
+                String version, ParceledListSlice<Rule> rules, IntentSender statusReceiver)
+                throws RemoteException {}
 
         @Override // android.content.integrity.IAppIntegrityManager
         public String getCurrentRuleSetVersion() throws RemoteException {
@@ -54,7 +58,7 @@ public interface IAppIntegrityManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppIntegrityManager {
+    public abstract static class Stub extends Binder implements IAppIntegrityManager {
         static final int TRANSACTION_getCurrentRuleSetProvider = 3;
         static final int TRANSACTION_getCurrentRuleSetVersion = 2;
         static final int TRANSACTION_getCurrentRules = 4;
@@ -104,7 +108,8 @@ public interface IAppIntegrityManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppIntegrityManager.DESCRIPTOR);
             }
@@ -115,7 +120,8 @@ public interface IAppIntegrityManager extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ParceledListSlice<Rule> _arg1 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<Rule> _arg1 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     IntentSender _arg2 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     data.enforceNoDataAvail();
                     updateRuleSet(_arg0, _arg1, _arg2);
@@ -163,7 +169,9 @@ public interface IAppIntegrityManager extends IInterface {
             }
 
             @Override // android.content.integrity.IAppIntegrityManager
-            public void updateRuleSet(String version, ParceledListSlice<Rule> rules, IntentSender statusReceiver) throws RemoteException {
+            public void updateRuleSet(
+                    String version, ParceledListSlice<Rule> rules, IntentSender statusReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -219,7 +227,8 @@ public interface IAppIntegrityManager extends IInterface {
                     _data.writeInterfaceToken(IAppIntegrityManager.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<Rule> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<Rule> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

@@ -22,24 +22,19 @@ public interface ITaskChangeListener extends IInterface {
 
     public static class Default implements ITaskChangeListener {
         @Override // com.samsung.android.remoteappmode.ITaskChangeListener
-        public void onTaskRemoved(int taskId) throws RemoteException {
-        }
+        public void onTaskRemoved(int taskId) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.ITaskChangeListener
-        public void onTaskPlayed(int taskId, int displayId) throws RemoteException {
-        }
+        public void onTaskPlayed(int taskId, int displayId) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.ITaskChangeListener
-        public void onTaskTriedToGoToBackground(int taskId, int displayId) throws RemoteException {
-        }
+        public void onTaskTriedToGoToBackground(int taskId, int displayId) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.ITaskChangeListener
-        public void onTaskDisplayChanged(int taskId, int newDisplayId) throws RemoteException {
-        }
+        public void onTaskDisplayChanged(int taskId, int newDisplayId) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.ITaskChangeListener
-        public void onRecentTaskListUpdated() throws RemoteException {
-        }
+        public void onRecentTaskListUpdated() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +42,7 @@ public interface ITaskChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITaskChangeListener {
+    public abstract static class Stub extends Binder implements ITaskChangeListener {
         static final int TRANSACTION_onRecentTaskListUpdated = 5;
         static final int TRANSACTION_onTaskDisplayChanged = 4;
         static final int TRANSACTION_onTaskPlayed = 2;
@@ -97,7 +92,8 @@ public interface ITaskChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITaskChangeListener.DESCRIPTOR);
             }
@@ -179,7 +175,8 @@ public interface ITaskChangeListener extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.ITaskChangeListener
-            public void onTaskTriedToGoToBackground(int taskId, int displayId) throws RemoteException {
+            public void onTaskTriedToGoToBackground(int taskId, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskChangeListener.DESCRIPTOR);

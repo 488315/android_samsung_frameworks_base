@@ -7,19 +7,22 @@ import android.os.Parcelable;
 @Deprecated(forRemoval = true, since = "15.5")
 /* loaded from: classes6.dex */
 public class SemContextSedentaryTimer extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextSedentaryTimer> CREATOR = new Parcelable.Creator<SemContextSedentaryTimer>() { // from class: com.samsung.android.hardware.context.SemContextSedentaryTimer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSedentaryTimer createFromParcel(Parcel in) {
-            return new SemContextSedentaryTimer(in);
-        }
+    public static final Parcelable.Creator<SemContextSedentaryTimer> CREATOR =
+            new Parcelable.Creator<
+                    SemContextSedentaryTimer>() { // from class:
+                                                  // com.samsung.android.hardware.context.SemContextSedentaryTimer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSedentaryTimer createFromParcel(Parcel in) {
+                    return new SemContextSedentaryTimer(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSedentaryTimer[] newArray(int size) {
-            return new SemContextSedentaryTimer[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSedentaryTimer[] newArray(int size) {
+                    return new SemContextSedentaryTimer[size];
+                }
+            };
     public static final int DEVICE_TYPE_MOBILE = 1;
     public static final int DEVICE_TYPE_WEARABLE = 2;
     public static final int STATUS_SEDENTARY = 2;

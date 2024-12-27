@@ -1,40 +1,42 @@
 package android.hardware.hdmi;
 
-import android.hardware.hdmi.IHdmiCecSettingChangeListener;
-import android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener;
-import android.hardware.hdmi.IHdmiControlCallback;
-import android.hardware.hdmi.IHdmiControlStatusChangeListener;
-import android.hardware.hdmi.IHdmiDeviceEventListener;
-import android.hardware.hdmi.IHdmiHotplugEventListener;
-import android.hardware.hdmi.IHdmiInputChangeListener;
-import android.hardware.hdmi.IHdmiMhlVendorCommandListener;
-import android.hardware.hdmi.IHdmiRecordListener;
-import android.hardware.hdmi.IHdmiSystemAudioModeChangeListener;
-import android.hardware.hdmi.IHdmiVendorCommandListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IHdmiControlService extends IInterface {
-    void addCecSettingChangeListener(String str, IHdmiCecSettingChangeListener iHdmiCecSettingChangeListener) throws RemoteException;
+    void addCecSettingChangeListener(
+            String str, IHdmiCecSettingChangeListener iHdmiCecSettingChangeListener)
+            throws RemoteException;
 
-    void addDeviceEventListener(IHdmiDeviceEventListener iHdmiDeviceEventListener) throws RemoteException;
+    void addDeviceEventListener(IHdmiDeviceEventListener iHdmiDeviceEventListener)
+            throws RemoteException;
 
-    void addHdmiCecVolumeControlFeatureListener(IHdmiCecVolumeControlFeatureListener iHdmiCecVolumeControlFeatureListener) throws RemoteException;
+    void addHdmiCecVolumeControlFeatureListener(
+            IHdmiCecVolumeControlFeatureListener iHdmiCecVolumeControlFeatureListener)
+            throws RemoteException;
 
-    void addHdmiControlStatusChangeListener(IHdmiControlStatusChangeListener iHdmiControlStatusChangeListener) throws RemoteException;
+    void addHdmiControlStatusChangeListener(
+            IHdmiControlStatusChangeListener iHdmiControlStatusChangeListener)
+            throws RemoteException;
 
-    void addHdmiMhlVendorCommandListener(IHdmiMhlVendorCommandListener iHdmiMhlVendorCommandListener) throws RemoteException;
+    void addHdmiMhlVendorCommandListener(
+            IHdmiMhlVendorCommandListener iHdmiMhlVendorCommandListener) throws RemoteException;
 
-    void addHotplugEventListener(IHdmiHotplugEventListener iHdmiHotplugEventListener) throws RemoteException;
+    void addHotplugEventListener(IHdmiHotplugEventListener iHdmiHotplugEventListener)
+            throws RemoteException;
 
-    void addSystemAudioModeChangeListener(IHdmiSystemAudioModeChangeListener iHdmiSystemAudioModeChangeListener) throws RemoteException;
+    void addSystemAudioModeChangeListener(
+            IHdmiSystemAudioModeChangeListener iHdmiSystemAudioModeChangeListener)
+            throws RemoteException;
 
-    void addVendorCommandListener(IHdmiVendorCommandListener iHdmiVendorCommandListener, int i) throws RemoteException;
+    void addVendorCommandListener(IHdmiVendorCommandListener iHdmiVendorCommandListener, int i)
+            throws RemoteException;
 
     void askRemoteDeviceToBecomeActiveSource(int i) throws RemoteException;
 
@@ -80,15 +82,24 @@ public interface IHdmiControlService extends IInterface {
 
     void queryDisplayStatus(IHdmiControlCallback iHdmiControlCallback) throws RemoteException;
 
-    void removeCecSettingChangeListener(String str, IHdmiCecSettingChangeListener iHdmiCecSettingChangeListener) throws RemoteException;
+    void removeCecSettingChangeListener(
+            String str, IHdmiCecSettingChangeListener iHdmiCecSettingChangeListener)
+            throws RemoteException;
 
-    void removeHdmiCecVolumeControlFeatureListener(IHdmiCecVolumeControlFeatureListener iHdmiCecVolumeControlFeatureListener) throws RemoteException;
+    void removeHdmiCecVolumeControlFeatureListener(
+            IHdmiCecVolumeControlFeatureListener iHdmiCecVolumeControlFeatureListener)
+            throws RemoteException;
 
-    void removeHdmiControlStatusChangeListener(IHdmiControlStatusChangeListener iHdmiControlStatusChangeListener) throws RemoteException;
+    void removeHdmiControlStatusChangeListener(
+            IHdmiControlStatusChangeListener iHdmiControlStatusChangeListener)
+            throws RemoteException;
 
-    void removeHotplugEventListener(IHdmiHotplugEventListener iHdmiHotplugEventListener) throws RemoteException;
+    void removeHotplugEventListener(IHdmiHotplugEventListener iHdmiHotplugEventListener)
+            throws RemoteException;
 
-    void removeSystemAudioModeChangeListener(IHdmiSystemAudioModeChangeListener iHdmiSystemAudioModeChangeListener) throws RemoteException;
+    void removeSystemAudioModeChangeListener(
+            IHdmiSystemAudioModeChangeListener iHdmiSystemAudioModeChangeListener)
+            throws RemoteException;
 
     void reportAudioStatus(int i, int i2, int i3, boolean z) throws RemoteException;
 
@@ -110,7 +121,8 @@ public interface IHdmiControlService extends IInterface {
 
     void setHdmiRecordListener(IHdmiRecordListener iHdmiRecordListener) throws RemoteException;
 
-    void setInputChangeListener(IHdmiInputChangeListener iHdmiInputChangeListener) throws RemoteException;
+    void setInputChangeListener(IHdmiInputChangeListener iHdmiInputChangeListener)
+            throws RemoteException;
 
     boolean setMessageHistorySize(int i) throws RemoteException;
 
@@ -118,7 +130,8 @@ public interface IHdmiControlService extends IInterface {
 
     void setStandbyMode(boolean z) throws RemoteException;
 
-    void setSystemAudioMode(boolean z, IHdmiControlCallback iHdmiControlCallback) throws RemoteException;
+    void setSystemAudioMode(boolean z, IHdmiControlCallback iHdmiControlCallback)
+            throws RemoteException;
 
     void setSystemAudioModeOnForAudioOnlySource() throws RemoteException;
 
@@ -148,12 +161,10 @@ public interface IHdmiControlService extends IInterface {
         }
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void oneTouchPlay(IHdmiControlCallback callback) throws RemoteException {
-        }
+        public void oneTouchPlay(IHdmiControlCallback callback) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void toggleAndFollowTvPower() throws RemoteException {
-        }
+        public void toggleAndFollowTvPower() throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
         public boolean shouldHandleTvPowerKey() throws RemoteException {
@@ -161,52 +172,50 @@ public interface IHdmiControlService extends IInterface {
         }
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void queryDisplayStatus(IHdmiControlCallback callback) throws RemoteException {
-        }
+        public void queryDisplayStatus(IHdmiControlCallback callback) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void addHdmiControlStatusChangeListener(IHdmiControlStatusChangeListener listener) throws RemoteException {
-        }
+        public void addHdmiControlStatusChangeListener(IHdmiControlStatusChangeListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void removeHdmiControlStatusChangeListener(IHdmiControlStatusChangeListener listener) throws RemoteException {
-        }
+        public void removeHdmiControlStatusChangeListener(IHdmiControlStatusChangeListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void addHdmiCecVolumeControlFeatureListener(IHdmiCecVolumeControlFeatureListener listener) throws RemoteException {
-        }
+        public void addHdmiCecVolumeControlFeatureListener(
+                IHdmiCecVolumeControlFeatureListener listener) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void removeHdmiCecVolumeControlFeatureListener(IHdmiCecVolumeControlFeatureListener listener) throws RemoteException {
-        }
+        public void removeHdmiCecVolumeControlFeatureListener(
+                IHdmiCecVolumeControlFeatureListener listener) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void addHotplugEventListener(IHdmiHotplugEventListener listener) throws RemoteException {
-        }
+        public void addHotplugEventListener(IHdmiHotplugEventListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void removeHotplugEventListener(IHdmiHotplugEventListener listener) throws RemoteException {
-        }
+        public void removeHotplugEventListener(IHdmiHotplugEventListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void addDeviceEventListener(IHdmiDeviceEventListener listener) throws RemoteException {
-        }
+        public void addDeviceEventListener(IHdmiDeviceEventListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void deviceSelect(int deviceId, IHdmiControlCallback callback) throws RemoteException {
-        }
+        public void deviceSelect(int deviceId, IHdmiControlCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void portSelect(int portId, IHdmiControlCallback callback) throws RemoteException {
-        }
+        public void portSelect(int portId, IHdmiControlCallback callback) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void sendKeyEvent(int deviceType, int keyCode, boolean isPressed) throws RemoteException {
-        }
+        public void sendKeyEvent(int deviceType, int keyCode, boolean isPressed)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void sendVolumeKeyEvent(int deviceType, int keyCode, boolean isPressed) throws RemoteException {
-        }
+        public void sendVolumeKeyEvent(int deviceType, int keyCode, boolean isPressed)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
         public List<HdmiPortInfo> getPortInfo() throws RemoteException {
@@ -229,36 +238,33 @@ public interface IHdmiControlService extends IInterface {
         }
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setSystemAudioMode(boolean enabled, IHdmiControlCallback callback) throws RemoteException {
-        }
+        public void setSystemAudioMode(boolean enabled, IHdmiControlCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void addSystemAudioModeChangeListener(IHdmiSystemAudioModeChangeListener listener) throws RemoteException {
-        }
+        public void addSystemAudioModeChangeListener(IHdmiSystemAudioModeChangeListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void removeSystemAudioModeChangeListener(IHdmiSystemAudioModeChangeListener listener) throws RemoteException {
-        }
+        public void removeSystemAudioModeChangeListener(IHdmiSystemAudioModeChangeListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setArcMode(boolean enabled) throws RemoteException {
-        }
+        public void setArcMode(boolean enabled) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setProhibitMode(boolean enabled) throws RemoteException {
-        }
+        public void setProhibitMode(boolean enabled) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setSystemAudioVolume(int oldIndex, int newIndex, int maxIndex) throws RemoteException {
-        }
+        public void setSystemAudioVolume(int oldIndex, int newIndex, int maxIndex)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setSystemAudioMute(boolean mute) throws RemoteException {
-        }
+        public void setSystemAudioMute(boolean mute) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setInputChangeListener(IHdmiInputChangeListener listener) throws RemoteException {
-        }
+        public void setInputChangeListener(IHdmiInputChangeListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
         public List<HdmiDeviceInfo> getInputDevices() throws RemoteException {
@@ -271,68 +277,64 @@ public interface IHdmiControlService extends IInterface {
         }
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void powerOffRemoteDevice(int logicalAddress, int powerStatus) throws RemoteException {
-        }
+        public void powerOffRemoteDevice(int logicalAddress, int powerStatus)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void powerOnRemoteDevice(int logicalAddress, int powerStatus) throws RemoteException {
-        }
+        public void powerOnRemoteDevice(int logicalAddress, int powerStatus)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void askRemoteDeviceToBecomeActiveSource(int physicalAddress) throws RemoteException {
-        }
+        public void askRemoteDeviceToBecomeActiveSource(int physicalAddress)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void sendVendorCommand(int deviceType, int targetAddress, byte[] params, boolean hasVendorId) throws RemoteException {
-        }
+        public void sendVendorCommand(
+                int deviceType, int targetAddress, byte[] params, boolean hasVendorId)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void addVendorCommandListener(IHdmiVendorCommandListener listener, int vendorId) throws RemoteException {
-        }
+        public void addVendorCommandListener(IHdmiVendorCommandListener listener, int vendorId)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void sendStandby(int deviceType, int deviceId) throws RemoteException {
-        }
+        public void sendStandby(int deviceType, int deviceId) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setHdmiRecordListener(IHdmiRecordListener callback) throws RemoteException {
-        }
+        public void setHdmiRecordListener(IHdmiRecordListener callback) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void startOneTouchRecord(int recorderAddress, byte[] recordSource) throws RemoteException {
-        }
+        public void startOneTouchRecord(int recorderAddress, byte[] recordSource)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void stopOneTouchRecord(int recorderAddress) throws RemoteException {
-        }
+        public void stopOneTouchRecord(int recorderAddress) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void startTimerRecording(int recorderAddress, int sourceType, byte[] recordSource) throws RemoteException {
-        }
+        public void startTimerRecording(int recorderAddress, int sourceType, byte[] recordSource)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void clearTimerRecording(int recorderAddress, int sourceType, byte[] recordSource) throws RemoteException {
-        }
+        public void clearTimerRecording(int recorderAddress, int sourceType, byte[] recordSource)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void sendMhlVendorCommand(int portId, int offset, int length, byte[] data) throws RemoteException {
-        }
+        public void sendMhlVendorCommand(int portId, int offset, int length, byte[] data)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void addHdmiMhlVendorCommandListener(IHdmiMhlVendorCommandListener listener) throws RemoteException {
-        }
+        public void addHdmiMhlVendorCommandListener(IHdmiMhlVendorCommandListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setStandbyMode(boolean isStandbyModeOn) throws RemoteException {
-        }
+        public void setStandbyMode(boolean isStandbyModeOn) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void reportAudioStatus(int deviceType, int volume, int maxVolume, boolean isMute) throws RemoteException {
-        }
+        public void reportAudioStatus(int deviceType, int volume, int maxVolume, boolean isMute)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setSystemAudioModeOnForAudioOnlySource() throws RemoteException {
-        }
+        public void setSystemAudioModeOnForAudioOnlySource() throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
         public boolean setMessageHistorySize(int newSize) throws RemoteException {
@@ -345,12 +347,12 @@ public interface IHdmiControlService extends IInterface {
         }
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void addCecSettingChangeListener(String name, IHdmiCecSettingChangeListener listener) throws RemoteException {
-        }
+        public void addCecSettingChangeListener(String name, IHdmiCecSettingChangeListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void removeCecSettingChangeListener(String name, IHdmiCecSettingChangeListener listener) throws RemoteException {
-        }
+        public void removeCecSettingChangeListener(
+                String name, IHdmiCecSettingChangeListener listener) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
         public List<String> getUserCecSettings() throws RemoteException {
@@ -373,8 +375,7 @@ public interface IHdmiControlService extends IInterface {
         }
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setCecSettingStringValue(String name, String value) throws RemoteException {
-        }
+        public void setCecSettingStringValue(String name, String value) throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiControlService
         public int getCecSettingIntValue(String name) throws RemoteException {
@@ -382,8 +383,7 @@ public interface IHdmiControlService extends IInterface {
         }
 
         @Override // android.hardware.hdmi.IHdmiControlService
-        public void setCecSettingIntValue(String name, int value) throws RemoteException {
-        }
+        public void setCecSettingIntValue(String name, int value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -391,7 +391,7 @@ public interface IHdmiControlService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiControlService {
+    public abstract static class Stub extends Binder implements IHdmiControlService {
         public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiControlService";
         static final int TRANSACTION_addCecSettingChangeListener = 50;
         static final int TRANSACTION_addDeviceEventListener = 13;
@@ -601,7 +601,8 @@ public interface IHdmiControlService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -621,7 +622,8 @@ public interface IHdmiControlService extends IInterface {
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 3:
-                    IHdmiControlCallback _arg0 = IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
+                    IHdmiControlCallback _arg0 =
+                            IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     oneTouchPlay(_arg0);
                     reply.writeNoException();
@@ -636,63 +638,77 @@ public interface IHdmiControlService extends IInterface {
                     reply.writeBoolean(_result3);
                     return true;
                 case 6:
-                    IHdmiControlCallback _arg02 = IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
+                    IHdmiControlCallback _arg02 =
+                            IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     queryDisplayStatus(_arg02);
                     reply.writeNoException();
                     return true;
                 case 7:
-                    IHdmiControlStatusChangeListener _arg03 = IHdmiControlStatusChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiControlStatusChangeListener _arg03 =
+                            IHdmiControlStatusChangeListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addHdmiControlStatusChangeListener(_arg03);
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IHdmiControlStatusChangeListener _arg04 = IHdmiControlStatusChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiControlStatusChangeListener _arg04 =
+                            IHdmiControlStatusChangeListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeHdmiControlStatusChangeListener(_arg04);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    IHdmiCecVolumeControlFeatureListener _arg05 = IHdmiCecVolumeControlFeatureListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiCecVolumeControlFeatureListener _arg05 =
+                            IHdmiCecVolumeControlFeatureListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addHdmiCecVolumeControlFeatureListener(_arg05);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    IHdmiCecVolumeControlFeatureListener _arg06 = IHdmiCecVolumeControlFeatureListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiCecVolumeControlFeatureListener _arg06 =
+                            IHdmiCecVolumeControlFeatureListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeHdmiCecVolumeControlFeatureListener(_arg06);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    IHdmiHotplugEventListener _arg07 = IHdmiHotplugEventListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiHotplugEventListener _arg07 =
+                            IHdmiHotplugEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addHotplugEventListener(_arg07);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    IHdmiHotplugEventListener _arg08 = IHdmiHotplugEventListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiHotplugEventListener _arg08 =
+                            IHdmiHotplugEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeHotplugEventListener(_arg08);
                     reply.writeNoException();
                     return true;
                 case 13:
-                    IHdmiDeviceEventListener _arg09 = IHdmiDeviceEventListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiDeviceEventListener _arg09 =
+                            IHdmiDeviceEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addDeviceEventListener(_arg09);
                     reply.writeNoException();
                     return true;
                 case 14:
                     int _arg010 = data.readInt();
-                    IHdmiControlCallback _arg1 = IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
+                    IHdmiControlCallback _arg1 =
+                            IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     deviceSelect(_arg010, _arg1);
                     reply.writeNoException();
                     return true;
                 case 15:
                     int _arg011 = data.readInt();
-                    IHdmiControlCallback _arg12 = IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
+                    IHdmiControlCallback _arg12 =
+                            IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     portSelect(_arg011, _arg12);
                     reply.writeNoException();
@@ -735,19 +751,24 @@ public interface IHdmiControlService extends IInterface {
                     return true;
                 case 22:
                     boolean _arg014 = data.readBoolean();
-                    IHdmiControlCallback _arg15 = IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
+                    IHdmiControlCallback _arg15 =
+                            IHdmiControlCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setSystemAudioMode(_arg014, _arg15);
                     reply.writeNoException();
                     return true;
                 case 23:
-                    IHdmiSystemAudioModeChangeListener _arg015 = IHdmiSystemAudioModeChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiSystemAudioModeChangeListener _arg015 =
+                            IHdmiSystemAudioModeChangeListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addSystemAudioModeChangeListener(_arg015);
                     reply.writeNoException();
                     return true;
                 case 24:
-                    IHdmiSystemAudioModeChangeListener _arg016 = IHdmiSystemAudioModeChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiSystemAudioModeChangeListener _arg016 =
+                            IHdmiSystemAudioModeChangeListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeSystemAudioModeChangeListener(_arg016);
                     reply.writeNoException();
@@ -779,7 +800,8 @@ public interface IHdmiControlService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 29:
-                    IHdmiInputChangeListener _arg021 = IHdmiInputChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiInputChangeListener _arg021 =
+                            IHdmiInputChangeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setInputChangeListener(_arg021);
                     reply.writeNoException();
@@ -824,7 +846,8 @@ public interface IHdmiControlService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 36:
-                    IHdmiVendorCommandListener _arg026 = IHdmiVendorCommandListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiVendorCommandListener _arg026 =
+                            IHdmiVendorCommandListener.Stub.asInterface(data.readStrongBinder());
                     int _arg110 = data.readInt();
                     data.enforceNoDataAvail();
                     addVendorCommandListener(_arg026, _arg110);
@@ -838,7 +861,8 @@ public interface IHdmiControlService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 38:
-                    IHdmiRecordListener _arg028 = IHdmiRecordListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiRecordListener _arg028 =
+                            IHdmiRecordListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setHdmiRecordListener(_arg028);
                     reply.writeNoException();
@@ -882,7 +906,8 @@ public interface IHdmiControlService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 44:
-                    IHdmiMhlVendorCommandListener _arg034 = IHdmiMhlVendorCommandListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiMhlVendorCommandListener _arg034 =
+                            IHdmiMhlVendorCommandListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addHdmiMhlVendorCommandListener(_arg034);
                     reply.writeNoException();
@@ -920,14 +945,16 @@ public interface IHdmiControlService extends IInterface {
                     return true;
                 case 50:
                     String _arg038 = data.readString();
-                    IHdmiCecSettingChangeListener _arg117 = IHdmiCecSettingChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiCecSettingChangeListener _arg117 =
+                            IHdmiCecSettingChangeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addCecSettingChangeListener(_arg038, _arg117);
                     reply.writeNoException();
                     return true;
                 case 51:
                     String _arg039 = data.readString();
-                    IHdmiCecSettingChangeListener _arg118 = IHdmiCecSettingChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IHdmiCecSettingChangeListener _arg118 =
+                            IHdmiCecSettingChangeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeCecSettingChangeListener(_arg039, _arg118);
                     reply.writeNoException();
@@ -1024,7 +1051,8 @@ public interface IHdmiControlService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    HdmiDeviceInfo _result = (HdmiDeviceInfo) _reply.readTypedObject(HdmiDeviceInfo.CREATOR);
+                    HdmiDeviceInfo _result =
+                            (HdmiDeviceInfo) _reply.readTypedObject(HdmiDeviceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1093,7 +1121,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void addHdmiControlStatusChangeListener(IHdmiControlStatusChangeListener listener) throws RemoteException {
+            public void addHdmiControlStatusChangeListener(
+                    IHdmiControlStatusChangeListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1108,7 +1137,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void removeHdmiControlStatusChangeListener(IHdmiControlStatusChangeListener listener) throws RemoteException {
+            public void removeHdmiControlStatusChangeListener(
+                    IHdmiControlStatusChangeListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1123,7 +1153,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void addHdmiCecVolumeControlFeatureListener(IHdmiCecVolumeControlFeatureListener listener) throws RemoteException {
+            public void addHdmiCecVolumeControlFeatureListener(
+                    IHdmiCecVolumeControlFeatureListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1138,7 +1169,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void removeHdmiCecVolumeControlFeatureListener(IHdmiCecVolumeControlFeatureListener listener) throws RemoteException {
+            public void removeHdmiCecVolumeControlFeatureListener(
+                    IHdmiCecVolumeControlFeatureListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1153,7 +1185,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void addHotplugEventListener(IHdmiHotplugEventListener listener) throws RemoteException {
+            public void addHotplugEventListener(IHdmiHotplugEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1168,7 +1201,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void removeHotplugEventListener(IHdmiHotplugEventListener listener) throws RemoteException {
+            public void removeHotplugEventListener(IHdmiHotplugEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1183,7 +1217,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void addDeviceEventListener(IHdmiDeviceEventListener listener) throws RemoteException {
+            public void addDeviceEventListener(IHdmiDeviceEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1198,7 +1233,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void deviceSelect(int deviceId, IHdmiControlCallback callback) throws RemoteException {
+            public void deviceSelect(int deviceId, IHdmiControlCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1214,7 +1250,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void portSelect(int portId, IHdmiControlCallback callback) throws RemoteException {
+            public void portSelect(int portId, IHdmiControlCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1230,7 +1267,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void sendKeyEvent(int deviceType, int keyCode, boolean isPressed) throws RemoteException {
+            public void sendKeyEvent(int deviceType, int keyCode, boolean isPressed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1247,7 +1285,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void sendVolumeKeyEvent(int deviceType, int keyCode, boolean isPressed) throws RemoteException {
+            public void sendVolumeKeyEvent(int deviceType, int keyCode, boolean isPressed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1328,7 +1367,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void setSystemAudioMode(boolean enabled, IHdmiControlCallback callback) throws RemoteException {
+            public void setSystemAudioMode(boolean enabled, IHdmiControlCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1344,7 +1384,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void addSystemAudioModeChangeListener(IHdmiSystemAudioModeChangeListener listener) throws RemoteException {
+            public void addSystemAudioModeChangeListener(
+                    IHdmiSystemAudioModeChangeListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1359,7 +1400,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void removeSystemAudioModeChangeListener(IHdmiSystemAudioModeChangeListener listener) throws RemoteException {
+            public void removeSystemAudioModeChangeListener(
+                    IHdmiSystemAudioModeChangeListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1404,7 +1446,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void setSystemAudioVolume(int oldIndex, int newIndex, int maxIndex) throws RemoteException {
+            public void setSystemAudioVolume(int oldIndex, int newIndex, int maxIndex)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1436,7 +1479,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void setInputChangeListener(IHdmiInputChangeListener listener) throws RemoteException {
+            public void setInputChangeListener(IHdmiInputChangeListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1458,7 +1502,8 @@ public interface IHdmiControlService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    List<HdmiDeviceInfo> _result = _reply.createTypedArrayList(HdmiDeviceInfo.CREATOR);
+                    List<HdmiDeviceInfo> _result =
+                            _reply.createTypedArrayList(HdmiDeviceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1474,7 +1519,8 @@ public interface IHdmiControlService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(31, _data, _reply, 0);
                     _reply.readException();
-                    List<HdmiDeviceInfo> _result = _reply.createTypedArrayList(HdmiDeviceInfo.CREATOR);
+                    List<HdmiDeviceInfo> _result =
+                            _reply.createTypedArrayList(HdmiDeviceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1483,7 +1529,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void powerOffRemoteDevice(int logicalAddress, int powerStatus) throws RemoteException {
+            public void powerOffRemoteDevice(int logicalAddress, int powerStatus)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1499,7 +1546,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void powerOnRemoteDevice(int logicalAddress, int powerStatus) throws RemoteException {
+            public void powerOnRemoteDevice(int logicalAddress, int powerStatus)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1515,7 +1563,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void askRemoteDeviceToBecomeActiveSource(int physicalAddress) throws RemoteException {
+            public void askRemoteDeviceToBecomeActiveSource(int physicalAddress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1530,7 +1579,9 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void sendVendorCommand(int deviceType, int targetAddress, byte[] params, boolean hasVendorId) throws RemoteException {
+            public void sendVendorCommand(
+                    int deviceType, int targetAddress, byte[] params, boolean hasVendorId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1548,7 +1599,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void addVendorCommandListener(IHdmiVendorCommandListener listener, int vendorId) throws RemoteException {
+            public void addVendorCommandListener(IHdmiVendorCommandListener listener, int vendorId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1595,7 +1647,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void startOneTouchRecord(int recorderAddress, byte[] recordSource) throws RemoteException {
+            public void startOneTouchRecord(int recorderAddress, byte[] recordSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1626,7 +1679,9 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void startTimerRecording(int recorderAddress, int sourceType, byte[] recordSource) throws RemoteException {
+            public void startTimerRecording(
+                    int recorderAddress, int sourceType, byte[] recordSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1643,7 +1698,9 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void clearTimerRecording(int recorderAddress, int sourceType, byte[] recordSource) throws RemoteException {
+            public void clearTimerRecording(
+                    int recorderAddress, int sourceType, byte[] recordSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1660,7 +1717,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void sendMhlVendorCommand(int portId, int offset, int length, byte[] data) throws RemoteException {
+            public void sendMhlVendorCommand(int portId, int offset, int length, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1678,7 +1736,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void addHdmiMhlVendorCommandListener(IHdmiMhlVendorCommandListener listener) throws RemoteException {
+            public void addHdmiMhlVendorCommandListener(IHdmiMhlVendorCommandListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1708,7 +1767,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void reportAudioStatus(int deviceType, int volume, int maxVolume, boolean isMute) throws RemoteException {
+            public void reportAudioStatus(int deviceType, int volume, int maxVolume, boolean isMute)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1773,7 +1833,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void addCecSettingChangeListener(String name, IHdmiCecSettingChangeListener listener) throws RemoteException {
+            public void addCecSettingChangeListener(
+                    String name, IHdmiCecSettingChangeListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1789,7 +1850,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public void removeCecSettingChangeListener(String name, IHdmiCecSettingChangeListener listener) throws RemoteException {
+            public void removeCecSettingChangeListener(
+                    String name, IHdmiCecSettingChangeListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1821,7 +1883,8 @@ public interface IHdmiControlService extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiControlService
-            public List<String> getAllowedCecSettingStringValues(String name) throws RemoteException {
+            public List<String> getAllowedCecSettingStringValues(String name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

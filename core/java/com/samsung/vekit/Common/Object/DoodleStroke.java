@@ -2,6 +2,7 @@ package com.samsung.vekit.Common.Object;
 
 import com.samsung.vekit.Common.Type.PenType;
 import com.samsung.vekit.Common.Type.StrokeType;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

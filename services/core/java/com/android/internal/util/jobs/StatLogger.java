@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -56,7 +57,17 @@ public class StatLogger {
                 for (int i = 0; i < this.SIZE; i++) {
                     int i2 = this.mCountStats[i];
                     double d = this.mDurationStats[i] / 1000.0d;
-                    indentingPrintWriter.println(String.format("%s: count=%d, total=%.1fms, avg=%.3fms, max calls/s=%d max dur/s=%.1fms max time=%.1fms", this.mLabels[i], Integer.valueOf(i2), Double.valueOf(d), Double.valueOf(i2 == 0 ? 0.0d : d / i2), Integer.valueOf(this.mMaxCallsPerSecond[i]), Double.valueOf(this.mMaxDurationPerSecond[i] / 1000.0d), Double.valueOf(this.mMaxDurationStats[i] / 1000.0d)));
+                    indentingPrintWriter.println(
+                            String.format(
+                                    "%s: count=%d, total=%.1fms, avg=%.3fms, max calls/s=%d max"
+                                        + " dur/s=%.1fms max time=%.1fms",
+                                    this.mLabels[i],
+                                    Integer.valueOf(i2),
+                                    Double.valueOf(d),
+                                    Double.valueOf(i2 == 0 ? 0.0d : d / i2),
+                                    Integer.valueOf(this.mMaxCallsPerSecond[i]),
+                                    Double.valueOf(this.mMaxDurationPerSecond[i] / 1000.0d),
+                                    Double.valueOf(this.mMaxDurationStats[i] / 1000.0d)));
                 }
                 indentingPrintWriter.decreaseIndent();
             } catch (Throwable th) {

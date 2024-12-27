@@ -20,7 +20,9 @@ public final class InputMethodDataSource extends DataSource<DataSourceInstance, 
 
     @Override // android.tracing.perfetto.DataSource
     public DataSourceInstance createInstance(ProtoInputStream configStream, int instanceIndex) {
-        return new DataSourceInstance(this, instanceIndex) { // from class: android.tracing.inputmethod.InputMethodDataSource.1
+        return new DataSourceInstance(
+                this,
+                instanceIndex) { // from class: android.tracing.inputmethod.InputMethodDataSource.1
             @Override // android.tracing.perfetto.DataSourceInstance
             protected void onStart(StartCallbackArguments args) {
                 InputMethodDataSource.this.mOnStartCallback.run();

@@ -43,13 +43,18 @@ public class MultiResolutionStreamInfo {
             return false;
         }
         MultiResolutionStreamInfo other = (MultiResolutionStreamInfo) obj;
-        if (this.mStreamWidth != other.mStreamWidth || this.mStreamHeight != other.mStreamHeight || !this.mPhysicalCameraId.equals(other.mPhysicalCameraId)) {
+        if (this.mStreamWidth != other.mStreamWidth
+                || this.mStreamHeight != other.mStreamHeight
+                || !this.mPhysicalCameraId.equals(other.mPhysicalCameraId)) {
             return false;
         }
         return true;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mStreamWidth), Integer.valueOf(this.mStreamHeight), this.mPhysicalCameraId);
+        return Objects.hash(
+                Integer.valueOf(this.mStreamWidth),
+                Integer.valueOf(this.mStreamHeight),
+                this.mPhysicalCameraId);
     }
 }

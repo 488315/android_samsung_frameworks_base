@@ -40,7 +40,7 @@ import android.view.animation.PathInterpolator;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -103,19 +103,21 @@ public class Switch extends CompoundButton {
     private boolean mUseFallbackLineSpacing;
     private VelocityTracker mVelocityTracker;
     private static final int[] CHECKED_STATE_SET = {16842912};
-    private static final FloatProperty<Switch> THUMB_POS = new FloatProperty<Switch>("thumbPos") { // from class: android.widget.Switch.1
-        @Override // android.util.Property
-        public Float get(Switch object) {
-            return Float.valueOf(object.mThumbPosition);
-        }
+    private static final FloatProperty<Switch> THUMB_POS =
+            new FloatProperty<Switch>("thumbPos") { // from class: android.widget.Switch.1
+                @Override // android.util.Property
+                public Float get(Switch object) {
+                    return Float.valueOf(object.mThumbPosition);
+                }
 
-        @Override // android.util.FloatProperty
-        public void setValue(Switch object, float value) {
-            object.setThumbPosition(value);
-        }
-    };
+                @Override // android.util.FloatProperty
+                public void setValue(Switch object, float value) {
+                    object.setThumbPosition(value);
+                }
+            };
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<Switch> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<Switch> {
         private boolean mPropertiesMapped = false;
         private int mShowTextId;
         private int mSplitTrackId;
@@ -209,8 +211,11 @@ public class Switch extends CompoundButton {
         Resources res = getResources();
         this.mTextPaint.density = res.getDisplayMetrics().density;
         this.mTextPaint.setCompatibilityScaling(res.getCompatibilityInfo().applicationScale);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Switch, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.Switch, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.Switch, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.Switch, attrs, a, defStyleAttr, defStyleRes);
         Activity activity = getActivityContext(context);
         if (activity != null && (ai = activity.getActivityInfo()) != null && ai.metaData != null) {
             String data = ai.metaData.getString("SamsungBasicInteraction");
@@ -219,32 +224,57 @@ public class Switch extends CompoundButton {
         TypedValue themeValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, themeValue, false);
         if (themeValue.data != 0) {
-            String packageName = Settings.System.getString(context.getContentResolver(), "current_sec_active_themepackage");
+            String packageName =
+                    Settings.System.getString(
+                            context.getContentResolver(), "current_sec_active_themepackage");
             this.mIsThemeChanged = packageName != null;
         }
         TypedValue switchTheme = new TypedValue();
         context.getTheme().resolveAttribute(16844176, switchTheme, true);
-        if ((!this.mIsSamsungBasicInteraction && !this.mIsMetaDataInActivity) || a.getResourceId(2, 0) != 17304553) {
+        if ((!this.mIsSamsungBasicInteraction && !this.mIsMetaDataInActivity)
+                || a.getResourceId(2, 0) != 17304553) {
             this.mThumbDrawable = a.getDrawable(2);
         } else if (this.mIsThemeChanged) {
-            this.mThumbDrawable = switchTheme.data != 0 ? res.getDrawable(R.drawable.sem_switch_thumb_material_anim_for_theme, context.getTheme()) : res.getDrawable(R.drawable.sem_switch_thumb_material_dark_anim_for_theme, context.getTheme());
+            this.mThumbDrawable =
+                    switchTheme.data != 0
+                            ? res.getDrawable(
+                                    R.drawable.sem_switch_thumb_material_anim_for_theme,
+                                    context.getTheme())
+                            : res.getDrawable(
+                                    R.drawable.sem_switch_thumb_material_dark_anim_for_theme,
+                                    context.getTheme());
         } else {
-            this.mThumbDrawable = switchTheme.data != 0 ? res.getDrawable(R.drawable.sem_switch_thumb_material_anim, context.getTheme()) : res.getDrawable(R.drawable.sem_switch_thumb_material_dark_anim, context.getTheme());
+            this.mThumbDrawable =
+                    switchTheme.data != 0
+                            ? res.getDrawable(
+                                    R.drawable.sem_switch_thumb_material_anim, context.getTheme())
+                            : res.getDrawable(
+                                    R.drawable.sem_switch_thumb_material_dark_anim,
+                                    context.getTheme());
         }
         if (this.mThumbDrawable != null) {
             this.mThumbDrawable.setCallback(this);
         }
-        if ((this.mIsSamsungBasicInteraction || this.mIsMetaDataInActivity) && a.getResourceId(4, 0) == 17304559) {
-            this.mTrackDrawable = switchTheme.data != 0 ? res.getDrawable(R.drawable.sem_switch_track_material, context.getTheme()) : res.getDrawable(R.drawable.sem_switch_track_material_dark, context.getTheme());
+        if ((this.mIsSamsungBasicInteraction || this.mIsMetaDataInActivity)
+                && a.getResourceId(4, 0) == 17304559) {
+            this.mTrackDrawable =
+                    switchTheme.data != 0
+                            ? res.getDrawable(
+                                    R.drawable.sem_switch_track_material, context.getTheme())
+                            : res.getDrawable(
+                                    R.drawable.sem_switch_track_material_dark, context.getTheme());
         } else {
             this.mTrackDrawable = a.getDrawable(4);
         }
         if (this.mTrackDrawable != null) {
             this.mTrackDrawable.setCallback(this);
         }
-        if ((this.mIsSamsungBasicInteraction || this.mIsMetaDataInActivity) && !this.mIsThemeChanged) {
-            this.mTrackOnDrawable = res.getDrawable(R.drawable.sem_switch_track_mtrl_alpha_on, context.getTheme());
-            this.mTrackOffDrawable = res.getDrawable(R.drawable.sem_switch_track_mtrl_alpha_off, context.getTheme());
+        if ((this.mIsSamsungBasicInteraction || this.mIsMetaDataInActivity)
+                && !this.mIsThemeChanged) {
+            this.mTrackOnDrawable =
+                    res.getDrawable(R.drawable.sem_switch_track_mtrl_alpha_on, context.getTheme());
+            this.mTrackOffDrawable =
+                    res.getDrawable(R.drawable.sem_switch_track_mtrl_alpha_off, context.getTheme());
             if (this.mTrackOnDrawable != null && this.mTrackOffDrawable != null) {
                 this.mIsSupportSemSwitchVI = true;
             }
@@ -659,7 +689,9 @@ public class Switch extends CompoundButton {
             thumbHeight = 0;
         }
         if (this.mShowText) {
-            maxTextWidth = Math.max(this.mOnLayout.getWidth(), this.mOffLayout.getWidth()) + (this.mThumbTextPadding * 2);
+            maxTextWidth =
+                    Math.max(this.mOnLayout.getWidth(), this.mOffLayout.getWidth())
+                            + (this.mThumbTextPadding * 2);
         } else {
             maxTextWidth = 0;
         }
@@ -682,14 +714,23 @@ public class Switch extends CompoundButton {
             int mTwSwitchWidth = getResources().getDimensionPixelSize(R.dimen.tw_switch_width);
             switchWidth = Math.max(this.mSwitchMinWidth, mTwSwitchWidth);
         } else {
-            switchWidth = Math.max(this.mSwitchMinWidth, (this.mThumbWidth * 2) + paddingLeft + paddingRight);
+            switchWidth =
+                    Math.max(
+                            this.mSwitchMinWidth,
+                            (this.mThumbWidth * 2) + paddingLeft + paddingRight);
         }
         int switchHeight = Math.max(trackHeight, thumbHeight);
         this.mSwitchWidth = switchWidth;
         this.mSwitchHeight = switchHeight;
         if (this.mIsThemeChanged) {
             float ratio = this.mThumbWidth / this.mSwitchWidth;
-            this.mTrackMargin = ratio > THUMB_TRACK_WIDTH_RATIO ? (int) Math.ceil(this.mThumbWidth - (this.mSwitchWidth * THUMB_TRACK_WIDTH_RATIO)) : 0;
+            this.mTrackMargin =
+                    ratio > THUMB_TRACK_WIDTH_RATIO
+                            ? (int)
+                                    Math.ceil(
+                                            this.mThumbWidth
+                                                    - (this.mSwitchWidth * THUMB_TRACK_WIDTH_RATIO))
+                            : 0;
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int measuredHeight = getMeasuredHeight();
@@ -716,8 +757,19 @@ public class Switch extends CompoundButton {
         } else {
             transformed = text;
         }
-        int width = (int) Math.ceil(Layout.getDesiredWidth(transformed, 0, transformed.length(), this.mTextPaint, getTextDirectionHeuristic()));
-        return StaticLayout.Builder.obtain(transformed, 0, transformed.length(), this.mTextPaint, width).setUseLineSpacingFromFallbacks(this.mUseFallbackLineSpacing).build();
+        int width =
+                (int)
+                        Math.ceil(
+                                Layout.getDesiredWidth(
+                                        transformed,
+                                        0,
+                                        transformed.length(),
+                                        this.mTextPaint,
+                                        getTextDirectionHeuristic()));
+        return StaticLayout.Builder.obtain(
+                        transformed, 0, transformed.length(), this.mTextPaint, width)
+                .setUseLineSpacingFromFallbacks(this.mUseFallbackLineSpacing)
+                .build();
     }
 
     private boolean hitThumb(float x, float y) {
@@ -728,9 +780,17 @@ public class Switch extends CompoundButton {
         this.mThumbDrawable.getPadding(this.mTempRect);
         int thumbTop = this.mSwitchTop - this.mTouchSlop;
         int thumbLeft = (this.mSwitchLeft + thumbOffset) - this.mTouchSlop;
-        int thumbRight = this.mThumbWidth + thumbLeft + this.mTempRect.left + this.mTempRect.right + this.mTouchSlop;
+        int thumbRight =
+                this.mThumbWidth
+                        + thumbLeft
+                        + this.mTempRect.left
+                        + this.mTempRect.right
+                        + this.mTouchSlop;
         int thumbBottom = this.mSwitchBottom + this.mTouchSlop;
-        return x > ((float) thumbLeft) && x < ((float) thumbRight) && y > ((float) thumbTop) && y < ((float) thumbBottom);
+        return x > ((float) thumbLeft)
+                && x < ((float) thumbRight)
+                && y > ((float) thumbTop)
+                && y < ((float) thumbBottom);
     }
 
     @Override // android.widget.TextView, android.view.View
@@ -764,7 +824,8 @@ public class Switch extends CompoundButton {
                     case 1:
                         float x2 = ev.getX();
                         float y2 = ev.getY();
-                        if (Math.abs(x2 - this.mTouchX) > this.mTouchSlop || Math.abs(y2 - this.mTouchY) > this.mTouchSlop) {
+                        if (Math.abs(x2 - this.mTouchX) > this.mTouchSlop
+                                || Math.abs(y2 - this.mTouchY) > this.mTouchSlop) {
                             this.mTouchMode = 2;
                             getParent().requestDisallowInterceptTouchEvent(true);
                             this.mTouchX = x2;
@@ -863,13 +924,22 @@ public class Switch extends CompoundButton {
 
     @Override // android.widget.CompoundButton
     protected CharSequence getButtonStateDescription() {
-        return isChecked() ? this.mTextOn == null ? getResources().getString(R.string.sem_switch_on) : this.mTextOn : this.mTextOff == null ? getResources().getString(R.string.sem_switch_off) : this.mTextOff;
+        return isChecked()
+                ? this.mTextOn == null
+                        ? getResources().getString(R.string.sem_switch_on)
+                        : this.mTextOn
+                : this.mTextOff == null
+                        ? getResources().getString(R.string.sem_switch_off)
+                        : this.mTextOff;
     }
 
     @Override // android.widget.CompoundButton, android.widget.Checkable
     @RemotableViewMethod(asyncImpl = "setCheckedAsync")
     public void setChecked(boolean checked) {
-        if (checked != isChecked() && hasWindowFocus() && isVisibleToUser() && !isTemporarilyDetached()) {
+        if (checked != isChecked()
+                && hasWindowFocus()
+                && isVisibleToUser()
+                && !isTemporarilyDetached()) {
             performHapticFeedback(HapticFeedbackConstants.semGetVibrationIndex(27));
         }
         super.setChecked(checked);
@@ -904,16 +974,23 @@ public class Switch extends CompoundButton {
         }
         if (isLayoutRtl()) {
             switchLeft = getPaddingLeft() + opticalInsetLeft;
-            switchRight = (((this.mSwitchWidth + switchLeft) + this.mTrackMargin) - opticalInsetLeft) - opticalInsetRight;
+            switchRight =
+                    (((this.mSwitchWidth + switchLeft) + this.mTrackMargin) - opticalInsetLeft)
+                            - opticalInsetRight;
         } else {
             int switchLeft2 = getWidth();
             switchRight = (switchLeft2 - getPaddingRight()) - opticalInsetRight;
-            switchLeft = ((switchRight - this.mSwitchWidth) - this.mTrackMargin) + opticalInsetLeft + opticalInsetRight;
+            switchLeft =
+                    ((switchRight - this.mSwitchWidth) - this.mTrackMargin)
+                            + opticalInsetLeft
+                            + opticalInsetRight;
         }
         switch (getGravity() & 112) {
             case 16:
                 int switchBottom2 = getPaddingTop();
-                switchTop = (((switchBottom2 + getHeight()) - getPaddingBottom()) / 2) - (this.mSwitchHeight / 2);
+                switchTop =
+                        (((switchBottom2 + getHeight()) - getPaddingBottom()) / 2)
+                                - (this.mSwitchHeight / 2);
                 switchBottom = this.mSwitchHeight + switchTop;
                 break;
             case 80:
@@ -1013,7 +1090,8 @@ public class Switch extends CompoundButton {
                 trackDrawable.draw(canvas);
                 canvas.restoreToCount(saveCount);
             } else if (this.mIsSupportSemSwitchVI) {
-                Drawable overDrawable = isChecked() ? this.mTrackOffDrawable : this.mTrackOnDrawable;
+                Drawable overDrawable =
+                        isChecked() ? this.mTrackOffDrawable : this.mTrackOnDrawable;
                 overDrawable.setBounds(trackDrawable.getBounds());
                 int alpha = (int) (this.mThumbPosition * 255.0f);
                 int i = 255;
@@ -1104,7 +1182,10 @@ public class Switch extends CompoundButton {
             } else {
                 insets = Insets.NONE;
             }
-            return (((((this.mSwitchWidth + this.mTrackMargin) - this.mThumbWidth) - padding.left) - padding.right) - insets.left) - insets.right;
+            return (((((this.mSwitchWidth + this.mTrackMargin) - this.mThumbWidth) - padding.left)
+                                    - padding.right)
+                            - insets.left)
+                    - insets.right;
         }
         return 0;
     }
@@ -1149,7 +1230,9 @@ public class Switch extends CompoundButton {
 
     @Override // android.widget.CompoundButton, android.widget.TextView, android.view.View
     protected boolean verifyDrawable(Drawable who) {
-        return super.verifyDrawable(who) || who == this.mThumbDrawable || who == this.mTrackDrawable;
+        return super.verifyDrawable(who)
+                || who == this.mThumbDrawable
+                || who == this.mTrackDrawable;
     }
 
     @Override // android.widget.CompoundButton, android.widget.TextView, android.view.View
@@ -1167,7 +1250,8 @@ public class Switch extends CompoundButton {
         }
     }
 
-    @Override // android.widget.CompoundButton, android.widget.Button, android.widget.TextView, android.view.View
+    @Override // android.widget.CompoundButton, android.widget.Button, android.widget.TextView,
+              // android.view.View
     public CharSequence getAccessibilityClassName() {
         return Switch.class.getName();
     }
@@ -1199,7 +1283,10 @@ public class Switch extends CompoundButton {
             if (tempContext instanceof Activity) {
                 activity = (Activity) tempContext;
             } else {
-                tempContext = tempContext instanceof ContextWrapper ? ((ContextWrapper) tempContext).getBaseContext() : null;
+                tempContext =
+                        tempContext instanceof ContextWrapper
+                                ? ((ContextWrapper) tempContext).getBaseContext()
+                                : null;
             }
         }
         return activity;

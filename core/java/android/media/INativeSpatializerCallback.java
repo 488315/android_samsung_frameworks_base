@@ -16,12 +16,10 @@ public interface INativeSpatializerCallback extends IInterface {
 
     public static class Default implements INativeSpatializerCallback {
         @Override // android.media.INativeSpatializerCallback
-        public void onLevelChanged(byte level) throws RemoteException {
-        }
+        public void onLevelChanged(byte level) throws RemoteException {}
 
         @Override // android.media.INativeSpatializerCallback
-        public void onOutputChanged(int output) throws RemoteException {
-        }
+        public void onOutputChanged(int output) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface INativeSpatializerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INativeSpatializerCallback {
+    public abstract static class Stub extends Binder implements INativeSpatializerCallback {
         static final int TRANSACTION_onLevelChanged = 1;
         static final int TRANSACTION_onOutputChanged = 2;
 
@@ -54,7 +52,8 @@ public interface INativeSpatializerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(INativeSpatializerCallback.DESCRIPTOR);
             }

@@ -2,13 +2,16 @@ package com.android.server.knox.zt.devicetrust.data;
 
 import android.hardware.soundtrigger.V2_3.OptionalModelParameterRange$$ExternalSyntheticOutline0;
 import android.os.Bundle;
+
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -75,9 +78,12 @@ public final class AppBindingData extends EndpointData {
         int i3 = this.uid;
         String str = this.procName;
         String str2 = this.label;
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i2, i3, " | pid : ", " | uid : ", m);
-        return OptionalModelParameterRange$$ExternalSyntheticOutline0.m(m, " | procName : ", str, " | label : ", str2);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i2, i3, " | pid : ", " | uid : ", m);
+        return OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                m, " | procName : ", str, " | label : ", str2);
     }
 
     @Override // com.android.server.knox.zt.devicetrust.data.EndpointData

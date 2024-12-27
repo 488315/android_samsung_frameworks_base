@@ -21,6 +21,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.LruCache;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -29,7 +30,11 @@ import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.clipboard.ClipboardService;
+
+import libcore.util.EmptyArray;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -38,7 +43,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -54,7 +58,9 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
     public ZenModeHelper mZenModeHelper;
     public static final boolean VERBOSE = Log.isLoggable("ValidateNoPeople", 2);
     public static final boolean DEBUG = Log.isLoggable("ValidateNoPeople", 3);
-    public static final String[] LOOKUP_PROJECTION = {KnoxCustomManagerService.ID, "lookup", "starred", "has_phone_number"};
+    public static final String[] LOOKUP_PROJECTION = {
+        KnoxCustomManagerService.ID, "lookup", "starred", "has_phone_number"
+    };
     static final String[] PHONE_LOOKUP_PROJECTION = {"data4", "data1"};
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -63,10 +69,14 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         public boolean mHasPhone = false;
         public String mPhoneLookupKey = null;
         public final ArraySet mPhoneNumbers = new ArraySet();
-        public final long mExpireMillis = System.currentTimeMillis() + ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
+        public final long mExpireMillis =
+                System.currentTimeMillis() + ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
 
         public final float getAffinity() {
-            return (this.mAffinity == FullScreenMagnificationGestureHandler.MAX_SCALE || isExpired()) ? FullScreenMagnificationGestureHandler.MAX_SCALE : this.mAffinity;
+            return (this.mAffinity == FullScreenMagnificationGestureHandler.MAX_SCALE
+                            || isExpired())
+                    ? FullScreenMagnificationGestureHandler.MAX_SCALE
+                    : this.mAffinity;
         }
 
         public boolean isExpired() {
@@ -79,7 +89,8 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
             if (columnIndex >= 0) {
                 int i = cursor.getInt(columnIndex);
                 if (ValidateNotificationPeople.DEBUG) {
-                    AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "contact _ID is: ", "ValidateNoPeople");
+                    AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                            i, "contact _ID is: ", "ValidateNoPeople");
                 }
             } else {
                 Slog.i("ValidateNoPeople", "invalid cursor: no _ID");
@@ -88,7 +99,10 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
             if (columnIndex2 >= 0) {
                 this.mPhoneLookupKey = cursor.getString(columnIndex2);
                 if (ValidateNotificationPeople.DEBUG) {
-                    BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder("contact LOOKUP_KEY is: "), this.mPhoneLookupKey, "ValidateNoPeople");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("contact LOOKUP_KEY is: "),
+                            this.mPhoneLookupKey,
+                            "ValidateNoPeople");
                 }
             } else if (ValidateNotificationPeople.DEBUG) {
                 Slog.d("ValidateNoPeople", "invalid cursor: no LOOKUP_KEY");
@@ -100,7 +114,8 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                     this.mAffinity = Math.max(this.mAffinity, 1.0f);
                 }
                 if (ValidateNotificationPeople.DEBUG) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m("contact STARRED is: ", "ValidateNoPeople", z);
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            "contact STARRED is: ", "ValidateNoPeople", z);
                 }
             } else if (ValidateNotificationPeople.DEBUG) {
                 Slog.d("ValidateNoPeople", "invalid cursor: no STARRED");
@@ -113,7 +128,10 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
             } else {
                 this.mHasPhone = cursor.getInt(columnIndex4) != 0;
                 if (ValidateNotificationPeople.DEBUG) {
-                    AnyMotionDetector$$ExternalSyntheticOutline0.m("ValidateNoPeople", new StringBuilder("contact HAS_PHONE_NUMBER is: "), this.mHasPhone);
+                    AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                            "ValidateNoPeople",
+                            new StringBuilder("contact HAS_PHONE_NUMBER is: "),
+                            this.mHasPhone);
                 }
             }
         }
@@ -152,7 +170,14 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
 
         public static void addContacts(LookupResult lookupResult, Context context, Uri uri) {
             try {
-                Cursor query = context.getContentResolver().query(uri, ValidateNotificationPeople.LOOKUP_PROJECTION, null, null, null);
+                Cursor query =
+                        context.getContentResolver()
+                                .query(
+                                        uri,
+                                        ValidateNotificationPeople.LOOKUP_PROJECTION,
+                                        null,
+                                        null,
+                                        null);
                 try {
                     if (query != null) {
                         while (query.moveToNext()) {
@@ -168,14 +193,18 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                 } finally {
                 }
             } catch (Throwable th) {
-                Slog.w("ValidateNoPeople", "Problem getting content resolver or performing contacts query.", th);
+                Slog.w(
+                        "ValidateNoPeople",
+                        "Problem getting content resolver or performing contacts query.",
+                        th);
             }
         }
 
         public static LookupResult searchContacts(Context context, Uri uri) {
             int i;
             LookupResult lookupResult = new LookupResult();
-            Uri createCorpLookupUriFromEnterpriseLookupUri = ContactsContract.Contacts.createCorpLookupUriFromEnterpriseLookupUri(uri);
+            Uri createCorpLookupUriFromEnterpriseLookupUri =
+                    ContactsContract.Contacts.createCorpLookupUriFromEnterpriseLookupUri(uri);
             if (createCorpLookupUriFromEnterpriseLookupUri == null) {
                 addContacts(lookupResult, context, uri);
             } else {
@@ -195,9 +224,16 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                     i2++;
                 }
                 if (i == -1) {
-                    Slog.w("ValidateNoPeople", "Work profile user ID not found for work contact: " + createCorpLookupUriFromEnterpriseLookupUri);
+                    Slog.w(
+                            "ValidateNoPeople",
+                            "Work profile user ID not found for work contact: "
+                                    + createCorpLookupUriFromEnterpriseLookupUri);
                 } else {
-                    addContacts(lookupResult, context, ContentProvider.maybeAddUserId(createCorpLookupUriFromEnterpriseLookupUri, i));
+                    addContacts(
+                            lookupResult,
+                            context,
+                            ContentProvider.maybeAddUserId(
+                                    createCorpLookupUriFromEnterpriseLookupUri, i));
                 }
             }
             return lookupResult;
@@ -208,10 +244,19 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
             String str = !searchContacts.mHasPhone ? null : searchContacts.mPhoneLookupKey;
             if (str != null) {
                 try {
-                    Cursor query = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, ValidateNotificationPeople.PHONE_LOOKUP_PROJECTION, "lookup = ?", new String[]{str}, null);
+                    Cursor query =
+                            context.getContentResolver()
+                                    .query(
+                                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                                            ValidateNotificationPeople.PHONE_LOOKUP_PROJECTION,
+                                            "lookup = ?",
+                                            new String[] {str},
+                                            null);
                     try {
                         if (query == null) {
-                            Slog.w("ValidateNoPeople", "Cursor is null when querying contact phone number.");
+                            Slog.w(
+                                    "ValidateNoPeople",
+                                    "Cursor is null when querying contact phone number.");
                             if (query != null) {
                                 query.close();
                             }
@@ -224,7 +269,10 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                     } finally {
                     }
                 } catch (Throwable th) {
-                    Slog.w("ValidateNoPeople", "Problem getting content resolver or querying phone numbers.", th);
+                    Slog.w(
+                            "ValidateNoPeople",
+                            "Problem getting content resolver or querying phone numbers.",
+                            th);
                 }
             }
             return searchContacts;
@@ -232,9 +280,12 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
 
         @Override // com.android.server.notification.RankingReconsideration
         public final void applyChangesLocked(NotificationRecord notificationRecord) {
-            notificationRecord.mContactAffinity = Math.max(this.mContactAffinity, notificationRecord.mContactAffinity);
+            notificationRecord.mContactAffinity =
+                    Math.max(this.mContactAffinity, notificationRecord.mContactAffinity);
             if (ValidateNotificationPeople.VERBOSE) {
-                Slog.i("ValidateNoPeople", "final affinity: " + notificationRecord.mContactAffinity);
+                Slog.i(
+                        "ValidateNoPeople",
+                        "final affinity: " + notificationRecord.mContactAffinity);
             }
             ArraySet arraySet = this.mPhoneNumbers;
             if (arraySet == null || arraySet.size() == 0) {
@@ -250,7 +301,10 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         public final void work() {
             LookupResult lookupResult;
             if (ValidateNotificationPeople.VERBOSE) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("Executing: validation for: "), this.mKey, "ValidateNoPeople");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Executing: validation for: "),
+                        this.mKey,
+                        "ValidateNoPeople");
             }
             long currentTimeMillis = System.currentTimeMillis();
             Iterator it = this.mPendingLookups.iterator();
@@ -259,10 +313,13 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                     break;
                 }
                 String str = (String) it.next();
-                String cacheKey = ValidateNotificationPeople.getCacheKey(this.mContext.getUserId(), str);
+                String cacheKey =
+                        ValidateNotificationPeople.getCacheKey(this.mContext.getUserId(), str);
                 synchronized (ValidateNotificationPeople.this.mPeopleCache) {
                     try {
-                        lookupResult = (LookupResult) ValidateNotificationPeople.this.mPeopleCache.get(cacheKey);
+                        lookupResult =
+                                (LookupResult)
+                                        ValidateNotificationPeople.this.mPeopleCache.get(cacheKey);
                         if (lookupResult == null || lookupResult.isExpired()) {
                             r4 = false;
                         }
@@ -273,15 +330,29 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                     Uri parse = Uri.parse(str);
                     if ("tel".equals(parse.getScheme())) {
                         if (ValidateNotificationPeople.DEBUG) {
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m("checking telephone URI: ", str, "ValidateNoPeople");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    "checking telephone URI: ", str, "ValidateNoPeople");
                         }
-                        lookupResult = searchContacts(this.mContext, Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(parse.getSchemeSpecificPart())));
+                        lookupResult =
+                                searchContacts(
+                                        this.mContext,
+                                        Uri.withAppendedPath(
+                                                ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                                                Uri.encode(parse.getSchemeSpecificPart())));
                     } else if ("mailto".equals(parse.getScheme())) {
                         if (ValidateNotificationPeople.DEBUG) {
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m("checking mailto URI: ", str, "ValidateNoPeople");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    "checking mailto URI: ", str, "ValidateNoPeople");
                         }
-                        lookupResult = searchContacts(this.mContext, Uri.withAppendedPath(ContactsContract.CommonDataKinds.Email.CONTENT_LOOKUP_URI, Uri.encode(parse.getSchemeSpecificPart())));
-                    } else if (str.startsWith(ContactsContract.Contacts.CONTENT_LOOKUP_URI.toString())) {
+                        lookupResult =
+                                searchContacts(
+                                        this.mContext,
+                                        Uri.withAppendedPath(
+                                                ContactsContract.CommonDataKinds.Email
+                                                        .CONTENT_LOOKUP_URI,
+                                                Uri.encode(parse.getSchemeSpecificPart())));
+                    } else if (str.startsWith(
+                            ContactsContract.Contacts.CONTENT_LOOKUP_URI.toString())) {
                         if (ValidateNotificationPeople.DEBUG) {
                             Slog.d("ValidateNoPeople", "checking lookup URI: ".concat(str));
                         }
@@ -296,13 +367,17 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                 if (lookupResult != null) {
                     if (!r4) {
                         synchronized (ValidateNotificationPeople.this.mPeopleCache) {
-                            ValidateNotificationPeople.this.mPeopleCache.put(cacheKey, lookupResult);
+                            ValidateNotificationPeople.this.mPeopleCache.put(
+                                    cacheKey, lookupResult);
                         }
                     }
                     if (ValidateNotificationPeople.DEBUG) {
-                        Slog.d("ValidateNoPeople", "lookup contactAffinity is " + lookupResult.getAffinity());
+                        Slog.d(
+                                "ValidateNoPeople",
+                                "lookup contactAffinity is " + lookupResult.getAffinity());
                     }
-                    this.mContactAffinity = Math.max(this.mContactAffinity, lookupResult.getAffinity());
+                    this.mContactAffinity =
+                            Math.max(this.mContactAffinity, lookupResult.getAffinity());
                     if (lookupResult.mPhoneNumbers != null) {
                         if (this.mPhoneNumbers == null) {
                             this.mPhoneNumbers = new ArraySet();
@@ -314,13 +389,22 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                 }
             }
             if (ValidateNotificationPeople.DEBUG) {
-                Slog.d("ValidateNoPeople", "Validation finished in " + (System.currentTimeMillis() - currentTimeMillis) + "ms");
+                Slog.d(
+                        "ValidateNoPeople",
+                        "Validation finished in "
+                                + (System.currentTimeMillis() - currentTimeMillis)
+                                + "ms");
             }
             NotificationRecord notificationRecord = this.mRecord;
             if (notificationRecord != null) {
-                NotificationUsageStats notificationUsageStats = ValidateNotificationPeople.this.mUsageStats;
+                NotificationUsageStats notificationUsageStats =
+                        ValidateNotificationPeople.this.mUsageStats;
                 float f = this.mContactAffinity;
-                notificationUsageStats.registerPeopleAffinity(notificationRecord, f > FullScreenMagnificationGestureHandler.MAX_SCALE, f == 1.0f, false);
+                notificationUsageStats.registerPeopleAffinity(
+                        notificationRecord,
+                        f > FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        f == 1.0f,
+                        false);
             }
         }
     }
@@ -357,13 +441,13 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         int i = 0;
         if (!(obj instanceof ArrayList)) {
             if (obj instanceof String) {
-                return new String[]{(String) obj};
+                return new String[] {(String) obj};
             }
             if (obj instanceof char[]) {
-                return new String[]{new String((char[]) obj)};
+                return new String[] {new String((char[]) obj)};
             }
             if (obj instanceof CharSequence) {
-                return new String[]{((CharSequence) obj).toString()};
+                return new String[] {((CharSequence) obj).toString()};
             }
             if (obj instanceof CharSequence[]) {
                 CharSequence[] charSequenceArr = (CharSequence[]) obj;
@@ -404,7 +488,8 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
     }
 
     public final Context getContextAsUser(UserHandle userHandle) {
-        Context context = (Context) this.mUserToContextMap.get(Integer.valueOf(userHandle.getIdentifier()));
+        Context context =
+                (Context) this.mUserToContextMap.get(Integer.valueOf(userHandle.getIdentifier()));
         if (context != null) {
             return context;
         }
@@ -418,7 +503,8 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         }
     }
 
-    public void initForTests(Context context, NotificationUsageStats notificationUsageStats, LruCache lruCache) {
+    public void initForTests(
+            Context context, NotificationUsageStats notificationUsageStats, LruCache lruCache) {
         this.mUserToContextMap = new ArrayMap();
         this.mBaseContext = context;
         this.mUsageStats = notificationUsageStats;
@@ -428,7 +514,8 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
 
     /* JADX WARN: Type inference failed for: r4v8, types: [com.android.server.notification.ValidateNotificationPeople$1] */
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void initialize(final Context context, NotificationUsageStats notificationUsageStats) {
+    public final void initialize(
+            final Context context, NotificationUsageStats notificationUsageStats) {
         if (DEBUG) {
             Slog.d("ValidateNoPeople", "Initializing  " + getClass().getSimpleName() + ".");
         }
@@ -436,42 +523,64 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         this.mBaseContext = context;
         this.mUsageStats = notificationUsageStats;
         this.mPeopleCache = new LruCache(200);
-        boolean z = 1 == Settings.Global.getInt(this.mBaseContext.getContentResolver(), "validate_notification_people_enabled", 1);
+        boolean z =
+                1
+                        == Settings.Global.getInt(
+                                this.mBaseContext.getContentResolver(),
+                                "validate_notification_people_enabled",
+                                1);
         this.mEnabled = z;
         if (z) {
             this.mHandler = new Handler();
-            this.mObserver = new ContentObserver(this.mHandler) { // from class: com.android.server.notification.ValidateNotificationPeople.1
-                @Override // android.database.ContentObserver
-                public final void onChange(boolean z2, Uri uri, final int i) {
-                    super.onChange(z2, uri, i);
-                    if ((ValidateNotificationPeople.DEBUG || ValidateNotificationPeople.this.mEvictionCount % 100 == 0) && ValidateNotificationPeople.VERBOSE) {
-                        SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("mEvictionCount: "), ValidateNotificationPeople.this.mEvictionCount, "ValidateNoPeople");
-                    }
-                    ValidateNotificationPeople.this.mPeopleCache.evictAll();
-                    final ValidateNotificationPeople validateNotificationPeople = ValidateNotificationPeople.this;
-                    validateNotificationPeople.mEvictionCount++;
-                    final Context context2 = context;
-                    final int callingUid = Binder.getCallingUid();
-                    validateNotificationPeople.getClass();
-                    BackgroundThread.getHandler().post(new Runnable() { // from class: com.android.server.notification.ValidateNotificationPeople$$ExternalSyntheticLambda1
-                        /* JADX WARN: Removed duplicated region for block: B:27:0x00cf A[SYNTHETIC] */
-                        /* JADX WARN: Removed duplicated region for block: B:31:0x0057 A[SYNTHETIC] */
-                        @Override // java.lang.Runnable
-                        /*
-                            Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
-                        */
-                        public final void run() {
-                            /*
-                                Method dump skipped, instructions count: 272
-                                To view this dump change 'Code comments level' option to 'DEBUG'
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ValidateNotificationPeople$$ExternalSyntheticLambda1.run():void");
+            this.mObserver =
+                    new ContentObserver(this.mHandler) { // from class:
+                        // com.android.server.notification.ValidateNotificationPeople.1
+                        @Override // android.database.ContentObserver
+                        public final void onChange(boolean z2, Uri uri, final int i) {
+                            super.onChange(z2, uri, i);
+                            if ((ValidateNotificationPeople.DEBUG
+                                            || ValidateNotificationPeople.this.mEvictionCount % 100
+                                                    == 0)
+                                    && ValidateNotificationPeople.VERBOSE) {
+                                SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("mEvictionCount: "),
+                                        ValidateNotificationPeople.this.mEvictionCount,
+                                        "ValidateNoPeople");
+                            }
+                            ValidateNotificationPeople.this.mPeopleCache.evictAll();
+                            final ValidateNotificationPeople validateNotificationPeople =
+                                    ValidateNotificationPeople.this;
+                            validateNotificationPeople.mEvictionCount++;
+                            final Context context2 = context;
+                            final int callingUid = Binder.getCallingUid();
+                            validateNotificationPeople.getClass();
+                            BackgroundThread.getHandler()
+                                    .post(
+                                            new Runnable() { // from class:
+                                                // com.android.server.notification.ValidateNotificationPeople$$ExternalSyntheticLambda1
+                                                /* JADX WARN: Removed duplicated region for block: B:27:0x00cf A[SYNTHETIC] */
+                                                /* JADX WARN: Removed duplicated region for block: B:31:0x0057 A[SYNTHETIC] */
+                                                @Override // java.lang.Runnable
+                                                /*
+                                                    Code decompiled incorrectly, please refer to instructions dump.
+                                                    To view partially-correct code enable 'Show inconsistent code' option in preferences
+                                                */
+                                                public final void run() {
+                                                    /*
+                                                        Method dump skipped, instructions count: 272
+                                                        To view this dump change 'Code comments level' option to 'DEBUG'
+                                                    */
+                                                    throw new UnsupportedOperationException(
+                                                            "Method not decompiled:"
+                                                                + " com.android.server.notification.ValidateNotificationPeople$$ExternalSyntheticLambda1.run():void");
+                                                }
+                                            });
                         }
-                    });
-                }
-            };
-            this.mBaseContext.getContentResolver().registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true, this.mObserver, -1);
+                    };
+            this.mBaseContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            ContactsContract.Contacts.CONTENT_URI, true, this.mObserver, -1);
         }
     }
 
@@ -481,7 +590,8 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         String str;
         String[] extraPeople = getExtraPeople(bundle);
         if (extraPeople != null) {
-            TelephonyManager telephonyManager = (TelephonyManager) this.mBaseContext.getSystemService("phone");
+            TelephonyManager telephonyManager =
+                    (TelephonyManager) this.mBaseContext.getSystemService("phone");
             if (telephonyManager != null) {
                 country = telephonyManager.getNetworkCountryIso();
                 if (country == null && (country = telephonyManager.getSimCountryIso()) == null) {
@@ -502,7 +612,8 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
                     Iterator it = list.iterator();
                     while (it.hasNext()) {
                         String[] split2 = ((String) it.next()).split(";");
-                        if (split2.length > 1 && PhoneNumberUtils.areSamePhoneNumber(str, split2[1], str2)) {
+                        if (split2.length > 1
+                                && PhoneNumberUtils.areSamePhoneNumber(str, split2[1], str2)) {
                             return true;
                         }
                     }
@@ -518,10 +629,13 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
             Iterator it2 = arraySet.iterator();
             while (it2.hasNext()) {
                 String str4 = (String) it2.next();
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m("isInExceptionContacts phone = ", str4, "ValidateNoPeople");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        "isInExceptionContacts phone = ", str4, "ValidateNoPeople");
                 if (str4 != null) {
                     for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i) != null && PhoneNumberUtils.areSamePhoneNumber(str4, (String) list.get(i), str2)) {
+                        if (list.get(i) != null
+                                && PhoneNumberUtils.areSamePhoneNumber(
+                                        str4, (String) list.get(i), str2)) {
                             Slog.d("ValidateNoPeople", "isInExceptionContacts return true");
                             return true;
                         }
@@ -565,20 +679,22 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
     }
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setConfig(RankingConfig rankingConfig) {
-    }
+    public final void setConfig(RankingConfig rankingConfig) {}
 
     @Override // com.android.server.notification.NotificationSignalExtractor
     public final void setZenHelper(ZenModeHelper zenModeHelper) {
         this.mZenModeHelper = zenModeHelper;
     }
 
-    public RankingReconsideration validatePeople(Context context, NotificationRecord notificationRecord) {
+    public RankingReconsideration validatePeople(
+            Context context, NotificationRecord notificationRecord) {
         String key = notificationRecord.sbn.getKey();
         Bundle bundle = notificationRecord.sbn.getNotification().extras;
         float[] fArr = new float[1];
         ArraySet arraySet = new ArraySet();
-        PeopleRankingReconsideration validatePeople = validatePeople(context, key, bundle, notificationRecord.mPeopleOverride, fArr, arraySet);
+        PeopleRankingReconsideration validatePeople =
+                validatePeople(
+                        context, key, bundle, notificationRecord.mPeopleOverride, fArr, arraySet);
         float f = fArr[0];
         notificationRecord.mContactAffinity = f;
         if (arraySet.size() > 0 && arraySet.size() != 0) {
@@ -588,7 +704,11 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
             notificationRecord.mPhoneNumbers.addAll(arraySet);
         }
         if (validatePeople == null) {
-            this.mUsageStats.registerPeopleAffinity(notificationRecord, f > FullScreenMagnificationGestureHandler.MAX_SCALE, f == 1.0f, true);
+            this.mUsageStats.registerPeopleAffinity(
+                    notificationRecord,
+                    f > FullScreenMagnificationGestureHandler.MAX_SCALE,
+                    f == 1.0f,
+                    true);
         } else {
             validatePeople.mRecord = notificationRecord;
         }
@@ -600,7 +720,15 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.notification.ValidateNotificationPeople.PeopleRankingReconsideration validatePeople(android.content.Context r9, java.lang.String r10, android.os.Bundle r11, java.util.List r12, float[] r13, android.util.ArraySet r14) {
+    public final com.android.server.notification.ValidateNotificationPeople
+                    .PeopleRankingReconsideration
+            validatePeople(
+                    android.content.Context r9,
+                    java.lang.String r10,
+                    android.os.Bundle r11,
+                    java.util.List r12,
+                    float[] r13,
+                    android.util.ArraySet r14) {
         /*
             r8 = this;
             r0 = 0
@@ -707,6 +835,10 @@ public class ValidateNotificationPeople implements NotificationSignalExtractor {
             r12.<init>(r9, r10, r11)
             return r12
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ValidateNotificationPeople.validatePeople(android.content.Context, java.lang.String, android.os.Bundle, java.util.List, float[], android.util.ArraySet):com.android.server.notification.ValidateNotificationPeople$PeopleRankingReconsideration");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.ValidateNotificationPeople.validatePeople(android.content.Context,"
+                    + " java.lang.String, android.os.Bundle, java.util.List, float[],"
+                    + " android.util.ArraySet):com.android.server.notification.ValidateNotificationPeople$PeopleRankingReconsideration");
     }
 }

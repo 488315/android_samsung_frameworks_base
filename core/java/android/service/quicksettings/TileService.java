@@ -17,32 +17,41 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.service.quicksettings.IQSService;
-import android.service.quicksettings.IQSTileService;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public class TileService extends Service {
     public static final String ACTION_QS_TILE = "android.service.quicksettings.action.QS_TILE";
-    public static final String ACTION_QS_TILE_PREFERENCES = "android.service.quicksettings.action.QS_TILE_PREFERENCES";
+    public static final String ACTION_QS_TILE_PREFERENCES =
+            "android.service.quicksettings.action.QS_TILE_PREFERENCES";
     private static final boolean DEBUG = false;
     public static final String EXTRA_SERVICE = "service";
     public static final String EXTRA_STATE = "state";
     public static final String EXTRA_TOKEN = "token";
     public static final String META_DATA_ACTIVE_TILE = "android.service.quicksettings.ACTIVE_TILE";
-    public static final String META_DATA_TOGGLEABLE_TILE = "android.service.quicksettings.TOGGLEABLE_TILE";
-    public static final String SEM_META_DATA_ACTIVE_TILE_SUPPORT_SEM_PLATFORM_VER = "android.service.quicksettings.SEM_ACTIVE_TILE_SUPPORT_SEM_PLATFORM_VER";
-    public static final String SEM_META_DATA_DEFAULT_TILE_DEXMODE_ONLY = "android.service.quicksettings.SEM_DEFAULT_TILE_DEXMODE_ONLY";
-    public static final String SEM_META_DATA_DEFAULT_TILE_NAME = "android.service.quicksettings.SEM_DEFAULT_TILE_NAME";
-    public static final String SEM_META_DATA_DEFAULT_TILE_STATE = "android.service.quicksettings.SEM_DEFAULT_TILE_STATE";
-    public static final String SEM_META_DATA_DEFAULT_TILE_UNLOCK_POLICY = "android.service.quicksettings.SEM_DEFAULT_TILE_UNLOCK_POLICY";
-    public static final String SEM_META_DATA_DEFAULT_TILE_USER_POLICY = "android.service.quicksettings.SEM_DEFAULT_TILE_USER_POLICY";
-    public static final String SEM_META_DATA_SUPPORT_DETAIL_VIEW = "android.service.quicksettings.SEM_SUPPORT_DETAIL_VIEW";
+    public static final String META_DATA_TOGGLEABLE_TILE =
+            "android.service.quicksettings.TOGGLEABLE_TILE";
+    public static final String SEM_META_DATA_ACTIVE_TILE_SUPPORT_SEM_PLATFORM_VER =
+            "android.service.quicksettings.SEM_ACTIVE_TILE_SUPPORT_SEM_PLATFORM_VER";
+    public static final String SEM_META_DATA_DEFAULT_TILE_DEXMODE_ONLY =
+            "android.service.quicksettings.SEM_DEFAULT_TILE_DEXMODE_ONLY";
+    public static final String SEM_META_DATA_DEFAULT_TILE_NAME =
+            "android.service.quicksettings.SEM_DEFAULT_TILE_NAME";
+    public static final String SEM_META_DATA_DEFAULT_TILE_STATE =
+            "android.service.quicksettings.SEM_DEFAULT_TILE_STATE";
+    public static final String SEM_META_DATA_DEFAULT_TILE_UNLOCK_POLICY =
+            "android.service.quicksettings.SEM_DEFAULT_TILE_UNLOCK_POLICY";
+    public static final String SEM_META_DATA_DEFAULT_TILE_USER_POLICY =
+            "android.service.quicksettings.SEM_DEFAULT_TILE_USER_POLICY";
+    public static final String SEM_META_DATA_SUPPORT_DETAIL_VIEW =
+            "android.service.quicksettings.SEM_SUPPORT_DETAIL_VIEW";
     public static final long START_ACTIVITY_NEEDS_PENDING_INTENT = 241766793;
     private static final String TAG = "TileService";
     private final H mHandler = new H(Looper.getMainLooper());
@@ -62,20 +71,15 @@ public class TileService extends Service {
         super.onDestroy();
     }
 
-    public void onTileAdded() {
-    }
+    public void onTileAdded() {}
 
-    public void onTileRemoved() {
-    }
+    public void onTileRemoved() {}
 
-    public void onStartListening() {
-    }
+    public void onStartListening() {}
 
-    public void onStopListening() {
-    }
+    public void onStopListening() {}
 
-    public void onClick() {
-    }
+    public void onClick() {}
 
     @SystemApi
     public final void setStatusIcon(Icon icon, String contentDescription) {
@@ -93,19 +97,24 @@ public class TileService extends Service {
             dialog.getWindow().getAttributes().token = this.mToken;
             dialog.getWindow().setType(2035);
         }
-        dialog.getWindow().getDecorView().addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: android.service.quicksettings.TileService.1
-            @Override // android.view.View.OnAttachStateChangeListener
-            public void onViewAttachedToWindow(View v) {
-            }
+        dialog.getWindow()
+                .getDecorView()
+                .addOnAttachStateChangeListener(
+                        new View
+                                .OnAttachStateChangeListener() { // from class:
+                                                                 // android.service.quicksettings.TileService.1
+                            @Override // android.view.View.OnAttachStateChangeListener
+                            public void onViewAttachedToWindow(View v) {}
 
-            @Override // android.view.View.OnAttachStateChangeListener
-            public void onViewDetachedFromWindow(View v) {
-                try {
-                    TileService.this.mService.onDialogHidden(TileService.this.mTileToken);
-                } catch (RemoteException e) {
-                }
-            }
-        });
+                            @Override // android.view.View.OnAttachStateChangeListener
+                            public void onViewDetachedFromWindow(View v) {
+                                try {
+                                    TileService.this.mService.onDialogHidden(
+                                            TileService.this.mTileToken);
+                                } catch (RemoteException e) {
+                                }
+                            }
+                        });
         dialog.show();
         try {
             this.mService.onShowDialog(this.mTileToken);
@@ -140,7 +149,9 @@ public class TileService extends Service {
     @Deprecated
     public final void startActivityAndCollapse(Intent intent) {
         if (CompatChanges.isChangeEnabled(START_ACTIVITY_NEEDS_PENDING_INTENT)) {
-            throw new UnsupportedOperationException("startActivityAndCollapse: Starting activity from TileService using an Intent is not allowed.");
+            throw new UnsupportedOperationException(
+                    "startActivityAndCollapse: Starting activity from TileService using an Intent"
+                        + " is not allowed.");
         }
         startActivity(intent);
         try {
@@ -215,14 +226,19 @@ public class TileService extends Service {
         return null;
     }
 
-    public void semSetToggleButtonChecked(boolean checked) {
-    }
+    public void semSetToggleButtonChecked(boolean checked) {}
 
     @Override // android.app.Service
     public IBinder onBind(Intent intent) {
         this.mService = IQSService.Stub.asInterface(intent.getIBinderExtra("service"));
         this.mTileToken = intent.getIBinderExtra("token");
-        Log.d(TAG, "onBind : mService = " + this.mService + ", mTileToken = " + this.mTileToken + getClass().getSimpleName());
+        Log.d(
+                TAG,
+                "onBind : mService = "
+                        + this.mService
+                        + ", mTileToken = "
+                        + this.mTileToken
+                        + getClass().getSimpleName());
         try {
             this.mTile = this.mService.getTile(this.mTileToken);
             Log.d(TAG, "onBind : mTile = " + this.mTile);
@@ -230,7 +246,8 @@ public class TileService extends Service {
                 this.mTile.setService(this.mService, this.mTileToken);
                 this.mHandler.sendEmptyMessage(7);
             }
-            return new IQSTileService.Stub() { // from class: android.service.quicksettings.TileService.2
+            return new IQSTileService
+                    .Stub() { // from class: android.service.quicksettings.TileService.2
                 @Override // android.service.quicksettings.IQSTileService
                 public void onTileRemoved() throws RemoteException {
                     TileService.this.mHandler.sendEmptyMessage(4);
@@ -293,7 +310,10 @@ public class TileService extends Service {
 
                 @Override // android.service.quicksettings.IQSTileService
                 public void semSetToggleButtonChecked(boolean checked) throws RemoteException {
-                    TileService.this.mHandler.obtainMessage(8, Boolean.valueOf(checked)).sendToTarget();
+                    TileService.this
+                            .mHandler
+                            .obtainMessage(8, Boolean.valueOf(checked))
+                            .sendToTarget();
                 }
             };
         } catch (RemoteException e) {

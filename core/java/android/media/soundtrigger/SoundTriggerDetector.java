@@ -10,7 +10,9 @@ import android.os.Message;
 import android.os.ParcelUuid;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.app.ISoundTriggerSession;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -39,7 +41,7 @@ public final class SoundTriggerDetector {
     private final SoundTrigger.GenericSoundModel mSoundModel;
     private final ISoundTriggerSession mSoundTriggerSession;
 
-    public static abstract class Callback {
+    public abstract static class Callback {
         public abstract void onAvailabilityChanged(int i);
 
         public abstract void onDetected(EventPayload eventPayload);
@@ -52,8 +54,7 @@ public final class SoundTriggerDetector {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RecognitionFlags {
-    }
+    public @interface RecognitionFlags {}
 
     public static class EventPayload {
         private final AudioFormat mAudioFormat;
@@ -62,7 +63,12 @@ public final class SoundTriggerDetector {
         private final byte[] mData;
         private final boolean mTriggerAvailable;
 
-        private EventPayload(boolean triggerAvailable, boolean captureAvailable, AudioFormat audioFormat, int captureSession, byte[] data) {
+        private EventPayload(
+                boolean triggerAvailable,
+                boolean captureAvailable,
+                AudioFormat audioFormat,
+                int captureSession,
+                byte[] data) {
             this.mTriggerAvailable = triggerAvailable;
             this.mCaptureAvailable = captureAvailable;
             this.mCaptureSession = captureSession;
@@ -96,7 +102,11 @@ public final class SoundTriggerDetector {
         }
     }
 
-    SoundTriggerDetector(ISoundTriggerSession soundTriggerSession, SoundTrigger.GenericSoundModel soundModel, Callback callback, Handler handler) {
+    SoundTriggerDetector(
+            ISoundTriggerSession soundTriggerSession,
+            SoundTrigger.GenericSoundModel soundModel,
+            Callback callback,
+            Handler handler) {
         this.mSoundTriggerSession = soundTriggerSession;
         this.mSoundModel = soundModel;
         this.mCallback = callback;
@@ -124,7 +134,17 @@ public final class SoundTriggerDetector {
             audioCapabilities = audioCapabilities2 | 2;
         }
         try {
-            int status = this.mSoundTriggerSession.startRecognition(this.mSoundModel, this.mRecognitionCallback, new SoundTrigger.RecognitionConfig(captureTriggerAudio, allowMultipleTriggers, null, null, audioCapabilities), runInBatterySaver);
+            int status =
+                    this.mSoundTriggerSession.startRecognition(
+                            this.mSoundModel,
+                            this.mRecognitionCallback,
+                            new SoundTrigger.RecognitionConfig(
+                                    captureTriggerAudio,
+                                    allowMultipleTriggers,
+                                    null,
+                                    null,
+                                    audioCapabilities),
+                            runInBatterySaver);
             return status == 0;
         } catch (RemoteException e) {
             return false;
@@ -134,7 +154,9 @@ public final class SoundTriggerDetector {
     @Deprecated
     public boolean stopRecognition() {
         try {
-            int status = this.mSoundTriggerSession.stopRecognition(new ParcelUuid(this.mSoundModel.getUuid()), this.mRecognitionCallback);
+            int status =
+                    this.mSoundTriggerSession.stopRecognition(
+                            new ParcelUuid(this.mSoundModel.getUuid()), this.mRecognitionCallback);
             return status == 0;
         } catch (RemoteException e) {
             return false;
@@ -147,13 +169,21 @@ public final class SoundTriggerDetector {
     }
 
     private class RecognitionCallback extends IRecognitionStatusCallback.Stub {
-        private RecognitionCallback() {
-        }
+        private RecognitionCallback() {}
 
         @Override // android.hardware.soundtrigger.IRecognitionStatusCallback
         public void onGenericSoundTriggerDetected(SoundTrigger.GenericRecognitionEvent event) {
             Slog.d(SoundTriggerDetector.TAG, "onGenericSoundTriggerDetected()" + event);
-            Message.obtain(SoundTriggerDetector.this.mHandler, 2, new EventPayload(event.triggerInData, event.captureAvailable, event.captureFormat, event.captureSession, event.data)).sendToTarget();
+            Message.obtain(
+                            SoundTriggerDetector.this.mHandler,
+                            2,
+                            new EventPayload(
+                                    event.triggerInData,
+                                    event.captureAvailable,
+                                    event.captureFormat,
+                                    event.captureSession,
+                                    event.data))
+                    .sendToTarget();
         }
 
         @Override // android.hardware.soundtrigger.IRecognitionStatusCallback
@@ -199,8 +229,7 @@ public final class SoundTriggerDetector {
     }
 
     private class MyHandler extends Handler {
-        MyHandler() {
-        }
+        MyHandler() {}
 
         MyHandler(Looper looper) {
             super(looper);
@@ -209,7 +238,9 @@ public final class SoundTriggerDetector {
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
             if (SoundTriggerDetector.this.mCallback == null) {
-                Slog.w(SoundTriggerDetector.TAG, "Received message: " + msg.what + " for NULL callback.");
+                Slog.w(
+                        SoundTriggerDetector.TAG,
+                        "Received message: " + msg.what + " for NULL callback.");
             }
             switch (msg.what) {
                 case 2:

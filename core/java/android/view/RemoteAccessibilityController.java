@@ -6,8 +6,8 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.util.Log;
-import android.view.RemoteAccessibilityController;
 import android.view.accessibility.IAccessibilityEmbeddedConnection;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes4.dex */
@@ -33,10 +33,12 @@ class RemoteAccessibilityController {
         }
     }
 
-    void assosciateHierarchy(IAccessibilityEmbeddedConnection connection, IBinder leashToken, int hostId) {
+    void assosciateHierarchy(
+            IAccessibilityEmbeddedConnection connection, IBinder leashToken, int hostId) {
         this.mHostId = hostId;
         try {
-            setRemoteAccessibilityEmbeddedConnection(connection, connection.associateEmbeddedHierarchy(leashToken, this.mHostId));
+            setRemoteAccessibilityEmbeddedConnection(
+                    connection, connection.associateEmbeddedHierarchy(leashToken, this.mHostId));
         } catch (RemoteException e) {
             Log.d(TAG, "Error in associateEmbeddedHierarchy " + e);
         }
@@ -67,7 +69,10 @@ class RemoteAccessibilityController {
         private final WeakReference<RemoteAccessibilityController> mController;
         private final IBinder mLeashToken;
 
-        RemoteAccessibilityEmbeddedConnection(RemoteAccessibilityController controller, IAccessibilityEmbeddedConnection connection, IBinder leashToken) {
+        RemoteAccessibilityEmbeddedConnection(
+                RemoteAccessibilityController controller,
+                IAccessibilityEmbeddedConnection connection,
+                IBinder leashToken) {
             this.mController = new WeakReference<>(controller);
             this.mConnection = connection;
             this.mLeashToken = leashToken;
@@ -96,12 +101,15 @@ class RemoteAccessibilityController {
             if (controller == null) {
                 return;
             }
-            controller.runOnUiThread(new Runnable() { // from class: android.view.RemoteAccessibilityController$RemoteAccessibilityEmbeddedConnection$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RemoteAccessibilityController.RemoteAccessibilityEmbeddedConnection.this.lambda$binderDied$0(controller);
-                }
-            });
+            controller.runOnUiThread(
+                    new Runnable() { // from class:
+                                     // android.view.RemoteAccessibilityController$RemoteAccessibilityEmbeddedConnection$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RemoteAccessibilityController.RemoteAccessibilityEmbeddedConnection.this
+                                    .lambda$binderDied$0(controller);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -112,7 +120,8 @@ class RemoteAccessibilityController {
         }
     }
 
-    private void setRemoteAccessibilityEmbeddedConnection(IAccessibilityEmbeddedConnection connection, IBinder leashToken) {
+    private void setRemoteAccessibilityEmbeddedConnection(
+            IAccessibilityEmbeddedConnection connection, IBinder leashToken) {
         try {
             if (this.mConnectionWrapper != null) {
                 this.mConnectionWrapper.getConnection().disassociateEmbeddedHierarchy();
@@ -120,7 +129,8 @@ class RemoteAccessibilityController {
                 this.mConnectionWrapper = null;
             }
             if (connection != null && leashToken != null) {
-                this.mConnectionWrapper = new RemoteAccessibilityEmbeddedConnection(this, connection, leashToken);
+                this.mConnectionWrapper =
+                        new RemoteAccessibilityEmbeddedConnection(this, connection, leashToken);
                 this.mConnectionWrapper.linkToDeath();
             }
         } catch (RemoteException e) {
@@ -137,7 +147,8 @@ class RemoteAccessibilityController {
             return;
         }
         try {
-            RemoteAccessibilityEmbeddedConnection wrapper = getRemoteAccessibilityEmbeddedConnection();
+            RemoteAccessibilityEmbeddedConnection wrapper =
+                    getRemoteAccessibilityEmbeddedConnection();
             if (wrapper == null) {
                 return;
             }

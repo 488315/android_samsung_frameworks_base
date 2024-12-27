@@ -14,10 +14,10 @@ import android.util.ArraySet;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
-import com.android.server.accessibility.AbstractAccessibilityServiceConnection;
-import com.android.server.accessibility.AccessibilityManagerService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -98,16 +98,22 @@ public final class AccessibilityUserState {
     public int mSoftKeyboardShowMode = 0;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface ServiceInfoChangeListener {
-    }
+    public interface ServiceInfoChangeListener {}
 
-    public AccessibilityUserState(int i, Context context, ServiceInfoChangeListener serviceInfoChangeListener) {
+    public AccessibilityUserState(
+            int i, Context context, ServiceInfoChangeListener serviceInfoChangeListener) {
         this.mUserId = i;
         this.mContext = context;
         this.mServiceInfoChangeListener = serviceInfoChangeListener;
-        int dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.accessibility_focus_highlight_stroke_width);
+        int dimensionPixelSize =
+                context.getResources()
+                        .getDimensionPixelSize(R.dimen.accessibility_focus_highlight_stroke_width);
         this.mFocusStrokeWidthDefaultValue = dimensionPixelSize;
-        int color = context.getResources().getColor(R.color.accessibility_magnification_thumbnail_container_background_color);
+        int color =
+                context.getResources()
+                        .getColor(
+                                R.color
+                                        .accessibility_magnification_thumbnail_container_background_color);
         this.mFocusColorDefaultValue = color;
         this.mFocusStrokeWidth = dimensionPixelSize;
         this.mFocusColor = color;
@@ -126,7 +132,8 @@ public final class AccessibilityUserState {
             Iterator it = collection.iterator();
             while (it.hasNext()) {
                 String str2 = (String) it.next();
-                if (!TextUtils.isEmpty(str2) && unflattenFromString.equals(ComponentName.unflattenFromString(str2))) {
+                if (!TextUtils.isEmpty(str2)
+                        && unflattenFromString.equals(ComponentName.unflattenFromString(str2))) {
                     return true;
                 }
             }
@@ -134,16 +141,139 @@ public final class AccessibilityUserState {
         return false;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         printWriter.append("User state[");
         printWriter.println();
-        printWriter.append("     attributes:{id=").append((CharSequence) String.valueOf(this.mUserId));
-        AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsAutoclickEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsMagnificationSingleFingerTripleTapEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mSendMotionEventsEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mRequestTwoFingerPassthrough, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mRequestMultiFingerGestures, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mServiceHandlesDoubleTap, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsTouchExplorationEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsAMEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsCornerActionEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsAutoActionEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsAMEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsCornerActionEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsAutoActionEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsSlowKeysEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsBounceKeysEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsStickyKeysEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsTouchBlockingEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsTapDurationEnabled, printWriter.append(", mIsTapDurationEnabled="), printWriter, ", mIsTouchBlockingEnabled="), printWriter, ", mIsStickyKeysEnabled="), printWriter, ", mIsBounceKeysEnabled="), printWriter, ", mIsSlowKeysEnabled="), printWriter, ", mIsAutoActionEnabled="), printWriter, ", mIsCornerActionEnabled="), printWriter, ", mIsAMEnabled="), printWriter, ", autoActionEnabled="), printWriter, ", cornerActionEnabled="), printWriter, ", AmEnabled="), printWriter, ", touchExplorationEnabled="), printWriter, ", serviceHandlesDoubleTap="), printWriter, ", requestMultiFingerGestures="), printWriter, ", requestTwoFingerPassthrough="), printWriter, ", sendMotionEventsEnabled"), printWriter, ", displayMagnificationEnabled="), printWriter, ", autoclickEnabled="), printWriter, ", nonInteractiveUiTimeout=").append((CharSequence) String.valueOf(this.mNonInteractiveUiTimeout));
-        printWriter.append(", interactiveUiTimeout=").append((CharSequence) String.valueOf(this.mInteractiveUiTimeout));
-        printWriter.append(", installedServiceCount=").append((CharSequence) String.valueOf(((ArrayList) this.mInstalledServices).size()));
-        printWriter.append(", magnificationModes=").append((CharSequence) String.valueOf(this.mMagnificationModes));
-        printWriter.append(", magnificationCapabilities=").append((CharSequence) String.valueOf(this.mMagnificationCapabilities));
-        AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mMagnificationFollowTypingEnabled, AccessibilityUserState$$ExternalSyntheticOutline0.m(this.mIsAudioDescriptionByDefaultRequested, printWriter.append(", audioDescriptionByDefaultEnabled="), printWriter, ", magnificationFollowTypingEnabled="), printWriter, ", alwaysOnMagnificationEnabled=").append((CharSequence) String.valueOf(this.mAlwaysOnMagnificationEnabled));
+        printWriter
+                .append("     attributes:{id=")
+                .append((CharSequence) String.valueOf(this.mUserId));
+        AccessibilityUserState$$ExternalSyntheticOutline0.m(
+                        this.mIsAutoclickEnabled,
+                        AccessibilityUserState$$ExternalSyntheticOutline0.m(
+                                this.mIsMagnificationSingleFingerTripleTapEnabled,
+                                AccessibilityUserState$$ExternalSyntheticOutline0.m(
+                                        this.mSendMotionEventsEnabled,
+                                        AccessibilityUserState$$ExternalSyntheticOutline0.m(
+                                                this.mRequestTwoFingerPassthrough,
+                                                AccessibilityUserState$$ExternalSyntheticOutline0.m(
+                                                        this.mRequestMultiFingerGestures,
+                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                .m(
+                                                                        this
+                                                                                .mServiceHandlesDoubleTap,
+                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                .m(
+                                                                                        this
+                                                                                                .mIsTouchExplorationEnabled,
+                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                .m(
+                                                                                                        this
+                                                                                                                .mIsAMEnabled,
+                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                .m(
+                                                                                                                        this
+                                                                                                                                .mIsCornerActionEnabled,
+                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                .m(
+                                                                                                                                        this
+                                                                                                                                                .mIsAutoActionEnabled,
+                                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                                .m(
+                                                                                                                                                        this
+                                                                                                                                                                .mIsAMEnabled,
+                                                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                                                .m(
+                                                                                                                                                                        this
+                                                                                                                                                                                .mIsCornerActionEnabled,
+                                                                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                                                                .m(
+                                                                                                                                                                                        this
+                                                                                                                                                                                                .mIsAutoActionEnabled,
+                                                                                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                                                                                .m(
+                                                                                                                                                                                                        this
+                                                                                                                                                                                                                .mIsSlowKeysEnabled,
+                                                                                                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                                                                                                .m(
+                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                .mIsBounceKeysEnabled,
+                                                                                                                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                                                                                                                .m(
+                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                .mIsStickyKeysEnabled,
+                                                                                                                                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                                                                                                                                .m(
+                                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                                .mIsTouchBlockingEnabled,
+                                                                                                                                                                                                                                                        AccessibilityUserState$$ExternalSyntheticOutline0
+                                                                                                                                                                                                                                                                .m(
+                                                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                                                .mIsTapDurationEnabled,
+                                                                                                                                                                                                                                                                        printWriter
+                                                                                                                                                                                                                                                                                .append(
+                                                                                                                                                                                                                                                                                        ", mIsTapDurationEnabled="),
+                                                                                                                                                                                                                                                                        printWriter,
+                                                                                                                                                                                                                                                                        ", mIsTouchBlockingEnabled="),
+                                                                                                                                                                                                                                                        printWriter,
+                                                                                                                                                                                                                                                        ", mIsStickyKeysEnabled="),
+                                                                                                                                                                                                                                        printWriter,
+                                                                                                                                                                                                                                        ", mIsBounceKeysEnabled="),
+                                                                                                                                                                                                                        printWriter,
+                                                                                                                                                                                                                        ", mIsSlowKeysEnabled="),
+                                                                                                                                                                                                        printWriter,
+                                                                                                                                                                                                        ", mIsAutoActionEnabled="),
+                                                                                                                                                                                        printWriter,
+                                                                                                                                                                                        ", mIsCornerActionEnabled="),
+                                                                                                                                                                        printWriter,
+                                                                                                                                                                        ", mIsAMEnabled="),
+                                                                                                                                                        printWriter,
+                                                                                                                                                        ", autoActionEnabled="),
+                                                                                                                                        printWriter,
+                                                                                                                                        ", cornerActionEnabled="),
+                                                                                                                        printWriter,
+                                                                                                                        ", AmEnabled="),
+                                                                                                        printWriter,
+                                                                                                        ", touchExplorationEnabled="),
+                                                                                        printWriter,
+                                                                                        ", serviceHandlesDoubleTap="),
+                                                                        printWriter,
+                                                                        ", requestMultiFingerGestures="),
+                                                        printWriter,
+                                                        ", requestTwoFingerPassthrough="),
+                                                printWriter,
+                                                ", sendMotionEventsEnabled"),
+                                        printWriter,
+                                        ", displayMagnificationEnabled="),
+                                printWriter,
+                                ", autoclickEnabled="),
+                        printWriter,
+                        ", nonInteractiveUiTimeout=")
+                .append((CharSequence) String.valueOf(this.mNonInteractiveUiTimeout));
+        printWriter
+                .append(", interactiveUiTimeout=")
+                .append((CharSequence) String.valueOf(this.mInteractiveUiTimeout));
+        printWriter
+                .append(", installedServiceCount=")
+                .append(
+                        (CharSequence)
+                                String.valueOf(((ArrayList) this.mInstalledServices).size()));
+        printWriter
+                .append(", magnificationModes=")
+                .append((CharSequence) String.valueOf(this.mMagnificationModes));
+        printWriter
+                .append(", magnificationCapabilities=")
+                .append((CharSequence) String.valueOf(this.mMagnificationCapabilities));
+        AccessibilityUserState$$ExternalSyntheticOutline0.m(
+                        this.mMagnificationFollowTypingEnabled,
+                        AccessibilityUserState$$ExternalSyntheticOutline0.m(
+                                this.mIsAudioDescriptionByDefaultRequested,
+                                printWriter.append(", audioDescriptionByDefaultEnabled="),
+                                printWriter,
+                                ", magnificationFollowTypingEnabled="),
+                        printWriter,
+                        ", alwaysOnMagnificationEnabled=")
+                .append((CharSequence) String.valueOf(this.mAlwaysOnMagnificationEnabled));
         printWriter.append("}");
         printWriter.println();
         printWriter.append("     shortcut key:{");
@@ -155,11 +285,17 @@ public final class AccessibilityUserState {
         printWriter.append("     direct access:{");
         printWriter.append((CharSequence) this.mAccessibilityDirectAccessTargets.toString());
         printWriter.println("}");
-        printWriter.append("     button target:{").append((CharSequence) this.mTargetAssignedToAccessibilityButton);
+        printWriter
+                .append("     button target:{")
+                .append((CharSequence) this.mTargetAssignedToAccessibilityButton);
         printWriter.println("}");
-        printWriter.append("     qs shortcut targets:").append((CharSequence) this.mAccessibilityQsTargets.toString());
+        printWriter
+                .append("     qs shortcut targets:")
+                .append((CharSequence) this.mAccessibilityQsTargets.toString());
         printWriter.println();
-        printWriter.append("     a11y tiles in QS panel:").append((CharSequence) this.mA11yTilesInQsPanel.toString());
+        printWriter
+                .append("     a11y tiles in QS panel:")
+                .append((CharSequence) this.mA11yTilesInQsPanel.toString());
         printWriter.println();
         printWriter.println();
         printWriter.append("     installed services: {");
@@ -167,8 +303,14 @@ public final class AccessibilityUserState {
         int size = ((ArrayList) this.mInstalledServices).size();
         for (int i = 0; i < size; i++) {
             StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "      ", " : ");
-            m.append(((AccessibilityServiceInfo) ((ArrayList) this.mInstalledServices).get(i)).getId());
-            m.append(((AccessibilityServiceInfo) ((ArrayList) this.mInstalledServices).get(i)).isAccessibilityTool() ? "  (A11yTool)" : "");
+            m.append(
+                    ((AccessibilityServiceInfo) ((ArrayList) this.mInstalledServices).get(i))
+                            .getId());
+            m.append(
+                    ((AccessibilityServiceInfo) ((ArrayList) this.mInstalledServices).get(i))
+                                    .isAccessibilityTool()
+                            ? "  (A11yTool)"
+                            : "");
             printWriter.append((CharSequence) m.toString());
             printWriter.println();
         }
@@ -182,7 +324,8 @@ public final class AccessibilityUserState {
                 printWriter.println();
                 printWriter.append("                     ");
             }
-            ((AccessibilityServiceConnection) this.mBoundServices.get(i2)).dump(fileDescriptor, printWriter, strArr);
+            ((AccessibilityServiceConnection) this.mBoundServices.get(i2))
+                    .dump(fileDescriptor, printWriter, strArr);
         }
         printWriter.println("}");
         printWriter.append("     Enabled services:{");
@@ -222,7 +365,13 @@ public final class AccessibilityUserState {
         this.mUserClients.dump(printWriter, "          Client list ");
         printWriter.println("          Registered clients:{");
         for (int i3 = 0; i3 < this.mUserClients.getRegisteredCallbackCount(); i3++) {
-            printWriter.append((CharSequence) Arrays.toString(((AccessibilityManagerService.Client) this.mUserClients.getRegisteredCallbackCookie(i3)).mPackageNames));
+            printWriter.append(
+                    (CharSequence)
+                            Arrays.toString(
+                                    ((AccessibilityManagerService.Client)
+                                                    this.mUserClients.getRegisteredCallbackCookie(
+                                                            i3))
+                                            .mPackageNames));
         }
         printWriter.println("}]");
     }
@@ -234,9 +383,11 @@ public final class AccessibilityUserState {
         return arrayMap;
     }
 
-    public final AccessibilityServiceInfo getInstalledServiceInfoLocked(ComponentName componentName) {
+    public final AccessibilityServiceInfo getInstalledServiceInfoLocked(
+            ComponentName componentName) {
         for (int i = 0; i < ((ArrayList) this.mInstalledServices).size(); i++) {
-            AccessibilityServiceInfo accessibilityServiceInfo = (AccessibilityServiceInfo) ((ArrayList) this.mInstalledServices).get(i);
+            AccessibilityServiceInfo accessibilityServiceInfo =
+                    (AccessibilityServiceInfo) ((ArrayList) this.mInstalledServices).get(i);
             if (accessibilityServiceInfo.getComponentName().equals(componentName)) {
                 return accessibilityServiceInfo;
             }
@@ -267,7 +418,8 @@ public final class AccessibilityUserState {
         if (i == 16) {
             return new LinkedHashSet(this.mAccessibilityQsTargets);
         }
-        if ((i != 4 || !this.mIsMagnificationSingleFingerTripleTapEnabled) && (i != 8 || !this.mMagnificationTwoFingerTripleTapEnabled)) {
+        if ((i != 4 || !this.mIsMagnificationSingleFingerTripleTapEnabled)
+                && (i != 8 || !this.mMagnificationTwoFingerTripleTapEnabled)) {
             return i == 512 ? this.mAccessibilityDirectAccessTargets : new LinkedHashSet();
         }
         LinkedHashSet linkedHashSet = new LinkedHashSet();
@@ -277,21 +429,36 @@ public final class AccessibilityUserState {
 
     public final Map getTileServiceToA11yServiceInfoMapLocked() {
         ArrayMap arrayMap = new ArrayMap();
-        Map map = (Map) this.mInstalledServices.stream().collect(Collectors.toMap(new AccessibilityUserState$$ExternalSyntheticLambda3(), Function.identity()));
+        Map map =
+                (Map)
+                        this.mInstalledServices.stream()
+                                .collect(
+                                        Collectors.toMap(
+                                                new AccessibilityUserState$$ExternalSyntheticLambda3(),
+                                                Function.identity()));
         for (Map.Entry entry : ((ArrayMap) this.mA11yServiceToTileService).entrySet()) {
             if (map.containsKey(entry.getKey())) {
-                arrayMap.put((ComponentName) entry.getValue(), (AccessibilityServiceInfo) map.get(entry.getKey()));
+                arrayMap.put(
+                        (ComponentName) entry.getValue(),
+                        (AccessibilityServiceInfo) map.get(entry.getKey()));
             }
         }
         return arrayMap;
     }
 
     public final boolean isHandlingAccessibilityEventsLocked() {
-        return (this.mBoundServices.isEmpty() && ((HashSet) this.mBindingServices).isEmpty()) ? false : true;
+        return (this.mBoundServices.isEmpty() && ((HashSet) this.mBindingServices).isEmpty())
+                ? false
+                : true;
     }
 
     public final boolean isShortcutMagnificationEnabledLocked() {
-        return this.mAccessibilityShortcutKeyTargets.contains("com.android.server.accessibility.MagnificationController") || this.mAccessibilityButtonTargets.contains("com.android.server.accessibility.MagnificationController") || this.mAccessibilityDirectAccessTargets.contains("com.android.server.accessibility.MagnificationController");
+        return this.mAccessibilityShortcutKeyTargets.contains(
+                        "com.android.server.accessibility.MagnificationController")
+                || this.mAccessibilityButtonTargets.contains(
+                        "com.android.server.accessibility.MagnificationController")
+                || this.mAccessibilityDirectAccessTargets.contains(
+                        "com.android.server.accessibility.MagnificationController");
     }
 
     public final boolean isShortcutTargetInstalledLocked(String str) {
@@ -305,11 +472,15 @@ public final class AccessibilityUserState {
         if (unflattenFromString == null) {
             return false;
         }
-        if (AccessibilityShortcutController.getFrameworkShortcutFeaturesMap().containsKey(unflattenFromString) || getInstalledServiceInfoLocked(unflattenFromString) != null) {
+        if (AccessibilityShortcutController.getFrameworkShortcutFeaturesMap()
+                        .containsKey(unflattenFromString)
+                || getInstalledServiceInfoLocked(unflattenFromString) != null) {
             return true;
         }
         for (int i = 0; i < ((ArrayList) this.mInstalledShortcuts).size(); i++) {
-            if (((AccessibilityShortcutInfo) ((ArrayList) this.mInstalledShortcuts).get(i)).getComponentName().equals(unflattenFromString)) {
+            if (((AccessibilityShortcutInfo) ((ArrayList) this.mInstalledShortcuts).get(i))
+                    .getComponentName()
+                    .equals(unflattenFromString)) {
                 return true;
             }
         }
@@ -373,10 +544,16 @@ public final class AccessibilityUserState {
         boolean z = getSecureIntForUser(i, "show_ime_with_hard_keyboard") != 0;
         if (this.mSoftKeyboardShowMode == 2 && !z) {
             setSoftKeyboardModeLocked(0, null);
-            putSecureIntForUser(getSecureIntForUser(i, "accessibility_soft_keyboard_mode") | 1073741824, i, "accessibility_soft_keyboard_mode");
+            putSecureIntForUser(
+                    getSecureIntForUser(i, "accessibility_soft_keyboard_mode") | 1073741824,
+                    i,
+                    "accessibility_soft_keyboard_mode");
         }
-        if ((getSecureIntForUser(i, "accessibility_soft_keyboard_mode") & 3) != this.mSoftKeyboardShowMode) {
-            Slog.e("AccessibilityUserState", "Show IME setting inconsistent with internal state. Overwriting");
+        if ((getSecureIntForUser(i, "accessibility_soft_keyboard_mode") & 3)
+                != this.mSoftKeyboardShowMode) {
+            Slog.e(
+                    "AccessibilityUserState",
+                    "Show IME setting inconsistent with internal state. Overwriting");
             setSoftKeyboardModeLocked(0, null);
             putSecureIntForUser(0, i, "accessibility_soft_keyboard_mode");
         }
@@ -385,7 +562,11 @@ public final class AccessibilityUserState {
     public final void removeDisabledServicesFromTemporaryStatesLocked() {
         int size = ((ArrayList) this.mInstalledServices).size();
         for (int i = 0; i < size; i++) {
-            ComponentName unflattenFromString = ComponentName.unflattenFromString(((AccessibilityServiceInfo) ((ArrayList) this.mInstalledServices).get(i)).getId());
+            ComponentName unflattenFromString =
+                    ComponentName.unflattenFromString(
+                            ((AccessibilityServiceInfo)
+                                            ((ArrayList) this.mInstalledServices).get(i))
+                                    .getId());
             if (!((HashSet) this.mEnabledServices).contains(unflattenFromString)) {
                 ((HashSet) this.mCrashedServices).remove(unflattenFromString);
                 ((HashSet) this.mBindingServices).remove(unflattenFromString);
@@ -393,38 +574,55 @@ public final class AccessibilityUserState {
         }
     }
 
-    public final void removeServiceLocked(AccessibilityServiceConnection accessibilityServiceConnection) {
+    public final void removeServiceLocked(
+            AccessibilityServiceConnection accessibilityServiceConnection) {
         this.mBoundServices.remove(accessibilityServiceConnection);
         accessibilityServiceConnection.onRemoved();
         ComponentName componentName = this.mServiceChangingSoftKeyboardMode;
-        if (componentName != null && componentName.equals(accessibilityServiceConnection.mAccessibilityServiceInfo.getComponentName())) {
+        if (componentName != null
+                && componentName.equals(
+                        accessibilityServiceConnection.mAccessibilityServiceInfo
+                                .getComponentName())) {
             setSoftKeyboardModeLocked(0, null);
         }
         ((HashMap) this.mComponentNameToServiceMap).clear();
         for (int i = 0; i < this.mBoundServices.size(); i++) {
-            AccessibilityServiceConnection accessibilityServiceConnection2 = (AccessibilityServiceConnection) this.mBoundServices.get(i);
-            ((HashMap) this.mComponentNameToServiceMap).put(accessibilityServiceConnection2.mComponentName, accessibilityServiceConnection2);
+            AccessibilityServiceConnection accessibilityServiceConnection2 =
+                    (AccessibilityServiceConnection) this.mBoundServices.get(i);
+            ((HashMap) this.mComponentNameToServiceMap)
+                    .put(
+                            accessibilityServiceConnection2.mComponentName,
+                            accessibilityServiceConnection2);
         }
-        ((AccessibilityManagerService) this.mServiceInfoChangeListener).onServiceInfoChangedLocked(this);
+        ((AccessibilityManagerService) this.mServiceInfoChangeListener)
+                .onServiceInfoChangedLocked(this);
     }
 
     public final boolean removeShortcutTargetLocked(int i, final ComponentName componentName) {
         if (i == 4 || i == 8) {
-            throw new UnsupportedOperationException("removeShortcutTargetLocked only support shortcut type: software and hardware and quick settings for now");
+            throw new UnsupportedOperationException(
+                    "removeShortcutTargetLocked only support shortcut type: software and hardware"
+                        + " and quick settings for now");
         }
         LinkedHashSet shortcutTargetsLocked = getShortcutTargetsLocked(i);
-        boolean removeIf = shortcutTargetsLocked.removeIf(new Predicate() { // from class: com.android.server.accessibility.AccessibilityUserState$$ExternalSyntheticLambda4
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                ComponentName unflattenFromString;
-                ComponentName componentName2 = componentName;
-                String str = (String) obj;
-                if (str == null || (unflattenFromString = ComponentName.unflattenFromString(str)) == null) {
-                    return false;
-                }
-                return unflattenFromString.equals(componentName2);
-            }
-        });
+        boolean removeIf =
+                shortcutTargetsLocked.removeIf(
+                        new Predicate() { // from class:
+                                          // com.android.server.accessibility.AccessibilityUserState$$ExternalSyntheticLambda4
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                ComponentName unflattenFromString;
+                                ComponentName componentName2 = componentName;
+                                String str = (String) obj;
+                                if (str == null
+                                        || (unflattenFromString =
+                                                        ComponentName.unflattenFromString(str))
+                                                == null) {
+                                    return false;
+                                }
+                                return unflattenFromString.equals(componentName2);
+                            }
+                        });
         if (i == 16) {
             updateA11yQsTargetLocked(shortcutTargetsLocked);
         }
@@ -446,19 +644,35 @@ public final class AccessibilityUserState {
                 return false;
             }
             if ((getSecureIntForUser(i3, "accessibility_soft_keyboard_mode") & 3) != 2) {
-                putSecureIntForUser((getSecureIntForUser(i3, "accessibility_soft_keyboard_mode") & (-536870913)) | (getSecureIntForUser(i3, "show_ime_with_hard_keyboard") != 0 ? 536870912 : 0), i3, "accessibility_soft_keyboard_mode");
+                putSecureIntForUser(
+                        (getSecureIntForUser(i3, "accessibility_soft_keyboard_mode") & (-536870913))
+                                | (getSecureIntForUser(i3, "show_ime_with_hard_keyboard") != 0
+                                        ? 536870912
+                                        : 0),
+                        i3,
+                        "accessibility_soft_keyboard_mode");
             }
             putSecureIntForUser(1, i3, "show_ime_with_hard_keyboard");
         } else if (i2 == 2) {
-            putSecureIntForUser((getSecureIntForUser(i3, "accessibility_soft_keyboard_mode") & 536870912) != 0 ? 1 : 0, i3, "show_ime_with_hard_keyboard");
+            putSecureIntForUser(
+                    (getSecureIntForUser(i3, "accessibility_soft_keyboard_mode") & 536870912) != 0
+                            ? 1
+                            : 0,
+                    i3,
+                    "show_ime_with_hard_keyboard");
         }
-        putSecureIntForUser((getSecureIntForUser(i3, "accessibility_soft_keyboard_mode") & (-4)) | i, i3, "accessibility_soft_keyboard_mode");
+        putSecureIntForUser(
+                (getSecureIntForUser(i3, "accessibility_soft_keyboard_mode") & (-4)) | i,
+                i3,
+                "accessibility_soft_keyboard_mode");
         this.mSoftKeyboardShowMode = i;
         this.mServiceChangingSoftKeyboardMode = componentName;
         for (int size = this.mBoundServices.size() - 1; size >= 0; size--) {
-            AccessibilityServiceConnection accessibilityServiceConnection = (AccessibilityServiceConnection) this.mBoundServices.get(size);
+            AccessibilityServiceConnection accessibilityServiceConnection =
+                    (AccessibilityServiceConnection) this.mBoundServices.get(size);
             int i4 = this.mSoftKeyboardShowMode;
-            AbstractAccessibilityServiceConnection.InvocationHandler invocationHandler = accessibilityServiceConnection.mInvocationHandler;
+            AbstractAccessibilityServiceConnection.InvocationHandler invocationHandler =
+                    accessibilityServiceConnection.mInvocationHandler;
             if (invocationHandler.mIsSoftKeyboardCallbackEnabled) {
                 invocationHandler.obtainMessage(6, i4, 0).sendToTarget();
             }

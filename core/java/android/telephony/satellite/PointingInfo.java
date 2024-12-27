@@ -3,24 +3,27 @@ package android.telephony.satellite;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class PointingInfo implements Parcelable {
-    public static final Parcelable.Creator<PointingInfo> CREATOR = new Parcelable.Creator<PointingInfo>() { // from class: android.telephony.satellite.PointingInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PointingInfo createFromParcel(Parcel in) {
-            return new PointingInfo(in);
-        }
+    public static final Parcelable.Creator<PointingInfo> CREATOR =
+            new Parcelable.Creator<
+                    PointingInfo>() { // from class: android.telephony.satellite.PointingInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PointingInfo createFromParcel(Parcel in) {
+                    return new PointingInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PointingInfo[] newArray(int size) {
-            return new PointingInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PointingInfo[] newArray(int size) {
+                    return new PointingInfo[size];
+                }
+            };
     private float mSatelliteAzimuthDegrees;
     private float mSatelliteElevationDegrees;
 
@@ -52,18 +55,24 @@ public final class PointingInfo implements Parcelable {
             return false;
         }
         PointingInfo that = (PointingInfo) o;
-        if (this.mSatelliteAzimuthDegrees == that.mSatelliteAzimuthDegrees && this.mSatelliteElevationDegrees == that.mSatelliteElevationDegrees) {
+        if (this.mSatelliteAzimuthDegrees == that.mSatelliteAzimuthDegrees
+                && this.mSatelliteElevationDegrees == that.mSatelliteElevationDegrees) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Float.valueOf(this.mSatelliteAzimuthDegrees), Float.valueOf(this.mSatelliteElevationDegrees));
+        return Objects.hash(
+                Float.valueOf(this.mSatelliteAzimuthDegrees),
+                Float.valueOf(this.mSatelliteElevationDegrees));
     }
 
     public String toString() {
-        return "SatelliteAzimuthDegrees:" + this.mSatelliteAzimuthDegrees + ",SatelliteElevationDegrees:" + this.mSatelliteElevationDegrees;
+        return "SatelliteAzimuthDegrees:"
+                + this.mSatelliteAzimuthDegrees
+                + ",SatelliteElevationDegrees:"
+                + this.mSatelliteElevationDegrees;
     }
 
     public float getSatelliteAzimuthDegrees() {

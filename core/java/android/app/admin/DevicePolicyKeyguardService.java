@@ -2,8 +2,6 @@ package android.app.admin;
 
 import android.annotation.SystemApi;
 import android.app.Service;
-import android.app.admin.DevicePolicyKeyguardService;
-import android.app.admin.IKeyguardClient;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
@@ -22,27 +20,34 @@ public class DevicePolicyKeyguardService extends Service {
 
     /* renamed from: android.app.admin.DevicePolicyKeyguardService$1, reason: invalid class name */
     class AnonymousClass1 extends IKeyguardClient.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.app.admin.IKeyguardClient
-        public void onCreateKeyguardSurface(final IBinder hostInputToken, IKeyguardCallback callback) {
+        public void onCreateKeyguardSurface(
+                final IBinder hostInputToken, IKeyguardCallback callback) {
             DevicePolicyKeyguardService.this.mCallback = callback;
-            DevicePolicyKeyguardService.this.mHandler.post(new Runnable() { // from class: android.app.admin.DevicePolicyKeyguardService$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DevicePolicyKeyguardService.AnonymousClass1.this.lambda$onCreateKeyguardSurface$0(hostInputToken);
-                }
-            });
+            DevicePolicyKeyguardService.this.mHandler.post(
+                    new Runnable() { // from class:
+                        // android.app.admin.DevicePolicyKeyguardService$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DevicePolicyKeyguardService.AnonymousClass1.this
+                                    .lambda$onCreateKeyguardSurface$0(hostInputToken);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCreateKeyguardSurface$0(IBinder hostInputToken) {
-            SurfaceControlViewHost.SurfacePackage surfacePackage = DevicePolicyKeyguardService.this.onCreateKeyguardSurface(hostInputToken);
+            SurfaceControlViewHost.SurfacePackage surfacePackage =
+                    DevicePolicyKeyguardService.this.onCreateKeyguardSurface(hostInputToken);
             try {
                 DevicePolicyKeyguardService.this.mCallback.onRemoteContentReady(surfacePackage);
             } catch (RemoteException e) {
-                Log.e(DevicePolicyKeyguardService.TAG, "Failed to return created SurfacePackage", e);
+                Log.e(
+                        DevicePolicyKeyguardService.TAG,
+                        "Failed to return created SurfacePackage",
+                        e);
             }
         }
     }

@@ -4,6 +4,7 @@ import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.WindowManagerGlobal;
+
 import java.util.Collections;
 import java.util.Set;
 
@@ -19,7 +20,9 @@ public final class DisplayHashManager {
                 return sSupportedHashAlgorithms;
             }
             try {
-                String[] supportedAlgorithms = WindowManagerGlobal.getWindowManagerService().getSupportedDisplayHashAlgorithms();
+                String[] supportedAlgorithms =
+                        WindowManagerGlobal.getWindowManagerService()
+                                .getSupportedDisplayHashAlgorithms();
                 if (supportedAlgorithms == null) {
                     return Collections.emptySet();
                 }

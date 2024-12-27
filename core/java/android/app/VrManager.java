@@ -1,13 +1,13 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.VrManager;
 import android.content.ComponentName;
 import android.os.RemoteException;
 import android.service.vr.IPersistentVrStateCallbacks;
 import android.service.vr.IVrManager;
 import android.service.vr.IVrStateCallbacks;
 import android.util.ArrayMap;
+
 import java.util.Map;
 import java.util.concurrent.Executor;
 
@@ -26,8 +26,7 @@ public class VrManager {
 
         /* renamed from: android.app.VrManager$CallbackEntry$1, reason: invalid class name */
         class AnonymousClass1 extends IVrStateCallbacks.Stub {
-            AnonymousClass1() {
-            }
+            AnonymousClass1() {}
 
             /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onVrStateChanged$0(boolean enabled) {
@@ -36,19 +35,21 @@ public class VrManager {
 
             @Override // android.service.vr.IVrStateCallbacks
             public void onVrStateChanged(final boolean enabled) {
-                CallbackEntry.this.mExecutor.execute(new Runnable() { // from class: android.app.VrManager$CallbackEntry$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VrManager.CallbackEntry.AnonymousClass1.this.lambda$onVrStateChanged$0(enabled);
-                    }
-                });
+                CallbackEntry.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.app.VrManager$CallbackEntry$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VrManager.CallbackEntry.AnonymousClass1.this
+                                        .lambda$onVrStateChanged$0(enabled);
+                            }
+                        });
             }
         }
 
         /* renamed from: android.app.VrManager$CallbackEntry$2, reason: invalid class name */
         class AnonymousClass2 extends IPersistentVrStateCallbacks.Stub {
-            AnonymousClass2() {
-            }
+            AnonymousClass2() {}
 
             /* JADX INFO: Access modifiers changed from: private */
             public /* synthetic */ void lambda$onPersistentVrStateChanged$0(boolean enabled) {
@@ -57,12 +58,15 @@ public class VrManager {
 
             @Override // android.service.vr.IPersistentVrStateCallbacks
             public void onPersistentVrStateChanged(final boolean enabled) {
-                CallbackEntry.this.mExecutor.execute(new Runnable() { // from class: android.app.VrManager$CallbackEntry$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VrManager.CallbackEntry.AnonymousClass2.this.lambda$onPersistentVrStateChanged$0(enabled);
-                    }
-                });
+                CallbackEntry.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.app.VrManager$CallbackEntry$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VrManager.CallbackEntry.AnonymousClass2.this
+                                        .lambda$onPersistentVrStateChanged$0(enabled);
+                            }
+                        });
             }
         }
 
@@ -144,7 +148,8 @@ public class VrManager {
 
     public void setAndBindVrCompositor(ComponentName componentName) {
         try {
-            this.mService.setAndBindCompositor(componentName == null ? null : componentName.flattenToString());
+            this.mService.setAndBindCompositor(
+                    componentName == null ? null : componentName.flattenToString());
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -158,8 +163,7 @@ public class VrManager {
         }
     }
 
-    public void setVrInputMethod(ComponentName componentName) {
-    }
+    public void setVrInputMethod(ComponentName componentName) {}
 
     public int getVr2dDisplayId() {
         try {

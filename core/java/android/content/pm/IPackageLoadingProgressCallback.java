@@ -14,8 +14,7 @@ public interface IPackageLoadingProgressCallback extends IInterface {
 
     public static class Default implements IPackageLoadingProgressCallback {
         @Override // android.content.pm.IPackageLoadingProgressCallback
-        public void onPackageLoadingProgressChanged(float progress) throws RemoteException {
-        }
+        public void onPackageLoadingProgressChanged(float progress) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IPackageLoadingProgressCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageLoadingProgressCallback {
+    public abstract static class Stub extends Binder implements IPackageLoadingProgressCallback {
         static final int TRANSACTION_onPackageLoadingProgressChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IPackageLoadingProgressCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPackageLoadingProgressCallback.DESCRIPTOR);
             }

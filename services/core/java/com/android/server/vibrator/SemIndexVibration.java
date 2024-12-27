@@ -3,11 +3,14 @@ package com.android.server.vibrator;
 import android.os.CombinedVibration;
 import android.os.IBinder;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.vibrator.CommonPatternInfo;
 import com.samsung.android.server.vibrator.VibratorHelper;
 import com.samsung.android.vibrator.SemHapticFeedbackConstants;
 import com.samsung.android.vibrator.VibRune;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -38,7 +41,8 @@ public final class SemIndexVibration extends SemVibration {
                 ArrayList arrayList = new ArrayList();
                 int[] iArr = vibratorHelper.getPatternInfo(sepIndex).hybrid;
                 if (iArr.length == 0) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(sepIndex, "index : ", " has not hybrid data", "VibratorManagerService");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            sepIndex, "index : ", " has not hybrid data", "VibratorManagerService");
                 }
                 int length = iArr.length;
                 int i2 = 0;
@@ -52,9 +56,23 @@ public final class SemIndexVibration extends SemVibration {
                         Slog.d("VibratorManagerService", "get ram index data");
                         int sepIndex2 = VibratorHelper.getSepIndex(i5);
                         int sepIndex3 = VibratorHelper.getSepIndex(i5);
-                        arrayList.add(new CommonPatternInfo[]{new CommonPatternInfo(81, sepIndex2, vibratorHelper.getPatternInfo(sepIndex3) == null ? 100 : vibratorHelper.getPatternInfo(sepIndex3).scale, vibratorHelper.getIndexDuration(i5), vibratorHelper.getPatternFrequencyByIndex(i5))}[i2]);
+                        arrayList.add(
+                                new CommonPatternInfo[] {
+                                            new CommonPatternInfo(
+                                                    81,
+                                                    sepIndex2,
+                                                    vibratorHelper.getPatternInfo(sepIndex3) == null
+                                                            ? 100
+                                                            : vibratorHelper.getPatternInfo(
+                                                                            sepIndex3)
+                                                                    .scale,
+                                                    vibratorHelper.getIndexDuration(i5),
+                                                    vibratorHelper.getPatternFrequencyByIndex(i5))
+                                        }
+                                        [i2]);
                     } else if (SemHapticFeedbackConstants.isResourceIndexValid(i5)) {
-                        CommonPatternInfo[] resourceIndexData = vibratorHelper.getResourceIndexData(i5);
+                        CommonPatternInfo[] resourceIndexData =
+                                vibratorHelper.getResourceIndexData(i5);
                         int length2 = resourceIndexData.length;
                         for (int i6 = i2; i6 < length2; i6++) {
                             arrayList.add(resourceIndexData[i6]);
@@ -68,11 +86,25 @@ public final class SemIndexVibration extends SemVibration {
                     commonPatternInfoArr3[i7] = (CommonPatternInfo) arrayList.get(i7);
                 }
                 commonPatternInfoArr = commonPatternInfoArr3;
-                return new HalVibration(iBinder, combinedVibration, indexDuration, this.mMagnitude, null, commonPatternInfoArr, getCallerInfo());
+                return new HalVibration(
+                        iBinder,
+                        combinedVibration,
+                        indexDuration,
+                        this.mMagnitude,
+                        null,
+                        commonPatternInfoArr,
+                        getCallerInfo());
             }
         }
         commonPatternInfoArr = commonPatternInfoArr2;
-        return new HalVibration(iBinder, combinedVibration, indexDuration, this.mMagnitude, null, commonPatternInfoArr, getCallerInfo());
+        return new HalVibration(
+                iBinder,
+                combinedVibration,
+                indexDuration,
+                this.mMagnitude,
+                null,
+                commonPatternInfoArr,
+                getCallerInfo());
     }
 
     public final String toString() {

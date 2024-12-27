@@ -3,26 +3,29 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SlicingConfig implements Parcelable {
-    public static final Parcelable.Creator<SlicingConfig> CREATOR = new Parcelable.Creator<SlicingConfig>() { // from class: android.hardware.radio.data.SlicingConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SlicingConfig createFromParcel(Parcel _aidl_source) {
-            SlicingConfig _aidl_out = new SlicingConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SlicingConfig> CREATOR =
+            new Parcelable.Creator<
+                    SlicingConfig>() { // from class: android.hardware.radio.data.SlicingConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SlicingConfig createFromParcel(Parcel _aidl_source) {
+                    SlicingConfig _aidl_out = new SlicingConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SlicingConfig[] newArray(int _aidl_size) {
-            return new SlicingConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SlicingConfig[] newArray(int _aidl_size) {
+                    return new SlicingConfig[_aidl_size];
+                }
+            };
     public SliceInfo[] sliceInfo;
     public UrspRule[] urspRules;
 

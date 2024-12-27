@@ -16,7 +16,8 @@ public final class WebViewUpdateManager {
     }
 
     public static WebViewUpdateManager getInstance() {
-        return (WebViewUpdateManager) SystemServiceRegistry.getSystemServiceWithNoContext(Context.WEBVIEW_UPDATE_SERVICE);
+        return (WebViewUpdateManager)
+                SystemServiceRegistry.getSystemServiceWithNoContext(Context.WEBVIEW_UPDATE_SERVICE);
     }
 
     public WebViewProviderResponse waitForAndGetProvider() {

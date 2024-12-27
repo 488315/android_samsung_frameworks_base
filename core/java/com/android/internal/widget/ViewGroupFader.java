@@ -27,8 +27,10 @@ class ViewGroupFader {
     private float mChainedUpperRegion = CHAINED_UPPER_REGION_FRACTION;
     private final Rect mContainerBounds = new Rect();
     private final Rect mOffsetViewBounds = new Rect();
-    private BaseInterpolator mTopInterpolator = new PathInterpolator(0.3f, 0.0f, SCALE_LOWER_BOUND, 1.0f);
-    private BaseInterpolator mBottomInterpolator = new PathInterpolator(0.3f, 0.0f, SCALE_LOWER_BOUND, 1.0f);
+    private BaseInterpolator mTopInterpolator =
+            new PathInterpolator(0.3f, 0.0f, SCALE_LOWER_BOUND, 1.0f);
+    private BaseInterpolator mBottomInterpolator =
+            new PathInterpolator(0.3f, 0.0f, SCALE_LOWER_BOUND, 1.0f);
     private ContainerBoundsProvider mContainerBoundsProvider = new ScreenContainerBoundsProvider();
 
     interface AnimationCallback {
@@ -48,18 +50,20 @@ class ViewGroupFader {
     }
 
     static final class ScreenContainerBoundsProvider implements ContainerBoundsProvider {
-        ScreenContainerBoundsProvider() {
-        }
+        ScreenContainerBoundsProvider() {}
 
         @Override // com.android.internal.widget.ViewGroupFader.ContainerBoundsProvider
         public void provideBounds(ViewGroup parent, Rect bounds) {
-            bounds.set(0, 0, parent.getResources().getDisplayMetrics().widthPixels, parent.getResources().getDisplayMetrics().heightPixels);
+            bounds.set(
+                    0,
+                    0,
+                    parent.getResources().getDisplayMetrics().widthPixels,
+                    parent.getResources().getDisplayMetrics().heightPixels);
         }
     }
 
     static final class ParentContainerBoundsProvider implements ContainerBoundsProvider {
-        ParentContainerBoundsProvider() {
-        }
+        ParentContainerBoundsProvider() {}
 
         @Override // com.android.internal.widget.ViewGroupFader.ContainerBoundsProvider
         public void provideBounds(ViewGroup parent, Rect bounds) {
@@ -68,8 +72,7 @@ class ViewGroupFader {
     }
 
     static final class DefaultViewBoundsProvider implements ChildViewBoundsProvider {
-        DefaultViewBoundsProvider() {
-        }
+        DefaultViewBoundsProvider() {}
 
         @Override // com.android.internal.widget.ViewGroupFader.ChildViewBoundsProvider
         public void provideBounds(ViewGroup parent, View child, Rect bounds) {
@@ -83,8 +86,7 @@ class ViewGroupFader {
     }
 
     static final class GlobalVisibleViewBoundsProvider implements ChildViewBoundsProvider {
-        GlobalVisibleViewBoundsProvider() {
-        }
+        GlobalVisibleViewBoundsProvider() {}
 
         @Override // com.android.internal.widget.ViewGroupFader.ChildViewBoundsProvider
         public void provideBounds(ViewGroup parent, View child, Rect bounds) {
@@ -92,7 +94,10 @@ class ViewGroupFader {
         }
     }
 
-    ViewGroupFader(ViewGroup parent, AnimationCallback callback, ChildViewBoundsProvider childViewBoundsProvider) {
+    ViewGroupFader(
+            ViewGroup parent,
+            AnimationCallback callback,
+            ChildViewBoundsProvider childViewBoundsProvider) {
         this.mParent = parent;
         this.mCallback = callback;
         this.mChildViewBoundsProvider = childViewBoundsProvider;
@@ -140,13 +145,20 @@ class ViewGroupFader {
 
     private void fadeElement(ViewGroup parent, View child) {
         this.mChildViewBoundsProvider.provideBounds(parent, child, this.mOffsetViewBounds);
-        setViewPropertiesByPosition(child, this.mOffsetViewBounds, this.mTopBoundPixels, this.mBottomBoundPixels);
+        setViewPropertiesByPosition(
+                child, this.mOffsetViewBounds, this.mTopBoundPixels, this.mBottomBoundPixels);
     }
 
-    private void setViewPropertiesByPosition(View view, Rect bounds, float topBoundPixels, float bottomBoundPixels) {
+    private void setViewPropertiesByPosition(
+            View view, Rect bounds, float topBoundPixels, float bottomBoundPixels) {
         float fadeOutRegionFraction;
         if (view.getHeight() < topBoundPixels && view.getHeight() > bottomBoundPixels) {
-            fadeOutRegionFraction = lerp(this.mChainedLowerRegion, this.mChainedUpperRegion, (view.getHeight() - bottomBoundPixels) / (topBoundPixels - bottomBoundPixels));
+            fadeOutRegionFraction =
+                    lerp(
+                            this.mChainedLowerRegion,
+                            this.mChainedUpperRegion,
+                            (view.getHeight() - bottomBoundPixels)
+                                    / (topBoundPixels - bottomBoundPixels));
         } else if (view.getHeight() < bottomBoundPixels) {
             fadeOutRegionFraction = this.mChainedLowerRegion;
         } else {
@@ -160,10 +172,16 @@ class ViewGroupFader {
         view.setPivotX(view.getWidth() * 0.5f);
         if (bounds.top > bottomFadeBoundary && this.mCallback.shouldFadeFromBottom(view)) {
             view.setPivotY(-lp.topMargin);
-            scaleAndFadeByRelativeOffsetFraction(view, this.mBottomInterpolator.getInterpolation((this.mContainerBounds.bottom - bounds.top) / fadeOutRegionHeight));
+            scaleAndFadeByRelativeOffsetFraction(
+                    view,
+                    this.mBottomInterpolator.getInterpolation(
+                            (this.mContainerBounds.bottom - bounds.top) / fadeOutRegionHeight));
         } else if (bounds.bottom < topFadeBoundary && this.mCallback.shouldFadeFromTop(view)) {
             view.setPivotY(view.getMeasuredHeight() + lp.bottomMargin);
-            scaleAndFadeByRelativeOffsetFraction(view, this.mTopInterpolator.getInterpolation((bounds.bottom - this.mContainerBounds.top) / fadeOutRegionHeight));
+            scaleAndFadeByRelativeOffsetFraction(
+                    view,
+                    this.mTopInterpolator.getInterpolation(
+                            (bounds.bottom - this.mContainerBounds.top) / fadeOutRegionHeight));
         } else {
             if (!wasFullSize) {
                 this.mCallback.viewHasBecomeFullSize(view);

@@ -6,14 +6,12 @@ import android.net.vcn.VcnUnderlyingNetworkTemplate;
 import android.os.Handler;
 import android.os.ParcelUuid;
 import android.util.Slog;
+
 import com.android.server.VcnManagementService;
 import com.android.server.vcn.TelephonySubscriptionTracker;
 import com.android.server.vcn.VcnContext;
-import com.android.server.vcn.routeselection.IpSecPacketLossDetector;
-import com.android.server.vcn.routeselection.NetworkMetricMonitor;
-import com.android.server.vcn.routeselection.UnderlyingNetworkController;
-import com.android.server.vcn.routeselection.UnderlyingNetworkRecord;
 import com.android.server.vcn.util.PersistableBundleUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,37 +34,46 @@ public final class UnderlyingNetworkEvaluator {
     public final VcnContext mVcnContext;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public class Dependencies {
-    }
+    public class Dependencies {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExitPenaltyBoxRunnable implements Runnable {
-        public ExitPenaltyBoxRunnable() {
-        }
+        public ExitPenaltyBoxRunnable() {}
 
         @Override // java.lang.Runnable
         public final void run() {
             UnderlyingNetworkEvaluator underlyingNetworkEvaluator = UnderlyingNetworkEvaluator.this;
             if (!underlyingNetworkEvaluator.mIsPenalized) {
-                underlyingNetworkEvaluator.logWtf("Evaluator not being penalized but ExitPenaltyBoxRunnable was scheduled");
+                underlyingNetworkEvaluator.logWtf(
+                        "Evaluator not being penalized but ExitPenaltyBoxRunnable was scheduled");
             } else {
                 underlyingNetworkEvaluator.mIsPenalized = false;
-                ((UnderlyingNetworkController.NetworkEvaluatorCallbackImpl) underlyingNetworkEvaluator.mEvaluatorCallback).onEvaluationResultChanged();
+                ((UnderlyingNetworkController.NetworkEvaluatorCallbackImpl)
+                                underlyingNetworkEvaluator.mEvaluatorCallback)
+                        .onEvaluationResultChanged();
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class MetricMonitorCallbackImpl implements NetworkMetricMonitor.NetworkMetricMonitorCallback {
-        public MetricMonitorCallbackImpl() {
-        }
+    public final class MetricMonitorCallbackImpl
+            implements NetworkMetricMonitor.NetworkMetricMonitorCallback {
+        public MetricMonitorCallbackImpl() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface NetworkEvaluatorCallback {
-    }
+    public interface NetworkEvaluatorCallback {}
 
-    public UnderlyingNetworkEvaluator(VcnContext vcnContext, Network network, List list, ParcelUuid parcelUuid, TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot, PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper, NetworkEvaluatorCallback networkEvaluatorCallback, Dependencies dependencies) {
+    public UnderlyingNetworkEvaluator(
+            VcnContext vcnContext,
+            Network network,
+            List list,
+            ParcelUuid parcelUuid,
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot,
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper,
+            NetworkEvaluatorCallback networkEvaluatorCallback,
+            Dependencies dependencies) {
         int[] intArray;
         ArrayList arrayList = new ArrayList();
         this.mMetricMonitors = arrayList;
@@ -85,14 +92,26 @@ public final class UnderlyingNetworkEvaluator {
         this.mIsSelected = false;
         this.mIsPenalized = false;
         int[] iArr = PENALTY_TIMEOUT_MINUTES_DEFAULT;
-        if (persistableBundleWrapper != null && (intArray = persistableBundleWrapper.mBundle.getIntArray("vcn_network_selection_penalty_timeout_minutes_list")) != null) {
+        if (persistableBundleWrapper != null
+                && (intArray =
+                                persistableBundleWrapper.mBundle.getIntArray(
+                                        "vcn_network_selection_penalty_timeout_minutes_list"))
+                        != null) {
             iArr = intArray;
         }
         this.mPenalizedTimeoutMs = TimeUnit.MINUTES.toMillis(iArr[0]);
-        updatePriorityClass(list, parcelUuid, telephonySubscriptionSnapshot, persistableBundleWrapper);
-        if (VcnContext.isFlagIpSecTransformStateEnabled() && vcnContext.isFlagNetworkMetricMonitorEnabled()) {
+        updatePriorityClass(
+                list, parcelUuid, telephonySubscriptionSnapshot, persistableBundleWrapper);
+        if (VcnContext.isFlagIpSecTransformStateEnabled()
+                && vcnContext.isFlagNetworkMetricMonitorEnabled()) {
             try {
-                arrayList.add(new IpSecPacketLossDetector(vcnContext, network, persistableBundleWrapper, new MetricMonitorCallbackImpl(), new IpSecPacketLossDetector.Dependencies()));
+                arrayList.add(
+                        new IpSecPacketLossDetector(
+                                vcnContext,
+                                network,
+                                persistableBundleWrapper,
+                                new MetricMonitorCallbackImpl(),
+                                new IpSecPacketLossDetector.Dependencies()));
             } catch (IllegalAccessException unused) {
             }
         }
@@ -112,10 +131,16 @@ public final class UnderlyingNetworkEvaluator {
 
     public final void logWtf(String str) {
         Slog.wtf("UnderlyingNetworkEvaluator", getLogPrefix() + str);
-        VcnManagementService.LOCAL_LOG.log("[WTF ] UnderlyingNetworkEvaluator" + getLogPrefix() + str);
+        VcnManagementService.LOCAL_LOG.log(
+                "[WTF ] UnderlyingNetworkEvaluator" + getLogPrefix() + str);
     }
 
-    public final void updatePriorityClass(List list, ParcelUuid parcelUuid, TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot, PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper) {
+    public final void updatePriorityClass(
+            List list,
+            ParcelUuid parcelUuid,
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot,
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper) {
         UnderlyingNetworkRecord.Builder builder = this.mNetworkRecordBuilder;
         int i = -1;
         if (!builder.isValid()) {
@@ -136,11 +161,19 @@ public final class UnderlyingNetworkEvaluator {
                 VcnContext vcnContext = this.mVcnContext;
                 if (!hasNext) {
                     NetworkCapabilities networkCapabilities = build.networkCapabilities;
-                    if (networkCapabilities.hasCapability(12) || (vcnContext.mIsInTestMode && networkCapabilities.hasTransport(7))) {
+                    if (networkCapabilities.hasCapability(12)
+                            || (vcnContext.mIsInTestMode && networkCapabilities.hasTransport(7))) {
                         i = Integer.MAX_VALUE;
                     }
                 } else {
-                    if (NetworkPriorityClassifier.checkMatchesPriorityRule(vcnContext, (VcnUnderlyingNetworkTemplate) it.next(), build, parcelUuid, telephonySubscriptionSnapshot, z, persistableBundleWrapper)) {
+                    if (NetworkPriorityClassifier.checkMatchesPriorityRule(
+                            vcnContext,
+                            (VcnUnderlyingNetworkTemplate) it.next(),
+                            build,
+                            parcelUuid,
+                            telephonySubscriptionSnapshot,
+                            z,
+                            persistableBundleWrapper)) {
                         i = i2;
                         break;
                     }

@@ -14,10 +14,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.MotionEvent;
 import android.window.WindowContainerToken;
-import com.samsung.android.multiwindow.IDexSnappingCallback;
-import com.samsung.android.multiwindow.IDexTransientCaptionDelayListener;
-import com.samsung.android.multiwindow.IFreeformCallback;
-import com.samsung.android.multiwindow.IRemoteAppTransitionListener;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -106,13 +103,17 @@ public interface IMultiTaskingBinder extends IInterface {
 
     boolean preventNaturalSwitching(int i) throws RemoteException;
 
-    void registerDexSnappingCallback(IDexSnappingCallback iDexSnappingCallback) throws RemoteException;
+    void registerDexSnappingCallback(IDexSnappingCallback iDexSnappingCallback)
+            throws RemoteException;
 
-    void registerDexTransientDelayListener(IDexTransientCaptionDelayListener iDexTransientCaptionDelayListener) throws RemoteException;
+    void registerDexTransientDelayListener(
+            IDexTransientCaptionDelayListener iDexTransientCaptionDelayListener)
+            throws RemoteException;
 
     void registerFreeformCallback(IFreeformCallback iFreeformCallback) throws RemoteException;
 
-    void registerRemoteAppTransitionListener(IRemoteAppTransitionListener iRemoteAppTransitionListener) throws RemoteException;
+    void registerRemoteAppTransitionListener(
+            IRemoteAppTransitionListener iRemoteAppTransitionListener) throws RemoteException;
 
     boolean removeFocusedTask(int i) throws RemoteException;
 
@@ -142,7 +143,8 @@ public interface IMultiTaskingBinder extends IInterface {
 
     void setMaxVisibleFreeformCountForDex(int i, int i2) throws RemoteException;
 
-    void setMultiWindowEnabledForUser(String str, String str2, boolean z, int i) throws RemoteException;
+    void setMultiWindowEnabledForUser(String str, String str2, boolean z, int i)
+            throws RemoteException;
 
     void setNaviStarSplitImmersiveMode(boolean z) throws RemoteException;
 
@@ -168,19 +170,23 @@ public interface IMultiTaskingBinder extends IInterface {
 
     boolean toggleFreeformWindowingMode() throws RemoteException;
 
-    void toggleFreeformWindowingModeForDex(WindowContainerToken windowContainerToken) throws RemoteException;
+    void toggleFreeformWindowingModeForDex(WindowContainerToken windowContainerToken)
+            throws RemoteException;
 
-    void unregisterDexSnappingCallback(IDexSnappingCallback iDexSnappingCallback) throws RemoteException;
+    void unregisterDexSnappingCallback(IDexSnappingCallback iDexSnappingCallback)
+            throws RemoteException;
 
     void unregisterFreeformCallback(IFreeformCallback iFreeformCallback) throws RemoteException;
 
-    void unregisterRemoteAppTransitionListener(IRemoteAppTransitionListener iRemoteAppTransitionListener) throws RemoteException;
+    void unregisterRemoteAppTransitionListener(
+            IRemoteAppTransitionListener iRemoteAppTransitionListener) throws RemoteException;
 
     void updateMultiSplitAppMinimumSize() throws RemoteException;
 
     public static class Default implements IMultiTaskingBinder {
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public boolean exitMultiWindow(IBinder token, boolean checkPermission) throws RemoteException {
+        public boolean exitMultiWindow(IBinder token, boolean checkPermission)
+                throws RemoteException {
             return false;
         }
 
@@ -225,37 +231,36 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setMultiWindowEnabledForUser(String requester, String reason, boolean enable, int userId) throws RemoteException {
-        }
+        public void setMultiWindowEnabledForUser(
+                String requester, String reason, boolean enable, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void registerRemoteAppTransitionListener(IRemoteAppTransitionListener listener) throws RemoteException {
-        }
+        public void registerRemoteAppTransitionListener(IRemoteAppTransitionListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void unregisterRemoteAppTransitionListener(IRemoteAppTransitionListener listener) throws RemoteException {
-        }
+        public void unregisterRemoteAppTransitionListener(IRemoteAppTransitionListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public boolean isAllTasksResizable(int taskId1, int taskId2, int taskId3) throws RemoteException {
+        public boolean isAllTasksResizable(int taskId1, int taskId2, int taskId3)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void registerFreeformCallback(IFreeformCallback observer) throws RemoteException {
-        }
+        public void registerFreeformCallback(IFreeformCallback observer) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void unregisterFreeformCallback(IFreeformCallback observer) throws RemoteException {
-        }
+        public void unregisterFreeformCallback(IFreeformCallback observer) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void notifyFreeformMinimizeAnimationEnd(int taskId, PointF point) throws RemoteException {
-        }
+        public void notifyFreeformMinimizeAnimationEnd(int taskId, PointF point)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void reportFreeformContainerPoint(PointF point) throws RemoteException {
-        }
+        public void reportFreeformContainerPoint(PointF point) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public PointF getFreeformContainerPoint() throws RemoteException {
@@ -278,13 +283,14 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public boolean getEmbedActivityPackageEnabled(String packageName, int userId) throws RemoteException {
+        public boolean getEmbedActivityPackageEnabled(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setEmbedActivityPackageEnabled(String packageName, boolean enabled, int userId) throws RemoteException {
-        }
+        public void setEmbedActivityPackageEnabled(String packageName, boolean enabled, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public List<String> getSupportEmbedActivityPackages() throws RemoteException {
@@ -297,17 +303,17 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public int getSplitActivityPackageEnabled(String packageName, int userId) throws RemoteException {
+        public int getSplitActivityPackageEnabled(String packageName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setSplitActivityPackageEnabled(String packageName, int newState, int userId) throws RemoteException {
-        }
+        public void setSplitActivityPackageEnabled(String packageName, int newState, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setCornerGestureEnabledWithSettings(boolean enable) throws RemoteException {
-        }
+        public void setCornerGestureEnabledWithSettings(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public boolean isValidCornerGesture(MotionEvent ev) throws RemoteException {
@@ -320,7 +326,8 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public ParceledListSlice getTaskInfoFromPackageName(String packageName) throws RemoteException {
+        public ParceledListSlice getTaskInfoFromPackageName(String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -345,13 +352,13 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public boolean minimizeTaskToSpecificPosition(int taskId, boolean animate, int x, int y) throws RemoteException {
+        public boolean minimizeTaskToSpecificPosition(int taskId, boolean animate, int x, int y)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setSplitImmersiveMode(boolean enable) throws RemoteException {
-        }
+        public void setSplitImmersiveMode(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public boolean isSplitImmersiveModeEnabled() throws RemoteException {
@@ -359,20 +366,17 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void saveFreeformBounds(int taskId) throws RemoteException {
-        }
+        public void saveFreeformBounds(int taskId) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setNaviStarSplitImmersiveMode(boolean enable) throws RemoteException {
-        }
+        public void setNaviStarSplitImmersiveMode(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setStayFocusActivityEnabled(boolean enable) throws RemoteException {
-        }
+        public void setStayFocusActivityEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setStayFocusAndTopResumedActivityEnabled(boolean stayFocusEnable, boolean stayTopResumedEnable) throws RemoteException {
-        }
+        public void setStayFocusAndTopResumedActivityEnabled(
+                boolean stayFocusEnable, boolean stayTopResumedEnable) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public boolean isVisibleTaskInDexDisplay(PendingIntent intent) throws RemoteException {
@@ -385,7 +389,8 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public boolean shouldDeferEnterSplit(List<PendingIntent> intents, List taskIds) throws RemoteException {
+        public boolean shouldDeferEnterSplit(List<PendingIntent> intents, List taskIds)
+                throws RemoteException {
             return false;
         }
 
@@ -400,20 +405,17 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setBoostFreeformTaskLayer(int taskId, boolean boost) throws RemoteException {
-        }
+        public void setBoostFreeformTaskLayer(int taskId, boolean boost) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void toggleFreeformWindowingModeForDex(WindowContainerToken token) throws RemoteException {
-        }
+        public void toggleFreeformWindowingModeForDex(WindowContainerToken token)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void rotateDexCompatTask(IBinder token) throws RemoteException {
-        }
+        public void rotateDexCompatTask(IBinder token) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void toggleFreeformForDexCompatApp(int taskId) throws RemoteException {
-        }
+        public void toggleFreeformForDexCompatApp(int taskId) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public boolean supportMultiSplitAppMinimumSize() throws RemoteException {
@@ -421,8 +423,7 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void updateMultiSplitAppMinimumSize() throws RemoteException {
-        }
+        public void updateMultiSplitAppMinimumSize() throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public boolean isDismissedFlexPanelMode() throws RemoteException {
@@ -430,24 +431,20 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setBlockedMinimizeFreeformEnable(boolean enable) throws RemoteException {
-        }
+        public void setBlockedMinimizeFreeformEnable(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setCustomDensityEnabled(int enabledFlags) throws RemoteException {
-        }
+        public void setCustomDensityEnabled(int enabledFlags) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setEnsureLaunchSplitEnabled(boolean enable) throws RemoteException {
-        }
+        public void setEnsureLaunchSplitEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setMaxVisibleFreeformCountForDex(int maxCount, int maxDexCount) throws RemoteException {
-        }
+        public void setMaxVisibleFreeformCountForDex(int maxCount, int maxDexCount)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void notifyDragSplitAppIconHasDrawable(boolean hasDrawable) throws RemoteException {
-        }
+        public void notifyDragSplitAppIconHasDrawable(boolean hasDrawable) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public SurfaceFreezerSnapshot getSurfaceFreezerSnapshot(int taskId) throws RemoteException {
@@ -455,13 +452,13 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public boolean startNaturalSwitching(IBinder client, IBinder dragTargetToken) throws RemoteException {
+        public boolean startNaturalSwitching(IBinder client, IBinder dragTargetToken)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void finishNaturalSwitching() throws RemoteException {
-        }
+        public void finishNaturalSwitching() throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public boolean preventNaturalSwitching(int TaskId) throws RemoteException {
@@ -474,45 +471,42 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void dismissSplitTask(IBinder token, boolean homeBehindTopTask) throws RemoteException {
-        }
+        public void dismissSplitTask(IBinder token, boolean homeBehindTopTask)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void changeToHorizontalSplitLayout(IBinder token) throws RemoteException {
-        }
+        public void changeToHorizontalSplitLayout(IBinder token) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void initDockingBounds(Rect leftBounds, Rect rightBounds, int displayWidth) throws RemoteException {
-        }
+        public void initDockingBounds(Rect leftBounds, Rect rightBounds, int displayWidth)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void setCandidateTask(int TaskId) throws RemoteException {
-        }
+        public void setCandidateTask(int TaskId) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public int calculateMaxWidth(int taskDockingState, int displayWidth, int defaultMinWidth) throws RemoteException {
+        public int calculateMaxWidth(int taskDockingState, int displayWidth, int defaultMinWidth)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void resizeOtherTaskIfNeeded(int taskId, Rect bounds) throws RemoteException {
-        }
+        public void resizeOtherTaskIfNeeded(int taskId, Rect bounds) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void clearAllDockingTasks(String reason) throws RemoteException {
-        }
+        public void clearAllDockingTasks(String reason) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void registerDexSnappingCallback(IDexSnappingCallback callback) throws RemoteException {
-        }
+        public void registerDexSnappingCallback(IDexSnappingCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void unregisterDexSnappingCallback(IDexSnappingCallback callback) throws RemoteException {
-        }
+        public void unregisterDexSnappingCallback(IDexSnappingCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void scheduleNotifyDexSnappingCallback(int taskId, Rect otherBounds) throws RemoteException {
-        }
+        public void scheduleNotifyDexSnappingCallback(int taskId, Rect otherBounds)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
         public boolean toggleFreeformWindowingMode() throws RemoteException {
@@ -520,12 +514,12 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void startAssistantActivityToSplit(Intent assistantActivityIntent, float splitRatio) throws RemoteException {
-        }
+        public void startAssistantActivityToSplit(Intent assistantActivityIntent, float splitRatio)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-        public void registerDexTransientDelayListener(IDexTransientCaptionDelayListener listener) throws RemoteException {
-        }
+        public void registerDexTransientDelayListener(IDexTransientCaptionDelayListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -533,7 +527,7 @@ public interface IMultiTaskingBinder extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMultiTaskingBinder {
+    public abstract static class Stub extends Binder implements IMultiTaskingBinder {
         static final int TRANSACTION_calculateMaxWidth = 69;
         static final int TRANSACTION_changeToHorizontalSplitLayout = 66;
         static final int TRANSACTION_clearAllDockingTasks = 71;
@@ -799,7 +793,8 @@ public interface IMultiTaskingBinder extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMultiTaskingBinder.DESCRIPTOR);
             }
@@ -876,13 +871,15 @@ public interface IMultiTaskingBinder extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 11:
-                    IRemoteAppTransitionListener _arg08 = IRemoteAppTransitionListener.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAppTransitionListener _arg08 =
+                            IRemoteAppTransitionListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerRemoteAppTransitionListener(_arg08);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    IRemoteAppTransitionListener _arg09 = IRemoteAppTransitionListener.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAppTransitionListener _arg09 =
+                            IRemoteAppTransitionListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterRemoteAppTransitionListener(_arg09);
                     reply.writeNoException();
@@ -897,13 +894,15 @@ public interface IMultiTaskingBinder extends IInterface {
                     reply.writeBoolean(_result10);
                     return true;
                 case 14:
-                    IFreeformCallback _arg011 = IFreeformCallback.Stub.asInterface(data.readStrongBinder());
+                    IFreeformCallback _arg011 =
+                            IFreeformCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerFreeformCallback(_arg011);
                     reply.writeNoException();
                     return true;
                 case 15:
-                    IFreeformCallback _arg012 = IFreeformCallback.Stub.asInterface(data.readStrongBinder());
+                    IFreeformCallback _arg012 =
+                            IFreeformCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterFreeformCallback(_arg012);
                     reply.writeNoException();
@@ -1042,7 +1041,8 @@ public interface IMultiTaskingBinder extends IInterface {
                     int _arg25 = data.readInt();
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result26 = minimizeTaskToSpecificPosition(_arg026, _arg19, _arg25, _arg32);
+                    boolean _result26 =
+                            minimizeTaskToSpecificPosition(_arg026, _arg19, _arg25, _arg32);
                     reply.writeNoException();
                     reply.writeBoolean(_result26);
                     return true;
@@ -1083,7 +1083,8 @@ public interface IMultiTaskingBinder extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 43:
-                    PendingIntent _arg032 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg032 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result28 = isVisibleTaskInDexDisplay(_arg032);
                     reply.writeNoException();
@@ -1125,7 +1126,9 @@ public interface IMultiTaskingBinder extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 49:
-                    WindowContainerToken _arg037 = (WindowContainerToken) data.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _arg037 =
+                            (WindowContainerToken)
+                                    data.readTypedObject(WindowContainerToken.CREATOR);
                     data.enforceNoDataAvail();
                     toggleFreeformWindowingModeForDex(_arg037);
                     reply.writeNoException();
@@ -1267,13 +1270,15 @@ public interface IMultiTaskingBinder extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 72:
-                    IDexSnappingCallback _arg055 = IDexSnappingCallback.Stub.asInterface(data.readStrongBinder());
+                    IDexSnappingCallback _arg055 =
+                            IDexSnappingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerDexSnappingCallback(_arg055);
                     reply.writeNoException();
                     return true;
                 case 73:
-                    IDexSnappingCallback _arg056 = IDexSnappingCallback.Stub.asInterface(data.readStrongBinder());
+                    IDexSnappingCallback _arg056 =
+                            IDexSnappingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterDexSnappingCallback(_arg056);
                     reply.writeNoException();
@@ -1298,7 +1303,9 @@ public interface IMultiTaskingBinder extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 77:
-                    IDexTransientCaptionDelayListener _arg059 = IDexTransientCaptionDelayListener.Stub.asInterface(data.readStrongBinder());
+                    IDexTransientCaptionDelayListener _arg059 =
+                            IDexTransientCaptionDelayListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerDexTransientDelayListener(_arg059);
                     reply.writeNoException();
@@ -1325,7 +1332,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public boolean exitMultiWindow(IBinder token, boolean checkPermission) throws RemoteException {
+            public boolean exitMultiWindow(IBinder token, boolean checkPermission)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1451,7 +1459,9 @@ public interface IMultiTaskingBinder extends IInterface {
                     _data.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    StringParceledListSlice _result = (StringParceledListSlice) _reply.readTypedObject(StringParceledListSlice.CREATOR);
+                    StringParceledListSlice _result =
+                            (StringParceledListSlice)
+                                    _reply.readTypedObject(StringParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1467,7 +1477,9 @@ public interface IMultiTaskingBinder extends IInterface {
                     _data.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    StringParceledListSlice _result = (StringParceledListSlice) _reply.readTypedObject(StringParceledListSlice.CREATOR);
+                    StringParceledListSlice _result =
+                            (StringParceledListSlice)
+                                    _reply.readTypedObject(StringParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1476,7 +1488,9 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void setMultiWindowEnabledForUser(String requester, String reason, boolean enable, int userId) throws RemoteException {
+            public void setMultiWindowEnabledForUser(
+                    String requester, String reason, boolean enable, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1494,7 +1508,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void registerRemoteAppTransitionListener(IRemoteAppTransitionListener listener) throws RemoteException {
+            public void registerRemoteAppTransitionListener(IRemoteAppTransitionListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1509,7 +1524,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void unregisterRemoteAppTransitionListener(IRemoteAppTransitionListener listener) throws RemoteException {
+            public void unregisterRemoteAppTransitionListener(IRemoteAppTransitionListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1524,7 +1540,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public boolean isAllTasksResizable(int taskId1, int taskId2, int taskId3) throws RemoteException {
+            public boolean isAllTasksResizable(int taskId1, int taskId2, int taskId3)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1543,7 +1560,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void registerFreeformCallback(IFreeformCallback observer) throws RemoteException {
+            public void registerFreeformCallback(IFreeformCallback observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1558,7 +1576,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void unregisterFreeformCallback(IFreeformCallback observer) throws RemoteException {
+            public void unregisterFreeformCallback(IFreeformCallback observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1573,7 +1592,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void notifyFreeformMinimizeAnimationEnd(int taskId, PointF point) throws RemoteException {
+            public void notifyFreeformMinimizeAnimationEnd(int taskId, PointF point)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1620,14 +1640,16 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public ParceledListSlice getMinimizedFreeformTasksForCurrentUser() throws RemoteException {
+            public ParceledListSlice getMinimizedFreeformTasksForCurrentUser()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
                     this.mRemote.transact(19, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1643,7 +1665,8 @@ public interface IMultiTaskingBinder extends IInterface {
                     _data.writeInterfaceToken(IMultiTaskingBinder.DESCRIPTOR);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1668,7 +1691,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public boolean getEmbedActivityPackageEnabled(String packageName, int userId) throws RemoteException {
+            public boolean getEmbedActivityPackageEnabled(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1686,7 +1710,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void setEmbedActivityPackageEnabled(String packageName, boolean enabled, int userId) throws RemoteException {
+            public void setEmbedActivityPackageEnabled(
+                    String packageName, boolean enabled, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1735,7 +1760,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public int getSplitActivityPackageEnabled(String packageName, int userId) throws RemoteException {
+            public int getSplitActivityPackageEnabled(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1753,7 +1779,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void setSplitActivityPackageEnabled(String packageName, int newState, int userId) throws RemoteException {
+            public void setSplitActivityPackageEnabled(String packageName, int newState, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1818,7 +1845,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public ParceledListSlice getTaskInfoFromPackageName(String packageName) throws RemoteException {
+            public ParceledListSlice getTaskInfoFromPackageName(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1826,7 +1854,8 @@ public interface IMultiTaskingBinder extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(31, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1903,7 +1932,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public boolean minimizeTaskToSpecificPosition(int taskId, boolean animate, int x, int y) throws RemoteException {
+            public boolean minimizeTaskToSpecificPosition(int taskId, boolean animate, int x, int y)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1999,7 +2029,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void setStayFocusAndTopResumedActivityEnabled(boolean stayFocusEnable, boolean stayTopResumedEnable) throws RemoteException {
+            public void setStayFocusAndTopResumedActivityEnabled(
+                    boolean stayFocusEnable, boolean stayTopResumedEnable) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2049,7 +2080,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public boolean shouldDeferEnterSplit(List<PendingIntent> intents, List taskIds) throws RemoteException {
+            public boolean shouldDeferEnterSplit(List<PendingIntent> intents, List taskIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2100,7 +2132,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void setBoostFreeformTaskLayer(int taskId, boolean boost) throws RemoteException {
+            public void setBoostFreeformTaskLayer(int taskId, boolean boost)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2116,7 +2149,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void toggleFreeformWindowingModeForDex(WindowContainerToken token) throws RemoteException {
+            public void toggleFreeformWindowingModeForDex(WindowContainerToken token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2249,7 +2283,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void setMaxVisibleFreeformCountForDex(int maxCount, int maxDexCount) throws RemoteException {
+            public void setMaxVisibleFreeformCountForDex(int maxCount, int maxDexCount)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2265,7 +2300,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void notifyDragSplitAppIconHasDrawable(boolean hasDrawable) throws RemoteException {
+            public void notifyDragSplitAppIconHasDrawable(boolean hasDrawable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2280,7 +2316,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public SurfaceFreezerSnapshot getSurfaceFreezerSnapshot(int taskId) throws RemoteException {
+            public SurfaceFreezerSnapshot getSurfaceFreezerSnapshot(int taskId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2288,7 +2325,9 @@ public interface IMultiTaskingBinder extends IInterface {
                     _data.writeInt(taskId);
                     this.mRemote.transact(60, _data, _reply, 0);
                     _reply.readException();
-                    SurfaceFreezerSnapshot _result = (SurfaceFreezerSnapshot) _reply.readTypedObject(SurfaceFreezerSnapshot.CREATOR);
+                    SurfaceFreezerSnapshot _result =
+                            (SurfaceFreezerSnapshot)
+                                    _reply.readTypedObject(SurfaceFreezerSnapshot.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2297,7 +2336,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public boolean startNaturalSwitching(IBinder client, IBinder dragTargetToken) throws RemoteException {
+            public boolean startNaturalSwitching(IBinder client, IBinder dragTargetToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2362,7 +2402,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void dismissSplitTask(IBinder token, boolean homeBehindTopTask) throws RemoteException {
+            public void dismissSplitTask(IBinder token, boolean homeBehindTopTask)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2393,7 +2434,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void initDockingBounds(Rect leftBounds, Rect rightBounds, int displayWidth) throws RemoteException {
+            public void initDockingBounds(Rect leftBounds, Rect rightBounds, int displayWidth)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2425,7 +2467,9 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public int calculateMaxWidth(int taskDockingState, int displayWidth, int defaultMinWidth) throws RemoteException {
+            public int calculateMaxWidth(
+                    int taskDockingState, int displayWidth, int defaultMinWidth)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2475,7 +2519,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void registerDexSnappingCallback(IDexSnappingCallback callback) throws RemoteException {
+            public void registerDexSnappingCallback(IDexSnappingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2490,7 +2535,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void unregisterDexSnappingCallback(IDexSnappingCallback callback) throws RemoteException {
+            public void unregisterDexSnappingCallback(IDexSnappingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2505,7 +2551,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void scheduleNotifyDexSnappingCallback(int taskId, Rect otherBounds) throws RemoteException {
+            public void scheduleNotifyDexSnappingCallback(int taskId, Rect otherBounds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2537,7 +2584,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void startAssistantActivityToSplit(Intent assistantActivityIntent, float splitRatio) throws RemoteException {
+            public void startAssistantActivityToSplit(
+                    Intent assistantActivityIntent, float splitRatio) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2553,7 +2601,8 @@ public interface IMultiTaskingBinder extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IMultiTaskingBinder
-            public void registerDexTransientDelayListener(IDexTransientCaptionDelayListener listener) throws RemoteException {
+            public void registerDexTransientDelayListener(
+                    IDexTransientCaptionDelayListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -7,7 +7,8 @@ import android.annotation.SystemApi;
 public final class InstallationFile {
     private final InstallationFileParcel mParcel = new InstallationFileParcel();
 
-    public InstallationFile(int location, String name, long lengthBytes, byte[] metadata, byte[] signature) {
+    public InstallationFile(
+            int location, String name, long lengthBytes, byte[] metadata, byte[] signature) {
         this.mParcel.location = location;
         this.mParcel.name = name;
         this.mParcel.size = lengthBytes;

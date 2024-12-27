@@ -2,6 +2,7 @@ package com.samsung.vekit.Item;
 
 import android.graphics.Bitmap;
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.DoodlePoint;
 import com.samsung.vekit.Common.Object.DoodleStroke;
 import com.samsung.vekit.Common.Type.ContentType;
@@ -11,6 +12,7 @@ import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Content.Content;
 import com.samsung.vekit.Content.Doodle;
 import com.samsung.vekit.Layer.Layer;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,7 +110,12 @@ public class DoodleItem extends Item {
             Log.e(this.TAG, "isDrawing is false");
         }
         if (this.currentStrokeIndex < 0 || this.currentStrokeIndex >= this.strokeList.size()) {
-            Log.e(this.TAG, "currentStrokeIndex is invalid : " + this.currentStrokeIndex + " Size : " + this.strokeList.size());
+            Log.e(
+                    this.TAG,
+                    "currentStrokeIndex is invalid : "
+                            + this.currentStrokeIndex
+                            + " Size : "
+                            + this.strokeList.size());
             return;
         }
         Log.d(this.TAG, "currentStrokeIndex : " + this.currentStrokeIndex);

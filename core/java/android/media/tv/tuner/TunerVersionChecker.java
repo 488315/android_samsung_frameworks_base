@@ -3,6 +3,7 @@ package android.media.tv.tuner;
 import android.annotation.SystemApi;
 import android.media.MediaMetrics;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -17,11 +18,9 @@ public final class TunerVersionChecker {
     public static final int TUNER_VERSION_UNKNOWN = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TunerVersion {
-    }
+    public @interface TunerVersion {}
 
-    private TunerVersionChecker() {
-    }
+    private TunerVersionChecker() {}
 
     public static int getTunerVersion() {
         return Tuner.getTunerVersion();
@@ -29,7 +28,8 @@ public final class TunerVersionChecker {
 
     public static boolean supportTunerVersion(int version) {
         int currentVersion = Tuner.getTunerVersion();
-        return isHigherOrEqualVersionTo(version) && getMajorVersion(version) == getMajorVersion(currentVersion);
+        return isHigherOrEqualVersionTo(version)
+                && getMajorVersion(version) == getMajorVersion(currentVersion);
     }
 
     public static boolean isHigherOrEqualVersionTo(int version) {
@@ -47,7 +47,15 @@ public final class TunerVersionChecker {
 
     public static boolean checkHigherOrEqualVersionTo(int version, String methodName) {
         if (!isHigherOrEqualVersionTo(version)) {
-            Log.e(TAG, "Current Tuner version " + getMajorVersion(Tuner.getTunerVersion()) + MediaMetrics.SEPARATOR + getMinorVersion(Tuner.getTunerVersion()) + " does not support " + methodName + MediaMetrics.SEPARATOR);
+            Log.e(
+                    TAG,
+                    "Current Tuner version "
+                            + getMajorVersion(Tuner.getTunerVersion())
+                            + MediaMetrics.SEPARATOR
+                            + getMinorVersion(Tuner.getTunerVersion())
+                            + " does not support "
+                            + methodName
+                            + MediaMetrics.SEPARATOR);
             return false;
         }
         return true;
@@ -55,7 +63,15 @@ public final class TunerVersionChecker {
 
     public static boolean checkSupportVersion(int version, String methodName) {
         if (!supportTunerVersion(version)) {
-            Log.e(TAG, "Current Tuner version " + getMajorVersion(Tuner.getTunerVersion()) + MediaMetrics.SEPARATOR + getMinorVersion(Tuner.getTunerVersion()) + " does not support " + methodName + MediaMetrics.SEPARATOR);
+            Log.e(
+                    TAG,
+                    "Current Tuner version "
+                            + getMajorVersion(Tuner.getTunerVersion())
+                            + MediaMetrics.SEPARATOR
+                            + getMinorVersion(Tuner.getTunerVersion())
+                            + " does not support "
+                            + methodName
+                            + MediaMetrics.SEPARATOR);
             return false;
         }
         return true;

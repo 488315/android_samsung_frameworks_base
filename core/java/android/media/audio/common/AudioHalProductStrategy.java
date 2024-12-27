@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioHalProductStrategy implements Parcelable {
-    public static final Parcelable.Creator<AudioHalProductStrategy> CREATOR = new Parcelable.Creator<AudioHalProductStrategy>() { // from class: android.media.audio.common.AudioHalProductStrategy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalProductStrategy createFromParcel(Parcel _aidl_source) {
-            AudioHalProductStrategy _aidl_out = new AudioHalProductStrategy();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioHalProductStrategy> CREATOR =
+            new Parcelable.Creator<AudioHalProductStrategy>() { // from class:
+                // android.media.audio.common.AudioHalProductStrategy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalProductStrategy createFromParcel(Parcel _aidl_source) {
+                    AudioHalProductStrategy _aidl_out = new AudioHalProductStrategy();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalProductStrategy[] newArray(int _aidl_size) {
-            return new AudioHalProductStrategy[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalProductStrategy[] newArray(int _aidl_size) {
+                    return new AudioHalProductStrategy[_aidl_size];
+                }
+            };
     public static final int VENDOR_STRATEGY_ID_START = 1000;
     public AudioHalAttributesGroup[] attributesGroups;
     public int id = -1;
@@ -66,7 +69,9 @@ public class AudioHalProductStrategy implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.attributesGroups = (AudioHalAttributesGroup[]) _aidl_parcel.createTypedArray(AudioHalAttributesGroup.CREATOR);
+                this.attributesGroups =
+                        (AudioHalAttributesGroup[])
+                                _aidl_parcel.createTypedArray(AudioHalAttributesGroup.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -96,7 +101,8 @@ public class AudioHalProductStrategy implements Parcelable {
             return false;
         }
         AudioHalProductStrategy that = (AudioHalProductStrategy) other;
-        if (Objects.deepEquals(Integer.valueOf(this.id), Integer.valueOf(that.id)) && Objects.deepEquals(this.attributesGroups, that.attributesGroups)) {
+        if (Objects.deepEquals(Integer.valueOf(this.id), Integer.valueOf(that.id))
+                && Objects.deepEquals(this.attributesGroups, that.attributesGroups)) {
             return true;
         }
         return false;
@@ -104,7 +110,8 @@ public class AudioHalProductStrategy implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.id), this.attributesGroups).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this.id), this.attributesGroups).toArray());
     }
 
     @Override // android.os.Parcelable

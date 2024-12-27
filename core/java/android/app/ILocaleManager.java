@@ -17,17 +17,21 @@ public interface ILocaleManager extends IInterface {
 
     LocaleList getSystemLocales() throws RemoteException;
 
-    void setApplicationLocales(String str, int i, LocaleList localeList, boolean z) throws RemoteException;
+    void setApplicationLocales(String str, int i, LocaleList localeList, boolean z)
+            throws RemoteException;
 
-    void setOverrideLocaleConfig(String str, int i, LocaleConfig localeConfig) throws RemoteException;
+    void setOverrideLocaleConfig(String str, int i, LocaleConfig localeConfig)
+            throws RemoteException;
 
     public static class Default implements ILocaleManager {
         @Override // android.app.ILocaleManager
-        public void setApplicationLocales(String packageName, int userId, LocaleList locales, boolean fromDelegate) throws RemoteException {
-        }
+        public void setApplicationLocales(
+                String packageName, int userId, LocaleList locales, boolean fromDelegate)
+                throws RemoteException {}
 
         @Override // android.app.ILocaleManager
-        public LocaleList getApplicationLocales(String packageName, int userId) throws RemoteException {
+        public LocaleList getApplicationLocales(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -37,11 +41,12 @@ public interface ILocaleManager extends IInterface {
         }
 
         @Override // android.app.ILocaleManager
-        public void setOverrideLocaleConfig(String packageName, int userId, LocaleConfig localeConfig) throws RemoteException {
-        }
+        public void setOverrideLocaleConfig(
+                String packageName, int userId, LocaleConfig localeConfig) throws RemoteException {}
 
         @Override // android.app.ILocaleManager
-        public LocaleConfig getOverrideLocaleConfig(String packageName, int userId) throws RemoteException {
+        public LocaleConfig getOverrideLocaleConfig(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -51,7 +56,7 @@ public interface ILocaleManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILocaleManager {
+    public abstract static class Stub extends Binder implements ILocaleManager {
         static final int TRANSACTION_getApplicationLocales = 2;
         static final int TRANSACTION_getOverrideLocaleConfig = 5;
         static final int TRANSACTION_getSystemLocales = 3;
@@ -101,7 +106,8 @@ public interface ILocaleManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILocaleManager.DESCRIPTOR);
             }
@@ -170,7 +176,9 @@ public interface ILocaleManager extends IInterface {
             }
 
             @Override // android.app.ILocaleManager
-            public void setApplicationLocales(String packageName, int userId, LocaleList locales, boolean fromDelegate) throws RemoteException {
+            public void setApplicationLocales(
+                    String packageName, int userId, LocaleList locales, boolean fromDelegate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -188,7 +196,8 @@ public interface ILocaleManager extends IInterface {
             }
 
             @Override // android.app.ILocaleManager
-            public LocaleList getApplicationLocales(String packageName, int userId) throws RemoteException {
+            public LocaleList getApplicationLocales(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -222,7 +231,9 @@ public interface ILocaleManager extends IInterface {
             }
 
             @Override // android.app.ILocaleManager
-            public void setOverrideLocaleConfig(String packageName, int userId, LocaleConfig localeConfig) throws RemoteException {
+            public void setOverrideLocaleConfig(
+                    String packageName, int userId, LocaleConfig localeConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -239,7 +250,8 @@ public interface ILocaleManager extends IInterface {
             }
 
             @Override // android.app.ILocaleManager
-            public LocaleConfig getOverrideLocaleConfig(String packageName, int userId) throws RemoteException {
+            public LocaleConfig getOverrideLocaleConfig(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -248,7 +260,8 @@ public interface ILocaleManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    LocaleConfig _result = (LocaleConfig) _reply.readTypedObject(LocaleConfig.CREATOR);
+                    LocaleConfig _result =
+                            (LocaleConfig) _reply.readTypedObject(LocaleConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

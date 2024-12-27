@@ -13,19 +13,23 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.KeyEvent;
-import android.view.autofill.IAutofillWindowPresenter;
+
 import com.android.internal.os.IResultReceiver;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface IAutoFillManagerClient extends IInterface {
-    void authenticate(int i, int i2, IntentSender intentSender, Intent intent, boolean z) throws RemoteException;
+    void authenticate(int i, int i2, IntentSender intentSender, Intent intent, boolean z)
+            throws RemoteException;
 
-    void autofill(int i, List<AutofillId> list, List<AutofillValue> list2, boolean z) throws RemoteException;
+    void autofill(int i, List<AutofillId> list, List<AutofillValue> list2, boolean z)
+            throws RemoteException;
 
     void autofillContent(int i, AutofillId autofillId, ClipData clipData) throws RemoteException;
 
-    void dispatchUnhandledKey(int i, AutofillId autofillId, KeyEvent keyEvent) throws RemoteException;
+    void dispatchUnhandledKey(int i, AutofillId autofillId, KeyEvent keyEvent)
+            throws RemoteException;
 
     void getAugmentedAutofillClient(IResultReceiver iResultReceiver) throws RemoteException;
 
@@ -39,15 +43,25 @@ public interface IAutoFillManagerClient extends IInterface {
 
     void notifyNoFillUi(int i, AutofillId autofillId, int i2) throws RemoteException;
 
-    void onGetCredentialException(int i, AutofillId autofillId, String str, String str2) throws RemoteException;
+    void onGetCredentialException(int i, AutofillId autofillId, String str, String str2)
+            throws RemoteException;
 
-    void onGetCredentialResponse(int i, AutofillId autofillId, GetCredentialResponse getCredentialResponse) throws RemoteException;
+    void onGetCredentialResponse(
+            int i, AutofillId autofillId, GetCredentialResponse getCredentialResponse)
+            throws RemoteException;
 
     void requestHideFillUi(int i, AutofillId autofillId) throws RemoteException;
 
     void requestHideFillUiWhenDestroyed(int i, AutofillId autofillId) throws RemoteException;
 
-    void requestShowFillUi(int i, AutofillId autofillId, int i2, int i3, Rect rect, IAutofillWindowPresenter iAutofillWindowPresenter) throws RemoteException;
+    void requestShowFillUi(
+            int i,
+            AutofillId autofillId,
+            int i2,
+            int i3,
+            Rect rect,
+            IAutofillWindowPresenter iAutofillWindowPresenter)
+            throws RemoteException;
 
     void requestShowSoftInput(AutofillId autofillId) throws RemoteException;
 
@@ -57,94 +71,116 @@ public interface IAutoFillManagerClient extends IInterface {
 
     void setState(int i) throws RemoteException;
 
-    void setTrackedViews(int i, AutofillId[] autofillIdArr, boolean z, boolean z2, AutofillId[] autofillIdArr2, AutofillId autofillId) throws RemoteException;
+    void setTrackedViews(
+            int i,
+            AutofillId[] autofillIdArr,
+            boolean z,
+            boolean z2,
+            AutofillId[] autofillIdArr2,
+            AutofillId autofillId)
+            throws RemoteException;
 
     void startIntentSender(IntentSender intentSender, Intent intent) throws RemoteException;
 
     public static class Default implements IAutoFillManagerClient {
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void setState(int flags) throws RemoteException {
-        }
+        public void setState(int flags) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void autofill(int sessionId, List<AutofillId> ids, List<AutofillValue> values, boolean hideHighlight) throws RemoteException {
-        }
+        public void autofill(
+                int sessionId,
+                List<AutofillId> ids,
+                List<AutofillValue> values,
+                boolean hideHighlight)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void onGetCredentialResponse(int sessionId, AutofillId id, GetCredentialResponse response) throws RemoteException {
-        }
+        public void onGetCredentialResponse(
+                int sessionId, AutofillId id, GetCredentialResponse response)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void onGetCredentialException(int sessionId, AutofillId id, String errorType, String errorMsg) throws RemoteException {
-        }
+        public void onGetCredentialException(
+                int sessionId, AutofillId id, String errorType, String errorMsg)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void autofillContent(int sessionId, AutofillId id, ClipData content) throws RemoteException {
-        }
+        public void autofillContent(int sessionId, AutofillId id, ClipData content)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void authenticate(int sessionId, int authenticationId, IntentSender intent, Intent fillInIntent, boolean authenticateInline) throws RemoteException {
-        }
+        public void authenticate(
+                int sessionId,
+                int authenticationId,
+                IntentSender intent,
+                Intent fillInIntent,
+                boolean authenticateInline)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void setTrackedViews(int sessionId, AutofillId[] savableIds, boolean saveOnAllViewsInvisible, boolean saveOnFinish, AutofillId[] fillableIds, AutofillId saveTriggerId) throws RemoteException {
-        }
+        public void setTrackedViews(
+                int sessionId,
+                AutofillId[] savableIds,
+                boolean saveOnAllViewsInvisible,
+                boolean saveOnFinish,
+                AutofillId[] fillableIds,
+                AutofillId saveTriggerId)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void requestShowFillUi(int sessionId, AutofillId id, int width, int height, Rect anchorBounds, IAutofillWindowPresenter presenter) throws RemoteException {
-        }
+        public void requestShowFillUi(
+                int sessionId,
+                AutofillId id,
+                int width,
+                int height,
+                Rect anchorBounds,
+                IAutofillWindowPresenter presenter)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void requestHideFillUi(int sessionId, AutofillId id) throws RemoteException {
-        }
+        public void requestHideFillUi(int sessionId, AutofillId id) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void requestHideFillUiWhenDestroyed(int sessionId, AutofillId id) throws RemoteException {
-        }
+        public void requestHideFillUiWhenDestroyed(int sessionId, AutofillId id)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void notifyNoFillUi(int sessionId, AutofillId id, int sessionFinishedState) throws RemoteException {
-        }
+        public void notifyNoFillUi(int sessionId, AutofillId id, int sessionFinishedState)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void notifyFillUiShown(int sessionId, AutofillId id) throws RemoteException {
-        }
+        public void notifyFillUiShown(int sessionId, AutofillId id) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void notifyFillUiHidden(int sessionId, AutofillId id) throws RemoteException {
-        }
+        public void notifyFillUiHidden(int sessionId, AutofillId id) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void dispatchUnhandledKey(int sessionId, AutofillId id, KeyEvent keyEvent) throws RemoteException {
-        }
+        public void dispatchUnhandledKey(int sessionId, AutofillId id, KeyEvent keyEvent)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void startIntentSender(IntentSender intentSender, Intent intent) throws RemoteException {
-        }
+        public void startIntentSender(IntentSender intentSender, Intent intent)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void setSaveUiState(int sessionId, boolean shown) throws RemoteException {
-        }
+        public void setSaveUiState(int sessionId, boolean shown) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void setSessionFinished(int newState, List<AutofillId> autofillableIds) throws RemoteException {
-        }
+        public void setSessionFinished(int newState, List<AutofillId> autofillableIds)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void getAugmentedAutofillClient(IResultReceiver result) throws RemoteException {
-        }
+        public void getAugmentedAutofillClient(IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void notifyDisableAutofill(long disableDuration, ComponentName componentName) throws RemoteException {
-        }
+        public void notifyDisableAutofill(long disableDuration, ComponentName componentName)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void requestShowSoftInput(AutofillId id) throws RemoteException {
-        }
+        public void requestShowSoftInput(AutofillId id) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManagerClient
-        public void notifyFillDialogTriggerIds(List<AutofillId> ids) throws RemoteException {
-        }
+        public void notifyFillDialogTriggerIds(List<AutofillId> ids) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -152,7 +188,7 @@ public interface IAutoFillManagerClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAutoFillManagerClient {
+    public abstract static class Stub extends Binder implements IAutoFillManagerClient {
         public static final String DESCRIPTOR = "android.view.autofill.IAutoFillManagerClient";
         static final int TRANSACTION_authenticate = 6;
         static final int TRANSACTION_autofill = 2;
@@ -251,7 +287,8 @@ public interface IAutoFillManagerClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -276,7 +313,9 @@ public interface IAutoFillManagerClient extends IInterface {
                 case 3:
                     int _arg03 = data.readInt();
                     AutofillId _arg12 = (AutofillId) data.readTypedObject(AutofillId.CREATOR);
-                    GetCredentialResponse _arg22 = (GetCredentialResponse) data.readTypedObject(GetCredentialResponse.CREATOR);
+                    GetCredentialResponse _arg22 =
+                            (GetCredentialResponse)
+                                    data.readTypedObject(GetCredentialResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onGetCredentialResponse(_arg03, _arg12, _arg22);
                     return true;
@@ -320,7 +359,8 @@ public interface IAutoFillManagerClient extends IInterface {
                     int _arg27 = data.readInt();
                     int _arg35 = data.readInt();
                     Rect _arg43 = (Rect) data.readTypedObject(Rect.CREATOR);
-                    IAutofillWindowPresenter _arg52 = IAutofillWindowPresenter.Stub.asInterface(data.readStrongBinder());
+                    IAutofillWindowPresenter _arg52 =
+                            IAutofillWindowPresenter.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestShowFillUi(_arg08, _arg17, _arg27, _arg35, _arg43, _arg52);
                     return true;
@@ -363,7 +403,8 @@ public interface IAutoFillManagerClient extends IInterface {
                     dispatchUnhandledKey(_arg014, _arg113, _arg29);
                     return true;
                 case 15:
-                    IntentSender _arg015 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _arg015 =
+                            (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     Intent _arg114 = (Intent) data.readTypedObject(Intent.CREATOR);
                     data.enforceNoDataAvail();
                     startIntentSender(_arg015, _arg114);
@@ -381,13 +422,15 @@ public interface IAutoFillManagerClient extends IInterface {
                     setSessionFinished(_arg017, _arg116);
                     return true;
                 case 18:
-                    IResultReceiver _arg018 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg018 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getAugmentedAutofillClient(_arg018);
                     return true;
                 case 19:
                     long _arg019 = data.readLong();
-                    ComponentName _arg117 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg117 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     notifyDisableAutofill(_arg019, _arg117);
                     return true;
@@ -435,7 +478,12 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void autofill(int sessionId, List<AutofillId> ids, List<AutofillValue> values, boolean hideHighlight) throws RemoteException {
+            public void autofill(
+                    int sessionId,
+                    List<AutofillId> ids,
+                    List<AutofillValue> values,
+                    boolean hideHighlight)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -450,7 +498,9 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void onGetCredentialResponse(int sessionId, AutofillId id, GetCredentialResponse response) throws RemoteException {
+            public void onGetCredentialResponse(
+                    int sessionId, AutofillId id, GetCredentialResponse response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -464,7 +514,9 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void onGetCredentialException(int sessionId, AutofillId id, String errorType, String errorMsg) throws RemoteException {
+            public void onGetCredentialException(
+                    int sessionId, AutofillId id, String errorType, String errorMsg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -479,7 +531,8 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void autofillContent(int sessionId, AutofillId id, ClipData content) throws RemoteException {
+            public void autofillContent(int sessionId, AutofillId id, ClipData content)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -493,7 +546,13 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void authenticate(int sessionId, int authenticationId, IntentSender intent, Intent fillInIntent, boolean authenticateInline) throws RemoteException {
+            public void authenticate(
+                    int sessionId,
+                    int authenticationId,
+                    IntentSender intent,
+                    Intent fillInIntent,
+                    boolean authenticateInline)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -509,7 +568,14 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void setTrackedViews(int sessionId, AutofillId[] savableIds, boolean saveOnAllViewsInvisible, boolean saveOnFinish, AutofillId[] fillableIds, AutofillId saveTriggerId) throws RemoteException {
+            public void setTrackedViews(
+                    int sessionId,
+                    AutofillId[] savableIds,
+                    boolean saveOnAllViewsInvisible,
+                    boolean saveOnFinish,
+                    AutofillId[] fillableIds,
+                    AutofillId saveTriggerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -526,7 +592,14 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void requestShowFillUi(int sessionId, AutofillId id, int width, int height, Rect anchorBounds, IAutofillWindowPresenter presenter) throws RemoteException {
+            public void requestShowFillUi(
+                    int sessionId,
+                    AutofillId id,
+                    int width,
+                    int height,
+                    Rect anchorBounds,
+                    IAutofillWindowPresenter presenter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -556,7 +629,8 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void requestHideFillUiWhenDestroyed(int sessionId, AutofillId id) throws RemoteException {
+            public void requestHideFillUiWhenDestroyed(int sessionId, AutofillId id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -569,7 +643,8 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void notifyNoFillUi(int sessionId, AutofillId id, int sessionFinishedState) throws RemoteException {
+            public void notifyNoFillUi(int sessionId, AutofillId id, int sessionFinishedState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -609,7 +684,8 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void dispatchUnhandledKey(int sessionId, AutofillId id, KeyEvent keyEvent) throws RemoteException {
+            public void dispatchUnhandledKey(int sessionId, AutofillId id, KeyEvent keyEvent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -623,7 +699,8 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void startIntentSender(IntentSender intentSender, Intent intent) throws RemoteException {
+            public void startIntentSender(IntentSender intentSender, Intent intent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -649,7 +726,8 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void setSessionFinished(int newState, List<AutofillId> autofillableIds) throws RemoteException {
+            public void setSessionFinished(int newState, List<AutofillId> autofillableIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -674,7 +752,8 @@ public interface IAutoFillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManagerClient
-            public void notifyDisableAutofill(long disableDuration, ComponentName componentName) throws RemoteException {
+            public void notifyDisableAutofill(long disableDuration, ComponentName componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -1,6 +1,5 @@
 package android.media.session;
 
-import android.media.session.MediaSession;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,14 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
-    public static final String DESCRIPTOR = "android.media.session.IOnMediaKeyEventSessionChangedListener";
+    public static final String DESCRIPTOR =
+            "android.media.session.IOnMediaKeyEventSessionChangedListener";
 
     void onMediaKeyEventSessionChanged(String str, MediaSession.Token token) throws RemoteException;
 
     public static class Default implements IOnMediaKeyEventSessionChangedListener {
         @Override // android.media.session.IOnMediaKeyEventSessionChangedListener
-        public void onMediaKeyEventSessionChanged(String packageName, MediaSession.Token mediaKeyEventSessionToken) throws RemoteException {
-        }
+        public void onMediaKeyEventSessionChanged(
+                String packageName, MediaSession.Token mediaKeyEventSessionToken)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,8 @@ public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnMediaKeyEventSessionChangedListener {
+    public abstract static class Stub extends Binder
+            implements IOnMediaKeyEventSessionChangedListener {
         static final int TRANSACTION_onMediaKeyEventSessionChanged = 1;
 
         public Stub() {
@@ -35,7 +37,8 @@ public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IOnMediaKeyEventSessionChangedListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IOnMediaKeyEventSessionChangedListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IOnMediaKeyEventSessionChangedListener)) {
                 return (IOnMediaKeyEventSessionChangedListener) iin;
             }
@@ -62,7 +65,8 @@ public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnMediaKeyEventSessionChangedListener.DESCRIPTOR);
             }
@@ -73,7 +77,8 @@ public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    MediaSession.Token _arg1 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg1 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     data.enforceNoDataAvail();
                     onMediaKeyEventSessionChanged(_arg0, _arg1);
                     return true;
@@ -99,7 +104,9 @@ public interface IOnMediaKeyEventSessionChangedListener extends IInterface {
             }
 
             @Override // android.media.session.IOnMediaKeyEventSessionChangedListener
-            public void onMediaKeyEventSessionChanged(String packageName, MediaSession.Token mediaKeyEventSessionToken) throws RemoteException {
+            public void onMediaKeyEventSessionChanged(
+                    String packageName, MediaSession.Token mediaKeyEventSessionToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnMediaKeyEventSessionChangedListener.DESCRIPTOR);

@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-import android.hardware.gnss.IGnssMeasurementCallback;
 import android.os.BadParcelableException;
 import android.os.Binder;
 import android.os.IBinder;
@@ -11,7 +10,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGnssMeasurementInterface extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$IGnssMeasurementInterface".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IGnssMeasurementInterface".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -21,22 +21,26 @@ public interface IGnssMeasurementInterface extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    void setCallback(IGnssMeasurementCallback iGnssMeasurementCallback, boolean z, boolean z2) throws RemoteException;
+    void setCallback(IGnssMeasurementCallback iGnssMeasurementCallback, boolean z, boolean z2)
+            throws RemoteException;
 
-    void setCallbackWithOptions(IGnssMeasurementCallback iGnssMeasurementCallback, Options options) throws RemoteException;
+    void setCallbackWithOptions(IGnssMeasurementCallback iGnssMeasurementCallback, Options options)
+            throws RemoteException;
 
     public static class Default implements IGnssMeasurementInterface {
         @Override // android.hardware.gnss.IGnssMeasurementInterface
-        public void setCallback(IGnssMeasurementCallback callback, boolean enableFullTracking, boolean enableCorrVecOutputs) throws RemoteException {
-        }
+        public void setCallback(
+                IGnssMeasurementCallback callback,
+                boolean enableFullTracking,
+                boolean enableCorrVecOutputs)
+                throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssMeasurementInterface
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssMeasurementInterface
-        public void setCallbackWithOptions(IGnssMeasurementCallback callback, Options options) throws RemoteException {
-        }
+        public void setCallbackWithOptions(IGnssMeasurementCallback callback, Options options)
+                throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssMeasurementInterface
         public int getInterfaceVersion() {
@@ -54,7 +58,7 @@ public interface IGnssMeasurementInterface extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssMeasurementInterface {
+    public abstract static class Stub extends Binder implements IGnssMeasurementInterface {
         static final int TRANSACTION_close = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -105,7 +109,8 @@ public interface IGnssMeasurementInterface extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -126,7 +131,8 @@ public interface IGnssMeasurementInterface extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IGnssMeasurementCallback _arg0 = IGnssMeasurementCallback.Stub.asInterface(data.readStrongBinder());
+                    IGnssMeasurementCallback _arg0 =
+                            IGnssMeasurementCallback.Stub.asInterface(data.readStrongBinder());
                     boolean _arg1 = data.readBoolean();
                     boolean _arg2 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -138,7 +144,8 @@ public interface IGnssMeasurementInterface extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    IGnssMeasurementCallback _arg02 = IGnssMeasurementCallback.Stub.asInterface(data.readStrongBinder());
+                    IGnssMeasurementCallback _arg02 =
+                            IGnssMeasurementCallback.Stub.asInterface(data.readStrongBinder());
                     Options _arg12 = (Options) data.readTypedObject(Options.CREATOR);
                     data.enforceNoDataAvail();
                     setCallbackWithOptions(_arg02, _arg12);
@@ -168,7 +175,11 @@ public interface IGnssMeasurementInterface extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssMeasurementInterface
-            public void setCallback(IGnssMeasurementCallback callback, boolean enableFullTracking, boolean enableCorrVecOutputs) throws RemoteException {
+            public void setCallback(
+                    IGnssMeasurementCallback callback,
+                    boolean enableFullTracking,
+                    boolean enableCorrVecOutputs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -205,7 +216,8 @@ public interface IGnssMeasurementInterface extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssMeasurementInterface
-            public void setCallbackWithOptions(IGnssMeasurementCallback callback, Options options) throws RemoteException {
+            public void setCallbackWithOptions(IGnssMeasurementCallback callback, Options options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -214,7 +226,8 @@ public interface IGnssMeasurementInterface extends IInterface {
                     _data.writeTypedObject(options, 0);
                     boolean _status = this.mRemote.transact(3, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method setCallbackWithOptions is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCallbackWithOptions is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -270,21 +283,23 @@ public interface IGnssMeasurementInterface extends IInterface {
     }
 
     public static class Options implements Parcelable {
-        public static final Parcelable.Creator<Options> CREATOR = new Parcelable.Creator<Options>() { // from class: android.hardware.gnss.IGnssMeasurementInterface.Options.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Options createFromParcel(Parcel _aidl_source) {
-                Options _aidl_out = new Options();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<Options> CREATOR =
+                new Parcelable.Creator<Options>() { // from class:
+                    // android.hardware.gnss.IGnssMeasurementInterface.Options.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Options createFromParcel(Parcel _aidl_source) {
+                        Options _aidl_out = new Options();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Options[] newArray(int _aidl_size) {
-                return new Options[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Options[] newArray(int _aidl_size) {
+                        return new Options[_aidl_size];
+                    }
+                };
         public boolean enableFullTracking = false;
         public boolean enableCorrVecOutputs = false;
         public int intervalMs = 0;

@@ -10,12 +10,14 @@ import android.graphics.Insets;
 import android.graphics.Outline;
 import android.graphics.Rect;
 import android.graphics.Xfermode;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public abstract class DrawableWrapper extends Drawable implements Drawable.Callback {
@@ -71,7 +73,9 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         super.inflate(r, parser, attrs, theme);
         DrawableWrapperState state = this.mState;
         if (state == null) {
@@ -157,7 +161,9 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
 
     @Override // android.graphics.drawable.Drawable
     public int getChangingConfigurations() {
-        return super.getChangingConfigurations() | (this.mState != null ? this.mState.getChangingConfigurations() : 0) | this.mDrawable.getChangingConfigurations();
+        return super.getChangingConfigurations()
+                | (this.mState != null ? this.mState.getChangingConfigurations() : 0)
+                | this.mDrawable.getChangingConfigurations();
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -341,7 +347,8 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
                 this.mDrawable.mutate();
             }
             if (this.mState != null) {
-                this.mState.mDrawableState = this.mDrawable != null ? this.mDrawable.getConstantState() : null;
+                this.mState.mDrawableState =
+                        this.mDrawable != null ? this.mDrawable.getConstantState() : null;
             }
             this.mMutated = true;
         }
@@ -361,7 +368,9 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
         this.mMutated = false;
     }
 
-    private void inflateChildDrawable(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    private void inflateChildDrawable(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         Drawable dr = null;
         int outerDepth = parser.getDepth();
         while (true) {
@@ -369,7 +378,9 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
             if (type == 1 || (type == 3 && parser.getDepth() <= outerDepth)) {
                 break;
             } else if (type == 2) {
-                dr = Drawable.createFromXmlInnerForDensity(r, parser, attrs, this.mState.mSrcDensityOverride, theme);
+                dr =
+                        Drawable.createFromXmlInnerForDensity(
+                                r, parser, attrs, this.mState.mSrcDensityOverride, theme);
             }
         }
         if (dr != null) {
@@ -377,7 +388,7 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
         }
     }
 
-    static abstract class DrawableWrapperState extends Drawable.ConstantState {
+    abstract static class DrawableWrapperState extends Drawable.ConstantState {
         int mChangingConfigurations;
         int mDensity;
         Drawable.ConstantState mDrawableState;
@@ -415,12 +426,13 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
             }
         }
 
-        void onDensityChanged(int sourceDensity, int targetDensity) {
-        }
+        void onDensityChanged(int sourceDensity, int targetDensity) {}
 
         @Override // android.graphics.drawable.Drawable.ConstantState
         public boolean canApplyTheme() {
-            return this.mThemeAttrs != null || (this.mDrawableState != null && this.mDrawableState.canApplyTheme()) || super.canApplyTheme();
+            return this.mThemeAttrs != null
+                    || (this.mDrawableState != null && this.mDrawableState.canApplyTheme())
+                    || super.canApplyTheme();
         }
 
         @Override // android.graphics.drawable.Drawable.ConstantState
@@ -430,7 +442,10 @@ public abstract class DrawableWrapper extends Drawable implements Drawable.Callb
 
         @Override // android.graphics.drawable.Drawable.ConstantState
         public int getChangingConfigurations() {
-            return this.mChangingConfigurations | (this.mDrawableState != null ? this.mDrawableState.getChangingConfigurations() : 0);
+            return this.mChangingConfigurations
+                    | (this.mDrawableState != null
+                            ? this.mDrawableState.getChangingConfigurations()
+                            : 0);
         }
 
         public boolean canConstantState() {

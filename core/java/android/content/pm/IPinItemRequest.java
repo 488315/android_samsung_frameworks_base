@@ -52,7 +52,7 @@ public interface IPinItemRequest extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPinItemRequest {
+    public abstract static class Stub extends Binder implements IPinItemRequest {
         public static final String DESCRIPTOR = "android.content.pm.IPinItemRequest";
         static final int TRANSACTION_accept = 2;
         static final int TRANSACTION_getAppWidgetProviderInfo = 4;
@@ -103,7 +103,8 @@ public interface IPinItemRequest extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -201,7 +202,8 @@ public interface IPinItemRequest extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ShortcutInfo _result = (ShortcutInfo) _reply.readTypedObject(ShortcutInfo.CREATOR);
+                    ShortcutInfo _result =
+                            (ShortcutInfo) _reply.readTypedObject(ShortcutInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -217,7 +219,9 @@ public interface IPinItemRequest extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    AppWidgetProviderInfo _result = (AppWidgetProviderInfo) _reply.readTypedObject(AppWidgetProviderInfo.CREATOR);
+                    AppWidgetProviderInfo _result =
+                            (AppWidgetProviderInfo)
+                                    _reply.readTypedObject(AppWidgetProviderInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

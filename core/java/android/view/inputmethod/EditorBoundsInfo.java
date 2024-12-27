@@ -3,23 +3,26 @@ package android.view.inputmethod;
 import android.graphics.RectF;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class EditorBoundsInfo implements Parcelable {
-    public static final Parcelable.Creator<EditorBoundsInfo> CREATOR = new Parcelable.Creator<EditorBoundsInfo>() { // from class: android.view.inputmethod.EditorBoundsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EditorBoundsInfo createFromParcel(Parcel source) {
-            return new EditorBoundsInfo(source);
-        }
+    public static final Parcelable.Creator<EditorBoundsInfo> CREATOR =
+            new Parcelable.Creator<
+                    EditorBoundsInfo>() { // from class: android.view.inputmethod.EditorBoundsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EditorBoundsInfo createFromParcel(Parcel source) {
+                    return new EditorBoundsInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EditorBoundsInfo[] newArray(int size) {
-            return new EditorBoundsInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EditorBoundsInfo[] newArray(int size) {
+                    return new EditorBoundsInfo[size];
+                }
+            };
     private final RectF mEditorBounds;
     private final RectF mHandwritingBounds;
     private final int mHashCode;
@@ -43,7 +46,11 @@ public final class EditorBoundsInfo implements Parcelable {
     }
 
     public String toString() {
-        return "EditorBoundsInfo{mEditorBounds=" + this.mEditorBounds + " mHandwritingBounds=" + this.mHandwritingBounds + "}";
+        return "EditorBoundsInfo{mEditorBounds="
+                + this.mEditorBounds
+                + " mHandwritingBounds="
+                + this.mHandwritingBounds
+                + "}";
     }
 
     public boolean equals(Object obj) {
@@ -51,7 +58,8 @@ public final class EditorBoundsInfo implements Parcelable {
             return false;
         }
         EditorBoundsInfo bounds = (EditorBoundsInfo) obj;
-        return Objects.equals(bounds.mEditorBounds, this.mEditorBounds) && Objects.equals(bounds.mHandwritingBounds, this.mHandwritingBounds);
+        return Objects.equals(bounds.mEditorBounds, this.mEditorBounds)
+                && Objects.equals(bounds.mHandwritingBounds, this.mHandwritingBounds);
     }
 
     @Override // android.os.Parcelable

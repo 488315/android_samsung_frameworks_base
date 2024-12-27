@@ -14,26 +14,25 @@ public interface ILayoutResultCallback extends IInterface {
 
     void onLayoutFailed(CharSequence charSequence, int i) throws RemoteException;
 
-    void onLayoutFinished(PrintDocumentInfo printDocumentInfo, boolean z, int i) throws RemoteException;
+    void onLayoutFinished(PrintDocumentInfo printDocumentInfo, boolean z, int i)
+            throws RemoteException;
 
     void onLayoutStarted(ICancellationSignal iCancellationSignal, int i) throws RemoteException;
 
     public static class Default implements ILayoutResultCallback {
         @Override // android.print.ILayoutResultCallback
-        public void onLayoutStarted(ICancellationSignal cancellation, int sequence) throws RemoteException {
-        }
+        public void onLayoutStarted(ICancellationSignal cancellation, int sequence)
+                throws RemoteException {}
 
         @Override // android.print.ILayoutResultCallback
-        public void onLayoutFinished(PrintDocumentInfo info, boolean changed, int sequence) throws RemoteException {
-        }
+        public void onLayoutFinished(PrintDocumentInfo info, boolean changed, int sequence)
+                throws RemoteException {}
 
         @Override // android.print.ILayoutResultCallback
-        public void onLayoutFailed(CharSequence error, int sequence) throws RemoteException {
-        }
+        public void onLayoutFailed(CharSequence error, int sequence) throws RemoteException {}
 
         @Override // android.print.ILayoutResultCallback
-        public void onLayoutCanceled(int sequence) throws RemoteException {
-        }
+        public void onLayoutCanceled(int sequence) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,7 +40,7 @@ public interface ILayoutResultCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILayoutResultCallback {
+    public abstract static class Stub extends Binder implements ILayoutResultCallback {
         public static final String DESCRIPTOR = "android.print.ILayoutResultCallback";
         static final int TRANSACTION_onLayoutCanceled = 4;
         static final int TRANSACTION_onLayoutFailed = 3;
@@ -89,7 +88,8 @@ public interface ILayoutResultCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -99,20 +99,23 @@ public interface ILayoutResultCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICancellationSignal _arg0 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg0 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     onLayoutStarted(_arg0, _arg1);
                     return true;
                 case 2:
-                    PrintDocumentInfo _arg02 = (PrintDocumentInfo) data.readTypedObject(PrintDocumentInfo.CREATOR);
+                    PrintDocumentInfo _arg02 =
+                            (PrintDocumentInfo) data.readTypedObject(PrintDocumentInfo.CREATOR);
                     boolean _arg12 = data.readBoolean();
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     onLayoutFinished(_arg02, _arg12, _arg2);
                     return true;
                 case 3:
-                    CharSequence _arg03 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg03 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     onLayoutFailed(_arg03, _arg13);
@@ -144,7 +147,8 @@ public interface ILayoutResultCallback extends IInterface {
             }
 
             @Override // android.print.ILayoutResultCallback
-            public void onLayoutStarted(ICancellationSignal cancellation, int sequence) throws RemoteException {
+            public void onLayoutStarted(ICancellationSignal cancellation, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -157,7 +161,8 @@ public interface ILayoutResultCallback extends IInterface {
             }
 
             @Override // android.print.ILayoutResultCallback
-            public void onLayoutFinished(PrintDocumentInfo info, boolean changed, int sequence) throws RemoteException {
+            public void onLayoutFinished(PrintDocumentInfo info, boolean changed, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

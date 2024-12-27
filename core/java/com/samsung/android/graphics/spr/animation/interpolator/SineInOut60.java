@@ -6,13 +6,15 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes6.dex */
 public class SineInOut60 implements Interpolator {
-    private static final float[][] segments = {new float[]{0.0f, 0.01f, 0.37f}, new float[]{0.37f, 0.72f, 0.888f}, new float[]{0.888f, 0.9999f, 1.0f}};
+    private static final float[][] segments = {
+        new float[] {0.0f, 0.01f, 0.37f},
+        new float[] {0.37f, 0.72f, 0.888f},
+        new float[] {0.888f, 0.9999f, 1.0f}
+    };
 
-    public SineInOut60() {
-    }
+    public SineInOut60() {}
 
-    public SineInOut60(Context context, AttributeSet attrs) {
-    }
+    public SineInOut60(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float input) {
@@ -24,7 +26,13 @@ public class SineInOut60 implements Interpolator {
         }
         float _loc_7 = (_loc_5 - (_loc_9 * (1.0f / _loc_6))) * _loc_6;
         float[] _loc_8 = segments[_loc_9];
-        float ret = ((_loc_8[0] + ((((1.0f - _loc_7) * 2.0f * (_loc_8[1] - _loc_8[0])) + ((_loc_8[2] - _loc_8[0]) * _loc_7)) * _loc_7)) * 1.0f) + 0.0f;
+        float ret =
+                ((_loc_8[0]
+                                        + ((((1.0f - _loc_7) * 2.0f * (_loc_8[1] - _loc_8[0]))
+                                                        + ((_loc_8[2] - _loc_8[0]) * _loc_7))
+                                                * _loc_7))
+                                * 1.0f)
+                        + 0.0f;
         return ret;
     }
 }

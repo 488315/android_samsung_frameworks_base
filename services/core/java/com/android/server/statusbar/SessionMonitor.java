@@ -2,6 +2,7 @@ package com.android.server.statusbar;
 
 import android.app.StatusBarManager;
 import android.content.Context;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -22,10 +23,14 @@ public final class SessionMonitor {
 
     public final void requireSetterPermissions(int i) {
         if ((i & 1) != 0) {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.CONTROL_KEYGUARD", "StatusBarManagerService.SessionMonitor");
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.CONTROL_KEYGUARD",
+                    "StatusBarManagerService.SessionMonitor");
         }
         if ((i & 2) != 0) {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.STATUS_BAR_SERVICE", "StatusBarManagerService.SessionMonitor");
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.STATUS_BAR_SERVICE",
+                    "StatusBarManagerService.SessionMonitor");
         }
     }
 }

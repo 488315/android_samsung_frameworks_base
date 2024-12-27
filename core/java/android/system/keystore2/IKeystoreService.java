@@ -5,11 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.system.keystore2.IKeystoreSecurityLevel;
 
 /* loaded from: classes3.dex */
 public interface IKeystoreService extends IInterface {
-    public static final String DESCRIPTOR = "android$system$keystore2$IKeystoreService".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$system$keystore2$IKeystoreService".replace('$', '.');
     public static final String HASH = "5648acc9b43590ef0a775b6f5c553831c20cccc4";
     public static final int VERSION = 4;
 
@@ -34,7 +34,8 @@ public interface IKeystoreService extends IInterface {
 
     void ungrant(KeyDescriptor keyDescriptor, int i) throws RemoteException;
 
-    void updateSubcomponent(KeyDescriptor keyDescriptor, byte[] bArr, byte[] bArr2) throws RemoteException;
+    void updateSubcomponent(KeyDescriptor keyDescriptor, byte[] bArr, byte[] bArr2)
+            throws RemoteException;
 
     public static class Default implements IKeystoreService {
         @Override // android.system.keystore2.IKeystoreService
@@ -48,8 +49,9 @@ public interface IKeystoreService extends IInterface {
         }
 
         @Override // android.system.keystore2.IKeystoreService
-        public void updateSubcomponent(KeyDescriptor key, byte[] publicCert, byte[] certificateChain) throws RemoteException {
-        }
+        public void updateSubcomponent(
+                KeyDescriptor key, byte[] publicCert, byte[] certificateChain)
+                throws RemoteException {}
 
         @Override // android.system.keystore2.IKeystoreService
         public KeyDescriptor[] listEntries(int domain, long nspace) throws RemoteException {
@@ -57,17 +59,16 @@ public interface IKeystoreService extends IInterface {
         }
 
         @Override // android.system.keystore2.IKeystoreService
-        public void deleteKey(KeyDescriptor key) throws RemoteException {
-        }
+        public void deleteKey(KeyDescriptor key) throws RemoteException {}
 
         @Override // android.system.keystore2.IKeystoreService
-        public KeyDescriptor grant(KeyDescriptor key, int granteeUid, int accessVector) throws RemoteException {
+        public KeyDescriptor grant(KeyDescriptor key, int granteeUid, int accessVector)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.system.keystore2.IKeystoreService
-        public void ungrant(KeyDescriptor key, int granteeUid) throws RemoteException {
-        }
+        public void ungrant(KeyDescriptor key, int granteeUid) throws RemoteException {}
 
         @Override // android.system.keystore2.IKeystoreService
         public int getNumberOfEntries(int domain, long nspace) throws RemoteException {
@@ -75,7 +76,8 @@ public interface IKeystoreService extends IInterface {
         }
 
         @Override // android.system.keystore2.IKeystoreService
-        public KeyDescriptor[] listEntriesBatched(int domain, long nspace, String startingPastAlias) throws RemoteException {
+        public KeyDescriptor[] listEntriesBatched(int domain, long nspace, String startingPastAlias)
+                throws RemoteException {
             return null;
         }
 
@@ -95,7 +97,7 @@ public interface IKeystoreService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeystoreService {
+    public abstract static class Stub extends Binder implements IKeystoreService {
         static final int TRANSACTION_deleteKey = 5;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -164,7 +166,8 @@ public interface IKeystoreService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -192,14 +195,16 @@ public interface IKeystoreService extends IInterface {
                     reply.writeStrongInterface(_result);
                     return true;
                 case 2:
-                    KeyDescriptor _arg02 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg02 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     KeyEntryResponse _result2 = getKeyEntry(_arg02);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 3:
-                    KeyDescriptor _arg03 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg03 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     byte[] _arg1 = data.createByteArray();
                     byte[] _arg2 = data.createByteArray();
                     data.enforceNoDataAvail();
@@ -215,13 +220,15 @@ public interface IKeystoreService extends IInterface {
                     reply.writeTypedArray(_result3, 1);
                     return true;
                 case 5:
-                    KeyDescriptor _arg05 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg05 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     deleteKey(_arg05);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    KeyDescriptor _arg06 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg06 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     int _arg13 = data.readInt();
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
@@ -230,7 +237,8 @@ public interface IKeystoreService extends IInterface {
                     reply.writeTypedObject(_result4, 1);
                     return true;
                 case 7:
-                    KeyDescriptor _arg07 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg07 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     int _arg14 = data.readInt();
                     data.enforceNoDataAvail();
                     ungrant(_arg07, _arg14);
@@ -277,7 +285,8 @@ public interface IKeystoreService extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreService
-            public IKeystoreSecurityLevel getSecurityLevel(int securityLevel) throws RemoteException {
+            public IKeystoreSecurityLevel getSecurityLevel(int securityLevel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -288,7 +297,8 @@ public interface IKeystoreService extends IInterface {
                         throw new RemoteException("Method getSecurityLevel is unimplemented.");
                     }
                     _reply.readException();
-                    IKeystoreSecurityLevel _result = IKeystoreSecurityLevel.Stub.asInterface(_reply.readStrongBinder());
+                    IKeystoreSecurityLevel _result =
+                            IKeystoreSecurityLevel.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -308,7 +318,8 @@ public interface IKeystoreService extends IInterface {
                         throw new RemoteException("Method getKeyEntry is unimplemented.");
                     }
                     _reply.readException();
-                    KeyEntryResponse _result = (KeyEntryResponse) _reply.readTypedObject(KeyEntryResponse.CREATOR);
+                    KeyEntryResponse _result =
+                            (KeyEntryResponse) _reply.readTypedObject(KeyEntryResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -317,7 +328,9 @@ public interface IKeystoreService extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreService
-            public void updateSubcomponent(KeyDescriptor key, byte[] publicCert, byte[] certificateChain) throws RemoteException {
+            public void updateSubcomponent(
+                    KeyDescriptor key, byte[] publicCert, byte[] certificateChain)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -349,7 +362,8 @@ public interface IKeystoreService extends IInterface {
                         throw new RemoteException("Method listEntries is unimplemented.");
                     }
                     _reply.readException();
-                    KeyDescriptor[] _result = (KeyDescriptor[]) _reply.createTypedArray(KeyDescriptor.CREATOR);
+                    KeyDescriptor[] _result =
+                            (KeyDescriptor[]) _reply.createTypedArray(KeyDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -376,7 +390,8 @@ public interface IKeystoreService extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreService
-            public KeyDescriptor grant(KeyDescriptor key, int granteeUid, int accessVector) throws RemoteException {
+            public KeyDescriptor grant(KeyDescriptor key, int granteeUid, int accessVector)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +404,8 @@ public interface IKeystoreService extends IInterface {
                         throw new RemoteException("Method grant is unimplemented.");
                     }
                     _reply.readException();
-                    KeyDescriptor _result = (KeyDescriptor) _reply.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _result =
+                            (KeyDescriptor) _reply.readTypedObject(KeyDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -438,7 +454,8 @@ public interface IKeystoreService extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreService
-            public KeyDescriptor[] listEntriesBatched(int domain, long nspace, String startingPastAlias) throws RemoteException {
+            public KeyDescriptor[] listEntriesBatched(
+                    int domain, long nspace, String startingPastAlias) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -451,7 +468,8 @@ public interface IKeystoreService extends IInterface {
                         throw new RemoteException("Method listEntriesBatched is unimplemented.");
                     }
                     _reply.readException();
-                    KeyDescriptor[] _result = (KeyDescriptor[]) _reply.createTypedArray(KeyDescriptor.CREATOR);
+                    KeyDescriptor[] _result =
+                            (KeyDescriptor[]) _reply.createTypedArray(KeyDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

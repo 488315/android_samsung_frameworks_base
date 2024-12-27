@@ -1,6 +1,5 @@
 package android.content.pm;
 
-import android.content.pm.IPackageInstallerSessionFileSystemConnector;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,21 +8,23 @@ import android.os.incremental.IncrementalFileSystemControlParcel;
 
 /* loaded from: classes.dex */
 public class FileSystemControlParcel implements Parcelable {
-    public static final Parcelable.Creator<FileSystemControlParcel> CREATOR = new Parcelable.Creator<FileSystemControlParcel>() { // from class: android.content.pm.FileSystemControlParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FileSystemControlParcel createFromParcel(Parcel _aidl_source) {
-            FileSystemControlParcel _aidl_out = new FileSystemControlParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FileSystemControlParcel> CREATOR =
+            new Parcelable.Creator<FileSystemControlParcel>() { // from class:
+                // android.content.pm.FileSystemControlParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FileSystemControlParcel createFromParcel(Parcel _aidl_source) {
+                    FileSystemControlParcel _aidl_out = new FileSystemControlParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FileSystemControlParcel[] newArray(int _aidl_size) {
-            return new FileSystemControlParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FileSystemControlParcel[] newArray(int _aidl_size) {
+                    return new FileSystemControlParcel[_aidl_size];
+                }
+            };
     public IPackageInstallerSessionFileSystemConnector callback;
     public IncrementalFileSystemControlParcel incremental;
     public IIncrementalServiceConnector service;
@@ -55,7 +56,10 @@ public class FileSystemControlParcel implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.incremental = (IncrementalFileSystemControlParcel) _aidl_parcel.readTypedObject(IncrementalFileSystemControlParcel.CREATOR);
+            this.incremental =
+                    (IncrementalFileSystemControlParcel)
+                            _aidl_parcel.readTypedObject(
+                                    IncrementalFileSystemControlParcel.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -63,14 +67,17 @@ public class FileSystemControlParcel implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.service = IIncrementalServiceConnector.Stub.asInterface(_aidl_parcel.readStrongBinder());
+            this.service =
+                    IIncrementalServiceConnector.Stub.asInterface(_aidl_parcel.readStrongBinder());
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.callback = IPackageInstallerSessionFileSystemConnector.Stub.asInterface(_aidl_parcel.readStrongBinder());
+                this.callback =
+                        IPackageInstallerSessionFileSystemConnector.Stub.asInterface(
+                                _aidl_parcel.readStrongBinder());
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

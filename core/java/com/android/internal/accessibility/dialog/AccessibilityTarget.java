@@ -8,14 +8,16 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.UserHandle;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.Flags;
+
 import com.android.internal.R;
-import com.android.internal.accessibility.dialog.TargetAdapter;
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.accessibility.util.ShortcutUtils;
+
 import java.util.Set;
 
 /* loaded from: classes5.dex */
-public abstract class AccessibilityTarget implements TargetOperations, OnTargetSelectedListener, OnTargetCheckedChangeListener {
+public abstract class AccessibilityTarget
+        implements TargetOperations, OnTargetSelectedListener, OnTargetCheckedChangeListener {
     private ComponentName mComponentName;
     private Context mContext;
     private int mFragmentType;
@@ -28,7 +30,16 @@ public abstract class AccessibilityTarget implements TargetOperations, OnTargetS
     private CharSequence mStateDescription;
     private int mUid;
 
-    public AccessibilityTarget(Context context, int shortcutType, int fragmentType, boolean isShortcutSwitched, String id, int uid, CharSequence label, Drawable icon, String key) {
+    public AccessibilityTarget(
+            Context context,
+            int shortcutType,
+            int fragmentType,
+            boolean isShortcutSwitched,
+            String id,
+            int uid,
+            CharSequence label,
+            Drawable icon,
+            String key) {
         this.mContext = context;
         this.mShortcutType = shortcutType;
         this.mFragmentType = fragmentType;
@@ -75,7 +86,11 @@ public abstract class AccessibilityTarget implements TargetOperations, OnTargetS
         int backgroundSize = (int) (90.0f * density);
         int iconSize = (int) (80.0f * density);
         WrappedDrawable wrappedDrawable = new WrappedDrawable(getIcon());
-        LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{((AdaptiveIconDrawable) getIcon()).getBackground(), wrappedDrawable});
+        LayerDrawable layerDrawable =
+                new LayerDrawable(
+                        new Drawable[] {
+                            ((AdaptiveIconDrawable) getIcon()).getBackground(), wrappedDrawable
+                        });
         layerDrawable.setLayerSize(0, backgroundSize, backgroundSize);
         layerDrawable.setLayerSize(1, iconSize, iconSize);
         layerDrawable.setLayerGravity(1, 17);
@@ -84,7 +99,8 @@ public abstract class AccessibilityTarget implements TargetOperations, OnTargetS
 
     @Override // com.android.internal.accessibility.dialog.OnTargetSelectedListener
     public void onSelected() {
-        AccessibilityManager am = (AccessibilityManager) getContext().getSystemService(AccessibilityManager.class);
+        AccessibilityManager am =
+                (AccessibilityManager) getContext().getSystemService(AccessibilityManager.class);
         switch (getShortcutType()) {
             case 1:
                 am.notifyAccessibilityButtonClicked(getContext().getDisplayId(), getId());
@@ -104,8 +120,11 @@ public abstract class AccessibilityTarget implements TargetOperations, OnTargetS
     public void onCheckedChanged(boolean isChecked) {
         setShortcutEnabled(isChecked);
         if (Flags.migrateEnableShortcuts()) {
-            AccessibilityManager am = (AccessibilityManager) getContext().getSystemService(AccessibilityManager.class);
-            am.enableShortcutsForTargets(isChecked, getShortcutType(), Set.of(this.mId), UserHandle.myUserId());
+            AccessibilityManager am =
+                    (AccessibilityManager)
+                            getContext().getSystemService(AccessibilityManager.class);
+            am.enableShortcutsForTargets(
+                    isChecked, getShortcutType(), Set.of(this.mId), UserHandle.myUserId());
         } else if (isChecked) {
             ShortcutUtils.optInValueToSettings(getContext(), getShortcutType(), getId());
         } else {

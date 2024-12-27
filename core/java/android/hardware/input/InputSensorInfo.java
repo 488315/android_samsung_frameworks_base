@@ -3,23 +3,26 @@ package android.hardware.input;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes2.dex */
 public class InputSensorInfo implements Parcelable {
-    public static final Parcelable.Creator<InputSensorInfo> CREATOR = new Parcelable.Creator<InputSensorInfo>() { // from class: android.hardware.input.InputSensorInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputSensorInfo[] newArray(int size) {
-            return new InputSensorInfo[size];
-        }
+    public static final Parcelable.Creator<InputSensorInfo> CREATOR =
+            new Parcelable.Creator<
+                    InputSensorInfo>() { // from class: android.hardware.input.InputSensorInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputSensorInfo[] newArray(int size) {
+                    return new InputSensorInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputSensorInfo createFromParcel(Parcel in) {
-            return new InputSensorInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputSensorInfo createFromParcel(Parcel in) {
+                    return new InputSensorInfo(in);
+                }
+            };
     private int mFifoMaxEventCount;
     private int mFifoReservedEventCount;
     private int mFlags;
@@ -37,11 +40,29 @@ public class InputSensorInfo implements Parcelable {
     private String mVendor;
     private int mVersion;
 
-    public InputSensorInfo(String name, String vendor2, int version, int handle, int type, float maxRange, float resolution, float power, int minDelay, int fifoReservedEventCount, int fifoMaxEventCount, String stringType, String requiredPermission, int maxDelay, int flags, int id) {
+    public InputSensorInfo(
+            String name,
+            String vendor2,
+            int version,
+            int handle,
+            int type,
+            float maxRange,
+            float resolution,
+            float power,
+            int minDelay,
+            int fifoReservedEventCount,
+            int fifoMaxEventCount,
+            String stringType,
+            String requiredPermission,
+            int maxDelay,
+            int flags,
+            int id) {
         this.mName = name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mName);
         this.mVendor = vendor2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mVendor);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mVendor);
         this.mVersion = version;
         this.mHandle = handle;
         this.mType = type;
@@ -52,9 +73,11 @@ public class InputSensorInfo implements Parcelable {
         this.mFifoReservedEventCount = fifoReservedEventCount;
         this.mFifoMaxEventCount = fifoMaxEventCount;
         this.mStringType = stringType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStringType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStringType);
         this.mRequiredPermission = requiredPermission;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRequiredPermission);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRequiredPermission);
         this.mMaxDelay = maxDelay;
         this.mFlags = flags;
         this.mId = id;
@@ -125,7 +148,39 @@ public class InputSensorInfo implements Parcelable {
     }
 
     public String toString() {
-        return "InputSensorInfo { name = " + this.mName + ", vendor = " + this.mVendor + ", version = " + this.mVersion + ", handle = " + this.mHandle + ", type = " + this.mType + ", maxRange = " + this.mMaxRange + ", resolution = " + this.mResolution + ", power = " + this.mPower + ", minDelay = " + this.mMinDelay + ", fifoReservedEventCount = " + this.mFifoReservedEventCount + ", fifoMaxEventCount = " + this.mFifoMaxEventCount + ", stringType = " + this.mStringType + ", requiredPermission = " + this.mRequiredPermission + ", maxDelay = " + this.mMaxDelay + ", flags = " + this.mFlags + ", id = " + this.mId + " }";
+        return "InputSensorInfo { name = "
+                + this.mName
+                + ", vendor = "
+                + this.mVendor
+                + ", version = "
+                + this.mVersion
+                + ", handle = "
+                + this.mHandle
+                + ", type = "
+                + this.mType
+                + ", maxRange = "
+                + this.mMaxRange
+                + ", resolution = "
+                + this.mResolution
+                + ", power = "
+                + this.mPower
+                + ", minDelay = "
+                + this.mMinDelay
+                + ", fifoReservedEventCount = "
+                + this.mFifoReservedEventCount
+                + ", fifoMaxEventCount = "
+                + this.mFifoMaxEventCount
+                + ", stringType = "
+                + this.mStringType
+                + ", requiredPermission = "
+                + this.mRequiredPermission
+                + ", maxDelay = "
+                + this.mMaxDelay
+                + ", flags = "
+                + this.mFlags
+                + ", id = "
+                + this.mId
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -171,9 +226,11 @@ public class InputSensorInfo implements Parcelable {
         int flags = in.readInt();
         int id = in.readInt();
         this.mName = name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mName);
         this.mVendor = vendor2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mVendor);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mVendor);
         this.mVersion = version;
         this.mHandle = handle;
         this.mType = type;
@@ -184,15 +241,16 @@ public class InputSensorInfo implements Parcelable {
         this.mFifoReservedEventCount = fifoReservedEventCount;
         this.mFifoMaxEventCount = fifoMaxEventCount;
         this.mStringType = stringType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStringType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStringType);
         this.mRequiredPermission = requiredPermission;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRequiredPermission);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRequiredPermission);
         this.mMaxDelay = maxDelay;
         this.mFlags = flags;
         this.mId = id;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

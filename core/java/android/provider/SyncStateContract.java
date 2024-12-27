@@ -27,8 +27,15 @@ public class SyncStateContract {
         private static final String[] DATA_PROJECTION = {"data", "_id"};
         private static final String SELECT_BY_ACCOUNT = "account_name=? AND account_type=?";
 
-        public static byte[] get(ContentProviderClient provider, Uri uri, Account account) throws RemoteException {
-            Cursor c = provider.query(uri, DATA_PROJECTION, SELECT_BY_ACCOUNT, new String[]{account.name, account.type}, null);
+        public static byte[] get(ContentProviderClient provider, Uri uri, Account account)
+                throws RemoteException {
+            Cursor c =
+                    provider.query(
+                            uri,
+                            DATA_PROJECTION,
+                            SELECT_BY_ACCOUNT,
+                            new String[] {account.name, account.type},
+                            null);
             if (c == null) {
                 throw new RemoteException();
             }
@@ -43,7 +50,9 @@ public class SyncStateContract {
             }
         }
 
-        public static void set(ContentProviderClient provider, Uri uri, Account account, byte[] data) throws RemoteException {
+        public static void set(
+                ContentProviderClient provider, Uri uri, Account account, byte[] data)
+                throws RemoteException {
             ContentValues values = new ContentValues();
             values.put("data", data);
             values.put("account_name", account.name);
@@ -51,7 +60,9 @@ public class SyncStateContract {
             provider.insert(uri, values);
         }
 
-        public static Uri insert(ContentProviderClient provider, Uri uri, Account account, byte[] data) throws RemoteException {
+        public static Uri insert(
+                ContentProviderClient provider, Uri uri, Account account, byte[] data)
+                throws RemoteException {
             ContentValues values = new ContentValues();
             values.put("data", data);
             values.put("account_name", account.name);
@@ -59,14 +70,22 @@ public class SyncStateContract {
             return provider.insert(uri, values);
         }
 
-        public static void update(ContentProviderClient provider, Uri uri, byte[] data) throws RemoteException {
+        public static void update(ContentProviderClient provider, Uri uri, byte[] data)
+                throws RemoteException {
             ContentValues values = new ContentValues();
             values.put("data", data);
             provider.update(uri, values, null, null);
         }
 
-        public static Pair<Uri, byte[]> getWithUri(ContentProviderClient provider, Uri uri, Account account) throws RemoteException {
-            Cursor c = provider.query(uri, DATA_PROJECTION, SELECT_BY_ACCOUNT, new String[]{account.name, account.type}, null);
+        public static Pair<Uri, byte[]> getWithUri(
+                ContentProviderClient provider, Uri uri, Account account) throws RemoteException {
+            Cursor c =
+                    provider.query(
+                            uri,
+                            DATA_PROJECTION,
+                            SELECT_BY_ACCOUNT,
+                            new String[] {account.name, account.type},
+                            null);
             if (c == null) {
                 throw new RemoteException();
             }
@@ -83,10 +102,15 @@ public class SyncStateContract {
             }
         }
 
-        public static ContentProviderOperation newSetOperation(Uri uri, Account account, byte[] data) {
+        public static ContentProviderOperation newSetOperation(
+                Uri uri, Account account, byte[] data) {
             ContentValues values = new ContentValues();
             values.put("data", data);
-            return ContentProviderOperation.newInsert(uri).withValue("account_name", account.name).withValue("account_type", account.type).withValues(values).build();
+            return ContentProviderOperation.newInsert(uri)
+                    .withValue("account_name", account.name)
+                    .withValue("account_type", account.type)
+                    .withValues(values)
+                    .build();
         }
 
         public static ContentProviderOperation newUpdateOperation(Uri uri, byte[] data) {

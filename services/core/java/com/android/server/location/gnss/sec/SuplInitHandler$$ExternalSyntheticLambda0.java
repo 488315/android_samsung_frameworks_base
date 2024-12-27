@@ -3,7 +3,9 @@ package com.android.server.location.gnss.sec;
 import android.net.TrafficStats;
 import android.net.util.NetworkConstants;
 import android.util.Log;
+
 import com.android.server.location.LocationServiceThread;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -14,7 +16,8 @@ import java.net.SocketTimeoutException;
 public final /* synthetic */ class SuplInitHandler$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ SuplInitHandler f$0;
 
-    public /* synthetic */ SuplInitHandler$$ExternalSyntheticLambda0(SuplInitHandler suplInitHandler) {
+    public /* synthetic */ SuplInitHandler$$ExternalSyntheticLambda0(
+            SuplInitHandler suplInitHandler) {
         this.f$0 = suplInitHandler;
     }
 
@@ -28,12 +31,18 @@ public final /* synthetic */ class SuplInitHandler$$ExternalSyntheticLambda0 imp
                 DatagramSocket datagramSocket = new DatagramSocket(7275);
                 try {
                     suplInitHandler.mIsOpenUdpPort = true;
-                    DatagramPacket datagramPacket = new DatagramPacket(new byte[NetworkConstants.ETHER_MTU], NetworkConstants.ETHER_MTU);
+                    DatagramPacket datagramPacket =
+                            new DatagramPacket(
+                                    new byte[NetworkConstants.ETHER_MTU],
+                                    NetworkConstants.ETHER_MTU);
                     datagramSocket.setSoTimeout(60000);
                     datagramSocket.receive(datagramPacket);
                     Log.d("SuplInitHandler", "received data through 7275 UDP port");
                     if (datagramPacket.getLength() > 0) {
-                        LocationServiceThread.getHandler().post(new SuplInitHandler$$ExternalSyntheticLambda1(suplInitHandler, datagramPacket, 2));
+                        LocationServiceThread.getHandler()
+                                .post(
+                                        new SuplInitHandler$$ExternalSyntheticLambda1(
+                                                suplInitHandler, datagramPacket, 2));
                         suplInitHandler.mIsOpenUdpPort = false;
                     }
                     datagramSocket.close();

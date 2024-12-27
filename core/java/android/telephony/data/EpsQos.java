@@ -2,24 +2,25 @@ package android.telephony.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.telephony.data.Qos;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class EpsQos extends Qos implements Parcelable {
-    public static final Parcelable.Creator<EpsQos> CREATOR = new Parcelable.Creator<EpsQos>() { // from class: android.telephony.data.EpsQos.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EpsQos createFromParcel(Parcel source) {
-            return new EpsQos(source);
-        }
+    public static final Parcelable.Creator<EpsQos> CREATOR =
+            new Parcelable.Creator<EpsQos>() { // from class: android.telephony.data.EpsQos.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EpsQos createFromParcel(Parcel source) {
+                    return new EpsQos(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EpsQos[] newArray(int size) {
-            return new EpsQos[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EpsQos[] newArray(int size) {
+                    return new EpsQos[size];
+                }
+            };
     int qosClassId;
 
     public EpsQos(Qos.QosBandwidth downlink, Qos.QosBandwidth uplink, int qosClassId) {
@@ -72,6 +73,12 @@ public final class EpsQos extends Qos implements Parcelable {
     }
 
     public String toString() {
-        return "EpsQos { qosClassId=" + this.qosClassId + " downlink=" + this.downlink + " uplink=" + this.uplink + "}";
+        return "EpsQos { qosClassId="
+                + this.qosClassId
+                + " downlink="
+                + this.downlink
+                + " uplink="
+                + this.uplink
+                + "}";
     }
 }

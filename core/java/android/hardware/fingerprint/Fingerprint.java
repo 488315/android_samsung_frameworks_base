@@ -6,23 +6,26 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class Fingerprint extends BiometricAuthenticator.Identifier {
-    public static final Parcelable.Creator<Fingerprint> CREATOR = new Parcelable.Creator<Fingerprint>() { // from class: android.hardware.fingerprint.Fingerprint.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Fingerprint createFromParcel(Parcel in) {
-            return new Fingerprint(in);
-        }
+    public static final Parcelable.Creator<Fingerprint> CREATOR =
+            new Parcelable.Creator<
+                    Fingerprint>() { // from class: android.hardware.fingerprint.Fingerprint.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Fingerprint createFromParcel(Parcel in) {
+                    return new Fingerprint(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Fingerprint[] newArray(int size) {
-            return new Fingerprint[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Fingerprint[] newArray(int size) {
+                    return new Fingerprint[size];
+                }
+            };
     private int mDuplicatedImgCount;
     private int mGroupId;
 
-    public Fingerprint(CharSequence name, int groupId, int fingerId, long deviceId, int duplicatedCnt) {
+    public Fingerprint(
+            CharSequence name, int groupId, int fingerId, long deviceId, int duplicatedCnt) {
         super(name, fingerId, deviceId);
         this.mGroupId = groupId;
         this.mDuplicatedImgCount = duplicatedCnt;

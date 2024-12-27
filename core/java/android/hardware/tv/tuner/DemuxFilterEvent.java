@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DemuxFilterEvent implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterEvent> CREATOR = new Parcelable.Creator<DemuxFilterEvent>() { // from class: android.hardware.tv.tuner.DemuxFilterEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterEvent createFromParcel(Parcel _aidl_source) {
-            return new DemuxFilterEvent(_aidl_source);
-        }
+    public static final Parcelable.Creator<DemuxFilterEvent> CREATOR =
+            new Parcelable.Creator<DemuxFilterEvent>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterEvent createFromParcel(Parcel _aidl_source) {
+                    return new DemuxFilterEvent(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterEvent[] newArray(int _aidl_size) {
-            return new DemuxFilterEvent[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterEvent[] newArray(int _aidl_size) {
+                    return new DemuxFilterEvent[_aidl_size];
+                }
+            };
     public static final int download = 5;
     public static final int ipPayload = 6;
     public static final int media = 1;
@@ -239,39 +241,57 @@ public final class DemuxFilterEvent implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                DemuxFilterSectionEvent _aidl_value = (DemuxFilterSectionEvent) _aidl_parcel.readTypedObject(DemuxFilterSectionEvent.CREATOR);
+                DemuxFilterSectionEvent _aidl_value =
+                        (DemuxFilterSectionEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterSectionEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                DemuxFilterMediaEvent _aidl_value2 = (DemuxFilterMediaEvent) _aidl_parcel.readTypedObject(DemuxFilterMediaEvent.CREATOR);
+                DemuxFilterMediaEvent _aidl_value2 =
+                        (DemuxFilterMediaEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterMediaEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                DemuxFilterPesEvent _aidl_value3 = (DemuxFilterPesEvent) _aidl_parcel.readTypedObject(DemuxFilterPesEvent.CREATOR);
+                DemuxFilterPesEvent _aidl_value3 =
+                        (DemuxFilterPesEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterPesEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
-                DemuxFilterTsRecordEvent _aidl_value4 = (DemuxFilterTsRecordEvent) _aidl_parcel.readTypedObject(DemuxFilterTsRecordEvent.CREATOR);
+                DemuxFilterTsRecordEvent _aidl_value4 =
+                        (DemuxFilterTsRecordEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterTsRecordEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value4);
                 return;
             case 4:
-                DemuxFilterMmtpRecordEvent _aidl_value5 = (DemuxFilterMmtpRecordEvent) _aidl_parcel.readTypedObject(DemuxFilterMmtpRecordEvent.CREATOR);
+                DemuxFilterMmtpRecordEvent _aidl_value5 =
+                        (DemuxFilterMmtpRecordEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterMmtpRecordEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value5);
                 return;
             case 5:
-                DemuxFilterDownloadEvent _aidl_value6 = (DemuxFilterDownloadEvent) _aidl_parcel.readTypedObject(DemuxFilterDownloadEvent.CREATOR);
+                DemuxFilterDownloadEvent _aidl_value6 =
+                        (DemuxFilterDownloadEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterDownloadEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value6);
                 return;
             case 6:
-                DemuxFilterIpPayloadEvent _aidl_value7 = (DemuxFilterIpPayloadEvent) _aidl_parcel.readTypedObject(DemuxFilterIpPayloadEvent.CREATOR);
+                DemuxFilterIpPayloadEvent _aidl_value7 =
+                        (DemuxFilterIpPayloadEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterIpPayloadEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value7);
                 return;
             case 7:
-                DemuxFilterTemiEvent _aidl_value8 = (DemuxFilterTemiEvent) _aidl_parcel.readTypedObject(DemuxFilterTemiEvent.CREATOR);
+                DemuxFilterTemiEvent _aidl_value8 =
+                        (DemuxFilterTemiEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterTemiEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value8);
                 return;
             case 8:
-                DemuxFilterMonitorEvent _aidl_value9 = (DemuxFilterMonitorEvent) _aidl_parcel.readTypedObject(DemuxFilterMonitorEvent.CREATOR);
+                DemuxFilterMonitorEvent _aidl_value9 =
+                        (DemuxFilterMonitorEvent)
+                                _aidl_parcel.readTypedObject(DemuxFilterMonitorEvent.CREATOR);
                 _set(_aidl_tag, _aidl_value9);
                 return;
             case 9:
@@ -327,7 +347,12 @@ public final class DemuxFilterEvent implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

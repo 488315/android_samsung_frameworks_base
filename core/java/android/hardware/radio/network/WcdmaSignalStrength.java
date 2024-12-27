@@ -3,25 +3,28 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class WcdmaSignalStrength implements Parcelable {
-    public static final Parcelable.Creator<WcdmaSignalStrength> CREATOR = new Parcelable.Creator<WcdmaSignalStrength>() { // from class: android.hardware.radio.network.WcdmaSignalStrength.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WcdmaSignalStrength createFromParcel(Parcel _aidl_source) {
-            WcdmaSignalStrength _aidl_out = new WcdmaSignalStrength();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<WcdmaSignalStrength> CREATOR =
+            new Parcelable.Creator<WcdmaSignalStrength>() { // from class:
+                // android.hardware.radio.network.WcdmaSignalStrength.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WcdmaSignalStrength createFromParcel(Parcel _aidl_source) {
+                    WcdmaSignalStrength _aidl_out = new WcdmaSignalStrength();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WcdmaSignalStrength[] newArray(int _aidl_size) {
-            return new WcdmaSignalStrength[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WcdmaSignalStrength[] newArray(int _aidl_size) {
+                    return new WcdmaSignalStrength[_aidl_size];
+                }
+            };
     public int signalStrength = 0;
     public int bitErrorRate = 0;
     public int rscp = 0;

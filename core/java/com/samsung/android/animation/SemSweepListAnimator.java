@@ -85,7 +85,8 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
                 this.mSweepAnimationFilter = new SemSweepWaveFilter(this.mListView);
                 break;
             case 2:
-                this.mSweepAnimationFilter = new SemSweepTranslationFilter(this.mListView, this.mContext);
+                this.mSweepAnimationFilter =
+                        new SemSweepTranslationFilter(this.mListView, this.mContext);
                 break;
         }
     }
@@ -111,9 +112,11 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
             if (viewForeground == null || this.mCurrentSweepConfig == null) {
                 return;
             }
-            if ((this.mCurrentSweepConfig.allowLeftToRight && deltaX >= 0.0f) || (this.mCurrentSweepConfig.allowRightToLeft && deltaX <= 0.0f)) {
+            if ((this.mCurrentSweepConfig.allowLeftToRight && deltaX >= 0.0f)
+                    || (this.mCurrentSweepConfig.allowRightToLeft && deltaX <= 0.0f)) {
                 this.mSweepAnimationFilter.doMoveAction(viewForeground, deltaX, position);
-            } else if (Math.signum(this.mPreviousDeltaX) != Math.signum(deltaX) && this.mSweepAnimationType == 2) {
+            } else if (Math.signum(this.mPreviousDeltaX) != Math.signum(deltaX)
+                    && this.mSweepAnimationType == 2) {
                 viewForeground.setTranslationX(0.0f);
                 viewForeground.setAlpha(1.0f);
                 Rect bitmapDrawableBound = this.mSweepAnimationFilter.getBitmapDrawableBound();
@@ -140,12 +143,23 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
             }
             this.mPreviousDeltaX = deltaX;
             if (this.mOnSweepListener != null && viewForeground != null) {
-                Rect rect = new Rect(viewForeground.getLeft(), viewForeground.getTop(), viewForeground.getRight(), viewForeground.getBottom());
+                Rect rect =
+                        new Rect(
+                                viewForeground.getLeft(),
+                                viewForeground.getTop(),
+                                viewForeground.getRight(),
+                                viewForeground.getBottom());
                 this.mCurrentSweepConfig = this.mOnSweepListener.onSweepStart(position, 0.0f, rect);
                 if (this.mSweepAnimationFilter != null && this.mCurrentSweepConfig != null) {
-                    if ((this.mCurrentSweepConfig.allowLeftToRight && deltaX >= 0.0f) || (this.mCurrentSweepConfig.allowRightToLeft && deltaX <= 0.0f)) {
-                        if (this.mCurrentSweepConfig.childIdForLocationHint != 0 && viewForeground.findViewById(this.mCurrentSweepConfig.childIdForLocationHint) != null) {
-                            View v2 = viewForeground.findViewById(this.mCurrentSweepConfig.childIdForLocationHint);
+                    if ((this.mCurrentSweepConfig.allowLeftToRight && deltaX >= 0.0f)
+                            || (this.mCurrentSweepConfig.allowRightToLeft && deltaX <= 0.0f)) {
+                        if (this.mCurrentSweepConfig.childIdForLocationHint != 0
+                                && viewForeground.findViewById(
+                                                this.mCurrentSweepConfig.childIdForLocationHint)
+                                        != null) {
+                            View v2 =
+                                    viewForeground.findViewById(
+                                            this.mCurrentSweepConfig.childIdForLocationHint);
                             this.mForegroundView = v2;
                             v = v2;
                         } else {
@@ -157,7 +171,12 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
                             this.mListView.setPressed(false);
                             listViewSelector.jumpToCurrentState();
                         }
-                        this.mSweepAnimationFilter.initAnimationFilter(v, deltaX, position, this.mOnSweepListener, this.mCurrentSweepConfig);
+                        this.mSweepAnimationFilter.initAnimationFilter(
+                                v,
+                                deltaX,
+                                position,
+                                this.mOnSweepListener,
+                                this.mCurrentSweepConfig);
                         return;
                     }
                     this.mSwiping = false;
@@ -170,7 +189,11 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
     }
 
     @Override // com.samsung.android.animation.SemAbsSweepListAnimator
-    public void onActionUp(MotionEvent event, final View viewForeground, final int position, boolean isSweepPattern) {
+    public void onActionUp(
+            MotionEvent event,
+            final View viewForeground,
+            final int position,
+            boolean isSweepPattern) {
         boolean animationStarted = false;
         if (this.mSkipActionUpAnimation) {
             this.mSkipActionUpAnimation = false;
@@ -179,7 +202,9 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
             this.mListView.setEnabled(true);
             resetTouchState();
             if (this.mOnSweepListener != null) {
-                this.mOnSweepListener.onSweepEnd(position, Math.signum(this.mSweepAnimationFilter.getEndXOfActionUpAnimator()));
+                this.mOnSweepListener.onSweepEnd(
+                        position,
+                        Math.signum(this.mSweepAnimationFilter.getEndXOfActionUpAnimator()));
                 return;
             }
             return;
@@ -207,102 +232,203 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
                 return;
             }
             Log.d(TAG, "onActionUp : create sweepAnimation.. #1");
-            ValueAnimator animator = this.mSweepAnimationFilter.createActionUpAnimator(viewForeground, adjustedVelocityX, this.mScaledTouchSlop, deltaX, isSweepPattern);
-            animator.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemSweepListAnimator.1
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animation) {
-                    Log.d(SemSweepListAnimator.TAG, "animator : onAnimationStart");
-                }
-
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    if (SemSweepListAnimator.this.mSweepAnimationFilter != null && !SemSweepListAnimator.this.mSweepAnimationFilter.isAnimationBack() && SemSweepListAnimator.this.mSweepAnimationType == 2) {
-                        Log.d(SemSweepListAnimator.TAG, "onActionUp : animator : onAnimationEnd : prepare copy bitmap to animate fade.. ");
-                        BitmapDrawable tempBd = ((SemSweepTranslationFilter) SemSweepListAnimator.this.mSweepAnimationFilter).getSweepBitmapDrawable();
-                        if (tempBd == null || tempBd.getBitmap() == null) {
-                            SemSweepListAnimator.this.resetSweepInfo();
-                            if (SemSweepListAnimator.this.mOnSweepListener != null) {
-                                Log.d(SemSweepListAnimator.TAG, "onActionUp : animator : onAnimationEnd : send onSweepEnd #1");
-                                SemSweepListAnimator.this.mOnSweepListener.onSweepEnd(position, Math.signum(SemSweepListAnimator.this.mSweepAnimationFilter.getEndXOfActionUpAnimator()));
-                            }
-                            SemSweepListAnimator.this.resetSweepAnimationFilter();
-                            Log.d(SemSweepListAnimator.TAG, "onActionUp : animator : onAnimationEnd : failed getBitmap() and so can not copy bitmap, return");
-                            return;
+            ValueAnimator animator =
+                    this.mSweepAnimationFilter.createActionUpAnimator(
+                            viewForeground,
+                            adjustedVelocityX,
+                            this.mScaledTouchSlop,
+                            deltaX,
+                            isSweepPattern);
+            animator.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                        // com.samsung.android.animation.SemSweepListAnimator.1
+                        @Override // android.animation.AnimatorListenerAdapter,
+                        // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animation) {
+                            Log.d(SemSweepListAnimator.TAG, "animator : onAnimationStart");
                         }
-                        final Bitmap copiedBitmap = tempBd.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
-                        SemSweepListAnimator.this.mSweepBdToFade = new BitmapDrawable(SemSweepListAnimator.this.mContext.getResources(), copiedBitmap);
-                        SemSweepListAnimator.this.mSweepBdToFade.setBounds(tempBd.getBounds());
-                        if (SemSweepListAnimator.this.mSweepBdToFade != null) {
-                            Log.d(SemSweepListAnimator.TAG, "animator : create fadeOut animator #2");
-                            Log.d(SemSweepListAnimator.TAG, "animator : sweepBdToFade = " + SemSweepListAnimator.this.mSweepBdToFade);
-                            ValueAnimator fadeOutAnimator = ValueAnimator.ofInt(255, 0);
-                            fadeOutAnimator.setDuration(300L);
-                            fadeOutAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemSweepListAnimator.1.1
-                                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                                public void onAnimationUpdate(ValueAnimator anim) {
-                                    if (SemSweepListAnimator.this.mSweepBdToFade != null && SemSweepListAnimator.this.mListView != null) {
-                                        int animatedValue = ((Integer) anim.getAnimatedValue()).intValue();
-                                        SemSweepListAnimator.this.mSweepBdToFade.setAlpha(animatedValue);
-                                        SemSweepListAnimator.this.mListView.invalidate(SemSweepListAnimator.this.mSweepBdToFade.getBounds());
-                                    }
-                                }
-                            });
-                            fadeOutAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemSweepListAnimator.1.2
-                                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                                public void onAnimationStart(Animator animation2) {
-                                    Log.d(SemSweepListAnimator.TAG, "fadeOutAnimator : onAnimationStart");
-                                }
 
-                                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                                public void onAnimationEnd(Animator animation2) {
-                                    Log.d(SemSweepListAnimator.TAG, "fadeOutAnimator : onAnimationEnd");
+                        @Override // android.animation.AnimatorListenerAdapter,
+                        // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            if (SemSweepListAnimator.this.mSweepAnimationFilter != null
+                                    && !SemSweepListAnimator.this.mSweepAnimationFilter
+                                            .isAnimationBack()
+                                    && SemSweepListAnimator.this.mSweepAnimationType == 2) {
+                                Log.d(
+                                        SemSweepListAnimator.TAG,
+                                        "onActionUp : animator : onAnimationEnd : prepare copy"
+                                            + " bitmap to animate fade.. ");
+                                BitmapDrawable tempBd =
+                                        ((SemSweepTranslationFilter)
+                                                        SemSweepListAnimator.this
+                                                                .mSweepAnimationFilter)
+                                                .getSweepBitmapDrawable();
+                                if (tempBd == null || tempBd.getBitmap() == null) {
                                     SemSweepListAnimator.this.resetSweepInfo();
                                     if (SemSweepListAnimator.this.mOnSweepListener != null) {
-                                        Log.d(SemSweepListAnimator.TAG, "fadeOutAnimator : onAnimationEnd : send onSweepEnd #2");
-                                        SemSweepListAnimator.this.mOnSweepListener.onSweepEnd(position, Math.signum(SemSweepListAnimator.this.mSweepAnimationFilter.getEndXOfActionUpAnimator()));
+                                        Log.d(
+                                                SemSweepListAnimator.TAG,
+                                                "onActionUp : animator : onAnimationEnd : send"
+                                                    + " onSweepEnd #1");
+                                        SemSweepListAnimator.this.mOnSweepListener.onSweepEnd(
+                                                position,
+                                                Math.signum(
+                                                        SemSweepListAnimator.this
+                                                                .mSweepAnimationFilter
+                                                                .getEndXOfActionUpAnimator()));
                                     }
-                                    if (SemSweepListAnimator.this.mSweepBdToFade != null) {
-                                        Bitmap b = SemSweepListAnimator.this.mSweepBdToFade.getBitmap();
-                                        if (b != null) {
-                                            Log.d(SemSweepListAnimator.TAG, "fadeOutAnimator : onAnimationEnd : recycle mSweepBdToFade");
-                                            b.recycle();
-                                        }
-                                        SemSweepListAnimator.this.mSweepBdToFade = null;
-                                    }
-                                    if (copiedBitmap != null) {
-                                        Log.d(SemSweepListAnimator.TAG, "fadeOutAnimator : onAnimationEnd : recycle copiedBitmap");
-                                        copiedBitmap.recycle();
-                                    }
+                                    SemSweepListAnimator.this.resetSweepAnimationFilter();
+                                    Log.d(
+                                            SemSweepListAnimator.TAG,
+                                            "onActionUp : animator : onAnimationEnd : failed"
+                                                + " getBitmap() and so can not copy bitmap,"
+                                                + " return");
+                                    return;
                                 }
-                            });
-                            Log.d(SemSweepListAnimator.TAG, "animator : onAnimationEnd : fadeOutAnimator.start()");
-                            fadeOutAnimator.start();
+                                final Bitmap copiedBitmap =
+                                        tempBd.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+                                SemSweepListAnimator.this.mSweepBdToFade =
+                                        new BitmapDrawable(
+                                                SemSweepListAnimator.this.mContext.getResources(),
+                                                copiedBitmap);
+                                SemSweepListAnimator.this.mSweepBdToFade.setBounds(
+                                        tempBd.getBounds());
+                                if (SemSweepListAnimator.this.mSweepBdToFade != null) {
+                                    Log.d(
+                                            SemSweepListAnimator.TAG,
+                                            "animator : create fadeOut animator #2");
+                                    Log.d(
+                                            SemSweepListAnimator.TAG,
+                                            "animator : sweepBdToFade = "
+                                                    + SemSweepListAnimator.this.mSweepBdToFade);
+                                    ValueAnimator fadeOutAnimator = ValueAnimator.ofInt(255, 0);
+                                    fadeOutAnimator.setDuration(300L);
+                                    fadeOutAnimator.addUpdateListener(
+                                            new ValueAnimator
+                                                    .AnimatorUpdateListener() { // from class:
+                                                // com.samsung.android.animation.SemSweepListAnimator.1.1
+                                                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                                public void onAnimationUpdate(ValueAnimator anim) {
+                                                    if (SemSweepListAnimator.this.mSweepBdToFade
+                                                                    != null
+                                                            && SemSweepListAnimator.this.mListView
+                                                                    != null) {
+                                                        int animatedValue =
+                                                                ((Integer) anim.getAnimatedValue())
+                                                                        .intValue();
+                                                        SemSweepListAnimator.this.mSweepBdToFade
+                                                                .setAlpha(animatedValue);
+                                                        SemSweepListAnimator.this.mListView
+                                                                .invalidate(
+                                                                        SemSweepListAnimator.this
+                                                                                .mSweepBdToFade
+                                                                                .getBounds());
+                                                    }
+                                                }
+                                            });
+                                    fadeOutAnimator.addListener(
+                                            new AnimatorListenerAdapter() { // from class:
+                                                // com.samsung.android.animation.SemSweepListAnimator.1.2
+                                                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                                                public void onAnimationStart(Animator animation2) {
+                                                    Log.d(
+                                                            SemSweepListAnimator.TAG,
+                                                            "fadeOutAnimator : onAnimationStart");
+                                                }
+
+                                                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                                                public void onAnimationEnd(Animator animation2) {
+                                                    Log.d(
+                                                            SemSweepListAnimator.TAG,
+                                                            "fadeOutAnimator : onAnimationEnd");
+                                                    SemSweepListAnimator.this.resetSweepInfo();
+                                                    if (SemSweepListAnimator.this.mOnSweepListener
+                                                            != null) {
+                                                        Log.d(
+                                                                SemSweepListAnimator.TAG,
+                                                                "fadeOutAnimator : onAnimationEnd :"
+                                                                    + " send onSweepEnd #2");
+                                                        SemSweepListAnimator.this.mOnSweepListener
+                                                                .onSweepEnd(
+                                                                        position,
+                                                                        Math.signum(
+                                                                                SemSweepListAnimator
+                                                                                        .this
+                                                                                        .mSweepAnimationFilter
+                                                                                        .getEndXOfActionUpAnimator()));
+                                                    }
+                                                    if (SemSweepListAnimator.this.mSweepBdToFade
+                                                            != null) {
+                                                        Bitmap b =
+                                                                SemSweepListAnimator.this
+                                                                        .mSweepBdToFade.getBitmap();
+                                                        if (b != null) {
+                                                            Log.d(
+                                                                    SemSweepListAnimator.TAG,
+                                                                    "fadeOutAnimator :"
+                                                                        + " onAnimationEnd :"
+                                                                        + " recycle"
+                                                                        + " mSweepBdToFade");
+                                                            b.recycle();
+                                                        }
+                                                        SemSweepListAnimator.this.mSweepBdToFade =
+                                                                null;
+                                                    }
+                                                    if (copiedBitmap != null) {
+                                                        Log.d(
+                                                                SemSweepListAnimator.TAG,
+                                                                "fadeOutAnimator : onAnimationEnd :"
+                                                                    + " recycle copiedBitmap");
+                                                        copiedBitmap.recycle();
+                                                    }
+                                                }
+                                            });
+                                    Log.d(
+                                            SemSweepListAnimator.TAG,
+                                            "animator : onAnimationEnd : fadeOutAnimator.start()");
+                                    fadeOutAnimator.start();
+                                }
+                            } else {
+                                Log.d(
+                                        SemSweepListAnimator.TAG,
+                                        "animator : onAnimationEnd : Animation is back, call"
+                                            + " resetSweepInfo()");
+                                SemSweepListAnimator.this.resetSweepInfo();
+                                if (SemSweepListAnimator.this.mOnSweepListener != null) {
+                                    Log.d(
+                                            SemSweepListAnimator.TAG,
+                                            "animator : onAnimationEnd : send onSweepEnd #3");
+                                    SemSweepListAnimator.this.mOnSweepListener.onSweepEnd(
+                                            position,
+                                            Math.signum(
+                                                    SemSweepListAnimator.this.mSweepAnimationFilter
+                                                            .getEndXOfActionUpAnimator()));
+                                }
+                            }
+                            Log.d(
+                                    SemSweepListAnimator.TAG,
+                                    "animator : onAnimationEnd : call resetSweepAnimationFilter ");
+                            SemSweepListAnimator.this.resetSweepAnimationFilter();
                         }
-                    } else {
-                        Log.d(SemSweepListAnimator.TAG, "animator : onAnimationEnd : Animation is back, call resetSweepInfo()");
-                        SemSweepListAnimator.this.resetSweepInfo();
-                        if (SemSweepListAnimator.this.mOnSweepListener != null) {
-                            Log.d(SemSweepListAnimator.TAG, "animator : onAnimationEnd : send onSweepEnd #3");
-                            SemSweepListAnimator.this.mOnSweepListener.onSweepEnd(position, Math.signum(SemSweepListAnimator.this.mSweepAnimationFilter.getEndXOfActionUpAnimator()));
-                        }
-                    }
-                    Log.d(SemSweepListAnimator.TAG, "animator : onAnimationEnd : call resetSweepAnimationFilter ");
-                    SemSweepListAnimator.this.resetSweepAnimationFilter();
-                }
-            });
+                    });
             if (this.mOnSweepListener != null) {
-                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemSweepListAnimator.2
-                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                    public void onAnimationUpdate(ValueAnimator anim) {
-                        float sweeprogress = -1.0f;
-                        if (SemSweepListAnimator.this.mSweepAnimationType == 2) {
-                            sweeprogress = viewForeground.getTranslationX() / width;
-                        } else if (SemSweepListAnimator.this.mSweepAnimationType == 1) {
-                            sweeprogress = ((Float) anim.getAnimatedValue()).floatValue();
-                        }
-                        SemSweepListAnimator.this.mSweepAnimationFilter.doUpActionWhenAnimationUpdate(position, sweeprogress);
-                    }
-                });
+                animator.addUpdateListener(
+                        new ValueAnimator
+                                .AnimatorUpdateListener() { // from class:
+                                                            // com.samsung.android.animation.SemSweepListAnimator.2
+                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                            public void onAnimationUpdate(ValueAnimator anim) {
+                                float sweeprogress = -1.0f;
+                                if (SemSweepListAnimator.this.mSweepAnimationType == 2) {
+                                    sweeprogress = viewForeground.getTranslationX() / width;
+                                } else if (SemSweepListAnimator.this.mSweepAnimationType == 1) {
+                                    sweeprogress = ((Float) anim.getAnimatedValue()).floatValue();
+                                }
+                                SemSweepListAnimator.this.mSweepAnimationFilter
+                                        .doUpActionWhenAnimationUpdate(position, sweeprogress);
+                            }
+                        });
             }
             this.mListView.setEnabled(false);
             Log.d(TAG, "onActionUp : call animator.start()");
@@ -328,7 +454,12 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
             float x = event.getX();
             float deltaX = x - this.mDownX;
             float sweepProgress = deltaX / viewForeground.getWidth();
-            Log.d(TAG, "onActionCancel : position = " + position + ", sweepProgress = " + sweepProgress);
+            Log.d(
+                    TAG,
+                    "onActionCancel : position = "
+                            + position
+                            + ", sweepProgress = "
+                            + sweepProgress);
             this.mOnSweepListener.onSweepEnd(position, sweepProgress);
         }
         showForeground(viewForeground);
@@ -371,7 +502,8 @@ public class SemSweepListAnimator extends SemAbsSweepListAnimator {
         public String textRightToLeft;
         public float textSize;
 
-        public SweepConfiguration(boolean allowLeftToRight, boolean allowRightToLeft, int childIdForLocationHint) {
+        public SweepConfiguration(
+                boolean allowLeftToRight, boolean allowRightToLeft, int childIdForLocationHint) {
             this.allowLeftToRight = allowLeftToRight;
             this.allowRightToLeft = allowRightToLeft;
             this.childIdForLocationHint = childIdForLocationHint;

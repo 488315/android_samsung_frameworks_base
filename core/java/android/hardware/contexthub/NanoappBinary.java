@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class NanoappBinary implements Parcelable {
-    public static final Parcelable.Creator<NanoappBinary> CREATOR = new Parcelable.Creator<NanoappBinary>() { // from class: android.hardware.contexthub.NanoappBinary.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoappBinary createFromParcel(Parcel _aidl_source) {
-            NanoappBinary _aidl_out = new NanoappBinary();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NanoappBinary> CREATOR =
+            new Parcelable.Creator<
+                    NanoappBinary>() { // from class: android.hardware.contexthub.NanoappBinary.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoappBinary createFromParcel(Parcel _aidl_source) {
+                    NanoappBinary _aidl_out = new NanoappBinary();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoappBinary[] newArray(int _aidl_size) {
-            return new NanoappBinary[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoappBinary[] newArray(int _aidl_size) {
+                    return new NanoappBinary[_aidl_size];
+                }
+            };
     public static final int FLAG_ENCRYPTED = 2;
     public static final int FLAG_SIGNED = 1;
     public static final int FLAG_TCM_CAPABLE = 4;

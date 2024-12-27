@@ -1,7 +1,8 @@
 package android.ddm;
 
-import java.nio.ByteBuffer;
 import org.apache.harmony.dalvik.ddmc.ChunkHandler;
+
+import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */
 public abstract class DdmHandle extends ChunkHandler {

@@ -26,9 +26,11 @@ public class LocaleManager {
         setApplicationLocales(appPackageName, locales, true);
     }
 
-    private void setApplicationLocales(String appPackageName, LocaleList locales, boolean fromDelegate) {
+    private void setApplicationLocales(
+            String appPackageName, LocaleList locales, boolean fromDelegate) {
         try {
-            this.mService.setApplicationLocales(appPackageName, this.mContext.getUserId(), locales, fromDelegate);
+            this.mService.setApplicationLocales(
+                    appPackageName, this.mContext.getUserId(), locales, fromDelegate);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -66,7 +68,8 @@ public class LocaleManager {
 
     public void setOverrideLocaleConfig(LocaleConfig localeConfig) {
         try {
-            this.mService.setOverrideLocaleConfig(this.mContext.getPackageName(), this.mContext.getUserId(), localeConfig);
+            this.mService.setOverrideLocaleConfig(
+                    this.mContext.getPackageName(), this.mContext.getUserId(), localeConfig);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -74,7 +77,8 @@ public class LocaleManager {
 
     public LocaleConfig getOverrideLocaleConfig() {
         try {
-            return this.mService.getOverrideLocaleConfig(this.mContext.getPackageName(), this.mContext.getUserId());
+            return this.mService.getOverrideLocaleConfig(
+                    this.mContext.getPackageName(), this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

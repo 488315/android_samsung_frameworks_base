@@ -7,26 +7,30 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.hidden_from_bootclasspath.android.credentials.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes.dex */
 public final class CredentialProviderInfo implements Parcelable {
-    public static final Parcelable.Creator<CredentialProviderInfo> CREATOR = new Parcelable.Creator<CredentialProviderInfo>() { // from class: android.credentials.CredentialProviderInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CredentialProviderInfo[] newArray(int size) {
-            return new CredentialProviderInfo[size];
-        }
+    public static final Parcelable.Creator<CredentialProviderInfo> CREATOR =
+            new Parcelable.Creator<CredentialProviderInfo>() { // from class:
+                // android.credentials.CredentialProviderInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CredentialProviderInfo[] newArray(int size) {
+                    return new CredentialProviderInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CredentialProviderInfo createFromParcel(Parcel in) {
-            return new CredentialProviderInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CredentialProviderInfo createFromParcel(Parcel in) {
+                    return new CredentialProviderInfo(in);
+                }
+            };
     private final List<String> mCapabilities;
     private final boolean mIsEnabled;
     private final boolean mIsPrimary;
@@ -118,7 +122,23 @@ public final class CredentialProviderInfo implements Parcelable {
     }
 
     public String toString() {
-        return "CredentialProviderInfo {serviceInfo=" + this.mServiceInfo + ", isSystemProvider=" + this.mIsSystemProvider + ", isEnabled=" + this.mIsEnabled + ", isPrimary=" + this.mIsPrimary + ", overrideLabel=" + ((Object) this.mOverrideLabel) + ", settingsSubtitle=" + ((Object) this.mSettingsSubtitle) + ", settingsActivity=" + ((Object) this.mSettingsActivity) + ", capabilities=" + String.join(",", this.mCapabilities) + "}";
+        return "CredentialProviderInfo {serviceInfo="
+                + this.mServiceInfo
+                + ", isSystemProvider="
+                + this.mIsSystemProvider
+                + ", isEnabled="
+                + this.mIsEnabled
+                + ", isPrimary="
+                + this.mIsPrimary
+                + ", overrideLabel="
+                + ((Object) this.mOverrideLabel)
+                + ", settingsSubtitle="
+                + ((Object) this.mSettingsSubtitle)
+                + ", settingsActivity="
+                + ((Object) this.mSettingsActivity)
+                + ", capabilities="
+                + String.join(",", this.mCapabilities)
+                + "}";
     }
 
     private CredentialProviderInfo(Parcel in) {

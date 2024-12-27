@@ -7,19 +7,22 @@ import android.text.TextUtils;
 
 /* loaded from: classes3.dex */
 public final class GetWalletCardsError implements Parcelable {
-    public static final Parcelable.Creator<GetWalletCardsError> CREATOR = new Parcelable.Creator<GetWalletCardsError>() { // from class: android.service.quickaccesswallet.GetWalletCardsError.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetWalletCardsError createFromParcel(Parcel source) {
-            return GetWalletCardsError.readFromParcel(source);
-        }
+    public static final Parcelable.Creator<GetWalletCardsError> CREATOR =
+            new Parcelable.Creator<
+                    GetWalletCardsError>() { // from class:
+                                             // android.service.quickaccesswallet.GetWalletCardsError.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetWalletCardsError createFromParcel(Parcel source) {
+                    return GetWalletCardsError.readFromParcel(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetWalletCardsError[] newArray(int size) {
-            return new GetWalletCardsError[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetWalletCardsError[] newArray(int size) {
+                    return new GetWalletCardsError[size];
+                }
+            };
     private final Icon mIcon;
     private final CharSequence mMessage;
 

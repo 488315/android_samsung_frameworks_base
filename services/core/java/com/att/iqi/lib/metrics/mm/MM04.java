@@ -2,7 +2,9 @@ package com.att.iqi.lib.metrics.mm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.att.iqi.lib.Metric;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
@@ -14,17 +16,18 @@ public class MM04 extends Metric {
     private String m_szOriginatingUri;
     private String m_szTerminatingUri;
     public static final Metric.ID ID = new Metric.ID("MM04");
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.mm.MM04.1
-        @Override // android.os.Parcelable.Creator
-        public MM04 createFromParcel(Parcel parcel) {
-            return new MM04(parcel);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.mm.MM04.1
+                @Override // android.os.Parcelable.Creator
+                public MM04 createFromParcel(Parcel parcel) {
+                    return new MM04(parcel);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public MM04[] newArray(int i) {
-            return new MM04[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public MM04[] newArray(int i) {
+                    return new MM04[i];
+                }
+            };
 
     public MM04() {
         reset();

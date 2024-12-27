@@ -2,9 +2,12 @@ package com.android.server.backup.internal;
 
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.backup.BackupRestoreTask;
 import com.android.server.backup.OperationStorage;
+
 import com.google.android.collect.Sets;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -32,11 +35,21 @@ public final class LifecycleOperationStorage implements OperationStorage {
                 operation = (Operation) this.mOperations.get(i);
                 int i2 = operation != null ? operation.state : -1;
                 if (i2 == 1) {
-                    Slog.w("LifecycleOperationStorage", "[UserID:" + this.mUserId + "] Operation already got an ack.Should have been removed from mCurrentOperations.");
+                    Slog.w(
+                            "LifecycleOperationStorage",
+                            "[UserID:"
+                                    + this.mUserId
+                                    + "] Operation already got an ack.Should have been removed from"
+                                    + " mCurrentOperations.");
                     this.mOperations.delete(i);
                     operation = null;
                 } else if (i2 == 0) {
-                    Slog.v("LifecycleOperationStorage", "[UserID:" + this.mUserId + "] Cancel: token=" + Integer.toHexString(i));
+                    Slog.v(
+                            "LifecycleOperationStorage",
+                            "[UserID:"
+                                    + this.mUserId
+                                    + "] Cancel: token="
+                                    + Integer.toHexString(i));
                     operation.state = -1;
                     intConsumer.accept(operation.type);
                 }
@@ -69,7 +82,8 @@ public final class LifecycleOperationStorage implements OperationStorage {
         return newHashSet;
     }
 
-    public final void registerOperationForPackages(int i, Set set, BackupRestoreTask backupRestoreTask, int i2) {
+    public final void registerOperationForPackages(
+            int i, Set set, BackupRestoreTask backupRestoreTask, int i2) {
         synchronized (this.mOperationsLock) {
             try {
                 this.mOperations.put(i, new Operation(backupRestoreTask, i2));

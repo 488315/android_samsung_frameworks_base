@@ -16,7 +16,8 @@ public final class AODLogger {
     public final ArrayList mLogs = new ArrayList();
     public final String mName;
     public static final Object sLock = new Object();
-    public static final SimpleDateFormat mDateFormat = new SimpleDateFormat("[MM-dd HH:mm:ss.SSS]", Locale.getDefault());
+    public static final SimpleDateFormat mDateFormat =
+            new SimpleDateFormat("[MM-dd HH:mm:ss.SSS]", Locale.getDefault());
 
     public AODLogger(String str, int i) {
         this.mName = str;

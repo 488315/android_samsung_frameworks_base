@@ -4,7 +4,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.spay.IPaymentClient;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,19 +18,21 @@ public class PaymentTZServiceConfig implements Parcelable {
     public IBinder mClient;
     public Map<Integer, TAConfig> mTAConfigs;
     private static final boolean bQC = Build.BOARD.matches("(?i)(msm[a-z0-9]*)|(sdm[a-z0-9]*)");
-    public static final Parcelable.Creator<PaymentTZServiceConfig> CREATOR = new Parcelable.Creator<PaymentTZServiceConfig>() { // from class: android.spay.PaymentTZServiceConfig.2
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PaymentTZServiceConfig createFromParcel(Parcel in) {
-            return new PaymentTZServiceConfig(in);
-        }
+    public static final Parcelable.Creator<PaymentTZServiceConfig> CREATOR =
+            new Parcelable.Creator<
+                    PaymentTZServiceConfig>() { // from class: android.spay.PaymentTZServiceConfig.2
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PaymentTZServiceConfig createFromParcel(Parcel in) {
+                    return new PaymentTZServiceConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PaymentTZServiceConfig[] newArray(int size) {
-            return new PaymentTZServiceConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PaymentTZServiceConfig[] newArray(int size) {
+                    return new PaymentTZServiceConfig[size];
+                }
+            };
 
     public static class TAConfig {
         public int maxRecvRespSize;
@@ -42,12 +44,16 @@ public class PaymentTZServiceConfig implements Parcelable {
         public TAConfig(int sendsize, int recvsize) {
             this.taTechnology = "unknown";
             this.rootName = PaymentTZServiceConfig.bQC ? "unknown" : "0";
-            this.processName = PaymentTZServiceConfig.bQC ? "unknown" : PaymentTZServiceConfig.TBASE_UNKNOWN_PROCESS;
+            this.processName =
+                    PaymentTZServiceConfig.bQC
+                            ? "unknown"
+                            : PaymentTZServiceConfig.TBASE_UNKNOWN_PROCESS;
             this.maxSendCmdSize = sendsize;
             this.maxRecvRespSize = recvsize;
         }
 
-        public TAConfig(String _taTechnology, String root, String process, int sendsize, int recvsize) {
+        public TAConfig(
+                String _taTechnology, String root, String process, int sendsize, int recvsize) {
             this.taTechnology = _taTechnology;
             this.rootName = root;
             this.processName = process;
@@ -69,14 +75,16 @@ public class PaymentTZServiceConfig implements Parcelable {
     }
 
     public PaymentTZServiceConfig() {
-        this.mClient = new IPaymentClient.Stub() { // from class: android.spay.PaymentTZServiceConfig.1
-        };
+        this.mClient =
+                new IPaymentClient.Stub() { // from class: android.spay.PaymentTZServiceConfig.1
+                };
         this.mTAConfigs = new HashMap();
     }
 
     private PaymentTZServiceConfig(Parcel in) {
-        this.mClient = new IPaymentClient.Stub() { // from class: android.spay.PaymentTZServiceConfig.1
-        };
+        this.mClient =
+                new IPaymentClient.Stub() { // from class: android.spay.PaymentTZServiceConfig.1
+                };
         this.mTAConfigs = new HashMap();
         readFromParcel(in);
     }
@@ -99,7 +107,14 @@ public class PaymentTZServiceConfig implements Parcelable {
         this.mClient = in.readStrongBinder();
         int count = in.readInt();
         for (int i = 0; i < count; i++) {
-            this.mTAConfigs.put(Integer.valueOf(in.readInt()), new TAConfig(in.readString(), in.readString(), in.readString(), in.readInt(), in.readInt()));
+            this.mTAConfigs.put(
+                    Integer.valueOf(in.readInt()),
+                    new TAConfig(
+                            in.readString(),
+                            in.readString(),
+                            in.readString(),
+                            in.readInt(),
+                            in.readInt()));
         }
     }
 

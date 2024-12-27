@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -51,7 +52,8 @@ public class SemBitmapRegionDecoder {
         return rd;
     }
 
-    public static SemBitmapRegionDecoder newInstance(byte[] data, int offset, int length) throws IOException {
+    public static SemBitmapRegionDecoder newInstance(byte[] data, int offset, int length)
+            throws IOException {
         if (data == null) {
             throw new IOException("data is null");
         }
@@ -109,8 +111,7 @@ public class SemBitmapRegionDecoder {
         this.mNativeBitmapRegionDecoder = decoder;
     }
 
-    private SemBitmapRegionDecoder() {
-    }
+    private SemBitmapRegionDecoder() {}
 
     public Bitmap decodeRegion(Rect rect, BitmapFactory.Options opt) {
         Bitmap coverBitmap;
@@ -120,7 +121,10 @@ public class SemBitmapRegionDecoder {
             Log.e(TAG, "mRegionDecoder is null");
             return null;
         }
-        if (rect.right <= 0 || rect.bottom <= 0 || rect.left >= getWidth() || rect.top >= getHeight()) {
+        if (rect.right <= 0
+                || rect.bottom <= 0
+                || rect.left >= getWidth()
+                || rect.top >= getHeight()) {
             throw new IllegalArgumentException("rectangle is outside the image");
         }
         if (opt != null) {
@@ -134,13 +138,20 @@ public class SemBitmapRegionDecoder {
             int tile_width2 = ((tile_width + sample_size) - 1) / sample_size;
             int tile_width3 = tile_height + sample_size;
             int tile_height2 = (tile_width3 - 1) / sample_size;
-            if (opt.inBitmap != null && (opt.inBitmap.getWidth() != tile_width2 || opt.inBitmap.getHeight() != tile_height2)) {
+            if (opt.inBitmap != null
+                    && (opt.inBitmap.getWidth() != tile_width2
+                            || opt.inBitmap.getHeight() != tile_height2)) {
                 Log.w(TAG, "RegionDecode Input Bitmap error");
                 return opt.inBitmap;
             }
         }
         if (opt != null) {
-            Log.d(TAG, "opt.semInApplyPhotoHdr:" + opt.semInApplyPhotoHdr + ", opt.semInCreateGainmap:" + opt.semInCreateGainmap);
+            Log.d(
+                    TAG,
+                    "opt.semInApplyPhotoHdr:"
+                            + opt.semInApplyPhotoHdr
+                            + ", opt.semInCreateGainmap:"
+                            + opt.semInCreateGainmap);
         }
         Log.d(TAG, "decode region");
         if (opt != null && opt.semInApplyPhotoHdr) {

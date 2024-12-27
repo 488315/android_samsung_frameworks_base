@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISemContextCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.hardware.context.ISemContextCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.hardware.context.ISemContextCallback";
 
     String getListenerInfo() throws RemoteException;
 
@@ -16,8 +17,7 @@ public interface ISemContextCallback extends IInterface {
 
     public static class Default implements ISemContextCallback {
         @Override // com.samsung.android.hardware.context.ISemContextCallback
-        public void semContextCallback(SemContextEvent scontextEvent) throws RemoteException {
-        }
+        public void semContextCallback(SemContextEvent scontextEvent) throws RemoteException {}
 
         @Override // com.samsung.android.hardware.context.ISemContextCallback
         public String getListenerInfo() throws RemoteException {
@@ -30,7 +30,7 @@ public interface ISemContextCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemContextCallback {
+    public abstract static class Stub extends Binder implements ISemContextCallback {
         static final int TRANSACTION_getListenerInfo = 2;
         static final int TRANSACTION_semContextCallback = 1;
 
@@ -71,7 +71,8 @@ public interface ISemContextCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemContextCallback.DESCRIPTOR);
             }
@@ -81,7 +82,8 @@ public interface ISemContextCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SemContextEvent _arg0 = (SemContextEvent) data.readTypedObject(SemContextEvent.CREATOR);
+                    SemContextEvent _arg0 =
+                            (SemContextEvent) data.readTypedObject(SemContextEvent.CREATOR);
                     data.enforceNoDataAvail();
                     semContextCallback(_arg0);
                     return true;

@@ -45,8 +45,7 @@ public interface IIntelligentBatterySaverService extends IInterface {
 
     public static class Default implements IIntelligentBatterySaverService {
         @Override // android.os.IIntelligentBatterySaverService
-        public void setSqdUiControlEnabled(boolean allow) throws RemoteException {
-        }
+        public void setSqdUiControlEnabled(boolean allow) throws RemoteException {}
 
         @Override // android.os.IIntelligentBatterySaverService
         public boolean isSqdUiControlEnabled() throws RemoteException {
@@ -94,20 +93,16 @@ public interface IIntelligentBatterySaverService extends IInterface {
         }
 
         @Override // android.os.IIntelligentBatterySaverService
-        public void setSarrUiControlEnable(boolean allow) throws RemoteException {
-        }
+        public void setSarrUiControlEnable(boolean allow) throws RemoteException {}
 
         @Override // android.os.IIntelligentBatterySaverService
-        public void setSleepModeEnabled(boolean allow) throws RemoteException {
-        }
+        public void setSleepModeEnabled(boolean allow) throws RemoteException {}
 
         @Override // android.os.IIntelligentBatterySaverService
-        public void setSleepTime(long startTime, long endTime) throws RemoteException {
-        }
+        public void setSleepTime(long startTime, long endTime) throws RemoteException {}
 
         @Override // android.os.IIntelligentBatterySaverService
-        public void setRubinEvent(String type) throws RemoteException {
-        }
+        public void setRubinEvent(String type) throws RemoteException {}
 
         @Override // android.os.IIntelligentBatterySaverService
         public boolean isEnableSerive() throws RemoteException {
@@ -135,7 +130,7 @@ public interface IIntelligentBatterySaverService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIntelligentBatterySaverService {
+    public abstract static class Stub extends Binder implements IIntelligentBatterySaverService {
         static final int TRANSACTION_addScreenQuickDimApp = 5;
         static final int TRANSACTION_addSqdBlockList = 4;
         static final int TRANSACTION_dexoptPackages = 18;
@@ -224,7 +219,8 @@ public interface IIntelligentBatterySaverService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIntelligentBatterySaverService.DESCRIPTOR);
             }

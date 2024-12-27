@@ -1,7 +1,9 @@
 package android.hardware;
 
 import android.os.MemoryFile;
+
 import dalvik.system.CloseGuard;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -24,12 +26,10 @@ public final class SensorDirectChannel implements Channel {
     private final CloseGuard mCloseGuard = CloseGuard.get();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MemoryType {
-    }
+    public @interface MemoryType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RateLevel {
-    }
+    public @interface RateLevel {}
 
     @Override // java.nio.channels.Channel
     public boolean isOpen() {
@@ -72,7 +72,7 @@ public final class SensorDirectChannel implements Channel {
         } catch (IOException e) {
             fd = -1;
         }
-        return new long[]{1, 0, fd};
+        return new long[] {1, 0, fd};
     }
 
     protected void finalize() throws Throwable {

@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-import android.hardware.gnss.IGnssNavigationMessageCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGnssNavigationMessageInterface extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$IGnssNavigationMessageInterface".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IGnssNavigationMessageInterface".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -19,16 +19,15 @@ public interface IGnssNavigationMessageInterface extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    void setCallback(IGnssNavigationMessageCallback iGnssNavigationMessageCallback) throws RemoteException;
+    void setCallback(IGnssNavigationMessageCallback iGnssNavigationMessageCallback)
+            throws RemoteException;
 
     public static class Default implements IGnssNavigationMessageInterface {
         @Override // android.hardware.gnss.IGnssNavigationMessageInterface
-        public void setCallback(IGnssNavigationMessageCallback callback) throws RemoteException {
-        }
+        public void setCallback(IGnssNavigationMessageCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssNavigationMessageInterface
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssNavigationMessageInterface
         public int getInterfaceVersion() {
@@ -46,7 +45,7 @@ public interface IGnssNavigationMessageInterface extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssNavigationMessageInterface {
+    public abstract static class Stub extends Binder implements IGnssNavigationMessageInterface {
         static final int TRANSACTION_close = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -94,7 +93,8 @@ public interface IGnssNavigationMessageInterface extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -115,7 +115,9 @@ public interface IGnssNavigationMessageInterface extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IGnssNavigationMessageCallback _arg0 = IGnssNavigationMessageCallback.Stub.asInterface(data.readStrongBinder());
+                    IGnssNavigationMessageCallback _arg0 =
+                            IGnssNavigationMessageCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     reply.writeNoException();
@@ -148,7 +150,8 @@ public interface IGnssNavigationMessageInterface extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssNavigationMessageInterface
-            public void setCallback(IGnssNavigationMessageCallback callback) throws RemoteException {
+            public void setCallback(IGnssNavigationMessageCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

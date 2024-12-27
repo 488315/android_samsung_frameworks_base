@@ -2,24 +2,26 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public final class CarrierInfo implements Parcelable {
-    public static final Parcelable.Creator<CarrierInfo> CREATOR = new Parcelable.Creator<CarrierInfo>() { // from class: android.telephony.CarrierInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierInfo createFromParcel(Parcel source) {
-            return new CarrierInfo(source);
-        }
+    public static final Parcelable.Creator<CarrierInfo> CREATOR =
+            new Parcelable.Creator<CarrierInfo>() { // from class: android.telephony.CarrierInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierInfo createFromParcel(Parcel source) {
+                    return new CarrierInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierInfo[] newArray(int size) {
-            return new CarrierInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierInfo[] newArray(int size) {
+                    return new CarrierInfo[size];
+                }
+            };
     private List<String> mEhplmn;
     private String mGid1;
     private String mGid2;
@@ -66,7 +68,16 @@ public final class CarrierInfo implements Parcelable {
         return this.mEhplmn;
     }
 
-    public CarrierInfo(String mcc, String mnc, String spn, String gid1, String gid2, String imsi, String iccid, String impi, List<String> plmnArrayList) {
+    public CarrierInfo(
+            String mcc,
+            String mnc,
+            String spn,
+            String gid1,
+            String gid2,
+            String imsi,
+            String iccid,
+            String impi,
+            List<String> plmnArrayList) {
         this.mMcc = mcc;
         this.mMnc = mnc;
         this.mSpn = spn;
@@ -110,7 +121,25 @@ public final class CarrierInfo implements Parcelable {
     }
 
     public String toString() {
-        return "CarrierInfo MCC = " + this.mMcc + "   MNC = " + this.mMnc + "  SPN = " + this.mSpn + "   GID1 = " + this.mGid1 + "   GID2 = " + this.mGid2 + "   IMSI = " + getPrintableImsi() + "   ICCID = " + SubscriptionInfo.getPrintableId(this.mIccid) + "  IMPI = " + this.mImpi + "  EHPLMN = [ " + getEhplmn_toString() + " ]";
+        return "CarrierInfo MCC = "
+                + this.mMcc
+                + "   MNC = "
+                + this.mMnc
+                + "  SPN = "
+                + this.mSpn
+                + "   GID1 = "
+                + this.mGid1
+                + "   GID2 = "
+                + this.mGid2
+                + "   IMSI = "
+                + getPrintableImsi()
+                + "   ICCID = "
+                + SubscriptionInfo.getPrintableId(this.mIccid)
+                + "  IMPI = "
+                + this.mImpi
+                + "  EHPLMN = [ "
+                + getEhplmn_toString()
+                + " ]";
     }
 
     private String getEhplmn_toString() {
@@ -119,6 +148,10 @@ public final class CarrierInfo implements Parcelable {
 
     private String getPrintableImsi() {
         boolean enablePiiLog = com.android.telephony.Rlog.isLoggable("CarrierInfo", 2);
-        return (this.mImsiPrefix == null || this.mImsiPrefix.length() <= 6) ? this.mImsiPrefix : this.mImsiPrefix.substring(0, 6) + com.android.telephony.Rlog.pii(enablePiiLog, this.mImsiPrefix.substring(6));
+        return (this.mImsiPrefix == null || this.mImsiPrefix.length() <= 6)
+                ? this.mImsiPrefix
+                : this.mImsiPrefix.substring(0, 6)
+                        + com.android.telephony.Rlog.pii(
+                                enablePiiLog, this.mImsiPrefix.substring(6));
     }
 }

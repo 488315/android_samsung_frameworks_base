@@ -4,13 +4,12 @@ import android.os.PersistableBundle;
 import android.os.Process;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.os.CpuScalingPolicies;
 import com.android.internal.os.PowerProfile;
 import com.android.internal.os.PowerStats;
 import com.android.server.CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0;
-import com.android.server.power.stats.BatteryStatsImpl;
-import com.android.server.power.stats.CpuPowerStatsCollector;
-import com.android.server.power.stats.PowerStatsCollector;
+
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -49,7 +48,12 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
     public class KernelCpuStatsReader {
         public native boolean nativeIsSupportedFeature();
 
-        public native long nativeReadCpuStats(KernelCpuStatsCallback kernelCpuStatsCallback, int[] iArr, long j, long[] jArr, long[] jArr2);
+        public native long nativeReadCpuStats(
+                KernelCpuStatsCallback kernelCpuStatsCallback,
+                int[] iArr,
+                long j,
+                long[] jArr,
+                long[] jArr2);
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -63,7 +67,8 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public CpuPowerStatsCollector(com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r8) {
+    public CpuPowerStatsCollector(
+            com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r8) {
         /*
             r7 = this;
             com.android.server.power.stats.BatteryStatsImpl r0 = com.android.server.power.stats.BatteryStatsImpl.this
@@ -85,7 +90,9 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
             r7.mInjector = r8
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.CpuPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.CpuPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector):void");
     }
 
     public static void mapScalingStepsToDefaultBrackets(int[] iArr, double[] dArr, int i) {
@@ -125,40 +132,68 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
             return null;
         }
         this.mCpuPowerStats.uidStats.clear();
-        long nativeReadCpuStats = this.mKernelCpuStatsReader.nativeReadCpuStats(new KernelCpuStatsCallback() { // from class: com.android.server.power.stats.CpuPowerStatsCollector$$ExternalSyntheticLambda0
-            @Override // com.android.server.power.stats.CpuPowerStatsCollector.KernelCpuStatsCallback
-            public final void processUidStats(int i, long[] jArr) {
-                CpuPowerStatsCollector cpuPowerStatsCollector = CpuPowerStatsCollector.this;
-                int i2 = cpuPowerStatsCollector.mLayout.mUidPowerBracketCount;
-                CpuPowerStatsCollector.UidStats uidStats = (CpuPowerStatsCollector.UidStats) cpuPowerStatsCollector.mUidStats.get(i);
-                if (uidStats == null) {
-                    uidStats = new CpuPowerStatsCollector.UidStats();
-                    uidStats.timeByPowerBracket = new long[i2];
-                    uidStats.stats = new long[cpuPowerStatsCollector.mLayout.mUidStatsArrayLength];
-                    cpuPowerStatsCollector.mUidStats.put(i, uidStats);
-                }
-                boolean z = false;
-                for (int i3 = i2 - 1; i3 >= 0; i3--) {
-                    long max = Math.max(0L, jArr[i3] - uidStats.timeByPowerBracket[i3]);
-                    if (max != 0) {
-                        z = true;
-                    }
-                    uidStats.stats[cpuPowerStatsCollector.mLayout.mUidPowerBracketsPosition + i3] = max;
-                    uidStats.timeByPowerBracket[i3] = jArr[i3];
-                }
-                if (z) {
-                    int appUidForSdkSandboxUid = Process.isSdkSandboxUid(i) ? Process.getAppUidForSdkSandboxUid(i) : cpuPowerStatsCollector.mUidResolver.mapUid(i);
-                    long[] jArr2 = (long[]) cpuPowerStatsCollector.mCpuPowerStats.uidStats.get(appUidForSdkSandboxUid);
-                    if (jArr2 == null) {
-                        cpuPowerStatsCollector.mCpuPowerStats.uidStats.put(appUidForSdkSandboxUid, uidStats.stats);
-                        return;
-                    }
-                    for (int i4 = 0; i4 < jArr2.length; i4++) {
-                        jArr2[i4] = jArr2[i4] + uidStats.stats[i4];
-                    }
-                }
-            }
-        }, this.mLayout.mScalingStepToPowerBracketMap, this.mLastUpdateTimestampNanos, this.mTempCpuTimeByScalingStep, this.mTempUidStats);
+        long nativeReadCpuStats =
+                this.mKernelCpuStatsReader.nativeReadCpuStats(
+                        new KernelCpuStatsCallback() { // from class:
+                                                       // com.android.server.power.stats.CpuPowerStatsCollector$$ExternalSyntheticLambda0
+                            @Override // com.android.server.power.stats.CpuPowerStatsCollector.KernelCpuStatsCallback
+                            public final void processUidStats(int i, long[] jArr) {
+                                CpuPowerStatsCollector cpuPowerStatsCollector =
+                                        CpuPowerStatsCollector.this;
+                                int i2 = cpuPowerStatsCollector.mLayout.mUidPowerBracketCount;
+                                CpuPowerStatsCollector.UidStats uidStats =
+                                        (CpuPowerStatsCollector.UidStats)
+                                                cpuPowerStatsCollector.mUidStats.get(i);
+                                if (uidStats == null) {
+                                    uidStats = new CpuPowerStatsCollector.UidStats();
+                                    uidStats.timeByPowerBracket = new long[i2];
+                                    uidStats.stats =
+                                            new long
+                                                    [cpuPowerStatsCollector
+                                                            .mLayout
+                                                            .mUidStatsArrayLength];
+                                    cpuPowerStatsCollector.mUidStats.put(i, uidStats);
+                                }
+                                boolean z = false;
+                                for (int i3 = i2 - 1; i3 >= 0; i3--) {
+                                    long max =
+                                            Math.max(
+                                                    0L, jArr[i3] - uidStats.timeByPowerBracket[i3]);
+                                    if (max != 0) {
+                                        z = true;
+                                    }
+                                    uidStats.stats[
+                                                    cpuPowerStatsCollector
+                                                                    .mLayout
+                                                                    .mUidPowerBracketsPosition
+                                                            + i3] =
+                                            max;
+                                    uidStats.timeByPowerBracket[i3] = jArr[i3];
+                                }
+                                if (z) {
+                                    int appUidForSdkSandboxUid =
+                                            Process.isSdkSandboxUid(i)
+                                                    ? Process.getAppUidForSdkSandboxUid(i)
+                                                    : cpuPowerStatsCollector.mUidResolver.mapUid(i);
+                                    long[] jArr2 =
+                                            (long[])
+                                                    cpuPowerStatsCollector.mCpuPowerStats.uidStats
+                                                            .get(appUidForSdkSandboxUid);
+                                    if (jArr2 == null) {
+                                        cpuPowerStatsCollector.mCpuPowerStats.uidStats.put(
+                                                appUidForSdkSandboxUid, uidStats.stats);
+                                        return;
+                                    }
+                                    for (int i4 = 0; i4 < jArr2.length; i4++) {
+                                        jArr2[i4] = jArr2[i4] + uidStats.stats[i4];
+                                    }
+                                }
+                            }
+                        },
+                        this.mLayout.mScalingStepToPowerBracketMap,
+                        this.mLastUpdateTimestampNanos,
+                        this.mTempCpuTimeByScalingStep,
+                        this.mTempUidStats);
         for (int i = this.mLayout.mDeviceCpuTimeByScalingStepCount - 1; i >= 0; i--) {
             CpuPowerStatsLayout cpuPowerStatsLayout = this.mLayout;
             long[] jArr = this.mCpuPowerStats.stats;
@@ -168,7 +203,8 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
             jArr[cpuPowerStatsLayout.mDeviceCpuTimeByScalingStepPosition + i] = j - jArr3[i];
             jArr3[i] = jArr2[i];
         }
-        this.mCpuPowerStats.durationMs = (nativeReadCpuStats - this.mLastUpdateTimestampNanos) / 1000000;
+        this.mCpuPowerStats.durationMs =
+                (nativeReadCpuStats - this.mLastUpdateTimestampNanos) / 1000000;
         this.mLastUpdateTimestampNanos = nativeReadCpuStats;
         long uptimeMillis = this.mClock.uptimeMillis();
         long j2 = uptimeMillis - this.mLastUpdateUptimeMillis;
@@ -182,12 +218,18 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
         if (this.mCpuEnergyConsumerIds.length != 0) {
             int asInt = this.mVoltageSupplier.getAsInt();
             if (asInt <= 0) {
-                Slog.wtf("CpuPowerStatsCollector", "Unexpected battery voltage (" + asInt + " mV) when querying energy consumers");
+                Slog.wtf(
+                        "CpuPowerStatsCollector",
+                        "Unexpected battery voltage ("
+                                + asInt
+                                + " mV) when querying energy consumers");
             } else {
                 int i2 = this.mLastVoltageMv;
                 int i3 = i2 != 0 ? (i2 + asInt) / 2 : asInt;
                 this.mLastVoltageMv = asInt;
-                long[] consumedEnergyUws = this.mConsumedEnergyRetriever.getConsumedEnergyUws(this.mCpuEnergyConsumerIds);
+                long[] consumedEnergyUws =
+                        this.mConsumedEnergyRetriever.getConsumedEnergyUws(
+                                this.mCpuEnergyConsumerIds);
                 if (consumedEnergyUws != null) {
                     for (int length = consumedEnergyUws.length - 1; length >= 0; length--) {
                         long j4 = this.mLastConsumedEnergyUws[length];
@@ -196,7 +238,10 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
                         if (j6 >= 0) {
                             j5 = j6;
                         }
-                        this.mLayout.setConsumedEnergy(this.mCpuPowerStats.stats, length, PowerStatsCollector.uJtoUc(i3, j5));
+                        this.mLayout.setConsumedEnergy(
+                                this.mCpuPowerStats.stats,
+                                length,
+                                PowerStatsCollector.uJtoUc(i3, j5));
                         this.mLastConsumedEnergyUws[length] = consumedEnergyUws[length];
                     }
                 }
@@ -220,7 +265,9 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
         KernelCpuStatsReader kernelCpuStatsReader = new KernelCpuStatsReader();
         this.mKernelCpuStatsReader = kernelCpuStatsReader;
         this.mConsumedEnergyRetriever = powerStatsCollectorInjector.mConsumedEnergyRetriever;
-        this.mVoltageSupplier = new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0(powerStatsCollectorInjector);
+        this.mVoltageSupplier =
+                new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0(
+                        powerStatsCollectorInjector);
         this.mDefaultCpuPowerBrackets = 3;
         this.mDefaultCpuPowerBracketsPerEnergyConsumer = 2;
         this.mIsPerUidTimeInStateSupported = kernelCpuStatsReader.nativeIsSupportedFeature();
@@ -239,7 +286,8 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
                 int[] frequencies = this.mCpuScalingPolicies.getFrequencies(i2);
                 int i3 = 0;
                 while (i3 < frequencies.length) {
-                    initDefaultPowerBrackets[i] = this.mPowerProfile.getCpuPowerBracketForScalingStep(i2, i3);
+                    initDefaultPowerBrackets[i] =
+                            this.mPowerProfile.getCpuPowerBracketForScalingStep(i2, i3);
                     i3++;
                     i++;
                 }
@@ -248,7 +296,8 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
             int[] iArr = this.mCpuEnergyConsumerIds;
             if (iArr.length == 0 || iArr.length == 1) {
                 initDefaultPowerBrackets = initDefaultPowerBrackets(this.mDefaultCpuPowerBrackets);
-            } else if (this.mCpuScalingPolicies.getPolicies().length == this.mCpuEnergyConsumerIds.length) {
+            } else if (this.mCpuScalingPolicies.getPolicies().length
+                    == this.mCpuEnergyConsumerIds.length) {
                 int i4 = this.mDefaultCpuPowerBracketsPerEnergyConsumer;
                 int[] iArr2 = new int[this.mCpuScalingPolicies.getScalingStepCount()];
                 int i5 = 0;
@@ -277,23 +326,33 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
                 }
                 initDefaultPowerBrackets = iArr2;
             } else {
-                StringBuilder sb = new StringBuilder("Assigning a single power brackets to each CPU_CLUSTER energy consumer. Number of CPU clusters (");
+                StringBuilder sb =
+                        new StringBuilder(
+                                "Assigning a single power brackets to each CPU_CLUSTER energy"
+                                    + " consumer. Number of CPU clusters (");
                 sb.append(this.mCpuScalingPolicies.getPolicies().length);
                 sb.append(") does not match the number of energy consumers (");
-                CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(sb, this.mCpuEnergyConsumerIds.length, ").  Using default power bucket assignment.", "CpuPowerStatsCollector");
+                CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(
+                        sb,
+                        this.mCpuEnergyConsumerIds.length,
+                        ").  Using default power bucket assignment.",
+                        "CpuPowerStatsCollector");
                 initDefaultPowerBrackets = initDefaultPowerBrackets(this.mDefaultCpuPowerBrackets);
             }
         }
         CpuPowerStatsLayout cpuPowerStatsLayout = new CpuPowerStatsLayout();
         this.mLayout = cpuPowerStatsLayout;
-        cpuPowerStatsLayout.mDeviceCpuTimeByScalingStepPosition = cpuPowerStatsLayout.addDeviceSection(scalingStepCount, 0, "steps");
+        cpuPowerStatsLayout.mDeviceCpuTimeByScalingStepPosition =
+                cpuPowerStatsLayout.addDeviceSection(scalingStepCount, 0, "steps");
         cpuPowerStatsLayout.mDeviceCpuTimeByScalingStepCount = scalingStepCount;
         CpuPowerStatsLayout cpuPowerStatsLayout2 = this.mLayout;
         int length = this.mCpuScalingPolicies.getPolicies().length;
-        cpuPowerStatsLayout2.mDeviceCpuTimeByClusterPosition = cpuPowerStatsLayout2.addDeviceSection(length, 0, "clusters");
+        cpuPowerStatsLayout2.mDeviceCpuTimeByClusterPosition =
+                cpuPowerStatsLayout2.addDeviceSection(length, 0, "clusters");
         cpuPowerStatsLayout2.mDeviceCpuTimeByClusterCount = length;
         CpuPowerStatsLayout cpuPowerStatsLayout3 = this.mLayout;
-        cpuPowerStatsLayout3.mDeviceDurationPosition = cpuPowerStatsLayout3.addDeviceSection(1, 1, "usage");
+        cpuPowerStatsLayout3.mDeviceDurationPosition =
+                cpuPowerStatsLayout3.addDeviceSection(1, 1, "usage");
         this.mLayout.addDeviceSectionEnergyConsumers(this.mCpuEnergyConsumerIds.length);
         this.mLayout.addDeviceSectionPowerEstimate();
         CpuPowerStatsLayout cpuPowerStatsLayout4 = this.mLayout;
@@ -304,13 +363,23 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
                 cpuPowerStatsLayout4.mUidPowerBracketCount = i13 + 1;
             }
         }
-        cpuPowerStatsLayout4.mUidPowerBracketsPosition = cpuPowerStatsLayout4.addUidSection(cpuPowerStatsLayout4.mUidPowerBracketCount, 0, "time");
+        cpuPowerStatsLayout4.mUidPowerBracketsPosition =
+                cpuPowerStatsLayout4.addUidSection(
+                        cpuPowerStatsLayout4.mUidPowerBracketCount, 0, "time");
         CpuPowerStatsLayout cpuPowerStatsLayout5 = this.mLayout;
-        cpuPowerStatsLayout5.mUidPowerEstimatePosition = cpuPowerStatsLayout5.addUidSection(1, 5, "power");
+        cpuPowerStatsLayout5.mUidPowerEstimatePosition =
+                cpuPowerStatsLayout5.addUidSection(1, 5, "power");
         PersistableBundle persistableBundle = new PersistableBundle();
         this.mLayout.toExtras(persistableBundle);
         CpuPowerStatsLayout cpuPowerStatsLayout6 = this.mLayout;
-        this.mPowerStatsDescriptor = new PowerStats.Descriptor(1, cpuPowerStatsLayout6.mDeviceStatsArrayLength, (SparseArray) null, 0, cpuPowerStatsLayout6.mUidStatsArrayLength, persistableBundle);
+        this.mPowerStatsDescriptor =
+                new PowerStats.Descriptor(
+                        1,
+                        cpuPowerStatsLayout6.mDeviceStatsArrayLength,
+                        (SparseArray) null,
+                        0,
+                        cpuPowerStatsLayout6.mUidStatsArrayLength,
+                        persistableBundle);
         this.mCpuPowerStats = new PowerStats(this.mPowerStatsDescriptor);
         this.mTempUidStats = new long[this.mLayout.mUidPowerBracketCount];
         this.mIsInitialized = true;
@@ -338,7 +407,13 @@ public final class CpuPowerStatsCollector extends PowerStatsCollector {
                     }
                     sb.append(frequencies[i4] / 1000);
                     sb.append('(');
-                    sb.append(String.format(Locale.US, "%.1f", Double.valueOf(this.mPowerProfile.getAveragePowerForCpuScalingStep(i3, i4))));
+                    sb.append(
+                            String.format(
+                                    Locale.US,
+                                    "%.1f",
+                                    Double.valueOf(
+                                            this.mPowerProfile.getAveragePowerForCpuScalingStep(
+                                                    i3, i4))));
                     sb.append(')');
                 }
                 i2++;

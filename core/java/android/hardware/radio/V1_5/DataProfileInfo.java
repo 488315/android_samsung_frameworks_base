@@ -8,6 +8,7 @@ import android.hardware.radio.V1_4.RadioAccessFamily;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -40,18 +41,93 @@ public final class DataProfileInfo {
             return false;
         }
         DataProfileInfo other = (DataProfileInfo) otherObject;
-        if (this.profileId == other.profileId && HidlSupport.deepEquals(this.apn, other.apn) && this.protocol == other.protocol && this.roamingProtocol == other.roamingProtocol && this.authType == other.authType && HidlSupport.deepEquals(this.user, other.user) && HidlSupport.deepEquals(this.password, other.password) && this.type == other.type && this.maxConnsTime == other.maxConnsTime && this.maxConns == other.maxConns && this.waitTime == other.waitTime && this.enabled == other.enabled && HidlSupport.deepEquals(Integer.valueOf(this.supportedApnTypesBitmap), Integer.valueOf(other.supportedApnTypesBitmap)) && HidlSupport.deepEquals(Integer.valueOf(this.bearerBitmap), Integer.valueOf(other.bearerBitmap)) && this.mtuV4 == other.mtuV4 && this.mtuV6 == other.mtuV6 && this.preferred == other.preferred && this.persistent == other.persistent) {
+        if (this.profileId == other.profileId
+                && HidlSupport.deepEquals(this.apn, other.apn)
+                && this.protocol == other.protocol
+                && this.roamingProtocol == other.roamingProtocol
+                && this.authType == other.authType
+                && HidlSupport.deepEquals(this.user, other.user)
+                && HidlSupport.deepEquals(this.password, other.password)
+                && this.type == other.type
+                && this.maxConnsTime == other.maxConnsTime
+                && this.maxConns == other.maxConns
+                && this.waitTime == other.waitTime
+                && this.enabled == other.enabled
+                && HidlSupport.deepEquals(
+                        Integer.valueOf(this.supportedApnTypesBitmap),
+                        Integer.valueOf(other.supportedApnTypesBitmap))
+                && HidlSupport.deepEquals(
+                        Integer.valueOf(this.bearerBitmap), Integer.valueOf(other.bearerBitmap))
+                && this.mtuV4 == other.mtuV4
+                && this.mtuV6 == other.mtuV6
+                && this.preferred == other.preferred
+                && this.persistent == other.persistent) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.profileId))), Integer.valueOf(HidlSupport.deepHashCode(this.apn)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.protocol))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.roamingProtocol))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.authType))), Integer.valueOf(HidlSupport.deepHashCode(this.user)), Integer.valueOf(HidlSupport.deepHashCode(this.password)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxConnsTime))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxConns))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.waitTime))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.enabled))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.supportedApnTypesBitmap))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.bearerBitmap))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mtuV4))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mtuV6))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.preferred))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.persistent))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.profileId))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.apn)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.protocol))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.roamingProtocol))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.authType))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.user)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.password)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxConnsTime))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxConns))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.waitTime))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.enabled))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.supportedApnTypesBitmap))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.bearerBitmap))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mtuV4))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.mtuV6))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.preferred))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.persistent))));
     }
 
     public final String toString() {
-        return "{.profileId = " + DataProfileId.toString(this.profileId) + ", .apn = " + this.apn + ", .protocol = " + PdpProtocolType.toString(this.protocol) + ", .roamingProtocol = " + PdpProtocolType.toString(this.roamingProtocol) + ", .authType = " + ApnAuthType.toString(this.authType) + ", .user = " + this.user + ", .password = " + this.password + ", .type = " + DataProfileInfoType.toString(this.type) + ", .maxConnsTime = " + this.maxConnsTime + ", .maxConns = " + this.maxConns + ", .waitTime = " + this.waitTime + ", .enabled = " + this.enabled + ", .supportedApnTypesBitmap = " + ApnTypes.dumpBitfield(this.supportedApnTypesBitmap) + ", .bearerBitmap = " + RadioAccessFamily.dumpBitfield(this.bearerBitmap) + ", .mtuV4 = " + this.mtuV4 + ", .mtuV6 = " + this.mtuV6 + ", .preferred = " + this.preferred + ", .persistent = " + this.persistent + "}";
+        return "{.profileId = "
+                + DataProfileId.toString(this.profileId)
+                + ", .apn = "
+                + this.apn
+                + ", .protocol = "
+                + PdpProtocolType.toString(this.protocol)
+                + ", .roamingProtocol = "
+                + PdpProtocolType.toString(this.roamingProtocol)
+                + ", .authType = "
+                + ApnAuthType.toString(this.authType)
+                + ", .user = "
+                + this.user
+                + ", .password = "
+                + this.password
+                + ", .type = "
+                + DataProfileInfoType.toString(this.type)
+                + ", .maxConnsTime = "
+                + this.maxConnsTime
+                + ", .maxConns = "
+                + this.maxConns
+                + ", .waitTime = "
+                + this.waitTime
+                + ", .enabled = "
+                + this.enabled
+                + ", .supportedApnTypesBitmap = "
+                + ApnTypes.dumpBitfield(this.supportedApnTypesBitmap)
+                + ", .bearerBitmap = "
+                + RadioAccessFamily.dumpBitfield(this.bearerBitmap)
+                + ", .mtuV4 = "
+                + this.mtuV4
+                + ", .mtuV6 = "
+                + this.mtuV6
+                + ", .preferred = "
+                + this.preferred
+                + ", .persistent = "
+                + this.persistent
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -63,7 +139,8 @@ public final class DataProfileInfo {
         ArrayList<DataProfileInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 112, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 112, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             DataProfileInfo _hidl_vec_element = new DataProfileInfo();
@@ -73,17 +150,24 @@ public final class DataProfileInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.profileId = _hidl_blob.getInt32(_hidl_offset + 0);
         this.apn = _hidl_blob.getString(_hidl_offset + 8);
-        parcel.readEmbeddedBuffer(this.apn.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.apn.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
         this.protocol = _hidl_blob.getInt32(_hidl_offset + 24);
         this.roamingProtocol = _hidl_blob.getInt32(_hidl_offset + 28);
         this.authType = _hidl_blob.getInt32(_hidl_offset + 32);
         this.user = _hidl_blob.getString(_hidl_offset + 40);
-        parcel.readEmbeddedBuffer(this.user.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 40 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.user.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 40 + 0, false);
         this.password = _hidl_blob.getString(_hidl_offset + 56);
-        parcel.readEmbeddedBuffer(this.password.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 56 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.password.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 56 + 0,
+                false);
         this.type = _hidl_blob.getInt32(_hidl_offset + 72);
         this.maxConnsTime = _hidl_blob.getInt32(_hidl_offset + 76);
         this.maxConns = _hidl_blob.getInt32(_hidl_offset + 80);
@@ -103,7 +187,8 @@ public final class DataProfileInfo {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<DataProfileInfo> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<DataProfileInfo> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

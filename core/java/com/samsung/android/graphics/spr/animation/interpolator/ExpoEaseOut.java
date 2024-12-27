@@ -6,11 +6,9 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes6.dex */
 public class ExpoEaseOut implements Interpolator {
-    public ExpoEaseOut() {
-    }
+    public ExpoEaseOut() {}
 
-    public ExpoEaseOut(Context context, AttributeSet attrs) {
-    }
+    public ExpoEaseOut(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float t) {

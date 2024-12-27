@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,18 +21,29 @@ public final class Dial {
             return false;
         }
         Dial other = (Dial) otherObject;
-        if (HidlSupport.deepEquals(this.address, other.address) && this.clir == other.clir && HidlSupport.deepEquals(this.uusInfo, other.uusInfo)) {
+        if (HidlSupport.deepEquals(this.address, other.address)
+                && this.clir == other.clir
+                && HidlSupport.deepEquals(this.uusInfo, other.uusInfo)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.address)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.clir))), Integer.valueOf(HidlSupport.deepHashCode(this.uusInfo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.address)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.clir))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.uusInfo)));
     }
 
     public final String toString() {
-        return "{.address = " + this.address + ", .clir = " + Clir.toString(this.clir) + ", .uusInfo = " + this.uusInfo + "}";
+        return "{.address = "
+                + this.address
+                + ", .clir = "
+                + Clir.toString(this.clir)
+                + ", .uusInfo = "
+                + this.uusInfo
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +55,8 @@ public final class Dial {
         ArrayList<Dial> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             Dial _hidl_vec_element = new Dial();
@@ -53,12 +66,19 @@ public final class Dial {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.address = _hidl_blob.getString(_hidl_offset + 0);
-        parcel.readEmbeddedBuffer(this.address.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.address.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 0 + 0,
+                false);
         this.clir = _hidl_blob.getInt32(_hidl_offset + 16);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 24 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 24, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
         this.uusInfo.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             UusInfo _hidl_vec_element = new UusInfo();

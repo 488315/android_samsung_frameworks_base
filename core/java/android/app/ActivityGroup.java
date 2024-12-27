@@ -2,6 +2,7 @@ package android.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import java.util.HashMap;
 
 @Deprecated
@@ -22,7 +23,8 @@ public class ActivityGroup extends Activity {
     @Override // android.app.Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle states = savedInstanceState != null ? savedInstanceState.getBundle(STATES_KEY) : null;
+        Bundle states =
+                savedInstanceState != null ? savedInstanceState.getBundle(STATES_KEY) : null;
         this.mLocalActivityManager.dispatchCreate(states);
     }
 
@@ -73,7 +75,13 @@ public class ActivityGroup extends Activity {
     }
 
     @Override // android.app.Activity
-    void dispatchActivityResult(String who, int requestCode, int resultCode, Intent data, ComponentCaller caller, String reason) {
+    void dispatchActivityResult(
+            String who,
+            int requestCode,
+            int resultCode,
+            Intent data,
+            ComponentCaller caller,
+            String reason) {
         Activity act;
         if (who != null && (act = this.mLocalActivityManager.getActivity(who)) != null) {
             act.onActivityResult(requestCode, resultCode, data);

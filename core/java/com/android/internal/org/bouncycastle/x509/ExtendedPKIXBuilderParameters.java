@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.x509;
 
 import com.android.internal.org.bouncycastle.util.Selector;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidParameterException;
 import java.security.cert.PKIXBuilderParameters;
@@ -27,7 +28,8 @@ public class ExtendedPKIXBuilderParameters extends ExtendedPKIXParameters {
         }
     }
 
-    public ExtendedPKIXBuilderParameters(Set trustAnchors, Selector targetConstraints) throws InvalidAlgorithmParameterException {
+    public ExtendedPKIXBuilderParameters(Set trustAnchors, Selector targetConstraints)
+            throws InvalidAlgorithmParameterException {
         super(trustAnchors);
         this.maxPathLength = 5;
         this.excludedCerts = Collections.EMPTY_SET;
@@ -36,7 +38,8 @@ public class ExtendedPKIXBuilderParameters extends ExtendedPKIXParameters {
 
     public void setMaxPathLength(int maxPathLength) {
         if (maxPathLength < -1) {
-            throw new InvalidParameterException("The maximum path length parameter can not be less than -1.");
+            throw new InvalidParameterException(
+                    "The maximum path length parameter can not be less than -1.");
         }
         this.maxPathLength = maxPathLength;
     }
@@ -58,10 +61,12 @@ public class ExtendedPKIXBuilderParameters extends ExtendedPKIXParameters {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.x509.ExtendedPKIXParameters, java.security.cert.PKIXParameters, java.security.cert.CertPathParameters
+    @Override // com.android.internal.org.bouncycastle.x509.ExtendedPKIXParameters,
+              // java.security.cert.PKIXParameters, java.security.cert.CertPathParameters
     public Object clone() {
         try {
-            ExtendedPKIXBuilderParameters params = new ExtendedPKIXBuilderParameters(getTrustAnchors(), getTargetConstraints());
+            ExtendedPKIXBuilderParameters params =
+                    new ExtendedPKIXBuilderParameters(getTrustAnchors(), getTargetConstraints());
             params.setParams(this);
             return params;
         } catch (Exception e) {
@@ -71,7 +76,11 @@ public class ExtendedPKIXBuilderParameters extends ExtendedPKIXParameters {
 
     public static ExtendedPKIXParameters getInstance(PKIXParameters pkixParams) {
         try {
-            ExtendedPKIXBuilderParameters params = new ExtendedPKIXBuilderParameters(pkixParams.getTrustAnchors(), X509CertStoreSelector.getInstance((X509CertSelector) pkixParams.getTargetCertConstraints()));
+            ExtendedPKIXBuilderParameters params =
+                    new ExtendedPKIXBuilderParameters(
+                            pkixParams.getTrustAnchors(),
+                            X509CertStoreSelector.getInstance(
+                                    (X509CertSelector) pkixParams.getTargetCertConstraints()));
             params.setParams(pkixParams);
             return params;
         } catch (Exception e) {

@@ -9,7 +9,8 @@ import android.text.TextUtils;
 
 /* loaded from: classes5.dex */
 public interface IConnectionlessHandwritingCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.inputmethod.IConnectionlessHandwritingCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.inputmethod.IConnectionlessHandwritingCallback";
 
     void onError(int i) throws RemoteException;
 
@@ -17,12 +18,10 @@ public interface IConnectionlessHandwritingCallback extends IInterface {
 
     public static class Default implements IConnectionlessHandwritingCallback {
         @Override // com.android.internal.inputmethod.IConnectionlessHandwritingCallback
-        public void onResult(CharSequence text) throws RemoteException {
-        }
+        public void onResult(CharSequence text) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IConnectionlessHandwritingCallback
-        public void onError(int errorCode) throws RemoteException {
-        }
+        public void onError(int errorCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IConnectionlessHandwritingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IConnectionlessHandwritingCallback {
+    public abstract static class Stub extends Binder implements IConnectionlessHandwritingCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onResult = 1;
 
@@ -71,7 +70,8 @@ public interface IConnectionlessHandwritingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IConnectionlessHandwritingCallback.DESCRIPTOR);
             }
@@ -81,7 +81,8 @@ public interface IConnectionlessHandwritingCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CharSequence _arg0 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg0 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onResult(_arg0);
                     return true;

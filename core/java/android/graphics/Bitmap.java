@@ -1,7 +1,5 @@
 package android.graphics;
 
-import android.graphics.ColorSpace;
-import android.graphics.NinePatch;
 import android.hardware.HardwareBuffer;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
@@ -13,7 +11,11 @@ import android.util.DisplayMetrics;
 import android.util.Half;
 import android.util.Log;
 import android.view.ThreadedRenderer;
+
 import dalvik.annotation.optimization.CriticalNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -25,7 +27,6 @@ import java.nio.ShortBuffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.WeakHashMap;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public final class Bitmap implements Parcelable {
@@ -48,28 +49,30 @@ public final class Bitmap implements Parcelable {
     private static volatile int sDefaultDensity = -1;
     private static final WeakHashMap<Bitmap, Void> sAllBitmaps = new WeakHashMap<>();
     private static DumpData dumpData = null;
-    public static final Parcelable.Creator<Bitmap> CREATOR = new Parcelable.Creator<Bitmap>() { // from class: android.graphics.Bitmap.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Bitmap createFromParcel(Parcel p) {
-            Bitmap bm = Bitmap.nativeCreateFromParcel(p);
-            if (bm == null) {
-                throw new RuntimeException("Failed to unparcel Bitmap");
-            }
-            if (p.readBoolean()) {
-                bm.setGainmap((Gainmap) p.readTypedObject(Gainmap.CREATOR));
-            }
-            return bm;
-        }
+    public static final Parcelable.Creator<Bitmap> CREATOR =
+            new Parcelable.Creator<Bitmap>() { // from class: android.graphics.Bitmap.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Bitmap createFromParcel(Parcel p) {
+                    Bitmap bm = Bitmap.nativeCreateFromParcel(p);
+                    if (bm == null) {
+                        throw new RuntimeException("Failed to unparcel Bitmap");
+                    }
+                    if (p.readBoolean()) {
+                        bm.setGainmap((Gainmap) p.readTypedObject(Gainmap.CREATOR));
+                    }
+                    return bm;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Bitmap[] newArray(int size) {
-            return new Bitmap[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Bitmap[] newArray(int size) {
+                    return new Bitmap[size];
+                }
+            };
 
-    private static native boolean nativeCompress(long j, int i, int i2, OutputStream outputStream, byte[] bArr);
+    private static native boolean nativeCompress(
+            long j, int i, int i2, OutputStream outputStream, byte[] bArr);
 
     private static native ColorSpace nativeComputeColorSpace(long j);
 
@@ -87,7 +90,8 @@ public final class Bitmap implements Parcelable {
 
     private static native Bitmap nativeCopyPreserveInternalConfig(long j);
 
-    private static native Bitmap nativeCreate(int[] iArr, int i, int i2, int i3, int i4, int i5, boolean z, long j);
+    private static native Bitmap nativeCreate(
+            int[] iArr, int i, int i2, int i3, int i4, int i5, boolean z, long j);
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native Bitmap nativeCreateFromParcel(Parcel parcel);
@@ -114,7 +118,8 @@ public final class Bitmap implements Parcelable {
 
     private static native int nativeGetPixel(long j, int i, int i2);
 
-    private static native void nativeGetPixels(long j, int[] iArr, int i, int i2, int i3, int i4, int i5, int i6);
+    private static native void nativeGetPixels(
+            long j, int[] iArr, int i, int i2, int i3, int i4, int i5, int i6);
 
     private static native boolean nativeHasAlpha(long j);
 
@@ -157,11 +162,13 @@ public final class Bitmap implements Parcelable {
 
     private static native void nativeSetPixel(long j, int i, int i2, int i3);
 
-    private static native void nativeSetPixels(long j, int[] iArr, int i, int i2, int i3, int i4, int i5, int i6);
+    private static native void nativeSetPixels(
+            long j, int[] iArr, int i, int i2, int i3, int i4, int i5, int i6);
 
     private static native void nativeSetPremultiplied(long j, boolean z);
 
-    private static native Bitmap nativeWrapHardwareBufferBitmap(HardwareBuffer hardwareBuffer, long j);
+    private static native Bitmap nativeWrapHardwareBufferBitmap(
+            HardwareBuffer hardwareBuffer, long j);
 
     private static native boolean nativeWriteToParcel(long j, int i, Parcel parcel);
 
@@ -177,11 +184,34 @@ public final class Bitmap implements Parcelable {
         return sDefaultDensity;
     }
 
-    Bitmap(long nativeBitmap, int width, int height, int density, boolean requestPremultiplied, byte[] ninePatchChunk, NinePatch.InsetStruct ninePatchInsets) {
-        this(nativeBitmap, width, height, density, requestPremultiplied, ninePatchChunk, ninePatchInsets, true);
+    Bitmap(
+            long nativeBitmap,
+            int width,
+            int height,
+            int density,
+            boolean requestPremultiplied,
+            byte[] ninePatchChunk,
+            NinePatch.InsetStruct ninePatchInsets) {
+        this(
+                nativeBitmap,
+                width,
+                height,
+                density,
+                requestPremultiplied,
+                ninePatchChunk,
+                ninePatchInsets,
+                true);
     }
 
-    Bitmap(long nativeBitmap, int width, int height, int density, boolean requestPremultiplied, byte[] ninePatchChunk, NinePatch.InsetStruct ninePatchInsets, boolean fromMalloc) {
+    Bitmap(
+            long nativeBitmap,
+            int width,
+            int height,
+            int density,
+            boolean requestPremultiplied,
+            byte[] ninePatchChunk,
+            NinePatch.InsetStruct ninePatchInsets,
+            boolean fromMalloc) {
         NativeAllocationRegistry registry;
         this.mDensity = getDefaultDensity();
         this.mTag = null;
@@ -199,9 +229,17 @@ public final class Bitmap implements Parcelable {
         this.mNativePtr = nativeBitmap;
         int allocationByteCount = getAllocationByteCount();
         if (fromMalloc) {
-            registry = NativeAllocationRegistry.createMalloced(Bitmap.class.getClassLoader(), nativeGetNativeFinalizer(), allocationByteCount);
+            registry =
+                    NativeAllocationRegistry.createMalloced(
+                            Bitmap.class.getClassLoader(),
+                            nativeGetNativeFinalizer(),
+                            allocationByteCount);
         } else {
-            registry = NativeAllocationRegistry.createNonmalloced(Bitmap.class.getClassLoader(), nativeGetNativeFinalizer(), allocationByteCount);
+            registry =
+                    NativeAllocationRegistry.createNonmalloced(
+                            Bitmap.class.getClassLoader(),
+                            nativeGetNativeFinalizer(),
+                            allocationByteCount);
         }
         registry.registerNativeAllocation(this, nativeBitmap);
         synchronized (Bitmap.class) {
@@ -239,7 +277,8 @@ public final class Bitmap implements Parcelable {
         if (!isMutable()) {
             throw new IllegalStateException("only mutable bitmaps may be reconfigured");
         }
-        nativeReconfigure(this.mNativePtr, width, height, config.nativeInt, this.mRequestPremultiplied);
+        nativeReconfigure(
+                this.mNativePtr, width, height, config.nativeInt, this.mRequestPremultiplied);
         this.mWidth = width;
         this.mHeight = height;
         this.mColorSpace = null;
@@ -276,7 +315,10 @@ public final class Bitmap implements Parcelable {
 
     public int getGenerationId() {
         if (this.mRecycled) {
-            Log.w(TAG, "Called getGenerationId() on a recycle()'d bitmap! This is undefined behavior!");
+            Log.w(
+                    TAG,
+                    "Called getGenerationId() on a recycle()'d bitmap! This is undefined"
+                            + " behavior!");
         }
         return nativeGenerationId(this.mNativePtr);
     }
@@ -321,7 +363,9 @@ public final class Bitmap implements Parcelable {
         RGBA_1010102(8);
 
         final int nativeInt;
-        private static Config[] sConfigs = {null, ALPHA_8, null, RGB_565, ARGB_4444, ARGB_8888, RGBA_F16, HARDWARE, RGBA_1010102};
+        private static Config[] sConfigs = {
+            null, ALPHA_8, null, RGB_565, ARGB_4444, ARGB_8888, RGBA_F16, HARDWARE, RGBA_1010102
+        };
 
         Config(int ni) {
             this.nativeInt = ni;
@@ -334,7 +378,9 @@ public final class Bitmap implements Parcelable {
 
     public void copyPixelsToBuffer(Buffer dst) {
         int shift;
-        checkHardware("unable to copyPixelsToBuffer, pixel access is not supported on Config#HARDWARE bitmaps");
+        checkHardware(
+                "unable to copyPixelsToBuffer, pixel access is not supported on Config#HARDWARE"
+                        + " bitmaps");
         int elements = dst.remaining();
         if (dst instanceof ByteBuffer) {
             shift = 0;
@@ -381,7 +427,9 @@ public final class Bitmap implements Parcelable {
 
     private void noteHardwareBitmapSlowCall() {
         if (getConfig() == Config.HARDWARE) {
-            StrictMode.noteSlowCall("Warning: attempt to read pixels from hardware bitmap, which is very slow operation");
+            StrictMode.noteSlowCall(
+                    "Warning: attempt to read pixels from hardware bitmap, which is very slow"
+                            + " operation");
         }
     }
 
@@ -446,14 +494,16 @@ public final class Bitmap implements Parcelable {
         if (colorSpace == null) {
             colorSpace = ColorSpace.get(ColorSpace.Named.SRGB);
         }
-        Bitmap bitmap = nativeWrapHardwareBufferBitmap(hardwareBuffer, colorSpace.getNativeInstance());
+        Bitmap bitmap =
+                nativeWrapHardwareBufferBitmap(hardwareBuffer, colorSpace.getNativeInstance());
         if (bitmap != null) {
             bitmap.mHardwareBuffer = new WeakReference<>(hardwareBuffer);
         }
         return bitmap;
     }
 
-    public static Bitmap createScaledBitmap(Bitmap src, int dstWidth, int dstHeight, boolean filter) {
+    public static Bitmap createScaledBitmap(
+            Bitmap src, int dstWidth, int dstHeight, boolean filter) {
         Matrix m = new Matrix();
         int width = src.getWidth();
         int height = src.getHeight();
@@ -481,23 +531,55 @@ public final class Bitmap implements Parcelable {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.graphics.Bitmap createBitmap(android.graphics.Bitmap r28, int r29, int r30, int r31, int r32, android.graphics.Matrix r33, boolean r34) {
+    public static android.graphics.Bitmap createBitmap(
+            android.graphics.Bitmap r28,
+            int r29,
+            int r30,
+            int r31,
+            int r32,
+            android.graphics.Matrix r33,
+            boolean r34) {
         /*
             Method dump skipped, instructions count: 436
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.Bitmap.createBitmap(android.graphics.Bitmap, int, int, int, int, android.graphics.Matrix, boolean):android.graphics.Bitmap");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.graphics.Bitmap.createBitmap(android.graphics.Bitmap, int, int,"
+                        + " int, int, android.graphics.Matrix, boolean):android.graphics.Bitmap");
     }
 
-    private static Bitmap transformGainmap(Bitmap source, Matrix m, int neww, int newh, Paint paint, Rect srcR, RectF dstR, RectF deviceR) {
+    private static Bitmap transformGainmap(
+            Bitmap source,
+            Matrix m,
+            int neww,
+            int newh,
+            Paint paint,
+            Rect srcR,
+            RectF dstR,
+            RectF deviceR) {
         Bitmap sourceGainmap = source.getGainmap().getGainmapContents();
         float scaleX = sourceGainmap.getWidth() / source.getWidth();
         float scaleY = sourceGainmap.getHeight() / source.getHeight();
         int mapw = Math.round(neww * scaleX);
         int maph = Math.round(newh * scaleY);
         if (mapw != 0 && maph != 0) {
-            Rect gSrcR = new Rect((int) (srcR.left * scaleX), (int) (srcR.top * scaleY), (int) (srcR.right * scaleX), (int) (srcR.bottom * scaleY));
-            Bitmap newMapContents = nativeCreate(null, 0, mapw, mapw, maph, sourceGainmap.getConfig().nativeInt, true, 0L);
+            Rect gSrcR =
+                    new Rect(
+                            (int) (srcR.left * scaleX),
+                            (int) (srcR.top * scaleY),
+                            (int) (srcR.right * scaleX),
+                            (int) (srcR.bottom * scaleY));
+            Bitmap newMapContents =
+                    nativeCreate(
+                            null,
+                            0,
+                            mapw,
+                            mapw,
+                            maph,
+                            sourceGainmap.getConfig().nativeInt,
+                            true,
+                            0L);
             newMapContents.eraseColor(0);
             Canvas canvas = new Canvas(newMapContents);
             canvas.scale(scaleX, scaleY);
@@ -514,7 +596,8 @@ public final class Bitmap implements Parcelable {
         return createBitmap(width, height, config, true);
     }
 
-    public static Bitmap createBitmap(DisplayMetrics display, int width, int height, Config config) {
+    public static Bitmap createBitmap(
+            DisplayMetrics display, int width, int height, Config config) {
         return createBitmap(display, width, height, config, true);
     }
 
@@ -522,15 +605,24 @@ public final class Bitmap implements Parcelable {
         return createBitmap((DisplayMetrics) null, width, height, config, hasAlpha);
     }
 
-    public static Bitmap createBitmap(int width, int height, Config config, boolean hasAlpha, ColorSpace colorSpace) {
+    public static Bitmap createBitmap(
+            int width, int height, Config config, boolean hasAlpha, ColorSpace colorSpace) {
         return createBitmap((DisplayMetrics) null, width, height, config, hasAlpha, colorSpace);
     }
 
-    public static Bitmap createBitmap(DisplayMetrics display, int width, int height, Config config, boolean hasAlpha) {
-        return createBitmap(display, width, height, config, hasAlpha, ColorSpace.get(ColorSpace.Named.SRGB));
+    public static Bitmap createBitmap(
+            DisplayMetrics display, int width, int height, Config config, boolean hasAlpha) {
+        return createBitmap(
+                display, width, height, config, hasAlpha, ColorSpace.get(ColorSpace.Named.SRGB));
     }
 
-    public static Bitmap createBitmap(DisplayMetrics display, int width, int height, Config config, boolean hasAlpha, ColorSpace colorSpace) {
+    public static Bitmap createBitmap(
+            DisplayMetrics display,
+            int width,
+            int height,
+            Config config,
+            boolean hasAlpha,
+            ColorSpace colorSpace) {
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("width and height must be > 0");
         }
@@ -540,7 +632,16 @@ public final class Bitmap implements Parcelable {
         if (colorSpace == null && config != Config.ALPHA_8) {
             throw new IllegalArgumentException("can't create bitmap without a color space");
         }
-        Bitmap bm = nativeCreate(null, 0, width, width, height, config.nativeInt, true, colorSpace == null ? 0L : colorSpace.getNativeInstance());
+        Bitmap bm =
+                nativeCreate(
+                        null,
+                        0,
+                        width,
+                        width,
+                        height,
+                        config.nativeInt,
+                        true,
+                        colorSpace == null ? 0L : colorSpace.getNativeInstance());
         if (display != null) {
             bm.mDensity = display.densityDpi;
         }
@@ -551,25 +652,45 @@ public final class Bitmap implements Parcelable {
         return bm;
     }
 
-    public static Bitmap createBitmap(int[] colors, int offset, int stride, int width, int height, Config config) {
+    public static Bitmap createBitmap(
+            int[] colors, int offset, int stride, int width, int height, Config config) {
         return createBitmap((DisplayMetrics) null, colors, offset, stride, width, height, config);
     }
 
-    public static Bitmap createBitmap(DisplayMetrics display, int[] colors, int offset, int stride, int width, int height, Config config) {
+    public static Bitmap createBitmap(
+            DisplayMetrics display,
+            int[] colors,
+            int offset,
+            int stride,
+            int width,
+            int height,
+            Config config) {
         checkWidthHeight(width, height);
         if (Math.abs(stride) < width) {
             throw new IllegalArgumentException("abs(stride) must be >= width");
         }
         int lastScanline = offset + ((height - 1) * stride);
         int length = colors.length;
-        if (offset < 0 || offset + width > length || lastScanline < 0 || lastScanline + width > length) {
+        if (offset < 0
+                || offset + width > length
+                || lastScanline < 0
+                || lastScanline + width > length) {
             throw new ArrayIndexOutOfBoundsException();
         }
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("width and height must be > 0");
         }
         ColorSpace sRGB = ColorSpace.get(ColorSpace.Named.SRGB);
-        Bitmap bm = nativeCreate(colors, offset, stride, width, height, config.nativeInt, false, sRGB.getNativeInstance());
+        Bitmap bm =
+                nativeCreate(
+                        colors,
+                        offset,
+                        stride,
+                        width,
+                        height,
+                        config.nativeInt,
+                        false,
+                        sRGB.getNativeInstance());
         if (display != null) {
             bm.mDensity = display.densityDpi;
         }
@@ -580,7 +701,8 @@ public final class Bitmap implements Parcelable {
         return createBitmap((DisplayMetrics) null, colors, 0, width, width, height, config);
     }
 
-    public static Bitmap createBitmap(DisplayMetrics display, int[] colors, int width, int height, Config config) {
+    public static Bitmap createBitmap(
+            DisplayMetrics display, int[] colors, int width, int height, Config config) {
         return createBitmap(display, colors, 0, width, width, height, config);
     }
 
@@ -729,7 +851,8 @@ public final class Bitmap implements Parcelable {
         }
         StrictMode.noteSlowCall("Compression of a bitmap is slow");
         Trace.traceBegin(8192L, "Bitmap.compress");
-        boolean result = nativeCompress(this.mNativePtr, format.nativeInt, quality, stream, new byte[4096]);
+        boolean result =
+                nativeCompress(this.mNativePtr, format.nativeInt, quality, stream, new byte[4096]);
         Trace.traceEnd(8192L);
         return result;
     }
@@ -746,7 +869,10 @@ public final class Bitmap implements Parcelable {
 
     public final boolean isPremultiplied() {
         if (this.mRecycled) {
-            Log.w(TAG, "Called isPremultiplied() on a recycle()'d bitmap! This is undefined behavior!");
+            Log.w(
+                    TAG,
+                    "Called isPremultiplied() on a recycle()'d bitmap! This is undefined"
+                            + " behavior!");
         }
         return nativeIsPremultiplied(this.mNativePtr);
     }
@@ -811,7 +937,9 @@ public final class Bitmap implements Parcelable {
 
     public final int getByteCount() {
         if (this.mRecycled) {
-            Log.w(TAG, "Called getByteCount() on a recycle()'d bitmap! This is undefined behavior!");
+            Log.w(
+                    TAG,
+                    "Called getByteCount() on a recycle()'d bitmap! This is undefined behavior!");
             return 0;
         }
         return getRowBytes() * getHeight();
@@ -819,7 +947,10 @@ public final class Bitmap implements Parcelable {
 
     public final int getAllocationByteCount() {
         if (this.mRecycled) {
-            Log.w(TAG, "Called getAllocationByteCount() on a recycle()'d bitmap! This is undefined behavior!");
+            Log.w(
+                    TAG,
+                    "Called getAllocationByteCount() on a recycle()'d bitmap! This is undefined"
+                            + " behavior!");
             return 0;
         }
         return nativeGetAllocationByteCount(this.mNativePtr);
@@ -878,14 +1009,24 @@ public final class Bitmap implements Parcelable {
         ColorSpace newColorSpace = getColorSpace();
         try {
             if (oldColorSpace.getComponentCount() != newColorSpace.getComponentCount()) {
-                throw new IllegalArgumentException("The new ColorSpace must have the same component count as the current ColorSpace");
+                throw new IllegalArgumentException(
+                        "The new ColorSpace must have the same component count as the current"
+                                + " ColorSpace");
             }
             for (int i = 0; i < oldColorSpace.getComponentCount(); i++) {
                 if (oldColorSpace.getMinValue(i) < newColorSpace.getMinValue(i)) {
-                    throw new IllegalArgumentException("The new ColorSpace cannot increase the minimum value for any of the components compared to the current ColorSpace. To perform this type of conversion create a new Bitmap in the desired ColorSpace and draw this Bitmap into it.");
+                    throw new IllegalArgumentException(
+                            "The new ColorSpace cannot increase the minimum value for any of the"
+                                + " components compared to the current ColorSpace. To perform this"
+                                + " type of conversion create a new Bitmap in the desired"
+                                + " ColorSpace and draw this Bitmap into it.");
                 }
                 if (oldColorSpace.getMaxValue(i) > newColorSpace.getMaxValue(i)) {
-                    throw new IllegalArgumentException("The new ColorSpace cannot decrease the maximum value for any of the components compared to the current ColorSpace/ To perform this type of conversion create a new Bitmap in the desired ColorSpace and draw this Bitmap into it.");
+                    throw new IllegalArgumentException(
+                            "The new ColorSpace cannot decrease the maximum value for any of the"
+                                + " components compared to the current ColorSpace/ To perform this"
+                                + " type of conversion create a new Bitmap in the desired"
+                                + " ColorSpace and draw this Bitmap into it.");
                 }
             }
         } catch (IllegalArgumentException e) {
@@ -933,7 +1074,8 @@ public final class Bitmap implements Parcelable {
 
     public int getPixel(int x, int y) {
         checkRecycled("Can't call getPixel() on a recycled bitmap");
-        checkHardware("unable to getPixel(), pixel access is not supported on Config#HARDWARE bitmaps");
+        checkHardware(
+                "unable to getPixel(), pixel access is not supported on Config#HARDWARE bitmaps");
         checkPixelAccess(x, y);
         return nativeGetPixel(this.mNativePtr, x, y);
     }
@@ -944,7 +1086,8 @@ public final class Bitmap implements Parcelable {
 
     public Color getColor(int x, int y) {
         checkRecycled("Can't call getColor() on a recycled bitmap");
-        checkHardware("unable to getColor(), pixel access is not supported on Config#HARDWARE bitmaps");
+        checkHardware(
+                "unable to getColor(), pixel access is not supported on Config#HARDWARE bitmaps");
         checkPixelAccess(x, y);
         ColorSpace cs = getColorSpace();
         if (cs == null || cs.equals(ColorSpace.get(ColorSpace.Named.SRGB))) {
@@ -958,9 +1101,11 @@ public final class Bitmap implements Parcelable {
         return Color.valueOf(clamp(r, cs, 0), clamp(g, cs, 1), clamp(b, cs, 2), a, cs);
     }
 
-    public void getPixels(int[] pixels, int offset, int stride, int x, int y, int width, int height) {
+    public void getPixels(
+            int[] pixels, int offset, int stride, int x, int y, int width, int height) {
         checkRecycled("Can't call getPixels() on a recycled bitmap");
-        checkHardware("unable to getPixels(), pixel access is not supported on Config#HARDWARE bitmaps");
+        checkHardware(
+                "unable to getPixels(), pixel access is not supported on Config#HARDWARE bitmaps");
         if (width == 0 || height == 0) {
             return;
         }
@@ -978,7 +1123,8 @@ public final class Bitmap implements Parcelable {
         }
     }
 
-    private void checkPixelsAccess(int x, int y, int width, int height, int offset, int stride, int[] pixels) {
+    private void checkPixelsAccess(
+            int x, int y, int width, int height, int offset, int stride, int[] pixels) {
         checkXYSign(x, y);
         if (width < 0) {
             throw new IllegalArgumentException("width must be >= 0");
@@ -997,7 +1143,10 @@ public final class Bitmap implements Parcelable {
         }
         int lastScanline = ((height - 1) * stride) + offset;
         int length = pixels.length;
-        if (offset < 0 || offset + width > length || lastScanline < 0 || lastScanline + width > length) {
+        if (offset < 0
+                || offset + width > length
+                || lastScanline < 0
+                || lastScanline + width > length) {
             throw new ArrayIndexOutOfBoundsException();
         }
     }
@@ -1011,7 +1160,8 @@ public final class Bitmap implements Parcelable {
         nativeSetPixel(this.mNativePtr, x, y, color);
     }
 
-    public void setPixels(int[] pixels, int offset, int stride, int x, int y, int width, int height) {
+    public void setPixels(
+            int[] pixels, int offset, int stride, int x, int y, int width, int height) {
         checkRecycled("Can't call setPixels() on a recycled bitmap");
         if (!isMutable()) {
             throw new IllegalStateException();
@@ -1081,7 +1231,8 @@ public final class Bitmap implements Parcelable {
 
     public HardwareBuffer getHardwareBuffer() {
         checkRecycled("Can't getHardwareBuffer from a recycled bitmap");
-        HardwareBuffer hardwareBuffer = this.mHardwareBuffer == null ? null : this.mHardwareBuffer.get();
+        HardwareBuffer hardwareBuffer =
+                this.mHardwareBuffer == null ? null : this.mHardwareBuffer.get();
         if (hardwareBuffer == null || hardwareBuffer.isClosed()) {
             HardwareBuffer hardwareBuffer2 = nativeGetHardwareBuffer(this.mNativePtr);
             this.mHardwareBuffer = new WeakReference<>(hardwareBuffer2);

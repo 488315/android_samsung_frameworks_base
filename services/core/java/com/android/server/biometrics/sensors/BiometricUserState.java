@@ -7,9 +7,15 @@ import android.os.Environment;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.biometrics.Utils;
+
+import libcore.io.IoUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,8 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -28,43 +32,53 @@ public abstract class BiometricUserState {
     public final File mFile;
     public boolean mInvalidationInProgress;
     public final ArrayList mBiometrics = new ArrayList();
-    public final BiometricUserState$$ExternalSyntheticLambda0 mWriteStateRunnable = new Runnable() { // from class: com.android.server.biometrics.sensors.BiometricUserState$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            FileOutputStream startWrite;
-            BiometricUserState biometricUserState = BiometricUserState.this;
-            biometricUserState.getClass();
-            AtomicFile atomicFile = new AtomicFile(biometricUserState.mFile);
-            FileOutputStream fileOutputStream = null;
-            try {
-                startWrite = atomicFile.startWrite();
-            } catch (Throwable th) {
-                th = th;
-            }
-            try {
-                TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
-                resolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                resolveSerializer.startDocument((String) null, Boolean.TRUE);
-                resolveSerializer.startTag((String) null, "authenticatorIdInvalidation_tag");
-                resolveSerializer.attributeBoolean((String) null, "authenticatorIdInvalidation_attr", biometricUserState.mInvalidationInProgress);
-                resolveSerializer.endTag((String) null, "authenticatorIdInvalidation_tag");
-                biometricUserState.doWriteState(resolveSerializer);
-                resolveSerializer.endDocument();
-                atomicFile.finishWrite(startWrite);
-                IoUtils.closeQuietly(startWrite);
-            } catch (Throwable th2) {
-                th = th2;
-                fileOutputStream = startWrite;
-                try {
-                    Slog.wtf("UserState", "Failed to write settings, restoring backup", th);
-                    atomicFile.failWrite(fileOutputStream);
-                    Slog.e("UserState", "Failed to write to file: " + biometricUserState.mFile, th);
-                } finally {
-                    IoUtils.closeQuietly(fileOutputStream);
+    public final BiometricUserState$$ExternalSyntheticLambda0 mWriteStateRunnable =
+            new Runnable() { // from class:
+                             // com.android.server.biometrics.sensors.BiometricUserState$$ExternalSyntheticLambda0
+                @Override // java.lang.Runnable
+                public final void run() {
+                    FileOutputStream startWrite;
+                    BiometricUserState biometricUserState = BiometricUserState.this;
+                    biometricUserState.getClass();
+                    AtomicFile atomicFile = new AtomicFile(biometricUserState.mFile);
+                    FileOutputStream fileOutputStream = null;
+                    try {
+                        startWrite = atomicFile.startWrite();
+                    } catch (Throwable th) {
+                        th = th;
+                    }
+                    try {
+                        TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
+                        resolveSerializer.setFeature(
+                                "http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                        resolveSerializer.startDocument((String) null, Boolean.TRUE);
+                        resolveSerializer.startTag(
+                                (String) null, "authenticatorIdInvalidation_tag");
+                        resolveSerializer.attributeBoolean(
+                                (String) null,
+                                "authenticatorIdInvalidation_attr",
+                                biometricUserState.mInvalidationInProgress);
+                        resolveSerializer.endTag((String) null, "authenticatorIdInvalidation_tag");
+                        biometricUserState.doWriteState(resolveSerializer);
+                        resolveSerializer.endDocument();
+                        atomicFile.finishWrite(startWrite);
+                        IoUtils.closeQuietly(startWrite);
+                    } catch (Throwable th2) {
+                        th = th2;
+                        fileOutputStream = startWrite;
+                        try {
+                            Slog.wtf("UserState", "Failed to write settings, restoring backup", th);
+                            atomicFile.failWrite(fileOutputStream);
+                            Slog.e(
+                                    "UserState",
+                                    "Failed to write to file: " + biometricUserState.mFile,
+                                    th);
+                        } finally {
+                            IoUtils.closeQuietly(fileOutputStream);
+                        }
+                    }
                 }
-            }
-        }
-    };
+            };
 
     /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.biometrics.sensors.BiometricUserState$$ExternalSyntheticLambda0] */
     public BiometricUserState(Context context, String str, int i) {
@@ -74,9 +88,12 @@ public abstract class BiometricUserState {
         synchronized (this) {
             try {
                 if (!file.exists()) {
-                    File file2 = new File(Environment.getUserSystemDirectory(i), getLegacyFileName());
+                    File file2 =
+                            new File(Environment.getUserSystemDirectory(i), getLegacyFileName());
                     if (file2.exists()) {
-                        Slog.i("UserState", "BiometricUserState: migration result = " + file2.renameTo(file));
+                        Slog.i(
+                                "UserState",
+                                "BiometricUserState: migration result = " + file2.renameTo(file));
                     }
                 }
                 readStateSyncLocked();
@@ -136,7 +153,9 @@ public abstract class BiometricUserState {
                 if (name.equals(getBiometricsTag())) {
                     parseBiometricsLocked(typedXmlPullParser);
                 } else if (name.equals("authenticatorIdInvalidation_tag")) {
-                    this.mInvalidationInProgress = typedXmlPullParser.getAttributeBoolean((String) null, "authenticatorIdInvalidation_attr");
+                    this.mInvalidationInProgress =
+                            typedXmlPullParser.getAttributeBoolean(
+                                    (String) null, "authenticatorIdInvalidation_attr");
                 }
             }
         }
@@ -176,7 +195,9 @@ public abstract class BiometricUserState {
                     if (i2 >= this.mBiometrics.size()) {
                         break;
                     }
-                    if (((BiometricAuthenticator.Identifier) this.mBiometrics.get(i2)).getBiometricId() == i) {
+                    if (((BiometricAuthenticator.Identifier) this.mBiometrics.get(i2))
+                                    .getBiometricId()
+                            == i) {
                         this.mBiometrics.remove(i2);
                         AsyncTask.execute(this.mWriteStateRunnable);
                         break;

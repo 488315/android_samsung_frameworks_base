@@ -15,12 +15,14 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0;
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -50,18 +52,22 @@ public final class AdaptiveDisplaySolutionService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenWatchingReceiver extends BroadcastReceiver {
-        public ScreenWatchingReceiver() {
-        }
+        public ScreenWatchingReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Slog.i("AdaptiveDisplaySolutionService", "action  :  " + action);
             if ("android.intent.action.BOOT_COMPLETED".equals(action)) {
-                AdaptiveDisplaySolutionService adaptiveDisplaySolutionService = AdaptiveDisplaySolutionService.this;
+                AdaptiveDisplaySolutionService adaptiveDisplaySolutionService =
+                        AdaptiveDisplaySolutionService.this;
                 adaptiveDisplaySolutionService.mADSEnableCondition = true;
-                ContentResolver contentResolver = adaptiveDisplaySolutionService.mContext.getContentResolver();
-                if (adaptiveDisplaySolutionService.AUTO_CURRENT_LIMIT_VERSION < 3 || Settings.System.getIntForUser(contentResolver, "screen_brightness_mode", 0, -2) != 0) {
+                ContentResolver contentResolver =
+                        adaptiveDisplaySolutionService.mContext.getContentResolver();
+                if (adaptiveDisplaySolutionService.AUTO_CURRENT_LIMIT_VERSION < 3
+                        || Settings.System.getIntForUser(
+                                        contentResolver, "screen_brightness_mode", 0, -2)
+                                != 0) {
                     return;
                 }
                 adaptiveDisplaySolutionService.updateAdaptiveControlStateInt(3);
@@ -93,28 +99,43 @@ public final class AdaptiveDisplaySolutionService {
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             if (this.BRIGHTNESS_URI.equals(uri)) {
-                AdaptiveDisplaySolutionService adaptiveDisplaySolutionService = AdaptiveDisplaySolutionService.this;
-                int intForUser = Settings.System.getIntForUser(adaptiveDisplaySolutionService.mContext.getContentResolver(), "screen_brightness", 0, -2);
+                AdaptiveDisplaySolutionService adaptiveDisplaySolutionService =
+                        AdaptiveDisplaySolutionService.this;
+                int intForUser =
+                        Settings.System.getIntForUser(
+                                adaptiveDisplaySolutionService.mContext.getContentResolver(),
+                                "screen_brightness",
+                                0,
+                                -2);
                 boolean z2 = adaptiveDisplaySolutionService.mACLwithBrightness;
                 if (z2) {
-                    adaptiveDisplaySolutionService.updateAdaptiveControlStatewithBrightness(intForUser, z2);
+                    adaptiveDisplaySolutionService.updateAdaptiveControlStatewithBrightness(
+                            intForUser, z2);
                 }
             }
-            if (AdaptiveDisplaySolutionService.this.AUTO_CURRENT_LIMIT_VERSION == 3 && this.BRIGHTNESS_MODE_URI.equals(uri)) {
-                if (Settings.System.getIntForUser(this.resolver, "screen_brightness_mode", 0, -2) == 0) {
-                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService2 = AdaptiveDisplaySolutionService.this;
+            if (AdaptiveDisplaySolutionService.this.AUTO_CURRENT_LIMIT_VERSION == 3
+                    && this.BRIGHTNESS_MODE_URI.equals(uri)) {
+                if (Settings.System.getIntForUser(this.resolver, "screen_brightness_mode", 0, -2)
+                        == 0) {
+                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService2 =
+                            AdaptiveDisplaySolutionService.this;
                     if (adaptiveDisplaySolutionService2.mCurrentAutoCurrentLimitValue != 0) {
                         adaptiveDisplaySolutionService2.updateAdaptiveControlStateInt(3);
                     }
                 } else {
-                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService3 = AdaptiveDisplaySolutionService.this;
+                    AdaptiveDisplaySolutionService adaptiveDisplaySolutionService3 =
+                            AdaptiveDisplaySolutionService.this;
                     if (adaptiveDisplaySolutionService3.mCurrentAutoCurrentLimitValue != 0) {
                         adaptiveDisplaySolutionService3.updateAdaptiveControlStateInt(1);
                     }
                 }
             }
-            if (AdaptiveDisplaySolutionService.this.AUTO_CURRENT_LIMIT_VERSION == 4 && this.BRIGHTNESS_MODE_URI.equals(uri) && Settings.System.getIntForUser(this.resolver, "screen_brightness_mode", 0, -2) == 0) {
-                AdaptiveDisplaySolutionService adaptiveDisplaySolutionService4 = AdaptiveDisplaySolutionService.this;
+            if (AdaptiveDisplaySolutionService.this.AUTO_CURRENT_LIMIT_VERSION == 4
+                    && this.BRIGHTNESS_MODE_URI.equals(uri)
+                    && Settings.System.getIntForUser(this.resolver, "screen_brightness_mode", 0, -2)
+                            == 0) {
+                AdaptiveDisplaySolutionService adaptiveDisplaySolutionService4 =
+                        AdaptiveDisplaySolutionService.this;
                 if (adaptiveDisplaySolutionService4.mCurrentAutoCurrentLimitValue != 0) {
                     adaptiveDisplaySolutionService4.updateAdaptiveControlStateInt(3);
                 }
@@ -131,27 +152,40 @@ public final class AdaptiveDisplaySolutionService {
         this.mACLwithBrightness = false;
         this.mAdaptiveControlValues = null;
         this.mContext = context;
-        ADSControlHandler aDSControlHandler = new ADSControlHandler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("AdaptiveDisplaySolutionServiceThread").getLooper(), null);
+        ADSControlHandler aDSControlHandler =
+                new ADSControlHandler(
+                        KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                                        "AdaptiveDisplaySolutionServiceThread")
+                                .getLooper(),
+                        null);
         boolean z = context.getResources().getBoolean(R.bool.config_allow3rdPartyAppOnInternal);
-        if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/lcd/panel/adaptive_control")) {
+        if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                "/sys/class/lcd/panel/adaptive_control")) {
             this.AVAILABLE_ADAPTIVE_CONTROL = true;
-            this.mAdaptiveControlValues = context.getResources().getStringArray(R.array.config_locationDriverAssistancePackageNames);
-            int integer = context.getResources().getInteger(R.integer.config_audio_ring_vol_default);
+            this.mAdaptiveControlValues =
+                    context.getResources()
+                            .getStringArray(R.array.config_locationDriverAssistancePackageNames);
+            int integer =
+                    context.getResources().getInteger(R.integer.config_audio_ring_vol_default);
             this.AUTO_CURRENT_LIMIT_VERSION = integer;
-            HermesService$3$$ExternalSyntheticOutline0.m(integer, "AUTO_CURRENT_LIMIT_VERSION : ", "AdaptiveDisplaySolutionService");
+            HermesService$3$$ExternalSyntheticOutline0.m(
+                    integer, "AUTO_CURRENT_LIMIT_VERSION : ", "AdaptiveDisplaySolutionService");
         } else {
             this.AVAILABLE_ADAPTIVE_CONTROL = false;
         }
         SettingsObserver settingsObserver = new SettingsObserver(aDSControlHandler);
         ContentResolver contentResolver = context.getContentResolver();
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_brightness"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_brightness_mode"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_brightness"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_brightness_mode"), false, settingsObserver, -1);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.BOOT_COMPLETED");
         intentFilter.addAction("android.intent.action.SCREEN_ON");
         intentFilter.addAction("android.intent.action.SCREEN_OFF");
         intentFilter.addAction("android.intent.action.USER_PRESENT");
-        context.registerReceiverAsUser(new ScreenWatchingReceiver(), UserHandle.ALL, intentFilter, null, null);
+        context.registerReceiverAsUser(
+                new ScreenWatchingReceiver(), UserHandle.ALL, intentFilter, null, null);
         SystemProperties.set("sys.adaptivedisplaysolution.adson", "false");
         if (z) {
             SystemProperties.set("sys.adaptivedisplaysolution.adson", "true");
@@ -215,13 +249,23 @@ public final class AdaptiveDisplaySolutionService {
     }
 
     public final void setAutoCurrentLimitState(boolean z) {
-        AnyMotionDetector$$ExternalSyntheticOutline0.m("AdaptiveDisplaySolutionService", BatteryService$$ExternalSyntheticOutline0.m("setAutoCurrentLimitState(", ") , mADSEnableCondition : ", z), this.mADSEnableCondition);
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                "AdaptiveDisplaySolutionService",
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "setAutoCurrentLimitState(", ") , mADSEnableCondition : ", z),
+                this.mADSEnableCondition);
     }
 
     public final void setAutoCurrentLimitStateWithBrightness(boolean z) {
-        int intForUser = Settings.System.getIntForUser(this.mContext.getContentResolver(), "screen_brightness", 0, -2);
+        int intForUser =
+                Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), "screen_brightness", 0, -2);
         this.mACLwithBrightness = true;
-        AnyMotionDetector$$ExternalSyntheticOutline0.m("AdaptiveDisplaySolutionService", BatteryService$$ExternalSyntheticOutline0.m("setAutoCurrentLimitStateWithBrightness(", ") , mADSEnableCondition : ", z), this.mADSEnableCondition);
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                "AdaptiveDisplaySolutionService",
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "setAutoCurrentLimitStateWithBrightness(", ") , mADSEnableCondition : ", z),
+                this.mADSEnableCondition);
         updateAdaptiveControlStatewithBrightness(intForUser, z);
     }
 
@@ -230,13 +274,19 @@ public final class AdaptiveDisplaySolutionService {
         StringBuilder sb = new StringBuilder("setGalleryDetailViewMode() : ");
         sb.append(this.mDetailViewState);
         sb.append(" , mADSEnableCondition : ");
-        AnyMotionDetector$$ExternalSyntheticOutline0.m("AdaptiveDisplaySolutionService", sb, this.mADSEnableCondition);
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                "AdaptiveDisplaySolutionService", sb, this.mADSEnableCondition);
     }
 
     public final void updateAdaptiveControlStateInt(int i) {
         this.mCurrentAutoCurrentLimitValue = i;
-        CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(new StringBuilder("updateAdaptiveControlStateInt("), this.mCurrentAutoCurrentLimitValue, ")", "AdaptiveDisplaySolutionService");
-        SemDisplaySolutionManager semDisplaySolutionManager = (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
+        CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(
+                new StringBuilder("updateAdaptiveControlStateInt("),
+                this.mCurrentAutoCurrentLimitValue,
+                ")",
+                "AdaptiveDisplaySolutionService");
+        SemDisplaySolutionManager semDisplaySolutionManager =
+                (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
         this.mSemDisplaySolutionManager = semDisplaySolutionManager;
         if (!this.AVAILABLE_ADAPTIVE_CONTROL) {
             Slog.d("AdaptiveDisplaySolutionService", "!AVAILABLE_ADAPTIVE_CONTROL");
@@ -250,17 +300,25 @@ public final class AdaptiveDisplaySolutionService {
             semDisplaySolutionManager.onAutoCurrentLimitOffMode(false);
             this.mSemDisplaySolutionManager.setAutoCurrentLimitOffModeEnabled(false);
         }
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("[AdaptiveControl]: ACL VALUE ("), this.mCurrentAutoCurrentLimitValue, ")", "AdaptiveDisplaySolutionService");
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("[AdaptiveControl]: ACL VALUE ("),
+                this.mCurrentAutoCurrentLimitValue,
+                ")",
+                "AdaptiveDisplaySolutionService");
         fileWriteInt(this.mCurrentAutoCurrentLimitValue, "/sys/class/lcd/panel/adaptive_control");
         if (new File("/sys/class/lcd/panel1/adaptive_control").exists()) {
-            fileWriteInt(this.mCurrentAutoCurrentLimitValue, "/sys/class/lcd/panel1/adaptive_control");
+            fileWriteInt(
+                    this.mCurrentAutoCurrentLimitValue, "/sys/class/lcd/panel1/adaptive_control");
         }
         this.mACLwithBrightness = false;
     }
 
     public final void updateAdaptiveControlStatewithBrightness(int i, boolean z) {
-        Slog.i("AdaptiveDisplaySolutionService", "updateAdaptiveControlStatewithBrightness(" + z + ")");
-        this.mSemDisplaySolutionManager = (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
+        Slog.i(
+                "AdaptiveDisplaySolutionService",
+                "updateAdaptiveControlStatewithBrightness(" + z + ")");
+        this.mSemDisplaySolutionManager =
+                (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
         if (!this.AVAILABLE_ADAPTIVE_CONTROL) {
             Slog.d("AdaptiveDisplaySolutionService", "!AVAILABLE_ADAPTIVE_CONTROL");
             return;

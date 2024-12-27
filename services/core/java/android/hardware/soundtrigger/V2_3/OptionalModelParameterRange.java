@@ -5,6 +5,7 @@ import android.hidl.safe_union.V1_0.Monostate;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,11 +22,14 @@ public final class OptionalModelParameterRange {
             return false;
         }
         OptionalModelParameterRange optionalModelParameterRange = (OptionalModelParameterRange) obj;
-        return this.hidl_d == optionalModelParameterRange.hidl_d && HidlSupport.deepEquals(this.hidl_o, optionalModelParameterRange.hidl_o);
+        return this.hidl_d == optionalModelParameterRange.hidl_d
+                && HidlSupport.deepEquals(this.hidl_o, optionalModelParameterRange.hidl_o);
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Byte.valueOf(this.hidl_d).hashCode()));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                Integer.valueOf(Byte.valueOf(this.hidl_d).hashCode()));
     }
 
     public final ModelParameterRange range() {
@@ -38,11 +42,20 @@ public final class OptionalModelParameterRange {
         }
         Object obj2 = this.hidl_o;
         String name = obj2 != null ? obj2.getClass().getName() : "null";
-        StringBuilder sb = new StringBuilder("Read access to inactive union components is disallowed. Discriminator value is ");
+        StringBuilder sb =
+                new StringBuilder(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                            + " value is ");
         sb.append((int) this.hidl_d);
         sb.append(" (corresponding to ");
         byte b = this.hidl_d;
-        throw new IllegalStateException(OptionalModelParameterRange$$ExternalSyntheticOutline0.m(sb, b != 0 ? b != 1 ? "Unknown" : "range" : "noinit", "), and hidl_o is of type ", name, "."));
+        throw new IllegalStateException(
+                OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                        sb,
+                        b != 0 ? b != 1 ? "Unknown" : "range" : "noinit",
+                        "), and hidl_o is of type ",
+                        name,
+                        "."));
     }
 
     public final void readFromParcel(HwParcel hwParcel) {
@@ -54,7 +67,11 @@ public final class OptionalModelParameterRange {
             return;
         }
         if (int8 != 1) {
-            throw new IllegalStateException(AmFmBandRange$$ExternalSyntheticOutline0.m(this.hidl_d, new StringBuilder("Unknown union discriminator (value: "), ")."));
+            throw new IllegalStateException(
+                    AmFmBandRange$$ExternalSyntheticOutline0.m(
+                            this.hidl_d,
+                            new StringBuilder("Unknown union discriminator (value: "),
+                            ")."));
         }
         ModelParameterRange modelParameterRange = new ModelParameterRange();
         modelParameterRange.start = 0;
@@ -72,11 +89,20 @@ public final class OptionalModelParameterRange {
             if (this.hidl_d != 0) {
                 Object obj = this.hidl_o;
                 String name = obj != null ? obj.getClass().getName() : "null";
-                StringBuilder sb2 = new StringBuilder("Read access to inactive union components is disallowed. Discriminator value is ");
+                StringBuilder sb2 =
+                        new StringBuilder(
+                                "Read access to inactive union components is disallowed."
+                                    + " Discriminator value is ");
                 sb2.append((int) this.hidl_d);
                 sb2.append(" (corresponding to ");
                 byte b2 = this.hidl_d;
-                throw new IllegalStateException(OptionalModelParameterRange$$ExternalSyntheticOutline0.m(sb2, b2 != 0 ? b2 != 1 ? "Unknown" : "range" : "noinit", "), and hidl_o is of type ", name, "."));
+                throw new IllegalStateException(
+                        OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                                sb2,
+                                b2 != 0 ? b2 != 1 ? "Unknown" : "range" : "noinit",
+                                "), and hidl_o is of type ",
+                                name,
+                                "."));
             }
             Object obj2 = this.hidl_o;
             if (obj2 != null && !Monostate.class.isInstance(obj2)) {
@@ -85,7 +111,11 @@ public final class OptionalModelParameterRange {
             sb.append((Monostate) this.hidl_o);
         } else {
             if (b != 1) {
-                throw new Error(AmFmBandRange$$ExternalSyntheticOutline0.m(this.hidl_d, new StringBuilder("Unknown union discriminator (value: "), ")."));
+                throw new Error(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                this.hidl_d,
+                                new StringBuilder("Unknown union discriminator (value: "),
+                                ")."));
             }
             sb.append(".range = ");
             sb.append(range());

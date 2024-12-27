@@ -18,20 +18,20 @@ public interface IProcessObserver extends IInterface {
 
     public static class Default implements IProcessObserver {
         @Override // android.app.IProcessObserver
-        public void onProcessStarted(int pid, int processUid, int packageUid, String packageName, String processName) throws RemoteException {
-        }
+        public void onProcessStarted(
+                int pid, int processUid, int packageUid, String packageName, String processName)
+                throws RemoteException {}
 
         @Override // android.app.IProcessObserver
-        public void onForegroundActivitiesChanged(int pid, int uid, boolean foregroundActivities) throws RemoteException {
-        }
+        public void onForegroundActivitiesChanged(int pid, int uid, boolean foregroundActivities)
+                throws RemoteException {}
 
         @Override // android.app.IProcessObserver
-        public void onForegroundServicesChanged(int pid, int uid, int serviceTypes) throws RemoteException {
-        }
+        public void onForegroundServicesChanged(int pid, int uid, int serviceTypes)
+                throws RemoteException {}
 
         @Override // android.app.IProcessObserver
-        public void onProcessDied(int pid, int uid) throws RemoteException {
-        }
+        public void onProcessDied(int pid, int uid) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -39,7 +39,7 @@ public interface IProcessObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProcessObserver {
+    public abstract static class Stub extends Binder implements IProcessObserver {
         public static final String DESCRIPTOR = "android.app.IProcessObserver";
         static final int TRANSACTION_onForegroundActivitiesChanged = 2;
         static final int TRANSACTION_onForegroundServicesChanged = 3;
@@ -87,7 +87,8 @@ public interface IProcessObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -147,7 +148,9 @@ public interface IProcessObserver extends IInterface {
             }
 
             @Override // android.app.IProcessObserver
-            public void onProcessStarted(int pid, int processUid, int packageUid, String packageName, String processName) throws RemoteException {
+            public void onProcessStarted(
+                    int pid, int processUid, int packageUid, String packageName, String processName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -163,7 +166,8 @@ public interface IProcessObserver extends IInterface {
             }
 
             @Override // android.app.IProcessObserver
-            public void onForegroundActivitiesChanged(int pid, int uid, boolean foregroundActivities) throws RemoteException {
+            public void onForegroundActivitiesChanged(
+                    int pid, int uid, boolean foregroundActivities) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -177,7 +181,8 @@ public interface IProcessObserver extends IInterface {
             }
 
             @Override // android.app.IProcessObserver
-            public void onForegroundServicesChanged(int pid, int uid, int serviceTypes) throws RemoteException {
+            public void onForegroundServicesChanged(int pid, int uid, int serviceTypes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

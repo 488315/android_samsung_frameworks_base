@@ -6,8 +6,7 @@ public final class BinderLatencyProto {
     public final class RepeatedApiStats {
         public static final long API_STATS = 2246267895809L;
 
-        public RepeatedApiStats() {
-        }
+        public RepeatedApiStats() {}
     }
 
     public final class Dims {
@@ -24,8 +23,7 @@ public final class BinderLatencyProto {
         public static final int UNKNOWN_PROCESS_SOURCE = 0;
         public static final int WIFI = 4;
 
-        public Dims() {
-        }
+        public Dims() {}
     }
 
     public final class ApiStats {
@@ -36,7 +34,6 @@ public final class BinderLatencyProto {
         public static final long FIRST_BUCKET_SIZE = 1120986464261L;
         public static final long SCALE_FACTOR = 1108101562374L;
 
-        public ApiStats() {
-        }
+        public ApiStats() {}
     }
 }

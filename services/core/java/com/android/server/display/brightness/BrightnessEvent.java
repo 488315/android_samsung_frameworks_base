@@ -4,8 +4,10 @@ import android.hardware.display.BrightnessInfo;
 import android.hardware.display.DisplayManagerInternal;
 import android.os.SystemClock;
 import android.view.Display;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.display.config.DisplayBrightnessMappingConfig;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -73,7 +75,36 @@ public final class BrightnessEvent {
     }
 
     public final boolean equalsMainData(BrightnessEvent brightnessEvent) {
-        return this.mReason.equals(brightnessEvent.mReason) && this.mDisplayId == brightnessEvent.mDisplayId && this.mPhysicalDisplayId.equals(brightnessEvent.mPhysicalDisplayId) && this.mDisplayState == brightnessEvent.mDisplayState && this.mDisplayPolicy == brightnessEvent.mDisplayPolicy && Float.floatToRawIntBits(this.mLux) == Float.floatToRawIntBits(brightnessEvent.mLux) && Float.floatToRawIntBits(this.mPreThresholdLux) == Float.floatToRawIntBits(brightnessEvent.mPreThresholdLux) && Float.floatToRawIntBits(this.mBrightness) == Float.floatToRawIntBits(brightnessEvent.mBrightness) && Float.floatToRawIntBits(this.mRecommendedBrightness) == Float.floatToRawIntBits(brightnessEvent.mRecommendedBrightness) && Float.floatToRawIntBits(this.mPreThresholdBrightness) == Float.floatToRawIntBits(brightnessEvent.mPreThresholdBrightness) && this.mHbmMode == brightnessEvent.mHbmMode && Float.floatToRawIntBits(this.mHbmMax) == Float.floatToRawIntBits(brightnessEvent.mHbmMax) && this.mRbcStrength == brightnessEvent.mRbcStrength && Float.floatToRawIntBits(this.mThermalMax) == Float.floatToRawIntBits(brightnessEvent.mThermalMax) && Float.floatToRawIntBits(this.mPowerFactor) == Float.floatToRawIntBits(brightnessEvent.mPowerFactor) && this.mWasShortTermModelActive == brightnessEvent.mWasShortTermModelActive && this.mFlags == brightnessEvent.mFlags && this.mAdjustmentFlags == brightnessEvent.mAdjustmentFlags && this.mAutomaticBrightnessEnabled == brightnessEvent.mAutomaticBrightnessEnabled && this.mDisplayBrightnessStrategyName.equals(brightnessEvent.mDisplayBrightnessStrategyName) && this.mAutoBrightnessMode == brightnessEvent.mAutoBrightnessMode;
+        return this.mReason.equals(brightnessEvent.mReason)
+                && this.mDisplayId == brightnessEvent.mDisplayId
+                && this.mPhysicalDisplayId.equals(brightnessEvent.mPhysicalDisplayId)
+                && this.mDisplayState == brightnessEvent.mDisplayState
+                && this.mDisplayPolicy == brightnessEvent.mDisplayPolicy
+                && Float.floatToRawIntBits(this.mLux)
+                        == Float.floatToRawIntBits(brightnessEvent.mLux)
+                && Float.floatToRawIntBits(this.mPreThresholdLux)
+                        == Float.floatToRawIntBits(brightnessEvent.mPreThresholdLux)
+                && Float.floatToRawIntBits(this.mBrightness)
+                        == Float.floatToRawIntBits(brightnessEvent.mBrightness)
+                && Float.floatToRawIntBits(this.mRecommendedBrightness)
+                        == Float.floatToRawIntBits(brightnessEvent.mRecommendedBrightness)
+                && Float.floatToRawIntBits(this.mPreThresholdBrightness)
+                        == Float.floatToRawIntBits(brightnessEvent.mPreThresholdBrightness)
+                && this.mHbmMode == brightnessEvent.mHbmMode
+                && Float.floatToRawIntBits(this.mHbmMax)
+                        == Float.floatToRawIntBits(brightnessEvent.mHbmMax)
+                && this.mRbcStrength == brightnessEvent.mRbcStrength
+                && Float.floatToRawIntBits(this.mThermalMax)
+                        == Float.floatToRawIntBits(brightnessEvent.mThermalMax)
+                && Float.floatToRawIntBits(this.mPowerFactor)
+                        == Float.floatToRawIntBits(brightnessEvent.mPowerFactor)
+                && this.mWasShortTermModelActive == brightnessEvent.mWasShortTermModelActive
+                && this.mFlags == brightnessEvent.mFlags
+                && this.mAdjustmentFlags == brightnessEvent.mAdjustmentFlags
+                && this.mAutomaticBrightnessEnabled == brightnessEvent.mAutomaticBrightnessEnabled
+                && this.mDisplayBrightnessStrategyName.equals(
+                        brightnessEvent.mDisplayBrightnessStrategyName)
+                && this.mAutoBrightnessMode == brightnessEvent.mAutoBrightnessMode;
     }
 
     public String flagsToString() {
@@ -226,7 +257,9 @@ public final class BrightnessEvent {
         sb.append(", strategy=");
         sb.append(this.mDisplayBrightnessStrategyName);
         sb.append(", autoBrightnessMode=");
-        sb.append(DisplayBrightnessMappingConfig.autoBrightnessModeToString(this.mAutoBrightnessMode));
+        sb.append(
+                DisplayBrightnessMappingConfig.autoBrightnessModeToString(
+                        this.mAutoBrightnessMode));
         return sb.toString();
     }
 }

@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500NameBuilder;
 import com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle;
 import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -178,7 +179,8 @@ public class IETFUtils {
         }
         ASN1ObjectIdentifier oid = (ASN1ObjectIdentifier) lookUp.get(Strings.toLowerCase(name));
         if (oid == null) {
-            throw new IllegalArgumentException("Unknown object id - " + name + " - passed to distinguished name");
+            throw new IllegalArgumentException(
+                    "Unknown object id - " + name + " - passed to distinguished name");
         }
         return oid;
     }
@@ -212,7 +214,8 @@ public class IETFUtils {
         }
     }
 
-    public static void appendTypeAndValue(StringBuffer buf, AttributeTypeAndValue typeAndValue, Hashtable oidSymbols) {
+    public static void appendTypeAndValue(
+            StringBuffer buf, AttributeTypeAndValue typeAndValue, Hashtable oidSymbols) {
         String sym = (String) oidSymbols.get(typeAndValue.getType());
         if (sym != null) {
             buf.append(sym);
@@ -275,9 +278,9 @@ public class IETFUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:30:0x005c, code lost:
-    
-        if (r5 >= r2) goto L30;
-     */
+
+       if (r5 >= r2) goto L30;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -338,7 +341,9 @@ public class IETFUtils {
             java.lang.String r3 = stripInternalSpaces(r8)
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.asn1.x500.style.IETFUtils.canonicalize(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.org.bouncycastle.asn1.x500.style.IETFUtils.canonicalize(java.lang.String):java.lang.String");
     }
 
     public static String canonicalString(ASN1Encodable value) {

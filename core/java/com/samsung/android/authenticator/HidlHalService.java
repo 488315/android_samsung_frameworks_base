@@ -3,11 +3,12 @@ package com.samsung.android.authenticator;
 import android.os.IHwBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import com.samsung.android.authenticator.SemTrustedApplicationExecutor;
+
+import vendor.samsung.hardware.authfw.V1_0.ISehAuthenticationFramework;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import vendor.samsung.hardware.authfw.V1_0.ISehAuthenticationFramework;
 
 /* loaded from: classes5.dex */
 final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
@@ -42,12 +43,20 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
     }
 
     @Override // com.samsung.android.authenticator.XidlHalService
-    public boolean load(SemTrustedApplicationExecutor.TrustedAppType type, ParcelFileDescriptor fd, long offset, long len) {
+    public boolean load(
+            SemTrustedApplicationExecutor.TrustedAppType type,
+            ParcelFileDescriptor fd,
+            long offset,
+            long len) {
         return load(translateTaType(type), fd, offset, len);
     }
 
     @Override // com.samsung.android.authenticator.XidlHalService
-    public boolean load(SemTrustedApplicationExecutor.TrustedAppAssetType type, ParcelFileDescriptor fd, long offset, long len) {
+    public boolean load(
+            SemTrustedApplicationExecutor.TrustedAppAssetType type,
+            ParcelFileDescriptor fd,
+            long offset,
+            long len) {
         return load(translateTaType(type), fd, offset, len);
     }
 
@@ -58,7 +67,8 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
             AuthenticatorLog.e(TAG, "type can not be 0");
             return false;
         }
-        ISehAuthenticationFramework service = (ISehAuthenticationFramework) checkNotNullState(getService());
+        ISehAuthenticationFramework service =
+                (ISehAuthenticationFramework) checkNotNullState(getService());
         ArrayList<Byte> fileBuf = new ArrayList<>();
         if (fd != null) {
             try {
@@ -150,7 +160,8 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
             AuthenticatorLog.e(TAG, "type can not be 0");
             return false;
         }
-        ISehAuthenticationFramework service = (ISehAuthenticationFramework) checkNotNullState(getService());
+        ISehAuthenticationFramework service =
+                (ISehAuthenticationFramework) checkNotNullState(getService());
         try {
             boolean ret = service.terminate(type);
             if (!ret) {
@@ -180,19 +191,25 @@ final class HidlHalService implements XidlHalService, IHwBinder.DeathRecipient {
             AuthenticatorLog.e(TAG, "type can not be 0");
             return null;
         }
-        ISehAuthenticationFramework service = (ISehAuthenticationFramework) checkNotNullState(getService());
+        ISehAuthenticationFramework service =
+                (ISehAuthenticationFramework) checkNotNullState(getService());
         ArrayList<Byte> request = new ArrayList<>();
         for (byte b : command) {
             request.add(Byte.valueOf(b));
         }
         this.mResultBytes = null;
         try {
-            service.execute(type, request, new ISehAuthenticationFramework.executeCallback() { // from class: com.samsung.android.authenticator.HidlHalService$$ExternalSyntheticLambda0
-                @Override // vendor.samsung.hardware.authfw.V1_0.ISehAuthenticationFramework.executeCallback
-                public final void onValues(boolean z, ArrayList arrayList) {
-                    HidlHalService.this.lambda$execute$0(z, arrayList);
-                }
-            });
+            service.execute(
+                    type,
+                    request,
+                    new ISehAuthenticationFramework
+                            .executeCallback() { // from class:
+                                                 // com.samsung.android.authenticator.HidlHalService$$ExternalSyntheticLambda0
+                        @Override // vendor.samsung.hardware.authfw.V1_0.ISehAuthenticationFramework.executeCallback
+                        public final void onValues(boolean z, ArrayList arrayList) {
+                            HidlHalService.this.lambda$execute$0(z, arrayList);
+                        }
+                    });
         } catch (RemoteException e) {
             AuthenticatorLog.e(TAG, "process failed : " + e.getMessage());
             e.rethrowFromSystemServer();

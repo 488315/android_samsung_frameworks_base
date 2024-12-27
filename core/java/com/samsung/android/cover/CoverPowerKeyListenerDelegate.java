@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import com.samsung.android.cover.CoverManager;
-import com.samsung.android.cover.INfcLedCoverTouchListenerCallback;
 
 /* loaded from: classes6.dex */
 class CoverPowerKeyListenerDelegate extends INfcLedCoverTouchListenerCallback.Stub {
@@ -23,11 +21,11 @@ class CoverPowerKeyListenerDelegate extends INfcLedCoverTouchListenerCallback.St
         private static final int NOTIFICATION_REMOVE = 3;
         private static final int POWER_BUTTON = 1;
 
-        private SystemEvents() {
-        }
+        private SystemEvents() {}
     }
 
-    CoverPowerKeyListenerDelegate(CoverManager.CoverPowerKeyListener listener, Handler handler, Context context) {
+    CoverPowerKeyListenerDelegate(
+            CoverManager.CoverPowerKeyListener listener, Handler handler, Context context) {
         this.mListener = listener;
         Looper looper = handler == null ? context.getMainLooper() : handler.getLooper();
         this.mHandler = new ListenerDelegateHandler(looper, this.mListener);
@@ -38,24 +36,19 @@ class CoverPowerKeyListenerDelegate extends INfcLedCoverTouchListenerCallback.St
     }
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onCoverTouchAccept() throws RemoteException {
-    }
+    public void onCoverTouchAccept() throws RemoteException {}
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onCoverTouchReject() throws RemoteException {
-    }
+    public void onCoverTouchReject() throws RemoteException {}
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onCoverTapLeft() throws RemoteException {
-    }
+    public void onCoverTapLeft() throws RemoteException {}
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onCoverTapMid() throws RemoteException {
-    }
+    public void onCoverTapMid() throws RemoteException {}
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
-    public void onCoverTapRight() throws RemoteException {
-    }
+    public void onCoverTapRight() throws RemoteException {}
 
     @Override // com.samsung.android.cover.INfcLedCoverTouchListenerCallback
     public void onSystemCoverEvent(int event, Bundle args) throws RemoteException {

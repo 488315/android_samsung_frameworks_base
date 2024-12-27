@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.inputmethod.InlineSuggestionsRequest;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.BitUtils;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -17,19 +19,21 @@ import java.util.function.IntFunction;
 
 /* loaded from: classes3.dex */
 public final class FillRequest implements Parcelable {
-    public static final Parcelable.Creator<FillRequest> CREATOR = new Parcelable.Creator<FillRequest>() { // from class: android.service.autofill.FillRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FillRequest[] newArray(int size) {
-            return new FillRequest[size];
-        }
+    public static final Parcelable.Creator<FillRequest> CREATOR =
+            new Parcelable.Creator<
+                    FillRequest>() { // from class: android.service.autofill.FillRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FillRequest[] newArray(int size) {
+                    return new FillRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FillRequest createFromParcel(Parcel in) {
-            return new FillRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FillRequest createFromParcel(Parcel in) {
+                    return new FillRequest(in);
+                }
+            };
     public static final int FLAG_COMPATIBILITY_MODE_REQUEST = 2;
     public static final int FLAG_IME_SHOWING = 128;
     public static final int FLAG_MANUAL_REQUEST = 1;
@@ -50,8 +54,7 @@ public final class FillRequest implements Parcelable {
     private final InlineSuggestionsRequest mInlineSuggestionsRequest;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestFlags {
-    }
+    public @interface RequestFlags {}
 
     private void onConstructed() {
         Preconditions.checkCollectionElementsNotNull(this.mFillContexts, "contexts");
@@ -59,12 +62,15 @@ public final class FillRequest implements Parcelable {
     }
 
     public static String requestFlagsToString(int value) {
-        return BitUtils.flagsToString(value, new IntFunction() { // from class: android.service.autofill.FillRequest$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                return FillRequest.singleRequestFlagsToString(i);
-            }
-        });
+        return BitUtils.flagsToString(
+                value,
+                new IntFunction() { // from class:
+                                    // android.service.autofill.FillRequest$$ExternalSyntheticLambda0
+                    @Override // java.util.function.IntFunction
+                    public final Object apply(int i) {
+                        return FillRequest.singleRequestFlagsToString(i);
+                    }
+                });
     }
 
     static String singleRequestFlagsToString(int value) {
@@ -94,12 +100,21 @@ public final class FillRequest implements Parcelable {
         }
     }
 
-    public FillRequest(int id, List<FillContext> fillContexts, List<String> hints, Bundle clientState, int flags, InlineSuggestionsRequest inlineSuggestionsRequest, IntentSender delayedFillIntentSender) {
+    public FillRequest(
+            int id,
+            List<FillContext> fillContexts,
+            List<String> hints,
+            Bundle clientState,
+            int flags,
+            InlineSuggestionsRequest inlineSuggestionsRequest,
+            IntentSender delayedFillIntentSender) {
         this.mId = id;
         this.mFillContexts = fillContexts;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFillContexts);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFillContexts);
         this.mHints = hints;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHints);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHints);
         this.mClientState = clientState;
         this.mFlags = flags;
         Preconditions.checkFlagsArgument(this.mFlags, 4055);
@@ -137,7 +152,21 @@ public final class FillRequest implements Parcelable {
     }
 
     public String toString() {
-        return "FillRequest { id = " + this.mId + ", fillContexts = " + this.mFillContexts + ", hints = " + this.mHints + ", clientState = " + this.mClientState + ", flags = " + requestFlagsToString(this.mFlags) + ", inlineSuggestionsRequest = " + this.mInlineSuggestionsRequest + ", delayedFillIntentSender = " + this.mDelayedFillIntentSender + " }";
+        return "FillRequest { id = "
+                + this.mId
+                + ", fillContexts = "
+                + this.mFillContexts
+                + ", hints = "
+                + this.mHints
+                + ", clientState = "
+                + this.mClientState
+                + ", flags = "
+                + requestFlagsToString(this.mFlags)
+                + ", inlineSuggestionsRequest = "
+                + this.mInlineSuggestionsRequest
+                + ", delayedFillIntentSender = "
+                + this.mDelayedFillIntentSender
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -179,13 +208,20 @@ public final class FillRequest implements Parcelable {
         in.readStringList(hints);
         Bundle clientState = (flg & 8) == 0 ? null : in.readBundle();
         int flags = in.readInt();
-        InlineSuggestionsRequest inlineSuggestionsRequest = (flg & 32) == 0 ? null : (InlineSuggestionsRequest) in.readTypedObject(InlineSuggestionsRequest.CREATOR);
-        IntentSender delayedFillIntentSender = (flg & 64) == 0 ? null : (IntentSender) in.readTypedObject(IntentSender.CREATOR);
+        InlineSuggestionsRequest inlineSuggestionsRequest =
+                (flg & 32) == 0
+                        ? null
+                        : (InlineSuggestionsRequest)
+                                in.readTypedObject(InlineSuggestionsRequest.CREATOR);
+        IntentSender delayedFillIntentSender =
+                (flg & 64) == 0 ? null : (IntentSender) in.readTypedObject(IntentSender.CREATOR);
         this.mId = id;
         this.mFillContexts = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFillContexts);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFillContexts);
         this.mHints = hints;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHints);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHints);
         this.mClientState = clientState;
         this.mFlags = flags;
         Preconditions.checkFlagsArgument(this.mFlags, 4055);
@@ -195,6 +231,5 @@ public final class FillRequest implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

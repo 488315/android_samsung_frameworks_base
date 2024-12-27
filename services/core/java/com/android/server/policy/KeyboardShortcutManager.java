@@ -11,9 +11,11 @@ import android.provider.Settings;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.policy.PhoneWindow;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,14 +46,17 @@ public final class KeyboardShortcutManager {
         }
 
         public void startTargetApp(int i) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "launch keyboard shortcut app, displayId=", "KeyboardShortcutManager");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i, "launch keyboard shortcut app, displayId=", "KeyboardShortcutManager");
             PhoneWindowManagerExt phoneWindowManagerExt = this.mPolicyExt;
             phoneWindowManagerExt.getClass();
             PhoneWindowManagerExt.getFillInIntent();
             ActivityOptions makeBasic = ActivityOptions.makeBasic();
             makeBasic.setLaunchDisplayId(i);
-            this.mContext.startActivityAsUser(this.mIntent, makeBasic.toBundle(), UserHandle.CURRENT);
-            PhoneWindow.sendCloseSystemWindows(phoneWindowManagerExt.mPolicy.mContext, (String) null);
+            this.mContext.startActivityAsUser(
+                    this.mIntent, makeBasic.toBundle(), UserHandle.CURRENT);
+            PhoneWindow.sendCloseSystemWindows(
+                    phoneWindowManagerExt.mPolicy.mContext, (String) null);
             phoneWindowManagerExt.mPolicy.dismissKeyboardShortcutsMenu();
         }
 
@@ -68,11 +73,14 @@ public final class KeyboardShortcutManager {
         public DefaultBehavior(Context context, PhoneWindowManagerExt phoneWindowManagerExt) {
             super(context, phoneWindowManagerExt);
             this.$r8$classId = 3;
-            this.mIntent = BatteryService$$ExternalSyntheticOutline0.m(67108864, "android.settings.SETTINGS");
+            this.mIntent =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            67108864, "android.settings.SETTINGS");
         }
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ DefaultBehavior(Context context, PhoneWindowManagerExt phoneWindowManagerExt, int i) {
+        public /* synthetic */ DefaultBehavior(
+                Context context, PhoneWindowManagerExt phoneWindowManagerExt, int i) {
             super(context, phoneWindowManagerExt);
             this.$r8$classId = i;
         }
@@ -86,7 +94,14 @@ public final class KeyboardShortcutManager {
                         return true;
                     }
                     try {
-                        return true ^ this.mContext.getPackageManager().getApplicationInfo("com.samsung.android.game.gametools", 128).metaData.getString("Feature.External.Action", "").contains("togglemenu");
+                        return true
+                                ^ this.mContext
+                                        .getPackageManager()
+                                        .getApplicationInfo(
+                                                "com.samsung.android.game.gametools", 128)
+                                        .metaData
+                                        .getString("Feature.External.Action", "")
+                                        .contains("togglemenu");
                     } catch (PackageManager.NameNotFoundException unused) {
                         Log.e("KeyboardShortcutManager", "GameBooster not installed");
                         return false;
@@ -102,7 +117,8 @@ public final class KeyboardShortcutManager {
                 case 2:
                     Log.d("KeyboardShortcutManager", "send broadcast game booster toggle menu");
                     this.mContext.sendBroadcastAsUser(this.mIntent, UserHandle.SYSTEM);
-                    StatusBarManager statusBarManager = (StatusBarManager) this.mContext.getSystemService("statusbar");
+                    StatusBarManager statusBarManager =
+                            (StatusBarManager) this.mContext.getSystemService("statusbar");
                     if (statusBarManager != null) {
                         statusBarManager.collapsePanels();
                     }
@@ -121,9 +137,12 @@ public final class KeyboardShortcutManager {
 
         public SFinderBehavior(Context context, PhoneWindowManagerExt phoneWindowManagerExt) {
             super(context, phoneWindowManagerExt);
-            this.mDeniedActivities = new String[]{"{com.android.phone/com.android.phone.UsimDownload}"};
+            this.mDeniedActivities =
+                    new String[] {"{com.android.phone/com.android.phone.UsimDownload}"};
             Intent intent = new Intent();
-            intent.setComponent(ComponentName.unflattenFromString("com.sec.android.app.launcher/com.sec.android.app.launcher.search.SearchActivity"));
+            intent.setComponent(
+                    ComponentName.unflattenFromString(
+                            "com.sec.android.app.launcher/com.sec.android.app.launcher.search.SearchActivity"));
             intent.putExtra("callername", 0);
             this.mIntent = intent;
         }
@@ -132,15 +151,21 @@ public final class KeyboardShortcutManager {
         public final boolean preCondition() {
             Intent intent = this.mIntent;
             if (intent != null) {
-                List semQueryIntentActivitiesAsUser = this.mContext.getPackageManager().semQueryIntentActivitiesAsUser(intent, 0, UserHandle.myUserId());
-                if (semQueryIntentActivitiesAsUser != null && semQueryIntentActivitiesAsUser.size() > 0) {
+                List semQueryIntentActivitiesAsUser =
+                        this.mContext
+                                .getPackageManager()
+                                .semQueryIntentActivitiesAsUser(intent, 0, UserHandle.myUserId());
+                if (semQueryIntentActivitiesAsUser != null
+                        && semQueryIntentActivitiesAsUser.size() > 0) {
                     PhoneWindowManagerExt phoneWindowManagerExt = this.mPolicyExt;
                     ComponentName componentName = phoneWindowManagerExt.mTopActivity;
                     if (componentName != null) {
                         String shortString = componentName.toShortString();
                         for (String str : this.mDeniedActivities) {
                             if (str.equals(shortString)) {
-                                Slog.d("KeyboardShortcutManager", "canLaunchAppByExternalKeyboard: It is denied activity");
+                                Slog.d(
+                                        "KeyboardShortcutManager",
+                                        "canLaunchAppByExternalKeyboard: It is denied activity");
                                 return true;
                             }
                         }
@@ -148,7 +173,9 @@ public final class KeyboardShortcutManager {
                     return phoneWindowManagerExt.externalKeyboardPolicy();
                 }
             }
-            Slog.d("KeyboardShortcutManager", "canLaunchAppByExternalKeyboard : SFinder activity is not available");
+            Slog.d(
+                    "KeyboardShortcutManager",
+                    "canLaunchAppByExternalKeyboard : SFinder activity is not available");
             return true;
         }
     }
@@ -204,7 +231,13 @@ public final class KeyboardShortcutManager {
     }
 
     public static String typeToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? i != 4 ? Integer.toString(i) : "META_Z" : "META_U" : "META_G" : "META_F" : "DEFAULT";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? i != 3 ? i != 4 ? Integer.toString(i) : "META_Z" : "META_U"
+                                : "META_G"
+                        : "META_F"
+                : "DEFAULT";
     }
 
     public final Behavior getBehavior(int i) {
@@ -213,7 +246,8 @@ public final class KeyboardShortcutManager {
             return new SFinderBehavior(this.mContext, phoneWindowManagerExt);
         }
         if (i == 2) {
-            DefaultBehavior defaultBehavior = new DefaultBehavior(this.mContext, phoneWindowManagerExt, 2);
+            DefaultBehavior defaultBehavior =
+                    new DefaultBehavior(this.mContext, phoneWindowManagerExt, 2);
             Intent intent = new Intent("com.samsung.android.game.gametools.action.togglemenu");
             intent.setPackage("com.samsung.android.game.gametools");
             intent.putExtra("package", "window-g");
@@ -224,11 +258,13 @@ public final class KeyboardShortcutManager {
             if (i == 4) {
                 return new DefaultBehavior(this.mContext, phoneWindowManagerExt);
             }
-            DefaultBehavior defaultBehavior2 = new DefaultBehavior(this.mContext, phoneWindowManagerExt, 0);
+            DefaultBehavior defaultBehavior2 =
+                    new DefaultBehavior(this.mContext, phoneWindowManagerExt, 0);
             defaultBehavior2.mIntent = new Intent("android.intent.action.MAIN");
             return defaultBehavior2;
         }
-        DefaultBehavior defaultBehavior3 = new DefaultBehavior(this.mContext, phoneWindowManagerExt, 1);
+        DefaultBehavior defaultBehavior3 =
+                new DefaultBehavior(this.mContext, phoneWindowManagerExt, 1);
         Intent intent2 = new Intent("com.samsung.accessibility.ACCESSIBILITY_SETTINGS");
         intent2.setFlags(268468224);
         defaultBehavior3.mIntent = intent2;
@@ -236,7 +272,10 @@ public final class KeyboardShortcutManager {
     }
 
     public final String getShortcutSettingsValue(int i) {
-        return Settings.System.getStringForUser(this.mContext.getContentResolver(), (String) this.mShortcutMap.get(Integer.valueOf(i)), -2);
+        return Settings.System.getStringForUser(
+                this.mContext.getContentResolver(),
+                (String) this.mShortcutMap.get(Integer.valueOf(i)),
+                -2);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:10:0x0083  */
@@ -323,6 +362,9 @@ public final class KeyboardShortcutManager {
         L94:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.policy.KeyboardShortcutManager.launch(int, int, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.policy.KeyboardShortcutManager.launch(int, int,"
+                    + " java.lang.String):boolean");
     }
 }

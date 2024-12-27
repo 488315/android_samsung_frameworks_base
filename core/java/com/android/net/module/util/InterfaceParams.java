@@ -2,6 +2,7 @@ package com.android.net.module.util;
 
 import android.net.MacAddress;
 import android.text.TextUtils;
+
 import java.net.NetworkInterface;
 import java.net.SocketException;
 
@@ -42,12 +43,18 @@ public class InterfaceParams {
         this.name = name;
         this.index = index;
         this.hasMacAddress = macAddr != null;
-        this.macAddr = this.hasMacAddress ? macAddr : MacAddress.fromBytes(new byte[]{2, 0, 0, 0, 0, 0});
+        this.macAddr =
+                this.hasMacAddress ? macAddr : MacAddress.fromBytes(new byte[] {2, 0, 0, 0, 0, 0});
         this.defaultMtu = defaultMtu > 1280 ? defaultMtu : 1280;
     }
 
     public String toString() {
-        return String.format("%s/%d/%s/%d", this.name, Integer.valueOf(this.index), this.macAddr, Integer.valueOf(this.defaultMtu));
+        return String.format(
+                "%s/%d/%s/%d",
+                this.name,
+                Integer.valueOf(this.index),
+                this.macAddr,
+                Integer.valueOf(this.defaultMtu));
     }
 
     private static NetworkInterface getNetworkInterfaceByName(String name) {

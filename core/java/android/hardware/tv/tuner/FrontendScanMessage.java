@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FrontendScanMessage implements Parcelable {
-    public static final Parcelable.Creator<FrontendScanMessage> CREATOR = new Parcelable.Creator<FrontendScanMessage>() { // from class: android.hardware.tv.tuner.FrontendScanMessage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendScanMessage createFromParcel(Parcel _aidl_source) {
-            return new FrontendScanMessage(_aidl_source);
-        }
+    public static final Parcelable.Creator<FrontendScanMessage> CREATOR =
+            new Parcelable.Creator<FrontendScanMessage>() { // from class:
+                // android.hardware.tv.tuner.FrontendScanMessage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendScanMessage createFromParcel(Parcel _aidl_source) {
+                    return new FrontendScanMessage(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendScanMessage[] newArray(int _aidl_size) {
-            return new FrontendScanMessage[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendScanMessage[] newArray(int _aidl_size) {
+                    return new FrontendScanMessage[_aidl_size];
+                }
+            };
     public static final int analogType = 6;
     public static final int annex = 13;
     public static final int atsc3PlpInfos = 11;
@@ -386,15 +388,21 @@ public final class FrontendScanMessage implements Parcelable {
                 _set(_aidl_tag, _aidl_value10);
                 return;
             case 10:
-                FrontendScanMessageStandard _aidl_value11 = (FrontendScanMessageStandard) _aidl_parcel.readTypedObject(FrontendScanMessageStandard.CREATOR);
+                FrontendScanMessageStandard _aidl_value11 =
+                        (FrontendScanMessageStandard)
+                                _aidl_parcel.readTypedObject(FrontendScanMessageStandard.CREATOR);
                 _set(_aidl_tag, _aidl_value11);
                 return;
             case 11:
-                FrontendScanAtsc3PlpInfo[] _aidl_value12 = (FrontendScanAtsc3PlpInfo[]) _aidl_parcel.createTypedArray(FrontendScanAtsc3PlpInfo.CREATOR);
+                FrontendScanAtsc3PlpInfo[] _aidl_value12 =
+                        (FrontendScanAtsc3PlpInfo[])
+                                _aidl_parcel.createTypedArray(FrontendScanAtsc3PlpInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value12);
                 return;
             case 12:
-                FrontendModulation _aidl_value13 = (FrontendModulation) _aidl_parcel.readTypedObject(FrontendModulation.CREATOR);
+                FrontendModulation _aidl_value13 =
+                        (FrontendModulation)
+                                _aidl_parcel.readTypedObject(FrontendModulation.CREATOR);
                 _set(_aidl_tag, _aidl_value13);
                 return;
             case 13:
@@ -450,7 +458,12 @@ public final class FrontendScanMessage implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

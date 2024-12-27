@@ -5,19 +5,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class EuiccInfo implements Parcelable {
-    public static final Parcelable.Creator<EuiccInfo> CREATOR = new Parcelable.Creator<EuiccInfo>() { // from class: android.telephony.euicc.EuiccInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EuiccInfo createFromParcel(Parcel in) {
-            return new EuiccInfo(in);
-        }
+    public static final Parcelable.Creator<EuiccInfo> CREATOR =
+            new Parcelable.Creator<EuiccInfo>() { // from class: android.telephony.euicc.EuiccInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EuiccInfo createFromParcel(Parcel in) {
+                    return new EuiccInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EuiccInfo[] newArray(int size) {
-            return new EuiccInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EuiccInfo[] newArray(int size) {
+                    return new EuiccInfo[size];
+                }
+            };
     private final String osVersion;
 
     public String getOsVersion() {

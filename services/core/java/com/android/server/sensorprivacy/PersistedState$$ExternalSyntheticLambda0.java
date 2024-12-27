@@ -3,8 +3,9 @@ package com.android.server.sensorprivacy;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlSerializer;
-import com.android.server.sensorprivacy.PersistedState;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.function.BiConsumer;
@@ -27,15 +28,21 @@ public final /* synthetic */ class PersistedState$$ExternalSyntheticLambda0 impl
                 resolveSerializer.attributeInt((String) null, "persistence-version", 2);
                 resolveSerializer.attributeInt((String) null, "version", 2);
                 for (int i = 0; i < arrayMap.size(); i++) {
-                    PersistedState.TypeUserSensor typeUserSensor = (PersistedState.TypeUserSensor) arrayMap.keyAt(i);
+                    PersistedState.TypeUserSensor typeUserSensor =
+                            (PersistedState.TypeUserSensor) arrayMap.keyAt(i);
                     SensorState sensorState = (SensorState) arrayMap.valueAt(i);
                     if (typeUserSensor.mType == 1) {
                         resolveSerializer.startTag((String) null, "sensor-state");
-                        resolveSerializer.attributeInt((String) null, "toggle-type", typeUserSensor.mType);
-                        resolveSerializer.attributeInt((String) null, "user-id", typeUserSensor.mUserId);
-                        resolveSerializer.attributeInt((String) null, "sensor", typeUserSensor.mSensor);
-                        resolveSerializer.attributeInt((String) null, "state-type", sensorState.mStateType);
-                        resolveSerializer.attributeLong((String) null, "last-change", sensorState.mLastChange);
+                        resolveSerializer.attributeInt(
+                                (String) null, "toggle-type", typeUserSensor.mType);
+                        resolveSerializer.attributeInt(
+                                (String) null, "user-id", typeUserSensor.mUserId);
+                        resolveSerializer.attributeInt(
+                                (String) null, "sensor", typeUserSensor.mSensor);
+                        resolveSerializer.attributeInt(
+                                (String) null, "state-type", sensorState.mStateType);
+                        resolveSerializer.attributeLong(
+                                (String) null, "last-change", sensorState.mLastChange);
                         resolveSerializer.endTag((String) null, "sensor-state");
                     }
                 }
@@ -45,7 +52,10 @@ public final /* synthetic */ class PersistedState$$ExternalSyntheticLambda0 impl
             } catch (IOException e) {
                 e = e;
                 fileOutputStream = startWrite;
-                Log.e("PersistedState", "Caught an exception persisting the sensor privacy state: ", e);
+                Log.e(
+                        "PersistedState",
+                        "Caught an exception persisting the sensor privacy state: ",
+                        e);
                 persistedState.mAtomicFile.failWrite(fileOutputStream);
             }
         } catch (IOException e2) {

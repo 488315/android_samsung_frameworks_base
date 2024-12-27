@@ -18,24 +18,36 @@ public final class AppIdSettingMap {
         this.mFirstAvailableAppId = 10000;
         WatchedArrayList watchedArrayList = new WatchedArrayList(0);
         this.mNonSystemSettings = watchedArrayList;
-        this.mNonSystemSettingsSnapshot = new SnapshotCache.Auto(watchedArrayList, watchedArrayList, "AppIdSettingMap.mNonSystemSettings", 0);
+        this.mNonSystemSettingsSnapshot =
+                new SnapshotCache.Auto(
+                        watchedArrayList,
+                        watchedArrayList,
+                        "AppIdSettingMap.mNonSystemSettings",
+                        0);
         WatchedSparseArray watchedSparseArray = new WatchedSparseArray();
         this.mSystemSettings = watchedSparseArray;
-        this.mSystemSettingsSnapshot = new SnapshotCache.Auto(watchedSparseArray, watchedSparseArray, "AppIdSettingMap.mSystemSettings", 0);
+        this.mSystemSettingsSnapshot =
+                new SnapshotCache.Auto(
+                        watchedSparseArray,
+                        watchedSparseArray,
+                        "AppIdSettingMap.mSystemSettings",
+                        0);
     }
 
     public AppIdSettingMap(AppIdSettingMap appIdSettingMap) {
         this.mFirstAvailableAppId = 10000;
-        this.mNonSystemSettings = (WatchedArrayList) appIdSettingMap.mNonSystemSettingsSnapshot.snapshot();
+        this.mNonSystemSettings =
+                (WatchedArrayList) appIdSettingMap.mNonSystemSettingsSnapshot.snapshot();
         this.mNonSystemSettingsSnapshot = new SnapshotCache.Auto();
-        this.mSystemSettings = (WatchedSparseArray) appIdSettingMap.mSystemSettingsSnapshot.snapshot();
+        this.mSystemSettings =
+                (WatchedSparseArray) appIdSettingMap.mSystemSettingsSnapshot.snapshot();
         this.mSystemSettingsSnapshot = new SnapshotCache.Auto();
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:9:0x001b, code lost:
-    
-        return r3 + 10000;
-     */
+
+       return r3 + 10000;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -85,7 +97,9 @@ public final class AppIdSettingMap {
             int r1 = r1 + 10000
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.AppIdSettingMap.acquireAndRegisterNewAppId(com.android.server.pm.SettingBase):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.AppIdSettingMap.acquireAndRegisterNewAppId(com.android.server.pm.SettingBase):int");
     }
 
     public final boolean registerExistingAppId(int i, SettingBase settingBase, Object obj) {
@@ -128,7 +142,12 @@ public final class AppIdSettingMap {
             watchedArrayList.set(i2, settingBase);
             return;
         }
-        String m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Error in package manager settings: calling replaceAppIdLpw to replace SettingBase at appId=", " but nothing is replaced.");
+        String m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        i,
+                        "Error in package manager settings: calling replaceAppIdLpw to replace"
+                            + " SettingBase at appId=",
+                        " but nothing is replaced.");
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         PackageManagerServiceUtils.logCriticalInfo(5, m);
     }

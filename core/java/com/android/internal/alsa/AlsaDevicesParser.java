@@ -3,6 +3,7 @@ package com.android.internal.alsa;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.provider.Downloads;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,8 +47,7 @@ public class AlsaDevicesParser {
         int mDeviceType = -1;
         int mDeviceDir = -1;
 
-        public AlsaDeviceRecord() {
-        }
+        public AlsaDeviceRecord() {}
 
         public boolean parse(String line) {
             int delimOffset = 0;
@@ -111,7 +111,14 @@ public class AlsaDevicesParser {
                                 break;
                             }
                         } catch (NumberFormatException e) {
-                            Slog.e(AlsaDevicesParser.TAG, "Failed to parse token " + tokenIndex + " of " + AlsaDevicesParser.kDevicesFilePath + " token: " + token);
+                            Slog.e(
+                                    AlsaDevicesParser.TAG,
+                                    "Failed to parse token "
+                                            + tokenIndex
+                                            + " of "
+                                            + AlsaDevicesParser.kDevicesFilePath
+                                            + " token: "
+                                            + token);
                             return false;
                         }
                 }
@@ -121,7 +128,12 @@ public class AlsaDevicesParser {
 
         public String textFormat() {
             StringBuilder sb = new StringBuilder();
-            sb.append(NavigationBarInflaterView.SIZE_MOD_START + this.mCardNum + ":" + this.mDeviceNum + NavigationBarInflaterView.SIZE_MOD_END);
+            sb.append(
+                    NavigationBarInflaterView.SIZE_MOD_START
+                            + this.mCardNum
+                            + ":"
+                            + this.mDeviceNum
+                            + NavigationBarInflaterView.SIZE_MOD_END);
             switch (this.mDeviceType) {
                 case 0:
                     sb.append(" Audio");
@@ -159,7 +171,9 @@ public class AlsaDevicesParser {
         Iterator<AlsaDeviceRecord> it = this.mDeviceRecords.iterator();
         while (it.hasNext()) {
             AlsaDeviceRecord deviceRecord = it.next();
-            if (deviceRecord.mCardNum == card && deviceRecord.mDeviceType == 0 && deviceRecord.mDeviceDir == 1) {
+            if (deviceRecord.mCardNum == card
+                    && deviceRecord.mDeviceType == 0
+                    && deviceRecord.mDeviceDir == 1) {
                 return true;
             }
         }
@@ -170,7 +184,9 @@ public class AlsaDevicesParser {
         Iterator<AlsaDeviceRecord> it = this.mDeviceRecords.iterator();
         while (it.hasNext()) {
             AlsaDeviceRecord deviceRecord = it.next();
-            if (deviceRecord.mCardNum == card && deviceRecord.mDeviceType == 0 && deviceRecord.mDeviceDir == 0) {
+            if (deviceRecord.mCardNum == card
+                    && deviceRecord.mDeviceType == 0
+                    && deviceRecord.mDeviceDir == 0) {
                 return true;
             }
         }
@@ -230,6 +246,5 @@ public class AlsaDevicesParser {
         return this.mScanStatus;
     }
 
-    private void Log(String heading) {
-    }
+    private void Log(String heading) {}
 }

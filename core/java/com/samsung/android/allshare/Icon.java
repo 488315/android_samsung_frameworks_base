@@ -14,6 +14,5 @@ public abstract class Icon {
 
     public abstract int getWidth();
 
-    protected Icon() {
-    }
+    protected Icon() {}
 }

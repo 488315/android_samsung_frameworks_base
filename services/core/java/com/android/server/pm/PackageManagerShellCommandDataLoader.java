@@ -11,6 +11,9 @@ import android.os.ShellCommand;
 import android.service.dataloader.DataLoaderService;
 import android.util.Slog;
 import android.util.SparseArray;
+
+import libcore.io.IoUtils;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
@@ -21,7 +24,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicLong;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -42,39 +44,58 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
         public DataLoaderService.FileSystemConnector mConnector;
         public DataLoaderParams mParams;
 
-        public final boolean onCreate(DataLoaderParams dataLoaderParams, DataLoaderService.FileSystemConnector fileSystemConnector) {
+        public final boolean onCreate(
+                DataLoaderParams dataLoaderParams,
+                DataLoaderService.FileSystemConnector fileSystemConnector) {
             this.mParams = dataLoaderParams;
             this.mConnector = fileSystemConnector;
             return true;
         }
 
         public final boolean onPrepareImage(Collection collection, Collection collection2) {
-            ShellCommand lookupShellCommand = PackageManagerShellCommandDataLoader.lookupShellCommand(this.mParams.getArguments());
+            ShellCommand lookupShellCommand =
+                    PackageManagerShellCommandDataLoader.lookupShellCommand(
+                            this.mParams.getArguments());
             try {
                 Iterator it = collection.iterator();
                 while (it.hasNext()) {
                     InstallationFile installationFile = (InstallationFile) it.next();
                     Metadata fromByteArray = Metadata.fromByteArray(installationFile.getMetadata());
                     if (fromByteArray == null) {
-                        Slog.e(PackageManagerShellCommandDataLoader.TAG, "Invalid metadata for file: " + installationFile.getName());
+                        Slog.e(
+                                PackageManagerShellCommandDataLoader.TAG,
+                                "Invalid metadata for file: " + installationFile.getName());
                         return false;
                     }
                     byte b = fromByteArray.mMode;
                     if (b != 0) {
                         if (b != 1) {
                             if (b != 4) {
-                                Slog.e(PackageManagerShellCommandDataLoader.TAG, "Unsupported metadata mode: " + ((int) b));
+                                Slog.e(
+                                        PackageManagerShellCommandDataLoader.TAG,
+                                        "Unsupported metadata mode: " + ((int) b));
                                 return false;
                             }
                         } else {
                             if (lookupShellCommand == null) {
-                                Slog.e(PackageManagerShellCommandDataLoader.TAG, "Missing shell command for Metadata.LOCAL_FILE.");
+                                Slog.e(
+                                        PackageManagerShellCommandDataLoader.TAG,
+                                        "Missing shell command for Metadata.LOCAL_FILE.");
                                 return false;
                             }
                             ParcelFileDescriptor parcelFileDescriptor = null;
                             try {
-                                parcelFileDescriptor = lookupShellCommand.openFileForSystem(new String(fromByteArray.mData, StandardCharsets.UTF_8), "r");
-                                this.mConnector.writeData(installationFile.getName(), 0L, parcelFileDescriptor.getStatSize(), parcelFileDescriptor);
+                                parcelFileDescriptor =
+                                        lookupShellCommand.openFileForSystem(
+                                                new String(
+                                                        fromByteArray.mData,
+                                                        StandardCharsets.UTF_8),
+                                                "r");
+                                this.mConnector.writeData(
+                                        installationFile.getName(),
+                                        0L,
+                                        parcelFileDescriptor.getStatSize(),
+                                        parcelFileDescriptor);
                                 IoUtils.closeQuietly(parcelFileDescriptor);
                             } catch (Throwable th) {
                                 IoUtils.closeQuietly(parcelFileDescriptor);
@@ -83,15 +104,25 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
                         }
                     } else {
                         if (lookupShellCommand == null) {
-                            Slog.e(PackageManagerShellCommandDataLoader.TAG, "Missing shell command for Metadata.STDIN.");
+                            Slog.e(
+                                    PackageManagerShellCommandDataLoader.TAG,
+                                    "Missing shell command for Metadata.STDIN.");
                             return false;
                         }
-                        this.mConnector.writeData(installationFile.getName(), 0L, installationFile.getLengthBytes(), PackageManagerShellCommandDataLoader.getStdInPFD(lookupShellCommand));
+                        this.mConnector.writeData(
+                                installationFile.getName(),
+                                0L,
+                                installationFile.getLengthBytes(),
+                                PackageManagerShellCommandDataLoader.getStdInPFD(
+                                        lookupShellCommand));
                     }
                 }
                 return true;
             } catch (IOException e) {
-                Slog.e(PackageManagerShellCommandDataLoader.TAG, "Exception while streaming files", e);
+                Slog.e(
+                        PackageManagerShellCommandDataLoader.TAG,
+                        "Exception while streaming files",
+                        e);
                 return false;
             }
         }
@@ -128,7 +159,8 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
         }
 
         public static Metadata forLocalFile(String str) {
-            return new Metadata((byte) 1, str, Long.valueOf(sGlobalSalt.incrementAndGet()).toString());
+            return new Metadata(
+                    (byte) 1, str, Long.valueOf(sGlobalSalt.incrementAndGet()).toString());
         }
 
         public static Metadata fromByteArray(byte[] bArr) {
@@ -190,7 +222,9 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
         int i = indexOf + 15;
         int indexOf2 = str.indexOf(38, i);
         try {
-            return indexOf2 < 0 ? Integer.parseInt(str.substring(i)) : Integer.parseInt(str.substring(i, indexOf2));
+            return indexOf2 < 0
+                    ? Integer.parseInt(str.substring(i))
+                    : Integer.parseInt(str.substring(i, indexOf2));
         } catch (NumberFormatException e) {
             Slog.e(TAG, "Incorrect shell command id format.", e);
             return -1;
@@ -227,7 +261,8 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
     }
 
     public static DataLoaderParams getIncrementalDataLoaderParams(ShellCommand shellCommand) {
-        return DataLoaderParams.forIncremental(new ComponentName("android", CLASS), getDataLoaderParamsArgs(shellCommand));
+        return DataLoaderParams.forIncremental(
+                new ComponentName("android", CLASS), getDataLoaderParamsArgs(shellCommand));
     }
 
     public static int getLocalFile(ShellCommand shellCommand, String str) {
@@ -260,7 +295,8 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
     }
 
     public static DataLoaderParams getStreamingDataLoaderParams(ShellCommand shellCommand) {
-        return DataLoaderParams.forStreaming(new ComponentName("android", CLASS), getDataLoaderParamsArgs(shellCommand));
+        return DataLoaderParams.forStreaming(
+                new ComponentName("android", CLASS), getDataLoaderParamsArgs(shellCommand));
     }
 
     public static ShellCommand lookupShellCommand(String str) {
@@ -281,7 +317,8 @@ public class PackageManagerShellCommandDataLoader extends DataLoaderService {
 
     private static native void nativeInitialize();
 
-    public final DataLoaderService.DataLoader onCreateDataLoader(DataLoaderParams dataLoaderParams) {
+    public final DataLoaderService.DataLoader onCreateDataLoader(
+            DataLoaderParams dataLoaderParams) {
         if (dataLoaderParams.getType() != 1) {
             return null;
         }

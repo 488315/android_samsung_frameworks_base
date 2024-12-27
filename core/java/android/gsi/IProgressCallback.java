@@ -14,8 +14,7 @@ public interface IProgressCallback extends IInterface {
 
     public static class Default implements IProgressCallback {
         @Override // android.gsi.IProgressCallback
-        public void onProgress(long current, long total) throws RemoteException {
-        }
+        public void onProgress(long current, long total) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IProgressCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProgressCallback {
+    public abstract static class Stub extends Binder implements IProgressCallback {
         static final int TRANSACTION_onProgress = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IProgressCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProgressCallback.DESCRIPTOR);
             }

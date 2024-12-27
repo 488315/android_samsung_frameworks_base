@@ -22,6 +22,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.TBSCertList;
 import com.android.internal.org.bouncycastle.asn1.x509.TBSCertificate;
 import com.android.internal.org.bouncycastle.operator.ContentSigner;
 import com.android.internal.org.bouncycastle.util.Properties;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
@@ -39,8 +40,7 @@ class CertUtils {
     private static Set EMPTY_SET = Collections.unmodifiableSet(new HashSet());
     private static List EMPTY_LIST = Collections.unmodifiableList(new ArrayList());
 
-    CertUtils() {
-    }
+    CertUtils() {}
 
     static ASN1Primitive parseNonEmptyASN1(byte[] encoding) throws IOException {
         ASN1Primitive p = ASN1Primitive.fromByteArray(encoding);
@@ -52,15 +52,24 @@ class CertUtils {
 
     static X509CertificateHolder generateFullCert(ContentSigner signer, TBSCertificate tbsCert) {
         try {
-            return new X509CertificateHolder(generateStructure(tbsCert, signer.getAlgorithmIdentifier(), generateSig(signer, tbsCert)));
+            return new X509CertificateHolder(
+                    generateStructure(
+                            tbsCert,
+                            signer.getAlgorithmIdentifier(),
+                            generateSig(signer, tbsCert)));
         } catch (IOException e) {
             throw new IllegalStateException("cannot produce certificate signature");
         }
     }
 
-    static X509AttributeCertificateHolder generateFullAttrCert(ContentSigner signer, AttributeCertificateInfo attrInfo) {
+    static X509AttributeCertificateHolder generateFullAttrCert(
+            ContentSigner signer, AttributeCertificateInfo attrInfo) {
         try {
-            return new X509AttributeCertificateHolder(generateAttrStructure(attrInfo, signer.getAlgorithmIdentifier(), generateSig(signer, attrInfo)));
+            return new X509AttributeCertificateHolder(
+                    generateAttrStructure(
+                            attrInfo,
+                            signer.getAlgorithmIdentifier(),
+                            generateSig(signer, attrInfo)));
         } catch (IOException e) {
             throw new IllegalStateException("cannot produce attribute certificate signature");
         }
@@ -68,7 +77,11 @@ class CertUtils {
 
     static X509CRLHolder generateFullCRL(ContentSigner signer, TBSCertList tbsCertList) {
         try {
-            return new X509CRLHolder(generateCRLStructure(tbsCertList, signer.getAlgorithmIdentifier(), generateSig(signer, tbsCertList)));
+            return new X509CRLHolder(
+                    generateCRLStructure(
+                            tbsCertList,
+                            signer.getAlgorithmIdentifier(),
+                            generateSig(signer, tbsCertList)));
         } catch (IOException e) {
             throw new IllegalStateException("cannot produce certificate signature");
         }
@@ -81,7 +94,8 @@ class CertUtils {
         return signer.getSignature();
     }
 
-    private static Certificate generateStructure(TBSCertificate tbsCert, AlgorithmIdentifier sigAlgId, byte[] signature) {
+    private static Certificate generateStructure(
+            TBSCertificate tbsCert, AlgorithmIdentifier sigAlgId, byte[] signature) {
         ASN1EncodableVector v = new ASN1EncodableVector();
         v.add(tbsCert);
         v.add(sigAlgId);
@@ -89,7 +103,8 @@ class CertUtils {
         return Certificate.getInstance(new DERSequence(v));
     }
 
-    private static AttributeCertificate generateAttrStructure(AttributeCertificateInfo attrInfo, AlgorithmIdentifier sigAlgId, byte[] signature) {
+    private static AttributeCertificate generateAttrStructure(
+            AttributeCertificateInfo attrInfo, AlgorithmIdentifier sigAlgId, byte[] signature) {
         ASN1EncodableVector v = new ASN1EncodableVector();
         v.add(attrInfo);
         v.add(sigAlgId);
@@ -97,7 +112,8 @@ class CertUtils {
         return AttributeCertificate.getInstance(new DERSequence(v));
     }
 
-    private static CertificateList generateCRLStructure(TBSCertList tbsCertList, AlgorithmIdentifier sigAlgId, byte[] signature) {
+    private static CertificateList generateCRLStructure(
+            TBSCertList tbsCertList, AlgorithmIdentifier sigAlgId, byte[] signature) {
         ASN1EncodableVector v = new ASN1EncodableVector();
         v.add(tbsCertList);
         v.add(sigAlgId);
@@ -109,14 +125,16 @@ class CertUtils {
         if (extensions == null) {
             return EMPTY_SET;
         }
-        return Collections.unmodifiableSet(new HashSet(Arrays.asList(extensions.getCriticalExtensionOIDs())));
+        return Collections.unmodifiableSet(
+                new HashSet(Arrays.asList(extensions.getCriticalExtensionOIDs())));
     }
 
     static Set getNonCriticalExtensionOIDs(Extensions extensions) {
         if (extensions == null) {
             return EMPTY_SET;
         }
-        return Collections.unmodifiableSet(new HashSet(Arrays.asList(extensions.getNonCriticalExtensionOIDs())));
+        return Collections.unmodifiableSet(
+                new HashSet(Arrays.asList(extensions.getNonCriticalExtensionOIDs())));
     }
 
     static List getExtensionOIDs(Extensions extensions) {
@@ -126,7 +144,12 @@ class CertUtils {
         return Collections.unmodifiableList(Arrays.asList(extensions.getExtensionOIDs()));
     }
 
-    static void addExtension(ExtensionsGenerator extGenerator, ASN1ObjectIdentifier oid, boolean isCritical, ASN1Encodable value) throws CertIOException {
+    static void addExtension(
+            ExtensionsGenerator extGenerator,
+            ASN1ObjectIdentifier oid,
+            boolean isCritical,
+            ASN1Encodable value)
+            throws CertIOException {
         try {
             extGenerator.addExtension(oid, isCritical, value);
         } catch (IOException e) {
@@ -172,7 +195,8 @@ class CertUtils {
         if (!id1.getAlgorithm().equals((ASN1Primitive) id2.getAlgorithm())) {
             return false;
         }
-        if (Properties.isOverrideSet("com.android.internal.org.bouncycastle.x509.allow_absent_equiv_NULL")) {
+        if (Properties.isOverrideSet(
+                "com.android.internal.org.bouncycastle.x509.allow_absent_equiv_NULL")) {
             if (id1.getParameters() == null) {
                 return id2.getParameters() == null || id2.getParameters().equals(DERNull.INSTANCE);
             }
@@ -206,10 +230,12 @@ class CertUtils {
         if (isReplaced) {
             return extGenerator2;
         }
-        throw new IllegalArgumentException("replace - original extension (OID = " + ext.getExtnId() + ") not found");
+        throw new IllegalArgumentException(
+                "replace - original extension (OID = " + ext.getExtnId() + ") not found");
     }
 
-    static ExtensionsGenerator doRemoveExtension(ExtensionsGenerator extGenerator, ASN1ObjectIdentifier oid) {
+    static ExtensionsGenerator doRemoveExtension(
+            ExtensionsGenerator extGenerator, ASN1ObjectIdentifier oid) {
         boolean isRemoved = false;
         Extensions exts = extGenerator.generate();
         ExtensionsGenerator extGenerator2 = new ExtensionsGenerator();

@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IVirtualDeviceSoundEffectListener extends IInterface {
-    public static final String DESCRIPTOR = "android.companion.virtual.IVirtualDeviceSoundEffectListener";
+    public static final String DESCRIPTOR =
+            "android.companion.virtual.IVirtualDeviceSoundEffectListener";
 
     void onPlaySoundEffect(int i) throws RemoteException;
 
     public static class Default implements IVirtualDeviceSoundEffectListener {
         @Override // android.companion.virtual.IVirtualDeviceSoundEffectListener
-        public void onPlaySoundEffect(int effectType) throws RemoteException {
-        }
+        public void onPlaySoundEffect(int effectType) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IVirtualDeviceSoundEffectListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDeviceSoundEffectListener {
+    public abstract static class Stub extends Binder implements IVirtualDeviceSoundEffectListener {
         static final int TRANSACTION_onPlaySoundEffect = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IVirtualDeviceSoundEffectListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualDeviceSoundEffectListener.DESCRIPTOR);
             }

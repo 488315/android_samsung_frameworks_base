@@ -3,25 +3,28 @@ package android.media.metrics;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class PlaybackErrorEvent extends Event implements Parcelable {
-    public static final Parcelable.Creator<PlaybackErrorEvent> CREATOR = new Parcelable.Creator<PlaybackErrorEvent>() { // from class: android.media.metrics.PlaybackErrorEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackErrorEvent[] newArray(int size) {
-            return new PlaybackErrorEvent[size];
-        }
+    public static final Parcelable.Creator<PlaybackErrorEvent> CREATOR =
+            new Parcelable.Creator<PlaybackErrorEvent>() { // from class:
+                // android.media.metrics.PlaybackErrorEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackErrorEvent[] newArray(int size) {
+                    return new PlaybackErrorEvent[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackErrorEvent createFromParcel(Parcel in) {
-            return new PlaybackErrorEvent(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackErrorEvent createFromParcel(Parcel in) {
+                    return new PlaybackErrorEvent(in);
+                }
+            };
     public static final int ERROR_AUDIO_TRACK_INIT_FAILED = 17;
     public static final int ERROR_AUDIO_TRACK_OTHER = 19;
     public static final int ERROR_AUDIO_TRACK_WRITE_FAILED = 18;
@@ -64,10 +67,14 @@ public final class PlaybackErrorEvent extends Event implements Parcelable {
     private final long mTimeSinceCreatedMillis;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorCode {
-    }
+    public @interface ErrorCode {}
 
-    private PlaybackErrorEvent(String exceptionStack, int errorCode, int subErrorCode, long timeSinceCreatedMillis, Bundle extras) {
+    private PlaybackErrorEvent(
+            String exceptionStack,
+            int errorCode,
+            int subErrorCode,
+            long timeSinceCreatedMillis,
+            Bundle extras) {
         this.mExceptionStack = exceptionStack;
         this.mErrorCode = errorCode;
         this.mSubErrorCode = subErrorCode;
@@ -98,7 +105,15 @@ public final class PlaybackErrorEvent extends Event implements Parcelable {
     }
 
     public String toString() {
-        return "PlaybackErrorEvent { exceptionStack = " + this.mExceptionStack + ", errorCode = " + this.mErrorCode + ", subErrorCode = " + this.mSubErrorCode + ", timeSinceCreatedMillis = " + this.mTimeSinceCreatedMillis + " }";
+        return "PlaybackErrorEvent { exceptionStack = "
+                + this.mExceptionStack
+                + ", errorCode = "
+                + this.mErrorCode
+                + ", subErrorCode = "
+                + this.mSubErrorCode
+                + ", timeSinceCreatedMillis = "
+                + this.mTimeSinceCreatedMillis
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -109,14 +124,21 @@ public final class PlaybackErrorEvent extends Event implements Parcelable {
             return false;
         }
         PlaybackErrorEvent that = (PlaybackErrorEvent) o;
-        if (Objects.equals(this.mExceptionStack, that.mExceptionStack) && this.mErrorCode == that.mErrorCode && this.mSubErrorCode == that.mSubErrorCode && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis) {
+        if (Objects.equals(this.mExceptionStack, that.mExceptionStack)
+                && this.mErrorCode == that.mErrorCode
+                && this.mSubErrorCode == that.mSubErrorCode
+                && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mExceptionStack, Integer.valueOf(this.mErrorCode), Integer.valueOf(this.mSubErrorCode), Long.valueOf(this.mTimeSinceCreatedMillis));
+        return Objects.hash(
+                this.mExceptionStack,
+                Integer.valueOf(this.mErrorCode),
+                Integer.valueOf(this.mSubErrorCode),
+                Long.valueOf(this.mTimeSinceCreatedMillis));
     }
 
     @Override // android.os.Parcelable
@@ -185,12 +207,19 @@ public final class PlaybackErrorEvent extends Event implements Parcelable {
 
         public PlaybackErrorEvent build() {
             String stack;
-            if (this.mException.getStackTrace() != null && this.mException.getStackTrace().length > 0) {
+            if (this.mException.getStackTrace() != null
+                    && this.mException.getStackTrace().length > 0) {
                 stack = this.mException.getStackTrace()[0].toString();
             } else {
                 stack = null;
             }
-            PlaybackErrorEvent o = new PlaybackErrorEvent(stack, this.mErrorCode, this.mSubErrorCode, this.mTimeSinceCreatedMillis, this.mMetricsBundle);
+            PlaybackErrorEvent o =
+                    new PlaybackErrorEvent(
+                            stack,
+                            this.mErrorCode,
+                            this.mSubErrorCode,
+                            this.mTimeSinceCreatedMillis,
+                            this.mMetricsBundle);
             return o;
         }
     }

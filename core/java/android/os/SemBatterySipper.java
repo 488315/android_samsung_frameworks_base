@@ -1,25 +1,27 @@
 package android.os;
 
 import android.hardware.scontext.SContextConstants;
-import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public class SemBatterySipper implements Parcelable {
-    public static final Parcelable.Creator<SemBatterySipper> CREATOR = new Parcelable.Creator<SemBatterySipper>() { // from class: android.os.SemBatterySipper.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemBatterySipper createFromParcel(Parcel in) {
-            return new SemBatterySipper(in);
-        }
+    public static final Parcelable.Creator<SemBatterySipper> CREATOR =
+            new Parcelable.Creator<
+                    SemBatterySipper>() { // from class: android.os.SemBatterySipper.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemBatterySipper createFromParcel(Parcel in) {
+                    return new SemBatterySipper(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemBatterySipper[] newArray(int size) {
-            return new SemBatterySipper[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemBatterySipper[] newArray(int size) {
+                    return new SemBatterySipper[size];
+                }
+            };
     public SemDevicePowerInfo mDevPowerInfo;
     public List<SemKernelWakelockInfo> mKernelWakelockInfoList;
     public List<SemScreenWakeInfo> mScreenWakeInfoList;
@@ -34,7 +36,12 @@ public class SemBatterySipper implements Parcelable {
         this.mScreenWakeInfoList = new ArrayList();
     }
 
-    public SemBatterySipper(SemDevicePowerInfo devPowerInfo, List<SemUidPowerInfo> uidPowerInfoList, List<SemWakeupReasonInfo> wakeupReasonInfoList, List<SemKernelWakelockInfo> kernelWakelockInfoList, List<SemScreenWakeInfo> screenWakeInfoList) {
+    public SemBatterySipper(
+            SemDevicePowerInfo devPowerInfo,
+            List<SemUidPowerInfo> uidPowerInfoList,
+            List<SemWakeupReasonInfo> wakeupReasonInfoList,
+            List<SemKernelWakelockInfo> kernelWakelockInfoList,
+            List<SemScreenWakeInfo> screenWakeInfoList) {
         this.mDevPowerInfo = devPowerInfo;
         this.mUidPowerInfoList = uidPowerInfoList;
         this.mWakeupReasonInfoList = wakeupReasonInfoList;

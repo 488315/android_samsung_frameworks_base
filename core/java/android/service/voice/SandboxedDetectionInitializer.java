@@ -6,6 +6,7 @@ import android.os.IRemoteCallback;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.SharedMemory;
+
 import java.util.function.IntConsumer;
 
 @SystemApi
@@ -16,7 +17,11 @@ public interface SandboxedDetectionInitializer {
     public static final String KEY_INITIALIZATION_STATUS = "initialization_status";
     public static final int MAXIMUM_NUMBER_OF_INITIALIZATION_STATUS_CUSTOM_ERROR = 2;
 
-    void onUpdateState(PersistableBundle persistableBundle, SharedMemory sharedMemory, long j, IntConsumer intConsumer);
+    void onUpdateState(
+            PersistableBundle persistableBundle,
+            SharedMemory sharedMemory,
+            long j,
+            IntConsumer intConsumer);
 
     static int getMaxCustomInitializationStatus() {
         return 2;
@@ -26,16 +31,20 @@ public interface SandboxedDetectionInitializer {
         if (callback == null) {
             return null;
         }
-        IntConsumer intConsumer = new IntConsumer() { // from class: android.service.voice.SandboxedDetectionInitializer$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntConsumer
-            public final void accept(int i) {
-                SandboxedDetectionInitializer.lambda$createInitializationStatusConsumer$0(IRemoteCallback.this, i);
-            }
-        };
+        IntConsumer intConsumer =
+                new IntConsumer() { // from class:
+                                    // android.service.voice.SandboxedDetectionInitializer$$ExternalSyntheticLambda0
+                    @Override // java.util.function.IntConsumer
+                    public final void accept(int i) {
+                        SandboxedDetectionInitializer.lambda$createInitializationStatusConsumer$0(
+                                IRemoteCallback.this, i);
+                    }
+                };
         return intConsumer;
     }
 
-    static /* synthetic */ void lambda$createInitializationStatusConsumer$0(IRemoteCallback callback, int value) {
+    static /* synthetic */ void lambda$createInitializationStatusConsumer$0(
+            IRemoteCallback callback, int value) {
         if (value > getMaxCustomInitializationStatus()) {
             throw new IllegalArgumentException("The initialization status is invalid for " + value);
         }

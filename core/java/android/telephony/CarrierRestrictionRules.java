@@ -5,7 +5,9 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.service.carrier.CarrierIdentifier;
+
 import com.android.internal.telephony.flags.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -20,19 +22,22 @@ import java.util.function.UnaryOperator;
 public final class CarrierRestrictionRules implements Parcelable {
     public static final int CARRIER_RESTRICTION_DEFAULT_ALLOWED = 1;
     public static final int CARRIER_RESTRICTION_DEFAULT_NOT_ALLOWED = 0;
-    public static final Parcelable.Creator<CarrierRestrictionRules> CREATOR = new Parcelable.Creator<CarrierRestrictionRules>() { // from class: android.telephony.CarrierRestrictionRules.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierRestrictionRules createFromParcel(Parcel in) {
-            return new CarrierRestrictionRules(in);
-        }
+    public static final Parcelable.Creator<CarrierRestrictionRules> CREATOR =
+            new Parcelable.Creator<
+                    CarrierRestrictionRules>() { // from class:
+                                                 // android.telephony.CarrierRestrictionRules.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierRestrictionRules createFromParcel(Parcel in) {
+                    return new CarrierRestrictionRules(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierRestrictionRules[] newArray(int size) {
-            return new CarrierRestrictionRules[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierRestrictionRules[] newArray(int size) {
+                    return new CarrierRestrictionRules[size];
+                }
+            };
     public static final int MULTISIM_POLICY_ACTIVE_SERVICE_ON_ANY_SLOT_TO_UNBLOCK_OTHER_SLOTS = 6;
     public static final int MULTISIM_POLICY_ACTIVE_SERVICE_ON_SLOT_1_TO_UNBLOCK_OTHER_SLOTS = 5;
     public static final int MULTISIM_POLICY_ALL_SIMS_MUST_BE_VALID = 7;
@@ -53,12 +58,10 @@ public final class CarrierRestrictionRules implements Parcelable {
     private boolean mUseCarrierLockInfo;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CarrierRestrictionDefault {
-    }
+    public @interface CarrierRestrictionDefault {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MultiSimPolicy {
-    }
+    public @interface MultiSimPolicy {}
 
     private CarrierRestrictionRules() {
         this.mAllowedCarriers = new ArrayList();
@@ -96,7 +99,13 @@ public final class CarrierRestrictionRules implements Parcelable {
         if (Flags.carrierRestrictionStatus() && this.mCarrierRestrictionStatus == 1) {
             return true;
         }
-        return (Flags.carrierRestrictionRulesEnhancement() && this.mUseCarrierLockInfo) ? this.mAllowedCarrierInfo.isEmpty() && this.mExcludedCarrierInfo.isEmpty() && this.mCarrierRestrictionDefault == 1 : this.mAllowedCarriers.isEmpty() && this.mExcludedCarriers.isEmpty() && this.mCarrierRestrictionDefault == 1;
+        return (Flags.carrierRestrictionRulesEnhancement() && this.mUseCarrierLockInfo)
+                ? this.mAllowedCarrierInfo.isEmpty()
+                        && this.mExcludedCarrierInfo.isEmpty()
+                        && this.mCarrierRestrictionDefault == 1
+                : this.mAllowedCarriers.isEmpty()
+                        && this.mExcludedCarriers.isEmpty()
+                        && this.mCarrierRestrictionDefault == 1;
     }
 
     public List<CarrierIdentifier> getAllowedCarriers() {
@@ -151,12 +160,15 @@ public final class CarrierRestrictionRules implements Parcelable {
                 }
                 boolean b = it.next().booleanValue();
                 if (b) {
-                    result.replaceAll(new UnaryOperator() { // from class: android.telephony.CarrierRestrictionRules$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            return CarrierRestrictionRules.lambda$areCarrierIdentifiersAllowed$0((Boolean) obj);
-                        }
-                    });
+                    result.replaceAll(
+                            new UnaryOperator() { // from class:
+                                                  // android.telephony.CarrierRestrictionRules$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Function
+                                public final Object apply(Object obj) {
+                                    return CarrierRestrictionRules
+                                            .lambda$areCarrierIdentifiersAllowed$0((Boolean) obj);
+                                }
+                            });
                     break;
                 }
             }
@@ -170,19 +182,30 @@ public final class CarrierRestrictionRules implements Parcelable {
 
     private static boolean isCarrierIdInList(CarrierIdentifier id, List<CarrierIdentifier> list) {
         for (CarrierIdentifier listItem : list) {
-            if (patternMatch(id.getMcc(), listItem.getMcc()) && patternMatch(id.getMnc(), listItem.getMnc())) {
+            if (patternMatch(id.getMcc(), listItem.getMcc())
+                    && patternMatch(id.getMnc(), listItem.getMnc())) {
                 String listItemValue = convertNullToEmpty(listItem.getSpn());
                 String idValue = convertNullToEmpty(id.getSpn());
                 if (listItemValue.isEmpty() || patternMatch(idValue, listItemValue)) {
                     String listItemValue2 = convertNullToEmpty(listItem.getImsi());
                     String idValue2 = convertNullToEmpty(id.getImsi());
-                    if (patternMatch(idValue2.substring(0, Math.min(idValue2.length(), listItemValue2.length())), listItemValue2)) {
+                    if (patternMatch(
+                            idValue2.substring(
+                                    0, Math.min(idValue2.length(), listItemValue2.length())),
+                            listItemValue2)) {
                         String listItemValue3 = convertNullToEmpty(listItem.getGid1());
                         String idValue3 = convertNullToEmpty(id.getGid1());
-                        if (patternMatch(idValue3.substring(0, Math.min(idValue3.length(), listItemValue3.length())), listItemValue3)) {
+                        if (patternMatch(
+                                idValue3.substring(
+                                        0, Math.min(idValue3.length(), listItemValue3.length())),
+                                listItemValue3)) {
                             String listItemValue4 = convertNullToEmpty(listItem.getGid2());
                             String idValue4 = convertNullToEmpty(id.getGid2());
-                            if (patternMatch(idValue4.substring(0, Math.min(idValue4.length(), listItemValue4.length())), listItemValue4)) {
+                            if (patternMatch(
+                                    idValue4.substring(
+                                            0,
+                                            Math.min(idValue4.length(), listItemValue4.length())),
+                                    listItemValue4)) {
                                 return true;
                             }
                         } else {
@@ -208,7 +231,8 @@ public final class CarrierRestrictionRules implements Parcelable {
         String lowerCaseStr = str.toLowerCase(Locale.ROOT);
         String lowerCasePattern = pattern.toLowerCase(Locale.ROOT);
         for (int i = 0; i < lowerCasePattern.length(); i++) {
-            if (lowerCasePattern.charAt(i) != lowerCaseStr.charAt(i) && lowerCasePattern.charAt(i) != '?') {
+            if (lowerCasePattern.charAt(i) != lowerCaseStr.charAt(i)
+                    && lowerCasePattern.charAt(i) != '?') {
                 return false;
             }
         }
@@ -239,12 +263,26 @@ public final class CarrierRestrictionRules implements Parcelable {
     }
 
     public String toString() {
-        return "CarrierRestrictionRules(allowed:" + this.mAllowedCarriers + ", excluded:" + this.mExcludedCarriers + ", default:" + this.mCarrierRestrictionDefault + ", MultiSim policy:" + this.mMultiSimPolicy + getCarrierInfoList() + "  mIsCarrierLockInfoSupported = " + this.mUseCarrierLockInfo + NavigationBarInflaterView.KEY_CODE_END;
+        return "CarrierRestrictionRules(allowed:"
+                + this.mAllowedCarriers
+                + ", excluded:"
+                + this.mExcludedCarriers
+                + ", default:"
+                + this.mCarrierRestrictionDefault
+                + ", MultiSim policy:"
+                + this.mMultiSimPolicy
+                + getCarrierInfoList()
+                + "  mIsCarrierLockInfoSupported = "
+                + this.mUseCarrierLockInfo
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     private String getCarrierInfoList() {
         if (Flags.carrierRestrictionRulesEnhancement()) {
-            return ",  allowedCarrierInfoList:" + this.mAllowedCarrierInfo + ", excludedCarrierInfoList:" + this.mExcludedCarrierInfo;
+            return ",  allowedCarrierInfoList:"
+                    + this.mAllowedCarrierInfo
+                    + ", excludedCarrierInfoList:"
+                    + this.mExcludedCarrierInfo;
         }
         return "";
     }

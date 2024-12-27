@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
+
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -33,16 +34,24 @@ public final class AuthStateDenialTimer {
                     if (authStateDenialTimer2.mCancelled) {
                         return;
                     }
-                    long elapsedRealtime = authStateDenialTimer2.mStopTimeInFuture - SystemClock.elapsedRealtime();
+                    long elapsedRealtime =
+                            authStateDenialTimer2.mStopTimeInFuture - SystemClock.elapsedRealtime();
                     if (elapsedRealtime <= 0) {
                         AuthStateDenialTimer authStateDenialTimer3 = AuthStateDenialTimer.this;
-                        ContextHubClientBroker contextHubClientBroker = authStateDenialTimer3.mClient;
+                        ContextHubClientBroker contextHubClientBroker =
+                                authStateDenialTimer3.mClient;
                         long j = authStateDenialTimer3.mNanoAppId;
                         synchronized (contextHubClientBroker.mMessageChannelNanoappIdMap) {
-                            authStateDenialTimer = (AuthStateDenialTimer) ((ConcurrentHashMap) contextHubClientBroker.mNappToAuthTimerMap).remove(Long.valueOf(j));
+                            authStateDenialTimer =
+                                    (AuthStateDenialTimer)
+                                            ((ConcurrentHashMap)
+                                                            contextHubClientBroker
+                                                                    .mNappToAuthTimerMap)
+                                                    .remove(Long.valueOf(j));
                         }
                         if (authStateDenialTimer != null) {
-                            contextHubClientBroker.updateNanoAppAuthState(j, Collections.emptyList(), true, false);
+                            contextHubClientBroker.updateNanoAppAuthState(
+                                    j, Collections.emptyList(), true, false);
                         }
                     } else {
                         sendMessageDelayed(obtainMessage(1), elapsedRealtime);
@@ -54,7 +63,8 @@ public final class AuthStateDenialTimer {
         }
     }
 
-    public AuthStateDenialTimer(ContextHubClientBroker contextHubClientBroker, long j, Looper looper) {
+    public AuthStateDenialTimer(
+            ContextHubClientBroker contextHubClientBroker, long j, Looper looper) {
         this.mClient = contextHubClientBroker;
         this.mNanoAppId = j;
         this.mHandler = new CountDownHandler(looper);

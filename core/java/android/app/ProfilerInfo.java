@@ -5,6 +5,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -14,19 +15,20 @@ public class ProfilerInfo implements Parcelable {
     public static final int CLOCK_TYPE_DUAL = 272;
     public static final int CLOCK_TYPE_THREAD_CPU = 256;
     public static final int CLOCK_TYPE_WALL = 16;
-    public static final Parcelable.Creator<ProfilerInfo> CREATOR = new Parcelable.Creator<ProfilerInfo>() { // from class: android.app.ProfilerInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ProfilerInfo createFromParcel(Parcel in) {
-            return new ProfilerInfo(in);
-        }
+    public static final Parcelable.Creator<ProfilerInfo> CREATOR =
+            new Parcelable.Creator<ProfilerInfo>() { // from class: android.app.ProfilerInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ProfilerInfo createFromParcel(Parcel in) {
+                    return new ProfilerInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ProfilerInfo[] newArray(int size) {
-            return new ProfilerInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ProfilerInfo[] newArray(int size) {
+                    return new ProfilerInfo[size];
+                }
+            };
     public static final int OUTPUT_VERSION_DEFAULT = 1;
     private static final String TAG = "ProfilerInfo";
     public static final int TRACE_FORMAT_VERSION_SHIFT = 1;
@@ -40,7 +42,16 @@ public class ProfilerInfo implements Parcelable {
     public final int samplingInterval;
     public final boolean streamingOutput;
 
-    public ProfilerInfo(String filename, ParcelFileDescriptor fd, int interval, boolean autoStop, boolean streaming, String agent, boolean attachAgentDuringBind, int clockType, int profilerOutputVersion) {
+    public ProfilerInfo(
+            String filename,
+            ParcelFileDescriptor fd,
+            int interval,
+            boolean autoStop,
+            boolean streaming,
+            String agent,
+            boolean attachAgentDuringBind,
+            int clockType,
+            int profilerOutputVersion) {
         this.profileFile = filename;
         this.profileFd = fd;
         this.samplingInterval = interval;
@@ -85,7 +96,16 @@ public class ProfilerInfo implements Parcelable {
     }
 
     public ProfilerInfo setAgent(String agent, boolean attachAgentDuringBind) {
-        return new ProfilerInfo(this.profileFile, this.profileFd, this.samplingInterval, this.autoStopProfiler, this.streamingOutput, agent, attachAgentDuringBind, this.clockType, this.profilerOutputVersion);
+        return new ProfilerInfo(
+                this.profileFile,
+                this.profileFd,
+                this.samplingInterval,
+                this.autoStopProfiler,
+                this.streamingOutput,
+                agent,
+                attachAgentDuringBind,
+                this.clockType,
+                this.profilerOutputVersion);
     }
 
     public void closeFd() {
@@ -142,7 +162,8 @@ public class ProfilerInfo implements Parcelable {
 
     private ProfilerInfo(Parcel in) {
         this.profileFile = in.readString();
-        this.profileFd = in.readInt() != 0 ? ParcelFileDescriptor.CREATOR.createFromParcel(in) : null;
+        this.profileFd =
+                in.readInt() != 0 ? ParcelFileDescriptor.CREATOR.createFromParcel(in) : null;
         this.samplingInterval = in.readInt();
         this.autoStopProfiler = in.readInt() != 0;
         this.streamingOutput = in.readInt() != 0;
@@ -160,13 +181,34 @@ public class ProfilerInfo implements Parcelable {
             return false;
         }
         ProfilerInfo other = (ProfilerInfo) o;
-        if (Objects.equals(this.profileFile, other.profileFile) && this.autoStopProfiler == other.autoStopProfiler && this.samplingInterval == other.samplingInterval && this.streamingOutput == other.streamingOutput && Objects.equals(this.agent, other.agent) && this.clockType == other.clockType && this.profilerOutputVersion == other.profilerOutputVersion) {
+        if (Objects.equals(this.profileFile, other.profileFile)
+                && this.autoStopProfiler == other.autoStopProfiler
+                && this.samplingInterval == other.samplingInterval
+                && this.streamingOutput == other.streamingOutput
+                && Objects.equals(this.agent, other.agent)
+                && this.clockType == other.clockType
+                && this.profilerOutputVersion == other.profilerOutputVersion) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return (((((((((((((17 * 31) + Objects.hashCode(this.profileFile)) * 31) + this.samplingInterval) * 31) + (this.autoStopProfiler ? 1 : 0)) * 31) + (this.streamingOutput ? 1 : 0)) * 31) + Objects.hashCode(this.agent)) * 31) + this.clockType) * 31) + this.profilerOutputVersion;
+        return (((((((((((((17 * 31) + Objects.hashCode(this.profileFile)) * 31)
+                                                                                                + this
+                                                                                                        .samplingInterval)
+                                                                                        * 31)
+                                                                                + (this
+                                                                                                .autoStopProfiler
+                                                                                        ? 1
+                                                                                        : 0))
+                                                                        * 31)
+                                                                + (this.streamingOutput ? 1 : 0))
+                                                        * 31)
+                                                + Objects.hashCode(this.agent))
+                                        * 31)
+                                + this.clockType)
+                        * 31)
+                + this.profilerOutputVersion;
     }
 }

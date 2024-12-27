@@ -15,7 +15,8 @@ public interface IVoldMountCallback extends IInterface {
         }
 
         @Override // android.os.IVoldMountCallback
-        public boolean onVolumeChecking(FileDescriptor fileDescriptor, String str, String str2) throws RemoteException {
+        public boolean onVolumeChecking(FileDescriptor fileDescriptor, String str, String str2)
+                throws RemoteException {
             return false;
         }
     }
@@ -34,7 +35,8 @@ public interface IVoldMountCallback extends IInterface {
             }
 
             @Override // android.os.IVoldMountCallback
-            public final boolean onVolumeChecking(FileDescriptor fileDescriptor, String str, String str2) {
+            public final boolean onVolumeChecking(
+                    FileDescriptor fileDescriptor, String str, String str2) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -60,8 +62,10 @@ public interface IVoldMountCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IVoldMountCallback.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IVoldMountCallback)) {
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(IVoldMountCallback.DESCRIPTOR);
+            if (queryLocalInterface != null
+                    && (queryLocalInterface instanceof IVoldMountCallback)) {
                 return (IVoldMountCallback) queryLocalInterface;
             }
             Proxy proxy = new Proxy();
@@ -75,7 +79,8 @@ public interface IVoldMountCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IVoldMountCallback.DESCRIPTOR);
             }
@@ -90,12 +95,14 @@ public interface IVoldMountCallback extends IInterface {
             String readString = parcel.readString();
             String readString2 = parcel.readString();
             parcel.enforceNoDataAvail();
-            boolean onVolumeChecking = onVolumeChecking(readRawFileDescriptor, readString, readString2);
+            boolean onVolumeChecking =
+                    onVolumeChecking(readRawFileDescriptor, readString, readString2);
             parcel2.writeNoException();
             parcel2.writeBoolean(onVolumeChecking);
             return true;
         }
     }
 
-    boolean onVolumeChecking(FileDescriptor fileDescriptor, String str, String str2) throws RemoteException;
+    boolean onVolumeChecking(FileDescriptor fileDescriptor, String str, String str2)
+            throws RemoteException;
 }

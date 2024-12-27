@@ -5,121 +5,147 @@ import android.os.storage.StorageManager;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.util.Slog;
+
+import libcore.io.IoUtils;
+import libcore.util.EmptyArray;
+
 import com.samsung.android.security.SemSdCardEncryption;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.util.Arrays;
-import libcore.io.IoUtils;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes3.dex */
 public class RedactingFileDescriptor {
     private static final boolean DEBUG = true;
     private static final String TAG = "RedactingFileDescriptor";
-    private final ProxyFileDescriptorCallback mCallback = new ProxyFileDescriptorCallback() { // from class: android.os.RedactingFileDescriptor.1
-        @Override // android.os.ProxyFileDescriptorCallback
-        public long onGetSize() throws ErrnoException {
-            return Os.fstat(RedactingFileDescriptor.this.mInner).st_size;
-        }
+    private final ProxyFileDescriptorCallback mCallback =
+            new ProxyFileDescriptorCallback() { // from class: android.os.RedactingFileDescriptor.1
+                @Override // android.os.ProxyFileDescriptorCallback
+                public long onGetSize() throws ErrnoException {
+                    return Os.fstat(RedactingFileDescriptor.this.mInner).st_size;
+                }
 
-        @Override // android.os.ProxyFileDescriptorCallback
-        public int onRead(long offset, int size, byte[] data) throws ErrnoException {
-            int res;
-            AnonymousClass1 anonymousClass1 = this;
-            long j = offset;
-            int n = 0;
-            while (n < size) {
-                try {
-                    res = Os.pread(RedactingFileDescriptor.this.mInner, data, n, size - n, j + n);
-                } catch (InterruptedIOException e) {
-                    n += e.bytesTransferred;
-                }
-                if (res == 0) {
-                    break;
-                }
-                n += res;
-            }
-            long[] ranges = RedactingFileDescriptor.this.mRedactRanges;
-            int i = 0;
-            while (i < ranges.length) {
-                long start = Math.max(j, ranges[i]);
-                long end = Math.min(size + j, ranges[i + 1]);
-                for (long j2 = start; j2 < end; j2++) {
-                    data[(int) (j2 - j)] = 0;
-                }
-                long[] jArr = RedactingFileDescriptor.this.mFreeOffsets;
-                int length = jArr.length;
-                int i2 = 0;
-                while (i2 < length) {
-                    long freeOffset = jArr[i2];
-                    long[] ranges2 = ranges;
-                    long freeEnd = freeOffset + 4;
-                    long redactFreeStart = Math.max(freeOffset, start);
-                    long redactFreeEnd = Math.min(freeEnd, end);
-                    long j3 = redactFreeStart;
-                    while (j3 < redactFreeEnd) {
-                        data[(int) (j3 - j)] = (byte) SemSdCardEncryption.STATUS_FREE.charAt((int) (j3 - freeOffset));
-                        j3++;
-                        j = offset;
-                        freeEnd = freeEnd;
+                @Override // android.os.ProxyFileDescriptorCallback
+                public int onRead(long offset, int size, byte[] data) throws ErrnoException {
+                    int res;
+                    AnonymousClass1 anonymousClass1 = this;
+                    long j = offset;
+                    int n = 0;
+                    while (n < size) {
+                        try {
+                            res =
+                                    Os.pread(
+                                            RedactingFileDescriptor.this.mInner,
+                                            data,
+                                            n,
+                                            size - n,
+                                            j + n);
+                        } catch (InterruptedIOException e) {
+                            n += e.bytesTransferred;
+                        }
+                        if (res == 0) {
+                            break;
+                        }
+                        n += res;
                     }
-                    i2++;
-                    j = offset;
-                    ranges = ranges2;
+                    long[] ranges = RedactingFileDescriptor.this.mRedactRanges;
+                    int i = 0;
+                    while (i < ranges.length) {
+                        long start = Math.max(j, ranges[i]);
+                        long end = Math.min(size + j, ranges[i + 1]);
+                        for (long j2 = start; j2 < end; j2++) {
+                            data[(int) (j2 - j)] = 0;
+                        }
+                        long[] jArr = RedactingFileDescriptor.this.mFreeOffsets;
+                        int length = jArr.length;
+                        int i2 = 0;
+                        while (i2 < length) {
+                            long freeOffset = jArr[i2];
+                            long[] ranges2 = ranges;
+                            long freeEnd = freeOffset + 4;
+                            long redactFreeStart = Math.max(freeOffset, start);
+                            long redactFreeEnd = Math.min(freeEnd, end);
+                            long j3 = redactFreeStart;
+                            while (j3 < redactFreeEnd) {
+                                data[(int) (j3 - j)] =
+                                        (byte)
+                                                SemSdCardEncryption.STATUS_FREE.charAt(
+                                                        (int) (j3 - freeOffset));
+                                j3++;
+                                j = offset;
+                                freeEnd = freeEnd;
+                            }
+                            i2++;
+                            j = offset;
+                            ranges = ranges2;
+                        }
+                        i += 2;
+                        anonymousClass1 = this;
+                        j = offset;
+                    }
+                    return n;
                 }
-                i += 2;
-                anonymousClass1 = this;
-                j = offset;
-            }
-            return n;
-        }
 
-        @Override // android.os.ProxyFileDescriptorCallback
-        public int onWrite(long offset, int size, byte[] data) throws ErrnoException {
-            int res;
-            int n = 0;
-            while (n < size) {
-                try {
-                    res = Os.pwrite(RedactingFileDescriptor.this.mInner, data, n, size - n, offset + n);
-                } catch (InterruptedIOException e) {
-                    n += e.bytesTransferred;
+                @Override // android.os.ProxyFileDescriptorCallback
+                public int onWrite(long offset, int size, byte[] data) throws ErrnoException {
+                    int res;
+                    int n = 0;
+                    while (n < size) {
+                        try {
+                            res =
+                                    Os.pwrite(
+                                            RedactingFileDescriptor.this.mInner,
+                                            data,
+                                            n,
+                                            size - n,
+                                            offset + n);
+                        } catch (InterruptedIOException e) {
+                            n += e.bytesTransferred;
+                        }
+                        if (res == 0) {
+                            break;
+                        }
+                        n += res;
+                    }
+                    RedactingFileDescriptor.this.mRedactRanges =
+                            RedactingFileDescriptor.removeRange(
+                                    RedactingFileDescriptor.this.mRedactRanges, offset, n + offset);
+                    return n;
                 }
-                if (res == 0) {
-                    break;
+
+                @Override // android.os.ProxyFileDescriptorCallback
+                public void onFsync() throws ErrnoException {
+                    Os.fsync(RedactingFileDescriptor.this.mInner);
                 }
-                n += res;
-            }
-            RedactingFileDescriptor.this.mRedactRanges = RedactingFileDescriptor.removeRange(RedactingFileDescriptor.this.mRedactRanges, offset, n + offset);
-            return n;
-        }
 
-        @Override // android.os.ProxyFileDescriptorCallback
-        public void onFsync() throws ErrnoException {
-            Os.fsync(RedactingFileDescriptor.this.mInner);
-        }
-
-        @Override // android.os.ProxyFileDescriptorCallback
-        public void onRelease() {
-            Slog.v(RedactingFileDescriptor.TAG, "onRelease()");
-            IoUtils.closeQuietly(RedactingFileDescriptor.this.mInner);
-        }
-    };
+                @Override // android.os.ProxyFileDescriptorCallback
+                public void onRelease() {
+                    Slog.v(RedactingFileDescriptor.TAG, "onRelease()");
+                    IoUtils.closeQuietly(RedactingFileDescriptor.this.mInner);
+                }
+            };
     private volatile long[] mFreeOffsets;
     private FileDescriptor mInner;
     private ParcelFileDescriptor mOuter;
     private volatile long[] mRedactRanges;
 
-    private RedactingFileDescriptor(Context context, File file, int mode, long[] redactRanges, long[] freeOffsets) throws IOException {
+    private RedactingFileDescriptor(
+            Context context, File file, int mode, long[] redactRanges, long[] freeOffsets)
+            throws IOException {
         this.mInner = null;
         this.mOuter = null;
         this.mRedactRanges = checkRangesArgument(redactRanges);
         this.mFreeOffsets = freeOffsets;
         try {
             try {
-                this.mInner = Os.open(file.getAbsolutePath(), FileUtils.translateModePfdToPosix(mode), 0);
-                this.mOuter = ((StorageManager) context.getSystemService(StorageManager.class)).openProxyFileDescriptor(mode, this.mCallback);
+                this.mInner =
+                        Os.open(file.getAbsolutePath(), FileUtils.translateModePfdToPosix(mode), 0);
+                this.mOuter =
+                        ((StorageManager) context.getSystemService(StorageManager.class))
+                                .openProxyFileDescriptor(mode, this.mCallback);
             } catch (ErrnoException e) {
                 throw e.rethrowAsIOException();
             }
@@ -142,7 +168,9 @@ public class RedactingFileDescriptor {
         return ranges;
     }
 
-    public static ParcelFileDescriptor open(Context context, File file, int mode, long[] redactRanges, long[] freePositions) throws IOException {
+    public static ParcelFileDescriptor open(
+            Context context, File file, int mode, long[] redactRanges, long[] freePositions)
+            throws IOException {
         return new RedactingFileDescriptor(context, file, mode, redactRanges, freePositions).mOuter;
     }
 

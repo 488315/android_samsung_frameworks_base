@@ -29,8 +29,7 @@ public final class ApplicationInfoProto {
         public static final long TARGET_SDK_VERSION = 1120986464259L;
         public static final long VERSION_CODE = 1120986464260L;
 
-        public Version() {
-        }
+        public Version() {}
     }
 
     public final class Detail {
@@ -57,7 +56,6 @@ public final class ApplicationInfoProto {
         public static final long TASK_AFFINITY = 1138166333442L;
         public static final long UI_OPTIONS = 1120986464269L;
 
-        public Detail() {
-        }
+        public Detail() {}
     }
 }

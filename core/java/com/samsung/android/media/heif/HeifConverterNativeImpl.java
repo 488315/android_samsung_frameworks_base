@@ -1,10 +1,11 @@
 package com.samsung.android.media.heif;
 
 import android.media.MediaFormat;
-import com.samsung.android.media.heif.CaptureSourceInternal;
+
 import com.samsung.android.media.heif.jni.AMessageJNI;
 import com.samsung.android.media.heif.jni.HeifCaptureJNI;
 import com.samsung.android.sume.core.message.Message;
+
 import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 import java.util.Collections;
@@ -63,7 +64,8 @@ final class HeifConverterNativeImpl implements SemHeifConverter {
         int id = 1;
         msg.setInt("cover-count", configs.size());
         for (SemHeifConfig config : configs) {
-            CaptureSourceInternal masterInternal = CaptureSourceInternal.Parser.makeInternalSource(config.getMasterImage());
+            CaptureSourceInternal masterInternal =
+                    CaptureSourceInternal.Parser.makeInternalSource(config.getMasterImage());
             masterInternal.setImageRole(0);
             if (config.getExifData() != null) {
                 masterInternal.setExifData(config.getExifData());
@@ -71,13 +73,16 @@ final class HeifConverterNativeImpl implements SemHeifConverter {
             if (config.getCameraInfo() != null) {
                 masterInternal.setCameraInfo(config.getCameraInfo());
             }
-            msg.setMessage(String.format(Locale.US, "cover%02d", Integer.valueOf(id)), masterInternal.getMsg());
+            msg.setMessage(
+                    String.format(Locale.US, "cover%02d", Integer.valueOf(id)),
+                    masterInternal.getMsg());
             int id2 = id + 1;
             masterInternal.setId(id);
             if (config.getThumbnailImage() == null) {
                 id = id2;
             } else {
-                CaptureSourceInternal thumbInternal = CaptureSourceInternal.Parser.makeInternalSource(config.getThumbnailImage());
+                CaptureSourceInternal thumbInternal =
+                        CaptureSourceInternal.Parser.makeInternalSource(config.getThumbnailImage());
                 thumbInternal.setImageRole(1);
                 thumbInternal.setId(id2);
                 masterInternal.setThumbnail(thumbInternal);

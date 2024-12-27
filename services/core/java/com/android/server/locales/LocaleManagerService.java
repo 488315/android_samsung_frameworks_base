@@ -25,6 +25,7 @@ import android.os.UserHandle;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.XmlUtils;
@@ -35,11 +36,16 @@ import com.android.server.LocalServices;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
-import com.android.server.locales.LocaleManagerBackupHelper;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.PackageConfigurationUpdaterImpl;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.localeoverlaymanager.LocaleOverlayManagerWrapper;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,8 +63,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -73,8 +77,7 @@ public final class LocaleManagerService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocaleManagerBinderService extends ILocaleManager.Stub {
-        public LocaleManagerBinderService() {
-        }
+        public LocaleManagerBinderService() {}
 
         public final LocaleList getApplicationLocales(String str, int i) {
             return LocaleManagerService.this.getApplicationLocales(str, i);
@@ -100,11 +103,26 @@ public final class LocaleManagerService extends SystemService {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-            new LocaleManagerShellCommand(LocaleManagerService.this.mBinderService).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
+            new LocaleManagerShellCommand(LocaleManagerService.this.mBinderService)
+                    .exec(
+                            this,
+                            fileDescriptor,
+                            fileDescriptor2,
+                            fileDescriptor3,
+                            strArr,
+                            shellCallback,
+                            resultReceiver);
         }
 
-        public final void setApplicationLocales(String str, int i, LocaleList localeList, boolean z) {
+        public final void setApplicationLocales(
+                String str, int i, LocaleList localeList, boolean z) {
             LocaleManagerService.this.setApplicationLocales(str, i, localeList, z, z ? 1 : 2);
         }
 
@@ -113,13 +131,25 @@ public final class LocaleManagerService extends SystemService {
             localeManagerService.getClass();
             if (SystemProperties.getBoolean("i18n.feature.dynamic_locales_change", true)) {
                 int callingUid = Binder.getCallingUid();
-                AppSupportedLocalesChangedAtomRecord appSupportedLocalesChangedAtomRecord = new AppSupportedLocalesChangedAtomRecord(callingUid);
+                AppSupportedLocalesChangedAtomRecord appSupportedLocalesChangedAtomRecord =
+                        new AppSupportedLocalesChangedAtomRecord(callingUid);
                 try {
                     Objects.requireNonNull(str);
-                    int handleIncomingUser = localeManagerService.mActivityManagerInternal.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, 0, "setOverrideLocaleConfig", (String) null);
-                    if (!localeManagerService.isPackageOwnedByCaller(str, handleIncomingUser, null, appSupportedLocalesChangedAtomRecord)) {
+                    int handleIncomingUser =
+                            localeManagerService.mActivityManagerInternal.handleIncomingUser(
+                                    Binder.getCallingPid(),
+                                    Binder.getCallingUid(),
+                                    i,
+                                    false,
+                                    0,
+                                    "setOverrideLocaleConfig",
+                                    (String) null);
+                    if (!localeManagerService.isPackageOwnedByCaller(
+                            str, handleIncomingUser, null, appSupportedLocalesChangedAtomRecord)) {
                         try {
-                            localeManagerService.mContext.enforceCallingOrSelfPermission("android.permission.SET_APP_SPECIFIC_LOCALECONFIG", "setOverrideLocaleConfig");
+                            localeManagerService.mContext.enforceCallingOrSelfPermission(
+                                    "android.permission.SET_APP_SPECIFIC_LOCALECONFIG",
+                                    "setOverrideLocaleConfig");
                         } catch (SecurityException e) {
                             appSupportedLocalesChangedAtomRecord.mStatus = 4;
                             throw e;
@@ -127,13 +157,33 @@ public final class LocaleManagerService extends SystemService {
                     }
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        localeManagerService.setOverrideLocaleConfigUnchecked(str, handleIncomingUser, localeConfig, appSupportedLocalesChangedAtomRecord);
-                        FrameworkStatsLog.write(FrameworkStatsLog.APP_SUPPORTED_LOCALES_CHANGED, callingUid, appSupportedLocalesChangedAtomRecord.mTargetUid, appSupportedLocalesChangedAtomRecord.mNumLocales, appSupportedLocalesChangedAtomRecord.mOverrideRemoved, appSupportedLocalesChangedAtomRecord.mSameAsResConfig, appSupportedLocalesChangedAtomRecord.mSameAsPrevConfig, appSupportedLocalesChangedAtomRecord.mStatus);
+                        localeManagerService.setOverrideLocaleConfigUnchecked(
+                                str,
+                                handleIncomingUser,
+                                localeConfig,
+                                appSupportedLocalesChangedAtomRecord);
+                        FrameworkStatsLog.write(
+                                FrameworkStatsLog.APP_SUPPORTED_LOCALES_CHANGED,
+                                callingUid,
+                                appSupportedLocalesChangedAtomRecord.mTargetUid,
+                                appSupportedLocalesChangedAtomRecord.mNumLocales,
+                                appSupportedLocalesChangedAtomRecord.mOverrideRemoved,
+                                appSupportedLocalesChangedAtomRecord.mSameAsResConfig,
+                                appSupportedLocalesChangedAtomRecord.mSameAsPrevConfig,
+                                appSupportedLocalesChangedAtomRecord.mStatus);
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
                 } catch (Throwable th) {
-                    FrameworkStatsLog.write(FrameworkStatsLog.APP_SUPPORTED_LOCALES_CHANGED, appSupportedLocalesChangedAtomRecord.mCallingUid, appSupportedLocalesChangedAtomRecord.mTargetUid, appSupportedLocalesChangedAtomRecord.mNumLocales, appSupportedLocalesChangedAtomRecord.mOverrideRemoved, appSupportedLocalesChangedAtomRecord.mSameAsResConfig, appSupportedLocalesChangedAtomRecord.mSameAsPrevConfig, appSupportedLocalesChangedAtomRecord.mStatus);
+                    FrameworkStatsLog.write(
+                            FrameworkStatsLog.APP_SUPPORTED_LOCALES_CHANGED,
+                            appSupportedLocalesChangedAtomRecord.mCallingUid,
+                            appSupportedLocalesChangedAtomRecord.mTargetUid,
+                            appSupportedLocalesChangedAtomRecord.mNumLocales,
+                            appSupportedLocalesChangedAtomRecord.mOverrideRemoved,
+                            appSupportedLocalesChangedAtomRecord.mSameAsResConfig,
+                            appSupportedLocalesChangedAtomRecord.mSameAsPrevConfig,
+                            appSupportedLocalesChangedAtomRecord.mStatus);
                     throw th;
                 }
             }
@@ -142,27 +192,46 @@ public final class LocaleManagerService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocaleManagerInternalImpl {
-        public LocaleManagerInternalImpl() {
-        }
+        public LocaleManagerInternalImpl() {}
 
         public final byte[] getBackupPayload(int i) {
             if (Binder.getCallingUid() != 1000) {
                 throw new SecurityException("Caller is not system.");
             }
-            LocaleManagerBackupHelper localeManagerBackupHelper = LocaleManagerService.this.mBackupHelper;
+            LocaleManagerBackupHelper localeManagerBackupHelper =
+                    LocaleManagerService.this.mBackupHelper;
             synchronized (localeManagerBackupHelper.mStagedDataLock) {
                 localeManagerBackupHelper.cleanStagedDataForOldEntriesLocked(i);
             }
             HashMap hashMap = new HashMap();
-            for (ApplicationInfo applicationInfo : localeManagerBackupHelper.mPackageManager.getInstalledApplicationsAsUser(PackageManager.ApplicationInfoFlags.of(0L), i)) {
+            for (ApplicationInfo applicationInfo :
+                    localeManagerBackupHelper.mPackageManager.getInstalledApplicationsAsUser(
+                            PackageManager.ApplicationInfoFlags.of(0L), i)) {
                 try {
-                    LocaleList applicationLocales = localeManagerBackupHelper.mLocaleManagerService.getApplicationLocales(applicationInfo.packageName, i);
+                    LocaleList applicationLocales =
+                            localeManagerBackupHelper.mLocaleManagerService.getApplicationLocales(
+                                    applicationInfo.packageName, i);
                     if (!applicationLocales.isEmpty()) {
-                        SharedPreferences sharedPreferences = localeManagerBackupHelper.mDelegateAppLocalePackages;
-                        hashMap.put(applicationInfo.packageName, new LocaleManagerBackupHelper.LocalesInfo(applicationLocales.toLanguageTags(), sharedPreferences != null ? sharedPreferences.getStringSet(Integer.toString(i), Collections.emptySet()).contains(applicationInfo.packageName) : false));
+                        SharedPreferences sharedPreferences =
+                                localeManagerBackupHelper.mDelegateAppLocalePackages;
+                        hashMap.put(
+                                applicationInfo.packageName,
+                                new LocaleManagerBackupHelper.LocalesInfo(
+                                        applicationLocales.toLanguageTags(),
+                                        sharedPreferences != null
+                                                ? sharedPreferences
+                                                        .getStringSet(
+                                                                Integer.toString(i),
+                                                                Collections.emptySet())
+                                                        .contains(applicationInfo.packageName)
+                                                : false));
                     }
                 } catch (RemoteException | IllegalArgumentException e) {
-                    Slog.e("LocaleManagerBkpHelper", "Exception when getting locales for package: " + applicationInfo.packageName, e);
+                    Slog.e(
+                            "LocaleManagerBkpHelper",
+                            "Exception when getting locales for package: "
+                                    + applicationInfo.packageName,
+                            e);
                 }
             }
             if (hashMap.isEmpty()) {
@@ -180,10 +249,14 @@ public final class LocaleManagerService extends SystemService {
 
         public final void stageAndApplyRestoredPayload(int i, byte[] bArr) {
             PackageInfo packageInfo;
-            LocaleManagerBackupHelper localeManagerBackupHelper = LocaleManagerService.this.mBackupHelper;
+            LocaleManagerBackupHelper localeManagerBackupHelper =
+                    LocaleManagerService.this.mBackupHelper;
             localeManagerBackupHelper.getClass();
             if (bArr == null) {
-                NandswapManager$$ExternalSyntheticOutline0.m(i, "stageAndApplyRestoredPayload: no payload to restore for user ", "LocaleManagerBkpHelper");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i,
+                        "stageAndApplyRestoredPayload: no payload to restore for user ",
+                        "LocaleManagerBkpHelper");
                 return;
             }
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
@@ -195,20 +268,33 @@ public final class LocaleManagerService extends SystemService {
                 synchronized (localeManagerBackupHelper.mStagedDataLock) {
                     try {
                         for (String str : readFromXml.keySet()) {
-                            LocaleManagerBackupHelper.LocalesInfo localesInfo = (LocaleManagerBackupHelper.LocalesInfo) readFromXml.get(str);
+                            LocaleManagerBackupHelper.LocalesInfo localesInfo =
+                                    (LocaleManagerBackupHelper.LocalesInfo) readFromXml.get(str);
                             try {
-                                packageInfo = localeManagerBackupHelper.mContext.getPackageManager().getPackageInfoAsUser(str, 0, i);
+                                packageInfo =
+                                        localeManagerBackupHelper
+                                                .mContext
+                                                .getPackageManager()
+                                                .getPackageInfoAsUser(str, 0, i);
                             } catch (PackageManager.NameNotFoundException unused) {
                                 packageInfo = null;
                             }
                             if (packageInfo != null) {
                                 localeManagerBackupHelper.removeFromArchivedPackagesInfo(i, str);
-                                localeManagerBackupHelper.checkExistingLocalesAndApplyRestore(i, localesInfo, str);
+                                localeManagerBackupHelper.checkExistingLocalesAndApplyRestore(
+                                        i, localesInfo, str);
                             } else {
                                 localeManagerBackupHelper.storeStagedDataInfo(i, localesInfo, str);
                             }
                         }
-                        if (!localeManagerBackupHelper.getStagedDataSp(i).getAll().isEmpty() && !localeManagerBackupHelper.getStagedDataSp(i).edit().putLong("staged_data_time", localeManagerBackupHelper.mClock.millis()).commit()) {
+                        if (!localeManagerBackupHelper.getStagedDataSp(i).getAll().isEmpty()
+                                && !localeManagerBackupHelper
+                                        .getStagedDataSp(i)
+                                        .edit()
+                                        .putLong(
+                                                "staged_data_time",
+                                                localeManagerBackupHelper.mClock.millis())
+                                        .commit()) {
                             Slog.e("LocaleManagerBkpHelper", "Failed to commit data!");
                         }
                     } finally {
@@ -225,42 +311,83 @@ public final class LocaleManagerService extends SystemService {
         this.mWriteLock = new Object();
         this.mContext = context;
         this.mBinderService = new LocaleManagerBinderService();
-        this.mActivityTaskManagerInternal = (ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class);
-        this.mActivityManagerInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
+        this.mActivityTaskManagerInternal =
+                (ActivityTaskManagerInternal)
+                        LocalServices.getService(ActivityTaskManagerInternal.class);
+        this.mActivityManagerInternal =
+                (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
         PackageManager packageManager = context.getPackageManager();
         this.mPackageManager = packageManager;
         HandlerThread handlerThread = new HandlerThread("LocaleManagerService", 10);
         handlerThread.start();
-        final SystemAppUpdateTracker systemAppUpdateTracker = new SystemAppUpdateTracker(context, this, new AtomicFile(new File(Environment.getDataSystemDirectory(), "locale_manager_service_updated_system_apps.xml")));
-        handlerThread.getThreadHandler().postAtFrontOfQueue(new Runnable() { // from class: com.android.server.locales.LocaleManagerService.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                SystemAppUpdateTracker systemAppUpdateTracker2 = SystemAppUpdateTracker.this;
-                if (systemAppUpdateTracker2.mUpdatedAppsFile.getBaseFile().exists()) {
-                    FileInputStream fileInputStream = null;
-                    try {
-                        try {
-                            fileInputStream = systemAppUpdateTracker2.mUpdatedAppsFile.openRead();
-                            systemAppUpdateTracker2.readFromXml(fileInputStream);
-                        } catch (IOException | XmlPullParserException e) {
-                            Slog.e("SystemAppUpdateTracker", "loadUpdatedSystemApps: Could not parse storage file ", e);
-                        }
-                    } finally {
-                        IoUtils.closeQuietly(fileInputStream);
-                    }
-                }
-            }
-        });
-        LocaleManagerBackupHelper localeManagerBackupHelper = new LocaleManagerBackupHelper(context, this, packageManager, Clock.systemUTC(), handlerThread, null, null, null);
+        final SystemAppUpdateTracker systemAppUpdateTracker =
+                new SystemAppUpdateTracker(
+                        context,
+                        this,
+                        new AtomicFile(
+                                new File(
+                                        Environment.getDataSystemDirectory(),
+                                        "locale_manager_service_updated_system_apps.xml")));
+        handlerThread
+                .getThreadHandler()
+                .postAtFrontOfQueue(
+                        new Runnable() { // from class:
+                            // com.android.server.locales.LocaleManagerService.1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SystemAppUpdateTracker systemAppUpdateTracker2 =
+                                        SystemAppUpdateTracker.this;
+                                if (systemAppUpdateTracker2
+                                        .mUpdatedAppsFile
+                                        .getBaseFile()
+                                        .exists()) {
+                                    FileInputStream fileInputStream = null;
+                                    try {
+                                        try {
+                                            fileInputStream =
+                                                    systemAppUpdateTracker2.mUpdatedAppsFile
+                                                            .openRead();
+                                            systemAppUpdateTracker2.readFromXml(fileInputStream);
+                                        } catch (IOException | XmlPullParserException e) {
+                                            Slog.e(
+                                                    "SystemAppUpdateTracker",
+                                                    "loadUpdatedSystemApps: Could not parse storage"
+                                                        + " file ",
+                                                    e);
+                                        }
+                                    } finally {
+                                        IoUtils.closeQuietly(fileInputStream);
+                                    }
+                                }
+                            }
+                        });
+        LocaleManagerBackupHelper localeManagerBackupHelper =
+                new LocaleManagerBackupHelper(
+                        context,
+                        this,
+                        packageManager,
+                        Clock.systemUTC(),
+                        handlerThread,
+                        null,
+                        null,
+                        null);
         this.mBackupHelper = localeManagerBackupHelper;
-        LocaleManagerServicePackageMonitor localeManagerServicePackageMonitor = new LocaleManagerServicePackageMonitor();
+        LocaleManagerServicePackageMonitor localeManagerServicePackageMonitor =
+                new LocaleManagerServicePackageMonitor();
         localeManagerServicePackageMonitor.mBackupHelper = localeManagerBackupHelper;
         localeManagerServicePackageMonitor.mSystemAppUpdateTracker = systemAppUpdateTracker;
         localeManagerServicePackageMonitor.mLocaleManagerService = this;
-        localeManagerServicePackageMonitor.register(context, handlerThread.getLooper(), UserHandle.ALL, true);
+        localeManagerServicePackageMonitor.register(
+                context, handlerThread.getLooper(), UserHandle.ALL, true);
     }
 
-    public LocaleManagerService(Context context, ActivityTaskManagerInternal activityTaskManagerInternal, ActivityManagerInternal activityManagerInternal, PackageManager packageManager, LocaleManagerBackupHelper localeManagerBackupHelper, PackageMonitor packageMonitor) {
+    public LocaleManagerService(
+            Context context,
+            ActivityTaskManagerInternal activityTaskManagerInternal,
+            ActivityManagerInternal activityManagerInternal,
+            PackageManager packageManager,
+            LocaleManagerBackupHelper localeManagerBackupHelper,
+            PackageMonitor packageMonitor) {
         super(context);
         this.mWriteLock = new Object();
         this.mContext = context;
@@ -272,11 +399,16 @@ public final class LocaleManagerService extends SystemService {
     }
 
     public static Intent createBaseIntent(String str, String str2, LocaleList localeList) {
-        return new Intent(str).putExtra("android.intent.extra.PACKAGE_NAME", str2).putExtra("android.intent.extra.LOCALE_LIST", localeList).addFlags(285212672);
+        return new Intent(str)
+                .putExtra("android.intent.extra.PACKAGE_NAME", str2)
+                .putExtra("android.intent.extra.LOCALE_LIST", localeList)
+                .addFlags(285212672);
     }
 
     public static File getXmlFileNameForUser(int i, String str) {
-        return new File(new File(Environment.getDataSystemCeDirectory(i), "locale_configs"), ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, ".xml"));
+        return new File(
+                new File(Environment.getDataSystemCeDirectory(i), "locale_configs"),
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, ".xml"));
     }
 
     public static List loadFromXml(TypedXmlPullParser typedXmlPullParser) {
@@ -303,7 +435,9 @@ public final class LocaleManagerService extends SystemService {
                 newFastSerializer.setOutput(byteArrayOutputStream, StandardCharsets.UTF_8.name());
                 newFastSerializer.startDocument((String) null, Boolean.TRUE);
                 newFastSerializer.startTag((String) null, "locale-config");
-                Iterator it = new ArrayList(Arrays.asList(localeList.toLanguageTags().split(","))).iterator();
+                Iterator it =
+                        new ArrayList(Arrays.asList(localeList.toLanguageTags().split(",")))
+                                .iterator();
                 while (it.hasNext()) {
                     String str = (String) it.next();
                     newFastSerializer.startTag((String) null, "locale");
@@ -323,9 +457,9 @@ public final class LocaleManagerService extends SystemService {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0081, code lost:
-    
-        if (r8.mActivityManagerInternal.isAppForeground(getPackageUid(r9, r10)) != false) goto L26;
-     */
+
+       if (r8.mActivityManagerInternal.isAppForeground(getPackageUid(r9, r10)) != false) goto L26;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -399,20 +533,33 @@ public final class LocaleManagerService extends SystemService {
             android.os.Binder.restoreCallingIdentity(r0)
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.locales.LocaleManagerService.getApplicationLocales(java.lang.String, int):android.os.LocaleList");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.locales.LocaleManagerService.getApplicationLocales(java.lang.String,"
+                    + " int):android.os.LocaleList");
     }
 
     public final LocaleList getApplicationLocalesUnchecked(int i, String str) {
         LocaleList localeList;
-        ActivityTaskManagerInternal.PackageConfig findPackageConfiguration = ActivityTaskManagerService.this.mPackageConfigPersister.findPackageConfiguration(i, str);
-        return (findPackageConfiguration == null || (localeList = findPackageConfiguration.mLocales) == null) ? LocaleList.getEmptyLocaleList() : localeList;
+        ActivityTaskManagerInternal.PackageConfig findPackageConfiguration =
+                ActivityTaskManagerService.this.mPackageConfigPersister.findPackageConfiguration(
+                        i, str);
+        return (findPackageConfiguration == null
+                        || (localeList = findPackageConfiguration.mLocales) == null)
+                ? LocaleList.getEmptyLocaleList()
+                : localeList;
     }
 
     public final String getInstallingPackageName(int i, String str) {
         try {
-            return this.mContext.createContextAsUser(UserHandle.of(i), 0).getPackageManager().getInstallSourceInfo(str).getInstallingPackageName();
+            return this.mContext
+                    .createContextAsUser(UserHandle.of(i), 0)
+                    .getPackageManager()
+                    .getInstallSourceInfo(str)
+                    .getInstallingPackageName();
         } catch (PackageManager.NameNotFoundException unused) {
-            HeimdAllFsService$$ExternalSyntheticOutline0.m("Package not found ", str, "LocaleManagerService");
+            HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                    "Package not found ", str, "LocaleManagerService");
             return null;
         }
     }
@@ -422,14 +569,30 @@ public final class LocaleManagerService extends SystemService {
             return null;
         }
         Objects.requireNonNull(str);
-        File xmlFileNameForUser = getXmlFileNameForUser(this.mActivityManagerInternal.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, 0, "getOverrideLocaleConfig", (String) null), str);
+        File xmlFileNameForUser =
+                getXmlFileNameForUser(
+                        this.mActivityManagerInternal.handleIncomingUser(
+                                Binder.getCallingPid(),
+                                Binder.getCallingUid(),
+                                i,
+                                false,
+                                0,
+                                "getOverrideLocaleConfig",
+                                (String) null),
+                        str);
         if (!xmlFileNameForUser.exists()) {
             return null;
         }
         try {
             FileInputStream fileInputStream = new FileInputStream(xmlFileNameForUser);
             try {
-                LocaleConfig localeConfig = new LocaleConfig(LocaleList.forLanguageTags(String.join(",", loadFromXml(Xml.resolvePullParser(fileInputStream)))));
+                LocaleConfig localeConfig =
+                        new LocaleConfig(
+                                LocaleList.forLanguageTags(
+                                        String.join(
+                                                ",",
+                                                loadFromXml(
+                                                        Xml.resolvePullParser(fileInputStream)))));
                 fileInputStream.close();
                 return localeConfig;
             } catch (Throwable th) {
@@ -441,20 +604,28 @@ public final class LocaleManagerService extends SystemService {
                 throw th;
             }
         } catch (IOException | XmlPullParserException e) {
-            Slog.e("LocaleManagerService", "Failed to parse XML configuration from " + xmlFileNameForUser, e);
+            Slog.e(
+                    "LocaleManagerService",
+                    "Failed to parse XML configuration from " + xmlFileNameForUser,
+                    e);
             return null;
         }
     }
 
     public final int getPackageUid(String str, int i) {
         try {
-            return this.mPackageManager.getPackageUidAsUser(str, PackageManager.PackageInfoFlags.of(0L), i);
+            return this.mPackageManager.getPackageUidAsUser(
+                    str, PackageManager.PackageInfoFlags.of(0L), i);
         } catch (PackageManager.NameNotFoundException unused) {
             return -1;
         }
     }
 
-    public final boolean isPackageOwnedByCaller(String str, int i, AppLocaleChangedAtomRecord appLocaleChangedAtomRecord, AppSupportedLocalesChangedAtomRecord appSupportedLocalesChangedAtomRecord) {
+    public final boolean isPackageOwnedByCaller(
+            String str,
+            int i,
+            AppLocaleChangedAtomRecord appLocaleChangedAtomRecord,
+            AppSupportedLocalesChangedAtomRecord appSupportedLocalesChangedAtomRecord) {
         int packageUid = getPackageUid(str, i);
         if (packageUid >= 0) {
             if (appLocaleChangedAtomRecord != null) {
@@ -470,7 +641,9 @@ public final class LocaleManagerService extends SystemService {
         } else if (appSupportedLocalesChangedAtomRecord != null) {
             appSupportedLocalesChangedAtomRecord.mStatus = 3;
         }
-        throw new IllegalArgumentException(SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0.m(i, "Unknown package: ", str, " for user "));
+        throw new IllegalArgumentException(
+                SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0
+                        .m(i, "Unknown package: ", str, " for user "));
     }
 
     @Override // com.android.server.SystemService
@@ -479,7 +652,8 @@ public final class LocaleManagerService extends SystemService {
         LocalServices.addService(LocaleManagerInternalImpl.class, new LocaleManagerInternalImpl());
     }
 
-    public final void removeUnsupportedAppLocales(String str, int i, LocaleConfig localeConfig, int i2) {
+    public final void removeUnsupportedAppLocales(
+            String str, int i, LocaleConfig localeConfig, int i2) {
         LocaleList applicationLocalesUnchecked = getApplicationLocalesUnchecked(i, str);
         ArrayList arrayList = new ArrayList();
         boolean z = true;
@@ -491,7 +665,9 @@ public final class LocaleManagerService extends SystemService {
                 if (localeConfig.containsLocale(applicationLocalesUnchecked.get(i3))) {
                     arrayList.add(applicationLocalesUnchecked.get(i3));
                 } else {
-                    Slog.i("LocaleManagerService", "Missing from the LocaleConfig, reset app locales");
+                    Slog.i(
+                            "LocaleManagerService",
+                            "Missing from the LocaleConfig, reset app locales");
                     z2 = true;
                 }
             }
@@ -499,35 +675,56 @@ public final class LocaleManagerService extends SystemService {
         }
         if (z) {
             try {
-                setApplicationLocales(str, i, new LocaleList((Locale[]) arrayList.toArray(new Locale[arrayList.size()])), this.mBackupHelper.areLocalesSetFromDelegate(i, str), i2);
+                setApplicationLocales(
+                        str,
+                        i,
+                        new LocaleList((Locale[]) arrayList.toArray(new Locale[arrayList.size()])),
+                        this.mBackupHelper.areLocalesSetFromDelegate(i, str),
+                        i2);
             } catch (RemoteException | IllegalArgumentException e) {
                 Slog.e("LocaleManagerService", "Could not set locales for " + str, e);
             }
         }
     }
 
-    public final void setApplicationLocales(String str, int i, LocaleList localeList, boolean z, int i2) {
-        AppLocaleChangedAtomRecord appLocaleChangedAtomRecord = new AppLocaleChangedAtomRecord(Binder.getCallingUid());
+    public final void setApplicationLocales(
+            String str, int i, LocaleList localeList, boolean z, int i2) {
+        AppLocaleChangedAtomRecord appLocaleChangedAtomRecord =
+                new AppLocaleChangedAtomRecord(Binder.getCallingUid());
         try {
             Objects.requireNonNull(str);
             Objects.requireNonNull(localeList);
             appLocaleChangedAtomRecord.mCaller = i2;
-            appLocaleChangedAtomRecord.mNewLocales = AppLocaleChangedAtomRecord.convertEmptyLocales(localeList.toLanguageTags());
-            int handleIncomingUser = this.mActivityManagerInternal.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, 0, "setApplicationLocales", (String) null);
-            if (!isPackageOwnedByCaller(str, handleIncomingUser, appLocaleChangedAtomRecord, null)) {
+            appLocaleChangedAtomRecord.mNewLocales =
+                    AppLocaleChangedAtomRecord.convertEmptyLocales(localeList.toLanguageTags());
+            int handleIncomingUser =
+                    this.mActivityManagerInternal.handleIncomingUser(
+                            Binder.getCallingPid(),
+                            Binder.getCallingUid(),
+                            i,
+                            false,
+                            0,
+                            "setApplicationLocales",
+                            (String) null);
+            if (!isPackageOwnedByCaller(
+                    str, handleIncomingUser, appLocaleChangedAtomRecord, null)) {
                 try {
-                    this.mContext.enforceCallingOrSelfPermission("android.permission.CHANGE_CONFIGURATION", "setApplicationLocales");
+                    this.mContext.enforceCallingOrSelfPermission(
+                            "android.permission.CHANGE_CONFIGURATION", "setApplicationLocales");
                 } catch (SecurityException e) {
                     appLocaleChangedAtomRecord.mStatus = 4;
                     throw e;
                 }
             }
-            this.mBackupHelper.persistLocalesModificationInfo(str, z, localeList.isEmpty(), handleIncomingUser);
+            this.mBackupHelper.persistLocalesModificationInfo(
+                    str, z, localeList.isEmpty(), handleIncomingUser);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                setApplicationLocalesUnchecked(str, handleIncomingUser, localeList, appLocaleChangedAtomRecord);
+                setApplicationLocalesUnchecked(
+                        str, handleIncomingUser, localeList, appLocaleChangedAtomRecord);
                 try {
-                    LocaleOverlayManagerWrapper.getInstance(this.mContext).applyPerAppLocale(localeList, str, handleIncomingUser);
+                    LocaleOverlayManagerWrapper.getInstance(this.mContext)
+                            .applyPerAppLocale(localeList, str, handleIncomingUser);
                 } catch (Exception e2) {
                     Slog.e("LocaleManagerService", "Error while starting LOM: " + e2);
                 }
@@ -535,13 +732,27 @@ public final class LocaleManagerService extends SystemService {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         } finally {
-            FrameworkStatsLog.write(FrameworkStatsLog.APPLICATION_LOCALES_CHANGED, appLocaleChangedAtomRecord.mCallingUid, appLocaleChangedAtomRecord.mTargetUid, appLocaleChangedAtomRecord.mNewLocales, appLocaleChangedAtomRecord.mPrevLocales, appLocaleChangedAtomRecord.mStatus, appLocaleChangedAtomRecord.mCaller);
+            FrameworkStatsLog.write(
+                    FrameworkStatsLog.APPLICATION_LOCALES_CHANGED,
+                    appLocaleChangedAtomRecord.mCallingUid,
+                    appLocaleChangedAtomRecord.mTargetUid,
+                    appLocaleChangedAtomRecord.mNewLocales,
+                    appLocaleChangedAtomRecord.mPrevLocales,
+                    appLocaleChangedAtomRecord.mStatus,
+                    appLocaleChangedAtomRecord.mCaller);
         }
     }
 
-    public final void setApplicationLocalesUnchecked(String str, int i, LocaleList localeList, AppLocaleChangedAtomRecord appLocaleChangedAtomRecord) {
-        appLocaleChangedAtomRecord.mPrevLocales = AppLocaleChangedAtomRecord.convertEmptyLocales(getApplicationLocalesUnchecked(i, str).toLanguageTags());
-        PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl = new PackageConfigurationUpdaterImpl(i, ActivityTaskManagerService.this, str);
+    public final void setApplicationLocalesUnchecked(
+            String str,
+            int i,
+            LocaleList localeList,
+            AppLocaleChangedAtomRecord appLocaleChangedAtomRecord) {
+        appLocaleChangedAtomRecord.mPrevLocales =
+                AppLocaleChangedAtomRecord.convertEmptyLocales(
+                        getApplicationLocalesUnchecked(i, str).toLanguageTags());
+        PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl =
+                new PackageConfigurationUpdaterImpl(i, ActivityTaskManagerService.this, str);
         synchronized (packageConfigurationUpdaterImpl) {
             packageConfigurationUpdaterImpl.mLocales = localeList;
         }
@@ -549,28 +760,41 @@ public final class LocaleManagerService extends SystemService {
             appLocaleChangedAtomRecord.mStatus = 2;
             return;
         }
-        Intent createBaseIntent = createBaseIntent("android.intent.action.LOCALE_CHANGED", str, localeList);
+        Intent createBaseIntent =
+                createBaseIntent("android.intent.action.LOCALE_CHANGED", str, localeList);
         createBaseIntent.setPackage(str);
         createBaseIntent.addFlags(2097152);
         this.mContext.sendBroadcastAsUser(createBaseIntent, UserHandle.of(i));
         String installingPackageName = getInstallingPackageName(i, str);
         if (installingPackageName != null) {
-            Intent createBaseIntent2 = createBaseIntent("android.intent.action.APPLICATION_LOCALE_CHANGED", str, localeList);
+            Intent createBaseIntent2 =
+                    createBaseIntent(
+                            "android.intent.action.APPLICATION_LOCALE_CHANGED", str, localeList);
             createBaseIntent2.setPackage(installingPackageName);
             this.mContext.sendBroadcastAsUser(createBaseIntent2, UserHandle.of(i));
         }
-        this.mContext.sendBroadcastAsUser(createBaseIntent("android.intent.action.APPLICATION_LOCALE_CHANGED", str, localeList), UserHandle.of(i), "android.permission.READ_APP_SPECIFIC_LOCALES");
+        this.mContext.sendBroadcastAsUser(
+                createBaseIntent(
+                        "android.intent.action.APPLICATION_LOCALE_CHANGED", str, localeList),
+                UserHandle.of(i),
+                "android.permission.READ_APP_SPECIFIC_LOCALES");
         this.mBackupHelper.getClass();
         BackupManager.dataChanged("android");
         appLocaleChangedAtomRecord.mStatus = 1;
     }
 
-    public final void setOverrideLocaleConfigUnchecked(String str, int i, LocaleConfig localeConfig, AppSupportedLocalesChangedAtomRecord appSupportedLocalesChangedAtomRecord) {
+    public final void setOverrideLocaleConfigUnchecked(
+            String str,
+            int i,
+            LocaleConfig localeConfig,
+            AppSupportedLocalesChangedAtomRecord appSupportedLocalesChangedAtomRecord) {
         FileOutputStream fileOutputStream;
         synchronized (this.mWriteLock) {
             try {
                 try {
-                    LocaleConfig fromContextIgnoringOverride = LocaleConfig.fromContextIgnoringOverride(this.mContext.createPackageContext(str, 0));
+                    LocaleConfig fromContextIgnoringOverride =
+                            LocaleConfig.fromContextIgnoringOverride(
+                                    this.mContext.createPackageContext(str, 0));
                     File xmlFileNameForUser = getXmlFileNameForUser(i, str);
                     if (localeConfig == null) {
                         if (xmlFileNameForUser.exists()) {
@@ -600,7 +824,9 @@ public final class LocaleManagerService extends SystemService {
                             atomicFile.finishWrite(fileOutputStream);
                             removeUnsupportedAppLocales(str, i, localeConfig, 5);
                             if (localeConfig.isSameLocaleConfig(fromContextIgnoringOverride)) {
-                                Slog.d("LocaleManagerService", "setOverrideLocaleConfig, same as the app's LocaleConfig");
+                                Slog.d(
+                                        "LocaleManagerService",
+                                        "setOverrideLocaleConfig, same as the app's LocaleConfig");
                                 appSupportedLocalesChangedAtomRecord.mSameAsResConfig = true;
                             }
                             appSupportedLocalesChangedAtomRecord.mStatus = 1;

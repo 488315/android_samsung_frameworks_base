@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.android.internal.R;
 
 /* loaded from: classes6.dex */
@@ -48,16 +49,29 @@ public class MaintenanceModeProxyActivity extends Activity {
                 msg = resources.getString(i);
                 break;
             case 2:
-                msg = this.mResources.getString(R.string.maintenance_mode_proxy_only_be_used_toast_message, this.mResources.getString(R.string.maintenance_mode_name));
+                msg =
+                        this.mResources.getString(
+                                R.string.maintenance_mode_proxy_only_be_used_toast_message,
+                                this.mResources.getString(R.string.maintenance_mode_name));
                 break;
             case 3:
-                msg = this.mResources.getString(R.string.maintenance_mode_proxy_cant_be_used_toast_message, this.mResources.getString(R.string.maintenance_mode_toast_text_device_admin));
+                msg =
+                        this.mResources.getString(
+                                R.string.maintenance_mode_proxy_cant_be_used_toast_message,
+                                this.mResources.getString(
+                                        R.string.maintenance_mode_toast_text_device_admin));
                 break;
             case 4:
-                msg = this.mResources.getString(R.string.maintenance_mode_proxy_cant_be_used_toast_message, this.mResources.getString(R.string.maintenance_mode_toast_text_samsung_dex));
+                msg =
+                        this.mResources.getString(
+                                R.string.maintenance_mode_proxy_cant_be_used_toast_message,
+                                this.mResources.getString(
+                                        R.string.maintenance_mode_toast_text_samsung_dex));
                 break;
             case 5:
-                msg = this.mResources.getString(R.string.maintenance_mode_proxy_cant_use_while_mpsm_toast_message);
+                msg =
+                        this.mResources.getString(
+                                R.string.maintenance_mode_proxy_cant_use_while_mpsm_toast_message);
                 break;
         }
         if (!TextUtils.isEmpty(msg)) {

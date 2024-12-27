@@ -9,12 +9,21 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IIntentReceiver extends IInterface {
-    void performReceive(Intent intent, int i, String str, Bundle bundle, boolean z, boolean z2, int i2) throws RemoteException;
+    void performReceive(
+            Intent intent, int i, String str, Bundle bundle, boolean z, boolean z2, int i2)
+            throws RemoteException;
 
     public static class Default implements IIntentReceiver {
         @Override // android.content.IIntentReceiver
-        public void performReceive(Intent intent, int resultCode, String data, Bundle extras, boolean ordered, boolean sticky, int sendingUser) throws RemoteException {
-        }
+        public void performReceive(
+                Intent intent,
+                int resultCode,
+                String data,
+                Bundle extras,
+                boolean ordered,
+                boolean sticky,
+                int sendingUser)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +31,7 @@ public interface IIntentReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIntentReceiver {
+    public abstract static class Stub extends Binder implements IIntentReceiver {
         public static final String DESCRIPTOR = "android.content.IIntentReceiver";
         static final int TRANSACTION_performReceive = 1;
 
@@ -61,7 +70,8 @@ public interface IIntentReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -103,7 +113,15 @@ public interface IIntentReceiver extends IInterface {
             }
 
             @Override // android.content.IIntentReceiver
-            public void performReceive(Intent intent, int resultCode, String data, Bundle extras, boolean ordered, boolean sticky, int sendingUser) throws RemoteException {
+            public void performReceive(
+                    Intent intent,
+                    int resultCode,
+                    String data,
+                    Bundle extras,
+                    boolean ordered,
+                    boolean sticky,
+                    int sendingUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

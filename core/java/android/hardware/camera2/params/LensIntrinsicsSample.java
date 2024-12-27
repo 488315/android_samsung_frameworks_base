@@ -2,7 +2,9 @@ package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 
 /* loaded from: classes2.dex */
@@ -35,7 +37,8 @@ public final class LensIntrinsicsSample {
             return false;
         }
         LensIntrinsicsSample other = (LensIntrinsicsSample) obj;
-        if (this.mTimestampNs != other.mTimestampNs || !Arrays.equals(this.mLensIntrinsics, other.getLensIntrinsics())) {
+        if (this.mTimestampNs != other.mTimestampNs
+                || !Arrays.equals(this.mLensIntrinsics, other.getLensIntrinsics())) {
             return false;
         }
         return true;
@@ -47,6 +50,8 @@ public final class LensIntrinsicsSample {
     }
 
     public String toString() {
-        return TextUtils.formatSimple("LensIntrinsicsSample{timestamp:%d, sample:%s}", Long.valueOf(this.mTimestampNs), Arrays.toString(this.mLensIntrinsics));
+        return TextUtils.formatSimple(
+                "LensIntrinsicsSample{timestamp:%d, sample:%s}",
+                Long.valueOf(this.mTimestampNs), Arrays.toString(this.mLensIntrinsics));
     }
 }

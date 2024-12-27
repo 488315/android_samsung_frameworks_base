@@ -9,25 +9,42 @@ public class DERExternal extends ASN1External {
         super(vector);
     }
 
-    public DERExternal(ASN1ObjectIdentifier directReference, ASN1Integer indirectReference, ASN1Primitive dataValueDescriptor, DERTaggedObject externalData) {
-        this(directReference, indirectReference, dataValueDescriptor, externalData.getTagNo(), externalData.toASN1Primitive());
+    public DERExternal(
+            ASN1ObjectIdentifier directReference,
+            ASN1Integer indirectReference,
+            ASN1Primitive dataValueDescriptor,
+            DERTaggedObject externalData) {
+        this(
+                directReference,
+                indirectReference,
+                dataValueDescriptor,
+                externalData.getTagNo(),
+                externalData.toASN1Primitive());
     }
 
-    public DERExternal(ASN1ObjectIdentifier directReference, ASN1Integer indirectReference, ASN1Primitive dataValueDescriptor, int encoding, ASN1Primitive externalData) {
+    public DERExternal(
+            ASN1ObjectIdentifier directReference,
+            ASN1Integer indirectReference,
+            ASN1Primitive dataValueDescriptor,
+            int encoding,
+            ASN1Primitive externalData) {
         super(directReference, indirectReference, dataValueDescriptor, encoding, externalData);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1External, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1External,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDERObject() {
         return this;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1External, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1External,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDLObject() {
         return this;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1External, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1External,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     int encodedLength() throws IOException {
         return getEncoded().length;
     }

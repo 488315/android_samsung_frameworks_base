@@ -1,7 +1,5 @@
 package com.android.server.wm;
 
-import com.android.server.wm.DeviceStateController;
-import com.android.server.wm.DisplayRotation;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -13,9 +11,9 @@ public final class AppCompatDeviceStateQuery {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0030, code lost:
-    
-        if (r4 == ((android.util.ArraySet) r3.mTabletopRotations).contains(java.lang.Integer.valueOf(com.android.server.wm.DisplayRotation.this.mRotation))) goto L16;
-     */
+
+       if (r4 == ((android.util.ArraySet) r3.mTabletopRotations).contains(java.lang.Integer.valueOf(com.android.server.wm.DisplayRotation.this.mRotation))) goto L16;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -58,7 +56,9 @@ public final class AppCompatDeviceStateQuery {
         L3b:
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.AppCompatDeviceStateQuery.isDisplayFullScreenAndInPosture(boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.AppCompatDeviceStateQuery.isDisplayFullScreenAndInPosture(boolean):boolean");
     }
 
     public final boolean isDisplayFullScreenAndSeparatingHinge() {
@@ -67,6 +67,16 @@ public final class AppCompatDeviceStateQuery {
         ActivityRecord activityRecord = this.mActivityRecord;
         Task task = activityRecord.task;
         DisplayContent displayContent = activityRecord.mDisplayContent;
-        return (displayContent == null || task == null || (foldController = displayContent.mDisplayRotation.mFoldController) == null || ((deviceState = foldController.mDeviceState) != DeviceStateController.DeviceState.HALF_FOLDED && (deviceState != DeviceStateController.DeviceState.OPEN || !foldController.mIsDisplayAlwaysSeparatingHinge)) || task.getWindowingMode() != 1) ? false : true;
+        return (displayContent == null
+                        || task == null
+                        || (foldController = displayContent.mDisplayRotation.mFoldController)
+                                == null
+                        || ((deviceState = foldController.mDeviceState)
+                                        != DeviceStateController.DeviceState.HALF_FOLDED
+                                && (deviceState != DeviceStateController.DeviceState.OPEN
+                                        || !foldController.mIsDisplayAlwaysSeparatingHinge))
+                        || task.getWindowingMode() != 1)
+                ? false
+                : true;
     }
 }

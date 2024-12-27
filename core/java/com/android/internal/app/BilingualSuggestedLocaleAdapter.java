@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.app.LocaleStore;
+
 import java.util.Locale;
 import java.util.Set;
 
@@ -19,11 +20,18 @@ public class BilingualSuggestedLocaleAdapter extends SuggestedLocaleAdapter {
     private LocaleStore.LocaleInfo mSelectedLocaleInfo;
     private final boolean mShowSelection;
 
-    public BilingualSuggestedLocaleAdapter(Set<LocaleStore.LocaleInfo> localeOptions, boolean countryMode, Locale secondaryLocale) {
+    public BilingualSuggestedLocaleAdapter(
+            Set<LocaleStore.LocaleInfo> localeOptions,
+            boolean countryMode,
+            Locale secondaryLocale) {
         this(localeOptions, countryMode, secondaryLocale, false);
     }
 
-    public BilingualSuggestedLocaleAdapter(Set<LocaleStore.LocaleInfo> localeOptions, boolean countryMode, Locale secondaryLocale, boolean showLastSelected) {
+    public BilingualSuggestedLocaleAdapter(
+            Set<LocaleStore.LocaleInfo> localeOptions,
+            boolean countryMode,
+            Locale secondaryLocale,
+            boolean showLastSelected) {
         super(localeOptions, countryMode);
         this.mSecondaryLocale = secondaryLocale;
         if (TextUtils.getLayoutDirectionFromLocale(secondaryLocale) == 1) {
@@ -44,18 +52,30 @@ public class BilingualSuggestedLocaleAdapter extends SuggestedLocaleAdapter {
             case 0:
             case 1:
                 if (!(convertView instanceof TextView)) {
-                    convertView = this.mInflater.inflate(R.layout.language_picker_bilingual_section_header, parent, false);
+                    convertView =
+                            this.mInflater.inflate(
+                                    R.layout.language_picker_bilingual_section_header,
+                                    parent,
+                                    false);
                 }
                 TextView textView = (TextView) convertView;
                 if (itemType == 0) {
-                    setHeaderText(textView, R.string.language_picker_section_suggested_bilingual, R.string.region_picker_section_suggested_bilingual);
+                    setHeaderText(
+                            textView,
+                            R.string.language_picker_section_suggested_bilingual,
+                            R.string.region_picker_section_suggested_bilingual);
                 } else {
-                    setHeaderText(textView, R.string.language_picker_section_all, R.string.region_picker_section_all);
+                    setHeaderText(
+                            textView,
+                            R.string.language_picker_section_all,
+                            R.string.region_picker_section_all);
                 }
                 return convertView;
             default:
                 if (!(convertView instanceof ViewGroup)) {
-                    convertView = this.mInflater.inflate(R.layout.language_picker_bilingual_item, parent, false);
+                    convertView =
+                            this.mInflater.inflate(
+                                    R.layout.language_picker_bilingual_item, parent, false);
                 }
                 LocaleStore.LocaleInfo item = (LocaleStore.LocaleInfo) getItem(position);
                 if (this.mShowSelection) {
@@ -76,7 +96,11 @@ public class BilingualSuggestedLocaleAdapter extends SuggestedLocaleAdapter {
     }
 
     private boolean isSelectedLocaleInfo(LocaleStore.LocaleInfo item) {
-        return (item == null || this.mSelectedLocaleInfo == null || !item.getId().equals(this.mSelectedLocaleInfo.getId())) ? false : true;
+        return (item == null
+                        || this.mSelectedLocaleInfo == null
+                        || !item.getId().equals(this.mSelectedLocaleInfo.getId()))
+                ? false
+                : true;
     }
 
     private void setItemState(boolean selected, View itemView) {
@@ -98,7 +122,8 @@ public class BilingualSuggestedLocaleAdapter extends SuggestedLocaleAdapter {
         }
     }
 
-    private void setHeaderText(TextView textView, int languageStringResourceId, int regionStringResourceId) {
+    private void setHeaderText(
+            TextView textView, int languageStringResourceId, int regionStringResourceId) {
         if (this.mCountryMode) {
             setTextTo(textView, regionStringResourceId);
         } else {
@@ -116,7 +141,8 @@ public class BilingualSuggestedLocaleAdapter extends SuggestedLocaleAdapter {
         textNative.setTextLocale(localeInfo.getLocale());
         textNative.setContentDescription(localeInfo.getContentDescription(this.mCountryMode));
         TextView textSecondary = (TextView) itemView.findViewById(R.id.locale_secondary);
-        textSecondary.lambda$setTextAsync$0(localeInfo.getLocale().getDisplayLanguage(this.mSecondaryLocale));
+        textSecondary.lambda$setTextAsync$0(
+                localeInfo.getLocale().getDisplayLanguage(this.mSecondaryLocale));
         textSecondary.setTextDirection(this.mSecondaryLocaleTextDir);
         if (this.mCountryMode) {
             int layoutDir = TextUtils.getLayoutDirectionFromLocale(localeInfo.getParent());

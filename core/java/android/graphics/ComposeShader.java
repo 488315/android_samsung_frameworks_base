@@ -1,7 +1,5 @@
 package android.graphics;
 
-import android.graphics.PorterDuff;
-
 /* loaded from: classes.dex */
 public class ComposeShader extends Shader {
     private long mNativeInstanceShaderA;
@@ -38,11 +36,19 @@ public class ComposeShader extends Shader {
     protected long createNativeInstance(long nativeMatrix, boolean filterFromPaint) {
         this.mNativeInstanceShaderA = this.mShaderA.getNativeInstance(filterFromPaint);
         this.mNativeInstanceShaderB = this.mShaderB.getNativeInstance(filterFromPaint);
-        return nativeCreate(nativeMatrix, this.mShaderA.getNativeInstance(), this.mShaderB.getNativeInstance(), this.mPorterDuffMode);
+        return nativeCreate(
+                nativeMatrix,
+                this.mShaderA.getNativeInstance(),
+                this.mShaderB.getNativeInstance(),
+                this.mPorterDuffMode);
     }
 
     @Override // android.graphics.Shader
     protected boolean shouldDiscardNativeInstance(boolean filterFromPaint) {
-        return (this.mShaderA.getNativeInstance(filterFromPaint) == this.mNativeInstanceShaderA && this.mShaderB.getNativeInstance(filterFromPaint) == this.mNativeInstanceShaderB) ? false : true;
+        return (this.mShaderA.getNativeInstance(filterFromPaint) == this.mNativeInstanceShaderA
+                        && this.mShaderB.getNativeInstance(filterFromPaint)
+                                == this.mNativeInstanceShaderB)
+                ? false
+                : true;
     }
 }

@@ -13,15 +13,13 @@ public final class UserControllerProto {
         public static final long ID = 1120986464257L;
         public static final long STATE = 1146756268034L;
 
-        public User() {
-        }
+        public User() {}
     }
 
     public final class UserProfile {
         public static final long PROFILE = 1120986464258L;
         public static final long USER = 1120986464257L;
 
-        public UserProfile() {
-        }
+        public UserProfile() {}
     }
 }

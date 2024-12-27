@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
+
 import com.android.server.LocalServices;
 import com.android.server.contentcapture.ContentCaptureManagerService;
 import com.android.server.contentcapture.ContentCapturePerUserService;
@@ -16,7 +17,8 @@ public final /* synthetic */ class ActivityRecord$$ExternalSyntheticLambda7 impl
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ActivityRecord f$0;
 
-    public /* synthetic */ ActivityRecord$$ExternalSyntheticLambda7(int i, ActivityRecord activityRecord) {
+    public /* synthetic */ ActivityRecord$$ExternalSyntheticLambda7(
+            int i, ActivityRecord activityRecord) {
         this.$r8$classId = i;
         this.f$0 = activityRecord;
     }
@@ -27,14 +29,18 @@ public final /* synthetic */ class ActivityRecord$$ExternalSyntheticLambda7 impl
         ActivityRecord activityRecord = this.f$0;
         switch (i) {
             case 0:
-                WindowManagerGlobalLock windowManagerGlobalLock = activityRecord.mAtmService.mGlobalLock;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        activityRecord.mAtmService.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
                         if (activityRecord.hasProcess() && activityRecord.app.mRepProcState > 6) {
                             WindowProcessController windowProcessController = activityRecord.app;
                             WindowManagerService.resetPriorityAfterLockedSection();
-                            activityRecord.mAtmService.mAmInternal.killProcess(windowProcessController.mName, windowProcessController.mUid, "resetConfig");
+                            activityRecord.mAtmService.mAmInternal.killProcess(
+                                    windowProcessController.mName,
+                                    windowProcessController.mUid,
+                                    "resetConfig");
                             return;
                         }
                         WindowManagerService.resetPriorityAfterLockedSection();
@@ -46,12 +52,21 @@ public final /* synthetic */ class ActivityRecord$$ExternalSyntheticLambda7 impl
                 }
             default:
                 activityRecord.getClass();
-                ContentCaptureManagerService.LocalService localService = (ContentCaptureManagerService.LocalService) LocalServices.getService(ContentCaptureManagerService.LocalService.class);
+                ContentCaptureManagerService.LocalService localService =
+                        (ContentCaptureManagerService.LocalService)
+                                LocalServices.getService(
+                                        ContentCaptureManagerService.LocalService.class);
                 if (localService != null) {
                     int i2 = activityRecord.mUserId;
                     ComponentName componentName = activityRecord.mActivityComponent;
                     Task task = activityRecord.task;
-                    localService.notifyActivityEvent(i2, componentName, 10000, new ActivityId(task != null ? task.mTaskId : -1, activityRecord.shareableActivityToken));
+                    localService.notifyActivityEvent(
+                            i2,
+                            componentName,
+                            10000,
+                            new ActivityId(
+                                    task != null ? task.mTaskId : -1,
+                                    activityRecord.shareableActivityToken));
                     int i3 = activityRecord.mUserId;
                     Binder binder = activityRecord.shareableActivityToken;
                     Intent intent = activityRecord.intent;
@@ -66,9 +81,13 @@ public final /* synthetic */ class ActivityRecord$$ExternalSyntheticLambda7 impl
                                 assistContent.setDefaultIntent(intent2);
                                 Bundle bundle2 = new Bundle();
                                 bundle2.putParcelable("content", assistContent);
-                                ContentCapturePerUserService contentCapturePerUserService = (ContentCapturePerUserService) ContentCaptureManagerService.this.peekServiceForUserLocked(i3);
+                                ContentCapturePerUserService contentCapturePerUserService =
+                                        (ContentCapturePerUserService)
+                                                ContentCaptureManagerService.this
+                                                        .peekServiceForUserLocked(i3);
                                 if (contentCapturePerUserService != null) {
-                                    contentCapturePerUserService.sendActivityAssistDataLocked(binder, bundle2);
+                                    contentCapturePerUserService.sendActivityAssistDataLocked(
+                                            binder, bundle2);
                                 }
                             }
                         } finally {

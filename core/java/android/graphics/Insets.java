@@ -10,19 +10,20 @@ public final class Insets implements Parcelable {
     public final int right;
     public final int top;
     public static final Insets NONE = new Insets(0, 0, 0, 0);
-    public static final Parcelable.Creator<Insets> CREATOR = new Parcelable.Creator<Insets>() { // from class: android.graphics.Insets.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Insets createFromParcel(Parcel in) {
-            return new Insets(in.readInt(), in.readInt(), in.readInt(), in.readInt());
-        }
+    public static final Parcelable.Creator<Insets> CREATOR =
+            new Parcelable.Creator<Insets>() { // from class: android.graphics.Insets.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Insets createFromParcel(Parcel in) {
+                    return new Insets(in.readInt(), in.readInt(), in.readInt(), in.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Insets[] newArray(int size) {
-            return new Insets[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Insets[] newArray(int size) {
+                    return new Insets[size];
+                }
+            };
 
     private Insets(int left, int top, int right, int bottom) {
         this.left = left;
@@ -55,11 +56,19 @@ public final class Insets implements Parcelable {
     }
 
     public static Insets max(Insets a, Insets b) {
-        return of(Math.max(a.left, b.left), Math.max(a.top, b.top), Math.max(a.right, b.right), Math.max(a.bottom, b.bottom));
+        return of(
+                Math.max(a.left, b.left),
+                Math.max(a.top, b.top),
+                Math.max(a.right, b.right),
+                Math.max(a.bottom, b.bottom));
     }
 
     public static Insets min(Insets a, Insets b) {
-        return of(Math.min(a.left, b.left), Math.min(a.top, b.top), Math.min(a.right, b.right), Math.min(a.bottom, b.bottom));
+        return of(
+                Math.min(a.left, b.left),
+                Math.min(a.top, b.top),
+                Math.min(a.right, b.right),
+                Math.min(a.bottom, b.bottom));
     }
 
     public boolean equals(Object o) {
@@ -70,7 +79,10 @@ public final class Insets implements Parcelable {
             return false;
         }
         Insets insets = (Insets) o;
-        if (this.bottom == insets.bottom && this.left == insets.left && this.right == insets.right && this.top == insets.top) {
+        if (this.bottom == insets.bottom
+                && this.left == insets.left
+                && this.right == insets.right
+                && this.top == insets.top) {
             return true;
         }
         return false;
@@ -82,7 +94,15 @@ public final class Insets implements Parcelable {
     }
 
     public String toString() {
-        return "Insets{left=" + this.left + ", top=" + this.top + ", right=" + this.right + ", bottom=" + this.bottom + '}';
+        return "Insets{left="
+                + this.left
+                + ", top="
+                + this.top
+                + ", right="
+                + this.right
+                + ", bottom="
+                + this.bottom
+                + '}';
     }
 
     @Override // android.os.Parcelable

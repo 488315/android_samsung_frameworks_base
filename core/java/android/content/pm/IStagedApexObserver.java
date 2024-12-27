@@ -14,8 +14,7 @@ public interface IStagedApexObserver extends IInterface {
 
     public static class Default implements IStagedApexObserver {
         @Override // android.content.pm.IStagedApexObserver
-        public void onApexStaged(ApexStagedEvent event) throws RemoteException {
-        }
+        public void onApexStaged(ApexStagedEvent event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IStagedApexObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStagedApexObserver {
+    public abstract static class Stub extends Binder implements IStagedApexObserver {
         static final int TRANSACTION_onApexStaged = 1;
 
         public Stub() {
@@ -47,7 +46,8 @@ public interface IStagedApexObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStagedApexObserver.DESCRIPTOR);
             }
@@ -57,7 +57,8 @@ public interface IStagedApexObserver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ApexStagedEvent _arg0 = (ApexStagedEvent) data.readTypedObject(ApexStagedEvent.CREATOR);
+                    ApexStagedEvent _arg0 =
+                            (ApexStagedEvent) data.readTypedObject(ApexStagedEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onApexStaged(_arg0);
                     return true;

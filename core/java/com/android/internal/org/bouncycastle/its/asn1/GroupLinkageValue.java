@@ -17,8 +17,12 @@ public class GroupLinkageValue extends ASN1Object {
         if (seq.size() != 2) {
             throw new IllegalArgumentException("sequence not length 2");
         }
-        this.jValue = Utils.octetStringFixed(ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets(), 4);
-        this.value = Utils.octetStringFixed(ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets(), 9);
+        this.jValue =
+                Utils.octetStringFixed(
+                        ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets(), 4);
+        this.value =
+                Utils.octetStringFixed(
+                        ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets(), 9);
     }
 
     public static GroupLinkageValue getInstance(Object src) {
@@ -39,7 +43,8 @@ public class GroupLinkageValue extends ASN1Object {
         return this.value;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector avec = new ASN1EncodableVector();
         avec.add(new DEROctetString(this.jValue));

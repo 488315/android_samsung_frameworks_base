@@ -1,6 +1,5 @@
 package android.os.epic;
 
-import android.os.epic.IEpicObject;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
@@ -8,7 +7,8 @@ import java.util.ArrayList;
 /* loaded from: classes.dex */
 public final class EpicHIDLObject extends IEpicObject.Stub {
     private static final String EPIC_CLASS = "vendor.samsung_slsi.hardware.epic.V1_0.IEpicRequest";
-    private static final String EPIC_HANDLE_CLASS = "vendor.samsung_slsi.hardware.epic.V1_0.IEpicHandle";
+    private static final String EPIC_HANDLE_CLASS =
+            "vendor.samsung_slsi.hardware.epic.V1_0.IEpicHandle";
     private static final String TAG = "EpicObject";
     private static Method m_epic_getservice_func;
     private static Class m_epic_handle_cls;
@@ -84,12 +84,18 @@ public final class EpicHIDLObject extends IEpicObject.Stub {
             m_epic_init_multi_func = m_epic_request_cls.getMethod("init_multi", ArrayList.class);
             m_epic_request_func = m_epic_request_cls.getMethod("acquire_lock", cls);
             m_epic_release_func = m_epic_request_cls.getMethod("release_lock", cls);
-            m_epic_request_opt_func = m_epic_request_cls.getMethod("acquire_lock_option", cls, cls2, cls2);
-            m_epic_request_opt_multi_func = m_epic_request_cls.getMethod("acquire_lock_multi_option", cls, ArrayList.class, ArrayList.class);
-            m_epic_request_conditional_func = m_epic_request_cls.getMethod("acquire_lock_conditional", cls, String.class);
-            m_epic_release_conditional_func = m_epic_request_cls.getMethod("release_lock_conditional", cls, String.class);
+            m_epic_request_opt_func =
+                    m_epic_request_cls.getMethod("acquire_lock_option", cls, cls2, cls2);
+            m_epic_request_opt_multi_func =
+                    m_epic_request_cls.getMethod(
+                            "acquire_lock_multi_option", cls, ArrayList.class, ArrayList.class);
+            m_epic_request_conditional_func =
+                    m_epic_request_cls.getMethod("acquire_lock_conditional", cls, String.class);
+            m_epic_release_conditional_func =
+                    m_epic_request_cls.getMethod("release_lock_conditional", cls, String.class);
             m_epic_perf_hint_func = m_epic_request_cls.getMethod("perf_hint", cls, String.class);
-            m_epic_hint_release_func = m_epic_request_cls.getMethod("hint_release", cls, String.class);
+            m_epic_hint_release_func =
+                    m_epic_request_cls.getMethod("hint_release", cls, String.class);
             m_has_load = true;
         }
     }
@@ -112,7 +118,9 @@ public final class EpicHIDLObject extends IEpicObject.Stub {
             return false;
         }
         try {
-            return ((Integer) m_epic_request_conditional_func.invoke(obj, this.m_handle_obj, str)).intValue() != 0;
+            return ((Integer) m_epic_request_conditional_func.invoke(obj, this.m_handle_obj, str))
+                            .intValue()
+                    != 0;
         } catch (Exception unused) {
             return false;
         }
@@ -124,7 +132,14 @@ public final class EpicHIDLObject extends IEpicObject.Stub {
             return false;
         }
         try {
-            return ((Integer) m_epic_request_opt_func.invoke(obj, this.m_handle_obj, Integer.valueOf(i), Integer.valueOf(i2))).intValue() != 0;
+            return ((Integer)
+                                    m_epic_request_opt_func.invoke(
+                                            obj,
+                                            this.m_handle_obj,
+                                            Integer.valueOf(i),
+                                            Integer.valueOf(i2)))
+                            .intValue()
+                    != 0;
         } catch (Exception unused) {
             return false;
         }
@@ -143,7 +158,14 @@ public final class EpicHIDLObject extends IEpicObject.Stub {
             for (int i2 : iArr2) {
                 arrayList2.add(Integer.valueOf(i2));
             }
-            return ((Integer) m_epic_request_opt_multi_func.invoke(this.m_request_obj, this.m_handle_obj, arrayList, arrayList2)).intValue() != 0;
+            return ((Integer)
+                                    m_epic_request_opt_multi_func.invoke(
+                                            this.m_request_obj,
+                                            this.m_handle_obj,
+                                            arrayList,
+                                            arrayList2))
+                            .intValue()
+                    != 0;
         } catch (Exception unused) {
             return false;
         }
@@ -155,7 +177,9 @@ public final class EpicHIDLObject extends IEpicObject.Stub {
             return false;
         }
         try {
-            return ((Integer) m_epic_hint_release_func.invoke(obj, this.m_handle_obj, str)).intValue() != 0;
+            return ((Integer) m_epic_hint_release_func.invoke(obj, this.m_handle_obj, str))
+                            .intValue()
+                    != 0;
         } catch (Exception unused) {
             return false;
         }
@@ -167,7 +191,8 @@ public final class EpicHIDLObject extends IEpicObject.Stub {
             return false;
         }
         try {
-            return ((Integer) m_epic_perf_hint_func.invoke(obj, this.m_handle_obj, str)).intValue() != 0;
+            return ((Integer) m_epic_perf_hint_func.invoke(obj, this.m_handle_obj, str)).intValue()
+                    != 0;
         } catch (Exception unused) {
             return false;
         }
@@ -191,7 +216,9 @@ public final class EpicHIDLObject extends IEpicObject.Stub {
             return false;
         }
         try {
-            return ((Integer) m_epic_release_conditional_func.invoke(obj, this.m_handle_obj, str)).intValue() != 0;
+            return ((Integer) m_epic_release_conditional_func.invoke(obj, this.m_handle_obj, str))
+                            .intValue()
+                    != 0;
         } catch (Exception unused) {
             return false;
         }

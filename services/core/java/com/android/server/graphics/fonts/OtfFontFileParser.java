@@ -10,6 +10,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.text.TextUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.ByteBuffer;
@@ -28,8 +29,14 @@ public final class OtfFontFileParser {
             String postScriptName = FontFileUtil.getPostScriptName(mmap, 0);
             int isPostScriptType1Font = FontFileUtil.isPostScriptType1Font(mmap, 0);
             int isCollectionFont = FontFileUtil.isCollectionFont(mmap);
-            if (!TextUtils.isEmpty(postScriptName) && isPostScriptType1Font != -1 && isCollectionFont != -1) {
-                String str = postScriptName + (isCollectionFont == 1 ? isPostScriptType1Font == 1 ? ".otc" : ".ttc" : isPostScriptType1Font == 1 ? ".otf" : ".ttf");
+            if (!TextUtils.isEmpty(postScriptName)
+                    && isPostScriptType1Font != -1
+                    && isCollectionFont != -1) {
+                String str =
+                        postScriptName
+                                + (isCollectionFont == 1
+                                        ? isPostScriptType1Font == 1 ? ".otc" : ".ttc"
+                                        : isPostScriptType1Font == 1 ? ".otf" : ".ttf");
                 unmap(mmap);
                 return str;
             }
@@ -61,12 +68,30 @@ public final class OtfFontFileParser {
     public static void tryToCreateTypeface(File file) {
         ByteBuffer mmap = mmap(file);
         try {
-            Typeface build = new Typeface.CustomFallbackBuilder(new FontFamily.Builder(new Font.Builder(mmap).build()).build()).build();
+            Typeface build =
+                    new Typeface.CustomFallbackBuilder(
+                                    new FontFamily.Builder(new Font.Builder(mmap).build()).build())
+                            .build();
             TextPaint textPaint = new TextPaint();
             textPaint.setTextSize(24.0f);
             textPaint.setTypeface(build);
-            StaticLayout build2 = StaticLayout.Builder.obtain("abcXYZ@- 🫖🇺🇸💏🏻👨🏼\u200d❤️\u200d💋\u200d👨🏿", 0, 34, textPaint, (int) Math.ceil(Layout.getDesiredWidth("abcXYZ@- 🫖🇺🇸💏🏻👨🏼\u200d❤️\u200d💋\u200d👨🏿", textPaint))).build();
-            build2.draw(new Canvas(Bitmap.createBitmap(build2.getWidth(), build2.getHeight(), Bitmap.Config.ALPHA_8)));
+            StaticLayout build2 =
+                    StaticLayout.Builder.obtain(
+                                    "abcXYZ@- 🫖🇺🇸💏🏻👨🏼\u200d❤️\u200d💋\u200d👨🏿",
+                                    0,
+                                    34,
+                                    textPaint,
+                                    (int)
+                                            Math.ceil(
+                                                    Layout.getDesiredWidth(
+                                                            "abcXYZ@-"
+                                                                + " 🫖🇺🇸💏🏻👨🏼\u200d❤️\u200d💋\u200d👨🏿",
+                                                            textPaint)))
+                            .build();
+            build2.draw(
+                    new Canvas(
+                            Bitmap.createBitmap(
+                                    build2.getWidth(), build2.getHeight(), Bitmap.Config.ALPHA_8)));
         } finally {
             unmap(mmap);
         }

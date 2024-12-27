@@ -69,7 +69,7 @@ public interface IInputConstants extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputConstants {
+    public abstract static class Stub extends Binder implements IInputConstants {
         public Stub() {
             attachInterface(this, IInputConstants.DESCRIPTOR);
         }
@@ -100,7 +100,8 @@ public interface IInputConstants extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code == 1598968902) {
                 reply.writeString(IInputConstants.DESCRIPTOR);
                 return true;

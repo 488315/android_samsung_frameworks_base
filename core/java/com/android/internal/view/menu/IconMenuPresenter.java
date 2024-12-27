@@ -8,9 +8,9 @@ import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.R;
-import com.android.internal.view.menu.MenuPresenter;
-import com.android.internal.view.menu.MenuView;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -24,12 +24,16 @@ public class IconMenuPresenter extends BaseMenuPresenter {
     SubMenuPresenterCallback mSubMenuPresenterCallback;
 
     public IconMenuPresenter(Context context) {
-        super(new ContextThemeWrapper(context, R.style.Theme_IconMenu), R.layout.icon_menu_layout, R.layout.icon_menu_item_layout);
+        super(
+                new ContextThemeWrapper(context, R.style.Theme_IconMenu),
+                R.layout.icon_menu_layout,
+                R.layout.icon_menu_item_layout);
         this.mMaxItems = -1;
         this.mSubMenuPresenterCallback = new SubMenuPresenterCallback();
     }
 
-    @Override // com.android.internal.view.menu.BaseMenuPresenter, com.android.internal.view.menu.MenuPresenter
+    @Override // com.android.internal.view.menu.BaseMenuPresenter,
+              // com.android.internal.view.menu.MenuPresenter
     public void initForMenu(Context context, MenuBuilder menu) {
         super.initForMenu(context, menu);
         this.mMaxItems = -1;
@@ -48,7 +52,9 @@ public class IconMenuPresenter extends BaseMenuPresenter {
     @Override // com.android.internal.view.menu.BaseMenuPresenter
     public boolean shouldIncludeItem(int childIndex, MenuItemImpl item) {
         ArrayList<MenuItemImpl> itemsToShow = this.mMenu.getNonActionItems();
-        boolean fits = (itemsToShow.size() == this.mMaxItems && childIndex < this.mMaxItems) || childIndex < this.mMaxItems - 1;
+        boolean fits =
+                (itemsToShow.size() == this.mMaxItems && childIndex < this.mMaxItems)
+                        || childIndex < this.mMaxItems - 1;
         return fits && !item.isActionButton();
     }
 
@@ -62,7 +68,8 @@ public class IconMenuPresenter extends BaseMenuPresenter {
         super.addItemView(itemView, childIndex);
     }
 
-    @Override // com.android.internal.view.menu.BaseMenuPresenter, com.android.internal.view.menu.MenuPresenter
+    @Override // com.android.internal.view.menu.BaseMenuPresenter,
+              // com.android.internal.view.menu.MenuPresenter
     public boolean onSubMenuSelected(SubMenuBuilder subMenu) {
         if (!subMenu.hasVisibleItems()) {
             return false;
@@ -76,7 +83,8 @@ public class IconMenuPresenter extends BaseMenuPresenter {
         return true;
     }
 
-    @Override // com.android.internal.view.menu.BaseMenuPresenter, com.android.internal.view.menu.MenuPresenter
+    @Override // com.android.internal.view.menu.BaseMenuPresenter,
+              // com.android.internal.view.menu.MenuPresenter
     public void updateMenuView(boolean cleared) {
         IconMenuView menuView = (IconMenuView) this.mMenuView;
         if (this.mMaxItems < 0) {
@@ -124,7 +132,9 @@ public class IconMenuPresenter extends BaseMenuPresenter {
             ((View) this.mMenuView).restoreHierarchyState(viewStates);
         }
         int subMenuId = inState.getInt(OPEN_SUBMENU_KEY, 0);
-        if (subMenuId > 0 && this.mMenu != null && (item = this.mMenu.findItem(subMenuId)) != null) {
+        if (subMenuId > 0
+                && this.mMenu != null
+                && (item = this.mMenu.findItem(subMenuId)) != null) {
             onSubMenuSelected((SubMenuBuilder) item.getSubMenu());
         }
     }
@@ -148,8 +158,7 @@ public class IconMenuPresenter extends BaseMenuPresenter {
     }
 
     class SubMenuPresenterCallback implements MenuPresenter.Callback {
-        SubMenuPresenterCallback() {
-        }
+        SubMenuPresenterCallback() {}
 
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
         public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
@@ -163,7 +172,8 @@ public class IconMenuPresenter extends BaseMenuPresenter {
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
         public boolean onOpenSubMenu(MenuBuilder subMenu) {
             if (subMenu != null) {
-                IconMenuPresenter.this.mOpenSubMenuId = ((SubMenuBuilder) subMenu).getItem().getItemId();
+                IconMenuPresenter.this.mOpenSubMenuId =
+                        ((SubMenuBuilder) subMenu).getItem().getItemId();
                 return false;
             }
             return false;

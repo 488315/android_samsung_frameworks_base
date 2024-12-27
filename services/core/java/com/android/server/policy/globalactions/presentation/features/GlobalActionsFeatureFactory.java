@@ -1,6 +1,7 @@
 package com.android.server.policy.globalactions.presentation.features;
 
 import android.content.Context;
+
 import com.samsung.android.globalactions.features.DataModeStrategy;
 import com.samsung.android.globalactions.features.DesktopModeStrategy;
 import com.samsung.android.globalactions.features.FOTAForceUpdateStrategy;
@@ -23,6 +24,7 @@ import com.samsung.android.globalactions.util.ResourcesWrapper;
 import com.samsung.android.globalactions.util.SystemController;
 import com.samsung.android.globalactions.util.ToastController;
 import com.samsung.android.globalactions.util.UtilFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,12 @@ public final class GlobalActionsFeatureFactory implements FeatureFactory {
             case "power":
             case "restart":
             case "emergency":
-                arrayList.add(new SktStrategy(this.mConditionChecker, (ToastController) this.mUtilFactory.get(ToastController.class), (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class), (LogWrapper) this.mUtilFactory.get(LogWrapper.class)));
+                arrayList.add(
+                        new SktStrategy(
+                                this.mConditionChecker,
+                                (ToastController) this.mUtilFactory.get(ToastController.class),
+                                (ResourcesWrapper) this.mUtilFactory.get(ResourcesWrapper.class),
+                                (LogWrapper) this.mUtilFactory.get(LogWrapper.class)));
             default:
                 return arrayList;
         }
@@ -61,14 +68,25 @@ public final class GlobalActionsFeatureFactory implements FeatureFactory {
         return arrayList;
     }
 
-    public final List createDefaultActionsCreationStrategy(SamsungGlobalActions samsungGlobalActions, String str) {
+    public final List createDefaultActionsCreationStrategy(
+            SamsungGlobalActions samsungGlobalActions, String str) {
         ArrayList arrayList = new ArrayList();
         if (str.equals("emergency")) {
             if (this.mFeatures.isEnabled("SAFETY_CARE")) {
-                arrayList.add(new SafetyCareStrategy(samsungGlobalActions, this.mConditionChecker, (LogWrapper) this.mUtilFactory.get(LogWrapper.class)));
+                arrayList.add(
+                        new SafetyCareStrategy(
+                                samsungGlobalActions,
+                                this.mConditionChecker,
+                                (LogWrapper) this.mUtilFactory.get(LogWrapper.class)));
             }
             if (this.mFeatures.isEnabled("DESKTOP_MODE")) {
-                arrayList.add(new DesktopModeStrategy(this.mContext, this.mView, (DesktopModeManagerWrapper) this.mUtilFactory.get(DesktopModeManagerWrapper.class), this.mConditionChecker));
+                arrayList.add(
+                        new DesktopModeStrategy(
+                                this.mContext,
+                                this.mView,
+                                (DesktopModeManagerWrapper)
+                                        this.mUtilFactory.get(DesktopModeManagerWrapper.class),
+                                this.mConditionChecker));
             }
             if (this.mFeatures.isEnabled("RESERVE_BATTERY_MODE")) {
                 arrayList.add(new ReserveBatteryModeStrategy(this.mConditionChecker));
@@ -80,7 +98,13 @@ public final class GlobalActionsFeatureFactory implements FeatureFactory {
     public final List createDisposingStrategies(SamsungGlobalActions samsungGlobalActions) {
         ArrayList arrayList = new ArrayList();
         if (this.mFeatures.isEnabled("DESKTOP_MODE")) {
-            arrayList.add(new DesktopModeStrategy(this.mContext, this.mView, (DesktopModeManagerWrapper) this.mUtilFactory.get(DesktopModeManagerWrapper.class), this.mConditionChecker));
+            arrayList.add(
+                    new DesktopModeStrategy(
+                            this.mContext,
+                            this.mView,
+                            (DesktopModeManagerWrapper)
+                                    this.mUtilFactory.get(DesktopModeManagerWrapper.class),
+                            this.mConditionChecker));
         }
         return arrayList;
     }
@@ -88,10 +112,20 @@ public final class GlobalActionsFeatureFactory implements FeatureFactory {
     public final List createInitializationStrategies(SamsungGlobalActions samsungGlobalActions) {
         ArrayList arrayList = new ArrayList();
         if (this.mFeatures.isEnabled("DESKTOP_MODE")) {
-            arrayList.add(new DesktopModeStrategy(this.mContext, this.mView, (DesktopModeManagerWrapper) this.mUtilFactory.get(DesktopModeManagerWrapper.class), this.mConditionChecker));
+            arrayList.add(
+                    new DesktopModeStrategy(
+                            this.mContext,
+                            this.mView,
+                            (DesktopModeManagerWrapper)
+                                    this.mUtilFactory.get(DesktopModeManagerWrapper.class),
+                            this.mConditionChecker));
         }
         if (this.mFeatures.isEnabled("SAFETY_CARE")) {
-            arrayList.add(new SafetyCareStrategy(samsungGlobalActions, this.mConditionChecker, (LogWrapper) this.mUtilFactory.get(LogWrapper.class)));
+            arrayList.add(
+                    new SafetyCareStrategy(
+                            samsungGlobalActions,
+                            this.mConditionChecker,
+                            (LogWrapper) this.mUtilFactory.get(LogWrapper.class)));
         }
         if (this.mFeatures.isEnabled("KNOX_CONTAINER")) {
             arrayList.add(new KnoxContainerStrategy(samsungGlobalActions, this.mConditionChecker));
@@ -103,15 +137,23 @@ public final class GlobalActionsFeatureFactory implements FeatureFactory {
         return new ArrayList();
     }
 
-    public final List createSecureConfirmStrategy(SamsungGlobalActions samsungGlobalActions, String str) {
+    public final List createSecureConfirmStrategy(
+            SamsungGlobalActions samsungGlobalActions, String str) {
         return new ArrayList();
     }
 
-    public final List createSoftwareUpdateStrategy(SamsungGlobalActions samsungGlobalActions, String str) {
+    public final List createSoftwareUpdateStrategy(
+            SamsungGlobalActions samsungGlobalActions, String str) {
         ArrayList arrayList = new ArrayList();
         if (str.equals("restart")) {
-            arrayList.add(new FOTAForceUpdateStrategy(this.mConditionChecker, (SystemController) this.mUtilFactory.get(SystemController.class)));
-            arrayList.add(new SecFOTAForceUpdateStrategy(this.mConditionChecker, (SystemController) this.mUtilFactory.get(SystemController.class)));
+            arrayList.add(
+                    new FOTAForceUpdateStrategy(
+                            this.mConditionChecker,
+                            (SystemController) this.mUtilFactory.get(SystemController.class)));
+            arrayList.add(
+                    new SecFOTAForceUpdateStrategy(
+                            this.mConditionChecker,
+                            (SystemController) this.mUtilFactory.get(SystemController.class)));
         }
         return arrayList;
     }
@@ -128,7 +170,8 @@ public final class GlobalActionsFeatureFactory implements FeatureFactory {
         return arrayList;
     }
 
-    public final List createWindowManagerFunctionStrategy(SamsungGlobalActions samsungGlobalActions, String str) {
+    public final List createWindowManagerFunctionStrategy(
+            SamsungGlobalActions samsungGlobalActions, String str) {
         return new ArrayList();
     }
 }

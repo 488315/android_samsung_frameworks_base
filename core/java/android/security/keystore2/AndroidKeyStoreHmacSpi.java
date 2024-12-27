@@ -4,7 +4,7 @@ import android.hardware.security.keymint.KeyParameter;
 import android.security.KeyStoreException;
 import android.security.KeyStoreOperation;
 import android.security.keystore.KeyStoreCryptoOperation;
-import android.security.keystore2.KeyStoreCryptoOperationChunkedStreamer;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -12,6 +12,7 @@ import java.security.ProviderException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.crypto.MacSpi;
 
 /* loaded from: classes3.dex */
@@ -65,7 +66,8 @@ public abstract class AndroidKeyStoreHmacSpi extends MacSpi implements KeyStoreC
     }
 
     @Override // javax.crypto.MacSpi
-    protected void engineInit(Key key, AlgorithmParameterSpec params) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(Key key, AlgorithmParameterSpec params)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         resetAll();
         boolean success = false;
         try {
@@ -79,16 +81,19 @@ public abstract class AndroidKeyStoreHmacSpi extends MacSpi implements KeyStoreC
         }
     }
 
-    private void init(Key key, AlgorithmParameterSpec params) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    private void init(Key key, AlgorithmParameterSpec params)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         if (key == null) {
             throw new InvalidKeyException("key == null");
         }
         if (!(key instanceof AndroidKeyStoreSecretKey)) {
-            throw new InvalidKeyException("Only Android KeyStore secret keys supported. Key: " + key);
+            throw new InvalidKeyException(
+                    "Only Android KeyStore secret keys supported. Key: " + key);
         }
         this.mKey = (AndroidKeyStoreSecretKey) key;
         if (params != null) {
-            throw new InvalidAlgorithmParameterException("Unsupported algorithm parameters: " + params);
+            throw new InvalidAlgorithmParameterException(
+                    "Unsupported algorithm parameters: " + params);
         }
     }
 
@@ -128,20 +133,29 @@ public abstract class AndroidKeyStoreHmacSpi extends MacSpi implements KeyStoreC
         parameters.add(KeyStore2ParameterUtils.makeEnum(536870917, this.mKeymasterDigest));
         parameters.add(KeyStore2ParameterUtils.makeInt(805307371, this.mMacSizeBits));
         try {
-            this.mOperation = this.mKey.getSecurityLevel().createOperation(this.mKey.getKeyIdDescriptor(), parameters);
+            this.mOperation =
+                    this.mKey
+                            .getSecurityLevel()
+                            .createOperation(this.mKey.getKeyIdDescriptor(), parameters);
         } catch (KeyStoreException keyStoreException) {
-            InvalidKeyException e = KeyStoreCryptoOperationUtils.getInvalidKeyException(this.mKey, keyStoreException);
+            InvalidKeyException e =
+                    KeyStoreCryptoOperationUtils.getInvalidKeyException(
+                            this.mKey, keyStoreException);
             if (e != null) {
                 throw e;
             }
         }
-        this.mOperationChallenge = KeyStoreCryptoOperationUtils.getOrMakeOperationChallenge(this.mOperation, this.mKey);
-        this.mChunkedStreamer = new KeyStoreCryptoOperationChunkedStreamer(new KeyStoreCryptoOperationChunkedStreamer.MainDataStream(this.mOperation));
+        this.mOperationChallenge =
+                KeyStoreCryptoOperationUtils.getOrMakeOperationChallenge(
+                        this.mOperation, this.mKey);
+        this.mChunkedStreamer =
+                new KeyStoreCryptoOperationChunkedStreamer(
+                        new KeyStoreCryptoOperationChunkedStreamer.MainDataStream(this.mOperation));
     }
 
     @Override // javax.crypto.MacSpi
     protected void engineUpdate(byte input) {
-        engineUpdate(new byte[]{input}, 0, 1);
+        engineUpdate(new byte[] {input}, 0, 1);
     }
 
     @Override // javax.crypto.MacSpi

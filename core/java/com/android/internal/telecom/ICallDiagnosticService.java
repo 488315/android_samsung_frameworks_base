@@ -10,7 +10,6 @@ import android.telecom.CallAudioState;
 import android.telecom.DisconnectCause;
 import android.telecom.ParcelableCall;
 import android.telephony.CallQuality;
-import com.android.internal.telecom.ICallDiagnosticServiceAdapter;
 
 /* loaded from: classes5.dex */
 public interface ICallDiagnosticService extends IInterface {
@@ -22,13 +21,15 @@ public interface ICallDiagnosticService extends IInterface {
 
     void notifyCallDisconnected(String str, DisconnectCause disconnectCause) throws RemoteException;
 
-    void receiveBluetoothCallQualityReport(BluetoothCallQualityReport bluetoothCallQualityReport) throws RemoteException;
+    void receiveBluetoothCallQualityReport(BluetoothCallQualityReport bluetoothCallQualityReport)
+            throws RemoteException;
 
     void receiveDeviceToDeviceMessage(String str, int i, int i2) throws RemoteException;
 
     void removeDiagnosticCall(String str) throws RemoteException;
 
-    void setAdapter(ICallDiagnosticServiceAdapter iCallDiagnosticServiceAdapter) throws RemoteException;
+    void setAdapter(ICallDiagnosticServiceAdapter iCallDiagnosticServiceAdapter)
+            throws RemoteException;
 
     void updateCall(ParcelableCall parcelableCall) throws RemoteException;
 
@@ -36,40 +37,35 @@ public interface ICallDiagnosticService extends IInterface {
 
     public static class Default implements ICallDiagnosticService {
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void setAdapter(ICallDiagnosticServiceAdapter adapter) throws RemoteException {
-        }
+        public void setAdapter(ICallDiagnosticServiceAdapter adapter) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void initializeDiagnosticCall(ParcelableCall call) throws RemoteException {
-        }
+        public void initializeDiagnosticCall(ParcelableCall call) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void updateCall(ParcelableCall call) throws RemoteException {
-        }
+        public void updateCall(ParcelableCall call) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void updateCallAudioState(CallAudioState callAudioState) throws RemoteException {
-        }
+        public void updateCallAudioState(CallAudioState callAudioState) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void removeDiagnosticCall(String callId) throws RemoteException {
-        }
+        public void removeDiagnosticCall(String callId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void receiveDeviceToDeviceMessage(String callId, int message, int value) throws RemoteException {
-        }
+        public void receiveDeviceToDeviceMessage(String callId, int message, int value)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void callQualityChanged(String callId, CallQuality callQuality) throws RemoteException {
-        }
+        public void callQualityChanged(String callId, CallQuality callQuality)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void receiveBluetoothCallQualityReport(BluetoothCallQualityReport qualityReport) throws RemoteException {
-        }
+        public void receiveBluetoothCallQualityReport(BluetoothCallQualityReport qualityReport)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticService
-        public void notifyCallDisconnected(String callId, DisconnectCause disconnectCause) throws RemoteException {
-        }
+        public void notifyCallDisconnected(String callId, DisconnectCause disconnectCause)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -77,7 +73,7 @@ public interface ICallDiagnosticService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallDiagnosticService {
+    public abstract static class Stub extends Binder implements ICallDiagnosticService {
         static final int TRANSACTION_callQualityChanged = 7;
         static final int TRANSACTION_initializeDiagnosticCall = 2;
         static final int TRANSACTION_notifyCallDisconnected = 9;
@@ -139,7 +135,8 @@ public interface ICallDiagnosticService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICallDiagnosticService.DESCRIPTOR);
             }
@@ -149,22 +146,26 @@ public interface ICallDiagnosticService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICallDiagnosticServiceAdapter _arg0 = ICallDiagnosticServiceAdapter.Stub.asInterface(data.readStrongBinder());
+                    ICallDiagnosticServiceAdapter _arg0 =
+                            ICallDiagnosticServiceAdapter.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setAdapter(_arg0);
                     return true;
                 case 2:
-                    ParcelableCall _arg02 = (ParcelableCall) data.readTypedObject(ParcelableCall.CREATOR);
+                    ParcelableCall _arg02 =
+                            (ParcelableCall) data.readTypedObject(ParcelableCall.CREATOR);
                     data.enforceNoDataAvail();
                     initializeDiagnosticCall(_arg02);
                     return true;
                 case 3:
-                    ParcelableCall _arg03 = (ParcelableCall) data.readTypedObject(ParcelableCall.CREATOR);
+                    ParcelableCall _arg03 =
+                            (ParcelableCall) data.readTypedObject(ParcelableCall.CREATOR);
                     data.enforceNoDataAvail();
                     updateCall(_arg03);
                     return true;
                 case 4:
-                    CallAudioState _arg04 = (CallAudioState) data.readTypedObject(CallAudioState.CREATOR);
+                    CallAudioState _arg04 =
+                            (CallAudioState) data.readTypedObject(CallAudioState.CREATOR);
                     data.enforceNoDataAvail();
                     updateCallAudioState(_arg04);
                     return true;
@@ -187,13 +188,16 @@ public interface ICallDiagnosticService extends IInterface {
                     callQualityChanged(_arg07, _arg12);
                     return true;
                 case 8:
-                    BluetoothCallQualityReport _arg08 = (BluetoothCallQualityReport) data.readTypedObject(BluetoothCallQualityReport.CREATOR);
+                    BluetoothCallQualityReport _arg08 =
+                            (BluetoothCallQualityReport)
+                                    data.readTypedObject(BluetoothCallQualityReport.CREATOR);
                     data.enforceNoDataAvail();
                     receiveBluetoothCallQualityReport(_arg08);
                     return true;
                 case 9:
                     String _arg09 = data.readString();
-                    DisconnectCause _arg13 = (DisconnectCause) data.readTypedObject(DisconnectCause.CREATOR);
+                    DisconnectCause _arg13 =
+                            (DisconnectCause) data.readTypedObject(DisconnectCause.CREATOR);
                     data.enforceNoDataAvail();
                     notifyCallDisconnected(_arg09, _arg13);
                     return true;
@@ -279,7 +283,8 @@ public interface ICallDiagnosticService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
-            public void receiveDeviceToDeviceMessage(String callId, int message, int value) throws RemoteException {
+            public void receiveDeviceToDeviceMessage(String callId, int message, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
@@ -293,7 +298,8 @@ public interface ICallDiagnosticService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
-            public void callQualityChanged(String callId, CallQuality callQuality) throws RemoteException {
+            public void callQualityChanged(String callId, CallQuality callQuality)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
@@ -306,7 +312,8 @@ public interface ICallDiagnosticService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
-            public void receiveBluetoothCallQualityReport(BluetoothCallQualityReport qualityReport) throws RemoteException {
+            public void receiveBluetoothCallQualityReport(BluetoothCallQualityReport qualityReport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);
@@ -318,7 +325,8 @@ public interface ICallDiagnosticService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticService
-            public void notifyCallDisconnected(String callId, DisconnectCause disconnectCause) throws RemoteException {
+            public void notifyCallDisconnected(String callId, DisconnectCause disconnectCause)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallDiagnosticService.DESCRIPTOR);

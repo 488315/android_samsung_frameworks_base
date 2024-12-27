@@ -16,8 +16,7 @@ public interface ICoverManagerCallback extends IInterface {
 
     public static class Default implements ICoverManagerCallback {
         @Override // com.samsung.android.cover.ICoverManagerCallback
-        public void coverCallback(CoverState state) throws RemoteException {
-        }
+        public void coverCallback(CoverState state) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManagerCallback
         public String getListenerInfo() throws RemoteException {
@@ -30,7 +29,7 @@ public interface ICoverManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICoverManagerCallback {
+    public abstract static class Stub extends Binder implements ICoverManagerCallback {
         static final int TRANSACTION_coverCallback = 1;
         static final int TRANSACTION_getListenerInfo = 2;
 
@@ -71,7 +70,8 @@ public interface ICoverManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICoverManagerCallback.DESCRIPTOR);
             }

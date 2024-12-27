@@ -4,11 +4,13 @@ import android.hardware.biometrics.fingerprint.ISession;
 import android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.biometrics.sensors.ClientMonitorCallback;
 import com.android.server.biometrics.sensors.ErrorConsumer;
 import com.android.server.biometrics.sensors.fingerprint.aidl.AidlSession;
 import com.android.server.biometrics.sensors.fingerprint.hidl.HidlToAidlSessionAdapter;
+
 import vendor.samsung.hardware.biometrics.fingerprint.V3_0.ISehBiometricsFingerprint;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,12 +28,16 @@ public final class SemFpSensorTestClient extends SemFpBaseRequestClient implemen
         if (obj instanceof AidlSession) {
             ISession iSession = ((AidlSession) obj).mSession;
             if (iSession instanceof HidlToAidlSessionAdapter) {
-                HidlToAidlSessionAdapter hidlToAidlSessionAdapter = (HidlToAidlSessionAdapter) iSession;
+                HidlToAidlSessionAdapter hidlToAidlSessionAdapter =
+                        (HidlToAidlSessionAdapter) iSession;
                 hidlToAidlSessionAdapter.getClass();
                 try {
                     ((IBiometricsFingerprint) hidlToAidlSessionAdapter.mSession.get()).cancel();
                 } catch (RemoteException e) {
-                    Slog.e("HidlToAidlSessionAdapter", "Remote exception when requesting cancel", e);
+                    Slog.e(
+                            "HidlToAidlSessionAdapter",
+                            "Remote exception when requesting cancel",
+                            e);
                 }
             }
         }
@@ -52,7 +58,8 @@ public final class SemFpSensorTestClient extends SemFpBaseRequestClient implemen
         this.mCallback.onClientFinished(this, false);
     }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseRequestClient, com.android.server.biometrics.sensors.BaseClientMonitor
+    @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseRequestClient,
+              // com.android.server.biometrics.sensors.BaseClientMonitor
     public final boolean interruptsPrecedingClients() {
         return true;
     }

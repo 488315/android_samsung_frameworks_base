@@ -5,19 +5,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DemuxPid implements Parcelable {
-    public static final Parcelable.Creator<DemuxPid> CREATOR = new Parcelable.Creator<DemuxPid>() { // from class: android.hardware.tv.tuner.DemuxPid.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxPid createFromParcel(Parcel _aidl_source) {
-            return new DemuxPid(_aidl_source);
-        }
+    public static final Parcelable.Creator<DemuxPid> CREATOR =
+            new Parcelable.Creator<DemuxPid>() { // from class: android.hardware.tv.tuner.DemuxPid.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxPid createFromParcel(Parcel _aidl_source) {
+                    return new DemuxPid(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxPid[] newArray(int _aidl_size) {
-            return new DemuxPid[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxPid[] newArray(int _aidl_size) {
+                    return new DemuxPid[_aidl_size];
+                }
+            };
     public static final int mmtpPid = 1;
     public static final int tPid = 0;
     private int _tag;
@@ -114,7 +115,12 @@ public final class DemuxPid implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

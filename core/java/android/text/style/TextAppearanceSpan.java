@@ -10,6 +10,7 @@ import android.os.Parcel;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
 import android.text.format.DateFormat;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -103,7 +104,8 @@ public class TextAppearanceSpan extends MetricAffectingSpan implements Parcelabl
         this.mTextColor = textColor;
     }
 
-    public TextAppearanceSpan(String family, int style, int size, ColorStateList color, ColorStateList linkColor) {
+    public TextAppearanceSpan(
+            String family, int style, int size, ColorStateList color, ColorStateList linkColor) {
         this.mFamilyName = family;
         this.mStyle = style;
         this.mTextSize = size;
@@ -140,7 +142,9 @@ public class TextAppearanceSpan extends MetricAffectingSpan implements Parcelabl
         }
         this.mTypeface = LeakyTypefaceStorage.readTypefaceFromParcel(src);
         this.mTextFontWeight = src.readInt();
-        this.mTextLocales = (LocaleList) src.readParcelable(LocaleList.class.getClassLoader(), LocaleList.class);
+        this.mTextLocales =
+                (LocaleList)
+                        src.readParcelable(LocaleList.class.getClassLoader(), LocaleList.class);
         this.mShadowRadius = src.readFloat();
         this.mShadowDx = src.readFloat();
         this.mShadowDy = src.readFloat();
@@ -279,7 +283,8 @@ public class TextAppearanceSpan extends MetricAffectingSpan implements Parcelabl
             ds.linkColor = this.mTextColorLink.getColorForState(ds.drawableState, 0);
         }
         if (this.mShadowColor != 0) {
-            ds.setShadowLayer(this.mShadowRadius, this.mShadowDx, this.mShadowDy, this.mShadowColor);
+            ds.setShadowLayer(
+                    this.mShadowRadius, this.mShadowDx, this.mShadowDy, this.mShadowColor);
         }
     }
 
@@ -346,6 +351,41 @@ public class TextAppearanceSpan extends MetricAffectingSpan implements Parcelabl
     }
 
     public String toString() {
-        return "TextAppearanceSpan{familyName='" + getFamily() + DateFormat.QUOTE + ", style=" + getTextStyle() + ", textSize=" + getTextSize() + ", textColor=" + getTextColor() + ", textColorLink=" + getLinkTextColor() + ", typeface=" + getTypeface() + ", textFontWeight=" + getTextFontWeight() + ", textLocales=" + getTextLocales() + ", shadowRadius=" + getShadowRadius() + ", shadowDx=" + getShadowDx() + ", shadowDy=" + getShadowDy() + ", shadowColor=" + String.format("#%08X", Integer.valueOf(getShadowColor())) + ", elegantTextHeight=" + isElegantTextHeight() + ", letterSpacing=" + getLetterSpacing() + ", fontFeatureSettings='" + getFontFeatureSettings() + DateFormat.QUOTE + ", fontVariationSettings='" + getFontVariationSettings() + DateFormat.QUOTE + '}';
+        return "TextAppearanceSpan{familyName='"
+                + getFamily()
+                + DateFormat.QUOTE
+                + ", style="
+                + getTextStyle()
+                + ", textSize="
+                + getTextSize()
+                + ", textColor="
+                + getTextColor()
+                + ", textColorLink="
+                + getLinkTextColor()
+                + ", typeface="
+                + getTypeface()
+                + ", textFontWeight="
+                + getTextFontWeight()
+                + ", textLocales="
+                + getTextLocales()
+                + ", shadowRadius="
+                + getShadowRadius()
+                + ", shadowDx="
+                + getShadowDx()
+                + ", shadowDy="
+                + getShadowDy()
+                + ", shadowColor="
+                + String.format("#%08X", Integer.valueOf(getShadowColor()))
+                + ", elegantTextHeight="
+                + isElegantTextHeight()
+                + ", letterSpacing="
+                + getLetterSpacing()
+                + ", fontFeatureSettings='"
+                + getFontFeatureSettings()
+                + DateFormat.QUOTE
+                + ", fontVariationSettings='"
+                + getFontVariationSettings()
+                + DateFormat.QUOTE
+                + '}';
     }
 }

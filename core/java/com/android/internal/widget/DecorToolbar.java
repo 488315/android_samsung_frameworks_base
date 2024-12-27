@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.SpinnerAdapter;
+
 import com.android.internal.view.menu.MenuBuilder;
 import com.android.internal.view.menu.MenuPresenter;
 
@@ -88,7 +89,9 @@ public interface DecorToolbar {
 
     void setDisplayOptions(int i);
 
-    void setDropdownParams(SpinnerAdapter spinnerAdapter, AdapterView.OnItemSelectedListener onItemSelectedListener);
+    void setDropdownParams(
+            SpinnerAdapter spinnerAdapter,
+            AdapterView.OnItemSelectedListener onItemSelectedListener);
 
     void setDropdownSelectedPosition(int i);
 

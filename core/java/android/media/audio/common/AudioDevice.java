@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioDevice implements Parcelable {
-    public static final Parcelable.Creator<AudioDevice> CREATOR = new Parcelable.Creator<AudioDevice>() { // from class: android.media.audio.common.AudioDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioDevice createFromParcel(Parcel _aidl_source) {
-            AudioDevice _aidl_out = new AudioDevice();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioDevice> CREATOR =
+            new Parcelable.Creator<
+                    AudioDevice>() { // from class: android.media.audio.common.AudioDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioDevice createFromParcel(Parcel _aidl_source) {
+                    AudioDevice _aidl_out = new AudioDevice();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioDevice[] newArray(int _aidl_size) {
-            return new AudioDevice[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioDevice[] newArray(int _aidl_size) {
+                    return new AudioDevice[_aidl_size];
+                }
+            };
     public AudioDeviceAddress address;
     public AudioDeviceDescription type;
 
@@ -58,14 +61,18 @@ public class AudioDevice implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.type = (AudioDeviceDescription) _aidl_parcel.readTypedObject(AudioDeviceDescription.CREATOR);
+            this.type =
+                    (AudioDeviceDescription)
+                            _aidl_parcel.readTypedObject(AudioDeviceDescription.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.address = (AudioDeviceAddress) _aidl_parcel.readTypedObject(AudioDeviceAddress.CREATOR);
+                this.address =
+                        (AudioDeviceAddress)
+                                _aidl_parcel.readTypedObject(AudioDeviceAddress.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -95,7 +102,8 @@ public class AudioDevice implements Parcelable {
             return false;
         }
         AudioDevice that = (AudioDevice) other;
-        if (Objects.deepEquals(this.type, that.type) && Objects.deepEquals(this.address, that.address)) {
+        if (Objects.deepEquals(this.type, that.type)
+                && Objects.deepEquals(this.address, that.address)) {
             return true;
         }
         return false;

@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ServiceStartArgs implements Parcelable {
-    public static final Parcelable.Creator<ServiceStartArgs> CREATOR = new Parcelable.Creator<ServiceStartArgs>() { // from class: android.app.ServiceStartArgs.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ServiceStartArgs createFromParcel(Parcel in) {
-            return new ServiceStartArgs(in);
-        }
+    public static final Parcelable.Creator<ServiceStartArgs> CREATOR =
+            new Parcelable.Creator<
+                    ServiceStartArgs>() { // from class: android.app.ServiceStartArgs.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ServiceStartArgs createFromParcel(Parcel in) {
+                    return new ServiceStartArgs(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ServiceStartArgs[] newArray(int size) {
-            return new ServiceStartArgs[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ServiceStartArgs[] newArray(int size) {
+                    return new ServiceStartArgs[size];
+                }
+            };
     public final Intent args;
     public final int flags;
     public final int startId;
@@ -32,7 +34,15 @@ public class ServiceStartArgs implements Parcelable {
     }
 
     public String toString() {
-        return "ServiceStartArgs{taskRemoved=" + this.taskRemoved + ", startId=" + this.startId + ", flags=0x" + Integer.toHexString(this.flags) + ", args=" + this.args + "}";
+        return "ServiceStartArgs{taskRemoved="
+                + this.taskRemoved
+                + ", startId="
+                + this.startId
+                + ", flags=0x"
+                + Integer.toHexString(this.flags)
+                + ", args="
+                + this.args
+                + "}";
     }
 
     @Override // android.os.Parcelable

@@ -12,8 +12,7 @@ public interface IWindowSessionCallback extends IInterface {
 
     public static class Default implements IWindowSessionCallback {
         @Override // android.view.IWindowSessionCallback
-        public void onAnimatorScaleChanged(float scale) throws RemoteException {
-        }
+        public void onAnimatorScaleChanged(float scale) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IWindowSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWindowSessionCallback {
+    public abstract static class Stub extends Binder implements IWindowSessionCallback {
         public static final String DESCRIPTOR = "android.view.IWindowSessionCallback";
         static final int TRANSACTION_onAnimatorScaleChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IWindowSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

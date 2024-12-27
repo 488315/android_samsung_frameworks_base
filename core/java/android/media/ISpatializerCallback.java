@@ -16,12 +16,10 @@ public interface ISpatializerCallback extends IInterface {
 
     public static class Default implements ISpatializerCallback {
         @Override // android.media.ISpatializerCallback
-        public void dispatchSpatializerEnabledChanged(boolean enabled) throws RemoteException {
-        }
+        public void dispatchSpatializerEnabledChanged(boolean enabled) throws RemoteException {}
 
         @Override // android.media.ISpatializerCallback
-        public void dispatchSpatializerAvailableChanged(boolean available) throws RemoteException {
-        }
+        public void dispatchSpatializerAvailableChanged(boolean available) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ISpatializerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpatializerCallback {
+    public abstract static class Stub extends Binder implements ISpatializerCallback {
         static final int TRANSACTION_dispatchSpatializerAvailableChanged = 2;
         static final int TRANSACTION_dispatchSpatializerEnabledChanged = 1;
 
@@ -70,7 +68,8 @@ public interface ISpatializerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpatializerCallback.DESCRIPTOR);
             }
@@ -123,7 +122,8 @@ public interface ISpatializerCallback extends IInterface {
             }
 
             @Override // android.media.ISpatializerCallback
-            public void dispatchSpatializerAvailableChanged(boolean available) throws RemoteException {
+            public void dispatchSpatializerAvailableChanged(boolean available)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISpatializerCallback.DESCRIPTOR);

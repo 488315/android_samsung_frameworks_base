@@ -2,23 +2,28 @@ package android.service.controls.templates;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
 public final class ControlTemplateWrapper implements Parcelable {
-    public static final Parcelable.Creator<ControlTemplateWrapper> CREATOR = new Parcelable.Creator<ControlTemplateWrapper>() { // from class: android.service.controls.templates.ControlTemplateWrapper.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ControlTemplateWrapper createFromParcel(Parcel source) {
-            return new ControlTemplateWrapper(ControlTemplate.createTemplateFromBundle(source.readBundle()));
-        }
+    public static final Parcelable.Creator<ControlTemplateWrapper> CREATOR =
+            new Parcelable.Creator<
+                    ControlTemplateWrapper>() { // from class:
+                                                // android.service.controls.templates.ControlTemplateWrapper.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ControlTemplateWrapper createFromParcel(Parcel source) {
+                    return new ControlTemplateWrapper(
+                            ControlTemplate.createTemplateFromBundle(source.readBundle()));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ControlTemplateWrapper[] newArray(int size) {
-            return new ControlTemplateWrapper[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ControlTemplateWrapper[] newArray(int size) {
+                    return new ControlTemplateWrapper[size];
+                }
+            };
     private final ControlTemplate mControlTemplate;
 
     public ControlTemplateWrapper(ControlTemplate template) {

@@ -17,14 +17,22 @@ public final class SupportedModeData {
     public static List load(NonNegativeFloatToFloatMap nonNegativeFloatToFloatMap) {
         ArrayList arrayList = new ArrayList();
         if (nonNegativeFloatToFloatMap != null) {
-            for (NonNegativeFloatToFloatPoint nonNegativeFloatToFloatPoint : nonNegativeFloatToFloatMap.getPoint()) {
-                arrayList.add(new SupportedModeData(nonNegativeFloatToFloatPoint.first.floatValue(), nonNegativeFloatToFloatPoint.second.floatValue()));
+            for (NonNegativeFloatToFloatPoint nonNegativeFloatToFloatPoint :
+                    nonNegativeFloatToFloatMap.getPoint()) {
+                arrayList.add(
+                        new SupportedModeData(
+                                nonNegativeFloatToFloatPoint.first.floatValue(),
+                                nonNegativeFloatToFloatPoint.second.floatValue()));
             }
         }
         return arrayList;
     }
 
     public final String toString() {
-        return "SupportedModeData{refreshRate= " + this.refreshRate + ", vsyncRate= " + this.vsyncRate + '}';
+        return "SupportedModeData{refreshRate= "
+                + this.refreshRate
+                + ", vsyncRate= "
+                + this.vsyncRate
+                + '}';
     }
 }

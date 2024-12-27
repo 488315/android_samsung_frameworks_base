@@ -1,7 +1,9 @@
 package com.samsung.android.graphics.spr.document.attribute.impl;
 
 import android.graphics.RadialGradient;
+
 import com.samsung.android.graphics.spr.document.SprInputStream;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -11,8 +13,7 @@ public class SprRadialGradient extends SprGradientBase {
     public float cy;
     public float r;
 
-    public SprRadialGradient() {
-    }
+    public SprRadialGradient() {}
 
     public SprRadialGradient(SprInputStream in) throws IOException {
         fromSPR(in);
@@ -71,7 +72,14 @@ public class SprRadialGradient extends SprGradientBase {
                 lpositions[size - 1] = 1.0f;
             }
         }
-        this.shader = new RadialGradient(this.cx, this.cy, this.r, lcolors, lpositions, sTileModeArray[this.spreadMode]);
+        this.shader =
+                new RadialGradient(
+                        this.cx,
+                        this.cy,
+                        this.r,
+                        lcolors,
+                        lpositions,
+                        sTileModeArray[this.spreadMode]);
         if (this.matrix != null) {
             this.shader.setLocalMatrix(this.matrix);
         }

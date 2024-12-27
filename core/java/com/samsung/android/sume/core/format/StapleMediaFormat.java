@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.format;
 
 import android.graphics.Rect;
+
 import com.samsung.android.sume.core.types.CodecType;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.ColorSpace;
@@ -8,6 +9,7 @@ import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.FlipType;
 import com.samsung.android.sume.core.types.MediaType;
 import com.samsung.android.sume.core.types.SplitType;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */

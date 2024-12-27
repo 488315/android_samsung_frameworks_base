@@ -16,7 +16,8 @@ public interface IBlockchainManager extends IInterface {
 
     boolean putCredential(int i, byte[] bArr) throws RemoteException;
 
-    BlockchainTZServiceCommnInfo registerBlockchainFW(BlockchainTZServiceConfig blockchainTZServiceConfig) throws RemoteException;
+    BlockchainTZServiceCommnInfo registerBlockchainFW(
+            BlockchainTZServiceConfig blockchainTZServiceConfig) throws RemoteException;
 
     int sspExit() throws RemoteException;
 
@@ -24,7 +25,8 @@ public interface IBlockchainManager extends IInterface {
 
     public static class Default implements IBlockchainManager {
         @Override // android.blockchain.IBlockchainManager
-        public BlockchainTZServiceCommnInfo registerBlockchainFW(BlockchainTZServiceConfig config) throws RemoteException {
+        public BlockchainTZServiceCommnInfo registerBlockchainFW(BlockchainTZServiceConfig config)
+                throws RemoteException {
             return null;
         }
 
@@ -59,7 +61,7 @@ public interface IBlockchainManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBlockchainManager {
+    public abstract static class Stub extends Binder implements IBlockchainManager {
         static final int TRANSACTION_getCredential = 4;
         static final int TRANSACTION_getMeasurementFile = 2;
         static final int TRANSACTION_putCredential = 3;
@@ -112,7 +114,8 @@ public interface IBlockchainManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBlockchainManager.DESCRIPTOR);
             }
@@ -122,7 +125,9 @@ public interface IBlockchainManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    BlockchainTZServiceConfig _arg0 = (BlockchainTZServiceConfig) data.readTypedObject(BlockchainTZServiceConfig.CREATOR);
+                    BlockchainTZServiceConfig _arg0 =
+                            (BlockchainTZServiceConfig)
+                                    data.readTypedObject(BlockchainTZServiceConfig.CREATOR);
                     data.enforceNoDataAvail();
                     BlockchainTZServiceCommnInfo _result = registerBlockchainFW(_arg0);
                     reply.writeNoException();
@@ -180,7 +185,8 @@ public interface IBlockchainManager extends IInterface {
             }
 
             @Override // android.blockchain.IBlockchainManager
-            public BlockchainTZServiceCommnInfo registerBlockchainFW(BlockchainTZServiceConfig config) throws RemoteException {
+            public BlockchainTZServiceCommnInfo registerBlockchainFW(
+                    BlockchainTZServiceConfig config) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -188,7 +194,9 @@ public interface IBlockchainManager extends IInterface {
                     _data.writeTypedObject(config, 0);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    BlockchainTZServiceCommnInfo _result = (BlockchainTZServiceCommnInfo) _reply.readTypedObject(BlockchainTZServiceCommnInfo.CREATOR);
+                    BlockchainTZServiceCommnInfo _result =
+                            (BlockchainTZServiceCommnInfo)
+                                    _reply.readTypedObject(BlockchainTZServiceCommnInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

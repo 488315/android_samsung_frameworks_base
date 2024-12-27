@@ -4,6 +4,7 @@ import android.hardware.face.FaceEnrollOptions;
 import android.hardware.face.IFaceServiceReceiver;
 import android.os.IBinder;
 import android.view.Surface;
+
 import com.android.server.biometrics.sensors.ClientMonitorCallbackConverter;
 import com.android.server.biometrics.sensors.face.FaceUtils;
 
@@ -23,7 +24,19 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda12 imple
     public final /* synthetic */ int[] f$8;
     public final /* synthetic */ Surface f$9;
 
-    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda12(FaceProvider faceProvider, int i, int i2, IBinder iBinder, IFaceServiceReceiver iFaceServiceReceiver, byte[] bArr, String str, long j, int[] iArr, Surface surface, boolean z, FaceEnrollOptions faceEnrollOptions) {
+    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda12(
+            FaceProvider faceProvider,
+            int i,
+            int i2,
+            IBinder iBinder,
+            IFaceServiceReceiver iFaceServiceReceiver,
+            byte[] bArr,
+            String str,
+            long j,
+            int[] iArr,
+            Surface surface,
+            boolean z,
+            FaceEnrollOptions faceEnrollOptions) {
         this.f$0 = faceProvider;
         this.f$1 = i;
         this.f$2 = i2;
@@ -53,6 +66,29 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda12 imple
         boolean z = this.f$10;
         FaceEnrollOptions faceEnrollOptions = this.f$11;
         ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).scheduleFaceUpdateActiveUserClient(i2);
-        faceProvider.scheduleForSensor(i, new FaceEnrollClient(faceProvider.mContext, ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mLazySession, iBinder, new ClientMonitorCallbackConverter(iFaceServiceReceiver), i2, bArr, str, j, FaceUtils.getInstance(i, null), iArr, surface, i, faceProvider.createLogger(1, 0, faceProvider.mAuthenticationStatsCollector), faceProvider.mBiometricContext, ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mSensorProperties.maxEnrollmentsPerUser, z, faceEnrollOptions, faceProvider.mAuthenticationStateListeners), faceProvider.mBiometricStateCallback);
+        faceProvider.scheduleForSensor(
+                i,
+                new FaceEnrollClient(
+                        faceProvider.mContext,
+                        ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mLazySession,
+                        iBinder,
+                        new ClientMonitorCallbackConverter(iFaceServiceReceiver),
+                        i2,
+                        bArr,
+                        str,
+                        j,
+                        FaceUtils.getInstance(i, null),
+                        iArr,
+                        surface,
+                        i,
+                        faceProvider.createLogger(1, 0, faceProvider.mAuthenticationStatsCollector),
+                        faceProvider.mBiometricContext,
+                        ((Sensor) faceProvider.mFaceSensors.mSensors.get(i))
+                                .mSensorProperties
+                                .maxEnrollmentsPerUser,
+                        z,
+                        faceEnrollOptions,
+                        faceProvider.mAuthenticationStateListeners),
+                faceProvider.mBiometricStateCallback);
     }
 }

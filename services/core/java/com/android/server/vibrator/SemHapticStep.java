@@ -5,10 +5,13 @@ import android.os.Trace;
 import android.os.vibrator.SemHapticSegment;
 import android.os.vibrator.VibrationEffectSegment;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import com.samsung.android.server.vibrator.CommonPatternInfo;
 import com.samsung.android.vibrator.VibRune;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,17 +25,22 @@ public final class SemHapticStep extends AbstractVibratorStep {
             this.mVibratorCompleteCallbackReceived = true;
             this.mNextOffTime = SystemClock.uptimeMillis();
         }
-        return this.mNextOffTime < this.startTime && this.controller.mCurrentAmplitude > FullScreenMagnificationGestureHandler.MAX_SCALE;
+        return this.mNextOffTime < this.startTime
+                && this.controller.mCurrentAmplitude
+                        > FullScreenMagnificationGestureHandler.MAX_SCALE;
     }
 
     @Override // com.android.server.vibrator.Step
     public final List play() {
         Trace.traceBegin(8388608L, "SemHapticStep");
         try {
-            SemHapticSegment semHapticSegment = (VibrationEffectSegment) this.effect.getSegments().get(this.segmentIndex);
+            SemHapticSegment semHapticSegment =
+                    (VibrationEffectSegment) this.effect.getSegments().get(this.segmentIndex);
             int i = 1;
             if (!(semHapticSegment instanceof SemHapticSegment)) {
-                Slog.w("SemHapticStep", "Ignoring wrong segment for a SemHapticSegment: " + semHapticSegment);
+                Slog.w(
+                        "SemHapticStep",
+                        "Ignoring wrong segment for a SemHapticSegment: " + semHapticSegment);
                 return nextSteps(1);
             }
             HalVibration halVibration = this.conductor.mVibration;
@@ -40,7 +48,16 @@ public final class SemHapticStep extends AbstractVibratorStep {
             int sepIndex = semHapticSegment.getSepIndex();
             long j = halVibration.mTimeout;
             boolean z = this.effect.getRepeatIndex() > -1;
-            Slog.d("SemHapticStep", "sepIndex=" + sepIndex + ", intensity=" + i2 + ", repeat=" + z + ", duration=" + j);
+            Slog.d(
+                    "SemHapticStep",
+                    "sepIndex="
+                            + sepIndex
+                            + ", intensity="
+                            + i2
+                            + ", repeat="
+                            + z
+                            + ", duration="
+                            + j);
             startVibrating(sepIndex, i2, z, j);
             if (z && halVibration.mEngineData == null) {
                 this.mNextOffTime = 9223372036854770807L;
@@ -62,7 +79,8 @@ public final class SemHapticStep extends AbstractVibratorStep {
         sb.append(j);
         BootReceiver$$ExternalSyntheticOutline0.m(sb, "ms", "SemHapticStep");
         HalVibration halVibration = this.conductor.mVibration;
-        if (!VibRune.SUPPORT_HYBRID_HAPTIC() || (commonPatternInfoArr = halVibration.mCommonData) == null) {
+        if (!VibRune.SUPPORT_HYBRID_HAPTIC()
+                || (commonPatternInfoArr = halVibration.mCommonData) == null) {
             int[] iArr = halVibration.mEngineData;
             if (iArr == null) {
                 VibratorController vibratorController = this.controller;

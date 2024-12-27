@@ -35,7 +35,8 @@ public class DirectoryString extends ASN1Object implements ASN1Choice, ASN1Strin
         if (o instanceof DERBMPString) {
             return new DirectoryString((DERBMPString) o);
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + o.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + o.getClass().getName());
     }
 
     public static DirectoryString getInstance(ASN1TaggedObject o, boolean explicit) {
@@ -78,7 +79,8 @@ public class DirectoryString extends ASN1Object implements ASN1Choice, ASN1Strin
         return this.string.getString();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return ((ASN1Encodable) this.string).toASN1Primitive();
     }

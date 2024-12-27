@@ -4,14 +4,17 @@ import android.util.AndroidException;
 
 /* loaded from: classes3.dex */
 public class RemoteException extends AndroidException {
-    public RemoteException() {
-    }
+    public RemoteException() {}
 
     public RemoteException(String message) {
         super(message);
     }
 
-    public RemoteException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public RemoteException(
+            String message,
+            Throwable cause,
+            boolean enableSuppression,
+            boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 

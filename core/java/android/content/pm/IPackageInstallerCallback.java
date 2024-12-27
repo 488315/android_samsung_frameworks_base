@@ -20,24 +20,20 @@ public interface IPackageInstallerCallback extends IInterface {
 
     public static class Default implements IPackageInstallerCallback {
         @Override // android.content.pm.IPackageInstallerCallback
-        public void onSessionCreated(int sessionId) throws RemoteException {
-        }
+        public void onSessionCreated(int sessionId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerCallback
-        public void onSessionBadgingChanged(int sessionId) throws RemoteException {
-        }
+        public void onSessionBadgingChanged(int sessionId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerCallback
-        public void onSessionActiveChanged(int sessionId, boolean active) throws RemoteException {
-        }
+        public void onSessionActiveChanged(int sessionId, boolean active) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerCallback
-        public void onSessionProgressChanged(int sessionId, float progress) throws RemoteException {
-        }
+        public void onSessionProgressChanged(int sessionId, float progress)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerCallback
-        public void onSessionFinished(int sessionId, boolean success) throws RemoteException {
-        }
+        public void onSessionFinished(int sessionId, boolean success) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +41,7 @@ public interface IPackageInstallerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageInstallerCallback {
+    public abstract static class Stub extends Binder implements IPackageInstallerCallback {
         public static final String DESCRIPTOR = "android.content.pm.IPackageInstallerCallback";
         static final int TRANSACTION_onSessionActiveChanged = 3;
         static final int TRANSACTION_onSessionBadgingChanged = 2;
@@ -96,7 +92,8 @@ public interface IPackageInstallerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -179,7 +176,8 @@ public interface IPackageInstallerCallback extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerCallback
-            public void onSessionActiveChanged(int sessionId, boolean active) throws RemoteException {
+            public void onSessionActiveChanged(int sessionId, boolean active)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -192,7 +190,8 @@ public interface IPackageInstallerCallback extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerCallback
-            public void onSessionProgressChanged(int sessionId, float progress) throws RemoteException {
+            public void onSessionProgressChanged(int sessionId, float progress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

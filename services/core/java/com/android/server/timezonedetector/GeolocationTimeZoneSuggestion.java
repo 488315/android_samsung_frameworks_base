@@ -27,8 +27,11 @@ public final class GeolocationTimeZoneSuggestion {
         if (obj == null || GeolocationTimeZoneSuggestion.class != obj.getClass()) {
             return false;
         }
-        GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion = (GeolocationTimeZoneSuggestion) obj;
-        return this.mEffectiveFromElapsedMillis == geolocationTimeZoneSuggestion.mEffectiveFromElapsedMillis && Objects.equals(this.mZoneIds, geolocationTimeZoneSuggestion.mZoneIds);
+        GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion =
+                (GeolocationTimeZoneSuggestion) obj;
+        return this.mEffectiveFromElapsedMillis
+                        == geolocationTimeZoneSuggestion.mEffectiveFromElapsedMillis
+                && Objects.equals(this.mZoneIds, geolocationTimeZoneSuggestion.mZoneIds);
     }
 
     public final int hashCode() {
@@ -36,6 +39,10 @@ public final class GeolocationTimeZoneSuggestion {
     }
 
     public final String toString() {
-        return "GeolocationTimeZoneSuggestion{mEffectiveFromElapsedMillis=" + this.mEffectiveFromElapsedMillis + ", mZoneIds=" + this.mZoneIds + '}';
+        return "GeolocationTimeZoneSuggestion{mEffectiveFromElapsedMillis="
+                + this.mEffectiveFromElapsedMillis
+                + ", mZoneIds="
+                + this.mZoneIds
+                + '}';
     }
 }

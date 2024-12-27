@@ -20,7 +20,8 @@ public final /* synthetic */ class Transition$$ExternalSyntheticLambda2 implemen
             case 1:
                 return activityRecord.findMainWindow(true) != null;
             default:
-                return activityRecord.occludesParent(true) && activityRecord.findMainWindow(true) != null;
+                return activityRecord.occludesParent(true)
+                        && activityRecord.findMainWindow(true) != null;
         }
     }
 }

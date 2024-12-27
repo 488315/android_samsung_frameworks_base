@@ -1,7 +1,9 @@
 package android.timezone;
 
 import android.icu.util.TimeZone;
+
 import com.android.i18n.timezone.CountryTimeZones;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -71,7 +73,8 @@ public final class CountryTimeZones {
                 return false;
             }
             OffsetResult that = (OffsetResult) o;
-            if (this.mIsOnlyMatch == that.mIsOnlyMatch && this.mTimeZone.getID().equals(that.mTimeZone.getID())) {
+            if (this.mIsOnlyMatch == that.mIsOnlyMatch
+                    && this.mTimeZone.getID().equals(that.mTimeZone.getID())) {
                 return true;
             }
             return false;
@@ -82,7 +85,11 @@ public final class CountryTimeZones {
         }
 
         public String toString() {
-            return "OffsetResult{mTimeZone(ID)=" + this.mTimeZone.getID() + ", mIsOnlyMatch=" + this.mIsOnlyMatch + '}';
+            return "OffsetResult{mTimeZone(ID)="
+                    + this.mTimeZone.getID()
+                    + ", mIsOnlyMatch="
+                    + this.mIsOnlyMatch
+                    + '}';
         }
     }
 
@@ -110,24 +117,31 @@ public final class CountryTimeZones {
         return this.mDelegate.hasUtcZone(whenMillis);
     }
 
-    public OffsetResult lookupByOffsetWithBias(long whenMillis, TimeZone bias, int totalOffsetMillis, boolean isDst) {
-        CountryTimeZones.OffsetResult delegateOffsetResult = this.mDelegate.lookupByOffsetWithBias(whenMillis, bias, totalOffsetMillis, isDst);
+    public OffsetResult lookupByOffsetWithBias(
+            long whenMillis, TimeZone bias, int totalOffsetMillis, boolean isDst) {
+        CountryTimeZones.OffsetResult delegateOffsetResult =
+                this.mDelegate.lookupByOffsetWithBias(whenMillis, bias, totalOffsetMillis, isDst);
         if (delegateOffsetResult == null) {
             return null;
         }
-        return new OffsetResult(delegateOffsetResult.getTimeZone(), delegateOffsetResult.isOnlyMatch());
+        return new OffsetResult(
+                delegateOffsetResult.getTimeZone(), delegateOffsetResult.isOnlyMatch());
     }
 
-    public OffsetResult lookupByOffsetWithBias(long whenMillis, TimeZone bias, int totalOffsetMillis) {
-        CountryTimeZones.OffsetResult delegateOffsetResult = this.mDelegate.lookupByOffsetWithBias(whenMillis, bias, totalOffsetMillis);
+    public OffsetResult lookupByOffsetWithBias(
+            long whenMillis, TimeZone bias, int totalOffsetMillis) {
+        CountryTimeZones.OffsetResult delegateOffsetResult =
+                this.mDelegate.lookupByOffsetWithBias(whenMillis, bias, totalOffsetMillis);
         if (delegateOffsetResult == null) {
             return null;
         }
-        return new OffsetResult(delegateOffsetResult.getTimeZone(), delegateOffsetResult.isOnlyMatch());
+        return new OffsetResult(
+                delegateOffsetResult.getTimeZone(), delegateOffsetResult.isOnlyMatch());
     }
 
     public List<TimeZoneMapping> getEffectiveTimeZoneMappingsAt(long whenMillis) {
-        List<CountryTimeZones.TimeZoneMapping> delegateList = this.mDelegate.getEffectiveTimeZoneMappingsAt(whenMillis);
+        List<CountryTimeZones.TimeZoneMapping> delegateList =
+                this.mDelegate.getEffectiveTimeZoneMappingsAt(whenMillis);
         List<TimeZoneMapping> toReturn = new ArrayList<>(delegateList.size());
         for (CountryTimeZones.TimeZoneMapping delegateMapping : delegateList) {
             toReturn.add(new TimeZoneMapping(delegateMapping));

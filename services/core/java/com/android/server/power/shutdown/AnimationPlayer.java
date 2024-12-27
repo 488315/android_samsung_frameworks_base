@@ -4,6 +4,7 @@ import android.app.Presentation;
 import android.content.Context;
 import android.util.Pair;
 import android.widget.ImageView;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -44,7 +45,10 @@ public abstract class AnimationPlayer implements PlayerInterface {
             SUB_MAIN = displayMode4;
             DisplayMode displayMode5 = new DisplayMode("SUB_SUB", 4);
             SUB_SUB = displayMode5;
-            $VALUES = new DisplayMode[]{displayMode, displayMode2, displayMode3, displayMode4, displayMode5};
+            $VALUES =
+                    new DisplayMode[] {
+                        displayMode, displayMode2, displayMode3, displayMode4, displayMode5
+                    };
         }
 
         public static DisplayMode valueOf(String str) {
@@ -66,7 +70,11 @@ public abstract class AnimationPlayer implements PlayerInterface {
     }
 
     public static String[] initAnimationFiles(String str, String str2) {
-        return new String[]{AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "before", str2), str.concat(str2), AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "after", str2)};
+        return new String[] {
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "before", str2),
+            str.concat(str2),
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "after", str2)
+        };
     }
 
     public abstract Pair getMainAnimationWidthHeight();

@@ -3,6 +3,7 @@ package android.companion.virtual.camera;
 import android.annotation.SystemApi;
 import android.companion.virtual.IVirtualDevice;
 import android.os.RemoteException;
+
 import java.io.Closeable;
 import java.util.Objects;
 
@@ -13,7 +14,8 @@ public final class VirtualCamera implements Closeable {
     private final VirtualCameraConfig mConfig;
     private final IVirtualDevice mVirtualDevice;
 
-    public VirtualCamera(IVirtualDevice virtualDevice, String cameraId, VirtualCameraConfig config) {
+    public VirtualCamera(
+            IVirtualDevice virtualDevice, String cameraId, VirtualCameraConfig config) {
         this.mVirtualDevice = (IVirtualDevice) Objects.requireNonNull(virtualDevice);
         this.mCameraId = (String) Objects.requireNonNull(cameraId);
         this.mConfig = (VirtualCameraConfig) Objects.requireNonNull(config);

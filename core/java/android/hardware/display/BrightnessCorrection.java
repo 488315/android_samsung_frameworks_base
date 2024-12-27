@@ -5,34 +5,39 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.MathUtils;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class BrightnessCorrection implements Parcelable {
-    public static final Parcelable.Creator<BrightnessCorrection> CREATOR = new Parcelable.Creator<BrightnessCorrection>() { // from class: android.hardware.display.BrightnessCorrection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BrightnessCorrection createFromParcel(Parcel in) {
-            int type = in.readInt();
-            switch (type) {
-                case 1:
-                    return ScaleAndTranslateLog.readFromParcel(in);
-                default:
-                    return null;
-            }
-        }
+    public static final Parcelable.Creator<BrightnessCorrection> CREATOR =
+            new Parcelable.Creator<BrightnessCorrection>() { // from class:
+                // android.hardware.display.BrightnessCorrection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BrightnessCorrection createFromParcel(Parcel in) {
+                    int type = in.readInt();
+                    switch (type) {
+                        case 1:
+                            return ScaleAndTranslateLog.readFromParcel(in);
+                        default:
+                            return null;
+                    }
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BrightnessCorrection[] newArray(int size) {
-            return new BrightnessCorrection[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BrightnessCorrection[] newArray(int size) {
+                    return new BrightnessCorrection[size];
+                }
+            };
     private static final int SCALE_AND_TRANSLATE_LOG = 1;
     private static final String TAG_SCALE_AND_TRANSLATE_LOG = "scale-and-translate-log";
     private BrightnessCorrectionImplementation mImplementation;
@@ -52,7 +57,8 @@ public final class BrightnessCorrection implements Parcelable {
     }
 
     public static BrightnessCorrection createScaleAndTranslateLog(float scale, float translate) {
-        BrightnessCorrectionImplementation implementation = new ScaleAndTranslateLog(scale, translate);
+        BrightnessCorrectionImplementation implementation =
+                new ScaleAndTranslateLog(scale, translate);
         return new BrightnessCorrection(implementation);
     }
 
@@ -93,7 +99,8 @@ public final class BrightnessCorrection implements Parcelable {
         this.mImplementation.saveToXml(serializer);
     }
 
-    public static BrightnessCorrection loadFromXml(TypedXmlPullParser parser) throws IOException, XmlPullParserException {
+    public static BrightnessCorrection loadFromXml(TypedXmlPullParser parser)
+            throws IOException, XmlPullParserException {
         int depth = parser.getDepth();
         while (XmlUtils.nextElementWithin(parser, depth)) {
             if (TAG_SCALE_AND_TRANSLATE_LOG.equals(parser.getName())) {
@@ -133,7 +140,11 @@ public final class BrightnessCorrection implements Parcelable {
 
         @Override // android.hardware.display.BrightnessCorrection.BrightnessCorrectionImplementation
         public String toString() {
-            return "ScaleAndTranslateLog(" + this.mScale + ", " + this.mTranslate + NavigationBarInflaterView.KEY_CODE_END;
+            return "ScaleAndTranslateLog("
+                    + this.mScale
+                    + ", "
+                    + this.mTranslate
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
 
         public boolean equals(Object o) {
@@ -173,7 +184,8 @@ public final class BrightnessCorrection implements Parcelable {
             return BrightnessCorrection.createScaleAndTranslateLog(scale, translate);
         }
 
-        static BrightnessCorrection loadFromXml(TypedXmlPullParser parser) throws IOException, XmlPullParserException {
+        static BrightnessCorrection loadFromXml(TypedXmlPullParser parser)
+                throws IOException, XmlPullParserException {
             float scale = BrightnessCorrection.loadFloatFromXml(parser, "scale");
             float translate = BrightnessCorrection.loadFloatFromXml(parser, ATTR_TRANSLATE);
             return BrightnessCorrection.createScaleAndTranslateLog(scale, translate);

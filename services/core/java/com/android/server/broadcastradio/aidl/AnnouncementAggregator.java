@@ -6,8 +6,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
-import com.android.server.broadcastradio.aidl.RadioModule;
+
 import com.android.server.utils.Slogf;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -27,15 +28,18 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeathRecipient implements IBinder.DeathRecipient {
-        public DeathRecipient() {
-        }
+        public DeathRecipient() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             try {
                 AnnouncementAggregator.this.close();
             } catch (RemoteException e) {
-                Slogf.e("BcRadioAidlSrv.AnnAggr", e, "Cannot close Announcement aggregator for DeathRecipient", new Object[0]);
+                Slogf.e(
+                        "BcRadioAidlSrv.AnnAggr",
+                        e,
+                        "Cannot close Announcement aggregator for DeathRecipient",
+                        new Object[0]);
             }
         }
     }
@@ -45,8 +49,7 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
         public ICloseHandle mCloseHandle;
         public List mCurrentList = new ArrayList();
 
-        public ModuleWatcher() {
-        }
+        public ModuleWatcher() {}
 
         public final void onListUpdated(List list) {
             boolean z = AnnouncementAggregator.DEBUG;
@@ -63,17 +66,32 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
             synchronized (announcementAggregator.mLock) {
                 try {
                     if (announcementAggregator.mIsClosed) {
-                        Slogf.e("BcRadioAidlSrv.AnnAggr", "Announcement aggregator is closed, it shouldn't receive callbacks");
+                        Slogf.e(
+                                "BcRadioAidlSrv.AnnAggr",
+                                "Announcement aggregator is closed, it shouldn't receive"
+                                    + " callbacks");
                         return;
                     }
-                    ArrayList arrayList = new ArrayList(((ArrayList) announcementAggregator.mModuleWatchers).size());
-                    for (int i = 0; i < ((ArrayList) announcementAggregator.mModuleWatchers).size(); i++) {
-                        arrayList.addAll(((ModuleWatcher) ((ArrayList) announcementAggregator.mModuleWatchers).get(i)).mCurrentList);
+                    ArrayList arrayList =
+                            new ArrayList(
+                                    ((ArrayList) announcementAggregator.mModuleWatchers).size());
+                    for (int i = 0;
+                            i < ((ArrayList) announcementAggregator.mModuleWatchers).size();
+                            i++) {
+                        arrayList.addAll(
+                                ((ModuleWatcher)
+                                                ((ArrayList) announcementAggregator.mModuleWatchers)
+                                                        .get(i))
+                                        .mCurrentList);
                     }
                     try {
                         announcementAggregator.mListener.onListUpdated(arrayList);
                     } catch (RemoteException e) {
-                        Slogf.e("BcRadioAidlSrv.AnnAggr", e, "mListener.onListUpdated() failed", new Object[0]);
+                        Slogf.e(
+                                "BcRadioAidlSrv.AnnAggr",
+                                e,
+                                "mListener.onListUpdated() failed",
+                                new Object[0]);
                     }
                 } finally {
                 }
@@ -102,12 +120,15 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
         synchronized (this.mLock) {
             try {
                 if (this.mIsClosed) {
-                    Slogf.w("BcRadioAidlSrv.AnnAggr", "Announcement aggregator has already been closed.");
+                    Slogf.w(
+                            "BcRadioAidlSrv.AnnAggr",
+                            "Announcement aggregator has already been closed.");
                     return;
                 }
                 this.mListener.asBinder().unlinkToDeath(this.mDeathRecipient, 0);
                 for (int i = 0; i < ((ArrayList) this.mModuleWatchers).size(); i++) {
-                    ModuleWatcher moduleWatcher = (ModuleWatcher) ((ArrayList) this.mModuleWatchers).get(i);
+                    ModuleWatcher moduleWatcher =
+                            (ModuleWatcher) ((ArrayList) this.mModuleWatchers).get(i);
                     try {
                         moduleWatcher.getClass();
                         if (DEBUG) {
@@ -118,7 +139,11 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
                             iCloseHandle.close();
                         }
                     } catch (Exception e) {
-                        Slogf.e("BcRadioAidlSrv.AnnAggr", "Failed to close module watcher %s: %s", moduleWatcher, e);
+                        Slogf.e(
+                                "BcRadioAidlSrv.AnnAggr",
+                                "Failed to close module watcher %s: %s",
+                                moduleWatcher,
+                                e);
                     }
                 }
                 ((ArrayList) this.mModuleWatchers).clear();
@@ -129,22 +154,30 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter);
         indentingPrintWriter.printf("AnnouncementAggregator\n", new Object[0]);
         indentingPrintWriter.increaseIndent();
         synchronized (this.mLock) {
             try {
-                indentingPrintWriter.printf("Is session closed? %s\n", new Object[]{this.mIsClosed ? "Yes" : "No"});
-                indentingPrintWriter.printf("Module Watchers [%d]:\n", new Object[]{Integer.valueOf(((ArrayList) this.mModuleWatchers).size())});
+                indentingPrintWriter.printf(
+                        "Is session closed? %s\n", new Object[] {this.mIsClosed ? "Yes" : "No"});
+                indentingPrintWriter.printf(
+                        "Module Watchers [%d]:\n",
+                        new Object[] {Integer.valueOf(((ArrayList) this.mModuleWatchers).size())});
                 indentingPrintWriter.increaseIndent();
                 for (int i = 0; i < ((ArrayList) this.mModuleWatchers).size(); i++) {
-                    ModuleWatcher moduleWatcher = (ModuleWatcher) ((ArrayList) this.mModuleWatchers).get(i);
+                    ModuleWatcher moduleWatcher =
+                            (ModuleWatcher) ((ArrayList) this.mModuleWatchers).get(i);
                     moduleWatcher.getClass();
                     indentingPrintWriter.printf("ModuleWatcher:\n", new Object[0]);
                     indentingPrintWriter.increaseIndent();
-                    indentingPrintWriter.printf("Close handle: %s\n", new Object[]{moduleWatcher.mCloseHandle});
-                    indentingPrintWriter.printf("Current announcement list: %s\n", new Object[]{moduleWatcher.mCurrentList});
+                    indentingPrintWriter.printf(
+                            "Close handle: %s\n", new Object[] {moduleWatcher.mCloseHandle});
+                    indentingPrintWriter.printf(
+                            "Current announcement list: %s\n",
+                            new Object[] {moduleWatcher.mCurrentList});
                     indentingPrintWriter.decreaseIndent();
                 }
                 indentingPrintWriter.decreaseIndent();
@@ -158,23 +191,37 @@ public final class AnnouncementAggregator extends ICloseHandle.Stub {
     public final void watchModule(RadioModule radioModule, int[] iArr) {
         boolean z = DEBUG;
         if (z) {
-            Slogf.d("BcRadioAidlSrv.AnnAggr", "Watch module for %s with enabled types %s", radioModule, Arrays.toString(iArr));
+            Slogf.d(
+                    "BcRadioAidlSrv.AnnAggr",
+                    "Watch module for %s with enabled types %s",
+                    radioModule,
+                    Arrays.toString(iArr));
         }
         synchronized (this.mLock) {
             try {
                 if (this.mIsClosed) {
-                    throw new IllegalStateException("Failed to watch modulesince announcement aggregator has already been closed");
+                    throw new IllegalStateException(
+                            "Failed to watch modulesince announcement aggregator has already been"
+                                + " closed");
                 }
                 ModuleWatcher moduleWatcher = new ModuleWatcher();
                 try {
-                    RadioModule.AnonymousClass3 addAnnouncementListener = radioModule.addAnnouncementListener(moduleWatcher, iArr);
+                    RadioModule.AnonymousClass3 addAnnouncementListener =
+                            radioModule.addAnnouncementListener(moduleWatcher, iArr);
                     if (z) {
-                        Slogf.d("BcRadioAidlSrv.AnnAggr", "Set close handle %s", addAnnouncementListener);
+                        Slogf.d(
+                                "BcRadioAidlSrv.AnnAggr",
+                                "Set close handle %s",
+                                addAnnouncementListener);
                     }
                     moduleWatcher.mCloseHandle = addAnnouncementListener;
                     ((ArrayList) this.mModuleWatchers).add(moduleWatcher);
                 } catch (RemoteException e) {
-                    Slogf.e("BcRadioAidlSrv.AnnAggr", e, "Failed to add announcement listener", new Object[0]);
+                    Slogf.e(
+                            "BcRadioAidlSrv.AnnAggr",
+                            e,
+                            "Failed to add announcement listener",
+                            new Object[0]);
                 }
             } catch (Throwable th) {
                 throw th;

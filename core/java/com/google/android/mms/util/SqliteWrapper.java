@@ -12,10 +12,16 @@ import android.util.Log;
 public final class SqliteWrapper {
     private static final String TAG = "SqliteWrapper";
 
-    private SqliteWrapper() {
-    }
+    private SqliteWrapper() {}
 
-    public static Cursor query(Context context, ContentResolver resolver, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public static Cursor query(
+            Context context,
+            ContentResolver resolver,
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         try {
             return resolver.query(uri, projection, selection, selectionArgs, sortOrder);
         } catch (SQLiteException e) {
@@ -24,7 +30,13 @@ public final class SqliteWrapper {
         }
     }
 
-    public static int update(Context context, ContentResolver resolver, Uri uri, ContentValues values, String where, String[] selectionArgs) {
+    public static int update(
+            Context context,
+            ContentResolver resolver,
+            Uri uri,
+            ContentValues values,
+            String where,
+            String[] selectionArgs) {
         try {
             return resolver.update(uri, values, where, selectionArgs);
         } catch (SQLiteException e) {
@@ -33,7 +45,12 @@ public final class SqliteWrapper {
         }
     }
 
-    public static int delete(Context context, ContentResolver resolver, Uri uri, String where, String[] selectionArgs) {
+    public static int delete(
+            Context context,
+            ContentResolver resolver,
+            Uri uri,
+            String where,
+            String[] selectionArgs) {
         try {
             return resolver.delete(uri, where, selectionArgs);
         } catch (SQLiteException e) {
@@ -42,7 +59,8 @@ public final class SqliteWrapper {
         }
     }
 
-    public static Uri insert(Context context, ContentResolver resolver, Uri uri, ContentValues values) {
+    public static Uri insert(
+            Context context, ContentResolver resolver, Uri uri, ContentValues values) {
         try {
             return resolver.insert(uri, values);
         } catch (SQLiteException e) {

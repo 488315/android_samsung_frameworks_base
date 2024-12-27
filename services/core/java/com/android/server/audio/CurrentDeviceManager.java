@@ -1,6 +1,7 @@
 package com.android.server.audio;
 
 import com.samsung.android.server.audio.SensorHandleThread$$ExternalSyntheticLambda0;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executor;
@@ -16,11 +17,16 @@ public final class CurrentDeviceManager {
         public final SensorHandleThread$$ExternalSyntheticLambda0 callback;
         public final Executor executor;
 
-        public CallbackRecord(SensorHandleThread$$ExternalSyntheticLambda0 sensorHandleThread$$ExternalSyntheticLambda0) {
+        public CallbackRecord(
+                SensorHandleThread$$ExternalSyntheticLambda0
+                        sensorHandleThread$$ExternalSyntheticLambda0) {
             this.callback = sensorHandleThread$$ExternalSyntheticLambda0;
         }
 
-        public CallbackRecord(SensorHandleThread$$ExternalSyntheticLambda0 sensorHandleThread$$ExternalSyntheticLambda0, Executor executor) {
+        public CallbackRecord(
+                SensorHandleThread$$ExternalSyntheticLambda0
+                        sensorHandleThread$$ExternalSyntheticLambda0,
+                Executor executor) {
             this.callback = sensorHandleThread$$ExternalSyntheticLambda0;
             this.executor = executor;
         }

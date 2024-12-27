@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.field.PolynomialExtensionField;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -25,14 +26,20 @@ public class X9ECParameters extends ASN1Object implements X9ObjectIdentifiers {
     private byte[] seed;
 
     private X9ECParameters(ASN1Sequence seq) {
-        if (!(seq.getObjectAt(0) instanceof ASN1Integer) || !((ASN1Integer) seq.getObjectAt(0)).hasValue(ONE)) {
+        if (!(seq.getObjectAt(0) instanceof ASN1Integer)
+                || !((ASN1Integer) seq.getObjectAt(0)).hasValue(ONE)) {
             throw new IllegalArgumentException("bad version in X9ECParameters");
         }
         this.n = ((ASN1Integer) seq.getObjectAt(4)).getValue();
         if (seq.size() == 6) {
             this.h = ((ASN1Integer) seq.getObjectAt(5)).getValue();
         }
-        X9Curve x9c = new X9Curve(X9FieldID.getInstance(seq.getObjectAt(1)), this.n, this.h, ASN1Sequence.getInstance(seq.getObjectAt(2)));
+        X9Curve x9c =
+                new X9Curve(
+                        X9FieldID.getInstance(seq.getObjectAt(1)),
+                        this.n,
+                        this.h,
+                        ASN1Sequence.getInstance(seq.getObjectAt(2)));
         this.curve = x9c.getCurve();
         Object p = seq.getObjectAt(3);
         if (p instanceof X9ECPoint) {
@@ -79,10 +86,12 @@ public class X9ECParameters extends ASN1Object implements X9ObjectIdentifiers {
                 return;
             } else {
                 if (exponents.length == 5) {
-                    this.fieldID = new X9FieldID(exponents[4], exponents[1], exponents[2], exponents[3]);
+                    this.fieldID =
+                            new X9FieldID(exponents[4], exponents[1], exponents[2], exponents[3]);
                     return;
                 }
-                throw new IllegalArgumentException("Only trinomial and pentomial curves are supported");
+                throw new IllegalArgumentException(
+                        "Only trinomial and pentomial curves are supported");
             }
         }
         throw new IllegalArgumentException("'curve' is of an unsupported type");
@@ -124,7 +133,8 @@ public class X9ECParameters extends ASN1Object implements X9ObjectIdentifiers {
         return this.g;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(6);
         v.add(new ASN1Integer(ONE));

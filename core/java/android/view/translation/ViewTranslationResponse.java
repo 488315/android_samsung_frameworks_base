@@ -5,7 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.view.autofill.AutofillId;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,19 +16,22 @@ import java.util.Set;
 
 /* loaded from: classes4.dex */
 public final class ViewTranslationResponse implements Parcelable {
-    public static final Parcelable.Creator<ViewTranslationResponse> CREATOR = new Parcelable.Creator<ViewTranslationResponse>() { // from class: android.view.translation.ViewTranslationResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ViewTranslationResponse[] newArray(int size) {
-            return new ViewTranslationResponse[size];
-        }
+    public static final Parcelable.Creator<ViewTranslationResponse> CREATOR =
+            new Parcelable.Creator<
+                    ViewTranslationResponse>() { // from class:
+                                                 // android.view.translation.ViewTranslationResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ViewTranslationResponse[] newArray(int size) {
+                    return new ViewTranslationResponse[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ViewTranslationResponse createFromParcel(Parcel in) {
-            return new ViewTranslationResponse(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ViewTranslationResponse createFromParcel(Parcel in) {
+                    return new ViewTranslationResponse(in);
+                }
+            };
     private final AutofillId mAutofillId;
     private final Map<String, TranslationResponseValue> mTranslationResponseValues;
 
@@ -51,11 +56,10 @@ public final class ViewTranslationResponse implements Parcelable {
         return Collections.emptyMap();
     }
 
-    static abstract class BaseBuilder {
+    abstract static class BaseBuilder {
         abstract Builder setTranslationResponseValues(Map<String, TranslationResponseValue> map);
 
-        BaseBuilder() {
-        }
+        BaseBuilder() {}
 
         public Builder setValue(String key, TranslationResponseValue value) {
             Builder builder = (Builder) this;
@@ -67,15 +71,25 @@ public final class ViewTranslationResponse implements Parcelable {
         }
     }
 
-    ViewTranslationResponse(AutofillId autofillId, Map<String, TranslationResponseValue> translationResponseValues) {
+    ViewTranslationResponse(
+            AutofillId autofillId,
+            Map<String, TranslationResponseValue> translationResponseValues) {
         this.mAutofillId = autofillId;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
         this.mTranslationResponseValues = translationResponseValues;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTranslationResponseValues);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mTranslationResponseValues);
     }
 
     public String toString() {
-        return "ViewTranslationResponse { autofillId = " + this.mAutofillId + ", translationResponseValues = " + this.mTranslationResponseValues + " }";
+        return "ViewTranslationResponse { autofillId = "
+                + this.mAutofillId
+                + ", translationResponseValues = "
+                + this.mTranslationResponseValues
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -86,7 +100,9 @@ public final class ViewTranslationResponse implements Parcelable {
             return false;
         }
         ViewTranslationResponse that = (ViewTranslationResponse) o;
-        if (Objects.equals(this.mAutofillId, that.mAutofillId) && Objects.equals(this.mTranslationResponseValues, that.mTranslationResponseValues)) {
+        if (Objects.equals(this.mAutofillId, that.mAutofillId)
+                && Objects.equals(
+                        this.mTranslationResponseValues, that.mTranslationResponseValues)) {
             return true;
         }
         return false;
@@ -113,9 +129,13 @@ public final class ViewTranslationResponse implements Parcelable {
         Map<String, TranslationResponseValue> translationResponseValues = new LinkedHashMap<>();
         in.readMap(translationResponseValues, TranslationResponseValue.class.getClassLoader());
         this.mAutofillId = autofillId;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
         this.mTranslationResponseValues = translationResponseValues;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTranslationResponseValues);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mTranslationResponseValues);
     }
 
     public static final class Builder extends BaseBuilder {
@@ -124,13 +144,15 @@ public final class ViewTranslationResponse implements Parcelable {
         private Map<String, TranslationResponseValue> mTranslationResponseValues;
 
         @Override // android.view.translation.ViewTranslationResponse.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder setValue(String str, TranslationResponseValue translationResponseValue) {
+        public /* bridge */ /* synthetic */ Builder setValue(
+                String str, TranslationResponseValue translationResponseValue) {
             return super.setValue(str, translationResponseValue);
         }
 
         public Builder(AutofillId autofillId) {
             this.mAutofillId = autofillId;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
         }
 
         @Override // android.view.translation.ViewTranslationResponse.BaseBuilder
@@ -145,20 +167,22 @@ public final class ViewTranslationResponse implements Parcelable {
             checkNotUsed();
             this.mBuilderFieldsSet |= 4;
             if ((this.mBuilderFieldsSet & 2) == 0) {
-                this.mTranslationResponseValues = ViewTranslationResponse.defaultTranslationResponseValues();
+                this.mTranslationResponseValues =
+                        ViewTranslationResponse.defaultTranslationResponseValues();
             }
-            ViewTranslationResponse o = new ViewTranslationResponse(this.mAutofillId, this.mTranslationResponseValues);
+            ViewTranslationResponse o =
+                    new ViewTranslationResponse(this.mAutofillId, this.mTranslationResponseValues);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 4) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

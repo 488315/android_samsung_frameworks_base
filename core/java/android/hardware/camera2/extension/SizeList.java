@@ -3,26 +3,29 @@ package android.hardware.camera2.extension;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collection;
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public class SizeList implements Parcelable {
-    public static final Parcelable.Creator<SizeList> CREATOR = new Parcelable.Creator<SizeList>() { // from class: android.hardware.camera2.extension.SizeList.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SizeList createFromParcel(Parcel _aidl_source) {
-            SizeList _aidl_out = new SizeList();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SizeList> CREATOR =
+            new Parcelable.Creator<
+                    SizeList>() { // from class: android.hardware.camera2.extension.SizeList.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SizeList createFromParcel(Parcel _aidl_source) {
+                    SizeList _aidl_out = new SizeList();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SizeList[] newArray(int _aidl_size) {
-            return new SizeList[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SizeList[] newArray(int _aidl_size) {
+                    return new SizeList[_aidl_size];
+                }
+            };
     public int format = 0;
     public List<Size> sizes;
 

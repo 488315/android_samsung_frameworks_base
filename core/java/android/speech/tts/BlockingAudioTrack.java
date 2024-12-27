@@ -2,7 +2,6 @@ package android.speech.tts;
 
 import android.media.AudioFormat;
 import android.media.AudioTrack;
-import android.speech.tts.TextToSpeechService;
 import android.util.Log;
 
 /* loaded from: classes3.dex */
@@ -26,7 +25,11 @@ class BlockingAudioTrack {
     private AudioTrack mAudioTrack = null;
     private volatile boolean mStopped = false;
 
-    BlockingAudioTrack(TextToSpeechService.AudioOutputParams audioParams, int sampleRate, int audioFormat, int channelCount) {
+    BlockingAudioTrack(
+            TextToSpeechService.AudioOutputParams audioParams,
+            int sampleRate,
+            int audioFormat,
+            int channelCount) {
         this.mBytesWritten = 0;
         this.mAudioParams = audioParams;
         this.mSampleRateInHz = sampleRate;
@@ -130,10 +133,22 @@ class BlockingAudioTrack {
 
     private AudioTrack createStreamingAudioTrack() {
         int channelConfig = getChannelConfig(this.mChannelCount);
-        int minBufferSizeInBytes = AudioTrack.getMinBufferSize(this.mSampleRateInHz, channelConfig, this.mAudioFormat);
+        int minBufferSizeInBytes =
+                AudioTrack.getMinBufferSize(this.mSampleRateInHz, channelConfig, this.mAudioFormat);
         int bufferSizeInBytes = Math.max(8192, minBufferSizeInBytes);
-        AudioFormat audioFormat = new AudioFormat.Builder().setChannelMask(channelConfig).setEncoding(this.mAudioFormat).setSampleRate(this.mSampleRateInHz).build();
-        AudioTrack audioTrack = new AudioTrack(this.mAudioParams.mAudioAttributes, audioFormat, bufferSizeInBytes, 1, this.mAudioParams.mSessionId);
+        AudioFormat audioFormat =
+                new AudioFormat.Builder()
+                        .setChannelMask(channelConfig)
+                        .setEncoding(this.mAudioFormat)
+                        .setSampleRate(this.mSampleRateInHz)
+                        .build();
+        AudioTrack audioTrack =
+                new AudioTrack(
+                        this.mAudioParams.mAudioAttributes,
+                        audioFormat,
+                        bufferSizeInBytes,
+                        1,
+                        this.mAudioParams.mSessionId);
         if (audioTrack.getState() != 1) {
             Log.w(TAG, "Unable to create audio track.");
             audioTrack.release();
@@ -170,13 +185,19 @@ class BlockingAudioTrack {
         long blockedTimeMs = 0;
         while (true) {
             int currentPosition = audioTrack.getPlaybackHeadPosition();
-            if (currentPosition < lengthInFrames && audioTrack.getPlayState() == 3 && !this.mStopped) {
-                long estimatedTimeMs = ((lengthInFrames - currentPosition) * 1000) / audioTrack.getSampleRate();
+            if (currentPosition < lengthInFrames
+                    && audioTrack.getPlayState() == 3
+                    && !this.mStopped) {
+                long estimatedTimeMs =
+                        ((lengthInFrames - currentPosition) * 1000) / audioTrack.getSampleRate();
                 long sleepTimeMs = clip(estimatedTimeMs, 20L, 2500L);
                 if (currentPosition == previousPosition) {
                     blockedTimeMs += sleepTimeMs;
                     if (blockedTimeMs > 2500) {
-                        Log.w(TAG, "Waited unsuccessfully for 2500ms for AudioTrack to make progress, Aborting");
+                        Log.w(
+                                TAG,
+                                "Waited unsuccessfully for 2500ms for AudioTrack to make progress,"
+                                    + " Aborting");
                         return;
                     }
                 } else {
@@ -217,7 +238,8 @@ class BlockingAudioTrack {
         return value < min ? min : value < max ? value : max;
     }
 
-    public void setPlaybackPositionUpdateListener(AudioTrack.OnPlaybackPositionUpdateListener listener) {
+    public void setPlaybackPositionUpdateListener(
+            AudioTrack.OnPlaybackPositionUpdateListener listener) {
         synchronized (this.mAudioTrackLock) {
             if (this.mAudioTrack != null) {
                 this.mAudioTrack.setPlaybackPositionUpdateListener(listener);

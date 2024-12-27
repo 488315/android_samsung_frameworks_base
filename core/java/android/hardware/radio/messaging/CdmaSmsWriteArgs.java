@@ -3,26 +3,29 @@ package android.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaSmsWriteArgs implements Parcelable {
-    public static final Parcelable.Creator<CdmaSmsWriteArgs> CREATOR = new Parcelable.Creator<CdmaSmsWriteArgs>() { // from class: android.hardware.radio.messaging.CdmaSmsWriteArgs.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsWriteArgs createFromParcel(Parcel _aidl_source) {
-            CdmaSmsWriteArgs _aidl_out = new CdmaSmsWriteArgs();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaSmsWriteArgs> CREATOR =
+            new Parcelable.Creator<CdmaSmsWriteArgs>() { // from class:
+                // android.hardware.radio.messaging.CdmaSmsWriteArgs.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsWriteArgs createFromParcel(Parcel _aidl_source) {
+                    CdmaSmsWriteArgs _aidl_out = new CdmaSmsWriteArgs();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsWriteArgs[] newArray(int _aidl_size) {
-            return new CdmaSmsWriteArgs[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsWriteArgs[] newArray(int _aidl_size) {
+                    return new CdmaSmsWriteArgs[_aidl_size];
+                }
+            };
     public static final int STATUS_REC_READ = 1;
     public static final int STATUS_REC_UNREAD = 0;
     public static final int STATUS_STO_SENT = 3;
@@ -68,7 +71,8 @@ public class CdmaSmsWriteArgs implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.message = (CdmaSmsMessage) _aidl_parcel.readTypedObject(CdmaSmsMessage.CREATOR);
+                this.message =
+                        (CdmaSmsMessage) _aidl_parcel.readTypedObject(CdmaSmsMessage.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

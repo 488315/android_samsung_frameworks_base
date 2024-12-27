@@ -7,12 +7,16 @@ import com.android.server.infra.AbstractPerUserSystemService;
 /* loaded from: classes.dex */
 public final /* synthetic */ class AutofillManagerService$1$$ExternalSyntheticLambda0 {
     public final void visit(AbstractPerUserSystemService abstractPerUserSystemService) {
-        AutofillManagerServiceImpl autofillManagerServiceImpl = (AutofillManagerServiceImpl) abstractPerUserSystemService;
+        AutofillManagerServiceImpl autofillManagerServiceImpl =
+                (AutofillManagerServiceImpl) abstractPerUserSystemService;
         for (int size = autofillManagerServiceImpl.mSessions.size() - 1; size >= 0; size--) {
             Session session = (Session) autofillManagerServiceImpl.mSessions.valueAt(size);
             if (session.mSessionFlags.mShowingSaveUi) {
                 if (Helper.sDebug) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("destroyFinishedSessionsLocked(): "), session.id, "AutofillManagerServiceImpl");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("destroyFinishedSessionsLocked(): "),
+                            session.id,
+                            "AutofillManagerServiceImpl");
                 }
                 session.forceRemoveFromServiceLocked(0);
             } else {

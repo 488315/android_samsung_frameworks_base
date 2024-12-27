@@ -3,6 +3,7 @@ package android.hardware.camera2.marshal.impl;
 import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
@@ -37,6 +38,8 @@ public class MarshalQueryableBoolean implements MarshalQueryable<Boolean> {
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
     public boolean isTypeMappingSupported(TypeReference<Boolean> managedType, int nativeType) {
-        return (Boolean.class.equals(managedType.getType()) || Boolean.TYPE.equals(managedType.getType())) && nativeType == 0;
+        return (Boolean.class.equals(managedType.getType())
+                        || Boolean.TYPE.equals(managedType.getType()))
+                && nativeType == 0;
     }
 }

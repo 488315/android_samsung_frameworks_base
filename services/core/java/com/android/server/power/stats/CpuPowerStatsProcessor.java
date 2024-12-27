@@ -2,10 +2,11 @@ package com.android.server.power.stats;
 
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.os.CpuScalingPolicies;
 import com.android.internal.os.PowerProfile;
 import com.android.internal.os.PowerStats;
-import com.android.server.power.stats.PowerStatsProcessor;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -36,7 +37,8 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
         public long[] timeByBracket;
     }
 
-    public CpuPowerStatsProcessor(CpuScalingPolicies cpuScalingPolicies, PowerProfile powerProfile) {
+    public CpuPowerStatsProcessor(
+            CpuScalingPolicies cpuScalingPolicies, PowerProfile powerProfile) {
         this.mCpuScalingPolicies = cpuScalingPolicies;
         int scalingStepCount = cpuScalingPolicies.getScalingStepCount();
         this.mCpuScalingStepCount = scalingStepCount;
@@ -56,11 +58,13 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
                 return;
             }
             int i4 = policies[i];
-            this.mPowerMultipliersByCluster[i] = powerProfile.getAveragePowerForCpuScalingPolicy(i4) / d;
+            this.mPowerMultipliersByCluster[i] =
+                    powerProfile.getAveragePowerForCpuScalingPolicy(i4) / d;
             int[] frequencies = cpuScalingPolicies.getFrequencies(i4);
             for (int i5 = 0; i5 < frequencies.length; i5++) {
                 this.mScalingStepToCluster[i2] = i;
-                this.mPowerMultipliersByScalingStep[i2] = powerProfile.getAveragePowerForCpuScalingStep(i4, i5) / d;
+                this.mPowerMultipliersByScalingStep[i2] =
+                        powerProfile.getAveragePowerForCpuScalingStep(i4, i5) / d;
                 i2++;
             }
             i++;
@@ -68,7 +72,8 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
     }
 
     @Override // com.android.server.power.stats.PowerStatsProcessor
-    public final void finish(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
+    public final void finish(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
         int[] iArr;
         CpuPowerStatsLayout cpuPowerStatsLayout;
         int i;
@@ -96,7 +101,9 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
             cpuPowerStatsProcessor.mTmpUidStatsArray = new long[descriptor.uidStatsArrayLength];
         }
         if (cpuPowerStatsProcessor.mPlan == null) {
-            cpuPowerStatsProcessor.mPlan = new PowerStatsProcessor.PowerEstimationPlan(powerComponentAggregatedPowerStats.mConfig);
+            cpuPowerStatsProcessor.mPlan =
+                    new PowerStatsProcessor.PowerEstimationPlan(
+                            powerComponentAggregatedPowerStats.mConfig);
             CpuPowerStatsLayout cpuPowerStatsLayout3 = cpuPowerStatsProcessor.mStatsLayout;
             int i6 = cpuPowerStatsLayout3.mDeviceEnergyConsumerCount;
             if (i6 != 0) {
@@ -110,7 +117,9 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
                     ArraySet[] arraySetArr = new ArraySet[length];
                     int i8 = 0;
                     for (int i9 = 0; i9 < policies.length; i9++) {
-                        int[] frequencies = cpuPowerStatsProcessor.mCpuScalingPolicies.getFrequencies(policies[i9]);
+                        int[] frequencies =
+                                cpuPowerStatsProcessor.mCpuScalingPolicies.getFrequencies(
+                                        policies[i9]);
                         arraySetArr[i9] = new ArraySet(frequencies.length);
                         int i10 = 0;
                         while (i10 < frequencies.length) {
@@ -138,18 +147,23 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
                             i13++;
                         }
                         if (i13 != -1) {
-                            cpuPowerStatsProcessor.mEnergyConsumerToCombinedEnergyConsumerMap[i12] = i13;
+                            cpuPowerStatsProcessor.mEnergyConsumerToCombinedEnergyConsumerMap[i12] =
+                                    i13;
                             arraySetArr2[i13].addAll(arraySetArr[i12]);
                         } else {
-                            cpuPowerStatsProcessor.mEnergyConsumerToCombinedEnergyConsumerMap[i12] = i11;
+                            cpuPowerStatsProcessor.mEnergyConsumerToCombinedEnergyConsumerMap[i12] =
+                                    i11;
                             arraySetArr2[i11] = arraySetArr[i12];
                             i11++;
                         }
                     }
                     for (int i15 = r2 - 1; i15 >= 0; i15--) {
-                        cpuPowerStatsProcessor.mCombinedEnergyConsumerToPowerBracketMap[i15] = new int[arraySetArr2[i15].size()];
+                        cpuPowerStatsProcessor.mCombinedEnergyConsumerToPowerBracketMap[i15] =
+                                new int[arraySetArr2[i15].size()];
                         for (int size = arraySetArr2[i15].size() - 1; size >= 0; size--) {
-                            cpuPowerStatsProcessor.mCombinedEnergyConsumerToPowerBracketMap[i15][size] = ((Integer) arraySetArr2[i15].valueAt(size)).intValue();
+                            cpuPowerStatsProcessor
+                                            .mCombinedEnergyConsumerToPowerBracketMap[i15][size] =
+                                    ((Integer) arraySetArr2[i15].valueAt(size)).intValue();
                         }
                     }
                 } else {
@@ -165,13 +179,20 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
         int i17 = cpuPowerStatsLayout4.mDeviceCpuTimeByScalingStepCount;
         int i18 = cpuPowerStatsProcessor.mCpuScalingStepCount;
         if (i17 != i18) {
-            Log.e("CpuPowerStatsProcessor", "Mismatched CPU scaling step count in PowerStats: " + i17 + ", expected: " + i18);
+            Log.e(
+                    "CpuPowerStatsProcessor",
+                    "Mismatched CPU scaling step count in PowerStats: "
+                            + i17
+                            + ", expected: "
+                            + i18);
             return;
         }
         int i19 = cpuPowerStatsLayout4.mDeviceCpuTimeByClusterCount;
         int i20 = cpuPowerStatsProcessor.mCpuClusterCount;
         if (i19 != i20) {
-            Log.e("CpuPowerStatsProcessor", "Mismatched CPU cluster count in PowerStats: " + i19 + ", expected: " + i20);
+            Log.e(
+                    "CpuPowerStatsProcessor",
+                    "Mismatched CPU cluster count in PowerStats: " + i19 + ", expected: " + i20);
             return;
         }
         long[] jArr2 = new long[i18];
@@ -186,17 +207,35 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
             if (size2 < 0) {
                 break;
             }
-            if (powerComponentAggregatedPowerStats.getDeviceStats(((PowerStatsProcessor.DeviceStateEstimation) arrayList3.get(size2)).stateValues, cpuPowerStatsProcessor.mTmpDeviceStatsArray)) {
-                j3 += cpuPowerStatsProcessor.mTmpDeviceStatsArray[cpuPowerStatsProcessor.mStatsLayout.mDeviceDurationPosition];
+            if (powerComponentAggregatedPowerStats.getDeviceStats(
+                    ((PowerStatsProcessor.DeviceStateEstimation) arrayList3.get(size2)).stateValues,
+                    cpuPowerStatsProcessor.mTmpDeviceStatsArray)) {
+                j3 +=
+                        cpuPowerStatsProcessor
+                                .mTmpDeviceStatsArray[
+                                cpuPowerStatsProcessor.mStatsLayout.mDeviceDurationPosition];
                 int i21 = 0;
                 while (i21 < i20) {
-                    jArr3[i21] = jArr3[i21] + cpuPowerStatsProcessor.mTmpDeviceStatsArray[cpuPowerStatsProcessor.mStatsLayout.mDeviceCpuTimeByClusterPosition + i21];
+                    jArr3[i21] =
+                            jArr3[i21]
+                                    + cpuPowerStatsProcessor
+                                            .mTmpDeviceStatsArray[
+                                            cpuPowerStatsProcessor
+                                                            .mStatsLayout
+                                                            .mDeviceCpuTimeByClusterPosition
+                                                    + i21];
                     i21++;
                     arrayList3 = arrayList3;
                 }
                 arrayList2 = arrayList3;
                 for (int i22 = 0; i22 < i18; i22++) {
-                    long j4 = cpuPowerStatsProcessor.mTmpDeviceStatsArray[cpuPowerStatsProcessor.mStatsLayout.mDeviceCpuTimeByScalingStepPosition + i22];
+                    long j4 =
+                            cpuPowerStatsProcessor
+                                    .mTmpDeviceStatsArray[
+                                    cpuPowerStatsProcessor
+                                                    .mStatsLayout
+                                                    .mDeviceCpuTimeByScalingStepPosition
+                                            + i22];
                     j2 += j4;
                     jArr2[i22] = jArr2[i22] + j4;
                     int i23 = iArr[i22];
@@ -243,7 +282,8 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
         int size3 = arrayList4.size() - 1;
         long[] jArr5 = null;
         while (size3 >= 0) {
-            PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation = (PowerStatsProcessor.DeviceStateEstimation) arrayList4.get(size3);
+            PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation =
+                    (PowerStatsProcessor.DeviceStateEstimation) arrayList4.get(size3);
             DeviceStatsIntermediates deviceStatsIntermediates = new DeviceStatsIntermediates();
             deviceStateEstimation.intermediates = deviceStatsIntermediates;
             deviceStatsIntermediates.timeByBracket = new long[i28];
@@ -262,7 +302,9 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
                 } else {
                     jArr = jArr2;
                     i4 = i27;
-                    long j7 = this.mTmpDeviceStatsArray[this.mStatsLayout.mDeviceCpuTimeByScalingStepPosition + i30];
+                    long j7 =
+                            this.mTmpDeviceStatsArray[
+                                    this.mStatsLayout.mDeviceCpuTimeByScalingStepPosition + i30];
                     arrayList = arrayList4;
                     i5 = size3;
                     double d5 = (dArr3[i30] * j7) / j6;
@@ -290,7 +332,9 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
                 }
                 for (int i34 = 0; i34 < i3; i34++) {
                     int i35 = this.mEnergyConsumerToCombinedEnergyConsumerMap[i34];
-                    jArr5[i35] = this.mStatsLayout.getConsumedEnergy(i34, this.mTmpDeviceStatsArray) + jArr5[i35];
+                    jArr5[i35] =
+                            this.mStatsLayout.getConsumedEnergy(i34, this.mTmpDeviceStatsArray)
+                                    + jArr5[i35];
                 }
                 int length2 = this.mCombinedEnergyConsumerToPowerBracketMap.length - 1;
                 while (length2 >= 0) {
@@ -321,7 +365,9 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
             }
             double[] dArr6 = dArr3;
             double d8 = 0.0d;
-            for (int length4 = deviceStatsIntermediates.powerByBracket.length - 1; length4 >= 0; length4--) {
+            for (int length4 = deviceStatsIntermediates.powerByBracket.length - 1;
+                    length4 >= 0;
+                    length4--) {
                 d8 += deviceStatsIntermediates.powerByBracket[length4];
             }
             this.mStatsLayout.setDevicePowerEstimate(this.mTmpDeviceStatsArray, d8);
@@ -332,8 +378,12 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
             i27 = i32;
             dArr3 = dArr6;
         }
-        for (int size4 = ((ArrayList) this.mPlan.combinedDeviceStateEstimations).size() - 1; size4 >= 0; size4--) {
-            PowerStatsProcessor.CombinedDeviceStateEstimate combinedDeviceStateEstimate = (PowerStatsProcessor.CombinedDeviceStateEstimate) ((ArrayList) this.mPlan.combinedDeviceStateEstimations).get(size4);
+        for (int size4 = ((ArrayList) this.mPlan.combinedDeviceStateEstimations).size() - 1;
+                size4 >= 0;
+                size4--) {
+            PowerStatsProcessor.CombinedDeviceStateEstimate combinedDeviceStateEstimate =
+                    (PowerStatsProcessor.CombinedDeviceStateEstimate)
+                            ((ArrayList) this.mPlan.combinedDeviceStateEstimations).get(size4);
             DeviceStatsIntermediates deviceStatsIntermediates2 = new DeviceStatsIntermediates();
             combinedDeviceStateEstimate.intermediates = deviceStatsIntermediates2;
             int i38 = this.mStatsLayout.mUidPowerBracketCount;
@@ -341,7 +391,10 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
             deviceStatsIntermediates2.powerByBracket = new double[i38];
             ArrayList arrayList6 = (ArrayList) combinedDeviceStateEstimate.deviceStateEstimations;
             for (int size5 = arrayList6.size() - 1; size5 >= 0; size5--) {
-                DeviceStatsIntermediates deviceStatsIntermediates3 = (DeviceStatsIntermediates) ((PowerStatsProcessor.DeviceStateEstimation) arrayList6.get(size5)).intermediates;
+                DeviceStatsIntermediates deviceStatsIntermediates3 =
+                        (DeviceStatsIntermediates)
+                                ((PowerStatsProcessor.DeviceStateEstimation) arrayList6.get(size5))
+                                        .intermediates;
                 deviceStatsIntermediates3.getClass();
                 for (int i39 = 0; i39 < i38; i39++) {
                     long[] jArr9 = deviceStatsIntermediates2.timeByBracket;
@@ -359,12 +412,25 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
                 int intValue = ((Integer) it.next()).intValue();
                 int i40 = 0;
                 while (i40 < ((ArrayList) this.mPlan.uidStateEstimates).size()) {
-                    PowerStatsProcessor.UidStateEstimate uidStateEstimate3 = (PowerStatsProcessor.UidStateEstimate) ((ArrayList) this.mPlan.uidStateEstimates).get(i40);
-                    DeviceStatsIntermediates deviceStatsIntermediates4 = (DeviceStatsIntermediates) uidStateEstimate3.combinedDeviceStateEstimate.intermediates;
+                    PowerStatsProcessor.UidStateEstimate uidStateEstimate3 =
+                            (PowerStatsProcessor.UidStateEstimate)
+                                    ((ArrayList) this.mPlan.uidStateEstimates).get(i40);
+                    DeviceStatsIntermediates deviceStatsIntermediates4 =
+                            (DeviceStatsIntermediates)
+                                    uidStateEstimate3.combinedDeviceStateEstimate.intermediates;
                     int i41 = 0;
                     while (i41 < ((ArrayList) uidStateEstimate3.proportionalEstimates).size()) {
-                        PowerStatsProcessor.UidStateProportionalEstimate uidStateProportionalEstimate = (PowerStatsProcessor.UidStateProportionalEstimate) ((ArrayList) uidStateEstimate3.proportionalEstimates).get(i41);
-                        if (powerComponentAggregatedPowerStats.getUidStats(intValue, uidStateProportionalEstimate.stateValues, this.mTmpUidStatsArray)) {
+                        PowerStatsProcessor.UidStateProportionalEstimate
+                                uidStateProportionalEstimate =
+                                        (PowerStatsProcessor.UidStateProportionalEstimate)
+                                                ((ArrayList)
+                                                                uidStateEstimate3
+                                                                        .proportionalEstimates)
+                                                        .get(i41);
+                        if (powerComponentAggregatedPowerStats.getUidStats(
+                                intValue,
+                                uidStateProportionalEstimate.stateValues,
+                                this.mTmpUidStatsArray)) {
                             double d9 = 0.0d;
                             int i42 = 0;
                             while (true) {
@@ -379,9 +445,16 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
                                 } else {
                                     i2 = i40;
                                     uidStateEstimate2 = uidStateEstimate3;
-                                    long j9 = this.mTmpUidStatsArray[cpuPowerStatsLayout.mUidPowerBracketsPosition + i42];
+                                    long j9 =
+                                            this.mTmpUidStatsArray[
+                                                    cpuPowerStatsLayout.mUidPowerBracketsPosition
+                                                            + i42];
                                     if (j9 != 0) {
-                                        d9 = ((deviceStatsIntermediates4.powerByBracket[i42] * j9) / j8) + d9;
+                                        d9 =
+                                                ((deviceStatsIntermediates4.powerByBracket[i42]
+                                                                        * j9)
+                                                                / j8)
+                                                        + d9;
                                     }
                                 }
                                 i42++;
@@ -391,7 +464,10 @@ public final class CpuPowerStatsProcessor extends PowerStatsProcessor {
                             i = i40;
                             uidStateEstimate = uidStateEstimate3;
                             cpuPowerStatsLayout.setUidPowerEstimate(this.mTmpUidStatsArray, d9);
-                            powerComponentAggregatedPowerStats.setUidStats(intValue, uidStateProportionalEstimate.stateValues, this.mTmpUidStatsArray);
+                            powerComponentAggregatedPowerStats.setUidStats(
+                                    intValue,
+                                    uidStateProportionalEstimate.stateValues,
+                                    this.mTmpUidStatsArray);
                         } else {
                             i = i40;
                             uidStateEstimate = uidStateEstimate3;

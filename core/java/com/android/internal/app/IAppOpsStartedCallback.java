@@ -10,12 +10,24 @@ import android.os.RemoteException;
 public interface IAppOpsStartedCallback extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.app.IAppOpsStartedCallback";
 
-    void opStarted(int i, int i2, String str, String str2, int i3, int i4, int i5, int i6, int i7, int i8) throws RemoteException;
+    void opStarted(
+            int i, int i2, String str, String str2, int i3, int i4, int i5, int i6, int i7, int i8)
+            throws RemoteException;
 
     public static class Default implements IAppOpsStartedCallback {
         @Override // com.android.internal.app.IAppOpsStartedCallback
-        public void opStarted(int op, int uid, String packageName, String attributionTag, int virtualDeviceId, int flags, int mode, int startedType, int attributionFlags, int attributionChainId) throws RemoteException {
-        }
+        public void opStarted(
+                int op,
+                int uid,
+                String packageName,
+                String attributionTag,
+                int virtualDeviceId,
+                int flags,
+                int mode,
+                int startedType,
+                int attributionFlags,
+                int attributionChainId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +35,7 @@ public interface IAppOpsStartedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppOpsStartedCallback {
+    public abstract static class Stub extends Binder implements IAppOpsStartedCallback {
         static final int TRANSACTION_opStarted = 1;
 
         public Stub() {
@@ -61,7 +73,8 @@ public interface IAppOpsStartedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppOpsStartedCallback.DESCRIPTOR);
             }
@@ -106,7 +119,18 @@ public interface IAppOpsStartedCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsStartedCallback
-            public void opStarted(int op, int uid, String packageName, String attributionTag, int virtualDeviceId, int flags, int mode, int startedType, int attributionFlags, int attributionChainId) throws RemoteException {
+            public void opStarted(
+                    int op,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    int virtualDeviceId,
+                    int flags,
+                    int mode,
+                    int startedType,
+                    int attributionFlags,
+                    int attributionChainId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAppOpsStartedCallback.DESCRIPTOR);

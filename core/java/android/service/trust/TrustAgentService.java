@@ -16,10 +16,11 @@ import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.service.trust.ITrustAgentService;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -56,78 +57,86 @@ public class TrustAgentService extends Service {
     private ITrustAgentServiceCallback mCallback;
     private boolean mManagingTrust;
     private Runnable mPendingGrantTrustTask;
-    private final String TAG = TrustAgentService.class.getSimpleName() + NavigationBarInflaterView.SIZE_MOD_START + getClass().getSimpleName() + NavigationBarInflaterView.SIZE_MOD_END;
+    private final String TAG =
+            TrustAgentService.class.getSimpleName()
+                    + NavigationBarInflaterView.SIZE_MOD_START
+                    + getClass().getSimpleName()
+                    + NavigationBarInflaterView.SIZE_MOD_END;
     private final Object mLock = new Object();
-    private Handler mHandler = new Handler() { // from class: android.service.trust.TrustAgentService.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    TrustAgentService.this.onUnlockAttempt(msg.arg1 != 0);
-                    break;
-                case 2:
-                    ConfigurationData data = (ConfigurationData) msg.obj;
-                    boolean result = TrustAgentService.this.onConfigure(data.options);
-                    if (data.token != null) {
-                        try {
-                            synchronized (TrustAgentService.this.mLock) {
-                                TrustAgentService.this.mCallback.onConfigureCompleted(result, data.token);
+    private Handler mHandler =
+            new Handler() { // from class: android.service.trust.TrustAgentService.1
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case 1:
+                            TrustAgentService.this.onUnlockAttempt(msg.arg1 != 0);
+                            break;
+                        case 2:
+                            ConfigurationData data = (ConfigurationData) msg.obj;
+                            boolean result = TrustAgentService.this.onConfigure(data.options);
+                            if (data.token != null) {
+                                try {
+                                    synchronized (TrustAgentService.this.mLock) {
+                                        TrustAgentService.this.mCallback.onConfigureCompleted(
+                                                result, data.token);
+                                    }
+                                    break;
+                                } catch (RemoteException e) {
+                                    TrustAgentService.this.onError(
+                                            "calling onSetTrustAgentFeaturesEnabledCompleted()");
+                                    return;
+                                }
                             }
                             break;
-                        } catch (RemoteException e) {
-                            TrustAgentService.this.onError("calling onSetTrustAgentFeaturesEnabledCompleted()");
-                            return;
-                        }
+                        case 3:
+                            TrustAgentService.this.onTrustTimeout();
+                            break;
+                        case 4:
+                            TrustAgentService.this.onDeviceLocked();
+                            break;
+                        case 5:
+                            TrustAgentService.this.onDeviceUnlocked();
+                            break;
+                        case 6:
+                            TrustAgentService.this.onDeviceUnlockLockout(msg.arg1);
+                            break;
+                        case 7:
+                            Bundle data2 = msg.getData();
+                            byte[] token = data2.getByteArray("token");
+                            long handle = data2.getLong(TrustAgentService.EXTRA_TOKEN_HANDLE);
+                            UserHandle user =
+                                    (UserHandle)
+                                            data2.getParcelable("user_handle", UserHandle.class);
+                            TrustAgentService.this.onEscrowTokenAdded(token, handle, user);
+                            break;
+                        case 8:
+                            Bundle data3 = msg.getData();
+                            long handle2 = data3.getLong(TrustAgentService.EXTRA_TOKEN_HANDLE);
+                            int tokenState = data3.getInt(TrustAgentService.EXTRA_TOKEN_STATE, 0);
+                            TrustAgentService.this.onEscrowTokenStateReceived(handle2, tokenState);
+                            break;
+                        case 9:
+                            Bundle data4 = msg.getData();
+                            long handle3 = data4.getLong(TrustAgentService.EXTRA_TOKEN_HANDLE);
+                            boolean success =
+                                    data4.getBoolean(TrustAgentService.EXTRA_TOKEN_REMOVED_RESULT);
+                            TrustAgentService.this.onEscrowTokenRemoved(handle3, success);
+                            break;
+                        case 10:
+                            TrustAgentService.this.onUserRequestedUnlock(msg.arg1 != 0);
+                            break;
+                        case 11:
+                            TrustAgentService.this.onUserMayRequestUnlock();
+                            break;
                     }
-                    break;
-                case 3:
-                    TrustAgentService.this.onTrustTimeout();
-                    break;
-                case 4:
-                    TrustAgentService.this.onDeviceLocked();
-                    break;
-                case 5:
-                    TrustAgentService.this.onDeviceUnlocked();
-                    break;
-                case 6:
-                    TrustAgentService.this.onDeviceUnlockLockout(msg.arg1);
-                    break;
-                case 7:
-                    Bundle data2 = msg.getData();
-                    byte[] token = data2.getByteArray("token");
-                    long handle = data2.getLong(TrustAgentService.EXTRA_TOKEN_HANDLE);
-                    UserHandle user = (UserHandle) data2.getParcelable("user_handle", UserHandle.class);
-                    TrustAgentService.this.onEscrowTokenAdded(token, handle, user);
-                    break;
-                case 8:
-                    Bundle data3 = msg.getData();
-                    long handle2 = data3.getLong(TrustAgentService.EXTRA_TOKEN_HANDLE);
-                    int tokenState = data3.getInt(TrustAgentService.EXTRA_TOKEN_STATE, 0);
-                    TrustAgentService.this.onEscrowTokenStateReceived(handle2, tokenState);
-                    break;
-                case 9:
-                    Bundle data4 = msg.getData();
-                    long handle3 = data4.getLong(TrustAgentService.EXTRA_TOKEN_HANDLE);
-                    boolean success = data4.getBoolean(TrustAgentService.EXTRA_TOKEN_REMOVED_RESULT);
-                    TrustAgentService.this.onEscrowTokenRemoved(handle3, success);
-                    break;
-                case 10:
-                    TrustAgentService.this.onUserRequestedUnlock(msg.arg1 != 0);
-                    break;
-                case 11:
-                    TrustAgentService.this.onUserMayRequestUnlock();
-                    break;
-            }
-        }
-    };
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GrantTrustFlags {
-    }
+    public @interface GrantTrustFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TokenState {
-    }
+    public @interface TokenState {}
 
     private static final class ConfigurationData {
         final List<PersistableBundle> options;
@@ -146,42 +155,36 @@ public class TrustAgentService extends Service {
         try {
             ServiceInfo serviceInfo = getPackageManager().getServiceInfo(component, 0);
             if (!Manifest.permission.BIND_TRUST_AGENT.equals(serviceInfo.permission)) {
-                throw new IllegalStateException(component.flattenToShortString() + " is not declared with the permission \"" + Manifest.permission.BIND_TRUST_AGENT + "\"");
+                throw new IllegalStateException(
+                        component.flattenToShortString()
+                                + " is not declared with the permission \""
+                                + Manifest.permission.BIND_TRUST_AGENT
+                                + "\"");
             }
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(this.TAG, "Can't get ServiceInfo for " + component.toShortString());
         }
     }
 
-    public void onUnlockAttempt(boolean successful) {
-    }
+    public void onUnlockAttempt(boolean successful) {}
 
-    public void onUserMayRequestUnlock() {
-    }
+    public void onUserMayRequestUnlock() {}
 
-    public void onUserRequestedUnlock(boolean dismissKeyguard) {
-    }
+    public void onUserRequestedUnlock(boolean dismissKeyguard) {}
 
-    public void onTrustTimeout() {
-    }
+    public void onTrustTimeout() {}
 
-    public void onDeviceLocked() {
-    }
+    public void onDeviceLocked() {}
 
-    public void onDeviceUnlocked() {
-    }
+    public void onDeviceUnlocked() {}
 
-    public void onDeviceUnlockLockout(long timeoutMs) {
-    }
+    public void onDeviceUnlockLockout(long timeoutMs) {}
 
-    public void onEscrowTokenAdded(byte[] token, long handle, UserHandle user) {
-    }
+    public void onEscrowTokenAdded(byte[] token, long handle, UserHandle user) {}
 
-    public void onEscrowTokenStateReceived(long handle, int tokenState) {
-    }
+    public void onEscrowTokenStateReceived(long handle, int tokenState) {}
 
-    public void onEscrowTokenRemoved(long handle, boolean successful) {
-    }
+    public void onEscrowTokenRemoved(long handle, boolean successful) {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public void onError(String msg) {
@@ -202,18 +205,27 @@ public class TrustAgentService extends Service {
         grantTrust(message, durationMs, flags, null);
     }
 
-    public final void grantTrust(final CharSequence message, final long durationMs, final int flags, final Consumer<GrantTrustResult> resultCallback) {
+    public final void grantTrust(
+            final CharSequence message,
+            final long durationMs,
+            final int flags,
+            final Consumer<GrantTrustResult> resultCallback) {
         synchronized (this.mLock) {
             if (!this.mManagingTrust) {
-                throw new IllegalStateException("Cannot grant trust if agent is not managing trust. Call setManagingTrust(true) first.");
+                throw new IllegalStateException(
+                        "Cannot grant trust if agent is not managing trust. Call"
+                            + " setManagingTrust(true) first.");
             }
             AndroidFuture<GrantTrustResult> future = new AndroidFuture<>();
-            future.thenAccept(new Consumer() { // from class: android.service.trust.TrustAgentService$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    TrustAgentService.this.lambda$grantTrust$1(resultCallback, (GrantTrustResult) obj);
-                }
-            });
+            future.thenAccept(
+                    new Consumer() { // from class:
+                                     // android.service.trust.TrustAgentService$$ExternalSyntheticLambda1
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            TrustAgentService.this.lambda$grantTrust$1(
+                                    resultCallback, (GrantTrustResult) obj);
+                        }
+                    });
             if (this.mCallback != null) {
                 try {
                     this.mCallback.grantTrust(message.toString(), durationMs, flags, future);
@@ -221,25 +233,30 @@ public class TrustAgentService extends Service {
                     onError("calling enableTrust()");
                 }
             } else {
-                this.mPendingGrantTrustTask = new Runnable() { // from class: android.service.trust.TrustAgentService.2
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        TrustAgentService.this.grantTrust(message, durationMs, flags, resultCallback);
-                    }
-                };
+                this.mPendingGrantTrustTask =
+                        new Runnable() { // from class: android.service.trust.TrustAgentService.2
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                TrustAgentService.this.grantTrust(
+                                        message, durationMs, flags, resultCallback);
+                            }
+                        };
             }
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$grantTrust$1(final Consumer resultCallback, final GrantTrustResult result) {
+    public /* synthetic */ void lambda$grantTrust$1(
+            final Consumer resultCallback, final GrantTrustResult result) {
         if (resultCallback != null) {
-            this.mHandler.post(new Runnable() { // from class: android.service.trust.TrustAgentService$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    resultCallback.accept(result);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.service.trust.TrustAgentService$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            resultCallback.accept(result);
+                        }
+                    });
         }
     }
 
@@ -276,7 +293,9 @@ public class TrustAgentService extends Service {
     public final void addEscrowToken(byte[] token, UserHandle user) {
         synchronized (this.mLock) {
             if (this.mCallback == null) {
-                Slog.w(this.TAG, "Cannot add escrow token if the agent is not connecting to framework");
+                Slog.w(
+                        this.TAG,
+                        "Cannot add escrow token if the agent is not connecting to framework");
                 throw new IllegalStateException("Trust agent is not connected");
             }
             try {
@@ -290,7 +309,9 @@ public class TrustAgentService extends Service {
     public final void isEscrowTokenActive(long handle, UserHandle user) {
         synchronized (this.mLock) {
             if (this.mCallback == null) {
-                Slog.w(this.TAG, "Cannot add escrow token if the agent is not connecting to framework");
+                Slog.w(
+                        this.TAG,
+                        "Cannot add escrow token if the agent is not connecting to framework");
                 throw new IllegalStateException("Trust agent is not connected");
             }
             try {
@@ -304,7 +325,9 @@ public class TrustAgentService extends Service {
     public final void removeEscrowToken(long handle, UserHandle user) {
         synchronized (this.mLock) {
             if (this.mCallback == null) {
-                Slog.w(this.TAG, "Cannot add escrow token if the agent is not connecting to framework");
+                Slog.w(
+                        this.TAG,
+                        "Cannot add escrow token if the agent is not connecting to framework");
                 throw new IllegalStateException("Trust agent is not connected");
             }
             try {
@@ -323,7 +346,9 @@ public class TrustAgentService extends Service {
         }
         synchronized (this.mLock) {
             if (this.mCallback == null) {
-                Slog.w(this.TAG, "Cannot add escrow token if the agent is not connecting to framework");
+                Slog.w(
+                        this.TAG,
+                        "Cannot add escrow token if the agent is not connecting to framework");
                 throw new IllegalStateException("Trust agent is not connected");
             }
             try {
@@ -350,7 +375,9 @@ public class TrustAgentService extends Service {
         }
         synchronized (this.mLock) {
             if (this.mCallback == null) {
-                Slog.w(this.TAG, "Cannot show message because service is not connected to framework.");
+                Slog.w(
+                        this.TAG,
+                        "Cannot show message because service is not connected to framework.");
                 throw new IllegalStateException("Trust agent is not connected");
             }
             try {
@@ -367,8 +394,7 @@ public class TrustAgentService extends Service {
     }
 
     private final class TrustAgentServiceWrapper extends ITrustAgentService.Stub {
-        private TrustAgentServiceWrapper() {
-        }
+        private TrustAgentServiceWrapper() {}
 
         @Override // android.service.trust.ITrustAgentService
         public void onUnlockAttempt(boolean z) {
@@ -397,7 +423,10 @@ public class TrustAgentService extends Service {
 
         @Override // android.service.trust.ITrustAgentService
         public void onConfigure(List<PersistableBundle> args, IBinder token) {
-            TrustAgentService.this.mHandler.obtainMessage(2, new ConfigurationData(args, token)).sendToTarget();
+            TrustAgentService.this
+                    .mHandler
+                    .obtainMessage(2, new ConfigurationData(args, token))
+                    .sendToTarget();
         }
 
         @Override // android.service.trust.ITrustAgentService
@@ -416,7 +445,8 @@ public class TrustAgentService extends Service {
                 TrustAgentService.this.mCallback = callback;
                 if (TrustAgentService.this.mManagingTrust) {
                     try {
-                        TrustAgentService.this.mCallback.setManagingTrust(TrustAgentService.this.mManagingTrust);
+                        TrustAgentService.this.mCallback.setManagingTrust(
+                                TrustAgentService.this.mManagingTrust);
                     } catch (RemoteException e) {
                         TrustAgentService.this.onError("calling setManagingTrust()");
                     }

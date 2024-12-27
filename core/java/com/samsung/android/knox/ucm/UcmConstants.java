@@ -2,12 +2,18 @@ package com.samsung.android.knox.ucm;
 
 /* loaded from: classes6.dex */
 public interface UcmConstants {
-    public static final String ACTION_UCM_COMPLETED_PROVISIONING_CANCELLED = "com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_CANCELLED";
-    public static final String ACTION_UCM_COMPLETED_PROVISIONING_ERROR = "com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_ERROR";
-    public static final String ACTION_UCM_COMPLETED_PROVISIONING_SUCCESS = "com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_SUCCESS";
-    public static final String ACTION_UCM_STARTED_PROVISIONING_CANCELLED = "com.samsung.android.knox.ucm.action.UCM_STARTED_PROVISIONING_CANCELLED";
-    public static final String ACTION_UCM_STARTED_PROVISIONING_ERROR = "com.samsung.android.knox.ucm.action.UCM_STARTED_PROVISIONING_ERROR";
-    public static final String ACTION_UCM_STARTED_PROVISIONING_SUCCESS = "com.samsung.android.knox.ucm.action.UCM_STARTED_PROVISIONING_SUCCESS";
+    public static final String ACTION_UCM_COMPLETED_PROVISIONING_CANCELLED =
+            "com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_CANCELLED";
+    public static final String ACTION_UCM_COMPLETED_PROVISIONING_ERROR =
+            "com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_ERROR";
+    public static final String ACTION_UCM_COMPLETED_PROVISIONING_SUCCESS =
+            "com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_SUCCESS";
+    public static final String ACTION_UCM_STARTED_PROVISIONING_CANCELLED =
+            "com.samsung.android.knox.ucm.action.UCM_STARTED_PROVISIONING_CANCELLED";
+    public static final String ACTION_UCM_STARTED_PROVISIONING_ERROR =
+            "com.samsung.android.knox.ucm.action.UCM_STARTED_PROVISIONING_ERROR";
+    public static final String ACTION_UCM_STARTED_PROVISIONING_SUCCESS =
+            "com.samsung.android.knox.ucm.action.UCM_STARTED_PROVISIONING_SUCCESS";
     public static final String CANCEL_DATA_LOCK = "CANCEL_DATA_LOCK";
     public static final String CLEAR_APP_DATA = "CLEAR_APP_DATA";
     public static final String CLEAR_RESET_PASSWORD_TOKEN = "CLEAR_RESET_PASSWORD_TOKEN";
@@ -41,7 +47,8 @@ public interface UcmConstants {
     public static final String IS_UCM_CREATION_CRYPTO_TYPE = "IS_UCM_CREATION_CRYPTO_TYPE";
     public static final String IS_UCM_INTENT_PROVISIONING = "IS_UCM_INTENT_PROVISIONING";
     public static final String IS_UCM_MANAGED_DEVICE = "IS_UCM_MANAGED_DEVICE";
-    public static final String IS_UCM_PROVISIONED_WITHOUT_LICENSE = "IS_UCM_PROVISIONED_WITHOUT_LICENSE";
+    public static final String IS_UCM_PROVISIONED_WITHOUT_LICENSE =
+            "IS_UCM_PROVISIONED_WITHOUT_LICENSE";
     public static final String IS_UCM_TRIAL_PERIOD = "IS_UCM_TRIAL_PERIOD";
     public static final String IS_UCM_WPCOD = "IS_UCM_WPCOD";
     public static final String KEY_CLIENT_LIBRARY_NAME = "KEY_CLIENT_LIBRARY_NAME";

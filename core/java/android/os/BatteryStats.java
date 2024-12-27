@@ -16,7 +16,6 @@ import android.hardware.usb.UsbManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.audio.common.AudioDeviceDescription;
 import android.net.NetworkPolicyManager;
-import android.os.BatteryStats;
 import android.security.Credentials;
 import android.telephony.CellSignalStrength;
 import android.telephony.ModemActivityInfo;
@@ -35,6 +34,7 @@ import android.util.SparseIntArray;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
 import android.view.SurfaceControl;
+
 import com.android.internal.R;
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.os.BatteryStatsHistoryIterator;
@@ -42,11 +42,13 @@ import com.android.internal.os.CpuScalingPolicies;
 import com.android.internal.os.PowerStats;
 import com.android.internal.telephony.DctConstants;
 import com.android.net.module.util.NetworkCapabilitiesUtils;
+
 import com.google.android.collect.Lists;
 import com.samsung.android.biometrics.SemBiometricConstants;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.wallpaperbackup.GenerateXML;
 import com.samsung.android.wifi.p2p.SemWifiP2pManager;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -180,12 +182,10 @@ public abstract class BatteryStats {
     private static final String SIGNAL_STRENGTH_TIME_DATA = "sgt";
     private static final String STATE_TIME_DATA = "st";
 
-    @Deprecated
-    public static final int STATS_CURRENT = 1;
+    @Deprecated public static final int STATS_CURRENT = 1;
     public static final int STATS_SINCE_CHARGED = 0;
 
-    @Deprecated
-    public static final int STATS_SINCE_UNPLUGGED = 2;
+    @Deprecated public static final int STATS_SINCE_UNPLUGGED = 2;
     public static final long STEP_LEVEL_INITIAL_MODE_MASK = 71776119061217280L;
     public static final int STEP_LEVEL_INITIAL_MODE_SHIFT = 48;
     public static final long STEP_LEVEL_LEVEL_MASK = 280375465082880L;
@@ -233,48 +233,270 @@ public abstract class BatteryStats {
     private final StringBuilder mFormatBuilder = new StringBuilder(32);
     private final Formatter mFormatter = new Formatter(this.mFormatBuilder);
     private static final String[] STAT_NAMES = {XmlTags.TAG_LEASEE, "c", XmlTags.ATTR_UID};
-    public static final long[] JOB_FRESHNESS_BUCKETS = {3600000, 7200000, 14400000, 28800000, Long.MAX_VALUE};
-    private static final String[] PROTECT_BATTERY_MODE_TYPES = {"off", "max", "longTerm", "basic", "adaptive"};
+    public static final long[] JOB_FRESHNESS_BUCKETS = {
+        3600000, 7200000, 14400000, 28800000, Long.MAX_VALUE
+    };
+    private static final String[] PROTECT_BATTERY_MODE_TYPES = {
+        "off", "max", "longTerm", "basic", "adaptive"
+    };
     public static final int NUM_PROTECT_BATTERY_MODE_TYPES = PROTECT_BATTERY_MODE_TYPES.length;
     static final String[] SCREEN_BRIGHTNESS_NAMES = {"dark", "dim", "medium", "light", "bright"};
     static final String[] SCREEN_BRIGHTNESS_SHORT_NAMES = {"0", "1", "2", "3", "4"};
-    static final String[] DATA_CONNECTION_NAMES = {"oos", "gprs", Context.SEM_EDGE_SERVICE, "umts", "cdma", "evdo_0", "evdo_A", "1xrtt", "hsdpa", "hsupa", "hspa", "iden", "evdo_b", "lte", "ehrpd", "hspap", "gsm", "td_scdma", "iwlan", "lte_ca", "nr", "emngcy", "other"};
+    static final String[] DATA_CONNECTION_NAMES = {
+        "oos",
+        "gprs",
+        Context.SEM_EDGE_SERVICE,
+        "umts",
+        "cdma",
+        "evdo_0",
+        "evdo_A",
+        "1xrtt",
+        "hsdpa",
+        "hsupa",
+        "hspa",
+        "iden",
+        "evdo_b",
+        "lte",
+        "ehrpd",
+        "hspap",
+        "gsm",
+        "td_scdma",
+        "iwlan",
+        "lte_ca",
+        "nr",
+        "emngcy",
+        "other"
+    };
     public static final int NUM_ALL_NETWORK_TYPES = getAllNetworkTypesCount();
     public static final int DATA_CONNECTION_EMERGENCY_SERVICE = NUM_ALL_NETWORK_TYPES + 1;
     public static final int DATA_CONNECTION_OTHER = NUM_ALL_NETWORK_TYPES + 2;
     public static final int NUM_DATA_CONNECTION_TYPES = NUM_ALL_NETWORK_TYPES + 3;
-    public static final String[] RADIO_ACCESS_TECHNOLOGY_NAMES = {"Other", DctConstants.RAT_NAME_LTE, "NR"};
-    static final String[] WIFI_SUPPL_STATE_NAMES = {"invalid", "disconn", "disabled", "inactive", "scanning", "authenticating", "associating", "associated", "4-way-handshake", "group-handshake", "completed", "dormant", "uninit"};
-    static final String[] WIFI_SUPPL_STATE_SHORT_NAMES = {"inv", "dsc", "dis", "inact", "scan", Context.AUTH_SERVICE, "ascing", "asced", "4-way", "group", "compl", "dorm", "uninit"};
-    public static final BitDescription[] HISTORY_STATE_DESCRIPTIONS = {new BitDescription(Integer.MIN_VALUE, "running", "r"), new BitDescription(1073741824, "wake_lock", "w"), new BitDescription(8388608, Context.SENSOR_SERVICE, XmlTags.TAG_SESSION), new BitDescription(536870912, "gps", "g"), new BitDescription(268435456, "wifi_full_lock", "Wl"), new BitDescription(134217728, "wifi_scan", "Ws"), new BitDescription(65536, "wifi_multicast", "Wm"), new BitDescription(67108864, "wifi_radio", "Wr"), new BitDescription(33554432, "mobile_radio", "Pr"), new BitDescription(2097152, "phone_scanning", "Psc"), new BitDescription(4194304, "audio", FullBackup.APK_TREE_TOKEN), new BitDescription(1048576, "screen", GnssSignalType.CODE_TYPE_S), new BitDescription(524288, BatteryManager.EXTRA_PLUGGED, "BP"), new BitDescription(262144, "screen_doze", "Sd"), new BitDescription(HistoryItem.STATE_DATA_CONNECTION_MASK, 9, "data_conn", "Pcn", DATA_CONNECTION_NAMES, DATA_CONNECTION_NAMES), new BitDescription(448, 6, "phone_state", "Pst", new String[]{"in", "out", "emergency", "off"}, new String[]{"in", "out", "em", "off"}), new BitDescription(56, 3, "phone_signal_strength", "Pss", new String[]{"none", "poor", "moderate", "good", "great"}, new String[]{"0", "1", "2", "3", "4"}), new BitDescription(7, 0, SemBiometricConstants.KEY_INDISPLAY_SENSOR_OPTICAL_BRIGHTNESS, "Sb", SCREEN_BRIGHTNESS_NAMES, SCREEN_BRIGHTNESS_SHORT_NAMES)};
-    public static final BitDescription[] HISTORY_STATE2_DESCRIPTIONS = {new BitDescription(Integer.MIN_VALUE, "power_save", "ps"), new BitDescription(1073741824, "video", "v"), new BitDescription(536870912, "wifi_running", "Ww"), new BitDescription(268435456, "wifi", GnssSignalType.CODE_TYPE_W), new BitDescription(134217728, "flashlight", "fl"), new BitDescription(100663296, 25, "device_idle", "di", new String[]{"off", "light", "full", "???"}, new String[]{"off", "light", "full", "???"}), new BitDescription(16777216, UsbManager.USB_FUNCTION_CHARGING, "ch"), new BitDescription(262144, "usb_data", "Ud"), new BitDescription(8388608, "phone_in_call", "Pcl"), new BitDescription(4194304, "bluetooth", XmlTags.TAG_BLOB), new BitDescription(112, 4, "wifi_signal_strength", "Wss", new String[]{"0", "1", "2", "3", "4"}, new String[]{"0", "1", "2", "3", "4"}), new BitDescription(15, 0, "wifi_suppl", "Wsp", WIFI_SUPPL_STATE_NAMES, WIFI_SUPPL_STATE_SHORT_NAMES), new BitDescription(2097152, Context.CAMERA_SERVICE, Credentials.CERTIFICATE_USAGE_CA), new BitDescription(1048576, "ble_scan", "bles"), new BitDescription(524288, "cellular_high_tx_power", "Chtp"), new BitDescription(384, 7, "gps_signal_quality", "Gss", new String[]{"poor", "good", "none"}, new String[]{"poor", "good", "none"}), new BitDescription(1536, 9, "nr_state", "nrs", new String[]{"none", NetworkPolicyManager.FIREWALL_CHAIN_NAME_RESTRICTED, "not_restricted", "connected"}, new String[]{"0", "1", "2", "3"})};
+    public static final String[] RADIO_ACCESS_TECHNOLOGY_NAMES = {
+        "Other", DctConstants.RAT_NAME_LTE, "NR"
+    };
+    static final String[] WIFI_SUPPL_STATE_NAMES = {
+        "invalid",
+        "disconn",
+        "disabled",
+        "inactive",
+        "scanning",
+        "authenticating",
+        "associating",
+        "associated",
+        "4-way-handshake",
+        "group-handshake",
+        "completed",
+        "dormant",
+        "uninit"
+    };
+    static final String[] WIFI_SUPPL_STATE_SHORT_NAMES = {
+        "inv",
+        "dsc",
+        "dis",
+        "inact",
+        "scan",
+        Context.AUTH_SERVICE,
+        "ascing",
+        "asced",
+        "4-way",
+        "group",
+        "compl",
+        "dorm",
+        "uninit"
+    };
+    public static final BitDescription[] HISTORY_STATE_DESCRIPTIONS = {
+        new BitDescription(Integer.MIN_VALUE, "running", "r"),
+        new BitDescription(1073741824, "wake_lock", "w"),
+        new BitDescription(8388608, Context.SENSOR_SERVICE, XmlTags.TAG_SESSION),
+        new BitDescription(536870912, "gps", "g"),
+        new BitDescription(268435456, "wifi_full_lock", "Wl"),
+        new BitDescription(134217728, "wifi_scan", "Ws"),
+        new BitDescription(65536, "wifi_multicast", "Wm"),
+        new BitDescription(67108864, "wifi_radio", "Wr"),
+        new BitDescription(33554432, "mobile_radio", "Pr"),
+        new BitDescription(2097152, "phone_scanning", "Psc"),
+        new BitDescription(4194304, "audio", FullBackup.APK_TREE_TOKEN),
+        new BitDescription(1048576, "screen", GnssSignalType.CODE_TYPE_S),
+        new BitDescription(524288, BatteryManager.EXTRA_PLUGGED, "BP"),
+        new BitDescription(262144, "screen_doze", "Sd"),
+        new BitDescription(
+                HistoryItem.STATE_DATA_CONNECTION_MASK,
+                9,
+                "data_conn",
+                "Pcn",
+                DATA_CONNECTION_NAMES,
+                DATA_CONNECTION_NAMES),
+        new BitDescription(
+                448,
+                6,
+                "phone_state",
+                "Pst",
+                new String[] {"in", "out", "emergency", "off"},
+                new String[] {"in", "out", "em", "off"}),
+        new BitDescription(
+                56,
+                3,
+                "phone_signal_strength",
+                "Pss",
+                new String[] {"none", "poor", "moderate", "good", "great"},
+                new String[] {"0", "1", "2", "3", "4"}),
+        new BitDescription(
+                7,
+                0,
+                SemBiometricConstants.KEY_INDISPLAY_SENSOR_OPTICAL_BRIGHTNESS,
+                "Sb",
+                SCREEN_BRIGHTNESS_NAMES,
+                SCREEN_BRIGHTNESS_SHORT_NAMES)
+    };
+    public static final BitDescription[] HISTORY_STATE2_DESCRIPTIONS = {
+        new BitDescription(Integer.MIN_VALUE, "power_save", "ps"),
+        new BitDescription(1073741824, "video", "v"),
+        new BitDescription(536870912, "wifi_running", "Ww"),
+        new BitDescription(268435456, "wifi", GnssSignalType.CODE_TYPE_W),
+        new BitDescription(134217728, "flashlight", "fl"),
+        new BitDescription(
+                100663296,
+                25,
+                "device_idle",
+                "di",
+                new String[] {"off", "light", "full", "???"},
+                new String[] {"off", "light", "full", "???"}),
+        new BitDescription(16777216, UsbManager.USB_FUNCTION_CHARGING, "ch"),
+        new BitDescription(262144, "usb_data", "Ud"),
+        new BitDescription(8388608, "phone_in_call", "Pcl"),
+        new BitDescription(4194304, "bluetooth", XmlTags.TAG_BLOB),
+        new BitDescription(
+                112,
+                4,
+                "wifi_signal_strength",
+                "Wss",
+                new String[] {"0", "1", "2", "3", "4"},
+                new String[] {"0", "1", "2", "3", "4"}),
+        new BitDescription(
+                15, 0, "wifi_suppl", "Wsp", WIFI_SUPPL_STATE_NAMES, WIFI_SUPPL_STATE_SHORT_NAMES),
+        new BitDescription(2097152, Context.CAMERA_SERVICE, Credentials.CERTIFICATE_USAGE_CA),
+        new BitDescription(1048576, "ble_scan", "bles"),
+        new BitDescription(524288, "cellular_high_tx_power", "Chtp"),
+        new BitDescription(
+                384,
+                7,
+                "gps_signal_quality",
+                "Gss",
+                new String[] {"poor", "good", "none"},
+                new String[] {"poor", "good", "none"}),
+        new BitDescription(
+                1536,
+                9,
+                "nr_state",
+                "nrs",
+                new String[] {
+                    "none",
+                    NetworkPolicyManager.FIREWALL_CHAIN_NAME_RESTRICTED,
+                    "not_restricted",
+                    "connected"
+                },
+                new String[] {"0", "1", "2", "3"})
+    };
     private static final String FOREGROUND_ACTIVITY_DATA = "fg";
-    public static final String[] HISTORY_EVENT_NAMES = {"null", "proc", FOREGROUND_ACTIVITY_DATA, GenerateXML.TOP, "sync", "wake_lock_in", "job", "user", "userfg", "conn", "active", "pkginst", "pkgunin", "alarm", Context.STATS_MANAGER, "pkginactive", "pkgactive", "tmpwhitelist", "screenwake", "wakeupap", "longwake", "est_capacity", "state"};
-    public static final String[] HISTORY_EVENT_CHECKIN_NAMES = {"Enl", "Epr", "Efg", "Etp", "Esy", "Ewl", "Ejb", "Eur", "Euf", "Ecn", "Eac", "Epi", "Epu", "Eal", "Est", "Eai", "Eaa", "Etw", "Esw", "Ewa", "Elw", "Eec", "Esc"};
-    private static final IntToString sUidToString = new IntToString() { // from class: android.os.BatteryStats$$ExternalSyntheticLambda0
-        @Override // android.os.BatteryStats.IntToString
-        public final String applyAsString(int i) {
-            return UserHandle.formatUid(i);
-        }
+    public static final String[] HISTORY_EVENT_NAMES = {
+        "null",
+        "proc",
+        FOREGROUND_ACTIVITY_DATA,
+        GenerateXML.TOP,
+        "sync",
+        "wake_lock_in",
+        "job",
+        "user",
+        "userfg",
+        "conn",
+        "active",
+        "pkginst",
+        "pkgunin",
+        "alarm",
+        Context.STATS_MANAGER,
+        "pkginactive",
+        "pkgactive",
+        "tmpwhitelist",
+        "screenwake",
+        "wakeupap",
+        "longwake",
+        "est_capacity",
+        "state"
     };
-    private static final IntToString sIntToString = new IntToString() { // from class: android.os.BatteryStats$$ExternalSyntheticLambda1
-        @Override // android.os.BatteryStats.IntToString
-        public final String applyAsString(int i) {
-            return Integer.toString(i);
-        }
+    public static final String[] HISTORY_EVENT_CHECKIN_NAMES = {
+        "Enl", "Epr", "Efg", "Etp", "Esy", "Ewl", "Ejb", "Eur", "Euf", "Ecn", "Eac", "Epi", "Epu",
+        "Eal", "Est", "Eai", "Eaa", "Etw", "Esw", "Ewa", "Elw", "Eec", "Esc"
     };
-    public static final IntToString[] HISTORY_EVENT_INT_FORMATTERS = {sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sIntToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sUidToString, sIntToString, sUidToString};
-    static final String[] WIFI_STATE_NAMES = {"off", "scanning", "no_net", "disconn", "sta", SemWifiP2pManager.TYPE_WIFI_P2P, "sta_p2p", "soft_ap"};
+    private static final IntToString sUidToString =
+            new IntToString() { // from class: android.os.BatteryStats$$ExternalSyntheticLambda0
+                @Override // android.os.BatteryStats.IntToString
+                public final String applyAsString(int i) {
+                    return UserHandle.formatUid(i);
+                }
+            };
+    private static final IntToString sIntToString =
+            new IntToString() { // from class: android.os.BatteryStats$$ExternalSyntheticLambda1
+                @Override // android.os.BatteryStats.IntToString
+                public final String applyAsString(int i) {
+                    return Integer.toString(i);
+                }
+            };
+    public static final IntToString[] HISTORY_EVENT_INT_FORMATTERS = {
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sIntToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sUidToString,
+        sIntToString,
+        sUidToString
+    };
+    static final String[] WIFI_STATE_NAMES = {
+        "off",
+        "scanning",
+        "no_net",
+        "disconn",
+        "sta",
+        SemWifiP2pManager.TYPE_WIFI_P2P,
+        "sta_p2p",
+        "soft_ap"
+    };
     public static final int[] STEP_LEVEL_MODES_OF_INTEREST = {7, 15, 11, 7, 7, 7, 7, 7, 15, 11};
     public static final int[] STEP_LEVEL_MODE_VALUES = {0, 4, 8, 1, 5, 2, 6, 3, 7, 11};
-    public static final String[] STEP_LEVEL_MODE_LABELS = {"screen off", "screen off power save", "screen off device idle", "screen on", "screen on power save", "screen doze", "screen doze power save", "screen doze-suspend", "screen doze-suspend power save", "screen doze-suspend device idle"};
+    public static final String[] STEP_LEVEL_MODE_LABELS = {
+        "screen off",
+        "screen off power save",
+        "screen off device idle",
+        "screen on",
+        "screen on power save",
+        "screen doze",
+        "screen doze power save",
+        "screen doze-suspend",
+        "screen doze-suspend power save",
+        "screen doze-suspend device idle"
+    };
     private static final String[] CHECKIN_POWER_COMPONENT_LABELS = new String[19];
 
     public interface BatteryStatsDumpHelper {
         BatteryUsageStats getBatteryUsageStats(BatteryStats batteryStats, boolean z);
     }
 
-    public static abstract class ControllerActivityCounter {
+    public abstract static class ControllerActivityCounter {
         public abstract LongCounter getIdleTimeCounter();
 
         public abstract LongCounter getMonitoredRailChargeConsumedMaMs();
@@ -290,7 +512,7 @@ public abstract class BatteryStats {
         public abstract LongCounter[] getTxTimeCounters();
     }
 
-    public static abstract class Counter {
+    public abstract static class Counter {
         public abstract int getCountLocked(int i);
 
         public abstract void logState(Printer printer, String str);
@@ -309,7 +531,7 @@ public abstract class BatteryStats {
         String applyAsString(int i);
     }
 
-    public static abstract class LongCounter {
+    public abstract static class LongCounter {
         public abstract long getCountForProcessState(int i);
 
         public abstract long getCountLocked(int i);
@@ -317,13 +539,13 @@ public abstract class BatteryStats {
         public abstract void logState(Printer printer, String str);
     }
 
-    public static abstract class LongCounterArray {
+    public abstract static class LongCounterArray {
         public abstract long[] getCountsLocked(int i);
 
         public abstract void logState(Printer printer, String str);
     }
 
-    public static abstract class ModemActivityCounter {
+    public abstract static class ModemActivityCounter {
         public abstract LongCounter getIdleTimeCounter();
 
         public abstract ModemTxRxCounter getLcModemActivityInfo();
@@ -333,7 +555,7 @@ public abstract class BatteryStats {
         public abstract LongCounter getSleepTimeCounter();
     }
 
-    public static abstract class ModemTxRxCounter {
+    public abstract static class ModemTxRxCounter {
         public abstract LongCounter getRxByteCounter();
 
         public abstract LongCounter getRxTimeCounter();
@@ -350,12 +572,10 @@ public abstract class BatteryStats {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RadioAccessTechnology {
-    }
+    public @interface RadioAccessTechnology {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StatName {
-    }
+    public @interface StatName {}
 
     public abstract boolean canReadTimeToFullNow();
 
@@ -723,10 +943,10 @@ public abstract class BatteryStats {
         CHECKIN_POWER_COMPONENT_LABELS[14] = "phone";
         CHECKIN_POWER_COMPONENT_LABELS[15] = "ambi";
         CHECKIN_POWER_COMPONENT_LABELS[16] = "idle";
-        DISPLAY_TRANSPORT_PRIORITIES = new int[]{4, 0, 5, 2, 1, 3, 8};
+        DISPLAY_TRANSPORT_PRIORITIES = new int[] {4, 0, 5, 2, 1, 3, 8};
     }
 
-    public static abstract class Timer {
+    public abstract static class Timer {
         public abstract int getCountLocked(int i);
 
         public abstract long getTimeSinceMarkLocked(long j);
@@ -802,7 +1022,7 @@ public abstract class BatteryStats {
         }
     }
 
-    public static abstract class Uid {
+    public abstract static class Uid {
         public static final int NUM_PROCESS_STATE = 7;
         public static final int NUM_WIFI_BATCHED_SCAN_BINS = 5;
         public static final int PROCESS_STATE_BACKGROUND = 3;
@@ -813,14 +1033,32 @@ public abstract class BatteryStats {
         public static final int PROCESS_STATE_NONEXISTENT = 7;
         public static final int PROCESS_STATE_TOP = 0;
         public static final int PROCESS_STATE_TOP_SLEEPING = 4;
-        static final String[] PROCESS_STATE_NAMES = {"Top", "Fg Service", "Foreground", "Background", "Top Sleeping", "Heavy Weight", "Cached"};
-        public static final String[] UID_PROCESS_TYPES = {"T", "FS", "F", GnssSignalType.CODE_TYPE_B, "TS", "HW", GnssSignalType.CODE_TYPE_C};
-        static final String[] USER_ACTIVITY_TYPES = {"other", "button", "touch", Context.ACCESSIBILITY_SERVICE, Context.ATTENTION_SERVICE, "faceDown", "deviceState"};
+        static final String[] PROCESS_STATE_NAMES = {
+            "Top",
+            "Fg Service",
+            "Foreground",
+            "Background",
+            "Top Sleeping",
+            "Heavy Weight",
+            "Cached"
+        };
+        public static final String[] UID_PROCESS_TYPES = {
+            "T", "FS", "F", GnssSignalType.CODE_TYPE_B, "TS", "HW", GnssSignalType.CODE_TYPE_C
+        };
+        static final String[] USER_ACTIVITY_TYPES = {
+            "other",
+            "button",
+            "touch",
+            Context.ACCESSIBILITY_SERVICE,
+            Context.ATTENTION_SERVICE,
+            "faceDown",
+            "deviceState"
+        };
         public static final int NUM_USER_ACTIVITY_TYPES = USER_ACTIVITY_TYPES.length;
 
-        public static abstract class Pkg {
+        public abstract static class Pkg {
 
-            public static abstract class Serv {
+            public abstract static class Serv {
                 public abstract int getLaunches(int i);
 
                 public abstract long getStartTime(long j, int i);
@@ -833,7 +1071,7 @@ public abstract class BatteryStats {
             public abstract ArrayMap<String, ? extends Counter> getWakeupAlarmStats();
         }
 
-        public static abstract class Proc {
+        public abstract static class Proc {
 
             public static class ExcessivePower {
                 public static final int TYPE_CPU = 2;
@@ -862,7 +1100,7 @@ public abstract class BatteryStats {
             public abstract boolean isActive();
         }
 
-        public static abstract class Sensor {
+        public abstract static class Sensor {
             public static final int GPS = -10000;
             public static final int actualGPS = -10001;
 
@@ -873,7 +1111,7 @@ public abstract class BatteryStats {
             public abstract Timer getSensorTime();
         }
 
-        public static abstract class Wakelock {
+        public abstract static class Wakelock {
             public abstract Timer getWakeTime(int i);
         }
 
@@ -1069,8 +1307,7 @@ public abstract class BatteryStats {
             public long mWakeStartMs;
             public long mWakeSumMs;
 
-            public Pid() {
-            }
+            public Pid() {}
         }
     }
 
@@ -1098,11 +1335,15 @@ public abstract class BatteryStats {
         }
 
         public int getInitModeAt(int index) {
-            return (int) ((this.mStepDurations[index] & BatteryStats.STEP_LEVEL_INITIAL_MODE_MASK) >> 48);
+            return (int)
+                    ((this.mStepDurations[index] & BatteryStats.STEP_LEVEL_INITIAL_MODE_MASK)
+                            >> 48);
         }
 
         public int getModModeAt(int index) {
-            return (int) ((this.mStepDurations[index] & BatteryStats.STEP_LEVEL_MODIFIED_MODE_MASK) >> 56);
+            return (int)
+                    ((this.mStepDurations[index] & BatteryStats.STEP_LEVEL_MODIFIED_MODE_MASK)
+                            >> 56);
         }
 
         private void appendHex(long val, int topOffset, StringBuilder out) {
@@ -1279,7 +1520,8 @@ public abstract class BatteryStats {
                         c3 = 4;
                     }
                 } else {
-                    this.mStepDurations[index] = (BatteryStats.STEP_LEVEL_TIME_MASK & duration) | out2;
+                    this.mStepDurations[index] =
+                            (BatteryStats.STEP_LEVEL_TIME_MASK & duration) | out2;
                 }
             }
             this.mStepDurations[index] = (BatteryStats.STEP_LEVEL_TIME_MASK & duration) | out2;
@@ -1307,7 +1549,8 @@ public abstract class BatteryStats {
             return total / numSteps;
         }
 
-        public long computeTimeEstimate(long modesOfInterest, long modeValues, int[] outNumOfInterest) {
+        public long computeTimeEstimate(
+                long modesOfInterest, long modeValues, int[] outNumOfInterest) {
             long[] steps = this.mStepDurations;
             int count = this.mNumStepDurations;
             if (count <= 0) {
@@ -1318,7 +1561,8 @@ public abstract class BatteryStats {
             for (int i = 0; i < count; i++) {
                 long initMode = (steps[i] & BatteryStats.STEP_LEVEL_INITIAL_MODE_MASK) >> 48;
                 long modMode = (steps[i] & BatteryStats.STEP_LEVEL_MODIFIED_MODE_MASK) >> 56;
-                if ((modMode & modesOfInterest) == 0 && (initMode & modesOfInterest) == modeValues) {
+                if ((modMode & modesOfInterest) == 0
+                        && (initMode & modesOfInterest) == modeValues) {
                     numOfInterest++;
                     total += steps[i] & BatteryStats.STEP_LEVEL_TIME_MASK;
                 }
@@ -1528,7 +1772,9 @@ public abstract class BatteryStats {
             int bits = in.readInt();
             this.processState = (PROC_STATE_MASK & bits) >>> PROC_STATE_SHIFT;
             if (this.processState >= 5) {
-                Slog.e(BatteryStats.TAG, "Unrecognized proc state in battery history: " + this.processState);
+                Slog.e(
+                        BatteryStats.TAG,
+                        "Unrecognized proc state in battery history: " + this.processState);
                 this.processState = 0;
             }
             if ((Integer.MIN_VALUE & bits) == 0) {
@@ -1539,7 +1785,9 @@ public abstract class BatteryStats {
         }
 
         public String formatForBatteryHistory() {
-            return UserHandle.formatUid(this.uid) + ": " + BatteryConsumer.processStateToString(this.processState);
+            return UserHandle.formatUid(this.uid)
+                    + ": "
+                    + BatteryConsumer.processStateToString(this.processState);
         }
     }
 
@@ -1723,15 +1971,37 @@ public abstract class BatteryStats {
 
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeLong(this.time);
-            int bat = (this.cmd & 255) | ((this.batteryLevel << 8) & 65280) | ((this.batteryStatus << 16) & 983040) | ((this.batteryHealth << 20) & SurfaceControl.NO_REMOTECONTROL) | ((this.batteryPlugType << 24) & 251658240) | (this.wakelockTag != null ? 268435456 : 0) | (this.wakeReasonTag != null ? 536870912 : 0) | (this.eventCode != 0 ? 1073741824 : 0);
+            int bat =
+                    (this.cmd & 255)
+                            | ((this.batteryLevel << 8) & 65280)
+                            | ((this.batteryStatus << 16) & 983040)
+                            | ((this.batteryHealth << 20) & SurfaceControl.NO_REMOTECONTROL)
+                            | ((this.batteryPlugType << 24) & 251658240)
+                            | (this.wakelockTag != null ? 268435456 : 0)
+                            | (this.wakeReasonTag != null ? 536870912 : 0)
+                            | (this.eventCode != 0 ? 1073741824 : 0);
             dest.writeInt(bat);
             int bat2 = (this.batteryTemperature & 65535) | ((this.batteryVoltage << 16) & (-65536));
             dest.writeInt(bat2);
-            int bat3 = (this.current & 65535) | ((this.ap_temp << 16) & Spanned.SPAN_PRIORITY) | ((this.pa_temp << 24) & (-16777216));
+            int bat3 =
+                    (this.current & 65535)
+                            | ((this.ap_temp << 16) & Spanned.SPAN_PRIORITY)
+                            | ((this.pa_temp << 24) & (-16777216));
             dest.writeInt(bat3);
-            int bat4 = ((this.sub_batt_temp << 8) & 65280) | ((this.skin_temp << 16) & Spanned.SPAN_PRIORITY) | ((this.wifi_ap << 25) & 33554432) | ((this.otgOnline << 26) & 67108864) | ((this.highSpeakerVolume << 27) & 134217728) | ((this.subScreenOn << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN) & 268435456) | ((this.subScreenDoze << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT) & 536870912);
+            int bat4 =
+                    ((this.sub_batt_temp << 8) & 65280)
+                            | ((this.skin_temp << 16) & Spanned.SPAN_PRIORITY)
+                            | ((this.wifi_ap << 25) & 33554432)
+                            | ((this.otgOnline << 26) & 67108864)
+                            | ((this.highSpeakerVolume << 27) & 134217728)
+                            | ((this.subScreenOn << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN)
+                                    & 268435456)
+                            | ((this.subScreenDoze << SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT)
+                                    & 536870912);
             dest.writeInt(bat4);
-            int bat5 = (this.batterySecTxShareEvent & 16777215) | ((this.batterySecOnline << 24) & (-16777216));
+            int bat5 =
+                    (this.batterySecTxShareEvent & 16777215)
+                            | ((this.batterySecOnline << 24) & (-16777216));
             dest.writeInt(bat5);
             dest.writeInt(this.batterySecCurrentEvent);
             dest.writeInt(this.batterySecEvent);
@@ -1922,21 +2192,57 @@ public abstract class BatteryStats {
         }
 
         public boolean sameNonEvent(HistoryItem o) {
-            return this.batteryLevel == o.batteryLevel && this.batteryStatus == o.batteryStatus && this.batteryHealth == o.batteryHealth && this.batteryPlugType == o.batteryPlugType && this.batteryTemperature == o.batteryTemperature && this.batteryVoltage == o.batteryVoltage && this.current == o.current && this.ap_temp == o.ap_temp && this.pa_temp == o.pa_temp && this.sub_batt_temp == o.sub_batt_temp && this.skin_temp == o.skin_temp && this.wifi_ap == o.wifi_ap && this.otgOnline == o.otgOnline && this.highSpeakerVolume == o.highSpeakerVolume && this.subScreenOn == o.subScreenOn && this.subScreenDoze == o.subScreenDoze && this.batterySecTxShareEvent == o.batterySecTxShareEvent && this.batterySecOnline == o.batterySecOnline && this.batterySecCurrentEvent == o.batterySecCurrentEvent && this.batterySecEvent == o.batterySecEvent && this.protectBatteryMode == o.protectBatteryMode && this.batteryChargeUah == o.batteryChargeUah && this.modemRailChargeMah == o.modemRailChargeMah && this.wifiRailChargeMah == o.wifiRailChargeMah && this.states == o.states && this.states2 == o.states2 && this.currentTime == o.currentTime;
+            return this.batteryLevel == o.batteryLevel
+                    && this.batteryStatus == o.batteryStatus
+                    && this.batteryHealth == o.batteryHealth
+                    && this.batteryPlugType == o.batteryPlugType
+                    && this.batteryTemperature == o.batteryTemperature
+                    && this.batteryVoltage == o.batteryVoltage
+                    && this.current == o.current
+                    && this.ap_temp == o.ap_temp
+                    && this.pa_temp == o.pa_temp
+                    && this.sub_batt_temp == o.sub_batt_temp
+                    && this.skin_temp == o.skin_temp
+                    && this.wifi_ap == o.wifi_ap
+                    && this.otgOnline == o.otgOnline
+                    && this.highSpeakerVolume == o.highSpeakerVolume
+                    && this.subScreenOn == o.subScreenOn
+                    && this.subScreenDoze == o.subScreenDoze
+                    && this.batterySecTxShareEvent == o.batterySecTxShareEvent
+                    && this.batterySecOnline == o.batterySecOnline
+                    && this.batterySecCurrentEvent == o.batterySecCurrentEvent
+                    && this.batterySecEvent == o.batterySecEvent
+                    && this.protectBatteryMode == o.protectBatteryMode
+                    && this.batteryChargeUah == o.batteryChargeUah
+                    && this.modemRailChargeMah == o.modemRailChargeMah
+                    && this.wifiRailChargeMah == o.wifiRailChargeMah
+                    && this.states == o.states
+                    && this.states2 == o.states2
+                    && this.currentTime == o.currentTime;
         }
 
         public boolean same(HistoryItem o) {
             if (!sameNonEvent(o) || this.eventCode != o.eventCode) {
                 return false;
             }
-            if (this.wakelockTag != o.wakelockTag && (this.wakelockTag == null || o.wakelockTag == null || !this.wakelockTag.equals(o.wakelockTag))) {
+            if (this.wakelockTag != o.wakelockTag
+                    && (this.wakelockTag == null
+                            || o.wakelockTag == null
+                            || !this.wakelockTag.equals(o.wakelockTag))) {
                 return false;
             }
-            if (this.wakeReasonTag != o.wakeReasonTag && (this.wakeReasonTag == null || o.wakeReasonTag == null || !this.wakeReasonTag.equals(o.wakeReasonTag))) {
+            if (this.wakeReasonTag != o.wakeReasonTag
+                    && (this.wakeReasonTag == null
+                            || o.wakeReasonTag == null
+                            || !this.wakeReasonTag.equals(o.wakeReasonTag))) {
                 return false;
             }
             if (this.eventTag != o.eventTag) {
-                return (this.eventTag == null || o.eventTag == null || !this.eventTag.equals(o.eventTag)) ? false : true;
+                return (this.eventTag == null
+                                || o.eventTag == null
+                                || !this.eventTag.equals(o.eventTag))
+                        ? false
+                        : true;
             }
             return true;
         }
@@ -1967,8 +2273,11 @@ public abstract class BatteryStats {
                 return true;
             }
             if ((code & 16384) != 0) {
-                HashMap<String, SparseIntArray> active2 = this.mActiveEvents[code & HistoryItem.EVENT_TYPE_MASK];
-                if (active2 == null || (uids = active2.get(name)) == null || (idx = uids.indexOfKey(uid)) < 0) {
+                HashMap<String, SparseIntArray> active2 =
+                        this.mActiveEvents[code & HistoryItem.EVENT_TYPE_MASK];
+                if (active2 == null
+                        || (uids = active2.get(name)) == null
+                        || (idx = uids.indexOfKey(uid)) < 0) {
                     return false;
                 }
                 uids.removeAt(idx);
@@ -2008,7 +2317,13 @@ public abstract class BatteryStats {
             this.shortValues = null;
         }
 
-        public BitDescription(int mask, int shift, String name, String shortName, String[] values, String[] shortValues) {
+        public BitDescription(
+                int mask,
+                int shift,
+                String name,
+                String shortName,
+                String[] values,
+                String[] shortValues) {
             this.mask = mask;
             this.shift = shift;
             this.name = name;
@@ -2021,7 +2336,11 @@ public abstract class BatteryStats {
     public static int getAllNetworkTypesCount() {
         int count = TelephonyManager.getAllNetworkTypes().length;
         if (DATA_CONNECTION_NAMES.length != count + 3) {
-            throw new IllegalStateException("DATA_CONNECTION_NAMES length does not match network type count. Expected: " + (count + 3) + ", actual:" + DATA_CONNECTION_NAMES.length);
+            throw new IllegalStateException(
+                    "DATA_CONNECTION_NAMES length does not match network type count. Expected: "
+                            + (count + 3)
+                            + ", actual:"
+                            + DATA_CONNECTION_NAMES.length);
         }
         return count;
     }
@@ -2140,7 +2459,13 @@ public abstract class BatteryStats {
         return 0L;
     }
 
-    private static final String printWakeLock(StringBuilder sb, Timer timer, long elapsedRealtimeUs, String name, int which, String linePrefix) {
+    private static final String printWakeLock(
+            StringBuilder sb,
+            Timer timer,
+            long elapsedRealtimeUs,
+            String name,
+            int which,
+            String linePrefix) {
         if (timer != null) {
             long totalTimeMillis = computeWakeLock(timer, elapsedRealtimeUs, which);
             int count = timer.getCountLocked(which);
@@ -2181,7 +2506,14 @@ public abstract class BatteryStats {
         return linePrefix;
     }
 
-    private static final boolean printTimer(PrintWriter pw, StringBuilder sb, Timer timer, long rawRealtimeUs, int which, String prefix, String type) {
+    private static final boolean printTimer(
+            PrintWriter pw,
+            StringBuilder sb,
+            Timer timer,
+            long rawRealtimeUs,
+            int which,
+            String prefix,
+            String type) {
         if (timer != null) {
             long totalTimeMs = (timer.getTotalTimeLocked(rawRealtimeUs, which) + 500) / 1000;
             int count = timer.getCountLocked(which);
@@ -2217,7 +2549,13 @@ public abstract class BatteryStats {
         return false;
     }
 
-    private static final String printWakeLockCheckin(StringBuilder sb, Timer timer, long elapsedRealtimeUs, String name, int which, String linePrefix) {
+    private static final String printWakeLockCheckin(
+            StringBuilder sb,
+            Timer timer,
+            long elapsedRealtimeUs,
+            String name,
+            int which,
+            String linePrefix) {
         long totalTimeMicros = 0;
         int count = 0;
         long max = 0;
@@ -2247,7 +2585,8 @@ public abstract class BatteryStats {
         return ",";
     }
 
-    private static final void dumpLineHeader(PrintWriter pw, int uid, String category, String type) {
+    private static final void dumpLineHeader(
+            PrintWriter pw, int uid, String category, String type) {
         pw.print(9);
         pw.print(',');
         pw.print(uid);
@@ -2257,7 +2596,8 @@ public abstract class BatteryStats {
         pw.print(type);
     }
 
-    private static final void dumpLine(PrintWriter pw, int uid, String category, String type, Object... args) {
+    private static final void dumpLine(
+            PrintWriter pw, int uid, String category, String type, Object... args) {
         dumpLineHeader(pw, uid, category, type);
         for (Object arg : args) {
             pw.print(',');
@@ -2266,7 +2606,14 @@ public abstract class BatteryStats {
         pw.println();
     }
 
-    private static final void dumpTimer(PrintWriter pw, int uid, String category, String type, Timer timer, long rawRealtime, int which) {
+    private static final void dumpTimer(
+            PrintWriter pw,
+            int uid,
+            String category,
+            String type,
+            Timer timer,
+            long rawRealtime,
+            int which) {
         if (timer != null) {
             long totalTime = roundUsToMs(timer.getTotalTimeLocked(rawRealtime, which));
             int count = timer.getCountLocked(which);
@@ -2276,7 +2623,8 @@ public abstract class BatteryStats {
         }
     }
 
-    private static void dumpTimer(ProtoOutputStream proto, long fieldId, Timer timer, long rawRealtimeUs, int which) {
+    private static void dumpTimer(
+            ProtoOutputStream proto, long fieldId, Timer timer, long rawRealtimeUs, int which) {
         if (timer == null) {
             return;
         }
@@ -2285,7 +2633,11 @@ public abstract class BatteryStats {
         long maxDurationMs = timer.getMaxDurationMsLocked(rawRealtimeUs / 1000);
         long curDurationMs = timer.getCurrentDurationMsLocked(rawRealtimeUs / 1000);
         long totalDurationMs = timer.getTotalDurationMsLocked(rawRealtimeUs / 1000);
-        if (timeMs != 0 || count != 0 || maxDurationMs != -1 || curDurationMs != -1 || totalDurationMs != -1) {
+        if (timeMs != 0
+                || count != 0
+                || maxDurationMs != -1
+                || curDurationMs != -1
+                || totalDurationMs != -1) {
             long token = proto.start(fieldId);
             proto.write(1112396529665L, timeMs);
             proto.write(1112396529666L, count);
@@ -2306,7 +2658,10 @@ public abstract class BatteryStats {
         if (counter == null) {
             return false;
         }
-        if (counter.getIdleTimeCounter().getCountLocked(which) != 0 || counter.getRxTimeCounter().getCountLocked(which) != 0 || counter.getPowerCounter().getCountLocked(which) != 0 || counter.getMonitoredRailChargeConsumedMaMs().getCountLocked(which) != 0) {
+        if (counter.getIdleTimeCounter().getCountLocked(which) != 0
+                || counter.getRxTimeCounter().getCountLocked(which) != 0
+                || counter.getPowerCounter().getCountLocked(which) != 0
+                || counter.getMonitoredRailChargeConsumedMaMs().getCountLocked(which) != 0) {
             return true;
         }
         for (LongCounter c : counter.getTxTimeCounters()) {
@@ -2317,7 +2672,13 @@ public abstract class BatteryStats {
         return false;
     }
 
-    private static final void dumpControllerActivityLine(PrintWriter pw, int uid, String category, String type, ControllerActivityCounter counter, int which) {
+    private static final void dumpControllerActivityLine(
+            PrintWriter pw,
+            int uid,
+            String category,
+            String type,
+            ControllerActivityCounter counter,
+            int which) {
         if (!controllerActivityHasData(counter, which)) {
             return;
         }
@@ -2337,7 +2698,8 @@ public abstract class BatteryStats {
         pw.println();
     }
 
-    private static void dumpControllerActivityProto(ProtoOutputStream proto, long fieldId, ControllerActivityCounter counter, int which) {
+    private static void dumpControllerActivityProto(
+            ProtoOutputStream proto, long fieldId, ControllerActivityCounter counter, int which) {
         if (!controllerActivityHasData(counter, which)) {
             return;
         }
@@ -2345,7 +2707,9 @@ public abstract class BatteryStats {
         proto.write(1112396529665L, counter.getIdleTimeCounter().getCountLocked(which));
         proto.write(1112396529666L, counter.getRxTimeCounter().getCountLocked(which));
         proto.write(1112396529667L, counter.getPowerCounter().getCountLocked(which) / 3600000.0d);
-        proto.write(1103806595077L, counter.getMonitoredRailChargeConsumedMaMs().getCountLocked(which) / 3600000.0d);
+        proto.write(
+                1103806595077L,
+                counter.getMonitoredRailChargeConsumedMaMs().getCountLocked(which) / 3600000.0d);
         LongCounter[] txCounters = counter.getTxTimeCounters();
         for (int i = 0; i < txCounters.length; i++) {
             LongCounter c = txCounters[i];
@@ -2357,14 +2721,26 @@ public abstract class BatteryStats {
         proto.end(cToken);
     }
 
-    private final void printControllerActivityIfInteresting(PrintWriter pw, StringBuilder sb, String prefix, String controllerName, ControllerActivityCounter counter, int which) {
+    private final void printControllerActivityIfInteresting(
+            PrintWriter pw,
+            StringBuilder sb,
+            String prefix,
+            String controllerName,
+            ControllerActivityCounter counter,
+            int which) {
         if (controllerActivityHasData(counter, which)) {
             printControllerActivity(pw, sb, prefix, controllerName, counter, which);
         }
     }
 
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
-    private final void printControllerActivity(PrintWriter pw, StringBuilder sb, String prefix, String controllerName, ControllerActivityCounter counter, int which) {
+    private final void printControllerActivity(
+            PrintWriter pw,
+            StringBuilder sb,
+            String prefix,
+            String controllerName,
+            ControllerActivityCounter counter,
+            int which) {
         long rxTimeMs;
         String str;
         int i;
@@ -2376,8 +2752,10 @@ public abstract class BatteryStats {
         long idleTimeMs = counter.getIdleTimeCounter().getCountLocked(which);
         long rxTimeMs2 = counter.getRxTimeCounter().getCountLocked(which);
         long powerDrainMaMs2 = counter.getPowerCounter().getCountLocked(which);
-        long monitoredRailChargeConsumedMaMs = counter.getMonitoredRailChargeConsumedMaMs().getCountLocked(which);
-        long totalControllerActivityTimeMs = computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which) / 1000;
+        long monitoredRailChargeConsumedMaMs =
+                counter.getMonitoredRailChargeConsumedMaMs().getCountLocked(which);
+        long totalControllerActivityTimeMs =
+                computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which) / 1000;
         long totalTxTimeMs = 0;
         LongCounter[] txTimeCounters = counter.getTxTimeCounters();
         int length = txTimeCounters.length;
@@ -2404,7 +2782,8 @@ public abstract class BatteryStats {
             sb.append(formatRatioLocked(scanTimeMs, totalControllerActivityTimeMs));
             sb.append(NavigationBarInflaterView.KEY_CODE_END);
             pw.println(sb.toString());
-            long scanTimeMs2 = totalControllerActivityTimeMs - ((idleTimeMs + rxTimeMs2) + totalTxTimeMs);
+            long scanTimeMs2 =
+                    totalControllerActivityTimeMs - ((idleTimeMs + rxTimeMs2) + totalTxTimeMs);
             sb.setLength(0);
             sb.append(prefix);
             sb.append("     ");
@@ -2474,10 +2853,17 @@ public abstract class BatteryStats {
         }
         switch (c) {
             case 0:
-                powerLevel = new String[]{"   less than 0dBm: ", "   0dBm to 8dBm: ", "   8dBm to 15dBm: ", "   15dBm to 20dBm: ", "   above 20dBm: "};
+                powerLevel =
+                        new String[] {
+                            "   less than 0dBm: ",
+                            "   0dBm to 8dBm: ",
+                            "   8dBm to 15dBm: ",
+                            "   15dBm to 20dBm: ",
+                            "   above 20dBm: "
+                        };
                 break;
             default:
-                powerLevel = new String[]{"[0]", "[1]", "[2]", "[3]", "[4]"};
+                powerLevel = new String[] {"[0]", "[1]", "[2]", "[3]", "[4]"};
                 break;
         }
         int numTxLvls = Math.min(counter.getTxTimeCounters().length, powerLevel.length);
@@ -2523,22 +2909,38 @@ public abstract class BatteryStats {
             sb.append(prefix);
             sb.append("     ");
             sb.append(controllerName);
-            sb.append(" Monitored rail energy drain: ").append(new DecimalFormat("#.##").format(monitoredRailChargeConsumedMaMs / 3600000.0d));
+            sb.append(" Monitored rail energy drain: ")
+                    .append(
+                            new DecimalFormat("#.##")
+                                    .format(monitoredRailChargeConsumedMaMs / 3600000.0d));
             sb.append(" mAh");
             pw.println(sb.toString());
         }
     }
 
-    private void printCellularPerRatBreakdown(PrintWriter pw, StringBuilder sb, String prefix, long rawRealtimeMs) {
+    private void printCellularPerRatBreakdown(
+            PrintWriter pw, StringBuilder sb, String prefix, long rawRealtimeMs) {
         String[] nrFrequencyRangeDescription;
         String signalStrengthHeader;
         long j = rawRealtimeMs;
         String allFrequenciesHeader = "    All frequencies:\n";
-        String[] nrFrequencyRangeDescription2 = {"    Unknown frequency:\n", "    Low frequency (less than 1GHz):\n", "    Middle frequency (1GHz to 3GHz):\n", "    High frequency (3GHz to 6GHz):\n", "    Mmwave frequency (greater than 6GHz):\n"};
+        String[] nrFrequencyRangeDescription2 = {
+            "    Unknown frequency:\n",
+            "    Low frequency (less than 1GHz):\n",
+            "    Middle frequency (1GHz to 3GHz):\n",
+            "    High frequency (3GHz to 6GHz):\n",
+            "    Mmwave frequency (greater than 6GHz):\n"
+        };
         String signalStrengthHeader2 = "      Signal Strength Time:\n";
         String txHeader = "      Tx Time:\n";
         String rxHeader = "      Rx Time: ";
-        String[] signalStrengthDescription = {"        unknown:  ", "        poor:     ", "        moderate: ", "        good:     ", "        great:    "};
+        String[] signalStrengthDescription = {
+            "        unknown:  ",
+            "        poor:     ",
+            "        moderate: ",
+            "        good:     ",
+            "        great:    "
+        };
         int rat = 0;
         long totalActiveTimesMs = getMobileRadioActiveTime(j * 1000, 0) / 1000;
         sb.setLength(0);
@@ -2614,7 +3016,8 @@ public abstract class BatteryStats {
                 sb.append(prefix);
                 sb.append("      Tx Time:\n");
                 for (int strength2 = 0; strength2 < numSignalStrength3; strength2++) {
-                    long timeMs2 = getActiveTxRadioDurationMs(rat4, freqLvl3, strength2, rawRealtimeMs);
+                    long timeMs2 =
+                            getActiveTxRadioDurationMs(rat4, freqLvl3, strength2, rawRealtimeMs);
                     if (timeMs2 > 0) {
                         sb.append(prefix);
                         sb.append(signalStrengthDescription[strength2]);
@@ -2672,7 +3075,13 @@ public abstract class BatteryStats {
         }
     }
 
-    public final void dumpCheckinLocked(Context context, PrintWriter printWriter, int i, int i2, boolean z, BatteryStatsDumpHelper batteryStatsDumpHelper) {
+    public final void dumpCheckinLocked(
+            Context context,
+            PrintWriter printWriter,
+            int i,
+            int i2,
+            boolean z,
+            BatteryStatsDumpHelper batteryStatsDumpHelper) {
         Integer num;
         SparseArray<? extends Uid> sparseArray;
         String str;
@@ -2726,7 +3135,14 @@ public abstract class BatteryStats {
         int i7 = i;
         Integer num3 = 0;
         if (i7 != 0) {
-            dumpLine(printWriter, 0, STAT_NAMES[i7], Notification.CATEGORY_ERROR, "ERROR: BatteryStats.dumpCheckin called for which type " + i7 + " but only STATS_SINCE_CHARGED is supported.");
+            dumpLine(
+                    printWriter,
+                    0,
+                    STAT_NAMES[i7],
+                    Notification.CATEGORY_ERROR,
+                    "ERROR: BatteryStats.dumpCheckin called for which type "
+                            + i7
+                            + " but only STATS_SINCE_CHARGED is supported.");
             return;
         }
         long uptimeMillis = SystemClock.uptimeMillis() * 1000;
@@ -2735,8 +3151,10 @@ public abstract class BatteryStats {
         long batteryUptime = batteryStats.getBatteryUptime(uptimeMillis);
         long computeBatteryUptime = batteryStats.computeBatteryUptime(uptimeMillis, i7);
         long computeBatteryRealtime = batteryStats.computeBatteryRealtime(j14, i7);
-        long computeBatteryScreenOffUptime = batteryStats.computeBatteryScreenOffUptime(uptimeMillis, i7);
-        long computeBatteryScreenOffRealtime = batteryStats.computeBatteryScreenOffRealtime(j14, i7);
+        long computeBatteryScreenOffUptime =
+                batteryStats.computeBatteryScreenOffUptime(uptimeMillis, i7);
+        long computeBatteryScreenOffRealtime =
+                batteryStats.computeBatteryScreenOffRealtime(j14, i7);
         long computeRealtime = batteryStats.computeRealtime(j14, i7);
         long computeUptime = batteryStats.computeUptime(uptimeMillis, i7);
         long screenOnTime = batteryStats.getScreenOnTime(j14, i7);
@@ -2758,7 +3176,23 @@ public abstract class BatteryStats {
         SparseArray<? extends Uid> uidStats = getUidStats();
         int size = uidStats.size();
         String str9 = STAT_NAMES[i7];
-        dumpLine(printWriter, 0, str9, BATTERY_DATA, i7 == 0 ? Integer.valueOf(getStartCount()) : "N/A", Long.valueOf(computeBatteryRealtime / 1000), Long.valueOf(computeBatteryUptime / 1000), Long.valueOf(computeRealtime / 1000), Long.valueOf(computeUptime / 1000), Long.valueOf(getStartClockTime()), Long.valueOf(computeBatteryScreenOffRealtime / 1000), Long.valueOf(computeBatteryScreenOffUptime / 1000), Integer.valueOf(getEstimatedBatteryCapacity()), Integer.valueOf(getMinLearnedBatteryCapacity()), Integer.valueOf(getMaxLearnedBatteryCapacity()), Long.valueOf(screenDozeTime / 1000));
+        dumpLine(
+                printWriter,
+                0,
+                str9,
+                BATTERY_DATA,
+                i7 == 0 ? Integer.valueOf(getStartCount()) : "N/A",
+                Long.valueOf(computeBatteryRealtime / 1000),
+                Long.valueOf(computeBatteryUptime / 1000),
+                Long.valueOf(computeRealtime / 1000),
+                Long.valueOf(computeUptime / 1000),
+                Long.valueOf(getStartClockTime()),
+                Long.valueOf(computeBatteryScreenOffRealtime / 1000),
+                Long.valueOf(computeBatteryScreenOffUptime / 1000),
+                Integer.valueOf(getEstimatedBatteryCapacity()),
+                Integer.valueOf(getMinLearnedBatteryCapacity()),
+                Integer.valueOf(getMaxLearnedBatteryCapacity()),
+                Long.valueOf(screenDozeTime / 1000));
         int i8 = 0;
         long j15 = 0;
         long j16 = 0;
@@ -2788,18 +3222,79 @@ public abstract class BatteryStats {
             i8++;
             uidStats = sparseArray3;
         }
-        dumpLine(printWriter, 0, str9, GLOBAL_NETWORK_DATA, Long.valueOf(batteryStats.getNetworkActivityBytes(0, i7)), Long.valueOf(batteryStats.getNetworkActivityBytes(1, i7)), Long.valueOf(batteryStats.getNetworkActivityBytes(2, i7)), Long.valueOf(batteryStats.getNetworkActivityBytes(3, i7)), Long.valueOf(batteryStats.getNetworkActivityPackets(0, i7)), Long.valueOf(batteryStats.getNetworkActivityPackets(1, i7)), Long.valueOf(batteryStats.getNetworkActivityPackets(2, i7)), Long.valueOf(batteryStats.getNetworkActivityPackets(3, i7)), Long.valueOf(batteryStats.getNetworkActivityBytes(4, i7)), Long.valueOf(batteryStats.getNetworkActivityBytes(5, i7)));
+        dumpLine(
+                printWriter,
+                0,
+                str9,
+                GLOBAL_NETWORK_DATA,
+                Long.valueOf(batteryStats.getNetworkActivityBytes(0, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityBytes(1, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityBytes(2, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityBytes(3, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityPackets(0, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityPackets(1, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityPackets(2, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityPackets(3, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityBytes(4, i7)),
+                Long.valueOf(batteryStats.getNetworkActivityBytes(5, i7)));
         SparseArray<? extends Uid> sparseArray4 = uidStats;
         long j17 = batteryUptime;
         int i10 = size;
         long j18 = elapsedRealtime;
-        dumpControllerActivityLine(printWriter, 0, str9, GLOBAL_MODEM_CONTROLLER_DATA, getModemControllerActivity(), i);
-        dumpLine(printWriter, 0, str9, GLOBAL_WIFI_DATA, Long.valueOf(batteryStats.getWifiOnTime(j14, i7) / 1000), Long.valueOf(batteryStats.getGlobalWifiRunningTime(j14, i7) / 1000), num3, num3, num3);
-        dumpControllerActivityLine(printWriter, 0, str9, GLOBAL_WIFI_CONTROLLER_DATA, getWifiControllerActivity(), i);
-        dumpControllerActivityLine(printWriter, 0, str9, GLOBAL_BLUETOOTH_CONTROLLER_DATA, getBluetoothControllerActivity(), i);
+        dumpControllerActivityLine(
+                printWriter,
+                0,
+                str9,
+                GLOBAL_MODEM_CONTROLLER_DATA,
+                getModemControllerActivity(),
+                i);
+        dumpLine(
+                printWriter,
+                0,
+                str9,
+                GLOBAL_WIFI_DATA,
+                Long.valueOf(batteryStats.getWifiOnTime(j14, i7) / 1000),
+                Long.valueOf(batteryStats.getGlobalWifiRunningTime(j14, i7) / 1000),
+                num3,
+                num3,
+                num3);
+        dumpControllerActivityLine(
+                printWriter, 0, str9, GLOBAL_WIFI_CONTROLLER_DATA, getWifiControllerActivity(), i);
+        dumpControllerActivityLine(
+                printWriter,
+                0,
+                str9,
+                GLOBAL_BLUETOOTH_CONTROLLER_DATA,
+                getBluetoothControllerActivity(),
+                i);
         long j19 = j14;
         String str10 = str9;
-        dumpLine(printWriter, 0, str10, MISC_DATA, Long.valueOf(screenOnTime / 1000), Long.valueOf(phoneOnTime / 1000), Long.valueOf(j16 / 1000), Long.valueOf(j15 / 1000), Long.valueOf(batteryStats.getMobileRadioActiveTime(j19, i7) / 1000), Long.valueOf(batteryStats.getMobileRadioActiveAdjustedTime(i7) / 1000), Long.valueOf(interactiveTime / 1000), Long.valueOf(powerSaveModeEnabledTime / 1000), Integer.valueOf(numConnectivityChange), Long.valueOf(deviceIdleModeTime2 / 1000), Integer.valueOf(batteryStats.getDeviceIdleModeCount(2, i7)), Long.valueOf(deviceIdlingTime2 / 1000), Integer.valueOf(batteryStats.getDeviceIdlingCount(2, i7)), Integer.valueOf(batteryStats.getMobileRadioActiveCount(i7)), Long.valueOf(batteryStats.getMobileRadioActiveUnknownTime(i7) / 1000), Long.valueOf(deviceIdleModeTime / 1000), Integer.valueOf(batteryStats.getDeviceIdleModeCount(1, i7)), Long.valueOf(deviceIdlingTime / 1000), Integer.valueOf(batteryStats.getDeviceIdlingCount(1, i7)), Long.valueOf(batteryStats.getLongestDeviceIdleModeTime(1)), Long.valueOf(batteryStats.getLongestDeviceIdleModeTime(2)));
+        dumpLine(
+                printWriter,
+                0,
+                str10,
+                MISC_DATA,
+                Long.valueOf(screenOnTime / 1000),
+                Long.valueOf(phoneOnTime / 1000),
+                Long.valueOf(j16 / 1000),
+                Long.valueOf(j15 / 1000),
+                Long.valueOf(batteryStats.getMobileRadioActiveTime(j19, i7) / 1000),
+                Long.valueOf(batteryStats.getMobileRadioActiveAdjustedTime(i7) / 1000),
+                Long.valueOf(interactiveTime / 1000),
+                Long.valueOf(powerSaveModeEnabledTime / 1000),
+                Integer.valueOf(numConnectivityChange),
+                Long.valueOf(deviceIdleModeTime2 / 1000),
+                Integer.valueOf(batteryStats.getDeviceIdleModeCount(2, i7)),
+                Long.valueOf(deviceIdlingTime2 / 1000),
+                Integer.valueOf(batteryStats.getDeviceIdlingCount(2, i7)),
+                Integer.valueOf(batteryStats.getMobileRadioActiveCount(i7)),
+                Long.valueOf(batteryStats.getMobileRadioActiveUnknownTime(i7) / 1000),
+                Long.valueOf(deviceIdleModeTime / 1000),
+                Integer.valueOf(batteryStats.getDeviceIdleModeCount(1, i7)),
+                Long.valueOf(deviceIdlingTime / 1000),
+                Integer.valueOf(batteryStats.getDeviceIdlingCount(1, i7)),
+                Long.valueOf(batteryStats.getLongestDeviceIdleModeTime(1)),
+                Long.valueOf(batteryStats.getLongestDeviceIdleModeTime(2)));
         Object[] objArr4 = new Object[5];
         for (int i11 = 0; i11 < 5; i11++) {
             objArr4[i11] = Long.valueOf(batteryStats.getScreenBrightnessTime(i11, j19, i7) / 1000);
@@ -2807,17 +3302,24 @@ public abstract class BatteryStats {
         dumpLine(printWriter, 0, str10, "br", objArr4);
         Object[] objArr5 = new Object[CellSignalStrength.getNumSignalStrengthLevels()];
         for (int i12 = 0; i12 < CellSignalStrength.getNumSignalStrengthLevels(); i12++) {
-            objArr5[i12] = Long.valueOf(batteryStats.getPhoneSignalStrengthTime(i12, j19, i7) / 1000);
+            objArr5[i12] =
+                    Long.valueOf(batteryStats.getPhoneSignalStrengthTime(i12, j19, i7) / 1000);
         }
         dumpLine(printWriter, 0, str10, SIGNAL_STRENGTH_TIME_DATA, objArr5);
-        dumpLine(printWriter, 0, str10, SIGNAL_SCANNING_TIME_DATA, Long.valueOf(batteryStats.getPhoneSignalScanningTime(j19, i7) / 1000));
+        dumpLine(
+                printWriter,
+                0,
+                str10,
+                SIGNAL_SCANNING_TIME_DATA,
+                Long.valueOf(batteryStats.getPhoneSignalScanningTime(j19, i7) / 1000));
         for (int i13 = 0; i13 < CellSignalStrength.getNumSignalStrengthLevels(); i13++) {
             objArr5[i13] = Integer.valueOf(batteryStats.getPhoneSignalStrengthCount(i13, i7));
         }
         dumpLine(printWriter, 0, str10, SIGNAL_STRENGTH_COUNT_DATA, objArr5);
         Object[] objArr6 = new Object[NUM_DATA_CONNECTION_TYPES];
         for (int i14 = 0; i14 < NUM_DATA_CONNECTION_TYPES; i14++) {
-            objArr6[i14] = Long.valueOf(batteryStats.getPhoneDataConnectionTime(i14, j19, i7) / 1000);
+            objArr6[i14] =
+                    Long.valueOf(batteryStats.getPhoneDataConnectionTime(i14, j19, i7) / 1000);
         }
         dumpLine(printWriter, 0, str10, DATA_CONNECTION_TIME_DATA, objArr6);
         for (int i15 = 0; i15 < NUM_DATA_CONNECTION_TYPES; i15++) {
@@ -2844,15 +3346,36 @@ public abstract class BatteryStats {
         dumpLine(printWriter, 0, str10, WIFI_SUPPL_STATE_COUNT_DATA, objArr8);
         Object[] objArr9 = new Object[5];
         for (int i20 = 0; i20 < 5; i20++) {
-            objArr9[i20] = Long.valueOf(batteryStats.getWifiSignalStrengthTime(i20, j19, i7) / 1000);
+            objArr9[i20] =
+                    Long.valueOf(batteryStats.getWifiSignalStrengthTime(i20, j19, i7) / 1000);
         }
         dumpLine(printWriter, 0, str10, WIFI_SIGNAL_STRENGTH_TIME_DATA, objArr9);
         for (int i21 = 0; i21 < 5; i21++) {
             objArr9[i21] = Integer.valueOf(batteryStats.getWifiSignalStrengthCount(i21, i7));
         }
         dumpLine(printWriter, 0, str10, WIFI_SIGNAL_STRENGTH_COUNT_DATA, objArr9);
-        dumpLine(printWriter, 0, str10, WIFI_MULTICAST_TOTAL_DATA, Long.valueOf(batteryStats.getWifiMulticastWakelockTime(j19, i7) / 1000), Integer.valueOf(batteryStats.getWifiMulticastWakelockCount(i7)));
-        dumpLine(printWriter, 0, str10, BATTERY_DISCHARGE_DATA, Integer.valueOf(getLowDischargeAmountSinceCharge()), Integer.valueOf(getHighDischargeAmountSinceCharge()), Integer.valueOf(getDischargeAmountScreenOnSinceCharge()), Integer.valueOf(getDischargeAmountScreenOffSinceCharge()), Long.valueOf(uahDischarge / 1000), Long.valueOf(uahDischargeScreenOff / 1000), Integer.valueOf(getDischargeAmountScreenDozeSinceCharge()), Long.valueOf(uahDischargeScreenDoze / 1000), Long.valueOf(uahDischargeLightDoze / 1000), Long.valueOf(uahDischargeDeepDoze / 1000));
+        dumpLine(
+                printWriter,
+                0,
+                str10,
+                WIFI_MULTICAST_TOTAL_DATA,
+                Long.valueOf(batteryStats.getWifiMulticastWakelockTime(j19, i7) / 1000),
+                Integer.valueOf(batteryStats.getWifiMulticastWakelockCount(i7)));
+        dumpLine(
+                printWriter,
+                0,
+                str10,
+                BATTERY_DISCHARGE_DATA,
+                Integer.valueOf(getLowDischargeAmountSinceCharge()),
+                Integer.valueOf(getHighDischargeAmountSinceCharge()),
+                Integer.valueOf(getDischargeAmountScreenOnSinceCharge()),
+                Integer.valueOf(getDischargeAmountScreenOffSinceCharge()),
+                Long.valueOf(uahDischarge / 1000),
+                Long.valueOf(uahDischargeScreenOff / 1000),
+                Integer.valueOf(getDischargeAmountScreenDozeSinceCharge()),
+                Long.valueOf(uahDischargeScreenDoze / 1000),
+                Long.valueOf(uahDischargeLightDoze / 1000),
+                Long.valueOf(uahDischargeDeepDoze / 1000));
         String str11 = "\"";
         if (i2 >= 0) {
             num = num3;
@@ -2876,7 +3399,13 @@ public abstract class BatteryStats {
                     String str12 = str10;
                     String str13 = str11;
                     printWakeLockCheckin(sb5, entry.getValue(), j19, null, i, "");
-                    dumpLine(printWriter, 0, str12, KERNEL_WAKELOCK_DATA, str13 + entry.getKey() + str13, sb5.toString());
+                    dumpLine(
+                            printWriter,
+                            0,
+                            str12,
+                            KERNEL_WAKELOCK_DATA,
+                            str13 + entry.getKey() + str13,
+                            sb5.toString());
                     str10 = str12;
                     j19 = j19;
                     str11 = str13;
@@ -2892,10 +3421,18 @@ public abstract class BatteryStats {
             }
             Map<String, ? extends Timer> wakeupReasonStats = getWakeupReasonStats();
             if (wakeupReasonStats.size() > 0) {
-                Iterator<Map.Entry<String, ? extends Timer>> it = wakeupReasonStats.entrySet().iterator();
+                Iterator<Map.Entry<String, ? extends Timer>> it =
+                        wakeupReasonStats.entrySet().iterator();
                 while (it.hasNext()) {
                     Map.Entry<String, ? extends Timer> next = it.next();
-                    dumpLine(printWriter, 0, str, WAKEUP_REASON_DATA, str2 + next.getKey() + str2, Long.valueOf((next.getValue().getTotalTimeLocked(j, i7) + 500) / 1000), Integer.valueOf(next.getValue().getCountLocked(i7)));
+                    dumpLine(
+                            printWriter,
+                            0,
+                            str,
+                            WAKEUP_REASON_DATA,
+                            str2 + next.getKey() + str2,
+                            Long.valueOf((next.getValue().getTotalTimeLocked(j, i7) + 500) / 1000),
+                            Integer.valueOf(next.getValue().getCountLocked(i7)));
                     it = it;
                     wakeupReasonStats = wakeupReasonStats;
                 }
@@ -2919,31 +3456,73 @@ public abstract class BatteryStats {
                 if (timer2 != null) {
                     timer2.getCountLocked(i7);
                 }
-                dumpLine(printWriter, 0, str, RESOURCE_POWER_MANAGER_DATA, str2 + next2.getKey() + str2, Long.valueOf(totalTimeLocked), Integer.valueOf(countLocked));
+                dumpLine(
+                        printWriter,
+                        0,
+                        str,
+                        RESOURCE_POWER_MANAGER_DATA,
+                        str2 + next2.getKey() + str2,
+                        Long.valueOf(totalTimeLocked),
+                        Integer.valueOf(countLocked));
                 it2 = it3;
             }
         }
-        BatteryUsageStats batteryUsageStats = batteryStatsDumpHelper.getBatteryUsageStats(batteryStats, true);
-        dumpLine(printWriter, 0, str, POWER_USE_SUMMARY_DATA, formatCharge(batteryUsageStats.getBatteryCapacity()), formatCharge(batteryUsageStats.getConsumedPower()), formatCharge(batteryUsageStats.getDischargedPowerRange().getLower().doubleValue()), formatCharge(batteryUsageStats.getDischargedPowerRange().getUpper().doubleValue()));
-        AggregateBatteryConsumer aggregateBatteryConsumer2 = batteryUsageStats.getAggregateBatteryConsumer(0);
+        BatteryUsageStats batteryUsageStats =
+                batteryStatsDumpHelper.getBatteryUsageStats(batteryStats, true);
+        dumpLine(
+                printWriter,
+                0,
+                str,
+                POWER_USE_SUMMARY_DATA,
+                formatCharge(batteryUsageStats.getBatteryCapacity()),
+                formatCharge(batteryUsageStats.getConsumedPower()),
+                formatCharge(batteryUsageStats.getDischargedPowerRange().getLower().doubleValue()),
+                formatCharge(batteryUsageStats.getDischargedPowerRange().getUpper().doubleValue()));
+        AggregateBatteryConsumer aggregateBatteryConsumer2 =
+                batteryUsageStats.getAggregateBatteryConsumer(0);
         int i22 = 0;
         while (i22 < 19) {
             String str14 = CHECKIN_POWER_COMPONENT_LABELS[i22];
             if (str14 == null) {
                 str14 = "???";
             }
-            dumpLine(printWriter, 0, str, POWER_USE_ITEM_DATA, str14, formatCharge(aggregateBatteryConsumer2.getConsumedPower(i22)), Integer.valueOf(batteryStats.shouldHidePowerComponent(i22) ? 1 : 0), "0", "0");
+            dumpLine(
+                    printWriter,
+                    0,
+                    str,
+                    POWER_USE_ITEM_DATA,
+                    str14,
+                    formatCharge(aggregateBatteryConsumer2.getConsumedPower(i22)),
+                    Integer.valueOf(batteryStats.shouldHidePowerComponent(i22) ? 1 : 0),
+                    "0",
+                    "0");
             i22++;
             batteryStats = this;
             aggregateBatteryConsumer2 = aggregateBatteryConsumer2;
         }
         AggregateBatteryConsumer aggregateBatteryConsumer3 = aggregateBatteryConsumer2;
-        ProportionalAttributionCalculator proportionalAttributionCalculator = new ProportionalAttributionCalculator(context, batteryUsageStats);
+        ProportionalAttributionCalculator proportionalAttributionCalculator =
+                new ProportionalAttributionCalculator(context, batteryUsageStats);
         List<UidBatteryConsumer> uidBatteryConsumers = batteryUsageStats.getUidBatteryConsumers();
         int i23 = 0;
         while (i23 < uidBatteryConsumers.size()) {
             UidBatteryConsumer uidBatteryConsumer = uidBatteryConsumers.get(i23);
-            dumpLine(printWriter, uidBatteryConsumer.getUid(), str, POWER_USE_ITEM_DATA, "uid", formatCharge(uidBatteryConsumer.getConsumedPower()), Integer.valueOf(proportionalAttributionCalculator.isSystemBatteryConsumer(uidBatteryConsumer) ? 1 : 0), formatCharge(uidBatteryConsumer.getConsumedPower(0)), formatCharge(proportionalAttributionCalculator.getProportionalPowerMah(uidBatteryConsumer)));
+            dumpLine(
+                    printWriter,
+                    uidBatteryConsumer.getUid(),
+                    str,
+                    POWER_USE_ITEM_DATA,
+                    "uid",
+                    formatCharge(uidBatteryConsumer.getConsumedPower()),
+                    Integer.valueOf(
+                            proportionalAttributionCalculator.isSystemBatteryConsumer(
+                                            uidBatteryConsumer)
+                                    ? 1
+                                    : 0),
+                    formatCharge(uidBatteryConsumer.getConsumedPower(0)),
+                    formatCharge(
+                            proportionalAttributionCalculator.getProportionalPowerMah(
+                                    uidBatteryConsumer)));
             i23++;
             uidBatteryConsumers = uidBatteryConsumers;
             batteryUsageStats = batteryUsageStats;
@@ -3028,8 +3607,55 @@ public abstract class BatteryStats {
                 long networkActivityPackets6 = valueAt3.getNetworkActivityPackets(7, i7);
                 long networkActivityPackets7 = valueAt3.getNetworkActivityPackets(8, i7);
                 long networkActivityPackets8 = valueAt3.getNetworkActivityPackets(9, i7);
-                if (networkActivityBytes > 0 || networkActivityBytes2 > 0 || networkActivityBytes3 > 0 || networkActivityBytes4 > 0 || networkActivityPackets > 0 || networkActivityPackets2 > 0 || networkActivityPackets3 > 0 || networkActivityPackets4 > 0 || mobileRadioActiveTime > 0 || mobileRadioActiveCount > 0 || networkActivityBytes5 > 0 || networkActivityBytes6 > 0 || mobileRadioApWakeupCount > 0 || wifiRadioApWakeupCount > 0 || networkActivityBytes7 > 0 || networkActivityBytes8 > 0 || networkActivityBytes9 > 0 || networkActivityBytes10 > 0 || networkActivityPackets5 > 0 || networkActivityPackets6 > 0 || networkActivityPackets7 > 0 || networkActivityPackets8 > 0) {
-                    dumpLine(printWriter, keyAt, str, NETWORK_DATA, Long.valueOf(networkActivityBytes), Long.valueOf(networkActivityBytes2), Long.valueOf(networkActivityBytes3), Long.valueOf(networkActivityBytes4), Long.valueOf(networkActivityPackets), Long.valueOf(networkActivityPackets2), Long.valueOf(networkActivityPackets3), Long.valueOf(networkActivityPackets4), Long.valueOf(mobileRadioActiveTime), Integer.valueOf(mobileRadioActiveCount), Long.valueOf(networkActivityBytes5), Long.valueOf(networkActivityBytes6), Long.valueOf(mobileRadioApWakeupCount), Long.valueOf(wifiRadioApWakeupCount), Long.valueOf(networkActivityBytes7), Long.valueOf(networkActivityBytes8), Long.valueOf(networkActivityBytes9), Long.valueOf(networkActivityBytes10), Long.valueOf(networkActivityPackets5), Long.valueOf(networkActivityPackets6), Long.valueOf(networkActivityPackets7), Long.valueOf(networkActivityPackets8));
+                if (networkActivityBytes > 0
+                        || networkActivityBytes2 > 0
+                        || networkActivityBytes3 > 0
+                        || networkActivityBytes4 > 0
+                        || networkActivityPackets > 0
+                        || networkActivityPackets2 > 0
+                        || networkActivityPackets3 > 0
+                        || networkActivityPackets4 > 0
+                        || mobileRadioActiveTime > 0
+                        || mobileRadioActiveCount > 0
+                        || networkActivityBytes5 > 0
+                        || networkActivityBytes6 > 0
+                        || mobileRadioApWakeupCount > 0
+                        || wifiRadioApWakeupCount > 0
+                        || networkActivityBytes7 > 0
+                        || networkActivityBytes8 > 0
+                        || networkActivityBytes9 > 0
+                        || networkActivityBytes10 > 0
+                        || networkActivityPackets5 > 0
+                        || networkActivityPackets6 > 0
+                        || networkActivityPackets7 > 0
+                        || networkActivityPackets8 > 0) {
+                    dumpLine(
+                            printWriter,
+                            keyAt,
+                            str,
+                            NETWORK_DATA,
+                            Long.valueOf(networkActivityBytes),
+                            Long.valueOf(networkActivityBytes2),
+                            Long.valueOf(networkActivityBytes3),
+                            Long.valueOf(networkActivityBytes4),
+                            Long.valueOf(networkActivityPackets),
+                            Long.valueOf(networkActivityPackets2),
+                            Long.valueOf(networkActivityPackets3),
+                            Long.valueOf(networkActivityPackets4),
+                            Long.valueOf(mobileRadioActiveTime),
+                            Integer.valueOf(mobileRadioActiveCount),
+                            Long.valueOf(networkActivityBytes5),
+                            Long.valueOf(networkActivityBytes6),
+                            Long.valueOf(mobileRadioApWakeupCount),
+                            Long.valueOf(wifiRadioApWakeupCount),
+                            Long.valueOf(networkActivityBytes7),
+                            Long.valueOf(networkActivityBytes8),
+                            Long.valueOf(networkActivityBytes9),
+                            Long.valueOf(networkActivityBytes10),
+                            Long.valueOf(networkActivityPackets5),
+                            Long.valueOf(networkActivityPackets6),
+                            Long.valueOf(networkActivityPackets7),
+                            Long.valueOf(networkActivityPackets8));
                 }
                 i3 = i27;
                 Uid uid2 = valueAt3;
@@ -3037,7 +3663,13 @@ public abstract class BatteryStats {
                 String str15 = str2;
                 aggregateBatteryConsumer = aggregateBatteryConsumer3;
                 list = list2;
-                dumpControllerActivityLine(printWriter, keyAt, str, MODEM_CONTROLLER_DATA, valueAt3.getModemControllerActivity(), i);
+                dumpControllerActivityLine(
+                        printWriter,
+                        keyAt,
+                        str,
+                        MODEM_CONTROLLER_DATA,
+                        valueAt3.getModemControllerActivity(),
+                        i);
                 long fullWifiLockTime = uid2.getFullWifiLockTime(j20, i7);
                 long wifiScanTime = uid2.getWifiScanTime(j20, i7);
                 int wifiScanCount = uid2.getWifiScanCount(i7);
@@ -3045,7 +3677,13 @@ public abstract class BatteryStats {
                 long wifiScanActualTime = (uid2.getWifiScanActualTime(j20) + 500) / 1000;
                 long wifiScanBackgroundTime = (uid2.getWifiScanBackgroundTime(j20) + 500) / 1000;
                 long wifiRunningTime = uid2.getWifiRunningTime(j20, i7);
-                if (fullWifiLockTime == 0 && wifiScanTime == 0 && wifiScanCount == 0 && wifiScanBackgroundCount == 0 && wifiScanActualTime == 0 && wifiScanBackgroundTime == 0 && wifiRunningTime == 0) {
+                if (fullWifiLockTime == 0
+                        && wifiScanTime == 0
+                        && wifiScanCount == 0
+                        && wifiScanBackgroundCount == 0
+                        && wifiScanActualTime == 0
+                        && wifiScanBackgroundTime == 0
+                        && wifiRunningTime == 0) {
                     cpuScalingPolicies = cpuScalingPolicies2;
                     sb = sb5;
                     j3 = j20;
@@ -3059,25 +3697,56 @@ public abstract class BatteryStats {
                     i4 = i28;
                     b = 2;
                     str3 = str15;
-                    dumpLine(printWriter, keyAt, str, WIFI_DATA, Long.valueOf(fullWifiLockTime), Long.valueOf(wifiScanTime), Long.valueOf(wifiRunningTime), Integer.valueOf(wifiScanCount), num, num, num, Integer.valueOf(wifiScanBackgroundCount), Long.valueOf(wifiScanActualTime), Long.valueOf(wifiScanBackgroundTime));
+                    dumpLine(
+                            printWriter,
+                            keyAt,
+                            str,
+                            WIFI_DATA,
+                            Long.valueOf(fullWifiLockTime),
+                            Long.valueOf(wifiScanTime),
+                            Long.valueOf(wifiRunningTime),
+                            Integer.valueOf(wifiScanCount),
+                            num,
+                            num,
+                            num,
+                            Integer.valueOf(wifiScanBackgroundCount),
+                            Long.valueOf(wifiScanActualTime),
+                            Long.valueOf(wifiScanBackgroundTime));
                 }
                 String str16 = str3;
                 StringBuilder sb6 = sb;
-                dumpControllerActivityLine(printWriter, keyAt, str, WIFI_CONTROLLER_DATA, uid2.getWifiControllerActivity(), i);
+                dumpControllerActivityLine(
+                        printWriter,
+                        keyAt,
+                        str,
+                        WIFI_CONTROLLER_DATA,
+                        uid2.getWifiControllerActivity(),
+                        i);
                 Timer bluetoothScanTimer = uid2.getBluetoothScanTimer();
                 if (bluetoothScanTimer == null) {
                     j4 = j18;
                 } else {
                     long j21 = j3;
-                    long totalTimeLocked3 = (bluetoothScanTimer.getTotalTimeLocked(j21, i7) + 500) / 1000;
+                    long totalTimeLocked3 =
+                            (bluetoothScanTimer.getTotalTimeLocked(j21, i7) + 500) / 1000;
                     if (totalTimeLocked3 != 0) {
                         int countLocked2 = bluetoothScanTimer.getCountLocked(i7);
                         Timer bluetoothScanBackgroundTimer = uid2.getBluetoothScanBackgroundTimer();
-                        int countLocked3 = bluetoothScanBackgroundTimer != null ? bluetoothScanBackgroundTimer.getCountLocked(i7) : 0;
+                        int countLocked3 =
+                                bluetoothScanBackgroundTimer != null
+                                        ? bluetoothScanBackgroundTimer.getCountLocked(i7)
+                                        : 0;
                         long j22 = j18;
-                        long totalDurationMsLocked = bluetoothScanTimer.getTotalDurationMsLocked(j22);
-                        long totalDurationMsLocked2 = bluetoothScanBackgroundTimer != null ? bluetoothScanBackgroundTimer.getTotalDurationMsLocked(j22) : 0L;
-                        int countLocked4 = uid2.getBluetoothScanResultCounter() != null ? uid2.getBluetoothScanResultCounter().getCountLocked(i7) : 0;
+                        long totalDurationMsLocked =
+                                bluetoothScanTimer.getTotalDurationMsLocked(j22);
+                        long totalDurationMsLocked2 =
+                                bluetoothScanBackgroundTimer != null
+                                        ? bluetoothScanBackgroundTimer.getTotalDurationMsLocked(j22)
+                                        : 0L;
+                        int countLocked4 =
+                                uid2.getBluetoothScanResultCounter() != null
+                                        ? uid2.getBluetoothScanResultCounter().getCountLocked(i7)
+                                        : 0;
                         if (uid2.getBluetoothScanResultBgCounter() != null) {
                             j3 = j21;
                             i6 = uid2.getBluetoothScanResultBgCounter().getCountLocked(i7);
@@ -3085,12 +3754,44 @@ public abstract class BatteryStats {
                             j3 = j21;
                             i6 = 0;
                         }
-                        Timer bluetoothUnoptimizedScanTimer = uid2.getBluetoothUnoptimizedScanTimer();
-                        long totalDurationMsLocked3 = bluetoothUnoptimizedScanTimer != null ? bluetoothUnoptimizedScanTimer.getTotalDurationMsLocked(j22) : 0L;
-                        long maxDurationMsLocked = bluetoothUnoptimizedScanTimer != null ? bluetoothUnoptimizedScanTimer.getMaxDurationMsLocked(j22) : 0L;
-                        Timer bluetoothUnoptimizedScanBackgroundTimer = uid2.getBluetoothUnoptimizedScanBackgroundTimer();
+                        Timer bluetoothUnoptimizedScanTimer =
+                                uid2.getBluetoothUnoptimizedScanTimer();
+                        long totalDurationMsLocked3 =
+                                bluetoothUnoptimizedScanTimer != null
+                                        ? bluetoothUnoptimizedScanTimer.getTotalDurationMsLocked(
+                                                j22)
+                                        : 0L;
+                        long maxDurationMsLocked =
+                                bluetoothUnoptimizedScanTimer != null
+                                        ? bluetoothUnoptimizedScanTimer.getMaxDurationMsLocked(j22)
+                                        : 0L;
+                        Timer bluetoothUnoptimizedScanBackgroundTimer =
+                                uid2.getBluetoothUnoptimizedScanBackgroundTimer();
                         j4 = j22;
-                        dumpLine(printWriter, keyAt, str, BLUETOOTH_MISC_DATA, Long.valueOf(totalTimeLocked3), Integer.valueOf(countLocked2), Integer.valueOf(countLocked3), Long.valueOf(totalDurationMsLocked), Long.valueOf(totalDurationMsLocked2), Integer.valueOf(countLocked4), Integer.valueOf(i6), Long.valueOf(totalDurationMsLocked3), Long.valueOf(bluetoothUnoptimizedScanBackgroundTimer != null ? bluetoothUnoptimizedScanBackgroundTimer.getTotalDurationMsLocked(j22) : 0L), Long.valueOf(maxDurationMsLocked), Long.valueOf(bluetoothUnoptimizedScanBackgroundTimer != null ? bluetoothUnoptimizedScanBackgroundTimer.getMaxDurationMsLocked(j22) : 0L));
+                        dumpLine(
+                                printWriter,
+                                keyAt,
+                                str,
+                                BLUETOOTH_MISC_DATA,
+                                Long.valueOf(totalTimeLocked3),
+                                Integer.valueOf(countLocked2),
+                                Integer.valueOf(countLocked3),
+                                Long.valueOf(totalDurationMsLocked),
+                                Long.valueOf(totalDurationMsLocked2),
+                                Integer.valueOf(countLocked4),
+                                Integer.valueOf(i6),
+                                Long.valueOf(totalDurationMsLocked3),
+                                Long.valueOf(
+                                        bluetoothUnoptimizedScanBackgroundTimer != null
+                                                ? bluetoothUnoptimizedScanBackgroundTimer
+                                                        .getTotalDurationMsLocked(j22)
+                                                : 0L),
+                                Long.valueOf(maxDurationMsLocked),
+                                Long.valueOf(
+                                        bluetoothUnoptimizedScanBackgroundTimer != null
+                                                ? bluetoothUnoptimizedScanBackgroundTimer
+                                                        .getMaxDurationMsLocked(j22)
+                                                : 0L));
                     } else {
                         j3 = j21;
                         j4 = j18;
@@ -3099,7 +3800,13 @@ public abstract class BatteryStats {
                 String str17 = str16;
                 long j23 = j4;
                 long j24 = j3;
-                dumpControllerActivityLine(printWriter, keyAt, str, BLUETOOTH_CONTROLLER_DATA, uid2.getBluetoothControllerActivity(), i);
+                dumpControllerActivityLine(
+                        printWriter,
+                        keyAt,
+                        str,
+                        BLUETOOTH_CONTROLLER_DATA,
+                        uid2.getBluetoothControllerActivity(),
+                        i);
                 if (uid2.hasUserActivity()) {
                     Object[] objArr11 = new Object[Uid.NUM_USER_ACTIVITY_TYPES];
                     boolean z2 = false;
@@ -3116,9 +3823,19 @@ public abstract class BatteryStats {
                 }
                 if (uid2.getAggregatedPartialWakelockTimer() != null) {
                     Timer aggregatedPartialWakelockTimer = uid2.getAggregatedPartialWakelockTimer();
-                    long totalDurationMsLocked4 = aggregatedPartialWakelockTimer.getTotalDurationMsLocked(j23);
+                    long totalDurationMsLocked4 =
+                            aggregatedPartialWakelockTimer.getTotalDurationMsLocked(j23);
                     Timer subTimer = aggregatedPartialWakelockTimer.getSubTimer();
-                    dumpLine(printWriter, keyAt, str, AGGREGATED_WAKELOCK_DATA, Long.valueOf(totalDurationMsLocked4), Long.valueOf(subTimer != null ? subTimer.getTotalDurationMsLocked(j23) : 0L));
+                    dumpLine(
+                            printWriter,
+                            keyAt,
+                            str,
+                            AGGREGATED_WAKELOCK_DATA,
+                            Long.valueOf(totalDurationMsLocked4),
+                            Long.valueOf(
+                                    subTimer != null
+                                            ? subTimer.getTotalDurationMsLocked(j23)
+                                            : 0L));
                 }
                 ArrayMap<String, ? extends Uid.Wakelock> wakelockStats2 = uid2.getWakelockStats();
                 int size3 = wakelockStats2.size() - 1;
@@ -3131,9 +3848,29 @@ public abstract class BatteryStats {
                     ArrayMap<String, ? extends Uid.Wakelock> arrayMap8 = wakelockStats2;
                     SparseArray<? extends Uid> sparseArray6 = sparseArray5;
                     Map<String, ? extends Timer> map3 = map2;
-                    String printWakeLockCheckin = printWakeLockCheckin(sb6, valueAt4.getWakeTime(1), j24, FullBackup.FILES_TREE_TOKEN, i, "");
+                    String printWakeLockCheckin =
+                            printWakeLockCheckin(
+                                    sb6,
+                                    valueAt4.getWakeTime(1),
+                                    j24,
+                                    FullBackup.FILES_TREE_TOKEN,
+                                    i,
+                                    "");
                     Timer wakeTime3 = valueAt4.getWakeTime(0);
-                    printWakeLockCheckin(sb6, valueAt4.getWakeTime(2), j24, "w", i, printWakeLockCheckin(sb6, wakeTime3 != null ? wakeTime3.getSubTimer() : null, j24, "bp", i, printWakeLockCheckin(sb6, wakeTime3, j24, "p", i, printWakeLockCheckin)));
+                    printWakeLockCheckin(
+                            sb6,
+                            valueAt4.getWakeTime(2),
+                            j24,
+                            "w",
+                            i,
+                            printWakeLockCheckin(
+                                    sb6,
+                                    wakeTime3 != null ? wakeTime3.getSubTimer() : null,
+                                    j24,
+                                    "bp",
+                                    i,
+                                    printWakeLockCheckin(
+                                            sb6, wakeTime3, j24, "p", i, printWakeLockCheckin)));
                     if (sb6.length() > 0) {
                         String keyAt2 = arrayMap8.keyAt(i30);
                         if (keyAt2.indexOf(44) < 0) {
@@ -3166,10 +3903,17 @@ public abstract class BatteryStats {
                 if (multicastWakelockStats != null) {
                     j5 = j24;
                     i7 = i;
-                    long totalTimeLocked4 = multicastWakelockStats.getTotalTimeLocked(j5, i7) / 1000;
+                    long totalTimeLocked4 =
+                            multicastWakelockStats.getTotalTimeLocked(j5, i7) / 1000;
                     int countLocked5 = multicastWakelockStats.getCountLocked(i7);
                     if (totalTimeLocked4 > 0) {
-                        dumpLine(printWriter, keyAt, str, WIFI_MULTICAST_DATA, Long.valueOf(totalTimeLocked4), Integer.valueOf(countLocked5));
+                        dumpLine(
+                                printWriter,
+                                keyAt,
+                                str,
+                                WIFI_MULTICAST_DATA,
+                                Long.valueOf(totalTimeLocked4),
+                                Integer.valueOf(countLocked5));
                     }
                 } else {
                     j5 = j24;
@@ -3202,7 +3946,16 @@ public abstract class BatteryStats {
                         arrayMap5 = arrayMap9;
                         str8 = str19;
                         arrayMap6 = syncStats;
-                        dumpLine(printWriter, keyAt, str, SYNC_DATA, str8 + syncStats.keyAt(size4) + str8, Long.valueOf(totalTimeLocked5), Integer.valueOf(countLocked6), Long.valueOf(j12), Integer.valueOf(countLocked7));
+                        dumpLine(
+                                printWriter,
+                                keyAt,
+                                str,
+                                SYNC_DATA,
+                                str8 + syncStats.keyAt(size4) + str8,
+                                Long.valueOf(totalTimeLocked5),
+                                Integer.valueOf(countLocked6),
+                                Long.valueOf(j12),
+                                Integer.valueOf(countLocked7));
                     }
                     size4--;
                     j26 = j11;
@@ -3223,13 +3976,23 @@ public abstract class BatteryStats {
                     int countLocked8 = valueAt6.getCountLocked(i7);
                     long j28 = j5;
                     Timer subTimer3 = valueAt6.getSubTimer();
-                    long totalDurationMsLocked5 = subTimer3 != null ? subTimer3.getTotalDurationMsLocked(j27) : -1L;
+                    long totalDurationMsLocked5 =
+                            subTimer3 != null ? subTimer3.getTotalDurationMsLocked(j27) : -1L;
                     int countLocked9 = subTimer3 != null ? subTimer3.getCountLocked(i7) : -1;
                     if (totalTimeLocked6 == 0) {
                         arrayMap4 = jobStats;
                     } else {
                         arrayMap4 = jobStats;
-                        dumpLine(printWriter, keyAt, str, JOB_DATA, str20 + jobStats.keyAt(size5) + str20, Long.valueOf(totalTimeLocked6), Integer.valueOf(countLocked8), Long.valueOf(totalDurationMsLocked5), Integer.valueOf(countLocked9));
+                        dumpLine(
+                                printWriter,
+                                keyAt,
+                                str,
+                                JOB_DATA,
+                                str20 + jobStats.keyAt(size5) + str20,
+                                Long.valueOf(totalTimeLocked6),
+                                Integer.valueOf(countLocked8),
+                                Long.valueOf(totalDurationMsLocked5),
+                                Integer.valueOf(countLocked9));
                     }
                     size5--;
                     j5 = j28;
@@ -3249,7 +4012,8 @@ public abstract class BatteryStats {
                         objArr12[0] = str20 + jobCompletionStats.keyAt(size6) + str20;
                         int i32 = 0;
                         while (i32 < jobStopReasonCodes.length) {
-                            objArr12[i32 + 1] = Integer.valueOf(valueAt7.get(jobStopReasonCodes[i32], i31));
+                            objArr12[i32 + 1] =
+                                    Integer.valueOf(valueAt7.get(jobStopReasonCodes[i32], i31));
                             i32++;
                             jobCompletionStats = jobCompletionStats;
                             i31 = 0;
@@ -3270,10 +4034,31 @@ public abstract class BatteryStats {
                 Integer num5 = num;
                 String str22 = str20;
                 Integer num6 = num5;
-                dumpTimer(printWriter, keyAt, str, FLASHLIGHT_DATA, uid2.getFlashlightTurnedOnTimer(), j30, i);
-                dumpTimer(printWriter, keyAt, str21, CAMERA_DATA, uid2.getCameraTurnedOnTimer(), j30, i);
+                dumpTimer(
+                        printWriter,
+                        keyAt,
+                        str,
+                        FLASHLIGHT_DATA,
+                        uid2.getFlashlightTurnedOnTimer(),
+                        j30,
+                        i);
+                dumpTimer(
+                        printWriter,
+                        keyAt,
+                        str21,
+                        CAMERA_DATA,
+                        uid2.getCameraTurnedOnTimer(),
+                        j30,
+                        i);
                 dumpTimer(printWriter, keyAt, str21, "vid", uid2.getVideoTurnedOnTimer(), j30, i);
-                dumpTimer(printWriter, keyAt, str21, AUDIO_DATA, uid2.getAudioTurnedOnTimer(), j30, i);
+                dumpTimer(
+                        printWriter,
+                        keyAt,
+                        str21,
+                        AUDIO_DATA,
+                        uid2.getAudioTurnedOnTimer(),
+                        j30,
+                        i);
                 SparseArray<? extends Uid.Sensor> sensorStats = uid2.getSensorStats();
                 int size7 = sensorStats.size();
                 int i33 = 0;
@@ -3284,17 +4069,34 @@ public abstract class BatteryStats {
                     if (sensorTime != null) {
                         i5 = size7;
                         long j31 = j30;
-                        long totalTimeLocked7 = (sensorTime.getTotalTimeLocked(j31, i7) + 500) / 1000;
+                        long totalTimeLocked7 =
+                                (sensorTime.getTotalTimeLocked(j31, i7) + 500) / 1000;
                         if (totalTimeLocked7 != 0) {
                             int countLocked10 = sensorTime.getCountLocked(i7);
                             j10 = j31;
                             Timer sensorBackgroundTime = valueAt8.getSensorBackgroundTime();
-                            int countLocked11 = sensorBackgroundTime != null ? sensorBackgroundTime.getCountLocked(i7) : 0;
+                            int countLocked11 =
+                                    sensorBackgroundTime != null
+                                            ? sensorBackgroundTime.getCountLocked(i7)
+                                            : 0;
                             long totalDurationMsLocked6 = sensorTime.getTotalDurationMsLocked(j27);
-                            long totalDurationMsLocked7 = sensorBackgroundTime != null ? sensorBackgroundTime.getTotalDurationMsLocked(j27) : 0L;
+                            long totalDurationMsLocked7 =
+                                    sensorBackgroundTime != null
+                                            ? sensorBackgroundTime.getTotalDurationMsLocked(j27)
+                                            : 0L;
                             j9 = j27;
                             str7 = str21;
-                            dumpLine(printWriter, keyAt, str7, SENSOR_DATA, Integer.valueOf(keyAt3), Long.valueOf(totalTimeLocked7), Integer.valueOf(countLocked10), Integer.valueOf(countLocked11), Long.valueOf(totalDurationMsLocked6), Long.valueOf(totalDurationMsLocked7));
+                            dumpLine(
+                                    printWriter,
+                                    keyAt,
+                                    str7,
+                                    SENSOR_DATA,
+                                    Integer.valueOf(keyAt3),
+                                    Long.valueOf(totalTimeLocked7),
+                                    Integer.valueOf(countLocked10),
+                                    Integer.valueOf(countLocked11),
+                                    Long.valueOf(totalDurationMsLocked6),
+                                    Long.valueOf(totalDurationMsLocked7));
                         } else {
                             j10 = j31;
                             j9 = j27;
@@ -3315,9 +4117,24 @@ public abstract class BatteryStats {
                 j6 = j27;
                 str4 = str21;
                 long j32 = j30;
-                dumpTimer(printWriter, keyAt, str4, VIBRATOR_DATA, uid2.getVibratorOnTimer(), j32, i);
-                dumpTimer(printWriter, keyAt, str4, FOREGROUND_ACTIVITY_DATA, uid2.getForegroundActivityTimer(), j32, i);
-                dumpTimer(printWriter, keyAt, str4, FOREGROUND_SERVICE_DATA, uid2.getForegroundServiceTimer(), j32, i);
+                dumpTimer(
+                        printWriter, keyAt, str4, VIBRATOR_DATA, uid2.getVibratorOnTimer(), j32, i);
+                dumpTimer(
+                        printWriter,
+                        keyAt,
+                        str4,
+                        FOREGROUND_ACTIVITY_DATA,
+                        uid2.getForegroundActivityTimer(),
+                        j32,
+                        i);
+                dumpTimer(
+                        printWriter,
+                        keyAt,
+                        str4,
+                        FOREGROUND_SERVICE_DATA,
+                        uid2.getForegroundServiceTimer(),
+                        j32,
+                        i);
                 Object[] objArr13 = new Object[7];
                 long j33 = 0;
                 int i34 = 0;
@@ -3336,7 +4153,14 @@ public abstract class BatteryStats {
                 long userCpuTimeUs = uid2.getUserCpuTimeUs(i7);
                 long systemCpuTimeUs = uid2.getSystemCpuTimeUs(i7);
                 if (userCpuTimeUs > 0 || systemCpuTimeUs > 0) {
-                    dumpLine(printWriter, keyAt, str4, CPU_DATA, Long.valueOf(userCpuTimeUs / 1000), Long.valueOf(systemCpuTimeUs / 1000), num6);
+                    dumpLine(
+                            printWriter,
+                            keyAt,
+                            str4,
+                            CPU_DATA,
+                            Long.valueOf(userCpuTimeUs / 1000),
+                            Long.valueOf(systemCpuTimeUs / 1000),
+                            num6);
                 }
                 if (cpuScalingPolicies == null) {
                     objArr = objArr13;
@@ -3377,7 +4201,14 @@ public abstract class BatteryStats {
                                 sb8.append(",0");
                             }
                         }
-                        dumpLine(printWriter, keyAt, str4, CPU_TIMES_AT_FREQ_DATA, "A", Integer.valueOf(cpuFreqTimes.length), sb8.toString());
+                        dumpLine(
+                                printWriter,
+                                keyAt,
+                                str4,
+                                CPU_TIMES_AT_FREQ_DATA,
+                                "A",
+                                Integer.valueOf(cpuFreqTimes.length),
+                                sb8.toString());
                     }
                     long[] jArr = new long[getCpuScalingPolicies().getScalingStepCount()];
                     int i39 = 0;
@@ -3406,7 +4237,14 @@ public abstract class BatteryStats {
                                     sb8.append(",0");
                                 }
                             }
-                            dumpLine(printWriter, keyAt, str4, CPU_TIMES_AT_FREQ_DATA, Uid.UID_PROCESS_TYPES[i39], Integer.valueOf(jArr.length), sb8.toString());
+                            dumpLine(
+                                    printWriter,
+                                    keyAt,
+                                    str4,
+                                    CPU_TIMES_AT_FREQ_DATA,
+                                    Uid.UID_PROCESS_TYPES[i39],
+                                    Integer.valueOf(jArr.length),
+                                    sb8.toString());
                         }
                         i39++;
                         objArr2 = objArr3;
@@ -3423,7 +4261,12 @@ public abstract class BatteryStats {
                     int starts = valueAt9.getStarts(i7);
                     int numCrashes = valueAt9.getNumCrashes(i7);
                     int numAnrs = valueAt9.getNumAnrs(i7);
-                    if (userTime == 0 && systemTime == 0 && foregroundTime == 0 && starts == 0 && numAnrs == 0 && numCrashes == 0) {
+                    if (userTime == 0
+                            && systemTime == 0
+                            && foregroundTime == 0
+                            && starts == 0
+                            && numAnrs == 0
+                            && numCrashes == 0) {
                         sb3 = sb8;
                         arrayMap2 = processStats;
                         str6 = str22;
@@ -3431,7 +4274,18 @@ public abstract class BatteryStats {
                         sb3 = sb8;
                         str6 = str22;
                         arrayMap2 = processStats;
-                        dumpLine(printWriter, keyAt, str4, PROCESS_DATA, str6 + processStats.keyAt(size8) + str6, Long.valueOf(userTime), Long.valueOf(systemTime), Long.valueOf(foregroundTime), Integer.valueOf(starts), Integer.valueOf(numAnrs), Integer.valueOf(numCrashes));
+                        dumpLine(
+                                printWriter,
+                                keyAt,
+                                str4,
+                                PROCESS_DATA,
+                                str6 + processStats.keyAt(size8) + str6,
+                                Long.valueOf(userTime),
+                                Long.valueOf(systemTime),
+                                Long.valueOf(foregroundTime),
+                                Integer.valueOf(starts),
+                                Integer.valueOf(numAnrs),
+                                Integer.valueOf(numCrashes));
                     }
                     size8--;
                     str22 = str6;
@@ -3445,12 +4299,19 @@ public abstract class BatteryStats {
                 while (size9 >= 0) {
                     Uid.Pkg valueAt10 = packageStats.valueAt(size9);
                     int i43 = 0;
-                    ArrayMap<String, ? extends Counter> wakeupAlarmStats = valueAt10.getWakeupAlarmStats();
+                    ArrayMap<String, ? extends Counter> wakeupAlarmStats =
+                            valueAt10.getWakeupAlarmStats();
                     int size10 = wakeupAlarmStats.size() - 1;
                     while (size10 >= 0) {
                         int countLocked12 = wakeupAlarmStats.valueAt(size10).getCountLocked(i7);
                         i43 += countLocked12;
-                        dumpLine(printWriter, keyAt, str4, WAKEUP_ALARM_DATA, wakeupAlarmStats.keyAt(size10).replace(',', '_'), Integer.valueOf(countLocked12));
+                        dumpLine(
+                                printWriter,
+                                keyAt,
+                                str4,
+                                WAKEUP_ALARM_DATA,
+                                wakeupAlarmStats.keyAt(size10).replace(',', '_'),
+                                Integer.valueOf(countLocked12));
                         size10--;
                         wakeupAlarmStats = wakeupAlarmStats;
                         objArr = objArr;
@@ -3458,7 +4319,8 @@ public abstract class BatteryStats {
                     }
                     String str24 = str23;
                     Object[] objArr14 = objArr;
-                    ArrayMap<String, ? extends Uid.Pkg.Serv> serviceStats = valueAt10.getServiceStats();
+                    ArrayMap<String, ? extends Uid.Pkg.Serv> serviceStats =
+                            valueAt10.getServiceStats();
                     int size11 = serviceStats.size() - 1;
                     while (size11 >= 0) {
                         Uid.Pkg.Serv valueAt11 = serviceStats.valueAt(size11);
@@ -3472,7 +4334,17 @@ public abstract class BatteryStats {
                             arrayMap = packageStats;
                         } else {
                             arrayMap = packageStats;
-                            dumpLine(printWriter, keyAt, str4, APK_DATA, Integer.valueOf(i43), packageStats.keyAt(size9), serviceStats.keyAt(size11), Long.valueOf(startTime / 1000), Integer.valueOf(starts2), Integer.valueOf(launches));
+                            dumpLine(
+                                    printWriter,
+                                    keyAt,
+                                    str4,
+                                    APK_DATA,
+                                    Integer.valueOf(i43),
+                                    packageStats.keyAt(size9),
+                                    serviceStats.keyAt(size11),
+                                    Long.valueOf(startTime / 1000),
+                                    Integer.valueOf(starts2),
+                                    Integer.valueOf(launches));
                         }
                         size11--;
                         j17 = j36;
@@ -3561,15 +4433,31 @@ public abstract class BatteryStats {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void dumpLocked(android.content.Context r243, java.io.PrintWriter r244, java.lang.String r245, int r246, int r247, boolean r248, android.os.BatteryStats.BatteryStatsDumpHelper r249) {
+    public final void dumpLocked(
+            android.content.Context r243,
+            java.io.PrintWriter r244,
+            java.lang.String r245,
+            int r246,
+            int r247,
+            boolean r248,
+            android.os.BatteryStats.BatteryStatsDumpHelper r249) {
         /*
             Method dump skipped, instructions count: 10967
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.BatteryStats.dumpLocked(android.content.Context, java.io.PrintWriter, java.lang.String, int, int, boolean, android.os.BatteryStats$BatteryStatsDumpHelper):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.BatteryStats.dumpLocked(android.content.Context,"
+                    + " java.io.PrintWriter, java.lang.String, int, int, boolean,"
+                    + " android.os.BatteryStats$BatteryStatsDumpHelper):void");
     }
 
-    static void printBitDescriptions(StringBuilder sb, int oldval, int newval, HistoryTag wakelockTag, BitDescription[] descriptions, boolean longNames) {
+    static void printBitDescriptions(
+            StringBuilder sb,
+            int oldval,
+            int newval,
+            HistoryTag wakelockTag,
+            BitDescription[] descriptions,
+            boolean longNames) {
         int diff = oldval ^ newval;
         if (diff == 0) {
             return;
@@ -3579,7 +4467,8 @@ public abstract class BatteryStats {
             if ((bd.mask & diff) != 0) {
                 sb.append(longNames ? " " : ",");
                 if (bd.shift < 0) {
-                    sb.append((bd.mask & newval) != 0 ? "+" : NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+                    sb.append(
+                            (bd.mask & newval) != 0 ? "+" : NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
                     sb.append(longNames ? bd.name : bd.shortName);
                     if (bd.mask == 1073741824 && wakelockTag != null) {
                         didWake = true;
@@ -3618,8 +4507,7 @@ public abstract class BatteryStats {
         }
     }
 
-    public void prepareForDumpLocked() {
-    }
+    public void prepareForDumpLocked() {}
 
     public static class HistoryPrinter {
         int oldState = 0;
@@ -3679,18 +4567,21 @@ public abstract class BatteryStats {
             this.oldWifiRailChargeMah = -1.0d;
         }
 
-        public void printNextItem(PrintWriter pw, HistoryItem rec, long baseTime, boolean checkin, boolean verbose) {
+        public void printNextItem(
+                PrintWriter pw, HistoryItem rec, long baseTime, boolean checkin, boolean verbose) {
             pw.print(printNextItem(rec, baseTime, checkin, verbose));
         }
 
-        public void printNextItem(ProtoOutputStream proto, HistoryItem rec, long baseTime, boolean verbose) {
+        public void printNextItem(
+                ProtoOutputStream proto, HistoryItem rec, long baseTime, boolean verbose) {
             String item = printNextItem(rec, baseTime, true, verbose);
             for (String line : item.split("\n")) {
                 proto.write(2237677961222L, line);
             }
         }
 
-        private String printNextItem(HistoryItem rec, long baseTime, boolean checkin, boolean verbose) {
+        private String printNextItem(
+                HistoryItem rec, long baseTime, boolean checkin, boolean verbose) {
             StringBuilder item = new StringBuilder();
             if (!checkin) {
                 item.append("  ");
@@ -3731,7 +4622,9 @@ public abstract class BatteryStats {
                         item.append("\n");
                     } else {
                         item.append(" ");
-                        item.append(new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.ENGLISH).format(Long.valueOf(rec.currentTime)));
+                        item.append(
+                                new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS", Locale.ENGLISH)
+                                        .format(Long.valueOf(rec.currentTime)));
                         item.append("\n");
                     }
                 } else if (rec.cmd == 8) {
@@ -3856,7 +4749,8 @@ public abstract class BatteryStats {
                                 item.append(this.oldPlug);
                                 break;
                             case 4:
-                                item.append(checkin ? "w" : AudioDeviceDescription.CONNECTION_WIRELESS);
+                                item.append(
+                                        checkin ? "w" : AudioDeviceDescription.CONNECTION_WIRELESS);
                                 break;
                         }
                     }
@@ -4012,20 +4906,28 @@ public abstract class BatteryStats {
                         }
                         if (mChanged7) {
                             item.append(" txshare_event=");
-                            item.append(String.format("0x%x", Integer.valueOf(this.oldSecTxShareEvent)));
+                            item.append(
+                                    String.format(
+                                            "0x%x", Integer.valueOf(this.oldSecTxShareEvent)));
                             item.append(" online=");
                             item.append(this.oldSecOnline);
                             item.append(" current_event=");
-                            item.append(String.format("0x%x", Integer.valueOf(this.oldSecCurrentEvent)));
+                            item.append(
+                                    String.format(
+                                            "0x%x", Integer.valueOf(this.oldSecCurrentEvent)));
                             item.append(" misc_event=");
                             item.append(String.format("0x%x", Integer.valueOf(this.oldSecEvent)));
                         }
                     }
                     if (!checkin && this.oldProtectBatteryMode != rec.protectBatteryMode) {
                         this.oldProtectBatteryMode = rec.protectBatteryMode;
-                        if (this.oldProtectBatteryMode >= 0 && this.oldProtectBatteryMode < BatteryStats.PROTECT_BATTERY_MODE_TYPES.length) {
+                        if (this.oldProtectBatteryMode >= 0
+                                && this.oldProtectBatteryMode
+                                        < BatteryStats.PROTECT_BATTERY_MODE_TYPES.length) {
                             item.append(" pbm=");
-                            item.append(BatteryStats.PROTECT_BATTERY_MODE_TYPES[this.oldProtectBatteryMode]);
+                            item.append(
+                                    BatteryStats.PROTECT_BATTERY_MODE_TYPES[
+                                            this.oldProtectBatteryMode]);
                         }
                     }
                     int chargeMAh = rec.batteryChargeUah / 1000;
@@ -4044,13 +4946,27 @@ public abstract class BatteryStats {
                         item.append(checkin ? ",Wrc=" : " wifiRailChargemAh=");
                         item.append(new DecimalFormat("#.##").format(this.oldWifiRailChargeMah));
                     }
-                    BatteryStats.printBitDescriptions(item, this.oldState, rec.states, rec.wakelockTag, BatteryStats.HISTORY_STATE_DESCRIPTIONS, !checkin);
-                    BatteryStats.printBitDescriptions(item, this.oldState2, rec.states2, null, BatteryStats.HISTORY_STATE2_DESCRIPTIONS, !checkin);
+                    BatteryStats.printBitDescriptions(
+                            item,
+                            this.oldState,
+                            rec.states,
+                            rec.wakelockTag,
+                            BatteryStats.HISTORY_STATE_DESCRIPTIONS,
+                            !checkin);
+                    BatteryStats.printBitDescriptions(
+                            item,
+                            this.oldState2,
+                            rec.states2,
+                            null,
+                            BatteryStats.HISTORY_STATE2_DESCRIPTIONS,
+                            !checkin);
                     if (rec.wakeReasonTag != null) {
                         if (checkin) {
                             item.append(",wr=");
                             if (rec.wakeReasonTag.poolIdx == -1) {
-                                item.append(BatteryStats.sUidToString.applyAsString(rec.wakeReasonTag.uid));
+                                item.append(
+                                        BatteryStats.sUidToString.applyAsString(
+                                                rec.wakeReasonTag.uid));
                                 item.append(":\"");
                                 item.append(rec.wakeReasonTag.string.replace("\"", "\"\""));
                                 item.append("\"");
@@ -4072,7 +4988,10 @@ public abstract class BatteryStats {
                         } else if ((rec.eventCode & 16384) != 0) {
                             item.append(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
                         }
-                        String[] eventNames = checkin ? BatteryStats.HISTORY_EVENT_CHECKIN_NAMES : BatteryStats.HISTORY_EVENT_NAMES;
+                        String[] eventNames =
+                                checkin
+                                        ? BatteryStats.HISTORY_EVENT_CHECKIN_NAMES
+                                        : BatteryStats.HISTORY_EVENT_NAMES;
                         int idx = rec.eventCode & HistoryItem.EVENT_TYPE_MASK;
                         if (idx >= 0 && idx < eventNames.length) {
                             item.append(eventNames[idx]);
@@ -4083,7 +5002,9 @@ public abstract class BatteryStats {
                         item.append("=");
                         if (checkin) {
                             if (rec.eventTag.poolIdx == -1) {
-                                item.append(BatteryStats.HISTORY_EVENT_INT_FORMATTERS[idx].applyAsString(rec.eventTag.uid));
+                                item.append(
+                                        BatteryStats.HISTORY_EVENT_INT_FORMATTERS[idx]
+                                                .applyAsString(rec.eventTag.uid));
                                 item.append(":\"");
                                 item.append(rec.eventTag.string.replace("\"", "\"\""));
                                 item.append("\"");
@@ -4091,7 +5012,9 @@ public abstract class BatteryStats {
                                 item.append(rec.eventTag.poolIdx);
                             }
                         } else {
-                            item.append(BatteryStats.HISTORY_EVENT_INT_FORMATTERS[idx].applyAsString(rec.eventTag.uid));
+                            item.append(
+                                    BatteryStats.HISTORY_EVENT_INT_FORMATTERS[idx].applyAsString(
+                                            rec.eventTag.uid));
                             item.append(":\"");
                             item.append(rec.eventTag.string);
                             item.append("\"");
@@ -4099,7 +5022,8 @@ public abstract class BatteryStats {
                     }
                     if (rec.powerStats != null && verbose && !checkin) {
                         item.append("\n                 Stats: ");
-                        item.append(rec.powerStats.formatForBatteryHistory("\n                    "));
+                        item.append(
+                                rec.powerStats.formatForBatteryHistory("\n                    "));
                     }
                     if (rec.processStateChange != null && verbose && !checkin) {
                         item.append(" procstate: ");
@@ -4115,14 +5039,26 @@ public abstract class BatteryStats {
                             item.append(XmlTags.TAG_SESSION);
                             if (rec.stepDetails.appCpuUid1 >= 0) {
                                 item.append(" (");
-                                printStepCpuUidDetails(item, rec.stepDetails.appCpuUid1, rec.stepDetails.appCpuUTime1, rec.stepDetails.appCpuSTime1);
+                                printStepCpuUidDetails(
+                                        item,
+                                        rec.stepDetails.appCpuUid1,
+                                        rec.stepDetails.appCpuUTime1,
+                                        rec.stepDetails.appCpuSTime1);
                                 if (rec.stepDetails.appCpuUid2 >= 0) {
                                     item.append(", ");
-                                    printStepCpuUidDetails(item, rec.stepDetails.appCpuUid2, rec.stepDetails.appCpuUTime2, rec.stepDetails.appCpuSTime2);
+                                    printStepCpuUidDetails(
+                                            item,
+                                            rec.stepDetails.appCpuUid2,
+                                            rec.stepDetails.appCpuUTime2,
+                                            rec.stepDetails.appCpuSTime2);
                                 }
                                 if (rec.stepDetails.appCpuUid3 >= 0) {
                                     item.append(", ");
-                                    printStepCpuUidDetails(item, rec.stepDetails.appCpuUid3, rec.stepDetails.appCpuUTime3, rec.stepDetails.appCpuSTime3);
+                                    printStepCpuUidDetails(
+                                            item,
+                                            rec.stepDetails.appCpuUid3,
+                                            rec.stepDetails.appCpuUTime3,
+                                            rec.stepDetails.appCpuSTime3);
                                 }
                                 item.append(')');
                             }
@@ -4140,7 +5076,12 @@ public abstract class BatteryStats {
                             item.append(" sirq, ");
                             item.append(rec.stepDetails.statIdlTime);
                             item.append(" idle");
-                            int totalRun = rec.stepDetails.statUserTime + rec.stepDetails.statSystemTime + rec.stepDetails.statIOWaitTime + rec.stepDetails.statIrqTime + rec.stepDetails.statSoftIrqTime;
+                            int totalRun =
+                                    rec.stepDetails.statUserTime
+                                            + rec.stepDetails.statSystemTime
+                                            + rec.stepDetails.statIOWaitTime
+                                            + rec.stepDetails.statIrqTime
+                                            + rec.stepDetails.statSoftIrqTime;
                             int total = rec.stepDetails.statIdlTime + totalRun;
                             if (total > 0) {
                                 item.append(" (");
@@ -4164,12 +5105,24 @@ public abstract class BatteryStats {
                             item.append(":");
                             item.append(rec.stepDetails.systemTime);
                             if (rec.stepDetails.appCpuUid1 >= 0) {
-                                printStepCpuUidCheckinDetails(item, rec.stepDetails.appCpuUid1, rec.stepDetails.appCpuUTime1, rec.stepDetails.appCpuSTime1);
+                                printStepCpuUidCheckinDetails(
+                                        item,
+                                        rec.stepDetails.appCpuUid1,
+                                        rec.stepDetails.appCpuUTime1,
+                                        rec.stepDetails.appCpuSTime1);
                                 if (rec.stepDetails.appCpuUid2 >= 0) {
-                                    printStepCpuUidCheckinDetails(item, rec.stepDetails.appCpuUid2, rec.stepDetails.appCpuUTime2, rec.stepDetails.appCpuSTime2);
+                                    printStepCpuUidCheckinDetails(
+                                            item,
+                                            rec.stepDetails.appCpuUid2,
+                                            rec.stepDetails.appCpuUTime2,
+                                            rec.stepDetails.appCpuSTime2);
                                 }
                                 if (rec.stepDetails.appCpuUid3 >= 0) {
-                                    printStepCpuUidCheckinDetails(item, rec.stepDetails.appCpuUid3, rec.stepDetails.appCpuUTime3, rec.stepDetails.appCpuSTime3);
+                                    printStepCpuUidCheckinDetails(
+                                            item,
+                                            rec.stepDetails.appCpuUid3,
+                                            rec.stepDetails.appCpuUTime3,
+                                            rec.stepDetails.appCpuSTime3);
                                 }
                             }
                             item.append("\n");
@@ -4214,7 +5167,8 @@ public abstract class BatteryStats {
             sb.append(XmlTags.TAG_SESSION);
         }
 
-        private void printStepCpuUidCheckinDetails(StringBuilder sb, int uid, int utime, int stime) {
+        private void printStepCpuUidCheckinDetails(
+                StringBuilder sb, int uid, int utime, int stime) {
             sb.append('/');
             sb.append(uid);
             sb.append(":");
@@ -4251,7 +5205,8 @@ public abstract class BatteryStats {
         pw.print(suffix);
     }
 
-    private static boolean dumpTimeEstimate(PrintWriter pw, String label1, String label2, String label3, long estimatedTime) {
+    private static boolean dumpTimeEstimate(
+            PrintWriter pw, String label1, String label2, String label3, long estimatedTime) {
         if (estimatedTime < 0) {
             return false;
         }
@@ -4265,7 +5220,8 @@ public abstract class BatteryStats {
         return true;
     }
 
-    private static boolean dumpDurationSteps(PrintWriter pw, String prefix, String header, LevelStepTracker steps, boolean checkin) {
+    private static boolean dumpDurationSteps(
+            PrintWriter pw, String prefix, String header, LevelStepTracker steps, boolean checkin) {
         int count;
         int count2;
         String str = header;
@@ -4376,7 +5332,8 @@ public abstract class BatteryStats {
         return true;
     }
 
-    private static void dumpDurationSteps(ProtoOutputStream proto, long fieldId, LevelStepTracker steps) {
+    private static void dumpDurationSteps(
+            ProtoOutputStream proto, long fieldId, LevelStepTracker steps) {
         if (steps == null) {
             return;
         }
@@ -4437,7 +5394,9 @@ public abstract class BatteryStats {
             Method dump skipped, instructions count: 520
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.BatteryStats.dumpHistory(java.io.PrintWriter, int, long, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.BatteryStats.dumpHistory(java.io.PrintWriter,"
+                    + " int, long, boolean):void");
     }
 
     private void dumpHistoryTagPoolLocked(PrintWriter pw, boolean checkin) {
@@ -4475,7 +5434,13 @@ public abstract class BatteryStats {
         pw.println("):");
     }
 
-    private void dumpDailyLevelStepSummary(PrintWriter pw, String prefix, String label, LevelStepTracker steps, StringBuilder tmpSb, int[] tmpOutInt) {
+    private void dumpDailyLevelStepSummary(
+            PrintWriter pw,
+            String prefix,
+            String label,
+            LevelStepTracker steps,
+            StringBuilder tmpSb,
+            int[] tmpOutInt) {
         if (steps == null) {
             return;
         }
@@ -4494,7 +5459,9 @@ public abstract class BatteryStats {
         int i = 0;
         while (i < STEP_LEVEL_MODES_OF_INTEREST.length) {
             int i2 = i;
-            long estimatedTime = steps.computeTimeEstimate(STEP_LEVEL_MODES_OF_INTEREST[i], STEP_LEVEL_MODE_VALUES[i], tmpOutInt);
+            long estimatedTime =
+                    steps.computeTimeEstimate(
+                            STEP_LEVEL_MODES_OF_INTEREST[i], STEP_LEVEL_MODE_VALUES[i], tmpOutInt);
             if (estimatedTime > 0) {
                 pw.print(prefix);
                 pw.print(label);
@@ -4512,7 +5479,8 @@ public abstract class BatteryStats {
         }
     }
 
-    private void dumpDailyPackageChanges(PrintWriter pw, String prefix, ArrayList<PackageChange> changes) {
+    private void dumpDailyPackageChanges(
+            PrintWriter pw, String prefix, ArrayList<PackageChange> changes) {
         if (changes == null) {
             return;
         }
@@ -4534,7 +5502,13 @@ public abstract class BatteryStats {
         }
     }
 
-    public void dump(Context context, PrintWriter pw, int flags, int reqUid, long histStart, BatteryStatsDumpHelper dumpHelper) {
+    public void dump(
+            Context context,
+            PrintWriter pw,
+            int flags,
+            int reqUid,
+            long histStart,
+            BatteryStatsDumpHelper dumpHelper) {
         synchronized (this) {
             prepareForDumpLocked();
         }
@@ -4551,7 +5525,13 @@ public abstract class BatteryStats {
         }
     }
 
-    private void dumpLocked(Context context, PrintWriter pw, int flags, int reqUid, boolean filtering, BatteryStatsDumpHelper dumpHelper) {
+    private void dumpLocked(
+            Context context,
+            PrintWriter pw,
+            int flags,
+            int reqUid,
+            boolean filtering,
+            BatteryStatsDumpHelper dumpHelper) {
         String str;
         ArrayList<PackageChange> pkgc;
         LevelStepTracker csteps;
@@ -4614,8 +5594,10 @@ public abstract class BatteryStats {
             }
         }
         if (!filtering || (flags & 2) != 0) {
-            if (dumpDurationSteps(pw, "  ", "Discharge step durations:", getDischargeLevelStepTracker(), false)) {
-                long timeRemaining = computeBatteryTimeRemaining(SystemClock.elapsedRealtime() * 1000);
+            if (dumpDurationSteps(
+                    pw, "  ", "Discharge step durations:", getDischargeLevelStepTracker(), false)) {
+                long timeRemaining =
+                        computeBatteryTimeRemaining(SystemClock.elapsedRealtime() * 1000);
                 if (timeRemaining >= 0) {
                     pw.print("  Estimated discharge time remaining: ");
                     TimeUtils.formatDuration(timeRemaining / 1000, pw);
@@ -4623,12 +5605,22 @@ public abstract class BatteryStats {
                 }
                 LevelStepTracker steps = getDischargeLevelStepTracker();
                 for (int i2 = 0; i2 < STEP_LEVEL_MODES_OF_INTEREST.length; i2++) {
-                    dumpTimeEstimate(pw, "  Estimated ", STEP_LEVEL_MODE_LABELS[i2], " time: ", steps.computeTimeEstimate(STEP_LEVEL_MODES_OF_INTEREST[i2], STEP_LEVEL_MODE_VALUES[i2], null));
+                    dumpTimeEstimate(
+                            pw,
+                            "  Estimated ",
+                            STEP_LEVEL_MODE_LABELS[i2],
+                            " time: ",
+                            steps.computeTimeEstimate(
+                                    STEP_LEVEL_MODES_OF_INTEREST[i2],
+                                    STEP_LEVEL_MODE_VALUES[i2],
+                                    null));
                 }
                 pw.println();
             }
-            if (dumpDurationSteps(pw, "  ", "Charge step durations:", getChargeLevelStepTracker(), false)) {
-                long timeRemaining2 = computeChargeTimeRemaining(SystemClock.elapsedRealtime() * 1000);
+            if (dumpDurationSteps(
+                    pw, "  ", "Charge step durations:", getChargeLevelStepTracker(), false)) {
+                long timeRemaining2 =
+                        computeChargeTimeRemaining(SystemClock.elapsedRealtime() * 1000);
                 if (timeRemaining2 >= 0) {
                     pw.print("  Estimated charge time remaining: ");
                     TimeUtils.formatDuration(timeRemaining2 / 1000, pw);
@@ -4642,11 +5634,15 @@ public abstract class BatteryStats {
         } else {
             pw.println("Daily stats:");
             pw.print("  Current start time: ");
-            pw.println(DateFormat.format("yyyy-MM-dd-HH-mm-ss", getCurrentDailyStartTime()).toString());
+            pw.println(
+                    DateFormat.format("yyyy-MM-dd-HH-mm-ss", getCurrentDailyStartTime())
+                            .toString());
             pw.print("  Next min deadline: ");
-            pw.println(DateFormat.format("yyyy-MM-dd-HH-mm-ss", getNextMinDailyDeadline()).toString());
+            pw.println(
+                    DateFormat.format("yyyy-MM-dd-HH-mm-ss", getNextMinDailyDeadline()).toString());
             pw.print("  Next max deadline: ");
-            pw.println(DateFormat.format("yyyy-MM-dd-HH-mm-ss", getNextMaxDailyDeadline()).toString());
+            pw.println(
+                    DateFormat.format("yyyy-MM-dd-HH-mm-ss", getNextMaxDailyDeadline()).toString());
             StringBuilder sb = new StringBuilder(64);
             int[] outInt2 = new int[1];
             LevelStepTracker dsteps3 = getDailyDischargeLevelStepTracker();
@@ -4685,10 +5681,12 @@ public abstract class BatteryStats {
                     z = false;
                     dumpDailyLevelStepSummary(pw, "    ", "Charge", csteps2, sb, outInt);
                 }
-                if (dumpDurationSteps(pw, str, "  Current daily discharge step durations:", dsteps, z)) {
+                if (dumpDurationSteps(
+                        pw, str, "  Current daily discharge step durations:", dsteps, z)) {
                     dumpDailyLevelStepSummary(pw, "      ", "Discharge", dsteps, sb, outInt);
                 }
-                if (dumpDurationSteps(pw, str, "  Current daily charge step durations:", csteps, z)) {
+                if (dumpDurationSteps(
+                        pw, str, "  Current daily charge step durations:", csteps, z)) {
                     dumpDailyLevelStepSummary(pw, "      ", "Charge", csteps, sb, outInt);
                 }
                 dumpDailyPackageChanges(pw, str, pkgc);
@@ -4716,7 +5714,8 @@ public abstract class BatteryStats {
                 } else if (filtering) {
                     charSequence = charSequence2;
                     int[] iArr = outInt;
-                    dumpDailyLevelStepSummary(pw, "    ", "Discharge", dit2.mDischargeSteps, sb, iArr);
+                    dumpDailyLevelStepSummary(
+                            pw, "    ", "Discharge", dit2.mDischargeSteps, sb, iArr);
                     dumpDailyLevelStepSummary(pw, "    ", "Charge", dit2.mChargeSteps, sb, iArr);
                     dsteps2 = dsteps;
                     z3 = false;
@@ -4727,19 +5726,27 @@ public abstract class BatteryStats {
                     charSequence = charSequence2;
                     dit = dit2;
                 }
-                if (!dumpDurationSteps(pw, "      ", "    Discharge step durations:", dit.mDischargeSteps, false)) {
+                if (!dumpDurationSteps(
+                        pw,
+                        "      ",
+                        "    Discharge step durations:",
+                        dit.mDischargeSteps,
+                        false)) {
                     dsteps2 = dsteps;
                     str2 = "      ";
                 } else {
                     dsteps2 = dsteps;
                     str2 = "      ";
-                    dumpDailyLevelStepSummary(pw, "        ", "Discharge", dit.mDischargeSteps, sb, outInt);
+                    dumpDailyLevelStepSummary(
+                            pw, "        ", "Discharge", dit.mDischargeSteps, sb, outInt);
                 }
-                if (!dumpDurationSteps(pw, str2, "    Charge step durations:", dit.mChargeSteps, false)) {
+                if (!dumpDurationSteps(
+                        pw, str2, "    Charge step durations:", dit.mChargeSteps, false)) {
                     z3 = false;
                 } else {
                     z3 = false;
-                    dumpDailyLevelStepSummary(pw, "        ", "Charge", dit.mChargeSteps, sb, outInt);
+                    dumpDailyLevelStepSummary(
+                            pw, "        ", "Charge", dit.mChargeSteps, sb, outInt);
                 }
                 dumpDailyPackageChanges(pw, str, dit.mPackageChanges);
                 z = z3;
@@ -4757,7 +5764,11 @@ public abstract class BatteryStats {
         }
         if (!filtering || (flags & 2) != 0) {
             pw.println("Statistics since last charge:");
-            pw.println("  System starts: " + getStartCount() + ", currently on battery: " + getIsOnBattery());
+            pw.println(
+                    "  System starts: "
+                            + getStartCount()
+                            + ", currently on battery: "
+                            + getIsOnBattery());
             dumpLocked(context, pw, "", 0, reqUid, (flags & 64) != 0 ? true : z2, dumpHelper);
             pw.println();
         }
@@ -4766,10 +5777,24 @@ public abstract class BatteryStats {
         }
     }
 
-    public void dumpCheckin(Context context, PrintWriter pw, List<ApplicationInfo> apps, int flags, long histStart, BatteryStatsDumpHelper dumpHelper) {
+    public void dumpCheckin(
+            Context context,
+            PrintWriter pw,
+            List<ApplicationInfo> apps,
+            int flags,
+            long histStart,
+            BatteryStatsDumpHelper dumpHelper) {
         synchronized (this) {
             prepareForDumpLocked();
-            dumpLine(pw, 0, "i", VERSION_DATA, 36, Integer.valueOf(getParcelVersion()), getStartPlatformVersion(), getEndPlatformVersion());
+            dumpLine(
+                    pw,
+                    0,
+                    "i",
+                    VERSION_DATA,
+                    36,
+                    Integer.valueOf(getParcelVersion()),
+                    getStartPlatformVersion(),
+                    getEndPlatformVersion());
         }
         if ((flags & 24) != 0) {
             dumpHistory(pw, flags, histStart, true);
@@ -4782,12 +5807,18 @@ public abstract class BatteryStats {
         }
     }
 
-    private void dumpCheckinLocked(Context context, PrintWriter pw, List<ApplicationInfo> apps, int flags, BatteryStatsDumpHelper dumpHelper) {
+    private void dumpCheckinLocked(
+            Context context,
+            PrintWriter pw,
+            List<ApplicationInfo> apps,
+            int flags,
+            BatteryStatsDumpHelper dumpHelper) {
         if (apps != null) {
             SparseArray<Pair<ArrayList<String>, MutableBoolean>> uids = new SparseArray<>();
             for (int i = 0; i < apps.size(); i++) {
                 ApplicationInfo ai = apps.get(i);
-                Pair<ArrayList<String>, MutableBoolean> pkgs = uids.get(UserHandle.getAppId(ai.uid));
+                Pair<ArrayList<String>, MutableBoolean> pkgs =
+                        uids.get(UserHandle.getAppId(ai.uid));
                 if (pkgs == null) {
                     pkgs = new Pair<>(new ArrayList(), new MutableBoolean(false));
                     uids.put(UserHandle.getAppId(ai.uid), pkgs);
@@ -4828,7 +5859,13 @@ public abstract class BatteryStats {
         }
     }
 
-    public void dumpProtoLocked(Context context, FileDescriptor fd, List<ApplicationInfo> apps, int flags, long histStart, BatteryStatsDumpHelper dumpHelper) {
+    public void dumpProtoLocked(
+            Context context,
+            FileDescriptor fd,
+            List<ApplicationInfo> apps,
+            int flags,
+            long histStart,
+            BatteryStatsDumpHelper dumpHelper) {
         ProtoOutputStream proto = new ProtoOutputStream(fd);
         prepareForDumpLocked();
         if ((flags & 24) != 0) {
@@ -4843,7 +5880,8 @@ public abstract class BatteryStats {
         proto.write(1138166333444L, getEndPlatformVersion());
         if ((flags & 4) == 0) {
             BatteryUsageStats stats = dumpHelper.getBatteryUsageStats(this, false);
-            ProportionalAttributionCalculator proportionalAttributionCalculator = new ProportionalAttributionCalculator(context, stats);
+            ProportionalAttributionCalculator proportionalAttributionCalculator =
+                    new ProportionalAttributionCalculator(context, stats);
             dumpProtoAppsLocked(proto, stats, apps, proportionalAttributionCalculator);
             dumpProtoSystemLocked(proto, stats);
         }
@@ -4851,7 +5889,11 @@ public abstract class BatteryStats {
         proto.flush();
     }
 
-    private void dumpProtoAppsLocked(ProtoOutputStream proto, BatteryUsageStats stats, List<ApplicationInfo> apps, ProportionalAttributionCalculator proportionalAttributionCalculator) {
+    private void dumpProtoAppsLocked(
+            ProtoOutputStream proto,
+            BatteryUsageStats stats,
+            List<ApplicationInfo> apps,
+            ProportionalAttributionCalculator proportionalAttributionCalculator) {
         long rawRealtimeUs;
         SparseArray<ArrayList<String>> aidToPackages;
         long rawRealtimeMs;
@@ -4941,7 +5983,8 @@ public abstract class BatteryStats {
                     break;
                 }
                 String pkg = packageStats3.keyAt(iu4);
-                ArrayMap<String, ? extends Uid.Pkg.Serv> serviceStats = packageStats3.valueAt(iu4).getServiceStats();
+                ArrayMap<String, ? extends Uid.Pkg.Serv> serviceStats =
+                        packageStats3.valueAt(iu4).getServiceStats();
                 if (serviceStats.size() == 0) {
                     protoOutputStream = proto;
                     batteryUptimeUs = batteryUptimeUs2;
@@ -5033,7 +6076,8 @@ public abstract class BatteryStats {
                 rawRealtimeMs = rawRealtimeMs5;
                 long totTimeMs = timer.getTotalDurationMsLocked(rawRealtimeMs);
                 Timer bgTimer = timer.getSubTimer();
-                long bgTimeMs = bgTimer != null ? bgTimer.getTotalDurationMsLocked(rawRealtimeMs) : 0L;
+                long bgTimeMs =
+                        bgTimer != null ? bgTimer.getTotalDurationMsLocked(rawRealtimeMs) : 0L;
                 long awToken = proto.start(1146756268056L);
                 proto.write(1112396529665L, totTimeMs);
                 proto.write(1112396529666L, bgTimeMs);
@@ -5044,17 +6088,41 @@ public abstract class BatteryStats {
             List<UidBatteryConsumer> consumers3 = consumers2;
             SparseArray<UidBatteryConsumer> uidToConsumer5 = uidToConsumer4;
             dumpTimer(proto, 1146756268040L, u4.getAudioTurnedOnTimer(), rawRealtimeUs4, 0);
-            dumpControllerActivityProto(proto, 1146756268035L, u4.getBluetoothControllerActivity(), 0);
+            dumpControllerActivityProto(
+                    proto, 1146756268035L, u4.getBluetoothControllerActivity(), 0);
             Timer bleTimer = u4.getBluetoothScanTimer();
             if (bleTimer != null) {
                 long bmToken = proto.start(1146756268038L);
                 dumpTimer(proto, 1146756268033L, bleTimer, rawRealtimeUs4, 0);
-                dumpTimer(proto, 1146756268034L, u4.getBluetoothScanBackgroundTimer(), rawRealtimeUs4, 0);
-                dumpTimer(proto, 1146756268035L, u4.getBluetoothUnoptimizedScanTimer(), rawRealtimeUs4, 0);
-                dumpTimer(proto, 1146756268036L, u4.getBluetoothUnoptimizedScanBackgroundTimer(), rawRealtimeUs4, 0);
+                dumpTimer(
+                        proto,
+                        1146756268034L,
+                        u4.getBluetoothScanBackgroundTimer(),
+                        rawRealtimeUs4,
+                        0);
+                dumpTimer(
+                        proto,
+                        1146756268035L,
+                        u4.getBluetoothUnoptimizedScanTimer(),
+                        rawRealtimeUs4,
+                        0);
+                dumpTimer(
+                        proto,
+                        1146756268036L,
+                        u4.getBluetoothUnoptimizedScanBackgroundTimer(),
+                        rawRealtimeUs4,
+                        0);
                 j = 1120986464261L;
-                proto.write(1120986464261L, u4.getBluetoothScanResultCounter() != null ? u4.getBluetoothScanResultCounter().getCountLocked(0) : 0);
-                proto.write(1120986464262L, u4.getBluetoothScanResultBgCounter() != null ? u4.getBluetoothScanResultBgCounter().getCountLocked(0) : 0);
+                proto.write(
+                        1120986464261L,
+                        u4.getBluetoothScanResultCounter() != null
+                                ? u4.getBluetoothScanResultCounter().getCountLocked(0)
+                                : 0);
+                proto.write(
+                        1120986464262L,
+                        u4.getBluetoothScanResultBgCounter() != null
+                                ? u4.getBluetoothScanResultBgCounter().getCountLocked(0)
+                                : 0);
                 proto.end(bmToken);
             } else {
                 j = 1120986464261L;
@@ -5227,9 +6295,13 @@ public abstract class BatteryStats {
                 long bsToken = proto.start(1146756268050L);
                 proto.write(1103806595073L, consumer2.getConsumedPower());
                 proportionalAttributionCalculator2 = proportionalAttributionCalculator;
-                proto.write(1133871366146L, proportionalAttributionCalculator2.isSystemBatteryConsumer(consumer2));
+                proto.write(
+                        1133871366146L,
+                        proportionalAttributionCalculator2.isSystemBatteryConsumer(consumer2));
                 proto.write(1103806595075L, consumer2.getConsumedPower(0));
-                proto.write(1103806595076L, proportionalAttributionCalculator2.getProportionalPowerMah(consumer2));
+                proto.write(
+                        1103806595076L,
+                        proportionalAttributionCalculator2.getProportionalPowerMah(consumer2));
                 proto.end(bsToken);
             }
             ArrayMap<String, ? extends Uid.Proc> processStats2 = u4.getProcessStats();
@@ -5340,7 +6412,8 @@ public abstract class BatteryStats {
             int ipkg = packageStats5.size() - 1;
             while (ipkg >= 0) {
                 ArrayMap<String, ? extends Uid.Pkg> packageStats6 = packageStats5;
-                ArrayMap<String, ? extends Counter> alarms = packageStats6.valueAt(ipkg).getWakeupAlarmStats();
+                ArrayMap<String, ? extends Counter> alarms =
+                        packageStats6.valueAt(ipkg).getWakeupAlarmStats();
                 int iwa = alarms.size() - i5;
                 while (iwa >= 0) {
                     long waToken = proto.start(2246267895834L);
@@ -5382,12 +6455,16 @@ public abstract class BatteryStats {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void dumpProtoHistoryLocked(android.util.proto.ProtoOutputStream r28, int r29, long r30) {
+    private void dumpProtoHistoryLocked(
+            android.util.proto.ProtoOutputStream r28, int r29, long r30) {
         /*
             Method dump skipped, instructions count: 541
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.BatteryStats.dumpProtoHistoryLocked(android.util.proto.ProtoOutputStream, int, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.BatteryStats.dumpProtoHistoryLocked(android.util.proto.ProtoOutputStream,"
+                    + " int, long):void");
     }
 
     private void dumpProtoSystemLocked(ProtoOutputStream proto, BatteryUsageStats stats) {
@@ -5442,7 +6519,10 @@ public abstract class BatteryStats {
         while (i2 < NUM_DATA_CONNECTION_TYPES) {
             boolean isNone = i2 == 0;
             int telephonyNetworkType = i2;
-            int telephonyNetworkType2 = (i2 == DATA_CONNECTION_OTHER || i2 == DATA_CONNECTION_EMERGENCY_SERVICE) ? 0 : telephonyNetworkType;
+            int telephonyNetworkType2 =
+                    (i2 == DATA_CONNECTION_OTHER || i2 == DATA_CONNECTION_EMERGENCY_SERVICE)
+                            ? 0
+                            : telephonyNetworkType;
             long rawRealtimeUs2 = rawRealtimeUs;
             long pdcToken2 = proto.start(2246267895816L);
             if (isNone) {
@@ -5533,7 +6613,8 @@ public abstract class BatteryStats {
                 }
                 Timer partialWakeTimer = wl.getWakeTime(i);
                 if (partialWakeTimer != null) {
-                    partialWakeLockTimeTotalUs += partialWakeTimer.getTotalTimeLocked(rawRealtimeUs3, i);
+                    partialWakeLockTimeTotalUs +=
+                            partialWakeTimer.getTotalTimeLocked(rawRealtimeUs3, i);
                 }
                 iw--;
                 i7 = 1;
@@ -5631,7 +6712,12 @@ public abstract class BatteryStats {
             proto.write(1138166333441L, ent2.getKey());
             Map<String, ? extends Timer> screenOffRpmStats2 = screenOffRpmStats;
             dumpTimer(proto, 1146756268034L, ent2.getValue(), rawRealtimeUs3, 0);
-            dumpTimer(proto, 1146756268035L, screenOffRpmStats2.get(ent2.getKey()), rawRealtimeUs3, 0);
+            dumpTimer(
+                    proto,
+                    1146756268035L,
+                    screenOffRpmStats2.get(ent2.getKey()),
+                    rawRealtimeUs3,
+                    0);
             proto.end(rpmToken);
             multicastWakeLockCountTotal = multicastWakeLockCountTotal;
             screenOffRpmStats = screenOffRpmStats2;
@@ -5686,7 +6772,10 @@ public abstract class BatteryStats {
     }
 
     private boolean shouldHidePowerComponent(int powerComponent) {
-        return powerComponent == 16 || powerComponent == 8 || powerComponent == 0 || powerComponent == 15;
+        return powerComponent == 16
+                || powerComponent == 8
+                || powerComponent == 0
+                || powerComponent == 15;
     }
 
     private static class ProportionalAttributionCalculator {
@@ -5701,9 +6790,12 @@ public abstract class BatteryStats {
             ProportionalAttributionCalculator proportionalAttributionCalculator = this;
             proportionalAttributionCalculator.mPackageManager = context.getPackageManager();
             Resources resources2 = context.getResources();
-            String[] systemPackageArray = resources2.getStringArray(R.array.config_batteryPackageTypeSystem);
-            String[] servicePackageArray = resources2.getStringArray(R.array.config_batteryPackageTypeService);
-            proportionalAttributionCalculator.mSystemAndServicePackages = new HashSet<>(systemPackageArray.length + servicePackageArray.length);
+            String[] systemPackageArray =
+                    resources2.getStringArray(R.array.config_batteryPackageTypeSystem);
+            String[] servicePackageArray =
+                    resources2.getStringArray(R.array.config_batteryPackageTypeService);
+            proportionalAttributionCalculator.mSystemAndServicePackages =
+                    new HashSet<>(systemPackageArray.length + servicePackageArray.length);
             for (String packageName : systemPackageArray) {
                 proportionalAttributionCalculator.mSystemAndServicePackages.add(packageName);
             }
@@ -5711,7 +6803,8 @@ public abstract class BatteryStats {
                 proportionalAttributionCalculator.mSystemAndServicePackages.add(packageName2);
             }
             List<UidBatteryConsumer> uidBatteryConsumers = stats.getUidBatteryConsumers();
-            proportionalAttributionCalculator.mProportionalPowerMah = new SparseDoubleArray(uidBatteryConsumers.size());
+            proportionalAttributionCalculator.mProportionalPowerMah =
+                    new SparseDoubleArray(uidBatteryConsumers.size());
             double systemPowerMah = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
             int i = uidBatteryConsumers.size();
             while (true) {
@@ -5738,7 +6831,8 @@ public abstract class BatteryStats {
                     } else {
                         double power = consumer2.getConsumedPower();
                         resources = resources2;
-                        proportionalAttributionCalculator.mProportionalPowerMah.put(uid2, power + ((systemPowerMah * power) / totalRemainingPower));
+                        proportionalAttributionCalculator.mProportionalPowerMah.put(
+                                uid2, power + ((systemPowerMah * power) / totalRemainingPower));
                     }
                     i2--;
                     proportionalAttributionCalculator = this;
@@ -5749,12 +6843,15 @@ public abstract class BatteryStats {
         }
 
         boolean isSystemBatteryConsumer(UidBatteryConsumer consumer) {
-            return this.mProportionalPowerMah.get(consumer.getUid()) < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+            return this.mProportionalPowerMah.get(consumer.getUid())
+                    < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         }
 
         double getProportionalPowerMah(UidBatteryConsumer consumer) {
             double powerMah = this.mProportionalPowerMah.get(consumer.getUid());
-            return powerMah >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN ? powerMah : SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+            return powerMah >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                    ? powerMah
+                    : SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         }
 
         private boolean isSystemUid(int uid) {
@@ -5783,7 +6880,13 @@ public abstract class BatteryStats {
         public final long txPackets;
         public final int uid;
 
-        private UidMobileRadioStats(int uid, long rxPackets, long txPackets, long radioActiveMs, int radioActiveCount, double millisecondsPerPacket) {
+        private UidMobileRadioStats(
+                int uid,
+                long rxPackets,
+                long txPackets,
+                long radioActiveMs,
+                int radioActiveCount,
+                double millisecondsPerPacket) {
             this.uid = uid;
             this.txPackets = txPackets;
             this.rxPackets = rxPackets;
@@ -5793,7 +6896,8 @@ public abstract class BatteryStats {
         }
     }
 
-    private List<UidMobileRadioStats> getUidMobileRadioStats(List<UidBatteryConsumer> uidBatteryConsumers) {
+    private List<UidMobileRadioStats> getUidMobileRadioStats(
+            List<UidBatteryConsumer> uidBatteryConsumers) {
         SparseArray<? extends Uid> uidStats = getUidStats();
         List<UidMobileRadioStats> uidMobileRadioStats = Lists.newArrayList();
         for (int i = 0; i < uidBatteryConsumers.size(); i++) {
@@ -5808,19 +6912,32 @@ public abstract class BatteryStats {
                     int radioActiveCount = u.getMobileRadioActiveCount(0);
                     double msPerPacket = radioActiveMs / (rxPackets + txPackets);
                     if (msPerPacket != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
-                        uidMobileRadioStats.add(new UidMobileRadioStats(uid, rxPackets, txPackets, radioActiveMs, radioActiveCount, msPerPacket));
+                        uidMobileRadioStats.add(
+                                new UidMobileRadioStats(
+                                        uid,
+                                        rxPackets,
+                                        txPackets,
+                                        radioActiveMs,
+                                        radioActiveCount,
+                                        msPerPacket));
                     }
                 }
             }
         }
-        uidMobileRadioStats.sort(new Comparator() { // from class: android.os.BatteryStats$$ExternalSyntheticLambda2
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Double.compare(((BatteryStats.UidMobileRadioStats) obj2).millisecondsPerPacket, ((BatteryStats.UidMobileRadioStats) obj).millisecondsPerPacket);
-                return compare;
-            }
-        });
+        uidMobileRadioStats.sort(
+                new Comparator() { // from class: android.os.BatteryStats$$ExternalSyntheticLambda2
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int compare;
+                        compare =
+                                Double.compare(
+                                        ((BatteryStats.UidMobileRadioStats) obj2)
+                                                .millisecondsPerPacket,
+                                        ((BatteryStats.UidMobileRadioStats) obj)
+                                                .millisecondsPerPacket);
+                        return compare;
+                    }
+                });
         return uidMobileRadioStats;
     }
 
@@ -5877,7 +6994,11 @@ public abstract class BatteryStats {
         File backupDir = new File("/data/log/batterystats/");
         if (backupDir.exists() && (childFileList = backupDir.listFiles()) != null) {
             for (File childFile : childFileList) {
-                long time = Long.parseLong(childFile.getAbsolutePath().replace("/data/log/batterystats/newbatterystats", ""));
+                long time =
+                        Long.parseLong(
+                                childFile
+                                        .getAbsolutePath()
+                                        .replace("/data/log/batterystats/newbatterystats", ""));
                 if (time > latestTime) {
                     latestTime = time;
                 }
@@ -5886,7 +7007,8 @@ public abstract class BatteryStats {
                 return;
             }
             try {
-                FileInputStream fis = new FileInputStream("/data/log/batterystats/newbatterystats" + latestTime);
+                FileInputStream fis =
+                        new FileInputStream("/data/log/batterystats/newbatterystats" + latestTime);
                 try {
                     InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
                     try {

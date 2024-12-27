@@ -4,6 +4,7 @@ import android.os.SystemClock;
 import android.provider.DeviceConfig;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.modules.expresslog.Counter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -19,8 +20,7 @@ public final class DropboxRateLimiter {
     public int mStrictRatelimitAllowedEntries;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class DefaultClock {
-    }
+    public final class DefaultClock {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ErrorRecord {
@@ -57,22 +57,40 @@ public final class DropboxRateLimiter {
     }
 
     public final void init() {
-        this.mRateLimitBufferDuration = DeviceConfig.getLong("dropbox", "DropboxRateLimiter__rate_limit_buffer_duration", 600000L);
-        this.mRateLimitBufferExpiryFactor = DeviceConfig.getLong("dropbox", "DropboxRateLimiter__rate_limit_buffer_expiry_factor", 3L);
-        this.mRateLimitAllowedEntries = DeviceConfig.getInt("dropbox", "DropboxRateLimiter__rate_limit_allowed_entries", 6);
-        this.mStrictRatelimitAllowedEntries = DeviceConfig.getInt("dropbox", "DropboxRateLimiter__strict_rate_limit_allowed_entries", 1);
-        this.mStrictRateLimitBufferDuration = DeviceConfig.getLong("dropbox", "DropboxRateLimiter__strict_rate_limit_buffer_duration", 1200000L);
+        this.mRateLimitBufferDuration =
+                DeviceConfig.getLong(
+                        "dropbox", "DropboxRateLimiter__rate_limit_buffer_duration", 600000L);
+        this.mRateLimitBufferExpiryFactor =
+                DeviceConfig.getLong(
+                        "dropbox", "DropboxRateLimiter__rate_limit_buffer_expiry_factor", 3L);
+        this.mRateLimitAllowedEntries =
+                DeviceConfig.getInt("dropbox", "DropboxRateLimiter__rate_limit_allowed_entries", 6);
+        this.mStrictRatelimitAllowedEntries =
+                DeviceConfig.getInt(
+                        "dropbox", "DropboxRateLimiter__strict_rate_limit_allowed_entries", 1);
+        this.mStrictRateLimitBufferDuration =
+                DeviceConfig.getLong(
+                        "dropbox",
+                        "DropboxRateLimiter__strict_rate_limit_buffer_duration",
+                        1200000L);
     }
 
     public final void maybeRemoveExpiredRecords(long j) {
-        if (j - this.mLastMapCleanUp <= this.mRateLimitBufferExpiryFactor * this.mRateLimitBufferDuration) {
+        if (j - this.mLastMapCleanUp
+                <= this.mRateLimitBufferExpiryFactor * this.mRateLimitBufferDuration) {
             return;
         }
         for (int size = this.mErrorClusterRecords.size() - 1; size >= 0; size--) {
             ErrorRecord errorRecord = (ErrorRecord) this.mErrorClusterRecords.valueAt(size);
             DropboxRateLimiter dropboxRateLimiter = DropboxRateLimiter.this;
-            if (j - errorRecord.mStartTime > (errorRecord.mSuccessiveRateLimitCycles >= 2 ? dropboxRateLimiter.mStrictRateLimitBufferDuration : dropboxRateLimiter.mRateLimitBufferDuration) * dropboxRateLimiter.mRateLimitBufferExpiryFactor) {
-                Counter.logIncrement("stability_errors.value_dropbox_buffer_expired_count", ((ErrorRecord) this.mErrorClusterRecords.valueAt(size)).mCount);
+            if (j - errorRecord.mStartTime
+                    > (errorRecord.mSuccessiveRateLimitCycles >= 2
+                                    ? dropboxRateLimiter.mStrictRateLimitBufferDuration
+                                    : dropboxRateLimiter.mRateLimitBufferDuration)
+                            * dropboxRateLimiter.mRateLimitBufferExpiryFactor) {
+                Counter.logIncrement(
+                        "stability_errors.value_dropbox_buffer_expired_count",
+                        ((ErrorRecord) this.mErrorClusterRecords.valueAt(size)).mCount);
                 this.mErrorClusterRecords.removeAt(size);
             }
         }
@@ -105,27 +123,51 @@ public final class DropboxRateLimiter {
                 int i3 = errorRecord.mSuccessiveRateLimitCycles;
                 boolean z = i3 >= 2;
                 DropboxRateLimiter dropboxRateLimiter = DropboxRateLimiter.this;
-                if (j <= (z ? dropboxRateLimiter.mStrictRateLimitBufferDuration : dropboxRateLimiter.mRateLimitBufferDuration)) {
+                if (j
+                        <= (z
+                                ? dropboxRateLimiter.mStrictRateLimitBufferDuration
+                                : dropboxRateLimiter.mRateLimitBufferDuration)) {
                     int i4 = errorRecord.mCount + 1;
                     errorRecord.mCount = i4;
-                    if (i4 <= (i3 >= 2 ? dropboxRateLimiter.mStrictRatelimitAllowedEntries : dropboxRateLimiter.mRateLimitAllowedEntries)) {
+                    if (i4
+                            <= (i3 >= 2
+                                    ? dropboxRateLimiter.mStrictRatelimitAllowedEntries
+                                    : dropboxRateLimiter.mRateLimitAllowedEntries)) {
                         return new RateLimitResult(0, false);
                     }
-                    if (i4 >= (i3 >= 2 ? dropboxRateLimiter.mStrictRatelimitAllowedEntries : dropboxRateLimiter.mRateLimitAllowedEntries)) {
-                        i2 = i4 - (i3 >= 2 ? dropboxRateLimiter.mStrictRatelimitAllowedEntries : dropboxRateLimiter.mRateLimitAllowedEntries);
+                    if (i4
+                            >= (i3 >= 2
+                                    ? dropboxRateLimiter.mStrictRatelimitAllowedEntries
+                                    : dropboxRateLimiter.mRateLimitAllowedEntries)) {
+                        i2 =
+                                i4
+                                        - (i3 >= 2
+                                                ? dropboxRateLimiter.mStrictRatelimitAllowedEntries
+                                                : dropboxRateLimiter.mRateLimitAllowedEntries);
                     }
                     return new RateLimitResult(i2, true);
                 }
                 int i5 = errorRecord.mCount;
-                if (i5 < (i3 >= 2 ? dropboxRateLimiter.mStrictRatelimitAllowedEntries : dropboxRateLimiter.mRateLimitAllowedEntries)) {
+                if (i5
+                        < (i3 >= 2
+                                ? dropboxRateLimiter.mStrictRatelimitAllowedEntries
+                                : dropboxRateLimiter.mRateLimitAllowedEntries)) {
                     i = 0;
                 } else {
-                    i = i5 - (i3 >= 2 ? dropboxRateLimiter.mStrictRatelimitAllowedEntries : dropboxRateLimiter.mRateLimitAllowedEntries);
+                    i =
+                            i5
+                                    - (i3 >= 2
+                                            ? dropboxRateLimiter.mStrictRatelimitAllowedEntries
+                                            : dropboxRateLimiter.mRateLimitAllowedEntries);
                 }
                 errorRecord.mStartTime = uptimeMillis;
                 errorRecord.mCount = 1;
                 if (i > 0) {
-                    if (j < (i3 >= 2 ? dropboxRateLimiter.mStrictRateLimitBufferDuration : dropboxRateLimiter.mRateLimitBufferDuration) * 2) {
+                    if (j
+                            < (i3 >= 2
+                                            ? dropboxRateLimiter.mStrictRateLimitBufferDuration
+                                            : dropboxRateLimiter.mRateLimitBufferDuration)
+                                    * 2) {
                         errorRecord.mSuccessiveRateLimitCycles = i3 + 1;
                         return new RateLimitResult(i, false);
                     }

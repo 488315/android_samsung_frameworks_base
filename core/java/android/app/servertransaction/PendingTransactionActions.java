@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.TransactionTooLargeException;
 import android.util.Log;
+
 import com.android.internal.util.IndentingPrintWriter;
+
 import java.io.StringWriter;
 
 /* loaded from: classes.dex */
@@ -95,14 +97,23 @@ public class PendingTransactionActions {
         @Override // java.lang.Runnable
         public void run() {
             try {
-                ActivityClient.getInstance().activityStopped(this.mActivity.token, this.mState, this.mPersistentState, this.mDescription);
+                ActivityClient.getInstance()
+                        .activityStopped(
+                                this.mActivity.token,
+                                this.mState,
+                                this.mPersistentState,
+                                this.mDescription);
             } catch (RuntimeException runtimeException) {
                 String bundleStats = collectBundleStates();
                 if (runtimeException.getCause() instanceof TransactionTooLargeException) {
                     String message = runtimeException.getMessage() + "\n" + bundleStats;
-                    RuntimeException ex = new RuntimeException(message, runtimeException.getCause());
+                    RuntimeException ex =
+                            new RuntimeException(message, runtimeException.getCause());
                     if (this.mActivity.packageInfo.getTargetSdkVersion() < 24) {
-                        Log.e(TAG, "App sent too much data in instance state, so it was ignored", ex);
+                        Log.e(
+                                TAG,
+                                "App sent too much data in instance state, so it was ignored",
+                                ex);
                         return;
                     }
                     throw ex;

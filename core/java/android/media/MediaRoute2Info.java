@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -21,26 +23,33 @@ public final class MediaRoute2Info implements Parcelable {
     public static final int CONNECTION_STATE_CONNECTED = 2;
     public static final int CONNECTION_STATE_CONNECTING = 1;
     public static final int CONNECTION_STATE_DISCONNECTED = 0;
-    public static final Parcelable.Creator<MediaRoute2Info> CREATOR = new Parcelable.Creator<MediaRoute2Info>() { // from class: android.media.MediaRoute2Info.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaRoute2Info createFromParcel(Parcel in) {
-            return new MediaRoute2Info(in);
-        }
+    public static final Parcelable.Creator<MediaRoute2Info> CREATOR =
+            new Parcelable.Creator<
+                    MediaRoute2Info>() { // from class: android.media.MediaRoute2Info.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaRoute2Info createFromParcel(Parcel in) {
+                    return new MediaRoute2Info(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaRoute2Info[] newArray(int size) {
-            return new MediaRoute2Info[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaRoute2Info[] newArray(int size) {
+                    return new MediaRoute2Info[size];
+                }
+            };
     public static final String FEATURE_LIVE_AUDIO = "android.media.route.feature.LIVE_AUDIO";
     public static final String FEATURE_LIVE_VIDEO = "android.media.route.feature.LIVE_VIDEO";
-    public static final String FEATURE_LOCAL_PLAYBACK = "android.media.route.feature.LOCAL_PLAYBACK";
-    public static final String FEATURE_REMOTE_AUDIO_PLAYBACK = "android.media.route.feature.REMOTE_AUDIO_PLAYBACK";
-    public static final String FEATURE_REMOTE_GROUP_PLAYBACK = "android.media.route.feature.REMOTE_GROUP_PLAYBACK";
-    public static final String FEATURE_REMOTE_PLAYBACK = "android.media.route.feature.REMOTE_PLAYBACK";
-    public static final String FEATURE_REMOTE_VIDEO_PLAYBACK = "android.media.route.feature.REMOTE_VIDEO_PLAYBACK";
+    public static final String FEATURE_LOCAL_PLAYBACK =
+            "android.media.route.feature.LOCAL_PLAYBACK";
+    public static final String FEATURE_REMOTE_AUDIO_PLAYBACK =
+            "android.media.route.feature.REMOTE_AUDIO_PLAYBACK";
+    public static final String FEATURE_REMOTE_GROUP_PLAYBACK =
+            "android.media.route.feature.REMOTE_GROUP_PLAYBACK";
+    public static final String FEATURE_REMOTE_PLAYBACK =
+            "android.media.route.feature.REMOTE_PLAYBACK";
+    public static final String FEATURE_REMOTE_VIDEO_PLAYBACK =
+            "android.media.route.feature.REMOTE_VIDEO_PLAYBACK";
     public static final int PLAYBACK_VOLUME_FIXED = 0;
     public static final int PLAYBACK_VOLUME_VARIABLE = 1;
     public static final String ROUTE_ID_DEFAULT = "DEFAULT_ROUTE";
@@ -96,20 +105,16 @@ public final class MediaRoute2Info implements Parcelable {
     private final int mVolumeMax;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConnectionState {
-    }
+    public @interface ConnectionState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PlaybackVolume {
-    }
+    public @interface PlaybackVolume {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SuitabilityStatus {
-    }
+    public @interface SuitabilityStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     MediaRoute2Info(Builder builder) {
         this.mId = builder.mId;
@@ -257,14 +262,18 @@ public final class MediaRoute2Info implements Parcelable {
     }
 
     public boolean isValid() {
-        if (TextUtils.isEmpty(getId()) || TextUtils.isEmpty(getName()) || TextUtils.isEmpty(getProviderId())) {
+        if (TextUtils.isEmpty(getId())
+                || TextUtils.isEmpty(getName())
+                || TextUtils.isEmpty(getProviderId())) {
             return false;
         }
         return true;
     }
 
     public boolean isVisibleTo(String packageName) {
-        return !this.mIsVisibilityRestricted || getPackageName().equals(packageName) || this.mAllowedPackages.contains(packageName);
+        return !this.mIsVisibilityRestricted
+                || getPackageName().equals(packageName)
+                || this.mAllowedPackages.contains(packageName);
     }
 
     public boolean isSystemRouteType() {
@@ -327,15 +336,84 @@ public final class MediaRoute2Info implements Parcelable {
             return false;
         }
         MediaRoute2Info other = (MediaRoute2Info) obj;
-        return Objects.equals(this.mId, other.mId) && Objects.equals(this.mName, other.mName) && Objects.equals(this.mFeatures, other.mFeatures) && this.mType == other.mType && this.mIsSystem == other.mIsSystem && Objects.equals(this.mIconUri, other.mIconUri) && Objects.equals(this.mDescription, other.mDescription) && this.mConnectionState == other.mConnectionState && Objects.equals(this.mClientPackageName, other.mClientPackageName) && Objects.equals(this.mPackageName, other.mPackageName) && this.mVolumeHandling == other.mVolumeHandling && this.mVolumeMax == other.mVolumeMax && this.mVolume == other.mVolume && Objects.equals(this.mAddress, other.mAddress) && Objects.equals(this.mDeduplicationIds, other.mDeduplicationIds) && Objects.equals(this.mProviderId, other.mProviderId) && this.mIsVisibilityRestricted == other.mIsVisibilityRestricted && Objects.equals(this.mAllowedPackages, other.mAllowedPackages) && this.mSuitabilityStatus == other.mSuitabilityStatus;
+        return Objects.equals(this.mId, other.mId)
+                && Objects.equals(this.mName, other.mName)
+                && Objects.equals(this.mFeatures, other.mFeatures)
+                && this.mType == other.mType
+                && this.mIsSystem == other.mIsSystem
+                && Objects.equals(this.mIconUri, other.mIconUri)
+                && Objects.equals(this.mDescription, other.mDescription)
+                && this.mConnectionState == other.mConnectionState
+                && Objects.equals(this.mClientPackageName, other.mClientPackageName)
+                && Objects.equals(this.mPackageName, other.mPackageName)
+                && this.mVolumeHandling == other.mVolumeHandling
+                && this.mVolumeMax == other.mVolumeMax
+                && this.mVolume == other.mVolume
+                && Objects.equals(this.mAddress, other.mAddress)
+                && Objects.equals(this.mDeduplicationIds, other.mDeduplicationIds)
+                && Objects.equals(this.mProviderId, other.mProviderId)
+                && this.mIsVisibilityRestricted == other.mIsVisibilityRestricted
+                && Objects.equals(this.mAllowedPackages, other.mAllowedPackages)
+                && this.mSuitabilityStatus == other.mSuitabilityStatus;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mId, this.mName, this.mFeatures, Integer.valueOf(this.mType), Boolean.valueOf(this.mIsSystem), this.mIconUri, this.mDescription, Integer.valueOf(this.mConnectionState), this.mClientPackageName, this.mPackageName, Integer.valueOf(this.mVolumeHandling), Integer.valueOf(this.mVolumeMax), Integer.valueOf(this.mVolume), this.mAddress, this.mDeduplicationIds, this.mProviderId, Boolean.valueOf(this.mIsVisibilityRestricted), this.mAllowedPackages, Integer.valueOf(this.mSuitabilityStatus));
+        return Objects.hash(
+                this.mId,
+                this.mName,
+                this.mFeatures,
+                Integer.valueOf(this.mType),
+                Boolean.valueOf(this.mIsSystem),
+                this.mIconUri,
+                this.mDescription,
+                Integer.valueOf(this.mConnectionState),
+                this.mClientPackageName,
+                this.mPackageName,
+                Integer.valueOf(this.mVolumeHandling),
+                Integer.valueOf(this.mVolumeMax),
+                Integer.valueOf(this.mVolume),
+                this.mAddress,
+                this.mDeduplicationIds,
+                this.mProviderId,
+                Boolean.valueOf(this.mIsVisibilityRestricted),
+                this.mAllowedPackages,
+                Integer.valueOf(this.mSuitabilityStatus));
     }
 
     public String toString() {
-        return "MediaRoute2Info{ id=" + getId() + ", name=" + getName() + ", type=" + getDeviceTypeString(getType()) + ", isSystem=" + isSystemRoute() + ", features=" + getFeatures() + ", iconUri=" + getIconUri() + ", description=" + getDescription() + ", connectionState=" + getConnectionState() + ", clientPackageName=" + getClientPackageName() + ", " + getVolumeString(this.mVolume, this.mVolumeMax, this.mVolumeHandling) + ", address=" + getAddress() + ", deduplicationIds=" + String.join(",", getDeduplicationIds()) + ", providerId=" + getProviderId() + ", isVisibilityRestricted=" + this.mIsVisibilityRestricted + ", allowedPackages=" + String.join(",", this.mAllowedPackages) + ", suitabilityStatus=" + this.mSuitabilityStatus + " }";
+        return "MediaRoute2Info{ id="
+                + getId()
+                + ", name="
+                + getName()
+                + ", type="
+                + getDeviceTypeString(getType())
+                + ", isSystem="
+                + isSystemRoute()
+                + ", features="
+                + getFeatures()
+                + ", iconUri="
+                + getIconUri()
+                + ", description="
+                + getDescription()
+                + ", connectionState="
+                + getConnectionState()
+                + ", clientPackageName="
+                + getClientPackageName()
+                + ", "
+                + getVolumeString(this.mVolume, this.mVolumeMax, this.mVolumeHandling)
+                + ", address="
+                + getAddress()
+                + ", deduplicationIds="
+                + String.join(",", getDeduplicationIds())
+                + ", providerId="
+                + getProviderId()
+                + ", isVisibilityRestricted="
+                + this.mIsVisibilityRestricted
+                + ", allowedPackages="
+                + String.join(",", this.mAllowedPackages)
+                + ", suitabilityStatus="
+                + this.mSuitabilityStatus
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -359,7 +437,9 @@ public final class MediaRoute2Info implements Parcelable {
         dest.writeInt(this.mVolumeMax);
         dest.writeInt(this.mVolume);
         dest.writeString(this.mAddress);
-        dest.writeStringArray((String[]) this.mDeduplicationIds.toArray(new String[this.mDeduplicationIds.size()]));
+        dest.writeStringArray(
+                (String[])
+                        this.mDeduplicationIds.toArray(new String[this.mDeduplicationIds.size()]));
         dest.writeBundle(this.mExtras);
         dest.writeString(this.mProviderId);
         dest.writeBoolean(this.mIsVisibilityRestricted);
@@ -380,7 +460,13 @@ public final class MediaRoute2Info implements Parcelable {
                 volumeHandlingName = "UNKNOWN";
                 break;
         }
-        return String.format(Locale.US, "volume(current=%d, max=%d, handling=%s(%d))", Integer.valueOf(volume), Integer.valueOf(maxVolume), volumeHandlingName, Integer.valueOf(volumeHandling));
+        return String.format(
+                Locale.US,
+                "volume(current=%d, max=%d, handling=%s(%d))",
+                Integer.valueOf(volume),
+                Integer.valueOf(maxVolume),
+                volumeHandlingName,
+                Integer.valueOf(volumeHandling));
     }
 
     private static String getDeviceTypeString(int deviceType) {

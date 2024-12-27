@@ -2,6 +2,7 @@ package com.samsung.android.sume.core.buffer;
 
 import android.media.ExifInterface;
 import android.media.MediaMetrics;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.format.MutableMediaFormat;
@@ -10,6 +11,7 @@ import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.MediaType;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,14 +36,24 @@ import java.util.stream.Collectors;
 /* loaded from: classes6.dex */
 public class MediaBufferFileReader {
     private static final String TAG = Def.tagOf((Class<?>) MediaBufferFileReader.class);
-    private static final List<String> imageExt = (List) Arrays.stream(ColorFormat.values()).skip(0).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda2
-        @Override // java.util.function.Function
-        public final Object apply(Object obj) {
-            String lowerCase;
-            lowerCase = ((ColorFormat) obj).name().toLowerCase(Locale.ROOT);
-            return lowerCase;
-        }
-    }).collect(Collectors.toList());
+    private static final List<String> imageExt =
+            (List)
+                    Arrays.stream(ColorFormat.values())
+                            .skip(0)
+                            .map(
+                                    new Function() { // from class:
+                                                     // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            String lowerCase;
+                                            lowerCase =
+                                                    ((ColorFormat) obj)
+                                                            .name()
+                                                            .toLowerCase(Locale.ROOT);
+                                            return lowerCase;
+                                        }
+                                    })
+                            .collect(Collectors.toList());
     private BiFunction<MediaFormat, String, MediaBuffer> compressedMediaReader;
     private Consumer<ExifInterface> exifConsumer;
     private MediaFormat format;
@@ -74,7 +86,8 @@ public class MediaBufferFileReader {
         return this;
     }
 
-    public MediaBufferFileReader setCompressedMediaReader(BiFunction<MediaFormat, String, MediaBuffer> compressedImageReader) {
+    public MediaBufferFileReader setCompressedMediaReader(
+            BiFunction<MediaFormat, String, MediaBuffer> compressedImageReader) {
         this.compressedMediaReader = compressedImageReader;
         return this;
     }
@@ -98,12 +111,19 @@ public class MediaBufferFileReader {
             }
             Matcher resolutionMatcher = Pattern.compile("\\d+x\\d+").matcher(name);
             if (resolutionMatcher.find()) {
-                Integer[] resolution = (Integer[]) Arrays.stream(resolutionMatcher.group().split("x")).map(new MediaBufferFileReader$$ExternalSyntheticLambda0()).toArray(new IntFunction() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda1
-                    @Override // java.util.function.IntFunction
-                    public final Object apply(int i) {
-                        return MediaBufferFileReader.lambda$getImageFormatFromName$1(i);
-                    }
-                });
+                Integer[] resolution =
+                        (Integer[])
+                                Arrays.stream(resolutionMatcher.group().split("x"))
+                                        .map(new MediaBufferFileReader$$ExternalSyntheticLambda0())
+                                        .toArray(
+                                                new IntFunction() { // from class:
+                                                                    // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda1
+                                                    @Override // java.util.function.IntFunction
+                                                    public final Object apply(int i) {
+                                                        return MediaBufferFileReader
+                                                                .lambda$getImageFormatFromName$1(i);
+                                                    }
+                                                });
                 format.setCols(resolution[0].intValue());
                 format.setRows(resolution[1].intValue());
             } else {
@@ -140,7 +160,8 @@ public class MediaBufferFileReader {
     }
 
     static String getExtension(String name) {
-        return name.substring(name.lastIndexOf(MediaMetrics.SEPARATOR) + 1).toLowerCase(Locale.ROOT);
+        return name.substring(name.lastIndexOf(MediaMetrics.SEPARATOR) + 1)
+                .toLowerCase(Locale.ROOT);
     }
 
     private static ExifInterface readExif(String path) {
@@ -167,17 +188,27 @@ public class MediaBufferFileReader {
     }
 
     public MediaBuffer read() throws UnsupportedOperationException {
-        List<MediaBuffer> buffers = (List) this.paths.stream().map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda8
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return MediaBufferFileReader.this.m9112xa4e33a0c((String) obj);
-            }
-        }).filter(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda9
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Objects.nonNull((MediaBuffer) obj);
-            }
-        }).collect(Collectors.toList());
+        List<MediaBuffer> buffers =
+                (List)
+                        this.paths.stream()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda8
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return MediaBufferFileReader.this.m9112xa4e33a0c(
+                                                        (String) obj);
+                                            }
+                                        })
+                                .filter(
+                                        new Predicate() { // from class:
+                                                          // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda9
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return Objects.nonNull((MediaBuffer) obj);
+                                            }
+                                        })
+                                .collect(Collectors.toList());
         if (buffers.size() == 1) {
             return buffers.get(0);
         }
@@ -186,27 +217,45 @@ public class MediaBufferFileReader {
 
     /* renamed from: lambda$read$7$com-samsung-android-sume-core-buffer-MediaBufferFileReader, reason: not valid java name */
     /* synthetic */ MediaBuffer m9112xa4e33a0c(final String path) {
-        final MediaFormat format = (MediaFormat) Optional.ofNullable(this.format).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda3
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return MediaBufferFileReader.this.m9111x86d04131(path);
-            }
-        });
+        final MediaFormat format =
+                (MediaFormat)
+                        Optional.ofNullable(this.format)
+                                .orElseGet(
+                                        new Supplier() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda3
+                                            @Override // java.util.function.Supplier
+                                            public final Object get() {
+                                                return MediaBufferFileReader.this.m9111x86d04131(
+                                                        path);
+                                            }
+                                        });
         switch (format.getMediaType()) {
             case RAW_IMAGE:
                 return readRawImage(format, path);
             case COMPRESSED_IMAGE:
-                MediaBuffer buffer = (MediaBuffer) Optional.ofNullable(this.compressedMediaReader).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda4
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        return MediaBufferFileReader.lambda$read$3(MediaFormat.this, path, (BiFunction) obj);
-                    }
-                }).orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda5
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        return MediaBufferFileReader.lambda$read$4();
-                    }
-                });
+                MediaBuffer buffer =
+                        (MediaBuffer)
+                                Optional.ofNullable(this.compressedMediaReader)
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda4
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        return MediaBufferFileReader.lambda$read$3(
+                                                                MediaFormat.this,
+                                                                path,
+                                                                (BiFunction) obj);
+                                                    }
+                                                })
+                                        .orElseThrow(
+                                                new Supplier() { // from class:
+                                                                 // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda5
+                                                    @Override // java.util.function.Supplier
+                                                    public final Object get() {
+                                                        return MediaBufferFileReader
+                                                                .lambda$read$4();
+                                                    }
+                                                });
                 ExifInterface exif = readExif(path);
                 if (exif != null) {
                     int orientation = 0;
@@ -235,36 +284,48 @@ public class MediaBufferFileReader {
                 }
                 return buffer;
             case COMPRESSED_VIDEO:
-                return (MediaBuffer) Optional.ofNullable(this.compressedMediaReader).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda6
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        return MediaBufferFileReader.lambda$read$5(MediaFormat.this, path, (BiFunction) obj);
-                    }
-                }).orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda7
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        return MediaBufferFileReader.lambda$read$6();
-                    }
-                });
+                return (MediaBuffer)
+                        Optional.ofNullable(this.compressedMediaReader)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda6
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return MediaBufferFileReader.lambda$read$5(
+                                                        MediaFormat.this, path, (BiFunction) obj);
+                                            }
+                                        })
+                                .orElseThrow(
+                                        new Supplier() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda7
+                                            @Override // java.util.function.Supplier
+                                            public final Object get() {
+                                                return MediaBufferFileReader.lambda$read$6();
+                                            }
+                                        });
             default:
                 throw new UnsupportedOperationException("not support yet");
         }
     }
 
-    static /* synthetic */ MediaBuffer lambda$read$3(MediaFormat format, String path, BiFunction reader) {
+    static /* synthetic */ MediaBuffer lambda$read$3(
+            MediaFormat format, String path, BiFunction reader) {
         return (MediaBuffer) reader.apply(format, path);
     }
 
     static /* synthetic */ IllegalArgumentException lambda$read$4() {
-        return new IllegalArgumentException("not implement internal compress image reader yet, plz should set explicitly");
+        return new IllegalArgumentException(
+                "not implement internal compress image reader yet, plz should set explicitly");
     }
 
-    static /* synthetic */ MediaBuffer lambda$read$5(MediaFormat format, String path, BiFunction reader) {
+    static /* synthetic */ MediaBuffer lambda$read$5(
+            MediaFormat format, String path, BiFunction reader) {
         return (MediaBuffer) reader.apply(format, path);
     }
 
     static /* synthetic */ IllegalArgumentException lambda$read$6() {
-        return new IllegalArgumentException("not implement internal compress image reader yet, plz should set explicitly");
+        return new IllegalArgumentException(
+                "not implement internal compress image reader yet, plz should set explicitly");
     }
 
     private MediaBuffer readRawImage(MediaFormat mediaFormat, String path) {
@@ -274,7 +335,9 @@ public class MediaBufferFileReader {
         try {
             FileInputStream is = new FileInputStream(file);
             try {
-                ByteBuffer buffer = ByteBuffer.allocateDirect((int) file.length()).order(ByteOrder.nativeOrder());
+                ByteBuffer buffer =
+                        ByteBuffer.allocateDirect((int) file.length())
+                                .order(ByteOrder.nativeOrder());
                 is.getChannel().read(buffer);
                 MediaBuffer of = MediaBuffer.of(mediaFormat, buffer);
                 is.close();

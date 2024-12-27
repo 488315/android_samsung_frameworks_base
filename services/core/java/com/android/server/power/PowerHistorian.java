@@ -3,7 +3,7 @@ package com.android.server.power;
 import android.os.PowerManager;
 import android.util.SparseArray;
 import android.util.TimeUtils;
-import com.android.server.power.PowerManagerService;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +30,12 @@ public final class PowerHistorian {
             StringBuilder sb = new StringBuilder();
             sb.append(super.toString());
             int i = this.mGroupId;
-            sb.append(String.format(" %-10s", i != 0 ? i != 2 ? i != 4 ? Integer.toString(i) : "CarLife" : "Dex" : "Default"));
+            sb.append(
+                    String.format(
+                            " %-10s",
+                            i != 0
+                                    ? i != 2 ? i != 4 ? Integer.toString(i) : "CarLife" : "Dex"
+                                    : "Default"));
             sb.append(String.format(" %-7s", this.mIsAdded ? "ADD" : "REMOVE"));
             return sb.toString();
         }
@@ -52,7 +57,8 @@ public final class PowerHistorian {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Record {
-        public static final SimpleDateFormat sDumpDateFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
+        public static final SimpleDateFormat sDumpDateFormat =
+                new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
         public final long mRecordedTimeMillis = System.currentTimeMillis();
 
         public String toString() {
@@ -95,7 +101,9 @@ public final class PowerHistorian {
 
         @Override // com.android.server.power.PowerHistorian.Record
         public final String toString() {
-            return super.toString() + String.format(" %-18s", TimeUtils.formatDuration(this.mElapsedTimeMillis)) + this.mWakeLock;
+            return super.toString()
+                    + String.format(" %-18s", TimeUtils.formatDuration(this.mElapsedTimeMillis))
+                    + this.mWakeLock;
         }
     }
 
@@ -114,7 +122,8 @@ public final class PowerHistorian {
             this.mUid = i;
             this.mGroupId = i2;
             this.mReasonInt = i3;
-            this.mReasonStr = z ? PowerManager.wakeReasonToString(i3) : PowerManager.sleepReasonToString(i3);
+            this.mReasonStr =
+                    z ? PowerManager.wakeReasonToString(i3) : PowerManager.sleepReasonToString(i3);
             this.mForegroundPackageName = str == null ? "" : str;
             this.mOpPackageName = str2 == null ? "" : str2;
         }

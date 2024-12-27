@@ -59,7 +59,11 @@ public enum ColorFormat implements NumericEnum {
     }
 
     public boolean isYuv() {
-        return this == NV12 || this == NV21 || this == YUV420 || this == P010 || this == P010_ZIPPED;
+        return this == NV12
+                || this == NV21
+                || this == YUV420
+                || this == P010
+                || this == P010_ZIPPED;
     }
 
     public static float bytePerPixel(ColorFormat format) {

@@ -5,6 +5,7 @@ import android.net.IpSecTransformState;
 import android.net.vcn.FeatureFlags;
 import android.net.vcn.FeatureFlagsImpl;
 import android.os.Looper;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,7 +17,8 @@ public final class VcnContext {
     public final Looper mLooper;
     public final VcnNetworkProvider mVcnNetworkProvider;
 
-    public VcnContext(Context context, Looper looper, VcnNetworkProvider vcnNetworkProvider, boolean z) {
+    public VcnContext(
+            Context context, Looper looper, VcnNetworkProvider vcnNetworkProvider, boolean z) {
         Objects.requireNonNull(context, "Missing context");
         this.mContext = context;
         Objects.requireNonNull(looper, "Missing looper");

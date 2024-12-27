@@ -9,9 +9,9 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.SurfaceControl;
-import android.view.SurfaceControlRegistry;
+
 import com.android.internal.util.GcUtils;
+
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,28 +41,33 @@ public class SurfaceControlRegistry {
     private static final DefaultReporter sDefaultReporter = new DefaultReporter();
 
     public interface Reporter {
-        void onMaxLayersExceeded(WeakHashMap<SurfaceControl, Long> weakHashMap, int i, PrintWriter printWriter);
+        void onMaxLayersExceeded(
+                WeakHashMap<SurfaceControl, Long> weakHashMap, int i, PrintWriter printWriter);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     static class DefaultReporter implements Reporter {
-        private DefaultReporter() {
-        }
+        private DefaultReporter() {}
 
         @Override // android.view.SurfaceControlRegistry.Reporter
-        public void onMaxLayersExceeded(WeakHashMap<SurfaceControl, Long> surfaceControls, int limit, PrintWriter pw) {
+        public void onMaxLayersExceeded(
+                WeakHashMap<SurfaceControl, Long> surfaceControls, int limit, PrintWriter pw) {
             long now = SystemClock.elapsedRealtime();
             ArrayList<Map.Entry<SurfaceControl, Long>> entries = new ArrayList<>();
             Iterator<Map.Entry<SurfaceControl, Long>> it = surfaceControls.entrySet().iterator();
             while (it.hasNext()) {
                 entries.add(it.next());
             }
-            entries.sort(new Comparator() { // from class: android.view.SurfaceControlRegistry$DefaultReporter$$ExternalSyntheticLambda0
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    return SurfaceControlRegistry.DefaultReporter.lambda$onMaxLayersExceeded$0((Map.Entry) obj, (Map.Entry) obj2);
-                }
-            });
+            entries.sort(
+                    new Comparator() { // from class:
+                                       // android.view.SurfaceControlRegistry$DefaultReporter$$ExternalSyntheticLambda0
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            return SurfaceControlRegistry.DefaultReporter
+                                    .lambda$onMaxLayersExceeded$0(
+                                            (Map.Entry) obj, (Map.Entry) obj2);
+                        }
+                    });
             int size = Math.min(entries.size(), limit);
             pw.println(SurfaceControlRegistry.TAG);
             pw.println("----------------------");
@@ -93,10 +98,17 @@ public class SurfaceControlRegistry {
         this.mSurfaceControls = new WeakHashMap<>(256);
     }
 
-    public void setReportingThresholds(int maxLayersReportingThreshold, int resetReportingThreshold, Reporter reporter) {
+    public void setReportingThresholds(
+            int maxLayersReportingThreshold, int resetReportingThreshold, Reporter reporter) {
         synchronized (sLock) {
-            if (maxLayersReportingThreshold <= 0 || resetReportingThreshold >= maxLayersReportingThreshold) {
-                throw new IllegalArgumentException("Expected maxLayersReportingThreshold (" + maxLayersReportingThreshold + ") to be > 0 and resetReportingThreshold (" + resetReportingThreshold + ") to be < maxLayersReportingThreshold");
+            if (maxLayersReportingThreshold <= 0
+                    || resetReportingThreshold >= maxLayersReportingThreshold) {
+                throw new IllegalArgumentException(
+                        "Expected maxLayersReportingThreshold ("
+                                + maxLayersReportingThreshold
+                                + ") to be > 0 and resetReportingThreshold ("
+                                + resetReportingThreshold
+                                + ") to be < maxLayersReportingThreshold");
             }
             if (reporter == null) {
                 throw new IllegalArgumentException("Expected non-null reporter");
@@ -144,7 +156,8 @@ public class SurfaceControlRegistry {
     void add(SurfaceControl sc) {
         synchronized (sLock) {
             this.mSurfaceControls.put(sc, Long.valueOf(SystemClock.elapsedRealtime()));
-            if (!this.mHasReportedExceedingMaxThreshold && this.mSurfaceControls.size() >= this.mMaxLayersReportingThreshold) {
+            if (!this.mHasReportedExceedingMaxThreshold
+                    && this.mSurfaceControls.size() >= this.mMaxLayersReportingThreshold) {
                 PrintWriter pw = new PrintWriter((OutputStream) System.out, true);
                 this.mReporter.onMaxLayersExceeded(this.mSurfaceControls, 256, pw);
                 this.mHasReportedExceedingMaxThreshold = true;
@@ -155,7 +168,8 @@ public class SurfaceControlRegistry {
     void remove(SurfaceControl sc) {
         synchronized (sLock) {
             this.mSurfaceControls.remove(sc);
-            if (this.mHasReportedExceedingMaxThreshold && this.mSurfaceControls.size() <= this.mResetReportingThreshold) {
+            if (this.mHasReportedExceedingMaxThreshold
+                    && this.mSurfaceControls.size() <= this.mResetReportingThreshold) {
                 this.mHasReportedExceedingMaxThreshold = false;
             }
         }
@@ -176,22 +190,35 @@ public class SurfaceControlRegistry {
         boolean z = Build.IS_DEBUGGABLE;
         boolean z2 = true;
         sCallStackDebuggingInitialized = true;
-        sCallStackDebuggingMatchCall = SystemProperties.get("persist.wm.debug.sc.tx.log_match_call", null).toLowerCase();
-        sCallStackDebuggingMatchName = SystemProperties.get("persist.wm.debug.sc.tx.log_match_name", null).toLowerCase();
+        sCallStackDebuggingMatchCall =
+                SystemProperties.get("persist.wm.debug.sc.tx.log_match_call", null).toLowerCase();
+        sCallStackDebuggingMatchName =
+                SystemProperties.get("persist.wm.debug.sc.tx.log_match_name", null).toLowerCase();
         if (sCallStackDebuggingMatchCall.isEmpty() && sCallStackDebuggingMatchName.isEmpty()) {
             z2 = false;
         }
         sCallStackDebuggingEnabled = z2;
         if (sCallStackDebuggingEnabled) {
-            Log.d(TAG, "Enabling transaction call stack debugging: matchCall=" + sCallStackDebuggingMatchCall + " matchName=" + sCallStackDebuggingMatchName);
+            Log.d(
+                    TAG,
+                    "Enabling transaction call stack debugging: matchCall="
+                            + sCallStackDebuggingMatchCall
+                            + " matchName="
+                            + sCallStackDebuggingMatchName);
         }
     }
 
-    final void checkCallStackDebugging(String call, SurfaceControl.Transaction tx, SurfaceControl sc, String details) {
+    final void checkCallStackDebugging(
+            String call, SurfaceControl.Transaction tx, SurfaceControl sc, String details) {
         checkCallStackDebugging(call, tx, sc, details, false);
     }
 
-    final void checkCallStackDebugging(String call, SurfaceControl.Transaction tx, SurfaceControl sc, String details, boolean forceEnabled) {
+    final void checkCallStackDebugging(
+            String call,
+            SurfaceControl.Transaction tx,
+            SurfaceControl sc,
+            String details,
+            boolean forceEnabled) {
         if (sCallStackDebuggingEnabled || forceEnabled) {
             if (!matchesForCallStackDebugging(sc != null ? sc.getName() : null, call)) {
                 return;
@@ -203,11 +230,17 @@ public class SurfaceControlRegistry {
                 if (tx != null && !TextUtils.isEmpty(tx.mDebugName)) {
                     debugMsg = " t=" + tx.mDebugName;
                 }
-                String msg = details != null ? call + "," + debugMsg + scMsg + ", " + details : call + "," + debugMsg + scMsg;
+                String msg =
+                        details != null
+                                ? call + "," + debugMsg + scMsg + ", " + details
+                                : call + "," + debugMsg + scMsg;
                 Log.i(TAG, msg + ", caller=" + Debug.getCallers(6));
                 return;
             }
-            String msg2 = details != null ? call + " (" + txMsg + scMsg + ") " + details : call + " (" + txMsg + scMsg + NavigationBarInflaterView.KEY_CODE_END;
+            String msg2 =
+                    details != null
+                            ? call + " (" + txMsg + scMsg + ") " + details
+                            : call + " (" + txMsg + scMsg + NavigationBarInflaterView.KEY_CODE_END;
             Log.e(TAG, msg2, new Throwable());
         }
     }
@@ -227,7 +260,8 @@ public class SurfaceControlRegistry {
         if (name == null) {
             return false;
         }
-        return sCallStackDebuggingMatchName.contains(name.toLowerCase()) || name.toLowerCase().contains(sCallStackDebuggingMatchName);
+        return sCallStackDebuggingMatchName.contains(name.toLowerCase())
+                || name.toLowerCase().contains(sCallStackDebuggingMatchName);
     }
 
     static final boolean isCallStackDebuggingEnabled() {
@@ -261,15 +295,13 @@ public class SurfaceControlRegistry {
         }
 
         @Override // android.view.SurfaceControlRegistry
-        public void setReportingThresholds(int maxLayersReportingThreshold, int resetReportingThreshold, Reporter reporter) {
-        }
+        public void setReportingThresholds(
+                int maxLayersReportingThreshold, int resetReportingThreshold, Reporter reporter) {}
 
         @Override // android.view.SurfaceControlRegistry
-        void add(SurfaceControl sc) {
-        }
+        void add(SurfaceControl sc) {}
 
         @Override // android.view.SurfaceControlRegistry
-        void remove(SurfaceControl sc) {
-        }
+        void remove(SurfaceControl sc) {}
     }
 }

@@ -7,24 +7,29 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.net.IProxyCallback;
-import com.android.server.enterprise.proxy.LocalProxyManager;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2 implements FunctionalUtils.ThrowingRunnable {
+public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2
+        implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ LocalProxyManager f$0;
 
-    public /* synthetic */ LocalProxyManager$$ExternalSyntheticLambda2(LocalProxyManager localProxyManager, int i) {
+    public /* synthetic */ LocalProxyManager$$ExternalSyntheticLambda2(
+            LocalProxyManager localProxyManager, int i) {
         this.$r8$classId = i;
         this.f$0 = localProxyManager;
     }
 
-    private final void runOrThrow$com$android$server$enterprise$proxy$LocalProxyManager$$ExternalSyntheticLambda6() {
+    private final void
+            runOrThrow$com$android$server$enterprise$proxy$LocalProxyManager$$ExternalSyntheticLambda6() {
         LocalProxyManager localProxyManager = this.f$0;
         synchronized (localProxyManager) {
             try {
@@ -33,7 +38,9 @@ public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2 i
                     localProxyManager.clearProxyServerCache();
                     Log.d("LocalProxyManager", "Clear notification dialog");
                     if (localProxyManager.mNotificationManager != null) {
-                        Binder.withCleanCallingIdentity(new LocalProxyManager$$ExternalSyntheticLambda2(localProxyManager, 7));
+                        Binder.withCleanCallingIdentity(
+                                new LocalProxyManager$$ExternalSyntheticLambda2(
+                                        localProxyManager, 7));
                     } else {
                         Log.d("LocalProxyManager", "NotificationManager is null");
                     }
@@ -59,7 +66,9 @@ public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2 i
         switch (this.$r8$classId) {
             case 0:
                 LocalProxyManager localProxyManager = this.f$0;
-                localProxyManager.getConnectivityManagerService().unregisterNetworkCallback(localProxyManager.mNetworkCallback);
+                localProxyManager
+                        .getConnectivityManagerService()
+                        .unregisterNetworkCallback(localProxyManager.mNetworkCallback);
                 synchronized (LocalProxyManager.mNetworkCallbackLock) {
                     LocalProxyManager.sIsNetworkCallbackRunning = false;
                 }
@@ -76,7 +85,8 @@ public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2 i
                 try {
                     iProxyCallback.clearProxyServerCache();
                     IProxyCallback iProxyCallback2 = localProxyManager2.mCallbackService;
-                    if (LocalProxyManager.getGlobalProxy() == null && LocalProxyManager.getDefaultProxy() == null) {
+                    if (LocalProxyManager.getGlobalProxy() == null
+                            && LocalProxyManager.getDefaultProxy() == null) {
                         z = false;
                         iProxyCallback2.setEnterpriseProxy(z);
                         return;
@@ -98,8 +108,10 @@ public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2 i
                         return;
                     }
                     Intent intent = new Intent();
-                    intent.setClassName("com.android.proxyhandler", "com.android.proxyhandler.ProxyService");
-                    LocalProxyManager.AnonymousClass1 anonymousClass1 = new LocalProxyManager.AnonymousClass1(localProxyManager3, 0);
+                    intent.setClassName(
+                            "com.android.proxyhandler", "com.android.proxyhandler.ProxyService");
+                    LocalProxyManager.AnonymousClass1 anonymousClass1 =
+                            new LocalProxyManager.AnonymousClass1(localProxyManager3, 0);
                     localProxyManager3.mProxyConnection = anonymousClass1;
                     localProxyManager3.mContext.bindService(intent, anonymousClass1, 1073741829);
                     return;
@@ -110,7 +122,14 @@ public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2 i
             case 4:
                 LocalProxyManager localProxyManager4 = this.f$0;
                 localProxyManager4.getClass();
-                localProxyManager4.getConnectivityManagerService().registerNetworkCallback(new NetworkRequest.Builder().addTransportType(1).addCapability(12).build(), localProxyManager4.mNetworkCallback);
+                localProxyManager4
+                        .getConnectivityManagerService()
+                        .registerNetworkCallback(
+                                new NetworkRequest.Builder()
+                                        .addTransportType(1)
+                                        .addCapability(12)
+                                        .build(),
+                                localProxyManager4.mNetworkCallback);
                 synchronized (LocalProxyManager.mNetworkCallbackLock) {
                     LocalProxyManager.sIsNetworkCallbackRunning = true;
                 }
@@ -118,7 +137,9 @@ public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2 i
             case 5:
                 LocalProxyManager localProxyManager5 = this.f$0;
                 localProxyManager5.getClass();
-                Intent intent2 = new Intent("com.samsung.android.knox.intent.action.PROXY_REFRESH_CREDENTIALS_DIALOG_INTERNAL");
+                Intent intent2 =
+                        new Intent(
+                                "com.samsung.android.knox.intent.action.PROXY_REFRESH_CREDENTIALS_DIALOG_INTERNAL");
                 intent2.setPackage(KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME);
                 localProxyManager5.mContext.sendStickyBroadcastAsUser(intent2, UserHandle.ALL);
                 return;
@@ -126,7 +147,8 @@ public final /* synthetic */ class LocalProxyManager$$ExternalSyntheticLambda2 i
                 runOrThrow$com$android$server$enterprise$proxy$LocalProxyManager$$ExternalSyntheticLambda6();
                 return;
             default:
-                this.f$0.mNotificationManager.cancelAsUser("LocalProxyManager", 993, UserHandle.ALL);
+                this.f$0.mNotificationManager.cancelAsUser(
+                        "LocalProxyManager", 993, UserHandle.ALL);
                 return;
         }
     }

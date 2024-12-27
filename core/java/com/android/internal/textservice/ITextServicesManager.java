@@ -8,12 +8,11 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.SpellCheckerSubtype;
-import com.android.internal.textservice.ISpellCheckerSessionListener;
-import com.android.internal.textservice.ITextServicesSessionListener;
 
 /* loaded from: classes5.dex */
 public interface ITextServicesManager extends IInterface {
-    void finishSpellCheckerService(int i, ISpellCheckerSessionListener iSpellCheckerSessionListener) throws RemoteException;
+    void finishSpellCheckerService(int i, ISpellCheckerSessionListener iSpellCheckerSessionListener)
+            throws RemoteException;
 
     SpellCheckerInfo getCurrentSpellChecker(int i, String str) throws RemoteException;
 
@@ -21,28 +20,45 @@ public interface ITextServicesManager extends IInterface {
 
     SpellCheckerInfo[] getEnabledSpellCheckers(int i) throws RemoteException;
 
-    void getSpellCheckerService(int i, String str, String str2, ITextServicesSessionListener iTextServicesSessionListener, ISpellCheckerSessionListener iSpellCheckerSessionListener, Bundle bundle, int i2) throws RemoteException;
+    void getSpellCheckerService(
+            int i,
+            String str,
+            String str2,
+            ITextServicesSessionListener iTextServicesSessionListener,
+            ISpellCheckerSessionListener iSpellCheckerSessionListener,
+            Bundle bundle,
+            int i2)
+            throws RemoteException;
 
     boolean isSpellCheckerEnabled(int i) throws RemoteException;
 
     public static class Default implements ITextServicesManager {
         @Override // com.android.internal.textservice.ITextServicesManager
-        public SpellCheckerInfo getCurrentSpellChecker(int userId, String locale) throws RemoteException {
+        public SpellCheckerInfo getCurrentSpellChecker(int userId, String locale)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.textservice.ITextServicesManager
-        public SpellCheckerSubtype getCurrentSpellCheckerSubtype(int userId, boolean allowImplicitlySelectedSubtype) throws RemoteException {
+        public SpellCheckerSubtype getCurrentSpellCheckerSubtype(
+                int userId, boolean allowImplicitlySelectedSubtype) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.textservice.ITextServicesManager
-        public void getSpellCheckerService(int userId, String sciId, String locale, ITextServicesSessionListener tsListener, ISpellCheckerSessionListener scListener, Bundle bundle, int supportedAttributes) throws RemoteException {
-        }
+        public void getSpellCheckerService(
+                int userId,
+                String sciId,
+                String locale,
+                ITextServicesSessionListener tsListener,
+                ISpellCheckerSessionListener scListener,
+                Bundle bundle,
+                int supportedAttributes)
+                throws RemoteException {}
 
         @Override // com.android.internal.textservice.ITextServicesManager
-        public void finishSpellCheckerService(int userId, ISpellCheckerSessionListener listener) throws RemoteException {
-        }
+        public void finishSpellCheckerService(int userId, ISpellCheckerSessionListener listener)
+                throws RemoteException {}
 
         @Override // com.android.internal.textservice.ITextServicesManager
         public boolean isSpellCheckerEnabled(int userId) throws RemoteException {
@@ -60,8 +76,9 @@ public interface ITextServicesManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITextServicesManager {
-        public static final String DESCRIPTOR = "com.android.internal.textservice.ITextServicesManager";
+    public abstract static class Stub extends Binder implements ITextServicesManager {
+        public static final String DESCRIPTOR =
+                "com.android.internal.textservice.ITextServicesManager";
         static final int TRANSACTION_finishSpellCheckerService = 4;
         static final int TRANSACTION_getCurrentSpellChecker = 1;
         static final int TRANSACTION_getCurrentSpellCheckerSubtype = 2;
@@ -114,7 +131,8 @@ public interface ITextServicesManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -143,8 +161,10 @@ public interface ITextServicesManager extends IInterface {
                     int _arg03 = data.readInt();
                     String _arg13 = data.readString();
                     String _arg2 = data.readString();
-                    ITextServicesSessionListener _arg3 = ITextServicesSessionListener.Stub.asInterface(data.readStrongBinder());
-                    ISpellCheckerSessionListener _arg4 = ISpellCheckerSessionListener.Stub.asInterface(data.readStrongBinder());
+                    ITextServicesSessionListener _arg3 =
+                            ITextServicesSessionListener.Stub.asInterface(data.readStrongBinder());
+                    ISpellCheckerSessionListener _arg4 =
+                            ISpellCheckerSessionListener.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg5 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
@@ -152,7 +172,8 @@ public interface ITextServicesManager extends IInterface {
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    ISpellCheckerSessionListener _arg14 = ISpellCheckerSessionListener.Stub.asInterface(data.readStrongBinder());
+                    ISpellCheckerSessionListener _arg14 =
+                            ISpellCheckerSessionListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     finishSpellCheckerService(_arg04, _arg14);
                     return true;
@@ -192,7 +213,8 @@ public interface ITextServicesManager extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
-            public SpellCheckerInfo getCurrentSpellChecker(int userId, String locale) throws RemoteException {
+            public SpellCheckerInfo getCurrentSpellChecker(int userId, String locale)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -201,7 +223,8 @@ public interface ITextServicesManager extends IInterface {
                     _data.writeString(locale);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    SpellCheckerInfo _result = (SpellCheckerInfo) _reply.readTypedObject(SpellCheckerInfo.CREATOR);
+                    SpellCheckerInfo _result =
+                            (SpellCheckerInfo) _reply.readTypedObject(SpellCheckerInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -210,7 +233,8 @@ public interface ITextServicesManager extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
-            public SpellCheckerSubtype getCurrentSpellCheckerSubtype(int userId, boolean allowImplicitlySelectedSubtype) throws RemoteException {
+            public SpellCheckerSubtype getCurrentSpellCheckerSubtype(
+                    int userId, boolean allowImplicitlySelectedSubtype) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -219,7 +243,9 @@ public interface ITextServicesManager extends IInterface {
                     _data.writeBoolean(allowImplicitlySelectedSubtype);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    SpellCheckerSubtype _result = (SpellCheckerSubtype) _reply.readTypedObject(SpellCheckerSubtype.CREATOR);
+                    SpellCheckerSubtype _result =
+                            (SpellCheckerSubtype)
+                                    _reply.readTypedObject(SpellCheckerSubtype.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -228,7 +254,15 @@ public interface ITextServicesManager extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
-            public void getSpellCheckerService(int userId, String sciId, String locale, ITextServicesSessionListener tsListener, ISpellCheckerSessionListener scListener, Bundle bundle, int supportedAttributes) throws RemoteException {
+            public void getSpellCheckerService(
+                    int userId,
+                    String sciId,
+                    String locale,
+                    ITextServicesSessionListener tsListener,
+                    ISpellCheckerSessionListener scListener,
+                    Bundle bundle,
+                    int supportedAttributes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -246,7 +280,8 @@ public interface ITextServicesManager extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ITextServicesManager
-            public void finishSpellCheckerService(int userId, ISpellCheckerSessionListener listener) throws RemoteException {
+            public void finishSpellCheckerService(int userId, ISpellCheckerSessionListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -284,7 +319,8 @@ public interface ITextServicesManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    SpellCheckerInfo[] _result = (SpellCheckerInfo[]) _reply.createTypedArray(SpellCheckerInfo.CREATOR);
+                    SpellCheckerInfo[] _result =
+                            (SpellCheckerInfo[]) _reply.createTypedArray(SpellCheckerInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

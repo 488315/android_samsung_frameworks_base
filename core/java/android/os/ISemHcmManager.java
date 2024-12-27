@@ -18,7 +18,7 @@ public interface ISemHcmManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemHcmManager {
+    public abstract static class Stub extends Binder implements ISemHcmManager {
         static final int TRANSACTION_getHcmEnable = 1;
 
         public Stub() {
@@ -56,7 +56,8 @@ public interface ISemHcmManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemHcmManager.DESCRIPTOR);
             }

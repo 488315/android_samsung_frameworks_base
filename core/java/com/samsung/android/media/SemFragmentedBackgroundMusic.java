@@ -2,7 +2,7 @@ package com.samsung.android.media;
 
 import android.content.res.AssetFileDescriptor;
 import android.os.Parcel;
-import com.samsung.android.media.SemBackgroundMusic;
+
 import java.io.FileDescriptor;
 import java.util.ArrayList;
 
@@ -84,9 +84,14 @@ public class SemFragmentedBackgroundMusic extends SemBackgroundMusic {
         this.mFBGMOutro = super.addInfo(this.mFBGMOutro, afd, startTime, endTime);
     }
 
-    public void setPlaybackRule(int bodyRepeatCount, int bodyLastIndex, boolean useOutro) throws IllegalArgumentException {
+    public void setPlaybackRule(int bodyRepeatCount, int bodyLastIndex, boolean useOutro)
+            throws IllegalArgumentException {
         if (bodyLastIndex > this.mBodyCount) {
-            String msg = "bodyLastIndex " + bodyLastIndex + "is invalid; larger than BGM_SECTION_TYPE_BODY count " + this.mBodyCount;
+            String msg =
+                    "bodyLastIndex "
+                            + bodyLastIndex
+                            + "is invalid; larger than BGM_SECTION_TYPE_BODY count "
+                            + this.mBodyCount;
             throw new IllegalArgumentException(msg);
         }
         this.mBodyCycle = bodyRepeatCount;

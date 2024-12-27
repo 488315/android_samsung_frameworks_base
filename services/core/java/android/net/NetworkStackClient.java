@@ -1,7 +1,5 @@
 package android.net;
 
-import android.net.ConnectivityModuleConnector;
-import android.net.INetworkStackConnector;
 import android.net.dhcp.DhcpServingParamsParcel;
 import android.net.dhcp.IDhcpServerCallbacks;
 import android.net.ip.IIpClientCallbacks;
@@ -12,6 +10,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -45,8 +44,11 @@ public class NetworkStackClient {
         @Override // android.net.NetworkStackClient.Dependencies
         public final void checkCallerUid() {
             int callingUid = Binder.getCallingUid();
-            if (callingUid != 1000 && callingUid != 1073 && UserHandle.getAppId(callingUid) != 1002) {
-                throw new SecurityException("Only the system server should try to bind to the network stack.");
+            if (callingUid != 1000
+                    && callingUid != 1073
+                    && UserHandle.getAppId(callingUid) != 1002) {
+                throw new SecurityException(
+                        "Only the system server should try to bind to the network stack.");
             }
         }
 
@@ -62,9 +64,9 @@ public class NetworkStackClient {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class NetworkStackConnection implements ConnectivityModuleConnector.ModuleServiceCallback {
-        public NetworkStackConnection() {
-        }
+    public final class NetworkStackConnection
+            implements ConnectivityModuleConnector.ModuleServiceCallback {
+        public NetworkStackConnection() {}
 
         @Override // android.net.ConnectivityModuleConnector.ModuleServiceCallback
         public final void onModuleServiceConnected(IBinder iBinder) {
@@ -118,7 +120,9 @@ public class NetworkStackClient {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ void lambda$fetchIpMemoryStore$3(IIpMemoryStoreCallbacks iIpMemoryStoreCallbacks, INetworkStackConnector iNetworkStackConnector) {
+    public static /* synthetic */ void lambda$fetchIpMemoryStore$3(
+            IIpMemoryStoreCallbacks iIpMemoryStoreCallbacks,
+            INetworkStackConnector iNetworkStackConnector) {
         try {
             iNetworkStackConnector.fetchIpMemoryStore(iIpMemoryStoreCallbacks);
         } catch (RemoteException e) {
@@ -127,16 +131,24 @@ public class NetworkStackClient {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ void lambda$makeDhcpServer$0(String str, DhcpServingParamsParcel dhcpServingParamsParcel, IDhcpServerCallbacks iDhcpServerCallbacks, INetworkStackConnector iNetworkStackConnector) {
+    public static /* synthetic */ void lambda$makeDhcpServer$0(
+            String str,
+            DhcpServingParamsParcel dhcpServingParamsParcel,
+            IDhcpServerCallbacks iDhcpServerCallbacks,
+            INetworkStackConnector iNetworkStackConnector) {
         try {
-            iNetworkStackConnector.makeDhcpServer(str, dhcpServingParamsParcel, iDhcpServerCallbacks);
+            iNetworkStackConnector.makeDhcpServer(
+                    str, dhcpServingParamsParcel, iDhcpServerCallbacks);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ void lambda$makeIpClient$1(String str, IIpClientCallbacks iIpClientCallbacks, INetworkStackConnector iNetworkStackConnector) {
+    public static /* synthetic */ void lambda$makeIpClient$1(
+            String str,
+            IIpClientCallbacks iIpClientCallbacks,
+            INetworkStackConnector iNetworkStackConnector) {
         try {
             iNetworkStackConnector.makeIpClient(str, iIpClientCallbacks);
         } catch (RemoteException e) {
@@ -145,7 +157,11 @@ public class NetworkStackClient {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ void lambda$makeNetworkMonitor$2(Network network, String str, INetworkMonitorCallbacks iNetworkMonitorCallbacks, INetworkStackConnector iNetworkStackConnector) {
+    public static /* synthetic */ void lambda$makeNetworkMonitor$2(
+            Network network,
+            String str,
+            INetworkMonitorCallbacks iNetworkMonitorCallbacks,
+            INetworkStackConnector iNetworkStackConnector) {
         try {
             iNetworkStackConnector.makeNetworkMonitor(network, str, iNetworkMonitorCallbacks);
         } catch (RemoteException e) {
@@ -214,12 +230,16 @@ public class NetworkStackClient {
     }
 
     public void fetchIpMemoryStore(final IIpMemoryStoreCallbacks iIpMemoryStoreCallbacks) {
-        requestConnector(new NetworkStackCallback() { // from class: android.net.NetworkStackClient$$ExternalSyntheticLambda2
-            @Override // android.net.NetworkStackClient.NetworkStackCallback
-            public final void onNetworkStackConnected(INetworkStackConnector iNetworkStackConnector) {
-                NetworkStackClient.lambda$fetchIpMemoryStore$3(IIpMemoryStoreCallbacks.this, iNetworkStackConnector);
-            }
-        });
+        requestConnector(
+                new NetworkStackCallback() { // from class:
+                                             // android.net.NetworkStackClient$$ExternalSyntheticLambda2
+                    @Override // android.net.NetworkStackClient.NetworkStackCallback
+                    public final void onNetworkStackConnected(
+                            INetworkStackConnector iNetworkStackConnector) {
+                        NetworkStackClient.lambda$fetchIpMemoryStore$3(
+                                IIpMemoryStoreCallbacks.this, iNetworkStackConnector);
+                    }
+                });
     }
 
     public void init() {
@@ -227,25 +247,42 @@ public class NetworkStackClient {
         this.mWasSystemServerInitialized = true;
     }
 
-    public void makeDhcpServer(String str, DhcpServingParamsParcel dhcpServingParamsParcel, IDhcpServerCallbacks iDhcpServerCallbacks) {
-        requestConnector(new NetworkStackClient$$ExternalSyntheticLambda1(str, dhcpServingParamsParcel, iDhcpServerCallbacks));
+    public void makeDhcpServer(
+            String str,
+            DhcpServingParamsParcel dhcpServingParamsParcel,
+            IDhcpServerCallbacks iDhcpServerCallbacks) {
+        requestConnector(
+                new NetworkStackClient$$ExternalSyntheticLambda1(
+                        str, dhcpServingParamsParcel, iDhcpServerCallbacks));
     }
 
     public void makeIpClient(final String str, final IIpClientCallbacks iIpClientCallbacks) {
-        requestConnector(new NetworkStackCallback() { // from class: android.net.NetworkStackClient$$ExternalSyntheticLambda0
-            @Override // android.net.NetworkStackClient.NetworkStackCallback
-            public final void onNetworkStackConnected(INetworkStackConnector iNetworkStackConnector) {
-                NetworkStackClient.lambda$makeIpClient$1(str, iIpClientCallbacks, iNetworkStackConnector);
-            }
-        });
+        requestConnector(
+                new NetworkStackCallback() { // from class:
+                                             // android.net.NetworkStackClient$$ExternalSyntheticLambda0
+                    @Override // android.net.NetworkStackClient.NetworkStackCallback
+                    public final void onNetworkStackConnected(
+                            INetworkStackConnector iNetworkStackConnector) {
+                        NetworkStackClient.lambda$makeIpClient$1(
+                                str, iIpClientCallbacks, iNetworkStackConnector);
+                    }
+                });
     }
 
-    public void makeNetworkMonitor(Network network, String str, INetworkMonitorCallbacks iNetworkMonitorCallbacks) {
-        requestConnector(new NetworkStackClient$$ExternalSyntheticLambda1(network, str, iNetworkMonitorCallbacks));
+    public void makeNetworkMonitor(
+            Network network, String str, INetworkMonitorCallbacks iNetworkMonitorCallbacks) {
+        requestConnector(
+                new NetworkStackClient$$ExternalSyntheticLambda1(
+                        network, str, iNetworkMonitorCallbacks));
     }
 
     public void start() {
-        this.mDependencies.getConnectivityModuleConnector().startModuleService(INetworkStackConnector.class.getName(), "android.permission.MAINLINE_NETWORK_STACK", new NetworkStackConnection());
+        this.mDependencies
+                .getConnectivityModuleConnector()
+                .startModuleService(
+                        INetworkStackConnector.class.getName(),
+                        "android.permission.MAINLINE_NETWORK_STACK",
+                        new NetworkStackConnection());
         log("Network stack service start requested");
     }
 }

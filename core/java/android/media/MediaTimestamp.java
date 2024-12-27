@@ -44,13 +44,22 @@ public final class MediaTimestamp {
             return false;
         }
         MediaTimestamp that = (MediaTimestamp) obj;
-        if (this.mediaTimeUs == that.mediaTimeUs && this.nanoTime == that.nanoTime && this.clockRate == that.clockRate) {
+        if (this.mediaTimeUs == that.mediaTimeUs
+                && this.nanoTime == that.nanoTime
+                && this.clockRate == that.clockRate) {
             return true;
         }
         return false;
     }
 
     public String toString() {
-        return getClass().getName() + "{AnchorMediaTimeUs=" + this.mediaTimeUs + " AnchorSystemNanoTime=" + this.nanoTime + " clockRate=" + this.clockRate + "}";
+        return getClass().getName()
+                + "{AnchorMediaTimeUs="
+                + this.mediaTimeUs
+                + " AnchorSystemNanoTime="
+                + this.nanoTime
+                + " clockRate="
+                + this.clockRate
+                + "}";
     }
 }

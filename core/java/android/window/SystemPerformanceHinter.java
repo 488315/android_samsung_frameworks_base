@@ -5,7 +5,9 @@ import android.os.PerformanceHintManager;
 import android.os.Trace;
 import android.util.Log;
 import android.view.SurfaceControl;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -32,8 +34,7 @@ public class SystemPerformanceHinter {
         SurfaceControl getRootForDisplay(int i);
     }
 
-    private @interface HintFlags {
-    }
+    private @interface HintFlags {}
 
     public class HighPerfSession implements AutoCloseable {
         private final int displayId;
@@ -68,9 +69,17 @@ public class SystemPerformanceHinter {
                 return false;
             }
             if (this.mTraceName == null) {
-                this.mTraceName = "PerfSession-d" + this.displayId + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + this.reason;
+                this.mTraceName =
+                        "PerfSession-d"
+                                + this.displayId
+                                + NativeLibraryHelper.CLEAR_ABI_OVERRIDE
+                                + this.reason;
             }
-            Trace.asyncTraceForTrackBegin(SystemPerformanceHinter.this.mTraceTag, SystemPerformanceHinter.TAG, this.mTraceName, System.identityHashCode(this));
+            Trace.asyncTraceForTrackBegin(
+                    SystemPerformanceHinter.this.mTraceTag,
+                    SystemPerformanceHinter.TAG,
+                    this.mTraceName,
+                    System.identityHashCode(this));
             return true;
         }
 
@@ -78,7 +87,10 @@ public class SystemPerformanceHinter {
             if (this.mTraceName == null) {
                 return false;
             }
-            Trace.asyncTraceForTrackEnd(SystemPerformanceHinter.this.mTraceTag, SystemPerformanceHinter.TAG, System.identityHashCode(this));
+            Trace.asyncTraceForTrackEnd(
+                    SystemPerformanceHinter.this.mTraceTag,
+                    SystemPerformanceHinter.TAG,
+                    System.identityHashCode(this));
             return true;
         }
     }
@@ -89,24 +101,26 @@ public class SystemPerformanceHinter {
         }
 
         @Override // android.window.SystemPerformanceHinter.HighPerfSession
-        public void start() {
-        }
+        public void start() {}
 
         @Override // android.window.SystemPerformanceHinter.HighPerfSession, java.lang.AutoCloseable
-        public void close() {
-        }
+        public void close() {}
     }
 
     public SystemPerformanceHinter(Context context, DisplayRootProvider displayRootProvider) {
         this(context, displayRootProvider, null);
     }
 
-    public SystemPerformanceHinter(Context context, DisplayRootProvider displayRootProvider, Supplier<SurfaceControl.Transaction> transactionSupplier) {
+    public SystemPerformanceHinter(
+            Context context,
+            DisplayRootProvider displayRootProvider,
+            Supplier<SurfaceControl.Transaction> transactionSupplier) {
         SurfaceControl.Transaction transaction;
         this.mTraceTag = 4096L;
         this.mActiveSessions = new ArrayList<>();
         this.mDisplayRootProvider = displayRootProvider;
-        this.mPerfHintManager = (PerformanceHintManager) context.getSystemService(PerformanceHintManager.class);
+        this.mPerfHintManager =
+                (PerformanceHintManager) context.getSystemService(PerformanceHintManager.class);
         if (transactionSupplier != null) {
             transaction = transactionSupplier.get();
         } else {
@@ -124,12 +138,14 @@ public class SystemPerformanceHinter {
             throw new IllegalArgumentException("Not allow empty hint flags");
         }
         if (this.mDisplayRootProvider == null && (hintFlags & 2) != 0) {
-            throw new IllegalArgumentException("Using SF frame rate hints requires a valid display root provider");
+            throw new IllegalArgumentException(
+                    "Using SF frame rate hints requires a valid display root provider");
         }
         if (this.mAdpfSession == null && (hintFlags & 4) != 0) {
             throw new IllegalArgumentException("Using ADPF hints requires an ADPF session");
         }
-        if ((hintFlags & 2) != 0 && this.mDisplayRootProvider.getRootForDisplay(displayId) == null) {
+        if ((hintFlags & 2) != 0
+                && this.mDisplayRootProvider.getRootForDisplay(displayId) == null) {
             Log.v(TAG, "No display root for displayId=" + displayId);
             Trace.instant(32L, "PerfHint-NoDisplayRoot: " + displayId);
             return new NoOpHighPerfSession();
@@ -155,7 +171,8 @@ public class SystemPerformanceHinter {
         int newPerDisplayFlags = calculateActiveHintFlagsForDisplay(2, session.displayId);
         boolean transactionChanged = false;
         if (nowEnabled(oldPerDisplayFlags, newPerDisplayFlags, 2)) {
-            SurfaceControl displaySurfaceControl = this.mDisplayRootProvider.getRootForDisplay(session.displayId);
+            SurfaceControl displaySurfaceControl =
+                    this.mDisplayRootProvider.getRootForDisplay(session.displayId);
             this.mTransaction.setFrameRateSelectionStrategy(displaySurfaceControl, 1);
             this.mTransaction.setFrameRateCategory(displaySurfaceControl, 5, false);
             transactionChanged = true;
@@ -191,7 +208,8 @@ public class SystemPerformanceHinter {
         int newPerDisplayFlags = calculateActiveHintFlagsForDisplay(2, session.displayId);
         boolean transactionChanged = false;
         if (nowDisabled(oldPerDisplayFlags, newPerDisplayFlags, 2)) {
-            SurfaceControl displaySurfaceControl = this.mDisplayRootProvider.getRootForDisplay(session.displayId);
+            SurfaceControl displaySurfaceControl =
+                    this.mDisplayRootProvider.getRootForDisplay(session.displayId);
             this.mTransaction.setFrameRateSelectionStrategy(displaySurfaceControl, 0);
             this.mTransaction.setFrameRateCategory(displaySurfaceControl, 0, false);
             transactionChanged = true;
@@ -262,7 +280,8 @@ public class SystemPerformanceHinter {
                 break;
         }
         String name = displayId != -1 ? prefix + "-d" + displayId : prefix;
-        Trace.asyncTraceForTrackBegin(this.mTraceTag, TAG, name, System.identityHashCode(this) ^ flag);
+        Trace.asyncTraceForTrackBegin(
+                this.mTraceTag, TAG, name, System.identityHashCode(this) ^ flag);
     }
 
     private void asyncTraceEnd(int flag) {
@@ -275,7 +294,14 @@ public class SystemPerformanceHinter {
         pw.println(innerPrefix + "Active sessions (" + this.mActiveSessions.size() + "):");
         for (int i = 0; i < this.mActiveSessions.size(); i++) {
             HighPerfSession s = this.mActiveSessions.get(i);
-            pw.println(innerPrefix + "  reason=" + s.reason + " flags=" + s.hintFlags + " display=" + s.displayId);
+            pw.println(
+                    innerPrefix
+                            + "  reason="
+                            + s.reason
+                            + " flags="
+                            + s.hintFlags
+                            + " display="
+                            + s.displayId);
         }
     }
 }

@@ -2,6 +2,7 @@ package com.samsung.android.media.portrait.semportraiteditor;
 
 import com.samsung.android.media.portrait.semportraiteditor.controllerinterface.PortraitController;
 import com.samsung.android.media.portrait.semportraiteditor.controllerinterface.PortraitData;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -60,24 +61,19 @@ public class SemPortraitEditor {
     public static final int PORTRAIT_PROPERTY_EFFECT_TYPE_VINTAGE_LIGHT = 3;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface getPortraitDataParameterIndex {
-    }
+    public @interface getPortraitDataParameterIndex {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface returnCode {
-    }
+    public @interface returnCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface setPortraitDataParameterIndex {
-    }
+    public @interface setPortraitDataParameterIndex {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface setPortraitType {
-    }
+    public @interface setPortraitType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface setProcessMode {
-    }
+    public @interface setProcessMode {}
 
     public static int create(int type) {
         return PortraitController.create(type);

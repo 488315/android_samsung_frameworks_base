@@ -16,12 +16,10 @@ public interface IDeviceInjectorSession extends IInterface {
 
     public static class Default implements IDeviceInjectorSession {
         @Override // android.hardware.IDeviceInjectorSession
-        public void stopDeviceInjector() throws RemoteException {
-        }
+        public void stopDeviceInjector() throws RemoteException {}
 
         @Override // android.hardware.IDeviceInjectorSession
-        public void setDeviceInjectorPending(boolean pending) throws RemoteException {
-        }
+        public void setDeviceInjectorPending(boolean pending) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IDeviceInjectorSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceInjectorSession {
+    public abstract static class Stub extends Binder implements IDeviceInjectorSession {
         static final int TRANSACTION_setDeviceInjectorPending = 2;
         static final int TRANSACTION_stopDeviceInjector = 1;
 
@@ -70,7 +68,8 @@ public interface IDeviceInjectorSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDeviceInjectorSession.DESCRIPTOR);
             }

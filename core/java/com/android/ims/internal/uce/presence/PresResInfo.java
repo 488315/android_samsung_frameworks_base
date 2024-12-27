@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class PresResInfo implements Parcelable {
-    public static final Parcelable.Creator<PresResInfo> CREATOR = new Parcelable.Creator<PresResInfo>() { // from class: com.android.ims.internal.uce.presence.PresResInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresResInfo createFromParcel(Parcel source) {
-            return new PresResInfo(source);
-        }
+    public static final Parcelable.Creator<PresResInfo> CREATOR =
+            new Parcelable.Creator<
+                    PresResInfo>() { // from class:
+                                     // com.android.ims.internal.uce.presence.PresResInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresResInfo createFromParcel(Parcel source) {
+                    return new PresResInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresResInfo[] newArray(int size) {
-            return new PresResInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresResInfo[] newArray(int size) {
+                    return new PresResInfo[size];
+                }
+            };
     private String mDisplayName;
     private PresResInstanceInfo mInstanceInfo;
     private String mResUri;
@@ -73,6 +76,10 @@ public class PresResInfo implements Parcelable {
     public void readFromParcel(Parcel source) {
         this.mResUri = source.readString();
         this.mDisplayName = source.readString();
-        this.mInstanceInfo = (PresResInstanceInfo) source.readParcelable(PresResInstanceInfo.class.getClassLoader(), PresResInstanceInfo.class);
+        this.mInstanceInfo =
+                (PresResInstanceInfo)
+                        source.readParcelable(
+                                PresResInstanceInfo.class.getClassLoader(),
+                                PresResInstanceInfo.class);
     }
 }

@@ -1,6 +1,7 @@
 package android.os.vibrator;
 
 import android.os.VibratorInfo;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
@@ -8,7 +9,9 @@ public final class VibratorFrequencyProfile {
     private final VibratorInfo.FrequencyProfile mFrequencyProfile;
 
     public VibratorFrequencyProfile(VibratorInfo.FrequencyProfile frequencyProfile) {
-        Preconditions.checkArgument(!frequencyProfile.isEmpty(), "Frequency profile must have a non-empty frequency range");
+        Preconditions.checkArgument(
+                !frequencyProfile.isEmpty(),
+                "Frequency profile must have a non-empty frequency range");
         this.mFrequencyProfile = frequencyProfile;
     }
 

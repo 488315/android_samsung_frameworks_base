@@ -5,7 +5,8 @@ import android.graphics.Paint;
 import android.graphics.animation.RenderNodeAnimator;
 
 /* loaded from: classes4.dex */
-public class RenderNodeAnimator extends android.graphics.animation.RenderNodeAnimator implements RenderNodeAnimator.ViewListener {
+public class RenderNodeAnimator extends android.graphics.animation.RenderNodeAnimator
+        implements RenderNodeAnimator.ViewListener {
     private View mViewTarget;
 
     public RenderNodeAnimator(int property, float finalValue) {

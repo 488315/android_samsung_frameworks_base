@@ -15,8 +15,7 @@ public interface ITransactionReadyCallback extends IInterface {
 
     public static class Default implements ITransactionReadyCallback {
         @Override // android.window.ITransactionReadyCallback
-        public void onTransactionReady(SurfaceControl.Transaction t) throws RemoteException {
-        }
+        public void onTransactionReady(SurfaceControl.Transaction t) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface ITransactionReadyCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITransactionReadyCallback {
+    public abstract static class Stub extends Binder implements ITransactionReadyCallback {
         static final int TRANSACTION_onTransactionReady = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface ITransactionReadyCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITransactionReadyCallback.DESCRIPTOR);
             }
@@ -72,7 +72,9 @@ public interface ITransactionReadyCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SurfaceControl.Transaction _arg0 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    SurfaceControl.Transaction _arg0 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
                     data.enforceNoDataAvail();
                     onTransactionReady(_arg0);
                     reply.writeNoException();

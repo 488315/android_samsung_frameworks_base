@@ -3,6 +3,7 @@ package com.android.server;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
+
 import com.android.server.devicepolicy.DevicePolicyManagerService;
 import com.android.server.input.InputManagerService;
 import com.android.server.media.MediaRouterService;
@@ -11,6 +12,7 @@ import com.android.server.net.NetworkPolicyManagerService;
 import com.android.server.net.UrspService;
 import com.android.server.timedetector.NetworkTimeUpdateService;
 import com.android.server.utils.TimingsTraceAndSlog;
+
 import com.samsung.accessory.manager.SAccessoryManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -40,7 +42,30 @@ public final /* synthetic */ class SystemServer$$ExternalSyntheticLambda7 implem
     public final /* synthetic */ NetworkPolicyManagerService f$8;
     public final /* synthetic */ VpnManagerService f$9;
 
-    public /* synthetic */ SystemServer$$ExternalSyntheticLambda7(SystemServer systemServer, TimingsTraceAndSlog timingsTraceAndSlog, DevicePolicyManagerService.Lifecycle lifecycle, boolean z, Context context, boolean z2, ConnectivityManager connectivityManager, NetworkManagementService networkManagementService, NetworkPolicyManagerService networkPolicyManagerService, VpnManagerService vpnManagerService, VcnManagementService vcnManagementService, UrspService urspService, HsumBootUserInitializer hsumBootUserInitializer, IBinder iBinder, SAccessoryManager sAccessoryManager, IBinder iBinder2, CountryDetectorService countryDetectorService, NetworkTimeUpdateService networkTimeUpdateService, InputManagerService inputManagerService, TelephonyRegistry telephonyRegistry, MediaRouterService mediaRouterService, MmsServiceBroker mmsServiceBroker, boolean z3) {
+    public /* synthetic */ SystemServer$$ExternalSyntheticLambda7(
+            SystemServer systemServer,
+            TimingsTraceAndSlog timingsTraceAndSlog,
+            DevicePolicyManagerService.Lifecycle lifecycle,
+            boolean z,
+            Context context,
+            boolean z2,
+            ConnectivityManager connectivityManager,
+            NetworkManagementService networkManagementService,
+            NetworkPolicyManagerService networkPolicyManagerService,
+            VpnManagerService vpnManagerService,
+            VcnManagementService vcnManagementService,
+            UrspService urspService,
+            HsumBootUserInitializer hsumBootUserInitializer,
+            IBinder iBinder,
+            SAccessoryManager sAccessoryManager,
+            IBinder iBinder2,
+            CountryDetectorService countryDetectorService,
+            NetworkTimeUpdateService networkTimeUpdateService,
+            InputManagerService inputManagerService,
+            TelephonyRegistry telephonyRegistry,
+            MediaRouterService mediaRouterService,
+            MmsServiceBroker mmsServiceBroker,
+            boolean z3) {
         this.f$0 = systemServer;
         this.f$1 = timingsTraceAndSlog;
         this.f$2 = lifecycle;
@@ -68,6 +93,10 @@ public final /* synthetic */ class SystemServer$$ExternalSyntheticLambda7 implem
 
     @Override // java.lang.Runnable
     public final void run() {
-        SystemServer.$r8$lambda$Djmghhk0H4gEPRWdl1V39kc2N1M(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, this.f$8, this.f$9, this.f$10, this.f$11, this.f$12, this.f$13, this.f$14, this.f$15, this.f$16, this.f$17, this.f$18, this.f$19, this.f$20, this.f$21, this.f$22);
+        SystemServer.$r8$lambda$Djmghhk0H4gEPRWdl1V39kc2N1M(
+                this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7,
+                this.f$8, this.f$9, this.f$10, this.f$11, this.f$12, this.f$13, this.f$14,
+                this.f$15, this.f$16, this.f$17, this.f$18, this.f$19, this.f$20, this.f$21,
+                this.f$22);
     }
 }

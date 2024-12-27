@@ -2,6 +2,7 @@ package android.hardware.scontext;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 @Deprecated
@@ -13,27 +14,29 @@ public class SContextActivityNotificationExAttribute extends SContextAttribute {
     private int mDuration;
 
     SContextActivityNotificationExAttribute() {
-        this.mActivityFilter = new int[]{4};
+        this.mActivityFilter = new int[] {4};
         this.mDuration = 30;
         setAttribute();
     }
 
     public SContextActivityNotificationExAttribute(int[] activityFilter, int duration) {
-        this.mActivityFilter = new int[]{4};
+        this.mActivityFilter = new int[] {4};
         this.mDuration = 30;
         this.mActivityFilter = activityFilter;
         this.mDuration = duration;
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mActivityFilter == null) {
             return false;
         }
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < this.mActivityFilter.length; i++) {
-            if ((this.mActivityFilter[i] < 0 || this.mActivityFilter[i] > 5) && this.mActivityFilter[i] != 30) {
+            if ((this.mActivityFilter[i] < 0 || this.mActivityFilter[i] > 5)
+                    && this.mActivityFilter[i] != 30) {
                 Log.e(TAG, "The activity status is wrong.");
                 return false;
             }

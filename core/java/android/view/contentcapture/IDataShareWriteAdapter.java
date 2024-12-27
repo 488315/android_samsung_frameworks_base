@@ -21,20 +21,16 @@ public interface IDataShareWriteAdapter extends IInterface {
 
     public static class Default implements IDataShareWriteAdapter {
         @Override // android.view.contentcapture.IDataShareWriteAdapter
-        public void write(ParcelFileDescriptor destination) throws RemoteException {
-        }
+        public void write(ParcelFileDescriptor destination) throws RemoteException {}
 
         @Override // android.view.contentcapture.IDataShareWriteAdapter
-        public void error(int errorCode) throws RemoteException {
-        }
+        public void error(int errorCode) throws RemoteException {}
 
         @Override // android.view.contentcapture.IDataShareWriteAdapter
-        public void rejected() throws RemoteException {
-        }
+        public void rejected() throws RemoteException {}
 
         @Override // android.view.contentcapture.IDataShareWriteAdapter
-        public void finish() throws RemoteException {
-        }
+        public void finish() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +38,7 @@ public interface IDataShareWriteAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDataShareWriteAdapter {
+    public abstract static class Stub extends Binder implements IDataShareWriteAdapter {
         static final int TRANSACTION_error = 2;
         static final int TRANSACTION_finish = 4;
         static final int TRANSACTION_rejected = 3;
@@ -89,7 +85,8 @@ public interface IDataShareWriteAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDataShareWriteAdapter.DESCRIPTOR);
             }
@@ -99,7 +96,9 @@ public interface IDataShareWriteAdapter extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     write(_arg0);
                     return true;

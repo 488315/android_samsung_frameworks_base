@@ -2,24 +2,26 @@ package android.media.tv;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public final class AdResponse implements Parcelable {
-    public static final Parcelable.Creator<AdResponse> CREATOR = new Parcelable.Creator<AdResponse>() { // from class: android.media.tv.AdResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AdResponse createFromParcel(Parcel source) {
-            return new AdResponse(source);
-        }
+    public static final Parcelable.Creator<AdResponse> CREATOR =
+            new Parcelable.Creator<AdResponse>() { // from class: android.media.tv.AdResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AdResponse createFromParcel(Parcel source) {
+                    return new AdResponse(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AdResponse[] newArray(int size) {
-            return new AdResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AdResponse[] newArray(int size) {
+                    return new AdResponse[size];
+                }
+            };
     public static final int RESPONSE_TYPE_BUFFERING = 5;
     public static final int RESPONSE_TYPE_ERROR = 4;
     public static final int RESPONSE_TYPE_FINISHED = 2;
@@ -30,8 +32,7 @@ public final class AdResponse implements Parcelable {
     private final int mResponseType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResponseType {
-    }
+    public @interface ResponseType {}
 
     public AdResponse(int id, int responseType, long elapsedTime) {
         this.mId = id;

@@ -4,26 +4,29 @@ import android.hardware.camera2.impl.CameraMetadataNative;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collection;
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public class CameraSessionConfig implements Parcelable {
-    public static final Parcelable.Creator<CameraSessionConfig> CREATOR = new Parcelable.Creator<CameraSessionConfig>() { // from class: android.hardware.camera2.extension.CameraSessionConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraSessionConfig createFromParcel(Parcel _aidl_source) {
-            CameraSessionConfig _aidl_out = new CameraSessionConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CameraSessionConfig> CREATOR =
+            new Parcelable.Creator<CameraSessionConfig>() { // from class:
+                // android.hardware.camera2.extension.CameraSessionConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraSessionConfig createFromParcel(Parcel _aidl_source) {
+                    CameraSessionConfig _aidl_out = new CameraSessionConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraSessionConfig[] newArray(int _aidl_size) {
-            return new CameraSessionConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraSessionConfig[] newArray(int _aidl_size) {
+                    return new CameraSessionConfig[_aidl_size];
+                }
+            };
     public List<CameraOutputConfig> outputConfigs;
     public CameraMetadataNative sessionParameter;
     public int sessionTemplateId = 0;
@@ -67,7 +70,9 @@ public class CameraSessionConfig implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.sessionParameter = (CameraMetadataNative) _aidl_parcel.readTypedObject(CameraMetadataNative.CREATOR);
+            this.sessionParameter =
+                    (CameraMetadataNative)
+                            _aidl_parcel.readTypedObject(CameraMetadataNative.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

@@ -9,10 +9,13 @@ import android.opengl.GLES20;
 import android.os.Process;
 import android.util.BoostFramework;
 import android.view.WindowManagerPolicyConstants;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.gsm.SmsCbConstants;
+
 import com.samsung.android.media.SemMediaPlayer;
 import com.samsung.android.smartface.SmartFaceManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
@@ -21,18 +24,15 @@ import java.util.Locale;
 public final class AccessNetworkConstants {
     private static final String TAG = AccessNetworkConstants.class.getSimpleName();
 
-    @SystemApi
-    public static final int TRANSPORT_TYPE_INVALID = -1;
+    @SystemApi public static final int TRANSPORT_TYPE_INVALID = -1;
     public static final int TRANSPORT_TYPE_WLAN = 2;
     public static final int TRANSPORT_TYPE_WWAN = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RadioAccessNetworkType {
-    }
+    public @interface RadioAccessNetworkType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TransportType {
-    }
+    public @interface TransportType {}
 
     public static String transportTypeToString(int transportType) {
         switch (transportType) {
@@ -57,8 +57,7 @@ public final class AccessNetworkConstants {
         public static final int UNKNOWN = 0;
         public static final int UTRAN = 2;
 
-        private AccessNetworkType() {
-        }
+        private AccessNetworkType() {}
 
         public static String toString(int type) {
             switch (type) {
@@ -177,19 +176,24 @@ public final class AccessNetworkConstants {
         public static final int BAND_T810 = 7;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface GeranBands {
-        }
+        public @interface GeranBands {}
 
-        private GeranBand() {
-        }
+        private GeranBand() {}
     }
 
     enum GeranBandArfcnFrequency {
         GERAN_ARFCN_FREQUENCY_BAND_450(3, 450600, 259, 259, 293, 10),
         GERAN_ARFCN_FREQUENCY_BAND_480(4, 479000, 306, 306, 340, 10),
         GERAN_ARFCN_FREQUENCY_BAND_850(8, 824200, 128, 128, 251, 45),
-        GERAN_ARFCN_FREQUENCY_BAND_DCS1800(12, 1710200, 512, 512, MetricsProto.MetricsEvent.ACTION_APPOP_DENIED_ACCESS_NOTIFICATIONS, 95),
-        GERAN_ARFCN_FREQUENCY_BAND_PCS1900(13, 1850200, 512, 512, MetricsProto.MetricsEvent.PROVISIONING_TERMS_COUNT, 80),
+        GERAN_ARFCN_FREQUENCY_BAND_DCS1800(
+                12,
+                1710200,
+                512,
+                512,
+                MetricsProto.MetricsEvent.ACTION_APPOP_DENIED_ACCESS_NOTIFICATIONS,
+                95),
+        GERAN_ARFCN_FREQUENCY_BAND_PCS1900(
+                13, 1850200, 512, 512, MetricsProto.MetricsEvent.PROVISIONING_TERMS_COUNT, 80),
         GERAN_ARFCN_FREQUENCY_BAND_E900_1(10, 890000, 0, 0, 124, 45),
         GERAN_ARFCN_FREQUENCY_BAND_E900_2(10, 890000, 1024, 975, 1023, 45),
         GERAN_ARFCN_FREQUENCY_BAND_R900_1(11, 890000, 0, 0, 124, 45),
@@ -205,7 +209,13 @@ public final class AccessNetworkConstants {
         int downlinkOffset;
         int uplinkFrequencyFirst;
 
-        GeranBandArfcnFrequency(int band, int uplinkFrequencyFirstKhz, int arfcnOffset, int arfcnRangeFirst, int arfcnRangeLast, int downlinkOffset) {
+        GeranBandArfcnFrequency(
+                int band,
+                int uplinkFrequencyFirstKhz,
+                int arfcnOffset,
+                int arfcnRangeFirst,
+                int arfcnRangeLast,
+                int downlinkOffset) {
             this.band = band;
             this.uplinkFrequencyFirst = uplinkFrequencyFirstKhz;
             this.arfcnOffset = arfcnOffset;
@@ -244,29 +254,57 @@ public final class AccessNetworkConstants {
         public static final int BAND_F = 106;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface UtranBands {
-        }
+        public @interface UtranBands {}
 
-        private UtranBand() {
-        }
+        private UtranBand() {}
     }
 
     enum UtranBandArfcnFrequency {
         UTRAN_ARFCN_FREQUENCY_BAND_1(1, 0, 10562, 10838, 0, 9612, 9888),
         UTRAN_ARFCN_FREQUENCY_BAND_2(2, 0, 9662, 9938, 0, 9262, 9538),
-        UTRAN_ARFCN_FREQUENCY_BAND_3(3, 1575000, 1162, 1513, 1525000, MetricsProto.MetricsEvent.ACTION_TEXT_SELECTION_MENU_ITEM_ASSIST, MetricsProto.MetricsEvent.ROTATION_SUGGESTION_SHOWN),
+        UTRAN_ARFCN_FREQUENCY_BAND_3(
+                3,
+                1575000,
+                1162,
+                1513,
+                1525000,
+                MetricsProto.MetricsEvent.ACTION_TEXT_SELECTION_MENU_ITEM_ASSIST,
+                MetricsProto.MetricsEvent.ROTATION_SUGGESTION_SHOWN),
         UTRAN_ARFCN_FREQUENCY_BAND_4(4, 1805000, 1537, 1738, 1450000, 1312, 1513),
-        UTRAN_ARFCN_FREQUENCY_BAND_5(5, 0, 4357, 4458, 0, 4132, BoostFramework.VENDOR_HINT_ROTATION_LATENCY_BOOST),
-        UTRAN_ARFCN_FREQUENCY_BAND_6(6, 0, SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_LIKELY_LANGUAGE, 4413, 0, BoostFramework.VENDOR_HINT_FIRST_DRAW, 4188),
+        UTRAN_ARFCN_FREQUENCY_BAND_5(
+                5, 0, 4357, 4458, 0, 4132, BoostFramework.VENDOR_HINT_ROTATION_LATENCY_BOOST),
+        UTRAN_ARFCN_FREQUENCY_BAND_6(
+                6,
+                0,
+                SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_LIKELY_LANGUAGE,
+                4413,
+                0,
+                BoostFramework.VENDOR_HINT_FIRST_DRAW,
+                4188),
         UTRAN_ARFCN_FREQUENCY_BAND_7(7, 2175000, 2237, 2563, 2100000, 2012, 2338),
         UTRAN_ARFCN_FREQUENCY_BAND_8(8, 340000, 2937, 3088, 340000, 2712, 2863),
         UTRAN_ARFCN_FREQUENCY_BAND_9(9, 0, 9327, 9837, 0, 8762, 8912),
-        UTRAN_ARFCN_FREQUENCY_BAND_10(10, 1490000, BluetoothHciProtoEnums.CMD_WRITE_AUTOMATIC_FLUSH_TIMEOUT, 3388, 1135000, 2887, BluetoothHciProtoEnums.CMD_WRITE_ERRONEOUS_DATA_RPT),
+        UTRAN_ARFCN_FREQUENCY_BAND_10(
+                10,
+                1490000,
+                BluetoothHciProtoEnums.CMD_WRITE_AUTOMATIC_FLUSH_TIMEOUT,
+                3388,
+                1135000,
+                2887,
+                BluetoothHciProtoEnums.CMD_WRITE_ERRONEOUS_DATA_RPT),
         UTRAN_ARFCN_FREQUENCY_BAND_11(11, 736000, 3712, 3787, 733000, 3487, 3562),
         UTRAN_ARFCN_FREQUENCY_BAND_12(12, -37000, 3842, 3903, -22000, 3617, 3678),
         UTRAN_ARFCN_FREQUENCY_BAND_13(13, -55000, 4017, 4043, 21000, 3792, 3818),
-        UTRAN_ARFCN_FREQUENCY_BAND_14(14, -63000, MtpConstants.OPERATION_GET_DEVICE_PROP_VALUE, 4143, 12000, 3892, 3918),
-        UTRAN_ARFCN_FREQUENCY_BAND_19(19, 735000, MetricsProto.MetricsEvent.ACTION_PERMISSION_DENIED_RECEIVE_SMS, MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT, 770000, 312, 363),
+        UTRAN_ARFCN_FREQUENCY_BAND_14(
+                14, -63000, MtpConstants.OPERATION_GET_DEVICE_PROP_VALUE, 4143, 12000, 3892, 3918),
+        UTRAN_ARFCN_FREQUENCY_BAND_19(
+                19,
+                735000,
+                MetricsProto.MetricsEvent.ACTION_PERMISSION_DENIED_RECEIVE_SMS,
+                MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT,
+                770000,
+                312,
+                363),
         UTRAN_ARFCN_FREQUENCY_BAND_20(20, -109000, 4512, 4638, -23000, 4287, 4413),
         UTRAN_ARFCN_FREQUENCY_BAND_21(21, 1326000, 862, 912, 1358000, 462, 512),
         UTRAN_ARFCN_FREQUENCY_BAND_22(22, 2580000, 4662, 5038, 2525000, 4437, 4813),
@@ -286,7 +324,14 @@ public final class AccessNetworkConstants {
         int uplinkRangeFirst;
         int uplinkRangeLast;
 
-        UtranBandArfcnFrequency(int band, int downlinkOffsetKhz, int downlinkRangeFirst, int downlinkRangeLast, int uplinkOffsetKhz, int uplinkRangeFirst, int uplinkRangeLast) {
+        UtranBandArfcnFrequency(
+                int band,
+                int downlinkOffsetKhz,
+                int downlinkRangeFirst,
+                int downlinkRangeLast,
+                int uplinkOffsetKhz,
+                int uplinkRangeFirst,
+                int uplinkRangeLast) {
             this.band = band;
             this.downlinkOffset = downlinkOffsetKhz;
             this.downlinkRangeFirst = downlinkRangeFirst;
@@ -360,26 +405,33 @@ public final class AccessNetworkConstants {
         public static final int BAND_9 = 9;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface EutranBands {
-        }
+        public @interface EutranBands {}
 
-        private EutranBand() {
-        }
+        private EutranBand() {}
     }
 
     enum EutranBandArfcnFrequency {
         EUTRAN_ARFCN_FREQUENCY_BAND_1(1, 2110000, 0, 599, 1920000, 18800, 18599),
         EUTRAN_ARFCN_FREQUENCY_BAND_2(2, 1930000, 600, 1199, 1850000, 18600, 19199),
-        EUTRAN_ARFCN_FREQUENCY_BAND_3(3, 1805000, 1200, SettingsEnums.ACTION_AUDIO_STREAM_CONFIRM_LAUNCH_MAIN_BUTTON_CLICK, 1710000, 19200, 19949),
+        EUTRAN_ARFCN_FREQUENCY_BAND_3(
+                3,
+                1805000,
+                1200,
+                SettingsEnums.ACTION_AUDIO_STREAM_CONFIRM_LAUNCH_MAIN_BUTTON_CLICK,
+                1710000,
+                19200,
+                19949),
         EUTRAN_ARFCN_FREQUENCY_BAND_4(4, 2110000, 1950, 2399, 1710000, 19950, 20399),
         EUTRAN_ARFCN_FREQUENCY_BAND_5(5, 869000, 2400, 2649, 824000, 20400, 20649),
         EUTRAN_ARFCN_FREQUENCY_BAND_6(6, 875000, 2650, 2749, 830000, 20650, 20749),
-        EUTRAN_ARFCN_FREQUENCY_BAND_7(7, 2620000, SmartFaceManager.SMART_STAY_DELAY, 3449, 2500000, 20750, 21449),
+        EUTRAN_ARFCN_FREQUENCY_BAND_7(
+                7, 2620000, SmartFaceManager.SMART_STAY_DELAY, 3449, 2500000, 20750, 21449),
         EUTRAN_ARFCN_FREQUENCY_BAND_8(8, 925000, 3450, 3799, 880000, 21450, 21799),
         EUTRAN_ARFCN_FREQUENCY_BAND_9(9, 1844900, 3800, 4149, 1749900, 21800, 22149),
         EUTRAN_ARFCN_FREQUENCY_BAND_10(10, 2110000, 4150, 4749, 1710000, 22150, 22749),
         EUTRAN_ARFCN_FREQUENCY_BAND_11(11, 1475900, 4750, 4949, 1427900, 22750, 22949),
-        EUTRAN_ARFCN_FREQUENCY_BAND_12(12, 729000, Process.INTELLIGENCE_SERVICE_UID, 5179, 699000, 23010, 23179),
+        EUTRAN_ARFCN_FREQUENCY_BAND_12(
+                12, 729000, Process.INTELLIGENCE_SERVICE_UID, 5179, 699000, 23010, 23179),
         EUTRAN_ARFCN_FREQUENCY_BAND_13(13, 746000, 5180, Process.SPAY_UID, 777000, 23180, 23279),
         EUTRAN_ARFCN_FREQUENCY_BAND_14(14, 758000, 5280, 5379, 788000, 23230, 23379),
         EUTRAN_ARFCN_FREQUENCY_BAND_17(17, 734000, 5730, 5849, 704000, 23730, 23849),
@@ -388,7 +440,14 @@ public final class AccessNetworkConstants {
         EUTRAN_ARFCN_FREQUENCY_BAND_20(20, 791000, 6150, 6449, 832000, 24150, 24449),
         EUTRAN_ARFCN_FREQUENCY_BAND_21(21, 1495900, 6450, 6599, 1447900, 24450, 24599),
         EUTRAN_ARFCN_FREQUENCY_BAND_22(22, 3510000, 6600, 7399, 3410000, 24600, 25399),
-        EUTRAN_ARFCN_FREQUENCY_BAND_23(23, 2180000, 7500, 7699, WindowManagerPolicyConstants.WINDOW_FREEZE_LAYER, 25500, 25699),
+        EUTRAN_ARFCN_FREQUENCY_BAND_23(
+                23,
+                2180000,
+                7500,
+                7699,
+                WindowManagerPolicyConstants.WINDOW_FREEZE_LAYER,
+                25500,
+                25699),
         EUTRAN_ARFCN_FREQUENCY_BAND_24(24, 1525000, 7700, 8039, 1626500, 25700, 26039),
         EUTRAN_ARFCN_FREQUENCY_BAND_25(25, 1930000, 8040, 8689, 1850000, 26040, 26689),
         EUTRAN_ARFCN_FREQUENCY_BAND_26(26, 859000, 8690, 9039, 814000, 26690, 27039),
@@ -396,8 +455,22 @@ public final class AccessNetworkConstants {
         EUTRAN_ARFCN_FREQUENCY_BAND_28(28, 758000, 9210, 9659, 703000, 27210, 27659),
         EUTRAN_ARFCN_FREQUENCY_BAND_30(30, 2350000, 9770, 9869, 2305000, 27660, 27759),
         EUTRAN_ARFCN_FREQUENCY_BAND_31(31, 462500, 9870, 9919, 452500, 27760, 27809),
-        EUTRAN_ARFCN_FREQUENCY_BAND_33(33, 1900000, SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION, GLES11Ext.GL_TEXTURE_BINDING_EXTERNAL_OES, 1900000, SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION, GLES11Ext.GL_TEXTURE_BINDING_EXTERNAL_OES),
-        EUTRAN_ARFCN_FREQUENCY_BAND_34(34, WindowManagerPolicyConstants.SCREEN_FREEZE_LAYER_BASE, GLES11Ext.GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES, GLES20.GL_MAX_FRAGMENT_UNIFORM_VECTORS, WindowManagerPolicyConstants.SCREEN_FREEZE_LAYER_BASE, GLES11Ext.GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES, GLES20.GL_MAX_FRAGMENT_UNIFORM_VECTORS),
+        EUTRAN_ARFCN_FREQUENCY_BAND_33(
+                33,
+                1900000,
+                SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION,
+                GLES11Ext.GL_TEXTURE_BINDING_EXTERNAL_OES,
+                1900000,
+                SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION,
+                GLES11Ext.GL_TEXTURE_BINDING_EXTERNAL_OES),
+        EUTRAN_ARFCN_FREQUENCY_BAND_34(
+                34,
+                WindowManagerPolicyConstants.SCREEN_FREEZE_LAYER_BASE,
+                GLES11Ext.GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES,
+                GLES20.GL_MAX_FRAGMENT_UNIFORM_VECTORS,
+                WindowManagerPolicyConstants.SCREEN_FREEZE_LAYER_BASE,
+                GLES11Ext.GL_REQUIRED_TEXTURE_IMAGE_UNITS_OES,
+                GLES20.GL_MAX_FRAGMENT_UNIFORM_VECTORS),
         EUTRAN_ARFCN_FREQUENCY_BAND_35(35, 1850000, 36350, 36949, 1850000, 36350, 36949),
         EUTRAN_ARFCN_FREQUENCY_BAND_36(36, 1930000, 36950, 37549, 1930000, 36950, 37549),
         EUTRAN_ARFCN_FREQUENCY_BAND_37(37, 1910000, 37550, 37749, 1910000, 37550, 37749),
@@ -437,7 +510,14 @@ public final class AccessNetworkConstants {
         int uplinkOffset;
         int uplinkRange;
 
-        EutranBandArfcnFrequency(int band, int downlinkLowKhz, int downlinkOffset, int downlinkRange, int uplinkLowKhz, int uplinkOffset, int uplinkRange) {
+        EutranBandArfcnFrequency(
+                int band,
+                int downlinkLowKhz,
+                int downlinkOffset,
+                int downlinkRange,
+                int uplinkLowKhz,
+                int uplinkOffset,
+                int uplinkRange) {
             this.band = band;
             this.downlinkLowKhz = downlinkLowKhz;
             this.downlinkOffset = downlinkOffset;
@@ -472,8 +552,7 @@ public final class AccessNetworkConstants {
         public static final int BAND_8 = 9;
         public static final int BAND_9 = 10;
 
-        private CdmaBands() {
-        }
+        private CdmaBands() {}
     }
 
     public static final class NgranBands {
@@ -531,22 +610,17 @@ public final class AccessNetworkConstants {
         public static final int BAND_95 = 95;
         public static final int BAND_96 = 96;
 
-        @SystemApi
-        public static final int FREQUENCY_RANGE_GROUP_1 = 1;
+        @SystemApi public static final int FREQUENCY_RANGE_GROUP_1 = 1;
 
-        @SystemApi
-        public static final int FREQUENCY_RANGE_GROUP_2 = 2;
+        @SystemApi public static final int FREQUENCY_RANGE_GROUP_2 = 2;
 
-        @SystemApi
-        public static final int FREQUENCY_RANGE_GROUP_UNKNOWN = 0;
+        @SystemApi public static final int FREQUENCY_RANGE_GROUP_UNKNOWN = 0;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface FrequencyRangeGroup {
-        }
+        public @interface FrequencyRangeGroup {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface NgranBand {
-        }
+        public @interface NgranBand {}
 
         @SystemApi
         public static int getFrequencyRangeGroup(int band) {
@@ -611,8 +685,7 @@ public final class AccessNetworkConstants {
             }
         }
 
-        private NgranBands() {
-        }
+        private NgranBands() {}
     }
 
     enum NgranArfcnFrequency {
@@ -626,7 +699,8 @@ public final class AccessNetworkConstants {
         int rangeLast;
         int rangeOffset;
 
-        NgranArfcnFrequency(int globalKhz, int rangeOffset, int arfcnOffset, int rangeFirst, int rangeLast) {
+        NgranArfcnFrequency(
+                int globalKhz, int rangeOffset, int arfcnOffset, int rangeFirst, int rangeLast) {
             this.globalKhz = globalKhz;
             this.rangeOffset = rangeOffset;
             this.arfcnOffset = arfcnOffset;
@@ -635,6 +709,5 @@ public final class AccessNetworkConstants {
         }
     }
 
-    private AccessNetworkConstants() {
-    }
+    private AccessNetworkConstants() {}
 }

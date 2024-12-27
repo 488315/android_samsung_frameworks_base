@@ -1,6 +1,7 @@
 package android.app.time;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,9 +14,7 @@ public final class Capabilities {
     public static final int CAPABILITY_POSSESSED = 40;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CapabilityState {
-    }
+    public @interface CapabilityState {}
 
-    private Capabilities() {
-    }
+    private Capabilities() {}
 }

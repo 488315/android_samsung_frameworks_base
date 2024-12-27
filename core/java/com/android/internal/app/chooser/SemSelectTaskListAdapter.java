@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
 import com.android.internal.R;
 import com.android.internal.app.AbstractMultiProfilePagerAdapter;
 import com.android.internal.widget.RecyclerView;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -24,12 +26,17 @@ public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
         void onStartSelected(int i, boolean z, boolean z2);
     }
 
-    public SemSelectTaskListAdapter(List<DisplayResolveInfo> list, AbstractMultiProfilePagerAdapter multiProfilePagerAdapter) {
+    public SemSelectTaskListAdapter(
+            List<DisplayResolveInfo> list,
+            AbstractMultiProfilePagerAdapter multiProfilePagerAdapter) {
         this.secondDepthList = list;
         this.mMultiProfilePagerAdapter = multiProfilePagerAdapter;
     }
 
-    public SemSelectTaskListAdapter(List<DisplayResolveInfo> list, AbstractMultiProfilePagerAdapter multiProfilePagerAdapter, ActivityCallback activityCallback) {
+    public SemSelectTaskListAdapter(
+            List<DisplayResolveInfo> list,
+            AbstractMultiProfilePagerAdapter multiProfilePagerAdapter,
+            ActivityCallback activityCallback) {
         this.secondDepthList = list;
         this.mMultiProfilePagerAdapter = multiProfilePagerAdapter;
         this.mActivityCallback = activityCallback;
@@ -64,7 +71,8 @@ public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override // com.android.internal.widget.RecyclerView.Adapter
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem = layoutInflater.inflate(R.layout.sem_resolver_second_depth_list_item, parent, false);
+        View listItem =
+                layoutInflater.inflate(R.layout.sem_resolver_second_depth_list_item, parent, false);
         this.viewHolder = new ViewHolder(listItem);
         return this.viewHolder;
     }
@@ -72,10 +80,21 @@ public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override // com.android.internal.widget.RecyclerView.Adapter
     public void onBindViewHolder(ViewHolder holder, int position) {
         boolean isSamePackage;
-        int index = Math.max(this.mMultiProfilePagerAdapter.getActiveListAdapter().getLastChosenActivityIndex(), 0);
-        String lastChosenPackage = this.mMultiProfilePagerAdapter.getActiveListAdapter().getLastChosenPackage();
+        int index =
+                Math.max(
+                        this.mMultiProfilePagerAdapter
+                                .getActiveListAdapter()
+                                .getLastChosenActivityIndex(),
+                        0);
+        String lastChosenPackage =
+                this.mMultiProfilePagerAdapter.getActiveListAdapter().getLastChosenPackage();
         if (!TextUtils.isEmpty(lastChosenPackage)) {
-            isSamePackage = lastChosenPackage.equals(this.secondDepthList.get(position).getResolvedComponentName().getPackageName());
+            isSamePackage =
+                    lastChosenPackage.equals(
+                            this.secondDepthList
+                                    .get(position)
+                                    .getResolvedComponentName()
+                                    .getPackageName());
         } else {
             isSamePackage = false;
         }
@@ -101,18 +120,26 @@ public class SemSelectTaskListAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            this.radioButton = (RadioButton) itemView.findViewById(R.id.sem_resolver_second_depth_item_button);
-            this.textView = (TextView) itemView.findViewById(R.id.sem_resolver_second_depth_item_text);
-            View.OnClickListener clickListener = new View.OnClickListener() { // from class: com.android.internal.app.chooser.SemSelectTaskListAdapter.ViewHolder.1
-                @Override // android.view.View.OnClickListener
-                public void onClick(View v) {
-                    SemSelectTaskListAdapter.this.mSelectedItem = ViewHolder.this.getAdapterPosition();
-                    SemSelectTaskListAdapter.this.notifyDataSetChanged();
-                    if (ViewHolder.this.radioButton.isChecked() && SemSelectTaskListAdapter.this.mActivityCallback != null) {
-                        SemSelectTaskListAdapter.this.mActivityCallback.onStartSelected(SemSelectTaskListAdapter.this.mSelectedItem, false, true);
-                    }
-                }
-            };
+            this.radioButton =
+                    (RadioButton) itemView.findViewById(R.id.sem_resolver_second_depth_item_button);
+            this.textView =
+                    (TextView) itemView.findViewById(R.id.sem_resolver_second_depth_item_text);
+            View.OnClickListener clickListener =
+                    new View
+                            .OnClickListener() { // from class:
+                                                 // com.android.internal.app.chooser.SemSelectTaskListAdapter.ViewHolder.1
+                        @Override // android.view.View.OnClickListener
+                        public void onClick(View v) {
+                            SemSelectTaskListAdapter.this.mSelectedItem =
+                                    ViewHolder.this.getAdapterPosition();
+                            SemSelectTaskListAdapter.this.notifyDataSetChanged();
+                            if (ViewHolder.this.radioButton.isChecked()
+                                    && SemSelectTaskListAdapter.this.mActivityCallback != null) {
+                                SemSelectTaskListAdapter.this.mActivityCallback.onStartSelected(
+                                        SemSelectTaskListAdapter.this.mSelectedItem, false, true);
+                            }
+                        }
+                    };
             this.radioButton.setOnClickListener(clickListener);
             itemView.setOnClickListener(clickListener);
         }

@@ -3,26 +3,28 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CfData implements Parcelable {
-    public static final Parcelable.Creator<CfData> CREATOR = new Parcelable.Creator<CfData>() { // from class: android.hardware.radio.voice.CfData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CfData createFromParcel(Parcel _aidl_source) {
-            CfData _aidl_out = new CfData();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CfData> CREATOR =
+            new Parcelable.Creator<CfData>() { // from class: android.hardware.radio.voice.CfData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CfData createFromParcel(Parcel _aidl_source) {
+                    CfData _aidl_out = new CfData();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CfData[] newArray(int _aidl_size) {
-            return new CfData[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CfData[] newArray(int _aidl_size) {
+                    return new CfData[_aidl_size];
+                }
+            };
     public static final int NUM_SERVICE_CLASSES = 7;
     public CallForwardInfo[] cfInfo;
 
@@ -55,7 +57,8 @@ public class CfData implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.cfInfo = (CallForwardInfo[]) _aidl_parcel.createTypedArray(CallForwardInfo.CREATOR);
+                this.cfInfo =
+                        (CallForwardInfo[]) _aidl_parcel.createTypedArray(CallForwardInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

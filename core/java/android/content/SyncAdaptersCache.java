@@ -9,13 +9,16 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.util.SparseArray;
+
 import com.android.internal.R;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> {
@@ -27,13 +30,19 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
     private SparseArray<ArrayMap<String, String[]>> mAuthorityToSyncAdapters;
 
     public SyncAdaptersCache(Context context) {
-        super(context, "android.content.SyncAdapter", "android.content.SyncAdapter", ATTRIBUTES_NAME, sSerializer);
+        super(
+                context,
+                "android.content.SyncAdapter",
+                "android.content.SyncAdapter",
+                ATTRIBUTES_NAME,
+                sSerializer);
         this.mAuthorityToSyncAdapters = new SparseArray<>();
     }
 
     /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.content.pm.RegisteredServicesCache
-    public SyncAdapterType parseServiceAttributes(Resources res, String packageName, AttributeSet attrs) {
+    public SyncAdapterType parseServiceAttributes(
+            Resources res, String packageName, AttributeSet attrs) {
         TypedArray sa = res.obtainAttributes(attrs, R.styleable.SyncAdapter);
         try {
             String authority = sa.getString(2);
@@ -44,7 +53,15 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
                 boolean isAlwaysSyncable = sa.getBoolean(6, false);
                 boolean allowParallelSyncs = sa.getBoolean(5, false);
                 String settingsActivity = sa.getString(0);
-                return new SyncAdapterType(authority, accountType, userVisible, supportsUploading, isAlwaysSyncable, allowParallelSyncs, settingsActivity, packageName);
+                return new SyncAdapterType(
+                        authority,
+                        accountType,
+                        userVisible,
+                        supportsUploading,
+                        isAlwaysSyncable,
+                        allowParallelSyncs,
+                        settingsActivity,
+                        packageName);
             }
             sa.recycle();
             return null;
@@ -74,10 +91,12 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
             if (adapterMap.containsKey(authority)) {
                 return adapterMap.get(authority);
             }
-            Collection<RegisteredServicesCache.ServiceInfo<SyncAdapterType>> serviceInfos = getAllServices(userId);
+            Collection<RegisteredServicesCache.ServiceInfo<SyncAdapterType>> serviceInfos =
+                    getAllServices(userId);
             ArrayList<String> packages = new ArrayList<>();
             for (RegisteredServicesCache.ServiceInfo<SyncAdapterType> serviceInfo : serviceInfos) {
-                if (authority.equals(serviceInfo.type.authority) && serviceInfo.componentName != null) {
+                if (authority.equals(serviceInfo.type.authority)
+                        && serviceInfo.componentName != null) {
                     packages.add(serviceInfo.componentName.getPackageName());
                 }
             }
@@ -97,8 +116,7 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
     }
 
     static class MySerializer implements XmlSerializerAndParser<SyncAdapterType> {
-        MySerializer() {
-        }
+        MySerializer() {}
 
         @Override // android.content.pm.XmlSerializerAndParser
         public void writeAsXml(SyncAdapterType item, TypedXmlSerializer out) throws IOException {
@@ -108,8 +126,10 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.content.pm.XmlSerializerAndParser
-        public SyncAdapterType createFromXml(TypedXmlPullParser parser) throws IOException, XmlPullParserException {
-            String authority = parser.getAttributeValue(null, ContactsContract.Directory.DIRECTORY_AUTHORITY);
+        public SyncAdapterType createFromXml(TypedXmlPullParser parser)
+                throws IOException, XmlPullParserException {
+            String authority =
+                    parser.getAttributeValue(null, ContactsContract.Directory.DIRECTORY_AUTHORITY);
             String accountType = parser.getAttributeValue(null, "accountType");
             return SyncAdapterType.newKey(authority, accountType);
         }

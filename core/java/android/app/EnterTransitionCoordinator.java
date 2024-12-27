@@ -3,9 +3,6 @@ package android.app;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.app.ActivityTransitionCoordinator;
-import android.app.EnterTransitionCoordinator;
-import android.app.SharedElementCallback;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,7 +19,9 @@ import android.view.ViewGroup;
 import android.view.ViewGroupOverlay;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+
 import com.android.internal.view.OneShotPreDrawListener;
+
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -48,8 +47,17 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
     private OneShotPreDrawListener mViewsReadyListener;
     private boolean mWasOpaque;
 
-    EnterTransitionCoordinator(Activity activity, ResultReceiver resultReceiver, ArrayList<String> sharedElementNames, boolean isReturning, boolean isCrossTask) {
-        super(activity.getWindow(), sharedElementNames, getListener(activity, isReturning && !isCrossTask), isReturning);
+    EnterTransitionCoordinator(
+            Activity activity,
+            ResultReceiver resultReceiver,
+            ArrayList<String> sharedElementNames,
+            boolean isReturning,
+            boolean isCrossTask) {
+        super(
+                activity.getWindow(),
+                sharedElementNames,
+                getListener(activity, isReturning && !isCrossTask),
+                isReturning);
         this.mActivity = activity;
         this.mIsCrossTask = isCrossTask;
         setResultReceiver(resultReceiver);
@@ -60,33 +68,44 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         final View decorView = getDecor();
         if (decorView != null) {
             final ViewTreeObserver viewTreeObserver = decorView.getViewTreeObserver();
-            viewTreeObserver.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: android.app.EnterTransitionCoordinator.1
-                @Override // android.view.ViewTreeObserver.OnPreDrawListener
-                public boolean onPreDraw() {
-                    if (EnterTransitionCoordinator.this.mIsReadyForTransition) {
-                        if (viewTreeObserver.isAlive()) {
-                            viewTreeObserver.removeOnPreDrawListener(this);
+            viewTreeObserver.addOnPreDrawListener(
+                    new ViewTreeObserver.OnPreDrawListener() { // from class:
+                        // android.app.EnterTransitionCoordinator.1
+                        @Override // android.view.ViewTreeObserver.OnPreDrawListener
+                        public boolean onPreDraw() {
+                            if (EnterTransitionCoordinator.this.mIsReadyForTransition) {
+                                if (viewTreeObserver.isAlive()) {
+                                    viewTreeObserver.removeOnPreDrawListener(this);
+                                    return false;
+                                }
+                                decorView.getViewTreeObserver().removeOnPreDrawListener(this);
+                                return false;
+                            }
                             return false;
                         }
-                        decorView.getViewTreeObserver().removeOnPreDrawListener(this);
-                        return false;
-                    }
-                    return false;
-                }
-            });
+                    });
         }
-        Slog.d(TAG, "EnterTransitionCoordinator is created, activity=" + activity + ", mWindow=" + getWindow() + ", caller=" + Debug.getCallers(3));
+        Slog.d(
+                TAG,
+                "EnterTransitionCoordinator is created, activity="
+                        + activity
+                        + ", mWindow="
+                        + getWindow()
+                        + ", caller="
+                        + Debug.getCallers(3));
     }
 
     boolean isCrossTask() {
         return this.mIsCrossTask;
     }
 
-    public void viewInstancesReady(ArrayList<String> accepted, ArrayList<String> localNames, ArrayList<View> localViews) {
+    public void viewInstancesReady(
+            ArrayList<String> accepted, ArrayList<String> localNames, ArrayList<View> localViews) {
         boolean remap = false;
         for (int i = 0; i < localViews.size(); i++) {
             View view = localViews.get(i);
-            if (!TextUtils.equals(view.getTransitionName(), localNames.get(i)) || !view.isAttachedToWindow()) {
+            if (!TextUtils.equals(view.getTransitionName(), localNames.get(i))
+                    || !view.isAttachedToWindow()) {
                 remap = true;
                 break;
             }
@@ -133,15 +152,23 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
         this.mAreViewsReady = true;
         ViewGroup decor = getDecor();
-        if (decor == null || (decor.isAttachedToWindow() && (sharedElements.isEmpty() || !sharedElements.valueAt(0).isLayoutRequested()))) {
+        if (decor == null
+                || (decor.isAttachedToWindow()
+                        && (sharedElements.isEmpty()
+                                || !sharedElements.valueAt(0).isLayoutRequested()))) {
             viewsReady(sharedElements);
         } else {
-            this.mViewsReadyListener = OneShotPreDrawListener.add(decor, new Runnable() { // from class: android.app.EnterTransitionCoordinator$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    EnterTransitionCoordinator.this.lambda$triggerViewsReady$0(sharedElements);
-                }
-            });
+            this.mViewsReadyListener =
+                    OneShotPreDrawListener.add(
+                            decor,
+                            new Runnable() { // from class:
+                                // android.app.EnterTransitionCoordinator$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    EnterTransitionCoordinator.this.lambda$triggerViewsReady$0(
+                                            sharedElements);
+                                }
+                            });
             decor.invalidate();
         }
     }
@@ -152,7 +179,8 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         viewsReady(sharedElements);
     }
 
-    private ArrayMap<String, View> mapNamedElements(ArrayList<String> accepted, ArrayList<String> localNames) {
+    private ArrayMap<String, View> mapNamedElements(
+            ArrayList<String> accepted, ArrayList<String> localNames) {
         View view;
         ArrayMap<String, View> sharedElements = new ArrayMap<>();
         ViewGroup decorView = getDecor();
@@ -163,7 +191,9 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
             for (int i = 0; i < localNames.size(); i++) {
                 String localName = localNames.get(i);
                 String acceptedName = accepted.get(i);
-                if (localName != null && !localName.equals(acceptedName) && (view = sharedElements.get(localName)) != null) {
+                if (localName != null
+                        && !localName.equals(acceptedName)
+                        && (view = sharedElements.get(localName)) != null) {
                     sharedElements.put(acceptedName, view);
                 }
             }
@@ -200,12 +230,15 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
             moveSharedElementsToOverlay();
             this.mResultReceiver.send(107, state);
         } else if (decorView != null) {
-            OneShotPreDrawListener.add(decorView, new Runnable() { // from class: android.app.EnterTransitionCoordinator$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    EnterTransitionCoordinator.this.lambda$sendSharedElementDestination$1();
-                }
-            });
+            OneShotPreDrawListener.add(
+                    decorView,
+                    new Runnable() { // from class:
+                        // android.app.EnterTransitionCoordinator$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            EnterTransitionCoordinator.this.lambda$sendSharedElementDestination$1();
+                        }
+                    });
         }
         if (allowOverlappingTransitions()) {
             startEnterTransitionOnly();
@@ -392,10 +425,12 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
         removeNullViews(rejectedSnapshots);
         startRejectedAnimations(rejectedSnapshots);
-        ArrayList<View> sharedElementSnapshots = createSnapshots(sharedElementState, this.mSharedElementNames);
+        ArrayList<View> sharedElementSnapshots =
+                createSnapshots(sharedElementState, this.mSharedElementNames);
         showViews(this.mSharedElements, true);
         scheduleSetSharedElementEnd(sharedElementSnapshots);
-        ArrayList<ActivityTransitionCoordinator.SharedElementOriginalState> originalImageViewState = setSharedElementState(sharedElementState, sharedElementSnapshots);
+        ArrayList<ActivityTransitionCoordinator.SharedElementOriginalState> originalImageViewState =
+                setSharedElementState(sharedElementState, sharedElementSnapshots);
         requestLayoutForSharedElements();
         boolean startEnterTransition = allowOverlappingTransitions() && !this.mIsReturning;
         lambda$scheduleGhostVisibilityChange$1(4);
@@ -409,27 +444,28 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
         setOriginalSharedElementState(this.mSharedElements, originalImageViewState);
         if (this.mResultReceiver != null) {
-            decorView.postOnAnimation(new Runnable() { // from class: android.app.EnterTransitionCoordinator.2
-                int mAnimations;
+            decorView.postOnAnimation(
+                    new Runnable() { // from class: android.app.EnterTransitionCoordinator.2
+                        int mAnimations;
 
-                @Override // java.lang.Runnable
-                public void run() {
-                    int i = this.mAnimations;
-                    this.mAnimations = i + 1;
-                    if (i < 2) {
-                        View decorView2 = EnterTransitionCoordinator.this.getDecor();
-                        if (decorView2 != null) {
-                            decorView2.postOnAnimation(this);
-                            return;
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            int i = this.mAnimations;
+                            this.mAnimations = i + 1;
+                            if (i < 2) {
+                                View decorView2 = EnterTransitionCoordinator.this.getDecor();
+                                if (decorView2 != null) {
+                                    decorView2.postOnAnimation(this);
+                                    return;
+                                }
+                                return;
+                            }
+                            if (EnterTransitionCoordinator.this.mResultReceiver != null) {
+                                EnterTransitionCoordinator.this.mResultReceiver.send(101, null);
+                                EnterTransitionCoordinator.this.mResultReceiver = null;
+                            }
                         }
-                        return;
-                    }
-                    if (EnterTransitionCoordinator.this.mResultReceiver != null) {
-                        EnterTransitionCoordinator.this.mResultReceiver.send(101, null);
-                        EnterTransitionCoordinator.this.mResultReceiver = null;
-                    }
-                }
-            });
+                    });
         }
     }
 
@@ -449,11 +485,13 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         }
         Bundle sharedElementState = this.mSharedElementsBundle;
         this.mSharedElementsBundle = null;
-        SharedElementCallback.OnSharedElementsReadyListener listener = new AnonymousClass3(sharedElementState);
+        SharedElementCallback.OnSharedElementsReadyListener listener =
+                new AnonymousClass3(sharedElementState);
         if (this.mListener == null) {
             listener.onSharedElementsReady();
         } else {
-            this.mListener.onSharedElementsArrived(this.mSharedElementNames, this.mSharedElements, listener);
+            this.mListener.onSharedElementsArrived(
+                    this.mSharedElementNames, this.mSharedElements, listener);
         }
     }
 
@@ -470,24 +508,33 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
             View decorView = EnterTransitionCoordinator.this.getDecor();
             if (decorView != null) {
                 final Bundle bundle = this.val$sharedElementState;
-                OneShotPreDrawListener.add(decorView, false, new Runnable() { // from class: android.app.EnterTransitionCoordinator$3$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EnterTransitionCoordinator.AnonymousClass3.this.lambda$onSharedElementsReady$1(bundle);
-                    }
-                });
+                OneShotPreDrawListener.add(
+                        decorView,
+                        false,
+                        new Runnable() { // from class:
+                            // android.app.EnterTransitionCoordinator$3$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EnterTransitionCoordinator.AnonymousClass3.this
+                                        .lambda$onSharedElementsReady$1(bundle);
+                            }
+                        });
                 decorView.invalidate();
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onSharedElementsReady$1(final Bundle sharedElementState) {
-            EnterTransitionCoordinator.this.startTransition(new Runnable() { // from class: android.app.EnterTransitionCoordinator$3$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    EnterTransitionCoordinator.AnonymousClass3.this.lambda$onSharedElementsReady$0(sharedElementState);
-                }
-            });
+        public /* synthetic */ void lambda$onSharedElementsReady$1(
+                final Bundle sharedElementState) {
+            EnterTransitionCoordinator.this.startTransition(
+                    new Runnable() { // from class:
+                        // android.app.EnterTransitionCoordinator$3$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            EnterTransitionCoordinator.AnonymousClass3.this
+                                    .lambda$onSharedElementsReady$0(sharedElementState);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -504,7 +551,10 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Transition beginTransition(ViewGroup decorView, boolean startEnterTransition, boolean startSharedElementTransition) {
+    public Transition beginTransition(
+            ViewGroup decorView,
+            boolean startEnterTransition,
+            boolean startSharedElementTransition) {
         Transition sharedElementTransition = null;
         if (startSharedElementTransition) {
             if (!this.mSharedElementNames.isEmpty()) {
@@ -514,18 +564,22 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
                 sharedElementTransitionStarted();
                 sharedElementTransitionComplete();
             } else {
-                sharedElementTransition.addListener(new TransitionListenerAdapter() { // from class: android.app.EnterTransitionCoordinator.4
-                    @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
-                    public void onTransitionStart(Transition transition) {
-                        EnterTransitionCoordinator.this.sharedElementTransitionStarted();
-                    }
+                sharedElementTransition.addListener(
+                        new TransitionListenerAdapter() { // from class:
+                            // android.app.EnterTransitionCoordinator.4
+                            @Override // android.transition.TransitionListenerAdapter,
+                            // android.transition.Transition.TransitionListener
+                            public void onTransitionStart(Transition transition) {
+                                EnterTransitionCoordinator.this.sharedElementTransitionStarted();
+                            }
 
-                    @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
-                    public void onTransitionEnd(Transition transition) {
-                        transition.removeListener(this);
-                        EnterTransitionCoordinator.this.sharedElementTransitionComplete();
-                    }
-                });
+                            @Override // android.transition.TransitionListenerAdapter,
+                            // android.transition.Transition.TransitionListener
+                            public void onTransitionEnd(Transition transition) {
+                                transition.removeListener(this);
+                                EnterTransitionCoordinator.this.sharedElementTransitionComplete();
+                            }
+                        });
             }
         }
         Transition viewsTransition = null;
@@ -538,29 +592,33 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
                 viewsTransitionComplete();
             } else {
                 final ArrayList<View> transitioningViews = this.mTransitioningViews;
-                viewsTransition.addListener(new ActivityTransitionCoordinator.ContinueTransitionListener() { // from class: android.app.EnterTransitionCoordinator.5
-                    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-                    {
-                        super();
-                    }
+                viewsTransition.addListener(
+                        new ActivityTransitionCoordinator
+                                .ContinueTransitionListener() { // from class:
+                            // android.app.EnterTransitionCoordinator.5
+                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                            {
+                                super();
+                            }
 
-                    @Override // android.app.ActivityTransitionCoordinator.ContinueTransitionListener, android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
-                    public void onTransitionStart(Transition transition) {
-                        EnterTransitionCoordinator.this.mEnterViewsTransition = transition;
-                        if (transitioningViews != null) {
-                            EnterTransitionCoordinator.this.showViews(transitioningViews, false);
-                        }
-                        super.onTransitionStart(transition);
-                    }
+                            @Override // android.app.ActivityTransitionCoordinator.ContinueTransitionListener, android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+                            public void onTransitionStart(Transition transition) {
+                                EnterTransitionCoordinator.this.mEnterViewsTransition = transition;
+                                if (transitioningViews != null) {
+                                    EnterTransitionCoordinator.this.showViews(
+                                            transitioningViews, false);
+                                }
+                                super.onTransitionStart(transition);
+                            }
 
-                    @Override // android.app.ActivityTransitionCoordinator.ContinueTransitionListener, android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
-                    public void onTransitionEnd(Transition transition) {
-                        EnterTransitionCoordinator.this.mEnterViewsTransition = null;
-                        transition.removeListener(this);
-                        EnterTransitionCoordinator.this.viewsTransitionComplete();
-                        super.onTransitionEnd(transition);
-                    }
-                });
+                            @Override // android.app.ActivityTransitionCoordinator.ContinueTransitionListener, android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+                            public void onTransitionEnd(Transition transition) {
+                                EnterTransitionCoordinator.this.mEnterViewsTransition = null;
+                                transition.removeListener(this);
+                                EnterTransitionCoordinator.this.viewsTransitionComplete();
+                                super.onTransitionEnd(transition);
+                            }
+                        });
             }
         }
         Transition transition = mergeTransitions(sharedElementTransition, viewsTransition);
@@ -623,24 +681,30 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
                 getWindow().setBackgroundDrawable(background2);
                 this.mBackgroundAnimator = ObjectAnimator.ofInt(background2, "alpha", 255);
                 this.mBackgroundAnimator.setDuration(getFadeDuration());
-                this.mBackgroundAnimator.addListener(new AnimatorListenerAdapter() { // from class: android.app.EnterTransitionCoordinator.6
-                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationEnd(Animator animation) {
-                        EnterTransitionCoordinator.this.makeOpaque();
-                        EnterTransitionCoordinator.this.backgroundAnimatorComplete();
-                    }
-                });
+                this.mBackgroundAnimator.addListener(
+                        new AnimatorListenerAdapter() { // from class:
+                            // android.app.EnterTransitionCoordinator.6
+                            @Override // android.animation.AnimatorListenerAdapter,
+                            // android.animation.Animator.AnimatorListener
+                            public void onAnimationEnd(Animator animation) {
+                                EnterTransitionCoordinator.this.makeOpaque();
+                                EnterTransitionCoordinator.this.backgroundAnimatorComplete();
+                            }
+                        });
                 this.mBackgroundAnimator.start();
                 return;
             }
             if (transition != null) {
-                transition.addListener(new TransitionListenerAdapter() { // from class: android.app.EnterTransitionCoordinator.7
-                    @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
-                    public void onTransitionEnd(Transition transition2) {
-                        transition2.removeListener(this);
-                        EnterTransitionCoordinator.this.makeOpaque();
-                    }
-                });
+                transition.addListener(
+                        new TransitionListenerAdapter() { // from class:
+                            // android.app.EnterTransitionCoordinator.7
+                            @Override // android.transition.TransitionListenerAdapter,
+                            // android.transition.Transition.TransitionListener
+                            public void onTransitionEnd(Transition transition2) {
+                                transition2.removeListener(this);
+                                EnterTransitionCoordinator.this.makeOpaque();
+                            }
+                        });
                 backgroundAnimatorComplete();
                 return;
             } else {
@@ -658,7 +722,9 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         if (this.mBackgroundAnimator != null) {
             this.mBackgroundAnimator.end();
             this.mBackgroundAnimator = null;
-        } else if (this.mWasOpaque && (decorView = getDecor()) != null && (drawable = decorView.getBackground()) != null) {
+        } else if (this.mWasOpaque
+                && (decorView = getDecor()) != null
+                && (drawable = decorView.getBackground()) != null) {
             drawable.setAlpha(255);
         }
         makeOpaque();
@@ -713,12 +779,16 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
         if (window == null) {
             return false;
         }
-        return this.mIsReturning ? window.getAllowReturnTransitionOverlap() : window.getAllowEnterTransitionOverlap();
+        return this.mIsReturning
+                ? window.getAllowReturnTransitionOverlap()
+                : window.getAllowEnterTransitionOverlap();
     }
 
     private void startRejectedAnimations(final ArrayList<View> rejectedSnapshots) {
         final ViewGroup decorView;
-        if (rejectedSnapshots != null && !rejectedSnapshots.isEmpty() && (decorView = getDecor()) != null) {
+        if (rejectedSnapshots != null
+                && !rejectedSnapshots.isEmpty()
+                && (decorView = getDecor()) != null) {
             ViewGroupOverlay overlay = decorView.getOverlay();
             ObjectAnimator animator = null;
             int numRejected = rejectedSnapshots.size();
@@ -728,16 +798,19 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
                 animator = ObjectAnimator.ofFloat(snapshot, View.ALPHA, 1.0f, 0.0f);
                 animator.start();
             }
-            animator.addListener(new AnimatorListenerAdapter() { // from class: android.app.EnterTransitionCoordinator.8
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    ViewGroupOverlay overlay2 = decorView.getOverlay();
-                    int numRejected2 = rejectedSnapshots.size();
-                    for (int i2 = 0; i2 < numRejected2; i2++) {
-                        overlay2.remove((View) rejectedSnapshots.get(i2));
-                    }
-                }
-            });
+            animator.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                        // android.app.EnterTransitionCoordinator.8
+                        @Override // android.animation.AnimatorListenerAdapter,
+                        // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            ViewGroupOverlay overlay2 = decorView.getOverlay();
+                            int numRejected2 = rejectedSnapshots.size();
+                            for (int i2 = 0; i2 < numRejected2; i2++) {
+                                overlay2.remove((View) rejectedSnapshots.get(i2));
+                            }
+                        }
+                    });
         }
     }
 
@@ -748,15 +821,18 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
     }
 
     private void startEnterTransitionOnly() {
-        startTransition(new Runnable() { // from class: android.app.EnterTransitionCoordinator.9
-            @Override // java.lang.Runnable
-            public void run() {
-                ViewGroup decorView = EnterTransitionCoordinator.this.getDecor();
-                if (decorView != null) {
-                    Transition transition = EnterTransitionCoordinator.this.beginTransition(decorView, true, false);
-                    EnterTransitionCoordinator.this.startEnterTransition(transition);
-                }
-            }
-        });
+        startTransition(
+                new Runnable() { // from class: android.app.EnterTransitionCoordinator.9
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        ViewGroup decorView = EnterTransitionCoordinator.this.getDecor();
+                        if (decorView != null) {
+                            Transition transition =
+                                    EnterTransitionCoordinator.this.beginTransition(
+                                            decorView, true, false);
+                            EnterTransitionCoordinator.this.startEnterTransition(transition);
+                        }
+                    }
+                });
     }
 }

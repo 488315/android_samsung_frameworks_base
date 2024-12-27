@@ -5,20 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class CellInfoCdma extends CellInfo implements Parcelable {
-    public static final Parcelable.Creator<CellInfoCdma> CREATOR = new Parcelable.Creator<CellInfoCdma>() { // from class: android.telephony.CellInfoCdma.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoCdma createFromParcel(Parcel in) {
-            in.readInt();
-            return CellInfoCdma.createFromParcelBody(in);
-        }
+    public static final Parcelable.Creator<CellInfoCdma> CREATOR =
+            new Parcelable.Creator<CellInfoCdma>() { // from class: android.telephony.CellInfoCdma.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoCdma createFromParcel(Parcel in) {
+                    in.readInt();
+                    return CellInfoCdma.createFromParcelBody(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoCdma[] newArray(int size) {
-            return new CellInfoCdma[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoCdma[] newArray(int size) {
+                    return new CellInfoCdma[size];
+                }
+            };
     private static final boolean DBG = false;
     private static final String LOG_TAG = "CellInfoCdma";
     private CellIdentityCdma mCellIdentityCdma;
@@ -35,7 +36,12 @@ public final class CellInfoCdma extends CellInfo implements Parcelable {
         this.mCellSignalStrengthCdma = ci.mCellSignalStrengthCdma.copy();
     }
 
-    public CellInfoCdma(int connectionStatus, boolean registered, long timeStamp, CellIdentityCdma cellIdentityCdma, CellSignalStrengthCdma cellSignalStrengthCdma) {
+    public CellInfoCdma(
+            int connectionStatus,
+            boolean registered,
+            long timeStamp,
+            CellIdentityCdma cellIdentityCdma,
+            CellSignalStrengthCdma cellSignalStrengthCdma) {
         super(connectionStatus, registered, timeStamp);
         this.mCellIdentityCdma = cellIdentityCdma;
         this.mCellSignalStrengthCdma = cellSignalStrengthCdma;
@@ -68,7 +74,9 @@ public final class CellInfoCdma extends CellInfo implements Parcelable {
 
     @Override // android.telephony.CellInfo
     public int hashCode() {
-        return super.hashCode() + this.mCellIdentityCdma.hashCode() + this.mCellSignalStrengthCdma.hashCode();
+        return super.hashCode()
+                + this.mCellIdentityCdma.hashCode()
+                + this.mCellSignalStrengthCdma.hashCode();
     }
 
     @Override // android.telephony.CellInfo

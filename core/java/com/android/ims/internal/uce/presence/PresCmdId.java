@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class PresCmdId implements Parcelable {
-    public static final Parcelable.Creator<PresCmdId> CREATOR = new Parcelable.Creator<PresCmdId>() { // from class: com.android.ims.internal.uce.presence.PresCmdId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresCmdId createFromParcel(Parcel source) {
-            return new PresCmdId(source);
-        }
+    public static final Parcelable.Creator<PresCmdId> CREATOR =
+            new Parcelable.Creator<
+                    PresCmdId>() { // from class: com.android.ims.internal.uce.presence.PresCmdId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresCmdId createFromParcel(Parcel source) {
+                    return new PresCmdId(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresCmdId[] newArray(int size) {
-            return new PresCmdId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresCmdId[] newArray(int size) {
+                    return new PresCmdId[size];
+                }
+            };
     public static final int UCE_PRES_CMD_GETCONTACTCAP = 2;
     public static final int UCE_PRES_CMD_GETCONTACTLISTCAP = 3;
     public static final int UCE_PRES_CMD_GET_VERSION = 0;

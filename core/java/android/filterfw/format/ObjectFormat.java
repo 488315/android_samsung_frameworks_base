@@ -36,12 +36,20 @@ public class ObjectFormat {
     private static int bytesPerSampleForClass(Class clazz, int target) {
         if (target == 2) {
             if (!NativeBuffer.class.isAssignableFrom(clazz)) {
-                throw new IllegalArgumentException("Native object-based formats must be of a NativeBuffer subclass! (Received class: " + clazz + ").");
+                throw new IllegalArgumentException(
+                        "Native object-based formats must be of a NativeBuffer subclass! (Received"
+                                + " class: "
+                                + clazz
+                                + ").");
             }
             try {
                 return ((NativeBuffer) clazz.newInstance()).getElementSize();
             } catch (Exception e) {
-                throw new RuntimeException("Could not determine the size of an element in a native object-based frame of type " + clazz + "! Perhaps it is missing a default constructor?");
+                throw new RuntimeException(
+                        "Could not determine the size of an element in a native object-based frame"
+                                + " of type "
+                                + clazz
+                                + "! Perhaps it is missing a default constructor?");
             }
         }
         return 1;
@@ -73,7 +81,8 @@ public class ObjectFormat {
             if (type == Double.TYPE) {
                 return Double.class;
             }
-            throw new IllegalArgumentException("Unknown primitive type: " + type.getSimpleName() + "!");
+            throw new IllegalArgumentException(
+                    "Unknown primitive type: " + type.getSimpleName() + "!");
         }
         return type;
     }

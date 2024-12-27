@@ -2,27 +2,29 @@ package android.app.smartspace.uitemplatedata;
 
 import android.annotation.SystemApi;
 import android.app.smartspace.SmartspaceUtils;
-import android.app.smartspace.uitemplatedata.BaseTemplateData;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class HeadToHeadTemplateData extends BaseTemplateData {
-    public static final Parcelable.Creator<HeadToHeadTemplateData> CREATOR = new Parcelable.Creator<HeadToHeadTemplateData>() { // from class: android.app.smartspace.uitemplatedata.HeadToHeadTemplateData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HeadToHeadTemplateData createFromParcel(Parcel in) {
-            return new HeadToHeadTemplateData(in);
-        }
+    public static final Parcelable.Creator<HeadToHeadTemplateData> CREATOR =
+            new Parcelable.Creator<HeadToHeadTemplateData>() { // from class:
+                // android.app.smartspace.uitemplatedata.HeadToHeadTemplateData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HeadToHeadTemplateData createFromParcel(Parcel in) {
+                    return new HeadToHeadTemplateData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HeadToHeadTemplateData[] newArray(int size) {
-            return new HeadToHeadTemplateData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HeadToHeadTemplateData[] newArray(int size) {
+                    return new HeadToHeadTemplateData[size];
+                }
+            };
     private final TapAction mHeadToHeadAction;
     private final Icon mHeadToHeadFirstCompetitorIcon;
     private final Text mHeadToHeadFirstCompetitorText;
@@ -40,8 +42,28 @@ public final class HeadToHeadTemplateData extends BaseTemplateData {
         this.mHeadToHeadAction = (TapAction) in.readTypedObject(TapAction.CREATOR);
     }
 
-    private HeadToHeadTemplateData(int templateType, BaseTemplateData.SubItemInfo primaryItem, BaseTemplateData.SubItemInfo subtitleItem, BaseTemplateData.SubItemInfo subtitleSupplementalItem, BaseTemplateData.SubItemInfo supplementalLineItem, BaseTemplateData.SubItemInfo supplementalAlarmItem, int layoutWeight, Text headToHeadTitle, Icon headToHeadFirstCompetitorIcon, Icon headToHeadSecondCompetitorIcon, Text headToHeadFirstCompetitorText, Text headToHeadSecondCompetitorText, TapAction headToHeadAction) {
-        super(templateType, primaryItem, subtitleItem, subtitleSupplementalItem, supplementalLineItem, supplementalAlarmItem, layoutWeight);
+    private HeadToHeadTemplateData(
+            int templateType,
+            BaseTemplateData.SubItemInfo primaryItem,
+            BaseTemplateData.SubItemInfo subtitleItem,
+            BaseTemplateData.SubItemInfo subtitleSupplementalItem,
+            BaseTemplateData.SubItemInfo supplementalLineItem,
+            BaseTemplateData.SubItemInfo supplementalAlarmItem,
+            int layoutWeight,
+            Text headToHeadTitle,
+            Icon headToHeadFirstCompetitorIcon,
+            Icon headToHeadSecondCompetitorIcon,
+            Text headToHeadFirstCompetitorText,
+            Text headToHeadSecondCompetitorText,
+            TapAction headToHeadAction) {
+        super(
+                templateType,
+                primaryItem,
+                subtitleItem,
+                subtitleSupplementalItem,
+                supplementalLineItem,
+                supplementalAlarmItem,
+                layoutWeight);
         this.mHeadToHeadTitle = headToHeadTitle;
         this.mHeadToHeadFirstCompetitorIcon = headToHeadFirstCompetitorIcon;
         this.mHeadToHeadSecondCompetitorIcon = headToHeadSecondCompetitorIcon;
@@ -99,17 +121,46 @@ public final class HeadToHeadTemplateData extends BaseTemplateData {
             return false;
         }
         HeadToHeadTemplateData that = (HeadToHeadTemplateData) o;
-        return SmartspaceUtils.isEqual(this.mHeadToHeadTitle, that.mHeadToHeadTitle) && Objects.equals(this.mHeadToHeadFirstCompetitorIcon, that.mHeadToHeadFirstCompetitorIcon) && Objects.equals(this.mHeadToHeadSecondCompetitorIcon, that.mHeadToHeadSecondCompetitorIcon) && SmartspaceUtils.isEqual(this.mHeadToHeadFirstCompetitorText, that.mHeadToHeadFirstCompetitorText) && SmartspaceUtils.isEqual(this.mHeadToHeadSecondCompetitorText, that.mHeadToHeadSecondCompetitorText) && Objects.equals(this.mHeadToHeadAction, that.mHeadToHeadAction);
+        return SmartspaceUtils.isEqual(this.mHeadToHeadTitle, that.mHeadToHeadTitle)
+                && Objects.equals(
+                        this.mHeadToHeadFirstCompetitorIcon, that.mHeadToHeadFirstCompetitorIcon)
+                && Objects.equals(
+                        this.mHeadToHeadSecondCompetitorIcon, that.mHeadToHeadSecondCompetitorIcon)
+                && SmartspaceUtils.isEqual(
+                        this.mHeadToHeadFirstCompetitorText, that.mHeadToHeadFirstCompetitorText)
+                && SmartspaceUtils.isEqual(
+                        this.mHeadToHeadSecondCompetitorText, that.mHeadToHeadSecondCompetitorText)
+                && Objects.equals(this.mHeadToHeadAction, that.mHeadToHeadAction);
     }
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), this.mHeadToHeadTitle, this.mHeadToHeadFirstCompetitorIcon, this.mHeadToHeadSecondCompetitorIcon, this.mHeadToHeadFirstCompetitorText, this.mHeadToHeadSecondCompetitorText, this.mHeadToHeadAction);
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()),
+                this.mHeadToHeadTitle,
+                this.mHeadToHeadFirstCompetitorIcon,
+                this.mHeadToHeadSecondCompetitorIcon,
+                this.mHeadToHeadFirstCompetitorText,
+                this.mHeadToHeadSecondCompetitorText,
+                this.mHeadToHeadAction);
     }
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public String toString() {
-        return super.toString() + " + SmartspaceHeadToHeadUiTemplateData{mH2HTitle=" + this.mHeadToHeadTitle + ", mH2HFirstCompetitorIcon=" + this.mHeadToHeadFirstCompetitorIcon + ", mH2HSecondCompetitorIcon=" + this.mHeadToHeadSecondCompetitorIcon + ", mH2HFirstCompetitorText=" + this.mHeadToHeadFirstCompetitorText + ", mH2HSecondCompetitorText=" + this.mHeadToHeadSecondCompetitorText + ", mH2HAction=" + this.mHeadToHeadAction + '}';
+        return super.toString()
+                + " + SmartspaceHeadToHeadUiTemplateData{mH2HTitle="
+                + this.mHeadToHeadTitle
+                + ", mH2HFirstCompetitorIcon="
+                + this.mHeadToHeadFirstCompetitorIcon
+                + ", mH2HSecondCompetitorIcon="
+                + this.mHeadToHeadSecondCompetitorIcon
+                + ", mH2HFirstCompetitorText="
+                + this.mHeadToHeadFirstCompetitorText
+                + ", mH2HSecondCompetitorText="
+                + this.mHeadToHeadSecondCompetitorText
+                + ", mH2HAction="
+                + this.mHeadToHeadAction
+                + '}';
     }
 
     @SystemApi
@@ -157,7 +208,20 @@ public final class HeadToHeadTemplateData extends BaseTemplateData {
 
         @Override // android.app.smartspace.uitemplatedata.BaseTemplateData.Builder
         public HeadToHeadTemplateData build() {
-            return new HeadToHeadTemplateData(getTemplateType(), getPrimaryItem(), getSubtitleItem(), getSubtitleSupplemtnalItem(), getSupplementalLineItem(), getSupplementalAlarmItem(), getLayoutWeight(), this.mHeadToHeadTitle, this.mHeadToHeadFirstCompetitorIcon, this.mHeadToHeadSecondCompetitorIcon, this.mHeadToHeadFirstCompetitorText, this.mHeadToHeadSecondCompetitorText, this.mHeadToHeadAction);
+            return new HeadToHeadTemplateData(
+                    getTemplateType(),
+                    getPrimaryItem(),
+                    getSubtitleItem(),
+                    getSubtitleSupplemtnalItem(),
+                    getSupplementalLineItem(),
+                    getSupplementalAlarmItem(),
+                    getLayoutWeight(),
+                    this.mHeadToHeadTitle,
+                    this.mHeadToHeadFirstCompetitorIcon,
+                    this.mHeadToHeadSecondCompetitorIcon,
+                    this.mHeadToHeadFirstCompetitorText,
+                    this.mHeadToHeadSecondCompetitorText,
+                    this.mHeadToHeadAction);
         }
     }
 }

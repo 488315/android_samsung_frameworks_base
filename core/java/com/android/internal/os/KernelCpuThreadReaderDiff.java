@@ -2,8 +2,9 @@ package com.android.internal.os;
 
 import android.util.ArrayMap;
 import android.util.Slog;
-import com.android.internal.os.KernelCpuThreadReader;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,8 @@ public class KernelCpuThreadReaderDiff {
     public ArrayList<KernelCpuThreadReader.ProcessCpuUsage> getProcessCpuUsageDiffed() {
         Map<ThreadKey, int[]> newCpuUsage = null;
         try {
-            ArrayList<KernelCpuThreadReader.ProcessCpuUsage> processCpuUsages = this.mReader.getProcessCpuUsage();
+            ArrayList<KernelCpuThreadReader.ProcessCpuUsage> processCpuUsages =
+                    this.mReader.getProcessCpuUsage();
             newCpuUsage = createCpuUsageMap(processCpuUsages);
             if (this.mPreviousCpuUsage != null) {
                 for (int i = 0; i < processCpuUsages.size(); i++) {
@@ -55,27 +57,44 @@ public class KernelCpuThreadReaderDiff {
         }
     }
 
-    private static Map<ThreadKey, int[]> createCpuUsageMap(List<KernelCpuThreadReader.ProcessCpuUsage> processCpuUsages) {
+    private static Map<ThreadKey, int[]> createCpuUsageMap(
+            List<KernelCpuThreadReader.ProcessCpuUsage> processCpuUsages) {
         Map<ThreadKey, int[]> cpuUsageMap = new ArrayMap<>();
         for (int i = 0; i < processCpuUsages.size(); i++) {
             KernelCpuThreadReader.ProcessCpuUsage processCpuUsage = processCpuUsages.get(i);
             for (int j = 0; j < processCpuUsage.threadCpuUsages.size(); j++) {
-                KernelCpuThreadReader.ThreadCpuUsage threadCpuUsage = processCpuUsage.threadCpuUsages.get(j);
-                cpuUsageMap.put(new ThreadKey(processCpuUsage.processId, threadCpuUsage.threadId, processCpuUsage.processName, threadCpuUsage.threadName), threadCpuUsage.usageTimesMillis);
+                KernelCpuThreadReader.ThreadCpuUsage threadCpuUsage =
+                        processCpuUsage.threadCpuUsages.get(j);
+                cpuUsageMap.put(
+                        new ThreadKey(
+                                processCpuUsage.processId,
+                                threadCpuUsage.threadId,
+                                processCpuUsage.processName,
+                                threadCpuUsage.threadName),
+                        threadCpuUsage.usageTimesMillis);
             }
         }
         return cpuUsageMap;
     }
 
-    private static void changeToDiffs(Map<ThreadKey, int[]> previousCpuUsage, KernelCpuThreadReader.ProcessCpuUsage processCpuUsage) {
+    private static void changeToDiffs(
+            Map<ThreadKey, int[]> previousCpuUsage,
+            KernelCpuThreadReader.ProcessCpuUsage processCpuUsage) {
         for (int i = 0; i < processCpuUsage.threadCpuUsages.size(); i++) {
-            KernelCpuThreadReader.ThreadCpuUsage threadCpuUsage = processCpuUsage.threadCpuUsages.get(i);
-            ThreadKey key = new ThreadKey(processCpuUsage.processId, threadCpuUsage.threadId, processCpuUsage.processName, threadCpuUsage.threadName);
+            KernelCpuThreadReader.ThreadCpuUsage threadCpuUsage =
+                    processCpuUsage.threadCpuUsages.get(i);
+            ThreadKey key =
+                    new ThreadKey(
+                            processCpuUsage.processId,
+                            threadCpuUsage.threadId,
+                            processCpuUsage.processName,
+                            threadCpuUsage.threadName);
             int[] previous = previousCpuUsage.get(key);
             if (previous == null) {
                 previous = new int[threadCpuUsage.usageTimesMillis.length];
             }
-            threadCpuUsage.usageTimesMillis = cpuTimeDiff(threadCpuUsage.usageTimesMillis, previous);
+            threadCpuUsage.usageTimesMillis =
+                    cpuTimeDiff(threadCpuUsage.usageTimesMillis, previous);
         }
     }
 
@@ -83,7 +102,8 @@ public class KernelCpuThreadReaderDiff {
         int[] filteredThreadsCpuUsage = null;
         ArrayList<KernelCpuThreadReader.ThreadCpuUsage> thresholded = new ArrayList<>();
         for (int i = 0; i < processCpuUsage.threadCpuUsages.size(); i++) {
-            KernelCpuThreadReader.ThreadCpuUsage threadCpuUsage = processCpuUsage.threadCpuUsages.get(i);
+            KernelCpuThreadReader.ThreadCpuUsage threadCpuUsage =
+                    processCpuUsage.threadCpuUsages.get(i);
             if (this.mMinimumTotalCpuUsageMillis > totalCpuUsage(threadCpuUsage.usageTimesMillis)) {
                 if (filteredThreadsCpuUsage == null) {
                     filteredThreadsCpuUsage = new int[threadCpuUsage.usageTimesMillis.length];
@@ -94,7 +114,9 @@ public class KernelCpuThreadReaderDiff {
             }
         }
         if (filteredThreadsCpuUsage != null) {
-            thresholded.add(new KernelCpuThreadReader.ThreadCpuUsage(-1, OTHER_THREADS_NAME, filteredThreadsCpuUsage));
+            thresholded.add(
+                    new KernelCpuThreadReader.ThreadCpuUsage(
+                            -1, OTHER_THREADS_NAME, filteredThreadsCpuUsage));
         }
         processCpuUsage.threadCpuUsages = thresholded;
     }
@@ -135,7 +157,11 @@ public class KernelCpuThreadReaderDiff {
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mProcessId), Integer.valueOf(this.mThreadId), Integer.valueOf(this.mProcessNameHash), Integer.valueOf(this.mThreadNameHash));
+            return Objects.hash(
+                    Integer.valueOf(this.mProcessId),
+                    Integer.valueOf(this.mThreadId),
+                    Integer.valueOf(this.mProcessNameHash),
+                    Integer.valueOf(this.mThreadNameHash));
         }
 
         public boolean equals(Object obj) {
@@ -143,7 +169,10 @@ public class KernelCpuThreadReaderDiff {
                 return false;
             }
             ThreadKey other = (ThreadKey) obj;
-            return this.mProcessId == other.mProcessId && this.mThreadId == other.mThreadId && this.mProcessNameHash == other.mProcessNameHash && this.mThreadNameHash == other.mThreadNameHash;
+            return this.mProcessId == other.mProcessId
+                    && this.mThreadId == other.mThreadId
+                    && this.mProcessNameHash == other.mProcessNameHash
+                    && this.mThreadNameHash == other.mThreadNameHash;
         }
     }
 }

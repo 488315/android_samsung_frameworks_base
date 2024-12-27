@@ -6,13 +6,15 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes3.dex */
 public interface ITrustAgentServiceCallback extends IInterface {
     void addEscrowToken(byte[] bArr, int i) throws RemoteException;
 
-    void grantTrust(CharSequence charSequence, long j, int i, AndroidFuture androidFuture) throws RemoteException;
+    void grantTrust(CharSequence charSequence, long j, int i, AndroidFuture androidFuture)
+            throws RemoteException;
 
     void isEscrowTokenActive(long j, int i) throws RemoteException;
 
@@ -32,44 +34,37 @@ public interface ITrustAgentServiceCallback extends IInterface {
 
     public static class Default implements ITrustAgentServiceCallback {
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void grantTrust(CharSequence message, long durationMs, int flags, AndroidFuture resultCallback) throws RemoteException {
-        }
+        public void grantTrust(
+                CharSequence message, long durationMs, int flags, AndroidFuture resultCallback)
+                throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void revokeTrust() throws RemoteException {
-        }
+        public void revokeTrust() throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void lockUser() throws RemoteException {
-        }
+        public void lockUser() throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void setManagingTrust(boolean managingTrust) throws RemoteException {
-        }
+        public void setManagingTrust(boolean managingTrust) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void onConfigureCompleted(boolean result, IBinder token) throws RemoteException {
-        }
+        public void onConfigureCompleted(boolean result, IBinder token) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void addEscrowToken(byte[] token, int userId) throws RemoteException {
-        }
+        public void addEscrowToken(byte[] token, int userId) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void isEscrowTokenActive(long handle, int userId) throws RemoteException {
-        }
+        public void isEscrowTokenActive(long handle, int userId) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void removeEscrowToken(long handle, int userId) throws RemoteException {
-        }
+        public void removeEscrowToken(long handle, int userId) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void unlockUserWithToken(long handle, byte[] token, int userId) throws RemoteException {
-        }
+        public void unlockUserWithToken(long handle, byte[] token, int userId)
+                throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentServiceCallback
-        public void showKeyguardErrorMessage(CharSequence message) throws RemoteException {
-        }
+        public void showKeyguardErrorMessage(CharSequence message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -77,7 +72,7 @@ public interface ITrustAgentServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITrustAgentServiceCallback {
+    public abstract static class Stub extends Binder implements ITrustAgentServiceCallback {
         public static final String DESCRIPTOR = "android.service.trust.ITrustAgentServiceCallback";
         static final int TRANSACTION_addEscrowToken = 6;
         static final int TRANSACTION_grantTrust = 1;
@@ -143,7 +138,8 @@ public interface ITrustAgentServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -153,10 +149,12 @@ public interface ITrustAgentServiceCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CharSequence _arg0 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg0 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     long _arg1 = data.readLong();
                     int _arg2 = data.readInt();
-                    AndroidFuture _arg3 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg3 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     grantTrust(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -203,7 +201,8 @@ public interface ITrustAgentServiceCallback extends IInterface {
                     unlockUserWithToken(_arg07, _arg16, _arg22);
                     return true;
                 case 10:
-                    CharSequence _arg08 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg08 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     showKeyguardErrorMessage(_arg08);
                     return true;
@@ -229,7 +228,9 @@ public interface ITrustAgentServiceCallback extends IInterface {
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
-            public void grantTrust(CharSequence message, long durationMs, int flags, AndroidFuture resultCallback) throws RemoteException {
+            public void grantTrust(
+                    CharSequence message, long durationMs, int flags, AndroidFuture resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -335,7 +336,8 @@ public interface ITrustAgentServiceCallback extends IInterface {
             }
 
             @Override // android.service.trust.ITrustAgentServiceCallback
-            public void unlockUserWithToken(long handle, byte[] token, int userId) throws RemoteException {
+            public void unlockUserWithToken(long handle, byte[] token, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -12,21 +12,23 @@ public class GnssMeasurement implements Parcelable {
     public static final int ADR_STATE_RESET = 2;
     public static final int ADR_STATE_UNKNOWN = 0;
     public static final int ADR_STATE_VALID = 1;
-    public static final Parcelable.Creator<GnssMeasurement> CREATOR = new Parcelable.Creator<GnssMeasurement>() { // from class: android.hardware.gnss.GnssMeasurement.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssMeasurement createFromParcel(Parcel _aidl_source) {
-            GnssMeasurement _aidl_out = new GnssMeasurement();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GnssMeasurement> CREATOR =
+            new Parcelable.Creator<
+                    GnssMeasurement>() { // from class: android.hardware.gnss.GnssMeasurement.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssMeasurement createFromParcel(Parcel _aidl_source) {
+                    GnssMeasurement _aidl_out = new GnssMeasurement();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssMeasurement[] newArray(int _aidl_size) {
-            return new GnssMeasurement[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssMeasurement[] newArray(int _aidl_size) {
+                    return new GnssMeasurement[_aidl_size];
+                }
+            };
     public static final int HAS_AUTOMATIC_GAIN_CONTROL = 8192;
     public static final int HAS_CARRIER_CYCLES = 1024;
     public static final int HAS_CARRIER_FREQUENCY = 512;
@@ -82,7 +84,8 @@ public class GnssMeasurement implements Parcelable {
     public double fullInterSignalBiasNs = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public double fullInterSignalBiasUncertaintyNs = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public double satelliteInterSignalBiasNs = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
-    public double satelliteInterSignalBiasUncertaintyNs = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+    public double satelliteInterSignalBiasUncertaintyNs =
+            SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
 
     @Override // android.os.Parcelable
     public final int getStability() {
@@ -338,7 +341,9 @@ public class GnssMeasurement implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.correlationVectors = (CorrelationVector[]) _aidl_parcel.createTypedArray(CorrelationVector.CREATOR);
+                this.correlationVectors =
+                        (CorrelationVector[])
+                                _aidl_parcel.createTypedArray(CorrelationVector.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -356,7 +361,9 @@ public class GnssMeasurement implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.signalType);
-        return _mask | describeContents(this.satellitePvt) | describeContents(this.correlationVectors);
+        return _mask
+                | describeContents(this.satellitePvt)
+                | describeContents(this.correlationVectors);
     }
 
     private int describeContents(Object _v) {

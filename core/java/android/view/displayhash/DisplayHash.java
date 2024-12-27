@@ -5,23 +5,26 @@ import android.annotation.SystemApi;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes4.dex */
 public final class DisplayHash implements Parcelable {
-    public static final Parcelable.Creator<DisplayHash> CREATOR = new Parcelable.Creator<DisplayHash>() { // from class: android.view.displayhash.DisplayHash.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayHash[] newArray(int size) {
-            return new DisplayHash[size];
-        }
+    public static final Parcelable.Creator<DisplayHash> CREATOR =
+            new Parcelable.Creator<
+                    DisplayHash>() { // from class: android.view.displayhash.DisplayHash.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayHash[] newArray(int size) {
+                    return new DisplayHash[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayHash createFromParcel(Parcel in) {
-            return new DisplayHash(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayHash createFromParcel(Parcel in) {
+                    return new DisplayHash(in);
+                }
+            };
     private final Rect mBoundsInWindow;
     private final String mHashAlgorithm;
     private final byte[] mHmac;
@@ -29,16 +32,25 @@ public final class DisplayHash implements Parcelable {
     private final long mTimeMillis;
 
     @SystemApi
-    public DisplayHash(long timeMillis, Rect boundsInWindow, String hashAlgorithm, byte[] imageHash, byte[] hmac) {
+    public DisplayHash(
+            long timeMillis,
+            Rect boundsInWindow,
+            String hashAlgorithm,
+            byte[] imageHash,
+            byte[] hmac) {
         this.mTimeMillis = timeMillis;
         this.mBoundsInWindow = boundsInWindow;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBoundsInWindow);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBoundsInWindow);
         this.mHashAlgorithm = hashAlgorithm;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHashAlgorithm);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHashAlgorithm);
         this.mImageHash = imageHash;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mImageHash);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mImageHash);
         this.mHmac = hmac;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHmac);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHmac);
     }
 
     @SystemApi
@@ -67,7 +79,17 @@ public final class DisplayHash implements Parcelable {
     }
 
     public String toString() {
-        return "DisplayHash { timeMillis = " + this.mTimeMillis + ", boundsInWindow = " + this.mBoundsInWindow + ", hashAlgorithm = " + this.mHashAlgorithm + ", imageHash = " + byteArrayToString(this.mImageHash) + ", hmac = " + byteArrayToString(this.mHmac) + " }";
+        return "DisplayHash { timeMillis = "
+                + this.mTimeMillis
+                + ", boundsInWindow = "
+                + this.mBoundsInWindow
+                + ", hashAlgorithm = "
+                + this.mHashAlgorithm
+                + ", imageHash = "
+                + byteArrayToString(this.mImageHash)
+                + ", hmac = "
+                + byteArrayToString(this.mHmac)
+                + " }";
     }
 
     private String byteArrayToString(byte[] byteArray) {
@@ -115,12 +137,16 @@ public final class DisplayHash implements Parcelable {
         byte[] imageHash = in.createByteArray();
         byte[] hmac = in.createByteArray();
         this.mBoundsInWindow = boundsInWindow;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBoundsInWindow);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBoundsInWindow);
         this.mHashAlgorithm = hashAlgorithm;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHashAlgorithm);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHashAlgorithm);
         this.mImageHash = imageHash;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mImageHash);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mImageHash);
         this.mHmac = hmac;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHmac);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHmac);
     }
 }

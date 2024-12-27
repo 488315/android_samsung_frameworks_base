@@ -2,6 +2,7 @@ package android.hardware.camera2.impl;
 
 import android.hardware.camera2.CaptureRequest;
 import android.view.Surface;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,9 +17,15 @@ public class CaptureCallbackHolder {
     private final List<CaptureRequest> mRequestList;
     private final int mSessionId;
 
-    CaptureCallbackHolder(CaptureCallback callback, List<CaptureRequest> requestList, Executor executor, boolean repeating, int sessionId) {
+    CaptureCallbackHolder(
+            CaptureCallback callback,
+            List<CaptureRequest> requestList,
+            Executor executor,
+            boolean repeating,
+            int sessionId) {
         if (callback == null || executor == null) {
-            throw new UnsupportedOperationException("Must have a valid handler and a valid callback");
+            throw new UnsupportedOperationException(
+                    "Must have a valid handler and a valid callback");
         }
         this.mRepeating = repeating;
         this.mExecutor = executor;
@@ -58,10 +65,17 @@ public class CaptureCallbackHolder {
 
     public CaptureRequest getRequest(int subsequenceId) {
         if (subsequenceId >= this.mRequestList.size()) {
-            throw new IllegalArgumentException(String.format("Requested subsequenceId %d is larger than request list size %d.", Integer.valueOf(subsequenceId), Integer.valueOf(this.mRequestList.size())));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Requested subsequenceId %d is larger than request list size %d.",
+                            Integer.valueOf(subsequenceId),
+                            Integer.valueOf(this.mRequestList.size())));
         }
         if (subsequenceId < 0) {
-            throw new IllegalArgumentException(String.format("Requested subsequenceId %d is negative", Integer.valueOf(subsequenceId)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Requested subsequenceId %d is negative",
+                            Integer.valueOf(subsequenceId)));
         }
         return this.mRequestList.get(subsequenceId);
     }

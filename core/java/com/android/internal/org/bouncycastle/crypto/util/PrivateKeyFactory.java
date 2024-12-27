@@ -28,6 +28,7 @@ import com.android.internal.org.bouncycastle.crypto.params.ECDomainParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ECNamedDomainParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ECPrivateKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
@@ -35,7 +36,8 @@ import java.math.BigInteger;
 /* loaded from: classes5.dex */
 public class PrivateKeyFactory {
     public static AsymmetricKeyParameter createKey(byte[] privateKeyInfoData) throws IOException {
-        return createKey(PrivateKeyInfo.getInstance(ASN1Primitive.fromByteArray(privateKeyInfoData)));
+        return createKey(
+                PrivateKeyInfo.getInstance(ASN1Primitive.fromByteArray(privateKeyInfoData)));
     }
 
     public static AsymmetricKeyParameter createKey(InputStream inStr) throws IOException {
@@ -46,9 +48,19 @@ public class PrivateKeyFactory {
         ECDomainParameters dParams;
         AlgorithmIdentifier algId = keyInfo.getPrivateKeyAlgorithm();
         ASN1ObjectIdentifier algOID = algId.getAlgorithm();
-        if (algOID.equals((ASN1Primitive) PKCSObjectIdentifiers.rsaEncryption) || algOID.equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS) || algOID.equals((ASN1Primitive) X509ObjectIdentifiers.id_ea_rsa)) {
+        if (algOID.equals((ASN1Primitive) PKCSObjectIdentifiers.rsaEncryption)
+                || algOID.equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)
+                || algOID.equals((ASN1Primitive) X509ObjectIdentifiers.id_ea_rsa)) {
             RSAPrivateKey keyStructure = RSAPrivateKey.getInstance(keyInfo.parsePrivateKey());
-            return new RSAPrivateCrtKeyParameters(keyStructure.getModulus(), keyStructure.getPublicExponent(), keyStructure.getPrivateExponent(), keyStructure.getPrime1(), keyStructure.getPrime2(), keyStructure.getExponent1(), keyStructure.getExponent2(), keyStructure.getCoefficient());
+            return new RSAPrivateCrtKeyParameters(
+                    keyStructure.getModulus(),
+                    keyStructure.getPublicExponent(),
+                    keyStructure.getPrivateExponent(),
+                    keyStructure.getPrime1(),
+                    keyStructure.getPrime2(),
+                    keyStructure.getExponent1(),
+                    keyStructure.getExponent2(),
+                    keyStructure.getCoefficient());
         }
         if (algOID.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
             DHParameter params = DHParameter.getInstance(algId.getParameters());
@@ -79,7 +91,9 @@ public class PrivateKeyFactory {
                 dParams = new ECNamedDomainParameters(oid, x9);
             } else {
                 X9ECParameters x92 = X9ECParameters.getInstance(params3.getParameters());
-                dParams = new ECDomainParameters(x92.getCurve(), x92.getG(), x92.getN(), x92.getH(), x92.getSeed());
+                dParams =
+                        new ECDomainParameters(
+                                x92.getCurve(), x92.getG(), x92.getN(), x92.getH(), x92.getSeed());
             }
             ECPrivateKey ec = ECPrivateKey.getInstance(keyInfo.parsePrivateKey());
             BigInteger d = ec.getKey();

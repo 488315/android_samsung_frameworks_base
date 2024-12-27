@@ -4,24 +4,28 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public final class QueryLocationException extends RuntimeException implements Parcelable {
-    public static final Parcelable.Creator<QueryLocationException> CREATOR = new Parcelable.Creator<QueryLocationException>() { // from class: android.telecom.QueryLocationException.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QueryLocationException createFromParcel(Parcel source) {
-            return new QueryLocationException(source.readString8(), source.readInt());
-        }
+    public static final Parcelable.Creator<QueryLocationException> CREATOR =
+            new Parcelable.Creator<
+                    QueryLocationException>() { // from class:
+                                                // android.telecom.QueryLocationException.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QueryLocationException createFromParcel(Parcel source) {
+                    return new QueryLocationException(source.readString8(), source.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QueryLocationException[] newArray(int size) {
-            return new QueryLocationException[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QueryLocationException[] newArray(int size) {
+                    return new QueryLocationException[size];
+                }
+            };
     public static final int ERROR_NOT_ALLOWED_FOR_NON_EMERGENCY_CONNECTIONS = 4;
     public static final int ERROR_NOT_PERMITTED = 3;
     public static final int ERROR_PREVIOUS_REQUEST_EXISTS = 2;
@@ -33,8 +37,7 @@ public final class QueryLocationException extends RuntimeException implements Pa
     private final String mMessage;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface QueryLocationErrorCode {
-    }
+    public @interface QueryLocationErrorCode {}
 
     @Override // android.os.Parcelable
     public int describeContents() {

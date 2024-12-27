@@ -5,10 +5,12 @@ import android.os.LocaleList;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.app.LocalePicker;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,8 +41,14 @@ public abstract class Utils {
         for (int i = 0; i < localeList.size(); i++) {
             String language = localeList.get(i).getLanguage();
             if (language.length() == 3) {
-                Log.i("LOMUtils", "localeChanged: trying to get ISO_639_1 mapping for locale: ".concat(language));
-                language = (String) ((HashMap) OverlayConstants.ISO_639_2_TO_639_1_MAPPING).get(language);
+                Log.i(
+                        "LOMUtils",
+                        "localeChanged: trying to get ISO_639_1 mapping for locale: "
+                                .concat(language));
+                language =
+                        (String)
+                                ((HashMap) OverlayConstants.ISO_639_2_TO_639_1_MAPPING)
+                                        .get(language);
             }
             if (language != null) {
                 hashSet.add(language);
@@ -56,8 +64,14 @@ public abstract class Utils {
         for (int i = 0; i < locales.size(); i++) {
             String language = locales.get(i).getLanguage();
             if (language.length() == 3) {
-                Log.i("LOMUtils", "updateOverlays: trying to get ISO_639_1 mapping for locale: ".concat(language));
-                language = (String) ((HashMap) OverlayConstants.ISO_639_2_TO_639_1_MAPPING).get(language);
+                Log.i(
+                        "LOMUtils",
+                        "updateOverlays: trying to get ISO_639_1 mapping for locale: "
+                                .concat(language));
+                language =
+                        (String)
+                                ((HashMap) OverlayConstants.ISO_639_2_TO_639_1_MAPPING)
+                                        .get(language);
             }
             if (language != null) {
                 hashSet.add(language);
@@ -70,9 +84,11 @@ public abstract class Utils {
     public static void handleNewLocaleCodes(Set set) {
         for (String str : ((HashMap) OverlayConstants.SPECIAL_LOCALE_CODES_EQUIVALENTS).keySet()) {
             if (set.remove(str)) {
-                StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("replacing code: ", str, "with : ");
+                StringBuilder m =
+                        DumpUtils$$ExternalSyntheticOutline0.m("replacing code: ", str, "with : ");
                 Map map = OverlayConstants.SPECIAL_LOCALE_CODES_EQUIVALENTS;
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, (String) ((HashMap) map).get(str), "LOMUtils");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        m, (String) ((HashMap) map).get(str), "LOMUtils");
                 set.add((String) ((HashMap) map).get(str));
             }
         }
@@ -86,7 +102,11 @@ public abstract class Utils {
         }
         Log.i("LOMUtils", "reading CSC Version from file");
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream("system/CSCVersion.txt"), Charset.defaultCharset()));
+            BufferedReader bufferedReader =
+                    new BufferedReader(
+                            new InputStreamReader(
+                                    new FileInputStream("system/CSCVersion.txt"),
+                                    Charset.defaultCharset()));
             try {
                 String readLine = bufferedReader.readLine();
                 if (readLine != null && !readLine.isEmpty()) {
@@ -96,13 +116,15 @@ public abstract class Utils {
             } finally {
             }
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("readTextFromFile failed: "), "LOMUtils");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("readTextFromFile failed: "), "LOMUtils");
         }
         return str;
     }
 
     public static void setCurrentUserId(int i) {
-        LogWriter.logDebugInfoAndLogcat("LOMUtils", "setCurrentUserId() called with: userId = [" + i + "]");
+        LogWriter.logDebugInfoAndLogcat(
+                "LOMUtils", "setCurrentUserId() called with: userId = [" + i + "]");
         sCurrentUserId = i;
     }
 }

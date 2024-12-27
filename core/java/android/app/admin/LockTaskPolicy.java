@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.app.admin.flags.Flags;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -11,19 +12,21 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes.dex */
 public final class LockTaskPolicy extends PolicyValue<LockTaskPolicy> {
-    public static final Parcelable.Creator<LockTaskPolicy> CREATOR = new Parcelable.Creator<LockTaskPolicy>() { // from class: android.app.admin.LockTaskPolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LockTaskPolicy createFromParcel(Parcel source) {
-            return new LockTaskPolicy(source);
-        }
+    public static final Parcelable.Creator<LockTaskPolicy> CREATOR =
+            new Parcelable.Creator<
+                    LockTaskPolicy>() { // from class: android.app.admin.LockTaskPolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LockTaskPolicy createFromParcel(Parcel source) {
+                    return new LockTaskPolicy(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LockTaskPolicy[] newArray(int size) {
-            return new LockTaskPolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LockTaskPolicy[] newArray(int size) {
+                    return new LockTaskPolicy[size];
+                }
+            };
     public static final int DEFAULT_LOCK_TASK_FLAG = 16;
     private int mFlags;
     private Set<String> mPackages;
@@ -126,7 +129,11 @@ public final class LockTaskPolicy extends PolicyValue<LockTaskPolicy> {
     }
 
     public String toString() {
-        return "LockTaskPolicy {mPackages= " + String.join(", ", this.mPackages) + "; mFlags= " + this.mFlags + " }";
+        return "LockTaskPolicy {mPackages= "
+                + String.join(", ", this.mPackages)
+                + "; mFlags= "
+                + this.mFlags
+                + " }";
     }
 
     @Override // android.os.Parcelable

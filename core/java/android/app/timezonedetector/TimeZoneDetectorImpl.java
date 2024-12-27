@@ -1,6 +1,5 @@
 package android.app.timezonedetector;
 
-import android.app.timezonedetector.ITimeZoneDetectorService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 
@@ -8,7 +7,9 @@ import android.os.ServiceManager;
 public final class TimeZoneDetectorImpl implements TimeZoneDetector {
     private static final boolean DEBUG = false;
     private static final String TAG = "timezonedetector.TimeZoneDetector";
-    private final ITimeZoneDetectorService mITimeZoneDetectorService = ITimeZoneDetectorService.Stub.asInterface(ServiceManager.getServiceOrThrow("time_zone_detector"));
+    private final ITimeZoneDetectorService mITimeZoneDetectorService =
+            ITimeZoneDetectorService.Stub.asInterface(
+                    ServiceManager.getServiceOrThrow("time_zone_detector"));
 
     @Override // android.app.timezonedetector.TimeZoneDetector
     public boolean suggestManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion) {

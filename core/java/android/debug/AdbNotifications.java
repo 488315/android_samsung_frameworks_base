@@ -8,6 +8,7 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import com.android.internal.R;
 import com.android.internal.notification.SystemNotificationChannels;
 
@@ -27,7 +28,9 @@ public final class AdbNotifications {
             titleId = 17039772;
             messageId = 17039771;
         } else {
-            throw new IllegalArgumentException("createNotification called with unknown transport type=" + ((int) transportType));
+            throw new IllegalArgumentException(
+                    "createNotification called with unknown transport type="
+                            + ((int) transportType));
         }
         CharSequence title = resources.getText(titleId);
         CharSequence message = resources.getText(messageId);
@@ -38,9 +41,23 @@ public final class AdbNotifications {
             pIntent = null;
         } else {
             intent.setPackage(resolveInfo.activityInfo.packageName);
-            PendingIntent pIntent2 = PendingIntent.getActivityAsUser(context, 0, intent, 67108864, null, UserHandle.CURRENT);
+            PendingIntent pIntent2 =
+                    PendingIntent.getActivityAsUser(
+                            context, 0, intent, 67108864, null, UserHandle.CURRENT);
             pIntent = pIntent2;
         }
-        return new Notification.Builder(context, SystemNotificationChannels.DEVELOPER_IMPORTANT).setSmallIcon(R.drawable.stat_sys_adb).setWhen(0L).setOngoing(true).setTicker(title).setDefaults(0).setColor(context.getColor(17170460)).setContentTitle(title).setContentText(message).setContentIntent(pIntent).setVisibility(1).extend(new Notification.TvExtender().setChannelId(ADB_NOTIFICATION_CHANNEL_ID_TV)).build();
+        return new Notification.Builder(context, SystemNotificationChannels.DEVELOPER_IMPORTANT)
+                .setSmallIcon(R.drawable.stat_sys_adb)
+                .setWhen(0L)
+                .setOngoing(true)
+                .setTicker(title)
+                .setDefaults(0)
+                .setColor(context.getColor(17170460))
+                .setContentTitle(title)
+                .setContentText(message)
+                .setContentIntent(pIntent)
+                .setVisibility(1)
+                .extend(new Notification.TvExtender().setChannelId(ADB_NOTIFICATION_CHANNEL_ID_TV))
+                .build();
     }
 }

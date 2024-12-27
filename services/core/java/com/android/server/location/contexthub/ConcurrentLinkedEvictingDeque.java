@@ -7,7 +7,8 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 public class ConcurrentLinkedEvictingDeque extends ConcurrentLinkedDeque {
     private int mSize = 20;
 
-    @Override // java.util.concurrent.ConcurrentLinkedDeque, java.util.AbstractCollection, java.util.Collection, java.util.Deque, java.util.Queue
+    @Override // java.util.concurrent.ConcurrentLinkedDeque, java.util.AbstractCollection,
+              // java.util.Collection, java.util.Deque, java.util.Queue
     public final boolean add(Object obj) {
         boolean add;
         synchronized (this) {

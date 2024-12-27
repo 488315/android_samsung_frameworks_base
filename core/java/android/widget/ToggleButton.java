@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -18,7 +19,8 @@ public class ToggleButton extends CompoundButton {
     private CharSequence mTextOff;
     private CharSequence mTextOn;
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<ToggleButton> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<ToggleButton> {
         private int mDisabledAlphaId;
         private boolean mPropertiesMapped = false;
         private int mTextOffId;
@@ -45,8 +47,11 @@ public class ToggleButton extends CompoundButton {
 
     public ToggleButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ToggleButton, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.ToggleButton, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.ToggleButton, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.ToggleButton, attrs, a, defStyleAttr, defStyleRes);
         this.mTextOn = a.getText(1);
         this.mTextOff = a.getText(2);
         this.mDisabledAlpha = a.getFloat(0, 0.5f);
@@ -129,17 +134,25 @@ public class ToggleButton extends CompoundButton {
     protected void drawableStateChanged() {
         super.drawableStateChanged();
         if (this.mIndicatorDrawable != null) {
-            this.mIndicatorDrawable.setAlpha(isEnabled() ? 255 : (int) (this.mDisabledAlpha * 255.0f));
+            this.mIndicatorDrawable.setAlpha(
+                    isEnabled() ? 255 : (int) (this.mDisabledAlpha * 255.0f));
         }
     }
 
-    @Override // android.widget.CompoundButton, android.widget.Button, android.widget.TextView, android.view.View
+    @Override // android.widget.CompoundButton, android.widget.Button, android.widget.TextView,
+              // android.view.View
     public CharSequence getAccessibilityClassName() {
         return ToggleButton.class.getName();
     }
 
     @Override // android.widget.CompoundButton
     protected CharSequence getButtonStateDescription() {
-        return isChecked() ? this.mTextOn == null ? getResources().getString(R.string.capital_on) : this.mTextOn : this.mTextOff == null ? getResources().getString(R.string.capital_off) : this.mTextOff;
+        return isChecked()
+                ? this.mTextOn == null
+                        ? getResources().getString(R.string.capital_on)
+                        : this.mTextOn
+                : this.mTextOff == null
+                        ? getResources().getString(R.string.capital_off)
+                        : this.mTextOff;
     }
 }

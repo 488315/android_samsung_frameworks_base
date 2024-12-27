@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.samsung.android.content.clipboard.data.SemClipData;
 import com.samsung.android.knox.analytics.database.Contract;
 
@@ -54,7 +55,7 @@ public interface IClipboardDataList extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IClipboardDataList {
+    public abstract static class Stub extends Binder implements IClipboardDataList {
         static final int TRANSACTION_getClipByID = 5;
         static final int TRANSACTION_getItem = 2;
         static final int TRANSACTION_removeData = 3;
@@ -104,7 +105,8 @@ public interface IClipboardDataList extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IClipboardDataList.DESCRIPTOR);
             }

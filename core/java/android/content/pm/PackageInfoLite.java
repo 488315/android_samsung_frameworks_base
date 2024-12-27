@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class PackageInfoLite implements Parcelable {
-    public static final Parcelable.Creator<PackageInfoLite> CREATOR = new Parcelable.Creator<PackageInfoLite>() { // from class: android.content.pm.PackageInfoLite.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageInfoLite createFromParcel(Parcel source) {
-            return new PackageInfoLite(source);
-        }
+    public static final Parcelable.Creator<PackageInfoLite> CREATOR =
+            new Parcelable.Creator<
+                    PackageInfoLite>() { // from class: android.content.pm.PackageInfoLite.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageInfoLite createFromParcel(Parcel source) {
+                    return new PackageInfoLite(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackageInfoLite[] newArray(int size) {
-            return new PackageInfoLite[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackageInfoLite[] newArray(int size) {
+                    return new PackageInfoLite[size];
+                }
+            };
     public int baseRevisionCode;
     public boolean debuggable;
     public int installLocation;
@@ -29,19 +31,21 @@ public class PackageInfoLite implements Parcelable {
     public int[] splitRevisionCodes;
     public VerifierInfo[] verifiers;
 
-    @Deprecated
-    public int versionCode;
+    @Deprecated public int versionCode;
     public int versionCodeMajor;
 
     public long getLongVersionCode() {
         return PackageInfo.composeLongVersionCode(this.versionCodeMajor, this.versionCode);
     }
 
-    public PackageInfoLite() {
-    }
+    public PackageInfoLite() {}
 
     public String toString() {
-        return "PackageInfoLite{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.packageName + "}";
+        return "PackageInfoLite{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.packageName
+                + "}";
     }
 
     @Override // android.os.Parcelable

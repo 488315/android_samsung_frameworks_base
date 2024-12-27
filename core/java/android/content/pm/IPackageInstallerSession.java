@@ -3,8 +3,6 @@ package android.content.pm;
 import android.Manifest;
 import android.app.ActivityThread;
 import android.content.IntentSender;
-import android.content.pm.IOnChecksumsReadyListener;
-import android.content.pm.PackageInstaller;
 import android.content.pm.verify.domain.DomainSet;
 import android.os.Binder;
 import android.os.IBinder;
@@ -13,6 +11,7 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -67,9 +66,17 @@ public interface IPackageInstallerSession extends IInterface {
 
     void removeSplit(String str) throws RemoteException;
 
-    void requestChecksums(String str, int i, int i2, List list, IOnChecksumsReadyListener iOnChecksumsReadyListener) throws RemoteException;
+    void requestChecksums(
+            String str,
+            int i,
+            int i2,
+            List list,
+            IOnChecksumsReadyListener iOnChecksumsReadyListener)
+            throws RemoteException;
 
-    void requestUserPreapproval(PackageInstaller.PreapprovalDetails preapprovalDetails, IntentSender intentSender) throws RemoteException;
+    void requestUserPreapproval(
+            PackageInstaller.PreapprovalDetails preapprovalDetails, IntentSender intentSender)
+            throws RemoteException;
 
     void seal() throws RemoteException;
 
@@ -83,16 +90,15 @@ public interface IPackageInstallerSession extends IInterface {
 
     void transfer(String str) throws RemoteException;
 
-    void write(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    void write(String str, long j, long j2, ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
     public static class Default implements IPackageInstallerSession {
         @Override // android.content.pm.IPackageInstallerSession
-        public void setClientProgress(float progress) throws RemoteException {
-        }
+        public void setClientProgress(float progress) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void addClientProgress(float progress) throws RemoteException {
-        }
+        public void addClientProgress(float progress) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
         public String[] getNames() throws RemoteException {
@@ -100,7 +106,8 @@ public interface IPackageInstallerSession extends IInterface {
         }
 
         @Override // android.content.pm.IPackageInstallerSession
-        public ParcelFileDescriptor openWrite(String name, long offsetBytes, long lengthBytes) throws RemoteException {
+        public ParcelFileDescriptor openWrite(String name, long offsetBytes, long lengthBytes)
+                throws RemoteException {
             return null;
         }
 
@@ -110,44 +117,43 @@ public interface IPackageInstallerSession extends IInterface {
         }
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void write(String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd) throws RemoteException {
-        }
+        public void write(String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void stageViaHardLink(String target) throws RemoteException {
-        }
+        public void stageViaHardLink(String target) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void setChecksums(String name, Checksum[] checksums, byte[] signature) throws RemoteException {
-        }
+        public void setChecksums(String name, Checksum[] checksums, byte[] signature)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void requestChecksums(String name, int optional, int required, List trustedInstallers, IOnChecksumsReadyListener onChecksumsReadyListener) throws RemoteException {
-        }
+        public void requestChecksums(
+                String name,
+                int optional,
+                int required,
+                List trustedInstallers,
+                IOnChecksumsReadyListener onChecksumsReadyListener)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void removeSplit(String splitName) throws RemoteException {
-        }
+        public void removeSplit(String splitName) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void commit(IntentSender statusReceiver, boolean forTransferred) throws RemoteException {
-        }
+        public void commit(IntentSender statusReceiver, boolean forTransferred)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void transfer(String packageName) throws RemoteException {
-        }
+        public void transfer(String packageName) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void abandon() throws RemoteException {
-        }
+        public void abandon() throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void seal() throws RemoteException {
-        }
+        public void seal() throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
         public List<String> fetchPackageNames() throws RemoteException {
@@ -160,12 +166,12 @@ public interface IPackageInstallerSession extends IInterface {
         }
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void addFile(int location, String name, long lengthBytes, byte[] metadata, byte[] signature) throws RemoteException {
-        }
+        public void addFile(
+                int location, String name, long lengthBytes, byte[] metadata, byte[] signature)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void removeFile(int location, String name) throws RemoteException {
-        }
+        public void removeFile(int location, String name) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
         public boolean isMultiPackage() throws RemoteException {
@@ -178,12 +184,10 @@ public interface IPackageInstallerSession extends IInterface {
         }
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void addChildSessionId(int sessionId) throws RemoteException {
-        }
+        public void addChildSessionId(int sessionId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void removeChildSessionId(int sessionId) throws RemoteException {
-        }
+        public void removeChildSessionId(int sessionId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
         public int getParentSessionId() throws RemoteException {
@@ -201,8 +205,9 @@ public interface IPackageInstallerSession extends IInterface {
         }
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void requestUserPreapproval(PackageInstaller.PreapprovalDetails details, IntentSender statusReceiver) throws RemoteException {
-        }
+        public void requestUserPreapproval(
+                PackageInstaller.PreapprovalDetails details, IntentSender statusReceiver)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
         public boolean isApplicationEnabledSettingPersistent() throws RemoteException {
@@ -225,12 +230,10 @@ public interface IPackageInstallerSession extends IInterface {
         }
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void removeAppMetadata() throws RemoteException {
-        }
+        public void removeAppMetadata() throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
-        public void setPreVerifiedDomains(DomainSet preVerifiedDomains) throws RemoteException {
-        }
+        public void setPreVerifiedDomains(DomainSet preVerifiedDomains) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstallerSession
         public DomainSet getPreVerifiedDomains() throws RemoteException {
@@ -243,7 +246,7 @@ public interface IPackageInstallerSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageInstallerSession {
+    public abstract static class Stub extends Binder implements IPackageInstallerSession {
         public static final String DESCRIPTOR = "android.content.pm.IPackageInstallerSession";
         static final int TRANSACTION_abandon = 14;
         static final int TRANSACTION_addChildSessionId = 22;
@@ -291,7 +294,9 @@ public interface IPackageInstallerSession extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IPackageInstallerSession asInterface(IBinder obj) {
@@ -391,7 +396,8 @@ public interface IPackageInstallerSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -437,7 +443,9 @@ public interface IPackageInstallerSession extends IInterface {
                     String _arg05 = data.readString();
                     long _arg12 = data.readLong();
                     long _arg22 = data.readLong();
-                    ParcelFileDescriptor _arg3 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg3 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     write(_arg05, _arg12, _arg22, _arg3);
                     reply.writeNoException();
@@ -462,7 +470,8 @@ public interface IPackageInstallerSession extends IInterface {
                     int _arg24 = data.readInt();
                     ClassLoader cl = getClass().getClassLoader();
                     List _arg32 = data.readArrayList(cl);
-                    IOnChecksumsReadyListener _arg4 = IOnChecksumsReadyListener.Stub.asInterface(data.readStrongBinder());
+                    IOnChecksumsReadyListener _arg4 =
+                            IOnChecksumsReadyListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestChecksums(_arg08, _arg14, _arg24, _arg32, _arg4);
                     reply.writeNoException();
@@ -478,7 +487,8 @@ public interface IPackageInstallerSession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 12:
-                    IntentSender _arg010 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _arg010 =
+                            (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     boolean _arg15 = data.readBoolean();
                     data.enforceNoDataAvail();
                     commit(_arg010, _arg15);
@@ -563,7 +573,10 @@ public interface IPackageInstallerSession extends IInterface {
                     reply.writeInt(_result10);
                     return true;
                 case 27:
-                    PackageInstaller.PreapprovalDetails _arg016 = (PackageInstaller.PreapprovalDetails) data.readTypedObject(PackageInstaller.PreapprovalDetails.CREATOR);
+                    PackageInstaller.PreapprovalDetails _arg016 =
+                            (PackageInstaller.PreapprovalDetails)
+                                    data.readTypedObject(
+                                            PackageInstaller.PreapprovalDetails.CREATOR);
                     IntentSender _arg18 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     data.enforceNoDataAvail();
                     requestUserPreapproval(_arg016, _arg18);
@@ -672,7 +685,8 @@ public interface IPackageInstallerSession extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerSession
-            public ParcelFileDescriptor openWrite(String name, long offsetBytes, long lengthBytes) throws RemoteException {
+            public ParcelFileDescriptor openWrite(String name, long offsetBytes, long lengthBytes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -682,7 +696,9 @@ public interface IPackageInstallerSession extends IInterface {
                     _data.writeLong(lengthBytes);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -699,7 +715,9 @@ public interface IPackageInstallerSession extends IInterface {
                     _data.writeString(name);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -708,7 +726,9 @@ public interface IPackageInstallerSession extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerSession
-            public void write(String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd) throws RemoteException {
+            public void write(
+                    String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -741,7 +761,8 @@ public interface IPackageInstallerSession extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerSession
-            public void setChecksums(String name, Checksum[] checksums, byte[] signature) throws RemoteException {
+            public void setChecksums(String name, Checksum[] checksums, byte[] signature)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -758,7 +779,13 @@ public interface IPackageInstallerSession extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerSession
-            public void requestChecksums(String name, int optional, int required, List trustedInstallers, IOnChecksumsReadyListener onChecksumsReadyListener) throws RemoteException {
+            public void requestChecksums(
+                    String name,
+                    int optional,
+                    int required,
+                    List trustedInstallers,
+                    IOnChecksumsReadyListener onChecksumsReadyListener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -806,7 +833,8 @@ public interface IPackageInstallerSession extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerSession
-            public void commit(IntentSender statusReceiver, boolean forTransferred) throws RemoteException {
+            public void commit(IntentSender statusReceiver, boolean forTransferred)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -888,7 +916,9 @@ public interface IPackageInstallerSession extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    DataLoaderParamsParcel _result = (DataLoaderParamsParcel) _reply.readTypedObject(DataLoaderParamsParcel.CREATOR);
+                    DataLoaderParamsParcel _result =
+                            (DataLoaderParamsParcel)
+                                    _reply.readTypedObject(DataLoaderParamsParcel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -897,7 +927,9 @@ public interface IPackageInstallerSession extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerSession
-            public void addFile(int location, String name, long lengthBytes, byte[] metadata, byte[] signature) throws RemoteException {
+            public void addFile(
+                    int location, String name, long lengthBytes, byte[] metadata, byte[] signature)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1042,7 +1074,9 @@ public interface IPackageInstallerSession extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstallerSession
-            public void requestUserPreapproval(PackageInstaller.PreapprovalDetails details, IntentSender statusReceiver) throws RemoteException {
+            public void requestUserPreapproval(
+                    PackageInstaller.PreapprovalDetails details, IntentSender statusReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1097,7 +1131,9 @@ public interface IPackageInstallerSession extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1113,7 +1149,9 @@ public interface IPackageInstallerSession extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(31, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1168,15 +1206,18 @@ public interface IPackageInstallerSession extends IInterface {
         }
 
         protected void getDataLoaderParams_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_INSTALLER_V2, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_INSTALLER_V2, getCallingPid(), getCallingUid());
         }
 
         protected void addFile_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_INSTALLER_V2, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_INSTALLER_V2, getCallingPid(), getCallingUid());
         }
 
         protected void removeFile_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_INSTALLER_V2, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_INSTALLER_V2, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

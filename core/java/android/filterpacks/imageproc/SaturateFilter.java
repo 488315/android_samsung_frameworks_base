@@ -18,6 +18,7 @@ public class SaturateFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "scale")
     private float mScale;
+
     private int mTarget;
 
     @GenerateFieldPort(hasDefault = true, name = "tile_size")
@@ -28,8 +29,34 @@ public class SaturateFilter extends Filter {
         this.mScale = 0.0f;
         this.mTileSize = 640;
         this.mTarget = 0;
-        this.mBenSaturateShader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform float scale;\nuniform float shift;\nuniform vec3 weights;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float kv = dot(color.rgb, weights) + shift;\n  vec3 new_color = scale * color.rgb + (1.0 - scale) * kv;\n  gl_FragColor = vec4(new_color, color.a);\n}\n";
-        this.mHerfSaturateShader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform vec3 weights;\nuniform vec3 exponents;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float de = dot(color.rgb, weights);\n  float inv_de = 1.0 / de;\n  vec3 new_color = de * pow(color.rgb * inv_de, exponents);\n  float max_color = max(max(max(new_color.r, new_color.g), new_color.b), 1.0);\n  gl_FragColor = vec4(new_color / max_color, color.a);\n}\n";
+        this.mBenSaturateShader =
+                "precision mediump float;\n"
+                        + "uniform sampler2D tex_sampler_0;\n"
+                        + "uniform float scale;\n"
+                        + "uniform float shift;\n"
+                        + "uniform vec3 weights;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                        + "  float kv = dot(color.rgb, weights) + shift;\n"
+                        + "  vec3 new_color = scale * color.rgb + (1.0 - scale) * kv;\n"
+                        + "  gl_FragColor = vec4(new_color, color.a);\n"
+                        + "}\n";
+        this.mHerfSaturateShader =
+                "precision mediump float;\n"
+                        + "uniform sampler2D tex_sampler_0;\n"
+                        + "uniform vec3 weights;\n"
+                        + "uniform vec3 exponents;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                        + "  float de = dot(color.rgb, weights);\n"
+                        + "  float inv_de = 1.0 / de;\n"
+                        + "  vec3 new_color = de * pow(color.rgb * inv_de, exponents);\n"
+                        + "  float max_color = max(max(max(new_color.r, new_color.g), new_color.b),"
+                        + " 1.0);\n"
+                        + "  gl_FragColor = vec4(new_color / max_color, color.a);\n"
+                        + "}\n";
     }
 
     @Override // android.filterfw.core.Filter
@@ -46,16 +73,48 @@ public class SaturateFilter extends Filter {
     public void initProgram(FilterContext context, int target) {
         switch (target) {
             case 3:
-                ShaderProgram shaderProgram = new ShaderProgram(context, "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform float scale;\nuniform float shift;\nuniform vec3 weights;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float kv = dot(color.rgb, weights) + shift;\n  vec3 new_color = scale * color.rgb + (1.0 - scale) * kv;\n  gl_FragColor = vec4(new_color, color.a);\n}\n");
+                ShaderProgram shaderProgram =
+                        new ShaderProgram(
+                                context,
+                                "precision mediump float;\n"
+                                    + "uniform sampler2D tex_sampler_0;\n"
+                                    + "uniform float scale;\n"
+                                    + "uniform float shift;\n"
+                                    + "uniform vec3 weights;\n"
+                                    + "varying vec2 v_texcoord;\n"
+                                    + "void main() {\n"
+                                    + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                                    + "  float kv = dot(color.rgb, weights) + shift;\n"
+                                    + "  vec3 new_color = scale * color.rgb + (1.0 - scale) * kv;\n"
+                                    + "  gl_FragColor = vec4(new_color, color.a);\n"
+                                    + "}\n");
                 shaderProgram.setMaximumTileSize(this.mTileSize);
                 this.mBenProgram = shaderProgram;
-                ShaderProgram shaderProgram2 = new ShaderProgram(context, "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform vec3 weights;\nuniform vec3 exponents;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float de = dot(color.rgb, weights);\n  float inv_de = 1.0 / de;\n  vec3 new_color = de * pow(color.rgb * inv_de, exponents);\n  float max_color = max(max(max(new_color.r, new_color.g), new_color.b), 1.0);\n  gl_FragColor = vec4(new_color / max_color, color.a);\n}\n");
+                ShaderProgram shaderProgram2 =
+                        new ShaderProgram(
+                                context,
+                                "precision mediump float;\n"
+                                    + "uniform sampler2D tex_sampler_0;\n"
+                                    + "uniform vec3 weights;\n"
+                                    + "uniform vec3 exponents;\n"
+                                    + "varying vec2 v_texcoord;\n"
+                                    + "void main() {\n"
+                                    + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                                    + "  float de = dot(color.rgb, weights);\n"
+                                    + "  float inv_de = 1.0 / de;\n"
+                                    + "  vec3 new_color = de * pow(color.rgb * inv_de,"
+                                    + " exponents);\n"
+                                    + "  float max_color = max(max(max(new_color.r, new_color.g),"
+                                    + " new_color.b), 1.0);\n"
+                                    + "  gl_FragColor = vec4(new_color / max_color, color.a);\n"
+                                    + "}\n");
                 shaderProgram2.setMaximumTileSize(this.mTileSize);
                 this.mHerfProgram = shaderProgram2;
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter Sharpen does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Sharpen does not support frames of target " + target + "!");
         }
     }
 
@@ -94,7 +153,11 @@ public class SaturateFilter extends Filter {
 
     private void updateParameters() {
         if (this.mScale > 0.0f) {
-            float[] exponents = {(this.mScale * 0.9f) + 1.0f, (this.mScale * 2.1f) + 1.0f, (this.mScale * 2.7f) + 1.0f};
+            float[] exponents = {
+                (this.mScale * 0.9f) + 1.0f,
+                (this.mScale * 2.1f) + 1.0f,
+                (this.mScale * 2.7f) + 1.0f
+            };
             this.mHerfProgram.setHostValue("exponents", exponents);
         } else {
             this.mBenProgram.setHostValue("scale", Float.valueOf(this.mScale + 1.0f));

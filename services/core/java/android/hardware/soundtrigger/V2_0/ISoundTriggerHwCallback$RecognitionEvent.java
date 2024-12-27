@@ -8,6 +8,7 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -55,12 +56,35 @@ public final class ISoundTriggerHwCallback$RecognitionEvent {
         if (obj == null || obj.getClass() != ISoundTriggerHwCallback$RecognitionEvent.class) {
             return false;
         }
-        ISoundTriggerHwCallback$RecognitionEvent iSoundTriggerHwCallback$RecognitionEvent = (ISoundTriggerHwCallback$RecognitionEvent) obj;
-        return this.status == iSoundTriggerHwCallback$RecognitionEvent.status && this.type == iSoundTriggerHwCallback$RecognitionEvent.type && this.model == iSoundTriggerHwCallback$RecognitionEvent.model && this.captureAvailable == iSoundTriggerHwCallback$RecognitionEvent.captureAvailable && this.captureSession == iSoundTriggerHwCallback$RecognitionEvent.captureSession && this.captureDelayMs == iSoundTriggerHwCallback$RecognitionEvent.captureDelayMs && this.capturePreambleMs == iSoundTriggerHwCallback$RecognitionEvent.capturePreambleMs && this.triggerInData == iSoundTriggerHwCallback$RecognitionEvent.triggerInData && HidlSupport.deepEquals(this.audioConfig, iSoundTriggerHwCallback$RecognitionEvent.audioConfig) && HidlSupport.deepEquals(this.data, iSoundTriggerHwCallback$RecognitionEvent.data);
+        ISoundTriggerHwCallback$RecognitionEvent iSoundTriggerHwCallback$RecognitionEvent =
+                (ISoundTriggerHwCallback$RecognitionEvent) obj;
+        return this.status == iSoundTriggerHwCallback$RecognitionEvent.status
+                && this.type == iSoundTriggerHwCallback$RecognitionEvent.type
+                && this.model == iSoundTriggerHwCallback$RecognitionEvent.model
+                && this.captureAvailable
+                        == iSoundTriggerHwCallback$RecognitionEvent.captureAvailable
+                && this.captureSession == iSoundTriggerHwCallback$RecognitionEvent.captureSession
+                && this.captureDelayMs == iSoundTriggerHwCallback$RecognitionEvent.captureDelayMs
+                && this.capturePreambleMs
+                        == iSoundTriggerHwCallback$RecognitionEvent.capturePreambleMs
+                && this.triggerInData == iSoundTriggerHwCallback$RecognitionEvent.triggerInData
+                && HidlSupport.deepEquals(
+                        this.audioConfig, iSoundTriggerHwCallback$RecognitionEvent.audioConfig)
+                && HidlSupport.deepEquals(this.data, iSoundTriggerHwCallback$RecognitionEvent.data);
     }
 
     public final int hashCode() {
-        return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.status), AudioConfig$$ExternalSyntheticOutline0.m(this.type), AudioConfig$$ExternalSyntheticOutline0.m(this.model), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.captureAvailable), AudioConfig$$ExternalSyntheticOutline0.m(this.captureSession), AudioConfig$$ExternalSyntheticOutline0.m(this.captureDelayMs), AudioConfig$$ExternalSyntheticOutline0.m(this.capturePreambleMs), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.triggerInData), Integer.valueOf(HidlSupport.deepHashCode(this.audioConfig)), Integer.valueOf(HidlSupport.deepHashCode(this.data)));
+        return Objects.hash(
+                AudioConfig$$ExternalSyntheticOutline0.m(this.status),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.type),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.model),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.captureAvailable),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.captureSession),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.captureDelayMs),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.capturePreambleMs),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.triggerInData),
+                Integer.valueOf(HidlSupport.deepHashCode(this.audioConfig)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.data)));
     }
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob) {
@@ -102,7 +126,15 @@ public final class ISoundTriggerHwCallback$RecognitionEvent {
     public final String toString() {
         StringBuilder sb = new StringBuilder("{.status = ");
         int i = this.status;
-        sb.append(i == 0 ? "SUCCESS" : i == 1 ? "ABORT" : i == 2 ? "FAILURE" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i));
+        sb.append(
+                i == 0
+                        ? "SUCCESS"
+                        : i == 1
+                                ? "ABORT"
+                                : i == 2
+                                        ? "FAILURE"
+                                        : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                                new StringBuilder("0x"), i));
         sb.append(", .type = ");
         sb.append(SoundModelType.toString(this.type));
         sb.append(", .model = ");

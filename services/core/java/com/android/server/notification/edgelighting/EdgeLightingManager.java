@@ -19,6 +19,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
@@ -30,8 +31,8 @@ import com.android.server.LocalServices;
 import com.android.server.SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.notification.NmRune;
-import com.android.server.notification.edgelighting.EdgeLightingPolicyManager;
 import com.android.server.wm.WindowManagerInternal;
+
 import com.samsung.android.app.SemDualAppManager;
 import com.samsung.android.edge.SemEdgeLightingInfo;
 import com.samsung.android.knox.SemPersonaManager;
@@ -64,14 +65,30 @@ public final class EdgeLightingManager {
         public final Context mContext;
 
         /* renamed from: -$$Nest$menforceCallingPermission, reason: not valid java name */
-        public static void m735$$Nest$menforceCallingPermission(SecurityPolicy securityPolicy, String str) {
+        public static void m735$$Nest$menforceCallingPermission(
+                SecurityPolicy securityPolicy, String str) {
             securityPolicy.getClass();
             int callingUid = Binder.getCallingUid();
-            if ("eng".equals(Build.TYPE) || securityPolicy.mContext.getPackageManager().checkSignatures(1000, callingUid) == 0) {
+            if ("eng".equals(Build.TYPE)
+                    || securityPolicy.mContext.getPackageManager().checkSignatures(1000, callingUid)
+                            == 0) {
                 return;
             }
-            Slog.e(EdgeLightingManager.TAG, AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(callingUid, "Permission denied:", str, " uid=", ", you need system uid or to be signed with the system certificate."));
-            throw new SecurityException(AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(callingUid, "Permission denied:", str, " uid=", ", you need system uid or to be signed with the system certificate."));
+            Slog.e(
+                    EdgeLightingManager.TAG,
+                    AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(
+                            callingUid,
+                            "Permission denied:",
+                            str,
+                            " uid=",
+                            ", you need system uid or to be signed with the system certificate."));
+            throw new SecurityException(
+                    AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(
+                            callingUid,
+                            "Permission denied:",
+                            str,
+                            " uid=",
+                            ", you need system uid or to be signed with the system certificate."));
         }
 
         public SecurityPolicy(Context context) {
@@ -84,38 +101,45 @@ public final class EdgeLightingManager {
         }
 
         public final void enforceCallingPermissionFromHost() {
-            this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.EDGE_LIGHTING_HOST", EdgeLightingManager.TAG);
+            this.mContext.enforceCallingOrSelfPermission(
+                    "com.samsung.android.permission.EDGE_LIGHTING_HOST", EdgeLightingManager.TAG);
         }
     }
 
     public EdgeLightingManager(Context context) {
-        PhoneStateListener phoneStateListener = new PhoneStateListener() { // from class: com.android.server.notification.edgelighting.EdgeLightingManager.1
-            @Override // android.telephony.PhoneStateListener
-            public final void onCallStateChanged(int i, String str) {
-                boolean z = i == 1;
-                EdgeLightingManager edgeLightingManager = EdgeLightingManager.this;
-                if (z == edgeLightingManager.mRinging) {
-                    return;
-                }
-                edgeLightingManager.mRinging = z;
-                edgeLightingManager.mEdgeLightingPolicyManager.getClass();
-            }
-        };
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.notification.edgelighting.EdgeLightingManager.2
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                String action = intent.getAction();
-                if ("android.intent.action.SCREEN_OFF".equals(action)) {
-                    EdgeLightingManager.this.mEdgeLightingClientManager.onScreenChanged(false);
-                    EdgeLightingManager.this.getClass();
-                } else if ("android.intent.action.SCREEN_ON".equals(action)) {
-                    EdgeLightingManager.this.mEdgeLightingClientManager.onScreenChanged(true);
-                    EdgeLightingManager edgeLightingManager = EdgeLightingManager.this;
-                    System.currentTimeMillis();
-                    edgeLightingManager.getClass();
-                }
-            }
-        };
+        PhoneStateListener phoneStateListener =
+                new PhoneStateListener() { // from class:
+                                           // com.android.server.notification.edgelighting.EdgeLightingManager.1
+                    @Override // android.telephony.PhoneStateListener
+                    public final void onCallStateChanged(int i, String str) {
+                        boolean z = i == 1;
+                        EdgeLightingManager edgeLightingManager = EdgeLightingManager.this;
+                        if (z == edgeLightingManager.mRinging) {
+                            return;
+                        }
+                        edgeLightingManager.mRinging = z;
+                        edgeLightingManager.mEdgeLightingPolicyManager.getClass();
+                    }
+                };
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.notification.edgelighting.EdgeLightingManager.2
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        if ("android.intent.action.SCREEN_OFF".equals(action)) {
+                            EdgeLightingManager.this.mEdgeLightingClientManager.onScreenChanged(
+                                    false);
+                            EdgeLightingManager.this.getClass();
+                        } else if ("android.intent.action.SCREEN_ON".equals(action)) {
+                            EdgeLightingManager.this.mEdgeLightingClientManager.onScreenChanged(
+                                    true);
+                            EdgeLightingManager edgeLightingManager = EdgeLightingManager.this;
+                            System.currentTimeMillis();
+                            edgeLightingManager.getClass();
+                        }
+                    }
+                };
         this.mContext = context;
         this.mSecurityPolicy = new SecurityPolicy(context);
         this.mEdgeLightingPolicyManager = new EdgeLightingPolicyManager(context);
@@ -123,7 +147,8 @@ public final class EdgeLightingManager {
         this.mPowerManager = (PowerManager) context.getSystemService("power");
         this.mUserManager = (UserManager) context.getSystemService(UserManager.class);
         ((TelephonyManager) context.getSystemService("phone")).listen(phoneStateListener, 32);
-        this.mWindowManagerInternal = (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class);
+        this.mWindowManagerInternal =
+                (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class);
         IntentFilter intentFilter = new IntentFilter("android.intent.action.SCREEN_OFF");
         intentFilter.addAction("android.intent.action.SCREEN_ON");
         context.registerReceiver(broadcastReceiver, intentFilter);
@@ -131,7 +156,8 @@ public final class EdgeLightingManager {
 
     public static boolean isFolded() {
         SemWindowManager semWindowManager;
-        if (NmRune.NM_SUPPORT_SUB_DISPLAY_EDGE_LIGHTING || (semWindowManager = SemWindowManager.getInstance()) == null) {
+        if (NmRune.NM_SUPPORT_SUB_DISPLAY_EDGE_LIGHTING
+                || (semWindowManager = SemWindowManager.getInstance()) == null) {
             return false;
         }
         return semWindowManager.isFolded();
@@ -153,11 +179,18 @@ public final class EdgeLightingManager {
             }
             String packageName = statusBarNotification.getPackageName();
             String str = TAG;
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("hideForNotification : packageName = ", packageName, str);
-            EdgeLightingPolicyManager.NotificationGroup notificationGroup = this.mEdgeLightingPolicyManager.mNotificationGroup;
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "hideForNotification : packageName = ", packageName, str);
+            EdgeLightingPolicyManager.NotificationGroup notificationGroup =
+                    this.mEdgeLightingPolicyManager.mNotificationGroup;
             synchronized (notificationGroup.mGroupMap) {
-                Slog.d("EdgeLightingPolicyManager:NotificationGroup", "remove : sbn : " + statusBarNotification);
-                EdgeLightingPolicyManager.GroupNotificationData groupNotificationData = (EdgeLightingPolicyManager.GroupNotificationData) notificationGroup.mGroupMap.get(statusBarNotification.getGroupKey());
+                Slog.d(
+                        "EdgeLightingPolicyManager:NotificationGroup",
+                        "remove : sbn : " + statusBarNotification);
+                EdgeLightingPolicyManager.GroupNotificationData groupNotificationData =
+                        (EdgeLightingPolicyManager.GroupNotificationData)
+                                notificationGroup.mGroupMap.get(
+                                        statusBarNotification.getGroupKey());
                 if (groupNotificationData == null) {
                     notificationGroup.mGroupMap.remove(statusBarNotification.getGroupKey());
                 } else if (statusBarNotification.getKey() != null) {
@@ -181,12 +214,20 @@ public final class EdgeLightingManager {
                 Slog.d(str, "hideForNotification : isInteractive is true");
                 return;
             }
-            if (this.mEdgeLightingPolicyManager.isEdgeLightingDisabled() || this.mEdgeLightingPolicyManager.isEdgeLightingRestricted(1) || this.mEdgeLightingPolicyManager.isEdgeLightingDisabledByPackage(packageName)) {
+            if (this.mEdgeLightingPolicyManager.isEdgeLightingDisabled()
+                    || this.mEdgeLightingPolicyManager.isEdgeLightingRestricted(1)
+                    || this.mEdgeLightingPolicyManager.isEdgeLightingDisabledByPackage(
+                            packageName)) {
                 return;
             }
-            if (this.mEdgeLightingPolicyManager.isAcceptableApplication(1, identifier, packageName, false)) {
+            if (this.mEdgeLightingPolicyManager.isAcceptableApplication(
+                    1, identifier, packageName, false)) {
                 if (EdgeLightingHistory.IS_DEV_DEBUG || DEBUG) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m("hideEdgeLightingInternal : packageName = ", packageName, ", reason=1", str);
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            "hideEdgeLightingInternal : packageName = ",
+                            packageName,
+                            ", reason=1",
+                            str);
                 }
                 this.mEdgeLightingClientManager.stopEdgeLightingInternal(1, packageName);
                 return;
@@ -204,7 +245,8 @@ public final class EdgeLightingManager {
         String str3 = TAG;
         boolean z2 = DEBUG;
         if (z || z2) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("hideForWakeLockByWindow : packageName = ", str, str3);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "hideForWakeLockByWindow : packageName = ", str, str3);
         }
         int userId = UserHandle.getUserId(i);
         if (!isCallingUserSupported(userId)) {
@@ -213,15 +255,21 @@ public final class EdgeLightingManager {
         } else if (isUserSetupCompleted()) {
             EdgeLightingPolicyManager edgeLightingPolicyManager = this.mEdgeLightingPolicyManager;
             if (edgeLightingPolicyManager.isAllowEdgelighting()) {
-                EdgeLightingClientManager edgeLightingClientManager = this.mEdgeLightingClientManager;
+                EdgeLightingClientManager edgeLightingClientManager =
+                        this.mEdgeLightingClientManager;
                 if (edgeLightingClientManager.isAvailableEdgeLighting(2)) {
-                    if (!edgeLightingPolicyManager.isEdgeLightingDisabled() && !edgeLightingPolicyManager.isEdgeLightingRestricted(4)) {
-                        if (edgeLightingPolicyManager.isAcceptableApplication(4, userId, str, false)) {
+                    if (!edgeLightingPolicyManager.isEdgeLightingDisabled()
+                            && !edgeLightingPolicyManager.isEdgeLightingRestricted(4)) {
+                        if (edgeLightingPolicyManager.isAcceptableApplication(
+                                4, userId, str, false)) {
                             edgeLightingClientManager.stopEdgeLightingInternal(6, str);
                             return;
                         } else {
                             if (z || z2) {
-                                Slog.d(str3, "hideForWakeLockInternal : return false by isAcceptableApplication.");
+                                Slog.d(
+                                        str3,
+                                        "hideForWakeLockInternal : return false by"
+                                            + " isAcceptableApplication.");
                                 return;
                             }
                             return;
@@ -230,16 +278,24 @@ public final class EdgeLightingManager {
                     if (!z && !z2) {
                         return;
                     }
-                    Slog.d(str3, "hideForWakeLockInternal : return false by checking disable policy.");
+                    Slog.d(
+                            str3,
+                            "hideForWakeLockInternal : return false by checking disable policy.");
                     edgeLightingHistory = EdgeLightingHistory.getInstance();
-                    str2 = "hideForWakeLockInternal : return false by checking disable policy. | Package : ";
+                    str2 =
+                            "hideForWakeLockInternal : return false by checking disable policy. |"
+                                + " Package : ";
                 } else {
                     if (!z && !z2) {
                         return;
                     }
-                    Slog.d(str3, "hideForWakeLockInternal : return false by isAvailableEdgeLighting.");
+                    Slog.d(
+                            str3,
+                            "hideForWakeLockInternal : return false by isAvailableEdgeLighting.");
                     edgeLightingHistory = EdgeLightingHistory.getInstance();
-                    str2 = "hideForWakeLockInternal : return false by isAvailableEdgeLighting. | Package : ";
+                    str2 =
+                            "hideForWakeLockInternal : return false by isAvailableEdgeLighting. |"
+                                + " Package : ";
                 }
             } else {
                 if (!z && !z2) {
@@ -247,7 +303,9 @@ public final class EdgeLightingManager {
                 }
                 Slog.d(str3, "showForNotificationScreenOn : return false by isAllowEdgelighting.");
                 edgeLightingHistory = EdgeLightingHistory.getInstance();
-                str2 = "hideForWakeLockInternal : return false by isAllowEdgelighting. | Package : ";
+                str2 =
+                        "hideForWakeLockInternal : return false by isAllowEdgelighting. | Package :"
+                            + " ";
             }
         } else {
             Slog.d(str3, "hideForWakeLockInternal : user setup is not yet completed.");
@@ -263,7 +321,9 @@ public final class EdgeLightingManager {
         boolean isKnoxId = SemPersonaManager.isKnoxId(i);
         if (EdgeLightingHistory.IS_DEV_DEBUG || DEBUG) {
             String str = TAG;
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "isCallingUserSupported : callingUserId=", ", mUserId=");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "isCallingUserSupported : callingUserId=", ", mUserId=");
             m.append(this.mUserId);
             m.append(", isDualAppId=");
             m.append(isDualAppId);
@@ -291,19 +351,30 @@ public final class EdgeLightingManager {
 
     public final boolean isUserSetupCompleted() {
         if (!this.mUserSetupCompleted) {
-            this.mUserSetupCompleted = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "user_setup_complete", 0, -2) != 0;
+            this.mUserSetupCompleted =
+                    Settings.Secure.getIntForUser(
+                                    this.mContext.getContentResolver(),
+                                    "user_setup_complete",
+                                    0,
+                                    -2)
+                            != 0;
         }
         return this.mUserSetupCompleted;
     }
 
     public final void showEdgeLightingInternal(int i, String str, Bundle bundle) {
-        SemEdgeLightingInfo semEdgeLightingInfo = new SemEdgeLightingInfo(2001, new int[]{bundle != null ? bundle.getInt("color", 0) : 0, 0});
+        SemEdgeLightingInfo semEdgeLightingInfo =
+                new SemEdgeLightingInfo(
+                        2001, new int[] {bundle != null ? bundle.getInt("color", 0) : 0, 0});
         semEdgeLightingInfo.setUserId(this.mUserId);
         if (bundle != null) {
             semEdgeLightingInfo.setExtra(bundle);
         }
         if (EdgeLightingHistory.IS_DEV_DEBUG || DEBUG) {
-            Slog.d(TAG, SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0.m(i, "showEdgeLightingInternal : packageName = ", str, ", reason="));
+            Slog.d(
+                    TAG,
+                    SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0
+                            .m(i, "showEdgeLightingInternal : packageName = ", str, ", reason="));
         }
         this.mEdgeLightingClientManager.startEdgeLightingInternal(str, semEdgeLightingInfo, i);
     }
@@ -316,12 +387,16 @@ public final class EdgeLightingManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean showForNotification(android.service.notification.StatusBarNotification r24, android.os.Bundle r25) {
+    public final boolean showForNotification(
+            android.service.notification.StatusBarNotification r24, android.os.Bundle r25) {
         /*
             Method dump skipped, instructions count: 1192
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.edgelighting.EdgeLightingManager.showForNotification(android.service.notification.StatusBarNotification, android.os.Bundle):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.edgelighting.EdgeLightingManager.showForNotification(android.service.notification.StatusBarNotification,"
+                    + " android.os.Bundle):boolean");
     }
 
     public final boolean showForToast(int i, String str, String str2) {
@@ -337,32 +412,47 @@ public final class EdgeLightingManager {
         }
         if (!isUserSetupCompleted()) {
             Slog.d(TAG, "showForToast : user setup is not yet completed.");
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForToast : user setup is not yet completed. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForToast : user setup is not yet completed. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
         boolean z = DEBUG;
         if (z) {
-            GmsAlarmManager$$ExternalSyntheticOutline0.m("showForToast : packageName = ", str, ",text=", str2, TAG);
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    "showForToast : packageName = ", str, ",text=", str2, TAG);
         } else if (EdgeLightingHistory.IS_DEV_DEBUG) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("showForToast : packageName = ", str, TAG);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "showForToast : packageName = ", str, TAG);
         }
         if (!this.mEdgeLightingPolicyManager.isAllowEdgelighting()) {
             if (EdgeLightingHistory.IS_DEV_DEBUG || z) {
                 Slog.d(TAG, "showForNotificationScreenOn : return false by isAllowEdgelighting.");
-                EdgeLightingManager$$ExternalSyntheticOutline0.m("showForToast : return false by isAllowEdgelighting. | Package : ", str, EdgeLightingHistory.getInstance());
+                EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                        "showForToast : return false by isAllowEdgelighting. | Package : ",
+                        str,
+                        EdgeLightingHistory.getInstance());
             }
             return false;
         }
         if (!this.mEdgeLightingClientManager.isAvailableEdgeLighting(1)) {
             if (EdgeLightingHistory.IS_DEV_DEBUG || z) {
                 Slog.d(TAG, "showForToast : return false by isAvailableEdgeLighting.");
-                EdgeLightingManager$$ExternalSyntheticOutline0.m("showForToast : return false by isAvailableEdgeLighting. | Package : ", str, EdgeLightingHistory.getInstance());
+                EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                        "showForToast : return false by isAvailableEdgeLighting. | Package : ",
+                        str,
+                        EdgeLightingHistory.getInstance());
             }
             return false;
         }
-        if (this.mEdgeLightingPolicyManager.isEdgeLightingDisabled() || this.mEdgeLightingPolicyManager.isEdgeLightingRestricted(512)) {
+        if (this.mEdgeLightingPolicyManager.isEdgeLightingDisabled()
+                || this.mEdgeLightingPolicyManager.isEdgeLightingRestricted(512)) {
             Slog.d(TAG, "showForToast : return false by checking disable policy.");
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForToast : return false by checking disable policy. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForToast : return false by checking disable policy. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
         if (!this.mEdgeLightingPolicyManager.isAcceptableApplication(512, userId, str, false)) {
@@ -372,20 +462,33 @@ public final class EdgeLightingManager {
             return false;
         }
         if (!this.mPowerManager.isInteractive()) {
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForToast : power not interactive. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForToast : power not interactive. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
         EdgeLightingPolicyManager edgeLightingPolicyManager = this.mEdgeLightingPolicyManager;
         synchronized (edgeLightingPolicyManager.mNotificationMap) {
             try {
                 long currentTimeMillis = System.currentTimeMillis();
-                notificationData = (EdgeLightingPolicyManager.NotificationData) edgeLightingPolicyManager.mNotificationMap.get(str);
+                notificationData =
+                        (EdgeLightingPolicyManager.NotificationData)
+                                edgeLightingPolicyManager.mNotificationMap.get(str);
                 if (notificationData != null) {
                     if (EdgeLightingHistory.IS_DEV_DEBUG || EdgeLightingPolicyManager.DEBUG) {
-                        Slog.d("EdgeLightingPolicyManager", "getValidNotificationData packageName=" + str + ",now=" + currentTimeMillis + ",time=" + notificationData.mTime + ",ret=" + (currentTimeMillis - notificationData.mTime));
+                        Slog.d(
+                                "EdgeLightingPolicyManager",
+                                "getValidNotificationData packageName="
+                                        + str
+                                        + ",now="
+                                        + currentTimeMillis
+                                        + ",time="
+                                        + notificationData.mTime
+                                        + ",ret="
+                                        + (currentTimeMillis - notificationData.mTime));
                     }
-                    if (currentTimeMillis - notificationData.mTime < 4000) {
-                    }
+                    if (currentTimeMillis - notificationData.mTime < 4000) {}
                 }
                 notificationData = null;
             } finally {
@@ -393,12 +496,14 @@ public final class EdgeLightingManager {
         }
         if (notificationData != null) {
             boolean z2 = (notificationData.mNotificationInfo.getInt("flag", 0) & 2) != 0;
-            DeviceIdleController$$ExternalSyntheticOutline0.m("showForToast : ongoing check ", TAG, z2);
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "showForToast : ongoing check ", TAG, z2);
             if (!z2) {
                 showEdgeLightingInternal(2, str, notificationData.mNotificationInfo);
                 return true;
             }
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForToast : onGoing | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForToast : onGoing | Package : ", str, EdgeLightingHistory.getInstance());
         }
         return false;
     }
@@ -406,13 +511,24 @@ public final class EdgeLightingManager {
     public final boolean showForWakeLockByWindow(int i, String str) {
         boolean isInteractive = this.mPowerManager.isInteractive();
         if (EdgeLightingHistory.IS_DEV_DEBUG || DEBUG) {
-            Slog.d(TAG, "showForWakeLockByWindow : packageName = " + str + ", screenOn = " + isInteractive);
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeLockByWindow : Calling user is not supported. | Package : ", str, EdgeLightingHistory.getInstance());
+            Slog.d(
+                    TAG,
+                    "showForWakeLockByWindow : packageName = "
+                            + str
+                            + ", screenOn = "
+                            + isInteractive);
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForWakeLockByWindow : Calling user is not supported. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
         }
         if (!isInteractive) {
             return showForWakeLockInternal(6, i, str);
         }
-        EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeLockByWindow : screenOn | Package : ", str, EdgeLightingHistory.getInstance());
+        EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                "showForWakeLockByWindow : screenOn | Package : ",
+                str,
+                EdgeLightingHistory.getInstance());
         return false;
     }
 
@@ -421,21 +537,29 @@ public final class EdgeLightingManager {
         String str2 = TAG;
         if (isFolded) {
             Slog.d(str2, "showForWakeLockInternal : folded");
-            EdgeLightingHistory.getInstance().updateRejectHistory("showForWakeLockInternal : folded");
+            EdgeLightingHistory.getInstance()
+                    .updateRejectHistory("showForWakeLockInternal : folded");
             return false;
         }
         int userId = UserHandle.getUserId(i2);
         if (!isCallingUserSupported(userId)) {
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeLockInternal : Calling user is not supported. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForWakeLockInternal : Calling user is not supported. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
         if ((new LockPatternUtils(this.mContext).getStrongAuthForUser(this.mUserId) & 32) != 0) {
-            EdgeLightingHistory.getInstance().updateRejectHistory("showForWakeLockInternal : lockdown mode");
+            EdgeLightingHistory.getInstance()
+                    .updateRejectHistory("showForWakeLockInternal : lockdown mode");
             return false;
         }
         if (!isUserSetupCompleted()) {
             Slog.d(str2, "showForWakeLockInternal : user setup is not yet completed");
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeLockInternal : user setup is not yet completed. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForWakeLockInternal : user setup is not yet completed. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
         EdgeLightingPolicyManager edgeLightingPolicyManager = this.mEdgeLightingPolicyManager;
@@ -444,21 +568,34 @@ public final class EdgeLightingManager {
         if (!isAllowEdgelighting) {
             if (EdgeLightingHistory.IS_DEV_DEBUG || z) {
                 Slog.d(str2, "showForWakeLockInternal : return false by isAllowEdgelighting.");
-                EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeLockInternal : return false by isAllowEdgelighting. | Package : ", str, EdgeLightingHistory.getInstance());
+                EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                        "showForWakeLockInternal : return false by isAllowEdgelighting. | Package :"
+                            + " ",
+                        str,
+                        EdgeLightingHistory.getInstance());
             }
             return false;
         }
         if (!this.mEdgeLightingClientManager.isAvailableEdgeLighting(2)) {
             if (EdgeLightingHistory.IS_DEV_DEBUG || z) {
                 Slog.d(str2, "showForWakeLockInternal : return false by isAvailableEdgeLighting.");
-                EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeLockInternal : return false by isAvailableEdgeLighting. | Package : ", str, EdgeLightingHistory.getInstance());
+                EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                        "showForWakeLockInternal : return false by isAvailableEdgeLighting. |"
+                            + " Package : ",
+                        str,
+                        EdgeLightingHistory.getInstance());
             }
             return false;
         }
-        if (edgeLightingPolicyManager.isEdgeLightingDisabled() || edgeLightingPolicyManager.isEdgeLightingRestricted(4)) {
+        if (edgeLightingPolicyManager.isEdgeLightingDisabled()
+                || edgeLightingPolicyManager.isEdgeLightingRestricted(4)) {
             if (EdgeLightingHistory.IS_DEV_DEBUG || z) {
                 Slog.d(str2, "showForWakeLockInternal : return false by checking disable policy.");
-                EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeLockInternal : return false by checking disable policy. | Package : ", str, EdgeLightingHistory.getInstance());
+                EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                        "showForWakeLockInternal : return false by checking disable policy. |"
+                            + " Package : ",
+                        str,
+                        EdgeLightingHistory.getInstance());
             }
             return false;
         }
@@ -477,7 +614,8 @@ public final class EdgeLightingManager {
         String str2 = TAG;
         boolean z2 = DEBUG;
         if (z || z2) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("showForWakeUp : packageName =", str, str2);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "showForWakeUp : packageName =", str, str2);
         }
         if (isFolded()) {
             Slog.d(str2, "showForWakeUpInternal : folded");
@@ -486,16 +624,23 @@ public final class EdgeLightingManager {
         }
         int userId = UserHandle.getUserId(i);
         if (!isCallingUserSupported(userId)) {
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeUpInternal : Calling user is not supported. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForWakeUpInternal : Calling user is not supported. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
         if ((new LockPatternUtils(this.mContext).getStrongAuthForUser(this.mUserId) & 32) != 0) {
-            EdgeLightingHistory.getInstance().updateRejectHistory("showForWakeUpInternal : lockdown mode");
+            EdgeLightingHistory.getInstance()
+                    .updateRejectHistory("showForWakeUpInternal : lockdown mode");
             return false;
         }
         if (!isUserSetupCompleted()) {
             Slog.d(str2, "showForWakeUpInternal : user setup is not yet completed");
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeUpInternal : user setup is not yet completed. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForWakeUpInternal : user setup is not yet completed. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
         EdgeLightingPolicyManager edgeLightingPolicyManager = this.mEdgeLightingPolicyManager;
@@ -504,7 +649,10 @@ public final class EdgeLightingManager {
                 return false;
             }
             Slog.d(str2, "showForNotificationScreenOn : return false by isAllowEdgelighting.");
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeUpInternal : return false by isAllowEdgelighting. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForWakeUpInternal : return false by isAllowEdgelighting. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
         if (!this.mEdgeLightingClientManager.isAvailableEdgeLighting(2)) {
@@ -512,10 +660,14 @@ public final class EdgeLightingManager {
                 return false;
             }
             Slog.d(str2, "showForWakeUpInternal : return false by isAvailableEdgeLighting.");
-            EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeUpInternal : return false by isAvailableEdgeLighting. | Package : ", str, EdgeLightingHistory.getInstance());
+            EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                    "showForWakeUpInternal : return false by isAvailableEdgeLighting. | Package : ",
+                    str,
+                    EdgeLightingHistory.getInstance());
             return false;
         }
-        if (!edgeLightingPolicyManager.isEdgeLightingDisabled() && !edgeLightingPolicyManager.isEdgeLightingRestricted(2)) {
+        if (!edgeLightingPolicyManager.isEdgeLightingDisabled()
+                && !edgeLightingPolicyManager.isEdgeLightingRestricted(2)) {
             if (edgeLightingPolicyManager.isAcceptableApplication(2, userId, str, false)) {
                 showEdgeLightingInternal(3, str, null);
                 return true;
@@ -527,7 +679,10 @@ public final class EdgeLightingManager {
             return false;
         }
         Slog.d(str2, "showForWakeUpInternal : return false by checking disable policy.");
-        EdgeLightingManager$$ExternalSyntheticOutline0.m("showForWakeUpInternal : return false by checking disable policy. | Package : ", str, EdgeLightingHistory.getInstance());
+        EdgeLightingManager$$ExternalSyntheticOutline0.m(
+                "showForWakeUpInternal : return false by checking disable policy. | Package : ",
+                str,
+                EdgeLightingHistory.getInstance());
         return false;
     }
 
@@ -546,7 +701,8 @@ public final class EdgeLightingManager {
         edgeLightingHistory.getClass();
         if (EdgeLightingHistory.IS_DEV_DEBUG || EdgeLightingHistory.DEBUG) {
             if (EdgeLightingHistory.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m("updateEventHistory log = ", sb2, "EdgeLightingHistory");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        "updateEventHistory log = ", sb2, "EdgeLightingHistory");
             }
             String timestampFormat = EdgeLightingHistory.toTimestampFormat(sb2);
             synchronized (edgeLightingHistory.mLock) {

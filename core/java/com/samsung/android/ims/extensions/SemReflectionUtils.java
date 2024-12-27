@@ -1,6 +1,7 @@
 package com.samsung.android.ims.extensions;
 
 import android.util.Log;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,7 +20,9 @@ public class SemReflectionUtils {
             }
             return getField(superClass, name);
         } catch (NoSuchFieldException e) {
-            Log.d(SemReflectionUtils.class.getSimpleName(), "Could not find field " + name + " in " + cls);
+            Log.d(
+                    SemReflectionUtils.class.getSimpleName(),
+                    "Could not find field " + name + " in " + cls);
             if (superClass == null) {
                 return null;
             }

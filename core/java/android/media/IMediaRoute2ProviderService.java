@@ -1,6 +1,5 @@
 package android.media;
 
-import android.media.IMediaRoute2ProviderServiceCallback;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -16,11 +15,13 @@ public interface IMediaRoute2ProviderService extends IInterface {
 
     void releaseSession(long j, String str) throws RemoteException;
 
-    void requestCreateSession(long j, String str, String str2, Bundle bundle) throws RemoteException;
+    void requestCreateSession(long j, String str, String str2, Bundle bundle)
+            throws RemoteException;
 
     void selectRoute(long j, String str, String str2) throws RemoteException;
 
-    void setCallback(IMediaRoute2ProviderServiceCallback iMediaRoute2ProviderServiceCallback) throws RemoteException;
+    void setCallback(IMediaRoute2ProviderServiceCallback iMediaRoute2ProviderServiceCallback)
+            throws RemoteException;
 
     void setRouteVolume(long j, String str, int i) throws RemoteException;
 
@@ -28,44 +29,45 @@ public interface IMediaRoute2ProviderService extends IInterface {
 
     void transferToRoute(long j, String str, String str2) throws RemoteException;
 
-    void updateDiscoveryPreference(RouteDiscoveryPreference routeDiscoveryPreference) throws RemoteException;
+    void updateDiscoveryPreference(RouteDiscoveryPreference routeDiscoveryPreference)
+            throws RemoteException;
 
     public static class Default implements IMediaRoute2ProviderService {
         @Override // android.media.IMediaRoute2ProviderService
-        public void setCallback(IMediaRoute2ProviderServiceCallback callback) throws RemoteException {
-        }
+        public void setCallback(IMediaRoute2ProviderServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderService
-        public void updateDiscoveryPreference(RouteDiscoveryPreference discoveryPreference) throws RemoteException {
-        }
+        public void updateDiscoveryPreference(RouteDiscoveryPreference discoveryPreference)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderService
-        public void setRouteVolume(long requestId, String routeId, int volume) throws RemoteException {
-        }
+        public void setRouteVolume(long requestId, String routeId, int volume)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderService
-        public void requestCreateSession(long requestId, String packageName, String routeId, Bundle sessionHints) throws RemoteException {
-        }
+        public void requestCreateSession(
+                long requestId, String packageName, String routeId, Bundle sessionHints)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderService
-        public void selectRoute(long requestId, String sessionId, String routeId) throws RemoteException {
-        }
+        public void selectRoute(long requestId, String sessionId, String routeId)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderService
-        public void deselectRoute(long requestId, String sessionId, String routeId) throws RemoteException {
-        }
+        public void deselectRoute(long requestId, String sessionId, String routeId)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderService
-        public void transferToRoute(long requestId, String sessionId, String routeId) throws RemoteException {
-        }
+        public void transferToRoute(long requestId, String sessionId, String routeId)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderService
-        public void setSessionVolume(long requestId, String sessionId, int volume) throws RemoteException {
-        }
+        public void setSessionVolume(long requestId, String sessionId, int volume)
+                throws RemoteException {}
 
         @Override // android.media.IMediaRoute2ProviderService
-        public void releaseSession(long requestId, String sessionId) throws RemoteException {
-        }
+        public void releaseSession(long requestId, String sessionId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -73,7 +75,7 @@ public interface IMediaRoute2ProviderService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaRoute2ProviderService {
+    public abstract static class Stub extends Binder implements IMediaRoute2ProviderService {
         static final int TRANSACTION_deselectRoute = 6;
         static final int TRANSACTION_releaseSession = 9;
         static final int TRANSACTION_requestCreateSession = 4;
@@ -135,7 +137,8 @@ public interface IMediaRoute2ProviderService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMediaRoute2ProviderService.DESCRIPTOR);
             }
@@ -145,12 +148,16 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IMediaRoute2ProviderServiceCallback _arg0 = IMediaRoute2ProviderServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IMediaRoute2ProviderServiceCallback _arg0 =
+                            IMediaRoute2ProviderServiceCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     return true;
                 case 2:
-                    RouteDiscoveryPreference _arg02 = (RouteDiscoveryPreference) data.readTypedObject(RouteDiscoveryPreference.CREATOR);
+                    RouteDiscoveryPreference _arg02 =
+                            (RouteDiscoveryPreference)
+                                    data.readTypedObject(RouteDiscoveryPreference.CREATOR);
                     data.enforceNoDataAvail();
                     updateDiscoveryPreference(_arg02);
                     return true;
@@ -225,7 +232,8 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderService
-            public void setCallback(IMediaRoute2ProviderServiceCallback callback) throws RemoteException {
+            public void setCallback(IMediaRoute2ProviderServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
@@ -237,7 +245,8 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderService
-            public void updateDiscoveryPreference(RouteDiscoveryPreference discoveryPreference) throws RemoteException {
+            public void updateDiscoveryPreference(RouteDiscoveryPreference discoveryPreference)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
@@ -249,7 +258,8 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderService
-            public void setRouteVolume(long requestId, String routeId, int volume) throws RemoteException {
+            public void setRouteVolume(long requestId, String routeId, int volume)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
@@ -263,7 +273,9 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderService
-            public void requestCreateSession(long requestId, String packageName, String routeId, Bundle sessionHints) throws RemoteException {
+            public void requestCreateSession(
+                    long requestId, String packageName, String routeId, Bundle sessionHints)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
@@ -278,7 +290,8 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderService
-            public void selectRoute(long requestId, String sessionId, String routeId) throws RemoteException {
+            public void selectRoute(long requestId, String sessionId, String routeId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
@@ -292,7 +305,8 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderService
-            public void deselectRoute(long requestId, String sessionId, String routeId) throws RemoteException {
+            public void deselectRoute(long requestId, String sessionId, String routeId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
@@ -306,7 +320,8 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderService
-            public void transferToRoute(long requestId, String sessionId, String routeId) throws RemoteException {
+            public void transferToRoute(long requestId, String sessionId, String routeId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);
@@ -320,7 +335,8 @@ public interface IMediaRoute2ProviderService extends IInterface {
             }
 
             @Override // android.media.IMediaRoute2ProviderService
-            public void setSessionVolume(long requestId, String sessionId, int volume) throws RemoteException {
+            public void setSessionVolume(long requestId, String sessionId, int volume)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMediaRoute2ProviderService.DESCRIPTOR);

@@ -14,12 +14,12 @@ public interface IHdmiVendorCommandListener extends IInterface {
 
     public static class Default implements IHdmiVendorCommandListener {
         @Override // android.hardware.hdmi.IHdmiVendorCommandListener
-        public void onReceived(int logicalAddress, int destAddress, byte[] operands, boolean hasVendorId) throws RemoteException {
-        }
+        public void onReceived(
+                int logicalAddress, int destAddress, byte[] operands, boolean hasVendorId)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiVendorCommandListener
-        public void onControlStateChanged(boolean enabled, int reason) throws RemoteException {
-        }
+        public void onControlStateChanged(boolean enabled, int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +27,7 @@ public interface IHdmiVendorCommandListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiVendorCommandListener {
+    public abstract static class Stub extends Binder implements IHdmiVendorCommandListener {
         public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiVendorCommandListener";
         static final int TRANSACTION_onControlStateChanged = 2;
         static final int TRANSACTION_onReceived = 1;
@@ -69,7 +69,8 @@ public interface IHdmiVendorCommandListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -114,7 +115,9 @@ public interface IHdmiVendorCommandListener extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiVendorCommandListener
-            public void onReceived(int logicalAddress, int destAddress, byte[] operands, boolean hasVendorId) throws RemoteException {
+            public void onReceived(
+                    int logicalAddress, int destAddress, byte[] operands, boolean hasVendorId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

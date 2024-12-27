@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.modules.utils.SynchronousResultReceiver;
 
 /* loaded from: classes5.dex */
 public interface ISynchronousResultReceiver extends IInterface {
@@ -15,8 +14,7 @@ public interface ISynchronousResultReceiver extends IInterface {
 
     public static class Default implements ISynchronousResultReceiver {
         @Override // com.android.modules.utils.ISynchronousResultReceiver
-        public void send(SynchronousResultReceiver.Result resultData) throws RemoteException {
-        }
+        public void send(SynchronousResultReceiver.Result resultData) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +22,7 @@ public interface ISynchronousResultReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISynchronousResultReceiver {
+    public abstract static class Stub extends Binder implements ISynchronousResultReceiver {
         static final int TRANSACTION_send = 1;
 
         public Stub() {
@@ -62,7 +60,8 @@ public interface ISynchronousResultReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISynchronousResultReceiver.DESCRIPTOR);
             }
@@ -72,7 +71,9 @@ public interface ISynchronousResultReceiver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SynchronousResultReceiver.Result _arg0 = (SynchronousResultReceiver.Result) data.readTypedObject(SynchronousResultReceiver.Result.CREATOR);
+                    SynchronousResultReceiver.Result _arg0 =
+                            (SynchronousResultReceiver.Result)
+                                    data.readTypedObject(SynchronousResultReceiver.Result.CREATOR);
                     send(_arg0);
                     return true;
                 default:

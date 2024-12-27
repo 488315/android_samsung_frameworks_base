@@ -15,7 +15,8 @@ public interface IFaceServiceReceiver extends IInterface {
 
     void onAuthenticationFailed() throws RemoteException;
 
-    void onAuthenticationFrame(FaceAuthenticationFrame faceAuthenticationFrame) throws RemoteException;
+    void onAuthenticationFrame(FaceAuthenticationFrame faceAuthenticationFrame)
+            throws RemoteException;
 
     void onAuthenticationSucceeded(Face face, int i, boolean z) throws RemoteException;
 
@@ -35,78 +36,75 @@ public interface IFaceServiceReceiver extends IInterface {
 
     void onRemoved(Face face, int i) throws RemoteException;
 
-    void onSemAuthenticationSucceeded(Face face, int i, boolean z, byte[] bArr) throws RemoteException;
+    void onSemAuthenticationSucceeded(Face face, int i, boolean z, byte[] bArr)
+            throws RemoteException;
 
-    void onSemAuthenticationSucceededWithBundle(Face face, int i, boolean z, Bundle bundle) throws RemoteException;
+    void onSemAuthenticationSucceededWithBundle(Face face, int i, boolean z, Bundle bundle)
+            throws RemoteException;
 
-    void onSemImageProcessed(byte[] bArr, int i, int i2, int i3, int i4, Bundle bundle) throws RemoteException;
+    void onSemImageProcessed(byte[] bArr, int i, int i2, int i3, int i4, Bundle bundle)
+            throws RemoteException;
 
     void onSemStatusUpdate(int i, String str) throws RemoteException;
 
     public static class Default implements IFaceServiceReceiver {
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onEnrollResult(Face face, int remaining) throws RemoteException {
-        }
+        public void onEnrollResult(Face face, int remaining) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onAcquired(int acquiredInfo, int vendorCode) throws RemoteException {
-        }
+        public void onAcquired(int acquiredInfo, int vendorCode) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onAuthenticationSucceeded(Face face, int userId, boolean isStrongBiometric) throws RemoteException {
-        }
+        public void onAuthenticationSucceeded(Face face, int userId, boolean isStrongBiometric)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onFaceDetected(int sensorId, int userId, boolean isStrongBiometric) throws RemoteException {
-        }
+        public void onFaceDetected(int sensorId, int userId, boolean isStrongBiometric)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onAuthenticationFailed() throws RemoteException {
-        }
+        public void onAuthenticationFailed() throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onError(int error, int vendorCode) throws RemoteException {
-        }
+        public void onError(int error, int vendorCode) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onRemoved(Face face, int remaining) throws RemoteException {
-        }
+        public void onRemoved(Face face, int remaining) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onFeatureSet(boolean success, int feature) throws RemoteException {
-        }
+        public void onFeatureSet(boolean success, int feature) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onFeatureGet(boolean success, int[] features, boolean[] featureState) throws RemoteException {
-        }
+        public void onFeatureGet(boolean success, int[] features, boolean[] featureState)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onChallengeGenerated(int sensorId, int userId, long challenge) throws RemoteException {
-        }
+        public void onChallengeGenerated(int sensorId, int userId, long challenge)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onAuthenticationFrame(FaceAuthenticationFrame frame) throws RemoteException {
-        }
+        public void onAuthenticationFrame(FaceAuthenticationFrame frame) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onEnrollmentFrame(FaceEnrollFrame frame) throws RemoteException {
-        }
+        public void onEnrollmentFrame(FaceEnrollFrame frame) throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onSemAuthenticationSucceeded(Face face, int userId, boolean isStrongBiometric, byte[] fidoResultData) throws RemoteException {
-        }
+        public void onSemAuthenticationSucceeded(
+                Face face, int userId, boolean isStrongBiometric, byte[] fidoResultData)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onSemAuthenticationSucceededWithBundle(Face face, int userId, boolean isStrongBiometric, Bundle b) throws RemoteException {
-        }
+        public void onSemAuthenticationSucceededWithBundle(
+                Face face, int userId, boolean isStrongBiometric, Bundle b)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onSemImageProcessed(byte[] data, int width, int height, int orientation, int imageFormat, Bundle b) throws RemoteException {
-        }
+        public void onSemImageProcessed(
+                byte[] data, int width, int height, int orientation, int imageFormat, Bundle b)
+                throws RemoteException {}
 
         @Override // android.hardware.face.IFaceServiceReceiver
-        public void onSemStatusUpdate(int status, String msg) throws RemoteException {
-        }
+        public void onSemStatusUpdate(int status, String msg) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -114,7 +112,7 @@ public interface IFaceServiceReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFaceServiceReceiver {
+    public abstract static class Stub extends Binder implements IFaceServiceReceiver {
         static final int TRANSACTION_onAcquired = 2;
         static final int TRANSACTION_onAuthenticationFailed = 5;
         static final int TRANSACTION_onAuthenticationFrame = 11;
@@ -197,7 +195,8 @@ public interface IFaceServiceReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFaceServiceReceiver.DESCRIPTOR);
             }
@@ -268,12 +267,15 @@ public interface IFaceServiceReceiver extends IInterface {
                     onChallengeGenerated(_arg09, _arg19, _arg24);
                     return true;
                 case 11:
-                    FaceAuthenticationFrame _arg010 = (FaceAuthenticationFrame) data.readTypedObject(FaceAuthenticationFrame.CREATOR);
+                    FaceAuthenticationFrame _arg010 =
+                            (FaceAuthenticationFrame)
+                                    data.readTypedObject(FaceAuthenticationFrame.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationFrame(_arg010);
                     return true;
                 case 12:
-                    FaceEnrollFrame _arg011 = (FaceEnrollFrame) data.readTypedObject(FaceEnrollFrame.CREATOR);
+                    FaceEnrollFrame _arg011 =
+                            (FaceEnrollFrame) data.readTypedObject(FaceEnrollFrame.CREATOR);
                     data.enforceNoDataAvail();
                     onEnrollmentFrame(_arg011);
                     return true;
@@ -357,7 +359,8 @@ public interface IFaceServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
-            public void onAuthenticationSucceeded(Face face, int userId, boolean isStrongBiometric) throws RemoteException {
+            public void onAuthenticationSucceeded(Face face, int userId, boolean isStrongBiometric)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
@@ -371,7 +374,8 @@ public interface IFaceServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
-            public void onFaceDetected(int sensorId, int userId, boolean isStrongBiometric) throws RemoteException {
+            public void onFaceDetected(int sensorId, int userId, boolean isStrongBiometric)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
@@ -435,7 +439,8 @@ public interface IFaceServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
-            public void onFeatureGet(boolean success, int[] features, boolean[] featureState) throws RemoteException {
+            public void onFeatureGet(boolean success, int[] features, boolean[] featureState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
@@ -449,7 +454,8 @@ public interface IFaceServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
-            public void onChallengeGenerated(int sensorId, int userId, long challenge) throws RemoteException {
+            public void onChallengeGenerated(int sensorId, int userId, long challenge)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
@@ -463,7 +469,8 @@ public interface IFaceServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
-            public void onAuthenticationFrame(FaceAuthenticationFrame frame) throws RemoteException {
+            public void onAuthenticationFrame(FaceAuthenticationFrame frame)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
@@ -487,7 +494,9 @@ public interface IFaceServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
-            public void onSemAuthenticationSucceeded(Face face, int userId, boolean isStrongBiometric, byte[] fidoResultData) throws RemoteException {
+            public void onSemAuthenticationSucceeded(
+                    Face face, int userId, boolean isStrongBiometric, byte[] fidoResultData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
@@ -502,7 +511,9 @@ public interface IFaceServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
-            public void onSemAuthenticationSucceededWithBundle(Face face, int userId, boolean isStrongBiometric, Bundle b) throws RemoteException {
+            public void onSemAuthenticationSucceededWithBundle(
+                    Face face, int userId, boolean isStrongBiometric, Bundle b)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);
@@ -517,7 +528,9 @@ public interface IFaceServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.face.IFaceServiceReceiver
-            public void onSemImageProcessed(byte[] data, int width, int height, int orientation, int imageFormat, Bundle b) throws RemoteException {
+            public void onSemImageProcessed(
+                    byte[] data, int width, int height, int orientation, int imageFormat, Bundle b)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFaceServiceReceiver.DESCRIPTOR);

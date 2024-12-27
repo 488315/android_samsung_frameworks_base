@@ -8,6 +8,7 @@ import android.media.AudioFormat;
 import android.media.AudioPlaybackConfiguration;
 import android.media.AudioRecordingConfiguration;
 import android.os.RemoteException;
+
 import java.io.Closeable;
 import java.util.List;
 import java.util.Objects;
@@ -35,7 +36,13 @@ public final class VirtualAudioDevice implements Closeable {
         void onClosed();
     }
 
-    public VirtualAudioDevice(Context context, IVirtualDevice virtualDevice, VirtualDisplay virtualDisplay, Executor executor, AudioConfigurationChangeCallback callback, CloseListener listener) {
+    public VirtualAudioDevice(
+            Context context,
+            IVirtualDevice virtualDevice,
+            VirtualDisplay virtualDisplay,
+            Executor executor,
+            AudioConfigurationChangeCallback callback,
+            CloseListener listener) {
         this.mContext = context;
         this.mVirtualDevice = virtualDevice;
         this.mVirtualDisplay = virtualDisplay;
@@ -47,13 +54,19 @@ public final class VirtualAudioDevice implements Closeable {
     public AudioInjection startAudioInjection(AudioFormat injectionFormat) {
         Objects.requireNonNull(injectionFormat, "injectionFormat must not be null");
         if (this.mOngoingSession != null && this.mOngoingSession.getAudioInjection() != null) {
-            throw new IllegalStateException("Cannot start an audio injection while a session is ongoing. Call close() on this device first to end the previous session.");
+            throw new IllegalStateException(
+                    "Cannot start an audio injection while a session is ongoing. Call close() on"
+                            + " this device first to end the previous session.");
         }
         if (this.mOngoingSession == null) {
-            this.mOngoingSession = new VirtualAudioSession(this.mContext, this.mCallback, this.mExecutor);
+            this.mOngoingSession =
+                    new VirtualAudioSession(this.mContext, this.mCallback, this.mExecutor);
         }
         try {
-            this.mVirtualDevice.onAudioSessionStarting(this.mVirtualDisplay.getDisplay().getDisplayId(), this.mOngoingSession, this.mOngoingSession.getAudioConfigChangedListener());
+            this.mVirtualDevice.onAudioSessionStarting(
+                    this.mVirtualDisplay.getDisplay().getDisplayId(),
+                    this.mOngoingSession,
+                    this.mOngoingSession.getAudioConfigChangedListener());
             return this.mOngoingSession.startAudioInjection(injectionFormat);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -63,13 +76,19 @@ public final class VirtualAudioDevice implements Closeable {
     public AudioCapture startAudioCapture(AudioFormat captureFormat) {
         Objects.requireNonNull(captureFormat, "captureFormat must not be null");
         if (this.mOngoingSession != null && this.mOngoingSession.getAudioCapture() != null) {
-            throw new IllegalStateException("Cannot start an audio capture while a session is ongoing. Call close() on this device first to end the previous session.");
+            throw new IllegalStateException(
+                    "Cannot start an audio capture while a session is ongoing. Call close() on this"
+                            + " device first to end the previous session.");
         }
         if (this.mOngoingSession == null) {
-            this.mOngoingSession = new VirtualAudioSession(this.mContext, this.mCallback, this.mExecutor);
+            this.mOngoingSession =
+                    new VirtualAudioSession(this.mContext, this.mCallback, this.mExecutor);
         }
         try {
-            this.mVirtualDevice.onAudioSessionStarting(this.mVirtualDisplay.getDisplay().getDisplayId(), this.mOngoingSession, this.mOngoingSession.getAudioConfigChangedListener());
+            this.mVirtualDevice.onAudioSessionStarting(
+                    this.mVirtualDisplay.getDisplay().getDisplayId(),
+                    this.mOngoingSession,
+                    this.mOngoingSession.getAudioConfigChangedListener());
             return this.mOngoingSession.startAudioCapture(captureFormat);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();

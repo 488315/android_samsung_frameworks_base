@@ -7,14 +7,17 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes.dex */
@@ -27,19 +30,21 @@ public final class IntentFilterVerificationInfo implements Parcelable {
     private String mPackageName;
     private int mStatus;
     private static final String TAG = IntentFilterVerificationInfo.class.getName();
-    public static final Parcelable.Creator<IntentFilterVerificationInfo> CREATOR = new Parcelable.Creator<IntentFilterVerificationInfo>() { // from class: android.content.pm.IntentFilterVerificationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntentFilterVerificationInfo createFromParcel(Parcel source) {
-            return new IntentFilterVerificationInfo(source);
-        }
+    public static final Parcelable.Creator<IntentFilterVerificationInfo> CREATOR =
+            new Parcelable.Creator<IntentFilterVerificationInfo>() { // from class:
+                // android.content.pm.IntentFilterVerificationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntentFilterVerificationInfo createFromParcel(Parcel source) {
+                    return new IntentFilterVerificationInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntentFilterVerificationInfo[] newArray(int size) {
-            return new IntentFilterVerificationInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntentFilterVerificationInfo[] newArray(int size) {
+                    return new IntentFilterVerificationInfo[size];
+                }
+            };
 
     public IntentFilterVerificationInfo() {
         this.mDomains = new ArraySet<>();
@@ -54,7 +59,8 @@ public final class IntentFilterVerificationInfo implements Parcelable {
         this.mStatus = 0;
     }
 
-    public IntentFilterVerificationInfo(TypedXmlPullParser parser) throws IOException, XmlPullParserException {
+    public IntentFilterVerificationInfo(TypedXmlPullParser parser)
+            throws IOException, XmlPullParserException {
         this.mDomains = new ArraySet<>();
         readFromXml(parser);
     }
@@ -104,7 +110,13 @@ public final class IntentFilterVerificationInfo implements Parcelable {
     String getStringFromXml(TypedXmlPullParser parser, String attribute, String defaultValue) {
         String value = parser.getAttributeValue(null, attribute);
         if (value == null) {
-            String msg = "Missing element under " + TAG + ": " + attribute + " at " + parser.getPositionDescription();
+            String msg =
+                    "Missing element under "
+                            + TAG
+                            + ": "
+                            + attribute
+                            + " at "
+                            + parser.getPositionDescription();
             Log.w(TAG, msg);
             return defaultValue;
         }

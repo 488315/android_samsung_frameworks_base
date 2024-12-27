@@ -8,12 +8,10 @@ public interface IUpdateEngineCallback extends IInterface {
 
     public static class Default implements IUpdateEngineCallback {
         @Override // android.os.IUpdateEngineCallback
-        public void onStatusUpdate(int status_code, float percentage) throws RemoteException {
-        }
+        public void onStatusUpdate(int status_code, float percentage) throws RemoteException {}
 
         @Override // android.os.IUpdateEngineCallback
-        public void onPayloadApplicationComplete(int error_code) throws RemoteException {
-        }
+        public void onPayloadApplicationComplete(int error_code) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +19,7 @@ public interface IUpdateEngineCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUpdateEngineCallback {
+    public abstract static class Stub extends Binder implements IUpdateEngineCallback {
         public static final String DESCRIPTOR = "android.os.IUpdateEngineCallback";
         static final int TRANSACTION_onPayloadApplicationComplete = 2;
         static final int TRANSACTION_onStatusUpdate = 1;
@@ -63,7 +61,8 @@ public interface IUpdateEngineCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

@@ -11,7 +11,9 @@ import android.system.Os;
 import android.system.StructStat;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.DirectoryIteratorException;
@@ -42,14 +44,17 @@ public class MtpStorageManager {
     private int mNextObjectId = 1;
     private int mNextStorageId = 2;
     private volatile boolean mCheckConsistency = false;
-    private Thread mConsistencyThread = new Thread(new Runnable() { // from class: android.mtp.MtpStorageManager$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            MtpStorageManager.this.lambda$new$0();
-        }
-    });
+    private Thread mConsistencyThread =
+            new Thread(
+                    new Runnable() { // from class:
+                                     // android.mtp.MtpStorageManager$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MtpStorageManager.this.lambda$new$0();
+                        }
+                    });
 
-    public static abstract class MtpNotifier {
+    public abstract static class MtpNotifier {
         public abstract void sendObjectAdded(int i);
 
         public abstract void sendObjectInfoChanged(int i);
@@ -83,13 +88,13 @@ public class MtpStorageManager {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:29:0x0082, code lost:
-        
-            r5.this$0.sDebugLog("Object was null in event", r7);
-         */
+
+           r5.this$0.sDebugLog("Object was null in event", r7);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:31:0x008a, code lost:
-        
-            return;
-         */
+
+           return;
+        */
         @Override // android.os.FileObserver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -196,12 +201,14 @@ public class MtpStorageManager {
                 monitor-exit(r0)     // Catch: java.lang.Throwable -> Lb0
                 throw r1
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpStorageManager.MtpObjectObserver.onEvent(int, java.lang.String):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.mtp.MtpStorageManager.MtpObjectObserver.onEvent(int,"
+                        + " java.lang.String):void");
         }
 
         @Override // android.os.FileObserver
-        public void finalize() {
-        }
+        public void finalize() {}
     }
 
     public static class MtpObject {
@@ -268,7 +275,9 @@ public class MtpStorageManager {
         }
 
         private long maybeApplyTranscodeLengthWorkaround(long length) {
-            if (this.mStorage.isHostWindows() && isTranscodeMtpEnabled() && isFileTranscodeSupported()) {
+            if (this.mStorage.isHostWindows()
+                    && isTranscodeMtpEnabled()
+                    && isFileTranscodeSupported()) {
                 return 2 * length;
             }
             return length;
@@ -284,13 +293,17 @@ public class MtpStorageManager {
                 StructStat stat = Os.stat(path.toString());
                 return stat.st_nlink > 1;
             } catch (ErrnoException e) {
-                Log.w(MtpStorageManager.TAG, "Failed to stat path: " + getPath() + ". Ignoring transcoding.");
+                Log.w(
+                        MtpStorageManager.TAG,
+                        "Failed to stat path: " + getPath() + ". Ignoring transcoding.");
                 return false;
             }
         }
 
         public Path getPath() {
-            return isRoot() ? Paths.get(this.mName, new String[0]) : this.mParent.getPath().resolve(this.mName);
+            return isRoot()
+                    ? Paths.get(this.mName, new String[0])
+                    : this.mParent.getPath().resolve(this.mName);
         }
 
         public boolean isRoot() {
@@ -403,7 +416,8 @@ public class MtpStorageManager {
 
         /* JADX INFO: Access modifiers changed from: private */
         public MtpObject copy(boolean recursive) {
-            MtpObject copy = new MtpObject(this.mName, this.mId, this.mStorage, this.mParent, this.mIsDir);
+            MtpObject copy =
+                    new MtpObject(this.mName, this.mId, this.mStorage, this.mParent, this.mIsDir);
             copy.mIsDir = this.mIsDir;
             copy.mVisited = this.mVisited;
             copy.mState = this.mState;
@@ -470,11 +484,22 @@ public class MtpStorageManager {
         this.mSubdirectories = subDirs;
     }
 
-    public synchronized MtpStorage addMtpStorage(StorageVolume volume, Supplier<Boolean> isHostWindows) {
+    public synchronized MtpStorage addMtpStorage(
+            StorageVolume volume, Supplier<Boolean> isHostWindows) {
         int storageId;
         int mId;
         String volumeId = volume.getId();
-        if (volumeId != null && volumeId.startsWith("emulated;") && (mId = Integer.parseInt(volumeId.substring(volumeId.lastIndexOf(NavigationBarInflaterView.GRAVITY_SEPARATOR) + 1))) >= 95 && mId < 100) {
+        if (volumeId != null
+                && volumeId.startsWith("emulated;")
+                && (mId =
+                                Integer.parseInt(
+                                        volumeId.substring(
+                                                volumeId.lastIndexOf(
+                                                                NavigationBarInflaterView
+                                                                        .GRAVITY_SEPARATOR)
+                                                        + 1)))
+                        >= 95
+                && mId < 100) {
             MtpStorage storage = new MtpStorage(volume, 65538, isHostWindows);
             MtpObject root = new MtpObject(storage.getPath(), 65538, storage, null, true);
             this.mRoots.put(65538, root);
@@ -563,7 +588,8 @@ public class MtpStorageManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public synchronized java.util.List<android.mtp.MtpStorageManager.MtpObject> getObjects(int r16, int r17, int r18, boolean r19) {
+    public synchronized java.util.List<android.mtp.MtpStorageManager.MtpObject> getObjects(
+            int r16, int r17, int r18, boolean r19) {
         /*
             r15 = this;
             r12 = r15
@@ -638,10 +664,13 @@ public class MtpStorageManager {
             monitor-exit(r15)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpStorageManager.getObjects(int, int, int, boolean):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.mtp.MtpStorageManager.getObjects(int, int, int,"
+                    + " boolean):java.util.List");
     }
 
-    private synchronized boolean getObjects(List<MtpObject> toAdd, MtpObject parent, int format, boolean rec, boolean isSearch) {
+    private synchronized boolean getObjects(
+            List<MtpObject> toAdd, MtpObject parent, int format, boolean rec, boolean isSearch) {
         Collection<MtpObject> children = getChildren(parent, isSearch);
         if (children == null) {
             return false;
@@ -676,13 +705,19 @@ public class MtpStorageManager {
                         DirectoryStream<Path> stream = Files.newDirectoryStream(dir);
                         try {
                             for (Path file : stream) {
-                                addObjectToCache(object, file.getFileName().toString(), file.toFile().isDirectory());
+                                addObjectToCache(
+                                        object,
+                                        file.getFileName().toString(),
+                                        file.toFile().isDirectory());
                             }
                             if (stream != null) {
                                 stream.close();
                             }
                             object.setVisited(true);
-                            if (object.isDir() && (object.isSkipObserving() || object.getName().startsWith(MediaMetrics.SEPARATOR))) {
+                            if (object.isDir()
+                                    && (object.isSkipObserving()
+                                            || object.getName()
+                                                    .startsWith(MediaMetrics.SEPARATOR))) {
                                 object.getObserver().stopWatching();
                                 object.setObserver(null);
                             }
@@ -706,18 +741,24 @@ public class MtpStorageManager {
                 return object.getChildren();
             }
         }
-        Log.w(TAG, "Can't find children of " + (object == null ? "null" : Integer.valueOf(object.getId())));
+        Log.w(
+                TAG,
+                "Can't find children of "
+                        + (object == null ? "null" : Integer.valueOf(object.getId())));
         return null;
     }
 
-    private synchronized MtpObject addObjectToCache(MtpObject parent, String newName, boolean isDir) {
+    private synchronized MtpObject addObjectToCache(
+            MtpObject parent, String newName, boolean isDir) {
         if (!parent.isRoot() && getObject(parent.getId()) != parent) {
             return null;
         }
         if (parent.getChild(newName) != null) {
             return null;
         }
-        if (this.mSubdirectories != null && parent.isRoot() && !this.mSubdirectories.contains(newName)) {
+        if (this.mSubdirectories != null
+                && parent.isRoot()
+                && !this.mSubdirectories.contains(newName)) {
             return null;
         }
         MtpObject obj = new MtpObject(newName, getNextObjectId(), parent.mStorage, parent, isDir);
@@ -736,7 +777,8 @@ public class MtpStorageManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private synchronized boolean removeObjectFromCache(android.mtp.MtpStorageManager.MtpObject r8, boolean r9, boolean r10) {
+    private synchronized boolean removeObjectFromCache(
+            android.mtp.MtpStorageManager.MtpObject r8, boolean r9, boolean r10) {
         /*
             r7 = this;
             monitor-enter(r7)
@@ -833,7 +875,10 @@ public class MtpStorageManager {
             monitor-exit(r7)
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpStorageManager.removeObjectFromCache(android.mtp.MtpStorageManager$MtpObject, boolean, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.mtp.MtpStorageManager.removeObjectFromCache(android.mtp.MtpStorageManager$MtpObject,"
+                    + " boolean, boolean):boolean");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -897,7 +942,8 @@ public class MtpStorageManager {
             try {
                 for (Path file : stream) {
                     sDebugLog("Manually handling event for ", file.getFileName().toString());
-                    handleAddedObject(obj, file.getFileName().toString(), file.toFile().isDirectory());
+                    handleAddedObject(
+                            obj, file.getFileName().toString(), file.toFile().isDirectory());
                 }
                 if (stream != null) {
                     stream.close();
@@ -980,7 +1026,21 @@ public class MtpStorageManager {
         while (it.hasNext()) {
             int key = it.next().intValue();
             MtpObject obj = this.mObjects.get(Integer.valueOf(key));
-            Log.i(TAG, key + " | " + (obj.getParent() == null ? Integer.valueOf(obj.getParent().getId()) : "null") + " | " + obj.getName() + " | " + (obj.isDir() ? "dir" : "obj") + " | " + (obj.isVisited() ? "v" : "nv") + " | " + obj.getState());
+            Log.i(
+                    TAG,
+                    key
+                            + " | "
+                            + (obj.getParent() == null
+                                    ? Integer.valueOf(obj.getParent().getId())
+                                    : "null")
+                            + " | "
+                            + obj.getName()
+                            + " | "
+                            + (obj.isDir() ? "dir" : "obj")
+                            + " | "
+                            + (obj.isVisited() ? "v" : "nv")
+                            + " | "
+                            + obj.getState());
         }
     }
 
@@ -1008,11 +1068,15 @@ public class MtpStorageManager {
                 ret = false;
             }
             if (obj.getParent() != null) {
-                if (obj.getParent().isRoot() && obj.getParent() != this.mRoots.get(Integer.valueOf(obj.getParent().getId()))) {
+                if (obj.getParent().isRoot()
+                        && obj.getParent()
+                                != this.mRoots.get(Integer.valueOf(obj.getParent().getId()))) {
                     Log.w(TAG, "Root parent is not in root mapping " + obj.getPath());
                     ret = false;
                 }
-                if (!obj.getParent().isRoot() && obj.getParent() != this.mObjects.get(Integer.valueOf(obj.getParent().getId()))) {
+                if (!obj.getParent().isRoot()
+                        && obj.getParent()
+                                != this.mObjects.get(Integer.valueOf(obj.getParent().getId()))) {
                     Log.w(TAG, "Parent is not in object mapping " + obj.getPath());
                     ret = false;
                 }
@@ -1023,7 +1087,13 @@ public class MtpStorageManager {
             }
             if (obj.isDir()) {
                 if (obj.isVisited() == (obj.getObserver() == null)) {
-                    Log.w(TAG, obj.getPath() + " is " + (obj.isVisited() ? "" : "not ") + " visited but observer is " + obj.getObserver());
+                    Log.w(
+                            TAG,
+                            obj.getPath()
+                                    + " is "
+                                    + (obj.isVisited() ? "" : "not ")
+                                    + " visited but observer is "
+                                    + obj.getObserver());
                     ret = false;
                 }
                 if (!obj.isVisited() && obj.getChildren().size() > 0) {
@@ -1035,7 +1105,12 @@ public class MtpStorageManager {
                     try {
                         Set<String> files = new HashSet<>();
                         for (Path file : stream) {
-                            if (obj.isVisited() && obj.getChild(file.getFileName().toString()) == null && (this.mSubdirectories == null || !obj.isRoot() || this.mSubdirectories.contains(file.getFileName().toString()))) {
+                            if (obj.isVisited()
+                                    && obj.getChild(file.getFileName().toString()) == null
+                                    && (this.mSubdirectories == null
+                                            || !obj.isRoot()
+                                            || this.mSubdirectories.contains(
+                                                    file.getFileName().toString()))) {
                                 Log.w(TAG, "File exists in fs but not in children " + file);
                                 ret = false;
                             }
@@ -1043,7 +1118,9 @@ public class MtpStorageManager {
                         }
                         for (MtpObject child : obj.getChildren()) {
                             if (!files.contains(child.getPath().toString())) {
-                                Log.w(TAG, "File in children doesn't exist in fs " + child.getPath());
+                                Log.w(
+                                        TAG,
+                                        "File in children doesn't exist in fs " + child.getPath());
                                 ret = false;
                             }
                             if (child != this.mObjects.get(Integer.valueOf(child.getId()))) {
@@ -1078,7 +1155,9 @@ public class MtpStorageManager {
         if (!parent.isDir()) {
             return -1;
         }
-        if (parent.isRoot() && this.mSubdirectories != null && !this.mSubdirectories.contains(name)) {
+        if (parent.isRoot()
+                && this.mSubdirectories != null
+                && !this.mSubdirectories.contains(name)) {
             return -1;
         }
         boolean z = true;
@@ -1183,7 +1262,8 @@ public class MtpStorageManager {
             MtpObject newObj = obj.copy(true);
             newObj.setParent(newParent);
             newParent.addChild(newObj);
-            if (generalBeginRemoveObject(obj, MtpOperation.RENAME) && generalBeginCopyObject(newObj, false)) {
+            if (generalBeginRemoveObject(obj, MtpOperation.RENAME)
+                    && generalBeginCopyObject(newObj, false)) {
                 z = true;
             }
             return z;
@@ -1195,7 +1275,8 @@ public class MtpStorageManager {
         return generalBeginRenameObject(oldObj, obj);
     }
 
-    public synchronized boolean endMoveObject(MtpObject oldParent, MtpObject newParent, String name, boolean success) {
+    public synchronized boolean endMoveObject(
+            MtpObject oldParent, MtpObject newParent, String name, boolean success) {
         Log.v(TAG, "endMoveObject " + success);
         MtpObject oldObj = oldParent.getChild(name);
         MtpObject newObj = newParent.getChild(name);
@@ -1230,7 +1311,9 @@ public class MtpStorageManager {
         if (!newParent.isDir()) {
             return -1;
         }
-        if (newParent.isRoot() && this.mSubdirectories != null && !this.mSubdirectories.contains(name)) {
+        if (newParent.isRoot()
+                && this.mSubdirectories != null
+                && !this.mSubdirectories.contains(name)) {
             return -1;
         }
         getChildren(newParent, true);
@@ -1251,7 +1334,8 @@ public class MtpStorageManager {
         return generalEndCopyObject(object, success, false);
     }
 
-    private synchronized boolean generalEndAddObject(MtpObject obj, boolean succeeded, boolean removeGlobal) {
+    private synchronized boolean generalEndAddObject(
+            MtpObject obj, boolean succeeded, boolean removeGlobal) {
         switch (obj.getState().ordinal()) {
             case 1:
                 if (succeeded) {
@@ -1287,7 +1371,8 @@ public class MtpStorageManager {
         return true;
     }
 
-    private synchronized boolean generalEndRemoveObject(MtpObject obj, boolean success, boolean removeGlobal) {
+    private synchronized boolean generalEndRemoveObject(
+            MtpObject obj, boolean success, boolean removeGlobal) {
         switch (obj.getState().ordinal()) {
             case 1:
                 if (success) {
@@ -1331,7 +1416,8 @@ public class MtpStorageManager {
         return true;
     }
 
-    private synchronized boolean generalEndRenameObject(MtpObject fromObj, MtpObject toObj, boolean success) {
+    private synchronized boolean generalEndRenameObject(
+            MtpObject fromObj, MtpObject toObj, boolean success) {
         boolean ret;
         ret = generalEndRemoveObject(fromObj, success, !success);
         return generalEndAddObject(toObj, success, success) && ret;
@@ -1365,7 +1451,8 @@ public class MtpStorageManager {
         return true;
     }
 
-    private synchronized boolean generalEndCopyObject(MtpObject obj, boolean success, boolean addGlobal) {
+    private synchronized boolean generalEndCopyObject(
+            MtpObject obj, boolean success, boolean addGlobal) {
         boolean ret;
         boolean z;
         if (success && addGlobal) {

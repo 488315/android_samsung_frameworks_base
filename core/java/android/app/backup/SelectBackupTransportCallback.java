@@ -5,9 +5,7 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes.dex */
 public abstract class SelectBackupTransportCallback {
-    public void onSuccess(String transportName) {
-    }
+    public void onSuccess(String transportName) {}
 
-    public void onFailure(int reason) {
-    }
+    public void onFailure(int reason) {}
 }

@@ -49,7 +49,10 @@ public class CasResource {
 
     public final void removeOwner(int i) {
         if (((HashMap) this.mOwnerClientIdsToSessionNum).containsKey(Integer.valueOf(i))) {
-            this.mAvailableSessionNum = ((Integer) ((HashMap) this.mOwnerClientIdsToSessionNum).get(Integer.valueOf(i))).intValue() + this.mAvailableSessionNum;
+            this.mAvailableSessionNum =
+                    ((Integer) ((HashMap) this.mOwnerClientIdsToSessionNum).get(Integer.valueOf(i)))
+                                    .intValue()
+                            + this.mAvailableSessionNum;
             ((HashMap) this.mOwnerClientIdsToSessionNum).remove(Integer.valueOf(i));
         }
     }
@@ -59,9 +62,13 @@ public class CasResource {
         if (((HashMap) this.mOwnerClientIdsToSessionNum).get(Integer.valueOf(i)) == null) {
             intValue = 1;
         } else {
-            intValue = ((Integer) ((HashMap) this.mOwnerClientIdsToSessionNum).get(Integer.valueOf(i))).intValue() + 1;
+            intValue =
+                    ((Integer) ((HashMap) this.mOwnerClientIdsToSessionNum).get(Integer.valueOf(i)))
+                                    .intValue()
+                            + 1;
         }
-        ((HashMap) this.mOwnerClientIdsToSessionNum).put(Integer.valueOf(i), Integer.valueOf(intValue));
+        ((HashMap) this.mOwnerClientIdsToSessionNum)
+                .put(Integer.valueOf(i), Integer.valueOf(intValue));
         this.mAvailableSessionNum--;
     }
 

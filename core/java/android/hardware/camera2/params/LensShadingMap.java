@@ -2,7 +2,9 @@ package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -18,7 +20,11 @@ public final class LensShadingMap {
         this.mColumns = Preconditions.checkArgumentPositive(columns, "columns must be positive");
         this.mElements = (float[]) Objects.requireNonNull(elements, "elements must not be null");
         if (elements.length != getGainFactorCount()) {
-            throw new IllegalArgumentException("elements must be " + getGainFactorCount() + " length, received " + elements.length);
+            throw new IllegalArgumentException(
+                    "elements must be "
+                            + getGainFactorCount()
+                            + " length, received "
+                            + elements.length);
         }
         Preconditions.checkArrayElementsInRange(elements, 1.0f, Float.MAX_VALUE, "elements");
     }
@@ -83,7 +89,9 @@ public final class LensShadingMap {
             return false;
         }
         LensShadingMap other = (LensShadingMap) obj;
-        if (this.mRows != other.mRows || this.mColumns != other.mColumns || !Arrays.equals(this.mElements, other.mElements)) {
+        if (this.mRows != other.mRows
+                || this.mColumns != other.mColumns
+                || !Arrays.equals(this.mElements, other.mElements)) {
             return false;
         }
         return true;

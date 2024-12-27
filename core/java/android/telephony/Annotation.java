@@ -7,98 +7,74 @@ import java.lang.annotation.RetentionPolicy;
 public class Annotation {
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ApnType {
-    }
+    public @interface ApnType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallState {
-    }
+    public @interface CallState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CarrierPrivilegeStatus {
-    }
+    public @interface CarrierPrivilegeStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConnectivityTransport {
-    }
+    public @interface ConnectivityTransport {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataActivityType {
-    }
+    public @interface DataActivityType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataFailureCause {
-    }
+    public @interface DataFailureCause {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataState {
-    }
+    public @interface DataState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisconnectCauses {
-    }
+    public @interface DisconnectCauses {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EnterpriseId {
-    }
+    public @interface EnterpriseId {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsAudioCodec {
-    }
+    public @interface ImsAudioCodec {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsCallServiceType {
-    }
+    public @interface ImsCallServiceType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsCallType {
-    }
+    public @interface ImsCallType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NetCapability {
-    }
+    public @interface NetCapability {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NetworkType {
-    }
+    public @interface NetworkType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OverrideNetworkType {
-    }
+    public @interface OverrideNetworkType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PreciseCallStates {
-    }
+    public @interface PreciseCallStates {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PreciseDisconnectCauses {
-    }
+    public @interface PreciseDisconnectCauses {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RadioPowerState {
-    }
+    public @interface RadioPowerState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SimActivationState {
-    }
+    public @interface SimActivationState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SrvccState {
-    }
+    public @interface SrvccState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ThermalMitigationResult {
-    }
+    public @interface ThermalMitigationResult {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UiccAppType {
-    }
+    public @interface UiccAppType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UiccAppTypeExt {
-    }
+    public @interface UiccAppTypeExt {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ValidationStatus {
-    }
+    public @interface ValidationStatus {}
 }

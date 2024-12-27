@@ -6,10 +6,13 @@ import android.net.Uri;
 import android.os.BadParcelableException;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.uri.GrantUri;
+
 import com.samsung.android.knoxguard.service.SystemIntentProcessor;
+
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
@@ -35,13 +38,22 @@ public final class ActivityCallerState {
         }
 
         public static GrantUri restoreGrantUriFromXml(TypedXmlPullParser typedXmlPullParser) {
-            return new GrantUri(typedXmlPullParser.getAttributeInt((String) null, "source_user_id", 0), typedXmlPullParser.getAttributeBoolean((String) null, "prefix", false) ? 128 : 0, Uri.parse(typedXmlPullParser.getAttributeValue((String) null, SystemIntentProcessor.KEY_URI)));
+            return new GrantUri(
+                    typedXmlPullParser.getAttributeInt((String) null, "source_user_id", 0),
+                    typedXmlPullParser.getAttributeBoolean((String) null, "prefix", false)
+                            ? 128
+                            : 0,
+                    Uri.parse(
+                            typedXmlPullParser.getAttributeValue(
+                                    (String) null, SystemIntentProcessor.KEY_URI)));
         }
 
-        public static void saveGrantUriToXml(TypedXmlSerializer typedXmlSerializer, GrantUri grantUri, String str) {
+        public static void saveGrantUriToXml(
+                TypedXmlSerializer typedXmlSerializer, GrantUri grantUri, String str) {
             typedXmlSerializer.startTag((String) null, str);
             typedXmlSerializer.attributeInt((String) null, "source_user_id", grantUri.sourceUserId);
-            typedXmlSerializer.attribute((String) null, SystemIntentProcessor.KEY_URI, String.valueOf(grantUri.uri));
+            typedXmlSerializer.attribute(
+                    (String) null, SystemIntentProcessor.KEY_URI, String.valueOf(grantUri.uri));
             typedXmlSerializer.attributeBoolean((String) null, "prefix", grantUri.prefix);
             typedXmlSerializer.endTag((String) null, str);
         }
@@ -68,16 +80,23 @@ public final class ActivityCallerState {
         if (intent.hasExtra("android.intent.extra.STREAM")) {
             Uri uri = null;
             try {
-                arrayList = intent.getParcelableArrayListExtra("android.intent.extra.STREAM", Uri.class);
+                arrayList =
+                        intent.getParcelableArrayListExtra(
+                                "android.intent.extra.STREAM", Uri.class);
             } catch (BadParcelableException e) {
-                Slog.w("ActivityTaskManager", "Failed to unparcel an ArrayList of URIs in EXTRA_STREAM, returning null: " + e);
+                Slog.w(
+                        "ActivityTaskManager",
+                        "Failed to unparcel an ArrayList of URIs in EXTRA_STREAM, returning null: "
+                                + e);
                 arrayList = null;
             }
             if (arrayList == null) {
                 try {
                     uri = (Uri) intent.getParcelableExtra("android.intent.extra.STREAM", Uri.class);
                 } catch (BadParcelableException e2) {
-                    Slog.w("ActivityTaskManager", "Failed to unparcel an URI in EXTRA_STREAM, returning null: " + e2);
+                    Slog.w(
+                            "ActivityTaskManager",
+                            "Failed to unparcel an URI in EXTRA_STREAM, returning null: " + e2);
                 }
                 addUriIfContentUri(uri, arraySet);
             } else {

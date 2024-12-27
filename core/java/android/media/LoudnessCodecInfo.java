@@ -3,27 +3,30 @@ package android.media;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class LoudnessCodecInfo implements Parcelable {
-    public static final Parcelable.Creator<LoudnessCodecInfo> CREATOR = new Parcelable.Creator<LoudnessCodecInfo>() { // from class: android.media.LoudnessCodecInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LoudnessCodecInfo createFromParcel(Parcel _aidl_source) {
-            LoudnessCodecInfo _aidl_out = new LoudnessCodecInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<LoudnessCodecInfo> CREATOR =
+            new Parcelable.Creator<
+                    LoudnessCodecInfo>() { // from class: android.media.LoudnessCodecInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LoudnessCodecInfo createFromParcel(Parcel _aidl_source) {
+                    LoudnessCodecInfo _aidl_out = new LoudnessCodecInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LoudnessCodecInfo[] newArray(int _aidl_size) {
-            return new LoudnessCodecInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LoudnessCodecInfo[] newArray(int _aidl_size) {
+                    return new LoudnessCodecInfo[_aidl_size];
+                }
+            };
     public boolean isDownmixing = false;
     public int metadataType;
 
@@ -100,14 +103,21 @@ public class LoudnessCodecInfo implements Parcelable {
             return false;
         }
         LoudnessCodecInfo that = (LoudnessCodecInfo) other;
-        if (Objects.deepEquals(Integer.valueOf(this.metadataType), Integer.valueOf(that.metadataType)) && Objects.deepEquals(Boolean.valueOf(this.isDownmixing), Boolean.valueOf(that.isDownmixing))) {
+        if (Objects.deepEquals(
+                        Integer.valueOf(this.metadataType), Integer.valueOf(that.metadataType))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.isDownmixing), Boolean.valueOf(that.isDownmixing))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.metadataType), Boolean.valueOf(this.isDownmixing)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.metadataType),
+                                Boolean.valueOf(this.isDownmixing))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

@@ -33,6 +33,7 @@ import android.provider.Settings;
 import android.util.Slog;
 import android.view.OrientationEventListener;
 import android.view.Surface;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
@@ -56,9 +57,11 @@ import com.android.server.biometrics.sensors.face.FaceUtils;
 import com.android.server.biometrics.sensors.face.SemFaceBrightManager;
 import com.android.server.biometrics.sensors.face.SemFaceUtils;
 import com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter;
-import java.io.IOException;
+
 import vendor.samsung.hardware.biometrics.face.ISehFace;
 import vendor.samsung.hardware.biometrics.face.ISehSession;
+
+import java.io.IOException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -118,60 +121,76 @@ public final class SemFaceServiceExImpl {
     public MemoryFile mMemoryFileForAuthPreviewResult = null;
     public byte[] mHIDLpreviewImage = null;
     public MemoryFile mHIDLmemoryFileForPreview = null;
-    public final AnonymousClass1 mHandlerMain = new Handler(BiometricHandlerProvider.sBiometricHandlerProvider.getFaceHandler().getLooper()) { // from class: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl.1
-        @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-            int i = message.what;
-            SemFaceServiceExImpl semFaceServiceExImpl = SemFaceServiceExImpl.this;
-            if (i != 1) {
-                if (i != 4) {
-                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(new StringBuilder("Unknown message:"), message.what, "SemFace");
-                    return;
-                } else {
-                    Slog.i("SemFace", "handleMessage: MSG_PROXIMITY_SENSOR_ERROR");
-                    semFaceServiceExImpl.sendAcquired(1001);
-                    return;
+    public final AnonymousClass1 mHandlerMain =
+            new Handler(
+                    BiometricHandlerProvider.sBiometricHandlerProvider
+                            .getFaceHandler()
+                            .getLooper()) { // from class:
+                                            // com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl.1
+                @Override // android.os.Handler
+                public final void handleMessage(Message message) {
+                    int i = message.what;
+                    SemFaceServiceExImpl semFaceServiceExImpl = SemFaceServiceExImpl.this;
+                    if (i != 1) {
+                        if (i != 4) {
+                            HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("Unknown message:"), message.what, "SemFace");
+                            return;
+                        } else {
+                            Slog.i("SemFace", "handleMessage: MSG_PROXIMITY_SENSOR_ERROR");
+                            semFaceServiceExImpl.sendAcquired(1001);
+                            return;
+                        }
+                    }
+                    Slog.d("SemFace", "handleMessage : MSG_INACTIVITY_TIMER_EXPIRED(TIMEOUT)");
+                    semFaceServiceExImpl.mIsTimeout = true;
+                    int i2 = semFaceServiceExImpl.mOperationType;
+                    if (i2 == 1) {
+                        semFaceServiceExImpl.onExtended(3, -1);
+                        semFaceServiceExImpl.daemonCancelInternal();
+                        if (semFaceServiceExImpl.mIsCheckedTooDark) {
+                            semFaceServiceExImpl.sendError(8, 100002);
+                            return;
+                        } else {
+                            semFaceServiceExImpl.sendError(3, 0);
+                            return;
+                        }
+                    }
+                    if (i2 == 2) {
+                        SemBioAnalyticsManager semBioAnalyticsManager =
+                                semFaceServiceExImpl.mSemAnalyticsManager;
+                        int[] iArr = {
+                            semBioAnalyticsManager.mFaceQualityNoFace,
+                            semBioAnalyticsManager.mFaceQualityBigFace,
+                            semBioAnalyticsManager.mFaceQualitySmallFace
+                        };
+                        if (semFaceServiceExImpl.mIsAuthenticateResult) {
+                            StringBuilder sb = new StringBuilder("no match timeout BILG ");
+                            sb.append(iArr[0]);
+                            sb.append(":");
+                            sb.append(iArr[1]);
+                            sb.append(":");
+                            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                    sb, iArr[2], "SemFace");
+                            semFaceServiceExImpl
+                                    .mSensor
+                                    .getSessionForUser(semFaceServiceExImpl.mUserId)
+                                    .mAidlResponseHandler
+                                    .onAuthenticationFailed();
+                            return;
+                        }
+                        StringBuilder sb2 = new StringBuilder("no face BILG ");
+                        sb2.append(iArr[0]);
+                        sb2.append(":");
+                        sb2.append(iArr[1]);
+                        sb2.append(":");
+                        SystemServiceManager$$ExternalSyntheticOutline0.m(sb2, iArr[2], "SemFace");
+                        semFaceServiceExImpl.onExtended(3, -1);
+                        semFaceServiceExImpl.daemonCancelInternal();
+                        semFaceServiceExImpl.sendError(3, 0);
+                    }
                 }
-            }
-            Slog.d("SemFace", "handleMessage : MSG_INACTIVITY_TIMER_EXPIRED(TIMEOUT)");
-            semFaceServiceExImpl.mIsTimeout = true;
-            int i2 = semFaceServiceExImpl.mOperationType;
-            if (i2 == 1) {
-                semFaceServiceExImpl.onExtended(3, -1);
-                semFaceServiceExImpl.daemonCancelInternal();
-                if (semFaceServiceExImpl.mIsCheckedTooDark) {
-                    semFaceServiceExImpl.sendError(8, 100002);
-                    return;
-                } else {
-                    semFaceServiceExImpl.sendError(3, 0);
-                    return;
-                }
-            }
-            if (i2 == 2) {
-                SemBioAnalyticsManager semBioAnalyticsManager = semFaceServiceExImpl.mSemAnalyticsManager;
-                int[] iArr = {semBioAnalyticsManager.mFaceQualityNoFace, semBioAnalyticsManager.mFaceQualityBigFace, semBioAnalyticsManager.mFaceQualitySmallFace};
-                if (semFaceServiceExImpl.mIsAuthenticateResult) {
-                    StringBuilder sb = new StringBuilder("no match timeout BILG ");
-                    sb.append(iArr[0]);
-                    sb.append(":");
-                    sb.append(iArr[1]);
-                    sb.append(":");
-                    SystemServiceManager$$ExternalSyntheticOutline0.m(sb, iArr[2], "SemFace");
-                    semFaceServiceExImpl.mSensor.getSessionForUser(semFaceServiceExImpl.mUserId).mAidlResponseHandler.onAuthenticationFailed();
-                    return;
-                }
-                StringBuilder sb2 = new StringBuilder("no face BILG ");
-                sb2.append(iArr[0]);
-                sb2.append(":");
-                sb2.append(iArr[1]);
-                sb2.append(":");
-                SystemServiceManager$$ExternalSyntheticOutline0.m(sb2, iArr[2], "SemFace");
-                semFaceServiceExImpl.onExtended(3, -1);
-                semFaceServiceExImpl.daemonCancelInternal();
-                semFaceServiceExImpl.sendError(3, 0);
-            }
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl$2, reason: invalid class name */
@@ -192,7 +211,8 @@ public final class SemFaceServiceExImpl {
                 if (rotation != semFaceServiceExImpl.mLastRotation) {
                     semFaceServiceExImpl.mLastRotation = rotation;
                     if (semFaceServiceExImpl.mIsOperationStarted) {
-                        semFaceServiceExImpl.mHandlerMain.post(new SemFaceServiceExImpl$2$$ExternalSyntheticLambda0(0, this));
+                        semFaceServiceExImpl.mHandlerMain.post(
+                                new SemFaceServiceExImpl$2$$ExternalSyntheticLambda0(0, this));
                     }
                 }
             } catch (UnsupportedOperationException e) {
@@ -218,12 +238,12 @@ public final class SemFaceServiceExImpl {
         }
 
         @Override // android.hardware.SensorEventListener
-        public final void onAccuracyChanged(android.hardware.Sensor sensor, int i) {
-        }
+        public final void onAccuracyChanged(android.hardware.Sensor sensor, int i) {}
 
         @Override // android.hardware.SensorEventListener
         public final void onSensorChanged(SensorEvent sensorEvent) {
-            if (!SemFaceServiceExImpl.this.mSensor.mTestHalEnabled && sensorEvent.sensor.getType() == 8) {
+            if (!SemFaceServiceExImpl.this.mSensor.mTestHalEnabled
+                    && sensorEvent.sensor.getType() == 8) {
                 float[] fArr = (float[]) sensorEvent.values.clone();
                 if (fArr[0] == FullScreenMagnificationGestureHandler.MAX_SCALE) {
                     removeMessages(4);
@@ -237,8 +257,7 @@ public final class SemFaceServiceExImpl {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl$4, reason: invalid class name */
     public final class AnonymousClass4 extends BroadcastReceiver {
-        public AnonymousClass4() {
-        }
+        public AnonymousClass4() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -260,10 +279,12 @@ public final class SemFaceServiceExImpl {
 
     public final void acquireDVFS(int i, int i2) {
         Slog.i("SemFace", "acquireDVFS");
-        SemBiometricBoostingManager.getInstance().acquireDvfs(this.mContext, i2 == 1 ? 3511 : 3512, 8, "GFACE_SERVICE", i);
+        SemBiometricBoostingManager.getInstance()
+                .acquireDvfs(this.mContext, i2 == 1 ? 3511 : 3512, 8, "GFACE_SERVICE", i);
     }
 
-    public final synchronized void daemonCancel(ICancellationSignal iCancellationSignal, boolean z) {
+    public final synchronized void daemonCancel(
+            ICancellationSignal iCancellationSignal, boolean z) {
         stopOperation();
         if (iCancellationSignal == null) {
             Slog.w("SemFace", "cancellationSignal is null");
@@ -280,7 +301,11 @@ public final class SemFaceServiceExImpl {
             long currentTimeMillis = System.currentTimeMillis();
             Slog.w("SemFace", "daemonCancel START");
             iCancellationSignal.cancel();
-            Slog.w("SemFace", "daemonCancel FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms) RESULT: ");
+            Slog.w(
+                    "SemFace",
+                    "daemonCancel FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms) RESULT: ");
         } catch (Exception e) {
             Slog.e("SemFace", "Failed to get biometric interface", e);
         }
@@ -289,7 +314,8 @@ public final class SemFaceServiceExImpl {
     public final synchronized void daemonCancelInternal() {
         try {
             BaseClientMonitor currentClient = this.mScheduler.getCurrentClient();
-            if ((currentClient instanceof FaceAuthenticationClient) || (currentClient instanceof FaceEnrollClient)) {
+            if ((currentClient instanceof FaceAuthenticationClient)
+                    || (currentClient instanceof FaceEnrollClient)) {
                 Slog.d("SemFace", "daemonCancelInternal");
             } else {
                 Slog.d("SemFace", "daemonCancelInternal not auth(enroll) client");
@@ -309,7 +335,11 @@ public final class SemFaceServiceExImpl {
             }
             long currentTimeMillis = System.currentTimeMillis();
             this.mISession.close();
-            Slog.w("SemFace", "ISession.close: FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms)");
+            Slog.w(
+                    "SemFace",
+                    "ISession.close: FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms)");
             this.mISession = null;
             if (this.mISehSession == null) {
                 Slog.e("SemFace", "daemonClose: no seh face HAL!");
@@ -317,25 +347,46 @@ public final class SemFaceServiceExImpl {
             }
             long currentTimeMillis2 = System.currentTimeMillis();
             ((ISehSession.Stub.Proxy) this.mISehSession).close();
-            Slog.w("SemFace", "IsehSession.close: FINISH (" + (System.currentTimeMillis() - currentTimeMillis2) + "ms)");
+            Slog.w(
+                    "SemFace",
+                    "IsehSession.close: FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis2)
+                            + "ms)");
             this.mISehSession = null;
         } catch (Exception e) {
             Slog.e("SemFace", "IsehSession.close: ", e);
         }
     }
 
-    public final ICancellationSignal daemonEnroll(HardwareAuthToken hardwareAuthToken, byte[] bArr, NativeHandle nativeHandle, Surface surface, Boolean bool) {
+    public final ICancellationSignal daemonEnroll(
+            HardwareAuthToken hardwareAuthToken,
+            byte[] bArr,
+            NativeHandle nativeHandle,
+            Surface surface,
+            Boolean bool) {
         Slog.i("SemFace", "enroll BILG ");
         if (this.mISession == null) {
             Slog.w("SemFace", "daemonEnroll: no face HAL!");
             throw new IllegalArgumentException();
         }
         if (hardwareAuthToken.challenge == 0) {
-            Slog.w("SemFace", "daemonEnroll: hardwareAuthToken mac.length = " + hardwareAuthToken.mac.length + ", id=" + hardwareAuthToken.authenticatorId + ", challenge=" + hardwareAuthToken.challenge + ", type=" + hardwareAuthToken.authenticatorType);
+            Slog.w(
+                    "SemFace",
+                    "daemonEnroll: hardwareAuthToken mac.length = "
+                            + hardwareAuthToken.mac.length
+                            + ", id="
+                            + hardwareAuthToken.authenticatorId
+                            + ", challenge="
+                            + hardwareAuthToken.challenge
+                            + ", type="
+                            + hardwareAuthToken.authenticatorType);
             throw new IllegalArgumentException();
         }
         if (Utils.DEBUG) {
-            BatteryService$$ExternalSyntheticOutline0.m(new StringBuilder("hardwareAuthToken  id = "), hardwareAuthToken.authenticatorId, "SemFace");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("hardwareAuthToken  id = "),
+                    hardwareAuthToken.authenticatorId,
+                    "SemFace");
         }
         if (bool.booleanValue()) {
             FaceEnrollOptions faceEnrollOptions = new FaceEnrollOptions();
@@ -347,7 +398,8 @@ public final class SemFaceServiceExImpl {
             faceEnrollOptions.surfacePreview = surface;
             this.mCancellationSignal = this.mISession.enrollWithOptions(faceEnrollOptions);
         } else {
-            this.mCancellationSignal = this.mISession.enroll(hardwareAuthToken, (byte) 0, bArr, nativeHandle);
+            this.mCancellationSignal =
+                    this.mISession.enroll(hardwareAuthToken, (byte) 0, bArr, nativeHandle);
         }
         return this.mCancellationSignal;
     }
@@ -357,7 +409,9 @@ public final class SemFaceServiceExImpl {
         long currentTimeMillis = System.currentTimeMillis();
         try {
             if (this.mIsHIDL) {
-                ((HidlToAidlSessionAdapter) ((AidlSession) this.mSensor.mLazySession.get()).mSession).enumerateEnrollments();
+                ((HidlToAidlSessionAdapter)
+                                ((AidlSession) this.mSensor.mLazySession.get()).mSession)
+                        .enumerateEnrollments();
             } else {
                 ISession iSession = this.mISession;
                 if (iSession == null) {
@@ -366,7 +420,11 @@ public final class SemFaceServiceExImpl {
                 }
                 iSession.enumerateEnrollments();
             }
-            Slog.w("SemFace", "daemonEnumerateUser FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms)");
+            Slog.w(
+                    "SemFace",
+                    "daemonEnumerateUser FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms)");
         } catch (Exception e) {
             Slog.e("SemFace", "daemonEnumerateUser: ", e);
         }
@@ -377,13 +435,19 @@ public final class SemFaceServiceExImpl {
         long currentTimeMillis = System.currentTimeMillis();
         try {
             if (this.mIsHIDL) {
-                ((HidlToAidlSessionAdapter) ((AidlSession) this.mSensor.mLazySession.get()).mSession).generateChallenge();
+                ((HidlToAidlSessionAdapter)
+                                ((AidlSession) this.mSensor.mLazySession.get()).mSession)
+                        .generateChallenge();
             } else if (this.mISession == null) {
                 Slog.w("SemFace", "daemonGenerateChallenge(): no face HAL!");
                 return;
             }
             this.mISession.generateChallenge();
-            Slog.w("SemFace", "daemonGenerateChallenge FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms)");
+            Slog.w(
+                    "SemFace",
+                    "daemonGenerateChallenge FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms)");
         } catch (Exception e) {
             Slog.e("SemFace", "daemonGenerateChallenge: ", e);
         }
@@ -394,7 +458,9 @@ public final class SemFaceServiceExImpl {
         long currentTimeMillis = System.currentTimeMillis();
         try {
             if (this.mIsHIDL) {
-                ((HidlToAidlSessionAdapter) ((AidlSession) this.mSensor.mLazySession.get()).mSession).getAuthenticatorId();
+                ((HidlToAidlSessionAdapter)
+                                ((AidlSession) this.mSensor.mLazySession.get()).mSession)
+                        .getAuthenticatorId();
             } else {
                 ISession iSession = this.mISession;
                 if (iSession == null) {
@@ -403,7 +469,11 @@ public final class SemFaceServiceExImpl {
                 }
                 iSession.getAuthenticatorId();
             }
-            Slog.w("SemFace", "daemonGetAuthenticatorId FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms)");
+            Slog.w(
+                    "SemFace",
+                    "daemonGetAuthenticatorId FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms)");
         } catch (Exception e) {
             Slog.e("SemFace", "daemonGetAuthenticatorId: ", e);
         }
@@ -414,7 +484,9 @@ public final class SemFaceServiceExImpl {
         long currentTimeMillis = System.currentTimeMillis();
         try {
             if (this.mIsHIDL) {
-                ((HidlToAidlSessionAdapter) ((AidlSession) this.mSensor.mLazySession.get()).mSession).getFeatures();
+                ((HidlToAidlSessionAdapter)
+                                ((AidlSession) this.mSensor.mLazySession.get()).mSession)
+                        .getFeatures();
             } else {
                 ISession iSession = this.mISession;
                 if (iSession == null) {
@@ -423,7 +495,11 @@ public final class SemFaceServiceExImpl {
                 }
                 iSession.getFeatures();
             }
-            Slog.w("SemFace", "daemonGetFeatures FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms)");
+            Slog.w(
+                    "SemFace",
+                    "daemonGetFeatures FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms)");
         } catch (Exception e) {
             Slog.e("SemFace", "daemonGetFeatures: ", e);
         }
@@ -443,13 +519,19 @@ public final class SemFaceServiceExImpl {
             } catch (Exception e) {
                 e = e;
                 BootReceiver$$ExternalSyntheticOutline0.m(e, "daemonRemove : ", "SemFace");
-                Slog.w("SemFace", "removeEnrollments FINISH (" + (System.currentTimeMillis() - j) + "ms) RESULT: ");
+                Slog.w(
+                        "SemFace",
+                        "removeEnrollments FINISH ("
+                                + (System.currentTimeMillis() - j)
+                                + "ms) RESULT: ");
             }
         } catch (Exception e2) {
             e = e2;
             j = 0;
         }
-        Slog.w("SemFace", "removeEnrollments FINISH (" + (System.currentTimeMillis() - j) + "ms) RESULT: ");
+        Slog.w(
+                "SemFace",
+                "removeEnrollments FINISH (" + (System.currentTimeMillis() - j) + "ms) RESULT: ");
     }
 
     public final void daemonRevokeChallenge(long j) {
@@ -457,7 +539,9 @@ public final class SemFaceServiceExImpl {
         long currentTimeMillis = System.currentTimeMillis();
         try {
             if (this.mIsHIDL) {
-                ((HidlToAidlSessionAdapter) ((AidlSession) this.mSensor.mLazySession.get()).mSession).revokeChallenge(j);
+                ((HidlToAidlSessionAdapter)
+                                ((AidlSession) this.mSensor.mLazySession.get()).mSession)
+                        .revokeChallenge(j);
             } else {
                 ISession iSession = this.mISession;
                 if (iSession == null) {
@@ -466,7 +550,11 @@ public final class SemFaceServiceExImpl {
                 }
                 iSession.revokeChallenge(j);
             }
-            Slog.w("SemFace", "daemonRevokeChallenge FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms)");
+            Slog.w(
+                    "SemFace",
+                    "daemonRevokeChallenge FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms)");
         } catch (Exception e) {
             Slog.e("SemFace", "daemonRevokeChallenge: ", e);
         }
@@ -489,9 +577,14 @@ public final class SemFaceServiceExImpl {
             Slog.i("SemFace", sb.toString());
             long currentTimeMillis = System.currentTimeMillis();
             ((ISehSession.Stub.Proxy) this.mISehSession).setFaceTag(bArr);
-            Slog.i("SemFace", "setFaceTag FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms)");
+            Slog.i(
+                    "SemFace",
+                    "setFaceTag FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms)");
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("setFaceTag: "), "SemFace");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("setFaceTag: "), "SemFace");
         }
     }
 
@@ -503,9 +596,24 @@ public final class SemFaceServiceExImpl {
         try {
             long currentTimeMillis = System.currentTimeMillis();
             Slog.w("SemFace", "SetRotation START");
-            Slog.w("SemFace", "SetRotation FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms) RESULT: " + ((ISehSession.Stub.Proxy) this.mISehSession).setRotation(i != 1 ? i != 2 ? i != 3 ? FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_AI_CLEAR_ZOOM_MERGE_ZSL_ANCHOR_6 : 180 : 90 : 0));
+            Slog.w(
+                    "SemFace",
+                    "SetRotation FINISH ("
+                            + (System.currentTimeMillis() - currentTimeMillis)
+                            + "ms) RESULT: "
+                            + ((ISehSession.Stub.Proxy) this.mISehSession)
+                                    .setRotation(
+                                            i != 1
+                                                    ? i != 2
+                                                            ? i != 3
+                                                                    ? FrameworkStatsLog
+                                                                            .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_AI_CLEAR_ZOOM_MERGE_ZSL_ANCHOR_6
+                                                                    : 180
+                                                            : 90
+                                                    : 0));
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("daemonSetRotation: "), "SemFace");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("daemonSetRotation: "), "SemFace");
         }
     }
 
@@ -528,7 +636,16 @@ public final class SemFaceServiceExImpl {
     }
 
     public final boolean isBrightnessEnable() {
-        return (this.mUserId == -10000 || Utils.isFlipFolded(this.mContext) || Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "face_brighten_screen", 1, this.mUserId) != 1) ? false : true;
+        return (this.mUserId == -10000
+                        || Utils.isFlipFolded(this.mContext)
+                        || Settings.Secure.getIntForUser(
+                                        this.mContext.getContentResolver(),
+                                        "face_brighten_screen",
+                                        1,
+                                        this.mUserId)
+                                != 1)
+                ? false
+                : true;
     }
 
     public final boolean isTpaSehTestHalEnabled() {
@@ -536,7 +653,12 @@ public final class SemFaceServiceExImpl {
     }
 
     public final boolean isUsingSehAPI() {
-        return (this.mIsHIDL || this.mSensor.mTestHalEnabled || isTpaSehTestHalEnabled() || SemBiometricFeature.FEATURE_JDM_HAL) ? false : true;
+        return (this.mIsHIDL
+                        || this.mSensor.mTestHalEnabled
+                        || isTpaSehTestHalEnabled()
+                        || SemBiometricFeature.FEATURE_JDM_HAL)
+                ? false
+                : true;
     }
 
     /* JADX WARN: Removed duplicated region for block: B:124:0x0280  */
@@ -549,7 +671,10 @@ public final class SemFaceServiceExImpl {
             Method dump skipped, instructions count: 730
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl.onExtended(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl.onExtended(int,"
+                    + " int):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:14:0x006f  */
@@ -563,7 +688,10 @@ public final class SemFaceServiceExImpl {
             Method dump skipped, instructions count: 380
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl.onPreAcquired(int, int, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl.onPreAcquired(int,"
+                    + " int, boolean):int");
     }
 
     public final void releaseDVFS() {
@@ -615,19 +743,23 @@ public final class SemFaceServiceExImpl {
 
     public final void restoreBrightness() {
         if (isBrightnessEnable()) {
-            SemFaceBrightManager semFaceBrightManager = SemFaceBrightManager.getInstance(this.mContext);
+            SemFaceBrightManager semFaceBrightManager =
+                    SemFaceBrightManager.getInstance(this.mContext);
             if (semFaceBrightManager.mIsSetBrightness) {
                 semFaceBrightManager.mIsSetBrightness = false;
-                SemFaceBrightManager.AnonymousClass1 anonymousClass1 = semFaceBrightManager.mHandlerBg;
+                SemFaceBrightManager.AnonymousClass1 anonymousClass1 =
+                        semFaceBrightManager.mHandlerBg;
                 anonymousClass1.removeMessages(2);
                 anonymousClass1.removeMessages(5);
                 boolean isFlipFolded = Utils.isFlipFolded(semFaceBrightManager.mContext);
                 if (semFaceBrightManager.mIsScreenAutoBrightnessOn) {
                     semFaceBrightManager.mPowerManager.semSetAutoBrightnessLimit(-1, -1);
                 } else {
-                    semFaceBrightManager.mDisplayManager.setTemporaryBrightness(isFlipFolded ? 1 : 0, -1, false);
+                    semFaceBrightManager.mDisplayManager.setTemporaryBrightness(
+                            isFlipFolded ? 1 : 0, -1, false);
                 }
-                HermesService$3$$ExternalSyntheticOutline0.m(isFlipFolded ? 1 : 0, "restoreBrightness, ", "SemFaceBrightManager");
+                HermesService$3$$ExternalSyntheticOutline0.m(
+                        isFlipFolded ? 1 : 0, "restoreBrightness, ", "SemFaceBrightManager");
             }
         }
     }
@@ -643,7 +775,9 @@ public final class SemFaceServiceExImpl {
             return;
         }
         try {
-            Slog.d("SemFace", "semConnectSession IFace = " + iFace + ", " + iFace.getInterfaceVersion());
+            Slog.d(
+                    "SemFace",
+                    "semConnectSession IFace = " + iFace + ", " + iFace.getInterfaceVersion());
             IBinder extension = iFace.asBinder().getExtension();
             int i = ISehFace.Stub.$r8$clinit;
             if (extension == null) {
@@ -660,12 +794,21 @@ public final class SemFaceServiceExImpl {
                 }
             }
             this.mISehFace = iSehFace;
-            Slog.d("SemFace", "semConnectSession ISehFace = " + this.mISehFace + ", " + ((ISehFace.Stub.Proxy) this.mISehFace).getInterfaceVersion());
-            this.mISehSession = ((ISehFace.Stub.Proxy) this.mISehFace).createSession(this.mSensorId, this.mUserId, this.mISessionCallback);
+            Slog.d(
+                    "SemFace",
+                    "semConnectSession ISehFace = "
+                            + this.mISehFace
+                            + ", "
+                            + ((ISehFace.Stub.Proxy) this.mISehFace).getInterfaceVersion());
+            this.mISehSession =
+                    ((ISehFace.Stub.Proxy) this.mISehFace)
+                            .createSession(this.mSensorId, this.mUserId, this.mISessionCallback);
             StringBuilder sb = new StringBuilder("semConnectSession ISehSession = ");
             sb.append(this.mISehSession);
             Slog.d("SemFace", sb.toString());
-            this.mISession = ISession.Stub.asInterface(((ISehSession.Stub.Proxy) this.mISehSession).mRemote.getExtension());
+            this.mISession =
+                    ISession.Stub.asInterface(
+                            ((ISehSession.Stub.Proxy) this.mISehSession).mRemote.getExtension());
             Slog.d("SemFace", "semConnectSession ISession = " + this.mISession);
             ((ISehFace.Stub.Proxy) this.mISehFace).mRemote.linkToDeath(this.mProvider, 0);
             ((ISehSession.Stub.Proxy) this.mISehSession).mRemote.linkToDeath(this.mProvider, 0);
@@ -684,7 +827,10 @@ public final class SemFaceServiceExImpl {
         if (currentClient instanceof AcquisitionClient) {
             ((AcquisitionClient) currentClient).onAcquired(22, i);
         } else {
-            Slog.e("SemFace", "sendAcquired - not AcquisitionClient: ".concat(Utils.getClientName(currentClient)));
+            Slog.e(
+                    "SemFace",
+                    "sendAcquired - not AcquisitionClient: "
+                            .concat(Utils.getClientName(currentClient)));
         }
     }
 
@@ -712,18 +858,25 @@ public final class SemFaceServiceExImpl {
         if (currentClient instanceof AcquisitionClient) {
             ((AcquisitionClient) currentClient).onError(i, i2);
         } else {
-            Slog.e("SemFace", "sendError - not AcquisitionClient: ".concat(Utils.getClientName(currentClient)));
+            Slog.e(
+                    "SemFace",
+                    "sendError - not AcquisitionClient: "
+                            .concat(Utils.getClientName(currentClient)));
         }
     }
 
     public final void sendFailed() {
         BaseClientMonitor currentClient = this.mScheduler.getCurrentClient();
         if (!(currentClient instanceof AcquisitionClient)) {
-            Slog.e("SemFace", "sendFailed - not AcquisitionClient: ".concat(Utils.getClientName(currentClient)));
+            Slog.e(
+                    "SemFace",
+                    "sendFailed - not AcquisitionClient: "
+                            .concat(Utils.getClientName(currentClient)));
             return;
         }
         try {
-            IFaceServiceReceiver iFaceServiceReceiver = currentClient.mListener.mFaceServiceReceiver;
+            IFaceServiceReceiver iFaceServiceReceiver =
+                    currentClient.mListener.mFaceServiceReceiver;
             if (iFaceServiceReceiver != null) {
                 iFaceServiceReceiver.onAuthenticationFailed();
             }
@@ -735,15 +888,20 @@ public final class SemFaceServiceExImpl {
     public final void sendSucceeded(Bundle bundle) {
         BaseClientMonitor currentClient = this.mScheduler.getCurrentClient();
         if (!(currentClient instanceof AcquisitionClient)) {
-            Slog.e("SemFace", "sendSuccess - not AcquisitionClient: ".concat(Utils.getClientName(currentClient)));
+            Slog.e(
+                    "SemFace",
+                    "sendSuccess - not AcquisitionClient: "
+                            .concat(Utils.getClientName(currentClient)));
             return;
         }
         ClientMonitorCallbackConverter clientMonitorCallbackConverter = currentClient.mListener;
         try {
             int i = this.mUserId;
-            IFaceServiceReceiver iFaceServiceReceiver = clientMonitorCallbackConverter.mFaceServiceReceiver;
+            IFaceServiceReceiver iFaceServiceReceiver =
+                    clientMonitorCallbackConverter.mFaceServiceReceiver;
             if (iFaceServiceReceiver != null) {
-                iFaceServiceReceiver.onSemAuthenticationSucceededWithBundle(new Face("", 1, 0L), i, false, bundle);
+                iFaceServiceReceiver.onSemAuthenticationSucceededWithBundle(
+                        new Face("", 1, 0L), i, false, bundle);
             }
         } catch (Exception e) {
             Slog.e("SemFace", "sendSucceeded : Unable to notify listener, finishing", e);
@@ -784,7 +942,9 @@ public final class SemFaceServiceExImpl {
             Method dump skipped, instructions count: 413
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl.startBrightness():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl.startBrightness():void");
     }
 
     public final void startInactivityTimer(int i) {
@@ -812,14 +972,31 @@ public final class SemFaceServiceExImpl {
                     }
                     Slog.d("SemFace", "enroll timeout set as : " + i2);
                     startInactivityTimer(i2);
-                    this.mAppOpsManager.startOp(26, Process.myUid(), this.mContext.getOpPackageName(), false, "Biometrics_FaceService", null);
+                    this.mAppOpsManager.startOp(
+                            26,
+                            Process.myUid(),
+                            this.mContext.getOpPackageName(),
+                            false,
+                            "Biometrics_FaceService",
+                            null);
                     BaseClientMonitor currentClient = this.mScheduler.getCurrentClient();
                     if (currentClient != null) {
-                        SemBioLoggingManager.get().faceStart(currentClient.mHashID, "E", this.mScheduler.getCurrentClient().mOwner);
+                        SemBioLoggingManager.get()
+                                .faceStart(
+                                        currentClient.mHashID,
+                                        "E",
+                                        this.mScheduler.getCurrentClient().mOwner);
                     }
                 } else if (i == 2) {
-                    SemFaceBrightManager semFaceBrightManager = SemFaceBrightManager.getInstance(this.mContext);
-                    int i3 = semFaceBrightManager.mPowerManager.getCurrentBrightness(false) < ((float) semFaceBrightManager.mScreenFlashBrightnessLevelMaxCorrected) ? 5000 : 4000;
+                    SemFaceBrightManager semFaceBrightManager =
+                            SemFaceBrightManager.getInstance(this.mContext);
+                    int i3 =
+                            semFaceBrightManager.mPowerManager.getCurrentBrightness(false)
+                                            < ((float)
+                                                    semFaceBrightManager
+                                                            .mScreenFlashBrightnessLevelMaxCorrected)
+                                    ? 5000
+                                    : 4000;
                     if (SemFaceUtils.mNeedtoAuthenticateExt) {
                         Surface surface = SemFaceUtils.mSurface;
                         this.mPreviewSurface = surface;
@@ -827,10 +1004,12 @@ public final class SemFaceServiceExImpl {
                         SemFaceUtils.mNeedtoAuthenticateExt = false;
                         this.mIsAuthenticationExtOperation = true;
                         if (surface != null) {
-                            android.os.NativeHandle acquireSurfaceHandle = FaceService.acquireSurfaceHandle(surface);
+                            android.os.NativeHandle acquireSurfaceHandle =
+                                    FaceService.acquireSurfaceHandle(surface);
                             this.mOsPreviewHandle = acquireSurfaceHandle;
                             try {
-                                this.mHwPreviewHandle = AidlNativeHandleUtils.dup(acquireSurfaceHandle);
+                                this.mHwPreviewHandle =
+                                        AidlNativeHandleUtils.dup(acquireSurfaceHandle);
                                 Slog.v("SemFace", "Obtained handles for the preview surface.");
                             } catch (IOException e) {
                                 this.mHwPreviewHandle = null;
@@ -844,17 +1023,22 @@ public final class SemFaceServiceExImpl {
                     }
                     startInactivityTimer(i2);
                     startBrightness();
-                    daemonSetFaceTag(new byte[]{isBrightnessEnable()});
+                    daemonSetFaceTag(new byte[] {isBrightnessEnable()});
                     BaseClientMonitor currentClient2 = this.mScheduler.getCurrentClient();
                     if (currentClient2 != null) {
-                        SemBioLoggingManager.get().faceStart(currentClient2.mHashID, "A", this.mScheduler.getCurrentClient().mOwner);
+                        SemBioLoggingManager.get()
+                                .faceStart(
+                                        currentClient2.mHashID,
+                                        "A",
+                                        this.mScheduler.getCurrentClient().mOwner);
                     }
                 } else {
                     i2 = 6000;
                 }
                 acquireDVFS(i2, i);
                 String currentClientOwnerString = getCurrentClientOwnerString();
-                if (currentClientOwnerString == null || !Utils.isKeyguard(this.mContext, currentClientOwnerString)) {
+                if (currentClientOwnerString == null
+                        || !Utils.isKeyguard(this.mContext, currentClientOwnerString)) {
                     z = false;
                 }
                 setWakeLock(i2 + 3000, z);
@@ -893,7 +1077,11 @@ public final class SemFaceServiceExImpl {
         }
         int i = this.mOperationType;
         if (i == 1) {
-            this.mAppOpsManager.finishOp(26, Process.myUid(), this.mContext.getOpPackageName(), "Biometrics_FaceService");
+            this.mAppOpsManager.finishOp(
+                    26,
+                    Process.myUid(),
+                    this.mContext.getOpPackageName(),
+                    "Biometrics_FaceService");
             releaseWakeLock(true);
         } else if (i == 2) {
             releaseWakeLock(false);

@@ -9,11 +9,24 @@ import java.nio.ByteOrder;
 
 /* loaded from: classes3.dex */
 public class ETC1Util {
-    public static void loadTexture(int target, int level, int border, int fallbackFormat, int fallbackType, InputStream input) throws IOException {
+    public static void loadTexture(
+            int target,
+            int level,
+            int border,
+            int fallbackFormat,
+            int fallbackType,
+            InputStream input)
+            throws IOException {
         loadTexture(target, level, border, fallbackFormat, fallbackType, createTexture(input));
     }
 
-    public static void loadTexture(int target, int level, int border, int fallbackFormat, int fallbackType, ETC1Texture texture) {
+    public static void loadTexture(
+            int target,
+            int level,
+            int border,
+            int fallbackFormat,
+            int fallbackType,
+            ETC1Texture texture) {
         if (fallbackFormat == 6407) {
             if (fallbackType != 33635 && fallbackType != 5121) {
                 throw new IllegalArgumentException("Unsupported fallbackType");
@@ -23,15 +36,26 @@ public class ETC1Util {
             Buffer data = texture.getData();
             if (isETC1Supported()) {
                 int imageSize = data.remaining();
-                GLES10.glCompressedTexImage2D(target, level, 36196, width, height, border, imageSize, data);
+                GLES10.glCompressedTexImage2D(
+                        target, level, 36196, width, height, border, imageSize, data);
                 return;
             }
             boolean useShorts = fallbackType != 5121;
             int pixelSize = useShorts ? 2 : 3;
             int stride = pixelSize * width;
-            ByteBuffer decodedData = ByteBuffer.allocateDirect(stride * height).order(ByteOrder.nativeOrder());
+            ByteBuffer decodedData =
+                    ByteBuffer.allocateDirect(stride * height).order(ByteOrder.nativeOrder());
             ETC1.decodeImage(data, decodedData, width, height, pixelSize, stride);
-            GLES10.glTexImage2D(target, level, fallbackFormat, width, height, border, fallbackFormat, fallbackType, decodedData);
+            GLES10.glTexImage2D(
+                    target,
+                    level,
+                    fallbackFormat,
+                    width,
+                    height,
+                    border,
+                    fallbackFormat,
+                    fallbackType,
+                    decodedData);
             return;
         }
         throw new IllegalArgumentException("fallbackFormat must be GL_RGB");
@@ -90,7 +114,8 @@ public class ETC1Util {
         int width = ETC1.getWidth(headerBuffer);
         int height = ETC1.getHeight(headerBuffer);
         int encodedSize = ETC1.getEncodedDataSize(width, height);
-        ByteBuffer dataBuffer = ByteBuffer.allocateDirect(encodedSize).order(ByteOrder.nativeOrder());
+        ByteBuffer dataBuffer =
+                ByteBuffer.allocateDirect(encodedSize).order(ByteOrder.nativeOrder());
         int i = 0;
         while (i < encodedSize) {
             int chunkSize = Math.min(ioBuffer.length, encodedSize - i);
@@ -104,9 +129,11 @@ public class ETC1Util {
         return new ETC1Texture(width, height, dataBuffer);
     }
 
-    public static ETC1Texture compressTexture(Buffer input, int width, int height, int pixelSize, int stride) {
+    public static ETC1Texture compressTexture(
+            Buffer input, int width, int height, int pixelSize, int stride) {
         int encodedImageSize = ETC1.getEncodedDataSize(width, height);
-        ByteBuffer compressedImage = ByteBuffer.allocateDirect(encodedImageSize).order(ByteOrder.nativeOrder());
+        ByteBuffer compressedImage =
+                ByteBuffer.allocateDirect(encodedImageSize).order(ByteOrder.nativeOrder());
         ETC1.encodeImage(input, width, height, pixelSize, stride, compressedImage);
         return new ETC1Texture(width, height, compressedImage);
     }

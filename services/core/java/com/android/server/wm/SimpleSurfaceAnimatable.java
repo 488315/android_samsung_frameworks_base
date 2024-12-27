@@ -1,7 +1,7 @@
 package com.android.server.wm;
 
 import android.view.SurfaceControl;
-import com.android.server.wm.SurfaceAnimator;
+
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -102,12 +102,11 @@ public final class SimpleSurfaceAnimatable implements SurfaceAnimator.Animatable
     }
 
     @Override // com.android.server.wm.SurfaceAnimator.Animatable
-    public final void onAnimationLeashCreated(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
-    }
+    public final void onAnimationLeashCreated(
+            SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {}
 
     @Override // com.android.server.wm.SurfaceAnimator.Animatable
-    public final void onAnimationLeashLost(SurfaceControl.Transaction transaction) {
-    }
+    public final void onAnimationLeashLost(SurfaceControl.Transaction transaction) {}
 
     @Override // com.android.server.wm.SurfaceAnimator.Animatable
     public final boolean shouldDeferAnimationFinish(Runnable runnable) {

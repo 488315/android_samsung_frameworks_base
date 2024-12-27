@@ -2,23 +2,27 @@ package android.view.translation;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TranslationRequestValue implements Parcelable {
-    public static final Parcelable.Creator<TranslationRequestValue> CREATOR = new Parcelable.Creator<TranslationRequestValue>() { // from class: android.view.translation.TranslationRequestValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationRequestValue[] newArray(int size) {
-            return new TranslationRequestValue[size];
-        }
+    public static final Parcelable.Creator<TranslationRequestValue> CREATOR =
+            new Parcelable.Creator<
+                    TranslationRequestValue>() { // from class:
+                                                 // android.view.translation.TranslationRequestValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationRequestValue[] newArray(int size) {
+                    return new TranslationRequestValue[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationRequestValue createFromParcel(Parcel in) {
-            return new TranslationRequestValue(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationRequestValue createFromParcel(Parcel in) {
+                    return new TranslationRequestValue(in);
+                }
+            };
     private final CharSequence mText;
 
     public static TranslationRequestValue forText(CharSequence text) {
@@ -75,6 +79,5 @@ public final class TranslationRequestValue implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -3,7 +3,9 @@ package com.samsung.android.ims;
 import android.net.Network;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.samsung.android.ims.settings.SemImsProfile;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,19 +14,22 @@ import java.util.Set;
 
 /* loaded from: classes6.dex */
 public class SemImsRegistration implements Parcelable {
-    public static final Parcelable.Creator<SemImsRegistration> CREATOR = new Parcelable.Creator<SemImsRegistration>() { // from class: com.samsung.android.ims.SemImsRegistration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemImsRegistration createFromParcel(Parcel in) {
-            return new SemImsRegistration(in);
-        }
+    public static final Parcelable.Creator<SemImsRegistration> CREATOR =
+            new Parcelable.Creator<
+                    SemImsRegistration>() { // from class:
+                                            // com.samsung.android.ims.SemImsRegistration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemImsRegistration createFromParcel(Parcel in) {
+                    return new SemImsRegistration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemImsRegistration[] newArray(int size) {
-            return new SemImsRegistration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemImsRegistration[] newArray(int size) {
+                    return new SemImsRegistration[size];
+                }
+            };
     private static final String LOG_TAG = "SemImsRegistration";
     private static final int NETWORK_TYPE_MOBILE = 1;
     private static final int NETWORK_TYPE_UNKNOWN = 0;
@@ -103,7 +108,8 @@ public class SemImsRegistration implements Parcelable {
     }
 
     public boolean hasRcsService() {
-        Set<String> rcsServices = new HashSet<>(Arrays.asList(SemImsProfile.ImsFeature.getRcsServiceList()));
+        Set<String> rcsServices =
+                new HashSet<>(Arrays.asList(SemImsProfile.ImsFeature.getRcsServiceList()));
         return rcsServices.removeAll(this.mServices);
     }
 

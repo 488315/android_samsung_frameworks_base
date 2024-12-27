@@ -7,6 +7,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -15,13 +16,17 @@ public interface IRestrictionsManager extends IInterface {
 
     Bundle getApplicationRestrictions(String str) throws RemoteException;
 
-    List<Bundle> getApplicationRestrictionsPerAdminForUser(int i, String str) throws RemoteException;
+    List<Bundle> getApplicationRestrictionsPerAdminForUser(int i, String str)
+            throws RemoteException;
 
     boolean hasRestrictionsProvider() throws RemoteException;
 
-    void notifyPermissionResponse(String str, PersistableBundle persistableBundle) throws RemoteException;
+    void notifyPermissionResponse(String str, PersistableBundle persistableBundle)
+            throws RemoteException;
 
-    void requestPermission(String str, String str2, String str3, PersistableBundle persistableBundle) throws RemoteException;
+    void requestPermission(
+            String str, String str2, String str3, PersistableBundle persistableBundle)
+            throws RemoteException;
 
     public static class Default implements IRestrictionsManager {
         @Override // android.content.IRestrictionsManager
@@ -30,7 +35,8 @@ public interface IRestrictionsManager extends IInterface {
         }
 
         @Override // android.content.IRestrictionsManager
-        public List<Bundle> getApplicationRestrictionsPerAdminForUser(int userId, String packageName) throws RemoteException {
+        public List<Bundle> getApplicationRestrictionsPerAdminForUser(
+                int userId, String packageName) throws RemoteException {
             return null;
         }
 
@@ -40,12 +46,16 @@ public interface IRestrictionsManager extends IInterface {
         }
 
         @Override // android.content.IRestrictionsManager
-        public void requestPermission(String packageName, String requestType, String requestId, PersistableBundle requestData) throws RemoteException {
-        }
+        public void requestPermission(
+                String packageName,
+                String requestType,
+                String requestId,
+                PersistableBundle requestData)
+                throws RemoteException {}
 
         @Override // android.content.IRestrictionsManager
-        public void notifyPermissionResponse(String packageName, PersistableBundle response) throws RemoteException {
-        }
+        public void notifyPermissionResponse(String packageName, PersistableBundle response)
+                throws RemoteException {}
 
         @Override // android.content.IRestrictionsManager
         public Intent createLocalApprovalIntent() throws RemoteException {
@@ -58,7 +68,7 @@ public interface IRestrictionsManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRestrictionsManager {
+    public abstract static class Stub extends Binder implements IRestrictionsManager {
         public static final String DESCRIPTOR = "android.content.IRestrictionsManager";
         static final int TRANSACTION_createLocalApprovalIntent = 6;
         static final int TRANSACTION_getApplicationRestrictions = 1;
@@ -112,7 +122,8 @@ public interface IRestrictionsManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -132,7 +143,8 @@ public interface IRestrictionsManager extends IInterface {
                     int _arg02 = data.readInt();
                     String _arg1 = data.readString();
                     data.enforceNoDataAvail();
-                    List<Bundle> _result2 = getApplicationRestrictionsPerAdminForUser(_arg02, _arg1);
+                    List<Bundle> _result2 =
+                            getApplicationRestrictionsPerAdminForUser(_arg02, _arg1);
                     reply.writeNoException();
                     reply.writeTypedList(_result2, 1);
                     return true;
@@ -145,14 +157,16 @@ public interface IRestrictionsManager extends IInterface {
                     String _arg03 = data.readString();
                     String _arg12 = data.readString();
                     String _arg2 = data.readString();
-                    PersistableBundle _arg3 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg3 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     requestPermission(_arg03, _arg12, _arg2, _arg3);
                     reply.writeNoException();
                     return true;
                 case 5:
                     String _arg04 = data.readString();
-                    PersistableBundle _arg13 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg13 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     notifyPermissionResponse(_arg04, _arg13);
                     reply.writeNoException();
@@ -201,7 +215,8 @@ public interface IRestrictionsManager extends IInterface {
             }
 
             @Override // android.content.IRestrictionsManager
-            public List<Bundle> getApplicationRestrictionsPerAdminForUser(int userId, String packageName) throws RemoteException {
+            public List<Bundle> getApplicationRestrictionsPerAdminForUser(
+                    int userId, String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -235,7 +250,12 @@ public interface IRestrictionsManager extends IInterface {
             }
 
             @Override // android.content.IRestrictionsManager
-            public void requestPermission(String packageName, String requestType, String requestId, PersistableBundle requestData) throws RemoteException {
+            public void requestPermission(
+                    String packageName,
+                    String requestType,
+                    String requestId,
+                    PersistableBundle requestData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -253,7 +273,8 @@ public interface IRestrictionsManager extends IInterface {
             }
 
             @Override // android.content.IRestrictionsManager
-            public void notifyPermissionResponse(String packageName, PersistableBundle response) throws RemoteException {
+            public void notifyPermissionResponse(String packageName, PersistableBundle response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

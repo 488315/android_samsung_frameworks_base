@@ -9,13 +9,15 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.view.inputmethod.ImeTracker;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes5.dex */
 public interface IImeTracker extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.inputmethod.IImeTracker";
 
-    void finishTrackingPendingImeVisibilityRequests(AndroidFuture androidFuture) throws RemoteException;
+    void finishTrackingPendingImeVisibilityRequests(AndroidFuture androidFuture)
+            throws RemoteException;
 
     boolean hasPendingImeVisibilityRequests() throws RemoteException;
 
@@ -31,37 +33,34 @@ public interface IImeTracker extends IInterface {
 
     void onShown(ImeTracker.Token token) throws RemoteException;
 
-    ImeTracker.Token onStart(String str, int i, int i2, int i3, int i4, boolean z) throws RemoteException;
+    ImeTracker.Token onStart(String str, int i, int i2, int i3, int i4, boolean z)
+            throws RemoteException;
 
     public static class Default implements IImeTracker {
         @Override // com.android.internal.inputmethod.IImeTracker
-        public ImeTracker.Token onStart(String tag, int uid, int type, int origin, int reason, boolean fromUser) throws RemoteException {
+        public ImeTracker.Token onStart(
+                String tag, int uid, int type, int origin, int reason, boolean fromUser)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.inputmethod.IImeTracker
-        public void onProgress(IBinder binder, int phase) throws RemoteException {
-        }
+        public void onProgress(IBinder binder, int phase) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IImeTracker
-        public void onFailed(ImeTracker.Token statsToken, int phase) throws RemoteException {
-        }
+        public void onFailed(ImeTracker.Token statsToken, int phase) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IImeTracker
-        public void onCancelled(ImeTracker.Token statsToken, int phase) throws RemoteException {
-        }
+        public void onCancelled(ImeTracker.Token statsToken, int phase) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IImeTracker
-        public void onShown(ImeTracker.Token statsToken) throws RemoteException {
-        }
+        public void onShown(ImeTracker.Token statsToken) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IImeTracker
-        public void onHidden(ImeTracker.Token statsToken) throws RemoteException {
-        }
+        public void onHidden(ImeTracker.Token statsToken) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IImeTracker
-        public void onDispatched(ImeTracker.Token statsToken) throws RemoteException {
-        }
+        public void onDispatched(ImeTracker.Token statsToken) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IImeTracker
         public boolean hasPendingImeVisibilityRequests() throws RemoteException {
@@ -69,8 +68,8 @@ public interface IImeTracker extends IInterface {
         }
 
         @Override // com.android.internal.inputmethod.IImeTracker
-        public void finishTrackingPendingImeVisibilityRequests(AndroidFuture completionSignal) throws RemoteException {
-        }
+        public void finishTrackingPendingImeVisibilityRequests(AndroidFuture completionSignal)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -78,7 +77,7 @@ public interface IImeTracker extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImeTracker {
+    public abstract static class Stub extends Binder implements IImeTracker {
         static final int TRANSACTION_finishTrackingPendingImeVisibilityRequests = 9;
         static final int TRANSACTION_hasPendingImeVisibilityRequests = 8;
         static final int TRANSACTION_onCancelled = 4;
@@ -100,7 +99,9 @@ public interface IImeTracker extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IImeTracker asInterface(IBinder obj) {
@@ -150,7 +151,8 @@ public interface IImeTracker extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImeTracker.DESCRIPTOR);
             }
@@ -178,29 +180,34 @@ public interface IImeTracker extends IInterface {
                     onProgress(_arg02, _arg12);
                     return true;
                 case 3:
-                    ImeTracker.Token _arg03 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg03 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     onFailed(_arg03, _arg13);
                     return true;
                 case 4:
-                    ImeTracker.Token _arg04 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg04 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     int _arg14 = data.readInt();
                     data.enforceNoDataAvail();
                     onCancelled(_arg04, _arg14);
                     return true;
                 case 5:
-                    ImeTracker.Token _arg05 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg05 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     data.enforceNoDataAvail();
                     onShown(_arg05);
                     return true;
                 case 6:
-                    ImeTracker.Token _arg06 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg06 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     data.enforceNoDataAvail();
                     onHidden(_arg06);
                     return true;
                 case 7:
-                    ImeTracker.Token _arg07 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg07 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     data.enforceNoDataAvail();
                     onDispatched(_arg07);
                     return true;
@@ -210,7 +217,8 @@ public interface IImeTracker extends IInterface {
                     reply.writeBoolean(_result2);
                     return true;
                 case 9:
-                    AndroidFuture _arg08 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg08 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     finishTrackingPendingImeVisibilityRequests(_arg08);
                     return true;
@@ -236,7 +244,9 @@ public interface IImeTracker extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
-            public ImeTracker.Token onStart(String tag, int uid, int type, int origin, int reason, boolean fromUser) throws RemoteException {
+            public ImeTracker.Token onStart(
+                    String tag, int uid, int type, int origin, int reason, boolean fromUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -249,7 +259,8 @@ public interface IImeTracker extends IInterface {
                     _data.writeBoolean(fromUser);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ImeTracker.Token _result = (ImeTracker.Token) _reply.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _result =
+                            (ImeTracker.Token) _reply.readTypedObject(ImeTracker.Token.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -349,7 +360,8 @@ public interface IImeTracker extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IImeTracker
-            public void finishTrackingPendingImeVisibilityRequests(AndroidFuture completionSignal) throws RemoteException {
+            public void finishTrackingPendingImeVisibilityRequests(AndroidFuture completionSignal)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImeTracker.DESCRIPTOR);
@@ -361,12 +373,16 @@ public interface IImeTracker extends IInterface {
             }
         }
 
-        protected void hasPendingImeVisibilityRequests_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
+        protected void hasPendingImeVisibilityRequests_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
         }
 
-        protected void finishTrackingPendingImeVisibilityRequests_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
+        protected void finishTrackingPendingImeVisibilityRequests_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

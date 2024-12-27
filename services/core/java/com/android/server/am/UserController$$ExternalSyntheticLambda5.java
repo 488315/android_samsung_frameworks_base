@@ -25,6 +25,8 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda5 impl
             Method dump skipped, instructions count: 352
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.UserController$$ExternalSyntheticLambda5.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.UserController$$ExternalSyntheticLambda5.run():void");
     }
 }

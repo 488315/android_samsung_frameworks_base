@@ -2,8 +2,10 @@ package com.android.server.devicepolicy;
 
 import android.content.ComponentName;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
 import com.android.modules.utils.TypedXmlPullParser;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,8 +18,7 @@ public final class TransferOwnershipMetadataManager {
     public final Injector mInjector;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Metadata {
@@ -26,7 +27,8 @@ public final class TransferOwnershipMetadataManager {
         public final ComponentName targetComponent;
         public final int userId;
 
-        public Metadata(ComponentName componentName, ComponentName componentName2, int i, String str) {
+        public Metadata(
+                ComponentName componentName, ComponentName componentName2, int i, String str) {
             this.sourceComponent = componentName;
             this.targetComponent = componentName2;
             Objects.requireNonNull(componentName);
@@ -41,11 +43,18 @@ public final class TransferOwnershipMetadataManager {
                 return false;
             }
             Metadata metadata = (Metadata) obj;
-            return this.userId == metadata.userId && this.sourceComponent.equals(metadata.sourceComponent) && this.targetComponent.equals(metadata.targetComponent) && TextUtils.equals(this.adminType, metadata.adminType);
+            return this.userId == metadata.userId
+                    && this.sourceComponent.equals(metadata.sourceComponent)
+                    && this.targetComponent.equals(metadata.targetComponent)
+                    && TextUtils.equals(this.adminType, metadata.adminType);
         }
 
         public final int hashCode() {
-            return this.adminType.hashCode() + ((this.targetComponent.hashCode() + ((this.sourceComponent.hashCode() + ((this.userId + 31) * 31)) * 31)) * 31);
+            return this.adminType.hashCode()
+                    + ((this.targetComponent.hashCode()
+                                    + ((this.sourceComponent.hashCode() + ((this.userId + 31) * 31))
+                                            * 31))
+                            * 31);
         }
     }
 

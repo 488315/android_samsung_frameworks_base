@@ -3,6 +3,7 @@ package android.service.autofill.augmented;
 import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.service.autofill.Dataset;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +29,10 @@ public final class FillResponse {
         return null;
     }
 
-    static abstract class BaseBuilder {
+    abstract static class BaseBuilder {
         abstract Builder addInlineSuggestion(Dataset dataset);
 
-        BaseBuilder() {
-        }
+        BaseBuilder() {}
     }
 
     FillResponse(FillWindow fillWindow, List<Dataset> inlineSuggestions, Bundle clientState) {
@@ -101,18 +101,19 @@ public final class FillResponse {
             if ((this.mBuilderFieldsSet & 4) == 0) {
                 this.mClientState = FillResponse.defaultClientState();
             }
-            FillResponse o = new FillResponse(this.mFillWindow, this.mInlineSuggestions, this.mClientState);
+            FillResponse o =
+                    new FillResponse(this.mFillWindow, this.mInlineSuggestions, this.mClientState);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 8) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

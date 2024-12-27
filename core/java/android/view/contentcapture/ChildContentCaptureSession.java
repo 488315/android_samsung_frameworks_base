@@ -6,14 +6,15 @@ import android.graphics.Rect;
 import android.os.IBinder;
 import android.util.SparseArray;
 import android.view.autofill.AutofillId;
-import android.view.contentcapture.ViewNode;
+
 import java.util.ArrayList;
 
 /* loaded from: classes4.dex */
 final class ChildContentCaptureSession extends ContentCaptureSession {
     private final ContentCaptureSession mParent;
 
-    protected ChildContentCaptureSession(ContentCaptureSession parent, ContentCaptureContext clientContext) {
+    protected ChildContentCaptureSession(
+            ContentCaptureSession parent, ContentCaptureContext clientContext) {
         super(clientContext);
         this.mParent = parent;
     }
@@ -61,8 +62,10 @@ final class ChildContentCaptureSession extends ContentCaptureSession {
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession
-    void internalNotifyChildSessionStarted(int parentSessionId, int childSessionId, ContentCaptureContext clientContext) {
-        getMainCaptureSession().internalNotifyChildSessionStarted(parentSessionId, childSessionId, clientContext);
+    void internalNotifyChildSessionStarted(
+            int parentSessionId, int childSessionId, ContentCaptureContext clientContext) {
+        getMainCaptureSession()
+                .internalNotifyChildSessionStarted(parentSessionId, childSessionId, clientContext);
     }
 
     @Override // android.view.contentcapture.ContentCaptureSession

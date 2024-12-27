@@ -6,7 +6,7 @@ import android.app.admin.SecurityLog;
 /* loaded from: classes.dex */
 public abstract class CryptoTestHelper {
     public static void runAndLogSelfTest() {
-        SecurityLog.writeEvent(210031, new Object[]{Integer.valueOf(runSelfTest())});
+        SecurityLog.writeEvent(210031, new Object[] {Integer.valueOf(runSelfTest())});
     }
 
     private static native int runSelfTest();

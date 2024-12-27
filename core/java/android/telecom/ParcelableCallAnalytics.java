@@ -3,6 +3,7 @@ package android.telecom;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,19 +14,22 @@ public class ParcelableCallAnalytics implements Parcelable {
     public static final int CALLTYPE_OUTGOING = 2;
     public static final int CALLTYPE_UNKNOWN = 0;
     public static final int CDMA_PHONE = 1;
-    public static final Parcelable.Creator<ParcelableCallAnalytics> CREATOR = new Parcelable.Creator<ParcelableCallAnalytics>() { // from class: android.telecom.ParcelableCallAnalytics.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableCallAnalytics createFromParcel(Parcel in) {
-            return new ParcelableCallAnalytics(in);
-        }
+    public static final Parcelable.Creator<ParcelableCallAnalytics> CREATOR =
+            new Parcelable.Creator<
+                    ParcelableCallAnalytics>() { // from class:
+                                                 // android.telecom.ParcelableCallAnalytics.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableCallAnalytics createFromParcel(Parcel in) {
+                    return new ParcelableCallAnalytics(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableCallAnalytics[] newArray(int size) {
-            return new ParcelableCallAnalytics[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableCallAnalytics[] newArray(int size) {
+                    return new ParcelableCallAnalytics[size];
+                }
+            };
     public static final int GSM_PHONE = 2;
     public static final int IMS_PHONE = 4;
     public static final long MILLIS_IN_1_SECOND = 1000;
@@ -50,19 +54,22 @@ public class ParcelableCallAnalytics implements Parcelable {
     private List<VideoEvent> videoEvents;
 
     public static final class VideoEvent implements Parcelable {
-        public static final Parcelable.Creator<VideoEvent> CREATOR = new Parcelable.Creator<VideoEvent>() { // from class: android.telecom.ParcelableCallAnalytics.VideoEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public VideoEvent createFromParcel(Parcel in) {
-                return new VideoEvent(in);
-            }
+        public static final Parcelable.Creator<VideoEvent> CREATOR =
+                new Parcelable.Creator<
+                        VideoEvent>() { // from class:
+                                        // android.telecom.ParcelableCallAnalytics.VideoEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public VideoEvent createFromParcel(Parcel in) {
+                        return new VideoEvent(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public VideoEvent[] newArray(int size) {
-                return new VideoEvent[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public VideoEvent[] newArray(int size) {
+                        return new VideoEvent[size];
+                    }
+                };
         public static final int RECEIVE_REMOTE_SESSION_MODIFY_REQUEST = 2;
         public static final int RECEIVE_REMOTE_SESSION_MODIFY_RESPONSE = 3;
         public static final int SEND_LOCAL_SESSION_MODIFY_REQUEST = 0;
@@ -117,19 +124,22 @@ public class ParcelableCallAnalytics implements Parcelable {
         public static final int BLOCK_CHECK_FINISHED = 105;
         public static final int BLOCK_CHECK_INITIATED = 104;
         public static final int CONFERENCE_WITH = 300;
-        public static final Parcelable.Creator<AnalyticsEvent> CREATOR = new Parcelable.Creator<AnalyticsEvent>() { // from class: android.telecom.ParcelableCallAnalytics.AnalyticsEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AnalyticsEvent createFromParcel(Parcel in) {
-                return new AnalyticsEvent(in);
-            }
+        public static final Parcelable.Creator<AnalyticsEvent> CREATOR =
+                new Parcelable.Creator<
+                        AnalyticsEvent>() { // from class:
+                                            // android.telecom.ParcelableCallAnalytics.AnalyticsEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AnalyticsEvent createFromParcel(Parcel in) {
+                        return new AnalyticsEvent(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AnalyticsEvent[] newArray(int size) {
-                return new AnalyticsEvent[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AnalyticsEvent[] newArray(int size) {
+                        return new AnalyticsEvent[size];
+                    }
+                };
         public static final int CS_BOUND = 6;
         public static final int DIRECT_TO_VM_FINISHED = 103;
         public static final int DIRECT_TO_VM_INITIATED = 102;
@@ -197,19 +207,22 @@ public class ParcelableCallAnalytics implements Parcelable {
         public static final int ACCEPT_TIMING = 0;
         public static final int BIND_CS_TIMING = 6;
         public static final int BLOCK_CHECK_FINISHED_TIMING = 9;
-        public static final Parcelable.Creator<EventTiming> CREATOR = new Parcelable.Creator<EventTiming>() { // from class: android.telecom.ParcelableCallAnalytics.EventTiming.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public EventTiming createFromParcel(Parcel in) {
-                return new EventTiming(in);
-            }
+        public static final Parcelable.Creator<EventTiming> CREATOR =
+                new Parcelable.Creator<
+                        EventTiming>() { // from class:
+                                         // android.telecom.ParcelableCallAnalytics.EventTiming.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public EventTiming createFromParcel(Parcel in) {
+                        return new EventTiming(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public EventTiming[] newArray(int size) {
-                return new EventTiming[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public EventTiming[] newArray(int size) {
+                        return new EventTiming[size];
+                    }
+                };
         public static final int DIRECT_TO_VM_FINISHED_TIMING = 8;
         public static final int DISCONNECT_TIMING = 2;
         public static final int DND_PRE_CALL_PRE_CHECK_TIMING = 12;
@@ -255,7 +268,19 @@ public class ParcelableCallAnalytics implements Parcelable {
         }
     }
 
-    public ParcelableCallAnalytics(long startTimeMillis, long callDurationMillis, int callType, boolean isAdditionalCall, boolean isInterrupted, int callTechnologies, int callTerminationCode, boolean isEmergencyCall, String connectionService, boolean isCreatedFromExistingConnection, List<AnalyticsEvent> analyticsEvents, List<EventTiming> eventTimings) {
+    public ParcelableCallAnalytics(
+            long startTimeMillis,
+            long callDurationMillis,
+            int callType,
+            boolean isAdditionalCall,
+            boolean isInterrupted,
+            int callTechnologies,
+            int callTerminationCode,
+            boolean isEmergencyCall,
+            String connectionService,
+            boolean isCreatedFromExistingConnection,
+            List<AnalyticsEvent> analyticsEvents,
+            List<EventTiming> eventTimings) {
         this.isVideoCall = false;
         this.callSource = 0;
         this.startTimeMillis = startTimeMillis;

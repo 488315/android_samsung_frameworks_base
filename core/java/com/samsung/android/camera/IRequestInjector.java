@@ -20,15 +20,19 @@ public interface IRequestInjector extends IInterface {
     public static final int UNIHAL_VIDEO_MODE_OFF = 0;
     public static final int UNIHAL_VIDEO_MODE_SEGMENTATION = 30;
     public static final int UNIHAL_VIDEO_MODE_VDIS = 10;
-    public static final String UNIHAL_VIDEO_SEGMENTATION_BG_IMG_NUM = "samsung.android.unihal.videoSegmentationBgImgNum";
-    public static final String UNIHAL_VIDEO_SEGMENTATION_BLUR_LEVEL = "samsung.android.unihal.videoSegmentationBlurLevel";
-    public static final String UNIHAL_VIDEO_SEGMENTATION_MODE = "samsung.android.unihal.videoSegmentationMode";
+    public static final String UNIHAL_VIDEO_SEGMENTATION_BG_IMG_NUM =
+            "samsung.android.unihal.videoSegmentationBgImgNum";
+    public static final String UNIHAL_VIDEO_SEGMENTATION_BLUR_LEVEL =
+            "samsung.android.unihal.videoSegmentationBlurLevel";
+    public static final String UNIHAL_VIDEO_SEGMENTATION_MODE =
+            "samsung.android.unihal.videoSegmentationMode";
     public static final int UNIHAL_VIDEO_SEGMENTATION_MODE_BACKGROUND = 4;
     public static final int UNIHAL_VIDEO_SEGMENTATION_MODE_BLUR = 3;
     public static final int UNIHAL_VIDEO_SEGMENTATION_MODE_COLOR = 1;
     public static final int UNIHAL_VIDEO_SEGMENTATION_MODE_COLOR_PICKER = 2;
     public static final int UNIHAL_VIDEO_SEGMENTATION_MODE_OFF = 0;
-    public static final String UNIHAL_VIDEO_SEGMENTATION_RGB_VALUE = "samsung.android.unihal.videoSegmentationRgbValue";
+    public static final String UNIHAL_VIDEO_SEGMENTATION_RGB_VALUE =
+            "samsung.android.unihal.videoSegmentationRgbValue";
 
     void applyRequests(PersistableBundle[] persistableBundleArr) throws RemoteException;
 
@@ -40,20 +44,16 @@ public interface IRequestInjector extends IInterface {
 
     public static class Default implements IRequestInjector {
         @Override // com.samsung.android.camera.IRequestInjector
-        public void applyRequests(PersistableBundle[] requests) throws RemoteException {
-        }
+        public void applyRequests(PersistableBundle[] requests) throws RemoteException {}
 
         @Override // com.samsung.android.camera.IRequestInjector
-        public void clearRequests() throws RemoteException {
-        }
+        public void clearRequests() throws RemoteException {}
 
         @Override // com.samsung.android.camera.IRequestInjector
-        public void registerCallback(IBinder callback) throws RemoteException {
-        }
+        public void registerCallback(IBinder callback) throws RemoteException {}
 
         @Override // com.samsung.android.camera.IRequestInjector
-        public void unregisterCallback(IBinder callback) throws RemoteException {
-        }
+        public void unregisterCallback(IBinder callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -61,7 +61,7 @@ public interface IRequestInjector extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRequestInjector {
+    public abstract static class Stub extends Binder implements IRequestInjector {
         static final int TRANSACTION_applyRequests = 1;
         static final int TRANSACTION_clearRequests = 2;
         static final int TRANSACTION_registerCallback = 3;
@@ -108,7 +108,8 @@ public interface IRequestInjector extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRequestInjector.DESCRIPTOR);
             }
@@ -118,7 +119,8 @@ public interface IRequestInjector extends IInterface {
             }
             switch (code) {
                 case 1:
-                    PersistableBundle[] _arg0 = (PersistableBundle[]) data.createTypedArray(PersistableBundle.CREATOR);
+                    PersistableBundle[] _arg0 =
+                            (PersistableBundle[]) data.createTypedArray(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     applyRequests(_arg0);
                     reply.writeNoException();

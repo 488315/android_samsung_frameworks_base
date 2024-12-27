@@ -10,15 +10,15 @@ public class ColorFilter {
     public static native long nativeGetFinalizer();
 
     private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(ColorFilter.class.getClassLoader(), ColorFilter.nativeGetFinalizer());
+        public static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        ColorFilter.class.getClassLoader(), ColorFilter.nativeGetFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     @Deprecated
-    public ColorFilter() {
-    }
+    public ColorFilter() {}
 
     long createNativeInstance() {
         return 0L;

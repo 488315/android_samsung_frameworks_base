@@ -8,7 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Slog;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -40,8 +42,12 @@ public final class ArchivedActivityInfo {
         ArchivedActivityParcel parcel = new ArchivedActivityParcel();
         parcel.title = this.mLabel.toString();
         parcel.originalComponentName = this.mComponentName;
-        parcel.iconBitmap = this.mIcon == null ? null : bytesFromBitmap(drawableToBitmap(this.mIcon));
-        parcel.monochromeIconBitmap = this.mMonochromeIcon != null ? bytesFromBitmap(drawableToBitmap(this.mMonochromeIcon)) : null;
+        parcel.iconBitmap =
+                this.mIcon == null ? null : bytesFromBitmap(drawableToBitmap(this.mIcon));
+        parcel.monochromeIconBitmap =
+                this.mMonochromeIcon != null
+                        ? bytesFromBitmap(drawableToBitmap(this.mMonochromeIcon))
+                        : null;
         return parcel;
     }
 
@@ -57,7 +63,11 @@ public final class ArchivedActivityInfo {
             if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
                 bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
             } else {
-                bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                bitmap =
+                        Bitmap.createBitmap(
+                                drawable.getIntrinsicWidth(),
+                                drawable.getIntrinsicHeight(),
+                                Bitmap.Config.ARGB_8888);
             }
             Canvas canvas = new Canvas(bitmap);
             drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -66,7 +76,10 @@ public final class ArchivedActivityInfo {
         if (iconSize <= 0) {
             return bitmap;
         }
-        if (bitmap.getWidth() < iconSize || bitmap.getHeight() < iconSize || bitmap.getWidth() > iconSize * 2 || bitmap.getHeight() > iconSize * 2) {
+        if (bitmap.getWidth() < iconSize
+                || bitmap.getHeight() < iconSize
+                || bitmap.getWidth() > iconSize * 2
+                || bitmap.getHeight() > iconSize * 2) {
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, iconSize, iconSize, true);
             if (scaledBitmap != bitmap) {
                 bitmap.recycle();
@@ -120,13 +133,15 @@ public final class ArchivedActivityInfo {
 
     public ArchivedActivityInfo setLabel(CharSequence value) {
         this.mLabel = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLabel);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLabel);
         return this;
     }
 
     public ArchivedActivityInfo setComponentName(ComponentName value) {
         this.mComponentName = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mComponentName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mComponentName);
         return this;
     }
 
@@ -141,6 +156,5 @@ public final class ArchivedActivityInfo {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

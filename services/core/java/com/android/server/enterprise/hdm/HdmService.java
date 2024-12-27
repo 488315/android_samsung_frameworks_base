@@ -8,9 +8,11 @@ import android.os.SystemProperties;
 import android.security.KeyStore2;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseServiceCallback;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.hdm.IHdmManager;
@@ -19,6 +21,9 @@ import com.samsung.android.service.DeviceRootKeyService.Tlv;
 import com.samsung.android.wifi.SemWifiManager;
 import com.samsung.security.securekeyblob.SecureKeyGenerator;
 import com.samsung.security.securekeyblob.SecureKeyResult;
+
+import vendor.samsung.hardware.khdm.ISehKhdm;
+
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -26,7 +31,6 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
-import vendor.samsung.hardware.khdm.ISehKhdm;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -49,16 +53,19 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
             if (!file.exists()) {
                 file.mkdir();
             }
-            EnterpriseDeviceManager enterpriseDeviceManager = EnterpriseDeviceManager.getInstance(context);
+            EnterpriseDeviceManager enterpriseDeviceManager =
+                    EnterpriseDeviceManager.getInstance(context);
             hdmSoftwareBlock.edm = enterpriseDeviceManager;
             hdmSoftwareBlock.restrictionPolicy = enterpriseDeviceManager.getRestrictionPolicy();
             hdmSoftwareBlock.supportedFunctionMap = hdmSoftwareBlock.initControlMap();
             int initTargetSubSystems = hdmSoftwareBlock.initTargetSubSystems();
             hdmSoftwareBlock.targetSubSystems = initTargetSubSystems;
             hdmSoftwareBlock.swBlockEnabled = hdmSoftwareBlock.isSwBlockEnabled();
-            SystemProperties.set("sys.hdm.double.protection.subsystem", Integer.toString(initTargetSubSystems));
+            SystemProperties.set(
+                    "sys.hdm.double.protection.subsystem", Integer.toString(initTargetSubSystems));
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "HdmSoftwareBlock failed: ", "HDM - HdmSoftwareBlock");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "HdmSoftwareBlock failed: ", "HDM - HdmSoftwareBlock");
         }
         this.hdmSoftwareBlock = hdmSoftwareBlock;
         this.vendorController = new HdmVendorController();
@@ -91,7 +98,9 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_HDM")));
+        this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(
+                contextInfo,
+                new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_HDM")));
     }
 
     public final byte[] generateHdmKey() {
@@ -101,10 +110,18 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
                 SecureKeyGenerator secureKeyGenerator = new SecureKeyGenerator();
                 secureKeyGenerator.mSamsungSecurekeyGeneratorBinder = null;
                 KeyStore2.getInstance();
-                SecureKeyResult generateKeyPair = secureKeyGenerator.generateKeyPair(HdmSakManager.genKeySpec());
+                SecureKeyResult generateKeyPair =
+                        secureKeyGenerator.generateKeyPair(HdmSakManager.genKeySpec());
                 byte[] bArr2 = generateKeyPair.mServiceKey;
                 X509Certificate[] x509CertificateArr = generateKeyPair.mCertificates;
-                Log.i("HDM - HdmSakManager", "serviceId: " + new String(generateKeyPair.mServiceID) + ", certLen: " + x509CertificateArr.length + ", keyLen: " + bArr2.length);
+                Log.i(
+                        "HDM - HdmSakManager",
+                        "serviceId: "
+                                + new String(generateKeyPair.mServiceID)
+                                + ", certLen: "
+                                + x509CertificateArr.length
+                                + ", keyLen: "
+                                + bArr2.length);
                 return HdmSakManager.constructTLV(x509CertificateArr, bArr2);
             } catch (Exception e) {
                 Log.e("HDM - HdmSakManager", "generateHdmKey failed: " + e, e);
@@ -112,7 +129,8 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
             }
         }
         Log.d("HDM - HdmService", "Generate HDM key");
-        DeviceRootKeyServiceManager deviceRootKeyServiceManager = new DeviceRootKeyServiceManager(this.mContext);
+        DeviceRootKeyServiceManager deviceRootKeyServiceManager =
+                new DeviceRootKeyServiceManager(this.mContext);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             boolean z = false;
@@ -130,7 +148,8 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
                 bArr = deviceRootKeyServiceManager.createServiceKeySession("HDM", 1, (Tlv) null);
             }
         } catch (Exception e2) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "drk request failed: ", "HDM - HdmService");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e2, "drk request failed: ", "HDM - HdmService");
             bArr = null;
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -183,7 +202,11 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
             if (z2 || bArr != null) {
                 Log.d("HDM - HdmService", "HDM TLC call!");
                 long clearCallingIdentity = Binder.clearCallingIdentity();
-                hdmGetId = this.vendorController.hdmGetId(z, str2.getBytes(Charset.defaultCharset()), str.getBytes(Charset.defaultCharset()));
+                hdmGetId =
+                        this.vendorController.hdmGetId(
+                                z,
+                                str2.getBytes(Charset.defaultCharset()),
+                                str.getBytes(Charset.defaultCharset()));
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } else {
                 Log.d("HDM - HdmService", "wrappedKey is null, delete HDM key for a new try");
@@ -213,7 +236,8 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         return null;
     }
 
-    public final synchronized String getHdmPolicy(ContextInfo contextInfo, String str, String str2) {
+    public final synchronized String getHdmPolicy(
+            ContextInfo contextInfo, String str, String str2) {
         Log.d("HDM - HdmService", "getHdmPolicy() on HdmService.java");
         enforceOwnerOnlyHDMPermission(contextInfo);
         return getHdmPolicy(str, str2);
@@ -252,7 +276,11 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
             }
             z = false;
         }
-        byte[] hdmGetPolicy = this.vendorController.hdmGetPolicy(z, str.getBytes(Charset.defaultCharset()), str2.getBytes(Charset.defaultCharset()));
+        byte[] hdmGetPolicy =
+                this.vendorController.hdmGetPolicy(
+                        z,
+                        str.getBytes(Charset.defaultCharset()),
+                        str2.getBytes(Charset.defaultCharset()));
         if (this.vendorController.hdmUnload() != 0) {
             Log.d("HDM - HdmService", "hdm_unload failure");
         }
@@ -273,14 +301,18 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        this.mEDM.enforcePermissionByContext(contextInfo, "com.samsung.android.knox.permission.KNOX_HDM");
+        this.mEDM.enforcePermissionByContext(
+                contextInfo, "com.samsung.android.knox.permission.KNOX_HDM");
         HdmSoftwareBlock hdmSoftwareBlock = this.hdmSoftwareBlock;
         String hdmPolicy = getHdmPolicy(UUID.randomUUID().toString(), "HDMFW");
         hdmSoftwareBlock.getClass();
         try {
-            appliedHdmPolicy = hdmSoftwareBlock.getAppliedHdmPolicy(hdmPolicy.getBytes(StandardCharsets.UTF_8));
+            appliedHdmPolicy =
+                    hdmSoftwareBlock.getAppliedHdmPolicy(
+                            hdmPolicy.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "isNFCBlockedByHDM failed: ", "HDM - HdmSoftwareBlock");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "isNFCBlockedByHDM failed: ", "HDM - HdmSoftwareBlock");
         }
         if ((appliedHdmPolicy & 64) != 0 && (hdmSoftwareBlock.targetSubSystems & 64) != 0) {
             Log.i("HDM - HdmSoftwareBlock", "nfc is blocked: " + appliedHdmPolicy);
@@ -295,37 +327,38 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        this.mEDM.enforcePermissionByContext(contextInfo, "com.samsung.android.knox.permission.KNOX_HDM");
+        this.mEDM.enforcePermissionByContext(
+                contextInfo, "com.samsung.android.knox.permission.KNOX_HDM");
         return this.hdmSoftwareBlock.isSwBlockEnabled();
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminRemoved(int i) {
-    }
+    public final void onAdminRemoved(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onPreAdminRemoval(int i) {
-    }
+    public final void onPreAdminRemoval(int i) {}
 
     public final void releaseDrk() {
         if (HdmSakManager.isSupported(this.mContext)) {
             Log.i("HDM - HdmService", "ignore releaseDrk for sak model");
             return;
         }
-        DeviceRootKeyServiceManager deviceRootKeyServiceManager = new DeviceRootKeyServiceManager(this.mContext);
+        DeviceRootKeyServiceManager deviceRootKeyServiceManager =
+                new DeviceRootKeyServiceManager(this.mContext);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         int releaseServiceKeySession = deviceRootKeyServiceManager.releaseServiceKeySession();
         Binder.restoreCallingIdentity(clearCallingIdentity);
         if (releaseServiceKeySession != 0) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(releaseServiceKeySession, "failure releasing drk service: ", "HDM - HdmService");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    releaseServiceKeySession,
+                    "failure releasing drk service: ",
+                    "HDM - HdmService");
         }
     }
 
@@ -376,12 +409,25 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
                 str3 = "";
             }
             byte[] bytes2 = str3.getBytes(defaultCharset);
-            Log.i("HDM - HdmService", "beforeSoftwareBlockResult: " + this.hdmSoftwareBlock.handleSoftwareBlockBefore(str.getBytes(defaultCharset)));
-            hdmApplyPolicy = this.vendorController.hdmApplyPolicy(str.getBytes(defaultCharset), this.mSerialNumber, bytes, this.mHashImei, bytes2, z);
+            Log.i(
+                    "HDM - HdmService",
+                    "beforeSoftwareBlockResult: "
+                            + this.hdmSoftwareBlock.handleSoftwareBlockBefore(
+                                    str.getBytes(defaultCharset)));
+            hdmApplyPolicy =
+                    this.vendorController.hdmApplyPolicy(
+                            str.getBytes(defaultCharset),
+                            this.mSerialNumber,
+                            bytes,
+                            this.mHashImei,
+                            bytes2,
+                            z);
             HdmSoftwareBlock hdmSoftwareBlock = this.hdmSoftwareBlock;
             hdmSoftwareBlock.getClass();
             try {
-                i = hdmSoftwareBlock.applySwBlock(hdmSoftwareBlock.getAppliedHdmPolicy(hdmApplyPolicy), true);
+                i =
+                        hdmSoftwareBlock.applySwBlock(
+                                hdmSoftwareBlock.getAppliedHdmPolicy(hdmApplyPolicy), true);
             } catch (Exception e) {
                 Log.e("HDM - HdmSoftwareBlock", "handleSoftwareBlockAfter failed: " + e);
                 i = -1;
@@ -418,7 +464,8 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        this.mEDM.enforcePermissionByContext(contextInfo, "com.samsung.android.knox.permission.KNOX_HDM");
+        this.mEDM.enforcePermissionByContext(
+                contextInfo, "com.samsung.android.knox.permission.KNOX_HDM");
         if (this.vendorController.hdmLoad() != 0) {
             Log.d("HDM - HdmService", "hdm_load failure");
             return -1;
@@ -435,7 +482,8 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
 
     public final void setImeis() {
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService("phone");
+        TelephonyManager telephonyManager =
+                (TelephonyManager) this.mContext.getSystemService("phone");
         if (telephonyManager != null) {
             try {
                 if (telephonyManager.getPrimaryImei() != null) {
@@ -461,13 +509,13 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
 
     /* JADX WARN: Can't wrap try/catch for region: R(12:3|(2:4|5)|(7:10|11|12|13|(1:15)(1:35)|16|17)|39|(1:41)(1:43)|42|11|12|13|(0)(0)|16|17) */
     /* JADX WARN: Code restructure failed: missing block: B:36:0x0081, code lost:
-    
-        r3 = move-exception;
-     */
+
+       r3 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0089, code lost:
-    
-        com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(r3, "getHashedUniqueNumber failed: ", "HDM - HdmSakManager");
-     */
+
+       com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(r3, "getHashedUniqueNumber failed: ", "HDM - HdmSakManager");
+    */
     /* JADX WARN: Removed duplicated region for block: B:15:0x007a A[Catch: Exception -> 0x0081, TryCatch #1 {Exception -> 0x0081, blocks: (B:13:0x0074, B:15:0x007a, B:16:0x0084), top: B:12:0x0074 }] */
     /* JADX WARN: Removed duplicated region for block: B:35:0x0083  */
     /* JADX WARN: Removed duplicated region for block: B:52:0x00c5  */
@@ -480,7 +528,9 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
             Method dump skipped, instructions count: 268
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.hdm.HdmService.setNwdInfo():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.hdm.HdmService.setNwdInfo():boolean");
     }
 
     public final synchronized boolean setSwBlock(ContextInfo contextInfo, boolean z) {
@@ -488,7 +538,8 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        this.mEDM.enforcePermissionByContext(contextInfo, "com.samsung.android.knox.permission.KNOX_HDM");
+        this.mEDM.enforcePermissionByContext(
+                contextInfo, "com.samsung.android.knox.permission.KNOX_HDM");
         return this.hdmSoftwareBlock.setSwBlock(z);
     }
 
@@ -503,7 +554,9 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         int callingPid = Binder.getCallingPid();
         Log.d("HDM - HdmService", "getCallerPackageName");
         try {
-            str = ((ActivityManager) this.mContext.getSystemService("activity")).getPackageFromAppProcesses(callingPid);
+            str =
+                    ((ActivityManager) this.mContext.getSystemService("activity"))
+                            .getPackageFromAppProcesses(callingPid);
         } catch (Exception unused) {
             str = null;
         }
@@ -515,7 +568,11 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
         String hdmPolicy = getHdmPolicy(UUID.randomUUID().toString(), "HDMFW");
         hdmSoftwareBlock.getClass();
         try {
-            i = hdmSoftwareBlock.applySwBlock(hdmSoftwareBlock.getAppliedHdmPolicy(hdmPolicy.getBytes(StandardCharsets.UTF_8)), false);
+            i =
+                    hdmSoftwareBlock.applySwBlock(
+                            hdmSoftwareBlock.getAppliedHdmPolicy(
+                                    hdmPolicy.getBytes(StandardCharsets.UTF_8)),
+                            false);
         } catch (Exception e) {
             Log.e("HDM - HdmSoftwareBlock", "syncSwBlockFromBoot failed: " + e);
         }
@@ -523,6 +580,5 @@ public final class HdmService extends IHdmManager.Stub implements EnterpriseServ
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void systemReady() {
-    }
+    public final void systemReady() {}
 }

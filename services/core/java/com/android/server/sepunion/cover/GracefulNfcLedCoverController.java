@@ -14,10 +14,13 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.provider.Settings;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.cover.INfcLedCoverTouchListenerCallback;
 import com.samsung.android.nfc.adapter.SamsungNfcAdapter;
 import com.samsung.android.sepunion.Log;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -62,16 +65,20 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                 default:
                     return;
                 case 2:
-                    GracefulNfcLedCoverController gracefulNfcLedCoverController = GracefulNfcLedCoverController.this;
+                    GracefulNfcLedCoverController gracefulNfcLedCoverController =
+                            GracefulNfcLedCoverController.this;
                     int i = message.arg1;
                     if (!gracefulNfcLedCoverController.mPollingTouchEvents) {
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController.mPollTouchWakeLock);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                gracefulNfcLedCoverController.mPollTouchWakeLock);
                         return;
                     }
                     if (GracefulNfcLedCoverController.TEST > 0) {
                         gracefulNfcLedCoverController.testCount++;
                     }
-                    byte[] buildNfcCoverLedData = GracefulNfcLedCoverController.buildNfcCoverLedData(17, new byte[]{0, 0});
+                    byte[] buildNfcCoverLedData =
+                            GracefulNfcLedCoverController.buildNfcCoverLedData(
+                                    17, new byte[] {0, 0});
                     if (buildNfcCoverLedData == null) {
                         Log.e("CoverManager_GracefulNfcLedCoverController", "Invalid data");
                         return;
@@ -79,16 +86,24 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                     try {
                         if (GracefulNfcLedCoverController.TEST == 0) {
                             long currentTimeMillis = System.currentTimeMillis();
-                            if (currentTimeMillis - gracefulNfcLedCoverController.mLastWcControlResetTime > 30000) {
+                            if (currentTimeMillis
+                                            - gracefulNfcLedCoverController.mLastWcControlResetTime
+                                    > 30000) {
                                 gracefulNfcLedCoverController.mSamsungNfcAdapter.getClass();
                                 SamsungNfcAdapter.setWirelessChargeEnabled(false);
-                                gracefulNfcLedCoverController.mLastWcControlResetTime = currentTimeMillis;
+                                gracefulNfcLedCoverController.mLastWcControlResetTime =
+                                        currentTimeMillis;
                             }
                             gracefulNfcLedCoverController.mSamsungNfcAdapter.getClass();
-                            bArr = SamsungNfcAdapter.transceiveDataWithLedCover(buildNfcCoverLedData);
+                            bArr =
+                                    SamsungNfcAdapter.transceiveDataWithLedCover(
+                                            buildNfcCoverLedData);
                         }
                     } catch (Exception e) {
-                        Log.e("CoverManager_GracefulNfcLedCoverController", "Error sending data to NFC", e);
+                        Log.e(
+                                "CoverManager_GracefulNfcLedCoverController",
+                                "Error sending data to NFC",
+                                e);
                     }
                     int i2 = GracefulNfcLedCoverController.TEST;
                     if (i2 > 0 && gracefulNfcLedCoverController.testCount > 19) {
@@ -101,58 +116,81 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                         } else if (i2 == 1) {
                             bArr[3] = 2;
                         } else {
-                            Log.e("CoverManager_GracefulNfcLedCoverController", "Unknown test value: " + GracefulNfcLedCoverController.TEST + ", reject by default");
+                            Log.e(
+                                    "CoverManager_GracefulNfcLedCoverController",
+                                    "Unknown test value: "
+                                            + GracefulNfcLedCoverController.TEST
+                                            + ", reject by default");
                             bArr[3] = 2;
                         }
                         bArr[4] = -1;
                         bArr[5] = -1;
                     }
-                    NfcLedCoverControllerHandler nfcLedCoverControllerHandler = gracefulNfcLedCoverController.mHandler;
-                    if (bArr == null || bArr.length < 6 || bArr[1] != 17 || !((b = bArr[3]) == 1 || b == 2)) {
-                        Log.d("CoverManager_GracefulNfcLedCoverController", "No touch event from LED cover, keep listening");
+                    NfcLedCoverControllerHandler nfcLedCoverControllerHandler =
+                            gracefulNfcLedCoverController.mHandler;
+                    if (bArr == null
+                            || bArr.length < 6
+                            || bArr[1] != 17
+                            || !((b = bArr[3]) == 1 || b == 2)) {
+                        Log.d(
+                                "CoverManager_GracefulNfcLedCoverController",
+                                "No touch event from LED cover, keep listening");
                         Message obtain = Message.obtain();
                         obtain.what = 2;
                         obtain.arg1 = i;
                         nfcLedCoverControllerHandler.sendMessageDelayed(obtain, 100L);
                         return;
                     }
-                    BaseNfcLedCoverController.acquireWakeLockWithPermission(gracefulNfcLedCoverController.mTouchResponseWakeLock);
+                    BaseNfcLedCoverController.acquireWakeLockWithPermission(
+                            gracefulNfcLedCoverController.mTouchResponseWakeLock);
                     Message obtain2 = Message.obtain();
                     obtain2.what = 3;
                     obtain2.arg1 = i;
                     obtain2.arg2 = bArr[3];
                     nfcLedCoverControllerHandler.sendMessage(obtain2);
                     gracefulNfcLedCoverController.mPollingTouchEvents = false;
-                    BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController.mPollTouchWakeLock);
+                    BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                            gracefulNfcLedCoverController.mPollTouchWakeLock);
                     return;
                 case 3:
-                    GracefulNfcLedCoverController.m882$$Nest$mhandleEventResponse(GracefulNfcLedCoverController.this, message.arg1, message.arg2);
+                    GracefulNfcLedCoverController.m882$$Nest$mhandleEventResponse(
+                            GracefulNfcLedCoverController.this, message.arg1, message.arg2);
                     return;
                 case 4:
                     break;
                 case 6:
-                    GracefulNfcLedCoverController.m884$$Nest$mhandleSendPowerKeyToCover(GracefulNfcLedCoverController.this);
+                    GracefulNfcLedCoverController.m884$$Nest$mhandleSendPowerKeyToCover(
+                            GracefulNfcLedCoverController.this);
                     return;
                 case 7:
                     if (message.arg1 == 1) {
                         return;
                     }
-                    GracefulNfcLedCoverController gracefulNfcLedCoverController2 = GracefulNfcLedCoverController.this;
+                    GracefulNfcLedCoverController gracefulNfcLedCoverController2 =
+                            GracefulNfcLedCoverController.this;
                     gracefulNfcLedCoverController2.getClass();
                     Log.d("CoverManager_GracefulNfcLedCoverController", "handleCoverDetached()");
                     synchronized (gracefulNfcLedCoverController2.mCallTimerLock) {
                         try {
-                            gracefulNfcLedCoverController2.mHandler.removeCallbacksAndMessages(null);
-                            BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController2.mSendLedDataWakeLock);
-                            BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController2.mPollTouchWakeLock);
-                            BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController2.mTouchResponseWakeLock);
+                            gracefulNfcLedCoverController2.mHandler.removeCallbacksAndMessages(
+                                    null);
+                            BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                    gracefulNfcLedCoverController2.mSendLedDataWakeLock);
+                            BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                    gracefulNfcLedCoverController2.mPollTouchWakeLock);
+                            BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                    gracefulNfcLedCoverController2.mTouchResponseWakeLock);
                             gracefulNfcLedCoverController2.mPollingTouchEvents = false;
                             gracefulNfcLedCoverController2.clearRetryCountDelayedMsg();
                             if (gracefulNfcLedCoverController2.mNfcAdapter == null) {
-                                gracefulNfcLedCoverController2.mNfcAdapter = NfcAdapter.getDefaultAdapter(gracefulNfcLedCoverController2.mContext);
+                                gracefulNfcLedCoverController2.mNfcAdapter =
+                                        NfcAdapter.getDefaultAdapter(
+                                                gracefulNfcLedCoverController2.mContext);
                             }
                             if (gracefulNfcLedCoverController2.mNfcAdapter == null) {
-                                Log.e("CoverManager_BaseNfcLedCoverController", "Could not get NfcAdapter");
+                                Log.e(
+                                        "CoverManager_BaseNfcLedCoverController",
+                                        "Could not get NfcAdapter");
                             }
                             if (gracefulNfcLedCoverController2.mNfcAdapter != null) {
                                 gracefulNfcLedCoverController2.stopLedCover();
@@ -163,13 +201,15 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                     }
                     return;
                 case 8:
-                    GracefulNfcLedCoverController gracefulNfcLedCoverController3 = GracefulNfcLedCoverController.this;
+                    GracefulNfcLedCoverController gracefulNfcLedCoverController3 =
+                            GracefulNfcLedCoverController.this;
                     Bundle bundle = (Bundle) message.obj;
                     synchronized (gracefulNfcLedCoverController3.mListeners) {
                         try {
                             Iterator it = gracefulNfcLedCoverController3.mListeners.iterator();
                             while (it.hasNext()) {
-                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
+                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                                        (NfcLedTouchListenerInfo) it.next();
                                 if (nfcLedTouchListenerInfo.type == 4) {
                                     nfcLedTouchListenerInfo.onSystemCoverEvent(2, bundle);
                                 }
@@ -179,13 +219,15 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                     }
                     return;
                 case 9:
-                    GracefulNfcLedCoverController gracefulNfcLedCoverController4 = GracefulNfcLedCoverController.this;
+                    GracefulNfcLedCoverController gracefulNfcLedCoverController4 =
+                            GracefulNfcLedCoverController.this;
                     Bundle bundle2 = (Bundle) message.obj;
                     synchronized (gracefulNfcLedCoverController4.mListeners) {
                         try {
                             Iterator it2 = gracefulNfcLedCoverController4.mListeners.iterator();
                             while (it2.hasNext()) {
-                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 = (NfcLedTouchListenerInfo) it2.next();
+                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 =
+                                        (NfcLedTouchListenerInfo) it2.next();
                                 if (nfcLedTouchListenerInfo2.type == 4) {
                                     nfcLedTouchListenerInfo2.onSystemCoverEvent(3, bundle2);
                                 }
@@ -195,21 +237,30 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                     }
                     return;
                 case 10:
-                    GracefulNfcLedCoverController gracefulNfcLedCoverController5 = GracefulNfcLedCoverController.this;
+                    GracefulNfcLedCoverController gracefulNfcLedCoverController5 =
+                            GracefulNfcLedCoverController.this;
                     if (gracefulNfcLedCoverController5.mFirmwareVersion != null) {
-                        Log.e("CoverManager_GracefulNfcLedCoverController", "Firmware version already retrieved: " + gracefulNfcLedCoverController5.mFirmwareVersion);
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController5.mLedVersionCheckWakeLock);
+                        Log.e(
+                                "CoverManager_GracefulNfcLedCoverController",
+                                "Firmware version already retrieved: "
+                                        + gracefulNfcLedCoverController5.mFirmwareVersion);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                gracefulNfcLedCoverController5.mLedVersionCheckWakeLock);
                         return;
                     }
                     if (gracefulNfcLedCoverController5.mIsLedOn) {
-                        Log.d("CoverManager_GracefulNfcLedCoverController", "Led is on, try checking version later");
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController5.mLedVersionCheckWakeLock);
+                        Log.d(
+                                "CoverManager_GracefulNfcLedCoverController",
+                                "Led is on, try checking version later");
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                gracefulNfcLedCoverController5.mLedVersionCheckWakeLock);
                         return;
                     }
                     gracefulNfcLedCoverController5.mSamsungNfcAdapter.getClass();
                     byte[] startLedCover = SamsungNfcAdapter.startLedCover();
                     boolean z2 = startLedCover != null && startLedCover.length > 1;
-                    NfcLedCoverControllerHandler nfcLedCoverControllerHandler2 = gracefulNfcLedCoverController5.mHandler;
+                    NfcLedCoverControllerHandler nfcLedCoverControllerHandler2 =
+                            gracefulNfcLedCoverController5.mHandler;
                     if (!z2) {
                         gracefulNfcLedCoverController5.mSamsungNfcAdapter.getClass();
                         SamsungNfcAdapter.stopLedCover();
@@ -217,23 +268,46 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                             gracefulNfcLedCoverController5.mSamsungNfcAdapter.getClass();
                             SamsungNfcAdapter.setWirelessChargeEnabled(true);
                         }
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController5.mLedVersionCheckWakeLock);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                gracefulNfcLedCoverController5.mLedVersionCheckWakeLock);
                         return;
                     }
-                    SamsungNfcAdapter samsungNfcAdapter = gracefulNfcLedCoverController5.mSamsungNfcAdapter;
+                    SamsungNfcAdapter samsungNfcAdapter =
+                            gracefulNfcLedCoverController5.mSamsungNfcAdapter;
                     byte[] bArr2 = GracefulNfcLedCoverController.VERSION_CHECK_COMMAND;
                     samsungNfcAdapter.getClass();
-                    byte[] transceiveDataWithLedCover = SamsungNfcAdapter.transceiveDataWithLedCover(bArr2);
-                    Log.d("CoverManager_GracefulNfcLedCoverController", "Verison check response: " + BaseNfcLedCoverController.getByteDataString(transceiveDataWithLedCover));
-                    if (transceiveDataWithLedCover != null && transceiveDataWithLedCover.length >= 7 && transceiveDataWithLedCover[0] == bArr2[5] && transceiveDataWithLedCover[1] == bArr2[6] && transceiveDataWithLedCover[2] == bArr2[7] && transceiveDataWithLedCover[5] == bArr2[10] && transceiveDataWithLedCover[6] == bArr2[11]) {
+                    byte[] transceiveDataWithLedCover =
+                            SamsungNfcAdapter.transceiveDataWithLedCover(bArr2);
+                    Log.d(
+                            "CoverManager_GracefulNfcLedCoverController",
+                            "Verison check response: "
+                                    + BaseNfcLedCoverController.getByteDataString(
+                                            transceiveDataWithLedCover));
+                    if (transceiveDataWithLedCover != null
+                            && transceiveDataWithLedCover.length >= 7
+                            && transceiveDataWithLedCover[0] == bArr2[5]
+                            && transceiveDataWithLedCover[1] == bArr2[6]
+                            && transceiveDataWithLedCover[2] == bArr2[7]
+                            && transceiveDataWithLedCover[5] == bArr2[10]
+                            && transceiveDataWithLedCover[6] == bArr2[11]) {
                         z = true;
                     }
                     if (z) {
-                        gracefulNfcLedCoverController5.mFirmwareVersion = String.format("%02X %02X", Byte.valueOf(transceiveDataWithLedCover[3]), Byte.valueOf(transceiveDataWithLedCover[4]));
+                        gracefulNfcLedCoverController5.mFirmwareVersion =
+                                String.format(
+                                        "%02X %02X",
+                                        Byte.valueOf(transceiveDataWithLedCover[3]),
+                                        Byte.valueOf(transceiveDataWithLedCover[4]));
                     }
                     if (z) {
-                        Log.e("CoverManager_GracefulNfcLedCoverController", "Firmware version retrieved: " + gracefulNfcLedCoverController5.mFirmwareVersion);
-                        Settings.Secure.putString(gracefulNfcLedCoverController5.mContext.getContentResolver(), "led_cover_firmware_version", gracefulNfcLedCoverController5.mFirmwareVersion);
+                        Log.e(
+                                "CoverManager_GracefulNfcLedCoverController",
+                                "Firmware version retrieved: "
+                                        + gracefulNfcLedCoverController5.mFirmwareVersion);
+                        Settings.Secure.putString(
+                                gracefulNfcLedCoverController5.mContext.getContentResolver(),
+                                "led_cover_firmware_version",
+                                gracefulNfcLedCoverController5.mFirmwareVersion);
                     }
                     gracefulNfcLedCoverController5.mSamsungNfcAdapter.getClass();
                     SamsungNfcAdapter.stopLedCover();
@@ -241,16 +315,19 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                         gracefulNfcLedCoverController5.mSamsungNfcAdapter.getClass();
                         SamsungNfcAdapter.setWirelessChargeEnabled(true);
                     }
-                    BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController5.mLedVersionCheckWakeLock);
+                    BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                            gracefulNfcLedCoverController5.mLedVersionCheckWakeLock);
                     return;
                 case 11:
-                    GracefulNfcLedCoverController gracefulNfcLedCoverController6 = GracefulNfcLedCoverController.this;
+                    GracefulNfcLedCoverController gracefulNfcLedCoverController6 =
+                            GracefulNfcLedCoverController.this;
                     Bundle bundle3 = (Bundle) message.obj;
                     synchronized (gracefulNfcLedCoverController6.mListeners) {
                         try {
                             Iterator it3 = gracefulNfcLedCoverController6.mListeners.iterator();
                             while (it3.hasNext()) {
-                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo3 = (NfcLedTouchListenerInfo) it3.next();
+                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo3 =
+                                        (NfcLedTouchListenerInfo) it3.next();
                                 if (nfcLedTouchListenerInfo3.type == 4) {
                                     nfcLedTouchListenerInfo3.onSystemCoverEvent(4, bundle3);
                                 }
@@ -260,11 +337,14 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                     }
                     return;
             }
-            GracefulNfcLedCoverController.m883$$Nest$mhandleSendDataToNfcLedCover(GracefulNfcLedCoverController.this, message.arg1, (byte[]) message.obj);
-            if (GracefulNfcLedCoverController.this.mHandler.hasMessages(0) || GracefulNfcLedCoverController.this.mHandler.hasMessages(4)) {
+            GracefulNfcLedCoverController.m883$$Nest$mhandleSendDataToNfcLedCover(
+                    GracefulNfcLedCoverController.this, message.arg1, (byte[]) message.obj);
+            if (GracefulNfcLedCoverController.this.mHandler.hasMessages(0)
+                    || GracefulNfcLedCoverController.this.mHandler.hasMessages(4)) {
                 return;
             }
-            BaseNfcLedCoverController.releaseWakeLockWithPermission(GracefulNfcLedCoverController.this.mSendLedDataWakeLock);
+            BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                    GracefulNfcLedCoverController.this.mSendLedDataWakeLock);
         }
     }
 
@@ -276,7 +356,8 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
         public final int type;
         public final int uid;
 
-        public NfcLedTouchListenerInfo(IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
+        public NfcLedTouchListenerInfo(
+                IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
             this.token = iBinder;
             this.component = componentName;
             this.pid = i;
@@ -286,7 +367,9 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
-            Log.v("CoverManager_GracefulNfcLedCoverController", "binderDied : binder = " + this.token);
+            Log.v(
+                    "CoverManager_GracefulNfcLedCoverController",
+                    "binderDied : binder = " + this.token);
             synchronized (GracefulNfcLedCoverController.this.mListeners) {
                 GracefulNfcLedCoverController.this.mListeners.remove(this);
             }
@@ -296,43 +379,59 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
         public final void onSystemCoverEvent(int i, Bundle bundle) {
             IBinder iBinder = this.token;
             if (iBinder == null) {
-                Log.w("CoverManager_GracefulNfcLedCoverController", "null listener received TouchReject!");
+                Log.w(
+                        "CoverManager_GracefulNfcLedCoverController",
+                        "null listener received TouchReject!");
                 return;
             }
             try {
-                INfcLedCoverTouchListenerCallback asInterface = INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
+                INfcLedCoverTouchListenerCallback asInterface =
+                        INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
                 if (asInterface != null) {
                     asInterface.onSystemCoverEvent(i, bundle);
                 }
             } catch (RemoteException e) {
-                Log.e("CoverManager_GracefulNfcLedCoverController", "Failed onSystemCoverEvent callback", e);
+                Log.e(
+                        "CoverManager_GracefulNfcLedCoverController",
+                        "Failed onSystemCoverEvent callback",
+                        e);
             }
         }
     }
 
     /* renamed from: -$$Nest$mhandleEventResponse, reason: not valid java name */
-    public static void m882$$Nest$mhandleEventResponse(GracefulNfcLedCoverController gracefulNfcLedCoverController, int i, int i2) {
+    public static void m882$$Nest$mhandleEventResponse(
+            GracefulNfcLedCoverController gracefulNfcLedCoverController, int i, int i2) {
         Iterator it;
         Iterator it2;
         gracefulNfcLedCoverController.getClass();
-        Log.d("CoverManager_GracefulNfcLedCoverController", "HandleEventResponse: type: " + i + " action: " + i2);
+        Log.d(
+                "CoverManager_GracefulNfcLedCoverController",
+                "HandleEventResponse: type: " + i + " action: " + i2);
         if (i2 == 1) {
             Log.d("CoverManager_GracefulNfcLedCoverController", "Event touch: accept");
             synchronized (gracefulNfcLedCoverController.mListeners) {
                 try {
                     it2 = gracefulNfcLedCoverController.mListeners.iterator();
                 } catch (RemoteException e) {
-                    Log.e("CoverManager_GracefulNfcLedCoverController", "Failed onCoverTouchAccept callback", e);
+                    Log.e(
+                            "CoverManager_GracefulNfcLedCoverController",
+                            "Failed onCoverTouchAccept callback",
+                            e);
                 } finally {
                 }
                 while (it2.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it2.next();
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it2.next();
                     if (i == nfcLedTouchListenerInfo.type) {
                         IBinder iBinder = nfcLedTouchListenerInfo.token;
                         if (iBinder == null) {
-                            Log.w("CoverManager_GracefulNfcLedCoverController", "null listener received TouchAccept!");
+                            Log.w(
+                                    "CoverManager_GracefulNfcLedCoverController",
+                                    "null listener received TouchAccept!");
                         } else {
-                            INfcLedCoverTouchListenerCallback asInterface = INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
+                            INfcLedCoverTouchListenerCallback asInterface =
+                                    INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
                             if (asInterface != null) {
                                 asInterface.onCoverTouchAccept();
                             }
@@ -346,17 +445,24 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                 try {
                     it = gracefulNfcLedCoverController.mListeners.iterator();
                 } catch (RemoteException e2) {
-                    Log.e("CoverManager_GracefulNfcLedCoverController", "Failed onCoverTouchReject callback", e2);
+                    Log.e(
+                            "CoverManager_GracefulNfcLedCoverController",
+                            "Failed onCoverTouchReject callback",
+                            e2);
                 } finally {
                 }
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 = (NfcLedTouchListenerInfo) it.next();
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 =
+                            (NfcLedTouchListenerInfo) it.next();
                     if (i == nfcLedTouchListenerInfo2.type) {
                         IBinder iBinder2 = nfcLedTouchListenerInfo2.token;
                         if (iBinder2 == null) {
-                            Log.w("CoverManager_GracefulNfcLedCoverController", "null listener received TouchReject!");
+                            Log.w(
+                                    "CoverManager_GracefulNfcLedCoverController",
+                                    "null listener received TouchReject!");
                         } else {
-                            INfcLedCoverTouchListenerCallback asInterface2 = INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder2);
+                            INfcLedCoverTouchListenerCallback asInterface2 =
+                                    INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder2);
                             if (asInterface2 != null) {
                                 asInterface2.onCoverTouchReject();
                             }
@@ -367,7 +473,8 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
         } else {
             Log.d("CoverManager_GracefulNfcLedCoverController", "Unknown event action: " + i2);
         }
-        BaseNfcLedCoverController.releaseWakeLockWithPermission(gracefulNfcLedCoverController.mTouchResponseWakeLock);
+        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                gracefulNfcLedCoverController.mTouchResponseWakeLock);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:48:0x0157  */
@@ -380,21 +487,29 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m883$$Nest$mhandleSendDataToNfcLedCover(com.android.server.sepunion.cover.GracefulNfcLedCoverController r17, int r18, byte[] r19) {
+    public static void m883$$Nest$mhandleSendDataToNfcLedCover(
+            com.android.server.sepunion.cover.GracefulNfcLedCoverController r17,
+            int r18,
+            byte[] r19) {
         /*
             Method dump skipped, instructions count: 498
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sepunion.cover.GracefulNfcLedCoverController.m883$$Nest$mhandleSendDataToNfcLedCover(com.android.server.sepunion.cover.GracefulNfcLedCoverController, int, byte[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sepunion.cover.GracefulNfcLedCoverController.m883$$Nest$mhandleSendDataToNfcLedCover(com.android.server.sepunion.cover.GracefulNfcLedCoverController,"
+                    + " int, byte[]):void");
     }
 
     /* renamed from: -$$Nest$mhandleSendPowerKeyToCover, reason: not valid java name */
-    public static void m884$$Nest$mhandleSendPowerKeyToCover(GracefulNfcLedCoverController gracefulNfcLedCoverController) {
+    public static void m884$$Nest$mhandleSendPowerKeyToCover(
+            GracefulNfcLedCoverController gracefulNfcLedCoverController) {
         synchronized (gracefulNfcLedCoverController.mListeners) {
             try {
                 Iterator it = gracefulNfcLedCoverController.mListeners.iterator();
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it.next();
                     if (nfcLedTouchListenerInfo.type == 4) {
                         nfcLedTouchListenerInfo.onSystemCoverEvent(1, null);
                     }
@@ -416,13 +531,16 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
         PowerManager.WakeLock newWakeLock = this.mPowerManager.newWakeLock(1, "send leddata");
         this.mSendLedDataWakeLock = newWakeLock;
         newWakeLock.setReferenceCounted(false);
-        PowerManager.WakeLock newWakeLock2 = this.mPowerManager.newWakeLock(1, "pollTouch ledcover");
+        PowerManager.WakeLock newWakeLock2 =
+                this.mPowerManager.newWakeLock(1, "pollTouch ledcover");
         this.mPollTouchWakeLock = newWakeLock2;
         newWakeLock2.setReferenceCounted(false);
-        PowerManager.WakeLock newWakeLock3 = this.mPowerManager.newWakeLock(1, "touchResponse ledcover");
+        PowerManager.WakeLock newWakeLock3 =
+                this.mPowerManager.newWakeLock(1, "touchResponse ledcover");
         this.mTouchResponseWakeLock = newWakeLock3;
         newWakeLock3.setReferenceCounted(false);
-        PowerManager.WakeLock newWakeLock4 = this.mPowerManager.newWakeLock(1, "version check ledcover");
+        PowerManager.WakeLock newWakeLock4 =
+                this.mPowerManager.newWakeLock(1, "version check ledcover");
         this.mLedVersionCheckWakeLock = newWakeLock4;
         newWakeLock4.setReferenceCounted(false);
         TEST = Settings.Secure.getInt(context.getContentResolver(), "nfc_led_cover_test", 0);
@@ -430,10 +548,10 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
 
     public static byte[] buildNfcCoverLedData(int i, byte[] bArr) {
         if (bArr == null) {
-            bArr = new byte[]{0, 0};
+            bArr = new byte[] {0, 0};
         }
         if (bArr.length < 2) {
-            bArr = new byte[]{0, bArr[0]};
+            bArr = new byte[] {0, bArr[0]};
         }
         boolean z = bArr.length > 3;
         int length = bArr.length + 4;
@@ -443,7 +561,12 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
         int i2 = 5 + length;
         byte[] bArr2 = new byte[i2];
         if (i2 < bArr.length + (z ? 5 : 7)) {
-            Log.e("CoverManager_GracefulNfcLedCoverController", "buildNfcCoverLedData : Invalid genData length data.length=" + String.valueOf(bArr.length) + " genData.length=" + String.valueOf(i2));
+            Log.e(
+                    "CoverManager_GracefulNfcLedCoverController",
+                    "buildNfcCoverLedData : Invalid genData length data.length="
+                            + String.valueOf(bArr.length)
+                            + " genData.length="
+                            + String.valueOf(i2));
             return null;
         }
         bArr2[0] = 0;
@@ -496,9 +619,19 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                 printWriter.println("  Live callbacks (" + this.mListeners.size() + "):");
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it.next();
                     if (nfcLedTouchListenerInfo != null) {
-                        printWriter.println("    " + nfcLedTouchListenerInfo.component + " (pid=" + nfcLedTouchListenerInfo.pid + " uid=" + nfcLedTouchListenerInfo.uid + " type=" + nfcLedTouchListenerInfo.type + ")");
+                        printWriter.println(
+                                "    "
+                                        + nfcLedTouchListenerInfo.component
+                                        + " (pid="
+                                        + nfcLedTouchListenerInfo.pid
+                                        + " uid="
+                                        + nfcLedTouchListenerInfo.uid
+                                        + " type="
+                                        + nfcLedTouchListenerInfo.type
+                                        + ")");
                     }
                 }
                 printWriter.println("  ");
@@ -519,12 +652,16 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                     case -78:
                         break;
                     default:
-                        Log.e("CoverManager_GracefulNfcLedCoverController", "Transceive error - unknown error value: " + ((int) bArr2[0]));
+                        Log.e(
+                                "CoverManager_GracefulNfcLedCoverController",
+                                "Transceive error - unknown error value: " + ((int) bArr2[0]));
                         break;
                 }
             }
             if (this.mLedCoverTransceiveRetryCount < 13) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Repeat command ", " count: ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i, "Repeat command ", " count: ");
                 m.append(this.mLedCoverTransceiveRetryCount);
                 Log.e("CoverManager_GracefulNfcLedCoverController", m.toString());
                 this.mIsLedOn = false;
@@ -539,7 +676,9 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
                 return;
             }
             this.mLedCoverTransceiveRetryCount = 0;
-            Log.e("CoverManager_GracefulNfcLedCoverController", "Could not transceive command to cover so turn off led cover");
+            Log.e(
+                    "CoverManager_GracefulNfcLedCoverController",
+                    "Could not transceive command to cover so turn off led cover");
         }
         Log.d("CoverManager_GracefulNfcLedCoverController", "Sent done intent, fail transceive");
         stopLedCover();
@@ -549,22 +688,35 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
     }
 
     @Override // com.android.server.sepunion.cover.BaseNfcLedCoverController
-    public final void registerNfcTouchListenerCallback(int i, IBinder iBinder, ComponentName componentName) {
+    public final void registerNfcTouchListenerCallback(
+            int i, IBinder iBinder, ComponentName componentName) {
         if (i < 0 || i > 5) {
-            Log.e("CoverManager_GracefulNfcLedCoverController", "Unsupported touch listener type: " + i);
+            Log.e(
+                    "CoverManager_GracefulNfcLedCoverController",
+                    "Unsupported touch listener type: " + i);
             return;
         }
         synchronized (this.mListeners) {
             try {
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
-                    if (nfcLedTouchListenerInfo != null && iBinder.equals(nfcLedTouchListenerInfo.token)) {
-                        Log.e("CoverManager_GracefulNfcLedCoverController", "sendDataToNfcLedCover : duplicated listener handle");
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it.next();
+                    if (nfcLedTouchListenerInfo != null
+                            && iBinder.equals(nfcLedTouchListenerInfo.token)) {
+                        Log.e(
+                                "CoverManager_GracefulNfcLedCoverController",
+                                "sendDataToNfcLedCover : duplicated listener handle");
                         return;
                     }
                 }
-                NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 = new NfcLedTouchListenerInfo(iBinder, componentName, Binder.getCallingPid(), Binder.getCallingUid(), i);
+                NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 =
+                        new NfcLedTouchListenerInfo(
+                                iBinder,
+                                componentName,
+                                Binder.getCallingPid(),
+                                Binder.getCallingUid(),
+                                i);
                 iBinder.linkToDeath(nfcLedTouchListenerInfo2, 0);
                 this.mListeners.add(nfcLedTouchListenerInfo2);
             } catch (Throwable th) {
@@ -585,11 +737,15 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
     @Override // com.android.server.sepunion.cover.BaseNfcLedCoverController
     public final void sendDataToNfcLedCover(int i, byte[] bArr) {
         if (!this.mIsLedCoverAttached && !FactoryTest.isFactoryBinary()) {
-            Log.d("CoverManager_GracefulNfcLedCoverController", "sendDataToLedCover : Not attached LED Cover");
+            Log.d(
+                    "CoverManager_GracefulNfcLedCoverController",
+                    "sendDataToLedCover : Not attached LED Cover");
             return;
         }
         if (this.mSamsungNfcAdapter == null && getSamsungNfcAdapter() == null) {
-            Log.d("CoverManager_GracefulNfcLedCoverController", "sendDataToLedCover : Nfc Service not available");
+            Log.d(
+                    "CoverManager_GracefulNfcLedCoverController",
+                    "sendDataToLedCover : Nfc Service not available");
             return;
         }
         BaseNfcLedCoverController.acquireWakeLockWithPermission(this.mSendLedDataWakeLock);
@@ -641,7 +797,9 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
     }
 
     public final boolean tryStartLedCover(Intent intent) {
-        Log.d("CoverManager_GracefulNfcLedCoverController", "Trying to start NFC LED Cover mIsLedOn=" + String.valueOf(this.mIsLedOn));
+        Log.d(
+                "CoverManager_GracefulNfcLedCoverController",
+                "Trying to start NFC LED Cover mIsLedOn=" + String.valueOf(this.mIsLedOn));
         if (this.mIsLedOn) {
             Log.d("CoverManager_GracefulNfcLedCoverController", "NFC LED Cover already started");
         } else {
@@ -654,7 +812,9 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
             byte[] startLedCover = SamsungNfcAdapter.startLedCover();
             intent.putExtra("start_result", startLedCover);
             if (startLedCover == null || startLedCover.length <= 1) {
-                Log.w("CoverManager_GracefulNfcLedCoverController", "Failed to start NFC LED Cover");
+                Log.w(
+                        "CoverManager_GracefulNfcLedCoverController",
+                        "Failed to start NFC LED Cover");
                 return false;
             }
             Log.d("CoverManager_GracefulNfcLedCoverController", "Started NFC LED Cover");
@@ -670,15 +830,21 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
             try {
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
-                    if (nfcLedTouchListenerInfo != null && iBinder.equals(nfcLedTouchListenerInfo.token)) {
-                        Log.e("CoverManager_GracefulNfcLedCoverController", "remove listener: " + nfcLedTouchListenerInfo.pid);
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it.next();
+                    if (nfcLedTouchListenerInfo != null
+                            && iBinder.equals(nfcLedTouchListenerInfo.token)) {
+                        Log.e(
+                                "CoverManager_GracefulNfcLedCoverController",
+                                "remove listener: " + nfcLedTouchListenerInfo.pid);
                         this.mListeners.remove(nfcLedTouchListenerInfo);
                         iBinder.unlinkToDeath(nfcLedTouchListenerInfo, 0);
                         return true;
                     }
                 }
-                Log.e("CoverManager_GracefulNfcLedCoverController", "UnregisterNfcTouchListener: listener does not exist");
+                Log.e(
+                        "CoverManager_GracefulNfcLedCoverController",
+                        "UnregisterNfcTouchListener: listener does not exist");
                 return false;
             } catch (Throwable th) {
                 throw th;
@@ -693,12 +859,15 @@ public final class GracefulNfcLedCoverController extends BaseNfcLedCoverControll
             this.mIsLedCoverAttached = z2;
             NfcLedCoverControllerHandler nfcLedCoverControllerHandler = this.mHandler;
             if (!z2) {
-                Log.d("CoverManager_GracefulNfcLedCoverController", "NfcLedCover detached, start clearing all flags, messages, wakelocks");
+                Log.d(
+                        "CoverManager_GracefulNfcLedCoverController",
+                        "NfcLedCover detached, start clearing all flags, messages, wakelocks");
                 Message obtainMessage = nfcLedCoverControllerHandler.obtainMessage(7);
                 obtainMessage.arg1 = z ? 1 : 0;
                 nfcLedCoverControllerHandler.sendMessageAtFrontOfQueue(obtainMessage);
             } else if (FactoryTest.isFactoryBinary() && getSamsungNfcAdapter() != null) {
-                BaseNfcLedCoverController.acquireWakeLockWithPermission(this.mLedVersionCheckWakeLock);
+                BaseNfcLedCoverController.acquireWakeLockWithPermission(
+                        this.mLedVersionCheckWakeLock);
                 nfcLedCoverControllerHandler.sendEmptyMessage(10);
             }
         }

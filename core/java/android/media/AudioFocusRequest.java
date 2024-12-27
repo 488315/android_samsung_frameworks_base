@@ -1,14 +1,13 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 
 /* loaded from: classes2.dex */
 public final class AudioFocusRequest {
-    private static final AudioAttributes FOCUS_DEFAULT_ATTR = new AudioAttributes.Builder().setUsage(1).build();
+    private static final AudioAttributes FOCUS_DEFAULT_ATTR =
+            new AudioAttributes.Builder().setUsage(1).build();
     public static final String KEY_ACCESSIBILITY_FORCE_FOCUS_DUCKING = "a11y_force_ducking";
     private final AudioAttributes mAttr;
     private final int mFlags;
@@ -16,7 +15,12 @@ public final class AudioFocusRequest {
     private final AudioManager.OnAudioFocusChangeListener mFocusListener;
     private final Handler mListenerHandler;
 
-    private AudioFocusRequest(AudioManager.OnAudioFocusChangeListener listener, Handler handler, AudioAttributes attr, int focusGain, int flags) {
+    private AudioFocusRequest(
+            AudioManager.OnAudioFocusChangeListener listener,
+            Handler handler,
+            AudioAttributes attr,
+            int focusGain,
+            int flags) {
         this.mFocusListener = listener;
         this.mListenerHandler = handler;
         this.mFocusGain = focusGain;
@@ -113,7 +117,8 @@ public final class AudioFocusRequest {
             return this;
         }
 
-        public Builder setOnAudioFocusChangeListener(AudioManager.OnAudioFocusChangeListener listener) {
+        public Builder setOnAudioFocusChangeListener(
+                AudioManager.OnAudioFocusChangeListener listener) {
             if (listener == null) {
                 throw new NullPointerException("Illegal null focus listener");
             }
@@ -122,13 +127,15 @@ public final class AudioFocusRequest {
             return this;
         }
 
-        Builder setOnAudioFocusChangeListenerInt(AudioManager.OnAudioFocusChangeListener listener, Handler handler) {
+        Builder setOnAudioFocusChangeListenerInt(
+                AudioManager.OnAudioFocusChangeListener listener, Handler handler) {
             this.mFocusListener = listener;
             this.mListenerHandler = handler;
             return this;
         }
 
-        public Builder setOnAudioFocusChangeListener(AudioManager.OnAudioFocusChangeListener listener, Handler handler) {
+        public Builder setOnAudioFocusChangeListener(
+                AudioManager.OnAudioFocusChangeListener listener, Handler handler) {
             if (listener == null || handler == null) {
                 throw new NullPointerException("Illegal null focus listener or handler");
             }
@@ -169,7 +176,8 @@ public final class AudioFocusRequest {
         public AudioFocusRequest build() {
             Bundle bundle;
             if ((this.mDelayedFocus || this.mPausesOnDuck) && this.mFocusListener == null) {
-                throw new IllegalStateException("Can't use delayed focus or pause on duck without a listener");
+                throw new IllegalStateException(
+                        "Can't use delayed focus or pause on duck without a listener");
             }
             if (this.mA11yForceDucking) {
                 if (this.mAttr.getBundle() == null) {
@@ -180,7 +188,15 @@ public final class AudioFocusRequest {
                 bundle.putBoolean(AudioFocusRequest.KEY_ACCESSIBILITY_FORCE_FOCUS_DUCKING, true);
                 this.mAttr = new AudioAttributes.Builder(this.mAttr).addBundle(bundle).build();
             }
-            return new AudioFocusRequest(this.mFocusListener, this.mListenerHandler, this.mAttr, this.mFocusGain, (this.mDelayedFocus ? 1 : 0) | 0 | (this.mPausesOnDuck ? 2 : 0) | (this.mFocusLocked ? 4 : 0));
+            return new AudioFocusRequest(
+                    this.mFocusListener,
+                    this.mListenerHandler,
+                    this.mAttr,
+                    this.mFocusGain,
+                    (this.mDelayedFocus ? 1 : 0)
+                            | 0
+                            | (this.mPausesOnDuck ? 2 : 0)
+                            | (this.mFocusLocked ? 4 : 0));
         }
     }
 }

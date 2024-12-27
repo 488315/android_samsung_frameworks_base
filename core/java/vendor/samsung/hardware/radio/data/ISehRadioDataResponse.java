@@ -5,11 +5,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import vendor.samsung.hardware.radio.SehRadioResponseInfo;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioDataResponse extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$data$ISehRadioDataResponse".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$data$ISehRadioDataResponse".replace('$', '.');
     public static final String HASH = "1c18f89373d68cf0030dbdb95f4a9287fe232a2e";
     public static final int VERSION = 1;
 
@@ -19,16 +21,16 @@ public interface ISehRadioDataResponse extends IInterface {
 
     void setDataAllowedResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
 
-    void setMobileDataSettingResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
+    void setMobileDataSettingResponse(SehRadioResponseInfo sehRadioResponseInfo)
+            throws RemoteException;
 
     public static class Default implements ISehRadioDataResponse {
         @Override // vendor.samsung.hardware.radio.data.ISehRadioDataResponse
-        public void setDataAllowedResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setDataAllowedResponse(SehRadioResponseInfo info) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.data.ISehRadioDataResponse
-        public void setMobileDataSettingResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setMobileDataSettingResponse(SehRadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.data.ISehRadioDataResponse
         public int getInterfaceVersion() {
@@ -46,7 +48,7 @@ public interface ISehRadioDataResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioDataResponse {
+    public abstract static class Stub extends Binder implements ISehRadioDataResponse {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_setDataAllowedResponse = 1;
@@ -74,7 +76,8 @@ public interface ISehRadioDataResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -95,12 +98,16 @@ public interface ISehRadioDataResponse extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SehRadioResponseInfo _arg0 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg0 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDataAllowedResponse(_arg0);
                     return true;
                 case 2:
-                    SehRadioResponseInfo _arg02 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg02 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setMobileDataSettingResponse(_arg02);
                     return true;
@@ -135,7 +142,8 @@ public interface ISehRadioDataResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setDataAllowedResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setDataAllowedResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -143,14 +151,16 @@ public interface ISehRadioDataResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataResponse
-            public void setMobileDataSettingResponse(SehRadioResponseInfo info) throws RemoteException {
+            public void setMobileDataSettingResponse(SehRadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setMobileDataSettingResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setMobileDataSettingResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

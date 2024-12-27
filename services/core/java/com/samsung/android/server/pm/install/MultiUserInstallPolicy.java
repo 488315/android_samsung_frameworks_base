@@ -5,6 +5,7 @@ import android.content.pm.UserInfo;
 import android.os.Binder;
 import android.os.Bundle;
 import android.util.Slog;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.internal.pm.pkg.component.ParsedActivity;
 import com.android.internal.pm.pkg.component.ParsedService;
@@ -17,7 +18,9 @@ import com.android.server.pm.PackageManagerService$$ExternalSyntheticLambda68;
 import com.android.server.pm.PackageSetting;
 import com.android.server.pm.UserManagerService;
 import com.android.server.pm.parsing.PackageInfoUtils;
+
 import com.samsung.android.server.pm.MetaDataHelper;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -37,7 +40,15 @@ public final class MultiUserInstallPolicy {
         public final TriConsumer mSetEnabled;
         public final TriConsumer mSetInstalled;
 
-        public PackageSettingsDelegator(PackageManagerService$$ExternalSyntheticLambda55 packageManagerService$$ExternalSyntheticLambda55, PackageManagerService$$ExternalSyntheticLambda68 packageManagerService$$ExternalSyntheticLambda68, PackageManagerService$$ExternalSyntheticLambda68 packageManagerService$$ExternalSyntheticLambda682, PackageManagerService$$ExternalSyntheticLambda68 packageManagerService$$ExternalSyntheticLambda683) {
+        public PackageSettingsDelegator(
+                PackageManagerService$$ExternalSyntheticLambda55
+                        packageManagerService$$ExternalSyntheticLambda55,
+                PackageManagerService$$ExternalSyntheticLambda68
+                        packageManagerService$$ExternalSyntheticLambda68,
+                PackageManagerService$$ExternalSyntheticLambda68
+                        packageManagerService$$ExternalSyntheticLambda682,
+                PackageManagerService$$ExternalSyntheticLambda68
+                        packageManagerService$$ExternalSyntheticLambda683) {
             this.mGetPackagesLocked = packageManagerService$$ExternalSyntheticLambda55;
             this.mSetInstalled = packageManagerService$$ExternalSyntheticLambda68;
             this.mSetEnabled = packageManagerService$$ExternalSyntheticLambda682;
@@ -45,24 +56,39 @@ public final class MultiUserInstallPolicy {
         }
     }
 
-    public MultiUserInstallPolicy(PackageSettingsDelegator packageSettingsDelegator, MetaDataHelper metaDataHelper, UserManagerService userManagerService) {
+    public MultiUserInstallPolicy(
+            PackageSettingsDelegator packageSettingsDelegator,
+            MetaDataHelper metaDataHelper,
+            UserManagerService userManagerService) {
         this.mSettingsDelegator = packageSettingsDelegator;
         this.mMetaDataHelper = metaDataHelper;
         this.mUserManager = userManagerService;
     }
 
-    public static int checkIfInstallAllowed(Bundle bundle, int i, InstallPackageHelper$$ExternalSyntheticLambda8 installPackageHelper$$ExternalSyntheticLambda8) {
+    public static int checkIfInstallAllowed(
+            Bundle bundle,
+            int i,
+            InstallPackageHelper$$ExternalSyntheticLambda8
+                    installPackageHelper$$ExternalSyntheticLambda8) {
         if (i == -1 || i == 0 || bundle == null) {
             return 0;
         }
-        if (MetaDataHelper.isMetaDataInBundle(bundle, "com.samsung.android.multiuser.install_only_owner")) {
+        if (MetaDataHelper.isMetaDataInBundle(
+                bundle, "com.samsung.android.multiuser.install_only_owner")) {
             return 1;
         }
-        UserInfo userInfo = (UserInfo) installPackageHelper$$ExternalSyntheticLambda8.apply(Integer.valueOf(i));
-        return (userInfo != null && userInfo.isGuest() && MetaDataHelper.isMetaDataInBundle(bundle, "com.samsung.android.multiuser.disable_for_guest")) ? 2 : 0;
+        UserInfo userInfo =
+                (UserInfo) installPackageHelper$$ExternalSyntheticLambda8.apply(Integer.valueOf(i));
+        return (userInfo != null
+                        && userInfo.isGuest()
+                        && MetaDataHelper.isMetaDataInBundle(
+                                bundle, "com.samsung.android.multiuser.disable_for_guest"))
+                ? 2
+                : 0;
     }
 
-    public final void applyInstallPolicyPackageInternalLPw(PackageSetting packageSetting, List list, int i) {
+    public final void applyInstallPolicyPackageInternalLPw(
+            PackageSetting packageSetting, List list, int i) {
         ApplicationInfo generateApplicationInfo;
         boolean z;
         boolean z2;
@@ -74,30 +100,64 @@ public final class MultiUserInstallPolicy {
         this.mMetaDataHelper.getClass();
         AndroidPackageInternal androidPackageInternal = packageSetting.pkg;
         ArrayList<String> arrayList = null;
-        Bundle bundle = (androidPackageInternal == null || (generateApplicationInfo = PackageInfoUtils.generateApplicationInfo(androidPackageInternal, 128L, packageSetting.readUserState(-1), -1, packageSetting)) == null) ? null : generateApplicationInfo.metaData;
+        Bundle bundle =
+                (androidPackageInternal == null
+                                || (generateApplicationInfo =
+                                                PackageInfoUtils.generateApplicationInfo(
+                                                        androidPackageInternal,
+                                                        128L,
+                                                        packageSetting.readUserState(-1),
+                                                        -1,
+                                                        packageSetting))
+                                        == null)
+                        ? null
+                        : generateApplicationInfo.metaData;
         PackageSettingsDelegator packageSettingsDelegator = this.mSettingsDelegator;
         if (bundle != null) {
-            z = MetaDataHelper.isMetaDataInBundle(bundle, "com.samsung.android.multiuser.install_only_owner");
-            z3 = MetaDataHelper.isMetaDataInBundle(bundle, "com.samsung.android.multiuser.disable_for_guest");
+            z =
+                    MetaDataHelper.isMetaDataInBundle(
+                            bundle, "com.samsung.android.multiuser.install_only_owner");
+            z3 =
+                    MetaDataHelper.isMetaDataInBundle(
+                            bundle, "com.samsung.android.multiuser.disable_for_guest");
             if (z) {
                 Iterator it = ((ArrayList) list).iterator();
                 while (it.hasNext()) {
                     Integer num = (Integer) it.next();
-                    Slog.i("MultiUserInstallPolicy", "Set package state as uninstalled: " + packageSetting.mName + " for userId: " + num);
+                    Slog.i(
+                            "MultiUserInstallPolicy",
+                            "Set package state as uninstalled: "
+                                    + packageSetting.mName
+                                    + " for userId: "
+                                    + num);
                     num.getClass();
-                    packageSettingsDelegator.mSetInstalled.accept(packageSetting, Boolean.FALSE, num);
+                    packageSettingsDelegator.mSetInstalled.accept(
+                            packageSetting, Boolean.FALSE, num);
                 }
             }
             if (z3 && i > 0) {
-                Slog.i("MultiUserInstallPolicy", "Set package state as uninstalled: " + packageSetting.mName + " for userId: " + i);
-                packageSettingsDelegator.mSetInstalled.accept(packageSetting, Boolean.FALSE, Integer.valueOf(i));
+                Slog.i(
+                        "MultiUserInstallPolicy",
+                        "Set package state as uninstalled: "
+                                + packageSetting.mName
+                                + " for userId: "
+                                + i);
+                packageSettingsDelegator.mSetInstalled.accept(
+                        packageSetting, Boolean.FALSE, Integer.valueOf(i));
             }
-            z2 = MetaDataHelper.isMetaDataInBundle(bundle, "com.samsung.android.multiuser.disable_sub_user");
+            z2 =
+                    MetaDataHelper.isMetaDataInBundle(
+                            bundle, "com.samsung.android.multiuser.disable_sub_user");
             if (z2) {
                 Iterator it2 = ((ArrayList) list).iterator();
                 while (it2.hasNext()) {
                     Integer num2 = (Integer) it2.next();
-                    Slog.i("MultiUserInstallPolicy", "Set package state as disabled: " + packageSetting.mName + " for userId: " + i);
+                    Slog.i(
+                            "MultiUserInstallPolicy",
+                            "Set package state as disabled: "
+                                    + packageSetting.mName
+                                    + " for userId: "
+                                    + i);
                     num2.getClass();
                     packageSettingsDelegator.mSetEnabled.accept(packageSetting, 2, num2);
                 }
@@ -113,20 +173,33 @@ public final class MultiUserInstallPolicy {
         ArrayList arrayList2 = new ArrayList();
         AndroidPackageInternal androidPackageInternal2 = packageSetting.pkg;
         if (androidPackageInternal2 == null) {
-            BootReceiver$$ExternalSyntheticOutline0.m59m(new StringBuilder("Package "), packageSetting.mName, " has not package object", "MultiUserInstallPolicy");
+            BootReceiver$$ExternalSyntheticOutline0.m59m(
+                    new StringBuilder("Package "),
+                    packageSetting.mName,
+                    " has not package object",
+                    "MultiUserInstallPolicy");
         } else {
             for (ParsedActivity parsedActivity : androidPackageInternal2.getActivities()) {
-                if (MetaDataHelper.isMetaDataInBundle(parsedActivity.getMetaData(), "com.samsung.android.multiuser.install_only_owner") && !arrayList2.contains(parsedActivity.getName())) {
+                if (MetaDataHelper.isMetaDataInBundle(
+                                parsedActivity.getMetaData(),
+                                "com.samsung.android.multiuser.install_only_owner")
+                        && !arrayList2.contains(parsedActivity.getName())) {
                     arrayList2.add(parsedActivity.getName());
                 }
             }
             for (ParsedService parsedService : androidPackageInternal2.getServices()) {
-                if (MetaDataHelper.isMetaDataInBundle(parsedService.getMetaData(), "com.samsung.android.multiuser.install_only_owner") && !arrayList2.contains(parsedService.getName())) {
+                if (MetaDataHelper.isMetaDataInBundle(
+                                parsedService.getMetaData(),
+                                "com.samsung.android.multiuser.install_only_owner")
+                        && !arrayList2.contains(parsedService.getName())) {
                     arrayList2.add(parsedService.getName());
                 }
             }
             for (ParsedActivity parsedActivity2 : androidPackageInternal2.getReceivers()) {
-                if (MetaDataHelper.isMetaDataInBundle(parsedActivity2.getMetaData(), "com.samsung.android.multiuser.install_only_owner") && !arrayList2.contains(parsedActivity2.getName())) {
+                if (MetaDataHelper.isMetaDataInBundle(
+                                parsedActivity2.getMetaData(),
+                                "com.samsung.android.multiuser.install_only_owner")
+                        && !arrayList2.contains(parsedActivity2.getName())) {
                     arrayList2.add(parsedActivity2.getName());
                 }
             }
@@ -137,13 +210,16 @@ public final class MultiUserInstallPolicy {
             while (it3.hasNext()) {
                 Integer num3 = (Integer) it3.next();
                 for (String str : arrayList) {
-                    StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Set component state as disabled: ", str, " in pkg: ");
+                    StringBuilder m =
+                            DumpUtils$$ExternalSyntheticOutline0.m(
+                                    "Set component state as disabled: ", str, " in pkg: ");
                     m.append(packageSetting.mName);
                     m.append(" for userId: ");
                     m.append(num3);
                     Slog.i("MultiUserInstallPolicy", m.toString());
                     num3.getClass();
-                    packageSettingsDelegator.mAddDisabledComponent.accept(packageSetting, str, num3);
+                    packageSettingsDelegator.mAddDisabledComponent.accept(
+                            packageSetting, str, num3);
                 }
             }
         }

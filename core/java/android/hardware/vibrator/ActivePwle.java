@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class ActivePwle implements Parcelable {
-    public static final Parcelable.Creator<ActivePwle> CREATOR = new Parcelable.Creator<ActivePwle>() { // from class: android.hardware.vibrator.ActivePwle.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivePwle createFromParcel(Parcel _aidl_source) {
-            ActivePwle _aidl_out = new ActivePwle();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ActivePwle> CREATOR =
+            new Parcelable.Creator<
+                    ActivePwle>() { // from class: android.hardware.vibrator.ActivePwle.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivePwle createFromParcel(Parcel _aidl_source) {
+                    ActivePwle _aidl_out = new ActivePwle();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivePwle[] newArray(int _aidl_size) {
-            return new ActivePwle[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivePwle[] newArray(int _aidl_size) {
+                    return new ActivePwle[_aidl_size];
+                }
+            };
     public float startAmplitude = 0.0f;
     public float startFrequency = 0.0f;
     public float endAmplitude = 0.0f;

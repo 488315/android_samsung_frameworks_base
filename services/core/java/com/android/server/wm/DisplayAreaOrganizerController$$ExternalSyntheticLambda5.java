@@ -3,21 +3,29 @@ package com.android.server.wm;
 import android.view.SurfaceControl;
 import android.window.DisplayAreaAppearedInfo;
 import android.window.IDisplayAreaOrganizer;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
+
 import java.util.List;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class DisplayAreaOrganizerController$$ExternalSyntheticLambda5 implements Consumer {
+public final /* synthetic */ class DisplayAreaOrganizerController$$ExternalSyntheticLambda5
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DisplayAreaOrganizerController f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ List f$2;
     public final /* synthetic */ IDisplayAreaOrganizer f$3;
 
-    public /* synthetic */ DisplayAreaOrganizerController$$ExternalSyntheticLambda5(DisplayAreaOrganizerController displayAreaOrganizerController, int i, List list, IDisplayAreaOrganizer iDisplayAreaOrganizer, int i2) {
+    public /* synthetic */ DisplayAreaOrganizerController$$ExternalSyntheticLambda5(
+            DisplayAreaOrganizerController displayAreaOrganizerController,
+            int i,
+            List list,
+            IDisplayAreaOrganizer iDisplayAreaOrganizer,
+            int i2) {
         this.$r8$classId = i2;
         this.f$0 = displayAreaOrganizerController;
         this.f$1 = i;
@@ -37,7 +45,12 @@ public final /* synthetic */ class DisplayAreaOrganizerController$$ExternalSynth
                 displayAreaOrganizerController.getClass();
                 if (displayArea.mFeatureId == i) {
                     displayArea.setOrganizer(iDisplayAreaOrganizer, true);
-                    list.add(new DisplayAreaAppearedInfo(displayArea.getDisplayAreaInfo(), new SurfaceControl(displayArea.getSurfaceControl(), "DisplayAreaOrganizerController.registerOrganizer")));
+                    list.add(
+                            new DisplayAreaAppearedInfo(
+                                    displayArea.getDisplayAreaInfo(),
+                                    new SurfaceControl(
+                                            displayArea.getSurfaceControl(),
+                                            "DisplayAreaOrganizerController.registerOrganizer")));
                     break;
                 }
                 break;
@@ -50,11 +63,22 @@ public final /* synthetic */ class DisplayAreaOrganizerController$$ExternalSynth
                 displayAreaOrganizerController2.getClass();
                 if (!displayContent.mDisplay.isTrusted()) {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[3]) {
-                        ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -3066370283926570943L, 1, null, Long.valueOf(displayContent.mDisplayId));
+                        ProtoLogImpl_54989576.w(
+                                ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                                -3066370283926570943L,
+                                1,
+                                null,
+                                Long.valueOf(displayContent.mDisplayId));
                         break;
                     }
                 } else {
-                    displayContent.forAllDisplayAreas(new DisplayAreaOrganizerController$$ExternalSyntheticLambda5(displayAreaOrganizerController2, i2, list2, iDisplayAreaOrganizer2, 0));
+                    displayContent.forAllDisplayAreas(
+                            new DisplayAreaOrganizerController$$ExternalSyntheticLambda5(
+                                    displayAreaOrganizerController2,
+                                    i2,
+                                    list2,
+                                    iDisplayAreaOrganizer2,
+                                    0));
                     break;
                 }
                 break;

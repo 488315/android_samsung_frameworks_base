@@ -22,15 +22,7 @@ import android.os.SharedMemory;
 import android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback;
 import android.service.voice.IVisualQueryDetectionVoiceInteractionCallback;
 import android.service.voice.IVoiceInteractionSession;
-import com.android.internal.app.IHotwordRecognitionStatusCallback;
-import com.android.internal.app.IVisualQueryDetectionAttentionListener;
-import com.android.internal.app.IVisualQueryRecognitionStatusListener;
-import com.android.internal.app.IVoiceActionCheckCallback;
-import com.android.internal.app.IVoiceInteractionAccessibilitySettingsListener;
-import com.android.internal.app.IVoiceInteractionSessionListener;
-import com.android.internal.app.IVoiceInteractionSessionShowCallback;
-import com.android.internal.app.IVoiceInteractionSoundTriggerSession;
-import com.android.internal.app.IVoiceInteractor;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -41,17 +33,25 @@ public interface IVoiceInteractionManagerService extends IInterface {
 
     void closeSystemDialogs(IBinder iBinder) throws RemoteException;
 
-    IVoiceInteractionSoundTriggerSession createSoundTriggerSessionAsOriginator(Identity identity, IBinder iBinder, SoundTrigger.ModuleProperties moduleProperties) throws RemoteException;
+    IVoiceInteractionSoundTriggerSession createSoundTriggerSessionAsOriginator(
+            Identity identity, IBinder iBinder, SoundTrigger.ModuleProperties moduleProperties)
+            throws RemoteException;
 
     int deleteKeyphraseSoundModel(int i, String str) throws RemoteException;
 
-    boolean deliverNewSession(IBinder iBinder, IVoiceInteractionSession iVoiceInteractionSession, IVoiceInteractor iVoiceInteractor) throws RemoteException;
+    boolean deliverNewSession(
+            IBinder iBinder,
+            IVoiceInteractionSession iVoiceInteractionSession,
+            IVoiceInteractor iVoiceInteractor)
+            throws RemoteException;
 
     void destroyDetector(IBinder iBinder) throws RemoteException;
 
     void disableVisualQueryDetection() throws RemoteException;
 
-    void enableVisualQueryDetection(IVisualQueryDetectionAttentionListener iVisualQueryDetectionAttentionListener) throws RemoteException;
+    void enableVisualQueryDetection(
+            IVisualQueryDetectionAttentionListener iVisualQueryDetectionAttentionListener)
+            throws RemoteException;
 
     void finish(IBinder iBinder) throws RemoteException;
 
@@ -59,13 +59,16 @@ public interface IVoiceInteractionManagerService extends IInterface {
 
     ComponentName getActiveServiceComponentName() throws RemoteException;
 
-    void getActiveServiceSupportedActions(List<String> list, IVoiceActionCheckCallback iVoiceActionCheckCallback) throws RemoteException;
+    void getActiveServiceSupportedActions(
+            List<String> list, IVoiceActionCheckCallback iVoiceActionCheckCallback)
+            throws RemoteException;
 
     int getDisabledShowContext() throws RemoteException;
 
     KeyphraseMetadata getEnrolledKeyphraseMetadata(String str, String str2) throws RemoteException;
 
-    SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(int i, String str) throws RemoteException;
+    SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(int i, String str)
+            throws RemoteException;
 
     int getUserDisabledShowContext() throws RemoteException;
 
@@ -73,7 +76,14 @@ public interface IVoiceInteractionManagerService extends IInterface {
 
     boolean hideSessionFromSession(IBinder iBinder) throws RemoteException;
 
-    void initAndVerifyDetector(Identity identity, PersistableBundle persistableBundle, SharedMemory sharedMemory, IBinder iBinder, IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback, int i) throws RemoteException;
+    void initAndVerifyDetector(
+            Identity identity,
+            PersistableBundle persistableBundle,
+            SharedMemory sharedMemory,
+            IBinder iBinder,
+            IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback,
+            int i)
+            throws RemoteException;
 
     boolean isEnrolledForKeyphrase(int i, String str) throws RemoteException;
 
@@ -81,19 +91,39 @@ public interface IVoiceInteractionManagerService extends IInterface {
 
     void launchVoiceAssistFromKeyguard() throws RemoteException;
 
-    List<SoundTrigger.ModuleProperties> listModuleProperties(Identity identity) throws RemoteException;
+    List<SoundTrigger.ModuleProperties> listModuleProperties(Identity identity)
+            throws RemoteException;
 
     void notifyActivityEventChanged(IBinder iBinder, int i) throws RemoteException;
 
     void onLockscreenShown() throws RemoteException;
 
-    void performDirectAction(IBinder iBinder, String str, Bundle bundle, int i, IBinder iBinder2, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException;
+    void performDirectAction(
+            IBinder iBinder,
+            String str,
+            Bundle bundle,
+            int i,
+            IBinder iBinder2,
+            RemoteCallback remoteCallback,
+            RemoteCallback remoteCallback2)
+            throws RemoteException;
 
-    void registerAccessibilityDetectionSettingsListener(IVoiceInteractionAccessibilitySettingsListener iVoiceInteractionAccessibilitySettingsListener) throws RemoteException;
+    void registerAccessibilityDetectionSettingsListener(
+            IVoiceInteractionAccessibilitySettingsListener
+                    iVoiceInteractionAccessibilitySettingsListener)
+            throws RemoteException;
 
-    void registerVoiceInteractionSessionListener(IVoiceInteractionSessionListener iVoiceInteractionSessionListener) throws RemoteException;
+    void registerVoiceInteractionSessionListener(
+            IVoiceInteractionSessionListener iVoiceInteractionSessionListener)
+            throws RemoteException;
 
-    void requestDirectActions(IBinder iBinder, int i, IBinder iBinder2, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException;
+    void requestDirectActions(
+            IBinder iBinder,
+            int i,
+            IBinder iBinder2,
+            RemoteCallback remoteCallback,
+            RemoteCallback remoteCallback2)
+            throws RemoteException;
 
     void setDisabled(boolean z) throws RemoteException;
 
@@ -109,23 +139,47 @@ public interface IVoiceInteractionManagerService extends IInterface {
 
     void showSession(Bundle bundle, int i, String str) throws RemoteException;
 
-    boolean showSessionForActiveService(Bundle bundle, int i, String str, IVoiceInteractionSessionShowCallback iVoiceInteractionSessionShowCallback, IBinder iBinder) throws RemoteException;
+    boolean showSessionForActiveService(
+            Bundle bundle,
+            int i,
+            String str,
+            IVoiceInteractionSessionShowCallback iVoiceInteractionSessionShowCallback,
+            IBinder iBinder)
+            throws RemoteException;
 
-    boolean showSessionFromSession(IBinder iBinder, Bundle bundle, int i, String str) throws RemoteException;
+    boolean showSessionFromSession(IBinder iBinder, Bundle bundle, int i, String str)
+            throws RemoteException;
 
     void shutdownHotwordDetectionService() throws RemoteException;
 
-    int startAssistantActivity(IBinder iBinder, Intent intent, String str, String str2, Bundle bundle) throws RemoteException;
+    int startAssistantActivity(
+            IBinder iBinder, Intent intent, String str, String str2, Bundle bundle)
+            throws RemoteException;
 
-    void startListeningFromExternalSource(ParcelFileDescriptor parcelFileDescriptor, AudioFormat audioFormat, PersistableBundle persistableBundle, IBinder iBinder, IMicrophoneHotwordDetectionVoiceInteractionCallback iMicrophoneHotwordDetectionVoiceInteractionCallback) throws RemoteException;
+    void startListeningFromExternalSource(
+            ParcelFileDescriptor parcelFileDescriptor,
+            AudioFormat audioFormat,
+            PersistableBundle persistableBundle,
+            IBinder iBinder,
+            IMicrophoneHotwordDetectionVoiceInteractionCallback
+                    iMicrophoneHotwordDetectionVoiceInteractionCallback)
+            throws RemoteException;
 
-    void startListeningFromMic(AudioFormat audioFormat, IMicrophoneHotwordDetectionVoiceInteractionCallback iMicrophoneHotwordDetectionVoiceInteractionCallback) throws RemoteException;
+    void startListeningFromMic(
+            AudioFormat audioFormat,
+            IMicrophoneHotwordDetectionVoiceInteractionCallback
+                    iMicrophoneHotwordDetectionVoiceInteractionCallback)
+            throws RemoteException;
 
     void startListeningVisibleActivityChanged(IBinder iBinder) throws RemoteException;
 
-    void startPerceiving(IVisualQueryDetectionVoiceInteractionCallback iVisualQueryDetectionVoiceInteractionCallback) throws RemoteException;
+    void startPerceiving(
+            IVisualQueryDetectionVoiceInteractionCallback
+                    iVisualQueryDetectionVoiceInteractionCallback)
+            throws RemoteException;
 
-    int startVoiceActivity(IBinder iBinder, Intent intent, String str, String str2) throws RemoteException;
+    int startVoiceActivity(IBinder iBinder, Intent intent, String str, String str2)
+            throws RemoteException;
 
     void stopListeningFromMic() throws RemoteException;
 
@@ -133,28 +187,43 @@ public interface IVoiceInteractionManagerService extends IInterface {
 
     void stopPerceiving() throws RemoteException;
 
-    void subscribeVisualQueryRecognitionStatus(IVisualQueryRecognitionStatusListener iVisualQueryRecognitionStatusListener) throws RemoteException;
+    void subscribeVisualQueryRecognitionStatus(
+            IVisualQueryRecognitionStatusListener iVisualQueryRecognitionStatusListener)
+            throws RemoteException;
 
-    void triggerHardwareRecognitionEventForTest(SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent, IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback) throws RemoteException;
+    void triggerHardwareRecognitionEventForTest(
+            SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent,
+            IHotwordRecognitionStatusCallback iHotwordRecognitionStatusCallback)
+            throws RemoteException;
 
-    void unregisterAccessibilityDetectionSettingsListener(IVoiceInteractionAccessibilitySettingsListener iVoiceInteractionAccessibilitySettingsListener) throws RemoteException;
+    void unregisterAccessibilityDetectionSettingsListener(
+            IVoiceInteractionAccessibilitySettingsListener
+                    iVoiceInteractionAccessibilitySettingsListener)
+            throws RemoteException;
 
-    int updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel keyphraseSoundModel) throws RemoteException;
+    int updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel keyphraseSoundModel)
+            throws RemoteException;
 
-    void updateState(PersistableBundle persistableBundle, SharedMemory sharedMemory, IBinder iBinder) throws RemoteException;
+    void updateState(
+            PersistableBundle persistableBundle, SharedMemory sharedMemory, IBinder iBinder)
+            throws RemoteException;
 
     public static class Default implements IVoiceInteractionManagerService {
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void showSession(Bundle sessionArgs, int flags, String attributionTag) throws RemoteException {
-        }
+        public void showSession(Bundle sessionArgs, int flags, String attributionTag)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public boolean deliverNewSession(IBinder token, IVoiceInteractionSession session, IVoiceInteractor interactor) throws RemoteException {
+        public boolean deliverNewSession(
+                IBinder token, IVoiceInteractionSession session, IVoiceInteractor interactor)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public boolean showSessionFromSession(IBinder token, Bundle sessionArgs, int flags, String attributionTag) throws RemoteException {
+        public boolean showSessionFromSession(
+                IBinder token, Bundle sessionArgs, int flags, String attributionTag)
+                throws RemoteException {
             return false;
         }
 
@@ -164,30 +233,34 @@ public interface IVoiceInteractionManagerService extends IInterface {
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public int startVoiceActivity(IBinder token, Intent intent, String resolvedType, String attributionTag) throws RemoteException {
+        public int startVoiceActivity(
+                IBinder token, Intent intent, String resolvedType, String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public int startAssistantActivity(IBinder token, Intent intent, String resolvedType, String attributionTag, Bundle bundle) throws RemoteException {
+        public int startAssistantActivity(
+                IBinder token,
+                Intent intent,
+                String resolvedType,
+                String attributionTag,
+                Bundle bundle)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void setKeepAwake(IBinder token, boolean keepAwake) throws RemoteException {
-        }
+        public void setKeepAwake(IBinder token, boolean keepAwake) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void closeSystemDialogs(IBinder token) throws RemoteException {
-        }
+        public void closeSystemDialogs(IBinder token) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void finish(IBinder token) throws RemoteException {
-        }
+        public void finish(IBinder token) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void setDisabledShowContext(int flags) throws RemoteException {
-        }
+        public void setDisabledShowContext(int flags) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
         public int getDisabledShowContext() throws RemoteException {
@@ -200,31 +273,36 @@ public interface IVoiceInteractionManagerService extends IInterface {
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(int keyphraseId, String bcp47Locale) throws RemoteException {
+        public SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(
+                int keyphraseId, String bcp47Locale) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public int updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel model) throws RemoteException {
+        public int updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel model)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public int deleteKeyphraseSoundModel(int keyphraseId, String bcp47Locale) throws RemoteException {
+        public int deleteKeyphraseSoundModel(int keyphraseId, String bcp47Locale)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void setModelDatabaseForTestEnabled(boolean enabled, IBinder token) throws RemoteException {
-        }
+        public void setModelDatabaseForTestEnabled(boolean enabled, IBinder token)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public boolean isEnrolledForKeyphrase(int keyphraseId, String bcp47Locale) throws RemoteException {
+        public boolean isEnrolledForKeyphrase(int keyphraseId, String bcp47Locale)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public KeyphraseMetadata getEnrolledKeyphraseMetadata(String keyphrase, String bcp47Locale) throws RemoteException {
+        public KeyphraseMetadata getEnrolledKeyphraseMetadata(String keyphrase, String bcp47Locale)
+                throws RemoteException {
             return null;
         }
 
@@ -234,17 +312,21 @@ public interface IVoiceInteractionManagerService extends IInterface {
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public boolean showSessionForActiveService(Bundle args, int sourceFlags, String attributionTag, IVoiceInteractionSessionShowCallback showCallback, IBinder activityToken) throws RemoteException {
+        public boolean showSessionForActiveService(
+                Bundle args,
+                int sourceFlags,
+                String attributionTag,
+                IVoiceInteractionSessionShowCallback showCallback,
+                IBinder activityToken)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void hideCurrentSession() throws RemoteException {
-        }
+        public void hideCurrentSession() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void launchVoiceAssistFromKeyguard() throws RemoteException {
-        }
+        public void launchVoiceAssistFromKeyguard() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
         public boolean isSessionRunning() throws RemoteException {
@@ -262,110 +344,133 @@ public interface IVoiceInteractionManagerService extends IInterface {
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void onLockscreenShown() throws RemoteException {
-        }
+        public void onLockscreenShown() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void registerVoiceInteractionSessionListener(IVoiceInteractionSessionListener listener) throws RemoteException {
-        }
+        public void registerVoiceInteractionSessionListener(
+                IVoiceInteractionSessionListener listener) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void getActiveServiceSupportedActions(List<String> voiceActions, IVoiceActionCheckCallback callback) throws RemoteException {
-        }
+        public void getActiveServiceSupportedActions(
+                List<String> voiceActions, IVoiceActionCheckCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void setUiHints(Bundle hints) throws RemoteException {
-        }
+        public void setUiHints(Bundle hints) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void requestDirectActions(IBinder token, int taskId, IBinder assistToken, RemoteCallback cancellationCallback, RemoteCallback callback) throws RemoteException {
-        }
+        public void requestDirectActions(
+                IBinder token,
+                int taskId,
+                IBinder assistToken,
+                RemoteCallback cancellationCallback,
+                RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void performDirectAction(IBinder token, String actionId, Bundle arguments, int taskId, IBinder assistToken, RemoteCallback cancellationCallback, RemoteCallback resultCallback) throws RemoteException {
-        }
+        public void performDirectAction(
+                IBinder token,
+                String actionId,
+                Bundle arguments,
+                int taskId,
+                IBinder assistToken,
+                RemoteCallback cancellationCallback,
+                RemoteCallback resultCallback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void setDisabled(boolean disabled) throws RemoteException {
-        }
+        public void setDisabled(boolean disabled) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public IVoiceInteractionSoundTriggerSession createSoundTriggerSessionAsOriginator(Identity originatorIdentity, IBinder client, SoundTrigger.ModuleProperties moduleProperties) throws RemoteException {
+        public IVoiceInteractionSoundTriggerSession createSoundTriggerSessionAsOriginator(
+                Identity originatorIdentity,
+                IBinder client,
+                SoundTrigger.ModuleProperties moduleProperties)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public List<SoundTrigger.ModuleProperties> listModuleProperties(Identity originatorIdentity) throws RemoteException {
+        public List<SoundTrigger.ModuleProperties> listModuleProperties(Identity originatorIdentity)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void updateState(PersistableBundle options, SharedMemory sharedMemory, IBinder token) throws RemoteException {
-        }
+        public void updateState(PersistableBundle options, SharedMemory sharedMemory, IBinder token)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void initAndVerifyDetector(Identity originatorIdentity, PersistableBundle options, SharedMemory sharedMemory, IBinder token, IHotwordRecognitionStatusCallback callback, int detectorType) throws RemoteException {
-        }
+        public void initAndVerifyDetector(
+                Identity originatorIdentity,
+                PersistableBundle options,
+                SharedMemory sharedMemory,
+                IBinder token,
+                IHotwordRecognitionStatusCallback callback,
+                int detectorType)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void destroyDetector(IBinder token) throws RemoteException {
-        }
+        public void destroyDetector(IBinder token) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void shutdownHotwordDetectionService() throws RemoteException {
-        }
+        public void shutdownHotwordDetectionService() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void subscribeVisualQueryRecognitionStatus(IVisualQueryRecognitionStatusListener listener) throws RemoteException {
-        }
+        public void subscribeVisualQueryRecognitionStatus(
+                IVisualQueryRecognitionStatusListener listener) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void enableVisualQueryDetection(IVisualQueryDetectionAttentionListener Listener) throws RemoteException {
-        }
+        public void enableVisualQueryDetection(IVisualQueryDetectionAttentionListener Listener)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void disableVisualQueryDetection() throws RemoteException {
-        }
+        public void disableVisualQueryDetection() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void startPerceiving(IVisualQueryDetectionVoiceInteractionCallback callback) throws RemoteException {
-        }
+        public void startPerceiving(IVisualQueryDetectionVoiceInteractionCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void stopPerceiving() throws RemoteException {
-        }
+        public void stopPerceiving() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void startListeningFromMic(AudioFormat audioFormat, IMicrophoneHotwordDetectionVoiceInteractionCallback callback) throws RemoteException {
-        }
+        public void startListeningFromMic(
+                AudioFormat audioFormat,
+                IMicrophoneHotwordDetectionVoiceInteractionCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void stopListeningFromMic() throws RemoteException {
-        }
+        public void stopListeningFromMic() throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void startListeningFromExternalSource(ParcelFileDescriptor audioStream, AudioFormat audioFormat, PersistableBundle options, IBinder token, IMicrophoneHotwordDetectionVoiceInteractionCallback callback) throws RemoteException {
-        }
+        public void startListeningFromExternalSource(
+                ParcelFileDescriptor audioStream,
+                AudioFormat audioFormat,
+                PersistableBundle options,
+                IBinder token,
+                IMicrophoneHotwordDetectionVoiceInteractionCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void triggerHardwareRecognitionEventForTest(SoundTrigger.KeyphraseRecognitionEvent event, IHotwordRecognitionStatusCallback callback) throws RemoteException {
-        }
+        public void triggerHardwareRecognitionEventForTest(
+                SoundTrigger.KeyphraseRecognitionEvent event,
+                IHotwordRecognitionStatusCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void startListeningVisibleActivityChanged(IBinder token) throws RemoteException {
-        }
+        public void startListeningVisibleActivityChanged(IBinder token) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void stopListeningVisibleActivityChanged(IBinder token) throws RemoteException {
-        }
+        public void stopListeningVisibleActivityChanged(IBinder token) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void setSessionWindowVisible(IBinder token, boolean visible) throws RemoteException {
-        }
+        public void setSessionWindowVisible(IBinder token, boolean visible)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void notifyActivityEventChanged(IBinder activityToken, int type) throws RemoteException {
-        }
+        public void notifyActivityEventChanged(IBinder activityToken, int type)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
         public boolean getAccessibilityDetectionEnabled() throws RemoteException {
@@ -373,12 +478,12 @@ public interface IVoiceInteractionManagerService extends IInterface {
         }
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void registerAccessibilityDetectionSettingsListener(IVoiceInteractionAccessibilitySettingsListener listener) throws RemoteException {
-        }
+        public void registerAccessibilityDetectionSettingsListener(
+                IVoiceInteractionAccessibilitySettingsListener listener) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractionManagerService
-        public void unregisterAccessibilityDetectionSettingsListener(IVoiceInteractionAccessibilitySettingsListener listener) throws RemoteException {
-        }
+        public void unregisterAccessibilityDetectionSettingsListener(
+                IVoiceInteractionAccessibilitySettingsListener listener) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -386,8 +491,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractionManagerService {
-        public static final String DESCRIPTOR = "com.android.internal.app.IVoiceInteractionManagerService";
+    public abstract static class Stub extends Binder implements IVoiceInteractionManagerService {
+        public static final String DESCRIPTOR =
+                "com.android.internal.app.IVoiceInteractionManagerService";
         static final int TRANSACTION_activeServiceSupportsAssist = 24;
         static final int TRANSACTION_activeServiceSupportsLaunchFromKeyguard = 25;
         static final int TRANSACTION_closeSystemDialogs = 8;
@@ -454,7 +560,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IVoiceInteractionManagerService asInterface(IBinder obj) {
@@ -594,7 +702,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -613,8 +722,10 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     return true;
                 case 2:
                     IBinder _arg02 = data.readStrongBinder();
-                    IVoiceInteractionSession _arg12 = IVoiceInteractionSession.Stub.asInterface(data.readStrongBinder());
-                    IVoiceInteractor _arg22 = IVoiceInteractor.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractionSession _arg12 =
+                            IVoiceInteractionSession.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractor _arg22 =
+                            IVoiceInteractor.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result = deliverNewSession(_arg02, _arg12, _arg22);
                     reply.writeNoException();
@@ -697,12 +808,15 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     int _arg011 = data.readInt();
                     String _arg17 = data.readString();
                     data.enforceNoDataAvail();
-                    SoundTrigger.KeyphraseSoundModel _result8 = getKeyphraseSoundModel(_arg011, _arg17);
+                    SoundTrigger.KeyphraseSoundModel _result8 =
+                            getKeyphraseSoundModel(_arg011, _arg17);
                     reply.writeNoException();
                     reply.writeTypedObject(_result8, 1);
                     return true;
                 case 14:
-                    SoundTrigger.KeyphraseSoundModel _arg012 = (SoundTrigger.KeyphraseSoundModel) data.readTypedObject(SoundTrigger.KeyphraseSoundModel.CREATOR);
+                    SoundTrigger.KeyphraseSoundModel _arg012 =
+                            (SoundTrigger.KeyphraseSoundModel)
+                                    data.readTypedObject(SoundTrigger.KeyphraseSoundModel.CREATOR);
                     data.enforceNoDataAvail();
                     int _result9 = updateKeyphraseSoundModel(_arg012);
                     reply.writeNoException();
@@ -748,10 +862,13 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     Bundle _arg017 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg112 = data.readInt();
                     String _arg26 = data.readString();
-                    IVoiceInteractionSessionShowCallback _arg34 = IVoiceInteractionSessionShowCallback.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractionSessionShowCallback _arg34 =
+                            IVoiceInteractionSessionShowCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     IBinder _arg42 = data.readStrongBinder();
                     data.enforceNoDataAvail();
-                    boolean _result14 = showSessionForActiveService(_arg017, _arg112, _arg26, _arg34, _arg42);
+                    boolean _result14 =
+                            showSessionForActiveService(_arg017, _arg112, _arg26, _arg34, _arg42);
                     reply.writeNoException();
                     reply.writeBoolean(_result14);
                     return true;
@@ -783,14 +900,17 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 27:
-                    IVoiceInteractionSessionListener _arg018 = IVoiceInteractionSessionListener.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractionSessionListener _arg018 =
+                            IVoiceInteractionSessionListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerVoiceInteractionSessionListener(_arg018);
                     reply.writeNoException();
                     return true;
                 case 28:
                     List<String> _arg019 = data.createStringArrayList();
-                    IVoiceActionCheckCallback _arg113 = IVoiceActionCheckCallback.Stub.asInterface(data.readStrongBinder());
+                    IVoiceActionCheckCallback _arg113 =
+                            IVoiceActionCheckCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getActiveServiceSupportedActions(_arg019, _arg113);
                     reply.writeNoException();
@@ -805,8 +925,10 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     IBinder _arg021 = data.readStrongBinder();
                     int _arg114 = data.readInt();
                     IBinder _arg27 = data.readStrongBinder();
-                    RemoteCallback _arg35 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
-                    RemoteCallback _arg43 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg35 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg43 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     requestDirectActions(_arg021, _arg114, _arg27, _arg35, _arg43);
                     reply.writeNoException();
@@ -817,8 +939,10 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     Bundle _arg28 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg36 = data.readInt();
                     IBinder _arg44 = data.readStrongBinder();
-                    RemoteCallback _arg5 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
-                    RemoteCallback _arg6 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg5 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg6 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     performDirectAction(_arg022, _arg115, _arg28, _arg36, _arg44, _arg5, _arg6);
                     reply.writeNoException();
@@ -832,9 +956,12 @@ public interface IVoiceInteractionManagerService extends IInterface {
                 case 33:
                     Identity _arg024 = (Identity) data.readTypedObject(Identity.CREATOR);
                     IBinder _arg116 = data.readStrongBinder();
-                    SoundTrigger.ModuleProperties _arg29 = (SoundTrigger.ModuleProperties) data.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
+                    SoundTrigger.ModuleProperties _arg29 =
+                            (SoundTrigger.ModuleProperties)
+                                    data.readTypedObject(SoundTrigger.ModuleProperties.CREATOR);
                     data.enforceNoDataAvail();
-                    IVoiceInteractionSoundTriggerSession _result18 = createSoundTriggerSessionAsOriginator(_arg024, _arg116, _arg29);
+                    IVoiceInteractionSoundTriggerSession _result18 =
+                            createSoundTriggerSessionAsOriginator(_arg024, _arg116, _arg29);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result18);
                     return true;
@@ -846,8 +973,10 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     reply.writeTypedList(_result19, 1);
                     return true;
                 case 35:
-                    PersistableBundle _arg026 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
-                    SharedMemory _arg117 = (SharedMemory) data.readTypedObject(SharedMemory.CREATOR);
+                    PersistableBundle _arg026 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    SharedMemory _arg117 =
+                            (SharedMemory) data.readTypedObject(SharedMemory.CREATOR);
                     IBinder _arg210 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     updateState(_arg026, _arg117, _arg210);
@@ -855,10 +984,14 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     return true;
                 case 36:
                     Identity _arg027 = (Identity) data.readTypedObject(Identity.CREATOR);
-                    PersistableBundle _arg118 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
-                    SharedMemory _arg211 = (SharedMemory) data.readTypedObject(SharedMemory.CREATOR);
+                    PersistableBundle _arg118 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    SharedMemory _arg211 =
+                            (SharedMemory) data.readTypedObject(SharedMemory.CREATOR);
                     IBinder _arg37 = data.readStrongBinder();
-                    IHotwordRecognitionStatusCallback _arg45 = IHotwordRecognitionStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IHotwordRecognitionStatusCallback _arg45 =
+                            IHotwordRecognitionStatusCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg52 = data.readInt();
                     data.enforceNoDataAvail();
                     initAndVerifyDetector(_arg027, _arg118, _arg211, _arg37, _arg45, _arg52);
@@ -875,13 +1008,17 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 39:
-                    IVisualQueryRecognitionStatusListener _arg029 = IVisualQueryRecognitionStatusListener.Stub.asInterface(data.readStrongBinder());
+                    IVisualQueryRecognitionStatusListener _arg029 =
+                            IVisualQueryRecognitionStatusListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     subscribeVisualQueryRecognitionStatus(_arg029);
                     reply.writeNoException();
                     return true;
                 case 40:
-                    IVisualQueryDetectionAttentionListener _arg030 = IVisualQueryDetectionAttentionListener.Stub.asInterface(data.readStrongBinder());
+                    IVisualQueryDetectionAttentionListener _arg030 =
+                            IVisualQueryDetectionAttentionListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     enableVisualQueryDetection(_arg030);
                     reply.writeNoException();
@@ -891,7 +1028,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 42:
-                    IVisualQueryDetectionVoiceInteractionCallback _arg031 = IVisualQueryDetectionVoiceInteractionCallback.Stub.asInterface(data.readStrongBinder());
+                    IVisualQueryDetectionVoiceInteractionCallback _arg031 =
+                            IVisualQueryDetectionVoiceInteractionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startPerceiving(_arg031);
                     reply.writeNoException();
@@ -902,7 +1041,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     return true;
                 case 44:
                     AudioFormat _arg032 = (AudioFormat) data.readTypedObject(AudioFormat.CREATOR);
-                    IMicrophoneHotwordDetectionVoiceInteractionCallback _arg119 = IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMicrophoneHotwordDetectionVoiceInteractionCallback _arg119 =
+                            IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startListeningFromMic(_arg032, _arg119);
                     reply.writeNoException();
@@ -912,18 +1053,28 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 46:
-                    ParcelFileDescriptor _arg033 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg033 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     AudioFormat _arg120 = (AudioFormat) data.readTypedObject(AudioFormat.CREATOR);
-                    PersistableBundle _arg212 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg212 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     IBinder _arg38 = data.readStrongBinder();
-                    IMicrophoneHotwordDetectionVoiceInteractionCallback _arg46 = IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMicrophoneHotwordDetectionVoiceInteractionCallback _arg46 =
+                            IMicrophoneHotwordDetectionVoiceInteractionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startListeningFromExternalSource(_arg033, _arg120, _arg212, _arg38, _arg46);
                     reply.writeNoException();
                     return true;
                 case 47:
-                    SoundTrigger.KeyphraseRecognitionEvent _arg034 = (SoundTrigger.KeyphraseRecognitionEvent) data.readTypedObject(SoundTrigger.KeyphraseRecognitionEvent.CREATOR);
-                    IHotwordRecognitionStatusCallback _arg121 = IHotwordRecognitionStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    SoundTrigger.KeyphraseRecognitionEvent _arg034 =
+                            (SoundTrigger.KeyphraseRecognitionEvent)
+                                    data.readTypedObject(
+                                            SoundTrigger.KeyphraseRecognitionEvent.CREATOR);
+                    IHotwordRecognitionStatusCallback _arg121 =
+                            IHotwordRecognitionStatusCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     triggerHardwareRecognitionEventForTest(_arg034, _arg121);
                     reply.writeNoException();
@@ -959,12 +1110,16 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     reply.writeBoolean(_result20);
                     return true;
                 case 53:
-                    IVoiceInteractionAccessibilitySettingsListener _arg039 = IVoiceInteractionAccessibilitySettingsListener.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractionAccessibilitySettingsListener _arg039 =
+                            IVoiceInteractionAccessibilitySettingsListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerAccessibilityDetectionSettingsListener(_arg039);
                     return true;
                 case 54:
-                    IVoiceInteractionAccessibilitySettingsListener _arg040 = IVoiceInteractionAccessibilitySettingsListener.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractionAccessibilitySettingsListener _arg040 =
+                            IVoiceInteractionAccessibilitySettingsListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAccessibilityDetectionSettingsListener(_arg040);
                     return true;
@@ -990,7 +1145,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void showSession(Bundle sessionArgs, int flags, String attributionTag) throws RemoteException {
+            public void showSession(Bundle sessionArgs, int flags, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1007,7 +1163,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public boolean deliverNewSession(IBinder token, IVoiceInteractionSession session, IVoiceInteractor interactor) throws RemoteException {
+            public boolean deliverNewSession(
+                    IBinder token, IVoiceInteractionSession session, IVoiceInteractor interactor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1026,7 +1184,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public boolean showSessionFromSession(IBinder token, Bundle sessionArgs, int flags, String attributionTag) throws RemoteException {
+            public boolean showSessionFromSession(
+                    IBinder token, Bundle sessionArgs, int flags, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1063,7 +1223,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public int startVoiceActivity(IBinder token, Intent intent, String resolvedType, String attributionTag) throws RemoteException {
+            public int startVoiceActivity(
+                    IBinder token, Intent intent, String resolvedType, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1083,7 +1245,13 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public int startAssistantActivity(IBinder token, Intent intent, String resolvedType, String attributionTag, Bundle bundle) throws RemoteException {
+            public int startAssistantActivity(
+                    IBinder token,
+                    Intent intent,
+                    String resolvedType,
+                    String attributionTag,
+                    Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1197,7 +1365,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(int keyphraseId, String bcp47Locale) throws RemoteException {
+            public SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(
+                    int keyphraseId, String bcp47Locale) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1206,7 +1375,10 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     _data.writeString(bcp47Locale);
                     this.mRemote.transact(13, _data, _reply, 0);
                     _reply.readException();
-                    SoundTrigger.KeyphraseSoundModel _result = (SoundTrigger.KeyphraseSoundModel) _reply.readTypedObject(SoundTrigger.KeyphraseSoundModel.CREATOR);
+                    SoundTrigger.KeyphraseSoundModel _result =
+                            (SoundTrigger.KeyphraseSoundModel)
+                                    _reply.readTypedObject(
+                                            SoundTrigger.KeyphraseSoundModel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1215,7 +1387,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public int updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel model) throws RemoteException {
+            public int updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel model)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1232,7 +1405,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public int deleteKeyphraseSoundModel(int keyphraseId, String bcp47Locale) throws RemoteException {
+            public int deleteKeyphraseSoundModel(int keyphraseId, String bcp47Locale)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1250,7 +1424,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void setModelDatabaseForTestEnabled(boolean enabled, IBinder token) throws RemoteException {
+            public void setModelDatabaseForTestEnabled(boolean enabled, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1266,7 +1441,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public boolean isEnrolledForKeyphrase(int keyphraseId, String bcp47Locale) throws RemoteException {
+            public boolean isEnrolledForKeyphrase(int keyphraseId, String bcp47Locale)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1284,7 +1460,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public KeyphraseMetadata getEnrolledKeyphraseMetadata(String keyphrase, String bcp47Locale) throws RemoteException {
+            public KeyphraseMetadata getEnrolledKeyphraseMetadata(
+                    String keyphrase, String bcp47Locale) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1293,7 +1470,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     _data.writeString(bcp47Locale);
                     this.mRemote.transact(18, _data, _reply, 0);
                     _reply.readException();
-                    KeyphraseMetadata _result = (KeyphraseMetadata) _reply.readTypedObject(KeyphraseMetadata.CREATOR);
+                    KeyphraseMetadata _result =
+                            (KeyphraseMetadata) _reply.readTypedObject(KeyphraseMetadata.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1309,7 +1487,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(19, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1318,7 +1497,13 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public boolean showSessionForActiveService(Bundle args, int sourceFlags, String attributionTag, IVoiceInteractionSessionShowCallback showCallback, IBinder activityToken) throws RemoteException {
+            public boolean showSessionForActiveService(
+                    Bundle args,
+                    int sourceFlags,
+                    String attributionTag,
+                    IVoiceInteractionSessionShowCallback showCallback,
+                    IBinder activityToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1429,7 +1614,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void registerVoiceInteractionSessionListener(IVoiceInteractionSessionListener listener) throws RemoteException {
+            public void registerVoiceInteractionSessionListener(
+                    IVoiceInteractionSessionListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1444,7 +1630,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void getActiveServiceSupportedActions(List<String> voiceActions, IVoiceActionCheckCallback callback) throws RemoteException {
+            public void getActiveServiceSupportedActions(
+                    List<String> voiceActions, IVoiceActionCheckCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1475,7 +1663,13 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void requestDirectActions(IBinder token, int taskId, IBinder assistToken, RemoteCallback cancellationCallback, RemoteCallback callback) throws RemoteException {
+            public void requestDirectActions(
+                    IBinder token,
+                    int taskId,
+                    IBinder assistToken,
+                    RemoteCallback cancellationCallback,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1494,7 +1688,15 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void performDirectAction(IBinder token, String actionId, Bundle arguments, int taskId, IBinder assistToken, RemoteCallback cancellationCallback, RemoteCallback resultCallback) throws RemoteException {
+            public void performDirectAction(
+                    IBinder token,
+                    String actionId,
+                    Bundle arguments,
+                    int taskId,
+                    IBinder assistToken,
+                    RemoteCallback cancellationCallback,
+                    RemoteCallback resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1530,7 +1732,11 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public IVoiceInteractionSoundTriggerSession createSoundTriggerSessionAsOriginator(Identity originatorIdentity, IBinder client, SoundTrigger.ModuleProperties moduleProperties) throws RemoteException {
+            public IVoiceInteractionSoundTriggerSession createSoundTriggerSessionAsOriginator(
+                    Identity originatorIdentity,
+                    IBinder client,
+                    SoundTrigger.ModuleProperties moduleProperties)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1540,7 +1746,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     _data.writeTypedObject(moduleProperties, 0);
                     this.mRemote.transact(33, _data, _reply, 0);
                     _reply.readException();
-                    IVoiceInteractionSoundTriggerSession _result = IVoiceInteractionSoundTriggerSession.Stub.asInterface(_reply.readStrongBinder());
+                    IVoiceInteractionSoundTriggerSession _result =
+                            IVoiceInteractionSoundTriggerSession.Stub.asInterface(
+                                    _reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1549,7 +1757,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public List<SoundTrigger.ModuleProperties> listModuleProperties(Identity originatorIdentity) throws RemoteException {
+            public List<SoundTrigger.ModuleProperties> listModuleProperties(
+                    Identity originatorIdentity) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1557,7 +1766,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
                     _data.writeTypedObject(originatorIdentity, 0);
                     this.mRemote.transact(34, _data, _reply, 0);
                     _reply.readException();
-                    List<SoundTrigger.ModuleProperties> _result = _reply.createTypedArrayList(SoundTrigger.ModuleProperties.CREATOR);
+                    List<SoundTrigger.ModuleProperties> _result =
+                            _reply.createTypedArrayList(SoundTrigger.ModuleProperties.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1566,7 +1776,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void updateState(PersistableBundle options, SharedMemory sharedMemory, IBinder token) throws RemoteException {
+            public void updateState(
+                    PersistableBundle options, SharedMemory sharedMemory, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1583,7 +1795,14 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void initAndVerifyDetector(Identity originatorIdentity, PersistableBundle options, SharedMemory sharedMemory, IBinder token, IHotwordRecognitionStatusCallback callback, int detectorType) throws RemoteException {
+            public void initAndVerifyDetector(
+                    Identity originatorIdentity,
+                    PersistableBundle options,
+                    SharedMemory sharedMemory,
+                    IBinder token,
+                    IHotwordRecognitionStatusCallback callback,
+                    int detectorType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1632,7 +1851,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void subscribeVisualQueryRecognitionStatus(IVisualQueryRecognitionStatusListener listener) throws RemoteException {
+            public void subscribeVisualQueryRecognitionStatus(
+                    IVisualQueryRecognitionStatusListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1647,7 +1867,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void enableVisualQueryDetection(IVisualQueryDetectionAttentionListener Listener) throws RemoteException {
+            public void enableVisualQueryDetection(IVisualQueryDetectionAttentionListener Listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1676,7 +1897,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void startPerceiving(IVisualQueryDetectionVoiceInteractionCallback callback) throws RemoteException {
+            public void startPerceiving(IVisualQueryDetectionVoiceInteractionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1705,7 +1927,10 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void startListeningFromMic(AudioFormat audioFormat, IMicrophoneHotwordDetectionVoiceInteractionCallback callback) throws RemoteException {
+            public void startListeningFromMic(
+                    AudioFormat audioFormat,
+                    IMicrophoneHotwordDetectionVoiceInteractionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1735,7 +1960,13 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void startListeningFromExternalSource(ParcelFileDescriptor audioStream, AudioFormat audioFormat, PersistableBundle options, IBinder token, IMicrophoneHotwordDetectionVoiceInteractionCallback callback) throws RemoteException {
+            public void startListeningFromExternalSource(
+                    ParcelFileDescriptor audioStream,
+                    AudioFormat audioFormat,
+                    PersistableBundle options,
+                    IBinder token,
+                    IMicrophoneHotwordDetectionVoiceInteractionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1754,7 +1985,10 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void triggerHardwareRecognitionEventForTest(SoundTrigger.KeyphraseRecognitionEvent event, IHotwordRecognitionStatusCallback callback) throws RemoteException {
+            public void triggerHardwareRecognitionEventForTest(
+                    SoundTrigger.KeyphraseRecognitionEvent event,
+                    IHotwordRecognitionStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1800,7 +2034,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void setSessionWindowVisible(IBinder token, boolean visible) throws RemoteException {
+            public void setSessionWindowVisible(IBinder token, boolean visible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1816,7 +2051,8 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void notifyActivityEventChanged(IBinder activityToken, int type) throws RemoteException {
+            public void notifyActivityEventChanged(IBinder activityToken, int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1845,7 +2081,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void registerAccessibilityDetectionSettingsListener(IVoiceInteractionAccessibilitySettingsListener listener) throws RemoteException {
+            public void registerAccessibilityDetectionSettingsListener(
+                    IVoiceInteractionAccessibilitySettingsListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1857,7 +2095,9 @@ public interface IVoiceInteractionManagerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractionManagerService
-            public void unregisterAccessibilityDetectionSettingsListener(IVoiceInteractionAccessibilitySettingsListener listener) throws RemoteException {
+            public void unregisterAccessibilityDetectionSettingsListener(
+                    IVoiceInteractionAccessibilitySettingsListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1870,67 +2110,113 @@ public interface IVoiceInteractionManagerService extends IInterface {
         }
 
         protected void setModelDatabaseForTestEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_VOICE_KEYPHRASES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_VOICE_KEYPHRASES, getCallingPid(), getCallingUid());
         }
 
         protected void showSessionForActiveService_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void hideCurrentSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void launchVoiceAssistFromKeyguard_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isSessionRunning_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void activeServiceSupportsAssist_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void activeServiceSupportsLaunchFromKeyguard_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+        protected void activeServiceSupportsLaunchFromKeyguard_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void onLockscreenShown_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void registerVoiceInteractionSessionListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+        protected void registerVoiceInteractionSessionListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void getActiveServiceSupportedActions_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+        protected void getActiveServiceSupportedActions_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setDisabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void updateState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_HOTWORD_DETECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_HOTWORD_DETECTION, getCallingPid(), getCallingUid());
         }
 
         protected void initAndVerifyDetector_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_HOTWORD_DETECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_HOTWORD_DETECTION, getCallingPid(), getCallingUid());
         }
 
-        protected void subscribeVisualQueryRecognitionStatus_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+        protected void subscribeVisualQueryRecognitionStatus_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void enableVisualQueryDetection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void disableVisualQueryDetection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

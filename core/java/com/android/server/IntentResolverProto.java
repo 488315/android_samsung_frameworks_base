@@ -13,7 +13,6 @@ public final class IntentResolverProto {
         public static final long KEY = 1138166333441L;
         public static final long VALUES = 2237677961218L;
 
-        public ArrayMapEntry() {
-        }
+        public ArrayMapEntry() {}
     }
 }

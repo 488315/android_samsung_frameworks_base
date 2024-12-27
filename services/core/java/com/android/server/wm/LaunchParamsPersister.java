@@ -12,14 +12,14 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.Xml;
 import android.view.DisplayInfo;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageList;
-import com.android.server.wm.LaunchParamsController;
-import com.android.server.wm.LaunchParamsPersister;
-import com.android.server.wm.PersisterQueue;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -65,7 +65,10 @@ public final class LaunchParamsPersister {
         public PersistableLaunchParams mLaunchParams;
         public final int mUserId;
 
-        public LaunchParamsWriteQueueItem(int i, ComponentName componentName, PersistableLaunchParams persistableLaunchParams) {
+        public LaunchParamsWriteQueueItem(
+                int i,
+                ComponentName componentName,
+                PersistableLaunchParams persistableLaunchParams) {
             this.mUserId = i;
             this.mComponentName = componentName;
             this.mLaunchParams = persistableLaunchParams;
@@ -73,8 +76,10 @@ public final class LaunchParamsPersister {
 
         @Override // com.android.server.wm.PersisterQueue.WriteQueueItem
         public final boolean matches(PersisterQueue.WriteQueueItem writeQueueItem) {
-            LaunchParamsWriteQueueItem launchParamsWriteQueueItem = (LaunchParamsWriteQueueItem) writeQueueItem;
-            return this.mUserId == launchParamsWriteQueueItem.mUserId && this.mComponentName.equals(launchParamsWriteQueueItem.mComponentName);
+            LaunchParamsWriteQueueItem launchParamsWriteQueueItem =
+                    (LaunchParamsWriteQueueItem) writeQueueItem;
+            return this.mUserId == launchParamsWriteQueueItem.mUserId
+                    && this.mComponentName.equals(launchParamsWriteQueueItem.mComponentName);
         }
 
         @Override // com.android.server.wm.PersisterQueue.WriteQueueItem
@@ -98,16 +103,21 @@ public final class LaunchParamsPersister {
             int i = this.mUserId;
             File file = new File((File) intFunction.apply(i), "launch_params");
             if (!file.isDirectory() && !file.mkdir()) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Failed to create folder for ", "LaunchParamsPersister");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i, "Failed to create folder for ", "LaunchParamsPersister");
                 return;
             }
-            AtomicFile atomicFile = new AtomicFile(LaunchParamsPersister.getParamFile(file, this.mComponentName));
+            AtomicFile atomicFile =
+                    new AtomicFile(LaunchParamsPersister.getParamFile(file, this.mComponentName));
             try {
                 fileOutputStream = atomicFile.startWrite();
                 fileOutputStream.write(bArr);
                 atomicFile.finishWrite(fileOutputStream);
             } catch (Exception e) {
-                Slog.e("LaunchParamsPersister", "Failed to write param file for " + this.mComponentName, e);
+                Slog.e(
+                        "LaunchParamsPersister",
+                        "Failed to write param file for " + this.mComponentName,
+                        e);
                 if (fileOutputStream != null) {
                     atomicFile.failWrite(fileOutputStream);
                 }
@@ -122,16 +132,15 @@ public final class LaunchParamsPersister {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageListObserver implements PackageManagerInternal.PackageListObserver {
-        public PackageListObserver() {
-        }
+        public PackageListObserver() {}
 
         @Override // android.content.pm.PackageManagerInternal.PackageListObserver
-        public final void onPackageAdded(String str, int i) {
-        }
+        public final void onPackageAdded(String str, int i) {}
 
         @Override // android.content.pm.PackageManagerInternal.PackageListObserver
         public final void onPackageRemoved(String str, int i) {
-            WindowManagerGlobalLock windowManagerGlobalLock = LaunchParamsPersister.this.mSupervisor.mService.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    LaunchParamsPersister.this.mSupervisor.mService.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
@@ -155,7 +164,8 @@ public final class LaunchParamsPersister {
         public int mWindowingMode;
         public final Rect mBounds = new Rect();
         public final DexPersistBoundsParams mDexPersistBoundsParams = new DexPersistBoundsParams();
-        public final FreeformPersistBoundsParams mFreeformPersistBoundsParams = new FreeformPersistBoundsParams();
+        public final FreeformPersistBoundsParams mFreeformPersistBoundsParams =
+                new FreeformPersistBoundsParams();
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public final void restore(File file, TypedXmlPullParser typedXmlPullParser) {
@@ -239,7 +249,8 @@ public final class LaunchParamsPersister {
                         break;
                     default:
                         String attributeName2 = typedXmlPullParser.getAttributeName(i);
-                        FreeformPersistBoundsParams freeformPersistBoundsParams = this.mFreeformPersistBoundsParams;
+                        FreeformPersistBoundsParams freeformPersistBoundsParams =
+                                this.mFreeformPersistBoundsParams;
                         freeformPersistBoundsParams.getClass();
                         attributeName2.getClass();
                         switch (attributeName2.hashCode()) {
@@ -270,25 +281,31 @@ public final class LaunchParamsPersister {
                         }
                         switch (z) {
                             case false:
-                                freeformPersistBoundsParams.mRotation = Integer.parseInt(attributeValue);
+                                freeformPersistBoundsParams.mRotation =
+                                        Integer.parseInt(attributeValue);
                                 break;
                             case true:
-                                Rect unflattenFromString2 = Rect.unflattenFromString(attributeValue);
+                                Rect unflattenFromString2 =
+                                        Rect.unflattenFromString(attributeValue);
                                 if (unflattenFromString2 != null) {
-                                    freeformPersistBoundsParams.mDisplayBounds.set(unflattenFromString2);
+                                    freeformPersistBoundsParams.mDisplayBounds.set(
+                                            unflattenFromString2);
                                     break;
                                 }
                                 break;
                             case true:
-                                Rect unflattenFromString3 = Rect.unflattenFromString(attributeValue);
+                                Rect unflattenFromString3 =
+                                        Rect.unflattenFromString(attributeValue);
                                 if (unflattenFromString3 != null) {
-                                    freeformPersistBoundsParams.mFreeformBounds.set(unflattenFromString3);
+                                    freeformPersistBoundsParams.mFreeformBounds.set(
+                                            unflattenFromString3);
                                     break;
                                 }
                                 break;
                         }
                         String attributeName3 = typedXmlPullParser.getAttributeName(i);
-                        DexPersistBoundsParams dexPersistBoundsParams = this.mDexPersistBoundsParams;
+                        DexPersistBoundsParams dexPersistBoundsParams =
+                                this.mDexPersistBoundsParams;
                         dexPersistBoundsParams.getClass();
                         attributeName3.getClass();
                         switch (attributeName3.hashCode()) {
@@ -319,10 +336,12 @@ public final class LaunchParamsPersister {
                         }
                         switch (z2) {
                             case false:
-                                dexPersistBoundsParams.mDexWindowingMode = Integer.parseInt(attributeValue);
+                                dexPersistBoundsParams.mDexWindowingMode =
+                                        Integer.parseInt(attributeValue);
                                 break;
                             case true:
-                                Rect unflattenFromString4 = Rect.unflattenFromString(attributeValue);
+                                Rect unflattenFromString4 =
+                                        Rect.unflattenFromString(attributeValue);
                                 if (unflattenFromString4 != null) {
                                     dexPersistBoundsParams.mDexDualBounds.set(unflattenFromString4);
                                     break;
@@ -330,9 +349,11 @@ public final class LaunchParamsPersister {
                                     break;
                                 }
                             case true:
-                                Rect unflattenFromString5 = Rect.unflattenFromString(attributeValue);
+                                Rect unflattenFromString5 =
+                                        Rect.unflattenFromString(attributeValue);
                                 if (unflattenFromString5 != null) {
-                                    dexPersistBoundsParams.mDexStandAloneBounds.set(unflattenFromString5);
+                                    dexPersistBoundsParams.mDexStandAloneBounds.set(
+                                            unflattenFromString5);
                                     break;
                                 } else {
                                     break;
@@ -351,18 +372,41 @@ public final class LaunchParamsPersister {
             if (str != null) {
                 typedXmlSerializer.attribute((String) null, "window_layout_affinity", str);
             }
-            typedXmlSerializer.attribute((String) null, "orientation", Integer.toString(this.mOrientation));
+            typedXmlSerializer.attribute(
+                    (String) null, "orientation", Integer.toString(this.mOrientation));
             if (CoreRune.MW_MULTI_SPLIT_FREEFORM_FOLDING_POLICY) {
-                typedXmlSerializer.attribute((String) null, "display_device_type", Integer.toString(this.mDisplayDeviceType));
+                typedXmlSerializer.attribute(
+                        (String) null,
+                        "display_device_type",
+                        Integer.toString(this.mDisplayDeviceType));
             }
-            FreeformPersistBoundsParams freeformPersistBoundsParams = this.mFreeformPersistBoundsParams;
-            typedXmlSerializer.attribute((String) null, "freeform_bounds", freeformPersistBoundsParams.mFreeformBounds.flattenToString());
-            typedXmlSerializer.attribute((String) null, "display_bounds", freeformPersistBoundsParams.mDisplayBounds.flattenToString());
-            typedXmlSerializer.attribute((String) null, "rotation", Integer.toString(freeformPersistBoundsParams.mRotation));
+            FreeformPersistBoundsParams freeformPersistBoundsParams =
+                    this.mFreeformPersistBoundsParams;
+            typedXmlSerializer.attribute(
+                    (String) null,
+                    "freeform_bounds",
+                    freeformPersistBoundsParams.mFreeformBounds.flattenToString());
+            typedXmlSerializer.attribute(
+                    (String) null,
+                    "display_bounds",
+                    freeformPersistBoundsParams.mDisplayBounds.flattenToString());
+            typedXmlSerializer.attribute(
+                    (String) null,
+                    "rotation",
+                    Integer.toString(freeformPersistBoundsParams.mRotation));
             DexPersistBoundsParams dexPersistBoundsParams = this.mDexPersistBoundsParams;
-            typedXmlSerializer.attribute((String) null, "dex_windowing_mode", Integer.toString(dexPersistBoundsParams.mDexWindowingMode));
-            typedXmlSerializer.attribute((String) null, "dex_dual_bounds", dexPersistBoundsParams.mDexDualBounds.flattenToString());
-            typedXmlSerializer.attribute((String) null, "dex_standalone_bounds", dexPersistBoundsParams.mDexStandAloneBounds.flattenToString());
+            typedXmlSerializer.attribute(
+                    (String) null,
+                    "dex_windowing_mode",
+                    Integer.toString(dexPersistBoundsParams.mDexWindowingMode));
+            typedXmlSerializer.attribute(
+                    (String) null,
+                    "dex_dual_bounds",
+                    dexPersistBoundsParams.mDexDualBounds.flattenToString());
+            typedXmlSerializer.attribute(
+                    (String) null,
+                    "dex_standalone_bounds",
+                    dexPersistBoundsParams.mDexStandAloneBounds.flattenToString());
         }
 
         public final String toString() {
@@ -385,26 +429,40 @@ public final class LaunchParamsPersister {
         }
     }
 
-    public LaunchParamsPersister(PersisterQueue persisterQueue, ActivityTaskSupervisor activityTaskSupervisor, IntFunction intFunction) {
+    public LaunchParamsPersister(
+            PersisterQueue persisterQueue,
+            ActivityTaskSupervisor activityTaskSupervisor,
+            IntFunction intFunction) {
         this.mPersisterQueue = persisterQueue;
         this.mSupervisor = activityTaskSupervisor;
         this.mUserFolderGetter = intFunction;
     }
 
     public static File getParamFile(File file, ComponentName componentName) {
-        return new File(file, ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(componentName.flattenToShortString().replace('/', '-'), ".xml"));
+        return new File(
+                file,
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                        componentName.flattenToShortString().replace('/', '-'), ".xml"));
     }
 
-    public final void addComponentNameToLaunchParamAffinityMapIfNotNull(ComponentName componentName, String str) {
+    public final void addComponentNameToLaunchParamAffinityMapIfNotNull(
+            ComponentName componentName, String str) {
         if (str == null) {
             return;
         }
-        ((ArraySet) this.mWindowLayoutAffinityMap.computeIfAbsent(str, new LaunchParamsPersister$$ExternalSyntheticLambda3())).add(componentName);
+        ((ArraySet)
+                        this.mWindowLayoutAffinityMap.computeIfAbsent(
+                                str, new LaunchParamsPersister$$ExternalSyntheticLambda3()))
+                .add(componentName);
     }
 
-    public final void getLaunchParams(Task task, ActivityRecord activityRecord, LaunchParamsController.LaunchParams launchParams) {
+    public final void getLaunchParams(
+            Task task,
+            ActivityRecord activityRecord,
+            LaunchParamsController.LaunchParams launchParams) {
         String str;
-        ComponentName componentName = task != null ? task.realActivity : activityRecord.mActivityComponent;
+        ComponentName componentName =
+                task != null ? task.realActivity : activityRecord.mActivityComponent;
         int i = task != null ? task.mUserId : activityRecord.mUserId;
         if (task != null) {
             str = task.mWindowLayoutAffinity;
@@ -417,12 +475,17 @@ public final class LaunchParamsPersister {
         if (map == null) {
             return;
         }
-        PersistableLaunchParams persistableLaunchParams = (PersistableLaunchParams) map.get(componentName);
+        PersistableLaunchParams persistableLaunchParams =
+                (PersistableLaunchParams) map.get(componentName);
         if (str != null && this.mWindowLayoutAffinityMap.get(str) != null) {
             ArraySet arraySet = (ArraySet) this.mWindowLayoutAffinityMap.get(str);
             for (int i2 = 0; i2 < arraySet.size(); i2++) {
-                PersistableLaunchParams persistableLaunchParams2 = (PersistableLaunchParams) map.get((ComponentName) arraySet.valueAt(i2));
-                if (persistableLaunchParams2 != null && (persistableLaunchParams == null || persistableLaunchParams2.mTimestamp > persistableLaunchParams.mTimestamp)) {
+                PersistableLaunchParams persistableLaunchParams2 =
+                        (PersistableLaunchParams) map.get((ComponentName) arraySet.valueAt(i2));
+                if (persistableLaunchParams2 != null
+                        && (persistableLaunchParams == null
+                                || persistableLaunchParams2.mTimestamp
+                                        > persistableLaunchParams.mTimestamp)) {
                     persistableLaunchParams = persistableLaunchParams2;
                 }
             }
@@ -430,7 +493,9 @@ public final class LaunchParamsPersister {
         if (persistableLaunchParams == null) {
             return;
         }
-        DisplayContent displayContent = this.mSupervisor.mRootWindowContainer.getDisplayContent(persistableLaunchParams.mDisplayUniqueId);
+        DisplayContent displayContent =
+                this.mSupervisor.mRootWindowContainer.getDisplayContent(
+                        persistableLaunchParams.mDisplayUniqueId);
         if (displayContent != null) {
             launchParams.mPreferredTaskDisplayArea = displayContent.getDefaultTaskDisplayArea();
         }
@@ -440,24 +505,31 @@ public final class LaunchParamsPersister {
         if (CoreRune.MW_MULTI_SPLIT_FREEFORM_FOLDING_POLICY) {
             launchParams.mDisplayDeviceType = persistableLaunchParams.mDisplayDeviceType;
         }
-        FreeformPersistBoundsParams freeformPersistBoundsParams = launchParams.mFreeformPersistBoundsParam;
+        FreeformPersistBoundsParams freeformPersistBoundsParams =
+                launchParams.mFreeformPersistBoundsParam;
         Rect rect = freeformPersistBoundsParams.mFreeformBounds;
-        FreeformPersistBoundsParams freeformPersistBoundsParams2 = persistableLaunchParams.mFreeformPersistBoundsParams;
+        FreeformPersistBoundsParams freeformPersistBoundsParams2 =
+                persistableLaunchParams.mFreeformPersistBoundsParams;
         rect.set(freeformPersistBoundsParams2.mFreeformBounds);
         freeformPersistBoundsParams.mDisplayBounds.set(freeformPersistBoundsParams2.mDisplayBounds);
         freeformPersistBoundsParams.mRotation = freeformPersistBoundsParams2.mRotation;
         DexPersistBoundsParams dexPersistBoundsParams = launchParams.mDexPersistBoundsParam;
         dexPersistBoundsParams.getClass();
-        DexPersistBoundsParams dexPersistBoundsParams2 = persistableLaunchParams.mDexPersistBoundsParams;
+        DexPersistBoundsParams dexPersistBoundsParams2 =
+                persistableLaunchParams.mDexPersistBoundsParams;
         dexPersistBoundsParams.mDexWindowingMode = dexPersistBoundsParams2.mDexWindowingMode;
         dexPersistBoundsParams.mDexDualBounds.set(dexPersistBoundsParams2.mDexDualBounds);
-        dexPersistBoundsParams.mDexStandAloneBounds.set(dexPersistBoundsParams2.mDexStandAloneBounds);
+        dexPersistBoundsParams.mDexStandAloneBounds.set(
+                dexPersistBoundsParams2.mDexStandAloneBounds);
     }
 
     public final void removeRecordForPackage(final String str) {
         ArrayList arrayList = new ArrayList();
         for (int i = 0; i < this.mLaunchParamsMap.size(); i++) {
-            File file = new File((File) this.mUserFolderGetter.apply(this.mLaunchParamsMap.keyAt(i)), "launch_params");
+            File file =
+                    new File(
+                            (File) this.mUserFolderGetter.apply(this.mLaunchParamsMap.keyAt(i)),
+                            "launch_params");
             ArrayMap arrayMap = (ArrayMap) this.mLaunchParamsMap.valueAt(i);
             for (int size = arrayMap.size() - 1; size >= 0; size--) {
                 ComponentName componentName = (ComponentName) arrayMap.keyAt(size);
@@ -468,12 +540,18 @@ public final class LaunchParamsPersister {
             }
         }
         synchronized (this.mPersisterQueue) {
-            this.mPersisterQueue.removeItems(new Predicate() { // from class: com.android.server.wm.LaunchParamsPersister$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return ((LaunchParamsPersister.LaunchParamsWriteQueueItem) obj).mComponentName.getPackageName().equals(str);
-                }
-            }, LaunchParamsWriteQueueItem.class);
+            this.mPersisterQueue.removeItems(
+                    new Predicate() { // from class:
+                                      // com.android.server.wm.LaunchParamsPersister$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Predicate
+                        public final boolean test(Object obj) {
+                            return ((LaunchParamsPersister.LaunchParamsWriteQueueItem) obj)
+                                    .mComponentName
+                                    .getPackageName()
+                                    .equals(str);
+                        }
+                    },
+                    LaunchParamsWriteQueueItem.class);
             this.mPersisterQueue.addItem(new CleanUpComponentQueueItem(arrayList), true);
         }
     }
@@ -491,24 +569,39 @@ public final class LaunchParamsPersister {
             arrayMap = new ArrayMap();
             this.mLaunchParamsMap.put(i, arrayMap);
         }
-        PersistableLaunchParams persistableLaunchParams = (PersistableLaunchParams) arrayMap.computeIfAbsent(componentName, new LaunchParamsPersister$$ExternalSyntheticLambda1(this, 0));
+        PersistableLaunchParams persistableLaunchParams =
+                (PersistableLaunchParams)
+                        arrayMap.computeIfAbsent(
+                                componentName,
+                                new LaunchParamsPersister$$ExternalSyntheticLambda1(this, 0));
         DisplayInfo displayInfo = new DisplayInfo();
         displayContent.mDisplay.getDisplayInfo(displayInfo);
-        boolean z2 = !Objects.equals(persistableLaunchParams.mDisplayUniqueId, displayInfo.uniqueId);
+        boolean z2 =
+                !Objects.equals(persistableLaunchParams.mDisplayUniqueId, displayInfo.uniqueId);
         persistableLaunchParams.mDisplayUniqueId = displayInfo.uniqueId;
         boolean z3 = (persistableLaunchParams.mWindowingMode != task.getWindowingMode()) | z2;
         persistableLaunchParams.mWindowingMode = task.getWindowingMode();
-        boolean z4 = z3 | (persistableLaunchParams.mOrientation != displayContent.getConfiguration().orientation);
+        boolean z4 =
+                z3
+                        | (persistableLaunchParams.mOrientation
+                                != displayContent.getConfiguration().orientation);
         persistableLaunchParams.mOrientation = displayContent.getConfiguration().orientation;
         if (CoreRune.MW_MULTI_SPLIT_FREEFORM_FOLDING_POLICY && task.getDisplayId() == 0) {
-            z4 |= persistableLaunchParams.mDisplayDeviceType != displayContent.getConfiguration().semDisplayDeviceType;
-            persistableLaunchParams.mDisplayDeviceType = displayContent.getConfiguration().semDisplayDeviceType;
+            z4 |=
+                    persistableLaunchParams.mDisplayDeviceType
+                            != displayContent.getConfiguration().semDisplayDeviceType;
+            persistableLaunchParams.mDisplayDeviceType =
+                    displayContent.getConfiguration().semDisplayDeviceType;
         }
         if (task.isDexMode()) {
-            DexPersistBoundsParams dexPersistBoundsParams = persistableLaunchParams.mDexPersistBoundsParams;
+            DexPersistBoundsParams dexPersistBoundsParams =
+                    persistableLaunchParams.mDexPersistBoundsParams;
             equals = z4 | (dexPersistBoundsParams.mDexWindowingMode != task.getWindowingMode());
             dexPersistBoundsParams.mDexWindowingMode = task.getWindowingMode();
-            Rect rect = task.getDisplayId() == 2 ? dexPersistBoundsParams.mDexDualBounds : dexPersistBoundsParams.mDexStandAloneBounds;
+            Rect rect =
+                    task.getDisplayId() == 2
+                            ? dexPersistBoundsParams.mDexDualBounds
+                            : dexPersistBoundsParams.mDexStandAloneBounds;
             if (task.mHasTopFullscreenWindow) {
                 if (task.mLastNonFullscreenBounds != null) {
                     equals |= !Objects.equals(rect, r4);
@@ -533,9 +626,11 @@ public final class LaunchParamsPersister {
                 persistableLaunchParams.mTimestamp = System.currentTimeMillis();
             }
         }
-        addComponentNameToLaunchParamAffinityMapIfNotNull(componentName, persistableLaunchParams.mWindowLayoutAffinity);
+        addComponentNameToLaunchParamAffinityMapIfNotNull(
+                componentName, persistableLaunchParams.mWindowLayoutAffinity);
         if (equals) {
-            this.mPersisterQueue.updateLastOrAddItem(new LaunchParamsWriteQueueItem(i, componentName, persistableLaunchParams));
+            this.mPersisterQueue.updateLastOrAddItem(
+                    new LaunchParamsWriteQueueItem(i, componentName, persistableLaunchParams));
         }
     }
 }

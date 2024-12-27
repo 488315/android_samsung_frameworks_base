@@ -3,7 +3,6 @@ package com.samsung.android.knox.util;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import com.samsung.android.knox.util.ISemKeyStoreService;
 
 /* loaded from: classes6.dex */
 public class SemKeyStoreManager {
@@ -19,6 +18,7 @@ public class SemKeyStoreManager {
 
     @Deprecated(forRemoval = true, since = "16.0")
     public static final int KEYSTORE_STATUS_UNLOCKED = 1;
+
     private ISemKeyStoreService mRemoteServiceKeystore;
 
     private SemKeyStoreManager(IBinder binder) {
@@ -26,8 +26,15 @@ public class SemKeyStoreManager {
     }
 
     @Deprecated(forRemoval = true, since = "13.0")
-    public int installCertInAndroidKeyStore(SemCertByte certificate, String aliasName, char[] password, boolean installWithWIFI, int scepUid) throws RemoteException {
-        return this.mRemoteServiceKeystore.installCertificateInAndroidKeyStore(certificate, aliasName, password, scepUid);
+    public int installCertInAndroidKeyStore(
+            SemCertByte certificate,
+            String aliasName,
+            char[] password,
+            boolean installWithWIFI,
+            int scepUid)
+            throws RemoteException {
+        return this.mRemoteServiceKeystore.installCertificateInAndroidKeyStore(
+                certificate, aliasName, password, scepUid);
     }
 
     public boolean hasAlias(String alias, boolean arg1) throws RemoteException {

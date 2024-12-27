@@ -9,8 +9,7 @@ class CertStatus {
     int certStatus = 11;
     Date revocationDate = null;
 
-    CertStatus() {
-    }
+    CertStatus() {}
 
     public Date getRevocationDate() {
         return this.revocationDate;

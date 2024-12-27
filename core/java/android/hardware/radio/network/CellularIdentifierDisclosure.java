@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CellularIdentifierDisclosure implements Parcelable {
-    public static final Parcelable.Creator<CellularIdentifierDisclosure> CREATOR = new Parcelable.Creator<CellularIdentifierDisclosure>() { // from class: android.hardware.radio.network.CellularIdentifierDisclosure.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellularIdentifierDisclosure createFromParcel(Parcel _aidl_source) {
-            CellularIdentifierDisclosure _aidl_out = new CellularIdentifierDisclosure();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CellularIdentifierDisclosure> CREATOR =
+            new Parcelable.Creator<CellularIdentifierDisclosure>() { // from class:
+                // android.hardware.radio.network.CellularIdentifierDisclosure.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellularIdentifierDisclosure createFromParcel(Parcel _aidl_source) {
+                    CellularIdentifierDisclosure _aidl_out = new CellularIdentifierDisclosure();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellularIdentifierDisclosure[] newArray(int _aidl_size) {
-            return new CellularIdentifierDisclosure[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellularIdentifierDisclosure[] newArray(int _aidl_size) {
+                    return new CellularIdentifierDisclosure[_aidl_size];
+                }
+            };
     public int identifier;
     public boolean isEmergency = false;
     public String plmn;

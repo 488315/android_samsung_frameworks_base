@@ -99,6 +99,8 @@ public final /* synthetic */ class BrightnessTracker$$ExternalSyntheticLambda1 i
             monitor-exit(r1)     // Catch: java.lang.Throwable -> Lf
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.BrightnessTracker$$ExternalSyntheticLambda1.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.BrightnessTracker$$ExternalSyntheticLambda1.run():void");
     }
 }

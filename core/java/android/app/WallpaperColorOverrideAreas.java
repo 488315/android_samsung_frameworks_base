@@ -5,6 +5,7 @@ import android.graphics.RectF;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -18,8 +19,10 @@ public class WallpaperColorOverrideAreas {
     public static final int DISPLAY_TYPE_VIRTUAL = 4;
     public static final int DISPLAY_TYPE_WATCHFACE = 3;
     private static final String FIRST_DELIMITER = ";";
-    public static final String KEY_CUSTOM_WALLPAPER_COLOR_AREAS_HOME = "custom_wallpaper_color_areas_home";
-    public static final String KEY_CUSTOM_WALLPAPER_COLOR_AREAS_LOCK = "custom_wallpaper_color_areas_lock";
+    public static final String KEY_CUSTOM_WALLPAPER_COLOR_AREAS_HOME =
+            "custom_wallpaper_color_areas_home";
+    public static final String KEY_CUSTOM_WALLPAPER_COLOR_AREAS_LOCK =
+            "custom_wallpaper_color_areas_lock";
     public static final int ROTATION_270 = 2;
     public static final int ROTATION_90 = 1;
     public static final int ROTATION_ALL = 4;
@@ -34,18 +37,17 @@ public class WallpaperColorOverrideAreas {
     private int mWhich;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DISPLAY_TYPE {
-    }
+    public @interface DISPLAY_TYPE {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ROTATION {
-    }
+    public @interface ROTATION {}
 
     public WallpaperColorOverrideAreas(Context context, int which) {
         this(context, which, null);
     }
 
-    public WallpaperColorOverrideAreas(Context context, int which, WallpaperColorOverrideAreas base) {
+    public WallpaperColorOverrideAreas(
+            Context context, int which, WallpaperColorOverrideAreas base) {
         this.mAreaMap = new HashMap<>();
         this.mContext = context;
         this.mWhich = which;
@@ -108,7 +110,10 @@ public class WallpaperColorOverrideAreas {
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<String, RectF> entry : this.mAreaMap.entrySet()) {
             if (entry != null) {
-                builder.append(entry.getKey()).append("-").append(combineValue(entry.getValue())).append(";");
+                builder.append(entry.getKey())
+                        .append("-")
+                        .append(combineValue(entry.getValue()))
+                        .append(";");
             }
         }
         return builder.toString();
@@ -123,11 +128,18 @@ public class WallpaperColorOverrideAreas {
         for (String areaString : areaStringList) {
             if (!TextUtils.isEmpty(areaString)) {
                 String[] keyValueList = areaString.split("-");
-                if (keyValueList.length == 2 && !TextUtils.isEmpty(keyValueList[0]) && !TextUtils.isEmpty(keyValueList[1])) {
+                if (keyValueList.length == 2
+                        && !TextUtils.isEmpty(keyValueList[0])
+                        && !TextUtils.isEmpty(keyValueList[1])) {
                     String[] valueList = keyValueList[1].split(":");
                     if (valueList.length == 4) {
                         try {
-                            RectF areaRect = new RectF(Float.parseFloat(valueList[0]), Float.parseFloat(valueList[1]), Float.parseFloat(valueList[2]), Float.parseFloat(valueList[3]));
+                            RectF areaRect =
+                                    new RectF(
+                                            Float.parseFloat(valueList[0]),
+                                            Float.parseFloat(valueList[1]),
+                                            Float.parseFloat(valueList[2]),
+                                            Float.parseFloat(valueList[3]));
                             this.mAreaMap.put(keyValueList[0], areaRect);
                         } catch (RuntimeException e) {
                             Log.e(TAG, "Cannot parsing area rect : " + keyValueList[1]);
@@ -143,7 +155,8 @@ public class WallpaperColorOverrideAreas {
     }
 
     public void store() {
-        Settings.System.putString(this.mContext.getContentResolver(), this.mSettingsKey, toString());
+        Settings.System.putString(
+                this.mContext.getContentResolver(), this.mSettingsKey, toString());
     }
 
     private void fill(HashMap<String, RectF> areaMap) {

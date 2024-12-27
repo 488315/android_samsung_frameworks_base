@@ -12,8 +12,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvi
 
 /* loaded from: classes5.dex */
 public final class Blowfish {
-    private Blowfish() {
-    }
+    private Blowfish() {}
 
     public static class ECB extends BaseBlockCipher {
         public ECB() {
@@ -47,9 +46,15 @@ public final class Blowfish {
         public void configure(ConfigurableProvider provider) {
             provider.addAlgorithm("Cipher.BLOWFISH", PREFIX + "$ECB");
             provider.addAlgorithm("KeyGenerator.BLOWFISH", PREFIX + "$KeyGen");
-            provider.addAlgorithm("Alg.Alias.KeyGenerator", MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC, "BLOWFISH");
+            provider.addAlgorithm(
+                    "Alg.Alias.KeyGenerator",
+                    MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC,
+                    "BLOWFISH");
             provider.addAlgorithm("AlgorithmParameters.BLOWFISH", PREFIX + "$AlgParams");
-            provider.addAlgorithm("Alg.Alias.AlgorithmParameters", MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC, "BLOWFISH");
+            provider.addAlgorithm(
+                    "Alg.Alias.AlgorithmParameters",
+                    MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC,
+                    "BLOWFISH");
         }
     }
 }

@@ -3,6 +3,7 @@ package com.samsung.android.wallpaper.utils;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.util.Log;
+
 import com.samsung.android.wallpaper.Rune;
 
 /* loaded from: classes6.dex */
@@ -68,7 +69,12 @@ public class WhichChecker {
     }
 
     public static boolean isSupportLock(int which) {
-        return ((Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && isSubDisplay(which)) || (Rune.VIRTUAL_DISPLAY_WALLPAPER && isVirtualDisplay(which))) ? false : true;
+        return ((Rune.SUPPORT_SUB_DISPLAY_MODE
+                                && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                                && isSubDisplay(which))
+                        || (Rune.VIRTUAL_DISPLAY_WALLPAPER && isVirtualDisplay(which)))
+                ? false
+                : true;
     }
 
     public static int determineMode(boolean isLidClosed) {
@@ -88,7 +94,10 @@ public class WhichChecker {
 
     public static void assertModeIsPresent(int which) {
         if (getMode(which) == 0) {
-            Log.e(TAG, "assertModeIsPresent: mode is not present. which = " + which, new Exception());
+            Log.e(
+                    TAG,
+                    "assertModeIsPresent: mode is not present. which = " + which,
+                    new Exception());
         }
     }
 

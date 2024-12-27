@@ -9,32 +9,55 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IWapPushManager extends IInterface {
-    boolean addPackage(String str, String str2, String str3, String str4, int i, boolean z, boolean z2) throws RemoteException;
+    boolean addPackage(
+            String str, String str2, String str3, String str4, int i, boolean z, boolean z2)
+            throws RemoteException;
 
     boolean deletePackage(String str, String str2, String str3, String str4) throws RemoteException;
 
     int processMessage(String str, String str2, Intent intent) throws RemoteException;
 
-    boolean updatePackage(String str, String str2, String str3, String str4, int i, boolean z, boolean z2) throws RemoteException;
+    boolean updatePackage(
+            String str, String str2, String str3, String str4, int i, boolean z, boolean z2)
+            throws RemoteException;
 
     public static class Default implements IWapPushManager {
         @Override // com.android.internal.telephony.IWapPushManager
-        public int processMessage(String app_id, String content_type, Intent intent) throws RemoteException {
+        public int processMessage(String app_id, String content_type, Intent intent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.telephony.IWapPushManager
-        public boolean addPackage(String x_app_id, String content_type, String package_name, String class_name, int app_type, boolean need_signature, boolean further_processing) throws RemoteException {
+        public boolean addPackage(
+                String x_app_id,
+                String content_type,
+                String package_name,
+                String class_name,
+                int app_type,
+                boolean need_signature,
+                boolean further_processing)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.IWapPushManager
-        public boolean updatePackage(String x_app_id, String content_type, String package_name, String class_name, int app_type, boolean need_signature, boolean further_processing) throws RemoteException {
+        public boolean updatePackage(
+                String x_app_id,
+                String content_type,
+                String package_name,
+                String class_name,
+                int app_type,
+                boolean need_signature,
+                boolean further_processing)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.IWapPushManager
-        public boolean deletePackage(String x_app_id, String content_type, String package_name, String class_name) throws RemoteException {
+        public boolean deletePackage(
+                String x_app_id, String content_type, String package_name, String class_name)
+                throws RemoteException {
             return false;
         }
 
@@ -44,7 +67,7 @@ public interface IWapPushManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWapPushManager {
+    public abstract static class Stub extends Binder implements IWapPushManager {
         public static final String DESCRIPTOR = "com.android.internal.telephony.IWapPushManager";
         static final int TRANSACTION_addPackage = 2;
         static final int TRANSACTION_deletePackage = 4;
@@ -92,7 +115,8 @@ public interface IWapPushManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -119,7 +143,8 @@ public interface IWapPushManager extends IInterface {
                     boolean _arg5 = data.readBoolean();
                     boolean _arg6 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    boolean _result2 = addPackage(_arg02, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6);
+                    boolean _result2 =
+                            addPackage(_arg02, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeBoolean(_result2);
                     return true;
@@ -132,7 +157,8 @@ public interface IWapPushManager extends IInterface {
                     boolean _arg52 = data.readBoolean();
                     boolean _arg62 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    boolean _result3 = updatePackage(_arg03, _arg13, _arg23, _arg32, _arg42, _arg52, _arg62);
+                    boolean _result3 =
+                            updatePackage(_arg03, _arg13, _arg23, _arg32, _arg42, _arg52, _arg62);
                     reply.writeNoException();
                     reply.writeBoolean(_result3);
                     return true;
@@ -168,7 +194,8 @@ public interface IWapPushManager extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IWapPushManager
-            public int processMessage(String app_id, String content_type, Intent intent) throws RemoteException {
+            public int processMessage(String app_id, String content_type, Intent intent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -187,7 +214,15 @@ public interface IWapPushManager extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IWapPushManager
-            public boolean addPackage(String x_app_id, String content_type, String package_name, String class_name, int app_type, boolean need_signature, boolean further_processing) throws RemoteException {
+            public boolean addPackage(
+                    String x_app_id,
+                    String content_type,
+                    String package_name,
+                    String class_name,
+                    int app_type,
+                    boolean need_signature,
+                    boolean further_processing)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -210,7 +245,15 @@ public interface IWapPushManager extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IWapPushManager
-            public boolean updatePackage(String x_app_id, String content_type, String package_name, String class_name, int app_type, boolean need_signature, boolean further_processing) throws RemoteException {
+            public boolean updatePackage(
+                    String x_app_id,
+                    String content_type,
+                    String package_name,
+                    String class_name,
+                    int app_type,
+                    boolean need_signature,
+                    boolean further_processing)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -233,7 +276,9 @@ public interface IWapPushManager extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IWapPushManager
-            public boolean deletePackage(String x_app_id, String content_type, String package_name, String class_name) throws RemoteException {
+            public boolean deletePackage(
+                    String x_app_id, String content_type, String package_name, String class_name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -15,6 +15,8 @@ public final /* synthetic */ class OdsignStatsLogger$$ExternalSyntheticLambda0 i
             Method dump skipped, instructions count: 261
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.dex.OdsignStatsLogger$$ExternalSyntheticLambda0.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.dex.OdsignStatsLogger$$ExternalSyntheticLambda0.run():void");
     }
 }

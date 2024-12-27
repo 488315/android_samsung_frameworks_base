@@ -47,6 +47,5 @@ public class SmsCbConstants {
     public static final int SERIAL_NUMBER_ETWS_ACTIVATE_POPUP = 4096;
     public static final int SERIAL_NUMBER_ETWS_EMERGENCY_USER_ALERT = 8192;
 
-    private SmsCbConstants() {
-    }
+    private SmsCbConstants() {}
 }

@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
+
 import com.android.internal.R;
-import com.android.internal.view.menu.MenuPresenter;
-import com.android.internal.view.menu.MenuView;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -62,7 +62,9 @@ public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClick
     @Override // com.android.internal.view.menu.MenuPresenter
     public MenuView getMenuView(ViewGroup root) {
         if (this.mMenuView == null) {
-            this.mMenuView = (ExpandedMenuView) this.mInflater.inflate(R.layout.expanded_menu_layout, root, false);
+            this.mMenuView =
+                    (ExpandedMenuView)
+                            this.mInflater.inflate(R.layout.expanded_menu_layout, root, false);
             if (this.mAdapter == null) {
                 this.mAdapter = new MenuAdapter();
             }
@@ -216,7 +218,9 @@ public class ListMenuPresenter implements MenuPresenter, AdapterView.OnItemClick
         @Override // android.widget.Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = ListMenuPresenter.this.mInflater.inflate(ListMenuPresenter.this.mItemLayoutRes, parent, false);
+                convertView =
+                        ListMenuPresenter.this.mInflater.inflate(
+                                ListMenuPresenter.this.mItemLayoutRes, parent, false);
             }
             MenuView.ItemView itemView = (MenuView.ItemView) convertView;
             itemView.initialize(getItem(position), 0);

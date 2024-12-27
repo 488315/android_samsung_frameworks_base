@@ -5,7 +5,6 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.os.Bundle;
-import android.view.ActionMode;
 import android.view.accessibility.AccessibilityEvent;
 import android.window.OnBackInvokedDispatcher;
 
@@ -107,10 +106,10 @@ public interface ViewParent {
         }
     }
 
-    default void subtractObscuredTouchableRegion(Region touchableRegion, View view) {
-    }
+    default void subtractObscuredTouchableRegion(Region touchableRegion, View view) {}
 
-    default boolean getChildLocalHitRegion(View child, Region region, Matrix matrix, boolean isHover) {
+    default boolean getChildLocalHitRegion(
+            View child, Region region, Matrix matrix, boolean isHover) {
         region.setEmpty();
         return false;
     }
@@ -121,7 +120,8 @@ public interface ViewParent {
         }
     }
 
-    default OnBackInvokedDispatcher findOnBackInvokedDispatcherForChild(View child, View requester) {
+    default OnBackInvokedDispatcher findOnBackInvokedDispatcherForChild(
+            View child, View requester) {
         return null;
     }
 

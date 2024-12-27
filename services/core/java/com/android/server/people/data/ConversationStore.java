@@ -4,7 +4,7 @@ import android.content.LocusId;
 import android.net.Uri;
 import android.util.ArrayMap;
 import android.util.Slog;
-import com.android.server.people.data.AbstractProtoDiskReadWriter;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,7 +28,8 @@ public final class ConversationStore {
     public final class ConversationInfosProtoDiskReadWriter extends AbstractProtoDiskReadWriter {
         public final String mConversationInfoFileName;
 
-        public ConversationInfosProtoDiskReadWriter(File file, ScheduledExecutorService scheduledExecutorService) {
+        public ConversationInfosProtoDiskReadWriter(
+                File file, ScheduledExecutorService scheduledExecutorService) {
             super(file, scheduledExecutorService);
             this.mConversationInfoFileName = "conversations";
         }
@@ -61,7 +62,9 @@ public final class ConversationStore {
     }
 
     public final synchronized ConversationInfo getConversation(String str) {
-        return str != null ? (ConversationInfo) ((ArrayMap) this.mConversationInfoMap).get(str) : null;
+        return str != null
+                ? (ConversationInfo) ((ArrayMap) this.mConversationInfoMap).get(str)
+                : null;
     }
 
     public final synchronized ConversationInfo getConversationByLocusId(LocusId locusId) {
@@ -75,31 +78,39 @@ public final class ConversationStore {
     public final ConversationInfosProtoDiskReadWriter getConversationInfosProtoDiskReadWriter() {
         if (this.mPackageDir.exists()) {
             if (this.mConversationInfosProtoDiskReadWriter == null) {
-                this.mConversationInfosProtoDiskReadWriter = new ConversationInfosProtoDiskReadWriter(this.mPackageDir, this.mScheduledExecutorService);
+                this.mConversationInfosProtoDiskReadWriter =
+                        new ConversationInfosProtoDiskReadWriter(
+                                this.mPackageDir, this.mScheduledExecutorService);
             }
             return this.mConversationInfosProtoDiskReadWriter;
         }
-        Slog.e("ConversationStore", "Package data directory does not exist: " + this.mPackageDir.getAbsolutePath());
+        Slog.e(
+                "ConversationStore",
+                "Package data directory does not exist: " + this.mPackageDir.getAbsolutePath());
         return null;
     }
 
     public final void scheduleUpdateConversationsOnDisk() {
         ArrayList arrayList;
-        ConversationInfosProtoDiskReadWriter conversationInfosProtoDiskReadWriter = getConversationInfosProtoDiskReadWriter();
+        ConversationInfosProtoDiskReadWriter conversationInfosProtoDiskReadWriter =
+                getConversationInfosProtoDiskReadWriter();
         if (conversationInfosProtoDiskReadWriter != null) {
             synchronized (this) {
                 arrayList = new ArrayList(((ArrayMap) this.mConversationInfoMap).values());
             }
-            conversationInfosProtoDiskReadWriter.scheduleSave(conversationInfosProtoDiskReadWriter.mConversationInfoFileName, arrayList);
+            conversationInfosProtoDiskReadWriter.scheduleSave(
+                    conversationInfosProtoDiskReadWriter.mConversationInfoFileName, arrayList);
         }
     }
 
     public final synchronized void updateConversationsInMemory(ConversationInfo conversationInfo) {
         try {
-            ((ArrayMap) this.mConversationInfoMap).put(conversationInfo.mShortcutId, conversationInfo);
+            ((ArrayMap) this.mConversationInfoMap)
+                    .put(conversationInfo.mShortcutId, conversationInfo);
             LocusId locusId = conversationInfo.mLocusId;
             if (locusId != null) {
-                ((ArrayMap) this.mLocusIdToShortcutIdMap).put(locusId, conversationInfo.mShortcutId);
+                ((ArrayMap) this.mLocusIdToShortcutIdMap)
+                        .put(locusId, conversationInfo.mShortcutId);
             }
             Uri uri = conversationInfo.mContactUri;
             if (uri != null) {
@@ -107,11 +118,13 @@ public final class ConversationStore {
             }
             String str = conversationInfo.mContactPhoneNumber;
             if (str != null) {
-                ((ArrayMap) this.mPhoneNumberToShortcutIdMap).put(str, conversationInfo.mShortcutId);
+                ((ArrayMap) this.mPhoneNumberToShortcutIdMap)
+                        .put(str, conversationInfo.mShortcutId);
             }
             String str2 = conversationInfo.mNotificationChannelId;
             if (str2 != null) {
-                ((ArrayMap) this.mNotifChannelIdToShortcutIdMap).put(str2, conversationInfo.mShortcutId);
+                ((ArrayMap) this.mNotifChannelIdToShortcutIdMap)
+                        .put(str2, conversationInfo.mShortcutId);
             }
         } catch (Throwable th) {
             throw th;

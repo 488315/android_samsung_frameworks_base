@@ -41,11 +41,23 @@ public class IccCardConstants {
         DETECTED;
 
         public boolean isPinLocked() {
-            return TelephonyFeatures.isSalesCodeSpecific("SKC", "KTC", "LUC", "KOO") ? this == PIN_REQUIRED || this == PUK_REQUIRED || this == PERSO_LOCKED : this == PIN_REQUIRED || this == PUK_REQUIRED;
+            return TelephonyFeatures.isSalesCodeSpecific("SKC", "KTC", "LUC", "KOO")
+                    ? this == PIN_REQUIRED || this == PUK_REQUIRED || this == PERSO_LOCKED
+                    : this == PIN_REQUIRED || this == PUK_REQUIRED;
         }
 
         public boolean iccCardExist() {
-            return this == PIN_REQUIRED || this == PUK_REQUIRED || this == NETWORK_LOCKED || this == READY || this == NOT_READY || this == PERM_DISABLED || this == CARD_IO_ERROR || this == CARD_RESTRICTED || this == LOADED || this == PERSO_LOCKED || this == DETECTED;
+            return this == PIN_REQUIRED
+                    || this == PUK_REQUIRED
+                    || this == NETWORK_LOCKED
+                    || this == READY
+                    || this == NOT_READY
+                    || this == PERM_DISABLED
+                    || this == CARD_IO_ERROR
+                    || this == CARD_RESTRICTED
+                    || this == LOADED
+                    || this == PERSO_LOCKED
+                    || this == DETECTED;
         }
 
         public static State intToState(int state) throws IllegalArgumentException {

@@ -1,6 +1,7 @@
 package android.util;
 
 import android.graphics.Path;
+
 import dalvik.annotation.optimization.FastNative;
 
 /* loaded from: classes4.dex */
@@ -69,7 +70,8 @@ public class PathParser {
 
         public PathData(String pathString) {
             this.mNativePathData = 0L;
-            this.mNativePathData = PathParser.nCreatePathDataFromString(pathString, pathString.length());
+            this.mNativePathData =
+                    PathParser.nCreatePathDataFromString(pathString, pathString.length());
             if (this.mNativePathData == 0) {
                 throw new IllegalArgumentException("Invalid pathData: " + pathString);
             }
@@ -92,7 +94,12 @@ public class PathParser {
         }
     }
 
-    public static boolean interpolatePathData(PathData outData, PathData fromData, PathData toData, float fraction) {
-        return nInterpolatePathData(outData.mNativePathData, fromData.mNativePathData, toData.mNativePathData, fraction);
+    public static boolean interpolatePathData(
+            PathData outData, PathData fromData, PathData toData, float fraction) {
+        return nInterpolatePathData(
+                outData.mNativePathData,
+                fromData.mNativePathData,
+                toData.mNativePathData,
+                fraction);
     }
 }

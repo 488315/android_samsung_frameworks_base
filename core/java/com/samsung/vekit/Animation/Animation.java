@@ -1,6 +1,7 @@
 package com.samsung.vekit.Animation;
 
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.BezierControlPoint;
 import com.samsung.vekit.Common.Object.Element;
 import com.samsung.vekit.Common.Object.KeyFrame;
@@ -9,6 +10,7 @@ import com.samsung.vekit.Common.Type.ElementType;
 import com.samsung.vekit.Common.Type.InterpolationType;
 import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Listener.AnimationStatusListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -64,8 +66,7 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         return this.rollbackValue;
     }
 
-    public void rollback() {
-    }
+    public void rollback() {}
 
     public Element getTarget() {
         return this.firstTarget;
@@ -92,11 +93,16 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public Animation<?> setBezierControlPoint(float controlPointX1, float controlPointY1, float controlPointX2, float controlPointY2) {
+    public Animation<?> setBezierControlPoint(
+            float controlPointX1,
+            float controlPointY1,
+            float controlPointX2,
+            float controlPointY2) {
         Iterator<KeyFrame<T>> it = this.keyFrameList.iterator();
         while (it.hasNext()) {
             KeyFrame<T> data = it.next();
-            data.setBezierControlPoint(controlPointX1, controlPointY1, controlPointX2, controlPointY2);
+            data.setBezierControlPoint(
+                    controlPointX1, controlPointY1, controlPointX2, controlPointY2);
         }
         return this;
     }
@@ -151,8 +157,7 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
         this.listener.onAnimationCanceled(interpolatedValue);
     }
 
-    public void updateTargetValue(Object interpolatedValue) {
-    }
+    public void updateTargetValue(Object interpolatedValue) {}
 
     /* JADX WARN: Multi-variable type inference failed */
     public Animation<?> setRepeat(int fromLoop, int toLoop, int repeatCount) {
@@ -182,11 +187,15 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
             return;
         }
         int size = this.keyFrameList.size();
-        this.duration += this.keyFrameList.get(size - 1).getTime() - this.keyFrameList.get(0).getTime();
+        this.duration +=
+                this.keyFrameList.get(size - 1).getTime() - this.keyFrameList.get(0).getTime();
         if (this.repeatCount == 0) {
             return;
         }
-        long repeatDuration = (this.keyFrameList.get(this.toLoop).getTime() - this.keyFrameList.get(this.fromLoop).getTime()) * this.repeatCount;
+        long repeatDuration =
+                (this.keyFrameList.get(this.toLoop).getTime()
+                                - this.keyFrameList.get(this.fromLoop).getTime())
+                        * this.repeatCount;
         this.duration += repeatDuration;
     }
 
@@ -268,12 +277,14 @@ public abstract class Animation<T> extends Element implements AnimationStatusLis
     }
 
     private void sortKeyFrameList() {
-        this.keyFrameList.sort(new Comparator() { // from class: com.samsung.vekit.Animation.Animation$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                return Animation.lambda$sortKeyFrameList$0((KeyFrame) obj, (KeyFrame) obj2);
-            }
-        });
+        this.keyFrameList.sort(
+                new Comparator() { // from class:
+                                   // com.samsung.vekit.Animation.Animation$$ExternalSyntheticLambda0
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        return Animation.lambda$sortKeyFrameList$0((KeyFrame) obj, (KeyFrame) obj2);
+                    }
+                });
     }
 
     static /* synthetic */ int lambda$sortKeyFrameList$0(KeyFrame prev, KeyFrame next) {

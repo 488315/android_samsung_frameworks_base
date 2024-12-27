@@ -1,7 +1,7 @@
 package android.media.audiofx;
 
-import android.media.audiofx.AudioEffect;
 import android.util.Log;
+
 import java.util.StringTokenizer;
 
 /* loaded from: classes2.dex */
@@ -16,7 +16,11 @@ public class LoudnessEnhancer extends AudioEffect {
         void onParameterChange(LoudnessEnhancer loudnessEnhancer, int i, int i2);
     }
 
-    public LoudnessEnhancer(int audioSession) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public LoudnessEnhancer(int audioSession)
+            throws IllegalStateException,
+                    IllegalArgumentException,
+                    UnsupportedOperationException,
+                    RuntimeException {
         super(EFFECT_TYPE_LOUDNESS_ENHANCER, EFFECT_TYPE_NULL, 0, audioSession);
         this.mParamListener = null;
         this.mBaseParamListener = null;
@@ -26,7 +30,11 @@ public class LoudnessEnhancer extends AudioEffect {
         }
     }
 
-    public LoudnessEnhancer(int priority, int audioSession) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public LoudnessEnhancer(int priority, int audioSession)
+            throws IllegalStateException,
+                    IllegalArgumentException,
+                    UnsupportedOperationException,
+                    RuntimeException {
         super(EFFECT_TYPE_LOUDNESS_ENHANCER, EFFECT_TYPE_NULL, priority, audioSession);
         this.mParamListener = null;
         this.mBaseParamListener = null;
@@ -36,19 +44,20 @@ public class LoudnessEnhancer extends AudioEffect {
         }
     }
 
-    public void setTargetGain(int gainmB) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setTargetGain(int gainmB)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(0, gainmB));
     }
 
-    public float getTargetGain() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public float getTargetGain()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         int[] value = new int[1];
         checkStatus(getParameter(0, value));
         return value[0];
     }
 
     private class BaseParameterListener implements AudioEffect.OnParameterChangeListener {
-        private BaseParameterListener() {
-        }
+        private BaseParameterListener() {}
 
         @Override // android.media.audiofx.AudioEffect.OnParameterChangeListener
         public void onParameterChange(AudioEffect effect, int status, byte[] param, byte[] value) {
@@ -90,8 +99,7 @@ public class LoudnessEnhancer extends AudioEffect {
     public static class Settings {
         public int targetGainmB;
 
-        public Settings() {
-        }
+        public Settings() {}
 
         public Settings(String settings) {
             StringTokenizer st = new StringTokenizer(settings, "=;");
@@ -114,12 +122,15 @@ public class LoudnessEnhancer extends AudioEffect {
         }
 
         public String toString() {
-            String str = new String("LoudnessEnhancer;targetGainmB=" + Integer.toString(this.targetGainmB));
+            String str =
+                    new String(
+                            "LoudnessEnhancer;targetGainmB=" + Integer.toString(this.targetGainmB));
             return str;
         }
     }
 
-    public Settings getProperties() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public Settings getProperties()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         Settings settings = new Settings();
         int[] value = new int[1];
         checkStatus(getParameter(0, value));
@@ -127,7 +138,8 @@ public class LoudnessEnhancer extends AudioEffect {
         return settings;
     }
 
-    public void setProperties(Settings settings) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setProperties(Settings settings)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(0, settings.targetGainmB));
     }
 }

@@ -1,7 +1,6 @@
 package android.hardware.tv.tuner;
 
 import android.hardware.common.fmq.MQDescriptor;
-import android.hardware.tv.tuner.IFilter;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -38,40 +37,31 @@ public interface IDvr extends IInterface {
 
     public static class Default implements IDvr {
         @Override // android.hardware.tv.tuner.IDvr
-        public void getQueueDesc(MQDescriptor<Byte, Byte> queue) throws RemoteException {
-        }
+        public void getQueueDesc(MQDescriptor<Byte, Byte> queue) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
-        public void configure(DvrSettings settings) throws RemoteException {
-        }
+        public void configure(DvrSettings settings) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
-        public void attachFilter(IFilter filter) throws RemoteException {
-        }
+        public void attachFilter(IFilter filter) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
-        public void detachFilter(IFilter filter) throws RemoteException {
-        }
+        public void detachFilter(IFilter filter) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
-        public void start() throws RemoteException {
-        }
+        public void start() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
-        public void stop() throws RemoteException {
-        }
+        public void stop() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
-        public void flush() throws RemoteException {
-        }
+        public void flush() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
-        public void setStatusCheckIntervalHint(long milliseconds) throws RemoteException {
-        }
+        public void setStatusCheckIntervalHint(long milliseconds) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDvr
         public int getInterfaceVersion() {
@@ -89,7 +79,7 @@ public interface IDvr extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDvr {
+    public abstract static class Stub extends Binder implements IDvr {
         static final int TRANSACTION_attachFilter = 3;
         static final int TRANSACTION_close = 8;
         static final int TRANSACTION_configure = 2;
@@ -124,7 +114,8 @@ public interface IDvr extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -365,7 +356,8 @@ public interface IDvr extends IInterface {
                     _data.writeLong(milliseconds);
                     boolean _status = this.mRemote.transact(9, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method setStatusCheckIntervalHint is unimplemented.");
+                        throw new RemoteException(
+                                "Method setStatusCheckIntervalHint is unimplemented.");
                     }
                     _reply.readException();
                 } finally {

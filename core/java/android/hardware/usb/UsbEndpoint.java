@@ -6,23 +6,25 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class UsbEndpoint implements Parcelable {
-    public static final Parcelable.Creator<UsbEndpoint> CREATOR = new Parcelable.Creator<UsbEndpoint>() { // from class: android.hardware.usb.UsbEndpoint.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsbEndpoint createFromParcel(Parcel in) {
-            int address = in.readInt();
-            int attributes = in.readInt();
-            int maxPacketSize = in.readInt();
-            int interval = in.readInt();
-            return new UsbEndpoint(address, attributes, maxPacketSize, interval);
-        }
+    public static final Parcelable.Creator<UsbEndpoint> CREATOR =
+            new Parcelable.Creator<
+                    UsbEndpoint>() { // from class: android.hardware.usb.UsbEndpoint.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsbEndpoint createFromParcel(Parcel in) {
+                    int address = in.readInt();
+                    int attributes = in.readInt();
+                    int maxPacketSize = in.readInt();
+                    int interval = in.readInt();
+                    return new UsbEndpoint(address, attributes, maxPacketSize, interval);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsbEndpoint[] newArray(int size) {
-            return new UsbEndpoint[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsbEndpoint[] newArray(int size) {
+                    return new UsbEndpoint[size];
+                }
+            };
     private final int mAddress;
     private final int mAttributes;
     private final int mInterval;
@@ -64,7 +66,15 @@ public class UsbEndpoint implements Parcelable {
     }
 
     public String toString() {
-        return "UsbEndpoint[mAddress=" + this.mAddress + ",mAttributes=" + this.mAttributes + ",mMaxPacketSize=" + this.mMaxPacketSize + ",mInterval=" + this.mInterval + NavigationBarInflaterView.SIZE_MOD_END;
+        return "UsbEndpoint[mAddress="
+                + this.mAddress
+                + ",mAttributes="
+                + this.mAttributes
+                + ",mMaxPacketSize="
+                + this.mMaxPacketSize
+                + ",mInterval="
+                + this.mInterval
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.os.Parcelable

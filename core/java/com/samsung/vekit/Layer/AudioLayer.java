@@ -11,7 +11,14 @@ public class AudioLayer extends Layer {
     public AudioLayer(VEContext context, int id, String name) {
         super(context, LayerType.AUDIO, id, name);
         this.volume = 100;
-        this.availableTypes = new ItemType[]{ItemType.AUDIO, ItemType.FRAGMENT_AUDIO, ItemType.VIDEO, ItemType.PORTRAIT_VIDEO, ItemType.EMPTY};
+        this.availableTypes =
+                new ItemType[] {
+                    ItemType.AUDIO,
+                    ItemType.FRAGMENT_AUDIO,
+                    ItemType.VIDEO,
+                    ItemType.PORTRAIT_VIDEO,
+                    ItemType.EMPTY
+                };
     }
 
     public int getVolume() {

@@ -6,7 +6,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.ANNOTATION_TYPE})
+@Target({
+    ElementType.METHOD,
+    ElementType.PARAMETER,
+    ElementType.FIELD,
+    ElementType.LOCAL_VARIABLE,
+    ElementType.ANNOTATION_TYPE
+})
 @Documented
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
@@ -16,8 +22,7 @@ public @interface Dimension {
     public static final int SP = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Unit {
-    }
+    public @interface Unit {}
 
     int unit() default 1;
 }

@@ -1,34 +1,48 @@
 package com.android.server.biometrics.sensors.fingerprint;
 
 import com.samsung.android.bio.fingerprint.ISemFingerprintAodController;
+
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class SemFpAodController$$ExternalSyntheticLambda2 implements Runnable {
+public final /* synthetic */ class SemFpAodController$$ExternalSyntheticLambda2
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ SemFpAodController f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ SemFpAodController$$ExternalSyntheticLambda2(SemFpAodController semFpAodController, SemFpAodController$$ExternalSyntheticLambda0 semFpAodController$$ExternalSyntheticLambda0) {
+    public /* synthetic */ SemFpAodController$$ExternalSyntheticLambda2(
+            SemFpAodController semFpAodController,
+            SemFpAodController$$ExternalSyntheticLambda0
+                    semFpAodController$$ExternalSyntheticLambda0) {
         this.$r8$classId = 1;
         this.f$0 = semFpAodController;
         this.f$1 = semFpAodController$$ExternalSyntheticLambda0;
     }
 
-    public /* synthetic */ SemFpAodController$$ExternalSyntheticLambda2(SemFpAodController semFpAodController, SemFpAodController$$ExternalSyntheticLambda0 semFpAodController$$ExternalSyntheticLambda0, byte b) {
+    public /* synthetic */ SemFpAodController$$ExternalSyntheticLambda2(
+            SemFpAodController semFpAodController,
+            SemFpAodController$$ExternalSyntheticLambda0
+                    semFpAodController$$ExternalSyntheticLambda0,
+            byte b) {
         this.$r8$classId = 2;
         this.f$0 = semFpAodController;
         this.f$1 = semFpAodController$$ExternalSyntheticLambda0;
     }
 
-    public /* synthetic */ SemFpAodController$$ExternalSyntheticLambda2(SemFpAodController semFpAodController, SemFpAodController$$ExternalSyntheticLambda0 semFpAodController$$ExternalSyntheticLambda0, char c) {
+    public /* synthetic */ SemFpAodController$$ExternalSyntheticLambda2(
+            SemFpAodController semFpAodController,
+            SemFpAodController$$ExternalSyntheticLambda0
+                    semFpAodController$$ExternalSyntheticLambda0,
+            char c) {
         this.$r8$classId = 3;
         this.f$0 = semFpAodController;
         this.f$1 = semFpAodController$$ExternalSyntheticLambda0;
     }
 
-    public /* synthetic */ SemFpAodController$$ExternalSyntheticLambda2(SemFpAodController semFpAodController, Object obj, int i) {
+    public /* synthetic */ SemFpAodController$$ExternalSyntheticLambda2(
+            SemFpAodController semFpAodController, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = semFpAodController;
         this.f$1 = obj;

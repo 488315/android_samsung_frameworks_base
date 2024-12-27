@@ -14,32 +14,44 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IContentSuggestionsService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.contentsuggestions.IContentSuggestionsService";
+    public static final String DESCRIPTOR =
+            "android.service.contentsuggestions.IContentSuggestionsService";
 
-    void classifyContentSelections(ClassificationsRequest classificationsRequest, IClassificationsCallback iClassificationsCallback) throws RemoteException;
+    void classifyContentSelections(
+            ClassificationsRequest classificationsRequest,
+            IClassificationsCallback iClassificationsCallback)
+            throws RemoteException;
 
     void notifyInteraction(String str, Bundle bundle) throws RemoteException;
 
-    void provideContextImage(int i, HardwareBuffer hardwareBuffer, int i2, Bundle bundle) throws RemoteException;
+    void provideContextImage(int i, HardwareBuffer hardwareBuffer, int i2, Bundle bundle)
+            throws RemoteException;
 
-    void suggestContentSelections(SelectionsRequest selectionsRequest, ISelectionsCallback iSelectionsCallback) throws RemoteException;
+    void suggestContentSelections(
+            SelectionsRequest selectionsRequest, ISelectionsCallback iSelectionsCallback)
+            throws RemoteException;
 
     public static class Default implements IContentSuggestionsService {
         @Override // android.service.contentsuggestions.IContentSuggestionsService
-        public void provideContextImage(int taskId, HardwareBuffer contextImage, int colorSpaceId, Bundle imageContextRequestExtras) throws RemoteException {
-        }
+        public void provideContextImage(
+                int taskId,
+                HardwareBuffer contextImage,
+                int colorSpaceId,
+                Bundle imageContextRequestExtras)
+                throws RemoteException {}
 
         @Override // android.service.contentsuggestions.IContentSuggestionsService
-        public void suggestContentSelections(SelectionsRequest request, ISelectionsCallback callback) throws RemoteException {
-        }
+        public void suggestContentSelections(
+                SelectionsRequest request, ISelectionsCallback callback) throws RemoteException {}
 
         @Override // android.service.contentsuggestions.IContentSuggestionsService
-        public void classifyContentSelections(ClassificationsRequest request, IClassificationsCallback callback) throws RemoteException {
-        }
+        public void classifyContentSelections(
+                ClassificationsRequest request, IClassificationsCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.contentsuggestions.IContentSuggestionsService
-        public void notifyInteraction(String requestId, Bundle interaction) throws RemoteException {
-        }
+        public void notifyInteraction(String requestId, Bundle interaction)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +59,7 @@ public interface IContentSuggestionsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentSuggestionsService {
+    public abstract static class Stub extends Binder implements IContentSuggestionsService {
         static final int TRANSACTION_classifyContentSelections = 3;
         static final int TRANSACTION_notifyInteraction = 4;
         static final int TRANSACTION_provideContextImage = 1;
@@ -94,7 +106,8 @@ public interface IContentSuggestionsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContentSuggestionsService.DESCRIPTOR);
             }
@@ -105,21 +118,27 @@ public interface IContentSuggestionsService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    HardwareBuffer _arg1 = (HardwareBuffer) data.readTypedObject(HardwareBuffer.CREATOR);
+                    HardwareBuffer _arg1 =
+                            (HardwareBuffer) data.readTypedObject(HardwareBuffer.CREATOR);
                     int _arg2 = data.readInt();
                     Bundle _arg3 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     provideContextImage(_arg0, _arg1, _arg2, _arg3);
                     return true;
                 case 2:
-                    SelectionsRequest _arg02 = (SelectionsRequest) data.readTypedObject(SelectionsRequest.CREATOR);
-                    ISelectionsCallback _arg12 = ISelectionsCallback.Stub.asInterface(data.readStrongBinder());
+                    SelectionsRequest _arg02 =
+                            (SelectionsRequest) data.readTypedObject(SelectionsRequest.CREATOR);
+                    ISelectionsCallback _arg12 =
+                            ISelectionsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     suggestContentSelections(_arg02, _arg12);
                     return true;
                 case 3:
-                    ClassificationsRequest _arg03 = (ClassificationsRequest) data.readTypedObject(ClassificationsRequest.CREATOR);
-                    IClassificationsCallback _arg13 = IClassificationsCallback.Stub.asInterface(data.readStrongBinder());
+                    ClassificationsRequest _arg03 =
+                            (ClassificationsRequest)
+                                    data.readTypedObject(ClassificationsRequest.CREATOR);
+                    IClassificationsCallback _arg13 =
+                            IClassificationsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     classifyContentSelections(_arg03, _arg13);
                     return true;
@@ -151,7 +170,12 @@ public interface IContentSuggestionsService extends IInterface {
             }
 
             @Override // android.service.contentsuggestions.IContentSuggestionsService
-            public void provideContextImage(int taskId, HardwareBuffer contextImage, int colorSpaceId, Bundle imageContextRequestExtras) throws RemoteException {
+            public void provideContextImage(
+                    int taskId,
+                    HardwareBuffer contextImage,
+                    int colorSpaceId,
+                    Bundle imageContextRequestExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
@@ -166,7 +190,9 @@ public interface IContentSuggestionsService extends IInterface {
             }
 
             @Override // android.service.contentsuggestions.IContentSuggestionsService
-            public void suggestContentSelections(SelectionsRequest request, ISelectionsCallback callback) throws RemoteException {
+            public void suggestContentSelections(
+                    SelectionsRequest request, ISelectionsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
@@ -179,7 +205,9 @@ public interface IContentSuggestionsService extends IInterface {
             }
 
             @Override // android.service.contentsuggestions.IContentSuggestionsService
-            public void classifyContentSelections(ClassificationsRequest request, IClassificationsCallback callback) throws RemoteException {
+            public void classifyContentSelections(
+                    ClassificationsRequest request, IClassificationsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);
@@ -192,7 +220,8 @@ public interface IContentSuggestionsService extends IInterface {
             }
 
             @Override // android.service.contentsuggestions.IContentSuggestionsService
-            public void notifyInteraction(String requestId, Bundle interaction) throws RemoteException {
+            public void notifyInteraction(String requestId, Bundle interaction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsService.DESCRIPTOR);

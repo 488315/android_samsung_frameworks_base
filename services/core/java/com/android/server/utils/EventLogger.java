@@ -2,8 +2,10 @@ package com.android.server.utils;
 
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.server.usb.DualOutputStreamDumpSink;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -21,7 +23,8 @@ public final class EventLogger {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Event {
-        public static final SimpleDateFormat sFormat = new SimpleDateFormat("MM-dd HH:mm:ss:SSS", Locale.US);
+        public static final SimpleDateFormat sFormat =
+                new SimpleDateFormat("MM-dd HH:mm:ss:SSS", Locale.US);
         public final long mTimestamp = System.currentTimeMillis();
 
         public abstract String eventToString();
@@ -86,7 +89,8 @@ public final class EventLogger {
         dualDumpOutputStream.write("USB Event Log", j, str);
         Iterator it = arrayList.iterator();
         while (it.hasNext()) {
-            dualOutputStreamDumpSink.mDumpOutputStream.write("USB Event", j, ((Event) it.next()).toString());
+            dualOutputStreamDumpSink.mDumpOutputStream.write(
+                    "USB Event", j, ((Event) it.next()).toString());
         }
     }
 

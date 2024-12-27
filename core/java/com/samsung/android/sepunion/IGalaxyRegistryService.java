@@ -16,12 +16,10 @@ public interface IGalaxyRegistryService extends IInterface {
 
     public static class Default implements IGalaxyRegistryService {
         @Override // com.samsung.android.sepunion.IGalaxyRegistryService
-        public void registerListener(String packageName, IBinder cb) throws RemoteException {
-        }
+        public void registerListener(String packageName, IBinder cb) throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IGalaxyRegistryService
-        public void unRegisterListener(String packageName, IBinder cb) throws RemoteException {
-        }
+        public void unRegisterListener(String packageName, IBinder cb) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IGalaxyRegistryService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGalaxyRegistryService {
+    public abstract static class Stub extends Binder implements IGalaxyRegistryService {
         static final int TRANSACTION_registerListener = 1;
         static final int TRANSACTION_unRegisterListener = 2;
 
@@ -70,7 +68,8 @@ public interface IGalaxyRegistryService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGalaxyRegistryService.DESCRIPTOR);
             }

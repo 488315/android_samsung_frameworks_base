@@ -5,6 +5,7 @@ import android.hardware.broadcastradio.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -19,7 +20,8 @@ public class IPv6ProvisioningLossQuirkParcelable implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            IPv6ProvisioningLossQuirkParcelable iPv6ProvisioningLossQuirkParcelable = new IPv6ProvisioningLossQuirkParcelable();
+            IPv6ProvisioningLossQuirkParcelable iPv6ProvisioningLossQuirkParcelable =
+                    new IPv6ProvisioningLossQuirkParcelable();
             iPv6ProvisioningLossQuirkParcelable.readFromParcel(parcel);
             return iPv6ProvisioningLossQuirkParcelable;
         }
@@ -70,10 +72,16 @@ public class IPv6ProvisioningLossQuirkParcelable implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        StringBuilder m = AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("detectionCount: "), this.detectionCount, stringJoiner, "quirkExpiry: ");
+        StringBuilder m =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("detectionCount: "),
+                        this.detectionCount,
+                        stringJoiner,
+                        "quirkExpiry: ");
         m.append(this.quirkExpiry);
         stringJoiner.add(m.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("IPv6ProvisioningLossQuirkParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("IPv6ProvisioningLossQuirkParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -84,6 +92,7 @@ public class IPv6ProvisioningLossQuirkParcelable implements Parcelable {
         parcel.writeLong(this.quirkExpiry);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

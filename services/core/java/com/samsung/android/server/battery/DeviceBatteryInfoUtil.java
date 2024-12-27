@@ -16,7 +16,8 @@ public abstract class DeviceBatteryInfoUtil {
             String replaceAll = str.replaceAll(":", "");
             return replaceAll.substring(0, 6) + "_" + replaceAll.substring(11);
         } catch (Exception e) {
-            BootReceiver$$ExternalSyntheticOutline0.m(e, "getAddressForLog(Exception occurred) : ", "DeviceBatteryInfoUtil");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    e, "getAddressForLog(Exception occurred) : ", "DeviceBatteryInfoUtil");
             return "unknown";
         }
     }

@@ -5,7 +5,9 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.StrictMode;
+
 import com.android.internal.util.ExponentiallyBucketedHistogram;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -21,7 +23,8 @@ public class QueuedWork {
     private static Handler sHandler = null;
     private static LinkedList<Runnable> sWork = new LinkedList<>();
     private static boolean sCanDelay = true;
-    private static final ExponentiallyBucketedHistogram mWaitTimes = new ExponentiallyBucketedHistogram(16);
+    private static final ExponentiallyBucketedHistogram mWaitTimes =
+            new ExponentiallyBucketedHistogram(16);
     private static int mNumWaits = 0;
 
     private static Handler getHandler() {

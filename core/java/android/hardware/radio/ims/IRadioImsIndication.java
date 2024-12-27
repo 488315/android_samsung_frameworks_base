@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioImsIndication extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$ims$IRadioImsIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$ims$IRadioImsIndication".replace('$', '.');
     public static final String HASH = "ec0dfedf764f3916783848c540ad312a74fa755d";
     public static final int VERSION = 2;
 
@@ -18,22 +19,22 @@ public interface IRadioImsIndication extends IInterface {
 
     void notifyAnbr(int i, int i2, int i3, int i4) throws RemoteException;
 
-    void onConnectionSetupFailure(int i, int i2, ConnectionFailureInfo connectionFailureInfo) throws RemoteException;
+    void onConnectionSetupFailure(int i, int i2, ConnectionFailureInfo connectionFailureInfo)
+            throws RemoteException;
 
     void triggerImsDeregistration(int i, int i2) throws RemoteException;
 
     public static class Default implements IRadioImsIndication {
         @Override // android.hardware.radio.ims.IRadioImsIndication
-        public void onConnectionSetupFailure(int type, int token, ConnectionFailureInfo info) throws RemoteException {
-        }
+        public void onConnectionSetupFailure(int type, int token, ConnectionFailureInfo info)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsIndication
-        public void notifyAnbr(int type, int mediaType, int direction, int bitsPerSecond) throws RemoteException {
-        }
+        public void notifyAnbr(int type, int mediaType, int direction, int bitsPerSecond)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsIndication
-        public void triggerImsDeregistration(int type, int reason) throws RemoteException {
-        }
+        public void triggerImsDeregistration(int type, int reason) throws RemoteException {}
 
         @Override // android.hardware.radio.ims.IRadioImsIndication
         public int getInterfaceVersion() {
@@ -51,7 +52,7 @@ public interface IRadioImsIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioImsIndication {
+    public abstract static class Stub extends Binder implements IRadioImsIndication {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_notifyAnbr = 2;
@@ -80,7 +81,8 @@ public interface IRadioImsIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -103,7 +105,9 @@ public interface IRadioImsIndication extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    ConnectionFailureInfo _arg2 = (ConnectionFailureInfo) data.readTypedObject(ConnectionFailureInfo.CREATOR);
+                    ConnectionFailureInfo _arg2 =
+                            (ConnectionFailureInfo)
+                                    data.readTypedObject(ConnectionFailureInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onConnectionSetupFailure(_arg0, _arg1, _arg2);
                     return true;
@@ -145,7 +149,8 @@ public interface IRadioImsIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioImsIndication
-            public void onConnectionSetupFailure(int type, int token, ConnectionFailureInfo info) throws RemoteException {
+            public void onConnectionSetupFailure(int type, int token, ConnectionFailureInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -154,7 +159,8 @@ public interface IRadioImsIndication extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method onConnectionSetupFailure is unimplemented.");
+                        throw new RemoteException(
+                                "Method onConnectionSetupFailure is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -162,7 +168,8 @@ public interface IRadioImsIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.ims.IRadioImsIndication
-            public void notifyAnbr(int type, int mediaType, int direction, int bitsPerSecond) throws RemoteException {
+            public void notifyAnbr(int type, int mediaType, int direction, int bitsPerSecond)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -188,7 +195,8 @@ public interface IRadioImsIndication extends IInterface {
                     _data.writeInt(reason);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method triggerImsDeregistration is unimplemented.");
+                        throw new RemoteException(
+                                "Method triggerImsDeregistration is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

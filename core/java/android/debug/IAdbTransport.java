@@ -14,8 +14,7 @@ public interface IAdbTransport extends IInterface {
 
     public static class Default implements IAdbTransport {
         @Override // android.debug.IAdbTransport
-        public void onAdbEnabled(boolean enabled, byte type) throws RemoteException {
-        }
+        public void onAdbEnabled(boolean enabled, byte type) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IAdbTransport extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAdbTransport {
+    public abstract static class Stub extends Binder implements IAdbTransport {
         static final int TRANSACTION_onAdbEnabled = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IAdbTransport extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAdbTransport.DESCRIPTOR);
             }

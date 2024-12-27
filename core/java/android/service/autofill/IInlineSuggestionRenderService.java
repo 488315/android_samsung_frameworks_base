@@ -6,30 +6,46 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
-import android.service.autofill.IInlineSuggestionUiCallback;
 
 /* loaded from: classes3.dex */
 public interface IInlineSuggestionRenderService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.autofill.IInlineSuggestionRenderService";
+    public static final String DESCRIPTOR =
+            "android.service.autofill.IInlineSuggestionRenderService";
 
     void destroySuggestionViews(int i, int i2) throws RemoteException;
 
     void getInlineSuggestionsRendererInfo(RemoteCallback remoteCallback) throws RemoteException;
 
-    void renderSuggestion(IInlineSuggestionUiCallback iInlineSuggestionUiCallback, InlinePresentation inlinePresentation, int i, int i2, IBinder iBinder, int i3, int i4, int i5) throws RemoteException;
+    void renderSuggestion(
+            IInlineSuggestionUiCallback iInlineSuggestionUiCallback,
+            InlinePresentation inlinePresentation,
+            int i,
+            int i2,
+            IBinder iBinder,
+            int i3,
+            int i4,
+            int i5)
+            throws RemoteException;
 
     public static class Default implements IInlineSuggestionRenderService {
         @Override // android.service.autofill.IInlineSuggestionRenderService
-        public void renderSuggestion(IInlineSuggestionUiCallback callback, InlinePresentation presentation, int width, int height, IBinder hostInputToken, int displayId, int userId, int sessionId) throws RemoteException {
-        }
+        public void renderSuggestion(
+                IInlineSuggestionUiCallback callback,
+                InlinePresentation presentation,
+                int width,
+                int height,
+                IBinder hostInputToken,
+                int displayId,
+                int userId,
+                int sessionId)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IInlineSuggestionRenderService
-        public void getInlineSuggestionsRendererInfo(RemoteCallback callback) throws RemoteException {
-        }
+        public void getInlineSuggestionsRendererInfo(RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IInlineSuggestionRenderService
-        public void destroySuggestionViews(int userId, int sessionId) throws RemoteException {
-        }
+        public void destroySuggestionViews(int userId, int sessionId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +53,7 @@ public interface IInlineSuggestionRenderService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInlineSuggestionRenderService {
+    public abstract static class Stub extends Binder implements IInlineSuggestionRenderService {
         static final int TRANSACTION_destroySuggestionViews = 3;
         static final int TRANSACTION_getInlineSuggestionsRendererInfo = 2;
         static final int TRANSACTION_renderSuggestion = 1;
@@ -81,7 +97,8 @@ public interface IInlineSuggestionRenderService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInlineSuggestionRenderService.DESCRIPTOR);
             }
@@ -91,8 +108,10 @@ public interface IInlineSuggestionRenderService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IInlineSuggestionUiCallback _arg0 = IInlineSuggestionUiCallback.Stub.asInterface(data.readStrongBinder());
-                    InlinePresentation _arg1 = (InlinePresentation) data.readTypedObject(InlinePresentation.CREATOR);
+                    IInlineSuggestionUiCallback _arg0 =
+                            IInlineSuggestionUiCallback.Stub.asInterface(data.readStrongBinder());
+                    InlinePresentation _arg1 =
+                            (InlinePresentation) data.readTypedObject(InlinePresentation.CREATOR);
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
                     IBinder _arg4 = data.readStrongBinder();
@@ -103,7 +122,8 @@ public interface IInlineSuggestionRenderService extends IInterface {
                     renderSuggestion(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
                     return true;
                 case 2:
-                    RemoteCallback _arg02 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg02 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getInlineSuggestionsRendererInfo(_arg02);
                     return true;
@@ -135,7 +155,16 @@ public interface IInlineSuggestionRenderService extends IInterface {
             }
 
             @Override // android.service.autofill.IInlineSuggestionRenderService
-            public void renderSuggestion(IInlineSuggestionUiCallback callback, InlinePresentation presentation, int width, int height, IBinder hostInputToken, int displayId, int userId, int sessionId) throws RemoteException {
+            public void renderSuggestion(
+                    IInlineSuggestionUiCallback callback,
+                    InlinePresentation presentation,
+                    int width,
+                    int height,
+                    IBinder hostInputToken,
+                    int displayId,
+                    int userId,
+                    int sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineSuggestionRenderService.DESCRIPTOR);
@@ -154,7 +183,8 @@ public interface IInlineSuggestionRenderService extends IInterface {
             }
 
             @Override // android.service.autofill.IInlineSuggestionRenderService
-            public void getInlineSuggestionsRendererInfo(RemoteCallback callback) throws RemoteException {
+            public void getInlineSuggestionsRendererInfo(RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineSuggestionRenderService.DESCRIPTOR);

@@ -10,10 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
-import android.content.pm.IOnChecksumsReadyListener;
-import android.content.pm.IPackageInstallerCallback;
-import android.content.pm.PackageInstaller;
-import android.content.pm.PackageManager;
 import android.content.pm.parsing.ApkLiteParseUtils;
 import android.content.pm.parsing.PackageLite;
 import android.content.pm.parsing.result.ParseResult;
@@ -41,6 +37,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.ExceptionUtils;
+
 import com.android.internal.content.InstallLocationUtils;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.ArrayUtils;
@@ -48,7 +45,9 @@ import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import com.samsung.android.share.SemShareConstants;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -79,80 +78,84 @@ public class PackageInstaller {
     public static final String ACTION_CONFIRM_INSTALL = "android.content.pm.action.CONFIRM_INSTALL";
 
     @SystemApi
-    public static final String ACTION_CONFIRM_PRE_APPROVAL = "android.content.pm.action.CONFIRM_PRE_APPROVAL";
-    public static final String ACTION_SESSION_COMMITTED = "android.content.pm.action.SESSION_COMMITTED";
+    public static final String ACTION_CONFIRM_PRE_APPROVAL =
+            "android.content.pm.action.CONFIRM_PRE_APPROVAL";
+
+    public static final String ACTION_SESSION_COMMITTED =
+            "android.content.pm.action.SESSION_COMMITTED";
     public static final String ACTION_SESSION_DETAILS = "android.content.pm.action.SESSION_DETAILS";
     public static final String ACTION_SESSION_UPDATED = "android.content.pm.action.SESSION_UPDATED";
-    private static final String ACTION_WAIT_INSTALL_CONSTRAINTS = "android.content.pm.action.WAIT_INSTALL_CONSTRAINTS";
+    private static final String ACTION_WAIT_INSTALL_CONSTRAINTS =
+            "android.content.pm.action.WAIT_INSTALL_CONSTRAINTS";
 
-    @SystemApi
-    public static final int DATA_LOADER_TYPE_INCREMENTAL = 2;
+    @SystemApi public static final int DATA_LOADER_TYPE_INCREMENTAL = 2;
 
-    @SystemApi
-    public static final int DATA_LOADER_TYPE_NONE = 0;
+    @SystemApi public static final int DATA_LOADER_TYPE_NONE = 0;
 
-    @SystemApi
-    public static final int DATA_LOADER_TYPE_STREAMING = 1;
+    @SystemApi public static final int DATA_LOADER_TYPE_STREAMING = 1;
     private static final int DEFAULT_CHECKSUMS = 127;
-    public static final boolean ENABLE_REVOCABLE_FD = SystemProperties.getBoolean("fw.revocable_fd", false);
+    public static final boolean ENABLE_REVOCABLE_FD =
+            SystemProperties.getBoolean("fw.revocable_fd", false);
 
-    @SystemApi
-    public static final String EXTRA_CALLBACK = "android.content.pm.extra.CALLBACK";
+    @SystemApi public static final String EXTRA_CALLBACK = "android.content.pm.extra.CALLBACK";
 
     @SystemApi
     public static final String EXTRA_DATA_LOADER_TYPE = "android.content.pm.extra.DATA_LOADER_TYPE";
 
     @SystemApi
     public static final String EXTRA_DELETE_FLAGS = "android.content.pm.extra.DELETE_FLAGS";
-    public static final String EXTRA_INSTALL_CONSTRAINTS = "android.content.pm.extra.INSTALL_CONSTRAINTS";
-    public static final String EXTRA_INSTALL_CONSTRAINTS_RESULT = "android.content.pm.extra.INSTALL_CONSTRAINTS_RESULT";
+
+    public static final String EXTRA_INSTALL_CONSTRAINTS =
+            "android.content.pm.extra.INSTALL_CONSTRAINTS";
+    public static final String EXTRA_INSTALL_CONSTRAINTS_RESULT =
+            "android.content.pm.extra.INSTALL_CONSTRAINTS_RESULT";
     public static final String EXTRA_LEGACY_BUNDLE = "android.content.pm.extra.LEGACY_BUNDLE";
 
     @SystemApi
     public static final String EXTRA_LEGACY_STATUS = "android.content.pm.extra.LEGACY_STATUS";
-    public static final String EXTRA_OTHER_PACKAGE_NAME = "android.content.pm.extra.OTHER_PACKAGE_NAME";
+
+    public static final String EXTRA_OTHER_PACKAGE_NAME =
+            "android.content.pm.extra.OTHER_PACKAGE_NAME";
     public static final String EXTRA_PACKAGE_NAME = "android.content.pm.extra.PACKAGE_NAME";
 
     @Deprecated
     public static final String EXTRA_PACKAGE_NAMES = "android.content.pm.extra.PACKAGE_NAMES";
+
     public static final String EXTRA_PRE_APPROVAL = "android.content.pm.extra.PRE_APPROVAL";
 
-    @SystemApi
-    @Deprecated
-    public static final String EXTRA_RESOLVED_BASE_PATH = "android.content.pm.extra.RESOLVED_BASE_PATH";
+    @SystemApi @Deprecated
+    public static final String EXTRA_RESOLVED_BASE_PATH =
+            "android.content.pm.extra.RESOLVED_BASE_PATH";
+
     public static final String EXTRA_SESSION = "android.content.pm.extra.SESSION";
     public static final String EXTRA_SESSION_ID = "android.content.pm.extra.SESSION_ID";
     public static final String EXTRA_STATUS = "android.content.pm.extra.STATUS";
     public static final String EXTRA_STATUS_MESSAGE = "android.content.pm.extra.STATUS_MESSAGE";
     public static final String EXTRA_STORAGE_PATH = "android.content.pm.extra.STORAGE_PATH";
-    public static final String EXTRA_UNARCHIVE_ALL_USERS = "android.content.pm.extra.UNARCHIVE_ALL_USERS";
+    public static final String EXTRA_UNARCHIVE_ALL_USERS =
+            "android.content.pm.extra.UNARCHIVE_ALL_USERS";
     public static final String EXTRA_UNARCHIVE_ID = "android.content.pm.extra.UNARCHIVE_ID";
-    public static final String EXTRA_UNARCHIVE_PACKAGE_NAME = "android.content.pm.extra.UNARCHIVE_PACKAGE_NAME";
+    public static final String EXTRA_UNARCHIVE_PACKAGE_NAME =
+            "android.content.pm.extra.UNARCHIVE_PACKAGE_NAME";
     public static final String EXTRA_UNARCHIVE_STATUS = "android.content.pm.extra.UNARCHIVE_STATUS";
     public static final String EXTRA_WARNINGS = "android.content.pm.extra.WARNINGS";
 
-    @SystemApi
-    public static final int LOCATION_DATA_APP = 0;
+    @SystemApi public static final int LOCATION_DATA_APP = 0;
 
-    @SystemApi
-    public static final int LOCATION_MEDIA_DATA = 2;
+    @SystemApi public static final int LOCATION_MEDIA_DATA = 2;
 
-    @SystemApi
-    public static final int LOCATION_MEDIA_OBB = 1;
+    @SystemApi public static final int LOCATION_MEDIA_OBB = 1;
     public static final int PACKAGE_SOURCE_DOWNLOADED_FILE = 4;
     public static final int PACKAGE_SOURCE_LOCAL_FILE = 3;
     public static final int PACKAGE_SOURCE_OTHER = 1;
     public static final int PACKAGE_SOURCE_STORE = 2;
     public static final int PACKAGE_SOURCE_UNSPECIFIED = 0;
 
-    @SystemApi
-    public static final int REASON_CONFIRM_PACKAGE_CHANGE = 0;
+    @SystemApi public static final int REASON_CONFIRM_PACKAGE_CHANGE = 0;
 
-    @SystemApi
-    public static final int REASON_OWNERSHIP_CHANGED = 1;
+    @SystemApi public static final int REASON_OWNERSHIP_CHANGED = 1;
 
-    @SystemApi
-    public static final int REASON_REMIND_OWNERSHIP = 2;
+    @SystemApi public static final int REASON_REMIND_OWNERSHIP = 2;
     public static final int STATUS_FAILURE = 1;
     public static final int STATUS_FAILURE_ABORTED = 3;
     public static final int STATUS_FAILURE_BLOCKED = 2;
@@ -180,14 +183,12 @@ public class PackageInstaller {
     private final int mUserId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FileLocation {
-    }
+    public @interface FileLocation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface PackageSourceType {
-    }
+    @interface PackageSourceType {}
 
-    public static abstract class SessionCallback {
+    public abstract static class SessionCallback {
         public abstract void onActiveChanged(int i, boolean z);
 
         public abstract void onBadgingChanged(int i);
@@ -200,14 +201,16 @@ public class PackageInstaller {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UnarchivalStatus {
-    }
+    public @interface UnarchivalStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UserActionReason {
-    }
+    public @interface UserActionReason {}
 
-    public PackageInstaller(IPackageInstaller installer, String installerPackageName, String installerAttributionTag, int userId) {
+    public PackageInstaller(
+            IPackageInstaller installer,
+            String installerPackageName,
+            String installerAttributionTag,
+            int userId) {
         Objects.requireNonNull(installer, "installer cannot be null");
         this.mInstaller = installer;
         this.mInstallerPackageName = installerPackageName;
@@ -217,7 +220,8 @@ public class PackageInstaller {
 
     public int createSession(SessionParams params) throws IOException {
         try {
-            return this.mInstaller.createSession(params, this.mInstallerPackageName, this.mAttributionTag, this.mUserId);
+            return this.mInstaller.createSession(
+                    params, this.mInstallerPackageName, this.mAttributionTag, this.mUserId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (RuntimeException e2) {
@@ -311,7 +315,9 @@ public class PackageInstaller {
 
     public List<SessionInfo> getMySessions() {
         try {
-            return this.mInstaller.getMySessions(this.mInstallerPackageName, this.mUserId).getList();
+            return this.mInstaller
+                    .getMySessions(this.mInstallerPackageName, this.mUserId)
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -366,19 +372,27 @@ public class PackageInstaller {
         uninstall(versionedPackage, 0, statusReceiver);
     }
 
-    public void uninstall(VersionedPackage versionedPackage, int flags, IntentSender statusReceiver) {
+    public void uninstall(
+            VersionedPackage versionedPackage, int flags, IntentSender statusReceiver) {
         Objects.requireNonNull(versionedPackage, "versionedPackage cannot be null");
         try {
-            this.mInstaller.uninstall(versionedPackage, this.mInstallerPackageName, flags, statusReceiver, this.mUserId);
+            this.mInstaller.uninstall(
+                    versionedPackage,
+                    this.mInstallerPackageName,
+                    flags,
+                    statusReceiver,
+                    this.mUserId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void installExistingPackage(String packageName, int installReason, IntentSender statusReceiver) {
+    public void installExistingPackage(
+            String packageName, int installReason, IntentSender statusReceiver) {
         Objects.requireNonNull(packageName, "packageName cannot be null");
         try {
-            this.mInstaller.installExistingPackage(packageName, 4194304, installReason, statusReceiver, this.mUserId, null);
+            this.mInstaller.installExistingPackage(
+                    packageName, 4194304, installReason, statusReceiver, this.mUserId, null);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -387,18 +401,30 @@ public class PackageInstaller {
     public void uninstallExistingPackage(String packageName, IntentSender statusReceiver) {
         Objects.requireNonNull(packageName, "packageName cannot be null");
         try {
-            this.mInstaller.uninstallExistingPackage(new VersionedPackage(packageName, -1), this.mInstallerPackageName, statusReceiver, this.mUserId);
+            this.mInstaller.uninstallExistingPackage(
+                    new VersionedPackage(packageName, -1),
+                    this.mInstallerPackageName,
+                    statusReceiver,
+                    this.mUserId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void installPackageArchived(ArchivedPackageInfo archivedPackageInfo, SessionParams sessionParams, IntentSender statusReceiver) {
+    public void installPackageArchived(
+            ArchivedPackageInfo archivedPackageInfo,
+            SessionParams sessionParams,
+            IntentSender statusReceiver) {
         Objects.requireNonNull(archivedPackageInfo, "archivedPackageInfo cannot be null");
         Objects.requireNonNull(sessionParams, "sessionParams cannot be null");
         Objects.requireNonNull(statusReceiver, "statusReceiver cannot be null");
         try {
-            this.mInstaller.installPackageArchived(archivedPackageInfo.getParcel(), sessionParams, statusReceiver, this.mInstallerPackageName, new UserHandle(this.mUserId));
+            this.mInstaller.installPackageArchived(
+                    archivedPackageInfo.getParcel(),
+                    sessionParams,
+                    statusReceiver,
+                    this.mInstallerPackageName,
+                    new UserHandle(this.mUserId));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -413,43 +439,71 @@ public class PackageInstaller {
         }
     }
 
-    public void checkInstallConstraints(List<String> packageNames, InstallConstraints constraints, final Executor executor, final Consumer<InstallConstraintsResult> callback) {
+    public void checkInstallConstraints(
+            List<String> packageNames,
+            InstallConstraints constraints,
+            final Executor executor,
+            final Consumer<InstallConstraintsResult> callback) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
         try {
-            RemoteCallback remoteCallback = new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: android.content.pm.PackageInstaller$$ExternalSyntheticLambda1
-                @Override // android.os.RemoteCallback.OnResultListener
-                public final void onResult(Bundle bundle) {
-                    executor.execute(new Runnable() { // from class: android.content.pm.PackageInstaller$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            r1.accept((PackageInstaller.InstallConstraintsResult) bundle.getParcelable("result", PackageInstaller.InstallConstraintsResult.class));
-                        }
-                    });
-                }
-            });
-            this.mInstaller.checkInstallConstraints(this.mInstallerPackageName, packageNames, constraints, remoteCallback);
+            RemoteCallback remoteCallback =
+                    new RemoteCallback(
+                            new RemoteCallback.OnResultListener() { // from class:
+                                // android.content.pm.PackageInstaller$$ExternalSyntheticLambda1
+                                @Override // android.os.RemoteCallback.OnResultListener
+                                public final void onResult(Bundle bundle) {
+                                    executor.execute(
+                                            new Runnable() { // from class:
+                                                // android.content.pm.PackageInstaller$$ExternalSyntheticLambda0
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    r1.accept(
+                                                            (PackageInstaller
+                                                                            .InstallConstraintsResult)
+                                                                    bundle.getParcelable(
+                                                                            "result",
+                                                                            PackageInstaller
+                                                                                    .InstallConstraintsResult
+                                                                                    .class));
+                                                }
+                                            });
+                                }
+                            });
+            this.mInstaller.checkInstallConstraints(
+                    this.mInstallerPackageName, packageNames, constraints, remoteCallback);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void waitForInstallConstraints(List<String> packageNames, InstallConstraints constraints, IntentSender callback, long timeoutMillis) {
+    public void waitForInstallConstraints(
+            List<String> packageNames,
+            InstallConstraints constraints,
+            IntentSender callback,
+            long timeoutMillis) {
         try {
-            this.mInstaller.waitForInstallConstraints(this.mInstallerPackageName, packageNames, constraints, callback, timeoutMillis);
+            this.mInstaller.waitForInstallConstraints(
+                    this.mInstallerPackageName, packageNames, constraints, callback, timeoutMillis);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void commitSessionAfterInstallConstraintsAreMet(int sessionId, IntentSender statusReceiver, InstallConstraints constraints, long timeoutMillis) {
+    public void commitSessionAfterInstallConstraintsAreMet(
+            int sessionId,
+            IntentSender statusReceiver,
+            InstallConstraints constraints,
+            long timeoutMillis) {
         try {
             IPackageInstallerSession session = this.mInstaller.openSession(sessionId);
             session.seal();
             List<String> packageNames = session.fetchPackageNames();
             Application context = ActivityThread.currentApplication();
-            LocalIntentSender localIntentSender = new LocalIntentSender(context, sessionId, session, statusReceiver);
-            waitForInstallConstraints(packageNames, constraints, localIntentSender.getIntentSender(), timeoutMillis);
+            LocalIntentSender localIntentSender =
+                    new LocalIntentSender(context, sessionId, session, statusReceiver);
+            waitForInstallConstraints(
+                    packageNames, constraints, localIntentSender.getIntentSender(), timeoutMillis);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -461,7 +515,11 @@ public class PackageInstaller {
         private final int mSessionId;
         private final IntentSender mStatusReceiver;
 
-        LocalIntentSender(Context context, int sessionId, IPackageInstallerSession session, IntentSender statusReceiver) {
+        LocalIntentSender(
+                Context context,
+                int sessionId,
+                IPackageInstallerSession session,
+                IntentSender statusReceiver) {
             this.mContext = context;
             this.mSessionId = sessionId;
             this.mSession = session;
@@ -470,15 +528,23 @@ public class PackageInstaller {
 
         /* JADX INFO: Access modifiers changed from: private */
         public IntentSender getIntentSender() {
-            Intent intent = new Intent(PackageInstaller.ACTION_WAIT_INSTALL_CONSTRAINTS).setPackage(this.mContext.getPackageName());
-            this.mContext.registerReceiver(this, new IntentFilter(PackageInstaller.ACTION_WAIT_INSTALL_CONSTRAINTS), 2);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this.mContext, 0, intent, 33554432);
+            Intent intent =
+                    new Intent(PackageInstaller.ACTION_WAIT_INSTALL_CONSTRAINTS)
+                            .setPackage(this.mContext.getPackageName());
+            this.mContext.registerReceiver(
+                    this, new IntentFilter(PackageInstaller.ACTION_WAIT_INSTALL_CONSTRAINTS), 2);
+            PendingIntent pendingIntent =
+                    PendingIntent.getBroadcast(this.mContext, 0, intent, 33554432);
             return pendingIntent.getIntentSender();
         }
 
         @Override // android.content.BroadcastReceiver
         public void onReceive(Context context, Intent intent) {
-            InstallConstraintsResult result = (InstallConstraintsResult) intent.getParcelableExtra(PackageInstaller.EXTRA_INSTALL_CONSTRAINTS_RESULT, InstallConstraintsResult.class);
+            InstallConstraintsResult result =
+                    (InstallConstraintsResult)
+                            intent.getParcelableExtra(
+                                    PackageInstaller.EXTRA_INSTALL_CONSTRAINTS_RESULT,
+                                    InstallConstraintsResult.class);
             try {
                 if (result.areAllConstraintsSatisfied()) {
                     this.mSession.commit(this.mStatusReceiver, false);
@@ -486,8 +552,11 @@ public class PackageInstaller {
                     Intent fillIn = new Intent();
                     fillIn.putExtra(PackageInstaller.EXTRA_SESSION_ID, this.mSessionId);
                     fillIn.putExtra(PackageInstaller.EXTRA_STATUS, 8);
-                    fillIn.putExtra(PackageInstaller.EXTRA_STATUS_MESSAGE, "Install constraints not satisfied within timeout");
-                    this.mStatusReceiver.sendIntent(ActivityThread.currentApplication(), 0, fillIn, null, null);
+                    fillIn.putExtra(
+                            PackageInstaller.EXTRA_STATUS_MESSAGE,
+                            "Install constraints not satisfied within timeout");
+                    this.mStatusReceiver.sendIntent(
+                            ActivityThread.currentApplication(), 0, fillIn, null, null);
                 }
             } catch (Exception e) {
             } catch (Throwable th) {
@@ -518,52 +587,99 @@ public class PackageInstaller {
 
         @Override // android.content.pm.IPackageInstallerCallback
         public void onSessionCreated(int sessionId) {
-            this.mExecutor.execute(PooledLambda.obtainRunnable(new BiConsumer() { // from class: android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda4
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((PackageInstaller.SessionCallback) obj).onCreated(((Integer) obj2).intValue());
-                }
-            }, this.mCallback, Integer.valueOf(sessionId)).recycleOnUse());
+            this.mExecutor.execute(
+                    PooledLambda.obtainRunnable(
+                                    new BiConsumer() { // from class:
+                                        // android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda4
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj, Object obj2) {
+                                            ((PackageInstaller.SessionCallback) obj)
+                                                    .onCreated(((Integer) obj2).intValue());
+                                        }
+                                    },
+                                    this.mCallback,
+                                    Integer.valueOf(sessionId))
+                            .recycleOnUse());
         }
 
         @Override // android.content.pm.IPackageInstallerCallback
         public void onSessionBadgingChanged(int sessionId) {
-            this.mExecutor.execute(PooledLambda.obtainRunnable(new BiConsumer() { // from class: android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda2
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((PackageInstaller.SessionCallback) obj).onBadgingChanged(((Integer) obj2).intValue());
-                }
-            }, this.mCallback, Integer.valueOf(sessionId)).recycleOnUse());
+            this.mExecutor.execute(
+                    PooledLambda.obtainRunnable(
+                                    new BiConsumer() { // from class:
+                                        // android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj, Object obj2) {
+                                            ((PackageInstaller.SessionCallback) obj)
+                                                    .onBadgingChanged(((Integer) obj2).intValue());
+                                        }
+                                    },
+                                    this.mCallback,
+                                    Integer.valueOf(sessionId))
+                            .recycleOnUse());
         }
 
         @Override // android.content.pm.IPackageInstallerCallback
         public void onSessionActiveChanged(int sessionId, boolean active) {
-            this.mExecutor.execute(PooledLambda.obtainRunnable(new TriConsumer() { // from class: android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((PackageInstaller.SessionCallback) obj).onActiveChanged(((Integer) obj2).intValue(), ((Boolean) obj3).booleanValue());
-                }
-            }, this.mCallback, Integer.valueOf(sessionId), Boolean.valueOf(active)).recycleOnUse());
+            this.mExecutor.execute(
+                    PooledLambda.obtainRunnable(
+                                    new TriConsumer() { // from class:
+                                        // android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda0
+                                        @Override // com.android.internal.util.function.TriConsumer
+                                        public final void accept(
+                                                Object obj, Object obj2, Object obj3) {
+                                            ((PackageInstaller.SessionCallback) obj)
+                                                    .onActiveChanged(
+                                                            ((Integer) obj2).intValue(),
+                                                            ((Boolean) obj3).booleanValue());
+                                        }
+                                    },
+                                    this.mCallback,
+                                    Integer.valueOf(sessionId),
+                                    Boolean.valueOf(active))
+                            .recycleOnUse());
         }
 
         @Override // android.content.pm.IPackageInstallerCallback
         public void onSessionProgressChanged(int sessionId, float progress) {
-            this.mExecutor.execute(PooledLambda.obtainRunnable(new TriConsumer() { // from class: android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda1
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((PackageInstaller.SessionCallback) obj).onProgressChanged(((Integer) obj2).intValue(), ((Float) obj3).floatValue());
-                }
-            }, this.mCallback, Integer.valueOf(sessionId), Float.valueOf(progress)).recycleOnUse());
+            this.mExecutor.execute(
+                    PooledLambda.obtainRunnable(
+                                    new TriConsumer() { // from class:
+                                        // android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda1
+                                        @Override // com.android.internal.util.function.TriConsumer
+                                        public final void accept(
+                                                Object obj, Object obj2, Object obj3) {
+                                            ((PackageInstaller.SessionCallback) obj)
+                                                    .onProgressChanged(
+                                                            ((Integer) obj2).intValue(),
+                                                            ((Float) obj3).floatValue());
+                                        }
+                                    },
+                                    this.mCallback,
+                                    Integer.valueOf(sessionId),
+                                    Float.valueOf(progress))
+                            .recycleOnUse());
         }
 
         @Override // android.content.pm.IPackageInstallerCallback
         public void onSessionFinished(int sessionId, boolean success) {
-            this.mExecutor.execute(PooledLambda.obtainRunnable(new TriConsumer() { // from class: android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda3
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((PackageInstaller.SessionCallback) obj).onFinished(((Integer) obj2).intValue(), ((Boolean) obj3).booleanValue());
-                }
-            }, this.mCallback, Integer.valueOf(sessionId), Boolean.valueOf(success)).recycleOnUse());
+            this.mExecutor.execute(
+                    PooledLambda.obtainRunnable(
+                                    new TriConsumer() { // from class:
+                                        // android.content.pm.PackageInstaller$SessionCallbackDelegate$$ExternalSyntheticLambda3
+                                        @Override // com.android.internal.util.function.TriConsumer
+                                        public final void accept(
+                                                Object obj, Object obj2, Object obj3) {
+                                            ((PackageInstaller.SessionCallback) obj)
+                                                    .onFinished(
+                                                            ((Integer) obj2).intValue(),
+                                                            ((Boolean) obj3).booleanValue());
+                                        }
+                                    },
+                                    this.mCallback,
+                                    Integer.valueOf(sessionId),
+                                    Boolean.valueOf(success))
+                            .recycleOnUse());
         }
     }
 
@@ -583,7 +699,8 @@ public class PackageInstaller {
 
     public void registerSessionCallback(SessionCallback callback, Handler handler) {
         synchronized (this.mDelegates) {
-            SessionCallbackDelegate delegate = new SessionCallbackDelegate(callback, new HandlerExecutor(handler));
+            SessionCallbackDelegate delegate =
+                    new SessionCallbackDelegate(callback, new HandlerExecutor(handler));
             try {
                 this.mInstaller.registerCallback(delegate, this.mUserId);
                 this.mDelegates.add(delegate);
@@ -643,12 +760,15 @@ public class PackageInstaller {
             }
         }
 
-        public OutputStream openWrite(String name, long offsetBytes, long lengthBytes) throws IOException {
+        public OutputStream openWrite(String name, long offsetBytes, long lengthBytes)
+                throws IOException {
             try {
                 if (PackageInstaller.ENABLE_REVOCABLE_FD) {
-                    return new ParcelFileDescriptor.AutoCloseOutputStream(this.mSession.openWrite(name, offsetBytes, lengthBytes));
+                    return new ParcelFileDescriptor.AutoCloseOutputStream(
+                            this.mSession.openWrite(name, offsetBytes, lengthBytes));
                 }
-                ParcelFileDescriptor clientSocket = this.mSession.openWrite(name, offsetBytes, lengthBytes);
+                ParcelFileDescriptor clientSocket =
+                        this.mSession.openWrite(name, offsetBytes, lengthBytes);
                 return new FileBridge.FileBridgeOutputStream(clientSocket);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -658,7 +778,8 @@ public class PackageInstaller {
             }
         }
 
-        public void write(String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd) throws IOException {
+        public void write(String name, long offsetBytes, long lengthBytes, ParcelFileDescriptor fd)
+                throws IOException {
             try {
                 this.mSession.write(name, offsetBytes, lengthBytes, fd);
             } catch (RemoteException e) {
@@ -747,7 +868,8 @@ public class PackageInstaller {
         }
 
         @SystemApi
-        public void addFile(int location, String name, long lengthBytes, byte[] metadata, byte[] signature) {
+        public void addFile(
+                int location, String name, long lengthBytes, byte[] metadata, byte[] signature) {
             try {
                 this.mSession.addFile(location, name, lengthBytes, metadata, signature);
             } catch (RemoteException e) {
@@ -765,11 +887,15 @@ public class PackageInstaller {
         }
 
         @Deprecated
-        public void setChecksums(String name, List<Checksum> checksums, byte[] signature) throws IOException {
+        public void setChecksums(String name, List<Checksum> checksums, byte[] signature)
+                throws IOException {
             Objects.requireNonNull(name);
             Objects.requireNonNull(checksums);
             try {
-                this.mSession.setChecksums(name, (Checksum[]) checksums.toArray(new Checksum[checksums.size()]), signature);
+                this.mSession.setChecksums(
+                        name,
+                        (Checksum[]) checksums.toArray(new Checksum[checksums.size()]),
+                        signature);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             } catch (RuntimeException e2) {
@@ -778,7 +904,8 @@ public class PackageInstaller {
             }
         }
 
-        private static List<byte[]> encodeCertificates(List<Certificate> certs) throws CertificateEncodingException {
+        private static List<byte[]> encodeCertificates(List<Certificate> certs)
+                throws CertificateEncodingException {
             if (certs == null) {
                 return null;
             }
@@ -792,7 +919,13 @@ public class PackageInstaller {
             return result;
         }
 
-        public void requestChecksums(String name, int required, List<Certificate> trustedInstallers, Executor executor, PackageManager.OnChecksumsReadyListener onChecksumsReadyListener) throws CertificateEncodingException, FileNotFoundException {
+        public void requestChecksums(
+                String name,
+                int required,
+                List<Certificate> trustedInstallers,
+                Executor executor,
+                PackageManager.OnChecksumsReadyListener onChecksumsReadyListener)
+                throws CertificateEncodingException, FileNotFoundException {
             Objects.requireNonNull(name);
             Objects.requireNonNull(trustedInstallers);
             Objects.requireNonNull(executor);
@@ -802,11 +935,19 @@ public class PackageInstaller {
             } else if (trustedInstallers == PackageManager.TRUST_NONE) {
                 trustedInstallers = Collections.emptyList();
             } else if (trustedInstallers.isEmpty()) {
-                throw new IllegalArgumentException("trustedInstallers has to be one of TRUST_ALL/TRUST_NONE or a non-empty list of certificates.");
+                throw new IllegalArgumentException(
+                        "trustedInstallers has to be one of TRUST_ALL/TRUST_NONE or a non-empty"
+                                + " list of certificates.");
             }
             try {
-                IOnChecksumsReadyListener onChecksumsReadyListenerDelegate = new AnonymousClass1(executor, onChecksumsReadyListener);
-                this.mSession.requestChecksums(name, 127, required, encodeCertificates(trustedInstallers), onChecksumsReadyListenerDelegate);
+                IOnChecksumsReadyListener onChecksumsReadyListenerDelegate =
+                        new AnonymousClass1(executor, onChecksumsReadyListener);
+                this.mSession.requestChecksums(
+                        name,
+                        127,
+                        required,
+                        encodeCertificates(trustedInstallers),
+                        onChecksumsReadyListenerDelegate);
             } catch (ParcelableException e) {
                 e.maybeRethrow(FileNotFoundException.class);
                 throw new RuntimeException(e);
@@ -818,9 +959,12 @@ public class PackageInstaller {
         /* renamed from: android.content.pm.PackageInstaller$Session$1, reason: invalid class name */
         class AnonymousClass1 extends IOnChecksumsReadyListener.Stub {
             final /* synthetic */ Executor val$executor;
-            final /* synthetic */ PackageManager.OnChecksumsReadyListener val$onChecksumsReadyListener;
+            final /* synthetic */ PackageManager.OnChecksumsReadyListener
+                    val$onChecksumsReadyListener;
 
-            AnonymousClass1(Executor executor, PackageManager.OnChecksumsReadyListener onChecksumsReadyListener) {
+            AnonymousClass1(
+                    Executor executor,
+                    PackageManager.OnChecksumsReadyListener onChecksumsReadyListener) {
                 this.val$executor = executor;
                 this.val$onChecksumsReadyListener = onChecksumsReadyListener;
             }
@@ -828,13 +972,17 @@ public class PackageInstaller {
             @Override // android.content.pm.IOnChecksumsReadyListener
             public void onChecksumsReady(final List<ApkChecksum> checksums) throws RemoteException {
                 Executor executor = this.val$executor;
-                final PackageManager.OnChecksumsReadyListener onChecksumsReadyListener = this.val$onChecksumsReadyListener;
-                executor.execute(new Runnable() { // from class: android.content.pm.PackageInstaller$Session$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        PackageManager.OnChecksumsReadyListener.this.onChecksumsReady(checksums);
-                    }
-                });
+                final PackageManager.OnChecksumsReadyListener onChecksumsReadyListener =
+                        this.val$onChecksumsReadyListener;
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.content.pm.PackageInstaller$Session$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                PackageManager.OnChecksumsReadyListener.this.onChecksumsReady(
+                                        checksums);
+                            }
+                        });
             }
         }
 
@@ -963,7 +1111,8 @@ public class PackageInstaller {
         private OutputStream openWriteAppMetadata() throws IOException {
             try {
                 if (PackageInstaller.ENABLE_REVOCABLE_FD) {
-                    return new ParcelFileDescriptor.AutoCloseOutputStream(this.mSession.openWriteAppMetadata());
+                    return new ParcelFileDescriptor.AutoCloseOutputStream(
+                            this.mSession.openWriteAppMetadata());
                 }
                 ParcelFileDescriptor clientSocket = this.mSession.openWriteAppMetadata();
                 return new FileBridge.FileBridgeOutputStream(clientSocket);
@@ -1003,7 +1152,8 @@ public class PackageInstaller {
             }
         }
 
-        public void requestUserPreapproval(PreapprovalDetails details, IntentSender statusReceiver) {
+        public void requestUserPreapproval(
+                PreapprovalDetails details, IntentSender statusReceiver) {
             Preconditions.checkArgument(details != null, "preapprovalDetails cannot be null.");
             Preconditions.checkArgument(statusReceiver != null, "statusReceiver cannot be null.");
             try {
@@ -1031,7 +1181,9 @@ public class PackageInstaller {
 
         @SystemApi
         public void setPreVerifiedDomains(Set<String> preVerifiedDomains) {
-            Preconditions.checkArgument((preVerifiedDomains == null || preVerifiedDomains.isEmpty()) ? false : true, "Provided pre-verified domains cannot be null or empty.");
+            Preconditions.checkArgument(
+                    (preVerifiedDomains == null || preVerifiedDomains.isEmpty()) ? false : true,
+                    "Provided pre-verified domains cannot be null or empty.");
             try {
                 this.mSession.setPreVerifiedDomains(new DomainSet(preVerifiedDomains));
             } catch (RemoteException e) {
@@ -1053,7 +1205,8 @@ public class PackageInstaller {
     @SystemApi
     public InstallInfo readInstallInfo(File file, int flags) throws PackageParsingException {
         ParseTypeImpl input = ParseTypeImpl.forDefaultParsing();
-        ParseResult<PackageLite> result = ApkLiteParseUtils.parsePackageLite(input.reset(), file, flags);
+        ParseResult<PackageLite> result =
+                ApkLiteParseUtils.parsePackageLite(input.reset(), file, flags);
         if (result.isError()) {
             throw new PackageParsingException(result.getErrorCode(), result.getErrorMessage());
         }
@@ -1061,18 +1214,27 @@ public class PackageInstaller {
     }
 
     @SystemApi
-    public InstallInfo readInstallInfo(ParcelFileDescriptor pfd, String debugPathName, int flags) throws PackageParsingException {
+    public InstallInfo readInstallInfo(ParcelFileDescriptor pfd, String debugPathName, int flags)
+            throws PackageParsingException {
         ParseTypeImpl input = ParseTypeImpl.forDefaultParsing();
-        ParseResult<PackageLite> result = ApkLiteParseUtils.parseMonolithicPackageLite(input, pfd.getFileDescriptor(), debugPathName, flags);
+        ParseResult<PackageLite> result =
+                ApkLiteParseUtils.parseMonolithicPackageLite(
+                        input, pfd.getFileDescriptor(), debugPathName, flags);
         if (result.isError()) {
             throw new PackageParsingException(result.getErrorCode(), result.getErrorMessage());
         }
         return new InstallInfo(result);
     }
 
-    public void requestArchive(String packageName, IntentSender statusReceiver) throws PackageManager.NameNotFoundException {
+    public void requestArchive(String packageName, IntentSender statusReceiver)
+            throws PackageManager.NameNotFoundException {
         try {
-            this.mInstaller.requestArchive(packageName, this.mInstallerPackageName, 0, statusReceiver, new UserHandle(this.mUserId));
+            this.mInstaller.requestArchive(
+                    packageName,
+                    this.mInstallerPackageName,
+                    0,
+                    statusReceiver,
+                    new UserHandle(this.mUserId));
         } catch (ParcelableException e) {
             e.maybeRethrow(PackageManager.NameNotFoundException.class);
             throw new RuntimeException(e);
@@ -1081,9 +1243,14 @@ public class PackageInstaller {
         }
     }
 
-    public void requestUnarchive(String packageName, IntentSender statusReceiver) throws IOException, PackageManager.NameNotFoundException {
+    public void requestUnarchive(String packageName, IntentSender statusReceiver)
+            throws IOException, PackageManager.NameNotFoundException {
         try {
-            this.mInstaller.requestUnarchive(packageName, this.mInstallerPackageName, statusReceiver, new UserHandle(this.mUserId));
+            this.mInstaller.requestUnarchive(
+                    packageName,
+                    this.mInstallerPackageName,
+                    statusReceiver,
+                    new UserHandle(this.mUserId));
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             e.maybeRethrow(PackageManager.NameNotFoundException.class);
@@ -1093,9 +1260,16 @@ public class PackageInstaller {
         }
     }
 
-    public void reportUnarchivalStatus(int unarchiveId, int status, long requiredStorageBytes, PendingIntent userActionIntent) throws PackageManager.NameNotFoundException {
+    public void reportUnarchivalStatus(
+            int unarchiveId, int status, long requiredStorageBytes, PendingIntent userActionIntent)
+            throws PackageManager.NameNotFoundException {
         try {
-            this.mInstaller.reportUnarchivalStatus(unarchiveId, status, requiredStorageBytes, userActionIntent, new UserHandle(this.mUserId));
+            this.mInstaller.reportUnarchivalStatus(
+                    unarchiveId,
+                    status,
+                    requiredStorageBytes,
+                    userActionIntent,
+                    new UserHandle(this.mUserId));
         } catch (ParcelableException e) {
             e.maybeRethrow(PackageManager.NameNotFoundException.class);
             throw new RuntimeException(e);
@@ -1104,10 +1278,16 @@ public class PackageInstaller {
         }
     }
 
-    public void reportUnarchivalState(UnarchivalState unarchivalState) throws PackageManager.NameNotFoundException {
+    public void reportUnarchivalState(UnarchivalState unarchivalState)
+            throws PackageManager.NameNotFoundException {
         Objects.requireNonNull(unarchivalState);
         try {
-            this.mInstaller.reportUnarchivalStatus(unarchivalState.getUnarchiveId(), unarchivalState.getStatus(), unarchivalState.getRequiredStorageBytes(), unarchivalState.getUserActionIntent(), new UserHandle(this.mUserId));
+            this.mInstaller.reportUnarchivalStatus(
+                    unarchivalState.getUnarchiveId(),
+                    unarchivalState.getStatus(),
+                    unarchivalState.getRequiredStorageBytes(),
+                    unarchivalState.getUserActionIntent(),
+                    new UserHandle(this.mUserId));
         } catch (ParcelableException e) {
             e.maybeRethrow(PackageManager.NameNotFoundException.class);
         } catch (RemoteException e2) {
@@ -1120,8 +1300,7 @@ public class PackageInstaller {
         private PackageLite mPkg;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface InstallLocation {
-        }
+        public @interface InstallLocation {}
 
         InstallInfo(ParseResult<PackageLite> result) {
             this.mPkg = result.getResult();
@@ -1139,8 +1318,10 @@ public class PackageInstaller {
             return InstallLocationUtils.calculateInstalledSize(this.mPkg, params.abiOverride);
         }
 
-        public long calculateInstalledSize(SessionParams params, ParcelFileDescriptor pfd) throws IOException {
-            return InstallLocationUtils.calculateInstalledSize(this.mPkg, params.abiOverride, pfd.getFileDescriptor());
+        public long calculateInstalledSize(SessionParams params, ParcelFileDescriptor pfd)
+                throws IOException {
+            return InstallLocationUtils.calculateInstalledSize(
+                    this.mPkg, params.abiOverride, pfd.getFileDescriptor());
         }
     }
 
@@ -1205,27 +1386,27 @@ public class PackageInstaller {
         public String volumeUuid;
         public List<String> whitelistedRestrictedPermissions;
         public static final Set<String> RESTRICTED_PERMISSIONS_ALL = new ArraySet();
-        public static final Parcelable.Creator<SessionParams> CREATOR = new Parcelable.Creator<SessionParams>() { // from class: android.content.pm.PackageInstaller.SessionParams.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SessionParams createFromParcel(Parcel p) {
-                return new SessionParams(p);
-            }
+        public static final Parcelable.Creator<SessionParams> CREATOR =
+                new Parcelable.Creator<SessionParams>() { // from class:
+                    // android.content.pm.PackageInstaller.SessionParams.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SessionParams createFromParcel(Parcel p) {
+                        return new SessionParams(p);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SessionParams[] newArray(int size) {
-                return new SessionParams[size];
-            }
-        };
-
-        @Retention(RetentionPolicy.SOURCE)
-        public @interface PermissionState {
-        }
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SessionParams[] newArray(int size) {
+                        return new SessionParams[size];
+                    }
+                };
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface UserActionRequirement {
-        }
+        public @interface PermissionState {}
+
+        @Retention(RetentionPolicy.SOURCE)
+        public @interface UserActionRequirement {}
 
         public SessionParams(int mode) {
             this.mode = -1;
@@ -1296,7 +1477,11 @@ public class PackageInstaller {
             this.isStaged = source.readBoolean();
             this.forceQueryableOverride = source.readBoolean();
             this.requiredInstalledVersionCode = source.readLong();
-            DataLoaderParamsParcel dataLoaderParamsParcel = (DataLoaderParamsParcel) source.readParcelable(DataLoaderParamsParcel.class.getClassLoader(), DataLoaderParamsParcel.class);
+            DataLoaderParamsParcel dataLoaderParamsParcel =
+                    (DataLoaderParamsParcel)
+                            source.readParcelable(
+                                    DataLoaderParamsParcel.class.getClassLoader(),
+                                    DataLoaderParamsParcel.class);
             if (dataLoaderParamsParcel != null) {
                 this.dataLoaderParams = new DataLoaderParams(dataLoaderParamsParcel);
             }
@@ -1327,7 +1512,8 @@ public class PackageInstaller {
             ret.referrerUri = this.referrerUri;
             ret.abiOverride = this.abiOverride;
             ret.volumeUuid = this.volumeUuid;
-            ret.mPermissionStates.putAll((ArrayMap<? extends String, ? extends Integer>) this.mPermissionStates);
+            ret.mPermissionStates.putAll(
+                    (ArrayMap<? extends String, ? extends Integer>) this.mPermissionStates);
             ret.whitelistedRestrictedPermissions = this.whitelistedRestrictedPermissions;
             ret.autoRevokePermissionsMode = this.autoRevokePermissionsMode;
             ret.installerPackageName = this.installerPackageName;
@@ -1350,7 +1536,11 @@ public class PackageInstaller {
         }
 
         public boolean areHiddenOptionsSet() {
-            return ((this.installFlags & 1169536) == this.installFlags && this.abiOverride == null && this.volumeUuid == null) ? false : true;
+            return ((this.installFlags & 1169536) == this.installFlags
+                            && this.abiOverride == null
+                            && this.volumeUuid == null)
+                    ? false
+                    : true;
         }
 
         public void setInstallLocation(int installLocation) {
@@ -1401,7 +1591,9 @@ public class PackageInstaller {
 
         public SessionParams setPermissionState(String permissionName, int state) {
             if (TextUtils.isEmpty(permissionName)) {
-                throw new IllegalArgumentException("Provided permissionName cannot be " + (permissionName == null ? "null" : "empty"));
+                throw new IllegalArgumentException(
+                        "Provided permissionName cannot be "
+                                + (permissionName == null ? "null" : "empty"));
             }
             switch (state) {
                 case 0:
@@ -1416,7 +1608,8 @@ public class PackageInstaller {
             }
         }
 
-        public void setPermissionStates(Collection<String> grantPermissions, Collection<String> denyPermissions) {
+        public void setPermissionStates(
+                Collection<String> grantPermissions, Collection<String> denyPermissions) {
             for (String grantPermission : grantPermissions) {
                 this.mPermissionStates.put(grantPermission, 1);
             }
@@ -1435,7 +1628,8 @@ public class PackageInstaller {
                 this.whitelistedRestrictedPermissions = null;
             } else {
                 this.installFlags &= -4194305;
-                this.whitelistedRestrictedPermissions = permissions != null ? new ArrayList(permissions) : null;
+                this.whitelistedRestrictedPermissions =
+                        permissions != null ? new ArrayList(permissions) : null;
             }
         }
 
@@ -1466,7 +1660,8 @@ public class PackageInstaller {
                 throw new IllegalArgumentException("rollbackLifetimeMillis can't be negative.");
             }
             if ((this.installFlags & 262144) == 0) {
-                throw new IllegalArgumentException("Can't set rollbackLifetimeMillis when rollback is not enabled");
+                throw new IllegalArgumentException(
+                        "Can't set rollbackLifetimeMillis when rollback is not enabled");
             }
             this.rollbackLifetimeMillis = lifetimeMillis;
         }
@@ -1474,7 +1669,8 @@ public class PackageInstaller {
         @SystemApi
         public void setRollbackImpactLevel(int impactLevel) {
             if ((this.installFlags & 262144) == 0) {
-                throw new IllegalArgumentException("Can't set rollbackImpactLevel when rollback is not enabled");
+                throw new IllegalArgumentException(
+                        "Can't set rollbackImpactLevel when rollback is not enabled");
             }
             this.rollbackImpactLevel = impactLevel;
         }
@@ -1584,7 +1780,11 @@ public class PackageInstaller {
 
         public void setRequireUserAction(int requireUserAction) {
             if (requireUserAction != 0 && requireUserAction != 1 && requireUserAction != 2) {
-                throw new IllegalArgumentException("requireUserAction set as invalid value of " + requireUserAction + ", but must be one of [USER_ACTION_UNSPECIFIED, USER_ACTION_REQUIRED, USER_ACTION_NOT_REQUIRED]");
+                throw new IllegalArgumentException(
+                        "requireUserAction set as invalid value of "
+                                + requireUserAction
+                                + ", but must be one of [USER_ACTION_UNSPECIFIED,"
+                                + " USER_ACTION_REQUIRED, USER_ACTION_NOT_REQUIRED]");
             }
             this.requireUserAction = requireUserAction;
         }
@@ -1629,7 +1829,8 @@ public class PackageInstaller {
                     grantedPermissions.add(permissionName);
                 }
             }
-            return (String[]) grantedPermissions.toArray((String[]) ArrayUtils.emptyArray(String.class));
+            return (String[])
+                    grantedPermissions.toArray((String[]) ArrayUtils.emptyArray(String.class));
         }
 
         public void dump(IndentingPrintWriter pw) {
@@ -1655,13 +1856,18 @@ public class PackageInstaller {
             pw.printPair("isMultiPackage", Boolean.valueOf(this.isMultiPackage));
             pw.printPair("isStaged", Boolean.valueOf(this.isStaged));
             pw.printPair("forceQueryable", Boolean.valueOf(this.forceQueryableOverride));
-            pw.printPair("requireUserAction", SessionInfo.userActionToString(this.requireUserAction));
-            pw.printPair("requiredInstalledVersionCode", Long.valueOf(this.requiredInstalledVersionCode));
+            pw.printPair(
+                    "requireUserAction", SessionInfo.userActionToString(this.requireUserAction));
+            pw.printPair(
+                    "requiredInstalledVersionCode",
+                    Long.valueOf(this.requiredInstalledVersionCode));
             pw.printPair("dataLoaderParams", this.dataLoaderParams);
             pw.printPair("rollbackDataPolicy", Integer.valueOf(this.rollbackDataPolicy));
             pw.printPair("rollbackLifetimeMillis", Long.valueOf(this.rollbackLifetimeMillis));
             pw.printPair("rollbackImpactLevel", Integer.valueOf(this.rollbackImpactLevel));
-            pw.printPair("applicationEnabledSettingPersistent", Boolean.valueOf(this.applicationEnabledSettingPersistent));
+            pw.printPair(
+                    "applicationEnabledSettingPersistent",
+                    Boolean.valueOf(this.applicationEnabledSettingPersistent));
             pw.printHexPair("developmentInstallFlags", this.developmentInstallFlags);
             pw.printPair("unarchiveId", Integer.valueOf(this.unarchiveId));
             pw.printPair("dexoptCompilerFilter", this.dexoptCompilerFilter);
@@ -1724,20 +1930,15 @@ public class PackageInstaller {
         public static final int SESSION_UNKNOWN_ERROR = 3;
         public static final int SESSION_VERIFICATION_FAILED = 1;
 
-        @Deprecated
-        public static final int STAGED_SESSION_ACTIVATION_FAILED = 2;
+        @Deprecated public static final int STAGED_SESSION_ACTIVATION_FAILED = 2;
 
-        @Deprecated
-        public static final int STAGED_SESSION_CONFLICT = 4;
+        @Deprecated public static final int STAGED_SESSION_CONFLICT = 4;
 
-        @Deprecated
-        public static final int STAGED_SESSION_NO_ERROR = 0;
+        @Deprecated public static final int STAGED_SESSION_NO_ERROR = 0;
 
-        @Deprecated
-        public static final int STAGED_SESSION_UNKNOWN = 3;
+        @Deprecated public static final int STAGED_SESSION_UNKNOWN = 3;
 
-        @Deprecated
-        public static final int STAGED_SESSION_VERIFICATION_FAILED = 1;
+        @Deprecated public static final int STAGED_SESSION_VERIFICATION_FAILED = 1;
         public boolean active;
         public Bitmap appIcon;
         public CharSequence appLabel;
@@ -1784,19 +1985,21 @@ public class PackageInstaller {
         public int userId;
         public List<String> whitelistedRestrictedPermissions;
         private static final int[] NO_SESSIONS = new int[0];
-        public static final Parcelable.Creator<SessionInfo> CREATOR = new Parcelable.Creator<SessionInfo>() { // from class: android.content.pm.PackageInstaller.SessionInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SessionInfo createFromParcel(Parcel p) {
-                return new SessionInfo(p);
-            }
+        public static final Parcelable.Creator<SessionInfo> CREATOR =
+                new Parcelable.Creator<SessionInfo>() { // from class:
+                    // android.content.pm.PackageInstaller.SessionInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SessionInfo createFromParcel(Parcel p) {
+                        return new SessionInfo(p);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SessionInfo[] newArray(int size) {
-                return new SessionInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SessionInfo[] newArray(int size) {
+                        return new SessionInfo[size];
+                    }
+                };
 
         /* JADX INFO: Access modifiers changed from: private */
         public static String userActionToString(int requireUserAction) {
@@ -1915,7 +2118,10 @@ public class PackageInstaller {
         public Bitmap getAppIcon() {
             if (this.appIcon == null) {
                 try {
-                    SessionInfo info = AppGlobals.getPackageManager().getPackageInstaller().getSessionInfo(this.sessionId);
+                    SessionInfo info =
+                            AppGlobals.getPackageManager()
+                                    .getPackageInstaller()
+                                    .getSessionInfo(this.sessionId);
                     this.appIcon = info != null ? info.appIcon : null;
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
@@ -2053,7 +2259,13 @@ public class PackageInstaller {
         }
 
         public boolean isStagedSessionActive() {
-            return (!this.isStaged || !this.isCommitted || this.isSessionApplied || this.isSessionFailed || hasParentSessionId()) ? false : true;
+            return (!this.isStaged
+                            || !this.isCommitted
+                            || this.isSessionApplied
+                            || this.isSessionFailed
+                            || hasParentSessionId())
+                    ? false
+                    : true;
         }
 
         public int getParentSessionId() {
@@ -2200,32 +2412,37 @@ public class PackageInstaller {
     }
 
     public static final class PreapprovalDetails implements Parcelable {
-        public static final Parcelable.Creator<PreapprovalDetails> CREATOR = new Parcelable.Creator<PreapprovalDetails>() { // from class: android.content.pm.PackageInstaller.PreapprovalDetails.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PreapprovalDetails[] newArray(int size) {
-                return new PreapprovalDetails[size];
-            }
+        public static final Parcelable.Creator<PreapprovalDetails> CREATOR =
+                new Parcelable.Creator<PreapprovalDetails>() { // from class:
+                    // android.content.pm.PackageInstaller.PreapprovalDetails.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PreapprovalDetails[] newArray(int size) {
+                        return new PreapprovalDetails[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PreapprovalDetails createFromParcel(Parcel in) {
-                return new PreapprovalDetails(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PreapprovalDetails createFromParcel(Parcel in) {
+                        return new PreapprovalDetails(in);
+                    }
+                };
         private final Bitmap mIcon;
         private final CharSequence mLabel;
         private final ULocale mLocale;
         private final String mPackageName;
 
-        public PreapprovalDetails(Bitmap icon, CharSequence label, ULocale locale, String packageName) {
+        public PreapprovalDetails(
+                Bitmap icon, CharSequence label, ULocale locale, String packageName) {
             this.mIcon = icon;
             this.mLabel = label;
-            Preconditions.checkArgument(!TextUtils.isEmpty(this.mLabel), "App label cannot be empty.");
+            Preconditions.checkArgument(
+                    !TextUtils.isEmpty(this.mLabel), "App label cannot be empty.");
             this.mLocale = locale;
             Preconditions.checkArgument(!Objects.isNull(this.mLocale), "Locale cannot be null.");
             this.mPackageName = packageName;
-            Preconditions.checkArgument(!TextUtils.isEmpty(this.mPackageName), "Package name cannot be empty.");
+            Preconditions.checkArgument(
+                    !TextUtils.isEmpty(this.mPackageName), "Package name cannot be empty.");
         }
 
         @Override // android.os.Parcelable
@@ -2253,11 +2470,13 @@ public class PackageInstaller {
             String packageName = in.readString8();
             this.mIcon = icon;
             this.mLabel = label;
-            Preconditions.checkArgument(!TextUtils.isEmpty(this.mLabel), "App label cannot be empty.");
+            Preconditions.checkArgument(
+                    !TextUtils.isEmpty(this.mLabel), "App label cannot be empty.");
             this.mLocale = locale;
             Preconditions.checkArgument(!Objects.isNull(this.mLocale), "Locale cannot be null.");
             this.mPackageName = packageName;
-            Preconditions.checkArgument(!TextUtils.isEmpty(this.mPackageName), "Package name cannot be empty.");
+            Preconditions.checkArgument(
+                    !TextUtils.isEmpty(this.mPackageName), "Package name cannot be empty.");
         }
 
         public static final class Builder {
@@ -2298,13 +2517,17 @@ public class PackageInstaller {
             public PreapprovalDetails build() {
                 checkNotUsed();
                 this.mBuilderFieldsSet |= 16;
-                PreapprovalDetails o = new PreapprovalDetails(this.mIcon, this.mLabel, this.mLocale, this.mPackageName);
+                PreapprovalDetails o =
+                        new PreapprovalDetails(
+                                this.mIcon, this.mLabel, this.mLocale, this.mPackageName);
                 return o;
             }
 
             private void checkNotUsed() {
                 if ((this.mBuilderFieldsSet & 16) != 0) {
-                    throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                    throw new IllegalStateException(
+                            "This Builder should not be reused. Use a new Builder instance"
+                                    + " instead");
                 }
             }
         }
@@ -2326,28 +2549,37 @@ public class PackageInstaller {
         }
 
         public String toString() {
-            return "PreapprovalDetails { icon = " + this.mIcon + ", label = " + ((Object) this.mLabel) + ", locale = " + this.mLocale + ", packageName = " + this.mPackageName + " }";
+            return "PreapprovalDetails { icon = "
+                    + this.mIcon
+                    + ", label = "
+                    + ((Object) this.mLabel)
+                    + ", locale = "
+                    + this.mLocale
+                    + ", packageName = "
+                    + this.mPackageName
+                    + " }";
         }
 
         @Deprecated
-        private void __metadata() {
-        }
+        private void __metadata() {}
     }
 
     public static final class InstallConstraintsResult implements Parcelable {
-        public static final Parcelable.Creator<InstallConstraintsResult> CREATOR = new Parcelable.Creator<InstallConstraintsResult>() { // from class: android.content.pm.PackageInstaller.InstallConstraintsResult.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public InstallConstraintsResult[] newArray(int size) {
-                return new InstallConstraintsResult[size];
-            }
+        public static final Parcelable.Creator<InstallConstraintsResult> CREATOR =
+                new Parcelable.Creator<InstallConstraintsResult>() { // from class:
+                    // android.content.pm.PackageInstaller.InstallConstraintsResult.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public InstallConstraintsResult[] newArray(int size) {
+                        return new InstallConstraintsResult[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public InstallConstraintsResult createFromParcel(Parcel in) {
-                return new InstallConstraintsResult(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public InstallConstraintsResult createFromParcel(Parcel in) {
+                        return new InstallConstraintsResult(in);
+                    }
+                };
         private boolean mAllConstraintsSatisfied;
 
         public boolean areAllConstraintsSatisfied() {
@@ -2376,8 +2608,7 @@ public class PackageInstaller {
         }
 
         @Deprecated
-        private void __metadata() {
-        }
+        private void __metadata() {}
     }
 
     public static final class InstallConstraints implements Parcelable {
@@ -2386,20 +2617,23 @@ public class PackageInstaller {
         private final boolean mAppNotTopVisibleRequired;
         private final boolean mDeviceIdleRequired;
         private final boolean mNotInCallRequired;
-        public static final InstallConstraints GENTLE_UPDATE = new Builder().setAppNotInteractingRequired().build();
-        public static final Parcelable.Creator<InstallConstraints> CREATOR = new Parcelable.Creator<InstallConstraints>() { // from class: android.content.pm.PackageInstaller.InstallConstraints.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public InstallConstraints[] newArray(int size) {
-                return new InstallConstraints[size];
-            }
+        public static final InstallConstraints GENTLE_UPDATE =
+                new Builder().setAppNotInteractingRequired().build();
+        public static final Parcelable.Creator<InstallConstraints> CREATOR =
+                new Parcelable.Creator<InstallConstraints>() { // from class:
+                    // android.content.pm.PackageInstaller.InstallConstraints.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public InstallConstraints[] newArray(int size) {
+                        return new InstallConstraints[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public InstallConstraints createFromParcel(Parcel in) {
-                return new InstallConstraints(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public InstallConstraints createFromParcel(Parcel in) {
+                        return new InstallConstraints(in);
+                    }
+                };
 
         public static final class Builder {
             private boolean mAppNotForegroundRequired;
@@ -2434,11 +2668,21 @@ public class PackageInstaller {
             }
 
             public InstallConstraints build() {
-                return new InstallConstraints(this.mDeviceIdleRequired, this.mAppNotForegroundRequired, this.mAppNotInteractingRequired, this.mAppNotTopVisibleRequired, this.mNotInCallRequired);
+                return new InstallConstraints(
+                        this.mDeviceIdleRequired,
+                        this.mAppNotForegroundRequired,
+                        this.mAppNotInteractingRequired,
+                        this.mAppNotTopVisibleRequired,
+                        this.mNotInCallRequired);
             }
         }
 
-        public InstallConstraints(boolean deviceIdleRequired, boolean appNotForegroundRequired, boolean appNotInteractingRequired, boolean appNotTopVisibleRequired, boolean notInCallRequired) {
+        public InstallConstraints(
+                boolean deviceIdleRequired,
+                boolean appNotForegroundRequired,
+                boolean appNotInteractingRequired,
+                boolean appNotTopVisibleRequired,
+                boolean notInCallRequired) {
             this.mDeviceIdleRequired = deviceIdleRequired;
             this.mAppNotForegroundRequired = appNotForegroundRequired;
             this.mAppNotInteractingRequired = appNotInteractingRequired;
@@ -2474,7 +2718,11 @@ public class PackageInstaller {
                 return false;
             }
             InstallConstraints that = (InstallConstraints) o;
-            if (this.mDeviceIdleRequired == that.mDeviceIdleRequired && this.mAppNotForegroundRequired == that.mAppNotForegroundRequired && this.mAppNotInteractingRequired == that.mAppNotInteractingRequired && this.mAppNotTopVisibleRequired == that.mAppNotTopVisibleRequired && this.mNotInCallRequired == that.mNotInCallRequired) {
+            if (this.mDeviceIdleRequired == that.mDeviceIdleRequired
+                    && this.mAppNotForegroundRequired == that.mAppNotForegroundRequired
+                    && this.mAppNotInteractingRequired == that.mAppNotInteractingRequired
+                    && this.mAppNotTopVisibleRequired == that.mAppNotTopVisibleRequired
+                    && this.mNotInCallRequired == that.mNotInCallRequired) {
                 return true;
             }
             return false;
@@ -2482,7 +2730,13 @@ public class PackageInstaller {
 
         public int hashCode() {
             int _hash = (1 * 31) + Boolean.hashCode(this.mDeviceIdleRequired);
-            return (((((((_hash * 31) + Boolean.hashCode(this.mAppNotForegroundRequired)) * 31) + Boolean.hashCode(this.mAppNotInteractingRequired)) * 31) + Boolean.hashCode(this.mAppNotTopVisibleRequired)) * 31) + Boolean.hashCode(this.mNotInCallRequired);
+            return (((((((_hash * 31) + Boolean.hashCode(this.mAppNotForegroundRequired)) * 31)
+                                                    + Boolean.hashCode(
+                                                            this.mAppNotInteractingRequired))
+                                            * 31)
+                                    + Boolean.hashCode(this.mAppNotTopVisibleRequired))
+                            * 31)
+                    + Boolean.hashCode(this.mNotInCallRequired);
         }
 
         @Override // android.os.Parcelable
@@ -2523,8 +2777,7 @@ public class PackageInstaller {
         }
 
         @Deprecated
-        private void __metadata() {
-        }
+        private void __metadata() {}
     }
 
     public static final class UnarchivalState {
@@ -2537,12 +2790,14 @@ public class PackageInstaller {
             return new UnarchivalState(unarchiveId, 0, -1L, null);
         }
 
-        public static UnarchivalState createUserActionRequiredState(int unarchiveId, PendingIntent userActionIntent) {
+        public static UnarchivalState createUserActionRequiredState(
+                int unarchiveId, PendingIntent userActionIntent) {
             Objects.requireNonNull(userActionIntent);
             return new UnarchivalState(unarchiveId, 1, -1L, userActionIntent);
         }
 
-        public static UnarchivalState createInsufficientStorageState(int unarchiveId, long requiredStorageBytes, PendingIntent userActionIntent) {
+        public static UnarchivalState createInsufficientStorageState(
+                int unarchiveId, long requiredStorageBytes, PendingIntent userActionIntent) {
             return new UnarchivalState(unarchiveId, 2, requiredStorageBytes, userActionIntent);
         }
 
@@ -2554,10 +2809,17 @@ public class PackageInstaller {
             return new UnarchivalState(unarchiveId, 100, -1L, null);
         }
 
-        private UnarchivalState(int unarchiveId, int status, long requiredStorageBytes, PendingIntent userActionIntent) {
+        private UnarchivalState(
+                int unarchiveId,
+                int status,
+                long requiredStorageBytes,
+                PendingIntent userActionIntent) {
             this.mUnarchiveId = unarchiveId;
             this.mStatus = status;
-            AnnotationValidations.validate((Class<? extends Annotation>) UnarchivalStatus.class, (Annotation) null, this.mStatus);
+            AnnotationValidations.validate(
+                    (Class<? extends Annotation>) UnarchivalStatus.class,
+                    (Annotation) null,
+                    this.mStatus);
             this.mRequiredStorageBytes = requiredStorageBytes;
             this.mUserActionIntent = userActionIntent;
         }

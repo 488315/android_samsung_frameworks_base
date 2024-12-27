@@ -1,24 +1,25 @@
 package android.os;
 
-import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public class BluetoothBatteryStats implements Parcelable {
-    public static final Parcelable.Creator<BluetoothBatteryStats> CREATOR = new Parcelable.Creator<BluetoothBatteryStats>() { // from class: android.os.BluetoothBatteryStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BluetoothBatteryStats createFromParcel(Parcel in) {
-            return new BluetoothBatteryStats(in);
-        }
+    public static final Parcelable.Creator<BluetoothBatteryStats> CREATOR =
+            new Parcelable.Creator<
+                    BluetoothBatteryStats>() { // from class: android.os.BluetoothBatteryStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BluetoothBatteryStats createFromParcel(Parcel in) {
+                    return new BluetoothBatteryStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BluetoothBatteryStats[] newArray(int size) {
-            return new BluetoothBatteryStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BluetoothBatteryStats[] newArray(int size) {
+                    return new BluetoothBatteryStats[size];
+                }
+            };
     private final List<UidStats> mUidStats;
 
     public static class UidStats {
@@ -29,7 +30,13 @@ public class BluetoothBatteryStats implements Parcelable {
         public final int uid;
         public final long unoptimizedScanTimeMs;
 
-        public UidStats(int uid, long scanTimeMs, long unoptimizedScanTimeMs, int scanResultCount, long rxTimeMs, long txTimeMs) {
+        public UidStats(
+                int uid,
+                long scanTimeMs,
+                long unoptimizedScanTimeMs,
+                int scanResultCount,
+                long rxTimeMs,
+                long txTimeMs) {
             this.uid = uid;
             this.scanTimeMs = scanTimeMs;
             this.unoptimizedScanTimeMs = unoptimizedScanTimeMs;
@@ -58,7 +65,19 @@ public class BluetoothBatteryStats implements Parcelable {
         }
 
         public String toString() {
-            return "UidStats{uid=" + this.uid + ", scanTimeMs=" + this.scanTimeMs + ", unoptimizedScanTimeMs=" + this.unoptimizedScanTimeMs + ", scanResultCount=" + this.scanResultCount + ", rxTimeMs=" + this.rxTimeMs + ", txTimeMs=" + this.txTimeMs + '}';
+            return "UidStats{uid="
+                    + this.uid
+                    + ", scanTimeMs="
+                    + this.scanTimeMs
+                    + ", unoptimizedScanTimeMs="
+                    + this.unoptimizedScanTimeMs
+                    + ", scanResultCount="
+                    + this.scanResultCount
+                    + ", rxTimeMs="
+                    + this.rxTimeMs
+                    + ", txTimeMs="
+                    + this.txTimeMs
+                    + '}';
         }
     }
 

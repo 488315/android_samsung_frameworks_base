@@ -1,6 +1,7 @@
 package com.android.server.permission.jarjar.kotlin.text;
 
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;

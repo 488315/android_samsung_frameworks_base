@@ -3,23 +3,27 @@ package vendor.samsung.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehSignalBar implements Parcelable {
-    public static final Parcelable.Creator<SehSignalBar> CREATOR = new Parcelable.Creator<SehSignalBar>() { // from class: vendor.samsung.hardware.radio.network.SehSignalBar.1
-        @Override // android.os.Parcelable.Creator
-        public SehSignalBar createFromParcel(Parcel _aidl_source) {
-            SehSignalBar _aidl_out = new SehSignalBar();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSignalBar> CREATOR =
+            new Parcelable.Creator<
+                    SehSignalBar>() { // from class:
+                                      // vendor.samsung.hardware.radio.network.SehSignalBar.1
+                @Override // android.os.Parcelable.Creator
+                public SehSignalBar createFromParcel(Parcel _aidl_source) {
+                    SehSignalBar _aidl_out = new SehSignalBar();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSignalBar[] newArray(int _aidl_size) {
-            return new SehSignalBar[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSignalBar[] newArray(int _aidl_size) {
+                    return new SehSignalBar[_aidl_size];
+                }
+            };
     public int cdmaLevel;
     public int evdoLevel;
     public int gsmLevel;

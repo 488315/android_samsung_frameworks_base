@@ -4,25 +4,29 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class ContentRecordingSession implements Parcelable {
-    public static final Parcelable.Creator<ContentRecordingSession> CREATOR = new Parcelable.Creator<ContentRecordingSession>() { // from class: android.view.ContentRecordingSession.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentRecordingSession[] newArray(int size) {
-            return new ContentRecordingSession[size];
-        }
+    public static final Parcelable.Creator<ContentRecordingSession> CREATOR =
+            new Parcelable.Creator<
+                    ContentRecordingSession>() { // from class:
+                                                 // android.view.ContentRecordingSession.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentRecordingSession[] newArray(int size) {
+                    return new ContentRecordingSession[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentRecordingSession createFromParcel(Parcel in) {
-            return new ContentRecordingSession(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentRecordingSession createFromParcel(Parcel in) {
+                    return new ContentRecordingSession(in);
+                }
+            };
     public static final int RECORD_CONTENT_DISPLAY = 0;
     public static final int RECORD_CONTENT_TASK = 1;
     public static final int TARGET_UID_FULL_SCREEN = -1;
@@ -37,12 +41,10 @@ public final class ContentRecordingSession implements Parcelable {
     private boolean mWaitingForConsent;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RecordContent {
-    }
+    public @interface RecordContent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TargetUid {
-    }
+    public @interface TargetUid {}
 
     private ContentRecordingSession() {
         this.mTaskId = -1;
@@ -55,31 +57,45 @@ public final class ContentRecordingSession implements Parcelable {
     }
 
     public static ContentRecordingSession createDisplaySession(int displayToMirror) {
-        return new ContentRecordingSession().setDisplayToRecord(displayToMirror).setContentToRecord(0).setTargetUid(-1);
+        return new ContentRecordingSession()
+                .setDisplayToRecord(displayToMirror)
+                .setContentToRecord(0)
+                .setTargetUid(-1);
     }
 
     public static ContentRecordingSession createTaskSession(IBinder taskWindowContainerToken) {
         return createTaskSession(taskWindowContainerToken, -1);
     }
 
-    public static ContentRecordingSession createTaskSession(IBinder taskWindowContainerToken, int taskId) {
-        return new ContentRecordingSession().setContentToRecord(1).setTokenToRecord(taskWindowContainerToken).setTaskId(taskId);
+    public static ContentRecordingSession createTaskSession(
+            IBinder taskWindowContainerToken, int taskId) {
+        return new ContentRecordingSession()
+                .setContentToRecord(1)
+                .setTokenToRecord(taskWindowContainerToken)
+                .setTaskId(taskId);
     }
 
     public static boolean isValid(ContentRecordingSession session) {
         if (session == null) {
             return false;
         }
-        boolean isValidTaskSession = session.getContentToRecord() == 1 && session.getTokenToRecord() != null;
-        boolean isValidDisplaySession = session.getContentToRecord() == 0 && session.getDisplayToRecord() > -1;
+        boolean isValidTaskSession =
+                session.getContentToRecord() == 1 && session.getTokenToRecord() != null;
+        boolean isValidDisplaySession =
+                session.getContentToRecord() == 0 && session.getDisplayToRecord() > -1;
         if (session.getVirtualDisplayId() > -1) {
             return isValidTaskSession || isValidDisplaySession;
         }
         return false;
     }
 
-    public static boolean isProjectionOnSameDisplay(ContentRecordingSession session, ContentRecordingSession incomingSession) {
-        return (session == null || incomingSession == null || session.getVirtualDisplayId() != incomingSession.getVirtualDisplayId()) ? false : true;
+    public static boolean isProjectionOnSameDisplay(
+            ContentRecordingSession session, ContentRecordingSession incomingSession) {
+        return (session == null
+                        || incomingSession == null
+                        || session.getVirtualDisplayId() != incomingSession.getVirtualDisplayId())
+                ? false
+                : true;
     }
 
     public static String recordContentToString(int value) {
@@ -104,7 +120,14 @@ public final class ContentRecordingSession implements Parcelable {
         }
     }
 
-    ContentRecordingSession(int taskId, int virtualDisplayId, int contentToRecord, int displayToRecord, IBinder tokenToRecord, boolean waitingForConsent, int targetUid) {
+    ContentRecordingSession(
+            int taskId,
+            int virtualDisplayId,
+            int contentToRecord,
+            int displayToRecord,
+            IBinder tokenToRecord,
+            boolean waitingForConsent,
+            int targetUid) {
         this.mTaskId = -1;
         this.mVirtualDisplayId = -1;
         this.mContentToRecord = 0;
@@ -116,7 +139,12 @@ public final class ContentRecordingSession implements Parcelable {
         this.mVirtualDisplayId = virtualDisplayId;
         this.mContentToRecord = contentToRecord;
         if (this.mContentToRecord != 0 && this.mContentToRecord != 1) {
-            throw new IllegalArgumentException("contentToRecord was " + this.mContentToRecord + " but must be one of: RECORD_CONTENT_DISPLAY(0), RECORD_CONTENT_TASK(1" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "contentToRecord was "
+                            + this.mContentToRecord
+                            + " but must be one of: RECORD_CONTENT_DISPLAY(0),"
+                            + " RECORD_CONTENT_TASK(1"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mDisplayToRecord = displayToRecord;
         this.mTokenToRecord = tokenToRecord;
@@ -165,7 +193,12 @@ public final class ContentRecordingSession implements Parcelable {
     public ContentRecordingSession setContentToRecord(int value) {
         this.mContentToRecord = value;
         if (this.mContentToRecord != 0 && this.mContentToRecord != 1) {
-            throw new IllegalArgumentException("contentToRecord was " + this.mContentToRecord + " but must be one of: RECORD_CONTENT_DISPLAY(0), RECORD_CONTENT_TASK(1" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "contentToRecord was "
+                            + this.mContentToRecord
+                            + " but must be one of: RECORD_CONTENT_DISPLAY(0),"
+                            + " RECORD_CONTENT_TASK(1"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         return this;
     }
@@ -191,7 +224,21 @@ public final class ContentRecordingSession implements Parcelable {
     }
 
     public String toString() {
-        return "ContentRecordingSession { taskId = " + this.mTaskId + ", virtualDisplayId = " + this.mVirtualDisplayId + ", contentToRecord = " + recordContentToString(this.mContentToRecord) + ", displayToRecord = " + this.mDisplayToRecord + ", tokenToRecord = " + this.mTokenToRecord + ", waitingForConsent = " + this.mWaitingForConsent + ", targetUid = " + this.mTargetUid + " }";
+        return "ContentRecordingSession { taskId = "
+                + this.mTaskId
+                + ", virtualDisplayId = "
+                + this.mVirtualDisplayId
+                + ", contentToRecord = "
+                + recordContentToString(this.mContentToRecord)
+                + ", displayToRecord = "
+                + this.mDisplayToRecord
+                + ", tokenToRecord = "
+                + this.mTokenToRecord
+                + ", waitingForConsent = "
+                + this.mWaitingForConsent
+                + ", targetUid = "
+                + this.mTargetUid
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -202,7 +249,13 @@ public final class ContentRecordingSession implements Parcelable {
             return false;
         }
         ContentRecordingSession that = (ContentRecordingSession) o;
-        if (this.mTaskId == that.mTaskId && this.mVirtualDisplayId == that.mVirtualDisplayId && this.mContentToRecord == that.mContentToRecord && this.mDisplayToRecord == that.mDisplayToRecord && Objects.equals(this.mTokenToRecord, that.mTokenToRecord) && this.mWaitingForConsent == that.mWaitingForConsent && this.mTargetUid == that.mTargetUid) {
+        if (this.mTaskId == that.mTaskId
+                && this.mVirtualDisplayId == that.mVirtualDisplayId
+                && this.mContentToRecord == that.mContentToRecord
+                && this.mDisplayToRecord == that.mDisplayToRecord
+                && Objects.equals(this.mTokenToRecord, that.mTokenToRecord)
+                && this.mWaitingForConsent == that.mWaitingForConsent
+                && this.mTargetUid == that.mTargetUid) {
             return true;
         }
         return false;
@@ -210,7 +263,14 @@ public final class ContentRecordingSession implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + this.mTaskId;
-        return (((((((((((_hash * 31) + this.mVirtualDisplayId) * 31) + this.mContentToRecord) * 31) + this.mDisplayToRecord) * 31) + Objects.hashCode(this.mTokenToRecord)) * 31) + Boolean.hashCode(this.mWaitingForConsent)) * 31) + this.mTargetUid;
+        return (((((((((((_hash * 31) + this.mVirtualDisplayId) * 31) + this.mContentToRecord) * 31)
+                                                                + this.mDisplayToRecord)
+                                                        * 31)
+                                                + Objects.hashCode(this.mTokenToRecord))
+                                        * 31)
+                                + Boolean.hashCode(this.mWaitingForConsent))
+                        * 31)
+                + this.mTargetUid;
     }
 
     @Override // android.os.Parcelable
@@ -255,7 +315,12 @@ public final class ContentRecordingSession implements Parcelable {
         this.mVirtualDisplayId = virtualDisplayId;
         this.mContentToRecord = contentToRecord;
         if (this.mContentToRecord != 0 && this.mContentToRecord != 1) {
-            throw new IllegalArgumentException("contentToRecord was " + this.mContentToRecord + " but must be one of: RECORD_CONTENT_DISPLAY(0), RECORD_CONTENT_TASK(1" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "contentToRecord was "
+                            + this.mContentToRecord
+                            + " but must be one of: RECORD_CONTENT_DISPLAY(0),"
+                            + " RECORD_CONTENT_TASK(1"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mDisplayToRecord = displayToRecord;
         this.mTokenToRecord = tokenToRecord;
@@ -346,18 +411,26 @@ public final class ContentRecordingSession implements Parcelable {
             if ((this.mBuilderFieldsSet & 64) == 0) {
                 this.mTargetUid = -2;
             }
-            ContentRecordingSession o = new ContentRecordingSession(this.mTaskId, this.mVirtualDisplayId, this.mContentToRecord, this.mDisplayToRecord, this.mTokenToRecord, this.mWaitingForConsent, this.mTargetUid);
+            ContentRecordingSession o =
+                    new ContentRecordingSession(
+                            this.mTaskId,
+                            this.mVirtualDisplayId,
+                            this.mContentToRecord,
+                            this.mDisplayToRecord,
+                            this.mTokenToRecord,
+                            this.mWaitingForConsent,
+                            this.mTargetUid);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 128) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -1,6 +1,5 @@
 package com.android.internal.telephony;
 
-import com.android.internal.telephony.PhoneConstants;
 
 /* loaded from: classes5.dex */
 public class PhoneConstantConversions {

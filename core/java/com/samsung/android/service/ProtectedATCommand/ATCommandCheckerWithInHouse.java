@@ -1,6 +1,7 @@
 package com.samsung.android.service.ProtectedATCommand;
 
 import android.util.Slog;
+
 import com.samsung.android.service.ProtectedATCommand.list.ATCommands;
 
 /* loaded from: classes6.dex */
@@ -27,7 +28,9 @@ public class ATCommandCheckerWithInHouse extends ATCommandChecker {
         if (result != 1) {
             return result;
         }
-        Slog.i("PACMClassifier", "This command is not allowed because the command is an unregistered command");
+        Slog.i(
+                "PACMClassifier",
+                "This command is not allowed because the command is an unregistered command");
         return 175;
     }
 }

@@ -5,6 +5,7 @@ import android.hardware.radio.V1_0.EvdoSignalStrength;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,29 @@ public final class CellInfoCdma {
             return false;
         }
         CellInfoCdma other = (CellInfoCdma) otherObject;
-        if (HidlSupport.deepEquals(this.cellIdentityCdma, other.cellIdentityCdma) && HidlSupport.deepEquals(this.signalStrengthCdma, other.signalStrengthCdma) && HidlSupport.deepEquals(this.signalStrengthEvdo, other.signalStrengthEvdo)) {
+        if (HidlSupport.deepEquals(this.cellIdentityCdma, other.cellIdentityCdma)
+                && HidlSupport.deepEquals(this.signalStrengthCdma, other.signalStrengthCdma)
+                && HidlSupport.deepEquals(this.signalStrengthEvdo, other.signalStrengthEvdo)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.cellIdentityCdma)), Integer.valueOf(HidlSupport.deepHashCode(this.signalStrengthCdma)), Integer.valueOf(HidlSupport.deepHashCode(this.signalStrengthEvdo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.cellIdentityCdma)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.signalStrengthCdma)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.signalStrengthEvdo)));
     }
 
     public final String toString() {
-        return "{.cellIdentityCdma = " + this.cellIdentityCdma + ", .signalStrengthCdma = " + this.signalStrengthCdma + ", .signalStrengthEvdo = " + this.signalStrengthEvdo + "}";
+        return "{.cellIdentityCdma = "
+                + this.cellIdentityCdma
+                + ", .signalStrengthCdma = "
+                + this.signalStrengthCdma
+                + ", .signalStrengthEvdo = "
+                + this.signalStrengthEvdo
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +57,8 @@ public final class CellInfoCdma {
         ArrayList<CellInfoCdma> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 80, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 80, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CellInfoCdma _hidl_vec_element = new CellInfoCdma();
@@ -55,7 +68,8 @@ public final class CellInfoCdma {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.cellIdentityCdma.readEmbeddedFromParcel(parcel, _hidl_blob, 0 + _hidl_offset);
         this.signalStrengthCdma.readEmbeddedFromParcel(parcel, _hidl_blob, 56 + _hidl_offset);
         this.signalStrengthEvdo.readEmbeddedFromParcel(parcel, _hidl_blob, 64 + _hidl_offset);
@@ -67,7 +81,8 @@ public final class CellInfoCdma {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<CellInfoCdma> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<CellInfoCdma> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

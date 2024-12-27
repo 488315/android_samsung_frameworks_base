@@ -7,8 +7,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.view.contentcapture.IContentCaptureOptionsCallback;
-import android.view.contentcapture.IDataShareWriteAdapter;
+
 import com.android.internal.os.IResultReceiver;
 
 /* loaded from: classes4.dex */
@@ -17,7 +16,8 @@ public interface IContentCaptureManager extends IInterface {
 
     void finishSession(int i) throws RemoteException;
 
-    void getContentCaptureConditions(String str, IResultReceiver iResultReceiver) throws RemoteException;
+    void getContentCaptureConditions(String str, IResultReceiver iResultReceiver)
+            throws RemoteException;
 
     void getServiceComponentName(IResultReceiver iResultReceiver) throws RemoteException;
 
@@ -25,9 +25,12 @@ public interface IContentCaptureManager extends IInterface {
 
     void isContentCaptureFeatureEnabled(IResultReceiver iResultReceiver) throws RemoteException;
 
-    void onLoginDetected(ParceledListSlice<ContentCaptureEvent> parceledListSlice) throws RemoteException;
+    void onLoginDetected(ParceledListSlice<ContentCaptureEvent> parceledListSlice)
+            throws RemoteException;
 
-    void registerContentCaptureOptionsCallback(String str, IContentCaptureOptionsCallback iContentCaptureOptionsCallback) throws RemoteException;
+    void registerContentCaptureOptionsCallback(
+            String str, IContentCaptureOptionsCallback iContentCaptureOptionsCallback)
+            throws RemoteException;
 
     void removeData(DataRemovalRequest dataRemovalRequest) throws RemoteException;
 
@@ -37,62 +40,70 @@ public interface IContentCaptureManager extends IInterface {
 
     void setTemporaryService(int i, String str, int i2) throws RemoteException;
 
-    void shareData(DataShareRequest dataShareRequest, IDataShareWriteAdapter iDataShareWriteAdapter) throws RemoteException;
+    void shareData(DataShareRequest dataShareRequest, IDataShareWriteAdapter iDataShareWriteAdapter)
+            throws RemoteException;
 
-    void startSession(IBinder iBinder, IBinder iBinder2, ComponentName componentName, int i, int i2, IResultReceiver iResultReceiver) throws RemoteException;
+    void startSession(
+            IBinder iBinder,
+            IBinder iBinder2,
+            ComponentName componentName,
+            int i,
+            int i2,
+            IResultReceiver iResultReceiver)
+            throws RemoteException;
 
     public static class Default implements IContentCaptureManager {
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void startSession(IBinder activityToken, IBinder shareableActivityToken, ComponentName componentName, int sessionId, int flags, IResultReceiver result) throws RemoteException {
-        }
+        public void startSession(
+                IBinder activityToken,
+                IBinder shareableActivityToken,
+                ComponentName componentName,
+                int sessionId,
+                int flags,
+                IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void finishSession(int sessionId) throws RemoteException {
-        }
+        public void finishSession(int sessionId) throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void getServiceComponentName(IResultReceiver result) throws RemoteException {
-        }
+        public void getServiceComponentName(IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void removeData(DataRemovalRequest request) throws RemoteException {
-        }
+        public void removeData(DataRemovalRequest request) throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void shareData(DataShareRequest request, IDataShareWriteAdapter adapter) throws RemoteException {
-        }
+        public void shareData(DataShareRequest request, IDataShareWriteAdapter adapter)
+                throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void isContentCaptureFeatureEnabled(IResultReceiver result) throws RemoteException {
-        }
+        public void isContentCaptureFeatureEnabled(IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void getServiceSettingsActivity(IResultReceiver result) throws RemoteException {
-        }
+        public void getServiceSettingsActivity(IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void getContentCaptureConditions(String packageName, IResultReceiver result) throws RemoteException {
-        }
+        public void getContentCaptureConditions(String packageName, IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void resetTemporaryService(int userId) throws RemoteException {
-        }
+        public void resetTemporaryService(int userId) throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void setTemporaryService(int userId, String serviceName, int duration) throws RemoteException {
-        }
+        public void setTemporaryService(int userId, String serviceName, int duration)
+                throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void setDefaultServiceEnabled(int userId, boolean enabled) throws RemoteException {
-        }
+        public void setDefaultServiceEnabled(int userId, boolean enabled) throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void registerContentCaptureOptionsCallback(String packageName, IContentCaptureOptionsCallback callback) throws RemoteException {
-        }
+        public void registerContentCaptureOptionsCallback(
+                String packageName, IContentCaptureOptionsCallback callback)
+                throws RemoteException {}
 
         @Override // android.view.contentcapture.IContentCaptureManager
-        public void onLoginDetected(ParceledListSlice<ContentCaptureEvent> events) throws RemoteException {
-        }
+        public void onLoginDetected(ParceledListSlice<ContentCaptureEvent> events)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -100,7 +111,7 @@ public interface IContentCaptureManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentCaptureManager {
+    public abstract static class Stub extends Binder implements IContentCaptureManager {
         static final int TRANSACTION_finishSession = 2;
         static final int TRANSACTION_getContentCaptureConditions = 8;
         static final int TRANSACTION_getServiceComponentName = 3;
@@ -174,7 +185,8 @@ public interface IContentCaptureManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContentCaptureManager.DESCRIPTOR);
             }
@@ -186,10 +198,12 @@ public interface IContentCaptureManager extends IInterface {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
                     IBinder _arg1 = data.readStrongBinder();
-                    ComponentName _arg2 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg2 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg3 = data.readInt();
                     int _arg4 = data.readInt();
-                    IResultReceiver _arg5 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg5 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startSession(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
                     return true;
@@ -199,34 +213,41 @@ public interface IContentCaptureManager extends IInterface {
                     finishSession(_arg02);
                     return true;
                 case 3:
-                    IResultReceiver _arg03 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg03 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getServiceComponentName(_arg03);
                     return true;
                 case 4:
-                    DataRemovalRequest _arg04 = (DataRemovalRequest) data.readTypedObject(DataRemovalRequest.CREATOR);
+                    DataRemovalRequest _arg04 =
+                            (DataRemovalRequest) data.readTypedObject(DataRemovalRequest.CREATOR);
                     data.enforceNoDataAvail();
                     removeData(_arg04);
                     return true;
                 case 5:
-                    DataShareRequest _arg05 = (DataShareRequest) data.readTypedObject(DataShareRequest.CREATOR);
-                    IDataShareWriteAdapter _arg12 = IDataShareWriteAdapter.Stub.asInterface(data.readStrongBinder());
+                    DataShareRequest _arg05 =
+                            (DataShareRequest) data.readTypedObject(DataShareRequest.CREATOR);
+                    IDataShareWriteAdapter _arg12 =
+                            IDataShareWriteAdapter.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     shareData(_arg05, _arg12);
                     return true;
                 case 6:
-                    IResultReceiver _arg06 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg06 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     isContentCaptureFeatureEnabled(_arg06);
                     return true;
                 case 7:
-                    IResultReceiver _arg07 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg07 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getServiceSettingsActivity(_arg07);
                     return true;
                 case 8:
                     String _arg08 = data.readString();
-                    IResultReceiver _arg13 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg13 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getContentCaptureConditions(_arg08, _arg13);
                     return true;
@@ -250,12 +271,15 @@ public interface IContentCaptureManager extends IInterface {
                     return true;
                 case 12:
                     String _arg012 = data.readString();
-                    IContentCaptureOptionsCallback _arg16 = IContentCaptureOptionsCallback.Stub.asInterface(data.readStrongBinder());
+                    IContentCaptureOptionsCallback _arg16 =
+                            IContentCaptureOptionsCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerContentCaptureOptionsCallback(_arg012, _arg16);
                     return true;
                 case 13:
-                    ParceledListSlice<ContentCaptureEvent> _arg013 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<ContentCaptureEvent> _arg013 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     onLoginDetected(_arg013);
                     return true;
@@ -281,7 +305,14 @@ public interface IContentCaptureManager extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
-            public void startSession(IBinder activityToken, IBinder shareableActivityToken, ComponentName componentName, int sessionId, int flags, IResultReceiver result) throws RemoteException {
+            public void startSession(
+                    IBinder activityToken,
+                    IBinder shareableActivityToken,
+                    ComponentName componentName,
+                    int sessionId,
+                    int flags,
+                    IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
@@ -334,7 +365,8 @@ public interface IContentCaptureManager extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
-            public void shareData(DataShareRequest request, IDataShareWriteAdapter adapter) throws RemoteException {
+            public void shareData(DataShareRequest request, IDataShareWriteAdapter adapter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
@@ -347,7 +379,8 @@ public interface IContentCaptureManager extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
-            public void isContentCaptureFeatureEnabled(IResultReceiver result) throws RemoteException {
+            public void isContentCaptureFeatureEnabled(IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
@@ -371,7 +404,8 @@ public interface IContentCaptureManager extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
-            public void getContentCaptureConditions(String packageName, IResultReceiver result) throws RemoteException {
+            public void getContentCaptureConditions(String packageName, IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
@@ -396,7 +430,8 @@ public interface IContentCaptureManager extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
-            public void setTemporaryService(int userId, String serviceName, int duration) throws RemoteException {
+            public void setTemporaryService(int userId, String serviceName, int duration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
@@ -410,7 +445,8 @@ public interface IContentCaptureManager extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
-            public void setDefaultServiceEnabled(int userId, boolean enabled) throws RemoteException {
+            public void setDefaultServiceEnabled(int userId, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
@@ -423,7 +459,9 @@ public interface IContentCaptureManager extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
-            public void registerContentCaptureOptionsCallback(String packageName, IContentCaptureOptionsCallback callback) throws RemoteException {
+            public void registerContentCaptureOptionsCallback(
+                    String packageName, IContentCaptureOptionsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);
@@ -436,7 +474,8 @@ public interface IContentCaptureManager extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureManager
-            public void onLoginDetected(ParceledListSlice<ContentCaptureEvent> events) throws RemoteException {
+            public void onLoginDetected(ParceledListSlice<ContentCaptureEvent> events)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureManager.DESCRIPTOR);

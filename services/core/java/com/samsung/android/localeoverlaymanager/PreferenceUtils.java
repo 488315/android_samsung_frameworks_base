@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.FileUtils;
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -22,7 +24,10 @@ public abstract class PreferenceUtils {
     public static URI getLocaleFileUriForUser(int i) {
         boolean z;
         Log.i("PreferenceUtils", "getLocaleFileUriForUser() called with: userId = [" + i + "]");
-        File file = new File(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/data/overlays/current_locale_apks/locale_preferences_", "/"));
+        File file =
+                new File(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "/data/overlays/current_locale_apks/locale_preferences_", "/"));
         if (!file.exists()) {
             if (file.mkdirs()) {
                 FileUtils.setPermissions(file, 509, -1, 1000);
@@ -39,10 +44,14 @@ public abstract class PreferenceUtils {
                 z = false;
             }
             if (z) {
-                Log.i("PreferenceUtils", "getLocaleFileUriForUser: Setting permissions for file: " + file2);
+                Log.i(
+                        "PreferenceUtils",
+                        "getLocaleFileUriForUser: Setting permissions for file: " + file2);
                 FileUtils.setPermissions(file2, 509, -1, 1000);
             } else {
-                Log.e("PreferenceUtils", "getLocaleFileUriForUser: Unable to create file - " + file2);
+                Log.e(
+                        "PreferenceUtils",
+                        "getLocaleFileUriForUser: Unable to create file - " + file2);
             }
         }
         return file2.toURI();
@@ -52,9 +61,13 @@ public abstract class PreferenceUtils {
         List<String> list = null;
         try {
             list = Files.readAllLines(Paths.get(getLocaleFileUriForUser(i)));
-            Log.i("PreferenceUtils", "getLocalesForUser(): userId = [" + i + "], locales = [" + list + "]");
+            Log.i(
+                    "PreferenceUtils",
+                    "getLocalesForUser(): userId = [" + i + "], locales = [" + list + "]");
         } catch (IOException e) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Couldn't read locales for ", " ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "Couldn't read locales for ", " ");
             m.append(e.getMessage());
             Log.e("PreferenceUtils", m.toString());
         }
@@ -64,8 +77,13 @@ public abstract class PreferenceUtils {
     public static SharedPreferences getPreferences(Context context) {
         boolean z;
         int i = Utils.sCurrentUserId;
-        Log.i("PreferenceUtils", "getPreferences() called with: userId = [" + i + "], context: " + context);
-        File file = new File(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/data/overlays/current_locale_apks/locale_preferences_", "/"));
+        Log.i(
+                "PreferenceUtils",
+                "getPreferences() called with: userId = [" + i + "], context: " + context);
+        File file =
+                new File(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "/data/overlays/current_locale_apks/locale_preferences_", "/"));
         if (!file.exists()) {
             if (file.mkdirs()) {
                 FileUtils.setPermissions(file, 509, -1, 1000);
@@ -94,7 +112,9 @@ public abstract class PreferenceUtils {
         try {
             Files.write(Paths.get(getLocaleFileUriForUser(i)), set, new OpenOption[0]);
         } catch (IOException e) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Couldn't create for user ", " ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "Couldn't create for user ", " ");
             m.append(e.getMessage());
             Log.e("PreferenceUtils", m.toString());
         }

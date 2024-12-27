@@ -10,7 +10,8 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_ENABLE_PER_PROCESS_USE_EMBEDDED_DEX_ATTR, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(Arrays.asList(Flags.FLAG_ENABLE_PER_PROCESS_USE_EMBEDDED_DEX_ATTR, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,12 +19,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.pm.pkg.component.flags.FeatureFlags
     public boolean enablePerProcessUseEmbeddedDexAttr() {
-        return getValue(Flags.FLAG_ENABLE_PER_PROCESS_USE_EMBEDDED_DEX_ATTR, new Predicate() { // from class: com.android.internal.pm.pkg.component.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enablePerProcessUseEmbeddedDexAttr();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_PER_PROCESS_USE_EMBEDDED_DEX_ATTR,
+                new Predicate() { // from class:
+                                  // com.android.internal.pm.pkg.component.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enablePerProcessUseEmbeddedDexAttr();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

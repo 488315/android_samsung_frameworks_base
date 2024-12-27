@@ -26,7 +26,8 @@ public class SubjectKeyIdentifier extends ASN1Object {
     }
 
     public static SubjectKeyIdentifier fromExtensions(Extensions extensions) {
-        return getInstance(Extensions.getExtensionParsedValue(extensions, Extension.subjectKeyIdentifier));
+        return getInstance(
+                Extensions.getExtensionParsedValue(extensions, Extension.subjectKeyIdentifier));
     }
 
     public SubjectKeyIdentifier(byte[] keyid) {
@@ -41,7 +42,8 @@ public class SubjectKeyIdentifier extends ASN1Object {
         return Arrays.clone(this.keyidentifier);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return new DEROctetString(getKeyIdentifier());
     }

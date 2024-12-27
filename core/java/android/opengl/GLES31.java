@@ -183,7 +183,8 @@ public class GLES31 extends GLES30 {
 
     public static native void glActiveShaderProgram(int i, int i2);
 
-    public static native void glBindImageTexture(int i, int i2, int i3, boolean z, int i4, int i5, int i6);
+    public static native void glBindImageTexture(
+            int i, int i2, int i3, boolean z, int i4, int i5, int i6);
 
     public static native void glBindProgramPipeline(int i);
 
@@ -237,11 +238,31 @@ public class GLES31 extends GLES30 {
 
     public static native String glGetProgramResourceName(int i, int i2, int i3);
 
-    public static native void glGetProgramResourceiv(int i, int i2, int i3, int i4, IntBuffer intBuffer, int i5, IntBuffer intBuffer2, IntBuffer intBuffer3);
+    public static native void glGetProgramResourceiv(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            IntBuffer intBuffer,
+            int i5,
+            IntBuffer intBuffer2,
+            IntBuffer intBuffer3);
 
-    public static native void glGetProgramResourceiv(int i, int i2, int i3, int i4, int[] iArr, int i5, int i6, int[] iArr2, int i7, int[] iArr3, int i8);
+    public static native void glGetProgramResourceiv(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int[] iArr,
+            int i5,
+            int i6,
+            int[] iArr2,
+            int i7,
+            int[] iArr3,
+            int i8);
 
-    public static native void glGetTexLevelParameterfv(int i, int i2, int i3, FloatBuffer floatBuffer);
+    public static native void glGetTexLevelParameterfv(
+            int i, int i2, int i3, FloatBuffer floatBuffer);
 
     public static native void glGetTexLevelParameterfv(int i, int i2, int i3, float[] fArr, int i4);
 
@@ -309,7 +330,8 @@ public class GLES31 extends GLES30 {
 
     public static native void glProgramUniform3uiv(int i, int i2, int i3, int[] iArr, int i4);
 
-    public static native void glProgramUniform4f(int i, int i2, float f, float f2, float f3, float f4);
+    public static native void glProgramUniform4f(
+            int i, int i2, float f, float f2, float f3, float f4);
 
     public static native void glProgramUniform4fv(int i, int i2, int i3, FloatBuffer floatBuffer);
 
@@ -327,45 +349,64 @@ public class GLES31 extends GLES30 {
 
     public static native void glProgramUniform4uiv(int i, int i2, int i3, int[] iArr, int i4);
 
-    public static native void glProgramUniformMatrix2fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix2fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix2fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix2fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
-    public static native void glProgramUniformMatrix2x3fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix2x3fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix2x3fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix2x3fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
-    public static native void glProgramUniformMatrix2x4fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix2x4fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix2x4fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix2x4fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
-    public static native void glProgramUniformMatrix3fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix3fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix3fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix3fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
-    public static native void glProgramUniformMatrix3x2fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix3x2fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix3x2fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix3x2fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
-    public static native void glProgramUniformMatrix3x4fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix3x4fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix3x4fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix3x4fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
-    public static native void glProgramUniformMatrix4fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix4fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix4fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix4fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
-    public static native void glProgramUniformMatrix4x2fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix4x2fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix4x2fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix4x2fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
-    public static native void glProgramUniformMatrix4x3fv(int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
+    public static native void glProgramUniformMatrix4x3fv(
+            int i, int i2, int i3, boolean z, FloatBuffer floatBuffer);
 
-    public static native void glProgramUniformMatrix4x3fv(int i, int i2, int i3, boolean z, float[] fArr, int i4);
+    public static native void glProgramUniformMatrix4x3fv(
+            int i, int i2, int i3, boolean z, float[] fArr, int i4);
 
     public static native void glSampleMaski(int i, int i2);
 
-    public static native void glTexStorage2DMultisample(int i, int i2, int i3, int i4, int i5, boolean z);
+    public static native void glTexStorage2DMultisample(
+            int i, int i2, int i3, int i4, int i5, boolean z);
 
     public static native void glUseProgramStages(int i, int i2, int i3);
 
@@ -383,6 +424,5 @@ public class GLES31 extends GLES30 {
         _nativeClassInit();
     }
 
-    GLES31() {
-    }
+    GLES31() {}
 }

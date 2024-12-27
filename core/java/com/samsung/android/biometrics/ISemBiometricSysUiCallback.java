@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISemBiometricSysUiCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.biometrics.ISemBiometricSysUiCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.biometrics.ISemBiometricSysUiCallback";
 
     void onError(int i, int i2, int i3) throws RemoteException;
 
@@ -20,20 +21,17 @@ public interface ISemBiometricSysUiCallback extends IInterface {
 
     public static class Default implements ISemBiometricSysUiCallback {
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiCallback
-        public void onTouchEvent(int sessionId, int event) throws RemoteException {
-        }
+        public void onTouchEvent(int sessionId, int event) throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiCallback
-        public void onError(int sessionId, int error, int code) throws RemoteException {
-        }
+        public void onError(int sessionId, int error, int code) throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiCallback
-        public void onSysUiDismissed(int sessionId, int reason, byte[] credentialAttestation) throws RemoteException {
-        }
+        public void onSysUiDismissed(int sessionId, int reason, byte[] credentialAttestation)
+                throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiCallback
-        public void onEvent(int sessionId, int event, int code) throws RemoteException {
-        }
+        public void onEvent(int sessionId, int event, int code) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,7 +39,7 @@ public interface ISemBiometricSysUiCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemBiometricSysUiCallback {
+    public abstract static class Stub extends Binder implements ISemBiometricSysUiCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onEvent = 4;
         static final int TRANSACTION_onSysUiDismissed = 3;
@@ -88,7 +86,8 @@ public interface ISemBiometricSysUiCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemBiometricSysUiCallback.DESCRIPTOR);
             }
@@ -173,7 +172,8 @@ public interface ISemBiometricSysUiCallback extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiCallback
-            public void onSysUiDismissed(int sessionId, int reason, byte[] credentialAttestation) throws RemoteException {
+            public void onSysUiDismissed(int sessionId, int reason, byte[] credentialAttestation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiCallback.DESCRIPTOR);

@@ -1,17 +1,18 @@
 package android.hardware.camera2.extension;
 
-import android.hardware.camera2.extension.IProcessResultImpl;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.Surface;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface ICaptureProcessorImpl extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.ICaptureProcessorImpl";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.ICaptureProcessorImpl";
 
     void onImageFormatUpdate(int i) throws RemoteException;
 
@@ -21,28 +22,28 @@ public interface ICaptureProcessorImpl extends IInterface {
 
     void onResolutionUpdate(Size size, Size size2) throws RemoteException;
 
-    void process(List<CaptureBundle> list, IProcessResultImpl iProcessResultImpl, boolean z) throws RemoteException;
+    void process(List<CaptureBundle> list, IProcessResultImpl iProcessResultImpl, boolean z)
+            throws RemoteException;
 
     public static class Default implements ICaptureProcessorImpl {
         @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
-        public void onOutputSurface(Surface surface, int imageFormat) throws RemoteException {
-        }
+        public void onOutputSurface(Surface surface, int imageFormat) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
-        public void onPostviewOutputSurface(Surface surface) throws RemoteException {
-        }
+        public void onPostviewOutputSurface(Surface surface) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
-        public void onResolutionUpdate(Size size, Size postviewSize) throws RemoteException {
-        }
+        public void onResolutionUpdate(Size size, Size postviewSize) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
-        public void onImageFormatUpdate(int imageFormat) throws RemoteException {
-        }
+        public void onImageFormatUpdate(int imageFormat) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
-        public void process(List<CaptureBundle> capturelist, IProcessResultImpl resultCallback, boolean isPostviewRequested) throws RemoteException {
-        }
+        public void process(
+                List<CaptureBundle> capturelist,
+                IProcessResultImpl resultCallback,
+                boolean isPostviewRequested)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -50,7 +51,7 @@ public interface ICaptureProcessorImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICaptureProcessorImpl {
+    public abstract static class Stub extends Binder implements ICaptureProcessorImpl {
         static final int TRANSACTION_onImageFormatUpdate = 4;
         static final int TRANSACTION_onOutputSurface = 1;
         static final int TRANSACTION_onPostviewOutputSurface = 2;
@@ -100,7 +101,8 @@ public interface ICaptureProcessorImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICaptureProcessorImpl.DESCRIPTOR);
             }
@@ -137,7 +139,8 @@ public interface ICaptureProcessorImpl extends IInterface {
                     return true;
                 case 5:
                     List<CaptureBundle> _arg05 = data.createTypedArrayList(CaptureBundle.CREATOR);
-                    IProcessResultImpl _arg13 = IProcessResultImpl.Stub.asInterface(data.readStrongBinder());
+                    IProcessResultImpl _arg13 =
+                            IProcessResultImpl.Stub.asInterface(data.readStrongBinder());
                     boolean _arg2 = data.readBoolean();
                     data.enforceNoDataAvail();
                     process(_arg05, _arg13, _arg2);
@@ -227,7 +230,11 @@ public interface ICaptureProcessorImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.ICaptureProcessorImpl
-            public void process(List<CaptureBundle> capturelist, IProcessResultImpl resultCallback, boolean isPostviewRequested) throws RemoteException {
+            public void process(
+                    List<CaptureBundle> capturelist,
+                    IProcessResultImpl resultCallback,
+                    boolean isPostviewRequested)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

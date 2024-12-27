@@ -3,13 +3,14 @@ package com.android.server.desktopmode;
 import android.os.Handler;
 import android.util.ArrayMap;
 import android.view.Display;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
-import com.android.server.desktopmode.HardwareManager;
-import com.android.server.desktopmode.StateManager;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.SemDesktopModeState;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -100,7 +101,10 @@ public final class StateManager implements IStateManager {
             if (this.mPreviousConnectedDisplay != null) {
                 m.append(" prev/");
                 int i = this.mPreviousConnectedDisplay.mType;
-                m.append(i != 1000 ? i != 1001 ? Display.typeToString(i) : "WIRELESS_DEX" : "DEX_ON_PC");
+                m.append(
+                        i != 1000
+                                ? i != 1001 ? Display.typeToString(i) : "WIRELESS_DEX"
+                                : "DEX_ON_PC");
             }
             if (this.mIsPogoKeyboardConnected) {
                 m.append(" pogoKeyboard");
@@ -178,86 +182,59 @@ public final class StateManager implements IStateManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class StateListener {
-        public void onBootCompleted() {
-        }
+        public void onBootCompleted() {}
 
-        public void onBootInitBlockerRegistered(boolean z) {
-        }
+        public void onBootInitBlockerRegistered(boolean z) {}
 
-        public void onDesktopModeStateChanged(InternalState internalState) {
-        }
+        public void onDesktopModeStateChanged(InternalState internalState) {}
 
-        public void onDisplayDisconnectionRequested(int i) {
-        }
+        public void onDisplayDisconnectionRequested(int i) {}
 
-        public void onDockLowChargerPowerChanged(InternalState internalState) {
-        }
+        public void onDockLowChargerPowerChanged(InternalState internalState) {}
 
-        public void onDockStateChanged(InternalState internalState) {
-        }
+        public void onDockStateChanged(InternalState internalState) {}
 
-        public void onDualModeSetDesktopMode(boolean z) {
-        }
+        public void onDualModeSetDesktopMode(boolean z) {}
 
-        public void onDualModeSetDesktopModeInternal(boolean z) {
-        }
+        public void onDualModeSetDesktopModeInternal(boolean z) {}
 
-        public void onDualModeStartLoadingScreen(boolean z) {
-        }
+        public void onDualModeStartLoadingScreen(boolean z) {}
 
-        public void onDualModeStopLoadingScreen(boolean z) {
-        }
+        public void onDualModeStopLoadingScreen(boolean z) {}
 
-        public void onEmergencyModeChanged() {
-        }
+        public void onEmergencyModeChanged() {}
 
-        public void onExternalDisplayConnectionChanged(InternalState internalState) {
-        }
+        public void onExternalDisplayConnectionChanged(InternalState internalState) {}
 
-        public void onExternalDisplayUpdated(InternalState internalState) {
-        }
+        public void onExternalDisplayUpdated(InternalState internalState) {}
 
-        public void onForcedInternalScreenStateChanged(InternalState internalState) {
-        }
+        public void onForcedInternalScreenStateChanged(InternalState internalState) {}
 
-        public void onLauncherPackageReplaced(boolean z) {
-        }
+        public void onLauncherPackageReplaced(boolean z) {}
 
-        public void onNavBarGestureEnabled(InternalState internalState) {
-        }
+        public void onNavBarGestureEnabled(InternalState internalState) {}
 
-        public void onPackageStateChanged(InternalState internalState) {
-        }
+        public void onPackageStateChanged(InternalState internalState) {}
 
-        public void onPogoKeyboardConnectionChanged(InternalState internalState) {
-        }
+        public void onPogoKeyboardConnectionChanged(InternalState internalState) {}
 
-        public void onScheduleUpdateDesktopMode(boolean z) {
-        }
+        public void onScheduleUpdateDesktopMode(boolean z) {}
 
-        public void onSetDesktopMode(boolean z) {
-        }
+        public void onSetDesktopMode(boolean z) {}
 
-        public void onSetDesktopModeInternal(boolean z) {
-        }
+        public void onSetDesktopModeInternal(boolean z) {}
 
-        public void onSpenEnabled(InternalState internalState) {
-        }
+        public void onSpenEnabled(InternalState internalState) {}
 
-        public void onStartLoadingScreen(boolean z) {
-        }
+        public void onStartLoadingScreen(boolean z) {}
 
-        public void onStopLoadingScreen(boolean z) {
-        }
+        public void onStopLoadingScreen(boolean z) {}
 
-        public void onTouchpadAvailabilityChanged(InternalState internalState) {
-        }
+        public void onTouchpadAvailabilityChanged(InternalState internalState) {}
 
-        public void onTouchpadEnabled(InternalState internalState) {
-        }
+        public void onTouchpadEnabled(InternalState internalState) {}
 
-        public void onUserChanged(InternalState internalState) {
-        }
+        public void onUserChanged(InternalState internalState) {}
     }
 
     public StateManager(ServiceThread serviceThread) {
@@ -317,7 +294,8 @@ public final class StateManager implements IStateManager {
         internalState2.mPackageState = new ArrayMap();
         internalState2.mDesktopModeState = new SemDesktopModeState();
         internalState2.mSeq = internalState.mSeq;
-        internalState2.mForcedInternalScreenModeEnabled = internalState.mForcedInternalScreenModeEnabled;
+        internalState2.mForcedInternalScreenModeEnabled =
+                internalState.mForcedInternalScreenModeEnabled;
         internalState2.mIsExternalDisplayConnected = internalState.mIsExternalDisplayConnected;
         internalState2.mIsMouseConnected = internalState.mIsMouseConnected;
         internalState2.mIsPogoKeyboardConnected = internalState.mIsPogoKeyboardConnected;
@@ -360,17 +338,20 @@ public final class StateManager implements IStateManager {
             Log.d("[DMS]StateManager", "notifyBootInitBlockerRegistered()");
         }
         synchronized (this.mLock) {
-            this.mHandler.post(new Runnable() { // from class: com.android.server.desktopmode.StateManager$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    StateManager stateManager = StateManager.this;
-                    boolean z2 = z;
-                    Iterator it = stateManager.mStateListeners.iterator();
-                    while (it.hasNext()) {
-                        ((StateManager.StateListener) it.next()).onBootInitBlockerRegistered(z2);
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.desktopmode.StateManager$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            StateManager stateManager = StateManager.this;
+                            boolean z2 = z;
+                            Iterator it = stateManager.mStateListeners.iterator();
+                            while (it.hasNext()) {
+                                ((StateManager.StateListener) it.next())
+                                        .onBootInitBlockerRegistered(z2);
+                            }
+                        }
+                    });
         }
     }
 
@@ -386,7 +367,8 @@ public final class StateManager implements IStateManager {
 
     public final void notifyLauncherPackageReplaced(boolean z) {
         if (DesktopModeFeature.DEBUG) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("notifyLauncherPackageReplaced(dataCleared=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "notifyLauncherPackageReplaced(dataCleared=", ")", "[DMS]StateManager", z);
         }
         Iterator it = this.mStateListeners.iterator();
         while (it.hasNext()) {
@@ -396,7 +378,8 @@ public final class StateManager implements IStateManager {
 
     public final void notifyScheduleUpdateDesktopMode(boolean z) {
         if (DesktopModeFeature.DEBUG) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("notifyScheduleUpdateDesktopMode(enter=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "notifyScheduleUpdateDesktopMode(enter=", ")", "[DMS]StateManager", z);
         }
         Iterator it = this.mStateListeners.iterator();
         while (it.hasNext()) {
@@ -417,7 +400,9 @@ public final class StateManager implements IStateManager {
         }
         synchronized (this.mLock) {
             this.mInternalState.mDesktopModeState = semDesktopModeState;
-            this.mHandler.post(new StateManager$$ExternalSyntheticLambda0(this, copyInternalStateLocked(this.mInternalState), 11));
+            this.mHandler.post(
+                    new StateManager$$ExternalSyntheticLambda0(
+                            this, copyInternalStateLocked(this.mInternalState), 11));
         }
     }
 
@@ -429,7 +414,9 @@ public final class StateManager implements IStateManager {
             try {
                 if (this.mInternalState.mDockLowChargerState != i) {
                     this.mInternalState.mDockLowChargerState = i;
-                    this.mHandler.post(new StateManager$$ExternalSyntheticLambda0(this, copyInternalStateLocked(this.mInternalState), 13));
+                    this.mHandler.post(
+                            new StateManager$$ExternalSyntheticLambda0(
+                                    this, copyInternalStateLocked(this.mInternalState), 13));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -439,13 +426,16 @@ public final class StateManager implements IStateManager {
 
     public final void setEmergencyModeEnabled(boolean z) {
         if (DesktopModeFeature.DEBUG) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("setEmergencyModeEnabled(enabled=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "setEmergencyModeEnabled(enabled=", ")", "[DMS]StateManager", z);
         }
         synchronized (this.mLock) {
             try {
                 if (this.mInternalState.mEmergencyModeEnabled != z) {
                     this.mInternalState.mEmergencyModeEnabled = z;
-                    this.mHandler.post(new StateManager$$ExternalSyntheticLambda0(this, copyInternalStateLocked(this.mInternalState), 12));
+                    this.mHandler.post(
+                            new StateManager$$ExternalSyntheticLambda0(
+                                    this, copyInternalStateLocked(this.mInternalState), 12));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -455,7 +445,13 @@ public final class StateManager implements IStateManager {
 
     public final void setExternalDisplayConnected(boolean z, DisplayInfo displayInfo) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]StateManager", "setExternalDisplayConnected(connected=" + z + ", display=" + displayInfo + ")");
+            Log.d(
+                    "[DMS]StateManager",
+                    "setExternalDisplayConnected(connected="
+                            + z
+                            + ", display="
+                            + displayInfo
+                            + ")");
         }
         synchronized (this.mLock) {
             try {
@@ -465,7 +461,9 @@ public final class StateManager implements IStateManager {
                     if (!z) {
                         this.mInternalState.mDisplayResolutionUnsupported = false;
                     }
-                    this.mHandler.post(new StateManager$$ExternalSyntheticLambda0(this, copyInternalStateLocked(this.mInternalState), 2));
+                    this.mHandler.post(
+                            new StateManager$$ExternalSyntheticLambda0(
+                                    this, copyInternalStateLocked(this.mInternalState), 2));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -479,10 +477,16 @@ public final class StateManager implements IStateManager {
         }
         synchronized (this.mLock) {
             try {
-                if ((this.mInternalState.mConnectedDisplay == null ? -1 : this.mInternalState.mConnectedDisplay.mDisplayId) != displayInfo.mDisplayId) {
-                    this.mInternalState.mPreviousConnectedDisplay = this.mInternalState.mConnectedDisplay;
+                if ((this.mInternalState.mConnectedDisplay == null
+                                ? -1
+                                : this.mInternalState.mConnectedDisplay.mDisplayId)
+                        != displayInfo.mDisplayId) {
+                    this.mInternalState.mPreviousConnectedDisplay =
+                            this.mInternalState.mConnectedDisplay;
                     this.mInternalState.mConnectedDisplay = displayInfo;
-                    this.mHandler.post(new StateManager$$ExternalSyntheticLambda0(this, copyInternalStateLocked(this.mInternalState), 5));
+                    this.mHandler.post(
+                            new StateManager$$ExternalSyntheticLambda0(
+                                    this, copyInternalStateLocked(this.mInternalState), 5));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -492,7 +496,8 @@ public final class StateManager implements IStateManager {
 
     public final void setModeChangeLocked(boolean z) {
         if (DesktopModeFeature.DEBUG) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("setModeChangeLocked(locked=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "setModeChangeLocked(locked=", ")", "[DMS]StateManager", z);
         }
         synchronized (this.mLock) {
             try {
@@ -508,13 +513,16 @@ public final class StateManager implements IStateManager {
 
     public final void setNavBarGestureEnabled(boolean z) {
         if (DesktopModeFeature.DEBUG) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("setNavBarGestureEnabled(enabled=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "setNavBarGestureEnabled(enabled=", ")", "[DMS]StateManager", z);
         }
         synchronized (this.mLock) {
             try {
                 if (this.mInternalState.mIsNavBarGestureEnabled != z) {
                     this.mInternalState.mIsNavBarGestureEnabled = z;
-                    this.mHandler.post(new StateManager$$ExternalSyntheticLambda0(this, copyInternalStateLocked(this.mInternalState), 1));
+                    this.mHandler.post(
+                            new StateManager$$ExternalSyntheticLambda0(
+                                    this, copyInternalStateLocked(this.mInternalState), 1));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -524,13 +532,16 @@ public final class StateManager implements IStateManager {
 
     public final void setTouchpadEnabled(boolean z) {
         if (DesktopModeFeature.DEBUG) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("setTouchpadEnabled(enabled=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "setTouchpadEnabled(enabled=", ")", "[DMS]StateManager", z);
         }
         synchronized (this.mLock) {
             try {
                 if (this.mInternalState.mTouchpadEnabled != z) {
                     this.mInternalState.mTouchpadEnabled = z;
-                    this.mHandler.post(new StateManager$$ExternalSyntheticLambda0(this, copyInternalStateLocked(this.mInternalState), 6));
+                    this.mHandler.post(
+                            new StateManager$$ExternalSyntheticLambda0(
+                                    this, copyInternalStateLocked(this.mInternalState), 6));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -540,13 +551,16 @@ public final class StateManager implements IStateManager {
 
     public final void setWiredCharging(boolean z) {
         if (DesktopModeFeature.DEBUG) {
-            DesktopModeService$$ExternalSyntheticOutline0.m("setWiredCharging(isWiredCharging=", ")", "[DMS]StateManager", z);
+            DesktopModeService$$ExternalSyntheticOutline0.m(
+                    "setWiredCharging(isWiredCharging=", ")", "[DMS]StateManager", z);
         }
         synchronized (this.mLock) {
             try {
                 if (this.mInternalState.mIsWiredCharging != z) {
                     this.mInternalState.mIsWiredCharging = z;
-                    this.mHandler.post(new StateManager$$ExternalSyntheticLambda2(this, copyInternalStateLocked(this.mInternalState), 4));
+                    this.mHandler.post(
+                            new StateManager$$ExternalSyntheticLambda2(
+                                    this, copyInternalStateLocked(this.mInternalState), 4));
                 }
             } catch (Throwable th) {
                 throw th;

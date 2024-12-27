@@ -16,8 +16,10 @@ import android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService;
 import android.media.soundtrigger_middleware.ISoundTriggerModule;
 import android.media.soundtrigger_middleware.SoundTriggerModuleDescriptor;
 import android.os.IBinder;
+
 import com.android.internal.util.LatencyTracker;
 import com.android.server.SystemService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Objects;
@@ -38,9 +40,24 @@ public final class SoundTriggerMiddlewareService extends ISoundTriggerMiddleware
         @Override // com.android.server.SystemService
         public final void onStart() {
             SoundTriggerInjection soundTriggerInjection = new SoundTriggerInjection();
-            HalFactory[] halFactoryArr = {new DefaultHalFactory(), new FakeHalFactory(soundTriggerInjection)};
+            HalFactory[] halFactoryArr = {
+                new DefaultHalFactory(), new FakeHalFactory(soundTriggerInjection)
+            };
             Context context = getContext();
-            publishBinderService("soundtrigger_middleware", new SoundTriggerMiddlewareService(new SoundTriggerMiddlewareLogging(LatencyTracker.getInstance(context), new SoundTriggerMiddlewareLogging$$ExternalSyntheticLambda0(), new SoundTriggerMiddlewarePermission(new SoundTriggerMiddlewareValidation(new SoundTriggerMiddlewareImpl(halFactoryArr, new AudioSessionProviderImpl())), getContext())), getContext(), soundTriggerInjection));
+            publishBinderService(
+                    "soundtrigger_middleware",
+                    new SoundTriggerMiddlewareService(
+                            new SoundTriggerMiddlewareLogging(
+                                    LatencyTracker.getInstance(context),
+                                    new SoundTriggerMiddlewareLogging$$ExternalSyntheticLambda0(),
+                                    new SoundTriggerMiddlewarePermission(
+                                            new SoundTriggerMiddlewareValidation(
+                                                    new SoundTriggerMiddlewareImpl(
+                                                            halFactoryArr,
+                                                            new AudioSessionProviderImpl())),
+                                            getContext())),
+                            getContext(),
+                            soundTriggerInjection));
         }
     }
 
@@ -153,7 +170,8 @@ public final class SoundTriggerMiddlewareService extends ISoundTriggerMiddleware
         public final ModelParameterRange queryModelParameterSupport(int i, int i2) {
             SafeCloseable create = ClearCallingIdentityContext.create();
             try {
-                ModelParameterRange queryModelParameterSupport = this.mDelegate.queryModelParameterSupport(i, i2);
+                ModelParameterRange queryModelParameterSupport =
+                        this.mDelegate.queryModelParameterSupport(i, i2);
                 if (create != null) {
                     create.close();
                 }
@@ -248,18 +266,32 @@ public final class SoundTriggerMiddlewareService extends ISoundTriggerMiddleware
         }
     }
 
-    public SoundTriggerMiddlewareService(SoundTriggerMiddlewareLogging soundTriggerMiddlewareLogging, Context context, SoundTriggerInjection soundTriggerInjection) {
+    public SoundTriggerMiddlewareService(
+            SoundTriggerMiddlewareLogging soundTriggerMiddlewareLogging,
+            Context context,
+            SoundTriggerInjection soundTriggerInjection) {
         this.mDelegate = soundTriggerMiddlewareLogging;
         this.mContext = context;
         this.mInjection = soundTriggerInjection;
     }
 
-    public final ISoundTriggerModule attachAsMiddleman(int i, Identity identity, Identity identity2, ISoundTriggerCallback iSoundTriggerCallback, boolean z) {
+    public final ISoundTriggerModule attachAsMiddleman(
+            int i,
+            Identity identity,
+            Identity identity2,
+            ISoundTriggerCallback iSoundTriggerCallback,
+            boolean z) {
         Objects.requireNonNull(identity);
         Objects.requireNonNull(identity2);
-        SafeCloseable establishIdentityIndirect = PermissionUtil.establishIdentityIndirect(this.mContext, "android.permission.SOUNDTRIGGER_DELEGATE_IDENTITY", identity, identity2);
+        SafeCloseable establishIdentityIndirect =
+                PermissionUtil.establishIdentityIndirect(
+                        this.mContext,
+                        "android.permission.SOUNDTRIGGER_DELEGATE_IDENTITY",
+                        identity,
+                        identity2);
         try {
-            ModuleService moduleService = new ModuleService(this.mDelegate.attach(i, iSoundTriggerCallback, z));
+            ModuleService moduleService =
+                    new ModuleService(this.mDelegate.attach(i, iSoundTriggerCallback, z));
             if (establishIdentityIndirect != null) {
                 establishIdentityIndirect.close();
             }
@@ -276,11 +308,13 @@ public final class SoundTriggerMiddlewareService extends ISoundTriggerMiddleware
         }
     }
 
-    public final ISoundTriggerModule attachAsOriginator(int i, Identity identity, ISoundTriggerCallback iSoundTriggerCallback) {
+    public final ISoundTriggerModule attachAsOriginator(
+            int i, Identity identity, ISoundTriggerCallback iSoundTriggerCallback) {
         Objects.requireNonNull(identity);
         SafeCloseable establishIdentityDirect = PermissionUtil.establishIdentityDirect(identity);
         try {
-            ModuleService moduleService = new ModuleService(this.mDelegate.attach(i, iSoundTriggerCallback, false));
+            ModuleService moduleService =
+                    new ModuleService(this.mDelegate.attach(i, iSoundTriggerCallback, false));
             if (establishIdentityDirect != null) {
                 establishIdentityDirect.close();
             }
@@ -298,7 +332,8 @@ public final class SoundTriggerMiddlewareService extends ISoundTriggerMiddleware
     }
 
     public final void attachFakeHalInjection(ISoundTriggerInjection iSoundTriggerInjection) {
-        PermissionChecker.checkCallingOrSelfPermissionForPreflight(this.mContext, "android.permission.MANAGE_SOUND_TRIGGER");
+        PermissionChecker.checkCallingOrSelfPermissionForPreflight(
+                this.mContext, "android.permission.MANAGE_SOUND_TRIGGER");
         SafeCloseable create = ClearCallingIdentityContext.create();
         try {
             SoundTriggerInjection soundTriggerInjection = this.mInjection;
@@ -319,15 +354,22 @@ public final class SoundTriggerMiddlewareService extends ISoundTriggerMiddleware
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         ISoundTriggerMiddlewareInternal iSoundTriggerMiddlewareInternal = this.mDelegate;
         if (iSoundTriggerMiddlewareInternal instanceof Dumpable) {
             ((Dumpable) iSoundTriggerMiddlewareInternal).dump(printWriter);
         }
     }
 
-    public final SoundTriggerModuleDescriptor[] listModulesAsMiddleman(Identity identity, Identity identity2) {
-        SafeCloseable establishIdentityIndirect = PermissionUtil.establishIdentityIndirect(this.mContext, "android.permission.SOUNDTRIGGER_DELEGATE_IDENTITY", identity, identity2);
+    public final SoundTriggerModuleDescriptor[] listModulesAsMiddleman(
+            Identity identity, Identity identity2) {
+        SafeCloseable establishIdentityIndirect =
+                PermissionUtil.establishIdentityIndirect(
+                        this.mContext,
+                        "android.permission.SOUNDTRIGGER_DELEGATE_IDENTITY",
+                        identity,
+                        identity2);
         try {
             SoundTriggerModuleDescriptor[] listModules = this.mDelegate.listModules();
             if (establishIdentityIndirect != null) {

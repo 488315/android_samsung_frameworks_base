@@ -15,11 +15,12 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.location.GpsNetInitiatedHandler;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
-import com.android.server.location.gnss.GnssVisibilityControl;
 import com.android.server.location.gnss.sec.CarrierConfig;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
@@ -37,37 +38,58 @@ class GnssVisibilityControl {
     public final PackageManager mPackageManager;
     public final PowerManager.WakeLock mWakeLock;
     public final ArrayMap mProxyAppsState = new ArrayMap(5);
-    public final GnssVisibilityControl$$ExternalSyntheticLambda3 mOnPermissionsChangedListener = new PackageManager.OnPermissionsChangedListener() { // from class: com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda3
-        public final void onPermissionsChanged(final int i) {
-            final GnssVisibilityControl gnssVisibilityControl = GnssVisibilityControl.this;
-            gnssVisibilityControl.getClass();
-            gnssVisibilityControl.runOnHandler(new Runnable() { // from class: com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    GnssVisibilityControl gnssVisibilityControl2 = GnssVisibilityControl.this;
-                    int i2 = i;
-                    if (gnssVisibilityControl2.mProxyAppsState.isEmpty()) {
-                        return;
-                    }
-                    for (Map.Entry entry : gnssVisibilityControl2.mProxyAppsState.entrySet()) {
-                        String str = (String) entry.getKey();
-                        ApplicationInfo proxyAppInfo = gnssVisibilityControl2.getProxyAppInfo(str);
-                        if (proxyAppInfo != null && proxyAppInfo.uid == i2) {
-                            boolean shouldEnableLocationPermissionInGnssHal = gnssVisibilityControl2.shouldEnableLocationPermissionInGnssHal(str);
-                            GnssVisibilityControl.ProxyAppState proxyAppState = (GnssVisibilityControl.ProxyAppState) entry.getValue();
-                            if (shouldEnableLocationPermissionInGnssHal != proxyAppState.mHasLocationPermission) {
-                                Log.i("GnssVisibilityControl", "Proxy app " + str + " location permission changed. IsLocationPermissionEnabled: " + shouldEnableLocationPermissionInGnssHal);
-                                proxyAppState.mHasLocationPermission = shouldEnableLocationPermissionInGnssHal;
-                                gnssVisibilityControl2.updateNfwLocationAccessProxyAppsInGnssHal();
-                                return;
-                            }
-                            return;
-                        }
-                    }
+    public final GnssVisibilityControl$$ExternalSyntheticLambda3 mOnPermissionsChangedListener =
+            new PackageManager.OnPermissionsChangedListener() { // from class:
+                // com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda3
+                public final void onPermissionsChanged(final int i) {
+                    final GnssVisibilityControl gnssVisibilityControl = GnssVisibilityControl.this;
+                    gnssVisibilityControl.getClass();
+                    gnssVisibilityControl.runOnHandler(
+                            new Runnable() { // from class:
+                                // com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda5
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    GnssVisibilityControl gnssVisibilityControl2 =
+                                            GnssVisibilityControl.this;
+                                    int i2 = i;
+                                    if (gnssVisibilityControl2.mProxyAppsState.isEmpty()) {
+                                        return;
+                                    }
+                                    for (Map.Entry entry :
+                                            gnssVisibilityControl2.mProxyAppsState.entrySet()) {
+                                        String str = (String) entry.getKey();
+                                        ApplicationInfo proxyAppInfo =
+                                                gnssVisibilityControl2.getProxyAppInfo(str);
+                                        if (proxyAppInfo != null && proxyAppInfo.uid == i2) {
+                                            boolean shouldEnableLocationPermissionInGnssHal =
+                                                    gnssVisibilityControl2
+                                                            .shouldEnableLocationPermissionInGnssHal(
+                                                                    str);
+                                            GnssVisibilityControl.ProxyAppState proxyAppState =
+                                                    (GnssVisibilityControl.ProxyAppState)
+                                                            entry.getValue();
+                                            if (shouldEnableLocationPermissionInGnssHal
+                                                    != proxyAppState.mHasLocationPermission) {
+                                                Log.i(
+                                                        "GnssVisibilityControl",
+                                                        "Proxy app "
+                                                                + str
+                                                                + " location permission changed."
+                                                                + " IsLocationPermissionEnabled: "
+                                                                + shouldEnableLocationPermissionInGnssHal);
+                                                proxyAppState.mHasLocationPermission =
+                                                        shouldEnableLocationPermissionInGnssHal;
+                                                gnssVisibilityControl2
+                                                        .updateNfwLocationAccessProxyAppsInGnssHal();
+                                                return;
+                                            }
+                                            return;
+                                        }
+                                    }
+                                }
+                            });
                 }
-            });
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NfwNotification {
@@ -80,7 +102,15 @@ class GnssVisibilityControl {
         public final String mRequestorId;
         public final byte mResponseType;
 
-        public NfwNotification(String str, byte b, String str2, byte b2, String str3, byte b3, boolean z, boolean z2) {
+        public NfwNotification(
+                String str,
+                byte b,
+                String str2,
+                byte b2,
+                String str3,
+                byte b3,
+                boolean z,
+                boolean z2) {
             this.mProxyAppPackageName = str;
             this.mProtocolStack = b;
             this.mOtherProtocolStackName = str2;
@@ -95,7 +125,22 @@ class GnssVisibilityControl {
             Byte valueOf = Byte.valueOf(this.mProtocolStack);
             Byte valueOf2 = Byte.valueOf(this.mRequestor);
             byte b = this.mResponseType;
-            return String.format("{proxyAppPackageName: %s, protocolStack: %d, otherProtocolStackName: %s, requestor: %d, requestorId: %s, responseType: %s, inEmergencyMode: %b, isCachedLocation: %b}", this.mProxyAppPackageName, valueOf, this.mOtherProtocolStackName, valueOf2, this.mRequestorId, b != 0 ? b != 1 ? b != 2 ? "<Unknown>" : "ACCEPTED_LOCATION_PROVIDED" : "ACCEPTED_NO_LOCATION_PROVIDED" : "REJECTED", Boolean.valueOf(this.mInEmergencyMode), Boolean.valueOf(this.mIsCachedLocation));
+            return String.format(
+                    "{proxyAppPackageName: %s, protocolStack: %d, otherProtocolStackName: %s,"
+                        + " requestor: %d, requestorId: %s, responseType: %s, inEmergencyMode: %b,"
+                        + " isCachedLocation: %b}",
+                    this.mProxyAppPackageName,
+                    valueOf,
+                    this.mOtherProtocolStackName,
+                    valueOf2,
+                    this.mRequestorId,
+                    b != 0
+                            ? b != 1
+                                    ? b != 2 ? "<Unknown>" : "ACCEPTED_LOCATION_PROVIDED"
+                                    : "ACCEPTED_NO_LOCATION_PROVIDED"
+                            : "REJECTED",
+                    Boolean.valueOf(this.mInEmergencyMode),
+                    Boolean.valueOf(this.mIsCachedLocation));
         }
     }
 
@@ -106,54 +151,92 @@ class GnssVisibilityControl {
     }
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda3] */
-    public GnssVisibilityControl(Context context, Looper looper, GpsNetInitiatedHandler gpsNetInitiatedHandler) {
+    public GnssVisibilityControl(
+            Context context, Looper looper, GpsNetInitiatedHandler gpsNetInitiatedHandler) {
         this.mContext = context;
-        this.mWakeLock = ((PowerManager) context.getSystemService("power")).newWakeLock(1, "GnssVisibilityControl");
+        this.mWakeLock =
+                ((PowerManager) context.getSystemService("power"))
+                        .newWakeLock(1, "GnssVisibilityControl");
         this.mHandler = new Handler(looper);
         this.mNiHandler = gpsNetInitiatedHandler;
         this.mAppOps = (AppOpsManager) context.getSystemService(AppOpsManager.class);
         this.mPackageManager = context.getPackageManager();
-        runOnHandler(new Runnable() { // from class: com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                final GnssVisibilityControl gnssVisibilityControl = GnssVisibilityControl.this;
-                gnssVisibilityControl.getClass();
-                IntentFilter intentFilter = new IntentFilter();
-                intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
-                intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
-                intentFilter.addAction("android.intent.action.PACKAGE_REPLACED");
-                intentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
-                intentFilter.addDataScheme("package");
-                gnssVisibilityControl.mContext.registerReceiverAsUser(new BroadcastReceiver() { // from class: com.android.server.location.gnss.GnssVisibilityControl.1
-                    @Override // android.content.BroadcastReceiver
-                    public final void onReceive(Context context2, Intent intent) {
-                        String action = intent.getAction();
-                        if (action == null) {
-                        }
-                        switch (action) {
-                            case "android.intent.action.PACKAGE_REPLACED":
-                            case "android.intent.action.PACKAGE_CHANGED":
-                            case "android.intent.action.PACKAGE_REMOVED":
-                            case "android.intent.action.PACKAGE_ADDED":
-                                String encodedSchemeSpecificPart = intent.getData().getEncodedSchemeSpecificPart();
-                                GnssVisibilityControl gnssVisibilityControl2 = GnssVisibilityControl.this;
-                                ProxyAppState proxyAppState = (ProxyAppState) gnssVisibilityControl2.mProxyAppsState.get(encodedSchemeSpecificPart);
-                                if (proxyAppState != null) {
-                                    Log.d("GnssVisibilityControl", "Proxy app " + encodedSchemeSpecificPart + " package changed: " + action);
-                                    boolean shouldEnableLocationPermissionInGnssHal = gnssVisibilityControl2.shouldEnableLocationPermissionInGnssHal(encodedSchemeSpecificPart);
-                                    if (proxyAppState.mHasLocationPermission != shouldEnableLocationPermissionInGnssHal) {
-                                        Log.i("GnssVisibilityControl", "Proxy app " + encodedSchemeSpecificPart + " location permission changed. IsLocationPermissionEnabled: " + shouldEnableLocationPermissionInGnssHal);
-                                        proxyAppState.mHasLocationPermission = shouldEnableLocationPermissionInGnssHal;
-                                        gnssVisibilityControl2.updateNfwLocationAccessProxyAppsInGnssHal();
-                                        break;
+        runOnHandler(
+                new Runnable() { // from class:
+                    // com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        final GnssVisibilityControl gnssVisibilityControl =
+                                GnssVisibilityControl.this;
+                        gnssVisibilityControl.getClass();
+                        IntentFilter intentFilter = new IntentFilter();
+                        intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
+                        intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
+                        intentFilter.addAction("android.intent.action.PACKAGE_REPLACED");
+                        intentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
+                        intentFilter.addDataScheme("package");
+                        gnssVisibilityControl.mContext.registerReceiverAsUser(
+                                new BroadcastReceiver() { // from class:
+                                    // com.android.server.location.gnss.GnssVisibilityControl.1
+                                    @Override // android.content.BroadcastReceiver
+                                    public final void onReceive(Context context2, Intent intent) {
+                                        String action = intent.getAction();
+                                        if (action == null) {}
+                                        switch (action) {
+                                            case "android.intent.action.PACKAGE_REPLACED":
+                                            case "android.intent.action.PACKAGE_CHANGED":
+                                            case "android.intent.action.PACKAGE_REMOVED":
+                                            case "android.intent.action.PACKAGE_ADDED":
+                                                String encodedSchemeSpecificPart =
+                                                        intent.getData()
+                                                                .getEncodedSchemeSpecificPart();
+                                                GnssVisibilityControl gnssVisibilityControl2 =
+                                                        GnssVisibilityControl.this;
+                                                ProxyAppState proxyAppState =
+                                                        (ProxyAppState)
+                                                                gnssVisibilityControl2
+                                                                        .mProxyAppsState.get(
+                                                                        encodedSchemeSpecificPart);
+                                                if (proxyAppState != null) {
+                                                    Log.d(
+                                                            "GnssVisibilityControl",
+                                                            "Proxy app "
+                                                                    + encodedSchemeSpecificPart
+                                                                    + " package changed: "
+                                                                    + action);
+                                                    boolean
+                                                            shouldEnableLocationPermissionInGnssHal =
+                                                                    gnssVisibilityControl2
+                                                                            .shouldEnableLocationPermissionInGnssHal(
+                                                                                    encodedSchemeSpecificPart);
+                                                    if (proxyAppState.mHasLocationPermission
+                                                            != shouldEnableLocationPermissionInGnssHal) {
+                                                        Log.i(
+                                                                "GnssVisibilityControl",
+                                                                "Proxy app "
+                                                                        + encodedSchemeSpecificPart
+                                                                        + " location permission"
+                                                                        + " changed."
+                                                                        + " IsLocationPermissionEnabled:"
+                                                                        + " "
+                                                                        + shouldEnableLocationPermissionInGnssHal);
+                                                        proxyAppState.mHasLocationPermission =
+                                                                shouldEnableLocationPermissionInGnssHal;
+                                                        gnssVisibilityControl2
+                                                                .updateNfwLocationAccessProxyAppsInGnssHal();
+                                                        break;
+                                                    }
+                                                }
+                                                break;
+                                        }
                                     }
-                                }
-                                break;
-                        }
+                                },
+                                UserHandle.ALL,
+                                intentFilter,
+                                null,
+                                gnssVisibilityControl.mHandler);
                     }
-                }, UserHandle.ALL, intentFilter, null, gnssVisibilityControl.mHandler);
-            }
-        });
+                });
     }
 
     private native boolean native_enable_nfw_location_access(String[] strArr);
@@ -163,7 +246,9 @@ class GnssVisibilityControl {
         if (proxyAppState != null) {
             proxyAppState.mIsLocationIconOn = false;
         }
-        Log.d("GnssVisibilityControl", "Location icon off. Uid: " + i + ", proxyAppPkgName: " + str);
+        Log.d(
+                "GnssVisibilityControl",
+                "Location icon off. Uid: " + i + ", proxyAppPkgName: " + str);
     }
 
     public final String[] getLocationPermissionEnabledProxyApps() {
@@ -190,7 +275,8 @@ class GnssVisibilityControl {
         try {
             return this.mPackageManager.getApplicationInfo(str, 0);
         } catch (PackageManager.NameNotFoundException unused) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("Proxy app ", str, " is not found.", "GnssVisibilityControl");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "Proxy app ", str, " is not found.", "GnssVisibilityControl");
             return null;
         }
     }
@@ -211,7 +297,8 @@ class GnssVisibilityControl {
 
     public final void runOnHandler(Runnable runnable) {
         this.mWakeLock.acquire(60000L);
-        if (this.mHandler.post(new GnssVisibilityControl$$ExternalSyntheticLambda1(this, runnable, 1))) {
+        if (this.mHandler.post(
+                new GnssVisibilityControl$$ExternalSyntheticLambda1(this, runnable, 1))) {
             return;
         }
         this.mWakeLock.release();
@@ -219,19 +306,28 @@ class GnssVisibilityControl {
 
     public final void setNfwLocationAccessProxyAppsInGnssHal(String[] strArr) {
         String arrays = Arrays.toString(strArr);
-        Log.i("GnssVisibilityControl", "Updating non-framework location access proxy apps in the GNSS HAL to: " + arrays);
+        Log.i(
+                "GnssVisibilityControl",
+                "Updating non-framework location access proxy apps in the GNSS HAL to: " + arrays);
         if (!CarrierConfig.getInstance().isKoreaMarket()) {
             Uri uri = GnssLocationProviderSec.PREFERAPN_NO_UPDATE_URI_USING_SUBID;
-            if (SystemProperties.getInt("ro.product.first_api_level", 0) <= 28 && this.mIsGpsEnabled) {
-                strArr = new String[]{"com.sec.location.nfwlocationprivacy"};
+            if (SystemProperties.getInt("ro.product.first_api_level", 0) <= 28
+                    && this.mIsGpsEnabled) {
+                strArr = new String[] {"com.sec.location.nfwlocationprivacy"};
             }
         } else if (strArr.length == 0) {
-            Log.d("GnssVisibilityControl", "GnssVisibilityControl KOR exception policy. Force set proxyapp packageName");
-            strArr = new String[]{"com.sec.location.nfwlocationprivacy"};
+            Log.d(
+                    "GnssVisibilityControl",
+                    "GnssVisibilityControl KOR exception policy. Force set proxyapp packageName");
+            strArr = new String[] {"com.sec.location.nfwlocationprivacy"};
         }
         boolean native_enable_nfw_location_access = native_enable_nfw_location_access(strArr);
         if (!native_enable_nfw_location_access) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("Failed to update non-framework location access proxy apps in the GNSS HAL to: ", arrays, "GnssVisibilityControl");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "Failed to update non-framework location access proxy apps in the GNSS HAL to:"
+                        + " ",
+                    arrays,
+                    "GnssVisibilityControl");
         }
         if (mIsNfwLocationAccessProxyAppsUpdated || !native_enable_nfw_location_access) {
             return;
@@ -241,7 +337,11 @@ class GnssVisibilityControl {
 
     public final boolean shouldEnableLocationPermissionInGnssHal(String str) {
         ApplicationInfo proxyAppInfo = getProxyAppInfo(str);
-        return proxyAppInfo != null && proxyAppInfo.enabled && this.mPackageManager.checkPermission("android.permission.ACCESS_FINE_LOCATION", str) == 0;
+        return proxyAppInfo != null
+                && proxyAppInfo.enabled
+                && this.mPackageManager.checkPermission(
+                                "android.permission.ACCESS_FINE_LOCATION", str)
+                        == 0;
     }
 
     public final boolean updateLocationIcon(int i, String str, boolean z) {

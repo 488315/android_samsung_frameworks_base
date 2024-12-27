@@ -2,9 +2,6 @@ package android.hardware;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.hardware.ISensorPrivacyListener;
-import android.hardware.ISensorPrivacyManager;
-import android.hardware.SensorPrivacyManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -12,7 +9,9 @@ import android.os.ServiceManager;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.internal.camera.flags.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -27,39 +26,44 @@ public final class SensorPrivacyManager {
     private final Context mContext;
     private final ISensorPrivacyManager mService;
     private static final String LOG_TAG = SensorPrivacyManager.class.getSimpleName();
-    public static final String EXTRA_SENSOR = SensorPrivacyManager.class.getName() + ".extra.sensor";
-    public static final String EXTRA_NOTIFICATION_ID = SensorPrivacyManager.class.getName() + ".extra.notification_id";
-    public static final String EXTRA_ALL_SENSORS = SensorPrivacyManager.class.getName() + ".extra.all_sensors";
-    public static final String EXTRA_TOGGLE_TYPE = SensorPrivacyManager.class.getName() + ".extra.toggle_type";
+    public static final String EXTRA_SENSOR =
+            SensorPrivacyManager.class.getName() + ".extra.sensor";
+    public static final String EXTRA_NOTIFICATION_ID =
+            SensorPrivacyManager.class.getName() + ".extra.notification_id";
+    public static final String EXTRA_ALL_SENSORS =
+            SensorPrivacyManager.class.getName() + ".extra.all_sensors";
+    public static final String EXTRA_TOGGLE_TYPE =
+            SensorPrivacyManager.class.getName() + ".extra.toggle_type";
     private static final Object sInstanceLock = new Object();
     private IBinder token = new Binder();
     private final Object mLock = new Object();
     private final ArrayMap<Pair<Integer, Integer>, Boolean> mToggleSupportCache = new ArrayMap<>();
-    private final ArrayMap<OnSensorPrivacyChangedListener, Executor> mToggleListeners = new ArrayMap<>();
-    private final ArrayMap<Pair<Integer, OnSensorPrivacyChangedListener>, OnSensorPrivacyChangedListener> mLegacyToggleListeners = new ArrayMap<>();
+    private final ArrayMap<OnSensorPrivacyChangedListener, Executor> mToggleListeners =
+            new ArrayMap<>();
+    private final ArrayMap<
+                    Pair<Integer, OnSensorPrivacyChangedListener>, OnSensorPrivacyChangedListener>
+            mLegacyToggleListeners = new ArrayMap<>();
     private final ISensorPrivacyListener mIToggleListener = new AnonymousClass1();
     private boolean mToggleListenerRegistered = false;
     private Boolean mRequiresAuthentication = null;
-    private final ArrayMap<OnAllSensorPrivacyChangedListener, ISensorPrivacyListener> mListeners = new ArrayMap<>();
+    private final ArrayMap<OnAllSensorPrivacyChangedListener, ISensorPrivacyListener> mListeners =
+            new ArrayMap<>();
 
     public interface OnAllSensorPrivacyChangedListener {
         void onAllSensorPrivacyChanged(boolean z);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ToggleType {
-    }
+    public @interface ToggleType {}
 
     public static class Sensors {
         public static final int CAMERA = 2;
         public static final int MICROPHONE = 1;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Sensor {
-        }
+        public @interface Sensor {}
 
-        private Sensors() {
-        }
+        private Sensors() {}
     }
 
     public static class Sources {
@@ -71,11 +75,9 @@ public final class SensorPrivacyManager {
         public static final int SHELL = 4;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Source {
-        }
+        public @interface Source {}
 
-        private Sources() {
-        }
+        private Sources() {}
     }
 
     @SystemApi
@@ -85,11 +87,9 @@ public final class SensorPrivacyManager {
         public static final int ENABLED_EXCEPT_ALLOWLISTED_APPS = 3;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface StateType {
-        }
+        public @interface StateType {}
 
-        private StateTypes() {
-        }
+        private StateTypes() {}
     }
 
     @SystemApi
@@ -144,45 +144,78 @@ public final class SensorPrivacyManager {
 
     /* renamed from: android.hardware.SensorPrivacyManager$1, reason: invalid class name */
     class AnonymousClass1 extends ISensorPrivacyListener.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.hardware.ISensorPrivacyListener
-        public void onSensorPrivacyChanged(final int toggleType, final int sensor, final boolean enabled) {
+        public void onSensorPrivacyChanged(
+                final int toggleType, final int sensor, final boolean enabled) {
             synchronized (SensorPrivacyManager.this.mLock) {
                 for (int i = 0; i < SensorPrivacyManager.this.mToggleListeners.size(); i++) {
-                    final OnSensorPrivacyChangedListener listener = (OnSensorPrivacyChangedListener) SensorPrivacyManager.this.mToggleListeners.keyAt(i);
+                    final OnSensorPrivacyChangedListener listener =
+                            (OnSensorPrivacyChangedListener)
+                                    SensorPrivacyManager.this.mToggleListeners.keyAt(i);
                     if (Flags.cameraPrivacyAllowlist()) {
                         final int state = enabled ? 1 : 2;
-                        ((Executor) SensorPrivacyManager.this.mToggleListeners.valueAt(i)).execute(new Runnable() { // from class: android.hardware.SensorPrivacyManager$1$$ExternalSyntheticLambda1
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                SensorPrivacyManager.OnSensorPrivacyChangedListener.this.onSensorPrivacyChanged(new SensorPrivacyManager.OnSensorPrivacyChangedListener.SensorPrivacyChangedParams(toggleType, sensor, state));
-                            }
-                        });
+                        ((Executor) SensorPrivacyManager.this.mToggleListeners.valueAt(i))
+                                .execute(
+                                        new Runnable() { // from class:
+                                            // android.hardware.SensorPrivacyManager$1$$ExternalSyntheticLambda1
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                SensorPrivacyManager.OnSensorPrivacyChangedListener
+                                                        .this
+                                                        .onSensorPrivacyChanged(
+                                                                new SensorPrivacyManager
+                                                                        .OnSensorPrivacyChangedListener
+                                                                        .SensorPrivacyChangedParams(
+                                                                        toggleType, sensor, state));
+                                            }
+                                        });
                     } else {
-                        ((Executor) SensorPrivacyManager.this.mToggleListeners.valueAt(i)).execute(new Runnable() { // from class: android.hardware.SensorPrivacyManager$1$$ExternalSyntheticLambda2
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                SensorPrivacyManager.OnSensorPrivacyChangedListener.this.onSensorPrivacyChanged(new SensorPrivacyManager.OnSensorPrivacyChangedListener.SensorPrivacyChangedParams(toggleType, sensor, enabled));
-                            }
-                        });
+                        ((Executor) SensorPrivacyManager.this.mToggleListeners.valueAt(i))
+                                .execute(
+                                        new Runnable() { // from class:
+                                            // android.hardware.SensorPrivacyManager$1$$ExternalSyntheticLambda2
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                SensorPrivacyManager.OnSensorPrivacyChangedListener
+                                                        .this
+                                                        .onSensorPrivacyChanged(
+                                                                new SensorPrivacyManager
+                                                                        .OnSensorPrivacyChangedListener
+                                                                        .SensorPrivacyChangedParams(
+                                                                        toggleType,
+                                                                        sensor,
+                                                                        enabled));
+                                            }
+                                        });
                     }
                 }
             }
         }
 
         @Override // android.hardware.ISensorPrivacyListener
-        public void onSensorPrivacyStateChanged(final int toggleType, final int sensor, final int state) {
+        public void onSensorPrivacyStateChanged(
+                final int toggleType, final int sensor, final int state) {
             synchronized (SensorPrivacyManager.this.mLock) {
                 for (int i = 0; i < SensorPrivacyManager.this.mToggleListeners.size(); i++) {
-                    final OnSensorPrivacyChangedListener listener = (OnSensorPrivacyChangedListener) SensorPrivacyManager.this.mToggleListeners.keyAt(i);
-                    ((Executor) SensorPrivacyManager.this.mToggleListeners.valueAt(i)).execute(new Runnable() { // from class: android.hardware.SensorPrivacyManager$1$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            SensorPrivacyManager.OnSensorPrivacyChangedListener.this.onSensorPrivacyChanged(new SensorPrivacyManager.OnSensorPrivacyChangedListener.SensorPrivacyChangedParams(toggleType, sensor, state));
-                        }
-                    });
+                    final OnSensorPrivacyChangedListener listener =
+                            (OnSensorPrivacyChangedListener)
+                                    SensorPrivacyManager.this.mToggleListeners.keyAt(i);
+                    ((Executor) SensorPrivacyManager.this.mToggleListeners.valueAt(i))
+                            .execute(
+                                    new Runnable() { // from class:
+                                        // android.hardware.SensorPrivacyManager$1$$ExternalSyntheticLambda0
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            SensorPrivacyManager.OnSensorPrivacyChangedListener.this
+                                                    .onSensorPrivacyChanged(
+                                                            new SensorPrivacyManager
+                                                                    .OnSensorPrivacyChangedListener
+                                                                    .SensorPrivacyChangedParams(
+                                                                    toggleType, sensor, state));
+                                        }
+                                    });
                 }
             }
         }
@@ -246,25 +279,30 @@ public final class SensorPrivacyManager {
         addSensorPrivacyListener(sensor, this.mContext.getMainExecutor(), listener);
     }
 
-    public void addSensorPrivacyListener(int sensor, int userId, OnSensorPrivacyChangedListener listener) {
+    public void addSensorPrivacyListener(
+            int sensor, int userId, OnSensorPrivacyChangedListener listener) {
         addSensorPrivacyListener(sensor, this.mContext.getMainExecutor(), listener);
     }
 
     @SystemApi
-    public void addSensorPrivacyListener(final int sensor, Executor executor, final OnSensorPrivacyChangedListener listener) {
-        Pair<Integer, OnSensorPrivacyChangedListener> pair = new Pair<>(Integer.valueOf(sensor), listener);
-        OnSensorPrivacyChangedListener toggleListener = new OnSensorPrivacyChangedListener() { // from class: android.hardware.SensorPrivacyManager.2
-            @Override // android.hardware.SensorPrivacyManager.OnSensorPrivacyChangedListener
-            public void onSensorPrivacyChanged(OnSensorPrivacyChangedListener.SensorPrivacyChangedParams params) {
-                if (params.getSensor() == sensor) {
-                    listener.onSensorPrivacyChanged(params);
-                }
-            }
+    public void addSensorPrivacyListener(
+            final int sensor, Executor executor, final OnSensorPrivacyChangedListener listener) {
+        Pair<Integer, OnSensorPrivacyChangedListener> pair =
+                new Pair<>(Integer.valueOf(sensor), listener);
+        OnSensorPrivacyChangedListener toggleListener =
+                new OnSensorPrivacyChangedListener() { // from class:
+                    // android.hardware.SensorPrivacyManager.2
+                    @Override // android.hardware.SensorPrivacyManager.OnSensorPrivacyChangedListener
+                    public void onSensorPrivacyChanged(
+                            OnSensorPrivacyChangedListener.SensorPrivacyChangedParams params) {
+                        if (params.getSensor() == sensor) {
+                            listener.onSensorPrivacyChanged(params);
+                        }
+                    }
 
-            @Override // android.hardware.SensorPrivacyManager.OnSensorPrivacyChangedListener
-            public void onSensorPrivacyChanged(int sensor2, boolean enabled) {
-            }
-        };
+                    @Override // android.hardware.SensorPrivacyManager.OnSensorPrivacyChangedListener
+                    public void onSensorPrivacyChanged(int sensor2, boolean enabled) {}
+                };
         synchronized (this.mLock) {
             this.mLegacyToggleListeners.put(pair, toggleListener);
             addSensorPrivacyListenerLocked(executor, toggleListener);
@@ -277,13 +315,15 @@ public final class SensorPrivacyManager {
     }
 
     @SystemApi
-    public void addSensorPrivacyListener(Executor executor, OnSensorPrivacyChangedListener listener) {
+    public void addSensorPrivacyListener(
+            Executor executor, OnSensorPrivacyChangedListener listener) {
         synchronized (this.mLock) {
             addSensorPrivacyListenerLocked(executor, listener);
         }
     }
 
-    private void addSensorPrivacyListenerLocked(Executor executor, OnSensorPrivacyChangedListener listener) {
+    private void addSensorPrivacyListenerLocked(
+            Executor executor, OnSensorPrivacyChangedListener listener) {
         if (!this.mToggleListenerRegistered) {
             try {
                 this.mService.addToggleSensorPrivacyListener(this.mIToggleListener);
@@ -300,9 +340,11 @@ public final class SensorPrivacyManager {
 
     @SystemApi
     public void removeSensorPrivacyListener(int sensor, OnSensorPrivacyChangedListener listener) {
-        Pair<Integer, OnSensorPrivacyChangedListener> pair = new Pair<>(Integer.valueOf(sensor), listener);
+        Pair<Integer, OnSensorPrivacyChangedListener> pair =
+                new Pair<>(Integer.valueOf(sensor), listener);
         synchronized (this.mLock) {
-            OnSensorPrivacyChangedListener onToggleSensorPrivacyChangedListener = this.mLegacyToggleListeners.remove(pair);
+            OnSensorPrivacyChangedListener onToggleSensorPrivacyChangedListener =
+                    this.mLegacyToggleListeners.remove(pair);
             if (onToggleSensorPrivacyChangedListener != null) {
                 removeSensorPrivacyListenerLocked(onToggleSensorPrivacyChangedListener);
             }
@@ -408,7 +450,9 @@ public final class SensorPrivacyManager {
 
     private int resolveSourceFromCurrentContext() {
         String packageName = this.mContext.getOpPackageName();
-        if (Objects.equals(packageName, this.mContext.getPackageManager().getPermissionControllerPackageName())) {
+        if (Objects.equals(
+                packageName,
+                this.mContext.getPackageManager().getPermissionControllerPackageName())) {
             return 6;
         }
         return 5;
@@ -433,7 +477,8 @@ public final class SensorPrivacyManager {
 
     public void setSensorPrivacyState(int source, int sensor, int state) {
         try {
-            this.mService.setToggleSensorPrivacyState(this.mContext.getUserId(), source, sensor, state);
+            this.mService.setToggleSensorPrivacyState(
+                    this.mContext.getUserId(), source, sensor, state);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -443,7 +488,8 @@ public final class SensorPrivacyManager {
         setSensorPrivacyForProfileGroup(source, sensor, enable, -2);
     }
 
-    public void setSensorPrivacyForProfileGroup(int source, int sensor, boolean enable, int userId) {
+    public void setSensorPrivacyForProfileGroup(
+            int source, int sensor, boolean enable, int userId) {
         try {
             this.mService.setToggleSensorPrivacyForProfileGroup(userId, source, sensor, enable);
         } catch (RemoteException e) {
@@ -451,9 +497,11 @@ public final class SensorPrivacyManager {
         }
     }
 
-    public void setSensorPrivacyForProfileGroupWithConfirmPopup(int source, int sensor, boolean enable, int displayId) {
+    public void setSensorPrivacyForProfileGroupWithConfirmPopup(
+            int source, int sensor, boolean enable, int displayId) {
         try {
-            this.mService.setToggleSensorPrivacyForProfileGroupWithConfirmPopup(-2, source, sensor, enable, displayId);
+            this.mService.setToggleSensorPrivacyForProfileGroupWithConfirmPopup(
+                    -2, source, sensor, enable, displayId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -461,7 +509,8 @@ public final class SensorPrivacyManager {
 
     public void setSensorPrivacyStateForProfileGroup(int source, int sensor, int state) {
         try {
-            this.mService.setToggleSensorPrivacyStateForProfileGroup(this.mContext.getUserId(), source, sensor, state);
+            this.mService.setToggleSensorPrivacyStateForProfileGroup(
+                    this.mContext.getUserId(), source, sensor, state);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -473,7 +522,8 @@ public final class SensorPrivacyManager {
 
     public void suppressSensorPrivacyReminders(int sensor, boolean suppress, int userId) {
         try {
-            this.mService.suppressToggleSensorPrivacyReminders(userId, sensor, this.token, suppress);
+            this.mService.suppressToggleSensorPrivacyReminders(
+                    userId, sensor, this.token, suppress);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -482,7 +532,8 @@ public final class SensorPrivacyManager {
     public boolean requiresAuthentication() {
         if (this.mRequiresAuthentication == null) {
             try {
-                this.mRequiresAuthentication = Boolean.valueOf(this.mService.requiresAuthentication());
+                this.mRequiresAuthentication =
+                        Boolean.valueOf(this.mService.requiresAuthentication());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -510,16 +561,19 @@ public final class SensorPrivacyManager {
         synchronized (this.mListeners) {
             ISensorPrivacyListener iListener = this.mListeners.get(listener);
             if (iListener == null) {
-                iListener = new ISensorPrivacyListener.Stub() { // from class: android.hardware.SensorPrivacyManager.3
-                    @Override // android.hardware.ISensorPrivacyListener
-                    public void onSensorPrivacyChanged(int toggleType, int sensor, boolean enabled) {
-                        listener.onAllSensorPrivacyChanged(enabled);
-                    }
+                iListener =
+                        new ISensorPrivacyListener
+                                .Stub() { // from class: android.hardware.SensorPrivacyManager.3
+                            @Override // android.hardware.ISensorPrivacyListener
+                            public void onSensorPrivacyChanged(
+                                    int toggleType, int sensor, boolean enabled) {
+                                listener.onAllSensorPrivacyChanged(enabled);
+                            }
 
-                    @Override // android.hardware.ISensorPrivacyListener
-                    public void onSensorPrivacyStateChanged(int toggleType, int sensor, int state) {
-                    }
-                };
+                            @Override // android.hardware.ISensorPrivacyListener
+                            public void onSensorPrivacyStateChanged(
+                                    int toggleType, int sensor, int state) {}
+                        };
                 this.mListeners.put(listener, iListener);
             }
             try {

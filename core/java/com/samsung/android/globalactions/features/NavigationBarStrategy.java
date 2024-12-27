@@ -1,6 +1,7 @@
 package com.samsung.android.globalactions.features;
 
 import android.view.Window;
+
 import com.samsung.android.globalactions.presentation.strategies.WindowDecorationStrategy;
 import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.SystemConditions;

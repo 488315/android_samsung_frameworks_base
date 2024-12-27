@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import android.os.Handler;
+
 import com.android.server.ServiceThread;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,7 +16,9 @@ public final class SurfaceAnimationThread extends ServiceThread {
                 if (sInstance == null) {
                     return;
                 }
-                getHandler().runWithScissors(new SurfaceAnimationThread$$ExternalSyntheticLambda0(), 0L);
+                getHandler()
+                        .runWithScissors(
+                                new SurfaceAnimationThread$$ExternalSyntheticLambda0(), 0L);
                 sInstance = null;
             } catch (Throwable th) {
                 throw th;
@@ -25,7 +28,8 @@ public final class SurfaceAnimationThread extends ServiceThread {
 
     public static void ensureThreadLocked() {
         if (sInstance == null) {
-            SurfaceAnimationThread surfaceAnimationThread = new SurfaceAnimationThread(-4, "android.anim.lf", false);
+            SurfaceAnimationThread surfaceAnimationThread =
+                    new SurfaceAnimationThread(-4, "android.anim.lf", false);
             sInstance = surfaceAnimationThread;
             surfaceAnimationThread.start();
             sInstance.getLooper().setTraceTag(32L);

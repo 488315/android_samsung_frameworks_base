@@ -4,11 +4,12 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
+
 import com.android.internal.util.FileRotator;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupManagerConstants;
-import com.android.server.powerstats.PowerStatsLogger;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,47 +52,69 @@ public final class PowerStatsDataStorage {
                 byte[] bArr = new byte[4];
                 int read = inputStream.read(bArr);
                 if (read != 4) {
-                    throw new IOException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(read, "Did not read 4 bytes (", ")"));
+                    throw new IOException(
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    read, "Did not read 4 bytes (", ")"));
                 }
                 int i = ByteBuffer.wrap(bArr).getInt();
                 if (i <= 0 || i >= 32768) {
-                    throw new IOException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "DataElement size is invalid: "));
+                    throw new IOException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    i, "DataElement size is invalid: "));
                 }
                 byte[] bArr2 = new byte[i];
                 int read2 = inputStream.read(bArr2);
                 if (read2 != i) {
-                    throw new IOException(ArrayUtils$$ExternalSyntheticOutline0.m(i, read2, "Invalid bytes read, expected: ", ", actual: "));
+                    throw new IOException(
+                            ArrayUtils$$ExternalSyntheticOutline0.m(
+                                    i, read2, "Invalid bytes read, expected: ", ", actual: "));
                 }
                 PowerStatsLogger.AnonymousClass1 anonymousClass1 = this.mCallback;
                 switch (anonymousClass1.$r8$classId) {
                     case 0:
                         try {
                             new ProtoInputStream(new ByteArrayInputStream(bArr2));
-                            ProtoStreamUtils$ChannelUtils.packProtoMessage(ProtoStreamUtils$ChannelUtils.m851unpackProtoMessage(bArr2), anonymousClass1.val$pos);
+                            ProtoStreamUtils$ChannelUtils.packProtoMessage(
+                                    ProtoStreamUtils$ChannelUtils.m851unpackProtoMessage(bArr2),
+                                    anonymousClass1.val$pos);
                             break;
                         } catch (IOException e) {
                             int i2 = PowerStatsLogger.$r8$clinit;
-                            Slog.e("PowerStatsLogger", "Failed to write energy meter data to incident report.", e);
+                            Slog.e(
+                                    "PowerStatsLogger",
+                                    "Failed to write energy meter data to incident report.",
+                                    e);
                             break;
                         }
                     case 1:
                         try {
                             new ProtoInputStream(new ByteArrayInputStream(bArr2));
-                            ProtoStreamUtils$ChannelUtils.packProtoMessage(ProtoStreamUtils$ChannelUtils.unpackProtoMessage(bArr2), anonymousClass1.val$pos, true);
+                            ProtoStreamUtils$ChannelUtils.packProtoMessage(
+                                    ProtoStreamUtils$ChannelUtils.unpackProtoMessage(bArr2),
+                                    anonymousClass1.val$pos,
+                                    true);
                             break;
                         } catch (IOException e2) {
                             int i3 = PowerStatsLogger.$r8$clinit;
-                            Slog.e("PowerStatsLogger", "Failed to write energy model data to incident report.", e2);
+                            Slog.e(
+                                    "PowerStatsLogger",
+                                    "Failed to write energy model data to incident report.",
+                                    e2);
                             break;
                         }
                     default:
                         try {
                             new ProtoInputStream(new ByteArrayInputStream(bArr2));
-                            ProtoStreamUtils$ChannelUtils.packProtoMessage(ProtoStreamUtils$ChannelUtils.m852unpackProtoMessage(bArr2), anonymousClass1.val$pos);
+                            ProtoStreamUtils$ChannelUtils.packProtoMessage(
+                                    ProtoStreamUtils$ChannelUtils.m852unpackProtoMessage(bArr2),
+                                    anonymousClass1.val$pos);
                             break;
                         } catch (IOException e3) {
                             int i4 = PowerStatsLogger.$r8$clinit;
-                            Slog.e("PowerStatsLogger", "Failed to write residency data to incident report.", e3);
+                            Slog.e(
+                                    "PowerStatsLogger",
+                                    "Failed to write residency data to incident report.",
+                                    e3);
                             break;
                         }
                 }
@@ -110,8 +133,7 @@ public final class PowerStatsDataStorage {
             inputStream.read(bArr);
         }
 
-        public final void reset() {
-        }
+        public final void reset() {}
 
         public final boolean shouldWrite() {
             return true;
@@ -133,11 +155,21 @@ public final class PowerStatsDataStorage {
         }
         File[] listFiles = file.listFiles();
         for (int i = 0; i < listFiles.length; i++) {
-            if (listFiles[i].getName().startsWith(this.mDataStorageFilename.substring(0, this.mDataStorageFilename.lastIndexOf(46))) && !listFiles[i].getName().startsWith(this.mDataStorageFilename)) {
+            if (listFiles[i]
+                            .getName()
+                            .startsWith(
+                                    this.mDataStorageFilename.substring(
+                                            0, this.mDataStorageFilename.lastIndexOf(46)))
+                    && !listFiles[i].getName().startsWith(this.mDataStorageFilename)) {
                 listFiles[i].delete();
             }
         }
-        this.mFileRotator = new FileRotator(this.mDataStorageDir, this.mDataStorageFilename, BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS, 172800000L);
+        this.mFileRotator =
+                new FileRotator(
+                        this.mDataStorageDir,
+                        this.mDataStorageFilename,
+                        BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS,
+                        172800000L);
     }
 
     public final void deleteLogs() {
@@ -171,12 +203,18 @@ public final class PowerStatsDataStorage {
                     int i4 = i + 1;
                     int length = (int) (i2 + file.length());
                     try {
-                        long parseLong = Long.parseLong(name.substring(name.lastIndexOf(46) + 1, name.lastIndexOf(45)));
+                        long parseLong =
+                                Long.parseLong(
+                                        name.substring(
+                                                name.lastIndexOf(46) + 1, name.lastIndexOf(45)));
                         if (parseLong < j) {
                             j = parseLong;
                         }
                     } catch (NumberFormatException e) {
-                        Slog.e("PowerStatsDataStorage", "Failed to extract start time from file : " + name, e);
+                        Slog.e(
+                                "PowerStatsDataStorage",
+                                "Failed to extract start time from file : " + name,
+                                e);
                     }
                     i2 = length;
                     i = i4;

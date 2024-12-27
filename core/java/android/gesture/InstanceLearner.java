@@ -1,6 +1,7 @@
 package android.gesture;
 
 import android.hardware.scontext.SContextConstants;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,23 +9,23 @@ import java.util.TreeMap;
 
 /* loaded from: classes.dex */
 class InstanceLearner extends Learner {
-    private static final Comparator<Prediction> sComparator = new Comparator<Prediction>() { // from class: android.gesture.InstanceLearner.1
-        @Override // java.util.Comparator
-        public int compare(Prediction object1, Prediction object2) {
-            double score1 = object1.score;
-            double score2 = object2.score;
-            if (score1 > score2) {
-                return -1;
-            }
-            if (score1 < score2) {
-                return 1;
-            }
-            return 0;
-        }
-    };
+    private static final Comparator<Prediction> sComparator =
+            new Comparator<Prediction>() { // from class: android.gesture.InstanceLearner.1
+                @Override // java.util.Comparator
+                public int compare(Prediction object1, Prediction object2) {
+                    double score1 = object1.score;
+                    double score2 = object2.score;
+                    if (score1 > score2) {
+                        return -1;
+                    }
+                    if (score1 < score2) {
+                        return 1;
+                    }
+                    return 0;
+                }
+            };
 
-    InstanceLearner() {
-    }
+    InstanceLearner() {}
 
     @Override // android.gesture.Learner
     ArrayList<Prediction> classify(int sequenceType, int orientationType, float[] vector) {
@@ -36,7 +37,11 @@ class InstanceLearner extends Learner {
         for (int i = 0; i < count; i++) {
             Instance sample = instances.get(i);
             if (sample.vector.length == vector.length) {
-                double distance = sequenceType == 2 ? GestureUtils.minimumCosineDistance(sample.vector, vector, orientationType) : GestureUtils.squaredEuclideanDistance(sample.vector, vector);
+                double distance =
+                        sequenceType == 2
+                                ? GestureUtils.minimumCosineDistance(
+                                        sample.vector, vector, orientationType)
+                                : GestureUtils.squaredEuclideanDistance(sample.vector, vector);
                 if (distance == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
                     weight = Double.MAX_VALUE;
                 } else {

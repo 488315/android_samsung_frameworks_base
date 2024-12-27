@@ -14,9 +14,9 @@ import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.Log;
-import com.android.internal.telecom.ClientTransactionalServiceWrapper;
-import com.android.internal.telecom.ICallEventCallback;
+
 import com.android.server.telecom.flags.Flags;
+
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,14 +25,17 @@ import java.util.function.Consumer;
 
 /* loaded from: classes5.dex */
 public class ClientTransactionalServiceWrapper {
-    private static final String EXECUTOR_FAIL_MSG = "Telecom hit an exception while handling a CallEventCallback on an executor: ";
+    private static final String EXECUTOR_FAIL_MSG =
+            "Telecom hit an exception while handling a CallEventCallback on an executor: ";
     private static final String TAG = ClientTransactionalServiceWrapper.class.getSimpleName();
     private final PhoneAccountHandle mPhoneAccountHandle;
     private final ClientTransactionalServiceRepository mRepository;
-    private final ConcurrentHashMap<String, TransactionalCall> mCallIdToTransactionalCall = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, TransactionalCall> mCallIdToTransactionalCall =
+            new ConcurrentHashMap<>();
     private final ICallEventCallback mCallEventCallback = new AnonymousClass1();
 
-    public ClientTransactionalServiceWrapper(PhoneAccountHandle handle, ClientTransactionalServiceRepository repo) {
+    public ClientTransactionalServiceWrapper(
+            PhoneAccountHandle handle, ClientTransactionalServiceRepository repo) {
         this.mPhoneAccountHandle = handle;
         this.mRepository = repo;
     }
@@ -51,9 +54,17 @@ public class ClientTransactionalServiceWrapper {
         }
     }
 
-    public String trackCall(CallAttributes callAttributes, Executor executor, OutcomeReceiver<CallControl, CallException> pendingControl, CallControlCallback handshakes, CallEventCallback events) {
+    public String trackCall(
+            CallAttributes callAttributes,
+            Executor executor,
+            OutcomeReceiver<CallControl, CallException> pendingControl,
+            CallControlCallback handshakes,
+            CallEventCallback events) {
         String newCallId = UUID.randomUUID().toString();
-        this.mCallIdToTransactionalCall.put(newCallId, new TransactionalCall(newCallId, callAttributes, executor, pendingControl, handshakes, events));
+        this.mCallIdToTransactionalCall.put(
+                newCallId,
+                new TransactionalCall(
+                        newCallId, callAttributes, executor, pendingControl, handshakes, events));
         return newCallId;
     }
 
@@ -98,26 +109,48 @@ public class ClientTransactionalServiceWrapper {
         private static final String ON_STREAMING_STARTED = "onStreamingStarted";
         private static final String ON_VIDEO_STATE_CHANGED = "onVideoStateChanged";
 
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
-        private void handleCallEventCallback(final String action, final String callId, ResultReceiver ackResultReceiver, final Object... args) {
-            Log.i(ClientTransactionalServiceWrapper.TAG, TextUtils.formatSimple("hCEC: id=[%s], action=[%s]", callId, action));
-            TransactionalCall call = (TransactionalCall) ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.get(callId);
+        private void handleCallEventCallback(
+                final String action,
+                final String callId,
+                ResultReceiver ackResultReceiver,
+                final Object... args) {
+            Log.i(
+                    ClientTransactionalServiceWrapper.TAG,
+                    TextUtils.formatSimple("hCEC: id=[%s], action=[%s]", callId, action));
+            TransactionalCall call =
+                    (TransactionalCall)
+                            ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.get(
+                                    callId);
             if (call != null) {
                 final CallControlCallback callback = call.getCallControlCallback();
-                final ReceiverWrapper outcomeReceiverWrapper = ClientTransactionalServiceWrapper.this.new ReceiverWrapper(ackResultReceiver);
+                final ReceiverWrapper outcomeReceiverWrapper =
+                        ClientTransactionalServiceWrapper.this
+                        .new ReceiverWrapper(ackResultReceiver);
                 long identity = Binder.clearCallingIdentity();
                 try {
                     try {
-                        call.getExecutor().execute(new Runnable() { // from class: com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                ClientTransactionalServiceWrapper.AnonymousClass1.this.lambda$handleCallEventCallback$0(action, callback, outcomeReceiverWrapper, args, callId);
-                            }
-                        });
+                        call.getExecutor()
+                                .execute(
+                                        new Runnable() { // from class:
+                                                         // com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda0
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                ClientTransactionalServiceWrapper.AnonymousClass1
+                                                        .this
+                                                        .lambda$handleCallEventCallback$0(
+                                                                action,
+                                                                callback,
+                                                                outcomeReceiverWrapper,
+                                                                args,
+                                                                callId);
+                                            }
+                                        });
                     } catch (Exception e) {
-                        Log.e(ClientTransactionalServiceWrapper.TAG, ClientTransactionalServiceWrapper.EXECUTOR_FAIL_MSG + e);
+                        Log.e(
+                                ClientTransactionalServiceWrapper.TAG,
+                                ClientTransactionalServiceWrapper.EXECUTOR_FAIL_MSG + e);
                     }
                 } finally {
                     Binder.restoreCallingIdentity(identity);
@@ -127,7 +160,12 @@ public class ClientTransactionalServiceWrapper {
 
         /* JADX INFO: Access modifiers changed from: private */
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        public /* synthetic */ void lambda$handleCallEventCallback$0(String action, CallControlCallback callback, ReceiverWrapper outcomeReceiverWrapper, Object[] args, String callId) {
+        public /* synthetic */ void lambda$handleCallEventCallback$0(
+                String action,
+                CallControlCallback callback,
+                ReceiverWrapper outcomeReceiverWrapper,
+                Object[] args,
+                String callId) {
             char c;
             switch (action.hashCode()) {
                 case -1801878642:
@@ -190,11 +228,22 @@ public class ClientTransactionalServiceWrapper {
         }
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onAddCallControl(String callId, int resultCode, ICallControl callControl, CallException transactionalException) {
-            Log.i(ClientTransactionalServiceWrapper.TAG, TextUtils.formatSimple("oACC: id=[%s], code=[%d]", callId, Integer.valueOf(resultCode)));
-            TransactionalCall call = (TransactionalCall) ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.get(callId);
+        public void onAddCallControl(
+                String callId,
+                int resultCode,
+                ICallControl callControl,
+                CallException transactionalException) {
+            Log.i(
+                    ClientTransactionalServiceWrapper.TAG,
+                    TextUtils.formatSimple(
+                            "oACC: id=[%s], code=[%d]", callId, Integer.valueOf(resultCode)));
+            TransactionalCall call =
+                    (TransactionalCall)
+                            ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.get(
+                                    callId);
             if (call != null) {
-                OutcomeReceiver<CallControl, CallException> pendingControl = call.getPendingControl();
+                OutcomeReceiver<CallControl, CallException> pendingControl =
+                        call.getPendingControl();
                 if (resultCode == 0) {
                     CallControl control = new CallControl(callId, callControl);
                     pendingControl.onResult(control);
@@ -202,12 +251,15 @@ public class ClientTransactionalServiceWrapper {
                     return;
                 } else {
                     pendingControl.onError(transactionalException);
-                    ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.remove(callId);
+                    ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.remove(
+                            callId);
                     return;
                 }
             }
             ClientTransactionalServiceWrapper.this.untrackCall(callId);
-            Log.e(ClientTransactionalServiceWrapper.TAG, "oACC: TransactionalCall object not found for call w/ id=" + callId);
+            Log.e(
+                    ClientTransactionalServiceWrapper.TAG,
+                    "oACC: TransactionalCall object not found for call w/ id=" + callId);
         }
 
         @Override // com.android.internal.telecom.ICallEventCallback
@@ -226,7 +278,8 @@ public class ClientTransactionalServiceWrapper {
         }
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onDisconnect(String callId, DisconnectCause cause, ResultReceiver resultReceiver) {
+        public void onDisconnect(
+                String callId, DisconnectCause cause, ResultReceiver resultReceiver) {
             handleCallEventCallback(ON_DISCONNECT, callId, resultReceiver, cause);
         }
 
@@ -251,19 +304,27 @@ public class ClientTransactionalServiceWrapper {
         }
 
         public void handleEventCallback(String callId, final String action, final Object arg) {
-            Log.d(ClientTransactionalServiceWrapper.TAG, TextUtils.formatSimple("hEC: [%s], callId=[%s]", action, callId));
-            TransactionalCall call = (TransactionalCall) ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.get(callId);
+            Log.d(
+                    ClientTransactionalServiceWrapper.TAG,
+                    TextUtils.formatSimple("hEC: [%s], callId=[%s]", action, callId));
+            TransactionalCall call =
+                    (TransactionalCall)
+                            ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.get(
+                                    callId);
             if (call != null) {
                 final CallEventCallback callback = call.getCallStateCallback();
                 Executor executor = call.getExecutor();
                 long identity = Binder.clearCallingIdentity();
                 try {
-                    executor.execute(new Runnable() { // from class: com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ClientTransactionalServiceWrapper.AnonymousClass1.lambda$handleEventCallback$1(action, callback, arg);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ClientTransactionalServiceWrapper.AnonymousClass1
+                                            .lambda$handleEventCallback$1(action, callback, arg);
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(identity);
                 }
@@ -271,7 +332,8 @@ public class ClientTransactionalServiceWrapper {
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        static /* synthetic */ void lambda$handleEventCallback$1(String action, CallEventCallback callback, Object arg) {
+        static /* synthetic */ void lambda$handleEventCallback$1(
+                String action, CallEventCallback callback, Object arg) {
             char c;
             switch (action.hashCode()) {
                 case -2134827621:
@@ -347,24 +409,32 @@ public class ClientTransactionalServiceWrapper {
 
         @Override // com.android.internal.telecom.ICallEventCallback
         public void onCallStreamingFailed(String callId, int reason) {
-            Log.i(ClientTransactionalServiceWrapper.TAG, TextUtils.formatSimple("oCSF: id=[%s], reason=[%s]", callId, Integer.valueOf(reason)));
+            Log.i(
+                    ClientTransactionalServiceWrapper.TAG,
+                    TextUtils.formatSimple(
+                            "oCSF: id=[%s], reason=[%s]", callId, Integer.valueOf(reason)));
             handleEventCallback(callId, ON_CALL_STREAMING_FAILED, Integer.valueOf(reason));
         }
 
         @Override // com.android.internal.telecom.ICallEventCallback
         public void onEvent(String callId, final String event, final Bundle extras) {
-            TransactionalCall call = (TransactionalCall) ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.get(callId);
+            TransactionalCall call =
+                    (TransactionalCall)
+                            ClientTransactionalServiceWrapper.this.mCallIdToTransactionalCall.get(
+                                    callId);
             if (call != null) {
                 final CallEventCallback callback = call.getCallStateCallback();
                 Executor executor = call.getExecutor();
                 long identity = Binder.clearCallingIdentity();
                 try {
-                    executor.execute(new Runnable() { // from class: com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            CallEventCallback.this.onEvent(event, extras);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // com.android.internal.telecom.ClientTransactionalServiceWrapper$1$$ExternalSyntheticLambda2
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    CallEventCallback.this.onEvent(event, extras);
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(identity);
                 }

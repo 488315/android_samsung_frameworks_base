@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.AnalyzeInfo;
 import com.samsung.vekit.Common.Object.Element;
 import com.samsung.vekit.Common.Type.AnalyzeSolutionErrorType;
@@ -11,6 +12,7 @@ import com.samsung.vekit.Common.Type.AnalyzeType;
 import com.samsung.vekit.Common.Type.ElementType;
 import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Listener.AnalyzeStatusListener;
+
 import java.util.HashMap;
 
 /* loaded from: classes6.dex */
@@ -117,7 +119,8 @@ public class VEAnalyzer extends Element {
     }
 
     public boolean isSolutionLoaded(AnalyzeType type) {
-        if (!this.solutionLoadChecker.containsKey(type) || !this.solutionLoadChecker.get(type).booleanValue()) {
+        if (!this.solutionLoadChecker.containsKey(type)
+                || !this.solutionLoadChecker.get(type).booleanValue()) {
             return false;
         }
         return true;
@@ -205,9 +208,11 @@ public class VEAnalyzer extends Element {
                     return;
                 case SOLUTION_FAILED:
                     AnalyzeType analyzeType3 = AnalyzeType.values()[msg.arg1];
-                    AnalyzeSolutionErrorType analyzeSolutionErrorType = AnalyzeSolutionErrorType.values()[msg.arg2];
+                    AnalyzeSolutionErrorType analyzeSolutionErrorType =
+                            AnalyzeSolutionErrorType.values()[msg.arg2];
                     if (VEAnalyzer.this.listener != null) {
-                        VEAnalyzer.this.listener.onSolutionError(analyzeType3, analyzeSolutionErrorType);
+                        VEAnalyzer.this.listener.onSolutionError(
+                                analyzeType3, analyzeSolutionErrorType);
                         return;
                     }
                     return;

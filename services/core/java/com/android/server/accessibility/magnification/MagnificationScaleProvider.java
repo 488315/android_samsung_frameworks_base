@@ -4,6 +4,7 @@ import android.content.Context;
 import android.provider.Settings;
 import android.util.SparseArray;
 import android.view.accessibility.A11yRune;
+
 import com.android.internal.accessibility.common.MagnificationConstants;
 import com.android.internal.os.BackgroundThread;
 
@@ -24,10 +25,18 @@ public final class MagnificationScaleProvider {
     public final float getScale(int i) {
         float floatValue;
         if (i == 0 || (i == 1 && A11yRune.A11Y_COMMON_BOOL_SUPPORT_LARGE_COVER_SCREEN_FLIP)) {
-            return Settings.Secure.getFloatForUser(this.mContext.getContentResolver(), "accessibility_display_magnification_scale", DEFAULT_MAGNIFICATION_SCALE, this.mCurrentUserId);
+            return Settings.Secure.getFloatForUser(
+                    this.mContext.getContentResolver(),
+                    "accessibility_display_magnification_scale",
+                    DEFAULT_MAGNIFICATION_SCALE,
+                    this.mCurrentUserId);
         }
         synchronized (this.mLock) {
-            floatValue = ((Float) getScalesWithCurrentUser().get(i, Float.valueOf(DEFAULT_MAGNIFICATION_SCALE))).floatValue();
+            floatValue =
+                    ((Float)
+                                    getScalesWithCurrentUser()
+                                            .get(i, Float.valueOf(DEFAULT_MAGNIFICATION_SCALE)))
+                            .floatValue();
         }
         return floatValue;
     }
@@ -44,13 +53,22 @@ public final class MagnificationScaleProvider {
 
     public final void putScale(final float f, int i) {
         if (i == 0 || (i == 1 && A11yRune.A11Y_COMMON_BOOL_SUPPORT_LARGE_COVER_SCREEN_FLIP)) {
-            BackgroundThread.getHandler().post(new Runnable() { // from class: com.android.server.accessibility.magnification.MagnificationScaleProvider$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MagnificationScaleProvider magnificationScaleProvider = MagnificationScaleProvider.this;
-                    Settings.Secure.putFloatForUser(magnificationScaleProvider.mContext.getContentResolver(), "accessibility_display_magnification_scale", f, magnificationScaleProvider.mCurrentUserId);
-                }
-            });
+            BackgroundThread.getHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                             // com.android.server.accessibility.magnification.MagnificationScaleProvider$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    MagnificationScaleProvider magnificationScaleProvider =
+                                            MagnificationScaleProvider.this;
+                                    Settings.Secure.putFloatForUser(
+                                            magnificationScaleProvider.mContext
+                                                    .getContentResolver(),
+                                            "accessibility_display_magnification_scale",
+                                            f,
+                                            magnificationScaleProvider.mCurrentUserId);
+                                }
+                            });
             return;
         }
         synchronized (this.mLock) {
@@ -61,7 +79,14 @@ public final class MagnificationScaleProvider {
     public final String toString() {
         String str;
         synchronized (this.mLock) {
-            str = "MagnificationScaleProvider{mCurrentUserId=" + this.mCurrentUserId + "Scale on the default display=" + getScale(0) + "Scales on non-default displays=" + getScalesWithCurrentUser() + '}';
+            str =
+                    "MagnificationScaleProvider{mCurrentUserId="
+                            + this.mCurrentUserId
+                            + "Scale on the default display="
+                            + getScale(0)
+                            + "Scales on non-default displays="
+                            + getScalesWithCurrentUser()
+                            + '}';
         }
         return str;
     }

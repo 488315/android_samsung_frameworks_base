@@ -92,12 +92,14 @@ public class MetricsLogger {
     }
 
     @Deprecated
-    public static void visibility(Context context, int category, boolean visibile) throws IllegalArgumentException {
+    public static void visibility(Context context, int category, boolean visibile)
+            throws IllegalArgumentException {
         getLogger().visibility(category, visibile);
     }
 
     @Deprecated
-    public static void visibility(Context context, int category, int vis) throws IllegalArgumentException {
+    public static void visibility(Context context, int category, int vis)
+            throws IllegalArgumentException {
         visibility(context, category, vis == 0);
     }
 

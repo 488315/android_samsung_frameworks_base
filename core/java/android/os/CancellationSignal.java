@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.ICancellationSignal;
 
 /* loaded from: classes3.dex */
 public final class CancellationSignal {

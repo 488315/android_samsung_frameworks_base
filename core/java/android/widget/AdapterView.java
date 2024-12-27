@@ -20,7 +20,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.autofill.AutofillManager;
-import android.widget.Adapter;
+
 import com.android.internal.widget.ScrollingTabContainerView;
 
 /* loaded from: classes4.dex */
@@ -42,15 +42,18 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     @ViewDebug.ExportedProperty(category = "scrolling")
     int mFirstPosition;
+
     boolean mInLayout;
 
     @ViewDebug.ExportedProperty(category = Slice.HINT_LIST)
     int mItemCount;
+
     private int mLayoutHeight;
     boolean mNeedSync;
 
     @ViewDebug.ExportedProperty(category = Slice.HINT_LIST)
     int mNextSelectedPosition;
+
     long mNextSelectedRowId;
     int mOldItemCount;
     int mOldSelectedPosition;
@@ -63,6 +66,7 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     @ViewDebug.ExportedProperty(category = Slice.HINT_LIST)
     int mSelectedPosition;
+
     long mSelectedRowId;
     private AdapterView<T>.SelectionNotifier mSelectionNotifier;
     boolean mSemAdapterChanged;
@@ -112,7 +116,14 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
         void onMultiSelectStop(int i, int i2);
 
-        void onMultiSelected(AdapterView<?> adapterView, View view, int i, long j, boolean z, boolean z2, boolean z3);
+        void onMultiSelected(
+                AdapterView<?> adapterView,
+                View view,
+                int i,
+                long j,
+                boolean z,
+                boolean z2,
+                boolean z3);
     }
 
     public interface SemOnNotifyKeyPressListener {
@@ -178,7 +189,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     public boolean performItemClick(View view, int position, long id) {
         boolean result;
         if (this.mOnItemClickListener != null) {
-            if (!(this.mOnItemClickListener instanceof ScrollingTabContainerView) && !this.mPenPressState) {
+            if (!(this.mOnItemClickListener instanceof ScrollingTabContainerView)
+                    && !this.mPenPressState) {
                 playSoundEffect(0);
             }
             this.mOnItemClickListener.onItemClick(this, view, position, id);
@@ -236,13 +248,20 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
         return this.mSemOnMultiSelectedListener;
     }
 
-    protected boolean semNotifyMultiSelectedState(View view, int position, long id, boolean shiftPressState, boolean ctrlPressState, boolean penPressState) {
+    protected boolean semNotifyMultiSelectedState(
+            View view,
+            int position,
+            long id,
+            boolean shiftPressState,
+            boolean ctrlPressState,
+            boolean penPressState) {
         if (this.mSemMultiSelectionListener != null) {
             return true;
         }
         this.mPenPressState = penPressState;
         if (this.mSemOnMultiSelectedListener != null) {
-            this.mSemOnMultiSelectedListener.onMultiSelected(this, view, position, id, shiftPressState, ctrlPressState, penPressState);
+            this.mSemOnMultiSelectedListener.onMultiSelected(
+                    this, view, position, id, shiftPressState, ctrlPressState, penPressState);
             return true;
         }
         return false;
@@ -295,7 +314,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     void semNotifyLongPressMultiSelectionStarted(int startX, int startY) {
         if (this.mSemLongPressMultiSelectionListener != null) {
-            this.mSemLongPressMultiSelectionListener.onLongPressMultiSelectionStarted(startX, startY);
+            this.mSemLongPressMultiSelectionListener.onLongPressMultiSelectionStarted(
+                    startX, startY);
         }
     }
 
@@ -315,7 +335,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     public boolean semNotifyKeyPress(View view, int position, long id, boolean shiftPressState) {
         if (this.mSemOnNotifyKeyPressListener != null) {
-            this.mSemOnNotifyKeyPressListener.onNotifyKeyPress(this, view, position, id, shiftPressState);
+            this.mSemOnNotifyKeyPressListener.onNotifyKeyPress(
+                    this, view, position, id, shiftPressState);
             return true;
         }
         return false;
@@ -340,17 +361,20 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     @Override // android.view.ViewGroup
     public void addView(View child, int index) {
-        throw new UnsupportedOperationException("addView(View, int) is not supported in AdapterView");
+        throw new UnsupportedOperationException(
+                "addView(View, int) is not supported in AdapterView");
     }
 
     @Override // android.view.ViewGroup, android.view.ViewManager
     public void addView(View child, ViewGroup.LayoutParams params) {
-        throw new UnsupportedOperationException("addView(View, LayoutParams) is not supported in AdapterView");
+        throw new UnsupportedOperationException(
+                "addView(View, LayoutParams) is not supported in AdapterView");
     }
 
     @Override // android.view.ViewGroup
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
-        throw new UnsupportedOperationException("addView(View, int, LayoutParams) is not supported in AdapterView");
+        throw new UnsupportedOperationException(
+                "addView(View, int, LayoutParams) is not supported in AdapterView");
     }
 
     @Override // android.view.ViewGroup, android.view.ViewManager
@@ -360,7 +384,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     @Override // android.view.ViewGroup
     public void removeViewAt(int index) {
-        throw new UnsupportedOperationException("removeViewAt(int) is not supported in AdapterView");
+        throw new UnsupportedOperationException(
+                "removeViewAt(int) is not supported in AdapterView");
     }
 
     @Override // android.view.ViewGroup
@@ -533,7 +558,9 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     @Override // android.view.View
     public void setOnClickListener(View.OnClickListener l) {
-        throw new RuntimeException("Don't call setOnClickListener for an AdapterView. You probably want setOnItemClickListener instead");
+        throw new RuntimeException(
+                "Don't call setOnClickListener for an AdapterView. You probably want"
+                    + " setOnItemClickListener instead");
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -549,15 +576,17 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     class AdapterDataSetObserver extends DataSetObserver {
         private Parcelable mInstanceState = null;
 
-        AdapterDataSetObserver() {
-        }
+        AdapterDataSetObserver() {}
 
         @Override // android.database.DataSetObserver
         public void onChanged() {
             AdapterView.this.mDataChanged = true;
             AdapterView.this.mOldItemCount = AdapterView.this.mItemCount;
             AdapterView.this.mItemCount = AdapterView.this.getAdapter().getCount();
-            if (AdapterView.this.getAdapter().hasStableIds() && this.mInstanceState != null && AdapterView.this.mOldItemCount == 0 && AdapterView.this.mItemCount > 0) {
+            if (AdapterView.this.getAdapter().hasStableIds()
+                    && this.mInstanceState != null
+                    && AdapterView.this.mOldItemCount == 0
+                    && AdapterView.this.mItemCount > 0) {
                 AdapterView.this.onRestoreInstanceState(this.mInstanceState);
                 this.mInstanceState = null;
             } else {
@@ -596,13 +625,14 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     private class SelectionNotifier implements Runnable {
-        private SelectionNotifier() {
-        }
+        private SelectionNotifier() {}
 
         @Override // java.lang.Runnable
         public void run() {
             AdapterView.this.mPendingSelectionNotifier = null;
-            if (AdapterView.this.mDataChanged && AdapterView.this.getViewRootImpl() != null && AdapterView.this.getViewRootImpl().isLayoutRequested()) {
+            if (AdapterView.this.mDataChanged
+                    && AdapterView.this.getViewRootImpl() != null
+                    && AdapterView.this.getViewRootImpl().isLayoutRequested()) {
                 if (AdapterView.this.getAdapter() != null) {
                     AdapterView.this.mPendingSelectionNotifier = this;
                     return;
@@ -615,7 +645,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
 
     void selectionChanged() {
         this.mPendingSelectionNotifier = null;
-        if (this.mOnItemSelectedListener != null || AccessibilityManager.getInstance(this.mContext).isEnabled()) {
+        if (this.mOnItemSelectedListener != null
+                || AccessibilityManager.getInstance(this.mContext).isEnabled()) {
             if (this.mInLayout || this.mBlockLayoutRequests) {
                 if (this.mSelectionNotifier == null) {
                     this.mSelectionNotifier = new SelectionNotifier();
@@ -627,7 +658,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
                 dispatchOnItemSelected();
             }
         }
-        AutofillManager afm = (AutofillManager) this.mContext.getSystemService(AutofillManager.class);
+        AutofillManager afm =
+                (AutofillManager) this.mContext.getSystemService(AutofillManager.class);
         if (afm != null) {
             afm.notifyValueChanged(this);
         }
@@ -650,7 +682,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
         int selection = getSelectedItemPosition();
         if (selection >= 0) {
             View v = getSelectedView();
-            this.mOnItemSelectedListener.onItemSelected(this, v, selection, getAdapter().getItemId(selection));
+            this.mOnItemSelectedListener.onItemSelected(
+                    this, v, selection, getAdapter().getItemId(selection));
         } else {
             this.mOnItemSelectedListener.onNothingSelected(this);
         }
@@ -662,12 +695,14 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
         }
         int position = getSelectedItemPosition();
         if (position >= 0) {
-            post(new Runnable() { // from class: android.widget.AdapterView$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AdapterView.this.lambda$performAccessibilityActionsOnSelected$0();
-                }
-            });
+            post(
+                    new Runnable() { // from class:
+                                     // android.widget.AdapterView$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AdapterView.this.lambda$performAccessibilityActionsOnSelected$0();
+                        }
+                    });
         }
     }
 
@@ -679,7 +714,9 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     @Override // android.view.ViewGroup, android.view.View
     public boolean dispatchPopulateAccessibilityEventInternal(AccessibilityEvent event) {
         View selectedView = getSelectedView();
-        if (selectedView != null && selectedView.getVisibility() == 0 && selectedView.dispatchPopulateAccessibilityEvent(event)) {
+        if (selectedView != null
+                && selectedView.getVisibility() == 0
+                && selectedView.dispatchPopulateAccessibilityEvent(event)) {
             return true;
         }
         return false;
@@ -783,7 +820,8 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
     }
 
     void checkSelectionChanged() {
-        if (this.mSelectedPosition != this.mOldSelectedPosition || this.mSelectedRowId != this.mOldSelectedRowId) {
+        if (this.mSelectedPosition != this.mOldSelectedPosition
+                || this.mSelectedRowId != this.mOldSelectedRowId) {
             selectionChanged();
             this.mOldSelectedPosition = this.mSelectedPosition;
             this.mOldSelectedRowId = this.mSelectedRowId;
@@ -942,7 +980,9 @@ public abstract class AdapterView<T extends Adapter> extends ViewGroup {
         Adapter adapter;
         CharSequence[] options;
         super.onProvideStructure(structure, viewFor, flags);
-        if ((viewFor == 1 || viewFor == 2) && (adapter = getAdapter()) != null && (options = adapter.getAutofillOptions()) != null) {
+        if ((viewFor == 1 || viewFor == 2)
+                && (adapter = getAdapter()) != null
+                && (options = adapter.getAutofillOptions()) != null) {
             structure.setAutofillOptions(options);
         }
     }

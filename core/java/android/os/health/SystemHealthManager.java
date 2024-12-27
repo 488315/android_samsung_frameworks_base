@@ -12,8 +12,10 @@ import android.os.RemoteException;
 import android.os.ResultReceiver;
 import android.os.ServiceManager;
 import android.os.SynchronousResultReceiver;
+
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.hidden_from_bootclasspath.com.android.server.power.optimization.Flags;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -24,14 +26,17 @@ import java.util.function.ToIntFunction;
 
 /* loaded from: classes3.dex */
 public class SystemHealthManager {
-    private static final Comparator<PowerMonitor> POWER_MONITOR_COMPARATOR = Comparator.comparingInt(new ToIntFunction() { // from class: android.os.health.SystemHealthManager$$ExternalSyntheticLambda1
-        @Override // java.util.function.ToIntFunction
-        public final int applyAsInt(Object obj) {
-            int i;
-            i = ((PowerMonitor) obj).index;
-            return i;
-        }
-    });
+    private static final Comparator<PowerMonitor> POWER_MONITOR_COMPARATOR =
+            Comparator.comparingInt(
+                    new ToIntFunction() { // from class:
+                                          // android.os.health.SystemHealthManager$$ExternalSyntheticLambda1
+                        @Override // java.util.function.ToIntFunction
+                        public final int applyAsInt(Object obj) {
+                            int i;
+                            i = ((PowerMonitor) obj).index;
+                            return i;
+                        }
+                    });
     private static final long TAKE_UID_SNAPSHOT_TIMEOUT_MILLIS = 10000;
     private final IBatteryStats mBatteryStats;
     private final PendingUidSnapshots mPendingUidSnapshots;
@@ -43,12 +48,14 @@ public class SystemHealthManager {
         public SynchronousResultReceiver resultReceiver;
         public int[] uids;
 
-        private PendingUidSnapshots() {
-        }
+        private PendingUidSnapshots() {}
     }
 
     public SystemHealthManager() {
-        this(IBatteryStats.Stub.asInterface(ServiceManager.getService("batterystats")), IPowerStatsService.Stub.asInterface(ServiceManager.getService(Context.POWER_STATS_SERVICE)));
+        this(
+                IBatteryStats.Stub.asInterface(ServiceManager.getService("batterystats")),
+                IPowerStatsService.Stub.asInterface(
+                        ServiceManager.getService(Context.POWER_STATS_SERVICE)));
     }
 
     public SystemHealthManager(IBatteryStats batteryStats, IPowerStatsService powerStats) {
@@ -71,7 +78,7 @@ public class SystemHealthManager {
                 throw ex.rethrowFromSystemServer();
             }
         }
-        HealthStats[] result = takeUidSnapshots(new int[]{uid});
+        HealthStats[] result = takeUidSnapshots(new int[] {uid});
         if (result != null && result.length >= 1) {
             return result[0];
         }
@@ -104,7 +111,8 @@ public class SystemHealthManager {
             } else {
                 this.mPendingUidSnapshots.uids = Arrays.copyOf(uids, uids.length);
                 PendingUidSnapshots pendingUidSnapshots = this.mPendingUidSnapshots;
-                SynchronousResultReceiver resultReceiver2 = new SynchronousResultReceiver("takeUidSnapshots");
+                SynchronousResultReceiver resultReceiver2 =
+                        new SynchronousResultReceiver("takeUidSnapshots");
                 pendingUidSnapshots.resultReceiver = resultReceiver2;
                 try {
                     this.mBatteryStats.takeUidSnapshotsAsync(uids, resultReceiver2);
@@ -124,7 +132,14 @@ public class SystemHealthManager {
                     }
                 }
                 HealthStats[] results2 = new HealthStats[uids.length];
-                if (result.bundle != null && (parcelers = (HealthStatsParceler[]) result.bundle.getParcelableArray(IBatteryStats.KEY_UID_SNAPSHOTS, HealthStatsParceler.class)) != null && parcelers.length == uids.length) {
+                if (result.bundle != null
+                        && (parcelers =
+                                        (HealthStatsParceler[])
+                                                result.bundle.getParcelableArray(
+                                                        IBatteryStats.KEY_UID_SNAPSHOTS,
+                                                        HealthStatsParceler.class))
+                                != null
+                        && parcelers.length == uids.length) {
                     for (int i2 = 0; i2 < parcelers.length; i2++) {
                         results2[i2] = parcelers[i2].getHealthStats();
                     }
@@ -144,7 +159,8 @@ public class SystemHealthManager {
         }
     }
 
-    public void getSupportedPowerMonitors(Executor executor, final Consumer<List<PowerMonitor>> onResult) {
+    public void getSupportedPowerMonitors(
+            Executor executor, final Consumer<List<PowerMonitor>> onResult) {
         final List<PowerMonitor> result;
         synchronized (this.mPowerMonitorsLock) {
             if (this.mPowerMonitorsInfo != null) {
@@ -158,12 +174,14 @@ public class SystemHealthManager {
         }
         if (result != null) {
             if (executor != null) {
-                executor.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        onResult.accept(result);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.os.health.SystemHealthManager$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                onResult.accept(result);
+                            }
+                        });
                 return;
             } else {
                 onResult.accept(result);
@@ -171,7 +189,8 @@ public class SystemHealthManager {
             }
         }
         try {
-            this.mPowerStats.getSupportedPowerMonitors(new AnonymousClass1(null, executor, onResult));
+            this.mPowerStats.getSupportedPowerMonitors(
+                    new AnonymousClass1(null, executor, onResult));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -191,7 +210,10 @@ public class SystemHealthManager {
 
         @Override // android.os.ResultReceiver
         protected void onReceiveResult(int resultCode, Bundle resultData) {
-            PowerMonitor[] array = (PowerMonitor[]) resultData.getParcelableArray(IPowerStatsService.KEY_MONITORS, PowerMonitor.class);
+            PowerMonitor[] array =
+                    (PowerMonitor[])
+                            resultData.getParcelableArray(
+                                    IPowerStatsService.KEY_MONITORS, PowerMonitor.class);
             final List<PowerMonitor> result = array != null ? Arrays.asList(array) : List.of();
             synchronized (SystemHealthManager.this.mPowerMonitorsLock) {
                 SystemHealthManager.this.mPowerMonitorsInfo = result;
@@ -199,42 +221,52 @@ public class SystemHealthManager {
             if (this.val$executor != null) {
                 Executor executor = this.val$executor;
                 final Consumer consumer = this.val$onResult;
-                executor.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(result);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.os.health.SystemHealthManager$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(result);
+                            }
+                        });
                 return;
             }
             this.val$onResult.accept(result);
         }
     }
 
-    public void getPowerMonitorReadings(List<PowerMonitor> powerMonitors, Executor executor, final OutcomeReceiver<PowerMonitorReadings, RuntimeException> onResult) {
+    public void getPowerMonitorReadings(
+            List<PowerMonitor> powerMonitors,
+            Executor executor,
+            final OutcomeReceiver<PowerMonitorReadings, RuntimeException> onResult) {
         if (this.mPowerStats == null) {
-            final IllegalArgumentException error = new IllegalArgumentException("Unsupported power monitor");
+            final IllegalArgumentException error =
+                    new IllegalArgumentException("Unsupported power monitor");
             if (executor != null) {
-                executor.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        OutcomeReceiver.this.onError(error);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.os.health.SystemHealthManager$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                OutcomeReceiver.this.onError(error);
+                            }
+                        });
                 return;
             } else {
                 onResult.onError(error);
                 return;
             }
         }
-        PowerMonitor[] powerMonitorsArray = (PowerMonitor[]) powerMonitors.toArray(new PowerMonitor[powerMonitors.size()]);
+        PowerMonitor[] powerMonitorsArray =
+                (PowerMonitor[]) powerMonitors.toArray(new PowerMonitor[powerMonitors.size()]);
         Arrays.sort(powerMonitorsArray, POWER_MONITOR_COMPARATOR);
         int[] indices = new int[powerMonitors.size()];
         for (int i = 0; i < powerMonitors.size(); i++) {
             indices[i] = powerMonitorsArray[i].index;
         }
         try {
-            this.mPowerStats.getPowerMonitorReadings(indices, new AnonymousClass2(null, powerMonitorsArray, executor, onResult));
+            this.mPowerStats.getPowerMonitorReadings(
+                    indices, new AnonymousClass2(null, powerMonitorsArray, executor, onResult));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -247,7 +279,11 @@ public class SystemHealthManager {
         final /* synthetic */ PowerMonitor[] val$powerMonitorsArray;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        AnonymousClass2(Handler handler, PowerMonitor[] powerMonitorArr, Executor executor, OutcomeReceiver outcomeReceiver) {
+        AnonymousClass2(
+                Handler handler,
+                PowerMonitor[] powerMonitorArr,
+                Executor executor,
+                OutcomeReceiver outcomeReceiver) {
             super(handler);
             this.val$powerMonitorsArray = powerMonitorArr;
             this.val$executor = executor;
@@ -258,16 +294,22 @@ public class SystemHealthManager {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             final RuntimeException error;
             if (resultCode == 0) {
-                final PowerMonitorReadings result = new PowerMonitorReadings(this.val$powerMonitorsArray, resultData.getLongArray(IPowerStatsService.KEY_ENERGY), resultData.getLongArray(IPowerStatsService.KEY_TIMESTAMPS));
+                final PowerMonitorReadings result =
+                        new PowerMonitorReadings(
+                                this.val$powerMonitorsArray,
+                                resultData.getLongArray(IPowerStatsService.KEY_ENERGY),
+                                resultData.getLongArray(IPowerStatsService.KEY_TIMESTAMPS));
                 if (this.val$executor != null) {
                     Executor executor = this.val$executor;
                     final OutcomeReceiver outcomeReceiver = this.val$onResult;
-                    executor.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$2$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            OutcomeReceiver.this.onResult(result);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.health.SystemHealthManager$2$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    OutcomeReceiver.this.onResult(result);
+                                }
+                            });
                     return;
                 }
                 this.val$onResult.onResult(result);
@@ -281,12 +323,14 @@ public class SystemHealthManager {
             if (this.val$executor != null) {
                 Executor executor2 = this.val$executor;
                 final OutcomeReceiver outcomeReceiver2 = this.val$onResult;
-                executor2.execute(new Runnable() { // from class: android.os.health.SystemHealthManager$2$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        OutcomeReceiver.this.onError(error);
-                    }
-                });
+                executor2.execute(
+                        new Runnable() { // from class:
+                                         // android.os.health.SystemHealthManager$2$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                OutcomeReceiver.this.onError(error);
+                            }
+                        });
                 return;
             }
             this.val$onResult.onError(error);

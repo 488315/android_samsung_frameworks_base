@@ -18,6 +18,7 @@ import android.util.PackageUtils;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.Xml;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.os.SomeArgs;
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
@@ -25,8 +26,6 @@ import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.XmlUtils;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.modules.utils.TypedXmlPullParser;
-import com.android.server.pm.InstantAppRegistry;
-import com.android.server.pm.UserManagerService;
 import com.android.server.pm.parsing.PackageInfoUtils;
 import com.android.server.pm.permission.PermissionManagerService;
 import com.android.server.pm.pkg.AndroidPackage;
@@ -39,6 +38,11 @@ import com.android.server.utils.WatchableImpl;
 import com.android.server.utils.WatchedSparseArray;
 import com.android.server.utils.WatchedSparseBooleanArray;
 import com.android.server.utils.Watcher;
+
+import libcore.io.IoUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -49,8 +53,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -73,7 +75,8 @@ public final class InstantAppRegistry implements Watchable, Snappable {
     public final class AnonymousClass2 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache
         public final Object createSnapshot() {
-            InstantAppRegistry instantAppRegistry = new InstantAppRegistry((InstantAppRegistry) this.mSource);
+            InstantAppRegistry instantAppRegistry =
+                    new InstantAppRegistry((InstantAppRegistry) this.mSource);
             instantAppRegistry.mWatchable.seal();
             return instantAppRegistry;
         }
@@ -92,7 +95,8 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         public final void handleMessage(Message message) {
             int i = message.what;
             AndroidPackage androidPackage = (AndroidPackage) message.obj;
-            SomeArgs removePendingPersistCookieLPr = removePendingPersistCookieLPr(androidPackage, i);
+            SomeArgs removePendingPersistCookieLPr =
+                    removePendingPersistCookieLPr(androidPackage, i);
             if (removePendingPersistCookieLPr == null) {
                 return;
             }
@@ -103,7 +107,8 @@ public final class InstantAppRegistry implements Watchable, Snappable {
             String packageName = androidPackage.getPackageName();
             synchronized (instantAppRegistry.mLock) {
                 try {
-                    File instantApplicationDir = InstantAppRegistry.getInstantApplicationDir(i, packageName);
+                    File instantApplicationDir =
+                            InstantAppRegistry.getInstantApplicationDir(i, packageName);
                     if (!instantApplicationDir.exists() && !instantApplicationDir.mkdirs()) {
                         Slog.e("InstantAppRegistry", "Cannot create instant app cookie directory");
                         return;
@@ -120,7 +125,10 @@ public final class InstantAppRegistry implements Watchable, Snappable {
                             } finally {
                             }
                         } catch (IOException e) {
-                            Slog.e("InstantAppRegistry", "Error writing instant app cookie file: " + file, e);
+                            Slog.e(
+                                    "InstantAppRegistry",
+                                    "Error writing instant app cookie file: " + file,
+                                    e);
                         }
                     }
                 } finally {
@@ -142,16 +150,26 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         }
 
         public final void schedulePersistLPw(int i, AndroidPackage androidPackage, byte[] bArr) {
-            File file = new File(InstantAppRegistry.getInstantApplicationDir(i, androidPackage.getPackageName()), XmlUtils$$ExternalSyntheticOutline0.m("cookie_", PackageUtils.computeSignaturesSha256Digest(androidPackage.getSigningDetails().getSignatures()), ".dat"));
+            File file =
+                    new File(
+                            InstantAppRegistry.getInstantApplicationDir(
+                                    i, androidPackage.getPackageName()),
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    "cookie_",
+                                    PackageUtils.computeSignaturesSha256Digest(
+                                            androidPackage.getSigningDetails().getSignatures()),
+                                    ".dat"));
             if (!androidPackage.getSigningDetails().hasSignatures()) {
                 Slog.wtf("InstantAppRegistry", "Parsed Instant App contains no valid signatures!");
             }
-            File peekInstantCookieFile = InstantAppRegistry.peekInstantCookieFile(i, androidPackage.getPackageName());
+            File peekInstantCookieFile =
+                    InstantAppRegistry.peekInstantCookieFile(i, androidPackage.getPackageName());
             if (peekInstantCookieFile != null && !file.equals(peekInstantCookieFile)) {
                 peekInstantCookieFile.delete();
             }
             removeMessages(i, androidPackage);
-            SomeArgs removePendingPersistCookieLPr = removePendingPersistCookieLPr(androidPackage, i);
+            SomeArgs removePendingPersistCookieLPr =
+                    removePendingPersistCookieLPr(androidPackage, i);
             if (removePendingPersistCookieLPr != null) {
                 removePendingPersistCookieLPr.recycle();
             }
@@ -179,14 +197,19 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         }
     }
 
-    public InstantAppRegistry(Context context, PermissionManagerService.PermissionManagerServiceInternalImpl permissionManagerServiceInternalImpl, UserManagerService.LocalService localService, DeletePackageHelper deletePackageHelper) {
+    public InstantAppRegistry(
+            Context context,
+            PermissionManagerService.PermissionManagerServiceInternalImpl
+                    permissionManagerServiceInternalImpl,
+            UserManagerService.LocalService localService,
+            DeletePackageHelper deletePackageHelper) {
         Watcher watcher = new Watcher() { // from class: com.android.server.pm.InstantAppRegistry.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                Watchable watchable2 = InstantAppRegistry.this;
-                watchable2.dispatchChange(watchable2);
-            }
-        };
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        Watchable watchable2 = InstantAppRegistry.this;
+                        watchable2.dispatchChange(watchable2);
+                    }
+                };
         this.mContext = context;
         this.mPermissionManager = permissionManagerServiceInternalImpl;
         this.mUserManager = localService;
@@ -218,9 +241,11 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         this.mUserManager = instantAppRegistry.mUserManager;
         this.mDeletePackageHelper = instantAppRegistry.mDeletePackageHelper;
         this.mCookiePersistence = null;
-        this.mUninstalledInstantApps = new WatchedSparseArray(instantAppRegistry.mUninstalledInstantApps);
+        this.mUninstalledInstantApps =
+                new WatchedSparseArray(instantAppRegistry.mUninstalledInstantApps);
         this.mInstantGrants = new WatchedSparseArray(instantAppRegistry.mInstantGrants);
-        this.mInstalledInstantAppUids = new WatchedSparseArray(instantAppRegistry.mInstalledInstantAppUids);
+        this.mInstalledInstantAppUids =
+                new WatchedSparseArray(instantAppRegistry.mInstalledInstantAppUids);
         this.mSnapshot = null;
     }
 
@@ -242,7 +267,8 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         int depth = typedXmlPullParser.getDepth();
         while (XmlUtils.nextElementWithin(typedXmlPullParser, depth)) {
             if ("package".equals(typedXmlPullParser.getName())) {
-                String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "label");
+                String attributeValue =
+                        typedXmlPullParser.getAttributeValue((String) null, "label");
                 ArrayList arrayList = new ArrayList();
                 ArrayList arrayList2 = new ArrayList();
                 int depth2 = typedXmlPullParser.getDepth();
@@ -251,9 +277,11 @@ public final class InstantAppRegistry implements Watchable, Snappable {
                         int depth3 = typedXmlPullParser.getDepth();
                         while (XmlUtils.nextElementWithin(typedXmlPullParser, depth3)) {
                             if ("permission".equals(typedXmlPullParser.getName())) {
-                                String readStringAttribute = XmlUtils.readStringAttribute(typedXmlPullParser, "name");
+                                String readStringAttribute =
+                                        XmlUtils.readStringAttribute(typedXmlPullParser, "name");
                                 arrayList.add(readStringAttribute);
-                                if (typedXmlPullParser.getAttributeBoolean((String) null, "granted", false)) {
+                                if (typedXmlPullParser.getAttributeBoolean(
+                                        (String) null, "granted", false)) {
                                     arrayList2.add(readStringAttribute);
                                 }
                             }
@@ -278,9 +306,14 @@ public final class InstantAppRegistry implements Watchable, Snappable {
             FileInputStream openRead = new AtomicFile(file).openRead();
             try {
                 try {
-                    return new UninstalledInstantAppState(parseMetadata(Xml.resolvePullParser(openRead), file.getParentFile().getName()), file.lastModified());
+                    return new UninstalledInstantAppState(
+                            parseMetadata(
+                                    Xml.resolvePullParser(openRead),
+                                    file.getParentFile().getName()),
+                            file.lastModified());
                 } catch (IOException | XmlPullParserException e) {
-                    throw new IllegalStateException("Failed parsing instant metadata file: " + file, e);
+                    throw new IllegalStateException(
+                            "Failed parsing instant metadata file: " + file, e);
                 }
             } finally {
                 IoUtils.closeQuietly(openRead);
@@ -294,11 +327,14 @@ public final class InstantAppRegistry implements Watchable, Snappable {
     public static File peekInstantCookieFile(int i, String str) {
         File[] listFiles;
         File instantApplicationDir = getInstantApplicationDir(i, str);
-        if (!instantApplicationDir.exists() || (listFiles = instantApplicationDir.listFiles()) == null) {
+        if (!instantApplicationDir.exists()
+                || (listFiles = instantApplicationDir.listFiles()) == null) {
             return null;
         }
         for (File file : listFiles) {
-            if (!file.isDirectory() && file.getName().startsWith("cookie_") && file.getName().endsWith(".dat")) {
+            if (!file.isDirectory()
+                    && file.getName().startsWith("cookie_")
+                    && file.getName().endsWith(".dat")) {
                 return file;
             }
         }
@@ -308,10 +344,12 @@ public final class InstantAppRegistry implements Watchable, Snappable {
     public final void addInstantApp(int i, int i2) {
         synchronized (this.mLock) {
             try {
-                WatchedSparseBooleanArray watchedSparseBooleanArray = (WatchedSparseBooleanArray) this.mInstalledInstantAppUids.mStorage.get(i);
+                WatchedSparseBooleanArray watchedSparseBooleanArray =
+                        (WatchedSparseBooleanArray) this.mInstalledInstantAppUids.mStorage.get(i);
                 WatchedSparseBooleanArray watchedSparseBooleanArray2 = watchedSparseBooleanArray;
                 if (watchedSparseBooleanArray == null) {
-                    WatchedSparseBooleanArray watchedSparseBooleanArray3 = new WatchedSparseBooleanArray();
+                    WatchedSparseBooleanArray watchedSparseBooleanArray3 =
+                            new WatchedSparseBooleanArray();
                     this.mInstalledInstantAppUids.put(i, watchedSparseBooleanArray3);
                     watchedSparseBooleanArray2 = watchedSparseBooleanArray3;
                 }
@@ -330,32 +368,52 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void addUninstalledInstantAppLPw(com.android.server.pm.pkg.PackageStateInternal r17, int r18) {
+    public final void addUninstalledInstantAppLPw(
+            com.android.server.pm.pkg.PackageStateInternal r17, int r18) {
         /*
             Method dump skipped, instructions count: 351
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.InstantAppRegistry.addUninstalledInstantAppLPw(com.android.server.pm.pkg.PackageStateInternal, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.InstantAppRegistry.addUninstalledInstantAppLPw(com.android.server.pm.pkg.PackageStateInternal,"
+                    + " int):void");
     }
 
-    public final InstantAppInfo createInstantAppInfoForPackage(PackageStateInternal packageStateInternal, int i, boolean z) {
+    public final InstantAppInfo createInstantAppInfoForPackage(
+            PackageStateInternal packageStateInternal, int i, boolean z) {
         AndroidPackageInternal pkg = packageStateInternal.getPkg();
         if (pkg == null || !packageStateInternal.getUserStateOrDefault(i).isInstalled()) {
             return null;
         }
         String[] strArr = new String[pkg.getRequestedPermissions().size()];
         pkg.getRequestedPermissions().toArray(strArr);
-        Set grantedPermissions = PermissionManagerService.this.mPermissionManagerServiceImpl.getGrantedPermissions(i, pkg.getPackageName());
+        Set grantedPermissions =
+                PermissionManagerService.this.mPermissionManagerServiceImpl.getGrantedPermissions(
+                        i, pkg.getPackageName());
         String[] strArr2 = new String[grantedPermissions.size()];
         grantedPermissions.toArray(strArr2);
-        ApplicationInfo generateApplicationInfo = PackageInfoUtils.generateApplicationInfo(packageStateInternal.getPkg(), 0L, packageStateInternal.getUserStateOrDefault(i), i, packageStateInternal);
-        return z ? new InstantAppInfo(generateApplicationInfo, strArr, strArr2) : new InstantAppInfo(generateApplicationInfo.packageName, generateApplicationInfo.loadLabel(this.mContext.getPackageManager()), strArr, strArr2);
+        ApplicationInfo generateApplicationInfo =
+                PackageInfoUtils.generateApplicationInfo(
+                        packageStateInternal.getPkg(),
+                        0L,
+                        packageStateInternal.getUserStateOrDefault(i),
+                        i,
+                        packageStateInternal);
+        return z
+                ? new InstantAppInfo(generateApplicationInfo, strArr, strArr2)
+                : new InstantAppInfo(
+                        generateApplicationInfo.packageName,
+                        generateApplicationInfo.loadLabel(this.mContext.getPackageManager()),
+                        strArr,
+                        strArr2);
     }
 
     public final void deleteInstantApplicationMetadata(int i, String str) {
         synchronized (this.mLock) {
             try {
-                removeUninstalledInstantAppStateLPw(i, new InstantAppRegistry$$ExternalSyntheticLambda2(1, str));
+                removeUninstalledInstantAppStateLPw(
+                        i, new InstantAppRegistry$$ExternalSyntheticLambda2(1, str));
                 File instantApplicationDir = getInstantApplicationDir(i, str);
                 new File(instantApplicationDir, "metadata.xml").delete();
                 new File(instantApplicationDir, "icon.png").delete();
@@ -378,11 +436,13 @@ public final class InstantAppRegistry implements Watchable, Snappable {
     public final boolean isInstantAccessGranted(int i, int i2, int i3) {
         synchronized (this.mLock) {
             try {
-                WatchedSparseArray watchedSparseArray = (WatchedSparseArray) this.mInstantGrants.mStorage.get(i);
+                WatchedSparseArray watchedSparseArray =
+                        (WatchedSparseArray) this.mInstantGrants.mStorage.get(i);
                 if (watchedSparseArray == null) {
                     return false;
                 }
-                WatchedSparseBooleanArray watchedSparseBooleanArray = (WatchedSparseBooleanArray) watchedSparseArray.mStorage.get(i2);
+                WatchedSparseBooleanArray watchedSparseBooleanArray =
+                        (WatchedSparseBooleanArray) watchedSparseArray.mStorage.get(i2);
                 if (watchedSparseBooleanArray == null) {
                     return false;
                 }
@@ -398,7 +458,8 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         return this.mWatchable.isRegisteredObserver(watcher);
     }
 
-    public final void onPackageUninstalled(AndroidPackage androidPackage, PackageSetting packageSetting, int[] iArr, boolean z) {
+    public final void onPackageUninstalled(
+            AndroidPackage androidPackage, PackageSetting packageSetting, int[] iArr, boolean z) {
         WatchedSparseArray watchedSparseArray;
         synchronized (this.mLock) {
             try {
@@ -411,13 +472,19 @@ public final class InstantAppRegistry implements Watchable, Snappable {
                             deleteDir(getInstantApplicationDir(i, androidPackage.getPackageName()));
                             CookiePersistence cookiePersistence = this.mCookiePersistence;
                             cookiePersistence.removeMessages(i, androidPackage);
-                            SomeArgs removePendingPersistCookieLPr = cookiePersistence.removePendingPersistCookieLPr(androidPackage, i);
+                            SomeArgs removePendingPersistCookieLPr =
+                                    cookiePersistence.removePendingPersistCookieLPr(
+                                            androidPackage, i);
                             if (removePendingPersistCookieLPr != null) {
                                 removePendingPersistCookieLPr.recycle();
                             }
                             int i2 = packageSetting.mAppId;
                             WatchedSparseArray watchedSparseArray2 = this.mInstantGrants;
-                            if (watchedSparseArray2 != null && (watchedSparseArray = (WatchedSparseArray) watchedSparseArray2.mStorage.get(i)) != null) {
+                            if (watchedSparseArray2 != null
+                                    && (watchedSparseArray =
+                                                    (WatchedSparseArray)
+                                                            watchedSparseArray2.mStorage.get(i))
+                                            != null) {
                                 watchedSparseArray.delete(i2);
                                 dispatchChange(this);
                             }
@@ -446,17 +513,25 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         synchronized (this.mLock) {
             try {
                 WatchedSparseArray watchedSparseArray = this.mUninstalledInstantApps;
-                if (watchedSparseArray != null && (list = (List) watchedSparseArray.mStorage.get(i)) != null) {
+                if (watchedSparseArray != null
+                        && (list = (List) watchedSparseArray.mStorage.get(i)) != null) {
                     int size = list.size();
                     for (int i2 = 0; i2 < size; i2++) {
-                        UninstalledInstantAppState uninstalledInstantAppState = (UninstalledInstantAppState) list.get(i2);
-                        if (uninstalledInstantAppState.mInstantAppInfo.getPackageName().equals(packageName)) {
+                        UninstalledInstantAppState uninstalledInstantAppState =
+                                (UninstalledInstantAppState) list.get(i2);
+                        if (uninstalledInstantAppState
+                                .mInstantAppInfo
+                                .getPackageName()
+                                .equals(packageName)) {
                             instantAppInfo = uninstalledInstantAppState.mInstantAppInfo;
                         }
                     }
                 }
-                UninstalledInstantAppState parseMetadataFile = parseMetadataFile(new File(getInstantApplicationDir(i, packageName), "metadata.xml"));
-                instantAppInfo = parseMetadataFile == null ? null : parseMetadataFile.mInstantAppInfo;
+                UninstalledInstantAppState parseMetadataFile =
+                        parseMetadataFile(
+                                new File(getInstantApplicationDir(i, packageName), "metadata.xml"));
+                instantAppInfo =
+                        parseMetadataFile == null ? null : parseMetadataFile.mInstantAppInfo;
             } finally {
             }
         }
@@ -466,9 +541,18 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             for (String str : instantAppInfo.getGrantedPermissions()) {
-                PermissionInfo permissionInfo = ((PermissionManager) this.mContext.getSystemService(PermissionManager.class)).getPermissionInfo(str, 0);
-                if (permissionInfo != null && ((permissionInfo.getProtection() == 1 || (permissionInfo.getProtectionFlags() & 32) != 0) && (permissionInfo.getProtectionFlags() & 4096) != 0 && androidPackage.getRequestedPermissions().contains(str))) {
-                    ((PermissionManager) this.mContext.getSystemService(PermissionManager.class)).grantRuntimePermission(androidPackage.getPackageName(), str, UserHandle.of(i));
+                PermissionInfo permissionInfo =
+                        ((PermissionManager)
+                                        this.mContext.getSystemService(PermissionManager.class))
+                                .getPermissionInfo(str, 0);
+                if (permissionInfo != null
+                        && ((permissionInfo.getProtection() == 1
+                                        || (permissionInfo.getProtectionFlags() & 32) != 0)
+                                && (permissionInfo.getProtectionFlags() & 4096) != 0
+                                && androidPackage.getRequestedPermissions().contains(str))) {
+                    ((PermissionManager) this.mContext.getSystemService(PermissionManager.class))
+                            .grantRuntimePermission(
+                                    androidPackage.getPackageName(), str, UserHandle.of(i));
                 }
             }
         } finally {
@@ -478,7 +562,9 @@ public final class InstantAppRegistry implements Watchable, Snappable {
 
     public final boolean pruneInstantApps(Computer computer, long j, long j2, final long j3) {
         File[] listFiles;
-        File findPathForUuid = ((StorageManager) this.mContext.getSystemService(StorageManager.class)).findPathForUuid(StorageManager.UUID_PRIVATE_INTERNAL);
+        File findPathForUuid =
+                ((StorageManager) this.mContext.getSystemService(StorageManager.class))
+                        .findPathForUuid(StorageManager.UUID_PRIVATE_INTERNAL);
         if (findPathForUuid.getUsableSpace() >= j) {
             return true;
         }
@@ -488,9 +574,16 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         int size = packageStates.size();
         ArrayList arrayList = null;
         for (int i = 0; i < size; i++) {
-            PackageStateInternal packageStateInternal = (PackageStateInternal) packageStates.valueAt(i);
-            AndroidPackage pkg = packageStateInternal == null ? null : packageStateInternal.getPkg();
-            if (pkg != null && currentTimeMillis - packageStateInternal.getTransientState().getLatestPackageUseTimeInMills() >= j2) {
+            PackageStateInternal packageStateInternal =
+                    (PackageStateInternal) packageStates.valueAt(i);
+            AndroidPackage pkg =
+                    packageStateInternal == null ? null : packageStateInternal.getPkg();
+            if (pkg != null
+                    && currentTimeMillis
+                                    - packageStateInternal
+                                            .getTransientState()
+                                            .getLatestPackageUseTimeInMills()
+                            >= j2) {
                 int length = userIds.length;
                 int i2 = 0;
                 boolean z = false;
@@ -498,7 +591,8 @@ public final class InstantAppRegistry implements Watchable, Snappable {
                     if (i2 >= length) {
                         break;
                     }
-                    PackageUserStateInternal userStateOrDefault = packageStateInternal.getUserStateOrDefault(userIds[i2]);
+                    PackageUserStateInternal userStateOrDefault =
+                            packageStateInternal.getUserStateOrDefault(userIds[i2]);
                     if (userStateOrDefault.isInstalled()) {
                         if (!userStateOrDefault.isInstantApp()) {
                             z = false;
@@ -517,101 +611,109 @@ public final class InstantAppRegistry implements Watchable, Snappable {
             }
         }
         if (arrayList != null) {
-            arrayList.sort(new Comparator() { // from class: com.android.server.pm.InstantAppRegistry$$ExternalSyntheticLambda0
-                /* JADX WARN: Code restructure failed: missing block: B:28:0x0088, code lost:
-                
-                    if (com.android.server.pm.pkg.PackageStateUtils.getEarliestFirstInstallTime(r8.getUserStates()) > com.android.server.pm.pkg.PackageStateUtils.getEarliestFirstInstallTime(r7.getUserStates())) goto L18;
-                 */
-                @Override // java.util.Comparator
-                /*
-                    Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
-                */
-                public final int compare(java.lang.Object r8, java.lang.Object r9) {
-                    /*
-                        r7 = this;
-                        android.util.ArrayMap r7 = r1
-                        java.lang.String r8 = (java.lang.String) r8
-                        java.lang.String r9 = (java.lang.String) r9
-                        java.lang.Object r8 = r7.get(r8)
-                        com.android.server.pm.pkg.PackageStateInternal r8 = (com.android.server.pm.pkg.PackageStateInternal) r8
-                        java.lang.Object r9 = r7.get(r9)
-                        com.android.server.pm.pkg.PackageStateInternal r9 = (com.android.server.pm.pkg.PackageStateInternal) r9
-                        r0 = 0
-                        if (r8 != 0) goto L17
-                        r8 = r0
-                        goto L1b
-                    L17:
-                        com.android.internal.pm.parsing.pkg.AndroidPackageInternal r8 = r8.getPkg()
-                    L1b:
-                        if (r9 != 0) goto L1e
-                        goto L22
-                    L1e:
-                        com.android.internal.pm.parsing.pkg.AndroidPackageInternal r0 = r9.getPkg()
-                    L22:
-                        r9 = 0
-                        if (r8 != 0) goto L28
-                        if (r0 != 0) goto L28
-                        goto L8b
-                    L28:
-                        r1 = -1
-                        if (r8 != 0) goto L2d
-                    L2b:
-                        r9 = r1
-                        goto L8b
-                    L2d:
-                        r2 = 1
-                        if (r0 != 0) goto L32
-                    L30:
-                        r9 = r2
-                        goto L8b
-                    L32:
-                        java.lang.String r8 = r8.getPackageName()
-                        java.lang.Object r8 = r7.get(r8)
-                        com.android.server.pm.pkg.PackageStateInternal r8 = (com.android.server.pm.pkg.PackageStateInternal) r8
-                        if (r8 != 0) goto L3f
-                        goto L8b
-                    L3f:
-                        java.lang.String r0 = r0.getPackageName()
-                        java.lang.Object r7 = r7.get(r0)
-                        com.android.server.pm.pkg.PackageStateInternal r7 = (com.android.server.pm.pkg.PackageStateInternal) r7
-                        if (r7 != 0) goto L4c
-                        goto L8b
-                    L4c:
-                        com.android.server.pm.pkg.PackageStateUnserialized r9 = r8.getTransientState()
-                        long r3 = r9.getLatestPackageUseTimeInMills()
-                        com.android.server.pm.pkg.PackageStateUnserialized r9 = r7.getTransientState()
-                        long r5 = r9.getLatestPackageUseTimeInMills()
-                        int r9 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-                        if (r9 <= 0) goto L61
-                        goto L30
-                    L61:
-                        com.android.server.pm.pkg.PackageStateUnserialized r9 = r8.getTransientState()
-                        long r3 = r9.getLatestPackageUseTimeInMills()
-                        com.android.server.pm.pkg.PackageStateUnserialized r9 = r7.getTransientState()
-                        long r5 = r9.getLatestPackageUseTimeInMills()
-                        int r9 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
-                        if (r9 >= 0) goto L76
-                        goto L2b
-                    L76:
-                        android.util.SparseArray r8 = r8.getUserStates()
-                        long r8 = com.android.server.pm.pkg.PackageStateUtils.getEarliestFirstInstallTime(r8)
-                        android.util.SparseArray r7 = r7.getUserStates()
-                        long r3 = com.android.server.pm.pkg.PackageStateUtils.getEarliestFirstInstallTime(r7)
-                        int r7 = (r8 > r3 ? 1 : (r8 == r3 ? 0 : -1))
-                        if (r7 <= 0) goto L2b
-                        goto L30
-                    L8b:
-                        return r9
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.InstantAppRegistry$$ExternalSyntheticLambda0.compare(java.lang.Object, java.lang.Object):int");
-                }
-            });
+            arrayList.sort(
+                    new Comparator() { // from class:
+                        // com.android.server.pm.InstantAppRegistry$$ExternalSyntheticLambda0
+                        /* JADX WARN: Code restructure failed: missing block: B:28:0x0088, code lost:
+
+                           if (com.android.server.pm.pkg.PackageStateUtils.getEarliestFirstInstallTime(r8.getUserStates()) > com.android.server.pm.pkg.PackageStateUtils.getEarliestFirstInstallTime(r7.getUserStates())) goto L18;
+                        */
+                        @Override // java.util.Comparator
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                            To view partially-correct code enable 'Show inconsistent code' option in preferences
+                        */
+                        public final int compare(java.lang.Object r8, java.lang.Object r9) {
+                            /*
+                                r7 = this;
+                                android.util.ArrayMap r7 = r1
+                                java.lang.String r8 = (java.lang.String) r8
+                                java.lang.String r9 = (java.lang.String) r9
+                                java.lang.Object r8 = r7.get(r8)
+                                com.android.server.pm.pkg.PackageStateInternal r8 = (com.android.server.pm.pkg.PackageStateInternal) r8
+                                java.lang.Object r9 = r7.get(r9)
+                                com.android.server.pm.pkg.PackageStateInternal r9 = (com.android.server.pm.pkg.PackageStateInternal) r9
+                                r0 = 0
+                                if (r8 != 0) goto L17
+                                r8 = r0
+                                goto L1b
+                            L17:
+                                com.android.internal.pm.parsing.pkg.AndroidPackageInternal r8 = r8.getPkg()
+                            L1b:
+                                if (r9 != 0) goto L1e
+                                goto L22
+                            L1e:
+                                com.android.internal.pm.parsing.pkg.AndroidPackageInternal r0 = r9.getPkg()
+                            L22:
+                                r9 = 0
+                                if (r8 != 0) goto L28
+                                if (r0 != 0) goto L28
+                                goto L8b
+                            L28:
+                                r1 = -1
+                                if (r8 != 0) goto L2d
+                            L2b:
+                                r9 = r1
+                                goto L8b
+                            L2d:
+                                r2 = 1
+                                if (r0 != 0) goto L32
+                            L30:
+                                r9 = r2
+                                goto L8b
+                            L32:
+                                java.lang.String r8 = r8.getPackageName()
+                                java.lang.Object r8 = r7.get(r8)
+                                com.android.server.pm.pkg.PackageStateInternal r8 = (com.android.server.pm.pkg.PackageStateInternal) r8
+                                if (r8 != 0) goto L3f
+                                goto L8b
+                            L3f:
+                                java.lang.String r0 = r0.getPackageName()
+                                java.lang.Object r7 = r7.get(r0)
+                                com.android.server.pm.pkg.PackageStateInternal r7 = (com.android.server.pm.pkg.PackageStateInternal) r7
+                                if (r7 != 0) goto L4c
+                                goto L8b
+                            L4c:
+                                com.android.server.pm.pkg.PackageStateUnserialized r9 = r8.getTransientState()
+                                long r3 = r9.getLatestPackageUseTimeInMills()
+                                com.android.server.pm.pkg.PackageStateUnserialized r9 = r7.getTransientState()
+                                long r5 = r9.getLatestPackageUseTimeInMills()
+                                int r9 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
+                                if (r9 <= 0) goto L61
+                                goto L30
+                            L61:
+                                com.android.server.pm.pkg.PackageStateUnserialized r9 = r8.getTransientState()
+                                long r3 = r9.getLatestPackageUseTimeInMills()
+                                com.android.server.pm.pkg.PackageStateUnserialized r9 = r7.getTransientState()
+                                long r5 = r9.getLatestPackageUseTimeInMills()
+                                int r9 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
+                                if (r9 >= 0) goto L76
+                                goto L2b
+                            L76:
+                                android.util.SparseArray r8 = r8.getUserStates()
+                                long r8 = com.android.server.pm.pkg.PackageStateUtils.getEarliestFirstInstallTime(r8)
+                                android.util.SparseArray r7 = r7.getUserStates()
+                                long r3 = com.android.server.pm.pkg.PackageStateUtils.getEarliestFirstInstallTime(r7)
+                                int r7 = (r8 > r3 ? 1 : (r8 == r3 ? 0 : -1))
+                                if (r7 <= 0) goto L2b
+                                goto L30
+                            L8b:
+                                return r9
+                            */
+                            throw new UnsupportedOperationException(
+                                    "Method not decompiled:"
+                                        + " com.android.server.pm.InstantAppRegistry$$ExternalSyntheticLambda0.compare(java.lang.Object,"
+                                        + " java.lang.Object):int");
+                        }
+                    });
         }
         if (arrayList != null) {
             int size2 = arrayList.size();
             for (int i3 = 0; i3 < size2; i3++) {
-                if (this.mDeletePackageHelper.deletePackageX(0, 2, -1L, (String) arrayList.get(i3), true) == 1 && findPathForUuid.getUsableSpace() >= j) {
+                if (this.mDeletePackageHelper.deletePackageX(
+                                        0, 2, -1L, (String) arrayList.get(i3), true)
+                                == 1
+                        && findPathForUuid.getUsableSpace() >= j) {
                     return true;
                 }
             }
@@ -619,18 +721,27 @@ public final class InstantAppRegistry implements Watchable, Snappable {
         synchronized (this.mLock) {
             try {
                 for (int i4 : this.mUserManager.getUserIds()) {
-                    removeUninstalledInstantAppStateLPw(i4, new Predicate() { // from class: com.android.server.pm.InstantAppRegistry$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj) {
-                            return System.currentTimeMillis() - ((InstantAppRegistry.UninstalledInstantAppState) obj).mTimestamp > j3;
-                        }
-                    });
+                    removeUninstalledInstantAppStateLPw(
+                            i4,
+                            new Predicate() { // from class:
+                                              // com.android.server.pm.InstantAppRegistry$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    return System.currentTimeMillis()
+                                                    - ((InstantAppRegistry
+                                                                            .UninstalledInstantAppState)
+                                                                    obj)
+                                                            .mTimestamp
+                                            > j3;
+                                }
+                            });
                     File file = new File(Environment.getUserSystemDirectory(i4), "instant");
                     if (file.exists() && (listFiles = file.listFiles()) != null) {
                         for (File file2 : listFiles) {
                             if (file2.isDirectory()) {
                                 File file3 = new File(file2, "metadata.xml");
-                                if (file3.exists() && System.currentTimeMillis() - file3.lastModified() > j3) {
+                                if (file3.exists()
+                                        && System.currentTimeMillis() - file3.lastModified() > j3) {
                                     deleteDir(file2);
                                     if (findPathForUuid.getUsableSpace() >= j) {
                                         return true;
@@ -655,7 +766,10 @@ public final class InstantAppRegistry implements Watchable, Snappable {
     public final void removeInstantAppLPw(int i, int i2) {
         WatchedSparseBooleanArray watchedSparseBooleanArray;
         WatchedSparseArray watchedSparseArray = this.mInstalledInstantAppUids;
-        if (watchedSparseArray == null || (watchedSparseBooleanArray = (WatchedSparseBooleanArray) watchedSparseArray.mStorage.get(i)) == null) {
+        if (watchedSparseArray == null
+                || (watchedSparseBooleanArray =
+                                (WatchedSparseBooleanArray) watchedSparseArray.mStorage.get(i))
+                        == null) {
             return;
         }
         try {
@@ -665,12 +779,14 @@ public final class InstantAppRegistry implements Watchable, Snappable {
             if (watchedSparseArray2 == null) {
                 return;
             }
-            WatchedSparseArray watchedSparseArray3 = (WatchedSparseArray) watchedSparseArray2.mStorage.get(i);
+            WatchedSparseArray watchedSparseArray3 =
+                    (WatchedSparseArray) watchedSparseArray2.mStorage.get(i);
             if (watchedSparseArray3 == null) {
                 return;
             }
             for (int size = watchedSparseArray3.mStorage.size() - 1; size >= 0; size--) {
-                WatchedSparseBooleanArray watchedSparseBooleanArray2 = (WatchedSparseBooleanArray) watchedSparseArray3.mStorage.valueAt(size);
+                WatchedSparseBooleanArray watchedSparseBooleanArray2 =
+                        (WatchedSparseBooleanArray) watchedSparseArray3.mStorage.valueAt(size);
                 watchedSparseBooleanArray2.mStorage.delete(i2);
                 watchedSparseBooleanArray2.dispatchChange(watchedSparseBooleanArray2);
             }
@@ -682,7 +798,8 @@ public final class InstantAppRegistry implements Watchable, Snappable {
     public final void removeUninstalledInstantAppStateLPw(int i, Predicate predicate) {
         List list;
         WatchedSparseArray watchedSparseArray = this.mUninstalledInstantApps;
-        if (watchedSparseArray == null || (list = (List) watchedSparseArray.mStorage.get(i)) == null) {
+        if (watchedSparseArray == null
+                || (list = (List) watchedSparseArray.mStorage.get(i)) == null) {
             return;
         }
         for (int size = list.size() - 1; size >= 0; size--) {

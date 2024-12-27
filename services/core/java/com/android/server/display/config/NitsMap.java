@@ -9,17 +9,17 @@ public final class NitsMap {
     public List point;
 
     /* JADX WARN: Code restructure failed: missing block: B:55:0x009e, code lost:
-    
-        if (r1 != 3) goto L38;
-     */
+
+       if (r1 != 3) goto L38;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:56:0x00a0, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x00a8, code lost:
-    
-        throw new javax.xml.datatype.DatatypeConfigurationException("NitsMap is not closed");
-     */
+
+       throw new javax.xml.datatype.DatatypeConfigurationException("NitsMap is not closed");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -111,6 +111,8 @@ public final class NitsMap {
             r7.<init>(r0)
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.config.NitsMap.read(org.xmlpull.v1.XmlPullParser):com.android.server.display.config.NitsMap");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.config.NitsMap.read(org.xmlpull.v1.XmlPullParser):com.android.server.display.config.NitsMap");
     }
 }

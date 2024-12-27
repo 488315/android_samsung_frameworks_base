@@ -1,6 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Program;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -16,7 +15,13 @@ public class ProgramFragment extends Program {
 
         public ProgramFragment create() {
             this.mRS.validate();
-            long[] tmp = new long[(this.mInputCount + this.mOutputCount + this.mConstantCount + this.mTextureCount) * 2];
+            long[] tmp =
+                    new long
+                            [(this.mInputCount
+                                            + this.mOutputCount
+                                            + this.mConstantCount
+                                            + this.mTextureCount)
+                                    * 2];
             String[] texNames = new String[this.mTextureCount];
             int idx = 0;
             for (int i = 0; i < this.mInputCount; i++) {

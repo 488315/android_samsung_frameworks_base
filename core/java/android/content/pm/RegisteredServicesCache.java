@@ -6,7 +6,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.os.Environment;
@@ -21,12 +20,19 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.Xml;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.ArrayUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import libcore.io.IoUtils;
+
 import com.google.android.collect.Lists;
 import com.google.android.collect.Maps;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -39,8 +45,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public abstract class RegisteredServicesCache<V> {
@@ -56,30 +60,35 @@ public abstract class RegisteredServicesCache<V> {
     private final XmlSerializerAndParser<V> mSerializerAndParser;
     protected final Object mServicesLock = new Object();
     private final SparseArray<UserServices<V>> mUserServices = new SparseArray<>(2);
-    private final BroadcastReceiver mPackageReceiver = new BroadcastReceiver() { // from class: android.content.pm.RegisteredServicesCache.1
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            int uid = intent.getIntExtra(Intent.EXTRA_UID, -1);
-            if (uid != -1) {
-                RegisteredServicesCache.this.handlePackageEvent(intent, UserHandle.getUserId(uid));
-            }
-        }
-    };
-    private final BroadcastReceiver mExternalReceiver = new BroadcastReceiver() { // from class: android.content.pm.RegisteredServicesCache.2
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            RegisteredServicesCache.this.handlePackageEvent(intent, 0);
-        }
-    };
-    private final BroadcastReceiver mUserRemovedReceiver = new BroadcastReceiver() { // from class: android.content.pm.RegisteredServicesCache.3
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            int userId = intent.getIntExtra("android.intent.extra.user_handle", -1);
-            RegisteredServicesCache.this.onUserRemoved(userId);
-        }
-    };
+    private final BroadcastReceiver mPackageReceiver =
+            new BroadcastReceiver() { // from class: android.content.pm.RegisteredServicesCache.1
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    int uid = intent.getIntExtra(Intent.EXTRA_UID, -1);
+                    if (uid != -1) {
+                        RegisteredServicesCache.this.handlePackageEvent(
+                                intent, UserHandle.getUserId(uid));
+                    }
+                }
+            };
+    private final BroadcastReceiver mExternalReceiver =
+            new BroadcastReceiver() { // from class: android.content.pm.RegisteredServicesCache.2
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    RegisteredServicesCache.this.handlePackageEvent(intent, 0);
+                }
+            };
+    private final BroadcastReceiver mUserRemovedReceiver =
+            new BroadcastReceiver() { // from class: android.content.pm.RegisteredServicesCache.3
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    int userId = intent.getIntExtra("android.intent.extra.user_handle", -1);
+                    RegisteredServicesCache.this.onUserRemoved(userId);
+                }
+            };
 
-    public abstract V parseServiceAttributes(Resources resources, String str, AttributeSet attributeSet);
+    public abstract V parseServiceAttributes(
+            Resources resources, String str, AttributeSet attributeSet);
 
     private static class UserServices<V> {
         boolean mBindInstantServiceAllowed;
@@ -105,7 +114,9 @@ public abstract class RegisteredServicesCache<V> {
         if (services == null) {
             services = new UserServices<>();
             this.mUserServices.put(userId, services);
-            if (loadFromFileIfNew && this.mSerializerAndParser != null && (user = getUser(userId)) != null) {
+            if (loadFromFileIfNew
+                    && this.mSerializerAndParser != null
+                    && (user = getUser(userId)) != null) {
                 AtomicFile file = createFileForUser(user.id);
                 if (file.getBaseFile().exists()) {
                     InputStream is = null;
@@ -125,7 +136,12 @@ public abstract class RegisteredServicesCache<V> {
         return services;
     }
 
-    public RegisteredServicesCache(Context context, String interfaceName, String metaDataName, String attributeName, XmlSerializerAndParser<V> serializerAndParser) {
+    public RegisteredServicesCache(
+            Context context,
+            String interfaceName,
+            String metaDataName,
+            String attributeName,
+            XmlSerializerAndParser<V> serializerAndParser) {
         this.mContext = context;
         this.mInterfaceName = interfaceName;
         this.mMetaDataName = metaDataName;
@@ -142,7 +158,8 @@ public abstract class RegisteredServicesCache<V> {
             intentFilter.setPriority(1000);
         }
         Handler handler = BackgroundThread.getHandler();
-        this.mContext.registerReceiverAsUser(this.mPackageReceiver, UserHandle.ALL, intentFilter, null, handler);
+        this.mContext.registerReceiverAsUser(
+                this.mPackageReceiver, UserHandle.ALL, intentFilter, null, handler);
         IntentFilter sdFilter = new IntentFilter();
         sdFilter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
         sdFilter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
@@ -161,16 +178,19 @@ public abstract class RegisteredServicesCache<V> {
     /* JADX INFO: Access modifiers changed from: private */
     public void handlePackageEvent(Intent intent, int userId) {
         String action = intent.getAction();
-        boolean isRemoval = "android.intent.action.PACKAGE_REMOVED".equals(action) || Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action);
+        boolean isRemoval =
+                "android.intent.action.PACKAGE_REMOVED".equals(action)
+                        || Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action);
         boolean replacing = intent.getBooleanExtra(Intent.EXTRA_REPLACING, false);
         if (!isRemoval || !replacing) {
             int[] uids = null;
-            if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action) || Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
+            if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)
+                    || Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
                 uids = intent.getIntArrayExtra(Intent.EXTRA_CHANGED_UID_LIST);
             } else {
                 int uid = intent.getIntExtra(Intent.EXTRA_UID, -1);
                 if (uid > 0) {
-                    uids = new int[]{uid};
+                    uids = new int[] {uid};
                 }
             }
             generateServicesMap(uids, userId);
@@ -228,15 +248,19 @@ public abstract class RegisteredServicesCache<V> {
         if (listener == null) {
             return;
         }
-        handler.post(new Runnable() { // from class: android.content.pm.RegisteredServicesCache$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                RegisteredServicesCache.lambda$notifyListener$0(RegisteredServicesCacheListener.this, type, userId, removed);
-            }
-        });
+        handler.post(
+                new Runnable() { // from class:
+                    // android.content.pm.RegisteredServicesCache$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        RegisteredServicesCache.lambda$notifyListener$0(
+                                RegisteredServicesCacheListener.this, type, userId, removed);
+                    }
+                });
     }
 
-    static /* synthetic */ void lambda$notifyListener$0(RegisteredServicesCacheListener listener2, Object type, int userId, boolean removed) {
+    static /* synthetic */ void lambda$notifyListener$0(
+            RegisteredServicesCacheListener listener2, Object type, int userId, boolean removed) {
         try {
             listener2.onServiceChanged(type, userId, removed);
         } catch (Throwable th) {
@@ -281,7 +305,8 @@ public abstract class RegisteredServicesCache<V> {
             if (user.services == null) {
                 generateServicesMap(null, userId);
             }
-            unmodifiableCollection = Collections.unmodifiableCollection(new ArrayList(user.services.values()));
+            unmodifiableCollection =
+                    Collections.unmodifiableCollection(new ArrayList(user.services.values()));
         }
         return unmodifiableCollection;
     }
@@ -299,7 +324,10 @@ public abstract class RegisteredServicesCache<V> {
                 String pkg = service.componentInfo.packageName;
                 ApplicationInfo newAppInfo = null;
                 try {
-                    newAppInfo = this.mContext.getPackageManager().getApplicationInfoAsUser(pkg, 0, userId);
+                    newAppInfo =
+                            this.mContext
+                                    .getPackageManager()
+                                    .getApplicationInfoAsUser(pkg, 0, userId);
                 } catch (PackageManager.NameNotFoundException e) {
                 }
                 if (newAppInfo == null || newAppInfo.versionCode != versionCode) {
@@ -318,7 +346,8 @@ public abstract class RegisteredServicesCache<V> {
 
     public boolean getBindInstantServiceAllowed(int userId) {
         boolean z;
-        this.mContext.enforceCallingOrSelfPermission(Manifest.permission.MANAGE_BIND_INSTANT_SERVICE, "getBindInstantServiceAllowed");
+        this.mContext.enforceCallingOrSelfPermission(
+                Manifest.permission.MANAGE_BIND_INSTANT_SERVICE, "getBindInstantServiceAllowed");
         synchronized (this.mServicesLock) {
             UserServices<V> user = findOrCreateUserLocked(userId);
             z = user.mBindInstantServiceAllowed;
@@ -327,7 +356,8 @@ public abstract class RegisteredServicesCache<V> {
     }
 
     public void setBindInstantServiceAllowed(int userId, boolean allowed) {
-        this.mContext.enforceCallingOrSelfPermission(Manifest.permission.MANAGE_BIND_INSTANT_SERVICE, "setBindInstantServiceAllowed");
+        this.mContext.enforceCallingOrSelfPermission(
+                Manifest.permission.MANAGE_BIND_INSTANT_SERVICE, "setBindInstantServiceAllowed");
         synchronized (this.mServicesLock) {
             UserServices<V> user = findOrCreateUserLocked(userId);
             user.mBindInstantServiceAllowed = allowed;
@@ -339,7 +369,8 @@ public abstract class RegisteredServicesCache<V> {
         if (packages != null) {
             for (String name : packages) {
                 try {
-                    PackageInfo packageInfo = this.mContext.getPackageManager().getPackageInfo(name, 0);
+                    PackageInfo packageInfo =
+                            this.mContext.getPackageManager().getPackageInfo(name, 0);
                     if ((packageInfo.applicationInfo.flags & 1) != 0) {
                         return true;
                     }
@@ -397,7 +428,9 @@ public abstract class RegisteredServicesCache<V> {
                             notifyListener(info2.type, userId, false);
                         }
                     } else if (previousUid.intValue() != info2.uid) {
-                        if (inSystemImage(info2.uid) || !containsTypeAndUid(serviceInfos, info2.type, previousUid.intValue())) {
+                        if (inSystemImage(info2.uid)
+                                || !containsTypeAndUid(
+                                        serviceInfos, info2.type, previousUid.intValue())) {
                             user.services.put(info2.type, info2);
                             user.persistentServices.put(info2.type, Integer.valueOf(info2.uid));
                             notifyListener(info2.type, userId, false);
@@ -411,7 +444,8 @@ public abstract class RegisteredServicesCache<V> {
                 for (V v1 : user.persistentServices.keySet()) {
                     if (!containsType(serviceInfos, v1)) {
                         try {
-                            if (containsUid(changedUids, user.persistentServices.get(v1).intValue())) {
+                            if (containsUid(
+                                    changedUids, user.persistentServices.get(v1).intValue())) {
                                 toBeRemoved.add(v1);
                             }
                         } catch (Throwable th) {
@@ -438,8 +472,7 @@ public abstract class RegisteredServicesCache<V> {
         }
     }
 
-    protected void onServicesChangedLocked(int userId) {
-    }
+    protected void onServicesChangedLocked(int userId) {}
 
     private boolean containsUid(int[] changedUids, int uid) {
         return changedUids == null || ArrayUtils.contains(changedUids, uid);
@@ -466,7 +499,8 @@ public abstract class RegisteredServicesCache<V> {
         return false;
     }
 
-    protected ServiceInfo<V> parseServiceInfo(ResolveInfo service) throws XmlPullParserException, IOException {
+    protected ServiceInfo<V> parseServiceInfo(ResolveInfo service)
+            throws XmlPullParserException, IOException {
         int type;
         android.content.pm.ServiceInfo si = service.serviceInfo;
         ComponentName componentName = new ComponentName(si.packageName, si.name);
@@ -487,11 +521,15 @@ public abstract class RegisteredServicesCache<V> {
                 } while (type != 2);
                 String nodeName = parser.getName();
                 if (!this.mAttributesName.equals(nodeName)) {
-                    throw new XmlPullParserException("Meta-data does not start with " + this.mAttributesName + " tag");
+                    throw new XmlPullParserException(
+                            "Meta-data does not start with " + this.mAttributesName + " tag");
                 }
-                V v = parseServiceAttributes(pm.getResourcesForApplication(si.applicationInfo), si.packageName, attrs);
-                if (v == null) {
-                }
+                V v =
+                        parseServiceAttributes(
+                                pm.getResourcesForApplication(si.applicationInfo),
+                                si.packageName,
+                                attrs);
+                if (v == null) {}
                 android.content.pm.ServiceInfo serviceInfo = service.serviceInfo;
                 ServiceInfo<V> serviceInfo2 = new ServiceInfo<>(v, serviceInfo, componentName);
                 if (parser != null) {
@@ -499,7 +537,8 @@ public abstract class RegisteredServicesCache<V> {
                 }
                 return serviceInfo2;
             } catch (PackageManager.NameNotFoundException e) {
-                throw new XmlPullParserException("Unable to load resources for pacakge " + si.packageName);
+                throw new XmlPullParserException(
+                        "Unable to load resources for pacakge " + si.packageName);
             }
         } finally {
             if (parser != null) {
@@ -508,10 +547,12 @@ public abstract class RegisteredServicesCache<V> {
         }
     }
 
-    private void readPersistentServicesLocked(InputStream is) throws XmlPullParserException, IOException {
+    private void readPersistentServicesLocked(InputStream is)
+            throws XmlPullParserException, IOException {
         TypedXmlPullParser parser = Xml.resolvePullParser(is);
-        for (int eventType = parser.getEventType(); eventType != 2 && eventType != 1; eventType = parser.next()) {
-        }
+        for (int eventType = parser.getEventType();
+                eventType != 2 && eventType != 1;
+                eventType = parser.next()) {}
         String tagName = parser.getName();
         if ("services".equals(tagName)) {
             int eventType2 = parser.next();
@@ -590,7 +631,8 @@ public abstract class RegisteredServicesCache<V> {
             for (Map.Entry<V, Integer> service : user.persistentServices.entrySet()) {
                 out.startTag(null, "service");
                 out.attributeInt(null, "uid", service.getValue().intValue());
-                this.mSerializerAndParser.writeAsXml((XmlSerializerAndParser<V>) service.getKey(), out);
+                this.mSerializerAndParser.writeAsXml(
+                        (XmlSerializerAndParser<V>) service.getKey(), out);
                 out.endTag(null, "service");
             }
             out.endTag(null, "services");

@@ -5,12 +5,14 @@ import android.location.LocationConstants;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+
 import com.android.server.location.LocationPermissions;
-import com.android.server.location.nsflp.NSPermissionHelper;
 import com.android.server.location.provider.LocationProviderManager;
 import com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda1;
 import com.android.server.location.provider.LocationProviderManager$$ExternalSyntheticLambda12;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,7 +30,10 @@ public final class NSLocationProviderHelper {
     public final Map mRegistrationMap = new ConcurrentHashMap();
     public boolean mIsAvailableMotionStop = true;
 
-    public NSLocationProviderHelper(Context context, NSPermissionHelper nSPermissionHelper, NSConnectionHelper nSConnectionHelper) {
+    public NSLocationProviderHelper(
+            Context context,
+            NSPermissionHelper nSPermissionHelper,
+            NSConnectionHelper nSConnectionHelper) {
         Log.i("NSLocationProviderHelper", "constructor");
         this.mContext = context;
         this.mNSPermissionHelper = nSPermissionHelper;
@@ -36,7 +41,14 @@ public final class NSLocationProviderHelper {
         this.mMotionPowerListeners = new CopyOnWriteArrayList();
     }
 
-    public final void addGnssDataListener(IBinder iBinder, String str, LocationConstants.LISTENER_TYPE listener_type, int i, int i2, boolean z, boolean z2) {
+    public final void addGnssDataListener(
+            IBinder iBinder,
+            String str,
+            LocationConstants.LISTENER_TYPE listener_type,
+            int i,
+            int i2,
+            boolean z,
+            boolean z2) {
         if (iBinder == null) {
             Log.w("NSLocationProviderHelper", "addGnssDataListener, binder is null");
             return;
@@ -49,9 +61,11 @@ public final class NSLocationProviderHelper {
         bundle.putString("listenerid", Integer.toHexString(System.identityHashCode(iBinder)));
         bundle.putBoolean("isAllowed", z);
         bundle.putBoolean("foreground", z2);
-        bundle.putInt("permissionLevel", LocationPermissions.getPermissionLevel(this.mContext, i, i2));
+        bundle.putInt(
+                "permissionLevel", LocationPermissions.getPermissionLevel(this.mContext, i, i2));
         updateUidProcState(i, bundle);
-        this.mNSConnectionHelper.onStateUpdated(LocationConstants.STATE_TYPE.ADD_DATA_LISTENER, bundle);
+        this.mNSConnectionHelper.onStateUpdated(
+                LocationConstants.STATE_TYPE.ADD_DATA_LISTENER, bundle);
     }
 
     public final void notifyMotionPowerSaveModeChanged(boolean z) {
@@ -61,9 +75,11 @@ public final class NSLocationProviderHelper {
         this.mIsMotionPowerSaveMode = z;
         Iterator it = this.mMotionPowerListeners.iterator();
         while (it.hasNext()) {
-            LocationProviderManager locationProviderManager = ((LocationProviderManager$$ExternalSyntheticLambda1) it.next()).f$0;
+            LocationProviderManager locationProviderManager =
+                    ((LocationProviderManager$$ExternalSyntheticLambda1) it.next()).f$0;
             synchronized (locationProviderManager.mMultiplexerLock) {
-                locationProviderManager.updateRegistrations(new LocationProviderManager$$ExternalSyntheticLambda12(2));
+                locationProviderManager.updateRegistrations(
+                        new LocationProviderManager$$ExternalSyntheticLambda12(2));
             }
         }
     }
@@ -75,10 +91,12 @@ public final class NSLocationProviderHelper {
         this.mIsAvailableMotionStop = z;
         Bundle bundle = new Bundle();
         bundle.putBoolean("isAvailableMotionStop", z);
-        this.mNSConnectionHelper.onStateUpdated(LocationConstants.STATE_TYPE.AVAILABLE_MOTION_STOP, bundle);
+        this.mNSConnectionHelper.onStateUpdated(
+                LocationConstants.STATE_TYPE.AVAILABLE_MOTION_STOP, bundle);
     }
 
-    public final void removeGnssDataListener(IBinder iBinder, LocationConstants.LISTENER_TYPE listener_type, int i, int i2) {
+    public final void removeGnssDataListener(
+            IBinder iBinder, LocationConstants.LISTENER_TYPE listener_type, int i, int i2) {
         if (iBinder == null) {
             Log.w("NSLocationProviderHelper", "removeGnssDataListener, binder is null");
             return;
@@ -89,10 +107,12 @@ public final class NSLocationProviderHelper {
         bundle.putInt("uid", i);
         bundle.putInt("pid", i2);
         updateUidProcState(i, bundle);
-        this.mNSConnectionHelper.onStateUpdated(LocationConstants.STATE_TYPE.REMOVE_DATA_LISTENER, bundle);
+        this.mNSConnectionHelper.onStateUpdated(
+                LocationConstants.STATE_TYPE.REMOVE_DATA_LISTENER, bundle);
     }
 
-    public final void reportProviderStatus(LocationConstants.STATE_TYPE state_type, Integer num, Integer num2) {
+    public final void reportProviderStatus(
+            LocationConstants.STATE_TYPE state_type, Integer num, Integer num2) {
         Bundle bundle = new Bundle();
         if (num != null) {
             bundle.putInt(Constants.JSON_CLIENT_DATA_STATUS, num.intValue());
@@ -103,7 +123,13 @@ public final class NSLocationProviderHelper {
         this.mNSConnectionHelper.onStateUpdated(state_type, bundle);
     }
 
-    public final void updateGnssDataListener(IBinder iBinder, boolean z, String str, LocationConstants.LISTENER_TYPE listener_type, int i, int i2) {
+    public final void updateGnssDataListener(
+            IBinder iBinder,
+            boolean z,
+            String str,
+            LocationConstants.LISTENER_TYPE listener_type,
+            int i,
+            int i2) {
         if (iBinder == null) {
             Log.w("NSLocationProviderHelper", "updateGnssDataListener, binder is null");
             return;
@@ -115,13 +141,17 @@ public final class NSLocationProviderHelper {
         bundle.putInt("uid", i);
         bundle.putInt("pid", i2);
         bundle.putString("listenerid", Integer.toHexString(System.identityHashCode(iBinder)));
-        bundle.putInt("permissionLevel", LocationPermissions.getPermissionLevel(this.mContext, i, i2));
+        bundle.putInt(
+                "permissionLevel", LocationPermissions.getPermissionLevel(this.mContext, i, i2));
         updateUidProcState(i, bundle);
-        this.mNSConnectionHelper.onStateUpdated(LocationConstants.STATE_TYPE.UPDATE_DATA_LISTENER, bundle);
+        this.mNSConnectionHelper.onStateUpdated(
+                LocationConstants.STATE_TYPE.UPDATE_DATA_LISTENER, bundle);
     }
 
     public final void updateUidProcState(int i, Bundle bundle) {
-        NSPermissionHelper.UidState uidState = (NSPermissionHelper.UidState) this.mNSPermissionHelper.mUidObserver.mUidState.get(Integer.valueOf(i));
+        NSPermissionHelper.UidState uidState =
+                (NSPermissionHelper.UidState)
+                        this.mNSPermissionHelper.mUidObserver.mUidState.get(Integer.valueOf(i));
         if (uidState != null) {
             bundle.putInt("procState", uidState.state);
             bundle.putBoolean("hasLocationCapability", (uidState.capability & 1) == 1);

@@ -16,6 +16,7 @@ import com.android.internal.org.bouncycastle.math.ec.ECMultiplier;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.ec.FixedPointCombMultiplier;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -47,7 +48,8 @@ public class ECDSASigner implements ECConstants, DSAExt {
         } else {
             this.key = (ECPublicKeyParameters) param;
         }
-        this.random = initSecureRandom(forSigning && !this.kCalculator.isDeterministic(), providedRandom);
+        this.random =
+                initSecureRandom(forSigning && !this.kCalculator.isDeterministic(), providedRandom);
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.DSAExt
@@ -72,9 +74,10 @@ public class ECDSASigner implements ECConstants, DSAExt {
             ECPoint p = basePointMultiplier.multiply(ec.getG(), k).normalize();
             BigInteger r = p.getAffineXCoord().toBigInteger().mod(n);
             if (!r.equals(ZERO)) {
-                BigInteger k2 = BigIntegers.modOddInverse(n, k).multiply(e.add(d.multiply(r))).mod(n);
+                BigInteger k2 =
+                        BigIntegers.modOddInverse(n, k).multiply(e.add(d.multiply(r))).mod(n);
                 if (!k2.equals(ZERO)) {
-                    return new BigInteger[]{r, k2};
+                    return new BigInteger[] {r, k2};
                 }
             }
         }
@@ -88,7 +91,10 @@ public class ECDSASigner implements ECConstants, DSAExt {
         ECDomainParameters ec = this.key.getParameters();
         BigInteger n = ec.getN();
         BigInteger e = calculateE(n, message);
-        if (r2.compareTo(ONE) < 0 || r2.compareTo(n) >= 0 || s.compareTo(ONE) < 0 || s.compareTo(n) >= 0) {
+        if (r2.compareTo(ONE) < 0
+                || r2.compareTo(n) >= 0
+                || s.compareTo(ONE) < 0
+                || s.compareTo(n) >= 0) {
             return false;
         }
         BigInteger c = BigIntegers.modOddInverseVar(n, s);
@@ -101,7 +107,11 @@ public class ECDSASigner implements ECConstants, DSAExt {
             return false;
         }
         ECCurve curve = point.getCurve();
-        if (curve != null && (cofactor = curve.getCofactor()) != null && cofactor.compareTo(EIGHT) <= 0 && (D = getDenominator(curve.getCoordinateSystem(), point)) != null && !D.isZero()) {
+        if (curve != null
+                && (cofactor = curve.getCofactor()) != null
+                && cofactor.compareTo(EIGHT) <= 0
+                && (D = getDenominator(curve.getCoordinateSystem(), point)) != null
+                && !D.isZero()) {
             ECFieldElement X = point.getXCoord();
             while (curve.isValidFieldElement(r2)) {
                 ECFieldElement R = curve.fromBigInteger(r2).multiply(D);

@@ -3,6 +3,7 @@ package com.android.server.accessibility.autoaction.actiontype;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.view.MotionEvent;
+
 import com.android.server.accessibility.autoaction.CornerActionCircleCue;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -60,13 +61,13 @@ public abstract class CornerActionType {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:105:0x0396, code lost:
-    
-        if (r25.equals("recents") == false) goto L251;
-     */
+
+       if (r25.equals("recents") == false) goto L251;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x02a1, code lost:
-    
-        if (r25.equals("swipe_right") == false) goto L165;
-     */
+
+       if (r25.equals("swipe_right") == false) goto L165;
+    */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -77,11 +78,12 @@ public abstract class CornerActionType {
             Method dump skipped, instructions count: 1280
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.autoaction.actiontype.CornerActionType.getTitleResId(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.autoaction.actiontype.CornerActionType.getTitleResId(java.lang.String):int");
     }
 
     public abstract void performCornerAction(int i);
 
-    public void setMotionEventForDragAction(MotionEvent motionEvent) {
-    }
+    public void setMotionEventForDragAction(MotionEvent motionEvent) {}
 }

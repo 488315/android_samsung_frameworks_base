@@ -1,6 +1,7 @@
 package com.android.server.battery.batteryInfo;
 
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
@@ -8,6 +9,7 @@ import com.android.server.battery.BattFeatures;
 import com.android.server.battery.BattLogBuffer;
 import com.android.server.battery.BattUtils;
 import com.android.server.battery.BatteryLogger;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,7 +22,8 @@ import java.util.stream.IntStream;
 public final /* synthetic */ class BattInfoManager$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ BattInfoManager f$0;
 
-    public /* synthetic */ BattInfoManager$$ExternalSyntheticLambda0(BattInfoManager battInfoManager) {
+    public /* synthetic */ BattInfoManager$$ExternalSyntheticLambda0(
+            BattInfoManager battInfoManager) {
         this.f$0 = battInfoManager;
     }
 
@@ -41,35 +44,72 @@ public final /* synthetic */ class BattInfoManager$$ExternalSyntheticLambda0 imp
         if (i7 == 0) {
             zArr[0] = false;
         } else if (i7 == 3) {
-            zArr[0] = BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth/presence") == 1 && BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth/batt_auth") == 1;
-            zArr[1] = BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth_2nd/presence") == 1 && BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth_2nd/batt_auth") == 1;
+            zArr[0] =
+                    BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth/presence") == 1
+                            && BattUtils.readNodeAsLong(
+                                            "/sys/class/power_supply/sec_auth/batt_auth")
+                                    == 1;
+            zArr[1] =
+                    BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth_2nd/presence") == 1
+                            && BattUtils.readNodeAsLong(
+                                            "/sys/class/power_supply/sec_auth_2nd/batt_auth")
+                                    == 1;
         } else if (i7 == 1) {
-            zArr[0] = BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth/presence") == 1 && BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth/batt_auth") == 1;
+            zArr[0] =
+                    BattUtils.readNodeAsLong("/sys/class/power_supply/sec_auth/presence") == 1
+                            && BattUtils.readNodeAsLong(
+                                            "/sys/class/power_supply/sec_auth/batt_auth")
+                                    == 1;
         } else if (i7 == 2) {
             zArr[0] = !BattUtils.readNode("/sys/class/power_supply/sbp-fg/qr_code", true).isEmpty();
         } else if (i7 == 4) {
             zArr[0] = !BattUtils.readNode("/sys/class/power_supply/sbp-fg/qr_code", true).isEmpty();
-            zArr[1] = !BattUtils.readNode("/sys/class/power_supply/sbp-fg-2/qr_code", true).isEmpty();
+            zArr[1] =
+                    !BattUtils.readNode("/sys/class/power_supply/sbp-fg-2/qr_code", true).isEmpty();
         }
-        Slog.d("[SS][BattInfo]BattInfoManager", "[checkIcAuthenticationResults]result:" + Arrays.toString(zArr));
+        Slog.d(
+                "[SS][BattInfo]BattInfoManager",
+                "[checkIcAuthenticationResults]result:" + Arrays.toString(zArr));
         battInfoManager.mAuthentificationResults = zArr;
-        if ((i7 == 3 || i7 == 1) && !IntStream.range(0, i6).allMatch(new IntPredicate() { // from class: com.android.server.battery.batteryInfo.BattInfoManager$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntPredicate
-            public final boolean test(int i8) {
-                return BattInfoManager.this.mAuthentificationResults[i8];
-            }
-        }) && (i = battInfoManager.mInitCheckStatusCount) < 60) {
+        if ((i7 == 3 || i7 == 1)
+                && !IntStream.range(0, i6)
+                        .allMatch(
+                                new IntPredicate() { // from class:
+                                                     // com.android.server.battery.batteryInfo.BattInfoManager$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.IntPredicate
+                                    public final boolean test(int i8) {
+                                        return BattInfoManager.this.mAuthentificationResults[i8];
+                                    }
+                                })
+                && (i = battInfoManager.mInitCheckStatusCount) < 60) {
             battInfoManager.mInitCheckStatusCount = i + 1;
-            SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("[handleMessage]DualAuth IcAuthentication fails. retry count:"), battInfoManager.mInitCheckStatusCount, "[SS][BattInfo]BattInfoManager");
-            battInfoManager.mHandler.postDelayed(new BattInfoManager$$ExternalSyntheticLambda0(battInfoManager), 1000L);
+            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                    new StringBuilder(
+                            "[handleMessage]DualAuth IcAuthentication fails. retry count:"),
+                    battInfoManager.mInitCheckStatusCount,
+                    "[SS][BattInfo]BattInfoManager");
+            battInfoManager.mHandler.postDelayed(
+                    new BattInfoManager$$ExternalSyntheticLambda0(battInfoManager), 1000L);
             return;
         }
-        BatteryLogger.writeToFile("/data/log/battery_service/battery_service_main_history", "Final IcAuthenticationResults", "Final IcAuthenticationResults:" + Arrays.toString(battInfoManager.mAuthentificationResults) + " ,Retry Count:" + battInfoManager.mInitCheckStatusCount);
+        BatteryLogger.writeToFile(
+                "/data/log/battery_service/battery_service_main_history",
+                "Final IcAuthenticationResults",
+                "Final IcAuthenticationResults:"
+                        + Arrays.toString(battInfoManager.mAuthentificationResults)
+                        + " ,Retry Count:"
+                        + battInfoManager.mInitCheckStatusCount);
         StringBuilder sb = new StringBuilder("Final IcAuthenticationResults:");
         sb.append(Arrays.toString(battInfoManager.mAuthentificationResults));
         BattLogBuffer.addLog(3, sb.toString());
         battInfoManager.mQrData = new QrData(i7, i6, battInfoManager.mAuthentificationResults);
-        battInfoManager.mFirstUseDateData = new FirstUseDateData(battInfoManager.mBatteryType, battInfoManager.mBatteryCount, battInfoManager.mAuthentificationResults, battInfoManager.mContext, battInfoManager.mWorkerThread.getLooper());
+        battInfoManager.mFirstUseDateData =
+                new FirstUseDateData(
+                        battInfoManager.mBatteryType,
+                        battInfoManager.mBatteryCount,
+                        battInfoManager.mAuthentificationResults,
+                        battInfoManager.mContext,
+                        battInfoManager.mWorkerThread.getLooper());
         if (battInfoManager.mSupportsAsoc) {
             boolean[] zArr2 = battInfoManager.mAuthentificationResults;
             boolean[] zArr3 = battInfoManager.mQrData.mIsQrEquals;
@@ -100,11 +140,22 @@ public final /* synthetic */ class BattInfoManager$$ExternalSyntheticLambda0 imp
                         long j = 100;
                         if (zArr3[i9]) {
                             i5 = i7;
-                            long readNodeAsLong$1 = BattUtils.readNodeAsLong$1((String) asocData.efsPaths.get(i9));
+                            long readNodeAsLong$1 =
+                                    BattUtils.readNodeAsLong$1((String) asocData.efsPaths.get(i9));
                             i4 = i6;
-                            long readNodeAsLong$12 = BattUtils.readNodeAsLong$1((String) asocData.authPaths.get(i9));
-                            long j2 = (readNodeAsLong$12 < 0 || readNodeAsLong$12 > 100 || readNodeAsLong$12 >= readNodeAsLong$1) ? readNodeAsLong$1 : readNodeAsLong$12;
-                            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("[syncAuthAndEfsForAuth]efsAsoc:", readNodeAsLong$1, " ,authAsoc:");
+                            long readNodeAsLong$12 =
+                                    BattUtils.readNodeAsLong$1((String) asocData.authPaths.get(i9));
+                            long j2 =
+                                    (readNodeAsLong$12 < 0
+                                                    || readNodeAsLong$12 > 100
+                                                    || readNodeAsLong$12 >= readNodeAsLong$1)
+                                            ? readNodeAsLong$1
+                                            : readNodeAsLong$12;
+                            StringBuilder m =
+                                    BatteryService$$ExternalSyntheticOutline0.m(
+                                            "[syncAuthAndEfsForAuth]efsAsoc:",
+                                            readNodeAsLong$1,
+                                            " ,authAsoc:");
                             m.append(readNodeAsLong$12);
                             m.append(" =>worseAsoc:");
                             m.append(j2);
@@ -114,7 +165,8 @@ public final /* synthetic */ class BattInfoManager$$ExternalSyntheticLambda0 imp
                         } else {
                             i4 = i6;
                             i5 = i7;
-                            long readNodeAsLong = BattUtils.readNodeAsLong((String) asocData.authPaths.get(i9));
+                            long readNodeAsLong =
+                                    BattUtils.readNodeAsLong((String) asocData.authPaths.get(i9));
                             if (readNodeAsLong == 65535 || readNodeAsLong < 0) {
                                 Slog.i(str, "[syncAuthAndEfsForAuth]init authAsoc:100");
                                 BattUtils.writeNode(100L, (String) asocData.authPaths.get(i9));
@@ -125,7 +177,8 @@ public final /* synthetic */ class BattInfoManager$$ExternalSyntheticLambda0 imp
                             BattUtils.writeNode(j, (String) asocData.efsPaths.get(i9));
                         }
                     } else {
-                        DeviceIdleController$$ExternalSyntheticOutline0.m(i9, "[syncAuthAndEfsForAuth]Authentification false => skip_", str);
+                        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                i9, "[syncAuthAndEfsForAuth]Authentification false => skip_", str);
                         i4 = i6;
                         i5 = i7;
                     }
@@ -146,7 +199,8 @@ public final /* synthetic */ class BattInfoManager$$ExternalSyntheticLambda0 imp
                 } catch (IOException e) {
                     Slog.e("[SS]BattUtils", "[deleteNode]Exception", e);
                 }
-                DeviceIdleController$$ExternalSyntheticOutline0.m("[deleteNode]path:/efs/FactoryApp/batt_hist ,result:", "[SS]BattUtils", z);
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        "[deleteNode]path:/efs/FactoryApp/batt_hist ,result:", "[SS]BattUtils", z);
             }
             battInfoManager.mAsocData = asocData;
         } else {
@@ -166,12 +220,15 @@ public final /* synthetic */ class BattInfoManager$$ExternalSyntheticLambda0 imp
             dischargeLevelData.efsPaths.add("/efs/FactoryApp/batt_discharge_level");
         } else if (i10 == 1) {
             dischargeLevelData.efsPaths.add("/efs/FactoryApp/batt_discharge_level");
-            dischargeLevelData.authPaths.add("/sys/class/power_supply/sec_auth/batt_discharge_level");
+            dischargeLevelData.authPaths.add(
+                    "/sys/class/power_supply/sec_auth/batt_discharge_level");
         } else if (i10 == 3) {
             dischargeLevelData.efsPaths.add("/efs/FactoryApp/batt_discharge_level");
             dischargeLevelData.efsPaths.add("/efs/FactoryApp/batt_discharge_level_2nd");
-            dischargeLevelData.authPaths.add("/sys/class/power_supply/sec_auth/batt_discharge_level");
-            dischargeLevelData.authPaths.add("/sys/class/power_supply/sec_auth_2nd/batt_discharge_level");
+            dischargeLevelData.authPaths.add(
+                    "/sys/class/power_supply/sec_auth/batt_discharge_level");
+            dischargeLevelData.authPaths.add(
+                    "/sys/class/power_supply/sec_auth_2nd/batt_discharge_level");
         } else if (i10 == 2) {
             dischargeLevelData.efsPaths.add("/efs/FactoryApp/batt_discharge_level");
             dischargeLevelData.authPaths.add("/sys/class/power_supply/sbp-fg/cycle");
@@ -205,12 +262,15 @@ public final /* synthetic */ class BattInfoManager$$ExternalSyntheticLambda0 imp
                 fullStatusUsageData.efsPaths.add("/efs/FactoryApp/batt_full_status_usage");
             } else if (i10 == 1) {
                 fullStatusUsageData.efsPaths.add("/efs/FactoryApp/batt_full_status_usage");
-                fullStatusUsageData.authPaths.add("/sys/class/power_supply/sec_auth/batt_full_status_usage");
+                fullStatusUsageData.authPaths.add(
+                        "/sys/class/power_supply/sec_auth/batt_full_status_usage");
             } else if (i10 == 3) {
                 fullStatusUsageData.efsPaths.add("/efs/FactoryApp/batt_full_status_usage");
                 fullStatusUsageData.efsPaths.add("/efs/FactoryApp/batt_full_status_usage_2nd");
-                fullStatusUsageData.authPaths.add("/sys/class/power_supply/sec_auth/batt_full_status_usage");
-                fullStatusUsageData.authPaths.add("/sys/class/power_supply/sec_auth_2nd/batt_full_status_usage");
+                fullStatusUsageData.authPaths.add(
+                        "/sys/class/power_supply/sec_auth/batt_full_status_usage");
+                fullStatusUsageData.authPaths.add(
+                        "/sys/class/power_supply/sec_auth_2nd/batt_full_status_usage");
             }
             int i13 = fullStatusUsageData.mBatteryType;
             if (i13 == 1 || i13 == 3) {

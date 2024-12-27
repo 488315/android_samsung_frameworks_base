@@ -4,7 +4,9 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
+
 import com.android.internal.telecom.IConnectionService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,33 +29,27 @@ public final class RemoteConference {
     private final List<RemoteConnection> mUnmodifiableChildConnections;
     private final List<RemoteConnection> mUnmodifiableConferenceableConnections;
 
-    public static abstract class Callback {
-        public void onStateChanged(RemoteConference conference, int oldState, int newState) {
-        }
+    public abstract static class Callback {
+        public void onStateChanged(RemoteConference conference, int oldState, int newState) {}
 
-        public void onDisconnected(RemoteConference conference, DisconnectCause disconnectCause) {
-        }
+        public void onDisconnected(RemoteConference conference, DisconnectCause disconnectCause) {}
 
-        public void onConnectionAdded(RemoteConference conference, RemoteConnection connection) {
-        }
+        public void onConnectionAdded(RemoteConference conference, RemoteConnection connection) {}
 
-        public void onConnectionRemoved(RemoteConference conference, RemoteConnection connection) {
-        }
+        public void onConnectionRemoved(RemoteConference conference, RemoteConnection connection) {}
 
-        public void onConnectionCapabilitiesChanged(RemoteConference conference, int connectionCapabilities) {
-        }
+        public void onConnectionCapabilitiesChanged(
+                RemoteConference conference, int connectionCapabilities) {}
 
-        public void onConnectionPropertiesChanged(RemoteConference conference, int connectionProperties) {
-        }
+        public void onConnectionPropertiesChanged(
+                RemoteConference conference, int connectionProperties) {}
 
-        public void onConferenceableConnectionsChanged(RemoteConference conference, List<RemoteConnection> conferenceableConnections) {
-        }
+        public void onConferenceableConnectionsChanged(
+                RemoteConference conference, List<RemoteConnection> conferenceableConnections) {}
 
-        public void onDestroyed(RemoteConference conference) {
-        }
+        public void onDestroyed(RemoteConference conference) {}
 
-        public void onExtrasChanged(RemoteConference conference, Bundle extras) {
-        }
+        public void onExtrasChanged(RemoteConference conference, Bundle extras) {}
     }
 
     RemoteConference(String id, IConnectionService connectionService) {
@@ -61,7 +57,8 @@ public final class RemoteConference {
         this.mChildConnections = new CopyOnWriteArrayList();
         this.mUnmodifiableChildConnections = Collections.unmodifiableList(this.mChildConnections);
         this.mConferenceableConnections = new ArrayList();
-        this.mUnmodifiableConferenceableConnections = Collections.unmodifiableList(this.mConferenceableConnections);
+        this.mUnmodifiableConferenceableConnections =
+                Collections.unmodifiableList(this.mConferenceableConnections);
         this.mState = 1;
         this.mId = id;
         this.mConnectionService = connectionService;
@@ -72,7 +69,8 @@ public final class RemoteConference {
         this.mChildConnections = new CopyOnWriteArrayList();
         this.mUnmodifiableChildConnections = Collections.unmodifiableList(this.mChildConnections);
         this.mConferenceableConnections = new ArrayList();
-        this.mUnmodifiableConferenceableConnections = Collections.unmodifiableList(this.mConferenceableConnections);
+        this.mUnmodifiableConferenceableConnections =
+                Collections.unmodifiableList(this.mConferenceableConnections);
         this.mState = 1;
         this.mId = "NULL";
         this.mConnectionService = null;
@@ -90,18 +88,23 @@ public final class RemoteConference {
         }
         for (CallbackRecord<Callback> record : this.mCallbackRecords) {
             final Callback callback = record.getCallback();
-            record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    callback.onDestroyed(conference);
-                }
-            });
+            record.getHandler()
+                    .post(
+                            new Runnable() { // from class: android.telecom.RemoteConference.1
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    callback.onDestroyed(conference);
+                                }
+                            });
         }
     }
 
     void setState(final int newState) {
         if (newState != 4 && newState != 5 && newState != 6) {
-            Log.w(this, "Unsupported state transition for Conference call.", Connection.stateToString(newState));
+            Log.w(
+                    this,
+                    "Unsupported state transition for Conference call.",
+                    Connection.stateToString(newState));
             return;
         }
         if (this.mState != newState) {
@@ -109,12 +112,14 @@ public final class RemoteConference {
             this.mState = newState;
             for (CallbackRecord<Callback> record : this.mCallbackRecords) {
                 final Callback callback = record.getCallback();
-                record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.2
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        callback.onStateChanged(conference, oldState, newState);
-                    }
-                });
+                record.getHandler()
+                        .post(
+                                new Runnable() { // from class: android.telecom.RemoteConference.2
+                                    @Override // java.lang.Runnable
+                                    public void run() {
+                                        callback.onStateChanged(conference, oldState, newState);
+                                    }
+                                });
             }
         }
     }
@@ -125,12 +130,14 @@ public final class RemoteConference {
             connection.setConference(this);
             for (CallbackRecord<Callback> record : this.mCallbackRecords) {
                 final Callback callback = record.getCallback();
-                record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.3
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        callback.onConnectionAdded(conference, connection);
-                    }
-                });
+                record.getHandler()
+                        .post(
+                                new Runnable() { // from class: android.telecom.RemoteConference.3
+                                    @Override // java.lang.Runnable
+                                    public void run() {
+                                        callback.onConnectionAdded(conference, connection);
+                                    }
+                                });
             }
         }
     }
@@ -141,12 +148,14 @@ public final class RemoteConference {
             connection.setConference(null);
             for (CallbackRecord<Callback> record : this.mCallbackRecords) {
                 final Callback callback = record.getCallback();
-                record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.4
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        callback.onConnectionRemoved(conference, connection);
-                    }
-                });
+                record.getHandler()
+                        .post(
+                                new Runnable() { // from class: android.telecom.RemoteConference.4
+                                    @Override // java.lang.Runnable
+                                    public void run() {
+                                        callback.onConnectionRemoved(conference, connection);
+                                    }
+                                });
             }
         }
     }
@@ -156,12 +165,16 @@ public final class RemoteConference {
             this.mConnectionCapabilities = connectionCapabilities;
             for (CallbackRecord<Callback> record : this.mCallbackRecords) {
                 final Callback callback = record.getCallback();
-                record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.5
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        callback.onConnectionCapabilitiesChanged(conference, RemoteConference.this.mConnectionCapabilities);
-                    }
-                });
+                record.getHandler()
+                        .post(
+                                new Runnable() { // from class: android.telecom.RemoteConference.5
+                                    @Override // java.lang.Runnable
+                                    public void run() {
+                                        callback.onConnectionCapabilitiesChanged(
+                                                conference,
+                                                RemoteConference.this.mConnectionCapabilities);
+                                    }
+                                });
             }
         }
     }
@@ -171,12 +184,16 @@ public final class RemoteConference {
             this.mConnectionProperties = connectionProperties;
             for (CallbackRecord<Callback> record : this.mCallbackRecords) {
                 final Callback callback = record.getCallback();
-                record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.6
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        callback.onConnectionPropertiesChanged(conference, RemoteConference.this.mConnectionProperties);
-                    }
-                });
+                record.getHandler()
+                        .post(
+                                new Runnable() { // from class: android.telecom.RemoteConference.6
+                                    @Override // java.lang.Runnable
+                                    public void run() {
+                                        callback.onConnectionPropertiesChanged(
+                                                conference,
+                                                RemoteConference.this.mConnectionProperties);
+                                    }
+                                });
             }
         }
     }
@@ -186,12 +203,17 @@ public final class RemoteConference {
         this.mConferenceableConnections.addAll(conferenceableConnections);
         for (CallbackRecord<Callback> record : this.mCallbackRecords) {
             final Callback callback = record.getCallback();
-            record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.7
-                @Override // java.lang.Runnable
-                public void run() {
-                    callback.onConferenceableConnectionsChanged(conference, RemoteConference.this.mUnmodifiableConferenceableConnections);
-                }
-            });
+            record.getHandler()
+                    .post(
+                            new Runnable() { // from class: android.telecom.RemoteConference.7
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    callback.onConferenceableConnectionsChanged(
+                                            conference,
+                                            RemoteConference.this
+                                                    .mUnmodifiableConferenceableConnections);
+                                }
+                            });
         }
     }
 
@@ -201,12 +223,14 @@ public final class RemoteConference {
             setState(6);
             for (CallbackRecord<Callback> record : this.mCallbackRecords) {
                 final Callback callback = record.getCallback();
-                record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.8
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        callback.onDisconnected(conference, disconnectCause);
-                    }
-                });
+                record.getHandler()
+                        .post(
+                                new Runnable() { // from class: android.telecom.RemoteConference.8
+                                    @Override // java.lang.Runnable
+                                    public void run() {
+                                        callback.onDisconnected(conference, disconnectCause);
+                                    }
+                                });
             }
         }
     }
@@ -235,12 +259,15 @@ public final class RemoteConference {
     private void notifyExtrasChanged() {
         for (CallbackRecord<Callback> record : this.mCallbackRecords) {
             final Callback callback = record.getCallback();
-            record.getHandler().post(new Runnable() { // from class: android.telecom.RemoteConference.9
-                @Override // java.lang.Runnable
-                public void run() {
-                    callback.onExtrasChanged(conference, RemoteConference.this.mExtras);
-                }
-            });
+            record.getHandler()
+                    .post(
+                            new Runnable() { // from class: android.telecom.RemoteConference.9
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    callback.onExtrasChanged(
+                                            conference, RemoteConference.this.mExtras);
+                                }
+                            });
         }
     }
 

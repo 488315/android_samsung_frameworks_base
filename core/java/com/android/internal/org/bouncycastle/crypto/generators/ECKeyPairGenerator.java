@@ -14,6 +14,7 @@ import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.ec.FixedPointCombMultiplier;
 import com.android.internal.org.bouncycastle.math.ec.WNafUtil;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -36,9 +37,13 @@ public class ECKeyPairGenerator implements AsymmetricCipherKeyPairGenerator, ECC
         int minWeight = nBitLength >>> 2;
         while (true) {
             BigInteger d = BigIntegers.createRandomBigInteger(nBitLength, this.random);
-            if (d.compareTo(ONE) >= 0 && d.compareTo(n) < 0 && WNafUtil.getNafWeight(d) >= minWeight) {
+            if (d.compareTo(ONE) >= 0
+                    && d.compareTo(n) < 0
+                    && WNafUtil.getNafWeight(d) >= minWeight) {
                 ECPoint Q = createBasePointMultiplier().multiply(this.params.getG(), d);
-                return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new ECPublicKeyParameters(Q, this.params), (AsymmetricKeyParameter) new ECPrivateKeyParameters(d, this.params));
+                return new AsymmetricCipherKeyPair(
+                        (AsymmetricKeyParameter) new ECPublicKeyParameters(Q, this.params),
+                        (AsymmetricKeyParameter) new ECPrivateKeyParameters(d, this.params));
             }
         }
     }

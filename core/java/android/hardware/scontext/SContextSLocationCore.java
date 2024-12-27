@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextSLocationCore extends SContextEventContext {
-    public static final Parcelable.Creator<SContextSLocationCore> CREATOR = new Parcelable.Creator<SContextSLocationCore>() { // from class: android.hardware.scontext.SContextSLocationCore.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextSLocationCore createFromParcel(Parcel in) {
-            return new SContextSLocationCore(in);
-        }
+    public static final Parcelable.Creator<SContextSLocationCore> CREATOR =
+            new Parcelable.Creator<SContextSLocationCore>() { // from class:
+                // android.hardware.scontext.SContextSLocationCore.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextSLocationCore createFromParcel(Parcel in) {
+                    return new SContextSLocationCore(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextSLocationCore[] newArray(int size) {
-            return new SContextSLocationCore[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextSLocationCore[] newArray(int size) {
+                    return new SContextSLocationCore[size];
+                }
+            };
     private Bundle mContext;
 
     SContextSLocationCore() {
@@ -102,7 +104,8 @@ public class SContextSLocationCore extends SContextEventContext {
         return this.mContext.getIntArray("DataArray");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

@@ -5,13 +5,16 @@ import android.hardware.usb.DeviceFilter;
 import android.util.SparseBooleanArray;
 import android.util.Xml;
 import android.util.sysfwutil.Slog;
+
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class UsbUserPermissionManager$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class UsbUserPermissionManager$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ UsbUserPermissionManager f$0;
 
     @Override // java.lang.Runnable
@@ -33,8 +36,15 @@ public final /* synthetic */ class UsbUserPermissionManager$$ExternalSyntheticLa
                 zArr = new boolean[size][];
                 i = 0;
                 for (int i2 = 0; i2 < size; i2++) {
-                    deviceFilterArr[i2] = new DeviceFilter((DeviceFilter) usbUserPermissionManager.mDevicePersistentPermissionMap.keyAt(i2));
-                    SparseBooleanArray sparseBooleanArray = (SparseBooleanArray) usbUserPermissionManager.mDevicePersistentPermissionMap.valueAt(i2);
+                    deviceFilterArr[i2] =
+                            new DeviceFilter(
+                                    (DeviceFilter)
+                                            usbUserPermissionManager.mDevicePersistentPermissionMap
+                                                    .keyAt(i2));
+                    SparseBooleanArray sparseBooleanArray =
+                            (SparseBooleanArray)
+                                    usbUserPermissionManager.mDevicePersistentPermissionMap.valueAt(
+                                            i2);
                     int size3 = sparseBooleanArray.size();
                     iArr[i2] = new int[size3];
                     zArr[i2] = new boolean[size3];
@@ -48,8 +58,15 @@ public final /* synthetic */ class UsbUserPermissionManager$$ExternalSyntheticLa
                 iArr2 = new int[size2][];
                 boolean[][] zArr2 = new boolean[size2][];
                 for (int i4 = 0; i4 < size2; i4++) {
-                    accessoryFilterArr[i4] = new AccessoryFilter((AccessoryFilter) usbUserPermissionManager.mAccessoryPersistentPermissionMap.keyAt(i4));
-                    SparseBooleanArray sparseBooleanArray2 = (SparseBooleanArray) usbUserPermissionManager.mAccessoryPersistentPermissionMap.valueAt(i4);
+                    accessoryFilterArr[i4] =
+                            new AccessoryFilter(
+                                    (AccessoryFilter)
+                                            usbUserPermissionManager
+                                                    .mAccessoryPersistentPermissionMap.keyAt(i4));
+                    SparseBooleanArray sparseBooleanArray2 =
+                            (SparseBooleanArray)
+                                    usbUserPermissionManager.mAccessoryPersistentPermissionMap
+                                            .valueAt(i4);
                     int size4 = sparseBooleanArray2.size();
                     iArr2[i4] = new int[size4];
                     zArr2[i4] = new boolean[size4];
@@ -66,7 +83,8 @@ public final /* synthetic */ class UsbUserPermissionManager$$ExternalSyntheticLa
             FileOutputStream fileOutputStream = null;
             try {
                 try {
-                    FileOutputStream startWrite = usbUserPermissionManager.mPermissionsFile.startWrite();
+                    FileOutputStream startWrite =
+                            usbUserPermissionManager.mPermissionsFile.startWrite();
                     try {
                         TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
                         resolveSerializer.startDocument((String) null, Boolean.TRUE);
@@ -77,8 +95,10 @@ public final /* synthetic */ class UsbUserPermissionManager$$ExternalSyntheticLa
                             int i7 = i;
                             while (i7 < length) {
                                 resolveSerializer.startTag((String) null, "permission");
-                                resolveSerializer.attribute((String) null, "uid", Integer.toString(iArr[i6][i7]));
-                                resolveSerializer.attribute((String) null, "granted", Boolean.toString(zArr[i6][i7]));
+                                resolveSerializer.attribute(
+                                        (String) null, "uid", Integer.toString(iArr[i6][i7]));
+                                resolveSerializer.attribute(
+                                        (String) null, "granted", Boolean.toString(zArr[i6][i7]));
                                 deviceFilterArr[i6].write(resolveSerializer);
                                 resolveSerializer.endTag((String) null, "permission");
                                 i7++;
@@ -91,8 +111,10 @@ public final /* synthetic */ class UsbUserPermissionManager$$ExternalSyntheticLa
                             int length2 = iArr2[i8].length;
                             for (int i9 = 0; i9 < length2; i9++) {
                                 resolveSerializer.startTag((String) null, "permission");
-                                resolveSerializer.attribute((String) null, "uid", Integer.toString(iArr2[i8][i9]));
-                                resolveSerializer.attribute((String) null, "granted", Boolean.toString(zArr[i8][i9]));
+                                resolveSerializer.attribute(
+                                        (String) null, "uid", Integer.toString(iArr2[i8][i9]));
+                                resolveSerializer.attribute(
+                                        (String) null, "granted", Boolean.toString(zArr[i8][i9]));
                                 accessoryFilterArr[i8].write(resolveSerializer);
                                 resolveSerializer.endTag((String) null, "permission");
                             }

@@ -5,9 +5,10 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.service.attention.IAttentionService;
 import android.util.Slog;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -26,38 +27,39 @@ public abstract class AttentionService extends Service {
     private static final String LOG_TAG = "AttentionService";
     public static final double PROXIMITY_UNKNOWN = -1.0d;
     public static final String SERVICE_INTERFACE = "android.service.attention.AttentionService";
-    private final IAttentionService.Stub mBinder = new IAttentionService.Stub() { // from class: android.service.attention.AttentionService.1
-        @Override // android.service.attention.IAttentionService
-        public void checkAttention(IAttentionCallback callback) {
-            Preconditions.checkNotNull(callback);
-            AttentionService.this.onCheckAttention(new AttentionCallback(callback));
-        }
+    private final IAttentionService.Stub mBinder =
+            new IAttentionService
+                    .Stub() { // from class: android.service.attention.AttentionService.1
+                @Override // android.service.attention.IAttentionService
+                public void checkAttention(IAttentionCallback callback) {
+                    Preconditions.checkNotNull(callback);
+                    AttentionService.this.onCheckAttention(new AttentionCallback(callback));
+                }
 
-        @Override // android.service.attention.IAttentionService
-        public void cancelAttentionCheck(IAttentionCallback callback) {
-            Preconditions.checkNotNull(callback);
-            AttentionService.this.onCancelAttentionCheck(new AttentionCallback(callback));
-        }
+                @Override // android.service.attention.IAttentionService
+                public void cancelAttentionCheck(IAttentionCallback callback) {
+                    Preconditions.checkNotNull(callback);
+                    AttentionService.this.onCancelAttentionCheck(new AttentionCallback(callback));
+                }
 
-        @Override // android.service.attention.IAttentionService
-        public void onStartProximityUpdates(IProximityUpdateCallback callback) {
-            Objects.requireNonNull(callback);
-            AttentionService.this.onStartProximityUpdates(new ProximityUpdateCallback(callback));
-        }
+                @Override // android.service.attention.IAttentionService
+                public void onStartProximityUpdates(IProximityUpdateCallback callback) {
+                    Objects.requireNonNull(callback);
+                    AttentionService.this.onStartProximityUpdates(
+                            new ProximityUpdateCallback(callback));
+                }
 
-        @Override // android.service.attention.IAttentionService
-        public void onStopProximityUpdates() {
-            AttentionService.this.onStopProximityUpdates();
-        }
-    };
+                @Override // android.service.attention.IAttentionService
+                public void onStopProximityUpdates() {
+                    AttentionService.this.onStopProximityUpdates();
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttentionFailureCodes {
-    }
+    public @interface AttentionFailureCodes {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttentionSuccessCodes {
-    }
+    public @interface AttentionSuccessCodes {}
 
     public abstract void onCancelAttentionCheck(AttentionCallback attentionCallback);
 

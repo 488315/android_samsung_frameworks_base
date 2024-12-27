@@ -5,6 +5,7 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructLinger;
 import android.system.StructTimeval;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,27 +22,31 @@ class LocalSocketImpl {
     private Object readMonitor = new Object();
     private Object writeMonitor = new Object();
 
-    private native void bindLocal(FileDescriptor fileDescriptor, String str, int i) throws IOException;
+    private native void bindLocal(FileDescriptor fileDescriptor, String str, int i)
+            throws IOException;
 
-    private native void connectLocal(FileDescriptor fileDescriptor, String str, int i) throws IOException;
+    private native void connectLocal(FileDescriptor fileDescriptor, String str, int i)
+            throws IOException;
 
-    private native Credentials getPeerCredentials_native(FileDescriptor fileDescriptor) throws IOException;
+    private native Credentials getPeerCredentials_native(FileDescriptor fileDescriptor)
+            throws IOException;
 
     /* JADX INFO: Access modifiers changed from: private */
     public native int read_native(FileDescriptor fileDescriptor) throws IOException;
 
     /* JADX INFO: Access modifiers changed from: private */
-    public native int readba_native(byte[] bArr, int i, int i2, FileDescriptor fileDescriptor) throws IOException;
+    public native int readba_native(byte[] bArr, int i, int i2, FileDescriptor fileDescriptor)
+            throws IOException;
 
     /* JADX INFO: Access modifiers changed from: private */
     public native void write_native(int i, FileDescriptor fileDescriptor) throws IOException;
 
     /* JADX INFO: Access modifiers changed from: private */
-    public native void writeba_native(byte[] bArr, int i, int i2, FileDescriptor fileDescriptor) throws IOException;
+    public native void writeba_native(byte[] bArr, int i, int i2, FileDescriptor fileDescriptor)
+            throws IOException;
 
     class SocketInputStream extends InputStream {
-        SocketInputStream() {
-        }
+        SocketInputStream() {}
 
         @Override // java.io.InputStream
         public int available() throws IOException {
@@ -97,8 +102,7 @@ class LocalSocketImpl {
     }
 
     class SocketOutputStream extends OutputStream {
-        SocketOutputStream() {
-        }
+        SocketOutputStream() {}
 
         @Override // java.io.OutputStream, java.io.Closeable, java.lang.AutoCloseable
         public void close() throws IOException {
@@ -136,8 +140,7 @@ class LocalSocketImpl {
         }
     }
 
-    LocalSocketImpl() {
-    }
+    LocalSocketImpl() {}
 
     LocalSocketImpl(FileDescriptor fd) {
         this.fd = fd;
@@ -298,23 +301,34 @@ class LocalSocketImpl {
         try {
             switch (optID) {
                 case 1:
-                    Object toReturn = Integer.valueOf(Os.getsockoptInt(this.fd, OsConstants.IPPROTO_TCP, OsConstants.TCP_NODELAY));
+                    Object toReturn =
+                            Integer.valueOf(
+                                    Os.getsockoptInt(
+                                            this.fd,
+                                            OsConstants.IPPROTO_TCP,
+                                            OsConstants.TCP_NODELAY));
                     return toReturn;
                 case 4:
                 case 4097:
                 case 4098:
                     int osOpt = javaSoToOsOpt(optID);
-                    Object toReturn2 = Integer.valueOf(Os.getsockoptInt(this.fd, OsConstants.SOL_SOCKET, osOpt));
+                    Object toReturn2 =
+                            Integer.valueOf(
+                                    Os.getsockoptInt(this.fd, OsConstants.SOL_SOCKET, osOpt));
                     return toReturn2;
                 case 128:
-                    StructLinger linger = Os.getsockoptLinger(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_LINGER);
+                    StructLinger linger =
+                            Os.getsockoptLinger(
+                                    this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_LINGER);
                     if (!linger.isOn()) {
                         return -1;
                     }
                     Object toReturn3 = Integer.valueOf(linger.l_linger);
                     return toReturn3;
                 case 4102:
-                    StructTimeval timeval = Os.getsockoptTimeval(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_SNDTIMEO);
+                    StructTimeval timeval =
+                            Os.getsockoptTimeval(
+                                    this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_SNDTIMEO);
                     Object toReturn4 = Integer.valueOf((int) timeval.toMillis());
                     return toReturn4;
                 default:
@@ -350,12 +364,18 @@ class LocalSocketImpl {
                     Os.setsockoptInt(this.fd, OsConstants.SOL_SOCKET, javaSoToOsOpt(i), i3);
                     return;
                 case 128:
-                    Os.setsockoptLinger(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_LINGER, new StructLinger(i2, i3));
+                    Os.setsockoptLinger(
+                            this.fd,
+                            OsConstants.SOL_SOCKET,
+                            OsConstants.SO_LINGER,
+                            new StructLinger(i2, i3));
                     return;
                 case 4102:
                     StructTimeval fromMillis = StructTimeval.fromMillis(i3);
-                    Os.setsockoptTimeval(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_RCVTIMEO, fromMillis);
-                    Os.setsockoptTimeval(this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_SNDTIMEO, fromMillis);
+                    Os.setsockoptTimeval(
+                            this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_RCVTIMEO, fromMillis);
+                    Os.setsockoptTimeval(
+                            this.fd, OsConstants.SOL_SOCKET, OsConstants.SO_SNDTIMEO, fromMillis);
                     return;
                 default:
                     throw new IOException("Unknown option: " + i);

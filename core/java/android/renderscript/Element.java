@@ -444,7 +444,8 @@ public class Element extends BaseObj {
         if (rs.mElement_RGB_565 == null) {
             synchronized (rs) {
                 if (rs.mElement_RGB_565 == null) {
-                    rs.mElement_RGB_565 = createPixel(rs, DataType.UNSIGNED_5_6_5, DataKind.PIXEL_RGB);
+                    rs.mElement_RGB_565 =
+                            createPixel(rs, DataType.UNSIGNED_5_6_5, DataKind.PIXEL_RGB);
                 }
             }
         }
@@ -466,7 +467,8 @@ public class Element extends BaseObj {
         if (rs.mElement_RGBA_5551 == null) {
             synchronized (rs) {
                 if (rs.mElement_RGBA_5551 == null) {
-                    rs.mElement_RGBA_5551 = createPixel(rs, DataType.UNSIGNED_5_5_5_1, DataKind.PIXEL_RGBA);
+                    rs.mElement_RGBA_5551 =
+                            createPixel(rs, DataType.UNSIGNED_5_5_5_1, DataKind.PIXEL_RGBA);
                 }
             }
         }
@@ -477,7 +479,8 @@ public class Element extends BaseObj {
         if (rs.mElement_RGBA_4444 == null) {
             synchronized (rs) {
                 if (rs.mElement_RGBA_4444 == null) {
-                    rs.mElement_RGBA_4444 = createPixel(rs, DataType.UNSIGNED_4_4_4_4, DataKind.PIXEL_RGBA);
+                    rs.mElement_RGBA_4444 =
+                            createPixel(rs, DataType.UNSIGNED_4_4_4_4, DataKind.PIXEL_RGBA);
                 }
             }
         }
@@ -488,7 +491,8 @@ public class Element extends BaseObj {
         if (rs.mElement_RGBA_8888 == null) {
             synchronized (rs) {
                 if (rs.mElement_RGBA_8888 == null) {
-                    rs.mElement_RGBA_8888 = createPixel(rs, DataType.UNSIGNED_8, DataKind.PIXEL_RGBA);
+                    rs.mElement_RGBA_8888 =
+                            createPixel(rs, DataType.UNSIGNED_8, DataKind.PIXEL_RGBA);
                 }
             }
         }
@@ -925,7 +929,9 @@ public class Element extends BaseObj {
 
     Element(long id, RenderScript rs, DataType dt, DataKind dk, boolean norm, int size) {
         super(id, rs);
-        if (dt != DataType.UNSIGNED_5_6_5 && dt != DataType.UNSIGNED_4_4_4_4 && dt != DataType.UNSIGNED_5_5_5_1) {
+        if (dt != DataType.UNSIGNED_5_6_5
+                && dt != DataType.UNSIGNED_4_4_4_4
+                && dt != DataType.UNSIGNED_5_5_5_1) {
             if (size == 3) {
                 this.mSize = dt.mSize * 4;
             } else {
@@ -970,7 +976,8 @@ public class Element extends BaseObj {
             this.mArraySizes = new int[numSubElements];
             this.mOffsetInBytes = new int[numSubElements];
             long[] subElementIds = new long[numSubElements];
-            this.mRS.nElementGetSubElements(getID(this.mRS), subElementIds, this.mElementNames, this.mArraySizes);
+            this.mRS.nElementGetSubElements(
+                    getID(this.mRS), subElementIds, this.mElementNames, this.mArraySizes);
             for (int i = 0; i < numSubElements; i++) {
                 this.mElements[i] = new Element(subElementIds[i], this.mRS);
                 this.mElements[i].updateFromNative();
@@ -1013,10 +1020,20 @@ public class Element extends BaseObj {
     }
 
     public static Element createPixel(RenderScript rs, DataType dt, DataKind dk) {
-        if (dk != DataKind.PIXEL_L && dk != DataKind.PIXEL_A && dk != DataKind.PIXEL_LA && dk != DataKind.PIXEL_RGB && dk != DataKind.PIXEL_RGBA && dk != DataKind.PIXEL_DEPTH && dk != DataKind.PIXEL_YUV) {
+        if (dk != DataKind.PIXEL_L
+                && dk != DataKind.PIXEL_A
+                && dk != DataKind.PIXEL_LA
+                && dk != DataKind.PIXEL_RGB
+                && dk != DataKind.PIXEL_RGBA
+                && dk != DataKind.PIXEL_DEPTH
+                && dk != DataKind.PIXEL_YUV) {
             throw new RSIllegalArgumentException("Unsupported DataKind");
         }
-        if (dt != DataType.UNSIGNED_8 && dt != DataType.UNSIGNED_16 && dt != DataType.UNSIGNED_5_6_5 && dt != DataType.UNSIGNED_4_4_4_4 && dt != DataType.UNSIGNED_5_5_5_1) {
+        if (dt != DataType.UNSIGNED_8
+                && dt != DataType.UNSIGNED_16
+                && dt != DataType.UNSIGNED_5_6_5
+                && dt != DataType.UNSIGNED_4_4_4_4
+                && dt != DataType.UNSIGNED_5_5_5_1) {
             throw new RSIllegalArgumentException("Unsupported DataType");
         }
         if (dt == DataType.UNSIGNED_5_6_5 && dk != DataKind.PIXEL_RGB) {
@@ -1054,7 +1071,10 @@ public class Element extends BaseObj {
         if (equals(e)) {
             return true;
         }
-        return this.mSize == e.mSize && this.mType != DataType.NONE && this.mType == e.mType && this.mVectorSize == e.mVectorSize;
+        return this.mSize == e.mSize
+                && this.mType != DataType.NONE
+                && this.mType == e.mType
+                && this.mVectorSize == e.mVectorSize;
     }
 
     public static class Builder {

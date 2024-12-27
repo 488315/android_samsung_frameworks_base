@@ -8,10 +8,12 @@ import android.os.Binder;
 import android.os.FileUtils;
 import android.provider.Settings;
 import android.util.Slog;
+
+import libcore.io.IoUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -42,19 +44,25 @@ public final class CertBlacklister extends Binder {
                 public final void run() {
                     synchronized (BlacklistObserver.this.mTmpDir) {
                         BlacklistObserver blacklistObserver = BlacklistObserver.this;
-                        String string = Settings.Secure.getString(blacklistObserver.mContentResolver, blacklistObserver.mKey);
+                        String string =
+                                Settings.Secure.getString(
+                                        blacklistObserver.mContentResolver, blacklistObserver.mKey);
                         if (string != null) {
                             Slog.i("CertBlacklister", "Certificate blacklist changed, updating...");
                             FileOutputStream fileOutputStream = null;
                             try {
                                 try {
-                                    File createTempFile = File.createTempFile("journal", "", BlacklistObserver.this.mTmpDir);
+                                    File createTempFile =
+                                            File.createTempFile(
+                                                    "journal", "", BlacklistObserver.this.mTmpDir);
                                     createTempFile.setReadable(true, false);
-                                    FileOutputStream fileOutputStream2 = new FileOutputStream(createTempFile);
+                                    FileOutputStream fileOutputStream2 =
+                                            new FileOutputStream(createTempFile);
                                     try {
                                         fileOutputStream2.write(string.getBytes());
                                         FileUtils.sync(fileOutputStream2);
-                                        createTempFile.renameTo(new File(BlacklistObserver.this.mPath));
+                                        createTempFile.renameTo(
+                                                new File(BlacklistObserver.this.mPath));
                                         Slog.i("CertBlacklister", "Certificate blacklist updated");
                                         IoUtils.closeQuietly(fileOutputStream2);
                                     } catch (IOException e) {
@@ -83,13 +91,23 @@ public final class CertBlacklister extends Binder {
 
     static {
         String str = System.getenv("ANDROID_DATA") + "/misc/keychain/";
-        PUBKEY_PATH = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "pubkey_blacklist.txt");
-        SERIAL_PATH = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "serial_blacklist.txt");
+        PUBKEY_PATH =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                        str, "pubkey_blacklist.txt");
+        SERIAL_PATH =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                        str, "serial_blacklist.txt");
     }
 
     public CertBlacklister(Context context) {
         ContentResolver contentResolver = context.getContentResolver();
-        contentResolver.registerContentObserver(Settings.Secure.getUriFor("pubkey_blacklist"), true, new BlacklistObserver(contentResolver, "pubkey_blacklist", PUBKEY_PATH));
-        contentResolver.registerContentObserver(Settings.Secure.getUriFor("serial_blacklist"), true, new BlacklistObserver(contentResolver, "serial_blacklist", SERIAL_PATH));
+        contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("pubkey_blacklist"),
+                true,
+                new BlacklistObserver(contentResolver, "pubkey_blacklist", PUBKEY_PATH));
+        contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("serial_blacklist"),
+                true,
+                new BlacklistObserver(contentResolver, "serial_blacklist", SERIAL_PATH));
     }
 }

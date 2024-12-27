@@ -1,12 +1,15 @@
 package com.android.server.am;
 
 import android.os.WorkSource;
+
 import com.android.server.power.stats.BatteryStatsImpl;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ WorkSource f$1;
@@ -14,7 +17,13 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
     public final /* synthetic */ long f$3;
     public final /* synthetic */ long f$4;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda7(BatteryStatsService batteryStatsService, WorkSource workSource, boolean z, long j, long j2, int i) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda7(
+            BatteryStatsService batteryStatsService,
+            WorkSource workSource,
+            boolean z,
+            long j,
+            long j2,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = batteryStatsService;
         this.f$1 = workSource;
@@ -43,7 +52,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
                             while (i < size) {
                                 BatteryStatsImpl batteryStatsImpl3 = batteryStatsImpl;
                                 int i2 = i;
-                                batteryStatsImpl2.noteBluetoothScanStartedLocked(null, workSource.getUid(i), z, j, j2);
+                                batteryStatsImpl2.noteBluetoothScanStartedLocked(
+                                        null, workSource.getUid(i), z, j, j2);
                                 i = i2 + 1;
                                 batteryStatsImpl = batteryStatsImpl3;
                             }
@@ -51,7 +61,12 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
                             List workChains = workSource.getWorkChains();
                             if (workChains != null) {
                                 for (int i3 = 0; i3 < workChains.size(); i3++) {
-                                    batteryStatsImpl2.noteBluetoothScanStartedLocked((WorkSource.WorkChain) workChains.get(i3), -1, z, j, j2);
+                                    batteryStatsImpl2.noteBluetoothScanStartedLocked(
+                                            (WorkSource.WorkChain) workChains.get(i3),
+                                            -1,
+                                            z,
+                                            j,
+                                            j2);
                                 }
                             }
                             return;
@@ -82,7 +97,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
                             while (i4 < size2) {
                                 BatteryStatsImpl batteryStatsImpl8 = batteryStatsImpl6;
                                 int i5 = i4;
-                                batteryStatsImpl7.noteBluetoothScanStoppedLocked(null, workSource2.getUid(i4), z2, j3, j4);
+                                batteryStatsImpl7.noteBluetoothScanStoppedLocked(
+                                        null, workSource2.getUid(i4), z2, j3, j4);
                                 i4 = i5 + 1;
                                 batteryStatsImpl6 = batteryStatsImpl8;
                             }
@@ -90,7 +106,12 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda7
                             List workChains2 = workSource2.getWorkChains();
                             if (workChains2 != null) {
                                 for (int i6 = 0; i6 < workChains2.size(); i6++) {
-                                    batteryStatsImpl7.noteBluetoothScanStoppedLocked((WorkSource.WorkChain) workChains2.get(i6), -1, z2, j3, j4);
+                                    batteryStatsImpl7.noteBluetoothScanStoppedLocked(
+                                            (WorkSource.WorkChain) workChains2.get(i6),
+                                            -1,
+                                            z2,
+                                            j3,
+                                            j4);
                                 }
                             }
                             return;

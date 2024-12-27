@@ -2,6 +2,7 @@ package android.view.inputmethod;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -23,19 +24,15 @@ public abstract class HandwritingGesture {
     int mType = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface GestureType {
-    }
+    @interface GestureType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GestureTypeFlags {
-    }
+    public @interface GestureTypeFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Granularity {
-    }
+    @interface Granularity {}
 
-    HandwritingGesture() {
-    }
+    HandwritingGesture() {}
 
     public final int getGestureType() {
         return this.mType;

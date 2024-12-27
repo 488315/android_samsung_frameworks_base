@@ -2,9 +2,9 @@ package android.database.sqlite;
 
 import android.database.CursorWindow;
 import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteConnection;
 import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -35,19 +35,30 @@ public final class SQLiteSession {
     }
 
     public boolean hasNestedTransaction() {
-        return (this.mTransactionStack == null || this.mTransactionStack.mParent == null) ? false : true;
+        return (this.mTransactionStack == null || this.mTransactionStack.mParent == null)
+                ? false
+                : true;
     }
 
     public boolean hasConnection() {
         return this.mConnection != null;
     }
 
-    public void beginTransaction(int transactionMode, SQLiteTransactionListener transactionListener, int connectionFlags, CancellationSignal cancellationSignal) {
+    public void beginTransaction(
+            int transactionMode,
+            SQLiteTransactionListener transactionListener,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         throwIfTransactionMarkedSuccessful();
-        beginTransactionUnchecked(transactionMode, transactionListener, connectionFlags, cancellationSignal);
+        beginTransactionUnchecked(
+                transactionMode, transactionListener, connectionFlags, cancellationSignal);
     }
 
-    private void beginTransactionUnchecked(int transactionMode, SQLiteTransactionListener transactionListener, int connectionFlags, CancellationSignal cancellationSignal) {
+    private void beginTransactionUnchecked(
+            int transactionMode,
+            SQLiteTransactionListener transactionListener,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
@@ -146,12 +157,17 @@ public final class SQLiteSession {
         }
     }
 
-    public boolean yieldTransaction(long sleepAfterYieldDelayMillis, boolean throwIfUnsafe, CancellationSignal cancellationSignal) {
+    public boolean yieldTransaction(
+            long sleepAfterYieldDelayMillis,
+            boolean throwIfUnsafe,
+            CancellationSignal cancellationSignal) {
         if (throwIfUnsafe) {
             throwIfNoTransaction();
             throwIfTransactionMarkedSuccessful();
             throwIfNestedTransaction();
-        } else if (this.mTransactionStack == null || this.mTransactionStack.mMarkedSuccessful || this.mTransactionStack.mParent != null) {
+        } else if (this.mTransactionStack == null
+                || this.mTransactionStack.mMarkedSuccessful
+                || this.mTransactionStack.mParent != null) {
             return false;
         }
         if (this.mTransactionStack.mChildFailed) {
@@ -160,7 +176,8 @@ public final class SQLiteSession {
         return yieldTransactionUnchecked(sleepAfterYieldDelayMillis, cancellationSignal);
     }
 
-    private boolean yieldTransactionUnchecked(long sleepAfterYieldDelayMillis, CancellationSignal cancellationSignal) {
+    private boolean yieldTransactionUnchecked(
+            long sleepAfterYieldDelayMillis, CancellationSignal cancellationSignal) {
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
@@ -181,7 +198,11 @@ public final class SQLiteSession {
         return true;
     }
 
-    public void prepare(String sql, int connectionFlags, CancellationSignal cancellationSignal, SQLiteStatementInfo outStatementInfo) {
+    public void prepare(
+            String sql,
+            int connectionFlags,
+            CancellationSignal cancellationSignal,
+            SQLiteStatementInfo outStatementInfo) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -196,7 +217,11 @@ public final class SQLiteSession {
         }
     }
 
-    public void execute(String sql, Object[] bindArgs, int connectionFlags, CancellationSignal cancellationSignal) {
+    public void execute(
+            String sql,
+            Object[] bindArgs,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -211,7 +236,11 @@ public final class SQLiteSession {
         }
     }
 
-    public long executeForLong(String sql, Object[] bindArgs, int connectionFlags, CancellationSignal cancellationSignal) {
+    public long executeForLong(
+            String sql,
+            Object[] bindArgs,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -226,7 +255,11 @@ public final class SQLiteSession {
         }
     }
 
-    public String executeForString(String sql, Object[] bindArgs, int connectionFlags, CancellationSignal cancellationSignal) {
+    public String executeForString(
+            String sql,
+            Object[] bindArgs,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -241,7 +274,11 @@ public final class SQLiteSession {
         }
     }
 
-    public ParcelFileDescriptor executeForBlobFileDescriptor(String sql, Object[] bindArgs, int connectionFlags, CancellationSignal cancellationSignal) {
+    public ParcelFileDescriptor executeForBlobFileDescriptor(
+            String sql,
+            Object[] bindArgs,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -256,7 +293,11 @@ public final class SQLiteSession {
         }
     }
 
-    public int executeForChangedRowCount(String sql, Object[] bindArgs, int connectionFlags, CancellationSignal cancellationSignal) {
+    public int executeForChangedRowCount(
+            String sql,
+            Object[] bindArgs,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -271,7 +312,11 @@ public final class SQLiteSession {
         }
     }
 
-    public long executeForLastInsertedRowId(String sql, Object[] bindArgs, int connectionFlags, CancellationSignal cancellationSignal) {
+    public long executeForLastInsertedRowId(
+            String sql,
+            Object[] bindArgs,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -286,7 +331,15 @@ public final class SQLiteSession {
         }
     }
 
-    public int executeForCursorWindow(String sql, Object[] bindArgs, CursorWindow window, int startPos, int requiredPos, boolean countAllRows, int connectionFlags, CancellationSignal cancellationSignal) {
+    public int executeForCursorWindow(
+            String sql,
+            Object[] bindArgs,
+            CursorWindow window,
+            int startPos,
+            int requiredPos,
+            boolean countAllRows,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (sql == null) {
             throw new IllegalArgumentException("sql must not be null.");
         }
@@ -299,7 +352,8 @@ public final class SQLiteSession {
         }
         acquireConnection(sql, connectionFlags, cancellationSignal);
         try {
-            return this.mConnection.executeForCursorWindow(sql, bindArgs, window, startPos, requiredPos, countAllRows, cancellationSignal);
+            return this.mConnection.executeForCursorWindow(
+                    sql, bindArgs, window, startPos, requiredPos, countAllRows, cancellationSignal);
         } finally {
             releaseConnection();
         }
@@ -323,7 +377,11 @@ public final class SQLiteSession {
         }
     }
 
-    private boolean executeSpecial(String sql, Object[] bindArgs, int connectionFlags, CancellationSignal cancellationSignal) {
+    private boolean executeSpecial(
+            String sql,
+            Object[] bindArgs,
+            int connectionFlags,
+            CancellationSignal cancellationSignal) {
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
@@ -343,9 +401,12 @@ public final class SQLiteSession {
         return true;
     }
 
-    private void acquireConnection(String sql, int connectionFlags, CancellationSignal cancellationSignal) {
+    private void acquireConnection(
+            String sql, int connectionFlags, CancellationSignal cancellationSignal) {
         if (this.mConnection == null) {
-            this.mConnection = this.mConnectionPool.acquireConnection(sql, connectionFlags, cancellationSignal);
+            this.mConnection =
+                    this.mConnectionPool.acquireConnection(
+                            sql, connectionFlags, cancellationSignal);
             this.mConnectionFlags = connectionFlags;
         }
         this.mConnectionUseCount++;
@@ -363,7 +424,8 @@ public final class SQLiteSession {
         }
     }
 
-    SQLiteConnection.PreparedStatement acquirePersistentStatement(String query, Closeable dependent) {
+    SQLiteConnection.PreparedStatement acquirePersistentStatement(
+            String query, Closeable dependent) {
         throwIfNoTransaction();
         throwIfTransactionMarkedSuccessful();
         this.mOpenDependents.addFirst(dependent);
@@ -375,7 +437,8 @@ public final class SQLiteSession {
         }
     }
 
-    void releasePersistentStatement(SQLiteConnection.PreparedStatement statement, Closeable dependent) {
+    void releasePersistentStatement(
+            SQLiteConnection.PreparedStatement statement, Closeable dependent) {
         this.mConnection.releasePreparedStatement(statement);
         this.mOpenDependents.remove(dependent);
     }
@@ -409,19 +472,23 @@ public final class SQLiteSession {
 
     void throwIfNoTransaction() {
         if (this.mTransactionStack == null) {
-            throw new IllegalStateException("Cannot perform this operation because there is no current transaction.");
+            throw new IllegalStateException(
+                    "Cannot perform this operation because there is no current transaction.");
         }
     }
 
     private void throwIfTransactionMarkedSuccessful() {
         if (this.mTransactionStack != null && this.mTransactionStack.mMarkedSuccessful) {
-            throw new IllegalStateException("Cannot perform this operation because the transaction has already been marked successful.  The only thing you can do now is call endTransaction().");
+            throw new IllegalStateException(
+                    "Cannot perform this operation because the transaction has already been marked"
+                        + " successful.  The only thing you can do now is call endTransaction().");
         }
     }
 
     private void throwIfNestedTransaction() {
         if (hasNestedTransaction()) {
-            throw new IllegalStateException("Cannot perform this operation because a nested transaction is in progress.");
+            throw new IllegalStateException(
+                    "Cannot perform this operation because a nested transaction is in progress.");
         }
     }
 
@@ -453,7 +520,6 @@ public final class SQLiteSession {
         public int mMode;
         public Transaction mParent;
 
-        private Transaction() {
-        }
+        private Transaction() {}
     }
 }

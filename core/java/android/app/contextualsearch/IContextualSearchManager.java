@@ -1,6 +1,5 @@
 package android.app.contextualsearch;
 
-import android.app.contextualsearch.IContextualSearchCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -11,18 +10,19 @@ import android.os.RemoteException;
 public interface IContextualSearchManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.contextualsearch.IContextualSearchManager";
 
-    void getContextualSearchState(IBinder iBinder, IContextualSearchCallback iContextualSearchCallback) throws RemoteException;
+    void getContextualSearchState(
+            IBinder iBinder, IContextualSearchCallback iContextualSearchCallback)
+            throws RemoteException;
 
     void startContextualSearch(int i) throws RemoteException;
 
     public static class Default implements IContextualSearchManager {
         @Override // android.app.contextualsearch.IContextualSearchManager
-        public void startContextualSearch(int entrypoint) throws RemoteException {
-        }
+        public void startContextualSearch(int entrypoint) throws RemoteException {}
 
         @Override // android.app.contextualsearch.IContextualSearchManager
-        public void getContextualSearchState(IBinder token, IContextualSearchCallback callback) throws RemoteException {
-        }
+        public void getContextualSearchState(IBinder token, IContextualSearchCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IContextualSearchManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContextualSearchManager {
+    public abstract static class Stub extends Binder implements IContextualSearchManager {
         static final int TRANSACTION_getContextualSearchState = 2;
         static final int TRANSACTION_startContextualSearch = 1;
 
@@ -71,7 +71,8 @@ public interface IContextualSearchManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContextualSearchManager.DESCRIPTOR);
             }
@@ -87,7 +88,8 @@ public interface IContextualSearchManager extends IInterface {
                     return true;
                 case 2:
                     IBinder _arg02 = data.readStrongBinder();
-                    IContextualSearchCallback _arg1 = IContextualSearchCallback.Stub.asInterface(data.readStrongBinder());
+                    IContextualSearchCallback _arg1 =
+                            IContextualSearchCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getContextualSearchState(_arg02, _arg1);
                     return true;
@@ -125,7 +127,8 @@ public interface IContextualSearchManager extends IInterface {
             }
 
             @Override // android.app.contextualsearch.IContextualSearchManager
-            public void getContextualSearchState(IBinder token, IContextualSearchCallback callback) throws RemoteException {
+            public void getContextualSearchState(IBinder token, IContextualSearchCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContextualSearchManager.DESCRIPTOR);

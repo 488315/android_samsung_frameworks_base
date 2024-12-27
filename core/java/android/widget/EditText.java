@@ -13,7 +13,7 @@ import android.text.method.MovementMethod;
 import android.text.style.SpanUtils;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
-import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -42,7 +42,9 @@ public class EditText extends TextView {
         int i;
         this.mStyleShortcutsEnabled = false;
         Resources.Theme theme = context.getTheme();
-        TypedArray tvArray = theme.obtainStyledAttributes(attrs, R.styleable.EditText, defStyleAttr, defStyleRes);
+        TypedArray tvArray =
+                theme.obtainStyledAttributes(
+                        attrs, R.styleable.EditText, defStyleAttr, defStyleRes);
         try {
             n = tvArray.getIndexCount();
         } finally {
@@ -58,11 +60,19 @@ public class EditText extends TextView {
             }
         }
         tvArray.recycle();
-        tvArray = theme.obtainStyledAttributes(attrs, R.styleable.TextView, defStyleAttr, defStyleRes);
+        tvArray =
+                theme.obtainStyledAttributes(
+                        attrs, R.styleable.TextView, defStyleAttr, defStyleRes);
         try {
             boolean hasUseLocalePreferredLineHeightForMinimumInt = tvArray.hasValue(102);
-            boolean useLocalePreferredLineHeightForMinimumInt = hasUseLocalePreferredLineHeightForMinimumInt ? tvArray.getBoolean(102, false) : false;
-            setLocalePreferredLineHeightForMinimumUsed(hasUseLocalePreferredLineHeightForMinimumInt ? useLocalePreferredLineHeightForMinimumInt : CompatChanges.isChangeEnabled(LINE_HEIGHT_FOR_LOCALE));
+            boolean useLocalePreferredLineHeightForMinimumInt =
+                    hasUseLocalePreferredLineHeightForMinimumInt
+                            ? tvArray.getBoolean(102, false)
+                            : false;
+            setLocalePreferredLineHeightForMinimumUsed(
+                    hasUseLocalePreferredLineHeightForMinimumInt
+                            ? useLocalePreferredLineHeightForMinimumInt
+                            : CompatChanges.isChangeEnabled(LINE_HEIGHT_FOR_LOCALE));
         } finally {
         }
     }
@@ -119,7 +129,8 @@ public class EditText extends TextView {
     @Override // android.widget.TextView
     public void setEllipsize(TextUtils.TruncateAt ellipsis) {
         if (ellipsis == TextUtils.TruncateAt.MARQUEE) {
-            throw new IllegalArgumentException("EditText cannot use the ellipsize mode TextUtils.TruncateAt.MARQUEE");
+            throw new IllegalArgumentException(
+                    "EditText cannot use the ellipsize mode TextUtils.TruncateAt.MARQUEE");
         }
         super.setEllipsize(ellipsis);
     }

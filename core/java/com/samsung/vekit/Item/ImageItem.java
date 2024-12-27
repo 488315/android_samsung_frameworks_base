@@ -1,6 +1,7 @@
 package com.samsung.vekit.Item;
 
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.Filter;
 import com.samsung.vekit.Common.Object.FilterOption;
 import com.samsung.vekit.Common.Object.ToneInfo;
@@ -30,7 +31,8 @@ public class ImageItem extends Item {
 
     @Override // com.samsung.vekit.Item.Item
     public void checkValidContent(Content content) throws Exception {
-        if (content.getContentType() != ContentType.IMAGE && content.getContentType() != ContentType.ANIMATED_IMAGE) {
+        if (content.getContentType() != ContentType.IMAGE
+                && content.getContentType() != ContentType.ANIMATED_IMAGE) {
             throw new Exception("isInvalidElement : please set image or animated_image(content).");
         }
     }

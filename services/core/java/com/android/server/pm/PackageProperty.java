@@ -2,7 +2,9 @@ package com.android.server.pm;
 
 import android.content.pm.PackageManager;
 import android.util.ArrayMap;
+
 import com.android.internal.pm.pkg.component.ParsedComponent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +55,8 @@ public final class PackageProperty {
         return arrayMap;
     }
 
-    public static PackageManager.Property getProperty(String str, String str2, String str3, ArrayMap arrayMap) {
+    public static PackageManager.Property getProperty(
+            String str, String str2, String str3, ArrayMap arrayMap) {
         List list;
         ArrayMap arrayMap2 = (ArrayMap) arrayMap.get(str);
         if (arrayMap2 == null || (list = (List) arrayMap2.get(str2)) == null) {

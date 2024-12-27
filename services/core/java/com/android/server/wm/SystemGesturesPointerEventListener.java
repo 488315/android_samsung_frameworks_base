@@ -13,14 +13,16 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.WindowManagerPolicyConstants;
 import android.widget.OverScroller;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wm.DisplayPolicy;
+
 import com.samsung.android.multiwindow.MultiWindowEdgeDetector;
 import com.samsung.android.rune.CoreRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SystemGesturesPointerEventListener implements WindowManagerPolicyConstants.PointerEventListener {
+public final class SystemGesturesPointerEventListener
+        implements WindowManagerPolicyConstants.PointerEventListener {
     public final DisplayPolicy.AnonymousClass1 mCallbacks;
     public final Context mContext;
     public boolean mDebugFireable;
@@ -47,8 +49,7 @@ public final class SystemGesturesPointerEventListener implements WindowManagerPo
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.SystemGesturesPointerEventListener$1, reason: invalid class name */
-    public final class AnonymousClass1 extends GestureDetector {
-    }
+    public final class AnonymousClass1 extends GestureDetector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FlingGestureDetector extends GestureDetector.SimpleOnGestureListener {
@@ -58,8 +59,10 @@ public final class SystemGesturesPointerEventListener implements WindowManagerPo
             this.mOverscroller = new OverScroller(SystemGesturesPointerEventListener.this.mContext);
         }
 
-        @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-        public final boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
+        @Override // android.view.GestureDetector.SimpleOnGestureListener,
+                  // android.view.GestureDetector.OnGestureListener
+        public final boolean onFling(
+                MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
             PowerManagerInternal powerManagerInternal;
             this.mOverscroller.computeScrollOffset();
             long uptimeMillis = SystemClock.uptimeMillis();
@@ -67,22 +70,35 @@ public final class SystemGesturesPointerEventListener implements WindowManagerPo
             if (j != 0 && uptimeMillis > j + 5000) {
                 this.mOverscroller.forceFinished(true);
             }
-            this.mOverscroller.fling(0, 0, (int) f, (int) f2, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            this.mOverscroller.fling(
+                    0,
+                    0,
+                    (int) f,
+                    (int) f2,
+                    Integer.MIN_VALUE,
+                    Integer.MAX_VALUE,
+                    Integer.MIN_VALUE,
+                    Integer.MAX_VALUE);
             int duration = this.mOverscroller.getDuration();
             if (duration > 5000) {
                 duration = 5000;
             }
-            SystemGesturesPointerEventListener systemGesturesPointerEventListener = SystemGesturesPointerEventListener.this;
+            SystemGesturesPointerEventListener systemGesturesPointerEventListener =
+                    SystemGesturesPointerEventListener.this;
             systemGesturesPointerEventListener.mLastFlingTime = uptimeMillis;
-            DisplayPolicy.AnonymousClass1 anonymousClass1 = systemGesturesPointerEventListener.mCallbacks;
+            DisplayPolicy.AnonymousClass1 anonymousClass1 =
+                    systemGesturesPointerEventListener.mCallbacks;
             anonymousClass1.getClass();
-            if (!CoreRune.FW_VRR_PERFORMANCE && (powerManagerInternal = DisplayPolicy.this.mService.mPowerManagerInternal) != null) {
+            if (!CoreRune.FW_VRR_PERFORMANCE
+                    && (powerManagerInternal = DisplayPolicy.this.mService.mPowerManagerInternal)
+                            != null) {
                 powerManagerInternal.setPowerBoost(0, duration);
             }
             return true;
         }
 
-        @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
+        @Override // android.view.GestureDetector.SimpleOnGestureListener,
+                  // android.view.GestureDetector.OnGestureListener
         public final boolean onSingleTapUp(MotionEvent motionEvent) {
             if (!this.mOverscroller.isFinished()) {
                 this.mOverscroller.forceFinished(true);
@@ -91,7 +107,10 @@ public final class SystemGesturesPointerEventListener implements WindowManagerPo
         }
     }
 
-    public SystemGesturesPointerEventListener(Context context, DisplayPolicy.PolicyHandler policyHandler, DisplayPolicy.AnonymousClass1 anonymousClass1) {
+    public SystemGesturesPointerEventListener(
+            Context context,
+            DisplayPolicy.PolicyHandler policyHandler,
+            DisplayPolicy.AnonymousClass1 anonymousClass1) {
         if (context == null) {
             throw new IllegalArgumentException("context".concat(" must not be null"));
         }
@@ -118,17 +137,26 @@ public final class SystemGesturesPointerEventListener implements WindowManagerPo
         if (f4 <= rect.top && f2 > this.mSwipeDistanceThreshold + f4 && j2 < 500) {
             return 1;
         }
-        if (f4 >= this.screenHeight - rect.bottom && f2 < f4 - this.mSwipeDistanceThreshold && j2 < 500) {
+        if (f4 >= this.screenHeight - rect.bottom
+                && f2 < f4 - this.mSwipeDistanceThreshold
+                && j2 < 500) {
             return 2;
         }
-        if (f3 < this.screenWidth - rect.right || f >= f3 - this.mSwipeDistanceThreshold || j2 >= 500) {
-            return (f3 > ((float) rect.left) || f <= f3 + ((float) this.mSwipeDistanceThreshold) || j2 >= 500) ? 0 : 4;
+        if (f3 < this.screenWidth - rect.right
+                || f >= f3 - this.mSwipeDistanceThreshold
+                || j2 >= 500) {
+            return (f3 > ((float) rect.left)
+                            || f <= f3 + ((float) this.mSwipeDistanceThreshold)
+                            || j2 >= 500)
+                    ? 0
+                    : 4;
         }
         return 3;
     }
 
     public final void detectSystemGestureForDex(MotionEvent motionEvent) {
-        if (!this.mMouseHoveringAtTop && motionEvent.getY() == FullScreenMagnificationGestureHandler.MAX_SCALE) {
+        if (!this.mMouseHoveringAtTop
+                && motionEvent.getY() == FullScreenMagnificationGestureHandler.MAX_SCALE) {
             DisplayPolicy.AnonymousClass1 anonymousClass1 = this.mCallbacks;
             DisplayPolicy displayPolicy = DisplayPolicy.this;
             displayPolicy.mHandler.removeCallbacks(anonymousClass1.mOnSwipeFromTop);
@@ -136,7 +164,9 @@ public final class SystemGesturesPointerEventListener implements WindowManagerPo
             this.mMouseHoveringAtTop = true;
             return;
         }
-        if (this.mMouseHoveringAtTop && motionEvent.getY() > FullScreenMagnificationGestureHandler.MAX_SCALE && motionEvent.getY() < this.screenHeight - 22) {
+        if (this.mMouseHoveringAtTop
+                && motionEvent.getY() > FullScreenMagnificationGestureHandler.MAX_SCALE
+                && motionEvent.getY() < this.screenHeight - 22) {
             DisplayPolicy.AnonymousClass1 anonymousClass12 = this.mCallbacks;
             DisplayPolicy.this.mHandler.removeCallbacks(anonymousClass12.mOnSwipeFromTop);
             this.mMouseHoveringAtTop = false;
@@ -180,31 +210,42 @@ public final class SystemGesturesPointerEventListener implements WindowManagerPo
         }
         Resources resources = this.mContext.getResources();
         int dimensionPixelSize = resources.getDimensionPixelSize(17106300);
-        this.mSwipeStartThreshold.set(dimensionPixelSize, dimensionPixelSize, dimensionPixelSize, dimensionPixelSize);
+        this.mSwipeStartThreshold.set(
+                dimensionPixelSize, dimensionPixelSize, dimensionPixelSize, dimensionPixelSize);
         this.mSwipeDistanceThreshold = resources.getDimensionPixelSize(17106299);
         DisplayCutout cutout = DisplayManagerGlobal.getInstance().getRealDisplay(0).getCutout();
         if (cutout != null) {
-            this.mDisplayCutoutTouchableRegionSize = resources.getDimensionPixelSize(R.dimen.harmful_app_name_padding_right);
+            this.mDisplayCutoutTouchableRegionSize =
+                    resources.getDimensionPixelSize(R.dimen.harmful_app_name_padding_right);
             Rect[] boundingRectsAll = cutout.getBoundingRectsAll();
             Rect rect = boundingRectsAll[0];
             if (rect != null) {
                 Rect rect2 = this.mSwipeStartThreshold;
-                rect2.left = Math.max(rect2.left, rect.width() + this.mDisplayCutoutTouchableRegionSize);
+                rect2.left =
+                        Math.max(rect2.left, rect.width() + this.mDisplayCutoutTouchableRegionSize);
             }
             Rect rect3 = boundingRectsAll[1];
             if (rect3 != null) {
                 Rect rect4 = this.mSwipeStartThreshold;
-                rect4.top = Math.max(rect4.top, rect3.height() + this.mDisplayCutoutTouchableRegionSize);
+                rect4.top =
+                        Math.max(
+                                rect4.top, rect3.height() + this.mDisplayCutoutTouchableRegionSize);
             }
             Rect rect5 = boundingRectsAll[2];
             if (rect5 != null) {
                 Rect rect6 = this.mSwipeStartThreshold;
-                rect6.right = Math.max(rect6.right, rect5.width() + this.mDisplayCutoutTouchableRegionSize);
+                rect6.right =
+                        Math.max(
+                                rect6.right,
+                                rect5.width() + this.mDisplayCutoutTouchableRegionSize);
             }
             Rect rect7 = boundingRectsAll[3];
             if (rect7 != null) {
                 Rect rect8 = this.mSwipeStartThreshold;
-                rect8.bottom = Math.max(rect8.bottom, rect7.height() + this.mDisplayCutoutTouchableRegionSize);
+                rect8.bottom =
+                        Math.max(
+                                rect8.bottom,
+                                rect7.height() + this.mDisplayCutoutTouchableRegionSize);
             }
         }
     }
@@ -222,6 +263,8 @@ public final class SystemGesturesPointerEventListener implements WindowManagerPo
             Method dump skipped, instructions count: 761
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.SystemGesturesPointerEventListener.onPointerEvent(android.view.MotionEvent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.SystemGesturesPointerEventListener.onPointerEvent(android.view.MotionEvent):void");
     }
 }

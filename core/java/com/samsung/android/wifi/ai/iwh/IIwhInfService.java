@@ -14,8 +14,8 @@ public interface IIwhInfService extends IInterface {
 
     public static class Default implements IIwhInfService {
         @Override // com.samsung.android.wifi.ai.iwh.IIwhInfService
-        public void iwhInfResult(String key, int mode, String bssid, int score) throws RemoteException {
-        }
+        public void iwhInfResult(String key, int mode, String bssid, int score)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IIwhInfService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIwhInfService {
+    public abstract static class Stub extends Binder implements IIwhInfService {
         static final int TRANSACTION_iwhInfResult = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IIwhInfService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIwhInfService.DESCRIPTOR);
             }
@@ -100,7 +101,8 @@ public interface IIwhInfService extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ai.iwh.IIwhInfService
-            public void iwhInfResult(String key, int mode, String bssid, int score) throws RemoteException {
+            public void iwhInfResult(String key, int mode, String bssid, int score)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IIwhInfService.DESCRIPTOR);

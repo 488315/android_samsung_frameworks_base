@@ -4,25 +4,28 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.VibrationEffect;
 import android.os.VibratorInfo;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class RampSegment extends VibrationEffectSegment {
-    public static final Parcelable.Creator<RampSegment> CREATOR = new Parcelable.Creator<RampSegment>() { // from class: android.os.vibrator.RampSegment.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RampSegment createFromParcel(Parcel in) {
-            in.readInt();
-            return new RampSegment(in);
-        }
+    public static final Parcelable.Creator<RampSegment> CREATOR =
+            new Parcelable.Creator<RampSegment>() { // from class: android.os.vibrator.RampSegment.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RampSegment createFromParcel(Parcel in) {
+                    in.readInt();
+                    return new RampSegment(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RampSegment[] newArray(int size) {
-            return new RampSegment[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RampSegment[] newArray(int size) {
+                    return new RampSegment[size];
+                }
+            };
     private final int mDuration;
     private final float mEndAmplitude;
     private final float mEndFrequencyHz;
@@ -33,7 +36,12 @@ public final class RampSegment extends VibrationEffectSegment {
         this(in.readFloat(), in.readFloat(), in.readFloat(), in.readFloat(), in.readInt());
     }
 
-    public RampSegment(float startAmplitude, float endAmplitude, float startFrequencyHz, float endFrequencyHz, int duration) {
+    public RampSegment(
+            float startAmplitude,
+            float endAmplitude,
+            float startFrequencyHz,
+            float endFrequencyHz,
+            int duration) {
         this.mStartAmplitude = startAmplitude;
         this.mEndAmplitude = endAmplitude;
         this.mStartFrequencyHz = startFrequencyHz;
@@ -46,7 +54,11 @@ public final class RampSegment extends VibrationEffectSegment {
             return false;
         }
         RampSegment other = (RampSegment) o;
-        return Float.compare(this.mStartAmplitude, other.mStartAmplitude) == 0 && Float.compare(this.mEndAmplitude, other.mEndAmplitude) == 0 && Float.compare(this.mStartFrequencyHz, other.mStartFrequencyHz) == 0 && Float.compare(this.mEndFrequencyHz, other.mEndFrequencyHz) == 0 && this.mDuration == other.mDuration;
+        return Float.compare(this.mStartAmplitude, other.mStartAmplitude) == 0
+                && Float.compare(this.mEndAmplitude, other.mEndAmplitude) == 0
+                && Float.compare(this.mStartFrequencyHz, other.mStartFrequencyHz) == 0
+                && Float.compare(this.mEndFrequencyHz, other.mEndFrequencyHz) == 0
+                && this.mDuration == other.mDuration;
     }
 
     public float getStartAmplitude() {
@@ -72,8 +84,13 @@ public final class RampSegment extends VibrationEffectSegment {
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public boolean areVibrationFeaturesSupported(VibratorInfo vibratorInfo) {
-        boolean areFeaturesSupported = (this.mStartFrequencyHz != this.mEndFrequencyHz || frequencyRequiresFrequencyControl(this.mStartFrequencyHz)) ? true & vibratorInfo.hasFrequencyControl() : true;
-        if (this.mStartAmplitude != this.mEndAmplitude || amplitudeRequiresAmplitudeControl(this.mStartAmplitude)) {
+        boolean areFeaturesSupported =
+                (this.mStartFrequencyHz != this.mEndFrequencyHz
+                                || frequencyRequiresFrequencyControl(this.mStartFrequencyHz))
+                        ? true & vibratorInfo.hasFrequencyControl()
+                        : true;
+        if (this.mStartAmplitude != this.mEndAmplitude
+                || amplitudeRequiresAmplitudeControl(this.mStartAmplitude)) {
             return areFeaturesSupported & vibratorInfo.hasAmplitudeControl();
         }
         return areFeaturesSupported;
@@ -102,20 +119,32 @@ public final class RampSegment extends VibrationEffectSegment {
     public RampSegment scale(float scaleFactor) {
         float newStartAmplitude = VibrationEffect.scale(this.mStartAmplitude, scaleFactor);
         float newEndAmplitude = VibrationEffect.scale(this.mEndAmplitude, scaleFactor);
-        if (Float.compare(this.mStartAmplitude, newStartAmplitude) == 0 && Float.compare(this.mEndAmplitude, newEndAmplitude) == 0) {
+        if (Float.compare(this.mStartAmplitude, newStartAmplitude) == 0
+                && Float.compare(this.mEndAmplitude, newEndAmplitude) == 0) {
             return this;
         }
-        return new RampSegment(newStartAmplitude, newEndAmplitude, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
+        return new RampSegment(
+                newStartAmplitude,
+                newEndAmplitude,
+                this.mStartFrequencyHz,
+                this.mEndFrequencyHz,
+                this.mDuration);
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public RampSegment scaleLinearly(float scaleFactor) {
         float newStartAmplitude = VibrationEffect.scaleLinearly(this.mStartAmplitude, scaleFactor);
         float newEndAmplitude = VibrationEffect.scaleLinearly(this.mEndAmplitude, scaleFactor);
-        if (Float.compare(this.mStartAmplitude, newStartAmplitude) == 0 && Float.compare(this.mEndAmplitude, newEndAmplitude) == 0) {
+        if (Float.compare(this.mStartAmplitude, newStartAmplitude) == 0
+                && Float.compare(this.mEndAmplitude, newEndAmplitude) == 0) {
             return this;
         }
-        return new RampSegment(newStartAmplitude, newEndAmplitude, this.mStartFrequencyHz, this.mEndFrequencyHz, this.mDuration);
+        return new RampSegment(
+                newStartAmplitude,
+                newEndAmplitude,
+                this.mStartFrequencyHz,
+                this.mEndFrequencyHz,
+                this.mDuration);
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
@@ -124,16 +153,41 @@ public final class RampSegment extends VibrationEffectSegment {
     }
 
     public int hashCode() {
-        return Objects.hash(Float.valueOf(this.mStartAmplitude), Float.valueOf(this.mEndAmplitude), Float.valueOf(this.mStartFrequencyHz), Float.valueOf(this.mEndFrequencyHz), Integer.valueOf(this.mDuration));
+        return Objects.hash(
+                Float.valueOf(this.mStartAmplitude),
+                Float.valueOf(this.mEndAmplitude),
+                Float.valueOf(this.mStartFrequencyHz),
+                Float.valueOf(this.mEndFrequencyHz),
+                Integer.valueOf(this.mDuration));
     }
 
     public String toString() {
-        return "Ramp{startAmplitude=" + this.mStartAmplitude + ", endAmplitude=" + this.mEndAmplitude + ", startFrequencyHz=" + this.mStartFrequencyHz + ", endFrequencyHz=" + this.mEndFrequencyHz + ", duration=" + this.mDuration + "}";
+        return "Ramp{startAmplitude="
+                + this.mStartAmplitude
+                + ", endAmplitude="
+                + this.mEndAmplitude
+                + ", startFrequencyHz="
+                + this.mStartFrequencyHz
+                + ", endFrequencyHz="
+                + this.mEndFrequencyHz
+                + ", duration="
+                + this.mDuration
+                + "}";
     }
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public String toDebugString() {
-        return String.format("Ramp=%dms(amplitude=%.2f%s to %.2f%s)", Integer.valueOf(this.mDuration), Float.valueOf(this.mStartAmplitude), Float.compare(this.mStartFrequencyHz, 0.0f) == 0 ? "" : " @ " + this.mStartFrequencyHz + "Hz", Float.valueOf(this.mEndAmplitude), Float.compare(this.mEndFrequencyHz, 0.0f) != 0 ? " @ " + this.mEndFrequencyHz + "Hz" : "");
+        return String.format(
+                "Ramp=%dms(amplitude=%.2f%s to %.2f%s)",
+                Integer.valueOf(this.mDuration),
+                Float.valueOf(this.mStartAmplitude),
+                Float.compare(this.mStartFrequencyHz, 0.0f) == 0
+                        ? ""
+                        : " @ " + this.mStartFrequencyHz + "Hz",
+                Float.valueOf(this.mEndAmplitude),
+                Float.compare(this.mEndFrequencyHz, 0.0f) != 0
+                        ? " @ " + this.mEndFrequencyHz + "Hz"
+                        : "");
     }
 
     @Override // android.os.Parcelable

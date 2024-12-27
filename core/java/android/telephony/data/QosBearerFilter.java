@@ -3,6 +3,7 @@ package android.telephony.data;
 import android.net.LinkAddress;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -11,19 +12,21 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class QosBearerFilter implements Parcelable {
-    public static final Parcelable.Creator<QosBearerFilter> CREATOR = new Parcelable.Creator<QosBearerFilter>() { // from class: android.telephony.data.QosBearerFilter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QosBearerFilter createFromParcel(Parcel source) {
-            return new QosBearerFilter(source);
-        }
+    public static final Parcelable.Creator<QosBearerFilter> CREATOR =
+            new Parcelable.Creator<
+                    QosBearerFilter>() { // from class: android.telephony.data.QosBearerFilter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QosBearerFilter createFromParcel(Parcel source) {
+                    return new QosBearerFilter(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public QosBearerFilter[] newArray(int size) {
-            return new QosBearerFilter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public QosBearerFilter[] newArray(int size) {
+                    return new QosBearerFilter[size];
+                }
+            };
     public static final int QOS_FILTER_DIRECTION_BIDIRECTIONAL = 2;
     public static final int QOS_FILTER_DIRECTION_DOWNLINK = 0;
     public static final int QOS_FILTER_DIRECTION_UPLINK = 1;
@@ -46,14 +49,22 @@ public final class QosBearerFilter implements Parcelable {
     private int typeOfServiceMask;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface QosBearerFilterDirection {
-    }
+    public @interface QosBearerFilterDirection {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface QosProtocol {
-    }
+    public @interface QosProtocol {}
 
-    public QosBearerFilter(List<LinkAddress> localAddresses, List<LinkAddress> remoteAddresses, PortRange localPort, PortRange remotePort, int protocol, int tos, long flowLabel, long spi, int direction, int precedence) {
+    public QosBearerFilter(
+            List<LinkAddress> localAddresses,
+            List<LinkAddress> remoteAddresses,
+            PortRange localPort,
+            PortRange remotePort,
+            int protocol,
+            int tos,
+            long flowLabel,
+            long spi,
+            int direction,
+            int precedence) {
         this.localAddresses = new ArrayList();
         this.localAddresses.addAll(localAddresses);
         this.remoteAddresses = new ArrayList();
@@ -93,19 +104,22 @@ public final class QosBearerFilter implements Parcelable {
     }
 
     public static class PortRange implements Parcelable {
-        public static final Parcelable.Creator<PortRange> CREATOR = new Parcelable.Creator<PortRange>() { // from class: android.telephony.data.QosBearerFilter.PortRange.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PortRange createFromParcel(Parcel source) {
-                return new PortRange(source);
-            }
+        public static final Parcelable.Creator<PortRange> CREATOR =
+                new Parcelable.Creator<
+                        PortRange>() { // from class:
+                                       // android.telephony.data.QosBearerFilter.PortRange.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PortRange createFromParcel(Parcel source) {
+                        return new PortRange(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PortRange[] newArray(int size) {
-                return new PortRange[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PortRange[] newArray(int size) {
+                        return new PortRange[size];
+                    }
+                };
         int end;
         int start;
 
@@ -128,7 +142,11 @@ public final class QosBearerFilter implements Parcelable {
         }
 
         public boolean isValid() {
-            return this.start >= 20 && this.start <= 65535 && this.end >= 20 && this.end <= 65535 && this.start <= this.end;
+            return this.start >= 20
+                    && this.start <= 65535
+                    && this.end >= 20
+                    && this.end <= 65535
+                    && this.start <= this.end;
         }
 
         @Override // android.os.Parcelable
@@ -166,11 +184,41 @@ public final class QosBearerFilter implements Parcelable {
     }
 
     public String toString() {
-        return "QosBearerFilter { localAddresses=" + this.localAddresses + " remoteAddresses=" + this.remoteAddresses + " localPort=" + this.localPort + " remotePort=" + this.remotePort + " protocol=" + this.protocol + " typeOfServiceMask=" + this.typeOfServiceMask + " flowLabel=" + this.flowLabel + " securityParameterIndex=" + this.securityParameterIndex + " filterDirection=" + this.filterDirection + " precedence=" + this.precedence + "}";
+        return "QosBearerFilter { localAddresses="
+                + this.localAddresses
+                + " remoteAddresses="
+                + this.remoteAddresses
+                + " localPort="
+                + this.localPort
+                + " remotePort="
+                + this.remotePort
+                + " protocol="
+                + this.protocol
+                + " typeOfServiceMask="
+                + this.typeOfServiceMask
+                + " flowLabel="
+                + this.flowLabel
+                + " securityParameterIndex="
+                + this.securityParameterIndex
+                + " filterDirection="
+                + this.filterDirection
+                + " precedence="
+                + this.precedence
+                + "}";
     }
 
     public int hashCode() {
-        return Objects.hash(this.localAddresses, this.remoteAddresses, this.localPort, this.remotePort, Integer.valueOf(this.protocol), Integer.valueOf(this.typeOfServiceMask), Long.valueOf(this.flowLabel), Long.valueOf(this.securityParameterIndex), Integer.valueOf(this.filterDirection), Integer.valueOf(this.precedence));
+        return Objects.hash(
+                this.localAddresses,
+                this.remoteAddresses,
+                this.localPort,
+                this.remotePort,
+                Integer.valueOf(this.protocol),
+                Integer.valueOf(this.typeOfServiceMask),
+                Long.valueOf(this.flowLabel),
+                Long.valueOf(this.securityParameterIndex),
+                Integer.valueOf(this.filterDirection),
+                Integer.valueOf(this.precedence));
     }
 
     public boolean equals(Object o) {
@@ -181,7 +229,18 @@ public final class QosBearerFilter implements Parcelable {
             return false;
         }
         QosBearerFilter other = (QosBearerFilter) o;
-        if (this.localAddresses.size() == other.localAddresses.size() && this.localAddresses.containsAll(other.localAddresses) && this.remoteAddresses.size() == other.remoteAddresses.size() && this.remoteAddresses.containsAll(other.remoteAddresses) && Objects.equals(this.localPort, other.localPort) && Objects.equals(this.remotePort, other.remotePort) && this.protocol == other.protocol && this.typeOfServiceMask == other.typeOfServiceMask && this.flowLabel == other.flowLabel && this.securityParameterIndex == other.securityParameterIndex && this.filterDirection == other.filterDirection && this.precedence == other.precedence) {
+        if (this.localAddresses.size() == other.localAddresses.size()
+                && this.localAddresses.containsAll(other.localAddresses)
+                && this.remoteAddresses.size() == other.remoteAddresses.size()
+                && this.remoteAddresses.containsAll(other.remoteAddresses)
+                && Objects.equals(this.localPort, other.localPort)
+                && Objects.equals(this.remotePort, other.remotePort)
+                && this.protocol == other.protocol
+                && this.typeOfServiceMask == other.typeOfServiceMask
+                && this.flowLabel == other.flowLabel
+                && this.securityParameterIndex == other.securityParameterIndex
+                && this.filterDirection == other.filterDirection
+                && this.precedence == other.precedence) {
             return true;
         }
         return false;
@@ -191,9 +250,14 @@ public final class QosBearerFilter implements Parcelable {
         this.localAddresses = new ArrayList();
         source.readList(this.localAddresses, LinkAddress.class.getClassLoader(), LinkAddress.class);
         this.remoteAddresses = new ArrayList();
-        source.readList(this.remoteAddresses, LinkAddress.class.getClassLoader(), LinkAddress.class);
-        this.localPort = (PortRange) source.readParcelable(PortRange.class.getClassLoader(), PortRange.class);
-        this.remotePort = (PortRange) source.readParcelable(PortRange.class.getClassLoader(), PortRange.class);
+        source.readList(
+                this.remoteAddresses, LinkAddress.class.getClassLoader(), LinkAddress.class);
+        this.localPort =
+                (PortRange)
+                        source.readParcelable(PortRange.class.getClassLoader(), PortRange.class);
+        this.remotePort =
+                (PortRange)
+                        source.readParcelable(PortRange.class.getClassLoader(), PortRange.class);
         this.protocol = source.readInt();
         this.typeOfServiceMask = source.readInt();
         this.flowLabel = source.readLong();

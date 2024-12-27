@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.types;
 
 import com.samsung.android.sume.core.Def;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.InvalidParameterException;
@@ -31,8 +32,7 @@ public enum MediaType implements NumericEnum {
     private final int value;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flag {
-    }
+    public @interface Flag {}
 
     @Override // com.samsung.android.sume.core.types.NumericEnum
     public int getValue() {
@@ -85,22 +85,33 @@ public enum MediaType implements NumericEnum {
     }
 
     private static int typeValueOf(MediaType rank, int flag) {
-        Def.require(rank.getValue() <= _MAX_RANK_.getValue(), "1st argument is not depth: " + rank.getValue(), new Object[0]);
+        Def.require(
+                rank.getValue() <= _MAX_RANK_.getValue(),
+                "1st argument is not depth: " + rank.getValue(),
+                new Object[0]);
         return (rank.getValue() & 15) + (flag << 4);
     }
 
     private static MediaType of(final int value) {
-        return (MediaType) Arrays.stream(values()).filter(new Predicate() { // from class: com.samsung.android.sume.core.types.MediaType$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return MediaType.lambda$of$0(value, (MediaType) obj);
-            }
-        }).findFirst().orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.types.MediaType$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return MediaType.lambda$of$1(value);
-            }
-        });
+        return (MediaType)
+                Arrays.stream(values())
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.types.MediaType$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return MediaType.lambda$of$0(value, (MediaType) obj);
+                                    }
+                                })
+                        .findFirst()
+                        .orElseThrow(
+                                new Supplier() { // from class:
+                                                 // com.samsung.android.sume.core.types.MediaType$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        return MediaType.lambda$of$1(value);
+                                    }
+                                });
     }
 
     static /* synthetic */ boolean lambda$of$0(int value, MediaType e) {

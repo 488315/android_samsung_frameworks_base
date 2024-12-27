@@ -3,9 +3,11 @@ package com.samsung.android.media.photoremaster;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
+
 import com.samsung.android.photoremaster.IDirector;
 import com.samsung.android.photoremaster.util.LogUtil;
 import com.samsung.android.photoremasterservice.ClientRemasterDirector;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,22 +41,26 @@ public class SemPhotoRemasterManager {
     public static final int PARAMETER_URI_INPUT = 1001;
     private static final String TAG = "SemPhotoRemasterManager";
     private static IDirector sEngineInstance;
-    private final Map<Integer, IGetParam> mParamGetterType = new HashMap<Integer, IGetParam>() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemasterManager.1
-        {
-            put(1000, new IStringParamGetter(1000));
-            put(1002, new IStringParamGetter(1002));
-            put(1003, new IStringParamGetter(1003));
-            put(2101, new IStringParamGetter(2101));
-            put(2102, new IStringParamGetter(2102));
-            put(2103, new IStringParamGetter(2103));
-            put(2202, new IStringParamGetter(2202));
-            put(2201, new ILongParamGetter(2201));
-            put(1006, new ILongParamGetter(1006));
-            put(1008, new ILongParamGetter(1008));
-            put(1005, new IStringParamGetter(1005));
-            put(2203, new IBitmapParamGetter(2203));
-        }
-    };
+    private final Map<Integer, IGetParam> mParamGetterType =
+            new HashMap<
+                    Integer,
+                    IGetParam>() { // from class:
+                                   // com.samsung.android.media.photoremaster.SemPhotoRemasterManager.1
+                {
+                    put(1000, new IStringParamGetter(1000));
+                    put(1002, new IStringParamGetter(1002));
+                    put(1003, new IStringParamGetter(1003));
+                    put(2101, new IStringParamGetter(2101));
+                    put(2102, new IStringParamGetter(2102));
+                    put(2103, new IStringParamGetter(2103));
+                    put(2202, new IStringParamGetter(2202));
+                    put(2201, new ILongParamGetter(2201));
+                    put(1006, new ILongParamGetter(1006));
+                    put(1008, new ILongParamGetter(1008));
+                    put(1005, new IStringParamGetter(1005));
+                    put(2203, new IBitmapParamGetter(2203));
+                }
+            };
 
     public interface ProgressUpdateListener {
         void onUpdateMetadata(String str);
@@ -62,7 +68,7 @@ public class SemPhotoRemasterManager {
         void onUpdateProgress(double d, int i, int i2);
     }
 
-    private static abstract class IGetParam<T> {
+    private abstract static class IGetParam<T> {
         protected int mID;
 
         abstract T getParam();
@@ -80,7 +86,8 @@ public class SemPhotoRemasterManager {
         /* JADX INFO: Access modifiers changed from: package-private */
         @Override // com.samsung.android.media.photoremaster.SemPhotoRemasterManager.IGetParam
         public String getParam() {
-            return Long.toString(SemPhotoRemasterManager.getEngineInstance().getLongParam(this.mID));
+            return Long.toString(
+                    SemPhotoRemasterManager.getEngineInstance().getLongParam(this.mID));
         }
     }
 
@@ -168,7 +175,9 @@ public class SemPhotoRemasterManager {
         } else if (value instanceof Bitmap) {
             setParameter(id, (Bitmap) value);
         } else {
-            LogUtil.e(TAG, "Failed to setParameter, value not of 'Uri' type or bitmap type: " + value);
+            LogUtil.e(
+                    TAG,
+                    "Failed to setParameter, value not of 'Uri' type or bitmap type: " + value);
         }
     }
 
@@ -217,23 +226,31 @@ public class SemPhotoRemasterManager {
         if (listener == null) {
             getEngineInstance().setProgressUpdateListener(null);
         } else {
-            getEngineInstance().setProgressUpdateListener(new IDirector.ProgressUpdateListener() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemasterManager.2
-                private final ProgressUpdateListener mListener;
+            getEngineInstance()
+                    .setProgressUpdateListener(
+                            new IDirector
+                                    .ProgressUpdateListener() { // from class:
+                                                                // com.samsung.android.media.photoremaster.SemPhotoRemasterManager.2
+                                private final ProgressUpdateListener mListener;
 
-                {
-                    this.mListener = listener;
-                }
+                                {
+                                    this.mListener = listener;
+                                }
 
-                @Override // com.samsung.android.photoremaster.IDirector.ProgressUpdateListener
-                public void onUpdateProgress(double percent, int currentImageIndex, int totalImageCount) {
-                    this.mListener.onUpdateProgress(percent, currentImageIndex, totalImageCount);
-                }
+                                @Override // com.samsung.android.photoremaster.IDirector.ProgressUpdateListener
+                                public void onUpdateProgress(
+                                        double percent,
+                                        int currentImageIndex,
+                                        int totalImageCount) {
+                                    this.mListener.onUpdateProgress(
+                                            percent, currentImageIndex, totalImageCount);
+                                }
 
-                @Override // com.samsung.android.photoremaster.IDirector.ProgressUpdateListener
-                public void onUpdateMetadata(String metadata) {
-                    this.mListener.onUpdateMetadata(metadata);
-                }
-            });
+                                @Override // com.samsung.android.photoremaster.IDirector.ProgressUpdateListener
+                                public void onUpdateMetadata(String metadata) {
+                                    this.mListener.onUpdateMetadata(metadata);
+                                }
+                            });
         }
     }
 

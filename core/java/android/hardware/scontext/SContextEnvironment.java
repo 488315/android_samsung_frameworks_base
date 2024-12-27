@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextEnvironment extends SContextEventContext {
-    public static final Parcelable.Creator<SContextEnvironment> CREATOR = new Parcelable.Creator<SContextEnvironment>() { // from class: android.hardware.scontext.SContextEnvironment.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextEnvironment createFromParcel(Parcel in) {
-            return new SContextEnvironment(in);
-        }
+    public static final Parcelable.Creator<SContextEnvironment> CREATOR =
+            new Parcelable.Creator<SContextEnvironment>() { // from class:
+                // android.hardware.scontext.SContextEnvironment.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextEnvironment createFromParcel(Parcel in) {
+                    return new SContextEnvironment(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextEnvironment[] newArray(int size) {
-            return new SContextEnvironment[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextEnvironment[] newArray(int size) {
+                    return new SContextEnvironment[size];
+                }
+            };
     private Bundle mContext;
 
     SContextEnvironment() {
@@ -51,7 +53,8 @@ public class SContextEnvironment extends SContextEventContext {
         return null;
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

@@ -11,8 +11,7 @@ public interface MicrophoneDirection {
     public static final int MIC_DIRECTION_UNSPECIFIED = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DirectionMode {
-    }
+    public @interface DirectionMode {}
 
     boolean setPreferredMicrophoneDirection(int i);
 

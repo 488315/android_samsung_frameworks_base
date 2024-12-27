@@ -43,24 +43,21 @@ public interface IQSService extends IInterface {
         }
 
         @Override // android.service.quicksettings.IQSService
-        public void updateQsTile(Tile tile, IBinder service) throws RemoteException {
-        }
+        public void updateQsTile(Tile tile, IBinder service) throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
-        public void updateStatusIcon(IBinder tile, Icon icon, String contentDescription) throws RemoteException {
-        }
+        public void updateStatusIcon(IBinder tile, Icon icon, String contentDescription)
+                throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
-        public void onShowDialog(IBinder tile) throws RemoteException {
-        }
+        public void onShowDialog(IBinder tile) throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
-        public void onStartActivity(IBinder tile) throws RemoteException {
-        }
+        public void onStartActivity(IBinder tile) throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
-        public void startActivity(IBinder tile, PendingIntent pendingIntent) throws RemoteException {
-        }
+        public void startActivity(IBinder tile, PendingIntent pendingIntent)
+                throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
         public boolean isLocked() throws RemoteException {
@@ -73,24 +70,20 @@ public interface IQSService extends IInterface {
         }
 
         @Override // android.service.quicksettings.IQSService
-        public void startUnlockAndRun(IBinder tile) throws RemoteException {
-        }
+        public void startUnlockAndRun(IBinder tile) throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
-        public void onDialogHidden(IBinder tile) throws RemoteException {
-        }
+        public void onDialogHidden(IBinder tile) throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
-        public void onStartSuccessful(IBinder tile) throws RemoteException {
-        }
+        public void onStartSuccessful(IBinder tile) throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
-        public void semUpdateDetailView(IBinder tile) throws RemoteException {
-        }
+        public void semUpdateDetailView(IBinder tile) throws RemoteException {}
 
         @Override // android.service.quicksettings.IQSService
-        public void semFireToggleStateChanged(IBinder tile, boolean state, boolean enabled) throws RemoteException {
-        }
+        public void semFireToggleStateChanged(IBinder tile, boolean state, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -98,7 +91,7 @@ public interface IQSService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IQSService {
+    public abstract static class Stub extends Binder implements IQSService {
         public static final String DESCRIPTOR = "android.service.quicksettings.IQSService";
         static final int TRANSACTION_getTile = 1;
         static final int TRANSACTION_isLocked = 7;
@@ -173,7 +166,8 @@ public interface IQSService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -218,7 +212,8 @@ public interface IQSService extends IInterface {
                     return true;
                 case 6:
                     IBinder _arg06 = data.readStrongBinder();
-                    PendingIntent _arg13 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg13 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     startActivity(_arg06, _arg13);
                     reply.writeNoException();
@@ -320,7 +315,8 @@ public interface IQSService extends IInterface {
             }
 
             @Override // android.service.quicksettings.IQSService
-            public void updateStatusIcon(IBinder tile, Icon icon, String contentDescription) throws RemoteException {
+            public void updateStatusIcon(IBinder tile, Icon icon, String contentDescription)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -367,7 +363,8 @@ public interface IQSService extends IInterface {
             }
 
             @Override // android.service.quicksettings.IQSService
-            public void startActivity(IBinder tile, PendingIntent pendingIntent) throws RemoteException {
+            public void startActivity(IBinder tile, PendingIntent pendingIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -475,7 +472,8 @@ public interface IQSService extends IInterface {
             }
 
             @Override // android.service.quicksettings.IQSService
-            public void semFireToggleStateChanged(IBinder tile, boolean state, boolean enabled) throws RemoteException {
+            public void semFireToggleStateChanged(IBinder tile, boolean state, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

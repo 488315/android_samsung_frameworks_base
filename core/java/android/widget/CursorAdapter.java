@@ -9,13 +9,12 @@ import android.os.Handler;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorFilter;
 
 /* loaded from: classes4.dex */
-public abstract class CursorAdapter extends BaseAdapter implements Filterable, CursorFilter.CursorFilterClient, ThemedSpinnerAdapter {
+public abstract class CursorAdapter extends BaseAdapter
+        implements Filterable, CursorFilter.CursorFilterClient, ThemedSpinnerAdapter {
 
-    @Deprecated
-    public static final int FLAG_AUTO_REQUERY = 1;
+    @Deprecated public static final int FLAG_AUTO_REQUERY = 1;
     public static final int FLAG_REGISTER_CONTENT_OBSERVER = 2;
     protected boolean mAutoRequery;
     protected ChangeObserver mChangeObserver;
@@ -264,8 +263,7 @@ public abstract class CursorAdapter extends BaseAdapter implements Filterable, C
     }
 
     private class MyDataSetObserver extends DataSetObserver {
-        private MyDataSetObserver() {
-        }
+        private MyDataSetObserver() {}
 
         @Override // android.database.DataSetObserver
         public void onChanged() {

@@ -3,27 +3,30 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SetupDataCallResult implements Parcelable {
-    public static final Parcelable.Creator<SetupDataCallResult> CREATOR = new Parcelable.Creator<SetupDataCallResult>() { // from class: android.hardware.radio.data.SetupDataCallResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SetupDataCallResult createFromParcel(Parcel _aidl_source) {
-            SetupDataCallResult _aidl_out = new SetupDataCallResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SetupDataCallResult> CREATOR =
+            new Parcelable.Creator<SetupDataCallResult>() { // from class:
+                // android.hardware.radio.data.SetupDataCallResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SetupDataCallResult createFromParcel(Parcel _aidl_source) {
+                    SetupDataCallResult _aidl_out = new SetupDataCallResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SetupDataCallResult[] newArray(int _aidl_size) {
-            return new SetupDataCallResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SetupDataCallResult[] newArray(int _aidl_size) {
+                    return new SetupDataCallResult[_aidl_size];
+                }
+            };
     public static final int DATA_CONNECTION_STATUS_ACTIVE = 2;
     public static final int DATA_CONNECTION_STATUS_DORMANT = 1;
     public static final int DATA_CONNECTION_STATUS_INACTIVE = 0;
@@ -232,7 +235,9 @@ public class SetupDataCallResult implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.trafficDescriptors = (TrafficDescriptor[]) _aidl_parcel.createTypedArray(TrafficDescriptor.CREATOR);
+                this.trafficDescriptors =
+                        (TrafficDescriptor[])
+                                _aidl_parcel.createTypedArray(TrafficDescriptor.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -273,7 +278,11 @@ public class SetupDataCallResult implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.addresses);
-        return _mask | describeContents(this.defaultQos) | describeContents(this.qosSessions) | describeContents(this.sliceInfo) | describeContents(this.trafficDescriptors);
+        return _mask
+                | describeContents(this.defaultQos)
+                | describeContents(this.qosSessions)
+                | describeContents(this.sliceInfo)
+                | describeContents(this.trafficDescriptors);
     }
 
     private int describeContents(Object _v) {

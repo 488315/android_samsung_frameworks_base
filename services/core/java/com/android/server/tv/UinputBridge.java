@@ -2,7 +2,9 @@ package com.android.server.tv;
 
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.IBinder;
+
 import dalvik.system.CloseGuard;
+
 import java.io.IOException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -35,7 +37,9 @@ public final class UinputBridge {
         long nativeOpen = nativeOpen(str, iBinder.toString(), i, i2, i3);
         this.mPtr = nativeOpen;
         if (nativeOpen == 0) {
-            throw new IOException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Could not open uinput device ", str));
+            throw new IOException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "Could not open uinput device ", str));
         }
         this.mToken = iBinder;
         closeGuard.open("close");
@@ -69,7 +73,9 @@ public final class UinputBridge {
         if (nativeGamepadOpen != 0) {
             return new UinputBridge(iBinder, nativeGamepadOpen);
         }
-        throw new IOException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Could not open uinput device ", str));
+        throw new IOException(
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                        "Could not open uinput device ", str));
     }
 
     public final void clear(IBinder iBinder) {

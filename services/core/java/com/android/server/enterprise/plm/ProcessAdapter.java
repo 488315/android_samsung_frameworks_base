@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.plm.impl.BindServiceImpl;
 
@@ -35,7 +36,7 @@ public final class ProcessAdapter extends Handler {
             DEATH = tryReason4;
             TryReason tryReason5 = new TryReason("UPDATE", 4);
             UPDATE = tryReason5;
-            $VALUES = new TryReason[]{tryReason, tryReason2, tryReason3, tryReason4, tryReason5};
+            $VALUES = new TryReason[] {tryReason, tryReason2, tryReason3, tryReason4, tryReason5};
         }
 
         public static TryReason valueOf(String str) {
@@ -54,7 +55,8 @@ public final class ProcessAdapter extends Handler {
 
     @Override // android.os.Handler
     public final void handleMessage(Message message) {
-        GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("handleMessage : "), message.what, "ProcessAdapter");
+        GestureWakeup$$ExternalSyntheticOutline0.m(
+                new StringBuilder("handleMessage : "), message.what, "ProcessAdapter");
         try {
             int i = message.what;
             if (i == 1) {
@@ -77,14 +79,14 @@ public final class ProcessAdapter extends Handler {
 
     /* JADX WARN: Can't wrap try/catch for region: R(11:60|(1:62)(1:91)|(2:64|(8:66|67|68|69|(1:71)(1:86)|(1:75)|76|(1:78)))|90|67|68|69|(0)(0)|(2:73|75)|76|(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:88:0x0152, code lost:
-    
-        r11 = move-exception;
-     */
+
+       r11 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:89:0x0153, code lost:
-    
-        android.util.Log.e("Utils", r11.toString());
-        r14 = 0;
-     */
+
+       android.util.Log.e("Utils", r11.toString());
+       r14 = 0;
+    */
     /* JADX WARN: Removed duplicated region for block: B:28:0x00c6  */
     /* JADX WARN: Removed duplicated region for block: B:56:0x0121  */
     /* JADX WARN: Removed duplicated region for block: B:71:0x015d  */
@@ -99,6 +101,8 @@ public final class ProcessAdapter extends Handler {
             Method dump skipped, instructions count: 448
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.plm.ProcessAdapter.tryKeepAlive(com.android.server.enterprise.plm.ProcessAdapter$TryReason):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.plm.ProcessAdapter.tryKeepAlive(com.android.server.enterprise.plm.ProcessAdapter$TryReason):void");
     }
 }

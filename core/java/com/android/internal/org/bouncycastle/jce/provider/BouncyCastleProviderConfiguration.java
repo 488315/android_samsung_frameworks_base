@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.config.ProviderConf
 import com.android.internal.org.bouncycastle.jcajce.provider.config.ProviderConfigurationPermission;
 import com.android.internal.org.bouncycastle.jcajce.spec.DHDomainParameterSpec;
 import com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec;
+
 import java.security.Permission;
 import java.security.spec.DSAParameterSpec;
 import java.util.Collections;
@@ -16,25 +17,40 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 import javax.crypto.spec.DHParameterSpec;
 
 /* loaded from: classes5.dex */
 class BouncyCastleProviderConfiguration implements ProviderConfiguration {
     private volatile Object dhDefaultParams;
     private volatile ECParameterSpec ecImplicitCaParams;
-    private static Permission BC_EC_LOCAL_PERMISSION = new ProviderConfigurationPermission(BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.THREAD_LOCAL_EC_IMPLICITLY_CA);
-    private static Permission BC_EC_PERMISSION = new ProviderConfigurationPermission(BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.EC_IMPLICITLY_CA);
-    private static Permission BC_DH_LOCAL_PERMISSION = new ProviderConfigurationPermission(BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.THREAD_LOCAL_DH_DEFAULT_PARAMS);
-    private static Permission BC_DH_PERMISSION = new ProviderConfigurationPermission(BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.DH_DEFAULT_PARAMS);
-    private static Permission BC_EC_CURVE_PERMISSION = new ProviderConfigurationPermission(BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.ACCEPTABLE_EC_CURVES);
-    private static Permission BC_ADDITIONAL_EC_CURVE_PERMISSION = new ProviderConfigurationPermission(BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.ADDITIONAL_EC_PARAMETERS);
+    private static Permission BC_EC_LOCAL_PERMISSION =
+            new ProviderConfigurationPermission(
+                    BouncyCastleProvider.PROVIDER_NAME,
+                    ConfigurableProvider.THREAD_LOCAL_EC_IMPLICITLY_CA);
+    private static Permission BC_EC_PERMISSION =
+            new ProviderConfigurationPermission(
+                    BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.EC_IMPLICITLY_CA);
+    private static Permission BC_DH_LOCAL_PERMISSION =
+            new ProviderConfigurationPermission(
+                    BouncyCastleProvider.PROVIDER_NAME,
+                    ConfigurableProvider.THREAD_LOCAL_DH_DEFAULT_PARAMS);
+    private static Permission BC_DH_PERMISSION =
+            new ProviderConfigurationPermission(
+                    BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.DH_DEFAULT_PARAMS);
+    private static Permission BC_EC_CURVE_PERMISSION =
+            new ProviderConfigurationPermission(
+                    BouncyCastleProvider.PROVIDER_NAME, ConfigurableProvider.ACCEPTABLE_EC_CURVES);
+    private static Permission BC_ADDITIONAL_EC_CURVE_PERMISSION =
+            new ProviderConfigurationPermission(
+                    BouncyCastleProvider.PROVIDER_NAME,
+                    ConfigurableProvider.ADDITIONAL_EC_PARAMETERS);
     private ThreadLocal ecThreadSpec = new ThreadLocal();
     private ThreadLocal dhThreadSpec = new ThreadLocal();
     private volatile Set acceptableNamedCurves = new HashSet();
     private volatile Map additionalECParameters = new HashMap();
 
-    BouncyCastleProviderConfiguration() {
-    }
+    BouncyCastleProviderConfiguration() {}
 
     void setParameter(String parameterName, Object parameter) {
         ECParameterSpec curveSpec;
@@ -64,7 +80,8 @@ class BouncyCastleProviderConfiguration implements ProviderConfiguration {
                 this.ecImplicitCaParams = (ECParameterSpec) parameter;
                 return;
             } else {
-                this.ecImplicitCaParams = EC5Util.convertSpec((java.security.spec.ECParameterSpec) parameter);
+                this.ecImplicitCaParams =
+                        EC5Util.convertSpec((java.security.spec.ECParameterSpec) parameter);
                 return;
             }
         }
@@ -72,7 +89,9 @@ class BouncyCastleProviderConfiguration implements ProviderConfiguration {
             if (securityManager != null) {
                 securityManager.checkPermission(BC_DH_LOCAL_PERMISSION);
             }
-            if (!(parameter instanceof DHParameterSpec) && !(parameter instanceof DHParameterSpec[]) && parameter != null) {
+            if (!(parameter instanceof DHParameterSpec)
+                    && !(parameter instanceof DHParameterSpec[])
+                    && parameter != null) {
                 throw new IllegalArgumentException("not a valid DHParameterSpec");
             }
             if (parameter != null) {
@@ -87,7 +106,9 @@ class BouncyCastleProviderConfiguration implements ProviderConfiguration {
             if (securityManager != null) {
                 securityManager.checkPermission(BC_DH_PERMISSION);
             }
-            if ((parameter instanceof DHParameterSpec) || (parameter instanceof DHParameterSpec[]) || parameter == null) {
+            if ((parameter instanceof DHParameterSpec)
+                    || (parameter instanceof DHParameterSpec[])
+                    || parameter == null) {
                 this.dhDefaultParams = parameter;
                 return;
             }
@@ -134,7 +155,10 @@ class BouncyCastleProviderConfiguration implements ProviderConfiguration {
                 }
             }
         }
-        DHParameters dhParams = (DHParameters) CryptoServicesRegistrar.getSizedProperty(CryptoServicesRegistrar.Property.DH_DEFAULT_PARAMS, keySize);
+        DHParameters dhParams =
+                (DHParameters)
+                        CryptoServicesRegistrar.getSizedProperty(
+                                CryptoServicesRegistrar.Property.DH_DEFAULT_PARAMS, keySize);
         if (dhParams != null) {
             return new DHDomainParameterSpec(dhParams);
         }
@@ -143,7 +167,10 @@ class BouncyCastleProviderConfiguration implements ProviderConfiguration {
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.config.ProviderConfiguration
     public DSAParameterSpec getDSADefaultParameters(int keySize) {
-        DSAParameters dsaParams = (DSAParameters) CryptoServicesRegistrar.getSizedProperty(CryptoServicesRegistrar.Property.DSA_DEFAULT_PARAMS, keySize);
+        DSAParameters dsaParams =
+                (DSAParameters)
+                        CryptoServicesRegistrar.getSizedProperty(
+                                CryptoServicesRegistrar.Property.DSA_DEFAULT_PARAMS, keySize);
         if (dsaParams != null) {
             return new DSAParameterSpec(dsaParams.getP(), dsaParams.getQ(), dsaParams.getG());
         }

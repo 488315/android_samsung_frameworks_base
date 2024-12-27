@@ -3,17 +3,21 @@ package com.android.server.location.gnss.hal;
 import android.location.GnssMeasurementsEvent;
 import android.location.GnssNavigationMessage;
 import android.location.Location;
+
 import com.android.internal.util.FunctionalUtils;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class GnssNative$$ExternalSyntheticLambda10 implements FunctionalUtils.ThrowingRunnable {
+public final /* synthetic */ class GnssNative$$ExternalSyntheticLambda10
+        implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ GnssNative f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ GnssNative$$ExternalSyntheticLambda10(GnssNative gnssNative, Object obj, int i) {
+    public /* synthetic */ GnssNative$$ExternalSyntheticLambda10(
+            GnssNative gnssNative, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = gnssNative;
         this.f$1 = obj;

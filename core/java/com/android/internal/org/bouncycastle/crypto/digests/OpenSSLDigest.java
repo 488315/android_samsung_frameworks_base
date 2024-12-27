@@ -1,7 +1,9 @@
 package com.android.internal.org.bouncycastle.crypto.digests;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.crypto.ExtendedDigest;
+
 import java.security.DigestException;
 import java.security.MessageDigest;
 

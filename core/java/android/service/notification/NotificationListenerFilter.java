@@ -7,19 +7,22 @@ import android.util.ArraySet;
 
 /* loaded from: classes3.dex */
 public class NotificationListenerFilter implements Parcelable {
-    public static final Parcelable.Creator<NotificationListenerFilter> CREATOR = new Parcelable.Creator<NotificationListenerFilter>() { // from class: android.service.notification.NotificationListenerFilter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationListenerFilter createFromParcel(Parcel in) {
-            return new NotificationListenerFilter(in);
-        }
+    public static final Parcelable.Creator<NotificationListenerFilter> CREATOR =
+            new Parcelable.Creator<
+                    NotificationListenerFilter>() { // from class:
+                                                    // android.service.notification.NotificationListenerFilter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationListenerFilter createFromParcel(Parcel in) {
+                    return new NotificationListenerFilter(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationListenerFilter[] newArray(int size) {
-            return new NotificationListenerFilter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationListenerFilter[] newArray(int size) {
+                    return new NotificationListenerFilter[size];
+                }
+            };
     private static final int DEFAULT_TYPES = 15;
     private int mAllowedNotificationTypes;
     private ArraySet<VersionedPackage> mDisallowedPackages;

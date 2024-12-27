@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IContextualSearchCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.app.contextualsearch.IContextualSearchCallback";
+    public static final String DESCRIPTOR =
+            "android.app.contextualsearch.IContextualSearchCallback";
 
     void onError(ParcelableException parcelableException) throws RemoteException;
 
@@ -17,12 +18,10 @@ public interface IContextualSearchCallback extends IInterface {
 
     public static class Default implements IContextualSearchCallback {
         @Override // android.app.contextualsearch.IContextualSearchCallback
-        public void onResult(ContextualSearchState state) throws RemoteException {
-        }
+        public void onResult(ContextualSearchState state) throws RemoteException {}
 
         @Override // android.app.contextualsearch.IContextualSearchCallback
-        public void onError(ParcelableException error) throws RemoteException {
-        }
+        public void onError(ParcelableException error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IContextualSearchCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContextualSearchCallback {
+    public abstract static class Stub extends Binder implements IContextualSearchCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onResult = 1;
 
@@ -71,7 +70,8 @@ public interface IContextualSearchCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContextualSearchCallback.DESCRIPTOR);
             }
@@ -81,12 +81,15 @@ public interface IContextualSearchCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ContextualSearchState _arg0 = (ContextualSearchState) data.readTypedObject(ContextualSearchState.CREATOR);
+                    ContextualSearchState _arg0 =
+                            (ContextualSearchState)
+                                    data.readTypedObject(ContextualSearchState.CREATOR);
                     data.enforceNoDataAvail();
                     onResult(_arg0);
                     return true;
                 case 2:
-                    ParcelableException _arg02 = (ParcelableException) data.readTypedObject(ParcelableException.CREATOR);
+                    ParcelableException _arg02 =
+                            (ParcelableException) data.readTypedObject(ParcelableException.CREATOR);
                     data.enforceNoDataAvail();
                     onError(_arg02);
                     return true;

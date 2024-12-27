@@ -1,8 +1,5 @@
 package android.graphics;
 
-import android.graphics.ColorSpace;
-import android.graphics.Shader;
-
 /* loaded from: classes.dex */
 public class LinearGradient extends Shader {
     private int mColor0;
@@ -16,17 +13,56 @@ public class LinearGradient extends Shader {
     private float mY0;
     private float mY1;
 
-    private native long nativeCreate(long j, float f, float f2, float f3, float f4, long[] jArr, float[] fArr, int i, long j2);
+    private native long nativeCreate(
+            long j,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            long[] jArr,
+            float[] fArr,
+            int i,
+            long j2);
 
-    public LinearGradient(float x0, float y0, float x1, float y1, int[] colors, float[] positions, Shader.TileMode tile) {
-        this(x0, y0, x1, y1, convertColors(colors), positions, tile, ColorSpace.get(ColorSpace.Named.SRGB));
+    public LinearGradient(
+            float x0,
+            float y0,
+            float x1,
+            float y1,
+            int[] colors,
+            float[] positions,
+            Shader.TileMode tile) {
+        this(
+                x0,
+                y0,
+                x1,
+                y1,
+                convertColors(colors),
+                positions,
+                tile,
+                ColorSpace.get(ColorSpace.Named.SRGB));
     }
 
-    public LinearGradient(float x0, float y0, float x1, float y1, long[] colors, float[] positions, Shader.TileMode tile) {
+    public LinearGradient(
+            float x0,
+            float y0,
+            float x1,
+            float y1,
+            long[] colors,
+            float[] positions,
+            Shader.TileMode tile) {
         this(x0, y0, x1, y1, (long[]) colors.clone(), positions, tile, detectColorSpace(colors));
     }
 
-    private LinearGradient(float x0, float y0, float x1, float y1, long[] colors, float[] positions, Shader.TileMode tile, ColorSpace colorSpace) {
+    private LinearGradient(
+            float x0,
+            float y0,
+            float x1,
+            float y1,
+            long[] colors,
+            float[] positions,
+            Shader.TileMode tile,
+            ColorSpace colorSpace) {
         super(colorSpace);
         if (positions != null && colors.length != positions.length) {
             throw new IllegalArgumentException("color and position arrays must be of equal length");
@@ -40,16 +76,33 @@ public class LinearGradient extends Shader {
         this.mTileMode = tile;
     }
 
-    public LinearGradient(float x0, float y0, float x1, float y1, int color0, int color1, Shader.TileMode tile) {
+    public LinearGradient(
+            float x0, float y0, float x1, float y1, int color0, int color1, Shader.TileMode tile) {
         this(x0, y0, x1, y1, Color.pack(color0), Color.pack(color1), tile);
     }
 
-    public LinearGradient(float x0, float y0, float x1, float y1, long color0, long color1, Shader.TileMode tile) {
-        this(x0, y0, x1, y1, new long[]{color0, color1}, (float[]) null, tile);
+    public LinearGradient(
+            float x0,
+            float y0,
+            float x1,
+            float y1,
+            long color0,
+            long color1,
+            Shader.TileMode tile) {
+        this(x0, y0, x1, y1, new long[] {color0, color1}, (float[]) null, tile);
     }
 
     @Override // android.graphics.Shader
     protected long createNativeInstance(long nativeMatrix, boolean filterFromPaint) {
-        return nativeCreate(nativeMatrix, this.mX0, this.mY0, this.mX1, this.mY1, this.mColorLongs, this.mPositions, this.mTileMode.nativeInt, colorSpace().getNativeInstance());
+        return nativeCreate(
+                nativeMatrix,
+                this.mX0,
+                this.mY0,
+                this.mX1,
+                this.mY1,
+                this.mColorLongs,
+                this.mPositions,
+                this.mTileMode.nativeInt,
+                colorSpace().getNativeInstance());
     }
 }

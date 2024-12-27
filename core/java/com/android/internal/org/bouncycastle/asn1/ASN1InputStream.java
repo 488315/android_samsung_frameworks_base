@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.io.Streams;
+
 import java.io.ByteArrayInputStream;
 import java.io.EOFException;
 import java.io.FilterInputStream;
@@ -73,7 +74,9 @@ public class ASN1InputStream extends FilterInputStream implements BERTags {
                         if (asn1Obj instanceof ASN1OctetString) {
                             strings[i] = (ASN1OctetString) asn1Obj;
                         } else {
-                            throw new ASN1Exception("unknown object encountered in constructed OCTET STRING: " + asn1Obj.getClass());
+                            throw new ASN1Exception(
+                                    "unknown object encountered in constructed OCTET STRING: "
+                                            + asn1Obj.getClass());
                         }
                     }
                     return new BEROctetString(strings);
@@ -197,13 +200,18 @@ public class ASN1InputStream extends FilterInputStream implements BERTags {
                 throw new IOException("corrupted stream - negative length found");
             }
             if (length >= limit && !isParsing) {
-                throw new IOException("corrupted stream - out of bounds length found: " + length + " >= " + limit);
+                throw new IOException(
+                        "corrupted stream - out of bounds length found: "
+                                + length
+                                + " >= "
+                                + limit);
             }
         }
         return length;
     }
 
-    private static byte[] getBuffer(DefiniteLengthInputStream defIn, byte[][] tmpBuffers) throws IOException {
+    private static byte[] getBuffer(DefiniteLengthInputStream defIn, byte[][] tmpBuffers)
+            throws IOException {
         int len = defIn.getRemaining();
         if (len >= tmpBuffers.length) {
             return defIn.toByteArray();
@@ -265,7 +273,8 @@ public class ASN1InputStream extends FilterInputStream implements BERTags {
         return string;
     }
 
-    static ASN1Primitive createPrimitiveDERObject(int tagNo, DefiniteLengthInputStream defIn, byte[][] tmpBuffers) throws IOException {
+    static ASN1Primitive createPrimitiveDERObject(
+            int tagNo, DefiniteLengthInputStream defIn, byte[][] tmpBuffers) throws IOException {
         switch (tagNo) {
             case 1:
                 return ASN1Boolean.fromOctetString(getBuffer(defIn, tmpBuffers));

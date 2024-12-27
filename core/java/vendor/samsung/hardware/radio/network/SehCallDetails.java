@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehCallDetails implements Parcelable {
-    public static final Parcelable.Creator<SehCallDetails> CREATOR = new Parcelable.Creator<SehCallDetails>() { // from class: vendor.samsung.hardware.radio.network.SehCallDetails.1
-        @Override // android.os.Parcelable.Creator
-        public SehCallDetails createFromParcel(Parcel _aidl_source) {
-            SehCallDetails _aidl_out = new SehCallDetails();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehCallDetails> CREATOR =
+            new Parcelable.Creator<
+                    SehCallDetails>() { // from class:
+                                        // vendor.samsung.hardware.radio.network.SehCallDetails.1
+                @Override // android.os.Parcelable.Creator
+                public SehCallDetails createFromParcel(Parcel _aidl_source) {
+                    SehCallDetails _aidl_out = new SehCallDetails();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehCallDetails[] newArray(int _aidl_size) {
-            return new SehCallDetails[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehCallDetails[] newArray(int _aidl_size) {
+                    return new SehCallDetails[_aidl_size];
+                }
+            };
     public int callType;
     public String[] extras;
 

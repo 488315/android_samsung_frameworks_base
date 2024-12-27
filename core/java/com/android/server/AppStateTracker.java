@@ -8,7 +8,8 @@ public interface AppStateTracker {
         void updateBackgroundRestrictedForUidPackage(int i, String str, boolean z);
     }
 
-    void addBackgroundRestrictedAppListener(BackgroundRestrictedAppListener backgroundRestrictedAppListener);
+    void addBackgroundRestrictedAppListener(
+            BackgroundRestrictedAppListener backgroundRestrictedAppListener);
 
     boolean isAppBackgroundRestricted(int i, String str);
 }

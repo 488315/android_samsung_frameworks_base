@@ -17,7 +17,12 @@ public class AccountAuthenticatorActivity extends Activity {
     @Override // android.app.Activity
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        this.mAccountAuthenticatorResponse = (AccountAuthenticatorResponse) getIntent().getParcelableExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, AccountAuthenticatorResponse.class);
+        this.mAccountAuthenticatorResponse =
+                (AccountAuthenticatorResponse)
+                        getIntent()
+                                .getParcelableExtra(
+                                        AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,
+                                        AccountAuthenticatorResponse.class);
         if (this.mAccountAuthenticatorResponse != null) {
             this.mAccountAuthenticatorResponse.onRequestContinued();
         }
@@ -29,7 +34,8 @@ public class AccountAuthenticatorActivity extends Activity {
             if (this.mResultBundle != null) {
                 this.mAccountAuthenticatorResponse.onResult(this.mResultBundle);
             } else {
-                this.mAccountAuthenticatorResponse.onError(4, CompanionDeviceManager.REASON_CANCELED);
+                this.mAccountAuthenticatorResponse.onError(
+                        4, CompanionDeviceManager.REASON_CANCELED);
             }
             this.mAccountAuthenticatorResponse = null;
         }

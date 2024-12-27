@@ -2,13 +2,16 @@ package android.os.epic;
 
 import android.os.ServiceManager;
 import android.util.Log;
+
 import java.lang.reflect.Method;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public class ObjectFactory {
-    private static final String EPIC_AIDL_CLASS = "vendor.samsung_slsi.hardware.epic.IEpicRequest/default";
-    private static final String EPIC_HIDL_CLASS = "vendor.samsung_slsi.hardware.epic.V1_0.IEpicRequest";
+    private static final String EPIC_AIDL_CLASS =
+            "vendor.samsung_slsi.hardware.epic.IEpicRequest/default";
+    private static final String EPIC_HIDL_CLASS =
+            "vendor.samsung_slsi.hardware.epic.V1_0.IEpicRequest";
     private static boolean m_has_load;
     private static Method m_hidl_epic_getService_func;
     private static Class m_hidl_epic_request_cls;

@@ -10,18 +10,23 @@ import android.os.RemoteException;
 public interface IAudioDeviceVolumeDispatcher extends IInterface {
     public static final String DESCRIPTOR = "android.media.IAudioDeviceVolumeDispatcher";
 
-    void dispatchDeviceVolumeAdjusted(AudioDeviceAttributes audioDeviceAttributes, VolumeInfo volumeInfo, int i, int i2) throws RemoteException;
+    void dispatchDeviceVolumeAdjusted(
+            AudioDeviceAttributes audioDeviceAttributes, VolumeInfo volumeInfo, int i, int i2)
+            throws RemoteException;
 
-    void dispatchDeviceVolumeChanged(AudioDeviceAttributes audioDeviceAttributes, VolumeInfo volumeInfo) throws RemoteException;
+    void dispatchDeviceVolumeChanged(
+            AudioDeviceAttributes audioDeviceAttributes, VolumeInfo volumeInfo)
+            throws RemoteException;
 
     public static class Default implements IAudioDeviceVolumeDispatcher {
         @Override // android.media.IAudioDeviceVolumeDispatcher
-        public void dispatchDeviceVolumeChanged(AudioDeviceAttributes device, VolumeInfo vol) throws RemoteException {
-        }
+        public void dispatchDeviceVolumeChanged(AudioDeviceAttributes device, VolumeInfo vol)
+                throws RemoteException {}
 
         @Override // android.media.IAudioDeviceVolumeDispatcher
-        public void dispatchDeviceVolumeAdjusted(AudioDeviceAttributes device, VolumeInfo vol, int direction, int mode) throws RemoteException {
-        }
+        public void dispatchDeviceVolumeAdjusted(
+                AudioDeviceAttributes device, VolumeInfo vol, int direction, int mode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +34,7 @@ public interface IAudioDeviceVolumeDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioDeviceVolumeDispatcher {
+    public abstract static class Stub extends Binder implements IAudioDeviceVolumeDispatcher {
         static final int TRANSACTION_dispatchDeviceVolumeAdjusted = 2;
         static final int TRANSACTION_dispatchDeviceVolumeChanged = 1;
 
@@ -70,7 +75,8 @@ public interface IAudioDeviceVolumeDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAudioDeviceVolumeDispatcher.DESCRIPTOR);
             }
@@ -80,13 +86,17 @@ public interface IAudioDeviceVolumeDispatcher extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AudioDeviceAttributes _arg0 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     VolumeInfo _arg1 = (VolumeInfo) data.readTypedObject(VolumeInfo.CREATOR);
                     data.enforceNoDataAvail();
                     dispatchDeviceVolumeChanged(_arg0, _arg1);
                     return true;
                 case 2:
-                    AudioDeviceAttributes _arg02 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg02 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     VolumeInfo _arg12 = (VolumeInfo) data.readTypedObject(VolumeInfo.CREATOR);
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
@@ -115,7 +125,8 @@ public interface IAudioDeviceVolumeDispatcher extends IInterface {
             }
 
             @Override // android.media.IAudioDeviceVolumeDispatcher
-            public void dispatchDeviceVolumeChanged(AudioDeviceAttributes device, VolumeInfo vol) throws RemoteException {
+            public void dispatchDeviceVolumeChanged(AudioDeviceAttributes device, VolumeInfo vol)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAudioDeviceVolumeDispatcher.DESCRIPTOR);
@@ -128,7 +139,9 @@ public interface IAudioDeviceVolumeDispatcher extends IInterface {
             }
 
             @Override // android.media.IAudioDeviceVolumeDispatcher
-            public void dispatchDeviceVolumeAdjusted(AudioDeviceAttributes device, VolumeInfo vol, int direction, int mode) throws RemoteException {
+            public void dispatchDeviceVolumeAdjusted(
+                    AudioDeviceAttributes device, VolumeInfo vol, int direction, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAudioDeviceVolumeDispatcher.DESCRIPTOR);

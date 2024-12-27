@@ -3,13 +3,14 @@ package com.android.server.autofill;
 import android.os.SystemClock;
 import android.service.autofill.Dataset;
 import android.util.Slog;
-import com.android.server.autofill.FillResponseEventLogger;
+
 import java.util.List;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class FillResponseEventLogger$$ExternalSyntheticLambda2 implements Consumer {
+public final /* synthetic */ class FillResponseEventLogger$$ExternalSyntheticLambda2
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -27,7 +28,8 @@ public final /* synthetic */ class FillResponseEventLogger$$ExternalSyntheticLam
         switch (i3) {
             case 0:
                 List list = (List) obj2;
-                FillResponseEventLogger.FillResponseEventInternal fillResponseEventInternal = (FillResponseEventLogger.FillResponseEventInternal) obj;
+                FillResponseEventLogger.FillResponseEventInternal fillResponseEventInternal =
+                        (FillResponseEventLogger.FillResponseEventInternal) obj;
                 int i4 = 0;
                 if (list != null) {
                     i = list.size();
@@ -55,11 +57,17 @@ public final /* synthetic */ class FillResponseEventLogger$$ExternalSyntheticLam
                 break;
             default:
                 FillResponseEventLogger fillResponseEventLogger = (FillResponseEventLogger) obj2;
-                FillResponseEventLogger.FillResponseEventInternal fillResponseEventInternal2 = (FillResponseEventLogger.FillResponseEventInternal) obj;
-                if (fillResponseEventLogger.startResponseProcessingTimestamp == -1 && Helper.sVerbose) {
-                    Slog.v("FillResponseEventLogger", "uninitialized startResponseProcessingTimestamp");
+                FillResponseEventLogger.FillResponseEventInternal fillResponseEventInternal2 =
+                        (FillResponseEventLogger.FillResponseEventInternal) obj;
+                if (fillResponseEventLogger.startResponseProcessingTimestamp == -1
+                        && Helper.sVerbose) {
+                    Slog.v(
+                            "FillResponseEventLogger",
+                            "uninitialized startResponseProcessingTimestamp");
                 }
-                fillResponseEventInternal2.mLatencyResponseProcessingMillis = SystemClock.elapsedRealtime() - fillResponseEventLogger.startResponseProcessingTimestamp;
+                fillResponseEventInternal2.mLatencyResponseProcessingMillis =
+                        SystemClock.elapsedRealtime()
+                                - fillResponseEventLogger.startResponseProcessingTimestamp;
                 break;
         }
     }

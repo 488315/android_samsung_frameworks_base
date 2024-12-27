@@ -2,13 +2,13 @@ package android.graphics;
 
 import android.content.res.AssetManager;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.ColorSpace;
 import android.os.ParcelFileDescriptor;
 import android.os.Trace;
 import android.util.Log;
 import android.util.TypedValue;
+
 import com.android.internal.R;
+
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,13 +19,17 @@ public class BitmapFactory {
     private static final int DECODE_BUFFER_SIZE = 16384;
     private static final String TAG = "BitmapFactory";
 
-    private static native Bitmap nativeDecodeAsset(long j, Rect rect, Options options, long j2, long j3);
+    private static native Bitmap nativeDecodeAsset(
+            long j, Rect rect, Options options, long j2, long j3);
 
-    private static native Bitmap nativeDecodeByteArray(byte[] bArr, int i, int i2, Options options, long j, long j2);
+    private static native Bitmap nativeDecodeByteArray(
+            byte[] bArr, int i, int i2, Options options, long j, long j2);
 
-    private static native Bitmap nativeDecodeFileDescriptor(FileDescriptor fileDescriptor, Rect rect, Options options, long j, long j2);
+    private static native Bitmap nativeDecodeFileDescriptor(
+            FileDescriptor fileDescriptor, Rect rect, Options options, long j, long j2);
 
-    private static native Bitmap nativeDecodeStream(InputStream inputStream, byte[] bArr, Rect rect, Options options, long j, long j2);
+    private static native Bitmap nativeDecodeStream(
+            InputStream inputStream, byte[] bArr, Rect rect, Options options, long j, long j2);
 
     private static native boolean nativeIsSeekable(FileDescriptor fileDescriptor);
 
@@ -34,23 +38,19 @@ public class BitmapFactory {
         public int inDensity;
         public boolean inDither;
 
-        @Deprecated
-        public boolean inInputShareable;
+        @Deprecated public boolean inInputShareable;
         public boolean inJustDecodeBounds;
         public boolean inMutable;
 
-        @Deprecated
-        public boolean inPreferQualityOverSpeed;
+        @Deprecated public boolean inPreferQualityOverSpeed;
 
-        @Deprecated
-        public boolean inPurgeable;
+        @Deprecated public boolean inPurgeable;
         public int inSampleSize;
         public int inScreenDensity;
         public int inTargetDensity;
         public byte[] inTempStorage;
 
-        @Deprecated
-        public boolean mCancel;
+        @Deprecated public boolean mCancel;
         public ColorSpace outColorSpace;
         public Bitmap.Config outConfig;
         public int outHeight;
@@ -79,21 +79,30 @@ public class BitmapFactory {
             }
             if (opts.inBitmap != null) {
                 if (opts.inBitmap.getConfig() == Bitmap.Config.HARDWARE) {
-                    throw new IllegalArgumentException("Bitmaps with Config.HARDWARE are always immutable");
+                    throw new IllegalArgumentException(
+                            "Bitmaps with Config.HARDWARE are always immutable");
                 }
                 if (opts.inBitmap.isRecycled()) {
                     throw new IllegalArgumentException("Cannot reuse a recycled Bitmap");
                 }
             }
             if (opts.inMutable && opts.inPreferredConfig == Bitmap.Config.HARDWARE) {
-                throw new IllegalArgumentException("Bitmaps with Config.HARDWARE cannot be decoded into - they are immutable");
+                throw new IllegalArgumentException(
+                        "Bitmaps with Config.HARDWARE cannot be decoded into - they are immutable");
             }
             if (opts.inPreferredColorSpace != null) {
                 if (!(opts.inPreferredColorSpace instanceof ColorSpace.Rgb)) {
-                    throw new IllegalArgumentException("The destination color space must use the RGB color model");
+                    throw new IllegalArgumentException(
+                            "The destination color space must use the RGB color model");
                 }
-                if (!opts.inPreferredColorSpace.equals(ColorSpace.get(ColorSpace.Named.BT2020_HLG)) && !opts.inPreferredColorSpace.equals(ColorSpace.get(ColorSpace.Named.BT2020_PQ)) && ((ColorSpace.Rgb) opts.inPreferredColorSpace).getTransferParameters() == null) {
-                    throw new IllegalArgumentException("The destination color space must use an ICC parametric transfer function");
+                if (!opts.inPreferredColorSpace.equals(ColorSpace.get(ColorSpace.Named.BT2020_HLG))
+                        && !opts.inPreferredColorSpace.equals(
+                                ColorSpace.get(ColorSpace.Named.BT2020_PQ))
+                        && ((ColorSpace.Rgb) opts.inPreferredColorSpace).getTransferParameters()
+                                == null) {
+                    throw new IllegalArgumentException(
+                            "The destination color space must use an ICC parametric transfer"
+                                    + " function");
                 }
             }
         }
@@ -115,19 +124,19 @@ public class BitmapFactory {
     }
 
     /*  JADX ERROR: Types fix failed
-        java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
-        */
+    java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
+    */
     /* JADX WARN: Failed to apply debug info
     java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
     	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
@@ -147,19 +156,23 @@ public class BitmapFactory {
      */
     /* JADX WARN: Not initialized variable reg: 16, insn: 0x0107: MOVE (r3 I:??[OBJECT, ARRAY]) = (r16 I:??[OBJECT, ARRAY] A[D('bm' android.graphics.Bitmap)]), block:B:59:0x0106 */
     /* JADX WARN: Not initialized variable reg: 16, insn: 0x010b: MOVE (r3 I:??[OBJECT, ARRAY]) = (r16 I:??[OBJECT, ARRAY] A[D('bm' android.graphics.Bitmap)]), block:B:57:0x010b */
-    public static android.graphics.Bitmap decodeFile(java.lang.String r17, android.graphics.BitmapFactory.Options r18) {
+    public static android.graphics.Bitmap decodeFile(
+            java.lang.String r17, android.graphics.BitmapFactory.Options r18) {
         /*
             Method dump skipped, instructions count: 364
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.BitmapFactory.decodeFile(java.lang.String, android.graphics.BitmapFactory$Options):android.graphics.Bitmap");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.graphics.BitmapFactory.decodeFile(java.lang.String,"
+                        + " android.graphics.BitmapFactory$Options):android.graphics.Bitmap");
     }
 
     public static Bitmap decodeFile(String pathName) {
         return decodeFile(pathName, null);
     }
 
-    public static Bitmap decodeResourceStream(Resources res, TypedValue value, InputStream is, Rect pad, Options opts) {
+    public static Bitmap decodeResourceStream(
+            Resources res, TypedValue value, InputStream is, Rect pad, Options opts) {
         Options.validate(opts);
         if (opts == null) {
             opts = new Options();
@@ -229,7 +242,14 @@ public class BitmapFactory {
         Options.validate(opts);
         Trace.traceBegin(2L, "decodeBitmap");
         try {
-            Bitmap bm = nativeDecodeByteArray(data, offset, length, opts, Options.nativeInBitmap(opts), Options.nativeColorSpace(opts));
+            Bitmap bm =
+                    nativeDecodeByteArray(
+                            data,
+                            offset,
+                            length,
+                            opts,
+                            Options.nativeInBitmap(opts),
+                            Options.nativeColorSpace(opts));
             if (bm == null && opts != null && opts.inBitmap != null) {
                 throw new IllegalArgumentException("Problem decoding into existing bitmap");
             }
@@ -282,7 +302,13 @@ public class BitmapFactory {
         try {
             if (is instanceof AssetManager.AssetInputStream) {
                 long asset = ((AssetManager.AssetInputStream) is).getNativeAsset();
-                bm = nativeDecodeAsset(asset, outPadding, opts, Options.nativeInBitmap(opts), Options.nativeColorSpace(opts));
+                bm =
+                        nativeDecodeAsset(
+                                asset,
+                                outPadding,
+                                opts,
+                                Options.nativeInBitmap(opts),
+                                Options.nativeColorSpace(opts));
             } else {
                 bm = decodeStreamInternal(is, outPadding, opts);
             }
@@ -301,7 +327,13 @@ public class BitmapFactory {
         if (tempStorage == null) {
             tempStorage = new byte[16384];
         }
-        return nativeDecodeStream(is, tempStorage, outPadding, opts, Options.nativeInBitmap(opts), Options.nativeColorSpace(opts));
+        return nativeDecodeStream(
+                is,
+                tempStorage,
+                outPadding,
+                opts,
+                Options.nativeInBitmap(opts),
+                Options.nativeColorSpace(opts));
     }
 
     public static Bitmap decodeStream(InputStream is) {
@@ -320,7 +352,13 @@ public class BitmapFactory {
         Trace.traceBegin(2L, "decodeFileDescriptor");
         try {
             if (nativeIsSeekable(fd)) {
-                bm = nativeDecodeFileDescriptor(fd, outPadding, opts, Options.nativeInBitmap(opts), Options.nativeColorSpace(opts));
+                bm =
+                        nativeDecodeFileDescriptor(
+                                fd,
+                                outPadding,
+                                opts,
+                                Options.nativeInBitmap(opts),
+                                Options.nativeColorSpace(opts));
             } else {
                 FileInputStream fis = new FileInputStream(fd);
                 try {

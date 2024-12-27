@@ -1,6 +1,7 @@
 package android.graphics;
 
 import android.content.res.AssetManager;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,7 +40,11 @@ public class Movie {
     }
 
     public void draw(Canvas canvas, float x, float y, Paint paint) {
-        nDraw(canvas.getNativeCanvasWrapper(), x, y, paint != null ? paint.getNativeInstance() : 0L);
+        nDraw(
+                canvas.getNativeCanvasWrapper(),
+                x,
+                y,
+                paint != null ? paint.getNativeInstance() : 0L);
     }
 
     public void draw(Canvas canvas, float x, float y) {

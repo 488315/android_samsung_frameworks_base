@@ -2,26 +2,31 @@ package android.telephony.satellite;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.SemTelephonyUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class SemSatelliteRegistrationStateResult implements Parcelable {
-    public static final Parcelable.Creator<SemSatelliteRegistrationStateResult> CREATOR = new Parcelable.Creator<SemSatelliteRegistrationStateResult>() { // from class: android.telephony.satellite.SemSatelliteRegistrationStateResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatelliteRegistrationStateResult createFromParcel(Parcel source) {
-            return new SemSatelliteRegistrationStateResult(source);
-        }
+    public static final Parcelable.Creator<SemSatelliteRegistrationStateResult> CREATOR =
+            new Parcelable.Creator<
+                    SemSatelliteRegistrationStateResult>() { // from class:
+                                                             // android.telephony.satellite.SemSatelliteRegistrationStateResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatelliteRegistrationStateResult createFromParcel(Parcel source) {
+                    return new SemSatelliteRegistrationStateResult(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatelliteRegistrationStateResult[] newArray(int size) {
-            return new SemSatelliteRegistrationStateResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatelliteRegistrationStateResult[] newArray(int size) {
+                    return new SemSatelliteRegistrationStateResult[size];
+                }
+            };
     static final boolean DBG = true;
     static final String LOG_TAG = "SatelliteRegStateResult";
     public static final int SATELLITE_REG_STATE_DENIED = 3;
@@ -42,8 +47,7 @@ public final class SemSatelliteRegistrationStateResult implements Parcelable {
     private int mSatelliteId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SatelliteRegState {
-    }
+    public @interface SatelliteRegState {}
 
     public SemSatelliteRegistrationStateResult() {
         this.mMode = 0;
@@ -58,7 +62,17 @@ public final class SemSatelliteRegistrationStateResult implements Parcelable {
         this.mSatelliteId = -1;
     }
 
-    public SemSatelliteRegistrationStateResult(int mode, int regState, int lac, int ci, int arfcn, int beamId, int bmLong, int bmLat, int rejectCause, int satelliteId) {
+    public SemSatelliteRegistrationStateResult(
+            int mode,
+            int regState,
+            int lac,
+            int ci,
+            int arfcn,
+            int beamId,
+            int bmLong,
+            int bmLat,
+            int rejectCause,
+            int satelliteId) {
         this.mMode = mode;
         this.mRegState = regState;
         this.mLac = lac;
@@ -178,11 +192,38 @@ public final class SemSatelliteRegistrationStateResult implements Parcelable {
     }
 
     public String toString() {
-        return "SatelliteRegistrationStateResult { mode=" + this.mMode + " regState=" + regStateToString(this.mRegState) + " lac=" + SemTelephonyUtils.maskPii(Integer.valueOf(this.mLac)) + " cid=" + SemTelephonyUtils.maskPii(Integer.valueOf(this.mCi)) + " arfcn=" + this.mArfcn + " beamId=" + this.mBeamId + " bmLong=" + SemTelephonyUtils.maskPii(Integer.valueOf(this.mBmLong)) + " bmLat=" + SemTelephonyUtils.maskPii(Integer.valueOf(this.mBmLat)) + " rejectCause=" + this.mRejectCause + "}";
+        return "SatelliteRegistrationStateResult { mode="
+                + this.mMode
+                + " regState="
+                + regStateToString(this.mRegState)
+                + " lac="
+                + SemTelephonyUtils.maskPii(Integer.valueOf(this.mLac))
+                + " cid="
+                + SemTelephonyUtils.maskPii(Integer.valueOf(this.mCi))
+                + " arfcn="
+                + this.mArfcn
+                + " beamId="
+                + this.mBeamId
+                + " bmLong="
+                + SemTelephonyUtils.maskPii(Integer.valueOf(this.mBmLong))
+                + " bmLat="
+                + SemTelephonyUtils.maskPii(Integer.valueOf(this.mBmLat))
+                + " rejectCause="
+                + this.mRejectCause
+                + "}";
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mMode), Integer.valueOf(this.mRegState), Integer.valueOf(this.mLac), Integer.valueOf(this.mCi), Integer.valueOf(this.mArfcn), Integer.valueOf(this.mBeamId), Integer.valueOf(this.mBmLong), Integer.valueOf(this.mBmLat), Integer.valueOf(this.mRejectCause));
+        return Objects.hash(
+                Integer.valueOf(this.mMode),
+                Integer.valueOf(this.mRegState),
+                Integer.valueOf(this.mLac),
+                Integer.valueOf(this.mCi),
+                Integer.valueOf(this.mArfcn),
+                Integer.valueOf(this.mBeamId),
+                Integer.valueOf(this.mBmLong),
+                Integer.valueOf(this.mBmLat),
+                Integer.valueOf(this.mRejectCause));
     }
 
     public boolean equals(Object o) {
@@ -193,7 +234,16 @@ public final class SemSatelliteRegistrationStateResult implements Parcelable {
             return false;
         }
         SemSatelliteRegistrationStateResult other = (SemSatelliteRegistrationStateResult) o;
-        if (this.mMode == other.mMode && this.mRegState == other.mRegState && this.mLac == other.mLac && this.mCi == other.mCi && this.mArfcn == other.mArfcn && this.mBeamId == other.mBeamId && this.mBmLong == other.mBmLong && this.mBmLat == other.mBmLat && this.mRejectCause == other.mRejectCause && this.mSatelliteId == other.mSatelliteId) {
+        if (this.mMode == other.mMode
+                && this.mRegState == other.mRegState
+                && this.mLac == other.mLac
+                && this.mCi == other.mCi
+                && this.mArfcn == other.mArfcn
+                && this.mBeamId == other.mBeamId
+                && this.mBmLong == other.mBmLong
+                && this.mBmLat == other.mBmLat
+                && this.mRejectCause == other.mRejectCause
+                && this.mSatelliteId == other.mSatelliteId) {
             return true;
         }
         return false;
@@ -234,8 +284,7 @@ public final class SemSatelliteRegistrationStateResult implements Parcelable {
         private int mRejectCause;
         private int mSatelliteId;
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(SemSatelliteRegistrationStateResult srs) {
             this.mMode = srs.mMode;
@@ -300,7 +349,17 @@ public final class SemSatelliteRegistrationStateResult implements Parcelable {
         }
 
         public SemSatelliteRegistrationStateResult build() {
-            return new SemSatelliteRegistrationStateResult(this.mMode, this.mRegState, this.mLac, this.mCi, this.mArfcn, this.mBeamId, this.mBmLong, this.mBmLat, this.mRejectCause, this.mSatelliteId);
+            return new SemSatelliteRegistrationStateResult(
+                    this.mMode,
+                    this.mRegState,
+                    this.mLac,
+                    this.mCi,
+                    this.mArfcn,
+                    this.mBeamId,
+                    this.mBmLong,
+                    this.mBmLat,
+                    this.mRejectCause,
+                    this.mSatelliteId);
         }
     }
 }

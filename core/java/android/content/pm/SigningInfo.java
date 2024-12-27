@@ -3,31 +3,37 @@ package android.content.pm;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.security.PublicKey;
 import java.util.Collection;
 
 /* loaded from: classes.dex */
 public final class SigningInfo implements Parcelable {
-    public static final Parcelable.Creator<SigningInfo> CREATOR = new Parcelable.Creator<SigningInfo>() { // from class: android.content.pm.SigningInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SigningInfo createFromParcel(Parcel source) {
-            return new SigningInfo(source);
-        }
+    public static final Parcelable.Creator<SigningInfo> CREATOR =
+            new Parcelable.Creator<SigningInfo>() { // from class: android.content.pm.SigningInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SigningInfo createFromParcel(Parcel source) {
+                    return new SigningInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SigningInfo[] newArray(int size) {
-            return new SigningInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SigningInfo[] newArray(int size) {
+                    return new SigningInfo[size];
+                }
+            };
     private final SigningDetails mSigningDetails;
 
     public SigningInfo() {
         this.mSigningDetails = SigningDetails.UNKNOWN;
     }
 
-    public SigningInfo(int schemeVersion, Collection<Signature> apkContentsSigners, Collection<PublicKey> publicKeys, Collection<Signature> signingCertificateHistory) {
+    public SigningInfo(
+            int schemeVersion,
+            Collection<Signature> apkContentsSigners,
+            Collection<PublicKey> publicKeys,
+            Collection<Signature> signingCertificateHistory) {
         Signature[] signatures;
         Signature[] pastSignatures;
         if (schemeVersion <= 0 || apkContentsSigners == null) {
@@ -36,16 +42,22 @@ public final class SigningInfo implements Parcelable {
         }
         ArraySet<PublicKey> keys = null;
         if (apkContentsSigners != null && !apkContentsSigners.isEmpty()) {
-            signatures = (Signature[]) apkContentsSigners.toArray(new Signature[apkContentsSigners.size()]);
+            signatures =
+                    (Signature[])
+                            apkContentsSigners.toArray(new Signature[apkContentsSigners.size()]);
         } else {
             signatures = null;
         }
         if (signingCertificateHistory != null && !signingCertificateHistory.isEmpty()) {
-            pastSignatures = (Signature[]) signingCertificateHistory.toArray(new Signature[signingCertificateHistory.size()]);
+            pastSignatures =
+                    (Signature[])
+                            signingCertificateHistory.toArray(
+                                    new Signature[signingCertificateHistory.size()]);
         } else {
             pastSignatures = null;
         }
-        pastSignatures = Signature.areExactArraysMatch(signatures, pastSignatures) ? null : pastSignatures;
+        pastSignatures =
+                Signature.areExactArraysMatch(signatures, pastSignatures) ? null : pastSignatures;
         if (publicKeys != null && !publicKeys.isEmpty()) {
             keys = new ArraySet<>(publicKeys);
         }
@@ -65,11 +77,13 @@ public final class SigningInfo implements Parcelable {
     }
 
     public boolean hasMultipleSigners() {
-        return this.mSigningDetails.getSignatures() != null && this.mSigningDetails.getSignatures().length > 1;
+        return this.mSigningDetails.getSignatures() != null
+                && this.mSigningDetails.getSignatures().length > 1;
     }
 
     public boolean hasPastSigningCertificates() {
-        return this.mSigningDetails.getPastSigningCertificates() != null && this.mSigningDetails.getPastSigningCertificates().length > 0;
+        return this.mSigningDetails.getPastSigningCertificates() != null
+                && this.mSigningDetails.getPastSigningCertificates().length > 0;
     }
 
     public Signature[] getSigningCertificateHistory() {

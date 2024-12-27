@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerUtils;
 import android.media.tv.tuner.TunerVersionChecker;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -60,30 +61,26 @@ public class Filter implements AutoCloseable {
     private final Object mLock = new Object();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MonitorEventMask {
-    }
+    public @interface MonitorEventMask {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScramblingStatus {
-    }
+    public @interface ScramblingStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Subtype {
-    }
+    public @interface Subtype {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     private native String nativeAcquireSharedFilterToken();
 
     private native int nativeClose();
 
-    private native int nativeConfigureFilter(int i, int i2, FilterConfiguration filterConfiguration);
+    private native int nativeConfigureFilter(
+            int i, int i2, FilterConfiguration filterConfiguration);
 
     private native int nativeConfigureMonitorEvent(int i);
 
@@ -114,12 +111,14 @@ public class Filter implements AutoCloseable {
     private void onFilterStatus(final int status) {
         synchronized (this.mCallbackLock) {
             if (this.mCallback != null && this.mExecutor != null) {
-                this.mExecutor.execute(new Runnable() { // from class: android.media.tv.tuner.filter.Filter$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        Filter.this.lambda$onFilterStatus$0(status);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.media.tv.tuner.filter.Filter$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Filter.this.lambda$onFilterStatus$0(status);
+                            }
+                        });
             }
         }
     }
@@ -151,12 +150,14 @@ public class Filter implements AutoCloseable {
                     }
                 }
             } else {
-                this.mExecutor.execute(new Runnable() { // from class: android.media.tv.tuner.filter.Filter$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        Filter.this.lambda$onFilterEvent$1(events);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.media.tv.tuner.filter.Filter$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Filter.this.lambda$onFilterEvent$1(events);
+                            }
+                        });
             }
         }
     }
@@ -212,10 +213,24 @@ public class Filter implements AutoCloseable {
             Settings s = config.getSettings();
             int subType = s == null ? this.mSubtype : s.getType();
             if (this.mMainType != config.getType() || this.mSubtype != subType) {
-                throw new IllegalArgumentException("Invalid filter config. filter main type=" + this.mMainType + ", filter subtype=" + this.mSubtype + ". config main type=" + config.getType() + ", config subtype=" + subType);
+                throw new IllegalArgumentException(
+                        "Invalid filter config. filter main type="
+                                + this.mMainType
+                                + ", filter subtype="
+                                + this.mSubtype
+                                + ". config main type="
+                                + config.getType()
+                                + ", config subtype="
+                                + subType);
             }
-            if ((s instanceof RecordSettings) && ((RecordSettings) s).getScIndexType() == 4 && !TunerVersionChecker.isHigherOrEqualVersionTo(196608)) {
-                Log.e(TAG, "Tuner version " + TunerVersionChecker.getTunerVersion() + " does not support VVC");
+            if ((s instanceof RecordSettings)
+                    && ((RecordSettings) s).getScIndexType() == 4
+                    && !TunerVersionChecker.isHigherOrEqualVersionTo(196608)) {
+                Log.e(
+                        TAG,
+                        "Tuner version "
+                                + TunerVersionChecker.getTunerVersion()
+                                + " does not support VVC");
                 return 1;
             }
             return nativeConfigureFilter(config.getType(), subType, config);
@@ -357,7 +372,12 @@ public class Filter implements AutoCloseable {
                 }
                 return token;
             }
-            Log.d(TAG, "Acquire shared filter in a wrong state, started: " + this.mIsStarted + "shared: " + this.mIsShared);
+            Log.d(
+                    TAG,
+                    "Acquire shared filter in a wrong state, started: "
+                            + this.mIsStarted
+                            + "shared: "
+                            + this.mIsShared);
             return null;
         }
     }

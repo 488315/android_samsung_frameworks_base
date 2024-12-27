@@ -39,6 +39,7 @@ import android.util.ArrayMap;
 import android.util.AtomicFile;
 import android.util.KeyValueListParser;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.ConcurrentUtils;
@@ -54,6 +55,7 @@ import com.android.server.wm.CompatModePackages;
 import com.android.server.wm.CompatScaleProvider;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -159,14 +161,18 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 Method dump skipped, instructions count: 280
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.app.GameManagerService.AnonymousClass3.onReceive(android.content.Context, android.content.Intent):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.app.GameManagerService.AnonymousClass3.onReceive(android.content.Context,"
+                        + " android.content.Intent):void");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceConfigListener implements DeviceConfig.OnPropertiesChangedListener {
         public DeviceConfigListener() {
-            DeviceConfig.addOnPropertiesChangedListener("game_overlay", GameManagerService.this.mContext.getMainExecutor(), this);
+            DeviceConfig.addOnPropertiesChangedListener(
+                    "game_overlay", GameManagerService.this.mContext.getMainExecutor(), this);
         }
 
         public final void finalize() {
@@ -175,8 +181,11 @@ public final class GameManagerService extends IGameManagerService.Stub {
 
         public final void onPropertiesChanged(DeviceConfig.Properties properties) {
             String[] strArr = (String[]) properties.getKeyset().toArray(new String[0]);
-            Slog.v("GameManagerService", "Device config changed for packages: " + Arrays.toString(strArr));
-            GameManagerService.this.updateConfigsForUser(ActivityManager.getCurrentUser(), true, strArr);
+            Slog.v(
+                    "GameManagerService",
+                    "Device config changed for packages: " + Arrays.toString(strArr));
+            GameManagerService.this.updateConfigsForUser(
+                    ActivityManager.getCurrentUser(), true, strArr);
         }
     }
 
@@ -215,19 +224,26 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 boolean z = false;
                 int i = keyValueListParser.getInt("mode", 0);
                 this.mGameMode = i;
-                if (GamePackageConfiguration.this.mAllowDownscale && !GamePackageConfiguration.this.willGamePerformOptimizations(i)) {
+                if (GamePackageConfiguration.this.mAllowDownscale
+                        && !GamePackageConfiguration.this.willGamePerformOptimizations(i)) {
                     f = keyValueListParser.getFloat("downscaleFactor", -1.0f);
                 }
                 this.mScaling = f;
-                if (GamePackageConfiguration.this.mAllowFpsOverride && !GamePackageConfiguration.this.willGamePerformOptimizations(i)) {
+                if (GamePackageConfiguration.this.mAllowFpsOverride
+                        && !GamePackageConfiguration.this.willGamePerformOptimizations(i)) {
                     str = keyValueListParser.getString("fps", "");
                 }
                 this.mFps = str;
-                if (GamePackageConfiguration.this.mAllowAngle && !GamePackageConfiguration.this.willGamePerformOptimizations(i) && keyValueListParser.getBoolean("useAngle", false)) {
+                if (GamePackageConfiguration.this.mAllowAngle
+                        && !GamePackageConfiguration.this.willGamePerformOptimizations(i)
+                        && keyValueListParser.getBoolean("useAngle", false)) {
                     z = true;
                 }
                 this.mUseAngle = z;
-                this.mLoadingBoostDuration = GamePackageConfiguration.this.willGamePerformOptimizations(i) ? -1 : keyValueListParser.getInt("loadingBoost", -1);
+                this.mLoadingBoostDuration =
+                        GamePackageConfiguration.this.willGamePerformOptimizations(i)
+                                ? -1
+                                : keyValueListParser.getInt("loadingBoost", -1);
             }
 
             public final synchronized int getFps() {
@@ -252,7 +268,8 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 sb.append(",Fps:");
                 sb.append(this.mFps);
                 sb.append(",Loading Boost Duration:");
-                return AmFmBandRange$$ExternalSyntheticOutline0.m(this.mLoadingBoostDuration, sb, "]");
+                return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        this.mLoadingBoostDuration, sb, "]");
             }
         }
 
@@ -267,15 +284,26 @@ public final class GameManagerService extends IGameManagerService.Stub {
             this.mAllowFpsOverride = true;
             this.mPackageName = str;
             try {
-                ApplicationInfo applicationInfoAsUser = packageManager.getApplicationInfoAsUser(str, 128, i);
-                if (!parseInterventionFromXml(applicationInfoAsUser, packageManager, str) && (bundle = applicationInfoAsUser.metaData) != null) {
-                    this.mPerfModeOverridden = bundle.getBoolean("com.android.app.gamemode.performance.enabled");
-                    this.mBatteryModeOverridden = applicationInfoAsUser.metaData.getBoolean("com.android.app.gamemode.battery.enabled");
-                    this.mAllowDownscale = applicationInfoAsUser.metaData.getBoolean("com.android.graphics.intervention.wm.allowDownscale", true);
-                    this.mAllowAngle = applicationInfoAsUser.metaData.getBoolean("com.android.graphics.intervention.angle.allowAngle", true);
+                ApplicationInfo applicationInfoAsUser =
+                        packageManager.getApplicationInfoAsUser(str, 128, i);
+                if (!parseInterventionFromXml(applicationInfoAsUser, packageManager, str)
+                        && (bundle = applicationInfoAsUser.metaData) != null) {
+                    this.mPerfModeOverridden =
+                            bundle.getBoolean("com.android.app.gamemode.performance.enabled");
+                    this.mBatteryModeOverridden =
+                            applicationInfoAsUser.metaData.getBoolean(
+                                    "com.android.app.gamemode.battery.enabled");
+                    this.mAllowDownscale =
+                            applicationInfoAsUser.metaData.getBoolean(
+                                    "com.android.graphics.intervention.wm.allowDownscale", true);
+                    this.mAllowAngle =
+                            applicationInfoAsUser.metaData.getBoolean(
+                                    "com.android.graphics.intervention.angle.allowAngle", true);
                 }
             } catch (PackageManager.NameNotFoundException unused) {
-                Slog.v("GameManagerService_GamePackageConfiguration", "Failed to get package metadata");
+                Slog.v(
+                        "GameManagerService_GamePackageConfiguration",
+                        "Failed to get package metadata");
             }
             String property = DeviceConfig.getProperty("game_overlay", str);
             if (property != null) {
@@ -285,7 +313,9 @@ public final class GameManagerService extends IGameManagerService.Stub {
                         keyValueListParser.setString(str2);
                         addModeConfig(new GameModeConfiguration(keyValueListParser));
                     } catch (IllegalArgumentException unused2) {
-                        Slog.e("GameManagerService_GamePackageConfiguration", "Invalid config string");
+                        Slog.e(
+                                "GameManagerService_GamePackageConfiguration",
+                                "Invalid config string");
                     }
                 }
             }
@@ -304,20 +334,33 @@ public final class GameManagerService extends IGameManagerService.Stub {
 
         public final void addModeConfig(GameModeConfiguration gameModeConfiguration) {
             int i = gameModeConfiguration.mGameMode;
-            if ((i == 1 || i == 2 || i == 3 || i == 4) && !GamePackageConfiguration.this.willGamePerformOptimizations(i)) {
+            if ((i == 1 || i == 2 || i == 3 || i == 4)
+                    && !GamePackageConfiguration.this.willGamePerformOptimizations(i)) {
                 synchronized (this.mModeConfigLock) {
-                    this.mModeConfigs.put(Integer.valueOf(gameModeConfiguration.mGameMode), gameModeConfiguration);
+                    this.mModeConfigs.put(
+                            Integer.valueOf(gameModeConfiguration.mGameMode),
+                            gameModeConfiguration);
                 }
             } else {
-                Slog.w("GameManagerService_GamePackageConfiguration", "Attempt to add inactive game mode config for " + this.mPackageName + ":" + gameModeConfiguration.toString());
+                Slog.w(
+                        "GameManagerService_GamePackageConfiguration",
+                        "Attempt to add inactive game mode config for "
+                                + this.mPackageName
+                                + ":"
+                                + gameModeConfiguration.toString());
             }
         }
 
-        public final GamePackageConfiguration copyAndApplyOverride(GamePackageConfiguration gamePackageConfiguration) {
-            GamePackageConfiguration gamePackageConfiguration2 = new GamePackageConfiguration(this.mPackageName);
+        public final GamePackageConfiguration copyAndApplyOverride(
+                GamePackageConfiguration gamePackageConfiguration) {
+            GamePackageConfiguration gamePackageConfiguration2 =
+                    new GamePackageConfiguration(this.mPackageName);
             boolean z = false;
-            gamePackageConfiguration2.mPerfModeOverridden = this.mPerfModeOverridden && gamePackageConfiguration.getGameModeConfiguration(2) == null;
-            if (this.mBatteryModeOverridden && gamePackageConfiguration.getGameModeConfiguration(3) == null) {
+            gamePackageConfiguration2.mPerfModeOverridden =
+                    this.mPerfModeOverridden
+                            && gamePackageConfiguration.getGameModeConfiguration(2) == null;
+            if (this.mBatteryModeOverridden
+                    && gamePackageConfiguration.getGameModeConfiguration(3) == null) {
                 z = true;
             }
             gamePackageConfiguration2.mBatteryModeOverridden = z;
@@ -328,7 +371,9 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 synchronized (this.mModeConfigLock) {
                     try {
                         for (Map.Entry entry : this.mModeConfigs.entrySet()) {
-                            gamePackageConfiguration2.mModeConfigs.put((Integer) entry.getKey(), (GameModeConfiguration) entry.getValue());
+                            gamePackageConfiguration2.mModeConfigs.put(
+                                    (Integer) entry.getKey(),
+                                    (GameModeConfiguration) entry.getValue());
                         }
                     } finally {
                     }
@@ -336,7 +381,9 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 synchronized (gamePackageConfiguration.mModeConfigLock) {
                     try {
                         for (Map.Entry entry2 : gamePackageConfiguration.mModeConfigs.entrySet()) {
-                            gamePackageConfiguration2.mModeConfigs.put((Integer) entry2.getKey(), (GameModeConfiguration) entry2.getValue());
+                            gamePackageConfiguration2.mModeConfigs.put(
+                                    (Integer) entry2.getKey(),
+                                    (GameModeConfiguration) entry2.getValue());
                         }
                     } finally {
                     }
@@ -348,7 +395,9 @@ public final class GameManagerService extends IGameManagerService.Stub {
         public final int[] getAvailableGameModes() {
             int availableGameModesBitfield = getAvailableGameModesBitfield();
             int[] iArr = new int[Integer.bitCount(availableGameModesBitfield)];
-            int numberOfTrailingZeros = Integer.numberOfTrailingZeros(Integer.highestOneBit(availableGameModesBitfield));
+            int numberOfTrailingZeros =
+                    Integer.numberOfTrailingZeros(
+                            Integer.highestOneBit(availableGameModesBitfield));
             int i = 0;
             for (int i2 = 0; i2 <= numberOfTrailingZeros; i2++) {
                 if (((availableGameModesBitfield >> i2) & 1) != 0) {
@@ -382,7 +431,8 @@ public final class GameManagerService extends IGameManagerService.Stub {
         public final GameModeConfiguration getGameModeConfiguration(int i) {
             GameModeConfiguration gameModeConfiguration;
             synchronized (this.mModeConfigLock) {
-                gameModeConfiguration = (GameModeConfiguration) this.mModeConfigs.get(Integer.valueOf(i));
+                gameModeConfiguration =
+                        (GameModeConfiguration) this.mModeConfigs.get(Integer.valueOf(i));
             }
             return gameModeConfiguration;
         }
@@ -391,14 +441,17 @@ public final class GameManagerService extends IGameManagerService.Stub {
             GameModeConfiguration gameModeConfiguration;
             synchronized (this.mModeConfigLock) {
                 this.mModeConfigs.putIfAbsent(Integer.valueOf(i), new GameModeConfiguration(i));
-                gameModeConfiguration = (GameModeConfiguration) this.mModeConfigs.get(Integer.valueOf(i));
+                gameModeConfiguration =
+                        (GameModeConfiguration) this.mModeConfigs.get(Integer.valueOf(i));
             }
             return gameModeConfiguration;
         }
 
         public final int[] getOverriddenGameModes() {
             boolean z = this.mBatteryModeOverridden;
-            return (z && this.mPerfModeOverridden) ? new int[]{3, 2} : z ? new int[]{3} : this.mPerfModeOverridden ? new int[]{2} : new int[0];
+            return (z && this.mPerfModeOverridden)
+                    ? new int[] {3, 2}
+                    : z ? new int[] {3} : this.mPerfModeOverridden ? new int[] {2} : new int[0];
         }
 
         /* JADX WARN: Removed duplicated region for block: B:23:0x007e A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -406,7 +459,10 @@ public final class GameManagerService extends IGameManagerService.Stub {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean parseInterventionFromXml(android.content.pm.ApplicationInfo r7, android.content.pm.PackageManager r8, java.lang.String r9) {
+        public final boolean parseInterventionFromXml(
+                android.content.pm.ApplicationInfo r7,
+                android.content.pm.PackageManager r8,
+                java.lang.String r9) {
             /*
                 r6 = this;
                 java.lang.String r0 = "GameManagerService_GamePackageConfiguration"
@@ -497,13 +553,21 @@ public final class GameManagerService extends IGameManagerService.Stub {
             L9a:
                 return r8
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.app.GameManagerService.GamePackageConfiguration.parseInterventionFromXml(android.content.pm.ApplicationInfo, android.content.pm.PackageManager, java.lang.String):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.app.GameManagerService.GamePackageConfiguration.parseInterventionFromXml(android.content.pm.ApplicationInfo,"
+                        + " android.content.pm.PackageManager, java.lang.String):boolean");
         }
 
         public final String toString() {
             String str;
             synchronized (this.mModeConfigLock) {
-                str = "[Name:" + this.mPackageName + " Modes: " + this.mModeConfigs.toString() + "]";
+                str =
+                        "[Name:"
+                                + this.mPackageName
+                                + " Modes: "
+                                + this.mModeConfigs.toString()
+                                + "]";
             }
             return str;
         }
@@ -518,8 +582,7 @@ public final class GameManagerService extends IGameManagerService.Stub {
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.app.GameManagerService$Injector$1, reason: invalid class name */
-        public final class AnonymousClass1 {
-        }
+        public final class AnonymousClass1 {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -530,7 +593,12 @@ public final class GameManagerService extends IGameManagerService.Stub {
             super(context);
             ServiceThread serviceThread = new ServiceThread(10, "GameManagerService", true);
             serviceThread.start();
-            this.mService = new GameManagerService(context, serviceThread.getLooper(), Environment.getDataDirectory(), new Injector());
+            this.mService =
+                    new GameManagerService(
+                            context,
+                            serviceThread.getLooper(),
+                            Environment.getDataDirectory(),
+                            new Injector());
         }
 
         @Override // com.android.server.SystemService
@@ -538,26 +606,49 @@ public final class GameManagerService extends IGameManagerService.Stub {
             if (i == 1000) {
                 final GameManagerService gameManagerService = this.mService;
                 gameManagerService.onBootCompleted();
-                StatsManager statsManager = (StatsManager) gameManagerService.mContext.getSystemService(StatsManager.class);
+                StatsManager statsManager =
+                        (StatsManager)
+                                gameManagerService.mContext.getSystemService(StatsManager.class);
                 Executor executor = ConcurrentUtils.DIRECT_EXECUTOR;
-                statsManager.setPullAtomCallback(FrameworkStatsLog.GAME_MODE_INFO, (StatsManager.PullAtomMetadata) null, executor, new StatsManager.StatsPullAtomCallback() { // from class: com.android.server.app.GameManagerService$$ExternalSyntheticLambda5
-                    public final int onPullAtom(int i2, List list) {
-                        GameManagerService.m226$r8$lambda$LCP_4kvyEBQxmT_kuk0Xyillc(GameManagerService.this, i2, list);
-                        return 0;
-                    }
-                });
-                statsManager.setPullAtomCallback(FrameworkStatsLog.GAME_MODE_CONFIGURATION, (StatsManager.PullAtomMetadata) null, executor, new StatsManager.StatsPullAtomCallback() { // from class: com.android.server.app.GameManagerService$$ExternalSyntheticLambda5
-                    public final int onPullAtom(int i2, List list) {
-                        GameManagerService.m226$r8$lambda$LCP_4kvyEBQxmT_kuk0Xyillc(GameManagerService.this, i2, list);
-                        return 0;
-                    }
-                });
-                statsManager.setPullAtomCallback(FrameworkStatsLog.GAME_MODE_LISTENER, (StatsManager.PullAtomMetadata) null, executor, new StatsManager.StatsPullAtomCallback() { // from class: com.android.server.app.GameManagerService$$ExternalSyntheticLambda5
-                    public final int onPullAtom(int i2, List list) {
-                        GameManagerService.m226$r8$lambda$LCP_4kvyEBQxmT_kuk0Xyillc(GameManagerService.this, i2, list);
-                        return 0;
-                    }
-                });
+                statsManager.setPullAtomCallback(
+                        FrameworkStatsLog.GAME_MODE_INFO,
+                        (StatsManager.PullAtomMetadata) null,
+                        executor,
+                        new StatsManager
+                                .StatsPullAtomCallback() { // from class:
+                                                           // com.android.server.app.GameManagerService$$ExternalSyntheticLambda5
+                            public final int onPullAtom(int i2, List list) {
+                                GameManagerService.m226$r8$lambda$LCP_4kvyEBQxmT_kuk0Xyillc(
+                                        GameManagerService.this, i2, list);
+                                return 0;
+                            }
+                        });
+                statsManager.setPullAtomCallback(
+                        FrameworkStatsLog.GAME_MODE_CONFIGURATION,
+                        (StatsManager.PullAtomMetadata) null,
+                        executor,
+                        new StatsManager
+                                .StatsPullAtomCallback() { // from class:
+                                                           // com.android.server.app.GameManagerService$$ExternalSyntheticLambda5
+                            public final int onPullAtom(int i2, List list) {
+                                GameManagerService.m226$r8$lambda$LCP_4kvyEBQxmT_kuk0Xyillc(
+                                        GameManagerService.this, i2, list);
+                                return 0;
+                            }
+                        });
+                statsManager.setPullAtomCallback(
+                        FrameworkStatsLog.GAME_MODE_LISTENER,
+                        (StatsManager.PullAtomMetadata) null,
+                        executor,
+                        new StatsManager
+                                .StatsPullAtomCallback() { // from class:
+                                                           // com.android.server.app.GameManagerService$$ExternalSyntheticLambda5
+                            public final int onPullAtom(int i2, List list) {
+                                GameManagerService.m226$r8$lambda$LCP_4kvyEBQxmT_kuk0Xyillc(
+                                        GameManagerService.this, i2, list);
+                                return 0;
+                            }
+                        });
             }
         }
 
@@ -569,8 +660,10 @@ public final class GameManagerService extends IGameManagerService.Stub {
             int i2 = GameManagerService.$r8$clinit;
             gameManagerService.getClass();
             LocalService localService = gameManagerService.new LocalService();
-            CompatModePackages compatModePackages = ActivityTaskManagerService.this.mCompatModePackages;
-            WindowManagerGlobalLock windowManagerGlobalLock = compatModePackages.mService.mGlobalLock;
+            CompatModePackages compatModePackages =
+                    ActivityTaskManagerService.this.mCompatModePackages;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    compatModePackages.mService.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
@@ -587,28 +680,34 @@ public final class GameManagerService extends IGameManagerService.Stub {
             LocalServices.addService(GameManagerInternal.class, localService);
             GameManagerService gameManagerService2 = this.mService;
             gameManagerService2.getClass();
-            gameManagerService2.mDeviceConfigListener = gameManagerService2.new DeviceConfigListener();
+            gameManagerService2.mDeviceConfigListener =
+                    gameManagerService2.new DeviceConfigListener();
             GameManagerService gameManagerService3 = this.mService;
             gameManagerService3.getClass();
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
             intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
             intentFilter.addDataScheme("package");
-            gameManagerService3.mContext.registerReceiverForAllUsers(new AnonymousClass3(gameManagerService3, i), intentFilter, null, null);
+            gameManagerService3.mContext.registerReceiverForAllUsers(
+                    new AnonymousClass3(gameManagerService3, i), intentFilter, null, null);
         }
 
         @Override // com.android.server.SystemService
         public final void onUserStarting(SystemService.TargetUser targetUser) {
             Slog.d("GameManagerService", "Starting user " + targetUser.getUserIdentifier());
             GameManagerService gameManagerService = this.mService;
-            File dataSystemDeDirectory = Environment.getDataSystemDeDirectory(targetUser.getUserIdentifier());
+            File dataSystemDeDirectory =
+                    Environment.getDataSystemDeDirectory(targetUser.getUserIdentifier());
             gameManagerService.getClass();
             int userIdentifier = targetUser.getUserIdentifier();
             synchronized (gameManagerService.mLock) {
                 try {
-                    if (!gameManagerService.mSettings.containsKey(Integer.valueOf(userIdentifier))) {
-                        GameManagerSettings gameManagerSettings = new GameManagerSettings(dataSystemDeDirectory);
-                        gameManagerService.mSettings.put(Integer.valueOf(userIdentifier), gameManagerSettings);
+                    if (!gameManagerService.mSettings.containsKey(
+                            Integer.valueOf(userIdentifier))) {
+                        GameManagerSettings gameManagerSettings =
+                                new GameManagerSettings(dataSystemDeDirectory);
+                        gameManagerService.mSettings.put(
+                                Integer.valueOf(userIdentifier), gameManagerSettings);
                         gameManagerSettings.readPersistentDataLocked();
                     }
                 } catch (Throwable th) {
@@ -617,7 +716,8 @@ public final class GameManagerService extends IGameManagerService.Stub {
             }
             gameManagerService.sendUserMessage(userIdentifier, 3, 0, "ON_USER_STARTING");
             GameServiceController gameServiceController = gameManagerService.mGameServiceController;
-            if (gameServiceController == null || gameServiceController.mCurrentForegroundUser != null) {
+            if (gameServiceController == null
+                    || gameServiceController.mCurrentForegroundUser != null) {
                 return;
             }
             gameServiceController.setCurrentForegroundUserAndEvaluateProvider(targetUser);
@@ -631,9 +731,14 @@ public final class GameManagerService extends IGameManagerService.Stub {
             synchronized (gameManagerService.mLock) {
                 try {
                     if (gameManagerService.mSettings.containsKey(Integer.valueOf(userIdentifier))) {
-                        gameManagerService.sendUserMessage(userIdentifier, 2, 0, "ON_USER_STOPPING");
-                        GameServiceController gameServiceController = gameManagerService.mGameServiceController;
-                        if (gameServiceController == null || gameServiceController.mCurrentForegroundUser == null || gameServiceController.mCurrentForegroundUser.getUserIdentifier() != targetUser.getUserIdentifier()) {
+                        gameManagerService.sendUserMessage(
+                                userIdentifier, 2, 0, "ON_USER_STOPPING");
+                        GameServiceController gameServiceController =
+                                gameManagerService.mGameServiceController;
+                        if (gameServiceController == null
+                                || gameServiceController.mCurrentForegroundUser == null
+                                || gameServiceController.mCurrentForegroundUser.getUserIdentifier()
+                                        != targetUser.getUserIdentifier()) {
                             return;
                         }
                         gameServiceController.setCurrentForegroundUserAndEvaluateProvider(null);
@@ -644,10 +749,12 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
 
         @Override // com.android.server.SystemService
-        public final void onUserSwitching(SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
+        public final void onUserSwitching(
+                SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
             GameManagerService gameManagerService = this.mService;
             gameManagerService.getClass();
-            gameManagerService.sendUserMessage(targetUser2.getUserIdentifier(), 3, 0, "ON_USER_SWITCHING");
+            gameManagerService.sendUserMessage(
+                    targetUser2.getUserIdentifier(), 3, 0, "ON_USER_SWITCHING");
             GameServiceController gameServiceController = gameManagerService.mGameServiceController;
             if (gameServiceController != null) {
                 gameServiceController.setCurrentForegroundUserAndEvaluateProvider(targetUser2);
@@ -657,25 +764,32 @@ public final class GameManagerService extends IGameManagerService.Stub {
         @Override // com.android.server.SystemService
         public final void onUserUnlocking(SystemService.TargetUser targetUser) {
             GameServiceController gameServiceController = this.mService.mGameServiceController;
-            if (gameServiceController == null || gameServiceController.mCurrentForegroundUser == null || gameServiceController.mCurrentForegroundUser.getUserIdentifier() != targetUser.getUserIdentifier()) {
+            if (gameServiceController == null
+                    || gameServiceController.mCurrentForegroundUser == null
+                    || gameServiceController.mCurrentForegroundUser.getUserIdentifier()
+                            != targetUser.getUserIdentifier()) {
                 return;
             }
-            gameServiceController.mBackgroundExecutor.execute(new GameServiceController$$ExternalSyntheticLambda0(gameServiceController));
+            gameServiceController.mBackgroundExecutor.execute(
+                    new GameServiceController$$ExternalSyntheticLambda0(gameServiceController));
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends GameManagerInternal implements CompatScaleProvider {
-        public LocalService() {
-        }
+        public LocalService() {}
 
         public final float getResolutionScalingFactor(String str, int i) {
             GamePackageConfiguration.GameModeConfiguration gameModeConfiguration;
             GameManagerService gameManagerService = GameManagerService.this;
             int i2 = GameManagerService.$r8$clinit;
-            int gameModeFromSettingsUnchecked = gameManagerService.getGameModeFromSettingsUnchecked(i, str);
+            int gameModeFromSettingsUnchecked =
+                    gameManagerService.getGameModeFromSettingsUnchecked(i, str);
             GamePackageConfiguration config = GameManagerService.this.getConfig(i, str);
-            if (config == null || (gameModeConfiguration = config.getGameModeConfiguration(gameModeFromSettingsUnchecked)) == null) {
+            if (config == null
+                    || (gameModeConfiguration =
+                                    config.getGameModeConfiguration(gameModeFromSettingsUnchecked))
+                            == null) {
                 return -1.0f;
             }
             return gameModeConfiguration.getScaling();
@@ -685,12 +799,19 @@ public final class GameManagerService extends IGameManagerService.Stub {
             synchronized (GameManagerService.this.mLock) {
                 try {
                     GameManagerService gameManagerService = GameManagerService.this;
-                    if (gameManagerService.mSettings.containsKey(Integer.valueOf(gameManagerService.mContext.getUserId()))) {
+                    if (gameManagerService.mSettings.containsKey(
+                            Integer.valueOf(gameManagerService.mContext.getUserId()))) {
                         GameManagerService gameManagerService2 = GameManagerService.this;
-                        int gameModeFromSettingsUnchecked = gameManagerService2.getGameModeFromSettingsUnchecked(gameManagerService2.mContext.getUserId(), str);
+                        int gameModeFromSettingsUnchecked =
+                                gameManagerService2.getGameModeFromSettingsUnchecked(
+                                        gameManagerService2.mContext.getUserId(), str);
                         DeviceConfig.deleteProperty("game_overlay", str);
                         GameManagerService gameManagerService3 = GameManagerService.this;
-                        gameManagerService3.updateResolutionScalingFactor(str, gameModeFromSettingsUnchecked, f, gameManagerService3.mContext.getUserId());
+                        gameManagerService3.updateResolutionScalingFactor(
+                                str,
+                                gameModeFromSettingsUnchecked,
+                                f,
+                                gameManagerService3.mContext.getUserId());
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -701,28 +822,38 @@ public final class GameManagerService extends IGameManagerService.Stub {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyUidObserver extends UidObserver {
-        public MyUidObserver() {
-        }
+        public MyUidObserver() {}
 
         public final void handleUidMovedOffTop(int i) {
             synchronized (GameManagerService.this.mUidObserverLock) {
                 try {
-                    if (((HashSet) GameManagerService.this.mGameForegroundUids).contains(Integer.valueOf(i))) {
-                        ((HashSet) GameManagerService.this.mGameForegroundUids).remove(Integer.valueOf(i));
+                    if (((HashSet) GameManagerService.this.mGameForegroundUids)
+                            .contains(Integer.valueOf(i))) {
+                        ((HashSet) GameManagerService.this.mGameForegroundUids)
+                                .remove(Integer.valueOf(i));
                         if (((HashSet) GameManagerService.this.mGameForegroundUids).isEmpty()) {
                             if (Flags.disableGameModeWhenAppTop()) {
-                                if (((HashSet) GameManagerService.this.mNonGameForegroundUids).isEmpty()) {
-                                }
+                                if (((HashSet) GameManagerService.this.mNonGameForegroundUids)
+                                        .isEmpty()) {}
                             }
-                            Slog.v("GameManagerService", "Game power mode OFF (no games in foreground)");
+                            Slog.v(
+                                    "GameManagerService",
+                                    "Game power mode OFF (no games in foreground)");
                             GameManagerService.this.mPowerManagerInternal.setPowerMode(15, false);
                         }
                     } else if (Flags.disableGameModeWhenAppTop()) {
-                        if (((HashSet) GameManagerService.this.mNonGameForegroundUids).contains(Integer.valueOf(i))) {
-                            ((HashSet) GameManagerService.this.mNonGameForegroundUids).remove(Integer.valueOf(i));
-                            if (((HashSet) GameManagerService.this.mNonGameForegroundUids).isEmpty() && !((HashSet) GameManagerService.this.mGameForegroundUids).isEmpty()) {
-                                Slog.v("GameManagerService", "Game power mode ON (only games in foreground)");
-                                GameManagerService.this.mPowerManagerInternal.setPowerMode(15, true);
+                        if (((HashSet) GameManagerService.this.mNonGameForegroundUids)
+                                .contains(Integer.valueOf(i))) {
+                            ((HashSet) GameManagerService.this.mNonGameForegroundUids)
+                                    .remove(Integer.valueOf(i));
+                            if (((HashSet) GameManagerService.this.mNonGameForegroundUids).isEmpty()
+                                    && !((HashSet) GameManagerService.this.mGameForegroundUids)
+                                            .isEmpty()) {
+                                Slog.v(
+                                        "GameManagerService",
+                                        "Game power mode ON (only games in foreground)");
+                                GameManagerService.this.mPowerManagerInternal.setPowerMode(
+                                        15, true);
                             }
                         }
                     }
@@ -747,25 +878,42 @@ public final class GameManagerService extends IGameManagerService.Stub {
             if (packagesForUid == null || packagesForUid.length == 0) {
                 return;
             }
-            boolean noneMatch = Arrays.stream(packagesForUid).noneMatch(new GameManagerService$$ExternalSyntheticLambda3(this, GameManagerService.this.mContext.getUserId()));
+            boolean noneMatch =
+                    Arrays.stream(packagesForUid)
+                            .noneMatch(
+                                    new GameManagerService$$ExternalSyntheticLambda3(
+                                            this, GameManagerService.this.mContext.getUserId()));
             synchronized (GameManagerService.this.mUidObserverLock) {
                 try {
                     if (noneMatch) {
                         if (Flags.disableGameModeWhenAppTop()) {
-                            if (!((HashSet) GameManagerService.this.mGameForegroundUids).isEmpty() && ((HashSet) GameManagerService.this.mNonGameForegroundUids).isEmpty()) {
-                                Slog.v("GameManagerService", "Game power mode OFF (first non-game in foreground)");
-                                GameManagerService.this.mPowerManagerInternal.setPowerMode(15, false);
+                            if (!((HashSet) GameManagerService.this.mGameForegroundUids).isEmpty()
+                                    && ((HashSet) GameManagerService.this.mNonGameForegroundUids)
+                                            .isEmpty()) {
+                                Slog.v(
+                                        "GameManagerService",
+                                        "Game power mode OFF (first non-game in foreground)");
+                                GameManagerService.this.mPowerManagerInternal.setPowerMode(
+                                        15, false);
                             }
-                            ((HashSet) GameManagerService.this.mNonGameForegroundUids).add(Integer.valueOf(i));
+                            ((HashSet) GameManagerService.this.mNonGameForegroundUids)
+                                    .add(Integer.valueOf(i));
                         }
                         return;
                     }
-                    if (((HashSet) GameManagerService.this.mGameForegroundUids).isEmpty() && (!Flags.disableGameModeWhenAppTop() || ((HashSet) GameManagerService.this.mNonGameForegroundUids).isEmpty())) {
-                        Slog.v("GameManagerService", "Game power mode ON (first game in foreground)");
+                    if (((HashSet) GameManagerService.this.mGameForegroundUids).isEmpty()
+                            && (!Flags.disableGameModeWhenAppTop()
+                                    || ((HashSet) GameManagerService.this.mNonGameForegroundUids)
+                                            .isEmpty())) {
+                        Slog.v(
+                                "GameManagerService",
+                                "Game power mode ON (first game in foreground)");
                         GameManagerService.this.mPowerManagerInternal.setPowerMode(15, true);
                     }
                     GameManagerService.this.mSysProps.getClass();
-                    boolean z = SystemProperties.getBoolean("debug.graphics.game_default_frame_rate.disabled", false);
+                    boolean z =
+                            SystemProperties.getBoolean(
+                                    "debug.graphics.game_default_frame_rate.disabled", false);
                     GameManagerService gameManagerService = GameManagerService.this;
                     boolean z2 = !z;
                     gameManagerService.getClass();
@@ -800,19 +948,25 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 Method dump skipped, instructions count: 866
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.app.GameManagerService.SettingsHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.app.GameManagerService.SettingsHandler.handleMessage(android.os.Message):void");
         }
     }
 
     /* renamed from: $r8$lambda$LCP_4kvy-EB-QxmT_kuk0Xyillc, reason: not valid java name */
-    public static void m226$r8$lambda$LCP_4kvyEBQxmT_kuk0Xyillc(GameManagerService gameManagerService, int i, List list) {
+    public static void m226$r8$lambda$LCP_4kvyEBQxmT_kuk0Xyillc(
+            GameManagerService gameManagerService, int i, List list) {
         Set<String> keySet;
         int i2;
         gameManagerService.getClass();
         if (i != 10165 && i != 10166) {
             if (i == 10167) {
                 synchronized (gameManagerService.mGameModeListenerLock) {
-                    list.add(FrameworkStatsLog.buildStatsEvent(FrameworkStatsLog.GAME_MODE_LISTENER, gameManagerService.mGameModeListeners.size()));
+                    list.add(
+                            FrameworkStatsLog.buildStatsEvent(
+                                    FrameworkStatsLog.GAME_MODE_LISTENER,
+                                    gameManagerService.mGameModeListeners.size()));
                 }
                 return;
             }
@@ -828,7 +982,12 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 try {
                     i2 = gameManagerService.mPackageManager.getPackageUidAsUser(str, currentUser);
                 } catch (PackageManager.NameNotFoundException unused) {
-                    Slog.d("GameManagerService", "Cannot find UID for package " + str + " under user handle id " + currentUser);
+                    Slog.d(
+                            "GameManagerService",
+                            "Cannot find UID for package "
+                                    + str
+                                    + " under user handle id "
+                                    + currentUser);
                     i2 = -1;
                 }
                 int i3 = 0;
@@ -852,15 +1011,24 @@ public final class GameManagerService extends IGameManagerService.Stub {
                         i3++;
                         i6++;
                     }
-                    list.add(FrameworkStatsLog.buildStatsEvent(FrameworkStatsLog.GAME_MODE_INFO, i2, iArr, iArr2));
+                    list.add(
+                            FrameworkStatsLog.buildStatsEvent(
+                                    FrameworkStatsLog.GAME_MODE_INFO, i2, iArr, iArr2));
                 } else if (i == 10166) {
                     int[] availableGameModes2 = config.getAvailableGameModes();
                     int length3 = availableGameModes2.length;
                     while (i3 < length3) {
                         int i7 = availableGameModes2[i3];
-                        GamePackageConfiguration.GameModeConfiguration gameModeConfiguration = config.getGameModeConfiguration(i7);
+                        GamePackageConfiguration.GameModeConfiguration gameModeConfiguration =
+                                config.getGameModeConfiguration(i7);
                         if (gameModeConfiguration != null) {
-                            list.add(FrameworkStatsLog.buildStatsEvent(FrameworkStatsLog.GAME_MODE_CONFIGURATION, i2, gameModeToStatsdGameMode(i7), gameModeConfiguration.getFps(), gameModeConfiguration.getScaling()));
+                            list.add(
+                                    FrameworkStatsLog.buildStatsEvent(
+                                            FrameworkStatsLog.GAME_MODE_CONFIGURATION,
+                                            i2,
+                                            gameModeToStatsdGameMode(i7),
+                                            gameModeConfiguration.getFps(),
+                                            gameModeConfiguration.getScaling()));
                         }
                         i3++;
                     }
@@ -887,15 +1055,26 @@ public final class GameManagerService extends IGameManagerService.Stub {
         PackageManager packageManager = context.getPackageManager();
         this.mPackageManager = packageManager;
         this.mUserManager = (UserManager) context.getSystemService(UserManager.class);
-        this.mPowerManagerInternal = (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
+        this.mPowerManagerInternal =
+                (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
         File file2 = new File(file, "system");
         file2.mkdirs();
         FileUtils.setPermissions(file2.toString(), 509, -1, -1);
         AtomicFile atomicFile = new AtomicFile(new File(file2, "game_mode_intervention.list"));
         this.mGameModeInterventionListFile = atomicFile;
-        FileUtils.setPermissions(atomicFile.getBaseFile().getAbsolutePath(), FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_RESTARTED, -1, -1);
+        FileUtils.setPermissions(
+                atomicFile.getBaseFile().getAbsolutePath(),
+                FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_RESTARTED,
+                -1,
+                -1);
         if (packageManager.hasSystemFeature("android.software.game_service")) {
-            this.mGameServiceController = new GameServiceController(context, BackgroundThread.getExecutor(), new GameServiceProviderSelectorImpl(context.getResources(), packageManager), new GameServiceProviderInstanceFactoryImpl(context));
+            this.mGameServiceController =
+                    new GameServiceController(
+                            context,
+                            BackgroundThread.getExecutor(),
+                            new GameServiceProviderSelectorImpl(
+                                    context.getResources(), packageManager),
+                            new GameServiceProviderInstanceFactoryImpl(context));
         } else {
             this.mGameServiceController = null;
         }
@@ -936,10 +1115,16 @@ public final class GameManagerService extends IGameManagerService.Stub {
             IBinder asBinder = iGameModeListener.asBinder();
             asBinder.linkToDeath(new AnonymousClass1(iGameModeListener, asBinder), 0);
             synchronized (this.mGameModeListenerLock) {
-                this.mGameModeListeners.put(iGameModeListener, Integer.valueOf(Binder.getCallingUid()));
+                this.mGameModeListeners.put(
+                        iGameModeListener, Integer.valueOf(Binder.getCallingUid()));
             }
         } catch (RemoteException e) {
-            Slog.e("GameManagerService", "Failed to link death recipient for IGameModeListener from caller " + Binder.getCallingUid() + ", abandoned its listener registration", e);
+            Slog.e(
+                    "GameManagerService",
+                    "Failed to link death recipient for IGameModeListener from caller "
+                            + Binder.getCallingUid()
+                            + ", abandoned its listener registration",
+                    e);
         }
     }
 
@@ -948,10 +1133,16 @@ public final class GameManagerService extends IGameManagerService.Stub {
             IBinder asBinder = iGameStateListener.asBinder();
             asBinder.linkToDeath(new AnonymousClass1(iGameStateListener, asBinder), 0);
             synchronized (this.mGameStateListenerLock) {
-                this.mGameStateListeners.put(iGameStateListener, Integer.valueOf(Binder.getCallingUid()));
+                this.mGameStateListeners.put(
+                        iGameStateListener, Integer.valueOf(Binder.getCallingUid()));
             }
         } catch (RemoteException e) {
-            Slog.e("GameManagerService", "Failed to link death recipient for IGameStateListener from caller " + Binder.getCallingUid() + ", abandoned its listener registration", e);
+            Slog.e(
+                    "GameManagerService",
+                    "Failed to link death recipient for IGameStateListener from caller "
+                            + Binder.getCallingUid()
+                            + ", abandoned its listener registration",
+                    e);
         }
     }
 
@@ -959,12 +1150,22 @@ public final class GameManagerService extends IGameManagerService.Stub {
         if (this.mContext.checkCallingOrSelfPermission(str) == 0) {
             return;
         }
-        throw new SecurityException("Access denied to process: " + Binder.getCallingPid() + ", must have permission " + str);
+        throw new SecurityException(
+                "Access denied to process: "
+                        + Binder.getCallingPid()
+                        + ", must have permission "
+                        + str);
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
-            printWriter.println("Permission Denial: can't dump GameManagerService from from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid() + " without permission android.permission.DUMP");
+            printWriter.println(
+                    "Permission Denial: can't dump GameManagerService from from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid()
+                            + " without permission android.permission.DUMP");
             return;
         }
         if (strArr == null || strArr.length == 0) {
@@ -982,7 +1183,7 @@ public final class GameManagerService extends IGameManagerService.Stub {
             return new int[0];
         }
         GamePackageConfiguration config = getConfig(i, str);
-        return config == null ? new int[]{1, 4} : config.getAvailableGameModes();
+        return config == null ? new int[] {1, 4} : config.getAvailableGameModes();
     }
 
     public final GamePackageConfiguration getConfig(int i, String str) {
@@ -993,12 +1194,22 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
         synchronized (this.mLock) {
             try {
-                gamePackageConfiguration2 = this.mSettings.containsKey(Integer.valueOf(i)) ? (GamePackageConfiguration) ((GameManagerSettings) this.mSettings.get(Integer.valueOf(i))).mConfigOverrides.get(str) : null;
+                gamePackageConfiguration2 =
+                        this.mSettings.containsKey(Integer.valueOf(i))
+                                ? (GamePackageConfiguration)
+                                        ((GameManagerSettings)
+                                                        this.mSettings.get(Integer.valueOf(i)))
+                                                .mConfigOverrides.get(str)
+                                : null;
             } catch (Throwable th) {
                 throw th;
             }
         }
-        return (gamePackageConfiguration2 == null || gamePackageConfiguration == null) ? gamePackageConfiguration2 == null ? gamePackageConfiguration : gamePackageConfiguration2 : gamePackageConfiguration.copyAndApplyOverride(gamePackageConfiguration2);
+        return (gamePackageConfiguration2 == null || gamePackageConfiguration == null)
+                ? gamePackageConfiguration2 == null
+                        ? gamePackageConfiguration
+                        : gamePackageConfiguration2
+                : gamePackageConfiguration.copyAndApplyOverride(gamePackageConfiguration2);
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(8:5|(2:7|(6:11|12|13|(1:15)|16|(3:(3:19|(1:21)(1:(1:24)(1:(1:26)))|22)|27|28)(4:29|(3:31|(1:33)(1:(1:36)(1:(1:38)))|34)|39|40)))|43|12|13|(0)|16|(0)(0)) */
@@ -1097,7 +1308,10 @@ public final class GameManagerService extends IGameManagerService.Stub {
             int r11 = r11.getGameModeFromSettingsUnchecked(r13, r12)
             return r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.app.GameManagerService.getGameMode(java.lang.String, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.app.GameManagerService.getGameMode(java.lang.String,"
+                    + " int):int");
     }
 
     public final int getGameModeFromSettingsUnchecked(int i, String str) {
@@ -1106,13 +1320,24 @@ public final class GameManagerService extends IGameManagerService.Stub {
             try {
                 int i2 = 1;
                 if (this.mSettings.containsKey(Integer.valueOf(i))) {
-                    GameManagerSettings gameManagerSettings = (GameManagerSettings) this.mSettings.get(Integer.valueOf(i));
-                    if (gameManagerSettings.mGameModes.containsKey(str) && (intValue = ((Integer) gameManagerSettings.mGameModes.get(str)).intValue()) != 0) {
+                    GameManagerSettings gameManagerSettings =
+                            (GameManagerSettings) this.mSettings.get(Integer.valueOf(i));
+                    if (gameManagerSettings.mGameModes.containsKey(str)
+                            && (intValue =
+                                            ((Integer) gameManagerSettings.mGameModes.get(str))
+                                                    .intValue())
+                                    != 0) {
                         i2 = intValue;
                     }
                     return i2;
                 }
-                Slog.d("GameManagerService", "User ID '" + i + "' does not have a Game Mode selected for package: '" + str + "'");
+                Slog.d(
+                        "GameManagerService",
+                        "User ID '"
+                                + i
+                                + "' does not have a Game Mode selected for package: '"
+                                + str
+                                + "'");
                 return 1;
             } finally {
             }
@@ -1122,23 +1347,43 @@ public final class GameManagerService extends IGameManagerService.Stub {
     public final GameModeInfo getGameModeInfo(String str, int i) {
         GamePackageConfiguration.GameModeConfiguration gameModeConfiguration;
         int i2;
-        int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, true, "getGameModeInfo", "com.android.server.app.GameManagerService");
+        int handleIncomingUser =
+                ActivityManager.handleIncomingUser(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        i,
+                        false,
+                        true,
+                        "getGameModeInfo",
+                        "com.android.server.app.GameManagerService");
         checkPermission("android.permission.MANAGE_GAME_MODE");
         if (!isPackageGame(handleIncomingUser, str)) {
             return null;
         }
-        int gameModeFromSettingsUnchecked = getGameModeFromSettingsUnchecked(handleIncomingUser, str);
+        int gameModeFromSettingsUnchecked =
+                getGameModeFromSettingsUnchecked(handleIncomingUser, str);
         GamePackageConfiguration config = getConfig(handleIncomingUser, str);
         if (config == null) {
-            GameModeInfo.Builder activeGameMode = new GameModeInfo.Builder().setActiveGameMode(gameModeFromSettingsUnchecked);
+            GameModeInfo.Builder activeGameMode =
+                    new GameModeInfo.Builder().setActiveGameMode(gameModeFromSettingsUnchecked);
             GamePackageConfiguration config2 = getConfig(handleIncomingUser, str);
-            return activeGameMode.setAvailableGameModes(config2 == null ? new int[]{1, 4} : config2.getAvailableGameModes()).build();
+            return activeGameMode
+                    .setAvailableGameModes(
+                            config2 == null ? new int[] {1, 4} : config2.getAvailableGameModes())
+                    .build();
         }
         int[] overriddenGameModes = config.getOverriddenGameModes();
         int[] availableGameModes = config.getAvailableGameModes();
-        GameModeInfo.Builder fpsOverrideAllowed = new GameModeInfo.Builder().setActiveGameMode(gameModeFromSettingsUnchecked).setAvailableGameModes(availableGameModes).setOverriddenGameModes(overriddenGameModes).setDownscalingAllowed(config.mAllowDownscale).setFpsOverrideAllowed(config.mAllowFpsOverride);
+        GameModeInfo.Builder fpsOverrideAllowed =
+                new GameModeInfo.Builder()
+                        .setActiveGameMode(gameModeFromSettingsUnchecked)
+                        .setAvailableGameModes(availableGameModes)
+                        .setOverriddenGameModes(overriddenGameModes)
+                        .setDownscalingAllowed(config.mAllowDownscale)
+                        .setFpsOverrideAllowed(config.mAllowFpsOverride);
         for (int i3 : availableGameModes) {
-            if (!config.willGamePerformOptimizations(i3) && (gameModeConfiguration = config.getGameModeConfiguration(i3)) != null) {
+            if (!config.willGamePerformOptimizations(i3)
+                    && (gameModeConfiguration = config.getGameModeConfiguration(i3)) != null) {
                 try {
                     i2 = Integer.parseInt(gameModeConfiguration.mFps);
                 } catch (NumberFormatException unused) {
@@ -1151,14 +1396,23 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 if (f == -1.0f) {
                     f = 1.0f;
                 }
-                fpsOverrideAllowed.setGameModeConfiguration(i3, new GameModeConfiguration.Builder().setScalingFactor(f).setFpsOverride(i2).build());
+                fpsOverrideAllowed.setGameModeConfiguration(
+                        i3,
+                        new GameModeConfiguration.Builder()
+                                .setScalingFactor(f)
+                                .setFpsOverride(i2)
+                                .build());
             }
         }
         return fpsOverrideAllowed.build();
     }
 
     public final String[] getInstalledGamePackageNames(int i) {
-        return (String[]) this.mPackageManager.getInstalledPackagesAsUser(0, i).stream().filter(new GameManagerService$$ExternalSyntheticLambda0()).map(new GameManagerService$$ExternalSyntheticLambda1()).toArray(new GameManagerService$$ExternalSyntheticLambda2(0));
+        return (String[])
+                this.mPackageManager.getInstalledPackagesAsUser(0, i).stream()
+                        .filter(new GameManagerService$$ExternalSyntheticLambda0())
+                        .map(new GameManagerService$$ExternalSyntheticLambda1())
+                        .toArray(new GameManagerService$$ExternalSyntheticLambda2(0));
     }
 
     public final List getInstalledGamePackageNamesByAllUsers(int i) {
@@ -1183,7 +1437,8 @@ public final class GameManagerService extends IGameManagerService.Stub {
         GamePackageConfiguration config = getConfig(i, str);
         StringBuilder sb = new StringBuilder();
         if (config == null) {
-            return AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, "\n No intervention found for package ", str);
+            return AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                    sb, "\n No intervention found for package ", str);
         }
         sb.append("\n");
         sb.append(config.toString());
@@ -1201,7 +1456,10 @@ public final class GameManagerService extends IGameManagerService.Stub {
         synchronized (this.mDeviceConfigLock) {
             gamePackageConfiguration = (GamePackageConfiguration) this.mConfigs.get(str);
         }
-        if (gamePackageConfiguration == null || (gameModeConfiguration = gamePackageConfiguration.getGameModeConfiguration(gameMode)) == null) {
+        if (gamePackageConfiguration == null
+                || (gameModeConfiguration =
+                                gamePackageConfiguration.getGameModeConfiguration(gameMode))
+                        == null) {
             return -1;
         }
         synchronized (gameModeConfiguration) {
@@ -1219,7 +1477,8 @@ public final class GameManagerService extends IGameManagerService.Stub {
             }
         }
         GamePackageConfiguration config = getConfig(i2, str);
-        if (config == null || (gameModeConfiguration = config.getGameModeConfiguration(i)) == null) {
+        if (config == null
+                || (gameModeConfiguration = config.getGameModeConfiguration(i)) == null) {
             return -1.0f;
         }
         return gameModeConfiguration.getScaling();
@@ -1233,11 +1492,13 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
         synchronized (this.mDeviceConfigLock) {
             try {
-                GamePackageConfiguration gamePackageConfiguration = (GamePackageConfiguration) this.mConfigs.get(str);
+                GamePackageConfiguration gamePackageConfiguration =
+                        (GamePackageConfiguration) this.mConfigs.get(str);
                 if (gamePackageConfiguration == null) {
                     return false;
                 }
-                GamePackageConfiguration.GameModeConfiguration gameModeConfiguration = gamePackageConfiguration.getGameModeConfiguration(gameMode);
+                GamePackageConfiguration.GameModeConfiguration gameModeConfiguration =
+                        gamePackageConfiguration.getGameModeConfiguration(gameMode);
                 if (gameModeConfiguration == null) {
                     return false;
                 }
@@ -1260,20 +1521,36 @@ public final class GameManagerService extends IGameManagerService.Stub {
     }
 
     public final void notifyGraphicsEnvironmentSetup(String str, int i) {
-        int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, true, "notifyGraphicsEnvironmentSetup", "com.android.server.app.GameManagerService");
+        int handleIncomingUser =
+                ActivityManager.handleIncomingUser(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        i,
+                        false,
+                        true,
+                        "notifyGraphicsEnvironmentSetup",
+                        "com.android.server.app.GameManagerService");
         boolean z = false;
         try {
-            if (this.mPackageManager.getPackageUidAsUser(str, handleIncomingUser) == Binder.getCallingUid()) {
+            if (this.mPackageManager.getPackageUidAsUser(str, handleIncomingUser)
+                    == Binder.getCallingUid()) {
                 z = true;
             }
         } catch (PackageManager.NameNotFoundException unused) {
         }
         if (!z) {
-            Slog.d("GameManagerService", "No-op for attempt to notify graphics env setup for different packagethan caller with uid: " + Binder.getCallingUid());
+            Slog.d(
+                    "GameManagerService",
+                    "No-op for attempt to notify graphics env setup for different packagethan"
+                        + " caller with uid: "
+                            + Binder.getCallingUid());
             return;
         }
         if (getGameMode(str, handleIncomingUser) == 0) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("No-op for attempt to notify graphics env setup for non-game app: ", str, "GameManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "No-op for attempt to notify graphics env setup for non-game app: ",
+                    str,
+                    "GameManagerService");
             return;
         }
         int loadingBoostDuration = getLoadingBoostDuration(handleIncomingUser, str);
@@ -1284,7 +1561,9 @@ public final class GameManagerService extends IGameManagerService.Stub {
             if (this.mHandler.hasMessages(5)) {
                 this.mHandler.removeMessages(5);
             } else {
-                Slog.v("GameManagerService", "Game loading power mode ON (loading boost on game start)");
+                Slog.v(
+                        "GameManagerService",
+                        "Game loading power mode ON (loading boost on game start)");
                 this.mPowerManagerInternal.setPowerMode(16, true);
             }
             Handler handler = this.mHandler;
@@ -1297,21 +1576,43 @@ public final class GameManagerService extends IGameManagerService.Stub {
         GameServiceController gameServiceController = this.mGameServiceController;
         if (gameServiceController != null && !gameServiceController.mHasBootCompleted) {
             gameServiceController.mHasBootCompleted = true;
-            gameServiceController.mBackgroundExecutor.execute(new GameServiceController$$ExternalSyntheticLambda0(gameServiceController));
+            gameServiceController.mBackgroundExecutor.execute(
+                    new GameServiceController$$ExternalSyntheticLambda0(gameServiceController));
         }
-        this.mContext.registerReceiver(new AnonymousClass3(this, 0), new IntentFilter("android.intent.action.ACTION_SHUTDOWN"));
-        Slog.v("GameManagerService", "Game loading power mode OFF (game manager service start/restart)");
+        this.mContext.registerReceiver(
+                new AnonymousClass3(this, 0),
+                new IntentFilter("android.intent.action.ACTION_SHUTDOWN"));
+        Slog.v(
+                "GameManagerService",
+                "Game loading power mode OFF (game manager service start/restart)");
         this.mPowerManagerInternal.setPowerMode(16, false);
         Slog.v("GameManagerService", "Game power mode OFF (game manager service start/restart)");
         this.mPowerManagerInternal.setPowerMode(15, false);
         this.mSysProps.getClass();
-        this.mGameDefaultFrameRateValue = SystemProperties.getInt("ro.surface_flinger.game_default_frame_rate_override", 60);
-        Slog.v("GameManagerService", "Game Default Frame Rate : " + this.mGameDefaultFrameRateValue);
+        this.mGameDefaultFrameRateValue =
+                SystemProperties.getInt("ro.surface_flinger.game_default_frame_rate_override", 60);
+        Slog.v(
+                "GameManagerService",
+                "Game Default Frame Rate : " + this.mGameDefaultFrameRateValue);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-        new GameManagerShellCommand().exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+    public final void onShellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver) {
+        new GameManagerShellCommand()
+                .exec(
+                        this,
+                        fileDescriptor,
+                        fileDescriptor2,
+                        fileDescriptor3,
+                        strArr,
+                        shellCallback,
+                        resultReceiver);
     }
 
     public final void removeGameModeListener(IGameModeListener iGameModeListener) {
@@ -1333,13 +1634,17 @@ public final class GameManagerService extends IGameManagerService.Stub {
         synchronized (this.mLock) {
             try {
                 if (this.mSettings.containsKey(Integer.valueOf(i))) {
-                    GameManagerSettings gameManagerSettings = (GameManagerSettings) this.mSettings.get(Integer.valueOf(i));
+                    GameManagerSettings gameManagerSettings =
+                            (GameManagerSettings) this.mSettings.get(Integer.valueOf(i));
                     if (i2 != -1) {
-                        GamePackageConfiguration gamePackageConfiguration = (GamePackageConfiguration) gameManagerSettings.mConfigOverrides.get(str);
+                        GamePackageConfiguration gamePackageConfiguration =
+                                (GamePackageConfiguration)
+                                        gameManagerSettings.mConfigOverrides.get(str);
                         if (gamePackageConfiguration == null) {
                             return;
                         }
-                        if ((gamePackageConfiguration.getAvailableGameModesBitfield() & (1 << i2)) == 0) {
+                        if ((gamePackageConfiguration.getAvailableGameModesBitfield() & (1 << i2))
+                                == 0) {
                             return;
                         }
                         synchronized (gamePackageConfiguration.mModeConfigLock) {
@@ -1356,7 +1661,13 @@ public final class GameManagerService extends IGameManagerService.Stub {
                     }
                     int gameMode = getGameMode(str, i);
                     GamePackageConfiguration config = getConfig(i, str);
-                    if (gameMode != ((config == null || ((config.getAvailableGameModesBitfield() & (-2)) & (1 << gameMode)) == 0) ? 1 : gameMode)) {
+                    if (gameMode
+                            != ((config == null
+                                            || ((config.getAvailableGameModesBitfield() & (-2))
+                                                            & (1 << gameMode))
+                                                    == 0)
+                                    ? 1
+                                    : gameMode)) {
                         setGameMode(str, 1, i);
                     } else {
                         setGameMode(str, gameMode, i);
@@ -1369,7 +1680,8 @@ public final class GameManagerService extends IGameManagerService.Stub {
     }
 
     public final void sendUserMessage(int i, int i2, int i3, String str) {
-        if (this.mHandler.sendMessageDelayed(this.mHandler.obtainMessage(i2, Integer.valueOf(i)), i3)) {
+        if (this.mHandler.sendMessageDelayed(
+                this.mHandler.obtainMessage(i2, Integer.valueOf(i)), i3)) {
             return;
         }
         Slog.e("GameManagerService", "Failed to send user message " + i2 + " on " + str);
@@ -1386,28 +1698,60 @@ public final class GameManagerService extends IGameManagerService.Stub {
         GamePackageConfiguration gamePackageConfiguration;
         checkPermission("android.permission.MANAGE_GAME_MODE");
         if (i == 0) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("No-op for attempt to set UNSUPPORTED mode for app: ", str, "GameManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "No-op for attempt to set UNSUPPORTED mode for app: ",
+                    str,
+                    "GameManagerService");
             return;
         }
         if (!isPackageGame(i2, str)) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("No-op for attempt to set game mode for non-game app: ", str, "GameManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "No-op for attempt to set game mode for non-game app: ",
+                    str,
+                    "GameManagerService");
             return;
         }
         synchronized (this.mLock) {
             try {
-                int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i2, false, true, "setGameMode", "com.android.server.app.GameManagerService");
+                int handleIncomingUser =
+                        ActivityManager.handleIncomingUser(
+                                Binder.getCallingPid(),
+                                Binder.getCallingUid(),
+                                i2,
+                                false,
+                                true,
+                                "setGameMode",
+                                "com.android.server.app.GameManagerService");
                 if (!this.mSettings.containsKey(Integer.valueOf(handleIncomingUser))) {
-                    Slog.d("GameManagerService", "Failed to set game mode for package " + str + " as user " + handleIncomingUser + " is not started");
+                    Slog.d(
+                            "GameManagerService",
+                            "Failed to set game mode for package "
+                                    + str
+                                    + " as user "
+                                    + handleIncomingUser
+                                    + " is not started");
                     return;
                 }
-                GameManagerSettings gameManagerSettings = (GameManagerSettings) this.mSettings.get(Integer.valueOf(handleIncomingUser));
-                if (!gameManagerSettings.mGameModes.containsKey(str) || (i3 = ((Integer) gameManagerSettings.mGameModes.get(str)).intValue()) == 0) {
+                GameManagerSettings gameManagerSettings =
+                        (GameManagerSettings)
+                                this.mSettings.get(Integer.valueOf(handleIncomingUser));
+                if (!gameManagerSettings.mGameModes.containsKey(str)
+                        || (i3 = ((Integer) gameManagerSettings.mGameModes.get(str)).intValue())
+                                == 0) {
                     i3 = 1;
                 }
                 gameManagerSettings.mGameModes.put(str, Integer.valueOf(i));
-                if (i != i3 && (gamePackageConfiguration = (GamePackageConfiguration) gameManagerSettings.mConfigOverrides.get(str)) != null) {
-                    float resolutionScalingFactor = getResolutionScalingFactor(str, i3, handleIncomingUser);
-                    GamePackageConfiguration.GameModeConfiguration orAddDefaultGameModeConfiguration = gamePackageConfiguration.getOrAddDefaultGameModeConfiguration(i);
+                if (i != i3
+                        && (gamePackageConfiguration =
+                                        (GamePackageConfiguration)
+                                                gameManagerSettings.mConfigOverrides.get(str))
+                                != null) {
+                    float resolutionScalingFactor =
+                            getResolutionScalingFactor(str, i3, handleIncomingUser);
+                    GamePackageConfiguration.GameModeConfiguration
+                            orAddDefaultGameModeConfiguration =
+                                    gamePackageConfiguration.getOrAddDefaultGameModeConfiguration(
+                                            i);
                     synchronized (orAddDefaultGameModeConfiguration) {
                         orAddDefaultGameModeConfiguration.mScaling = resolutionScalingFactor;
                     }
@@ -1419,7 +1763,10 @@ public final class GameManagerService extends IGameManagerService.Stub {
                         try {
                             iGameModeListener.onGameModeChanged(str, i3, i, handleIncomingUser);
                         } catch (RemoteException unused) {
-                            Slog.w("GameManagerService", "Cannot notify game mode change for listener added by " + this.mGameModeListeners.get(iGameModeListener));
+                            Slog.w(
+                                    "GameManagerService",
+                                    "Cannot notify game mode change for listener added by "
+                                            + this.mGameModeListeners.get(iGameModeListener));
                         }
                     }
                 }
@@ -1428,43 +1775,79 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 try {
                     i4 = this.mPackageManager.getPackageUidAsUser(str, handleIncomingUser);
                 } catch (PackageManager.NameNotFoundException unused2) {
-                    Slog.d("GameManagerService", "Cannot find the UID for package " + str + " under user " + handleIncomingUser);
+                    Slog.d(
+                            "GameManagerService",
+                            "Cannot find the UID for package "
+                                    + str
+                                    + " under user "
+                                    + handleIncomingUser);
                     i4 = -1;
                 }
                 Slog.d("GameManagerService", "setGameMode: fromGameMode " + i3 + "toGameMode " + i);
-                FrameworkStatsLog.write(FrameworkStatsLog.GAME_MODE_CHANGED, i4, Binder.getCallingUid(), gameModeToStatsdGameMode(i3), gameModeToStatsdGameMode(i));
+                FrameworkStatsLog.write(
+                        FrameworkStatsLog.GAME_MODE_CHANGED,
+                        i4,
+                        Binder.getCallingUid(),
+                        gameModeToStatsdGameMode(i3),
+                        gameModeToStatsdGameMode(i));
             } finally {
             }
         }
     }
 
-    public void setGameModeConfigOverride(String str, int i, int i2, String str2, String str3) throws SecurityException {
+    public void setGameModeConfigOverride(String str, int i, int i2, String str2, String str3)
+            throws SecurityException {
         int i3;
         checkPermission("android.permission.MANAGE_GAME_MODE");
         try {
             i3 = this.mPackageManager.getPackageUidAsUser(str, i);
         } catch (PackageManager.NameNotFoundException unused) {
-            Slog.d("GameManagerService", "Cannot find the UID for package " + str + " under user " + i);
+            Slog.d(
+                    "GameManagerService",
+                    "Cannot find the UID for package " + str + " under user " + i);
             i3 = -1;
         }
         int i4 = i3;
         GamePackageConfiguration config = getConfig(i, str);
         if (config == null || config.getGameModeConfiguration(i2) == null) {
-            FrameworkStatsLog.write(FrameworkStatsLog.GAME_MODE_CONFIGURATION_CHANGED, i4, Binder.getCallingUid(), gameModeToStatsdGameMode(i2), -1.0f, str3 == null ? -1.0f : Float.parseFloat(str3), 0, str2 == null ? 0 : Integer.parseInt(str2));
+            FrameworkStatsLog.write(
+                    FrameworkStatsLog.GAME_MODE_CONFIGURATION_CHANGED,
+                    i4,
+                    Binder.getCallingUid(),
+                    gameModeToStatsdGameMode(i2),
+                    -1.0f,
+                    str3 == null ? -1.0f : Float.parseFloat(str3),
+                    0,
+                    str2 == null ? 0 : Integer.parseInt(str2));
         } else {
-            GamePackageConfiguration.GameModeConfiguration gameModeConfiguration = config.getGameModeConfiguration(i2);
-            FrameworkStatsLog.write(FrameworkStatsLog.GAME_MODE_CONFIGURATION_CHANGED, i4, Binder.getCallingUid(), gameModeToStatsdGameMode(i2), gameModeConfiguration.getScaling(), str3 == null ? gameModeConfiguration.getScaling() : Float.parseFloat(str3), gameModeConfiguration.getFps(), str2 == null ? gameModeConfiguration.getFps() : Integer.parseInt(str2));
+            GamePackageConfiguration.GameModeConfiguration gameModeConfiguration =
+                    config.getGameModeConfiguration(i2);
+            FrameworkStatsLog.write(
+                    FrameworkStatsLog.GAME_MODE_CONFIGURATION_CHANGED,
+                    i4,
+                    Binder.getCallingUid(),
+                    gameModeToStatsdGameMode(i2),
+                    gameModeConfiguration.getScaling(),
+                    str3 == null ? gameModeConfiguration.getScaling() : Float.parseFloat(str3),
+                    gameModeConfiguration.getFps(),
+                    str2 == null ? gameModeConfiguration.getFps() : Integer.parseInt(str2));
         }
         synchronized (this.mLock) {
             try {
                 if (this.mSettings.containsKey(Integer.valueOf(i))) {
-                    GameManagerSettings gameManagerSettings = (GameManagerSettings) this.mSettings.get(Integer.valueOf(i));
-                    GamePackageConfiguration gamePackageConfiguration = (GamePackageConfiguration) gameManagerSettings.mConfigOverrides.get(str);
+                    GameManagerSettings gameManagerSettings =
+                            (GameManagerSettings) this.mSettings.get(Integer.valueOf(i));
+                    GamePackageConfiguration gamePackageConfiguration =
+                            (GamePackageConfiguration)
+                                    gameManagerSettings.mConfigOverrides.get(str);
                     if (gamePackageConfiguration == null) {
                         gamePackageConfiguration = new GamePackageConfiguration(str);
                         gameManagerSettings.mConfigOverrides.put(str, gamePackageConfiguration);
                     }
-                    GamePackageConfiguration.GameModeConfiguration orAddDefaultGameModeConfiguration = gamePackageConfiguration.getOrAddDefaultGameModeConfiguration(i2);
+                    GamePackageConfiguration.GameModeConfiguration
+                            orAddDefaultGameModeConfiguration =
+                                    gamePackageConfiguration.getOrAddDefaultGameModeConfiguration(
+                                            i2);
                     if (str2 != null) {
                         synchronized (orAddDefaultGameModeConfiguration) {
                             orAddDefaultGameModeConfiguration.mFps = str2;
@@ -1480,7 +1863,8 @@ public final class GameManagerService extends IGameManagerService.Stub {
                             orAddDefaultGameModeConfiguration.mScaling = parseFloat;
                         }
                     }
-                    StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Package Name: ", str, " FPS: ");
+                    StringBuilder m =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package Name: ", str, " FPS: ");
                     m.append(String.valueOf(orAddDefaultGameModeConfiguration.getFps()));
                     m.append(" Scaling: ");
                     m.append(orAddDefaultGameModeConfiguration.getScaling());
@@ -1500,15 +1884,20 @@ public final class GameManagerService extends IGameManagerService.Stub {
     public final void setGameServiceProvider(String str) {
         checkPermission("android.permission.SET_GAME_SERVICE");
         GameServiceController gameServiceController = this.mGameServiceController;
-        if (gameServiceController != null && (!Objects.equals(gameServiceController.mGameServiceProviderOverride, str))) {
+        if (gameServiceController != null
+                && (!Objects.equals(gameServiceController.mGameServiceProviderOverride, str))) {
             gameServiceController.mGameServiceProviderOverride = str;
-            gameServiceController.mBackgroundExecutor.execute(new GameServiceController$$ExternalSyntheticLambda0(gameServiceController));
+            gameServiceController.mBackgroundExecutor.execute(
+                    new GameServiceController$$ExternalSyntheticLambda0(gameServiceController));
         }
     }
 
     public final void setGameState(String str, GameState gameState, int i) {
         if (!isPackageGame(i, str)) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("No-op for attempt to set game state for non-game app: ", str, "GameManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "No-op for attempt to set game state for non-game app: ",
+                    str,
+                    "GameManagerService");
             return;
         }
         Message obtainMessage = this.mHandler.obtainMessage(4);
@@ -1528,10 +1917,12 @@ public final class GameManagerService extends IGameManagerService.Stub {
                 try {
                     if (z) {
                         this.mSysProps.getClass();
-                        SystemProperties.set("debug.graphics.game_default_frame_rate.disabled", "false");
+                        SystemProperties.set(
+                                "debug.graphics.game_default_frame_rate.disabled", "false");
                     } else {
                         this.mSysProps.getClass();
-                        SystemProperties.set("debug.graphics.game_default_frame_rate.disabled", "true");
+                        SystemProperties.set(
+                                "debug.graphics.game_default_frame_rate.disabled", "true");
                     }
                 } finally {
                 }
@@ -1555,13 +1946,13 @@ public final class GameManagerService extends IGameManagerService.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:77:0x0069, code lost:
-    
-        r8 = move-exception;
-     */
+
+       r8 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:80:0x0122, code lost:
-    
-        throw r8;
-     */
+
+       throw r8;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1571,14 +1962,21 @@ public final class GameManagerService extends IGameManagerService.Stub {
             Method dump skipped, instructions count: 319
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.app.GameManagerService.updateConfigsForUser(int, boolean, java.lang.String[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.app.GameManagerService.updateConfigsForUser(int,"
+                    + " boolean, java.lang.String[]):void");
     }
 
-    public final void updateCustomGameModeConfiguration(String str, GameModeConfiguration gameModeConfiguration, int i) {
+    public final void updateCustomGameModeConfiguration(
+            String str, GameModeConfiguration gameModeConfiguration, int i) {
         int i2;
         checkPermission("android.permission.MANAGE_GAME_MODE");
         if (!isPackageGame(i, str)) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m("No-op for attempt to update custom game mode for non-game app: ", str, "GameManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    "No-op for attempt to update custom game mode for non-game app: ",
+                    str,
+                    "GameManagerService");
             return;
         }
         synchronized (this.mLock) {
@@ -1589,24 +1987,36 @@ public final class GameManagerService extends IGameManagerService.Stub {
         synchronized (this.mLock) {
             try {
                 if (this.mSettings.containsKey(Integer.valueOf(i))) {
-                    GameManagerSettings gameManagerSettings = (GameManagerSettings) this.mSettings.get(Integer.valueOf(i));
-                    GamePackageConfiguration gamePackageConfiguration = (GamePackageConfiguration) gameManagerSettings.mConfigOverrides.get(str);
+                    GameManagerSettings gameManagerSettings =
+                            (GameManagerSettings) this.mSettings.get(Integer.valueOf(i));
+                    GamePackageConfiguration gamePackageConfiguration =
+                            (GamePackageConfiguration)
+                                    gameManagerSettings.mConfigOverrides.get(str);
                     if (gamePackageConfiguration == null) {
                         gamePackageConfiguration = new GamePackageConfiguration(str);
                         gameManagerSettings.mConfigOverrides.put(str, gamePackageConfiguration);
                     }
-                    GamePackageConfiguration.GameModeConfiguration orAddDefaultGameModeConfiguration = gamePackageConfiguration.getOrAddDefaultGameModeConfiguration(4);
+                    GamePackageConfiguration.GameModeConfiguration
+                            orAddDefaultGameModeConfiguration =
+                                    gamePackageConfiguration.getOrAddDefaultGameModeConfiguration(
+                                            4);
                     float scaling = orAddDefaultGameModeConfiguration.getScaling();
                     int fps = orAddDefaultGameModeConfiguration.getFps();
-                    orAddDefaultGameModeConfiguration.mScaling = gameModeConfiguration.getScalingFactor();
-                    orAddDefaultGameModeConfiguration.mFps = String.valueOf(gameModeConfiguration.getFpsOverride());
+                    orAddDefaultGameModeConfiguration.mScaling =
+                            gameModeConfiguration.getScalingFactor();
+                    orAddDefaultGameModeConfiguration.mFps =
+                            String.valueOf(gameModeConfiguration.getFpsOverride());
                     sendUserMessage(i, 1, 10000, "UPDATE_CUSTOM_GAME_MODE_CONFIG");
                     sendUserMessage(i, 6, 10000, "UPDATE_CUSTOM_GAME_MODE_CONFIG");
                     int gameMode = getGameMode(str, i);
                     if (gameMode == 4) {
                         updateInterventions(gameMode, i, str);
                     }
-                    StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Updated custom game mode config for package: ", str, " with FPS=");
+                    StringBuilder m =
+                            DumpUtils$$ExternalSyntheticOutline0.m(
+                                    "Updated custom game mode config for package: ",
+                                    str,
+                                    " with FPS=");
                     m.append(orAddDefaultGameModeConfiguration.getFps());
                     m.append(";Scaling=");
                     m.append(orAddDefaultGameModeConfiguration.getScaling());
@@ -1616,10 +2026,20 @@ public final class GameManagerService extends IGameManagerService.Stub {
                     try {
                         i2 = this.mPackageManager.getPackageUidAsUser(str, i);
                     } catch (PackageManager.NameNotFoundException unused) {
-                        Slog.d("GameManagerService", "Cannot find the UID for package " + str + " under user " + i);
+                        Slog.d(
+                                "GameManagerService",
+                                "Cannot find the UID for package " + str + " under user " + i);
                         i2 = -1;
                     }
-                    FrameworkStatsLog.write(FrameworkStatsLog.GAME_MODE_CONFIGURATION_CHANGED, i2, Binder.getCallingUid(), gameModeToStatsdGameMode(4), scaling, gameModeConfiguration.getScalingFactor(), fps, gameModeConfiguration.getFpsOverride());
+                    FrameworkStatsLog.write(
+                            FrameworkStatsLog.GAME_MODE_CONFIGURATION_CHANGED,
+                            i2,
+                            Binder.getCallingUid(),
+                            gameModeToStatsdGameMode(4),
+                            scaling,
+                            gameModeConfiguration.getScalingFactor(),
+                            fps,
+                            gameModeConfiguration.getFpsOverride());
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1629,9 +2049,15 @@ public final class GameManagerService extends IGameManagerService.Stub {
 
     public final void updateInterventions(int i, int i2, String str) {
         GamePackageConfiguration config = getConfig(i2, str);
-        if (i == 1 || i == 0 || config == null || config.willGamePerformOptimizations(i) || config.getGameModeConfiguration(i) == null) {
+        if (i == 1
+                || i == 0
+                || config == null
+                || config.willGamePerformOptimizations(i)
+                || config.getGameModeConfiguration(i) == null) {
             try {
-                setGameModeFrameRateOverride(this.mPackageManager.getPackageUidAsUser(str, i2), FullScreenMagnificationGestureHandler.MAX_SCALE);
+                setGameModeFrameRateOverride(
+                        this.mPackageManager.getPackageUidAsUser(str, i2),
+                        FullScreenMagnificationGestureHandler.MAX_SCALE);
             } catch (PackageManager.NameNotFoundException unused) {
             }
             if (config == null) {
@@ -1642,7 +2068,8 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
         if (config.getGameModeConfiguration(i) != null) {
             try {
-                setGameModeFrameRateOverride(this.mPackageManager.getPackageUidAsUser(str, i2), r0.getFps());
+                setGameModeFrameRateOverride(
+                        this.mPackageManager.getPackageUidAsUser(str, i2), r0.getFps());
             } catch (PackageManager.NameNotFoundException unused2) {
             }
         } else {

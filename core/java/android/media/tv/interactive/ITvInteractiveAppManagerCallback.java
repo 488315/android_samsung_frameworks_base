@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface ITvInteractiveAppManagerCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.media.tv.interactive.ITvInteractiveAppManagerCallback";
+    public static final String DESCRIPTOR =
+            "android.media.tv.interactive.ITvInteractiveAppManagerCallback";
 
     void onInteractiveAppServiceAdded(String str) throws RemoteException;
 
@@ -18,28 +19,26 @@ public interface ITvInteractiveAppManagerCallback extends IInterface {
 
     void onStateChanged(String str, int i, int i2, int i3) throws RemoteException;
 
-    void onTvInteractiveAppServiceInfoUpdated(TvInteractiveAppServiceInfo tvInteractiveAppServiceInfo) throws RemoteException;
+    void onTvInteractiveAppServiceInfoUpdated(
+            TvInteractiveAppServiceInfo tvInteractiveAppServiceInfo) throws RemoteException;
 
     public static class Default implements ITvInteractiveAppManagerCallback {
         @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-        public void onInteractiveAppServiceAdded(String iAppServiceId) throws RemoteException {
-        }
+        public void onInteractiveAppServiceAdded(String iAppServiceId) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-        public void onInteractiveAppServiceRemoved(String iAppServiceId) throws RemoteException {
-        }
+        public void onInteractiveAppServiceRemoved(String iAppServiceId) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-        public void onInteractiveAppServiceUpdated(String iAppServiceId) throws RemoteException {
-        }
+        public void onInteractiveAppServiceUpdated(String iAppServiceId) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-        public void onTvInteractiveAppServiceInfoUpdated(TvInteractiveAppServiceInfo tvIAppInfo) throws RemoteException {
-        }
+        public void onTvInteractiveAppServiceInfoUpdated(TvInteractiveAppServiceInfo tvIAppInfo)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-        public void onStateChanged(String iAppServiceId, int type, int state, int err) throws RemoteException {
-        }
+        public void onStateChanged(String iAppServiceId, int type, int state, int err)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +46,7 @@ public interface ITvInteractiveAppManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInteractiveAppManagerCallback {
+    public abstract static class Stub extends Binder implements ITvInteractiveAppManagerCallback {
         static final int TRANSACTION_onInteractiveAppServiceAdded = 1;
         static final int TRANSACTION_onInteractiveAppServiceRemoved = 2;
         static final int TRANSACTION_onInteractiveAppServiceUpdated = 3;
@@ -97,7 +96,8 @@ public interface ITvInteractiveAppManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITvInteractiveAppManagerCallback.DESCRIPTOR);
             }
@@ -122,7 +122,9 @@ public interface ITvInteractiveAppManagerCallback extends IInterface {
                     onInteractiveAppServiceUpdated(_arg03);
                     return true;
                 case 4:
-                    TvInteractiveAppServiceInfo _arg04 = (TvInteractiveAppServiceInfo) data.readTypedObject(TvInteractiveAppServiceInfo.CREATOR);
+                    TvInteractiveAppServiceInfo _arg04 =
+                            (TvInteractiveAppServiceInfo)
+                                    data.readTypedObject(TvInteractiveAppServiceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onTvInteractiveAppServiceInfoUpdated(_arg04);
                     return true;
@@ -168,7 +170,8 @@ public interface ITvInteractiveAppManagerCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onInteractiveAppServiceRemoved(String iAppServiceId) throws RemoteException {
+            public void onInteractiveAppServiceRemoved(String iAppServiceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppManagerCallback.DESCRIPTOR);
@@ -180,7 +183,8 @@ public interface ITvInteractiveAppManagerCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onInteractiveAppServiceUpdated(String iAppServiceId) throws RemoteException {
+            public void onInteractiveAppServiceUpdated(String iAppServiceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppManagerCallback.DESCRIPTOR);
@@ -192,7 +196,8 @@ public interface ITvInteractiveAppManagerCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onTvInteractiveAppServiceInfoUpdated(TvInteractiveAppServiceInfo tvIAppInfo) throws RemoteException {
+            public void onTvInteractiveAppServiceInfoUpdated(TvInteractiveAppServiceInfo tvIAppInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppManagerCallback.DESCRIPTOR);
@@ -204,7 +209,8 @@ public interface ITvInteractiveAppManagerCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onStateChanged(String iAppServiceId, int type, int state, int err) throws RemoteException {
+            public void onStateChanged(String iAppServiceId, int type, int state, int err)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppManagerCallback.DESCRIPTOR);

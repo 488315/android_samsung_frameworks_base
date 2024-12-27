@@ -3,6 +3,7 @@ package com.samsung.android.globalactions.util;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */

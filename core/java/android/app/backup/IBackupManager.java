@@ -1,12 +1,5 @@
 package android.app.backup;
 
-import android.app.backup.BackupRestoreEventLogger;
-import android.app.backup.IBackupManagerMonitor;
-import android.app.backup.IBackupObserver;
-import android.app.backup.IFullBackupRestoreObserver;
-import android.app.backup.IMemorySaverBackupRestoreObserver;
-import android.app.backup.IRestoreSession;
-import android.app.backup.ISelectBackupTransportCallback;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Binder;
@@ -17,16 +10,42 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.text.TextUtils;
+
 import java.util.List;
 import java.util.Map;
 
 /* loaded from: classes.dex */
 public interface IBackupManager extends IInterface {
-    void acknowledgeFullBackupOrRestore(int i, boolean z, String str, String str2, IFullBackupRestoreObserver iFullBackupRestoreObserver) throws RemoteException;
+    void acknowledgeFullBackupOrRestore(
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            IFullBackupRestoreObserver iFullBackupRestoreObserver)
+            throws RemoteException;
 
-    void acknowledgeFullBackupOrRestoreForUser(int i, int i2, boolean z, String str, String str2, IFullBackupRestoreObserver iFullBackupRestoreObserver) throws RemoteException;
+    void acknowledgeFullBackupOrRestoreForUser(
+            int i,
+            int i2,
+            boolean z,
+            String str,
+            String str2,
+            IFullBackupRestoreObserver iFullBackupRestoreObserver)
+            throws RemoteException;
 
-    void adbBackup(int i, ParcelFileDescriptor parcelFileDescriptor, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8, String[] strArr) throws RemoteException;
+    void adbBackup(
+            int i,
+            ParcelFileDescriptor parcelFileDescriptor,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            boolean z6,
+            boolean z7,
+            boolean z8,
+            String[] strArr)
+            throws RemoteException;
 
     void adbRestore(int i, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
 
@@ -42,7 +61,8 @@ public interface IBackupManager extends IInterface {
 
     void backupNowForUser(int i) throws RemoteException;
 
-    IRestoreSession beginRestoreSessionForUser(int i, String str, String str2) throws RemoteException;
+    IRestoreSession beginRestoreSessionForUser(int i, String str, String str2)
+            throws RemoteException;
 
     void cancelBackups() throws RemoteException;
 
@@ -60,9 +80,30 @@ public interface IBackupManager extends IInterface {
 
     String[] filterAppsEligibleForBackupForUser(int i, String[] strArr) throws RemoteException;
 
-    void fullBackupCustomized(int i, String str, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, String[] strArr, boolean z8, String str2, boolean z9, IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) throws RemoteException;
+    void fullBackupCustomized(
+            int i,
+            String str,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            boolean z6,
+            boolean z7,
+            String[] strArr,
+            boolean z8,
+            String str2,
+            boolean z9,
+            IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver)
+            throws RemoteException;
 
-    void fullRestoreCustomized(int i, String str, boolean z, String str2, IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) throws RemoteException;
+    void fullRestoreCustomized(
+            int i,
+            String str,
+            boolean z,
+            String str2,
+            IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver)
+            throws RemoteException;
 
     void fullTransportBackupForUser(int i, String[] strArr) throws RemoteException;
 
@@ -94,7 +135,8 @@ public interface IBackupManager extends IInterface {
 
     boolean hasBackupPassword() throws RemoteException;
 
-    void initializeTransportsForUser(int i, String[] strArr, IBackupObserver iBackupObserver) throws RemoteException;
+    void initializeTransportsForUser(int i, String[] strArr, IBackupObserver iBackupObserver)
+            throws RemoteException;
 
     boolean isAppEligibleForBackupForUser(int i, String str) throws RemoteException;
 
@@ -118,11 +160,23 @@ public interface IBackupManager extends IInterface {
 
     void opCompleteForUser(int i, int i2, long j) throws RemoteException;
 
-    void reportDelayedRestoreResult(String str, List<BackupRestoreEventLogger.DataTypeResult> list) throws RemoteException;
+    void reportDelayedRestoreResult(String str, List<BackupRestoreEventLogger.DataTypeResult> list)
+            throws RemoteException;
 
-    int requestBackup(String[] strArr, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, int i) throws RemoteException;
+    int requestBackup(
+            String[] strArr,
+            IBackupObserver iBackupObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            int i)
+            throws RemoteException;
 
-    int requestBackupForUser(int i, String[] strArr, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, int i2) throws RemoteException;
+    int requestBackupForUser(
+            int i,
+            String[] strArr,
+            IBackupObserver iBackupObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            int i2)
+            throws RemoteException;
 
     void restoreAtInstall(String str, int i) throws RemoteException;
 
@@ -130,13 +184,25 @@ public interface IBackupManager extends IInterface {
 
     String selectBackupTransport(String str) throws RemoteException;
 
-    void selectBackupTransportAsyncForUser(int i, ComponentName componentName, ISelectBackupTransportCallback iSelectBackupTransportCallback) throws RemoteException;
+    void selectBackupTransportAsyncForUser(
+            int i,
+            ComponentName componentName,
+            ISelectBackupTransportCallback iSelectBackupTransportCallback)
+            throws RemoteException;
 
     String selectBackupTransportForUser(int i, String str) throws RemoteException;
 
-    Map semBackupPackage(ParcelFileDescriptor parcelFileDescriptor, String[] strArr, String str, int i) throws RemoteException;
+    Map semBackupPackage(
+            ParcelFileDescriptor parcelFileDescriptor, String[] strArr, String str, int i)
+            throws RemoteException;
 
-    Map semBackupPackagePath(ParcelFileDescriptor parcelFileDescriptor, String[] strArr, String str, int i, String[] strArr2) throws RemoteException;
+    Map semBackupPackagePath(
+            ParcelFileDescriptor parcelFileDescriptor,
+            String[] strArr,
+            String str,
+            int i,
+            String[] strArr2)
+            throws RemoteException;
 
     boolean semCancelBackupAndRestore() throws RemoteException;
 
@@ -144,7 +210,8 @@ public interface IBackupManager extends IInterface {
 
     boolean semIsBackupEnabled() throws RemoteException;
 
-    void semRestorePackage(ParcelFileDescriptor parcelFileDescriptor, String str) throws RemoteException;
+    void semRestorePackage(ParcelFileDescriptor parcelFileDescriptor, String str)
+            throws RemoteException;
 
     void semSetAutoRestoreEnabled(boolean z) throws RemoteException;
 
@@ -170,72 +237,73 @@ public interface IBackupManager extends IInterface {
 
     void setFrameworkSchedulingEnabledForUser(int i, boolean z) throws RemoteException;
 
-    void updateTransportAttributesForUser(int i, ComponentName componentName, String str, Intent intent, String str2, Intent intent2, CharSequence charSequence) throws RemoteException;
+    void updateTransportAttributesForUser(
+            int i,
+            ComponentName componentName,
+            String str,
+            Intent intent,
+            String str2,
+            Intent intent2,
+            CharSequence charSequence)
+            throws RemoteException;
 
     public static class Default implements IBackupManager {
         @Override // android.app.backup.IBackupManager
-        public void dataChangedForUser(int userId, String packageName) throws RemoteException {
-        }
+        public void dataChangedForUser(int userId, String packageName) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void dataChanged(String packageName) throws RemoteException {
-        }
+        public void dataChanged(String packageName) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void clearBackupDataForUser(int userId, String transportName, String packageName) throws RemoteException {
-        }
+        public void clearBackupDataForUser(int userId, String transportName, String packageName)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void clearBackupData(String transportName, String packageName) throws RemoteException {
-        }
+        public void clearBackupData(String transportName, String packageName)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void initializeTransportsForUser(int userId, String[] transportNames, IBackupObserver observer) throws RemoteException {
-        }
+        public void initializeTransportsForUser(
+                int userId, String[] transportNames, IBackupObserver observer)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void agentConnectedForUser(int userId, String packageName, IBinder agent) throws RemoteException {
-        }
+        public void agentConnectedForUser(int userId, String packageName, IBinder agent)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void agentConnected(String packageName, IBinder agent) throws RemoteException {
-        }
+        public void agentConnected(String packageName, IBinder agent) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void agentDisconnectedForUser(int userId, String packageName) throws RemoteException {
-        }
+        public void agentDisconnectedForUser(int userId, String packageName)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void agentDisconnected(String packageName) throws RemoteException {
-        }
+        public void agentDisconnected(String packageName) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void restoreAtInstallForUser(int userId, String packageName, int token) throws RemoteException {
-        }
+        public void restoreAtInstallForUser(int userId, String packageName, int token)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void restoreAtInstall(String packageName, int token) throws RemoteException {
-        }
+        public void restoreAtInstall(String packageName, int token) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void setBackupEnabledForUser(int userId, boolean isEnabled) throws RemoteException {
-        }
+        public void setBackupEnabledForUser(int userId, boolean isEnabled) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void setFrameworkSchedulingEnabledForUser(int userId, boolean isEnabled) throws RemoteException {
-        }
+        public void setFrameworkSchedulingEnabledForUser(int userId, boolean isEnabled)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void setBackupEnabled(boolean isEnabled) throws RemoteException {
-        }
+        public void setBackupEnabled(boolean isEnabled) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void setAutoRestoreForUser(int userId, boolean doAutoRestore) throws RemoteException {
-        }
+        public void setAutoRestoreForUser(int userId, boolean doAutoRestore)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void setAutoRestore(boolean doAutoRestore) throws RemoteException {
-        }
+        public void setAutoRestore(boolean doAutoRestore) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
         public boolean isBackupEnabledForUser(int userId) throws RemoteException {
@@ -258,40 +326,71 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public void backupNowForUser(int userId) throws RemoteException {
-        }
+        public void backupNowForUser(int userId) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void backupNow() throws RemoteException {
-        }
+        public void backupNow() throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void adbBackup(int userId, ParcelFileDescriptor fd, boolean includeApks, boolean includeObbs, boolean includeShared, boolean doWidgets, boolean allApps, boolean allIncludesSystem, boolean doCompress, boolean doKeyValue, String[] packageNames) throws RemoteException {
-        }
+        public void adbBackup(
+                int userId,
+                ParcelFileDescriptor fd,
+                boolean includeApks,
+                boolean includeObbs,
+                boolean includeShared,
+                boolean doWidgets,
+                boolean allApps,
+                boolean allIncludesSystem,
+                boolean doCompress,
+                boolean doKeyValue,
+                String[] packageNames)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void fullTransportBackupForUser(int userId, String[] packageNames) throws RemoteException {
-        }
+        public void fullTransportBackupForUser(int userId, String[] packageNames)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void fullRestoreCustomized(int userId, String filePath, boolean password, String EncPassword, IMemorySaverBackupRestoreObserver observer) throws RemoteException {
-        }
+        public void fullRestoreCustomized(
+                int userId,
+                String filePath,
+                boolean password,
+                String EncPassword,
+                IMemorySaverBackupRestoreObserver observer)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void adbRestore(int userId, ParcelFileDescriptor fd) throws RemoteException {
-        }
+        public void adbRestore(int userId, ParcelFileDescriptor fd) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void acknowledgeFullBackupOrRestoreForUser(int userId, int token, boolean allow, String curPassword, String encryptionPassword, IFullBackupRestoreObserver observer) throws RemoteException {
-        }
+        public void acknowledgeFullBackupOrRestoreForUser(
+                int userId,
+                int token,
+                boolean allow,
+                String curPassword,
+                String encryptionPassword,
+                IFullBackupRestoreObserver observer)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void acknowledgeFullBackupOrRestore(int token, boolean allow, String curPassword, String encryptionPassword, IFullBackupRestoreObserver observer) throws RemoteException {
-        }
+        public void acknowledgeFullBackupOrRestore(
+                int token,
+                boolean allow,
+                String curPassword,
+                String encryptionPassword,
+                IFullBackupRestoreObserver observer)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void updateTransportAttributesForUser(int userId, ComponentName transportComponent, String name, Intent configurationIntent, String currentDestinationString, Intent dataManagementIntent, CharSequence dataManagementLabel) throws RemoteException {
-        }
+        public void updateTransportAttributesForUser(
+                int userId,
+                ComponentName transportComponent,
+                String name,
+                Intent configurationIntent,
+                String currentDestinationString,
+                Intent dataManagementIntent,
+                CharSequence dataManagementLabel)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
         public String getCurrentTransportForUser(int userId) throws RemoteException {
@@ -304,7 +403,8 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public ComponentName getCurrentTransportComponentForUser(int userId) throws RemoteException {
+        public ComponentName getCurrentTransportComponentForUser(int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -319,7 +419,8 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public ComponentName[] listAllTransportComponentsForUser(int userId) throws RemoteException {
+        public ComponentName[] listAllTransportComponentsForUser(int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -329,7 +430,8 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public String selectBackupTransportForUser(int userId, String transport) throws RemoteException {
+        public String selectBackupTransportForUser(int userId, String transport)
+                throws RemoteException {
             return null;
         }
 
@@ -339,11 +441,13 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public void selectBackupTransportAsyncForUser(int userId, ComponentName transport, ISelectBackupTransportCallback listener) throws RemoteException {
-        }
+        public void selectBackupTransportAsyncForUser(
+                int userId, ComponentName transport, ISelectBackupTransportCallback listener)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public Intent getConfigurationIntentForUser(int userId, String transport) throws RemoteException {
+        public Intent getConfigurationIntentForUser(int userId, String transport)
+                throws RemoteException {
             return null;
         }
 
@@ -353,7 +457,8 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public String getDestinationStringForUser(int userId, String transport) throws RemoteException {
+        public String getDestinationStringForUser(int userId, String transport)
+                throws RemoteException {
             return null;
         }
 
@@ -363,7 +468,8 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public Intent getDataManagementIntentForUser(int userId, String transport) throws RemoteException {
+        public Intent getDataManagementIntentForUser(int userId, String transport)
+                throws RemoteException {
             return null;
         }
 
@@ -373,26 +479,26 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public CharSequence getDataManagementLabelForUser(int userId, String transport) throws RemoteException {
+        public CharSequence getDataManagementLabelForUser(int userId, String transport)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.backup.IBackupManager
-        public IRestoreSession beginRestoreSessionForUser(int userId, String packageName, String transportID) throws RemoteException {
+        public IRestoreSession beginRestoreSessionForUser(
+                int userId, String packageName, String transportID) throws RemoteException {
             return null;
         }
 
         @Override // android.app.backup.IBackupManager
-        public void opCompleteForUser(int userId, int token, long result) throws RemoteException {
-        }
+        public void opCompleteForUser(int userId, int token, long result) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void opComplete(int token, long result) throws RemoteException {
-        }
+        public void opComplete(int token, long result) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void setBackupServiceActive(int whichUser, boolean makeActive) throws RemoteException {
-        }
+        public void setBackupServiceActive(int whichUser, boolean makeActive)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
         public boolean isBackupServiceActive(int whichUser) throws RemoteException {
@@ -405,50 +511,76 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public long getAvailableRestoreTokenForUser(int userId, String packageName) throws RemoteException {
+        public long getAvailableRestoreTokenForUser(int userId, String packageName)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.backup.IBackupManager
-        public boolean isAppEligibleForBackupForUser(int userId, String packageName) throws RemoteException {
+        public boolean isAppEligibleForBackupForUser(int userId, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.backup.IBackupManager
-        public String[] filterAppsEligibleForBackupForUser(int userId, String[] packages) throws RemoteException {
+        public String[] filterAppsEligibleForBackupForUser(int userId, String[] packages)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.backup.IBackupManager
-        public int requestBackupForUser(int userId, String[] packages, IBackupObserver observer, IBackupManagerMonitor monitor, int flags) throws RemoteException {
+        public int requestBackupForUser(
+                int userId,
+                String[] packages,
+                IBackupObserver observer,
+                IBackupManagerMonitor monitor,
+                int flags)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.backup.IBackupManager
-        public int requestBackup(String[] packages, IBackupObserver observer, IBackupManagerMonitor monitor, int flags) throws RemoteException {
+        public int requestBackup(
+                String[] packages,
+                IBackupObserver observer,
+                IBackupManagerMonitor monitor,
+                int flags)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.backup.IBackupManager
-        public void cancelBackupsForUser(int userId) throws RemoteException {
-        }
+        public void cancelBackupsForUser(int userId) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void cancelBackups() throws RemoteException {
-        }
+        public void cancelBackups() throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void fullBackupCustomized(int userId, String filePath, boolean includeApks, boolean includeObbs, boolean includeShared, boolean doWidgets, boolean allApps, boolean allIncludesSystem, boolean doCompress, String[] packageNames, boolean password, String EncPassword, boolean doKeyValue, IMemorySaverBackupRestoreObserver observer) throws RemoteException {
-        }
+        public void fullBackupCustomized(
+                int userId,
+                String filePath,
+                boolean includeApks,
+                boolean includeObbs,
+                boolean includeShared,
+                boolean doWidgets,
+                boolean allApps,
+                boolean allIncludesSystem,
+                boolean doCompress,
+                String[] packageNames,
+                boolean password,
+                String EncPassword,
+                boolean doKeyValue,
+                IMemorySaverBackupRestoreObserver observer)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public UserHandle getUserForAncestralSerialNumber(long ancestralSerialNumber) throws RemoteException {
+        public UserHandle getUserForAncestralSerialNumber(long ancestralSerialNumber)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.backup.IBackupManager
-        public void setAncestralSerialNumber(long ancestralSerialNumber) throws RemoteException {
-        }
+        public void setAncestralSerialNumber(long ancestralSerialNumber) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
         public boolean isSubUserSupported() throws RemoteException {
@@ -456,18 +588,26 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public Map semBackupPackage(ParcelFileDescriptor fd, String[] packageNames, String password, int flag) throws RemoteException {
+        public Map semBackupPackage(
+                ParcelFileDescriptor fd, String[] packageNames, String password, int flag)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.backup.IBackupManager
-        public Map semBackupPackagePath(ParcelFileDescriptor fd, String[] packageNames, String password, int flag, String[] paths) throws RemoteException {
+        public Map semBackupPackagePath(
+                ParcelFileDescriptor fd,
+                String[] packageNames,
+                String password,
+                int flag,
+                String[] paths)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.backup.IBackupManager
-        public void semRestorePackage(ParcelFileDescriptor fd, String password) throws RemoteException {
-        }
+        public void semRestorePackage(ParcelFileDescriptor fd, String password)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
         public boolean semIsBackupEnabled() throws RemoteException {
@@ -475,12 +615,10 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public void semSetBackupEnabled(boolean enabled) throws RemoteException {
-        }
+        public void semSetBackupEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void semSetAutoRestoreEnabled(boolean enabled) throws RemoteException {
-        }
+        public void semSetAutoRestoreEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
         public boolean semCancelBackupAndRestore() throws RemoteException {
@@ -503,12 +641,13 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.app.backup.IBackupManager
-        public void excludeKeysFromRestore(String packageName, List<String> keys) throws RemoteException {
-        }
+        public void excludeKeysFromRestore(String packageName, List<String> keys)
+                throws RemoteException {}
 
         @Override // android.app.backup.IBackupManager
-        public void reportDelayedRestoreResult(String packageName, List<BackupRestoreEventLogger.DataTypeResult> results) throws RemoteException {
-        }
+        public void reportDelayedRestoreResult(
+                String packageName, List<BackupRestoreEventLogger.DataTypeResult> results)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -516,7 +655,7 @@ public interface IBackupManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBackupManager {
+    public abstract static class Stub extends Binder implements IBackupManager {
         public static final String DESCRIPTOR = "android.app.backup.IBackupManager";
         static final int TRANSACTION_acknowledgeFullBackupOrRestore = 28;
         static final int TRANSACTION_acknowledgeFullBackupOrRestoreForUser = 27;
@@ -777,7 +916,8 @@ public interface IBackupManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -817,7 +957,8 @@ public interface IBackupManager extends IInterface {
                 case 5:
                     int _arg05 = data.readInt();
                     String[] _arg14 = data.createStringArray();
-                    IBackupObserver _arg22 = IBackupObserver.Stub.asInterface(data.readStrongBinder());
+                    IBackupObserver _arg22 =
+                            IBackupObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     initializeTransportsForUser(_arg05, _arg14, _arg22);
                     reply.writeNoException();
@@ -935,7 +1076,9 @@ public interface IBackupManager extends IInterface {
                     return true;
                 case 23:
                     int _arg020 = data.readInt();
-                    ParcelFileDescriptor _arg114 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg114 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     boolean _arg25 = data.readBoolean();
                     boolean _arg3 = data.readBoolean();
                     boolean _arg4 = data.readBoolean();
@@ -946,7 +1089,9 @@ public interface IBackupManager extends IInterface {
                     boolean _arg9 = data.readBoolean();
                     String[] _arg10 = data.createStringArray();
                     data.enforceNoDataAvail();
-                    adbBackup(_arg020, _arg114, _arg25, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10);
+                    adbBackup(
+                            _arg020, _arg114, _arg25, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8,
+                            _arg9, _arg10);
                     reply.writeNoException();
                     return true;
                 case 24:
@@ -961,14 +1106,18 @@ public interface IBackupManager extends IInterface {
                     String _arg116 = data.readString();
                     boolean _arg26 = data.readBoolean();
                     String _arg32 = data.readString();
-                    IMemorySaverBackupRestoreObserver _arg42 = IMemorySaverBackupRestoreObserver.Stub.asInterface(data.readStrongBinder());
+                    IMemorySaverBackupRestoreObserver _arg42 =
+                            IMemorySaverBackupRestoreObserver.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     fullRestoreCustomized(_arg022, _arg116, _arg26, _arg32, _arg42);
                     reply.writeNoException();
                     return true;
                 case 26:
                     int _arg023 = data.readInt();
-                    ParcelFileDescriptor _arg117 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg117 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     adbRestore(_arg023, _arg117);
                     reply.writeNoException();
@@ -979,9 +1128,11 @@ public interface IBackupManager extends IInterface {
                     boolean _arg27 = data.readBoolean();
                     String _arg33 = data.readString();
                     String _arg43 = data.readString();
-                    IFullBackupRestoreObserver _arg52 = IFullBackupRestoreObserver.Stub.asInterface(data.readStrongBinder());
+                    IFullBackupRestoreObserver _arg52 =
+                            IFullBackupRestoreObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    acknowledgeFullBackupOrRestoreForUser(_arg024, _arg118, _arg27, _arg33, _arg43, _arg52);
+                    acknowledgeFullBackupOrRestoreForUser(
+                            _arg024, _arg118, _arg27, _arg33, _arg43, _arg52);
                     reply.writeNoException();
                     return true;
                 case 28:
@@ -989,21 +1140,25 @@ public interface IBackupManager extends IInterface {
                     boolean _arg119 = data.readBoolean();
                     String _arg28 = data.readString();
                     String _arg34 = data.readString();
-                    IFullBackupRestoreObserver _arg44 = IFullBackupRestoreObserver.Stub.asInterface(data.readStrongBinder());
+                    IFullBackupRestoreObserver _arg44 =
+                            IFullBackupRestoreObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     acknowledgeFullBackupOrRestore(_arg025, _arg119, _arg28, _arg34, _arg44);
                     reply.writeNoException();
                     return true;
                 case 29:
                     int _arg026 = data.readInt();
-                    ComponentName _arg120 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg120 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg29 = data.readString();
                     Intent _arg35 = (Intent) data.readTypedObject(Intent.CREATOR);
                     String _arg45 = data.readString();
                     Intent _arg53 = (Intent) data.readTypedObject(Intent.CREATOR);
-                    CharSequence _arg62 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg62 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
-                    updateTransportAttributesForUser(_arg026, _arg120, _arg29, _arg35, _arg45, _arg53, _arg62);
+                    updateTransportAttributesForUser(
+                            _arg026, _arg120, _arg29, _arg35, _arg45, _arg53, _arg62);
                     reply.writeNoException();
                     return true;
                 case 30:
@@ -1066,8 +1221,11 @@ public interface IBackupManager extends IInterface {
                     return true;
                 case 39:
                     int _arg033 = data.readInt();
-                    ComponentName _arg122 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    ISelectBackupTransportCallback _arg210 = ISelectBackupTransportCallback.Stub.asInterface(data.readStrongBinder());
+                    ComponentName _arg122 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ISelectBackupTransportCallback _arg210 =
+                            ISelectBackupTransportCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     selectBackupTransportAsyncForUser(_arg033, _arg122, _arg210);
                     reply.writeNoException();
@@ -1135,7 +1293,8 @@ public interface IBackupManager extends IInterface {
                     String _arg127 = data.readString();
                     String _arg211 = data.readString();
                     data.enforceNoDataAvail();
-                    IRestoreSession _result21 = beginRestoreSessionForUser(_arg041, _arg127, _arg211);
+                    IRestoreSession _result21 =
+                            beginRestoreSessionForUser(_arg041, _arg127, _arg211);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result21);
                     return true;
@@ -1202,8 +1361,10 @@ public interface IBackupManager extends IInterface {
                 case 56:
                     int _arg050 = data.readInt();
                     String[] _arg134 = data.createStringArray();
-                    IBackupObserver _arg213 = IBackupObserver.Stub.asInterface(data.readStrongBinder());
-                    IBackupManagerMonitor _arg36 = IBackupManagerMonitor.Stub.asInterface(data.readStrongBinder());
+                    IBackupObserver _arg213 =
+                            IBackupObserver.Stub.asInterface(data.readStrongBinder());
+                    IBackupManagerMonitor _arg36 =
+                            IBackupManagerMonitor.Stub.asInterface(data.readStrongBinder());
                     int _arg46 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result27 = requestBackupForUser(_arg050, _arg134, _arg213, _arg36, _arg46);
@@ -1212,8 +1373,10 @@ public interface IBackupManager extends IInterface {
                     return true;
                 case 57:
                     String[] _arg051 = data.createStringArray();
-                    IBackupObserver _arg135 = IBackupObserver.Stub.asInterface(data.readStrongBinder());
-                    IBackupManagerMonitor _arg214 = IBackupManagerMonitor.Stub.asInterface(data.readStrongBinder());
+                    IBackupObserver _arg135 =
+                            IBackupObserver.Stub.asInterface(data.readStrongBinder());
+                    IBackupManagerMonitor _arg214 =
+                            IBackupManagerMonitor.Stub.asInterface(data.readStrongBinder());
                     int _arg37 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result28 = requestBackup(_arg051, _arg135, _arg214, _arg37);
@@ -1244,9 +1407,13 @@ public interface IBackupManager extends IInterface {
                     boolean _arg102 = data.readBoolean();
                     String _arg11 = data.readString();
                     boolean _arg1210 = data.readBoolean();
-                    IMemorySaverBackupRestoreObserver _arg137 = IMemorySaverBackupRestoreObserver.Stub.asInterface(data.readStrongBinder());
+                    IMemorySaverBackupRestoreObserver _arg137 =
+                            IMemorySaverBackupRestoreObserver.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    fullBackupCustomized(_arg053, _arg136, _arg215, _arg38, _arg47, _arg54, _arg63, _arg72, _arg82, _arg92, _arg102, _arg11, _arg1210, _arg137);
+                    fullBackupCustomized(
+                            _arg053, _arg136, _arg215, _arg38, _arg47, _arg54, _arg63, _arg72,
+                            _arg82, _arg92, _arg102, _arg11, _arg1210, _arg137);
                     reply.writeNoException();
                     return true;
                 case 61:
@@ -1268,7 +1435,9 @@ public interface IBackupManager extends IInterface {
                     reply.writeBoolean(_result30);
                     return true;
                 case 64:
-                    ParcelFileDescriptor _arg056 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg056 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String[] _arg138 = data.createStringArray();
                     String _arg216 = data.readString();
                     int _arg39 = data.readInt();
@@ -1278,18 +1447,23 @@ public interface IBackupManager extends IInterface {
                     reply.writeMap(_result31);
                     return true;
                 case 65:
-                    ParcelFileDescriptor _arg057 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg057 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String[] _arg139 = data.createStringArray();
                     String _arg217 = data.readString();
                     int _arg310 = data.readInt();
                     String[] _arg48 = data.createStringArray();
                     data.enforceNoDataAvail();
-                    Map _result32 = semBackupPackagePath(_arg057, _arg139, _arg217, _arg310, _arg48);
+                    Map _result32 =
+                            semBackupPackagePath(_arg057, _arg139, _arg217, _arg310, _arg48);
                     reply.writeNoException();
                     reply.writeMap(_result32);
                     return true;
                 case 66:
-                    ParcelFileDescriptor _arg058 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg058 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String _arg140 = data.readString();
                     data.enforceNoDataAvail();
                     semRestorePackage(_arg058, _arg140);
@@ -1347,7 +1521,9 @@ public interface IBackupManager extends IInterface {
                     return true;
                 case 75:
                     String _arg065 = data.readString();
-                    List<BackupRestoreEventLogger.DataTypeResult> _arg142 = data.createTypedArrayList(BackupRestoreEventLogger.DataTypeResult.CREATOR);
+                    List<BackupRestoreEventLogger.DataTypeResult> _arg142 =
+                            data.createTypedArrayList(
+                                    BackupRestoreEventLogger.DataTypeResult.CREATOR);
                     data.enforceNoDataAvail();
                     reportDelayedRestoreResult(_arg065, _arg142);
                     reply.writeNoException();
@@ -1405,7 +1581,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void clearBackupDataForUser(int userId, String transportName, String packageName) throws RemoteException {
+            public void clearBackupDataForUser(int userId, String transportName, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1422,7 +1599,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void clearBackupData(String transportName, String packageName) throws RemoteException {
+            public void clearBackupData(String transportName, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1438,7 +1616,9 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void initializeTransportsForUser(int userId, String[] transportNames, IBackupObserver observer) throws RemoteException {
+            public void initializeTransportsForUser(
+                    int userId, String[] transportNames, IBackupObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1455,7 +1635,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void agentConnectedForUser(int userId, String packageName, IBinder agent) throws RemoteException {
+            public void agentConnectedForUser(int userId, String packageName, IBinder agent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1488,7 +1669,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void agentDisconnectedForUser(int userId, String packageName) throws RemoteException {
+            public void agentDisconnectedForUser(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1519,7 +1701,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void restoreAtInstallForUser(int userId, String packageName, int token) throws RemoteException {
+            public void restoreAtInstallForUser(int userId, String packageName, int token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1552,7 +1735,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void setBackupEnabledForUser(int userId, boolean isEnabled) throws RemoteException {
+            public void setBackupEnabledForUser(int userId, boolean isEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1568,7 +1752,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void setFrameworkSchedulingEnabledForUser(int userId, boolean isEnabled) throws RemoteException {
+            public void setFrameworkSchedulingEnabledForUser(int userId, boolean isEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1599,7 +1784,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void setAutoRestoreForUser(int userId, boolean doAutoRestore) throws RemoteException {
+            public void setAutoRestoreForUser(int userId, boolean doAutoRestore)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1663,7 +1849,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public boolean setBackupPassword(String currentPw, String newPw) throws RemoteException {
+            public boolean setBackupPassword(String currentPw, String newPw)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1726,7 +1913,19 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void adbBackup(int userId, ParcelFileDescriptor fd, boolean includeApks, boolean includeObbs, boolean includeShared, boolean doWidgets, boolean allApps, boolean allIncludesSystem, boolean doCompress, boolean doKeyValue, String[] packageNames) throws RemoteException {
+            public void adbBackup(
+                    int userId,
+                    ParcelFileDescriptor fd,
+                    boolean includeApks,
+                    boolean includeObbs,
+                    boolean includeShared,
+                    boolean doWidgets,
+                    boolean allApps,
+                    boolean allIncludesSystem,
+                    boolean doCompress,
+                    boolean doKeyValue,
+                    String[] packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1826,7 +2025,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void fullTransportBackupForUser(int userId, String[] packageNames) throws RemoteException {
+            public void fullTransportBackupForUser(int userId, String[] packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1842,7 +2042,13 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void fullRestoreCustomized(int userId, String filePath, boolean password, String EncPassword, IMemorySaverBackupRestoreObserver observer) throws RemoteException {
+            public void fullRestoreCustomized(
+                    int userId,
+                    String filePath,
+                    boolean password,
+                    String EncPassword,
+                    IMemorySaverBackupRestoreObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1877,7 +2083,14 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void acknowledgeFullBackupOrRestoreForUser(int userId, int token, boolean allow, String curPassword, String encryptionPassword, IFullBackupRestoreObserver observer) throws RemoteException {
+            public void acknowledgeFullBackupOrRestoreForUser(
+                    int userId,
+                    int token,
+                    boolean allow,
+                    String curPassword,
+                    String encryptionPassword,
+                    IFullBackupRestoreObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1897,7 +2110,13 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void acknowledgeFullBackupOrRestore(int token, boolean allow, String curPassword, String encryptionPassword, IFullBackupRestoreObserver observer) throws RemoteException {
+            public void acknowledgeFullBackupOrRestore(
+                    int token,
+                    boolean allow,
+                    String curPassword,
+                    String encryptionPassword,
+                    IFullBackupRestoreObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1916,7 +2135,15 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void updateTransportAttributesForUser(int userId, ComponentName transportComponent, String name, Intent configurationIntent, String currentDestinationString, Intent dataManagementIntent, CharSequence dataManagementLabel) throws RemoteException {
+            public void updateTransportAttributesForUser(
+                    int userId,
+                    ComponentName transportComponent,
+                    String name,
+                    Intent configurationIntent,
+                    String currentDestinationString,
+                    Intent dataManagementIntent,
+                    CharSequence dataManagementLabel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1975,7 +2202,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public ComponentName getCurrentTransportComponentForUser(int userId) throws RemoteException {
+            public ComponentName getCurrentTransportComponentForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1983,7 +2211,8 @@ public interface IBackupManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(32, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2025,7 +2254,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public ComponentName[] listAllTransportComponentsForUser(int userId) throws RemoteException {
+            public ComponentName[] listAllTransportComponentsForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2033,7 +2263,8 @@ public interface IBackupManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName[] _result = (ComponentName[]) _reply.createTypedArray(ComponentName.CREATOR);
+                    ComponentName[] _result =
+                            (ComponentName[]) _reply.createTypedArray(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2058,7 +2289,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public String selectBackupTransportForUser(int userId, String transport) throws RemoteException {
+            public String selectBackupTransportForUser(int userId, String transport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2093,7 +2325,9 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void selectBackupTransportAsyncForUser(int userId, ComponentName transport, ISelectBackupTransportCallback listener) throws RemoteException {
+            public void selectBackupTransportAsyncForUser(
+                    int userId, ComponentName transport, ISelectBackupTransportCallback listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2110,7 +2344,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public Intent getConfigurationIntentForUser(int userId, String transport) throws RemoteException {
+            public Intent getConfigurationIntentForUser(int userId, String transport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2145,7 +2380,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public String getDestinationStringForUser(int userId, String transport) throws RemoteException {
+            public String getDestinationStringForUser(int userId, String transport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2180,7 +2416,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public Intent getDataManagementIntentForUser(int userId, String transport) throws RemoteException {
+            public Intent getDataManagementIntentForUser(int userId, String transport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2215,7 +2452,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public CharSequence getDataManagementLabelForUser(int userId, String transport) throws RemoteException {
+            public CharSequence getDataManagementLabelForUser(int userId, String transport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2224,7 +2462,8 @@ public interface IBackupManager extends IInterface {
                     _data.writeString(transport);
                     this.mRemote.transact(46, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2233,7 +2472,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public IRestoreSession beginRestoreSessionForUser(int userId, String packageName, String transportID) throws RemoteException {
+            public IRestoreSession beginRestoreSessionForUser(
+                    int userId, String packageName, String transportID) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2243,7 +2483,8 @@ public interface IBackupManager extends IInterface {
                     _data.writeString(transportID);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    IRestoreSession _result = IRestoreSession.Stub.asInterface(_reply.readStrongBinder());
+                    IRestoreSession _result =
+                            IRestoreSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2252,7 +2493,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void opCompleteForUser(int userId, int token, long result) throws RemoteException {
+            public void opCompleteForUser(int userId, int token, long result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2285,7 +2527,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void setBackupServiceActive(int whichUser, boolean makeActive) throws RemoteException {
+            public void setBackupServiceActive(int whichUser, boolean makeActive)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2335,7 +2578,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public long getAvailableRestoreTokenForUser(int userId, String packageName) throws RemoteException {
+            public long getAvailableRestoreTokenForUser(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2353,7 +2597,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public boolean isAppEligibleForBackupForUser(int userId, String packageName) throws RemoteException {
+            public boolean isAppEligibleForBackupForUser(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2371,7 +2616,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public String[] filterAppsEligibleForBackupForUser(int userId, String[] packages) throws RemoteException {
+            public String[] filterAppsEligibleForBackupForUser(int userId, String[] packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2389,7 +2635,13 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public int requestBackupForUser(int userId, String[] packages, IBackupObserver observer, IBackupManagerMonitor monitor, int flags) throws RemoteException {
+            public int requestBackupForUser(
+                    int userId,
+                    String[] packages,
+                    IBackupObserver observer,
+                    IBackupManagerMonitor monitor,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2410,7 +2662,12 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public int requestBackup(String[] packages, IBackupObserver observer, IBackupManagerMonitor monitor, int flags) throws RemoteException {
+            public int requestBackup(
+                    String[] packages,
+                    IBackupObserver observer,
+                    IBackupManagerMonitor monitor,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2459,7 +2716,22 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void fullBackupCustomized(int userId, String filePath, boolean includeApks, boolean includeObbs, boolean includeShared, boolean doWidgets, boolean allApps, boolean allIncludesSystem, boolean doCompress, String[] packageNames, boolean password, String EncPassword, boolean doKeyValue, IMemorySaverBackupRestoreObserver observer) throws RemoteException {
+            public void fullBackupCustomized(
+                    int userId,
+                    String filePath,
+                    boolean includeApks,
+                    boolean includeObbs,
+                    boolean includeShared,
+                    boolean doWidgets,
+                    boolean allApps,
+                    boolean allIncludesSystem,
+                    boolean doCompress,
+                    String[] packageNames,
+                    boolean password,
+                    String EncPassword,
+                    boolean doKeyValue,
+                    IMemorySaverBackupRestoreObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2565,7 +2837,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public UserHandle getUserForAncestralSerialNumber(long ancestralSerialNumber) throws RemoteException {
+            public UserHandle getUserForAncestralSerialNumber(long ancestralSerialNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2582,7 +2855,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void setAncestralSerialNumber(long ancestralSerialNumber) throws RemoteException {
+            public void setAncestralSerialNumber(long ancestralSerialNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2613,7 +2887,9 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public Map semBackupPackage(ParcelFileDescriptor fd, String[] packageNames, String password, int flag) throws RemoteException {
+            public Map semBackupPackage(
+                    ParcelFileDescriptor fd, String[] packageNames, String password, int flag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2634,7 +2910,13 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public Map semBackupPackagePath(ParcelFileDescriptor fd, String[] packageNames, String password, int flag, String[] paths) throws RemoteException {
+            public Map semBackupPackagePath(
+                    ParcelFileDescriptor fd,
+                    String[] packageNames,
+                    String password,
+                    int flag,
+                    String[] paths)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2656,7 +2938,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void semRestorePackage(ParcelFileDescriptor fd, String password) throws RemoteException {
+            public void semRestorePackage(ParcelFileDescriptor fd, String password)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2751,7 +3034,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public boolean semSetTransportFlagsForAdbBackup(int transportFlags) throws RemoteException {
+            public boolean semSetTransportFlagsForAdbBackup(int transportFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2785,7 +3069,8 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void excludeKeysFromRestore(String packageName, List<String> keys) throws RemoteException {
+            public void excludeKeysFromRestore(String packageName, List<String> keys)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2801,7 +3086,9 @@ public interface IBackupManager extends IInterface {
             }
 
             @Override // android.app.backup.IBackupManager
-            public void reportDelayedRestoreResult(String packageName, List<BackupRestoreEventLogger.DataTypeResult> results) throws RemoteException {
+            public void reportDelayedRestoreResult(
+                    String packageName, List<BackupRestoreEventLogger.DataTypeResult> results)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

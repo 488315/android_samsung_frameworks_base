@@ -5,8 +5,7 @@ import java.util.Set;
 
 /* loaded from: classes4.dex */
 public final class EmojiConsistency {
-    private EmojiConsistency() {
-    }
+    private EmojiConsistency() {}
 
     public static Set<int[]> getEmojiConsistencySet() {
         return Collections.emptySet();

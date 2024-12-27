@@ -18,8 +18,10 @@ public class BitmapSspRange extends ASN1Object {
         if (seq.size() != 2) {
             throw new IllegalArgumentException("expected sequence with sspValue and sspBitmask");
         }
-        this.sspValue = Utils.octetStringFixed(ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets());
-        this.sspBitmask = Utils.octetStringFixed(ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets());
+        this.sspValue =
+                Utils.octetStringFixed(ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets());
+        this.sspBitmask =
+                Utils.octetStringFixed(ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets());
     }
 
     public static BitmapSspRange getInstance(Object o) {
@@ -40,7 +42,8 @@ public class BitmapSspRange extends ASN1Object {
         return Arrays.clone(this.sspBitmask);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector avec = new ASN1EncodableVector();
         avec.add(new DEROctetString(this.sspValue));

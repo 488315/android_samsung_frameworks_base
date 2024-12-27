@@ -17,7 +17,9 @@ public class AesCcmCiphertext extends ASN1Object {
         if (seq.size() != 2) {
             throw new IllegalArgumentException("sequence not length 2");
         }
-        this.nonce = Utils.octetStringFixed(ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets(), 12);
+        this.nonce =
+                Utils.octetStringFixed(
+                        ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets(), 12);
         this.opaque = SequenceOfOctetString.getInstance(seq.getObjectAt(1));
     }
 
@@ -31,7 +33,8 @@ public class AesCcmCiphertext extends ASN1Object {
         return null;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector();
         v.add(new DEROctetString(this.nonce));

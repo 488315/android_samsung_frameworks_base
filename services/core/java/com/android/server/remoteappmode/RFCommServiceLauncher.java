@@ -8,8 +8,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Handler;
 import android.os.IBinder;
+
 import com.android.internal.os.BackgroundThread;
-import com.android.server.remoteappmode.RFCommServiceLauncher;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -22,8 +22,7 @@ public final class RFCommServiceLauncher {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.remoteappmode.RFCommServiceLauncher$1, reason: invalid class name */
     public final class AnonymousClass1 implements ServiceConnection {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -36,22 +35,33 @@ public final class RFCommServiceLauncher {
             Log.i("RFCommServiceLauncher", "HotspotRFCommService is disconnected");
             RFCommServiceLauncher rFCommServiceLauncher = RFCommServiceLauncher.this;
             rFCommServiceLauncher.mBounded = false;
-            rFCommServiceLauncher.mHandler.postDelayed(new Runnable() { // from class: com.android.server.remoteappmode.RFCommServiceLauncher$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RFCommServiceLauncher.AnonymousClass1 anonymousClass1 = RFCommServiceLauncher.AnonymousClass1.this;
-                    anonymousClass1.getClass();
-                    Intent intent = new Intent("com.samsung.android.mdx.instanthotspot.action.RFCOMM_SERVICE_DISCONNECTED");
-                    Context context = RFCommServiceLauncher.this.mContext;
-                    for (ResolveInfo resolveInfo : context.getPackageManager().queryBroadcastReceivers(intent, 0)) {
-                        if (resolveInfo.activityInfo.packageName.equals("com.samsung.android.mdx")) {
-                            ActivityInfo activityInfo = resolveInfo.activityInfo;
-                            intent.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
-                            context.sendBroadcast(intent);
+            rFCommServiceLauncher.mHandler.postDelayed(
+                    new Runnable() { // from class:
+                        // com.android.server.remoteappmode.RFCommServiceLauncher$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RFCommServiceLauncher.AnonymousClass1 anonymousClass1 =
+                                    RFCommServiceLauncher.AnonymousClass1.this;
+                            anonymousClass1.getClass();
+                            Intent intent =
+                                    new Intent(
+                                            "com.samsung.android.mdx.instanthotspot.action.RFCOMM_SERVICE_DISCONNECTED");
+                            Context context = RFCommServiceLauncher.this.mContext;
+                            for (ResolveInfo resolveInfo :
+                                    context.getPackageManager()
+                                            .queryBroadcastReceivers(intent, 0)) {
+                                if (resolveInfo.activityInfo.packageName.equals(
+                                        "com.samsung.android.mdx")) {
+                                    ActivityInfo activityInfo = resolveInfo.activityInfo;
+                                    intent.setComponent(
+                                            new ComponentName(
+                                                    activityInfo.packageName, activityInfo.name));
+                                    context.sendBroadcast(intent);
+                                }
+                            }
                         }
-                    }
-                }
-            }, 3000L);
+                    },
+                    3000L);
         }
     }
 
@@ -66,7 +76,10 @@ public final class RFCommServiceLauncher {
         }
         try {
             Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.samsung.android.mdx", "com.samsung.android.mdx.windowslink.interactor.instanthotspot.HotspotRFCommService"));
+            intent.setComponent(
+                    new ComponentName(
+                            "com.samsung.android.mdx",
+                            "com.samsung.android.mdx.windowslink.interactor.instanthotspot.HotspotRFCommService"));
             context.bindService(intent, this.mConnection, 1);
         } catch (RuntimeException e) {
             Log.e("RFCommServiceLauncher", "bindService failed," + e);

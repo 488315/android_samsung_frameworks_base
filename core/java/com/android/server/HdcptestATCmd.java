@@ -2,6 +2,7 @@ package com.android.server;
 
 import android.content.Context;
 import android.util.Slog;
+
 import java.io.File;
 import java.security.MessageDigest;
 import java.util.Arrays;
@@ -94,7 +95,9 @@ public class HdcptestATCmd implements IWorkOnAt {
             Method dump skipped, instructions count: 3034
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.HdcptestATCmd.processCmd(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.HdcptestATCmd.processCmd(java.lang.String):java.lang.String");
     }
 
     private String[] parsingParam(String cmd) {
@@ -120,13 +123,13 @@ public class HdcptestATCmd implements IWorkOnAt {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0051, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x004e, code lost:
-    
-        if (r1 == null) goto L18;
-     */
+
+       if (r1 == null) goto L18;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -179,7 +182,9 @@ public class HdcptestATCmd implements IWorkOnAt {
         L57:
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.HdcptestATCmd.execCmd(java.lang.String, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.HdcptestATCmd.execCmd(java.lang.String,"
+                    + " java.lang.String):int");
     }
 
     public static boolean checkPath(String filePath, int type) {
@@ -250,6 +255,8 @@ public class HdcptestATCmd implements IWorkOnAt {
             Method dump skipped, instructions count: 202
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.HdcptestATCmd.writeFile(byte[], java.lang.String, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.HdcptestATCmd.writeFile(byte[],"
+                    + " java.lang.String, int):int");
     }
 }

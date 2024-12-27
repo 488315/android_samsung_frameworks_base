@@ -9,19 +9,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ContentProviderHolder implements Parcelable {
-    public static final Parcelable.Creator<ContentProviderHolder> CREATOR = new Parcelable.Creator<ContentProviderHolder>() { // from class: android.app.ContentProviderHolder.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentProviderHolder createFromParcel(Parcel source) {
-            return new ContentProviderHolder(source);
-        }
+    public static final Parcelable.Creator<ContentProviderHolder> CREATOR =
+            new Parcelable.Creator<
+                    ContentProviderHolder>() { // from class: android.app.ContentProviderHolder.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentProviderHolder createFromParcel(Parcel source) {
+                    return new ContentProviderHolder(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentProviderHolder[] newArray(int size) {
-            return new ContentProviderHolder[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentProviderHolder[] newArray(int size) {
+                    return new ContentProviderHolder[size];
+                }
+            };
     public IBinder connection;
     public final ProviderInfo info;
     public boolean mLocal;

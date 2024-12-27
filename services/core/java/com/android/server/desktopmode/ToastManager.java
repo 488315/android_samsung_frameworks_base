@@ -3,8 +3,11 @@ package com.android.server.desktopmode;
 import android.content.Context;
 import android.util.IndentingPrintWriter;
 import android.widget.Toast;
+
 import com.android.server.UiThread;
+
 import com.samsung.android.cover.CoverManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -39,6 +42,7 @@ public abstract class ToastManager {
         if (str == null || str.isEmpty()) {
             return;
         }
-        UiThread.getHandler().post(new ToastManager$$ExternalSyntheticLambda0(i, context, str, false));
+        UiThread.getHandler()
+                .post(new ToastManager$$ExternalSyntheticLambda0(i, context, str, false));
     }
 }

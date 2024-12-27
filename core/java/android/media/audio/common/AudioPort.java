@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioPort implements Parcelable {
-    public static final Parcelable.Creator<AudioPort> CREATOR = new Parcelable.Creator<AudioPort>() { // from class: android.media.audio.common.AudioPort.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPort createFromParcel(Parcel _aidl_source) {
-            AudioPort _aidl_out = new AudioPort();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioPort> CREATOR =
+            new Parcelable.Creator<
+                    AudioPort>() { // from class: android.media.audio.common.AudioPort.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPort createFromParcel(Parcel _aidl_source) {
+                    AudioPort _aidl_out = new AudioPort();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPort[] newArray(int _aidl_size) {
-            return new AudioPort[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPort[] newArray(int _aidl_size) {
+                    return new AudioPort[_aidl_size];
+                }
+            };
     public AudioPortExt ext;
     public ExtraAudioDescriptor[] extraAudioDescriptors;
     public AudioIoFlags flags;
@@ -100,7 +103,9 @@ public class AudioPort implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.extraAudioDescriptors = (ExtraAudioDescriptor[]) _aidl_parcel.createTypedArray(ExtraAudioDescriptor.CREATOR);
+            this.extraAudioDescriptors =
+                    (ExtraAudioDescriptor[])
+                            _aidl_parcel.createTypedArray(ExtraAudioDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -150,20 +155,39 @@ public class AudioPort implements Parcelable {
             return false;
         }
         AudioPort that = (AudioPort) other;
-        if (Objects.deepEquals(Integer.valueOf(this.id), Integer.valueOf(that.id)) && Objects.deepEquals(this.name, that.name) && Objects.deepEquals(this.profiles, that.profiles) && Objects.deepEquals(this.flags, that.flags) && Objects.deepEquals(this.extraAudioDescriptors, that.extraAudioDescriptors) && Objects.deepEquals(this.gains, that.gains) && Objects.deepEquals(this.ext, that.ext)) {
+        if (Objects.deepEquals(Integer.valueOf(this.id), Integer.valueOf(that.id))
+                && Objects.deepEquals(this.name, that.name)
+                && Objects.deepEquals(this.profiles, that.profiles)
+                && Objects.deepEquals(this.flags, that.flags)
+                && Objects.deepEquals(this.extraAudioDescriptors, that.extraAudioDescriptors)
+                && Objects.deepEquals(this.gains, that.gains)
+                && Objects.deepEquals(this.ext, that.ext)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.id), this.name, this.profiles, this.flags, this.extraAudioDescriptors, this.gains, this.ext).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.id),
+                                this.name,
+                                this.profiles,
+                                this.flags,
+                                this.extraAudioDescriptors,
+                                this.gains,
+                                this.ext)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.profiles);
-        return _mask | describeContents(this.flags) | describeContents(this.extraAudioDescriptors) | describeContents(this.gains) | describeContents(this.ext);
+        return _mask
+                | describeContents(this.flags)
+                | describeContents(this.extraAudioDescriptors)
+                | describeContents(this.gains)
+                | describeContents(this.ext);
     }
 
     private int describeContents(Object _v) {

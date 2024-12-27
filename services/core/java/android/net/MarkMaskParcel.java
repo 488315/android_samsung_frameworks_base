@@ -71,7 +71,9 @@ public class MarkMaskParcel implements Parcelable {
         int dataPosition = parcel.dataPosition();
         parcel.writeInt(0);
         parcel.writeInt(this.mark);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.mask, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.mask, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

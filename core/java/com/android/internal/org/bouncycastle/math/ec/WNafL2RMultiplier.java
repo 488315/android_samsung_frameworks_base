@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */

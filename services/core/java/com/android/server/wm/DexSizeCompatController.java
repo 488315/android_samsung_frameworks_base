@@ -4,11 +4,10 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.util.Slog;
 import android.view.DisplayInfo;
-import com.android.server.wm.DisplayPolicy;
-import com.android.server.wm.LaunchParamsController;
-import com.android.server.wm.SizeCompatPolicyManager;
+
 import com.samsung.android.core.CompatUtils;
 import com.samsung.android.core.SizeCompatInfo;
+
 import java.util.function.BiConsumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,7 +15,8 @@ import java.util.function.BiConsumer;
 public final class DexSizeCompatController {
     public float mDefaultScale = 0.72f;
     public float mAspectRatioScale = 0.72f;
-    public final LaunchParamsController.LaunchParams mTmpParams = new LaunchParamsController.LaunchParams();
+    public final LaunchParamsController.LaunchParams mTmpParams =
+            new LaunchParamsController.LaunchParams();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DexSizeCompatPolicy {
@@ -51,7 +51,11 @@ public final class DexSizeCompatController {
                 this.mStableInsets[i3] = new Rect();
                 if (displayPolicy != null) {
                     boolean z = i3 == 1 || i3 == 3;
-                    DisplayPolicy.DecorInsets.Info decorInsetsInfo = displayPolicy.getDecorInsetsInfo(i3, z ? this.mHeight : this.mWidth, z ? this.mWidth : this.mHeight);
+                    DisplayPolicy.DecorInsets.Info decorInsetsInfo =
+                            displayPolicy.getDecorInsetsInfo(
+                                    i3,
+                                    z ? this.mHeight : this.mWidth,
+                                    z ? this.mWidth : this.mHeight);
                     this.mNonDecorInsets[i3].set(decorInsetsInfo.mNonDecorInsets);
                     this.mStableInsets[i3].set(decorInsetsInfo.mConfigInsets);
                 }
@@ -79,16 +83,28 @@ public final class DexSizeCompatController {
             } else {
                 getFrameByOrientation(topOrientationInTask, this.mTmpFullScreenBounds);
                 Rect rect2 = this.mTmpFullScreenBounds;
-                float adjustRoundScale = CompatUtils.adjustRoundScale(CompatUtils.getCompatScale(rect2, rect));
+                float adjustRoundScale =
+                        CompatUtils.adjustRoundScale(CompatUtils.getCompatScale(rect2, rect));
                 Task task = this.mTask;
                 DisplayContent displayContent = task.mDisplayContent;
                 if (displayContent != null) {
-                    Rect taskBounds = getTaskBounds(displayContent.getBounds(), topOrientationInTask, adjustRoundScale, true);
+                    Rect taskBounds =
+                            getTaskBounds(
+                                    displayContent.getBounds(),
+                                    topOrientationInTask,
+                                    adjustRoundScale,
+                                    true);
                     float compatScale = CompatUtils.getCompatScale(rect2, taskBounds);
-                    if (rect.width() != taskBounds.width() || rect.height() != taskBounds.height()) {
+                    if (rect.width() != taskBounds.width()
+                            || rect.height() != taskBounds.height()) {
                         taskBounds.offsetTo(rect.left, rect.top);
                         rect.set(taskBounds);
-                        Slog.w("SizeCompatPolicy", "ensureDragBounds: userScale=" + compatScale + ", taskScale=" + compatScale);
+                        Slog.w(
+                                "SizeCompatPolicy",
+                                "ensureDragBounds: userScale="
+                                        + compatScale
+                                        + ", taskScale="
+                                        + compatScale);
                         adjustRoundScale = compatScale;
                     }
                 } else {
@@ -105,7 +121,9 @@ public final class DexSizeCompatController {
             Task task = this.mTask;
             DisplayContent displayContent = task.mDisplayContent;
             if (displayContent == null) {
-                Slog.w("SizeCompatPolicy", "fillSizeCompatInfoForDrag: Display is null. mTask=" + task);
+                Slog.w(
+                        "SizeCompatPolicy",
+                        "fillSizeCompatInfoForDrag: Display is null. mTask=" + task);
                 return;
             }
             Rect bounds = displayContent.getBounds();
@@ -117,7 +135,11 @@ public final class DexSizeCompatController {
             sizeCompatInfo.setDragMode(isRotatable ? 2 : 1);
             sizeCompatInfo.setDisplaySize(width, height);
             Rect bounds2 = task.getBounds();
-            int configurationOrientation2 = isRotatable ? CompatUtils.getConfigurationOrientation(bounds2.width(), bounds2.height()) : topOrientationInTask;
+            int configurationOrientation2 =
+                    isRotatable
+                            ? CompatUtils.getConfigurationOrientation(
+                                    bounds2.width(), bounds2.height())
+                            : topOrientationInTask;
             getFrameByOrientation(configurationOrientation2, this.mTmpFullScreenBounds);
             Rect rect = this.mTmpFullScreenBounds;
             boolean z = isRotatable && configurationOrientation != configurationOrientation2;
@@ -132,9 +154,17 @@ public final class DexSizeCompatController {
             }
             Rect stableBounds = getStableBounds(task.mDisplayContent);
             float minScale = getMinScale(topOrientationInTask, stableBounds, rect);
-            sizeCompatInfo.setMinSize(CompatUtils.applyScale(height2, minScale), CompatUtils.applyScale(width2, minScale));
-            float adjustFloorScale = (height2 > width || width2 > height) ? CompatUtils.adjustFloorScale(CompatUtils.getCompatScale(rect, stableBounds) - 0.01f) : 1.0f;
-            sizeCompatInfo.setMaxSize(CompatUtils.applyScale(height2, adjustFloorScale), CompatUtils.applyScale(width2, adjustFloorScale));
+            sizeCompatInfo.setMinSize(
+                    CompatUtils.applyScale(height2, minScale),
+                    CompatUtils.applyScale(width2, minScale));
+            float adjustFloorScale =
+                    (height2 > width || width2 > height)
+                            ? CompatUtils.adjustFloorScale(
+                                    CompatUtils.getCompatScale(rect, stableBounds) - 0.01f)
+                            : 1.0f;
+            sizeCompatInfo.setMaxSize(
+                    CompatUtils.applyScale(height2, adjustFloorScale),
+                    CompatUtils.applyScale(width2, adjustFloorScale));
         }
 
         public final void getFrameByOrientation(int i, Rect rect) {
@@ -153,7 +183,10 @@ public final class DexSizeCompatController {
         public final float getMinScale(int i, Rect rect, Rect rect2) {
             boolean z = i == 1;
             DisplayContent displayContent = this.mTask.mDisplayContent;
-            int i2 = (int) (displayContent.mMinSizeOfResizeableTaskDp * (displayContent.getConfiguration().densityDpi / 160.0f));
+            int i2 =
+                    (int)
+                            (displayContent.mMinSizeOfResizeableTaskDp
+                                    * (displayContent.getConfiguration().densityDpi / 160.0f));
             Rect rect3 = this.mTmpRect;
             int width = z ? i2 : rect.width();
             if (z) {
@@ -165,7 +198,12 @@ public final class DexSizeCompatController {
 
         public final Rect getStableBounds(DisplayContent displayContent) {
             DisplayInfo displayInfo = displayContent.mDisplayInfo;
-            this.mTmpStableBounds.set(displayContent.mDisplayPolicy.getDecorInsetsInfo(displayInfo.rotation, displayInfo.logicalWidth, displayInfo.logicalHeight).mConfigFrame);
+            this.mTmpStableBounds.set(
+                    displayContent.mDisplayPolicy.getDecorInsetsInfo(
+                                    displayInfo.rotation,
+                                    displayInfo.logicalWidth,
+                                    displayInfo.logicalHeight)
+                            .mConfigFrame);
             Rect rect = this.mTmpStableBounds;
             rect.top = this.mTask.getCaptionHeight() + rect.top;
             return rect;
@@ -193,14 +231,18 @@ public final class DexSizeCompatController {
             }
             getFrameByOrientation(i2, this.mTmpFullScreenBounds);
             Rect rect2 = this.mTmpFullScreenBounds;
-            boolean z2 = isRotatable(i) && i2 != CompatUtils.getConfigurationOrientation(width, height);
-            this.mTmpContainingBounds.set(0, 0, z2 ? rect2.height() : rect2.width(), z2 ? rect2.width() : rect2.height());
+            boolean z2 =
+                    isRotatable(i) && i2 != CompatUtils.getConfigurationOrientation(width, height);
+            this.mTmpContainingBounds.set(
+                    0, 0, z2 ? rect2.height() : rect2.width(), z2 ? rect2.width() : rect2.height());
             CompatUtils.getScaledBounds(this.mTmpContainingBounds, f, z2);
             if (z && !z2) {
                 int width2 = this.mTmpContainingBounds.width();
                 int height2 = this.mTmpContainingBounds.height();
                 if (width2 > width || height2 > height) {
-                    float adjustFloorScale = CompatUtils.adjustFloorScale(CompatUtils.getCompatScale(rect2, rect) - 0.01f);
+                    float adjustFloorScale =
+                            CompatUtils.adjustFloorScale(
+                                    CompatUtils.getCompatScale(rect2, rect) - 0.01f);
                     this.mUserScale = adjustFloorScale;
                     return getTaskBounds(rect, i, adjustFloorScale, false);
                 }
@@ -221,18 +263,38 @@ public final class DexSizeCompatController {
             int displayId;
             int intValue;
             if (this.mEnabled) {
-                SizeCompatPolicyManager sizeCompatPolicyManager = SizeCompatPolicyManager.LazyHolder.sManager;
-                if (sizeCompatPolicyManager.mLaunchPolicy != 0 && (displayId = (task = this.mTask).getDisplayId()) != -1 && (((intValue = ((Integer) sizeCompatPolicyManager.mDisplayIdsForActiveMode.get(displayId, 0)).intValue()) == 0 || intValue == 1) && (task.inFullscreenWindowingMode() || task.inFreeformWindowingMode()))) {
+                SizeCompatPolicyManager sizeCompatPolicyManager =
+                        SizeCompatPolicyManager.LazyHolder.sManager;
+                if (sizeCompatPolicyManager.mLaunchPolicy != 0
+                        && (displayId = (task = this.mTask).getDisplayId()) != -1
+                        && (((intValue =
+                                                        ((Integer)
+                                                                        sizeCompatPolicyManager
+                                                                                .mDisplayIdsForActiveMode
+                                                                                .get(displayId, 0))
+                                                                .intValue())
+                                                == 0
+                                        || intValue == 1)
+                                && (task.inFullscreenWindowingMode()
+                                        || task.inFreeformWindowingMode()))) {
                     return true;
                 }
             }
             return false;
         }
 
-        public final void setFreeformConfiguration(Configuration configuration, Rect rect, BiConsumer biConsumer) {
+        public final void setFreeformConfiguration(
+                Configuration configuration, Rect rect, BiConsumer biConsumer) {
             Task task = this.mTask;
             Rect bounds = task.getBounds();
-            Rect taskBounds = getTaskBounds(rect, getTopOrientationInTask(), isRotatable(getTopOrientationInTask()) ? LazyHolder.sInstance.mDefaultScale : this.mUserScale, true);
+            Rect taskBounds =
+                    getTaskBounds(
+                            rect,
+                            getTopOrientationInTask(),
+                            isRotatable(getTopOrientationInTask())
+                                    ? LazyHolder.sInstance.mDefaultScale
+                                    : this.mUserScale,
+                            true);
             if (task.inFreeformWindowingMode()) {
                 biConsumer.accept(bounds, taskBounds);
             } else {
@@ -257,7 +319,10 @@ public final class DexSizeCompatController {
                 return false;
             }
             SizeCompatAttributes sizeCompatAttributes = activityRecord.mSizeCompatAttributes;
-            return (sizeCompatAttributes != null && sizeCompatAttributes.hasBounds()) || !task.inFullscreenWindowingMode() || (taskDisplayArea = task.getTaskDisplayArea()) == null || !taskDisplayArea.getBounds().equals(bounds);
+            return (sizeCompatAttributes != null && sizeCompatAttributes.hasBounds())
+                    || !task.inFullscreenWindowingMode()
+                    || (taskDisplayArea = task.getTaskDisplayArea()) == null
+                    || !taskDisplayArea.getBounds().equals(bounds);
         }
     }
 
@@ -266,14 +331,17 @@ public final class DexSizeCompatController {
         public static final DexSizeCompatController sInstance = new DexSizeCompatController();
     }
 
-    public static DexSizeCompatPolicy createCompatPolicy(Task task, TaskDisplayArea taskDisplayArea) {
+    public static DexSizeCompatPolicy createCompatPolicy(
+            Task task, TaskDisplayArea taskDisplayArea) {
         DisplayContent displayContent = taskDisplayArea.getDisplayContent();
         if (displayContent != null) {
             DexSizeCompatPolicy dexSizeCompatPolicy = new DexSizeCompatPolicy(task, displayContent);
             SizeCompatPolicyManager.LazyHolder.sManager.setCompatPolicy(task, dexSizeCompatPolicy);
             return dexSizeCompatPolicy;
         }
-        Slog.w("SizeCompatPolicy", "createCompatPolicy: Display is null, task=" + task + ", tda=" + taskDisplayArea);
+        Slog.w(
+                "SizeCompatPolicy",
+                "createCompatPolicy: Display is null, task=" + task + ", tda=" + taskDisplayArea);
         return null;
     }
 
@@ -286,16 +354,23 @@ public final class DexSizeCompatController {
         return null;
     }
 
-    public static boolean shouldCreateCompatPolicy(Task task, ActivityRecord activityRecord, TaskDisplayArea taskDisplayArea) {
-        SizeCompatPolicyManager sizeCompatPolicyManager = SizeCompatPolicyManager.LazyHolder.sManager;
-        if (sizeCompatPolicyManager.mLaunchPolicy == 0 || taskDisplayArea.getDisplayContent() == null) {
+    public static boolean shouldCreateCompatPolicy(
+            Task task, ActivityRecord activityRecord, TaskDisplayArea taskDisplayArea) {
+        SizeCompatPolicyManager sizeCompatPolicyManager =
+                SizeCompatPolicyManager.LazyHolder.sManager;
+        if (sizeCompatPolicyManager.mLaunchPolicy == 0
+                || taskDisplayArea.getDisplayContent() == null) {
             return false;
         }
         if (task != null && task.getRootActivity(true, false) != null) {
             activityRecord = task.getRootActivity(true, false);
         }
-        if (activityRecord != null && activityRecord.isActivityTypeStandardOrUndefined() && SizeCompatPolicyManager.getCompatPolicy(task, false) == null) {
-            return sizeCompatPolicyManager.mLaunchPolicy == 2 || !(activityRecord.isResizeable(true) || activityRecord.supportsFreeformInDisplayArea(taskDisplayArea));
+        if (activityRecord != null
+                && activityRecord.isActivityTypeStandardOrUndefined()
+                && SizeCompatPolicyManager.getCompatPolicy(task, false) == null) {
+            return sizeCompatPolicyManager.mLaunchPolicy == 2
+                    || !(activityRecord.isResizeable(true)
+                            || activityRecord.supportsFreeformInDisplayArea(taskDisplayArea));
         }
         return false;
     }

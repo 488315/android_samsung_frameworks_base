@@ -1,6 +1,7 @@
 package com.samsung.android.core;
 
 import android.util.Log;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;

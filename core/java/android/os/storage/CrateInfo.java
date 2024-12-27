@@ -4,25 +4,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
 public final class CrateInfo implements Parcelable {
-    public static final Parcelable.Creator<CrateInfo> CREATOR = new Parcelable.Creator<CrateInfo>() { // from class: android.os.storage.CrateInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CrateInfo createFromParcel(Parcel in) {
-            CrateInfo crateInfo = new CrateInfo();
-            crateInfo.readFromParcel(in);
-            return crateInfo;
-        }
+    public static final Parcelable.Creator<CrateInfo> CREATOR =
+            new Parcelable.Creator<CrateInfo>() { // from class: android.os.storage.CrateInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CrateInfo createFromParcel(Parcel in) {
+                    CrateInfo crateInfo = new CrateInfo();
+                    crateInfo.readFromParcel(in);
+                    return crateInfo;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CrateInfo[] newArray(int size) {
-            return new CrateInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CrateInfo[] newArray(int size) {
+                    return new CrateInfo[size];
+                }
+            };
     private static final String TAG = "CrateInfo";
     private long mExpiration;
     private String mId;
@@ -36,7 +38,8 @@ public final class CrateInfo implements Parcelable {
 
     public CrateInfo(CharSequence label, long expiration) {
         Preconditions.checkStringNotEmpty(label, "Label should not be either null or empty string");
-        Preconditions.checkArgumentNonnegative(expiration, "Expiration should be non negative number");
+        Preconditions.checkArgumentNonnegative(
+                expiration, "Expiration should be non negative number");
         this.mLabel = label;
         this.mExpiration = expiration;
     }

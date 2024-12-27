@@ -4,11 +4,16 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Build;
 import android.util.AtomicFile;
 import android.util.Slog;
+
 import com.android.internal.util.FastPrintWriter;
 import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0;
 import com.android.server.pm.AbstractStatsBase;
 import com.android.server.utils.WatchedArrayMap;
+
 import dalvik.system.VMRuntime;
+
+import libcore.io.IoUtils;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -44,7 +48,8 @@ public final class PackageDexUsage extends AbstractStatsBase {
         public final int mOwnerUserId;
 
         /* renamed from: -$$Nest$mmerge, reason: not valid java name */
-        public static boolean m781$$Nest$mmerge(DexUseInfo dexUseInfo, DexUseInfo dexUseInfo2, boolean z) {
+        public static boolean m781$$Nest$mmerge(
+                DexUseInfo dexUseInfo, DexUseInfo dexUseInfo2, boolean z) {
             boolean z2 = dexUseInfo.mIsUsedByOtherApps;
             dexUseInfo.mIsUsedByOtherApps = z2 || dexUseInfo2.mIsUsedByOtherApps;
             boolean addAll = dexUseInfo.mLoaderIsas.addAll(dexUseInfo2.mLoaderIsas);
@@ -54,10 +59,14 @@ public final class PackageDexUsage extends AbstractStatsBase {
                 dexUseInfo.mClassLoaderContext = dexUseInfo2.mClassLoaderContext;
             } else if ("=UnsupportedClassLoaderContext=".equals(str)) {
                 dexUseInfo.mClassLoaderContext = dexUseInfo2.mClassLoaderContext;
-            } else if (!Objects.equals(dexUseInfo.mClassLoaderContext, dexUseInfo2.mClassLoaderContext)) {
+            } else if (!Objects.equals(
+                    dexUseInfo.mClassLoaderContext, dexUseInfo2.mClassLoaderContext)) {
                 dexUseInfo.mClassLoaderContext = "=VariableClassLoaderContext=";
             }
-            return addAll || z2 != dexUseInfo.mIsUsedByOtherApps || addAll2 || !Objects.equals(str, dexUseInfo.mClassLoaderContext);
+            return addAll
+                    || z2 != dexUseInfo.mIsUsedByOtherApps
+                    || addAll2
+                    || !Objects.equals(str, dexUseInfo.mClassLoaderContext);
         }
 
         public DexUseInfo(DexUseInfo dexUseInfo) {
@@ -91,11 +100,15 @@ public final class PackageDexUsage extends AbstractStatsBase {
             this.mPackageName = packageUseInfo.mPackageName;
             this.mPrimaryCodePaths = new HashMap();
             for (Map.Entry entry : ((HashMap) packageUseInfo.mPrimaryCodePaths).entrySet()) {
-                ((HashMap) this.mPrimaryCodePaths).put((String) entry.getKey(), new HashSet((Collection) entry.getValue()));
+                ((HashMap) this.mPrimaryCodePaths)
+                        .put((String) entry.getKey(), new HashSet((Collection) entry.getValue()));
             }
             this.mDexUseInfoMap = new HashMap();
             for (Map.Entry entry2 : ((HashMap) packageUseInfo.mDexUseInfoMap).entrySet()) {
-                ((HashMap) this.mDexUseInfoMap).put((String) entry2.getKey(), new DexUseInfo((DexUseInfo) entry2.getValue()));
+                ((HashMap) this.mDexUseInfoMap)
+                        .put(
+                                (String) entry2.getKey(),
+                                new DexUseInfo((DexUseInfo) entry2.getValue()));
             }
         }
 
@@ -126,7 +139,8 @@ public final class PackageDexUsage extends AbstractStatsBase {
     public final PackageUseInfo getPackageUseInfo(String str) {
         PackageUseInfo packageUseInfo;
         synchronized (this.mPackageUseInfoMap) {
-            PackageUseInfo packageUseInfo2 = (PackageUseInfo) ((HashMap) this.mPackageUseInfoMap).get(str);
+            PackageUseInfo packageUseInfo2 =
+                    (PackageUseInfo) ((HashMap) this.mPackageUseInfoMap).get(str);
             packageUseInfo = packageUseInfo2 == null ? null : new PackageUseInfo(packageUseInfo2);
         }
         return packageUseInfo;
@@ -144,7 +158,11 @@ public final class PackageDexUsage extends AbstractStatsBase {
         }
         int parseInt = Integer.parseInt(readLine.substring(36));
         if (parseInt != 2) {
-            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(parseInt, "Unexpected package-dex-use version: ", ". Not reading from it", "PackageDexUsage");
+            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                    parseInt,
+                    "Unexpected package-dex-use version: ",
+                    ". Not reading from it",
+                    "PackageDexUsage");
             return;
         }
         HashSet hashSet = new HashSet();
@@ -165,7 +183,9 @@ public final class PackageDexUsage extends AbstractStatsBase {
             boolean z = true;
             if (readLine2.startsWith("#")) {
                 if (str2 == null) {
-                    throw new IllegalStateException("Malformed PackageDexUsage file. Expected package line before dex line.");
+                    throw new IllegalStateException(
+                            "Malformed PackageDexUsage file. Expected package line before dex"
+                                + " line.");
                 }
                 String substring = readLine2.substring(1);
                 String readLine3 = bufferedReader.readLine();
@@ -174,7 +194,8 @@ public final class PackageDexUsage extends AbstractStatsBase {
                 }
                 String[] split = readLine3.split(",");
                 if (split.length < 3) {
-                    throw new IllegalStateException("Invalid PackageDexUsage line: ".concat(readLine3));
+                    throw new IllegalStateException(
+                            "Invalid PackageDexUsage line: ".concat(readLine3));
                 }
                 Set readLoadingPackages = readLoadingPackages(bufferedReader);
                 String readLine4 = bufferedReader.readLine();
@@ -189,7 +210,9 @@ public final class PackageDexUsage extends AbstractStatsBase {
                     if ("0".equals(str3)) {
                         z = false;
                     } else if (!"1".equals(str3)) {
-                        throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Unknown bool encoding: ", str3));
+                        throw new IllegalArgumentException(
+                                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                        "Unknown bool encoding: ", str3));
                     }
                     DexUseInfo dexUseInfo = new DexUseInfo(z, parseInt2, readLine4, null);
                     dexUseInfo.mLoadingPackages.addAll(readLoadingPackages);
@@ -198,17 +221,24 @@ public final class PackageDexUsage extends AbstractStatsBase {
                         if (hashSet.contains(str4)) {
                             ((HashSet) dexUseInfo.mLoaderIsas).add(split[i]);
                         } else {
-                            Slog.wtf("PackageDexUsage", "Unsupported ISA when parsing PackageDexUsage: " + str4);
+                            Slog.wtf(
+                                    "PackageDexUsage",
+                                    "Unsupported ISA when parsing PackageDexUsage: " + str4);
                         }
                     }
                     if (hashSet.isEmpty()) {
-                        Slog.wtf("PackageDexUsage", "Ignore dexPath when parsing PackageDexUsage because of unsupported isas. dexPath=" + substring);
+                        Slog.wtf(
+                                "PackageDexUsage",
+                                "Ignore dexPath when parsing PackageDexUsage because of unsupported"
+                                    + " isas. dexPath="
+                                        + substring);
                     } else {
                         ((HashMap) packageUseInfo.mDexUseInfoMap).put(substring, dexUseInfo);
                     }
                 }
             } else if (readLine2.startsWith("+")) {
-                ((HashMap) packageUseInfo.mPrimaryCodePaths).put(readLine2.substring(1), readLoadingPackages(bufferedReader));
+                ((HashMap) packageUseInfo.mPrimaryCodePaths)
+                        .put(readLine2.substring(1), readLoadingPackages(bufferedReader));
             } else {
                 packageUseInfo = new PackageUseInfo(readLine2);
                 hashMap.put(readLine2, packageUseInfo);
@@ -223,7 +253,8 @@ public final class PackageDexUsage extends AbstractStatsBase {
         BufferedReader bufferedReader = null;
         try {
             try {
-                BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(getFile().openRead()));
+                BufferedReader bufferedReader2 =
+                        new BufferedReader(new InputStreamReader(getFile().openRead()));
                 try {
                     read$1(bufferedReader2);
                     IoUtils.closeQuietly(bufferedReader2);
@@ -266,21 +297,29 @@ public final class PackageDexUsage extends AbstractStatsBase {
                         if (set == null) {
                             it.remove();
                         } else {
-                            Iterator it2 = ((HashMap) packageUseInfo.mDexUseInfoMap).entrySet().iterator();
+                            Iterator it2 =
+                                    ((HashMap) packageUseInfo.mDexUseInfoMap).entrySet().iterator();
                             while (it2.hasNext()) {
-                                if (!set.contains(Integer.valueOf(((DexUseInfo) ((Map.Entry) it2.next()).getValue()).mOwnerUserId))) {
+                                if (!set.contains(
+                                        Integer.valueOf(
+                                                ((DexUseInfo) ((Map.Entry) it2.next()).getValue())
+                                                        .mOwnerUserId))) {
                                     it2.remove();
                                 }
                             }
                             Set set2 = (Set) ((HashMap) map2).get(str);
-                            Iterator it3 = ((HashMap) packageUseInfo.mPrimaryCodePaths).entrySet().iterator();
+                            Iterator it3 =
+                                    ((HashMap) packageUseInfo.mPrimaryCodePaths)
+                                            .entrySet()
+                                            .iterator();
                             while (it3.hasNext()) {
                                 Map.Entry entry2 = (Map.Entry) it3.next();
                                 if (set2.contains((String) entry2.getKey())) {
                                     Iterator it4 = ((Set) entry2.getValue()).iterator();
                                     while (it4.hasNext()) {
                                         String str2 = (String) it4.next();
-                                        if (!arrayList.contains(str2) && !hashMap.containsKey(str2)) {
+                                        if (!arrayList.contains(str2)
+                                                && !hashMap.containsKey(str2)) {
                                             it4.remove();
                                         }
                                     }
@@ -288,7 +327,8 @@ public final class PackageDexUsage extends AbstractStatsBase {
                                     it3.remove();
                                 }
                             }
-                            if (!(!((HashMap) packageUseInfo.mPrimaryCodePaths).isEmpty()) && ((HashMap) packageUseInfo.mDexUseInfoMap).isEmpty()) {
+                            if (!(!((HashMap) packageUseInfo.mPrimaryCodePaths).isEmpty())
+                                    && ((HashMap) packageUseInfo.mDexUseInfoMap).isEmpty()) {
                                 it.remove();
                             }
                         }
@@ -305,7 +345,9 @@ public final class PackageDexUsage extends AbstractStatsBase {
         synchronized (this.mPackageUseInfoMap) {
             try {
                 for (Map.Entry entry : ((HashMap) this.mPackageUseInfoMap).entrySet()) {
-                    hashMap.put((String) entry.getKey(), new PackageUseInfo((PackageUseInfo) entry.getValue()));
+                    hashMap.put(
+                            (String) entry.getKey(),
+                            new PackageUseInfo((PackageUseInfo) entry.getValue()));
                 }
             } catch (Throwable th) {
                 throw th;

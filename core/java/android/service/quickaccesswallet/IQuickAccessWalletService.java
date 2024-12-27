@@ -5,48 +5,60 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.quickaccesswallet.IQuickAccessWalletServiceCallbacks;
 
 /* loaded from: classes3.dex */
 public interface IQuickAccessWalletService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.quickaccesswallet.IQuickAccessWalletService";
+    public static final String DESCRIPTOR =
+            "android.service.quickaccesswallet.IQuickAccessWalletService";
 
-    void onTargetActivityIntentRequested(IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks) throws RemoteException;
+    void onTargetActivityIntentRequested(
+            IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks)
+            throws RemoteException;
 
-    void onWalletCardSelected(SelectWalletCardRequest selectWalletCardRequest) throws RemoteException;
+    void onWalletCardSelected(SelectWalletCardRequest selectWalletCardRequest)
+            throws RemoteException;
 
-    void onWalletCardsRequested(GetWalletCardsRequest getWalletCardsRequest, IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks) throws RemoteException;
+    void onWalletCardsRequested(
+            GetWalletCardsRequest getWalletCardsRequest,
+            IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks)
+            throws RemoteException;
 
     void onWalletDismissed() throws RemoteException;
 
-    void registerWalletServiceEventListener(WalletServiceEventListenerRequest walletServiceEventListenerRequest, IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks) throws RemoteException;
+    void registerWalletServiceEventListener(
+            WalletServiceEventListenerRequest walletServiceEventListenerRequest,
+            IQuickAccessWalletServiceCallbacks iQuickAccessWalletServiceCallbacks)
+            throws RemoteException;
 
-    void unregisterWalletServiceEventListener(WalletServiceEventListenerRequest walletServiceEventListenerRequest) throws RemoteException;
+    void unregisterWalletServiceEventListener(
+            WalletServiceEventListenerRequest walletServiceEventListenerRequest)
+            throws RemoteException;
 
     public static class Default implements IQuickAccessWalletService {
         @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-        public void onWalletCardsRequested(GetWalletCardsRequest request, IQuickAccessWalletServiceCallbacks callback) throws RemoteException {
-        }
+        public void onWalletCardsRequested(
+                GetWalletCardsRequest request, IQuickAccessWalletServiceCallbacks callback)
+                throws RemoteException {}
 
         @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-        public void onWalletCardSelected(SelectWalletCardRequest request) throws RemoteException {
-        }
+        public void onWalletCardSelected(SelectWalletCardRequest request) throws RemoteException {}
 
         @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-        public void onWalletDismissed() throws RemoteException {
-        }
+        public void onWalletDismissed() throws RemoteException {}
 
         @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-        public void registerWalletServiceEventListener(WalletServiceEventListenerRequest request, IQuickAccessWalletServiceCallbacks callback) throws RemoteException {
-        }
+        public void registerWalletServiceEventListener(
+                WalletServiceEventListenerRequest request,
+                IQuickAccessWalletServiceCallbacks callback)
+                throws RemoteException {}
 
         @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-        public void unregisterWalletServiceEventListener(WalletServiceEventListenerRequest request) throws RemoteException {
-        }
+        public void unregisterWalletServiceEventListener(WalletServiceEventListenerRequest request)
+                throws RemoteException {}
 
         @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-        public void onTargetActivityIntentRequested(IQuickAccessWalletServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void onTargetActivityIntentRequested(IQuickAccessWalletServiceCallbacks callbacks)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -54,7 +66,7 @@ public interface IQuickAccessWalletService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IQuickAccessWalletService {
+    public abstract static class Stub extends Binder implements IQuickAccessWalletService {
         static final int TRANSACTION_onTargetActivityIntentRequested = 6;
         static final int TRANSACTION_onWalletCardSelected = 2;
         static final int TRANSACTION_onWalletCardsRequested = 1;
@@ -107,7 +119,8 @@ public interface IQuickAccessWalletService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IQuickAccessWalletService.DESCRIPTOR);
             }
@@ -117,13 +130,19 @@ public interface IQuickAccessWalletService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    GetWalletCardsRequest _arg0 = (GetWalletCardsRequest) data.readTypedObject(GetWalletCardsRequest.CREATOR);
-                    IQuickAccessWalletServiceCallbacks _arg1 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    GetWalletCardsRequest _arg0 =
+                            (GetWalletCardsRequest)
+                                    data.readTypedObject(GetWalletCardsRequest.CREATOR);
+                    IQuickAccessWalletServiceCallbacks _arg1 =
+                            IQuickAccessWalletServiceCallbacks.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onWalletCardsRequested(_arg0, _arg1);
                     return true;
                 case 2:
-                    SelectWalletCardRequest _arg02 = (SelectWalletCardRequest) data.readTypedObject(SelectWalletCardRequest.CREATOR);
+                    SelectWalletCardRequest _arg02 =
+                            (SelectWalletCardRequest)
+                                    data.readTypedObject(SelectWalletCardRequest.CREATOR);
                     data.enforceNoDataAvail();
                     onWalletCardSelected(_arg02);
                     return true;
@@ -131,18 +150,26 @@ public interface IQuickAccessWalletService extends IInterface {
                     onWalletDismissed();
                     return true;
                 case 4:
-                    WalletServiceEventListenerRequest _arg03 = (WalletServiceEventListenerRequest) data.readTypedObject(WalletServiceEventListenerRequest.CREATOR);
-                    IQuickAccessWalletServiceCallbacks _arg12 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    WalletServiceEventListenerRequest _arg03 =
+                            (WalletServiceEventListenerRequest)
+                                    data.readTypedObject(WalletServiceEventListenerRequest.CREATOR);
+                    IQuickAccessWalletServiceCallbacks _arg12 =
+                            IQuickAccessWalletServiceCallbacks.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerWalletServiceEventListener(_arg03, _arg12);
                     return true;
                 case 5:
-                    WalletServiceEventListenerRequest _arg04 = (WalletServiceEventListenerRequest) data.readTypedObject(WalletServiceEventListenerRequest.CREATOR);
+                    WalletServiceEventListenerRequest _arg04 =
+                            (WalletServiceEventListenerRequest)
+                                    data.readTypedObject(WalletServiceEventListenerRequest.CREATOR);
                     data.enforceNoDataAvail();
                     unregisterWalletServiceEventListener(_arg04);
                     return true;
                 case 6:
-                    IQuickAccessWalletServiceCallbacks _arg05 = IQuickAccessWalletServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IQuickAccessWalletServiceCallbacks _arg05 =
+                            IQuickAccessWalletServiceCallbacks.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onTargetActivityIntentRequested(_arg05);
                     return true;
@@ -168,7 +195,9 @@ public interface IQuickAccessWalletService extends IInterface {
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-            public void onWalletCardsRequested(GetWalletCardsRequest request, IQuickAccessWalletServiceCallbacks callback) throws RemoteException {
+            public void onWalletCardsRequested(
+                    GetWalletCardsRequest request, IQuickAccessWalletServiceCallbacks callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
@@ -181,7 +210,8 @@ public interface IQuickAccessWalletService extends IInterface {
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-            public void onWalletCardSelected(SelectWalletCardRequest request) throws RemoteException {
+            public void onWalletCardSelected(SelectWalletCardRequest request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
@@ -204,7 +234,10 @@ public interface IQuickAccessWalletService extends IInterface {
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-            public void registerWalletServiceEventListener(WalletServiceEventListenerRequest request, IQuickAccessWalletServiceCallbacks callback) throws RemoteException {
+            public void registerWalletServiceEventListener(
+                    WalletServiceEventListenerRequest request,
+                    IQuickAccessWalletServiceCallbacks callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
@@ -217,7 +250,8 @@ public interface IQuickAccessWalletService extends IInterface {
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-            public void unregisterWalletServiceEventListener(WalletServiceEventListenerRequest request) throws RemoteException {
+            public void unregisterWalletServiceEventListener(
+                    WalletServiceEventListenerRequest request) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);
@@ -229,7 +263,8 @@ public interface IQuickAccessWalletService extends IInterface {
             }
 
             @Override // android.service.quickaccesswallet.IQuickAccessWalletService
-            public void onTargetActivityIntentRequested(IQuickAccessWalletServiceCallbacks callbacks) throws RemoteException {
+            public void onTargetActivityIntentRequested(
+                    IQuickAccessWalletServiceCallbacks callbacks) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IQuickAccessWalletService.DESCRIPTOR);

@@ -50,7 +50,9 @@ public class UTF8 {
         fill(transitionTable, 72, 73, (byte) 0);
         fill(transitionTable, 89, 91, (byte) 16);
         fill(transitionTable, 104, 104, (byte) 16);
-        byte[] firstUnitMasks = {0, 0, 0, 0, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, 15, 15, 15, 7, 7, 7};
+        byte[] firstUnitMasks = {
+            0, 0, 0, 0, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, 15, 15, 15, 7, 7, 7
+        };
         byte[] firstUnitTransitions = {-2, -2, -2, -2, 0, 48, 16, 64, S_P4A, 32, 96};
         for (int i = 0; i < 128; i++) {
             byte category = categories[i];

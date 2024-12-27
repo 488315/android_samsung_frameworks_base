@@ -6,26 +6,31 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
 import android.view.autofill.AutofillId;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 /* loaded from: classes3.dex */
 public final class FieldClassification implements Parcelable {
-    public static final Parcelable.Creator<FieldClassification> CREATOR = new Parcelable.Creator<FieldClassification>() { // from class: android.service.assist.classification.FieldClassification.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FieldClassification[] newArray(int size) {
-            return new FieldClassification[size];
-        }
+    public static final Parcelable.Creator<FieldClassification> CREATOR =
+            new Parcelable.Creator<
+                    FieldClassification>() { // from class:
+                                             // android.service.assist.classification.FieldClassification.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FieldClassification[] newArray(int size) {
+                    return new FieldClassification[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FieldClassification createFromParcel(Parcel in) {
-            return new FieldClassification(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FieldClassification createFromParcel(Parcel in) {
+                    return new FieldClassification(in);
+                }
+            };
     private final AutofillId mAutofillId;
     private final Set<String> mGroupHints;
     private final Set<String> mHints;
@@ -75,7 +80,13 @@ public final class FieldClassification implements Parcelable {
     }
 
     public String toString() {
-        return "FieldClassification { autofillId = " + this.mAutofillId + ", hints = " + this.mHints + ", groupHints = " + this.mGroupHints + " }";
+        return "FieldClassification { autofillId = "
+                + this.mAutofillId
+                + ", hints = "
+                + this.mHints
+                + ", groupHints = "
+                + this.mGroupHints
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -95,14 +106,16 @@ public final class FieldClassification implements Parcelable {
         Set<String> hints = unparcelHints(in);
         Set<String> groupHints = unparcelGroupHints(in);
         this.mAutofillId = autofillId;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
         this.mHints = hints;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHints);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHints);
         this.mGroupHints = groupHints;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mGroupHints);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mGroupHints);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -2,6 +2,7 @@ package com.android.server.media;
 
 import android.media.MediaRoute2Info;
 import android.os.UserHandle;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -32,16 +33,13 @@ public interface BluetoothRouteController {
         }
 
         @Override // com.android.server.media.BluetoothRouteController
-        public final void start(UserHandle userHandle) {
-        }
+        public final void start(UserHandle userHandle) {}
 
         @Override // com.android.server.media.BluetoothRouteController
-        public final void stop() {
-        }
+        public final void stop() {}
 
         @Override // com.android.server.media.BluetoothRouteController
-        public final void transferTo(String str) {
-        }
+        public final void transferTo(String str) {}
 
         @Override // com.android.server.media.BluetoothRouteController
         public final boolean updateVolumeForDevices(int i, int i2) {

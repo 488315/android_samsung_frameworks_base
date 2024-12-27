@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface IRemoteMagnificationAnimationCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.view.accessibility.IRemoteMagnificationAnimationCallback";
+    public static final String DESCRIPTOR =
+            "android.view.accessibility.IRemoteMagnificationAnimationCallback";
 
     void onResult(boolean z) throws RemoteException;
 
     public static class Default implements IRemoteMagnificationAnimationCallback {
         @Override // android.view.accessibility.IRemoteMagnificationAnimationCallback
-        public void onResult(boolean success) throws RemoteException {
-        }
+        public void onResult(boolean success) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,8 @@ public interface IRemoteMagnificationAnimationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteMagnificationAnimationCallback {
+    public abstract static class Stub extends Binder
+            implements IRemoteMagnificationAnimationCallback {
         static final int TRANSACTION_onResult = 1;
 
         public Stub() {
@@ -34,7 +35,8 @@ public interface IRemoteMagnificationAnimationCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IRemoteMagnificationAnimationCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IRemoteMagnificationAnimationCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IRemoteMagnificationAnimationCallback)) {
                 return (IRemoteMagnificationAnimationCallback) iin;
             }
@@ -61,7 +63,8 @@ public interface IRemoteMagnificationAnimationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteMagnificationAnimationCallback.DESCRIPTOR);
             }

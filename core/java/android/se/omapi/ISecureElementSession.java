@@ -5,8 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.se.omapi.ISecureElementChannel;
-import android.se.omapi.ISecureElementListener;
 
 /* loaded from: classes3.dex */
 public interface ISecureElementSession extends IInterface {
@@ -25,9 +23,13 @@ public interface ISecureElementSession extends IInterface {
 
     boolean isClosed() throws RemoteException;
 
-    ISecureElementChannel openBasicChannel(byte[] bArr, byte b, ISecureElementListener iSecureElementListener) throws RemoteException;
+    ISecureElementChannel openBasicChannel(
+            byte[] bArr, byte b, ISecureElementListener iSecureElementListener)
+            throws RemoteException;
 
-    ISecureElementChannel openLogicalChannel(byte[] bArr, byte b, ISecureElementListener iSecureElementListener) throws RemoteException;
+    ISecureElementChannel openLogicalChannel(
+            byte[] bArr, byte b, ISecureElementListener iSecureElementListener)
+            throws RemoteException;
 
     public static class Default implements ISecureElementSession {
         @Override // android.se.omapi.ISecureElementSession
@@ -36,12 +38,10 @@ public interface ISecureElementSession extends IInterface {
         }
 
         @Override // android.se.omapi.ISecureElementSession
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.se.omapi.ISecureElementSession
-        public void closeChannels() throws RemoteException {
-        }
+        public void closeChannels() throws RemoteException {}
 
         @Override // android.se.omapi.ISecureElementSession
         public boolean isClosed() throws RemoteException {
@@ -49,12 +49,14 @@ public interface ISecureElementSession extends IInterface {
         }
 
         @Override // android.se.omapi.ISecureElementSession
-        public ISecureElementChannel openBasicChannel(byte[] aid, byte p2, ISecureElementListener listener) throws RemoteException {
+        public ISecureElementChannel openBasicChannel(
+                byte[] aid, byte p2, ISecureElementListener listener) throws RemoteException {
             return null;
         }
 
         @Override // android.se.omapi.ISecureElementSession
-        public ISecureElementChannel openLogicalChannel(byte[] aid, byte p2, ISecureElementListener listener) throws RemoteException {
+        public ISecureElementChannel openLogicalChannel(
+                byte[] aid, byte p2, ISecureElementListener listener) throws RemoteException {
             return null;
         }
 
@@ -74,8 +76,9 @@ public interface ISecureElementSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISecureElementSession {
-        public static final String DESCRIPTOR = "android$se$omapi$ISecureElementSession".replace('$', '.');
+    public abstract static class Stub extends Binder implements ISecureElementSession {
+        public static final String DESCRIPTOR =
+                "android$se$omapi$ISecureElementSession".replace('$', '.');
         static final int TRANSACTION_close = 2;
         static final int TRANSACTION_closeChannels = 3;
         static final int TRANSACTION_getAtr = 1;
@@ -107,7 +110,8 @@ public interface ISecureElementSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -148,7 +152,8 @@ public interface ISecureElementSession extends IInterface {
                 case 5:
                     byte[] _arg0 = data.createByteArray();
                     byte _arg1 = data.readByte();
-                    ISecureElementListener _arg2 = ISecureElementListener.Stub.asInterface(data.readStrongBinder());
+                    ISecureElementListener _arg2 =
+                            ISecureElementListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     ISecureElementChannel _result3 = openBasicChannel(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -157,7 +162,8 @@ public interface ISecureElementSession extends IInterface {
                 case 6:
                     byte[] _arg02 = data.createByteArray();
                     byte _arg12 = data.readByte();
-                    ISecureElementListener _arg22 = ISecureElementListener.Stub.asInterface(data.readStrongBinder());
+                    ISecureElementListener _arg22 =
+                            ISecureElementListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     ISecureElementChannel _result4 = openLogicalChannel(_arg02, _arg12, _arg22);
                     reply.writeNoException();
@@ -259,7 +265,8 @@ public interface ISecureElementSession extends IInterface {
             }
 
             @Override // android.se.omapi.ISecureElementSession
-            public ISecureElementChannel openBasicChannel(byte[] aid, byte p2, ISecureElementListener listener) throws RemoteException {
+            public ISecureElementChannel openBasicChannel(
+                    byte[] aid, byte p2, ISecureElementListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -272,7 +279,8 @@ public interface ISecureElementSession extends IInterface {
                         throw new RemoteException("Method openBasicChannel is unimplemented.");
                     }
                     _reply.readException();
-                    ISecureElementChannel _result = ISecureElementChannel.Stub.asInterface(_reply.readStrongBinder());
+                    ISecureElementChannel _result =
+                            ISecureElementChannel.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -281,7 +289,8 @@ public interface ISecureElementSession extends IInterface {
             }
 
             @Override // android.se.omapi.ISecureElementSession
-            public ISecureElementChannel openLogicalChannel(byte[] aid, byte p2, ISecureElementListener listener) throws RemoteException {
+            public ISecureElementChannel openLogicalChannel(
+                    byte[] aid, byte p2, ISecureElementListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -294,7 +303,8 @@ public interface ISecureElementSession extends IInterface {
                         throw new RemoteException("Method openLogicalChannel is unimplemented.");
                     }
                     _reply.readException();
-                    ISecureElementChannel _result = ISecureElementChannel.Stub.asInterface(_reply.readStrongBinder());
+                    ISecureElementChannel _result =
+                            ISecureElementChannel.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

@@ -16,6 +16,7 @@ import android.util.AndroidException;
 import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
+
 import com.android.internal.graphics.fonts.IFontManager;
 import com.android.internal.security.VerityUtils;
 import com.android.internal.util.DumpUtils;
@@ -24,6 +25,7 @@ import com.android.server.LocalServices;
 import com.android.server.SystemServerInitThreadPool;
 import com.android.server.SystemService;
 import com.android.text.flags.Flags;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -64,8 +66,7 @@ public final class FontManagerService extends IFontManager.Stub {
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.graphics.fonts.FontManagerService$Lifecycle$1, reason: invalid class name */
         public final class AnonymousClass1 {
-            public AnonymousClass1() {
-            }
+            public AnonymousClass1() {}
         }
 
         public Lifecycle(Context context, boolean z) {
@@ -77,7 +78,10 @@ public final class FontManagerService extends IFontManager.Stub {
 
         @Override // com.android.server.SystemService
         public final void onBootPhase(int i) {
-            if (i == (Flags.completeFontLoadInSystemServicesReady() ? SystemService.PHASE_LOCK_SETTINGS_READY : SystemService.PHASE_ACTIVITY_MANAGER_READY)) {
+            if (i
+                    == (Flags.completeFontLoadInSystemServicesReady()
+                            ? SystemService.PHASE_LOCK_SETTINGS_READY
+                            : SystemService.PHASE_ACTIVITY_MANAGER_READY)) {
                 this.mServiceStarted.join();
             }
         }
@@ -108,41 +112,48 @@ public final class FontManagerService extends IFontManager.Stub {
         }
     }
 
-    public FontManagerService(Context context, boolean z, final CompletableFuture completableFuture) {
+    public FontManagerService(
+            Context context, boolean z, final CompletableFuture completableFuture) {
         SharedMemory sharedMemory;
         Object obj = new Object();
         this.mSerializedFontMapLock = obj;
         this.mSerializedFontMap = null;
         if (z) {
             Slog.i("FontManagerService", "Entering safe mode. Deleting all font updates.");
-            UpdatableFontDir.deleteAllFiles(new File("/data/fonts/files"), new File("/data/fonts/config/config.xml"));
+            UpdatableFontDir.deleteAllFiles(
+                    new File("/data/fonts/files"), new File("/data/fonts/config/config.xml"));
         }
         this.mContext = context;
         this.mIsSafeMode = z;
         if (Flags.useOptimizedBoottimeFontLoading()) {
             Slog.i("FontManagerService", "Using optimized boot-time font loading.");
-            SystemServerInitThreadPool.submit("FontManagerService_create", new Runnable() { // from class: com.android.server.graphics.fonts.FontManagerService$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SharedMemory sharedMemory2;
-                    FontManagerService fontManagerService = FontManagerService.this;
-                    CompletableFuture completableFuture2 = completableFuture;
-                    fontManagerService.initialize();
-                    synchronized (fontManagerService.mUpdatableFontDirLock) {
-                        if (fontManagerService.mUpdatableFontDir != null) {
-                            try {
-                                synchronized (fontManagerService.mSerializedFontMapLock) {
-                                    sharedMemory2 = fontManagerService.mSerializedFontMap;
+            SystemServerInitThreadPool.submit(
+                    "FontManagerService_create",
+                    new Runnable() { // from class:
+                                     // com.android.server.graphics.fonts.FontManagerService$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SharedMemory sharedMemory2;
+                            FontManagerService fontManagerService = FontManagerService.this;
+                            CompletableFuture completableFuture2 = completableFuture;
+                            fontManagerService.initialize();
+                            synchronized (fontManagerService.mUpdatableFontDirLock) {
+                                if (fontManagerService.mUpdatableFontDir != null) {
+                                    try {
+                                        synchronized (fontManagerService.mSerializedFontMapLock) {
+                                            sharedMemory2 = fontManagerService.mSerializedFontMap;
+                                        }
+                                        Typeface.setSystemFontMap(sharedMemory2);
+                                    } catch (ErrnoException | IOException unused) {
+                                        Slog.w(
+                                                "FontManagerService",
+                                                "Failed to set system font map of system_server");
+                                    }
                                 }
-                                Typeface.setSystemFontMap(sharedMemory2);
-                            } catch (ErrnoException | IOException unused) {
-                                Slog.w("FontManagerService", "Failed to set system font map of system_server");
                             }
+                            completableFuture2.complete(null);
                         }
-                    }
-                    completableFuture2.complete(null);
-                }
-            });
+                    });
             return;
         }
         Slog.i("FontManagerService", "Not using optimized boot-time font loading.");
@@ -187,12 +198,19 @@ public final class FontManagerService extends IFontManager.Stub {
             strArr[stringArray.length] = this.mDebugCertFilePath;
             stringArray = strArr;
         }
-        return new UpdatableFontDir(new File("/data/fonts/files"), new OtfFontFileParser(), new FsverityUtilImpl(stringArray), new File("/data/fonts/config/config.xml"));
+        return new UpdatableFontDir(
+                new File("/data/fonts/files"),
+                new OtfFontFileParser(),
+                new FsverityUtilImpl(stringArray),
+                new File("/data/fonts/config/config.xml"));
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (DumpUtils.checkDumpPermission(this.mContext, "FontManagerService", printWriter)) {
-            FontManagerShellCommand.dumpFontConfig(new IndentingPrintWriter(printWriter, "  "), new FontManagerShellCommand(this).mService.getSystemFontConfig());
+            FontManagerShellCommand.dumpFontConfig(
+                    new IndentingPrintWriter(printWriter, "  "),
+                    new FontManagerShellCommand(this).mService.getSystemFontConfig());
         }
     }
 
@@ -246,8 +264,22 @@ public final class FontManagerService extends IFontManager.Stub {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-        new FontManagerShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+    public final void onShellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver) {
+        new FontManagerShellCommand(this)
+                .exec(
+                        this,
+                        fileDescriptor,
+                        fileDescriptor2,
+                        fileDescriptor3,
+                        strArr,
+                        shellCallback,
+                        resultReceiver);
     }
 
     public final void update(int i, List list) {
@@ -258,7 +290,8 @@ public final class FontManagerService extends IFontManager.Stub {
                     throw new SystemFontException(-7, "The font updater is disabled.");
                 }
                 if (i != -1 && updatableFontDir.mConfigVersion != i) {
-                    throw new SystemFontException(-8, "The base config version is older than current.");
+                    throw new SystemFontException(
+                            -8, "The base config version is older than current.");
                 }
                 updatableFontDir.update(list);
                 updateSerializedFontMap();
@@ -272,7 +305,8 @@ public final class FontManagerService extends IFontManager.Stub {
         try {
             Preconditions.checkArgumentNonnegative(i);
             Objects.requireNonNull(list);
-            this.mContext.enforceCallingPermission("android.permission.UPDATE_FONTS", "UPDATE_FONTS permission required.");
+            this.mContext.enforceCallingPermission(
+                    "android.permission.UPDATE_FONTS", "UPDATE_FONTS permission required.");
             try {
                 update(i, list);
                 closeFileDescriptors(list);
@@ -300,7 +334,12 @@ public final class FontManagerService extends IFontManager.Stub {
         SharedMemory sharedMemory3 = null;
         try {
             try {
-                sharedMemory = Typeface.serializeFontMap(SystemFonts.buildSystemTypefaces(systemFontConfig, SystemFonts.buildSystemFallback(systemFontConfig, arrayMap)));
+                sharedMemory =
+                        Typeface.serializeFontMap(
+                                SystemFonts.buildSystemTypefaces(
+                                        systemFontConfig,
+                                        SystemFonts.buildSystemFallback(
+                                                systemFontConfig, arrayMap)));
                 arrayMap = arrayMap.values().iterator();
                 while (arrayMap.hasNext()) {
                     ByteBuffer byteBuffer = (ByteBuffer) arrayMap.next();
@@ -309,7 +348,10 @@ public final class FontManagerService extends IFontManager.Stub {
                     }
                 }
             } catch (ErrnoException | IOException e) {
-                Slog.w("FontManagerService", "Failed to serialize updatable font map. Retrying with system image fonts.", e);
+                Slog.w(
+                        "FontManagerService",
+                        "Failed to serialize updatable font map. Retrying with system image fonts.",
+                        e);
                 Iterator it = arrayMap.values().iterator();
                 while (true) {
                     arrayMap = it.hasNext();
@@ -327,7 +369,10 @@ public final class FontManagerService extends IFontManager.Stub {
                 try {
                     sharedMemory3 = Typeface.serializeFontMap(Typeface.getSystemFontMap());
                 } catch (ErrnoException | IOException e2) {
-                    Slog.e("FontManagerService", "Failed to serialize SystemServer system font map", e2);
+                    Slog.e(
+                            "FontManagerService",
+                            "Failed to serialize SystemServer system font map",
+                            e2);
                 }
                 sharedMemory = sharedMemory3;
             }

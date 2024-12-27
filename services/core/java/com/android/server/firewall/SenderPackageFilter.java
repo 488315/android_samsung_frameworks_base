@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -23,7 +24,8 @@ public final class SenderPackageFilter implements Filter {
             if (attributeValue != null) {
                 return new SenderPackageFilter(attributeValue);
             }
-            throw new XmlPullParserException("A package name must be specified.", xmlPullParser, null);
+            throw new XmlPullParserException(
+                    "A package name must be specified.", xmlPullParser, null);
         }
     }
 
@@ -32,7 +34,14 @@ public final class SenderPackageFilter implements Filter {
     }
 
     @Override // com.android.server.firewall.Filter
-    public final boolean matches(IntentFirewall intentFirewall, ComponentName componentName, Intent intent, int i, int i2, String str, int i3) {
+    public final boolean matches(
+            IntentFirewall intentFirewall,
+            ComponentName componentName,
+            Intent intent,
+            int i,
+            int i2,
+            String str,
+            int i3) {
         int i4;
         try {
             i4 = AppGlobals.getPackageManager().getPackageUid(this.mPackageName, 4194304L, 0);

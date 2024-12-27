@@ -4,24 +4,27 @@ import android.annotation.SystemApi;
 import android.content.pm.VersionedPackage;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class RollbackInfo implements Parcelable {
-    public static final Parcelable.Creator<RollbackInfo> CREATOR = new Parcelable.Creator<RollbackInfo>() { // from class: android.content.rollback.RollbackInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RollbackInfo createFromParcel(Parcel in) {
-            return new RollbackInfo(in);
-        }
+    public static final Parcelable.Creator<RollbackInfo> CREATOR =
+            new Parcelable.Creator<
+                    RollbackInfo>() { // from class: android.content.rollback.RollbackInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RollbackInfo createFromParcel(Parcel in) {
+                    return new RollbackInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RollbackInfo[] newArray(int size) {
-            return new RollbackInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RollbackInfo[] newArray(int size) {
+                    return new RollbackInfo[size];
+                }
+            };
     private final List<VersionedPackage> mCausePackages;
     private int mCommittedSessionId;
     private final boolean mIsStaged;
@@ -29,7 +32,13 @@ public final class RollbackInfo implements Parcelable {
     private final int mRollbackId;
     private int mRollbackImpactLevel;
 
-    public RollbackInfo(int rollbackId, List<PackageRollbackInfo> packages, boolean isStaged, List<VersionedPackage> causePackages, int committedSessionId, int rollbackImpactLevel) {
+    public RollbackInfo(
+            int rollbackId,
+            List<PackageRollbackInfo> packages,
+            boolean isStaged,
+            List<VersionedPackage> causePackages,
+            int committedSessionId,
+            int rollbackImpactLevel) {
         this.mRollbackId = rollbackId;
         this.mPackages = packages;
         this.mIsStaged = isStaged;
@@ -38,7 +47,12 @@ public final class RollbackInfo implements Parcelable {
         this.mRollbackImpactLevel = rollbackImpactLevel;
     }
 
-    public RollbackInfo(int rollbackId, List<PackageRollbackInfo> packages, boolean isStaged, List<VersionedPackage> causePackages, int committedSessionId) {
+    public RollbackInfo(
+            int rollbackId,
+            List<PackageRollbackInfo> packages,
+            boolean isStaged,
+            List<VersionedPackage> causePackages,
+            int committedSessionId) {
         this(rollbackId, packages, isStaged, causePackages, committedSessionId, 0);
     }
 

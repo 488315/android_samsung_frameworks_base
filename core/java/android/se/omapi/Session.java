@@ -3,6 +3,7 @@ package android.se.omapi;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.util.Log;
+
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
@@ -81,7 +82,9 @@ public final class Session {
         synchronized (this.mLock) {
             try {
                 try {
-                    ISecureElementChannel channel = this.mSession.openBasicChannel(aid, p2, this.mReader.getSEService().getListener());
+                    ISecureElementChannel channel =
+                            this.mSession.openBasicChannel(
+                                    aid, p2, this.mReader.getSEService().getListener());
                     if (channel == null) {
                         return null;
                     }
@@ -114,7 +117,9 @@ public final class Session {
         synchronized (this.mLock) {
             try {
                 try {
-                    ISecureElementChannel channel = this.mSession.openLogicalChannel(aid, p2, this.mReader.getSEService().getListener());
+                    ISecureElementChannel channel =
+                            this.mSession.openLogicalChannel(
+                                    aid, p2, this.mReader.getSEService().getListener());
                     if (channel == null) {
                         return null;
                     }

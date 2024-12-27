@@ -13,7 +13,10 @@ public final class BootControlHIDL implements IBootControl {
     public final IBootControl$Proxy v1_2_hal;
     public final android.hardware.boot.V1_0.IBootControl v1_hal;
 
-    public BootControlHIDL(android.hardware.boot.V1_0.IBootControl iBootControl, android.hardware.boot.V1_1.IBootControl iBootControl2, IBootControl$Proxy iBootControl$Proxy) {
+    public BootControlHIDL(
+            android.hardware.boot.V1_0.IBootControl iBootControl,
+            android.hardware.boot.V1_1.IBootControl iBootControl2,
+            IBootControl$Proxy iBootControl$Proxy) {
         this.v1_hal = iBootControl;
         this.v1_2_hal = iBootControl$Proxy;
         if (iBootControl == null) {

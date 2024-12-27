@@ -20,15 +20,19 @@ import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.util.NtpTrustedTime;
 import android.util.Xml;
+
 import com.android.internal.R;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.util.SemLog;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public final class SemExecutableInfo implements Parcelable {
@@ -60,7 +64,8 @@ public final class SemExecutableInfo implements Parcelable {
     private static final String XML_ELEMENT_EXTRA_ATTR_PACKAGENAME = "packageName";
     private static final String XML_ELEMENT_EXTRA_ATTR_TYPE = "type";
     private static final String XML_ELEMENT_EXTRA_ATTR_TYPE_ACTIVITY = "activity";
-    private static final String XML_ELEMENT_EXTRA_ATTR_TYPE_ACTIVITY_FOR_RESULT = "activityForResult";
+    private static final String XML_ELEMENT_EXTRA_ATTR_TYPE_ACTIVITY_FOR_RESULT =
+            "activityForResult";
     private static final String XML_ELEMENT_EXTRA_ATTR_TYPE_BROADCAST = "broadcast";
     private static final String XML_ELEMENT_EXTRA_ATTR_TYPE_SERVICE = "service";
     private static final String XML_ELEMENT_ICON = "icon";
@@ -84,19 +89,22 @@ public final class SemExecutableInfo implements Parcelable {
     int mSmallIconId;
     String mUid;
     private static final boolean DEBUG = Debug.semIsProductDev();
-    public static final Parcelable.Creator<SemExecutableInfo> CREATOR = new Parcelable.Creator<SemExecutableInfo>() { // from class: com.samsung.android.app.SemExecutableInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemExecutableInfo createFromParcel(Parcel in) {
-            return new SemExecutableInfo(in);
-        }
+    public static final Parcelable.Creator<SemExecutableInfo> CREATOR =
+            new Parcelable.Creator<
+                    SemExecutableInfo>() { // from class:
+                                           // com.samsung.android.app.SemExecutableInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemExecutableInfo createFromParcel(Parcel in) {
+                    return new SemExecutableInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemExecutableInfo[] newArray(int size) {
-            return new SemExecutableInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemExecutableInfo[] newArray(int size) {
+                    return new SemExecutableInfo[size];
+                }
+            };
 
     public SemExecutableInfo() {
         this.mUid = null;
@@ -127,7 +135,12 @@ public final class SemExecutableInfo implements Parcelable {
     private void setId(String applicaitonPackageName) {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme(XML_ELEMENT_EXECUTABLE).authority(applicaitonPackageName);
-        String baseId = getAction() + getPackageName() + getComponentName() + getLaunchType() + getBundleString();
+        String baseId =
+                getAction()
+                        + getPackageName()
+                        + getComponentName()
+                        + getLaunchType()
+                        + getBundleString();
         String id = String.valueOf(baseId.hashCode() & 4294967295L);
         try {
             long lastId = Long.parseLong(this.mUid);
@@ -207,7 +220,8 @@ public final class SemExecutableInfo implements Parcelable {
         return flags;
     }
 
-    private static SemExecutableInfo getActivityMetaData(Context context, AttributeSet attr, ComponentName cName) {
+    private static SemExecutableInfo getActivityMetaData(
+            Context context, AttributeSet attr, ComponentName cName) {
         SemExecutableInfo result = new SemExecutableInfo();
         Context activityContext = createActivityContext(context, cName);
         if (activityContext == null) {
@@ -297,7 +311,9 @@ public final class SemExecutableInfo implements Parcelable {
                                     SemLog.d(LOG_TAG, "Invalid order");
                                     nfe.printStackTrace();
                                 }
-                                if (-9998 == -9999 || -9998 == ORDER_NOT_ALLOWED || -9998 == -9998) {
+                                if (-9998 == -9999
+                                        || -9998 == ORDER_NOT_ALLOWED
+                                        || -9998 == -9998) {
                                     str = strSplit[1];
                                 }
                             }
@@ -384,10 +400,15 @@ public final class SemExecutableInfo implements Parcelable {
         SemExecutableInfo lastSemExecutableInfo3 = null;
         int queryFlag2 = 640;
         String str3 = MD_LABEL_EXECUTABLE;
-        List<ResolveInfo> activityExecutableList2 = pm2.queryIntentActivities(new Intent(MD_LABEL_EXECUTABLE), 640);
-        List<ResolveInfo> serviceExecutableList2 = pm2.queryIntentServices(new Intent(MD_LABEL_EXECUTABLE), 640);
-        List<ResolveInfo> receiverExecutableList2 = pm2.queryBroadcastReceivers(new Intent(MD_LABEL_EXECUTABLE), 640);
-        List[] executableListArray3 = {activityExecutableList2, serviceExecutableList2, receiverExecutableList2};
+        List<ResolveInfo> activityExecutableList2 =
+                pm2.queryIntentActivities(new Intent(MD_LABEL_EXECUTABLE), 640);
+        List<ResolveInfo> serviceExecutableList2 =
+                pm2.queryIntentServices(new Intent(MD_LABEL_EXECUTABLE), 640);
+        List<ResolveInfo> receiverExecutableList2 =
+                pm2.queryBroadcastReceivers(new Intent(MD_LABEL_EXECUTABLE), 640);
+        List[] executableListArray3 = {
+            activityExecutableList2, serviceExecutableList2, receiverExecutableList2
+        };
         int length = executableListArray3.length;
         int i3 = 0;
         while (i3 < length) {
@@ -491,31 +512,44 @@ public final class SemExecutableInfo implements Parcelable {
                                 i2 = length;
                                 if (tagType == 2) {
                                     try {
-                                        startedExecutable = XML_ELEMENT_EXECUTABLE.equals(executableListArray2) ? true : startedExecutable2;
+                                        startedExecutable =
+                                                XML_ELEMENT_EXECUTABLE.equals(executableListArray2)
+                                                        ? true
+                                                        : startedExecutable2;
                                         try {
                                             if (!"command".equals(executableListArray2)) {
                                                 executableListArray2 = executableListArray3;
                                                 lastSemExecutableInfo2 = lastSemExecutableInfo;
                                             } else {
                                                 if (!startedExecutable) {
-                                                    throw new XmlPullParserException("executable element wasn't started");
+                                                    throw new XmlPullParserException(
+                                                            "executable element wasn't started");
                                                 }
                                                 startedCommand2 = true;
                                                 try {
                                                     AttributeSet attr = Xml.asAttributeSet(xml);
-                                                    SemExecutableInfo lastSemExecutableInfo4 = getActivityMetaData(context2, attr, cName);
+                                                    SemExecutableInfo lastSemExecutableInfo4 =
+                                                            getActivityMetaData(
+                                                                    context2, attr, cName);
                                                     executableListArray2 = executableListArray3;
                                                     lastSemExecutableInfo2 = lastSemExecutableInfo4;
                                                 } catch (IOException e5) {
                                                     e = e5;
                                                     executableListArray2 = executableListArray3;
-                                                    SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + cName.flattenToShortString(), e);
+                                                    SemLog.w(
+                                                            LOG_TAG,
+                                                            "Reading SemExecutableInfo metadata for"
+                                                                + " "
+                                                                    + cName.flattenToShortString(),
+                                                            e);
                                                     context2 = context;
                                                     ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                                     pm2 = pm;
                                                     queryFlag2 = queryFlag;
-                                                    activityExecutableList2 = activityExecutableList;
-                                                    receiverExecutableList2 = receiverExecutableList;
+                                                    activityExecutableList2 =
+                                                            activityExecutableList;
+                                                    receiverExecutableList2 =
+                                                            receiverExecutableList;
                                                     serviceExecutableList2 = serviceExecutableList;
                                                     str3 = str2;
                                                     executableListArray3 = executableListArray2;
@@ -523,13 +557,20 @@ public final class SemExecutableInfo implements Parcelable {
                                                 } catch (IllegalArgumentException e6) {
                                                     e = e6;
                                                     executableListArray2 = executableListArray3;
-                                                    SemLog.w(LOG_TAG, "Invalid attribute in metadata for " + cName.flattenToShortString() + ": " + e.getMessage());
+                                                    SemLog.w(
+                                                            LOG_TAG,
+                                                            "Invalid attribute in metadata for "
+                                                                    + cName.flattenToShortString()
+                                                                    + ": "
+                                                                    + e.getMessage());
                                                     context2 = context;
                                                     ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                                     pm2 = pm;
                                                     queryFlag2 = queryFlag;
-                                                    activityExecutableList2 = activityExecutableList;
-                                                    receiverExecutableList2 = receiverExecutableList;
+                                                    activityExecutableList2 =
+                                                            activityExecutableList;
+                                                    receiverExecutableList2 =
+                                                            receiverExecutableList;
                                                     serviceExecutableList2 = serviceExecutableList;
                                                     str3 = str2;
                                                     executableListArray3 = executableListArray2;
@@ -537,13 +578,20 @@ public final class SemExecutableInfo implements Parcelable {
                                                 } catch (XmlPullParserException e7) {
                                                     e = e7;
                                                     executableListArray2 = executableListArray3;
-                                                    SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + cName.flattenToShortString(), e);
+                                                    SemLog.w(
+                                                            LOG_TAG,
+                                                            "Reading SemExecutableInfo metadata for"
+                                                                + " "
+                                                                    + cName.flattenToShortString(),
+                                                            e);
                                                     context2 = context;
                                                     ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                                     pm2 = pm;
                                                     queryFlag2 = queryFlag;
-                                                    activityExecutableList2 = activityExecutableList;
-                                                    receiverExecutableList2 = receiverExecutableList;
+                                                    activityExecutableList2 =
+                                                            activityExecutableList;
+                                                    receiverExecutableList2 =
+                                                            receiverExecutableList;
                                                     serviceExecutableList2 = serviceExecutableList;
                                                     str3 = str2;
                                                     executableListArray3 = executableListArray2;
@@ -551,13 +599,19 @@ public final class SemExecutableInfo implements Parcelable {
                                                 } catch (Exception e8) {
                                                     e = e8;
                                                     executableListArray2 = executableListArray3;
-                                                    SemLog.w(LOG_TAG, "Unknown Exception while Reading SemExecutableInfo metadata", e);
+                                                    SemLog.w(
+                                                            LOG_TAG,
+                                                            "Unknown Exception while Reading"
+                                                                + " SemExecutableInfo metadata",
+                                                            e);
                                                     context2 = context;
                                                     ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                                     pm2 = pm;
                                                     queryFlag2 = queryFlag;
-                                                    activityExecutableList2 = activityExecutableList;
-                                                    receiverExecutableList2 = receiverExecutableList;
+                                                    activityExecutableList2 =
+                                                            activityExecutableList;
+                                                    receiverExecutableList2 =
+                                                            receiverExecutableList;
                                                     serviceExecutableList2 = serviceExecutableList;
                                                     str3 = str2;
                                                     executableListArray3 = executableListArray2;
@@ -565,71 +619,114 @@ public final class SemExecutableInfo implements Parcelable {
                                                 }
                                             }
                                             try {
-                                                if (!XML_ELEMENT_EXTRA_ATTR.equals(executableListArray2)) {
+                                                if (!XML_ELEMENT_EXTRA_ATTR.equals(
+                                                        executableListArray2)) {
                                                     lastSemExecutableInfo = lastSemExecutableInfo2;
                                                 } else {
                                                     if (!startedExecutable || !startedCommand2) {
                                                         break;
                                                     }
                                                     try {
-                                                        AttributeSet attr2 = Xml.asAttributeSet(xml);
+                                                        AttributeSet attr2 =
+                                                                Xml.asAttributeSet(xml);
                                                         if (lastSemExecutableInfo2 != null) {
-                                                            lastSemExecutableInfo2.addExtraAttribute(context2, attr2);
+                                                            lastSemExecutableInfo2
+                                                                    .addExtraAttribute(
+                                                                            context2, attr2);
                                                         }
-                                                        lastSemExecutableInfo = lastSemExecutableInfo2;
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo2;
                                                     } catch (IOException e9) {
                                                         e = e9;
-                                                        lastSemExecutableInfo = lastSemExecutableInfo2;
-                                                        SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + cName.flattenToShortString(), e);
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo2;
+                                                        SemLog.w(
+                                                                LOG_TAG,
+                                                                "Reading SemExecutableInfo metadata"
+                                                                    + " for "
+                                                                        + cName
+                                                                                .flattenToShortString(),
+                                                                e);
                                                         context2 = context;
                                                         ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                                         pm2 = pm;
                                                         queryFlag2 = queryFlag;
-                                                        activityExecutableList2 = activityExecutableList;
-                                                        receiverExecutableList2 = receiverExecutableList;
-                                                        serviceExecutableList2 = serviceExecutableList;
+                                                        activityExecutableList2 =
+                                                                activityExecutableList;
+                                                        receiverExecutableList2 =
+                                                                receiverExecutableList;
+                                                        serviceExecutableList2 =
+                                                                serviceExecutableList;
                                                         str3 = str2;
                                                         executableListArray3 = executableListArray2;
                                                         length = i2;
                                                     } catch (IllegalArgumentException e10) {
                                                         e = e10;
-                                                        lastSemExecutableInfo = lastSemExecutableInfo2;
-                                                        SemLog.w(LOG_TAG, "Invalid attribute in metadata for " + cName.flattenToShortString() + ": " + e.getMessage());
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo2;
+                                                        SemLog.w(
+                                                                LOG_TAG,
+                                                                "Invalid attribute in metadata for "
+                                                                        + cName
+                                                                                .flattenToShortString()
+                                                                        + ": "
+                                                                        + e.getMessage());
                                                         context2 = context;
                                                         ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                                         pm2 = pm;
                                                         queryFlag2 = queryFlag;
-                                                        activityExecutableList2 = activityExecutableList;
-                                                        receiverExecutableList2 = receiverExecutableList;
-                                                        serviceExecutableList2 = serviceExecutableList;
+                                                        activityExecutableList2 =
+                                                                activityExecutableList;
+                                                        receiverExecutableList2 =
+                                                                receiverExecutableList;
+                                                        serviceExecutableList2 =
+                                                                serviceExecutableList;
                                                         str3 = str2;
                                                         executableListArray3 = executableListArray2;
                                                         length = i2;
                                                     } catch (XmlPullParserException e11) {
                                                         e = e11;
-                                                        lastSemExecutableInfo = lastSemExecutableInfo2;
-                                                        SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + cName.flattenToShortString(), e);
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo2;
+                                                        SemLog.w(
+                                                                LOG_TAG,
+                                                                "Reading SemExecutableInfo metadata"
+                                                                    + " for "
+                                                                        + cName
+                                                                                .flattenToShortString(),
+                                                                e);
                                                         context2 = context;
                                                         ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                                         pm2 = pm;
                                                         queryFlag2 = queryFlag;
-                                                        activityExecutableList2 = activityExecutableList;
-                                                        receiverExecutableList2 = receiverExecutableList;
-                                                        serviceExecutableList2 = serviceExecutableList;
+                                                        activityExecutableList2 =
+                                                                activityExecutableList;
+                                                        receiverExecutableList2 =
+                                                                receiverExecutableList;
+                                                        serviceExecutableList2 =
+                                                                serviceExecutableList;
                                                         str3 = str2;
                                                         executableListArray3 = executableListArray2;
                                                         length = i2;
                                                     } catch (Exception e12) {
                                                         e = e12;
-                                                        lastSemExecutableInfo = lastSemExecutableInfo2;
-                                                        SemLog.w(LOG_TAG, "Unknown Exception while Reading SemExecutableInfo metadata", e);
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo2;
+                                                        SemLog.w(
+                                                                LOG_TAG,
+                                                                "Unknown Exception while Reading"
+                                                                    + " SemExecutableInfo metadata",
+                                                                e);
                                                         context2 = context;
                                                         ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                                         pm2 = pm;
                                                         queryFlag2 = queryFlag;
-                                                        activityExecutableList2 = activityExecutableList;
-                                                        receiverExecutableList2 = receiverExecutableList;
-                                                        serviceExecutableList2 = serviceExecutableList;
+                                                        activityExecutableList2 =
+                                                                activityExecutableList;
+                                                        receiverExecutableList2 =
+                                                                receiverExecutableList;
+                                                        serviceExecutableList2 =
+                                                                serviceExecutableList;
                                                         str3 = str2;
                                                         executableListArray3 = executableListArray2;
                                                         length = i2;
@@ -675,101 +772,171 @@ public final class SemExecutableInfo implements Parcelable {
                                     executableListArray2 = executableListArray3;
                                     if (tagType == 3) {
                                         try {
-                                            startedExecutable = XML_ELEMENT_EXECUTABLE.equals(executableListArray2) ? false : startedExecutable2;
+                                            startedExecutable =
+                                                    XML_ELEMENT_EXECUTABLE.equals(
+                                                                    executableListArray2)
+                                                            ? false
+                                                            : startedExecutable2;
                                             if ("command".equals(executableListArray2)) {
                                                 boolean startedCommand3 = false;
                                                 if (checkValidate(lastSemExecutableInfo)) {
-                                                    SemExecutableWhitelist whiteList = SemExecutableWhitelist.getInstance();
-                                                    boolean bSamsungApps = whiteList.isAllowedToUseOrder(context2, appInfo.packageName);
-                                                    SemExecutableInfo lastSemExecutableInfo5 = lastSemExecutableInfo;
+                                                    SemExecutableWhitelist whiteList =
+                                                            SemExecutableWhitelist.getInstance();
+                                                    boolean bSamsungApps =
+                                                            whiteList.isAllowedToUseOrder(
+                                                                    context2, appInfo.packageName);
+                                                    SemExecutableInfo lastSemExecutableInfo5 =
+                                                            lastSemExecutableInfo;
                                                     try {
-                                                        examineOrderInCategory(lastSemExecutableInfo5, bSamsungApps);
-                                                        lastSemExecutableInfo5.setId(appInfo.packageName);
+                                                        examineOrderInCategory(
+                                                                lastSemExecutableInfo5,
+                                                                bSamsungApps);
+                                                        lastSemExecutableInfo5.setId(
+                                                                appInfo.packageName);
                                                         boolean bDuplicatedID = false;
-                                                        for (SemExecutableInfo checkInfo : newSemExecutableInfoList) {
+                                                        for (SemExecutableInfo checkInfo :
+                                                                newSemExecutableInfoList) {
                                                             ApplicationInfo appInfo5 = appInfo;
                                                             try {
-                                                                boolean startedCommand4 = startedCommand3;
-                                                                if (TextUtils.equals(checkInfo.getId(), lastSemExecutableInfo5.getId())) {
+                                                                boolean startedCommand4 =
+                                                                        startedCommand3;
+                                                                if (TextUtils.equals(
+                                                                        checkInfo.getId(),
+                                                                        lastSemExecutableInfo5
+                                                                                .getId())) {
                                                                     bDuplicatedID = true;
                                                                 }
                                                                 appInfo = appInfo5;
                                                                 startedCommand3 = startedCommand4;
                                                             } catch (IOException e25) {
                                                                 e = e25;
-                                                                lastSemExecutableInfo = lastSemExecutableInfo5;
-                                                                SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + cName.flattenToShortString(), e);
+                                                                lastSemExecutableInfo =
+                                                                        lastSemExecutableInfo5;
+                                                                SemLog.w(
+                                                                        LOG_TAG,
+                                                                        "Reading SemExecutableInfo"
+                                                                            + " metadata for "
+                                                                                + cName
+                                                                                        .flattenToShortString(),
+                                                                        e);
                                                                 context2 = context;
-                                                                ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
+                                                                ACTION_EXECUTABLE =
+                                                                        ACTION_EXECUTABLE2;
                                                                 pm2 = pm;
                                                                 queryFlag2 = queryFlag;
-                                                                activityExecutableList2 = activityExecutableList;
-                                                                receiverExecutableList2 = receiverExecutableList;
-                                                                serviceExecutableList2 = serviceExecutableList;
+                                                                activityExecutableList2 =
+                                                                        activityExecutableList;
+                                                                receiverExecutableList2 =
+                                                                        receiverExecutableList;
+                                                                serviceExecutableList2 =
+                                                                        serviceExecutableList;
                                                                 str3 = str2;
-                                                                executableListArray3 = executableListArray2;
+                                                                executableListArray3 =
+                                                                        executableListArray2;
                                                                 length = i2;
                                                             } catch (IllegalArgumentException e26) {
                                                                 e = e26;
-                                                                lastSemExecutableInfo = lastSemExecutableInfo5;
-                                                                SemLog.w(LOG_TAG, "Invalid attribute in metadata for " + cName.flattenToShortString() + ": " + e.getMessage());
+                                                                lastSemExecutableInfo =
+                                                                        lastSemExecutableInfo5;
+                                                                SemLog.w(
+                                                                        LOG_TAG,
+                                                                        "Invalid attribute in"
+                                                                            + " metadata for "
+                                                                                + cName
+                                                                                        .flattenToShortString()
+                                                                                + ": "
+                                                                                + e.getMessage());
                                                                 context2 = context;
-                                                                ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
+                                                                ACTION_EXECUTABLE =
+                                                                        ACTION_EXECUTABLE2;
                                                                 pm2 = pm;
                                                                 queryFlag2 = queryFlag;
-                                                                activityExecutableList2 = activityExecutableList;
-                                                                receiverExecutableList2 = receiverExecutableList;
-                                                                serviceExecutableList2 = serviceExecutableList;
+                                                                activityExecutableList2 =
+                                                                        activityExecutableList;
+                                                                receiverExecutableList2 =
+                                                                        receiverExecutableList;
+                                                                serviceExecutableList2 =
+                                                                        serviceExecutableList;
                                                                 str3 = str2;
-                                                                executableListArray3 = executableListArray2;
+                                                                executableListArray3 =
+                                                                        executableListArray2;
                                                                 length = i2;
                                                             } catch (XmlPullParserException e27) {
                                                                 e = e27;
-                                                                lastSemExecutableInfo = lastSemExecutableInfo5;
-                                                                SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + cName.flattenToShortString(), e);
+                                                                lastSemExecutableInfo =
+                                                                        lastSemExecutableInfo5;
+                                                                SemLog.w(
+                                                                        LOG_TAG,
+                                                                        "Reading SemExecutableInfo"
+                                                                            + " metadata for "
+                                                                                + cName
+                                                                                        .flattenToShortString(),
+                                                                        e);
                                                                 context2 = context;
-                                                                ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
+                                                                ACTION_EXECUTABLE =
+                                                                        ACTION_EXECUTABLE2;
                                                                 pm2 = pm;
                                                                 queryFlag2 = queryFlag;
-                                                                activityExecutableList2 = activityExecutableList;
-                                                                receiverExecutableList2 = receiverExecutableList;
-                                                                serviceExecutableList2 = serviceExecutableList;
+                                                                activityExecutableList2 =
+                                                                        activityExecutableList;
+                                                                receiverExecutableList2 =
+                                                                        receiverExecutableList;
+                                                                serviceExecutableList2 =
+                                                                        serviceExecutableList;
                                                                 str3 = str2;
-                                                                executableListArray3 = executableListArray2;
+                                                                executableListArray3 =
+                                                                        executableListArray2;
                                                                 length = i2;
                                                             } catch (Exception e28) {
                                                                 e = e28;
-                                                                lastSemExecutableInfo = lastSemExecutableInfo5;
-                                                                SemLog.w(LOG_TAG, "Unknown Exception while Reading SemExecutableInfo metadata", e);
+                                                                lastSemExecutableInfo =
+                                                                        lastSemExecutableInfo5;
+                                                                SemLog.w(
+                                                                        LOG_TAG,
+                                                                        "Unknown Exception while"
+                                                                            + " Reading"
+                                                                            + " SemExecutableInfo"
+                                                                            + " metadata",
+                                                                        e);
                                                                 context2 = context;
-                                                                ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
+                                                                ACTION_EXECUTABLE =
+                                                                        ACTION_EXECUTABLE2;
                                                                 pm2 = pm;
                                                                 queryFlag2 = queryFlag;
-                                                                activityExecutableList2 = activityExecutableList;
-                                                                receiverExecutableList2 = receiverExecutableList;
-                                                                serviceExecutableList2 = serviceExecutableList;
+                                                                activityExecutableList2 =
+                                                                        activityExecutableList;
+                                                                receiverExecutableList2 =
+                                                                        receiverExecutableList;
+                                                                serviceExecutableList2 =
+                                                                        serviceExecutableList;
                                                                 str3 = str2;
-                                                                executableListArray3 = executableListArray2;
+                                                                executableListArray3 =
+                                                                        executableListArray2;
                                                                 length = i2;
                                                             }
                                                         }
                                                         appInfo2 = appInfo;
                                                         startedCommand = startedCommand3;
                                                         if (!bDuplicatedID) {
-                                                            newSemExecutableInfoList.add(lastSemExecutableInfo5);
+                                                            newSemExecutableInfoList.add(
+                                                                    lastSemExecutableInfo5);
                                                         }
                                                     } catch (IOException e29) {
                                                         e = e29;
-                                                        lastSemExecutableInfo = lastSemExecutableInfo5;
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo5;
                                                     } catch (IllegalArgumentException e30) {
                                                         e = e30;
-                                                        lastSemExecutableInfo = lastSemExecutableInfo5;
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo5;
                                                     } catch (XmlPullParserException e31) {
                                                         e = e31;
-                                                        lastSemExecutableInfo = lastSemExecutableInfo5;
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo5;
                                                     } catch (Exception e32) {
                                                         e = e32;
-                                                        lastSemExecutableInfo = lastSemExecutableInfo5;
+                                                        lastSemExecutableInfo =
+                                                                lastSemExecutableInfo5;
                                                     }
                                                 } else {
                                                     appInfo2 = appInfo;
@@ -803,7 +970,11 @@ public final class SemExecutableInfo implements Parcelable {
                                     appInfo = appInfo2;
                                 } catch (IOException e37) {
                                     e = e37;
-                                    SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + cName.flattenToShortString(), e);
+                                    SemLog.w(
+                                            LOG_TAG,
+                                            "Reading SemExecutableInfo metadata for "
+                                                    + cName.flattenToShortString(),
+                                            e);
                                     context2 = context;
                                     ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                     pm2 = pm;
@@ -816,7 +987,12 @@ public final class SemExecutableInfo implements Parcelable {
                                     length = i2;
                                 } catch (IllegalArgumentException e38) {
                                     e = e38;
-                                    SemLog.w(LOG_TAG, "Invalid attribute in metadata for " + cName.flattenToShortString() + ": " + e.getMessage());
+                                    SemLog.w(
+                                            LOG_TAG,
+                                            "Invalid attribute in metadata for "
+                                                    + cName.flattenToShortString()
+                                                    + ": "
+                                                    + e.getMessage());
                                     context2 = context;
                                     ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                     pm2 = pm;
@@ -829,7 +1005,11 @@ public final class SemExecutableInfo implements Parcelable {
                                     length = i2;
                                 } catch (XmlPullParserException e39) {
                                     e = e39;
-                                    SemLog.w(LOG_TAG, "Reading SemExecutableInfo metadata for " + cName.flattenToShortString(), e);
+                                    SemLog.w(
+                                            LOG_TAG,
+                                            "Reading SemExecutableInfo metadata for "
+                                                    + cName.flattenToShortString(),
+                                            e);
                                     context2 = context;
                                     ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                     pm2 = pm;
@@ -842,7 +1022,11 @@ public final class SemExecutableInfo implements Parcelable {
                                     length = i2;
                                 } catch (Exception e40) {
                                     e = e40;
-                                    SemLog.w(LOG_TAG, "Unknown Exception while Reading SemExecutableInfo metadata", e);
+                                    SemLog.w(
+                                            LOG_TAG,
+                                            "Unknown Exception while Reading SemExecutableInfo"
+                                                + " metadata",
+                                            e);
                                     context2 = context;
                                     ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
                                     pm2 = pm;
@@ -872,7 +1056,8 @@ public final class SemExecutableInfo implements Parcelable {
                                 executableListArray2 = executableListArray3;
                             }
                         }
-                        throw new XmlPullParserException("executable or command element wasn't started");
+                        throw new XmlPullParserException(
+                                "executable or command element wasn't started");
                     }
                     str = str3;
                     i = length;
@@ -889,7 +1074,9 @@ public final class SemExecutableInfo implements Parcelable {
                     length = i;
                 }
                 if (DEBUG) {
-                    SemLog.d(LOG_TAG, "skip disable component: " + isDisabled + ", " + isComponentDisabled);
+                    SemLog.d(
+                            LOG_TAG,
+                            "skip disable component: " + isDisabled + ", " + isComponentDisabled);
                 }
                 context2 = context;
                 ACTION_EXECUTABLE = ACTION_EXECUTABLE2;
@@ -925,7 +1112,8 @@ public final class SemExecutableInfo implements Parcelable {
             }
             return false;
         }
-        if (info.getLaunchType() != 2 && (info.getPackageName() == null || info.getComponentName() == null)) {
+        if (info.getLaunchType() != 2
+                && (info.getPackageName() == null || info.getComponentName() == null)) {
             if (DEBUG) {
                 SemLog.d(LOG_TAG, "Invalid packageName or componentName = " + info.toString());
             }
@@ -940,7 +1128,10 @@ public final class SemExecutableInfo implements Parcelable {
         for (int i = 0; i < info.mFeatureNames.size(); i++) {
             String featureName = info.mFeatureNames.get(i);
             String featureValue = info.mFeatureValues.get(i);
-            if (featureName != null && !featureName.isEmpty() && featureValue != null && !featureValue.isEmpty()) {
+            if (featureName != null
+                    && !featureName.isEmpty()
+                    && featureValue != null
+                    && !featureValue.isEmpty()) {
                 if (featureName.startsWith(CSC_FEATURE_PREFIX)) {
                     String str = SemCscFeature.getInstance().getString(featureName);
                     if (featureValue.startsWith("!")) {
@@ -950,7 +1141,13 @@ public final class SemExecutableInfo implements Parcelable {
                         }
                     } else if (!str.equalsIgnoreCase(featureValue)) {
                         if (DEBUG) {
-                            SemLog.d(LOG_TAG, featureName + " is not [" + featureValue + "] " + info.toString());
+                            SemLog.d(
+                                    LOG_TAG,
+                                    featureName
+                                            + " is not ["
+                                            + featureValue
+                                            + "] "
+                                            + info.toString());
                         }
                         return false;
                     }
@@ -962,7 +1159,13 @@ public final class SemExecutableInfo implements Parcelable {
                         }
                     } else if (!"".equalsIgnoreCase(featureValue)) {
                         if (DEBUG) {
-                            SemLog.d(LOG_TAG, featureName + " is not [" + featureValue + "] " + info.toString());
+                            SemLog.d(
+                                    LOG_TAG,
+                                    featureName
+                                            + " is not ["
+                                            + featureValue
+                                            + "] "
+                                            + info.toString());
                         }
                         return false;
                     }
@@ -978,7 +1181,13 @@ public final class SemExecutableInfo implements Parcelable {
                         }
                     } else if (!str2.equalsIgnoreCase(featureValue)) {
                         if (DEBUG) {
-                            SemLog.d(LOG_TAG, featureName + " is not [" + featureValue + "] " + info.toString());
+                            SemLog.d(
+                                    LOG_TAG,
+                                    featureName
+                                            + " is not ["
+                                            + featureValue
+                                            + "] "
+                                            + info.toString());
                         }
                         return false;
                     }
@@ -992,7 +1201,12 @@ public final class SemExecutableInfo implements Parcelable {
                 }
                 if (featureValue != null && !featureValue.isEmpty()) {
                     if (DEBUG) {
-                        SemLog.d(LOG_TAG, "No feature name is provided for the value " + featureValue + " " + info.toString());
+                        SemLog.d(
+                                LOG_TAG,
+                                "No feature name is provided for the value "
+                                        + featureValue
+                                        + " "
+                                        + info.toString());
                     }
                     return false;
                 }
@@ -1020,7 +1234,33 @@ public final class SemExecutableInfo implements Parcelable {
     }
 
     public String toString() {
-        String retString = "SemExecutableInfo{enabled=" + this.mEnabled + ", id=" + this.mUid + ", labelId=" + this.mLabelId + ", iconIId=" + this.mIconId + ", smallIconIId=" + this.mSmallIconId + ", type=" + this.mLaunchType + ", category=" + this.mCategory + ", action='" + this.mAction + DateFormat.QUOTE + ", packageName='" + this.mPackageName + DateFormat.QUOTE + ", componentName='" + this.mComponentName + DateFormat.QUOTE + ", launchMode='" + this.mActivityLaunchMode + DateFormat.QUOTE;
+        String retString =
+                "SemExecutableInfo{enabled="
+                        + this.mEnabled
+                        + ", id="
+                        + this.mUid
+                        + ", labelId="
+                        + this.mLabelId
+                        + ", iconIId="
+                        + this.mIconId
+                        + ", smallIconIId="
+                        + this.mSmallIconId
+                        + ", type="
+                        + this.mLaunchType
+                        + ", category="
+                        + this.mCategory
+                        + ", action='"
+                        + this.mAction
+                        + DateFormat.QUOTE
+                        + ", packageName='"
+                        + this.mPackageName
+                        + DateFormat.QUOTE
+                        + ", componentName='"
+                        + this.mComponentName
+                        + DateFormat.QUOTE
+                        + ", launchMode='"
+                        + this.mActivityLaunchMode
+                        + DateFormat.QUOTE;
         StringBuilder sb = new StringBuilder();
         sb.append(retString);
         for (int i = 0; i < this.mFeatureNames.size(); i++) {
@@ -1047,32 +1287,48 @@ public final class SemExecutableInfo implements Parcelable {
             return false;
         }
         SemExecutableInfo that = (SemExecutableInfo) o;
-        if (this.mEnabled != that.mEnabled || this.mLabelId != that.mLabelId || this.mIconId != that.mIconId || this.mSmallIconId != that.mSmallIconId || this.mLaunchType != that.mLaunchType) {
+        if (this.mEnabled != that.mEnabled
+                || this.mLabelId != that.mLabelId
+                || this.mIconId != that.mIconId
+                || this.mSmallIconId != that.mSmallIconId
+                || this.mLaunchType != that.mLaunchType) {
             return false;
         }
         if (this.mUid == null ? that.mUid != null : !this.mUid.equals(that.mUid)) {
             return false;
         }
-        if (this.mCategory == null ? that.mCategory != null : !this.mCategory.equals(that.mCategory)) {
+        if (this.mCategory == null
+                ? that.mCategory != null
+                : !this.mCategory.equals(that.mCategory)) {
             return false;
         }
         if (this.mAction == null ? that.mAction != null : !this.mAction.equals(that.mAction)) {
             return false;
         }
-        if (this.mPackageName == null ? that.mPackageName != null : !this.mPackageName.equals(that.mPackageName)) {
+        if (this.mPackageName == null
+                ? that.mPackageName != null
+                : !this.mPackageName.equals(that.mPackageName)) {
             return false;
         }
-        if (this.mFeatureNames == null ? that.mFeatureNames != null : !this.mFeatureNames.equals(that.mFeatureNames)) {
+        if (this.mFeatureNames == null
+                ? that.mFeatureNames != null
+                : !this.mFeatureNames.equals(that.mFeatureNames)) {
             return false;
         }
-        if (this.mFeatureValues == null ? that.mFeatureValues != null : !this.mFeatureValues.equals(that.mFeatureValues)) {
+        if (this.mFeatureValues == null
+                ? that.mFeatureValues != null
+                : !this.mFeatureValues.equals(that.mFeatureValues)) {
             return false;
         }
         if (this.mBundle == null ? that.mBundle != null : !this.mBundle.equals(that.mBundle)) {
             return false;
         }
-        if (this.mComponentName == null ? that.mComponentName == null : this.mComponentName.equals(that.mComponentName)) {
-            return this.mActivityLaunchMode == null ? that.mActivityLaunchMode == null : this.mActivityLaunchMode.equals(that.mActivityLaunchMode);
+        if (this.mComponentName == null
+                ? that.mComponentName == null
+                : this.mComponentName.equals(that.mComponentName)) {
+            return this.mActivityLaunchMode == null
+                    ? that.mActivityLaunchMode == null
+                    : this.mActivityLaunchMode.equals(that.mActivityLaunchMode);
         }
         return false;
     }

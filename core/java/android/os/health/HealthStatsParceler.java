@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class HealthStatsParceler implements Parcelable {
-    public static final Parcelable.Creator<HealthStatsParceler> CREATOR = new Parcelable.Creator<HealthStatsParceler>() { // from class: android.os.health.HealthStatsParceler.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HealthStatsParceler createFromParcel(Parcel in) {
-            return new HealthStatsParceler(in);
-        }
+    public static final Parcelable.Creator<HealthStatsParceler> CREATOR =
+            new Parcelable.Creator<
+                    HealthStatsParceler>() { // from class: android.os.health.HealthStatsParceler.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HealthStatsParceler createFromParcel(Parcel in) {
+                    return new HealthStatsParceler(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HealthStatsParceler[] newArray(int size) {
-            return new HealthStatsParceler[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HealthStatsParceler[] newArray(int size) {
+                    return new HealthStatsParceler[size];
+                }
+            };
     private HealthStats mHealthStats;
     private HealthStatsWriter mWriter;
 
@@ -40,7 +42,8 @@ public class HealthStatsParceler implements Parcelable {
             this.mWriter.flattenToParcel(out);
             return;
         }
-        throw new RuntimeException("Can not re-parcel HealthStatsParceler that was constructed from a Parcel");
+        throw new RuntimeException(
+                "Can not re-parcel HealthStatsParceler that was constructed from a Parcel");
     }
 
     public HealthStats getHealthStats() {

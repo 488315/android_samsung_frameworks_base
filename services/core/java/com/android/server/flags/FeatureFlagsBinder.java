@@ -10,13 +10,13 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.provider.DeviceConfig;
 import android.util.Slog;
+
 import com.android.internal.flags.CoreFlags;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.FastPrintWriter;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
-import com.android.server.flags.DynamicFlagBinderDelegate;
 import com.android.server.flags.DynamicFlagBinderDelegate.BinderGriever;
-import com.android.server.flags.FeatureFlagsService;
+
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +36,10 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
     public final FeatureFlagsService.PermissionsChecker mPermissionsChecker;
     public final FlagsShellCommand mShellCommand;
 
-    public FeatureFlagsBinder(FlagOverrideStore flagOverrideStore, FlagsShellCommand flagsShellCommand, FeatureFlagsService.PermissionsChecker permissionsChecker) {
+    public FeatureFlagsBinder(
+            FlagOverrideStore flagOverrideStore,
+            FlagsShellCommand flagsShellCommand,
+            FeatureFlagsService.PermissionsChecker permissionsChecker) {
         this.mFlagStore = flagOverrideStore;
         this.mShellCommand = flagsShellCommand;
         this.mDynamicFlagDelegate = new DynamicFlagBinderDelegate(flagOverrideStore);
@@ -45,11 +48,17 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @SystemApi
-    public int handleShellCommand(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3, String[] strArr) {
+    public int handleShellCommand(
+            ParcelFileDescriptor parcelFileDescriptor,
+            ParcelFileDescriptor parcelFileDescriptor2,
+            ParcelFileDescriptor parcelFileDescriptor3,
+            String[] strArr) {
         boolean z;
         int i = 4;
-        FileOutputStream fileOutputStream = new FileOutputStream(parcelFileDescriptor2.getFileDescriptor());
-        FileOutputStream fileOutputStream2 = new FileOutputStream(parcelFileDescriptor3.getFileDescriptor());
+        FileOutputStream fileOutputStream =
+                new FileOutputStream(parcelFileDescriptor2.getFileDescriptor());
+        FileOutputStream fileOutputStream2 =
+                new FileOutputStream(parcelFileDescriptor3.getFileDescriptor());
         FlagsShellCommand flagsShellCommand = this.mShellCommand;
         flagsShellCommand.getClass();
         FastPrintWriter fastPrintWriter = new FastPrintWriter(fileOutputStream);
@@ -102,7 +111,8 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
             }
             switch (z) {
                 case false:
-                    if (!FlagsShellCommand.validateNumArguments(strArr, 2, 2, strArr[0], fastPrintWriter2)) {
+                    if (!FlagsShellCommand.validateNumArguments(
+                            strArr, 2, 2, strArr[0], fastPrintWriter2)) {
                         fastPrintWriter2.println("Expected `" + strArr[0] + " <namespace> <name>`");
                         fastPrintWriter2.flush();
                         return -1;
@@ -118,25 +128,32 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
                     break;
                     break;
                 case true:
-                    if (!FlagsShellCommand.validateNumArguments(strArr, 3, 3, strArr[0], fastPrintWriter2)) {
-                        fastPrintWriter2.println("Expected `" + strArr[0] + " <namespace> <name> <value>`");
+                    if (!FlagsShellCommand.validateNumArguments(
+                            strArr, 3, 3, strArr[0], fastPrintWriter2)) {
+                        fastPrintWriter2.println(
+                                "Expected `" + strArr[0] + " <namespace> <name> <value>`");
                         fastPrintWriter2.flush();
                         return -1;
                     }
                     flagOverrideStore.set(strArr[1], strArr[2], strArr[3]);
-                    fastPrintWriter.println("Flag " + strArr[1] + "." + strArr[2] + " is now " + strArr[3]);
+                    fastPrintWriter.println(
+                            "Flag " + strArr[1] + "." + strArr[2] + " is now " + strArr[3]);
                     fastPrintWriter.flush();
                     break;
                 case true:
                     FlagsShellCommand.printHelp(fastPrintWriter);
                     break;
                 case true:
-                    if (!FlagsShellCommand.validateNumArguments(strArr, 0, 1, strArr[0], fastPrintWriter2)) {
+                    if (!FlagsShellCommand.validateNumArguments(
+                            strArr, 0, 1, strArr[0], fastPrintWriter2)) {
                         fastPrintWriter2.println("Expected `" + strArr[0] + " [namespace]`");
                         fastPrintWriter2.flush();
                         return -1;
                     }
-                    Map flagsForNamespace = strArr.length == 2 ? flagOverrideStore.getFlagsForNamespace(strArr[1]) : flagOverrideStore.getFlagsForNamespace(null);
+                    Map flagsForNamespace =
+                            strArr.length == 2
+                                    ? flagOverrideStore.getFlagsForNamespace(strArr[1])
+                                    : flagOverrideStore.getFlagsForNamespace(null);
                     if (flagsForNamespace.isEmpty()) {
                         fastPrintWriter.println("No overrides set");
                     } else {
@@ -149,9 +166,17 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
                                 i3 = Math.max(i3, ((String) entry2.getValue()).length());
                             }
                         }
-                        fastPrintWriter.print(String.format(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i2, "%-", "s"), "namespace"));
+                        fastPrintWriter.print(
+                                String.format(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                i2, "%-", "s"),
+                                        "namespace"));
                         fastPrintWriter.print(' ');
-                        fastPrintWriter.print(String.format(AmFmBandRange$$ExternalSyntheticOutline0.m(i, new StringBuilder("%-"), "s"), "flag"));
+                        fastPrintWriter.print(
+                                String.format(
+                                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                i, new StringBuilder("%-"), "s"),
+                                        "flag"));
                         fastPrintWriter.print(' ');
                         fastPrintWriter.println("value");
                         for (int i4 = 0; i4 < i2; i4++) {
@@ -168,9 +193,17 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
                         fastPrintWriter.println();
                         for (Map.Entry entry3 : flagsForNamespace.entrySet()) {
                             for (Map.Entry entry4 : ((Map) entry3.getValue()).entrySet()) {
-                                fastPrintWriter.print(String.format(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i2, "%-", "s"), entry3.getKey()));
+                                fastPrintWriter.print(
+                                        String.format(
+                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                        .m(i2, "%-", "s"),
+                                                entry3.getKey()));
                                 fastPrintWriter.print(' ');
-                                fastPrintWriter.print(String.format(AmFmBandRange$$ExternalSyntheticOutline0.m(i, new StringBuilder("%-"), "s"), entry4.getKey()));
+                                fastPrintWriter.print(
+                                        String.format(
+                                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                        i, new StringBuilder("%-"), "s"),
+                                                entry4.getKey()));
                                 fastPrintWriter.print(' ');
                                 fastPrintWriter.println((String) entry4.getValue());
                             }
@@ -179,7 +212,8 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
                     fastPrintWriter.flush();
                     break;
                 case true:
-                    if (!FlagsShellCommand.validateNumArguments(strArr, 2, 2, strArr[0], fastPrintWriter2)) {
+                    if (!FlagsShellCommand.validateNumArguments(
+                            strArr, 2, 2, strArr[0], fastPrintWriter2)) {
                         fastPrintWriter2.println("Expected `" + strArr[0] + " <namespace> <name>`");
                         fastPrintWriter2.flush();
                         return -1;
@@ -200,7 +234,8 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
     public final void overrideFlag(SyncableFlag syncableFlag) {
         this.mPermissionsChecker.assertWritePermission();
         IFeatureFlags.Stub.clearCallingIdentity();
-        this.mFlagStore.set(syncableFlag.getNamespace(), syncableFlag.getName(), syncableFlag.getValue());
+        this.mFlagStore.set(
+                syncableFlag.getNamespace(), syncableFlag.getName(), syncableFlag.getValue());
     }
 
     public final List queryFlags(List list) {
@@ -217,7 +252,9 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
             String str3 = this.mFlagStore.get(namespace, name);
             boolean z = str3 != null;
             if (syncableFlag.isDynamic()) {
-                str = this.mDynamicFlagDelegate.getFlagValue(namespace, name, syncableFlag.getValue());
+                str =
+                        this.mDynamicFlagDelegate.getFlagValue(
+                                namespace, name, syncableFlag.getValue());
             } else {
                 str = (String) this.mFlagCache.getOrNull(namespace, name);
                 if (str == null) {
@@ -228,12 +265,24 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
                         str = syncableFlag.getValue();
                     } else {
                         str2 = str3;
-                        arrayList.add(new SyncableFlag(syncableFlag.getNamespace(), syncableFlag.getName(), str2, syncableFlag.isDynamic(), z));
+                        arrayList.add(
+                                new SyncableFlag(
+                                        syncableFlag.getNamespace(),
+                                        syncableFlag.getName(),
+                                        str2,
+                                        syncableFlag.isDynamic(),
+                                        z));
                     }
                 }
             }
             str2 = str;
-            arrayList.add(new SyncableFlag(syncableFlag.getNamespace(), syncableFlag.getName(), str2, syncableFlag.isDynamic(), z));
+            arrayList.add(
+                    new SyncableFlag(
+                            syncableFlag.getNamespace(),
+                            syncableFlag.getName(),
+                            str2,
+                            syncableFlag.isDynamic(),
+                            z));
         }
         return arrayList;
     }
@@ -243,13 +292,22 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
         DynamicFlagBinderDelegate dynamicFlagBinderDelegate = this.mDynamicFlagDelegate;
         int callingPid = IFeatureFlags.Stub.getCallingPid();
         synchronized (dynamicFlagBinderDelegate.mCallbacks) {
-            set = (Set) ((HashMap) dynamicFlagBinderDelegate.mCallbacks).computeIfAbsent(Integer.valueOf(callingPid), DynamicFlagBinderDelegate.NEW_CALLBACK_SET);
+            set =
+                    (Set)
+                            ((HashMap) dynamicFlagBinderDelegate.mCallbacks)
+                                    .computeIfAbsent(
+                                            Integer.valueOf(callingPid),
+                                            DynamicFlagBinderDelegate.NEW_CALLBACK_SET);
             set.add(iFeatureFlagsCallback);
         }
         try {
-            iFeatureFlagsCallback.asBinder().linkToDeath(dynamicFlagBinderDelegate.new BinderGriever(callingPid), 0);
+            iFeatureFlagsCallback
+                    .asBinder()
+                    .linkToDeath(dynamicFlagBinderDelegate.new BinderGriever(callingPid), 0);
         } catch (RemoteException unused) {
-            Slog.e("FeatureFlagsService", "Failed to link to binder death. Callback not registered.");
+            Slog.e(
+                    "FeatureFlagsService",
+                    "Failed to link to binder death. Callback not registered.");
             synchronized (dynamicFlagBinderDelegate.mCallbacks) {
                 set.remove(iFeatureFlagsCallback);
             }
@@ -291,19 +349,32 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
                 if (syncableFlag2.isDynamic()) {
                     String namespace2 = syncableFlag2.getNamespace();
                     String name2 = syncableFlag2.getName();
-                    DynamicFlagBinderDelegate.DynamicFlagData dynamicFlagData = (DynamicFlagBinderDelegate.DynamicFlagData) dynamicFlagBinderDelegate.mDynamicFlags.getOrNull(namespace2, name2);
-                    String flagValue = dynamicFlagBinderDelegate.getFlagValue(namespace2, name2, syncableFlag2.getValue());
+                    DynamicFlagBinderDelegate.DynamicFlagData dynamicFlagData =
+                            (DynamicFlagBinderDelegate.DynamicFlagData)
+                                    dynamicFlagBinderDelegate.mDynamicFlags.getOrNull(
+                                            namespace2, name2);
+                    String flagValue =
+                            dynamicFlagBinderDelegate.getFlagValue(
+                                    namespace2, name2, syncableFlag2.getValue());
                     FlagCache flagCache = dynamicFlagBinderDelegate.mDynamicFlags;
                     synchronized (flagCache.mCache) {
                         containsKey = ((HashMap) flagCache.mCache).containsKey(namespace2);
                     }
                     if (!containsKey) {
-                        DeviceConfig.addOnPropertiesChangedListener(namespace2, BackgroundThread.getExecutor(), dynamicFlagBinderDelegate.mDeviceConfigListener);
+                        DeviceConfig.addOnPropertiesChangedListener(
+                                namespace2,
+                                BackgroundThread.getExecutor(),
+                                dynamicFlagBinderDelegate.mDeviceConfigListener);
                     }
                     ((HashSet) dynamicFlagData.mPids).add(Integer.valueOf(callingPid));
                     dynamicFlagData.mValue = flagValue;
                     dynamicFlagData.mDefaultValue = syncableFlag2.getValue();
-                    syncableFlag = new SyncableFlag(syncableFlag2.getNamespace(), syncableFlag2.getName(), flagValue, true);
+                    syncableFlag =
+                            new SyncableFlag(
+                                    syncableFlag2.getNamespace(),
+                                    syncableFlag2.getName(),
+                                    flagValue,
+                                    true);
                 } else {
                     continue;
                     arrayList.add(syncableFlag2);
@@ -319,7 +390,12 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
                             }
                             this.mFlagCache.setIfChanged(namespace, name, str);
                         }
-                        syncableFlag = new SyncableFlag(syncableFlag2.getNamespace(), syncableFlag2.getName(), str, false);
+                        syncableFlag =
+                                new SyncableFlag(
+                                        syncableFlag2.getNamespace(),
+                                        syncableFlag2.getName(),
+                                        str,
+                                        false);
                     } catch (Throwable th) {
                         throw th;
                     }
@@ -335,7 +411,12 @@ class FeatureFlagsBinder extends IFeatureFlags.Stub {
         DynamicFlagBinderDelegate dynamicFlagBinderDelegate = this.mDynamicFlagDelegate;
         int callingPid = IFeatureFlags.Stub.getCallingPid();
         synchronized (dynamicFlagBinderDelegate.mCallbacks) {
-            ((Set) ((HashMap) dynamicFlagBinderDelegate.mCallbacks).computeIfAbsent(Integer.valueOf(callingPid), DynamicFlagBinderDelegate.NEW_CALLBACK_SET)).remove(iFeatureFlagsCallback);
+            ((Set)
+                            ((HashMap) dynamicFlagBinderDelegate.mCallbacks)
+                                    .computeIfAbsent(
+                                            Integer.valueOf(callingPid),
+                                            DynamicFlagBinderDelegate.NEW_CALLBACK_SET))
+                    .remove(iFeatureFlagsCallback);
         }
     }
 }

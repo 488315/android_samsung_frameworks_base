@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
 import java.util.Locale;
 
 /* loaded from: classes4.dex */
@@ -40,8 +41,12 @@ public class AllCapsTransformationMethod implements TransformationMethod2 {
     }
 
     @Override // android.text.method.TransformationMethod
-    public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
-    }
+    public void onFocusChanged(
+            View view,
+            CharSequence sourceText,
+            boolean focused,
+            int direction,
+            Rect previouslyFocusedRect) {}
 
     @Override // android.text.method.TransformationMethod2
     public void setLengthChangesAllowed(boolean allowLengthChanges) {

@@ -8,8 +8,7 @@ public interface IThermalStatusListener extends IInterface {
 
     public static class Default implements IThermalStatusListener {
         @Override // android.os.IThermalStatusListener
-        public void onStatusChange(int status) throws RemoteException {
-        }
+        public void onStatusChange(int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,7 +16,7 @@ public interface IThermalStatusListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IThermalStatusListener {
+    public abstract static class Stub extends Binder implements IThermalStatusListener {
         static final int TRANSACTION_onStatusChange = 1;
 
         public Stub() {
@@ -55,7 +54,8 @@ public interface IThermalStatusListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IThermalStatusListener.DESCRIPTOR);
             }

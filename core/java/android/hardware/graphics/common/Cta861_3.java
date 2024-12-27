@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class Cta861_3 implements Parcelable {
-    public static final Parcelable.Creator<Cta861_3> CREATOR = new Parcelable.Creator<Cta861_3>() { // from class: android.hardware.graphics.common.Cta861_3.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Cta861_3 createFromParcel(Parcel _aidl_source) {
-            Cta861_3 _aidl_out = new Cta861_3();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Cta861_3> CREATOR =
+            new Parcelable.Creator<
+                    Cta861_3>() { // from class: android.hardware.graphics.common.Cta861_3.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Cta861_3 createFromParcel(Parcel _aidl_source) {
+                    Cta861_3 _aidl_out = new Cta861_3();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Cta861_3[] newArray(int _aidl_size) {
-            return new Cta861_3[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Cta861_3[] newArray(int _aidl_size) {
+                    return new Cta861_3[_aidl_size];
+                }
+            };
     public float maxContentLightLevel = 0.0f;
     public float maxFrameAverageLightLevel = 0.0f;
 

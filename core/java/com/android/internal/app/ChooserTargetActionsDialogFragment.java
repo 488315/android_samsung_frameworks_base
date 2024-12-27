@@ -23,11 +23,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.app.ChooserTargetActionsDialogFragment;
-import com.android.internal.app.ResolverListAdapter;
 import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +37,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /* loaded from: classes5.dex */
-public class ChooserTargetActionsDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
+public class ChooserTargetActionsDialogFragment extends DialogFragment
+        implements DialogInterface.OnClickListener {
     public static final String INTENT_FILTER_KEY = "intent_filter";
     public static final String IS_SHORTCUT_PINNED_KEY = "is_shortcut_pinned";
     public static final String SHORTCUT_ID_KEY = "shortcut_id";
@@ -82,31 +83,47 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
     }
 
     @Override // android.app.Fragment
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             setStateFromBundle(savedInstanceState);
         } else {
             setStateFromBundle(getArguments());
         }
-        Optional.of(getDialog()).map(new Function() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((Dialog) obj).getWindow();
-            }
-        }).ifPresent(new Consumer() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((Window) obj).setBackgroundDrawable(new ColorDrawable(0));
-            }
-        });
-        List<Pair<Drawable, CharSequence>> items = (List) this.mTargetInfos.stream().map(new Function() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda2
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Pair lambda$onCreateView$1;
-                lambda$onCreateView$1 = ChooserTargetActionsDialogFragment.this.lambda$onCreateView$1((DisplayResolveInfo) obj);
-                return lambda$onCreateView$1;
-            }
-        }).collect(Collectors.toList());
+        Optional.of(getDialog())
+                .map(
+                        new Function() { // from class:
+                                         // com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                return ((Dialog) obj).getWindow();
+                            }
+                        })
+                .ifPresent(
+                        new Consumer() { // from class:
+                                         // com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                ((Window) obj).setBackgroundDrawable(new ColorDrawable(0));
+                            }
+                        });
+        List<Pair<Drawable, CharSequence>> items =
+                (List)
+                        this.mTargetInfos.stream()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda2
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                Pair lambda$onCreateView$1;
+                                                lambda$onCreateView$1 =
+                                                        ChooserTargetActionsDialogFragment.this
+                                                                .lambda$onCreateView$1(
+                                                                        (DisplayResolveInfo) obj);
+                                                return lambda$onCreateView$1;
+                                            }
+                                        })
+                                .collect(Collectors.toList());
         View v = inflater.inflate(R.layout.chooser_dialog, container, false);
         TextView title = (TextView) v.findViewById(16908310);
         ImageView icon = (ImageView) v.findViewById(16908294);
@@ -133,7 +150,10 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // com.android.internal.widget.RecyclerView.Adapter
         public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-            return ChooserTargetActionsDialogFragment.this.new VH(LayoutInflater.from(parent.getContext()).inflate(R.layout.chooser_dialog_item, parent, false));
+            return ChooserTargetActionsDialogFragment.this
+            .new VH(
+                    LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.chooser_dialog_item, parent, false));
         }
 
         @Override // com.android.internal.widget.RecyclerView.Adapter
@@ -165,17 +185,22 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
                 this.mIcon.setVisibility(0);
                 this.mIcon.lambda$setImageURIAsync$0(item.first);
             }
-            this.itemView.setOnClickListener(new View.OnClickListener() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$VH$$ExternalSyntheticLambda0
-                @Override // android.view.View.OnClickListener
-                public final void onClick(View view) {
-                    ChooserTargetActionsDialogFragment.VH.this.lambda$bind$0(position, view);
-                }
-            });
+            this.itemView.setOnClickListener(
+                    new View
+                            .OnClickListener() { // from class:
+                                                 // com.android.internal.app.ChooserTargetActionsDialogFragment$VH$$ExternalSyntheticLambda0
+                        @Override // android.view.View.OnClickListener
+                        public final void onClick(View view) {
+                            ChooserTargetActionsDialogFragment.VH.this.lambda$bind$0(
+                                    position, view);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$bind$0(int position, View v) {
-            ChooserTargetActionsDialogFragment.this.onClick(ChooserTargetActionsDialogFragment.this.getDialog(), position);
+            ChooserTargetActionsDialogFragment.this.onClick(
+                    ChooserTargetActionsDialogFragment.this.getDialog(), position);
         }
     }
 
@@ -193,37 +218,58 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
         if (this.mIntentFilter == null) {
             return;
         }
-        List<String> pinnedShortcuts = getPinnedShortcutsFromPackageAsUser(getContext(), this.mUserHandle, this.mIntentFilter, name.getPackageName());
+        List<String> pinnedShortcuts =
+                getPinnedShortcutsFromPackageAsUser(
+                        getContext(), this.mUserHandle, this.mIntentFilter, name.getPackageName());
         if (this.mIsShortcutPinned) {
             pinnedShortcuts.remove(this.mShortcutId);
         } else {
             pinnedShortcuts.add(this.mShortcutId);
         }
-        ((LauncherApps) getContext().getSystemService(LauncherApps.class)).pinShortcuts(name.getPackageName(), pinnedShortcuts, this.mUserHandle);
+        ((LauncherApps) getContext().getSystemService(LauncherApps.class))
+                .pinShortcuts(name.getPackageName(), pinnedShortcuts, this.mUserHandle);
     }
 
-    private static List<String> getPinnedShortcutsFromPackageAsUser(Context context, UserHandle user, IntentFilter filter, final String packageName) {
+    private static List<String> getPinnedShortcutsFromPackageAsUser(
+            Context context, UserHandle user, IntentFilter filter, final String packageName) {
         Context contextAsUser = context.createContextAsUser(user, 0);
-        List<ShortcutManager.ShareShortcutInfo> targets = ((ShortcutManager) contextAsUser.getSystemService(ShortcutManager.class)).getShareTargets(filter);
-        return (List) targets.stream().map(new Function() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda3
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((ShortcutManager.ShareShortcutInfo) obj).getShortcutInfo();
-            }
-        }).filter(new Predicate() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda4
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ChooserTargetActionsDialogFragment.lambda$getPinnedShortcutsFromPackageAsUser$2(packageName, (ShortcutInfo) obj);
-            }
-        }).map(new Function() { // from class: com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda5
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((ShortcutInfo) obj).getId();
-            }
-        }).collect(Collectors.toList());
+        List<ShortcutManager.ShareShortcutInfo> targets =
+                ((ShortcutManager) contextAsUser.getSystemService(ShortcutManager.class))
+                        .getShareTargets(filter);
+        return (List)
+                targets.stream()
+                        .map(
+                                new Function() { // from class:
+                                                 // com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ((ShortcutManager.ShareShortcutInfo) obj)
+                                                .getShortcutInfo();
+                                    }
+                                })
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda4
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return ChooserTargetActionsDialogFragment
+                                                .lambda$getPinnedShortcutsFromPackageAsUser$2(
+                                                        packageName, (ShortcutInfo) obj);
+                                    }
+                                })
+                        .map(
+                                new Function() { // from class:
+                                                 // com.android.internal.app.ChooserTargetActionsDialogFragment$$ExternalSyntheticLambda5
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ((ShortcutInfo) obj).getId();
+                                    }
+                                })
+                        .collect(Collectors.toList());
     }
 
-    static /* synthetic */ boolean lambda$getPinnedShortcutsFromPackageAsUser$2(String packageName, ShortcutInfo s) {
+    static /* synthetic */ boolean lambda$getPinnedShortcutsFromPackageAsUser$2(
+            String packageName, ShortcutInfo s) {
         return s.isPinned() && s.getPackage().equals(packageName);
     }
 
@@ -254,7 +300,9 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
 
     protected CharSequence getItemLabel(DisplayResolveInfo dri) {
         PackageManager pm = getContext().getPackageManager();
-        return getPinLabel(isPinned(dri), isShortcutTarget() ? this.mShortcutTitle : dri.getResolveInfo().loadLabel(pm));
+        return getPinLabel(
+                isPinned(dri),
+                isShortcutTarget() ? this.mShortcutTitle : dri.getResolveInfo().loadLabel(pm));
     }
 
     protected Drawable getItemIcon(DisplayResolveInfo dri) {
@@ -264,7 +312,8 @@ public class ChooserTargetActionsDialogFragment extends DialogFragment implement
     private ResolverListAdapter.ResolveInfoPresentationGetter getProvidingAppPresentationGetter() {
         ActivityManager am = (ActivityManager) getContext().getSystemService("activity");
         int iconDpi = am.getLauncherLargeIconDensity();
-        return new ResolverListAdapter.ResolveInfoPresentationGetter(getContext(), iconDpi, this.mTargetInfos.get(0).getResolveInfo());
+        return new ResolverListAdapter.ResolveInfoPresentationGetter(
+                getContext(), iconDpi, this.mTargetInfos.get(0).getResolveInfo());
     }
 
     private boolean isPinned(DisplayResolveInfo dri) {

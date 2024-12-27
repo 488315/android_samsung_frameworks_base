@@ -12,7 +12,8 @@ public class PermissionAccessInformationRequester {
     }
 
     public static void request(Context context) throws Exception {
-        AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+        AppOpsManager appOpsManager =
+                (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         appOpsManager.requestPermissionAccessInformation();
     }
 }

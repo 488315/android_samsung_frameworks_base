@@ -9,12 +9,13 @@ import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.auditlog.AuditEvents;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.sec.enterprise.certificate.CertificatePolicy;
-import android.security.KeyStoreAuditLog;
 import android.system.keystore2.KeyDescriptor;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.Pair;
+
 import com.samsung.android.wifi.SemWifiManager;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -47,8 +48,7 @@ public class KeyStoreAuditLog {
         mKeyDescriptorBeforeImportKey = Pair.create(Long.valueOf(keyId), keyDescriptor);
     }
 
-    private KeyStoreAuditLog() {
-    }
+    private KeyStoreAuditLog() {}
 
     public static class AuditLogParams {
         private final String mAlias;
@@ -68,7 +68,11 @@ public class KeyStoreAuditLog {
         }
 
         public List<X509Certificate> getX509Certificates() {
-            return this.mX509Certificates != null ? this.mX509Certificates : this.mEncodedCerts != null ? KeyStoreAuditLog.toCertificates(this.mEncodedCerts) : Collections.emptyList();
+            return this.mX509Certificates != null
+                    ? this.mX509Certificates
+                    : this.mEncodedCerts != null
+                            ? KeyStoreAuditLog.toCertificates(this.mEncodedCerts)
+                            : Collections.emptyList();
         }
 
         public void setX509Certificates(List<X509Certificate> x509Certificates) {
@@ -88,7 +92,10 @@ public class KeyStoreAuditLog {
                 return this.mEncodedCerts;
             }
             if (this.mX509Certificates != null) {
-                return KeyStoreAuditLog.convertCertificatesToPem((Certificate[]) this.mX509Certificates.toArray(new X509Certificate[this.mX509Certificates.size()]));
+                return KeyStoreAuditLog.convertCertificatesToPem(
+                        (Certificate[])
+                                this.mX509Certificates.toArray(
+                                        new X509Certificate[this.mX509Certificates.size()]));
             }
             return null;
         }
@@ -134,7 +141,10 @@ public class KeyStoreAuditLog {
         }
 
         public boolean hasCertificates() {
-            return ((this.mX509Certificates == null || this.mX509Certificates.isEmpty()) && this.mEncodedCerts == null) ? false : true;
+            return ((this.mX509Certificates == null || this.mX509Certificates.isEmpty())
+                            && this.mEncodedCerts == null)
+                    ? false
+                    : true;
         }
 
         public void setEncodedCerts(byte[] encodedCerts) {
@@ -164,11 +174,19 @@ public class KeyStoreAuditLog {
             return init(keyDescriptor, operation, tag, -1);
         }
 
-        public static AuditLogParams init(KeyDescriptor keyDescriptor, int operation, String tag, int errorCode) {
-            return init(keyDescriptor.alias, keyDescriptor.nspace, keyDescriptor.domain, operation, tag, errorCode);
+        public static AuditLogParams init(
+                KeyDescriptor keyDescriptor, int operation, String tag, int errorCode) {
+            return init(
+                    keyDescriptor.alias,
+                    keyDescriptor.nspace,
+                    keyDescriptor.domain,
+                    operation,
+                    tag,
+                    errorCode);
         }
 
-        public static AuditLogParams init(String alias, long nspace, int domain, int operation, String tag, int errorCode) {
+        public static AuditLogParams init(
+                String alias, long nspace, int domain, int operation, String tag, int errorCode) {
             AuditLogParams params = new AuditLogParams(alias, tag);
             params.setNamespace(nspace);
             params.setDomain(domain);
@@ -178,7 +196,29 @@ public class KeyStoreAuditLog {
         }
 
         public String toString() {
-            return "AuditLogParams{mAlias='" + this.mAlias + DateFormat.QUOTE + ", mClassName='" + this.mClassName + DateFormat.QUOTE + ", mUserId=" + this.mUserId + ", mNamespace=" + this.mNamespace + ", mDomain=" + this.mDomain + ", mContext=" + this.mContext + ", mOperationType=" + this.mOperationType + ", mErrorCode=" + this.mErrorCode + ", mX509Certificates=" + this.mX509Certificates + ", mEncodedCerts=" + Arrays.toString(this.mEncodedCerts) + '}';
+            return "AuditLogParams{mAlias='"
+                    + this.mAlias
+                    + DateFormat.QUOTE
+                    + ", mClassName='"
+                    + this.mClassName
+                    + DateFormat.QUOTE
+                    + ", mUserId="
+                    + this.mUserId
+                    + ", mNamespace="
+                    + this.mNamespace
+                    + ", mDomain="
+                    + this.mDomain
+                    + ", mContext="
+                    + this.mContext
+                    + ", mOperationType="
+                    + this.mOperationType
+                    + ", mErrorCode="
+                    + this.mErrorCode
+                    + ", mX509Certificates="
+                    + this.mX509Certificates
+                    + ", mEncodedCerts="
+                    + Arrays.toString(this.mEncodedCerts)
+                    + '}';
         }
     }
 
@@ -195,22 +235,51 @@ public class KeyStoreAuditLog {
         }
 
         public String toString() {
-            return "LogMessage{message='" + this.message + DateFormat.QUOTE + ", redactedMessage='" + this.redactedMessage + DateFormat.QUOTE + '}';
+            return "LogMessage{message='"
+                    + this.message
+                    + DateFormat.QUOTE
+                    + ", redactedMessage='"
+                    + this.redactedMessage
+                    + DateFormat.QUOTE
+                    + '}';
         }
     }
 
     public static void auditLogPrivilegedAsUser(final AuditLogParams params) {
         List<LogMessage> logMessages = new ArrayList<>();
         final boolean success = params.getErrorCode() == -1;
-        String credentialUsage = getKeystoreString(params.getDomain(), params.getNamespace(), params.getOperationType());
+        String credentialUsage =
+                getKeystoreString(
+                        params.getDomain(), params.getNamespace(), params.getOperationType());
         switch (params.getOperationType()) {
             case 1:
-                logMessages.add(new LogMessage(String.format(success ? AuditEvents.AUDIT_CLEARING_CREDENTIALS_SUCCEEDED : AuditEvents.AUDIT_CLEARING_CREDENTIALS_FAILED, credentialUsage, getErrorMessage(params.getErrorCode())), LogMessage.KEEP));
+                logMessages.add(
+                        new LogMessage(
+                                String.format(
+                                        success
+                                                ? AuditEvents.AUDIT_CLEARING_CREDENTIALS_SUCCEEDED
+                                                : AuditEvents.AUDIT_CLEARING_CREDENTIALS_FAILED,
+                                        credentialUsage,
+                                        getErrorMessage(params.getErrorCode())),
+                                LogMessage.KEEP));
                 break;
             case 2:
                 if (params.hasCertificates()) {
                     for (X509Certificate certificate : params.getX509Certificates()) {
-                        logMessages.add(new LogMessage(String.format(success ? AuditEvents.AUDIT_DELETING_CERTIFICATE_SUCCEEDED : AuditEvents.AUDIT_DELETING_CERTIFICATE_FAILED, getKeyString(params.getAlias()), credentialUsage, params.getAlias(), certificate.getSubjectDN(), certificate.getIssuerDN()), ""));
+                        logMessages.add(
+                                new LogMessage(
+                                        String.format(
+                                                success
+                                                        ? AuditEvents
+                                                                .AUDIT_DELETING_CERTIFICATE_SUCCEEDED
+                                                        : AuditEvents
+                                                                .AUDIT_DELETING_CERTIFICATE_FAILED,
+                                                getKeyString(params.getAlias()),
+                                                credentialUsage,
+                                                params.getAlias(),
+                                                certificate.getSubjectDN(),
+                                                certificate.getIssuerDN()),
+                                        ""));
                     }
                     break;
                 }
@@ -218,7 +287,21 @@ public class KeyStoreAuditLog {
             case 3:
                 if (!credentialUsage.isEmpty()) {
                     for (X509Certificate certificate2 : params.getX509Certificates()) {
-                        logMessages.add(new LogMessage(String.format(success ? AuditEvents.AUDIT_INSTALLING_CERTIFICATE_SUCCEEDED : AuditEvents.AUDIT_INSTALLING_CERTIFICATE_FAILED, getKeyString(params.getAlias()), credentialUsage, params.getAlias(), certificate2.getSubjectDN(), certificate2.getIssuerDN(), getErrorMessage(params.getErrorCode())), ""));
+                        logMessages.add(
+                                new LogMessage(
+                                        String.format(
+                                                success
+                                                        ? AuditEvents
+                                                                .AUDIT_INSTALLING_CERTIFICATE_SUCCEEDED
+                                                        : AuditEvents
+                                                                .AUDIT_INSTALLING_CERTIFICATE_FAILED,
+                                                getKeyString(params.getAlias()),
+                                                credentialUsage,
+                                                params.getAlias(),
+                                                certificate2.getSubjectDN(),
+                                                certificate2.getIssuerDN(),
+                                                getErrorMessage(params.getErrorCode())),
+                                        ""));
                     }
                     break;
                 }
@@ -226,13 +309,27 @@ public class KeyStoreAuditLog {
             default:
                 return;
         }
-        final int userId = getUserIdForDomainOrNamespace(params.getUserId(), params.getDomain(), params.getNamespace());
-        logMessages.forEach(new Consumer() { // from class: android.security.KeyStoreAuditLog$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                AuditLog.logPrivilegedAsUser(success ? 5 : 1, 1, success, Process.myPid(), params.getClassName(), r4.message, userId != -1 ? ((KeyStoreAuditLog.LogMessage) obj).redactedMessage : null, userId);
-            }
-        });
+        final int userId =
+                getUserIdForDomainOrNamespace(
+                        params.getUserId(), params.getDomain(), params.getNamespace());
+        logMessages.forEach(
+                new Consumer() { // from class:
+                                 // android.security.KeyStoreAuditLog$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        AuditLog.logPrivilegedAsUser(
+                                success ? 5 : 1,
+                                1,
+                                success,
+                                Process.myPid(),
+                                params.getClassName(),
+                                r4.message,
+                                userId != -1
+                                        ? ((KeyStoreAuditLog.LogMessage) obj).redactedMessage
+                                        : null,
+                                userId);
+                    }
+                });
     }
 
     public static boolean isAuditLogEnabledAsUser() {
@@ -247,9 +344,11 @@ public class KeyStoreAuditLog {
         List<X509Certificate> certList = params.getX509Certificates();
         int userId = params.getUserId();
         if (certList != null && certList.size() > 0) {
-            CertificatePolicy certPolicy = EnterpriseDeviceManager.getInstance().getCertificatePolicy();
+            CertificatePolicy certPolicy =
+                    EnterpriseDeviceManager.getInstance().getCertificatePolicy();
             for (X509Certificate certificate : certList) {
-                certPolicy.notifyCertificateRemovedAsUser(certificate.getSubjectX500Principal().getName(), userId);
+                certPolicy.notifyCertificateRemovedAsUser(
+                        certificate.getSubjectX500Principal().getName(), userId);
             }
         }
     }
@@ -295,10 +394,12 @@ public class KeyStoreAuditLog {
         }
         int userId = params.getUserId();
         boolean isCertificateTrustedByMdm = true;
-        if (certPolicy.isCertificateTrustedUntrustedEnabledAsUser(userId) && !certPolicy.isCaCertificateTrustedAsUser(value, false, userId)) {
+        if (certPolicy.isCertificateTrustedUntrustedEnabledAsUser(userId)
+                && !certPolicy.isCaCertificateTrustedAsUser(value, false, userId)) {
             isCertificateTrustedByMdm = false;
         }
-        if (certPolicy.isCertificateValidationAtInstallEnabledAsUser(userId) && certPolicy.validateCertificateAtInstallAsUser(value, userId) != -1) {
+        if (certPolicy.isCertificateValidationAtInstallEnabledAsUser(userId)
+                && certPolicy.validateCertificateAtInstallAsUser(value, userId) != -1) {
             isCertificateTrustedByMdm = false;
         }
         if (!isCertificateTrustedByMdm) {
@@ -312,7 +413,8 @@ public class KeyStoreAuditLog {
         }
         try {
             CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
-            return (X509Certificate) certFactory.generateCertificate(new ByteArrayInputStream(bytes));
+            return (X509Certificate)
+                    certFactory.generateCertificate(new ByteArrayInputStream(bytes));
         } catch (CertificateException e) {
             Log.w(TAG, "Couldn't parse certificate in keystore", e);
             return null;
@@ -333,7 +435,9 @@ public class KeyStoreAuditLog {
     }
 
     private static String getKeyString(String key) {
-        return (key == null || !key.startsWith(Credentials.USER_PRIVATE_KEY)) ? TvInteractiveAppView.BI_INTERACTIVE_APP_KEY_CERTIFICATE : "private key";
+        return (key == null || !key.startsWith(Credentials.USER_PRIVATE_KEY))
+                ? TvInteractiveAppView.BI_INTERACTIVE_APP_KEY_CERTIFICATE
+                : "private key";
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -349,7 +453,9 @@ public class KeyStoreAuditLog {
     }
 
     private static String getKeystoreString(int domain, long namespace, int operationType) {
-        if (operationType == 3 && mKeyDescriptorBeforeImportKey != null && mKeyDescriptorBeforeImportKey.first.longValue() == namespace) {
+        if (operationType == 3
+                && mKeyDescriptorBeforeImportKey != null
+                && mKeyDescriptorBeforeImportKey.first.longValue() == namespace) {
             KeyDescriptor keyDescriptor = mKeyDescriptorBeforeImportKey.second;
             if (keyDescriptor != null) {
                 domain = keyDescriptor.domain;
@@ -396,8 +502,15 @@ public class KeyStoreAuditLog {
     private static String getPackageNameForUid(Context context, int uid) {
         if (context == null) {
             try {
-                IBinder bPkgMngr = (IBinder) Class.forName("android.os.ServiceManager").getMethod("getService", String.class).invoke(null, "package");
-                Object mPkgMngr = Class.forName("android.content.pm.IPackageManager$Stub").getMethod("asInterface", IBinder.class).invoke(null, bPkgMngr);
+                IBinder bPkgMngr =
+                        (IBinder)
+                                Class.forName("android.os.ServiceManager")
+                                        .getMethod("getService", String.class)
+                                        .invoke(null, "package");
+                Object mPkgMngr =
+                        Class.forName("android.content.pm.IPackageManager$Stub")
+                                .getMethod("asInterface", IBinder.class)
+                                .invoke(null, bPkgMngr);
                 Method mthdGetName = mPkgMngr.getClass().getMethod("getNameForUid", Integer.TYPE);
                 String packageName = (String) mthdGetName.invoke(mPkgMngr, Integer.valueOf(uid));
                 return packageName;
@@ -412,12 +525,25 @@ public class KeyStoreAuditLog {
 
     private static boolean isCallerAdmin(String packageName, int uid, int pid) {
         try {
-            IBinder bEdm = (IBinder) Class.forName("android.os.ServiceManager").getMethod("getService", String.class).invoke(null, "enterprise_policy");
-            Object mEdm = Class.forName("com.samsung.android.knox.IEnterpriseDeviceManager$Stub").getMethod("asInterface", IBinder.class).invoke(null, bEdm);
+            IBinder bEdm =
+                    (IBinder)
+                            Class.forName("android.os.ServiceManager")
+                                    .getMethod("getService", String.class)
+                                    .invoke(null, "enterprise_policy");
+            Object mEdm =
+                    Class.forName("com.samsung.android.knox.IEnterpriseDeviceManager$Stub")
+                            .getMethod("asInterface", IBinder.class)
+                            .invoke(null, bEdm);
             Method mthdCheck = mEdm.getClass().getMethod("packageHasActiveAdmins", String.class);
             return ((Boolean) mthdCheck.invoke(mEdm, packageName)).booleanValue();
         } catch (Exception ex) {
-            Log.e(TAG, "Administrator status cannot be defined for requester: uid=" + uid + " pid=" + pid, ex);
+            Log.e(
+                    TAG,
+                    "Administrator status cannot be defined for requester: uid="
+                            + uid
+                            + " pid="
+                            + pid,
+                    ex);
             return false;
         }
     }

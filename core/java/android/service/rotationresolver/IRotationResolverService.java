@@ -5,18 +5,22 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.rotationresolver.IRotationResolverCallback;
 
 /* loaded from: classes3.dex */
 public interface IRotationResolverService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.rotationresolver.IRotationResolverService";
+    public static final String DESCRIPTOR =
+            "android.service.rotationresolver.IRotationResolverService";
 
-    void resolveRotation(IRotationResolverCallback iRotationResolverCallback, RotationResolutionRequest rotationResolutionRequest) throws RemoteException;
+    void resolveRotation(
+            IRotationResolverCallback iRotationResolverCallback,
+            RotationResolutionRequest rotationResolutionRequest)
+            throws RemoteException;
 
     public static class Default implements IRotationResolverService {
         @Override // android.service.rotationresolver.IRotationResolverService
-        public void resolveRotation(IRotationResolverCallback callback, RotationResolutionRequest request) throws RemoteException {
-        }
+        public void resolveRotation(
+                IRotationResolverCallback callback, RotationResolutionRequest request)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +28,7 @@ public interface IRotationResolverService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRotationResolverService {
+    public abstract static class Stub extends Binder implements IRotationResolverService {
         static final int TRANSACTION_resolveRotation = 1;
 
         public Stub() {
@@ -62,7 +66,8 @@ public interface IRotationResolverService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRotationResolverService.DESCRIPTOR);
             }
@@ -72,8 +77,11 @@ public interface IRotationResolverService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IRotationResolverCallback _arg0 = IRotationResolverCallback.Stub.asInterface(data.readStrongBinder());
-                    RotationResolutionRequest _arg1 = (RotationResolutionRequest) data.readTypedObject(RotationResolutionRequest.CREATOR);
+                    IRotationResolverCallback _arg0 =
+                            IRotationResolverCallback.Stub.asInterface(data.readStrongBinder());
+                    RotationResolutionRequest _arg1 =
+                            (RotationResolutionRequest)
+                                    data.readTypedObject(RotationResolutionRequest.CREATOR);
                     data.enforceNoDataAvail();
                     resolveRotation(_arg0, _arg1);
                     return true;
@@ -99,7 +107,9 @@ public interface IRotationResolverService extends IInterface {
             }
 
             @Override // android.service.rotationresolver.IRotationResolverService
-            public void resolveRotation(IRotationResolverCallback callback, RotationResolutionRequest request) throws RemoteException {
+            public void resolveRotation(
+                    IRotationResolverCallback callback, RotationResolutionRequest request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRotationResolverService.DESCRIPTOR);

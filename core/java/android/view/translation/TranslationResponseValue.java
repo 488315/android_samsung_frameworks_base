@@ -5,26 +5,31 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TranslationResponseValue implements Parcelable {
-    public static final Parcelable.Creator<TranslationResponseValue> CREATOR = new Parcelable.Creator<TranslationResponseValue>() { // from class: android.view.translation.TranslationResponseValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationResponseValue[] newArray(int size) {
-            return new TranslationResponseValue[size];
-        }
+    public static final Parcelable.Creator<TranslationResponseValue> CREATOR =
+            new Parcelable.Creator<
+                    TranslationResponseValue>() { // from class:
+                                                  // android.view.translation.TranslationResponseValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationResponseValue[] newArray(int size) {
+                    return new TranslationResponseValue[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationResponseValue createFromParcel(Parcel in) {
-            return new TranslationResponseValue(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationResponseValue createFromParcel(Parcel in) {
+                    return new TranslationResponseValue(in);
+                }
+            };
     public static final String EXTRA_DEFINITIONS = "android.view.translation.extra.DEFINITIONS";
     public static final int STATUS_ERROR = 1;
     public static final int STATUS_SUCCESS = 0;
@@ -34,8 +39,7 @@ public final class TranslationResponseValue implements Parcelable {
     private final CharSequence mTransliteration;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     public static TranslationResponseValue forError() {
         return new TranslationResponseValue(1, null, Bundle.EMPTY, null);
@@ -60,9 +64,8 @@ public final class TranslationResponseValue implements Parcelable {
         return null;
     }
 
-    static abstract class BaseBuilder {
-        BaseBuilder() {
-        }
+    abstract static class BaseBuilder {
+        BaseBuilder() {}
     }
 
     public static String statusToString(int value) {
@@ -76,14 +79,20 @@ public final class TranslationResponseValue implements Parcelable {
         }
     }
 
-    TranslationResponseValue(int statusCode, CharSequence text, Bundle extras, CharSequence transliteration) {
+    TranslationResponseValue(
+            int statusCode, CharSequence text, Bundle extras, CharSequence transliteration) {
         this.mStatusCode = statusCode;
         if (this.mStatusCode != 0 && this.mStatusCode != 1) {
-            throw new IllegalArgumentException("statusCode was " + this.mStatusCode + " but must be one of: STATUS_SUCCESS(0), STATUS_ERROR(1" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "statusCode was "
+                            + this.mStatusCode
+                            + " but must be one of: STATUS_SUCCESS(0), STATUS_ERROR(1"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mText = text;
         this.mExtras = extras;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
         this.mTransliteration = transliteration;
     }
 
@@ -104,7 +113,15 @@ public final class TranslationResponseValue implements Parcelable {
     }
 
     public String toString() {
-        return "TranslationResponseValue { statusCode = " + statusToString(this.mStatusCode) + ", text = " + ((Object) this.mText) + ", extras = " + this.mExtras + ", transliteration = " + ((Object) this.mTransliteration) + " }";
+        return "TranslationResponseValue { statusCode = "
+                + statusToString(this.mStatusCode)
+                + ", text = "
+                + ((Object) this.mText)
+                + ", extras = "
+                + this.mExtras
+                + ", transliteration = "
+                + ((Object) this.mTransliteration)
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -115,7 +132,10 @@ public final class TranslationResponseValue implements Parcelable {
             return false;
         }
         TranslationResponseValue that = (TranslationResponseValue) o;
-        if (this.mStatusCode == that.mStatusCode && Objects.equals(this.mText, that.mText) && extrasEquals(that.mExtras) && Objects.equals(this.mTransliteration, that.mTransliteration)) {
+        if (this.mStatusCode == that.mStatusCode
+                && Objects.equals(this.mText, that.mText)
+                && extrasEquals(that.mExtras)
+                && Objects.equals(this.mTransliteration, that.mTransliteration)) {
             return true;
         }
         return false;
@@ -123,7 +143,10 @@ public final class TranslationResponseValue implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + this.mStatusCode;
-        return (((((_hash * 31) + Objects.hashCode(this.mText)) * 31) + Objects.hashCode(this.mExtras)) * 31) + Objects.hashCode(this.mTransliteration);
+        return (((((_hash * 31) + Objects.hashCode(this.mText)) * 31)
+                                + Objects.hashCode(this.mExtras))
+                        * 31)
+                + Objects.hashCode(this.mTransliteration);
     }
 
     @Override // android.os.Parcelable
@@ -156,11 +179,16 @@ public final class TranslationResponseValue implements Parcelable {
         CharSequence transliteration = (flg & 8) == 0 ? null : in.readCharSequence();
         this.mStatusCode = statusCode;
         if (this.mStatusCode != 0 && this.mStatusCode != 1) {
-            throw new IllegalArgumentException("statusCode was " + this.mStatusCode + " but must be one of: STATUS_SUCCESS(0), STATUS_ERROR(1" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "statusCode was "
+                            + this.mStatusCode
+                            + " but must be one of: STATUS_SUCCESS(0), STATUS_ERROR(1"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mText = text;
         this.mExtras = extras;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
         this.mTransliteration = transliteration;
     }
 
@@ -174,7 +202,11 @@ public final class TranslationResponseValue implements Parcelable {
         public Builder(int statusCode) {
             this.mStatusCode = statusCode;
             if (this.mStatusCode != 0 && this.mStatusCode != 1) {
-                throw new IllegalArgumentException("statusCode was " + this.mStatusCode + " but must be one of: STATUS_SUCCESS(0), STATUS_ERROR(1" + NavigationBarInflaterView.KEY_CODE_END);
+                throw new IllegalArgumentException(
+                        "statusCode was "
+                                + this.mStatusCode
+                                + " but must be one of: STATUS_SUCCESS(0), STATUS_ERROR(1"
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
         }
 
@@ -211,18 +243,20 @@ public final class TranslationResponseValue implements Parcelable {
             if ((this.mBuilderFieldsSet & 8) == 0) {
                 this.mTransliteration = TranslationResponseValue.defaultTransliteration();
             }
-            TranslationResponseValue o = new TranslationResponseValue(this.mStatusCode, this.mText, this.mExtras, this.mTransliteration);
+            TranslationResponseValue o =
+                    new TranslationResponseValue(
+                            this.mStatusCode, this.mText, this.mExtras, this.mTransliteration);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -20,7 +20,8 @@ public final class BattAuthManager {
                 HandlerThread handlerThread = new HandlerThread("BattAuthManager");
                 this.mHandlerThread = handlerThread;
                 handlerThread.start();
-                this.mWpcAuthenticator = new WpcAuthenticator(context, this.mHandlerThread.getLooper());
+                this.mWpcAuthenticator =
+                        new WpcAuthenticator(context, this.mHandlerThread.getLooper());
                 if (isFirstBoot) {
                     WpcAuthenticator.removeDigests();
                 }

@@ -7,10 +7,11 @@ import android.os.SystemClock;
 import android.util.IndentingPrintWriter;
 import android.util.LocalLog;
 import android.util.Slog;
+
 import com.android.server.LocalServices;
 import com.android.server.SystemClockTime;
 import com.android.server.alarm.AlarmManagerService;
-import com.android.server.timedetector.TimeDetectorStrategyImpl;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Objects;
@@ -25,10 +26,14 @@ public final class EnvironmentImpl implements TimeDetectorStrategyImpl.Environme
     public EnvironmentImpl(Context context, Handler handler) {
         Objects.requireNonNull(handler);
         this.mHandler = handler;
-        PowerManager.WakeLock newWakeLock = ((PowerManager) context.getSystemService(PowerManager.class)).newWakeLock(1, "time_detector");
+        PowerManager.WakeLock newWakeLock =
+                ((PowerManager) context.getSystemService(PowerManager.class))
+                        .newWakeLock(1, "time_detector");
         Objects.requireNonNull(newWakeLock);
         this.mWakeLock = newWakeLock;
-        AlarmManagerService.LocalService localService = (AlarmManagerService.LocalService) LocalServices.getService(AlarmManagerService.LocalService.class);
+        AlarmManagerService.LocalService localService =
+                (AlarmManagerService.LocalService)
+                        LocalServices.getService(AlarmManagerService.LocalService.class);
         Objects.requireNonNull(localService);
         this.mAlarmManagerInternal = localService;
     }
@@ -49,9 +54,15 @@ public final class EnvironmentImpl implements TimeDetectorStrategyImpl.Environme
 
     public final void dumpDebugLog(IndentingPrintWriter indentingPrintWriter) {
         long elapsedRealtime = SystemClock.elapsedRealtime();
-        indentingPrintWriter.printf("elapsedRealtimeMillis()=%s (%s)\n", new Object[]{Duration.ofMillis(elapsedRealtime), Long.valueOf(elapsedRealtime)});
+        indentingPrintWriter.printf(
+                "elapsedRealtimeMillis()=%s (%s)\n",
+                new Object[] {Duration.ofMillis(elapsedRealtime), Long.valueOf(elapsedRealtime)});
         long currentTimeMillis = System.currentTimeMillis();
-        indentingPrintWriter.printf("systemClockMillis()=%s (%s)\n", new Object[]{Instant.ofEpochMilli(currentTimeMillis), Long.valueOf(currentTimeMillis)});
+        indentingPrintWriter.printf(
+                "systemClockMillis()=%s (%s)\n",
+                new Object[] {
+                    Instant.ofEpochMilli(currentTimeMillis), Long.valueOf(currentTimeMillis)
+                });
         indentingPrintWriter.println("systemClockConfidence()=" + systemClockConfidence());
         indentingPrintWriter.println("SystemClockTime debug log:");
         indentingPrintWriter.increaseIndent();

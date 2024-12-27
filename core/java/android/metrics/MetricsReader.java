@@ -2,8 +2,10 @@ package android.metrics;
 
 import android.annotation.SystemApi;
 import android.util.EventLog;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,9 +45,13 @@ public class MetricsReader {
             if (data instanceof Object[]) {
                 objects = (Object[]) data;
             } else {
-                objects = new Object[]{data};
+                objects = new Object[] {data};
             }
-            LogMaker log = new LogMaker(objects).setTimestamp(eventTimestampMs).setUid(event.getUid()).setProcessId(event.getProcessId());
+            LogMaker log =
+                    new LogMaker(objects)
+                            .setTimestamp(eventTimestampMs)
+                            .setUid(event.getUid())
+                            .setProcessId(event.getProcessId());
             if (log.getCategory() == 920) {
                 if (log.getSubtype() == this.mCheckpointTag) {
                     this.mPendingQueue.clear();
@@ -98,7 +104,8 @@ public class MetricsReader {
         }
 
         Event(EventLog.Event nativeEvent) {
-            this.mTimeMillis = TimeUnit.MILLISECONDS.convert(nativeEvent.getTimeNanos(), TimeUnit.NANOSECONDS);
+            this.mTimeMillis =
+                    TimeUnit.MILLISECONDS.convert(nativeEvent.getTimeNanos(), TimeUnit.NANOSECONDS);
             this.mPid = nativeEvent.getProcessId();
             this.mUid = nativeEvent.getUid();
             this.mData = nativeEvent.getData();
@@ -126,7 +133,8 @@ public class MetricsReader {
     }
 
     public static class LogReader {
-        public void readEvents(int[] tags, long horizonMs, Collection<Event> events) throws IOException {
+        public void readEvents(int[] tags, long horizonMs, Collection<Event> events)
+                throws IOException {
             ArrayList<EventLog.Event> nativeEvents = new ArrayList<>();
             long horizonNs = TimeUnit.NANOSECONDS.convert(horizonMs, TimeUnit.MILLISECONDS);
             EventLog.readEventsOnWrapping(tags, horizonNs, nativeEvents);

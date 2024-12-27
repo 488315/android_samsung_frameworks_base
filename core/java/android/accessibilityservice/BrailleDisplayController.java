@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.view.accessibility.AccessibilityInteractionClient;
 import android.view.accessibility.Flags;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -25,8 +26,7 @@ public interface BrailleDisplayController {
         public static final int FLAG_ERROR_CANNOT_ACCESS = 1;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface ErrorCode {
-        }
+        public @interface ErrorCode {}
 
         void onConnected(byte[] bArr);
 
@@ -39,11 +39,15 @@ public interface BrailleDisplayController {
 
     void connect(BluetoothDevice bluetoothDevice, BrailleDisplayCallback brailleDisplayCallback);
 
-    void connect(BluetoothDevice bluetoothDevice, Executor executor, BrailleDisplayCallback brailleDisplayCallback);
+    void connect(
+            BluetoothDevice bluetoothDevice,
+            Executor executor,
+            BrailleDisplayCallback brailleDisplayCallback);
 
     void connect(UsbDevice usbDevice, BrailleDisplayCallback brailleDisplayCallback);
 
-    void connect(UsbDevice usbDevice, Executor executor, BrailleDisplayCallback brailleDisplayCallback);
+    void connect(
+            UsbDevice usbDevice, Executor executor, BrailleDisplayCallback brailleDisplayCallback);
 
     void disconnect();
 
@@ -57,9 +61,11 @@ public interface BrailleDisplayController {
         }
     }
 
-    static void setTestBrailleDisplayData(AccessibilityService service, List<Bundle> brailleDisplays) {
+    static void setTestBrailleDisplayData(
+            AccessibilityService service, List<Bundle> brailleDisplays) {
         checkApiFlagIsEnabled();
-        IAccessibilityServiceConnection serviceConnection = AccessibilityInteractionClient.getConnection(service.getConnectionId());
+        IAccessibilityServiceConnection serviceConnection =
+                AccessibilityInteractionClient.getConnection(service.getConnectionId());
         if (serviceConnection != null) {
             try {
                 serviceConnection.setTestBrailleDisplayData(brailleDisplays);

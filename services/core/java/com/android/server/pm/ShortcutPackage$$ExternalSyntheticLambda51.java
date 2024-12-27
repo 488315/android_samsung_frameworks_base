@@ -2,6 +2,7 @@ package com.android.server.pm;
 
 import android.app.appsearch.SearchResult;
 import android.content.pm.ShortcutInfo;
+
 import java.util.ArrayList;
 import java.util.function.Function;
 

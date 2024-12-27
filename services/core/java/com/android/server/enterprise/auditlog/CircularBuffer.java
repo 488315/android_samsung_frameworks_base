@@ -11,11 +11,13 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.util.Log;
+
 import com.android.server.enterprise.EnterpriseDeviceManagerService;
 import com.android.server.enterprise.EnterpriseService;
 import com.android.server.enterprise.storage.EdmStorageProvider;
 import com.android.server.enterprise.storage.SettingNotFoundException;
 import com.android.server.enterprise.utils.KpuHelper;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -62,7 +64,8 @@ public final class CircularBuffer {
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator
         public final int compare(Object obj, Object obj2) {
-            return Long.valueOf(((File) obj).lastModified()).compareTo(Long.valueOf(((File) obj2).lastModified()));
+            return Long.valueOf(((File) obj).lastModified())
+                    .compareTo(Long.valueOf(((File) obj2).lastModified()));
         }
     }
 
@@ -84,14 +87,20 @@ public final class CircularBuffer {
         try {
             boolean checkPseudoAdminForUid = edmStorageProvider.checkPseudoAdminForUid(i);
             this.mIsPseudoAdminOfOrganizationOwnedDevice = checkPseudoAdminForUid;
-            Log.d("CircularBuffer", "mIsPseudoAdminOfOrganizationOwnedDevice = " + checkPseudoAdminForUid);
+            Log.d(
+                    "CircularBuffer",
+                    "mIsPseudoAdminOfOrganizationOwnedDevice = " + checkPseudoAdminForUid);
         } catch (SettingNotFoundException e) {
-            Log.e("CircularBuffer", "mEdmStorageProvider.checkPseudoAdminForUid: error " + e.getMessage());
+            Log.e(
+                    "CircularBuffer",
+                    "mEdmStorageProvider.checkPseudoAdminForUid: error " + e.getMessage());
         }
         this.mBufferLimitSize = getBufferLogSize();
         try {
             try {
-                cursor = this.mEdmStorageProvider.getCursorByAdmin(this.mUid, 0, "AUDITLOG", new String[]{"auditNumberOfDepFiles"});
+                cursor =
+                        this.mEdmStorageProvider.getCursorByAdmin(
+                                this.mUid, 0, "AUDITLOG", new String[] {"auditNumberOfDepFiles"});
                 if (cursor != null) {
                     cursor.moveToFirst();
                     i2 = cursor.getInt(0);
@@ -102,7 +111,9 @@ public final class CircularBuffer {
                     cursor.close();
                 }
             } catch (SQLException e2) {
-                Log.e("CircularBuffer", "Exception occurred accessing Enterprise db " + e2.getMessage());
+                Log.e(
+                        "CircularBuffer",
+                        "Exception occurred accessing Enterprise db " + e2.getMessage());
                 if (cursor != null) {
                     cursor.close();
                 }
@@ -129,7 +140,8 @@ public final class CircularBuffer {
                         if (file2.length() == 0) {
                             file2.delete();
                         } else {
-                            PartialFileNode partialFileNode = new PartialFileNode(file2, this.mPackageName);
+                            PartialFileNode partialFileNode =
+                                    new PartialFileNode(file2, this.mPackageName);
                             partialFileNode.mWasWritten = true;
                             try {
                                 FileInputStream fileInputStream = new FileInputStream(file2);
@@ -161,7 +173,8 @@ public final class CircularBuffer {
                             }
                             this.mDumpList.add(partialFileNode);
                             if (i3 > this.mNumberOfDeprecatedFiles) {
-                                this.mCircularBufferSize = partialFileNode.getFileSize() + this.mCircularBufferSize;
+                                this.mCircularBufferSize =
+                                        partialFileNode.getFileSize() + this.mCircularBufferSize;
                             } else {
                                 synchronized (partialFileNode) {
                                     if (!partialFileNode.mMarkAsDeprecated) {
@@ -174,7 +187,8 @@ public final class CircularBuffer {
                     i3++;
                 }
                 for (File file3 : dirListByAscendingDate) {
-                    this.mTotalDirectoryOccupation = file3.length() + this.mTotalDirectoryOccupation;
+                    this.mTotalDirectoryOccupation =
+                            file3.length() + this.mTotalDirectoryOccupation;
                 }
                 resizeBubbleFile(this.mBufferLimitSize - this.mTotalDirectoryOccupation);
             }
@@ -233,38 +247,72 @@ public final class CircularBuffer {
             if (f < this.mAdminCriticalSize) {
                 this.mCriticalIntent = false;
             } else if (!this.mCriticalIntent) {
-                Intent intent = new Intent("com.samsung.android.knox.intent.action.AUDIT_CRITICAL_SIZE");
+                Intent intent =
+                        new Intent("com.samsung.android.knox.intent.action.AUDIT_CRITICAL_SIZE");
                 intent.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mUid);
                 intent.setPackage(this.mPackageName);
                 long clearCallingIdentity = Binder.clearCallingIdentity();
-                this.mContext.sendBroadcastAsUser(intent, new UserHandle(getTargetUserId()), "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+                this.mContext.sendBroadcastAsUser(
+                        intent,
+                        new UserHandle(getTargetUserId()),
+                        "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
                 try {
-                    String kpuPackageName = KpuHelper.getInstance(this.mContext).getKpuPackageName();
-                    Intent intent2 = new Intent("com.samsung.android.knox.intent.action.AUDIT_CRITICAL_SIZE");
-                    intent2.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mContext.getPackageManager().getPackageUidAsUser(kpuPackageName, UserHandle.getCallingUserId()));
+                    String kpuPackageName =
+                            KpuHelper.getInstance(this.mContext).getKpuPackageName();
+                    Intent intent2 =
+                            new Intent(
+                                    "com.samsung.android.knox.intent.action.AUDIT_CRITICAL_SIZE");
+                    intent2.putExtra(
+                            "com.samsung.android.knox.intent.extra.ADMIN_UID",
+                            this.mContext
+                                    .getPackageManager()
+                                    .getPackageUidAsUser(
+                                            kpuPackageName, UserHandle.getCallingUserId()));
                     intent2.setPackage(kpuPackageName);
-                    this.mContext.sendBroadcast(intent2, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+                    this.mContext.sendBroadcast(
+                            intent2, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 this.mCriticalIntent = true;
-                AuditLog.logAsUser(4, 2, true, Process.myPid(), "CircularBuffer", String.format("AuditLog has reached its critical size. Percentage is %.2f", Float.valueOf(this.mAdminCriticalSize)), UserHandle.getUserId(this.mUid));
+                AuditLog.logAsUser(
+                        4,
+                        2,
+                        true,
+                        Process.myPid(),
+                        "CircularBuffer",
+                        String.format(
+                                "AuditLog has reached its critical size. Percentage is %.2f",
+                                Float.valueOf(this.mAdminCriticalSize)),
+                        UserHandle.getUserId(this.mUid));
             }
             if (f < this.mAdminMaximumSize) {
                 this.mMaximumIntent = false;
             } else if (!this.mMaximumIntent) {
-                Intent intent3 = new Intent("com.samsung.android.knox.intent.action.AUDIT_MAXIMUM_SIZE");
+                Intent intent3 =
+                        new Intent("com.samsung.android.knox.intent.action.AUDIT_MAXIMUM_SIZE");
                 intent3.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mUid);
                 intent3.setPackage(this.mPackageName);
                 long clearCallingIdentity2 = Binder.clearCallingIdentity();
-                this.mContext.sendBroadcastAsUser(intent3, new UserHandle(getTargetUserId()), "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+                this.mContext.sendBroadcastAsUser(
+                        intent3,
+                        new UserHandle(getTargetUserId()),
+                        "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
                 try {
-                    String kpuPackageName2 = KpuHelper.getInstance(this.mContext).getKpuPackageName();
-                    Intent intent4 = new Intent("com.samsung.android.knox.intent.action.AUDIT_MAXIMUM_SIZE");
-                    intent4.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mContext.getPackageManager().getPackageUidAsUser(kpuPackageName2, UserHandle.getCallingUserId()));
+                    String kpuPackageName2 =
+                            KpuHelper.getInstance(this.mContext).getKpuPackageName();
+                    Intent intent4 =
+                            new Intent("com.samsung.android.knox.intent.action.AUDIT_MAXIMUM_SIZE");
+                    intent4.putExtra(
+                            "com.samsung.android.knox.intent.extra.ADMIN_UID",
+                            this.mContext
+                                    .getPackageManager()
+                                    .getPackageUidAsUser(
+                                            kpuPackageName2, UserHandle.getCallingUserId()));
                     intent4.setPackage(kpuPackageName2);
-                    this.mContext.sendBroadcast(intent4, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+                    this.mContext.sendBroadcast(
+                            intent4, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
                 } catch (Exception e2) {
                     e2.printStackTrace();
                 }
@@ -274,23 +322,36 @@ public final class CircularBuffer {
             if (f < this.mFullBuffer) {
                 this.mFullIntent = false;
             } else if (!this.mFullIntent) {
-                Intent intent5 = new Intent("com.samsung.android.knox.intent.action.AUDIT_FULL_SIZE");
+                Intent intent5 =
+                        new Intent("com.samsung.android.knox.intent.action.AUDIT_FULL_SIZE");
                 intent5.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mUid);
                 intent5.setPackage(this.mPackageName);
                 long clearCallingIdentity3 = Binder.clearCallingIdentity();
-                this.mContext.sendBroadcastAsUser(intent5, new UserHandle(getTargetUserId()), "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+                this.mContext.sendBroadcastAsUser(
+                        intent5,
+                        new UserHandle(getTargetUserId()),
+                        "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
                 try {
-                    String kpuPackageName3 = KpuHelper.getInstance(this.mContext).getKpuPackageName();
-                    Intent intent6 = new Intent("com.samsung.android.knox.intent.action.AUDIT_FULL_SIZE");
-                    intent6.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mContext.getPackageManager().getPackageUidAsUser(kpuPackageName3, UserHandle.getCallingUserId()));
+                    String kpuPackageName3 =
+                            KpuHelper.getInstance(this.mContext).getKpuPackageName();
+                    Intent intent6 =
+                            new Intent("com.samsung.android.knox.intent.action.AUDIT_FULL_SIZE");
+                    intent6.putExtra(
+                            "com.samsung.android.knox.intent.extra.ADMIN_UID",
+                            this.mContext
+                                    .getPackageManager()
+                                    .getPackageUidAsUser(
+                                            kpuPackageName3, UserHandle.getCallingUserId()));
                     intent6.setPackage(kpuPackageName3);
-                    this.mContext.sendBroadcast(intent6, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+                    this.mContext.sendBroadcast(
+                            intent6, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
                 } catch (Exception e3) {
                     e3.printStackTrace();
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity3);
                 this.mFullIntent = true;
-                InformFailure.getInstance().broadcastFailure("Full Size Reached!", this.mPackageName);
+                InformFailure.getInstance()
+                        .broadcastFailure("Full Size Reached!", this.mPackageName);
             }
         }
         if (!this.mIsDumping && this.mDumpList.size() > totalNumberFiles()) {
@@ -304,11 +365,13 @@ public final class CircularBuffer {
                             this.mNumberOfDeprecatedFiles = i - 1;
                             ContentValues contentValues = new ContentValues();
                             contentValues.put("auditNumberOfDepFiles", Integer.valueOf(i));
-                            this.mEdmStorageProvider.putValues(this.mUid, 0, "AUDITLOG", contentValues);
+                            this.mEdmStorageProvider.putValues(
+                                    this.mUid, 0, "AUDITLOG", contentValues);
                         } else {
                             this.mCircularBufferSize -= partialFileNode.getFileSize();
                         }
-                        long fileSize = this.mTotalDirectoryOccupation - partialFileNode.getFileSize();
+                        long fileSize =
+                                this.mTotalDirectoryOccupation - partialFileNode.getFileSize();
                         this.mTotalDirectoryOccupation = fileSize;
                         resizeBubbleFile(this.mBufferLimitSize - fileSize);
                         partialFileNode.delete();
@@ -339,7 +402,10 @@ public final class CircularBuffer {
     }
 
     public final void createBubbleDir() {
-        File file = new File(AmFmBandRange$$ExternalSyntheticOutline0.m(this.mUid, new StringBuilder("/data/system/"), "_bubble"));
+        File file =
+                new File(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                this.mUid, new StringBuilder("/data/system/"), "_bubble"));
         if (file.exists()) {
             return;
         }
@@ -347,12 +413,12 @@ public final class CircularBuffer {
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:34:0x004d
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:34:0x004d
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v0 */
     /* JADX WARN: Type inference failed for: r2v4, types: [java.io.RandomAccessFile] */
@@ -443,13 +509,18 @@ public final class CircularBuffer {
         L6e:
             throw r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.CircularBuffer.formatIfEmptyOrCorrupted(java.io.File):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.auditlog.CircularBuffer.formatIfEmptyOrCorrupted(java.io.File):void");
     }
 
     public final long getBufferLogSize() {
         ContentValues contentValues = new ContentValues();
         contentValues.put("adminUid", Integer.valueOf(this.mUid));
-        ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getLongList(contentValues, "AUDITLOG", "auditLogBufferSize");
+        ArrayList arrayList =
+                (ArrayList)
+                        this.mEdmStorageProvider.getLongList(
+                                contentValues, "AUDITLOG", "auditLogBufferSize");
         if (arrayList.size() > 0) {
             return ((Long) arrayList.get(0)).longValue();
         }
@@ -462,8 +533,11 @@ public final class CircularBuffer {
             return userId;
         }
         int i = EnterpriseDeviceManagerService.$r8$clinit;
-        EnterpriseDeviceManagerService enterpriseDeviceManagerService = (EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance;
-        return enterpriseDeviceManagerService != null ? enterpriseDeviceManagerService.getOrganizationOwnedProfileUserId() : userId;
+        EnterpriseDeviceManagerService enterpriseDeviceManagerService =
+                (EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance;
+        return enterpriseDeviceManagerService != null
+                ? enterpriseDeviceManagerService.getOrganizationOwnedProfileUserId()
+                : userId;
     }
 
     public final void markDeprecatedFiles() {
@@ -488,7 +562,8 @@ public final class CircularBuffer {
                             }
                         }
                         this.mNumberOfDeprecatedFiles++;
-                    } else if (this.mLastDumpedFile != null && partialFileNode.mFile.getName().equals(this.mLastDumpedFile)) {
+                    } else if (this.mLastDumpedFile != null
+                            && partialFileNode.mFile.getName().equals(this.mLastDumpedFile)) {
                         this.mLastDumpedFile = null;
                         listIterator.next();
                         z = true;
@@ -505,12 +580,12 @@ public final class CircularBuffer {
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:20:0x004b
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:20:0x004b
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v11 */
     /* JADX WARN: Type inference failed for: r2v12 */
@@ -612,7 +687,9 @@ public final class CircularBuffer {
         L81:
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.CircularBuffer.resizeBubbleFile(long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.auditlog.CircularBuffer.resizeBubbleFile(long):void");
     }
 
     public final long totalNumberFiles() {

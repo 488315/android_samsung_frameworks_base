@@ -83,7 +83,9 @@ public class ScrollingMovementMethod extends BaseMovementMethod implements Movem
         if (layout != null && (dir & 1) != 0) {
             int padding = widget.getTotalPaddingTop() + widget.getTotalPaddingBottom();
             int line = layout.getLineCount() - 1;
-            widget.scrollTo(widget.getScrollX(), layout.getLineTop(line + 1) - (widget.getHeight() - padding));
+            widget.scrollTo(
+                    widget.getScrollX(),
+                    layout.getLineTop(line + 1) - (widget.getHeight() - padding));
         }
     }
 

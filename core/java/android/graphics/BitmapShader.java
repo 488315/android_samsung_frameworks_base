@@ -1,7 +1,7 @@
 package android.graphics;
 
-import android.graphics.Shader;
 import com.android.graphics.hwui.flags.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -21,10 +21,10 @@ public class BitmapShader extends Shader {
     private int mTileY;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FilterMode {
-    }
+    public @interface FilterMode {}
 
-    private static native long nativeCreate(long j, long j2, int i, int i2, int i3, boolean z, boolean z2, long j3);
+    private static native long nativeCreate(
+            long j, long j2, int i, int i2, int i3, boolean z, boolean z2, long j3);
 
     public BitmapShader(Bitmap bitmap, Shader.TileMode tileX, Shader.TileMode tileY) {
         this(bitmap, tileX.nativeInt, tileY.nativeInt);
@@ -72,7 +72,8 @@ public class BitmapShader extends Shader {
         if (overrideGainmap == null) {
             this.mOverrideGainmap = null;
         } else {
-            this.mOverrideGainmap = new Gainmap(overrideGainmap, overrideGainmap.getGainmapContents());
+            this.mOverrideGainmap =
+                    new Gainmap(overrideGainmap, overrideGainmap.getGainmapContents());
         }
         discardNativeInstance();
     }
@@ -96,11 +97,20 @@ public class BitmapShader extends Shader {
         }
         this.mIsDirectSampled = this.mRequestDirectSampling;
         this.mRequestDirectSampling = false;
-        return nativeCreate(nativeMatrix, this.mBitmap.getNativeInstance(), this.mTileX, this.mTileY, this.mMaxAniso, enableLinearFilter, this.mIsDirectSampled, this.mOverrideGainmap != null ? this.mOverrideGainmap.mNativePtr : 0L);
+        return nativeCreate(
+                nativeMatrix,
+                this.mBitmap.getNativeInstance(),
+                this.mTileX,
+                this.mTileY,
+                this.mMaxAniso,
+                enableLinearFilter,
+                this.mIsDirectSampled,
+                this.mOverrideGainmap != null ? this.mOverrideGainmap.mNativePtr : 0L);
     }
 
     @Override // android.graphics.Shader
     protected boolean shouldDiscardNativeInstance(boolean filterFromPaint) {
-        return this.mIsDirectSampled != this.mRequestDirectSampling || (this.mFilterMode == 0 && this.mFilterFromPaint != filterFromPaint);
+        return this.mIsDirectSampled != this.mRequestDirectSampling
+                || (this.mFilterMode == 0 && this.mFilterFromPaint != filterFromPaint);
     }
 }

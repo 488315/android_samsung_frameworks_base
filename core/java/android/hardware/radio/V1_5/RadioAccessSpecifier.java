@@ -4,6 +4,7 @@ import android.media.MediaMetrics;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -43,8 +44,7 @@ public final class RadioAccessSpecifier {
                 }
             }
 
-            private hidl_discriminator() {
-            }
+            private hidl_discriminator() {}
         }
 
         public void geranBands(ArrayList<Integer> geranBands) {
@@ -55,7 +55,15 @@ public final class RadioAccessSpecifier {
         public ArrayList<Integer> geranBands() {
             if (this.hidl_d != 0) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !ArrayList.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -71,7 +79,15 @@ public final class RadioAccessSpecifier {
         public ArrayList<Integer> utranBands() {
             if (this.hidl_d != 1) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !ArrayList.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -87,7 +103,15 @@ public final class RadioAccessSpecifier {
         public ArrayList<Integer> eutranBands() {
             if (this.hidl_d != 2) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !ArrayList.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -103,7 +127,15 @@ public final class RadioAccessSpecifier {
         public ArrayList<Integer> ngranBands() {
             if (this.hidl_d != 3) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !ArrayList.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -130,7 +162,9 @@ public final class RadioAccessSpecifier {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                    Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
         }
 
         public final String toString() {
@@ -154,7 +188,8 @@ public final class RadioAccessSpecifier {
                     builder.append(ngranBands());
                     break;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
             builder.append("}");
             return builder.toString();
@@ -169,7 +204,8 @@ public final class RadioAccessSpecifier {
             ArrayList<Bands> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 Bands _hidl_vec_element = new Bands();
@@ -179,13 +215,19 @@ public final class RadioAccessSpecifier {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.hidl_d = _hidl_blob.getInt8(_hidl_offset + 0);
             switch (this.hidl_d) {
                 case 0:
                     this.hidl_o = new ArrayList();
                     int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 8 + 8);
-                    HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 4, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
+                    HwBlob childBlob =
+                            parcel.readEmbeddedBuffer(
+                                    _hidl_vec_size * 4,
+                                    _hidl_blob.handle(),
+                                    _hidl_offset + 8 + 0,
+                                    true);
                     ((ArrayList) this.hidl_o).clear();
                     for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                         int _hidl_vec_element = childBlob.getInt32(_hidl_index_0 * 4);
@@ -195,9 +237,16 @@ public final class RadioAccessSpecifier {
                 case 1:
                     this.hidl_o = new ArrayList();
                     int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 8 + 8);
-                    HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 4, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
+                    HwBlob childBlob2 =
+                            parcel.readEmbeddedBuffer(
+                                    _hidl_vec_size2 * 4,
+                                    _hidl_blob.handle(),
+                                    _hidl_offset + 8 + 0,
+                                    true);
                     ((ArrayList) this.hidl_o).clear();
-                    for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
+                    for (int _hidl_index_02 = 0;
+                            _hidl_index_02 < _hidl_vec_size2;
+                            _hidl_index_02++) {
                         int _hidl_vec_element2 = childBlob2.getInt32(_hidl_index_02 * 4);
                         ((ArrayList) this.hidl_o).add(Integer.valueOf(_hidl_vec_element2));
                     }
@@ -205,9 +254,16 @@ public final class RadioAccessSpecifier {
                 case 2:
                     this.hidl_o = new ArrayList();
                     int _hidl_vec_size3 = _hidl_blob.getInt32(_hidl_offset + 8 + 8);
-                    HwBlob childBlob3 = parcel.readEmbeddedBuffer(_hidl_vec_size3 * 4, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
+                    HwBlob childBlob3 =
+                            parcel.readEmbeddedBuffer(
+                                    _hidl_vec_size3 * 4,
+                                    _hidl_blob.handle(),
+                                    _hidl_offset + 8 + 0,
+                                    true);
                     ((ArrayList) this.hidl_o).clear();
-                    for (int _hidl_index_03 = 0; _hidl_index_03 < _hidl_vec_size3; _hidl_index_03++) {
+                    for (int _hidl_index_03 = 0;
+                            _hidl_index_03 < _hidl_vec_size3;
+                            _hidl_index_03++) {
                         int _hidl_vec_element3 = childBlob3.getInt32(_hidl_index_03 * 4);
                         ((ArrayList) this.hidl_o).add(Integer.valueOf(_hidl_vec_element3));
                     }
@@ -215,15 +271,23 @@ public final class RadioAccessSpecifier {
                 case 3:
                     this.hidl_o = new ArrayList();
                     int _hidl_vec_size4 = _hidl_blob.getInt32(_hidl_offset + 8 + 8);
-                    HwBlob childBlob4 = parcel.readEmbeddedBuffer(_hidl_vec_size4 * 4, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
+                    HwBlob childBlob4 =
+                            parcel.readEmbeddedBuffer(
+                                    _hidl_vec_size4 * 4,
+                                    _hidl_blob.handle(),
+                                    _hidl_offset + 8 + 0,
+                                    true);
                     ((ArrayList) this.hidl_o).clear();
-                    for (int _hidl_index_04 = 0; _hidl_index_04 < _hidl_vec_size4; _hidl_index_04++) {
+                    for (int _hidl_index_04 = 0;
+                            _hidl_index_04 < _hidl_vec_size4;
+                            _hidl_index_04++) {
                         int _hidl_vec_element4 = childBlob4.getInt32(_hidl_index_04 * 4);
                         ((ArrayList) this.hidl_o).add(Integer.valueOf(_hidl_vec_element4));
                     }
                     return;
                 default:
-                    throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new IllegalStateException(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
 
@@ -255,7 +319,8 @@ public final class RadioAccessSpecifier {
                     _hidl_blob.putBool(_hidl_offset + 8 + 12, false);
                     HwBlob childBlob = new HwBlob(_hidl_vec_size * 4);
                     for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
-                        childBlob.putInt32(_hidl_index_0 * 4, geranBands().get(_hidl_index_0).intValue());
+                        childBlob.putInt32(
+                                _hidl_index_0 * 4, geranBands().get(_hidl_index_0).intValue());
                     }
                     _hidl_blob.putBlob(8 + _hidl_offset + 0, childBlob);
                     return;
@@ -264,8 +329,11 @@ public final class RadioAccessSpecifier {
                     _hidl_blob.putInt32(_hidl_offset + 8 + 8, _hidl_vec_size2);
                     _hidl_blob.putBool(_hidl_offset + 8 + 12, false);
                     HwBlob childBlob2 = new HwBlob(_hidl_vec_size2 * 4);
-                    for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
-                        childBlob2.putInt32(_hidl_index_02 * 4, utranBands().get(_hidl_index_02).intValue());
+                    for (int _hidl_index_02 = 0;
+                            _hidl_index_02 < _hidl_vec_size2;
+                            _hidl_index_02++) {
+                        childBlob2.putInt32(
+                                _hidl_index_02 * 4, utranBands().get(_hidl_index_02).intValue());
                     }
                     _hidl_blob.putBlob(8 + _hidl_offset + 0, childBlob2);
                     return;
@@ -274,8 +342,11 @@ public final class RadioAccessSpecifier {
                     _hidl_blob.putInt32(_hidl_offset + 8 + 8, _hidl_vec_size3);
                     _hidl_blob.putBool(_hidl_offset + 8 + 12, false);
                     HwBlob childBlob3 = new HwBlob(_hidl_vec_size3 * 4);
-                    for (int _hidl_index_03 = 0; _hidl_index_03 < _hidl_vec_size3; _hidl_index_03++) {
-                        childBlob3.putInt32(_hidl_index_03 * 4, eutranBands().get(_hidl_index_03).intValue());
+                    for (int _hidl_index_03 = 0;
+                            _hidl_index_03 < _hidl_vec_size3;
+                            _hidl_index_03++) {
+                        childBlob3.putInt32(
+                                _hidl_index_03 * 4, eutranBands().get(_hidl_index_03).intValue());
                     }
                     _hidl_blob.putBlob(8 + _hidl_offset + 0, childBlob3);
                     return;
@@ -284,13 +355,17 @@ public final class RadioAccessSpecifier {
                     _hidl_blob.putInt32(_hidl_offset + 8 + 8, _hidl_vec_size4);
                     _hidl_blob.putBool(_hidl_offset + 8 + 12, false);
                     HwBlob childBlob4 = new HwBlob(_hidl_vec_size4 * 4);
-                    for (int _hidl_index_04 = 0; _hidl_index_04 < _hidl_vec_size4; _hidl_index_04++) {
-                        childBlob4.putInt32(_hidl_index_04 * 4, ngranBands().get(_hidl_index_04).intValue());
+                    for (int _hidl_index_04 = 0;
+                            _hidl_index_04 < _hidl_vec_size4;
+                            _hidl_index_04++) {
+                        childBlob4.putInt32(
+                                _hidl_index_04 * 4, ngranBands().get(_hidl_index_04).intValue());
                     }
                     _hidl_blob.putBlob(8 + _hidl_offset + 0, childBlob4);
                     return;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
     }
@@ -303,18 +378,29 @@ public final class RadioAccessSpecifier {
             return false;
         }
         RadioAccessSpecifier other = (RadioAccessSpecifier) otherObject;
-        if (this.radioAccessNetwork == other.radioAccessNetwork && HidlSupport.deepEquals(this.bands, other.bands) && HidlSupport.deepEquals(this.channels, other.channels)) {
+        if (this.radioAccessNetwork == other.radioAccessNetwork
+                && HidlSupport.deepEquals(this.bands, other.bands)
+                && HidlSupport.deepEquals(this.channels, other.channels)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.radioAccessNetwork))), Integer.valueOf(HidlSupport.deepHashCode(this.bands)), Integer.valueOf(HidlSupport.deepHashCode(this.channels)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.radioAccessNetwork))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.bands)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.channels)));
     }
 
     public final String toString() {
-        return "{.radioAccessNetwork = " + RadioAccessNetworks.toString(this.radioAccessNetwork) + ", .bands = " + this.bands + ", .channels = " + this.channels + "}";
+        return "{.radioAccessNetwork = "
+                + RadioAccessNetworks.toString(this.radioAccessNetwork)
+                + ", .bands = "
+                + this.bands
+                + ", .channels = "
+                + this.channels
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -326,7 +412,8 @@ public final class RadioAccessSpecifier {
         ArrayList<RadioAccessSpecifier> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             RadioAccessSpecifier _hidl_vec_element = new RadioAccessSpecifier();
@@ -336,11 +423,14 @@ public final class RadioAccessSpecifier {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.radioAccessNetwork = _hidl_blob.getInt32(_hidl_offset + 0);
         this.bands.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 8);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 32 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 4, _hidl_blob.handle(), 0 + _hidl_offset + 32, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 4, _hidl_blob.handle(), 0 + _hidl_offset + 32, true);
         this.channels.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             int _hidl_vec_element = childBlob.getInt32(_hidl_index_0 * 4);
@@ -354,7 +444,8 @@ public final class RadioAccessSpecifier {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<RadioAccessSpecifier> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<RadioAccessSpecifier> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

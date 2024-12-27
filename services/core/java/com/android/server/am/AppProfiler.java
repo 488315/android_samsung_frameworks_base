@@ -25,11 +25,11 @@ import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.app.ProcessMap;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.os.ProcessCpuTracker;
 import com.android.internal.util.DumpUtils;
-import com.android.server.am.ProcessList;
 import com.android.server.chimera.ChimeraManagerService;
 import com.android.server.chimera.umr.UnifiedMemoryReclaimer;
 import com.android.server.clipboard.ClipboardService;
@@ -39,6 +39,7 @@ import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
 import com.android.server.wm.WindowProcessController;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -142,7 +143,8 @@ public final class AppProfiler {
                     synchronized (appProfiler.mProfilerLock) {
                         if (appProfiler.mPendingPssOrRssProfiles.size() > 0) {
                             appProfiler.mBgHandler.removeMessages(1);
-                            appProfiler.mBgHandler.sendEmptyMessageDelayed(1, appProfiler.mPssDeferralTime);
+                            appProfiler.mBgHandler.sendEmptyMessageDelayed(
+                                    1, appProfiler.mPssDeferralTime);
                         }
                     }
                     appProfiler.mActivityStartingNesting.getAndIncrement();
@@ -173,10 +175,13 @@ public final class AppProfiler {
                     int i3 = message.arg2;
                     ActiveServices activeServices = appProfiler3.mService.mServices;
                     long uptimeMillis = SystemClock.uptimeMillis();
-                    ActivityManagerConstants activityManagerConstants = activeServices.mAm.mConstants;
+                    ActivityManagerConstants activityManagerConstants =
+                            activeServices.mAm.mConstants;
                     if (activityManagerConstants.mEnableExtraServiceRestartDelayOnMemPressure) {
-                        long[] jArr = activityManagerConstants.mExtraServiceRestartDelayOnMemPressure;
-                        activeServices.performRescheduleServiceRestartOnMemoryPressureLocked(jArr[i2], jArr[i3], uptimeMillis, "mem-pressure-event");
+                        long[] jArr =
+                                activityManagerConstants.mExtraServiceRestartDelayOnMemPressure;
+                        activeServices.performRescheduleServiceRestartOnMemoryPressureLocked(
+                                jArr[i2], jArr[i3], uptimeMillis, "mem-pressure-event");
                     }
                 } catch (Throwable th) {
                     ActivityManagerService.resetPriorityAfterLockedSection();
@@ -206,8 +211,7 @@ public final class AppProfiler {
         public int mUptimeInSeconds;
         public int mZramInKb;
 
-        public CachedAppsWatermarkData() {
-        }
+        public CachedAppsWatermarkData() {}
 
         /* JADX WARN: Removed duplicated region for block: B:11:0x004d A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:4:0x0008, B:6:0x0023, B:9:0x003a, B:11:0x004d, B:12:0x0072, B:14:0x007a, B:16:0x0080, B:18:0x0092, B:20:0x009b, B:23:0x009e, B:24:0x00c2, B:29:0x002a), top: B:3:0x0008 }] */
         /* JADX WARN: Removed duplicated region for block: B:14:0x007a A[Catch: all -> 0x0027, TryCatch #0 {all -> 0x0027, blocks: (B:4:0x0008, B:6:0x0023, B:9:0x003a, B:11:0x004d, B:12:0x0072, B:14:0x007a, B:16:0x0080, B:18:0x0092, B:20:0x009b, B:23:0x009e, B:24:0x00c2, B:29:0x002a), top: B:3:0x0008 }] */
@@ -327,45 +331,60 @@ public final class AppProfiler {
                 com.android.server.am.ActivityManagerService.resetPriorityAfterProcLockedSection()
                 throw r7
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppProfiler.CachedAppsWatermarkData.updateCachedAppsSnapshot(long):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.AppProfiler.CachedAppsWatermarkData.updateCachedAppsSnapshot(long):void");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CpuBinder extends Binder {
-        public final AnonymousClass1 mPriorityDumper = new PriorityDump.PriorityDumper() { // from class: com.android.server.am.AppProfiler.CpuBinder.1
-            @Override // com.android.server.utils.PriorityDump.PriorityDumper
-            public final void dumpCritical(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, boolean z) {
-                if (DumpUtils.checkDumpAndUsageStatsPermission(AppProfiler.this.mService.mContext, "cpuinfo", printWriter)) {
-                    synchronized (AppProfiler.this.mProcessCpuTracker) {
-                        try {
-                            if (z) {
-                                AppProfiler.this.mProcessCpuTracker.dumpProto(fileDescriptor);
-                            } else {
-                                printWriter.print(AppProfiler.this.mProcessCpuTracker.printCurrentLoad());
-                                printWriter.print(AppProfiler.this.mProcessCpuTracker.printCurrentState(SystemClock.uptimeMillis()));
+        public final AnonymousClass1 mPriorityDumper =
+                new PriorityDump
+                        .PriorityDumper() { // from class:
+                                            // com.android.server.am.AppProfiler.CpuBinder.1
+                    @Override // com.android.server.utils.PriorityDump.PriorityDumper
+                    public final void dumpCritical(
+                            FileDescriptor fileDescriptor,
+                            PrintWriter printWriter,
+                            String[] strArr,
+                            boolean z) {
+                        if (DumpUtils.checkDumpAndUsageStatsPermission(
+                                AppProfiler.this.mService.mContext, "cpuinfo", printWriter)) {
+                            synchronized (AppProfiler.this.mProcessCpuTracker) {
+                                try {
+                                    if (z) {
+                                        AppProfiler.this.mProcessCpuTracker.dumpProto(
+                                                fileDescriptor);
+                                    } else {
+                                        printWriter.print(
+                                                AppProfiler.this.mProcessCpuTracker
+                                                        .printCurrentLoad());
+                                        printWriter.print(
+                                                AppProfiler.this.mProcessCpuTracker
+                                                        .printCurrentState(
+                                                                SystemClock.uptimeMillis()));
+                                    }
+                                } catch (Throwable th) {
+                                    throw th;
+                                }
                             }
-                        } catch (Throwable th) {
-                            throw th;
                         }
                     }
-                }
-            }
-        };
+                };
 
         /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.am.AppProfiler$CpuBinder$1] */
-        public CpuBinder() {
-        }
+        public CpuBinder() {}
 
         @Override // android.os.Binder
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
             PriorityDump.dump(this.mPriorityDumper, fileDescriptor, printWriter, strArr);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class OnTrimReclaimer extends UnifiedMemoryReclaimer.Reclaimer {
-    }
+    public final class OnTrimReclaimer extends UnifiedMemoryReclaimer.Reclaimer {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessCpuThread extends Thread {
@@ -385,8 +404,11 @@ public final class AppProfiler {
                         synchronized (this) {
                             try {
                                 long uptimeMillis = SystemClock.uptimeMillis();
-                                long j = (AppProfiler.this.mLastCpuTime.get() + 268435455) - uptimeMillis;
-                                long j2 = (AppProfiler.this.mLastWriteTime + 1800000) - uptimeMillis;
+                                long j =
+                                        (AppProfiler.this.mLastCpuTime.get() + 268435455)
+                                                - uptimeMillis;
+                                long j2 =
+                                        (AppProfiler.this.mLastWriteTime + 1800000) - uptimeMillis;
                                 if (j2 < j) {
                                     j = j2;
                                 }
@@ -414,15 +436,17 @@ public final class AppProfiler {
         public ProcessRecord mProfileProc = null;
         public ProfilerInfo mProfilerInfo = null;
 
-        public ProfileData() {
-        }
+        public ProfileData() {}
 
         public final void setProfileApp(String str) {
             this.mProfileApp = str;
-            ActivityTaskManagerInternal activityTaskManagerInternal = AppProfiler.this.mService.mAtmInternal;
+            ActivityTaskManagerInternal activityTaskManagerInternal =
+                    AppProfiler.this.mService.mAtmInternal;
             if (activityTaskManagerInternal != null) {
-                ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
-                WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+                ActivityTaskManagerService.LocalService localService =
+                        (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        ActivityTaskManagerService.this.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
@@ -438,11 +462,15 @@ public final class AppProfiler {
 
         public final void setProfileProc(ProcessRecord processRecord) {
             this.mProfileProc = processRecord;
-            ActivityTaskManagerInternal activityTaskManagerInternal = AppProfiler.this.mService.mAtmInternal;
+            ActivityTaskManagerInternal activityTaskManagerInternal =
+                    AppProfiler.this.mService.mAtmInternal;
             if (activityTaskManagerInternal != null) {
-                WindowProcessController windowProcessController = processRecord == null ? null : processRecord.mWindowProcessController;
-                ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
-                WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+                WindowProcessController windowProcessController =
+                        processRecord == null ? null : processRecord.mWindowProcessController;
+                ActivityTaskManagerService.LocalService localService =
+                        (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        ActivityTaskManagerService.this.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
@@ -458,10 +486,13 @@ public final class AppProfiler {
 
         public final void setProfilerInfo(ProfilerInfo profilerInfo) {
             this.mProfilerInfo = profilerInfo;
-            ActivityTaskManagerInternal activityTaskManagerInternal = AppProfiler.this.mService.mAtmInternal;
+            ActivityTaskManagerInternal activityTaskManagerInternal =
+                    AppProfiler.this.mService.mAtmInternal;
             if (activityTaskManagerInternal != null) {
-                ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
-                WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+                ActivityTaskManagerService.LocalService localService =
+                        (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        ActivityTaskManagerService.this.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
@@ -482,7 +513,10 @@ public final class AppProfiler {
         public final Uri mDumpUri;
         public final ProcessProfileRecord mProfile;
 
-        public RecordPssRunnable(ProcessProfileRecord processProfileRecord, Uri uri, ContentResolver contentResolver) {
+        public RecordPssRunnable(
+                ProcessProfileRecord processProfileRecord,
+                Uri uri,
+                ContentResolver contentResolver) {
             this.mProfile = processProfileRecord;
             this.mDumpUri = uri;
             this.mContentResolver = contentResolver;
@@ -491,12 +525,20 @@ public final class AppProfiler {
         @Override // java.lang.Runnable
         public final void run() {
             try {
-                ParcelFileDescriptor openFileDescriptor = this.mContentResolver.openFileDescriptor(this.mDumpUri, "rw");
+                ParcelFileDescriptor openFileDescriptor =
+                        this.mContentResolver.openFileDescriptor(this.mDumpUri, "rw");
                 try {
                     IApplicationThread iApplicationThread = this.mProfile.mThread;
                     if (iApplicationThread != null) {
                         try {
-                            iApplicationThread.dumpHeap(true, false, false, (String) null, this.mDumpUri.getPath(), openFileDescriptor, (RemoteCallback) null);
+                            iApplicationThread.dumpHeap(
+                                    true,
+                                    false,
+                                    false,
+                                    (String) null,
+                                    this.mDumpUri.getPath(),
+                                    openFileDescriptor,
+                                    (RemoteCallback) null);
                         } catch (RemoteException unused) {
                         }
                     }
@@ -518,9 +560,9 @@ public final class AppProfiler {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:74:0x0145, code lost:
-    
-        if (r15 == false) goto L80;
-     */
+
+       if (r15 == false) goto L80;
+    */
     /* JADX WARN: Removed duplicated region for block: B:79:0x0177  */
     /* JADX WARN: Removed duplicated region for block: B:86:0x0212  */
     /* JADX WARN: Removed duplicated region for block: B:98:0x025c A[SYNTHETIC] */
@@ -535,13 +577,15 @@ public final class AppProfiler {
             Method dump skipped, instructions count: 618
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppProfiler.m177$$Nest$mcollectPssInBackground(com.android.server.am.AppProfiler):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppProfiler.m177$$Nest$mcollectPssInBackground(com.android.server.am.AppProfiler):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:73:0x013f, code lost:
-    
-        if (r14 == false) goto L80;
-     */
+
+       if (r14 == false) goto L80;
+    */
     /* JADX WARN: Removed duplicated region for block: B:78:0x0171  */
     /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:111:? -> B:107:0x01b5). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mcollectRssInBackground, reason: not valid java name */
@@ -554,11 +598,16 @@ public final class AppProfiler {
             Method dump skipped, instructions count: 471
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppProfiler.m178$$Nest$mcollectRssInBackground(com.android.server.am.AppProfiler):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppProfiler.m178$$Nest$mcollectRssInBackground(com.android.server.am.AppProfiler):void");
     }
 
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.am.AppProfiler$1] */
-    public AppProfiler(ActivityManagerService activityManagerService, Looper looper, LowMemDetector lowMemDetector) {
+    public AppProfiler(
+            ActivityManagerService activityManagerService,
+            Looper looper,
+            LowMemDetector lowMemDetector) {
         SystemClock.uptimeMillis();
         this.mFullPssOrRssPending = false;
         this.mTestPssOrRssMode = false;
@@ -579,13 +628,17 @@ public final class AppProfiler {
         this.mLastWriteTime = 0L;
         this.mCachedAppsWatermarkData = new CachedAppsWatermarkData();
         this.mProfilerLock = new Object();
-        this.mPssDelayConfigListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.am.AppProfiler.1
-            public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                if (properties.getKeyset().contains("activity_start_pss_defer")) {
-                    AppProfiler.this.mPssDeferralTime = properties.getLong("activity_start_pss_defer", 0L);
-                }
-            }
-        };
+        this.mPssDelayConfigListener =
+                new DeviceConfig
+                        .OnPropertiesChangedListener() { // from class:
+                                                         // com.android.server.am.AppProfiler.1
+                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                        if (properties.getKeyset().contains("activity_start_pss_defer")) {
+                            AppProfiler.this.mPssDeferralTime =
+                                    properties.getLong("activity_start_pss_defer", 0L);
+                        }
+                    }
+                };
         this.mService = activityManagerService;
         this.mProcLock = activityManagerService.mProcLock;
         this.mBgHandler = new BgHandler(looper);
@@ -597,7 +650,8 @@ public final class AppProfiler {
 
     public final void addProcessToGcListLPf(ProcessRecord processRecord) {
         for (int size = this.mProcessesToGc.size() - 1; size >= 0; size--) {
-            if (((ProcessRecord) this.mProcessesToGc.get(size)).mProfile.mLastRequestedGc < processRecord.mProfile.mLastRequestedGc) {
+            if (((ProcessRecord) this.mProcessesToGc.get(size)).mProfile.mLastRequestedGc
+                    < processRecord.mProfile.mLastRequestedGc) {
                 this.mProcessesToGc.add(size + 1, processRecord);
                 return;
             }
@@ -644,72 +698,84 @@ public final class AppProfiler {
                 int size2 = this.mService.mProcessList.mLruProcesses.size();
                 final ArrayList arrayList = z ? new ArrayList(size2) : null;
                 EventLog.writeEvent(30017, size2);
-                this.mService.mProcessList.forEachLruProcessesLOSP(new Consumer() { // from class: com.android.server.am.AppProfiler$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        String sb;
-                        AppProfiler appProfiler = AppProfiler.this;
-                        ProcessRecord processRecord3 = processRecord;
-                        ArrayList arrayList2 = arrayList;
-                        long j = uptimeMillis;
-                        ProcessRecord processRecord4 = (ProcessRecord) obj;
-                        appProfiler.getClass();
-                        if (processRecord4 == processRecord3 || processRecord4.mThread == null) {
-                            return;
-                        }
-                        ProcessStateRecord processStateRecord = processRecord4.mState;
-                        if (arrayList2 != null) {
-                            String str = processRecord4.processName;
-                            int i = processRecord4.mPid;
-                            int i2 = processStateRecord.mSetAdj;
-                            int i3 = processStateRecord.mSetProcState;
-                            String str2 = processStateRecord.mAdjType;
-                            if (processStateRecord.mAdjSource == null && processStateRecord.mAdjTarget == null) {
-                                sb = null;
-                            } else {
-                                StringBuilder sb2 = new StringBuilder(128);
-                                sb2.append(' ');
-                                Object obj2 = processStateRecord.mAdjTarget;
-                                if (obj2 instanceof ComponentName) {
-                                    sb2.append(((ComponentName) obj2).flattenToShortString());
-                                } else if (obj2 != null) {
-                                    sb2.append(obj2.toString());
-                                } else {
-                                    sb2.append("{null}");
+                this.mService.mProcessList.forEachLruProcessesLOSP(
+                        new Consumer() { // from class:
+                                         // com.android.server.am.AppProfiler$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                String sb;
+                                AppProfiler appProfiler = AppProfiler.this;
+                                ProcessRecord processRecord3 = processRecord;
+                                ArrayList arrayList2 = arrayList;
+                                long j = uptimeMillis;
+                                ProcessRecord processRecord4 = (ProcessRecord) obj;
+                                appProfiler.getClass();
+                                if (processRecord4 == processRecord3
+                                        || processRecord4.mThread == null) {
+                                    return;
                                 }
-                                sb2.append("<=");
-                                Object obj3 = processStateRecord.mAdjSource;
-                                if (obj3 instanceof ProcessRecord) {
-                                    sb2.append("Proc{");
-                                    sb2.append(((ProcessRecord) processStateRecord.mAdjSource).toShortString());
-                                    sb2.append("}");
-                                } else if (obj3 != null) {
-                                    sb2.append(obj3.toString());
-                                } else {
-                                    sb2.append("{null}");
+                                ProcessStateRecord processStateRecord = processRecord4.mState;
+                                if (arrayList2 != null) {
+                                    String str = processRecord4.processName;
+                                    int i = processRecord4.mPid;
+                                    int i2 = processStateRecord.mSetAdj;
+                                    int i3 = processStateRecord.mSetProcState;
+                                    String str2 = processStateRecord.mAdjType;
+                                    if (processStateRecord.mAdjSource == null
+                                            && processStateRecord.mAdjTarget == null) {
+                                        sb = null;
+                                    } else {
+                                        StringBuilder sb2 = new StringBuilder(128);
+                                        sb2.append(' ');
+                                        Object obj2 = processStateRecord.mAdjTarget;
+                                        if (obj2 instanceof ComponentName) {
+                                            sb2.append(
+                                                    ((ComponentName) obj2).flattenToShortString());
+                                        } else if (obj2 != null) {
+                                            sb2.append(obj2.toString());
+                                        } else {
+                                            sb2.append("{null}");
+                                        }
+                                        sb2.append("<=");
+                                        Object obj3 = processStateRecord.mAdjSource;
+                                        if (obj3 instanceof ProcessRecord) {
+                                            sb2.append("Proc{");
+                                            sb2.append(
+                                                    ((ProcessRecord) processStateRecord.mAdjSource)
+                                                            .toShortString());
+                                            sb2.append("}");
+                                        } else if (obj3 != null) {
+                                            sb2.append(obj3.toString());
+                                        } else {
+                                            sb2.append("{null}");
+                                        }
+                                        sb = sb2.toString();
+                                    }
+                                    arrayList2.add(new ProcessMemInfo(i, i2, str, str2, sb, i3));
                                 }
-                                sb = sb2.toString();
+                                ProcessProfileRecord processProfileRecord = processRecord4.mProfile;
+                                if (processProfileRecord.mLastLowMemory
+                                                + appProfiler.mService.mConstants.GC_MIN_INTERVAL
+                                        <= j) {
+                                    synchronized (appProfiler.mProfilerLock) {
+                                        if (processStateRecord.mSetAdj <= 400) {
+                                            processProfileRecord.mLastRequestedGc = 0L;
+                                        } else {
+                                            processProfileRecord.mLastRequestedGc =
+                                                    processProfileRecord.mLastLowMemory;
+                                        }
+                                        processProfileRecord.mReportLowMemory = true;
+                                        processProfileRecord.mLastLowMemory = j;
+                                        appProfiler.mProcessesToGc.remove(processRecord4);
+                                        appProfiler.addProcessToGcListLPf(processRecord4);
+                                    }
+                                }
                             }
-                            arrayList2.add(new ProcessMemInfo(i, i2, str, str2, sb, i3));
-                        }
-                        ProcessProfileRecord processProfileRecord = processRecord4.mProfile;
-                        if (processProfileRecord.mLastLowMemory + appProfiler.mService.mConstants.GC_MIN_INTERVAL <= j) {
-                            synchronized (appProfiler.mProfilerLock) {
-                                if (processStateRecord.mSetAdj <= 400) {
-                                    processProfileRecord.mLastRequestedGc = 0L;
-                                } else {
-                                    processProfileRecord.mLastRequestedGc = processProfileRecord.mLastLowMemory;
-                                }
-                                processProfileRecord.mReportLowMemory = true;
-                                processProfileRecord.mLastLowMemory = j;
-                                appProfiler.mProcessesToGc.remove(processRecord4);
-                                appProfiler.addProcessToGcListLPf(processRecord4);
-                            }
-                        }
-                    }
-                }, false);
+                        },
+                        false);
                 if (z) {
-                    this.mService.mHandler.sendMessage(this.mService.mHandler.obtainMessage(33, arrayList));
+                    this.mService.mHandler.sendMessage(
+                            this.mService.mHandler.obtainMessage(33, arrayList));
                 }
             }
         }
@@ -876,7 +942,9 @@ public final class AppProfiler {
     }
 
     public final boolean isProfilingPss() {
-        return !com.android.internal.hidden_from_bootclasspath.android.os.Flags.removeAppProfilerPssCollection() || this.mService.mConstants.mForceEnablePssProfiling;
+        return !com.android.internal.hidden_from_bootclasspath.android.os.Flags
+                        .removeAppProfilerPssCollection()
+                || this.mService.mConstants.mForceEnablePssProfiling;
     }
 
     public final void performAppGcsIfAppropriateLocked() {
@@ -901,7 +969,8 @@ public final class AppProfiler {
             ProcessRecord processRecord = (ProcessRecord) this.mProcessesToGc.remove(0);
             ProcessProfileRecord processProfileRecord = processRecord.mProfile;
             if (processProfileRecord.mCurRawAdj > 200 || processProfileRecord.mReportLowMemory) {
-                if (processProfileRecord.mLastRequestedGc + this.mService.mConstants.GC_MIN_INTERVAL > SystemClock.uptimeMillis()) {
+                if (processProfileRecord.mLastRequestedGc + this.mService.mConstants.GC_MIN_INTERVAL
+                        > SystemClock.uptimeMillis()) {
                     addProcessToGcListLPf(processRecord);
                     scheduleAppGcsLPf();
                 }
@@ -932,7 +1001,8 @@ public final class AppProfiler {
         }
     }
 
-    public final void profileControlLPf(ProcessRecord processRecord, boolean z, ProfilerInfo profilerInfo, int i) {
+    public final void profileControlLPf(
+            ProcessRecord processRecord, boolean z, ProfilerInfo profilerInfo, int i) {
         ParcelFileDescriptor parcelFileDescriptor;
         ParcelFileDescriptor parcelFileDescriptor2;
         ParcelFileDescriptor parcelFileDescriptor3;
@@ -940,7 +1010,13 @@ public final class AppProfiler {
             try {
                 if (z) {
                     stopProfilerLPf(0, null);
-                    this.mService.setProfileApp(processRecord.info, processRecord.processName, profilerInfo, processRecord.isSdkSandbox ? processRecord.getClientInfoForSdkSandbox() : null);
+                    this.mService.setProfileApp(
+                            processRecord.info,
+                            processRecord.processName,
+                            profilerInfo,
+                            processRecord.isSdkSandbox
+                                    ? processRecord.getClientInfoForSdkSandbox()
+                                    : null);
                     this.mProfileData.setProfileProc(processRecord);
                     this.mProfileType = i;
                     try {
@@ -960,7 +1036,8 @@ public final class AppProfiler {
                     }
                 } else {
                     stopProfilerLPf(i, processRecord);
-                    if (profilerInfo != null && (parcelFileDescriptor2 = profilerInfo.profileFd) != null) {
+                    if (profilerInfo != null
+                            && (parcelFileDescriptor2 = profilerInfo.profileFd) != null) {
                         try {
                             parcelFileDescriptor2.close();
                         } catch (IOException unused3) {
@@ -975,7 +1052,8 @@ public final class AppProfiler {
                 } catch (IOException unused4) {
                 }
             } finally {
-                if (profilerInfo != null && (parcelFileDescriptor = profilerInfo.profileFd) != null) {
+                if (profilerInfo != null
+                        && (parcelFileDescriptor = profilerInfo.profileFd) != null) {
                     try {
                         parcelFileDescriptor.close();
                     } catch (IOException unused5) {
@@ -993,12 +1071,24 @@ public final class AppProfiler {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void recordPssSampleLPf(com.android.server.am.ProcessProfileRecord r34, int r35, long r36, long r38, long r40, long r42, int r44, long r45, long r47) {
+    public final void recordPssSampleLPf(
+            com.android.server.am.ProcessProfileRecord r34,
+            int r35,
+            long r36,
+            long r38,
+            long r40,
+            long r42,
+            int r44,
+            long r45,
+            long r47) {
         /*
             Method dump skipped, instructions count: 249
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppProfiler.recordPssSampleLPf(com.android.server.am.ProcessProfileRecord, int, long, long, long, long, int, long, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppProfiler.recordPssSampleLPf(com.android.server.am.ProcessProfileRecord,"
+                    + " int, long, long, long, long, int, long, long):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:29:0x00e1  */
@@ -1007,12 +1097,21 @@ public final class AppProfiler {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void recordRssSampleLPf(com.android.server.am.ProcessProfileRecord r34, int r35, long r36, int r38, long r39, long r41) {
+    public final void recordRssSampleLPf(
+            com.android.server.am.ProcessProfileRecord r34,
+            int r35,
+            long r36,
+            int r38,
+            long r39,
+            long r41) {
         /*
             Method dump skipped, instructions count: 239
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppProfiler.recordRssSampleLPf(com.android.server.am.ProcessProfileRecord, int, long, int, long, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppProfiler.recordRssSampleLPf(com.android.server.am.ProcessProfileRecord,"
+                    + " int, long, int, long, long):void");
     }
 
     public final void requestPssAllProcsLPr(final long j, final boolean z) {
@@ -1020,34 +1119,42 @@ public final class AppProfiler {
             try {
                 this.mFullPssOrRssPending = true;
                 for (int size = this.mPendingPssOrRssProfiles.size() - 1; size >= 0; size--) {
-                    ((ProcessProfileRecord) this.mPendingPssOrRssProfiles.get(size)).abortNextPssTime();
+                    ((ProcessProfileRecord) this.mPendingPssOrRssProfiles.get(size))
+                            .abortNextPssTime();
                 }
-                this.mPendingPssOrRssProfiles.ensureCapacity(this.mService.mProcessList.mLruProcesses.size());
+                this.mPendingPssOrRssProfiles.ensureCapacity(
+                        this.mService.mProcessList.mLruProcesses.size());
                 this.mPendingPssOrRssProfiles.clear();
-                this.mService.mProcessList.forEachLruProcessesLOSP(new Consumer() { // from class: com.android.server.am.AppProfiler$$ExternalSyntheticLambda2
-                    public final /* synthetic */ boolean f$2 = true;
+                this.mService.mProcessList.forEachLruProcessesLOSP(
+                        new Consumer() { // from class:
+                                         // com.android.server.am.AppProfiler$$ExternalSyntheticLambda2
+                            public final /* synthetic */ boolean f$2 = true;
 
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        int i;
-                        AppProfiler appProfiler = AppProfiler.this;
-                        boolean z2 = z;
-                        boolean z3 = this.f$2;
-                        long j2 = j;
-                        appProfiler.getClass();
-                        ProcessProfileRecord processProfileRecord = ((ProcessRecord) obj).mProfile;
-                        if (processProfileRecord.mThread == null || (i = processProfileRecord.mSetProcState) == 20) {
-                            return;
-                        }
-                        long j3 = processProfileRecord.mLastStateTime;
-                        if (z2 || ((z3 && j2 > 1000 + j3) || j2 > j3 + 1200000)) {
-                            processProfileRecord.mPssProcState = i;
-                            processProfileRecord.mPssStatType = z3 ? 2 : 1;
-                            appProfiler.updateNextPssTimeLPf(i, processProfileRecord, j2, true);
-                            appProfiler.mPendingPssOrRssProfiles.add(processProfileRecord);
-                        }
-                    }
-                }, false);
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                int i;
+                                AppProfiler appProfiler = AppProfiler.this;
+                                boolean z2 = z;
+                                boolean z3 = this.f$2;
+                                long j2 = j;
+                                appProfiler.getClass();
+                                ProcessProfileRecord processProfileRecord =
+                                        ((ProcessRecord) obj).mProfile;
+                                if (processProfileRecord.mThread == null
+                                        || (i = processProfileRecord.mSetProcState) == 20) {
+                                    return;
+                                }
+                                long j3 = processProfileRecord.mLastStateTime;
+                                if (z2 || ((z3 && j2 > 1000 + j3) || j2 > j3 + 1200000)) {
+                                    processProfileRecord.mPssProcState = i;
+                                    processProfileRecord.mPssStatType = z3 ? 2 : 1;
+                                    appProfiler.updateNextPssTimeLPf(
+                                            i, processProfileRecord, j2, true);
+                                    appProfiler.mPendingPssOrRssProfiles.add(processProfileRecord);
+                                }
+                            }
+                        },
+                        false);
                 if (!this.mBgHandler.hasMessages(1)) {
                     this.mBgHandler.sendEmptyMessage(1);
                 }
@@ -1063,7 +1170,9 @@ public final class AppProfiler {
         if (this.mProcessesToGc.size() > 0) {
             ProcessRecord processRecord = (ProcessRecord) this.mProcessesToGc.get(0);
             Message obtainMessage = activityManagerService.mHandler.obtainMessage(5);
-            long j = processRecord.mProfile.mLastRequestedGc + activityManagerService.mConstants.GC_MIN_INTERVAL;
+            long j =
+                    processRecord.mProfile.mLastRequestedGc
+                            + activityManagerService.mConstants.GC_MIN_INTERVAL;
             long uptimeMillis = SystemClock.uptimeMillis();
             long j2 = activityManagerService.mConstants.GC_TIMEOUT;
             if (j < uptimeMillis + j2) {
@@ -1093,7 +1202,9 @@ public final class AppProfiler {
             this.mAppAgentMap.put(str, str2);
             return;
         }
-        Slog.e("ActivityManager", "App agent map has too many entries, cannot add " + str + "/" + str2);
+        Slog.e(
+                "ActivityManager",
+                "App agent map has too many entries, cannot add " + str + "/" + str2);
     }
 
     public final void setTestPssMode(boolean z) {
@@ -1118,25 +1229,42 @@ public final class AppProfiler {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.app.ProfilerInfo setupProfilerInfoLocked(android.app.IApplicationThread r22, com.android.server.am.ProcessRecord r23, com.android.server.am.ActiveInstrumentation r24) {
+    public final android.app.ProfilerInfo setupProfilerInfoLocked(
+            android.app.IApplicationThread r22,
+            com.android.server.am.ProcessRecord r23,
+            com.android.server.am.ActiveInstrumentation r24) {
         /*
             Method dump skipped, instructions count: 357
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppProfiler.setupProfilerInfoLocked(android.app.IApplicationThread, com.android.server.am.ProcessRecord, com.android.server.am.ActiveInstrumentation):android.app.ProfilerInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppProfiler.setupProfilerInfoLocked(android.app.IApplicationThread,"
+                    + " com.android.server.am.ProcessRecord,"
+                    + " com.android.server.am.ActiveInstrumentation):android.app.ProfilerInfo");
     }
 
     public final void startHeapDumpLPf(ProcessProfileRecord processProfileRecord, boolean z) {
         ProcessRecord processRecord = processProfileRecord.mApp;
         String str = processRecord.processName;
         this.mMemWatchDumpProcName = str;
-        this.mMemWatchDumpUri = Uri.parse("content://com.android.shell.heapdump/" + str + "_javaheap.bin");
+        this.mMemWatchDumpUri =
+                Uri.parse("content://com.android.shell.heapdump/" + str + "_javaheap.bin");
         this.mMemWatchDumpPid = processProfileRecord.mPid;
         int i = processRecord.uid;
         this.mMemWatchDumpUid = i;
         this.mMemWatchIsUserInitiated = z;
         try {
-            BackgroundThread.getHandler().post(new RecordPssRunnable(processProfileRecord, this.mMemWatchDumpUri, this.mService.mContext.createPackageContextAsUser("android", 0, UserHandle.getUserHandleForUid(i)).getContentResolver()));
+            BackgroundThread.getHandler()
+                    .post(
+                            new RecordPssRunnable(
+                                    processProfileRecord,
+                                    this.mMemWatchDumpUri,
+                                    this.mService
+                                            .mContext
+                                            .createPackageContextAsUser(
+                                                    "android", 0, UserHandle.getUserHandleForUid(i))
+                                            .getContentResolver()));
         } catch (PackageManager.NameNotFoundException unused) {
             throw new RuntimeException("android package not found.");
         }
@@ -1150,7 +1278,8 @@ public final class AppProfiler {
             i = this.mProfileType;
             clearProfilerLPf();
         }
-        if (processRecord == null || (iApplicationThread = processRecord.mProfile.mThread) == null) {
+        if (processRecord == null
+                || (iApplicationThread = processRecord.mProfile.mThread) == null) {
             return;
         }
         try {
@@ -1171,14 +1300,19 @@ public final class AppProfiler {
             Method dump skipped, instructions count: 606
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppProfiler.updateCpuStatsNow():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppProfiler.updateCpuStatsNow():void");
     }
 
-    public final void updateNextPssTimeLPf(int i, ProcessProfileRecord processProfileRecord, long j, boolean z) {
+    public final void updateNextPssTimeLPf(
+            int i, ProcessProfileRecord processProfileRecord, long j, boolean z) {
         long j2 = ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
         if (!z) {
             if (j <= processProfileRecord.mNextPssTime) {
-                long j3 = processProfileRecord.mLastPssTime + ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
+                long j3 =
+                        processProfileRecord.mLastPssTime
+                                + ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
                 long j4 = processProfileRecord.mLastStateTime;
                 boolean z2 = this.mTestPssOrRssMode;
                 int i2 = ProcessList.PAGE_SIZE;
@@ -1202,8 +1336,13 @@ public final class AppProfiler {
         }
         boolean z3 = this.mTestPssOrRssMode;
         boolean z4 = ActivityTaskManagerService.this.mSleeping;
-        ProcessList.ProcStateMemTracker procStateMemTracker = processProfileRecord.mProcStateMemTracker;
-        long max = Math.max(processProfileRecord.mService.mBootCompletedTimestamp, processProfileRecord.mService.mLastIdleTime) + processProfileRecord.mService.mConstants.FULL_PSS_MIN_INTERVAL;
+        ProcessList.ProcStateMemTracker procStateMemTracker =
+                processProfileRecord.mProcStateMemTracker;
+        long max =
+                Math.max(
+                                processProfileRecord.mService.mBootCompletedTimestamp,
+                                processProfileRecord.mService.mLastIdleTime)
+                        + processProfileRecord.mService.mConstants.FULL_PSS_MIN_INTERVAL;
         int i3 = ProcessList.sProcStateToProcMem[i];
         float f = 1.0f;
         if (procStateMemTracker != null) {
@@ -1221,7 +1360,21 @@ public final class AppProfiler {
                 procStateMemTracker.mPendingScalingFactor = 1.5f * f;
             }
         }
-        long j6 = (long) ((z3 ? r0 ? ProcessList.sTestFirstPssTimes : ProcessList.sTestSamePssTimes : r0 ? z4 ? ProcessList.sFirstAsleepPssTimes : ProcessList.sFirstAwakePssTimes : z4 ? ProcessList.sSameAsleepPssTimes : ProcessList.sSameAwakePssTimes)[i3] * f);
+        long j6 =
+                (long)
+                        ((z3
+                                                ? r0
+                                                        ? ProcessList.sTestFirstPssTimes
+                                                        : ProcessList.sTestSamePssTimes
+                                                : r0
+                                                        ? z4
+                                                                ? ProcessList.sFirstAsleepPssTimes
+                                                                : ProcessList.sFirstAwakePssTimes
+                                                        : z4
+                                                                ? ProcessList.sSameAsleepPssTimes
+                                                                : ProcessList.sSameAwakePssTimes)
+                                        [i3]
+                                * f);
         if (j6 <= ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS) {
             j2 = j6;
         }
@@ -1241,7 +1394,10 @@ public final class AppProfiler {
                     long start3 = protoOutputStream.start(2246267895810L);
                     Pair pair = (Pair) sparseArray.valueAt(size);
                     protoOutputStream.write(1120986464257L, sparseArray.keyAt(size));
-                    protoOutputStream.write(1138166333442L, DebugUtils.sizeValueToString(((Long) pair.first).longValue(), new StringBuilder()));
+                    protoOutputStream.write(
+                            1138166333442L,
+                            DebugUtils.sizeValueToString(
+                                    ((Long) pair.first).longValue(), new StringBuilder()));
                     protoOutputStream.write(1138166333443L, (String) pair.second);
                     protoOutputStream.end(start3);
                 }

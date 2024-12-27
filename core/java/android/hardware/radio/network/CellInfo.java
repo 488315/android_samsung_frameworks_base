@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CellInfo implements Parcelable {
-    public static final Parcelable.Creator<CellInfo> CREATOR = new Parcelable.Creator<CellInfo>() { // from class: android.hardware.radio.network.CellInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfo createFromParcel(Parcel _aidl_source) {
-            CellInfo _aidl_out = new CellInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CellInfo> CREATOR =
+            new Parcelable.Creator<
+                    CellInfo>() { // from class: android.hardware.radio.network.CellInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfo createFromParcel(Parcel _aidl_source) {
+                    CellInfo _aidl_out = new CellInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfo[] newArray(int _aidl_size) {
-            return new CellInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfo[] newArray(int _aidl_size) {
+                    return new CellInfo[_aidl_size];
+                }
+            };
     public int connectionStatus;
     public CellInfoRatSpecificInfo ratSpecificInfo;
     public boolean registered = false;
@@ -74,7 +77,9 @@ public class CellInfo implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.ratSpecificInfo = (CellInfoRatSpecificInfo) _aidl_parcel.readTypedObject(CellInfoRatSpecificInfo.CREATOR);
+                this.ratSpecificInfo =
+                        (CellInfoRatSpecificInfo)
+                                _aidl_parcel.readTypedObject(CellInfoRatSpecificInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

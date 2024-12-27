@@ -4,24 +4,26 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 
 /* loaded from: classes.dex */
 public final class Person implements Parcelable {
-    public static final Parcelable.Creator<Person> CREATOR = new Parcelable.Creator<Person>() { // from class: android.app.Person.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Person createFromParcel(Parcel in) {
-            return new Person(in);
-        }
+    public static final Parcelable.Creator<Person> CREATOR =
+            new Parcelable.Creator<Person>() { // from class: android.app.Person.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Person createFromParcel(Parcel in) {
+                    return new Person(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Person[] newArray(int size) {
-            return new Person[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Person[] newArray(int size) {
+                    return new Person[size];
+                }
+            };
     private Icon mIcon;
     private boolean mIsBot;
     private boolean mIsImportant;
@@ -112,11 +114,20 @@ public final class Person implements Parcelable {
         } else if (other.mIcon == null || !this.mIcon.sameAs(other.mIcon)) {
             return false;
         }
-        return Objects.equals(this.mUri, other.mUri) && Objects.equals(this.mKey, other.mKey) && this.mIsBot == other.mIsBot && this.mIsImportant == other.mIsImportant;
+        return Objects.equals(this.mUri, other.mUri)
+                && Objects.equals(this.mKey, other.mKey)
+                && this.mIsBot == other.mIsBot
+                && this.mIsImportant == other.mIsImportant;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mName, this.mIcon, this.mUri, this.mKey, Boolean.valueOf(this.mIsBot), Boolean.valueOf(this.mIsImportant));
+        return Objects.hash(
+                this.mName,
+                this.mIcon,
+                this.mUri,
+                this.mKey,
+                Boolean.valueOf(this.mIsBot),
+                Boolean.valueOf(this.mIsImportant));
     }
 
     @Override // android.os.Parcelable
@@ -154,8 +165,7 @@ public final class Person implements Parcelable {
         private CharSequence mName;
         private String mUri;
 
-        public Builder() {
-        }
+        public Builder() {}
 
         private Builder(Person person) {
             this.mName = person.mName;

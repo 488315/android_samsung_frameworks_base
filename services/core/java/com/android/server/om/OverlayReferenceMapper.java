@@ -4,9 +4,11 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.util.CollectionUtils;
 import com.android.server.SystemConfig;
 import com.android.server.pm.pkg.AndroidPackage;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -50,8 +52,7 @@ public final class OverlayReferenceMapper {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Provider {
-    }
+    public interface Provider {}
 
     public OverlayReferenceMapper(Provider provider) {
         this.mProvider = provider == null ? new AnonymousClass1() : provider;
@@ -62,7 +63,10 @@ public final class OverlayReferenceMapper {
             try {
                 String packageName = androidPackage.getPackageName();
                 removeOverlay(packageName, collection);
-                for (Map.Entry entry : ((AnonymousClass1) this.mProvider).getTargetToOverlayables(androidPackage).entrySet()) {
+                for (Map.Entry entry :
+                        ((AnonymousClass1) this.mProvider)
+                                .getTargetToOverlayables(androidPackage)
+                                .entrySet()) {
                     String str = (String) entry.getKey();
                     Set set = (Set) entry.getValue();
                     AndroidPackage androidPackage2 = (AndroidPackage) ((ArrayMap) map).get(str);
@@ -113,7 +117,9 @@ public final class OverlayReferenceMapper {
                 if (!androidPackage.getOverlayables().isEmpty()) {
                     addTarget(androidPackage, map, arraySet);
                 }
-                if (!((AnonymousClass1) this.mProvider).getTargetToOverlayables(androidPackage).isEmpty()) {
+                if (!((AnonymousClass1) this.mProvider)
+                        .getTargetToOverlayables(androidPackage)
+                        .isEmpty()) {
                     addOverlay(androidPackage, map, arraySet);
                 }
                 if (!this.mDeferRebuild) {
@@ -136,9 +142,17 @@ public final class OverlayReferenceMapper {
                     String str2 = (String) overlayables.get(str);
                     addTargetToMap(str2, packageName, collection);
                     for (AndroidPackage androidPackage2 : ((ArrayMap) map).values()) {
-                        Set set = (Set) ((AnonymousClass1) this.mProvider).getTargetToOverlayables(androidPackage2).get(packageName);
+                        Set set =
+                                (Set)
+                                        ((AnonymousClass1) this.mProvider)
+                                                .getTargetToOverlayables(androidPackage2)
+                                                .get(packageName);
                         if (!CollectionUtils.isEmpty(set) && set.contains(str)) {
-                            addOverlayToMap(str2, packageName, androidPackage2.getPackageName(), collection);
+                            addOverlayToMap(
+                                    str2,
+                                    packageName,
+                                    androidPackage2.getPackageName(),
+                                    collection);
                         }
                     }
                 }
@@ -176,7 +190,10 @@ public final class OverlayReferenceMapper {
                             this.mDeferRebuild = false;
                         }
                     }
-                    Slog.w("OverlayReferenceMapper", "The actor map was queried before the system was ready, which mayresult in decreased performance.");
+                    Slog.w(
+                            "OverlayReferenceMapper",
+                            "The actor map was queried before the system was ready, which mayresult"
+                                + " in decreased performance.");
                 }
                 Set set = (Set) this.mActorPkgToPkgs.get(str2);
                 if (set != null && set.contains(str)) {
@@ -220,7 +237,13 @@ public final class OverlayReferenceMapper {
                     ArrayMap arrayMap = (ArrayMap) this.mActorToTargetToOverlays.valueAt(size);
                     for (int size2 = arrayMap.size() - 1; size2 >= 0; size2--) {
                         if (((Set) arrayMap.valueAt(size2)).remove(str)) {
-                            ((ArraySet) collection).add(((AnonymousClass1) this.mProvider).getActorPkg((String) this.mActorToTargetToOverlays.keyAt(size)));
+                            ((ArraySet) collection)
+                                    .add(
+                                            ((AnonymousClass1) this.mProvider)
+                                                    .getActorPkg(
+                                                            (String)
+                                                                    this.mActorToTargetToOverlays
+                                                                            .keyAt(size)));
                         }
                     }
                     if (arrayMap.isEmpty()) {
@@ -257,7 +280,13 @@ public final class OverlayReferenceMapper {
                     ArrayMap arrayMap = (ArrayMap) this.mActorToTargetToOverlays.valueAt(size);
                     if (arrayMap.containsKey(str)) {
                         arrayMap.remove(str);
-                        ((ArraySet) collection).add(((AnonymousClass1) this.mProvider).getActorPkg((String) this.mActorToTargetToOverlays.keyAt(size)));
+                        ((ArraySet) collection)
+                                .add(
+                                        ((AnonymousClass1) this.mProvider)
+                                                .getActorPkg(
+                                                        (String)
+                                                                this.mActorToTargetToOverlays.keyAt(
+                                                                        size)));
                         if (arrayMap.isEmpty()) {
                             this.mActorToTargetToOverlays.removeAt(size);
                         }

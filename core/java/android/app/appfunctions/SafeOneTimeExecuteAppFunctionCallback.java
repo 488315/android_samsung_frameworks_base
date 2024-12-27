@@ -2,6 +2,7 @@ package android.app.appfunctions;
 
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
@@ -21,11 +22,15 @@ public class SafeOneTimeExecuteAppFunctionCallback {
         this.mAppFunctionExecutionRecord = null;
     }
 
-    public SafeOneTimeExecuteAppFunctionCallback(IExecuteAppFunctionCallback callback, Consumer<AppFunctionExecutionRecord> updateHistoryCallback, AppFunctionExecutionRecord appFunctionExecutionRecord) {
+    public SafeOneTimeExecuteAppFunctionCallback(
+            IExecuteAppFunctionCallback callback,
+            Consumer<AppFunctionExecutionRecord> updateHistoryCallback,
+            AppFunctionExecutionRecord appFunctionExecutionRecord) {
         this.mOnResultCalled = new AtomicBoolean(false);
         this.mCallback = (IExecuteAppFunctionCallback) Objects.requireNonNull(callback);
         this.mUpdateHistoryCallback = (Consumer) Objects.requireNonNull(updateHistoryCallback);
-        this.mAppFunctionExecutionRecord = (AppFunctionExecutionRecord) Objects.requireNonNull(appFunctionExecutionRecord);
+        this.mAppFunctionExecutionRecord =
+                (AppFunctionExecutionRecord) Objects.requireNonNull(appFunctionExecutionRecord);
     }
 
     public void onResult(ExecuteAppFunctionResponse result) {

@@ -7,19 +7,22 @@ import android.os.Parcelable;
 public final class EdgeLightingPolicyInfo implements Parcelable {
     public static final int CATEGORY_BLACK = 2;
     public static final int CATEGORY_WHITE = 1;
-    public static final Parcelable.Creator<EdgeLightingPolicyInfo> CREATOR = new Parcelable.Creator<EdgeLightingPolicyInfo>() { // from class: com.samsung.android.edge.EdgeLightingPolicyInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EdgeLightingPolicyInfo createFromParcel(Parcel source) {
-            return new EdgeLightingPolicyInfo(source);
-        }
+    public static final Parcelable.Creator<EdgeLightingPolicyInfo> CREATOR =
+            new Parcelable.Creator<
+                    EdgeLightingPolicyInfo>() { // from class:
+                                                // com.samsung.android.edge.EdgeLightingPolicyInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EdgeLightingPolicyInfo createFromParcel(Parcel source) {
+                    return new EdgeLightingPolicyInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EdgeLightingPolicyInfo[] newArray(int size) {
-            return new EdgeLightingPolicyInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EdgeLightingPolicyInfo[] newArray(int size) {
+                    return new EdgeLightingPolicyInfo[size];
+                }
+            };
     private static final int RANGE_MASK = 65535;
     public static final int RANGE_NOTIFICATION = 1;
     public static final int RANGE_PRIVATE_MASK = 65280;

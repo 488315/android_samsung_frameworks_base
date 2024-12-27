@@ -2,6 +2,7 @@ package android.security.keymaster;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,24 +10,26 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public class KeyCharacteristics implements Parcelable {
-    public static final Parcelable.Creator<KeyCharacteristics> CREATOR = new Parcelable.Creator<KeyCharacteristics>() { // from class: android.security.keymaster.KeyCharacteristics.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyCharacteristics createFromParcel(Parcel in) {
-            return new KeyCharacteristics(in);
-        }
+    public static final Parcelable.Creator<KeyCharacteristics> CREATOR =
+            new Parcelable.Creator<
+                    KeyCharacteristics>() { // from class:
+                                            // android.security.keymaster.KeyCharacteristics.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyCharacteristics createFromParcel(Parcel in) {
+                    return new KeyCharacteristics(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyCharacteristics[] newArray(int length) {
-            return new KeyCharacteristics[length];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyCharacteristics[] newArray(int length) {
+                    return new KeyCharacteristics[length];
+                }
+            };
     public KeymasterArguments hwEnforced;
     public KeymasterArguments swEnforced;
 
-    public KeyCharacteristics() {
-    }
+    public KeyCharacteristics() {}
 
     protected KeyCharacteristics(Parcel in) {
         readFromParcel(in);

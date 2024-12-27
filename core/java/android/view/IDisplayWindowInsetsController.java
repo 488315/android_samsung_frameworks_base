@@ -16,7 +16,8 @@ public interface IDisplayWindowInsetsController extends IInterface {
 
     void insetsChanged(InsetsState insetsState) throws RemoteException;
 
-    void insetsControlChanged(InsetsState insetsState, InsetsSourceControl[] insetsSourceControlArr) throws RemoteException;
+    void insetsControlChanged(InsetsState insetsState, InsetsSourceControl[] insetsSourceControlArr)
+            throws RemoteException;
 
     void setImeInputTargetRequestedVisibility(boolean z) throws RemoteException;
 
@@ -26,28 +27,27 @@ public interface IDisplayWindowInsetsController extends IInterface {
 
     public static class Default implements IDisplayWindowInsetsController {
         @Override // android.view.IDisplayWindowInsetsController
-        public void topFocusedWindowChanged(ComponentName component, int requestedVisibleTypes) throws RemoteException {
-        }
+        public void topFocusedWindowChanged(ComponentName component, int requestedVisibleTypes)
+                throws RemoteException {}
 
         @Override // android.view.IDisplayWindowInsetsController
-        public void insetsChanged(InsetsState insetsState) throws RemoteException {
-        }
+        public void insetsChanged(InsetsState insetsState) throws RemoteException {}
 
         @Override // android.view.IDisplayWindowInsetsController
-        public void insetsControlChanged(InsetsState insetsState, InsetsSourceControl[] activeControls) throws RemoteException {
-        }
+        public void insetsControlChanged(
+                InsetsState insetsState, InsetsSourceControl[] activeControls)
+                throws RemoteException {}
 
         @Override // android.view.IDisplayWindowInsetsController
-        public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken) throws RemoteException {
-        }
+        public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken)
+                throws RemoteException {}
 
         @Override // android.view.IDisplayWindowInsetsController
-        public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken) throws RemoteException {
-        }
+        public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken)
+                throws RemoteException {}
 
         @Override // android.view.IDisplayWindowInsetsController
-        public void setImeInputTargetRequestedVisibility(boolean visible) throws RemoteException {
-        }
+        public void setImeInputTargetRequestedVisibility(boolean visible) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -55,7 +55,7 @@ public interface IDisplayWindowInsetsController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayWindowInsetsController {
+    public abstract static class Stub extends Binder implements IDisplayWindowInsetsController {
         static final int TRANSACTION_hideInsets = 5;
         static final int TRANSACTION_insetsChanged = 2;
         static final int TRANSACTION_insetsControlChanged = 3;
@@ -108,7 +108,8 @@ public interface IDisplayWindowInsetsController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayWindowInsetsController.DESCRIPTOR);
             }
@@ -118,7 +119,8 @@ public interface IDisplayWindowInsetsController extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     topFocusedWindowChanged(_arg0, _arg1);
@@ -130,21 +132,25 @@ public interface IDisplayWindowInsetsController extends IInterface {
                     return true;
                 case 3:
                     InsetsState _arg03 = (InsetsState) data.readTypedObject(InsetsState.CREATOR);
-                    InsetsSourceControl[] _arg12 = (InsetsSourceControl[]) data.createTypedArray(InsetsSourceControl.CREATOR);
+                    InsetsSourceControl[] _arg12 =
+                            (InsetsSourceControl[])
+                                    data.createTypedArray(InsetsSourceControl.CREATOR);
                     data.enforceNoDataAvail();
                     insetsControlChanged(_arg03, _arg12);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
                     boolean _arg13 = data.readBoolean();
-                    ImeTracker.Token _arg2 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg2 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     data.enforceNoDataAvail();
                     showInsets(_arg04, _arg13, _arg2);
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
                     boolean _arg14 = data.readBoolean();
-                    ImeTracker.Token _arg22 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg22 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     data.enforceNoDataAvail();
                     hideInsets(_arg05, _arg14, _arg22);
                     return true;
@@ -175,7 +181,8 @@ public interface IDisplayWindowInsetsController extends IInterface {
             }
 
             @Override // android.view.IDisplayWindowInsetsController
-            public void topFocusedWindowChanged(ComponentName component, int requestedVisibleTypes) throws RemoteException {
+            public void topFocusedWindowChanged(ComponentName component, int requestedVisibleTypes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
@@ -200,7 +207,9 @@ public interface IDisplayWindowInsetsController extends IInterface {
             }
 
             @Override // android.view.IDisplayWindowInsetsController
-            public void insetsControlChanged(InsetsState insetsState, InsetsSourceControl[] activeControls) throws RemoteException {
+            public void insetsControlChanged(
+                    InsetsState insetsState, InsetsSourceControl[] activeControls)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
@@ -213,7 +222,8 @@ public interface IDisplayWindowInsetsController extends IInterface {
             }
 
             @Override // android.view.IDisplayWindowInsetsController
-            public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken) throws RemoteException {
+            public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
@@ -227,7 +237,8 @@ public interface IDisplayWindowInsetsController extends IInterface {
             }
 
             @Override // android.view.IDisplayWindowInsetsController
-            public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken) throws RemoteException {
+            public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);
@@ -241,7 +252,8 @@ public interface IDisplayWindowInsetsController extends IInterface {
             }
 
             @Override // android.view.IDisplayWindowInsetsController
-            public void setImeInputTargetRequestedVisibility(boolean visible) throws RemoteException {
+            public void setImeInputTargetRequestedVisibility(boolean visible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayWindowInsetsController.DESCRIPTOR);

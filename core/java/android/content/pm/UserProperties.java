@@ -4,24 +4,33 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Slog;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class UserProperties implements Parcelable {
-    private static final String ATTR_ALLOW_STOPPING_USER_WITH_DELAYED_LOCKING = "allowStoppingUserWithDelayedLocking";
+    private static final String ATTR_ALLOW_STOPPING_USER_WITH_DELAYED_LOCKING =
+            "allowStoppingUserWithDelayedLocking";
     private static final String ATTR_ALWAYS_VISIBLE = "alwaysVisible";
-    private static final String ATTR_AUTH_ALWAYS_REQUIRED_TO_DISABLE_QUIET_MODE = "authAlwaysRequiredToDisableQuietMode";
-    private static final String ATTR_CREDENTIAL_SHAREABLE_WITH_PARENT = "credentialShareableWithParent";
-    private static final String ATTR_CROSS_PROFILE_CONTENT_SHARING_STRATEGY = "crossProfileContentSharingStrategy";
-    private static final String ATTR_CROSS_PROFILE_INTENT_FILTER_ACCESS_CONTROL = "crossProfileIntentFilterAccessControl";
-    private static final String ATTR_CROSS_PROFILE_INTENT_RESOLUTION_STRATEGY = "crossProfileIntentResolutionStrategy";
+    private static final String ATTR_AUTH_ALWAYS_REQUIRED_TO_DISABLE_QUIET_MODE =
+            "authAlwaysRequiredToDisableQuietMode";
+    private static final String ATTR_CREDENTIAL_SHAREABLE_WITH_PARENT =
+            "credentialShareableWithParent";
+    private static final String ATTR_CROSS_PROFILE_CONTENT_SHARING_STRATEGY =
+            "crossProfileContentSharingStrategy";
+    private static final String ATTR_CROSS_PROFILE_INTENT_FILTER_ACCESS_CONTROL =
+            "crossProfileIntentFilterAccessControl";
+    private static final String ATTR_CROSS_PROFILE_INTENT_RESOLUTION_STRATEGY =
+            "crossProfileIntentResolutionStrategy";
     private static final String ATTR_DELETE_APP_WITH_PARENT = "deleteAppWithParent";
     private static final String ATTR_INHERIT_DEVICE_POLICY = "inheritDevicePolicy";
     private static final String ATTR_MEDIA_SHARED_WITH_PARENT = "mediaSharedWithParent";
@@ -31,7 +40,8 @@ public final class UserProperties implements Parcelable {
     private static final String ATTR_SHOW_IN_SETTINGS = "showInSettings";
     private static final String ATTR_SHOW_IN_SHARING_SURFACES = "showInSharingSurfaces";
     private static final String ATTR_START_WITH_PARENT = "startWithParent";
-    private static final String ATTR_UPDATE_CROSS_PROFILE_INTENT_FILTERS_ON_OTA = "updateCrossProfileIntentFiltersOnOTA";
+    private static final String ATTR_UPDATE_CROSS_PROFILE_INTENT_FILTERS_ON_OTA =
+            "updateCrossProfileIntentFiltersOnOTA";
     private static final String ATTR_USE_PARENTS_CONTACTS = "useParentsContacts";
     public static final int CROSS_PROFILE_CONTENT_SHARING_DELEGATE_FROM_PARENT = 1;
     public static final int CROSS_PROFILE_CONTENT_SHARING_NO_DELEGATION = 0;
@@ -104,59 +114,51 @@ public final class UserProperties implements Parcelable {
     private boolean mUpdateCrossProfileIntentFiltersOnOTA;
     private boolean mUseParentsContacts;
     private static final String LOG_TAG = UserProperties.class.getSimpleName();
-    public static final Parcelable.Creator<UserProperties> CREATOR = new Parcelable.Creator<UserProperties>() { // from class: android.content.pm.UserProperties.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserProperties createFromParcel(Parcel source) {
-            return new UserProperties(source);
-        }
+    public static final Parcelable.Creator<UserProperties> CREATOR =
+            new Parcelable.Creator<
+                    UserProperties>() { // from class: android.content.pm.UserProperties.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserProperties createFromParcel(Parcel source) {
+                    return new UserProperties(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserProperties[] newArray(int size) {
-            return new UserProperties[size];
-        }
-    };
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface CrossProfileContentSharingStrategy {
-    }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserProperties[] newArray(int size) {
+                    return new UserProperties[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CrossProfileIntentFilterAccessControlLevel {
-    }
+    public @interface CrossProfileContentSharingStrategy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CrossProfileIntentResolutionStrategy {
-    }
+    public @interface CrossProfileIntentFilterAccessControlLevel {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InheritDevicePolicy {
-    }
+    public @interface CrossProfileIntentResolutionStrategy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ProfileApiVisibility {
-    }
+    public @interface InheritDevicePolicy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface PropertyIndex {
-    }
+    public @interface ProfileApiVisibility {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ShowInLauncher {
-    }
+    private @interface PropertyIndex {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ShowInQuietMode {
-    }
+    public @interface ShowInLauncher {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ShowInSettings {
-    }
+    public @interface ShowInQuietMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ShowInSharingSurfaces {
-    }
+    public @interface ShowInSettings {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ShowInSharingSurfaces {}
 
     public UserProperties(UserProperties defaultProperties) {
         this.mPropertiesPresent = 0L;
@@ -164,7 +166,11 @@ public final class UserProperties implements Parcelable {
         this.mPropertiesPresent = 0L;
     }
 
-    public UserProperties(UserProperties orig, boolean exposeAllFields, boolean hasManagePermission, boolean hasQueryOrManagePermission) {
+    public UserProperties(
+            UserProperties orig,
+            boolean exposeAllFields,
+            boolean hasManagePermission,
+            boolean hasQueryOrManagePermission) {
         this.mPropertiesPresent = 0L;
         if (orig.mDefaultProperties == null) {
             throw new IllegalArgumentException("Attempting to copy a non-original UserProperties.");
@@ -174,7 +180,8 @@ public final class UserProperties implements Parcelable {
             setStartWithParent(orig.getStartWithParent());
             setInheritDevicePolicy(orig.getInheritDevicePolicy());
             setUpdateCrossProfileIntentFiltersOnOTA(orig.getUpdateCrossProfileIntentFiltersOnOTA());
-            setCrossProfileIntentFilterAccessControl(orig.getCrossProfileIntentFilterAccessControl());
+            setCrossProfileIntentFilterAccessControl(
+                    orig.getCrossProfileIntentFilterAccessControl());
             setCrossProfileIntentResolutionStrategy(orig.getCrossProfileIntentResolutionStrategy());
             setDeleteAppWithParent(orig.getDeleteAppWithParent());
             setAlwaysVisible(orig.getAlwaysVisible());
@@ -349,7 +356,8 @@ public final class UserProperties implements Parcelable {
         if (this.mDefaultProperties != null) {
             return this.mDefaultProperties.mUpdateCrossProfileIntentFiltersOnOTA;
         }
-        throw new SecurityException("You don't have permission to query updateCrossProfileIntentFiltersOnOTA");
+        throw new SecurityException(
+                "You don't have permission to query updateCrossProfileIntentFiltersOnOTA");
     }
 
     public void setUpdateCrossProfileIntentFiltersOnOTA(boolean val) {
@@ -379,7 +387,8 @@ public final class UserProperties implements Parcelable {
         if (this.mDefaultProperties != null) {
             return this.mDefaultProperties.mCredentialShareableWithParent;
         }
-        throw new SecurityException("You don't have permission to query credentialShareableWithParent");
+        throw new SecurityException(
+                "You don't have permission to query credentialShareableWithParent");
     }
 
     public void setCredentialShareableWithParent(boolean val) {
@@ -394,7 +403,8 @@ public final class UserProperties implements Parcelable {
         if (this.mDefaultProperties != null) {
             return this.mDefaultProperties.mAuthAlwaysRequiredToDisableQuietMode;
         }
-        throw new SecurityException("You don't have permission to query authAlwaysRequiredToDisableQuietMode");
+        throw new SecurityException(
+                "You don't have permission to query authAlwaysRequiredToDisableQuietMode");
     }
 
     public void setAuthAlwaysRequiredToDisableQuietMode(boolean val) {
@@ -409,7 +419,8 @@ public final class UserProperties implements Parcelable {
         if (this.mDefaultProperties != null) {
             return this.mDefaultProperties.mAllowStoppingUserWithDelayedLocking;
         }
-        throw new SecurityException("You don't have permission to query allowStoppingUserWithDelayedLocking");
+        throw new SecurityException(
+                "You don't have permission to query allowStoppingUserWithDelayedLocking");
     }
 
     public void setAllowStoppingUserWithDelayedLocking(boolean val) {
@@ -424,7 +435,8 @@ public final class UserProperties implements Parcelable {
         if (this.mDefaultProperties != null) {
             return this.mDefaultProperties.mCrossProfileIntentFilterAccessControl;
         }
-        throw new SecurityException("You don't have permission to query crossProfileIntentFilterAccessControl");
+        throw new SecurityException(
+                "You don't have permission to query crossProfileIntentFilterAccessControl");
     }
 
     public void setCrossProfileIntentFilterAccessControl(int val) {
@@ -439,7 +451,8 @@ public final class UserProperties implements Parcelable {
         if (this.mDefaultProperties != null) {
             return this.mDefaultProperties.mCrossProfileIntentResolutionStrategy;
         }
-        throw new SecurityException("You don't have permission to query crossProfileIntentResolutionStrategy");
+        throw new SecurityException(
+                "You don't have permission to query crossProfileIntentResolutionStrategy");
     }
 
     public void setCrossProfileIntentResolutionStrategy(int val) {
@@ -454,7 +467,8 @@ public final class UserProperties implements Parcelable {
         if (this.mDefaultProperties != null) {
             return this.mDefaultProperties.mCrossProfileContentSharingStrategy;
         }
-        throw new SecurityException("You don't have permission to query crossProfileContentSharingStrategy");
+        throw new SecurityException(
+                "You don't have permission to query crossProfileContentSharingStrategy");
     }
 
     public void setCrossProfileContentSharingStrategy(int val) {
@@ -484,7 +498,8 @@ public final class UserProperties implements Parcelable {
         if (this.mDefaultProperties != null) {
             return this.mDefaultProperties.mItemsRestrictedOnHomeScreen;
         }
-        throw new SecurityException("You don't have permission to query mItemsRestrictedOnHomeScreen");
+        throw new SecurityException(
+                "You don't have permission to query mItemsRestrictedOnHomeScreen");
     }
 
     public void setItemsRestrictedOnHomeScreen(boolean val) {
@@ -493,38 +508,96 @@ public final class UserProperties implements Parcelable {
     }
 
     public String toString() {
-        return "UserProperties{mPropertiesPresent=" + Long.toBinaryString(this.mPropertiesPresent) + ", mShowInLauncher=" + getShowInLauncher() + ", mStartWithParent=" + getStartWithParent() + ", mShowInSettings=" + getShowInSettings() + ", mInheritDevicePolicy=" + getInheritDevicePolicy() + ", mUseParentsContacts=" + getUseParentsContacts() + ", mUpdateCrossProfileIntentFiltersOnOTA=" + getUpdateCrossProfileIntentFiltersOnOTA() + ", mCrossProfileIntentFilterAccessControl=" + getCrossProfileIntentFilterAccessControl() + ", mCrossProfileIntentResolutionStrategy=" + getCrossProfileIntentResolutionStrategy() + ", mMediaSharedWithParent=" + isMediaSharedWithParent() + ", mCredentialShareableWithParent=" + isCredentialShareableWithParent() + ", mAuthAlwaysRequiredToDisableQuietMode=" + isAuthAlwaysRequiredToDisableQuietMode() + ", mAllowStoppingUserWithDelayedLocking=" + getAllowStoppingUserWithDelayedLocking() + ", mDeleteAppWithParent=" + getDeleteAppWithParent() + ", mAlwaysVisible=" + getAlwaysVisible() + ", mCrossProfileContentSharingStrategy=" + getCrossProfileContentSharingStrategy() + ", mProfileApiVisibility=" + getProfileApiVisibility() + ", mItemsRestrictedOnHomeScreen=" + areItemsRestrictedOnHomeScreen() + "}";
+        return "UserProperties{mPropertiesPresent="
+                + Long.toBinaryString(this.mPropertiesPresent)
+                + ", mShowInLauncher="
+                + getShowInLauncher()
+                + ", mStartWithParent="
+                + getStartWithParent()
+                + ", mShowInSettings="
+                + getShowInSettings()
+                + ", mInheritDevicePolicy="
+                + getInheritDevicePolicy()
+                + ", mUseParentsContacts="
+                + getUseParentsContacts()
+                + ", mUpdateCrossProfileIntentFiltersOnOTA="
+                + getUpdateCrossProfileIntentFiltersOnOTA()
+                + ", mCrossProfileIntentFilterAccessControl="
+                + getCrossProfileIntentFilterAccessControl()
+                + ", mCrossProfileIntentResolutionStrategy="
+                + getCrossProfileIntentResolutionStrategy()
+                + ", mMediaSharedWithParent="
+                + isMediaSharedWithParent()
+                + ", mCredentialShareableWithParent="
+                + isCredentialShareableWithParent()
+                + ", mAuthAlwaysRequiredToDisableQuietMode="
+                + isAuthAlwaysRequiredToDisableQuietMode()
+                + ", mAllowStoppingUserWithDelayedLocking="
+                + getAllowStoppingUserWithDelayedLocking()
+                + ", mDeleteAppWithParent="
+                + getDeleteAppWithParent()
+                + ", mAlwaysVisible="
+                + getAlwaysVisible()
+                + ", mCrossProfileContentSharingStrategy="
+                + getCrossProfileContentSharingStrategy()
+                + ", mProfileApiVisibility="
+                + getProfileApiVisibility()
+                + ", mItemsRestrictedOnHomeScreen="
+                + areItemsRestrictedOnHomeScreen()
+                + "}";
     }
 
     public void println(PrintWriter pw, String prefix) {
         pw.println(prefix + "UserProperties:");
-        pw.println(prefix + "    mPropertiesPresent=" + Long.toBinaryString(this.mPropertiesPresent));
+        pw.println(
+                prefix + "    mPropertiesPresent=" + Long.toBinaryString(this.mPropertiesPresent));
         pw.println(prefix + "    mShowInLauncher=" + getShowInLauncher());
         pw.println(prefix + "    mStartWithParent=" + getStartWithParent());
         pw.println(prefix + "    mShowInSettings=" + getShowInSettings());
         pw.println(prefix + "    mInheritDevicePolicy=" + getInheritDevicePolicy());
         pw.println(prefix + "    mUseParentsContacts=" + getUseParentsContacts());
-        pw.println(prefix + "    mUpdateCrossProfileIntentFiltersOnOTA=" + getUpdateCrossProfileIntentFiltersOnOTA());
-        pw.println(prefix + "    mCrossProfileIntentFilterAccessControl=" + getCrossProfileIntentFilterAccessControl());
-        pw.println(prefix + "    mCrossProfileIntentResolutionStrategy=" + getCrossProfileIntentResolutionStrategy());
+        pw.println(
+                prefix
+                        + "    mUpdateCrossProfileIntentFiltersOnOTA="
+                        + getUpdateCrossProfileIntentFiltersOnOTA());
+        pw.println(
+                prefix
+                        + "    mCrossProfileIntentFilterAccessControl="
+                        + getCrossProfileIntentFilterAccessControl());
+        pw.println(
+                prefix
+                        + "    mCrossProfileIntentResolutionStrategy="
+                        + getCrossProfileIntentResolutionStrategy());
         pw.println(prefix + "    mMediaSharedWithParent=" + isMediaSharedWithParent());
-        pw.println(prefix + "    mCredentialShareableWithParent=" + isCredentialShareableWithParent());
-        pw.println(prefix + "    mAuthAlwaysRequiredToDisableQuietMode=" + isAuthAlwaysRequiredToDisableQuietMode());
-        pw.println(prefix + "    mAllowStoppingUserWithDelayedLocking=" + getAllowStoppingUserWithDelayedLocking());
+        pw.println(
+                prefix + "    mCredentialShareableWithParent=" + isCredentialShareableWithParent());
+        pw.println(
+                prefix
+                        + "    mAuthAlwaysRequiredToDisableQuietMode="
+                        + isAuthAlwaysRequiredToDisableQuietMode());
+        pw.println(
+                prefix
+                        + "    mAllowStoppingUserWithDelayedLocking="
+                        + getAllowStoppingUserWithDelayedLocking());
         pw.println(prefix + "    mDeleteAppWithParent=" + getDeleteAppWithParent());
         pw.println(prefix + "    mAlwaysVisible=" + getAlwaysVisible());
-        pw.println(prefix + "    mCrossProfileContentSharingStrategy=" + getCrossProfileContentSharingStrategy());
+        pw.println(
+                prefix
+                        + "    mCrossProfileContentSharingStrategy="
+                        + getCrossProfileContentSharingStrategy());
         pw.println(prefix + "    mProfileApiVisibility=" + getProfileApiVisibility());
         pw.println(prefix + "    mItemsRestrictedOnHomeScreen=" + areItemsRestrictedOnHomeScreen());
     }
 
-    public UserProperties(TypedXmlPullParser parser, UserProperties defaultUserPropertiesReference) throws IOException, XmlPullParserException {
+    public UserProperties(TypedXmlPullParser parser, UserProperties defaultUserPropertiesReference)
+            throws IOException, XmlPullParserException {
         this(defaultUserPropertiesReference);
         updateFromXml(parser);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public void updateFromXml(TypedXmlPullParser parser) throws IOException, XmlPullParserException {
+    public void updateFromXml(TypedXmlPullParser parser)
+            throws IOException, XmlPullParserException {
         char c;
         int attributeCount = parser.getAttributeCount();
         for (int i = 0; i < attributeCount; i++) {
@@ -732,7 +805,8 @@ public final class UserProperties implements Parcelable {
         }
     }
 
-    public void writeToXml(TypedXmlSerializer serializer) throws IOException, XmlPullParserException {
+    public void writeToXml(TypedXmlSerializer serializer)
+            throws IOException, XmlPullParserException {
         if (isPresent(0L)) {
             serializer.attributeInt(null, ATTR_SHOW_IN_LAUNCHER, this.mShowInLauncher);
         }
@@ -746,7 +820,8 @@ public final class UserProperties implements Parcelable {
             serializer.attributeInt(null, ATTR_SHOW_IN_QUIET_MODE, this.mShowInQuietMode);
         }
         if (isPresent(14L)) {
-            serializer.attributeInt(null, ATTR_SHOW_IN_SHARING_SURFACES, this.mShowInSharingSurfaces);
+            serializer.attributeInt(
+                    null, ATTR_SHOW_IN_SHARING_SURFACES, this.mShowInSharingSurfaces);
         }
         if (isPresent(3L)) {
             serializer.attributeInt(null, ATTR_INHERIT_DEVICE_POLICY, this.mInheritDevicePolicy);
@@ -755,40 +830,64 @@ public final class UserProperties implements Parcelable {
             serializer.attributeBoolean(null, ATTR_USE_PARENTS_CONTACTS, this.mUseParentsContacts);
         }
         if (isPresent(5L)) {
-            serializer.attributeBoolean(null, ATTR_UPDATE_CROSS_PROFILE_INTENT_FILTERS_ON_OTA, this.mUpdateCrossProfileIntentFiltersOnOTA);
+            serializer.attributeBoolean(
+                    null,
+                    ATTR_UPDATE_CROSS_PROFILE_INTENT_FILTERS_ON_OTA,
+                    this.mUpdateCrossProfileIntentFiltersOnOTA);
         }
         if (isPresent(6L)) {
-            serializer.attributeInt(null, ATTR_CROSS_PROFILE_INTENT_FILTER_ACCESS_CONTROL, this.mCrossProfileIntentFilterAccessControl);
+            serializer.attributeInt(
+                    null,
+                    ATTR_CROSS_PROFILE_INTENT_FILTER_ACCESS_CONTROL,
+                    this.mCrossProfileIntentFilterAccessControl);
         }
         if (isPresent(7L)) {
-            serializer.attributeInt(null, ATTR_CROSS_PROFILE_INTENT_RESOLUTION_STRATEGY, this.mCrossProfileIntentResolutionStrategy);
+            serializer.attributeInt(
+                    null,
+                    ATTR_CROSS_PROFILE_INTENT_RESOLUTION_STRATEGY,
+                    this.mCrossProfileIntentResolutionStrategy);
         }
         if (isPresent(8L)) {
-            serializer.attributeBoolean(null, ATTR_MEDIA_SHARED_WITH_PARENT, this.mMediaSharedWithParent);
+            serializer.attributeBoolean(
+                    null, ATTR_MEDIA_SHARED_WITH_PARENT, this.mMediaSharedWithParent);
         }
         if (isPresent(9L)) {
-            serializer.attributeBoolean(null, ATTR_CREDENTIAL_SHAREABLE_WITH_PARENT, this.mCredentialShareableWithParent);
+            serializer.attributeBoolean(
+                    null,
+                    ATTR_CREDENTIAL_SHAREABLE_WITH_PARENT,
+                    this.mCredentialShareableWithParent);
         }
         if (isPresent(13L)) {
-            serializer.attributeBoolean(null, ATTR_AUTH_ALWAYS_REQUIRED_TO_DISABLE_QUIET_MODE, this.mAuthAlwaysRequiredToDisableQuietMode);
+            serializer.attributeBoolean(
+                    null,
+                    ATTR_AUTH_ALWAYS_REQUIRED_TO_DISABLE_QUIET_MODE,
+                    this.mAuthAlwaysRequiredToDisableQuietMode);
         }
         if (isPresent(16L)) {
-            serializer.attributeBoolean(null, ATTR_ALLOW_STOPPING_USER_WITH_DELAYED_LOCKING, this.mAllowStoppingUserWithDelayedLocking);
+            serializer.attributeBoolean(
+                    null,
+                    ATTR_ALLOW_STOPPING_USER_WITH_DELAYED_LOCKING,
+                    this.mAllowStoppingUserWithDelayedLocking);
         }
         if (isPresent(10L)) {
-            serializer.attributeBoolean(null, ATTR_DELETE_APP_WITH_PARENT, this.mDeleteAppWithParent);
+            serializer.attributeBoolean(
+                    null, ATTR_DELETE_APP_WITH_PARENT, this.mDeleteAppWithParent);
         }
         if (isPresent(11L)) {
             serializer.attributeBoolean(null, ATTR_ALWAYS_VISIBLE, this.mAlwaysVisible);
         }
         if (isPresent(15L)) {
-            serializer.attributeInt(null, ATTR_CROSS_PROFILE_CONTENT_SHARING_STRATEGY, this.mCrossProfileContentSharingStrategy);
+            serializer.attributeInt(
+                    null,
+                    ATTR_CROSS_PROFILE_CONTENT_SHARING_STRATEGY,
+                    this.mCrossProfileContentSharingStrategy);
         }
         if (isPresent(17L)) {
             serializer.attributeInt(null, ATTR_PROFILE_API_VISIBILITY, this.mProfileApiVisibility);
         }
         if (isPresent(18L)) {
-            serializer.attributeBoolean(null, ITEMS_RESTRICTED_ON_HOME_SCREEN, this.mItemsRestrictedOnHomeScreen);
+            serializer.attributeBoolean(
+                    null, ITEMS_RESTRICTED_ON_HOME_SCREEN, this.mItemsRestrictedOnHomeScreen);
         }
     }
 
@@ -902,17 +1001,20 @@ public final class UserProperties implements Parcelable {
             return this;
         }
 
-        public Builder setUpdateCrossProfileIntentFiltersOnOTA(boolean updateCrossProfileIntentFiltersOnOTA) {
+        public Builder setUpdateCrossProfileIntentFiltersOnOTA(
+                boolean updateCrossProfileIntentFiltersOnOTA) {
             this.mUpdateCrossProfileIntentFiltersOnOTA = updateCrossProfileIntentFiltersOnOTA;
             return this;
         }
 
-        public Builder setCrossProfileIntentFilterAccessControl(int crossProfileIntentFilterAccessControl) {
+        public Builder setCrossProfileIntentFilterAccessControl(
+                int crossProfileIntentFilterAccessControl) {
             this.mCrossProfileIntentFilterAccessControl = crossProfileIntentFilterAccessControl;
             return this;
         }
 
-        public Builder setCrossProfileIntentResolutionStrategy(int crossProfileIntentResolutionStrategy) {
+        public Builder setCrossProfileIntentResolutionStrategy(
+                int crossProfileIntentResolutionStrategy) {
             this.mCrossProfileIntentResolutionStrategy = crossProfileIntentResolutionStrategy;
             return this;
         }
@@ -927,12 +1029,14 @@ public final class UserProperties implements Parcelable {
             return this;
         }
 
-        public Builder setAuthAlwaysRequiredToDisableQuietMode(boolean authAlwaysRequiredToDisableQuietMode) {
+        public Builder setAuthAlwaysRequiredToDisableQuietMode(
+                boolean authAlwaysRequiredToDisableQuietMode) {
             this.mAuthAlwaysRequiredToDisableQuietMode = authAlwaysRequiredToDisableQuietMode;
             return this;
         }
 
-        public Builder setAllowStoppingUserWithDelayedLocking(boolean allowStoppingUserWithDelayedLocking) {
+        public Builder setAllowStoppingUserWithDelayedLocking(
+                boolean allowStoppingUserWithDelayedLocking) {
             this.mAllowStoppingUserWithDelayedLocking = allowStoppingUserWithDelayedLocking;
             return this;
         }
@@ -947,7 +1051,8 @@ public final class UserProperties implements Parcelable {
             return this;
         }
 
-        public Builder setCrossProfileContentSharingStrategy(int crossProfileContentSharingStrategy) {
+        public Builder setCrossProfileContentSharingStrategy(
+                int crossProfileContentSharingStrategy) {
             this.mCrossProfileContentSharingStrategy = crossProfileContentSharingStrategy;
             return this;
         }
@@ -963,11 +1068,49 @@ public final class UserProperties implements Parcelable {
         }
 
         public UserProperties build() {
-            return new UserProperties(this.mShowInLauncher, this.mStartWithParent, this.mShowInSettings, this.mShowInQuietMode, this.mShowInSharingSurfaces, this.mInheritDevicePolicy, this.mUseParentsContacts, this.mUpdateCrossProfileIntentFiltersOnOTA, this.mCrossProfileIntentFilterAccessControl, this.mCrossProfileIntentResolutionStrategy, this.mMediaSharedWithParent, this.mCredentialShareableWithParent, this.mAuthAlwaysRequiredToDisableQuietMode, this.mAllowStoppingUserWithDelayedLocking, this.mDeleteAppWithParent, this.mAlwaysVisible, this.mCrossProfileContentSharingStrategy, this.mProfileApiVisibility, this.mItemsRestrictedOnHomeScreen);
+            return new UserProperties(
+                    this.mShowInLauncher,
+                    this.mStartWithParent,
+                    this.mShowInSettings,
+                    this.mShowInQuietMode,
+                    this.mShowInSharingSurfaces,
+                    this.mInheritDevicePolicy,
+                    this.mUseParentsContacts,
+                    this.mUpdateCrossProfileIntentFiltersOnOTA,
+                    this.mCrossProfileIntentFilterAccessControl,
+                    this.mCrossProfileIntentResolutionStrategy,
+                    this.mMediaSharedWithParent,
+                    this.mCredentialShareableWithParent,
+                    this.mAuthAlwaysRequiredToDisableQuietMode,
+                    this.mAllowStoppingUserWithDelayedLocking,
+                    this.mDeleteAppWithParent,
+                    this.mAlwaysVisible,
+                    this.mCrossProfileContentSharingStrategy,
+                    this.mProfileApiVisibility,
+                    this.mItemsRestrictedOnHomeScreen);
         }
     }
 
-    private UserProperties(int showInLauncher, boolean startWithParent, int showInSettings, int showInQuietMode, int showInSharingSurfaces, int inheritDevicePolicy, boolean useParentsContacts, boolean updateCrossProfileIntentFiltersOnOTA, int crossProfileIntentFilterAccessControl, int crossProfileIntentResolutionStrategy, boolean mediaSharedWithParent, boolean credentialShareableWithParent, boolean authAlwaysRequiredToDisableQuietMode, boolean allowStoppingUserWithDelayedLocking, boolean deleteAppWithParent, boolean alwaysVisible, int crossProfileContentSharingStrategy, int profileApiVisibility, boolean itemsRestrictedOnHomeScreen) {
+    private UserProperties(
+            int showInLauncher,
+            boolean startWithParent,
+            int showInSettings,
+            int showInQuietMode,
+            int showInSharingSurfaces,
+            int inheritDevicePolicy,
+            boolean useParentsContacts,
+            boolean updateCrossProfileIntentFiltersOnOTA,
+            int crossProfileIntentFilterAccessControl,
+            int crossProfileIntentResolutionStrategy,
+            boolean mediaSharedWithParent,
+            boolean credentialShareableWithParent,
+            boolean authAlwaysRequiredToDisableQuietMode,
+            boolean allowStoppingUserWithDelayedLocking,
+            boolean deleteAppWithParent,
+            boolean alwaysVisible,
+            int crossProfileContentSharingStrategy,
+            int profileApiVisibility,
+            boolean itemsRestrictedOnHomeScreen) {
         this.mPropertiesPresent = 0L;
         this.mDefaultProperties = null;
         setShowInLauncher(showInLauncher);

@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehRoamingNetworkInfo implements Parcelable {
-    public static final Parcelable.Creator<SehRoamingNetworkInfo> CREATOR = new Parcelable.Creator<SehRoamingNetworkInfo>() { // from class: vendor.samsung.hardware.radio.network.SehRoamingNetworkInfo.1
-        @Override // android.os.Parcelable.Creator
-        public SehRoamingNetworkInfo createFromParcel(Parcel _aidl_source) {
-            SehRoamingNetworkInfo _aidl_out = new SehRoamingNetworkInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehRoamingNetworkInfo> CREATOR =
+            new Parcelable.Creator<
+                    SehRoamingNetworkInfo>() { // from class:
+                                               // vendor.samsung.hardware.radio.network.SehRoamingNetworkInfo.1
+                @Override // android.os.Parcelable.Creator
+                public SehRoamingNetworkInfo createFromParcel(Parcel _aidl_source) {
+                    SehRoamingNetworkInfo _aidl_out = new SehRoamingNetworkInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehRoamingNetworkInfo[] newArray(int _aidl_size) {
-            return new SehRoamingNetworkInfo[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehRoamingNetworkInfo[] newArray(int _aidl_size) {
+                    return new SehRoamingNetworkInfo[_aidl_size];
+                }
+            };
     public SehArfcnInfo[] arfcnInfo;
     public byte[] date;
     public byte[] plmn;
@@ -102,7 +106,8 @@ public class SehRoamingNetworkInfo implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.arfcnInfo = (SehArfcnInfo[]) _aidl_parcel.createTypedArray(SehArfcnInfo.CREATOR);
+                this.arfcnInfo =
+                        (SehArfcnInfo[]) _aidl_parcel.createTypedArray(SehArfcnInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

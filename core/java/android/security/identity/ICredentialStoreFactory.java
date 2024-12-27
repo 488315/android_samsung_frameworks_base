@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.security.identity.ICredentialStore;
 
 /* loaded from: classes3.dex */
 public interface ICredentialStoreFactory extends IInterface {
@@ -27,7 +26,7 @@ public interface ICredentialStoreFactory extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICredentialStoreFactory {
+    public abstract static class Stub extends Binder implements ICredentialStoreFactory {
         static final int TRANSACTION_getCredentialStore = 1;
 
         public Stub() {
@@ -65,7 +64,8 @@ public interface ICredentialStoreFactory extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICredentialStoreFactory.DESCRIPTOR);
             }
@@ -103,7 +103,8 @@ public interface ICredentialStoreFactory extends IInterface {
             }
 
             @Override // android.security.identity.ICredentialStoreFactory
-            public ICredentialStore getCredentialStore(int credentialStoreType) throws RemoteException {
+            public ICredentialStore getCredentialStore(int credentialStoreType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -111,7 +112,8 @@ public interface ICredentialStoreFactory extends IInterface {
                     _data.writeInt(credentialStoreType);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ICredentialStore _result = ICredentialStore.Stub.asInterface(_reply.readStrongBinder());
+                    ICredentialStore _result =
+                            ICredentialStore.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

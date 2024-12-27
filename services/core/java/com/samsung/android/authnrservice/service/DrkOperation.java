@@ -2,6 +2,7 @@ package com.samsung.android.authnrservice.service;
 
 import android.content.Context;
 import android.os.Binder;
+
 import com.samsung.android.service.DeviceRootKeyService.DeviceRootKeyServiceManager;
 import com.samsung.android.service.DeviceRootKeyService.Tlv;
 
@@ -33,7 +34,8 @@ public final class DrkOperation {
         }
         try {
             long clearCallingIdentity = Binder.clearCallingIdentity();
-            byte[] createServiceKeySession = this.mDrkServiceManager.createServiceKeySession("AUTHNR", 1, (Tlv) null);
+            byte[] createServiceKeySession =
+                    this.mDrkServiceManager.createServiceKeySession("AUTHNR", 1, (Tlv) null);
             Binder.restoreCallingIdentity(clearCallingIdentity);
             if (createServiceKeySession != null && createServiceKeySession.length != 0) {
                 return createServiceKeySession;

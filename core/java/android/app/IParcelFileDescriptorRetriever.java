@@ -25,7 +25,7 @@ public interface IParcelFileDescriptorRetriever extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IParcelFileDescriptorRetriever {
+    public abstract static class Stub extends Binder implements IParcelFileDescriptorRetriever {
         static final int TRANSACTION_getPfd = 1;
 
         public Stub() {
@@ -63,7 +63,8 @@ public interface IParcelFileDescriptorRetriever extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IParcelFileDescriptorRetriever.DESCRIPTOR);
             }
@@ -106,7 +107,9 @@ public interface IParcelFileDescriptorRetriever extends IInterface {
                     _data.writeInterfaceToken(IParcelFileDescriptorRetriever.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

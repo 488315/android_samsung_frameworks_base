@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.util.io.pem;
 
 import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.encoders.Base64;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -27,7 +28,11 @@ public class PemWriter extends BufferedWriter {
         int size = ((obj.getType().length() + 10 + this.nlLength) * 2) + 6 + 4;
         if (!obj.getHeaders().isEmpty()) {
             for (PemHeader hdr : obj.getHeaders()) {
-                size += hdr.getName().length() + ": ".length() + hdr.getValue().length() + this.nlLength;
+                size +=
+                        hdr.getName().length()
+                                + ": ".length()
+                                + hdr.getValue().length()
+                                + this.nlLength;
             }
             size += this.nlLength;
         }

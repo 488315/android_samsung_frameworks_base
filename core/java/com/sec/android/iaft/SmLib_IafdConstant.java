@@ -7,7 +7,11 @@ public class SmLib_IafdConstant {
     public static final int CAN_NOT_FOUND = 0;
     public static final String DC_API_AUTHORITY = "com.samsung.android.sm.dcapi";
     public static final int FLAG_UPDATE_FAIL = -1;
-    public static final Uri IAFD_STUB_EX_CHECK_UPDATE_API = Uri.parse("content://com.samsung.android.sm.dcapi").buildUpon().appendPath("iafdCheckUpdate").build();
+    public static final Uri IAFD_STUB_EX_CHECK_UPDATE_API =
+            Uri.parse("content://com.samsung.android.sm.dcapi")
+                    .buildUpon()
+                    .appendPath("iafdCheckUpdate")
+                    .build();
     public static final String KEY_APP_NAME = "app_name";
     public static final String KEY_ERROR_COMPONENT = "component";
     public static final String KEY_ERROR_STACK = "error_stack";

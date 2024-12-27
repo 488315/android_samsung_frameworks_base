@@ -3,7 +3,9 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.telephony.Rlog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -66,41 +68,44 @@ public final class ImsSsData implements Parcelable {
     public final int serviceType;
     public final int teleserviceType;
     private static final String TAG = ImsSsData.class.getCanonicalName();
-    public static final Parcelable.Creator<ImsSsData> CREATOR = new Parcelable.Creator<ImsSsData>() { // from class: android.telephony.ims.ImsSsData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsSsData createFromParcel(Parcel in) {
-            return new ImsSsData(in);
-        }
+    public static final Parcelable.Creator<ImsSsData> CREATOR =
+            new Parcelable.Creator<ImsSsData>() { // from class: android.telephony.ims.ImsSsData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsSsData createFromParcel(Parcel in) {
+                    return new ImsSsData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsSsData[] newArray(int size) {
-            return new ImsSsData[size];
-        }
-    };
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestType {
-    }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsSsData[] newArray(int size) {
+                    return new ImsSsData[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ServiceClassFlags {
-    }
+    public @interface RequestType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ServiceType {
-    }
+    public @interface ServiceClassFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TeleserviceType {
-    }
+    public @interface ServiceType {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface TeleserviceType {}
 
     public static final class Builder {
         private ImsSsData mImsSsData;
 
-        public Builder(int serviceType, int requestType, int teleserviceType, int serviceClass, int result) {
-            this.mImsSsData = new ImsSsData(serviceType, requestType, teleserviceType, serviceClass, result);
+        public Builder(
+                int serviceType,
+                int requestType,
+                int teleserviceType,
+                int serviceClass,
+                int result) {
+            this.mImsSsData =
+                    new ImsSsData(serviceType, requestType, teleserviceType, serviceClass, result);
         }
 
         public Builder setSuppServiceInfo(List<ImsSsInfo> imsSsInfos) {
@@ -118,7 +123,8 @@ public final class ImsSsData implements Parcelable {
         }
     }
 
-    public ImsSsData(int serviceType, int requestType, int teleserviceType, int serviceClass, int result) {
+    public ImsSsData(
+            int serviceType, int requestType, int teleserviceType, int serviceClass, int result) {
         this.serviceType = serviceType;
         this.requestType = requestType;
         this.teleserviceType = teleserviceType;
@@ -133,8 +139,12 @@ public final class ImsSsData implements Parcelable {
         this.serviceClass = in.readInt();
         this.result = in.readInt();
         this.mSsInfo = in.createIntArray();
-        this.mCfInfo = in.readParcelableList(new ArrayList(), getClass().getClassLoader(), ImsCallForwardInfo.class);
-        this.mImsSsInfo = in.readParcelableList(new ArrayList(), getClass().getClassLoader(), ImsSsInfo.class);
+        this.mCfInfo =
+                in.readParcelableList(
+                        new ArrayList(), getClass().getClassLoader(), ImsCallForwardInfo.class);
+        this.mImsSsInfo =
+                in.readParcelableList(
+                        new ArrayList(), getClass().getClassLoader(), ImsSsInfo.class);
     }
 
     @Override // android.os.Parcelable
@@ -155,7 +165,12 @@ public final class ImsSsData implements Parcelable {
     }
 
     public boolean isTypeCF() {
-        return getServiceType() == 0 || getServiceType() == 1 || getServiceType() == 2 || getServiceType() == 3 || getServiceType() == 4 || getServiceType() == 5;
+        return getServiceType() == 0
+                || getServiceType() == 1
+                || getServiceType() == 2
+                || getServiceType() == 3
+                || getServiceType() == 4
+                || getServiceType() == 5;
     }
 
     public boolean isTypeCf() {
@@ -195,7 +210,14 @@ public final class ImsSsData implements Parcelable {
     }
 
     public boolean isTypeBarring() {
-        return getServiceType() == 13 || getServiceType() == 14 || getServiceType() == 15 || getServiceType() == 16 || getServiceType() == 17 || getServiceType() == 18 || getServiceType() == 19 || getServiceType() == 20;
+        return getServiceType() == 13
+                || getServiceType() == 14
+                || getServiceType() == 15
+                || getServiceType() == 16
+                || getServiceType() == 17
+                || getServiceType() == 18
+                || getServiceType() == 19
+                || getServiceType() == 20;
     }
 
     public boolean isTypeInterrogation() {
@@ -240,7 +262,9 @@ public final class ImsSsData implements Parcelable {
         }
         int[] result = new int[2];
         if (this.mImsSsInfo == null || this.mImsSsInfo.size() == 0) {
-            Rlog.e(TAG, "getSuppServiceInfoCompat: Could not parse mImsSsInfo, returning empty int[]");
+            Rlog.e(
+                    TAG,
+                    "getSuppServiceInfoCompat: Could not parse mImsSsInfo, returning empty int[]");
             return result;
         }
         if (isTypeClir()) {
@@ -265,6 +289,15 @@ public final class ImsSsData implements Parcelable {
     }
 
     public String toString() {
-        return "[ImsSsData] ServiceType: " + getServiceType() + " RequestType: " + getRequestType() + " TeleserviceType: " + getTeleserviceType() + " ServiceClass: " + getServiceClass() + " Result: " + getResult();
+        return "[ImsSsData] ServiceType: "
+                + getServiceType()
+                + " RequestType: "
+                + getRequestType()
+                + " TeleserviceType: "
+                + getTeleserviceType()
+                + " ServiceClass: "
+                + getServiceClass()
+                + " Result: "
+                + getResult();
     }
 }

@@ -25,8 +25,12 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.MessagingMessage;
+
+import libcore.io.IoUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -47,13 +51,17 @@ import java.util.Locale;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
-import libcore.io.IoUtils;
 
 /* loaded from: classes5.dex */
 public abstract class FileSystemProvider extends DocumentsProvider {
     private static final boolean LOG_INOTIFY = false;
     private static final int MAX_RESULTS_NUMBER = 23;
-    protected static final String SUPPORTED_QUERY_ARGS = joinNewline(DocumentsContract.QUERY_ARG_DISPLAY_NAME, DocumentsContract.QUERY_ARG_FILE_SIZE_OVER, DocumentsContract.QUERY_ARG_LAST_MODIFIED_AFTER, DocumentsContract.QUERY_ARG_MIME_TYPES);
+    protected static final String SUPPORTED_QUERY_ARGS =
+            joinNewline(
+                    DocumentsContract.QUERY_ARG_DISPLAY_NAME,
+                    DocumentsContract.QUERY_ARG_FILE_SIZE_OVER,
+                    DocumentsContract.QUERY_ARG_LAST_MODIFIED_AFTER,
+                    DocumentsContract.QUERY_ARG_MIME_TYPES);
     private static final String TAG = "FileSystemProvider";
     private String[] mDefaultProjection;
     private Handler mHandler;
@@ -69,15 +77,14 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         return TextUtils.join("\n", args);
     }
 
-    protected void onDocIdChanged(String docId) {
-    }
+    protected void onDocIdChanged(String docId) {}
 
-    protected void onDocIdDeleted(String docId) {
-    }
+    protected void onDocIdDeleted(String docId) {}
 
     @Override // android.content.ContentProvider
     public boolean onCreate() {
-        throw new UnsupportedOperationException("Subclass should override this and call onCreate(defaultDocumentProjection)");
+        throw new UnsupportedOperationException(
+                "Subclass should override this and call onCreate(defaultDocumentProjection)");
     }
 
     protected void onCreate(String[] defaultProjection) {
@@ -92,7 +99,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
             File doc = getFileForDocId(docId).getCanonicalFile();
             return FileUtils.contains(parent, doc);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Failed to determine if " + docId + " is child of " + parentDocId + ": " + e);
+            throw new IllegalArgumentException(
+                    "Failed to determine if " + docId + " is child of " + parentDocId + ": " + e);
         }
     }
 
@@ -108,29 +116,35 @@ public abstract class FileSystemProvider extends DocumentsProvider {
             final Int64Ref treeSize = new Int64Ref(0L);
             try {
                 Path path = FileSystems.getDefault().getPath(file.getAbsolutePath(), new String[0]);
-                Files.walkFileTree(path, new FileVisitor<Path>() { // from class: com.android.internal.content.FileSystemProvider.1
-                    @Override // java.nio.file.FileVisitor
-                    public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-                        return FileVisitResult.CONTINUE;
-                    }
+                Files.walkFileTree(
+                        path,
+                        new FileVisitor<
+                                Path>() { // from class:
+                                          // com.android.internal.content.FileSystemProvider.1
+                            @Override // java.nio.file.FileVisitor
+                            public FileVisitResult preVisitDirectory(
+                                    Path dir, BasicFileAttributes attrs) {
+                                return FileVisitResult.CONTINUE;
+                            }
 
-                    @Override // java.nio.file.FileVisitor
-                    public FileVisitResult visitFile(Path file2, BasicFileAttributes attrs) {
-                        treeCount.value++;
-                        treeSize.value += attrs.size();
-                        return FileVisitResult.CONTINUE;
-                    }
+                            @Override // java.nio.file.FileVisitor
+                            public FileVisitResult visitFile(
+                                    Path file2, BasicFileAttributes attrs) {
+                                treeCount.value++;
+                                treeSize.value += attrs.size();
+                                return FileVisitResult.CONTINUE;
+                            }
 
-                    @Override // java.nio.file.FileVisitor
-                    public FileVisitResult visitFileFailed(Path file2, IOException exc) {
-                        return FileVisitResult.CONTINUE;
-                    }
+                            @Override // java.nio.file.FileVisitor
+                            public FileVisitResult visitFileFailed(Path file2, IOException exc) {
+                                return FileVisitResult.CONTINUE;
+                            }
 
-                    @Override // java.nio.file.FileVisitor
-                    public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
-                        return FileVisitResult.CONTINUE;
-                    }
-                });
+                            @Override // java.nio.file.FileVisitor
+                            public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
+                                return FileVisitResult.CONTINUE;
+                            }
+                        });
                 Bundle res = new Bundle();
                 res.putLong(DocumentsContract.METADATA_TREE_COUNT, treeCount.value);
                 res.putLong(DocumentsContract.METADATA_TREE_SIZE, treeSize.value);
@@ -166,7 +180,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         }
     }
 
-    protected final List<String> findDocumentPath(File parent, File doc) throws FileNotFoundException {
+    protected final List<String> findDocumentPath(File parent, File doc)
+            throws FileNotFoundException {
         if (!doc.exists()) {
             throw new FileNotFoundException(doc + " is not found.");
         }
@@ -182,7 +197,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     }
 
     @Override // android.provider.DocumentsProvider
-    public String createDocument(String docId, String mimeType, String displayName) throws FileNotFoundException {
+    public String createDocument(String docId, String mimeType, String displayName)
+            throws FileNotFoundException {
         String childId;
         String displayName2 = FileUtils.buildValidFatFilename(displayName);
         File parent = getFileForDocId(docId);
@@ -235,7 +251,9 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     }
 
     @Override // android.provider.DocumentsProvider
-    public String moveDocument(String sourceDocumentId, String sourceParentDocumentId, String targetParentDocumentId) throws FileNotFoundException {
+    public String moveDocument(
+            String sourceDocumentId, String sourceParentDocumentId, String targetParentDocumentId)
+            throws FileNotFoundException {
         File before = getFileForDocId(sourceDocumentId);
         File after = new File(getFileForDocId(targetParentDocumentId), before.getName());
         File visibleFileBefore = getFileForDocId(sourceDocumentId, true);
@@ -257,7 +275,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     private static void updateMediaStore(Context context, File file) {
         if (file != null) {
             ContentResolver resolver = context.getContentResolver();
-            if (!file.isDirectory() && file.getName().toLowerCase(Locale.ROOT).endsWith(".nomedia")) {
+            if (!file.isDirectory()
+                    && file.getName().toLowerCase(Locale.ROOT).endsWith(".nomedia")) {
                 MediaStore.scanFile(resolver, file.getParentFile());
             } else {
                 MediaStore.scanFile(resolver, file);
@@ -282,25 +301,31 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     }
 
     @Override // android.provider.DocumentsProvider
-    public Cursor queryDocument(String documentId, String[] projection) throws FileNotFoundException {
+    public Cursor queryDocument(String documentId, String[] projection)
+            throws FileNotFoundException {
         MatrixCursor result = new MatrixCursor(resolveProjection(projection));
         includeFile(result, documentId, null);
         return result;
     }
 
     @Override // android.provider.DocumentsProvider
-    public Cursor queryChildDocuments(String documentId, String[] projection, String sortOrder) throws FileNotFoundException {
+    public Cursor queryChildDocuments(String documentId, String[] projection, String sortOrder)
+            throws FileNotFoundException {
         return queryChildDocuments(documentId, projection, sortOrder, false);
     }
 
     @Override // android.provider.DocumentsProvider
-    public final Cursor queryChildDocumentsForManage(String documentId, String[] projection, String sortOrder) throws FileNotFoundException {
+    public final Cursor queryChildDocumentsForManage(
+            String documentId, String[] projection, String sortOrder) throws FileNotFoundException {
         return queryChildDocuments(documentId, projection, sortOrder, true);
     }
 
-    protected Cursor queryChildDocuments(String documentId, String[] projection, String sortOrder, boolean includeHidden) throws FileNotFoundException {
+    protected Cursor queryChildDocuments(
+            String documentId, String[] projection, String sortOrder, boolean includeHidden)
+            throws FileNotFoundException {
         File parent = getFileForDocId(documentId);
-        MatrixCursor result = new DirectoryCursor(resolveProjection(projection), documentId, parent);
+        MatrixCursor result =
+                new DirectoryCursor(resolveProjection(projection), documentId, parent);
         if (!parent.isDirectory()) {
             Log.w(TAG, '\"' + documentId + "\" is not a directory");
             return result;
@@ -317,7 +342,9 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         return result;
     }
 
-    protected final Cursor querySearchDocuments(File folder, String[] projection, Set<String> exclusion, Bundle queryArgs) throws FileNotFoundException {
+    protected final Cursor querySearchDocuments(
+            File folder, String[] projection, Set<String> exclusion, Bundle queryArgs)
+            throws FileNotFoundException {
         MatrixCursor result = new MatrixCursor(resolveProjection(projection));
         Queue<File> pending = new ArrayDeque<>();
         pending.offer(folder);
@@ -329,7 +356,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
                         pending.offer(child);
                     }
                 }
-                if (!exclusion.contains(file.getAbsolutePath()) && matchSearchQueryArguments(file, queryArgs)) {
+                if (!exclusion.contains(file.getAbsolutePath())
+                        && matchSearchQueryArguments(file, queryArgs)) {
                     includeFile(result, null, file);
                 }
             }
@@ -365,7 +393,9 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     }
 
     @Override // android.provider.DocumentsProvider
-    public ParcelFileDescriptor openDocument(final String documentId, String mode, CancellationSignal signal) throws FileNotFoundException {
+    public ParcelFileDescriptor openDocument(
+            final String documentId, String mode, CancellationSignal signal)
+            throws FileNotFoundException {
         File file = getFileForDocId(documentId);
         final File visibleFile = getFileForDocId(documentId, true);
         int pfdMode = ParcelFileDescriptor.parseMode(mode);
@@ -376,19 +406,27 @@ public abstract class FileSystemProvider extends DocumentsProvider {
             return openFileForRead(visibleFile);
         }
         try {
-            return ParcelFileDescriptor.open(file, pfdMode, this.mHandler, new ParcelFileDescriptor.OnCloseListener() { // from class: com.android.internal.content.FileSystemProvider$$ExternalSyntheticLambda0
-                @Override // android.os.ParcelFileDescriptor.OnCloseListener
-                public final void onClose(IOException iOException) {
-                    FileSystemProvider.this.lambda$openDocument$0(documentId, visibleFile, iOException);
-                }
-            });
+            return ParcelFileDescriptor.open(
+                    file,
+                    pfdMode,
+                    this.mHandler,
+                    new ParcelFileDescriptor
+                            .OnCloseListener() { // from class:
+                                                 // com.android.internal.content.FileSystemProvider$$ExternalSyntheticLambda0
+                        @Override // android.os.ParcelFileDescriptor.OnCloseListener
+                        public final void onClose(IOException iOException) {
+                            FileSystemProvider.this.lambda$openDocument$0(
+                                    documentId, visibleFile, iOException);
+                        }
+                    });
         } catch (IOException e) {
             throw new FileNotFoundException("Failed to open for writing: " + e);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$openDocument$0(String documentId, File visibleFile, IOException e) {
+    public /* synthetic */ void lambda$openDocument$0(
+            String documentId, File visibleFile, IOException e) {
         onDocIdChanged(documentId);
         scanFile(visibleFile);
     }
@@ -401,7 +439,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         }
         Bundle opts = new Bundle();
         opts.putInt("android.provider.extra.MEDIA_CAPABILITIES_UID", Binder.getCallingUid());
-        AssetFileDescriptor afd = getContext().getContentResolver().openTypedAssetFileDescriptor(uri, "*/*", opts);
+        AssetFileDescriptor afd =
+                getContext().getContentResolver().openTypedAssetFileDescriptor(uri, "*/*", opts);
         if (afd == null) {
             Log.w(TAG, "Failed to open with media_capabilities uid for URI: " + uri);
             return ParcelFileDescriptor.open(target, 268435456);
@@ -425,7 +464,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
             String extension2 = fileName.substring(dotPos + 1);
             extension = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension2);
         }
-        return DocumentsContract.matchSearchQueryArguments(queryArgs, fileName, extension, file.lastModified(), file.length());
+        return DocumentsContract.matchSearchQueryArguments(
+                queryArgs, fileName, extension, file.lastModified(), file.length());
     }
 
     private void scanFile(File visibleFile) {
@@ -435,12 +475,15 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     }
 
     @Override // android.provider.DocumentsProvider
-    public AssetFileDescriptor openDocumentThumbnail(String documentId, Point sizeHint, CancellationSignal signal) throws FileNotFoundException {
+    public AssetFileDescriptor openDocumentThumbnail(
+            String documentId, Point sizeHint, CancellationSignal signal)
+            throws FileNotFoundException {
         File file = getFileForDocId(documentId);
         return DocumentsContract.openImageThumbnail(file);
     }
 
-    protected MatrixCursor.RowBuilder includeFile(MatrixCursor result, String docId, File file) throws FileNotFoundException {
+    protected MatrixCursor.RowBuilder includeFile(MatrixCursor result, String docId, File file)
+            throws FileNotFoundException {
         String[] columns = result.getColumnNames();
         MatrixCursor.RowBuilder row = result.newRow();
         if (docId == null) {
@@ -506,7 +549,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
     }
 
     protected boolean typeSupportsMetadata(String mimeType) {
-        return MetadataReader.isSupportedMimeType(mimeType) || DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
+        return MetadataReader.isSupportedMimeType(mimeType)
+                || DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
     }
 
     protected final File getFileForDocId(String docId) throws FileNotFoundException {
@@ -522,7 +566,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         synchronized (this.mObservers) {
             DirectoryObserver observer = this.mObservers.get(file);
             if (observer == null) {
-                observer = new DirectoryObserver(file, getContext().getContentResolver(), notifyUri);
+                observer =
+                        new DirectoryObserver(file, getContext().getContentResolver(), notifyUri);
                 observer.startWatching();
                 this.mObservers.put(file, observer);
             }
@@ -584,7 +629,11 @@ public abstract class FileSystemProvider extends DocumentsProvider {
         public DirectoryCursor(String[] columnNames, String docId, File file) {
             super(columnNames);
             Uri notifyUri = FileSystemProvider.this.buildNotificationUri(docId);
-            setNotificationUris(FileSystemProvider.this.getContext().getContentResolver(), Arrays.asList(notifyUri), FileSystemProvider.this.getContext().getContentResolver().getUserId(), false);
+            setNotificationUris(
+                    FileSystemProvider.this.getContext().getContentResolver(),
+                    Arrays.asList(notifyUri),
+                    FileSystemProvider.this.getContext().getContentResolver().getUserId(),
+                    false);
             this.mFile = file;
             FileSystemProvider.this.startObserving(this.mFile, notifyUri, this);
         }
@@ -593,7 +642,8 @@ public abstract class FileSystemProvider extends DocumentsProvider {
             onChange(false);
         }
 
-        @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable, java.lang.AutoCloseable
+        @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable,
+                  // java.lang.AutoCloseable
         public void close() {
             super.close();
             FileSystemProvider.this.stopObserving(this.mFile, this);

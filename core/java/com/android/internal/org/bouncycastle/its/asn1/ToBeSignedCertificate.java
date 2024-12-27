@@ -6,8 +6,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 
 /* loaded from: classes5.dex */
 public class ToBeSignedCertificate extends ASN1Object {
-    private ToBeSignedCertificate(ASN1Sequence seq) {
-    }
+    private ToBeSignedCertificate(ASN1Sequence seq) {}
 
     public static ToBeSignedCertificate getInstance(Object src) {
         if (src instanceof ToBeSignedCertificate) {
@@ -19,7 +18,8 @@ public class ToBeSignedCertificate extends ASN1Object {
         return null;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return null;
     }

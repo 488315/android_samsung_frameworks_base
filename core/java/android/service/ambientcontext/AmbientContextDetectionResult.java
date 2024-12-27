@@ -5,7 +5,9 @@ import android.annotation.SystemApi;
 import android.app.ambientcontext.AmbientContextEvent;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,28 +15,34 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class AmbientContextDetectionResult implements Parcelable {
-    public static final Parcelable.Creator<AmbientContextDetectionResult> CREATOR = new Parcelable.Creator<AmbientContextDetectionResult>() { // from class: android.service.ambientcontext.AmbientContextDetectionResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AmbientContextDetectionResult[] newArray(int size) {
-            return new AmbientContextDetectionResult[size];
-        }
+    public static final Parcelable.Creator<AmbientContextDetectionResult> CREATOR =
+            new Parcelable.Creator<
+                    AmbientContextDetectionResult>() { // from class:
+                                                       // android.service.ambientcontext.AmbientContextDetectionResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AmbientContextDetectionResult[] newArray(int size) {
+                    return new AmbientContextDetectionResult[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AmbientContextDetectionResult createFromParcel(Parcel in) {
-            return new AmbientContextDetectionResult(in);
-        }
-    };
-    public static final String RESULT_RESPONSE_BUNDLE_KEY = "android.app.ambientcontext.AmbientContextDetectionResultBundleKey";
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AmbientContextDetectionResult createFromParcel(Parcel in) {
+                    return new AmbientContextDetectionResult(in);
+                }
+            };
+    public static final String RESULT_RESPONSE_BUNDLE_KEY =
+            "android.app.ambientcontext.AmbientContextDetectionResultBundleKey";
     private final List<AmbientContextEvent> mEvents;
     private final String mPackageName;
 
     AmbientContextDetectionResult(List<AmbientContextEvent> events, String packageName) {
         this.mEvents = events;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEvents);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEvents);
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
     }
 
     public List<AmbientContextEvent> getEvents() {
@@ -46,7 +54,11 @@ public final class AmbientContextDetectionResult implements Parcelable {
     }
 
     public String toString() {
-        return "AmbientContextEventResponse { events = " + this.mEvents + ", packageName = " + this.mPackageName + " }";
+        return "AmbientContextEventResponse { events = "
+                + this.mEvents
+                + ", packageName = "
+                + this.mPackageName
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -64,12 +76,15 @@ public final class AmbientContextDetectionResult implements Parcelable {
     AmbientContextDetectionResult(Parcel in) {
         in.readByte();
         ArrayList<AmbientContextEvent> events = new ArrayList<>();
-        in.readParcelableList(events, AmbientContextEvent.class.getClassLoader(), AmbientContextEvent.class);
+        in.readParcelableList(
+                events, AmbientContextEvent.class.getClassLoader(), AmbientContextEvent.class);
         String packageName = in.readString();
         this.mEvents = events;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEvents);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEvents);
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
     }
 
     public static final class Builder {
@@ -116,13 +131,15 @@ public final class AmbientContextDetectionResult implements Parcelable {
             if ((this.mBuilderFieldsSet & 1) == 0) {
                 this.mEvents = new ArrayList<>();
             }
-            AmbientContextDetectionResult o = new AmbientContextDetectionResult(this.mEvents, this.mPackageName);
+            AmbientContextDetectionResult o =
+                    new AmbientContextDetectionResult(this.mEvents, this.mPackageName);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 2) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }

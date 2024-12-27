@@ -25,8 +25,10 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.IGraphicsStats;
 import android.view.IGraphicsStatsCallback;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.FastPrintWriter;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -66,7 +68,8 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
 
     private static native void nAddToDump(long j, String str);
 
-    private static native void nAddToDump(long j, String str, String str2, long j2, long j3, long j4, byte[] bArr);
+    private static native void nAddToDump(
+            long j, String str, String str2, long j2, long j3, long j4, byte[] bArr);
 
     private static native long nCreateDump(int i, boolean z);
 
@@ -76,7 +79,8 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
 
     private static native int nGetAshmemSize();
 
-    private static native void nSaveBuffer(String str, String str2, long j, long j2, long j3, byte[] bArr);
+    private static native void nSaveBuffer(
+            String str, String str2, long j, long j2, long j3, byte[] bArr);
 
     private static native void nativeDestructor();
 
@@ -90,25 +94,32 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         this.mGraphicsStatsDir = new File(systemDataDir, GRAPHICS_STATS_SERVICE);
         this.mGraphicsStatsDir.mkdirs();
         if (!this.mGraphicsStatsDir.exists()) {
-            throw new IllegalStateException("Graphics stats directory does not exist: " + this.mGraphicsStatsDir.getAbsolutePath());
+            throw new IllegalStateException(
+                    "Graphics stats directory does not exist: "
+                            + this.mGraphicsStatsDir.getAbsolutePath());
         }
         HandlerThread bgthread = new HandlerThread("GraphicsStats-disk", 10);
         bgthread.start();
         this.mGraphicsRendererPolicy = new GraphicsRendererPolicy(context);
-        this.mWriteOutHandler = new Handler(bgthread.getLooper(), new Handler.Callback() { // from class: android.graphics.GraphicsStatsService.1
-            @Override // android.os.Handler.Callback
-            public boolean handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        GraphicsStatsService.this.saveBuffer((HistoricalBuffer) msg.obj);
-                        break;
-                    case 2:
-                        GraphicsStatsService.this.deleteOldBuffers();
-                        break;
-                }
-                return true;
-            }
-        });
+        this.mWriteOutHandler =
+                new Handler(
+                        bgthread.getLooper(),
+                        new Handler
+                                .Callback() { // from class: android.graphics.GraphicsStatsService.1
+                            @Override // android.os.Handler.Callback
+                            public boolean handleMessage(Message msg) {
+                                switch (msg.what) {
+                                    case 1:
+                                        GraphicsStatsService.this.saveBuffer(
+                                                (HistoricalBuffer) msg.obj);
+                                        break;
+                                    case 2:
+                                        GraphicsStatsService.this.deleteOldBuffers();
+                                        break;
+                                }
+                                return true;
+                            }
+                        });
         nativeInit();
     }
 
@@ -119,12 +130,18 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         this.mRotateIsScheduled = true;
         Calendar calendar = normalizeDate(System.currentTimeMillis());
         calendar.add(5, 1);
-        this.mAlarmManager.setExact(1, calendar.getTimeInMillis(), TAG, new AlarmManager.OnAlarmListener() { // from class: android.graphics.GraphicsStatsService$$ExternalSyntheticLambda0
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                GraphicsStatsService.this.onAlarm();
-            }
-        }, this.mWriteOutHandler);
+        this.mAlarmManager.setExact(
+                1,
+                calendar.getTimeInMillis(),
+                TAG,
+                new AlarmManager.OnAlarmListener() { // from class:
+                    // android.graphics.GraphicsStatsService$$ExternalSyntheticLambda0
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
+                        GraphicsStatsService.this.onAlarm();
+                    }
+                },
+                this.mWriteOutHandler);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -140,25 +157,40 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
             try {
                 active.mCallback.onRotateGraphicsStatsBuffer();
             } catch (RemoteException e) {
-                Log.w(TAG, String.format("Failed to notify '%s' (pid=%d) to rotate buffers", active.mInfo.mPackageName, Integer.valueOf(active.mPid)), e);
+                Log.w(
+                        TAG,
+                        String.format(
+                                "Failed to notify '%s' (pid=%d) to rotate buffers",
+                                active.mInfo.mPackageName, Integer.valueOf(active.mPid)),
+                        e);
             }
         }
         this.mWriteOutHandler.sendEmptyMessageDelayed(2, JobInfo.MIN_BACKOFF_MILLIS);
     }
 
     @Override // android.view.IGraphicsStats
-    public ParcelFileDescriptor requestBufferForProcess(String packageName, IGraphicsStatsCallback token) throws RemoteException {
+    public ParcelFileDescriptor requestBufferForProcess(
+            String packageName, IGraphicsStatsCallback token) throws RemoteException {
         int uid = Binder.getCallingUid();
         int pid = Binder.getCallingPid();
         long callingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 this.mAppOps.checkPackage(uid, packageName);
-                PackageInfo info = this.mContext.getPackageManager().getPackageInfoAsUser(packageName, 0, UserHandle.getUserId(uid));
+                PackageInfo info =
+                        this.mContext
+                                .getPackageManager()
+                                .getPackageInfoAsUser(packageName, 0, UserHandle.getUserId(uid));
                 try {
                     synchronized (this.mLock) {
                         try {
-                            ParcelFileDescriptor pfd = requestBufferForProcessLocked(token, uid, pid, packageName, info.getLongVersionCode());
+                            ParcelFileDescriptor pfd =
+                                    requestBufferForProcessLocked(
+                                            token,
+                                            uid,
+                                            pid,
+                                            packageName,
+                                            info.getLongVersionCode());
                             return pfd;
                         } catch (Throwable th) {
                             th = th;
@@ -178,7 +210,9 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
 
     @Override // android.view.IGraphicsStats
     public int requestRenderEngineFor(String packageName) throws RemoteException {
-        Log.d(TAG, "requestRenderEngineFor(" + packageName + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                TAG,
+                "requestRenderEngineFor(" + packageName + NavigationBarInflaterView.KEY_CODE_END);
         if (packageName == null) {
             Log.w(TAG, "packageName is null.");
             return GraphicsStatsRenderEngine.VK.ordinal();
@@ -311,7 +345,9 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         }
     }
 
-    private ParcelFileDescriptor requestBufferForProcessLocked(IGraphicsStatsCallback token, int uid, int pid, String packageName, long versionCode) throws RemoteException {
+    private ParcelFileDescriptor requestBufferForProcessLocked(
+            IGraphicsStatsCallback token, int uid, int pid, String packageName, long versionCode)
+            throws RemoteException {
         ActiveBuffer buffer = fetchActiveBuffersLocked(token, uid, pid, packageName, versionCode);
         scheduleRotateLocked();
         return buffer.getPfd();
@@ -328,7 +364,12 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
     }
 
     private File pathForApp(BufferInfo info) {
-        String subPath = String.format("%d/%s/%d/total", Long.valueOf(normalizeDate(info.mStartTime).getTimeInMillis()), info.mPackageName, Long.valueOf(info.mVersionCode));
+        String subPath =
+                String.format(
+                        "%d/%s/%d/total",
+                        Long.valueOf(normalizeDate(info.mStartTime).getTimeInMillis()),
+                        info.mPackageName,
+                        Long.valueOf(info.mVersionCode));
         return new File(this.mGraphicsStatsDir, subPath);
     }
 
@@ -344,7 +385,13 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
             if (!parent.exists()) {
                 Log.w(TAG, "Unable to create path: '" + parent.getAbsolutePath() + "'");
             } else {
-                nSaveBuffer(path.getAbsolutePath(), buffer.mInfo.mPackageName, buffer.mInfo.mVersionCode, buffer.mInfo.mStartTime, buffer.mInfo.mEndTime, buffer.mData);
+                nSaveBuffer(
+                        path.getAbsolutePath(),
+                        buffer.mInfo.mPackageName,
+                        buffer.mInfo.mVersionCode,
+                        buffer.mInfo.mStartTime,
+                        buffer.mInfo.mEndTime,
+                        buffer.mData);
                 Trace.traceEnd(524288L);
             }
         }
@@ -380,7 +427,8 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
                 }
                 Arrays.sort(sortedDates);
                 for (int i3 = 0; i3 < sortedDates.length - 3; i3++) {
-                    deleteRecursiveLocked(new File(this.mGraphicsStatsDir, Long.toString(sortedDates[i3])));
+                    deleteRecursiveLocked(
+                            new File(this.mGraphicsStatsDir, Long.toString(sortedDates[i3])));
                 }
                 Trace.traceEnd(524288L);
             }
@@ -406,23 +454,29 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0040, code lost:
-    
-        r0 = new android.graphics.GraphicsStatsService.ActiveBuffer(r15, r16, r17, r18, r19, r20);
-        r15.mActive.add(r0);
-     */
+
+       r0 = new android.graphics.GraphicsStatsService.ActiveBuffer(r15, r16, r17, r18, r19, r20);
+       r15.mActive.add(r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0056, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x005f, code lost:
-    
-        throw new android.os.RemoteException("Failed to allocate space");
-     */
+
+       throw new android.os.RemoteException("Failed to allocate space");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.graphics.GraphicsStatsService.ActiveBuffer fetchActiveBuffersLocked(android.view.IGraphicsStatsCallback r16, int r17, int r18, java.lang.String r19, long r20) throws android.os.RemoteException {
+    private android.graphics.GraphicsStatsService.ActiveBuffer fetchActiveBuffersLocked(
+            android.view.IGraphicsStatsCallback r16,
+            int r17,
+            int r18,
+            java.lang.String r19,
+            long r20)
+            throws android.os.RemoteException {
         /*
             r15 = this;
             r9 = r15
@@ -479,7 +533,11 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
             r1.<init>(r2)
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.GraphicsStatsService.fetchActiveBuffersLocked(android.view.IGraphicsStatsCallback, int, int, java.lang.String, long):android.graphics.GraphicsStatsService$ActiveBuffer");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.graphics.GraphicsStatsService.fetchActiveBuffersLocked(android.view.IGraphicsStatsCallback,"
+                    + " int, int, java.lang.String,"
+                    + " long):android.graphics.GraphicsStatsService$ActiveBuffer");
     }
 
     private HashSet<File> dumpActiveLocked(long dump, ArrayList<HistoricalBuffer> buffers) {
@@ -488,7 +546,14 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
             HistoricalBuffer buffer = buffers.get(i);
             File path = pathForApp(buffer.mInfo);
             skipFiles.add(path);
-            nAddToDump(dump, path.getAbsolutePath(), buffer.mInfo.mPackageName, buffer.mInfo.mVersionCode, buffer.mInfo.mStartTime, buffer.mInfo.mEndTime, buffer.mData);
+            nAddToDump(
+                    dump,
+                    path.getAbsolutePath(),
+                    buffer.mInfo.mPackageName,
+                    buffer.mInfo.mVersionCode,
+                    buffer.mInfo.mStartTime,
+                    buffer.mInfo.mEndTime,
+                    buffer.mData);
         }
         return skipFiles;
     }
@@ -595,21 +660,32 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
         final IBinder mToken;
         final int mUid;
 
-        ActiveBuffer(IGraphicsStatsCallback token, int uid, int pid, String packageName, long versionCode) throws RemoteException, IOException {
-            this.mInfo = GraphicsStatsService.this.new BufferInfo(packageName, versionCode, System.currentTimeMillis());
+        ActiveBuffer(
+                IGraphicsStatsCallback token,
+                int uid,
+                int pid,
+                String packageName,
+                long versionCode)
+                throws RemoteException, IOException {
+            this.mInfo =
+                    GraphicsStatsService.this
+                    .new BufferInfo(packageName, versionCode, System.currentTimeMillis());
             this.mUid = uid;
             this.mPid = pid;
             this.mCallback = token;
             this.mToken = this.mCallback.asBinder();
             this.mToken.linkToDeath(this, 0);
             try {
-                this.mProcessBuffer = SharedMemory.create("GFXStats-" + pid, GraphicsStatsService.this.mAshmemSize);
+                this.mProcessBuffer =
+                        SharedMemory.create(
+                                "GFXStats-" + pid, GraphicsStatsService.this.mAshmemSize);
                 this.mMapping = this.mProcessBuffer.mapReadWrite();
             } catch (ErrnoException ex) {
                 ex.rethrowAsIOException();
             }
             this.mMapping.position(0);
-            this.mMapping.put(GraphicsStatsService.this.mZeroData, 0, GraphicsStatsService.this.mAshmemSize);
+            this.mMapping.put(
+                    GraphicsStatsService.this.mZeroData, 0, GraphicsStatsService.this.mAshmemSize);
         }
 
         @Override // android.os.IBinder.DeathRecipient

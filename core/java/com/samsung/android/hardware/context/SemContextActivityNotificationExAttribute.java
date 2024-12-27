@@ -4,23 +4,27 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 /* loaded from: classes6.dex */
 public class SemContextActivityNotificationExAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextActivityNotificationExAttribute> CREATOR = new Parcelable.Creator<SemContextActivityNotificationExAttribute>() { // from class: com.samsung.android.hardware.context.SemContextActivityNotificationExAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityNotificationExAttribute createFromParcel(Parcel in) {
-            return new SemContextActivityNotificationExAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityNotificationExAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityNotificationExAttribute>() { // from class:
+                                                                   // com.samsung.android.hardware.context.SemContextActivityNotificationExAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityNotificationExAttribute createFromParcel(Parcel in) {
+                    return new SemContextActivityNotificationExAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityNotificationExAttribute[] newArray(int size) {
-            return new SemContextActivityNotificationExAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityNotificationExAttribute[] newArray(int size) {
+                    return new SemContextActivityNotificationExAttribute[size];
+                }
+            };
     private static final int STATUS_MAX = 5;
     private static final String TAG = "SemContextActivityNotificationExAttribute";
     private int[] mActivityFilter;
@@ -29,7 +33,7 @@ public class SemContextActivityNotificationExAttribute extends SemContextAttribu
     SemContextActivityNotificationExAttribute() {
         this.mActivityFilter = null;
         this.mDuration = 30;
-        this.mActivityFilter = new int[]{4};
+        this.mActivityFilter = new int[] {4};
         setAttribute();
     }
 
@@ -59,7 +63,8 @@ public class SemContextActivityNotificationExAttribute extends SemContextAttribu
         }
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < this.mActivityFilter.length; i++) {
-            if ((this.mActivityFilter[i] < 0 || this.mActivityFilter[i] > 5) && this.mActivityFilter[i] != 30) {
+            if ((this.mActivityFilter[i] < 0 || this.mActivityFilter[i] > 5)
+                    && this.mActivityFilter[i] != 30) {
                 Log.e(TAG, "The activity status is wrong.");
                 return false;
             }

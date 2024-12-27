@@ -3,17 +3,6 @@ package android.hardware.input;
 import android.Manifest;
 import android.app.ActivityThread;
 import android.bluetooth.BluetoothDevice;
-import android.hardware.input.IInputDeviceBatteryListener;
-import android.hardware.input.IInputDevicesChangedListener;
-import android.hardware.input.IInputSensorEventListener;
-import android.hardware.input.IKeyboardBacklightListener;
-import android.hardware.input.IMultiFingerGestureListener;
-import android.hardware.input.IPointerIconChangedListener;
-import android.hardware.input.ISemLidStateChangedListener;
-import android.hardware.input.IStickyModifierStateListener;
-import android.hardware.input.ISwitchEventChangedListener;
-import android.hardware.input.ITabletModeChangedListener;
-import android.hardware.input.IWirelessKeyboardShareChangedListener;
 import android.hardware.lights.Light;
 import android.hardware.lights.LightState;
 import android.os.Binder;
@@ -34,7 +23,9 @@ import android.view.PointerIcon;
 import android.view.VerifiedInputEvent;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
+
 import com.samsung.android.edge.EdgeManagerInternal;
+
 import java.util.List;
 import java.util.Map;
 
@@ -108,9 +99,19 @@ public interface IInputManager extends IInterface {
 
     KeyboardLayout getKeyboardLayout(String str) throws RemoteException;
 
-    KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) throws RemoteException;
+    KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(
+            InputDeviceIdentifier inputDeviceIdentifier,
+            int i,
+            InputMethodInfo inputMethodInfo,
+            InputMethodSubtype inputMethodSubtype)
+            throws RemoteException;
 
-    KeyboardLayout[] getKeyboardLayoutListForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) throws RemoteException;
+    KeyboardLayout[] getKeyboardLayoutListForInputDevice(
+            InputDeviceIdentifier inputDeviceIdentifier,
+            int i,
+            InputMethodInfo inputMethodInfo,
+            InputMethodSubtype inputMethodSubtype)
+            throws RemoteException;
 
     KeyboardLayout[] getKeyboardLayouts() throws RemoteException;
 
@@ -160,7 +161,8 @@ public interface IInputManager extends IInterface {
 
     InputMonitor monitorGestureInput(IBinder iBinder, String str, int i) throws RemoteException;
 
-    InputMonitor monitorGestureInputFiltered(IBinder iBinder, String str, int i, int i2) throws RemoteException;
+    InputMonitor monitorGestureInputFiltered(IBinder iBinder, String str, int i, int i2)
+            throws RemoteException;
 
     InputChannel monitorInputForBinder(String str, int i, int i2) throws RemoteException;
 
@@ -170,29 +172,42 @@ public interface IInputManager extends IInterface {
 
     void pilferPointers(IBinder iBinder) throws RemoteException;
 
-    void registerBatteryListener(int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) throws RemoteException;
+    void registerBatteryListener(int i, IInputDeviceBatteryListener iInputDeviceBatteryListener)
+            throws RemoteException;
 
-    void registerInputDevicesChangedListener(IInputDevicesChangedListener iInputDevicesChangedListener) throws RemoteException;
+    void registerInputDevicesChangedListener(
+            IInputDevicesChangedListener iInputDevicesChangedListener) throws RemoteException;
 
-    void registerKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener) throws RemoteException;
+    void registerKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener)
+            throws RemoteException;
 
-    void registerLidStateChangedListener(ISemLidStateChangedListener iSemLidStateChangedListener) throws RemoteException;
+    void registerLidStateChangedListener(ISemLidStateChangedListener iSemLidStateChangedListener)
+            throws RemoteException;
 
-    void registerMultiFingerGestureListener(IMultiFingerGestureListener iMultiFingerGestureListener) throws RemoteException;
+    void registerMultiFingerGestureListener(IMultiFingerGestureListener iMultiFingerGestureListener)
+            throws RemoteException;
 
-    void registerPointerIconChangedListener(IPointerIconChangedListener iPointerIconChangedListener) throws RemoteException;
+    void registerPointerIconChangedListener(IPointerIconChangedListener iPointerIconChangedListener)
+            throws RemoteException;
 
-    boolean registerSensorListener(IInputSensorEventListener iInputSensorEventListener) throws RemoteException;
+    boolean registerSensorListener(IInputSensorEventListener iInputSensorEventListener)
+            throws RemoteException;
 
-    void registerStickyModifierStateListener(IStickyModifierStateListener iStickyModifierStateListener) throws RemoteException;
+    void registerStickyModifierStateListener(
+            IStickyModifierStateListener iStickyModifierStateListener) throws RemoteException;
 
-    void registerSwitchEventChangedListener(ISwitchEventChangedListener iSwitchEventChangedListener) throws RemoteException;
+    void registerSwitchEventChangedListener(ISwitchEventChangedListener iSwitchEventChangedListener)
+            throws RemoteException;
 
-    void registerTabletModeChangedListener(ITabletModeChangedListener iTabletModeChangedListener) throws RemoteException;
+    void registerTabletModeChangedListener(ITabletModeChangedListener iTabletModeChangedListener)
+            throws RemoteException;
 
-    boolean registerVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) throws RemoteException;
+    boolean registerVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener)
+            throws RemoteException;
 
-    void registerWirelessKeyboardShareChangedListener(IWirelessKeyboardShareChangedListener iWirelessKeyboardShareChangedListener) throws RemoteException;
+    void registerWirelessKeyboardShareChangedListener(
+            IWirelessKeyboardShareChangedListener iWirelessKeyboardShareChangedListener)
+            throws RemoteException;
 
     void remapModifierKey(int i, int i2) throws RemoteException;
 
@@ -224,21 +239,31 @@ public interface IInputManager extends IInterface {
 
     void setHostRoleWirelessKeyboardShare() throws RemoteException;
 
-    void setKeyboardLayoutForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype, String str) throws RemoteException;
+    void setKeyboardLayoutForInputDevice(
+            InputDeviceIdentifier inputDeviceIdentifier,
+            int i,
+            InputMethodInfo inputMethodInfo,
+            InputMethodSubtype inputMethodSubtype,
+            String str)
+            throws RemoteException;
 
-    void setLightStates(int i, int[] iArr, LightState[] lightStateArr, IBinder iBinder) throws RemoteException;
+    void setLightStates(int i, int[] iArr, LightState[] lightStateArr, IBinder iBinder)
+            throws RemoteException;
 
-    boolean setPointerIcon(PointerIcon pointerIcon, int i, int i2, int i3, IBinder iBinder) throws RemoteException;
+    boolean setPointerIcon(PointerIcon pointerIcon, int i, int i2, int i3, IBinder iBinder)
+            throws RemoteException;
 
     boolean setRemapGamepadButton(int i, int i2, int i3) throws RemoteException;
 
-    boolean setRemapGamepadStick(int i, int i2, int i3, boolean z, boolean z2, boolean z3) throws RemoteException;
+    boolean setRemapGamepadStick(int i, int i2, int i3, boolean z, boolean z2, boolean z3)
+            throws RemoteException;
 
     void setShowAllTouches(boolean z) throws RemoteException;
 
     void setStartedShutdown(boolean z) throws RemoteException;
 
-    void setTouchCalibrationForInputDevice(String str, int i, TouchCalibration touchCalibration) throws RemoteException;
+    void setTouchCalibrationForInputDevice(String str, int i, TouchCalibration touchCalibration)
+            throws RemoteException;
 
     boolean setTspEnabled(int i, boolean z) throws RemoteException;
 
@@ -250,15 +275,20 @@ public interface IInputManager extends IInterface {
 
     void tryPointerSpeed(int i) throws RemoteException;
 
-    void unregisterBatteryListener(int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) throws RemoteException;
+    void unregisterBatteryListener(int i, IInputDeviceBatteryListener iInputDeviceBatteryListener)
+            throws RemoteException;
 
-    void unregisterKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener) throws RemoteException;
+    void unregisterKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener)
+            throws RemoteException;
 
-    void unregisterSensorListener(IInputSensorEventListener iInputSensorEventListener) throws RemoteException;
+    void unregisterSensorListener(IInputSensorEventListener iInputSensorEventListener)
+            throws RemoteException;
 
-    void unregisterStickyModifierStateListener(IStickyModifierStateListener iStickyModifierStateListener) throws RemoteException;
+    void unregisterStickyModifierStateListener(
+            IStickyModifierStateListener iStickyModifierStateListener) throws RemoteException;
 
-    boolean unregisterVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) throws RemoteException;
+    boolean unregisterVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener)
+            throws RemoteException;
 
     void updateDeviceToGamepadProfile(String str, int i) throws RemoteException;
 
@@ -268,7 +298,8 @@ public interface IInputManager extends IInterface {
 
     void vibrate(int i, VibrationEffect vibrationEffect, IBinder iBinder) throws RemoteException;
 
-    void vibrateCombined(int i, CombinedVibration combinedVibration, IBinder iBinder) throws RemoteException;
+    void vibrateCombined(int i, CombinedVibration combinedVibration, IBinder iBinder)
+            throws RemoteException;
 
     public static class Default implements IInputManager {
         @Override // android.hardware.input.IInputManager
@@ -287,24 +318,23 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void enableInputDevice(int deviceId) throws RemoteException {
-        }
+        public void enableInputDevice(int deviceId) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void disableInputDevice(int deviceId) throws RemoteException {
-        }
+        public void disableInputDevice(int deviceId) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void controlSpenWithToken(IBinder token, boolean enable) throws RemoteException {
-        }
+        public void controlSpenWithToken(IBinder token, boolean enable) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public boolean hasKeys(int deviceId, int sourceMask, int[] keyCodes, boolean[] keyExists) throws RemoteException {
+        public boolean hasKeys(int deviceId, int sourceMask, int[] keyCodes, boolean[] keyExists)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.input.IInputManager
-        public int getKeyCodeForKeyLocation(int deviceId, int locationKeyCode) throws RemoteException {
+        public int getKeyCodeForKeyLocation(int deviceId, int locationKeyCode)
+                throws RemoteException {
             return 0;
         }
 
@@ -319,8 +349,7 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void tryPointerSpeed(int speed) throws RemoteException {
-        }
+        public void tryPointerSpeed(int speed) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public boolean injectInputEvent(InputEvent ev, int mode) throws RemoteException {
@@ -328,7 +357,8 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public boolean injectInputEventToTarget(InputEvent ev, int mode, int targetUid) throws RemoteException {
+        public boolean injectInputEventToTarget(InputEvent ev, int mode, int targetUid)
+                throws RemoteException {
             return false;
         }
 
@@ -338,13 +368,15 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public TouchCalibration getTouchCalibrationForInputDevice(String inputDeviceDescriptor, int rotation) throws RemoteException {
+        public TouchCalibration getTouchCalibrationForInputDevice(
+                String inputDeviceDescriptor, int rotation) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void setTouchCalibrationForInputDevice(String inputDeviceDescriptor, int rotation, TouchCalibration calibration) throws RemoteException {
-        }
+        public void setTouchCalibrationForInputDevice(
+                String inputDeviceDescriptor, int rotation, TouchCalibration calibration)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public KeyboardLayout[] getKeyboardLayouts() throws RemoteException {
@@ -352,31 +384,45 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public KeyboardLayout getKeyboardLayout(String keyboardLayoutDescriptor) throws RemoteException {
+        public KeyboardLayout getKeyboardLayout(String keyboardLayoutDescriptor)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.input.IInputManager
-        public KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(InputDeviceIdentifier identifier, int userId, InputMethodInfo imeInfo, InputMethodSubtype imeSubtype) throws RemoteException {
+        public KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(
+                InputDeviceIdentifier identifier,
+                int userId,
+                InputMethodInfo imeInfo,
+                InputMethodSubtype imeSubtype)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void setKeyboardLayoutForInputDevice(InputDeviceIdentifier identifier, int userId, InputMethodInfo imeInfo, InputMethodSubtype imeSubtype, String keyboardLayoutDescriptor) throws RemoteException {
-        }
+        public void setKeyboardLayoutForInputDevice(
+                InputDeviceIdentifier identifier,
+                int userId,
+                InputMethodInfo imeInfo,
+                InputMethodSubtype imeSubtype,
+                String keyboardLayoutDescriptor)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public KeyboardLayout[] getKeyboardLayoutListForInputDevice(InputDeviceIdentifier identifier, int userId, InputMethodInfo imeInfo, InputMethodSubtype imeSubtype) throws RemoteException {
+        public KeyboardLayout[] getKeyboardLayoutListForInputDevice(
+                InputDeviceIdentifier identifier,
+                int userId,
+                InputMethodInfo imeInfo,
+                InputMethodSubtype imeSubtype)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void remapModifierKey(int fromKey, int toKey) throws RemoteException {
-        }
+        public void remapModifierKey(int fromKey, int toKey) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void clearAllModifierKeyRemappings() throws RemoteException {
-        }
+        public void clearAllModifierKeyRemappings() throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public Map getModifierKeyRemapping() throws RemoteException {
@@ -384,8 +430,8 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void registerInputDevicesChangedListener(IInputDevicesChangedListener listener) throws RemoteException {
-        }
+        public void registerInputDevicesChangedListener(IInputDevicesChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public int getLidState() throws RemoteException {
@@ -393,8 +439,8 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void registerLidStateChangedListener(ISemLidStateChangedListener listener) throws RemoteException {
-        }
+        public void registerLidStateChangedListener(ISemLidStateChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public long getLastLidEventTimeNanos() throws RemoteException {
@@ -402,8 +448,8 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void registerSwitchEventChangedListener(ISwitchEventChangedListener listener) throws RemoteException {
-        }
+        public void registerSwitchEventChangedListener(ISwitchEventChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public int getCurrentSwitchEventState(int mask, boolean isSwitch) throws RemoteException {
@@ -416,8 +462,8 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void registerMultiFingerGestureListener(IMultiFingerGestureListener listener) throws RemoteException {
-        }
+        public void registerMultiFingerGestureListener(IMultiFingerGestureListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public int isInTabletMode() throws RemoteException {
@@ -425,8 +471,8 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void registerTabletModeChangedListener(ITabletModeChangedListener listener) throws RemoteException {
-        }
+        public void registerTabletModeChangedListener(ITabletModeChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public int isMicMuted() throws RemoteException {
@@ -434,16 +480,15 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void vibrate(int deviceId, VibrationEffect effect, IBinder token) throws RemoteException {
-        }
+        public void vibrate(int deviceId, VibrationEffect effect, IBinder token)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void vibrateCombined(int deviceId, CombinedVibration vibration, IBinder token) throws RemoteException {
-        }
+        public void vibrateCombined(int deviceId, CombinedVibration vibration, IBinder token)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void cancelVibrate(int deviceId, IBinder token) throws RemoteException {
-        }
+        public void cancelVibrate(int deviceId, IBinder token) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public int[] getVibratorIds(int deviceId) throws RemoteException {
@@ -456,12 +501,14 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public boolean registerVibratorStateListener(int deviceId, IVibratorStateListener listener) throws RemoteException {
+        public boolean registerVibratorStateListener(int deviceId, IVibratorStateListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.input.IInputManager
-        public boolean unregisterVibratorStateListener(int deviceId, IVibratorStateListener listener) throws RemoteException {
+        public boolean unregisterVibratorStateListener(
+                int deviceId, IVibratorStateListener listener) throws RemoteException {
             return false;
         }
 
@@ -471,13 +518,15 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public boolean setPointerIcon(PointerIcon icon, int displayId, int deviceId, int pointerId, IBinder inputToken) throws RemoteException {
+        public boolean setPointerIcon(
+                PointerIcon icon, int displayId, int deviceId, int pointerId, IBinder inputToken)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void setDefaultPointerIcon(int toolType, PointerIcon icon, boolean forced) throws RemoteException {
-        }
+        public void setDefaultPointerIcon(int toolType, PointerIcon icon, boolean forced)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public PointerIcon getDefaultPointerIcon() throws RemoteException {
@@ -500,12 +549,11 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void registerPointerIconChangedListener(IPointerIconChangedListener listener) throws RemoteException {
-        }
+        public void registerPointerIconChangedListener(IPointerIconChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void setDisplayIdForPointerIcon(int displayId) throws RemoteException {
-        }
+        public void setDisplayIdForPointerIcon(int displayId) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public int getDisplayIdForPointerIcon() throws RemoteException {
@@ -518,28 +566,22 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void setShowAllTouches(boolean enabled) throws RemoteException {
-        }
+        public void setShowAllTouches(boolean enabled) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void updateDeviceToGamepadProfile(String btDevice, int id) throws RemoteException {
-        }
+        public void updateDeviceToGamepadProfile(String btDevice, int id) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void removeDeviceToGamepadProfile(String btDevice) throws RemoteException {
-        }
+        public void removeDeviceToGamepadProfile(String btDevice) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void removeAllDeviceToGamepadProfile() throws RemoteException {
-        }
+        public void removeAllDeviceToGamepadProfile() throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void removeAllGamepadProfiles() throws RemoteException {
-        }
+        public void removeAllGamepadProfiles() throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void removeGamepadProfile(int id) throws RemoteException {
-        }
+        public void removeGamepadProfile(int id) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public boolean setGamepadProfileName(int id, String name) throws RemoteException {
@@ -547,12 +589,20 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public boolean setRemapGamepadButton(int id, int fromButton, int toButton) throws RemoteException {
+        public boolean setRemapGamepadButton(int id, int fromButton, int toButton)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.input.IInputManager
-        public boolean setRemapGamepadStick(int id, int fromStick, int toStick, boolean inverseH, boolean inverseV, boolean inverseRot) throws RemoteException {
+        public boolean setRemapGamepadStick(
+                int id,
+                int fromStick,
+                int toStick,
+                boolean inverseH,
+                boolean inverseV,
+                boolean inverseRot)
+                throws RemoteException {
             return false;
         }
 
@@ -572,21 +622,24 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void requestPointerCapture(IBinder inputChannelToken, boolean enabled) throws RemoteException {
-        }
+        public void requestPointerCapture(IBinder inputChannelToken, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public InputMonitor monitorGestureInput(IBinder token, String name, int displayId) throws RemoteException {
+        public InputMonitor monitorGestureInput(IBinder token, String name, int displayId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.input.IInputManager
-        public InputMonitor monitorGestureInputFiltered(IBinder token, String name, int displayId, int filter) throws RemoteException {
+        public InputMonitor monitorGestureInputFiltered(
+                IBinder token, String name, int displayId, int filter) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.input.IInputManager
-        public InputChannel monitorInputForBinder(String inputChannelName, int displayId, int filter) throws RemoteException {
+        public InputChannel monitorInputForBinder(
+                String inputChannelName, int displayId, int filter) throws RemoteException {
             return null;
         }
 
@@ -606,17 +659,17 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void setStartedShutdown(boolean isStarted) throws RemoteException {
-        }
+        public void setStartedShutdown(boolean isStarted) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public int getScanCodeState(int deviceId, int sourceMask, int scanCode) throws RemoteException {
+        public int getScanCodeState(int deviceId, int sourceMask, int scanCode)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void setWakeKeyDynamically(String packageName, boolean isPut, String keyCodes) throws RemoteException {
-        }
+        public void setWakeKeyDynamically(String packageName, boolean isPut, String keyCodes)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public int getGlobalMetaState(int type) throws RemoteException {
@@ -634,28 +687,25 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void forceFadeIcon(int type) throws RemoteException {
-        }
+        public void forceFadeIcon(int type) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void notifyQuickAccess(int info, float x, float y) throws RemoteException {
-        }
+        public void notifyQuickAccess(int info, float x, float y) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void registerWirelessKeyboardShareChangedListener(IWirelessKeyboardShareChangedListener listener) throws RemoteException {
-        }
+        public void registerWirelessKeyboardShareChangedListener(
+                IWirelessKeyboardShareChangedListener listener) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void updateWirelessKeyboardShareStatus() throws RemoteException {
-        }
+        public void updateWirelessKeyboardShareStatus() throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void removeDeviceWirelessKeyboardShare(String device, int index) throws RemoteException {
-        }
+        public void removeDeviceWirelessKeyboardShare(String device, int index)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void changeDeviceWirelessKeyboardShare(String device, int index) throws RemoteException {
-        }
+        public void changeDeviceWirelessKeyboardShare(String device, int index)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public boolean addDeviceWirelessKeyboardShare(int index) throws RemoteException {
@@ -663,41 +713,37 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public boolean switchDeviceWirelessKeyboardShare(String device, int index) throws RemoteException {
+        public boolean switchDeviceWirelessKeyboardShare(String device, int index)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void setHostRoleWirelessKeyboardShare() throws RemoteException {
-        }
+        public void setHostRoleWirelessKeyboardShare() throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void connectByBtDevice(BluetoothDevice addr) throws RemoteException {
-        }
+        public void connectByBtDevice(BluetoothDevice addr) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void addPortAssociation(String inputPort, int displayPort) throws RemoteException {
-        }
+        public void addPortAssociation(String inputPort, int displayPort) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void removePortAssociation(String inputPort) throws RemoteException {
-        }
+        public void removePortAssociation(String inputPort) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void addUniqueIdAssociationByDescriptor(String inputDeviceDescriptor, String displayUniqueId) throws RemoteException {
-        }
+        public void addUniqueIdAssociationByDescriptor(
+                String inputDeviceDescriptor, String displayUniqueId) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void removeUniqueIdAssociationByDescriptor(String inputDeviceDescriptor) throws RemoteException {
-        }
+        public void removeUniqueIdAssociationByDescriptor(String inputDeviceDescriptor)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void addUniqueIdAssociationByPort(String inputPort, String displayUniqueId) throws RemoteException {
-        }
+        public void addUniqueIdAssociationByPort(String inputPort, String displayUniqueId)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void removeUniqueIdAssociationByPort(String inputPort) throws RemoteException {
-        }
+        public void removeUniqueIdAssociationByPort(String inputPort) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public InputSensorInfo[] getSensorList(int deviceId) throws RemoteException {
@@ -705,22 +751,24 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public boolean registerSensorListener(IInputSensorEventListener listener) throws RemoteException {
+        public boolean registerSensorListener(IInputSensorEventListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void unregisterSensorListener(IInputSensorEventListener listener) throws RemoteException {
-        }
+        public void unregisterSensorListener(IInputSensorEventListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public boolean enableSensor(int deviceId, int sensorType, int samplingPeriodUs, int maxBatchReportLatencyUs) throws RemoteException {
+        public boolean enableSensor(
+                int deviceId, int sensorType, int samplingPeriodUs, int maxBatchReportLatencyUs)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void disableSensor(int deviceId, int sensorType) throws RemoteException {
-        }
+        public void disableSensor(int deviceId, int sensorType) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public boolean flushSensor(int deviceId, int sensorType) throws RemoteException {
@@ -738,28 +786,26 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void setLightStates(int deviceId, int[] lightIds, LightState[] states, IBinder token) throws RemoteException {
-        }
+        public void setLightStates(int deviceId, int[] lightIds, LightState[] states, IBinder token)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void openLightSession(int deviceId, String opPkg, IBinder token) throws RemoteException {
-        }
+        public void openLightSession(int deviceId, String opPkg, IBinder token)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void closeLightSession(int deviceId, IBinder token) throws RemoteException {
-        }
+        public void closeLightSession(int deviceId, IBinder token) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void cancelCurrentTouch() throws RemoteException {
-        }
+        public void cancelCurrentTouch() throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void registerBatteryListener(int deviceId, IInputDeviceBatteryListener listener) throws RemoteException {
-        }
+        public void registerBatteryListener(int deviceId, IInputDeviceBatteryListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void unregisterBatteryListener(int deviceId, IInputDeviceBatteryListener listener) throws RemoteException {
-        }
+        public void unregisterBatteryListener(int deviceId, IInputDeviceBatteryListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
         public String getInputDeviceBluetoothAddress(int deviceId) throws RemoteException {
@@ -767,29 +813,29 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.hardware.input.IInputManager
-        public void pilferPointers(IBinder inputChannelToken) throws RemoteException {
-        }
+        public void pilferPointers(IBinder inputChannelToken) throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void registerKeyboardBacklightListener(IKeyboardBacklightListener listener) throws RemoteException {
-        }
+        public void registerKeyboardBacklightListener(IKeyboardBacklightListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void unregisterKeyboardBacklightListener(IKeyboardBacklightListener listener) throws RemoteException {
-        }
+        public void unregisterKeyboardBacklightListener(IKeyboardBacklightListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public HostUsiVersion getHostUsiVersionFromDisplayConfig(int displayId) throws RemoteException {
+        public HostUsiVersion getHostUsiVersionFromDisplayConfig(int displayId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.input.IInputManager
-        public void registerStickyModifierStateListener(IStickyModifierStateListener listener) throws RemoteException {
-        }
+        public void registerStickyModifierStateListener(IStickyModifierStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputManager
-        public void unregisterStickyModifierStateListener(IStickyModifierStateListener listener) throws RemoteException {
-        }
+        public void unregisterStickyModifierStateListener(IStickyModifierStateListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -797,7 +843,7 @@ public interface IInputManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputManager {
+    public abstract static class Stub extends Binder implements IInputManager {
         public static final String DESCRIPTOR = "android.hardware.input.IInputManager";
         static final int TRANSACTION_addDeviceWirelessKeyboardShare = 85;
         static final int TRANSACTION_addPortAssociation = 89;
@@ -926,7 +972,9 @@ public interface IInputManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IInputManager asInterface(IBinder obj) {
@@ -1188,7 +1236,8 @@ public interface IInputManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             boolean[] _arg3;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
@@ -1311,7 +1360,8 @@ public interface IInputManager extends IInterface {
                 case 16:
                     String _arg013 = data.readString();
                     int _arg17 = data.readInt();
-                    TouchCalibration _arg23 = (TouchCalibration) data.readTypedObject(TouchCalibration.CREATOR);
+                    TouchCalibration _arg23 =
+                            (TouchCalibration) data.readTypedObject(TouchCalibration.CREATOR);
                     data.enforceNoDataAvail();
                     setTouchCalibrationForInputDevice(_arg013, _arg17, _arg23);
                     reply.writeNoException();
@@ -1329,32 +1379,46 @@ public interface IInputManager extends IInterface {
                     reply.writeTypedObject(_result13, 1);
                     return true;
                 case 19:
-                    InputDeviceIdentifier _arg015 = (InputDeviceIdentifier) data.readTypedObject(InputDeviceIdentifier.CREATOR);
+                    InputDeviceIdentifier _arg015 =
+                            (InputDeviceIdentifier)
+                                    data.readTypedObject(InputDeviceIdentifier.CREATOR);
                     int _arg18 = data.readInt();
-                    InputMethodInfo _arg24 = (InputMethodInfo) data.readTypedObject(InputMethodInfo.CREATOR);
-                    InputMethodSubtype _arg32 = (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
+                    InputMethodInfo _arg24 =
+                            (InputMethodInfo) data.readTypedObject(InputMethodInfo.CREATOR);
+                    InputMethodSubtype _arg32 =
+                            (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
                     data.enforceNoDataAvail();
-                    KeyboardLayoutSelectionResult _result14 = getKeyboardLayoutForInputDevice(_arg015, _arg18, _arg24, _arg32);
+                    KeyboardLayoutSelectionResult _result14 =
+                            getKeyboardLayoutForInputDevice(_arg015, _arg18, _arg24, _arg32);
                     reply.writeNoException();
                     reply.writeTypedObject(_result14, 1);
                     return true;
                 case 20:
-                    InputDeviceIdentifier _arg016 = (InputDeviceIdentifier) data.readTypedObject(InputDeviceIdentifier.CREATOR);
+                    InputDeviceIdentifier _arg016 =
+                            (InputDeviceIdentifier)
+                                    data.readTypedObject(InputDeviceIdentifier.CREATOR);
                     int _arg19 = data.readInt();
-                    InputMethodInfo _arg25 = (InputMethodInfo) data.readTypedObject(InputMethodInfo.CREATOR);
-                    InputMethodSubtype _arg33 = (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
+                    InputMethodInfo _arg25 =
+                            (InputMethodInfo) data.readTypedObject(InputMethodInfo.CREATOR);
+                    InputMethodSubtype _arg33 =
+                            (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
                     String _arg4 = data.readString();
                     data.enforceNoDataAvail();
                     setKeyboardLayoutForInputDevice(_arg016, _arg19, _arg25, _arg33, _arg4);
                     reply.writeNoException();
                     return true;
                 case 21:
-                    InputDeviceIdentifier _arg017 = (InputDeviceIdentifier) data.readTypedObject(InputDeviceIdentifier.CREATOR);
+                    InputDeviceIdentifier _arg017 =
+                            (InputDeviceIdentifier)
+                                    data.readTypedObject(InputDeviceIdentifier.CREATOR);
                     int _arg110 = data.readInt();
-                    InputMethodInfo _arg26 = (InputMethodInfo) data.readTypedObject(InputMethodInfo.CREATOR);
-                    InputMethodSubtype _arg34 = (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
+                    InputMethodInfo _arg26 =
+                            (InputMethodInfo) data.readTypedObject(InputMethodInfo.CREATOR);
+                    InputMethodSubtype _arg34 =
+                            (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
                     data.enforceNoDataAvail();
-                    KeyboardLayout[] _result15 = getKeyboardLayoutListForInputDevice(_arg017, _arg110, _arg26, _arg34);
+                    KeyboardLayout[] _result15 =
+                            getKeyboardLayoutListForInputDevice(_arg017, _arg110, _arg26, _arg34);
                     reply.writeNoException();
                     reply.writeTypedArray(_result15, 1);
                     return true;
@@ -1375,7 +1439,8 @@ public interface IInputManager extends IInterface {
                     reply.writeMap(_result16);
                     return true;
                 case 25:
-                    IInputDevicesChangedListener _arg019 = IInputDevicesChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IInputDevicesChangedListener _arg019 =
+                            IInputDevicesChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerInputDevicesChangedListener(_arg019);
                     reply.writeNoException();
@@ -1386,7 +1451,8 @@ public interface IInputManager extends IInterface {
                     reply.writeInt(_result17);
                     return true;
                 case 27:
-                    ISemLidStateChangedListener _arg020 = ISemLidStateChangedListener.Stub.asInterface(data.readStrongBinder());
+                    ISemLidStateChangedListener _arg020 =
+                            ISemLidStateChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerLidStateChangedListener(_arg020);
                     reply.writeNoException();
@@ -1397,7 +1463,8 @@ public interface IInputManager extends IInterface {
                     reply.writeLong(_result18);
                     return true;
                 case 29:
-                    ISwitchEventChangedListener _arg021 = ISwitchEventChangedListener.Stub.asInterface(data.readStrongBinder());
+                    ISwitchEventChangedListener _arg021 =
+                            ISwitchEventChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerSwitchEventChangedListener(_arg021);
                     reply.writeNoException();
@@ -1416,7 +1483,8 @@ public interface IInputManager extends IInterface {
                     reply.writeBoolean(_result20);
                     return true;
                 case 32:
-                    IMultiFingerGestureListener _arg023 = IMultiFingerGestureListener.Stub.asInterface(data.readStrongBinder());
+                    IMultiFingerGestureListener _arg023 =
+                            IMultiFingerGestureListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerMultiFingerGestureListener(_arg023);
                     reply.writeNoException();
@@ -1427,7 +1495,8 @@ public interface IInputManager extends IInterface {
                     reply.writeInt(_result21);
                     return true;
                 case 34:
-                    ITabletModeChangedListener _arg024 = ITabletModeChangedListener.Stub.asInterface(data.readStrongBinder());
+                    ITabletModeChangedListener _arg024 =
+                            ITabletModeChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerTabletModeChangedListener(_arg024);
                     reply.writeNoException();
@@ -1439,7 +1508,8 @@ public interface IInputManager extends IInterface {
                     return true;
                 case 36:
                     int _arg025 = data.readInt();
-                    VibrationEffect _arg113 = (VibrationEffect) data.readTypedObject(VibrationEffect.CREATOR);
+                    VibrationEffect _arg113 =
+                            (VibrationEffect) data.readTypedObject(VibrationEffect.CREATOR);
                     IBinder _arg27 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     vibrate(_arg025, _arg113, _arg27);
@@ -1447,7 +1517,8 @@ public interface IInputManager extends IInterface {
                     return true;
                 case 37:
                     int _arg026 = data.readInt();
-                    CombinedVibration _arg114 = (CombinedVibration) data.readTypedObject(CombinedVibration.CREATOR);
+                    CombinedVibration _arg114 =
+                            (CombinedVibration) data.readTypedObject(CombinedVibration.CREATOR);
                     IBinder _arg28 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     vibrateCombined(_arg026, _arg114, _arg28);
@@ -1476,7 +1547,8 @@ public interface IInputManager extends IInterface {
                     return true;
                 case 41:
                     int _arg030 = data.readInt();
-                    IVibratorStateListener _arg116 = IVibratorStateListener.Stub.asInterface(data.readStrongBinder());
+                    IVibratorStateListener _arg116 =
+                            IVibratorStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result25 = registerVibratorStateListener(_arg030, _arg116);
                     reply.writeNoException();
@@ -1484,7 +1556,8 @@ public interface IInputManager extends IInterface {
                     return true;
                 case 42:
                     int _arg031 = data.readInt();
-                    IVibratorStateListener _arg117 = IVibratorStateListener.Stub.asInterface(data.readStrongBinder());
+                    IVibratorStateListener _arg117 =
+                            IVibratorStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result26 = unregisterVibratorStateListener(_arg031, _arg117);
                     reply.writeNoException();
@@ -1537,7 +1610,8 @@ public interface IInputManager extends IInterface {
                     reply.writeInt(_result32);
                     return true;
                 case 50:
-                    IPointerIconChangedListener _arg035 = IPointerIconChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IPointerIconChangedListener _arg035 =
+                            IPointerIconChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerPointerIconChangedListener(_arg035);
                     reply.writeNoException();
@@ -1616,7 +1690,8 @@ public interface IInputManager extends IInterface {
                     boolean _arg43 = data.readBoolean();
                     boolean _arg5 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    boolean _result37 = setRemapGamepadStick(_arg043, _arg123, _arg212, _arg36, _arg43, _arg5);
+                    boolean _result37 =
+                            setRemapGamepadStick(_arg043, _arg123, _arg212, _arg36, _arg43, _arg5);
                     reply.writeNoException();
                     reply.writeBoolean(_result37);
                     return true;
@@ -1658,7 +1733,8 @@ public interface IInputManager extends IInterface {
                     int _arg214 = data.readInt();
                     int _arg37 = data.readInt();
                     data.enforceNoDataAvail();
-                    InputMonitor _result42 = monitorGestureInputFiltered(_arg047, _arg126, _arg214, _arg37);
+                    InputMonitor _result42 =
+                            monitorGestureInputFiltered(_arg047, _arg126, _arg214, _arg37);
                     reply.writeNoException();
                     reply.writeTypedObject(_result42, 1);
                     return true;
@@ -1748,7 +1824,9 @@ public interface IInputManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 81:
-                    IWirelessKeyboardShareChangedListener _arg058 = IWirelessKeyboardShareChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IWirelessKeyboardShareChangedListener _arg058 =
+                            IWirelessKeyboardShareChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerWirelessKeyboardShareChangedListener(_arg058);
                     reply.writeNoException();
@@ -1791,7 +1869,8 @@ public interface IInputManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 88:
-                    BluetoothDevice _arg063 = (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
+                    BluetoothDevice _arg063 =
+                            (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
                     data.enforceNoDataAvail();
                     connectByBtDevice(_arg063);
                     reply.writeNoException();
@@ -1843,14 +1922,16 @@ public interface IInputManager extends IInterface {
                     reply.writeTypedArray(_result53, 1);
                     return true;
                 case 96:
-                    IInputSensorEventListener _arg071 = IInputSensorEventListener.Stub.asInterface(data.readStrongBinder());
+                    IInputSensorEventListener _arg071 =
+                            IInputSensorEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result54 = registerSensorListener(_arg071);
                     reply.writeNoException();
                     reply.writeBoolean(_result54);
                     return true;
                 case 97:
-                    IInputSensorEventListener _arg072 = IInputSensorEventListener.Stub.asInterface(data.readStrongBinder());
+                    IInputSensorEventListener _arg072 =
+                            IInputSensorEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterSensorListener(_arg072);
                     reply.writeNoException();
@@ -1925,14 +2006,16 @@ public interface IInputManager extends IInterface {
                     return true;
                 case 107:
                     int _arg081 = data.readInt();
-                    IInputDeviceBatteryListener _arg145 = IInputDeviceBatteryListener.Stub.asInterface(data.readStrongBinder());
+                    IInputDeviceBatteryListener _arg145 =
+                            IInputDeviceBatteryListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerBatteryListener(_arg081, _arg145);
                     reply.writeNoException();
                     return true;
                 case 108:
                     int _arg082 = data.readInt();
-                    IInputDeviceBatteryListener _arg146 = IInputDeviceBatteryListener.Stub.asInterface(data.readStrongBinder());
+                    IInputDeviceBatteryListener _arg146 =
+                            IInputDeviceBatteryListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterBatteryListener(_arg082, _arg146);
                     reply.writeNoException();
@@ -1951,13 +2034,15 @@ public interface IInputManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 111:
-                    IKeyboardBacklightListener _arg085 = IKeyboardBacklightListener.Stub.asInterface(data.readStrongBinder());
+                    IKeyboardBacklightListener _arg085 =
+                            IKeyboardBacklightListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerKeyboardBacklightListener(_arg085);
                     reply.writeNoException();
                     return true;
                 case 112:
-                    IKeyboardBacklightListener _arg086 = IKeyboardBacklightListener.Stub.asInterface(data.readStrongBinder());
+                    IKeyboardBacklightListener _arg086 =
+                            IKeyboardBacklightListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterKeyboardBacklightListener(_arg086);
                     reply.writeNoException();
@@ -1970,13 +2055,15 @@ public interface IInputManager extends IInterface {
                     reply.writeTypedObject(_result60, 1);
                     return true;
                 case 114:
-                    IStickyModifierStateListener _arg088 = IStickyModifierStateListener.Stub.asInterface(data.readStrongBinder());
+                    IStickyModifierStateListener _arg088 =
+                            IStickyModifierStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerStickyModifierStateListener(_arg088);
                     reply.writeNoException();
                     return true;
                 case 115:
-                    IStickyModifierStateListener _arg089 = IStickyModifierStateListener.Stub.asInterface(data.readStrongBinder());
+                    IStickyModifierStateListener _arg089 =
+                            IStickyModifierStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterStickyModifierStateListener(_arg089);
                     reply.writeNoException();
@@ -2098,7 +2185,9 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean hasKeys(int deviceId, int sourceMask, int[] keyCodes, boolean[] keyExists) throws RemoteException {
+            public boolean hasKeys(
+                    int deviceId, int sourceMask, int[] keyCodes, boolean[] keyExists)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2119,7 +2208,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public int getKeyCodeForKeyLocation(int deviceId, int locationKeyCode) throws RemoteException {
+            public int getKeyCodeForKeyLocation(int deviceId, int locationKeyCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2137,7 +2227,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public KeyCharacterMap getKeyCharacterMap(String layoutDescriptor) throws RemoteException {
+            public KeyCharacterMap getKeyCharacterMap(String layoutDescriptor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2145,7 +2236,8 @@ public interface IInputManager extends IInterface {
                     _data.writeString(layoutDescriptor);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    KeyCharacterMap _result = (KeyCharacterMap) _reply.readTypedObject(KeyCharacterMap.CREATOR);
+                    KeyCharacterMap _result =
+                            (KeyCharacterMap) _reply.readTypedObject(KeyCharacterMap.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2203,7 +2295,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean injectInputEventToTarget(InputEvent ev, int mode, int targetUid) throws RemoteException {
+            public boolean injectInputEventToTarget(InputEvent ev, int mode, int targetUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2230,7 +2323,8 @@ public interface IInputManager extends IInterface {
                     _data.writeTypedObject(ev, 0);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    VerifiedInputEvent _result = (VerifiedInputEvent) _reply.readTypedObject(VerifiedInputEvent.CREATOR);
+                    VerifiedInputEvent _result =
+                            (VerifiedInputEvent) _reply.readTypedObject(VerifiedInputEvent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2239,7 +2333,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public TouchCalibration getTouchCalibrationForInputDevice(String inputDeviceDescriptor, int rotation) throws RemoteException {
+            public TouchCalibration getTouchCalibrationForInputDevice(
+                    String inputDeviceDescriptor, int rotation) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2248,7 +2343,8 @@ public interface IInputManager extends IInterface {
                     _data.writeInt(rotation);
                     this.mRemote.transact(15, _data, _reply, 0);
                     _reply.readException();
-                    TouchCalibration _result = (TouchCalibration) _reply.readTypedObject(TouchCalibration.CREATOR);
+                    TouchCalibration _result =
+                            (TouchCalibration) _reply.readTypedObject(TouchCalibration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2257,7 +2353,9 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void setTouchCalibrationForInputDevice(String inputDeviceDescriptor, int rotation, TouchCalibration calibration) throws RemoteException {
+            public void setTouchCalibrationForInputDevice(
+                    String inputDeviceDescriptor, int rotation, TouchCalibration calibration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2281,7 +2379,8 @@ public interface IInputManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    KeyboardLayout[] _result = (KeyboardLayout[]) _reply.createTypedArray(KeyboardLayout.CREATOR);
+                    KeyboardLayout[] _result =
+                            (KeyboardLayout[]) _reply.createTypedArray(KeyboardLayout.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2290,7 +2389,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public KeyboardLayout getKeyboardLayout(String keyboardLayoutDescriptor) throws RemoteException {
+            public KeyboardLayout getKeyboardLayout(String keyboardLayoutDescriptor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2298,7 +2398,8 @@ public interface IInputManager extends IInterface {
                     _data.writeString(keyboardLayoutDescriptor);
                     this.mRemote.transact(18, _data, _reply, 0);
                     _reply.readException();
-                    KeyboardLayout _result = (KeyboardLayout) _reply.readTypedObject(KeyboardLayout.CREATOR);
+                    KeyboardLayout _result =
+                            (KeyboardLayout) _reply.readTypedObject(KeyboardLayout.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2307,7 +2408,12 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(InputDeviceIdentifier identifier, int userId, InputMethodInfo imeInfo, InputMethodSubtype imeSubtype) throws RemoteException {
+            public KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(
+                    InputDeviceIdentifier identifier,
+                    int userId,
+                    InputMethodInfo imeInfo,
+                    InputMethodSubtype imeSubtype)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2318,7 +2424,9 @@ public interface IInputManager extends IInterface {
                     _data.writeTypedObject(imeSubtype, 0);
                     this.mRemote.transact(19, _data, _reply, 0);
                     _reply.readException();
-                    KeyboardLayoutSelectionResult _result = (KeyboardLayoutSelectionResult) _reply.readTypedObject(KeyboardLayoutSelectionResult.CREATOR);
+                    KeyboardLayoutSelectionResult _result =
+                            (KeyboardLayoutSelectionResult)
+                                    _reply.readTypedObject(KeyboardLayoutSelectionResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2327,7 +2435,13 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void setKeyboardLayoutForInputDevice(InputDeviceIdentifier identifier, int userId, InputMethodInfo imeInfo, InputMethodSubtype imeSubtype, String keyboardLayoutDescriptor) throws RemoteException {
+            public void setKeyboardLayoutForInputDevice(
+                    InputDeviceIdentifier identifier,
+                    int userId,
+                    InputMethodInfo imeInfo,
+                    InputMethodSubtype imeSubtype,
+                    String keyboardLayoutDescriptor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2346,7 +2460,12 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public KeyboardLayout[] getKeyboardLayoutListForInputDevice(InputDeviceIdentifier identifier, int userId, InputMethodInfo imeInfo, InputMethodSubtype imeSubtype) throws RemoteException {
+            public KeyboardLayout[] getKeyboardLayoutListForInputDevice(
+                    InputDeviceIdentifier identifier,
+                    int userId,
+                    InputMethodInfo imeInfo,
+                    InputMethodSubtype imeSubtype)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2357,7 +2476,8 @@ public interface IInputManager extends IInterface {
                     _data.writeTypedObject(imeSubtype, 0);
                     this.mRemote.transact(21, _data, _reply, 0);
                     _reply.readException();
-                    KeyboardLayout[] _result = (KeyboardLayout[]) _reply.createTypedArray(KeyboardLayout.CREATOR);
+                    KeyboardLayout[] _result =
+                            (KeyboardLayout[]) _reply.createTypedArray(KeyboardLayout.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2413,7 +2533,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerInputDevicesChangedListener(IInputDevicesChangedListener listener) throws RemoteException {
+            public void registerInputDevicesChangedListener(IInputDevicesChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2444,7 +2565,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerLidStateChangedListener(ISemLidStateChangedListener listener) throws RemoteException {
+            public void registerLidStateChangedListener(ISemLidStateChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2475,7 +2597,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerSwitchEventChangedListener(ISwitchEventChangedListener listener) throws RemoteException {
+            public void registerSwitchEventChangedListener(ISwitchEventChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2490,7 +2613,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public int getCurrentSwitchEventState(int mask, boolean isSwitch) throws RemoteException {
+            public int getCurrentSwitchEventState(int mask, boolean isSwitch)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2524,7 +2648,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerMultiFingerGestureListener(IMultiFingerGestureListener listener) throws RemoteException {
+            public void registerMultiFingerGestureListener(IMultiFingerGestureListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2555,7 +2680,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerTabletModeChangedListener(ITabletModeChangedListener listener) throws RemoteException {
+            public void registerTabletModeChangedListener(ITabletModeChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2586,7 +2712,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void vibrate(int deviceId, VibrationEffect effect, IBinder token) throws RemoteException {
+            public void vibrate(int deviceId, VibrationEffect effect, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2603,7 +2730,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void vibrateCombined(int deviceId, CombinedVibration vibration, IBinder token) throws RemoteException {
+            public void vibrateCombined(int deviceId, CombinedVibration vibration, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2670,7 +2798,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean registerVibratorStateListener(int deviceId, IVibratorStateListener listener) throws RemoteException {
+            public boolean registerVibratorStateListener(
+                    int deviceId, IVibratorStateListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2688,7 +2817,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean unregisterVibratorStateListener(int deviceId, IVibratorStateListener listener) throws RemoteException {
+            public boolean unregisterVibratorStateListener(
+                    int deviceId, IVibratorStateListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2714,7 +2844,9 @@ public interface IInputManager extends IInterface {
                     _data.writeInt(deviceId);
                     this.mRemote.transact(43, _data, _reply, 0);
                     _reply.readException();
-                    IInputDeviceBatteryState _result = (IInputDeviceBatteryState) _reply.readTypedObject(IInputDeviceBatteryState.CREATOR);
+                    IInputDeviceBatteryState _result =
+                            (IInputDeviceBatteryState)
+                                    _reply.readTypedObject(IInputDeviceBatteryState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2723,7 +2855,13 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean setPointerIcon(PointerIcon icon, int displayId, int deviceId, int pointerId, IBinder inputToken) throws RemoteException {
+            public boolean setPointerIcon(
+                    PointerIcon icon,
+                    int displayId,
+                    int deviceId,
+                    int pointerId,
+                    IBinder inputToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2744,7 +2882,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void setDefaultPointerIcon(int toolType, PointerIcon icon, boolean forced) throws RemoteException {
+            public void setDefaultPointerIcon(int toolType, PointerIcon icon, boolean forced)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2825,7 +2964,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerPointerIconChangedListener(IPointerIconChangedListener listener) throws RemoteException {
+            public void registerPointerIconChangedListener(IPointerIconChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2902,7 +3042,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void updateDeviceToGamepadProfile(String btDevice, int id) throws RemoteException {
+            public void updateDeviceToGamepadProfile(String btDevice, int id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2994,7 +3135,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean setRemapGamepadButton(int id, int fromButton, int toButton) throws RemoteException {
+            public boolean setRemapGamepadButton(int id, int fromButton, int toButton)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3013,7 +3155,14 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean setRemapGamepadStick(int id, int fromStick, int toStick, boolean inverseH, boolean inverseV, boolean inverseRot) throws RemoteException {
+            public boolean setRemapGamepadStick(
+                    int id,
+                    int fromStick,
+                    int toStick,
+                    boolean inverseH,
+                    boolean inverseV,
+                    boolean inverseRot)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3084,7 +3233,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void requestPointerCapture(IBinder inputChannelToken, boolean enabled) throws RemoteException {
+            public void requestPointerCapture(IBinder inputChannelToken, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -3097,7 +3247,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public InputMonitor monitorGestureInput(IBinder token, String name, int displayId) throws RemoteException {
+            public InputMonitor monitorGestureInput(IBinder token, String name, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3107,7 +3258,8 @@ public interface IInputManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(67, _data, _reply, 0);
                     _reply.readException();
-                    InputMonitor _result = (InputMonitor) _reply.readTypedObject(InputMonitor.CREATOR);
+                    InputMonitor _result =
+                            (InputMonitor) _reply.readTypedObject(InputMonitor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3116,7 +3268,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public InputMonitor monitorGestureInputFiltered(IBinder token, String name, int displayId, int filter) throws RemoteException {
+            public InputMonitor monitorGestureInputFiltered(
+                    IBinder token, String name, int displayId, int filter) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3127,7 +3280,8 @@ public interface IInputManager extends IInterface {
                     _data.writeInt(filter);
                     this.mRemote.transact(68, _data, _reply, 0);
                     _reply.readException();
-                    InputMonitor _result = (InputMonitor) _reply.readTypedObject(InputMonitor.CREATOR);
+                    InputMonitor _result =
+                            (InputMonitor) _reply.readTypedObject(InputMonitor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3136,7 +3290,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public InputChannel monitorInputForBinder(String inputChannelName, int displayId, int filter) throws RemoteException {
+            public InputChannel monitorInputForBinder(
+                    String inputChannelName, int displayId, int filter) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3146,7 +3301,8 @@ public interface IInputManager extends IInterface {
                     _data.writeInt(filter);
                     this.mRemote.transact(69, _data, _reply, 0);
                     _reply.readException();
-                    InputChannel _result = (InputChannel) _reply.readTypedObject(InputChannel.CREATOR);
+                    InputChannel _result =
+                            (InputChannel) _reply.readTypedObject(InputChannel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3220,7 +3376,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public int getScanCodeState(int deviceId, int sourceMask, int scanCode) throws RemoteException {
+            public int getScanCodeState(int deviceId, int sourceMask, int scanCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3239,7 +3396,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void setWakeKeyDynamically(String packageName, boolean isPut, String keyCodes) throws RemoteException {
+            public void setWakeKeyDynamically(String packageName, boolean isPut, String keyCodes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3273,7 +3431,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public long semGetMotionIdleTimeMillis(boolean useOnlyActionDown) throws RemoteException {
+            public long semGetMotionIdleTimeMillis(boolean useOnlyActionDown)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3339,7 +3498,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerWirelessKeyboardShareChangedListener(IWirelessKeyboardShareChangedListener listener) throws RemoteException {
+            public void registerWirelessKeyboardShareChangedListener(
+                    IWirelessKeyboardShareChangedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3368,7 +3528,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void removeDeviceWirelessKeyboardShare(String device, int index) throws RemoteException {
+            public void removeDeviceWirelessKeyboardShare(String device, int index)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3384,7 +3545,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void changeDeviceWirelessKeyboardShare(String device, int index) throws RemoteException {
+            public void changeDeviceWirelessKeyboardShare(String device, int index)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3417,7 +3579,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean switchDeviceWirelessKeyboardShare(String device, int index) throws RemoteException {
+            public boolean switchDeviceWirelessKeyboardShare(String device, int index)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3464,7 +3627,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void addPortAssociation(String inputPort, int displayPort) throws RemoteException {
+            public void addPortAssociation(String inputPort, int displayPort)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3495,7 +3659,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void addUniqueIdAssociationByDescriptor(String inputDeviceDescriptor, String displayUniqueId) throws RemoteException {
+            public void addUniqueIdAssociationByDescriptor(
+                    String inputDeviceDescriptor, String displayUniqueId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3511,7 +3676,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void removeUniqueIdAssociationByDescriptor(String inputDeviceDescriptor) throws RemoteException {
+            public void removeUniqueIdAssociationByDescriptor(String inputDeviceDescriptor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3526,7 +3692,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void addUniqueIdAssociationByPort(String inputPort, String displayUniqueId) throws RemoteException {
+            public void addUniqueIdAssociationByPort(String inputPort, String displayUniqueId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3565,7 +3732,8 @@ public interface IInputManager extends IInterface {
                     _data.writeInt(deviceId);
                     this.mRemote.transact(95, _data, _reply, 0);
                     _reply.readException();
-                    InputSensorInfo[] _result = (InputSensorInfo[]) _reply.createTypedArray(InputSensorInfo.CREATOR);
+                    InputSensorInfo[] _result =
+                            (InputSensorInfo[]) _reply.createTypedArray(InputSensorInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3574,7 +3742,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean registerSensorListener(IInputSensorEventListener listener) throws RemoteException {
+            public boolean registerSensorListener(IInputSensorEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3591,7 +3760,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void unregisterSensorListener(IInputSensorEventListener listener) throws RemoteException {
+            public void unregisterSensorListener(IInputSensorEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3606,7 +3776,9 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public boolean enableSensor(int deviceId, int sensorType, int samplingPeriodUs, int maxBatchReportLatencyUs) throws RemoteException {
+            public boolean enableSensor(
+                    int deviceId, int sensorType, int samplingPeriodUs, int maxBatchReportLatencyUs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3695,7 +3867,9 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void setLightStates(int deviceId, int[] lightIds, LightState[] states, IBinder token) throws RemoteException {
+            public void setLightStates(
+                    int deviceId, int[] lightIds, LightState[] states, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3713,7 +3887,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void openLightSession(int deviceId, String opPkg, IBinder token) throws RemoteException {
+            public void openLightSession(int deviceId, String opPkg, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3760,7 +3935,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerBatteryListener(int deviceId, IInputDeviceBatteryListener listener) throws RemoteException {
+            public void registerBatteryListener(int deviceId, IInputDeviceBatteryListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3776,7 +3952,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void unregisterBatteryListener(int deviceId, IInputDeviceBatteryListener listener) throws RemoteException {
+            public void unregisterBatteryListener(
+                    int deviceId, IInputDeviceBatteryListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3824,7 +4001,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerKeyboardBacklightListener(IKeyboardBacklightListener listener) throws RemoteException {
+            public void registerKeyboardBacklightListener(IKeyboardBacklightListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3839,7 +4017,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void unregisterKeyboardBacklightListener(IKeyboardBacklightListener listener) throws RemoteException {
+            public void unregisterKeyboardBacklightListener(IKeyboardBacklightListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3854,7 +4033,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public HostUsiVersion getHostUsiVersionFromDisplayConfig(int displayId) throws RemoteException {
+            public HostUsiVersion getHostUsiVersionFromDisplayConfig(int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3862,7 +4042,8 @@ public interface IInputManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(113, _data, _reply, 0);
                     _reply.readException();
-                    HostUsiVersion _result = (HostUsiVersion) _reply.readTypedObject(HostUsiVersion.CREATOR);
+                    HostUsiVersion _result =
+                            (HostUsiVersion) _reply.readTypedObject(HostUsiVersion.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3871,7 +4052,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void registerStickyModifierStateListener(IStickyModifierStateListener listener) throws RemoteException {
+            public void registerStickyModifierStateListener(IStickyModifierStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3886,7 +4068,8 @@ public interface IInputManager extends IInterface {
             }
 
             @Override // android.hardware.input.IInputManager
-            public void unregisterStickyModifierStateListener(IStickyModifierStateListener listener) throws RemoteException {
+            public void unregisterStickyModifierStateListener(IStickyModifierStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3901,44 +4084,67 @@ public interface IInputManager extends IInterface {
             }
         }
 
-        protected void setKeyboardLayoutForInputDevice_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SET_KEYBOARD_LAYOUT, getCallingPid(), getCallingUid());
+        protected void setKeyboardLayoutForInputDevice_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SET_KEYBOARD_LAYOUT, getCallingPid(), getCallingUid());
         }
 
         protected void remapModifierKey_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REMAP_MODIFIER_KEYS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REMAP_MODIFIER_KEYS, getCallingPid(), getCallingUid());
         }
 
         protected void clearAllModifierKeyRemappings_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REMAP_MODIFIER_KEYS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REMAP_MODIFIER_KEYS, getCallingPid(), getCallingUid());
         }
 
         protected void getModifierKeyRemapping_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REMAP_MODIFIER_KEYS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REMAP_MODIFIER_KEYS, getCallingPid(), getCallingUid());
         }
 
         protected void getInputDeviceBluetoothAddress_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BLUETOOTH, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BLUETOOTH, getCallingPid(), getCallingUid());
         }
 
         protected void pilferPointers_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MONITOR_INPUT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MONITOR_INPUT, getCallingPid(), getCallingUid());
         }
 
-        protected void registerKeyboardBacklightListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MONITOR_KEYBOARD_BACKLIGHT, getCallingPid(), getCallingUid());
+        protected void registerKeyboardBacklightListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MONITOR_KEYBOARD_BACKLIGHT,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void unregisterKeyboardBacklightListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MONITOR_KEYBOARD_BACKLIGHT, getCallingPid(), getCallingUid());
+        protected void unregisterKeyboardBacklightListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MONITOR_KEYBOARD_BACKLIGHT,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void registerStickyModifierStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MONITOR_STICKY_MODIFIER_STATE, getCallingPid(), getCallingUid());
+        protected void registerStickyModifierStateListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MONITOR_STICKY_MODIFIER_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void unregisterStickyModifierStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MONITOR_STICKY_MODIFIER_STATE, getCallingPid(), getCallingUid());
+        protected void unregisterStickyModifierStateListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MONITOR_STICKY_MODIFIER_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

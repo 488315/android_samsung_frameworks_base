@@ -18,7 +18,8 @@ public final class VibratorControllerHolder implements IBinder.DeathRecipient {
     @Override // android.os.IBinder.DeathRecipient
     public final void binderDied(IBinder iBinder) {
         IVibratorController iVibratorController = this.mVibratorController;
-        if (iVibratorController == null || iBinder != ((IVibratorController.Stub.Proxy) iVibratorController).asBinder()) {
+        if (iVibratorController == null
+                || iBinder != ((IVibratorController.Stub.Proxy) iVibratorController).asBinder()) {
             return;
         }
         setVibratorController(null);
@@ -28,11 +29,15 @@ public final class VibratorControllerHolder implements IBinder.DeathRecipient {
         try {
             IVibratorController iVibratorController2 = this.mVibratorController;
             if (iVibratorController2 != null) {
-                ((IVibratorController.Stub.Proxy) iVibratorController2).asBinder().unlinkToDeath(this, 0);
+                ((IVibratorController.Stub.Proxy) iVibratorController2)
+                        .asBinder()
+                        .unlinkToDeath(this, 0);
             }
             this.mVibratorController = iVibratorController;
             if (iVibratorController != null) {
-                ((IVibratorController.Stub.Proxy) iVibratorController).asBinder().linkToDeath(this, 0);
+                ((IVibratorController.Stub.Proxy) iVibratorController)
+                        .asBinder()
+                        .linkToDeath(this, 0);
             }
         } catch (RemoteException e) {
             Slog.wtf("VibratorControllerHolder", "Failed to set IVibratorController: " + this, e);

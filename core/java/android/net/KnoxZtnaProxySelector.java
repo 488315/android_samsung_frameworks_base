@@ -2,7 +2,9 @@ package android.net;
 
 import android.os.Process;
 import android.util.Log;
+
 import com.google.android.collect.Lists;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -20,7 +22,10 @@ public class KnoxZtnaProxySelector extends ProxySelector {
         List<java.net.Proxy> ret = Lists.newArrayList();
         String port = System.getProperty("http.proxyPort");
         Log.d(TAG, "Proxy port configured is " + port + "for the caller " + Process.myUid());
-        java.net.Proxy proxy = new java.net.Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved("::1", Integer.parseInt(port)));
+        java.net.Proxy proxy =
+                new java.net.Proxy(
+                        Proxy.Type.HTTP,
+                        InetSocketAddress.createUnresolved("::1", Integer.parseInt(port)));
         ret.add(proxy);
         return ret;
     }

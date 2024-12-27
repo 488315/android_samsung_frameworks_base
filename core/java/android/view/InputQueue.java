@@ -4,7 +4,9 @@ import android.os.Looper;
 import android.os.MessageQueue;
 import android.util.LongSparseArray;
 import android.util.Pools;
+
 import dalvik.system.CloseGuard;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes4.dex */
@@ -26,7 +28,8 @@ public final class InputQueue {
 
     private static native void nativeDispose(long j);
 
-    private static native long nativeInit(WeakReference<InputQueue> weakReference, MessageQueue messageQueue);
+    private static native long nativeInit(
+            WeakReference<InputQueue> weakReference, MessageQueue messageQueue);
 
     private static native long nativeSendKeyEvent(long j, KeyEvent keyEvent, boolean z);
 
@@ -65,7 +68,8 @@ public final class InputQueue {
         return this.mPtr;
     }
 
-    public void sendInputEvent(InputEvent e, Object token, boolean predispatch, FinishedInputEventCallback callback) {
+    public void sendInputEvent(
+            InputEvent e, Object token, boolean predispatch, FinishedInputEventCallback callback) {
         long id;
         ActiveInputEvent event = obtainActiveInputEvent(token, callback);
         if (e instanceof KeyEvent) {
@@ -94,7 +98,8 @@ public final class InputQueue {
         }
     }
 
-    private ActiveInputEvent obtainActiveInputEvent(Object token, FinishedInputEventCallback callback) {
+    private ActiveInputEvent obtainActiveInputEvent(
+            Object token, FinishedInputEventCallback callback) {
         ActiveInputEvent e = this.mActiveInputEventPool.acquire();
         if (e == null) {
             e = new ActiveInputEvent();
@@ -113,8 +118,7 @@ public final class InputQueue {
         public FinishedInputEventCallback mCallback;
         public Object mToken;
 
-        private ActiveInputEvent() {
-        }
+        private ActiveInputEvent() {}
 
         public void recycle() {
             this.mToken = null;

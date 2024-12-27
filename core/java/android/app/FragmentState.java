@@ -8,19 +8,20 @@ import android.util.Log;
 
 /* loaded from: classes.dex */
 final class FragmentState implements Parcelable {
-    public static final Parcelable.Creator<FragmentState> CREATOR = new Parcelable.Creator<FragmentState>() { // from class: android.app.FragmentState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FragmentState createFromParcel(Parcel in) {
-            return new FragmentState(in);
-        }
+    public static final Parcelable.Creator<FragmentState> CREATOR =
+            new Parcelable.Creator<FragmentState>() { // from class: android.app.FragmentState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FragmentState createFromParcel(Parcel in) {
+                    return new FragmentState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FragmentState[] newArray(int size) {
-            return new FragmentState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FragmentState[] newArray(int size) {
+                    return new FragmentState[size];
+                }
+            };
     final Bundle mArguments;
     final String mClassName;
     final int mContainerId;
@@ -61,7 +62,11 @@ final class FragmentState implements Parcelable {
         this.mSavedFragmentState = in.readBundle();
     }
 
-    public Fragment instantiate(FragmentHostCallback host, FragmentContainer container, Fragment parent, FragmentManagerNonConfig childNonConfig) {
+    public Fragment instantiate(
+            FragmentHostCallback host,
+            FragmentContainer container,
+            Fragment parent,
+            FragmentManagerNonConfig childNonConfig) {
         if (this.mInstance == null) {
             Context context = host.getContext();
             if (this.mArguments != null) {

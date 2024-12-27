@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextLocationChangeTriggerAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextLocationChangeTriggerAttribute> CREATOR = new Parcelable.Creator<SemContextLocationChangeTriggerAttribute>() { // from class: com.samsung.android.hardware.context.SemContextLocationChangeTriggerAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextLocationChangeTriggerAttribute createFromParcel(Parcel in) {
-            return new SemContextLocationChangeTriggerAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextLocationChangeTriggerAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextLocationChangeTriggerAttribute>() { // from class:
+                                                                  // com.samsung.android.hardware.context.SemContextLocationChangeTriggerAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextLocationChangeTriggerAttribute createFromParcel(Parcel in) {
+                    return new SemContextLocationChangeTriggerAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextLocationChangeTriggerAttribute[] newArray(int size) {
-            return new SemContextLocationChangeTriggerAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextLocationChangeTriggerAttribute[] newArray(int size) {
+                    return new SemContextLocationChangeTriggerAttribute[size];
+                }
+            };
     private static final String TAG = "SemContextLocationChangeTriggerAttribute";
     private int mDuration;
     private int mTriggerType;

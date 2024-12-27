@@ -216,7 +216,31 @@ public class WallpaperUser {
 
     public String toString() {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("\n\tWallpaperUser:\n\t\tmWidth = " + this.mWidth + "\n\t\tmHeight = " + this.mHeight + "\n\t\tmTransparency = " + this.mTransparency + "\n\t\tmDeviceType = " + this.mDeviceType + "\n\t\tmPath = " + this.mPath + "\n\t\tmComponent = " + this.mComponent + "\n\t\tmWpType = " + this.mWpType + "\n\t\tmUri = " + this.mUri + "\n\t\tmTiltSetting = " + this.mTiltSetting + "\n\t\tmOrientation = " + this.mOrientation + "\n\t\tmIsHomeAndLockPaired = " + this.mIsHomeAndLockPaired + "\n\t\tmComponentName = " + this.mComponentName);
+        buffer.append(
+                "\n\tWallpaperUser:\n\t\tmWidth = "
+                        + this.mWidth
+                        + "\n\t\tmHeight = "
+                        + this.mHeight
+                        + "\n\t\tmTransparency = "
+                        + this.mTransparency
+                        + "\n\t\tmDeviceType = "
+                        + this.mDeviceType
+                        + "\n\t\tmPath = "
+                        + this.mPath
+                        + "\n\t\tmComponent = "
+                        + this.mComponent
+                        + "\n\t\tmWpType = "
+                        + this.mWpType
+                        + "\n\t\tmUri = "
+                        + this.mUri
+                        + "\n\t\tmTiltSetting = "
+                        + this.mTiltSetting
+                        + "\n\t\tmOrientation = "
+                        + this.mOrientation
+                        + "\n\t\tmIsHomeAndLockPaired = "
+                        + this.mIsHomeAndLockPaired
+                        + "\n\t\tmComponentName = "
+                        + this.mComponentName);
         if (this.mWallpaperData != null) {
             buffer.append("\n\t\tmWallpaperData: " + this.mWallpaperData);
         }
@@ -230,11 +254,19 @@ public class WallpaperUser {
         int bottom = 0;
         int rotation = 0;
 
-        WallpaperData() {
-        }
+        WallpaperData() {}
 
         public String toString() {
-            return "left = " + this.left + ", top = " + this.top + ", right = " + this.right + ", bottom = " + this.bottom + ", rotatioin = " + this.rotation;
+            return "left = "
+                    + this.left
+                    + ", top = "
+                    + this.top
+                    + ", right = "
+                    + this.right
+                    + ", bottom = "
+                    + this.bottom
+                    + ", rotatioin = "
+                    + this.rotation;
         }
     }
 }

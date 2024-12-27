@@ -5,9 +5,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
-import com.android.server.media.MediaSessionService;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,13 +30,19 @@ public final class MediaSessionStack {
         DEBUG = true;
     }
 
-    public MediaSessionStack(AudioPlayerStateMonitor audioPlayerStateMonitor, MediaSessionService.FullUserRecord fullUserRecord) {
+    public MediaSessionStack(
+            AudioPlayerStateMonitor audioPlayerStateMonitor,
+            MediaSessionService.FullUserRecord fullUserRecord) {
         this.mAudioPlayerStateMonitor = audioPlayerStateMonitor;
         this.mOnMediaButtonSessionChangedListener = fullUserRecord;
     }
 
     public final void addSession(MediaSessionRecordImpl mediaSessionRecordImpl) {
-        Slog.i("MediaSessionStack", TextUtils.formatSimple("addSession to bottom of stack | record: %s", new Object[]{mediaSessionRecordImpl}));
+        Slog.i(
+                "MediaSessionStack",
+                TextUtils.formatSimple(
+                        "addSession to bottom of stack | record: %s",
+                        new Object[] {mediaSessionRecordImpl}));
         ((ArrayList) this.mSessions).add(mediaSessionRecordImpl);
         this.mCachedActiveLists.remove(mediaSessionRecordImpl.getUserId());
         this.mCachedActiveLists.remove(-1);
@@ -47,8 +54,11 @@ public final class MediaSessionStack {
         MediaSessionRecordImpl mediaSessionRecordImpl = null;
         while (it.hasNext()) {
             MediaSessionRecordImpl mediaSessionRecordImpl2 = (MediaSessionRecordImpl) it.next();
-            if (!(mediaSessionRecordImpl2 instanceof MediaSession2Record) && i == mediaSessionRecordImpl2.getUid()) {
-                if (mediaSessionRecordImpl2.checkPlaybackActiveState(this.mAudioPlayerStateMonitor.isPlaybackActive(mediaSessionRecordImpl2.getUid()))) {
+            if (!(mediaSessionRecordImpl2 instanceof MediaSession2Record)
+                    && i == mediaSessionRecordImpl2.getUid()) {
+                if (mediaSessionRecordImpl2.checkPlaybackActiveState(
+                        this.mAudioPlayerStateMonitor.isPlaybackActive(
+                                mediaSessionRecordImpl2.getUid()))) {
                     return mediaSessionRecordImpl2;
                 }
                 if (mediaSessionRecordImpl == null) {
@@ -64,7 +74,8 @@ public final class MediaSessionStack {
         int size = arrayList.size();
         for (int i = 0; i < size; i++) {
             MediaSessionRecord mediaSessionRecord = (MediaSessionRecord) arrayList.get(i);
-            if (mediaSessionRecord.checkPlaybackActiveState(true) && mediaSessionRecord.canHandleVolumeKey()) {
+            if (mediaSessionRecord.checkPlaybackActiveState(true)
+                    && mediaSessionRecord.canHandleVolumeKey()) {
                 return mediaSessionRecord;
             }
         }
@@ -105,7 +116,8 @@ public final class MediaSessionStack {
         while (it.hasNext()) {
             MediaSessionRecordImpl mediaSessionRecordImpl = (MediaSessionRecordImpl) it.next();
             if (i == -1 || mediaSessionRecordImpl.getUserId() == i) {
-                if (mediaSessionRecordImpl.isActive() && (mediaSessionRecordImpl instanceof MediaSession2Record)) {
+                if (mediaSessionRecordImpl.isActive()
+                        && (mediaSessionRecordImpl instanceof MediaSession2Record)) {
                     arrayList.add(((MediaSession2Record) mediaSessionRecordImpl).mSessionToken);
                 }
             }
@@ -113,14 +125,22 @@ public final class MediaSessionStack {
         return arrayList;
     }
 
-    public final void onPlaybackStateChanged(MediaSessionRecordImpl mediaSessionRecordImpl, boolean z) {
+    public final void onPlaybackStateChanged(
+            MediaSessionRecordImpl mediaSessionRecordImpl, boolean z) {
         MediaSessionRecordImpl findMediaButtonSession;
         if (z) {
-            Slog.i("MediaSessionStack", TextUtils.formatSimple("onPlaybackStateChanged - Pushing session to top | record: %s", new Object[]{mediaSessionRecordImpl}));
+            Slog.i(
+                    "MediaSessionStack",
+                    TextUtils.formatSimple(
+                            "onPlaybackStateChanged - Pushing session to top | record: %s",
+                            new Object[] {mediaSessionRecordImpl}));
             ((ArrayList) this.mSessions).remove(mediaSessionRecordImpl);
             if (!this.mIsMultiSoundOn) {
                 ((ArrayList) this.mSessions).add(0, mediaSessionRecordImpl);
-            } else if (mediaSessionRecordImpl.checkPlaybackActiveState(true) || ((ArrayList) this.mSessions).size() <= 0 || !((MediaSessionRecordImpl) ((ArrayList) this.mSessions).get(0)).checkPlaybackActiveState(true)) {
+            } else if (mediaSessionRecordImpl.checkPlaybackActiveState(true)
+                    || ((ArrayList) this.mSessions).size() <= 0
+                    || !((MediaSessionRecordImpl) ((ArrayList) this.mSessions).get(0))
+                            .checkPlaybackActiveState(true)) {
                 ((ArrayList) this.mSessions).add(0, mediaSessionRecordImpl);
             } else {
                 ((ArrayList) this.mSessions).add(1, mediaSessionRecordImpl);
@@ -129,14 +149,22 @@ public final class MediaSessionStack {
             this.mCachedActiveLists.remove(-1);
         }
         MediaSessionRecordImpl mediaSessionRecordImpl2 = this.mMediaButtonSession;
-        if (mediaSessionRecordImpl2 == null || mediaSessionRecordImpl2.getUid() != mediaSessionRecordImpl.getUid() || (findMediaButtonSession = findMediaButtonSession(this.mMediaButtonSession.getUid())) == this.mMediaButtonSession || (findMediaButtonSession.getSessionPolicies() & 2) != 0) {
+        if (mediaSessionRecordImpl2 == null
+                || mediaSessionRecordImpl2.getUid() != mediaSessionRecordImpl.getUid()
+                || (findMediaButtonSession =
+                                findMediaButtonSession(this.mMediaButtonSession.getUid()))
+                        == this.mMediaButtonSession
+                || (findMediaButtonSession.getSessionPolicies() & 2) != 0) {
             return;
         }
         updateMediaButtonSession(findMediaButtonSession);
     }
 
     public final void removeSession(MediaSessionRecordImpl mediaSessionRecordImpl) {
-        Slog.i("MediaSessionStack", TextUtils.formatSimple("removeSession | record: %s", new Object[]{mediaSessionRecordImpl}));
+        Slog.i(
+                "MediaSessionStack",
+                TextUtils.formatSimple(
+                        "removeSession | record: %s", new Object[] {mediaSessionRecordImpl}));
         ((ArrayList) this.mSessions).remove(mediaSessionRecordImpl);
         if (this.mMediaButtonSession == mediaSessionRecordImpl) {
             updateMediaButtonSession(null);
@@ -148,9 +176,12 @@ public final class MediaSessionStack {
     public final void updateMediaButtonSession(MediaSessionRecordImpl mediaSessionRecordImpl) {
         MediaSessionRecordImpl mediaSessionRecordImpl2 = this.mMediaButtonSession;
         this.mMediaButtonSession = mediaSessionRecordImpl;
-        MediaSessionService.FullUserRecord fullUserRecord = this.mOnMediaButtonSessionChangedListener;
+        MediaSessionService.FullUserRecord fullUserRecord =
+                this.mOnMediaButtonSessionChangedListener;
         fullUserRecord.getClass();
-        Log.d("MediaSessionService", "Media button session is changed to " + mediaSessionRecordImpl);
+        Log.d(
+                "MediaSessionService",
+                "Media button session is changed to " + mediaSessionRecordImpl);
         synchronized (MediaSessionService.this.mLock) {
             if (mediaSessionRecordImpl2 != null) {
                 try {
@@ -179,7 +210,12 @@ public final class MediaSessionStack {
                     str = "<bottom of call stack>";
                 } else {
                     StackTraceElement stackTraceElement = stackTrace[i2];
-                    str = stackTraceElement.getClassName() + "." + stackTraceElement.getMethodName() + ":" + stackTraceElement.getLineNumber();
+                    str =
+                            stackTraceElement.getClassName()
+                                    + "."
+                                    + stackTraceElement.getMethodName()
+                                    + ":"
+                                    + stackTraceElement.getLineNumber();
                 }
                 sb2.append(str);
                 sb2.append(" ");
@@ -199,7 +235,8 @@ public final class MediaSessionStack {
             if (findMediaButtonSession != null) {
                 boolean z = (findMediaButtonSession.getSessionPolicies() & 2) != 0;
                 if (DEBUG) {
-                    StringBuilder sb3 = new StringBuilder("updateMediaButtonSessionIfNeeded, checking uid=");
+                    StringBuilder sb3 =
+                            new StringBuilder("updateMediaButtonSessionIfNeeded, checking uid=");
                     sb3.append(intValue);
                     sb3.append(", mediaButtonSession=");
                     sb3.append(findMediaButtonSession);
@@ -207,15 +244,42 @@ public final class MediaSessionStack {
                     RCPManagerService$$ExternalSyntheticOutline0.m("MediaSessionStack", sb3, z);
                 }
                 if (!z) {
-                    AudioPlayerStateMonitor audioPlayerStateMonitor2 = this.mAudioPlayerStateMonitor;
+                    AudioPlayerStateMonitor audioPlayerStateMonitor2 =
+                            this.mAudioPlayerStateMonitor;
                     int uid = findMediaButtonSession.getUid();
                     synchronized (audioPlayerStateMonitor2.mLock) {
                         try {
                             int identifier = UserHandle.getUserHandleForUid(uid).getIdentifier();
-                            for (int size = ((ArrayList) audioPlayerStateMonitor2.mSortedAudioPlaybackClientUids).size() - 1; size >= 0 && ((Integer) ((ArrayList) audioPlayerStateMonitor2.mSortedAudioPlaybackClientUids).get(size)).intValue() != uid; size--) {
-                                int intValue2 = ((Integer) ((ArrayList) audioPlayerStateMonitor2.mSortedAudioPlaybackClientUids).get(size)).intValue();
-                                if (identifier == UserHandle.getUserHandleForUid(intValue2).getIdentifier() && !audioPlayerStateMonitor2.isPlaybackActive(intValue2)) {
-                                    ((ArrayList) audioPlayerStateMonitor2.mSortedAudioPlaybackClientUids).remove(size);
+                            for (int size =
+                                            ((ArrayList)
+                                                                    audioPlayerStateMonitor2
+                                                                            .mSortedAudioPlaybackClientUids)
+                                                            .size()
+                                                    - 1;
+                                    size >= 0
+                                            && ((Integer)
+                                                                    ((ArrayList)
+                                                                                    audioPlayerStateMonitor2
+                                                                                            .mSortedAudioPlaybackClientUids)
+                                                                            .get(size))
+                                                            .intValue()
+                                                    != uid;
+                                    size--) {
+                                int intValue2 =
+                                        ((Integer)
+                                                        ((ArrayList)
+                                                                        audioPlayerStateMonitor2
+                                                                                .mSortedAudioPlaybackClientUids)
+                                                                .get(size))
+                                                .intValue();
+                                if (identifier
+                                                == UserHandle.getUserHandleForUid(intValue2)
+                                                        .getIdentifier()
+                                        && !audioPlayerStateMonitor2.isPlaybackActive(intValue2)) {
+                                    ((ArrayList)
+                                                    audioPlayerStateMonitor2
+                                                            .mSortedAudioPlaybackClientUids)
+                                            .remove(size);
                                 }
                             }
                         } catch (Throwable th) {
@@ -229,7 +293,10 @@ public final class MediaSessionStack {
                     return;
                 }
             } else if (DEBUG) {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(intValue, "updateMediaButtonSessionIfNeeded, skipping uid=", "MediaSessionStack");
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        intValue,
+                        "updateMediaButtonSessionIfNeeded, skipping uid=",
+                        "MediaSessionStack");
             }
         }
     }

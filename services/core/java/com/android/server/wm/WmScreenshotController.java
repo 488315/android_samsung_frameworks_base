@@ -26,11 +26,14 @@ import android.view.MagnificationSpec;
 import android.view.SurfaceControl;
 import android.view.WindowManager;
 import android.window.ScreenCapture;
+
 import com.android.internal.util.ScreenshotRequest;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
@@ -79,98 +82,199 @@ public final class WmScreenshotController {
             synchronized (wmScreenshotController.mScreenshotLock) {
                 try {
                     if (wmScreenshotController.mScreenshotConnections.size() >= 3) {
-                        Log.e("WindowManager", "Too many screenshot service connection: " + wmScreenshotController.mScreenshotConnections.size());
+                        Log.e(
+                                "WindowManager",
+                                "Too many screenshot service connection: "
+                                        + wmScreenshotController.mScreenshotConnections.size());
                         return;
                     }
-                    PersonaActivityHelper personaActivityHelper = wmScreenshotController.mService.mAtmService.mPersonaActivityHelper;
+                    PersonaActivityHelper personaActivityHelper =
+                            wmScreenshotController.mService.mAtmService.mPersonaActivityHelper;
                     if (personaActivityHelper != null) {
                         userHandle = personaActivityHelper.getCurrentScreenUserId(userHandle);
                     }
-                    Log.d("WindowManager", "takeScreenshot: info=" + wmScreenshotInfo + ", user=" + userHandle.getIdentifier());
+                    Log.d(
+                            "WindowManager",
+                            "takeScreenshot: info="
+                                    + wmScreenshotInfo
+                                    + ", user="
+                                    + userHandle.getIdentifier());
                     PerfLog.d(21, (short) 10, "TakeScreenshot");
                     Intent intent = new Intent();
-                    intent.setComponent(new ComponentName(Constants.SYSTEMUI_PACKAGE_NAME, "com.android.systemui.screenshot.TakeScreenshotService"));
-                    ServiceConnection serviceConnection = new ServiceConnection() { // from class: com.android.server.wm.WmScreenshotController.1
-                        @Override // android.content.ServiceConnection
-                        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                            WindowState windowState;
-                            final WmScreenshotController wmScreenshotController2 = WmScreenshotController.this;
-                            WmScreenshotInfo wmScreenshotInfo2 = wmScreenshotInfo;
-                            synchronized (wmScreenshotController2.mScreenshotLock) {
-                                try {
-                                    if (wmScreenshotController2.mScreenshotConnections.containsKey(this)) {
-                                        Message obtain = Message.obtain();
-                                        obtain.what = wmScreenshotInfo2.mType;
-                                        obtain.replyTo = new Messenger(new Handler(wmScreenshotController2.mHandler.getLooper()) { // from class: com.android.server.wm.WmScreenshotController.2
-                                            @Override // android.os.Handler
-                                            public final void handleMessage(Message message) {
-                                                if (message.what != 2) {
-                                                    return;
-                                                }
-                                                WmScreenshotController.this.resetConnection(this, true);
-                                            }
-                                        });
-                                        obtain.obj = new ScreenshotRequest.Builder(wmScreenshotInfo2.mType, 5).build();
-                                        Bundle bundle = new Bundle();
-                                        bundle.putInt("sweepDirection", wmScreenshotInfo2.mSweepDirection);
-                                        bundle.putInt("capturedDisplay", wmScreenshotInfo2.mDisplayId);
-                                        bundle.putInt("capturedOrigin", wmScreenshotInfo2.mOrigin);
-                                        bundle.putBundle("captureSharedBundle", wmScreenshotInfo2.mBundle);
-                                        WindowManagerGlobalLock windowManagerGlobalLock = wmScreenshotController2.mService.mGlobalLock;
-                                        WindowManagerService.boostPriorityForLockedSection();
-                                        synchronized (windowManagerGlobalLock) {
-                                            try {
-                                                DisplayContent displayContent = wmScreenshotController2.mService.mRoot.getDisplayContent(wmScreenshotInfo2.mDisplayId);
-                                                if (displayContent != null) {
-                                                    WindowState windowState2 = displayContent.mDisplayPolicy.mStatusBar;
-                                                    int i = 0;
-                                                    obtain.arg1 = (windowState2 == null || !windowState2.isVisible()) ? 0 : 1;
-                                                    DisplayPolicy displayPolicy = displayContent.mDisplayPolicy;
-                                                    WindowState windowState3 = displayPolicy.mNavigationBar;
-                                                    if ((windowState3 != null && windowState3.isVisible()) || ((windowState = displayPolicy.mExt.mTaskbarController.mTaskbarWin) != null && windowState.mHasSurface && windowState.isVisible())) {
-                                                        i = 1;
-                                                    }
-                                                    obtain.arg2 = i;
-                                                    wmScreenshotController2.putSystemBarHeight(bundle, displayContent);
-                                                    WindowState windowState4 = displayContent.mCurrentFocus;
-                                                    Task task = windowState4 != null ? windowState4.getTask() : null;
-                                                    if (task != null && task.getParent() != null) {
-                                                        task.getParent().getBounds(wmScreenshotController2.mTmpRect);
-                                                        bundle.putParcelable("stackBounds", wmScreenshotController2.mTmpRect);
-                                                    }
-                                                    WmScreenshotController.putCutoutSafeInsets(bundle, displayContent);
-                                                    if (wmScreenshotInfo2.mType == 100 && !wmScreenshotController2.putFocusedWindowInfo(bundle, displayContent)) {
-                                                        obtain.what = 1;
-                                                    }
-                                                } else {
-                                                    Slog.e("WindowManager", "Get screenshot display failed, " + wmScreenshotInfo2.mDisplayId);
-                                                }
-                                            } catch (Throwable th) {
-                                                WindowManagerService.resetPriorityAfterLockedSection();
-                                                throw th;
-                                            }
-                                        }
-                                        WindowManagerService.resetPriorityAfterLockedSection();
-                                        obtain.setData(bundle);
+                    intent.setComponent(
+                            new ComponentName(
+                                    Constants.SYSTEMUI_PACKAGE_NAME,
+                                    "com.android.systemui.screenshot.TakeScreenshotService"));
+                    ServiceConnection serviceConnection = new ServiceConnection() { // from class:
+                                // com.android.server.wm.WmScreenshotController.1
+                                @Override // android.content.ServiceConnection
+                                public final void onServiceConnected(
+                                        ComponentName componentName, IBinder iBinder) {
+                                    WindowState windowState;
+                                    final WmScreenshotController wmScreenshotController2 =
+                                            WmScreenshotController.this;
+                                    WmScreenshotInfo wmScreenshotInfo2 = wmScreenshotInfo;
+                                    synchronized (wmScreenshotController2.mScreenshotLock) {
                                         try {
-                                            new Messenger(iBinder).send(obtain);
-                                        } catch (RemoteException e) {
-                                            Slog.e("WindowManager", "Send screenshot message failed, " + e);
+                                            if (wmScreenshotController2.mScreenshotConnections
+                                                    .containsKey(this)) {
+                                                Message obtain = Message.obtain();
+                                                obtain.what = wmScreenshotInfo2.mType;
+                                                obtain.replyTo =
+                                                        new Messenger(
+                                                                new Handler(
+                                                                        wmScreenshotController2
+                                                                                .mHandler
+                                                                                .getLooper()) { // from class: com.android.server.wm.WmScreenshotController.2
+                                                                    @Override // android.os.Handler
+                                                                    public final void handleMessage(
+                                                                            Message message) {
+                                                                        if (message.what != 2) {
+                                                                            return;
+                                                                        }
+                                                                        WmScreenshotController.this
+                                                                                .resetConnection(
+                                                                                        this, true);
+                                                                    }
+                                                                });
+                                                obtain.obj =
+                                                        new ScreenshotRequest.Builder(
+                                                                        wmScreenshotInfo2.mType, 5)
+                                                                .build();
+                                                Bundle bundle = new Bundle();
+                                                bundle.putInt(
+                                                        "sweepDirection",
+                                                        wmScreenshotInfo2.mSweepDirection);
+                                                bundle.putInt(
+                                                        "capturedDisplay",
+                                                        wmScreenshotInfo2.mDisplayId);
+                                                bundle.putInt(
+                                                        "capturedOrigin",
+                                                        wmScreenshotInfo2.mOrigin);
+                                                bundle.putBundle(
+                                                        "captureSharedBundle",
+                                                        wmScreenshotInfo2.mBundle);
+                                                WindowManagerGlobalLock windowManagerGlobalLock =
+                                                        wmScreenshotController2
+                                                                .mService
+                                                                .mGlobalLock;
+                                                WindowManagerService
+                                                        .boostPriorityForLockedSection();
+                                                synchronized (windowManagerGlobalLock) {
+                                                    try {
+                                                        DisplayContent displayContent =
+                                                                wmScreenshotController2.mService
+                                                                        .mRoot.getDisplayContent(
+                                                                        wmScreenshotInfo2
+                                                                                .mDisplayId);
+                                                        if (displayContent != null) {
+                                                            WindowState windowState2 =
+                                                                    displayContent
+                                                                            .mDisplayPolicy
+                                                                            .mStatusBar;
+                                                            int i = 0;
+                                                            obtain.arg1 =
+                                                                    (windowState2 == null
+                                                                                    || !windowState2
+                                                                                            .isVisible())
+                                                                            ? 0
+                                                                            : 1;
+                                                            DisplayPolicy displayPolicy =
+                                                                    displayContent.mDisplayPolicy;
+                                                            WindowState windowState3 =
+                                                                    displayPolicy.mNavigationBar;
+                                                            if ((windowState3 != null
+                                                                            && windowState3
+                                                                                    .isVisible())
+                                                                    || ((windowState =
+                                                                                            displayPolicy
+                                                                                                    .mExt
+                                                                                                    .mTaskbarController
+                                                                                                    .mTaskbarWin)
+                                                                                    != null
+                                                                            && windowState
+                                                                                    .mHasSurface
+                                                                            && windowState
+                                                                                    .isVisible())) {
+                                                                i = 1;
+                                                            }
+                                                            obtain.arg2 = i;
+                                                            wmScreenshotController2
+                                                                    .putSystemBarHeight(
+                                                                            bundle, displayContent);
+                                                            WindowState windowState4 =
+                                                                    displayContent.mCurrentFocus;
+                                                            Task task =
+                                                                    windowState4 != null
+                                                                            ? windowState4.getTask()
+                                                                            : null;
+                                                            if (task != null
+                                                                    && task.getParent() != null) {
+                                                                task.getParent()
+                                                                        .getBounds(
+                                                                                wmScreenshotController2
+                                                                                        .mTmpRect);
+                                                                bundle.putParcelable(
+                                                                        "stackBounds",
+                                                                        wmScreenshotController2
+                                                                                .mTmpRect);
+                                                            }
+                                                            WmScreenshotController
+                                                                    .putCutoutSafeInsets(
+                                                                            bundle, displayContent);
+                                                            if (wmScreenshotInfo2.mType == 100
+                                                                    && !wmScreenshotController2
+                                                                            .putFocusedWindowInfo(
+                                                                                    bundle,
+                                                                                    displayContent)) {
+                                                                obtain.what = 1;
+                                                            }
+                                                        } else {
+                                                            Slog.e(
+                                                                    "WindowManager",
+                                                                    "Get screenshot display failed,"
+                                                                        + " "
+                                                                            + wmScreenshotInfo2
+                                                                                    .mDisplayId);
+                                                        }
+                                                    } catch (Throwable th) {
+                                                        WindowManagerService
+                                                                .resetPriorityAfterLockedSection();
+                                                        throw th;
+                                                    }
+                                                }
+                                                WindowManagerService
+                                                        .resetPriorityAfterLockedSection();
+                                                obtain.setData(bundle);
+                                                try {
+                                                    new Messenger(iBinder).send(obtain);
+                                                } catch (RemoteException e) {
+                                                    Slog.e(
+                                                            "WindowManager",
+                                                            "Send screenshot message failed, " + e);
+                                                }
+                                            }
+                                        } catch (Throwable th2) {
+                                            throw th2;
                                         }
                                     }
-                                } catch (Throwable th2) {
-                                    throw th2;
                                 }
-                            }
-                        }
 
-                        @Override // android.content.ServiceConnection
-                        public final void onServiceDisconnected(ComponentName componentName) {
-                        }
-                    };
-                    if (wmScreenshotController.mContext.bindServiceAsUser(intent, serviceConnection, 1, userHandle)) {
-                        wmScreenshotController.mScreenshotConnections.put(serviceConnection, new WmScreenshotController$$ExternalSyntheticLambda0(wmScreenshotController, serviceConnection, 1));
-                        wmScreenshotController.mHandler.postDelayed((Runnable) wmScreenshotController.mScreenshotConnections.get(serviceConnection), 10000L);
+                                @Override // android.content.ServiceConnection
+                                public final void onServiceDisconnected(
+                                        ComponentName componentName) {}
+                            };
+                    if (wmScreenshotController.mContext.bindServiceAsUser(
+                            intent, serviceConnection, 1, userHandle)) {
+                        wmScreenshotController.mScreenshotConnections.put(
+                                serviceConnection,
+                                new WmScreenshotController$$ExternalSyntheticLambda0(
+                                        wmScreenshotController, serviceConnection, 1));
+                        wmScreenshotController.mHandler.postDelayed(
+                                (Runnable)
+                                        wmScreenshotController.mScreenshotConnections.get(
+                                                serviceConnection),
+                                10000L);
                     }
                 } finally {
                 }
@@ -180,50 +284,61 @@ public final class WmScreenshotController {
 
     public WmScreenshotController(Context context, WindowManagerService windowManagerService) {
         final int i = 0;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.wm.WmScreenshotController.3
-            public final /* synthetic */ WmScreenshotController this$0;
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.wm.WmScreenshotController.3
+                    public final /* synthetic */ WmScreenshotController this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            /* JADX WARN: Removed duplicated region for block: B:45:0x0124  */
-            /* JADX WARN: Removed duplicated region for block: B:48:0x0129  */
-            /* JADX WARN: Removed duplicated region for block: B:49:0x012c  */
-            /* JADX WARN: Removed duplicated region for block: B:50:0x012f  */
-            /* JADX WARN: Removed duplicated region for block: B:51:0x0132  */
-            /* JADX WARN: Removed duplicated region for block: B:52:0x0135  */
-            /* JADX WARN: Removed duplicated region for block: B:53:0x0138  */
-            @Override // android.content.BroadcastReceiver
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final void onReceive(android.content.Context r11, android.content.Intent r12) {
-                /*
-                    Method dump skipped, instructions count: 442
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WmScreenshotController.AnonymousClass3.onReceive(android.content.Context, android.content.Intent):void");
-            }
-        };
+                    /* JADX WARN: Removed duplicated region for block: B:45:0x0124  */
+                    /* JADX WARN: Removed duplicated region for block: B:48:0x0129  */
+                    /* JADX WARN: Removed duplicated region for block: B:49:0x012c  */
+                    /* JADX WARN: Removed duplicated region for block: B:50:0x012f  */
+                    /* JADX WARN: Removed duplicated region for block: B:51:0x0132  */
+                    /* JADX WARN: Removed duplicated region for block: B:52:0x0135  */
+                    /* JADX WARN: Removed duplicated region for block: B:53:0x0138  */
+                    @Override // android.content.BroadcastReceiver
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                        To view partially-correct code enable 'Show inconsistent code' option in preferences
+                    */
+                    public final void onReceive(
+                            android.content.Context r11, android.content.Intent r12) {
+                        /*
+                            Method dump skipped, instructions count: 442
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.wm.WmScreenshotController.AnonymousClass3.onReceive(android.content.Context,"
+                                    + " android.content.Intent):void");
+                    }
+                };
         final int i2 = 1;
-        BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver(this) { // from class: com.android.server.wm.WmScreenshotController.3
-            public final /* synthetic */ WmScreenshotController this$0;
+        BroadcastReceiver broadcastReceiver2 =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.wm.WmScreenshotController.3
+                    public final /* synthetic */ WmScreenshotController this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                /*
-                    Method dump skipped, instructions count: 442
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WmScreenshotController.AnonymousClass3.onReceive(android.content.Context, android.content.Intent):void");
-            }
-        };
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        /*
+                            Method dump skipped, instructions count: 442
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.wm.WmScreenshotController.AnonymousClass3.onReceive(android.content.Context,"
+                                    + " android.content.Intent):void");
+                    }
+                };
         this.mContext = context;
         this.mService = windowManagerService;
         WmScreenshotShellCommand wmScreenshotShellCommand = new WmScreenshotShellCommand();
@@ -236,10 +351,22 @@ public final class WmScreenshotController {
         WmScreenshotFileController wmScreenshotFileController = new WmScreenshotFileController();
         wmScreenshotFileController.mService = windowManagerService;
         this.mFileController = wmScreenshotFileController;
-        IntentFilter m = GmsAlarmManager$$ExternalSyntheticOutline0.m("com.samsung.android.motion.SWEEP_LEFT", "com.samsung.android.motion.SWEEP_RIGHT", "com.samsung.android.motion.SWEEP_FULL_SCREEN");
+        IntentFilter m =
+                GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                        "com.samsung.android.motion.SWEEP_LEFT",
+                        "com.samsung.android.motion.SWEEP_RIGHT",
+                        "com.samsung.android.motion.SWEEP_FULL_SCREEN");
         UserHandle userHandle = UserHandle.ALL;
-        context.registerReceiverAsUser(broadcastReceiver, userHandle, m, "com.samsung.permission.PALM_MOTION", null, 2);
-        context.registerReceiverAsUser(broadcastReceiver2, userHandle, BatteryService$$ExternalSyntheticOutline0.m("com.samsung.android.capture.ScreenshotExecutor"), "com.samsung.permission.CAPTURE", null, 2);
+        context.registerReceiverAsUser(
+                broadcastReceiver, userHandle, m, "com.samsung.permission.PALM_MOTION", null, 2);
+        context.registerReceiverAsUser(
+                broadcastReceiver2,
+                userHandle,
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "com.samsung.android.capture.ScreenshotExecutor"),
+                "com.samsung.permission.CAPTURE",
+                null,
+                2);
     }
 
     public static Rect adjustCropForOneHandOp(DisplayContent displayContent, Rect rect) {
@@ -250,7 +377,9 @@ public final class WmScreenshotController {
         DisplayInfo displayInfo = displayContent.mDisplayInfo;
         if (rect != null && !rect.isEmpty()) {
             rect.scale(magnificationSpec.scale);
-            rect.offsetTo(((int) magnificationSpec.offsetX) + rect.left, ((int) magnificationSpec.offsetY) + rect.top);
+            rect.offsetTo(
+                    ((int) magnificationSpec.offsetX) + rect.left,
+                    ((int) magnificationSpec.offsetY) + rect.top);
             return rect;
         }
         int i = (int) magnificationSpec.offsetX;
@@ -264,10 +393,15 @@ public final class WmScreenshotController {
         ActivityRecord activityRecord;
         WindowState findMainWindow;
         WindowState windowState = displayContent.mCurrentFocus;
-        if (windowState == null || (activityRecord = windowState.mActivityRecord) == null || (findMainWindow = activityRecord.findMainWindow(true)) == null || !findMainWindow.isLetterboxedForDisplayCutout()) {
+        if (windowState == null
+                || (activityRecord = windowState.mActivityRecord) == null
+                || (findMainWindow = activityRecord.findMainWindow(true)) == null
+                || !findMainWindow.isLetterboxedForDisplayCutout()) {
             return;
         }
-        DisplayCutout calculateDisplayCutoutForRotation = displayContent.calculateDisplayCutoutForRotation(displayContent.mDisplayRotation.mRotation, false);
+        DisplayCutout calculateDisplayCutoutForRotation =
+                displayContent.calculateDisplayCutoutForRotation(
+                        displayContent.mDisplayRotation.mRotation, false);
         if (calculateDisplayCutoutForRotation.isEmpty()) {
             return;
         }
@@ -303,32 +437,38 @@ public final class WmScreenshotController {
         return sb.toString();
     }
 
-    public final SurfaceControl findTargetSurfaceForSystemWindowTarget(DisplayContent displayContent, final int i, final boolean z, StringBuilder sb) {
+    public final SurfaceControl findTargetSurfaceForSystemWindowTarget(
+            DisplayContent displayContent, final int i, final boolean z, StringBuilder sb) {
         final boolean[] zArr = {false};
-        WindowState window = displayContent.getWindow(new Predicate() { // from class: com.android.server.wm.WmScreenshotController$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                WmScreenshotController wmScreenshotController = WmScreenshotController.this;
-                boolean[] zArr2 = zArr;
-                int i2 = i;
-                boolean z2 = z;
-                WindowState windowState = (WindowState) obj;
-                wmScreenshotController.getClass();
-                if ((windowState.mAttrs.privateFlags & 1048576) != 0 || windowState.hasRelativeLayer()) {
-                    return false;
-                }
-                if (!zArr2[0]) {
-                    if (windowState.mAttrs.type != i2) {
-                        return false;
-                    }
-                    if (!z2) {
-                        zArr2[0] = true;
-                        return false;
-                    }
-                }
-                return true;
-            }
-        });
+        WindowState window =
+                displayContent.getWindow(
+                        new Predicate() { // from class:
+                                          // com.android.server.wm.WmScreenshotController$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                WmScreenshotController wmScreenshotController =
+                                        WmScreenshotController.this;
+                                boolean[] zArr2 = zArr;
+                                int i2 = i;
+                                boolean z2 = z;
+                                WindowState windowState = (WindowState) obj;
+                                wmScreenshotController.getClass();
+                                if ((windowState.mAttrs.privateFlags & 1048576) != 0
+                                        || windowState.hasRelativeLayer()) {
+                                    return false;
+                                }
+                                if (!zArr2[0]) {
+                                    if (windowState.mAttrs.type != i2) {
+                                        return false;
+                                    }
+                                    if (!z2) {
+                                        zArr2[0] = true;
+                                        return false;
+                                    }
+                                }
+                                return true;
+                            }
+                        });
         if (window == null) {
             this.mReasonForFailure |= 2;
             return null;
@@ -345,37 +485,56 @@ public final class WmScreenshotController {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    displayContent.forAllWindows(new Consumer() { // from class: com.android.server.wm.WmScreenshotController$$ExternalSyntheticLambda2
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            int i;
-                            WmScreenshotController wmScreenshotController = WmScreenshotController.this;
-                            boolean z2 = z;
-                            boolean[] zArr2 = zArr;
-                            WindowState windowState = (WindowState) obj;
-                            wmScreenshotController.getClass();
-                            if (windowState.isVisible()) {
-                                WindowManager.LayoutParams layoutParams = windowState.mAttrs;
-                                if (layoutParams != null) {
-                                    i = layoutParams.getColorMode();
-                                    if (i == 2 || i == 3) {
-                                        Log.i("WindowManager", "isHdrColorMode w=" + windowState.getName() + " colorMode=" + i);
+                    displayContent.forAllWindows(
+                            new Consumer() { // from class:
+                                             // com.android.server.wm.WmScreenshotController$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    int i;
+                                    WmScreenshotController wmScreenshotController =
+                                            WmScreenshotController.this;
+                                    boolean z2 = z;
+                                    boolean[] zArr2 = zArr;
+                                    WindowState windowState = (WindowState) obj;
+                                    wmScreenshotController.getClass();
+                                    if (windowState.isVisible()) {
+                                        WindowManager.LayoutParams layoutParams =
+                                                windowState.mAttrs;
+                                        if (layoutParams != null) {
+                                            i = layoutParams.getColorMode();
+                                            if (i == 2 || i == 3) {
+                                                Log.i(
+                                                        "WindowManager",
+                                                        "isHdrColorMode w="
+                                                                + windowState.getName()
+                                                                + " colorMode="
+                                                                + i);
+                                            }
+                                        } else {
+                                            i = 0;
+                                        }
+                                        if (i == 2 || i == 3) {
+                                            try {
+                                                Log.i(
+                                                        "WindowManager",
+                                                        "invalidateForScreenShot forceMode="
+                                                                + z2
+                                                                + " w="
+                                                                + windowState.getName());
+                                                windowState.mClient.invalidateForScreenShot(z2);
+                                                zArr2[0] = true;
+                                            } catch (Exception e) {
+                                                AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                e,
+                                                                new StringBuilder("Exception "),
+                                                                "WindowManager");
+                                            }
+                                        }
                                     }
-                                } else {
-                                    i = 0;
                                 }
-                                if (i == 2 || i == 3) {
-                                    try {
-                                        Log.i("WindowManager", "invalidateForScreenShot forceMode=" + z2 + " w=" + windowState.getName());
-                                        windowState.mClient.invalidateForScreenShot(z2);
-                                        zArr2[0] = true;
-                                    } catch (Exception e) {
-                                        AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception "), "WindowManager");
-                                    }
-                                }
-                            }
-                        }
-                    }, true);
+                            },
+                            true);
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     throw th;
@@ -393,11 +552,13 @@ public final class WmScreenshotController {
     }
 
     public final boolean isScreenshotAllowedByPolicy(DisplayContent displayContent) {
-        WindowState window = displayContent.getWindow(new DisplayContent$$ExternalSyntheticLambda7(6));
+        WindowState window =
+                displayContent.getWindow(new DisplayContent$$ExternalSyntheticLambda7(6));
         if (window == null) {
             return true;
         }
-        if (this.mService.mSensitiveContentPackages.shouldBlockScreenCaptureForApp(window.mOwnerUid, window.mClient.asBinder(), window.mAttrs.packageName)) {
+        if (this.mService.mSensitiveContentPackages.shouldBlockScreenCaptureForApp(
+                window.mOwnerUid, window.mClient.asBinder(), window.mAttrs.packageName)) {
             this.mIsBlockedBySensitiveContents = true;
             this.mSecuredWindowName = window.getWindowTag().toString();
             return true;
@@ -419,16 +580,19 @@ public final class WmScreenshotController {
         }
         this.mTmpRect.setEmpty();
         final Rect rect = this.mTmpRect;
-        task.forAllWindows(new Consumer() { // from class: com.android.server.wm.WmScreenshotController$$ExternalSyntheticLambda4
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                Rect rect2 = rect;
-                WindowState windowState2 = (WindowState) obj;
-                if (windowState2.isVisible()) {
-                    rect2.union(windowState2.mWindowFrames.mFrame);
-                }
-            }
-        }, true);
+        task.forAllWindows(
+                new Consumer() { // from class:
+                                 // com.android.server.wm.WmScreenshotController$$ExternalSyntheticLambda4
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        Rect rect2 = rect;
+                        WindowState windowState2 = (WindowState) obj;
+                        if (windowState2.isVisible()) {
+                            rect2.union(windowState2.mWindowFrames.mFrame);
+                        }
+                    }
+                },
+                true);
         if (this.mTmpRect.isEmpty()) {
             return false;
         }
@@ -444,7 +608,18 @@ public final class WmScreenshotController {
 
     public final void putSystemBarHeight(Bundle bundle, DisplayContent displayContent) {
         DisplayInfo displayInfo = displayContent.mDisplayInfo;
-        this.mTmpRect.set(this.mService.mFlags.mInsetsDecoupledConfiguration ? displayContent.mDisplayPolicy.getDecorInsetsInfo(displayInfo.rotation, displayInfo.logicalWidth, displayInfo.logicalHeight).mOverrideConfigInsets : displayContent.mDisplayPolicy.getDecorInsetsInfo(displayInfo.rotation, displayInfo.logicalWidth, displayInfo.logicalHeight).mConfigInsets);
+        this.mTmpRect.set(
+                this.mService.mFlags.mInsetsDecoupledConfiguration
+                        ? displayContent.mDisplayPolicy.getDecorInsetsInfo(
+                                        displayInfo.rotation,
+                                        displayInfo.logicalWidth,
+                                        displayInfo.logicalHeight)
+                                .mOverrideConfigInsets
+                        : displayContent.mDisplayPolicy.getDecorInsetsInfo(
+                                        displayInfo.rotation,
+                                        displayInfo.logicalWidth,
+                                        displayInfo.logicalHeight)
+                                .mConfigInsets);
         bundle.putInt("statusBarHeight", this.mTmpRect.top);
         int i = displayContent.mDisplayPolicy.mNavigationBarPosition;
         if (i == 1) {
@@ -459,9 +634,11 @@ public final class WmScreenshotController {
     public final void resetConnection(ServiceConnection serviceConnection, boolean z) {
         synchronized (this.mScreenshotLock) {
             try {
-                if (this.mScreenshotConnections.containsKey(serviceConnection) && serviceConnection != null) {
+                if (this.mScreenshotConnections.containsKey(serviceConnection)
+                        && serviceConnection != null) {
                     this.mContext.unbindService(serviceConnection);
-                    this.mHandler.removeCallbacks((Runnable) this.mScreenshotConnections.get(serviceConnection));
+                    this.mHandler.removeCallbacks(
+                            (Runnable) this.mScreenshotConnections.get(serviceConnection));
                     if (z) {
                         this.mScreenshotConnections.remove(serviceConnection);
                     }
@@ -472,11 +649,26 @@ public final class WmScreenshotController {
         }
     }
 
-    public final Bitmap screenshot(IBinder iBinder, Rect rect, int i, int i2, SurfaceControl surfaceControl, boolean z, boolean z2) {
+    public final Bitmap screenshot(
+            IBinder iBinder,
+            Rect rect,
+            int i,
+            int i2,
+            SurfaceControl surfaceControl,
+            boolean z,
+            boolean z2) {
         if (iBinder == null) {
             throw new IllegalArgumentException("displayToken must not be null");
         }
-        ScreenCapture.ScreenshotHardwareBuffer captureDisplay = ScreenCapture.captureDisplay(new ScreenCapture.DisplayCaptureArgs.Builder(iBinder).setUseIdentityTransform(z).setSourceCrop(rect).setSize(i, i2).setLayer(surfaceControl).setCaptureSecureLayers(z2).build());
+        ScreenCapture.ScreenshotHardwareBuffer captureDisplay =
+                ScreenCapture.captureDisplay(
+                        new ScreenCapture.DisplayCaptureArgs.Builder(iBinder)
+                                .setUseIdentityTransform(z)
+                                .setSourceCrop(rect)
+                                .setSize(i, i2)
+                                .setLayer(surfaceControl)
+                                .setCaptureSecureLayers(z2)
+                                .build());
         Bitmap asBitmap = captureDisplay == null ? null : captureDisplay.asBitmap();
         if (asBitmap == null) {
             Log.e("WindowManager", "Failed to take screenshot with sourceCrop");
@@ -517,11 +709,24 @@ public final class WmScreenshotController {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.view.ScreenshotResult takeScreenshotToTargetWindow(int r18, int r19, boolean r20, android.graphics.Rect r21, int r22, int r23, boolean r24, boolean r25, boolean r26) {
+    public final com.samsung.android.view.ScreenshotResult takeScreenshotToTargetWindow(
+            int r18,
+            int r19,
+            boolean r20,
+            android.graphics.Rect r21,
+            int r22,
+            int r23,
+            boolean r24,
+            boolean r25,
+            boolean r26) {
         /*
             Method dump skipped, instructions count: 469
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WmScreenshotController.takeScreenshotToTargetWindow(int, int, boolean, android.graphics.Rect, int, int, boolean, boolean, boolean):com.samsung.android.view.ScreenshotResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WmScreenshotController.takeScreenshotToTargetWindow(int,"
+                    + " int, boolean, android.graphics.Rect, int, int, boolean, boolean,"
+                    + " boolean):com.samsung.android.view.ScreenshotResult");
     }
 }

@@ -3,6 +3,7 @@ package com.google.android.mms.pdu;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.text.TextUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,9 +28,12 @@ public class PduComposer {
     private static final int PDU_PHONE_NUMBER_ADDRESS_TYPE = 1;
     private static final int PDU_UNKNOWN_ADDRESS_TYPE = 5;
     private static final int QUOTED_STRING_FLAG = 34;
-    static final String REGEXP_EMAIL_ADDRESS_TYPE = "[a-zA-Z| ]*\\<{0,1}[a-zA-Z| ]+@{1}[a-zA-Z| ]+\\.{1}[a-zA-Z| ]+\\>{0,1}";
-    static final String REGEXP_IPV4_ADDRESS_TYPE = "[0-9]{1,3}\\.{1}[0-9]{1,3}\\.{1}[0-9]{1,3}\\.{1}[0-9]{1,3}";
-    static final String REGEXP_IPV6_ADDRESS_TYPE = "[a-fA-F]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}";
+    static final String REGEXP_EMAIL_ADDRESS_TYPE =
+            "[a-zA-Z| ]*\\<{0,1}[a-zA-Z| ]+@{1}[a-zA-Z| ]+\\.{1}[a-zA-Z| ]+\\>{0,1}";
+    static final String REGEXP_IPV4_ADDRESS_TYPE =
+            "[0-9]{1,3}\\.{1}[0-9]{1,3}\\.{1}[0-9]{1,3}\\.{1}[0-9]{1,3}";
+    static final String REGEXP_IPV6_ADDRESS_TYPE =
+            "[a-fA-F]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}\\:{1}[a-fA-F0-9]{4}";
     static final String REGEXP_PHONE_NUMBER_ADDRESS_TYPE = "\\+?[0-9|\\.|\\-]+";
     private static final int SHORT_INTEGER_MAX = 127;
     static final String STRING_IPV4_ADDRESS_TYPE = "/TYPE=IPV4";
@@ -301,7 +305,10 @@ public class PduComposer {
             case 137:
                 appendOctet(field);
                 EncodedStringValue from = this.mPduHeader.getEncodedStringValue(field);
-                if (from == null || TextUtils.isEmpty(from.getString()) || new String(from.getTextString()).equals(PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR)) {
+                if (from == null
+                        || TextUtils.isEmpty(from.getString())
+                        || new String(from.getTextString())
+                                .equals(PduHeaders.FROM_INSERT_ADDRESS_TOKEN_STR)) {
                     append(1);
                     append(129);
                     return 0;
@@ -325,7 +332,8 @@ public class PduComposer {
                     return 2;
                 }
                 appendOctet(field);
-                if (Arrays.equals(messageClass, PduHeaders.MESSAGE_CLASS_ADVERTISEMENT_STR.getBytes())) {
+                if (Arrays.equals(
+                        messageClass, PduHeaders.MESSAGE_CLASS_ADVERTISEMENT_STR.getBytes())) {
                     appendOctet(129);
                     return 0;
                 }
@@ -337,7 +345,8 @@ public class PduComposer {
                     appendOctet(128);
                     return 0;
                 }
-                if (Arrays.equals(messageClass, PduHeaders.MESSAGE_CLASS_INFORMATIONAL_STR.getBytes())) {
+                if (Arrays.equals(
+                        messageClass, PduHeaders.MESSAGE_CLASS_INFORMATIONAL_STR.getBytes())) {
                     appendOctet(130);
                     return 0;
                 }
@@ -380,7 +389,13 @@ public class PduComposer {
         }
         appendOctet(140);
         appendOctet(135);
-        return (appendHeader(141) == 0 && appendHeader(139) == 0 && appendHeader(151) == 0 && appendHeader(137) == 0 && appendHeader(155) == 0) ? 0 : 1;
+        return (appendHeader(141) == 0
+                        && appendHeader(139) == 0
+                        && appendHeader(151) == 0
+                        && appendHeader(137) == 0
+                        && appendHeader(155) == 0)
+                ? 0
+                : 1;
     }
 
     private int makeNotifyResp() {
@@ -470,7 +485,10 @@ public class PduComposer {
             return 1;
         }
         appendShortInteger(contentTypeIdentifier.intValue());
-        PduBody body = type == 132 ? ((RetrieveConf) this.mPdu).getBody() : ((SendReq) this.mPdu).getBody();
+        PduBody body =
+                type == 132
+                        ? ((RetrieveConf) this.mPdu).getBody()
+                        : ((SendReq) this.mPdu).getBody();
         if (body != null && body.getPartsNum() != 0) {
             try {
                 PduPart part = body.getPart(0);
@@ -505,7 +523,8 @@ public class PduComposer {
                 if (partContentType == null) {
                     return i;
                 }
-                Integer partContentTypeIdentifier = mContentTypeMap.get(new String(partContentType));
+                Integer partContentTypeIdentifier =
+                        mContentTypeMap.get(new String(partContentType));
                 if (partContentTypeIdentifier == null) {
                     appendTextString(partContentType);
                 } else {
@@ -737,8 +756,7 @@ public class PduComposer {
         private int c_pos;
         private int currentStackSize;
 
-        private PositionMarker() {
-        }
+        private PositionMarker() {}
 
         int getLength() {
             if (this.currentStackSize != PduComposer.this.mStack.stackSize) {
@@ -786,7 +804,8 @@ public class PduComposer {
         }
 
         void copy() {
-            PduComposer.this.arraycopy(this.toCopy.currentMessage.toByteArray(), 0, this.toCopy.currentPosition);
+            PduComposer.this.arraycopy(
+                    this.toCopy.currentMessage.toByteArray(), 0, this.toCopy.currentPosition);
             this.toCopy = null;
         }
 

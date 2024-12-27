@@ -3,6 +3,7 @@ package android.hardware.display;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -34,33 +35,45 @@ public final class SemDlnaDevice implements Parcelable {
     private String mURI;
     private String mUid;
     public static final SemDlnaDevice[] EMPTY_ARRAY = new SemDlnaDevice[0];
-    public static final Parcelable.Creator<SemDlnaDevice> CREATOR = new Parcelable.Creator<SemDlnaDevice>() { // from class: android.hardware.display.SemDlnaDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemDlnaDevice createFromParcel(Parcel in) {
-            String deviceName = in.readString();
-            String deviceIpAddress = in.readString();
-            String deviceP2pMacAddress = in.readString();
-            String deviceMacAddressFromARP = in.readString();
-            String deviceNICType = in.readString();
-            String uid = in.readString();
-            int dlnaType = in.readInt();
-            boolean isSwitchingDevice = in.readInt() != 0;
-            String uri = in.readString();
-            int dlnaSupportTypes = in.readInt();
-            int connectionState = in.readInt();
-            SemDlnaDevice dlnaDevice = new SemDlnaDevice(deviceName, deviceIpAddress, deviceP2pMacAddress, deviceMacAddressFromARP, deviceNICType, uid, dlnaType, isSwitchingDevice, uri);
-            dlnaDevice.setDlnaSupportTypes(dlnaSupportTypes);
-            dlnaDevice.setConnectionState(connectionState);
-            return dlnaDevice;
-        }
+    public static final Parcelable.Creator<SemDlnaDevice> CREATOR =
+            new Parcelable.Creator<
+                    SemDlnaDevice>() { // from class: android.hardware.display.SemDlnaDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemDlnaDevice createFromParcel(Parcel in) {
+                    String deviceName = in.readString();
+                    String deviceIpAddress = in.readString();
+                    String deviceP2pMacAddress = in.readString();
+                    String deviceMacAddressFromARP = in.readString();
+                    String deviceNICType = in.readString();
+                    String uid = in.readString();
+                    int dlnaType = in.readInt();
+                    boolean isSwitchingDevice = in.readInt() != 0;
+                    String uri = in.readString();
+                    int dlnaSupportTypes = in.readInt();
+                    int connectionState = in.readInt();
+                    SemDlnaDevice dlnaDevice =
+                            new SemDlnaDevice(
+                                    deviceName,
+                                    deviceIpAddress,
+                                    deviceP2pMacAddress,
+                                    deviceMacAddressFromARP,
+                                    deviceNICType,
+                                    uid,
+                                    dlnaType,
+                                    isSwitchingDevice,
+                                    uri);
+                    dlnaDevice.setDlnaSupportTypes(dlnaSupportTypes);
+                    dlnaDevice.setConnectionState(connectionState);
+                    return dlnaDevice;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemDlnaDevice[] newArray(int size) {
-            return size == 0 ? SemDlnaDevice.EMPTY_ARRAY : new SemDlnaDevice[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemDlnaDevice[] newArray(int size) {
+                    return size == 0 ? SemDlnaDevice.EMPTY_ARRAY : new SemDlnaDevice[size];
+                }
+            };
 
     public SemDlnaDevice() {
         Log.d(TAG, "SemDlnaDevice " + toString());
@@ -76,11 +89,22 @@ public final class SemDlnaDevice implements Parcelable {
         Log.d(TAG, "SemDlnaDevice " + toString());
     }
 
-    public SemDlnaDevice(String name, String ipAddress, String p2pMacAddress, String macAddressFromARP, String deviceNICType, String uid, int dlnaType, boolean isSwitchingDevice, String uri) {
+    public SemDlnaDevice(
+            String name,
+            String ipAddress,
+            String p2pMacAddress,
+            String macAddressFromARP,
+            String deviceNICType,
+            String uid,
+            int dlnaType,
+            boolean isSwitchingDevice,
+            String uri) {
         this.mName = name;
         this.mIpAddress = ipAddress;
         this.mP2pMacAddress = p2pMacAddress != null ? p2pMacAddress : "";
-        if (this.mP2pMacAddress.equals("") && ((macAddressFromARP == null || macAddressFromARP.equals("")) && !"".equals(ipAddress))) {
+        if (this.mP2pMacAddress.equals("")
+                && ((macAddressFromARP == null || macAddressFromARP.equals(""))
+                        && !"".equals(ipAddress))) {
             this.mMacAddressFromARP = getMacAddrFromArpTable(ipAddress);
         } else {
             this.mMacAddressFromARP = macAddressFromARP != null ? macAddressFromARP : "";
@@ -136,16 +160,13 @@ public final class SemDlnaDevice implements Parcelable {
     public boolean isDlnaSupportType(int type) {
         switch (type) {
             case 0:
-                if ((this.mDlnaSupportTypes & 1) != 0) {
-                }
+                if ((this.mDlnaSupportTypes & 1) != 0) {}
                 break;
             case 1:
-                if ((this.mDlnaSupportTypes & 2) != 0) {
-                }
+                if ((this.mDlnaSupportTypes & 2) != 0) {}
                 break;
             case 2:
-                if ((this.mDlnaSupportTypes & 4) != 0) {
-                }
+                if ((this.mDlnaSupportTypes & 4) != 0) {}
                 break;
         }
         return true;
@@ -179,7 +200,11 @@ public final class SemDlnaDevice implements Parcelable {
         String ipAddr2 = ipAddr.replace("/", "");
         try {
             try {
-                BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream("/proc/net/arp"), StandardCharsets.UTF_8));
+                BufferedReader br2 =
+                        new BufferedReader(
+                                new InputStreamReader(
+                                        new FileInputStream("/proc/net/arp"),
+                                        StandardCharsets.UTF_8));
                 while (true) {
                     String line = br2.readLine();
                     if (line == null) {
@@ -234,7 +259,12 @@ public final class SemDlnaDevice implements Parcelable {
     }
 
     public boolean equals(SemDlnaDevice other) {
-        return other != null && this.mUid.equals(other.mUid) && this.mName.equals(other.mName) && this.mP2pMacAddress.equals(other.mP2pMacAddress) && Objects.equals(Integer.valueOf(this.mDlnaType), Integer.valueOf(other.mDlnaType));
+        return other != null
+                && this.mUid.equals(other.mUid)
+                && this.mName.equals(other.mName)
+                && this.mP2pMacAddress.equals(other.mP2pMacAddress)
+                && Objects.equals(
+                        Integer.valueOf(this.mDlnaType), Integer.valueOf(other.mDlnaType));
     }
 
     public int hashCode() {
@@ -263,6 +293,28 @@ public final class SemDlnaDevice implements Parcelable {
 
     public String toString() {
         String result = "name: " + this.mName;
-        return result + ", ip: " + this.mIpAddress + ", mac: " + this.mP2pMacAddress + ", macFromArp: " + this.mMacAddressFromARP + ", netType: " + this.mNICType + ", uid: " + this.mUid + ", dlnaType : " + this.mDlnaType + ", isSwitchingDevice : " + this.mIsSwitchingDevice + ", uri : " + this.mURI + ", dlnaType : " + this.mDlnaType + ", dlnaSupportTypes : " + this.mDlnaSupportTypes + ", connectionState : " + this.mConnectionState;
+        return result
+                + ", ip: "
+                + this.mIpAddress
+                + ", mac: "
+                + this.mP2pMacAddress
+                + ", macFromArp: "
+                + this.mMacAddressFromARP
+                + ", netType: "
+                + this.mNICType
+                + ", uid: "
+                + this.mUid
+                + ", dlnaType : "
+                + this.mDlnaType
+                + ", isSwitchingDevice : "
+                + this.mIsSwitchingDevice
+                + ", uri : "
+                + this.mURI
+                + ", dlnaType : "
+                + this.mDlnaType
+                + ", dlnaSupportTypes : "
+                + this.mDlnaSupportTypes
+                + ", connectionState : "
+                + this.mConnectionState;
     }
 }

@@ -34,17 +34,20 @@ public class NetworkStatsUtils {
         if (low <= high) {
             return amount < low ? low : amount > high ? high : amount;
         }
-        throw new IllegalArgumentException("low(" + low + ") > high(" + high + NavigationBarInflaterView.KEY_CODE_END);
+        throw new IllegalArgumentException(
+                "low(" + low + ") > high(" + high + NavigationBarInflaterView.KEY_CODE_END);
     }
 
     public static long constrain(long amount, long low, long high) {
         if (low <= high) {
             return amount < low ? low : amount > high ? high : amount;
         }
-        throw new IllegalArgumentException("low(" + low + ") > high(" + high + NavigationBarInflaterView.KEY_CODE_END);
+        throw new IllegalArgumentException(
+                "low(" + low + ") > high(" + high + NavigationBarInflaterView.KEY_CODE_END);
     }
 
-    public static NetworkStats fromPublicNetworkStats(android.app.usage.NetworkStats publiceNetworkStats) {
+    public static NetworkStats fromPublicNetworkStats(
+            android.app.usage.NetworkStats publiceNetworkStats) {
         NetworkStats stats = new NetworkStats(0L, 0);
         while (publiceNetworkStats.hasNextBucket()) {
             NetworkStats.Bucket bucket = new NetworkStats.Bucket();
@@ -56,7 +59,19 @@ public class NetworkStatsUtils {
     }
 
     public static NetworkStats.Entry fromBucket(NetworkStats.Bucket bucket) {
-        return new NetworkStats.Entry((String) null, bucket.getUid(), convertBucketState(bucket.getState()), convertBucketTag(bucket.getTag()), convertBucketMetered(bucket.getMetered()), convertBucketRoaming(bucket.getRoaming()), convertBucketDefaultNetworkStatus(bucket.getDefaultNetworkStatus()), bucket.getRxBytes(), bucket.getRxPackets(), bucket.getTxBytes(), bucket.getTxPackets(), 0L);
+        return new NetworkStats.Entry(
+                (String) null,
+                bucket.getUid(),
+                convertBucketState(bucket.getState()),
+                convertBucketTag(bucket.getTag()),
+                convertBucketMetered(bucket.getMetered()),
+                convertBucketRoaming(bucket.getRoaming()),
+                convertBucketDefaultNetworkStatus(bucket.getDefaultNetworkStatus()),
+                bucket.getRxBytes(),
+                bucket.getRxPackets(),
+                bucket.getTxBytes(),
+                bucket.getTxPackets(),
+                0L);
     }
 
     private static int convertBucketState(int networkStatsSet) {

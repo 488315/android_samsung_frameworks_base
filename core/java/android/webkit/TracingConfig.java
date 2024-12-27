@@ -23,14 +23,13 @@ public class TracingConfig {
     private int mTracingMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PredefinedCategories {
-    }
+    public @interface PredefinedCategories {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TracingMode {
-    }
+    public @interface TracingMode {}
 
-    public TracingConfig(int predefinedCategories, List<String> customIncludedCategories, int tracingMode) {
+    public TracingConfig(
+            int predefinedCategories, List<String> customIncludedCategories, int tracingMode) {
         this.mPredefinedCategories = predefinedCategories;
         this.mCustomIncludedCategories.addAll(customIncludedCategories);
         this.mTracingMode = tracingMode;
@@ -54,7 +53,8 @@ public class TracingConfig {
         private int mTracingMode = 1;
 
         public TracingConfig build() {
-            return new TracingConfig(this.mPredefinedCategories, this.mCustomIncludedCategories, this.mTracingMode);
+            return new TracingConfig(
+                    this.mPredefinedCategories, this.mCustomIncludedCategories, this.mTracingMode);
         }
 
         public Builder addCategories(int... predefinedCategories) {

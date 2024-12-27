@@ -14,8 +14,10 @@ import android.security.keystore2.AndroidKeyStoreProvider;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.internal.util.HexDump;
 import com.android.net.module.util.ProxyUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URLDecoder;
@@ -36,6 +38,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -104,19 +107,21 @@ public final class VpnProfile implements Cloneable, Parcelable {
     public int type;
     public String username;
     private static final String DEFAULT_ENCODING = StandardCharsets.UTF_8.name();
-    public static final Parcelable.Creator<VpnProfile> CREATOR = new Parcelable.Creator<VpnProfile>() { // from class: com.android.internal.net.VpnProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VpnProfile createFromParcel(Parcel in) {
-            return new VpnProfile(in);
-        }
+    public static final Parcelable.Creator<VpnProfile> CREATOR =
+            new Parcelable.Creator<
+                    VpnProfile>() { // from class: com.android.internal.net.VpnProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VpnProfile createFromParcel(Parcel in) {
+                    return new VpnProfile(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VpnProfile[] newArray(int size) {
-            return new VpnProfile[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VpnProfile[] newArray(int size) {
+                    return new VpnProfile[size];
+                }
+            };
 
     public VpnProfile(String key) {
         this(key, false, false, false, null);
@@ -126,11 +131,30 @@ public final class VpnProfile implements Cloneable, Parcelable {
         this(key, isRestrictedToTestNetworks, false, false, null);
     }
 
-    public VpnProfile(String key, boolean isRestrictedToTestNetworks, boolean excludeLocalRoutes, boolean requiresInternetValidation, IkeTunnelConnectionParams ikeTunConnParams) {
-        this(key, isRestrictedToTestNetworks, excludeLocalRoutes, requiresInternetValidation, ikeTunConnParams, false, false);
+    public VpnProfile(
+            String key,
+            boolean isRestrictedToTestNetworks,
+            boolean excludeLocalRoutes,
+            boolean requiresInternetValidation,
+            IkeTunnelConnectionParams ikeTunConnParams) {
+        this(
+                key,
+                isRestrictedToTestNetworks,
+                excludeLocalRoutes,
+                requiresInternetValidation,
+                ikeTunConnParams,
+                false,
+                false);
     }
 
-    public VpnProfile(String key, boolean isRestrictedToTestNetworks, boolean excludeLocalRoutes, boolean requiresInternetValidation, IkeTunnelConnectionParams ikeTunConnParams, boolean automaticNattKeepaliveTimerEnabled, boolean automaticIpVersionSelectionEnabled) {
+    public VpnProfile(
+            String key,
+            boolean isRestrictedToTestNetworks,
+            boolean excludeLocalRoutes,
+            boolean requiresInternetValidation,
+            IkeTunnelConnectionParams ikeTunConnParams,
+            boolean automaticNattKeepaliveTimerEnabled,
+            boolean automaticIpVersionSelectionEnabled) {
         this.name = "";
         this.type = 0;
         this.server = "";
@@ -244,8 +268,12 @@ public final class VpnProfile implements Cloneable, Parcelable {
         this.isRestrictedToTestNetworks = in.readBoolean();
         this.excludeLocalRoutes = in.readBoolean();
         this.requiresInternetValidation = in.readBoolean();
-        PersistableBundle bundle = (PersistableBundle) in.readParcelable(PersistableBundle.class.getClassLoader(), PersistableBundle.class);
-        this.ikeTunConnParams = bundle != null ? TunnelConnectionParamsUtils.fromPersistableBundle(bundle) : null;
+        PersistableBundle bundle =
+                (PersistableBundle)
+                        in.readParcelable(
+                                PersistableBundle.class.getClassLoader(), PersistableBundle.class);
+        this.ikeTunConnParams =
+                bundle != null ? TunnelConnectionParamsUtils.fromPersistableBundle(bundle) : null;
         this.automaticNattKeepaliveTimerEnabled = in.readBoolean();
         this.automaticIpVersionSelectionEnabled = in.readBoolean();
         this.ipsecRemoteIdentifier = in.readString();
@@ -294,7 +322,11 @@ public final class VpnProfile implements Cloneable, Parcelable {
         parcel.writeBoolean(this.isRestrictedToTestNetworks);
         parcel.writeBoolean(this.excludeLocalRoutes);
         parcel.writeBoolean(this.requiresInternetValidation);
-        parcel.writeParcelable(this.ikeTunConnParams == null ? null : TunnelConnectionParamsUtils.toPersistableBundle(this.ikeTunConnParams), i);
+        parcel.writeParcelable(
+                this.ikeTunConnParams == null
+                        ? null
+                        : TunnelConnectionParamsUtils.toPersistableBundle(this.ikeTunConnParams),
+                i);
         parcel.writeBoolean(this.automaticNattKeepaliveTimerEnabled);
         parcel.writeBoolean(this.automaticIpVersionSelectionEnabled);
         parcel.writeString(this.ipsecRemoteIdentifier);
@@ -345,21 +377,33 @@ public final class VpnProfile implements Cloneable, Parcelable {
                         byte[] bytes = HexDump.hexStringToByteArray(values[31]);
                         parcel.unmarshall(bytes, 0, bytes.length);
                         parcel.setDataPosition(0);
-                        PersistableBundle bundle = (PersistableBundle) parcel.readValue(PersistableBundle.class.getClassLoader());
-                        IkeTunnelConnectionParams tempIkeTunConnParams2 = TunnelConnectionParamsUtils.fromPersistableBundle(bundle);
+                        PersistableBundle bundle =
+                                (PersistableBundle)
+                                        parcel.readValue(PersistableBundle.class.getClassLoader());
+                        IkeTunnelConnectionParams tempIkeTunConnParams2 =
+                                TunnelConnectionParamsUtils.fromPersistableBundle(bundle);
                         tempIkeTunConnParams = tempIkeTunConnParams2;
                     } else {
                         tempIkeTunConnParams = null;
                     }
                     if (values.length >= 34) {
-                        boolean automaticNattKeepaliveTimerEnabled2 = Boolean.parseBoolean(values[32]);
+                        boolean automaticNattKeepaliveTimerEnabled2 =
+                                Boolean.parseBoolean(values[32]);
                         automaticNattKeepaliveTimerEnabled = automaticNattKeepaliveTimerEnabled2;
                         automaticIpVersionSelectionEnabled = Boolean.parseBoolean(values[33]);
                     } else {
                         automaticNattKeepaliveTimerEnabled = false;
                         automaticIpVersionSelectionEnabled = false;
                     }
-                    VpnProfile profile = new VpnProfile(key, isRestrictedToTestNetworks, excludeLocalRoutes, requiresInternetValidation, tempIkeTunConnParams, automaticNattKeepaliveTimerEnabled, automaticIpVersionSelectionEnabled);
+                    VpnProfile profile =
+                            new VpnProfile(
+                                    key,
+                                    isRestrictedToTestNetworks,
+                                    excludeLocalRoutes,
+                                    requiresInternetValidation,
+                                    tempIkeTunConnParams,
+                                    automaticNattKeepaliveTimerEnabled,
+                                    automaticIpVersionSelectionEnabled);
                     profile.name = values[0];
                     profile.type = Integer.parseInt(values[1]);
                     if (profile.type >= 0 && profile.type <= 10) {
@@ -377,7 +421,10 @@ public final class VpnProfile implements Cloneable, Parcelable {
                         profile.ipsecCaCert = values[13];
                         profile.ipsecServerCert = values.length > 14 ? values[14] : "";
                         profile.ocspServerUrl = values.length > 15 ? values[15] : "";
-                        profile.isPFS = values.length > 16 ? Boolean.valueOf(values[16]).booleanValue() : false;
+                        profile.isPFS =
+                                values.length > 16
+                                        ? Boolean.valueOf(values[16]).booleanValue()
+                                        : false;
                         profile.isPasswordIvParams = values.length > 17 ? values[17] : "";
                         profile.isIpsecSecretIvParams = values.length > 18 ? values[18] : "";
                         if (values.length > 19) {
@@ -390,12 +437,17 @@ public final class VpnProfile implements Cloneable, Parcelable {
                                     profile.proxy = ProxyInfo.buildPacProxy(Uri.parse(pacFileUrl));
                                 }
                             }
-                            profile.proxy = ProxyInfo.buildDirectProxy(host, port.isEmpty() ? 0 : Integer.parseInt(port), ProxyUtils.exclusionStringAsList(exclList));
+                            profile.proxy =
+                                    ProxyInfo.buildDirectProxy(
+                                            host,
+                                            port.isEmpty() ? 0 : Integer.parseInt(port),
+                                            ProxyUtils.exclusionStringAsList(exclList));
                         }
                         if (values.length >= 28) {
                             profile.mAllowedAlgorithms = new ArrayList();
                             for (String algo : Arrays.asList(values[23].split(","))) {
-                                profile.mAllowedAlgorithms.add(URLDecoder.decode(algo, DEFAULT_ENCODING));
+                                profile.mAllowedAlgorithms.add(
+                                        URLDecoder.decode(algo, DEFAULT_ENCODING));
                             }
                             profile.isBypassable = Boolean.parseBoolean(values[24]);
                             profile.isMetered = Boolean.parseBoolean(values[25]);
@@ -409,13 +461,17 @@ public final class VpnProfile implements Cloneable, Parcelable {
                         if (profile.username.isEmpty() && profile.password.isEmpty()) {
                             z = false;
                             profile.saveLogin = z;
-                            if (profile.type == 3 || !profile.ipsecUserCert.isEmpty() || profile.ipsecCaCert.isEmpty()) {
+                            if (profile.type == 3
+                                    || !profile.ipsecUserCert.isEmpty()
+                                    || profile.ipsecCaCert.isEmpty()) {
                                 if (profile.type == 4 || profile.ipsecSecret.isEmpty()) {
                                     if (profile.type != 5 && !profile.ipsecUserCert.isEmpty()) {
                                         profile.type = 4;
-                                    } else if (profile.type != 6 && !profile.ipsecSecret.isEmpty()) {
+                                    } else if (profile.type != 6
+                                            && !profile.ipsecSecret.isEmpty()) {
                                         profile.type = 7;
-                                    } else if (profile.type == 7 && !profile.ipsecUserCert.isEmpty()) {
+                                    } else if (profile.type == 7
+                                            && !profile.ipsecUserCert.isEmpty()) {
                                         profile.type = 8;
                                     }
                                 } else {
@@ -428,14 +484,10 @@ public final class VpnProfile implements Cloneable, Parcelable {
                         }
                         z = true;
                         profile.saveLogin = z;
-                        if (profile.type == 3) {
-                        }
-                        if (profile.type == 4) {
-                        }
-                        if (profile.type != 5) {
-                        }
-                        if (profile.type != 6) {
-                        }
+                        if (profile.type == 3) {}
+                        if (profile.type == 4) {}
+                        if (profile.type != 5) {}
+                        if (profile.type != 6) {}
                         if (profile.type == 7) {
                             profile.type = 8;
                         }
@@ -483,7 +535,8 @@ public final class VpnProfile implements Cloneable, Parcelable {
         builder.append(VALUE_DELIMITER).append(this.isPasswordIvParams);
         builder.append(VALUE_DELIMITER).append(this.isIpsecSecretIvParams);
         if (this.proxy != null) {
-            builder.append(VALUE_DELIMITER).append(this.proxy.getHost() != null ? this.proxy.getHost() : "");
+            builder.append(VALUE_DELIMITER)
+                    .append(this.proxy.getHost() != null ? this.proxy.getHost() : "");
             builder.append(VALUE_DELIMITER).append(this.proxy.getPort());
             StringBuilder append = builder.append(VALUE_DELIMITER);
             if (ProxyUtils.exclusionListAsString(this.proxy.getExclusionList()) != null) {
@@ -510,7 +563,8 @@ public final class VpnProfile implements Cloneable, Parcelable {
             builder.append(VALUE_DELIMITER).append(this.excludeLocalRoutes);
             builder.append(VALUE_DELIMITER).append(this.requiresInternetValidation);
             if (this.ikeTunConnParams != null) {
-                PersistableBundle bundle = TunnelConnectionParamsUtils.toPersistableBundle(this.ikeTunConnParams);
+                PersistableBundle bundle =
+                        TunnelConnectionParamsUtils.toPersistableBundle(this.ikeTunConnParams);
                 Parcel parcel = Parcel.obtain();
                 parcel.writeValue(bundle);
                 byte[] bytes = parcel.marshall();
@@ -545,7 +599,10 @@ public final class VpnProfile implements Cloneable, Parcelable {
     }
 
     private boolean isValidLockdownLegacyVpnProfile() {
-        return isLegacyType(this.type) && isServerAddressNumeric() && hasDns() && areDnsAddressesNumeric();
+        return isLegacyType(this.type)
+                && isServerAddressNumeric()
+                && hasDns()
+                && areDnsAddressesNumeric();
     }
 
     private boolean isValidLockdownPlatformVpnProfile() {
@@ -553,7 +610,8 @@ public final class VpnProfile implements Cloneable, Parcelable {
     }
 
     public boolean isValidLockdownProfile() {
-        return isTypeValidForLockdown() && (isValidLockdownLegacyVpnProfile() || isValidLockdownPlatformVpnProfile());
+        return isTypeValidForLockdown()
+                && (isValidLockdownLegacyVpnProfile() || isValidLockdownPlatformVpnProfile());
     }
 
     public boolean isTypeValidForLockdown() {
@@ -585,7 +643,38 @@ public final class VpnProfile implements Cloneable, Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(this.key, Integer.valueOf(this.type), this.server, this.username, this.password, this.dnsServers, this.searchDomains, this.routes, Boolean.valueOf(this.mppe), this.l2tpSecret, this.ipsecIdentifier, this.ipsecSecret, this.ipsecUserCert, this.ipsecCaCert, this.ipsecServerCert, this.proxy, this.mAllowedAlgorithms, Boolean.valueOf(this.isBypassable), Boolean.valueOf(this.isMetered), Integer.valueOf(this.maxMtu), Boolean.valueOf(this.areAuthParamsInline), Boolean.valueOf(this.isRestrictedToTestNetworks), Boolean.valueOf(this.excludeLocalRoutes), Boolean.valueOf(this.requiresInternetValidation), this.ikeTunConnParams, Boolean.valueOf(this.automaticNattKeepaliveTimerEnabled), Boolean.valueOf(this.automaticIpVersionSelectionEnabled), this.ipsecRemoteIdentifier, this.ipsecCacertValue, this.ipsecServerCertValue, this.allCert);
+        return Objects.hash(
+                this.key,
+                Integer.valueOf(this.type),
+                this.server,
+                this.username,
+                this.password,
+                this.dnsServers,
+                this.searchDomains,
+                this.routes,
+                Boolean.valueOf(this.mppe),
+                this.l2tpSecret,
+                this.ipsecIdentifier,
+                this.ipsecSecret,
+                this.ipsecUserCert,
+                this.ipsecCaCert,
+                this.ipsecServerCert,
+                this.proxy,
+                this.mAllowedAlgorithms,
+                Boolean.valueOf(this.isBypassable),
+                Boolean.valueOf(this.isMetered),
+                Integer.valueOf(this.maxMtu),
+                Boolean.valueOf(this.areAuthParamsInline),
+                Boolean.valueOf(this.isRestrictedToTestNetworks),
+                Boolean.valueOf(this.excludeLocalRoutes),
+                Boolean.valueOf(this.requiresInternetValidation),
+                this.ikeTunConnParams,
+                Boolean.valueOf(this.automaticNattKeepaliveTimerEnabled),
+                Boolean.valueOf(this.automaticIpVersionSelectionEnabled),
+                this.ipsecRemoteIdentifier,
+                this.ipsecCacertValue,
+                this.ipsecServerCertValue,
+                this.allCert);
     }
 
     public boolean equals(Object obj) {
@@ -593,7 +682,40 @@ public final class VpnProfile implements Cloneable, Parcelable {
             return false;
         }
         VpnProfile other = (VpnProfile) obj;
-        return Objects.equals(this.key, other.key) && Objects.equals(this.name, other.name) && this.type == other.type && Objects.equals(this.server, other.server) && Objects.equals(this.username, other.username) && Objects.equals(this.password, other.password) && Objects.equals(this.dnsServers, other.dnsServers) && Objects.equals(this.searchDomains, other.searchDomains) && Objects.equals(this.routes, other.routes) && this.mppe == other.mppe && Objects.equals(this.l2tpSecret, other.l2tpSecret) && Objects.equals(this.ipsecIdentifier, other.ipsecIdentifier) && Objects.equals(this.ipsecSecret, other.ipsecSecret) && Objects.equals(this.ipsecUserCert, other.ipsecUserCert) && Objects.equals(this.ipsecCaCert, other.ipsecCaCert) && Objects.equals(this.ipsecServerCert, other.ipsecServerCert) && Objects.equals(this.proxy, other.proxy) && Objects.equals(this.mAllowedAlgorithms, other.mAllowedAlgorithms) && this.isBypassable == other.isBypassable && this.isMetered == other.isMetered && this.maxMtu == other.maxMtu && this.areAuthParamsInline == other.areAuthParamsInline && this.isRestrictedToTestNetworks == other.isRestrictedToTestNetworks && this.excludeLocalRoutes == other.excludeLocalRoutes && this.requiresInternetValidation == other.requiresInternetValidation && Objects.equals(this.ikeTunConnParams, other.ikeTunConnParams) && this.automaticNattKeepaliveTimerEnabled == other.automaticNattKeepaliveTimerEnabled && this.automaticIpVersionSelectionEnabled == other.automaticIpVersionSelectionEnabled && Objects.equals(this.ipsecRemoteIdentifier, other.ipsecRemoteIdentifier) && Objects.equals(this.ipsecCacertValue, other.ipsecCacertValue) && Objects.equals(this.ipsecServerCertValue, other.ipsecServerCertValue) && Objects.equals(this.allCert, other.allCert);
+        return Objects.equals(this.key, other.key)
+                && Objects.equals(this.name, other.name)
+                && this.type == other.type
+                && Objects.equals(this.server, other.server)
+                && Objects.equals(this.username, other.username)
+                && Objects.equals(this.password, other.password)
+                && Objects.equals(this.dnsServers, other.dnsServers)
+                && Objects.equals(this.searchDomains, other.searchDomains)
+                && Objects.equals(this.routes, other.routes)
+                && this.mppe == other.mppe
+                && Objects.equals(this.l2tpSecret, other.l2tpSecret)
+                && Objects.equals(this.ipsecIdentifier, other.ipsecIdentifier)
+                && Objects.equals(this.ipsecSecret, other.ipsecSecret)
+                && Objects.equals(this.ipsecUserCert, other.ipsecUserCert)
+                && Objects.equals(this.ipsecCaCert, other.ipsecCaCert)
+                && Objects.equals(this.ipsecServerCert, other.ipsecServerCert)
+                && Objects.equals(this.proxy, other.proxy)
+                && Objects.equals(this.mAllowedAlgorithms, other.mAllowedAlgorithms)
+                && this.isBypassable == other.isBypassable
+                && this.isMetered == other.isMetered
+                && this.maxMtu == other.maxMtu
+                && this.areAuthParamsInline == other.areAuthParamsInline
+                && this.isRestrictedToTestNetworks == other.isRestrictedToTestNetworks
+                && this.excludeLocalRoutes == other.excludeLocalRoutes
+                && this.requiresInternetValidation == other.requiresInternetValidation
+                && Objects.equals(this.ikeTunConnParams, other.ikeTunConnParams)
+                && this.automaticNattKeepaliveTimerEnabled
+                        == other.automaticNattKeepaliveTimerEnabled
+                && this.automaticIpVersionSelectionEnabled
+                        == other.automaticIpVersionSelectionEnabled
+                && Objects.equals(this.ipsecRemoteIdentifier, other.ipsecRemoteIdentifier)
+                && Objects.equals(this.ipsecCacertValue, other.ipsecCacertValue)
+                && Objects.equals(this.ipsecServerCertValue, other.ipsecServerCertValue)
+                && Objects.equals(this.allCert, other.allCert);
     }
 
     @Override // android.os.Parcelable
@@ -617,7 +739,8 @@ public final class VpnProfile implements Cloneable, Parcelable {
         }
         StringBuilder result = new StringBuilder(bytes.length * 2);
         for (int i = 0; i < bytes.length; i++) {
-            result.append("0123456789ABCDEF".charAt((bytes[i] >> 4) & 15)).append("0123456789ABCDEF".charAt(bytes[i] & 15));
+            result.append("0123456789ABCDEF".charAt((bytes[i] >> 4) & 15))
+                    .append("0123456789ABCDEF".charAt(bytes[i] & 15));
         }
         return result.toString();
     }
@@ -638,12 +761,21 @@ public final class VpnProfile implements Cloneable, Parcelable {
             byte[] plainBuffer = Base64.encode(plainValue.getBytes(StandardCharsets.UTF_8), 2);
             byte[] encryptedBuffer = cipher.doFinal(plainBuffer);
             String encryptedBase64 = Base64.encodeToString(encryptedBuffer, 2);
-            IvParameterSpec ivParamSpec = (IvParameterSpec) cipher.getParameters().getParameterSpec(IvParameterSpec.class);
+            IvParameterSpec ivParamSpec =
+                    (IvParameterSpec)
+                            cipher.getParameters().getParameterSpec(IvParameterSpec.class);
             byte[] ivBuffer = ivParamSpec.getIV();
             String ivHexStr = bytes2Hex(ivBuffer);
-            String ivHexBase64 = Base64.encodeToString(ivHexStr.getBytes(StandardCharsets.UTF_8), 2);
-            return new String[]{encryptedBase64, ivHexBase64};
-        } catch (NullPointerException | InvalidKeyException | NoSuchAlgorithmException | InvalidParameterSpecException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+            String ivHexBase64 =
+                    Base64.encodeToString(ivHexStr.getBytes(StandardCharsets.UTF_8), 2);
+            return new String[] {encryptedBase64, ivHexBase64};
+        } catch (NullPointerException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | InvalidParameterSpecException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             Log.e(TAG, "Failed to encrypt: " + e.toString());
             e.printStackTrace();
             return null;
@@ -660,7 +792,14 @@ public final class VpnProfile implements Cloneable, Parcelable {
             cipher.init(2, secretKey, ivParamSpec);
             byte[] decryptedBuffer = cipher.doFinal(encryptedBuffer);
             return new String(Base64.decode(decryptedBuffer, 2), StandardCharsets.UTF_8).intern();
-        } catch (IllegalArgumentException | NullPointerException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+        } catch (IllegalArgumentException
+                | NullPointerException
+                | InvalidAlgorithmParameterException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             Log.e(TAG, "Failed to decrypt: " + e.toString());
             e.printStackTrace();
             return null;
@@ -674,7 +813,11 @@ public final class VpnProfile implements Cloneable, Parcelable {
             if (generate && !keyStore.containsAlias(VPN_SECRET_KEY)) {
                 try {
                     KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", "AndroidKeyStore");
-                    keyGenerator.init(new KeyGenParameterSpec.Builder(VPN_SECRET_KEY, 3).setBlockModes(KeyProperties.BLOCK_MODE_CBC).setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7).build());
+                    keyGenerator.init(
+                            new KeyGenParameterSpec.Builder(VPN_SECRET_KEY, 3)
+                                    .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                                    .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                                    .build());
                     keyGenerator.generateKey();
                 } catch (Exception e) {
                     Log.e(TAG, "Failed to create key: " + e.toString());
@@ -694,12 +837,15 @@ public final class VpnProfile implements Cloneable, Parcelable {
         Key secretKey;
         String[] ret;
         String[] ret2;
-        if ((!profile.ipsecSecret.isEmpty() || !profile.password.isEmpty()) && (secretKey = getSecretKey(true)) != null) {
-            if (!profile.ipsecSecret.isEmpty() && (ret2 = doEncrypt(secretKey, profile.ipsecSecret)) != null) {
+        if ((!profile.ipsecSecret.isEmpty() || !profile.password.isEmpty())
+                && (secretKey = getSecretKey(true)) != null) {
+            if (!profile.ipsecSecret.isEmpty()
+                    && (ret2 = doEncrypt(secretKey, profile.ipsecSecret)) != null) {
                 profile.ipsecSecret = ret2[0];
                 profile.isIpsecSecretIvParams = ret2[1];
             }
-            if (!profile.password.isEmpty() && (ret = doEncrypt(secretKey, profile.password)) != null) {
+            if (!profile.password.isEmpty()
+                    && (ret = doEncrypt(secretKey, profile.password)) != null) {
                 profile.password = ret[0];
                 profile.isPasswordIvParams = ret[1];
             }
@@ -719,10 +865,22 @@ public final class VpnProfile implements Cloneable, Parcelable {
                         AndroidKeyStoreProvider.install();
                         isSetBCProvider = true;
                     }
-                    if (!profile.ipsecSecret.isEmpty() && (ret2 = doDecrypt(secretKey, profile.ipsecSecret, profile.isIpsecSecretIvParams)) != null) {
+                    if (!profile.ipsecSecret.isEmpty()
+                            && (ret2 =
+                                            doDecrypt(
+                                                    secretKey,
+                                                    profile.ipsecSecret,
+                                                    profile.isIpsecSecretIvParams))
+                                    != null) {
                         profile.ipsecSecret = ret2;
                     }
-                    if (!profile.password.isEmpty() && (ret = doDecrypt(secretKey, profile.password, profile.isPasswordIvParams)) != null) {
+                    if (!profile.password.isEmpty()
+                            && (ret =
+                                            doDecrypt(
+                                                    secretKey,
+                                                    profile.password,
+                                                    profile.isPasswordIvParams))
+                                    != null) {
                         profile.password = ret;
                     }
                     if (isSetBCProvider) {

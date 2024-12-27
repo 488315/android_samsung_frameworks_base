@@ -3,6 +3,7 @@ package android.hardware.location;
 import android.annotation.SystemApi;
 import android.content.Intent;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.Objects;
 
 @SystemApi
@@ -15,7 +16,13 @@ public class ContextHubIntentEvent {
     private final long mNanoAppId;
     private final NanoAppMessage mNanoAppMessage;
 
-    private ContextHubIntentEvent(ContextHubInfo contextHubInfo, int eventType, long nanoAppId, NanoAppMessage nanoAppMessage, int nanoAppAbortCode, int clientAuthorizationState) {
+    private ContextHubIntentEvent(
+            ContextHubInfo contextHubInfo,
+            int eventType,
+            long nanoAppId,
+            NanoAppMessage nanoAppMessage,
+            int nanoAppAbortCode,
+            int clientAuthorizationState) {
         this.mContextHubInfo = contextHubInfo;
         this.mEventType = eventType;
         this.mNanoAppId = nanoAppId;
@@ -32,18 +39,26 @@ public class ContextHubIntentEvent {
         this(contextHubInfo, eventType, nanoAppId, null, -1, 0);
     }
 
-    private ContextHubIntentEvent(ContextHubInfo contextHubInfo, int eventType, long nanoAppId, NanoAppMessage nanoAppMessage) {
+    private ContextHubIntentEvent(
+            ContextHubInfo contextHubInfo,
+            int eventType,
+            long nanoAppId,
+            NanoAppMessage nanoAppMessage) {
         this(contextHubInfo, eventType, nanoAppId, nanoAppMessage, -1, 0);
     }
 
-    private ContextHubIntentEvent(ContextHubInfo contextHubInfo, int eventType, long nanoAppId, int nanoAppAbortCode) {
+    private ContextHubIntentEvent(
+            ContextHubInfo contextHubInfo, int eventType, long nanoAppId, int nanoAppAbortCode) {
         this(contextHubInfo, eventType, nanoAppId, null, nanoAppAbortCode, 0);
     }
 
     public static ContextHubIntentEvent fromIntent(Intent intent) {
         Objects.requireNonNull(intent, "Intent cannot be null");
         hasExtraOrThrow(intent, ContextHubManager.EXTRA_CONTEXT_HUB_INFO);
-        ContextHubInfo info = (ContextHubInfo) intent.getParcelableExtra(ContextHubManager.EXTRA_CONTEXT_HUB_INFO, ContextHubInfo.class);
+        ContextHubInfo info =
+                (ContextHubInfo)
+                        intent.getParcelableExtra(
+                                ContextHubManager.EXTRA_CONTEXT_HUB_INFO, ContextHubInfo.class);
         if (info == null) {
             throw new IllegalArgumentException("ContextHubInfo extra was null");
         }
@@ -59,24 +74,35 @@ public class ContextHubIntentEvent {
                 long nanoAppId = getLongExtraOrThrow(intent, ContextHubManager.EXTRA_NANOAPP_ID);
                 if (eventType == 5) {
                     hasExtraOrThrow(intent, ContextHubManager.EXTRA_MESSAGE);
-                    NanoAppMessage message = (NanoAppMessage) intent.getParcelableExtra(ContextHubManager.EXTRA_MESSAGE, NanoAppMessage.class);
+                    NanoAppMessage message =
+                            (NanoAppMessage)
+                                    intent.getParcelableExtra(
+                                            ContextHubManager.EXTRA_MESSAGE, NanoAppMessage.class);
                     if (message == null) {
                         throw new IllegalArgumentException("NanoAppMessage extra was null");
                     }
-                    ContextHubIntentEvent event = new ContextHubIntentEvent(info, eventType, nanoAppId, message);
+                    ContextHubIntentEvent event =
+                            new ContextHubIntentEvent(info, eventType, nanoAppId, message);
                     return event;
                 }
                 if (eventType == 4) {
-                    int nanoAppAbortCode = getIntExtraOrThrow(intent, ContextHubManager.EXTRA_NANOAPP_ABORT_CODE);
-                    ContextHubIntentEvent event2 = new ContextHubIntentEvent(info, eventType, nanoAppId, nanoAppAbortCode);
+                    int nanoAppAbortCode =
+                            getIntExtraOrThrow(intent, ContextHubManager.EXTRA_NANOAPP_ABORT_CODE);
+                    ContextHubIntentEvent event2 =
+                            new ContextHubIntentEvent(info, eventType, nanoAppId, nanoAppAbortCode);
                     return event2;
                 }
                 if (eventType == 7) {
-                    int authState = getIntExtraOrThrow(intent, ContextHubManager.EXTRA_CLIENT_AUTHORIZATION_STATE);
-                    ContextHubIntentEvent event3 = new ContextHubIntentEvent(info, eventType, nanoAppId, null, -1, authState);
+                    int authState =
+                            getIntExtraOrThrow(
+                                    intent, ContextHubManager.EXTRA_CLIENT_AUTHORIZATION_STATE);
+                    ContextHubIntentEvent event3 =
+                            new ContextHubIntentEvent(
+                                    info, eventType, nanoAppId, null, -1, authState);
                     return event3;
                 }
-                ContextHubIntentEvent event4 = new ContextHubIntentEvent(info, eventType, nanoAppId);
+                ContextHubIntentEvent event4 =
+                        new ContextHubIntentEvent(info, eventType, nanoAppId);
                 return event4;
             case 6:
                 ContextHubIntentEvent event5 = new ContextHubIntentEvent(info, eventType);
@@ -96,34 +122,43 @@ public class ContextHubIntentEvent {
 
     public long getNanoAppId() {
         if (this.mEventType == 6) {
-            throw new UnsupportedOperationException("Cannot invoke getNanoAppId() on Context Hub reset event");
+            throw new UnsupportedOperationException(
+                    "Cannot invoke getNanoAppId() on Context Hub reset event");
         }
         return this.mNanoAppId;
     }
 
     public int getNanoAppAbortCode() {
         if (this.mEventType != 4) {
-            throw new UnsupportedOperationException("Cannot invoke getNanoAppAbortCode() on non-abort event: " + this.mEventType);
+            throw new UnsupportedOperationException(
+                    "Cannot invoke getNanoAppAbortCode() on non-abort event: " + this.mEventType);
         }
         return this.mNanoAppAbortCode;
     }
 
     public NanoAppMessage getNanoAppMessage() {
         if (this.mEventType != 5) {
-            throw new UnsupportedOperationException("Cannot invoke getNanoAppMessage() on non-message event: " + this.mEventType);
+            throw new UnsupportedOperationException(
+                    "Cannot invoke getNanoAppMessage() on non-message event: " + this.mEventType);
         }
         return this.mNanoAppMessage;
     }
 
     public int getClientAuthorizationState() {
         if (this.mEventType != 7) {
-            throw new UnsupportedOperationException("Cannot invoke getClientAuthorizationState() on non-authorization event: " + this.mEventType);
+            throw new UnsupportedOperationException(
+                    "Cannot invoke getClientAuthorizationState() on non-authorization event: "
+                            + this.mEventType);
         }
         return this.mClientAuthorizationState;
     }
 
     public String toString() {
-        String out = "ContextHubIntentEvent[eventType = " + this.mEventType + ", contextHubId = " + this.mContextHubInfo.getId();
+        String out =
+                "ContextHubIntentEvent[eventType = "
+                        + this.mEventType
+                        + ", contextHubId = "
+                        + this.mContextHubInfo.getId();
         if (this.mEventType != 6) {
             out = out + ", nanoAppId = 0x" + Long.toHexString(this.mNanoAppId);
         }
@@ -147,7 +182,8 @@ public class ContextHubIntentEvent {
             return false;
         }
         ContextHubIntentEvent other = (ContextHubIntentEvent) object;
-        if (other.getEventType() != this.mEventType || !other.getContextHubInfo().equals(this.mContextHubInfo)) {
+        if (other.getEventType() != this.mEventType
+                || !other.getContextHubInfo().equals(this.mContextHubInfo)) {
             return false;
         }
         boolean isEqual = true;
@@ -162,7 +198,8 @@ public class ContextHubIntentEvent {
                 isEqual &= other.getNanoAppMessage().equals(this.mNanoAppMessage);
             }
             if (this.mEventType == 7) {
-                return (other.getClientAuthorizationState() == this.mClientAuthorizationState) & isEqual;
+                return (other.getClientAuthorizationState() == this.mClientAuthorizationState)
+                        & isEqual;
             }
             return isEqual;
         } catch (UnsupportedOperationException e) {

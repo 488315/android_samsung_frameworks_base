@@ -14,7 +14,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
-import com.samsung.android.emergencymode.IEmergencyManager;
+
 import com.samsung.android.feature.SemFloatingFeature;
 
 /* loaded from: classes6.dex */
@@ -30,40 +30,64 @@ public class SemEmergencyManager {
     private static boolean mSupport_UPSM;
     private Context mContext;
     private final Handler mHandler;
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() { // from class: com.samsung.android.emergencymode.SemEmergencyManager.1
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action == null) {
-                return;
-            }
-            Elog.d(SemEmergencyManager.TAG, "onReceive : " + intent);
-            if (action.equals(SemEmergencyConstants.EMERGENCY_START_SERVICE_BY_ORDER) || action.equals(SemEmergencyConstants.EMERGENCY_START_SERVICE_BY_ORDER_OLD)) {
-                boolean enabled = intent.getBooleanExtra("enabled", false);
-                int flag = intent.getIntExtra(SemEmergencyConstants.EXTRA_EMERGENCY_START_SERVICE_FLAG, -1);
-                boolean skipdialog = intent.getBooleanExtra(SemEmergencyConstants.EXTRA_EMERGENCY_START_SERVICE_SKIPDIALOG, false);
-                if (flag != -1) {
-                    if ((flag == 2048 && !SemEmergencyManager.mSupport_BCM) || ((flag == 512 || flag == 1024) && !SemEmergencyManager.mSupport_UPSM)) {
-                        Elog.d(SemEmergencyManager.TAG, "onReceive : trying to ON BCM|UPSM while BCM|UPMS not supported in this model. Flag = " + flag);
-                        return;
-                    } else {
-                        SemEmergencyManager.this.triggerEmergencyMode(enabled, flag, skipdialog, intent);
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() { // from class:
+                // com.samsung.android.emergencymode.SemEmergencyManager.1
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if (action == null) {
                         return;
                     }
+                    Elog.d(SemEmergencyManager.TAG, "onReceive : " + intent);
+                    if (action.equals(SemEmergencyConstants.EMERGENCY_START_SERVICE_BY_ORDER)
+                            || action.equals(
+                                    SemEmergencyConstants.EMERGENCY_START_SERVICE_BY_ORDER_OLD)) {
+                        boolean enabled = intent.getBooleanExtra("enabled", false);
+                        int flag =
+                                intent.getIntExtra(
+                                        SemEmergencyConstants.EXTRA_EMERGENCY_START_SERVICE_FLAG,
+                                        -1);
+                        boolean skipdialog =
+                                intent.getBooleanExtra(
+                                        SemEmergencyConstants
+                                                .EXTRA_EMERGENCY_START_SERVICE_SKIPDIALOG,
+                                        false);
+                        if (flag != -1) {
+                            if ((flag == 2048 && !SemEmergencyManager.mSupport_BCM)
+                                    || ((flag == 512 || flag == 1024)
+                                            && !SemEmergencyManager.mSupport_UPSM)) {
+                                Elog.d(
+                                        SemEmergencyManager.TAG,
+                                        "onReceive : trying to ON BCM|UPSM while BCM|UPMS not"
+                                            + " supported in this model. Flag = "
+                                                + flag);
+                                return;
+                            } else {
+                                SemEmergencyManager.this.triggerEmergencyMode(
+                                        enabled, flag, skipdialog, intent);
+                                return;
+                            }
+                        }
+                        return;
+                    }
+                    if (action.equals("com.nttdocomo.android.epsmodecontrol.action.CHANGE_MODE")) {
+                        boolean enabled2 =
+                                (SemEmergencyManager.isEmergencyMode(
+                                                        SemEmergencyManager.this.mContext)
+                                                || SemEmergencyManager.isMinimalBatteryUseMode(
+                                                        SemEmergencyManager.this.mContext))
+                                        ? false
+                                        : true;
+                        int flag2 = 16;
+                        int mode = SemEmergencyManager.this.getModeType();
+                        if (mode == 3 || mode == 1) {
+                            flag2 = 512;
+                        }
+                        SemEmergencyManager.this.triggerEmergencyMode(
+                                enabled2, flag2, false, intent);
+                    }
                 }
-                return;
-            }
-            if (action.equals("com.nttdocomo.android.epsmodecontrol.action.CHANGE_MODE")) {
-                boolean enabled2 = (SemEmergencyManager.isEmergencyMode(SemEmergencyManager.this.mContext) || SemEmergencyManager.isMinimalBatteryUseMode(SemEmergencyManager.this.mContext)) ? false : true;
-                int flag2 = 16;
-                int mode = SemEmergencyManager.this.getModeType();
-                if (mode == 3 || mode == 1) {
-                    flag2 = 512;
-                }
-                SemEmergencyManager.this.triggerEmergencyMode(enabled2, flag2, false, intent);
-            }
-        }
-    };
+            };
     private static SemEmergencyManager sInstance = null;
     private static boolean isBootCompleted = false;
     private static boolean isSystemReady = false;
@@ -82,7 +106,10 @@ public class SemEmergencyManager {
                 try {
                     ctx = context.createPackageContext("android", 2);
                 } catch (Exception e) {
-                    Elog.d(TAG, "NameNotFoundException or SecurityException createPackageContext failed");
+                    Elog.d(
+                            TAG,
+                            "NameNotFoundException or SecurityException createPackageContext"
+                                + " failed");
                     e.printStackTrace();
                 }
                 if (ctx != null) {
@@ -119,8 +146,14 @@ public class SemEmergencyManager {
             Elog.d(TAG, "setMpsmApplicationEnabled e : " + e);
         }
         try {
-            ComponentName launcher_cn = new ComponentName(SemEmergencyConstants.EMERGENCY_LAUNCHER, SemEmergencyConstants.EMERGENCY_LAUNCHER_CLASS);
-            ComponentName badge_cn = new ComponentName(SemEmergencyConstants.EMERGENCY_LAUNCHER, "com.sec.android.emergencylauncher.launcher.service.BadgeNotificationListner");
+            ComponentName launcher_cn =
+                    new ComponentName(
+                            SemEmergencyConstants.EMERGENCY_LAUNCHER,
+                            SemEmergencyConstants.EMERGENCY_LAUNCHER_CLASS);
+            ComponentName badge_cn =
+                    new ComponentName(
+                            SemEmergencyConstants.EMERGENCY_LAUNCHER,
+                            "com.sec.android.emergencylauncher.launcher.service.BadgeNotificationListner");
             int launcherCnState = mPM.getComponentEnabledSetting(launcher_cn);
             int badgeCnState = mPM.getComponentEnabledSetting(badge_cn);
             if (isMinimalBatteryUseMode(this.mContext)) {
@@ -143,10 +176,14 @@ public class SemEmergencyManager {
         }
         try {
             if (mService == null) {
-                mService = IEmergencyManager.Stub.asInterface(ServiceManager.getService(SemEmergencyConstants.SERVICE_NAME));
+                mService =
+                        IEmergencyManager.Stub.asInterface(
+                                ServiceManager.getService(SemEmergencyConstants.SERVICE_NAME));
             } else if (!mService.asBinder().isBinderAlive()) {
                 Elog.d(TAG, "mService is not valid so retieve the service again.");
-                mService = IEmergencyManager.Stub.asInterface(ServiceManager.getService(SemEmergencyConstants.SERVICE_NAME));
+                mService =
+                        IEmergencyManager.Stub.asInterface(
+                                ServiceManager.getService(SemEmergencyConstants.SERVICE_NAME));
             }
         } catch (Exception e) {
             Elog.d(TAG, "ensureServiceConnected e : " + e);
@@ -154,8 +191,12 @@ public class SemEmergencyManager {
     }
 
     private static void loadFloatingFeatures() {
-        mSupport_UPSM = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING");
-        mSupport_EM = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE");
+        mSupport_UPSM =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING");
+        mSupport_EM =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE");
         mSupport_BCM = false;
         EMERGENCY_FEATURES_SUPPORTED = mSupport_BCM;
         mIsLoadedFeatures = true;
@@ -181,7 +222,8 @@ public class SemEmergencyManager {
         setMpsmApplicationEnabled();
     }
 
-    private synchronized void startService(String action, boolean enabled, int flag, boolean skipdialog, Intent forwardedIntent) {
+    private synchronized void startService(
+            String action, boolean enabled, int flag, boolean skipdialog, Intent forwardedIntent) {
         try {
             Intent intent = new Intent();
             intent.putExtra("forwardedIntent", forwardedIntent);
@@ -193,14 +235,19 @@ public class SemEmergencyManager {
                     intent.setAction(action);
                     intent.putExtra("enabled", enabled);
                     intent.putExtra(SemEmergencyConstants.EXTRA_EMERGENCY_START_SERVICE_FLAG, flag);
-                    intent.putExtra(SemEmergencyConstants.EXTRA_EMERGENCY_START_SERVICE_SKIPDIALOG, skipdialog);
+                    intent.putExtra(
+                            SemEmergencyConstants.EXTRA_EMERGENCY_START_SERVICE_SKIPDIALOG,
+                            skipdialog);
                 } else if (action.equals(SemEmergencyConstants.EMERGENCY_CHECK_ABNORMAL_STATE)) {
                     intent.setAction(action);
                 }
             } else {
                 intent.putExtra(SemEmergencyConstants.EXTRA_INIT_FOR_EM_STATE, true);
             }
-            intent.setComponent(new ComponentName("com.sec.android.emergencymode.service", SemEmergencyConstants.EMERGENCY_SERVICE_STARTER));
+            intent.setComponent(
+                    new ComponentName(
+                            "com.sec.android.emergencymode.service",
+                            SemEmergencyConstants.EMERGENCY_SERVICE_STARTER));
             Elog.d(TAG, "Starting service: " + intent);
             this.mContext.startServiceAsUser(intent, UserHandle.OWNER);
         } catch (Exception e) {
@@ -213,7 +260,10 @@ public class SemEmergencyManager {
             try {
                 if (mService != null) {
                     Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.sec.android.emergencymode.service", SemEmergencyConstants.EMERGENCY_SERVICE_STARTER));
+                    intent.setComponent(
+                            new ComponentName(
+                                    "com.sec.android.emergencymode.service",
+                                    SemEmergencyConstants.EMERGENCY_SERVICE_STARTER));
                     Elog.d(TAG, "stopService: " + intent);
                     this.mContext.stopServiceAsUser(intent, UserHandle.OWNER);
                     mService = null;
@@ -234,7 +284,11 @@ public class SemEmergencyManager {
         if ("DCM".equalsIgnoreCase(salesCode)) {
             filter.addAction("com.nttdocomo.android.epsmodecontrol.action.CHANGE_MODE");
         }
-        this.mContext.registerReceiver(this.mReceiver, filter, "com.sec.android.emergencymode.permission.LAUNCH_EMERGENCYMODE_SERVICE", null);
+        this.mContext.registerReceiver(
+                this.mReceiver,
+                filter,
+                "com.sec.android.emergencymode.permission.LAUNCH_EMERGENCYMODE_SERVICE",
+                null);
     }
 
     private void unregisterReceiver() {
@@ -253,7 +307,13 @@ public class SemEmergencyManager {
         long token = Binder.clearCallingIdentity();
         boolean result = false;
         try {
-            result = Settings.System.getIntForUser(context.getContentResolver(), Settings.System.SEM_EMERGENCY_MODE, 0, 0) == 1;
+            result =
+                    Settings.System.getIntForUser(
+                                    context.getContentResolver(),
+                                    Settings.System.SEM_EMERGENCY_MODE,
+                                    0,
+                                    0)
+                            == 1;
         } catch (IllegalStateException e) {
             Elog.d(TAG, "Settings Provider is not ready e : " + e);
         } catch (Exception e2) {
@@ -269,7 +329,12 @@ public class SemEmergencyManager {
         try {
             boolean z = false;
             if (mSupport_UPSM) {
-                if (Settings.System.getIntForUser(context.getContentResolver(), Settings.System.SEM_MINIMAL_BATTERY_USE, 0, 0) == 1) {
+                if (Settings.System.getIntForUser(
+                                context.getContentResolver(),
+                                Settings.System.SEM_MINIMAL_BATTERY_USE,
+                                0,
+                                0)
+                        == 1) {
                     z = true;
                 }
             }
@@ -284,7 +349,10 @@ public class SemEmergencyManager {
     }
 
     public static boolean isBatteryConservingMode(Context context) {
-        return mSupport_BCM && Settings.System.getInt(context.getContentResolver(), "battery_conserving_mode", 0) == 1;
+        return mSupport_BCM
+                && Settings.System.getInt(
+                                context.getContentResolver(), "battery_conserving_mode", 0)
+                        == 1;
     }
 
     @Deprecated
@@ -296,16 +364,33 @@ public class SemEmergencyManager {
     }
 
     public int getModeType() {
-        if (Settings.System.getInt(this.mContext.getContentResolver(), Settings.System.SEM_ULTRA_POWERSAVING_MODE, 0) == 1) {
+        if (Settings.System.getInt(
+                        this.mContext.getContentResolver(),
+                        Settings.System.SEM_ULTRA_POWERSAVING_MODE,
+                        0)
+                == 1) {
             return 1;
         }
-        if (Settings.System.getInt(this.mContext.getContentResolver(), Settings.System.SEM_MINIMAL_BATTERY_USE, 0) == 1) {
+        if (Settings.System.getInt(
+                        this.mContext.getContentResolver(),
+                        Settings.System.SEM_MINIMAL_BATTERY_USE,
+                        0)
+                == 1) {
             return 3;
         }
-        if (mSupport_BCM && Settings.System.getInt(this.mContext.getContentResolver(), "battery_conserving_mode", 0) == 1) {
+        if (mSupport_BCM
+                && Settings.System.getInt(
+                                this.mContext.getContentResolver(), "battery_conserving_mode", 0)
+                        == 1) {
             return 2;
         }
-        return Settings.System.getInt(this.mContext.getContentResolver(), Settings.System.SEM_EMERGENCY_MODE, 0) == 1 ? 0 : -1;
+        return Settings.System.getInt(
+                                this.mContext.getContentResolver(),
+                                Settings.System.SEM_EMERGENCY_MODE,
+                                0)
+                        == 1
+                ? 0
+                : -1;
     }
 
     public static boolean isBatteryConversingModeSupported() {
@@ -482,7 +567,9 @@ public class SemEmergencyManager {
         } catch (Exception e) {
             Elog.d(TAG, "canSetMode Exception : " + e);
         }
-        boolean isDeviceProvisioned = Settings.Global.getInt(this.mContext.getContentResolver(), "device_provisioned", 0) != 0;
+        boolean isDeviceProvisioned =
+                Settings.Global.getInt(this.mContext.getContentResolver(), "device_provisioned", 0)
+                        != 0;
         if (!isDeviceProvisioned) {
             result = false;
             reason = "SETUP_WIZARD_UNFINISHED;";
@@ -493,7 +580,11 @@ public class SemEmergencyManager {
         }
         if (currentUserId != 0 && 0 == 0) {
             result = false;
-            reason = reason + "NOT_OWNER_" + currentUserId + NavigationBarInflaterView.GRAVITY_SEPARATOR;
+            reason =
+                    reason
+                            + "NOT_OWNER_"
+                            + currentUserId
+                            + NavigationBarInflaterView.GRAVITY_SEPARATOR;
         }
         if (!result) {
             Elog.v(TAG, "not Allowed EmergencyMode due to " + reason);
@@ -502,9 +593,15 @@ public class SemEmergencyManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void triggerEmergencyMode(boolean enabled, int flag, boolean skipdialog, Intent forwardedIntent) {
+    public void triggerEmergencyMode(
+            boolean enabled, int flag, boolean skipdialog, Intent forwardedIntent) {
         ensureServiceConnected();
-        startService(SemEmergencyConstants.EMERGENCY_START_SERVICE_BY_ORDER, enabled, flag, skipdialog, forwardedIntent);
+        startService(
+                SemEmergencyConstants.EMERGENCY_START_SERVICE_BY_ORDER,
+                enabled,
+                flag,
+                skipdialog,
+                forwardedIntent);
         Elog.d(TAG, "req trigger, start Service");
     }
 

@@ -5,7 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.BlendMode;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.view.ContextMenu;
 
 /* loaded from: classes4.dex */
 public interface MenuItem {
@@ -139,8 +138,10 @@ public interface MenuItem {
         return null;
     }
 
-    default MenuItem setShortcut(char numericChar, char alphaChar, int numericModifiers, int alphaModifiers) {
-        if ((alphaModifiers & Menu.SUPPORTED_MODIFIERS_MASK) == 4096 && (69647 & numericModifiers) == 4096) {
+    default MenuItem setShortcut(
+            char numericChar, char alphaChar, int numericModifiers, int alphaModifiers) {
+        if ((alphaModifiers & Menu.SUPPORTED_MODIFIERS_MASK) == 4096
+                && (69647 & numericModifiers) == 4096) {
             return setShortcut(numericChar, alphaChar);
         }
         return this;

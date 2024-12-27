@@ -10,15 +10,17 @@ import android.os.RemoteCallbackList;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wallpaper.WallpaperManagerService;
+
 import com.samsung.android.wallpaper.Rune;
 import com.samsung.android.wallpaper.utils.WhichChecker;
 import com.samsung.server.wallpaper.Log;
 import com.samsung.server.wallpaper.SemWallpaperData;
 import com.samsung.server.wallpaper.SemWallpaperManagerService;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -103,7 +105,23 @@ public final class WallpaperData implements Cloneable {
             BindSource bindSource13 = new BindSource("SWITCH_WALLPAPER_SWITCH_USER", 12);
             BindSource bindSource14 = new BindSource("SWITCH_WALLPAPER_UNLOCK_USER", 13);
             SWITCH_WALLPAPER_UNLOCK_USER = bindSource14;
-            $VALUES = new BindSource[]{bindSource, bindSource2, bindSource3, bindSource4, bindSource5, bindSource6, bindSource7, bindSource8, bindSource9, bindSource10, bindSource11, bindSource12, bindSource13, bindSource14};
+            $VALUES =
+                    new BindSource[] {
+                        bindSource,
+                        bindSource2,
+                        bindSource3,
+                        bindSource4,
+                        bindSource5,
+                        bindSource6,
+                        bindSource7,
+                        bindSource8,
+                        bindSource9,
+                        bindSource10,
+                        bindSource11,
+                        bindSource12,
+                        bindSource13,
+                        bindSource14
+                    };
         }
 
         public static BindSource valueOf(String str) {
@@ -184,10 +202,14 @@ public final class WallpaperData implements Cloneable {
             semWallpaperData.mDlsSemColors = null;
         }
         if (Rune.SUPPORT_VIDEO_WALLPAPER && i != 8) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "delete video thumbnail file. wpType=", "WallpaperData");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "delete video thumbnail file. wpType=", "WallpaperData");
             File file = this.mSemWallpaperData.mVideoFirstFrameFile;
             if (file != null && file.exists()) {
-                Slog.d("WallpaperData", "delete video thumbnail file path : " + this.mSemWallpaperData.mVideoFirstFrameFile.getPath());
+                Slog.d(
+                        "WallpaperData",
+                        "delete video thumbnail file path : "
+                                + this.mSemWallpaperData.mVideoFirstFrameFile.getPath());
                 this.mSemWallpaperData.mVideoFirstFrameFile.delete();
                 SemWallpaperData semWallpaperData2 = this.mSemWallpaperData;
                 semWallpaperData2.mVideoFirstFrameFile = null;
@@ -197,7 +219,9 @@ public final class WallpaperData implements Cloneable {
         }
         if (i != 0) {
             this.name = "";
-            Slog.d("WallpaperData", "delete wallpaper and crop file. wpType=" + this.mSemWallpaperData.mWpType);
+            Slog.d(
+                    "WallpaperData",
+                    "delete wallpaper and crop file. wpType=" + this.mSemWallpaperData.mWpType);
             File wallpaperFile = getWallpaperFile(0);
             if (wallpaperFile != null && wallpaperFile.exists()) {
                 Slog.d("WallpaperData", "Delete wallpaper file: " + wallpaperFile.getPath());
@@ -215,10 +239,14 @@ public final class WallpaperData implements Cloneable {
             this.mSemWallpaperData.mExternalParams = null;
         }
         if (i != 4) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "delete animated background file. wpType=", "WallpaperData");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "delete animated background file. wpType=", "WallpaperData");
             File file2 = this.mSemWallpaperData.mAnimatedBackground;
             if (file2 != null && file2.exists()) {
-                Slog.d("WallpaperData", "delete animated background file path : " + this.mSemWallpaperData.mAnimatedBackground.getPath());
+                Slog.d(
+                        "WallpaperData",
+                        "delete animated background file path : "
+                                + this.mSemWallpaperData.mAnimatedBackground.getPath());
                 this.mSemWallpaperData.mAnimatedBackground.delete();
                 SemWallpaperData semWallpaperData3 = this.mSemWallpaperData;
                 semWallpaperData3.mAnimatedBackground = null;
@@ -226,10 +254,14 @@ public final class WallpaperData implements Cloneable {
             }
         }
         if (i != 1) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "delete motion background file. wpType=", "WallpaperData");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "delete motion background file. wpType=", "WallpaperData");
             File file3 = this.mSemWallpaperData.mMotionBackground;
             if (file3 != null && file3.exists()) {
-                Slog.d("WallpaperData", "delete motion background file path : " + this.mSemWallpaperData.mMotionBackground.getPath());
+                Slog.d(
+                        "WallpaperData",
+                        "delete motion background file path : "
+                                + this.mSemWallpaperData.mMotionBackground.getPath());
                 this.mSemWallpaperData.mMotionBackground.delete();
                 SemWallpaperData semWallpaperData4 = this.mSemWallpaperData;
                 semWallpaperData4.mMotionBackground = null;
@@ -263,7 +295,12 @@ public final class WallpaperData implements Cloneable {
     public final File getFile(SparseArray sparseArray, String str) {
         File file = (File) sparseArray.get(this.mWhich);
         if (file == null) {
-            file = new File(WhichChecker.isLock(this.mWhich) ? WallpaperUtils.getWallpaperLockDir(this.userId) : Environment.getUserSystemDirectory(this.userId), str);
+            file =
+                    new File(
+                            WhichChecker.isLock(this.mWhich)
+                                    ? WallpaperUtils.getWallpaperLockDir(this.userId)
+                                    : Environment.getUserSystemDirectory(this.userId),
+                            str);
             sparseArray.put(this.mWhich, file);
         }
         return file;
@@ -291,7 +328,11 @@ public final class WallpaperData implements Cloneable {
         String[] split;
         if (TextUtils.isEmpty(str) || str.startsWith("null")) {
             long currentTimeMillis = System.currentTimeMillis();
-            StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(SimpleDateFormat.getDateTimeInstance().format(new Date(currentTimeMillis)), ".");
+            StringBuilder m =
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            SimpleDateFormat.getDateTimeInstance()
+                                    .format(new Date(currentTimeMillis)),
+                            ".");
             m.append(currentTimeMillis % 1000);
             StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(m.toString(), "\n");
             m2.append(SemWallpaperManagerService.getCallStackString());
@@ -313,7 +354,10 @@ public final class WallpaperData implements Cloneable {
             str2 = "live";
         } else if (i != 8) {
             str2 = "default";
-            if (i == 1000 && (str4 = semWallpaperData.mUri) != null && (split = str4.split("/")) != null && split.length > 1) {
+            if (i == 1000
+                    && (str4 = semWallpaperData.mUri) != null
+                    && (split = str4.split("/")) != null
+                    && split.length > 1) {
                 str2 = split[1];
             }
         } else {
@@ -358,8 +402,13 @@ public final class WallpaperData implements Cloneable {
         }
         this.mWallpaperFiles.put(this.mWhich, file);
         int i2 = this.mSemWallpaperData.mWhich;
-        if (WhichChecker.isSystem(i2) && WhichChecker.isSubDisplay(i2) && file != null && "wallpaper_orig".equals(file.getName())) {
-            SemWallpaperManagerService.putLog("\nUnexpected file assignment detected!\n" + SemWallpaperManagerService.getCallStackString());
+        if (WhichChecker.isSystem(i2)
+                && WhichChecker.isSubDisplay(i2)
+                && file != null
+                && "wallpaper_orig".equals(file.getName())) {
+            SemWallpaperManagerService.putLog(
+                    "\nUnexpected file assignment detected!\n"
+                            + SemWallpaperManagerService.getCallStackString());
         }
     }
 
@@ -374,26 +423,33 @@ public final class WallpaperData implements Cloneable {
         sb.append(", which: ");
         sb.append(this.mWhich);
         sb.append(", file mod: ");
-        sb.append(getWallpaperFile(this.mSemWallpaperData.mWpType) != null ? Long.valueOf(getWallpaperFile(this.mSemWallpaperData.mWpType).lastModified()) : "null");
+        sb.append(
+                getWallpaperFile(this.mSemWallpaperData.mWpType) != null
+                        ? Long.valueOf(
+                                getWallpaperFile(this.mSemWallpaperData.mWpType).lastModified())
+                        : "null");
         if (this.connection == null) {
             sb.append(", no connection");
         } else {
             sb.append(", info: ");
             sb.append(this.connection.mInfo);
             sb.append(", engine(s):");
-            this.connection.forEachDisplayConnector(new Consumer() { // from class: com.android.server.wallpaper.WallpaperData$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    StringBuilder sb2 = sb;
-                    WallpaperManagerService.DisplayConnector displayConnector = (WallpaperManagerService.DisplayConnector) obj;
-                    if (displayConnector.mEngine == null) {
-                        sb2.append(" null");
-                    } else {
-                        sb2.append(" ");
-                        sb2.append(WallpaperData.defaultString(displayConnector.mEngine));
-                    }
-                }
-            });
+            this.connection.forEachDisplayConnector(
+                    new Consumer() { // from class:
+                                     // com.android.server.wallpaper.WallpaperData$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            StringBuilder sb2 = sb;
+                            WallpaperManagerService.DisplayConnector displayConnector =
+                                    (WallpaperManagerService.DisplayConnector) obj;
+                            if (displayConnector.mEngine == null) {
+                                sb2.append(" null");
+                            } else {
+                                sb2.append(" ");
+                                sb2.append(WallpaperData.defaultString(displayConnector.mEngine));
+                            }
+                        }
+                    });
         }
         sb.append(", type = ");
         sb.append(this.mSemWallpaperData.mWpType);

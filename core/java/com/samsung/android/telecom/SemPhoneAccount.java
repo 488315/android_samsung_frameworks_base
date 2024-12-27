@@ -7,19 +7,22 @@ import android.telecom.PhoneAccount;
 
 /* loaded from: classes6.dex */
 public final class SemPhoneAccount implements Parcelable {
-    public static final Parcelable.Creator<SemPhoneAccount> CREATOR = new Parcelable.Creator<SemPhoneAccount>() { // from class: com.samsung.android.telecom.SemPhoneAccount.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemPhoneAccount createFromParcel(Parcel in) {
-            return new SemPhoneAccount(in);
-        }
+    public static final Parcelable.Creator<SemPhoneAccount> CREATOR =
+            new Parcelable.Creator<
+                    SemPhoneAccount>() { // from class:
+                                         // com.samsung.android.telecom.SemPhoneAccount.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemPhoneAccount createFromParcel(Parcel in) {
+                    return new SemPhoneAccount(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemPhoneAccount[] newArray(int size) {
-            return new SemPhoneAccount[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemPhoneAccount[] newArray(int size) {
+                    return new SemPhoneAccount[size];
+                }
+            };
     private static final String TAG = "SemPhoneAccount";
     private final boolean mAllowed;
     private final ComponentName mComponentName;
@@ -71,11 +74,23 @@ public final class SemPhoneAccount implements Parcelable {
         }
 
         public SemPhoneAccount build() {
-            return new SemPhoneAccount(nullToEmpty(this.packageName), this.componentName, this.phoneAccount, this.order, this.selfManaged, this.allowed);
+            return new SemPhoneAccount(
+                    nullToEmpty(this.packageName),
+                    this.componentName,
+                    this.phoneAccount,
+                    this.order,
+                    this.selfManaged,
+                    this.allowed);
         }
     }
 
-    public SemPhoneAccount(String packageName, ComponentName componentName, PhoneAccount phoneAccount, int order, boolean selfManaged, boolean allowed) {
+    public SemPhoneAccount(
+            String packageName,
+            ComponentName componentName,
+            PhoneAccount phoneAccount,
+            int order,
+            boolean selfManaged,
+            boolean allowed) {
         this.mPackageName = packageName;
         this.mComponentName = componentName;
         this.mPhoneAccount = phoneAccount;
@@ -151,6 +166,17 @@ public final class SemPhoneAccount implements Parcelable {
     }
 
     public String toString() {
-        return "SemPhoneAccount { PackageName : " + this.mPackageName + " / ComponentName : " + this.mComponentName + " / PhoneAccount : " + this.mPhoneAccount + " / Order : " + this.mOrder + " / SelfManaged : " + this.mSelfManaged + " / Allowed : " + this.mAllowed;
+        return "SemPhoneAccount { PackageName : "
+                + this.mPackageName
+                + " / ComponentName : "
+                + this.mComponentName
+                + " / PhoneAccount : "
+                + this.mPhoneAccount
+                + " / Order : "
+                + this.mOrder
+                + " / SelfManaged : "
+                + this.mSelfManaged
+                + " / Allowed : "
+                + this.mAllowed;
     }
 }

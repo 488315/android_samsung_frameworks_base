@@ -1,7 +1,9 @@
 package android.content.om;
 
 import android.annotation.NonNull;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -11,7 +13,8 @@ public final class OverlayableInfo {
 
     public OverlayableInfo(String name, String actor) {
         this.name = name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
         this.actor = actor;
     }
 
@@ -35,6 +38,5 @@ public final class OverlayableInfo {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

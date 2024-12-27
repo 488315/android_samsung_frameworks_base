@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.util.Slog;
+
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
+
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -15,19 +19,21 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class BattUtils {
-    public static final DateTimeFormatter FORMATTER_yyyyMMdd = DateTimeFormatter.ofPattern("yyyyMMdd");
+    public static final DateTimeFormatter FORMATTER_yyyyMMdd =
+            DateTimeFormatter.ofPattern("yyyyMMdd");
 
     public static long getCurrentNetworkTimeMillis() {
         long j;
         try {
             j = SystemClock.currentNetworkTimeMillis();
         } catch (Exception e) {
-            Slog.w("[SS]BattUtils", "[getCurrentNetworkTimeMillis]Exception(cannot get network time)");
+            Slog.w(
+                    "[SS]BattUtils",
+                    "[getCurrentNetworkTimeMillis]Exception(cannot get network time)");
             e.printStackTrace();
             j = -1;
         }
@@ -121,9 +127,14 @@ public abstract class BattUtils {
     }
 
     public static void saveSharedPreferencesAsLong(Context context, long j) {
-        Slog.d("[SS]BattUtils", "[saveSharedPreferencesAsLong]preferenceName:battery_service_prefs ,key:shutdown_time ,value:" + j);
+        Slog.d(
+                "[SS]BattUtils",
+                "[saveSharedPreferencesAsLong]preferenceName:battery_service_prefs"
+                    + " ,key:shutdown_time ,value:"
+                        + j);
         try {
-            SharedPreferences.Editor edit = context.getSharedPreferences("battery_service_prefs", 0).edit();
+            SharedPreferences.Editor edit =
+                    context.getSharedPreferences("battery_service_prefs", 0).edit();
             edit.putLong("shutdown_time", j);
             edit.apply();
         } catch (Exception e) {
@@ -137,9 +148,11 @@ public abstract class BattUtils {
     }
 
     public static boolean writeNode(String str, String str2) {
-        GmsAlarmManager$$ExternalSyntheticOutline0.m("[writeNode]path:", str, " ,data:", str2, "[SS]BattUtils");
+        GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                "[writeNode]path:", str, " ,data:", str2, "[SS]BattUtils");
         try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(str), StandardCharsets.UTF_8);
+            OutputStreamWriter outputStreamWriter =
+                    new OutputStreamWriter(new FileOutputStream(str), StandardCharsets.UTF_8);
             try {
                 outputStreamWriter.write(str2);
                 outputStreamWriter.close();

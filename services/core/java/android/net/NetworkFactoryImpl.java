@@ -2,11 +2,9 @@ package android.net;
 
 import android.content.Context;
 import android.hardware.biometrics.face.V1_0.OptionalBool$$ExternalSyntheticOutline0;
-import android.net.NetworkCapabilities;
-import android.net.NetworkProvider;
-import android.net.NetworkScore;
 import android.os.Looper;
 import android.os.Message;
+
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -16,7 +14,8 @@ import java.util.concurrent.Executor;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
-    public static final NetworkScore INVINCIBLE_SCORE = new NetworkScore.Builder().setLegacyInt(1000).build();
+    public static final NetworkScore INVINCIBLE_SCORE =
+            new NetworkScore.Builder().setLegacyInt(1000).build();
     public final NetworkFactoryImpl$$ExternalSyntheticLambda0 mExecutor;
     public final Map mNetworkRequests;
     public final AnonymousClass1 mRequestCallback;
@@ -41,25 +40,39 @@ public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
 
     /* JADX WARN: Type inference failed for: r1v5, types: [android.net.NetworkFactoryImpl$1] */
     /* JADX WARN: Type inference failed for: r1v6, types: [android.net.NetworkFactoryImpl$$ExternalSyntheticLambda0] */
-    public NetworkFactoryImpl(NetworkFactory networkFactory, Looper looper, Context context, NetworkCapabilities networkCapabilities) {
-        super(networkFactory, looper, context, networkCapabilities == null ? NetworkCapabilities.Builder.withoutDefaultCapabilities().build() : networkCapabilities);
+    public NetworkFactoryImpl(
+            NetworkFactory networkFactory,
+            Looper looper,
+            Context context,
+            NetworkCapabilities networkCapabilities) {
+        super(
+                networkFactory,
+                looper,
+                context,
+                networkCapabilities == null
+                        ? NetworkCapabilities.Builder.withoutDefaultCapabilities().build()
+                        : networkCapabilities);
         this.mNetworkRequests = new LinkedHashMap();
         this.mScore = new NetworkScore.Builder().setLegacyInt(0).build();
-        this.mRequestCallback = new NetworkProvider.NetworkOfferCallback() { // from class: android.net.NetworkFactoryImpl.1
-            public final void onNetworkNeeded(NetworkRequest networkRequest) {
-                NetworkFactoryImpl.this.handleAddRequest(networkRequest);
-            }
+        this.mRequestCallback =
+                new NetworkProvider
+                        .NetworkOfferCallback() { // from class: android.net.NetworkFactoryImpl.1
+                    public final void onNetworkNeeded(NetworkRequest networkRequest) {
+                        NetworkFactoryImpl.this.handleAddRequest(networkRequest);
+                    }
 
-            public final void onNetworkUnneeded(NetworkRequest networkRequest) {
-                NetworkFactoryImpl.this.handleRemoveRequest(networkRequest);
-            }
-        };
-        this.mExecutor = new Executor() { // from class: android.net.NetworkFactoryImpl$$ExternalSyntheticLambda0
-            @Override // java.util.concurrent.Executor
-            public final void execute(Runnable runnable) {
-                NetworkFactoryImpl.this.post(runnable);
-            }
-        };
+                    public final void onNetworkUnneeded(NetworkRequest networkRequest) {
+                        NetworkFactoryImpl.this.handleRemoveRequest(networkRequest);
+                    }
+                };
+        this.mExecutor =
+                new Executor() { // from class:
+                                 // android.net.NetworkFactoryImpl$$ExternalSyntheticLambda0
+                    @Override // java.util.concurrent.Executor
+                    public final void execute(Runnable runnable) {
+                        NetworkFactoryImpl.this.post(runnable);
+                    }
+                };
     }
 
     @Override // android.net.NetworkFactoryLegacyImpl, android.net.NetworkFactoryShim
@@ -77,7 +90,8 @@ public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
     }
 
     public final void handleAddRequest(NetworkRequest networkRequest) {
-        NetworkRequestInfo networkRequestInfo = (NetworkRequestInfo) ((LinkedHashMap) this.mNetworkRequests).get(networkRequest);
+        NetworkRequestInfo networkRequestInfo =
+                (NetworkRequestInfo) ((LinkedHashMap) this.mNetworkRequests).get(networkRequest);
         NetworkFactory networkFactory = this.mParent;
         if (networkRequestInfo == null) {
             networkFactory.log("got request " + networkRequest);
@@ -94,7 +108,8 @@ public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
     public final void handleMessage(Message message) {
         int i = message.what;
         AnonymousClass1 anonymousClass1 = this.mRequestCallback;
-        NetworkFactoryImpl$$ExternalSyntheticLambda0 networkFactoryImpl$$ExternalSyntheticLambda0 = this.mExecutor;
+        NetworkFactoryImpl$$ExternalSyntheticLambda0 networkFactoryImpl$$ExternalSyntheticLambda0 =
+                this.mExecutor;
         NetworkFactory networkFactory = this.mParent;
         switch (i) {
             case 1:
@@ -120,16 +135,25 @@ public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
                 }
                 break;
             case 5:
-                this.mProvider.registerNetworkOffer(this.mScore, this.mCapabilityFilter, networkFactoryImpl$$ExternalSyntheticLambda0, anonymousClass1);
+                this.mProvider.registerNetworkOffer(
+                        this.mScore,
+                        this.mCapabilityFilter,
+                        networkFactoryImpl$$ExternalSyntheticLambda0,
+                        anonymousClass1);
                 break;
             case 6:
-                this.mProvider.registerNetworkOffer(INVINCIBLE_SCORE, this.mCapabilityFilter, networkFactoryImpl$$ExternalSyntheticLambda0, anonymousClass1);
+                this.mProvider.registerNetworkOffer(
+                        INVINCIBLE_SCORE,
+                        this.mCapabilityFilter,
+                        networkFactoryImpl$$ExternalSyntheticLambda0,
+                        anonymousClass1);
                 break;
         }
     }
 
     public final void handleRemoveRequest(NetworkRequest networkRequest) {
-        NetworkRequestInfo networkRequestInfo = (NetworkRequestInfo) ((LinkedHashMap) this.mNetworkRequests).get(networkRequest);
+        NetworkRequestInfo networkRequestInfo =
+                (NetworkRequestInfo) ((LinkedHashMap) this.mNetworkRequests).get(networkRequest);
         if (networkRequestInfo != null) {
             this.mNetworkRequests.remove(networkRequest);
             if (networkRequestInfo.requested) {
@@ -144,7 +168,8 @@ public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
         if (networkProvider == null) {
             return;
         }
-        networkProvider.registerNetworkOffer(this.mScore, this.mCapabilityFilter, this.mExecutor, this.mRequestCallback);
+        networkProvider.registerNetworkOffer(
+                this.mScore, this.mCapabilityFilter, this.mExecutor, this.mRequestCallback);
     }
 
     @Override // android.net.NetworkFactoryLegacyImpl, android.net.NetworkFactoryShim
@@ -157,16 +182,22 @@ public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
             throw new IllegalStateException("A NetworkFactory must only be registered once");
         }
         this.mParent.log("Registering NetworkFactory");
-        this.mProvider = new NetworkProvider(this.mContext, getLooper(), str) { // from class: android.net.NetworkFactoryImpl.2
-            public final void onNetworkRequestWithdrawn(NetworkRequest networkRequest) {
-                NetworkFactoryImpl.this.handleRemoveRequest(networkRequest);
-            }
+        this.mProvider =
+                new NetworkProvider(
+                        this.mContext,
+                        getLooper(),
+                        str) { // from class: android.net.NetworkFactoryImpl.2
+                    public final void onNetworkRequestWithdrawn(NetworkRequest networkRequest) {
+                        NetworkFactoryImpl.this.handleRemoveRequest(networkRequest);
+                    }
 
-            public final void onNetworkRequested(NetworkRequest networkRequest, int i, int i2) {
-                NetworkFactoryImpl.this.handleAddRequest(networkRequest);
-            }
-        };
-        ((ConnectivityManager) this.mContext.getSystemService("connectivity")).registerNetworkProvider(this.mProvider);
+                    public final void onNetworkRequested(
+                            NetworkRequest networkRequest, int i, int i2) {
+                        NetworkFactoryImpl.this.handleAddRequest(networkRequest);
+                    }
+                };
+        ((ConnectivityManager) this.mContext.getSystemService("connectivity"))
+                .registerNetworkProvider(this.mProvider);
         if (z) {
             sendMessage(obtainMessage(6));
         } else {
@@ -198,7 +229,10 @@ public final class NetworkFactoryImpl extends NetworkFactoryLegacyImpl {
     public final String toString() {
         StringBuilder sb = new StringBuilder("providerId=");
         NetworkProvider networkProvider = this.mProvider;
-        sb.append(networkProvider != null ? Integer.valueOf(networkProvider.getProviderId()) : "null");
+        sb.append(
+                networkProvider != null
+                        ? Integer.valueOf(networkProvider.getProviderId())
+                        : "null");
         sb.append(", ScoreFilter=");
         sb.append(this.mScore);
         sb.append(", Filter=");

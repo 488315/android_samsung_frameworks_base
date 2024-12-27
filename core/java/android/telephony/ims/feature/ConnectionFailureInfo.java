@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 import android.util.SparseArray;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -27,8 +28,7 @@ public final class ConnectionFailureInfo implements Parcelable {
     private final int mWaitTimeMillis;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FailureReason {
-    }
+    public @interface FailureReason {}
 
     static {
         sReasonMap.set(0, KeyProperties.DIGEST_NONE);
@@ -42,19 +42,22 @@ public final class ConnectionFailureInfo implements Parcelable {
         sReasonMap.set(8, "PDN_NOT_AVAILABLE");
         sReasonMap.set(9, "RF_BUSY");
         sReasonMap.set(65535, "UNSPECIFIED");
-        CREATOR = new Parcelable.Creator<ConnectionFailureInfo>() { // from class: android.telephony.ims.feature.ConnectionFailureInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ConnectionFailureInfo createFromParcel(Parcel in) {
-                return new ConnectionFailureInfo(in);
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        ConnectionFailureInfo>() { // from class:
+                                                   // android.telephony.ims.feature.ConnectionFailureInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ConnectionFailureInfo createFromParcel(Parcel in) {
+                        return new ConnectionFailureInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ConnectionFailureInfo[] newArray(int size) {
-                return new ConnectionFailureInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ConnectionFailureInfo[] newArray(int size) {
+                        return new ConnectionFailureInfo[size];
+                    }
+                };
     }
 
     private ConnectionFailureInfo(Parcel in) {
@@ -83,7 +86,15 @@ public final class ConnectionFailureInfo implements Parcelable {
 
     public String toString() {
         String reason = sReasonMap.get(this.mReason, "UNKNOWN");
-        return "ConnectionFailureInfo :: {" + this.mReason + " : " + reason + ", " + this.mCauseCode + ", " + this.mWaitTimeMillis + "}";
+        return "ConnectionFailureInfo :: {"
+                + this.mReason
+                + " : "
+                + reason
+                + ", "
+                + this.mCauseCode
+                + ", "
+                + this.mWaitTimeMillis
+                + "}";
     }
 
     @Override // android.os.Parcelable

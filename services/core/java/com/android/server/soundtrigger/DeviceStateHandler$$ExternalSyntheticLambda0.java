@@ -1,15 +1,20 @@
 package com.android.server.soundtrigger;
 
-import com.android.server.soundtrigger.DeviceStateHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class DeviceStateHandler$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class DeviceStateHandler$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
-    public final /* synthetic */ SoundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1 f$0;
+    public final /* synthetic */
+    SoundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1 f$0;
     public final /* synthetic */ DeviceStateHandler.SoundTriggerDeviceState f$1;
 
-    public /* synthetic */ DeviceStateHandler$$ExternalSyntheticLambda0(SoundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1 soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1, DeviceStateHandler.SoundTriggerDeviceState soundTriggerDeviceState, int i) {
+    public /* synthetic */ DeviceStateHandler$$ExternalSyntheticLambda0(
+            SoundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1
+                    soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1,
+            DeviceStateHandler.SoundTriggerDeviceState soundTriggerDeviceState,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1;
         this.f$1 = soundTriggerDeviceState;

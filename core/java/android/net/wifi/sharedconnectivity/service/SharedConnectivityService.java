@@ -10,15 +10,15 @@ import android.net.wifi.sharedconnectivity.app.HotspotNetworkConnectionStatus;
 import android.net.wifi.sharedconnectivity.app.KnownNetwork;
 import android.net.wifi.sharedconnectivity.app.KnownNetworkConnectionStatus;
 import android.net.wifi.sharedconnectivity.app.SharedConnectivitySettingsState;
-import android.net.wifi.sharedconnectivity.service.ISharedConnectivityService;
-import android.net.wifi.sharedconnectivity.service.SharedConnectivityService;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.R;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -31,7 +31,8 @@ public abstract class SharedConnectivityService extends Service {
     private static final String TAG = SharedConnectivityService.class.getSimpleName();
     private CountDownLatch mCountDownLatch;
     private Handler mHandler;
-    private final RemoteCallbackList<ISharedConnectivityCallback> mRemoteCallbackList = new RemoteCallbackList<>();
+    private final RemoteCallbackList<ISharedConnectivityCallback> mRemoteCallbackList =
+            new RemoteCallbackList<>();
     private List<HotspotNetwork> mHotspotNetworks = Collections.emptyList();
     private List<KnownNetwork> mKnownNetworks = Collections.emptyList();
     private SharedConnectivitySettingsState mSettingsState = null;
@@ -57,50 +58,60 @@ public abstract class SharedConnectivityService extends Service {
 
     /* renamed from: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1, reason: invalid class name */
     class AnonymousClass1 extends ISharedConnectivityService.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
         public void registerCallback(final ISharedConnectivityCallback callback) {
             checkPermissions();
-            SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$registerCallback$0(callback);
-                }
-            });
+            SharedConnectivityService.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SharedConnectivityService.AnonymousClass1.this
+                                    .lambda$registerCallback$0(callback);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$registerCallback$0(ISharedConnectivityCallback callback) {
+        public /* synthetic */ void lambda$registerCallback$0(
+                ISharedConnectivityCallback callback) {
             SharedConnectivityService.this.onRegisterCallback(callback);
         }
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
         public void unregisterCallback(final ISharedConnectivityCallback callback) {
             checkPermissions();
-            SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$unregisterCallback$1(callback);
-                }
-            });
+            SharedConnectivityService.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SharedConnectivityService.AnonymousClass1.this
+                                    .lambda$unregisterCallback$1(callback);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$unregisterCallback$1(ISharedConnectivityCallback callback) {
+        public /* synthetic */ void lambda$unregisterCallback$1(
+                ISharedConnectivityCallback callback) {
             SharedConnectivityService.this.onUnregisterCallback(callback);
         }
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
         public void connectHotspotNetwork(final HotspotNetwork network) {
             checkPermissions();
-            SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$connectHotspotNetwork$2(network);
-                }
-            });
+            SharedConnectivityService.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SharedConnectivityService.AnonymousClass1.this
+                                    .lambda$connectHotspotNetwork$2(network);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -111,12 +122,15 @@ public abstract class SharedConnectivityService extends Service {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
         public void disconnectHotspotNetwork(final HotspotNetwork network) {
             checkPermissions();
-            SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$disconnectHotspotNetwork$3(network);
-                }
-            });
+            SharedConnectivityService.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SharedConnectivityService.AnonymousClass1.this
+                                    .lambda$disconnectHotspotNetwork$3(network);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -127,12 +141,15 @@ public abstract class SharedConnectivityService extends Service {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
         public void connectKnownNetwork(final KnownNetwork network) {
             checkPermissions();
-            SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$connectKnownNetwork$4(network);
-                }
-            });
+            SharedConnectivityService.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SharedConnectivityService.AnonymousClass1.this
+                                    .lambda$connectKnownNetwork$4(network);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -143,12 +160,15 @@ public abstract class SharedConnectivityService extends Service {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
         public void forgetKnownNetwork(final KnownNetwork network) {
             checkPermissions();
-            SharedConnectivityService.this.mHandler.post(new Runnable() { // from class: android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SharedConnectivityService.AnonymousClass1.this.lambda$forgetKnownNetwork$5(network);
-                }
-            });
+            SharedConnectivityService.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.net.wifi.sharedconnectivity.service.SharedConnectivityService$1$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SharedConnectivityService.AnonymousClass1.this
+                                    .lambda$forgetKnownNetwork$5(network);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -172,7 +192,11 @@ public abstract class SharedConnectivityService extends Service {
         public SharedConnectivitySettingsState getSettingsState() {
             checkPermissions();
             if (SharedConnectivityService.this.mSettingsState == null) {
-                SharedConnectivityService.this.mSettingsState = new SharedConnectivitySettingsState.Builder().setInstantTetherEnabled(false).setExtras(Bundle.EMPTY).build();
+                SharedConnectivityService.this.mSettingsState =
+                        new SharedConnectivitySettingsState.Builder()
+                                .setInstantTetherEnabled(false)
+                                .setExtras(Bundle.EMPTY)
+                                .build();
             }
             return SharedConnectivityService.this.mSettingsState;
         }
@@ -190,14 +214,20 @@ public abstract class SharedConnectivityService extends Service {
         }
 
         private void checkPermissions() {
-            if (SharedConnectivityService.this.checkCallingOrSelfPermission(Manifest.permission.NETWORK_SETTINGS) != 0 && SharedConnectivityService.this.checkCallingOrSelfPermission(Manifest.permission.NETWORK_SETUP_WIZARD) != 0) {
-                throw new SecurityException("Calling process must have NETWORK_SETTINGS or NETWORK_SETUP_WIZARD permission");
+            if (SharedConnectivityService.this.checkCallingOrSelfPermission(
+                                    Manifest.permission.NETWORK_SETTINGS)
+                            != 0
+                    && SharedConnectivityService.this.checkCallingOrSelfPermission(
+                                    Manifest.permission.NETWORK_SETUP_WIZARD)
+                            != 0) {
+                throw new SecurityException(
+                        "Calling process must have NETWORK_SETTINGS or NETWORK_SETUP_WIZARD"
+                            + " permission");
             }
         }
     }
 
-    public void onBind() {
-    }
+    public void onBind() {}
 
     public final void setCountdownLatch(CountDownLatch latch) {
         this.mCountDownLatch = latch;
@@ -229,7 +259,9 @@ public abstract class SharedConnectivityService extends Service {
         int count = this.mRemoteCallbackList.beginBroadcast();
         for (int i = 0; i < count; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onHotspotNetworksUpdated(this.mHotspotNetworks);
+                this.mRemoteCallbackList
+                        .getBroadcastItem(i)
+                        .onHotspotNetworksUpdated(this.mHotspotNetworks);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in setHotspotNetworks", e);
             }
@@ -242,7 +274,9 @@ public abstract class SharedConnectivityService extends Service {
         int count = this.mRemoteCallbackList.beginBroadcast();
         for (int i = 0; i < count; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onKnownNetworksUpdated(this.mKnownNetworks);
+                this.mRemoteCallbackList
+                        .getBroadcastItem(i)
+                        .onKnownNetworksUpdated(this.mKnownNetworks);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in setKnownNetworks", e);
             }
@@ -255,7 +289,9 @@ public abstract class SharedConnectivityService extends Service {
         int count = this.mRemoteCallbackList.beginBroadcast();
         for (int i = 0; i < count; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onSharedConnectivitySettingsChanged(this.mSettingsState);
+                this.mRemoteCallbackList
+                        .getBroadcastItem(i)
+                        .onSharedConnectivitySettingsChanged(this.mSettingsState);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in setSettingsState", e);
             }
@@ -268,7 +304,10 @@ public abstract class SharedConnectivityService extends Service {
         int count = this.mRemoteCallbackList.beginBroadcast();
         for (int i = 0; i < count; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onHotspotNetworkConnectionStatusChanged(this.mHotspotNetworkConnectionStatus);
+                this.mRemoteCallbackList
+                        .getBroadcastItem(i)
+                        .onHotspotNetworkConnectionStatusChanged(
+                                this.mHotspotNetworkConnectionStatus);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in updateHotspotNetworkConnectionStatus", e);
             }
@@ -281,7 +320,9 @@ public abstract class SharedConnectivityService extends Service {
         int count = this.mRemoteCallbackList.beginBroadcast();
         for (int i = 0; i < count; i++) {
             try {
-                this.mRemoteCallbackList.getBroadcastItem(i).onKnownNetworkConnectionStatusChanged(this.mKnownNetworkConnectionStatus);
+                this.mRemoteCallbackList
+                        .getBroadcastItem(i)
+                        .onKnownNetworkConnectionStatusChanged(this.mKnownNetworkConnectionStatus);
             } catch (RemoteException e) {
                 Log.w(TAG, "Exception in updateKnownNetworkConnectionStatus", e);
             }
@@ -290,12 +331,17 @@ public abstract class SharedConnectivityService extends Service {
     }
 
     public static boolean areHotspotNetworksEnabledForService(Context context) {
-        String servicePackage = context.getResources().getString(R.string.config_sharedConnectivityServicePackage);
-        return Objects.equals(context.getPackageName(), servicePackage) && context.getResources().getBoolean(R.bool.config_hotspotNetworksEnabledForService);
+        String servicePackage =
+                context.getResources().getString(R.string.config_sharedConnectivityServicePackage);
+        return Objects.equals(context.getPackageName(), servicePackage)
+                && context.getResources()
+                        .getBoolean(R.bool.config_hotspotNetworksEnabledForService);
     }
 
     public static boolean areKnownNetworksEnabledForService(Context context) {
-        String servicePackage = context.getResources().getString(R.string.config_sharedConnectivityServicePackage);
-        return Objects.equals(context.getPackageName(), servicePackage) && context.getResources().getBoolean(R.bool.config_knownNetworksEnabledForService);
+        String servicePackage =
+                context.getResources().getString(R.string.config_sharedConnectivityServicePackage);
+        return Objects.equals(context.getPackageName(), servicePackage)
+                && context.getResources().getBoolean(R.bool.config_knownNetworksEnabledForService);
     }
 }

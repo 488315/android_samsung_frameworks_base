@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class EntryParcel implements Parcelable {
-    public static final Parcelable.Creator<EntryParcel> CREATOR = new Parcelable.Creator<EntryParcel>() { // from class: android.security.identity.EntryParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EntryParcel createFromParcel(Parcel _aidl_source) {
-            EntryParcel _aidl_out = new EntryParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<EntryParcel> CREATOR =
+            new Parcelable.Creator<
+                    EntryParcel>() { // from class: android.security.identity.EntryParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EntryParcel createFromParcel(Parcel _aidl_source) {
+                    EntryParcel _aidl_out = new EntryParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EntryParcel[] newArray(int _aidl_size) {
-            return new EntryParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EntryParcel[] newArray(int _aidl_size) {
+                    return new EntryParcel[_aidl_size];
+                }
+            };
     public int[] accessControlProfileIds;
     public String name;
     public byte[] value;

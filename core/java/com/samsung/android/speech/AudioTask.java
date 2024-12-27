@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import com.samsung.android.speech.SemSpeechRecognizer;
+
 import java.io.DataOutputStream;
 import java.io.File;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -57,19 +57,30 @@ class AudioTask implements Runnable {
     private boolean isOEMResult = false;
     private int dualThresholdFlag = 0;
     private Handler handler = new Handler() { // from class: com.samsung.android.speech.AudioTask.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            String[] result = msg.getData().getStringArray("recognition_result");
-            if (AudioTask.this.m_listener != null) {
-                AudioTask.this.m_listener.onResults(result);
-            }
-        }
-    };
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    String[] result = msg.getData().getStringArray("recognition_result");
+                    if (AudioTask.this.m_listener != null) {
+                        AudioTask.this.m_listener.onResults(result);
+                    }
+                }
+            };
 
-    AudioTask(SemSpeechRecognizer.ResultListener listener, String path, int command, int language, boolean samsungOOVResult) {
-    }
+    AudioTask(
+            SemSpeechRecognizer.ResultListener listener,
+            String path,
+            int command,
+            int language,
+            boolean samsungOOVResult) {}
 
-    void init(LinkedBlockingQueue<short[]> q, int block_size, SemSpeechRecognizer.ResultListener listener, String path, int command, int Language, boolean samsungOOVResult) {
+    void init(
+            LinkedBlockingQueue<short[]> q,
+            int block_size,
+            SemSpeechRecognizer.ResultListener listener,
+            String path,
+            int command,
+            int Language,
+            boolean samsungOOVResult) {
         this.mTAG = AudioTask.class.getSimpleName();
         Log.i(this.mTAG, "AudioTask init()");
         Log.i(this.mTAG, "command : " + command);
@@ -84,8 +95,7 @@ class AudioTask implements Runnable {
         this.BargeinAct[0] = -1;
     }
 
-    public void stopPhraseSpotter() {
-    }
+    public void stopPhraseSpotter() {}
 
     public int getBlockSize() {
         return this.block_size;
@@ -153,7 +163,13 @@ class AudioTask implements Runnable {
                 return -1;
             }
             this.aMMUIRecognizer.ResetFx();
-            this.numRecogResult = this.aMMUIRecognizer.SASRDoRecognition(this.cmResult, this.strResult, "/system/voicecommanddata/sasr/input.txt", this.BargeinAct, this.utfResult);
+            this.numRecogResult =
+                    this.aMMUIRecognizer.SASRDoRecognition(
+                            this.cmResult,
+                            this.strResult,
+                            "/system/voicecommanddata/sasr/input.txt",
+                            this.BargeinAct,
+                            this.utfResult);
             this.strResult[0] = this.strResult[0].replace('_', ' ');
             if (this.mEmbeddedEngineLanguage == 0 || this.mEmbeddedEngineLanguage == 2) {
                 this.utfResult[0] = this.utfResult[0].replace('_', ' ');
@@ -179,9 +195,14 @@ class AudioTask implements Runnable {
                     Log.i(this.mTAG, "isOEMCameraBargeIn is true and isOEMResult is true");
                     Log.d(this.mTAG, "EmbeddedEngine Recognizer : " + ((int) this.BargeinAct[0]));
                     this.isOEMResult = false;
-                    Log.i(this.mTAG, "Set isOEMResult = false. So isOEMResult : " + this.isOEMResult);
+                    Log.i(
+                            this.mTAG,
+                            "Set isOEMResult = false. So isOEMResult : " + this.isOEMResult);
                 } else {
-                    Log.i(this.mTAG, "isOEMCameraBargeIn is true and keyword is not detected by OEM and keyword or non-keyword is detected by embeddedEngine.");
+                    Log.i(
+                            this.mTAG,
+                            "isOEMCameraBargeIn is true and keyword is not detected by OEM and"
+                                + " keyword or non-keyword is detected by embeddedEngine.");
                     this.strResult[0] = "TH-Reject";
                     this.BargeinAct[0] = -1;
                     SendHandlerMessage(this.strResult);
@@ -233,9 +254,21 @@ class AudioTask implements Runnable {
         AudioRecord retAudioRecord = null;
         Log.i(this.mTAG, "getAudioRecord modified by jy");
         try {
-            AudioRecord retAudioRecord2 = new AudioRecord.Builder().semSetConcurrentCapture(true).setAudioFormat(new AudioFormat.Builder().setChannelMask(16).setEncoding(2).setSampleRate(16000).build()).setBufferSizeInBytes(8192).build();
+            AudioRecord retAudioRecord2 =
+                    new AudioRecord.Builder()
+                            .semSetConcurrentCapture(true)
+                            .setAudioFormat(
+                                    new AudioFormat.Builder()
+                                            .setChannelMask(16)
+                                            .setEncoding(2)
+                                            .setSampleRate(16000)
+                                            .build())
+                            .setBufferSizeInBytes(8192)
+                            .build();
             if (retAudioRecord2 == null || retAudioRecord2.getState() == 1) {
-                Log.d(this.mTAG, "got AudioRecord using source=" + source + ", also 16000 16 2 8192");
+                Log.d(
+                        this.mTAG,
+                        "got AudioRecord using source=" + source + ", also 16000 16 2 8192");
                 Log.i(this.mTAG, "getAudioRecord for " + source + "=true");
                 return retAudioRecord2;
             }
@@ -244,7 +277,11 @@ class AudioTask implements Runnable {
             return null;
         } catch (IllegalArgumentException e) {
             Log.e(this.mTAG, "getAudioRecord for " + source + "=false, IllegalArgumentException");
-            Log.e(this.mTAG, "got IllegalArgumentException using source=" + source + ", also 16000 16 2 8192");
+            Log.e(
+                    this.mTAG,
+                    "got IllegalArgumentException using source="
+                            + source
+                            + ", also 16000 16 2 8192");
             if (0 != 0) {
                 retAudioRecord.release();
             }

@@ -36,7 +36,7 @@ import android.view.textclassifier.TextClassifier;
 import android.view.translation.TranslationCapability;
 import android.view.translation.ViewTranslationRequest;
 import android.view.translation.ViewTranslationResponse;
-import android.webkit.WebView;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.util.List;
@@ -254,7 +254,8 @@ public interface WebViewProvider {
 
     void setWebViewClient(WebViewClient webViewClient);
 
-    void setWebViewRenderProcessClient(Executor executor, WebViewRenderProcessClient webViewRenderProcessClient);
+    void setWebViewRenderProcessClient(
+            Executor executor, WebViewRenderProcessClient webViewRenderProcessClient);
 
     boolean showFindDialog(String str, boolean z);
 
@@ -266,8 +267,7 @@ public interface WebViewProvider {
 
     boolean zoomOut();
 
-    default void setTextClassifier(TextClassifier textClassifier) {
-    }
+    default void setTextClassifier(TextClassifier textClassifier) {}
 
     default TextClassifier getTextClassifier() {
         return TextClassifier.NO_OP;
@@ -296,7 +296,8 @@ public interface WebViewProvider {
 
         void onDraw(Canvas canvas);
 
-        void onDrawVerticalScrollBar(Canvas canvas, Drawable drawable, int i, int i2, int i3, int i4);
+        void onDrawVerticalScrollBar(
+                Canvas canvas, Drawable drawable, int i, int i2, int i3, int i4);
 
         void onFinishTemporaryDetach();
 
@@ -362,30 +363,31 @@ public interface WebViewProvider {
 
         boolean shouldDelayChildPressedState();
 
-        default void onProvideAutofillVirtualStructure(ViewStructure structure, int flags) {
-        }
+        default void onProvideAutofillVirtualStructure(ViewStructure structure, int flags) {}
 
-        default void autofill(SparseArray<AutofillValue> values) {
-        }
+        default void autofill(SparseArray<AutofillValue> values) {}
 
         default boolean isVisibleToUserForAutofill(int virtualId) {
             return true;
         }
 
-        default void onProvideContentCaptureStructure(ViewStructure structure, int flags) {
-        }
+        default void onProvideContentCaptureStructure(ViewStructure structure, int flags) {}
 
-        default void onCreateVirtualViewTranslationRequests(long[] virtualIds, int[] supportedFormats, Consumer<ViewTranslationRequest> requestsCollector) {
-        }
+        default void onCreateVirtualViewTranslationRequests(
+                long[] virtualIds,
+                int[] supportedFormats,
+                Consumer<ViewTranslationRequest> requestsCollector) {}
 
-        default void onVirtualViewTranslationResponses(LongSparseArray<ViewTranslationResponse> response) {
-        }
+        default void onVirtualViewTranslationResponses(
+                LongSparseArray<ViewTranslationResponse> response) {}
 
-        default void dispatchCreateViewTranslationRequest(Map<AutofillId, long[]> viewIds, int[] supportedFormats, TranslationCapability capability, List<ViewTranslationRequest> requests) {
-        }
+        default void dispatchCreateViewTranslationRequest(
+                Map<AutofillId, long[]> viewIds,
+                int[] supportedFormats,
+                TranslationCapability capability,
+                List<ViewTranslationRequest> requests) {}
 
-        default void onMovedToDisplay(int displayId, Configuration config) {
-        }
+        default void onMovedToDisplay(int displayId, Configuration config) {}
 
         default boolean onCheckIsTextEditor() {
             return false;

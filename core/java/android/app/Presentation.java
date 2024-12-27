@@ -14,7 +14,9 @@ import android.view.Display;
 import android.view.DisplayInfo;
 import android.view.Window;
 import android.view.WindowManager;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -38,31 +40,35 @@ public class Presentation extends Dialog {
 
     public Presentation(Context outerContext, Display display, int theme, int type) {
         super(createPresentationContext(outerContext, display, theme, type), theme, false);
-        this.mHandler = new Handler((Looper) Objects.requireNonNull(Looper.myLooper(), "Presentation must be constructed on a looper thread."));
-        this.mDisplayListener = new DisplayManager.DisplayListener() { // from class: android.app.Presentation.1
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayAdded(int displayId) {
-            }
+        this.mHandler =
+                new Handler(
+                        (Looper)
+                                Objects.requireNonNull(
+                                        Looper.myLooper(),
+                                        "Presentation must be constructed on a looper thread."));
+        this.mDisplayListener =
+                new DisplayManager.DisplayListener() { // from class: android.app.Presentation.1
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayAdded(int displayId) {}
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayRemoved(int displayId) {
-                if (displayId == Presentation.this.mDisplay.getDisplayId()) {
-                    Presentation.this.handleDisplayRemoved();
-                }
-            }
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayRemoved(int displayId) {
+                        if (displayId == Presentation.this.mDisplay.getDisplayId()) {
+                            Presentation.this.handleDisplayRemoved();
+                        }
+                    }
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayChanged(int displayId) {
-                if (displayId == Presentation.this.mDisplay.getDisplayId()) {
-                    Presentation.this.handleDisplayChanged();
-                }
-            }
-        };
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayChanged(int displayId) {
+                        if (displayId == Presentation.this.mDisplay.getDisplayId()) {
+                            Presentation.this.handleDisplayChanged();
+                        }
+                    }
+                };
         this.mDisplay = display;
         this.mDisplayManager = (DisplayManager) getContext().getSystemService(DisplayManager.class);
         this.mOwnerPackageName = outerContext.getPackageName();
-        if ((display.getFlags() & 4) != 0) {
-        }
+        if ((display.getFlags() & 4) != 0) {}
         Window w = getWindow();
         WindowManager.LayoutParams attr = w.getAttributes();
         w.setAttributes(attr);
@@ -93,7 +99,14 @@ public class Presentation extends Dialog {
         if (CoreRune.FW_FLEXIBLE_DUAL_MODE && this.mDisplay.getDisplayId() == 1) {
             DisplayInfo info = new DisplayInfo();
             boolean isValid = this.mDisplay.getDisplayInfo(info);
-            Slog.i(TAG, "onStart() FLAG_REAR : " + (info.flags & 8192) + ", isValid=" + isValid + " Presentation=" + this);
+            Slog.i(
+                    TAG,
+                    "onStart() FLAG_REAR : "
+                            + (info.flags & 8192)
+                            + ", isValid="
+                            + isValid
+                            + " Presentation="
+                            + this);
             if (isValid && (info.flags & 8192) != 0) {
                 this.isRearDisplayPresentation = true;
             }
@@ -120,11 +133,9 @@ public class Presentation extends Dialog {
         sendPresentationIntent(false);
     }
 
-    public void onDisplayRemoved() {
-    }
+    public void onDisplayRemoved() {}
 
-    public void onDisplayChanged() {
-    }
+    public void onDisplayChanged() {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public void handleDisplayRemoved() {
@@ -138,7 +149,16 @@ public class Presentation extends Dialog {
         if (CoreRune.FW_FLEXIBLE_DUAL_MODE && this.mDisplay.getDisplayId() == 1) {
             DisplayInfo info = new DisplayInfo();
             boolean isValid = this.mDisplay.getDisplayInfo(info);
-            Slog.i(TAG, "handleDisplayChanged() FLAG_REAR : " + (info.flags & 8192) + ", isRearDisplayPresentation=" + this.isRearDisplayPresentation + ", isValid=" + isValid + " Presentation=" + this);
+            Slog.i(
+                    TAG,
+                    "handleDisplayChanged() FLAG_REAR : "
+                            + (info.flags & 8192)
+                            + ", isRearDisplayPresentation="
+                            + this.isRearDisplayPresentation
+                            + ", isValid="
+                            + isValid
+                            + " Presentation="
+                            + this);
             if (this.isRearDisplayPresentation) {
                 if (isValid && (info.flags & 8192) == 0) {
                     cancel();
@@ -152,18 +172,23 @@ public class Presentation extends Dialog {
         }
     }
 
-    private static Context createPresentationContext(Context outerContext, Display display, int theme) {
+    private static Context createPresentationContext(
+            Context outerContext, Display display, int theme) {
         return createPresentationContext(outerContext, display, theme, -1);
     }
 
-    private static Context createPresentationContext(Context outerContext, Display display, int theme, int type) {
+    private static Context createPresentationContext(
+            Context outerContext, Display display, int theme, int type) {
         if (outerContext == null) {
             throw new IllegalArgumentException("outerContext must not be null");
         }
         if (display == null) {
             throw new IllegalArgumentException("display must not be null");
         }
-        Context windowContext = outerContext.createDisplayContext(display).createWindowContext(getWindowType(type, display), null);
+        Context windowContext =
+                outerContext
+                        .createDisplayContext(display)
+                        .createWindowContext(getWindowType(type, display), null);
         if (theme == 0) {
             TypedValue outValue = new TypedValue();
             windowContext.getTheme().resolveAttribute(16843712, outValue, true);
@@ -175,7 +200,8 @@ public class Presentation extends Dialog {
     private void sendPresentationIntent(boolean isStart) {
         if (isStart && !this.mIsStarted) {
             Intent intent = new Intent(DisplayManager.SEM_PRESENTATION_START);
-            intent.putExtra(ContactsContract.Directory.DISPLAY_NAME, this.mDisplay.getName().hashCode());
+            intent.putExtra(
+                    ContactsContract.Directory.DISPLAY_NAME, this.mDisplay.getName().hashCode());
             intent.putExtra("displayID", this.mDisplay.getDisplayId());
             intent.putExtra("ownerPackageName", this.mOwnerPackageName);
             this.mContext.sendBroadcast(intent);
@@ -184,7 +210,8 @@ public class Presentation extends Dialog {
         }
         if (!isStart && this.mIsStarted) {
             Intent intent2 = new Intent(DisplayManager.SEM_PRESENTATION_STOP);
-            intent2.putExtra(ContactsContract.Directory.DISPLAY_NAME, this.mDisplay.getName().hashCode());
+            intent2.putExtra(
+                    ContactsContract.Directory.DISPLAY_NAME, this.mDisplay.getName().hashCode());
             intent2.putExtra("displayID", this.mDisplay.getDisplayId());
             intent2.putExtra("ownerPackageName", this.mOwnerPackageName);
             this.mContext.sendBroadcast(intent2);

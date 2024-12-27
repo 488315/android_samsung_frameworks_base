@@ -16,9 +16,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,10 +52,20 @@ public final class AccountsDb implements AutoCloseable {
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onCreate(SQLiteDatabase sQLiteDatabase) {
             Log.i("AccountsDb", "Creating CE database " + getDatabaseName());
-            sQLiteDatabase.execSQL("CREATE TABLE accounts ( _id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, type TEXT NOT NULL, password TEXT, UNIQUE(name,type))");
-            sQLiteDatabase.execSQL("CREATE TABLE authtokens (  _id INTEGER PRIMARY KEY AUTOINCREMENT,  accounts_id INTEGER NOT NULL, type TEXT NOT NULL,  authtoken TEXT,  UNIQUE (accounts_id,type))");
-            sQLiteDatabase.execSQL("CREATE TABLE extras ( _id INTEGER PRIMARY KEY AUTOINCREMENT, accounts_id INTEGER, key TEXT NOT NULL, value TEXT, UNIQUE(accounts_id,key))");
-            sQLiteDatabase.execSQL(" CREATE TRIGGER accountsDelete DELETE ON accounts BEGIN   DELETE FROM authtokens     WHERE accounts_id=OLD._id ;   DELETE FROM extras     WHERE accounts_id=OLD._id ; END");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE accounts ( _id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT"
+                        + " NULL, type TEXT NOT NULL, password TEXT, UNIQUE(name,type))");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE authtokens (  _id INTEGER PRIMARY KEY AUTOINCREMENT,  accounts_id"
+                        + " INTEGER NOT NULL, type TEXT NOT NULL,  authtoken TEXT,  UNIQUE"
+                        + " (accounts_id,type))");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE extras ( _id INTEGER PRIMARY KEY AUTOINCREMENT, accounts_id"
+                        + " INTEGER, key TEXT NOT NULL, value TEXT, UNIQUE(accounts_id,key))");
+            sQLiteDatabase.execSQL(
+                    " CREATE TRIGGER accountsDelete DELETE ON accounts BEGIN   DELETE FROM"
+                        + " authtokens     WHERE accounts_id=OLD._id ;   DELETE FROM extras    "
+                        + " WHERE accounts_id=OLD._id ; END");
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
@@ -71,7 +84,8 @@ public final class AccountsDb implements AutoCloseable {
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, i2, "Upgrade CE from version ", " to version ", "AccountsDb");
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i, i2, "Upgrade CE from version ", " to version ", "AccountsDb");
             if (i == 9) {
                 if (Log.isLoggable("AccountsDb", 2)) {
                     Log.v("AccountsDb", "onUpgrade upgrading to v10");
@@ -79,7 +93,10 @@ public final class AccountsDb implements AutoCloseable {
                 sQLiteDatabase.execSQL("DROP TABLE IF EXISTS meta");
                 sQLiteDatabase.execSQL("DROP TABLE IF EXISTS shared_accounts");
                 sQLiteDatabase.execSQL("DROP TRIGGER IF EXISTS accountsDelete");
-                sQLiteDatabase.execSQL(" CREATE TRIGGER accountsDelete DELETE ON accounts BEGIN   DELETE FROM authtokens     WHERE accounts_id=OLD._id ;   DELETE FROM extras     WHERE accounts_id=OLD._id ; END");
+                sQLiteDatabase.execSQL(
+                        " CREATE TRIGGER accountsDelete DELETE ON accounts BEGIN   DELETE FROM"
+                            + " authtokens     WHERE accounts_id=OLD._id ;   DELETE FROM extras    "
+                            + " WHERE accounts_id=OLD._id ; END");
                 sQLiteDatabase.execSQL("DROP TABLE IF EXISTS grants");
                 sQLiteDatabase.execSQL("DROP TABLE IF EXISTS debug_table");
                 i++;
@@ -102,14 +119,28 @@ public final class AccountsDb implements AutoCloseable {
 
         public final SQLiteDatabase getReadableDatabaseUserIsUnlocked() {
             if (!this.mCeAttached) {
-                Log.wtf("AccountsDb", AmFmBandRange$$ExternalSyntheticOutline0.m(this.mUserId, new StringBuilder("getReadableDatabaseUserIsUnlocked called while user "), " is still locked. CE database is not yet available."), new Throwable());
+                Log.wtf(
+                        "AccountsDb",
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                this.mUserId,
+                                new StringBuilder(
+                                        "getReadableDatabaseUserIsUnlocked called while user "),
+                                " is still locked. CE database is not yet available."),
+                        new Throwable());
             }
             return getReadableDatabase();
         }
 
         public final SQLiteDatabase getWritableDatabaseUserIsUnlocked() {
             if (!this.mCeAttached) {
-                Log.wtf("AccountsDb", AmFmBandRange$$ExternalSyntheticOutline0.m(this.mUserId, new StringBuilder("getWritableDatabaseUserIsUnlocked called while user "), " is still locked. CE database is not yet available."), new Throwable());
+                Log.wtf(
+                        "AccountsDb",
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                this.mUserId,
+                                new StringBuilder(
+                                        "getWritableDatabaseUserIsUnlocked called while user "),
+                                " is still locked. CE database is not yet available."),
+                        new Throwable());
             }
             return getWritableDatabase();
         }
@@ -117,15 +148,33 @@ public final class AccountsDb implements AutoCloseable {
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onCreate(SQLiteDatabase sQLiteDatabase) {
             Log.i("AccountsDb", "Creating DE database for user " + this.mUserId);
-            sQLiteDatabase.execSQL("CREATE TABLE accounts ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL, type TEXT NOT NULL, previous_name TEXT, last_password_entry_time_millis_epoch INTEGER DEFAULT 0, UNIQUE(name,type))");
-            sQLiteDatabase.execSQL("CREATE TABLE meta ( key TEXT PRIMARY KEY NOT NULL, value TEXT)");
-            sQLiteDatabase.execSQL("CREATE TABLE grants (  accounts_id INTEGER NOT NULL, auth_token_type STRING NOT NULL,  uid INTEGER NOT NULL,  UNIQUE (accounts_id,auth_token_type,uid))");
-            sQLiteDatabase.execSQL("CREATE TABLE shared_accounts ( _id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, type TEXT NOT NULL, UNIQUE(name,type))");
-            sQLiteDatabase.execSQL(" CREATE TRIGGER accountsDelete DELETE ON accounts BEGIN   DELETE FROM grants     WHERE accounts_id=OLD._id ; END");
-            sQLiteDatabase.execSQL("CREATE TABLE debug_table ( _id INTEGER,action_type TEXT NOT NULL, time DATETIME,caller_uid INTEGER NOT NULL,table_name TEXT NOT NULL,primary_key INTEGER PRIMARY KEY)");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE accounts ( _id INTEGER PRIMARY KEY, name TEXT NOT NULL, type TEXT"
+                        + " NOT NULL, previous_name TEXT, last_password_entry_time_millis_epoch"
+                        + " INTEGER DEFAULT 0, UNIQUE(name,type))");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE meta ( key TEXT PRIMARY KEY NOT NULL, value TEXT)");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE grants (  accounts_id INTEGER NOT NULL, auth_token_type STRING"
+                        + " NOT NULL,  uid INTEGER NOT NULL,  UNIQUE"
+                        + " (accounts_id,auth_token_type,uid))");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE shared_accounts ( _id INTEGER PRIMARY KEY AUTOINCREMENT, name"
+                        + " TEXT NOT NULL, type TEXT NOT NULL, UNIQUE(name,type))");
+            sQLiteDatabase.execSQL(
+                    " CREATE TRIGGER accountsDelete DELETE ON accounts BEGIN   DELETE FROM grants  "
+                        + "   WHERE accounts_id=OLD._id ; END");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE debug_table ( _id INTEGER,action_type TEXT NOT NULL, time"
+                        + " DATETIME,caller_uid INTEGER NOT NULL,table_name TEXT NOT"
+                        + " NULL,primary_key INTEGER PRIMARY KEY)");
             sQLiteDatabase.execSQL("CREATE INDEX timestamp_index ON debug_table (time)");
-            sQLiteDatabase.execSQL("CREATE TABLE visibility ( accounts_id INTEGER NOT NULL, _package TEXT NOT NULL, value INTEGER, PRIMARY KEY(accounts_id,_package))");
-            sQLiteDatabase.execSQL(" CREATE TRIGGER accountsDeleteVisibility DELETE ON accounts BEGIN   DELETE FROM visibility     WHERE accounts_id=OLD._id ; END");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE visibility ( accounts_id INTEGER NOT NULL, _package TEXT NOT"
+                        + " NULL, value INTEGER, PRIMARY KEY(accounts_id,_package))");
+            sQLiteDatabase.execSQL(
+                    " CREATE TRIGGER accountsDeleteVisibility DELETE ON accounts BEGIN   DELETE"
+                        + " FROM visibility     WHERE accounts_id=OLD._id ; END");
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
@@ -144,17 +193,26 @@ public final class AccountsDb implements AutoCloseable {
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, i2, "upgrade from version ", " to version ", "AccountsDb");
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i, i2, "upgrade from version ", " to version ", "AccountsDb");
             if (i == 1) {
-                sQLiteDatabase.execSQL("CREATE TABLE visibility ( accounts_id INTEGER NOT NULL, _package TEXT NOT NULL, value INTEGER, PRIMARY KEY(accounts_id,_package))");
-                sQLiteDatabase.execSQL(" CREATE TRIGGER accountsDeleteVisibility DELETE ON accounts BEGIN   DELETE FROM visibility     WHERE accounts_id=OLD._id ; END");
+                sQLiteDatabase.execSQL(
+                        "CREATE TABLE visibility ( accounts_id INTEGER NOT NULL, _package TEXT NOT"
+                            + " NULL, value INTEGER, PRIMARY KEY(accounts_id,_package))");
+                sQLiteDatabase.execSQL(
+                        " CREATE TRIGGER accountsDeleteVisibility DELETE ON accounts BEGIN   DELETE"
+                            + " FROM visibility     WHERE accounts_id=OLD._id ; END");
                 i = 3;
             }
             if (i == 2) {
                 sQLiteDatabase.execSQL("DROP TRIGGER IF EXISTS accountsDeleteVisibility");
                 sQLiteDatabase.execSQL("DROP TABLE IF EXISTS visibility");
-                sQLiteDatabase.execSQL("CREATE TABLE visibility ( accounts_id INTEGER NOT NULL, _package TEXT NOT NULL, value INTEGER, PRIMARY KEY(accounts_id,_package))");
-                sQLiteDatabase.execSQL(" CREATE TRIGGER accountsDeleteVisibility DELETE ON accounts BEGIN   DELETE FROM visibility     WHERE accounts_id=OLD._id ; END");
+                sQLiteDatabase.execSQL(
+                        "CREATE TABLE visibility ( accounts_id INTEGER NOT NULL, _package TEXT NOT"
+                            + " NULL, value INTEGER, PRIMARY KEY(accounts_id,_package))");
+                sQLiteDatabase.execSQL(
+                        " CREATE TRIGGER accountsDeleteVisibility DELETE ON accounts BEGIN   DELETE"
+                            + " FROM visibility     WHERE accounts_id=OLD._id ; END");
                 i++;
             }
             if (i != i2) {
@@ -193,17 +251,27 @@ public final class AccountsDb implements AutoCloseable {
                 i++;
             }
             if (i == 2) {
-                sQLiteDatabase.execSQL("CREATE TABLE grants (  accounts_id INTEGER NOT NULL, auth_token_type STRING NOT NULL,  uid INTEGER NOT NULL,  UNIQUE (accounts_id,auth_token_type,uid))");
+                sQLiteDatabase.execSQL(
+                        "CREATE TABLE grants (  accounts_id INTEGER NOT NULL, auth_token_type"
+                            + " STRING NOT NULL,  uid INTEGER NOT NULL,  UNIQUE"
+                            + " (accounts_id,auth_token_type,uid))");
                 sQLiteDatabase.execSQL("DROP TRIGGER accountsDelete");
-                sQLiteDatabase.execSQL(" CREATE TRIGGER accountsDelete DELETE ON accounts BEGIN   DELETE FROM authtokens     WHERE accounts_id=OLD._id ;   DELETE FROM extras     WHERE accounts_id=OLD._id ;   DELETE FROM grants     WHERE accounts_id=OLD._id ; END");
+                sQLiteDatabase.execSQL(
+                        " CREATE TRIGGER accountsDelete DELETE ON accounts BEGIN   DELETE FROM"
+                            + " authtokens     WHERE accounts_id=OLD._id ;   DELETE FROM extras    "
+                            + " WHERE accounts_id=OLD._id ;   DELETE FROM grants     WHERE"
+                            + " accounts_id=OLD._id ; END");
                 i++;
             }
             if (i == 3) {
-                sQLiteDatabase.execSQL("UPDATE accounts SET type = 'com.google' WHERE type == 'com.google.GAIA'");
+                sQLiteDatabase.execSQL(
+                        "UPDATE accounts SET type = 'com.google' WHERE type == 'com.google.GAIA'");
                 i++;
             }
             if (i == 4) {
-                sQLiteDatabase.execSQL("CREATE TABLE shared_accounts ( _id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, type TEXT NOT NULL, UNIQUE(name,type))");
+                sQLiteDatabase.execSQL(
+                        "CREATE TABLE shared_accounts ( _id INTEGER PRIMARY KEY AUTOINCREMENT, name"
+                            + " TEXT NOT NULL, type TEXT NOT NULL, UNIQUE(name,type))");
                 i++;
             }
             if (i == 5) {
@@ -211,11 +279,16 @@ public final class AccountsDb implements AutoCloseable {
                 i++;
             }
             if (i == 6) {
-                sQLiteDatabase.execSQL("ALTER TABLE accounts ADD COLUMN last_password_entry_time_millis_epoch DEFAULT 0");
+                sQLiteDatabase.execSQL(
+                        "ALTER TABLE accounts ADD COLUMN last_password_entry_time_millis_epoch"
+                            + " DEFAULT 0");
                 i++;
             }
             if (i == 7) {
-                sQLiteDatabase.execSQL("CREATE TABLE debug_table ( _id INTEGER,action_type TEXT NOT NULL, time DATETIME,caller_uid INTEGER NOT NULL,table_name TEXT NOT NULL,primary_key INTEGER PRIMARY KEY)");
+                sQLiteDatabase.execSQL(
+                        "CREATE TABLE debug_table ( _id INTEGER,action_type TEXT NOT NULL, time"
+                            + " DATETIME,caller_uid INTEGER NOT NULL,table_name TEXT NOT"
+                            + " NULL,primary_key INTEGER PRIMARY KEY)");
                 sQLiteDatabase.execSQL("CREATE INDEX timestamp_index ON debug_table (time)");
                 i++;
             }
@@ -223,7 +296,11 @@ public final class AccountsDb implements AutoCloseable {
                 Context context = this.mContext;
                 int i3 = this.mUserId;
                 Intent intent = AccountManagerService.ACCOUNTS_CHANGED_INTENT;
-                for (Map.Entry entry : ((LinkedHashMap) AccountManagerService.getAuthenticatorTypeAndUIDForUser(new AccountAuthenticatorCache(context), i3)).entrySet()) {
+                for (Map.Entry entry :
+                        ((LinkedHashMap)
+                                        AccountManagerService.getAuthenticatorTypeAndUIDForUser(
+                                                new AccountAuthenticatorCache(context), i3))
+                                .entrySet()) {
                     String str = (String) entry.getKey();
                     Integer num = (Integer) entry.getValue();
                     num.getClass();
@@ -242,7 +319,8 @@ public final class AccountsDb implements AutoCloseable {
 
     /* renamed from: -$$Nest$smresetDatabase, reason: not valid java name */
     public static void m143$$Nest$smresetDatabase(SQLiteDatabase sQLiteDatabase) {
-        Cursor rawQuery = sQLiteDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type ='table'", null);
+        Cursor rawQuery =
+                sQLiteDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type ='table'", null);
         while (rawQuery.moveToNext()) {
             try {
                 String string = rawQuery.getString(0);
@@ -253,7 +331,9 @@ public final class AccountsDb implements AutoCloseable {
             }
         }
         rawQuery.close();
-        rawQuery = sQLiteDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type ='trigger'", null);
+        rawQuery =
+                sQLiteDatabase.rawQuery(
+                        "SELECT name FROM sqlite_master WHERE type ='trigger'", null);
         while (rawQuery.moveToNext()) {
             try {
                 sQLiteDatabase.execSQL("DROP TRIGGER IF EXISTS " + rawQuery.getString(0));
@@ -273,18 +353,32 @@ public final class AccountsDb implements AutoCloseable {
         boolean exists = file2.exists();
         DeDatabaseHelper deDatabaseHelper = new DeDatabaseHelper(context, file2.getPath(), i);
         if (!exists && file.exists()) {
-            PreNDatabaseHelper preNDatabaseHelper = new PreNDatabaseHelper(context, file.getPath(), i);
+            PreNDatabaseHelper preNDatabaseHelper =
+                    new PreNDatabaseHelper(context, file.getPath(), i);
             preNDatabaseHelper.getWritableDatabase();
             preNDatabaseHelper.close();
             Log.i("AccountsDb", "Migrate pre-N database to DE preNDbFile=" + file);
             SQLiteDatabase writableDatabase = deDatabaseHelper.getWritableDatabase();
             writableDatabase.execSQL("ATTACH DATABASE '" + file.getPath() + "' AS preNDb");
             writableDatabase.beginTransaction();
-            writableDatabase.execSQL("INSERT INTO accounts(_id,name,type, previous_name, last_password_entry_time_millis_epoch) SELECT _id,name,type, previous_name, last_password_entry_time_millis_epoch FROM preNDb.accounts");
-            writableDatabase.execSQL("INSERT INTO shared_accounts(_id,name,type) SELECT _id,name,type FROM preNDb.shared_accounts");
-            writableDatabase.execSQL("INSERT INTO debug_table(_id,action_type,time,caller_uid,table_name,primary_key) SELECT _id,action_type,time,caller_uid,table_name,primary_key FROM preNDb.debug_table");
-            writableDatabase.execSQL("INSERT INTO grants(accounts_id,auth_token_type,uid) SELECT accounts_id,auth_token_type,uid FROM preNDb.grants");
-            writableDatabase.execSQL("INSERT INTO meta(key,value) SELECT key,value FROM preNDb.meta");
+            writableDatabase.execSQL(
+                    "INSERT INTO accounts(_id,name,type, previous_name,"
+                        + " last_password_entry_time_millis_epoch) SELECT _id,name,type,"
+                        + " previous_name, last_password_entry_time_millis_epoch FROM"
+                        + " preNDb.accounts");
+            writableDatabase.execSQL(
+                    "INSERT INTO shared_accounts(_id,name,type) SELECT _id,name,type FROM"
+                        + " preNDb.shared_accounts");
+            writableDatabase.execSQL(
+                    "INSERT INTO"
+                        + " debug_table(_id,action_type,time,caller_uid,table_name,primary_key)"
+                        + " SELECT _id,action_type,time,caller_uid,table_name,primary_key FROM"
+                        + " preNDb.debug_table");
+            writableDatabase.execSQL(
+                    "INSERT INTO grants(accounts_id,auth_token_type,uid) SELECT"
+                        + " accounts_id,auth_token_type,uid FROM preNDb.grants");
+            writableDatabase.execSQL(
+                    "INSERT INTO meta(key,value) SELECT key,value FROM preNDb.meta");
             writableDatabase.setTransactionSuccessful();
             writableDatabase.endTransaction();
             writableDatabase.execSQL("DETACH DATABASE preNDb");
@@ -298,7 +392,14 @@ public final class AccountsDb implements AutoCloseable {
         int i = CeDatabaseHelper.$r8$clinit;
         boolean exists = file.exists();
         if (Log.isLoggable("AccountsDb", 2)) {
-            Log.v("AccountsDb", "CeDatabaseHelper.create ceDatabaseFile=" + file + " oldDbExists=" + file2.exists() + " newDbExists=" + exists);
+            Log.v(
+                    "AccountsDb",
+                    "CeDatabaseHelper.create ceDatabaseFile="
+                            + file
+                            + " oldDbExists="
+                            + file2.exists()
+                            + " newDbExists="
+                            + exists);
         }
         boolean z = false;
         if (!exists && file2.exists()) {
@@ -322,7 +423,9 @@ public final class AccountsDb implements AutoCloseable {
                 Slog.e("AccountsDb", "Cannot remove pre-N db " + file2);
             }
         }
-        this.mDeDatabase.getWritableDatabase().execSQL("ATTACH DATABASE '" + file.getPath() + "' AS ceDb");
+        this.mDeDatabase
+                .getWritableDatabase()
+                .execSQL("ATTACH DATABASE '" + file.getPath() + "' AS ceDb");
         this.mDeDatabase.mCeAttached = true;
     }
 
@@ -336,19 +439,49 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final void deleteCeAccount(long j) {
-        this.mDeDatabase.getWritableDatabaseUserIsUnlocked().delete("ceDb.accounts", DeviceIdleController$$ExternalSyntheticOutline0.m(j, "_id="), null);
+        this.mDeDatabase
+                .getWritableDatabaseUserIsUnlocked()
+                .delete(
+                        "ceDb.accounts",
+                        DeviceIdleController$$ExternalSyntheticOutline0.m(j, "_id="),
+                        null);
     }
 
     public final boolean deleteDeAccount(long j) {
-        return this.mDeDatabase.getWritableDatabase().delete("accounts", DeviceIdleController$$ExternalSyntheticOutline0.m(j, "_id="), null) > 0;
+        return this.mDeDatabase
+                        .getWritableDatabase()
+                        .delete(
+                                "accounts",
+                                DeviceIdleController$$ExternalSyntheticOutline0.m(j, "_id="),
+                                null)
+                > 0;
     }
 
     public final void deleteMetaByAuthTypeAndUid(int i, String str) {
-        this.mDeDatabase.getWritableDatabase().delete("meta", "key=? AND value=?", new String[]{ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("auth_uid_for_type:", str), String.valueOf(i)});
+        this.mDeDatabase
+                .getWritableDatabase()
+                .delete(
+                        "meta",
+                        "key=? AND value=?",
+                        new String[] {
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    "auth_uid_for_type:", str),
+                            String.valueOf(i)
+                        });
     }
 
     public final void dumpDeAccountsTable(PrintWriter printWriter) {
-        Cursor query = this.mDeDatabase.getReadableDatabase().query("accounts", ACCOUNT_TYPE_COUNT_PROJECTION, null, null, "type", null, null);
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabase()
+                        .query(
+                                "accounts",
+                                ACCOUNT_TYPE_COUNT_PROJECTION,
+                                null,
+                                null,
+                                "type",
+                                null,
+                                null);
         while (query.moveToNext()) {
             try {
                 printWriter.println(query.getString(0) + "," + query.getString(1));
@@ -363,12 +496,26 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final void dumpDebugTable(PrintWriter printWriter) {
-        Cursor query = this.mDeDatabase.getReadableDatabase().query("debug_table", null, null, null, null, null, "time");
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabase()
+                        .query("debug_table", null, null, null, null, null, "time");
         printWriter.println("AccountId, Action_Type, timestamp, UID, TableName, Key");
         printWriter.println("Accounts History");
         while (query.moveToNext()) {
             try {
-                printWriter.println(query.getString(0) + "," + query.getString(1) + "," + query.getString(2) + "," + query.getString(3) + "," + query.getString(4) + "," + query.getString(5));
+                printWriter.println(
+                        query.getString(0)
+                                + ","
+                                + query.getString(1)
+                                + ","
+                                + query.getString(2)
+                                + ","
+                                + query.getString(3)
+                                + ","
+                                + query.getString(4)
+                                + ","
+                                + query.getString(5));
             } finally {
                 query.close();
             }
@@ -380,7 +527,17 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final String findAccountPasswordByNameAndType(String str, String str2) {
-        Cursor query = this.mDeDatabase.getReadableDatabaseUserIsUnlocked().query("ceDb.accounts", new String[]{"password"}, "name=? AND type=?", new String[]{str, str2}, null, null, null);
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabaseUserIsUnlocked()
+                        .query(
+                                "ceDb.accounts",
+                                new String[] {"password"},
+                                "name=? AND type=?",
+                                new String[] {str, str2},
+                                null,
+                                null,
+                                null);
         try {
             if (!query.moveToNext()) {
                 query.close();
@@ -402,7 +559,19 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final Integer findAccountVisibility(Account account, String str) {
-        Cursor query = this.mDeDatabase.getReadableDatabase().query(LauncherConfigurationInternal.KEY_SUPPLEMENT_SERVICE_PAGE_VISIBILITY_BOOLEAN, new String[]{"value"}, "accounts_id=(select _id FROM accounts WHERE name=? AND type=?) AND _package=? ", new String[]{account.name, account.type, str}, null, null, null);
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabase()
+                        .query(
+                                LauncherConfigurationInternal
+                                        .KEY_SUPPLEMENT_SERVICE_PAGE_VISIBILITY_BOOLEAN,
+                                new String[] {"value"},
+                                "accounts_id=(select _id FROM accounts WHERE name=? AND type=?) AND"
+                                    + " _package=? ",
+                                new String[] {account.name, account.type, str},
+                                null,
+                                null,
+                                null);
         try {
             if (query.moveToNext()) {
                 return Integer.valueOf(query.getInt(0));
@@ -415,13 +584,21 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final List findAllAccountGrants() {
-        Cursor rawQuery = this.mDeDatabase.getReadableDatabase().rawQuery("SELECT name, uid FROM accounts, grants WHERE accounts_id=_id", null);
+        Cursor rawQuery =
+                this.mDeDatabase
+                        .getReadableDatabase()
+                        .rawQuery(
+                                "SELECT name, uid FROM accounts, grants WHERE accounts_id=_id",
+                                null);
         if (rawQuery != null) {
             try {
                 if (rawQuery.moveToFirst()) {
                     ArrayList arrayList = new ArrayList();
                     do {
-                        arrayList.add(Pair.create(rawQuery.getString(0), Integer.valueOf(rawQuery.getInt(1))));
+                        arrayList.add(
+                                Pair.create(
+                                        rawQuery.getString(0),
+                                        Integer.valueOf(rawQuery.getInt(1))));
                     } while (rawQuery.moveToNext());
                     rawQuery.close();
                     return arrayList;
@@ -447,11 +624,20 @@ public final class AccountsDb implements AutoCloseable {
     public final Map findAllDeAccounts() {
         SQLiteDatabase readableDatabase = this.mDeDatabase.getReadableDatabase();
         LinkedHashMap linkedHashMap = new LinkedHashMap();
-        Cursor query = readableDatabase.query("accounts", new String[]{KnoxCustomManagerService.ID, "type", "name"}, null, null, null, null, KnoxCustomManagerService.ID);
+        Cursor query =
+                readableDatabase.query(
+                        "accounts",
+                        new String[] {KnoxCustomManagerService.ID, "type", "name"},
+                        null,
+                        null,
+                        null,
+                        null,
+                        KnoxCustomManagerService.ID);
         while (query.moveToNext()) {
             try {
                 long j = query.getLong(0);
-                linkedHashMap.put(Long.valueOf(j), new Account(query.getString(2), query.getString(1)));
+                linkedHashMap.put(
+                        Long.valueOf(j), new Account(query.getString(2), query.getString(1)));
             } catch (Throwable th) {
                 if (query != null) {
                     try {
@@ -470,7 +656,9 @@ public final class AccountsDb implements AutoCloseable {
     public final List findAllUidGrants() {
         SQLiteDatabase readableDatabase = this.mDeDatabase.getReadableDatabase();
         ArrayList arrayList = new ArrayList();
-        Cursor query = readableDatabase.query("grants", new String[]{"uid"}, null, null, "uid", null, null);
+        Cursor query =
+                readableDatabase.query(
+                        "grants", new String[] {"uid"}, null, null, "uid", null, null);
         while (query.moveToNext()) {
             try {
                 arrayList.add(Integer.valueOf(query.getInt(0)));
@@ -484,7 +672,12 @@ public final class AccountsDb implements AutoCloseable {
     public final Map findAllVisibilityValues() {
         SQLiteDatabase readableDatabase = this.mDeDatabase.getReadableDatabase();
         HashMap hashMap = new HashMap();
-        Cursor rawQuery = readableDatabase.rawQuery("SELECT visibility._package, visibility.value, accounts.name, accounts.type FROM visibility JOIN accounts ON accounts._id = visibility.accounts_id", null);
+        Cursor rawQuery =
+                readableDatabase.rawQuery(
+                        "SELECT visibility._package, visibility.value, accounts.name, accounts.type"
+                            + " FROM visibility JOIN accounts ON accounts._id ="
+                            + " visibility.accounts_id",
+                        null);
         while (rawQuery.moveToNext()) {
             try {
                 String string = rawQuery.getString(0);
@@ -506,9 +699,18 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final Map findAuthTokensByAccount(Account account) {
-        SQLiteDatabase readableDatabaseUserIsUnlocked = this.mDeDatabase.getReadableDatabaseUserIsUnlocked();
+        SQLiteDatabase readableDatabaseUserIsUnlocked =
+                this.mDeDatabase.getReadableDatabaseUserIsUnlocked();
         HashMap hashMap = new HashMap();
-        Cursor query = readableDatabaseUserIsUnlocked.query("ceDb.authtokens", COLUMNS_AUTHTOKENS_TYPE_AND_AUTHTOKEN, "accounts_id=(select _id FROM accounts WHERE name=? AND type=?)", new String[]{account.name, account.type}, null, null, null);
+        Cursor query =
+                readableDatabaseUserIsUnlocked.query(
+                        "ceDb.authtokens",
+                        COLUMNS_AUTHTOKENS_TYPE_AND_AUTHTOKEN,
+                        "accounts_id=(select _id FROM accounts WHERE name=? AND type=?)",
+                        new String[] {account.name, account.type},
+                        null,
+                        null,
+                        null);
         while (query.moveToNext()) {
             try {
                 hashMap.put(query.getString(0), query.getString(1));
@@ -520,7 +722,17 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final long findCeAccountId(Account account) {
-        Cursor query = this.mDeDatabase.getReadableDatabaseUserIsUnlocked().query("ceDb.accounts", new String[]{KnoxCustomManagerService.ID}, "name=? AND type=?", new String[]{account.name, account.type}, null, null, null);
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabaseUserIsUnlocked()
+                        .query(
+                                "ceDb.accounts",
+                                new String[] {KnoxCustomManagerService.ID},
+                                "name=? AND type=?",
+                                new String[] {account.name, account.type},
+                                null,
+                                null,
+                                null);
         try {
             if (!query.moveToNext()) {
                 query.close();
@@ -542,7 +754,17 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final long findDeAccountId(Account account) {
-        Cursor query = this.mDeDatabase.getReadableDatabase().query("accounts", new String[]{KnoxCustomManagerService.ID}, "name=? AND type=?", new String[]{account.name, account.type}, null, null, null);
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabase()
+                        .query(
+                                "accounts",
+                                new String[] {KnoxCustomManagerService.ID},
+                                "name=? AND type=?",
+                                new String[] {account.name, account.type},
+                                null,
+                                null,
+                                null);
         try {
             if (!query.moveToNext()) {
                 query.close();
@@ -564,7 +786,17 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final String findDeAccountPreviousName(Account account) {
-        Cursor query = this.mDeDatabase.getReadableDatabase().query("accounts", new String[]{"previous_name"}, "name=? AND type=?", new String[]{account.name, account.type}, null, null, null);
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabase()
+                        .query(
+                                "accounts",
+                                new String[] {"previous_name"},
+                                "name=? AND type=?",
+                                new String[] {account.name, account.type},
+                                null,
+                                null,
+                                null);
         try {
             if (!query.moveToNext()) {
                 query.close();
@@ -586,7 +818,17 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final long findExtrasIdByAccountId(long j, String str) {
-        Cursor query = this.mDeDatabase.getReadableDatabaseUserIsUnlocked().query("ceDb.extras", new String[]{KnoxCustomManagerService.ID}, "accounts_id=" + j + " AND key=?", new String[]{str}, null, null, null);
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabaseUserIsUnlocked()
+                        .query(
+                                "ceDb.extras",
+                                new String[] {KnoxCustomManagerService.ID},
+                                "accounts_id=" + j + " AND key=?",
+                                new String[] {str},
+                                null,
+                                null,
+                                null);
         try {
             if (query.moveToNext()) {
                 return query.getLong(0);
@@ -599,7 +841,17 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final Map findMetaAuthUid() {
-        Cursor query = this.mDeDatabase.getReadableDatabase().query("meta", new String[]{"key", "value"}, "key LIKE ?", new String[]{"auth_uid_for_type:%"}, null, null, "key");
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabase()
+                        .query(
+                                "meta",
+                                new String[] {"key", "value"},
+                                "key LIKE ?",
+                                new String[] {"auth_uid_for_type:%"},
+                                null,
+                                null,
+                                "key");
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         while (query.moveToNext()) {
             try {
@@ -608,7 +860,12 @@ public final class AccountsDb implements AutoCloseable {
                 if (!TextUtils.isEmpty(str) && !TextUtils.isEmpty(string)) {
                     linkedHashMap.put(str, Integer.valueOf(Integer.parseInt(query.getString(1))));
                 }
-                Slog.e("AccountsDb", "Auth type empty: " + TextUtils.isEmpty(str) + ", uid empty: " + TextUtils.isEmpty(string));
+                Slog.e(
+                        "AccountsDb",
+                        "Auth type empty: "
+                                + TextUtils.isEmpty(str)
+                                + ", uid empty: "
+                                + TextUtils.isEmpty(string));
             } catch (Throwable th) {
                 query.close();
                 throw th;
@@ -619,7 +876,17 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final long findSharedAccountId(Account account) {
-        Cursor query = this.mDeDatabase.getReadableDatabase().query("shared_accounts", new String[]{KnoxCustomManagerService.ID}, "name=? AND type=?", new String[]{account.name, account.type}, null, null, null);
+        Cursor query =
+                this.mDeDatabase
+                        .getReadableDatabase()
+                        .query(
+                                "shared_accounts",
+                                new String[] {KnoxCustomManagerService.ID},
+                                "name=? AND type=?",
+                                new String[] {account.name, account.type},
+                                null,
+                                null,
+                                null);
         try {
             if (query.moveToNext()) {
                 return query.getLong(0);
@@ -632,9 +899,18 @@ public final class AccountsDb implements AutoCloseable {
     }
 
     public final Map findUserExtrasForAccount(Account account) {
-        SQLiteDatabase readableDatabaseUserIsUnlocked = this.mDeDatabase.getReadableDatabaseUserIsUnlocked();
+        SQLiteDatabase readableDatabaseUserIsUnlocked =
+                this.mDeDatabase.getReadableDatabaseUserIsUnlocked();
         HashMap hashMap = new HashMap();
-        Cursor query = readableDatabaseUserIsUnlocked.query("ceDb.extras", COLUMNS_EXTRAS_KEY_AND_VALUE, "accounts_id=(select _id FROM accounts WHERE name=? AND type=?)", new String[]{account.name, account.type}, null, null, null);
+        Cursor query =
+                readableDatabaseUserIsUnlocked.query(
+                        "ceDb.extras",
+                        COLUMNS_EXTRAS_KEY_AND_VALUE,
+                        "accounts_id=(select _id FROM accounts WHERE name=? AND type=?)",
+                        new String[] {account.name, account.type},
+                        null,
+                        null,
+                        null);
         while (query.moveToNext()) {
             try {
                 hashMap.put(query.getString(0), query.getString(1));
@@ -658,12 +934,22 @@ public final class AccountsDb implements AutoCloseable {
         ArrayList arrayList = new ArrayList();
         Cursor cursor = null;
         try {
-            cursor = readableDatabase.query("shared_accounts", new String[]{"name", "type"}, null, null, null, null, null);
+            cursor =
+                    readableDatabase.query(
+                            "shared_accounts",
+                            new String[] {"name", "type"},
+                            null,
+                            null,
+                            null,
+                            null,
+                            null);
             if (cursor != null && cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndex("name");
                 int columnIndex2 = cursor.getColumnIndex("type");
                 do {
-                    arrayList.add(new Account(cursor.getString(columnIndex), cursor.getString(columnIndex2)));
+                    arrayList.add(
+                            new Account(
+                                    cursor.getString(columnIndex), cursor.getString(columnIndex2)));
                 } while (cursor.moveToNext());
             }
             return arrayList;
@@ -679,7 +965,11 @@ public final class AccountsDb implements AutoCloseable {
             return this.mDebugStatementForLogging;
         }
         try {
-            this.mDebugStatementForLogging = this.mDeDatabase.getWritableDatabase().compileStatement("INSERT OR REPLACE INTO debug_table VALUES (?,?,?,?,?,?)");
+            this.mDebugStatementForLogging =
+                    this.mDeDatabase
+                            .getWritableDatabase()
+                            .compileStatement(
+                                    "INSERT OR REPLACE INTO debug_table VALUES (?,?,?,?,?,?)");
             return this.mDebugStatementForLogging;
         } catch (SQLiteException e) {
             Log.e("AccountsDb", "Failed to open debug table" + e);
@@ -693,12 +983,14 @@ public final class AccountsDb implements AutoCloseable {
         contentValues.put(KnoxCustomManagerService.ID, Long.valueOf(j));
         contentValues.put("name", account.name);
         contentValues.put("type", account.type);
-        contentValues.put("last_password_entry_time_millis_epoch", Long.valueOf(System.currentTimeMillis()));
+        contentValues.put(
+                "last_password_entry_time_millis_epoch", Long.valueOf(System.currentTimeMillis()));
         return writableDatabase.insert("accounts", "name", contentValues);
     }
 
     public final long insertExtra(String str, long j, String str2) {
-        SQLiteDatabase writableDatabaseUserIsUnlocked = this.mDeDatabase.getWritableDatabaseUserIsUnlocked();
+        SQLiteDatabase writableDatabaseUserIsUnlocked =
+                this.mDeDatabase.getWritableDatabaseUserIsUnlocked();
         ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("key", str);
         m.put("accounts_id", Long.valueOf(j));
         m.put("value", str2);

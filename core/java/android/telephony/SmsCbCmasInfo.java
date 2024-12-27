@@ -3,6 +3,7 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -48,19 +49,21 @@ public final class SmsCbCmasInfo implements Parcelable {
     public static final int CMAS_URGENCY_EXPECTED = 1;
     public static final int CMAS_URGENCY_IMMEDIATE = 0;
     public static final int CMAS_URGENCY_UNKNOWN = -1;
-    public static final Parcelable.Creator<SmsCbCmasInfo> CREATOR = new Parcelable.Creator<SmsCbCmasInfo>() { // from class: android.telephony.SmsCbCmasInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmsCbCmasInfo createFromParcel(Parcel in) {
-            return new SmsCbCmasInfo(in);
-        }
+    public static final Parcelable.Creator<SmsCbCmasInfo> CREATOR =
+            new Parcelable.Creator<
+                    SmsCbCmasInfo>() { // from class: android.telephony.SmsCbCmasInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmsCbCmasInfo createFromParcel(Parcel in) {
+                    return new SmsCbCmasInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmsCbCmasInfo[] newArray(int size) {
-            return new SmsCbCmasInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmsCbCmasInfo[] newArray(int size) {
+                    return new SmsCbCmasInfo[size];
+                }
+            };
     private int mAlertHandling;
     private final int mCategory;
     private final int mCertainty;
@@ -74,30 +77,30 @@ public final class SmsCbCmasInfo implements Parcelable {
     private final int mUrgency;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Category {
-    }
+    public @interface Category {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Certainty {
-    }
+    public @interface Certainty {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Class {
-    }
+    public @interface Class {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResponseType {
-    }
+    public @interface ResponseType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Severity {
-    }
+    public @interface Severity {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Urgency {
-    }
+    public @interface Urgency {}
 
-    public SmsCbCmasInfo(int messageClass, int category, int responseType, int severity, int urgency, int certainty) {
+    public SmsCbCmasInfo(
+            int messageClass,
+            int category,
+            int responseType,
+            int severity,
+            int urgency,
+            int certainty) {
         this.mMessageClass = messageClass;
         this.mCategory = category;
         this.mResponseType = responseType;
@@ -165,7 +168,29 @@ public final class SmsCbCmasInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SmsCbCmasInfo{messageClass=" + this.mMessageClass + ", category=" + this.mCategory + ", responseType=" + this.mResponseType + ", severity=" + this.mSeverity + ", urgency=" + this.mUrgency + ", certainty=" + this.mCertainty + ", recordType=" + this.mRecordType + ", messageID=" + this.mMessageID + ", alertHandling=" + this.mAlertHandling + ", language=" + this.mLanguage + ", mMsgExpires=" + this.mMsgExpires + '}';
+        return "SmsCbCmasInfo{messageClass="
+                + this.mMessageClass
+                + ", category="
+                + this.mCategory
+                + ", responseType="
+                + this.mResponseType
+                + ", severity="
+                + this.mSeverity
+                + ", urgency="
+                + this.mUrgency
+                + ", certainty="
+                + this.mCertainty
+                + ", recordType="
+                + this.mRecordType
+                + ", messageID="
+                + this.mMessageID
+                + ", alertHandling="
+                + this.mAlertHandling
+                + ", language="
+                + this.mLanguage
+                + ", mMsgExpires="
+                + this.mMsgExpires
+                + '}';
     }
 
     @Override // android.os.Parcelable
@@ -173,7 +198,14 @@ public final class SmsCbCmasInfo implements Parcelable {
         return 0;
     }
 
-    public SmsCbCmasInfo(int messageClass, int category, int responseType, int severity, int urgency, int certainty, int recordTypeAll) {
+    public SmsCbCmasInfo(
+            int messageClass,
+            int category,
+            int responseType,
+            int severity,
+            int urgency,
+            int certainty,
+            int recordTypeAll) {
         this.mMessageClass = messageClass;
         this.mCategory = category;
         this.mResponseType = responseType;
@@ -183,7 +215,18 @@ public final class SmsCbCmasInfo implements Parcelable {
         this.mRecordType = recordTypeAll;
     }
 
-    public SmsCbCmasInfo(int messageClass, int category, int responseType, int severity, int urgency, int certainty, int messageID, int alertHandling, long msgExpires, int language, int recordTypeAll) {
+    public SmsCbCmasInfo(
+            int messageClass,
+            int category,
+            int responseType,
+            int severity,
+            int urgency,
+            int certainty,
+            int messageID,
+            int alertHandling,
+            long msgExpires,
+            int language,
+            int recordTypeAll) {
         this.mMessageClass = messageClass;
         this.mCategory = category;
         this.mResponseType = responseType;

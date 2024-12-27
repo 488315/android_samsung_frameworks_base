@@ -5,6 +5,7 @@ import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.RouteInfo;
 import android.text.TextUtils;
+
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,8 +21,7 @@ public final class LinkPropertiesUtils {
         public final List<T> removed = new ArrayList();
         public final List<T> added = new ArrayList();
 
-        public CompareResult() {
-        }
+        public CompareResult() {}
 
         public CompareResult(Collection<T> oldItems, Collection<T> newItems) {
             if (oldItems != null) {
@@ -37,7 +37,11 @@ public final class LinkPropertiesUtils {
         }
 
         public String toString() {
-            return "removed=[" + TextUtils.join(",", this.removed) + "] added=[" + TextUtils.join(",", this.added) + NavigationBarInflaterView.SIZE_MOD_END;
+            return "removed=["
+                    + TextUtils.join(",", this.removed)
+                    + "] added=["
+                    + TextUtils.join(",", this.added)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
     }
 
@@ -46,7 +50,8 @@ public final class LinkPropertiesUtils {
         public final List<T> removed = new ArrayList();
         public final List<T> updated = new ArrayList();
 
-        public CompareOrUpdateResult(Collection<T> oldItems, Collection<T> newItems, Function<T, K> keyCalculator) {
+        public CompareOrUpdateResult(
+                Collection<T> oldItems, Collection<T> newItems, Function<T, K> keyCalculator) {
             HashMap<K, T> updateTracker = new HashMap<>();
             if (oldItems != null) {
                 for (T oldItem : oldItems) {
@@ -69,12 +74,21 @@ public final class LinkPropertiesUtils {
         }
 
         public String toString() {
-            return "removed=[" + TextUtils.join(",", this.removed) + "] added=[" + TextUtils.join(",", this.added) + "] updated=[" + TextUtils.join(",", this.updated) + NavigationBarInflaterView.SIZE_MOD_END;
+            return "removed=["
+                    + TextUtils.join(",", this.removed)
+                    + "] added=["
+                    + TextUtils.join(",", this.added)
+                    + "] updated=["
+                    + TextUtils.join(",", this.updated)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
     }
 
-    public static CompareResult<LinkAddress> compareAddresses(LinkProperties left, LinkProperties right) {
-        return new CompareResult<>(left != null ? left.getLinkAddresses() : null, right != null ? right.getLinkAddresses() : null);
+    public static CompareResult<LinkAddress> compareAddresses(
+            LinkProperties left, LinkProperties right) {
+        return new CompareResult<>(
+                left != null ? left.getLinkAddresses() : null,
+                right != null ? right.getLinkAddresses() : null);
     }
 
     public static boolean isIdenticalAllLinkAddresses(LinkProperties left, LinkProperties right) {

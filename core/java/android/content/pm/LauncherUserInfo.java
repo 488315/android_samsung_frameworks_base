@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class LauncherUserInfo implements Parcelable {
-    public static final Parcelable.Creator<LauncherUserInfo> CREATOR = new Parcelable.Creator<LauncherUserInfo>() { // from class: android.content.pm.LauncherUserInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LauncherUserInfo createFromParcel(Parcel in) {
-            return new LauncherUserInfo(in);
-        }
+    public static final Parcelable.Creator<LauncherUserInfo> CREATOR =
+            new Parcelable.Creator<
+                    LauncherUserInfo>() { // from class: android.content.pm.LauncherUserInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LauncherUserInfo createFromParcel(Parcel in) {
+                    return new LauncherUserInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LauncherUserInfo[] newArray(int size) {
-            return new LauncherUserInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LauncherUserInfo[] newArray(int size) {
+                    return new LauncherUserInfo[size];
+                }
+            };
     private final int mUserSerialNumber;
     private final String mUserType;
 

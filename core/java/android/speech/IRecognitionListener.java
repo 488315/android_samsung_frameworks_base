@@ -35,52 +35,40 @@ public interface IRecognitionListener extends IInterface {
 
     public static class Default implements IRecognitionListener {
         @Override // android.speech.IRecognitionListener
-        public void onReadyForSpeech(Bundle params) throws RemoteException {
-        }
+        public void onReadyForSpeech(Bundle params) throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onBeginningOfSpeech() throws RemoteException {
-        }
+        public void onBeginningOfSpeech() throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onRmsChanged(float rmsdB) throws RemoteException {
-        }
+        public void onRmsChanged(float rmsdB) throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onBufferReceived(byte[] buffer) throws RemoteException {
-        }
+        public void onBufferReceived(byte[] buffer) throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onEndOfSpeech() throws RemoteException {
-        }
+        public void onEndOfSpeech() throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onError(int error) throws RemoteException {
-        }
+        public void onError(int error) throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onResults(Bundle results) throws RemoteException {
-        }
+        public void onResults(Bundle results) throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onPartialResults(Bundle results) throws RemoteException {
-        }
+        public void onPartialResults(Bundle results) throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onSegmentResults(Bundle results) throws RemoteException {
-        }
+        public void onSegmentResults(Bundle results) throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onEndOfSegmentedSession() throws RemoteException {
-        }
+        public void onEndOfSegmentedSession() throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onLanguageDetection(Bundle results) throws RemoteException {
-        }
+        public void onLanguageDetection(Bundle results) throws RemoteException {}
 
         @Override // android.speech.IRecognitionListener
-        public void onEvent(int eventType, Bundle params) throws RemoteException {
-        }
+        public void onEvent(int eventType, Bundle params) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -88,7 +76,7 @@ public interface IRecognitionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecognitionListener {
+    public abstract static class Stub extends Binder implements IRecognitionListener {
         public static final String DESCRIPTOR = "android.speech.IRecognitionListener";
         static final int TRANSACTION_onBeginningOfSpeech = 2;
         static final int TRANSACTION_onBufferReceived = 4;
@@ -160,7 +148,8 @@ public interface IRecognitionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

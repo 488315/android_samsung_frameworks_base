@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioConfig implements Parcelable {
-    public static final Parcelable.Creator<AudioConfig> CREATOR = new Parcelable.Creator<AudioConfig>() { // from class: android.media.audio.common.AudioConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioConfig createFromParcel(Parcel _aidl_source) {
-            AudioConfig _aidl_out = new AudioConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioConfig> CREATOR =
+            new Parcelable.Creator<
+                    AudioConfig>() { // from class: android.media.audio.common.AudioConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioConfig createFromParcel(Parcel _aidl_source) {
+                    AudioConfig _aidl_out = new AudioConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioConfig[] newArray(int _aidl_size) {
-            return new AudioConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioConfig[] newArray(int _aidl_size) {
+                    return new AudioConfig[_aidl_size];
+                }
+            };
     public AudioConfigBase base;
     public long frameCount = 0;
     public AudioOffloadInfo offloadInfo;
@@ -68,7 +71,8 @@ public class AudioConfig implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.offloadInfo = (AudioOffloadInfo) _aidl_parcel.readTypedObject(AudioOffloadInfo.CREATOR);
+            this.offloadInfo =
+                    (AudioOffloadInfo) _aidl_parcel.readTypedObject(AudioOffloadInfo.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -106,14 +110,20 @@ public class AudioConfig implements Parcelable {
             return false;
         }
         AudioConfig that = (AudioConfig) other;
-        if (Objects.deepEquals(this.base, that.base) && Objects.deepEquals(this.offloadInfo, that.offloadInfo) && Objects.deepEquals(java.lang.Long.valueOf(this.frameCount), java.lang.Long.valueOf(that.frameCount))) {
+        if (Objects.deepEquals(this.base, that.base)
+                && Objects.deepEquals(this.offloadInfo, that.offloadInfo)
+                && Objects.deepEquals(
+                        java.lang.Long.valueOf(this.frameCount),
+                        java.lang.Long.valueOf(that.frameCount))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.base, this.offloadInfo, java.lang.Long.valueOf(this.frameCount)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(this.base, this.offloadInfo, java.lang.Long.valueOf(this.frameCount))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

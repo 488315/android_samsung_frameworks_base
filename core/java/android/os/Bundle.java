@@ -1,12 +1,12 @@
 package android.os;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.Size;
 import android.util.SizeF;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,26 +29,26 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
     public static final Bundle STRIPPED;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HasBinderStatus {
-    }
+    public @interface HasBinderStatus {}
 
     static {
         EMPTY.mMap = ArrayMap.EMPTY;
         STRIPPED = new Bundle();
         STRIPPED.putInt("STRIPPED", 1);
-        CREATOR = new Parcelable.Creator<Bundle>() { // from class: android.os.Bundle.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Bundle createFromParcel(Parcel in) {
-                return in.readBundle();
-            }
+        CREATOR =
+                new Parcelable.Creator<Bundle>() { // from class: android.os.Bundle.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Bundle createFromParcel(Parcel in) {
+                        return in.readBundle();
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Bundle[] newArray(int size) {
-                return new Bundle[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Bundle[] newArray(int size) {
+                        return new Bundle[size];
+                    }
+                };
     }
 
     public Bundle() {
@@ -569,7 +569,9 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
     public <T> T[] getParcelableArray(String str, Class<T> cls) {
         unparcel();
         try {
-            return (T[]) ((Object[]) getValue(str, Parcelable[].class, (Class) Objects.requireNonNull(cls)));
+            return (T[])
+                    ((Object[])
+                            getValue(str, Parcelable[].class, (Class) Objects.requireNonNull(cls)));
         } catch (BadTypeParcelableException | ClassCastException e) {
             typeWarning(str, cls.getCanonicalName() + "[]", e);
             return null;
@@ -613,7 +615,8 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
     public <T> SparseArray<T> getSparseParcelableArray(String key, Class<? extends T> clazz) {
         unparcel();
         try {
-            return (SparseArray) getValue(key, SparseArray.class, (Class) Objects.requireNonNull(clazz));
+            return (SparseArray)
+                    getValue(key, SparseArray.class, (Class) Objects.requireNonNull(clazz));
         } catch (BadTypeParcelableException | ClassCastException e) {
             typeWarning(key, "SparseArray<" + clazz.getCanonicalName() + ">", e);
             return null;
@@ -730,7 +733,9 @@ public final class Bundle extends BaseBundle implements Cloneable, Parcelable {
             if (isEmptyParcel()) {
                 return "Bundle[EMPTY_PARCEL]";
             }
-            return "Bundle[mParcelledData.dataSize=" + this.mParcelledData.dataSize() + NavigationBarInflaterView.SIZE_MOD_END;
+            return "Bundle[mParcelledData.dataSize="
+                    + this.mParcelledData.dataSize()
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
         return "Bundle[" + this.mMap.toString() + NavigationBarInflaterView.SIZE_MOD_END;
     }

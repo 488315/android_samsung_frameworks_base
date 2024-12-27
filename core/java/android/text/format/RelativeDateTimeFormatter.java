@@ -6,6 +6,7 @@ import android.icu.text.RelativeDateTimeFormatter;
 import android.icu.util.Calendar;
 import android.icu.util.ULocale;
 import android.util.LruCache;
+
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -21,21 +22,30 @@ public final class RelativeDateTimeFormatter {
     public static final long WEEK_IN_MILLIS = 604800000;
     public static final long YEAR_IN_MILLIS = 31449600000L;
 
-    static class FormatterCache extends LruCache<String, android.icu.text.RelativeDateTimeFormatter> {
+    static class FormatterCache
+            extends LruCache<String, android.icu.text.RelativeDateTimeFormatter> {
         FormatterCache() {
             super(8);
         }
     }
 
-    private RelativeDateTimeFormatter() {
-    }
+    private RelativeDateTimeFormatter() {}
 
-    public static String getRelativeTimeSpanString(Locale locale, TimeZone tz, long time, long now, long minResolution, int flags) {
+    public static String getRelativeTimeSpanString(
+            Locale locale, TimeZone tz, long time, long now, long minResolution, int flags) {
         DisplayContext displayContext = DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE;
-        return getRelativeTimeSpanString(locale, tz, time, now, minResolution, flags, displayContext);
+        return getRelativeTimeSpanString(
+                locale, tz, time, now, minResolution, flags, displayContext);
     }
 
-    public static String getRelativeTimeSpanString(Locale locale, TimeZone tz, long time, long now, long minResolution, int flags, DisplayContext displayContext) {
+    public static String getRelativeTimeSpanString(
+            Locale locale,
+            TimeZone tz,
+            long time,
+            long now,
+            long minResolution,
+            int flags,
+            DisplayContext displayContext) {
         if (locale == null) {
             throw new NullPointerException("locale == null");
         }
@@ -44,10 +54,18 @@ public final class RelativeDateTimeFormatter {
         }
         ULocale icuLocale = ULocale.forLocale(locale);
         android.icu.util.TimeZone icuTimeZone = DateUtilsBridge.icuTimeZone(tz);
-        return getRelativeTimeSpanString(icuLocale, icuTimeZone, time, now, minResolution, flags, displayContext);
+        return getRelativeTimeSpanString(
+                icuLocale, icuTimeZone, time, now, minResolution, flags, displayContext);
     }
 
-    private static String getRelativeTimeSpanString(ULocale icuLocale, android.icu.util.TimeZone icuTimeZone, long time, long now, long minResolution, int flags, DisplayContext displayContext) {
+    private static String getRelativeTimeSpanString(
+            ULocale icuLocale,
+            android.icu.util.TimeZone icuTimeZone,
+            long time,
+            long now,
+            long minResolution,
+            int flags,
+            DisplayContext displayContext) {
         RelativeDateTimeFormatter.Style style;
         RelativeDateTimeFormatter.Direction direction;
         int flags2;
@@ -69,7 +87,8 @@ public final class RelativeDateTimeFormatter {
         if (past) {
             direction = RelativeDateTimeFormatter.Direction.LAST;
         } else {
-            RelativeDateTimeFormatter.Direction direction3 = RelativeDateTimeFormatter.Direction.NEXT;
+            RelativeDateTimeFormatter.Direction direction3 =
+                    RelativeDateTimeFormatter.Direction.NEXT;
             direction = direction3;
         }
         if (duration >= 60000 || minResolution >= 60000) {
@@ -90,7 +109,8 @@ public final class RelativeDateTimeFormatter {
                 relative = true;
             } else if (duration < 604800000 && minResolution < 604800000) {
                 count = Math.abs(dayDistance(icuTimeZone, time, now));
-                RelativeDateTimeFormatter.RelativeUnit unit3 = RelativeDateTimeFormatter.RelativeUnit.DAYS;
+                RelativeDateTimeFormatter.RelativeUnit unit3 =
+                        RelativeDateTimeFormatter.RelativeUnit.DAYS;
                 if (count == 2) {
                     if (past) {
                         synchronized (CACHED_FORMATTERS) {
@@ -101,7 +121,13 @@ public final class RelativeDateTimeFormatter {
                                 }
                                 try {
                                     unit2 = unit3;
-                                    str = getFormatter(icuLocale, style, displayContext).format(RelativeDateTimeFormatter.Direction.LAST_2, RelativeDateTimeFormatter.AbsoluteUnit.DAY);
+                                    str =
+                                            getFormatter(icuLocale, style, displayContext)
+                                                    .format(
+                                                            RelativeDateTimeFormatter.Direction
+                                                                    .LAST_2,
+                                                            RelativeDateTimeFormatter.AbsoluteUnit
+                                                                    .DAY);
                                 } catch (Throwable th2) {
                                     th = th2;
                                     throw th;
@@ -113,7 +139,11 @@ public final class RelativeDateTimeFormatter {
                     } else {
                         unit2 = unit3;
                         synchronized (CACHED_FORMATTERS) {
-                            str = getFormatter(icuLocale, style, displayContext).format(RelativeDateTimeFormatter.Direction.NEXT_2, RelativeDateTimeFormatter.AbsoluteUnit.DAY);
+                            str =
+                                    getFormatter(icuLocale, style, displayContext)
+                                            .format(
+                                                    RelativeDateTimeFormatter.Direction.NEXT_2,
+                                                    RelativeDateTimeFormatter.AbsoluteUnit.DAY);
                         }
                     }
                     if (str != null && !str.isEmpty()) {
@@ -122,14 +152,17 @@ public final class RelativeDateTimeFormatter {
                 } else {
                     unit2 = unit3;
                     if (count == 1) {
-                        RelativeDateTimeFormatter.AbsoluteUnit aunit2 = RelativeDateTimeFormatter.AbsoluteUnit.DAY;
+                        RelativeDateTimeFormatter.AbsoluteUnit aunit2 =
+                                RelativeDateTimeFormatter.AbsoluteUnit.DAY;
                         aunit = aunit2;
                         direction2 = direction4;
                         relative = false;
                         unit = unit2;
                     } else if (count == 0) {
-                        RelativeDateTimeFormatter.AbsoluteUnit aunit3 = RelativeDateTimeFormatter.AbsoluteUnit.DAY;
-                        RelativeDateTimeFormatter.Direction direction5 = RelativeDateTimeFormatter.Direction.THIS;
+                        RelativeDateTimeFormatter.AbsoluteUnit aunit3 =
+                                RelativeDateTimeFormatter.AbsoluteUnit.DAY;
+                        RelativeDateTimeFormatter.Direction direction5 =
+                                RelativeDateTimeFormatter.Direction.THIS;
                         direction2 = direction5;
                         aunit = aunit3;
                         relative = false;
@@ -142,11 +175,13 @@ public final class RelativeDateTimeFormatter {
                 relative = true;
             } else {
                 if (minResolution != 604800000) {
-                    Calendar timeCalendar = DateUtilsBridge.createIcuCalendar(icuTimeZone, icuLocale, time);
+                    Calendar timeCalendar =
+                            DateUtilsBridge.createIcuCalendar(icuTimeZone, icuLocale, time);
                     if ((flags & 12) != 0) {
                         flags2 = flags;
                     } else {
-                        Calendar nowCalendar = DateUtilsBridge.createIcuCalendar(icuTimeZone, icuLocale, now);
+                        Calendar nowCalendar =
+                                DateUtilsBridge.createIcuCalendar(icuTimeZone, icuLocale, now);
                         if (timeCalendar.get(1) != nowCalendar.get(1)) {
                             flags2 = flags | 4;
                         } else {
@@ -177,7 +212,8 @@ public final class RelativeDateTimeFormatter {
                 th = th4;
             }
             try {
-                android.icu.text.RelativeDateTimeFormatter formatter = getFormatter(icuLocale, style, displayContext);
+                android.icu.text.RelativeDateTimeFormatter formatter =
+                        getFormatter(icuLocale, style, displayContext);
                 if (relative) {
                     return formatter.format(count, direction2, unit);
                 }
@@ -189,7 +225,14 @@ public final class RelativeDateTimeFormatter {
         }
     }
 
-    public static String getRelativeDateTimeString(Locale locale, TimeZone tz, long time, long now, long minResolution, long transitionResolution, int flags) {
+    public static String getRelativeDateTimeString(
+            Locale locale,
+            TimeZone tz,
+            long time,
+            long now,
+            long minResolution,
+            long transitionResolution,
+            int flags) {
         long transitionResolution2;
         RelativeDateTimeFormatter.Style style;
         int i;
@@ -231,7 +274,15 @@ public final class RelativeDateTimeFormatter {
             i = 1;
             timeCalendar = timeCalendar2;
             style2 = style;
-            dateClause = getRelativeTimeSpanString(icuLocale, icuTimeZone, time, now, minResolution2, flags, DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE);
+            dateClause =
+                    getRelativeTimeSpanString(
+                            icuLocale,
+                            icuTimeZone,
+                            time,
+                            now,
+                            minResolution2,
+                            flags,
+                            DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE);
         } else {
             i = 1;
             timeCalendar = timeCalendar2;
@@ -241,28 +292,41 @@ public final class RelativeDateTimeFormatter {
             } else {
                 flags2 = Sensor.TYPE_GRIP;
             }
-            dateClause = DateTimeFormat.format(icuLocale, timeCalendar, flags2, DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE);
+            dateClause =
+                    DateTimeFormat.format(
+                            icuLocale,
+                            timeCalendar,
+                            flags2,
+                            DisplayContext.CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE);
         }
-        String timeClause = DateTimeFormat.format(icuLocale, timeCalendar, i, DisplayContext.CAPITALIZATION_NONE);
+        String timeClause =
+                DateTimeFormat.format(
+                        icuLocale, timeCalendar, i, DisplayContext.CAPITALIZATION_NONE);
         DisplayContext capitalizationContext = DisplayContext.CAPITALIZATION_NONE;
         synchronized (CACHED_FORMATTERS) {
-            combineDateAndTime = getFormatter(icuLocale, style2, capitalizationContext).combineDateAndTime(dateClause, timeClause);
+            combineDateAndTime =
+                    getFormatter(icuLocale, style2, capitalizationContext)
+                            .combineDateAndTime(dateClause, timeClause);
         }
         return combineDateAndTime;
     }
 
-    private static android.icu.text.RelativeDateTimeFormatter getFormatter(ULocale locale, RelativeDateTimeFormatter.Style style, DisplayContext displayContext) {
+    private static android.icu.text.RelativeDateTimeFormatter getFormatter(
+            ULocale locale, RelativeDateTimeFormatter.Style style, DisplayContext displayContext) {
         String key = locale + "\t" + style + "\t" + displayContext;
         android.icu.text.RelativeDateTimeFormatter formatter = CACHED_FORMATTERS.get(key);
         if (formatter == null) {
-            android.icu.text.RelativeDateTimeFormatter formatter2 = android.icu.text.RelativeDateTimeFormatter.getInstance(locale, null, style, displayContext);
+            android.icu.text.RelativeDateTimeFormatter formatter2 =
+                    android.icu.text.RelativeDateTimeFormatter.getInstance(
+                            locale, null, style, displayContext);
             CACHED_FORMATTERS.put(key, formatter2);
             return formatter2;
         }
         return formatter;
     }
 
-    private static int dayDistance(android.icu.util.TimeZone icuTimeZone, long startTime, long endTime) {
+    private static int dayDistance(
+            android.icu.util.TimeZone icuTimeZone, long startTime, long endTime) {
         return julianDay(icuTimeZone, endTime) - julianDay(icuTimeZone, startTime);
     }
 

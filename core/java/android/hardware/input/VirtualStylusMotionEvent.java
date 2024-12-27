@@ -3,6 +3,7 @@ package android.hardware.input;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,19 +14,21 @@ public final class VirtualStylusMotionEvent implements Parcelable {
     public static final int ACTION_MOVE = 2;
     public static final int ACTION_UNKNOWN = -1;
     public static final int ACTION_UP = 1;
-    public static final Parcelable.Creator<VirtualStylusMotionEvent> CREATOR = new Parcelable.Creator<VirtualStylusMotionEvent>() { // from class: android.hardware.input.VirtualStylusMotionEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualStylusMotionEvent createFromParcel(Parcel source) {
-            return new VirtualStylusMotionEvent(source);
-        }
+    public static final Parcelable.Creator<VirtualStylusMotionEvent> CREATOR =
+            new Parcelable.Creator<VirtualStylusMotionEvent>() { // from class:
+                // android.hardware.input.VirtualStylusMotionEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualStylusMotionEvent createFromParcel(Parcel source) {
+                    return new VirtualStylusMotionEvent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualStylusMotionEvent[] newArray(int size) {
-            return new VirtualStylusMotionEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualStylusMotionEvent[] newArray(int size) {
+                    return new VirtualStylusMotionEvent[size];
+                }
+            };
     private static final int PRESSURE_MAX = 255;
     private static final int PRESSURE_MIN = 0;
     private static final int TILT_MAX = 90;
@@ -43,14 +46,20 @@ public final class VirtualStylusMotionEvent implements Parcelable {
     private final int mY;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ToolType {
-    }
+    public @interface ToolType {}
 
-    private VirtualStylusMotionEvent(int toolType, int action, int x, int y, int pressure, int tiltX, int tiltY, long eventTimeNanos) {
+    private VirtualStylusMotionEvent(
+            int toolType,
+            int action,
+            int x,
+            int y,
+            int pressure,
+            int tiltX,
+            int tiltY,
+            long eventTimeNanos) {
         this.mToolType = toolType;
         this.mAction = action;
         this.mX = x;
@@ -135,18 +144,30 @@ public final class VirtualStylusMotionEvent implements Parcelable {
 
         public VirtualStylusMotionEvent build() {
             if (this.mToolType == 0) {
-                throw new IllegalArgumentException("Cannot build stylus motion event with unset tool type");
+                throw new IllegalArgumentException(
+                        "Cannot build stylus motion event with unset tool type");
             }
             if (this.mAction == -1) {
-                throw new IllegalArgumentException("Cannot build stylus motion event with unset action");
+                throw new IllegalArgumentException(
+                        "Cannot build stylus motion event with unset action");
             }
             if (!this.mIsXSet) {
-                throw new IllegalArgumentException("Cannot build stylus motion event with unset x-axis location");
+                throw new IllegalArgumentException(
+                        "Cannot build stylus motion event with unset x-axis location");
             }
             if (!this.mIsYSet) {
-                throw new IllegalArgumentException("Cannot build stylus motion event with unset y-axis location");
+                throw new IllegalArgumentException(
+                        "Cannot build stylus motion event with unset y-axis location");
             }
-            return new VirtualStylusMotionEvent(this.mToolType, this.mAction, this.mX, this.mY, this.mPressure, this.mTiltX, this.mTiltY, this.mEventTimeNanos);
+            return new VirtualStylusMotionEvent(
+                    this.mToolType,
+                    this.mAction,
+                    this.mX,
+                    this.mY,
+                    this.mPressure,
+                    this.mTiltX,
+                    this.mTiltY,
+                    this.mEventTimeNanos);
         }
 
         public Builder setToolType(int toolType) {

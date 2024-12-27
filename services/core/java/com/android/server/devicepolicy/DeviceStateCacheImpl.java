@@ -2,7 +2,9 @@ package com.android.server.devicepolicy;
 
 import android.app.admin.DeviceStateCache;
 import android.util.IndentingPrintWriter;
+
 import com.android.server.desktopmode.DesktopModeService$$ExternalSyntheticOutline0;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,18 +21,27 @@ public final class DeviceStateCacheImpl extends DeviceStateCache {
     public final void dump(IndentingPrintWriter indentingPrintWriter) {
         indentingPrintWriter.println("Device state cache:");
         indentingPrintWriter.increaseIndent();
-        StringBuilder m = DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("Device provisioned: "), this.mIsDeviceProvisioned, indentingPrintWriter, "Device Owner Type: ");
+        StringBuilder m =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Device provisioned: "),
+                        this.mIsDeviceProvisioned,
+                        indentingPrintWriter,
+                        "Device Owner Type: ");
         m.append(this.mDeviceOwnerType.get());
         indentingPrintWriter.println(m.toString());
         indentingPrintWriter.println("Has PO:");
         for (Integer num : ((ConcurrentHashMap) this.mHasProfileOwner).keySet()) {
-            indentingPrintWriter.println("User " + num + ": " + ((ConcurrentHashMap) this.mHasProfileOwner).get(num));
+            indentingPrintWriter.println(
+                    "User " + num + ": " + ((ConcurrentHashMap) this.mHasProfileOwner).get(num));
         }
         indentingPrintWriter.decreaseIndent();
     }
 
     public final boolean hasAffiliationWithDevice(int i) {
-        return ((Boolean) ((ConcurrentHashMap) this.mAffiliationWithDevice).getOrDefault(Integer.valueOf(i), Boolean.FALSE)).booleanValue();
+        return ((Boolean)
+                        ((ConcurrentHashMap) this.mAffiliationWithDevice)
+                                .getOrDefault(Integer.valueOf(i), Boolean.FALSE))
+                .booleanValue();
     }
 
     public final boolean isDeviceProvisioned() {
@@ -38,7 +49,11 @@ public final class DeviceStateCacheImpl extends DeviceStateCache {
     }
 
     public final boolean isUserOrganizationManaged(int i) {
-        return ((Boolean) ((ConcurrentHashMap) this.mHasProfileOwner).getOrDefault(Integer.valueOf(i), Boolean.FALSE)).booleanValue() || this.mDeviceOwnerType.get() == 0;
+        return ((Boolean)
+                                ((ConcurrentHashMap) this.mHasProfileOwner)
+                                        .getOrDefault(Integer.valueOf(i), Boolean.FALSE))
+                        .booleanValue()
+                || this.mDeviceOwnerType.get() == 0;
     }
 
     public final void setHasAffiliationWithDevice(int i, Boolean bool) {

@@ -4,25 +4,27 @@ import android.content.ComponentName;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public class WaitResult implements Parcelable {
-    public static final Parcelable.Creator<WaitResult> CREATOR = new Parcelable.Creator<WaitResult>() { // from class: android.app.WaitResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WaitResult createFromParcel(Parcel source) {
-            return new WaitResult(source);
-        }
+    public static final Parcelable.Creator<WaitResult> CREATOR =
+            new Parcelable.Creator<WaitResult>() { // from class: android.app.WaitResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WaitResult createFromParcel(Parcel source) {
+                    return new WaitResult(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WaitResult[] newArray(int size) {
-            return new WaitResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WaitResult[] newArray(int size) {
+                    return new WaitResult[size];
+                }
+            };
     public static final int INVALID_DELAY = -1;
     public static final int LAUNCH_STATE_COLD = 1;
     public static final int LAUNCH_STATE_HOT = 3;
@@ -36,11 +38,9 @@ public class WaitResult implements Parcelable {
     public ComponentName who;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LaunchState {
-    }
+    public @interface LaunchState {}
 
-    public WaitResult() {
-    }
+    public WaitResult() {}
 
     @Override // android.os.Parcelable
     public int describeContents() {

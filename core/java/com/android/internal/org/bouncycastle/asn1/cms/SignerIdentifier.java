@@ -37,7 +37,8 @@ public class SignerIdentifier extends ASN1Object implements ASN1Choice {
         if (o instanceof ASN1Primitive) {
             return new SignerIdentifier((ASN1Primitive) o);
         }
-        throw new IllegalArgumentException("Illegal object in SignerIdentifier: " + o.getClass().getName());
+        throw new IllegalArgumentException(
+                "Illegal object in SignerIdentifier: " + o.getClass().getName());
     }
 
     public boolean isTagged() {
@@ -51,7 +52,8 @@ public class SignerIdentifier extends ASN1Object implements ASN1Choice {
         return this.id;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.id.toASN1Primitive();
     }

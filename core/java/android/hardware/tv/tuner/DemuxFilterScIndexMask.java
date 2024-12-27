@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DemuxFilterScIndexMask implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterScIndexMask> CREATOR = new Parcelable.Creator<DemuxFilterScIndexMask>() { // from class: android.hardware.tv.tuner.DemuxFilterScIndexMask.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterScIndexMask createFromParcel(Parcel _aidl_source) {
-            return new DemuxFilterScIndexMask(_aidl_source);
-        }
+    public static final Parcelable.Creator<DemuxFilterScIndexMask> CREATOR =
+            new Parcelable.Creator<DemuxFilterScIndexMask>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterScIndexMask.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterScIndexMask createFromParcel(Parcel _aidl_source) {
+                    return new DemuxFilterScIndexMask(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterScIndexMask[] newArray(int _aidl_size) {
-            return new DemuxFilterScIndexMask[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterScIndexMask[] newArray(int _aidl_size) {
+                    return new DemuxFilterScIndexMask[_aidl_size];
+                }
+            };
     public static final int scAvc = 1;
     public static final int scHevc = 2;
     public static final int scIndex = 0;
@@ -158,7 +160,12 @@ public final class DemuxFilterScIndexMask implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

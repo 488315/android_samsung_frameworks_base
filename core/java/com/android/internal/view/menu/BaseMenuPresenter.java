@@ -4,8 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.internal.view.menu.MenuPresenter;
-import com.android.internal.view.menu.MenuView;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -40,7 +39,8 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
     @Override // com.android.internal.view.menu.MenuPresenter
     public MenuView getMenuView(ViewGroup root) {
         if (this.mMenuView == null) {
-            this.mMenuView = (MenuView) this.mSystemInflater.inflate(this.mMenuLayoutRes, root, false);
+            this.mMenuView =
+                    (MenuView) this.mSystemInflater.inflate(this.mMenuLayoutRes, root, false);
             this.mMenuView.initialize(this.mMenu);
             updateMenuView(true);
         }
@@ -63,7 +63,10 @@ public abstract class BaseMenuPresenter implements MenuPresenter {
                 MenuItemImpl item = visibleItems.get(i);
                 if (shouldIncludeItem(childIndex, item)) {
                     View childAt = parent.getChildAt(childIndex);
-                    MenuItemImpl oldItem = childAt instanceof MenuView.ItemView ? ((MenuView.ItemView) childAt).getItemData() : null;
+                    MenuItemImpl oldItem =
+                            childAt instanceof MenuView.ItemView
+                                    ? ((MenuView.ItemView) childAt).getItemData()
+                                    : null;
                     View itemView = getItemView(item, childAt, parent);
                     if (item != oldItem) {
                         itemView.setPressed(false);

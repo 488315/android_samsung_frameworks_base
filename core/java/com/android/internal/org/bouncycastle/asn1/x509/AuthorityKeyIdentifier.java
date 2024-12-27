@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1EncodableVector;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
@@ -14,6 +15,7 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.math.BigInteger;
 import java.util.Enumeration;
 
@@ -38,7 +40,8 @@ public class AuthorityKeyIdentifier extends ASN1Object {
     }
 
     public static AuthorityKeyIdentifier fromExtensions(Extensions extensions) {
-        return getInstance(Extensions.getExtensionParsedValue(extensions, Extension.authorityKeyIdentifier));
+        return getInstance(
+                Extensions.getExtensionParsedValue(extensions, Extension.authorityKeyIdentifier));
     }
 
     protected AuthorityKeyIdentifier(ASN1Sequence seq) {
@@ -76,7 +79,8 @@ public class AuthorityKeyIdentifier extends ASN1Object {
         this.keyidentifier = new DEROctetString(resBuf);
     }
 
-    public AuthorityKeyIdentifier(SubjectPublicKeyInfo spki, GeneralNames name, BigInteger serialNumber) {
+    public AuthorityKeyIdentifier(
+            SubjectPublicKeyInfo spki, GeneralNames name, BigInteger serialNumber) {
         this.keyidentifier = null;
         this.certissuer = null;
         this.certserno = null;
@@ -99,7 +103,8 @@ public class AuthorityKeyIdentifier extends ASN1Object {
         this(keyIdentifier, (GeneralNames) null, (BigInteger) null);
     }
 
-    public AuthorityKeyIdentifier(byte[] keyIdentifier, GeneralNames name, BigInteger serialNumber) {
+    public AuthorityKeyIdentifier(
+            byte[] keyIdentifier, GeneralNames name, BigInteger serialNumber) {
         this.keyidentifier = null;
         this.certissuer = null;
         this.certserno = null;
@@ -126,7 +131,8 @@ public class AuthorityKeyIdentifier extends ASN1Object {
         return null;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         if (this.keyidentifier != null) {
@@ -142,7 +148,10 @@ public class AuthorityKeyIdentifier extends ASN1Object {
     }
 
     public String toString() {
-        String keyID = this.keyidentifier != null ? Hex.toHexString(this.keyidentifier.getOctets()) : "null";
+        String keyID =
+                this.keyidentifier != null
+                        ? Hex.toHexString(this.keyidentifier.getOctets())
+                        : "null";
         return "AuthorityKeyIdentifier: KeyID(" + keyID + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

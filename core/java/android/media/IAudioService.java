@@ -5,31 +5,6 @@ import android.app.ActivityThread;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothDevice;
 import android.content.AttributionSource;
-import android.media.IAudioDeviceVolumeDispatcher;
-import android.media.IAudioFocusDispatcher;
-import android.media.IAudioModeDispatcher;
-import android.media.IAudioRoutesObserver;
-import android.media.IAudioServerStateDispatcher;
-import android.media.ICapturePresetDevicesRoleDispatcher;
-import android.media.ICommunicationDeviceDispatcher;
-import android.media.IDeviceVolumeBehaviorDispatcher;
-import android.media.IDevicesForAttributesCallback;
-import android.media.ILoudnessCodecUpdatesDispatcher;
-import android.media.IMuteAwaitConnectionCallback;
-import android.media.IPlaybackConfigDispatcher;
-import android.media.IPreferredMixerAttributesDispatcher;
-import android.media.IRecordingConfigDispatcher;
-import android.media.IRingtonePlayer;
-import android.media.ISpatializerCallback;
-import android.media.ISpatializerHeadToSoundStagePoseCallback;
-import android.media.ISpatializerHeadTrackerAvailableCallback;
-import android.media.ISpatializerHeadTrackingModeCallback;
-import android.media.ISpatializerOutputCallback;
-import android.media.IStrategyNonDefaultDevicesDispatcher;
-import android.media.IStrategyPreferredDevicesDispatcher;
-import android.media.IStreamAliasingDispatcher;
-import android.media.IVolumeController;
-import android.media.PlayerBase;
 import android.media.audiopolicy.AudioMixingRule;
 import android.media.audiopolicy.IAudioPolicyCallback;
 import android.media.projection.IMediaProjection;
@@ -43,36 +18,60 @@ import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.view.KeyEvent;
+
 import java.util.List;
 import java.util.Map;
 
 /* loaded from: classes2.dex */
 public interface IAudioService extends IInterface {
-    int abandonAudioFocus(IAudioFocusDispatcher iAudioFocusDispatcher, String str, AudioAttributes audioAttributes, String str2) throws RemoteException;
+    int abandonAudioFocus(
+            IAudioFocusDispatcher iAudioFocusDispatcher,
+            String str,
+            AudioAttributes audioAttributes,
+            String str2)
+            throws RemoteException;
 
-    int abandonAudioFocusForTest(IAudioFocusDispatcher iAudioFocusDispatcher, String str, AudioAttributes audioAttributes, String str2) throws RemoteException;
+    int abandonAudioFocusForTest(
+            IAudioFocusDispatcher iAudioFocusDispatcher,
+            String str,
+            AudioAttributes audioAttributes,
+            String str2)
+            throws RemoteException;
 
     void addAssistantServicesUids(int[] iArr) throws RemoteException;
 
-    void addLoudnessCodecInfo(int i, int i2, LoudnessCodecInfo loudnessCodecInfo) throws RemoteException;
+    void addLoudnessCodecInfo(int i, int i2, LoudnessCodecInfo loudnessCodecInfo)
+            throws RemoteException;
 
-    int addMixForPolicy(android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
+    int addMixForPolicy(
+            android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig,
+            IAudioPolicyCallback iAudioPolicyCallback)
+            throws RemoteException;
 
-    void addOnDevicesForAttributesChangedListener(AudioAttributes audioAttributes, IDevicesForAttributesCallback iDevicesForAttributesCallback) throws RemoteException;
+    void addOnDevicesForAttributesChangedListener(
+            AudioAttributes audioAttributes,
+            IDevicesForAttributesCallback iDevicesForAttributesCallback)
+            throws RemoteException;
 
     void addPackage(int i, String str) throws RemoteException;
 
-    void addSpatializerCompatibleAudioDevice(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    void addSpatializerCompatibleAudioDevice(AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     void adjustStreamVolume(int i, int i2, int i3, String str) throws RemoteException;
 
-    void adjustStreamVolumeForUid(int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6) throws RemoteException;
+    void adjustStreamVolumeForUid(
+            int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6)
+            throws RemoteException;
 
-    void adjustStreamVolumeWithAttribution(int i, int i2, int i3, String str, String str2) throws RemoteException;
+    void adjustStreamVolumeWithAttribution(int i, int i2, int i3, String str, String str2)
+            throws RemoteException;
 
     void adjustSuggestedStreamVolume(int i, int i2, int i3) throws RemoteException;
 
-    void adjustSuggestedStreamVolumeForUid(int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6) throws RemoteException;
+    void adjustSuggestedStreamVolumeForUid(
+            int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6)
+            throws RemoteException;
 
     void adjustVolume(int i, int i2) throws RemoteException;
 
@@ -80,23 +79,34 @@ public interface IAudioService extends IInterface {
 
     boolean areNavigationRepeatSoundEffectsEnabled() throws RemoteException;
 
-    boolean canBeSpatialized(AudioAttributes audioAttributes, AudioFormat audioFormat) throws RemoteException;
+    boolean canBeSpatialized(AudioAttributes audioAttributes, AudioFormat audioFormat)
+            throws RemoteException;
 
-    void cancelMuteAwaitConnection(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    void cancelMuteAwaitConnection(AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     int clearFadeManagerConfigurationForFocusLoss() throws RemoteException;
 
     int clearPreferredDevicesForCapturePreset(int i) throws RemoteException;
 
-    int clearPreferredMixerAttributes(AudioAttributes audioAttributes, int i) throws RemoteException;
+    int clearPreferredMixerAttributes(AudioAttributes audioAttributes, int i)
+            throws RemoteException;
 
     void disableSafeMediaVolume(String str) throws RemoteException;
 
     void dismissVolumePanel() throws RemoteException;
 
-    int dispatchFocusChange(AudioFocusInfo audioFocusInfo, int i, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
+    int dispatchFocusChange(
+            AudioFocusInfo audioFocusInfo, int i, IAudioPolicyCallback iAudioPolicyCallback)
+            throws RemoteException;
 
-    int dispatchFocusChangeWithFade(AudioFocusInfo audioFocusInfo, int i, IAudioPolicyCallback iAudioPolicyCallback, List<AudioFocusInfo> list, FadeManagerConfiguration fadeManagerConfiguration) throws RemoteException;
+    int dispatchFocusChangeWithFade(
+            AudioFocusInfo audioFocusInfo,
+            int i,
+            IAudioPolicyCallback iAudioPolicyCallback,
+            List<AudioFocusInfo> list,
+            FadeManagerConfiguration fadeManagerConfiguration)
+            throws RemoteException;
 
     boolean enterAudioFocusFreezeForTest(IBinder iBinder, int[] iArr) throws RemoteException;
 
@@ -120,7 +130,8 @@ public interface IAudioService extends IInterface {
 
     int getActualHeadTrackingMode() throws RemoteException;
 
-    long getAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    long getAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     int getAllowedCapturePolicy() throws RemoteException;
 
@@ -130,7 +141,8 @@ public interface IAudioService extends IInterface {
 
     int[] getAssistantServicesUids() throws RemoteException;
 
-    List<android.media.audiopolicy.AudioProductStrategy> getAudioProductStrategies() throws RemoteException;
+    List<android.media.audiopolicy.AudioProductStrategy> getAudioProductStrategies()
+            throws RemoteException;
 
     String getAudioServiceConfig(String str) throws RemoteException;
 
@@ -156,13 +168,17 @@ public interface IAudioService extends IInterface {
 
     int getDeviceMaskForStream(int i) throws RemoteException;
 
-    VolumeInfo getDeviceVolume(VolumeInfo volumeInfo, AudioDeviceAttributes audioDeviceAttributes, String str) throws RemoteException;
+    VolumeInfo getDeviceVolume(
+            VolumeInfo volumeInfo, AudioDeviceAttributes audioDeviceAttributes, String str)
+            throws RemoteException;
 
     int getDeviceVolumeBehavior(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
 
-    List<AudioDeviceAttributes> getDevicesForAttributes(AudioAttributes audioAttributes) throws RemoteException;
+    List<AudioDeviceAttributes> getDevicesForAttributes(AudioAttributes audioAttributes)
+            throws RemoteException;
 
-    List<AudioDeviceAttributes> getDevicesForAttributesUnprotected(AudioAttributes audioAttributes) throws RemoteException;
+    List<AudioDeviceAttributes> getDevicesForAttributesUnprotected(AudioAttributes audioAttributes)
+            throws RemoteException;
 
     int getEarProtectLimit() throws RemoteException;
 
@@ -172,7 +188,8 @@ public interface IAudioService extends IInterface {
 
     FadeManagerConfiguration getFadeManagerConfigurationForFocusLoss() throws RemoteException;
 
-    long getFadeOutDurationOnFocusLossMillis(AudioAttributes audioAttributes) throws RemoteException;
+    long getFadeOutDurationOnFocusLossMillis(AudioAttributes audioAttributes)
+            throws RemoteException;
 
     int getFineVolume(int i, int i2) throws RemoteException;
 
@@ -198,7 +215,8 @@ public interface IAudioService extends IInterface {
 
     PersistableBundle getLoudnessParams(LoudnessCodecInfo loudnessCodecInfo) throws RemoteException;
 
-    long getMaxAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    long getMaxAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     int[] getMediaVolumeSteps() throws RemoteException;
 
@@ -280,9 +298,14 @@ public interface IAudioService extends IInterface {
 
     int getVolumeGroupVolumeIndex(int i) throws RemoteException;
 
-    void handleBluetoothActiveDeviceChanged(BluetoothDevice bluetoothDevice, BluetoothDevice bluetoothDevice2, BluetoothProfileConnectionInfo bluetoothProfileConnectionInfo) throws RemoteException;
+    void handleBluetoothActiveDeviceChanged(
+            BluetoothDevice bluetoothDevice,
+            BluetoothDevice bluetoothDevice2,
+            BluetoothProfileConnectionInfo bluetoothProfileConnectionInfo)
+            throws RemoteException;
 
-    void handleVolumeKey(KeyEvent keyEvent, boolean z, String str, String str2) throws RemoteException;
+    void handleVolumeKey(KeyEvent keyEvent, boolean z, String str, String str2)
+            throws RemoteException;
 
     boolean hasHapticChannels(Uri uri) throws RemoteException;
 
@@ -320,7 +343,8 @@ public interface IAudioService extends IInterface {
 
     boolean isHeadTrackerAvailable() throws RemoteException;
 
-    boolean isHeadTrackerEnabled(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    boolean isHeadTrackerEnabled(AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     boolean isHomeSoundEffectEnabled() throws RemoteException;
 
@@ -342,7 +366,8 @@ public interface IAudioService extends IInterface {
 
     boolean isSpatializerAvailable() throws RemoteException;
 
-    boolean isSpatializerAvailableForDevice(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    boolean isSpatializerAvailableForDevice(AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     boolean isSpatializerEnabled() throws RemoteException;
 
@@ -374,11 +399,14 @@ public interface IAudioService extends IInterface {
 
     void lowerVolumeToRs1(String str) throws RemoteException;
 
-    void muteAwaitConnection(int[] iArr, AudioDeviceAttributes audioDeviceAttributes, long j) throws RemoteException;
+    void muteAwaitConnection(int[] iArr, AudioDeviceAttributes audioDeviceAttributes, long j)
+            throws RemoteException;
 
-    void notifySafetyVolumeDialogVisible(IVolumeController iVolumeController, boolean z) throws RemoteException;
+    void notifySafetyVolumeDialogVisible(IVolumeController iVolumeController, boolean z)
+            throws RemoteException;
 
-    void notifyVolumeControllerVisible(IVolumeController iVolumeController, boolean z) throws RemoteException;
+    void notifyVolumeControllerVisible(IVolumeController iVolumeController, boolean z)
+            throws RemoteException;
 
     void playSoundEffect(int i, int i2) throws RemoteException;
 
@@ -400,47 +428,92 @@ public interface IAudioService extends IInterface {
 
     void recorderEvent(int i, int i2) throws RemoteException;
 
-    String registerAudioPolicy(android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig, IAudioPolicyCallback iAudioPolicyCallback, boolean z, boolean z2, boolean z3, boolean z4, IMediaProjection iMediaProjection, AttributionSource attributionSource) throws RemoteException;
+    String registerAudioPolicy(
+            android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig,
+            IAudioPolicyCallback iAudioPolicyCallback,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            IMediaProjection iMediaProjection,
+            AttributionSource attributionSource)
+            throws RemoteException;
 
-    void registerAudioServerStateDispatcher(IAudioServerStateDispatcher iAudioServerStateDispatcher) throws RemoteException;
+    void registerAudioServerStateDispatcher(IAudioServerStateDispatcher iAudioServerStateDispatcher)
+            throws RemoteException;
 
-    void registerCapturePresetDevicesRoleDispatcher(ICapturePresetDevicesRoleDispatcher iCapturePresetDevicesRoleDispatcher) throws RemoteException;
+    void registerCapturePresetDevicesRoleDispatcher(
+            ICapturePresetDevicesRoleDispatcher iCapturePresetDevicesRoleDispatcher)
+            throws RemoteException;
 
-    void registerCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher iCommunicationDeviceDispatcher) throws RemoteException;
+    void registerCommunicationDeviceDispatcher(
+            ICommunicationDeviceDispatcher iCommunicationDeviceDispatcher) throws RemoteException;
 
-    void registerDeviceVolumeBehaviorDispatcher(boolean z, IDeviceVolumeBehaviorDispatcher iDeviceVolumeBehaviorDispatcher) throws RemoteException;
+    void registerDeviceVolumeBehaviorDispatcher(
+            boolean z, IDeviceVolumeBehaviorDispatcher iDeviceVolumeBehaviorDispatcher)
+            throws RemoteException;
 
-    void registerDeviceVolumeDispatcherForAbsoluteVolume(boolean z, IAudioDeviceVolumeDispatcher iAudioDeviceVolumeDispatcher, String str, AudioDeviceAttributes audioDeviceAttributes, List<VolumeInfo> list, boolean z2, int i) throws RemoteException;
+    void registerDeviceVolumeDispatcherForAbsoluteVolume(
+            boolean z,
+            IAudioDeviceVolumeDispatcher iAudioDeviceVolumeDispatcher,
+            String str,
+            AudioDeviceAttributes audioDeviceAttributes,
+            List<VolumeInfo> list,
+            boolean z2,
+            int i)
+            throws RemoteException;
 
-    void registerHeadToSoundstagePoseCallback(ISpatializerHeadToSoundStagePoseCallback iSpatializerHeadToSoundStagePoseCallback) throws RemoteException;
+    void registerHeadToSoundstagePoseCallback(
+            ISpatializerHeadToSoundStagePoseCallback iSpatializerHeadToSoundStagePoseCallback)
+            throws RemoteException;
 
-    void registerLoudnessCodecUpdatesDispatcher(ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcher) throws RemoteException;
+    void registerLoudnessCodecUpdatesDispatcher(
+            ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcher) throws RemoteException;
 
     void registerModeDispatcher(IAudioModeDispatcher iAudioModeDispatcher) throws RemoteException;
 
-    void registerMuteAwaitConnectionDispatcher(IMuteAwaitConnectionCallback iMuteAwaitConnectionCallback, boolean z) throws RemoteException;
+    void registerMuteAwaitConnectionDispatcher(
+            IMuteAwaitConnectionCallback iMuteAwaitConnectionCallback, boolean z)
+            throws RemoteException;
 
-    void registerPlaybackCallback(IPlaybackConfigDispatcher iPlaybackConfigDispatcher) throws RemoteException;
+    void registerPlaybackCallback(IPlaybackConfigDispatcher iPlaybackConfigDispatcher)
+            throws RemoteException;
 
-    void registerPlaybackCallbackWithPackage(IPlaybackConfigDispatcher iPlaybackConfigDispatcher, String str) throws RemoteException;
+    void registerPlaybackCallbackWithPackage(
+            IPlaybackConfigDispatcher iPlaybackConfigDispatcher, String str) throws RemoteException;
 
-    void registerPreferredMixerAttributesDispatcher(IPreferredMixerAttributesDispatcher iPreferredMixerAttributesDispatcher) throws RemoteException;
+    void registerPreferredMixerAttributesDispatcher(
+            IPreferredMixerAttributesDispatcher iPreferredMixerAttributesDispatcher)
+            throws RemoteException;
 
-    void registerRecordingCallback(IRecordingConfigDispatcher iRecordingConfigDispatcher) throws RemoteException;
+    void registerRecordingCallback(IRecordingConfigDispatcher iRecordingConfigDispatcher)
+            throws RemoteException;
 
-    void registerSpatializerCallback(ISpatializerCallback iSpatializerCallback) throws RemoteException;
+    void registerSpatializerCallback(ISpatializerCallback iSpatializerCallback)
+            throws RemoteException;
 
-    void registerSpatializerHeadTrackerAvailableCallback(ISpatializerHeadTrackerAvailableCallback iSpatializerHeadTrackerAvailableCallback, boolean z) throws RemoteException;
+    void registerSpatializerHeadTrackerAvailableCallback(
+            ISpatializerHeadTrackerAvailableCallback iSpatializerHeadTrackerAvailableCallback,
+            boolean z)
+            throws RemoteException;
 
-    void registerSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback iSpatializerHeadTrackingModeCallback) throws RemoteException;
+    void registerSpatializerHeadTrackingCallback(
+            ISpatializerHeadTrackingModeCallback iSpatializerHeadTrackingModeCallback)
+            throws RemoteException;
 
-    void registerSpatializerOutputCallback(ISpatializerOutputCallback iSpatializerOutputCallback) throws RemoteException;
+    void registerSpatializerOutputCallback(ISpatializerOutputCallback iSpatializerOutputCallback)
+            throws RemoteException;
 
-    void registerStrategyNonDefaultDevicesDispatcher(IStrategyNonDefaultDevicesDispatcher iStrategyNonDefaultDevicesDispatcher) throws RemoteException;
+    void registerStrategyNonDefaultDevicesDispatcher(
+            IStrategyNonDefaultDevicesDispatcher iStrategyNonDefaultDevicesDispatcher)
+            throws RemoteException;
 
-    void registerStrategyPreferredDevicesDispatcher(IStrategyPreferredDevicesDispatcher iStrategyPreferredDevicesDispatcher) throws RemoteException;
+    void registerStrategyPreferredDevicesDispatcher(
+            IStrategyPreferredDevicesDispatcher iStrategyPreferredDevicesDispatcher)
+            throws RemoteException;
 
-    void registerStreamAliasingDispatcher(IStreamAliasingDispatcher iStreamAliasingDispatcher, boolean z) throws RemoteException;
+    void registerStreamAliasingDispatcher(
+            IStreamAliasingDispatcher iStreamAliasingDispatcher, boolean z) throws RemoteException;
 
     void releasePlayer(int i) throws RemoteException;
 
@@ -450,39 +523,71 @@ public interface IAudioService extends IInterface {
 
     void removeAssistantServicesUids(int[] iArr) throws RemoteException;
 
-    int removeDeviceAsNonDefaultForStrategy(int i, AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    int removeDeviceAsNonDefaultForStrategy(int i, AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     void removeLoudnessCodecInfo(int i, LoudnessCodecInfo loudnessCodecInfo) throws RemoteException;
 
-    int removeMixForPolicy(android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
+    int removeMixForPolicy(
+            android.media.audiopolicy.AudioPolicyConfig audioPolicyConfig,
+            IAudioPolicyCallback iAudioPolicyCallback)
+            throws RemoteException;
 
-    void removeOnDevicesForAttributesChangedListener(IDevicesForAttributesCallback iDevicesForAttributesCallback) throws RemoteException;
+    void removeOnDevicesForAttributesChangedListener(
+            IDevicesForAttributesCallback iDevicesForAttributesCallback) throws RemoteException;
 
     void removePackageForName(String str) throws RemoteException;
 
     int removePreferredDevicesForStrategy(int i) throws RemoteException;
 
-    void removeSpatializerCompatibleAudioDevice(AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    void removeSpatializerCompatibleAudioDevice(AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
-    int removeUidDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i) throws RemoteException;
+    int removeUidDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i)
+            throws RemoteException;
 
-    int removeUserIdDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i) throws RemoteException;
+    int removeUserIdDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i)
+            throws RemoteException;
 
-    int requestAudioFocus(AudioAttributes audioAttributes, int i, IBinder iBinder, IAudioFocusDispatcher iAudioFocusDispatcher, String str, String str2, String str3, int i2, IAudioPolicyCallback iAudioPolicyCallback, int i3) throws RemoteException;
+    int requestAudioFocus(
+            AudioAttributes audioAttributes,
+            int i,
+            IBinder iBinder,
+            IAudioFocusDispatcher iAudioFocusDispatcher,
+            String str,
+            String str2,
+            String str3,
+            int i2,
+            IAudioPolicyCallback iAudioPolicyCallback,
+            int i3)
+            throws RemoteException;
 
-    int requestAudioFocusForTest(AudioAttributes audioAttributes, int i, IBinder iBinder, IAudioFocusDispatcher iAudioFocusDispatcher, String str, String str2, int i2, int i3, int i4) throws RemoteException;
+    int requestAudioFocusForTest(
+            AudioAttributes audioAttributes,
+            int i,
+            IBinder iBinder,
+            IAudioFocusDispatcher iAudioFocusDispatcher,
+            String str,
+            String str2,
+            int i2,
+            int i3,
+            int i4)
+            throws RemoteException;
 
     int secGetActiveStreamType(int i) throws RemoteException;
 
-    boolean sendFocusLoss(AudioFocusInfo audioFocusInfo, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
+    boolean sendFocusLoss(AudioFocusInfo audioFocusInfo, IAudioPolicyCallback iAudioPolicyCallback)
+            throws RemoteException;
 
-    void setA2dpDeviceVolume(BluetoothDevice bluetoothDevice, int i, int i2, int i3, String str) throws RemoteException;
+    void setA2dpDeviceVolume(BluetoothDevice bluetoothDevice, int i, int i2, int i3, String str)
+            throws RemoteException;
 
     void setA2dpSuspended(boolean z) throws RemoteException;
 
     void setActiveAssistantServiceUids(int[] iArr) throws RemoteException;
 
-    boolean setAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes, long j) throws RemoteException;
+    boolean setAdditionalOutputDeviceDelay(AudioDeviceAttributes audioDeviceAttributes, long j)
+            throws RemoteException;
 
     int setAllowedCapturePolicy(int i) throws RemoteException;
 
@@ -498,7 +603,8 @@ public interface IAudioService extends IInterface {
 
     boolean setBluetoothAudioDeviceCategory(String str, int i) throws RemoteException;
 
-    void setBluetoothAudioDeviceCategory_legacy(String str, boolean z, int i) throws RemoteException;
+    void setBluetoothAudioDeviceCategory_legacy(String str, boolean z, int i)
+            throws RemoteException;
 
     void setBluetoothScoOn(boolean z) throws RemoteException;
 
@@ -514,29 +620,38 @@ public interface IAudioService extends IInterface {
 
     void setDesiredHeadTrackingMode(int i) throws RemoteException;
 
-    int setDeviceAsNonDefaultForStrategy(int i, AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    int setDeviceAsNonDefaultForStrategy(int i, AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     int setDeviceToForceByUser(int i, String str, boolean z) throws RemoteException;
 
-    void setDeviceVolume(VolumeInfo volumeInfo, AudioDeviceAttributes audioDeviceAttributes, String str) throws RemoteException;
+    void setDeviceVolume(
+            VolumeInfo volumeInfo, AudioDeviceAttributes audioDeviceAttributes, String str)
+            throws RemoteException;
 
-    void setDeviceVolumeBehavior(AudioDeviceAttributes audioDeviceAttributes, int i, String str) throws RemoteException;
+    void setDeviceVolumeBehavior(AudioDeviceAttributes audioDeviceAttributes, int i, String str)
+            throws RemoteException;
 
     boolean setEncodedSurroundMode(int i) throws RemoteException;
 
-    int setFadeManagerConfigurationForFocusLoss(FadeManagerConfiguration fadeManagerConfiguration) throws RemoteException;
+    int setFadeManagerConfigurationForFocusLoss(FadeManagerConfiguration fadeManagerConfiguration)
+            throws RemoteException;
 
     void setFineVolume(int i, int i2, int i3, int i4, String str) throws RemoteException;
 
-    int setFocusPropertiesForPolicy(int i, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
+    int setFocusPropertiesForPolicy(int i, IAudioPolicyCallback iAudioPolicyCallback)
+            throws RemoteException;
 
-    void setFocusRequestResultFromExtPolicy(AudioFocusInfo audioFocusInfo, int i, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
+    void setFocusRequestResultFromExtPolicy(
+            AudioFocusInfo audioFocusInfo, int i, IAudioPolicyCallback iAudioPolicyCallback)
+            throws RemoteException;
 
     void setForceSpeakerOn(boolean z) throws RemoteException;
 
     int setHdmiSystemAudioSupported(boolean z) throws RemoteException;
 
-    void setHeadTrackerEnabled(boolean z, AudioDeviceAttributes audioDeviceAttributes) throws RemoteException;
+    void setHeadTrackerEnabled(boolean z, AudioDeviceAttributes audioDeviceAttributes)
+            throws RemoteException;
 
     void setHomeSoundEffectEnabled(boolean z) throws RemoteException;
 
@@ -566,11 +681,15 @@ public interface IAudioService extends IInterface {
 
     void setOutputRs2UpperBound(float f) throws RemoteException;
 
-    int setPreferredDevicesForCapturePreset(int i, List<AudioDeviceAttributes> list) throws RemoteException;
+    int setPreferredDevicesForCapturePreset(int i, List<AudioDeviceAttributes> list)
+            throws RemoteException;
 
-    int setPreferredDevicesForStrategy(int i, List<AudioDeviceAttributes> list) throws RemoteException;
+    int setPreferredDevicesForStrategy(int i, List<AudioDeviceAttributes> list)
+            throws RemoteException;
 
-    int setPreferredMixerAttributes(AudioAttributes audioAttributes, int i, AudioMixerAttributes audioMixerAttributes) throws RemoteException;
+    int setPreferredMixerAttributes(
+            AudioAttributes audioAttributes, int i, AudioMixerAttributes audioMixerAttributes)
+            throws RemoteException;
 
     void setRadioOutputPath(int i) throws RemoteException;
 
@@ -584,7 +703,8 @@ public interface IAudioService extends IInterface {
 
     void setRttEnabled(boolean z) throws RemoteException;
 
-    void setSoundSettingEventBroadcastIntent(int i, PendingIntent pendingIntent) throws RemoteException;
+    void setSoundSettingEventBroadcastIntent(int i, PendingIntent pendingIntent)
+            throws RemoteException;
 
     void setSpatializerEnabled(boolean z) throws RemoteException;
 
@@ -596,31 +716,42 @@ public interface IAudioService extends IInterface {
 
     void setStreamVolume(int i, int i2, int i3, String str) throws RemoteException;
 
-    void setStreamVolumeForDeviceWithAttribution(int i, int i2, int i3, String str, String str2, int i4) throws RemoteException;
+    void setStreamVolumeForDeviceWithAttribution(
+            int i, int i2, int i3, String str, String str2, int i4) throws RemoteException;
 
-    void setStreamVolumeForUid(int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6) throws RemoteException;
+    void setStreamVolumeForUid(
+            int i, int i2, int i3, String str, int i4, int i5, UserHandle userHandle, int i6)
+            throws RemoteException;
 
-    void setStreamVolumeWithAttribution(int i, int i2, int i3, String str, String str2) throws RemoteException;
+    void setStreamVolumeWithAttribution(int i, int i2, int i3, String str, String str2)
+            throws RemoteException;
 
     void setSupportedSystemUsages(int[] iArr) throws RemoteException;
 
     boolean setSurroundFormatEnabled(int i, boolean z) throws RemoteException;
 
-    void setTestDeviceConnectionState(AudioDeviceAttributes audioDeviceAttributes, boolean z) throws RemoteException;
+    void setTestDeviceConnectionState(AudioDeviceAttributes audioDeviceAttributes, boolean z)
+            throws RemoteException;
 
-    int setUidDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i, int[] iArr, String[] strArr) throws RemoteException;
+    int setUidDeviceAffinity(
+            IAudioPolicyCallback iAudioPolicyCallback, int i, int[] iArr, String[] strArr)
+            throws RemoteException;
 
-    int setUserIdDeviceAffinity(IAudioPolicyCallback iAudioPolicyCallback, int i, int[] iArr, String[] strArr) throws RemoteException;
+    int setUserIdDeviceAffinity(
+            IAudioPolicyCallback iAudioPolicyCallback, int i, int[] iArr, String[] strArr)
+            throws RemoteException;
 
     void setVibrateSetting(int i, int i2) throws RemoteException;
 
     void setVolumeController(IVolumeController iVolumeController) throws RemoteException;
 
-    void setVolumeGroupVolumeIndex(int i, int i2, int i3, String str, String str2) throws RemoteException;
+    void setVolumeGroupVolumeIndex(int i, int i2, int i3, String str, String str2)
+            throws RemoteException;
 
     void setVolumePolicy(VolumePolicy volumePolicy) throws RemoteException;
 
-    void setWiredDeviceConnectionState(AudioDeviceAttributes audioDeviceAttributes, int i, String str) throws RemoteException;
+    void setWiredDeviceConnectionState(
+            AudioDeviceAttributes audioDeviceAttributes, int i, String str) throws RemoteException;
 
     boolean shouldNotificationSoundPlay(AudioAttributes audioAttributes) throws RemoteException;
 
@@ -634,7 +765,8 @@ public interface IAudioService extends IInterface {
 
     void startLoudnessCodecUpdates(int i) throws RemoteException;
 
-    AudioRoutesInfo startWatchingRoutes(IAudioRoutesObserver iAudioRoutesObserver) throws RemoteException;
+    AudioRoutesInfo startWatchingRoutes(IAudioRoutesObserver iAudioRoutesObserver)
+            throws RemoteException;
 
     void stopBluetoothSco(IBinder iBinder) throws RemoteException;
 
@@ -652,37 +784,61 @@ public interface IAudioService extends IInterface {
 
     void unregisterAudioPolicy(IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
 
-    void unregisterAudioPolicyAsync(IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
+    void unregisterAudioPolicyAsync(IAudioPolicyCallback iAudioPolicyCallback)
+            throws RemoteException;
 
-    void unregisterAudioServerStateDispatcher(IAudioServerStateDispatcher iAudioServerStateDispatcher) throws RemoteException;
+    void unregisterAudioServerStateDispatcher(
+            IAudioServerStateDispatcher iAudioServerStateDispatcher) throws RemoteException;
 
-    void unregisterCapturePresetDevicesRoleDispatcher(ICapturePresetDevicesRoleDispatcher iCapturePresetDevicesRoleDispatcher) throws RemoteException;
+    void unregisterCapturePresetDevicesRoleDispatcher(
+            ICapturePresetDevicesRoleDispatcher iCapturePresetDevicesRoleDispatcher)
+            throws RemoteException;
 
-    void unregisterCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher iCommunicationDeviceDispatcher) throws RemoteException;
+    void unregisterCommunicationDeviceDispatcher(
+            ICommunicationDeviceDispatcher iCommunicationDeviceDispatcher) throws RemoteException;
 
-    void unregisterHeadToSoundstagePoseCallback(ISpatializerHeadToSoundStagePoseCallback iSpatializerHeadToSoundStagePoseCallback) throws RemoteException;
+    void unregisterHeadToSoundstagePoseCallback(
+            ISpatializerHeadToSoundStagePoseCallback iSpatializerHeadToSoundStagePoseCallback)
+            throws RemoteException;
 
-    void unregisterLoudnessCodecUpdatesDispatcher(ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcher) throws RemoteException;
+    void unregisterLoudnessCodecUpdatesDispatcher(
+            ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcher) throws RemoteException;
 
     void unregisterModeDispatcher(IAudioModeDispatcher iAudioModeDispatcher) throws RemoteException;
 
-    void unregisterPlaybackCallback(IPlaybackConfigDispatcher iPlaybackConfigDispatcher) throws RemoteException;
+    void unregisterPlaybackCallback(IPlaybackConfigDispatcher iPlaybackConfigDispatcher)
+            throws RemoteException;
 
-    void unregisterPreferredMixerAttributesDispatcher(IPreferredMixerAttributesDispatcher iPreferredMixerAttributesDispatcher) throws RemoteException;
+    void unregisterPreferredMixerAttributesDispatcher(
+            IPreferredMixerAttributesDispatcher iPreferredMixerAttributesDispatcher)
+            throws RemoteException;
 
-    void unregisterRecordingCallback(IRecordingConfigDispatcher iRecordingConfigDispatcher) throws RemoteException;
+    void unregisterRecordingCallback(IRecordingConfigDispatcher iRecordingConfigDispatcher)
+            throws RemoteException;
 
-    void unregisterSpatializerCallback(ISpatializerCallback iSpatializerCallback) throws RemoteException;
+    void unregisterSpatializerCallback(ISpatializerCallback iSpatializerCallback)
+            throws RemoteException;
 
-    void unregisterSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback iSpatializerHeadTrackingModeCallback) throws RemoteException;
+    void unregisterSpatializerHeadTrackingCallback(
+            ISpatializerHeadTrackingModeCallback iSpatializerHeadTrackingModeCallback)
+            throws RemoteException;
 
-    void unregisterSpatializerOutputCallback(ISpatializerOutputCallback iSpatializerOutputCallback) throws RemoteException;
+    void unregisterSpatializerOutputCallback(ISpatializerOutputCallback iSpatializerOutputCallback)
+            throws RemoteException;
 
-    void unregisterStrategyNonDefaultDevicesDispatcher(IStrategyNonDefaultDevicesDispatcher iStrategyNonDefaultDevicesDispatcher) throws RemoteException;
+    void unregisterStrategyNonDefaultDevicesDispatcher(
+            IStrategyNonDefaultDevicesDispatcher iStrategyNonDefaultDevicesDispatcher)
+            throws RemoteException;
 
-    void unregisterStrategyPreferredDevicesDispatcher(IStrategyPreferredDevicesDispatcher iStrategyPreferredDevicesDispatcher) throws RemoteException;
+    void unregisterStrategyPreferredDevicesDispatcher(
+            IStrategyPreferredDevicesDispatcher iStrategyPreferredDevicesDispatcher)
+            throws RemoteException;
 
-    int updateMixingRulesForPolicy(android.media.audiopolicy.AudioMix[] audioMixArr, AudioMixingRule[] audioMixingRuleArr, IAudioPolicyCallback iAudioPolicyCallback) throws RemoteException;
+    int updateMixingRulesForPolicy(
+            android.media.audiopolicy.AudioMix[] audioMixArr,
+            AudioMixingRule[] audioMixingRuleArr,
+            IAudioPolicyCallback iAudioPolicyCallback)
+            throws RemoteException;
 
     public static class Default implements IAudioService {
         @Override // android.media.IAudioService
@@ -691,16 +847,13 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void playerAttributes(int piid, AudioAttributes attr) throws RemoteException {
-        }
+        public void playerAttributes(int piid, AudioAttributes attr) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void playerEvent(int piid, int event, int eventId) throws RemoteException {
-        }
+        public void playerEvent(int piid, int event, int eventId) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void releasePlayer(int piid) throws RemoteException {
-        }
+        public void releasePlayer(int piid) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int trackRecorder(IBinder recorder) throws RemoteException {
@@ -708,49 +861,56 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void recorderEvent(int riid, int event) throws RemoteException {
-        }
+        public void recorderEvent(int riid, int event) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void releaseRecorder(int riid) throws RemoteException {
-        }
+        public void releaseRecorder(int riid) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void playerSessionId(int piid, int sessionId) throws RemoteException {
-        }
+        public void playerSessionId(int piid, int sessionId) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void portEvent(int portId, int event, PersistableBundle extras) throws RemoteException {
-        }
+        public void portEvent(int portId, int event, PersistableBundle extras)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void adjustStreamVolume(int streamType, int direction, int flags, String callingPackage) throws RemoteException {
-        }
+        public void adjustStreamVolume(
+                int streamType, int direction, int flags, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void adjustStreamVolumeWithAttribution(int streamType, int direction, int flags, String callingPackage, String attributionTag) throws RemoteException {
-        }
+        public void adjustStreamVolumeWithAttribution(
+                int streamType,
+                int direction,
+                int flags,
+                String callingPackage,
+                String attributionTag)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setStreamVolume(int streamType, int index, int flags, String callingPackage) throws RemoteException {
-        }
+        public void setStreamVolume(int streamType, int index, int flags, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setStreamVolumeWithAttribution(int streamType, int index, int flags, String callingPackage, String attributionTag) throws RemoteException {
-        }
+        public void setStreamVolumeWithAttribution(
+                int streamType, int index, int flags, String callingPackage, String attributionTag)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setDeviceVolume(VolumeInfo vi, AudioDeviceAttributes ada, String callingPackage) throws RemoteException {
-        }
+        public void setDeviceVolume(VolumeInfo vi, AudioDeviceAttributes ada, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public VolumeInfo getDeviceVolume(VolumeInfo vi, AudioDeviceAttributes ada, String callingPackage) throws RemoteException {
+        public VolumeInfo getDeviceVolume(
+                VolumeInfo vi, AudioDeviceAttributes ada, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public void handleVolumeKey(KeyEvent event, boolean isOnTv, String callingPackage, String caller) throws RemoteException {
-        }
+        public void handleVolumeKey(
+                KeyEvent event, boolean isOnTv, String callingPackage, String caller)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isStreamMute(int streamType) throws RemoteException {
@@ -758,8 +918,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void forceRemoteSubmixFullVolume(boolean startForcing, IBinder cb) throws RemoteException {
-        }
+        public void forceRemoteSubmixFullVolume(boolean startForcing, IBinder cb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isMasterMute() throws RemoteException {
@@ -767,8 +927,9 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setMasterMute(boolean mute, int flags, String callingPackage, int userId, String attributionTag) throws RemoteException {
-        }
+        public void setMasterMute(
+                boolean mute, int flags, String callingPackage, int userId, String attributionTag)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getStreamVolume(int streamType) throws RemoteException {
@@ -786,13 +947,15 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public List<android.media.audiopolicy.AudioVolumeGroup> getAudioVolumeGroups() throws RemoteException {
+        public List<android.media.audiopolicy.AudioVolumeGroup> getAudioVolumeGroups()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public void setVolumeGroupVolumeIndex(int groupId, int index, int flags, String callingPackage, String attributionTag) throws RemoteException {
-        }
+        public void setVolumeGroupVolumeIndex(
+                int groupId, int index, int flags, String callingPackage, String attributionTag)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getVolumeGroupVolumeIndex(int groupId) throws RemoteException {
@@ -820,8 +983,9 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void adjustVolumeGroupVolume(int groupId, int direction, int flags, String callingPackage) throws RemoteException {
-        }
+        public void adjustVolumeGroupVolume(
+                int groupId, int direction, int flags, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getLastAudibleStreamVolume(int streamType) throws RemoteException {
@@ -829,8 +993,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setSupportedSystemUsages(int[] systemUsages) throws RemoteException {
-        }
+        public void setSupportedSystemUsages(int[] systemUsages) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int[] getSupportedSystemUsages() throws RemoteException {
@@ -838,7 +1001,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public List<android.media.audiopolicy.AudioProductStrategy> getAudioProductStrategies() throws RemoteException {
+        public List<android.media.audiopolicy.AudioProductStrategy> getAudioProductStrategies()
+                throws RemoteException {
             return null;
         }
 
@@ -858,20 +1022,18 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setMicrophoneMute(boolean on, String callingPackage, int userId, String attributionTag) throws RemoteException {
-        }
+        public void setMicrophoneMute(
+                boolean on, String callingPackage, int userId, String attributionTag)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setMicrophoneMuteFromSwitch(boolean on) throws RemoteException {
-        }
+        public void setMicrophoneMuteFromSwitch(boolean on) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setRingerModeExternal(int ringerMode, String caller) throws RemoteException {
-        }
+        public void setRingerModeExternal(int ringerMode, String caller) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setRingerModeInternal(int ringerMode, String caller) throws RemoteException {
-        }
+        public void setRingerModeInternal(int ringerMode, String caller) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getRingerModeExternal() throws RemoteException {
@@ -889,8 +1051,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setVibrateSetting(int vibrateType, int vibrateSetting) throws RemoteException {
-        }
+        public void setVibrateSetting(int vibrateType, int vibrateSetting) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getVibrateSetting(int vibrateType) throws RemoteException {
@@ -903,8 +1064,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setMode(int mode, IBinder cb, String callingPackage) throws RemoteException {
-        }
+        public void setMode(int mode, IBinder cb, String callingPackage) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getMode() throws RemoteException {
@@ -912,12 +1072,10 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void playSoundEffect(int effectType, int userId) throws RemoteException {
-        }
+        public void playSoundEffect(int effectType, int userId) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void playSoundEffectVolume(int effectType, float volume) throws RemoteException {
-        }
+        public void playSoundEffectVolume(int effectType, float volume) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean loadSoundEffects() throws RemoteException {
@@ -925,12 +1083,10 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void unloadSoundEffects() throws RemoteException {
-        }
+        public void unloadSoundEffects() throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void reloadAudioSettings() throws RemoteException {
-        }
+        public void reloadAudioSettings() throws RemoteException {}
 
         @Override // android.media.IAudioService
         public Map getSurroundFormats() throws RemoteException {
@@ -943,7 +1099,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public boolean setSurroundFormatEnabled(int audioFormat, boolean enabled) throws RemoteException {
+        public boolean setSurroundFormatEnabled(int audioFormat, boolean enabled)
+                throws RemoteException {
             return false;
         }
 
@@ -963,8 +1120,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setSpeakerphoneOn(IBinder cb, boolean on) throws RemoteException {
-        }
+        public void setSpeakerphoneOn(IBinder cb, boolean on) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isSpeakerphoneOn() throws RemoteException {
@@ -972,16 +1128,13 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setBluetoothScoOn(boolean on) throws RemoteException {
-        }
+        public void setBluetoothScoOn(boolean on) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setA2dpSuspended(boolean on) throws RemoteException {
-        }
+        public void setA2dpSuspended(boolean on) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setLeAudioSuspended(boolean enable) throws RemoteException {
-        }
+        public void setLeAudioSuspended(boolean enable) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isBluetoothScoOn() throws RemoteException {
@@ -989,8 +1142,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setBluetoothA2dpOn(boolean on) throws RemoteException {
-        }
+        public void setBluetoothA2dpOn(boolean on) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isBluetoothA2dpOn() throws RemoteException {
@@ -998,18 +1150,33 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public int requestAudioFocus(AudioAttributes aa, int durationHint, IBinder cb, IAudioFocusDispatcher fd, String clientId, String callingPackageName, String attributionTag, int flags, IAudioPolicyCallback pcb, int sdk) throws RemoteException {
+        public int requestAudioFocus(
+                AudioAttributes aa,
+                int durationHint,
+                IBinder cb,
+                IAudioFocusDispatcher fd,
+                String clientId,
+                String callingPackageName,
+                String attributionTag,
+                int flags,
+                IAudioPolicyCallback pcb,
+                int sdk)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int abandonAudioFocus(IAudioFocusDispatcher fd, String clientId, AudioAttributes aa, String callingPackageName) throws RemoteException {
+        public int abandonAudioFocus(
+                IAudioFocusDispatcher fd,
+                String clientId,
+                AudioAttributes aa,
+                String callingPackageName)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public void unregisterAudioFocusClient(String clientId) throws RemoteException {
-        }
+        public void unregisterAudioFocusClient(String clientId) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getCurrentAudioFocus() throws RemoteException {
@@ -1017,24 +1184,19 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void startBluetoothSco(IBinder cb, int targetSdkVersion) throws RemoteException {
-        }
+        public void startBluetoothSco(IBinder cb, int targetSdkVersion) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void startBluetoothScoVirtualCall(IBinder cb) throws RemoteException {
-        }
+        public void startBluetoothScoVirtualCall(IBinder cb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void stopBluetoothSco(IBinder cb) throws RemoteException {
-        }
+        public void stopBluetoothSco(IBinder cb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void forceVolumeControlStream(int streamType, IBinder cb) throws RemoteException {
-        }
+        public void forceVolumeControlStream(int streamType, IBinder cb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setRingtonePlayer(IRingtonePlayer player) throws RemoteException {
-        }
+        public void setRingtonePlayer(IRingtonePlayer player) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public IRingtonePlayer getRingtonePlayer() throws RemoteException {
@@ -1062,19 +1224,19 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerStreamAliasingDispatcher(IStreamAliasingDispatcher isad, boolean register) throws RemoteException {
-        }
+        public void registerStreamAliasingDispatcher(
+                IStreamAliasingDispatcher isad, boolean register) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setNotifAliasRingForTest(boolean alias) throws RemoteException {
-        }
+        public void setNotifAliasRingForTest(boolean alias) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setWiredDeviceConnectionState(AudioDeviceAttributes aa, int state, String caller) throws RemoteException {
-        }
+        public void setWiredDeviceConnectionState(
+                AudioDeviceAttributes aa, int state, String caller) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public AudioRoutesInfo startWatchingRoutes(IAudioRoutesObserver observer) throws RemoteException {
+        public AudioRoutesInfo startWatchingRoutes(IAudioRoutesObserver observer)
+                throws RemoteException {
             return null;
         }
 
@@ -1084,8 +1246,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setVolumeController(IVolumeController controller) throws RemoteException {
-        }
+        public void setVolumeController(IVolumeController controller) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public IVolumeController getVolumeController() throws RemoteException {
@@ -1093,8 +1254,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void notifyVolumeControllerVisible(IVolumeController controller, boolean visible) throws RemoteException {
-        }
+        public void notifyVolumeControllerVisible(IVolumeController controller, boolean visible)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isStreamAffectedByRingerMode(int streamType) throws RemoteException {
@@ -1112,12 +1273,10 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void disableSafeMediaVolume(String callingPackage) throws RemoteException {
-        }
+        public void disableSafeMediaVolume(String callingPackage) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void lowerVolumeToRs1(String callingPackage) throws RemoteException {
-        }
+        public void lowerVolumeToRs1(String callingPackage) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public float getOutputRs2UpperBound() throws RemoteException {
@@ -1125,8 +1284,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setOutputRs2UpperBound(float rs2Value) throws RemoteException {
-        }
+        public void setOutputRs2UpperBound(float rs2Value) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public float getCsd() throws RemoteException {
@@ -1134,16 +1292,14 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setCsd(float csd) throws RemoteException {
-        }
+        public void setCsd(float csd) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void forceUseFrameworkMel(boolean useFrameworkMel) throws RemoteException {
-        }
+        public void forceUseFrameworkMel(boolean useFrameworkMel) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void forceComputeCsdOnAllDevices(boolean computeCsdOnAllDevices) throws RemoteException {
-        }
+        public void forceComputeCsdOnAllDevices(boolean computeCsdOnAllDevices)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isCsdEnabled() throws RemoteException {
@@ -1161,20 +1317,21 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setCsdAsAFeatureEnabled(boolean csdToggleValue) throws RemoteException {
-        }
+        public void setCsdAsAFeatureEnabled(boolean csdToggleValue) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setBluetoothAudioDeviceCategory_legacy(String address, boolean isBle, int deviceCategory) throws RemoteException {
-        }
+        public void setBluetoothAudioDeviceCategory_legacy(
+                String address, boolean isBle, int deviceCategory) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public int getBluetoothAudioDeviceCategory_legacy(String address, boolean isBle) throws RemoteException {
+        public int getBluetoothAudioDeviceCategory_legacy(String address, boolean isBle)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public boolean setBluetoothAudioDeviceCategory(String address, int deviceCategory) throws RemoteException {
+        public boolean setBluetoothAudioDeviceCategory(String address, int deviceCategory)
+                throws RemoteException {
             return false;
         }
 
@@ -1199,46 +1356,62 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public String registerAudioPolicy(android.media.audiopolicy.AudioPolicyConfig policyConfig, IAudioPolicyCallback pcb, boolean hasFocusListener, boolean isFocusPolicy, boolean isTestFocusPolicy, boolean isVolumeController, IMediaProjection projection, AttributionSource attributionSource) throws RemoteException {
+        public String registerAudioPolicy(
+                android.media.audiopolicy.AudioPolicyConfig policyConfig,
+                IAudioPolicyCallback pcb,
+                boolean hasFocusListener,
+                boolean isFocusPolicy,
+                boolean isTestFocusPolicy,
+                boolean isVolumeController,
+                IMediaProjection projection,
+                AttributionSource attributionSource)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public void unregisterAudioPolicyAsync(IAudioPolicyCallback pcb) throws RemoteException {
-        }
+        public void unregisterAudioPolicyAsync(IAudioPolicyCallback pcb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public List<android.media.audiopolicy.AudioMix> getRegisteredPolicyMixes() throws RemoteException {
+        public List<android.media.audiopolicy.AudioMix> getRegisteredPolicyMixes()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public void unregisterAudioPolicy(IAudioPolicyCallback pcb) throws RemoteException {
-        }
+        public void unregisterAudioPolicy(IAudioPolicyCallback pcb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public int addMixForPolicy(android.media.audiopolicy.AudioPolicyConfig policyConfig, IAudioPolicyCallback pcb) throws RemoteException {
+        public int addMixForPolicy(
+                android.media.audiopolicy.AudioPolicyConfig policyConfig, IAudioPolicyCallback pcb)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int removeMixForPolicy(android.media.audiopolicy.AudioPolicyConfig policyConfig, IAudioPolicyCallback pcb) throws RemoteException {
+        public int removeMixForPolicy(
+                android.media.audiopolicy.AudioPolicyConfig policyConfig, IAudioPolicyCallback pcb)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int updateMixingRulesForPolicy(android.media.audiopolicy.AudioMix[] mixesToUpdate, AudioMixingRule[] updatedMixingRules, IAudioPolicyCallback pcb) throws RemoteException {
+        public int updateMixingRulesForPolicy(
+                android.media.audiopolicy.AudioMix[] mixesToUpdate,
+                AudioMixingRule[] updatedMixingRules,
+                IAudioPolicyCallback pcb)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int setFocusPropertiesForPolicy(int duckingBehavior, IAudioPolicyCallback pcb) throws RemoteException {
+        public int setFocusPropertiesForPolicy(int duckingBehavior, IAudioPolicyCallback pcb)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public void setVolumePolicy(VolumePolicy policy) throws RemoteException {
-        }
+        public void setVolumePolicy(VolumePolicy policy) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean hasRegisteredDynamicPolicy() throws RemoteException {
@@ -1246,28 +1419,30 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerRecordingCallback(IRecordingConfigDispatcher rcdb) throws RemoteException {
-        }
+        public void registerRecordingCallback(IRecordingConfigDispatcher rcdb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterRecordingCallback(IRecordingConfigDispatcher rcdb) throws RemoteException {
-        }
+        public void unregisterRecordingCallback(IRecordingConfigDispatcher rcdb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public List<AudioRecordingConfiguration> getActiveRecordingConfigurations() throws RemoteException {
+        public List<AudioRecordingConfiguration> getActiveRecordingConfigurations()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public void registerPlaybackCallback(IPlaybackConfigDispatcher pcdb) throws RemoteException {
-        }
+        public void registerPlaybackCallback(IPlaybackConfigDispatcher pcdb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterPlaybackCallback(IPlaybackConfigDispatcher pcdb) throws RemoteException {
-        }
+        public void unregisterPlaybackCallback(IPlaybackConfigDispatcher pcdb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public List<AudioPlaybackConfiguration> getActivePlaybackConfigurations() throws RemoteException {
+        public List<AudioPlaybackConfiguration> getActivePlaybackConfigurations()
+                throws RemoteException {
             return null;
         }
 
@@ -1277,34 +1452,45 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public int dispatchFocusChange(AudioFocusInfo afi, int focusChange, IAudioPolicyCallback pcb) throws RemoteException {
+        public int dispatchFocusChange(
+                AudioFocusInfo afi, int focusChange, IAudioPolicyCallback pcb)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int dispatchFocusChangeWithFade(AudioFocusInfo afi, int focusChange, IAudioPolicyCallback pcb, List<AudioFocusInfo> otherActiveAfis, FadeManagerConfiguration transientFadeMgrConfig) throws RemoteException {
+        public int dispatchFocusChangeWithFade(
+                AudioFocusInfo afi,
+                int focusChange,
+                IAudioPolicyCallback pcb,
+                List<AudioFocusInfo> otherActiveAfis,
+                FadeManagerConfiguration transientFadeMgrConfig)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public void playerHasOpPlayAudio(int piid, boolean hasOpPlayAudio) throws RemoteException {
-        }
+        public void playerHasOpPlayAudio(int piid, boolean hasOpPlayAudio) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void handleBluetoothActiveDeviceChanged(BluetoothDevice newDevice, BluetoothDevice previousDevice, BluetoothProfileConnectionInfo info) throws RemoteException {
-        }
+        public void handleBluetoothActiveDeviceChanged(
+                BluetoothDevice newDevice,
+                BluetoothDevice previousDevice,
+                BluetoothProfileConnectionInfo info)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setFocusRequestResultFromExtPolicy(AudioFocusInfo afi, int requestResult, IAudioPolicyCallback pcb) throws RemoteException {
-        }
+        public void setFocusRequestResultFromExtPolicy(
+                AudioFocusInfo afi, int requestResult, IAudioPolicyCallback pcb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void registerAudioServerStateDispatcher(IAudioServerStateDispatcher asd) throws RemoteException {
-        }
+        public void registerAudioServerStateDispatcher(IAudioServerStateDispatcher asd)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterAudioServerStateDispatcher(IAudioServerStateDispatcher asd) throws RemoteException {
-        }
+        public void unregisterAudioServerStateDispatcher(IAudioServerStateDispatcher asd)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isAudioServerRunning() throws RemoteException {
@@ -1312,22 +1498,28 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public int setUidDeviceAffinity(IAudioPolicyCallback pcb, int uid, int[] deviceTypes, String[] deviceAddresses) throws RemoteException {
+        public int setUidDeviceAffinity(
+                IAudioPolicyCallback pcb, int uid, int[] deviceTypes, String[] deviceAddresses)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int removeUidDeviceAffinity(IAudioPolicyCallback pcb, int uid) throws RemoteException {
+        public int removeUidDeviceAffinity(IAudioPolicyCallback pcb, int uid)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int setUserIdDeviceAffinity(IAudioPolicyCallback pcb, int userId, int[] deviceTypes, String[] deviceAddresses) throws RemoteException {
+        public int setUserIdDeviceAffinity(
+                IAudioPolicyCallback pcb, int userId, int[] deviceTypes, String[] deviceAddresses)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int removeUserIdDeviceAffinity(IAudioPolicyCallback pcb, int userId) throws RemoteException {
+        public int removeUserIdDeviceAffinity(IAudioPolicyCallback pcb, int userId)
+                throws RemoteException {
             return 0;
         }
 
@@ -1342,7 +1534,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public int setPreferredDevicesForStrategy(int strategy, List<AudioDeviceAttributes> devices) throws RemoteException {
+        public int setPreferredDevicesForStrategy(int strategy, List<AudioDeviceAttributes> devices)
+                throws RemoteException {
             return 0;
         }
 
@@ -1352,42 +1545,49 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public List<AudioDeviceAttributes> getPreferredDevicesForStrategy(int strategy) throws RemoteException {
+        public List<AudioDeviceAttributes> getPreferredDevicesForStrategy(int strategy)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public int setDeviceAsNonDefaultForStrategy(int strategy, AudioDeviceAttributes device) throws RemoteException {
+        public int setDeviceAsNonDefaultForStrategy(int strategy, AudioDeviceAttributes device)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int removeDeviceAsNonDefaultForStrategy(int strategy, AudioDeviceAttributes device) throws RemoteException {
+        public int removeDeviceAsNonDefaultForStrategy(int strategy, AudioDeviceAttributes device)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public List<AudioDeviceAttributes> getNonDefaultDevicesForStrategy(int strategy) throws RemoteException {
+        public List<AudioDeviceAttributes> getNonDefaultDevicesForStrategy(int strategy)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public List<AudioDeviceAttributes> getDevicesForAttributes(AudioAttributes attributes) throws RemoteException {
+        public List<AudioDeviceAttributes> getDevicesForAttributes(AudioAttributes attributes)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public List<AudioDeviceAttributes> getDevicesForAttributesUnprotected(AudioAttributes attributes) throws RemoteException {
+        public List<AudioDeviceAttributes> getDevicesForAttributesUnprotected(
+                AudioAttributes attributes) throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public void addOnDevicesForAttributesChangedListener(AudioAttributes attributes, IDevicesForAttributesCallback callback) throws RemoteException {
-        }
+        public void addOnDevicesForAttributesChangedListener(
+                AudioAttributes attributes, IDevicesForAttributesCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void removeOnDevicesForAttributesChangedListener(IDevicesForAttributesCallback callback) throws RemoteException {
-        }
+        public void removeOnDevicesForAttributesChangedListener(
+                IDevicesForAttributesCallback callback) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int setAllowedCapturePolicy(int capturePolicy) throws RemoteException {
@@ -1400,28 +1600,28 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerStrategyPreferredDevicesDispatcher(IStrategyPreferredDevicesDispatcher dispatcher) throws RemoteException {
-        }
+        public void registerStrategyPreferredDevicesDispatcher(
+                IStrategyPreferredDevicesDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterStrategyPreferredDevicesDispatcher(IStrategyPreferredDevicesDispatcher dispatcher) throws RemoteException {
-        }
+        public void unregisterStrategyPreferredDevicesDispatcher(
+                IStrategyPreferredDevicesDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void registerStrategyNonDefaultDevicesDispatcher(IStrategyNonDefaultDevicesDispatcher dispatcher) throws RemoteException {
-        }
+        public void registerStrategyNonDefaultDevicesDispatcher(
+                IStrategyNonDefaultDevicesDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterStrategyNonDefaultDevicesDispatcher(IStrategyNonDefaultDevicesDispatcher dispatcher) throws RemoteException {
-        }
+        public void unregisterStrategyNonDefaultDevicesDispatcher(
+                IStrategyNonDefaultDevicesDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setRttEnabled(boolean rttEnabled) throws RemoteException {
-        }
+        public void setRttEnabled(boolean rttEnabled) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setDeviceVolumeBehavior(AudioDeviceAttributes device, int deviceVolumeBehavior, String pkgName) throws RemoteException {
-        }
+        public void setDeviceVolumeBehavior(
+                AudioDeviceAttributes device, int deviceVolumeBehavior, String pkgName)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getDeviceVolumeBehavior(AudioDeviceAttributes device) throws RemoteException {
@@ -1429,11 +1629,11 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setMultiAudioFocusEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setMultiAudioFocusEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public int setPreferredDevicesForCapturePreset(int capturePreset, List<AudioDeviceAttributes> devices) throws RemoteException {
+        public int setPreferredDevicesForCapturePreset(
+                int capturePreset, List<AudioDeviceAttributes> devices) throws RemoteException {
             return 0;
         }
 
@@ -1443,37 +1643,61 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public List<AudioDeviceAttributes> getPreferredDevicesForCapturePreset(int capturePreset) throws RemoteException {
+        public List<AudioDeviceAttributes> getPreferredDevicesForCapturePreset(int capturePreset)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public void registerCapturePresetDevicesRoleDispatcher(ICapturePresetDevicesRoleDispatcher dispatcher) throws RemoteException {
-        }
+        public void registerCapturePresetDevicesRoleDispatcher(
+                ICapturePresetDevicesRoleDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterCapturePresetDevicesRoleDispatcher(ICapturePresetDevicesRoleDispatcher dispatcher) throws RemoteException {
-        }
+        public void unregisterCapturePresetDevicesRoleDispatcher(
+                ICapturePresetDevicesRoleDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void adjustStreamVolumeForUid(int streamType, int direction, int flags, String packageName, int uid, int pid, UserHandle userHandle, int targetSdkVersion) throws RemoteException {
-        }
+        public void adjustStreamVolumeForUid(
+                int streamType,
+                int direction,
+                int flags,
+                String packageName,
+                int uid,
+                int pid,
+                UserHandle userHandle,
+                int targetSdkVersion)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void adjustSuggestedStreamVolumeForUid(int streamType, int direction, int flags, String packageName, int uid, int pid, UserHandle userHandle, int targetSdkVersion) throws RemoteException {
-        }
+        public void adjustSuggestedStreamVolumeForUid(
+                int streamType,
+                int direction,
+                int flags,
+                String packageName,
+                int uid,
+                int pid,
+                UserHandle userHandle,
+                int targetSdkVersion)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setStreamVolumeForUid(int streamType, int direction, int flags, String packageName, int uid, int pid, UserHandle userHandle, int targetSdkVersion) throws RemoteException {
-        }
+        public void setStreamVolumeForUid(
+                int streamType,
+                int direction,
+                int flags,
+                String packageName,
+                int uid,
+                int pid,
+                UserHandle userHandle,
+                int targetSdkVersion)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void adjustVolume(int direction, int flags) throws RemoteException {
-        }
+        public void adjustVolume(int direction, int flags) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void adjustSuggestedStreamVolume(int direction, int suggestedStreamType, int flags) throws RemoteException {
-        }
+        public void adjustSuggestedStreamVolume(int direction, int suggestedStreamType, int flags)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isMusicActive(boolean remotely) throws RemoteException {
@@ -1501,12 +1725,12 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher dispatcher) throws RemoteException {
-        }
+        public void registerCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher dispatcher)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher dispatcher) throws RemoteException {
-        }
+        public void unregisterCommunicationDeviceDispatcher(
+                ICommunicationDeviceDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean areNavigationRepeatSoundEffectsEnabled() throws RemoteException {
@@ -1514,8 +1738,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setNavigationRepeatSoundEffectsEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setNavigationRepeatSoundEffectsEnabled(boolean enabled)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isHomeSoundEffectEnabled() throws RemoteException {
@@ -1523,31 +1747,48 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setHomeSoundEffectEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setHomeSoundEffectEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public boolean setAdditionalOutputDeviceDelay(AudioDeviceAttributes device, long delayMillis) throws RemoteException {
+        public boolean setAdditionalOutputDeviceDelay(
+                AudioDeviceAttributes device, long delayMillis) throws RemoteException {
             return false;
         }
 
         @Override // android.media.IAudioService
-        public long getAdditionalOutputDeviceDelay(AudioDeviceAttributes device) throws RemoteException {
+        public long getAdditionalOutputDeviceDelay(AudioDeviceAttributes device)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.media.IAudioService
-        public long getMaxAdditionalOutputDeviceDelay(AudioDeviceAttributes device) throws RemoteException {
+        public long getMaxAdditionalOutputDeviceDelay(AudioDeviceAttributes device)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.media.IAudioService
-        public int requestAudioFocusForTest(AudioAttributes aa, int durationHint, IBinder cb, IAudioFocusDispatcher fd, String clientId, String callingPackageName, int flags, int uid, int sdk) throws RemoteException {
+        public int requestAudioFocusForTest(
+                AudioAttributes aa,
+                int durationHint,
+                IBinder cb,
+                IAudioFocusDispatcher fd,
+                String clientId,
+                String callingPackageName,
+                int flags,
+                int uid,
+                int sdk)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int abandonAudioFocusForTest(IAudioFocusDispatcher fd, String clientId, AudioAttributes aa, String callingPackageName) throws RemoteException {
+        public int abandonAudioFocusForTest(
+                IAudioFocusDispatcher fd,
+                String clientId,
+                AudioAttributes aa,
+                String callingPackageName)
+                throws RemoteException {
             return 0;
         }
 
@@ -1582,12 +1823,12 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerModeDispatcher(IAudioModeDispatcher dispatcher) throws RemoteException {
-        }
+        public void registerModeDispatcher(IAudioModeDispatcher dispatcher)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterModeDispatcher(IAudioModeDispatcher dispatcher) throws RemoteException {
-        }
+        public void unregisterModeDispatcher(IAudioModeDispatcher dispatcher)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getSpatializerImmersiveAudioLevel() throws RemoteException {
@@ -1605,7 +1846,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public boolean isSpatializerAvailableForDevice(AudioDeviceAttributes device) throws RemoteException {
+        public boolean isSpatializerAvailableForDevice(AudioDeviceAttributes device)
+                throws RemoteException {
             return false;
         }
 
@@ -1615,8 +1857,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setHeadTrackerEnabled(boolean enabled, AudioDeviceAttributes device) throws RemoteException {
-        }
+        public void setHeadTrackerEnabled(boolean enabled, AudioDeviceAttributes device)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isHeadTrackerEnabled(AudioDeviceAttributes device) throws RemoteException {
@@ -1629,12 +1871,12 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerSpatializerHeadTrackerAvailableCallback(ISpatializerHeadTrackerAvailableCallback cb, boolean register) throws RemoteException {
-        }
+        public void registerSpatializerHeadTrackerAvailableCallback(
+                ISpatializerHeadTrackerAvailableCallback cb, boolean register)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setSpatializerEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setSpatializerEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean canBeSpatialized(AudioAttributes aa, AudioFormat af) throws RemoteException {
@@ -1642,45 +1884,43 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerSpatializerCallback(ISpatializerCallback cb) throws RemoteException {
-        }
+        public void registerSpatializerCallback(ISpatializerCallback cb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterSpatializerCallback(ISpatializerCallback cb) throws RemoteException {
-        }
+        public void unregisterSpatializerCallback(ISpatializerCallback cb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void registerSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback cb) throws RemoteException {
-        }
+        public void registerSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback cb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback cb) throws RemoteException {
-        }
+        public void unregisterSpatializerHeadTrackingCallback(
+                ISpatializerHeadTrackingModeCallback cb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void registerHeadToSoundstagePoseCallback(ISpatializerHeadToSoundStagePoseCallback cb) throws RemoteException {
-        }
+        public void registerHeadToSoundstagePoseCallback(
+                ISpatializerHeadToSoundStagePoseCallback cb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterHeadToSoundstagePoseCallback(ISpatializerHeadToSoundStagePoseCallback cb) throws RemoteException {
-        }
+        public void unregisterHeadToSoundstagePoseCallback(
+                ISpatializerHeadToSoundStagePoseCallback cb) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public List<AudioDeviceAttributes> getSpatializerCompatibleAudioDevices() throws RemoteException {
+        public List<AudioDeviceAttributes> getSpatializerCompatibleAudioDevices()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public void addSpatializerCompatibleAudioDevice(AudioDeviceAttributes ada) throws RemoteException {
-        }
+        public void addSpatializerCompatibleAudioDevice(AudioDeviceAttributes ada)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void removeSpatializerCompatibleAudioDevice(AudioDeviceAttributes ada) throws RemoteException {
-        }
+        public void removeSpatializerCompatibleAudioDevice(AudioDeviceAttributes ada)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setDesiredHeadTrackingMode(int mode) throws RemoteException {
-        }
+        public void setDesiredHeadTrackingMode(int mode) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getDesiredHeadTrackingMode() throws RemoteException {
@@ -1698,20 +1938,16 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setSpatializerGlobalTransform(float[] transform) throws RemoteException {
-        }
+        public void setSpatializerGlobalTransform(float[] transform) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void recenterHeadTracker() throws RemoteException {
-        }
+        public void recenterHeadTracker() throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setSpatializerParameter(int key, byte[] value) throws RemoteException {
-        }
+        public void setSpatializerParameter(int key, byte[] value) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void getSpatializerParameter(int key, byte[] value) throws RemoteException {
-        }
+        public void getSpatializerParameter(int key, byte[] value) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getSpatializerOutput() throws RemoteException {
@@ -1719,12 +1955,12 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerSpatializerOutputCallback(ISpatializerOutputCallback cb) throws RemoteException {
-        }
+        public void registerSpatializerOutputCallback(ISpatializerOutputCallback cb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterSpatializerOutputCallback(ISpatializerOutputCallback cb) throws RemoteException {
-        }
+        public void unregisterSpatializerOutputCallback(ISpatializerOutputCallback cb)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isVolumeFixed() throws RemoteException {
@@ -1742,12 +1978,12 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void muteAwaitConnection(int[] usagesToMute, AudioDeviceAttributes dev, long timeOutMs) throws RemoteException {
-        }
+        public void muteAwaitConnection(
+                int[] usagesToMute, AudioDeviceAttributes dev, long timeOutMs)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void cancelMuteAwaitConnection(AudioDeviceAttributes dev) throws RemoteException {
-        }
+        public void cancelMuteAwaitConnection(AudioDeviceAttributes dev) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public AudioDeviceAttributes getMutingExpectedDevice() throws RemoteException {
@@ -1755,16 +1991,17 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerMuteAwaitConnectionDispatcher(IMuteAwaitConnectionCallback cb, boolean register) throws RemoteException {
-        }
+        public void registerMuteAwaitConnectionDispatcher(
+                IMuteAwaitConnectionCallback cb, boolean register) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setTestDeviceConnectionState(AudioDeviceAttributes device, boolean connected) throws RemoteException {
-        }
+        public void setTestDeviceConnectionState(AudioDeviceAttributes device, boolean connected)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void registerDeviceVolumeBehaviorDispatcher(boolean register, IDeviceVolumeBehaviorDispatcher dispatcher) throws RemoteException {
-        }
+        public void registerDeviceVolumeBehaviorDispatcher(
+                boolean register, IDeviceVolumeBehaviorDispatcher dispatcher)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public List<AudioFocusInfo> getFocusStack() throws RemoteException {
@@ -1772,21 +2009,19 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public boolean sendFocusLoss(AudioFocusInfo focusLoser, IAudioPolicyCallback apcb) throws RemoteException {
+        public boolean sendFocusLoss(AudioFocusInfo focusLoser, IAudioPolicyCallback apcb)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.IAudioService
-        public void addAssistantServicesUids(int[] assistantUID) throws RemoteException {
-        }
+        public void addAssistantServicesUids(int[] assistantUID) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void removeAssistantServicesUids(int[] assistantUID) throws RemoteException {
-        }
+        public void removeAssistantServicesUids(int[] assistantUID) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setActiveAssistantServiceUids(int[] activeUids) throws RemoteException {
-        }
+        public void setActiveAssistantServiceUids(int[] activeUids) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int[] getAssistantServicesUids() throws RemoteException {
@@ -1799,8 +2034,15 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerDeviceVolumeDispatcherForAbsoluteVolume(boolean register, IAudioDeviceVolumeDispatcher cb, String packageName, AudioDeviceAttributes device, List<VolumeInfo> volumes, boolean handlesvolumeAdjustment, int volumeBehavior) throws RemoteException {
-        }
+        public void registerDeviceVolumeDispatcherForAbsoluteVolume(
+                boolean register,
+                IAudioDeviceVolumeDispatcher cb,
+                String packageName,
+                AudioDeviceAttributes device,
+                List<VolumeInfo> volumes,
+                boolean handlesvolumeAdjustment,
+                int volumeBehavior)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public AudioHalVersionInfo getHalVersion() throws RemoteException {
@@ -1808,22 +2050,25 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public int setPreferredMixerAttributes(AudioAttributes aa, int portId, AudioMixerAttributes mixerAttributes) throws RemoteException {
+        public int setPreferredMixerAttributes(
+                AudioAttributes aa, int portId, AudioMixerAttributes mixerAttributes)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public int clearPreferredMixerAttributes(AudioAttributes aa, int portId) throws RemoteException {
+        public int clearPreferredMixerAttributes(AudioAttributes aa, int portId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public void registerPreferredMixerAttributesDispatcher(IPreferredMixerAttributesDispatcher dispatcher) throws RemoteException {
-        }
+        public void registerPreferredMixerAttributesDispatcher(
+                IPreferredMixerAttributesDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterPreferredMixerAttributesDispatcher(IPreferredMixerAttributesDispatcher dispatcher) throws RemoteException {
-        }
+        public void unregisterPreferredMixerAttributesDispatcher(
+                IPreferredMixerAttributesDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean supportsBluetoothVariableLatency() throws RemoteException {
@@ -1831,8 +2076,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setBluetoothVariableLatencyEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setBluetoothVariableLatencyEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isBluetoothVariableLatencyEnabled() throws RemoteException {
@@ -1840,36 +2084,37 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void registerLoudnessCodecUpdatesDispatcher(ILoudnessCodecUpdatesDispatcher dispatcher) throws RemoteException {
-        }
+        public void registerLoudnessCodecUpdatesDispatcher(
+                ILoudnessCodecUpdatesDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void unregisterLoudnessCodecUpdatesDispatcher(ILoudnessCodecUpdatesDispatcher dispatcher) throws RemoteException {
-        }
+        public void unregisterLoudnessCodecUpdatesDispatcher(
+                ILoudnessCodecUpdatesDispatcher dispatcher) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void startLoudnessCodecUpdates(int sessionId) throws RemoteException {
-        }
+        public void startLoudnessCodecUpdates(int sessionId) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void stopLoudnessCodecUpdates(int sessionId) throws RemoteException {
-        }
+        public void stopLoudnessCodecUpdates(int sessionId) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void addLoudnessCodecInfo(int sessionId, int mediaCodecHash, LoudnessCodecInfo codecInfo) throws RemoteException {
-        }
+        public void addLoudnessCodecInfo(
+                int sessionId, int mediaCodecHash, LoudnessCodecInfo codecInfo)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void removeLoudnessCodecInfo(int sessionId, LoudnessCodecInfo codecInfo) throws RemoteException {
-        }
+        public void removeLoudnessCodecInfo(int sessionId, LoudnessCodecInfo codecInfo)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public PersistableBundle getLoudnessParams(LoudnessCodecInfo codecInfo) throws RemoteException {
+        public PersistableBundle getLoudnessParams(LoudnessCodecInfo codecInfo)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.IAudioService
-        public int setFadeManagerConfigurationForFocusLoss(FadeManagerConfiguration fmcForFocusLoss) throws RemoteException {
+        public int setFadeManagerConfigurationForFocusLoss(FadeManagerConfiguration fmcForFocusLoss)
+                throws RemoteException {
             return 0;
         }
 
@@ -1879,7 +2124,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public FadeManagerConfiguration getFadeManagerConfigurationForFocusLoss() throws RemoteException {
+        public FadeManagerConfiguration getFadeManagerConfigurationForFocusLoss()
+                throws RemoteException {
             return null;
         }
 
@@ -1889,8 +2135,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setAudioServiceConfig(String keyValuePairs) throws RemoteException {
-        }
+        public void setAudioServiceConfig(String keyValuePairs) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public String getAudioServiceConfig(String keys) throws RemoteException {
@@ -1913,8 +2158,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setAppDevice(int uid, int device, boolean shouldShowNotification) throws RemoteException {
-        }
+        public void setAppDevice(int uid, int device, boolean shouldShowNotification)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getAppDevice(int uid) throws RemoteException {
@@ -1922,8 +2167,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setAppVolume(int uid, int ratio, String callingPackage) throws RemoteException {
-        }
+        public void setAppVolume(int uid, int ratio, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getAppVolume(int uid) throws RemoteException {
@@ -1931,8 +2176,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setAppMute(int uid, boolean shouldMute, String callingPackage) throws RemoteException {
-        }
+        public void setAppMute(int uid, boolean shouldMute, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isAppMute(int uid) throws RemoteException {
@@ -1940,8 +2185,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setMultiSoundOn(boolean on, boolean shouldShowNotification) throws RemoteException {
-        }
+        public void setMultiSoundOn(boolean on, boolean shouldShowNotification)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isMultiSoundOn() throws RemoteException {
@@ -1949,8 +2194,14 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setStreamVolumeForDeviceWithAttribution(int streamType, int index, int flags, String callingPackage, String attributionTag, int device) throws RemoteException {
-        }
+        public void setStreamVolumeForDeviceWithAttribution(
+                int streamType,
+                int index,
+                int flags,
+                String callingPackage,
+                String attributionTag,
+                int device)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getStreamVolumeForDevice(int streamType, int device) throws RemoteException {
@@ -1973,12 +2224,10 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void addPackage(int uid, String packageName) throws RemoteException {
-        }
+        public void addPackage(int uid, String packageName) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void removePackageForName(String packageName) throws RemoteException {
-        }
+        public void removePackageForName(String packageName) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isAlreadyInDB(String packageName) throws RemoteException {
@@ -1991,8 +2240,9 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setFineVolume(int streamType, int index, int flags, int device, String callingPackage) throws RemoteException {
-        }
+        public void setFineVolume(
+                int streamType, int index, int flags, int device, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getFineVolume(int streamType, int device) throws RemoteException {
@@ -2000,8 +2250,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setForceSpeakerOn(boolean on) throws RemoteException {
-        }
+        public void setForceSpeakerOn(boolean on) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isForceSpeakerOn() throws RemoteException {
@@ -2009,13 +2258,13 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public int setDeviceToForceByUser(int device, String address, boolean force) throws RemoteException {
+        public int setDeviceToForceByUser(int device, String address, boolean force)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.media.IAudioService
-        public void setMuteInterval(int interval, String caller) throws RemoteException {
-        }
+        public void setMuteInterval(int interval, String caller) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getMuteInterval() throws RemoteException {
@@ -2033,8 +2282,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setSoundSettingEventBroadcastIntent(int type, PendingIntent broadcastIntent) throws RemoteException {
-        }
+        public void setSoundSettingEventBroadcastIntent(int type, PendingIntent broadcastIntent)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean setMediaVolumeSteps(int[] volumeSteps) throws RemoteException {
@@ -2047,8 +2296,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setRadioOutputPath(int path) throws RemoteException {
-        }
+        public void setRadioOutputPath(int path) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getRadioOutputPath() throws RemoteException {
@@ -2056,8 +2304,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void dismissVolumePanel() throws RemoteException {
-        }
+        public void dismissVolumePanel() throws RemoteException {}
 
         @Override // android.media.IAudioService
         public String getCurrentAudioFocusPackageName() throws RemoteException {
@@ -2070,11 +2317,13 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setA2dpDeviceVolume(BluetoothDevice device, int streamType, int index, int flags, String caller) throws RemoteException {
-        }
+        public void setA2dpDeviceVolume(
+                BluetoothDevice device, int streamType, int index, int flags, String caller)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public int getA2dpDeviceVolume(BluetoothDevice device, int streamType) throws RemoteException {
+        public int getA2dpDeviceVolume(BluetoothDevice device, int streamType)
+                throws RemoteException {
             return 0;
         }
 
@@ -2084,20 +2333,17 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setRemoteMic(boolean on) throws RemoteException {
-        }
+        public void setRemoteMic(boolean on) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void recordRingtoneChanger(String log) throws RemoteException {
-        }
+        public void recordRingtoneChanger(String log) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void registerPlaybackCallbackWithPackage(IPlaybackConfigDispatcher pcdb, String packageName) throws RemoteException {
-        }
+        public void registerPlaybackCallbackWithPackage(
+                IPlaybackConfigDispatcher pcdb, String packageName) throws RemoteException {}
 
         @Override // android.media.IAudioService
-        public void setBtOffloadEnable(int state) throws RemoteException {
-        }
+        public void setBtOffloadEnable(int state) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public boolean isSafeMediaVolumeStateActive() throws RemoteException {
@@ -2110,8 +2356,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void notifySafetyVolumeDialogVisible(IVolumeController controller, boolean visible) throws RemoteException {
-        }
+        public void notifySafetyVolumeDialogVisible(IVolumeController controller, boolean visible)
+                throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getModeInternal() throws RemoteException {
@@ -2119,8 +2365,7 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.media.IAudioService
-        public void setMicInputControlMode(int mode) throws RemoteException {
-        }
+        public void setMicInputControlMode(int mode) throws RemoteException {}
 
         @Override // android.media.IAudioService
         public int getMicModeType() throws RemoteException {
@@ -2138,7 +2383,7 @@ public interface IAudioService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioService {
+    public abstract static class Stub extends Binder implements IAudioService {
         public static final String DESCRIPTOR = "android.media.IAudioService";
         static final int TRANSACTION_abandonAudioFocus = 71;
         static final int TRANSACTION_abandonAudioFocusForTest = 190;
@@ -2459,15 +2704,43 @@ public interface IAudioService extends IInterface {
         static final int TRANSACTION_unregisterStrategyPreferredDevicesDispatcher = 158;
         static final int TRANSACTION_updateMixingRulesForPolicy = 120;
         private final PermissionEnforcer mEnforcer;
-        static final String[] PERMISSIONS_setDeviceVolume = {Manifest.permission.MODIFY_AUDIO_ROUTING, Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED};
-        static final String[] PERMISSIONS_getDeviceVolume = {Manifest.permission.MODIFY_AUDIO_ROUTING, Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED};
-        static final String[] PERMISSIONS_getAudioVolumeGroups = {Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, Manifest.permission.MODIFY_AUDIO_ROUTING};
-        static final String[] PERMISSIONS_setVolumeGroupVolumeIndex = {Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, Manifest.permission.MODIFY_AUDIO_ROUTING};
-        static final String[] PERMISSIONS_getVolumeGroupVolumeIndex = {Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, Manifest.permission.MODIFY_AUDIO_ROUTING};
-        static final String[] PERMISSIONS_getVolumeGroupMaxVolumeIndex = {Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, Manifest.permission.MODIFY_AUDIO_ROUTING};
-        static final String[] PERMISSIONS_getVolumeGroupMinVolumeIndex = {Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, Manifest.permission.MODIFY_AUDIO_ROUTING};
-        static final String[] PERMISSIONS_setDeviceVolumeBehavior = {Manifest.permission.MODIFY_AUDIO_ROUTING, Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED};
-        static final String[] PERMISSIONS_getDeviceVolumeBehavior = {Manifest.permission.MODIFY_AUDIO_ROUTING, Manifest.permission.QUERY_AUDIO_STATE, Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED};
+        static final String[] PERMISSIONS_setDeviceVolume = {
+            Manifest.permission.MODIFY_AUDIO_ROUTING,
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED
+        };
+        static final String[] PERMISSIONS_getDeviceVolume = {
+            Manifest.permission.MODIFY_AUDIO_ROUTING,
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED
+        };
+        static final String[] PERMISSIONS_getAudioVolumeGroups = {
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+            Manifest.permission.MODIFY_AUDIO_ROUTING
+        };
+        static final String[] PERMISSIONS_setVolumeGroupVolumeIndex = {
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+            Manifest.permission.MODIFY_AUDIO_ROUTING
+        };
+        static final String[] PERMISSIONS_getVolumeGroupVolumeIndex = {
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+            Manifest.permission.MODIFY_AUDIO_ROUTING
+        };
+        static final String[] PERMISSIONS_getVolumeGroupMaxVolumeIndex = {
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+            Manifest.permission.MODIFY_AUDIO_ROUTING
+        };
+        static final String[] PERMISSIONS_getVolumeGroupMinVolumeIndex = {
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+            Manifest.permission.MODIFY_AUDIO_ROUTING
+        };
+        static final String[] PERMISSIONS_setDeviceVolumeBehavior = {
+            Manifest.permission.MODIFY_AUDIO_ROUTING,
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED
+        };
+        static final String[] PERMISSIONS_getDeviceVolumeBehavior = {
+            Manifest.permission.MODIFY_AUDIO_ROUTING,
+            Manifest.permission.QUERY_AUDIO_STATE,
+            Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED
+        };
 
         public Stub(PermissionEnforcer enforcer) {
             attachInterface(this, DESCRIPTOR);
@@ -2479,7 +2752,9 @@ public interface IAudioService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IAudioService asInterface(IBinder obj) {
@@ -3147,7 +3422,8 @@ public interface IAudioService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -3157,7 +3433,9 @@ public interface IAudioService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    PlayerBase.PlayerIdCard _arg0 = (PlayerBase.PlayerIdCard) data.readTypedObject(PlayerBase.PlayerIdCard.CREATOR);
+                    PlayerBase.PlayerIdCard _arg0 =
+                            (PlayerBase.PlayerIdCard)
+                                    data.readTypedObject(PlayerBase.PlayerIdCard.CREATOR);
                     data.enforceNoDataAvail();
                     int _result = trackPlayer(_arg0);
                     reply.writeNoException();
@@ -3165,7 +3443,8 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    AudioAttributes _arg1 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg1 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     playerAttributes(_arg02, _arg1);
                     return true;
@@ -3264,7 +3543,8 @@ public interface IAudioService extends IInterface {
                     reply.writeInt(_result7);
                     return true;
                 case 24:
-                    List<android.media.audiopolicy.AudioVolumeGroup> _result8 = getAudioVolumeGroups();
+                    List<android.media.audiopolicy.AudioVolumeGroup> _result8 =
+                            getAudioVolumeGroups();
                     reply.writeNoException();
                     reply.writeTypedList(_result8, 1);
                     return true;
@@ -3326,7 +3606,8 @@ public interface IAudioService extends IInterface {
                     reply.writeIntArray(_result15);
                     return true;
                 case 35:
-                    List<android.media.audiopolicy.AudioProductStrategy> _result16 = getAudioProductStrategies();
+                    List<android.media.audiopolicy.AudioProductStrategy> _result16 =
+                            getAudioProductStrategies();
                     reply.writeNoException();
                     reply.writeTypedList(_result16, 1);
                     return true;
@@ -3563,7 +3844,8 @@ public interface IAudioService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 78:
-                    IRingtonePlayer _arg045 = IRingtonePlayer.Stub.asInterface(data.readStrongBinder());
+                    IRingtonePlayer _arg045 =
+                            IRingtonePlayer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setRingtonePlayer(_arg045);
                     reply.writeNoException();
@@ -3596,7 +3878,8 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result41);
                     return true;
                 case 84:
-                    IStreamAliasingDispatcher _arg047 = IStreamAliasingDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IStreamAliasingDispatcher _arg047 =
+                            IStreamAliasingDispatcher.Stub.asInterface(data.readStrongBinder());
                     boolean _arg115 = data.readBoolean();
                     data.enforceNoDataAvail();
                     registerStreamAliasingDispatcher(_arg047, _arg115);
@@ -3611,7 +3894,8 @@ public interface IAudioService extends IInterface {
                 case 86:
                     return onTransact$setWiredDeviceConnectionState$(data, reply);
                 case 87:
-                    IAudioRoutesObserver _arg049 = IAudioRoutesObserver.Stub.asInterface(data.readStrongBinder());
+                    IAudioRoutesObserver _arg049 =
+                            IAudioRoutesObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     AudioRoutesInfo _result42 = startWatchingRoutes(_arg049);
                     reply.writeNoException();
@@ -3623,7 +3907,8 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result43);
                     return true;
                 case 89:
-                    IVolumeController _arg050 = IVolumeController.Stub.asInterface(data.readStrongBinder());
+                    IVolumeController _arg050 =
+                            IVolumeController.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setVolumeController(_arg050);
                     reply.writeNoException();
@@ -3634,7 +3919,8 @@ public interface IAudioService extends IInterface {
                     reply.writeStrongInterface(_result44);
                     return true;
                 case 91:
-                    IVolumeController _arg051 = IVolumeController.Stub.asInterface(data.readStrongBinder());
+                    IVolumeController _arg051 =
+                            IVolumeController.Stub.asInterface(data.readStrongBinder());
                     boolean _arg116 = data.readBoolean();
                     data.enforceNoDataAvail();
                     notifyVolumeControllerVisible(_arg051, _arg116);
@@ -3769,7 +4055,8 @@ public interface IAudioService extends IInterface {
                 case 114:
                     return onTransact$registerAudioPolicy$(data, reply);
                 case 115:
-                    IAudioPolicyCallback _arg067 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    IAudioPolicyCallback _arg067 =
+                            IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAudioPolicyAsync(_arg067);
                     return true;
@@ -3779,22 +4066,31 @@ public interface IAudioService extends IInterface {
                     reply.writeTypedList(_result59, 1);
                     return true;
                 case 117:
-                    IAudioPolicyCallback _arg068 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    IAudioPolicyCallback _arg068 =
+                            IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAudioPolicy(_arg068);
                     reply.writeNoException();
                     return true;
                 case 118:
-                    android.media.audiopolicy.AudioPolicyConfig _arg069 = (android.media.audiopolicy.AudioPolicyConfig) data.readTypedObject(android.media.audiopolicy.AudioPolicyConfig.CREATOR);
-                    IAudioPolicyCallback _arg119 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    android.media.audiopolicy.AudioPolicyConfig _arg069 =
+                            (android.media.audiopolicy.AudioPolicyConfig)
+                                    data.readTypedObject(
+                                            android.media.audiopolicy.AudioPolicyConfig.CREATOR);
+                    IAudioPolicyCallback _arg119 =
+                            IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result60 = addMixForPolicy(_arg069, _arg119);
                     reply.writeNoException();
                     reply.writeInt(_result60);
                     return true;
                 case 119:
-                    android.media.audiopolicy.AudioPolicyConfig _arg070 = (android.media.audiopolicy.AudioPolicyConfig) data.readTypedObject(android.media.audiopolicy.AudioPolicyConfig.CREATOR);
-                    IAudioPolicyCallback _arg120 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    android.media.audiopolicy.AudioPolicyConfig _arg070 =
+                            (android.media.audiopolicy.AudioPolicyConfig)
+                                    data.readTypedObject(
+                                            android.media.audiopolicy.AudioPolicyConfig.CREATOR);
+                    IAudioPolicyCallback _arg120 =
+                            IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result61 = removeMixForPolicy(_arg070, _arg120);
                     reply.writeNoException();
@@ -3804,14 +4100,16 @@ public interface IAudioService extends IInterface {
                     return onTransact$updateMixingRulesForPolicy$(data, reply);
                 case 121:
                     int _arg071 = data.readInt();
-                    IAudioPolicyCallback _arg121 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    IAudioPolicyCallback _arg121 =
+                            IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result62 = setFocusPropertiesForPolicy(_arg071, _arg121);
                     reply.writeNoException();
                     reply.writeInt(_result62);
                     return true;
                 case 122:
-                    VolumePolicy _arg072 = (VolumePolicy) data.readTypedObject(VolumePolicy.CREATOR);
+                    VolumePolicy _arg072 =
+                            (VolumePolicy) data.readTypedObject(VolumePolicy.CREATOR);
                     data.enforceNoDataAvail();
                     setVolumePolicy(_arg072);
                     reply.writeNoException();
@@ -3822,29 +4120,34 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result63);
                     return true;
                 case 124:
-                    IRecordingConfigDispatcher _arg073 = IRecordingConfigDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IRecordingConfigDispatcher _arg073 =
+                            IRecordingConfigDispatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerRecordingCallback(_arg073);
                     reply.writeNoException();
                     return true;
                 case 125:
-                    IRecordingConfigDispatcher _arg074 = IRecordingConfigDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IRecordingConfigDispatcher _arg074 =
+                            IRecordingConfigDispatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterRecordingCallback(_arg074);
                     return true;
                 case 126:
-                    List<AudioRecordingConfiguration> _result64 = getActiveRecordingConfigurations();
+                    List<AudioRecordingConfiguration> _result64 =
+                            getActiveRecordingConfigurations();
                     reply.writeNoException();
                     reply.writeTypedList(_result64, 1);
                     return true;
                 case 127:
-                    IPlaybackConfigDispatcher _arg075 = IPlaybackConfigDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IPlaybackConfigDispatcher _arg075 =
+                            IPlaybackConfigDispatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerPlaybackCallback(_arg075);
                     reply.writeNoException();
                     return true;
                 case 128:
-                    IPlaybackConfigDispatcher _arg076 = IPlaybackConfigDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IPlaybackConfigDispatcher _arg076 =
+                            IPlaybackConfigDispatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterPlaybackCallback(_arg076);
                     return true;
@@ -3855,7 +4158,8 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 130:
                     int _arg077 = data.readInt();
-                    AudioAttributes _arg122 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg122 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     int _result66 = getFocusRampTimeMs(_arg077, _arg122);
                     reply.writeNoException();
@@ -3876,13 +4180,15 @@ public interface IAudioService extends IInterface {
                 case 135:
                     return onTransact$setFocusRequestResultFromExtPolicy$(data, reply);
                 case 136:
-                    IAudioServerStateDispatcher _arg079 = IAudioServerStateDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IAudioServerStateDispatcher _arg079 =
+                            IAudioServerStateDispatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerAudioServerStateDispatcher(_arg079);
                     reply.writeNoException();
                     return true;
                 case 137:
-                    IAudioServerStateDispatcher _arg080 = IAudioServerStateDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IAudioServerStateDispatcher _arg080 =
+                            IAudioServerStateDispatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAudioServerStateDispatcher(_arg080);
                     return true;
@@ -3894,7 +4200,8 @@ public interface IAudioService extends IInterface {
                 case 139:
                     return onTransact$setUidDeviceAffinity$(data, reply);
                 case 140:
-                    IAudioPolicyCallback _arg081 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    IAudioPolicyCallback _arg081 =
+                            IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg124 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result68 = removeUidDeviceAffinity(_arg081, _arg124);
@@ -3904,7 +4211,8 @@ public interface IAudioService extends IInterface {
                 case 141:
                     return onTransact$setUserIdDeviceAffinity$(data, reply);
                 case 142:
-                    IAudioPolicyCallback _arg082 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    IAudioPolicyCallback _arg082 =
+                            IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg125 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result69 = removeUserIdDeviceAffinity(_arg082, _arg125);
@@ -3925,7 +4233,8 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 145:
                     int _arg084 = data.readInt();
-                    List<AudioDeviceAttributes> _arg126 = data.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _arg126 =
+                            data.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     int _result72 = setPreferredDevicesForStrategy(_arg084, _arg126);
                     reply.writeNoException();
@@ -3947,7 +4256,9 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 148:
                     int _arg087 = data.readInt();
-                    AudioDeviceAttributes _arg127 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg127 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     int _result75 = setDeviceAsNonDefaultForStrategy(_arg087, _arg127);
                     reply.writeNoException();
@@ -3955,7 +4266,9 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 149:
                     int _arg088 = data.readInt();
-                    AudioDeviceAttributes _arg128 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg128 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     int _result76 = removeDeviceAsNonDefaultForStrategy(_arg088, _arg128);
                     reply.writeNoException();
@@ -3964,33 +4277,40 @@ public interface IAudioService extends IInterface {
                 case 150:
                     int _arg089 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<AudioDeviceAttributes> _result77 = getNonDefaultDevicesForStrategy(_arg089);
+                    List<AudioDeviceAttributes> _result77 =
+                            getNonDefaultDevicesForStrategy(_arg089);
                     reply.writeNoException();
                     reply.writeTypedList(_result77, 1);
                     return true;
                 case 151:
-                    AudioAttributes _arg090 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg090 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     List<AudioDeviceAttributes> _result78 = getDevicesForAttributes(_arg090);
                     reply.writeNoException();
                     reply.writeTypedList(_result78, 1);
                     return true;
                 case 152:
-                    AudioAttributes _arg091 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg091 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     data.enforceNoDataAvail();
-                    List<AudioDeviceAttributes> _result79 = getDevicesForAttributesUnprotected(_arg091);
+                    List<AudioDeviceAttributes> _result79 =
+                            getDevicesForAttributesUnprotected(_arg091);
                     reply.writeNoException();
                     reply.writeTypedList(_result79, 1);
                     return true;
                 case 153:
-                    AudioAttributes _arg092 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
-                    IDevicesForAttributesCallback _arg129 = IDevicesForAttributesCallback.Stub.asInterface(data.readStrongBinder());
+                    AudioAttributes _arg092 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    IDevicesForAttributesCallback _arg129 =
+                            IDevicesForAttributesCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addOnDevicesForAttributesChangedListener(_arg092, _arg129);
                     reply.writeNoException();
                     return true;
                 case 154:
-                    IDevicesForAttributesCallback _arg093 = IDevicesForAttributesCallback.Stub.asInterface(data.readStrongBinder());
+                    IDevicesForAttributesCallback _arg093 =
+                            IDevicesForAttributesCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnDevicesForAttributesChangedListener(_arg093);
                     return true;
@@ -4007,24 +4327,32 @@ public interface IAudioService extends IInterface {
                     reply.writeInt(_result81);
                     return true;
                 case 157:
-                    IStrategyPreferredDevicesDispatcher _arg095 = IStrategyPreferredDevicesDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IStrategyPreferredDevicesDispatcher _arg095 =
+                            IStrategyPreferredDevicesDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerStrategyPreferredDevicesDispatcher(_arg095);
                     reply.writeNoException();
                     return true;
                 case 158:
-                    IStrategyPreferredDevicesDispatcher _arg096 = IStrategyPreferredDevicesDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IStrategyPreferredDevicesDispatcher _arg096 =
+                            IStrategyPreferredDevicesDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterStrategyPreferredDevicesDispatcher(_arg096);
                     return true;
                 case 159:
-                    IStrategyNonDefaultDevicesDispatcher _arg097 = IStrategyNonDefaultDevicesDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IStrategyNonDefaultDevicesDispatcher _arg097 =
+                            IStrategyNonDefaultDevicesDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerStrategyNonDefaultDevicesDispatcher(_arg097);
                     reply.writeNoException();
                     return true;
                 case 160:
-                    IStrategyNonDefaultDevicesDispatcher _arg098 = IStrategyNonDefaultDevicesDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IStrategyNonDefaultDevicesDispatcher _arg098 =
+                            IStrategyNonDefaultDevicesDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterStrategyNonDefaultDevicesDispatcher(_arg098);
                     return true;
@@ -4036,7 +4364,9 @@ public interface IAudioService extends IInterface {
                 case 162:
                     return onTransact$setDeviceVolumeBehavior$(data, reply);
                 case 163:
-                    AudioDeviceAttributes _arg0100 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0100 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     int _result82 = getDeviceVolumeBehavior(_arg0100);
                     reply.writeNoException();
@@ -4049,7 +4379,8 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 165:
                     int _arg0102 = data.readInt();
-                    List<AudioDeviceAttributes> _arg130 = data.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _arg130 =
+                            data.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     int _result83 = setPreferredDevicesForCapturePreset(_arg0102, _arg130);
                     reply.writeNoException();
@@ -4065,18 +4396,23 @@ public interface IAudioService extends IInterface {
                 case 167:
                     int _arg0104 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<AudioDeviceAttributes> _result85 = getPreferredDevicesForCapturePreset(_arg0104);
+                    List<AudioDeviceAttributes> _result85 =
+                            getPreferredDevicesForCapturePreset(_arg0104);
                     reply.writeNoException();
                     reply.writeTypedList(_result85, 1);
                     return true;
                 case 168:
-                    ICapturePresetDevicesRoleDispatcher _arg0105 = ICapturePresetDevicesRoleDispatcher.Stub.asInterface(data.readStrongBinder());
+                    ICapturePresetDevicesRoleDispatcher _arg0105 =
+                            ICapturePresetDevicesRoleDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCapturePresetDevicesRoleDispatcher(_arg0105);
                     reply.writeNoException();
                     return true;
                 case 169:
-                    ICapturePresetDevicesRoleDispatcher _arg0106 = ICapturePresetDevicesRoleDispatcher.Stub.asInterface(data.readStrongBinder());
+                    ICapturePresetDevicesRoleDispatcher _arg0106 =
+                            ICapturePresetDevicesRoleDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCapturePresetDevicesRoleDispatcher(_arg0106);
                     return true;
@@ -4127,13 +4463,17 @@ public interface IAudioService extends IInterface {
                     reply.writeInt(_result90);
                     return true;
                 case 180:
-                    ICommunicationDeviceDispatcher _arg0111 = ICommunicationDeviceDispatcher.Stub.asInterface(data.readStrongBinder());
+                    ICommunicationDeviceDispatcher _arg0111 =
+                            ICommunicationDeviceDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCommunicationDeviceDispatcher(_arg0111);
                     reply.writeNoException();
                     return true;
                 case 181:
-                    ICommunicationDeviceDispatcher _arg0112 = ICommunicationDeviceDispatcher.Stub.asInterface(data.readStrongBinder());
+                    ICommunicationDeviceDispatcher _arg0112 =
+                            ICommunicationDeviceDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCommunicationDeviceDispatcher(_arg0112);
                     return true;
@@ -4158,7 +4498,9 @@ public interface IAudioService extends IInterface {
                     setHomeSoundEffectEnabled(_arg0114);
                     return true;
                 case 186:
-                    AudioDeviceAttributes _arg0115 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0115 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     long _arg133 = data.readLong();
                     data.enforceNoDataAvail();
                     boolean _result93 = setAdditionalOutputDeviceDelay(_arg0115, _arg133);
@@ -4166,14 +4508,18 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result93);
                     return true;
                 case 187:
-                    AudioDeviceAttributes _arg0116 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0116 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     long _result94 = getAdditionalOutputDeviceDelay(_arg0116);
                     reply.writeNoException();
                     reply.writeLong(_result94);
                     return true;
                 case 188:
-                    AudioDeviceAttributes _arg0117 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0117 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     long _result95 = getMaxAdditionalOutputDeviceDelay(_arg0117);
                     reply.writeNoException();
@@ -4184,7 +4530,8 @@ public interface IAudioService extends IInterface {
                 case 190:
                     return onTransact$abandonAudioFocusForTest$(data, reply);
                 case 191:
-                    AudioAttributes _arg0118 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg0118 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     long _result96 = getFadeOutDurationOnFocusLossMillis(_arg0118);
                     reply.writeNoException();
@@ -4221,13 +4568,15 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result101);
                     return true;
                 case 197:
-                    IAudioModeDispatcher _arg0121 = IAudioModeDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IAudioModeDispatcher _arg0121 =
+                            IAudioModeDispatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerModeDispatcher(_arg0121);
                     reply.writeNoException();
                     return true;
                 case 198:
-                    IAudioModeDispatcher _arg0122 = IAudioModeDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IAudioModeDispatcher _arg0122 =
+                            IAudioModeDispatcher.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterModeDispatcher(_arg0122);
                     return true;
@@ -4247,14 +4596,18 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result104);
                     return true;
                 case 202:
-                    AudioDeviceAttributes _arg0123 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0123 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result105 = isSpatializerAvailableForDevice(_arg0123);
                     reply.writeNoException();
                     reply.writeBoolean(_result105);
                     return true;
                 case 203:
-                    AudioDeviceAttributes _arg0124 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0124 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result106 = hasHeadTracker(_arg0124);
                     reply.writeNoException();
@@ -4262,13 +4615,17 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 204:
                     boolean _arg0125 = data.readBoolean();
-                    AudioDeviceAttributes _arg135 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg135 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     setHeadTrackerEnabled(_arg0125, _arg135);
                     reply.writeNoException();
                     return true;
                 case 205:
-                    AudioDeviceAttributes _arg0126 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0126 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result107 = isHeadTrackerEnabled(_arg0126);
                     reply.writeNoException();
@@ -4280,7 +4637,9 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result108);
                     return true;
                 case 207:
-                    ISpatializerHeadTrackerAvailableCallback _arg0127 = ISpatializerHeadTrackerAvailableCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerHeadTrackerAvailableCallback _arg0127 =
+                            ISpatializerHeadTrackerAvailableCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     boolean _arg136 = data.readBoolean();
                     data.enforceNoDataAvail();
                     registerSpatializerHeadTrackerAvailableCallback(_arg0127, _arg136);
@@ -4293,7 +4652,8 @@ public interface IAudioService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 209:
-                    AudioAttributes _arg0129 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg0129 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     AudioFormat _arg137 = (AudioFormat) data.readTypedObject(AudioFormat.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result109 = canBeSpatialized(_arg0129, _arg137);
@@ -4301,37 +4661,47 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result109);
                     return true;
                 case 210:
-                    ISpatializerCallback _arg0130 = ISpatializerCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerCallback _arg0130 =
+                            ISpatializerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerSpatializerCallback(_arg0130);
                     reply.writeNoException();
                     return true;
                 case 211:
-                    ISpatializerCallback _arg0131 = ISpatializerCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerCallback _arg0131 =
+                            ISpatializerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterSpatializerCallback(_arg0131);
                     reply.writeNoException();
                     return true;
                 case 212:
-                    ISpatializerHeadTrackingModeCallback _arg0132 = ISpatializerHeadTrackingModeCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerHeadTrackingModeCallback _arg0132 =
+                            ISpatializerHeadTrackingModeCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerSpatializerHeadTrackingCallback(_arg0132);
                     reply.writeNoException();
                     return true;
                 case 213:
-                    ISpatializerHeadTrackingModeCallback _arg0133 = ISpatializerHeadTrackingModeCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerHeadTrackingModeCallback _arg0133 =
+                            ISpatializerHeadTrackingModeCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterSpatializerHeadTrackingCallback(_arg0133);
                     reply.writeNoException();
                     return true;
                 case 214:
-                    ISpatializerHeadToSoundStagePoseCallback _arg0134 = ISpatializerHeadToSoundStagePoseCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerHeadToSoundStagePoseCallback _arg0134 =
+                            ISpatializerHeadToSoundStagePoseCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerHeadToSoundstagePoseCallback(_arg0134);
                     reply.writeNoException();
                     return true;
                 case 215:
-                    ISpatializerHeadToSoundStagePoseCallback _arg0135 = ISpatializerHeadToSoundStagePoseCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerHeadToSoundStagePoseCallback _arg0135 =
+                            ISpatializerHeadToSoundStagePoseCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterHeadToSoundstagePoseCallback(_arg0135);
                     reply.writeNoException();
@@ -4342,13 +4712,17 @@ public interface IAudioService extends IInterface {
                     reply.writeTypedList(_result110, 1);
                     return true;
                 case 217:
-                    AudioDeviceAttributes _arg0136 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0136 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     addSpatializerCompatibleAudioDevice(_arg0136);
                     reply.writeNoException();
                     return true;
                 case 218:
-                    AudioDeviceAttributes _arg0137 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0137 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     removeSpatializerCompatibleAudioDevice(_arg0137);
                     reply.writeNoException();
@@ -4403,13 +4777,15 @@ public interface IAudioService extends IInterface {
                     reply.writeInt(_result114);
                     return true;
                 case 228:
-                    ISpatializerOutputCallback _arg0142 = ISpatializerOutputCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerOutputCallback _arg0142 =
+                            ISpatializerOutputCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerSpatializerOutputCallback(_arg0142);
                     reply.writeNoException();
                     return true;
                 case 229:
-                    ISpatializerOutputCallback _arg0143 = ISpatializerOutputCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerOutputCallback _arg0143 =
+                            ISpatializerOutputCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterSpatializerOutputCallback(_arg0143);
                     reply.writeNoException();
@@ -4432,7 +4808,9 @@ public interface IAudioService extends IInterface {
                 case 233:
                     return onTransact$muteAwaitConnection$(data, reply);
                 case 234:
-                    AudioDeviceAttributes _arg0144 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0144 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     cancelMuteAwaitConnection(_arg0144);
                     return true;
@@ -4442,14 +4820,17 @@ public interface IAudioService extends IInterface {
                     reply.writeTypedObject(_result118, 1);
                     return true;
                 case 236:
-                    IMuteAwaitConnectionCallback _arg0145 = IMuteAwaitConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMuteAwaitConnectionCallback _arg0145 =
+                            IMuteAwaitConnectionCallback.Stub.asInterface(data.readStrongBinder());
                     boolean _arg140 = data.readBoolean();
                     data.enforceNoDataAvail();
                     registerMuteAwaitConnectionDispatcher(_arg0145, _arg140);
                     reply.writeNoException();
                     return true;
                 case 237:
-                    AudioDeviceAttributes _arg0146 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0146 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     boolean _arg141 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setTestDeviceConnectionState(_arg0146, _arg141);
@@ -4457,7 +4838,9 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 238:
                     boolean _arg0147 = data.readBoolean();
-                    IDeviceVolumeBehaviorDispatcher _arg142 = IDeviceVolumeBehaviorDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IDeviceVolumeBehaviorDispatcher _arg142 =
+                            IDeviceVolumeBehaviorDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerDeviceVolumeBehaviorDispatcher(_arg0147, _arg142);
                     reply.writeNoException();
@@ -4468,8 +4851,10 @@ public interface IAudioService extends IInterface {
                     reply.writeTypedList(_result119, 1);
                     return true;
                 case 240:
-                    AudioFocusInfo _arg0148 = (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
-                    IAudioPolicyCallback _arg143 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    AudioFocusInfo _arg0148 =
+                            (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
+                    IAudioPolicyCallback _arg143 =
+                            IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result120 = sendFocusLoss(_arg0148, _arg143);
                     reply.writeNoException();
@@ -4513,7 +4898,8 @@ public interface IAudioService extends IInterface {
                 case 248:
                     return onTransact$setPreferredMixerAttributes$(data, reply);
                 case 249:
-                    AudioAttributes _arg0152 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg0152 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     int _arg144 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result124 = clearPreferredMixerAttributes(_arg0152, _arg144);
@@ -4521,13 +4907,17 @@ public interface IAudioService extends IInterface {
                     reply.writeInt(_result124);
                     return true;
                 case 250:
-                    IPreferredMixerAttributesDispatcher _arg0153 = IPreferredMixerAttributesDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IPreferredMixerAttributesDispatcher _arg0153 =
+                            IPreferredMixerAttributesDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerPreferredMixerAttributesDispatcher(_arg0153);
                     reply.writeNoException();
                     return true;
                 case 251:
-                    IPreferredMixerAttributesDispatcher _arg0154 = IPreferredMixerAttributesDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IPreferredMixerAttributesDispatcher _arg0154 =
+                            IPreferredMixerAttributesDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterPreferredMixerAttributesDispatcher(_arg0154);
                     return true;
@@ -4548,13 +4938,17 @@ public interface IAudioService extends IInterface {
                     reply.writeBoolean(_result126);
                     return true;
                 case 255:
-                    ILoudnessCodecUpdatesDispatcher _arg0156 = ILoudnessCodecUpdatesDispatcher.Stub.asInterface(data.readStrongBinder());
+                    ILoudnessCodecUpdatesDispatcher _arg0156 =
+                            ILoudnessCodecUpdatesDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerLoudnessCodecUpdatesDispatcher(_arg0156);
                     reply.writeNoException();
                     return true;
                 case 256:
-                    ILoudnessCodecUpdatesDispatcher _arg0157 = ILoudnessCodecUpdatesDispatcher.Stub.asInterface(data.readStrongBinder());
+                    ILoudnessCodecUpdatesDispatcher _arg0157 =
+                            ILoudnessCodecUpdatesDispatcher.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterLoudnessCodecUpdatesDispatcher(_arg0157);
                     reply.writeNoException();
@@ -4573,19 +4967,23 @@ public interface IAudioService extends IInterface {
                     return onTransact$addLoudnessCodecInfo$(data, reply);
                 case 260:
                     int _arg0160 = data.readInt();
-                    LoudnessCodecInfo _arg145 = (LoudnessCodecInfo) data.readTypedObject(LoudnessCodecInfo.CREATOR);
+                    LoudnessCodecInfo _arg145 =
+                            (LoudnessCodecInfo) data.readTypedObject(LoudnessCodecInfo.CREATOR);
                     data.enforceNoDataAvail();
                     removeLoudnessCodecInfo(_arg0160, _arg145);
                     return true;
                 case 261:
-                    LoudnessCodecInfo _arg0161 = (LoudnessCodecInfo) data.readTypedObject(LoudnessCodecInfo.CREATOR);
+                    LoudnessCodecInfo _arg0161 =
+                            (LoudnessCodecInfo) data.readTypedObject(LoudnessCodecInfo.CREATOR);
                     data.enforceNoDataAvail();
                     PersistableBundle _result127 = getLoudnessParams(_arg0161);
                     reply.writeNoException();
                     reply.writeTypedObject(_result127, 1);
                     return true;
                 case 262:
-                    FadeManagerConfiguration _arg0162 = (FadeManagerConfiguration) data.readTypedObject(FadeManagerConfiguration.CREATOR);
+                    FadeManagerConfiguration _arg0162 =
+                            (FadeManagerConfiguration)
+                                    data.readTypedObject(FadeManagerConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     int _result128 = setFadeManagerConfigurationForFocusLoss(_arg0162);
                     reply.writeNoException();
@@ -4602,7 +5000,8 @@ public interface IAudioService extends IInterface {
                     reply.writeTypedObject(_result130, 1);
                     return true;
                 case 265:
-                    AudioAttributes _arg0163 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg0163 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result131 = shouldNotificationSoundPlay(_arg0163);
                     reply.writeNoException();
@@ -4780,7 +5179,8 @@ public interface IAudioService extends IInterface {
                     return true;
                 case 297:
                     int _arg0181 = data.readInt();
-                    PendingIntent _arg151 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg151 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     setSoundSettingEventBroadcastIntent(_arg0181, _arg151);
                     return true;
@@ -4826,7 +5226,8 @@ public interface IAudioService extends IInterface {
                 case 305:
                     return onTransact$setA2dpDeviceVolume$(data, reply);
                 case 306:
-                    BluetoothDevice _arg0185 = (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
+                    BluetoothDevice _arg0185 =
+                            (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
                     int _arg152 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result156 = getA2dpDeviceVolume(_arg0185, _arg152);
@@ -4850,7 +5251,8 @@ public interface IAudioService extends IInterface {
                     recordRingtoneChanger(_arg0187);
                     return true;
                 case 310:
-                    IPlaybackConfigDispatcher _arg0188 = IPlaybackConfigDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IPlaybackConfigDispatcher _arg0188 =
+                            IPlaybackConfigDispatcher.Stub.asInterface(data.readStrongBinder());
                     String _arg153 = data.readString();
                     data.enforceNoDataAvail();
                     registerPlaybackCallbackWithPackage(_arg0188, _arg153);
@@ -4875,7 +5277,8 @@ public interface IAudioService extends IInterface {
                     reply.writeStringList(_result159);
                     return true;
                 case 314:
-                    IVolumeController _arg0191 = IVolumeController.Stub.asInterface(data.readStrongBinder());
+                    IVolumeController _arg0191 =
+                            IVolumeController.Stub.asInterface(data.readStrongBinder());
                     boolean _arg154 = data.readBoolean();
                     data.enforceNoDataAvail();
                     notifySafetyVolumeDialogVisible(_arg0191, _arg154);
@@ -5034,7 +5437,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void portEvent(int portId, int event, PersistableBundle extras) throws RemoteException {
+            public void portEvent(int portId, int event, PersistableBundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -5048,7 +5452,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void adjustStreamVolume(int streamType, int direction, int flags, String callingPackage) throws RemoteException {
+            public void adjustStreamVolume(
+                    int streamType, int direction, int flags, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5066,7 +5472,13 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void adjustStreamVolumeWithAttribution(int streamType, int direction, int flags, String callingPackage, String attributionTag) throws RemoteException {
+            public void adjustStreamVolumeWithAttribution(
+                    int streamType,
+                    int direction,
+                    int flags,
+                    String callingPackage,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5085,7 +5497,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setStreamVolume(int streamType, int index, int flags, String callingPackage) throws RemoteException {
+            public void setStreamVolume(int streamType, int index, int flags, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5103,7 +5516,13 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setStreamVolumeWithAttribution(int streamType, int index, int flags, String callingPackage, String attributionTag) throws RemoteException {
+            public void setStreamVolumeWithAttribution(
+                    int streamType,
+                    int index,
+                    int flags,
+                    String callingPackage,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5122,7 +5541,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setDeviceVolume(VolumeInfo vi, AudioDeviceAttributes ada, String callingPackage) throws RemoteException {
+            public void setDeviceVolume(
+                    VolumeInfo vi, AudioDeviceAttributes ada, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5139,7 +5560,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public VolumeInfo getDeviceVolume(VolumeInfo vi, AudioDeviceAttributes ada, String callingPackage) throws RemoteException {
+            public VolumeInfo getDeviceVolume(
+                    VolumeInfo vi, AudioDeviceAttributes ada, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5158,7 +5581,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void handleVolumeKey(KeyEvent event, boolean isOnTv, String callingPackage, String caller) throws RemoteException {
+            public void handleVolumeKey(
+                    KeyEvent event, boolean isOnTv, String callingPackage, String caller)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -5190,7 +5615,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void forceRemoteSubmixFullVolume(boolean startForcing, IBinder cb) throws RemoteException {
+            public void forceRemoteSubmixFullVolume(boolean startForcing, IBinder cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5222,7 +5648,13 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setMasterMute(boolean mute, int flags, String callingPackage, int userId, String attributionTag) throws RemoteException {
+            public void setMasterMute(
+                    boolean mute,
+                    int flags,
+                    String callingPackage,
+                    int userId,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5292,14 +5724,17 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<android.media.audiopolicy.AudioVolumeGroup> getAudioVolumeGroups() throws RemoteException {
+            public List<android.media.audiopolicy.AudioVolumeGroup> getAudioVolumeGroups()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(24, _data, _reply, 0);
                     _reply.readException();
-                    List<android.media.audiopolicy.AudioVolumeGroup> _result = _reply.createTypedArrayList(android.media.audiopolicy.AudioVolumeGroup.CREATOR);
+                    List<android.media.audiopolicy.AudioVolumeGroup> _result =
+                            _reply.createTypedArrayList(
+                                    android.media.audiopolicy.AudioVolumeGroup.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5308,7 +5743,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setVolumeGroupVolumeIndex(int groupId, int index, int flags, String callingPackage, String attributionTag) throws RemoteException {
+            public void setVolumeGroupVolumeIndex(
+                    int groupId, int index, int flags, String callingPackage, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5412,7 +5849,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void adjustVolumeGroupVolume(int groupId, int direction, int flags, String callingPackage) throws RemoteException {
+            public void adjustVolumeGroupVolume(
+                    int groupId, int direction, int flags, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5478,14 +5917,17 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<android.media.audiopolicy.AudioProductStrategy> getAudioProductStrategies() throws RemoteException {
+            public List<android.media.audiopolicy.AudioProductStrategy> getAudioProductStrategies()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    List<android.media.audiopolicy.AudioProductStrategy> _result = _reply.createTypedArrayList(android.media.audiopolicy.AudioProductStrategy.CREATOR);
+                    List<android.media.audiopolicy.AudioProductStrategy> _result =
+                            _reply.createTypedArrayList(
+                                    android.media.audiopolicy.AudioProductStrategy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5543,7 +5985,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setMicrophoneMute(boolean on, String callingPackage, int userId, String attributionTag) throws RemoteException {
+            public void setMicrophoneMute(
+                    boolean on, String callingPackage, int userId, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5573,7 +6017,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setRingerModeExternal(int ringerMode, String caller) throws RemoteException {
+            public void setRingerModeExternal(int ringerMode, String caller)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5589,7 +6034,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setRingerModeInternal(int ringerMode, String caller) throws RemoteException {
+            public void setRingerModeInternal(int ringerMode, String caller)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5654,7 +6100,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setVibrateSetting(int vibrateType, int vibrateSetting) throws RemoteException {
+            public void setVibrateSetting(int vibrateType, int vibrateSetting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5704,7 +6151,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setMode(int mode, IBinder cb, String callingPackage) throws RemoteException {
+            public void setMode(int mode, IBinder cb, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5835,7 +6283,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean setSurroundFormatEnabled(int audioFormat, boolean enabled) throws RemoteException {
+            public boolean setSurroundFormatEnabled(int audioFormat, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6028,7 +6477,18 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int requestAudioFocus(AudioAttributes aa, int durationHint, IBinder cb, IAudioFocusDispatcher fd, String clientId, String callingPackageName, String attributionTag, int flags, IAudioPolicyCallback pcb, int sdk) throws RemoteException {
+            public int requestAudioFocus(
+                    AudioAttributes aa,
+                    int durationHint,
+                    IBinder cb,
+                    IAudioFocusDispatcher fd,
+                    String clientId,
+                    String callingPackageName,
+                    String attributionTag,
+                    int flags,
+                    IAudioPolicyCallback pcb,
+                    int sdk)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6054,7 +6514,12 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int abandonAudioFocus(IAudioFocusDispatcher fd, String clientId, AudioAttributes aa, String callingPackageName) throws RemoteException {
+            public int abandonAudioFocus(
+                    IAudioFocusDispatcher fd,
+                    String clientId,
+                    AudioAttributes aa,
+                    String callingPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6151,7 +6616,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void forceVolumeControlStream(int streamType, IBinder cb) throws RemoteException {
+            public void forceVolumeControlStream(int streamType, IBinder cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6189,7 +6655,8 @@ public interface IAudioService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(79, _data, _reply, 0);
                     _reply.readException();
-                    IRingtonePlayer _result = IRingtonePlayer.Stub.asInterface(_reply.readStrongBinder());
+                    IRingtonePlayer _result =
+                            IRingtonePlayer.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6264,7 +6731,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerStreamAliasingDispatcher(IStreamAliasingDispatcher isad, boolean register) throws RemoteException {
+            public void registerStreamAliasingDispatcher(
+                    IStreamAliasingDispatcher isad, boolean register) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6295,7 +6763,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setWiredDeviceConnectionState(AudioDeviceAttributes aa, int state, String caller) throws RemoteException {
+            public void setWiredDeviceConnectionState(
+                    AudioDeviceAttributes aa, int state, String caller) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6312,7 +6781,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public AudioRoutesInfo startWatchingRoutes(IAudioRoutesObserver observer) throws RemoteException {
+            public AudioRoutesInfo startWatchingRoutes(IAudioRoutesObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6320,7 +6790,8 @@ public interface IAudioService extends IInterface {
                     _data.writeStrongInterface(observer);
                     this.mRemote.transact(87, _data, _reply, 0);
                     _reply.readException();
-                    AudioRoutesInfo _result = (AudioRoutesInfo) _reply.readTypedObject(AudioRoutesInfo.CREATOR);
+                    AudioRoutesInfo _result =
+                            (AudioRoutesInfo) _reply.readTypedObject(AudioRoutesInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6367,7 +6838,8 @@ public interface IAudioService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(90, _data, _reply, 0);
                     _reply.readException();
-                    IVolumeController _result = IVolumeController.Stub.asInterface(_reply.readStrongBinder());
+                    IVolumeController _result =
+                            IVolumeController.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6376,7 +6848,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void notifyVolumeControllerVisible(IVolumeController controller, boolean visible) throws RemoteException {
+            public void notifyVolumeControllerVisible(IVolumeController controller, boolean visible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6538,7 +7011,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void forceComputeCsdOnAllDevices(boolean computeCsdOnAllDevices) throws RemoteException {
+            public void forceComputeCsdOnAllDevices(boolean computeCsdOnAllDevices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6610,7 +7084,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setBluetoothAudioDeviceCategory_legacy(String address, boolean isBle, int deviceCategory) throws RemoteException {
+            public void setBluetoothAudioDeviceCategory_legacy(
+                    String address, boolean isBle, int deviceCategory) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6624,7 +7099,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int getBluetoothAudioDeviceCategory_legacy(String address, boolean isBle) throws RemoteException {
+            public int getBluetoothAudioDeviceCategory_legacy(String address, boolean isBle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6642,7 +7118,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean setBluetoothAudioDeviceCategory(String address, int deviceCategory) throws RemoteException {
+            public boolean setBluetoothAudioDeviceCategory(String address, int deviceCategory)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6677,7 +7154,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean isBluetoothAudioDeviceCategoryFixed(String address) throws RemoteException {
+            public boolean isBluetoothAudioDeviceCategoryFixed(String address)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6727,7 +7205,16 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public String registerAudioPolicy(android.media.audiopolicy.AudioPolicyConfig policyConfig, IAudioPolicyCallback pcb, boolean hasFocusListener, boolean isFocusPolicy, boolean isTestFocusPolicy, boolean isVolumeController, IMediaProjection projection, AttributionSource attributionSource) throws RemoteException {
+            public String registerAudioPolicy(
+                    android.media.audiopolicy.AudioPolicyConfig policyConfig,
+                    IAudioPolicyCallback pcb,
+                    boolean hasFocusListener,
+                    boolean isFocusPolicy,
+                    boolean isTestFocusPolicy,
+                    boolean isVolumeController,
+                    IMediaProjection projection,
+                    AttributionSource attributionSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6751,7 +7238,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterAudioPolicyAsync(IAudioPolicyCallback pcb) throws RemoteException {
+            public void unregisterAudioPolicyAsync(IAudioPolicyCallback pcb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6763,14 +7251,16 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<android.media.audiopolicy.AudioMix> getRegisteredPolicyMixes() throws RemoteException {
+            public List<android.media.audiopolicy.AudioMix> getRegisteredPolicyMixes()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(116, _data, _reply, 0);
                     _reply.readException();
-                    List<android.media.audiopolicy.AudioMix> _result = _reply.createTypedArrayList(android.media.audiopolicy.AudioMix.CREATOR);
+                    List<android.media.audiopolicy.AudioMix> _result =
+                            _reply.createTypedArrayList(android.media.audiopolicy.AudioMix.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6794,7 +7284,10 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int addMixForPolicy(android.media.audiopolicy.AudioPolicyConfig policyConfig, IAudioPolicyCallback pcb) throws RemoteException {
+            public int addMixForPolicy(
+                    android.media.audiopolicy.AudioPolicyConfig policyConfig,
+                    IAudioPolicyCallback pcb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6812,7 +7305,10 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int removeMixForPolicy(android.media.audiopolicy.AudioPolicyConfig policyConfig, IAudioPolicyCallback pcb) throws RemoteException {
+            public int removeMixForPolicy(
+                    android.media.audiopolicy.AudioPolicyConfig policyConfig,
+                    IAudioPolicyCallback pcb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6830,7 +7326,11 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int updateMixingRulesForPolicy(android.media.audiopolicy.AudioMix[] mixesToUpdate, AudioMixingRule[] updatedMixingRules, IAudioPolicyCallback pcb) throws RemoteException {
+            public int updateMixingRulesForPolicy(
+                    android.media.audiopolicy.AudioMix[] mixesToUpdate,
+                    AudioMixingRule[] updatedMixingRules,
+                    IAudioPolicyCallback pcb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6849,7 +7349,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setFocusPropertiesForPolicy(int duckingBehavior, IAudioPolicyCallback pcb) throws RemoteException {
+            public int setFocusPropertiesForPolicy(int duckingBehavior, IAudioPolicyCallback pcb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6898,7 +7399,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerRecordingCallback(IRecordingConfigDispatcher rcdb) throws RemoteException {
+            public void registerRecordingCallback(IRecordingConfigDispatcher rcdb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6913,7 +7415,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterRecordingCallback(IRecordingConfigDispatcher rcdb) throws RemoteException {
+            public void unregisterRecordingCallback(IRecordingConfigDispatcher rcdb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6925,14 +7428,16 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<AudioRecordingConfiguration> getActiveRecordingConfigurations() throws RemoteException {
+            public List<AudioRecordingConfiguration> getActiveRecordingConfigurations()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(126, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioRecordingConfiguration> _result = _reply.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
+                    List<AudioRecordingConfiguration> _result =
+                            _reply.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6941,7 +7446,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerPlaybackCallback(IPlaybackConfigDispatcher pcdb) throws RemoteException {
+            public void registerPlaybackCallback(IPlaybackConfigDispatcher pcdb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6956,7 +7462,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterPlaybackCallback(IPlaybackConfigDispatcher pcdb) throws RemoteException {
+            public void unregisterPlaybackCallback(IPlaybackConfigDispatcher pcdb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6968,14 +7475,16 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<AudioPlaybackConfiguration> getActivePlaybackConfigurations() throws RemoteException {
+            public List<AudioPlaybackConfiguration> getActivePlaybackConfigurations()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(129, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioPlaybackConfiguration> _result = _reply.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
+                    List<AudioPlaybackConfiguration> _result =
+                            _reply.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6984,7 +7493,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int getFocusRampTimeMs(int focusGain, AudioAttributes attr) throws RemoteException {
+            public int getFocusRampTimeMs(int focusGain, AudioAttributes attr)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7002,7 +7512,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int dispatchFocusChange(AudioFocusInfo afi, int focusChange, IAudioPolicyCallback pcb) throws RemoteException {
+            public int dispatchFocusChange(
+                    AudioFocusInfo afi, int focusChange, IAudioPolicyCallback pcb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7021,7 +7533,13 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int dispatchFocusChangeWithFade(AudioFocusInfo afi, int focusChange, IAudioPolicyCallback pcb, List<AudioFocusInfo> otherActiveAfis, FadeManagerConfiguration transientFadeMgrConfig) throws RemoteException {
+            public int dispatchFocusChangeWithFade(
+                    AudioFocusInfo afi,
+                    int focusChange,
+                    IAudioPolicyCallback pcb,
+                    List<AudioFocusInfo> otherActiveAfis,
+                    FadeManagerConfiguration transientFadeMgrConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7042,7 +7560,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void playerHasOpPlayAudio(int piid, boolean hasOpPlayAudio) throws RemoteException {
+            public void playerHasOpPlayAudio(int piid, boolean hasOpPlayAudio)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7055,7 +7574,11 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void handleBluetoothActiveDeviceChanged(BluetoothDevice newDevice, BluetoothDevice previousDevice, BluetoothProfileConnectionInfo info) throws RemoteException {
+            public void handleBluetoothActiveDeviceChanged(
+                    BluetoothDevice newDevice,
+                    BluetoothDevice previousDevice,
+                    BluetoothProfileConnectionInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7072,7 +7595,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setFocusRequestResultFromExtPolicy(AudioFocusInfo afi, int requestResult, IAudioPolicyCallback pcb) throws RemoteException {
+            public void setFocusRequestResultFromExtPolicy(
+                    AudioFocusInfo afi, int requestResult, IAudioPolicyCallback pcb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7086,7 +7611,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerAudioServerStateDispatcher(IAudioServerStateDispatcher asd) throws RemoteException {
+            public void registerAudioServerStateDispatcher(IAudioServerStateDispatcher asd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7101,7 +7627,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterAudioServerStateDispatcher(IAudioServerStateDispatcher asd) throws RemoteException {
+            public void unregisterAudioServerStateDispatcher(IAudioServerStateDispatcher asd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7129,7 +7656,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setUidDeviceAffinity(IAudioPolicyCallback pcb, int uid, int[] deviceTypes, String[] deviceAddresses) throws RemoteException {
+            public int setUidDeviceAffinity(
+                    IAudioPolicyCallback pcb, int uid, int[] deviceTypes, String[] deviceAddresses)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7149,7 +7678,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int removeUidDeviceAffinity(IAudioPolicyCallback pcb, int uid) throws RemoteException {
+            public int removeUidDeviceAffinity(IAudioPolicyCallback pcb, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7167,7 +7697,12 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setUserIdDeviceAffinity(IAudioPolicyCallback pcb, int userId, int[] deviceTypes, String[] deviceAddresses) throws RemoteException {
+            public int setUserIdDeviceAffinity(
+                    IAudioPolicyCallback pcb,
+                    int userId,
+                    int[] deviceTypes,
+                    String[] deviceAddresses)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7187,7 +7722,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int removeUserIdDeviceAffinity(IAudioPolicyCallback pcb, int userId) throws RemoteException {
+            public int removeUserIdDeviceAffinity(IAudioPolicyCallback pcb, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7238,7 +7774,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setPreferredDevicesForStrategy(int strategy, List<AudioDeviceAttributes> devices) throws RemoteException {
+            public int setPreferredDevicesForStrategy(
+                    int strategy, List<AudioDeviceAttributes> devices) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7273,7 +7810,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<AudioDeviceAttributes> getPreferredDevicesForStrategy(int strategy) throws RemoteException {
+            public List<AudioDeviceAttributes> getPreferredDevicesForStrategy(int strategy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7281,7 +7819,8 @@ public interface IAudioService extends IInterface {
                     _data.writeInt(strategy);
                     this.mRemote.transact(147, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioDeviceAttributes> _result = _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _result =
+                            _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7290,7 +7829,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setDeviceAsNonDefaultForStrategy(int strategy, AudioDeviceAttributes device) throws RemoteException {
+            public int setDeviceAsNonDefaultForStrategy(int strategy, AudioDeviceAttributes device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7308,7 +7848,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int removeDeviceAsNonDefaultForStrategy(int strategy, AudioDeviceAttributes device) throws RemoteException {
+            public int removeDeviceAsNonDefaultForStrategy(
+                    int strategy, AudioDeviceAttributes device) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7326,7 +7867,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<AudioDeviceAttributes> getNonDefaultDevicesForStrategy(int strategy) throws RemoteException {
+            public List<AudioDeviceAttributes> getNonDefaultDevicesForStrategy(int strategy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7334,7 +7876,8 @@ public interface IAudioService extends IInterface {
                     _data.writeInt(strategy);
                     this.mRemote.transact(150, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioDeviceAttributes> _result = _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _result =
+                            _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7343,7 +7886,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<AudioDeviceAttributes> getDevicesForAttributes(AudioAttributes attributes) throws RemoteException {
+            public List<AudioDeviceAttributes> getDevicesForAttributes(AudioAttributes attributes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7351,7 +7895,8 @@ public interface IAudioService extends IInterface {
                     _data.writeTypedObject(attributes, 0);
                     this.mRemote.transact(151, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioDeviceAttributes> _result = _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _result =
+                            _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7360,7 +7905,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<AudioDeviceAttributes> getDevicesForAttributesUnprotected(AudioAttributes attributes) throws RemoteException {
+            public List<AudioDeviceAttributes> getDevicesForAttributesUnprotected(
+                    AudioAttributes attributes) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7368,7 +7914,8 @@ public interface IAudioService extends IInterface {
                     _data.writeTypedObject(attributes, 0);
                     this.mRemote.transact(152, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioDeviceAttributes> _result = _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _result =
+                            _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7377,7 +7924,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void addOnDevicesForAttributesChangedListener(AudioAttributes attributes, IDevicesForAttributesCallback callback) throws RemoteException {
+            public void addOnDevicesForAttributesChangedListener(
+                    AudioAttributes attributes, IDevicesForAttributesCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7393,7 +7942,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void removeOnDevicesForAttributesChangedListener(IDevicesForAttributesCallback callback) throws RemoteException {
+            public void removeOnDevicesForAttributesChangedListener(
+                    IDevicesForAttributesCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7438,7 +7988,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerStrategyPreferredDevicesDispatcher(IStrategyPreferredDevicesDispatcher dispatcher) throws RemoteException {
+            public void registerStrategyPreferredDevicesDispatcher(
+                    IStrategyPreferredDevicesDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7453,7 +8004,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterStrategyPreferredDevicesDispatcher(IStrategyPreferredDevicesDispatcher dispatcher) throws RemoteException {
+            public void unregisterStrategyPreferredDevicesDispatcher(
+                    IStrategyPreferredDevicesDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7465,7 +8017,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerStrategyNonDefaultDevicesDispatcher(IStrategyNonDefaultDevicesDispatcher dispatcher) throws RemoteException {
+            public void registerStrategyNonDefaultDevicesDispatcher(
+                    IStrategyNonDefaultDevicesDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7480,7 +8033,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterStrategyNonDefaultDevicesDispatcher(IStrategyNonDefaultDevicesDispatcher dispatcher) throws RemoteException {
+            public void unregisterStrategyNonDefaultDevicesDispatcher(
+                    IStrategyNonDefaultDevicesDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7504,7 +8058,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setDeviceVolumeBehavior(AudioDeviceAttributes device, int deviceVolumeBehavior, String pkgName) throws RemoteException {
+            public void setDeviceVolumeBehavior(
+                    AudioDeviceAttributes device, int deviceVolumeBehavior, String pkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7521,7 +8077,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int getDeviceVolumeBehavior(AudioDeviceAttributes device) throws RemoteException {
+            public int getDeviceVolumeBehavior(AudioDeviceAttributes device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7550,7 +8107,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setPreferredDevicesForCapturePreset(int capturePreset, List<AudioDeviceAttributes> devices) throws RemoteException {
+            public int setPreferredDevicesForCapturePreset(
+                    int capturePreset, List<AudioDeviceAttributes> devices) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7568,7 +8126,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int clearPreferredDevicesForCapturePreset(int capturePreset) throws RemoteException {
+            public int clearPreferredDevicesForCapturePreset(int capturePreset)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7585,7 +8144,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<AudioDeviceAttributes> getPreferredDevicesForCapturePreset(int capturePreset) throws RemoteException {
+            public List<AudioDeviceAttributes> getPreferredDevicesForCapturePreset(
+                    int capturePreset) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7593,7 +8153,8 @@ public interface IAudioService extends IInterface {
                     _data.writeInt(capturePreset);
                     this.mRemote.transact(167, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioDeviceAttributes> _result = _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _result =
+                            _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7602,7 +8163,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerCapturePresetDevicesRoleDispatcher(ICapturePresetDevicesRoleDispatcher dispatcher) throws RemoteException {
+            public void registerCapturePresetDevicesRoleDispatcher(
+                    ICapturePresetDevicesRoleDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7617,7 +8179,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterCapturePresetDevicesRoleDispatcher(ICapturePresetDevicesRoleDispatcher dispatcher) throws RemoteException {
+            public void unregisterCapturePresetDevicesRoleDispatcher(
+                    ICapturePresetDevicesRoleDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7629,7 +8192,16 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void adjustStreamVolumeForUid(int streamType, int direction, int flags, String packageName, int uid, int pid, UserHandle userHandle, int targetSdkVersion) throws RemoteException {
+            public void adjustStreamVolumeForUid(
+                    int streamType,
+                    int direction,
+                    int flags,
+                    String packageName,
+                    int uid,
+                    int pid,
+                    UserHandle userHandle,
+                    int targetSdkVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7648,7 +8220,16 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void adjustSuggestedStreamVolumeForUid(int streamType, int direction, int flags, String packageName, int uid, int pid, UserHandle userHandle, int targetSdkVersion) throws RemoteException {
+            public void adjustSuggestedStreamVolumeForUid(
+                    int streamType,
+                    int direction,
+                    int flags,
+                    String packageName,
+                    int uid,
+                    int pid,
+                    UserHandle userHandle,
+                    int targetSdkVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7667,7 +8248,16 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setStreamVolumeForUid(int streamType, int direction, int flags, String packageName, int uid, int pid, UserHandle userHandle, int targetSdkVersion) throws RemoteException {
+            public void setStreamVolumeForUid(
+                    int streamType,
+                    int direction,
+                    int flags,
+                    String packageName,
+                    int uid,
+                    int pid,
+                    UserHandle userHandle,
+                    int targetSdkVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7699,7 +8289,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void adjustSuggestedStreamVolume(int direction, int suggestedStreamType, int flags) throws RemoteException {
+            public void adjustSuggestedStreamVolume(
+                    int direction, int suggestedStreamType, int flags) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7797,7 +8388,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher dispatcher) throws RemoteException {
+            public void registerCommunicationDeviceDispatcher(
+                    ICommunicationDeviceDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7812,7 +8404,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterCommunicationDeviceDispatcher(ICommunicationDeviceDispatcher dispatcher) throws RemoteException {
+            public void unregisterCommunicationDeviceDispatcher(
+                    ICommunicationDeviceDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7840,7 +8433,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setNavigationRepeatSoundEffectsEnabled(boolean enabled) throws RemoteException {
+            public void setNavigationRepeatSoundEffectsEnabled(boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7880,7 +8474,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean setAdditionalOutputDeviceDelay(AudioDeviceAttributes device, long delayMillis) throws RemoteException {
+            public boolean setAdditionalOutputDeviceDelay(
+                    AudioDeviceAttributes device, long delayMillis) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7898,7 +8493,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public long getAdditionalOutputDeviceDelay(AudioDeviceAttributes device) throws RemoteException {
+            public long getAdditionalOutputDeviceDelay(AudioDeviceAttributes device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7915,7 +8511,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public long getMaxAdditionalOutputDeviceDelay(AudioDeviceAttributes device) throws RemoteException {
+            public long getMaxAdditionalOutputDeviceDelay(AudioDeviceAttributes device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7932,7 +8529,17 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int requestAudioFocusForTest(AudioAttributes aa, int durationHint, IBinder cb, IAudioFocusDispatcher fd, String clientId, String callingPackageName, int flags, int uid, int sdk) throws RemoteException {
+            public int requestAudioFocusForTest(
+                    AudioAttributes aa,
+                    int durationHint,
+                    IBinder cb,
+                    IAudioFocusDispatcher fd,
+                    String clientId,
+                    String callingPackageName,
+                    int flags,
+                    int uid,
+                    int sdk)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7957,7 +8564,12 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int abandonAudioFocusForTest(IAudioFocusDispatcher fd, String clientId, AudioAttributes aa, String callingPackageName) throws RemoteException {
+            public int abandonAudioFocusForTest(
+                    IAudioFocusDispatcher fd,
+                    String clientId,
+                    AudioAttributes aa,
+                    String callingPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7977,7 +8589,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public long getFadeOutDurationOnFocusLossMillis(AudioAttributes aa) throws RemoteException {
+            public long getFadeOutDurationOnFocusLossMillis(AudioAttributes aa)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8043,7 +8656,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean enterAudioFocusFreezeForTest(IBinder cb, int[] uids) throws RemoteException {
+            public boolean enterAudioFocusFreezeForTest(IBinder cb, int[] uids)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8078,7 +8692,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerModeDispatcher(IAudioModeDispatcher dispatcher) throws RemoteException {
+            public void registerModeDispatcher(IAudioModeDispatcher dispatcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8093,7 +8708,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterModeDispatcher(IAudioModeDispatcher dispatcher) throws RemoteException {
+            public void unregisterModeDispatcher(IAudioModeDispatcher dispatcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -8153,7 +8769,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean isSpatializerAvailableForDevice(AudioDeviceAttributes device) throws RemoteException {
+            public boolean isSpatializerAvailableForDevice(AudioDeviceAttributes device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8187,7 +8804,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setHeadTrackerEnabled(boolean enabled, AudioDeviceAttributes device) throws RemoteException {
+            public void setHeadTrackerEnabled(boolean enabled, AudioDeviceAttributes device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8203,7 +8821,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean isHeadTrackerEnabled(AudioDeviceAttributes device) throws RemoteException {
+            public boolean isHeadTrackerEnabled(AudioDeviceAttributes device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8236,7 +8855,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerSpatializerHeadTrackerAvailableCallback(ISpatializerHeadTrackerAvailableCallback cb, boolean register) throws RemoteException {
+            public void registerSpatializerHeadTrackerAvailableCallback(
+                    ISpatializerHeadTrackerAvailableCallback cb, boolean register)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8267,7 +8888,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean canBeSpatialized(AudioAttributes aa, AudioFormat af) throws RemoteException {
+            public boolean canBeSpatialized(AudioAttributes aa, AudioFormat af)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8285,7 +8907,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerSpatializerCallback(ISpatializerCallback cb) throws RemoteException {
+            public void registerSpatializerCallback(ISpatializerCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8300,7 +8923,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterSpatializerCallback(ISpatializerCallback cb) throws RemoteException {
+            public void unregisterSpatializerCallback(ISpatializerCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8315,7 +8939,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback cb) throws RemoteException {
+            public void registerSpatializerHeadTrackingCallback(
+                    ISpatializerHeadTrackingModeCallback cb) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8330,7 +8955,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterSpatializerHeadTrackingCallback(ISpatializerHeadTrackingModeCallback cb) throws RemoteException {
+            public void unregisterSpatializerHeadTrackingCallback(
+                    ISpatializerHeadTrackingModeCallback cb) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8345,7 +8971,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerHeadToSoundstagePoseCallback(ISpatializerHeadToSoundStagePoseCallback cb) throws RemoteException {
+            public void registerHeadToSoundstagePoseCallback(
+                    ISpatializerHeadToSoundStagePoseCallback cb) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8360,7 +8987,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterHeadToSoundstagePoseCallback(ISpatializerHeadToSoundStagePoseCallback cb) throws RemoteException {
+            public void unregisterHeadToSoundstagePoseCallback(
+                    ISpatializerHeadToSoundStagePoseCallback cb) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8375,14 +9003,16 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public List<AudioDeviceAttributes> getSpatializerCompatibleAudioDevices() throws RemoteException {
+            public List<AudioDeviceAttributes> getSpatializerCompatibleAudioDevices()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(216, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioDeviceAttributes> _result = _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _result =
+                            _reply.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8391,7 +9021,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void addSpatializerCompatibleAudioDevice(AudioDeviceAttributes ada) throws RemoteException {
+            public void addSpatializerCompatibleAudioDevice(AudioDeviceAttributes ada)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8406,7 +9037,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void removeSpatializerCompatibleAudioDevice(AudioDeviceAttributes ada) throws RemoteException {
+            public void removeSpatializerCompatibleAudioDevice(AudioDeviceAttributes ada)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8556,7 +9188,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerSpatializerOutputCallback(ISpatializerOutputCallback cb) throws RemoteException {
+            public void registerSpatializerOutputCallback(ISpatializerOutputCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8571,7 +9204,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterSpatializerOutputCallback(ISpatializerOutputCallback cb) throws RemoteException {
+            public void unregisterSpatializerOutputCallback(ISpatializerOutputCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8634,7 +9268,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void muteAwaitConnection(int[] usagesToMute, AudioDeviceAttributes dev, long timeOutMs) throws RemoteException {
+            public void muteAwaitConnection(
+                    int[] usagesToMute, AudioDeviceAttributes dev, long timeOutMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -8648,7 +9284,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void cancelMuteAwaitConnection(AudioDeviceAttributes dev) throws RemoteException {
+            public void cancelMuteAwaitConnection(AudioDeviceAttributes dev)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -8667,7 +9304,9 @@ public interface IAudioService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(235, _data, _reply, 0);
                     _reply.readException();
-                    AudioDeviceAttributes _result = (AudioDeviceAttributes) _reply.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _result =
+                            (AudioDeviceAttributes)
+                                    _reply.readTypedObject(AudioDeviceAttributes.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8676,7 +9315,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerMuteAwaitConnectionDispatcher(IMuteAwaitConnectionCallback cb, boolean register) throws RemoteException {
+            public void registerMuteAwaitConnectionDispatcher(
+                    IMuteAwaitConnectionCallback cb, boolean register) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8692,7 +9332,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setTestDeviceConnectionState(AudioDeviceAttributes device, boolean connected) throws RemoteException {
+            public void setTestDeviceConnectionState(
+                    AudioDeviceAttributes device, boolean connected) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8708,7 +9349,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerDeviceVolumeBehaviorDispatcher(boolean register, IDeviceVolumeBehaviorDispatcher dispatcher) throws RemoteException {
+            public void registerDeviceVolumeBehaviorDispatcher(
+                    boolean register, IDeviceVolumeBehaviorDispatcher dispatcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8731,7 +9374,8 @@ public interface IAudioService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(239, _data, _reply, 0);
                     _reply.readException();
-                    List<AudioFocusInfo> _result = _reply.createTypedArrayList(AudioFocusInfo.CREATOR);
+                    List<AudioFocusInfo> _result =
+                            _reply.createTypedArrayList(AudioFocusInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8740,7 +9384,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public boolean sendFocusLoss(AudioFocusInfo focusLoser, IAudioPolicyCallback apcb) throws RemoteException {
+            public boolean sendFocusLoss(AudioFocusInfo focusLoser, IAudioPolicyCallback apcb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8835,7 +9480,15 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerDeviceVolumeDispatcherForAbsoluteVolume(boolean register, IAudioDeviceVolumeDispatcher cb, String packageName, AudioDeviceAttributes device, List<VolumeInfo> volumes, boolean handlesvolumeAdjustment, int volumeBehavior) throws RemoteException {
+            public void registerDeviceVolumeDispatcherForAbsoluteVolume(
+                    boolean register,
+                    IAudioDeviceVolumeDispatcher cb,
+                    String packageName,
+                    AudioDeviceAttributes device,
+                    List<VolumeInfo> volumes,
+                    boolean handlesvolumeAdjustment,
+                    int volumeBehavior)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8863,7 +9516,9 @@ public interface IAudioService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(247, _data, _reply, 0);
                     _reply.readException();
-                    AudioHalVersionInfo _result = (AudioHalVersionInfo) _reply.readTypedObject(AudioHalVersionInfo.CREATOR);
+                    AudioHalVersionInfo _result =
+                            (AudioHalVersionInfo)
+                                    _reply.readTypedObject(AudioHalVersionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8872,7 +9527,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setPreferredMixerAttributes(AudioAttributes aa, int portId, AudioMixerAttributes mixerAttributes) throws RemoteException {
+            public int setPreferredMixerAttributes(
+                    AudioAttributes aa, int portId, AudioMixerAttributes mixerAttributes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8891,7 +9548,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int clearPreferredMixerAttributes(AudioAttributes aa, int portId) throws RemoteException {
+            public int clearPreferredMixerAttributes(AudioAttributes aa, int portId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8909,7 +9567,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerPreferredMixerAttributesDispatcher(IPreferredMixerAttributesDispatcher dispatcher) throws RemoteException {
+            public void registerPreferredMixerAttributesDispatcher(
+                    IPreferredMixerAttributesDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8924,7 +9583,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterPreferredMixerAttributesDispatcher(IPreferredMixerAttributesDispatcher dispatcher) throws RemoteException {
+            public void unregisterPreferredMixerAttributesDispatcher(
+                    IPreferredMixerAttributesDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -8983,7 +9643,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerLoudnessCodecUpdatesDispatcher(ILoudnessCodecUpdatesDispatcher dispatcher) throws RemoteException {
+            public void registerLoudnessCodecUpdatesDispatcher(
+                    ILoudnessCodecUpdatesDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8998,7 +9659,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void unregisterLoudnessCodecUpdatesDispatcher(ILoudnessCodecUpdatesDispatcher dispatcher) throws RemoteException {
+            public void unregisterLoudnessCodecUpdatesDispatcher(
+                    ILoudnessCodecUpdatesDispatcher dispatcher) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9037,7 +9699,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void addLoudnessCodecInfo(int sessionId, int mediaCodecHash, LoudnessCodecInfo codecInfo) throws RemoteException {
+            public void addLoudnessCodecInfo(
+                    int sessionId, int mediaCodecHash, LoudnessCodecInfo codecInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -9051,7 +9715,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void removeLoudnessCodecInfo(int sessionId, LoudnessCodecInfo codecInfo) throws RemoteException {
+            public void removeLoudnessCodecInfo(int sessionId, LoudnessCodecInfo codecInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -9064,7 +9729,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public PersistableBundle getLoudnessParams(LoudnessCodecInfo codecInfo) throws RemoteException {
+            public PersistableBundle getLoudnessParams(LoudnessCodecInfo codecInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9072,7 +9738,8 @@ public interface IAudioService extends IInterface {
                     _data.writeTypedObject(codecInfo, 0);
                     this.mRemote.transact(261, _data, _reply, 0);
                     _reply.readException();
-                    PersistableBundle _result = (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _result =
+                            (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9081,7 +9748,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setFadeManagerConfigurationForFocusLoss(FadeManagerConfiguration fmcForFocusLoss) throws RemoteException {
+            public int setFadeManagerConfigurationForFocusLoss(
+                    FadeManagerConfiguration fmcForFocusLoss) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9114,14 +9782,17 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public FadeManagerConfiguration getFadeManagerConfigurationForFocusLoss() throws RemoteException {
+            public FadeManagerConfiguration getFadeManagerConfigurationForFocusLoss()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(264, _data, _reply, 0);
                     _reply.readException();
-                    FadeManagerConfiguration _result = (FadeManagerConfiguration) _reply.readTypedObject(FadeManagerConfiguration.CREATOR);
+                    FadeManagerConfiguration _result =
+                            (FadeManagerConfiguration)
+                                    _reply.readTypedObject(FadeManagerConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9229,7 +9900,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setAppDevice(int uid, int device, boolean shouldShowNotification) throws RemoteException {
+            public void setAppDevice(int uid, int device, boolean shouldShowNotification)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9263,7 +9935,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setAppVolume(int uid, int ratio, String callingPackage) throws RemoteException {
+            public void setAppVolume(int uid, int ratio, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9297,7 +9970,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setAppMute(int uid, boolean shouldMute, String callingPackage) throws RemoteException {
+            public void setAppMute(int uid, boolean shouldMute, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9331,7 +10005,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setMultiSoundOn(boolean on, boolean shouldShowNotification) throws RemoteException {
+            public void setMultiSoundOn(boolean on, boolean shouldShowNotification)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9363,7 +10038,14 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setStreamVolumeForDeviceWithAttribution(int streamType, int index, int flags, String callingPackage, String attributionTag, int device) throws RemoteException {
+            public void setStreamVolumeForDeviceWithAttribution(
+                    int streamType,
+                    int index,
+                    int flags,
+                    String callingPackage,
+                    String attributionTag,
+                    int device)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9515,7 +10197,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setFineVolume(int streamType, int index, int flags, int device, String callingPackage) throws RemoteException {
+            public void setFineVolume(
+                    int streamType, int index, int flags, int device, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9583,7 +10267,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int setDeviceToForceByUser(int device, String address, boolean force) throws RemoteException {
+            public int setDeviceToForceByUser(int device, String address, boolean force)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9666,7 +10351,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setSoundSettingEventBroadcastIntent(int type, PendingIntent broadcastIntent) throws RemoteException {
+            public void setSoundSettingEventBroadcastIntent(int type, PendingIntent broadcastIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -9790,7 +10476,9 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void setA2dpDeviceVolume(BluetoothDevice device, int streamType, int index, int flags, String caller) throws RemoteException {
+            public void setA2dpDeviceVolume(
+                    BluetoothDevice device, int streamType, int index, int flags, String caller)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9809,7 +10497,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public int getA2dpDeviceVolume(BluetoothDevice device, int streamType) throws RemoteException {
+            public int getA2dpDeviceVolume(BluetoothDevice device, int streamType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9870,7 +10559,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void registerPlaybackCallbackWithPackage(IPlaybackConfigDispatcher pcdb, String packageName) throws RemoteException {
+            public void registerPlaybackCallbackWithPackage(
+                    IPlaybackConfigDispatcher pcdb, String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9934,7 +10624,8 @@ public interface IAudioService extends IInterface {
             }
 
             @Override // android.media.IAudioService
-            public void notifySafetyVolumeDialogVisible(IVolumeController controller, boolean visible) throws RemoteException {
+            public void notifySafetyVolumeDialogVisible(
+                    IVolumeController controller, boolean visible) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -10013,13 +10704,15 @@ public interface IAudioService extends IInterface {
         private boolean onTransact$portEvent$(Parcel data, Parcel reply) throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
-            PersistableBundle _arg2 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+            PersistableBundle _arg2 =
+                    (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
             data.enforceNoDataAvail();
             portEvent(_arg0, _arg1, _arg2);
             return true;
         }
 
-        private boolean onTransact$adjustStreamVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$adjustStreamVolume$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10030,7 +10723,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$adjustStreamVolumeWithAttribution$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$adjustStreamVolumeWithAttribution$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10042,7 +10736,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setStreamVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setStreamVolume$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10053,7 +10748,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setStreamVolumeWithAttribution$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setStreamVolumeWithAttribution$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10065,9 +10761,11 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setDeviceVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setDeviceVolume$(Parcel data, Parcel reply)
+                throws RemoteException {
             VolumeInfo _arg0 = (VolumeInfo) data.readTypedObject(VolumeInfo.CREATOR);
-            AudioDeviceAttributes _arg1 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+            AudioDeviceAttributes _arg1 =
+                    (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
             String _arg2 = data.readString();
             data.enforceNoDataAvail();
             setDeviceVolume(_arg0, _arg1, _arg2);
@@ -10076,12 +10774,15 @@ public interface IAudioService extends IInterface {
         }
 
         protected void setDeviceVolume_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_setDeviceVolume, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_setDeviceVolume, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$getDeviceVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getDeviceVolume$(Parcel data, Parcel reply)
+                throws RemoteException {
             VolumeInfo _arg0 = (VolumeInfo) data.readTypedObject(VolumeInfo.CREATOR);
-            AudioDeviceAttributes _arg1 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+            AudioDeviceAttributes _arg1 =
+                    (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
             String _arg2 = data.readString();
             data.enforceNoDataAvail();
             VolumeInfo _result = getDeviceVolume(_arg0, _arg1, _arg2);
@@ -10091,10 +10792,12 @@ public interface IAudioService extends IInterface {
         }
 
         protected void getDeviceVolume_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_getDeviceVolume, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_getDeviceVolume, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$handleVolumeKey$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$handleVolumeKey$(Parcel data, Parcel reply)
+                throws RemoteException {
             KeyEvent _arg0 = (KeyEvent) data.readTypedObject(KeyEvent.CREATOR);
             boolean _arg1 = data.readBoolean();
             String _arg2 = data.readString();
@@ -10104,7 +10807,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMasterMute$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMasterMute$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
@@ -10117,14 +10821,17 @@ public interface IAudioService extends IInterface {
         }
 
         protected void setMasterMute_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void getAudioVolumeGroups_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_getAudioVolumeGroups, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_getAudioVolumeGroups, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$setVolumeGroupVolumeIndex$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setVolumeGroupVolumeIndex$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10137,26 +10844,33 @@ public interface IAudioService extends IInterface {
         }
 
         protected void setVolumeGroupVolumeIndex_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_setVolumeGroupVolumeIndex, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_setVolumeGroupVolumeIndex, getCallingPid(), getCallingUid());
         }
 
         protected void getVolumeGroupVolumeIndex_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_getVolumeGroupVolumeIndex, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_getVolumeGroupVolumeIndex, getCallingPid(), getCallingUid());
         }
 
         protected void getVolumeGroupMaxVolumeIndex_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_getVolumeGroupMaxVolumeIndex, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_getVolumeGroupMaxVolumeIndex, getCallingPid(), getCallingUid());
         }
 
         protected void getVolumeGroupMinVolumeIndex_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_getVolumeGroupMinVolumeIndex, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_getVolumeGroupMinVolumeIndex, getCallingPid(), getCallingUid());
         }
 
-        protected void getLastAudibleVolumeForVolumeGroup_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
+        protected void getLastAudibleVolumeForVolumeGroup_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$adjustVolumeGroupVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$adjustVolumeGroupVolume$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10168,30 +10882,37 @@ public interface IAudioService extends IInterface {
         }
 
         protected void getLastAudibleStreamVolume_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void setSupportedSystemUsages_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void getSupportedSystemUsages_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void getAudioProductStrategies_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void isUltrasoundSupported_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_ULTRASOUND, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_ULTRASOUND, getCallingPid(), getCallingUid());
         }
 
         protected void isHotwordStreamSupported_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CAPTURE_AUDIO_HOTWORD, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CAPTURE_AUDIO_HOTWORD, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$setMicrophoneMute$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMicrophoneMute$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -10213,37 +10934,47 @@ public interface IAudioService extends IInterface {
         }
 
         protected void setEncodedSurroundMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void setA2dpSuspended_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BLUETOOTH_STACK, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BLUETOOTH_STACK, getCallingPid(), getCallingUid());
         }
 
         protected void setLeAudioSuspended_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BLUETOOTH_STACK, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BLUETOOTH_STACK, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$requestAudioFocus$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$requestAudioFocus$(Parcel data, Parcel reply)
+                throws RemoteException {
             AudioAttributes _arg0 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
             int _arg1 = data.readInt();
             IBinder _arg2 = data.readStrongBinder();
-            IAudioFocusDispatcher _arg3 = IAudioFocusDispatcher.Stub.asInterface(data.readStrongBinder());
+            IAudioFocusDispatcher _arg3 =
+                    IAudioFocusDispatcher.Stub.asInterface(data.readStrongBinder());
             String _arg4 = data.readString();
             String _arg5 = data.readString();
             String _arg6 = data.readString();
             int _arg7 = data.readInt();
-            IAudioPolicyCallback _arg8 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+            IAudioPolicyCallback _arg8 =
+                    IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
             int _arg9 = data.readInt();
             data.enforceNoDataAvail();
-            int _result = requestAudioFocus(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
+            int _result =
+                    requestAudioFocus(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$abandonAudioFocus$(Parcel data, Parcel reply) throws RemoteException {
-            IAudioFocusDispatcher _arg0 = IAudioFocusDispatcher.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$abandonAudioFocus$(Parcel data, Parcel reply)
+                throws RemoteException {
+            IAudioFocusDispatcher _arg0 =
+                    IAudioFocusDispatcher.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             AudioAttributes _arg2 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
             String _arg3 = data.readString();
@@ -10255,31 +10986,51 @@ public interface IAudioService extends IInterface {
         }
 
         protected void setRingtonePlayer_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REMOTE_AUDIO_PLAYBACK, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REMOTE_AUDIO_PLAYBACK, getCallingPid(), getCallingUid());
         }
 
         protected void getIndependentStreamTypes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getStreamTypeAlias_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void isVolumeControlUsingVolumeGroups_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void isVolumeControlUsingVolumeGroups_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void registerStreamAliasingDispatcher_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void registerStreamAliasingDispatcher_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setNotifAliasRingForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        private boolean onTransact$setWiredDeviceConnectionState$(Parcel data, Parcel reply) throws RemoteException {
-            AudioDeviceAttributes _arg0 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+        private boolean onTransact$setWiredDeviceConnectionState$(Parcel data, Parcel reply)
+                throws RemoteException {
+            AudioDeviceAttributes _arg0 =
+                    (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
             data.enforceNoDataAvail();
@@ -10289,50 +11040,82 @@ public interface IAudioService extends IInterface {
         }
 
         protected void setWiredDeviceConnectionState_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void getOutputRs2UpperBound_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setOutputRs2UpperBound_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getCsd_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setCsd_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void forceUseFrameworkMel_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void forceComputeCsdOnAllDevices_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isCsdEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isCsdAsAFeatureAvailable_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isCsdAsAFeatureEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setCsdAsAFeatureEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        private boolean onTransact$setBluetoothAudioDeviceCategory_legacy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setBluetoothAudioDeviceCategory_legacy$(
+                Parcel data, Parcel reply) throws RemoteException {
             String _arg0 = data.readString();
             boolean _arg1 = data.readBoolean();
             int _arg2 = data.readInt();
@@ -10341,46 +11124,78 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        protected void setBluetoothAudioDeviceCategory_legacy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void setBluetoothAudioDeviceCategory_legacy_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void getBluetoothAudioDeviceCategory_legacy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void getBluetoothAudioDeviceCategory_legacy_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void setBluetoothAudioDeviceCategory_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void setBluetoothAudioDeviceCategory_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void getBluetoothAudioDeviceCategory_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void getBluetoothAudioDeviceCategory_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void isBluetoothAudioDeviceCategoryFixed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void isBluetoothAudioDeviceCategoryFixed_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        private boolean onTransact$registerAudioPolicy$(Parcel data, Parcel reply) throws RemoteException {
-            android.media.audiopolicy.AudioPolicyConfig _arg0 = (android.media.audiopolicy.AudioPolicyConfig) data.readTypedObject(android.media.audiopolicy.AudioPolicyConfig.CREATOR);
-            IAudioPolicyCallback _arg1 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$registerAudioPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
+            android.media.audiopolicy.AudioPolicyConfig _arg0 =
+                    (android.media.audiopolicy.AudioPolicyConfig)
+                            data.readTypedObject(
+                                    android.media.audiopolicy.AudioPolicyConfig.CREATOR);
+            IAudioPolicyCallback _arg1 =
+                    IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
             boolean _arg2 = data.readBoolean();
             boolean _arg3 = data.readBoolean();
             boolean _arg4 = data.readBoolean();
             boolean _arg5 = data.readBoolean();
             IMediaProjection _arg6 = IMediaProjection.Stub.asInterface(data.readStrongBinder());
-            AttributionSource _arg7 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+            AttributionSource _arg7 =
+                    (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
             data.enforceNoDataAvail();
-            String _result = registerAudioPolicy(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+            String _result =
+                    registerAudioPolicy(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
             reply.writeNoException();
             reply.writeString(_result);
             return true;
         }
 
-        private boolean onTransact$updateMixingRulesForPolicy$(Parcel data, Parcel reply) throws RemoteException {
-            android.media.audiopolicy.AudioMix[] _arg0 = (android.media.audiopolicy.AudioMix[]) data.createTypedArray(android.media.audiopolicy.AudioMix.CREATOR);
-            AudioMixingRule[] _arg1 = (AudioMixingRule[]) data.createTypedArray(AudioMixingRule.CREATOR);
-            IAudioPolicyCallback _arg2 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$updateMixingRulesForPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
+            android.media.audiopolicy.AudioMix[] _arg0 =
+                    (android.media.audiopolicy.AudioMix[])
+                            data.createTypedArray(android.media.audiopolicy.AudioMix.CREATOR);
+            AudioMixingRule[] _arg1 =
+                    (AudioMixingRule[]) data.createTypedArray(AudioMixingRule.CREATOR);
+            IAudioPolicyCallback _arg2 =
+                    IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             int _result = updateMixingRulesForPolicy(_arg0, _arg1, _arg2);
             reply.writeNoException();
@@ -10389,13 +11204,16 @@ public interface IAudioService extends IInterface {
         }
 
         protected void updateMixingRulesForPolicy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$dispatchFocusChange$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$dispatchFocusChange$(Parcel data, Parcel reply)
+                throws RemoteException {
             AudioFocusInfo _arg0 = (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
             int _arg1 = data.readInt();
-            IAudioPolicyCallback _arg2 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+            IAudioPolicyCallback _arg2 =
+                    IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             int _result = dispatchFocusChange(_arg0, _arg1, _arg2);
             reply.writeNoException();
@@ -10403,12 +11221,16 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$dispatchFocusChangeWithFade$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$dispatchFocusChangeWithFade$(Parcel data, Parcel reply)
+                throws RemoteException {
             AudioFocusInfo _arg0 = (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
             int _arg1 = data.readInt();
-            IAudioPolicyCallback _arg2 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+            IAudioPolicyCallback _arg2 =
+                    IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
             List<AudioFocusInfo> _arg3 = data.createTypedArrayList(AudioFocusInfo.CREATOR);
-            FadeManagerConfiguration _arg4 = (FadeManagerConfiguration) data.readTypedObject(FadeManagerConfiguration.CREATOR);
+            FadeManagerConfiguration _arg4 =
+                    (FadeManagerConfiguration)
+                            data.readTypedObject(FadeManagerConfiguration.CREATOR);
             data.enforceNoDataAvail();
             int _result = dispatchFocusChangeWithFade(_arg0, _arg1, _arg2, _arg3, _arg4);
             reply.writeNoException();
@@ -10417,34 +11239,46 @@ public interface IAudioService extends IInterface {
         }
 
         protected void dispatchFocusChangeWithFade_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        private boolean onTransact$handleBluetoothActiveDeviceChanged$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$handleBluetoothActiveDeviceChanged$(Parcel data, Parcel reply)
+                throws RemoteException {
             BluetoothDevice _arg0 = (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
             BluetoothDevice _arg1 = (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
-            BluetoothProfileConnectionInfo _arg2 = (BluetoothProfileConnectionInfo) data.readTypedObject(BluetoothProfileConnectionInfo.CREATOR);
+            BluetoothProfileConnectionInfo _arg2 =
+                    (BluetoothProfileConnectionInfo)
+                            data.readTypedObject(BluetoothProfileConnectionInfo.CREATOR);
             data.enforceNoDataAvail();
             handleBluetoothActiveDeviceChanged(_arg0, _arg1, _arg2);
             reply.writeNoException();
             return true;
         }
 
-        protected void handleBluetoothActiveDeviceChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BLUETOOTH_STACK, getCallingPid(), getCallingUid());
+        protected void handleBluetoothActiveDeviceChanged_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BLUETOOTH_STACK, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$setFocusRequestResultFromExtPolicy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setFocusRequestResultFromExtPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
             AudioFocusInfo _arg0 = (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
             int _arg1 = data.readInt();
-            IAudioPolicyCallback _arg2 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+            IAudioPolicyCallback _arg2 =
+                    IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             setFocusRequestResultFromExtPolicy(_arg0, _arg1, _arg2);
             return true;
         }
 
-        private boolean onTransact$setUidDeviceAffinity$(Parcel data, Parcel reply) throws RemoteException {
-            IAudioPolicyCallback _arg0 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$setUidDeviceAffinity$(Parcel data, Parcel reply)
+                throws RemoteException {
+            IAudioPolicyCallback _arg0 =
+                    IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
             int _arg1 = data.readInt();
             int[] _arg2 = data.createIntArray();
             String[] _arg3 = data.createStringArray();
@@ -10455,8 +11289,10 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setUserIdDeviceAffinity$(Parcel data, Parcel reply) throws RemoteException {
-            IAudioPolicyCallback _arg0 = IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$setUserIdDeviceAffinity$(Parcel data, Parcel reply)
+                throws RemoteException {
+            IAudioPolicyCallback _arg0 =
+                    IAudioPolicyCallback.Stub.asInterface(data.readStrongBinder());
             int _arg1 = data.readInt();
             int[] _arg2 = data.createIntArray();
             String[] _arg3 = data.createStringArray();
@@ -10468,31 +11304,43 @@ public interface IAudioService extends IInterface {
         }
 
         protected void setPreferredDevicesForStrategy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void removePreferredDevicesForStrategy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void removePreferredDevicesForStrategy_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void getPreferredDevicesForStrategy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void setDeviceAsNonDefaultForStrategy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void setDeviceAsNonDefaultForStrategy_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void removeDeviceAsNonDefaultForStrategy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void removeDeviceAsNonDefaultForStrategy_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void getNonDefaultDevicesForStrategy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void getNonDefaultDevicesForStrategy_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$setDeviceVolumeBehavior$(Parcel data, Parcel reply) throws RemoteException {
-            AudioDeviceAttributes _arg0 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+        private boolean onTransact$setDeviceVolumeBehavior$(Parcel data, Parcel reply)
+                throws RemoteException {
+            AudioDeviceAttributes _arg0 =
+                    (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
             data.enforceNoDataAvail();
@@ -10502,26 +11350,34 @@ public interface IAudioService extends IInterface {
         }
 
         protected void setDeviceVolumeBehavior_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_setDeviceVolumeBehavior, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_setDeviceVolumeBehavior, getCallingPid(), getCallingUid());
         }
 
         protected void getDeviceVolumeBehavior_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_getDeviceVolumeBehavior, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_getDeviceVolumeBehavior, getCallingPid(), getCallingUid());
         }
 
         protected void setMultiAudioFocusEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void clearPreferredDevicesForCapturePreset_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void clearPreferredDevicesForCapturePreset_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void getPreferredDevicesForCapturePreset_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void getPreferredDevicesForCapturePreset_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$adjustStreamVolumeForUid$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$adjustStreamVolumeForUid$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10535,7 +11391,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$adjustSuggestedStreamVolumeForUid$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$adjustSuggestedStreamVolumeForUid$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10545,11 +11402,13 @@ public interface IAudioService extends IInterface {
             UserHandle _arg6 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
             int _arg7 = data.readInt();
             data.enforceNoDataAvail();
-            adjustSuggestedStreamVolumeForUid(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+            adjustSuggestedStreamVolumeForUid(
+                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
             return true;
         }
 
-        private boolean onTransact$setStreamVolumeForUid$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setStreamVolumeForUid$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10563,7 +11422,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$adjustSuggestedStreamVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$adjustSuggestedStreamVolume$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10572,25 +11432,31 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$requestAudioFocusForTest$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$requestAudioFocusForTest$(Parcel data, Parcel reply)
+                throws RemoteException {
             AudioAttributes _arg0 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
             int _arg1 = data.readInt();
             IBinder _arg2 = data.readStrongBinder();
-            IAudioFocusDispatcher _arg3 = IAudioFocusDispatcher.Stub.asInterface(data.readStrongBinder());
+            IAudioFocusDispatcher _arg3 =
+                    IAudioFocusDispatcher.Stub.asInterface(data.readStrongBinder());
             String _arg4 = data.readString();
             String _arg5 = data.readString();
             int _arg6 = data.readInt();
             int _arg7 = data.readInt();
             int _arg8 = data.readInt();
             data.enforceNoDataAvail();
-            int _result = requestAudioFocusForTest(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
+            int _result =
+                    requestAudioFocusForTest(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$abandonAudioFocusForTest$(Parcel data, Parcel reply) throws RemoteException {
-            IAudioFocusDispatcher _arg0 = IAudioFocusDispatcher.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$abandonAudioFocusForTest$(Parcel data, Parcel reply)
+                throws RemoteException {
+            IAudioFocusDispatcher _arg0 =
+                    IAudioFocusDispatcher.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             AudioAttributes _arg2 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
             String _arg3 = data.readString();
@@ -10602,124 +11468,216 @@ public interface IAudioService extends IInterface {
         }
 
         protected void getFocusDuckedUidsForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void getFocusFadeOutDurationForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
         }
 
-        protected void getFocusUnmuteDelayAfterFadeOutForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
+        protected void getFocusUnmuteDelayAfterFadeOutForTest_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void enterAudioFocusFreezeForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void exitAudioFocusFreezeForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void isSpatializerAvailableForDevice_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void isSpatializerAvailableForDevice_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void hasHeadTracker_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setHeadTrackerEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isHeadTrackerEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setSpatializerEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void registerSpatializerHeadTrackingCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void registerSpatializerHeadTrackingCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void unregisterSpatializerHeadTrackingCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void unregisterSpatializerHeadTrackingCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void registerHeadToSoundstagePoseCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void registerHeadToSoundstagePoseCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void unregisterHeadToSoundstagePoseCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void unregisterHeadToSoundstagePoseCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void getSpatializerCompatibleAudioDevices_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void getSpatializerCompatibleAudioDevices_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void addSpatializerCompatibleAudioDevice_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void addSpatializerCompatibleAudioDevice_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void removeSpatializerCompatibleAudioDevice_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void removeSpatializerCompatibleAudioDevice_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setDesiredHeadTrackingMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getDesiredHeadTrackingMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getSupportedHeadTrackingModes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getActualHeadTrackingMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setSpatializerGlobalTransform_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void recenterHeadTracker_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setSpatializerParameter_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getSpatializerParameter_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getSpatializerOutput_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void registerSpatializerOutputCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void registerSpatializerOutputCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void unregisterSpatializerOutputCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS, getCallingPid(), getCallingUid());
+        protected void unregisterSpatializerOutputCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DEFAULT_AUDIO_EFFECTS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isPstnCallAudioInterceptable_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CALL_AUDIO_INTERCEPTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CALL_AUDIO_INTERCEPTION, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$muteAwaitConnection$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$muteAwaitConnection$(Parcel data, Parcel reply)
+                throws RemoteException {
             int[] _arg0 = data.createIntArray();
-            AudioDeviceAttributes _arg1 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+            AudioDeviceAttributes _arg1 =
+                    (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
             long _arg2 = data.readLong();
             data.enforceNoDataAvail();
             muteAwaitConnection(_arg0, _arg1, _arg2);
@@ -10727,55 +11685,70 @@ public interface IAudioService extends IInterface {
         }
 
         protected void getMutingExpectedDevice_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void registerMuteAwaitConnectionDispatcher_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void registerMuteAwaitConnectionDispatcher_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void getFocusStack_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void addAssistantServicesUids_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void removeAssistantServicesUids_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void setActiveAssistantServiceUids_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void getAssistantServicesUids_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
         protected void getActiveAssistantServiceUids_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$registerDeviceVolumeDispatcherForAbsoluteVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerDeviceVolumeDispatcherForAbsoluteVolume$(
+                Parcel data, Parcel reply) throws RemoteException {
             boolean _arg0 = data.readBoolean();
-            IAudioDeviceVolumeDispatcher _arg1 = IAudioDeviceVolumeDispatcher.Stub.asInterface(data.readStrongBinder());
+            IAudioDeviceVolumeDispatcher _arg1 =
+                    IAudioDeviceVolumeDispatcher.Stub.asInterface(data.readStrongBinder());
             String _arg2 = data.readString();
-            AudioDeviceAttributes _arg3 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+            AudioDeviceAttributes _arg3 =
+                    (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
             List<VolumeInfo> _arg4 = data.createTypedArrayList(VolumeInfo.CREATOR);
             boolean _arg5 = data.readBoolean();
             int _arg6 = data.readInt();
             data.enforceNoDataAvail();
-            registerDeviceVolumeDispatcherForAbsoluteVolume(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
+            registerDeviceVolumeDispatcherForAbsoluteVolume(
+                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$setPreferredMixerAttributes$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPreferredMixerAttributes$(Parcel data, Parcel reply)
+                throws RemoteException {
             AudioAttributes _arg0 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
             int _arg1 = data.readInt();
-            AudioMixerAttributes _arg2 = (AudioMixerAttributes) data.readTypedObject(AudioMixerAttributes.CREATOR);
+            AudioMixerAttributes _arg2 =
+                    (AudioMixerAttributes) data.readTypedObject(AudioMixerAttributes.CREATOR);
             data.enforceNoDataAvail();
             int _result = setPreferredMixerAttributes(_arg0, _arg1, _arg2);
             reply.writeNoException();
@@ -10783,41 +11756,62 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        protected void supportsBluetoothVariableLatency_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void supportsBluetoothVariableLatency_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void setBluetoothVariableLatencyEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void setBluetoothVariableLatencyEnabled_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        protected void isBluetoothVariableLatencyEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
+        protected void isBluetoothVariableLatencyEnabled_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_ROUTING, getCallingPid(), getCallingUid());
         }
 
-        private boolean onTransact$addLoudnessCodecInfo$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$addLoudnessCodecInfo$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
-            LoudnessCodecInfo _arg2 = (LoudnessCodecInfo) data.readTypedObject(LoudnessCodecInfo.CREATOR);
+            LoudnessCodecInfo _arg2 =
+                    (LoudnessCodecInfo) data.readTypedObject(LoudnessCodecInfo.CREATOR);
             data.enforceNoDataAvail();
             addLoudnessCodecInfo(_arg0, _arg1, _arg2);
             return true;
         }
 
-        protected void setFadeManagerConfigurationForFocusLoss_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void setFadeManagerConfigurationForFocusLoss_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void clearFadeManagerConfigurationForFocusLoss_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void clearFadeManagerConfigurationForFocusLoss_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void getFadeManagerConfigurationForFocusLoss_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED, getCallingPid(), getCallingUid());
+        protected void getFadeManagerConfigurationForFocusLoss_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_AUDIO_SETTINGS_PRIVILEGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void shouldNotificationSoundPlay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.QUERY_AUDIO_STATE, getCallingPid(), getCallingUid());
         }
 
         private boolean onTransact$setAppDevice$(Parcel data, Parcel reply) throws RemoteException {
@@ -10850,7 +11844,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setStreamVolumeForDeviceWithAttribution$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setStreamVolumeForDeviceWithAttribution$(
+                Parcel data, Parcel reply) throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10863,7 +11858,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setFineVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setFineVolume$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10875,7 +11871,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setDeviceToForceByUser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setDeviceToForceByUser$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -10886,7 +11883,8 @@ public interface IAudioService extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setA2dpDeviceVolume$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setA2dpDeviceVolume$(Parcel data, Parcel reply)
+                throws RemoteException {
             BluetoothDevice _arg0 = (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();

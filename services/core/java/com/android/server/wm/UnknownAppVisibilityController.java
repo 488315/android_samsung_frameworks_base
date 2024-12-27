@@ -2,7 +2,6 @@ package com.android.server.wm;
 
 import android.util.ArrayMap;
 import android.util.Slog;
-import com.android.server.wm.ActivityRecord;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -11,7 +10,8 @@ public final class UnknownAppVisibilityController {
     public final WindowManagerService mService;
     public final ArrayMap mUnknownApps = new ArrayMap();
 
-    public UnknownAppVisibilityController(WindowManagerService windowManagerService, DisplayContent displayContent) {
+    public UnknownAppVisibilityController(
+            WindowManagerService windowManagerService, DisplayContent displayContent) {
         this.mService = windowManagerService;
         this.mDisplayContent = displayContent;
     }
@@ -39,7 +39,8 @@ public final class UnknownAppVisibilityController {
 
     public final void notifyRelayouted(ActivityRecord activityRecord) {
         Integer num;
-        if (this.mUnknownApps.isEmpty() || (num = (Integer) this.mUnknownApps.get(activityRecord)) == null) {
+        if (this.mUnknownApps.isEmpty()
+                || (num = (Integer) this.mUnknownApps.get(activityRecord)) == null) {
             return;
         }
         if (num.intValue() == 2 || activityRecord.mStartingWindow != null) {
@@ -50,7 +51,9 @@ public final class UnknownAppVisibilityController {
             if (num.intValue() != 1 || activityRecord.isState(ActivityRecord.State.RESUMED)) {
                 return;
             }
-            Slog.d("WindowManager", "UAVC: skip waiting for non-resumed relayouted " + activityRecord);
+            Slog.d(
+                    "WindowManager",
+                    "UAVC: skip waiting for non-resumed relayouted " + activityRecord);
             this.mUnknownApps.remove(activityRecord);
         }
     }

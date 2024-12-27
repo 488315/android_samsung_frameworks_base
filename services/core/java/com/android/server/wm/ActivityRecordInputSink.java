@@ -4,6 +4,7 @@ import android.app.compat.CompatChanges;
 import android.view.InputApplicationHandle;
 import android.view.InputWindowHandle;
 import android.view.SurfaceControl;
+
 import com.samsung.android.rune.CoreRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,7 +19,10 @@ public final class ActivityRecordInputSink {
     public ActivityRecordInputSink(ActivityRecord activityRecord, ActivityRecord activityRecord2) {
         this.mActivityRecord = activityRecord;
         this.mIsCompatEnabled = CompatChanges.isChangeEnabled(194480991L, activityRecord.getUid());
-        this.mName = Integer.toHexString(System.identityHashCode(this)) + " ActivityRecordInputSink " + activityRecord.mActivityComponent.flattenToShortString();
+        this.mName =
+                Integer.toHexString(System.identityHashCode(this))
+                        + " ActivityRecordInputSink "
+                        + activityRecord.mActivityComponent.flattenToShortString();
         if (activityRecord2 != null) {
             activityRecord2.mAllowedTouchUid = activityRecord.getUid();
         }
@@ -32,7 +36,9 @@ public final class ActivityRecordInputSink {
         String str = this.mName;
         ActivityRecord activityRecord = this.mActivityRecord;
         if (inputWindowHandleWrapper == null) {
-            InputWindowHandle inputWindowHandle = new InputWindowHandle((InputApplicationHandle) null, activityRecord.getDisplayId());
+            InputWindowHandle inputWindowHandle =
+                    new InputWindowHandle(
+                            (InputApplicationHandle) null, activityRecord.getDisplayId());
             inputWindowHandle.replaceTouchableRegionWithCrop = true;
             inputWindowHandle.name = str;
             inputWindowHandle.layoutParamsType = 2022;
@@ -42,8 +48,32 @@ public final class ActivityRecordInputSink {
             this.mInputWindowHandleWrapper = new InputWindowHandleWrapper(inputWindowHandle);
         }
         Task task2 = activityRecord.task;
-        ActivityRecord activityBelow = task2 != null ? task2.getActivityBelow(activityRecord) : null;
-        if ((activityBelow != null && (activityBelow.mAllowedTouchUid == activityRecord.getUid() || activityBelow.isUid(activityRecord.getUid()))) || !this.mIsCompatEnabled || activityRecord.inTransitionSelfOrParent() || !activityRecord.mActivityRecordInputSinkEnabled || activityRecord.inFreeformWindowingMode() || activityRecord.mPopOverState.mIsActivated || ((CoreRune.MW_EMBED_ACTIVITY && activityRecord.isSplitEmbedded()) || (((findMainWindow = activityRecord.findMainWindow(true)) != null && findMainWindow.isVisible() && findMainWindow.mWindowFrames.mFrame.isEmpty()) || ((task = activityRecord.task) != null && task.getConfiguration().windowConfiguration.getWindowingMode() == 6 && task.isAlwaysOnTop() && (rootTask = activityRecord.mRootWindowContainer.getRootTask(task.mTaskViewTaskOrganizerTaskId)) != null && rootTask.isFreeformForceHidden())))) {
+        ActivityRecord activityBelow =
+                task2 != null ? task2.getActivityBelow(activityRecord) : null;
+        if ((activityBelow != null
+                        && (activityBelow.mAllowedTouchUid == activityRecord.getUid()
+                                || activityBelow.isUid(activityRecord.getUid())))
+                || !this.mIsCompatEnabled
+                || activityRecord.inTransitionSelfOrParent()
+                || !activityRecord.mActivityRecordInputSinkEnabled
+                || activityRecord.inFreeformWindowingMode()
+                || activityRecord.mPopOverState.mIsActivated
+                || ((CoreRune.MW_EMBED_ACTIVITY && activityRecord.isSplitEmbedded())
+                        || (((findMainWindow = activityRecord.findMainWindow(true)) != null
+                                        && findMainWindow.isVisible()
+                                        && findMainWindow.mWindowFrames.mFrame.isEmpty())
+                                || ((task = activityRecord.task) != null
+                                        && task.getConfiguration()
+                                                        .windowConfiguration
+                                                        .getWindowingMode()
+                                                == 6
+                                        && task.isAlwaysOnTop()
+                                        && (rootTask =
+                                                        activityRecord.mRootWindowContainer
+                                                                .getRootTask(
+                                                                        task.mTaskViewTaskOrganizerTaskId))
+                                                != null
+                                        && rootTask.isFreeformForceHidden())))) {
             this.mInputWindowHandleWrapper.setInputConfigMasked(8, 8);
         } else {
             this.mInputWindowHandleWrapper.setInputConfigMasked(0, 8);
@@ -57,7 +87,13 @@ public final class ActivityRecordInputSink {
         }
         InputWindowHandleWrapper inputWindowHandleWrapper3 = this.mInputWindowHandleWrapper;
         if (this.mSurfaceControl == null) {
-            SurfaceControl build = activityRecord.makeChildSurface(null).setName(str).setHidden(false).setCallsite("ActivityRecordInputSink.createSurface").build();
+            SurfaceControl build =
+                    activityRecord
+                            .makeChildSurface(null)
+                            .setName(str)
+                            .setHidden(false)
+                            .setCallsite("ActivityRecordInputSink.createSurface")
+                            .build();
             transaction.setLayer(build, Integer.MIN_VALUE);
             this.mSurfaceControl = build;
         }

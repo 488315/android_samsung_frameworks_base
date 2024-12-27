@@ -9,24 +9,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class TapAction implements Parcelable {
-    public static final Parcelable.Creator<TapAction> CREATOR = new Parcelable.Creator<TapAction>() { // from class: android.app.smartspace.uitemplatedata.TapAction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TapAction createFromParcel(Parcel in) {
-            return new TapAction(in);
-        }
+    public static final Parcelable.Creator<TapAction> CREATOR =
+            new Parcelable.Creator<
+                    TapAction>() { // from class: android.app.smartspace.uitemplatedata.TapAction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TapAction createFromParcel(Parcel in) {
+                    return new TapAction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TapAction[] newArray(int size) {
-            return new TapAction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TapAction[] newArray(int size) {
+                    return new TapAction[size];
+                }
+            };
     private final Bundle mExtras;
     private final CharSequence mId;
     private final Intent mIntent;
@@ -43,7 +46,13 @@ public final class TapAction implements Parcelable {
         this.mShouldShowOnLockscreen = in.readBoolean();
     }
 
-    private TapAction(CharSequence id, Intent intent, PendingIntent pendingIntent, UserHandle userHandle, Bundle extras, boolean shouldShowOnLockscreen) {
+    private TapAction(
+            CharSequence id,
+            Intent intent,
+            PendingIntent pendingIntent,
+            UserHandle userHandle,
+            Bundle extras,
+            boolean shouldShowOnLockscreen) {
         this.mId = id;
         this.mIntent = intent;
         this.mPendingIntent = pendingIntent;
@@ -107,7 +116,19 @@ public final class TapAction implements Parcelable {
     }
 
     public String toString() {
-        return "SmartspaceTapAction{mId=" + ((Object) this.mId) + "mIntent=" + this.mIntent + ", mPendingIntent=" + this.mPendingIntent + ", mUserHandle=" + this.mUserHandle + ", mExtras=" + this.mExtras + ", mShouldShowOnLockscreen=" + this.mShouldShowOnLockscreen + '}';
+        return "SmartspaceTapAction{mId="
+                + ((Object) this.mId)
+                + "mIntent="
+                + this.mIntent
+                + ", mPendingIntent="
+                + this.mPendingIntent
+                + ", mUserHandle="
+                + this.mUserHandle
+                + ", mExtras="
+                + this.mExtras
+                + ", mShouldShowOnLockscreen="
+                + this.mShouldShowOnLockscreen
+                + '}';
     }
 
     @SystemApi
@@ -152,7 +173,13 @@ public final class TapAction implements Parcelable {
             if (this.mIntent == null && this.mPendingIntent == null && this.mExtras == null) {
                 throw new IllegalStateException("Please assign at least 1 valid tap field");
             }
-            return new TapAction(this.mId, this.mIntent, this.mPendingIntent, this.mUserHandle, this.mExtras, this.mShouldShowOnLockScreen);
+            return new TapAction(
+                    this.mId,
+                    this.mIntent,
+                    this.mPendingIntent,
+                    this.mUserHandle,
+                    this.mExtras,
+                    this.mShouldShowOnLockScreen);
         }
     }
 }

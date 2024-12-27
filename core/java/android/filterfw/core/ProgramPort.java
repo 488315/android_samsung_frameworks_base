@@ -6,7 +6,8 @@ import java.lang.reflect.Field;
 public class ProgramPort extends FieldPort {
     protected String mVarName;
 
-    public ProgramPort(Filter filter, String name, String varName, Field field, boolean hasDefault) {
+    public ProgramPort(
+            Filter filter, String name, String varName, Field field, boolean hasDefault) {
         super(filter, name, field, hasDefault);
         this.mVarName = varName;
     }
@@ -27,9 +28,13 @@ public class ProgramPort extends FieldPort {
                     this.mValueWaiting = false;
                 }
             } catch (ClassCastException e) {
-                throw new RuntimeException("Non Program field '" + this.mField.getName() + "' annotated with ProgramParameter!");
+                throw new RuntimeException(
+                        "Non Program field '"
+                                + this.mField.getName()
+                                + "' annotated with ProgramParameter!");
             } catch (IllegalAccessException e2) {
-                throw new RuntimeException("Access to program field '" + this.mField.getName() + "' was denied!");
+                throw new RuntimeException(
+                        "Access to program field '" + this.mField.getName() + "' was denied!");
             }
         }
     }

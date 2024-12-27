@@ -3,6 +3,7 @@ package android.media;
 import android.graphics.Rect;
 import android.hardware.HardwareBuffer;
 import android.hardware.SyncFence;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -29,8 +30,7 @@ public abstract class Image implements AutoCloseable {
 
     public abstract int getWidth();
 
-    protected Image() {
-    }
+    protected Image() {}
 
     protected void throwISEIfImageIsInvalid() {
         if (!this.mIsImageValid) {
@@ -103,14 +103,13 @@ public abstract class Image implements AutoCloseable {
         return 0L;
     }
 
-    public static abstract class Plane {
+    public abstract static class Plane {
         public abstract ByteBuffer getBuffer();
 
         public abstract int getPixelStride();
 
         public abstract int getRowStride();
 
-        protected Plane() {
-        }
+        protected Plane() {}
     }
 }

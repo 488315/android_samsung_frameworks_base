@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextDeviceActivityDetectorAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextDeviceActivityDetectorAttribute> CREATOR = new Parcelable.Creator<SemContextDeviceActivityDetectorAttribute>() { // from class: com.samsung.android.hardware.context.SemContextDeviceActivityDetectorAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextDeviceActivityDetectorAttribute createFromParcel(Parcel in) {
-            return new SemContextDeviceActivityDetectorAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextDeviceActivityDetectorAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextDeviceActivityDetectorAttribute>() { // from class:
+                                                                   // com.samsung.android.hardware.context.SemContextDeviceActivityDetectorAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextDeviceActivityDetectorAttribute createFromParcel(Parcel in) {
+                    return new SemContextDeviceActivityDetectorAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextDeviceActivityDetectorAttribute[] newArray(int size) {
-            return new SemContextDeviceActivityDetectorAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextDeviceActivityDetectorAttribute[] newArray(int size) {
+                    return new SemContextDeviceActivityDetectorAttribute[size];
+                }
+            };
     private static final String TAG = "SemContextDeviceActivityDetectorAttribute";
     private int mActivity;
     private int mDuration;
@@ -42,7 +45,8 @@ public class SemContextDeviceActivityDetectorAttribute extends SemContextAttribu
         this.mNeedsRequestToUpdate = false;
     }
 
-    public SemContextDeviceActivityDetectorAttribute(int activity, int duration, boolean needsRequestToUpdate) {
+    public SemContextDeviceActivityDetectorAttribute(
+            int activity, int duration, boolean needsRequestToUpdate) {
         this.mActivity = 1;
         this.mDuration = 10;
         this.mPosture = 0;
@@ -51,7 +55,12 @@ public class SemContextDeviceActivityDetectorAttribute extends SemContextAttribu
         this.mDuration = duration;
         this.mActivity = activity & 255;
         this.mNeedsRequestToUpdate = needsRequestToUpdate;
-        Log.d(TAG, "SemContextDeviceActivityDetectorAttribute activity, posture : " + this.mActivity + " , " + this.mPosture);
+        Log.d(
+                TAG,
+                "SemContextDeviceActivityDetectorAttribute activity, posture : "
+                        + this.mActivity
+                        + " , "
+                        + this.mPosture);
         setAttribute();
     }
 
@@ -61,8 +70,16 @@ public class SemContextDeviceActivityDetectorAttribute extends SemContextAttribu
             Log.e(TAG, "SemContextDeviceActivityDetector activity is wrong.");
             return false;
         }
-        if ((this.mActivity == 1 && !this.mNeedsRequestToUpdate) || (this.mActivity == 2 && this.mDuration > 0)) {
-            Log.e(TAG, "This option is NOT supported, activity : " + this.mActivity + ", duration : " + this.mDuration + ", request : " + this.mNeedsRequestToUpdate);
+        if ((this.mActivity == 1 && !this.mNeedsRequestToUpdate)
+                || (this.mActivity == 2 && this.mDuration > 0)) {
+            Log.e(
+                    TAG,
+                    "This option is NOT supported, activity : "
+                            + this.mActivity
+                            + ", duration : "
+                            + this.mDuration
+                            + ", request : "
+                            + this.mNeedsRequestToUpdate);
             return false;
         }
         Log.d(TAG, "SemContextDeviceActivityDetector checkAttribute : " + this.mActivity);

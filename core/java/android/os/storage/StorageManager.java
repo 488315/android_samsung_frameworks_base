@@ -31,10 +31,6 @@ import android.os.ProxyFileDescriptorCallback;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.os.storage.IObbActionListener;
-import android.os.storage.IStorageEventListener;
-import android.os.storage.IStorageManager;
-import android.os.storage.StorageManager;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.provider.Telephony;
@@ -47,6 +43,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.util.sysfwutil.Slog;
+
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.AppFuseMount;
@@ -54,9 +51,12 @@ import com.android.internal.os.FuseAppLoop;
 import com.android.internal.os.FuseUnavailableMountException;
 import com.android.internal.os.RoSystemProperties;
 import com.android.internal.util.Preconditions;
+
+import dalvik.system.BlockGuard;
+
 import com.samsung.android.media.AudioParameter;
 import com.samsung.android.share.SemShareConstants;
-import dalvik.system.BlockGuard;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -91,6 +91,7 @@ public class StorageManager {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final int APP_IO_BLOCKED_REASON_UNKNOWN = 0;
+
     public static final String CACHE_RESERVE_PERCENT_HIGH_KEY = "cache_reserve_percent_high";
     public static final String CACHE_RESERVE_PERCENT_LOW_KEY = "cache_reserve_percent_low";
     public static final int CRYPT_TYPE_DEFAULT = 1;
@@ -109,8 +110,7 @@ public class StorageManager {
     public static final String EXTRA_UUID = "android.os.storage.extra.UUID";
     private static final String FAT_UUID_PREFIX = "fafafafa-fafa-5afa-8afa-fafa";
 
-    @SystemApi
-    public static final int FLAG_ALLOCATE_AGGRESSIVE = 1;
+    @SystemApi public static final int FLAG_ALLOCATE_AGGRESSIVE = 1;
     public static final int FLAG_ALLOCATE_CACHE_ONLY = 16;
     public static final int FLAG_ALLOCATE_DEFY_ALL_RESERVED = 2;
     public static final int FLAG_ALLOCATE_DEFY_HALF_RESERVED = 4;
@@ -126,50 +126,43 @@ public class StorageManager {
     public static final int FLAG_STORAGE_SDK = 8;
     public static final int FSTRIM_FLAG_DEEP = 1;
 
-    @SystemApi
-    public static final int MOUNT_MODE_EXTERNAL_ANDROID_WRITABLE = 4;
+    @SystemApi public static final int MOUNT_MODE_EXTERNAL_ANDROID_WRITABLE = 4;
 
-    @SystemApi
-    public static final int MOUNT_MODE_EXTERNAL_DEFAULT = 1;
+    @SystemApi public static final int MOUNT_MODE_EXTERNAL_DEFAULT = 1;
 
-    @SystemApi
-    public static final int MOUNT_MODE_EXTERNAL_INSTALLER = 2;
+    @SystemApi public static final int MOUNT_MODE_EXTERNAL_INSTALLER = 2;
 
-    @SystemApi
-    public static final int MOUNT_MODE_EXTERNAL_NONE = 0;
+    @SystemApi public static final int MOUNT_MODE_EXTERNAL_NONE = 0;
 
-    @SystemApi
-    public static final int MOUNT_MODE_EXTERNAL_PASS_THROUGH = 3;
+    @SystemApi public static final int MOUNT_MODE_EXTERNAL_PASS_THROUGH = 3;
     public static final int PROJECT_ID_EXT_DEFAULT = 1000;
     public static final int PROJECT_ID_EXT_MEDIA_AUDIO = 1001;
     public static final int PROJECT_ID_EXT_MEDIA_IMAGE = 1003;
     public static final int PROJECT_ID_EXT_MEDIA_VIDEO = 1002;
     public static final String PROP_ADOPTABLE = "persist.sys.adoptable";
-    public static final String PROP_FORCED_SCOPED_STORAGE_WHITELIST = "forced_scoped_storage_whitelist";
+    public static final String PROP_FORCED_SCOPED_STORAGE_WHITELIST =
+            "forced_scoped_storage_whitelist";
     public static final String PROP_HAS_ADOPTABLE = "vold.has_adoptable";
     public static final String PROP_HAS_RESERVED = "vold.has_reserved";
     public static final String PROP_PRIMARY_PHYSICAL = "ro.vold.primary_physical";
     public static final String PROP_SDCARDFS = "persist.sys.sdcardfs";
     public static final String PROP_VIRTUAL_DISK = "persist.sys.virtual_disk";
 
-    @SystemApi
-    public static final int QUOTA_TYPE_MEDIA_AUDIO = 2;
+    @SystemApi public static final int QUOTA_TYPE_MEDIA_AUDIO = 2;
 
-    @SystemApi
-    public static final int QUOTA_TYPE_MEDIA_IMAGE = 1;
+    @SystemApi public static final int QUOTA_TYPE_MEDIA_IMAGE = 1;
 
-    @SystemApi
-    public static final int QUOTA_TYPE_MEDIA_NONE = 0;
+    @SystemApi public static final int QUOTA_TYPE_MEDIA_NONE = 0;
 
-    @SystemApi
-    public static final int QUOTA_TYPE_MEDIA_VIDEO = 3;
+    @SystemApi public static final int QUOTA_TYPE_MEDIA_VIDEO = 3;
     public static final int SEM_EXTERNAL_SD_CARD_HEALTH_STATE_BAD = 1;
     public static final int SEM_EXTERNAL_SD_CARD_HEALTH_STATE_GOOD = 0;
     public static final int SEM_EXTERNAL_SD_CARD_HEALTH_STATE_UNKNOWN = -1;
     public static final int SEM_EXTERNAL_STORAGE_FORMAT = 2;
     public static final int SEM_EXTERNAL_STORAGE_MOUNT = 0;
     public static final int SEM_EXTERNAL_STORAGE_UNMOUNT = 1;
-    public static final String STORAGE_THRESHOLD_PERCENT_HIGH_KEY = "storage_threshold_percent_high";
+    public static final String STORAGE_THRESHOLD_PERCENT_HIGH_KEY =
+            "storage_threshold_percent_high";
     public static final String UUID_PRIMARY_PHYSICAL = "primary_physical";
     public static final String UUID_SYSTEM = "system";
     private static final String XATTR_CACHE_GROUP = "user.cache_group";
@@ -182,47 +175,57 @@ public class StorageManager {
     private static final boolean LOCAL_LOGV = Log.isLoggable(TAG, 2);
     public static final String UUID_PRIVATE_INTERNAL = null;
     public static final UUID UUID_DEFAULT = UUID.fromString("41217664-9172-527a-b3d5-edabb50a7d69");
-    public static final UUID UUID_PRIMARY_PHYSICAL_ = UUID.fromString("0f95a519-dae7-5abf-9519-fbd6209e05fd");
+    public static final UUID UUID_PRIMARY_PHYSICAL_ =
+            UUID.fromString("0f95a519-dae7-5abf-9519-fbd6209e05fd");
     public static final UUID UUID_SYSTEM_ = UUID.fromString("5d258386-e60d-59e3-826d-0089cdd42cc0");
     private static volatile IStorageManager sStorageManager = null;
     private static final long DEFAULT_THRESHOLD_MAX_BYTES = DataUnit.MEBIBYTES.toBytes(500);
     private static final long DEFAULT_FULL_THRESHOLD_BYTES = DataUnit.MEBIBYTES.toBytes(1);
     private static final long DEFAULT_EXHAUSTION_THRESHOLD_BYTES = DataUnit.GIBIBYTES.toBytes(1);
-    private static final Pattern PATTERN_USER_ID = Pattern.compile("(?i)^/storage/emulated/([0-9]+)");
+    private static final Pattern PATTERN_USER_ID =
+            Pattern.compile("(?i)^/storage/emulated/([0-9]+)");
     private final AtomicInteger mNextNonce = new AtomicInteger(0);
-    private final String[] mAllowedPackagesForDataMvCp = {"com.sec.android.app.vepreload", "com.samsung.app.newtrim", "com.samsung.android.aware.service", "com.samsung.android.allshare.service.fileshare", SemShareConstants.GALLERY_PACKAGE, "com.sec.android.mimage.photoretouching", "com.sec.android.app.camera", "com.samsung.android.app.smartcapture", "com.sec.android.easyMover", "com.samsung.android.scloud", SemShareConstants.SHARE_LIVE_PKG};
+    private final String[] mAllowedPackagesForDataMvCp = {
+        "com.sec.android.app.vepreload",
+        "com.samsung.app.newtrim",
+        "com.samsung.android.aware.service",
+        "com.samsung.android.allshare.service.fileshare",
+        SemShareConstants.GALLERY_PACKAGE,
+        "com.sec.android.mimage.photoretouching",
+        "com.sec.android.app.camera",
+        "com.samsung.android.app.smartcapture",
+        "com.sec.android.easyMover",
+        "com.samsung.android.scloud",
+        SemShareConstants.SHARE_LIVE_PKG
+    };
     private final ArrayList<StorageEventListenerDelegate> mDelegates = new ArrayList<>();
     private final ObbActionListener mObbActionListener = new ObbActionListener();
     private final Object mFuseAppLoopLock = new Object();
     private FuseAppLoop mFuseAppLoop = null;
     private final String DATA_MEDIA_PATH = "/data/media";
     private final String DATA_SEC_PATH = "/data/sec";
-    private final IStorageManager mStorageManager = IStorageManager.Stub.asInterface(ServiceManager.getServiceOrThrow(AudioParameter.VALUE_MOUNT));
+    private final IStorageManager mStorageManager =
+            IStorageManager.Stub.asInterface(
+                    ServiceManager.getServiceOrThrow(AudioParameter.VALUE_MOUNT));
     private IActivityManager mActivityManager = ActivityManager.getService();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AllocateFlags {
-    }
+    public @interface AllocateFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AppIoBlockedReason {
-    }
+    public @interface AppIoBlockedReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ExtStorageManageMode {
-    }
+    public @interface ExtStorageManageMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MountMode {
-    }
+    public @interface MountMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface QuotaType {
-    }
+    public @interface QuotaType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StorageFlags {
-    }
+    public @interface StorageFlags {}
 
     private static native boolean setQuotaProjectId(String str, long j);
 
@@ -232,20 +235,25 @@ public class StorageManager {
         final Executor mExecutor;
         final StorageEventListener mListener;
 
-        public StorageEventListenerDelegate(Executor executor, StorageEventListener listener, StorageVolumeCallback callback) {
+        public StorageEventListenerDelegate(
+                Executor executor, StorageEventListener listener, StorageVolumeCallback callback) {
             this.mExecutor = executor;
             this.mListener = listener;
             this.mCallback = callback;
         }
 
         @Override // android.os.storage.IStorageEventListener
-        public void onUsbMassStorageConnectionChanged(final boolean connected) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onUsbMassStorageConnectionChanged$0(connected);
-                }
-            });
+        public void onUsbMassStorageConnectionChanged(final boolean connected)
+                throws RemoteException {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            StorageManager.StorageEventListenerDelegate.this
+                                    .lambda$onUsbMassStorageConnectionChanged$0(connected);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -254,17 +262,22 @@ public class StorageManager {
         }
 
         @Override // android.os.storage.IStorageEventListener
-        public void onStorageStateChanged(final String path, final String oldState, final String newState) {
-            this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onStorageStateChanged$1(path, oldState, newState);
-                }
-            });
+        public void onStorageStateChanged(
+                final String path, final String oldState, final String newState) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            StorageManager.StorageEventListenerDelegate.this
+                                    .lambda$onStorageStateChanged$1(path, oldState, newState);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onStorageStateChanged$1(String path, String oldState, String newState) {
+        public /* synthetic */ void lambda$onStorageStateChanged$1(
+                String path, String oldState, String newState) {
             this.mListener.onStorageStateChanged(path, oldState, newState);
             if (path != null) {
                 for (StorageVolume sv : StorageManager.this.getStorageVolumes()) {
@@ -276,17 +289,22 @@ public class StorageManager {
         }
 
         @Override // android.os.storage.IStorageEventListener
-        public void onVolumeStateChanged(final VolumeInfo vol, final int oldState, final int newState) {
-            this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onVolumeStateChanged$2(vol, oldState, newState);
-                }
-            });
+        public void onVolumeStateChanged(
+                final VolumeInfo vol, final int oldState, final int newState) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            StorageManager.StorageEventListenerDelegate.this
+                                    .lambda$onVolumeStateChanged$2(vol, oldState, newState);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onVolumeStateChanged$2(VolumeInfo vol, int oldState, int newState) {
+        public /* synthetic */ void lambda$onVolumeStateChanged$2(
+                VolumeInfo vol, int oldState, int newState) {
             this.mListener.onVolumeStateChanged(vol, oldState, newState);
             File path = vol.getPathForUser(UserHandle.myUserId());
             if (path != null) {
@@ -300,12 +318,15 @@ public class StorageManager {
 
         @Override // android.os.storage.IStorageEventListener
         public void onVolumeRecordChanged(final VolumeRecord rec) {
-            this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onVolumeRecordChanged$3(rec);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            StorageManager.StorageEventListenerDelegate.this
+                                    .lambda$onVolumeRecordChanged$3(rec);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -315,12 +336,15 @@ public class StorageManager {
 
         @Override // android.os.storage.IStorageEventListener
         public void onVolumeForgotten(final String fsUuid) {
-            this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda6
-                @Override // java.lang.Runnable
-                public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onVolumeForgotten$4(fsUuid);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda6
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            StorageManager.StorageEventListenerDelegate.this
+                                    .lambda$onVolumeForgotten$4(fsUuid);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -330,12 +354,15 @@ public class StorageManager {
 
         @Override // android.os.storage.IStorageEventListener
         public void onDiskScanned(final DiskInfo disk, final int volumeCount) {
-            this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onDiskScanned$5(disk, volumeCount);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            StorageManager.StorageEventListenerDelegate.this.lambda$onDiskScanned$5(
+                                    disk, volumeCount);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -345,12 +372,15 @@ public class StorageManager {
 
         @Override // android.os.storage.IStorageEventListener
         public void onDiskDestroyed(final DiskInfo disk) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    StorageManager.StorageEventListenerDelegate.this.lambda$onDiskDestroyed$6(disk);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.os.storage.StorageManager$StorageEventListenerDelegate$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            StorageManager.StorageEventListenerDelegate.this
+                                    .lambda$onDiskDestroyed$6(disk);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -402,16 +432,21 @@ public class StorageManager {
         ObbListenerDelegate(OnObbStateChangeListener listener) {
             this.nonce = StorageManager.this.getNextNonce();
             this.mObbEventListenerRef = new WeakReference<>(listener);
-            this.mHandler = new Handler(StorageManager.this.mLooper) { // from class: android.os.storage.StorageManager.ObbListenerDelegate.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    OnObbStateChangeListener changeListener = ObbListenerDelegate.this.getListener();
-                    if (changeListener == null) {
-                        return;
-                    }
-                    changeListener.onObbStateChange((String) msg.obj, msg.arg1);
-                }
-            };
+            this.mHandler =
+                    new Handler(
+                            StorageManager.this
+                                    .mLooper) { // from class:
+                                                // android.os.storage.StorageManager.ObbListenerDelegate.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            OnObbStateChangeListener changeListener =
+                                    ObbListenerDelegate.this.getListener();
+                            if (changeListener == null) {
+                                return;
+                            }
+                            changeListener.onObbStateChange((String) msg.obj, msg.arg1);
+                        }
+                    };
         }
 
         OnObbStateChangeListener getListener() {
@@ -431,7 +466,8 @@ public class StorageManager {
         return (StorageManager) context.getSystemService(StorageManager.class);
     }
 
-    public StorageManager(Context context, Looper looper) throws ServiceManager.ServiceNotFoundException {
+    public StorageManager(Context context, Looper looper)
+            throws ServiceManager.ServiceNotFoundException {
         this.mContext = context;
         this.mResolver = context.getContentResolver();
         this.mLooper = looper;
@@ -440,7 +476,9 @@ public class StorageManager {
 
     public void registerListener(StorageEventListener listener) {
         synchronized (this.mDelegates) {
-            StorageEventListenerDelegate delegate = new StorageEventListenerDelegate(this.mContext.getMainExecutor(), listener, new StorageVolumeCallback());
+            StorageEventListenerDelegate delegate =
+                    new StorageEventListenerDelegate(
+                            this.mContext.getMainExecutor(), listener, new StorageVolumeCallback());
             try {
                 this.mStorageManager.registerListener(delegate);
                 this.mDelegates.add(delegate);
@@ -468,13 +506,14 @@ public class StorageManager {
     }
 
     public static class StorageVolumeCallback {
-        public void onStateChanged(StorageVolume volume) {
-        }
+        public void onStateChanged(StorageVolume volume) {}
     }
 
     public void registerStorageVolumeCallback(Executor executor, StorageVolumeCallback callback) {
         synchronized (this.mDelegates) {
-            StorageEventListenerDelegate delegate = new StorageEventListenerDelegate(executor, new StorageEventListener(), callback);
+            StorageEventListenerDelegate delegate =
+                    new StorageEventListenerDelegate(
+                            executor, new StorageEventListener(), callback);
             try {
                 this.mStorageManager.registerListener(delegate);
                 this.mDelegates.add(delegate);
@@ -502,12 +541,10 @@ public class StorageManager {
     }
 
     @Deprecated
-    public void enableUsbMassStorage() {
-    }
+    public void enableUsbMassStorage() {}
 
     @Deprecated
-    public void disableUsbMassStorage() {
-    }
+    public void disableUsbMassStorage() {}
 
     @Deprecated
     public boolean isUsbMassStorageConnected() {
@@ -526,7 +563,12 @@ public class StorageManager {
         try {
             String canonicalPath = new File(rawPath).getCanonicalPath();
             int nonce = this.mObbActionListener.addListener(listener);
-            this.mStorageManager.mountObb(rawPath, canonicalPath, this.mObbActionListener, nonce, getObbInfo(canonicalPath));
+            this.mStorageManager.mountObb(
+                    rawPath,
+                    canonicalPath,
+                    this.mObbActionListener,
+                    nonce,
+                    getObbInfo(canonicalPath));
             return true;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -637,14 +679,22 @@ public class StorageManager {
             if (idx != -1) {
                 id = id.substring(0, idx);
             }
-            return findVolumeById(id.replace(VolumeInfo.ID_EMULATED_INTERNAL, VolumeInfo.ID_PRIVATE_INTERNAL));
+            return findVolumeById(
+                    id.replace(VolumeInfo.ID_EMULATED_INTERNAL, VolumeInfo.ID_PRIVATE_INTERNAL));
         }
         return null;
     }
 
     public VolumeInfo findEmulatedForPrivate(VolumeInfo privateVol) {
         if (privateVol != null) {
-            return findVolumeById(privateVol.getId().replace(VolumeInfo.ID_PRIVATE_INTERNAL, VolumeInfo.ID_EMULATED_INTERNAL) + NavigationBarInflaterView.GRAVITY_SEPARATOR + this.mContext.getUserId());
+            return findVolumeById(
+                    privateVol
+                                    .getId()
+                                    .replace(
+                                            VolumeInfo.ID_PRIVATE_INTERNAL,
+                                            VolumeInfo.ID_EMULATED_INTERNAL)
+                            + NavigationBarInflaterView.GRAVITY_SEPARATOR
+                            + this.mContext.getUserId());
         }
         return null;
     }
@@ -670,7 +720,10 @@ public class StorageManager {
             int length = volumes.length;
             for (int i = 0; i < length; i++) {
                 VolumeInfo vol = volumes[i];
-                if (vol.path != null && FileUtils.contains(vol.path, pathString) && vol.type != 0 && vol.type != 5) {
+                if (vol.path != null
+                        && FileUtils.contains(vol.path, pathString)
+                        && vol.type != 0
+                        && vol.type != 5) {
                     try {
                         return convert(vol.fsUuid);
                     } catch (IllegalArgumentException e) {
@@ -735,7 +788,9 @@ public class StorageManager {
         if (vol == null) {
             return null;
         }
-        if (!TextUtils.isEmpty(vol.fsUuid) && (rec = findRecordByUuid(vol.fsUuid)) != null && !TextUtils.isEmpty(rec.nickname)) {
+        if (!TextUtils.isEmpty(vol.fsUuid)
+                && (rec = findRecordByUuid(vol.fsUuid)) != null
+                && !TextUtils.isEmpty(rec.nickname)) {
             return rec.nickname;
         }
         if (!TextUtils.isEmpty(vol.getDescription())) {
@@ -799,16 +854,17 @@ public class StorageManager {
     @Deprecated
     public long benchmark(String volId) {
         final CompletableFuture<PersistableBundle> result = new CompletableFuture<>();
-        benchmark(volId, new IVoldTaskListener.Stub() { // from class: android.os.storage.StorageManager.1
-            @Override // android.os.IVoldTaskListener
-            public void onStatus(int status, PersistableBundle extras) {
-            }
+        benchmark(
+                volId,
+                new IVoldTaskListener.Stub() { // from class: android.os.storage.StorageManager.1
+                    @Override // android.os.IVoldTaskListener
+                    public void onStatus(int status, PersistableBundle extras) {}
 
-            @Override // android.os.IVoldTaskListener
-            public void onFinished(int status, PersistableBundle extras) {
-                result.complete(extras);
-            }
-        });
+                    @Override // android.os.IVoldTaskListener
+                    public void onFinished(int status, PersistableBundle extras) {
+                        result.complete(extras);
+                    }
+                });
         try {
             return result.get(3L, TimeUnit.MINUTES).getLong("run", Long.MAX_VALUE) * 1000000;
         } catch (Exception e) {
@@ -923,9 +979,9 @@ public class StorageManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0084, code lost:
-    
-        if (r0.equals("external_primary") != false) goto L34;
-     */
+
+       if (r0.equals("external_primary") != false) goto L34;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -935,7 +991,9 @@ public class StorageManager {
             Method dump skipped, instructions count: 318
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.storage.StorageManager.getStorageVolume(android.net.Uri):android.os.storage.StorageVolume");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.storage.StorageManager.getStorageVolume(android.net.Uri):android.os.storage.StorageVolume");
     }
 
     public static StorageVolume getStorageVolume(File file, int userId) {
@@ -949,7 +1007,10 @@ public class StorageManager {
         String path = file.getAbsolutePath();
         if (path.startsWith(ContentResolver.DEPRECATE_DATA_PREFIX)) {
             Uri uri = ContentResolver.translateDeprecatedDataPath(path);
-            return ((StorageManager) AppGlobals.getInitialApplication().getSystemService(StorageManager.class)).getStorageVolume(uri);
+            return ((StorageManager)
+                            AppGlobals.getInitialApplication()
+                                    .getSystemService(StorageManager.class))
+                    .getStorageVolume(uri);
         }
         try {
             File file2 = file.getCanonicalFile();
@@ -998,11 +1059,18 @@ public class StorageManager {
     }
 
     public static Pair<String, Long> getPrimaryStoragePathAndSize() {
-        return Pair.create(null, Long.valueOf(FileUtils.roundStorageSize(Environment.getDataDirectory().getTotalSpace() + Environment.getRootDirectory().getTotalSpace())));
+        return Pair.create(
+                null,
+                Long.valueOf(
+                        FileUtils.roundStorageSize(
+                                Environment.getDataDirectory().getTotalSpace()
+                                        + Environment.getRootDirectory().getTotalSpace())));
     }
 
     public long getPrimaryStorageSize() {
-        return FileUtils.roundStorageSize(Environment.getDataDirectory().getTotalSpace() + Environment.getRootDirectory().getTotalSpace());
+        return FileUtils.roundStorageSize(
+                Environment.getDataDirectory().getTotalSpace()
+                        + Environment.getRootDirectory().getTotalSpace());
     }
 
     public long getInternalStorageBlockDeviceSize() {
@@ -1027,11 +1095,14 @@ public class StorageManager {
     }
 
     public static StorageVolume[] getVolumeList(int userId, int flags) {
-        IStorageManager storageManager = IStorageManager.Stub.asInterface(ServiceManager.getService(AudioParameter.VALUE_MOUNT));
+        IStorageManager storageManager =
+                IStorageManager.Stub.asInterface(
+                        ServiceManager.getService(AudioParameter.VALUE_MOUNT));
         try {
             String packageName = ActivityThread.currentOpPackageName();
             if (packageName == null) {
-                String[] packageNames = ActivityThread.getPackageManager().getPackagesForUid(Process.myUid());
+                String[] packageNames =
+                        ActivityThread.getPackageManager().getPackagesForUid(Process.myUid());
                 if (packageNames != null && packageNames.length > 0) {
                     packageName = packageNames[0];
                 }
@@ -1073,17 +1144,26 @@ public class StorageManager {
     }
 
     public long getStorageLowBytes(File path) {
-        long lowPercent = Settings.Global.getInt(this.mResolver, Settings.Global.SYS_STORAGE_THRESHOLD_PERCENTAGE, 5);
+        long lowPercent =
+                Settings.Global.getInt(
+                        this.mResolver, Settings.Global.SYS_STORAGE_THRESHOLD_PERCENTAGE, 5);
         long lowBytes = (path.getTotalSpace() * lowPercent) / 100;
-        long maxLowBytes = Settings.Global.getLong(this.mResolver, Settings.Global.SYS_STORAGE_THRESHOLD_MAX_BYTES, DEFAULT_THRESHOLD_MAX_BYTES);
+        long maxLowBytes =
+                Settings.Global.getLong(
+                        this.mResolver,
+                        Settings.Global.SYS_STORAGE_THRESHOLD_MAX_BYTES,
+                        DEFAULT_THRESHOLD_MAX_BYTES);
         return Math.min(lowBytes, maxLowBytes);
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public long computeStorageCacheBytes(File path) {
-        int storageThresholdPercentHigh = DeviceConfig.getInt("storage_native_boot", STORAGE_THRESHOLD_PERCENT_HIGH_KEY, 20);
-        int cacheReservePercentHigh = DeviceConfig.getInt("storage_native_boot", CACHE_RESERVE_PERCENT_HIGH_KEY, 10);
-        int cacheReservePercentLow = DeviceConfig.getInt("storage_native_boot", CACHE_RESERVE_PERCENT_LOW_KEY, 2);
+        int storageThresholdPercentHigh =
+                DeviceConfig.getInt("storage_native_boot", STORAGE_THRESHOLD_PERCENT_HIGH_KEY, 20);
+        int cacheReservePercentHigh =
+                DeviceConfig.getInt("storage_native_boot", CACHE_RESERVE_PERCENT_HIGH_KEY, 10);
+        int cacheReservePercentLow =
+                DeviceConfig.getInt("storage_native_boot", CACHE_RESERVE_PERCENT_LOW_KEY, 2);
         long totalBytes = path.getTotalSpace();
         long usableBytes = path.getUsableSpace();
         long storageThresholdHighBytes = (storageThresholdPercentHigh * totalBytes) / 100;
@@ -1096,8 +1176,12 @@ public class StorageManager {
             long result2 = (cacheReservePercentLow * totalBytes) / 100;
             return result2;
         }
-        double slope = ((cacheReservePercentHigh - cacheReservePercentLow) * totalBytes) / ((storageThresholdHighBytes - storageThresholdLowBytes) * 100.0d);
-        double intercept = ((cacheReservePercentLow * totalBytes) / 100.0d) - (storageThresholdLowBytes * slope);
+        double slope =
+                ((cacheReservePercentHigh - cacheReservePercentLow) * totalBytes)
+                        / ((storageThresholdHighBytes - storageThresholdLowBytes) * 100.0d);
+        double intercept =
+                ((cacheReservePercentLow * totalBytes) / 100.0d)
+                        - (storageThresholdLowBytes * slope);
         long result3 = Math.round((usableBytes * slope) + intercept);
         return result3;
     }
@@ -1113,7 +1197,10 @@ public class StorageManager {
     }
 
     public long getStorageFullBytes(File path) {
-        return Settings.Global.getLong(this.mResolver, Settings.Global.SYS_STORAGE_FULL_THRESHOLD_BYTES, DEFAULT_FULL_THRESHOLD_BYTES);
+        return Settings.Global.getLong(
+                this.mResolver,
+                Settings.Global.SYS_STORAGE_FULL_THRESHOLD_BYTES,
+                DEFAULT_FULL_THRESHOLD_BYTES);
     }
 
     public void createUserStorageKeys(int userId, boolean ephemeral) {
@@ -1158,7 +1245,9 @@ public class StorageManager {
 
     public static boolean isCeStorageUnlocked(int userId) {
         if (sStorageManager == null) {
-            sStorageManager = IStorageManager.Stub.asInterface(ServiceManager.getService(AudioParameter.VALUE_MOUNT));
+            sStorageManager =
+                    IStorageManager.Stub.asInterface(
+                            ServiceManager.getService(AudioParameter.VALUE_MOUNT));
         }
         if (sStorageManager == null) {
             Slog.w(TAG, "Early during boot, assuming CE storage is locked");
@@ -1219,19 +1308,46 @@ public class StorageManager {
         return file;
     }
 
-    public static boolean checkPermissionAndAppOp(Context context, boolean enforce, int pid, int uid, String packageName, String featureId, String permission, int op) {
-        return checkPermissionAndAppOp(context, enforce, pid, uid, packageName, featureId, permission, op, true);
+    public static boolean checkPermissionAndAppOp(
+            Context context,
+            boolean enforce,
+            int pid,
+            int uid,
+            String packageName,
+            String featureId,
+            String permission,
+            int op) {
+        return checkPermissionAndAppOp(
+                context, enforce, pid, uid, packageName, featureId, permission, op, true);
     }
 
-    public static boolean checkPermissionAndCheckOp(Context context, boolean enforce, int pid, int uid, String packageName, String permission, int op) {
-        return checkPermissionAndAppOp(context, enforce, pid, uid, packageName, null, permission, op, false);
+    public static boolean checkPermissionAndCheckOp(
+            Context context,
+            boolean enforce,
+            int pid,
+            int uid,
+            String packageName,
+            String permission,
+            int op) {
+        return checkPermissionAndAppOp(
+                context, enforce, pid, uid, packageName, null, permission, op, false);
     }
 
-    private static boolean checkPermissionAndAppOp(Context context, boolean enforce, int pid, int uid, String packageName, String featureId, String permission, int op, boolean note) {
+    private static boolean checkPermissionAndAppOp(
+            Context context,
+            boolean enforce,
+            int pid,
+            int uid,
+            String packageName,
+            String featureId,
+            String permission,
+            int op,
+            boolean note) {
         int mode;
         if (context.checkPermission(permission, pid, uid) != 0) {
             if (enforce) {
-                throw new SecurityException("Permission " + permission + " denied for package " + packageName);
+                throw new SecurityException(
+                        "Permission " + permission + " denied for package " + packageName);
             }
             return false;
         }
@@ -1256,19 +1372,37 @@ public class StorageManager {
             case 2:
             case 3:
                 if (enforce) {
-                    throw new SecurityException("Op " + AppOpsManager.opToName(op) + " " + AppOpsManager.modeToName(mode) + " for package " + packageName);
+                    throw new SecurityException(
+                            "Op "
+                                    + AppOpsManager.opToName(op)
+                                    + " "
+                                    + AppOpsManager.modeToName(mode)
+                                    + " for package "
+                                    + packageName);
                 }
                 return false;
             default:
-                throw new IllegalStateException(AppOpsManager.opToName(op) + " has unknown mode " + AppOpsManager.modeToName(mode));
+                throw new IllegalStateException(
+                        AppOpsManager.opToName(op)
+                                + " has unknown mode "
+                                + AppOpsManager.modeToName(mode));
         }
     }
 
-    private boolean checkPermissionAndAppOp(boolean enforce, int pid, int uid, String packageName, String featureId, String permission, int op) {
-        return checkPermissionAndAppOp(this.mContext, enforce, pid, uid, packageName, featureId, permission, op);
+    private boolean checkPermissionAndAppOp(
+            boolean enforce,
+            int pid,
+            int uid,
+            String packageName,
+            String featureId,
+            String permission,
+            int op) {
+        return checkPermissionAndAppOp(
+                this.mContext, enforce, pid, uid, packageName, featureId, permission, op);
     }
 
-    private boolean noteAppOpAllowingLegacy(boolean enforce, int pid, int uid, String packageName, String featureId, int op) {
+    private boolean noteAppOpAllowingLegacy(
+            boolean enforce, int pid, int uid, String packageName, String featureId, int op) {
         int mode = this.mAppOps.noteOpNoThrow(op, uid, packageName, featureId, (String) null);
         switch (mode) {
             case 0:
@@ -1280,34 +1414,63 @@ public class StorageManager {
                     return true;
                 }
                 if (enforce) {
-                    throw new SecurityException("Op " + AppOpsManager.opToName(op) + " " + AppOpsManager.modeToName(mode) + " for package " + packageName);
+                    throw new SecurityException(
+                            "Op "
+                                    + AppOpsManager.opToName(op)
+                                    + " "
+                                    + AppOpsManager.modeToName(mode)
+                                    + " for package "
+                                    + packageName);
                 }
                 return false;
             default:
-                throw new IllegalStateException(AppOpsManager.opToName(op) + " has unknown mode " + AppOpsManager.modeToName(mode));
+                throw new IllegalStateException(
+                        AppOpsManager.opToName(op)
+                                + " has unknown mode "
+                                + AppOpsManager.modeToName(mode));
         }
     }
 
     @Deprecated
-    public boolean checkPermissionReadImages(boolean enforce, int pid, int uid, String packageName, String featureId) {
-        if (!checkExternalStoragePermissionAndAppOp(enforce, pid, uid, packageName, featureId, Manifest.permission.READ_EXTERNAL_STORAGE, 59)) {
+    public boolean checkPermissionReadImages(
+            boolean enforce, int pid, int uid, String packageName, String featureId) {
+        if (!checkExternalStoragePermissionAndAppOp(
+                enforce,
+                pid,
+                uid,
+                packageName,
+                featureId,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                59)) {
             return false;
         }
         return noteAppOpAllowingLegacy(enforce, pid, uid, packageName, featureId, 85);
     }
 
-    private boolean checkExternalStoragePermissionAndAppOp(boolean enforce, int pid, int uid, String packageName, String featureId, String permission, int op) {
+    private boolean checkExternalStoragePermissionAndAppOp(
+            boolean enforce,
+            int pid,
+            int uid,
+            String packageName,
+            String featureId,
+            String permission,
+            int op) {
         int mode = this.mAppOps.noteOpNoThrow(92, uid, packageName, featureId, (String) null);
         if (mode == 0) {
             return true;
         }
-        if (mode == 3 && this.mContext.checkPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE, pid, uid) == 0) {
+        if (mode == 3
+                && this.mContext.checkPermission(
+                                Manifest.permission.MANAGE_EXTERNAL_STORAGE, pid, uid)
+                        == 0) {
             return true;
         }
         return checkPermissionAndAppOp(enforce, pid, uid, packageName, featureId, permission, op);
     }
 
-    public ParcelFileDescriptor openProxyFileDescriptor(int mode, ProxyFileDescriptorCallback callback, Handler handler, ThreadFactory factory) throws IOException {
+    public ParcelFileDescriptor openProxyFileDescriptor(
+            int mode, ProxyFileDescriptorCallback callback, Handler handler, ThreadFactory factory)
+            throws IOException {
         ParcelFileDescriptor pfd;
         Preconditions.checkNotNull(callback);
         MetricsLogger.count(this.mContext, "storage_open_proxy_file_descriptor", 1);
@@ -1328,10 +1491,13 @@ public class StorageManager {
                     }
                     try {
                         int fileId = this.mFuseAppLoop.registerCallback(callback, handler);
-                        pfd = this.mStorageManager.openProxyFileDescriptor(this.mFuseAppLoop.getMountPointId(), fileId, mode);
+                        pfd =
+                                this.mStorageManager.openProxyFileDescriptor(
+                                        this.mFuseAppLoop.getMountPointId(), fileId, mode);
                         if (pfd == null) {
                             this.mFuseAppLoop.unregisterCallback(fileId);
-                            throw new FuseUnavailableMountException(this.mFuseAppLoop.getMountPointId());
+                            throw new FuseUnavailableMountException(
+                                    this.mFuseAppLoop.getMountPointId());
                         }
                     } catch (FuseUnavailableMountException exception) {
                         if (newlyCreated) {
@@ -1347,11 +1513,13 @@ public class StorageManager {
         }
     }
 
-    public ParcelFileDescriptor openProxyFileDescriptor(int mode, ProxyFileDescriptorCallback callback) throws IOException {
+    public ParcelFileDescriptor openProxyFileDescriptor(
+            int mode, ProxyFileDescriptorCallback callback) throws IOException {
         return openProxyFileDescriptor(mode, callback, null, null);
     }
 
-    public ParcelFileDescriptor openProxyFileDescriptor(int mode, ProxyFileDescriptorCallback callback, Handler handler) throws IOException {
+    public ParcelFileDescriptor openProxyFileDescriptor(
+            int mode, ProxyFileDescriptorCallback callback, Handler handler) throws IOException {
         Preconditions.checkNotNull(handler);
         return openProxyFileDescriptor(mode, callback, handler, null);
     }
@@ -1395,7 +1563,8 @@ public class StorageManager {
     @SystemApi
     public long getAllocatableBytes(UUID storageUuid, int flags) throws IOException {
         try {
-            return this.mStorageManager.getAllocatableBytes(convert(storageUuid), flags, this.mContext.getOpPackageName());
+            return this.mStorageManager.getAllocatableBytes(
+                    convert(storageUuid), flags, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             throw new RuntimeException(e);
@@ -1411,7 +1580,8 @@ public class StorageManager {
     @SystemApi
     public void allocateBytes(UUID storageUuid, long bytes, int flags) throws IOException {
         try {
-            this.mStorageManager.allocateBytes(convert(storageUuid), bytes, flags, this.mContext.getOpPackageName());
+            this.mStorageManager.allocateBytes(
+                    convert(storageUuid), bytes, flags, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
         } catch (RemoteException e2) {
@@ -1462,7 +1632,8 @@ public class StorageManager {
                 }
             }
         }
-        throw new IOException("Well this is embarassing; we can't allocate " + bytes + " for " + file);
+        throw new IOException(
+                "Well this is embarassing; we can't allocate " + bytes + " for " + file);
     }
 
     private static long getProjectIdForUser(int userId, int projectId) {
@@ -1480,10 +1651,12 @@ public class StorageManager {
                 volFlags = Integer.parseInt(matcher.group(1));
             } else {
                 int volFlags2 = 1536;
-                if (this.mContext.checkSelfPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == 0) {
+                if (this.mContext.checkSelfPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE)
+                        == 0) {
                     volFlags2 = 1536 | 4096;
                 }
-                StorageVolume[] availableVolumes = getVolumeList(this.mContext.getUserId(), volFlags2);
+                StorageVolume[] availableVolumes =
+                        getVolumeList(this.mContext.getUserId(), volFlags2);
                 StorageVolume volume = getStorageVolume(availableVolumes, path);
                 if (volume == null) {
                     Log.w(TAG, "Failed to update quota type for " + filePath);
@@ -1529,7 +1702,8 @@ public class StorageManager {
         }
     }
 
-    private static void setCacheBehavior(File path, String name, boolean enabled) throws IOException {
+    private static void setCacheBehavior(File path, String name, boolean enabled)
+            throws IOException {
         if (!path.isDirectory()) {
             throw new IOException("Cache behavior can only be set on directories");
         }
@@ -1593,7 +1767,8 @@ public class StorageManager {
             return UUID_SYSTEM_;
         }
         if (isFatVolumeIdentifier(uuid)) {
-            return UUID.fromString(FAT_UUID_PREFIX + uuid.replace(NativeLibraryHelper.CLEAR_ABI_OVERRIDE, ""));
+            return UUID.fromString(
+                    FAT_UUID_PREFIX + uuid.replace(NativeLibraryHelper.CLEAR_ABI_OVERRIDE, ""));
         }
         return UUID.fromString(uuid);
     }
@@ -1611,7 +1786,9 @@ public class StorageManager {
         String uuidString = storageUuid.toString();
         if (uuidString.startsWith(FAT_UUID_PREFIX)) {
             String fatStr = uuidString.substring(FAT_UUID_PREFIX.length()).toUpperCase(Locale.US);
-            return fatStr.substring(0, 4) + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + fatStr.substring(4);
+            return fatStr.substring(0, 4)
+                    + NativeLibraryHelper.CLEAR_ABI_OVERRIDE
+                    + fatStr.substring(4);
         }
         return storageUuid.toString();
     }
@@ -1716,7 +1893,10 @@ public class StorageManager {
 
     public long getUsedF2fsFileNode() {
         if (Process.myUid() != 1000) {
-            Log.d(TAG, "Getting Used FileNode Number is not allowed", new Exception("who's calling?"));
+            Log.d(
+                    TAG,
+                    "Getting Used FileNode Number is not allowed",
+                    new Exception("who's calling?"));
             return -1L;
         }
         try {
@@ -1763,7 +1943,8 @@ public class StorageManager {
             if (canonicalPath == null) {
                 return false;
             }
-            if (!canonicalPath.startsWith("/data/media") && !canonicalPath.startsWith("/data/sec")) {
+            if (!canonicalPath.startsWith("/data/media")
+                    && !canonicalPath.startsWith("/data/sec")) {
                 Slog.d(TAG, "input path is not supported");
                 return false;
             }
@@ -1776,10 +1957,14 @@ public class StorageManager {
 
     public boolean mvFileAtData(String from, String to) {
         try {
-            this.mContext.enforceCallingOrSelfPermission(Manifest.permission.SEM_VOLD_DATA_MOVE, null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    Manifest.permission.SEM_VOLD_DATA_MOVE, null);
             String callerPackageName = getPackageNameByContext();
             if (!isAllowedPackageForDataMvCp(callerPackageName)) {
-                Log.d(TAG, "Move file at data path is not allowed", new Exception("who's calling?"));
+                Log.d(
+                        TAG,
+                        "Move file at data path is not allowed",
+                        new Exception("who's calling?"));
                 return false;
             }
             Log.d(TAG, "!@[Move File at data]", new Exception("who's calling?"));
@@ -1795,10 +1980,14 @@ public class StorageManager {
 
     public boolean cpFileAtData(String from, String to) {
         try {
-            this.mContext.enforceCallingOrSelfPermission(Manifest.permission.SEM_VOLD_DATA_MOVE, null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    Manifest.permission.SEM_VOLD_DATA_MOVE, null);
             String callerPackageName = getPackageNameByContext();
             if (!isAllowedPackageForDataMvCp(callerPackageName)) {
-                Log.d(TAG, "Copy file at data path is not allowed", new Exception("who's calling?"));
+                Log.d(
+                        TAG,
+                        "Copy file at data path is not allowed",
+                        new Exception("who's calling?"));
                 return false;
             }
             Log.d(TAG, "!@[Copy file at data]", new Exception("who's calling?"));
@@ -1830,7 +2019,10 @@ public class StorageManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.d(TAG, "getPackageNameByContext : Package name : " + (packageName == null ? "NULL" : packageName));
+        Log.d(
+                TAG,
+                "getPackageNameByContext : Package name : "
+                        + (packageName == null ? "NULL" : packageName));
         return packageName;
     }
 
@@ -1852,10 +2044,14 @@ public class StorageManager {
 
     public boolean semMoveFileAtData(String from, String to) {
         try {
-            this.mContext.enforceCallingOrSelfPermission(Manifest.permission.SEM_VOLD_DATA_MOVE, null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    Manifest.permission.SEM_VOLD_DATA_MOVE, null);
             String callerPackageName = getPackageNameByContext();
             if (!isAllowedPackageForDataMvCp(callerPackageName)) {
-                Log.d(TAG, "Move file at data path is not allowed", new Exception("who's calling?"));
+                Log.d(
+                        TAG,
+                        "Move file at data path is not allowed",
+                        new Exception("who's calling?"));
                 return false;
             }
             Log.d(TAG, "!@[Move File at data]", new Exception("who's calling?"));
@@ -1871,10 +2067,14 @@ public class StorageManager {
 
     public boolean semCopyFileAtData(String from, String to) {
         try {
-            this.mContext.enforceCallingOrSelfPermission(Manifest.permission.SEM_VOLD_DATA_MOVE, null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    Manifest.permission.SEM_VOLD_DATA_MOVE, null);
             String callerPackageName = getPackageNameByContext();
             if (!isAllowedPackageForDataMvCp(callerPackageName)) {
-                Log.d(TAG, "Copy file at data path is not allowed", new Exception("who's calling?"));
+                Log.d(
+                        TAG,
+                        "Copy file at data path is not allowed",
+                        new Exception("who's calling?"));
                 return false;
             }
             Log.d(TAG, "!@[Copy file at data]", new Exception("who's calling?"));

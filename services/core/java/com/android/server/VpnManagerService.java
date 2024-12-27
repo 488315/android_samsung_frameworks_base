@@ -35,6 +35,7 @@ import android.text.TextUtils;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
@@ -45,9 +46,11 @@ import com.android.server.connectivity.Vpn;
 import com.android.server.connectivity.VpnProfileStore;
 import com.android.server.net.LockdownVpnTracker;
 import com.android.server.pm.UserManagerInternal;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.net.vpn.IKnoxVpnPolicy;
 import com.samsung.android.knox.zt.networktrust.filter.IKnoxNetworkFilterService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -82,8 +85,7 @@ public class VpnManagerService extends IVpnManager.Stub {
     protected final SparseArray mVpns = new SparseArray();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public class Dependencies {
-    }
+    public class Dependencies {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkCallback extends ConnectivityManager.NetworkCallback {
@@ -100,7 +102,12 @@ public class VpnManagerService extends IVpnManager.Stub {
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onLinkPropertiesChanged(Network network, LinkProperties linkProperties) {
             boolean z = VpnManagerService.DBG;
-            Log.d("VpnManagerService", "onLinkPropertiesChanged being called for netId " + network.getNetId() + " for interface " + linkProperties.getInterfaceName());
+            Log.d(
+                    "VpnManagerService",
+                    "onLinkPropertiesChanged being called for netId "
+                            + network.getNetId()
+                            + " for interface "
+                            + linkProperties.getInterfaceName());
             this.mNetwork = network;
             this.mLinkProperties = linkProperties;
         }
@@ -115,15 +122,18 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     /* renamed from: -$$Nest$mensureRunningOnHandlerThread, reason: not valid java name */
-    public static void m106$$Nest$mensureRunningOnHandlerThread(VpnManagerService vpnManagerService) {
+    public static void m106$$Nest$mensureRunningOnHandlerThread(
+            VpnManagerService vpnManagerService) {
         if (vpnManagerService.mHandler.getLooper().getThread() == Thread.currentThread()) {
             return;
         }
-        throw new IllegalStateException("Not running on VpnManagerService thread: " + Thread.currentThread().getName());
+        throw new IllegalStateException(
+                "Not running on VpnManagerService thread: " + Thread.currentThread().getName());
     }
 
     /* renamed from: -$$Nest$monPackageAdded, reason: not valid java name */
-    public static void m107$$Nest$monPackageAdded(VpnManagerService vpnManagerService, String str, int i, boolean z) {
+    public static void m107$$Nest$monPackageAdded(
+            VpnManagerService vpnManagerService, String str, int i, boolean z) {
         vpnManagerService.getClass();
         if (TextUtils.isEmpty(str) || i < 0) {
             Log.wtf("VpnManagerService", "Invalid package in onPackageAdded: " + str + " | " + i);
@@ -142,7 +152,8 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     /* renamed from: -$$Nest$monPackageRemoved, reason: not valid java name */
-    public static void m108$$Nest$monPackageRemoved(VpnManagerService vpnManagerService, String str, int i, boolean z) {
+    public static void m108$$Nest$monPackageRemoved(
+            VpnManagerService vpnManagerService, String str, int i, boolean z) {
         vpnManagerService.getClass();
         if (TextUtils.isEmpty(str) || i < 0) {
             Log.wtf("VpnManagerService", "Invalid package in onPackageRemoved: " + str + " | " + i);
@@ -154,7 +165,9 @@ public class VpnManagerService extends IVpnManager.Stub {
                 Vpn vpn = (Vpn) vpnManagerService.mVpns.get(userId);
                 if (vpn != null && !z) {
                     if (TextUtils.equals(vpn.getAlwaysOnPackage(), str)) {
-                        Log.d("VpnManagerService", "Removing always-on VPN package " + str + " for user " + userId);
+                        Log.d(
+                                "VpnManagerService",
+                                "Removing always-on VPN package " + str + " for user " + userId);
                         vpn.setAlwaysOnPackage(null, null, false);
                     }
                     vpn.refreshPlatformVpnAppExclusionList();
@@ -165,10 +178,13 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     /* renamed from: -$$Nest$monPackageReplaced, reason: not valid java name */
-    public static void m109$$Nest$monPackageReplaced(VpnManagerService vpnManagerService, String str, int i) {
+    public static void m109$$Nest$monPackageReplaced(
+            VpnManagerService vpnManagerService, String str, int i) {
         vpnManagerService.getClass();
         if (TextUtils.isEmpty(str) || i < 0) {
-            Log.wtf("VpnManagerService", "Invalid package in onPackageReplaced: " + str + " | " + i);
+            Log.wtf(
+                    "VpnManagerService",
+                    "Invalid package in onPackageReplaced: " + str + " | " + i);
             return;
         }
         int userId = UserHandle.getUserId(i);
@@ -179,7 +195,9 @@ public class VpnManagerService extends IVpnManager.Stub {
                     return;
                 }
                 if (TextUtils.equals(vpn.getAlwaysOnPackage(), str)) {
-                    Log.d("VpnManagerService", "Restarting always-on VPN package " + str + " for user " + userId);
+                    Log.d(
+                            "VpnManagerService",
+                            "Restarting always-on VPN package " + str + " for user " + userId);
                     vpn.startAlwaysOnVpn();
                 }
             } finally {
@@ -219,7 +237,8 @@ public class VpnManagerService extends IVpnManager.Stub {
     public static void m112$$Nest$monUserUnlocked(VpnManagerService vpnManagerService, int i) {
         synchronized (vpnManagerService.mVpns) {
             try {
-                if (i == vpnManagerService.mMainUserId && vpnManagerService.isLockdownVpnEnabled()) {
+                if (i == vpnManagerService.mMainUserId
+                        && vpnManagerService.isLockdownVpnEnabled()) {
                     vpnManagerService.updateLockdownVpn();
                 } else {
                     vpnManagerService.startAlwaysOnVpn(i);
@@ -232,233 +251,319 @@ public class VpnManagerService extends IVpnManager.Stub {
 
     public VpnManagerService(Context context, Dependencies dependencies) {
         final int i = 0;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.VpnManagerService.1
-            public final /* synthetic */ VpnManagerService this$0;
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver(this) { // from class: com.android.server.VpnManagerService.1
+                    public final /* synthetic */ VpnManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                switch (i) {
-                    case 0:
-                        VpnManagerService.m106$$Nest$mensureRunningOnHandlerThread(this.this$0);
-                        String action = intent.getAction();
-                        int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000);
-                        int intExtra2 = intent.getIntExtra("android.intent.extra.UID", -1);
-                        Uri data = intent.getData();
-                        String schemeSpecificPart = data != null ? data.getSchemeSpecificPart() : null;
-                        if ("com.android.server.action.LOCKDOWN_RESET".equals(action)) {
-                            VpnManagerService vpnManagerService = this.this$0;
-                            synchronized (vpnManagerService.mVpns) {
-                                LockdownVpnTracker lockdownVpnTracker = vpnManagerService.mLockdownTracker;
-                                if (lockdownVpnTracker != null) {
-                                    Log.d("LockdownVpnTracker", "reset()");
-                                    synchronized (lockdownVpnTracker.mStateLock) {
-                                        lockdownVpnTracker.shutdownLocked();
-                                        lockdownVpnTracker.initLocked();
-                                        lockdownVpnTracker.handleStateChangedLocked();
-                                    }
-                                }
-                            }
-                            return;
-                        }
-                        if (intExtra == -10000) {
-                            return;
-                        }
-                        if ("android.intent.action.USER_STARTED".equals(action)) {
-                            VpnManagerService vpnManagerService2 = this.this$0;
-                            if (vpnManagerService2.mUserManager.getUserInfo(intExtra) == null) {
-                                VpnManagerService.logw("Started user doesn't exist. UserId: " + intExtra);
-                                return;
-                            }
-                            synchronized (vpnManagerService2.mVpns) {
-                                try {
-                                    if (((Vpn) vpnManagerService2.mVpns.get(intExtra)) != null) {
-                                        Log.e("VpnManagerService", "Starting user already has a VPN");
-                                        return;
-                                    }
-                                    Dependencies dependencies2 = vpnManagerService2.mDeps;
-                                    Looper looper = vpnManagerService2.mHandler.getLooper();
-                                    Context context3 = vpnManagerService2.mContext;
-                                    INetworkManagementService iNetworkManagementService = vpnManagerService2.mNMS;
-                                    INetd iNetd = vpnManagerService2.mNetd;
-                                    dependencies2.getClass();
-                                    vpnManagerService2.mVpns.put(intExtra, new Vpn(looper, context3, new Vpn.Dependencies(), iNetworkManagementService, iNetd, intExtra, new VpnProfileStore(), new Vpn.SystemServices(context3), new Vpn.Ikev2SessionCreator()));
-                                    if (intExtra == vpnManagerService2.mMainUserId && vpnManagerService2.isLockdownVpnEnabled()) {
-                                        vpnManagerService2.updateLockdownVpn();
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        switch (i) {
+                            case 0:
+                                VpnManagerService.m106$$Nest$mensureRunningOnHandlerThread(
+                                        this.this$0);
+                                String action = intent.getAction();
+                                int intExtra =
+                                        intent.getIntExtra(
+                                                "android.intent.extra.user_handle", -10000);
+                                int intExtra2 = intent.getIntExtra("android.intent.extra.UID", -1);
+                                Uri data = intent.getData();
+                                String schemeSpecificPart =
+                                        data != null ? data.getSchemeSpecificPart() : null;
+                                if ("com.android.server.action.LOCKDOWN_RESET".equals(action)) {
+                                    VpnManagerService vpnManagerService = this.this$0;
+                                    synchronized (vpnManagerService.mVpns) {
+                                        LockdownVpnTracker lockdownVpnTracker =
+                                                vpnManagerService.mLockdownTracker;
+                                        if (lockdownVpnTracker != null) {
+                                            Log.d("LockdownVpnTracker", "reset()");
+                                            synchronized (lockdownVpnTracker.mStateLock) {
+                                                lockdownVpnTracker.shutdownLocked();
+                                                lockdownVpnTracker.initLocked();
+                                                lockdownVpnTracker.handleStateChangedLocked();
+                                            }
+                                        }
                                     }
                                     return;
-                                } finally {
                                 }
-                            }
-                        }
-                        if ("android.intent.action.USER_STOPPED".equals(action)) {
-                            VpnManagerService vpnManagerService3 = this.this$0;
-                            synchronized (vpnManagerService3.mVpns) {
-                                try {
-                                    Vpn vpn = (Vpn) vpnManagerService3.mVpns.get(intExtra);
-                                    if (vpn == null) {
-                                        Log.e("VpnManagerService", "Stopped user has no VPN");
-                                    } else {
-                                        vpn.onUserStopped();
-                                        vpnManagerService3.mVpns.delete(intExtra);
+                                if (intExtra == -10000) {
+                                    return;
+                                }
+                                if ("android.intent.action.USER_STARTED".equals(action)) {
+                                    VpnManagerService vpnManagerService2 = this.this$0;
+                                    if (vpnManagerService2.mUserManager.getUserInfo(intExtra)
+                                            == null) {
+                                        VpnManagerService.logw(
+                                                "Started user doesn't exist. UserId: " + intExtra);
+                                        return;
                                     }
-                                } finally {
+                                    synchronized (vpnManagerService2.mVpns) {
+                                        try {
+                                            if (((Vpn) vpnManagerService2.mVpns.get(intExtra))
+                                                    != null) {
+                                                Log.e(
+                                                        "VpnManagerService",
+                                                        "Starting user already has a VPN");
+                                                return;
+                                            }
+                                            Dependencies dependencies2 = vpnManagerService2.mDeps;
+                                            Looper looper = vpnManagerService2.mHandler.getLooper();
+                                            Context context3 = vpnManagerService2.mContext;
+                                            INetworkManagementService iNetworkManagementService =
+                                                    vpnManagerService2.mNMS;
+                                            INetd iNetd = vpnManagerService2.mNetd;
+                                            dependencies2.getClass();
+                                            vpnManagerService2.mVpns.put(
+                                                    intExtra,
+                                                    new Vpn(
+                                                            looper,
+                                                            context3,
+                                                            new Vpn.Dependencies(),
+                                                            iNetworkManagementService,
+                                                            iNetd,
+                                                            intExtra,
+                                                            new VpnProfileStore(),
+                                                            new Vpn.SystemServices(context3),
+                                                            new Vpn.Ikev2SessionCreator()));
+                                            if (intExtra == vpnManagerService2.mMainUserId
+                                                    && vpnManagerService2.isLockdownVpnEnabled()) {
+                                                vpnManagerService2.updateLockdownVpn();
+                                            }
+                                            return;
+                                        } finally {
+                                        }
+                                    }
                                 }
-                            }
-                            return;
-                        }
-                        if ("android.intent.action.USER_ADDED".equals(action)) {
-                            VpnManagerService.m110$$Nest$monUserAdded(this.this$0, intExtra);
-                            return;
-                        }
-                        if ("android.intent.action.USER_REMOVED".equals(action)) {
-                            VpnManagerService.m111$$Nest$monUserRemoved(this.this$0, intExtra);
-                            return;
-                        }
-                        if ("android.intent.action.USER_UNLOCKED".equals(action)) {
-                            VpnManagerService.m112$$Nest$monUserUnlocked(this.this$0, intExtra);
-                            return;
-                        }
-                        if ("android.intent.action.PACKAGE_REPLACED".equals(action)) {
-                            VpnManagerService.m109$$Nest$monPackageReplaced(this.this$0, schemeSpecificPart, intExtra2);
-                            return;
-                        }
-                        if ("android.intent.action.PACKAGE_REMOVED".equals(action)) {
-                            VpnManagerService.m108$$Nest$monPackageRemoved(this.this$0, schemeSpecificPart, intExtra2, intent.getBooleanExtra("android.intent.extra.REPLACING", false));
-                            return;
-                        } else {
-                            if ("android.intent.action.PACKAGE_ADDED".equals(action)) {
-                                VpnManagerService.m107$$Nest$monPackageAdded(this.this$0, schemeSpecificPart, intExtra2, intent.getBooleanExtra("android.intent.extra.REPLACING", false));
+                                if ("android.intent.action.USER_STOPPED".equals(action)) {
+                                    VpnManagerService vpnManagerService3 = this.this$0;
+                                    synchronized (vpnManagerService3.mVpns) {
+                                        try {
+                                            Vpn vpn = (Vpn) vpnManagerService3.mVpns.get(intExtra);
+                                            if (vpn == null) {
+                                                Log.e(
+                                                        "VpnManagerService",
+                                                        "Stopped user has no VPN");
+                                            } else {
+                                                vpn.onUserStopped();
+                                                vpnManagerService3.mVpns.delete(intExtra);
+                                            }
+                                        } finally {
+                                        }
+                                    }
+                                    return;
+                                }
+                                if ("android.intent.action.USER_ADDED".equals(action)) {
+                                    VpnManagerService.m110$$Nest$monUserAdded(
+                                            this.this$0, intExtra);
+                                    return;
+                                }
+                                if ("android.intent.action.USER_REMOVED".equals(action)) {
+                                    VpnManagerService.m111$$Nest$monUserRemoved(
+                                            this.this$0, intExtra);
+                                    return;
+                                }
+                                if ("android.intent.action.USER_UNLOCKED".equals(action)) {
+                                    VpnManagerService.m112$$Nest$monUserUnlocked(
+                                            this.this$0, intExtra);
+                                    return;
+                                }
+                                if ("android.intent.action.PACKAGE_REPLACED".equals(action)) {
+                                    VpnManagerService.m109$$Nest$monPackageReplaced(
+                                            this.this$0, schemeSpecificPart, intExtra2);
+                                    return;
+                                }
+                                if ("android.intent.action.PACKAGE_REMOVED".equals(action)) {
+                                    VpnManagerService.m108$$Nest$monPackageRemoved(
+                                            this.this$0,
+                                            schemeSpecificPart,
+                                            intExtra2,
+                                            intent.getBooleanExtra(
+                                                    "android.intent.extra.REPLACING", false));
+                                    return;
+                                } else {
+                                    if ("android.intent.action.PACKAGE_ADDED".equals(action)) {
+                                        VpnManagerService.m107$$Nest$monPackageAdded(
+                                                this.this$0,
+                                                schemeSpecificPart,
+                                                intExtra2,
+                                                intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false));
+                                        return;
+                                    }
+                                    Log.wtf(
+                                            "VpnManagerService",
+                                            "received unexpected intent: " + action);
+                                    return;
+                                }
+                            default:
+                                VpnManagerService.m106$$Nest$mensureRunningOnHandlerThread(
+                                        this.this$0);
+                                this.this$0.updateLockdownVpn();
+                                context2.unregisterReceiver(this);
                                 return;
-                            }
-                            Log.wtf("VpnManagerService", "received unexpected intent: " + action);
-                            return;
                         }
-                    default:
-                        VpnManagerService.m106$$Nest$mensureRunningOnHandlerThread(this.this$0);
-                        this.this$0.updateLockdownVpn();
-                        context2.unregisterReceiver(this);
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        BroadcastReceiver broadcastReceiver2 = new BroadcastReceiver(this) { // from class: com.android.server.VpnManagerService.1
-            public final /* synthetic */ VpnManagerService this$0;
+        BroadcastReceiver broadcastReceiver2 =
+                new BroadcastReceiver(this) { // from class: com.android.server.VpnManagerService.1
+                    public final /* synthetic */ VpnManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                switch (i2) {
-                    case 0:
-                        VpnManagerService.m106$$Nest$mensureRunningOnHandlerThread(this.this$0);
-                        String action = intent.getAction();
-                        int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000);
-                        int intExtra2 = intent.getIntExtra("android.intent.extra.UID", -1);
-                        Uri data = intent.getData();
-                        String schemeSpecificPart = data != null ? data.getSchemeSpecificPart() : null;
-                        if ("com.android.server.action.LOCKDOWN_RESET".equals(action)) {
-                            VpnManagerService vpnManagerService = this.this$0;
-                            synchronized (vpnManagerService.mVpns) {
-                                LockdownVpnTracker lockdownVpnTracker = vpnManagerService.mLockdownTracker;
-                                if (lockdownVpnTracker != null) {
-                                    Log.d("LockdownVpnTracker", "reset()");
-                                    synchronized (lockdownVpnTracker.mStateLock) {
-                                        lockdownVpnTracker.shutdownLocked();
-                                        lockdownVpnTracker.initLocked();
-                                        lockdownVpnTracker.handleStateChangedLocked();
-                                    }
-                                }
-                            }
-                            return;
-                        }
-                        if (intExtra == -10000) {
-                            return;
-                        }
-                        if ("android.intent.action.USER_STARTED".equals(action)) {
-                            VpnManagerService vpnManagerService2 = this.this$0;
-                            if (vpnManagerService2.mUserManager.getUserInfo(intExtra) == null) {
-                                VpnManagerService.logw("Started user doesn't exist. UserId: " + intExtra);
-                                return;
-                            }
-                            synchronized (vpnManagerService2.mVpns) {
-                                try {
-                                    if (((Vpn) vpnManagerService2.mVpns.get(intExtra)) != null) {
-                                        Log.e("VpnManagerService", "Starting user already has a VPN");
-                                        return;
-                                    }
-                                    Dependencies dependencies2 = vpnManagerService2.mDeps;
-                                    Looper looper = vpnManagerService2.mHandler.getLooper();
-                                    Context context3 = vpnManagerService2.mContext;
-                                    INetworkManagementService iNetworkManagementService = vpnManagerService2.mNMS;
-                                    INetd iNetd = vpnManagerService2.mNetd;
-                                    dependencies2.getClass();
-                                    vpnManagerService2.mVpns.put(intExtra, new Vpn(looper, context3, new Vpn.Dependencies(), iNetworkManagementService, iNetd, intExtra, new VpnProfileStore(), new Vpn.SystemServices(context3), new Vpn.Ikev2SessionCreator()));
-                                    if (intExtra == vpnManagerService2.mMainUserId && vpnManagerService2.isLockdownVpnEnabled()) {
-                                        vpnManagerService2.updateLockdownVpn();
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        switch (i2) {
+                            case 0:
+                                VpnManagerService.m106$$Nest$mensureRunningOnHandlerThread(
+                                        this.this$0);
+                                String action = intent.getAction();
+                                int intExtra =
+                                        intent.getIntExtra(
+                                                "android.intent.extra.user_handle", -10000);
+                                int intExtra2 = intent.getIntExtra("android.intent.extra.UID", -1);
+                                Uri data = intent.getData();
+                                String schemeSpecificPart =
+                                        data != null ? data.getSchemeSpecificPart() : null;
+                                if ("com.android.server.action.LOCKDOWN_RESET".equals(action)) {
+                                    VpnManagerService vpnManagerService = this.this$0;
+                                    synchronized (vpnManagerService.mVpns) {
+                                        LockdownVpnTracker lockdownVpnTracker =
+                                                vpnManagerService.mLockdownTracker;
+                                        if (lockdownVpnTracker != null) {
+                                            Log.d("LockdownVpnTracker", "reset()");
+                                            synchronized (lockdownVpnTracker.mStateLock) {
+                                                lockdownVpnTracker.shutdownLocked();
+                                                lockdownVpnTracker.initLocked();
+                                                lockdownVpnTracker.handleStateChangedLocked();
+                                            }
+                                        }
                                     }
                                     return;
-                                } finally {
                                 }
-                            }
-                        }
-                        if ("android.intent.action.USER_STOPPED".equals(action)) {
-                            VpnManagerService vpnManagerService3 = this.this$0;
-                            synchronized (vpnManagerService3.mVpns) {
-                                try {
-                                    Vpn vpn = (Vpn) vpnManagerService3.mVpns.get(intExtra);
-                                    if (vpn == null) {
-                                        Log.e("VpnManagerService", "Stopped user has no VPN");
-                                    } else {
-                                        vpn.onUserStopped();
-                                        vpnManagerService3.mVpns.delete(intExtra);
+                                if (intExtra == -10000) {
+                                    return;
+                                }
+                                if ("android.intent.action.USER_STARTED".equals(action)) {
+                                    VpnManagerService vpnManagerService2 = this.this$0;
+                                    if (vpnManagerService2.mUserManager.getUserInfo(intExtra)
+                                            == null) {
+                                        VpnManagerService.logw(
+                                                "Started user doesn't exist. UserId: " + intExtra);
+                                        return;
                                     }
-                                } finally {
+                                    synchronized (vpnManagerService2.mVpns) {
+                                        try {
+                                            if (((Vpn) vpnManagerService2.mVpns.get(intExtra))
+                                                    != null) {
+                                                Log.e(
+                                                        "VpnManagerService",
+                                                        "Starting user already has a VPN");
+                                                return;
+                                            }
+                                            Dependencies dependencies2 = vpnManagerService2.mDeps;
+                                            Looper looper = vpnManagerService2.mHandler.getLooper();
+                                            Context context3 = vpnManagerService2.mContext;
+                                            INetworkManagementService iNetworkManagementService =
+                                                    vpnManagerService2.mNMS;
+                                            INetd iNetd = vpnManagerService2.mNetd;
+                                            dependencies2.getClass();
+                                            vpnManagerService2.mVpns.put(
+                                                    intExtra,
+                                                    new Vpn(
+                                                            looper,
+                                                            context3,
+                                                            new Vpn.Dependencies(),
+                                                            iNetworkManagementService,
+                                                            iNetd,
+                                                            intExtra,
+                                                            new VpnProfileStore(),
+                                                            new Vpn.SystemServices(context3),
+                                                            new Vpn.Ikev2SessionCreator()));
+                                            if (intExtra == vpnManagerService2.mMainUserId
+                                                    && vpnManagerService2.isLockdownVpnEnabled()) {
+                                                vpnManagerService2.updateLockdownVpn();
+                                            }
+                                            return;
+                                        } finally {
+                                        }
+                                    }
                                 }
-                            }
-                            return;
-                        }
-                        if ("android.intent.action.USER_ADDED".equals(action)) {
-                            VpnManagerService.m110$$Nest$monUserAdded(this.this$0, intExtra);
-                            return;
-                        }
-                        if ("android.intent.action.USER_REMOVED".equals(action)) {
-                            VpnManagerService.m111$$Nest$monUserRemoved(this.this$0, intExtra);
-                            return;
-                        }
-                        if ("android.intent.action.USER_UNLOCKED".equals(action)) {
-                            VpnManagerService.m112$$Nest$monUserUnlocked(this.this$0, intExtra);
-                            return;
-                        }
-                        if ("android.intent.action.PACKAGE_REPLACED".equals(action)) {
-                            VpnManagerService.m109$$Nest$monPackageReplaced(this.this$0, schemeSpecificPart, intExtra2);
-                            return;
-                        }
-                        if ("android.intent.action.PACKAGE_REMOVED".equals(action)) {
-                            VpnManagerService.m108$$Nest$monPackageRemoved(this.this$0, schemeSpecificPart, intExtra2, intent.getBooleanExtra("android.intent.extra.REPLACING", false));
-                            return;
-                        } else {
-                            if ("android.intent.action.PACKAGE_ADDED".equals(action)) {
-                                VpnManagerService.m107$$Nest$monPackageAdded(this.this$0, schemeSpecificPart, intExtra2, intent.getBooleanExtra("android.intent.extra.REPLACING", false));
+                                if ("android.intent.action.USER_STOPPED".equals(action)) {
+                                    VpnManagerService vpnManagerService3 = this.this$0;
+                                    synchronized (vpnManagerService3.mVpns) {
+                                        try {
+                                            Vpn vpn = (Vpn) vpnManagerService3.mVpns.get(intExtra);
+                                            if (vpn == null) {
+                                                Log.e(
+                                                        "VpnManagerService",
+                                                        "Stopped user has no VPN");
+                                            } else {
+                                                vpn.onUserStopped();
+                                                vpnManagerService3.mVpns.delete(intExtra);
+                                            }
+                                        } finally {
+                                        }
+                                    }
+                                    return;
+                                }
+                                if ("android.intent.action.USER_ADDED".equals(action)) {
+                                    VpnManagerService.m110$$Nest$monUserAdded(
+                                            this.this$0, intExtra);
+                                    return;
+                                }
+                                if ("android.intent.action.USER_REMOVED".equals(action)) {
+                                    VpnManagerService.m111$$Nest$monUserRemoved(
+                                            this.this$0, intExtra);
+                                    return;
+                                }
+                                if ("android.intent.action.USER_UNLOCKED".equals(action)) {
+                                    VpnManagerService.m112$$Nest$monUserUnlocked(
+                                            this.this$0, intExtra);
+                                    return;
+                                }
+                                if ("android.intent.action.PACKAGE_REPLACED".equals(action)) {
+                                    VpnManagerService.m109$$Nest$monPackageReplaced(
+                                            this.this$0, schemeSpecificPart, intExtra2);
+                                    return;
+                                }
+                                if ("android.intent.action.PACKAGE_REMOVED".equals(action)) {
+                                    VpnManagerService.m108$$Nest$monPackageRemoved(
+                                            this.this$0,
+                                            schemeSpecificPart,
+                                            intExtra2,
+                                            intent.getBooleanExtra(
+                                                    "android.intent.extra.REPLACING", false));
+                                    return;
+                                } else {
+                                    if ("android.intent.action.PACKAGE_ADDED".equals(action)) {
+                                        VpnManagerService.m107$$Nest$monPackageAdded(
+                                                this.this$0,
+                                                schemeSpecificPart,
+                                                intExtra2,
+                                                intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false));
+                                        return;
+                                    }
+                                    Log.wtf(
+                                            "VpnManagerService",
+                                            "received unexpected intent: " + action);
+                                    return;
+                                }
+                            default:
+                                VpnManagerService.m106$$Nest$mensureRunningOnHandlerThread(
+                                        this.this$0);
+                                this.this$0.updateLockdownVpn();
+                                context2.unregisterReceiver(this);
                                 return;
-                            }
-                            Log.wtf("VpnManagerService", "received unexpected intent: " + action);
-                            return;
                         }
-                    default:
-                        VpnManagerService.m106$$Nest$mensureRunningOnHandlerThread(this.this$0);
-                        this.this$0.updateLockdownVpn();
-                        context2.unregisterReceiver(this);
-                        return;
-                }
-            }
-        };
+                    }
+                };
         this.mEnterpriseVpnStoreObj = new SparseArray();
         this.knoxVpnLock = new Object();
         this.mPersonaManager = null;
@@ -472,15 +577,38 @@ public class VpnManagerService extends IVpnManager.Stub {
         Handler threadHandler = handlerThread.getThreadHandler();
         this.mHandler = threadHandler;
         this.mVpnProfileStore = new VpnProfileStore();
-        Context createContextAsUser = createAttributionContext.createContextAsUser(UserHandle.ALL, 0);
-        this.mCm = (ConnectivityManager) createAttributionContext.getSystemService(ConnectivityManager.class);
-        this.mNMS = INetworkManagementService.Stub.asInterface(ServiceManager.getService("network_management"));
+        Context createContextAsUser =
+                createAttributionContext.createContextAsUser(UserHandle.ALL, 0);
+        this.mCm =
+                (ConnectivityManager)
+                        createAttributionContext.getSystemService(ConnectivityManager.class);
+        this.mNMS =
+                INetworkManagementService.Stub.asInterface(
+                        ServiceManager.getService("network_management"));
         this.mNetd = NetdService.getInstance();
-        this.mUserManager = (UserManager) createAttributionContext.getSystemService(UserManager.class);
-        int mainUserId = ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class)).getMainUserId();
+        this.mUserManager =
+                (UserManager) createAttributionContext.getSystemService(UserManager.class);
+        int mainUserId =
+                ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class))
+                        .getMainUserId();
         this.mMainUserId = mainUserId;
-        createContextAsUser.registerReceiver(broadcastReceiver, VcnManagementService$$ExternalSyntheticOutline0.m("android.intent.action.USER_STARTED", "android.intent.action.USER_STOPPED", "android.intent.action.USER_ADDED", "android.intent.action.USER_REMOVED", "android.intent.action.USER_UNLOCKED"), null, threadHandler);
-        createAttributionContext.createContextAsUser(UserHandle.of(mainUserId), 0).registerReceiver(broadcastReceiver2, new IntentFilter("android.intent.action.USER_PRESENT"), null, threadHandler);
+        createContextAsUser.registerReceiver(
+                broadcastReceiver,
+                VcnManagementService$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.USER_STARTED",
+                        "android.intent.action.USER_STOPPED",
+                        "android.intent.action.USER_ADDED",
+                        "android.intent.action.USER_REMOVED",
+                        "android.intent.action.USER_UNLOCKED"),
+                null,
+                threadHandler);
+        createAttributionContext
+                .createContextAsUser(UserHandle.of(mainUserId), 0)
+                .registerReceiver(
+                        broadcastReceiver2,
+                        new IntentFilter("android.intent.action.USER_PRESENT"),
+                        null,
+                        threadHandler);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
         intentFilter.addAction("android.intent.action.PACKAGE_REPLACED");
@@ -489,7 +617,12 @@ public class VpnManagerService extends IVpnManager.Stub {
         createContextAsUser.registerReceiver(broadcastReceiver, intentFilter, null, threadHandler);
         IntentFilter intentFilter2 = new IntentFilter();
         intentFilter2.addAction("com.android.server.action.LOCKDOWN_RESET");
-        createContextAsUser.registerReceiver(broadcastReceiver, intentFilter2, "android.permission.NETWORK_STACK", threadHandler, 2);
+        createContextAsUser.registerReceiver(
+                broadcastReceiver,
+                intentFilter2,
+                "android.permission.NETWORK_STACK",
+                threadHandler,
+                2);
         Log.d("VpnManagerService", "VpnManagerService starting up");
     }
 
@@ -534,7 +667,11 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
         synchronized (this.knoxVpnLock) {
             try {
-                EnterpriseVpn enterpriseVpn = this.mEnterpriseVpnStoreObj.get(i) != null ? (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str) : null;
+                EnterpriseVpn enterpriseVpn =
+                        this.mEnterpriseVpnStoreObj.get(i) != null
+                                ? (EnterpriseVpn)
+                                        ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str)
+                                : null;
                 if (enterpriseVpn != null) {
                     enterpriseVpn.applyBlockingRulesToUidRange(z);
                 }
@@ -547,7 +684,9 @@ public class VpnManagerService extends IVpnManager.Stub {
         try {
             return getService().checkIfLocalProxyPortExists(i);
         } catch (Exception unused) {
-            Log.e("VpnManagerService", "Exception occured while trying to checkIfLocalProxyPortExists");
+            Log.e(
+                    "VpnManagerService",
+                    "Exception occured while trying to checkIfLocalProxyPortExists");
             return false;
         }
     }
@@ -556,7 +695,12 @@ public class VpnManagerService extends IVpnManager.Stub {
         try {
             return getService().checkIfUidIsExempted(i);
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Error while checking if the uid of the app which originated the download is exempted or not "), "VpnManagerService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder(
+                            "Error while checking if the uid of the app which originated the"
+                                + " download is exempted or not "),
+                    "VpnManagerService");
             return false;
         }
     }
@@ -567,7 +711,15 @@ public class VpnManagerService extends IVpnManager.Stub {
                 try {
                     HashMap hashMap = (HashMap) this.mEnterpriseVpnStoreObj.get(i);
                     if (hashMap == null || !hashMap.containsKey(str2)) {
-                        EnterpriseVpn enterpriseVpn = new EnterpriseVpn(this.mHandler.getLooper(), this.mContext, this.mNMS, this.mNetd, i, str, i2);
+                        EnterpriseVpn enterpriseVpn =
+                                new EnterpriseVpn(
+                                        this.mHandler.getLooper(),
+                                        this.mContext,
+                                        this.mNMS,
+                                        this.mNetd,
+                                        i,
+                                        str,
+                                        i2);
                         HashMap hashMap2 = (HashMap) this.mEnterpriseVpnStoreObj.get(i);
                         if (hashMap2 == null) {
                             hashMap2 = new HashMap();
@@ -575,7 +727,9 @@ public class VpnManagerService extends IVpnManager.Stub {
                         hashMap2.put(str2, enterpriseVpn);
                         this.mEnterpriseVpnStoreObj.put(i, hashMap2);
                     } else {
-                        Log.d("VpnManagerService", "createEnterpriseVpnInstance failed for " + str2 + " in user " + i);
+                        Log.d(
+                                "VpnManagerService",
+                                "createEnterpriseVpnInstance failed for " + str2 + " in user " + i);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -597,18 +751,24 @@ public class VpnManagerService extends IVpnManager.Stub {
             throw new SecurityException();
         }
         if (DBG) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "vpn disconnect :  Profile: ", str, " callingUid: ", "VpnManagerService");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "vpn disconnect :  Profile: ", str, " callingUid: ", "VpnManagerService");
         }
         synchronized (this.knoxVpnLock) {
             try {
                 int userId = UserHandle.getUserId(i);
                 List list = null;
-                EnterpriseVpn enterpriseVpn = this.mEnterpriseVpnStoreObj.get(userId) != null ? (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(userId)).get(str) : null;
+                EnterpriseVpn enterpriseVpn =
+                        this.mEnterpriseVpnStoreObj.get(userId) != null
+                                ? (EnterpriseVpn)
+                                        ((HashMap) this.mEnterpriseVpnStoreObj.get(userId)).get(str)
+                                : null;
                 if (enterpriseVpn == null) {
                     return false;
                 }
                 NetworkInfo.State state = enterpriseVpn.mNetworkInfo.getState();
-                if (state != NetworkInfo.State.DISCONNECTED && state != NetworkInfo.State.DISCONNECTING) {
+                if (state != NetworkInfo.State.DISCONNECTED
+                        && state != NetworkInfo.State.DISCONNECTING) {
                     return false;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -622,12 +782,14 @@ public class VpnManagerService extends IVpnManager.Stub {
                 }
                 if (arrayList == null || arrayList.size() <= 0) {
                     if (this.mPersonaManager == null) {
-                        this.mPersonaManager = (SemPersonaManager) this.mContext.getSystemService("persona");
+                        this.mPersonaManager =
+                                (SemPersonaManager) this.mContext.getSystemService("persona");
                     }
                     SemPersonaManager semPersonaManager = this.mPersonaManager;
                     if (semPersonaManager != null) {
                         if (semPersonaManager == null) {
-                            this.mPersonaManager = (SemPersonaManager) this.mContext.getSystemService("persona");
+                            this.mPersonaManager =
+                                    (SemPersonaManager) this.mContext.getSystemService("persona");
                         }
                         list = this.mPersonaManager.getKnoxIds(false);
                     }
@@ -640,7 +802,9 @@ public class VpnManagerService extends IVpnManager.Stub {
                         int intValue = ((Integer) it.next()).intValue();
                         if (!hasInterfaceAsUser(intValue)) {
                             if (DBG) {
-                                Log.d("VpnManagerService", "The connected Vpn is not exists in user " + intValue);
+                                Log.d(
+                                        "VpnManagerService",
+                                        "The connected Vpn is not exists in user " + intValue);
                             }
                             enterpriseVpn.hideNotification(intValue);
                         }
@@ -649,9 +813,13 @@ public class VpnManagerService extends IVpnManager.Stub {
                     for (int i2 = 0; i2 < arrayList.size(); i2++) {
                         if (!hasInterfaceAsUser(Integer.parseInt((String) arrayList.get(i2)))) {
                             if (DBG) {
-                                Log.d("VpnManagerService", "The connected Vpn is not exists in user " + ((String) arrayList.get(i2)));
+                                Log.d(
+                                        "VpnManagerService",
+                                        "The connected Vpn is not exists in user "
+                                                + ((String) arrayList.get(i2)));
                             }
-                            enterpriseVpn.hideNotification(Integer.parseInt((String) arrayList.get(i2)));
+                            enterpriseVpn.hideNotification(
+                                    Integer.parseInt((String) arrayList.get(i2)));
                         }
                     }
                 }
@@ -663,15 +831,20 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (DumpUtils.checkDumpPermission(this.mContext, "VpnManagerService", printWriter)) {
-            IndentingPrintWriter indentingPrintWriter = new com.android.internal.util.IndentingPrintWriter(printWriter, "  ");
+            IndentingPrintWriter indentingPrintWriter =
+                    new com.android.internal.util.IndentingPrintWriter(printWriter, "  ");
             indentingPrintWriter.println("VPNs:");
             indentingPrintWriter.increaseIndent();
             synchronized (this.mVpns) {
                 for (int i = 0; i < this.mVpns.size(); i++) {
                     try {
-                        indentingPrintWriter.println(this.mVpns.keyAt(i) + ": " + ((Vpn) this.mVpns.valueAt(i)).getPackage());
+                        indentingPrintWriter.println(
+                                this.mVpns.keyAt(i)
+                                        + ": "
+                                        + ((Vpn) this.mVpns.valueAt(i)).getPackage());
                         indentingPrintWriter.increaseIndent();
                         ((Vpn) this.mVpns.valueAt(i)).dump(indentingPrintWriter);
                         indentingPrintWriter.decreaseIndent();
@@ -689,11 +862,17 @@ public class VpnManagerService extends IVpnManager.Stub {
         if (i == UserHandle.getCallingUserId()) {
             return;
         }
-        this.mContext.enforceCallingOrSelfPermission("android.permission.INTERACT_ACROSS_USERS_FULL", "VpnManagerService");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.INTERACT_ACROSS_USERS_FULL", "VpnManagerService");
     }
 
     public final void enforceSettingsPermission() {
-        PermissionUtils.enforceAnyPermissionOf(this.mContext, new String[]{"android.permission.NETWORK_SETTINGS", "android.permission.MAINLINE_NETWORK_STACK"});
+        PermissionUtils.enforceAnyPermissionOf(
+                this.mContext,
+                new String[] {
+                    "android.permission.NETWORK_SETTINGS",
+                    "android.permission.MAINLINE_NETWORK_STACK"
+                });
     }
 
     public final ParcelFileDescriptor establishVpn(VpnConfig vpnConfig) {
@@ -703,11 +882,18 @@ public class VpnManagerService extends IVpnManager.Stub {
         String[] packagesForUid = this.mContext.getPackageManager().getPackagesForUid(callingUid);
         ParcelFileDescriptor parcelFileDescriptor = null;
         int i = 0;
-        DualAppManagerService$$ExternalSyntheticOutline0.m("establishVpn called by ", packagesForUid != null ? packagesForUid[0] : null, "VpnManagerService");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "establishVpn called by ",
+                packagesForUid != null ? packagesForUid[0] : null,
+                "VpnManagerService");
         String str = vpnConfig.session;
         try {
-            boolean checkIfVendorCreatedKnoxProfile = getService().checkIfVendorCreatedKnoxProfile(str, callingUid, userId);
-            Log.d("VpnManagerService", "checkKnoxVpnProfileType: profileCreatedByKnoxAdmin value is " + checkIfVendorCreatedKnoxProfile);
+            boolean checkIfVendorCreatedKnoxProfile =
+                    getService().checkIfVendorCreatedKnoxProfile(str, callingUid, userId);
+            Log.d(
+                    "VpnManagerService",
+                    "checkKnoxVpnProfileType: profileCreatedByKnoxAdmin value is "
+                            + checkIfVendorCreatedKnoxProfile);
             if (checkIfVendorCreatedKnoxProfile) {
                 i = knoxVpnProfileType(str);
             }
@@ -715,20 +901,38 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
         if (i == 1) {
             Log.d("VpnManagerService", "establishVpn called by knox per app vpn");
-            Log.d("VpnManagerService", "establishEnterpriseVpn : user = " + vpnConfig.user + " Profile: " + vpnConfig.session);
+            Log.d(
+                    "VpnManagerService",
+                    "establishEnterpriseVpn : user = "
+                            + vpnConfig.user
+                            + " Profile: "
+                            + vpnConfig.session);
             String str2 = SystemProperties.get("net.vpn.framework");
-            DualAppManagerService$$ExternalSyntheticOutline0.m("establishEnterpriseVpn: getProperty value is '", str2, "'", "VpnManagerService");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "establishEnterpriseVpn: getProperty value is '",
+                    str2,
+                    "'",
+                    "VpnManagerService");
             synchronized (this.knoxVpnLock) {
                 try {
                     if (this.mEnterpriseVpnStoreObj.get(userId) != null) {
-                        EnterpriseVpn enterpriseVpn = (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(userId)).get(vpnConfig.session);
+                        EnterpriseVpn enterpriseVpn =
+                                (EnterpriseVpn)
+                                        ((HashMap) this.mEnterpriseVpnStoreObj.get(userId))
+                                                .get(vpnConfig.session);
                         if (enterpriseVpn != null && str2.equals("2.0")) {
                             vpnConfig.routes = null;
                             parcelFileDescriptor = enterpriseVpn.establish(vpnConfig);
                         }
-                        Log.d("VpnManagerService", "establishEnterpriseVpn: knoxVpnFd value is " + parcelFileDescriptor);
+                        Log.d(
+                                "VpnManagerService",
+                                "establishEnterpriseVpn: knoxVpnFd value is "
+                                        + parcelFileDescriptor);
                     } else {
-                        Log.e("VpnManagerService", "Unable to find enterpriseVpn object in hashmap : user = " + userId);
+                        Log.e(
+                                "VpnManagerService",
+                                "Unable to find enterpriseVpn object in hashmap : user = "
+                                        + userId);
                     }
                 } finally {
                 }
@@ -741,14 +945,18 @@ public class VpnManagerService extends IVpnManager.Stub {
             }
         }
         if (DBG) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("establishVpn: config.session value is "), vpnConfig.session, "VpnManagerService");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("establishVpn: config.session value is "),
+                    vpnConfig.session,
+                    "VpnManagerService");
         }
         return parcelFileDescriptor;
     }
 
     public final void factoryReset() {
         enforceSettingsPermission();
-        if (this.mUserManager.hasUserRestriction("no_network_reset") || this.mUserManager.hasUserRestriction("no_config_vpn")) {
+        if (this.mUserManager.hasUserRestriction("no_network_reset")
+                || this.mUserManager.hasUserRestriction("no_config_vpn")) {
             return;
         }
         int callingUserId = UserHandle.getCallingUserId();
@@ -804,7 +1012,8 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     public final String getAlwaysOnVpnPackage(int i) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.CONTROL_ALWAYS_ON_VPN", "VpnManagerService");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.CONTROL_ALWAYS_ON_VPN", "VpnManagerService");
         enforceCrossUserPermission(i);
         synchronized (this.mVpns) {
             try {
@@ -846,29 +1055,29 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0026, code lost:
-    
-        r6 = r4.getDnsServers().iterator();
-     */
+
+       r6 = r4.getDnsServers().iterator();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0032, code lost:
-    
-        if (r6.hasNext() == false) goto L27;
-     */
+
+       if (r6.hasNext() == false) goto L27;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0034, code lost:
-    
-        r7 = r6.next();
-     */
+
+       r7 = r6.next();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x003c, code lost:
-    
-        if (com.android.server.VpnManagerService.DBG == false) goto L29;
-     */
+
+       if (com.android.server.VpnManagerService.DBG == false) goto L29;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x003e, code lost:
-    
-        android.util.Log.d("VpnManagerService", "The knox vpn dns server being added for usb tethering use-case is " + r7.getHostAddress());
-     */
+
+       android.util.Log.d("VpnManagerService", "The knox vpn dns server being added for usb tethering use-case is " + r7.getHostAddress());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0058, code lost:
-    
-        r0.add(r7.getHostAddress());
-     */
+
+       r0.add(r7.getHostAddress());
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -923,7 +1132,9 @@ public class VpnManagerService extends IVpnManager.Stub {
             java.lang.String[] r6 = (java.lang.String[]) r6
             return r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.VpnManagerService.getDnsServerListForInterface(java.lang.String):java.lang.String[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.VpnManagerService.getDnsServerListForInterface(java.lang.String):java.lang.String[]");
     }
 
     public final byte[] getFromVpnProfileStore(String str) {
@@ -931,11 +1142,15 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     public final int getKnoxNwFilterHttpProxyPort(int i, String str) {
-        if (IKnoxNetworkFilterService.Stub.asInterface(ServiceManager.getService("knox_nwFilterMgr_policy")) == null) {
+        if (IKnoxNetworkFilterService.Stub.asInterface(
+                        ServiceManager.getService("knox_nwFilterMgr_policy"))
+                == null) {
             return -1;
         }
         try {
-            return IKnoxNetworkFilterService.Stub.asInterface(ServiceManager.getService("knox_nwFilterMgr_policy")).getKnoxNwFilterHttpProxyPort(i, str);
+            return IKnoxNetworkFilterService.Stub.asInterface(
+                            ServiceManager.getService("knox_nwFilterMgr_policy"))
+                    .getKnoxNwFilterHttpProxyPort(i, str);
         } catch (Exception e) {
             Log.d("VpnManagerService", e.getMessage());
             return -1;
@@ -991,7 +1206,10 @@ public class VpnManagerService extends IVpnManager.Stub {
                 synchronized (vpn) {
                     Objects.requireNonNull(str, "No package name provided");
                     vpn.enforceNotRestrictedUser();
-                    makeVpnProfileStateLocked = vpn.isCurrentIkev2VpnLocked(str) ? vpn.makeVpnProfileStateLocked() : null;
+                    makeVpnProfileStateLocked =
+                            vpn.isCurrentIkev2VpnLocked(str)
+                                    ? vpn.makeVpnProfileStateLocked()
+                                    : null;
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1039,7 +1257,8 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     public final List getVpnLockdownAllowlist(int i) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.CONTROL_ALWAYS_ON_VPN", "VpnManagerService");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.CONTROL_ALWAYS_ON_VPN", "VpnManagerService");
         enforceCrossUserPermission(i);
         synchronized (this.mVpns) {
             try {
@@ -1066,18 +1285,34 @@ public class VpnManagerService extends IVpnManager.Stub {
                 Log.d("VpnManagerService", "Exception: " + Log.getStackTraceString(e));
             }
             if (DBG) {
-                Log.d("VpnManagerService", "hasInterfaceAsUser > profiles.size : " + arrayList.size());
+                Log.d(
+                        "VpnManagerService",
+                        "hasInterfaceAsUser > profiles.size : " + arrayList.size());
             }
             for (int i2 = 0; i2 < arrayList.size(); i2++) {
                 for (int i3 = 0; i3 < this.mEnterpriseVpnStoreObj.size(); i3++) {
                     int keyAt = this.mEnterpriseVpnStoreObj.keyAt(i3);
                     boolean z = DBG;
                     if (z) {
-                        VpnManagerService$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(keyAt, "hasInterfaceAsUser > vpn key : ", ", profileName : "), (String) arrayList.get(i2), "VpnManagerService");
+                        VpnManagerService$$ExternalSyntheticOutline0.m(
+                                BatteryService$$ExternalSyntheticOutline0.m(
+                                        keyAt,
+                                        "hasInterfaceAsUser > vpn key : ",
+                                        ", profileName : "),
+                                (String) arrayList.get(i2),
+                                "VpnManagerService");
                     }
-                    if (this.mEnterpriseVpnStoreObj.get(keyAt) != null && (enterpriseVpn = (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(keyAt)).get(arrayList.get(i2))) != null) {
+                    if (this.mEnterpriseVpnStoreObj.get(keyAt) != null
+                            && (enterpriseVpn =
+                                            (EnterpriseVpn)
+                                                    ((HashMap)
+                                                                    this.mEnterpriseVpnStoreObj.get(
+                                                                            keyAt))
+                                                            .get(arrayList.get(i2)))
+                                    != null) {
                         NetworkInfo.State state = enterpriseVpn.mNetworkInfo.getState();
-                        if (enterpriseVpn.mInterface != null && state == NetworkInfo.State.CONNECTED) {
+                        if (enterpriseVpn.mInterface != null
+                                && state == NetworkInfo.State.CONNECTED) {
                             if (!z) {
                                 return true;
                             }
@@ -1138,9 +1373,13 @@ public class VpnManagerService extends IVpnManager.Stub {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         boolean z = false;
         try {
-            z = ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).isDeviceManaged();
+            z =
+                    ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                            .isDeviceManaged();
             if (z && i == 0) {
-                Log.e("VpnManagerService", "prepare filtering failed since device owner is configured");
+                Log.e(
+                        "VpnManagerService",
+                        "prepare filtering failed since device owner is configured");
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return z;
             }
@@ -1155,11 +1394,15 @@ public class VpnManagerService extends IVpnManager.Stub {
 
     public final void isKnoxAlwaysOnConfigured(String str, String str2) {
         if (str != null && str.equalsIgnoreCase("[Legacy VPN]")) {
-            Log.d("VpnManagerService", "isKnoxAlwaysOnConfigured check ignored for old package name");
+            Log.d(
+                    "VpnManagerService",
+                    "isKnoxAlwaysOnConfigured check ignored for old package name");
             return;
         }
         if (str2 != null && str2.equalsIgnoreCase("[Legacy VPN]")) {
-            Log.d("VpnManagerService", "isKnoxAlwaysOnConfigured check ignored for new package name");
+            Log.d(
+                    "VpnManagerService",
+                    "isKnoxAlwaysOnConfigured check ignored for new package name");
             return;
         }
         Vpn vpn = (Vpn) this.mVpns.get(0);
@@ -1178,7 +1421,10 @@ public class VpnManagerService extends IVpnManager.Stub {
         try {
             return getService().isProxyConfiguredForKnoxVpn(i);
         } catch (Exception unused) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "Exception occured while trying to get the getProxyInfoConfig for knoxvpn uid ", "VpnManagerService");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Exception occured while trying to get the getProxyInfoConfig for knoxvpn uid ",
+                    "VpnManagerService");
             return false;
         }
     }
@@ -1189,7 +1435,9 @@ public class VpnManagerService extends IVpnManager.Stub {
         synchronized (this.mVpns) {
             try {
                 Vpn vpn = (Vpn) this.mVpns.get(userId);
-                return (vpn == null || vpn.getNetwork() == null || vpn.getNetwork().getNetId() != i) ? false : true;
+                return (vpn == null || vpn.getNetwork() == null || vpn.getNetwork().getNetId() != i)
+                        ? false
+                        : true;
             } catch (Throwable th) {
                 throw th;
             }
@@ -1197,7 +1445,8 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     public final boolean isVpnLockdownEnabled(int i) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.CONTROL_ALWAYS_ON_VPN", "VpnManagerService");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.CONTROL_ALWAYS_ON_VPN", "VpnManagerService");
         enforceCrossUserPermission(i);
         synchronized (this.mVpns) {
             try {
@@ -1226,13 +1475,13 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x004b, code lost:
-    
-        if (getService().getUidPidEnabled(r2, r7) == 0) goto L14;
-     */
+
+       if (getService().getUidPidEnabled(r2, r7) == 0) goto L14;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:16:0x0055, code lost:
-    
-        throw new java.lang.SecurityException("Unauthorized Call to enable meta data");
-     */
+
+       throw new java.lang.SecurityException("Unauthorized Call to enable meta data");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1317,7 +1566,10 @@ public class VpnManagerService extends IVpnManager.Stub {
             android.util.Log.d(r6, r7)
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.VpnManagerService.prepareEnterpriseVpnExt(java.lang.String, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.VpnManagerService.prepareEnterpriseVpnExt(java.lang.String,"
+                    + " boolean):boolean");
     }
 
     public final boolean prepareVpn(String str, String str2, int i) {
@@ -1342,7 +1594,8 @@ public class VpnManagerService extends IVpnManager.Stub {
         this.mDeps.getClass();
         int userId = UserHandle.getUserId(Binder.getCallingUid());
         synchronized (this.mVpns) {
-            provisionVpnProfile = ((Vpn) this.mVpns.get(userId)).provisionVpnProfile(vpnProfile, str);
+            provisionVpnProfile =
+                    ((Vpn) this.mVpns.get(userId)).provisionVpnProfile(vpnProfile, str);
         }
         return provisionVpnProfile;
     }
@@ -1361,7 +1614,10 @@ public class VpnManagerService extends IVpnManager.Stub {
             try {
                 this.mCm.registerSystemDefaultNetworkCallback(networkCallback, this.mHandler);
             } catch (RuntimeException e) {
-                Log.e("VpnManagerService", "Failed to register system default network callback " + Log.getStackTraceString(e));
+                Log.e(
+                        "VpnManagerService",
+                        "Failed to register system default network callback "
+                                + Log.getStackTraceString(e));
                 this.mDefaultNetworkCallback = null;
             }
         } finally {
@@ -1386,16 +1642,28 @@ public class VpnManagerService extends IVpnManager.Stub {
             try {
                 HashMap hashMap = (HashMap) this.mEnterpriseVpnStoreObj.get(i);
                 if (hashMap != null && hashMap.containsKey(str2)) {
-                    Log.d("VpnManagerService", "removeEnterpriseVpnInstance: profile " + str2 + " in user " + i + " is removed");
+                    Log.d(
+                            "VpnManagerService",
+                            "removeEnterpriseVpnInstance: profile "
+                                    + str2
+                                    + " in user "
+                                    + i
+                                    + " is removed");
                     long clearCallingIdentity = Binder.clearCallingIdentity();
-                    ((EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str2)).showNotification(str2, false);
-                    ((EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str2)).cleanupObjects();
+                    ((EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str2))
+                            .showNotification(str2, false);
+                    ((EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str2))
+                            .cleanupObjects();
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).remove(str2);
                 }
                 HashMap hashMap2 = (HashMap) this.mEnterpriseVpnStoreObj.get(i);
                 if (hashMap2 == null || hashMap2.size() == 0 || hashMap2.isEmpty()) {
-                    Log.d("VpnManagerService", "removeEnterpriseVpnInstance all profiles in user " + i + " is removed");
+                    Log.d(
+                            "VpnManagerService",
+                            "removeEnterpriseVpnInstance all profiles in user "
+                                    + i
+                                    + " is removed");
                     this.mEnterpriseVpnStoreObj.delete(i);
                 }
             } catch (Throwable th) {
@@ -1437,7 +1705,11 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
         synchronized (this.knoxVpnLock) {
             try {
-                EnterpriseVpn enterpriseVpn = this.mEnterpriseVpnStoreObj.get(i) != null ? (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str) : null;
+                EnterpriseVpn enterpriseVpn =
+                        this.mEnterpriseVpnStoreObj.get(i) != null
+                                ? (EnterpriseVpn)
+                                        ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str)
+                                : null;
                 if (enterpriseVpn != null) {
                     enterpriseVpn.resetUidListInNetworkCapabilities();
                 }
@@ -1447,7 +1719,8 @@ public class VpnManagerService extends IVpnManager.Stub {
     }
 
     public final boolean setAlwaysOnVpnPackage(int i, String str, boolean z, List list) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.CONTROL_ALWAYS_ON_VPN", "VpnManagerService");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.CONTROL_ALWAYS_ON_VPN", "VpnManagerService");
         enforceCrossUserPermission(i);
         synchronized (this.mVpns) {
             try {
@@ -1482,7 +1755,8 @@ public class VpnManagerService extends IVpnManager.Stub {
                 Vpn vpn = (Vpn) this.mVpns.get(i);
                 if (vpn == null) {
                     logw("User " + i + " has no Vpn configuration");
-                    throw new IllegalStateException("VPN for user " + i + " not ready yet. Skipping setting the list");
+                    throw new IllegalStateException(
+                            "VPN for user " + i + " not ready yet. Skipping setting the list");
                 }
                 synchronized (vpn) {
                     vpn.enforceNotRestrictedUser();
@@ -1557,7 +1831,8 @@ public class VpnManagerService extends IVpnManager.Stub {
 
     public final void startLegacyVpn(VpnProfile vpnProfile) {
         LinkProperties linkProperties;
-        if (Build.VERSION.DEVICE_INITIAL_SDK_INT >= 31 && VpnProfile.isLegacyType(vpnProfile.type)) {
+        if (Build.VERSION.DEVICE_INITIAL_SDK_INT >= 31
+                && VpnProfile.isLegacyType(vpnProfile.type)) {
             throw new UnsupportedOperationException("Legacy VPN is deprecated");
         }
         this.mDeps.getClass();
@@ -1624,7 +1899,10 @@ public class VpnManagerService extends IVpnManager.Stub {
                 }
                 this.mDefaultNetworkCallback = null;
             } catch (RuntimeException e) {
-                Log.e("VpnManagerService", "Failed to unregister system default network callback " + Log.getStackTraceString(e));
+                Log.e(
+                        "VpnManagerService",
+                        "Failed to unregister system default network callback "
+                                + Log.getStackTraceString(e));
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
@@ -1642,8 +1920,14 @@ public class VpnManagerService extends IVpnManager.Stub {
             for (int i2 = 0; i2 < this.mEnterpriseVpnStoreObj.size(); i2++) {
                 try {
                     int keyAt = this.mEnterpriseVpnStoreObj.keyAt(i2);
-                    if (this.mEnterpriseVpnStoreObj.get(keyAt) == null || (enterpriseVpn = (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(keyAt)).get(str)) == null) {
-                    }
+                    if (this.mEnterpriseVpnStoreObj.get(keyAt) == null
+                            || (enterpriseVpn =
+                                            (EnterpriseVpn)
+                                                    ((HashMap)
+                                                                    this.mEnterpriseVpnStoreObj.get(
+                                                                            keyAt))
+                                                            .get(str))
+                                    == null) {}
                 } finally {
                 }
             }
@@ -1679,7 +1963,11 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
         synchronized (this.knoxVpnLock) {
             try {
-                EnterpriseVpn enterpriseVpn = this.mEnterpriseVpnStoreObj.get(i) != null ? (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str) : null;
+                EnterpriseVpn enterpriseVpn =
+                        this.mEnterpriseVpnStoreObj.get(i) != null
+                                ? (EnterpriseVpn)
+                                        ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str)
+                                : null;
                 if (enterpriseVpn != null) {
                     enterpriseVpn.mHttpProxyInfo = proxyInfo;
                     EnterpriseVpn.AnonymousClass1 anonymousClass1 = enterpriseVpn.mNetworkAgent;
@@ -1696,7 +1984,8 @@ public class VpnManagerService extends IVpnManager.Stub {
         this.mDeps.getClass();
         if (Binder.getCallingUid() != 1000) {
             this.mDeps.getClass();
-            if (Binder.getCallingUid() != UserHandle.getUid(this.mMainUserId, 1000) && Binder.getCallingPid() != Process.myPid()) {
+            if (Binder.getCallingUid() != UserHandle.getUid(this.mMainUserId, 1000)
+                    && Binder.getCallingPid() != Process.myPid()) {
                 logw("Lockdown VPN only available to system process or AID_SYSTEM on main user");
                 return false;
             }
@@ -1711,13 +2000,18 @@ public class VpnManagerService extends IVpnManager.Stub {
                 }
                 byte[] bArr = this.mVpnProfileStore.get("LOCKDOWN_VPN");
                 if (bArr == null) {
-                    Log.e("VpnManagerService", "Lockdown VPN configured but cannot be read from keystore");
+                    Log.e(
+                            "VpnManagerService",
+                            "Lockdown VPN configured but cannot be read from keystore");
                     return false;
                 }
                 String str = new String(bArr);
-                VpnProfile decode = VpnProfile.decode(str, this.mVpnProfileStore.get("VPN_".concat(str)));
+                VpnProfile decode =
+                        VpnProfile.decode(str, this.mVpnProfileStore.get("VPN_".concat(str)));
                 if (decode == null) {
-                    Log.e("VpnManagerService", "Lockdown VPN configured invalid profile ".concat(str));
+                    Log.e(
+                            "VpnManagerService",
+                            "Lockdown VPN configured invalid profile ".concat(str));
                     setLockdownTracker(null);
                     return true;
                 }
@@ -1756,10 +2050,12 @@ public class VpnManagerService extends IVpnManager.Stub {
         synchronized (this.knoxVpnLock) {
             try {
                 if (this.mEnterpriseVpnStoreObj.get(i) != null) {
-                    for (EnterpriseVpn enterpriseVpn : ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).values()) {
+                    for (EnterpriseVpn enterpriseVpn :
+                            ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).values()) {
                         if (enterpriseVpn != null) {
                             NetworkInfo.State state = enterpriseVpn.mNetworkInfo.getState();
-                            if (enterpriseVpn.mInterface != null && state == NetworkInfo.State.CONNECTED) {
+                            if (enterpriseVpn.mInterface != null
+                                    && state == NetworkInfo.State.CONNECTED) {
                                 if (DBG) {
                                     Log.d("VpnManagerService", "updateNotificationIcon is called");
                                 }
@@ -1774,7 +2070,8 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
     }
 
-    public final void updateUidRangesToPerAppVpn(String str, int i, boolean z, int[] iArr, String str2) {
+    public final void updateUidRangesToPerAppVpn(
+            String str, int i, boolean z, int[] iArr, String str2) {
         if (Binder.getCallingUid() != 1000) {
             return;
         }
@@ -1799,7 +2096,11 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
         synchronized (this.knoxVpnLock) {
             try {
-                EnterpriseVpn enterpriseVpn = this.mEnterpriseVpnStoreObj.get(i) != null ? (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str) : null;
+                EnterpriseVpn enterpriseVpn =
+                        this.mEnterpriseVpnStoreObj.get(i) != null
+                                ? (EnterpriseVpn)
+                                        ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str)
+                                : null;
                 if (enterpriseVpn != null) {
                     HashSet hashSet2 = new HashSet();
                     int length2 = iArr.length;
@@ -1832,7 +2133,11 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
         synchronized (this.knoxVpnLock) {
             try {
-                EnterpriseVpn enterpriseVpn = this.mEnterpriseVpnStoreObj.get(i) != null ? (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str) : null;
+                EnterpriseVpn enterpriseVpn =
+                        this.mEnterpriseVpnStoreObj.get(i) != null
+                                ? (EnterpriseVpn)
+                                        ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str)
+                                : null;
                 if (enterpriseVpn != null) {
                     enterpriseVpn.updateUidRangesToUserVpn(i2, z);
                 }
@@ -1841,7 +2146,8 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
     }
 
-    public final void updateUidRangesToUserVpnWithBlackList(String str, int i, int i2, int[] iArr, String str2) {
+    public final void updateUidRangesToUserVpnWithBlackList(
+            String str, int i, int i2, int[] iArr, String str2) {
         if (Binder.getCallingUid() != 1000) {
             return;
         }
@@ -1866,7 +2172,11 @@ public class VpnManagerService extends IVpnManager.Stub {
         }
         synchronized (this.knoxVpnLock) {
             try {
-                EnterpriseVpn enterpriseVpn = this.mEnterpriseVpnStoreObj.get(i) != null ? (EnterpriseVpn) ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str) : null;
+                EnterpriseVpn enterpriseVpn =
+                        this.mEnterpriseVpnStoreObj.get(i) != null
+                                ? (EnterpriseVpn)
+                                        ((HashMap) this.mEnterpriseVpnStoreObj.get(i)).get(str)
+                                : null;
                 if (enterpriseVpn != null) {
                     HashSet hashSet2 = new HashSet();
                     int length2 = iArr.length;
@@ -1897,7 +2207,9 @@ public class VpnManagerService extends IVpnManager.Stub {
             throw th;
         }
         if (i2 != i) {
-            throw new SecurityException(VpnManagerService$$ExternalSyntheticOutline0.m(i, str, " does not belong to uid "));
+            throw new SecurityException(
+                    VpnManagerService$$ExternalSyntheticOutline0.m(
+                            i, str, " does not belong to uid "));
         }
     }
 }

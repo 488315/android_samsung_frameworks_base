@@ -15,17 +15,16 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.service.credentials.CallingAppInfo;
 import android.util.Slog;
+
 import com.android.internal.hidden_from_bootclasspath.android.credentials.flags.Flags;
 import com.android.server.PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0;
-import com.android.server.credentials.CredentialManagerService;
-import com.android.server.credentials.CredentialManagerUi;
-import com.android.server.credentials.ProviderSession;
 import com.android.server.credentials.metrics.ApiName;
 import com.android.server.credentials.metrics.ApiStatus;
 import com.android.server.credentials.metrics.ChosenProviderFinalPhaseMetric;
 import com.android.server.credentials.metrics.InitialPhaseMetric;
 import com.android.server.credentials.metrics.ProviderStatusForMetrics;
 import com.android.server.credentials.metrics.RequestSessionMetric;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -56,14 +55,16 @@ public abstract class RequestSession {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RequestSessionDeathRecipient implements IBinder.DeathRecipient {
-        public RequestSessionDeathRecipient() {
-        }
+        public RequestSessionDeathRecipient() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             Slog.d("CredentialManager", "Client binder died - clearing session");
             RequestSession requestSession = RequestSession.this;
-            requestSession.finishSession(ApiStatus.CLIENT_CANCELED.getMetricCode(), requestSession.mCredentialManagerUi.mStatus == CredentialManagerUi.UiStatus.IN_PROGRESS);
+            requestSession.finishSession(
+                    ApiStatus.CLIENT_CANCELED.getMetricCode(),
+                    requestSession.mCredentialManagerUi.mStatus
+                            == CredentialManagerUi.UiStatus.IN_PROGRESS);
         }
     }
 
@@ -81,7 +82,10 @@ public abstract class RequestSession {
             RequestSessionStatus requestSessionStatus2 = new RequestSessionStatus("CANCELLED", 1);
             RequestSessionStatus requestSessionStatus3 = new RequestSessionStatus("COMPLETE", 2);
             COMPLETE = requestSessionStatus3;
-            $VALUES = new RequestSessionStatus[]{requestSessionStatus, requestSessionStatus2, requestSessionStatus3};
+            $VALUES =
+                    new RequestSessionStatus[] {
+                        requestSessionStatus, requestSessionStatus2, requestSessionStatus3
+                    };
         }
 
         public static RequestSessionStatus valueOf(String str) {
@@ -93,7 +97,20 @@ public abstract class RequestSession {
         }
     }
 
-    public RequestSession(Context context, CredentialManagerService.SessionManager sessionManager, Object obj, int i, int i2, Object obj2, Object obj3, String str, CallingAppInfo callingAppInfo, Set set, CancellationSignal cancellationSignal, long j, boolean z) {
+    public RequestSession(
+            Context context,
+            CredentialManagerService.SessionManager sessionManager,
+            Object obj,
+            int i,
+            int i2,
+            Object obj2,
+            Object obj3,
+            String str,
+            CallingAppInfo callingAppInfo,
+            Set set,
+            CancellationSignal cancellationSignal,
+            long j,
+            boolean z) {
         Object obj4;
         this.mContext = context;
         this.mLock = obj;
@@ -107,7 +124,9 @@ public abstract class RequestSession {
         this.mRequestId = new Binder();
         this.mCredentialManagerUi = new CredentialManagerUi(context, i, this, set);
         this.mHybridService = context.getResources().getString(R.string.date_time_done);
-        RequestSessionMetric requestSessionMetric = new RequestSessionMetric(new SecureRandom().nextInt(), new SecureRandom().nextInt());
+        RequestSessionMetric requestSessionMetric =
+                new RequestSessionMetric(
+                        new SecureRandom().nextInt(), new SecureRandom().nextInt());
         this.mRequestSessionMetric = requestSessionMetric;
         int metricCodeFromRequestInfo = ApiName.getMetricCodeFromRequestInfo(str);
         try {
@@ -116,33 +135,55 @@ public abstract class RequestSession {
             initialPhaseMetric.mCallerUid = i2;
             initialPhaseMetric.mApiName = metricCodeFromRequestInfo;
         } catch (Exception e) {
-            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e, "Unexpected error collecting initial phase metric start info: ", "RequestSessionMetric");
+            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                    e,
+                    "Unexpected error collecting initial phase metric start info: ",
+                    "RequestSessionMetric");
         }
-        this.mCancellationSignal.setOnCancelListener(new CancellationSignal.OnCancelListener() { // from class: com.android.server.credentials.RequestSession$$ExternalSyntheticLambda1
-            @Override // android.os.CancellationSignal.OnCancelListener
-            public final void onCancel() {
-                boolean z2;
-                RequestSession requestSession = RequestSession.this;
-                requestSession.getClass();
-                Slog.d("CredentialManager", "Cancellation invoked from the client - clearing session");
-                CredentialManagerUi credentialManagerUi = requestSession.mCredentialManagerUi;
-                if (credentialManagerUi.mStatus == CredentialManagerUi.UiStatus.USER_INTERACTION) {
-                    long clearCallingIdentity = Binder.clearCallingIdentity();
-                    try {
-                        requestSession.mContext.startActivityAsUser(IntentFactory.createCancelUiIntent(credentialManagerUi.mContext, requestSession.mRequestId, true, requestSession.mClientAppInfo.getPackageName()).addFlags(268435456), UserHandle.of(requestSession.mUserId));
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
-                        z2 = true;
-                    } catch (Throwable th) {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
-                        throw th;
+        this.mCancellationSignal.setOnCancelListener(
+                new CancellationSignal
+                        .OnCancelListener() { // from class:
+                                              // com.android.server.credentials.RequestSession$$ExternalSyntheticLambda1
+                    @Override // android.os.CancellationSignal.OnCancelListener
+                    public final void onCancel() {
+                        boolean z2;
+                        RequestSession requestSession = RequestSession.this;
+                        requestSession.getClass();
+                        Slog.d(
+                                "CredentialManager",
+                                "Cancellation invoked from the client - clearing session");
+                        CredentialManagerUi credentialManagerUi =
+                                requestSession.mCredentialManagerUi;
+                        if (credentialManagerUi.mStatus
+                                == CredentialManagerUi.UiStatus.USER_INTERACTION) {
+                            long clearCallingIdentity = Binder.clearCallingIdentity();
+                            try {
+                                requestSession.mContext.startActivityAsUser(
+                                        IntentFactory.createCancelUiIntent(
+                                                        credentialManagerUi.mContext,
+                                                        requestSession.mRequestId,
+                                                        true,
+                                                        requestSession.mClientAppInfo
+                                                                .getPackageName())
+                                                .addFlags(268435456),
+                                        UserHandle.of(requestSession.mUserId));
+                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                                z2 = true;
+                            } catch (Throwable th) {
+                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                                throw th;
+                            }
+                        } else {
+                            z2 = false;
+                        }
+                        requestSession.finishSession(
+                                ApiStatus.CLIENT_CANCELED.getMetricCode(), !z2);
                     }
-                } else {
-                    z2 = false;
-                }
-                requestSession.finishSession(ApiStatus.CLIENT_CANCELED.getMetricCode(), !z2);
-            }
-        });
-        if (z && Flags.clearSessionEnabled() && (obj4 = this.mClientCallback) != null && (obj4 instanceof IInterface)) {
+                });
+        if (z
+                && Flags.clearSessionEnabled()
+                && (obj4 = this.mClientCallback) != null
+                && (obj4 instanceof IInterface)) {
             setUpClientCallbackListener(((IInterface) obj4).asBinder());
         }
     }
@@ -150,10 +191,13 @@ public abstract class RequestSession {
     public final void finishSession(int i, boolean z) {
         Slog.i("CredentialManager", "finishing session with propagateCancellation " + z);
         if (z) {
-            ((ConcurrentHashMap) this.mProviders).values().forEach(new RequestSession$$ExternalSyntheticLambda0());
+            ((ConcurrentHashMap) this.mProviders)
+                    .values()
+                    .forEach(new RequestSession$$ExternalSyntheticLambda0());
         }
         RequestSessionMetric requestSessionMetric = this.mRequestSessionMetric;
-        ChosenProviderFinalPhaseMetric chosenProviderFinalPhaseMetric = requestSessionMetric.mChosenProviderFinalPhaseMetric;
+        ChosenProviderFinalPhaseMetric chosenProviderFinalPhaseMetric =
+                requestSessionMetric.mChosenProviderFinalPhaseMetric;
         try {
             List list = requestSessionMetric.mCandidateBrowsingPhaseMetric;
             int i2 = requestSessionMetric.mSequenceCounter + 1;
@@ -164,7 +208,8 @@ public abstract class RequestSession {
             requestSessionMetric.mSequenceCounter = i3;
             MetricUtilities.logApiCalledNoUidFinal(chosenProviderFinalPhaseMetric, list2, i, i3);
         } catch (Exception e) {
-            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e, "Unexpected error during final metric emit: ", "RequestSessionMetric");
+            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                    e, "Unexpected error during final metric emit: ", "RequestSessionMetric");
         }
         this.mRequestSessionStatus = RequestSessionStatus.COMPLETE;
         ((ConcurrentHashMap) this.mProviders).clear();
@@ -261,10 +306,14 @@ public abstract class RequestSession {
         L87:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.credentials.RequestSession.getProviderDataForUi():java.util.ArrayList");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.credentials.RequestSession.getProviderDataForUi():java.util.ArrayList");
     }
 
-    public abstract ProviderSession initiateProviderSession(CredentialProviderInfo credentialProviderInfo, RemoteCredentialService remoteCredentialService);
+    public abstract ProviderSession initiateProviderSession(
+            CredentialProviderInfo credentialProviderInfo,
+            RemoteCredentialService remoteCredentialService);
 
     public abstract void invokeClientCallbackError(String str, String str2);
 
@@ -306,7 +355,8 @@ public abstract class RequestSession {
         Map map = this.mProviders;
         RequestSessionMetric requestSessionMetric = this.mRequestSessionMetric;
         requestSessionMetric.logCandidateAggregateMetrics(map);
-        requestSessionMetric.collectFinalPhaseProviderMetricStatus(true, ProviderStatusForMetrics.FINAL_FAILURE);
+        requestSessionMetric.collectFinalPhaseProviderMetricStatus(
+                true, ProviderStatusForMetrics.FINAL_FAILURE);
         if (this.mRequestSessionStatus == RequestSessionStatus.COMPLETE) {
             Slog.w("CredentialManager", "Request has already been completed. This is strange.");
             return;
@@ -327,7 +377,10 @@ public abstract class RequestSession {
         try {
             requestSessionMetric.mChosenProviderFinalPhaseMetric.mHasException = false;
         } catch (Exception e2) {
-            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e2, "Unexpected error setting final exception metric: ", "RequestSessionMetric");
+            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                    e2,
+                    "Unexpected error setting final exception metric: ",
+                    "RequestSessionMetric");
         }
         finishSession(ApiStatus.USER_CANCELED.getMetricCode(), false);
     }
@@ -336,7 +389,8 @@ public abstract class RequestSession {
         Map map = this.mProviders;
         RequestSessionMetric requestSessionMetric = this.mRequestSessionMetric;
         requestSessionMetric.logCandidateAggregateMetrics(map);
-        requestSessionMetric.collectFinalPhaseProviderMetricStatus(false, ProviderStatusForMetrics.FINAL_SUCCESS);
+        requestSessionMetric.collectFinalPhaseProviderMetricStatus(
+                false, ProviderStatusForMetrics.FINAL_SUCCESS);
         if (this.mRequestSessionStatus == RequestSessionStatus.COMPLETE) {
             Slog.w("CredentialManager", "Request has already been completed. This is strange.");
             return;
@@ -349,7 +403,8 @@ public abstract class RequestSession {
             invokeClientCallbackSuccess(obj);
             finishSession(ApiStatus.SUCCESS.getMetricCode(), false);
         } catch (RemoteException e) {
-            requestSessionMetric.collectFinalPhaseProviderMetricStatus(true, ProviderStatusForMetrics.FINAL_FAILURE);
+            requestSessionMetric.collectFinalPhaseProviderMetricStatus(
+                    true, ProviderStatusForMetrics.FINAL_FAILURE);
             Slog.e("CredentialManager", "Issue while responding to client with a response : " + e);
             finishSession(ApiStatus.FAILURE.getMetricCode(), false);
         }

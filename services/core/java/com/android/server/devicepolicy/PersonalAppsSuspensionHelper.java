@@ -18,9 +18,11 @@ import android.util.ArraySet;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.IAccessibilityManager;
 import android.view.inputmethod.InputMethodInfo;
+
 import com.android.internal.telephony.SmsApplication;
 import com.android.server.inputmethod.InputMethodManagerInternal;
 import com.android.server.utils.Slogf;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -39,16 +41,20 @@ public final class PersonalAppsSuspensionHelper {
 
     public final List getAccessibilityServices() {
         IBinder service = ServiceManager.getService("accessibility");
-        IAccessibilityManager asInterface = service == null ? null : IAccessibilityManager.Stub.asInterface(service);
+        IAccessibilityManager asInterface =
+                service == null ? null : IAccessibilityManager.Stub.asInterface(service);
         Context context = this.mContext;
-        AccessibilityManager accessibilityManager = new AccessibilityManager(context, asInterface, context.getUserId());
+        AccessibilityManager accessibilityManager =
+                new AccessibilityManager(context, asInterface, context.getUserId());
         try {
-            List<AccessibilityServiceInfo> enabledAccessibilityServiceList = accessibilityManager.getEnabledAccessibilityServiceList(-1);
+            List<AccessibilityServiceInfo> enabledAccessibilityServiceList =
+                    accessibilityManager.getEnabledAccessibilityServiceList(-1);
             accessibilityManager.removeClient();
             ArrayList arrayList = new ArrayList();
             Iterator<AccessibilityServiceInfo> it = enabledAccessibilityServiceList.iterator();
             while (it.hasNext()) {
-                ComponentName unflattenFromString = ComponentName.unflattenFromString(it.next().getId());
+                ComponentName unflattenFromString =
+                        ComponentName.unflattenFromString(it.next().getId());
                 if (unflattenFromString != null) {
                     arrayList.add(unflattenFromString.getPackageName());
                 }
@@ -61,7 +67,9 @@ public final class PersonalAppsSuspensionHelper {
     }
 
     public final List getInputMethodPackages() {
-        List enabledInputMethodListAsUser = InputMethodManagerInternal.get().getEnabledInputMethodListAsUser(this.mContext.getUserId());
+        List enabledInputMethodListAsUser =
+                InputMethodManagerInternal.get()
+                        .getEnabledInputMethodListAsUser(this.mContext.getUserId());
         ArrayList arrayList = new ArrayList();
         Iterator it = enabledInputMethodListAsUser.iterator();
         while (it.hasNext()) {
@@ -81,9 +89,9 @@ public final class PersonalAppsSuspensionHelper {
                 Intent intent = new Intent("android.intent.action.MAIN");
                 intent.addCategory("android.intent.category.LAUNCHER");
                 intent.setPackage(str);
-                List<ResolveInfo> queryIntentActivities = this.mPackageManager.queryIntentActivities(intent, 786432);
-                if (queryIntentActivities != null && !queryIntentActivities.isEmpty()) {
-                }
+                List<ResolveInfo> queryIntentActivities =
+                        this.mPackageManager.queryIntentActivities(intent, 786432);
+                if (queryIntentActivities != null && !queryIntentActivities.isEmpty()) {}
             }
             arraySet.add(packageInfo.packageName);
         }
@@ -93,8 +101,13 @@ public final class PersonalAppsSuspensionHelper {
         arraySet.removeAll(getInputMethodPackages());
         if (Flags.defaultSmsPersonalAppSuspensionFixEnabled()) {
             Context context = this.mContext;
-            ComponentName defaultSmsApplicationAsUser = SmsApplication.getDefaultSmsApplicationAsUser(context, false, context.getUser());
-            defaultSmsPackage = defaultSmsApplicationAsUser != null ? defaultSmsApplicationAsUser.getPackageName() : null;
+            ComponentName defaultSmsApplicationAsUser =
+                    SmsApplication.getDefaultSmsApplicationAsUser(
+                            context, false, context.getUser());
+            defaultSmsPackage =
+                    defaultSmsApplicationAsUser != null
+                            ? defaultSmsApplicationAsUser.getPackageName()
+                            : null;
         } else {
             defaultSmsPackage = Telephony.Sms.getDefaultSmsPackage(this.mContext);
         }
@@ -103,7 +116,9 @@ public final class PersonalAppsSuspensionHelper {
         intent2.addCategory("android.intent.category.DEFAULT");
         ResolveInfo resolveActivity = this.mPackageManager.resolveActivity(intent2, 786432);
         arraySet.remove(resolveActivity != null ? resolveActivity.activityInfo.packageName : null);
-        for (String str2 : this.mPackageManager.getUnsuspendablePackages((String[]) arraySet.toArray(new String[0]))) {
+        for (String str2 :
+                this.mPackageManager.getUnsuspendablePackages(
+                        (String[]) arraySet.toArray(new String[0]))) {
             arraySet.remove(str2);
         }
         return (String[]) arraySet.toArray(new String[0]);
@@ -111,19 +126,30 @@ public final class PersonalAppsSuspensionHelper {
 
     public final List getSystemLauncherPackages() {
         ArrayList arrayList = new ArrayList();
-        for (ResolveInfo resolveInfo : this.mPackageManager.queryIntentActivities(PersonalAppsSuspensionHelper$$ExternalSyntheticOutline0.m("android.intent.action.MAIN", "android.intent.category.HOME"), 786432)) {
+        for (ResolveInfo resolveInfo :
+                this.mPackageManager.queryIntentActivities(
+                        PersonalAppsSuspensionHelper$$ExternalSyntheticOutline0.m(
+                                "android.intent.action.MAIN", "android.intent.category.HOME"),
+                        786432)) {
             ActivityInfo activityInfo = resolveInfo.activityInfo;
             if (activityInfo == null || TextUtils.isEmpty(activityInfo.packageName)) {
-                Slogf.wtf("DevicePolicyManager", "Could not find package name for launcher app %s", resolveInfo);
+                Slogf.wtf(
+                        "DevicePolicyManager",
+                        "Could not find package name for launcher app %s",
+                        resolveInfo);
             } else {
                 String str = resolveInfo.activityInfo.packageName;
                 try {
-                    ApplicationInfo applicationInfo = this.mPackageManager.getApplicationInfo(str, 786432);
+                    ApplicationInfo applicationInfo =
+                            this.mPackageManager.getApplicationInfo(str, 786432);
                     if (applicationInfo.isSystemApp() || applicationInfo.isUpdatedSystemApp()) {
                         arrayList.add(str);
                     }
                 } catch (PackageManager.NameNotFoundException unused) {
-                    Slogf.e("DevicePolicyManager", "Could not find application info for launcher app: %s", str);
+                    Slogf.e(
+                            "DevicePolicyManager",
+                            "Could not find application info for launcher app: %s",
+                            str);
                 }
             }
         }

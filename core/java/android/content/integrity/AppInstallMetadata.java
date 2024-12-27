@@ -84,7 +84,22 @@ public final class AppInstallMetadata {
     }
 
     public String toString() {
-        return String.format("AppInstallMetadata { PackageName = %s, AppCerts = %s, AppCertsLineage = %s, InstallerName = %s, InstallerCerts = %s, VersionCode = %d, PreInstalled = %b, StampPresent = %b, StampVerified = %b, StampTrusted = %b, StampCert = %s }", this.mPackageName, this.mAppCertificates, this.mAppCertificateLineage, this.mInstallerName == null ? "null" : this.mInstallerName, this.mInstallerCertificates == null ? "null" : this.mInstallerCertificates, Long.valueOf(this.mVersionCode), Boolean.valueOf(this.mIsPreInstalled), Boolean.valueOf(this.mIsStampPresent), Boolean.valueOf(this.mIsStampVerified), Boolean.valueOf(this.mIsStampTrusted), this.mStampCertificateHash != null ? this.mStampCertificateHash : "null");
+        return String.format(
+                "AppInstallMetadata { PackageName = %s, AppCerts = %s, AppCertsLineage = %s,"
+                    + " InstallerName = %s, InstallerCerts = %s, VersionCode = %d, PreInstalled ="
+                    + " %b, StampPresent = %b, StampVerified = %b, StampTrusted = %b, StampCert ="
+                    + " %s }",
+                this.mPackageName,
+                this.mAppCertificates,
+                this.mAppCertificateLineage,
+                this.mInstallerName == null ? "null" : this.mInstallerName,
+                this.mInstallerCertificates == null ? "null" : this.mInstallerCertificates,
+                Long.valueOf(this.mVersionCode),
+                Boolean.valueOf(this.mIsPreInstalled),
+                Boolean.valueOf(this.mIsStampPresent),
+                Boolean.valueOf(this.mIsStampVerified),
+                Boolean.valueOf(this.mIsStampTrusted),
+                this.mStampCertificateHash != null ? this.mStampCertificateHash : "null");
     }
 
     public static final class Builder {
@@ -101,7 +116,8 @@ public final class AppInstallMetadata {
         private String mStampCertificateHash;
         private long mVersionCode;
 
-        public Builder setAllowedInstallersAndCert(Map<String, String> allowedInstallersAndCertificates) {
+        public Builder setAllowedInstallersAndCert(
+                Map<String, String> allowedInstallersAndCertificates) {
             this.mAllowedInstallersAndCertificates = allowedInstallersAndCertificates;
             return this;
         }

@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.math.raw;
 
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -472,15 +473,28 @@ public abstract class Nat192 {
         long xVal = x & 4294967295L;
         long c = 0 + ((yy[yyOff + 0] & 4294967295L) * xVal) + (zz[zzOff + 0] & 4294967295L);
         zz[zzOff + 0] = (int) c;
-        long c2 = (c >>> 32) + ((yy[yyOff + 1] & 4294967295L) * xVal) + (zz[zzOff + 1] & 4294967295L);
+        long c2 =
+                (c >>> 32) + ((yy[yyOff + 1] & 4294967295L) * xVal) + (zz[zzOff + 1] & 4294967295L);
         zz[zzOff + 1] = (int) c2;
-        long c3 = (c2 >>> 32) + ((yy[yyOff + 2] & 4294967295L) * xVal) + (zz[zzOff + 2] & 4294967295L);
+        long c3 =
+                (c2 >>> 32)
+                        + ((yy[yyOff + 2] & 4294967295L) * xVal)
+                        + (zz[zzOff + 2] & 4294967295L);
         zz[zzOff + 2] = (int) c3;
-        long c4 = (c3 >>> 32) + ((yy[yyOff + 3] & 4294967295L) * xVal) + (zz[zzOff + 3] & 4294967295L);
+        long c4 =
+                (c3 >>> 32)
+                        + ((yy[yyOff + 3] & 4294967295L) * xVal)
+                        + (zz[zzOff + 3] & 4294967295L);
         zz[zzOff + 3] = (int) c4;
-        long c5 = (c4 >>> 32) + ((yy[yyOff + 4] & 4294967295L) * xVal) + (zz[zzOff + 4] & 4294967295L);
+        long c5 =
+                (c4 >>> 32)
+                        + ((yy[yyOff + 4] & 4294967295L) * xVal)
+                        + (zz[zzOff + 4] & 4294967295L);
         zz[zzOff + 4] = (int) c5;
-        long c6 = (c5 >>> 32) + ((yy[yyOff + 5] & 4294967295L) * xVal) + (4294967295L & zz[zzOff + 5]);
+        long c6 =
+                (c5 >>> 32)
+                        + ((yy[yyOff + 5] & 4294967295L) * xVal)
+                        + (4294967295L & zz[zzOff + 5]);
         zz[zzOff + 5] = (int) c6;
         return (int) (c6 >>> 32);
     }
@@ -762,15 +776,20 @@ public abstract class Nat192 {
     public static int subBothFrom(int[] x, int[] y, int[] z) {
         long c = 0 + (((z[0] & 4294967295L) - (x[0] & 4294967295L)) - (y[0] & 4294967295L));
         z[0] = (int) c;
-        long c2 = (c >> 32) + (((z[1] & 4294967295L) - (x[1] & 4294967295L)) - (y[1] & 4294967295L));
+        long c2 =
+                (c >> 32) + (((z[1] & 4294967295L) - (x[1] & 4294967295L)) - (y[1] & 4294967295L));
         z[1] = (int) c2;
-        long c3 = (c2 >> 32) + (((z[2] & 4294967295L) - (x[2] & 4294967295L)) - (y[2] & 4294967295L));
+        long c3 =
+                (c2 >> 32) + (((z[2] & 4294967295L) - (x[2] & 4294967295L)) - (y[2] & 4294967295L));
         z[2] = (int) c3;
-        long c4 = (c3 >> 32) + (((z[3] & 4294967295L) - (x[3] & 4294967295L)) - (y[3] & 4294967295L));
+        long c4 =
+                (c3 >> 32) + (((z[3] & 4294967295L) - (x[3] & 4294967295L)) - (y[3] & 4294967295L));
         z[3] = (int) c4;
-        long c5 = (c4 >> 32) + (((z[4] & 4294967295L) - (x[4] & 4294967295L)) - (y[4] & 4294967295L));
+        long c5 =
+                (c4 >> 32) + (((z[4] & 4294967295L) - (x[4] & 4294967295L)) - (y[4] & 4294967295L));
         z[4] = (int) c5;
-        long c6 = (c5 >> 32) + (((z[5] & 4294967295L) - (x[5] & 4294967295L)) - (y[5] & 4294967295L));
+        long c6 =
+                (c5 >> 32) + (((z[5] & 4294967295L) - (x[5] & 4294967295L)) - (y[5] & 4294967295L));
         z[5] = (int) c6;
         return (int) (c6 >> 32);
     }

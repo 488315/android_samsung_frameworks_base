@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -94,7 +93,8 @@ public final class MapFieldLite<K, V> extends LinkedHashMap<K, V> {
             return false;
         }
         for (Map.Entry<K, V> entry : a.entrySet()) {
-            if (!b.containsKey(entry.getKey()) || !equals(entry.getValue(), b.get(entry.getKey()))) {
+            if (!b.containsKey(entry.getKey())
+                    || !equals(entry.getValue(), b.get(entry.getKey()))) {
                 return false;
             }
         }
@@ -119,7 +119,9 @@ public final class MapFieldLite<K, V> extends LinkedHashMap<K, V> {
     static <K, V> int calculateHashCodeForMap(Map<K, V> a) {
         int result = 0;
         for (Map.Entry<K, V> entry : a.entrySet()) {
-            result += calculateHashCodeForObject(entry.getKey()) ^ calculateHashCodeForObject(entry.getValue());
+            result +=
+                    calculateHashCodeForObject(entry.getKey())
+                            ^ calculateHashCodeForObject(entry.getValue());
         }
         return result;
     }

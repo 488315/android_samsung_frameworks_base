@@ -12,7 +12,8 @@ public interface IGateKeeperService extends IInterface {
 
     void clearSecureUserId(int i) throws RemoteException;
 
-    GateKeeperResponse enroll(int i, byte[] bArr, byte[] bArr2, byte[] bArr3) throws RemoteException;
+    GateKeeperResponse enroll(int i, byte[] bArr, byte[] bArr2, byte[] bArr3)
+            throws RemoteException;
 
     int getFailureCount(int i) throws RemoteException;
 
@@ -22,21 +23,31 @@ public interface IGateKeeperService extends IInterface {
 
     GateKeeperResponse verify(int i, byte[] bArr, byte[] bArr2) throws RemoteException;
 
-    GateKeeperResponse verifyChallenge(int i, long j, byte[] bArr, byte[] bArr2) throws RemoteException;
+    GateKeeperResponse verifyChallenge(int i, long j, byte[] bArr, byte[] bArr2)
+            throws RemoteException;
 
     public static class Default implements IGateKeeperService {
         @Override // android.service.gatekeeper.IGateKeeperService
-        public GateKeeperResponse enroll(int userId, byte[] currentPasswordHandle, byte[] currentPassword, byte[] desiredPassword) throws RemoteException {
+        public GateKeeperResponse enroll(
+                int userId,
+                byte[] currentPasswordHandle,
+                byte[] currentPassword,
+                byte[] desiredPassword)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.service.gatekeeper.IGateKeeperService
-        public GateKeeperResponse verify(int userId, byte[] enrolledPasswordHandle, byte[] providedPassword) throws RemoteException {
+        public GateKeeperResponse verify(
+                int userId, byte[] enrolledPasswordHandle, byte[] providedPassword)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.service.gatekeeper.IGateKeeperService
-        public GateKeeperResponse verifyChallenge(int userId, long challenge, byte[] enrolledPasswordHandle, byte[] providedPassword) throws RemoteException {
+        public GateKeeperResponse verifyChallenge(
+                int userId, long challenge, byte[] enrolledPasswordHandle, byte[] providedPassword)
+                throws RemoteException {
             return null;
         }
 
@@ -46,12 +57,10 @@ public interface IGateKeeperService extends IInterface {
         }
 
         @Override // android.service.gatekeeper.IGateKeeperService
-        public void clearSecureUserId(int userId) throws RemoteException {
-        }
+        public void clearSecureUserId(int userId) throws RemoteException {}
 
         @Override // android.service.gatekeeper.IGateKeeperService
-        public void reportDeviceSetupComplete() throws RemoteException {
-        }
+        public void reportDeviceSetupComplete() throws RemoteException {}
 
         @Override // android.service.gatekeeper.IGateKeeperService
         public int getFailureCount(int userId) throws RemoteException {
@@ -64,7 +73,7 @@ public interface IGateKeeperService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGateKeeperService {
+    public abstract static class Stub extends Binder implements IGateKeeperService {
         static final int TRANSACTION_clearSecureUserId = 5;
         static final int TRANSACTION_enroll = 1;
         static final int TRANSACTION_getFailureCount = 7;
@@ -81,7 +90,8 @@ public interface IGateKeeperService extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface("android.service.gatekeeper.IGateKeeperService");
+            IInterface iin =
+                    obj.queryLocalInterface("android.service.gatekeeper.IGateKeeperService");
             if (iin != null && (iin instanceof IGateKeeperService)) {
                 return (IGateKeeperService) iin;
             }
@@ -120,7 +130,8 @@ public interface IGateKeeperService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface("android.service.gatekeeper.IGateKeeperService");
             }
@@ -204,7 +215,12 @@ public interface IGateKeeperService extends IInterface {
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
-            public GateKeeperResponse enroll(int userId, byte[] currentPasswordHandle, byte[] currentPassword, byte[] desiredPassword) throws RemoteException {
+            public GateKeeperResponse enroll(
+                    int userId,
+                    byte[] currentPasswordHandle,
+                    byte[] currentPassword,
+                    byte[] desiredPassword)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -216,7 +232,8 @@ public interface IGateKeeperService extends IInterface {
                     _data.writeByteArray(desiredPassword);
                     this.mRemote.transact(1, _data, _reply, 32);
                     _reply.readException();
-                    GateKeeperResponse _result = (GateKeeperResponse) _reply.readTypedObject(GateKeeperResponse.CREATOR);
+                    GateKeeperResponse _result =
+                            (GateKeeperResponse) _reply.readTypedObject(GateKeeperResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -225,7 +242,9 @@ public interface IGateKeeperService extends IInterface {
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
-            public GateKeeperResponse verify(int userId, byte[] enrolledPasswordHandle, byte[] providedPassword) throws RemoteException {
+            public GateKeeperResponse verify(
+                    int userId, byte[] enrolledPasswordHandle, byte[] providedPassword)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -236,7 +255,8 @@ public interface IGateKeeperService extends IInterface {
                     _data.writeByteArray(providedPassword);
                     this.mRemote.transact(2, _data, _reply, 32);
                     _reply.readException();
-                    GateKeeperResponse _result = (GateKeeperResponse) _reply.readTypedObject(GateKeeperResponse.CREATOR);
+                    GateKeeperResponse _result =
+                            (GateKeeperResponse) _reply.readTypedObject(GateKeeperResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -245,7 +265,12 @@ public interface IGateKeeperService extends IInterface {
             }
 
             @Override // android.service.gatekeeper.IGateKeeperService
-            public GateKeeperResponse verifyChallenge(int userId, long challenge, byte[] enrolledPasswordHandle, byte[] providedPassword) throws RemoteException {
+            public GateKeeperResponse verifyChallenge(
+                    int userId,
+                    long challenge,
+                    byte[] enrolledPasswordHandle,
+                    byte[] providedPassword)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -257,7 +282,8 @@ public interface IGateKeeperService extends IInterface {
                     _data.writeByteArray(providedPassword);
                     this.mRemote.transact(3, _data, _reply, 32);
                     _reply.readException();
-                    GateKeeperResponse _result = (GateKeeperResponse) _reply.readTypedObject(GateKeeperResponse.CREATOR);
+                    GateKeeperResponse _result =
+                            (GateKeeperResponse) _reply.readTypedObject(GateKeeperResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

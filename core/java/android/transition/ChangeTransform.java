@@ -16,12 +16,15 @@ import android.util.Property;
 import android.view.GhostView;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
 public class ChangeTransform extends Transition {
-    private static final String PROPNAME_INTERMEDIATE_MATRIX = "android:changeTransform:intermediateMatrix";
-    private static final String PROPNAME_INTERMEDIATE_PARENT_MATRIX = "android:changeTransform:intermediateParentMatrix";
+    private static final String PROPNAME_INTERMEDIATE_MATRIX =
+            "android:changeTransform:intermediateMatrix";
+    private static final String PROPNAME_INTERMEDIATE_PARENT_MATRIX =
+            "android:changeTransform:intermediateParentMatrix";
     private static final String PROPNAME_PARENT = "android:changeTransform:parent";
     private static final String TAG = "ChangeTransform";
     private boolean mReparent;
@@ -30,29 +33,37 @@ public class ChangeTransform extends Transition {
     private static final String PROPNAME_MATRIX = "android:changeTransform:matrix";
     private static final String PROPNAME_TRANSFORMS = "android:changeTransform:transforms";
     private static final String PROPNAME_PARENT_MATRIX = "android:changeTransform:parentMatrix";
-    private static final String[] sTransitionProperties = {PROPNAME_MATRIX, PROPNAME_TRANSFORMS, PROPNAME_PARENT_MATRIX};
-    private static final Property<PathAnimatorMatrix, float[]> NON_TRANSLATIONS_PROPERTY = new Property<PathAnimatorMatrix, float[]>(float[].class, "nonTranslations") { // from class: android.transition.ChangeTransform.1
-        @Override // android.util.Property
-        public float[] get(PathAnimatorMatrix object) {
-            return null;
-        }
-
-        @Override // android.util.Property
-        public void set(PathAnimatorMatrix object, float[] value) {
-            object.setValues(value);
-        }
+    private static final String[] sTransitionProperties = {
+        PROPNAME_MATRIX, PROPNAME_TRANSFORMS, PROPNAME_PARENT_MATRIX
     };
-    private static final Property<PathAnimatorMatrix, PointF> TRANSLATIONS_PROPERTY = new Property<PathAnimatorMatrix, PointF>(PointF.class, "translations") { // from class: android.transition.ChangeTransform.2
-        @Override // android.util.Property
-        public PointF get(PathAnimatorMatrix object) {
-            return null;
-        }
+    private static final Property<PathAnimatorMatrix, float[]> NON_TRANSLATIONS_PROPERTY =
+            new Property<PathAnimatorMatrix, float[]>(
+                    float[].class,
+                    "nonTranslations") { // from class: android.transition.ChangeTransform.1
+                @Override // android.util.Property
+                public float[] get(PathAnimatorMatrix object) {
+                    return null;
+                }
 
-        @Override // android.util.Property
-        public void set(PathAnimatorMatrix object, PointF value) {
-            object.setTranslation(value);
-        }
-    };
+                @Override // android.util.Property
+                public void set(PathAnimatorMatrix object, float[] value) {
+                    object.setValues(value);
+                }
+            };
+    private static final Property<PathAnimatorMatrix, PointF> TRANSLATIONS_PROPERTY =
+            new Property<PathAnimatorMatrix, PointF>(
+                    PointF.class,
+                    "translations") { // from class: android.transition.ChangeTransform.2
+                @Override // android.util.Property
+                public PointF get(PathAnimatorMatrix object) {
+                    return null;
+                }
+
+                @Override // android.util.Property
+                public void set(PathAnimatorMatrix object, PointF value) {
+                    object.setTranslation(value);
+                }
+            };
 
     public ChangeTransform() {
         this.mUseOverlay = true;
@@ -114,8 +125,10 @@ public class ChangeTransform extends Transition {
             parent.transformMatrixToGlobal(parentMatrix);
             parentMatrix.preTranslate(-parent.getScrollX(), -parent.getScrollY());
             transitionValues.values.put(PROPNAME_PARENT_MATRIX, parentMatrix);
-            transitionValues.values.put(PROPNAME_INTERMEDIATE_MATRIX, view.getTag(R.id.transitionTransform));
-            transitionValues.values.put(PROPNAME_INTERMEDIATE_PARENT_MATRIX, view.getTag(R.id.parentMatrix));
+            transitionValues.values.put(
+                    PROPNAME_INTERMEDIATE_MATRIX, view.getTag(R.id.transitionTransform));
+            transitionValues.values.put(
+                    PROPNAME_INTERMEDIATE_PARENT_MATRIX, view.getTag(R.id.parentMatrix));
         }
     }
 
@@ -130,8 +143,12 @@ public class ChangeTransform extends Transition {
     }
 
     @Override // android.transition.Transition
-    public Animator createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
-        if (startValues != null && endValues != null && startValues.values.containsKey(PROPNAME_PARENT) && endValues.values.containsKey(PROPNAME_PARENT)) {
+    public Animator createAnimator(
+            ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
+        if (startValues != null
+                && endValues != null
+                && startValues.values.containsKey(PROPNAME_PARENT)
+                && endValues.values.containsKey(PROPNAME_PARENT)) {
             ViewGroup startParent = (ViewGroup) startValues.values.get(PROPNAME_PARENT);
             ViewGroup endParent = (ViewGroup) endValues.values.get(PROPNAME_PARENT);
             boolean handleParentChange = this.mReparent && !parentsMatch(startParent, endParent);
@@ -139,14 +156,16 @@ public class ChangeTransform extends Transition {
             if (startMatrix != null) {
                 startValues.values.put(PROPNAME_MATRIX, startMatrix);
             }
-            Matrix startParentMatrix = (Matrix) startValues.values.get(PROPNAME_INTERMEDIATE_PARENT_MATRIX);
+            Matrix startParentMatrix =
+                    (Matrix) startValues.values.get(PROPNAME_INTERMEDIATE_PARENT_MATRIX);
             if (startParentMatrix != null) {
                 startValues.values.put(PROPNAME_PARENT_MATRIX, startParentMatrix);
             }
             if (handleParentChange) {
                 setMatricesForParent(startValues, endValues);
             }
-            ObjectAnimator transformAnimator = createTransformAnimator(startValues, endValues, handleParentChange);
+            ObjectAnimator transformAnimator =
+                    createTransformAnimator(startValues, endValues, handleParentChange);
             if (handleParentChange && transformAnimator != null && this.mUseOverlay) {
                 createGhostView(sceneRoot, startValues, endValues);
             }
@@ -155,7 +174,10 @@ public class ChangeTransform extends Transition {
         return null;
     }
 
-    private ObjectAnimator createTransformAnimator(TransitionValues startValues, TransitionValues endValues, final boolean handleParentChange) {
+    private ObjectAnimator createTransformAnimator(
+            TransitionValues startValues,
+            TransitionValues endValues,
+            final boolean handleParentChange) {
         Matrix startMatrix = (Matrix) startValues.values.get(PROPNAME_MATRIX);
         Matrix endMatrix = (Matrix) endValues.values.get(PROPNAME_MATRIX);
         if (startMatrix == null) {
@@ -174,52 +196,72 @@ public class ChangeTransform extends Transition {
         startMatrix.getValues(startMatrixValues);
         float[] endMatrixValues = new float[9];
         endMatrix.getValues(endMatrixValues);
-        final PathAnimatorMatrix pathAnimatorMatrix = new PathAnimatorMatrix(view, startMatrixValues);
-        PropertyValuesHolder valuesProperty = PropertyValuesHolder.ofObject(NON_TRANSLATIONS_PROPERTY, new FloatArrayEvaluator(new float[9]), startMatrixValues, endMatrixValues);
-        Path path = getPathMotion().getPath(startMatrixValues[2], startMatrixValues[5], endMatrixValues[2], endMatrixValues[5]);
-        PropertyValuesHolder translationProperty = PropertyValuesHolder.ofObject(TRANSLATIONS_PROPERTY, (TypeConverter) null, path);
-        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(pathAnimatorMatrix, valuesProperty, translationProperty);
+        final PathAnimatorMatrix pathAnimatorMatrix =
+                new PathAnimatorMatrix(view, startMatrixValues);
+        PropertyValuesHolder valuesProperty =
+                PropertyValuesHolder.ofObject(
+                        NON_TRANSLATIONS_PROPERTY,
+                        new FloatArrayEvaluator(new float[9]),
+                        startMatrixValues,
+                        endMatrixValues);
+        Path path =
+                getPathMotion()
+                        .getPath(
+                                startMatrixValues[2],
+                                startMatrixValues[5],
+                                endMatrixValues[2],
+                                endMatrixValues[5]);
+        PropertyValuesHolder translationProperty =
+                PropertyValuesHolder.ofObject(TRANSLATIONS_PROPERTY, (TypeConverter) null, path);
+        ObjectAnimator animator =
+                ObjectAnimator.ofPropertyValuesHolder(
+                        pathAnimatorMatrix, valuesProperty, translationProperty);
         final Matrix finalEndMatrix = endMatrix;
-        AnimatorListenerAdapter listener = new AnimatorListenerAdapter() { // from class: android.transition.ChangeTransform.3
-            private boolean mIsCanceled;
-            private Matrix mTempMatrix = new Matrix();
+        AnimatorListenerAdapter listener =
+                new AnimatorListenerAdapter() { // from class: android.transition.ChangeTransform.3
+                    private boolean mIsCanceled;
+                    private Matrix mTempMatrix = new Matrix();
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationCancel(Animator animation) {
-                this.mIsCanceled = true;
-            }
-
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                if (!this.mIsCanceled) {
-                    if (handleParentChange && ChangeTransform.this.mUseOverlay) {
-                        setCurrentMatrix(finalEndMatrix);
-                    } else {
-                        view.setTagInternal(R.id.transitionTransform, null);
-                        view.setTagInternal(R.id.parentMatrix, null);
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationCancel(Animator animation) {
+                        this.mIsCanceled = true;
                     }
-                }
-                view.setAnimationMatrix(null);
-                transforms.restore(view);
-            }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorPauseListener
-            public void onAnimationPause(Animator animation) {
-                Matrix currentMatrix = pathAnimatorMatrix.getMatrix();
-                setCurrentMatrix(currentMatrix);
-            }
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        if (!this.mIsCanceled) {
+                            if (handleParentChange && ChangeTransform.this.mUseOverlay) {
+                                setCurrentMatrix(finalEndMatrix);
+                            } else {
+                                view.setTagInternal(R.id.transitionTransform, null);
+                                view.setTagInternal(R.id.parentMatrix, null);
+                            }
+                        }
+                        view.setAnimationMatrix(null);
+                        transforms.restore(view);
+                    }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorPauseListener
-            public void onAnimationResume(Animator animation) {
-                ChangeTransform.setIdentityTransforms(view);
-            }
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorPauseListener
+                    public void onAnimationPause(Animator animation) {
+                        Matrix currentMatrix = pathAnimatorMatrix.getMatrix();
+                        setCurrentMatrix(currentMatrix);
+                    }
 
-            private void setCurrentMatrix(Matrix currentMatrix) {
-                this.mTempMatrix.set(currentMatrix);
-                view.setTagInternal(R.id.transitionTransform, this.mTempMatrix);
-                transforms.restore(view);
-            }
-        };
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorPauseListener
+                    public void onAnimationResume(Animator animation) {
+                        ChangeTransform.setIdentityTransforms(view);
+                    }
+
+                    private void setCurrentMatrix(Matrix currentMatrix) {
+                        this.mTempMatrix.set(currentMatrix);
+                        view.setTagInternal(R.id.transitionTransform, this.mTempMatrix);
+                        transforms.restore(view);
+                    }
+                };
         animator.addListener(listener);
         animator.addPauseListener(listener);
         return animator;
@@ -238,7 +280,8 @@ public class ChangeTransform extends Transition {
         return parentsMatch2;
     }
 
-    private void createGhostView(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
+    private void createGhostView(
+            ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
         View view = endValues.view;
         Matrix endMatrix = (Matrix) endValues.values.get(PROPNAME_PARENT_MATRIX);
         Matrix localEndMatrix = new Matrix(endMatrix);
@@ -278,7 +321,16 @@ public class ChangeTransform extends Transition {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void setTransforms(View view, float translationX, float translationY, float translationZ, float scaleX, float scaleY, float rotationX, float rotationY, float rotationZ) {
+    public static void setTransforms(
+            View view,
+            float translationX,
+            float translationY,
+            float translationZ,
+            float scaleX,
+            float scaleY,
+            float rotationX,
+            float rotationY,
+            float rotationZ) {
         view.setTranslationX(translationX);
         view.setTranslationY(translationY);
         view.setTranslationZ(translationZ);
@@ -311,7 +363,16 @@ public class ChangeTransform extends Transition {
         }
 
         public void restore(View view) {
-            ChangeTransform.setTransforms(view, this.translationX, this.translationY, this.translationZ, this.scaleX, this.scaleY, this.rotationX, this.rotationY, this.rotationZ);
+            ChangeTransform.setTransforms(
+                    view,
+                    this.translationX,
+                    this.translationY,
+                    this.translationZ,
+                    this.scaleX,
+                    this.scaleY,
+                    this.rotationX,
+                    this.rotationY,
+                    this.rotationZ);
         }
 
         public boolean equals(Object that) {
@@ -319,7 +380,14 @@ public class ChangeTransform extends Transition {
                 return false;
             }
             Transforms thatTransform = (Transforms) that;
-            return thatTransform.translationX == this.translationX && thatTransform.translationY == this.translationY && thatTransform.translationZ == this.translationZ && thatTransform.scaleX == this.scaleX && thatTransform.scaleY == this.scaleY && thatTransform.rotationX == this.rotationX && thatTransform.rotationY == this.rotationY && thatTransform.rotationZ == this.rotationZ;
+            return thatTransform.translationX == this.translationX
+                    && thatTransform.translationY == this.translationY
+                    && thatTransform.translationZ == this.translationZ
+                    && thatTransform.scaleX == this.scaleX
+                    && thatTransform.scaleY == this.scaleY
+                    && thatTransform.rotationX == this.rotationX
+                    && thatTransform.rotationY == this.rotationY
+                    && thatTransform.rotationZ == this.rotationZ;
         }
     }
 
@@ -334,7 +402,8 @@ public class ChangeTransform extends Transition {
             this.mGhostView = ghostView;
         }
 
-        @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+        @Override // android.transition.TransitionListenerAdapter,
+                  // android.transition.Transition.TransitionListener
         public void onTransitionEnd(Transition transition) {
             transition.removeListener(this);
             GhostView.removeGhost(this.mView);
@@ -343,12 +412,14 @@ public class ChangeTransform extends Transition {
             this.mStartView.setTransitionAlpha(1.0f);
         }
 
-        @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+        @Override // android.transition.TransitionListenerAdapter,
+                  // android.transition.Transition.TransitionListener
         public void onTransitionPause(Transition transition) {
             this.mGhostView.setVisibility(4);
         }
 
-        @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+        @Override // android.transition.TransitionListenerAdapter,
+                  // android.transition.Transition.TransitionListener
         public void onTransitionResume(Transition transition) {
             this.mGhostView.setVisibility(0);
         }

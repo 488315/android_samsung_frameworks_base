@@ -24,32 +24,25 @@ public interface IFullBackupRestoreObserver extends IInterface {
 
     public static class Default implements IFullBackupRestoreObserver {
         @Override // android.app.backup.IFullBackupRestoreObserver
-        public void onStartBackup() throws RemoteException {
-        }
+        public void onStartBackup() throws RemoteException {}
 
         @Override // android.app.backup.IFullBackupRestoreObserver
-        public void onBackupPackage(String name) throws RemoteException {
-        }
+        public void onBackupPackage(String name) throws RemoteException {}
 
         @Override // android.app.backup.IFullBackupRestoreObserver
-        public void onEndBackup() throws RemoteException {
-        }
+        public void onEndBackup() throws RemoteException {}
 
         @Override // android.app.backup.IFullBackupRestoreObserver
-        public void onStartRestore() throws RemoteException {
-        }
+        public void onStartRestore() throws RemoteException {}
 
         @Override // android.app.backup.IFullBackupRestoreObserver
-        public void onRestorePackage(String name) throws RemoteException {
-        }
+        public void onRestorePackage(String name) throws RemoteException {}
 
         @Override // android.app.backup.IFullBackupRestoreObserver
-        public void onEndRestore() throws RemoteException {
-        }
+        public void onEndRestore() throws RemoteException {}
 
         @Override // android.app.backup.IFullBackupRestoreObserver
-        public void onTimeout() throws RemoteException {
-        }
+        public void onTimeout() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +50,7 @@ public interface IFullBackupRestoreObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFullBackupRestoreObserver {
+    public abstract static class Stub extends Binder implements IFullBackupRestoreObserver {
         public static final String DESCRIPTOR = "android.app.backup.IFullBackupRestoreObserver";
         static final int TRANSACTION_onBackupPackage = 2;
         static final int TRANSACTION_onEndBackup = 3;
@@ -114,7 +107,8 @@ public interface IFullBackupRestoreObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

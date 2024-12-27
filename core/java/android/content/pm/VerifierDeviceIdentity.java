@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.PhoneNumberUtils;
 import android.text.format.DateFormat;
+
 import java.io.UnsupportedEncodingException;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -15,20 +16,55 @@ public class VerifierDeviceIdentity implements Parcelable {
     private static final char SEPARATOR = '-';
     private final long mIdentity;
     private final String mIdentityString;
-    private static final char[] ENCODE = {DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F', 'G', 'H', 'I', 'J', 'K', DateFormat.STANDALONE_MONTH, DateFormat.MONTH, PhoneNumberUtils.WILD, 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7'};
-    public static final Parcelable.Creator<VerifierDeviceIdentity> CREATOR = new Parcelable.Creator<VerifierDeviceIdentity>() { // from class: android.content.pm.VerifierDeviceIdentity.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifierDeviceIdentity createFromParcel(Parcel source) {
-            return new VerifierDeviceIdentity(source);
-        }
-
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifierDeviceIdentity[] newArray(int size) {
-            return new VerifierDeviceIdentity[size];
-        }
+    private static final char[] ENCODE = {
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        DateFormat.STANDALONE_MONTH,
+        DateFormat.MONTH,
+        PhoneNumberUtils.WILD,
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7'
     };
+    public static final Parcelable.Creator<VerifierDeviceIdentity> CREATOR =
+            new Parcelable.Creator<VerifierDeviceIdentity>() { // from class:
+                // android.content.pm.VerifierDeviceIdentity.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifierDeviceIdentity createFromParcel(Parcel source) {
+                    return new VerifierDeviceIdentity(source);
+                }
+
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifierDeviceIdentity[] newArray(int size) {
+                    return new VerifierDeviceIdentity[size];
+                }
+            };
 
     public VerifierDeviceIdentity(long identity) {
         this.mIdentity = identity;
@@ -120,7 +156,8 @@ public class VerifierDeviceIdentity implements Parcelable {
         return this.mIdentityString;
     }
 
-    public static VerifierDeviceIdentity parse(String deviceIdentity) throws IllegalArgumentException {
+    public static VerifierDeviceIdentity parse(String deviceIdentity)
+            throws IllegalArgumentException {
         try {
             byte[] input = deviceIdentity.getBytes("US-ASCII");
             return new VerifierDeviceIdentity(decodeBase32(input));

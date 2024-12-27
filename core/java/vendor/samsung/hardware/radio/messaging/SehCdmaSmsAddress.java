@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehCdmaSmsAddress implements Parcelable {
-    public static final Parcelable.Creator<SehCdmaSmsAddress> CREATOR = new Parcelable.Creator<SehCdmaSmsAddress>() { // from class: vendor.samsung.hardware.radio.messaging.SehCdmaSmsAddress.1
-        @Override // android.os.Parcelable.Creator
-        public SehCdmaSmsAddress createFromParcel(Parcel _aidl_source) {
-            SehCdmaSmsAddress _aidl_out = new SehCdmaSmsAddress();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehCdmaSmsAddress> CREATOR =
+            new Parcelable.Creator<
+                    SehCdmaSmsAddress>() { // from class:
+                                           // vendor.samsung.hardware.radio.messaging.SehCdmaSmsAddress.1
+                @Override // android.os.Parcelable.Creator
+                public SehCdmaSmsAddress createFromParcel(Parcel _aidl_source) {
+                    SehCdmaSmsAddress _aidl_out = new SehCdmaSmsAddress();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehCdmaSmsAddress[] newArray(int _aidl_size) {
-            return new SehCdmaSmsAddress[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehCdmaSmsAddress[] newArray(int _aidl_size) {
+                    return new SehCdmaSmsAddress[_aidl_size];
+                }
+            };
     public static final int DIGIT_MODE_EIGHT_BIT = 1;
     public static final int DIGIT_MODE_FOUR_BIT = 0;
     public static final int NUMBER_PLAN_DATA = 3;

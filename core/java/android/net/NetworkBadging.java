@@ -2,7 +2,9 @@ package android.net;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -15,11 +17,9 @@ public class NetworkBadging {
     public static final int BADGING_SD = 10;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Badging {
-    }
+    public @interface Badging {}
 
-    private NetworkBadging() {
-    }
+    private NetworkBadging() {}
 
     public static Drawable getWifiIcon(int signalLevel, int badging, Resources.Theme theme) {
         return Resources.getSystem().getDrawable(getWifiSignalResource(signalLevel), theme);

@@ -6,10 +6,13 @@ import android.os.SystemProperties;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+
 import com.android.internal.R;
 import com.android.internal.telephony.GsmAlphabet;
 import com.android.telephony.Rlog;
+
 import com.google.android.mms.pdu.CharacterSets;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -17,7 +20,24 @@ import java.util.List;
 /* loaded from: classes5.dex */
 public class IccUtils {
     static final int FPLMN_BYTE_SIZE = 3;
-    private static final char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F'};
+    private static final char[] HEX_CHARS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F'
+    };
     public static final int ICCID_ALL_FF = 255;
     public static final int ICCID_HAS_CHAR = 1;
     public static final int ICCID_NO_HAS_CHAR = 0;
@@ -72,7 +92,11 @@ public class IccUtils {
         if (offset + 3 > data.length) {
             return null;
         }
-        byte[] trans = {(byte) ((data[offset + 0] << 4) | ((data[offset + 0] >> 4) & 15)), (byte) ((data[offset + 1] << 4) | (data[offset + 2] & 15)), (byte) ((data[offset + 2] & 240) | ((data[offset + 1] >> 4) & 15))};
+        byte[] trans = {
+            (byte) ((data[offset + 0] << 4) | ((data[offset + 0] >> 4) & 15)),
+            (byte) ((data[offset + 1] << 4) | (data[offset + 2] & 15)),
+            (byte) ((data[offset + 2] & 240) | ((data[offset + 1] >> 4) & 15))
+        };
         String ret = bytesToHexString(trans);
         if (ret.contains("F")) {
             return ret.replaceAll("F", "");
@@ -346,14 +370,18 @@ public class IccUtils {
             colorIndexArray[colorNumber - 1] = 0;
         }
         if (8 % bits == 0) {
-            resultArray = mapTo2OrderBitColor(data, valueIndex6, width * height, colorIndexArray, bits);
+            resultArray =
+                    mapTo2OrderBitColor(data, valueIndex6, width * height, colorIndexArray, bits);
         } else {
-            resultArray = mapToNon2OrderBitColor(data, valueIndex6, width * height, colorIndexArray, bits);
+            resultArray =
+                    mapToNon2OrderBitColor(
+                            data, valueIndex6, width * height, colorIndexArray, bits);
         }
         return Bitmap.createBitmap(resultArray, width, height, Bitmap.Config.RGB_565);
     }
 
-    private static int[] mapTo2OrderBitColor(byte[] data, int valueIndex, int length, int[] colorArray, int bits) {
+    private static int[] mapTo2OrderBitColor(
+            byte[] data, int valueIndex, int length, int[] colorArray, int bits) {
         if (8 % bits != 0) {
             Rlog.e(LOG_TAG, "not event number of color");
             return mapToNon2OrderBitColor(data, valueIndex, length, colorArray, bits);
@@ -391,7 +419,8 @@ public class IccUtils {
         return resultArray;
     }
 
-    private static int[] mapToNon2OrderBitColor(byte[] data, int valueIndex, int length, int[] colorArray, int bits) {
+    private static int[] mapToNon2OrderBitColor(
+            byte[] data, int valueIndex, int length, int[] colorArray, int bits) {
         if (8 % bits == 0) {
             Rlog.e(LOG_TAG, "not odd number of color");
             return mapTo2OrderBitColor(data, valueIndex, length, colorArray, bits);
@@ -412,7 +441,10 @@ public class IccUtils {
             int colorIndex2 = colorIndex + 1;
             int valueIndex2 = valueIndex + 1;
             int valueIndex3 = valueIndex2 + 1;
-            int i = ((rawData[valueIndex] & 255) << 16) | (-16777216) | ((rawData[valueIndex2] & 255) << 8);
+            int i =
+                    ((rawData[valueIndex] & 255) << 16)
+                            | (-16777216)
+                            | ((rawData[valueIndex2] & 255) << 8);
             int valueIndex4 = valueIndex3 + 1;
             result[colorIndex] = i | (rawData[valueIndex3] & 255);
             if (valueIndex4 < endIndex) {
@@ -434,27 +466,42 @@ public class IccUtils {
 
     public static int bytesToInt(byte[] src, int offset, int length) {
         if (length > 4) {
-            throw new IllegalArgumentException("length must be <= 4 (only 32-bit integer supported): " + length);
+            throw new IllegalArgumentException(
+                    "length must be <= 4 (only 32-bit integer supported): " + length);
         }
         if (offset < 0 || length < 0 || offset + length > src.length) {
-            throw new IndexOutOfBoundsException("Out of the bounds: src=[" + src.length + "], offset=" + offset + ", length=" + length);
+            throw new IndexOutOfBoundsException(
+                    "Out of the bounds: src=["
+                            + src.length
+                            + "], offset="
+                            + offset
+                            + ", length="
+                            + length);
         }
         int result = 0;
         for (int i = 0; i < length; i++) {
             result = (result << 8) | (src[offset + i] & 255);
         }
         if (result < 0) {
-            throw new IllegalArgumentException("src cannot be parsed as a positive integer: " + result);
+            throw new IllegalArgumentException(
+                    "src cannot be parsed as a positive integer: " + result);
         }
         return result;
     }
 
     public static long bytesToRawLong(byte[] src, int offset, int length) {
         if (length > 8) {
-            throw new IllegalArgumentException("length must be <= 8 (only 64-bit long supported): " + length);
+            throw new IllegalArgumentException(
+                    "length must be <= 8 (only 64-bit long supported): " + length);
         }
         if (offset < 0 || length < 0 || offset + length > src.length) {
-            throw new IndexOutOfBoundsException("Out of the bounds: src=[" + src.length + "], offset=" + offset + ", length=" + length);
+            throw new IndexOutOfBoundsException(
+                    "Out of the bounds: src=["
+                            + src.length
+                            + "], offset="
+                            + offset
+                            + ", length="
+                            + length);
         }
         long result = 0;
         for (int i = 0; i < length; i++) {
@@ -560,7 +607,7 @@ public class IccUtils {
     }
 
     public static String byteToHex(byte b) {
-        return new String(new char[]{HEX_CHARS[(b & 255) >>> 4], HEX_CHARS[b & 15]});
+        return new String(new char[] {HEX_CHARS[(b & 255) >>> 4], HEX_CHARS[b & 15]});
     }
 
     public static String stripTrailingFs(String s) {

@@ -2,12 +2,6 @@ package android.hardware.biometrics;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.hardware.biometrics.AuthenticationStateListener;
-import android.hardware.biometrics.IBiometricEnabledOnKeyguardCallback;
-import android.hardware.biometrics.IBiometricServiceReceiver;
-import android.hardware.biometrics.IInvalidationCallback;
-import android.hardware.biometrics.ITestSession;
-import android.hardware.biometrics.ITestSessionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -15,19 +9,28 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.text.TextUtils;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IAuthService extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.biometrics.IAuthService";
 
-    long authenticate(IBinder iBinder, long j, int i, IBiometricServiceReceiver iBiometricServiceReceiver, String str, PromptInfo promptInfo) throws RemoteException;
+    long authenticate(
+            IBinder iBinder,
+            long j,
+            int i,
+            IBiometricServiceReceiver iBiometricServiceReceiver,
+            String str,
+            PromptInfo promptInfo)
+            throws RemoteException;
 
     int canAuthenticate(String str, int i, int i2) throws RemoteException;
 
     void cancelAuthentication(IBinder iBinder, String str, long j) throws RemoteException;
 
-    ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str) throws RemoteException;
+    ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str)
+            throws RemoteException;
 
     long[] getAuthenticatorIds(int i) throws RemoteException;
 
@@ -45,26 +48,35 @@ public interface IAuthService extends IInterface {
 
     boolean hasEnrolledBiometrics(int i, String str) throws RemoteException;
 
-    void invalidateAuthenticatorIds(int i, int i2, IInvalidationCallback iInvalidationCallback) throws RemoteException;
+    void invalidateAuthenticatorIds(int i, int i2, IInvalidationCallback iInvalidationCallback)
+            throws RemoteException;
 
-    void registerAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException;
+    void registerAuthenticationStateListener(
+            AuthenticationStateListener authenticationStateListener) throws RemoteException;
 
-    void registerEnabledOnKeyguardCallback(IBiometricEnabledOnKeyguardCallback iBiometricEnabledOnKeyguardCallback) throws RemoteException;
+    void registerEnabledOnKeyguardCallback(
+            IBiometricEnabledOnKeyguardCallback iBiometricEnabledOnKeyguardCallback)
+            throws RemoteException;
 
     void resetLockout(int i, byte[] bArr) throws RemoteException;
 
-    void resetLockoutTimeBound(IBinder iBinder, String str, int i, int i2, byte[] bArr) throws RemoteException;
+    void resetLockoutTimeBound(IBinder iBinder, String str, int i, int i2, byte[] bArr)
+            throws RemoteException;
 
-    void unregisterAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException;
+    void unregisterAuthenticationStateListener(
+            AuthenticationStateListener authenticationStateListener) throws RemoteException;
 
     public static class Default implements IAuthService {
         @Override // android.hardware.biometrics.IAuthService
-        public ITestSession createTestSession(int sensorId, ITestSessionCallback callback, String opPackageName) throws RemoteException {
+        public ITestSession createTestSession(
+                int sensorId, ITestSessionCallback callback, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public List<SensorPropertiesInternal> getSensorProperties(String opPackageName) throws RemoteException {
+        public List<SensorPropertiesInternal> getSensorProperties(String opPackageName)
+                throws RemoteException {
             return null;
         }
 
@@ -74,44 +86,55 @@ public interface IAuthService extends IInterface {
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public long authenticate(IBinder token, long sessionId, int userId, IBiometricServiceReceiver receiver, String opPackageName, PromptInfo promptInfo) throws RemoteException {
+        public long authenticate(
+                IBinder token,
+                long sessionId,
+                int userId,
+                IBiometricServiceReceiver receiver,
+                String opPackageName,
+                PromptInfo promptInfo)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public void cancelAuthentication(IBinder token, String opPackageName, long requestId) throws RemoteException {
-        }
+        public void cancelAuthentication(IBinder token, String opPackageName, long requestId)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IAuthService
-        public int canAuthenticate(String opPackageName, int userId, int authenticators) throws RemoteException {
+        public int canAuthenticate(String opPackageName, int userId, int authenticators)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public long getLastAuthenticationTime(int userId, int authenticators) throws RemoteException {
+        public long getLastAuthenticationTime(int userId, int authenticators)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public boolean hasEnrolledBiometrics(int userId, String opPackageName) throws RemoteException {
+        public boolean hasEnrolledBiometrics(int userId, String opPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public void registerEnabledOnKeyguardCallback(IBiometricEnabledOnKeyguardCallback callback) throws RemoteException {
-        }
+        public void registerEnabledOnKeyguardCallback(IBiometricEnabledOnKeyguardCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IAuthService
-        public void registerAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
-        }
+        public void registerAuthenticationStateListener(AuthenticationStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IAuthService
-        public void unregisterAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
-        }
+        public void unregisterAuthenticationStateListener(AuthenticationStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IAuthService
-        public void invalidateAuthenticatorIds(int userId, int fromSensorId, IInvalidationCallback callback) throws RemoteException {
-        }
+        public void invalidateAuthenticatorIds(
+                int userId, int fromSensorId, IInvalidationCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IAuthService
         public long[] getAuthenticatorIds(int userId) throws RemoteException {
@@ -119,25 +142,32 @@ public interface IAuthService extends IInterface {
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public void resetLockoutTimeBound(IBinder token, String opPackageName, int fromSensorId, int userId, byte[] hardwareAuthToken) throws RemoteException {
-        }
+        public void resetLockoutTimeBound(
+                IBinder token,
+                String opPackageName,
+                int fromSensorId,
+                int userId,
+                byte[] hardwareAuthToken)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IAuthService
-        public void resetLockout(int userId, byte[] hardwareAuthToken) throws RemoteException {
-        }
+        public void resetLockout(int userId, byte[] hardwareAuthToken) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IAuthService
-        public CharSequence getButtonLabel(int userId, String opPackageName, int authenticators) throws RemoteException {
+        public CharSequence getButtonLabel(int userId, String opPackageName, int authenticators)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public CharSequence getPromptMessage(int userId, String opPackageName, int authenticators) throws RemoteException {
+        public CharSequence getPromptMessage(int userId, String opPackageName, int authenticators)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.IAuthService
-        public CharSequence getSettingName(int userId, String opPackageName, int authenticators) throws RemoteException {
+        public CharSequence getSettingName(int userId, String opPackageName, int authenticators)
+                throws RemoteException {
             return null;
         }
 
@@ -147,7 +177,7 @@ public interface IAuthService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAuthService {
+    public abstract static class Stub extends Binder implements IAuthService {
         static final int TRANSACTION_authenticate = 4;
         static final int TRANSACTION_canAuthenticate = 6;
         static final int TRANSACTION_cancelAuthentication = 5;
@@ -178,7 +208,9 @@ public interface IAuthService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IAuthService asInterface(IBinder obj) {
@@ -246,7 +278,8 @@ public interface IAuthService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAuthService.DESCRIPTOR);
             }
@@ -257,7 +290,8 @@ public interface IAuthService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    ITestSessionCallback _arg1 = ITestSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITestSessionCallback _arg1 =
+                            ITestSessionCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg2 = data.readString();
                     data.enforceNoDataAvail();
                     ITestSession _result = createTestSession(_arg0, _arg1, _arg2);
@@ -280,7 +314,8 @@ public interface IAuthService extends IInterface {
                     IBinder _arg03 = data.readStrongBinder();
                     long _arg12 = data.readLong();
                     int _arg22 = data.readInt();
-                    IBiometricServiceReceiver _arg3 = IBiometricServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IBiometricServiceReceiver _arg3 =
+                            IBiometricServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg4 = data.readString();
                     PromptInfo _arg5 = (PromptInfo) data.readTypedObject(PromptInfo.CREATOR);
                     data.enforceNoDataAvail();
@@ -322,19 +357,23 @@ public interface IAuthService extends IInterface {
                     reply.writeBoolean(_result7);
                     return true;
                 case 9:
-                    IBiometricEnabledOnKeyguardCallback _arg08 = IBiometricEnabledOnKeyguardCallback.Stub.asInterface(data.readStrongBinder());
+                    IBiometricEnabledOnKeyguardCallback _arg08 =
+                            IBiometricEnabledOnKeyguardCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerEnabledOnKeyguardCallback(_arg08);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    AuthenticationStateListener _arg09 = AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
+                    AuthenticationStateListener _arg09 =
+                            AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerAuthenticationStateListener(_arg09);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    AuthenticationStateListener _arg010 = AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
+                    AuthenticationStateListener _arg010 =
+                            AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAuthenticationStateListener(_arg010);
                     reply.writeNoException();
@@ -342,7 +381,8 @@ public interface IAuthService extends IInterface {
                 case 12:
                     int _arg011 = data.readInt();
                     int _arg17 = data.readInt();
-                    IInvalidationCallback _arg25 = IInvalidationCallback.Stub.asInterface(data.readStrongBinder());
+                    IInvalidationCallback _arg25 =
+                            IInvalidationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     invalidateAuthenticatorIds(_arg011, _arg17, _arg25);
                     reply.writeNoException();
@@ -435,7 +475,9 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public ITestSession createTestSession(int sensorId, ITestSessionCallback callback, String opPackageName) throws RemoteException {
+            public ITestSession createTestSession(
+                    int sensorId, ITestSessionCallback callback, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -454,7 +496,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public List<SensorPropertiesInternal> getSensorProperties(String opPackageName) throws RemoteException {
+            public List<SensorPropertiesInternal> getSensorProperties(String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -462,7 +505,8 @@ public interface IAuthService extends IInterface {
                     _data.writeString(opPackageName);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    List<SensorPropertiesInternal> _result = _reply.createTypedArrayList(SensorPropertiesInternal.CREATOR);
+                    List<SensorPropertiesInternal> _result =
+                            _reply.createTypedArrayList(SensorPropertiesInternal.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -487,7 +531,14 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public long authenticate(IBinder token, long sessionId, int userId, IBiometricServiceReceiver receiver, String opPackageName, PromptInfo promptInfo) throws RemoteException {
+            public long authenticate(
+                    IBinder token,
+                    long sessionId,
+                    int userId,
+                    IBiometricServiceReceiver receiver,
+                    String opPackageName,
+                    PromptInfo promptInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -509,7 +560,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public void cancelAuthentication(IBinder token, String opPackageName, long requestId) throws RemoteException {
+            public void cancelAuthentication(IBinder token, String opPackageName, long requestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -526,7 +578,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public int canAuthenticate(String opPackageName, int userId, int authenticators) throws RemoteException {
+            public int canAuthenticate(String opPackageName, int userId, int authenticators)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -545,7 +598,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public long getLastAuthenticationTime(int userId, int authenticators) throws RemoteException {
+            public long getLastAuthenticationTime(int userId, int authenticators)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -563,7 +617,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public boolean hasEnrolledBiometrics(int userId, String opPackageName) throws RemoteException {
+            public boolean hasEnrolledBiometrics(int userId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -581,7 +636,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public void registerEnabledOnKeyguardCallback(IBiometricEnabledOnKeyguardCallback callback) throws RemoteException {
+            public void registerEnabledOnKeyguardCallback(
+                    IBiometricEnabledOnKeyguardCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -596,7 +652,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public void registerAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
+            public void registerAuthenticationStateListener(AuthenticationStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -611,7 +668,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public void unregisterAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
+            public void unregisterAuthenticationStateListener(AuthenticationStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -626,7 +684,9 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public void invalidateAuthenticatorIds(int userId, int fromSensorId, IInvalidationCallback callback) throws RemoteException {
+            public void invalidateAuthenticatorIds(
+                    int userId, int fromSensorId, IInvalidationCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -660,7 +720,13 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public void resetLockoutTimeBound(IBinder token, String opPackageName, int fromSensorId, int userId, byte[] hardwareAuthToken) throws RemoteException {
+            public void resetLockoutTimeBound(
+                    IBinder token,
+                    String opPackageName,
+                    int fromSensorId,
+                    int userId,
+                    byte[] hardwareAuthToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -695,7 +761,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public CharSequence getButtonLabel(int userId, String opPackageName, int authenticators) throws RemoteException {
+            public CharSequence getButtonLabel(int userId, String opPackageName, int authenticators)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -705,7 +772,8 @@ public interface IAuthService extends IInterface {
                     _data.writeInt(authenticators);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -714,7 +782,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public CharSequence getPromptMessage(int userId, String opPackageName, int authenticators) throws RemoteException {
+            public CharSequence getPromptMessage(
+                    int userId, String opPackageName, int authenticators) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -724,7 +793,8 @@ public interface IAuthService extends IInterface {
                     _data.writeInt(authenticators);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -733,7 +803,8 @@ public interface IAuthService extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IAuthService
-            public CharSequence getSettingName(int userId, String opPackageName, int authenticators) throws RemoteException {
+            public CharSequence getSettingName(int userId, String opPackageName, int authenticators)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -743,7 +814,8 @@ public interface IAuthService extends IInterface {
                     _data.writeInt(authenticators);
                     this.mRemote.transact(18, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -753,15 +825,18 @@ public interface IAuthService extends IInterface {
         }
 
         protected void createTestSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void getSensorProperties_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void getUiPackage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

@@ -12,21 +12,24 @@ public class SensorLocationInternal implements Parcelable {
     public final int sensorLocationY;
     public final int sensorRadius;
     public static final SensorLocationInternal DEFAULT = new SensorLocationInternal("", 0, 0, 0);
-    public static final Parcelable.Creator<SensorLocationInternal> CREATOR = new Parcelable.Creator<SensorLocationInternal>() { // from class: android.hardware.biometrics.SensorLocationInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SensorLocationInternal createFromParcel(Parcel in) {
-            return new SensorLocationInternal(in);
-        }
+    public static final Parcelable.Creator<SensorLocationInternal> CREATOR =
+            new Parcelable.Creator<SensorLocationInternal>() { // from class:
+                // android.hardware.biometrics.SensorLocationInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SensorLocationInternal createFromParcel(Parcel in) {
+                    return new SensorLocationInternal(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SensorLocationInternal[] newArray(int size) {
-            return new SensorLocationInternal[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SensorLocationInternal[] newArray(int size) {
+                    return new SensorLocationInternal[size];
+                }
+            };
 
-    public SensorLocationInternal(String displayId, int sensorLocationX, int sensorLocationY, int sensorRadius) {
+    public SensorLocationInternal(
+            String displayId, int sensorLocationX, int sensorLocationY, int sensorRadius) {
         this.displayId = displayId != null ? displayId : "";
         this.sensorLocationX = sensorLocationX;
         this.sensorLocationY = sensorLocationY;
@@ -54,10 +57,22 @@ public class SensorLocationInternal implements Parcelable {
     }
 
     public String toString() {
-        return "[id: " + this.displayId + ", x: " + this.sensorLocationX + ", y: " + this.sensorLocationY + ", r: " + this.sensorRadius + NavigationBarInflaterView.SIZE_MOD_END;
+        return "[id: "
+                + this.displayId
+                + ", x: "
+                + this.sensorLocationX
+                + ", y: "
+                + this.sensorLocationY
+                + ", r: "
+                + this.sensorRadius
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public Rect getRect() {
-        return new Rect(this.sensorLocationX - this.sensorRadius, this.sensorLocationY - this.sensorRadius, this.sensorLocationX + this.sensorRadius, this.sensorLocationY + this.sensorRadius);
+        return new Rect(
+                this.sensorLocationX - this.sensorRadius,
+                this.sensorLocationY - this.sensorRadius,
+                this.sensorLocationX + this.sensorRadius,
+                this.sensorLocationY + this.sensorRadius);
     }
 }

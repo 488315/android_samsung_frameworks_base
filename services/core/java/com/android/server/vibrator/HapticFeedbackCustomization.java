@@ -12,9 +12,11 @@ import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.Xml;
+
 import com.android.internal.vibrator.persistence.XmlReader;
 import com.android.internal.vibrator.persistence.XmlValidator;
 import com.android.modules.utils.TypedXmlPullParser;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -33,9 +35,12 @@ public abstract class HapticFeedbackCustomization {
         }
     }
 
-    public static SparseArray loadVibrationsInternal(Resources resources, VibratorInfo vibratorInfo) {
+    public static SparseArray loadVibrationsInternal(
+            Resources resources, VibratorInfo vibratorInfo) {
         if (!Flags.hapticFeedbackVibrationOemCustomizationEnabled()) {
-            Slog.d("HapticFeedbackCustomization", "Haptic feedback customization feature is not enabled.");
+            Slog.d(
+                    "HapticFeedbackCustomization",
+                    "Haptic feedback customization feature is not enabled.");
             return null;
         }
         String string = resources.getString(R.string.duration_years_shortest_future);
@@ -46,7 +51,8 @@ public abstract class HapticFeedbackCustomization {
         try {
             FileReader fileReader = new FileReader(string);
             TypedXmlPullParser newFastPullParser = Xml.newFastPullParser();
-            newFastPullParser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
+            newFastPullParser.setFeature(
+                    "http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
             newFastPullParser.setInput(fileReader);
             XmlReader.readDocumentStartTag(newFastPullParser, "haptic-feedback-constants");
             int i = 0;
@@ -56,20 +62,41 @@ public abstract class HapticFeedbackCustomization {
             while (XmlReader.readNextTagWithin(newFastPullParser, depth)) {
                 XmlValidator.checkStartTag(newFastPullParser, "constant");
                 int depth2 = newFastPullParser.getDepth();
-                XmlValidator.checkTagHasNoUnexpectedAttributes(newFastPullParser, new String[]{"id"});
-                int readAttributeIntNonNegative = XmlReader.readAttributeIntNonNegative(newFastPullParser, "id");
+                XmlValidator.checkTagHasNoUnexpectedAttributes(
+                        newFastPullParser, new String[] {"id"});
+                int readAttributeIntNonNegative =
+                        XmlReader.readAttributeIntNonNegative(newFastPullParser, "id");
                 if (sparseArray.contains(readAttributeIntNonNegative)) {
-                    throw new CustomizationParserException(VibrationParam$1$$ExternalSyntheticOutline0.m(readAttributeIntNonNegative, "Multiple customizations found for effect "), i);
+                    throw new CustomizationParserException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    readAttributeIntNonNegative,
+                                    "Multiple customizations found for effect "),
+                            i);
                 }
-                XmlValidator.checkParserCondition(XmlReader.readNextTagWithin(newFastPullParser, depth2), VibrationParam$1$$ExternalSyntheticOutline0.m(readAttributeIntNonNegative, "Unsupported empty customization tag for effect "), new Object[0]);
-                ParsedVibration parseElement = VibrationXmlParser.parseElement(newFastPullParser, 1);
+                XmlValidator.checkParserCondition(
+                        XmlReader.readNextTagWithin(newFastPullParser, depth2),
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                readAttributeIntNonNegative,
+                                "Unsupported empty customization tag for effect "),
+                        new Object[0]);
+                ParsedVibration parseElement =
+                        VibrationXmlParser.parseElement(newFastPullParser, 1);
                 if (parseElement == null) {
-                    throw new CustomizationParserException(VibrationParam$1$$ExternalSyntheticOutline0.m(readAttributeIntNonNegative, "Unable to parse vibration element for effect "), i);
+                    throw new CustomizationParserException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    readAttributeIntNonNegative,
+                                    "Unable to parse vibration element for effect "),
+                            i);
                 }
                 VibrationEffect resolve = parseElement.resolve(vibratorInfo);
                 if (resolve != null) {
                     if (resolve.getDuration() == Long.MAX_VALUE) {
-                        throw new CustomizationParserException(String.format("Vibration for effect ID %d is repeating, which is not allowed as a haptic feedback: %s", Integer.valueOf(readAttributeIntNonNegative), resolve), i);
+                        throw new CustomizationParserException(
+                                String.format(
+                                        "Vibration for effect ID %d is repeating, which is not"
+                                            + " allowed as a haptic feedback: %s",
+                                        Integer.valueOf(readAttributeIntNonNegative), resolve),
+                                i);
                     }
                     sparseArray.put(readAttributeIntNonNegative, resolve);
                 }

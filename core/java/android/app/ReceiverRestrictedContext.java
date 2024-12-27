@@ -9,6 +9,7 @@ import android.content.ReceiverCallNotAllowedException;
 import android.content.ServiceConnection;
 import android.os.Handler;
 import android.os.UserHandle;
+
 import java.util.concurrent.Executor;
 
 /* compiled from: ContextImpl.java */
@@ -24,38 +25,63 @@ class ReceiverRestrictedContext extends ContextWrapper {
     }
 
     @Override // android.content.ContextWrapper, android.content.Context
-    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission, Handler scheduler) {
+    public Intent registerReceiver(
+            BroadcastReceiver receiver,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
         if (receiver == null) {
             return super.registerReceiver(null, filter, broadcastPermission, scheduler);
         }
-        throw new ReceiverCallNotAllowedException("BroadcastReceiver components are not allowed to register to receive intents");
+        throw new ReceiverCallNotAllowedException(
+                "BroadcastReceiver components are not allowed to register to receive intents");
     }
 
     @Override // android.content.ContextWrapper, android.content.Context
-    public Intent registerReceiverForAllUsers(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission, Handler scheduler) {
-        return registerReceiverAsUser(receiver, UserHandle.ALL, filter, broadcastPermission, scheduler);
+    public Intent registerReceiverForAllUsers(
+            BroadcastReceiver receiver,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
+        return registerReceiverAsUser(
+                receiver, UserHandle.ALL, filter, broadcastPermission, scheduler);
     }
 
     @Override // android.content.ContextWrapper, android.content.Context
-    public Intent registerReceiverAsUser(BroadcastReceiver receiver, UserHandle user, IntentFilter filter, String broadcastPermission, Handler scheduler) {
+    public Intent registerReceiverAsUser(
+            BroadcastReceiver receiver,
+            UserHandle user,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
         if (receiver == null) {
             return super.registerReceiverAsUser(null, user, filter, broadcastPermission, scheduler);
         }
-        throw new ReceiverCallNotAllowedException("BroadcastReceiver components are not allowed to register to receive intents");
+        throw new ReceiverCallNotAllowedException(
+                "BroadcastReceiver components are not allowed to register to receive intents");
     }
 
     @Override // android.content.ContextWrapper, android.content.Context
     public boolean bindService(Intent service, ServiceConnection conn, int flags) {
-        throw new ReceiverCallNotAllowedException("BroadcastReceiver components are not allowed to bind to services");
+        throw new ReceiverCallNotAllowedException(
+                "BroadcastReceiver components are not allowed to bind to services");
     }
 
     @Override // android.content.ContextWrapper, android.content.Context
-    public boolean bindService(Intent service, int flags, Executor executor, ServiceConnection conn) {
-        throw new ReceiverCallNotAllowedException("BroadcastReceiver components are not allowed to bind to services");
+    public boolean bindService(
+            Intent service, int flags, Executor executor, ServiceConnection conn) {
+        throw new ReceiverCallNotAllowedException(
+                "BroadcastReceiver components are not allowed to bind to services");
     }
 
     @Override // android.content.ContextWrapper, android.content.Context
-    public boolean bindIsolatedService(Intent service, int flags, String instanceName, Executor executor, ServiceConnection conn) {
-        throw new ReceiverCallNotAllowedException("BroadcastReceiver components are not allowed to bind to services");
+    public boolean bindIsolatedService(
+            Intent service,
+            int flags,
+            String instanceName,
+            Executor executor,
+            ServiceConnection conn) {
+        throw new ReceiverCallNotAllowedException(
+                "BroadcastReceiver components are not allowed to bind to services");
     }
 }

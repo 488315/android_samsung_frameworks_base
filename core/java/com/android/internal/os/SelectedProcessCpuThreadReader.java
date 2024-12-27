@@ -1,7 +1,6 @@
 package com.android.internal.os;
 
 import android.os.Process;
-import com.android.internal.os.KernelSingleProcessCpuThreadReader;
 
 /* loaded from: classes5.dex */
 public final class SelectedProcessCpuThreadReader {
@@ -10,7 +9,7 @@ public final class SelectedProcessCpuThreadReader {
     private int mPid;
 
     public SelectedProcessCpuThreadReader(String cmdline) {
-        this.mCmdline = new String[]{cmdline};
+        this.mCmdline = new String[] {cmdline};
     }
 
     public KernelSingleProcessCpuThreadReader.ProcessCpuUsage readAbsolute() {

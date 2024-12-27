@@ -14,8 +14,7 @@ public interface IControlsActionCallback extends IInterface {
 
     public static class Default implements IControlsActionCallback {
         @Override // android.service.controls.IControlsActionCallback
-        public void accept(IBinder token, String controlId, int response) throws RemoteException {
-        }
+        public void accept(IBinder token, String controlId, int response) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IControlsActionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IControlsActionCallback {
+    public abstract static class Stub extends Binder implements IControlsActionCallback {
         static final int TRANSACTION_accept = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IControlsActionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IControlsActionCallback.DESCRIPTOR);
             }
@@ -99,7 +99,8 @@ public interface IControlsActionCallback extends IInterface {
             }
 
             @Override // android.service.controls.IControlsActionCallback
-            public void accept(IBinder token, String controlId, int response) throws RemoteException {
+            public void accept(IBinder token, String controlId, int response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IControlsActionCallback.DESCRIPTOR);

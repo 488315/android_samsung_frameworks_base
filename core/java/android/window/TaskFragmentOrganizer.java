@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.view.RemoteAnimationDefinition;
-import android.window.ITaskFragmentOrganizer;
-import android.window.TaskFragmentOrganizer;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -22,13 +21,14 @@ public class TaskFragmentOrganizer extends WindowOrganizer {
     public static final int TASK_FRAGMENT_TRANSIT_OPEN = 1;
     private final Executor mExecutor;
     private final ITaskFragmentOrganizer mInterface = new AnonymousClass1();
-    private final TaskFragmentOrganizerToken mToken = new TaskFragmentOrganizerToken(this.mInterface);
+    private final TaskFragmentOrganizerToken mToken =
+            new TaskFragmentOrganizerToken(this.mInterface);
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TaskFragmentTransitionType {
-    }
+    public @interface TaskFragmentTransitionType {}
 
-    public static Bundle putErrorInfoInBundle(Throwable exception, TaskFragmentInfo info, int opType) {
+    public static Bundle putErrorInfoInBundle(
+            Throwable exception, TaskFragmentInfo info, int opType) {
         Bundle errorBundle = new Bundle();
         errorBundle.putSerializable(KEY_ERROR_CALLBACK_THROWABLE, exception);
         if (info != null) {
@@ -86,10 +86,16 @@ public class TaskFragmentOrganizer extends WindowOrganizer {
         }
     }
 
-    public void onTransactionHandled(IBinder transactionToken, WindowContainerTransaction wct, int transitionType, boolean shouldApplyIndependently) {
+    public void onTransactionHandled(
+            IBinder transactionToken,
+            WindowContainerTransaction wct,
+            int transitionType,
+            boolean shouldApplyIndependently) {
         wct.setTaskFragmentOrganizer(this.mInterface);
         try {
-            getController().onTransactionHandled(transactionToken, wct, transitionType, shouldApplyIndependently);
+            getController()
+                    .onTransactionHandled(
+                            transactionToken, wct, transitionType, shouldApplyIndependently);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -100,7 +106,8 @@ public class TaskFragmentOrganizer extends WindowOrganizer {
         throw new RuntimeException("Not allowed!");
     }
 
-    public void applyTransaction(WindowContainerTransaction wct, int transitionType, boolean shouldApplyIndependently) {
+    public void applyTransaction(
+            WindowContainerTransaction wct, int transitionType, boolean shouldApplyIndependently) {
         if (wct.isEmpty()) {
             return;
         }
@@ -112,40 +119,47 @@ public class TaskFragmentOrganizer extends WindowOrganizer {
         }
     }
 
-    public void applySystemTransaction(WindowContainerTransaction wct, int transitionType, RemoteTransition remoteTransition) {
+    public void applySystemTransaction(
+            WindowContainerTransaction wct, int transitionType, RemoteTransition remoteTransition) {
         if (wct.isEmpty()) {
             return;
         }
         wct.setTaskFragmentOrganizer(this.mInterface);
         try {
-            getController().applyTransaction(wct, transitionType, remoteTransition != null, remoteTransition);
+            getController()
+                    .applyTransaction(
+                            wct, transitionType, remoteTransition != null, remoteTransition);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     public void onTransactionReady(TaskFragmentTransaction transaction) {
-        onTransactionHandled(transaction.getTransactionToken(), new WindowContainerTransaction(), 0, false);
+        onTransactionHandled(
+                transaction.getTransactionToken(), new WindowContainerTransaction(), 0, false);
     }
 
     /* renamed from: android.window.TaskFragmentOrganizer$1, reason: invalid class name */
     class AnonymousClass1 extends ITaskFragmentOrganizer.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onTransactionReady$0(TaskFragmentTransaction transaction) {
+        public /* synthetic */ void lambda$onTransactionReady$0(
+                TaskFragmentTransaction transaction) {
             TaskFragmentOrganizer.this.onTransactionReady(transaction);
         }
 
         @Override // android.window.ITaskFragmentOrganizer
         public void onTransactionReady(final TaskFragmentTransaction transaction) {
-            TaskFragmentOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.TaskFragmentOrganizer$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    TaskFragmentOrganizer.AnonymousClass1.this.lambda$onTransactionReady$0(transaction);
-                }
-            });
+            TaskFragmentOrganizer.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.window.TaskFragmentOrganizer$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            TaskFragmentOrganizer.AnonymousClass1.this.lambda$onTransactionReady$0(
+                                    transaction);
+                        }
+                    });
         }
     }
 

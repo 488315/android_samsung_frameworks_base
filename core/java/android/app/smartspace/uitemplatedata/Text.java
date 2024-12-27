@@ -5,24 +5,27 @@ import android.app.smartspace.SmartspaceUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class Text implements Parcelable {
-    public static final Parcelable.Creator<Text> CREATOR = new Parcelable.Creator<Text>() { // from class: android.app.smartspace.uitemplatedata.Text.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Text createFromParcel(Parcel in) {
-            return new Text(in);
-        }
+    public static final Parcelable.Creator<Text> CREATOR =
+            new Parcelable.Creator<
+                    Text>() { // from class: android.app.smartspace.uitemplatedata.Text.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Text createFromParcel(Parcel in) {
+                    return new Text(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Text[] newArray(int size) {
-            return new Text[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Text[] newArray(int size) {
+                    return new Text[size];
+                }
+            };
     private final int mMaxLines;
     private final CharSequence mText;
     private final TextUtils.TruncateAt mTruncateAtType;
@@ -64,7 +67,9 @@ public final class Text implements Parcelable {
             return false;
         }
         Text that = (Text) o;
-        return this.mTruncateAtType == that.mTruncateAtType && SmartspaceUtils.isEqual(this.mText, that.mText) && this.mMaxLines == that.mMaxLines;
+        return this.mTruncateAtType == that.mTruncateAtType
+                && SmartspaceUtils.isEqual(this.mText, that.mText)
+                && this.mMaxLines == that.mMaxLines;
     }
 
     public int hashCode() {
@@ -79,7 +84,13 @@ public final class Text implements Parcelable {
     }
 
     public String toString() {
-        return "Text{mText=" + ((Object) this.mText) + ", mTruncateAtType=" + this.mTruncateAtType + ", mMaxLines=" + this.mMaxLines + '}';
+        return "Text{mText="
+                + ((Object) this.mText)
+                + ", mTruncateAtType="
+                + this.mTruncateAtType
+                + ", mMaxLines="
+                + this.mMaxLines
+                + '}';
     }
 
     @SystemApi

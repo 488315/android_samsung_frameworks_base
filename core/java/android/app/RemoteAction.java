@@ -4,24 +4,26 @@ import android.graphics.drawable.Icon;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class RemoteAction implements Parcelable {
-    public static final Parcelable.Creator<RemoteAction> CREATOR = new Parcelable.Creator<RemoteAction>() { // from class: android.app.RemoteAction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteAction createFromParcel(Parcel in) {
-            return new RemoteAction(in);
-        }
+    public static final Parcelable.Creator<RemoteAction> CREATOR =
+            new Parcelable.Creator<RemoteAction>() { // from class: android.app.RemoteAction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteAction createFromParcel(Parcel in) {
+                    return new RemoteAction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteAction[] newArray(int size) {
-            return new RemoteAction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteAction[] newArray(int size) {
+                    return new RemoteAction[size];
+                }
+            };
     private static final String TAG = "RemoteAction";
     private final PendingIntent mActionIntent;
     private final CharSequence mContentDescription;
@@ -39,9 +41,11 @@ public final class RemoteAction implements Parcelable {
         this.mShouldShowIcon = in.readBoolean();
     }
 
-    public RemoteAction(Icon icon, CharSequence title, CharSequence contentDescription, PendingIntent intent) {
+    public RemoteAction(
+            Icon icon, CharSequence title, CharSequence contentDescription, PendingIntent intent) {
         if (icon == null || title == null || contentDescription == null || intent == null) {
-            throw new IllegalArgumentException("Expected icon, title, content description and action callback");
+            throw new IllegalArgumentException(
+                    "Expected icon, title, content description and action callback");
         }
         this.mIcon = icon;
         this.mTitle = title;
@@ -85,7 +89,9 @@ public final class RemoteAction implements Parcelable {
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
     public RemoteAction m523clone() {
-        RemoteAction action = new RemoteAction(this.mIcon, this.mTitle, this.mContentDescription, this.mActionIntent);
+        RemoteAction action =
+                new RemoteAction(
+                        this.mIcon, this.mTitle, this.mContentDescription, this.mActionIntent);
         action.setEnabled(this.mEnabled);
         action.setShouldShowIcon(this.mShouldShowIcon);
         return action;
@@ -99,11 +105,22 @@ public final class RemoteAction implements Parcelable {
             return false;
         }
         RemoteAction that = (RemoteAction) o;
-        return this.mEnabled == that.mEnabled && this.mShouldShowIcon == that.mShouldShowIcon && this.mIcon.equals(that.mIcon) && this.mTitle.equals(that.mTitle) && this.mContentDescription.equals(that.mContentDescription) && this.mActionIntent.equals(that.mActionIntent);
+        return this.mEnabled == that.mEnabled
+                && this.mShouldShowIcon == that.mShouldShowIcon
+                && this.mIcon.equals(that.mIcon)
+                && this.mTitle.equals(that.mTitle)
+                && this.mContentDescription.equals(that.mContentDescription)
+                && this.mActionIntent.equals(that.mActionIntent);
     }
 
     public int hashCode() {
-        return Objects.hash(this.mIcon, this.mTitle, this.mContentDescription, this.mActionIntent, Boolean.valueOf(this.mEnabled), Boolean.valueOf(this.mShouldShowIcon));
+        return Objects.hash(
+                this.mIcon,
+                this.mTitle,
+                this.mContentDescription,
+                this.mActionIntent,
+                Boolean.valueOf(this.mEnabled),
+                Boolean.valueOf(this.mShouldShowIcon));
     }
 
     @Override // android.os.Parcelable

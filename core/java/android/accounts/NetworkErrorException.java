@@ -2,8 +2,7 @@ package android.accounts;
 
 /* loaded from: classes.dex */
 public class NetworkErrorException extends AccountsException {
-    public NetworkErrorException() {
-    }
+    public NetworkErrorException() {}
 
     public NetworkErrorException(String message) {
         super(message);

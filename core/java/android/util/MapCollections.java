@@ -32,8 +32,7 @@ abstract class MapCollections<K, V> {
 
     protected abstract V colSetValue(int i, V v);
 
-    MapCollections() {
-    }
+    MapCollections() {}
 
     final class ArrayIterator<T> implements Iterator<T> {
         boolean mCanRemove = false;
@@ -112,7 +111,8 @@ abstract class MapCollections<K, V> {
         @Override // java.util.Map.Entry
         public K getKey() {
             if (!this.mEntryValid) {
-                throw new IllegalStateException("This container does not support retaining Map.Entry objects");
+                throw new IllegalStateException(
+                        "This container does not support retaining Map.Entry objects");
             }
             return (K) MapCollections.this.colGetEntry(this.mIndex, 0);
         }
@@ -120,7 +120,8 @@ abstract class MapCollections<K, V> {
         @Override // java.util.Map.Entry
         public V getValue() {
             if (!this.mEntryValid) {
-                throw new IllegalStateException("This container does not support retaining Map.Entry objects");
+                throw new IllegalStateException(
+                        "This container does not support retaining Map.Entry objects");
             }
             return (V) MapCollections.this.colGetEntry(this.mIndex, 1);
         }
@@ -128,7 +129,8 @@ abstract class MapCollections<K, V> {
         @Override // java.util.Map.Entry
         public V setValue(V v) {
             if (!this.mEntryValid) {
-                throw new IllegalStateException("This container does not support retaining Map.Entry objects");
+                throw new IllegalStateException(
+                        "This container does not support retaining Map.Entry objects");
             }
             return (V) MapCollections.this.colSetValue(this.mIndex, v);
         }
@@ -136,19 +138,23 @@ abstract class MapCollections<K, V> {
         @Override // java.util.Map.Entry
         public final boolean equals(Object o) {
             if (!this.mEntryValid) {
-                throw new IllegalStateException("This container does not support retaining Map.Entry objects");
+                throw new IllegalStateException(
+                        "This container does not support retaining Map.Entry objects");
             }
             if (!(o instanceof Map.Entry)) {
                 return false;
             }
             Map.Entry<?, ?> e = (Map.Entry) o;
-            return Objects.equals(e.getKey(), MapCollections.this.colGetEntry(this.mIndex, 0)) && Objects.equals(e.getValue(), MapCollections.this.colGetEntry(this.mIndex, 1));
+            return Objects.equals(e.getKey(), MapCollections.this.colGetEntry(this.mIndex, 0))
+                    && Objects.equals(
+                            e.getValue(), MapCollections.this.colGetEntry(this.mIndex, 1));
         }
 
         @Override // java.util.Map.Entry
         public final int hashCode() {
             if (!this.mEntryValid) {
-                throw new IllegalStateException("This container does not support retaining Map.Entry objects");
+                throw new IllegalStateException(
+                        "This container does not support retaining Map.Entry objects");
             }
             Object key = MapCollections.this.colGetEntry(this.mIndex, 0);
             Object value = MapCollections.this.colGetEntry(this.mIndex, 1);
@@ -161,8 +167,7 @@ abstract class MapCollections<K, V> {
     }
 
     final class EntrySet implements Set<Map.Entry<K, V>> {
-        EntrySet() {
-        }
+        EntrySet() {}
 
         @Override // java.util.Set, java.util.Collection
         public boolean add(Map.Entry<K, V> object) {
@@ -271,8 +276,7 @@ abstract class MapCollections<K, V> {
     }
 
     final class KeySet implements Set<K> {
-        KeySet() {
-        }
+        KeySet() {}
 
         @Override // java.util.Set, java.util.Collection
         public boolean add(K object) {
@@ -365,8 +369,7 @@ abstract class MapCollections<K, V> {
     }
 
     final class ValuesCollection implements Collection<V> {
-        ValuesCollection() {
-        }
+        ValuesCollection() {}
 
         @Override // java.util.Collection
         public boolean add(V object) {

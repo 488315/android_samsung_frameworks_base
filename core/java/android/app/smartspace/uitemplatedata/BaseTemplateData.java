@@ -5,24 +5,27 @@ import android.app.smartspace.SmartspaceUtils;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public class BaseTemplateData implements Parcelable {
-    public static final Parcelable.Creator<BaseTemplateData> CREATOR = new Parcelable.Creator<BaseTemplateData>() { // from class: android.app.smartspace.uitemplatedata.BaseTemplateData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BaseTemplateData createFromParcel(Parcel in) {
-            return new BaseTemplateData(in);
-        }
+    public static final Parcelable.Creator<BaseTemplateData> CREATOR =
+            new Parcelable.Creator<BaseTemplateData>() { // from class:
+                // android.app.smartspace.uitemplatedata.BaseTemplateData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BaseTemplateData createFromParcel(Parcel in) {
+                    return new BaseTemplateData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BaseTemplateData[] newArray(int size) {
-            return new BaseTemplateData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BaseTemplateData[] newArray(int size) {
+                    return new BaseTemplateData[size];
+                }
+            };
     private final int mLayoutWeight;
     private final SubItemInfo mPrimaryItem;
     private final SubItemInfo mSubtitleItem;
@@ -41,7 +44,14 @@ public class BaseTemplateData implements Parcelable {
         this.mLayoutWeight = in.readInt();
     }
 
-    BaseTemplateData(int templateType, SubItemInfo primaryItem, SubItemInfo subtitleItem, SubItemInfo subtitleSupplementalItem, SubItemInfo supplementalLineItem, SubItemInfo supplementalAlarmItem, int layoutWeight) {
+    BaseTemplateData(
+            int templateType,
+            SubItemInfo primaryItem,
+            SubItemInfo subtitleItem,
+            SubItemInfo subtitleSupplementalItem,
+            SubItemInfo supplementalLineItem,
+            SubItemInfo supplementalAlarmItem,
+            int layoutWeight) {
         this.mTemplateType = templateType;
         this.mPrimaryItem = primaryItem;
         this.mSubtitleItem = subtitleItem;
@@ -103,15 +113,42 @@ public class BaseTemplateData implements Parcelable {
             return false;
         }
         BaseTemplateData that = (BaseTemplateData) o;
-        return this.mTemplateType == that.mTemplateType && this.mLayoutWeight == that.mLayoutWeight && Objects.equals(this.mPrimaryItem, that.mPrimaryItem) && Objects.equals(this.mSubtitleItem, that.mSubtitleItem) && Objects.equals(this.mSubtitleSupplementalItem, that.mSubtitleSupplementalItem) && Objects.equals(this.mSupplementalLineItem, that.mSupplementalLineItem) && Objects.equals(this.mSupplementalAlarmItem, that.mSupplementalAlarmItem);
+        return this.mTemplateType == that.mTemplateType
+                && this.mLayoutWeight == that.mLayoutWeight
+                && Objects.equals(this.mPrimaryItem, that.mPrimaryItem)
+                && Objects.equals(this.mSubtitleItem, that.mSubtitleItem)
+                && Objects.equals(this.mSubtitleSupplementalItem, that.mSubtitleSupplementalItem)
+                && Objects.equals(this.mSupplementalLineItem, that.mSupplementalLineItem)
+                && Objects.equals(this.mSupplementalAlarmItem, that.mSupplementalAlarmItem);
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mTemplateType), this.mPrimaryItem, this.mSubtitleItem, this.mSubtitleSupplementalItem, this.mSupplementalLineItem, this.mSupplementalAlarmItem, Integer.valueOf(this.mLayoutWeight));
+        return Objects.hash(
+                Integer.valueOf(this.mTemplateType),
+                this.mPrimaryItem,
+                this.mSubtitleItem,
+                this.mSubtitleSupplementalItem,
+                this.mSupplementalLineItem,
+                this.mSupplementalAlarmItem,
+                Integer.valueOf(this.mLayoutWeight));
     }
 
     public String toString() {
-        return "BaseTemplateData{mTemplateType=" + this.mTemplateType + ", mPrimaryItem=" + this.mPrimaryItem + ", mSubtitleItem=" + this.mSubtitleItem + ", mSubtitleSupplementalItem=" + this.mSubtitleSupplementalItem + ", mSupplementalLineItem=" + this.mSupplementalLineItem + ", mSupplementalAlarmItem=" + this.mSupplementalAlarmItem + ", mLayoutWeight=" + this.mLayoutWeight + '}';
+        return "BaseTemplateData{mTemplateType="
+                + this.mTemplateType
+                + ", mPrimaryItem="
+                + this.mPrimaryItem
+                + ", mSubtitleItem="
+                + this.mSubtitleItem
+                + ", mSubtitleSupplementalItem="
+                + this.mSubtitleSupplementalItem
+                + ", mSupplementalLineItem="
+                + this.mSupplementalLineItem
+                + ", mSupplementalAlarmItem="
+                + this.mSupplementalAlarmItem
+                + ", mLayoutWeight="
+                + this.mLayoutWeight
+                + '}';
     }
 
     @SystemApi
@@ -187,24 +224,33 @@ public class BaseTemplateData implements Parcelable {
         }
 
         public BaseTemplateData build() {
-            return new BaseTemplateData(this.mTemplateType, this.mPrimaryItem, this.mSubtitleItem, this.mSubtitleSupplementalItem, this.mSupplementalLineItem, this.mSupplementalAlarmItem, this.mLayoutWeight);
+            return new BaseTemplateData(
+                    this.mTemplateType,
+                    this.mPrimaryItem,
+                    this.mSubtitleItem,
+                    this.mSubtitleSupplementalItem,
+                    this.mSupplementalLineItem,
+                    this.mSupplementalAlarmItem,
+                    this.mLayoutWeight);
         }
     }
 
     public static final class SubItemInfo implements Parcelable {
-        public static final Parcelable.Creator<SubItemInfo> CREATOR = new Parcelable.Creator<SubItemInfo>() { // from class: android.app.smartspace.uitemplatedata.BaseTemplateData.SubItemInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SubItemInfo createFromParcel(Parcel in) {
-                return new SubItemInfo(in);
-            }
+        public static final Parcelable.Creator<SubItemInfo> CREATOR =
+                new Parcelable.Creator<SubItemInfo>() { // from class:
+                    // android.app.smartspace.uitemplatedata.BaseTemplateData.SubItemInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SubItemInfo createFromParcel(Parcel in) {
+                        return new SubItemInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SubItemInfo[] newArray(int size) {
-                return new SubItemInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SubItemInfo[] newArray(int size) {
+                        return new SubItemInfo[size];
+                    }
+                };
         private final Icon mIcon;
         private final SubItemLoggingInfo mLoggingInfo;
         private final TapAction mTapAction;
@@ -217,7 +263,8 @@ public class BaseTemplateData implements Parcelable {
             this.mLoggingInfo = (SubItemLoggingInfo) in.readTypedObject(SubItemLoggingInfo.CREATOR);
         }
 
-        private SubItemInfo(Text text, Icon icon, TapAction tapAction, SubItemLoggingInfo loggingInfo) {
+        private SubItemInfo(
+                Text text, Icon icon, TapAction tapAction, SubItemLoggingInfo loggingInfo) {
             this.mText = text;
             this.mIcon = icon;
             this.mTapAction = tapAction;
@@ -261,7 +308,10 @@ public class BaseTemplateData implements Parcelable {
                 return false;
             }
             SubItemInfo that = (SubItemInfo) o;
-            return SmartspaceUtils.isEqual(this.mText, that.mText) && Objects.equals(this.mIcon, that.mIcon) && Objects.equals(this.mTapAction, that.mTapAction) && Objects.equals(this.mLoggingInfo, that.mLoggingInfo);
+            return SmartspaceUtils.isEqual(this.mText, that.mText)
+                    && Objects.equals(this.mIcon, that.mIcon)
+                    && Objects.equals(this.mTapAction, that.mTapAction)
+                    && Objects.equals(this.mLoggingInfo, that.mLoggingInfo);
         }
 
         public int hashCode() {
@@ -269,7 +319,15 @@ public class BaseTemplateData implements Parcelable {
         }
 
         public String toString() {
-            return "SubItemInfo{mText=" + this.mText + ", mIcon=" + this.mIcon + ", mTapAction=" + this.mTapAction + ", mLoggingInfo=" + this.mLoggingInfo + '}';
+            return "SubItemInfo{mText="
+                    + this.mText
+                    + ", mIcon="
+                    + this.mIcon
+                    + ", mTapAction="
+                    + this.mTapAction
+                    + ", mLoggingInfo="
+                    + this.mLoggingInfo
+                    + '}';
         }
 
         @SystemApi
@@ -300,7 +358,10 @@ public class BaseTemplateData implements Parcelable {
             }
 
             public SubItemInfo build() {
-                if (SmartspaceUtils.isEmpty(this.mText) && this.mIcon == null && this.mTapAction == null && this.mLoggingInfo == null) {
+                if (SmartspaceUtils.isEmpty(this.mText)
+                        && this.mIcon == null
+                        && this.mTapAction == null
+                        && this.mLoggingInfo == null) {
                     throw new IllegalStateException("SubItem data is empty");
                 }
                 return new SubItemInfo(this.mText, this.mIcon, this.mTapAction, this.mLoggingInfo);
@@ -309,19 +370,21 @@ public class BaseTemplateData implements Parcelable {
     }
 
     public static final class SubItemLoggingInfo implements Parcelable {
-        public static final Parcelable.Creator<SubItemLoggingInfo> CREATOR = new Parcelable.Creator<SubItemLoggingInfo>() { // from class: android.app.smartspace.uitemplatedata.BaseTemplateData.SubItemLoggingInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SubItemLoggingInfo createFromParcel(Parcel in) {
-                return new SubItemLoggingInfo(in);
-            }
+        public static final Parcelable.Creator<SubItemLoggingInfo> CREATOR =
+                new Parcelable.Creator<SubItemLoggingInfo>() { // from class:
+                    // android.app.smartspace.uitemplatedata.BaseTemplateData.SubItemLoggingInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SubItemLoggingInfo createFromParcel(Parcel in) {
+                        return new SubItemLoggingInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SubItemLoggingInfo[] newArray(int size) {
-                return new SubItemLoggingInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SubItemLoggingInfo[] newArray(int size) {
+                        return new SubItemLoggingInfo[size];
+                    }
+                };
         private final int mFeatureType;
         private final int mInstanceId;
         private final CharSequence mPackageName;
@@ -370,15 +433,26 @@ public class BaseTemplateData implements Parcelable {
                 return false;
             }
             SubItemLoggingInfo that = (SubItemLoggingInfo) o;
-            return this.mInstanceId == that.mInstanceId && this.mFeatureType == that.mFeatureType && SmartspaceUtils.isEqual(this.mPackageName, that.mPackageName);
+            return this.mInstanceId == that.mInstanceId
+                    && this.mFeatureType == that.mFeatureType
+                    && SmartspaceUtils.isEqual(this.mPackageName, that.mPackageName);
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mInstanceId), Integer.valueOf(this.mFeatureType), this.mPackageName);
+            return Objects.hash(
+                    Integer.valueOf(this.mInstanceId),
+                    Integer.valueOf(this.mFeatureType),
+                    this.mPackageName);
         }
 
         public String toString() {
-            return "SubItemLoggingInfo{mInstanceId=" + this.mInstanceId + ", mFeatureType=" + this.mFeatureType + ", mPackageName=" + ((Object) this.mPackageName) + '}';
+            return "SubItemLoggingInfo{mInstanceId="
+                    + this.mInstanceId
+                    + ", mFeatureType="
+                    + this.mFeatureType
+                    + ", mPackageName="
+                    + ((Object) this.mPackageName)
+                    + '}';
         }
 
         @SystemApi
@@ -398,7 +472,8 @@ public class BaseTemplateData implements Parcelable {
             }
 
             public SubItemLoggingInfo build() {
-                return new SubItemLoggingInfo(this.mInstanceId, this.mFeatureType, this.mPackageName);
+                return new SubItemLoggingInfo(
+                        this.mInstanceId, this.mFeatureType, this.mPackageName);
             }
         }
     }

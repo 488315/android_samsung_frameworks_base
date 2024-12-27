@@ -10,9 +10,12 @@ import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.util.NtpTrustedTime;
 import android.view.accessibility.CaptioningManager;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -71,7 +74,10 @@ class Cea608CCParser {
             if (DEBUG) {
                 Log.d(TAG, ccData[i].toString());
             }
-            if (!handleCtrlCode(ccData[i]) && !handleTabOffsets(ccData[i]) && !handlePACCode(ccData[i]) && !handleMidRowCode(ccData[i])) {
+            if (!handleCtrlCode(ccData[i])
+                    && !handleTabOffsets(ccData[i])
+                    && !handlePACCode(ccData[i])
+                    && !handleMidRowCode(ccData[i])) {
                 handleDisplayableChars(ccData[i]);
             }
         }
@@ -233,7 +239,9 @@ class Cea608CCParser {
         static final int COLOR_YELLOW = 5;
         static final int STYLE_ITALICS = 1;
         static final int STYLE_UNDERLINE = 2;
-        static final String[] mColorMap = {"WHITE", "GREEN", "BLUE", "CYAN", "RED", "YELLOW", "MAGENTA", "INVALID"};
+        static final String[] mColorMap = {
+            "WHITE", "GREEN", "BLUE", "CYAN", "RED", "YELLOW", "MAGENTA", "INVALID"
+        };
         final int mColor;
         final int mStyle;
 
@@ -327,12 +335,15 @@ class Cea608CCParser {
 
         @Override // android.media.Cea608CCParser.StyleCode
         public String toString() {
-            return String.format("{%d, %d}, %s", Integer.valueOf(this.mRow), Integer.valueOf(this.mCol), super.toString());
+            return String.format(
+                    "{%d, %d}, %s",
+                    Integer.valueOf(this.mRow), Integer.valueOf(this.mCol), super.toString());
         }
     }
 
     /* compiled from: ClosedCaptionRenderer.java */
-    public static class MutableBackgroundColorSpan extends CharacterStyle implements UpdateAppearance {
+    public static class MutableBackgroundColorSpan extends CharacterStyle
+            implements UpdateAppearance {
         private int mColor;
 
         public MutableBackgroundColorSpan(int color) {
@@ -421,8 +432,13 @@ class Cea608CCParser {
                     }
                 } else if (start >= 0) {
                     int expandedStart = this.mDisplayChars.charAt(start) == ' ' ? start : start - 1;
-                    int expandedEnd = this.mDisplayChars.charAt(next + (-1)) == ' ' ? next : next + 1;
-                    styledText.setSpan(new MutableBackgroundColorSpan(captionStyle.backgroundColor), expandedStart, expandedEnd, 33);
+                    int expandedEnd =
+                            this.mDisplayChars.charAt(next + (-1)) == ' ' ? next : next + 1;
+                    styledText.setSpan(
+                            new MutableBackgroundColorSpan(captionStyle.backgroundColor),
+                            expandedStart,
+                            expandedEnd,
+                            33);
                     if (styleStart >= 0) {
                         applyStyleSpan(styledText, curStyle, styleStart, expandedEnd);
                     }
@@ -527,7 +543,8 @@ class Cea608CCParser {
         SpannableStringBuilder[] getStyledText(CaptioningManager.CaptionStyle captionStyle) {
             ArrayList<SpannableStringBuilder> rows = new ArrayList<>(15);
             for (int i = 1; i <= 15; i++) {
-                rows.add(this.mLines[i] != null ? this.mLines[i].getStyledText(captionStyle) : null);
+                rows.add(
+                        this.mLines[i] != null ? this.mLines[i].getStyledText(captionStyle) : null);
             }
             return (SpannableStringBuilder[]) rows.toArray(new SpannableStringBuilder[15]);
         }
@@ -591,10 +608,65 @@ class Cea608CCParser {
         private final byte mData1;
         private final byte mData2;
         private final byte mType;
-        private static final String[] mCtrlCodeMap = {"RCL", "BS", "AOF", "AON", ASN1Encoding.DER, "RU2", "RU3", "RU4", "FON", "RDC", "TR", "RTD", "EDM", "CR", "ENM", "EOC"};
-        private static final String[] mSpecialCharMap = {"®", "°", "½", "¿", "™", "¢", "£", "♪", "à", " ", "è", "â", "ê", "î", "ô", "û"};
-        private static final String[] mSpanishCharMap = {"Á", "É", "Ó", "Ú", "Ü", "ü", "‘", "¡", "*", "'", "—", "©", "℠", "•", "“", "”", "À", "Â", "Ç", "È", "Ê", "Ë", "ë", "Î", "Ï", "ï", "Ô", "Ù", "ù", "Û", "«", "»"};
-        private static final String[] mProtugueseCharMap = {"Ã", "ã", "Í", "Ì", "ì", "Ò", "ò", "Õ", "õ", "{", "}", "\\", "^", Session.SESSION_SEPARATION_CHAR_CHILD, NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER, "~", "Ä", "ä", "Ö", "ö", "ß", "¥", "¤", "│", "Å", "å", "Ø", "ø", "┌", "┐", "└", "┘"};
+        private static final String[] mCtrlCodeMap = {
+            "RCL",
+            "BS",
+            "AOF",
+            "AON",
+            ASN1Encoding.DER,
+            "RU2",
+            "RU3",
+            "RU4",
+            "FON",
+            "RDC",
+            "TR",
+            "RTD",
+            "EDM",
+            "CR",
+            "ENM",
+            "EOC"
+        };
+        private static final String[] mSpecialCharMap = {
+            "®", "°", "½", "¿", "™", "¢", "£", "♪", "à", " ", "è", "â", "ê", "î", "ô", "û"
+        };
+        private static final String[] mSpanishCharMap = {
+            "Á", "É", "Ó", "Ú", "Ü", "ü", "‘", "¡", "*", "'", "—", "©", "℠", "•", "“", "”", "À",
+            "Â", "Ç", "È", "Ê", "Ë", "ë", "Î", "Ï", "ï", "Ô", "Ù", "ù", "Û", "«", "»"
+        };
+        private static final String[] mProtugueseCharMap = {
+            "Ã",
+            "ã",
+            "Í",
+            "Ì",
+            "ì",
+            "Ò",
+            "ò",
+            "Õ",
+            "õ",
+            "{",
+            "}",
+            "\\",
+            "^",
+            Session.SESSION_SEPARATION_CHAR_CHILD,
+            NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER,
+            "~",
+            "Ä",
+            "ä",
+            "Ö",
+            "ö",
+            "ß",
+            "¥",
+            "¤",
+            "│",
+            "Å",
+            "å",
+            "Ø",
+            "ø",
+            "┌",
+            "┐",
+            "└",
+            "┘"
+        };
 
         static CCData[] fromByteArray(byte[] data) {
             CCData[] ccData = new CCData[data.length / 3];
@@ -611,14 +683,18 @@ class Cea608CCParser {
         }
 
         int getCtrlCode() {
-            if ((this.mData1 == 20 || this.mData1 == 28) && this.mData2 >= 32 && this.mData2 <= 47) {
+            if ((this.mData1 == 20 || this.mData1 == 28)
+                    && this.mData2 >= 32
+                    && this.mData2 <= 47) {
                 return this.mData2;
             }
             return -1;
         }
 
         StyleCode getMidRow() {
-            if ((this.mData1 == 17 || this.mData1 == 25) && this.mData2 >= 32 && this.mData2 <= 47) {
+            if ((this.mData1 == 17 || this.mData1 == 25)
+                    && this.mData2 >= 32
+                    && this.mData2 <= 47) {
                 return StyleCode.fromByte(this.mData2);
             }
             return null;
@@ -635,7 +711,9 @@ class Cea608CCParser {
         }
 
         int getTabOffset() {
-            if ((this.mData1 == 23 || this.mData1 == 31) && this.mData2 >= 33 && this.mData2 <= 35) {
+            if ((this.mData1 == 23 || this.mData1 == 31)
+                    && this.mData2 >= 33
+                    && this.mData2 <= 35) {
                 return this.mData2 & 3;
             }
             return 0;
@@ -666,12 +744,19 @@ class Cea608CCParser {
         }
 
         private boolean isSpecialChar() {
-            return (this.mData1 == 17 || this.mData1 == 25) && this.mData2 >= 48 && this.mData2 <= 63;
+            return (this.mData1 == 17 || this.mData1 == 25)
+                    && this.mData2 >= 48
+                    && this.mData2 <= 63;
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public boolean isExtendedChar() {
-            return (this.mData1 == 18 || this.mData1 == 26 || this.mData1 == 19 || this.mData1 == 27) && this.mData2 >= 32 && this.mData2 <= 63;
+            return (this.mData1 == 18
+                            || this.mData1 == 26
+                            || this.mData1 == 19
+                            || this.mData1 == 27)
+                    && this.mData2 >= 32
+                    && this.mData2 <= 63;
         }
 
         private char getBasicChar(byte data) {
@@ -715,17 +800,23 @@ class Cea608CCParser {
         }
 
         private String getSpecialChar() {
-            if ((this.mData1 == 17 || this.mData1 == 25) && this.mData2 >= 48 && this.mData2 <= 63) {
+            if ((this.mData1 == 17 || this.mData1 == 25)
+                    && this.mData2 >= 48
+                    && this.mData2 <= 63) {
                 return mSpecialCharMap[this.mData2 - SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90];
             }
             return null;
         }
 
         private String getExtendedChar() {
-            if ((this.mData1 == 18 || this.mData1 == 26) && this.mData2 >= 32 && this.mData2 <= 63) {
+            if ((this.mData1 == 18 || this.mData1 == 26)
+                    && this.mData2 >= 32
+                    && this.mData2 <= 63) {
                 return mSpanishCharMap[this.mData2 - 32];
             }
-            if ((this.mData1 == 19 || this.mData1 == 27) && this.mData2 >= 32 && this.mData2 <= 63) {
+            if ((this.mData1 == 19 || this.mData1 == 27)
+                    && this.mData2 >= 32
+                    && this.mData2 <= 63) {
                 return mProtugueseCharMap[this.mData2 - 32];
             }
             return null;
@@ -733,15 +824,21 @@ class Cea608CCParser {
 
         public String toString() {
             if (this.mData1 < 16 && this.mData2 < 16) {
-                return String.format("[%d]Null: %02x %02x", Byte.valueOf(this.mType), Byte.valueOf(this.mData1), Byte.valueOf(this.mData2));
+                return String.format(
+                        "[%d]Null: %02x %02x",
+                        Byte.valueOf(this.mType),
+                        Byte.valueOf(this.mData1),
+                        Byte.valueOf(this.mData2));
             }
             int ctrlCode = getCtrlCode();
             if (ctrlCode != -1) {
-                return String.format("[%d]%s", Byte.valueOf(this.mType), ctrlCodeToString(ctrlCode));
+                return String.format(
+                        "[%d]%s", Byte.valueOf(this.mType), ctrlCodeToString(ctrlCode));
             }
             int tabOffset = getTabOffset();
             if (tabOffset > 0) {
-                return String.format("[%d]Tab%d", Byte.valueOf(this.mType), Integer.valueOf(tabOffset));
+                return String.format(
+                        "[%d]Tab%d", Byte.valueOf(this.mType), Integer.valueOf(tabOffset));
             }
             PAC pac = getPAC();
             if (pac != null) {
@@ -752,9 +849,16 @@ class Cea608CCParser {
                 return String.format("[%d]Mid-row: %s", Byte.valueOf(this.mType), m.toString());
             }
             if (isDisplayableChar()) {
-                return String.format("[%d]Displayable: %s (%02x %02x)", Byte.valueOf(this.mType), getDisplayText(), Byte.valueOf(this.mData1), Byte.valueOf(this.mData2));
+                return String.format(
+                        "[%d]Displayable: %s (%02x %02x)",
+                        Byte.valueOf(this.mType),
+                        getDisplayText(),
+                        Byte.valueOf(this.mData1),
+                        Byte.valueOf(this.mData2));
             }
-            return String.format("[%d]Invalid: %02x %02x", Byte.valueOf(this.mType), Byte.valueOf(this.mData1), Byte.valueOf(this.mData2));
+            return String.format(
+                    "[%d]Invalid: %02x %02x",
+                    Byte.valueOf(this.mType), Byte.valueOf(this.mData1), Byte.valueOf(this.mData2));
         }
     }
 }

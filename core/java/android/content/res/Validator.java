@@ -1,8 +1,9 @@
 package android.content.res;
 
-import java.util.ArrayDeque;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.util.ArrayDeque;
 
 /* loaded from: classes.dex */
 public class Validator {

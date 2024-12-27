@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioOffloadInfo implements Parcelable {
-    public static final Parcelable.Creator<AudioOffloadInfo> CREATOR = new Parcelable.Creator<AudioOffloadInfo>() { // from class: android.media.audio.common.AudioOffloadInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioOffloadInfo createFromParcel(Parcel _aidl_source) {
-            AudioOffloadInfo _aidl_out = new AudioOffloadInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioOffloadInfo> CREATOR =
+            new Parcelable.Creator<AudioOffloadInfo>() { // from class:
+                // android.media.audio.common.AudioOffloadInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioOffloadInfo createFromParcel(Parcel _aidl_source) {
+                    AudioOffloadInfo _aidl_out = new AudioOffloadInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioOffloadInfo[] newArray(int _aidl_size) {
-            return new AudioOffloadInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioOffloadInfo[] newArray(int _aidl_size) {
+                    return new AudioOffloadInfo[_aidl_size];
+                }
+            };
     public AudioConfigBase base;
     public int streamType = -2;
     public int bitRatePerSecond = 0;
@@ -205,14 +208,54 @@ public class AudioOffloadInfo implements Parcelable {
             return false;
         }
         AudioOffloadInfo that = (AudioOffloadInfo) other;
-        if (Objects.deepEquals(this.base, that.base) && Objects.deepEquals(Integer.valueOf(this.streamType), Integer.valueOf(that.streamType)) && Objects.deepEquals(Integer.valueOf(this.bitRatePerSecond), Integer.valueOf(that.bitRatePerSecond)) && Objects.deepEquals(java.lang.Long.valueOf(this.durationUs), java.lang.Long.valueOf(that.durationUs)) && Objects.deepEquals(java.lang.Boolean.valueOf(this.hasVideo), java.lang.Boolean.valueOf(that.hasVideo)) && Objects.deepEquals(java.lang.Boolean.valueOf(this.isStreaming), java.lang.Boolean.valueOf(that.isStreaming)) && Objects.deepEquals(Integer.valueOf(this.bitWidth), Integer.valueOf(that.bitWidth)) && Objects.deepEquals(Integer.valueOf(this.offloadBufferSize), Integer.valueOf(that.offloadBufferSize)) && Objects.deepEquals(Integer.valueOf(this.usage), Integer.valueOf(that.usage)) && Objects.deepEquals(java.lang.Byte.valueOf(this.encapsulationMode), java.lang.Byte.valueOf(that.encapsulationMode)) && Objects.deepEquals(Integer.valueOf(this.contentId), Integer.valueOf(that.contentId)) && Objects.deepEquals(Integer.valueOf(this.syncId), Integer.valueOf(that.syncId))) {
+        if (Objects.deepEquals(this.base, that.base)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.streamType), Integer.valueOf(that.streamType))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.bitRatePerSecond),
+                        Integer.valueOf(that.bitRatePerSecond))
+                && Objects.deepEquals(
+                        java.lang.Long.valueOf(this.durationUs),
+                        java.lang.Long.valueOf(that.durationUs))
+                && Objects.deepEquals(
+                        java.lang.Boolean.valueOf(this.hasVideo),
+                        java.lang.Boolean.valueOf(that.hasVideo))
+                && Objects.deepEquals(
+                        java.lang.Boolean.valueOf(this.isStreaming),
+                        java.lang.Boolean.valueOf(that.isStreaming))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.bitWidth), Integer.valueOf(that.bitWidth))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.offloadBufferSize),
+                        Integer.valueOf(that.offloadBufferSize))
+                && Objects.deepEquals(Integer.valueOf(this.usage), Integer.valueOf(that.usage))
+                && Objects.deepEquals(
+                        java.lang.Byte.valueOf(this.encapsulationMode),
+                        java.lang.Byte.valueOf(that.encapsulationMode))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.contentId), Integer.valueOf(that.contentId))
+                && Objects.deepEquals(Integer.valueOf(this.syncId), Integer.valueOf(that.syncId))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.base, Integer.valueOf(this.streamType), Integer.valueOf(this.bitRatePerSecond), java.lang.Long.valueOf(this.durationUs), java.lang.Boolean.valueOf(this.hasVideo), java.lang.Boolean.valueOf(this.isStreaming), Integer.valueOf(this.bitWidth), Integer.valueOf(this.offloadBufferSize), Integer.valueOf(this.usage), java.lang.Byte.valueOf(this.encapsulationMode), Integer.valueOf(this.contentId), Integer.valueOf(this.syncId)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.base,
+                                Integer.valueOf(this.streamType),
+                                Integer.valueOf(this.bitRatePerSecond),
+                                java.lang.Long.valueOf(this.durationUs),
+                                java.lang.Boolean.valueOf(this.hasVideo),
+                                java.lang.Boolean.valueOf(this.isStreaming),
+                                Integer.valueOf(this.bitWidth),
+                                Integer.valueOf(this.offloadBufferSize),
+                                Integer.valueOf(this.usage),
+                                java.lang.Byte.valueOf(this.encapsulationMode),
+                                Integer.valueOf(this.contentId),
+                                Integer.valueOf(this.syncId))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

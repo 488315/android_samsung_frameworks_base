@@ -1,6 +1,5 @@
 package com.android.server.compat.overrides;
 
-import com.android.server.compat.overrides.ChangeOverrides;
 import java.io.Closeable;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -85,7 +84,8 @@ public final class XmlWriter implements Closeable {
                     if (rawOverrideValue.enabled != null) {
                         xmlWriter.print(" enabled=\"");
                         Boolean bool = rawOverrideValue.enabled;
-                        xmlWriter.print(Boolean.toString(bool == null ? false : bool.booleanValue()));
+                        xmlWriter.print(
+                                Boolean.toString(bool == null ? false : bool.booleanValue()));
                         xmlWriter.print("\"");
                     }
                     xmlWriter.print(">\n");

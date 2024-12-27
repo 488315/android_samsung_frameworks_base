@@ -6,18 +6,21 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.ondeviceintelligence.IProcessingUpdateStatusCallback;
 
 /* loaded from: classes3.dex */
 public interface IRemoteProcessingService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.ondeviceintelligence.IRemoteProcessingService";
+    public static final String DESCRIPTOR =
+            "android.service.ondeviceintelligence.IRemoteProcessingService";
 
-    void updateProcessingState(Bundle bundle, IProcessingUpdateStatusCallback iProcessingUpdateStatusCallback) throws RemoteException;
+    void updateProcessingState(
+            Bundle bundle, IProcessingUpdateStatusCallback iProcessingUpdateStatusCallback)
+            throws RemoteException;
 
     public static class Default implements IRemoteProcessingService {
         @Override // android.service.ondeviceintelligence.IRemoteProcessingService
-        public void updateProcessingState(Bundle processingState, IProcessingUpdateStatusCallback callback) throws RemoteException {
-        }
+        public void updateProcessingState(
+                Bundle processingState, IProcessingUpdateStatusCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +28,7 @@ public interface IRemoteProcessingService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteProcessingService {
+    public abstract static class Stub extends Binder implements IRemoteProcessingService {
         static final int TRANSACTION_updateProcessingState = 1;
 
         public Stub() {
@@ -63,7 +66,8 @@ public interface IRemoteProcessingService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteProcessingService.DESCRIPTOR);
             }
@@ -74,7 +78,9 @@ public interface IRemoteProcessingService extends IInterface {
             switch (code) {
                 case 1:
                     Bundle _arg0 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IProcessingUpdateStatusCallback _arg1 = IProcessingUpdateStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IProcessingUpdateStatusCallback _arg1 =
+                            IProcessingUpdateStatusCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     updateProcessingState(_arg0, _arg1);
                     return true;
@@ -100,7 +106,9 @@ public interface IRemoteProcessingService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IRemoteProcessingService
-            public void updateProcessingState(Bundle processingState, IProcessingUpdateStatusCallback callback) throws RemoteException {
+            public void updateProcessingState(
+                    Bundle processingState, IProcessingUpdateStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteProcessingService.DESCRIPTOR);

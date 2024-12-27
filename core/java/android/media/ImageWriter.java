@@ -7,14 +7,15 @@ import android.graphics.Rect;
 import android.hardware.HardwareBuffer;
 import android.hardware.SyncFence;
 import android.hardware.camera2.utils.SurfaceUtils;
-import android.media.Image;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
 import android.util.Size;
 import android.view.Surface;
+
 import dalvik.system.VMRuntime;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
@@ -46,27 +47,52 @@ public class ImageWriter implements AutoCloseable {
         void onImageReleased(ImageWriter imageWriter);
     }
 
-    private native synchronized void cancelImage(long j, Image image);
+    private synchronized native void cancelImage(long j, Image image);
 
-    private native synchronized int nativeAttachAndQueueGraphicBuffer(long j, GraphicBuffer graphicBuffer, int i, long j2, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+    private synchronized native int nativeAttachAndQueueGraphicBuffer(
+            long j,
+            GraphicBuffer graphicBuffer,
+            int i,
+            long j2,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8);
 
-    private native synchronized int nativeAttachAndQueueImage(long j, long j2, int i, long j3, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+    private synchronized native int nativeAttachAndQueueImage(
+            long j,
+            long j2,
+            int i,
+            long j3,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8);
 
     private static native void nativeClassInit();
 
-    private native synchronized void nativeClose(long j);
+    private synchronized native void nativeClose(long j);
 
-    private native synchronized void nativeDequeueInputImage(long j, Image image);
+    private synchronized native void nativeDequeueInputImage(long j, Image image);
 
-    private native synchronized long nativeInit(Object obj, Surface surface, int i, int i2, int i3, boolean z, int i4, int i5, long j);
+    private synchronized native long nativeInit(
+            Object obj, Surface surface, int i, int i2, int i3, boolean z, int i4, int i5, long j);
 
-    private native synchronized void nativeQueueInputImage(long j, Image image, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7);
+    private synchronized native void nativeQueueInputImage(
+            long j, Image image, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7);
 
     public static ImageWriter newInstance(Surface surface, int maxImages) {
         return new ImageWriter(surface, maxImages, true, 0, -1, -1);
     }
 
-    public static ImageWriter newInstance(Surface surface, int maxImages, int format, int width, int height) {
+    public static ImageWriter newInstance(
+            Surface surface, int maxImages, int format, int width, int height) {
         if (!ImageFormat.isPublicFormat(format) && !PixelFormat.isPublicFormat(format)) {
             throw new IllegalArgumentException("Invalid format is specified: " + format);
         }
@@ -80,10 +106,29 @@ public class ImageWriter implements AutoCloseable {
         return new ImageWriter(surface, maxImages, false, format, -1, -1);
     }
 
-    private void initializeImageWriter(Surface surface, int maxImages, boolean useSurfaceImageFormatInfo, int imageFormat, int hardwareBufferFormat, int dataSpace, int width, int height, long usage) {
+    private void initializeImageWriter(
+            Surface surface,
+            int maxImages,
+            boolean useSurfaceImageFormatInfo,
+            int imageFormat,
+            int hardwareBufferFormat,
+            int dataSpace,
+            int width,
+            int height,
+            long usage) {
         int imageFormat2;
         if (surface != null && maxImages >= 1) {
-            this.mNativeContext = nativeInit(new WeakReference(this), surface, maxImages, width, height, useSurfaceImageFormatInfo, hardwareBufferFormat, dataSpace, usage);
+            this.mNativeContext =
+                    nativeInit(
+                            new WeakReference(this),
+                            surface,
+                            maxImages,
+                            width,
+                            height,
+                            useSurfaceImageFormatInfo,
+                            hardwareBufferFormat,
+                            dataSpace,
+                            usage);
             if (!useSurfaceImageFormatInfo) {
                 imageFormat2 = imageFormat;
             } else {
@@ -96,15 +141,24 @@ public class ImageWriter implements AutoCloseable {
             Size surfSize = SurfaceUtils.getSurfaceSize(surface);
             this.mWidth = width == -1 ? surfSize.getWidth() : width;
             this.mHeight = height == -1 ? surfSize.getHeight() : height;
-            this.mEstimatedNativeAllocBytes = ImageUtils.getEstimatedNativeAllocBytes(this.mWidth, this.mHeight, imageFormat2, 1);
+            this.mEstimatedNativeAllocBytes =
+                    ImageUtils.getEstimatedNativeAllocBytes(
+                            this.mWidth, this.mHeight, imageFormat2, 1);
             VMRuntime.getRuntime().registerNativeAllocation(this.mEstimatedNativeAllocBytes);
             this.mIsWriterValid = true;
             return;
         }
-        throw new IllegalArgumentException("Illegal input argument: surface " + surface + ", maxImages: " + maxImages);
+        throw new IllegalArgumentException(
+                "Illegal input argument: surface " + surface + ", maxImages: " + maxImages);
     }
 
-    private ImageWriter(Surface surface, int maxImages, boolean useSurfaceImageFormatInfo, int imageFormat, int width, int height) {
+    private ImageWriter(
+            Surface surface,
+            int maxImages,
+            boolean useSurfaceImageFormatInfo,
+            int imageFormat,
+            int width,
+            int height) {
         this.mListenerLock = new Object();
         this.mCloseLock = new Object();
         this.mIsWriterValid = false;
@@ -116,10 +170,26 @@ public class ImageWriter implements AutoCloseable {
             this.mHardwareBufferFormat = PublicFormatUtils.getHalFormat(imageFormat);
             this.mDataSpace = PublicFormatUtils.getHalDataspace(imageFormat);
         }
-        initializeImageWriter(surface, maxImages, useSurfaceImageFormatInfo, imageFormat, this.mHardwareBufferFormat, this.mDataSpace, width, height, this.mUsage);
+        initializeImageWriter(
+                surface,
+                maxImages,
+                useSurfaceImageFormatInfo,
+                imageFormat,
+                this.mHardwareBufferFormat,
+                this.mDataSpace,
+                width,
+                height,
+                this.mUsage);
     }
 
-    private ImageWriter(Surface surface, int maxImages, boolean useSurfaceImageFormatInfo, int imageFormat, int width, int height, long usage) {
+    private ImageWriter(
+            Surface surface,
+            int maxImages,
+            boolean useSurfaceImageFormatInfo,
+            int imageFormat,
+            int width,
+            int height,
+            long usage) {
         this.mListenerLock = new Object();
         this.mCloseLock = new Object();
         this.mIsWriterValid = false;
@@ -132,10 +202,27 @@ public class ImageWriter implements AutoCloseable {
             this.mHardwareBufferFormat = PublicFormatUtils.getHalFormat(imageFormat);
             this.mDataSpace = PublicFormatUtils.getHalDataspace(imageFormat);
         }
-        initializeImageWriter(surface, maxImages, useSurfaceImageFormatInfo, imageFormat, this.mHardwareBufferFormat, this.mDataSpace, width, height, usage);
+        initializeImageWriter(
+                surface,
+                maxImages,
+                useSurfaceImageFormatInfo,
+                imageFormat,
+                this.mHardwareBufferFormat,
+                this.mDataSpace,
+                width,
+                height,
+                usage);
     }
 
-    private ImageWriter(Surface surface, int maxImages, boolean useSurfaceImageFormatInfo, int hardwareBufferFormat, int dataSpace, int width, int height, long usage) {
+    private ImageWriter(
+            Surface surface,
+            int maxImages,
+            boolean useSurfaceImageFormatInfo,
+            int hardwareBufferFormat,
+            int dataSpace,
+            int width,
+            int height,
+            long usage) {
         int imageFormat;
         this.mListenerLock = new Object();
         this.mCloseLock = new Object();
@@ -153,16 +240,50 @@ public class ImageWriter implements AutoCloseable {
             this.mDataSpace = dataSpace;
             imageFormat = imageFormat2;
         }
-        initializeImageWriter(surface, maxImages, useSurfaceImageFormatInfo, imageFormat, hardwareBufferFormat, dataSpace, width, height, usage);
+        initializeImageWriter(
+                surface,
+                maxImages,
+                useSurfaceImageFormatInfo,
+                imageFormat,
+                hardwareBufferFormat,
+                dataSpace,
+                width,
+                height,
+                usage);
     }
 
-    private ImageWriter(Surface surface, int maxImages, boolean useSurfaceImageFormatInfo, int imageFormat, int width, int height, long usage, int transform) {
+    private ImageWriter(
+            Surface surface,
+            int maxImages,
+            boolean useSurfaceImageFormatInfo,
+            int imageFormat,
+            int width,
+            int height,
+            long usage,
+            int transform) {
         this(surface, maxImages, useSurfaceImageFormatInfo, imageFormat, width, height, usage);
         this.mSemTransform = transform;
     }
 
-    private ImageWriter(Surface surface, int maxImages, boolean useSurfaceImageFormatInfo, int hardwareBufferFormat, int dataSpace, int width, int height, long usage, int transform) {
-        this(surface, maxImages, useSurfaceImageFormatInfo, hardwareBufferFormat, dataSpace, width, height, usage);
+    private ImageWriter(
+            Surface surface,
+            int maxImages,
+            boolean useSurfaceImageFormatInfo,
+            int hardwareBufferFormat,
+            int dataSpace,
+            int width,
+            int height,
+            long usage,
+            int transform) {
+        this(
+                surface,
+                maxImages,
+                useSurfaceImageFormatInfo,
+                hardwareBufferFormat,
+                dataSpace,
+                width,
+                height,
+                usage);
         this.mSemTransform = transform;
     }
 
@@ -180,7 +301,8 @@ public class ImageWriter implements AutoCloseable {
 
     public Image dequeueInputImage() {
         if (this.mDequeuedImages.size() >= this.mMaxImages) {
-            throw new IllegalStateException("Already dequeued max number of Images " + this.mMaxImages);
+            throw new IllegalStateException(
+                    "Already dequeued max number of Images " + this.mMaxImages);
         }
         WriterSurfaceImage newImage = new WriterSurfaceImage(this);
         nativeDequeueInputImage(this.mNativeContext, newImage);
@@ -202,14 +324,26 @@ public class ImageWriter implements AutoCloseable {
                 ImageReader prevOwner = (ImageReader) image.getOwner();
                 prevOwner.detachImage(image);
             } else if (image.getOwner() != null) {
-                throw new IllegalArgumentException("Only images from ImageReader can be queued to ImageWriter, other image source is not supported yet!");
+                throw new IllegalArgumentException(
+                        "Only images from ImageReader can be queued to ImageWriter, other image"
+                                + " source is not supported yet!");
             }
             attachAndQueueInputImage(image);
             image.close();
             return;
         }
         Rect crop = image.getCropRect();
-        nativeQueueInputImage(this.mNativeContext, image, image.getTimestamp(), image.getDataSpace(), crop.left, crop.top, crop.right, crop.bottom, image.getTransform(), image.getScalingMode());
+        nativeQueueInputImage(
+                this.mNativeContext,
+                image,
+                image.getTimestamp(),
+                image.getDataSpace(),
+                crop.left,
+                crop.top,
+                crop.right,
+                crop.bottom,
+                image.getTransform(),
+                image.getScalingMode());
         if (ownedByMe) {
             this.mDequeuedImages.remove(image);
             WriterSurfaceImage wi = (WriterSurfaceImage) image;
@@ -239,7 +373,8 @@ public class ImageWriter implements AutoCloseable {
             if (listener != null) {
                 Looper looper = handler != null ? handler.getLooper() : Looper.myLooper();
                 if (looper == null) {
-                    throw new IllegalArgumentException("handler is null but the current thread is not a looper");
+                    throw new IllegalArgumentException(
+                            "handler is null but the current thread is not a looper");
                 }
                 if (this.mListenerHandler == null || this.mListenerHandler.getLooper() != looper) {
                     this.mListenerHandler = new ListenerHandler(looper);
@@ -285,19 +420,43 @@ public class ImageWriter implements AutoCloseable {
             throw new IllegalArgumentException("image shouldn't be null");
         }
         if (isImageOwnedByMe(image)) {
-            throw new IllegalArgumentException("Can not attach an image that is owned ImageWriter already");
+            throw new IllegalArgumentException(
+                    "Can not attach an image that is owned ImageWriter already");
         }
         if (!image.isAttachable()) {
-            throw new IllegalStateException("Image was not detached from last owner, or image  is not detachable");
+            throw new IllegalStateException(
+                    "Image was not detached from last owner, or image  is not detachable");
         }
         Rect crop = image.getCropRect();
         int hardwareBufferFormat = PublicFormatUtils.getHalFormat(image.getFormat());
         if (image.getNativeContext() != 0) {
-            nativeAttachAndQueueImage(this.mNativeContext, image.getNativeContext(), hardwareBufferFormat, image.getTimestamp(), image.getDataSpace(), crop.left, crop.top, crop.right, crop.bottom, image.getTransform(), image.getScalingMode());
+            nativeAttachAndQueueImage(
+                    this.mNativeContext,
+                    image.getNativeContext(),
+                    hardwareBufferFormat,
+                    image.getTimestamp(),
+                    image.getDataSpace(),
+                    crop.left,
+                    crop.top,
+                    crop.right,
+                    crop.bottom,
+                    image.getTransform(),
+                    image.getScalingMode());
             return;
         }
         GraphicBuffer gb = GraphicBuffer.createFromHardwareBuffer(image.getHardwareBuffer());
-        nativeAttachAndQueueGraphicBuffer(this.mNativeContext, gb, hardwareBufferFormat, image.getTimestamp(), image.getDataSpace(), crop.left, crop.top, crop.right, crop.bottom, image.getTransform(), image.getScalingMode());
+        nativeAttachAndQueueGraphicBuffer(
+                this.mNativeContext,
+                gb,
+                hardwareBufferFormat,
+                image.getTimestamp(),
+                image.getDataSpace(),
+                crop.left,
+                crop.top,
+                crop.right,
+                crop.bottom,
+                image.getTransform(),
+                image.getScalingMode());
         gb.destroy();
         image.close();
     }
@@ -344,7 +503,8 @@ public class ImageWriter implements AutoCloseable {
             throw new IllegalArgumentException("image shouldn't be null");
         }
         if (!this.mDequeuedImages.contains(image)) {
-            throw new IllegalStateException("It is illegal to abort some image that is not dequeued yet");
+            throw new IllegalStateException(
+                    "It is illegal to abort some image that is not dequeued yet");
         }
         WriterSurfaceImage wi = (WriterSurfaceImage) image;
         if (!wi.mIsImageValid) {
@@ -393,8 +553,10 @@ public class ImageWriter implements AutoCloseable {
         }
 
         public Builder setImageFormat(int imageFormat) {
-            if (!ImageFormat.isPublicFormat(imageFormat) && !PixelFormat.isPublicFormat(imageFormat)) {
-                throw new IllegalArgumentException("Invalid imageFormat is specified: " + imageFormat);
+            if (!ImageFormat.isPublicFormat(imageFormat)
+                    && !PixelFormat.isPublicFormat(imageFormat)) {
+                throw new IllegalArgumentException(
+                        "Invalid imageFormat is specified: " + imageFormat);
             }
             this.mImageFormat = imageFormat;
             this.mUseLegacyImageFormat = true;
@@ -432,9 +594,26 @@ public class ImageWriter implements AutoCloseable {
 
         public ImageWriter build() {
             if (this.mUseLegacyImageFormat) {
-                return new ImageWriter(this.mSurface, this.mMaxImages, this.mUseSurfaceImageFormatInfo, this.mImageFormat, this.mWidth, this.mHeight, this.mUsage, this.mSemTransform);
+                return new ImageWriter(
+                        this.mSurface,
+                        this.mMaxImages,
+                        this.mUseSurfaceImageFormatInfo,
+                        this.mImageFormat,
+                        this.mWidth,
+                        this.mHeight,
+                        this.mUsage,
+                        this.mSemTransform);
             }
-            return new ImageWriter(this.mSurface, this.mMaxImages, this.mUseSurfaceImageFormatInfo, this.mHardwareBufferFormat, this.mDataSpace, this.mWidth, this.mHeight, this.mUsage, this.mSemTransform);
+            return new ImageWriter(
+                    this.mSurface,
+                    this.mMaxImages,
+                    this.mUseSurfaceImageFormatInfo,
+                    this.mHardwareBufferFormat,
+                    this.mDataSpace,
+                    this.mWidth,
+                    this.mHeight,
+                    this.mUsage,
+                    this.mSemTransform);
         }
     }
 
@@ -453,17 +632,17 @@ public class ImageWriter implements AutoCloseable {
         private int mScalingMode = 0;
         private final Object mCloseLock = new Object();
 
-        private native synchronized SurfacePlane[] nativeCreatePlanes(int i, int i2);
+        private synchronized native SurfacePlane[] nativeCreatePlanes(int i, int i2);
 
-        private native synchronized int nativeGetFormat(int i);
+        private synchronized native int nativeGetFormat(int i);
 
-        private native synchronized HardwareBuffer nativeGetHardwareBuffer();
+        private synchronized native HardwareBuffer nativeGetHardwareBuffer();
 
-        private native synchronized int nativeGetHeight();
+        private synchronized native int nativeGetHeight();
 
-        private native synchronized int nativeGetWidth();
+        private synchronized native int nativeGetWidth();
 
-        private native synchronized void nativeSetFenceFd(int i);
+        private synchronized native void nativeSetFenceFd(int i);
 
         public WriterSurfaceImage(ImageWriter writer) {
             this.mHeight = -1;

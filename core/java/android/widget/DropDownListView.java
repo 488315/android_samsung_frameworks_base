@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+
 import com.android.internal.widget.AutoScrollHelper;
 
 /* loaded from: classes4.dex */
@@ -54,7 +55,9 @@ public class DropDownListView extends ListView {
                 if (hoveredItem.isEnabled()) {
                     requestFocus();
                     boolean talkbackEnabled = false;
-                    AccessibilityManager accessibilityManager = (AccessibilityManager) this.mContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
+                    AccessibilityManager accessibilityManager =
+                            (AccessibilityManager)
+                                    this.mContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
                     if (accessibilityManager != null) {
                         talkbackEnabled = accessibilityManager.semIsScreenReaderEnabled();
                     }
@@ -209,8 +212,7 @@ public class DropDownListView extends ListView {
     }
 
     private class ResolveHoverRunnable implements Runnable {
-        private ResolveHoverRunnable() {
-        }
+        private ResolveHoverRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {

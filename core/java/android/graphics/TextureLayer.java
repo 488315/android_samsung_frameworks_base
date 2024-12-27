@@ -19,7 +19,12 @@ public final class TextureLayer implements AutoCloseable {
 
     private TextureLayer(HardwareRenderer renderer, long deferredUpdater) {
         if (renderer == null || deferredUpdater == 0) {
-            throw new IllegalArgumentException("Either hardware renderer: " + renderer + " or deferredUpdater: " + deferredUpdater + " is invalid");
+            throw new IllegalArgumentException(
+                    "Either hardware renderer: "
+                            + renderer
+                            + " or deferredUpdater: "
+                            + deferredUpdater
+                            + " is invalid");
         }
         this.mRenderer = renderer;
         this.mFinalizer = new VirtualRefBasePtr(deferredUpdater);

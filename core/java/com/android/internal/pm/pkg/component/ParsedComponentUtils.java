@@ -9,16 +9,29 @@ import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
+
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
 import com.android.internal.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.internal.pm.pkg.parsing.ParsingUtils;
 
 /* loaded from: classes5.dex */
 class ParsedComponentUtils {
-    ParsedComponentUtils() {
-    }
+    ParsedComponentUtils() {}
 
-    static <Component extends ParsedComponentImpl> ParseResult<Component> parseComponent(Component component, String tag, ParsingPackage pkg, TypedArray array, boolean useRoundIcon, ParseInput input, int bannerAttr, int descriptionAttr, int iconAttr, int labelAttr, int logoAttr, int nameAttr, int roundIconAttr) {
+    static <Component extends ParsedComponentImpl> ParseResult<Component> parseComponent(
+            Component component,
+            String tag,
+            ParsingPackage pkg,
+            TypedArray array,
+            boolean useRoundIcon,
+            ParseInput input,
+            int bannerAttr,
+            int descriptionAttr,
+            int iconAttr,
+            int labelAttr,
+            int logoAttr,
+            int nameAttr,
+            int roundIconAttr) {
         String name = array.getNonConfigurationString(nameAttr, 0);
         if (TextUtils.isEmpty(name)) {
             return input.error(tag + " does not specify android:name");
@@ -60,8 +73,15 @@ class ParsedComponentUtils {
         return input.success(component);
     }
 
-    static ParseResult<Bundle> addMetaData(ParsedComponentImpl component, ParsingPackage pkg, Resources resources, XmlResourceParser parser, ParseInput input) {
-        ParseResult<PackageManager.Property> result = ParsingPackageUtils.parseMetaData(pkg, component, resources, parser, "<meta-data>", input);
+    static ParseResult<Bundle> addMetaData(
+            ParsedComponentImpl component,
+            ParsingPackage pkg,
+            Resources resources,
+            XmlResourceParser parser,
+            ParseInput input) {
+        ParseResult<PackageManager.Property> result =
+                ParsingPackageUtils.parseMetaData(
+                        pkg, component, resources, parser, "<meta-data>", input);
         if (result.isError()) {
             return input.error(result);
         }
@@ -72,8 +92,15 @@ class ParsedComponentUtils {
         return input.success(component.getMetaData());
     }
 
-    static ParseResult<PackageManager.Property> addProperty(ParsedComponentImpl component, ParsingPackage pkg, Resources resources, XmlResourceParser parser, ParseInput input) {
-        ParseResult<PackageManager.Property> result = ParsingPackageUtils.parseMetaData(pkg, component, resources, parser, "<property>", input);
+    static ParseResult<PackageManager.Property> addProperty(
+            ParsedComponentImpl component,
+            ParsingPackage pkg,
+            Resources resources,
+            XmlResourceParser parser,
+            ParseInput input) {
+        ParseResult<PackageManager.Property> result =
+                ParsingPackageUtils.parseMetaData(
+                        pkg, component, resources, parser, "<property>", input);
         if (result.isError()) {
             return input.error(result);
         }

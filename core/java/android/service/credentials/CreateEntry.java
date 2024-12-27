@@ -4,23 +4,26 @@ import android.annotation.NonNull;
 import android.app.slice.Slice;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes3.dex */
 public final class CreateEntry implements Parcelable {
-    public static final Parcelable.Creator<CreateEntry> CREATOR = new Parcelable.Creator<CreateEntry>() { // from class: android.service.credentials.CreateEntry.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateEntry createFromParcel(Parcel in) {
-            return new CreateEntry(in);
-        }
+    public static final Parcelable.Creator<CreateEntry> CREATOR =
+            new Parcelable.Creator<
+                    CreateEntry>() { // from class: android.service.credentials.CreateEntry.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateEntry createFromParcel(Parcel in) {
+                    return new CreateEntry(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateEntry[] newArray(int size) {
-            return new CreateEntry[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateEntry[] newArray(int size) {
+                    return new CreateEntry[size];
+                }
+            };
     private final Slice mSlice;
 
     private CreateEntry(Parcel in) {
@@ -39,7 +42,8 @@ public final class CreateEntry implements Parcelable {
 
     public CreateEntry(Slice slice) {
         this.mSlice = slice;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
     }
 
     public Slice getSlice() {

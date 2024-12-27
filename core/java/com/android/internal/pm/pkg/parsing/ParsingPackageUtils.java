@@ -43,6 +43,7 @@ import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.util.apk.ApkSignatureVerifier;
+
 import com.android.internal.R;
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.internal.pm.parsing.pkg.ParsedPackage;
@@ -68,7 +69,15 @@ import com.android.internal.pm.split.DefaultSplitAssetLoader;
 import com.android.internal.pm.split.SplitAssetLoader;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.XmlUtils;
+
+import libcore.io.IoUtils;
+import libcore.util.EmptyArray;
+import libcore.util.HexEncoding;
+
 import com.samsung.android.rune.PMRune;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Retention;
@@ -78,10 +87,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import libcore.io.IoUtils;
-import libcore.util.EmptyArray;
-import libcore.util.HexEncoding;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class ParsingPackageUtils {
@@ -91,8 +96,10 @@ public class ParsingPackageUtils {
     public static final boolean DEBUG_JAR = false;
     public static final float DEFAULT_PRE_O_MAX_ASPECT_RATIO = 1.86f;
     public static final String METADATA_ACTIVITY_LAUNCH_MODE = "android.activity.launch_mode";
-    public static final String METADATA_ACTIVITY_WINDOW_LAYOUT_AFFINITY = "android.activity_window_layout_affinity";
-    public static final String METADATA_CAN_DISPLAY_ON_REMOTE_DEVICES = "android.can_display_on_remote_devices";
+    public static final String METADATA_ACTIVITY_WINDOW_LAYOUT_AFFINITY =
+            "android.activity_window_layout_affinity";
+    public static final String METADATA_CAN_DISPLAY_ON_REMOTE_DEVICES =
+            "android.can_display_on_remote_devices";
     public static final String METADATA_MAX_ASPECT_RATIO = "android.max_aspect";
     public static final String METADATA_SUPPORTS_SIZE_CHANGES = "android.supports_size_changes";
     public static final String MNT_EXPAND = "/mnt/expand/";
@@ -159,15 +166,22 @@ public class ParsingPackageUtils {
 
         boolean hasFeature(String str);
 
-        ParsingPackage startParsingPackage(String str, String str2, String str3, TypedArray typedArray, boolean z);
+        ParsingPackage startParsingPackage(
+                String str, String str2, String str3, TypedArray typedArray, boolean z);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ParseFlags {
-    }
+    public @interface ParseFlags {}
 
-    public static ParseResult<ParsedPackage> parseDefault(ParseInput input, File file, int parseFlags, List<PermissionManager.SplitPermissionInfo> splitPermissions, boolean collectCertificates, Callback callback) {
-        ParsingPackageUtils parser = new ParsingPackageUtils(null, null, splitPermissions, callback);
+    public static ParseResult<ParsedPackage> parseDefault(
+            ParseInput input,
+            File file,
+            int parseFlags,
+            List<PermissionManager.SplitPermissionInfo> splitPermissions,
+            boolean collectCertificates,
+            Callback callback) {
+        ParsingPackageUtils parser =
+                new ParsingPackageUtils(null, null, splitPermissions, callback);
         ParseResult<ParsingPackage> parseResult = parser.parsePackage(input, file, parseFlags);
         if (parseResult.isError()) {
             return input.error(parseResult);
@@ -183,7 +197,11 @@ public class ParsingPackageUtils {
         return input.success(pkg);
     }
 
-    public ParsingPackageUtils(String[] separateProcesses, DisplayMetrics displayMetrics, List<PermissionManager.SplitPermissionInfo> splitPermissions, Callback callback) {
+    public ParsingPackageUtils(
+            String[] separateProcesses,
+            DisplayMetrics displayMetrics,
+            List<PermissionManager.SplitPermissionInfo> splitPermissions,
+            Callback callback) {
         this.mSeparateProcesses = separateProcesses;
         this.mDisplayMetrics = displayMetrics;
         this.mSplitPermissionInfos = splitPermissions;
@@ -205,17 +223,25 @@ public class ParsingPackageUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.parsing.ParsingPackage> parseClusterPackage(android.content.pm.parsing.result.ParseInput r20, java.io.File r21, int r22) {
+    private android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.parsing.ParsingPackage>
+            parseClusterPackage(
+                    android.content.pm.parsing.result.ParseInput r20, java.io.File r21, int r22) {
         /*
             Method dump skipped, instructions count: 346
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseClusterPackage(android.content.pm.parsing.result.ParseInput, java.io.File, int):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseClusterPackage(android.content.pm.parsing.result.ParseInput,"
+                    + " java.io.File, int):android.content.pm.parsing.result.ParseResult");
     }
 
-    private ParseResult<ParsingPackage> parseMonolithicPackage(ParseInput input, File apkFile, int flags) {
+    private ParseResult<ParsingPackage> parseMonolithicPackage(
+            ParseInput input, File apkFile, int flags) {
         int liteParseFlags = flags & (-33);
-        ParseResult<PackageLite> liteResult = ApkLiteParseUtils.parseMonolithicPackageLite(input, apkFile, liteParseFlags);
+        ParseResult<PackageLite> liteResult =
+                ApkLiteParseUtils.parseMonolithicPackageLite(input, apkFile, liteParseFlags);
         if (liteResult.isError()) {
             return input.error(liteResult);
         }
@@ -223,8 +249,17 @@ public class ParsingPackageUtils {
         SplitAssetLoader assetLoader = new DefaultSplitAssetLoader(lite, flags);
         try {
             boolean shouldSkipComponents = lite.isIsSdkLibrary() && Flags.disallowSdkLibsToBeApps();
-            ParseResult<ParsingPackage> result = parseBaseApk(input, apkFile, apkFile.getCanonicalPath(), assetLoader, flags, shouldSkipComponents);
-            return result.isError() ? input.error(result) : input.success(result.getResult().set32BitAbiPreferred(lite.isUse32bitAbi()));
+            ParseResult<ParsingPackage> result =
+                    parseBaseApk(
+                            input,
+                            apkFile,
+                            apkFile.getCanonicalPath(),
+                            assetLoader,
+                            flags,
+                            shouldSkipComponents);
+            return result.isError()
+                    ? input.error(result)
+                    : input.success(result.getResult().set32BitAbiPreferred(lite.isUse32bitAbi()));
         } catch (IOException e) {
             return input.error(-102, "Failed to get path: " + apkFile, e);
         } finally {
@@ -232,11 +267,14 @@ public class ParsingPackageUtils {
         }
     }
 
-    public ParseResult<ParsingPackage> parsePackageFromPackageLite(ParseInput input, PackageLite lite, int flags) {
+    public ParseResult<ParsingPackage> parsePackageFromPackageLite(
+            ParseInput input, PackageLite lite, int flags) {
         boolean z;
         String volumeUuid = getVolumeUuid(lite.getPath());
         String pkgName = lite.getPackageName();
-        ParsingPackage pkg = this.mCallback.startParsingPackage(pkgName, lite.getBaseApkPath(), lite.getPath(), null, lite.isCoreApp());
+        ParsingPackage pkg =
+                this.mCallback.startParsingPackage(
+                        pkgName, lite.getBaseApkPath(), lite.getPath(), null, lite.isCoreApp());
         int targetSdk = lite.getTargetSdk();
         pkg.setVersionCode(lite.getVersionCode());
         pkg.setVersionCodeMajor(lite.getVersionCodeMajor());
@@ -247,7 +285,8 @@ public class ParsingPackageUtils {
         pkg.setIsolatedSplitLoading(false);
         pkg.setTargetSdkVersion(targetSdk);
         boolean z2 = true;
-        ParsingPackage targetSandboxVersion = pkg.setInstallLocation(lite.getInstallLocation()).setTargetSandboxVersion(1);
+        ParsingPackage targetSandboxVersion =
+                pkg.setInstallLocation(lite.getInstallLocation()).setTargetSandboxVersion(1);
         if ((flags & 8) == 0) {
             z = false;
         } else {
@@ -258,18 +297,41 @@ public class ParsingPackageUtils {
         if (archivedPackage == null) {
             return input.error(-102, "archivePackage is missing");
         }
-        ParsingPackage extractNativeLibrariesRequested = pkg.setBackupAllowed(true).setClearUserDataAllowed(true).setClearUserDataOnFailedRestoreAllowed(true).setAllowNativeHeapPointerTagging(true).setEnabled(true).setExtractNativeLibrariesRequested(true);
+        ParsingPackage extractNativeLibrariesRequested =
+                pkg.setBackupAllowed(true)
+                        .setClearUserDataAllowed(true)
+                        .setClearUserDataOnFailedRestoreAllowed(true)
+                        .setAllowNativeHeapPointerTagging(true)
+                        .setEnabled(true)
+                        .setExtractNativeLibrariesRequested(true);
         if (targetSdk < 29) {
             z2 = false;
         }
-        extractNativeLibrariesRequested.setAllowAudioPlaybackCapture(z2).setHardwareAccelerated(targetSdk >= 14).setRequestLegacyExternalStorage(XmlUtils.convertValueToBoolean(archivedPackage.requestLegacyExternalStorage, targetSdk < 29)).setCleartextTrafficAllowed(targetSdk < 28).setDefaultToDeviceProtectedStorage(XmlUtils.convertValueToBoolean(archivedPackage.defaultToDeviceProtectedStorage, false)).setUserDataFragile(XmlUtils.convertValueToBoolean(archivedPackage.userDataFragile, false)).setCategory(-1).setMaxAspectRatio(0.0f).setMinAspectRatio(0.0f);
+        extractNativeLibrariesRequested
+                .setAllowAudioPlaybackCapture(z2)
+                .setHardwareAccelerated(targetSdk >= 14)
+                .setRequestLegacyExternalStorage(
+                        XmlUtils.convertValueToBoolean(
+                                archivedPackage.requestLegacyExternalStorage, targetSdk < 29))
+                .setCleartextTrafficAllowed(targetSdk < 28)
+                .setDefaultToDeviceProtectedStorage(
+                        XmlUtils.convertValueToBoolean(
+                                archivedPackage.defaultToDeviceProtectedStorage, false))
+                .setUserDataFragile(
+                        XmlUtils.convertValueToBoolean(archivedPackage.userDataFragile, false))
+                .setCategory(-1)
+                .setMaxAspectRatio(0.0f)
+                .setMinAspectRatio(0.0f);
         pkg.setDeclaredHavingCode(false);
-        ParseResult<String> taskAffinityResult = ComponentParseUtils.buildTaskAffinityName(pkgName, pkgName, null, input);
+        ParseResult<String> taskAffinityResult =
+                ComponentParseUtils.buildTaskAffinityName(pkgName, pkgName, null, input);
         if (taskAffinityResult.isError()) {
             return input.error(taskAffinityResult);
         }
         pkg.setTaskAffinity(taskAffinityResult.getResult());
-        ParseResult<String> processNameResult = ComponentParseUtils.buildProcessName(pkgName, null, null, flags, this.mSeparateProcesses, input);
+        ParseResult<String> processNameResult =
+                ComponentParseUtils.buildProcessName(
+                        pkgName, null, null, flags, this.mSeparateProcesses, input);
         if (processNameResult.isError()) {
             return input.error(processNameResult);
         }
@@ -299,7 +361,13 @@ public class ParsingPackageUtils {
         return volumeUuid;
     }
 
-    private ParseResult<ParsingPackage> parseBaseApk(ParseInput input, File apkFile, String codePath, SplitAssetLoader assetLoader, int flags, boolean shouldSkipComponents) {
+    private ParseResult<ParsingPackage> parseBaseApk(
+            ParseInput input,
+            File apkFile,
+            String codePath,
+            SplitAssetLoader assetLoader,
+            int flags,
+            boolean shouldSkipComponents) {
         ParseResult<ParsingPackage> result;
         String apkPath = apkFile.getAbsolutePath();
         String volumeUuid = getVolumeUuid(apkPath);
@@ -310,7 +378,8 @@ public class ParsingPackageUtils {
                 return input.error(-101, "Failed adding asset path: " + apkPath);
             }
             try {
-                XmlResourceParser parser = assets.openXmlResourceParser(cookie, "AndroidManifest.xml");
+                XmlResourceParser parser =
+                        assets.openXmlResourceParser(cookie, "AndroidManifest.xml");
                 try {
                     try {
                     } catch (Throwable th) {
@@ -318,9 +387,24 @@ public class ParsingPackageUtils {
                     }
                     try {
                         Resources res = new Resources(assets, this.mDisplayMetrics, null);
-                        ParseResult<ParsingPackage> result2 = parseBaseApk(input, apkPath, codePath, res, parser, flags, shouldSkipComponents);
+                        ParseResult<ParsingPackage> result2 =
+                                parseBaseApk(
+                                        input,
+                                        apkPath,
+                                        codePath,
+                                        res,
+                                        parser,
+                                        flags,
+                                        shouldSkipComponents);
                         if (result2.isError()) {
-                            ParseResult<ParsingPackage> error = input.error(result2.getErrorCode(), apkPath + " (at " + parser.getPositionDescription() + "): " + result2.getErrorMessage());
+                            ParseResult<ParsingPackage> error =
+                                    input.error(
+                                            result2.getErrorCode(),
+                                            apkPath
+                                                    + " (at "
+                                                    + parser.getPositionDescription()
+                                                    + "): "
+                                                    + result2.getErrorMessage());
                             if (parser != null) {
                                 parser.close();
                             }
@@ -328,9 +412,18 @@ public class ParsingPackageUtils {
                         }
                         ParsingPackage pkg = result2.getResult();
                         if (assets.containsAllocatedTable()) {
-                            ParseResult<?> deferResult = input.deferError("Targeting R+ (version 30 and above) requires the resources.arsc of installed APKs to be stored uncompressed and aligned on a 4-byte boundary", ParseInput.DeferredError.RESOURCES_ARSC_COMPRESSED);
+                            ParseResult<?> deferResult =
+                                    input.deferError(
+                                            "Targeting R+ (version 30 and above) requires the"
+                                                + " resources.arsc of installed APKs to be stored"
+                                                + " uncompressed and aligned on a 4-byte boundary",
+                                            ParseInput.DeferredError.RESOURCES_ARSC_COMPRESSED);
                             if (deferResult.isError()) {
-                                ParseResult<ParsingPackage> error2 = input.error(PackageManager.INSTALL_PARSE_FAILED_RESOURCES_ARSC_COMPRESSED, deferResult.getErrorMessage());
+                                ParseResult<ParsingPackage> error2 =
+                                        input.error(
+                                                PackageManager
+                                                        .INSTALL_PARSE_FAILED_RESOURCES_ARSC_COMPRESSED,
+                                                deferResult.getErrorMessage());
                                 if (parser != null) {
                                     parser.close();
                                 }
@@ -344,18 +437,21 @@ public class ParsingPackageUtils {
                         } catch (IOException e) {
                         }
                         if (definesOverlayable) {
-                            SparseArray<String> packageNames = assets.getAssignedPackageIdentifiers();
+                            SparseArray<String> packageNames =
+                                    assets.getAssignedPackageIdentifiers();
                             int size = packageNames.size();
                             int index = 0;
                             while (index < size) {
                                 String packageName = packageNames.valueAt(index);
                                 SparseArray<String> packageNames2 = packageNames;
-                                Map<String, String> overlayableToActor = assets.getOverlayableMap(packageName);
+                                Map<String, String> overlayableToActor =
+                                        assets.getOverlayableMap(packageName);
                                 if (overlayableToActor == null || overlayableToActor.isEmpty()) {
                                     result = result2;
                                 } else {
                                     for (String overlayable : overlayableToActor.keySet()) {
-                                        pkg.addOverlayable(overlayable, overlayableToActor.get(overlayable));
+                                        pkg.addOverlayable(
+                                                overlayable, overlayableToActor.get(overlayable));
                                         result2 = result2;
                                         overlayableToActor = overlayableToActor;
                                     }
@@ -407,11 +503,13 @@ public class ParsingPackageUtils {
                 e = e3;
             }
         } catch (IllegalArgumentException e4) {
-            return input.error(e4.getCause() instanceof IOException ? -2 : -100, e4.getMessage(), e4);
+            return input.error(
+                    e4.getCause() instanceof IOException ? -2 : -100, e4.getMessage(), e4);
         }
     }
 
-    private ParseResult<ParsingPackage> parseSplitApk(ParseInput input, ParsingPackage pkg, int splitIndex, AssetManager assets, int flags) {
+    private ParseResult<ParsingPackage> parseSplitApk(
+            ParseInput input, ParsingPackage pkg, int splitIndex, AssetManager assets, int flags) {
         String apkPath = pkg.getSplitCodePaths()[splitIndex];
         int cookie = assets.findCookieForPath(apkPath);
         if (cookie == 0) {
@@ -421,9 +519,17 @@ public class ParsingPackageUtils {
             XmlResourceParser parser = assets.openXmlResourceParser(cookie, "AndroidManifest.xml");
             try {
                 Resources res = new Resources(assets, this.mDisplayMetrics, null);
-                ParseResult<ParsingPackage> parseResult = parseSplitApk(input, pkg, res, parser, flags, splitIndex);
+                ParseResult<ParsingPackage> parseResult =
+                        parseSplitApk(input, pkg, res, parser, flags, splitIndex);
                 if (parseResult.isError()) {
-                    ParseResult<ParsingPackage> error = input.error(parseResult.getErrorCode(), apkPath + " (at " + parser.getPositionDescription() + "): " + parseResult.getErrorMessage());
+                    ParseResult<ParsingPackage> error =
+                            input.error(
+                                    parseResult.getErrorCode(),
+                                    apkPath
+                                            + " (at "
+                                            + parser.getPositionDescription()
+                                            + "): "
+                                            + parseResult.getErrorMessage());
                     if (parser != null) {
                         parser.close();
                     }
@@ -440,9 +546,18 @@ public class ParsingPackageUtils {
         }
     }
 
-    private ParseResult<ParsingPackage> parseBaseApk(ParseInput input, String apkPath, String codePath, Resources res, XmlResourceParser parser, int flags, boolean shouldSkipComponents) throws XmlPullParserException, IOException {
+    private ParseResult<ParsingPackage> parseBaseApk(
+            ParseInput input,
+            String apkPath,
+            String codePath,
+            Resources res,
+            XmlResourceParser parser,
+            int flags,
+            boolean shouldSkipComponents)
+            throws XmlPullParserException, IOException {
         ParsingPackage pkg;
-        ParseResult<Pair<String, String>> packageSplitResult = ApkLiteParseUtils.parsePackageSplitNames(input, parser);
+        ParseResult<Pair<String, String>> packageSplitResult =
+                ApkLiteParseUtils.parsePackageSplitNames(input, parser);
         if (packageSplitResult.isError()) {
             return input.error(packageSplitResult);
         }
@@ -455,12 +570,16 @@ public class ParsingPackageUtils {
         TypedArray manifestArray = res.obtainAttributes(parser, R.styleable.AndroidManifest);
         try {
             boolean isCoreApp = parser.getAttributeBooleanValue(null, "coreApp", false);
-            pkg = this.mCallback.startParsingPackage(pkgName, apkPath, codePath, manifestArray, isCoreApp);
+            pkg =
+                    this.mCallback.startParsingPackage(
+                            pkgName, apkPath, codePath, manifestArray, isCoreApp);
         } catch (Throwable th) {
             th = th;
         }
         try {
-            ParseResult<ParsingPackage> result = parseBaseApkTags(input, pkg, manifestArray, res, parser, flags, shouldSkipComponents);
+            ParseResult<ParsingPackage> result =
+                    parseBaseApkTags(
+                            input, pkg, manifestArray, res, parser, flags, shouldSkipComponents);
             if (!result.isError()) {
                 ParseResult<ParsingPackage> success = input.success(pkg);
                 manifestArray.recycle();
@@ -475,9 +594,17 @@ public class ParsingPackageUtils {
         }
     }
 
-    private ParseResult<ParsingPackage> parseSplitApk(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser, int flags, int splitIndex) throws XmlPullParserException, IOException {
+    private ParseResult<ParsingPackage> parseSplitApk(
+            ParseInput input,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser,
+            int flags,
+            int splitIndex)
+            throws XmlPullParserException, IOException {
         ParseResult result;
-        ParseResult<Pair<String, String>> packageSplitResult = ApkLiteParseUtils.parsePackageSplitNames(input, parser);
+        ParseResult<Pair<String, String>> packageSplitResult =
+                ApkLiteParseUtils.parsePackageSplitNames(input, parser);
         if (packageSplitResult.isError()) {
             return input.error(packageSplitResult);
         }
@@ -486,7 +613,9 @@ public class ParsingPackageUtils {
         while (true) {
             int type = parser.next();
             if (type != 1) {
-                if (outerDepth + 1 >= parser.getDepth() && type == 2 && !sAconfigFlags.skipCurrentElement(parser)) {
+                if (outerDepth + 1 >= parser.getDepth()
+                        && type == 2
+                        && !sAconfigFlags.skipCurrentElement(parser)) {
                     String tagName = parser.getName();
                     if ("application".equals(tagName)) {
                         if (foundApp) {
@@ -494,7 +623,9 @@ public class ParsingPackageUtils {
                             result = input.success(null);
                         } else {
                             foundApp = true;
-                            result = parseSplitApplication(input, pkg, res, parser, flags, splitIndex);
+                            result =
+                                    parseSplitApplication(
+                                            input, pkg, res, parser, flags, splitIndex);
                         }
                     } else {
                         result = ParsingUtils.unknownTag("<manifest>", pkg, parser, input);
@@ -505,7 +636,10 @@ public class ParsingPackageUtils {
                 }
             } else {
                 if (!foundApp) {
-                    ParseResult<?> deferResult = input.deferError("<manifest> does not contain an <application>", ParseInput.DeferredError.MISSING_APP_TAG);
+                    ParseResult<?> deferResult =
+                            input.deferError(
+                                    "<manifest> does not contain an <application>",
+                                    ParseInput.DeferredError.MISSING_APP_TAG);
                     if (deferResult.isError()) {
                         return input.error(deferResult);
                     }
@@ -517,24 +651,44 @@ public class ParsingPackageUtils {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:68:0x00ba, code lost:
-    
-        if (r5.equals(com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils.TAG_PROVIDER) != false) goto L48;
-     */
+
+       if (r5.equals(com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils.TAG_PROVIDER) != false) goto L48;
+    */
     /* JADX WARN: Removed duplicated region for block: B:54:0x01b5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.parsing.ParsingPackage> parseSplitApplication(android.content.pm.parsing.result.ParseInput r24, com.android.internal.pm.pkg.parsing.ParsingPackage r25, android.content.res.Resources r26, android.content.res.XmlResourceParser r27, int r28, int r29) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.parsing.ParsingPackage>
+            parseSplitApplication(
+                    android.content.pm.parsing.result.ParseInput r24,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r25,
+                    android.content.res.Resources r26,
+                    android.content.res.XmlResourceParser r27,
+                    int r28,
+                    int r29)
+                    throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 542
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseSplitApplication(android.content.pm.parsing.result.ParseInput, com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser, int, int):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseSplitApplication(android.content.pm.parsing.result.ParseInput,"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.Resources, android.content.res.XmlResourceParser, int,"
+                    + " int):android.content.pm.parsing.result.ParseResult");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    private ParseResult parseSplitBaseAppChildTags(ParseInput input, String tag, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws IOException, XmlPullParserException {
+    private ParseResult parseSplitBaseAppChildTags(
+            ParseInput input,
+            String tag,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser)
+            throws IOException, XmlPullParserException {
         char c;
         switch (tag.hashCode()) {
             case -1608941274:
@@ -592,13 +746,15 @@ public class ParsingPackageUtils {
         }
         switch (c) {
             case 0:
-                ParseResult<PackageManager.Property> metaDataResult = parseMetaData(pkg, null, res, parser, "<meta-data>", input);
+                ParseResult<PackageManager.Property> metaDataResult =
+                        parseMetaData(pkg, null, res, parser, "<meta-data>", input);
                 if (metaDataResult.isSuccess() && metaDataResult.getResult() != null) {
                     pkg.setMetaData(metaDataResult.getResult().toBundle(pkg.getMetaData()));
                 }
                 return metaDataResult;
             case 1:
-                ParseResult<PackageManager.Property> propertyResult = parseMetaData(pkg, null, res, parser, "<property>", input);
+                ParseResult<PackageManager.Property> propertyResult =
+                        parseMetaData(pkg, null, res, parser, "<property>", input);
                 if (propertyResult.isSuccess()) {
                     pkg.addProperty(propertyResult.getResult());
                 }
@@ -619,81 +775,122 @@ public class ParsingPackageUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0108, code lost:
-    
-        if (r14 == null) goto L47;
-     */
+
+       if (r14 == null) goto L47;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0112, code lost:
-    
-        if (com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils.useLegacyRuntimeManifest(r22.getMetaData()) == false) goto L47;
-     */
+
+       if (com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils.useLegacyRuntimeManifest(r22.getMetaData()) == false) goto L47;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0114, code lost:
-    
-        com.samsung.android.core.pm.runtimemanifest.LegacyRuntimeManifestParseUtils.modifyParsingPackageWithReplacement(r22, r14);
-     */
+
+       com.samsung.android.core.pm.runtimemanifest.LegacyRuntimeManifestParseUtils.modifyParsingPackageWithReplacement(r22, r14);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0117, code lost:
-    
-        if (r16 != false) goto L54;
-     */
+
+       if (r16 != false) goto L54;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0121, code lost:
-    
-        if (com.android.internal.util.ArrayUtils.size(r22.getInstrumentations()) != 0) goto L54;
-     */
+
+       if (com.android.internal.util.ArrayUtils.size(r22.getInstrumentations()) != 0) goto L54;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0123, code lost:
-    
-        r0 = r21.deferError("<manifest> does not contain an <application> or <instrumentation>", android.content.pm.parsing.result.ParseInput.DeferredError.MISSING_APP_TAG);
-     */
+
+       r0 = r21.deferError("<manifest> does not contain an <application> or <instrumentation>", android.content.pm.parsing.result.ParseInput.DeferredError.MISSING_APP_TAG);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0130, code lost:
-    
-        if (r0.isError() == false) goto L54;
-     */
+
+       if (r0.isError() == false) goto L54;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0136, code lost:
-    
-        return r21.error(r0);
-     */
+
+       return r21.error(r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x013d, code lost:
-    
-        return validateBaseApkTags(r21, r22, r26);
-     */
+
+       return validateBaseApkTags(r21, r22, r26);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.parsing.ParsingPackage> parseBaseApkTags(android.content.pm.parsing.result.ParseInput r21, com.android.internal.pm.pkg.parsing.ParsingPackage r22, android.content.res.TypedArray r23, android.content.res.Resources r24, android.content.res.XmlResourceParser r25, int r26, boolean r27) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.parsing.ParsingPackage>
+            parseBaseApkTags(
+                    android.content.pm.parsing.result.ParseInput r21,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r22,
+                    android.content.res.TypedArray r23,
+                    android.content.res.Resources r24,
+                    android.content.res.XmlResourceParser r25,
+                    int r26,
+                    boolean r27)
+                    throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 318
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseBaseApkTags(android.content.pm.parsing.result.ParseInput, com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.TypedArray, android.content.res.Resources, android.content.res.XmlResourceParser, int, boolean):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseBaseApkTags(android.content.pm.parsing.result.ParseInput,"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.TypedArray, android.content.res.Resources,"
+                    + " android.content.res.XmlResourceParser, int,"
+                    + " boolean):android.content.pm.parsing.result.ParseResult");
     }
 
-    private ParseResult<ParsingPackage> validateBaseApkTags(ParseInput input, ParsingPackage pkg, int flags) {
+    private ParseResult<ParsingPackage> validateBaseApkTags(
+            ParseInput input, ParsingPackage pkg, int flags) {
         if (!ParsedAttributionUtils.isCombinationValid(pkg.getAttributions())) {
             return input.error(-101, "Combination <attribution> tags are not valid");
         }
         if (ParsedPermissionUtils.declareDuplicatePermission(pkg)) {
-            return input.error(-108, "Found duplicate permission with a different attribute value.");
+            return input.error(
+                    -108, "Found duplicate permission with a different attribute value.");
         }
         convertCompatPermissions(pkg);
         convertSplitPermissions(pkg);
         if (PMRune.PM_NAL_GET_APP_LIST) {
             String pkgName = pkg.getPackageName();
-            boolean isCtsPackage = "android.permission.cts.appthataccesseslocation".equals(pkgName) || "android.permission.cts.appthatrequestcustompermission".equals(pkgName) || "com.google.android.sdksandbox".equals(pkgName) || "android.appenumeration.queries.nothing.hasprovider".equals(pkgName) || "android.appenumeration.queries.nothing.haspermission".equals(pkgName);
+            boolean isCtsPackage =
+                    "android.permission.cts.appthataccesseslocation".equals(pkgName)
+                            || "android.permission.cts.appthatrequestcustompermission"
+                                    .equals(pkgName)
+                            || "com.google.android.sdksandbox".equals(pkgName)
+                            || "android.appenumeration.queries.nothing.hasprovider".equals(pkgName)
+                            || "android.appenumeration.queries.nothing.haspermission"
+                                    .equals(pkgName);
             if (!isCtsPackage && ArrayUtils.size(pkg.getInstrumentations()) == 0) {
                 pkg.addImplicitPermission(PackageManager.GET_APP_LIST_PERMISSION);
             }
         }
-        if (pkg.getTargetSdkVersion() < 4 || (!pkg.isSmallScreensSupported() && !pkg.isNormalScreensSupported() && !pkg.isLargeScreensSupported() && !pkg.isExtraLargeScreensSupported() && !pkg.isResizeable() && !pkg.isAnyDensity())) {
+        if (pkg.getTargetSdkVersion() < 4
+                || (!pkg.isSmallScreensSupported()
+                        && !pkg.isNormalScreensSupported()
+                        && !pkg.isLargeScreensSupported()
+                        && !pkg.isExtraLargeScreensSupported()
+                        && !pkg.isResizeable()
+                        && !pkg.isAnyDensity())) {
             adjustPackageToBeUnresizeableAndUnpipable(pkg);
         }
         boolean isApex = (flags & 1024) != 0;
         if (isApex && !pkg.getPermissions().isEmpty()) {
-            return input.error(-108, pkg.getPackageName() + " is an APEX package and shouldn't declare permissions.");
+            return input.error(
+                    -108,
+                    pkg.getPackageName()
+                            + " is an APEX package and shouldn't declare permissions.");
         }
         return input.success(pkg);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    private ParseResult parseBaseApkTag(String tag, ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser, int flags) throws IOException, XmlPullParserException {
+    private ParseResult parseBaseApkTag(
+            String tag,
+            ParseInput input,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser,
+            int flags)
+            throws IOException, XmlPullParserException {
         char c;
         switch (tag.hashCode()) {
             case -1773650763:
@@ -927,7 +1124,8 @@ public class ParsingPackageUtils {
             case 23:
                 return parseRestrictUpdateHash(flags, input, pkg, res, parser);
             case 24:
-                return parseInstallConstraints(input, pkg, res, parser, this.mCallback.getInstallConstraintsAllowlist());
+                return parseInstallConstraints(
+                        input, pkg, res, parser, this.mCallback.getInstallConstraintsAllowlist());
             case 25:
                 return parseQueries(input, pkg, res, parser);
             default:
@@ -935,128 +1133,159 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseSharedUser(ParseInput input, ParsingPackage pkg, TypedArray sa) {
+    private static ParseResult<ParsingPackage> parseSharedUser(
+            ParseInput input, ParsingPackage pkg, TypedArray sa) {
         boolean leaving = false;
         String str = nonConfigString(0, 0, sa);
         if (TextUtils.isEmpty(str)) {
             return input.success(pkg);
         }
         if (!"android".equals(pkg.getPackageName())) {
-            ParseResult<?> nameResult = FrameworkParsingPackageUtils.validateName(input, str, true, true);
+            ParseResult<?> nameResult =
+                    FrameworkParsingPackageUtils.validateName(input, str, true, true);
             if (nameResult.isError()) {
-                return input.error(-107, "<manifest> specifies bad sharedUserId name \"" + str + "\": " + nameResult.getErrorMessage());
+                return input.error(
+                        -107,
+                        "<manifest> specifies bad sharedUserId name \""
+                                + str
+                                + "\": "
+                                + nameResult.getErrorMessage());
             }
         }
         int max = anInteger(0, 13, sa);
         if (max != 0 && max < Build.VERSION.RESOURCES_SDK_INT) {
             leaving = true;
         }
-        return input.success(pkg.setLeavingSharedUser(leaving).setSharedUserId(str.intern()).setSharedUserLabelResourceId(resId(3, sa)));
+        return input.success(
+                pkg.setLeavingSharedUser(leaving)
+                        .setSharedUserId(str.intern())
+                        .setSharedUserLabelResourceId(resId(3, sa)));
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0235, code lost:
-    
-        r0 = r22.getPackageName();
-        r5 = r7.keySet();
-     */
+
+       r0 = r22.getPackageName();
+       r5 = r7.keySet();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0247, code lost:
-    
-        if (r5.removeAll(r9.keySet()) == false) goto L109;
-     */
+
+       if (r5.removeAll(r9.keySet()) == false) goto L109;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0264, code lost:
-    
-        return r21.error("Package" + r0 + " AndroidManifest.xml 'key-set' and 'public-key' names must be distinct.");
-     */
+
+       return r21.error("Package" + r0 + " AndroidManifest.xml 'key-set' and 'public-key' names must be distinct.");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0265, code lost:
-    
-        r6 = r9.entrySet().iterator();
-     */
+
+       r6 = r9.entrySet().iterator();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0271, code lost:
-    
-        if (r6.hasNext() == false) goto L166;
-     */
+
+       if (r6.hasNext() == false) goto L166;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0273, code lost:
-    
-        r14 = r6.next();
-        r15 = r14.getKey();
-     */
+
+       r14 = r6.next();
+       r15 = r14.getKey();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x028b, code lost:
-    
-        if (r14.getValue().size() != 0) goto L167;
-     */
+
+       if (r14.getValue().size() != 0) goto L167;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x02b8, code lost:
-    
-        if (r10.contains(r15) == false) goto L168;
-     */
+
+       if (r10.contains(r15) == false) goto L168;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x02e1, code lost:
-    
-        r3 = r14.getValue().iterator();
-     */
+
+       r3 = r14.getValue().iterator();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x02ef, code lost:
-    
-        if (r3.hasNext() == false) goto L175;
-     */
+
+       if (r3.hasNext() == false) goto L175;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x02f1, code lost:
-    
-        r4 = r3.next();
-        r22.addKeySet(r15, r7.get(r4));
-        r3 = r3;
-     */
+
+       r4 = r3.next();
+       r22.addKeySet(r15, r7.get(r4));
+       r3 = r3;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x02ba, code lost:
-    
-        android.util.Slog.w("PackageParsing", "Package" + r0 + " AndroidManifest.xml 'key-set' " + r15 + " contained improper 'public-key' tags. Not including in package's defined key-sets.");
-     */
+
+       android.util.Slog.w("PackageParsing", "Package" + r0 + " AndroidManifest.xml 'key-set' " + r15 + " contained improper 'public-key' tags. Not including in package's defined key-sets.");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:36:0x028d, code lost:
-    
-        android.util.Slog.w("PackageParsing", "Package" + r0 + " AndroidManifest.xml 'key-set' " + r15 + " has no valid associated 'public-key'. Not including in package's defined key-sets.");
-     */
+
+       android.util.Slog.w("PackageParsing", "Package" + r0 + " AndroidManifest.xml 'key-set' " + r15 + " has no valid associated 'public-key'. Not including in package's defined key-sets.");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0319, code lost:
-    
-        if (r22.getKeySetMapping().keySet().containsAll(r8) == false) goto L127;
-     */
+
+       if (r22.getKeySetMapping().keySet().containsAll(r8) == false) goto L127;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x031b, code lost:
-    
-        r22.setUpgradeKeySets(r8);
-     */
+
+       r22.setUpgradeKeySets(r8);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x0322, code lost:
-    
-        return r21.success(r22);
-     */
+
+       return r21.success(r22);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x033e, code lost:
-    
-        return r21.error("Package" + r0 + " AndroidManifest.xml does not define all 'upgrade-key-set's .");
-     */
+
+       return r21.error("Package" + r0 + " AndroidManifest.xml does not define all 'upgrade-key-set's .");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.parsing.ParsingPackage> parseKeySets(android.content.pm.parsing.result.ParseInput r21, com.android.internal.pm.pkg.parsing.ParsingPackage r22, android.content.res.Resources r23, android.content.res.XmlResourceParser r24) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private static android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.parsing.ParsingPackage>
+            parseKeySets(
+                    android.content.pm.parsing.result.ParseInput r21,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r22,
+                    android.content.res.Resources r23,
+                    android.content.res.XmlResourceParser r24)
+                    throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 856
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseKeySets(android.content.pm.parsing.result.ParseInput, com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseKeySets(android.content.pm.parsing.result.ParseInput,"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.Resources,"
+                    + " android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
     }
 
-    private static ParseResult<ParsingPackage> parseAttribution(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws IOException, XmlPullParserException {
-        ParseResult<ParsedAttribution> result = ParsedAttributionUtils.parseAttribution(res, parser, input);
+    private static ParseResult<ParsingPackage> parseAttribution(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws IOException, XmlPullParserException {
+        ParseResult<ParsedAttribution> result =
+                ParsedAttributionUtils.parseAttribution(res, parser, input);
         if (result.isError()) {
             return input.error(result);
         }
         return input.success(pkg.addAttribution(result.getResult()));
     }
 
-    private static ParseResult<ParsingPackage> parsePermissionGroup(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws XmlPullParserException, IOException {
-        ParseResult<ParsedPermissionGroup> result = ParsedPermissionUtils.parsePermissionGroup(pkg, res, parser, sUseRoundIcon, input);
+    private static ParseResult<ParsingPackage> parsePermissionGroup(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
+        ParseResult<ParsedPermissionGroup> result =
+                ParsedPermissionUtils.parsePermissionGroup(pkg, res, parser, sUseRoundIcon, input);
         if (result.isError()) {
             return input.error(result);
         }
         return input.success(pkg.addPermissionGroup(result.getResult()));
     }
 
-    private static ParseResult<ParsingPackage> parsePermission(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws XmlPullParserException, IOException {
-        ParseResult<ParsedPermission> result = ParsedPermissionUtils.parsePermission(pkg, res, parser, sUseRoundIcon, input);
+    private static ParseResult<ParsingPackage> parsePermission(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
+        ParseResult<ParsedPermission> result =
+                ParsedPermissionUtils.parsePermission(pkg, res, parser, sUseRoundIcon, input);
         if (result.isError()) {
             return input.error(result);
         }
@@ -1067,8 +1296,11 @@ public class ParsingPackageUtils {
         return input.success(pkg);
     }
 
-    private static ParseResult<ParsingPackage> parsePermissionTree(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws XmlPullParserException, IOException {
-        ParseResult<ParsedPermission> result = ParsedPermissionUtils.parsePermissionTree(pkg, res, parser, sUseRoundIcon, input);
+    private static ParseResult<ParsingPackage> parsePermissionTree(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
+        ParseResult<ParsedPermission> result =
+                ParsedPermissionUtils.parsePermissionTree(pkg, res, parser, sUseRoundIcon, input);
         if (result.isError()) {
             return input.error(result);
         }
@@ -1093,15 +1325,28 @@ public class ParsingPackageUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.parsing.ParsingPackage> parseUsesPermission(android.content.pm.parsing.result.ParseInput r23, com.android.internal.pm.pkg.parsing.ParsingPackage r24, android.content.res.Resources r25, android.content.res.XmlResourceParser r26) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
+    private android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.parsing.ParsingPackage>
+            parseUsesPermission(
+                    android.content.pm.parsing.result.ParseInput r23,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r24,
+                    android.content.res.Resources r25,
+                    android.content.res.XmlResourceParser r26)
+                    throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
         /*
             Method dump skipped, instructions count: 558
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseUsesPermission(android.content.pm.parsing.result.ParseInput, com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseUsesPermission(android.content.pm.parsing.result.ParseInput,"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.Resources,"
+                    + " android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
     }
 
-    private ParseResult<String> parseRequiredFeature(ParseInput input, Resources res, AttributeSet attrs) {
+    private ParseResult<String> parseRequiredFeature(
+            ParseInput input, Resources res, AttributeSet attrs) {
         ParseResult<String> success;
         TypedArray sa = res.obtainAttributes(attrs, R.styleable.AndroidManifestRequiredFeature);
         try {
@@ -1117,7 +1362,8 @@ public class ParsingPackageUtils {
         }
     }
 
-    private ParseResult<String> parseRequiredNotFeature(ParseInput input, Resources res, AttributeSet attrs) {
+    private ParseResult<String> parseRequiredNotFeature(
+            ParseInput input, Resources res, AttributeSet attrs) {
         ParseResult<String> success;
         TypedArray sa = res.obtainAttributes(attrs, R.styleable.AndroidManifestRequiredNotFeature);
         try {
@@ -1133,7 +1379,8 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseUsesConfiguration(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseUsesConfiguration(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         ConfigurationInfo cPref = new ConfigurationInfo();
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestUsesConfiguration);
         try {
@@ -1153,7 +1400,8 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseUsesFeature(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseUsesFeature(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         FeatureInfo fi = parseFeatureInfo(res, parser);
         pkg.addReqFeature(fi);
         if (fi.name == null) {
@@ -1182,7 +1430,9 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseFeatureGroup(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws IOException, XmlPullParserException {
+    private static ParseResult<ParsingPackage> parseFeatureGroup(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws IOException, XmlPullParserException {
         FeatureGroupInfo group = new FeatureGroupInfo();
         ArrayList<FeatureInfo> features = null;
         int depth = parser.getDepth();
@@ -1198,7 +1448,14 @@ public class ParsingPackageUtils {
                     featureInfo.flags = 1 | featureInfo.flags;
                     features = ArrayUtils.add(features, featureInfo);
                 } else {
-                    Slog.w("PackageParsing", "Unknown element under <feature-group>: " + innerTagName + " at " + pkg.getBaseApkPath() + " " + parser.getPositionDescription());
+                    Slog.w(
+                            "PackageParsing",
+                            "Unknown element under <feature-group>: "
+                                    + innerTagName
+                                    + " at "
+                                    + pkg.getBaseApkPath()
+                                    + " "
+                                    + parser.getPositionDescription());
                 }
             }
         }
@@ -1210,7 +1467,13 @@ public class ParsingPackageUtils {
         return input.success(pkg);
     }
 
-    private static ParseResult<ParsingPackage> parseUsesSdk(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser, int flags) throws IOException, XmlPullParserException {
+    private static ParseResult<ParsingPackage> parseUsesSdk(
+            ParseInput input,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser,
+            int flags)
+            throws IOException, XmlPullParserException {
         int innerDepth;
         ParseResult result;
         if (SDK_VERSION > 0) {
@@ -1248,7 +1511,9 @@ public class ParsingPackageUtils {
                 if (isApkInApex && (val2 = sa.peekValue(2)) != null) {
                     maxVers = val2.data;
                 }
-                ParseResult<Integer> targetSdkVersionResult = FrameworkParsingPackageUtils.computeTargetSdkVersion(targetVers, targetCode, SDK_CODENAMES, input, isApkInApex);
+                ParseResult<Integer> targetSdkVersionResult =
+                        FrameworkParsingPackageUtils.computeTargetSdkVersion(
+                                targetVers, targetCode, SDK_CODENAMES, input, isApkInApex);
                 if (targetSdkVersionResult.isError()) {
                     return input.error(targetSdkVersionResult);
                 }
@@ -1257,14 +1522,18 @@ public class ParsingPackageUtils {
                 if (deferResult.isError()) {
                     return input.error(deferResult);
                 }
-                ParseResult<Integer> minSdkVersionResult = FrameworkParsingPackageUtils.computeMinSdkVersion(minVers, minCode, SDK_VERSION, SDK_CODENAMES, input);
+                ParseResult<Integer> minSdkVersionResult =
+                        FrameworkParsingPackageUtils.computeMinSdkVersion(
+                                minVers, minCode, SDK_VERSION, SDK_CODENAMES, input);
                 if (minSdkVersionResult.isError()) {
                     return input.error(minSdkVersionResult);
                 }
                 int minSdkVersion = minSdkVersionResult.getResult().intValue();
                 pkg.setMinSdkVersion(minSdkVersion).setTargetSdkVersion(type);
                 if (isApkInApex) {
-                    ParseResult<Integer> maxSdkVersionResult = FrameworkParsingPackageUtils.computeMaxSdkVersion(maxVers, SDK_VERSION, input);
+                    ParseResult<Integer> maxSdkVersionResult =
+                            FrameworkParsingPackageUtils.computeMaxSdkVersion(
+                                    maxVers, SDK_VERSION, input);
                     if (maxSdkVersionResult.isError()) {
                         return input.error(maxSdkVersionResult);
                     }
@@ -1290,7 +1559,10 @@ public class ParsingPackageUtils {
                     } else {
                         int innerDepth3 = innerDepth2;
                         if (parser.getName().equals("extension-sdk")) {
-                            SparseIntArray minExtensionVersions2 = minExtensionVersions == null ? new SparseIntArray() : minExtensionVersions;
+                            SparseIntArray minExtensionVersions2 =
+                                    minExtensionVersions == null
+                                            ? new SparseIntArray()
+                                            : minExtensionVersions;
                             result = parseExtensionSdk(input, res, parser, minExtensionVersions2);
                             XmlUtils.skipCurrentTag(parser);
                             minExtensionVersions = minExtensionVersions2;
@@ -1327,7 +1599,11 @@ public class ParsingPackageUtils {
         return output;
     }
 
-    private static ParseResult<SparseIntArray> parseExtensionSdk(ParseInput input, Resources res, XmlResourceParser parser, SparseIntArray minExtensionVersions) {
+    private static ParseResult<SparseIntArray> parseExtensionSdk(
+            ParseInput input,
+            Resources res,
+            XmlResourceParser parser,
+            SparseIntArray minExtensionVersions) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestExtensionSdk);
         try {
             int sdkVersion = sa.getInt(0, -1);
@@ -1342,7 +1618,14 @@ public class ParsingPackageUtils {
             try {
                 int version = SdkExtensions.getExtensionVersion(sdkVersion);
                 if (version < minVersion) {
-                    return input.error(-12, "Package requires " + sdkVersion + " extension version " + minVersion + " which exceeds device version " + version);
+                    return input.error(
+                            -12,
+                            "Package requires "
+                                    + sdkVersion
+                                    + " extension version "
+                                    + minVersion
+                                    + " which exceeds device version "
+                                    + version);
                 }
                 minExtensionVersions.put(sdkVersion, minVersion);
                 return input.success(minExtensionVersions);
@@ -1355,7 +1638,12 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseRestrictUpdateHash(int flags, ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseRestrictUpdateHash(
+            int flags,
+            ParseInput input,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser) {
         if ((flags & 16) != 0) {
             TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestRestrictUpdate);
             try {
@@ -1364,7 +1652,10 @@ public class ParsingPackageUtils {
                     int hashLength = hash.length();
                     byte[] hashBytes = new byte[hashLength / 2];
                     for (int i = 0; i < hashLength; i += 2) {
-                        hashBytes[i / 2] = (byte) ((Character.digit(hash.charAt(i), 16) << 4) + Character.digit(hash.charAt(i + 1), 16));
+                        hashBytes[i / 2] =
+                                (byte)
+                                        ((Character.digit(hash.charAt(i), 16) << 4)
+                                                + Character.digit(hash.charAt(i + 1), 16));
                     }
                     pkg.setRestrictUpdateHash(hashBytes);
                 } else {
@@ -1377,91 +1668,110 @@ public class ParsingPackageUtils {
         return input.success(pkg);
     }
 
-    private static ParseResult<ParsingPackage> parseInstallConstraints(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser, Set<String> allowlist) throws IOException, XmlPullParserException {
-        return InstallConstraintsTagParser.parseInstallConstraints(input, pkg, res, parser, allowlist);
+    private static ParseResult<ParsingPackage> parseInstallConstraints(
+            ParseInput input,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser,
+            Set<String> allowlist)
+            throws IOException, XmlPullParserException {
+        return InstallConstraintsTagParser.parseInstallConstraints(
+                input, pkg, res, parser, allowlist);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x01e5, code lost:
-    
-        return r20.success(r21);
-     */
+
+       return r20.success(r21);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.parsing.ParsingPackage> parseQueries(android.content.pm.parsing.result.ParseInput r20, com.android.internal.pm.pkg.parsing.ParsingPackage r21, android.content.res.Resources r22, android.content.res.XmlResourceParser r23) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
+    private static android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.parsing.ParsingPackage>
+            parseQueries(
+                    android.content.pm.parsing.result.ParseInput r20,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r21,
+                    android.content.res.Resources r22,
+                    android.content.res.XmlResourceParser r23)
+                    throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
         /*
             Method dump skipped, instructions count: 486
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseQueries(android.content.pm.parsing.result.ParseInput, com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseQueries(android.content.pm.parsing.result.ParseInput,"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.Resources,"
+                    + " android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:157:0x062b, code lost:
-    
-        if (com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils.useLegacyRuntimeManifest(r33.getMetaData()) != false) goto L277;
-     */
+
+       if (com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils.useLegacyRuntimeManifest(r33.getMetaData()) != false) goto L277;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:158:0x062d, code lost:
-    
-        com.samsung.android.core.pm.runtimemanifest.RuntimeManifestOverlayUtils.applyRuntimeManifestIfNeeded(r33, r34);
-     */
+
+       com.samsung.android.core.pm.runtimemanifest.RuntimeManifestOverlayUtils.applyRuntimeManifestIfNeeded(r33, r34);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:160:0x0638, code lost:
-    
-        if (android.text.TextUtils.isEmpty(r33.getStaticSharedLibraryName()) == false) goto L286;
-     */
+
+       if (android.text.TextUtils.isEmpty(r33.getStaticSharedLibraryName()) == false) goto L286;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:162:0x0642, code lost:
-    
-        if (android.text.TextUtils.isEmpty(r33.getSdkLibraryName()) == false) goto L286;
-     */
+
+       if (android.text.TextUtils.isEmpty(r33.getSdkLibraryName()) == false) goto L286;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:163:0x0644, code lost:
-    
-        r1 = generateAppDetailsHiddenActivity(r32, r33);
-     */
+
+       r1 = generateAppDetailsHiddenActivity(r32, r33);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:164:0x064c, code lost:
-    
-        if (r1.isError() == false) goto L285;
-     */
+
+       if (r1.isError() == false) goto L285;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:166:0x0652, code lost:
-    
-        return r10.error(r1);
-     */
+
+       return r10.error(r1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:167:0x0653, code lost:
-    
-        r9.addActivity(r1.getResult());
-     */
+
+       r9.addActivity(r1.getResult());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:168:0x065c, code lost:
-    
-        if (r0 == false) goto L288;
-     */
+
+       if (r0 == false) goto L288;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:169:0x065e, code lost:
-    
-        r33.sortActivities();
-     */
+
+       r33.sortActivities();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:170:0x0661, code lost:
-    
-        if (r19 == false) goto L290;
-     */
+
+       if (r19 == false) goto L290;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:171:0x0663, code lost:
-    
-        r33.sortReceivers();
-     */
+
+       r33.sortReceivers();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:172:0x0666, code lost:
-    
-        if (r21 == false) goto L292;
-     */
+
+       if (r21 == false) goto L292;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:173:0x0668, code lost:
-    
-        r33.sortServices();
-     */
+
+       r33.sortServices();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:174:0x066b, code lost:
-    
-        afterParseBaseApplication(r9);
-     */
+
+       afterParseBaseApplication(r9);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:175:0x0672, code lost:
-    
-        return r32.success(r33);
-     */
+
+       return r32.success(r33);
+    */
     /* JADX WARN: Removed duplicated region for block: B:199:0x0604  */
     /* JADX WARN: Removed duplicated region for block: B:202:0x05ff A[SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:232:0x05b5 A[SYNTHETIC] */
@@ -1470,12 +1780,26 @@ public class ParsingPackageUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.parsing.ParsingPackage> parseBaseApplication(android.content.pm.parsing.result.ParseInput r32, com.android.internal.pm.pkg.parsing.ParsingPackage r33, android.content.res.Resources r34, android.content.res.XmlResourceParser r35, int r36, boolean r37) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.parsing.ParsingPackage>
+            parseBaseApplication(
+                    android.content.pm.parsing.result.ParseInput r32,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r33,
+                    android.content.res.Resources r34,
+                    android.content.res.XmlResourceParser r35,
+                    int r36,
+                    boolean r37)
+                    throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 1718
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseBaseApplication(android.content.pm.parsing.result.ParseInput, com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser, int, boolean):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseBaseApplication(android.content.pm.parsing.result.ParseInput,"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.Resources, android.content.res.XmlResourceParser, int,"
+                    + " boolean):android.content.pm.parsing.result.ParseResult");
     }
 
     private void afterParseBaseApplication(ParsingPackage pkg) {
@@ -1491,35 +1815,94 @@ public class ParsingPackageUtils {
         boolean z3;
         boolean z4;
         int targetSdk = pkg.getTargetSdkVersion();
-        ParsingPackage onBackInvokedCallbackEnabled = pkg.setBackupAllowed(bool(true, 17, sa)).setClearUserDataAllowed(bool(true, 5, sa)).setClearUserDataOnFailedRestoreAllowed(bool(true, 54, sa)).setAllowNativeHeapPointerTagging(bool(true, 59, sa)).setEnabled(bool(true, 9, sa)).setExtractNativeLibrariesRequested(bool(true, 34, sa)).setDeclaredHavingCode(bool(true, 7, sa)).setTaskReparentingAllowed(bool(false, 14, sa)).setSaveStateDisallowed(bool(false, 47, sa)).setCrossProfile(bool(false, 58, sa)).setDebuggable(bool(false, 10, sa)).setDefaultToDeviceProtectedStorage(bool(false, 38, sa)).setDirectBootAware(bool(false, 39, sa)).setForceQueryable(bool(false, 57, sa)).setGame(bool(false, 31, sa)).setUserDataFragile(bool(false, 50, sa)).setLargeHeap(bool(false, 24, sa)).setMultiArch(bool(false, 33, sa)).setPreserveLegacyExternalStorage(bool(false, 61, sa)).setRequiredForAllUsers(bool(false, 27, sa)).setRtlSupported(bool(false, 26, sa)).setTestOnly(bool(false, 15, sa)).setUseEmbeddedDex(bool(false, 53, sa)).setNonSdkApiRequested(bool(false, 49, sa)).setVmSafeMode(bool(false, 20, sa)).setAutoRevokePermissions(anInt(60, sa)).setAttributionsAreUserVisible(bool(false, 69, sa)).setResetEnabledSettingsOnAppDataCleared(bool(false, 70, sa)).setOnBackInvokedCallbackEnabled(bool(false, 73, sa));
+        ParsingPackage onBackInvokedCallbackEnabled =
+                pkg.setBackupAllowed(bool(true, 17, sa))
+                        .setClearUserDataAllowed(bool(true, 5, sa))
+                        .setClearUserDataOnFailedRestoreAllowed(bool(true, 54, sa))
+                        .setAllowNativeHeapPointerTagging(bool(true, 59, sa))
+                        .setEnabled(bool(true, 9, sa))
+                        .setExtractNativeLibrariesRequested(bool(true, 34, sa))
+                        .setDeclaredHavingCode(bool(true, 7, sa))
+                        .setTaskReparentingAllowed(bool(false, 14, sa))
+                        .setSaveStateDisallowed(bool(false, 47, sa))
+                        .setCrossProfile(bool(false, 58, sa))
+                        .setDebuggable(bool(false, 10, sa))
+                        .setDefaultToDeviceProtectedStorage(bool(false, 38, sa))
+                        .setDirectBootAware(bool(false, 39, sa))
+                        .setForceQueryable(bool(false, 57, sa))
+                        .setGame(bool(false, 31, sa))
+                        .setUserDataFragile(bool(false, 50, sa))
+                        .setLargeHeap(bool(false, 24, sa))
+                        .setMultiArch(bool(false, 33, sa))
+                        .setPreserveLegacyExternalStorage(bool(false, 61, sa))
+                        .setRequiredForAllUsers(bool(false, 27, sa))
+                        .setRtlSupported(bool(false, 26, sa))
+                        .setTestOnly(bool(false, 15, sa))
+                        .setUseEmbeddedDex(bool(false, 53, sa))
+                        .setNonSdkApiRequested(bool(false, 49, sa))
+                        .setVmSafeMode(bool(false, 20, sa))
+                        .setAutoRevokePermissions(anInt(60, sa))
+                        .setAttributionsAreUserVisible(bool(false, 69, sa))
+                        .setResetEnabledSettingsOnAppDataCleared(bool(false, 70, sa))
+                        .setOnBackInvokedCallbackEnabled(bool(false, 73, sa));
         if (targetSdk >= 29) {
             z = true;
         } else {
             z = false;
         }
-        ParsingPackage allowAudioPlaybackCapture = onBackInvokedCallbackEnabled.setAllowAudioPlaybackCapture(bool(z, 55, sa));
+        ParsingPackage allowAudioPlaybackCapture =
+                onBackInvokedCallbackEnabled.setAllowAudioPlaybackCapture(bool(z, 55, sa));
         if (targetSdk >= 14) {
             z2 = true;
         } else {
             z2 = false;
         }
-        ParsingPackage hardwareAccelerated = allowAudioPlaybackCapture.setHardwareAccelerated(bool(z2, 23, sa));
+        ParsingPackage hardwareAccelerated =
+                allowAudioPlaybackCapture.setHardwareAccelerated(bool(z2, 23, sa));
         if (targetSdk < 29) {
             z3 = true;
         } else {
             z3 = false;
         }
-        ParsingPackage requestLegacyExternalStorage = hardwareAccelerated.setRequestLegacyExternalStorage(bool(z3, 56, sa));
+        ParsingPackage requestLegacyExternalStorage =
+                hardwareAccelerated.setRequestLegacyExternalStorage(bool(z3, 56, sa));
         if (targetSdk < 28) {
             z4 = true;
         } else {
             z4 = false;
         }
-        requestLegacyExternalStorage.setCleartextTrafficAllowed(bool(z4, 36, sa)).setUiOptions(anInt(25, sa)).setCategory(anInt(-1, 43, sa)).setMaxAspectRatio(aFloat(44, sa)).setMinAspectRatio(aFloat(51, sa)).setBannerResourceId(resId(30, sa)).setDescriptionResourceId(resId(13, sa)).setIconResourceId(resId(2, sa)).setLogoResourceId(resId(22, sa)).setNetworkSecurityConfigResourceId(resId(41, sa)).setRoundIconResourceId(resId(42, sa)).setThemeResourceId(resId(0, sa)).setDataExtractionRulesResourceId(resId(66, sa)).setLocaleConfigResourceId(resId(71, sa)).setClassLoaderName(string(46, sa)).setRequiredAccountType(string(29, sa)).setRestrictedAccountType(string(28, sa)).setZygotePreloadName(string(52, sa)).setPermission(nonConfigString(0, 6, sa)).setAllowCrossUidActivitySwitchFromBelow(bool(true, 74, sa));
+        requestLegacyExternalStorage
+                .setCleartextTrafficAllowed(bool(z4, 36, sa))
+                .setUiOptions(anInt(25, sa))
+                .setCategory(anInt(-1, 43, sa))
+                .setMaxAspectRatio(aFloat(44, sa))
+                .setMinAspectRatio(aFloat(51, sa))
+                .setBannerResourceId(resId(30, sa))
+                .setDescriptionResourceId(resId(13, sa))
+                .setIconResourceId(resId(2, sa))
+                .setLogoResourceId(resId(22, sa))
+                .setNetworkSecurityConfigResourceId(resId(41, sa))
+                .setRoundIconResourceId(resId(42, sa))
+                .setThemeResourceId(resId(0, sa))
+                .setDataExtractionRulesResourceId(resId(66, sa))
+                .setLocaleConfigResourceId(resId(71, sa))
+                .setClassLoaderName(string(46, sa))
+                .setRequiredAccountType(string(29, sa))
+                .setRestrictedAccountType(string(28, sa))
+                .setZygotePreloadName(string(52, sa))
+                .setPermission(nonConfigString(0, 6, sa))
+                .setAllowCrossUidActivitySwitchFromBelow(bool(true, 74, sa));
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    private ParseResult parseBaseAppChildTag(ParseInput input, String tag, ParsingPackage pkg, Resources res, XmlResourceParser parser, int flags) throws IOException, XmlPullParserException {
+    private ParseResult parseBaseAppChildTag(
+            ParseInput input,
+            String tag,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser,
+            int flags)
+            throws IOException, XmlPullParserException {
         char c;
         switch (tag.hashCode()) {
             case -1803294168:
@@ -1612,13 +1995,15 @@ public class ParsingPackageUtils {
         }
         switch (c) {
             case 0:
-                ParseResult<PackageManager.Property> metaDataResult = parseMetaData(pkg, null, res, parser, "<meta-data>", input);
+                ParseResult<PackageManager.Property> metaDataResult =
+                        parseMetaData(pkg, null, res, parser, "<meta-data>", input);
                 if (metaDataResult.isSuccess() && metaDataResult.getResult() != null) {
                     pkg.setMetaData(metaDataResult.getResult().toBundle(pkg.getMetaData()));
                 }
                 return metaDataResult;
             case 1:
-                ParseResult<PackageManager.Property> propertyResult = parseMetaData(pkg, null, res, parser, "<property>", input);
+                ParseResult<PackageManager.Property> propertyResult =
+                        parseMetaData(pkg, null, res, parser, "<property>", input);
                 if (propertyResult.isSuccess()) {
                     pkg.addProperty(propertyResult.getResult());
                 }
@@ -1648,36 +2033,59 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseSdkLibrary(ParsingPackage pkg, Resources res, XmlResourceParser parser, ParseInput input) {
+    private static ParseResult<ParsingPackage> parseSdkLibrary(
+            ParsingPackage pkg, Resources res, XmlResourceParser parser, ParseInput input) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestSdkLibrary);
         try {
             String lname = sa.getNonResourceString(0);
             int versionMajor = sa.getInt(1, -1);
             if (lname != null && versionMajor >= 0) {
-                return pkg.getSharedUserId() != null ? input.error(-107, "sharedUserId not allowed in SDK library") : pkg.getSdkLibraryName() != null ? input.error("Multiple SDKs for package " + pkg.getPackageName()) : input.success(pkg.setSdkLibraryName(lname.intern()).setSdkLibVersionMajor(versionMajor).setSdkLibrary(true));
+                return pkg.getSharedUserId() != null
+                        ? input.error(-107, "sharedUserId not allowed in SDK library")
+                        : pkg.getSdkLibraryName() != null
+                                ? input.error("Multiple SDKs for package " + pkg.getPackageName())
+                                : input.success(
+                                        pkg.setSdkLibraryName(lname.intern())
+                                                .setSdkLibVersionMajor(versionMajor)
+                                                .setSdkLibrary(true));
             }
-            return input.error("Bad sdk-library declaration name: " + lname + " version: " + versionMajor);
+            return input.error(
+                    "Bad sdk-library declaration name: " + lname + " version: " + versionMajor);
         } finally {
             sa.recycle();
         }
     }
 
-    private static ParseResult<ParsingPackage> parseStaticLibrary(ParsingPackage pkg, Resources res, XmlResourceParser parser, ParseInput input) {
+    private static ParseResult<ParsingPackage> parseStaticLibrary(
+            ParsingPackage pkg, Resources res, XmlResourceParser parser, ParseInput input) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestStaticLibrary);
         try {
             String lname = sa.getNonResourceString(0);
             int version = sa.getInt(1, -1);
             int versionMajor = sa.getInt(2, 0);
             if (lname != null && version >= 0) {
-                return pkg.getSharedUserId() != null ? input.error(-107, "sharedUserId not allowed in static shared library") : pkg.getStaticSharedLibraryName() != null ? input.error("Multiple static-shared libs for package " + pkg.getPackageName()) : input.success(pkg.setStaticSharedLibraryName(lname.intern()).setStaticSharedLibraryVersion(PackageInfo.composeLongVersionCode(versionMajor, version)).setStaticSharedLibrary(true));
+                return pkg.getSharedUserId() != null
+                        ? input.error(-107, "sharedUserId not allowed in static shared library")
+                        : pkg.getStaticSharedLibraryName() != null
+                                ? input.error(
+                                        "Multiple static-shared libs for package "
+                                                + pkg.getPackageName())
+                                : input.success(
+                                        pkg.setStaticSharedLibraryName(lname.intern())
+                                                .setStaticSharedLibraryVersion(
+                                                        PackageInfo.composeLongVersionCode(
+                                                                versionMajor, version))
+                                                .setStaticSharedLibrary(true));
             }
-            return input.error("Bad static-library declaration name: " + lname + " version: " + version);
+            return input.error(
+                    "Bad static-library declaration name: " + lname + " version: " + version);
         } finally {
             sa.recycle();
         }
     }
 
-    private static ParseResult<ParsingPackage> parseLibrary(ParsingPackage pkg, Resources res, XmlResourceParser parser, ParseInput input) {
+    private static ParseResult<ParsingPackage> parseLibrary(
+            ParsingPackage pkg, Resources res, XmlResourceParser parser, ParseInput input) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestLibrary);
         try {
             String lname = sa.getNonResourceString(0);
@@ -1693,7 +2101,9 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseUsesSdkLibrary(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws XmlPullParserException, IOException {
+    private static ParseResult<ParsingPackage> parseUsesSdkLibrary(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestUsesSdkLibrary);
         try {
             String lname = sa.getNonResourceString(0);
@@ -1708,7 +2118,9 @@ public class ParsingPackageUtils {
                 String lname2 = lname.intern();
                 String certSha256Digest2 = certSha256Digest.replace(":", "").toLowerCase();
                 if ("".equals(certSha256Digest2)) {
-                    String certSha256Digest3 = SystemProperties.get("debug.pm.uses_sdk_library_default_cert_digest", "");
+                    String certSha256Digest3 =
+                            SystemProperties.get(
+                                    "debug.pm.uses_sdk_library_default_cert_digest", "");
                     try {
                         HexEncoding.decode(certSha256Digest3, false);
                         certSha256Digest2 = certSha256Digest3;
@@ -1723,16 +2135,30 @@ public class ParsingPackageUtils {
                 String[] additionalCertSha256Digests = certResult.getResult();
                 String[] certSha256Digests = new String[additionalCertSha256Digests.length + 1];
                 certSha256Digests[0] = certSha256Digest2;
-                System.arraycopy(additionalCertSha256Digests, 0, certSha256Digests, 1, additionalCertSha256Digests.length);
-                return input.success(pkg.addUsesSdkLibrary(lname2, versionMajor, certSha256Digests, optional));
+                System.arraycopy(
+                        additionalCertSha256Digests,
+                        0,
+                        certSha256Digests,
+                        1,
+                        additionalCertSha256Digests.length);
+                return input.success(
+                        pkg.addUsesSdkLibrary(lname2, versionMajor, certSha256Digests, optional));
             }
-            return input.error("Bad uses-sdk-library declaration name: " + lname + " version: " + versionMajor + " certDigest" + certSha256Digest);
+            return input.error(
+                    "Bad uses-sdk-library declaration name: "
+                            + lname
+                            + " version: "
+                            + versionMajor
+                            + " certDigest"
+                            + certSha256Digest);
         } finally {
             sa.recycle();
         }
     }
 
-    private static ParseResult<ParsingPackage> parseUsesStaticLibrary(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws XmlPullParserException, IOException {
+    private static ParseResult<ParsingPackage> parseUsesStaticLibrary(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestUsesStaticLibrary);
         try {
             String lname = sa.getNonResourceString(0);
@@ -1747,7 +2173,8 @@ public class ParsingPackageUtils {
                 String certSha256Digest2 = certSha256Digest.replace(":", "").toLowerCase();
                 String[] additionalCertSha256Digests = EmptyArray.STRING;
                 if (pkg.getTargetSdkVersion() >= 27) {
-                    ParseResult<String[]> certResult = parseAdditionalCertificates(input, res, parser);
+                    ParseResult<String[]> certResult =
+                            parseAdditionalCertificates(input, res, parser);
                     if (certResult.isError()) {
                         return input.error((ParseResult<?>) certResult);
                     }
@@ -1755,16 +2182,28 @@ public class ParsingPackageUtils {
                 }
                 String[] certSha256Digests = new String[additionalCertSha256Digests.length + 1];
                 certSha256Digests[0] = certSha256Digest2;
-                System.arraycopy(additionalCertSha256Digests, 0, certSha256Digests, 1, additionalCertSha256Digests.length);
+                System.arraycopy(
+                        additionalCertSha256Digests,
+                        0,
+                        certSha256Digests,
+                        1,
+                        additionalCertSha256Digests.length);
                 return input.success(pkg.addUsesStaticLibrary(lname2, version, certSha256Digests));
             }
-            return input.error("Bad uses-static-library declaration name: " + lname + " version: " + version + " certDigest" + certSha256Digest);
+            return input.error(
+                    "Bad uses-static-library declaration name: "
+                            + lname
+                            + " version: "
+                            + version
+                            + " certDigest"
+                            + certSha256Digest);
         } finally {
             sa.recycle();
         }
     }
 
-    private static ParseResult<ParsingPackage> parseUsesLibrary(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseUsesLibrary(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestUsesLibrary);
         try {
             String lname = sa.getNonResourceString(0);
@@ -1783,7 +2222,8 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseUsesNativeLibrary(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseUsesNativeLibrary(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestUsesNativeLibrary);
         try {
             String lname = sa.getNonResourceString(0);
@@ -1801,15 +2241,25 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseProcesses(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser, String[] separateProcesses, int flags) throws IOException, XmlPullParserException {
-        ParseResult<ArrayMap<String, ParsedProcess>> result = ParsedProcessUtils.parseProcesses(separateProcesses, pkg, res, parser, flags, input);
+    private static ParseResult<ParsingPackage> parseProcesses(
+            ParseInput input,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser,
+            String[] separateProcesses,
+            int flags)
+            throws IOException, XmlPullParserException {
+        ParseResult<ArrayMap<String, ParsedProcess>> result =
+                ParsedProcessUtils.parseProcesses(
+                        separateProcesses, pkg, res, parser, flags, input);
         if (result.isError()) {
             return input.error(result);
         }
         return input.success(pkg.setProcesses(result.getResult()));
     }
 
-    private static ParseResult<ParsingPackage> parseProfileable(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseProfileable(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         boolean z;
         ParsingPackage newPkg;
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestProfileable);
@@ -1835,14 +2285,19 @@ public class ParsingPackageUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0080, code lost:
-    
-        return r8.success(r0);
-     */
+
+       return r8.success(r0);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static android.content.pm.parsing.result.ParseResult<java.lang.String[]> parseAdditionalCertificates(android.content.pm.parsing.result.ParseInput r8, android.content.res.Resources r9, android.content.res.XmlResourceParser r10) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private static android.content.pm.parsing.result.ParseResult<java.lang.String[]>
+            parseAdditionalCertificates(
+                    android.content.pm.parsing.result.ParseInput r8,
+                    android.content.res.Resources r9,
+                    android.content.res.XmlResourceParser r10)
+                    throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             java.lang.String[] r0 = libcore.util.EmptyArray.STRING
             int r1 = r10.getDepth()
@@ -1906,17 +2361,30 @@ public class ParsingPackageUtils {
             android.content.pm.parsing.result.ParseResult r2 = r8.success(r0)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseAdditionalCertificates(android.content.pm.parsing.result.ParseInput, android.content.res.Resources, android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackageUtils.parseAdditionalCertificates(android.content.pm.parsing.result.ParseInput,"
+                    + " android.content.res.Resources,"
+                    + " android.content.res.XmlResourceParser):android.content.pm.parsing.result.ParseResult");
     }
 
-    private static ParseResult<ParsedActivity> generateAppDetailsHiddenActivity(ParseInput input, ParsingPackage pkg) {
+    private static ParseResult<ParsedActivity> generateAppDetailsHiddenActivity(
+            ParseInput input, ParsingPackage pkg) {
         String packageName = pkg.getPackageName();
-        ParseResult<String> result = ComponentParseUtils.buildTaskAffinityName(packageName, packageName, ":app_details", input);
+        ParseResult<String> result =
+                ComponentParseUtils.buildTaskAffinityName(
+                        packageName, packageName, ":app_details", input);
         if (result.isError()) {
             return input.error(result);
         }
         String taskAffinity = result.getResult();
-        return input.success(ParsedActivityImpl.makeAppDetailsActivity(packageName, pkg.getProcessName(), pkg.getUiOptions(), taskAffinity, pkg.isHardwareAccelerated()));
+        return input.success(
+                ParsedActivityImpl.makeAppDetailsActivity(
+                        packageName,
+                        pkg.getProcessName(),
+                        pkg.getUiOptions(),
+                        taskAffinity,
+                        pkg.isHardwareAccelerated()));
     }
 
     private static boolean hasDomainURLs(ParsingPackage pkg) {
@@ -1928,7 +2396,10 @@ public class ParsingPackageUtils {
             int filtersSize = filters.size();
             for (int filtersIndex = 0; filtersIndex < filtersSize; filtersIndex++) {
                 IntentFilter aii = filters.get(filtersIndex).getIntentFilter();
-                if (aii.hasAction("android.intent.action.VIEW") && aii.hasAction("android.intent.action.VIEW") && (aii.hasDataScheme(IntentFilter.SCHEME_HTTP) || aii.hasDataScheme(IntentFilter.SCHEME_HTTPS))) {
+                if (aii.hasAction("android.intent.action.VIEW")
+                        && aii.hasAction("android.intent.action.VIEW")
+                        && (aii.hasDataScheme(IntentFilter.SCHEME_HTTP)
+                                || aii.hasDataScheme(IntentFilter.SCHEME_HTTPS))) {
                     return true;
                 }
             }
@@ -1952,8 +2423,10 @@ public class ParsingPackageUtils {
         for (int index = 0; index < activitiesSize; index++) {
             ParsedActivity activity = activities.get(index);
             if (activity.getMaxAspectRatio() == -1.0f) {
-                float activityAspectRatio = activity.getMetaData().getFloat("android.max_aspect", maxAspectRatio);
-                ComponentMutateUtils.setMaxAspectRatio(activity, activity.getResizeMode(), activityAspectRatio);
+                float activityAspectRatio =
+                        activity.getMetaData().getFloat("android.max_aspect", maxAspectRatio);
+                ComponentMutateUtils.setMaxAspectRatio(
+                        activity, activity.getResizeMode(), activityAspectRatio);
             }
         }
     }
@@ -1965,25 +2438,30 @@ public class ParsingPackageUtils {
         for (int index = 0; index < activitiesSize; index++) {
             ParsedActivity activity = activities.get(index);
             if (activity.getMinAspectRatio() == -1.0f) {
-                ComponentMutateUtils.setMinAspectRatio(activity, activity.getResizeMode(), minAspectRatio);
+                ComponentMutateUtils.setMinAspectRatio(
+                        activity, activity.getResizeMode(), minAspectRatio);
             }
         }
     }
 
     private void setSupportsSizeChanges(ParsingPackage pkg) {
         Bundle appMetaData = pkg.getMetaData();
-        boolean supportsSizeChanges = appMetaData != null && appMetaData.getBoolean("android.supports_size_changes", false);
+        boolean supportsSizeChanges =
+                appMetaData != null
+                        && appMetaData.getBoolean("android.supports_size_changes", false);
         List<ParsedActivity> activities = pkg.getActivities();
         int activitiesSize = activities.size();
         for (int index = 0; index < activitiesSize; index++) {
             ParsedActivity activity = activities.get(index);
-            if (supportsSizeChanges || activity.getMetaData().getBoolean("android.supports_size_changes", false)) {
+            if (supportsSizeChanges
+                    || activity.getMetaData().getBoolean("android.supports_size_changes", false)) {
                 ComponentMutateUtils.setSupportsSizeChanges(activity, true);
             }
         }
     }
 
-    private static ParseResult<ParsingPackage> parseOverlay(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseOverlay(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestResourceOverlay);
         try {
             String target = sa.getString(1);
@@ -1997,9 +2475,23 @@ public class ParsingPackageUtils {
             String propName = sa.getString(5);
             String propValue = sa.getString(6);
             if (FrameworkParsingPackageUtils.checkRequiredSystemProperties(propName, propValue)) {
-                return input.success(pkg.setResourceOverlay(true).setOverlayTarget(target).setOverlayPriority(priority).setOverlayTargetOverlayableName(sa.getString(3)).setOverlayCategory(sa.getString(2)).setOverlayIsStatic(bool(false, 4, sa)));
+                return input.success(
+                        pkg.setResourceOverlay(true)
+                                .setOverlayTarget(target)
+                                .setOverlayPriority(priority)
+                                .setOverlayTargetOverlayableName(sa.getString(3))
+                                .setOverlayCategory(sa.getString(2))
+                                .setOverlayIsStatic(bool(false, 4, sa)));
             }
-            String message = "Skipping target and overlay pair " + target + " and " + pkg.getBaseApkPath() + ": overlay ignored due to required system property: " + propName + " with value: " + propValue;
+            String message =
+                    "Skipping target and overlay pair "
+                            + target
+                            + " and "
+                            + pkg.getBaseApkPath()
+                            + ": overlay ignored due to required system property: "
+                            + propName
+                            + " with value: "
+                            + propValue;
             Slog.i("PackageParsing", message);
             return input.skip(message);
         } finally {
@@ -2007,7 +2499,8 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseProtectedBroadcast(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseProtectedBroadcast(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestProtectedBroadcast);
         try {
             String name = nonResString(0, sa);
@@ -2020,27 +2513,42 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseSupportScreens(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseSupportScreens(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestSupportsScreens);
         try {
             int requiresSmallestWidthDp = anInt(0, 6, sa);
             int compatibleWidthLimitDp = anInt(0, 7, sa);
             int largestWidthLimitDp = anInt(0, 8, sa);
-            return input.success(pkg.setSmallScreensSupported(anInt(1, 1, sa)).setNormalScreensSupported(anInt(1, 2, sa)).setLargeScreensSupported(anInt(1, 3, sa)).setExtraLargeScreensSupported(anInt(1, 5, sa)).setResizeable(anInt(1, 4, sa)).setAnyDensity(anInt(1, 0, sa)).setRequiresSmallestWidthDp(requiresSmallestWidthDp).setCompatibleWidthLimitDp(compatibleWidthLimitDp).setLargestWidthLimitDp(largestWidthLimitDp));
+            return input.success(
+                    pkg.setSmallScreensSupported(anInt(1, 1, sa))
+                            .setNormalScreensSupported(anInt(1, 2, sa))
+                            .setLargeScreensSupported(anInt(1, 3, sa))
+                            .setExtraLargeScreensSupported(anInt(1, 5, sa))
+                            .setResizeable(anInt(1, 4, sa))
+                            .setAnyDensity(anInt(1, 0, sa))
+                            .setRequiresSmallestWidthDp(requiresSmallestWidthDp)
+                            .setCompatibleWidthLimitDp(compatibleWidthLimitDp)
+                            .setLargestWidthLimitDp(largestWidthLimitDp));
         } finally {
             sa.recycle();
         }
     }
 
-    private static ParseResult<ParsingPackage> parseInstrumentation(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws XmlPullParserException, IOException {
-        ParseResult<ParsedInstrumentation> result = ParsedInstrumentationUtils.parseInstrumentation(pkg, res, parser, sUseRoundIcon, input);
+    private static ParseResult<ParsingPackage> parseInstrumentation(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
+        ParseResult<ParsedInstrumentation> result =
+                ParsedInstrumentationUtils.parseInstrumentation(
+                        pkg, res, parser, sUseRoundIcon, input);
         if (result.isError()) {
             return input.error(result);
         }
         return input.success(pkg.addInstrumentation(result.getResult()));
     }
 
-    private static ParseResult<ParsingPackage> parseOriginalPackage(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseOriginalPackage(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestOriginalPackage);
         try {
             String orig = sa.getNonConfigurationString(0, 0);
@@ -2053,7 +2561,8 @@ public class ParsingPackageUtils {
         }
     }
 
-    private static ParseResult<ParsingPackage> parseAdoptPermissions(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
+    private static ParseResult<ParsingPackage> parseAdoptPermissions(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestOriginalPackage);
         try {
             String name = nonConfigString(0, 0, sa);
@@ -2085,7 +2594,8 @@ public class ParsingPackageUtils {
         for (int is = 0; is < listSize; is++) {
             PermissionManager.SplitPermissionInfo spi = this.mSplitPermissionInfos.get(is);
             Set<String> requestedPermissions = pkg.getRequestedPermissions();
-            if (pkg.getTargetSdkVersion() < spi.getTargetSdk() && requestedPermissions.contains(spi.getSplitPermission())) {
+            if (pkg.getTargetSdkVersion() < spi.getTargetSdk()
+                    && requestedPermissions.contains(spi.getSplitPermission())) {
                 List<String> newPerms = spi.getNewPermissions();
                 for (int in = 0; in < newPerms.size(); in++) {
                     String perm = newPerms.get(in);
@@ -2107,7 +2617,13 @@ public class ParsingPackageUtils {
         }
     }
 
-    public static ParseResult<PackageManager.Property> parseMetaData(ParsingPackage pkg, ParsedComponent component, Resources res, XmlResourceParser parser, String tagName, ParseInput input) {
+    public static ParseResult<PackageManager.Property> parseMetaData(
+            ParsingPackage pkg,
+            ParsedComponent component,
+            Resources res,
+            XmlResourceParser parser,
+            String tagName,
+            ParseInput input) {
         PackageManager.Property property;
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestMetaData);
         try {
@@ -2121,24 +2637,42 @@ public class ParsingPackageUtils {
             if (v == null || v.resourceId == 0) {
                 TypedValue v2 = sa.peekValue(1);
                 if (v2 == null) {
-                    return input.error(tagName + " requires an android:value or android:resource attribute");
+                    return input.error(
+                            tagName + " requires an android:value or android:resource attribute");
                 }
                 if (v2.type == 3) {
                     CharSequence cs = v2.coerceToString();
                     String stringValue = cs != null ? cs.toString() : null;
-                    property = new PackageManager.Property(name, stringValue, packageName, className);
+                    property =
+                            new PackageManager.Property(name, stringValue, packageName, className);
                 } else if (v2.type == 18) {
-                    property = new PackageManager.Property(name, v2.data != 0, packageName, className);
+                    property =
+                            new PackageManager.Property(name, v2.data != 0, packageName, className);
                 } else if (v2.type >= 16 && v2.type <= 31) {
-                    property = new PackageManager.Property(name, v2.data, false, packageName, className);
+                    property =
+                            new PackageManager.Property(
+                                    name, v2.data, false, packageName, className);
                 } else if (v2.type == 4) {
-                    property = new PackageManager.Property(name, v2.getFloat(), packageName, className);
+                    property =
+                            new PackageManager.Property(
+                                    name, v2.getFloat(), packageName, className);
                 } else {
-                    Slog.w("PackageParsing", tagName + " only supports string, integer, float, color, boolean, and resource reference types: " + parser.getName() + " at " + pkg.getBaseApkPath() + " " + parser.getPositionDescription());
+                    Slog.w(
+                            "PackageParsing",
+                            tagName
+                                    + " only supports string, integer, float, color, boolean, and"
+                                    + " resource reference types: "
+                                    + parser.getName()
+                                    + " at "
+                                    + pkg.getBaseApkPath()
+                                    + " "
+                                    + parser.getPositionDescription());
                     property = null;
                 }
             } else {
-                property = new PackageManager.Property(name, v.resourceId, true, packageName, className);
+                property =
+                        new PackageManager.Property(
+                                name, v.resourceId, true, packageName, className);
             }
             return input.success(property);
         } finally {
@@ -2146,20 +2680,47 @@ public class ParsingPackageUtils {
         }
     }
 
-    public static ParseResult<SigningDetails> getSigningDetails(ParseInput input, ParsedPackage pkg, boolean skipVerify) {
-        return getSigningDetails(input, pkg.getBaseApkPath(), pkg.isStaticSharedLibrary(), pkg.getTargetSdkVersion(), pkg.getSplitCodePaths(), skipVerify);
+    public static ParseResult<SigningDetails> getSigningDetails(
+            ParseInput input, ParsedPackage pkg, boolean skipVerify) {
+        return getSigningDetails(
+                input,
+                pkg.getBaseApkPath(),
+                pkg.isStaticSharedLibrary(),
+                pkg.getTargetSdkVersion(),
+                pkg.getSplitCodePaths(),
+                skipVerify);
     }
 
-    private static ParseResult<SigningDetails> getSigningDetails(ParseInput input, ParsingPackage pkg, boolean skipVerify) {
-        return getSigningDetails(input, pkg.getBaseApkPath(), pkg.isStaticSharedLibrary(), pkg.getTargetSdkVersion(), pkg.getSplitCodePaths(), skipVerify);
+    private static ParseResult<SigningDetails> getSigningDetails(
+            ParseInput input, ParsingPackage pkg, boolean skipVerify) {
+        return getSigningDetails(
+                input,
+                pkg.getBaseApkPath(),
+                pkg.isStaticSharedLibrary(),
+                pkg.getTargetSdkVersion(),
+                pkg.getSplitCodePaths(),
+                skipVerify);
     }
 
-    public static ParseResult<SigningDetails> getSigningDetails(ParseInput input, String baseApkPath, boolean isStaticSharedLibrary, int targetSdkVersion, String[] splitCodePaths, boolean skipVerify) {
+    public static ParseResult<SigningDetails> getSigningDetails(
+            ParseInput input,
+            String baseApkPath,
+            boolean isStaticSharedLibrary,
+            int targetSdkVersion,
+            String[] splitCodePaths,
+            boolean skipVerify) {
         File frameworkRes;
         SigningDetails signingDetails = SigningDetails.UNKNOWN;
         Trace.traceBegin(262144L, "collectCertificates");
         try {
-            ParseResult<SigningDetails> result = getSigningDetails(input, baseApkPath, skipVerify, isStaticSharedLibrary, signingDetails, targetSdkVersion);
+            ParseResult<SigningDetails> result =
+                    getSigningDetails(
+                            input,
+                            baseApkPath,
+                            skipVerify,
+                            isStaticSharedLibrary,
+                            signingDetails,
+                            targetSdkVersion);
             if (result.isError()) {
                 ParseResult<SigningDetails> error = input.error(result);
                 Trace.traceEnd(262144L);
@@ -2167,7 +2728,8 @@ public class ParsingPackageUtils {
             }
             SigningDetails signingDetails2 = result.getResult();
             try {
-                frameworkRes = new File(Environment.getRootDirectory(), "framework/framework-res.apk");
+                frameworkRes =
+                        new File(Environment.getRootDirectory(), "framework/framework-res.apk");
             } catch (Throwable th) {
                 th = th;
             }
@@ -2175,7 +2737,14 @@ public class ParsingPackageUtils {
                 boolean isFrameworkResSplit = frameworkRes.getAbsolutePath().equals(baseApkPath);
                 if (!ArrayUtils.isEmpty(splitCodePaths) && !isFrameworkResSplit) {
                     for (String str : splitCodePaths) {
-                        result = getSigningDetails(input, str, skipVerify, isStaticSharedLibrary, signingDetails2, targetSdkVersion);
+                        result =
+                                getSigningDetails(
+                                        input,
+                                        str,
+                                        skipVerify,
+                                        isStaticSharedLibrary,
+                                        signingDetails2,
+                                        targetSdkVersion);
                         if (result.isError()) {
                             ParseResult<SigningDetails> error2 = input.error(result);
                             Trace.traceEnd(262144L);
@@ -2195,14 +2764,23 @@ public class ParsingPackageUtils {
         }
     }
 
-    public static ParseResult<SigningDetails> getSigningDetails(ParseInput input, String baseCodePath, boolean skipVerify, boolean isStaticSharedLibrary, SigningDetails existingSigningDetails, int targetSdk) {
+    public static ParseResult<SigningDetails> getSigningDetails(
+            ParseInput input,
+            String baseCodePath,
+            boolean skipVerify,
+            boolean isStaticSharedLibrary,
+            SigningDetails existingSigningDetails,
+            int targetSdk) {
         ParseResult<SigningDetails> verified;
-        int minSignatureScheme = ApkSignatureVerifier.getMinimumSignatureSchemeVersionForTargetSdk(targetSdk);
+        int minSignatureScheme =
+                ApkSignatureVerifier.getMinimumSignatureSchemeVersionForTargetSdk(targetSdk);
         if (isStaticSharedLibrary) {
             minSignatureScheme = 2;
         }
         if (skipVerify) {
-            verified = ApkSignatureVerifier.unsafeGetCertsWithoutVerification(input, baseCodePath, minSignatureScheme);
+            verified =
+                    ApkSignatureVerifier.unsafeGetCertsWithoutVerification(
+                            input, baseCodePath, minSignatureScheme);
         } else {
             verified = ApkSignatureVerifier.verify(input, baseCodePath, minSignatureScheme);
         }
@@ -2228,9 +2806,24 @@ public class ParsingPackageUtils {
             return;
         }
         try {
-            ApplicationInfo androidAppInfo = ActivityThread.getPackageManager().getApplicationInfo("android", 0L, UserHandle.myUserId());
+            ApplicationInfo androidAppInfo =
+                    ActivityThread.getPackageManager()
+                            .getApplicationInfo("android", 0L, UserHandle.myUserId());
             Resources systemResources = Resources.getSystem();
-            Resources overlayableRes = ResourcesManager.getInstance().getResources(null, null, null, androidAppInfo.resourceDirs, androidAppInfo.overlayPaths, androidAppInfo.sharedLibraryFiles, null, null, systemResources.getCompatibilityInfo(), systemResources.getClassLoader(), null);
+            Resources overlayableRes =
+                    ResourcesManager.getInstance()
+                            .getResources(
+                                    null,
+                                    null,
+                                    null,
+                                    androidAppInfo.resourceDirs,
+                                    androidAppInfo.overlayPaths,
+                                    androidAppInfo.sharedLibraryFiles,
+                                    null,
+                                    null,
+                                    systemResources.getCompatibilityInfo(),
+                                    systemResources.getClassLoader(),
+                                    null);
             sUseRoundIcon = overlayableRes.getBoolean(R.bool.config_useRoundIcon);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -2269,7 +2862,8 @@ public class ParsingPackageUtils {
         return sa.getString(attribute);
     }
 
-    private static String nonConfigString(int allowedChangingConfigs, int attribute, TypedArray sa) {
+    private static String nonConfigString(
+            int allowedChangingConfigs, int attribute, TypedArray sa) {
         return sa.getNonConfigurationString(attribute, allowedChangingConfigs);
     }
 
@@ -2277,7 +2871,8 @@ public class ParsingPackageUtils {
         return sa.getNonResourceString(index);
     }
 
-    public static void writeKeySetMapping(Parcel dest, Map<String, ArraySet<PublicKey>> keySetMapping) {
+    public static void writeKeySetMapping(
+            Parcel dest, Map<String, ArraySet<PublicKey>> keySetMapping) {
         if (keySetMapping == null) {
             dest.writeInt(-1);
             return;
@@ -2313,7 +2908,10 @@ public class ParsingPackageUtils {
             } else {
                 ArraySet<PublicKey> keys = new ArraySet<>(M);
                 for (int j = 0; j < M; j++) {
-                    PublicKey pk = (PublicKey) in.readSerializable(PublicKey.class.getClassLoader(), PublicKey.class);
+                    PublicKey pk =
+                            (PublicKey)
+                                    in.readSerializable(
+                                            PublicKey.class.getClassLoader(), PublicKey.class);
                     keys.add(pk);
                 }
                 keySetMapping.put(key, keys);

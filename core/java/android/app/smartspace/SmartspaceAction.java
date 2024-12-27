@@ -10,24 +10,27 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SmartspaceAction implements Parcelable {
-    public static final Parcelable.Creator<SmartspaceAction> CREATOR = new Parcelable.Creator<SmartspaceAction>() { // from class: android.app.smartspace.SmartspaceAction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartspaceAction createFromParcel(Parcel in) {
-            return new SmartspaceAction(in);
-        }
+    public static final Parcelable.Creator<SmartspaceAction> CREATOR =
+            new Parcelable.Creator<
+                    SmartspaceAction>() { // from class: android.app.smartspace.SmartspaceAction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartspaceAction createFromParcel(Parcel in) {
+                    return new SmartspaceAction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartspaceAction[] newArray(int size) {
-            return new SmartspaceAction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartspaceAction[] newArray(int size) {
+                    return new SmartspaceAction[size];
+                }
+            };
     private static final String TAG = "SmartspaceAction";
     private final CharSequence mContentDescription;
     private Bundle mExtras;
@@ -51,7 +54,16 @@ public final class SmartspaceAction implements Parcelable {
         this.mExtras = in.readBundle();
     }
 
-    private SmartspaceAction(String id, Icon icon, CharSequence title, CharSequence subtitle, CharSequence contentDescription, PendingIntent pendingIntent, Intent intent, UserHandle userHandle, Bundle extras) {
+    private SmartspaceAction(
+            String id,
+            Icon icon,
+            CharSequence title,
+            CharSequence subtitle,
+            CharSequence contentDescription,
+            PendingIntent pendingIntent,
+            Intent intent,
+            UserHandle userHandle,
+            Bundle extras) {
         this.mId = (String) Objects.requireNonNull(id);
         this.mIcon = icon;
         this.mTitle = (CharSequence) Objects.requireNonNull(title);
@@ -133,7 +145,26 @@ public final class SmartspaceAction implements Parcelable {
     }
 
     public String toString() {
-        return "SmartspaceAction{mId='" + this.mId + DateFormat.QUOTE + ", mIcon=" + this.mIcon + ", mTitle=" + ((Object) this.mTitle) + ", mSubtitle=" + ((Object) this.mSubtitle) + ", mContentDescription=" + ((Object) this.mContentDescription) + ", mPendingIntent=" + this.mPendingIntent + ", mIntent=" + this.mIntent + ", mUserHandle=" + this.mUserHandle + ", mExtras=" + this.mExtras + '}';
+        return "SmartspaceAction{mId='"
+                + this.mId
+                + DateFormat.QUOTE
+                + ", mIcon="
+                + this.mIcon
+                + ", mTitle="
+                + ((Object) this.mTitle)
+                + ", mSubtitle="
+                + ((Object) this.mSubtitle)
+                + ", mContentDescription="
+                + ((Object) this.mContentDescription)
+                + ", mPendingIntent="
+                + this.mPendingIntent
+                + ", mIntent="
+                + this.mIntent
+                + ", mUserHandle="
+                + this.mUserHandle
+                + ", mExtras="
+                + this.mExtras
+                + '}';
     }
 
     @SystemApi
@@ -192,7 +223,16 @@ public final class SmartspaceAction implements Parcelable {
             if (this.mIcon != null) {
                 this.mIcon.convertToAshmem();
             }
-            return new SmartspaceAction(this.mId, this.mIcon, this.mTitle, this.mSubtitle, this.mContentDescription, this.mPendingIntent, this.mIntent, this.mUserHandle, this.mExtras);
+            return new SmartspaceAction(
+                    this.mId,
+                    this.mIcon,
+                    this.mTitle,
+                    this.mSubtitle,
+                    this.mContentDescription,
+                    this.mPendingIntent,
+                    this.mIntent,
+                    this.mUserHandle,
+                    this.mExtras);
         }
     }
 }

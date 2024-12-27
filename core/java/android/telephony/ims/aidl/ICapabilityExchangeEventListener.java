@@ -7,16 +7,19 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.SipDetails;
-import android.telephony.ims.aidl.IOptionsRequestCallback;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface ICapabilityExchangeEventListener extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.ims.aidl.ICapabilityExchangeEventListener";
+    public static final String DESCRIPTOR =
+            "android.telephony.ims.aidl.ICapabilityExchangeEventListener";
 
     void onPublishUpdated(SipDetails sipDetails) throws RemoteException;
 
-    void onRemoteCapabilityRequest(Uri uri, List<String> list, IOptionsRequestCallback iOptionsRequestCallback) throws RemoteException;
+    void onRemoteCapabilityRequest(
+            Uri uri, List<String> list, IOptionsRequestCallback iOptionsRequestCallback)
+            throws RemoteException;
 
     void onRequestPublishCapabilities(int i) throws RemoteException;
 
@@ -24,20 +27,18 @@ public interface ICapabilityExchangeEventListener extends IInterface {
 
     public static class Default implements ICapabilityExchangeEventListener {
         @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
-        public void onRequestPublishCapabilities(int publishTriggerType) throws RemoteException {
-        }
+        public void onRequestPublishCapabilities(int publishTriggerType) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
-        public void onUnpublish() throws RemoteException {
-        }
+        public void onUnpublish() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
-        public void onPublishUpdated(SipDetails details) throws RemoteException {
-        }
+        public void onPublishUpdated(SipDetails details) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
-        public void onRemoteCapabilityRequest(Uri contactUri, List<String> remoteCapabilities, IOptionsRequestCallback cb) throws RemoteException {
-        }
+        public void onRemoteCapabilityRequest(
+                Uri contactUri, List<String> remoteCapabilities, IOptionsRequestCallback cb)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +46,7 @@ public interface ICapabilityExchangeEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICapabilityExchangeEventListener {
+    public abstract static class Stub extends Binder implements ICapabilityExchangeEventListener {
         static final int TRANSACTION_onPublishUpdated = 3;
         static final int TRANSACTION_onRemoteCapabilityRequest = 4;
         static final int TRANSACTION_onRequestPublishCapabilities = 1;
@@ -92,7 +93,8 @@ public interface ICapabilityExchangeEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICapabilityExchangeEventListener.DESCRIPTOR);
             }
@@ -117,7 +119,8 @@ public interface ICapabilityExchangeEventListener extends IInterface {
                 case 4:
                     Uri _arg03 = (Uri) data.readTypedObject(Uri.CREATOR);
                     List<String> _arg1 = data.createStringArrayList();
-                    IOptionsRequestCallback _arg2 = IOptionsRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    IOptionsRequestCallback _arg2 =
+                            IOptionsRequestCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onRemoteCapabilityRequest(_arg03, _arg1, _arg2);
                     return true;
@@ -143,7 +146,8 @@ public interface ICapabilityExchangeEventListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
-            public void onRequestPublishCapabilities(int publishTriggerType) throws RemoteException {
+            public void onRequestPublishCapabilities(int publishTriggerType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);
@@ -178,7 +182,9 @@ public interface ICapabilityExchangeEventListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ICapabilityExchangeEventListener
-            public void onRemoteCapabilityRequest(Uri contactUri, List<String> remoteCapabilities, IOptionsRequestCallback cb) throws RemoteException {
+            public void onRemoteCapabilityRequest(
+                    Uri contactUri, List<String> remoteCapabilities, IOptionsRequestCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICapabilityExchangeEventListener.DESCRIPTOR);

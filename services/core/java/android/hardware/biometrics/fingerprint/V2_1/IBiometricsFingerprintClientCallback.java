@@ -10,6 +10,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -28,7 +29,9 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -70,7 +73,8 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -135,7 +139,8 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
         public final void onAcquired(int i, int i2, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -151,7 +156,8 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
         public final void onAuthenticated(long j, int i, int i2, ArrayList arrayList) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -168,7 +174,8 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
         public final void onEnrollResult(int i, int i2, int i3, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -185,7 +192,8 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
         public final void onEnumerate(int i, int i2, int i3, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -202,7 +210,8 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
         public final void onError(int i, int i2, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -218,7 +227,8 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
         public final void onRemoved(int i, int i2, int i3, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -261,7 +271,8 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException unused) {
-                return "[class or subclass of android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback]@Proxy";
+                return "[class or subclass of"
+                           + " android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback]@Proxy";
             }
         }
 
@@ -275,8 +286,11 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
-        if (queryLocalInterface != null && (queryLocalInterface instanceof IBiometricsFingerprintClientCallback)) {
+        IHwInterface queryLocalInterface =
+                iHwBinder.queryLocalInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+        if (queryLocalInterface != null
+                && (queryLocalInterface instanceof IBiometricsFingerprintClientCallback)) {
             return (IBiometricsFingerprintClientCallback) queryLocalInterface;
         }
         Proxy proxy = new Proxy();
@@ -284,7 +298,9 @@ public interface IBiometricsFingerprintClientCallback extends IBase {
         try {
             Iterator it = proxy.interfaceChain().iterator();
             while (it.hasNext()) {
-                if (((String) it.next()).equals("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback")) {
+                if (((String) it.next())
+                        .equals(
+                                "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback")) {
                     return proxy;
                 }
             }

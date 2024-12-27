@@ -6,9 +6,10 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.view.KeyEvent;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.policy.PhoneWindowManagerExt;
 import com.android.server.wm.WmCoverState;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.rune.InputRune;
 import com.samsung.android.view.SemWindowManager;
@@ -37,7 +38,10 @@ public abstract class SideKeyDoublePress {
         }
 
         public Intent getIntent() {
-            return new Intent("android.intent.action.MAIN").addCategory("android.intent.category.LAUNCHER").addFlags(270532608).setComponent(ComponentName.unflattenFromString(this.mTargetAppName));
+            return new Intent("android.intent.action.MAIN")
+                    .addCategory("android.intent.category.LAUNCHER")
+                    .addFlags(270532608)
+                    .setComponent(ComponentName.unflattenFromString(this.mTargetAppName));
         }
 
         public boolean preCondition(Intent intent, boolean z) {
@@ -77,7 +81,8 @@ public abstract class SideKeyDoublePress {
             }
         }
 
-        public abstract void startTargetApp(KeyEvent keyEvent, boolean z, boolean z2, Intent intent, Intent intent2);
+        public abstract void startTargetApp(
+                KeyEvent keyEvent, boolean z, boolean z2, Intent intent, Intent intent2);
 
         public final String toString() {
             StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(256, "Behavior=");
@@ -87,8 +92,7 @@ public abstract class SideKeyDoublePress {
             return m.toString();
         }
 
-        public void updateTargetComponent(Intent intent) {
-        }
+        public void updateTargetComponent(Intent intent) {}
     }
 
     public static Behavior getBehavior(String str) {
@@ -119,41 +123,59 @@ public abstract class SideKeyDoublePress {
         str.getClass();
         switch (str) {
             case "com.samsung.tvmode/com.samsung.tvmode.activity.MainActivity":
-                openingBixby = InputRune.PWM_POWER_KEY_DOUBLE_PRESS_ATT_TV_MODE ? new PhoneWindowManagerExt.OpeningBixby(str, i5) : null;
+                openingBixby =
+                        InputRune.PWM_POWER_KEY_DOUBLE_PRESS_ATT_TV_MODE
+                                ? new PhoneWindowManagerExt.OpeningBixby(str, i5)
+                                : null;
                 mBehavior = openingBixby;
                 return openingBixby;
             case "samsungpay://simplepay/sidekey":
-                PhoneWindowManagerExt.OpeningBixby openingBixby2 = new PhoneWindowManagerExt.OpeningBixby(str, i3);
+                PhoneWindowManagerExt.OpeningBixby openingBixby2 =
+                        new PhoneWindowManagerExt.OpeningBixby(str, i3);
                 mBehavior = openingBixby2;
                 return openingBixby2;
             case "com.sec.android.app.camera/com.sec.android.app.camera.Camera":
-                PhoneWindowManagerExt.OpeningBixby openingBixby3 = new PhoneWindowManagerExt.OpeningBixby(str, i4);
+                PhoneWindowManagerExt.OpeningBixby openingBixby3 =
+                        new PhoneWindowManagerExt.OpeningBixby(str, i4);
                 mBehavior = openingBixby3;
                 return openingBixby3;
             case "wakeBixby_openApps/wakeBixby_openApps":
-                openingBixby = InputRune.PWM_SIDE_KEY_WAKE_UP_BIXBY ? new PhoneWindowManagerExt.OpeningBixby(str, i6) : null;
+                openingBixby =
+                        InputRune.PWM_SIDE_KEY_WAKE_UP_BIXBY
+                                ? new PhoneWindowManagerExt.OpeningBixby(str, i6)
+                                : null;
                 mBehavior = openingBixby;
                 return openingBixby;
             case "torch/torch":
-                openingBixby = InputRune.PWM_SIDE_KEY_TORCH ? new PhoneWindowManagerExt.OpeningBixby(str, i) : null;
+                openingBixby =
+                        InputRune.PWM_SIDE_KEY_TORCH
+                                ? new PhoneWindowManagerExt.OpeningBixby(str, i)
+                                : null;
                 mBehavior = openingBixby;
                 return openingBixby;
             case "secureFolder/secureFolder":
-                openingBixby = InputRune.PWM_SIDE_KEY_DOUBLE_PRESS_SECURE_FOLDER ? new PhoneWindowManagerExt.OpeningBixby(str, i2) : null;
+                openingBixby =
+                        InputRune.PWM_SIDE_KEY_DOUBLE_PRESS_SECURE_FOLDER
+                                ? new PhoneWindowManagerExt.OpeningBixby(str, i2)
+                                : null;
                 mBehavior = openingBixby;
                 return openingBixby;
             default:
-                PhoneWindowManagerExt.OpeningApps openingApps = new PhoneWindowManagerExt.OpeningApps(str);
+                PhoneWindowManagerExt.OpeningApps openingApps =
+                        new PhoneWindowManagerExt.OpeningApps(str);
                 openingApps.mAction = 1;
                 mBehavior = openingApps;
                 return openingApps;
         }
     }
 
-    public static void launch(PhoneWindowManagerExt phoneWindowManagerExt, KeyEvent keyEvent, boolean z) {
+    public static void launch(
+            PhoneWindowManagerExt phoneWindowManagerExt, KeyEvent keyEvent, boolean z) {
         String uri;
         Intent fillInIntent;
-        SemWindowManager.KeyCustomizationInfo last = phoneWindowManagerExt.mKeyCustomizationPolicy.mKeyCustomizationInfoManager.getLast(8, 26);
+        SemWindowManager.KeyCustomizationInfo last =
+                phoneWindowManagerExt.mKeyCustomizationPolicy.mKeyCustomizationInfoManager.getLast(
+                        8, 26);
         if (last == null || last.getIntent() == null) {
             return;
         }
@@ -177,7 +199,8 @@ public abstract class SideKeyDoublePress {
             return;
         }
         behavior.updateTargetComponent(intent);
-        if (intent.getExtras() == null || !intent.getExtras().getBoolean("show_on_keyguard", false)) {
+        if (intent.getExtras() == null
+                || !intent.getExtras().getBoolean("show_on_keyguard", false)) {
             fillInIntent = PhoneWindowManagerExt.getFillInIntent();
         } else {
             fillInIntent = new Intent();

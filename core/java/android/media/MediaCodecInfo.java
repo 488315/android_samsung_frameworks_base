@@ -1,7 +1,6 @@
 package android.media;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.MediaCodecInfo;
 import android.media.codec.Flags;
 import android.os.Process;
 import android.os.SystemProperties;
@@ -11,11 +10,14 @@ import android.util.Pair;
 import android.util.Range;
 import android.util.Rational;
 import android.util.Size;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import com.samsung.android.media.SemMediaPlayer;
 import com.samsung.android.media.SemMediaPostProcessor;
 import com.samsung.android.transcode.constants.EncodeConstants;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -51,13 +53,14 @@ public final class MediaCodecInfo {
     private String mName;
     private static final Range<Integer> POSITIVE_INTEGERS = Range.create(1, Integer.MAX_VALUE);
     private static final Range<Long> POSITIVE_LONGS = Range.create(1L, Long.MAX_VALUE);
-    private static final Range<Rational> POSITIVE_RATIONALS = Range.create(new Rational(1, Integer.MAX_VALUE), new Rational(Integer.MAX_VALUE, 1));
-    private static final Range<Integer> FRAME_RATE_RANGE = Range.create(0, Integer.valueOf(EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+    private static final Range<Rational> POSITIVE_RATIONALS =
+            Range.create(new Rational(1, Integer.MAX_VALUE), new Rational(Integer.MAX_VALUE, 1));
+    private static final Range<Integer> FRAME_RATE_RANGE =
+            Range.create(0, Integer.valueOf(EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
     private static final Range<Integer> BITRATE_RANGE = Range.create(0, 500000000);
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityModel {
-    }
+    public @interface SecurityModel {}
 
     MediaCodecInfo(String name, String canonicalName, int flags, CodecCapabilities[] caps) {
         this.mName = name;
@@ -132,11 +135,14 @@ public final class MediaCodecInfo {
     private static final class LazyHolder {
         private static final Range<Integer> SIZE_RANGE;
 
-        private LazyHolder() {
-        }
+        private LazyHolder() {}
 
         static {
-            SIZE_RANGE = Process.is64Bit() ? Range.create(1, 32768) : Range.create(1, MediaProperties.resolution_limit_32bit().orElse(4096));
+            SIZE_RANGE =
+                    Process.is64Bit()
+                            ? Range.create(1, 32768)
+                            : Range.create(
+                                    1, MediaProperties.resolution_limit_32bit().orElse(4096));
         }
     }
 
@@ -233,8 +239,7 @@ public final class MediaCodecInfo {
         private VideoCapabilities mVideoCaps;
         public CodecProfileLevel[] profileLevels;
 
-        public CodecCapabilities() {
-        }
+        public CodecCapabilities() {}
 
         public final boolean isFeatureSupported(String name) {
             return checkFeature(name, this.mFlagsSupported);
@@ -249,8 +254,7 @@ public final class MediaCodecInfo {
             private static Feature[] decoderFeatures = getDecoderFeatures();
             private static Feature[] encoderFeatures = getEncoderFeatures();
 
-            private FeatureList() {
-            }
+            private FeatureList() {}
 
             private static Feature[] getDecoderFeatures() {
                 ArrayList<Feature> features = new ArrayList<>();
@@ -262,27 +266,34 @@ public final class MediaCodecInfo {
                 features.add(new Feature(CodecCapabilities.FEATURE_MultipleFrames, 32, false));
                 features.add(new Feature(CodecCapabilities.FEATURE_DynamicTimestamp, 64, false));
                 features.add(new Feature("low-latency", 128, true));
-                if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        Boolean valueOf;
-                        valueOf = Boolean.valueOf(Flags.dynamicColorAspects());
-                        return valueOf;
-                    }
-                })) {
-                    features.add(new Feature(CodecCapabilities.FEATURE_DynamicColorAspects, 256, true));
+                if (MediaCodec.GetFlag(
+                        new Supplier() { // from class:
+                            // android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                Boolean valueOf;
+                                valueOf = Boolean.valueOf(Flags.dynamicColorAspects());
+                                return valueOf;
+                            }
+                        })) {
+                    features.add(
+                            new Feature(CodecCapabilities.FEATURE_DynamicColorAspects, 256, true));
                 }
-                if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        Boolean valueOf;
-                        valueOf = Boolean.valueOf(Flags.nullOutputSurface());
-                        return valueOf;
-                    }
-                })) {
+                if (MediaCodec.GetFlag(
+                        new Supplier() { // from class:
+                            // android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                Boolean valueOf;
+                                valueOf = Boolean.valueOf(Flags.nullOutputSurface());
+                                return valueOf;
+                            }
+                        })) {
                     features.add(new Feature(CodecCapabilities.FEATURE_DetachedSurface, 512, true));
                 }
-                features.add(new Feature(CodecCapabilities.FEATURE_SpecialCodec, 1073741824, false, true));
+                features.add(
+                        new Feature(
+                                CodecCapabilities.FEATURE_SpecialCodec, 1073741824, false, true));
                 return (Feature[]) features.toArray(new Feature[0]);
             }
 
@@ -294,27 +305,33 @@ public final class MediaCodecInfo {
                 features.add(new Feature(CodecCapabilities.FEATURE_QpBounds, 8, false));
                 features.add(new Feature(CodecCapabilities.FEATURE_EncodingStatistics, 16, false));
                 features.add(new Feature(CodecCapabilities.FEATURE_HdrEditing, 32, false));
-                if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda2
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        Boolean valueOf;
-                        valueOf = Boolean.valueOf(Flags.hlgEditing());
-                        return valueOf;
-                    }
-                })) {
+                if (MediaCodec.GetFlag(
+                        new Supplier() { // from class:
+                            // android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                Boolean valueOf;
+                                valueOf = Boolean.valueOf(Flags.hlgEditing());
+                                return valueOf;
+                            }
+                        })) {
                     features.add(new Feature(CodecCapabilities.FEATURE_HlgEditing, 64, true));
                 }
-                if (MediaCodec.GetFlag(new Supplier() { // from class: android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda3
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        Boolean valueOf;
-                        valueOf = Boolean.valueOf(Flags.regionOfInterest());
-                        return valueOf;
-                    }
-                })) {
+                if (MediaCodec.GetFlag(
+                        new Supplier() { // from class:
+                            // android.media.MediaCodecInfo$CodecCapabilities$FeatureList$$ExternalSyntheticLambda3
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                Boolean valueOf;
+                                valueOf = Boolean.valueOf(Flags.regionOfInterest());
+                                return valueOf;
+                            }
+                        })) {
                     features.add(new Feature(CodecCapabilities.FEATURE_Roi, 128, true));
                 }
-                features.add(new Feature(CodecCapabilities.FEATURE_SpecialCodec, 1073741824, false, true));
+                features.add(
+                        new Feature(
+                                CodecCapabilities.FEATURE_SpecialCodec, 1073741824, false, true));
                 return (Feature[]) features.toArray(new Feature[0]);
             }
 
@@ -368,7 +385,11 @@ public final class MediaCodecInfo {
                 return false;
             }
             for (Feature feat : getValidFeatures()) {
-                if (!feat.mInternal && (yesNo = (Integer) map.get(MediaFormat.KEY_FEATURE_ + feat.mName)) != null && ((yesNo.intValue() == 1 && !isFeatureSupported(feat.mName)) || (yesNo.intValue() == 0 && isFeatureRequired(feat.mName)))) {
+                if (!feat.mInternal
+                        && (yesNo = (Integer) map.get(MediaFormat.KEY_FEATURE_ + feat.mName))
+                                != null
+                        && ((yesNo.intValue() == 1 && !isFeatureSupported(feat.mName))
+                                || (yesNo.intValue() == 0 && isFeatureRequired(feat.mName)))) {
                     return false;
                 }
             }
@@ -380,16 +401,22 @@ public final class MediaCodecInfo {
                 }
                 int maxLevel = 0;
                 for (CodecProfileLevel pl : this.profileLevels) {
-                    if (pl.profile == profile.intValue() && pl.level > maxLevel && (!this.mMime.equalsIgnoreCase("video/3gpp") || pl.level != 16 || maxLevel == 1)) {
+                    if (pl.profile == profile.intValue()
+                            && pl.level > maxLevel
+                            && (!this.mMime.equalsIgnoreCase("video/3gpp")
+                                    || pl.level != 16
+                                    || maxLevel == 1)) {
                         maxLevel = pl.level;
                     }
                 }
-                CodecCapabilities levelCaps = createFromProfileLevel(this.mMime, profile.intValue(), maxLevel);
+                CodecCapabilities levelCaps =
+                        createFromProfileLevel(this.mMime, profile.intValue(), maxLevel);
                 Map<String, Object> levelCriticalFormatMap = new HashMap<>(map);
                 if (isVideo()) {
                     criticalKeys = VideoCapabilities.VIDEO_LEVEL_CRITICAL_FORMAT_KEYS;
                 } else {
-                    criticalKeys = isAudio() ? AudioCapabilities.AUDIO_LEVEL_CRITICAL_FORMAT_KEYS : null;
+                    criticalKeys =
+                            isAudio() ? AudioCapabilities.AUDIO_LEVEL_CRITICAL_FORMAT_KEYS : null;
                 }
                 if (criticalKeys != null && criticalKeys.size() > 1 && levelCaps != null) {
                     levelCriticalFormatMap.keySet().retainAll(criticalKeys);
@@ -427,18 +454,30 @@ public final class MediaCodecInfo {
         private boolean supportsProfileLevel(int profile, Integer level) {
             for (CodecProfileLevel pl : this.profileLevels) {
                 if (pl.profile == profile) {
-                    if (level == null || this.mMime.equalsIgnoreCase("audio/mp4a-latm") || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS) || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS_HD) || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS_UHD)) {
+                    if (level == null
+                            || this.mMime.equalsIgnoreCase("audio/mp4a-latm")
+                            || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS)
+                            || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS_HD)
+                            || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS_UHD)) {
                         return true;
                     }
-                    if ((!this.mMime.equalsIgnoreCase("video/3gpp") || pl.level == level.intValue() || pl.level != 16 || level.intValue() <= 1) && (!this.mMime.equalsIgnoreCase("video/mp4v-es") || pl.level == level.intValue() || pl.level != 4 || level.intValue() <= 1)) {
+                    if ((!this.mMime.equalsIgnoreCase("video/3gpp")
+                                    || pl.level == level.intValue()
+                                    || pl.level != 16
+                                    || level.intValue() <= 1)
+                            && (!this.mMime.equalsIgnoreCase("video/mp4v-es")
+                                    || pl.level == level.intValue()
+                                    || pl.level != 4
+                                    || level.intValue() <= 1)) {
                         if (this.mMime.equalsIgnoreCase("video/hevc")) {
                             boolean supportsHighTier = (pl.level & 44739242) != 0;
                             boolean checkingHighTier = (44739242 & level.intValue()) != 0;
-                            if (checkingHighTier && !supportsHighTier) {
-                            }
+                            if (checkingHighTier && !supportsHighTier) {}
                         }
                         if (pl.level >= level.intValue()) {
-                            return createFromProfileLevel(this.mMime, profile, pl.level) == null || createFromProfileLevel(this.mMime, profile, level.intValue()) != null;
+                            return createFromProfileLevel(this.mMime, profile, pl.level) == null
+                                    || createFromProfileLevel(this.mMime, profile, level.intValue())
+                                            != null;
                         }
                     }
                 }
@@ -484,7 +523,9 @@ public final class MediaCodecInfo {
 
         public CodecCapabilities dup() {
             CodecCapabilities caps = new CodecCapabilities();
-            caps.profileLevels = (CodecProfileLevel[]) Arrays.copyOf(this.profileLevels, this.profileLevels.length);
+            caps.profileLevels =
+                    (CodecProfileLevel[])
+                            Arrays.copyOf(this.profileLevels, this.profileLevels.length);
             caps.colorFormats = Arrays.copyOf(this.colorFormats, this.colorFormats.length);
             caps.mMime = this.mMime;
             caps.mMaxSupportedInstances = this.mMaxSupportedInstances;
@@ -499,24 +540,46 @@ public final class MediaCodecInfo {
             return caps;
         }
 
-        public static CodecCapabilities createFromProfileLevel(String mime, int profile, int level) {
+        public static CodecCapabilities createFromProfileLevel(
+                String mime, int profile, int level) {
             CodecProfileLevel pl = new CodecProfileLevel();
             pl.profile = profile;
             pl.level = level;
             MediaFormat defaultFormat = new MediaFormat();
             defaultFormat.setString("mime", mime);
-            CodecCapabilities ret = new CodecCapabilities(new CodecProfileLevel[]{pl}, new int[0], true, defaultFormat, new MediaFormat());
+            CodecCapabilities ret =
+                    new CodecCapabilities(
+                            new CodecProfileLevel[] {pl},
+                            new int[0],
+                            true,
+                            defaultFormat,
+                            new MediaFormat());
             if (ret.mError != 0) {
                 return null;
             }
             return ret;
         }
 
-        CodecCapabilities(CodecProfileLevel[] profLevs, int[] colFmts, boolean encoder, Map<String, Object> defaultFormatMap, Map<String, Object> capabilitiesMap) {
-            this(profLevs, colFmts, encoder, new MediaFormat(defaultFormatMap), new MediaFormat(capabilitiesMap));
+        CodecCapabilities(
+                CodecProfileLevel[] profLevs,
+                int[] colFmts,
+                boolean encoder,
+                Map<String, Object> defaultFormatMap,
+                Map<String, Object> capabilitiesMap) {
+            this(
+                    profLevs,
+                    colFmts,
+                    encoder,
+                    new MediaFormat(defaultFormatMap),
+                    new MediaFormat(capabilitiesMap));
         }
 
-        CodecCapabilities(CodecProfileLevel[] profLevs, int[] colFmts, boolean encoder, MediaFormat defaultFormat, MediaFormat info) {
+        CodecCapabilities(
+                CodecProfileLevel[] profLevs,
+                int[] colFmts,
+                boolean encoder,
+                MediaFormat defaultFormat,
+                MediaFormat info) {
             boolean z;
             Map<String, Object> map = info.getMap();
             this.colorFormats = colFmts;
@@ -527,17 +590,19 @@ public final class MediaCodecInfo {
             this.mMime = this.mDefaultFormat.getString("mime");
             CodecProfileLevel[] profLevs2 = profLevs;
             boolean z2 = true;
-            if (profLevs2.length == 0 && this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_VIDEO_VP9)) {
+            if (profLevs2.length == 0
+                    && this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_VIDEO_VP9)) {
                 CodecProfileLevel profLev = new CodecProfileLevel();
                 profLev.profile = 1;
                 profLev.level = VideoCapabilities.equivalentVP9Level(info);
-                profLevs2 = new CodecProfileLevel[]{profLev};
+                profLevs2 = new CodecProfileLevel[] {profLev};
             }
             this.profileLevels = profLevs2;
             if (this.mMime.toLowerCase().startsWith("audio/")) {
                 this.mAudioCaps = AudioCapabilities.create(info, this);
                 this.mAudioCaps.getDefaultFormat(this.mDefaultFormat);
-            } else if (this.mMime.toLowerCase().startsWith(BnRConstants.VIDEO_DIR_PATH) || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_IMAGE_ANDROID_HEIC)) {
+            } else if (this.mMime.toLowerCase().startsWith(BnRConstants.VIDEO_DIR_PATH)
+                    || this.mMime.equalsIgnoreCase(MediaFormat.MIMETYPE_IMAGE_ANDROID_HEIC)) {
                 this.mVideoCaps = VideoCapabilities.create(info, this);
             }
             if (encoder) {
@@ -545,9 +610,14 @@ public final class MediaCodecInfo {
                 this.mEncoderCaps.getDefaultFormat(this.mDefaultFormat);
             }
             Map<String, Object> global = MediaCodecList.getGlobalSettings();
-            this.mMaxSupportedInstances = Utils.parseIntSafely(global.get("max-concurrent-instances"), 32);
-            int maxInstances = Utils.parseIntSafely(map.get("max-concurrent-instances"), this.mMaxSupportedInstances);
-            this.mMaxSupportedInstances = ((Integer) Range.create(1, 256).clamp(Integer.valueOf(maxInstances))).intValue();
+            this.mMaxSupportedInstances =
+                    Utils.parseIntSafely(global.get("max-concurrent-instances"), 32);
+            int maxInstances =
+                    Utils.parseIntSafely(
+                            map.get("max-concurrent-instances"), this.mMaxSupportedInstances);
+            this.mMaxSupportedInstances =
+                    ((Integer) Range.create(1, 256).clamp(Integer.valueOf(maxInstances)))
+                            .intValue();
             Feature[] validFeatures = getValidFeatures();
             int length = validFeatures.length;
             while (i < length) {
@@ -622,11 +692,11 @@ public final class MediaCodecInfo {
         }
 
         public Range<Integer>[] getInputChannelCountRanges() {
-            return (Range[]) Arrays.copyOf(this.mInputChannelRanges, this.mInputChannelRanges.length);
+            return (Range[])
+                    Arrays.copyOf(this.mInputChannelRanges, this.mInputChannelRanges.length);
         }
 
-        private AudioCapabilities() {
-        }
+        private AudioCapabilities() {}
 
         public static AudioCapabilities create(MediaFormat info, CodecCapabilities parent) {
             AudioCapabilities caps = new AudioCapabilities();
@@ -643,10 +713,13 @@ public final class MediaCodecInfo {
 
         private void initWithPlatformLimits() {
             this.mBitrateRange = Range.create(0, Integer.MAX_VALUE);
-            this.mInputChannelRanges = new Range[]{Range.create(1, 30)};
+            this.mInputChannelRanges = new Range[] {Range.create(1, 30)};
             int minSampleRate = SystemProperties.getInt("ro.mediacodec.min_sample_rate", 7350);
             int maxSampleRate = SystemProperties.getInt("ro.mediacodec.max_sample_rate", 192000);
-            this.mSampleRateRanges = new Range[]{Range.create(Integer.valueOf(minSampleRate), Integer.valueOf(maxSampleRate))};
+            this.mSampleRateRanges =
+                    new Range[] {
+                        Range.create(Integer.valueOf(minSampleRate), Integer.valueOf(maxSampleRate))
+                    };
             this.mSampleRates = null;
         }
 
@@ -692,7 +765,8 @@ public final class MediaCodecInfo {
 
         private void limitSampleRates(Range<Integer>[] rateRanges) {
             Utils.sortDistinctRanges(rateRanges);
-            this.mSampleRateRanges = Utils.intersectSortedDistinctRanges(this.mSampleRateRanges, rateRanges);
+            this.mSampleRateRanges =
+                    Utils.intersectSortedDistinctRanges(this.mSampleRateRanges, rateRanges);
             for (Range<Integer> range : this.mSampleRateRanges) {
                 if (!range.getLower().equals(range.getUpper())) {
                     this.mSampleRates = null;
@@ -712,19 +786,24 @@ public final class MediaCodecInfo {
             CodecProfileLevel[] profileLevels = this.mParent.profileLevels;
             String mime = this.mParent.getMimeType();
             if (mime.equalsIgnoreCase("audio/mpeg")) {
-                sampleRates = new int[]{8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000};
+                sampleRates =
+                        new int[] {8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000};
                 bitRates = Range.create(8000, 320000);
                 maxChannels = 2;
             } else if (mime.equalsIgnoreCase("audio/3gpp")) {
-                sampleRates = new int[]{8000};
+                sampleRates = new int[] {8000};
                 bitRates = Range.create(4750, 12200);
                 maxChannels = 1;
             } else if (mime.equalsIgnoreCase("audio/amr-wb")) {
-                sampleRates = new int[]{16000};
+                sampleRates = new int[] {16000};
                 bitRates = Range.create(6600, 23850);
                 maxChannels = 1;
             } else if (mime.equalsIgnoreCase("audio/mp4a-latm")) {
-                sampleRates = new int[]{7350, 8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 64000, 88200, 96000};
+                sampleRates =
+                        new int[] {
+                            7350, 8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000,
+                            64000, 88200, 96000
+                        };
                 bitRates = Range.create(8000, 510000);
                 maxChannels = 48;
             } else if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_VORBIS)) {
@@ -736,33 +815,39 @@ public final class MediaCodecInfo {
                 int i3 = 48000;
                 if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_OPUS)) {
                     bitRates = Range.create(6000, 510000);
-                    sampleRates = new int[]{8000, 12000, 16000, 24000, 48000};
+                    sampleRates = new int[] {8000, 12000, 16000, 24000, 48000};
                     maxChannels = 255;
                 } else if (!mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_RAW)) {
                     if (!mime.equalsIgnoreCase("audio/flac")) {
-                        if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_ALAW) || mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_MLAW)) {
-                            sampleRates = new int[]{8000};
+                        if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_ALAW)
+                                || mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_MLAW)) {
+                            sampleRates = new int[] {8000};
                             bitRates = Range.create(64000, 64000);
                         } else if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_MSGSM)) {
-                            sampleRates = new int[]{8000};
-                            bitRates = Range.create(Integer.valueOf(EncodeConstants.BitRate.MM_AVG_FHD_DATARATE), Integer.valueOf(EncodeConstants.BitRate.MM_AVG_FHD_DATARATE));
+                            sampleRates = new int[] {8000};
+                            bitRates =
+                                    Range.create(
+                                            Integer.valueOf(
+                                                    EncodeConstants.BitRate.MM_AVG_FHD_DATARATE),
+                                            Integer.valueOf(
+                                                    EncodeConstants.BitRate.MM_AVG_FHD_DATARATE));
                             maxChannels = 1;
                         } else if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_AC3)) {
                             maxChannels = 6;
                         } else if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_EAC3)) {
                             maxChannels = 16;
                         } else if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_EAC3_JOC)) {
-                            sampleRates = new int[]{48000};
+                            sampleRates = new int[] {48000};
                             bitRates = Range.create(32000, 6144000);
                             maxChannels = 16;
                         } else {
                             int i4 = 44100;
                             if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_AC4)) {
-                                sampleRates = new int[]{44100, 48000, 96000, 192000};
+                                sampleRates = new int[] {44100, 48000, 96000, 192000};
                                 bitRates = Range.create(16000, 2688000);
                                 maxChannels = 24;
                             } else if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS)) {
-                                sampleRates = new int[]{44100, 48000};
+                                sampleRates = new int[] {44100, 48000};
                                 bitRates = Range.create(96000, 1524000);
                                 maxChannels = 6;
                             } else if (mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_DTS_HD)) {
@@ -773,18 +858,29 @@ public final class MediaCodecInfo {
                                     switch (profileLevel.profile) {
                                         case 1:
                                         case 4:
-                                            sampleRates = new int[]{44100, 48000, 88200, 96000, 176400, 192000};
+                                            sampleRates =
+                                                    new int[] {
+                                                        44100, 48000, 88200, 96000, 176400, 192000
+                                                    };
                                             bitRates = Range.create(96000, 24500000);
                                             break;
                                         case 2:
-                                            sampleRates = new int[]{22050, i2, i4, 48000};
+                                            sampleRates = new int[] {22050, i2, i4, 48000};
                                             bitRates = Range.create(32000, 768000);
                                             break;
                                         case 3:
                                         default:
-                                            Log.w(TAG, "Unrecognized profile " + profileLevel.profile + " for " + mime);
+                                            Log.w(
+                                                    TAG,
+                                                    "Unrecognized profile "
+                                                            + profileLevel.profile
+                                                            + " for "
+                                                            + mime);
                                             this.mParent.mError |= 1;
-                                            sampleRates = new int[]{44100, 48000, 88200, 96000, 176400, 192000};
+                                            sampleRates =
+                                                    new int[] {
+                                                        44100, 48000, 88200, 96000, 176400, 192000
+                                                    };
                                             bitRates = Range.create(96000, 24500000);
                                             break;
                                     }
@@ -800,19 +896,30 @@ public final class MediaCodecInfo {
                                     CodecProfileLevel profileLevel2 = profileLevels[i6];
                                     switch (profileLevel2.profile) {
                                         case 1:
-                                            sampleRates = new int[]{44100, 48000, 88200, 96000, 176400, 192000};
+                                            sampleRates =
+                                                    new int[] {
+                                                        44100, 48000, 88200, 96000, 176400, 192000
+                                                    };
                                             bitRates = Range.create(96000, 24500000);
                                             maxChannels = 32;
                                             break;
                                         case 2:
-                                            sampleRates = new int[]{i3};
+                                            sampleRates = new int[] {i3};
                                             bitRates = Range.create(96000, 768000);
                                             maxChannels = 10;
                                             break;
                                         default:
-                                            Log.w(TAG, "Unrecognized profile " + profileLevel2.profile + " for " + mime);
+                                            Log.w(
+                                                    TAG,
+                                                    "Unrecognized profile "
+                                                            + profileLevel2.profile
+                                                            + " for "
+                                                            + mime);
                                             this.mParent.mError |= 1;
-                                            sampleRates = new int[]{44100, 48000, 88200, 96000, 176400, 192000};
+                                            sampleRates =
+                                                    new int[] {
+                                                        44100, 48000, 88200, 96000, 176400, 192000
+                                                    };
                                             bitRates = Range.create(96000, 24500000);
                                             maxChannels = 32;
                                             break;
@@ -845,7 +952,7 @@ public final class MediaCodecInfo {
             } else {
                 i = 1;
                 c = 0;
-                limitSampleRates(new Range[]{sampleRateRange});
+                limitSampleRates(new Range[] {sampleRateRange});
             }
             Range<Integer> channelRange = Range.create(1, Integer.valueOf(maxChannels));
             Range<Integer>[] rangeArr = new Range[i];
@@ -861,7 +968,8 @@ public final class MediaCodecInfo {
                 myInputChannels[i] = Range.create(Integer.valueOf(lower), Integer.valueOf(upper));
             }
             Utils.sortDistinctRanges(myInputChannels);
-            Range<Integer>[] joinedChannelList = Utils.intersectSortedDistinctRanges(myInputChannels, this.mInputChannelRanges);
+            Range<Integer>[] joinedChannelList =
+                    Utils.intersectSortedDistinctRanges(myInputChannels, this.mInputChannelRanges);
             this.mInputChannelRanges = joinedChannelList;
             if (bitRates != null) {
                 this.mBitrateRange = this.mBitrateRange.intersect(bitRates);
@@ -887,27 +995,32 @@ public final class MediaCodecInfo {
                 }
                 channels = channelRanges;
             } else if (info.containsKey("channel-range")) {
-                Range<Integer> oneRange = Utils.parseIntRange(info.getString("channel-range"), null);
-                channels = new Range[]{oneRange};
+                Range<Integer> oneRange =
+                        Utils.parseIntRange(info.getString("channel-range"), null);
+                channels = new Range[] {oneRange};
             } else if (info.containsKey("max-channel-count")) {
-                int maxInputChannels = Utils.parseIntSafely(info.getString("max-channel-count"), 30);
+                int maxInputChannels =
+                        Utils.parseIntSafely(info.getString("max-channel-count"), 30);
                 if (maxInputChannels == 0) {
-                    channels = new Range[]{Range.create(0, 0)};
+                    channels = new Range[] {Range.create(0, 0)};
                 } else {
-                    channels = new Range[]{Range.create(1, Integer.valueOf(maxInputChannels))};
+                    channels = new Range[] {Range.create(1, Integer.valueOf(maxInputChannels))};
                 }
             } else if ((this.mParent.mError & 2) != 0) {
-                channels = new Range[]{Range.create(0, 0)};
+                channels = new Range[] {Range.create(0, 0)};
             }
             if (info.containsKey("bitrate-range")) {
-                bitRates = bitRates.intersect(Utils.parseIntRange(info.getString("bitrate-range"), bitRates));
+                bitRates =
+                        bitRates.intersect(
+                                Utils.parseIntRange(info.getString("bitrate-range"), bitRates));
             }
             applyLimits(channels, bitRates);
         }
 
         public void getDefaultFormat(MediaFormat format) {
             if (this.mBitrateRange.getLower().equals(this.mBitrateRange.getUpper())) {
-                format.setInteger(MediaFormat.KEY_BIT_RATE, this.mBitrateRange.getLower().intValue());
+                format.setInteger(
+                        MediaFormat.KEY_BIT_RATE, this.mBitrateRange.getLower().intValue());
             }
             if (getMaxInputChannelCount() == 1) {
                 format.setInteger(MediaFormat.KEY_CHANNEL_COUNT, 1);
@@ -921,7 +1034,8 @@ public final class MediaCodecInfo {
             Map<String, Object> map = format.getMap();
             Integer sampleRate = (Integer) map.get(MediaFormat.KEY_SAMPLE_RATE);
             Integer channels = (Integer) map.get(MediaFormat.KEY_CHANNEL_COUNT);
-            return supports(sampleRate, channels) && CodecCapabilities.supportsBitrate(this.mBitrateRange, format);
+            return supports(sampleRate, channels)
+                    && CodecCapabilities.supportsBitrate(this.mBitrateRange, format);
         }
     }
 
@@ -931,7 +1045,13 @@ public final class MediaCodecInfo {
 
     public static final class VideoCapabilities {
         private static final String TAG = "VideoCapabilities";
-        static final Set<String> VIDEO_LEVEL_CRITICAL_FORMAT_KEYS = Set.of("width", "height", MediaFormat.KEY_FRAME_RATE, MediaFormat.KEY_BIT_RATE, "mime");
+        static final Set<String> VIDEO_LEVEL_CRITICAL_FORMAT_KEYS =
+                Set.of(
+                        "width",
+                        "height",
+                        MediaFormat.KEY_FRAME_RATE,
+                        MediaFormat.KEY_BIT_RATE,
+                        "mime");
         private boolean mAllowMbOverride;
         private Range<Rational> mAspectRatioRange;
         private Range<Integer> mBitrateRange;
@@ -983,17 +1103,43 @@ public final class MediaCodecInfo {
         public Range<Integer> getSupportedWidthsFor(int height) {
             try {
                 Range<Integer> range = this.mWidthRange;
-                if (!this.mHeightRange.contains((Range<Integer>) Integer.valueOf(height)) || height % this.mHeightAlignment != 0) {
+                if (!this.mHeightRange.contains((Range<Integer>) Integer.valueOf(height))
+                        || height % this.mHeightAlignment != 0) {
                     throw new IllegalArgumentException("unsupported height");
                 }
                 int heightInBlocks = Utils.divUp(height, this.mBlockHeight);
-                int minWidthInBlocks = Math.max(Utils.divUp(this.mBlockCountRange.getLower().intValue(), heightInBlocks), (int) Math.ceil(this.mBlockAspectRatioRange.getLower().doubleValue() * heightInBlocks));
-                int maxWidthInBlocks = Math.min(this.mBlockCountRange.getUpper().intValue() / heightInBlocks, (int) (this.mBlockAspectRatioRange.getUpper().doubleValue() * heightInBlocks));
-                Range<Integer> range2 = range.intersect(Integer.valueOf(((minWidthInBlocks - 1) * this.mBlockWidth) + this.mWidthAlignment), Integer.valueOf(this.mBlockWidth * maxWidthInBlocks));
+                int minWidthInBlocks =
+                        Math.max(
+                                Utils.divUp(
+                                        this.mBlockCountRange.getLower().intValue(),
+                                        heightInBlocks),
+                                (int)
+                                        Math.ceil(
+                                                this.mBlockAspectRatioRange.getLower().doubleValue()
+                                                        * heightInBlocks));
+                int maxWidthInBlocks =
+                        Math.min(
+                                this.mBlockCountRange.getUpper().intValue() / heightInBlocks,
+                                (int)
+                                        (this.mBlockAspectRatioRange.getUpper().doubleValue()
+                                                * heightInBlocks));
+                Range<Integer> range2 =
+                        range.intersect(
+                                Integer.valueOf(
+                                        ((minWidthInBlocks - 1) * this.mBlockWidth)
+                                                + this.mWidthAlignment),
+                                Integer.valueOf(this.mBlockWidth * maxWidthInBlocks));
                 if (height > this.mSmallerDimensionUpperLimit) {
                     range2 = range2.intersect(1, Integer.valueOf(this.mSmallerDimensionUpperLimit));
                 }
-                return range2.intersect(Integer.valueOf((int) Math.ceil(this.mAspectRatioRange.getLower().doubleValue() * height)), Integer.valueOf((int) (this.mAspectRatioRange.getUpper().doubleValue() * height)));
+                return range2.intersect(
+                        Integer.valueOf(
+                                (int)
+                                        Math.ceil(
+                                                this.mAspectRatioRange.getLower().doubleValue()
+                                                        * height)),
+                        Integer.valueOf(
+                                (int) (this.mAspectRatioRange.getUpper().doubleValue() * height)));
             } catch (IllegalArgumentException e) {
                 Log.v(TAG, "could not get supported widths for " + height);
                 throw new IllegalArgumentException("unsupported height");
@@ -1003,17 +1149,48 @@ public final class MediaCodecInfo {
         public Range<Integer> getSupportedHeightsFor(int width) {
             try {
                 Range<Integer> range = this.mHeightRange;
-                if (!this.mWidthRange.contains((Range<Integer>) Integer.valueOf(width)) || width % this.mWidthAlignment != 0) {
+                if (!this.mWidthRange.contains((Range<Integer>) Integer.valueOf(width))
+                        || width % this.mWidthAlignment != 0) {
                     throw new IllegalArgumentException("unsupported width");
                 }
                 int widthInBlocks = Utils.divUp(width, this.mBlockWidth);
-                int minHeightInBlocks = Math.max(Utils.divUp(this.mBlockCountRange.getLower().intValue(), widthInBlocks), (int) Math.ceil(widthInBlocks / this.mBlockAspectRatioRange.getUpper().doubleValue()));
-                int maxHeightInBlocks = Math.min(this.mBlockCountRange.getUpper().intValue() / widthInBlocks, (int) (widthInBlocks / this.mBlockAspectRatioRange.getLower().doubleValue()));
-                Range<Integer> range2 = range.intersect(Integer.valueOf(((minHeightInBlocks - 1) * this.mBlockHeight) + this.mHeightAlignment), Integer.valueOf(this.mBlockHeight * maxHeightInBlocks));
+                int minHeightInBlocks =
+                        Math.max(
+                                Utils.divUp(
+                                        this.mBlockCountRange.getLower().intValue(), widthInBlocks),
+                                (int)
+                                        Math.ceil(
+                                                widthInBlocks
+                                                        / this.mBlockAspectRatioRange
+                                                                .getUpper()
+                                                                .doubleValue()));
+                int maxHeightInBlocks =
+                        Math.min(
+                                this.mBlockCountRange.getUpper().intValue() / widthInBlocks,
+                                (int)
+                                        (widthInBlocks
+                                                / this.mBlockAspectRatioRange
+                                                        .getLower()
+                                                        .doubleValue()));
+                Range<Integer> range2 =
+                        range.intersect(
+                                Integer.valueOf(
+                                        ((minHeightInBlocks - 1) * this.mBlockHeight)
+                                                + this.mHeightAlignment),
+                                Integer.valueOf(this.mBlockHeight * maxHeightInBlocks));
                 if (width > this.mSmallerDimensionUpperLimit) {
                     range2 = range2.intersect(1, Integer.valueOf(this.mSmallerDimensionUpperLimit));
                 }
-                return range2.intersect(Integer.valueOf((int) Math.ceil(width / this.mAspectRatioRange.getUpper().doubleValue())), Integer.valueOf((int) (width / this.mAspectRatioRange.getLower().doubleValue())));
+                return range2.intersect(
+                        Integer.valueOf(
+                                (int)
+                                        Math.ceil(
+                                                width
+                                                        / this.mAspectRatioRange
+                                                                .getUpper()
+                                                                .doubleValue())),
+                        Integer.valueOf(
+                                (int) (width / this.mAspectRatioRange.getLower().doubleValue())));
             } catch (IllegalArgumentException e) {
                 Log.v(TAG, "could not get supported heights for " + width);
                 throw new IllegalArgumentException("unsupported width");
@@ -1025,8 +1202,17 @@ public final class MediaCodecInfo {
             if (!supports(Integer.valueOf(width), Integer.valueOf(height), null)) {
                 throw new IllegalArgumentException("unsupported size");
             }
-            int blockCount = Utils.divUp(width, this.mBlockWidth) * Utils.divUp(height, this.mBlockHeight);
-            return Range.create(Double.valueOf(Math.max(this.mBlocksPerSecondRange.getLower().longValue() / blockCount, this.mFrameRateRange.getLower().intValue())), Double.valueOf(Math.min(this.mBlocksPerSecondRange.getUpper().longValue() / blockCount, this.mFrameRateRange.getUpper().intValue())));
+            int blockCount =
+                    Utils.divUp(width, this.mBlockWidth) * Utils.divUp(height, this.mBlockHeight);
+            return Range.create(
+                    Double.valueOf(
+                            Math.max(
+                                    this.mBlocksPerSecondRange.getLower().longValue() / blockCount,
+                                    this.mFrameRateRange.getLower().intValue())),
+                    Double.valueOf(
+                            Math.min(
+                                    this.mBlocksPerSecondRange.getUpper().longValue() / blockCount,
+                                    this.mFrameRateRange.getUpper().intValue())));
         }
 
         private int getBlockCount(int width, int height) {
@@ -1038,7 +1224,10 @@ public final class MediaCodecInfo {
             Size closestSize = null;
             int minDiff = Integer.MAX_VALUE;
             for (Size size : this.mMeasuredFrameRates.keySet()) {
-                int diff = Math.abs(targetBlockCount - getBlockCount(size.getWidth(), size.getHeight()));
+                int diff =
+                        Math.abs(
+                                targetBlockCount
+                                        - getBlockCount(size.getWidth(), size.getHeight()));
                 if (diff < minDiff) {
                     minDiff = diff;
                     closestSize = size;
@@ -1050,8 +1239,13 @@ public final class MediaCodecInfo {
         private Range<Double> estimateFrameRatesFor(int width, int height) {
             Size size = findClosestSize(width, height);
             Range<Long> range = this.mMeasuredFrameRates.get(size);
-            Double ratio = Double.valueOf(getBlockCount(size.getWidth(), size.getHeight()) / Math.max(getBlockCount(width, height), 1));
-            return Range.create(Double.valueOf(range.getLower().longValue() * ratio.doubleValue()), Double.valueOf(range.getUpper().longValue() * ratio.doubleValue()));
+            Double ratio =
+                    Double.valueOf(
+                            getBlockCount(size.getWidth(), size.getHeight())
+                                    / Math.max(getBlockCount(width, height), 1));
+            return Range.create(
+                    Double.valueOf(range.getLower().longValue() * ratio.doubleValue()),
+                    Double.valueOf(range.getUpper().longValue() * ratio.doubleValue()));
         }
 
         public Range<Double> getAchievableFrameRatesFor(int width, int height) {
@@ -1123,7 +1317,11 @@ public final class MediaCodecInfo {
                 int origRate = (int) Utils.divUp(this.mMaxMacroBlockRate, getMaxMacroBlocks());
                 String info = (this.mWidth * 16) + "x" + (this.mHeight * 16) + "@" + origRate;
                 if (origRate < this.mMaxFrameRate) {
-                    info = info + ", max " + this.mMaxFrameRate + SemMediaPostProcessor.ProcessingFormat.Key.FPS;
+                    info =
+                            info
+                                    + ", max "
+                                    + this.mMaxFrameRate
+                                    + SemMediaPostProcessor.ProcessingFormat.Key.FPS;
                 }
                 if (blockWidth > 16 || blockHeight > 16) {
                     info = info + ", " + blockWidth + "x" + blockHeight + " blocks";
@@ -1135,18 +1333,40 @@ public final class MediaCodecInfo {
                 return this.mMaxFrameRate;
             }
 
-            public PerformancePoint(int width, int height, int frameRate, int maxFrameRate, Size blockSize) {
+            public PerformancePoint(
+                    int width, int height, int frameRate, int maxFrameRate, Size blockSize) {
                 MediaCodecInfo.checkPowerOfTwo(blockSize.getWidth(), "block width");
                 MediaCodecInfo.checkPowerOfTwo(blockSize.getHeight(), "block height");
-                this.mBlockSize = new Size(Utils.divUp(blockSize.getWidth(), 16), Utils.divUp(blockSize.getHeight(), 16));
-                this.mWidth = (int) (Utils.divUp(Math.max(1L, width), Math.max(blockSize.getWidth(), 16)) * this.mBlockSize.getWidth());
-                this.mHeight = (int) (Utils.divUp(Math.max(1L, height), Math.max(blockSize.getHeight(), 16)) * this.mBlockSize.getHeight());
+                this.mBlockSize =
+                        new Size(
+                                Utils.divUp(blockSize.getWidth(), 16),
+                                Utils.divUp(blockSize.getHeight(), 16));
+                this.mWidth =
+                        (int)
+                                (Utils.divUp(
+                                                Math.max(1L, width),
+                                                Math.max(blockSize.getWidth(), 16))
+                                        * this.mBlockSize.getWidth());
+                this.mHeight =
+                        (int)
+                                (Utils.divUp(
+                                                Math.max(1L, height),
+                                                Math.max(blockSize.getHeight(), 16))
+                                        * this.mBlockSize.getHeight());
                 this.mMaxFrameRate = Math.max(1, Math.max(frameRate, maxFrameRate));
                 this.mMaxMacroBlockRate = Math.max(1, frameRate) * getMaxMacroBlocks();
             }
 
             public PerformancePoint(PerformancePoint pp, Size newBlockSize) {
-                this(pp.mWidth * 16, pp.mHeight * 16, (int) Utils.divUp(pp.mMaxMacroBlockRate, pp.getMaxMacroBlocks()), pp.mMaxFrameRate, new Size(Math.max(newBlockSize.getWidth(), pp.mBlockSize.getWidth() * 16), Math.max(newBlockSize.getHeight(), pp.mBlockSize.getHeight() * 16)));
+                this(
+                        pp.mWidth * 16,
+                        pp.mHeight * 16,
+                        (int) Utils.divUp(pp.mMaxMacroBlockRate, pp.getMaxMacroBlocks()),
+                        pp.mMaxFrameRate,
+                        new Size(
+                                Math.max(newBlockSize.getWidth(), pp.mBlockSize.getWidth() * 16),
+                                Math.max(
+                                        newBlockSize.getHeight(), pp.mBlockSize.getHeight() * 16)));
             }
 
             public PerformancePoint(int width, int height, int frameRate) {
@@ -1169,12 +1389,23 @@ public final class MediaCodecInfo {
 
             private void checkPowerOfTwo2(int value, String description) {
                 if (value == 0 || ((value - 1) & value) != 0) {
-                    throw new IllegalArgumentException(description + " (" + value + ") must be a power of 2");
+                    throw new IllegalArgumentException(
+                            description + " (" + value + ") must be a power of 2");
                 }
             }
 
             public boolean covers(MediaFormat format) {
-                PerformancePoint other = new PerformancePoint(format.getInteger("width", 0), format.getInteger("height", 0), Math.round((float) Math.ceil(format.getNumber(MediaFormat.KEY_FRAME_RATE, 0).doubleValue())));
+                PerformancePoint other =
+                        new PerformancePoint(
+                                format.getInteger("width", 0),
+                                format.getInteger("height", 0),
+                                Math.round(
+                                        (float)
+                                                Math.ceil(
+                                                        format.getNumber(
+                                                                        MediaFormat.KEY_FRAME_RATE,
+                                                                        0)
+                                                                .doubleValue())));
                 return covers(other);
             }
 
@@ -1182,11 +1413,15 @@ public final class MediaCodecInfo {
                 Size commonSize = getCommonBlockSize(other);
                 PerformancePoint aligned = new PerformancePoint(this, commonSize);
                 PerformancePoint otherAligned = new PerformancePoint(other, commonSize);
-                return aligned.getMaxMacroBlocks() >= otherAligned.getMaxMacroBlocks() && aligned.mMaxFrameRate >= otherAligned.mMaxFrameRate && aligned.mMaxMacroBlockRate >= otherAligned.mMaxMacroBlockRate;
+                return aligned.getMaxMacroBlocks() >= otherAligned.getMaxMacroBlocks()
+                        && aligned.mMaxFrameRate >= otherAligned.mMaxFrameRate
+                        && aligned.mMaxMacroBlockRate >= otherAligned.mMaxMacroBlockRate;
             }
 
             private Size getCommonBlockSize(PerformancePoint other) {
-                return new Size(Math.max(this.mBlockSize.getWidth(), other.mBlockSize.getWidth()) * 16, Math.max(this.mBlockSize.getHeight(), other.mBlockSize.getHeight()) * 16);
+                return new Size(
+                        Math.max(this.mBlockSize.getWidth(), other.mBlockSize.getWidth()) * 16,
+                        Math.max(this.mBlockSize.getHeight(), other.mBlockSize.getHeight()) * 16);
             }
 
             public boolean equals(Object o) {
@@ -1197,7 +1432,9 @@ public final class MediaCodecInfo {
                 Size commonSize = getCommonBlockSize(other);
                 PerformancePoint aligned = new PerformancePoint(this, commonSize);
                 PerformancePoint otherAligned = new PerformancePoint(other, commonSize);
-                return aligned.getMaxMacroBlocks() == otherAligned.getMaxMacroBlocks() && aligned.mMaxFrameRate == otherAligned.mMaxFrameRate && aligned.mMaxMacroBlockRate == otherAligned.mMaxMacroBlockRate;
+                return aligned.getMaxMacroBlocks() == otherAligned.getMaxMacroBlocks()
+                        && aligned.mMaxFrameRate == otherAligned.mMaxFrameRate
+                        && aligned.mMaxMacroBlockRate == otherAligned.mMaxMacroBlockRate;
             }
         }
 
@@ -1206,7 +1443,8 @@ public final class MediaCodecInfo {
         }
 
         public boolean areSizeAndRateSupported(int width, int height, double frameRate) {
-            return supports(Integer.valueOf(width), Integer.valueOf(height), Double.valueOf(frameRate));
+            return supports(
+                    Integer.valueOf(width), Integer.valueOf(height), Double.valueOf(frameRate));
         }
 
         public boolean isSizeSupported(int width, int height) {
@@ -1216,20 +1454,35 @@ public final class MediaCodecInfo {
         private boolean supports(Integer width, Integer height, Number rate) {
             boolean ok = true;
             if (1 != 0 && width != null) {
-                ok = this.mWidthRange.contains((Range<Integer>) width) && width.intValue() % this.mWidthAlignment == 0;
+                ok =
+                        this.mWidthRange.contains((Range<Integer>) width)
+                                && width.intValue() % this.mWidthAlignment == 0;
             }
             if (ok && height != null) {
-                ok = this.mHeightRange.contains((Range<Integer>) height) && height.intValue() % this.mHeightAlignment == 0;
+                ok =
+                        this.mHeightRange.contains((Range<Integer>) height)
+                                && height.intValue() % this.mHeightAlignment == 0;
             }
             if (ok && rate != null) {
                 ok = this.mFrameRateRange.contains(Utils.intRangeFor(rate.doubleValue()));
             }
             if (ok && height != null && width != null) {
-                boolean ok2 = Math.min(height.intValue(), width.intValue()) <= this.mSmallerDimensionUpperLimit;
+                boolean ok2 =
+                        Math.min(height.intValue(), width.intValue())
+                                <= this.mSmallerDimensionUpperLimit;
                 int widthInBlocks = Utils.divUp(width.intValue(), this.mBlockWidth);
                 int heightInBlocks = Utils.divUp(height.intValue(), this.mBlockHeight);
                 int blockCount = widthInBlocks * heightInBlocks;
-                boolean ok3 = ok2 && this.mBlockCountRange.contains((Range<Integer>) Integer.valueOf(blockCount)) && this.mBlockAspectRatioRange.contains((Range<Rational>) new Rational(widthInBlocks, heightInBlocks)) && this.mAspectRatioRange.contains((Range<Rational>) new Rational(width.intValue(), height.intValue()));
+                boolean ok3 =
+                        ok2
+                                && this.mBlockCountRange.contains(
+                                        (Range<Integer>) Integer.valueOf(blockCount))
+                                && this.mBlockAspectRatioRange.contains(
+                                        (Range<Rational>)
+                                                new Rational(widthInBlocks, heightInBlocks))
+                                && this.mAspectRatioRange.contains(
+                                        (Range<Rational>)
+                                                new Rational(width.intValue(), height.intValue()));
                 if (ok3 && rate != null) {
                     double blocksPerSec = blockCount * rate.doubleValue();
                     return this.mBlocksPerSecondRange.contains(Utils.longRangeFor(blocksPerSec));
@@ -1244,11 +1497,11 @@ public final class MediaCodecInfo {
             Integer width = (Integer) map.get("width");
             Integer height = (Integer) map.get("height");
             Number rate = (Number) map.get(MediaFormat.KEY_FRAME_RATE);
-            return supports(width, height, rate) && CodecCapabilities.supportsBitrate(this.mBitrateRange, format);
+            return supports(width, height, rate)
+                    && CodecCapabilities.supportsBitrate(this.mBitrateRange, format);
         }
 
-        private VideoCapabilities() {
-        }
+        private VideoCapabilities() {}
 
         public static VideoCapabilities create(MediaFormat info, CodecCapabilities parent) {
             VideoCapabilities caps = new VideoCapabilities();
@@ -1295,7 +1548,8 @@ public final class MediaCodecInfo {
             this.mHeightAlignment = 1;
             this.mBlockWidth = 1;
             this.mBlockHeight = 1;
-            this.mSmallerDimensionUpperLimit = ((Integer) MediaCodecInfo.getSizeRange().getUpper()).intValue();
+            this.mSmallerDimensionUpperLimit =
+                    ((Integer) MediaCodecInfo.getSizeRange().getUpper()).intValue();
         }
 
         private List<PerformancePoint> getPerformancePoints(Map<String, Object> map) {
@@ -1320,9 +1574,21 @@ public final class MediaCodecInfo {
                                 if (range.getUpper().longValue() >= 0) {
                                     String prefix2 = prefix;
                                     Set<String> keys2 = keys;
-                                    PerformancePoint given = new PerformancePoint(size.getWidth(), size.getHeight(), range.getLower().intValue(), range.getUpper().intValue(), new Size(this.mBlockWidth, this.mBlockHeight));
+                                    PerformancePoint given =
+                                            new PerformancePoint(
+                                                    size.getWidth(),
+                                                    size.getHeight(),
+                                                    range.getLower().intValue(),
+                                                    range.getUpper().intValue(),
+                                                    new Size(this.mBlockWidth, this.mBlockHeight));
                                     Iterator<String> it2 = it;
-                                    PerformancePoint rotated = new PerformancePoint(size.getHeight(), size.getWidth(), range.getLower().intValue(), range.getUpper().intValue(), new Size(this.mBlockWidth, this.mBlockHeight));
+                                    PerformancePoint rotated =
+                                            new PerformancePoint(
+                                                    size.getHeight(),
+                                                    size.getWidth(),
+                                                    range.getLower().intValue(),
+                                                    range.getUpper().intValue(),
+                                                    new Size(this.mBlockWidth, this.mBlockHeight));
                                     ret.add(given);
                                     if (!given.covers(rotated)) {
                                         ret.add(rotated);
@@ -1339,16 +1605,21 @@ public final class MediaCodecInfo {
             if (ret.size() == 0) {
                 return null;
             }
-            ret.sort(new Comparator() { // from class: android.media.MediaCodecInfo$VideoCapabilities$$ExternalSyntheticLambda0
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    return MediaCodecInfo.VideoCapabilities.lambda$getPerformancePoints$0((MediaCodecInfo.VideoCapabilities.PerformancePoint) obj, (MediaCodecInfo.VideoCapabilities.PerformancePoint) obj2);
-                }
-            });
+            ret.sort(
+                    new Comparator() { // from class:
+                        // android.media.MediaCodecInfo$VideoCapabilities$$ExternalSyntheticLambda0
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            return MediaCodecInfo.VideoCapabilities.lambda$getPerformancePoints$0(
+                                    (MediaCodecInfo.VideoCapabilities.PerformancePoint) obj,
+                                    (MediaCodecInfo.VideoCapabilities.PerformancePoint) obj2);
+                        }
+                    });
             return Collections.unmodifiableList(ret);
         }
 
-        static /* synthetic */ int lambda$getPerformancePoints$0(PerformancePoint a, PerformancePoint b) {
+        static /* synthetic */ int lambda$getPerformancePoints$0(
+                PerformancePoint a, PerformancePoint b) {
             int i = -1;
             if (a.getMaxMacroBlocks() != b.getMaxMacroBlocks()) {
                 if (a.getMaxMacroBlocks() >= b.getMaxMacroBlocks()) {
@@ -1377,7 +1648,11 @@ public final class MediaCodecInfo {
                     if (temp.length == 5) {
                         String sizeStr = temp[3];
                         Size size = Utils.parseSize(sizeStr, null);
-                        if (size != null && size.getWidth() * size.getHeight() > 0 && (range = Utils.parseLongRange(map.get(key), null)) != null && range.getLower().longValue() >= 0 && range.getUpper().longValue() >= 0) {
+                        if (size != null
+                                && size.getWidth() * size.getHeight() > 0
+                                && (range = Utils.parseLongRange(map.get(key), null)) != null
+                                && range.getLower().longValue() >= 0
+                                && range.getUpper().longValue() >= 0) {
                             ret.put(size, range);
                         }
                     }
@@ -1390,7 +1665,13 @@ public final class MediaCodecInfo {
             Pair<Size, Size> range = Utils.parseSizeRange(o);
             if (range != null) {
                 try {
-                    return Pair.create(Range.create(Integer.valueOf(range.first.getWidth()), Integer.valueOf(range.second.getWidth())), Range.create(Integer.valueOf(range.first.getHeight()), Integer.valueOf(range.second.getHeight())));
+                    return Pair.create(
+                            Range.create(
+                                    Integer.valueOf(range.first.getWidth()),
+                                    Integer.valueOf(range.second.getWidth())),
+                            Range.create(
+                                    Integer.valueOf(range.first.getHeight()),
+                                    Integer.valueOf(range.second.getHeight())));
                 } catch (IllegalArgumentException e) {
                     Log.w(TAG, "could not parse size range '" + o + "'");
                     return null;
@@ -1408,11 +1689,15 @@ public final class MediaCodecInfo {
             int FS = counts == null ? 0 : counts.getUpper().intValue() * BS;
             Range<Long> blockRates = Utils.parseLongRange(map.get("blocks-per-second-range"), null);
             long SR = blockRates == null ? 0L : BS * blockRates.getUpper().longValue();
-            Pair<Range<Integer>, Range<Integer>> dimensionRanges = parseWidthHeightRanges(map.get("size-range"));
+            Pair<Range<Integer>, Range<Integer>> dimensionRanges =
+                    parseWidthHeightRanges(map.get("size-range"));
             if (dimensionRanges == null) {
                 D = 0;
             } else {
-                D = Math.max(dimensionRanges.first.getUpper().intValue(), dimensionRanges.second.getUpper().intValue());
+                D =
+                        Math.max(
+                                dimensionRanges.first.getUpper().intValue(),
+                                dimensionRanges.second.getUpper().intValue());
             }
             Range<Integer> bitRates = Utils.parseIntRange(map.get("bitrate-range"), null);
             int BR = bitRates != null ? Utils.divUp(bitRates.getUpper().intValue(), 1000) : 0;
@@ -1481,10 +1766,17 @@ public final class MediaCodecInfo {
                 Method dump skipped, instructions count: 827
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.media.MediaCodecInfo.VideoCapabilities.parseFromInfo(android.media.MediaFormat):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.media.MediaCodecInfo.VideoCapabilities.parseFromInfo(android.media.MediaFormat):void");
         }
 
-        private void applyBlockLimits(int blockWidth, int blockHeight, Range<Integer> counts, Range<Long> rates, Range<Rational> ratios) {
+        private void applyBlockLimits(
+                int blockWidth,
+                int blockHeight,
+                Range<Integer> counts,
+                Range<Long> rates,
+                Range<Rational> ratios) {
             MediaCodecInfo.checkPowerOfTwo(blockWidth, "blockWidth must be a power of two");
             MediaCodecInfo.checkPowerOfTwo(blockHeight, "blockHeight must be a power of two");
             int newBlockWidth = Math.max(blockWidth, this.mBlockWidth);
@@ -1493,15 +1785,25 @@ public final class MediaCodecInfo {
             if (factor != 1) {
                 this.mBlockCountRange = Utils.factorRange(this.mBlockCountRange, factor);
                 this.mBlocksPerSecondRange = Utils.factorRange(this.mBlocksPerSecondRange, factor);
-                this.mBlockAspectRatioRange = Utils.scaleRange(this.mBlockAspectRatioRange, newBlockHeight / this.mBlockHeight, newBlockWidth / this.mBlockWidth);
-                this.mHorizontalBlockRange = Utils.factorRange(this.mHorizontalBlockRange, newBlockWidth / this.mBlockWidth);
-                this.mVerticalBlockRange = Utils.factorRange(this.mVerticalBlockRange, newBlockHeight / this.mBlockHeight);
+                this.mBlockAspectRatioRange =
+                        Utils.scaleRange(
+                                this.mBlockAspectRatioRange,
+                                newBlockHeight / this.mBlockHeight,
+                                newBlockWidth / this.mBlockWidth);
+                this.mHorizontalBlockRange =
+                        Utils.factorRange(
+                                this.mHorizontalBlockRange, newBlockWidth / this.mBlockWidth);
+                this.mVerticalBlockRange =
+                        Utils.factorRange(
+                                this.mVerticalBlockRange, newBlockHeight / this.mBlockHeight);
             }
             int factor2 = ((newBlockWidth * newBlockHeight) / blockWidth) / blockHeight;
             if (factor2 != 1) {
                 counts = Utils.factorRange(counts, factor2);
                 rates = Utils.factorRange(rates, factor2);
-                ratios = Utils.scaleRange(ratios, newBlockHeight / blockHeight, newBlockWidth / blockWidth);
+                ratios =
+                        Utils.scaleRange(
+                                ratios, newBlockHeight / blockHeight, newBlockWidth / blockWidth);
             }
             this.mBlockCountRange = this.mBlockCountRange.intersect(counts);
             this.mBlocksPerSecondRange = this.mBlocksPerSecondRange.intersect(rates);
@@ -1512,9 +1814,15 @@ public final class MediaCodecInfo {
 
         private void applyAlignment(int widthAlignment, int heightAlignment) {
             MediaCodecInfo.checkPowerOfTwo(widthAlignment, "widthAlignment must be a power of two");
-            MediaCodecInfo.checkPowerOfTwo(heightAlignment, "heightAlignment must be a power of two");
+            MediaCodecInfo.checkPowerOfTwo(
+                    heightAlignment, "heightAlignment must be a power of two");
             if (widthAlignment > this.mBlockWidth || heightAlignment > this.mBlockHeight) {
-                applyBlockLimits(Math.max(widthAlignment, this.mBlockWidth), Math.max(heightAlignment, this.mBlockHeight), MediaCodecInfo.POSITIVE_INTEGERS, MediaCodecInfo.POSITIVE_LONGS, MediaCodecInfo.POSITIVE_RATIONALS);
+                applyBlockLimits(
+                        Math.max(widthAlignment, this.mBlockWidth),
+                        Math.max(heightAlignment, this.mBlockHeight),
+                        MediaCodecInfo.POSITIVE_INTEGERS,
+                        MediaCodecInfo.POSITIVE_LONGS,
+                        MediaCodecInfo.POSITIVE_RATIONALS);
             }
             this.mWidthAlignment = Math.max(widthAlignment, this.mWidthAlignment);
             this.mHeightAlignment = Math.max(heightAlignment, this.mHeightAlignment);
@@ -1523,29 +1831,167 @@ public final class MediaCodecInfo {
         }
 
         private void updateLimits() {
-            this.mHorizontalBlockRange = this.mHorizontalBlockRange.intersect(Utils.factorRange(this.mWidthRange, this.mBlockWidth));
-            this.mHorizontalBlockRange = this.mHorizontalBlockRange.intersect(Range.create(Integer.valueOf(this.mBlockCountRange.getLower().intValue() / this.mVerticalBlockRange.getUpper().intValue()), Integer.valueOf(this.mBlockCountRange.getUpper().intValue() / this.mVerticalBlockRange.getLower().intValue())));
-            this.mVerticalBlockRange = this.mVerticalBlockRange.intersect(Utils.factorRange(this.mHeightRange, this.mBlockHeight));
-            this.mVerticalBlockRange = this.mVerticalBlockRange.intersect(Range.create(Integer.valueOf(this.mBlockCountRange.getLower().intValue() / this.mHorizontalBlockRange.getUpper().intValue()), Integer.valueOf(this.mBlockCountRange.getUpper().intValue() / this.mHorizontalBlockRange.getLower().intValue())));
-            this.mBlockCountRange = this.mBlockCountRange.intersect(Range.create(Integer.valueOf(this.mHorizontalBlockRange.getLower().intValue() * this.mVerticalBlockRange.getLower().intValue()), Integer.valueOf(this.mHorizontalBlockRange.getUpper().intValue() * this.mVerticalBlockRange.getUpper().intValue())));
-            this.mBlockAspectRatioRange = this.mBlockAspectRatioRange.intersect(new Rational(this.mHorizontalBlockRange.getLower().intValue(), this.mVerticalBlockRange.getUpper().intValue()), new Rational(this.mHorizontalBlockRange.getUpper().intValue(), this.mVerticalBlockRange.getLower().intValue()));
-            this.mWidthRange = this.mWidthRange.intersect(Integer.valueOf(((this.mHorizontalBlockRange.getLower().intValue() - 1) * this.mBlockWidth) + this.mWidthAlignment), Integer.valueOf(this.mHorizontalBlockRange.getUpper().intValue() * this.mBlockWidth));
-            this.mHeightRange = this.mHeightRange.intersect(Integer.valueOf(((this.mVerticalBlockRange.getLower().intValue() - 1) * this.mBlockHeight) + this.mHeightAlignment), Integer.valueOf(this.mVerticalBlockRange.getUpper().intValue() * this.mBlockHeight));
-            this.mAspectRatioRange = this.mAspectRatioRange.intersect(new Rational(this.mWidthRange.getLower().intValue(), this.mHeightRange.getUpper().intValue()), new Rational(this.mWidthRange.getUpper().intValue(), this.mHeightRange.getLower().intValue()));
-            this.mSmallerDimensionUpperLimit = Math.min(this.mSmallerDimensionUpperLimit, Math.min(this.mWidthRange.getUpper().intValue(), this.mHeightRange.getUpper().intValue()));
-            this.mBlocksPerSecondRange = this.mBlocksPerSecondRange.intersect(Long.valueOf(this.mBlockCountRange.getLower().intValue() * this.mFrameRateRange.getLower().intValue()), Long.valueOf(this.mBlockCountRange.getUpper().intValue() * this.mFrameRateRange.getUpper().intValue()));
-            this.mFrameRateRange = this.mFrameRateRange.intersect(Integer.valueOf((int) (this.mBlocksPerSecondRange.getLower().longValue() / this.mBlockCountRange.getUpper().intValue())), Integer.valueOf((int) (this.mBlocksPerSecondRange.getUpper().longValue() / this.mBlockCountRange.getLower().intValue())));
+            this.mHorizontalBlockRange =
+                    this.mHorizontalBlockRange.intersect(
+                            Utils.factorRange(this.mWidthRange, this.mBlockWidth));
+            this.mHorizontalBlockRange =
+                    this.mHorizontalBlockRange.intersect(
+                            Range.create(
+                                    Integer.valueOf(
+                                            this.mBlockCountRange.getLower().intValue()
+                                                    / this.mVerticalBlockRange
+                                                            .getUpper()
+                                                            .intValue()),
+                                    Integer.valueOf(
+                                            this.mBlockCountRange.getUpper().intValue()
+                                                    / this.mVerticalBlockRange
+                                                            .getLower()
+                                                            .intValue())));
+            this.mVerticalBlockRange =
+                    this.mVerticalBlockRange.intersect(
+                            Utils.factorRange(this.mHeightRange, this.mBlockHeight));
+            this.mVerticalBlockRange =
+                    this.mVerticalBlockRange.intersect(
+                            Range.create(
+                                    Integer.valueOf(
+                                            this.mBlockCountRange.getLower().intValue()
+                                                    / this.mHorizontalBlockRange
+                                                            .getUpper()
+                                                            .intValue()),
+                                    Integer.valueOf(
+                                            this.mBlockCountRange.getUpper().intValue()
+                                                    / this.mHorizontalBlockRange
+                                                            .getLower()
+                                                            .intValue())));
+            this.mBlockCountRange =
+                    this.mBlockCountRange.intersect(
+                            Range.create(
+                                    Integer.valueOf(
+                                            this.mHorizontalBlockRange.getLower().intValue()
+                                                    * this.mVerticalBlockRange
+                                                            .getLower()
+                                                            .intValue()),
+                                    Integer.valueOf(
+                                            this.mHorizontalBlockRange.getUpper().intValue()
+                                                    * this.mVerticalBlockRange
+                                                            .getUpper()
+                                                            .intValue())));
+            this.mBlockAspectRatioRange =
+                    this.mBlockAspectRatioRange.intersect(
+                            new Rational(
+                                    this.mHorizontalBlockRange.getLower().intValue(),
+                                    this.mVerticalBlockRange.getUpper().intValue()),
+                            new Rational(
+                                    this.mHorizontalBlockRange.getUpper().intValue(),
+                                    this.mVerticalBlockRange.getLower().intValue()));
+            this.mWidthRange =
+                    this.mWidthRange.intersect(
+                            Integer.valueOf(
+                                    ((this.mHorizontalBlockRange.getLower().intValue() - 1)
+                                                    * this.mBlockWidth)
+                                            + this.mWidthAlignment),
+                            Integer.valueOf(
+                                    this.mHorizontalBlockRange.getUpper().intValue()
+                                            * this.mBlockWidth));
+            this.mHeightRange =
+                    this.mHeightRange.intersect(
+                            Integer.valueOf(
+                                    ((this.mVerticalBlockRange.getLower().intValue() - 1)
+                                                    * this.mBlockHeight)
+                                            + this.mHeightAlignment),
+                            Integer.valueOf(
+                                    this.mVerticalBlockRange.getUpper().intValue()
+                                            * this.mBlockHeight));
+            this.mAspectRatioRange =
+                    this.mAspectRatioRange.intersect(
+                            new Rational(
+                                    this.mWidthRange.getLower().intValue(),
+                                    this.mHeightRange.getUpper().intValue()),
+                            new Rational(
+                                    this.mWidthRange.getUpper().intValue(),
+                                    this.mHeightRange.getLower().intValue()));
+            this.mSmallerDimensionUpperLimit =
+                    Math.min(
+                            this.mSmallerDimensionUpperLimit,
+                            Math.min(
+                                    this.mWidthRange.getUpper().intValue(),
+                                    this.mHeightRange.getUpper().intValue()));
+            this.mBlocksPerSecondRange =
+                    this.mBlocksPerSecondRange.intersect(
+                            Long.valueOf(
+                                    this.mBlockCountRange.getLower().intValue()
+                                            * this.mFrameRateRange.getLower().intValue()),
+                            Long.valueOf(
+                                    this.mBlockCountRange.getUpper().intValue()
+                                            * this.mFrameRateRange.getUpper().intValue()));
+            this.mFrameRateRange =
+                    this.mFrameRateRange.intersect(
+                            Integer.valueOf(
+                                    (int)
+                                            (this.mBlocksPerSecondRange.getLower().longValue()
+                                                    / this.mBlockCountRange.getUpper().intValue())),
+                            Integer.valueOf(
+                                    (int)
+                                            (this.mBlocksPerSecondRange.getUpper().longValue()
+                                                    / this.mBlockCountRange
+                                                            .getLower()
+                                                            .intValue())));
         }
 
-        private void applyMacroBlockLimits(int maxHorizontalBlocks, int maxVerticalBlocks, int maxBlocks, long maxBlocksPerSecond, int blockWidth, int blockHeight, int widthAlignment, int heightAlignment) {
-            applyMacroBlockLimits(1, 1, maxHorizontalBlocks, maxVerticalBlocks, maxBlocks, maxBlocksPerSecond, blockWidth, blockHeight, widthAlignment, heightAlignment);
+        private void applyMacroBlockLimits(
+                int maxHorizontalBlocks,
+                int maxVerticalBlocks,
+                int maxBlocks,
+                long maxBlocksPerSecond,
+                int blockWidth,
+                int blockHeight,
+                int widthAlignment,
+                int heightAlignment) {
+            applyMacroBlockLimits(
+                    1,
+                    1,
+                    maxHorizontalBlocks,
+                    maxVerticalBlocks,
+                    maxBlocks,
+                    maxBlocksPerSecond,
+                    blockWidth,
+                    blockHeight,
+                    widthAlignment,
+                    heightAlignment);
         }
 
-        private void applyMacroBlockLimits(int minHorizontalBlocks, int minVerticalBlocks, int maxHorizontalBlocks, int maxVerticalBlocks, int maxBlocks, long maxBlocksPerSecond, int blockWidth, int blockHeight, int widthAlignment, int heightAlignment) {
+        private void applyMacroBlockLimits(
+                int minHorizontalBlocks,
+                int minVerticalBlocks,
+                int maxHorizontalBlocks,
+                int maxVerticalBlocks,
+                int maxBlocks,
+                long maxBlocksPerSecond,
+                int blockWidth,
+                int blockHeight,
+                int widthAlignment,
+                int heightAlignment) {
             applyAlignment(widthAlignment, heightAlignment);
-            applyBlockLimits(blockWidth, blockHeight, Range.create(1, Integer.valueOf(maxBlocks)), Range.create(1L, Long.valueOf(maxBlocksPerSecond)), Range.create(new Rational(1, maxVerticalBlocks), new Rational(maxHorizontalBlocks, 1)));
-            this.mHorizontalBlockRange = this.mHorizontalBlockRange.intersect(Integer.valueOf(Utils.divUp(minHorizontalBlocks, this.mBlockWidth / blockWidth)), Integer.valueOf(maxHorizontalBlocks / (this.mBlockWidth / blockWidth)));
-            this.mVerticalBlockRange = this.mVerticalBlockRange.intersect(Integer.valueOf(Utils.divUp(minVerticalBlocks, this.mBlockHeight / blockHeight)), Integer.valueOf(maxVerticalBlocks / (this.mBlockHeight / blockHeight)));
+            applyBlockLimits(
+                    blockWidth,
+                    blockHeight,
+                    Range.create(1, Integer.valueOf(maxBlocks)),
+                    Range.create(1L, Long.valueOf(maxBlocksPerSecond)),
+                    Range.create(
+                            new Rational(1, maxVerticalBlocks),
+                            new Rational(maxHorizontalBlocks, 1)));
+            this.mHorizontalBlockRange =
+                    this.mHorizontalBlockRange.intersect(
+                            Integer.valueOf(
+                                    Utils.divUp(
+                                            minHorizontalBlocks, this.mBlockWidth / blockWidth)),
+                            Integer.valueOf(maxHorizontalBlocks / (this.mBlockWidth / blockWidth)));
+            this.mVerticalBlockRange =
+                    this.mVerticalBlockRange.intersect(
+                            Integer.valueOf(
+                                    Utils.divUp(
+                                            minVerticalBlocks, this.mBlockHeight / blockHeight)),
+                            Integer.valueOf(maxVerticalBlocks / (this.mBlockHeight / blockHeight)));
         }
 
         private void applyLevelLimits() {
@@ -1864,7 +2310,15 @@ public final class MediaCodecInfo {
                 }
                 num = num3;
                 int maxLengthInBlocks = (int) Math.sqrt(maxBlocks2 * 8);
-                applyMacroBlockLimits(maxLengthInBlocks, maxLengthInBlocks, maxBlocks2, maxBlocksPerSecond, 16, 16, 1, 1);
+                applyMacroBlockLimits(
+                        maxLengthInBlocks,
+                        maxLengthInBlocks,
+                        maxBlocks2,
+                        maxBlocksPerSecond,
+                        16,
+                        16,
+                        1,
+                        1);
                 maxBlocks = maxBps;
             } else {
                 String str26 = "Unrecognized level ";
@@ -1904,7 +2358,14 @@ public final class MediaCodecInfo {
                                         H3 = 36;
                                         break;
                                     default:
-                                        Log.w(str25, str29 + profileLevel2.profile + str28 + profileLevel2.level + str24 + mime);
+                                        Log.w(
+                                                str25,
+                                                str29
+                                                        + profileLevel2.profile
+                                                        + str28
+                                                        + profileLevel2.level
+                                                        + str24
+                                                        + mime);
                                         errors |= 1;
                                         MBPS4 = 0;
                                         FS4 = 0;
@@ -1976,7 +2437,14 @@ public final class MediaCodecInfo {
                                         H3 = 68;
                                         break;
                                     default:
-                                        Log.w(str25, str29 + profileLevel2.profile + str28 + profileLevel2.level + str24 + mime);
+                                        Log.w(
+                                                str25,
+                                                str29
+                                                        + profileLevel2.profile
+                                                        + str28
+                                                        + profileLevel2.level
+                                                        + str24
+                                                        + mime);
                                         errors |= 1;
                                         MBPS4 = 0;
                                         FS4 = 0;
@@ -1994,7 +2462,12 @@ public final class MediaCodecInfo {
                             case 4:
                             case 5:
                                 i4 = MBPS6;
-                                Log.i(str25, "Unsupported profile " + profileLevel2.profile + str24 + mime);
+                                Log.i(
+                                        str25,
+                                        "Unsupported profile "
+                                                + profileLevel2.profile
+                                                + str24
+                                                + mime);
                                 errors |= 2;
                                 supported2 = false;
                                 MBPS4 = 0;
@@ -2043,8 +2516,10 @@ public final class MediaCodecInfo {
                     int maxRate3 = maxRate2;
                     int maxRate4 = maxWidth;
                     int maxWidth2 = maxBlocks3;
-                    applyMacroBlockLimits(maxRate4, maxHeight, maxWidth2, maxBlocksPerSecond2, 16, 16, 1, 1);
-                    this.mFrameRateRange = this.mFrameRateRange.intersect(12, Integer.valueOf(maxRate3));
+                    applyMacroBlockLimits(
+                            maxRate4, maxHeight, maxWidth2, maxBlocksPerSecond2, 16, 16, 1, 1);
+                    this.mFrameRateRange =
+                            this.mFrameRateRange.intersect(12, Integer.valueOf(maxRate3));
                     maxBlocks = maxBps2;
                 } else {
                     String str30 = str27;
@@ -2137,7 +2612,9 @@ public final class MediaCodecInfo {
                                             W = 22;
                                             break;
                                         case 64:
-                                            MBPS3 = SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION;
+                                            MBPS3 =
+                                                    SemMediaPlayer
+                                                            .KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION;
                                             FS3 = 1200;
                                             BR4 = 4000;
                                             str34 = str37;
@@ -2173,7 +2650,14 @@ public final class MediaCodecInfo {
                                             W = 80;
                                             break;
                                         default:
-                                            Log.w(str37, str13 + profileLevel3.profile + str35 + profileLevel3.level + str36 + mime);
+                                            Log.w(
+                                                    str37,
+                                                    str13
+                                                            + profileLevel3.profile
+                                                            + str35
+                                                            + profileLevel3.level
+                                                            + str36
+                                                            + mime);
                                             errors |= 1;
                                             str34 = str37;
                                             FR4 = 0;
@@ -2206,7 +2690,12 @@ public final class MediaCodecInfo {
                                     i3 = length3;
                                     String str39 = str33;
                                     profileLevels4 = profileLevels9;
-                                    Log.i(str34, "Unsupported profile " + profileLevel3.profile + str39 + mime);
+                                    Log.i(
+                                            str34,
+                                            "Unsupported profile "
+                                                    + profileLevel3.profile
+                                                    + str39
+                                                    + mime);
                                     errors |= 2;
                                     supported3 = false;
                                     FR4 = 0;
@@ -2308,14 +2797,21 @@ public final class MediaCodecInfo {
                                             break;
                                         default:
                                             str13 = str32;
-                                            StringBuilder append = new StringBuilder().append(str13);
+                                            StringBuilder append =
+                                                    new StringBuilder().append(str13);
                                             int BR8 = profileLevel3.profile;
                                             StringBuilder append2 = append.append(BR8);
                                             String str40 = str31;
                                             i3 = length3;
                                             String str41 = str33;
                                             profileLevels4 = profileLevels9;
-                                            Log.w(str34, append2.append(str40).append(profileLevel3.level).append(str41).append(mime).toString());
+                                            Log.w(
+                                                    str34,
+                                                    append2.append(str40)
+                                                            .append(profileLevel3.level)
+                                                            .append(str41)
+                                                            .append(mime)
+                                                            .toString());
                                             errors |= 1;
                                             FR4 = 0;
                                             MBPS3 = 0;
@@ -2376,8 +2872,10 @@ public final class MediaCodecInfo {
                             str33 = str15;
                         }
                         int maxRate7 = maxHeight2;
-                        applyMacroBlockLimits(maxWidth3, maxRate5, maxBlocks4, maxBlocksPerSecond3, 16, 16, 1, 1);
-                        this.mFrameRateRange = this.mFrameRateRange.intersect(12, Integer.valueOf(maxRate7));
+                        applyMacroBlockLimits(
+                                maxWidth3, maxRate5, maxBlocks4, maxBlocksPerSecond3, 16, 16, 1, 1);
+                        this.mFrameRateRange =
+                                this.mFrameRateRange.intersect(12, Integer.valueOf(maxRate7));
                         maxBlocks = maxBps3;
                     } else {
                         String str44 = str33;
@@ -2547,7 +3045,14 @@ public final class MediaCodecInfo {
                                         str11 = str44;
                                         profileLevels3 = profileLevels10;
                                         str12 = str34;
-                                        Log.w(str12, str32 + profileLevel4.profile + str31 + profileLevel4.level + str11 + mime);
+                                        Log.w(
+                                                str12,
+                                                str32
+                                                        + profileLevel4.profile
+                                                        + str31
+                                                        + profileLevel4.level
+                                                        + str11
+                                                        + mime);
                                         errors3 |= 1;
                                         minHeight = minHeight3;
                                         MBPS = 0;
@@ -2606,13 +3111,24 @@ public final class MediaCodecInfo {
                             }
                             int maxRate9 = errors4;
                             if (!this.mAllowMbOverride) {
-                                this.mBlockAspectRatioRange = Range.create(new Rational(11, 9), new Rational(11, 9));
+                                this.mBlockAspectRatioRange =
+                                        Range.create(new Rational(11, 9), new Rational(11, 9));
                             }
                             int i9 = minWidth2;
                             int minWidth3 = maxWidth6;
                             int i10 = maxHeight5;
                             int maxHeight6 = maxBlocks5;
-                            applyMacroBlockLimits(i9, minHeight3, minWidth3, i10, maxHeight6, maxBlocksPerSecond4, 16, 16, minAlignment, minAlignment);
+                            applyMacroBlockLimits(
+                                    i9,
+                                    minHeight3,
+                                    minWidth3,
+                                    i10,
+                                    maxHeight6,
+                                    maxBlocksPerSecond4,
+                                    16,
+                                    16,
+                                    minAlignment,
+                                    minAlignment);
                             this.mFrameRateRange = Range.create(num, Integer.valueOf(maxRate9));
                             errors = errors3;
                             maxBlocks = maxBps4;
@@ -2649,7 +3165,9 @@ public final class MediaCodecInfo {
                                             break;
                                         default:
                                             str10 = str30;
-                                            Log.w(str9, str10 + profileLevel5.profile + str8 + mime);
+                                            Log.w(
+                                                    str9,
+                                                    str10 + profileLevel5.profile + str8 + mime);
                                             errors |= 1;
                                             break;
                                     }
@@ -2660,7 +3178,8 @@ public final class MediaCodecInfo {
                                     str47 = str9;
                                     str30 = str10;
                                 }
-                                applyMacroBlockLimits(32767, 32767, Integer.MAX_VALUE, 2147483647L, 16, 16, 1, 1);
+                                applyMacroBlockLimits(
+                                        32767, 32767, Integer.MAX_VALUE, 2147483647L, 16, 16, 1, 1);
                                 num = num5;
                                 maxBlocks = 100000000;
                             } else {
@@ -2807,7 +3326,9 @@ public final class MediaCodecInfo {
                                                 SR2 = 4706009088L;
                                                 break;
                                             default:
-                                                Log.w(str50, str49 + profileLevel6.level + str46 + mime);
+                                                Log.w(
+                                                        str50,
+                                                        str49 + profileLevel6.level + str46 + mime);
                                                 errors |= 1;
                                                 profileLevels2 = profileLevels11;
                                                 FS2 = 0;
@@ -2832,7 +3353,12 @@ public final class MediaCodecInfo {
                                                 break;
                                             default:
                                                 str6 = str48;
-                                                Log.w(str50, str48 + profileLevel6.profile + str46 + mime);
+                                                Log.w(
+                                                        str50,
+                                                        str48
+                                                                + profileLevel6.profile
+                                                                + str46
+                                                                + mime);
                                                 errors |= 1;
                                                 break;
                                         }
@@ -2850,7 +3376,15 @@ public final class MediaCodecInfo {
                                     }
                                     num = num5;
                                     int maxLengthInBlocks2 = Utils.divUp(maxDim2, 8);
-                                    applyMacroBlockLimits(maxLengthInBlocks2, maxLengthInBlocks2, Utils.divUp(maxBlocks6, 64), Utils.divUp(maxBlocksPerSecond5, 64L), 8, 8, 1, 1);
+                                    applyMacroBlockLimits(
+                                            maxLengthInBlocks2,
+                                            maxLengthInBlocks2,
+                                            Utils.divUp(maxBlocks6, 64),
+                                            Utils.divUp(maxBlocksPerSecond5, 64L),
+                                            8,
+                                            8,
+                                            1,
+                                            1);
                                     maxBlocks = maxBps5;
                                 } else {
                                     String str51 = str49;
@@ -3003,7 +3537,12 @@ public final class MediaCodecInfo {
                                                 default:
                                                     FR = 0.0d;
                                                     str3 = str51;
-                                                    Log.w(str50, str3 + profileLevel7.level + str46 + mime);
+                                                    Log.w(
+                                                            str50,
+                                                            str3
+                                                                    + profileLevel7.level
+                                                                    + str46
+                                                                    + mime);
                                                     errors |= 1;
                                                     break;
                                             }
@@ -3019,12 +3558,18 @@ public final class MediaCodecInfo {
                                                 default:
                                                     str4 = str52;
                                                     i = length7;
-                                                    Log.w(str50, str4 + profileLevel7.profile + str46 + mime);
+                                                    Log.w(
+                                                            str50,
+                                                            str4
+                                                                    + profileLevel7.profile
+                                                                    + str46
+                                                                    + mime);
                                                     errors |= 1;
                                                     break;
                                             }
                                             errors &= -5;
-                                            maxBlocksPerSecond7 = Math.max((int) (r2 * FR), maxBlocksPerSecond7);
+                                            maxBlocksPerSecond7 =
+                                                    Math.max((int) (r2 * FR), maxBlocksPerSecond7);
                                             maxBlocks7 = Math.max(FS7 >> 6, maxBlocks7);
                                             maxBps7 = Math.max(BR10 * 1000, maxBps7);
                                             i14++;
@@ -3034,7 +3579,15 @@ public final class MediaCodecInfo {
                                             str52 = str4;
                                         }
                                         int maxLengthInBlocks3 = (int) Math.sqrt(maxBlocks7 * 8);
-                                        applyMacroBlockLimits(maxLengthInBlocks3, maxLengthInBlocks3, maxBlocks7, maxBlocksPerSecond7, 8, 8, 1, 1);
+                                        applyMacroBlockLimits(
+                                                maxLengthInBlocks3,
+                                                maxLengthInBlocks3,
+                                                maxBlocks7,
+                                                maxBlocksPerSecond7,
+                                                8,
+                                                8,
+                                                1,
+                                                1);
                                         maxBlocks = maxBps7;
                                     } else {
                                         CodecProfileLevel[] profileLevels12 = profileLevels11;
@@ -3049,7 +3602,8 @@ public final class MediaCodecInfo {
                                             int errors5 = 4;
                                             int D4 = 0;
                                             while (D4 < length8) {
-                                                CodecProfileLevel profileLevel8 = profileLevels12[D4];
+                                                CodecProfileLevel profileLevel8 =
+                                                        profileLevels12[D4];
                                                 long SR3 = profileLevel8.level;
                                                 switch (SR3) {
                                                     case 1:
@@ -3214,7 +3768,12 @@ public final class MediaCodecInfo {
                                                         break;
                                                     default:
                                                         str2 = str53;
-                                                        Log.w(str2, str54 + profileLevel8.level + str46 + mime);
+                                                        Log.w(
+                                                                str2,
+                                                                str54
+                                                                        + profileLevel8.level
+                                                                        + str46
+                                                                        + mime);
                                                         profileLevels = profileLevels12;
                                                         errors2 = errors5 | 1;
                                                         D = 0;
@@ -3235,11 +3794,17 @@ public final class MediaCodecInfo {
                                                         break;
                                                     default:
                                                         D2 = D;
-                                                        Log.w(str2, str52 + profileLevel8.profile + str46 + mime);
+                                                        Log.w(
+                                                                str2,
+                                                                str52
+                                                                        + profileLevel8.profile
+                                                                        + str46
+                                                                        + mime);
                                                         errors2 |= 1;
                                                         break;
                                                 }
-                                                maxBlocksPerSecond8 = Math.max(SR, maxBlocksPerSecond8);
+                                                maxBlocksPerSecond8 =
+                                                        Math.max(SR, maxBlocksPerSecond8);
                                                 maxBlocks8 = Math.max(FS, maxBlocks8);
                                                 maxBps8 = Math.max(BR2 * 1000, maxBps8);
                                                 maxDim3 = Math.max(D2, maxDim3);
@@ -3251,7 +3816,15 @@ public final class MediaCodecInfo {
                                                 profileLevels12 = profileLevels;
                                             }
                                             int maxLengthInBlocks4 = Utils.divUp(maxDim3, 8);
-                                            applyMacroBlockLimits(maxLengthInBlocks4, maxLengthInBlocks4, Utils.divUp(maxBlocks8, 64), Utils.divUp(maxBlocksPerSecond8, 64L), 8, 8, 1, 1);
+                                            applyMacroBlockLimits(
+                                                    maxLengthInBlocks4,
+                                                    maxLengthInBlocks4,
+                                                    Utils.divUp(maxBlocks8, 64),
+                                                    Utils.divUp(maxBlocksPerSecond8, 64L),
+                                                    8,
+                                                    8,
+                                                    1,
+                                                    1);
                                             maxBlocks = maxBps8;
                                             errors = errors5;
                                         } else {
@@ -3276,7 +3849,12 @@ public final class MediaCodecInfo {
         public static final int BITRATE_MODE_CBR_FD = 3;
         public static final int BITRATE_MODE_CQ = 0;
         public static final int BITRATE_MODE_VBR = 1;
-        private static final Feature[] bitrates = {new Feature("VBR", 1, true), new Feature("CBR", 2, false), new Feature("CQ", 0, false), new Feature("CBR-FD", 3, false)};
+        private static final Feature[] bitrates = {
+            new Feature("VBR", 1, true),
+            new Feature("CBR", 2, false),
+            new Feature("CQ", 0, false),
+            new Feature("CBR-FD", 3, false)
+        };
         private int mBitControl;
         private Range<Integer> mComplexityRange;
         private Integer mDefaultComplexity;
@@ -3311,8 +3889,7 @@ public final class MediaCodecInfo {
             return false;
         }
 
-        private EncoderCapabilities() {
-        }
+        private EncoderCapabilities() {}
 
         public static EncoderCapabilities create(MediaFormat info, CodecCapabilities parent) {
             EncoderCapabilities caps = new EncoderCapabilities();
@@ -3334,7 +3911,11 @@ public final class MediaCodecInfo {
             if (mime.equalsIgnoreCase("audio/flac")) {
                 this.mComplexityRange = Range.create(0, 8);
                 this.mBitControl = 1;
-            } else if (mime.equalsIgnoreCase("audio/3gpp") || mime.equalsIgnoreCase("audio/amr-wb") || mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_ALAW) || mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_MLAW) || mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_MSGSM)) {
+            } else if (mime.equalsIgnoreCase("audio/3gpp")
+                    || mime.equalsIgnoreCase("audio/amr-wb")
+                    || mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_ALAW)
+                    || mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_G711_MLAW)
+                    || mime.equalsIgnoreCase(MediaFormat.MIMETYPE_AUDIO_MSGSM)) {
                 this.mBitControl = 4;
             }
         }
@@ -3342,10 +3923,13 @@ public final class MediaCodecInfo {
         private void parseFromInfo(MediaFormat info) {
             Map<String, Object> map = info.getMap();
             if (info.containsKey("complexity-range")) {
-                this.mComplexityRange = Utils.parseIntRange(info.getString("complexity-range"), this.mComplexityRange);
+                this.mComplexityRange =
+                        Utils.parseIntRange(
+                                info.getString("complexity-range"), this.mComplexityRange);
             }
             if (info.containsKey("quality-range")) {
-                this.mQualityRange = Utils.parseIntRange(info.getString("quality-range"), this.mQualityRange);
+                this.mQualityRange =
+                        Utils.parseIntRange(info.getString("quality-range"), this.mQualityRange);
             }
             if (info.containsKey("feature-bitrate-modes")) {
                 this.mBitControl = 0;
@@ -3354,11 +3938,13 @@ public final class MediaCodecInfo {
                 }
             }
             try {
-                this.mDefaultComplexity = Integer.valueOf(Integer.parseInt((String) map.get("complexity-default")));
+                this.mDefaultComplexity =
+                        Integer.valueOf(Integer.parseInt((String) map.get("complexity-default")));
             } catch (NumberFormatException e) {
             }
             try {
-                this.mDefaultQuality = Integer.valueOf(Integer.parseInt((String) map.get("quality-default")));
+                this.mDefaultQuality =
+                        Integer.valueOf(Integer.parseInt((String) map.get("quality-default")));
             } catch (NumberFormatException e2) {
             }
             this.mQualityScale = (String) map.get("quality-scale");
@@ -3394,10 +3980,12 @@ public final class MediaCodecInfo {
         }
 
         public void getDefaultFormat(MediaFormat format) {
-            if (!this.mQualityRange.getUpper().equals(this.mQualityRange.getLower()) && this.mDefaultQuality != null) {
+            if (!this.mQualityRange.getUpper().equals(this.mQualityRange.getLower())
+                    && this.mDefaultQuality != null) {
                 format.setInteger("quality", this.mDefaultQuality.intValue());
             }
-            if (!this.mComplexityRange.getUpper().equals(this.mComplexityRange.getLower()) && this.mDefaultComplexity != null) {
+            if (!this.mComplexityRange.getUpper().equals(this.mComplexityRange.getLower())
+                    && this.mDefaultComplexity != null) {
                 format.setInteger(MediaFormat.KEY_COMPLEXITY, this.mDefaultComplexity.intValue());
             }
             for (Feature feat : bitrates) {
@@ -3421,7 +4009,8 @@ public final class MediaCodecInfo {
                 if (complexity == null) {
                     complexity = flacComplexity;
                 } else if (flacComplexity != null && !complexity.equals(flacComplexity)) {
-                    throw new IllegalArgumentException("conflicting values for complexity and flac-compression-level");
+                    throw new IllegalArgumentException(
+                            "conflicting values for complexity and flac-compression-level");
                 }
             }
             Integer profile = (Integer) map.get("profile");
@@ -3430,7 +4019,8 @@ public final class MediaCodecInfo {
                 if (profile == null) {
                     profile = aacProfile;
                 } else if (aacProfile != null && !aacProfile.equals(profile)) {
-                    throw new IllegalArgumentException("conflicting values for profile and aac-profile");
+                    throw new IllegalArgumentException(
+                            "conflicting values for profile and aac-profile");
                 }
             }
             Integer quality = (Integer) map.get("quality");
@@ -3702,6 +4292,10 @@ public final class MediaCodecInfo {
         if (caps.size() == this.mCaps.size()) {
             return this;
         }
-        return new MediaCodecInfo(this.mName, this.mCanonicalName, this.mFlags, (CodecCapabilities[]) caps.toArray(new CodecCapabilities[caps.size()]));
+        return new MediaCodecInfo(
+                this.mName,
+                this.mCanonicalName,
+                this.mFlags,
+                (CodecCapabilities[]) caps.toArray(new CodecCapabilities[caps.size()]));
     }
 }

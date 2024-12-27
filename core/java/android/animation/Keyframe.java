@@ -8,7 +8,7 @@ public abstract class Keyframe implements Cloneable {
     Class mValueType;
     boolean mValueWasSetOnStart;
 
-    @Override // 
+    @Override //
     /* renamed from: clone */
     public abstract Keyframe mo85clone();
 
@@ -96,7 +96,8 @@ public abstract class Keyframe implements Cloneable {
         @Override // android.animation.Keyframe
         /* renamed from: clone */
         public ObjectKeyframe mo85clone() {
-            ObjectKeyframe kfClone = new ObjectKeyframe(getFraction(), hasValue() ? this.mValue : null);
+            ObjectKeyframe kfClone =
+                    new ObjectKeyframe(getFraction(), hasValue() ? this.mValue : null);
             kfClone.mValueWasSetOnStart = this.mValueWasSetOnStart;
             kfClone.setInterpolator(getInterpolator());
             return kfClone;

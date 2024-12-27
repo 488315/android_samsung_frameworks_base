@@ -1,9 +1,10 @@
 package android.speech.tts;
 
 import android.media.AudioFormat;
-import android.speech.tts.TextToSpeechService;
 import android.util.Log;
+
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -26,7 +27,10 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
     private final Object mStateLock;
     protected int mStatusCode;
 
-    FileSynthesisCallback(FileChannel fileChannel, TextToSpeechService.UtteranceProgressDispatcher dispatcher, boolean clientIsUsingV2) {
+    FileSynthesisCallback(
+            FileChannel fileChannel,
+            TextToSpeechService.UtteranceProgressDispatcher dispatcher,
+            boolean clientIsUsingV2) {
         super(clientIsUsingV2);
         this.mStateLock = new Object();
         this.mStarted = false;
@@ -67,7 +71,12 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
     @Override // android.speech.tts.SynthesisCallback
     public int start(int sampleRateInHz, int audioFormat, int channelCount) {
         if (audioFormat != 3 && audioFormat != 2 && audioFormat != 4) {
-            Log.e(TAG, "Audio format encoding " + audioFormat + " not supported. Please use one of AudioFormat.ENCODING_PCM_8BIT, AudioFormat.ENCODING_PCM_16BIT or AudioFormat.ENCODING_PCM_FLOAT");
+            Log.e(
+                    TAG,
+                    "Audio format encoding "
+                            + audioFormat
+                            + " not supported. Please use one of AudioFormat.ENCODING_PCM_8BIT,"
+                            + " AudioFormat.ENCODING_PCM_16BIT or AudioFormat.ENCODING_PCM_FLOAT");
         }
         this.mDispatcher.dispatchOnBeginSynthesis(sampleRateInHz, audioFormat, channelCount);
         synchronized (this.mStateLock) {
@@ -163,7 +172,8 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
             try {
                 fileChannel.position(0L);
                 int dataLength = (int) (fileChannel.size() - 44);
-                fileChannel.write(makeWavHeader(sampleRateInHz, audioFormat, channelCount, dataLength));
+                fileChannel.write(
+                        makeWavHeader(sampleRateInHz, audioFormat, channelCount, dataLength));
                 synchronized (this.mStateLock) {
                     closeFile();
                     this.mDispatcher.dispatchOnSuccess();
@@ -213,7 +223,8 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
         return z;
     }
 
-    private ByteBuffer makeWavHeader(int sampleRateInHz, int audioFormat, int channelCount, int dataLength) {
+    private ByteBuffer makeWavHeader(
+            int sampleRateInHz, int audioFormat, int channelCount, int dataLength) {
         int sampleSizeInBytes = AudioFormat.getBytesPerSample(audioFormat);
         int byteRate = sampleRateInHz * sampleSizeInBytes * channelCount;
         short blockAlign = (short) (sampleSizeInBytes * channelCount);
@@ -221,10 +232,10 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
         byte[] headerBuf = new byte[44];
         ByteBuffer header = ByteBuffer.wrap(headerBuf);
         header.order(ByteOrder.LITTLE_ENDIAN);
-        header.put(new byte[]{82, 73, 70, 70});
+        header.put(new byte[] {82, 73, 70, 70});
         header.putInt((dataLength + 44) - 8);
-        header.put(new byte[]{87, 65, 86, 69});
-        header.put(new byte[]{102, 109, 116, 32});
+        header.put(new byte[] {87, 65, 86, 69});
+        header.put(new byte[] {102, 109, 116, 32});
         header.putInt(16);
         header.putShort((short) 1);
         header.putShort((short) channelCount);
@@ -232,7 +243,10 @@ class FileSynthesisCallback extends AbstractSynthesisCallback {
         header.putInt(byteRate);
         header.putShort(blockAlign);
         header.putShort(bitsPerSample);
-        header.put(new byte[]{100, SprAttributeBase.TYPE_ANIMATOR_SET, 116, SprAttributeBase.TYPE_ANIMATOR_SET});
+        header.put(
+                new byte[] {
+                    100, SprAttributeBase.TYPE_ANIMATOR_SET, 116, SprAttributeBase.TYPE_ANIMATOR_SET
+                });
         header.putInt(dataLength);
         header.flip();
         return header;

@@ -11,7 +11,6 @@ import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.CursorAnchorInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.ExtractedText;
-import com.android.internal.inputmethod.IRemoteInputConnection;
 
 /* loaded from: classes5.dex */
 public interface IInputMethodSession extends IInterface {
@@ -25,7 +24,9 @@ public interface IInputMethodSession extends IInterface {
 
     void finishSession() throws RemoteException;
 
-    void invalidateInput(EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, int i) throws RemoteException;
+    void invalidateInput(
+            EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, int i)
+            throws RemoteException;
 
     void removeImeSurface() throws RemoteException;
 
@@ -41,48 +42,47 @@ public interface IInputMethodSession extends IInterface {
 
     public static class Default implements IInputMethodSession {
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void updateExtractedText(int token, ExtractedText text) throws RemoteException {
-        }
+        public void updateExtractedText(int token, ExtractedText text) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void updateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd, int candidatesStart, int candidatesEnd) throws RemoteException {
-        }
+        public void updateSelection(
+                int oldSelStart,
+                int oldSelEnd,
+                int newSelStart,
+                int newSelEnd,
+                int candidatesStart,
+                int candidatesEnd)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void viewClicked(boolean focusChanged) throws RemoteException {
-        }
+        public void viewClicked(boolean focusChanged) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void updateCursor(Rect newCursor) throws RemoteException {
-        }
+        public void updateCursor(Rect newCursor) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void displayCompletions(CompletionInfo[] completions) throws RemoteException {
-        }
+        public void displayCompletions(CompletionInfo[] completions) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void appPrivateCommand(String action, Bundle data) throws RemoteException {
-        }
+        public void appPrivateCommand(String action, Bundle data) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void finishSession() throws RemoteException {
-        }
+        public void finishSession() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void updateCursorAnchorInfo(CursorAnchorInfo cursorAnchorInfo) throws RemoteException {
-        }
+        public void updateCursorAnchorInfo(CursorAnchorInfo cursorAnchorInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void removeImeSurface() throws RemoteException {
-        }
+        public void removeImeSurface() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void finishInput() throws RemoteException {
-        }
+        public void finishInput() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodSession
-        public void invalidateInput(EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) throws RemoteException {
-        }
+        public void invalidateInput(
+                EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -90,7 +90,7 @@ public interface IInputMethodSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputMethodSession {
+    public abstract static class Stub extends Binder implements IInputMethodSession {
         static final int TRANSACTION_appPrivateCommand = 6;
         static final int TRANSACTION_displayCompletions = 5;
         static final int TRANSACTION_finishInput = 10;
@@ -158,7 +158,8 @@ public interface IInputMethodSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputMethodSession.DESCRIPTOR);
             }
@@ -169,7 +170,8 @@ public interface IInputMethodSession extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    ExtractedText _arg1 = (ExtractedText) data.readTypedObject(ExtractedText.CREATOR);
+                    ExtractedText _arg1 =
+                            (ExtractedText) data.readTypedObject(ExtractedText.CREATOR);
                     data.enforceNoDataAvail();
                     updateExtractedText(_arg0, _arg1);
                     return true;
@@ -194,7 +196,8 @@ public interface IInputMethodSession extends IInterface {
                     updateCursor(_arg04);
                     return true;
                 case 5:
-                    CompletionInfo[] _arg05 = (CompletionInfo[]) data.createTypedArray(CompletionInfo.CREATOR);
+                    CompletionInfo[] _arg05 =
+                            (CompletionInfo[]) data.createTypedArray(CompletionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     displayCompletions(_arg05);
                     return true;
@@ -208,7 +211,8 @@ public interface IInputMethodSession extends IInterface {
                     finishSession();
                     return true;
                 case 8:
-                    CursorAnchorInfo _arg07 = (CursorAnchorInfo) data.readTypedObject(CursorAnchorInfo.CREATOR);
+                    CursorAnchorInfo _arg07 =
+                            (CursorAnchorInfo) data.readTypedObject(CursorAnchorInfo.CREATOR);
                     data.enforceNoDataAvail();
                     updateCursorAnchorInfo(_arg07);
                     return true;
@@ -220,7 +224,8 @@ public interface IInputMethodSession extends IInterface {
                     return true;
                 case 11:
                     EditorInfo _arg08 = (EditorInfo) data.readTypedObject(EditorInfo.CREATOR);
-                    IRemoteInputConnection _arg14 = IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteInputConnection _arg14 =
+                            IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
                     invalidateInput(_arg08, _arg14, _arg22);
@@ -260,7 +265,14 @@ public interface IInputMethodSession extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodSession
-            public void updateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd, int candidatesStart, int candidatesEnd) throws RemoteException {
+            public void updateSelection(
+                    int oldSelStart,
+                    int oldSelEnd,
+                    int newSelStart,
+                    int newSelEnd,
+                    int candidatesStart,
+                    int candidatesEnd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodSession.DESCRIPTOR);
@@ -337,7 +349,8 @@ public interface IInputMethodSession extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodSession
-            public void updateCursorAnchorInfo(CursorAnchorInfo cursorAnchorInfo) throws RemoteException {
+            public void updateCursorAnchorInfo(CursorAnchorInfo cursorAnchorInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodSession.DESCRIPTOR);
@@ -371,7 +384,9 @@ public interface IInputMethodSession extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodSession
-            public void invalidateInput(EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) throws RemoteException {
+            public void invalidateInput(
+                    EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodSession.DESCRIPTOR);

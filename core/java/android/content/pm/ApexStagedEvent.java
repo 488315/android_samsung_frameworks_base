@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ApexStagedEvent implements Parcelable {
-    public static final Parcelable.Creator<ApexStagedEvent> CREATOR = new Parcelable.Creator<ApexStagedEvent>() { // from class: android.content.pm.ApexStagedEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApexStagedEvent createFromParcel(Parcel _aidl_source) {
-            ApexStagedEvent _aidl_out = new ApexStagedEvent();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ApexStagedEvent> CREATOR =
+            new Parcelable.Creator<
+                    ApexStagedEvent>() { // from class: android.content.pm.ApexStagedEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApexStagedEvent createFromParcel(Parcel _aidl_source) {
+                    ApexStagedEvent _aidl_out = new ApexStagedEvent();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApexStagedEvent[] newArray(int _aidl_size) {
-            return new ApexStagedEvent[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApexStagedEvent[] newArray(int _aidl_size) {
+                    return new ApexStagedEvent[_aidl_size];
+                }
+            };
     public String[] stagedApexModuleNames;
 
     @Override // android.os.Parcelable

@@ -14,6 +14,5 @@ final class OneColor {
     static final int NEUTRAL2_HUE_DELTA = 0;
     static final float NEUTRAL2_SAT = 0.0f;
 
-    OneColor() {
-    }
+    OneColor() {}
 }

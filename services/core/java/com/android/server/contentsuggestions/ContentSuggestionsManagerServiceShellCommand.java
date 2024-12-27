@@ -1,7 +1,9 @@
 package com.android.server.contentsuggestions;
 
 import android.os.ShellCommand;
+
 import com.android.server.am.ActiveServices$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -9,7 +11,8 @@ import java.io.PrintWriter;
 public final class ContentSuggestionsManagerServiceShellCommand extends ShellCommand {
     public final ContentSuggestionsManagerService mService;
 
-    public ContentSuggestionsManagerServiceShellCommand(ContentSuggestionsManagerService contentSuggestionsManagerService) {
+    public ContentSuggestionsManagerServiceShellCommand(
+            ContentSuggestionsManagerService contentSuggestionsManagerService) {
         this.mService = contentSuggestionsManagerService;
     }
 
@@ -25,7 +28,8 @@ public final class ContentSuggestionsManagerServiceShellCommand extends ShellCom
                 outPrintWriter.println("Invalid get: ".concat(nextArgRequired));
                 return -1;
             }
-            outPrintWriter.println(this.mService.isDefaultServiceEnabled(Integer.parseInt(getNextArgRequired())));
+            outPrintWriter.println(
+                    this.mService.isDefaultServiceEnabled(Integer.parseInt(getNextArgRequired())));
             return 0;
         }
         if (!str.equals("set")) {
@@ -34,7 +38,8 @@ public final class ContentSuggestionsManagerServiceShellCommand extends ShellCom
         String nextArgRequired2 = getNextArgRequired();
         nextArgRequired2.getClass();
         if (nextArgRequired2.equals("default-service-enabled")) {
-            this.mService.setDefaultServiceEnabled(Integer.parseInt(getNextArgRequired()), Boolean.parseBoolean(getNextArg()));
+            this.mService.setDefaultServiceEnabled(
+                    Integer.parseInt(getNextArgRequired()), Boolean.parseBoolean(getNextArg()));
         } else {
             if (!nextArgRequired2.equals("temporary-service")) {
                 outPrintWriter.println("Invalid set: ".concat(nextArgRequired2));
@@ -47,7 +52,14 @@ public final class ContentSuggestionsManagerServiceShellCommand extends ShellCom
             } else {
                 int parseInt2 = Integer.parseInt(getNextArgRequired());
                 this.mService.setTemporaryService(parseInt, nextArg, parseInt2);
-                outPrintWriter.println(ActiveServices$$ExternalSyntheticOutline0.m(parseInt2, nextArg, " for ", "ms", new StringBuilder("ContentSuggestionsService temporarily set to ")));
+                outPrintWriter.println(
+                        ActiveServices$$ExternalSyntheticOutline0.m(
+                                parseInt2,
+                                nextArg,
+                                " for ",
+                                "ms",
+                                new StringBuilder(
+                                        "ContentSuggestionsService temporarily set to ")));
             }
         }
         return 0;
@@ -61,14 +73,16 @@ public final class ContentSuggestionsManagerServiceShellCommand extends ShellCom
             outPrintWriter.println("    Prints this help text.");
             outPrintWriter.println("");
             outPrintWriter.println("  set temporary-service USER_ID [COMPONENT_NAME DURATION]");
-            outPrintWriter.println("    Temporarily (for DURATION ms) changes the service implementation.");
+            outPrintWriter.println(
+                    "    Temporarily (for DURATION ms) changes the service implementation.");
             outPrintWriter.println("    To reset, call with just the USER_ID argument.");
             outPrintWriter.println("");
             outPrintWriter.println("  set default-service-enabled USER_ID [true|false]");
             outPrintWriter.println("    Enable / disable the default service for the user.");
             outPrintWriter.println("");
             outPrintWriter.println("  get default-service-enabled USER_ID");
-            outPrintWriter.println("    Checks whether the default service is enabled for the user.");
+            outPrintWriter.println(
+                    "    Checks whether the default service is enabled for the user.");
             outPrintWriter.println("");
             outPrintWriter.close();
         } catch (Throwable th) {

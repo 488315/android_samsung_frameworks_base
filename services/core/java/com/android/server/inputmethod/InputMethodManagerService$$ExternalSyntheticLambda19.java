@@ -2,12 +2,14 @@ package com.android.server.inputmethod;
 
 import android.util.Printer;
 import android.view.inputmethod.InputMethodInfo;
+
 import java.io.PrintWriter;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class InputMethodManagerService$$ExternalSyntheticLambda19 implements Consumer {
+public final /* synthetic */ class InputMethodManagerService$$ExternalSyntheticLambda19
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -31,9 +33,12 @@ public final /* synthetic */ class InputMethodManagerService$$ExternalSyntheticL
                 StringBuilder sb = new StringBuilder("    client=");
                 sb.append(clientState.mClient);
                 printer.println(sb.toString());
-                printer.println("    fallbackInputConnection=" + clientState.mFallbackInputConnection);
+                printer.println(
+                        "    fallbackInputConnection=" + clientState.mFallbackInputConnection);
                 printer.println("    sessionRequested=" + clientState.mSessionRequested);
-                printer.println("    sessionRequestedForAccessibility=" + clientState.mSessionRequestedForAccessibility);
+                printer.println(
+                        "    sessionRequestedForAccessibility="
+                                + clientState.mSessionRequestedForAccessibility);
                 printer.println("    curSession=" + clientState.mCurSession);
                 printer.println("    selfReportedDisplayId=" + clientState.mSelfReportedDisplayId);
                 printer.println("    uid=" + clientState.mUid);

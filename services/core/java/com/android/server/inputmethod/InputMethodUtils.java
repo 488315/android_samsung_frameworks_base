@@ -9,10 +9,12 @@ import android.util.ArraySet;
 import android.util.Slog;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.textservice.SpellCheckerInfo;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.pm.UserManagerInternal;
 import com.android.server.textservices.TextServicesManagerInternal;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +41,8 @@ public abstract class InputMethodUtils {
     }
 
     public static int[] resolveUserId(int i, int i2, PrintWriter printWriter) {
-        UserManagerInternal userManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+        UserManagerInternal userManagerInternal =
+                (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
         if (i == -1) {
             return userManagerInternal.getUserIds();
         }
@@ -63,19 +66,25 @@ public abstract class InputMethodUtils {
                 return new int[0];
             }
         }
-        return new int[]{i};
+        return new int[] {i};
     }
 
-    public static void setNonSelectedSystemImesDisabledUntilUsed(PackageManager packageManager, List list) {
-        String[] stringArray = Resources.getSystem().getStringArray(R.array.config_tether_wifi_regexs);
+    public static void setNonSelectedSystemImesDisabledUntilUsed(
+            PackageManager packageManager, List list) {
+        String[] stringArray =
+                Resources.getSystem().getStringArray(R.array.config_tether_wifi_regexs);
         if (stringArray == null || stringArray.length == 0) {
             return;
         }
-        TextServicesManagerInternal textServicesManagerInternal = (TextServicesManagerInternal) LocalServices.getService(TextServicesManagerInternal.class);
+        TextServicesManagerInternal textServicesManagerInternal =
+                (TextServicesManagerInternal)
+                        LocalServices.getService(TextServicesManagerInternal.class);
         if (textServicesManagerInternal == null) {
             textServicesManagerInternal = TextServicesManagerInternal.NOP;
         }
-        SpellCheckerInfo currentSpellCheckerForUser = textServicesManagerInternal.getCurrentSpellCheckerForUser(packageManager.getUserId());
+        SpellCheckerInfo currentSpellCheckerForUser =
+                textServicesManagerInternal.getCurrentSpellCheckerForUser(
+                        packageManager.getUserId());
         for (String str : stringArray) {
             int i = 0;
             while (true) {
@@ -86,23 +95,37 @@ public abstract class InputMethodUtils {
                     } else {
                         i++;
                     }
-                } else if (currentSpellCheckerForUser == null || !str.equals(currentSpellCheckerForUser.getPackageName())) {
+                } else if (currentSpellCheckerForUser == null
+                        || !str.equals(currentSpellCheckerForUser.getPackageName())) {
                     try {
-                        ApplicationInfo applicationInfo = packageManager.getApplicationInfo(str, PackageManager.ApplicationInfoFlags.of(32768L));
+                        ApplicationInfo applicationInfo =
+                                packageManager.getApplicationInfo(
+                                        str, PackageManager.ApplicationInfoFlags.of(32768L));
                         if (applicationInfo != null && (applicationInfo.flags & 1) != 0) {
                             try {
-                                int applicationEnabledSetting = packageManager.getApplicationEnabledSetting(str);
-                                if (applicationEnabledSetting == 0 || applicationEnabledSetting == 1) {
+                                int applicationEnabledSetting =
+                                        packageManager.getApplicationEnabledSetting(str);
+                                if (applicationEnabledSetting == 0
+                                        || applicationEnabledSetting == 1) {
                                     try {
                                         packageManager.setApplicationEnabledSetting(str, 4, 0);
                                     } catch (IllegalArgumentException e) {
-                                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("setApplicationEnabledSetting failed. packageName=", str, " userId=");
+                                        StringBuilder m =
+                                                DumpUtils$$ExternalSyntheticOutline0.m(
+                                                        "setApplicationEnabledSetting failed."
+                                                            + " packageName=",
+                                                        str,
+                                                        " userId=");
                                         m.append(packageManager.getUserId());
                                         Slog.w("InputMethodUtils", m.toString(), e);
                                     }
                                 }
                             } catch (IllegalArgumentException e2) {
-                                StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("getApplicationEnabledSetting failed. packageName=", str, " userId=");
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "getApplicationEnabledSetting failed. packageName=",
+                                                str,
+                                                " userId=");
                                 m2.append(packageManager.getUserId());
                                 Slog.w("InputMethodUtils", m2.toString(), e2);
                             }
@@ -118,8 +141,10 @@ public abstract class InputMethodUtils {
         if (TextUtils.isEmpty(str)) {
             return;
         }
-        TextUtils.SimpleStringSplitter simpleStringSplitter = new TextUtils.SimpleStringSplitter(':');
-        TextUtils.SimpleStringSplitter simpleStringSplitter2 = new TextUtils.SimpleStringSplitter(';');
+        TextUtils.SimpleStringSplitter simpleStringSplitter =
+                new TextUtils.SimpleStringSplitter(':');
+        TextUtils.SimpleStringSplitter simpleStringSplitter2 =
+                new TextUtils.SimpleStringSplitter(';');
         simpleStringSplitter.setString(str);
         while (simpleStringSplitter.hasNext()) {
             simpleStringSplitter2.setString(simpleStringSplitter.next());

@@ -2,9 +2,10 @@ package android.provider;
 
 import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.provider.Settings;
 import android.text.TextUtils;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,10 +15,9 @@ import java.util.function.Function;
 public class SettingsStringUtil {
     public static final String DELIMITER = ":";
 
-    private SettingsStringUtil() {
-    }
+    private SettingsStringUtil() {}
 
-    public static abstract class ColonDelimitedSet<T> extends HashSet<T> {
+    public abstract static class ColonDelimitedSet<T> extends HashSet<T> {
         protected abstract T itemFromString(String str);
 
         public ColonDelimitedSet(String colonSeparatedItems) {
@@ -122,7 +122,8 @@ public class SettingsStringUtil {
         }
 
         public static boolean contains(String delimitedElements, ComponentName element) {
-            return ColonDelimitedSet.OfStrings.contains(delimitedElements, element.flattenToString());
+            return ColonDelimitedSet.OfStrings.contains(
+                    delimitedElements, element.flattenToString());
         }
     }
 
@@ -138,11 +139,13 @@ public class SettingsStringUtil {
         }
 
         public String read() {
-            return Settings.Secure.getStringForUser(this.mContentResolver, this.mSettingName, this.mUserId);
+            return Settings.Secure.getStringForUser(
+                    this.mContentResolver, this.mSettingName, this.mUserId);
         }
 
         public boolean write(String value) {
-            return Settings.Secure.putStringForUser(this.mContentResolver, this.mSettingName, value, this.mUserId);
+            return Settings.Secure.putStringForUser(
+                    this.mContentResolver, this.mSettingName, value, this.mUserId);
         }
 
         public boolean modify(Function<String, String> change) {

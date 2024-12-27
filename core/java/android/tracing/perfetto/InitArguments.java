@@ -13,8 +13,7 @@ public class InitArguments {
     public static InitArguments TESTING = new InitArguments(1, 0);
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PerfettoBackend {
-    }
+    public @interface PerfettoBackend {}
 
     public InitArguments(int backends, int shmemSizeHintKb) {
         this.backends = backends;

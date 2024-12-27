@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
+
 import com.samsung.android.view.SemWindowManager;
 
 /* loaded from: classes6.dex */
@@ -42,7 +43,17 @@ public class ScreenCaptureUtil {
         display.getRealMetrics(displayMetrics);
         int lcdWidth = Math.abs(displayMetrics.widthPixels);
         int lcdHeight = Math.abs(displayMetrics.heightPixels);
-        Bitmap bitmap = this.mSemWindowManager.screenshot(displayId, WindowManager.LayoutParams.TYPE_GLOBAL_ACTION, false, new Rect(), lcdWidth / 5, lcdHeight / 5, false, 0, true);
+        Bitmap bitmap =
+                this.mSemWindowManager.screenshot(
+                        displayId,
+                        WindowManager.LayoutParams.TYPE_GLOBAL_ACTION,
+                        false,
+                        new Rect(),
+                        lcdWidth / 5,
+                        lcdHeight / 5,
+                        false,
+                        0,
+                        true);
         if (bitmap == null) {
             this.mLogWrapper.v(TAG, "bitmap is null !!!!");
         } else {
@@ -53,6 +64,7 @@ public class ScreenCaptureUtil {
     private static Bitmap rotateBitmap(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+        return Bitmap.createBitmap(
+                source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 }

@@ -9,9 +9,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
-import com.sec.android.iaft.IIAFTManagerService;
 import com.sec.android.iaft.callback.IIAFTCallback;
 
 /* loaded from: classes6.dex */
@@ -30,7 +31,8 @@ class IAFTManagerServiceImpl extends IIAFTManagerService.Stub {
     private static String mPackageName = "";
     private static IIAFTCallback mIAFTCallback = null;
     private static CountDownTimer mTraceTimer = null;
-    private static int mTraceMaxTime = MetricsProto.MetricsEvent.ACTION_PERMISSION_DENIED_ACCESS_FINE_LOCATION;
+    private static int mTraceMaxTime =
+            MetricsProto.MetricsEvent.ACTION_PERMISSION_DENIED_ACCESS_FINE_LOCATION;
 
     IAFTManagerServiceImpl(Context context) {
         this.mContext = context;
@@ -54,19 +56,26 @@ class IAFTManagerServiceImpl extends IIAFTManagerService.Stub {
                     intent.setAction("com.android.internal.intent.action.START_TRACE");
                     intent.setPackage("com.android.traceur");
                     IAFTManagerServiceImpl.this.mContext.sendBroadcast(intent);
-                    IAFTManagerServiceImpl.mTraceTimer = new CountDownTimer(IAFTManagerServiceImpl.mTraceMaxTime * 1000, IAFTManagerServiceImpl.mTraceMaxTime * 1000) { // from class: com.sec.android.iaft.IAFTManagerServiceImpl.ServiceHandler.1
-                        @Override // android.os.CountDownTimer
-                        public void onTick(long duration) {
-                        }
+                    IAFTManagerServiceImpl.mTraceTimer =
+                            new CountDownTimer(
+                                    IAFTManagerServiceImpl.mTraceMaxTime * 1000,
+                                    IAFTManagerServiceImpl.mTraceMaxTime
+                                            * 1000) { // from class:
+                                                      // com.sec.android.iaft.IAFTManagerServiceImpl.ServiceHandler.1
+                                @Override // android.os.CountDownTimer
+                                public void onTick(long duration) {}
 
-                        @Override // android.os.CountDownTimer
-                        public void onFinish() {
-                            Log.d(IAFTManagerServiceImpl.TAG, "traceTimer onfinish");
-                            if (IAFTManagerServiceImpl.this.mSystemReady) {
-                                IAFTManagerServiceImpl.this.mHandler.obtainMessage(4).sendToTarget();
-                            }
-                        }
-                    }.start();
+                                @Override // android.os.CountDownTimer
+                                public void onFinish() {
+                                    Log.d(IAFTManagerServiceImpl.TAG, "traceTimer onfinish");
+                                    if (IAFTManagerServiceImpl.this.mSystemReady) {
+                                        IAFTManagerServiceImpl.this
+                                                .mHandler
+                                                .obtainMessage(4)
+                                                .sendToTarget();
+                                    }
+                                }
+                            }.start();
                     break;
                 case 3:
                     Log.d(IAFTManagerServiceImpl.TAG, "Start atrace and analyze in Handler thread");
@@ -75,7 +84,8 @@ class IAFTManagerServiceImpl extends IIAFTManagerService.Stub {
                     intent2.setPackage("com.android.traceur");
                     intent2.putExtra("pid", IAFTManagerServiceImpl.mForegroundPid);
                     intent2.putExtra("package_name", IAFTManagerServiceImpl.mPackageName);
-                    intent2.putExtra(RuntimeManifestUtils.TAG_POLICY, IAFTManagerServiceImpl.mPolicy);
+                    intent2.putExtra(
+                            RuntimeManifestUtils.TAG_POLICY, IAFTManagerServiceImpl.mPolicy);
                     IAFTManagerServiceImpl.this.mContext.sendBroadcast(intent2);
                     break;
                 case 4:
@@ -117,7 +127,8 @@ class IAFTManagerServiceImpl extends IIAFTManagerService.Stub {
     }
 
     @Override // com.sec.android.iaft.IIAFTManagerService
-    public void startAtraceAndAnalyze(int pid, String packageName, int policy) throws RemoteException {
+    public void startAtraceAndAnalyze(int pid, String packageName, int policy)
+            throws RemoteException {
         mForegroundPid = pid;
         mPackageName = packageName;
         mPolicy = policy;

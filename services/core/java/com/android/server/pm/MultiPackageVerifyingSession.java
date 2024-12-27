@@ -2,6 +2,7 @@ package com.android.server.pm;
 
 import android.content.pm.IPackageInstallObserver2;
 import android.util.ArraySet;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,8 @@ public final class MultiPackageVerifyingSession {
     }
 
     public final String toString() {
-        return "MultiPackageVerifyingSession{" + Integer.toHexString(System.identityHashCode(this)) + "}";
+        return "MultiPackageVerifyingSession{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + "}";
     }
 }

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface IAccessibilityEmbeddedConnection extends IInterface {
-    public static final String DESCRIPTOR = "android.view.accessibility.IAccessibilityEmbeddedConnection";
+    public static final String DESCRIPTOR =
+            "android.view.accessibility.IAccessibilityEmbeddedConnection";
 
     IBinder associateEmbeddedHierarchy(IBinder iBinder, int i) throws RemoteException;
 
@@ -18,17 +19,16 @@ public interface IAccessibilityEmbeddedConnection extends IInterface {
 
     public static class Default implements IAccessibilityEmbeddedConnection {
         @Override // android.view.accessibility.IAccessibilityEmbeddedConnection
-        public IBinder associateEmbeddedHierarchy(IBinder hostToken, int sourceId) throws RemoteException {
+        public IBinder associateEmbeddedHierarchy(IBinder hostToken, int sourceId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.accessibility.IAccessibilityEmbeddedConnection
-        public void disassociateEmbeddedHierarchy() throws RemoteException {
-        }
+        public void disassociateEmbeddedHierarchy() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityEmbeddedConnection
-        public void setWindowMatrix(float[] matrixValues) throws RemoteException {
-        }
+        public void setWindowMatrix(float[] matrixValues) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +36,7 @@ public interface IAccessibilityEmbeddedConnection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccessibilityEmbeddedConnection {
+    public abstract static class Stub extends Binder implements IAccessibilityEmbeddedConnection {
         static final int TRANSACTION_associateEmbeddedHierarchy = 1;
         static final int TRANSACTION_disassociateEmbeddedHierarchy = 2;
         static final int TRANSACTION_setWindowMatrix = 3;
@@ -80,7 +80,8 @@ public interface IAccessibilityEmbeddedConnection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAccessibilityEmbeddedConnection.DESCRIPTOR);
             }
@@ -128,7 +129,8 @@ public interface IAccessibilityEmbeddedConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityEmbeddedConnection
-            public IBinder associateEmbeddedHierarchy(IBinder hostToken, int sourceId) throws RemoteException {
+            public IBinder associateEmbeddedHierarchy(IBinder hostToken, int sourceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

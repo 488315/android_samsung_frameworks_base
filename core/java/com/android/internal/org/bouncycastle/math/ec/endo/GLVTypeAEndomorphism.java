@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.math.ec.endo;
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.math.ec.ECPointMap;
 import com.android.internal.org.bouncycastle.math.ec.ScaleYNegateXPointMap;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */

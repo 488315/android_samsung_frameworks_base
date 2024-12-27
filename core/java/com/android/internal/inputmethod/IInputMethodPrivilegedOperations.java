@@ -8,17 +8,22 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.inputmethod.ImeTracker;
 import android.view.inputmethod.InputMethodSubtype;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes5.dex */
 public interface IInputMethodPrivilegedOperations extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.inputmethod.IInputMethodPrivilegedOperations";
+    public static final String DESCRIPTOR =
+            "com.android.internal.inputmethod.IInputMethodPrivilegedOperations";
 
-    void applyImeVisibilityAsync(IBinder iBinder, boolean z, ImeTracker.Token token) throws RemoteException;
+    void applyImeVisibilityAsync(IBinder iBinder, boolean z, ImeTracker.Token token)
+            throws RemoteException;
 
-    void createInputContentUriToken(Uri uri, String str, AndroidFuture androidFuture) throws RemoteException;
+    void createInputContentUriToken(Uri uri, String str, AndroidFuture androidFuture)
+            throws RemoteException;
 
-    void hideMySoftInput(ImeTracker.Token token, int i, int i2, AndroidFuture androidFuture) throws RemoteException;
+    void hideMySoftInput(ImeTracker.Token token, int i, int i2, AndroidFuture androidFuture)
+            throws RemoteException;
 
     void notifyUserActionAsync() throws RemoteException;
 
@@ -36,11 +41,14 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
 
     void setInputMethod(String str, AndroidFuture androidFuture) throws RemoteException;
 
-    void setInputMethodAndSubtype(String str, InputMethodSubtype inputMethodSubtype, AndroidFuture androidFuture) throws RemoteException;
+    void setInputMethodAndSubtype(
+            String str, InputMethodSubtype inputMethodSubtype, AndroidFuture androidFuture)
+            throws RemoteException;
 
     void shouldOfferSwitchingToNextInputMethod(AndroidFuture androidFuture) throws RemoteException;
 
-    void showMySoftInput(ImeTracker.Token token, int i, int i2, AndroidFuture androidFuture) throws RemoteException;
+    void showMySoftInput(ImeTracker.Token token, int i, int i2, AndroidFuture androidFuture)
+            throws RemoteException;
 
     void switchKeyboardLayoutAsync(int i) throws RemoteException;
 
@@ -52,76 +60,70 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
 
     public static class Default implements IInputMethodPrivilegedOperations {
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void setImeWindowStatusAsync(int vis, int backDisposition) throws RemoteException {
-        }
+        public void setImeWindowStatusAsync(int vis, int backDisposition) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void reportStartInputAsync(IBinder startInputToken) throws RemoteException {
-        }
+        public void reportStartInputAsync(IBinder startInputToken) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void createInputContentUriToken(Uri contentUri, String packageName, AndroidFuture future) throws RemoteException {
-        }
+        public void createInputContentUriToken(
+                Uri contentUri, String packageName, AndroidFuture future) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void reportFullscreenModeAsync(boolean fullscreen) throws RemoteException {
-        }
+        public void reportFullscreenModeAsync(boolean fullscreen) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void setInputMethod(String id, AndroidFuture future) throws RemoteException {
-        }
+        public void setInputMethod(String id, AndroidFuture future) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void setInputMethodAndSubtype(String id, InputMethodSubtype subtype, AndroidFuture future) throws RemoteException {
-        }
+        public void setInputMethodAndSubtype(
+                String id, InputMethodSubtype subtype, AndroidFuture future)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void hideMySoftInput(ImeTracker.Token statsToken, int flags, int reason, AndroidFuture future) throws RemoteException {
-        }
+        public void hideMySoftInput(
+                ImeTracker.Token statsToken, int flags, int reason, AndroidFuture future)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void showMySoftInput(ImeTracker.Token statsToken, int flags, int reason, AndroidFuture future) throws RemoteException {
-        }
+        public void showMySoftInput(
+                ImeTracker.Token statsToken, int flags, int reason, AndroidFuture future)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void updateStatusIconAsync(String packageName, int iconId) throws RemoteException {
-        }
+        public void updateStatusIconAsync(String packageName, int iconId) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void switchToPreviousInputMethod(AndroidFuture future) throws RemoteException {
-        }
+        public void switchToPreviousInputMethod(AndroidFuture future) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void switchToNextInputMethod(boolean onlyCurrentIme, AndroidFuture future) throws RemoteException {
-        }
+        public void switchToNextInputMethod(boolean onlyCurrentIme, AndroidFuture future)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void shouldOfferSwitchingToNextInputMethod(AndroidFuture future) throws RemoteException {
-        }
+        public void shouldOfferSwitchingToNextInputMethod(AndroidFuture future)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void notifyUserActionAsync() throws RemoteException {
-        }
+        public void notifyUserActionAsync() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void applyImeVisibilityAsync(IBinder showOrHideInputToken, boolean setVisible, ImeTracker.Token statsToken) throws RemoteException {
-        }
+        public void applyImeVisibilityAsync(
+                IBinder showOrHideInputToken, boolean setVisible, ImeTracker.Token statsToken)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void onStylusHandwritingReady(int requestId, int pid) throws RemoteException {
-        }
+        public void onStylusHandwritingReady(int requestId, int pid) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void resetStylusHandwriting(int requestId) throws RemoteException {
-        }
+        public void resetStylusHandwriting(int requestId) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void switchKeyboardLayoutAsync(int direction) throws RemoteException {
-        }
+        public void switchKeyboardLayoutAsync(int direction) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-        public void setHandwritingSurfaceNotTouchable(boolean notTouchable) throws RemoteException {
-        }
+        public void setHandwritingSurfaceNotTouchable(boolean notTouchable)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -129,7 +131,7 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputMethodPrivilegedOperations {
+    public abstract static class Stub extends Binder implements IInputMethodPrivilegedOperations {
         static final int TRANSACTION_applyImeVisibilityAsync = 14;
         static final int TRANSACTION_createInputContentUriToken = 3;
         static final int TRANSACTION_hideMySoftInput = 7;
@@ -218,7 +220,8 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputMethodPrivilegedOperations.DESCRIPTOR);
             }
@@ -241,7 +244,8 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
                 case 3:
                     Uri _arg03 = (Uri) data.readTypedObject(Uri.CREATOR);
                     String _arg12 = data.readString();
-                    AndroidFuture _arg2 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg2 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     createInputContentUriToken(_arg03, _arg12, _arg2);
                     return true;
@@ -252,30 +256,37 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    AndroidFuture _arg13 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg13 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     setInputMethod(_arg05, _arg13);
                     return true;
                 case 6:
                     String _arg06 = data.readString();
-                    InputMethodSubtype _arg14 = (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
-                    AndroidFuture _arg22 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    InputMethodSubtype _arg14 =
+                            (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
+                    AndroidFuture _arg22 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     setInputMethodAndSubtype(_arg06, _arg14, _arg22);
                     return true;
                 case 7:
-                    ImeTracker.Token _arg07 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg07 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     int _arg15 = data.readInt();
                     int _arg23 = data.readInt();
-                    AndroidFuture _arg3 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg3 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     hideMySoftInput(_arg07, _arg15, _arg23, _arg3);
                     return true;
                 case 8:
-                    ImeTracker.Token _arg08 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg08 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     int _arg16 = data.readInt();
                     int _arg24 = data.readInt();
-                    AndroidFuture _arg32 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg32 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     showMySoftInput(_arg08, _arg16, _arg24, _arg32);
                     return true;
@@ -286,18 +297,21 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
                     updateStatusIconAsync(_arg09, _arg17);
                     return true;
                 case 10:
-                    AndroidFuture _arg010 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg010 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     switchToPreviousInputMethod(_arg010);
                     return true;
                 case 11:
                     boolean _arg011 = data.readBoolean();
-                    AndroidFuture _arg18 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg18 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     switchToNextInputMethod(_arg011, _arg18);
                     return true;
                 case 12:
-                    AndroidFuture _arg012 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg012 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     shouldOfferSwitchingToNextInputMethod(_arg012);
                     return true;
@@ -307,7 +321,8 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
                 case 14:
                     IBinder _arg013 = data.readStrongBinder();
                     boolean _arg19 = data.readBoolean();
-                    ImeTracker.Token _arg25 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg25 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     data.enforceNoDataAvail();
                     applyImeVisibilityAsync(_arg013, _arg19, _arg25);
                     return true;
@@ -354,7 +369,8 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void setImeWindowStatusAsync(int vis, int backDisposition) throws RemoteException {
+            public void setImeWindowStatusAsync(int vis, int backDisposition)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -379,7 +395,9 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void createInputContentUriToken(Uri contentUri, String packageName, AndroidFuture future) throws RemoteException {
+            public void createInputContentUriToken(
+                    Uri contentUri, String packageName, AndroidFuture future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -418,7 +436,9 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void setInputMethodAndSubtype(String id, InputMethodSubtype subtype, AndroidFuture future) throws RemoteException {
+            public void setInputMethodAndSubtype(
+                    String id, InputMethodSubtype subtype, AndroidFuture future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -432,7 +452,9 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void hideMySoftInput(ImeTracker.Token statsToken, int flags, int reason, AndroidFuture future) throws RemoteException {
+            public void hideMySoftInput(
+                    ImeTracker.Token statsToken, int flags, int reason, AndroidFuture future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -447,7 +469,9 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void showMySoftInput(ImeTracker.Token statsToken, int flags, int reason, AndroidFuture future) throws RemoteException {
+            public void showMySoftInput(
+                    ImeTracker.Token statsToken, int flags, int reason, AndroidFuture future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -462,7 +486,8 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void updateStatusIconAsync(String packageName, int iconId) throws RemoteException {
+            public void updateStatusIconAsync(String packageName, int iconId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -487,7 +512,8 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void switchToNextInputMethod(boolean onlyCurrentIme, AndroidFuture future) throws RemoteException {
+            public void switchToNextInputMethod(boolean onlyCurrentIme, AndroidFuture future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -500,7 +526,8 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void shouldOfferSwitchingToNextInputMethod(AndroidFuture future) throws RemoteException {
+            public void shouldOfferSwitchingToNextInputMethod(AndroidFuture future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -523,7 +550,9 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void applyImeVisibilityAsync(IBinder showOrHideInputToken, boolean setVisible, ImeTracker.Token statsToken) throws RemoteException {
+            public void applyImeVisibilityAsync(
+                    IBinder showOrHideInputToken, boolean setVisible, ImeTracker.Token statsToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);
@@ -574,7 +603,8 @@ public interface IInputMethodPrivilegedOperations extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethodPrivilegedOperations
-            public void setHandwritingSurfaceNotTouchable(boolean notTouchable) throws RemoteException {
+            public void setHandwritingSurfaceNotTouchable(boolean notTouchable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodPrivilegedOperations.DESCRIPTOR);

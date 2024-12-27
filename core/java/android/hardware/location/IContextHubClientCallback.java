@@ -26,36 +26,29 @@ public interface IContextHubClientCallback extends IInterface {
 
     public static class Default implements IContextHubClientCallback {
         @Override // android.hardware.location.IContextHubClientCallback
-        public void onMessageFromNanoApp(NanoAppMessage message) throws RemoteException {
-        }
+        public void onMessageFromNanoApp(NanoAppMessage message) throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClientCallback
-        public void onHubReset() throws RemoteException {
-        }
+        public void onHubReset() throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClientCallback
-        public void onNanoAppAborted(long nanoAppId, int abortCode) throws RemoteException {
-        }
+        public void onNanoAppAborted(long nanoAppId, int abortCode) throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClientCallback
-        public void onNanoAppLoaded(long nanoAppId) throws RemoteException {
-        }
+        public void onNanoAppLoaded(long nanoAppId) throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClientCallback
-        public void onNanoAppUnloaded(long nanoAppId) throws RemoteException {
-        }
+        public void onNanoAppUnloaded(long nanoAppId) throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClientCallback
-        public void onNanoAppEnabled(long nanoAppId) throws RemoteException {
-        }
+        public void onNanoAppEnabled(long nanoAppId) throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClientCallback
-        public void onNanoAppDisabled(long nanoAppId) throws RemoteException {
-        }
+        public void onNanoAppDisabled(long nanoAppId) throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClientCallback
-        public void onClientAuthorizationChanged(long nanoAppId, int authorization) throws RemoteException {
-        }
+        public void onClientAuthorizationChanged(long nanoAppId, int authorization)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -63,8 +56,9 @@ public interface IContextHubClientCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContextHubClientCallback {
-        public static final String DESCRIPTOR = "android.hardware.location.IContextHubClientCallback";
+    public abstract static class Stub extends Binder implements IContextHubClientCallback {
+        public static final String DESCRIPTOR =
+                "android.hardware.location.IContextHubClientCallback";
         static final int TRANSACTION_onClientAuthorizationChanged = 8;
         static final int TRANSACTION_onHubReset = 2;
         static final int TRANSACTION_onMessageFromNanoApp = 1;
@@ -123,7 +117,8 @@ public interface IContextHubClientCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -133,7 +128,8 @@ public interface IContextHubClientCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    NanoAppMessage _arg0 = (NanoAppMessage) data.readTypedObject(NanoAppMessage.CREATOR);
+                    NanoAppMessage _arg0 =
+                            (NanoAppMessage) data.readTypedObject(NanoAppMessage.CREATOR);
                     data.enforceNoDataAvail();
                     onMessageFromNanoApp(_arg0);
                     return true;
@@ -278,7 +274,8 @@ public interface IContextHubClientCallback extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubClientCallback
-            public void onClientAuthorizationChanged(long nanoAppId, int authorization) throws RemoteException {
+            public void onClientAuthorizationChanged(long nanoAppId, int authorization)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

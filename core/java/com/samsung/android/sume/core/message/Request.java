@@ -6,10 +6,11 @@ import android.os.Messenger;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MediaBufferGroup$$ExternalSyntheticLambda2;
-import com.samsung.android.sume.core.message.Response;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -31,21 +32,33 @@ public final class Request extends Message {
         Bundle bundle = message.getData();
         Parcelable[] inputBuffers = bundle.getParcelableArray("input-buffer-list");
         if (inputBuffers != null) {
-            this.inputBufferList = (List) Arrays.stream(inputBuffers).map(new Function() { // from class: com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return Request.lambda$new$0((Parcelable) obj);
-                }
-            }).collect(Collectors.toList());
+            this.inputBufferList =
+                    (List)
+                            Arrays.stream(inputBuffers)
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return Request.lambda$new$0((Parcelable) obj);
+                                                }
+                                            })
+                                    .collect(Collectors.toList());
         }
         Parcelable[] outputBuffers = bundle.getParcelableArray("output-buffer-list");
         if (outputBuffers != null) {
-            this.outputBufferList = (List) Arrays.stream(outputBuffers).map(new Function() { // from class: com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda1
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return Request.lambda$new$1((Parcelable) obj);
-                }
-            }).collect(Collectors.toList());
+            this.outputBufferList =
+                    (List)
+                            Arrays.stream(outputBuffers)
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return Request.lambda$new$1((Parcelable) obj);
+                                                }
+                                            })
+                                    .collect(Collectors.toList());
         }
     }
 
@@ -67,10 +80,14 @@ public final class Request extends Message {
         android.os.Message msg = super.toAndroidMessage();
         Bundle bundle = msg.getData();
         if (this.inputBufferList != null) {
-            bundle.putParcelableArray("input-buffer-list", (Parcelable[]) this.inputBufferList.toArray(new MediaBuffer[0]));
+            bundle.putParcelableArray(
+                    "input-buffer-list",
+                    (Parcelable[]) this.inputBufferList.toArray(new MediaBuffer[0]));
         }
         if (this.outputBufferList != null) {
-            bundle.putParcelableArray("output-buffer-list", (Parcelable[]) this.outputBufferList.toArray(new MediaBuffer[0]));
+            bundle.putParcelableArray(
+                    "output-buffer-list",
+                    (Parcelable[]) this.outputBufferList.toArray(new MediaBuffer[0]));
         }
         return msg;
     }
@@ -135,7 +152,8 @@ public final class Request extends Message {
                 }
                 if (this.outputBufferList != null) {
                     list = this.outputBufferList;
-                    mediaBufferGroup$$ExternalSyntheticLambda2 = new MediaBufferGroup$$ExternalSyntheticLambda2();
+                    mediaBufferGroup$$ExternalSyntheticLambda2 =
+                            new MediaBufferGroup$$ExternalSyntheticLambda2();
                 }
             } catch (Exception e2) {
                 Log.w(TAG, "Exception: " + e2.getMessage());
@@ -145,12 +163,14 @@ public final class Request extends Message {
                 }
                 if (this.outputBufferList != null) {
                     list = this.outputBufferList;
-                    mediaBufferGroup$$ExternalSyntheticLambda2 = new MediaBufferGroup$$ExternalSyntheticLambda2();
+                    mediaBufferGroup$$ExternalSyntheticLambda2 =
+                            new MediaBufferGroup$$ExternalSyntheticLambda2();
                 }
             }
             if (this.outputBufferList != null) {
                 list = this.outputBufferList;
-                mediaBufferGroup$$ExternalSyntheticLambda2 = new MediaBufferGroup$$ExternalSyntheticLambda2();
+                mediaBufferGroup$$ExternalSyntheticLambda2 =
+                        new MediaBufferGroup$$ExternalSyntheticLambda2();
                 list.forEach(mediaBufferGroup$$ExternalSyntheticLambda2);
             }
             this.inputBufferList = null;
@@ -176,12 +196,17 @@ public final class Request extends Message {
     }
 
     public MediaBuffer getInputBuffer() {
-        return (MediaBuffer) Optional.ofNullable(this.inputBufferList).map(new Function() { // from class: com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda4
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Request.lambda$getInputBuffer$2((List) obj);
-            }
-        }).orElse(null);
+        return (MediaBuffer)
+                Optional.ofNullable(this.inputBufferList)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda4
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return Request.lambda$getInputBuffer$2((List) obj);
+                                    }
+                                })
+                        .orElse(null);
     }
 
     static /* synthetic */ MediaBuffer lambda$getInputBuffer$2(List it) {
@@ -196,30 +221,42 @@ public final class Request extends Message {
     }
 
     public MediaBuffer getOutputBuffer() {
-        return (MediaBuffer) Optional.ofNullable(this.outputBufferList).map(new Function() { // from class: com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda3
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Request.lambda$getOutputBuffer$3((List) obj);
-            }
-        }).orElse(null);
+        return (MediaBuffer)
+                Optional.ofNullable(this.outputBufferList)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return Request.lambda$getOutputBuffer$3((List) obj);
+                                    }
+                                })
+                        .orElse(null);
     }
 
     static /* synthetic */ MediaBuffer lambda$getOutputBuffer$3(List it) {
         if (it.isEmpty()) {
             return null;
         }
-        return it.size() == 1 ? (MediaBuffer) it.get(0) : MediaBuffer.groupOf((List<MediaBuffer>) it);
+        return it.size() == 1
+                ? (MediaBuffer) it.get(0)
+                : MediaBuffer.groupOf((List<MediaBuffer>) it);
     }
 
     public ContentValues getContentValues() {
-        return (ContentValues) Optional.ofNullable(getContentValuesList()).flatMap(new Function() { // from class: com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda2
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Optional findFirst;
-                findFirst = ((List) obj).stream().findFirst();
-                return findFirst;
-            }
-        }).orElse(null);
+        return (ContentValues)
+                Optional.ofNullable(getContentValuesList())
+                        .flatMap(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.message.Request$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        Optional findFirst;
+                                        findFirst = ((List) obj).stream().findFirst();
+                                        return findFirst;
+                                    }
+                                })
+                        .orElse(null);
     }
 
     @Override // com.samsung.android.sume.core.message.Message

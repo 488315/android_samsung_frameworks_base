@@ -3,6 +3,7 @@ package android.hardware.radio.V1_1;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,18 +25,46 @@ public final class KeepaliveRequest {
             return false;
         }
         KeepaliveRequest other = (KeepaliveRequest) otherObject;
-        if (this.type == other.type && HidlSupport.deepEquals(this.sourceAddress, other.sourceAddress) && this.sourcePort == other.sourcePort && HidlSupport.deepEquals(this.destinationAddress, other.destinationAddress) && this.destinationPort == other.destinationPort && this.maxKeepaliveIntervalMillis == other.maxKeepaliveIntervalMillis && this.cid == other.cid) {
+        if (this.type == other.type
+                && HidlSupport.deepEquals(this.sourceAddress, other.sourceAddress)
+                && this.sourcePort == other.sourcePort
+                && HidlSupport.deepEquals(this.destinationAddress, other.destinationAddress)
+                && this.destinationPort == other.destinationPort
+                && this.maxKeepaliveIntervalMillis == other.maxKeepaliveIntervalMillis
+                && this.cid == other.cid) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))), Integer.valueOf(HidlSupport.deepHashCode(this.sourceAddress)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sourcePort))), Integer.valueOf(HidlSupport.deepHashCode(this.destinationAddress)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.destinationPort))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxKeepaliveIntervalMillis))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cid))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.sourceAddress)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sourcePort))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.destinationAddress)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.destinationPort))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.maxKeepaliveIntervalMillis))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cid))));
     }
 
     public final String toString() {
-        return "{.type = " + KeepaliveType.toString(this.type) + ", .sourceAddress = " + this.sourceAddress + ", .sourcePort = " + this.sourcePort + ", .destinationAddress = " + this.destinationAddress + ", .destinationPort = " + this.destinationPort + ", .maxKeepaliveIntervalMillis = " + this.maxKeepaliveIntervalMillis + ", .cid = " + this.cid + "}";
+        return "{.type = "
+                + KeepaliveType.toString(this.type)
+                + ", .sourceAddress = "
+                + this.sourceAddress
+                + ", .sourcePort = "
+                + this.sourcePort
+                + ", .destinationAddress = "
+                + this.destinationAddress
+                + ", .destinationPort = "
+                + this.destinationPort
+                + ", .maxKeepaliveIntervalMillis = "
+                + this.maxKeepaliveIntervalMillis
+                + ", .cid = "
+                + this.cid
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -47,7 +76,8 @@ public final class KeepaliveRequest {
         ArrayList<KeepaliveRequest> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 64, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 64, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             KeepaliveRequest _hidl_vec_element = new KeepaliveRequest();
@@ -57,10 +87,13 @@ public final class KeepaliveRequest {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.type = _hidl_blob.getInt32(_hidl_offset + 0);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 8 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
         this.sourceAddress.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             byte _hidl_vec_element = childBlob.getInt8(_hidl_index_0 * 1);
@@ -68,7 +101,9 @@ public final class KeepaliveRequest {
         }
         this.sourcePort = _hidl_blob.getInt32(_hidl_offset + 24);
         int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 32 + 8);
-        HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 1, _hidl_blob.handle(), _hidl_offset + 32 + 0, true);
+        HwBlob childBlob2 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size2 * 1, _hidl_blob.handle(), _hidl_offset + 32 + 0, true);
         this.destinationAddress.clear();
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
             byte _hidl_vec_element2 = childBlob2.getInt8(_hidl_index_02 * 1);
@@ -85,7 +120,8 @@ public final class KeepaliveRequest {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<KeepaliveRequest> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<KeepaliveRequest> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -114,7 +150,8 @@ public final class KeepaliveRequest {
         _hidl_blob.putBool(_hidl_offset + 32 + 12, false);
         HwBlob childBlob2 = new HwBlob(_hidl_vec_size2 * 1);
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
-            childBlob2.putInt8(_hidl_index_02 * 1, this.destinationAddress.get(_hidl_index_02).byteValue());
+            childBlob2.putInt8(
+                    _hidl_index_02 * 1, this.destinationAddress.get(_hidl_index_02).byteValue());
         }
         _hidl_blob.putBlob(_hidl_offset + 32 + 0, childBlob2);
         _hidl_blob.putInt32(_hidl_offset + 48, this.destinationPort);

@@ -27,12 +27,14 @@ import android.view.inputmethod.SelectRangeGesture;
 import android.view.inputmethod.TextBoundsInfo;
 import android.view.inputmethod.TextBoundsInfoResult;
 import android.widget.TextView;
+
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 /* loaded from: classes5.dex */
-public final class EditableInputConnection extends BaseInputConnection implements DumpableInputConnection {
+public final class EditableInputConnection extends BaseInputConnection
+        implements DumpableInputConnection {
     private static final boolean DEBUG = false;
     private static final String TAG = "EditableInputConnection";
     private int mBatchEditNesting;
@@ -52,7 +54,8 @@ public final class EditableInputConnection extends BaseInputConnection implement
         return null;
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean beginBatchEdit() {
         synchronized (this) {
             if (this.mBatchEditNesting >= 0) {
@@ -64,7 +67,8 @@ public final class EditableInputConnection extends BaseInputConnection implement
         }
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean endBatchEdit() {
         synchronized (this) {
             if (this.mBatchEditNesting <= 0) {
@@ -81,7 +85,8 @@ public final class EditableInputConnection extends BaseInputConnection implement
         this.mTextView.notifyContentCaptureTextChanged();
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public void closeConnection() {
         super.closeConnection();
         synchronized (this) {
@@ -92,7 +97,8 @@ public final class EditableInputConnection extends BaseInputConnection implement
         }
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean clearMetaKeyStates(int states) {
         Editable content = getEditable();
         if (content == null) {
@@ -110,7 +116,8 @@ public final class EditableInputConnection extends BaseInputConnection implement
         return true;
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean commitCompletion(CompletionInfo text) {
         this.mTextView.beginBatchEdit();
         this.mTextView.onCommitCompletion(text);
@@ -118,7 +125,8 @@ public final class EditableInputConnection extends BaseInputConnection implement
         return true;
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean commitCorrection(CorrectionInfo correctionInfo) {
         this.mTextView.beginBatchEdit();
         this.mTextView.onCommitCorrection(correctionInfo);
@@ -126,13 +134,15 @@ public final class EditableInputConnection extends BaseInputConnection implement
         return true;
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean performEditorAction(int actionCode) {
         this.mTextView.onEditorAction(actionCode);
         return true;
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean performContextMenuAction(int id) {
         this.mTextView.beginBatchEdit();
         this.mTextView.onTextContextMenuItem(id);
@@ -140,7 +150,8 @@ public final class EditableInputConnection extends BaseInputConnection implement
         return true;
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public ExtractedText getExtractedText(ExtractedTextRequest request, int flags) {
         if (this.mTextView != null) {
             ExtractedText et = new ExtractedText();
@@ -161,13 +172,15 @@ public final class EditableInputConnection extends BaseInputConnection implement
         return true;
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean performPrivateCommand(String action, Bundle data) {
         this.mTextView.onPrivateIMECommand(action, data);
         return true;
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean commitText(CharSequence text, int newCursorPosition) {
         if (this.mTextView == null) {
             return super.commitText(text, newCursorPosition);
@@ -183,7 +196,8 @@ public final class EditableInputConnection extends BaseInputConnection implement
         return requestCursorUpdates(cursorUpdateMode | cursorUpdateFilter);
     }
 
-    @Override // android.view.inputmethod.BaseInputConnection, android.view.inputmethod.InputConnection
+    @Override // android.view.inputmethod.BaseInputConnection,
+              // android.view.inputmethod.InputConnection
     public boolean requestCursorUpdates(int cursorUpdateMode) {
         int unknownFlags = cursorUpdateMode & (-128);
         if (unknownFlags != 0 || this.mIMM == null) {
@@ -191,14 +205,16 @@ public final class EditableInputConnection extends BaseInputConnection implement
         }
         this.mIMM.setUpdateCursorAnchorInfoMode(cursorUpdateMode);
         if (this.mTextView != null) {
-            this.mTextView.onRequestCursorUpdatesInternal(cursorUpdateMode & 3, cursorUpdateMode & 124);
+            this.mTextView.onRequestCursorUpdatesInternal(
+                    cursorUpdateMode & 3, cursorUpdateMode & 124);
             return true;
         }
         return true;
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public void requestTextBoundsInfo(RectF bounds, Executor executor, final Consumer<TextBoundsInfoResult> consumer) {
+    public void requestTextBoundsInfo(
+            RectF bounds, Executor executor, final Consumer<TextBoundsInfoResult> consumer) {
         int resultCode;
         TextBoundsInfo textBoundsInfo = this.mTextView.getTextBoundsInfo(bounds);
         if (textBoundsInfo != null) {
@@ -206,13 +222,16 @@ public final class EditableInputConnection extends BaseInputConnection implement
         } else {
             resultCode = 2;
         }
-        final TextBoundsInfoResult textBoundsInfoResult = new TextBoundsInfoResult(resultCode, textBoundsInfo);
-        executor.execute(new Runnable() { // from class: com.android.internal.inputmethod.EditableInputConnection$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                consumer.accept(textBoundsInfoResult);
-            }
-        });
+        final TextBoundsInfoResult textBoundsInfoResult =
+                new TextBoundsInfoResult(resultCode, textBoundsInfo);
+        executor.execute(
+                new Runnable() { // from class:
+                                 // com.android.internal.inputmethod.EditableInputConnection$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        consumer.accept(textBoundsInfoResult);
+                    }
+                });
     }
 
     @Override // android.view.inputmethod.InputConnection
@@ -225,39 +244,52 @@ public final class EditableInputConnection extends BaseInputConnection implement
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public void performHandwritingGesture(HandwritingGesture gesture, Executor executor, final IntConsumer consumer) {
+    public void performHandwritingGesture(
+            HandwritingGesture gesture, Executor executor, final IntConsumer consumer) {
         final int result;
         if (gesture instanceof SelectGesture) {
             result = this.mTextView.performHandwritingSelectGesture((SelectGesture) gesture);
         } else if (gesture instanceof SelectRangeGesture) {
-            result = this.mTextView.performHandwritingSelectRangeGesture((SelectRangeGesture) gesture);
+            result =
+                    this.mTextView.performHandwritingSelectRangeGesture(
+                            (SelectRangeGesture) gesture);
         } else if (gesture instanceof DeleteGesture) {
             result = this.mTextView.performHandwritingDeleteGesture((DeleteGesture) gesture);
         } else if (gesture instanceof DeleteRangeGesture) {
-            result = this.mTextView.performHandwritingDeleteRangeGesture((DeleteRangeGesture) gesture);
+            result =
+                    this.mTextView.performHandwritingDeleteRangeGesture(
+                            (DeleteRangeGesture) gesture);
         } else if (gesture instanceof InsertGesture) {
             result = this.mTextView.performHandwritingInsertGesture((InsertGesture) gesture);
         } else if (gesture instanceof RemoveSpaceGesture) {
-            result = this.mTextView.performHandwritingRemoveSpaceGesture((RemoveSpaceGesture) gesture);
+            result =
+                    this.mTextView.performHandwritingRemoveSpaceGesture(
+                            (RemoveSpaceGesture) gesture);
         } else if (gesture instanceof JoinOrSplitGesture) {
-            result = this.mTextView.performHandwritingJoinOrSplitGesture((JoinOrSplitGesture) gesture);
+            result =
+                    this.mTextView.performHandwritingJoinOrSplitGesture(
+                            (JoinOrSplitGesture) gesture);
         } else if (gesture instanceof InsertModeGesture) {
-            result = this.mTextView.performHandwritingInsertModeGesture((InsertModeGesture) gesture);
+            result =
+                    this.mTextView.performHandwritingInsertModeGesture((InsertModeGesture) gesture);
         } else {
             result = 2;
         }
         if (executor != null && consumer != null) {
-            executor.execute(new Runnable() { // from class: com.android.internal.inputmethod.EditableInputConnection$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    consumer.accept(result);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // com.android.internal.inputmethod.EditableInputConnection$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            consumer.accept(result);
+                        }
+                    });
         }
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public boolean previewHandwritingGesture(PreviewableHandwritingGesture gesture, CancellationSignal cancellationSignal) {
+    public boolean previewHandwritingGesture(
+            PreviewableHandwritingGesture gesture, CancellationSignal cancellationSignal) {
         return this.mTextView.previewHandwritingGesture(gesture, cancellationSignal);
     }
 

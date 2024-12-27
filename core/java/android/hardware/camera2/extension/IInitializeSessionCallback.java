@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IInitializeSessionCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.IInitializeSessionCallback";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.IInitializeSessionCallback";
 
     void onFailure() throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface IInitializeSessionCallback extends IInterface {
 
     public static class Default implements IInitializeSessionCallback {
         @Override // android.hardware.camera2.extension.IInitializeSessionCallback
-        public void onSuccess() throws RemoteException {
-        }
+        public void onSuccess() throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IInitializeSessionCallback
-        public void onFailure() throws RemoteException {
-        }
+        public void onFailure() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IInitializeSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInitializeSessionCallback {
+    public abstract static class Stub extends Binder implements IInitializeSessionCallback {
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -70,7 +69,8 @@ public interface IInitializeSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInitializeSessionCallback.DESCRIPTOR);
             }

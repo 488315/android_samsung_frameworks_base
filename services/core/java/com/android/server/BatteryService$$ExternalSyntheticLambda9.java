@@ -1,17 +1,20 @@
 package com.android.server;
 
 import com.android.internal.util.FunctionalUtils;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryService$$ExternalSyntheticLambda9 implements FunctionalUtils.ThrowingRunnable {
+public final /* synthetic */ class BatteryService$$ExternalSyntheticLambda9
+        implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryService f$0;
     public final /* synthetic */ boolean f$1;
     public final /* synthetic */ PrintWriter f$2;
 
-    public /* synthetic */ BatteryService$$ExternalSyntheticLambda9(BatteryService batteryService, boolean z, PrintWriter printWriter, int i) {
+    public /* synthetic */ BatteryService$$ExternalSyntheticLambda9(
+            BatteryService batteryService, boolean z, PrintWriter printWriter, int i) {
         this.$r8$classId = i;
         this.f$0 = batteryService;
         this.f$1 = z;

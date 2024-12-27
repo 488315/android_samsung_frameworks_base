@@ -4,6 +4,7 @@ import android.hardware.gnss.GnssSignalType;
 import android.os.Build;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import java.util.Set;
 
 /* loaded from: classes2.dex */
@@ -27,8 +28,10 @@ public final class UnboundedSdkLevel {
         Set<String> set;
         PREVIOUS_CODENAMES.put(29, setOf(GnssSignalType.CODE_TYPE_Q));
         PREVIOUS_CODENAMES.put(30, setOf(GnssSignalType.CODE_TYPE_Q, "R"));
-        PREVIOUS_CODENAMES.put(31, setOf(GnssSignalType.CODE_TYPE_Q, "R", GnssSignalType.CODE_TYPE_S));
-        PREVIOUS_CODENAMES.put(32, setOf(GnssSignalType.CODE_TYPE_Q, "R", GnssSignalType.CODE_TYPE_S, "Sv2"));
+        PREVIOUS_CODENAMES.put(
+                31, setOf(GnssSignalType.CODE_TYPE_Q, "R", GnssSignalType.CODE_TYPE_S));
+        PREVIOUS_CODENAMES.put(
+                32, setOf(GnssSignalType.CODE_TYPE_Q, "R", GnssSignalType.CODE_TYPE_S, "Sv2"));
         int i = Build.VERSION.SDK_INT;
         String str = Build.VERSION.CODENAME;
         if (SdkLevel.isAtLeastT()) {
@@ -64,7 +67,10 @@ public final class UnboundedSdkLevel {
                 return this.mSdkInt >= Integer.parseInt(version2);
             }
             if (this.mKnownCodenames.contains(version2)) {
-                throw new IllegalArgumentException("Artifact with a known codename " + version2 + " must be recompiled with a finalized integer version.");
+                throw new IllegalArgumentException(
+                        "Artifact with a known codename "
+                                + version2
+                                + " must be recompiled with a finalized integer version.");
             }
             return false;
         }
@@ -77,13 +83,18 @@ public final class UnboundedSdkLevel {
     boolean isAtMostInternal(String version) {
         String version2 = removeFingerprint(version);
         if (!this.mIsReleaseBuild) {
-            return isCodename(version2) ? !this.mKnownCodenames.contains(version2) || this.mCodename.equals(version2) : this.mSdkInt < Integer.parseInt(version2);
+            return isCodename(version2)
+                    ? !this.mKnownCodenames.contains(version2) || this.mCodename.equals(version2)
+                    : this.mSdkInt < Integer.parseInt(version2);
         }
         if (!isCodename(version2)) {
             return this.mSdkInt <= Integer.parseInt(version2);
         }
         if (this.mKnownCodenames.contains(version2)) {
-            throw new IllegalArgumentException("Artifact with a known codename " + version2 + " must be recompiled with a finalized integer version.");
+            throw new IllegalArgumentException(
+                    "Artifact with a known codename "
+                            + version2
+                            + " must be recompiled with a finalized integer version.");
         }
         return true;
     }

@@ -3,25 +3,29 @@ package android.content.pm.verify.domain;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 import java.util.Set;
 
 /* loaded from: classes.dex */
 public class DomainSet implements Parcelable {
-    public static final Parcelable.Creator<DomainSet> CREATOR = new Parcelable.Creator<DomainSet>() { // from class: android.content.pm.verify.domain.DomainSet.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DomainSet[] newArray(int size) {
-            return new DomainSet[size];
-        }
+    public static final Parcelable.Creator<DomainSet> CREATOR =
+            new Parcelable.Creator<
+                    DomainSet>() { // from class: android.content.pm.verify.domain.DomainSet.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DomainSet[] newArray(int size) {
+                    return new DomainSet[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DomainSet createFromParcel(Parcel in) {
-            return new DomainSet(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DomainSet createFromParcel(Parcel in) {
+                    return new DomainSet(in);
+                }
+            };
     private final Set<String> mDomains;
 
     private void parcelDomains(Parcel dest, int flags) {
@@ -34,7 +38,8 @@ public class DomainSet implements Parcelable {
 
     public DomainSet(Set<String> domains) {
         this.mDomains = domains;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDomains);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDomains);
     }
 
     public Set<String> getDomains() {
@@ -70,10 +75,10 @@ public class DomainSet implements Parcelable {
     protected DomainSet(Parcel in) {
         Set<String> domains = unparcelDomains(in);
         this.mDomains = domains;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDomains);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDomains);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

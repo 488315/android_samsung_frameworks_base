@@ -8,8 +8,7 @@ public interface IVibratorStateListener extends IInterface {
 
     public static class Default implements IVibratorStateListener {
         @Override // android.os.IVibratorStateListener
-        public void onVibrating(boolean vibrating) throws RemoteException {
-        }
+        public void onVibrating(boolean vibrating) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,7 +16,7 @@ public interface IVibratorStateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVibratorStateListener {
+    public abstract static class Stub extends Binder implements IVibratorStateListener {
         static final int TRANSACTION_onVibrating = 1;
 
         public Stub() {
@@ -55,7 +54,8 @@ public interface IVibratorStateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVibratorStateListener.DESCRIPTOR);
             }

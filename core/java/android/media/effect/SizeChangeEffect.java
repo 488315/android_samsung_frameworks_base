@@ -4,7 +4,13 @@ import android.filterfw.core.Frame;
 
 /* loaded from: classes2.dex */
 public class SizeChangeEffect extends SingleFilterEffect {
-    public SizeChangeEffect(EffectContext context, String name, Class filterClass, String inputName, String outputName, Object... finalParameters) {
+    public SizeChangeEffect(
+            EffectContext context,
+            String name,
+            Class filterClass,
+            String inputName,
+            String outputName,
+            Object... finalParameters) {
         super(context, name, filterClass, inputName, outputName, finalParameters);
     }
 

@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -88,11 +89,13 @@ public final class CriticalEventProto extends MessageNano {
             }
         }
 
-        public static ExcessiveBinderCalls parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static ExcessiveBinderCalls parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (ExcessiveBinderCalls) MessageNano.mergeFrom(new ExcessiveBinderCalls(), data);
         }
 
-        public static ExcessiveBinderCalls parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static ExcessiveBinderCalls parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new ExcessiveBinderCalls().mergeFrom(input);
         }
     }
@@ -121,19 +124,21 @@ public final class CriticalEventProto extends MessageNano {
         }
 
         /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-            jadx.core.utils.exceptions.JadxRuntimeException: Failed to find switch 'out' block (already processed)
-            	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.calcSwitchOut(SwitchRegionMaker.java:202)
-            	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.process(SwitchRegionMaker.java:61)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:115)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-            	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:103)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
-            	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
-            */
+        jadx.core.utils.exceptions.JadxRuntimeException: Failed to find switch 'out' block (already processed)
+        	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.calcSwitchOut(SwitchRegionMaker.java:202)
+        	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.process(SwitchRegionMaker.java:61)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:115)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:103)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
+        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
+        */
         @Override // com.android.framework.protobuf.nano.MessageNano
-        public com.android.server.criticalevents.nano.CriticalEventProto.InstallPackages mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano r3) throws java.io.IOException {
+        public com.android.server.criticalevents.nano.CriticalEventProto.InstallPackages mergeFrom(
+                com.android.framework.protobuf.nano.CodedInputByteBufferNano r3)
+                throws java.io.IOException {
             /*
                 r2 = this;
             L1:
@@ -151,10 +156,13 @@ public final class CriticalEventProto extends MessageNano {
             L10:
                 goto L1
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.criticalevents.nano.CriticalEventProto.InstallPackages.mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano):com.android.server.criticalevents.nano.CriticalEventProto$InstallPackages");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.criticalevents.nano.CriticalEventProto.InstallPackages.mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano):com.android.server.criticalevents.nano.CriticalEventProto$InstallPackages");
         }
 
-        public static InstallPackages parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static InstallPackages parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (InstallPackages) MessageNano.mergeFrom(new InstallPackages(), data);
         }
 
@@ -187,19 +195,21 @@ public final class CriticalEventProto extends MessageNano {
         }
 
         /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-            jadx.core.utils.exceptions.JadxRuntimeException: Failed to find switch 'out' block (already processed)
-            	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.calcSwitchOut(SwitchRegionMaker.java:202)
-            	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.process(SwitchRegionMaker.java:61)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:115)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-            	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:103)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-            	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
-            	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
-            */
+        jadx.core.utils.exceptions.JadxRuntimeException: Failed to find switch 'out' block (already processed)
+        	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.calcSwitchOut(SwitchRegionMaker.java:202)
+        	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.process(SwitchRegionMaker.java:61)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:115)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:103)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
+        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
+        */
         @Override // com.android.framework.protobuf.nano.MessageNano
-        public com.android.server.criticalevents.nano.CriticalEventProto.SystemServerStarted mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano r3) throws java.io.IOException {
+        public com.android.server.criticalevents.nano.CriticalEventProto.SystemServerStarted
+                mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano r3)
+                        throws java.io.IOException {
             /*
                 r2 = this;
             L1:
@@ -217,14 +227,18 @@ public final class CriticalEventProto extends MessageNano {
             L10:
                 goto L1
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.criticalevents.nano.CriticalEventProto.SystemServerStarted.mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano):com.android.server.criticalevents.nano.CriticalEventProto$SystemServerStarted");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.criticalevents.nano.CriticalEventProto.SystemServerStarted.mergeFrom(com.android.framework.protobuf.nano.CodedInputByteBufferNano):com.android.server.criticalevents.nano.CriticalEventProto$SystemServerStarted");
         }
 
-        public static SystemServerStarted parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static SystemServerStarted parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (SystemServerStarted) MessageNano.mergeFrom(new SystemServerStarted(), data);
         }
 
-        public static SystemServerStarted parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static SystemServerStarted parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new SystemServerStarted().mergeFrom(input);
         }
     }
@@ -371,7 +385,8 @@ public final class CriticalEventProto extends MessageNano {
             }
         }
 
-        public static HalfWatchdog parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static HalfWatchdog parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (HalfWatchdog) MessageNano.mergeFrom(new HalfWatchdog(), data);
         }
 
@@ -492,11 +507,13 @@ public final class CriticalEventProto extends MessageNano {
             }
         }
 
-        public static AppNotResponding parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static AppNotResponding parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (AppNotResponding) MessageNano.mergeFrom(new AppNotResponding(), data);
         }
 
-        public static AppNotResponding parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static AppNotResponding parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new AppNotResponding().mergeFrom(input);
         }
     }
@@ -984,7 +1001,8 @@ public final class CriticalEventProto extends MessageNano {
             size += CodedOutputByteBufferNano.computeMessageSize(8, (MessageNano) this.event_);
         }
         if (this.eventCase_ == 9) {
-            return size + CodedOutputByteBufferNano.computeMessageSize(9, (MessageNano) this.event_);
+            return size
+                    + CodedOutputByteBufferNano.computeMessageSize(9, (MessageNano) this.event_);
         }
         return size;
     }
@@ -1064,7 +1082,8 @@ public final class CriticalEventProto extends MessageNano {
         }
     }
 
-    public static CriticalEventProto parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+    public static CriticalEventProto parseFrom(byte[] data)
+            throws InvalidProtocolBufferNanoException {
         return (CriticalEventProto) MessageNano.mergeFrom(new CriticalEventProto(), data);
     }
 

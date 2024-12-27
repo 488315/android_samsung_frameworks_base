@@ -4,8 +4,13 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
-import android.util.jar.StrictJarVerifier;
+
 import dalvik.system.CloseGuard;
+
+import libcore.io.IoBridge;
+import libcore.io.IoUtils;
+import libcore.io.Streams;
+
 import java.io.FileDescriptor;
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -17,9 +22,6 @@ import java.util.Set;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 import java.util.zip.ZipEntry;
-import libcore.io.IoBridge;
-import libcore.io.IoUtils;
-import libcore.io.Streams;
 
 /* loaded from: classes4.dex */
 public final class StrictJarFile {
@@ -51,15 +53,32 @@ public final class StrictJarFile {
         this(fd, true, true);
     }
 
-    public StrictJarFile(FileDescriptor fd, boolean verify, boolean signatureSchemeRollbackProtectionsEnforced) throws IOException, SecurityException {
-        this("[fd:" + fd.getInt$() + NavigationBarInflaterView.SIZE_MOD_END, fd, verify, signatureSchemeRollbackProtectionsEnforced);
+    public StrictJarFile(
+            FileDescriptor fd, boolean verify, boolean signatureSchemeRollbackProtectionsEnforced)
+            throws IOException, SecurityException {
+        this(
+                "[fd:" + fd.getInt$() + NavigationBarInflaterView.SIZE_MOD_END,
+                fd,
+                verify,
+                signatureSchemeRollbackProtectionsEnforced);
     }
 
-    public StrictJarFile(String fileName, boolean verify, boolean signatureSchemeRollbackProtectionsEnforced) throws IOException, SecurityException {
-        this(fileName, IoBridge.open(fileName, OsConstants.O_RDONLY), verify, signatureSchemeRollbackProtectionsEnforced);
+    public StrictJarFile(
+            String fileName, boolean verify, boolean signatureSchemeRollbackProtectionsEnforced)
+            throws IOException, SecurityException {
+        this(
+                fileName,
+                IoBridge.open(fileName, OsConstants.O_RDONLY),
+                verify,
+                signatureSchemeRollbackProtectionsEnforced);
     }
 
-    private StrictJarFile(String name, FileDescriptor fd, boolean verify, boolean signatureSchemeRollbackProtectionsEnforced) throws IOException, SecurityException {
+    private StrictJarFile(
+            String name,
+            FileDescriptor fd,
+            boolean verify,
+            boolean signatureSchemeRollbackProtectionsEnforced)
+            throws IOException, SecurityException {
         this.guard = CloseGuard.get();
         this.nativeHandle = nativeOpenJarFile(name, fd.getInt$());
         this.fd = fd;
@@ -67,8 +86,14 @@ public final class StrictJarFile {
         try {
             if (verify) {
                 HashMap<String, byte[]> metaEntries = getMetaEntries();
-                this.manifest = new StrictJarManifest(metaEntries.get("META-INF/MANIFEST.MF"), true);
-                this.verifier = new StrictJarVerifier(name, this.manifest, metaEntries, signatureSchemeRollbackProtectionsEnforced);
+                this.manifest =
+                        new StrictJarManifest(metaEntries.get("META-INF/MANIFEST.MF"), true);
+                this.verifier =
+                        new StrictJarVerifier(
+                                name,
+                                this.manifest,
+                                metaEntries,
+                                signatureSchemeRollbackProtectionsEnforced);
                 Set<String> files = this.manifest.getEntries().keySet();
                 for (String file : files) {
                     if (findEntry(file) == null) {
@@ -169,7 +194,9 @@ public final class StrictJarFile {
         if (ze.getMethod() == 0) {
             return new FDStream(this.fd, ze.getDataOffset(), ze.getDataOffset() + ze.getSize());
         }
-        FDStream wrapped = new FDStream(this.fd, ze.getDataOffset(), ze.getDataOffset() + ze.getCompressedSize());
+        FDStream wrapped =
+                new FDStream(
+                        this.fd, ze.getDataOffset(), ze.getDataOffset() + ze.getCompressedSize());
         int bufSize = Math.max(1024, (int) Math.min(ze.getSize(), 65535L));
         return new ZipInflaterInputStream(wrapped, new Inflater(true), bufSize, ze);
     }
@@ -310,22 +337,33 @@ public final class StrictJarFile {
             this.entry = entry;
         }
 
-        @Override // java.util.zip.InflaterInputStream, java.io.FilterInputStream, java.io.InputStream
+        @Override // java.util.zip.InflaterInputStream, java.io.FilterInputStream,
+                  // java.io.InputStream
         public int read(byte[] buffer, int byteOffset, int byteCount) throws IOException {
             try {
                 int i = super.read(buffer, byteOffset, byteCount);
                 if (i != -1) {
                     this.bytesRead += i;
                 } else if (this.entry.getSize() != this.bytesRead) {
-                    throw new IOException("Size mismatch on inflated file: " + this.bytesRead + " vs " + this.entry.getSize());
+                    throw new IOException(
+                            "Size mismatch on inflated file: "
+                                    + this.bytesRead
+                                    + " vs "
+                                    + this.entry.getSize());
                 }
                 return i;
             } catch (IOException e) {
-                throw new IOException("Error reading data for " + this.entry.getName() + " near offset " + this.bytesRead, e);
+                throw new IOException(
+                        "Error reading data for "
+                                + this.entry.getName()
+                                + " near offset "
+                                + this.bytesRead,
+                        e);
             }
         }
 
-        @Override // java.util.zip.InflaterInputStream, java.io.FilterInputStream, java.io.InputStream
+        @Override // java.util.zip.InflaterInputStream, java.io.FilterInputStream,
+                  // java.io.InputStream
         public int available() throws IOException {
             if (this.closed || super.available() == 0) {
                 return 0;
@@ -333,7 +371,8 @@ public final class StrictJarFile {
             return (int) (this.entry.getSize() - this.bytesRead);
         }
 
-        @Override // java.util.zip.InflaterInputStream, java.io.FilterInputStream, java.io.InputStream, java.io.Closeable, java.lang.AutoCloseable
+        @Override // java.util.zip.InflaterInputStream, java.io.FilterInputStream,
+                  // java.io.InputStream, java.io.Closeable, java.lang.AutoCloseable
         public void close() throws IOException {
             super.close();
             this.closed = true;

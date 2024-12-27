@@ -5,6 +5,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
 import android.util.Log;
 import android.widget.SemRemoteViewsValueAnimation;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -17,8 +18,7 @@ class ReflectionUtils {
     public static final int MATCH_TYPE_FULL_NAME = 0;
     private static final String TAG = "ReflectionUtils";
 
-    ReflectionUtils() {
-    }
+    ReflectionUtils() {}
 
     protected static int getArraySize(Object array, String objectTypeStr) {
         if (objectTypeStr.startsWith("[I")) {
@@ -94,7 +94,14 @@ class ReflectionUtils {
     }
 
     protected static boolean isPrimitiveDataType(String dataType) {
-        return dataType.equals("short") || dataType.equals("int") || dataType.equals(SliceItem.FORMAT_LONG) || dataType.equals("char") || dataType.equals("byte") || dataType.equals(SemRemoteViewsValueAnimation.VALUE_TYPE_FLOAT) || dataType.equals("double") || dataType.equals("boolean");
+        return dataType.equals("short")
+                || dataType.equals("int")
+                || dataType.equals(SliceItem.FORMAT_LONG)
+                || dataType.equals("char")
+                || dataType.equals("byte")
+                || dataType.equals(SemRemoteViewsValueAnimation.VALUE_TYPE_FLOAT)
+                || dataType.equals("double")
+                || dataType.equals("boolean");
     }
 
     protected static int findObjFromArrayList(ArrayList<Object> arrayList, Object objToFind) {
@@ -123,16 +130,30 @@ class ReflectionUtils {
         return strs[strs.length - 1];
     }
 
-    public static void dumpObjectFieldsWithClassTypeFilter(Object objToDump, String objName, int maxDepth, String classTypeFilter) {
+    public static void dumpObjectFieldsWithClassTypeFilter(
+            Object objToDump, String objName, int maxDepth, String classTypeFilter) {
         ArrayList<Object> objList = new ArrayList<>();
-        Log.e(TAG, "-------- Field list dump start : " + objToDump.toString() + " / Object type filter : " + classTypeFilter + " ----------");
+        Log.e(
+                TAG,
+                "-------- Field list dump start : "
+                        + objToDump.toString()
+                        + " / Object type filter : "
+                        + classTypeFilter
+                        + " ----------");
         dumpObjectFields(objToDump, objList, objName, null, "", 0, maxDepth, classTypeFilter, null);
         Log.e(TAG, "-------- Field list dump finished ----------");
     }
 
-    public static void dumpObjectFieldsWithValueFilter(Object objToDump, String objName, int maxDepth, String valueFilter) {
+    public static void dumpObjectFieldsWithValueFilter(
+            Object objToDump, String objName, int maxDepth, String valueFilter) {
         ArrayList<Object> objList = new ArrayList<>();
-        Log.e(TAG, "-------- Field list dump start : " + objToDump.toString() + " / Value filter : " + valueFilter + " ----------");
+        Log.e(
+                TAG,
+                "-------- Field list dump start : "
+                        + objToDump.toString()
+                        + " / Value filter : "
+                        + valueFilter
+                        + " ----------");
         dumpObjectFields(objToDump, objList, objName, null, "", 0, maxDepth, null, valueFilter);
         Log.e(TAG, "-------- Field list dump finished ----------");
     }
@@ -157,17 +178,32 @@ class ReflectionUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    protected static void dumpObjectFields(java.lang.Object r31, java.util.ArrayList<java.lang.Object> r32, java.lang.String r33, java.lang.reflect.Field r34, java.lang.String r35, int r36, int r37, java.lang.String r38, java.lang.String r39) {
+    protected static void dumpObjectFields(
+            java.lang.Object r31,
+            java.util.ArrayList<java.lang.Object> r32,
+            java.lang.String r33,
+            java.lang.reflect.Field r34,
+            java.lang.String r35,
+            int r36,
+            int r37,
+            java.lang.String r38,
+            java.lang.String r39) {
         /*
             Method dump skipped, instructions count: 860
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.smartclip.ReflectionUtils.dumpObjectFields(java.lang.Object, java.util.ArrayList, java.lang.String, java.lang.reflect.Field, java.lang.String, int, int, java.lang.String, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.content.smartclip.ReflectionUtils.dumpObjectFields(java.lang.Object,"
+                    + " java.util.ArrayList, java.lang.String, java.lang.reflect.Field,"
+                    + " java.lang.String, int, int, java.lang.String, java.lang.String):void");
     }
 
     public static void dumpObjectMethods(Object objToDump) {
         Log.d(TAG, "-------- Method list dump start : " + objToDump.toString() + " ----------");
-        for (Class<?> curObjClass = objToDump.getClass(); curObjClass != null; curObjClass = curObjClass.getSuperclass()) {
+        for (Class<?> curObjClass = objToDump.getClass();
+                curObjClass != null;
+                curObjClass = curObjClass.getSuperclass()) {
             Log.d(TAG, " -- Methods of " + curObjClass.getName() + " class --");
             Method[] methods = curObjClass.getDeclaredMethods();
             for (Method method : methods) {
@@ -191,7 +227,15 @@ class ReflectionUtils {
         Log.d(TAG, "-------- Class hierarchy dump finished ----------");
     }
 
-    protected static void getFieldObjectByObjectType(Object srcObj, int matchType, String fieldObjectType, int maxSearchResultCount, ArrayList<Object> searchResult, int curDepth, int maxDepth, boolean skipWellKnownClass) {
+    protected static void getFieldObjectByObjectType(
+            Object srcObj,
+            int matchType,
+            String fieldObjectType,
+            int maxSearchResultCount,
+            ArrayList<Object> searchResult,
+            int curDepth,
+            int maxDepth,
+            boolean skipWellKnownClass) {
         int i;
         int i2;
         Field[] fields;
@@ -203,9 +247,13 @@ class ReflectionUtils {
         if (curDepth == maxDepth) {
             return;
         }
-        for (Class<?> curObjClass = srcObj.getClass(); curObjClass != null; curObjClass = curObjClass.getSuperclass()) {
+        for (Class<?> curObjClass = srcObj.getClass();
+                curObjClass != null;
+                curObjClass = curObjClass.getSuperclass()) {
             boolean z = true;
-            if (!skipWellKnownClass || (className = curObjClass.getName()) == null || (!className.startsWith("android.view.") && !className.startsWith("java."))) {
+            if (!skipWellKnownClass
+                    || (className = curObjClass.getName()) == null
+                    || (!className.startsWith("android.view.") && !className.startsWith("java."))) {
                 Field[] fields2 = curObjClass.getDeclaredFields();
                 int length = fields2.length;
                 int i3 = 0;
@@ -221,7 +269,9 @@ class ReflectionUtils {
                         if (memberObj != null) {
                             switch (matchType) {
                                 case 1:
-                                    accessable = fieldType.endsWith(MediaMetrics.SEPARATOR + fieldObjectType);
+                                    accessable =
+                                            fieldType.endsWith(
+                                                    MediaMetrics.SEPARATOR + fieldObjectType);
                                     break;
                                 default:
                                     accessable = fieldType.equals(fieldObjectType);
@@ -242,12 +292,17 @@ class ReflectionUtils {
                                     if (!haveSameObject) {
                                         try {
                                             searchResult.add(memberObj);
-                                        } catch (IllegalAccessException | IllegalArgumentException e) {
+                                        } catch (IllegalAccessException
+                                                | IllegalArgumentException e) {
                                             e = e;
                                             i = i3;
                                             i2 = length;
                                             fields = fields2;
-                                            Log.e(TAG, "Exception occurred in getFieldObjectByObjectType : " + e.toString());
+                                            Log.e(
+                                                    TAG,
+                                                    "Exception occurred in"
+                                                        + " getFieldObjectByObjectType : "
+                                                            + e.toString());
                                             i3 = i + 1;
                                             fields2 = fields;
                                             length = i2;
@@ -264,7 +319,15 @@ class ReflectionUtils {
                                 i = i3;
                                 i2 = length;
                                 fields = fields2;
-                                getFieldObjectByObjectType(memberObj, matchType, fieldObjectType, maxSearchResultCount, searchResult, curDepth + 1, maxDepth, skipWellKnownClass);
+                                getFieldObjectByObjectType(
+                                        memberObj,
+                                        matchType,
+                                        fieldObjectType,
+                                        maxSearchResultCount,
+                                        searchResult,
+                                        curDepth + 1,
+                                        maxDepth,
+                                        skipWellKnownClass);
                             }
                             if (maxSearchResultCount > 0) {
                                 try {
@@ -273,7 +336,10 @@ class ReflectionUtils {
                                     }
                                 } catch (IllegalAccessException | IllegalArgumentException e3) {
                                     e = e3;
-                                    Log.e(TAG, "Exception occurred in getFieldObjectByObjectType : " + e.toString());
+                                    Log.e(
+                                            TAG,
+                                            "Exception occurred in getFieldObjectByObjectType : "
+                                                    + e.toString());
                                     i3 = i + 1;
                                     fields2 = fields;
                                     length = i2;
@@ -303,16 +369,36 @@ class ReflectionUtils {
         }
     }
 
-    public static Object[] getFieldObjectByObjectType(Object srcObj, int matchType, String fieldObjectType, int maxSearchResultCount, boolean skipWellKnownClass) {
-        return getFieldObjectByObjectType(srcObj, matchType, fieldObjectType, maxSearchResultCount, 1, skipWellKnownClass);
+    public static Object[] getFieldObjectByObjectType(
+            Object srcObj,
+            int matchType,
+            String fieldObjectType,
+            int maxSearchResultCount,
+            boolean skipWellKnownClass) {
+        return getFieldObjectByObjectType(
+                srcObj, matchType, fieldObjectType, maxSearchResultCount, 1, skipWellKnownClass);
     }
 
-    public static Object[] getFieldObjectByObjectType(Object srcObj, int matchType, String fieldObjectType, int maxSearchResultCount, int maxDepth, boolean skipWellKnownClass) {
+    public static Object[] getFieldObjectByObjectType(
+            Object srcObj,
+            int matchType,
+            String fieldObjectType,
+            int maxSearchResultCount,
+            int maxDepth,
+            boolean skipWellKnownClass) {
         ArrayList<Object> searchResult = new ArrayList<>();
         if (srcObj == null || fieldObjectType == null) {
             return searchResult.toArray();
         }
-        getFieldObjectByObjectType(srcObj, matchType, fieldObjectType, maxSearchResultCount, searchResult, 0, maxDepth, skipWellKnownClass);
+        getFieldObjectByObjectType(
+                srcObj,
+                matchType,
+                fieldObjectType,
+                maxSearchResultCount,
+                searchResult,
+                0,
+                maxDepth,
+                skipWellKnownClass);
         return searchResult.toArray();
     }
 
@@ -320,7 +406,9 @@ class ReflectionUtils {
         if (srcObj == null || fieldName == null) {
             return null;
         }
-        for (Class<?> curObjClass = srcObj.getClass(); curObjClass != null; curObjClass = curObjClass.getSuperclass()) {
+        for (Class<?> curObjClass = srcObj.getClass();
+                curObjClass != null;
+                curObjClass = curObjClass.getSuperclass()) {
             Field[] fields = curObjClass.getDeclaredFields();
             for (Field field : fields) {
                 String curFieldName = field.getName();
@@ -332,7 +420,10 @@ class ReflectionUtils {
                         field.setAccessible(accessable);
                         return fieldObject;
                     } catch (IllegalAccessException | IllegalArgumentException e) {
-                        Log.e(TAG, "Exception occurred in getFieldObjectByFieldName : " + e.toString());
+                        Log.e(
+                                TAG,
+                                "Exception occurred in getFieldObjectByFieldName : "
+                                        + e.toString());
                     }
                 }
             }

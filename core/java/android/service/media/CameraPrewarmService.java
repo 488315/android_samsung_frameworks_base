@@ -9,22 +9,24 @@ import android.os.Messenger;
 
 /* loaded from: classes3.dex */
 public abstract class CameraPrewarmService extends Service {
-    public static final String ACTION_PREWARM = "android.service.media.CameraPrewarmService.ACTION_PREWARM";
+    public static final String ACTION_PREWARM =
+            "android.service.media.CameraPrewarmService.ACTION_PREWARM";
     public static final int MSG_CAMERA_FIRED = 1;
     private boolean mCameraIntentFired;
-    private final Handler mHandler = new Handler() { // from class: android.service.media.CameraPrewarmService.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    CameraPrewarmService.this.mCameraIntentFired = true;
-                    break;
-                default:
-                    super.handleMessage(msg);
-                    break;
-            }
-        }
-    };
+    private final Handler mHandler =
+            new Handler() { // from class: android.service.media.CameraPrewarmService.1
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case 1:
+                            CameraPrewarmService.this.mCameraIntentFired = true;
+                            break;
+                        default:
+                            super.handleMessage(msg);
+                            break;
+                    }
+                }
+            };
 
     public abstract void onCooldown(boolean z);
 

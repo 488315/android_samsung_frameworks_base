@@ -3,6 +3,7 @@ package com.android.server.bridge.operations;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +14,16 @@ public final class RCPDumpState {
 
     public final void dumpStateFileOpsTable(int i, PrintWriter printWriter) {
         if (i == 0) {
-            Cursor query = this.mContext.getContentResolver().query(Uri.parse("content://com.samsung.knox.securefolder.rcpcomponents.move.provider.knoxcontentmgrdbprovider/"), new String[]{"timestamp", "tag", "message"}, null, null, null);
+            Cursor query =
+                    this.mContext
+                            .getContentResolver()
+                            .query(
+                                    Uri.parse(
+                                            "content://com.samsung.knox.securefolder.rcpcomponents.move.provider.knoxcontentmgrdbprovider/"),
+                                    new String[] {"timestamp", "tag", "message"},
+                                    null,
+                                    null,
+                                    null);
             if (query != null) {
                 if (query.moveToFirst()) {
                     do {
@@ -30,7 +40,18 @@ public final class RCPDumpState {
             }
             return;
         }
-        Cursor query2 = this.mContext.getContentResolver().query(Uri.parse("content://" + Integer.toString(i) + "@com.samsung.android.knox.containercore.rcpcomponents.move.provider.knoxcontentmgrdbprovider/"), null, null, null, null);
+        Cursor query2 =
+                this.mContext
+                        .getContentResolver()
+                        .query(
+                                Uri.parse(
+                                        "content://"
+                                                + Integer.toString(i)
+                                                + "@com.samsung.android.knox.containercore.rcpcomponents.move.provider.knoxcontentmgrdbprovider/"),
+                                null,
+                                null,
+                                null,
+                                null);
         if (query2 != null) {
             if (query2.moveToFirst()) {
                 do {

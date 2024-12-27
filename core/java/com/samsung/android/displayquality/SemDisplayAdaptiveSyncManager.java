@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.IBinder;
 import android.os.ServiceManager;
 import android.util.Slog;
-import com.samsung.android.displayquality.ISemDisplayQualityManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -15,14 +15,13 @@ public final class SemDisplayAdaptiveSyncManager {
     public static final int RESULT_SUCCESS = 0;
     private static final String TAG = "SemDisplayAdaptiveSyncManager";
     private static final boolean mEnabled = SemDisplayQualityFeature.ENABLED;
-    private static final boolean mSupportAdaptiveSync = SemDisplayQualityFeature.ADAPTIVE_SYNC_SUPPORT;
+    private static final boolean mSupportAdaptiveSync =
+            SemDisplayQualityFeature.ADAPTIVE_SYNC_SUPPORT;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Result {
-    }
+    public @interface Result {}
 
-    private SemDisplayAdaptiveSyncManager() {
-    }
+    private SemDisplayAdaptiveSyncManager() {}
 
     public static int setAdaptiveSyncEnabled(boolean enabled) {
         IBinder b = ServiceManager.getService(Context.SEM_DISPLAY_QUALITY_SERVICE);

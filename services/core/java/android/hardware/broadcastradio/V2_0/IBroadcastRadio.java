@@ -10,11 +10,13 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.server.broadcastradio.hal2.Convert;
 import com.android.server.broadcastradio.hal2.Mutable;
 import com.android.server.broadcastradio.hal2.RadioModule;
 import com.android.server.broadcastradio.hal2.RadioModule$$ExternalSyntheticLambda0;
 import com.android.server.broadcastradio.hal2.RadioModule$$ExternalSyntheticLambda2;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -33,7 +35,9 @@ public interface IBroadcastRadio extends IBase {
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -48,7 +52,8 @@ public interface IBroadcastRadio extends IBase {
             return HidlSupport.interfacesEqual(this, obj);
         }
 
-        public final void getAmFmRegionConfig(RadioModule$$ExternalSyntheticLambda2 radioModule$$ExternalSyntheticLambda2) {
+        public final void getAmFmRegionConfig(
+                RadioModule$$ExternalSyntheticLambda2 radioModule$$ExternalSyntheticLambda2) {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken("android.hardware.broadcastradio@2.0::IBroadcastRadio");
             hwParcel.writeBool(false);
@@ -96,7 +101,8 @@ public interface IBroadcastRadio extends IBase {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -110,7 +116,9 @@ public interface IBroadcastRadio extends IBase {
         }
 
         public final Properties getProperties() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.broadcastradio@2.0::IBroadcastRadio");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.broadcastradio@2.0::IBroadcastRadio");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(1, m, hwParcel, 0);
@@ -173,8 +181,12 @@ public interface IBroadcastRadio extends IBase {
             }
         }
 
-        public final void openSession(RadioModule.AnonymousClass1 anonymousClass1, RadioModule$$ExternalSyntheticLambda0 radioModule$$ExternalSyntheticLambda0) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.broadcastradio@2.0::IBroadcastRadio");
+        public final void openSession(
+                RadioModule.AnonymousClass1 anonymousClass1,
+                RadioModule$$ExternalSyntheticLambda0 radioModule$$ExternalSyntheticLambda0) {
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.broadcastradio@2.0::IBroadcastRadio");
             ITunerSession$Proxy iTunerSession$Proxy = null;
             if (anonymousClass1 == null) {
                 anonymousClass1 = null;
@@ -188,8 +200,11 @@ public interface IBroadcastRadio extends IBase {
                 int readInt32 = hwParcel.readInt32();
                 IHwBinder readStrongBinder = hwParcel.readStrongBinder();
                 if (readStrongBinder != null) {
-                    IHwInterface queryLocalInterface = readStrongBinder.queryLocalInterface("android.hardware.broadcastradio@2.0::ITunerSession");
-                    if (queryLocalInterface == null || !(queryLocalInterface instanceof ITunerSession$Proxy)) {
+                    IHwInterface queryLocalInterface =
+                            readStrongBinder.queryLocalInterface(
+                                    "android.hardware.broadcastradio@2.0::ITunerSession");
+                    if (queryLocalInterface == null
+                            || !(queryLocalInterface instanceof ITunerSession$Proxy)) {
                         ITunerSession$Proxy iTunerSession$Proxy2 = new ITunerSession$Proxy();
                         iTunerSession$Proxy2.mRemote = readStrongBinder;
                         try {
@@ -197,7 +212,9 @@ public interface IBroadcastRadio extends IBase {
                             while (true) {
                                 if (!it.hasNext()) {
                                     break;
-                                } else if (((String) it.next()).equals("android.hardware.broadcastradio@2.0::ITunerSession")) {
+                                } else if (((String) it.next())
+                                        .equals(
+                                                "android.hardware.broadcastradio@2.0::ITunerSession")) {
                                     iTunerSession$Proxy = iTunerSession$Proxy2;
                                     break;
                                 }
@@ -212,7 +229,8 @@ public interface IBroadcastRadio extends IBase {
                 radioModule.getClass();
                 Convert.throwOnError(readInt32, "openSession");
                 radioModule$$ExternalSyntheticLambda0.f$1.value = iTunerSession$Proxy;
-                radioModule.mEventLogger.logRadioEvent("New HIDL 2.0 tuner session is opened", new Object[0]);
+                radioModule.mEventLogger.logRadioEvent(
+                        "New HIDL 2.0 tuner session is opened", new Object[0]);
             } finally {
                 hwParcel.release();
             }
@@ -247,7 +265,8 @@ public interface IBroadcastRadio extends IBase {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException unused) {
-                return "[class or subclass of android.hardware.broadcastradio@2.0::IBroadcastRadio]@Proxy";
+                return "[class or subclass of"
+                           + " android.hardware.broadcastradio@2.0::IBroadcastRadio]@Proxy";
             }
         }
 

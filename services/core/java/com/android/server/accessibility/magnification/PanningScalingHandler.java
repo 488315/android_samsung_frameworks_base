@@ -9,12 +9,13 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.ViewConfiguration;
+
 import com.android.server.accessibility.Flags;
-import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class PanningScalingHandler extends GestureDetector.SimpleOnGestureListener implements ScaleGestureDetector.OnScaleGestureListener {
+public final class PanningScalingHandler extends GestureDetector.SimpleOnGestureListener
+        implements ScaleGestureDetector.OnScaleGestureListener {
     public static final boolean DEBUG = Log.isLoggable("PanningScalingHandler", 3);
     public final int mDisplayId;
     public boolean mEnable;
@@ -37,11 +38,20 @@ public final class PanningScalingHandler extends GestureDetector.SimpleOnGesture
         void setScale(float f, int i);
     }
 
-    public PanningScalingHandler(Context context, float f, WindowMagnificationGestureHandler.AnonymousClass1 anonymousClass1) {
+    public PanningScalingHandler(
+            Context context,
+            float f,
+            WindowMagnificationGestureHandler.AnonymousClass1 anonymousClass1) {
         this.mDisplayId = context.getDisplayId();
         this.mMaxScale = f;
         Flags.pinchZoomZeroMinSpan();
-        ScaleGestureDetector scaleGestureDetector = new ScaleGestureDetector(context, ViewConfiguration.get(context).getScaledTouchSlop() * 2, 0, Handler.getMain(), this);
+        ScaleGestureDetector scaleGestureDetector =
+                new ScaleGestureDetector(
+                        context,
+                        ViewConfiguration.get(context).getScaledTouchSlop() * 2,
+                        0,
+                        Handler.getMain(),
+                        this);
         this.mScaleGestureDetector = scaleGestureDetector;
         this.mScrollGestureDetector = new GestureDetector(context, this, Handler.getMain());
         scaleGestureDetector.setQuickScaleEnabled(false);
@@ -52,9 +62,9 @@ public final class PanningScalingHandler extends GestureDetector.SimpleOnGesture
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0057, code lost:
-    
-        if (r7 < r2) goto L21;
-     */
+
+       if (r7 < r2) goto L21;
+    */
     /* JADX WARN: Removed duplicated region for block: B:22:0x005c  */
     @Override // android.view.ScaleGestureDetector.OnScaleGestureListener
     /*
@@ -132,7 +142,9 @@ public final class PanningScalingHandler extends GestureDetector.SimpleOnGesture
             r0.setScale(r7, r6)
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.magnification.PanningScalingHandler.onScale(android.view.ScaleGestureDetector):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.magnification.PanningScalingHandler.onScale(android.view.ScaleGestureDetector):boolean");
     }
 
     @Override // android.view.ScaleGestureDetector.OnScaleGestureListener
@@ -146,8 +158,10 @@ public final class PanningScalingHandler extends GestureDetector.SimpleOnGesture
         this.mScaling = false;
     }
 
-    @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener
-    public final boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
+    @Override // android.view.GestureDetector.SimpleOnGestureListener,
+              // android.view.GestureDetector.OnGestureListener
+    public final boolean onScroll(
+            MotionEvent motionEvent, MotionEvent motionEvent2, float f, float f2) {
         if (this.mEnable && (!this.mBlockScroll || !this.mScaling)) {
             this.mMagnificationDelegate.processScroll(this.mDisplayId, f, f2);
         }
@@ -155,6 +169,10 @@ public final class PanningScalingHandler extends GestureDetector.SimpleOnGesture
     }
 
     public final String toString() {
-        return "PanningScalingHandler{mInitialScaleFactor=" + this.mInitialScaleFactor + ", mScaling=" + this.mScaling + '}';
+        return "PanningScalingHandler{mInitialScaleFactor="
+                + this.mInitialScaleFactor
+                + ", mScaling="
+                + this.mScaling
+                + '}';
     }
 }

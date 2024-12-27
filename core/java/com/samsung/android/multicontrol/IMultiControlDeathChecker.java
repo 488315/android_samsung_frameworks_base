@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IMultiControlDeathChecker extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.multicontrol.IMultiControlDeathChecker";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.multicontrol.IMultiControlDeathChecker";
 
     public static class Default implements IMultiControlDeathChecker {
         @Override // android.os.IInterface
@@ -17,7 +18,7 @@ public interface IMultiControlDeathChecker extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMultiControlDeathChecker {
+    public abstract static class Stub extends Binder implements IMultiControlDeathChecker {
         public Stub() {
             attachInterface(this, IMultiControlDeathChecker.DESCRIPTOR);
         }
@@ -48,7 +49,8 @@ public interface IMultiControlDeathChecker extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code == 1598968902) {
                 reply.writeString(IMultiControlDeathChecker.DESCRIPTOR);
                 return true;

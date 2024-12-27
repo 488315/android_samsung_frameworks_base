@@ -4,49 +4,81 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telecom.IVideoProvider;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class ParcelableConnection implements Parcelable {
-    public static final Parcelable.Creator<ParcelableConnection> CREATOR = new Parcelable.Creator<ParcelableConnection>() { // from class: android.telecom.ParcelableConnection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableConnection createFromParcel(Parcel source) {
-            ClassLoader classLoader = ParcelableConnection.class.getClassLoader();
-            PhoneAccountHandle phoneAccount = (PhoneAccountHandle) source.readParcelable(classLoader, PhoneAccountHandle.class);
-            int state = source.readInt();
-            int capabilities = source.readInt();
-            Uri address = (Uri) source.readParcelable(classLoader, Uri.class);
-            int addressPresentation = source.readInt();
-            String callerDisplayName = source.readString();
-            int callerDisplayNamePresentation = source.readInt();
-            IVideoProvider videoCallProvider = IVideoProvider.Stub.asInterface(source.readStrongBinder());
-            int videoState = source.readInt();
-            boolean ringbackRequested = source.readByte() == 1;
-            boolean audioModeIsVoip = source.readByte() == 1;
-            long connectTimeMillis = source.readLong();
-            StatusHints statusHints = (StatusHints) source.readParcelable(classLoader, StatusHints.class);
-            DisconnectCause disconnectCause = (DisconnectCause) source.readParcelable(classLoader, DisconnectCause.class);
-            List<String> conferenceableConnectionIds = new ArrayList<>();
-            source.readStringList(conferenceableConnectionIds);
-            Bundle extras = Bundle.setDefusable(source.readBundle(classLoader), true);
-            int properties = source.readInt();
-            int supportedAudioRoutes = source.readInt();
-            String parentCallId = source.readString();
-            long connectElapsedTimeMillis = source.readLong();
-            int callDirection = source.readInt();
-            int callerNumberVerificationStatus = source.readInt();
-            return new ParcelableConnection(phoneAccount, state, capabilities, properties, supportedAudioRoutes, address, addressPresentation, callerDisplayName, callerDisplayNamePresentation, videoCallProvider, videoState, ringbackRequested, audioModeIsVoip, connectTimeMillis, connectElapsedTimeMillis, statusHints, disconnectCause, conferenceableConnectionIds, extras, parentCallId, callDirection, callerNumberVerificationStatus);
-        }
+    public static final Parcelable.Creator<ParcelableConnection> CREATOR =
+            new Parcelable.Creator<
+                    ParcelableConnection>() { // from class: android.telecom.ParcelableConnection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableConnection createFromParcel(Parcel source) {
+                    ClassLoader classLoader = ParcelableConnection.class.getClassLoader();
+                    PhoneAccountHandle phoneAccount =
+                            (PhoneAccountHandle)
+                                    source.readParcelable(classLoader, PhoneAccountHandle.class);
+                    int state = source.readInt();
+                    int capabilities = source.readInt();
+                    Uri address = (Uri) source.readParcelable(classLoader, Uri.class);
+                    int addressPresentation = source.readInt();
+                    String callerDisplayName = source.readString();
+                    int callerDisplayNamePresentation = source.readInt();
+                    IVideoProvider videoCallProvider =
+                            IVideoProvider.Stub.asInterface(source.readStrongBinder());
+                    int videoState = source.readInt();
+                    boolean ringbackRequested = source.readByte() == 1;
+                    boolean audioModeIsVoip = source.readByte() == 1;
+                    long connectTimeMillis = source.readLong();
+                    StatusHints statusHints =
+                            (StatusHints) source.readParcelable(classLoader, StatusHints.class);
+                    DisconnectCause disconnectCause =
+                            (DisconnectCause)
+                                    source.readParcelable(classLoader, DisconnectCause.class);
+                    List<String> conferenceableConnectionIds = new ArrayList<>();
+                    source.readStringList(conferenceableConnectionIds);
+                    Bundle extras = Bundle.setDefusable(source.readBundle(classLoader), true);
+                    int properties = source.readInt();
+                    int supportedAudioRoutes = source.readInt();
+                    String parentCallId = source.readString();
+                    long connectElapsedTimeMillis = source.readLong();
+                    int callDirection = source.readInt();
+                    int callerNumberVerificationStatus = source.readInt();
+                    return new ParcelableConnection(
+                            phoneAccount,
+                            state,
+                            capabilities,
+                            properties,
+                            supportedAudioRoutes,
+                            address,
+                            addressPresentation,
+                            callerDisplayName,
+                            callerDisplayNamePresentation,
+                            videoCallProvider,
+                            videoState,
+                            ringbackRequested,
+                            audioModeIsVoip,
+                            connectTimeMillis,
+                            connectElapsedTimeMillis,
+                            statusHints,
+                            disconnectCause,
+                            conferenceableConnectionIds,
+                            extras,
+                            parentCallId,
+                            callDirection,
+                            callerNumberVerificationStatus);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableConnection[] newArray(int size) {
-            return new ParcelableConnection[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableConnection[] newArray(int size) {
+                    return new ParcelableConnection[size];
+                }
+            };
     private final Uri mAddress;
     private final int mAddressPresentation;
     private int mCallDirection;
@@ -70,13 +102,75 @@ public final class ParcelableConnection implements Parcelable {
     private final IVideoProvider mVideoProvider;
     private final int mVideoState;
 
-    public ParcelableConnection(PhoneAccountHandle phoneAccount, int state, int capabilities, int properties, int supportedAudioRoutes, Uri address, int addressPresentation, String callerDisplayName, int callerDisplayNamePresentation, IVideoProvider videoProvider, int videoState, boolean ringbackRequested, boolean isVoipAudioMode, long connectTimeMillis, long connectElapsedTimeMillis, StatusHints statusHints, DisconnectCause disconnectCause, List<String> conferenceableConnectionIds, Bundle extras, String parentCallId, int callDirection, int callerNumberVerificationStatus) {
-        this(phoneAccount, state, capabilities, properties, supportedAudioRoutes, address, addressPresentation, callerDisplayName, callerDisplayNamePresentation, videoProvider, videoState, ringbackRequested, isVoipAudioMode, connectTimeMillis, connectElapsedTimeMillis, statusHints, disconnectCause, conferenceableConnectionIds, extras, callerNumberVerificationStatus);
+    public ParcelableConnection(
+            PhoneAccountHandle phoneAccount,
+            int state,
+            int capabilities,
+            int properties,
+            int supportedAudioRoutes,
+            Uri address,
+            int addressPresentation,
+            String callerDisplayName,
+            int callerDisplayNamePresentation,
+            IVideoProvider videoProvider,
+            int videoState,
+            boolean ringbackRequested,
+            boolean isVoipAudioMode,
+            long connectTimeMillis,
+            long connectElapsedTimeMillis,
+            StatusHints statusHints,
+            DisconnectCause disconnectCause,
+            List<String> conferenceableConnectionIds,
+            Bundle extras,
+            String parentCallId,
+            int callDirection,
+            int callerNumberVerificationStatus) {
+        this(
+                phoneAccount,
+                state,
+                capabilities,
+                properties,
+                supportedAudioRoutes,
+                address,
+                addressPresentation,
+                callerDisplayName,
+                callerDisplayNamePresentation,
+                videoProvider,
+                videoState,
+                ringbackRequested,
+                isVoipAudioMode,
+                connectTimeMillis,
+                connectElapsedTimeMillis,
+                statusHints,
+                disconnectCause,
+                conferenceableConnectionIds,
+                extras,
+                callerNumberVerificationStatus);
         this.mParentCallId = parentCallId;
         this.mCallDirection = callDirection;
     }
 
-    public ParcelableConnection(PhoneAccountHandle phoneAccount, int state, int capabilities, int properties, int supportedAudioRoutes, Uri address, int addressPresentation, String callerDisplayName, int callerDisplayNamePresentation, IVideoProvider videoProvider, int videoState, boolean ringbackRequested, boolean isVoipAudioMode, long connectTimeMillis, long connectElapsedTimeMillis, StatusHints statusHints, DisconnectCause disconnectCause, List<String> conferenceableConnectionIds, Bundle extras, int callerNumberVerificationStatus) {
+    public ParcelableConnection(
+            PhoneAccountHandle phoneAccount,
+            int state,
+            int capabilities,
+            int properties,
+            int supportedAudioRoutes,
+            Uri address,
+            int addressPresentation,
+            String callerDisplayName,
+            int callerDisplayNamePresentation,
+            IVideoProvider videoProvider,
+            int videoState,
+            boolean ringbackRequested,
+            boolean isVoipAudioMode,
+            long connectTimeMillis,
+            long connectElapsedTimeMillis,
+            StatusHints statusHints,
+            DisconnectCause disconnectCause,
+            List<String> conferenceableConnectionIds,
+            Bundle extras,
+            int callerNumberVerificationStatus) {
         this.mPhoneAccount = phoneAccount;
         this.mState = state;
         this.mConnectionCapabilities = capabilities;
@@ -190,7 +284,20 @@ public final class ParcelableConnection implements Parcelable {
     }
 
     public String toString() {
-        return "ParcelableConnection [act:" + this.mPhoneAccount + "], state:" + this.mState + ", capabilities:" + Connection.capabilitiesToString(this.mConnectionCapabilities) + ", properties:" + Connection.propertiesToString(this.mConnectionProperties) + ", extras:" + Log.maskPii(this.mExtras) + ", parent:" + this.mParentCallId + ", callDirection:" + this.mCallDirection;
+        return "ParcelableConnection [act:"
+                + this.mPhoneAccount
+                + "], state:"
+                + this.mState
+                + ", capabilities:"
+                + Connection.capabilitiesToString(this.mConnectionCapabilities)
+                + ", properties:"
+                + Connection.propertiesToString(this.mConnectionProperties)
+                + ", extras:"
+                + Log.maskPii(this.mExtras)
+                + ", parent:"
+                + this.mParentCallId
+                + ", callDirection:"
+                + this.mCallDirection;
     }
 
     @Override // android.os.Parcelable
@@ -207,7 +314,8 @@ public final class ParcelableConnection implements Parcelable {
         parcel.writeInt(this.mAddressPresentation);
         parcel.writeString(this.mCallerDisplayName);
         parcel.writeInt(this.mCallerDisplayNamePresentation);
-        parcel.writeStrongBinder(this.mVideoProvider != null ? this.mVideoProvider.asBinder() : null);
+        parcel.writeStrongBinder(
+                this.mVideoProvider != null ? this.mVideoProvider.asBinder() : null);
         parcel.writeInt(this.mVideoState);
         parcel.writeByte(this.mRingbackRequested ? (byte) 1 : (byte) 0);
         parcel.writeByte(this.mIsVoipAudioMode ? (byte) 1 : (byte) 0);

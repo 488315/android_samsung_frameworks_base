@@ -15,15 +15,18 @@ import android.text.style.URLSpan;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
 import android.view.textclassifier.TextLinks;
+
 import com.android.internal.transition.EpicenterTranslateClipReveal;
 import com.android.internal.util.ArrayUtils;
+
+import libcore.io.IoUtils;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import libcore.io.IoUtils;
 
 /* loaded from: classes.dex */
 public class ClipData implements Parcelable {
@@ -38,19 +41,20 @@ public class ClipData implements Parcelable {
     static final String[] MIMETYPES_TEXT_HTML = {"text/html"};
     static final String[] MIMETYPES_TEXT_URILIST = {ClipDescription.MIMETYPE_TEXT_URILIST};
     static final String[] MIMETYPES_TEXT_INTENT = {ClipDescription.MIMETYPE_TEXT_INTENT};
-    public static final Parcelable.Creator<ClipData> CREATOR = new Parcelable.Creator<ClipData>() { // from class: android.content.ClipData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClipData createFromParcel(Parcel source) {
-            return new ClipData(source);
-        }
+    public static final Parcelable.Creator<ClipData> CREATOR =
+            new Parcelable.Creator<ClipData>() { // from class: android.content.ClipData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClipData createFromParcel(Parcel source) {
+                    return new ClipData(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClipData[] newArray(int size) {
-            return new ClipData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClipData[] newArray(int size) {
+                    return new ClipData[size];
+                }
+            };
 
     public static class Item {
         private ActivityInfo mActivityInfo;
@@ -97,7 +101,8 @@ public class ClipData implements Parcelable {
             }
 
             public Item build() {
-                return new Item(this.mText, this.mHtmlText, this.mIntent, this.mIntentSender, this.mUri);
+                return new Item(
+                        this.mText, this.mHtmlText, this.mIntent, this.mIntentSender, this.mUri);
             }
         }
 
@@ -135,9 +140,15 @@ public class ClipData implements Parcelable {
             this(text, htmlText, intent, null, uri);
         }
 
-        private Item(CharSequence text, String htmlText, Intent intent, IntentSender intentSender, Uri uri) {
+        private Item(
+                CharSequence text,
+                String htmlText,
+                Intent intent,
+                IntentSender intentSender,
+                Uri uri) {
             if (htmlText != null && text == null) {
-                throw new IllegalArgumentException("Plain text must be supplied if HTML text is supplied");
+                throw new IllegalArgumentException(
+                        "Plain text must be supplied if HTML text is supplied");
             }
             this.mText = text;
             this.mHtmlText = htmlText;
@@ -244,7 +255,11 @@ public class ClipData implements Parcelable {
             }
             if (uri != null) {
                 String scheme = uri.getScheme();
-                return ("content".equals(scheme) || ContentResolver.SCHEME_ANDROID_RESOURCE.equals(scheme) || "file".equals(scheme)) ? "" : uri.toString();
+                return ("content".equals(scheme)
+                                || ContentResolver.SCHEME_ANDROID_RESOURCE.equals(scheme)
+                                || "file".equals(scheme))
+                        ? ""
+                        : uri.toString();
             }
             Intent intent = getIntent();
             return intent != null ? intent.toUri(1) : "";
@@ -292,7 +307,11 @@ public class ClipData implements Parcelable {
 
         private CharSequence coerceToHtmlOrStyledText(Context context, boolean styled) {
             if (this.mUri == null) {
-                return this.mIntent != null ? styled ? uriToStyledText(this.mIntent.toUri(1)) : uriToHtml(this.mIntent.toUri(1)) : "";
+                return this.mIntent != null
+                        ? styled
+                                ? uriToStyledText(this.mIntent.toUri(1))
+                                : uriToHtml(this.mIntent.toUri(1))
+                        : "";
             }
             String[] types = null;
             try {
@@ -322,7 +341,9 @@ public class ClipData implements Parcelable {
                                 if (!hasHtml) {
                                     str = "text/plain";
                                 }
-                                AssetFileDescriptor descr = contentResolver.openTypedAssetFileDescriptor(uri, str, null);
+                                AssetFileDescriptor descr =
+                                        contentResolver.openTypedAssetFileDescriptor(
+                                                uri, str, null);
                                 stream = descr.createInputStream();
                                 InputStreamReader reader = new InputStreamReader(stream, "UTF-8");
                                 StringBuilder builder = new StringBuilder(128);
@@ -409,7 +430,13 @@ public class ClipData implements Parcelable {
                 }
             }
             String scheme = this.mUri.getScheme();
-            return ("content".equals(scheme) || ContentResolver.SCHEME_ANDROID_RESOURCE.equals(scheme) || "file".equals(scheme)) ? "" : styled ? uriToStyledText(this.mUri.toString()) : uriToHtml(this.mUri.toString());
+            return ("content".equals(scheme)
+                            || ContentResolver.SCHEME_ANDROID_RESOURCE.equals(scheme)
+                            || "file".equals(scheme))
+                    ? ""
+                    : styled
+                            ? uriToStyledText(this.mUri.toString())
+                            : uriToHtml(this.mUri.toString());
         }
 
         private String uriToHtml(String uri) {
@@ -574,7 +601,7 @@ public class ClipData implements Parcelable {
             mimeTypes = resolver.getStreamTypes(uri, "*/*");
             if (realType != null) {
                 if (mimeTypes == null) {
-                    mimeTypes = new String[]{realType};
+                    mimeTypes = new String[] {realType};
                 } else if (!ArrayUtils.contains(mimeTypes, realType)) {
                     String[] tmp = new String[mimeTypes.length + 1];
                     tmp[0] = realType;
@@ -656,14 +683,14 @@ public class ClipData implements Parcelable {
                     item.mUri.checkFileUriExposed("ClipData.Item.getUri()");
                 }
                 if (StrictMode.vmContentUriWithoutPermissionEnabled()) {
-                    item.mUri.checkContentUriWithoutPermission("ClipData.Item.getUri()", intentFlags);
+                    item.mUri.checkContentUriWithoutPermission(
+                            "ClipData.Item.getUri()", intentFlags);
                 }
             }
         }
     }
 
-    public void prepareToLeaveProcess$ravenwood(boolean leavingPackage, int intentFlags) {
-    }
+    public void prepareToLeaveProcess$ravenwood(boolean leavingPackage, int intentFlags) {}
 
     public void prepareToEnterProcess(AttributionSource source) {
         int size = this.mItems.size();
@@ -725,7 +752,10 @@ public class ClipData implements Parcelable {
     }
 
     public void toShortString(StringBuilder b, boolean redactContent) {
-        boolean first = this.mClipDescription != null ? !this.mClipDescription.toShortString(b, redactContent) : true;
+        boolean first =
+                this.mClipDescription != null
+                        ? !this.mClipDescription.toShortString(b, redactContent)
+                        : true;
         if (this.mIcon != null) {
             if (!first) {
                 b.append(' ');

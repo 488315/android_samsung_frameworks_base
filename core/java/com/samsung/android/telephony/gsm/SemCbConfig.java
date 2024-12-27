@@ -9,6 +9,14 @@ public class SemCbConfig {
     public int selectedId;
 
     public String toString() {
-        return super.toString() + "CB ENABLED: " + this.bCBEnabled + "selectedId" + this.selectedId + " msgIdMaxCount:" + this.msgIdMaxCount + "msgIdCount" + this.msgIdCount;
+        return super.toString()
+                + "CB ENABLED: "
+                + this.bCBEnabled
+                + "selectedId"
+                + this.selectedId
+                + " msgIdMaxCount:"
+                + this.msgIdMaxCount
+                + "msgIdCount"
+                + this.msgIdCount;
     }
 }

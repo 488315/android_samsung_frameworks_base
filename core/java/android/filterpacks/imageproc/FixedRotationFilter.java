@@ -10,6 +10,7 @@ import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 import android.filterfw.geometry.Point;
 import android.filterfw.geometry.Quad;
+
 import com.samsung.android.wallpaperbackup.GenerateXML;
 
 /* loaded from: classes.dex */

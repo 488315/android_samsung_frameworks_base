@@ -3,6 +3,7 @@ package android.media;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Build;
 import android.util.SparseIntArray;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Iterator;
@@ -55,16 +56,13 @@ public final class AudioDeviceInfo {
     private final AudioDevicePort mPort;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioDeviceType {
-    }
+    public @interface AudioDeviceType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioDeviceTypeIn {
-    }
+    public @interface AudioDeviceTypeIn {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioDeviceTypeOut {
-    }
+    public @interface AudioDeviceTypeOut {}
 
     static boolean isValidAudioDeviceTypeOut(int type) {
         switch (type) {

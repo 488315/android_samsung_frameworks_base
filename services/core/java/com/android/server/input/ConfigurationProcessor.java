@@ -3,8 +3,10 @@ package com.android.server.input;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
+
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +29,9 @@ public abstract class ConfigurationProcessor {
                 Slog.wtf("ConfigurationProcessor", "Ignoring incomplete entry");
             } else {
                 try {
-                    hashMap.put(attributeValue, Integer.valueOf(Integer.parseUnsignedInt(attributeValue2)));
+                    hashMap.put(
+                            attributeValue,
+                            Integer.valueOf(Integer.parseUnsignedInt(attributeValue2)));
                 } catch (NumberFormatException unused) {
                     Slog.wtf("ConfigurationProcessor", "Display port should be an integer");
                 }

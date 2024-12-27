@@ -12,8 +12,7 @@ public interface AuthenticateOptions {
     public static final int DISPLAY_STATE_UNKNOWN = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisplayState {
-    }
+    public @interface DisplayState {}
 
     String getAttributionTag();
 

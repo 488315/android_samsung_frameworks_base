@@ -9,8 +9,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.Base
 
 /* loaded from: classes5.dex */
 public class MD5 {
-    private MD5() {
-    }
+    private MD5() {}
 
     public static class HashMac extends BaseMac {
         public HashMac() {
@@ -41,7 +40,6 @@ public class MD5 {
         private static final String PREFIX = MD5.class.getName();
 
         @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
-        public void configure(ConfigurableProvider provider) {
-        }
+        public void configure(ConfigurableProvider provider) {}
     }
 }

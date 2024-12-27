@@ -13,7 +13,11 @@ public abstract class Nat384 {
         boolean neg = Nat192.diff(x, 6, x, 0, dx, 0) != Nat192.diff(y, 6, y, 0, dy, 0);
         int[] tt = Nat192.createExt();
         Nat192.mul(dx, dy, tt);
-        Nat.addWordAt(24, c182 + (neg ? Nat.addTo(12, tt, 0, zz, 6) : Nat.subFrom(12, tt, 0, zz, 6)), zz, 18);
+        Nat.addWordAt(
+                24,
+                c182 + (neg ? Nat.addTo(12, tt, 0, zz, 6) : Nat.subFrom(12, tt, 0, zz, 6)),
+                zz,
+                18);
     }
 
     public static void square(int[] x, int[] zz) {

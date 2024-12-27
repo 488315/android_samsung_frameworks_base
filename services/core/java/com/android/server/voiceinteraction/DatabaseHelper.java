@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.hardware.soundtrigger.SoundTrigger;
+
 import java.io.PrintWriter;
 import java.util.Locale;
 
@@ -70,7 +71,8 @@ public final class DatabaseHelper extends SQLiteOpenHelper implements IEnrolledM
         String languageTag = Locale.forLanguageTag(str).toLanguageTag();
         synchronized (this) {
             try {
-                SoundTrigger.KeyphraseSoundModel keyphraseSoundModel = getKeyphraseSoundModel(i, i2, languageTag);
+                SoundTrigger.KeyphraseSoundModel keyphraseSoundModel =
+                        getKeyphraseSoundModel(i, i2, languageTag);
                 if (keyphraseSoundModel == null) {
                     return false;
                 }
@@ -106,11 +108,16 @@ public final class DatabaseHelper extends SQLiteOpenHelper implements IEnrolledM
                                 if (type == 0) {
                                     printWriter.printf("    %s: null\n", str);
                                 } else if (type == 1) {
-                                    printWriter.printf("    %s: %d\n", str, Integer.valueOf(rawQuery.getInt(columnIndex)));
+                                    printWriter.printf(
+                                            "    %s: %d\n",
+                                            str, Integer.valueOf(rawQuery.getInt(columnIndex)));
                                 } else if (type == 2) {
-                                    printWriter.printf("    %s: %f\n", str, Float.valueOf(rawQuery.getFloat(columnIndex)));
+                                    printWriter.printf(
+                                            "    %s: %f\n",
+                                            str, Float.valueOf(rawQuery.getFloat(columnIndex)));
                                 } else if (type == 3) {
-                                    printWriter.printf("    %s: %s\n", str, rawQuery.getString(columnIndex));
+                                    printWriter.printf(
+                                            "    %s: %s\n", str, rawQuery.getString(columnIndex));
                                 } else if (type == 4) {
                                     printWriter.printf("    %s: data blob\n", str);
                                 }
@@ -132,92 +139,116 @@ public final class DatabaseHelper extends SQLiteOpenHelper implements IEnrolledM
     }
 
     @Override // com.android.server.voiceinteraction.IEnrolledModelDb
-    public final SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(int i, int i2, String str) {
+    public final SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(
+            int i, int i2, String str) {
         SoundTrigger.KeyphraseSoundModel validKeyphraseSoundModelForUser;
         String languageTag = Locale.forLanguageTag(str).toLanguageTag();
         synchronized (this) {
-            validKeyphraseSoundModelForUser = getValidKeyphraseSoundModelForUser(i2, "SELECT  * FROM sound_model WHERE keyphrase_id= '" + i + "' AND locale='" + languageTag + "'");
+            validKeyphraseSoundModelForUser =
+                    getValidKeyphraseSoundModelForUser(
+                            i2,
+                            "SELECT  * FROM sound_model WHERE keyphrase_id= '"
+                                    + i
+                                    + "' AND locale='"
+                                    + languageTag
+                                    + "'");
         }
         return validKeyphraseSoundModelForUser;
     }
 
     @Override // com.android.server.voiceinteraction.IEnrolledModelDb
-    public final SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(int i, String str, String str2) {
+    public final SoundTrigger.KeyphraseSoundModel getKeyphraseSoundModel(
+            int i, String str, String str2) {
         SoundTrigger.KeyphraseSoundModel validKeyphraseSoundModelForUser;
         String languageTag = Locale.forLanguageTag(str2).toLanguageTag();
         synchronized (this) {
-            validKeyphraseSoundModelForUser = getValidKeyphraseSoundModelForUser(i, "SELECT  * FROM sound_model WHERE hint_text= '" + str + "' AND locale='" + languageTag + "'");
+            validKeyphraseSoundModelForUser =
+                    getValidKeyphraseSoundModelForUser(
+                            i,
+                            "SELECT  * FROM sound_model WHERE hint_text= '"
+                                    + str
+                                    + "' AND locale='"
+                                    + languageTag
+                                    + "'");
         }
         return validKeyphraseSoundModelForUser;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:31:0x00cc, code lost:
-    
-        r0 = new android.hardware.soundtrigger.SoundTrigger.Keyphrase[]{new android.hardware.soundtrigger.SoundTrigger.Keyphrase(r8, r9, r10, r11, r12)};
-     */
+
+       r0 = new android.hardware.soundtrigger.SoundTrigger.Keyphrase[]{new android.hardware.soundtrigger.SoundTrigger.Keyphrase(r8, r9, r10, r11, r12)};
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x00d7, code lost:
-    
-        if (r5 == null) goto L36;
-     */
+
+       if (r5 == null) goto L36;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x00d9, code lost:
-    
-        r11 = java.util.UUID.fromString(r5);
-     */
+
+       r11 = java.util.UUID.fromString(r5);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x00e0, code lost:
-    
-        r4 = new android.hardware.soundtrigger.SoundTrigger.KeyphraseSoundModel(java.util.UUID.fromString(r3), r11, r6, r0, r14);
-     */
+
+       r4 = new android.hardware.soundtrigger.SoundTrigger.KeyphraseSoundModel(java.util.UUID.fromString(r3), r11, r6, r0, r14);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x00ec, code lost:
-    
-        r2.close();
-        r1.close();
-     */
+
+       r2.close();
+       r1.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:36:0x00f2, code lost:
-    
-        return r4;
-     */
+
+       return r4;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x00df, code lost:
-    
-        r11 = null;
-     */
+
+       r11 = null;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.hardware.soundtrigger.SoundTrigger.KeyphraseSoundModel getValidKeyphraseSoundModelForUser(int r17, java.lang.String r18) {
+    public final android.hardware.soundtrigger.SoundTrigger.KeyphraseSoundModel
+            getValidKeyphraseSoundModelForUser(int r17, java.lang.String r18) {
         /*
             Method dump skipped, instructions count: 272
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.voiceinteraction.DatabaseHelper.getValidKeyphraseSoundModelForUser(int, java.lang.String):android.hardware.soundtrigger.SoundTrigger$KeyphraseSoundModel");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.voiceinteraction.DatabaseHelper.getValidKeyphraseSoundModelForUser(int,"
+                    + " java.lang.String):android.hardware.soundtrigger.SoundTrigger$KeyphraseSoundModel");
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
     public final void onCreate(SQLiteDatabase sQLiteDatabase) {
-        sQLiteDatabase.execSQL("CREATE TABLE sound_model(model_uuid TEXT,vendor_uuid TEXT,keyphrase_id INTEGER,type INTEGER,data BLOB,recognition_modes INTEGER,locale TEXT,hint_text TEXT,users TEXT,model_version INTEGER,PRIMARY KEY (keyphrase_id,locale,users))");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE sound_model(model_uuid TEXT,vendor_uuid TEXT,keyphrase_id"
+                    + " INTEGER,type INTEGER,data BLOB,recognition_modes INTEGER,locale"
+                    + " TEXT,hint_text TEXT,users TEXT,model_version INTEGER,PRIMARY KEY"
+                    + " (keyphrase_id,locale,users))");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:41:0x00a5, code lost:
-    
-        r3 = r10.writeToDatabase(r8);
-     */
+
+       r3 = r10.writeToDatabase(r8);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x00ad, code lost:
-    
-        if (r3 != (-1)) goto L66;
-     */
+
+       if (r3 != (-1)) goto L66;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x00af, code lost:
-    
-        android.util.Slog.e("SoundModelDBHelper", "Database write failed " + r1 + ": " + r3);
-     */
+
+       android.util.Slog.e("SoundModelDBHelper", "Database write failed " + r1 + ": " + r3);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:49:0x00cc, code lost:
-    
-        r10 = move-exception;
-     */
+
+       r10 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x00cd, code lost:
-    
-        android.util.Slog.e("SoundModelDBHelper", "Failed to update V6 record " + r1, r10);
-     */
+
+       android.util.Slog.e("SoundModelDBHelper", "Failed to update V6 record " + r1, r10);
+    */
     @Override // android.database.sqlite.SQLiteOpenHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -345,11 +376,15 @@ public final class DatabaseHelper extends SQLiteOpenHelper implements IEnrolledM
         Lf4:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.voiceinteraction.DatabaseHelper.onUpgrade(android.database.sqlite.SQLiteDatabase, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.voiceinteraction.DatabaseHelper.onUpgrade(android.database.sqlite.SQLiteDatabase,"
+                    + " int, int):void");
     }
 
     @Override // com.android.server.voiceinteraction.IEnrolledModelDb
-    public final boolean updateKeyphraseSoundModel(SoundTrigger.KeyphraseSoundModel keyphraseSoundModel) {
+    public final boolean updateKeyphraseSoundModel(
+            SoundTrigger.KeyphraseSoundModel keyphraseSoundModel) {
         String sb;
         synchronized (this) {
             try {
@@ -357,16 +392,24 @@ public final class DatabaseHelper extends SQLiteOpenHelper implements IEnrolledM
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("model_uuid", keyphraseSoundModel.getUuid().toString());
                 if (keyphraseSoundModel.getVendorUuid() != null) {
-                    contentValues.put("vendor_uuid", keyphraseSoundModel.getVendorUuid().toString());
+                    contentValues.put(
+                            "vendor_uuid", keyphraseSoundModel.getVendorUuid().toString());
                 }
                 contentValues.put("type", (Integer) 0);
                 contentValues.put("data", keyphraseSoundModel.getData());
-                contentValues.put("model_version", Integer.valueOf(keyphraseSoundModel.getVersion()));
-                if (keyphraseSoundModel.getKeyphrases() == null || keyphraseSoundModel.getKeyphrases().length != 1) {
+                contentValues.put(
+                        "model_version", Integer.valueOf(keyphraseSoundModel.getVersion()));
+                if (keyphraseSoundModel.getKeyphrases() == null
+                        || keyphraseSoundModel.getKeyphrases().length != 1) {
                     return false;
                 }
-                contentValues.put("keyphrase_id", Integer.valueOf(keyphraseSoundModel.getKeyphrases()[0].getId()));
-                contentValues.put("recognition_modes", Integer.valueOf(keyphraseSoundModel.getKeyphrases()[0].getRecognitionModes()));
+                contentValues.put(
+                        "keyphrase_id",
+                        Integer.valueOf(keyphraseSoundModel.getKeyphrases()[0].getId()));
+                contentValues.put(
+                        "recognition_modes",
+                        Integer.valueOf(
+                                keyphraseSoundModel.getKeyphrases()[0].getRecognitionModes()));
                 int[] users = keyphraseSoundModel.getKeyphrases()[0].getUsers();
                 if (users == null) {
                     sb = "";
@@ -381,10 +424,14 @@ public final class DatabaseHelper extends SQLiteOpenHelper implements IEnrolledM
                     sb = sb2.toString();
                 }
                 contentValues.put("users", sb);
-                contentValues.put("locale", keyphraseSoundModel.getKeyphrases()[0].getLocale().toLanguageTag());
+                contentValues.put(
+                        "locale",
+                        keyphraseSoundModel.getKeyphrases()[0].getLocale().toLanguageTag());
                 contentValues.put("hint_text", keyphraseSoundModel.getKeyphrases()[0].getText());
                 try {
-                    return writableDatabase.insertWithOnConflict("sound_model", null, contentValues, 5) != -1;
+                    return writableDatabase.insertWithOnConflict(
+                                    "sound_model", null, contentValues, 5)
+                            != -1;
                 } finally {
                     writableDatabase.close();
                 }

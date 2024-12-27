@@ -20,8 +20,11 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.internal.R;
+
 import com.samsung.android.graphics.spr.SemPathRenderingDrawable;
+
 import java.util.Arrays;
 import java.util.WeakHashMap;
 
@@ -33,7 +36,8 @@ public class ContrastColorUtil {
     private static final Object sLock = new Object();
     private final int mGrayscaleIconMaxSize;
     private final ImageUtils mImageUtils = new ImageUtils();
-    private final WeakHashMap<Bitmap, Pair<Boolean, Integer>> mGrayscaleBitmapCache = new WeakHashMap<>();
+    private final WeakHashMap<Bitmap, Pair<Boolean, Integer>> mGrayscaleBitmapCache =
+            new WeakHashMap<>();
 
     public static ContrastColorUtil getInstance(Context context) {
         ContrastColorUtil contrastColorUtil;
@@ -47,14 +51,25 @@ public class ContrastColorUtil {
     }
 
     private ContrastColorUtil(Context context) {
-        this.mGrayscaleIconMaxSize = context.getResources().getDimensionPixelSize(R.dimen.notification_gray_scale_size_limit);
+        this.mGrayscaleIconMaxSize =
+                context.getResources()
+                        .getDimensionPixelSize(R.dimen.notification_gray_scale_size_limit);
     }
 
     public boolean isGrayscaleIcon(Bitmap bitmap) {
         boolean result;
         int generationId;
-        if (bitmap.getWidth() > this.mGrayscaleIconMaxSize || bitmap.getHeight() > this.mGrayscaleIconMaxSize) {
-            Log.d(TAG, "GrayScale=false. Bitmap(Width=" + bitmap.getWidth() + "px, Height=" + bitmap.getHeight() + "px) is larger than " + this.mGrayscaleIconMaxSize + "px.");
+        if (bitmap.getWidth() > this.mGrayscaleIconMaxSize
+                || bitmap.getHeight() > this.mGrayscaleIconMaxSize) {
+            Log.d(
+                    TAG,
+                    "GrayScale=false. Bitmap(Width="
+                            + bitmap.getWidth()
+                            + "px, Height="
+                            + bitmap.getHeight()
+                            + "px) is larger than "
+                            + this.mGrayscaleIconMaxSize
+                            + "px.");
             return false;
         }
         synchronized (sLock) {
@@ -67,7 +82,9 @@ public class ContrastColorUtil {
                 generationId = bitmap.getGenerationId();
             }
             synchronized (sLock) {
-                this.mGrayscaleBitmapCache.put(bitmap, Pair.create(Boolean.valueOf(result), Integer.valueOf(generationId)));
+                this.mGrayscaleBitmapCache.put(
+                        bitmap,
+                        Pair.create(Boolean.valueOf(result), Integer.valueOf(generationId)));
             }
             if (!result) {
                 Log.d(TAG, "GrayScale=false. Bitmap is not grayscale.");
@@ -134,7 +151,8 @@ public class ContrastColorUtil {
                     resultSpan2 = ((CharacterStyle) span).getUnderlying();
                 }
                 if (resultSpan2 instanceof TextAppearanceSpan) {
-                    TextAppearanceSpan processedSpan = processTextAppearanceSpan((TextAppearanceSpan) span);
+                    TextAppearanceSpan processedSpan =
+                            processTextAppearanceSpan((TextAppearanceSpan) span);
                     if (processedSpan != resultSpan2) {
                         resultSpan = processedSpan;
                     } else {
@@ -147,7 +165,11 @@ public class ContrastColorUtil {
                 } else {
                     resultSpan = span;
                 }
-                builder.setSpan(resultSpan, ss.getSpanStart(span), ss.getSpanEnd(span), ss.getSpanFlags(span));
+                builder.setSpan(
+                        resultSpan,
+                        ss.getSpanStart(span),
+                        ss.getSpanEnd(span),
+                        ss.getSpanFlags(span));
             }
             return builder;
         }
@@ -169,7 +191,12 @@ public class ContrastColorUtil {
                 }
             }
             if (changed) {
-                return new TextAppearanceSpan(span.getFamily(), span.getTextStyle(), span.getTextSize(), new ColorStateList(colorStateList.getStates(), colors), span.getLinkTextColor());
+                return new TextAppearanceSpan(
+                        span.getFamily(),
+                        span.getTextStyle(),
+                        span.getTextSize(),
+                        new ColorStateList(colorStateList.getStates(), colors),
+                        span.getLinkTextColor());
             }
         }
         return span;
@@ -186,16 +213,27 @@ public class ContrastColorUtil {
                     resultSpan = ((CharacterStyle) span).getUnderlying();
                 }
                 if (!(resultSpan instanceof TextAppearanceSpan)) {
-                    if (!(resultSpan instanceof ForegroundColorSpan) && !(resultSpan instanceof BackgroundColorSpan)) {
+                    if (!(resultSpan instanceof ForegroundColorSpan)
+                            && !(resultSpan instanceof BackgroundColorSpan)) {
                         resultSpan = span;
                     }
                 } else {
                     TextAppearanceSpan originalSpan = (TextAppearanceSpan) resultSpan;
                     if (originalSpan.getTextColor() != null) {
-                        resultSpan = new TextAppearanceSpan(originalSpan.getFamily(), originalSpan.getTextStyle(), originalSpan.getTextSize(), null, originalSpan.getLinkTextColor());
+                        resultSpan =
+                                new TextAppearanceSpan(
+                                        originalSpan.getFamily(),
+                                        originalSpan.getTextStyle(),
+                                        originalSpan.getTextSize(),
+                                        null,
+                                        originalSpan.getLinkTextColor());
                     }
                 }
-                builder.setSpan(resultSpan, ss.getSpanStart(span), ss.getSpanEnd(span), ss.getSpanFlags(span));
+                builder.setSpan(
+                        resultSpan,
+                        ss.getSpanStart(span),
+                        ss.getSpanEnd(span),
+                        ss.getSpanFlags(span));
             }
             return builder;
         }
@@ -247,13 +285,22 @@ public class ContrastColorUtil {
                                     break;
                                 }
                                 boolean isBgDark = isColorDark(background);
-                                newColors[i3] = ensureLargeTextContrast(colors[i3], background, isBgDark);
+                                newColors[i3] =
+                                        ensureLargeTextContrast(colors[i3], background, isBgDark);
                                 i3++;
                                 length = i;
                             }
-                            textColor = new ColorStateList((int[][]) textColor2.getStates().clone(), newColors);
+                            textColor =
+                                    new ColorStateList(
+                                            (int[][]) textColor2.getStates().clone(), newColors);
                         }
-                        resultSpan = new TextAppearanceSpan(originalSpan.getFamily(), originalSpan.getTextStyle(), originalSpan.getTextSize(), textColor, originalSpan.getLinkTextColor());
+                        resultSpan =
+                                new TextAppearanceSpan(
+                                        originalSpan.getFamily(),
+                                        originalSpan.getTextStyle(),
+                                        originalSpan.getTextSize(),
+                                        textColor,
+                                        originalSpan.getLinkTextColor());
                     }
                 } else {
                     spans = spans2;
@@ -262,9 +309,13 @@ public class ContrastColorUtil {
                         if (fullLength) {
                             resultSpan = null;
                         } else {
-                            int foregroundColor = ((ForegroundColorSpan) resultSpan).getForegroundColor();
+                            int foregroundColor =
+                                    ((ForegroundColorSpan) resultSpan).getForegroundColor();
                             boolean isBgDark2 = isColorDark(background);
-                            resultSpan = new ForegroundColorSpan(ensureLargeTextContrast(foregroundColor, background, isBgDark2));
+                            resultSpan =
+                                    new ForegroundColorSpan(
+                                            ensureLargeTextContrast(
+                                                    foregroundColor, background, isBgDark2));
                         }
                     } else {
                         resultSpan = span;
@@ -288,7 +339,11 @@ public class ContrastColorUtil {
     }
 
     private int processColor(int color) {
-        return Color.argb(Color.alpha(color), 255 - Color.red(color), 255 - Color.green(color), 255 - Color.blue(color));
+        return Color.argb(
+                Color.alpha(color),
+                255 - Color.red(color),
+                255 - Color.green(color),
+                255 - Color.blue(color));
     }
 
     public static int findContrastColor(int color, int other, boolean findFg, double minRatio) {
@@ -342,7 +397,8 @@ public class ContrastColorUtil {
         return i2;
     }
 
-    public static int findContrastColorAgainstDark(int color, int other, boolean findFg, double minRatio) {
+    public static int findContrastColorAgainstDark(
+            int color, int other, boolean findFg, double minRatio) {
         int fg = findFg ? color : other;
         int bg = findFg ? other : color;
         if (ColorUtilsFromCompat.calculateContrast(fg, bg) >= minRatio) {
@@ -393,11 +449,15 @@ public class ContrastColorUtil {
     }
 
     public static int ensureTextBackgroundColor(int color, int textColor, int hintColor) {
-        return findContrastColor(findContrastColor(color, hintColor, false, 3.0d), textColor, false, 4.5d);
+        return findContrastColor(
+                findContrastColor(color, hintColor, false, 3.0d), textColor, false, 4.5d);
     }
 
     private static String contrastChange(int colorOld, int colorNew, int bg) {
-        return String.format("from %.2f:1 to %.2f:1", Double.valueOf(ColorUtilsFromCompat.calculateContrast(colorOld, bg)), Double.valueOf(ColorUtilsFromCompat.calculateContrast(colorNew, bg)));
+        return String.format(
+                "from %.2f:1 to %.2f:1",
+                Double.valueOf(ColorUtilsFromCompat.calculateContrast(colorOld, bg)),
+                Double.valueOf(ColorUtilsFromCompat.calculateContrast(colorNew, bg)));
     }
 
     public static int resolveColor(Context context, int color, boolean defaultBackgroundIsDark) {
@@ -413,11 +473,13 @@ public class ContrastColorUtil {
         return color;
     }
 
-    public static int resolveContrastColor(Context context, int notificationColor, int backgroundColor) {
+    public static int resolveContrastColor(
+            Context context, int notificationColor, int backgroundColor) {
         return resolveContrastColor(context, notificationColor, backgroundColor, false);
     }
 
-    public static int resolveContrastColor(Context context, int notificationColor, int backgroundColor, boolean isDark) {
+    public static int resolveContrastColor(
+            Context context, int notificationColor, int backgroundColor, boolean isDark) {
         int resolvedColor = resolveColor(context, notificationColor, isDark);
         int color = ensureTextContrast(resolvedColor, backgroundColor, isDark);
         return color;
@@ -426,11 +488,15 @@ public class ContrastColorUtil {
     public static int changeColorLightness(int baseColor, int amount) {
         double[] result = ColorUtilsFromCompat.getTempDouble3Array();
         ColorUtilsFromCompat.colorToLAB(baseColor, result);
-        result[0] = Math.max(Math.min(100.0d, result[0] + amount), SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
+        result[0] =
+                Math.max(
+                        Math.min(100.0d, result[0] + amount),
+                        SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
         return ColorUtilsFromCompat.LABToColor(result[0], result[1], result[2]);
     }
 
-    public static int resolvePrimaryColor(Context context, int backgroundColor, boolean defaultBackgroundIsDark) {
+    public static int resolvePrimaryColor(
+            Context context, int backgroundColor, boolean defaultBackgroundIsDark) {
         boolean useDark = shouldUseDark(backgroundColor, defaultBackgroundIsDark);
         if (useDark) {
             return context.getColor(R.color.notification_primary_text_color_light);
@@ -438,7 +504,8 @@ public class ContrastColorUtil {
         return context.getColor(R.color.notification_primary_text_color_dark);
     }
 
-    public static int resolveSecondaryColor(Context context, int backgroundColor, boolean defaultBackgroundIsDark) {
+    public static int resolveSecondaryColor(
+            Context context, int backgroundColor, boolean defaultBackgroundIsDark) {
         boolean useDark = shouldUseDark(backgroundColor, defaultBackgroundIsDark);
         if (useDark) {
             return context.getColor(R.color.notification_secondary_text_color_light);
@@ -446,7 +513,8 @@ public class ContrastColorUtil {
         return context.getColor(R.color.notification_secondary_text_color_dark);
     }
 
-    public static int resolveThirdColor(Context context, int backgroundColor, boolean defaultBackgroundIsDark) {
+    public static int resolveThirdColor(
+            Context context, int backgroundColor, boolean defaultBackgroundIsDark) {
         boolean useDark = shouldUseDark(backgroundColor, defaultBackgroundIsDark);
         if (useDark) {
             return context.getColor(R.color.notification_third_text_color_light);
@@ -454,7 +522,8 @@ public class ContrastColorUtil {
         return context.getColor(R.color.notification_third_text_color_dark);
     }
 
-    public static int resolveDefaultColor(Context context, int backgroundColor, boolean defaultBackgroundIsDark) {
+    public static int resolveDefaultColor(
+            Context context, int backgroundColor, boolean defaultBackgroundIsDark) {
         boolean useDark = shouldUseDark(backgroundColor, defaultBackgroundIsDark);
         if (useDark) {
             return context.getColor(R.color.notification_default_color_light);
@@ -515,16 +584,21 @@ public class ContrastColorUtil {
         private static final double XYZ_WHITE_REFERENCE_Y = 100.0d;
         private static final double XYZ_WHITE_REFERENCE_Z = 108.883d;
 
-        private ColorUtilsFromCompat() {
-        }
+        private ColorUtilsFromCompat() {}
 
         public static int compositeColors(int foreground, int background) {
             int bgAlpha = Color.alpha(background);
             int fgAlpha = Color.alpha(foreground);
             int a = compositeAlpha(fgAlpha, bgAlpha);
-            int r = compositeComponent(Color.red(foreground), fgAlpha, Color.red(background), bgAlpha, a);
-            int g = compositeComponent(Color.green(foreground), fgAlpha, Color.green(background), bgAlpha, a);
-            int b = compositeComponent(Color.blue(foreground), fgAlpha, Color.blue(background), bgAlpha, a);
+            int r =
+                    compositeComponent(
+                            Color.red(foreground), fgAlpha, Color.red(background), bgAlpha, a);
+            int g =
+                    compositeComponent(
+                            Color.green(foreground), fgAlpha, Color.green(background), bgAlpha, a);
+            int b =
+                    compositeComponent(
+                            Color.blue(foreground), fgAlpha, Color.blue(background), bgAlpha, a);
             return Color.argb(a, r, g, b);
         }
 
@@ -584,9 +658,12 @@ public class ContrastColorUtil {
             double sg2 = sg < 0.04045d ? sg / 12.92d : Math.pow((sg + 0.055d) / 1.055d, 2.4d);
             double sb = b / 255.0d;
             double sb2 = sb < 0.04045d ? sb / 12.92d : Math.pow((0.055d + sb) / 1.055d, 2.4d);
-            outXyz[0] = ((0.4124d * sr2) + (0.3576d * sg2) + (0.1805d * sb2)) * XYZ_WHITE_REFERENCE_Y;
-            outXyz[1] = ((0.2126d * sr2) + (0.7152d * sg2) + (0.0722d * sb2)) * XYZ_WHITE_REFERENCE_Y;
-            outXyz[2] = ((0.0193d * sr2) + (0.1192d * sg2) + (0.9505d * sb2)) * XYZ_WHITE_REFERENCE_Y;
+            outXyz[0] =
+                    ((0.4124d * sr2) + (0.3576d * sg2) + (0.1805d * sb2)) * XYZ_WHITE_REFERENCE_Y;
+            outXyz[1] =
+                    ((0.2126d * sr2) + (0.7152d * sg2) + (0.0722d * sb2)) * XYZ_WHITE_REFERENCE_Y;
+            outXyz[2] =
+                    ((0.0193d * sr2) + (0.1192d * sg2) + (0.9505d * sb2)) * XYZ_WHITE_REFERENCE_Y;
         }
 
         public static void XYZToLAB(double x, double y, double z, double[] outLab) {
@@ -596,7 +673,8 @@ public class ContrastColorUtil {
             double x2 = pivotXyzComponent(x / XYZ_WHITE_REFERENCE_X);
             double y2 = pivotXyzComponent(y / XYZ_WHITE_REFERENCE_Y);
             double z2 = pivotXyzComponent(z / XYZ_WHITE_REFERENCE_Z);
-            outLab[0] = Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (116.0d * y2) - 16.0d);
+            outLab[0] =
+                    Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (116.0d * y2) - 16.0d);
             outLab[1] = (x2 - y2) * 500.0d;
             outLab[2] = (y2 - z2) * 200.0d;
         }
@@ -616,10 +694,44 @@ public class ContrastColorUtil {
         }
 
         public static int XYZToColor(double x, double y, double z) {
-            double r = (((3.2406d * x) + ((-1.5372d) * y)) + ((-0.4986d) * z)) / XYZ_WHITE_REFERENCE_Y;
+            double r =
+                    (((3.2406d * x) + ((-1.5372d) * y)) + ((-0.4986d) * z)) / XYZ_WHITE_REFERENCE_Y;
             double g = ((((-0.9689d) * x) + (1.8758d * y)) + (0.0415d * z)) / XYZ_WHITE_REFERENCE_Y;
             double b = (((0.0557d * x) + ((-0.204d) * y)) + (1.057d * z)) / XYZ_WHITE_REFERENCE_Y;
-            return Color.rgb(constrain((int) Math.round((r > 0.0031308d ? (Math.pow(r, 0.4166666666666667d) * 1.055d) - 0.055d : r * 12.92d) * 255.0d), 0, 255), constrain((int) Math.round((g > 0.0031308d ? (Math.pow(g, 0.4166666666666667d) * 1.055d) - 0.055d : g * 12.92d) * 255.0d), 0, 255), constrain((int) Math.round(255.0d * (b > 0.0031308d ? (Math.pow(b, 0.4166666666666667d) * 1.055d) - 0.055d : b * 12.92d)), 0, 255));
+            return Color.rgb(
+                    constrain(
+                            (int)
+                                    Math.round(
+                                            (r > 0.0031308d
+                                                            ? (Math.pow(r, 0.4166666666666667d)
+                                                                            * 1.055d)
+                                                                    - 0.055d
+                                                            : r * 12.92d)
+                                                    * 255.0d),
+                            0,
+                            255),
+                    constrain(
+                            (int)
+                                    Math.round(
+                                            (g > 0.0031308d
+                                                            ? (Math.pow(g, 0.4166666666666667d)
+                                                                            * 1.055d)
+                                                                    - 0.055d
+                                                            : g * 12.92d)
+                                                    * 255.0d),
+                            0,
+                            255),
+                    constrain(
+                            (int)
+                                    Math.round(
+                                            255.0d
+                                                    * (b > 0.0031308d
+                                                            ? (Math.pow(b, 0.4166666666666667d)
+                                                                            * 1.055d)
+                                                                    - 0.055d
+                                                            : b * 12.92d)),
+                            0,
+                            255));
         }
 
         public static int LABToColor(double l, double a, double b) {

@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextPedometer extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextPedometer> CREATOR = new Parcelable.Creator<SemContextPedometer>() { // from class: com.samsung.android.hardware.context.SemContextPedometer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextPedometer createFromParcel(Parcel in) {
-            return new SemContextPedometer(in);
-        }
+    public static final Parcelable.Creator<SemContextPedometer> CREATOR =
+            new Parcelable.Creator<
+                    SemContextPedometer>() { // from class:
+                                             // com.samsung.android.hardware.context.SemContextPedometer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextPedometer createFromParcel(Parcel in) {
+                    return new SemContextPedometer(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextPedometer[] newArray(int size) {
-            return new SemContextPedometer[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextPedometer[] newArray(int size) {
+                    return new SemContextPedometer[size];
+                }
+            };
     public static final int EXERCISE_MODE_BICYCLE = 2;
     public static final int EXERCISE_MODE_NONE = -1;
     public static final int EXERCISE_MODE_NON_BICYCLE = 3;

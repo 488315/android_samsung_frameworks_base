@@ -2,8 +2,7 @@ package android.util.secutil;
 
 /* loaded from: classes4.dex */
 public final class Slog {
-    private Slog() {
-    }
+    private Slog() {}
 
     public static int v(String tag, String msg) {
         if (LogSwitcher.isShowingGlobalLog) {

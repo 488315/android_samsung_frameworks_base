@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.samsung.android.cover.CoverManager;
 import com.samsung.android.hardware.context.SemContextApproachAttribute;
 import com.samsung.android.hardware.context.SemContextManager;
@@ -35,12 +36,20 @@ public final class GestureWakeup {
             return false;
         }
         if (this.mSemContextManager == null) {
-            Log.d("GestureWakeup", "registerApproachListener, mSemContextManager is null, create again ");
-            this.mSemContextManager = (SemContextManager) this.mContext.getSystemService("scontext");
+            Log.d(
+                    "GestureWakeup",
+                    "registerApproachListener, mSemContextManager is null, create again ");
+            this.mSemContextManager =
+                    (SemContextManager) this.mContext.getSystemService("scontext");
         }
-        this.mSemContextManager.registerListener(this.mSemContextListener, 1, new SemContextApproachAttribute(currentUser));
-        GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("registerApproachListener, currentUser : "), currentUser, "GestureWakeup");
-        Settings.System.putIntForUser(this.mContext.getContentResolver(), "air_motion_wake_up", 1, -2);
+        this.mSemContextManager.registerListener(
+                this.mSemContextListener, 1, new SemContextApproachAttribute(currentUser));
+        GestureWakeup$$ExternalSyntheticOutline0.m(
+                new StringBuilder("registerApproachListener, currentUser : "),
+                currentUser,
+                "GestureWakeup");
+        Settings.System.putIntForUser(
+                this.mContext.getContentResolver(), "air_motion_wake_up", 1, -2);
         Log.d("GestureWakeup", "GestureWakeup start success");
         return true;
     }
@@ -55,8 +64,10 @@ public final class GestureWakeup {
             return;
         }
         try {
-            Settings.System.putIntForUser(this.mContext.getContentResolver(), "air_motion_wake_up", 0, -2);
-            if (this.mContext.getPackageManager().hasSystemFeature("com.sec.feature.sensorhub") && (semContextManager = this.mSemContextManager) != null) {
+            Settings.System.putIntForUser(
+                    this.mContext.getContentResolver(), "air_motion_wake_up", 0, -2);
+            if (this.mContext.getPackageManager().hasSystemFeature("com.sec.feature.sensorhub")
+                    && (semContextManager = this.mSemContextManager) != null) {
                 semContextManager.unregisterListener(this.mSemContextListener, 1);
                 Log.d("GestureWakeup", "GestureWakeupService : UnregisterApproachListener");
             }
@@ -72,8 +83,15 @@ public final class GestureWakeup {
     public final boolean checkSettingCondition(Context context) {
         boolean z;
         synchronized (this) {
-            this.mIsSettingGestureWakeUp = Settings.System.getIntForUser(context.getContentResolver(), "air_motion_wake_up", 0, -2) == 1;
-            Log.d("GestureWakeup", "checkSettingCondition() mIsSettingGestureWakeUp = " + this.mIsSettingGestureWakeUp + " User mode : -2");
+            this.mIsSettingGestureWakeUp =
+                    Settings.System.getIntForUser(
+                                    context.getContentResolver(), "air_motion_wake_up", 0, -2)
+                            == 1;
+            Log.d(
+                    "GestureWakeup",
+                    "checkSettingCondition() mIsSettingGestureWakeUp = "
+                            + this.mIsSettingGestureWakeUp
+                            + " User mode : -2");
             z = this.mIsSettingGestureWakeUp;
         }
         return z;

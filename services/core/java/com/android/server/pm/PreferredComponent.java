@@ -2,6 +2,7 @@ package com.android.server.pm;
 
 import android.content.ComponentName;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
+
 import com.android.internal.util.XmlUtils;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
@@ -21,7 +22,12 @@ public final class PreferredComponent {
     public final String[] mSetPackages;
     public final String mShortComponent;
 
-    public PreferredComponent(PreferredActivity preferredActivity, int i, ComponentName[] componentNameArr, ComponentName componentName, boolean z) {
+    public PreferredComponent(
+            PreferredActivity preferredActivity,
+            int i,
+            ComponentName[] componentNameArr,
+            ComponentName componentName,
+            boolean z) {
         this.mCallbacks = preferredActivity;
         this.mMatch = 268369920 & i;
         this.mComponent = componentName;
@@ -56,14 +62,17 @@ public final class PreferredComponent {
         this.mSetComponents = strArr3;
     }
 
-    public PreferredComponent(PreferredActivity preferredActivity, TypedXmlPullParser typedXmlPullParser) {
+    public PreferredComponent(
+            PreferredActivity preferredActivity, TypedXmlPullParser typedXmlPullParser) {
         this.mCallbacks = preferredActivity;
         String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "name");
         this.mShortComponent = attributeValue;
         ComponentName unflattenFromString = ComponentName.unflattenFromString(attributeValue);
         this.mComponent = unflattenFromString;
         if (unflattenFromString == null) {
-            this.mParseError = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Bad activity name ", attributeValue);
+            this.mParseError =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "Bad activity name ", attributeValue);
         }
         int i = 0;
         this.mMatch = typedXmlPullParser.getAttributeIntHex((String) null, "match", 0);
@@ -81,25 +90,34 @@ public final class PreferredComponent {
             if (next != 3 && next != 4) {
                 String name = typedXmlPullParser.getName();
                 if (name.equals("set")) {
-                    String attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "name");
+                    String attributeValue2 =
+                            typedXmlPullParser.getAttributeValue((String) null, "name");
                     if (attributeValue2 == null) {
                         if (this.mParseError == null) {
-                            this.mParseError = "No name in set tag in preferred activity " + this.mShortComponent;
+                            this.mParseError =
+                                    "No name in set tag in preferred activity "
+                                            + this.mShortComponent;
                         }
                     } else if (i < attributeInt) {
-                        ComponentName unflattenFromString2 = ComponentName.unflattenFromString(attributeValue2);
+                        ComponentName unflattenFromString2 =
+                                ComponentName.unflattenFromString(attributeValue2);
                         if (unflattenFromString2 != null) {
                             strArr[i] = unflattenFromString2.getPackageName();
                             strArr2[i] = unflattenFromString2.getClassName();
                             strArr3[i] = attributeValue2;
                             i++;
                         } else if (this.mParseError == null) {
-                            StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Bad set name ", attributeValue2, " in preferred activity ");
+                            StringBuilder m =
+                                    DumpUtils$$ExternalSyntheticOutline0.m(
+                                            "Bad set name ",
+                                            attributeValue2,
+                                            " in preferred activity ");
                             m.append(this.mShortComponent);
                             this.mParseError = m.toString();
                         }
                     } else if (this.mParseError == null) {
-                        this.mParseError = "Too many set tags in preferred activity " + this.mShortComponent;
+                        this.mParseError =
+                                "Too many set tags in preferred activity " + this.mShortComponent;
                     }
                     XmlUtils.skipCurrentTag(typedXmlPullParser);
                 } else {
@@ -108,7 +126,11 @@ public final class PreferredComponent {
                     if (name.equals("filter")) {
                         preferredActivity2.mFilter.readFromXml(typedXmlPullParser);
                     } else {
-                        String m2 = XmlUtils$$ExternalSyntheticOutline0.m(typedXmlPullParser, new StringBuilder("Unknown element under <preferred-activities>: "));
+                        String m2 =
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        typedXmlPullParser,
+                                        new StringBuilder(
+                                                "Unknown element under <preferred-activities>: "));
                         boolean z = PackageManagerService.DEBUG_COMPRESSION;
                         PackageManagerServiceUtils.logCriticalInfo(5, m2);
                         XmlUtils.skipCurrentTag(typedXmlPullParser);
@@ -117,7 +139,13 @@ public final class PreferredComponent {
             }
         }
         if (i != attributeInt && this.mParseError == null) {
-            StringBuilder m3 = ArrayUtils$$ExternalSyntheticOutline0.m(attributeInt, i, "Not enough set tags (expected ", " but found ", ") in ");
+            StringBuilder m3 =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            attributeInt,
+                            i,
+                            "Not enough set tags (expected ",
+                            " but found ",
+                            ") in ");
             m3.append(this.mShortComponent);
             this.mParseError = m3.toString();
         }

@@ -2,6 +2,7 @@ package android.net.http;
 
 import com.android.okhttp.internalandroidapi.AndroidResponseCacheAdapter;
 import com.android.okhttp.internalandroidapi.HasCacheHolder;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +30,8 @@ public final class HttpResponseCache extends ResponseCache implements HasCacheHo
         return null;
     }
 
-    public static synchronized HttpResponseCache install(File directory, long maxSize) throws IOException {
+    public static synchronized HttpResponseCache install(File directory, long maxSize)
+            throws IOException {
         synchronized (HttpResponseCache.class) {
             ResponseCache installed = ResponseCache.getDefault();
             if (installed instanceof HttpResponseCache) {
@@ -40,8 +42,10 @@ public final class HttpResponseCache extends ResponseCache implements HasCacheHo
                 }
                 installedResponseCache.close();
             }
-            HasCacheHolder.CacheHolder cacheHolder2 = HasCacheHolder.CacheHolder.create(directory, maxSize);
-            AndroidResponseCacheAdapter androidResponseCacheAdapter = new AndroidResponseCacheAdapter(cacheHolder2);
+            HasCacheHolder.CacheHolder cacheHolder2 =
+                    HasCacheHolder.CacheHolder.create(directory, maxSize);
+            AndroidResponseCacheAdapter androidResponseCacheAdapter =
+                    new AndroidResponseCacheAdapter(cacheHolder2);
             HttpResponseCache responseCache = new HttpResponseCache(androidResponseCacheAdapter);
             ResponseCache.setDefault(responseCache);
             return responseCache;
@@ -49,7 +53,9 @@ public final class HttpResponseCache extends ResponseCache implements HasCacheHo
     }
 
     @Override // java.net.ResponseCache
-    public CacheResponse get(URI uri, String requestMethod, Map<String, List<String>> requestHeaders) throws IOException {
+    public CacheResponse get(
+            URI uri, String requestMethod, Map<String, List<String>> requestHeaders)
+            throws IOException {
         return this.mDelegate.get(uri, requestMethod, requestHeaders);
     }
 

@@ -10,12 +10,13 @@ import android.os.RemoteException;
 public interface IInputDeviceBatteryListener extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.input.IInputDeviceBatteryListener";
 
-    void onBatteryStateChanged(IInputDeviceBatteryState iInputDeviceBatteryState) throws RemoteException;
+    void onBatteryStateChanged(IInputDeviceBatteryState iInputDeviceBatteryState)
+            throws RemoteException;
 
     public static class Default implements IInputDeviceBatteryListener {
         @Override // android.hardware.input.IInputDeviceBatteryListener
-        public void onBatteryStateChanged(IInputDeviceBatteryState batteryState) throws RemoteException {
-        }
+        public void onBatteryStateChanged(IInputDeviceBatteryState batteryState)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface IInputDeviceBatteryListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputDeviceBatteryListener {
+    public abstract static class Stub extends Binder implements IInputDeviceBatteryListener {
         static final int TRANSACTION_onBatteryStateChanged = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IInputDeviceBatteryListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputDeviceBatteryListener.DESCRIPTOR);
             }
@@ -71,7 +73,9 @@ public interface IInputDeviceBatteryListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IInputDeviceBatteryState _arg0 = (IInputDeviceBatteryState) data.readTypedObject(IInputDeviceBatteryState.CREATOR);
+                    IInputDeviceBatteryState _arg0 =
+                            (IInputDeviceBatteryState)
+                                    data.readTypedObject(IInputDeviceBatteryState.CREATOR);
                     data.enforceNoDataAvail();
                     onBatteryStateChanged(_arg0);
                     return true;
@@ -97,7 +101,8 @@ public interface IInputDeviceBatteryListener extends IInterface {
             }
 
             @Override // android.hardware.input.IInputDeviceBatteryListener
-            public void onBatteryStateChanged(IInputDeviceBatteryState batteryState) throws RemoteException {
+            public void onBatteryStateChanged(IInputDeviceBatteryState batteryState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputDeviceBatteryListener.DESCRIPTOR);

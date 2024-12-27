@@ -1,7 +1,9 @@
 package com.samsung.android.server.packagefeature.core;
 
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.packagefeature.PackageFeatureData;
+
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Map;
@@ -24,7 +26,8 @@ class PackageFeatureGroupData implements Serializable {
         for (Map.Entry entry : this.mFeatures.entrySet()) {
             String str2 = (String) entry.getKey();
             PackageFeatureRawData packageFeatureRawData = (PackageFeatureRawData) entry.getValue();
-            printWriter.print(str + "FeatureName=" + str2 + ", Size=" + packageFeatureRawData.size());
+            printWriter.print(
+                    str + "FeatureName=" + str2 + ", Size=" + packageFeatureRawData.size());
             if (set.contains(str2)) {
                 packageFeatureRawData.dump(printWriter, m$1);
             } else {
@@ -36,7 +39,8 @@ class PackageFeatureGroupData implements Serializable {
 
     public final PackageFeatureData getCopiedPackageFeature(String str) {
         PackageFeatureData packageFeatureData = new PackageFeatureData();
-        PackageFeatureRawData packageFeatureRawData = (PackageFeatureRawData) this.mFeatures.get(str);
+        PackageFeatureRawData packageFeatureRawData =
+                (PackageFeatureRawData) this.mFeatures.get(str);
         if (packageFeatureRawData == null) {
             packageFeatureRawData = new PackageFeatureRawData();
             this.mFeatures.put(str, packageFeatureRawData);
@@ -50,7 +54,8 @@ class PackageFeatureGroupData implements Serializable {
     }
 
     public final void putPackageFeature(String str, String str2, String str3, String str4) {
-        PackageFeatureRawData packageFeatureRawData = (PackageFeatureRawData) this.mFeatures.get(str);
+        PackageFeatureRawData packageFeatureRawData =
+                (PackageFeatureRawData) this.mFeatures.get(str);
         if (packageFeatureRawData == null) {
             packageFeatureRawData = new PackageFeatureRawData();
             this.mFeatures.put(str, packageFeatureRawData);

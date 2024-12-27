@@ -11,6 +11,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.CertificateList;
 import com.android.internal.org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.util.io.Streams;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -42,11 +43,13 @@ public class CertificateFactory extends CertificateFactorySpi {
     private int sCrlDataObjectCount = 0;
     private InputStream currentCrlStream = null;
 
-    private Certificate readDERCertificate(ASN1InputStream dIn) throws IOException, CertificateParsingException {
+    private Certificate readDERCertificate(ASN1InputStream dIn)
+            throws IOException, CertificateParsingException {
         return getCertificate(ASN1Sequence.getInstance(dIn.readObject()));
     }
 
-    private Certificate readPEMCertificate(InputStream in) throws IOException, CertificateParsingException {
+    private Certificate readPEMCertificate(InputStream in)
+            throws IOException, CertificateParsingException {
         return getCertificate(PEM_CERT_PARSER.readPEMObject(in));
     }
 
@@ -54,11 +57,19 @@ public class CertificateFactory extends CertificateFactorySpi {
         if (seq == null) {
             return null;
         }
-        if (seq.size() > 1 && (seq.getObjectAt(0) instanceof ASN1ObjectIdentifier) && seq.getObjectAt(0).equals(PKCSObjectIdentifiers.signedData)) {
-            this.sData = SignedData.getInstance(ASN1Sequence.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true)).getCertificates();
+        if (seq.size() > 1
+                && (seq.getObjectAt(0) instanceof ASN1ObjectIdentifier)
+                && seq.getObjectAt(0).equals(PKCSObjectIdentifiers.signedData)) {
+            this.sData =
+                    SignedData.getInstance(
+                                    ASN1Sequence.getInstance(
+                                            (ASN1TaggedObject) seq.getObjectAt(1), true))
+                            .getCertificates();
             return getCertificate();
         }
-        return new X509CertificateObject(this.bcHelper, com.android.internal.org.bouncycastle.asn1.x509.Certificate.getInstance(seq));
+        return new X509CertificateObject(
+                this.bcHelper,
+                com.android.internal.org.bouncycastle.asn1.x509.Certificate.getInstance(seq));
     }
 
     private Certificate getCertificate() throws CertificateParsingException {
@@ -69,7 +80,10 @@ public class CertificateFactory extends CertificateFactorySpi {
                 this.sDataObjectCount = i + 1;
                 Object obj = aSN1Set.getObjectAt(i);
                 if (obj instanceof ASN1Sequence) {
-                    return new X509CertificateObject(this.bcHelper, com.android.internal.org.bouncycastle.asn1.x509.Certificate.getInstance(obj));
+                    return new X509CertificateObject(
+                            this.bcHelper,
+                            com.android.internal.org.bouncycastle.asn1.x509.Certificate.getInstance(
+                                    obj));
                 }
             }
             return null;
@@ -93,8 +107,14 @@ public class CertificateFactory extends CertificateFactorySpi {
         if (seq == null) {
             return null;
         }
-        if (seq.size() > 1 && (seq.getObjectAt(0) instanceof ASN1ObjectIdentifier) && seq.getObjectAt(0).equals(PKCSObjectIdentifiers.signedData)) {
-            this.sCrlData = SignedData.getInstance(ASN1Sequence.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true)).getCRLs();
+        if (seq.size() > 1
+                && (seq.getObjectAt(0) instanceof ASN1ObjectIdentifier)
+                && seq.getObjectAt(0).equals(PKCSObjectIdentifiers.signedData)) {
+            this.sCrlData =
+                    SignedData.getInstance(
+                                    ASN1Sequence.getInstance(
+                                            (ASN1TaggedObject) seq.getObjectAt(1), true))
+                            .getCRLs();
             return getCRL();
         }
         return createCRL(CertificateList.getInstance(seq));
@@ -238,7 +258,8 @@ public class CertificateFactory extends CertificateFactorySpi {
     }
 
     @Override // java.security.cert.CertificateFactorySpi
-    public CertPath engineGenerateCertPath(InputStream inStream, String encoding) throws CertificateException {
+    public CertPath engineGenerateCertPath(InputStream inStream, String encoding)
+            throws CertificateException {
         return new PKIXCertPath(inStream, encoding);
     }
 
@@ -246,7 +267,9 @@ public class CertificateFactory extends CertificateFactorySpi {
     public CertPath engineGenerateCertPath(List certificates) throws CertificateException {
         for (Object obj : certificates) {
             if (obj != null && !(obj instanceof X509Certificate)) {
-                throw new CertificateException("list contains non X509Certificate object while creating CertPath\n" + obj.toString());
+                throw new CertificateException(
+                        "list contains non X509Certificate object while creating CertPath\n"
+                                + obj.toString());
             }
         }
         return new PKIXCertPath(certificates);

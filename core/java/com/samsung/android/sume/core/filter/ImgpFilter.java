@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.filter;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.DeriveBufferGroup;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
@@ -16,6 +17,7 @@ import com.samsung.android.sume.core.functional.OperatorChain;
 import com.samsung.android.sume.core.functional.OperatorMap;
 import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.plugin.ImgpPlugin;
+
 import java.io.FileDescriptor;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -29,7 +31,8 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
     private final ImgpDescriptor descriptor;
     private Operator imgp;
 
-    public static MediaFilter of(MediaFilter successor, MediaFilter preFilter, MediaFilter postFilter) {
+    public static MediaFilter of(
+            MediaFilter successor, MediaFilter preFilter, MediaFilter postFilter) {
         ImgpDecorateFilter filter = new ImgpDecorateFilter(successor);
         filter.setPreFilter(preFilter);
         filter.setPostFilter(postFilter);
@@ -46,17 +49,29 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
         if (this.descriptor.getFormat() != null) {
             this.descriptor.getFormat().set(this.descriptor.getOption().asInputOption());
         }
-        this.imgp = (Operator) Stream.of(this.descriptor.getImgpTypeName(), this.descriptor.getImgpType()).filter(new Predicate() { // from class: com.samsung.android.sume.core.filter.ImgpFilter$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Objects.nonNull(obj);
-            }
-        }).findFirst().map(new Function() { // from class: com.samsung.android.sume.core.filter.ImgpFilter$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ImgpFilter.this.m9137lambda$init$0$comsamsungandroidsumecorefilterImgpFilter(obj);
-            }
-        }).orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
+        this.imgp =
+                (Operator)
+                        Stream.of(this.descriptor.getImgpTypeName(), this.descriptor.getImgpType())
+                                .filter(
+                                        new Predicate() { // from class:
+                                                          // com.samsung.android.sume.core.filter.ImgpFilter$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return Objects.nonNull(obj);
+                                            }
+                                        })
+                                .findFirst()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.filter.ImgpFilter$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return ImgpFilter.this
+                                                        .m9137lambda$init$0$comsamsungandroidsumecorefilterImgpFilter(
+                                                                obj);
+                                            }
+                                        })
+                                .orElseThrow(new MutableMediaBuffer$$ExternalSyntheticLambda3());
         if (this.imgp instanceof OperatorMap) {
             ((OperatorMap) this.imgp).config(this.descriptor);
         } else if (this.imgp instanceof OperatorChain) {
@@ -65,7 +80,8 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
     }
 
     /* renamed from: lambda$init$0$com-samsung-android-sume-core-filter-ImgpFilter, reason: not valid java name */
-    /* synthetic */ Operator m9137lambda$init$0$comsamsungandroidsumecorefilterImgpFilter(Object it) {
+    /* synthetic */ Operator m9137lambda$init$0$comsamsungandroidsumecorefilterImgpFilter(
+            Object it) {
         if (it instanceof String) {
             return ((ImgpPlugin) this.plugin).getImgProcessor((String) it);
         }
@@ -84,11 +100,22 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
         if (format instanceof MutableMediaFormat) {
             format = ((MutableMediaFormat) format).toMediaFormat();
         }
-        Def.check(format != null, "designate format is not given, one of output buffer or descriptor should be given", new Object[0]);
+        Def.check(
+                format != null,
+                "designate format is not given, one of output buffer or descriptor should be given",
+                new Object[0]);
         if (((Boolean) format.get("keep-org-ratio", false)).booleanValue()) {
             MutableMediaFormat fmt = format.toMutableFormat();
-            fmt.setCols((int) (fmt.getCols() / ((Float) ibuf.getExtra("scale-cols", Float.valueOf(1.0f))).floatValue()));
-            fmt.setRows((int) (fmt.getRows() / ((Float) ibuf.getExtra("scale-rows", Float.valueOf(1.0f))).floatValue()));
+            fmt.setCols(
+                    (int)
+                            (fmt.getCols()
+                                    / ((Float) ibuf.getExtra("scale-cols", Float.valueOf(1.0f)))
+                                            .floatValue()));
+            fmt.setRows(
+                    (int)
+                            (fmt.getRows()
+                                    / ((Float) ibuf.getExtra("scale-rows", Float.valueOf(1.0f)))
+                                            .floatValue()));
             format = fmt.toMediaFormat();
         }
         if (ibuf.containsExtra("force-rotate")) {
@@ -100,7 +127,9 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
         if (((Boolean) format.get("rotate-ifnot-fit", false)).booleanValue()) {
             MediaFormat src = ibuf.getFormat();
             MediaFormat dst = format;
-            boolean requestForceRotate = (src.getCols() > dst.getCols() && src.getRows() < dst.getRows()) ^ (src.getCols() < dst.getCols() && src.getRows() > dst.getRows());
+            boolean requestForceRotate =
+                    (src.getCols() > dst.getCols() && src.getRows() < dst.getRows())
+                            ^ (src.getCols() < dst.getCols() && src.getRows() > dst.getRows());
             if (requestForceRotate) {
                 MutableMediaFormat fmt3 = format.toMutableFormat();
                 fmt3.set("rotation-degrees", 90);
@@ -114,24 +143,34 @@ public class ImgpFilter extends PluginFilter<ImgpPlugin> {
             format = fmt4.toMediaFormat();
         }
         if (obuf.containsExtra(Message.KEY_OUT_FILE)) {
-            format.toMutableFormat().set(Message.KEY_OUT_FILE, (String) obuf.getExtra(Message.KEY_OUT_FILE));
+            format.toMutableFormat()
+                    .set(Message.KEY_OUT_FILE, (String) obuf.getExtra(Message.KEY_OUT_FILE));
         }
         if (ibuf.getFormat() != null) {
-            format = UpdatableMediaFormat.of(format).with(ibuf.getFormat()).set(UpdatableMediaFormat.UPDATE_AT_ALLOC);
+            format =
+                    UpdatableMediaFormat.of(format)
+                            .with(ibuf.getFormat())
+                            .set(UpdatableMediaFormat.UPDATE_AT_ALLOC);
         }
         MediaBuffer outMutableBuffer = MediaBuffer.mutableOf(format);
         outMutableBuffer.setExtra(obuf.getExtra());
         obuf.put((MediaBuffer) this.imgp.run(ibuf, outMutableBuffer));
         obuf.addExtra(ibuf.getExtra());
-        if (ibuf != obuf.get() && !(ibuf instanceof DeriveBufferGroup) && (obuf.get() instanceof DeriveBufferGroup)) {
+        if (ibuf != obuf.get()
+                && !(ibuf instanceof DeriveBufferGroup)
+                && (obuf.get() instanceof DeriveBufferGroup)) {
             final int contentId = ((Integer) obuf.getExtra(Message.KEY_CONTENTS_ID, -1)).intValue();
             final int numBlocks = (int) obuf.size();
-            obuf.stream().forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.ImgpFilter$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ImgpFilter.lambda$run$1(contentId, numBlocks, (MediaBuffer) obj);
-                }
-            });
+            obuf.stream()
+                    .forEach(
+                            new Consumer() { // from class:
+                                             // com.samsung.android.sume.core.filter.ImgpFilter$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ImgpFilter.lambda$run$1(
+                                            contentId, numBlocks, (MediaBuffer) obj);
+                                }
+                            });
         }
         Log.d(TAG, "obuf: " + obuf);
         return obuf;

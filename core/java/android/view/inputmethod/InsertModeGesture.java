@@ -5,26 +5,31 @@ import android.os.CancellationSignal;
 import android.os.CancellationSignalBeamer;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class InsertModeGesture extends CancellableHandwritingGesture implements Parcelable {
-    public static final Parcelable.Creator<InsertModeGesture> CREATOR = new Parcelable.Creator<InsertModeGesture>() { // from class: android.view.inputmethod.InsertModeGesture.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsertModeGesture createFromParcel(Parcel source) {
-            return new InsertModeGesture(source);
-        }
+    public static final Parcelable.Creator<InsertModeGesture> CREATOR =
+            new Parcelable.Creator<
+                    InsertModeGesture>() { // from class:
+                                           // android.view.inputmethod.InsertModeGesture.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsertModeGesture createFromParcel(Parcel source) {
+                    return new InsertModeGesture(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsertModeGesture[] newArray(int size) {
-            return new InsertModeGesture[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsertModeGesture[] newArray(int size) {
+                    return new InsertModeGesture[size];
+                }
+            };
     private PointF mPoint;
 
-    private InsertModeGesture(PointF point, String fallbackText, CancellationSignal cancellationSignal) {
+    private InsertModeGesture(
+            PointF point, String fallbackText, CancellationSignal cancellationSignal) {
         this.mType = 128;
         this.mPoint = point;
         this.mFallbackText = fallbackText;
@@ -105,6 +110,7 @@ public final class InsertModeGesture extends CancellableHandwritingGesture imple
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString8(this.mFallbackText);
         dest.writeTypedObject(this.mPoint, flags);
-        dest.writeStrongBinder(CancellationSignalBeamer.Sender.beamFromScope(this.mCancellationSignal));
+        dest.writeStrongBinder(
+                CancellationSignalBeamer.Sender.beamFromScope(this.mCancellationSignal));
     }
 }

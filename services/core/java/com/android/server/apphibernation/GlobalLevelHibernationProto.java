@@ -3,6 +3,7 @@ package com.android.server.apphibernation;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,9 @@ public final class GlobalLevelHibernationProto implements ProtoReadWriter {
                     } else if (fieldNumber == 2) {
                         globalLevelState.hibernated = protoInputStream.readBoolean(1133871366146L);
                     } else if (fieldNumber != 3) {
-                        Slog.w("GlobalLevelHibernationProtoReadWriter", "Undefined field in proto: " + protoInputStream.getFieldNumber());
+                        Slog.w(
+                                "GlobalLevelHibernationProtoReadWriter",
+                                "Undefined field in proto: " + protoInputStream.getFieldNumber());
                     } else {
                         globalLevelState.savedByte = protoInputStream.readLong(1112396529667L);
                     }

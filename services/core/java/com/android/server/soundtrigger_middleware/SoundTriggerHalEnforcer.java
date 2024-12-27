@@ -11,7 +11,7 @@ import android.media.soundtrigger_middleware.RecognitionEventSys;
 import android.os.DeadObjectException;
 import android.os.IBinder;
 import android.util.Slog;
-import com.android.server.soundtrigger_middleware.ISoundTriggerHal;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,18 +33,26 @@ public final class SoundTriggerHalEnforcer implements ISoundTriggerHal {
         public final void modelUnloaded(int i) {
             synchronized (SoundTriggerHalEnforcer.this.mModelStates) {
                 try {
-                    ModelState modelState = (ModelState) ((HashMap) SoundTriggerHalEnforcer.this.mModelStates).get(Integer.valueOf(i));
+                    ModelState modelState =
+                            (ModelState)
+                                    ((HashMap) SoundTriggerHalEnforcer.this.mModelStates)
+                                            .get(Integer.valueOf(i));
                     if (modelState == null) {
-                        Slog.wtfStack("SoundTriggerHalEnforcer", "Unexpected unload event for model: " + i);
+                        Slog.wtfStack(
+                                "SoundTriggerHalEnforcer",
+                                "Unexpected unload event for model: " + i);
                         SoundTriggerHalEnforcer.this.reboot();
                         return;
                     }
                     if (modelState == ModelState.ACTIVE) {
-                        Slog.wtfStack("SoundTriggerHalEnforcer", "Trying to unload an active model: " + i);
+                        Slog.wtfStack(
+                                "SoundTriggerHalEnforcer",
+                                "Trying to unload an active model: " + i);
                         SoundTriggerHalEnforcer.this.reboot();
                         return;
                     }
-                    ((HashMap) SoundTriggerHalEnforcer.this.mModelStates).remove(Integer.valueOf(i));
+                    ((HashMap) SoundTriggerHalEnforcer.this.mModelStates)
+                            .remove(Integer.valueOf(i));
                     this.mUnderlying.modelUnloaded(i);
                 } catch (Throwable th) {
                     throw th;
@@ -53,23 +61,34 @@ public final class SoundTriggerHalEnforcer implements ISoundTriggerHal {
         }
 
         @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal.ModelCallback
-        public final void phraseRecognitionCallback(int i, PhraseRecognitionEventSys phraseRecognitionEventSys) {
+        public final void phraseRecognitionCallback(
+                int i, PhraseRecognitionEventSys phraseRecognitionEventSys) {
             int i2;
             synchronized (SoundTriggerHalEnforcer.this.mModelStates) {
                 try {
-                    if (((ModelState) ((HashMap) SoundTriggerHalEnforcer.this.mModelStates).get(Integer.valueOf(i))) == null) {
-                        Slog.wtfStack("SoundTriggerHalEnforcer", "Unexpected recognition event for model: " + i);
+                    if (((ModelState)
+                                    ((HashMap) SoundTriggerHalEnforcer.this.mModelStates)
+                                            .get(Integer.valueOf(i)))
+                            == null) {
+                        Slog.wtfStack(
+                                "SoundTriggerHalEnforcer",
+                                "Unexpected recognition event for model: " + i);
                         SoundTriggerHalEnforcer.this.reboot();
                         return;
                     }
-                    RecognitionEvent recognitionEvent = phraseRecognitionEventSys.phraseRecognitionEvent.common;
+                    RecognitionEvent recognitionEvent =
+                            phraseRecognitionEventSys.phraseRecognitionEvent.common;
                     boolean z = recognitionEvent.recognitionStillActive;
                     if (z && (i2 = recognitionEvent.status) != 0 && i2 != 3) {
-                        Slog.wtfStack("SoundTriggerHalEnforcer", "recognitionStillActive is only allowed when the recognition status is SUCCESS");
+                        Slog.wtfStack(
+                                "SoundTriggerHalEnforcer",
+                                "recognitionStillActive is only allowed when the recognition status"
+                                    + " is SUCCESS");
                         SoundTriggerHalEnforcer.this.reboot();
                     } else {
                         if (!z) {
-                            ((HashMap) SoundTriggerHalEnforcer.this.mModelStates).replace(Integer.valueOf(i), ModelState.INACTIVE);
+                            ((HashMap) SoundTriggerHalEnforcer.this.mModelStates)
+                                    .replace(Integer.valueOf(i), ModelState.INACTIVE);
                         }
                         this.mUnderlying.phraseRecognitionCallback(i, phraseRecognitionEventSys);
                     }
@@ -84,19 +103,28 @@ public final class SoundTriggerHalEnforcer implements ISoundTriggerHal {
             int i2;
             synchronized (SoundTriggerHalEnforcer.this.mModelStates) {
                 try {
-                    if (((ModelState) ((HashMap) SoundTriggerHalEnforcer.this.mModelStates).get(Integer.valueOf(i))) == null) {
-                        Slog.wtfStack("SoundTriggerHalEnforcer", "Unexpected recognition event for model: " + i);
+                    if (((ModelState)
+                                    ((HashMap) SoundTriggerHalEnforcer.this.mModelStates)
+                                            .get(Integer.valueOf(i)))
+                            == null) {
+                        Slog.wtfStack(
+                                "SoundTriggerHalEnforcer",
+                                "Unexpected recognition event for model: " + i);
                         SoundTriggerHalEnforcer.this.reboot();
                         return;
                     }
                     RecognitionEvent recognitionEvent = recognitionEventSys.recognitionEvent;
                     boolean z = recognitionEvent.recognitionStillActive;
                     if (z && (i2 = recognitionEvent.status) != 0 && i2 != 3) {
-                        Slog.wtfStack("SoundTriggerHalEnforcer", "recognitionStillActive is only allowed when the recognition status is SUCCESS");
+                        Slog.wtfStack(
+                                "SoundTriggerHalEnforcer",
+                                "recognitionStillActive is only allowed when the recognition status"
+                                    + " is SUCCESS");
                         SoundTriggerHalEnforcer.this.reboot();
                     } else {
                         if (!z) {
-                            ((HashMap) SoundTriggerHalEnforcer.this.mModelStates).replace(Integer.valueOf(i), ModelState.INACTIVE);
+                            ((HashMap) SoundTriggerHalEnforcer.this.mModelStates)
+                                    .replace(Integer.valueOf(i), ModelState.INACTIVE);
                         }
                         this.mUnderlying.recognitionCallback(i, recognitionEventSys);
                     }
@@ -123,7 +151,7 @@ public final class SoundTriggerHalEnforcer implements ISoundTriggerHal {
             ACTIVE = modelState2;
             ModelState modelState3 = new ModelState("PENDING_STOP", 2);
             PENDING_STOP = modelState3;
-            $VALUES = new ModelState[]{modelState, modelState2, modelState3};
+            $VALUES = new ModelState[] {modelState, modelState2, modelState3};
         }
 
         public static ModelState valueOf(String str) {
@@ -203,12 +231,16 @@ public final class SoundTriggerHalEnforcer implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadPhraseSoundModel(
+            PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         int loadPhraseSoundModel;
         try {
             synchronized (this.mModelStates) {
-                loadPhraseSoundModel = this.mUnderlying.loadPhraseSoundModel(phraseSoundModel, new ModelCallbackEnforcer(modelCallback));
-                ((HashMap) this.mModelStates).put(Integer.valueOf(loadPhraseSoundModel), ModelState.INACTIVE);
+                loadPhraseSoundModel =
+                        this.mUnderlying.loadPhraseSoundModel(
+                                phraseSoundModel, new ModelCallbackEnforcer(modelCallback));
+                ((HashMap) this.mModelStates)
+                        .put(Integer.valueOf(loadPhraseSoundModel), ModelState.INACTIVE);
             }
             return loadPhraseSoundModel;
         } catch (RuntimeException e) {
@@ -218,12 +250,16 @@ public final class SoundTriggerHalEnforcer implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadSoundModel(SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadSoundModel(
+            SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         int loadSoundModel;
         try {
             synchronized (this.mModelStates) {
-                loadSoundModel = this.mUnderlying.loadSoundModel(soundModel, new ModelCallbackEnforcer(modelCallback));
-                ((HashMap) this.mModelStates).put(Integer.valueOf(loadSoundModel), ModelState.INACTIVE);
+                loadSoundModel =
+                        this.mUnderlying.loadSoundModel(
+                                soundModel, new ModelCallbackEnforcer(modelCallback));
+                ((HashMap) this.mModelStates)
+                        .put(Integer.valueOf(loadSoundModel), ModelState.INACTIVE);
             }
             return loadSoundModel;
         } catch (RuntimeException e) {

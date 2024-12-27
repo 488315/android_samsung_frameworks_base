@@ -18,8 +18,11 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import com.google.android.collect.Sets;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,15 +33,18 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
-public class ChooseTypeAndAccountActivity extends Activity implements AccountManagerCallback<Bundle> {
+public class ChooseTypeAndAccountActivity extends Activity
+        implements AccountManagerCallback<Bundle> {
     public static final String EXTRA_ADD_ACCOUNT_AUTH_TOKEN_TYPE_STRING = "authTokenType";
     public static final String EXTRA_ADD_ACCOUNT_OPTIONS_BUNDLE = "addAccountOptions";
-    public static final String EXTRA_ADD_ACCOUNT_REQUIRED_FEATURES_STRING_ARRAY = "addAccountRequiredFeatures";
+    public static final String EXTRA_ADD_ACCOUNT_REQUIRED_FEATURES_STRING_ARRAY =
+            "addAccountRequiredFeatures";
     public static final String EXTRA_ALLOWABLE_ACCOUNTS_ARRAYLIST = "allowableAccounts";
     public static final String EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY = "allowableAccountTypes";
 
     @Deprecated
     public static final String EXTRA_ALWAYS_PROMPT_FOR_ACCOUNT = "alwaysPromptForAccount";
+
     public static final String EXTRA_DESCRIPTION_TEXT_OVERRIDE = "descriptionTextOverride";
     public static final String EXTRA_SELECTED_ACCOUNT = "selectedAccount";
     private static final String KEY_INSTANCE_STATE_ACCOUNTS_LIST = "accountsList";
@@ -71,14 +77,22 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
     @Override // android.app.Activity
     public void onCreate(Bundle savedInstanceState) {
         if (Log.isLoggable(TAG, 2)) {
-            Log.v(TAG, "ChooseTypeAndAccountActivity.onCreate(savedInstanceState=" + savedInstanceState + NavigationBarInflaterView.KEY_CODE_END);
+            Log.v(
+                    TAG,
+                    "ChooseTypeAndAccountActivity.onCreate(savedInstanceState="
+                            + savedInstanceState
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         getWindow().addSystemFlags(524288);
         this.mCallingUid = getLaunchedFromUid();
         this.mCallingPackage = getLaunchedFromPackage();
         if (this.mCallingUid != 0 && this.mCallingPackage != null) {
-            Bundle restrictions = UserManager.get(this).getUserRestrictions(new UserHandle(UserHandle.getUserId(this.mCallingUid)));
-            this.mDisallowAddAccounts = restrictions.getBoolean(UserManager.DISALLOW_MODIFY_ACCOUNTS, false);
+            Bundle restrictions =
+                    UserManager.get(this)
+                            .getUserRestrictions(
+                                    new UserHandle(UserHandle.getUserId(this.mCallingUid)));
+            this.mDisallowAddAccounts =
+                    restrictions.getBoolean(UserManager.DISALLOW_MODIFY_ACCOUNTS, false);
         }
         Intent intent = getIntent();
         this.mSetOfAllowableAccounts = getAllowableAccountSet(intent);
@@ -86,11 +100,16 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         this.mDescriptionOverride = intent.getStringExtra(EXTRA_DESCRIPTION_TEXT_OVERRIDE);
         if (savedInstanceState != null) {
             this.mPendingRequest = savedInstanceState.getInt(KEY_INSTANCE_STATE_PENDING_REQUEST);
-            this.mExistingAccounts = savedInstanceState.getParcelableArray(KEY_INSTANCE_STATE_EXISTING_ACCOUNTS);
-            this.mSelectedAccountName = savedInstanceState.getString(KEY_INSTANCE_STATE_SELECTED_ACCOUNT_NAME);
-            this.mSelectedAddNewAccount = savedInstanceState.getBoolean(KEY_INSTANCE_STATE_SELECTED_ADD_ACCOUNT, false);
-            Parcelable[] accounts = savedInstanceState.getParcelableArray(KEY_INSTANCE_STATE_ACCOUNTS_LIST);
-            ArrayList<Integer> visibility = savedInstanceState.getIntegerArrayList(KEY_INSTANCE_STATE_VISIBILITY_LIST);
+            this.mExistingAccounts =
+                    savedInstanceState.getParcelableArray(KEY_INSTANCE_STATE_EXISTING_ACCOUNTS);
+            this.mSelectedAccountName =
+                    savedInstanceState.getString(KEY_INSTANCE_STATE_SELECTED_ACCOUNT_NAME);
+            this.mSelectedAddNewAccount =
+                    savedInstanceState.getBoolean(KEY_INSTANCE_STATE_SELECTED_ADD_ACCOUNT, false);
+            Parcelable[] accounts =
+                    savedInstanceState.getParcelableArray(KEY_INSTANCE_STATE_ACCOUNTS_LIST);
+            ArrayList<Integer> visibility =
+                    savedInstanceState.getIntegerArrayList(KEY_INSTANCE_STATE_VISIBILITY_LIST);
             this.mAccounts = new LinkedHashMap<>();
             for (int i = 0; i < accounts.length; i++) {
                 this.mAccounts.put((Account) accounts[i], visibility.get(i));
@@ -98,7 +117,8 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         } else {
             this.mPendingRequest = 0;
             this.mExistingAccounts = null;
-            Account selectedAccount = (Account) intent.getParcelableExtra(EXTRA_SELECTED_ACCOUNT, Account.class);
+            Account selectedAccount =
+                    (Account) intent.getParcelableExtra(EXTRA_SELECTED_ACCOUNT, Account.class);
             if (selectedAccount != null) {
                 this.mSelectedAccountName = selectedAccount.name;
             }
@@ -114,14 +134,22 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
             requestWindowFeature(1);
             setContentView(R.layout.app_not_authorized);
             TextView view = (TextView) findViewById(R.id.description);
-            String text = ((DevicePolicyManager) getSystemService(DevicePolicyManager.class)).getResources().getString(DevicePolicyResources.Strings.Core.CANT_ADD_ACCOUNT_MESSAGE, new Supplier() { // from class: android.accounts.ChooseTypeAndAccountActivity$$ExternalSyntheticLambda0
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    String lambda$onCreate$0;
-                    lambda$onCreate$0 = ChooseTypeAndAccountActivity.this.lambda$onCreate$0();
-                    return lambda$onCreate$0;
-                }
-            });
+            String text =
+                    ((DevicePolicyManager) getSystemService(DevicePolicyManager.class))
+                            .getResources()
+                            .getString(
+                                    DevicePolicyResources.Strings.Core.CANT_ADD_ACCOUNT_MESSAGE,
+                                    new Supplier() { // from class:
+                                        // android.accounts.ChooseTypeAndAccountActivity$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            String lambda$onCreate$0;
+                                            lambda$onCreate$0 =
+                                                    ChooseTypeAndAccountActivity.this
+                                                            .lambda$onCreate$0();
+                                            return lambda$onCreate$0;
+                                        }
+                                    });
             view.lambda$setTextAsync$0(text);
             this.mDontShowPicker = true;
         }
@@ -138,7 +166,11 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
             }
         }
         String[] listItems = getListOfDisplayableOptions(this.mPossiblyVisibleAccounts);
-        this.mSelectedItemIndex = getItemIndexToSelect(this.mPossiblyVisibleAccounts, this.mSelectedAccountName, this.mSelectedAddNewAccount);
+        this.mSelectedItemIndex =
+                getItemIndexToSelect(
+                        this.mPossiblyVisibleAccounts,
+                        this.mSelectedAccountName,
+                        this.mSelectedAddNewAccount);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_type_and_account);
         overrideDescriptionIfSupplied(this.mDescriptionOverride);
@@ -165,14 +197,17 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_INSTANCE_STATE_PENDING_REQUEST, this.mPendingRequest);
         if (this.mPendingRequest == 2) {
-            outState.putParcelableArray(KEY_INSTANCE_STATE_EXISTING_ACCOUNTS, this.mExistingAccounts);
+            outState.putParcelableArray(
+                    KEY_INSTANCE_STATE_EXISTING_ACCOUNTS, this.mExistingAccounts);
         }
         if (this.mSelectedItemIndex != -1) {
             if (this.mSelectedItemIndex == this.mPossiblyVisibleAccounts.size()) {
                 outState.putBoolean(KEY_INSTANCE_STATE_SELECTED_ADD_ACCOUNT, true);
             } else {
                 outState.putBoolean(KEY_INSTANCE_STATE_SELECTED_ADD_ACCOUNT, false);
-                outState.putString(KEY_INSTANCE_STATE_SELECTED_ACCOUNT_NAME, this.mPossiblyVisibleAccounts.get(this.mSelectedItemIndex).name);
+                outState.putString(
+                        KEY_INSTANCE_STATE_SELECTED_ACCOUNT_NAME,
+                        this.mPossiblyVisibleAccounts.get(this.mSelectedItemIndex).name);
             }
         }
         Parcelable[] accounts = new Parcelable[this.mAccounts.size()];
@@ -209,7 +244,13 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
             if (data != null) {
                 data.getExtras();
             }
-            Log.v(TAG, "ChooseTypeAndAccountActivity.onActivityResult(reqCode=" + requestCode + ", resCode=" + resultCode + NavigationBarInflaterView.KEY_CODE_END);
+            Log.v(
+                    TAG,
+                    "ChooseTypeAndAccountActivity.onActivityResult(reqCode="
+                            + requestCode
+                            + ", resCode="
+                            + resultCode
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mPendingRequest = 0;
         if (resultCode == 0) {
@@ -223,7 +264,10 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         if (resultCode == -1) {
             if (requestCode == 1) {
                 if (data == null || (accountType = data.getStringExtra("accountType")) == null) {
-                    Log.d(TAG, "ChooseTypeAndAccountActivity.onActivityResult: unable to find account type, pretending the request was canceled");
+                    Log.d(
+                            TAG,
+                            "ChooseTypeAndAccountActivity.onActivityResult: unable to find account"
+                                    + " type, pretending the request was canceled");
                 } else {
                     runAddAccountForAuthenticator(accountType);
                     return;
@@ -236,7 +280,9 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
                     accountType2 = data.getStringExtra("accountType");
                 }
                 if (accountName == null || accountType2 == null) {
-                    Account[] currentAccounts = AccountManager.get(this).getAccountsForPackage(this.mCallingPackage, this.mCallingUid);
+                    Account[] currentAccounts =
+                            AccountManager.get(this)
+                                    .getAccountsForPackage(this.mCallingPackage, this.mCallingUid);
                     Set<Account> preExistingAccounts = new HashSet<>();
                     for (Parcelable accountParcel : this.mExistingAccounts) {
                         preExistingAccounts.add((Account) accountParcel);
@@ -262,7 +308,10 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
                     return;
                 }
             }
-            Log.d(TAG, "ChooseTypeAndAccountActivity.onActivityResult: unable to find added account, pretending the request was canceled");
+            Log.d(
+                    TAG,
+                    "ChooseTypeAndAccountActivity.onActivityResult: unable to find added account,"
+                            + " pretending the request was canceled");
         }
         if (Log.isLoggable(TAG, 2)) {
             Log.v(TAG, "ChooseTypeAndAccountActivity.onActivityResult: canceled");
@@ -276,9 +325,11 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
             Log.v(TAG, "runAddAccountForAuthenticator: " + type);
         }
         Bundle options = getIntent().getBundleExtra(EXTRA_ADD_ACCOUNT_OPTIONS_BUNDLE);
-        String[] requiredFeatures = getIntent().getStringArrayExtra(EXTRA_ADD_ACCOUNT_REQUIRED_FEATURES_STRING_ARRAY);
+        String[] requiredFeatures =
+                getIntent().getStringArrayExtra(EXTRA_ADD_ACCOUNT_REQUIRED_FEATURES_STRING_ARRAY);
         String authTokenType = getIntent().getStringExtra("authTokenType");
-        AccountManager.get(this).addAccount(type, authTokenType, requiredFeatures, options, null, this, null);
+        AccountManager.get(this)
+                .addAccount(type, authTokenType, requiredFeatures, options, null, this, null);
     }
 
     @Override // android.accounts.AccountManagerCallback
@@ -288,7 +339,9 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
             Intent intent = (Intent) accountManagerResult.getParcelable("intent", Intent.class);
             if (intent != null) {
                 this.mPendingRequest = 2;
-                this.mExistingAccounts = AccountManager.get(this).getAccountsForPackage(this.mCallingPackage, this.mCallingUid);
+                this.mExistingAccounts =
+                        AccountManager.get(this)
+                                .getAccountsForPackage(this.mCallingPackage, this.mCallingUid);
                 intent.setFlags(intent.getFlags() & (-268435457));
                 startActivityForResult(new Intent(intent), 2);
                 return;
@@ -318,7 +371,10 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
 
     private void setResultAndFinish(String accountName, String accountType) {
         Account account = new Account(accountName, accountType);
-        Integer oldVisibility = Integer.valueOf(AccountManager.get(this).getAccountVisibility(account, this.mCallingPackage));
+        Integer oldVisibility =
+                Integer.valueOf(
+                        AccountManager.get(this)
+                                .getAccountVisibility(account, this.mCallingPackage));
         if (oldVisibility != null && oldVisibility.intValue() == 4) {
             AccountManager.get(this).setAccountVisibility(account, this.mCallingPackage, 2);
         }
@@ -332,7 +388,10 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         bundle.putString("accountType", accountType);
         setResult(-1, new Intent().putExtras(bundle));
         if (Log.isLoggable(TAG, 2)) {
-            Log.v(TAG, "ChooseTypeAndAccountActivity.setResultAndFinish: selected account " + account.toSafeString());
+            Log.v(
+                    TAG,
+                    "ChooseTypeAndAccountActivity.setResultAndFinish: selected account "
+                            + account.toSafeString());
         }
         finish();
     }
@@ -343,15 +402,24 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         }
         Intent intent = new Intent(this, (Class<?>) ChooseAccountTypeActivity.class);
         intent.setFlags(524288);
-        intent.putExtra(EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY, getIntent().getStringArrayExtra(EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY));
-        intent.putExtra(EXTRA_ADD_ACCOUNT_OPTIONS_BUNDLE, getIntent().getBundleExtra(EXTRA_ADD_ACCOUNT_OPTIONS_BUNDLE));
-        intent.putExtra(EXTRA_ADD_ACCOUNT_REQUIRED_FEATURES_STRING_ARRAY, getIntent().getStringArrayExtra(EXTRA_ADD_ACCOUNT_REQUIRED_FEATURES_STRING_ARRAY));
+        intent.putExtra(
+                EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY,
+                getIntent().getStringArrayExtra(EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY));
+        intent.putExtra(
+                EXTRA_ADD_ACCOUNT_OPTIONS_BUNDLE,
+                getIntent().getBundleExtra(EXTRA_ADD_ACCOUNT_OPTIONS_BUNDLE));
+        intent.putExtra(
+                EXTRA_ADD_ACCOUNT_REQUIRED_FEATURES_STRING_ARRAY,
+                getIntent().getStringArrayExtra(EXTRA_ADD_ACCOUNT_REQUIRED_FEATURES_STRING_ARRAY));
         intent.putExtra("authTokenType", getIntent().getStringExtra("authTokenType"));
         startActivityForResult(intent, 1);
         this.mPendingRequest = 1;
     }
 
-    private int getItemIndexToSelect(ArrayList<Account> accounts, String selectedAccountName, boolean selectedAddNewAccount) {
+    private int getItemIndexToSelect(
+            ArrayList<Account> accounts,
+            String selectedAccountName,
+            boolean selectedAddNewAccount) {
         if (selectedAddNewAccount) {
             return accounts.size();
         }
@@ -374,12 +442,19 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         return strArr;
     }
 
-    private LinkedHashMap<Account, Integer> getAcceptableAccountChoices(AccountManager accountManager) {
-        Map<Account, Integer> accountsAndVisibilityForCaller = accountManager.getAccountsAndVisibilityForPackage(this.mCallingPackage, null);
+    private LinkedHashMap<Account, Integer> getAcceptableAccountChoices(
+            AccountManager accountManager) {
+        Map<Account, Integer> accountsAndVisibilityForCaller =
+                accountManager.getAccountsAndVisibilityForPackage(this.mCallingPackage, null);
         Account[] allAccounts = accountManager.getAccounts();
-        LinkedHashMap<Account, Integer> accountsToPopulate = new LinkedHashMap<>(accountsAndVisibilityForCaller.size());
+        LinkedHashMap<Account, Integer> accountsToPopulate =
+                new LinkedHashMap<>(accountsAndVisibilityForCaller.size());
         for (Account account : allAccounts) {
-            if ((this.mSetOfAllowableAccounts == null || this.mSetOfAllowableAccounts.contains(account)) && ((this.mSetOfRelevantAccountTypes == null || this.mSetOfRelevantAccountTypes.contains(account.type)) && accountsAndVisibilityForCaller.get(account) != null)) {
+            if ((this.mSetOfAllowableAccounts == null
+                            || this.mSetOfAllowableAccounts.contains(account))
+                    && ((this.mSetOfRelevantAccountTypes == null
+                                    || this.mSetOfRelevantAccountTypes.contains(account.type))
+                            && accountsAndVisibilityForCaller.get(account) != null)) {
                 accountsToPopulate.put(account, accountsAndVisibilityForCaller.get(account));
             }
         }
@@ -387,7 +462,8 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
     }
 
     private Set<String> getReleventAccountTypes(Intent intent) {
-        String[] allowedAccountTypes = intent.getStringArrayExtra(EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY);
+        String[] allowedAccountTypes =
+                intent.getStringArrayExtra(EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY);
         AuthenticatorDescription[] descs = AccountManager.get(this).getAuthenticatorTypes();
         Set<String> supportedAccountTypes = new HashSet<>(descs.length);
         for (AuthenticatorDescription desc : descs) {
@@ -403,7 +479,8 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
 
     private Set<Account> getAllowableAccountSet(Intent intent) {
         Set<Account> setOfAllowableAccounts = null;
-        ArrayList<Parcelable> validAccounts = intent.getParcelableArrayListExtra(EXTRA_ALLOWABLE_ACCOUNTS_ARRAYLIST);
+        ArrayList<Parcelable> validAccounts =
+                intent.getParcelableArrayListExtra(EXTRA_ALLOWABLE_ACCOUNTS_ARRAYLIST);
         if (validAccounts != null) {
             setOfAllowableAccounts = new HashSet<>(validAccounts.size());
             Iterator<Parcelable> it = validAccounts.iterator();
@@ -429,13 +506,15 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         list.setAdapter((ListAdapter) new ArrayAdapter(this, 17367055, listItems));
         list.setChoiceMode(1);
         list.setItemsCanFocus(false);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: android.accounts.ChooseTypeAndAccountActivity.1
-            @Override // android.widget.AdapterView.OnItemClickListener
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                ChooseTypeAndAccountActivity.this.mSelectedItemIndex = position;
-                ChooseTypeAndAccountActivity.this.mOkButton.setEnabled(true);
-            }
-        });
+        list.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() { // from class:
+                    // android.accounts.ChooseTypeAndAccountActivity.1
+                    @Override // android.widget.AdapterView.OnItemClickListener
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                        ChooseTypeAndAccountActivity.this.mSelectedItemIndex = position;
+                        ChooseTypeAndAccountActivity.this.mOkButton.setEnabled(true);
+                    }
+                });
         if (this.mSelectedItemIndex != -1) {
             list.setItemChecked(this.mSelectedItemIndex, true);
             if (Log.isLoggable(TAG, 2)) {

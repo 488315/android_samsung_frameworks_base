@@ -2,6 +2,7 @@ package com.android.server.enterprise.threatdefense;
 
 import android.util.Base64;
 import android.util.Log;
+
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -120,7 +121,9 @@ public final class MTDSignature {
         L81:
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.threatdefense.MTDSignature.getCertificate():java.security.cert.Certificate");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.threatdefense.MTDSignature.getCertificate():java.security.cert.Certificate");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:28:0x0038 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -178,7 +181,9 @@ public final class MTDSignature {
         L40:
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.threatdefense.MTDSignature.getPublicKey(byte[]):java.security.PublicKey");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.threatdefense.MTDSignature.getPublicKey(byte[]):java.security.PublicKey");
     }
 
     public final String getVerifiedData() {
@@ -195,7 +200,10 @@ public final class MTDSignature {
                     z = signature.verify(this.mSignature);
                 }
             }
-        } catch (InvalidKeyException | NoSuchAlgorithmException | SignatureException | CertificateEncodingException e) {
+        } catch (InvalidKeyException
+                | NoSuchAlgorithmException
+                | SignatureException
+                | CertificateEncodingException e) {
             e.printStackTrace();
         }
         if (!z) {

@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class GetGeoidHeightRequest implements Parcelable {
-    public static final Parcelable.Creator<GetGeoidHeightRequest> CREATOR = new Parcelable.Creator<GetGeoidHeightRequest>() { // from class: android.frameworks.location.altitude.GetGeoidHeightRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetGeoidHeightRequest createFromParcel(Parcel _aidl_source) {
-            GetGeoidHeightRequest _aidl_out = new GetGeoidHeightRequest();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GetGeoidHeightRequest> CREATOR =
+            new Parcelable.Creator<GetGeoidHeightRequest>() { // from class:
+                // android.frameworks.location.altitude.GetGeoidHeightRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetGeoidHeightRequest createFromParcel(Parcel _aidl_source) {
+                    GetGeoidHeightRequest _aidl_out = new GetGeoidHeightRequest();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetGeoidHeightRequest[] newArray(int _aidl_size) {
-            return new GetGeoidHeightRequest[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetGeoidHeightRequest[] newArray(int _aidl_size) {
+                    return new GetGeoidHeightRequest[_aidl_size];
+                }
+            };
     public double latitudeDegrees = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public double longitudeDegrees = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
 

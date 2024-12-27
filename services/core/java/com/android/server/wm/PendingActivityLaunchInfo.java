@@ -14,15 +14,33 @@ public final class PendingActivityLaunchInfo extends DexRestartAppInfo {
         PendingActivityLaunch pendingActivityLaunch = this.mPal;
         int i2 = pendingActivityLaunch.r.launchMode;
         boolean z = i2 == 3 || i2 == 2;
-        ActivityStartController activityStartController = activityTaskManagerService.mActivityStartController;
+        ActivityStartController activityStartController =
+                activityTaskManagerService.mActivityStartController;
         try {
-            activityStartController.obtainStarter(null, "pendingActivityLaunch-for-dex").startResolvedActivity(pendingActivityLaunch.r, pendingActivityLaunch.sourceRecord, pendingActivityLaunch.startFlags, this.mOptions, z ? null : this.mTargetTask, pendingActivityLaunch.intentGrants);
+            activityStartController
+                    .obtainStarter(null, "pendingActivityLaunch-for-dex")
+                    .startResolvedActivity(
+                            pendingActivityLaunch.r,
+                            pendingActivityLaunch.sourceRecord,
+                            pendingActivityLaunch.startFlags,
+                            this.mOptions,
+                            z ? null : this.mTargetTask,
+                            pendingActivityLaunch.intentGrants);
         } catch (Exception e) {
-            Slog.e("ActivityTaskManager", "Exception during pending activity launch for dex. pal=" + pendingActivityLaunch, e);
+            Slog.e(
+                    "ActivityTaskManager",
+                    "Exception during pending activity launch for dex. pal="
+                            + pendingActivityLaunch,
+                    e);
         }
     }
 
     public final String toString() {
-        return "START_PENDING_ACTIVITY_LAUNCH_TYPE, pal : " + this.mPal + ", processName : " + this.mProcessName + ", uid : " + this.mUid;
+        return "START_PENDING_ACTIVITY_LAUNCH_TYPE, pal : "
+                + this.mPal
+                + ", processName : "
+                + this.mProcessName
+                + ", uid : "
+                + this.mUid;
     }
 }

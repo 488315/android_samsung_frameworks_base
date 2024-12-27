@@ -3,8 +3,7 @@ package android.view;
 import android.graphics.HardwareRenderer;
 import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.view.SurfaceControl;
-import android.view.View;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
@@ -33,12 +32,15 @@ public class SyncRtSurfaceTransactionApplier {
         this.mTargetSc = this.mTargetViewRootImpl.getSurfaceControl();
         final SurfaceControl.Transaction t = new SurfaceControl.Transaction();
         applyParams(t, params);
-        this.mTargetViewRootImpl.registerRtFrameCallback(new HardwareRenderer.FrameDrawingCallback() { // from class: android.view.SyncRtSurfaceTransactionApplier$$ExternalSyntheticLambda0
-            @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
-            public final void onFrameDraw(long j) {
-                SyncRtSurfaceTransactionApplier.this.lambda$scheduleApply$0(t, j);
-            }
-        });
+        this.mTargetViewRootImpl.registerRtFrameCallback(
+                new HardwareRenderer
+                        .FrameDrawingCallback() { // from class:
+                                                  // android.view.SyncRtSurfaceTransactionApplier$$ExternalSyntheticLambda0
+                    @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
+                    public final void onFrameDraw(long j) {
+                        SyncRtSurfaceTransactionApplier.this.lambda$scheduleApply$0(t, j);
+                    }
+                });
         this.mTargetViewRootImpl.getView().invalidate();
     }
 
@@ -66,7 +68,8 @@ public class SyncRtSurfaceTransactionApplier {
         }
     }
 
-    public static void applyParams(SurfaceControl.Transaction t, SurfaceParams params, float[] tmpFloat9) {
+    public static void applyParams(
+            SurfaceControl.Transaction t, SurfaceParams params, float[] tmpFloat9) {
         if ((params.flags & 128) != 0) {
             t.merge(params.mergeTransaction);
         }
@@ -97,23 +100,26 @@ public class SyncRtSurfaceTransactionApplier {
         }
     }
 
-    public static void create(final View targetView, final Consumer<SyncRtSurfaceTransactionApplier> callback) {
+    public static void create(
+            final View targetView, final Consumer<SyncRtSurfaceTransactionApplier> callback) {
         if (targetView == null) {
             callback.accept(null);
         } else if (targetView.getViewRootImpl() != null) {
             callback.accept(new SyncRtSurfaceTransactionApplier(targetView));
         } else {
-            targetView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() { // from class: android.view.SyncRtSurfaceTransactionApplier.1
-                @Override // android.view.View.OnAttachStateChangeListener
-                public void onViewAttachedToWindow(View v) {
-                    View.this.removeOnAttachStateChangeListener(this);
-                    callback.accept(new SyncRtSurfaceTransactionApplier(View.this));
-                }
+            targetView.addOnAttachStateChangeListener(
+                    new View
+                            .OnAttachStateChangeListener() { // from class:
+                                                             // android.view.SyncRtSurfaceTransactionApplier.1
+                        @Override // android.view.View.OnAttachStateChangeListener
+                        public void onViewAttachedToWindow(View v) {
+                            View.this.removeOnAttachStateChangeListener(this);
+                            callback.accept(new SyncRtSurfaceTransactionApplier(View.this));
+                        }
 
-                @Override // android.view.View.OnAttachStateChangeListener
-                public void onViewDetachedFromWindow(View v) {
-                }
-            });
+                        @Override // android.view.View.OnAttachStateChangeListener
+                        public void onViewDetachedFromWindow(View v) {}
+                    });
         }
     }
 
@@ -194,11 +200,31 @@ public class SyncRtSurfaceTransactionApplier {
             }
 
             public SurfaceParams build() {
-                return new SurfaceParams(this.surface, this.flags, this.alpha, this.matrix, this.windowCrop, this.layer, this.cornerRadius, this.backgroundBlurRadius, this.visible, this.mergeTransaction);
+                return new SurfaceParams(
+                        this.surface,
+                        this.flags,
+                        this.alpha,
+                        this.matrix,
+                        this.windowCrop,
+                        this.layer,
+                        this.cornerRadius,
+                        this.backgroundBlurRadius,
+                        this.visible,
+                        this.mergeTransaction);
             }
         }
 
-        private SurfaceParams(SurfaceControl surface, int params, float alpha, Matrix matrix, Rect windowCrop, int layer, float cornerRadius, int backgroundBlurRadius, boolean visible, SurfaceControl.Transaction mergeTransaction) {
+        private SurfaceParams(
+                SurfaceControl surface,
+                int params,
+                float alpha,
+                Matrix matrix,
+                Rect windowCrop,
+                int layer,
+                float cornerRadius,
+                int backgroundBlurRadius,
+                boolean visible,
+                SurfaceControl.Transaction mergeTransaction) {
             this.flags = params;
             this.surface = surface;
             this.alpha = alpha;

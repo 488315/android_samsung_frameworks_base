@@ -1,6 +1,7 @@
 package com.samsung.vekit.Item;
 
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.AudioSegment;
 import com.samsung.vekit.Common.Object.Filter;
 import com.samsung.vekit.Common.Object.FilterOption;
@@ -18,11 +19,13 @@ import com.samsung.vekit.Interface.AudioSegmentInterface;
 import com.samsung.vekit.Interface.SpeakerIDInfoInterface;
 import com.samsung.vekit.Layer.Layer;
 import com.samsung.vekit.Listener.PcmInfoListener;
+
 import java.util.HashMap;
 import java.util.function.BiConsumer;
 
 /* loaded from: classes6.dex */
-public class VideoItem extends Item implements AudioSegmentInterface<VideoItem>, SpeakerIDInfoInterface<VideoItem> {
+public class VideoItem extends Item
+        implements AudioSegmentInterface<VideoItem>, SpeakerIDInfoInterface<VideoItem> {
     protected HashMap<String, AudioSegment> audioSegmentMap;
     protected boolean enableDeflicker;
     protected boolean enableFRC;
@@ -265,18 +268,25 @@ public class VideoItem extends Item implements AudioSegmentInterface<VideoItem>,
             return false;
         }
         this.audioSegmentMap.clear();
-        ((Video) this.content).getAudioSegmentMap().forEach(new BiConsumer() { // from class: com.samsung.vekit.Item.VideoItem$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                VideoItem.this.m9388lambda$loadAudioSegment$0$comsamsungvekitItemVideoItem((String) obj, (AudioSegment) obj2);
-            }
-        });
+        ((Video) this.content)
+                .getAudioSegmentMap()
+                .forEach(
+                        new BiConsumer() { // from class:
+                                           // com.samsung.vekit.Item.VideoItem$$ExternalSyntheticLambda0
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                VideoItem.this
+                                        .m9388lambda$loadAudioSegment$0$comsamsungvekitItemVideoItem(
+                                                (String) obj, (AudioSegment) obj2);
+                            }
+                        });
         update();
         return true;
     }
 
     /* renamed from: lambda$loadAudioSegment$0$com-samsung-vekit-Item-VideoItem, reason: not valid java name */
-    /* synthetic */ void m9388lambda$loadAudioSegment$0$comsamsungvekitItemVideoItem(String key, AudioSegment audioSegment) {
+    /* synthetic */ void m9388lambda$loadAudioSegment$0$comsamsungvekitItemVideoItem(
+            String key, AudioSegment audioSegment) {
         this.audioSegmentMap.put(key, audioSegment.m9384clone());
     }
 

@@ -2,10 +2,12 @@ package com.android.server.battery.batteryInfo;
 
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.battery.BattUtils;
 import com.android.server.battery.BatteryLogger;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -50,18 +52,31 @@ public final class QrData extends BaseData {
                     } else {
                         zArr2[i3] = true;
                     }
-                    HeimdAllFsService$$ExternalSyntheticOutline0.m(str, InitialConfiguration$$ExternalSyntheticOutline0.m("[checkQrEquals]efsQr:", readNode, " ,authQr:", readNode2, " =>Equal:"), zArr2[i3]);
+                    HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                            str,
+                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                    "[checkQrEquals]efsQr:",
+                                    readNode,
+                                    " ,authQr:",
+                                    readNode2,
+                                    " =>Equal:"),
+                            zArr2[i3]);
                 } else {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(i3, "[checkQrEquals]Authentification false => skip_", str);
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            i3, "[checkQrEquals]Authentification false => skip_", str);
                 }
             }
-            BatteryLogger.writeToFile("/data/log/battery_service/battery_service_main_history", "Check QR Equals", "isQrEquals:" + Arrays.toString(zArr2));
+            BatteryLogger.writeToFile(
+                    "/data/log/battery_service/battery_service_main_history",
+                    "Check QR Equals",
+                    "isQrEquals:" + Arrays.toString(zArr2));
             this.mIsQrEquals = zArr2;
             String str2 = this.TAG;
             Slog.d(str2, "[syncAuthAndEfs]");
             for (int i4 = 0; i4 < this.mBatteryCount; i4++) {
                 if (!this.mAuthentificationResults[i4]) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(i4, "[syncAuthAndEfs]Authentification false => skip_", str2);
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            i4, "[syncAuthAndEfs]Authentification false => skip_", str2);
                 } else if (!zArr2[i4]) {
                     String readNode3 = BattUtils.readNode((String) this.authPaths.get(i4), false);
                     Slog.d(str2, "[syncAuthAndEfs]sync efs QR with auth");

@@ -10,8 +10,11 @@ import android.util.ArrayMap;
 import android.util.JsonReader;
 import android.util.Log;
 import android.util.jar.StrictJarFile;
+
 import com.android.internal.security.VerityUtils;
+
 import com.sec.android.iaft.SmLib_IafdConstant;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,12 +33,12 @@ import java.util.zip.ZipEntry;
 public class DexMetadataHelper {
     private static final String DEX_METADATA_FILE_EXTENSION = ".dm";
     private static final String PROPERTY_DM_FSVERITY_REQUIRED = "pm.dexopt.dm.require_fsverity";
-    private static final String PROPERTY_DM_JSON_MANIFEST_REQUIRED = "pm.dexopt.dm.require_manifest";
+    private static final String PROPERTY_DM_JSON_MANIFEST_REQUIRED =
+            "pm.dexopt.dm.require_manifest";
     public static final String TAG = "DexMetadataHelper";
     public static final boolean DEBUG = Log.isLoggable(TAG, 3);
 
-    private DexMetadataHelper() {
-    }
+    private DexMetadataHelper() {}
 
     public static boolean isDexMetadataFile(File file) {
         return isDexMetadataPath(file.getName());
@@ -46,7 +49,8 @@ public class DexMetadataHelper {
     }
 
     public static boolean isFsVerityRequired() {
-        return VerityUtils.isFsVeritySupported() && SystemProperties.getBoolean(PROPERTY_DM_FSVERITY_REQUIRED, false);
+        return VerityUtils.isFsVeritySupported()
+                && SystemProperties.getBoolean(PROPERTY_DM_FSVERITY_REQUIRED, false);
     }
 
     public static long getPackageDexMetadataSize(PackageLite pkg) {
@@ -85,7 +89,8 @@ public class DexMetadataHelper {
 
     public static String buildDexMetadataPathForApk(String codePath) {
         if (!ApkLiteParseUtils.isApkPath(codePath)) {
-            throw new IllegalStateException("Corrupted package. Code path is not an apk " + codePath);
+            throw new IllegalStateException(
+                    "Corrupted package. Code path is not an apk " + codePath);
         }
         return codePath.substring(0, codePath.length() - ".apk".length()) + ".dm";
     }
@@ -97,8 +102,14 @@ public class DexMetadataHelper {
         return targetFile.getPath() + ".dm";
     }
 
-    public static ParseResult validateDexMetadataFile(ParseInput input, String dmaPath, String packageName, long versionCode) {
-        return validateDexMetadataFile(input, dmaPath, packageName, versionCode, SystemProperties.getBoolean(PROPERTY_DM_JSON_MANIFEST_REQUIRED, false));
+    public static ParseResult validateDexMetadataFile(
+            ParseInput input, String dmaPath, String packageName, long versionCode) {
+        return validateDexMetadataFile(
+                input,
+                dmaPath,
+                packageName,
+                versionCode,
+                SystemProperties.getBoolean(PROPERTY_DM_JSON_MANIFEST_REQUIRED, false));
     }
 
     /* JADX WARN: Removed duplicated region for block: B:28:0x0073 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -106,7 +117,12 @@ public class DexMetadataHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.content.pm.parsing.result.ParseResult validateDexMetadataFile(android.content.pm.parsing.result.ParseInput r10, java.lang.String r11, java.lang.String r12, long r13, boolean r15) {
+    public static android.content.pm.parsing.result.ParseResult validateDexMetadataFile(
+            android.content.pm.parsing.result.ParseInput r10,
+            java.lang.String r11,
+            java.lang.String r12,
+            long r13,
+            boolean r15) {
         /*
             r0 = 0
             boolean r1 = android.content.pm.dex.DexMetadataHelper.DEBUG
@@ -179,19 +195,34 @@ public class DexMetadataHelper {
         L78:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.pm.dex.DexMetadataHelper.validateDexMetadataFile(android.content.pm.parsing.result.ParseInput, java.lang.String, java.lang.String, long, boolean):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.content.pm.dex.DexMetadataHelper.validateDexMetadataFile(android.content.pm.parsing.result.ParseInput,"
+                    + " java.lang.String, java.lang.String, long,"
+                    + " boolean):android.content.pm.parsing.result.ParseResult");
     }
 
-    private static ParseResult validateDexMetadataManifest(ParseInput input, String dmaPath, StrictJarFile jarFile, String packageName, long versionCode, boolean requireManifest) throws IOException {
+    private static ParseResult validateDexMetadataManifest(
+            ParseInput input,
+            String dmaPath,
+            StrictJarFile jarFile,
+            String packageName,
+            long versionCode,
+            boolean requireManifest)
+            throws IOException {
         if (!requireManifest) {
             if (DEBUG) {
-                Log.v(TAG, "validateDexMetadataManifest: " + dmaPath + " manifest.json check skipped");
+                Log.v(
+                        TAG,
+                        "validateDexMetadataManifest: " + dmaPath + " manifest.json check skipped");
             }
             return input.success(null);
         }
         ZipEntry zipEntry = jarFile.findEntry("manifest.json");
         if (zipEntry == null) {
-            return input.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "Missing manifest.json in " + dmaPath);
+            return input.error(
+                    PackageManager.INSTALL_FAILED_BAD_DEX_METADATA,
+                    "Missing manifest.json in " + dmaPath);
         }
         InputStream inputStream = jarFile.getInputStream(zipEntry);
         try {
@@ -211,20 +242,49 @@ public class DexMetadataHelper {
             }
             reader.endObject();
             if (jsonPackageName == null || jsonVersionCode == -1) {
-                return input.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "manifest.json in " + dmaPath + " is missing 'packageName' and/or 'versionCode'");
+                return input.error(
+                        PackageManager.INSTALL_FAILED_BAD_DEX_METADATA,
+                        "manifest.json in "
+                                + dmaPath
+                                + " is missing 'packageName' and/or 'versionCode'");
             }
             if (!jsonPackageName.equals(packageName)) {
-                return input.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "manifest.json in " + dmaPath + " has invalid packageName: " + jsonPackageName + ", expected: " + packageName);
+                return input.error(
+                        PackageManager.INSTALL_FAILED_BAD_DEX_METADATA,
+                        "manifest.json in "
+                                + dmaPath
+                                + " has invalid packageName: "
+                                + jsonPackageName
+                                + ", expected: "
+                                + packageName);
             }
             if (versionCode != jsonVersionCode) {
-                return input.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "manifest.json in " + dmaPath + " has invalid versionCode: " + jsonVersionCode + ", expected: " + versionCode);
+                return input.error(
+                        PackageManager.INSTALL_FAILED_BAD_DEX_METADATA,
+                        "manifest.json in "
+                                + dmaPath
+                                + " has invalid versionCode: "
+                                + jsonVersionCode
+                                + ", expected: "
+                                + versionCode);
             }
             if (DEBUG) {
-                Log.v(TAG, "validateDexMetadataManifest: " + dmaPath + ", " + packageName + ", " + versionCode + ": successful");
+                Log.v(
+                        TAG,
+                        "validateDexMetadataManifest: "
+                                + dmaPath
+                                + ", "
+                                + packageName
+                                + ", "
+                                + versionCode
+                                + ": successful");
             }
             return input.success(null);
         } catch (UnsupportedEncodingException e) {
-            return input.error(PackageManager.INSTALL_FAILED_BAD_DEX_METADATA, "Error opening manifest.json in " + dmaPath, e);
+            return input.error(
+                    PackageManager.INSTALL_FAILED_BAD_DEX_METADATA,
+                    "Error opening manifest.json in " + dmaPath,
+                    e);
         }
     }
 

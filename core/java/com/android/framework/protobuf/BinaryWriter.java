@@ -1,11 +1,7 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
-import com.android.framework.protobuf.MapEntryLite;
-import com.android.framework.protobuf.Utf8;
-import com.android.framework.protobuf.WireFormat;
-import com.android.framework.protobuf.Writer;
 import com.samsung.android.transcode.constants.EncodeConstants;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -157,7 +153,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeInt32List(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    public final void writeInt32List(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         if (list instanceof IntArrayList) {
             writeInt32List_Internal(fieldNumber, (IntArrayList) list, packed);
         } else {
@@ -165,7 +162,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeInt32List_Internal(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    private final void writeInt32List_Internal(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 10) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -183,7 +181,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeInt32List_Internal(int fieldNumber, IntArrayList list, boolean packed) throws IOException {
+    private final void writeInt32List_Internal(int fieldNumber, IntArrayList list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 10) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -202,7 +201,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeFixed32List(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    public final void writeFixed32List(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         if (list instanceof IntArrayList) {
             writeFixed32List_Internal(fieldNumber, (IntArrayList) list, packed);
         } else {
@@ -210,7 +210,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeFixed32List_Internal(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    private final void writeFixed32List_Internal(
+            int fieldNumber, List<Integer> list, boolean packed) throws IOException {
         if (packed) {
             requireSpace((list.size() * 4) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -228,7 +229,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeFixed32List_Internal(int fieldNumber, IntArrayList list, boolean packed) throws IOException {
+    private final void writeFixed32List_Internal(int fieldNumber, IntArrayList list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 4) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -247,12 +249,14 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeInt64List(int fieldNumber, List<Long> list, boolean packed) throws IOException {
+    public final void writeInt64List(int fieldNumber, List<Long> list, boolean packed)
+            throws IOException {
         writeUInt64List(fieldNumber, list, packed);
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeUInt64List(int fieldNumber, List<Long> list, boolean packed) throws IOException {
+    public final void writeUInt64List(int fieldNumber, List<Long> list, boolean packed)
+            throws IOException {
         if (list instanceof LongArrayList) {
             writeUInt64List_Internal(fieldNumber, (LongArrayList) list, packed);
         } else {
@@ -260,7 +264,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeUInt64List_Internal(int fieldNumber, List<Long> list, boolean packed) throws IOException {
+    private final void writeUInt64List_Internal(int fieldNumber, List<Long> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 10) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -278,7 +283,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeUInt64List_Internal(int fieldNumber, LongArrayList list, boolean packed) throws IOException {
+    private final void writeUInt64List_Internal(int fieldNumber, LongArrayList list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 10) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -297,7 +303,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeFixed64List(int fieldNumber, List<Long> list, boolean packed) throws IOException {
+    public final void writeFixed64List(int fieldNumber, List<Long> list, boolean packed)
+            throws IOException {
         if (list instanceof LongArrayList) {
             writeFixed64List_Internal(fieldNumber, (LongArrayList) list, packed);
         } else {
@@ -305,7 +312,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeFixed64List_Internal(int fieldNumber, List<Long> list, boolean packed) throws IOException {
+    private final void writeFixed64List_Internal(int fieldNumber, List<Long> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 8) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -323,7 +331,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeFixed64List_Internal(int fieldNumber, LongArrayList list, boolean packed) throws IOException {
+    private final void writeFixed64List_Internal(
+            int fieldNumber, LongArrayList list, boolean packed) throws IOException {
         if (packed) {
             requireSpace((list.size() * 8) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -342,7 +351,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeFloatList(int fieldNumber, List<Float> list, boolean packed) throws IOException {
+    public final void writeFloatList(int fieldNumber, List<Float> list, boolean packed)
+            throws IOException {
         if (list instanceof FloatArrayList) {
             writeFloatList_Internal(fieldNumber, (FloatArrayList) list, packed);
         } else {
@@ -350,7 +360,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeFloatList_Internal(int fieldNumber, List<Float> list, boolean packed) throws IOException {
+    private final void writeFloatList_Internal(int fieldNumber, List<Float> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 4) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -368,7 +379,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeFloatList_Internal(int fieldNumber, FloatArrayList list, boolean packed) throws IOException {
+    private final void writeFloatList_Internal(int fieldNumber, FloatArrayList list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 4) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -387,7 +399,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeDoubleList(int fieldNumber, List<Double> list, boolean packed) throws IOException {
+    public final void writeDoubleList(int fieldNumber, List<Double> list, boolean packed)
+            throws IOException {
         if (list instanceof DoubleArrayList) {
             writeDoubleList_Internal(fieldNumber, (DoubleArrayList) list, packed);
         } else {
@@ -395,7 +408,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeDoubleList_Internal(int fieldNumber, List<Double> list, boolean packed) throws IOException {
+    private final void writeDoubleList_Internal(int fieldNumber, List<Double> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 8) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -413,7 +427,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeDoubleList_Internal(int fieldNumber, DoubleArrayList list, boolean packed) throws IOException {
+    private final void writeDoubleList_Internal(
+            int fieldNumber, DoubleArrayList list, boolean packed) throws IOException {
         if (packed) {
             requireSpace((list.size() * 8) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -432,12 +447,14 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeEnumList(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    public final void writeEnumList(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         writeInt32List(fieldNumber, list, packed);
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeBoolList(int fieldNumber, List<Boolean> list, boolean packed) throws IOException {
+    public final void writeBoolList(int fieldNumber, List<Boolean> list, boolean packed)
+            throws IOException {
         if (list instanceof BooleanArrayList) {
             writeBoolList_Internal(fieldNumber, (BooleanArrayList) list, packed);
         } else {
@@ -445,7 +462,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeBoolList_Internal(int fieldNumber, List<Boolean> list, boolean packed) throws IOException {
+    private final void writeBoolList_Internal(int fieldNumber, List<Boolean> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace(list.size() + 10);
             int prevBytes = getTotalBytesWritten();
@@ -463,7 +481,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeBoolList_Internal(int fieldNumber, BooleanArrayList list, boolean packed) throws IOException {
+    private final void writeBoolList_Internal(
+            int fieldNumber, BooleanArrayList list, boolean packed) throws IOException {
         if (packed) {
             requireSpace(list.size() + 10);
             int prevBytes = getTotalBytesWritten();
@@ -511,7 +530,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeUInt32List(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    public final void writeUInt32List(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         if (list instanceof IntArrayList) {
             writeUInt32List_Internal(fieldNumber, (IntArrayList) list, packed);
         } else {
@@ -519,7 +539,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeUInt32List_Internal(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    private final void writeUInt32List_Internal(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 5) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -537,7 +558,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeUInt32List_Internal(int fieldNumber, IntArrayList list, boolean packed) throws IOException {
+    private final void writeUInt32List_Internal(int fieldNumber, IntArrayList list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 5) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -556,17 +578,20 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeSFixed32List(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    public final void writeSFixed32List(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         writeFixed32List(fieldNumber, list, packed);
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeSFixed64List(int fieldNumber, List<Long> list, boolean packed) throws IOException {
+    public final void writeSFixed64List(int fieldNumber, List<Long> list, boolean packed)
+            throws IOException {
         writeFixed64List(fieldNumber, list, packed);
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeSInt32List(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    public final void writeSInt32List(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         if (list instanceof IntArrayList) {
             writeSInt32List_Internal(fieldNumber, (IntArrayList) list, packed);
         } else {
@@ -574,7 +599,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeSInt32List_Internal(int fieldNumber, List<Integer> list, boolean packed) throws IOException {
+    private final void writeSInt32List_Internal(int fieldNumber, List<Integer> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 5) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -592,7 +618,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeSInt32List_Internal(int fieldNumber, IntArrayList list, boolean packed) throws IOException {
+    private final void writeSInt32List_Internal(int fieldNumber, IntArrayList list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 5) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -611,7 +638,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeSInt64List(int fieldNumber, List<Long> list, boolean packed) throws IOException {
+    public final void writeSInt64List(int fieldNumber, List<Long> list, boolean packed)
+            throws IOException {
         if (list instanceof LongArrayList) {
             writeSInt64List_Internal(fieldNumber, (LongArrayList) list, packed);
         } else {
@@ -620,7 +648,9 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public <K, V> void writeMap(int fieldNumber, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map) throws IOException {
+    public <K, V> void writeMap(
+            int fieldNumber, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map)
+            throws IOException {
         for (Map.Entry<K, V> entry : map.entrySet()) {
             int prevBytes = getTotalBytesWritten();
             writeMapEntryField(this, 2, metadata.valueType, entry.getValue());
@@ -633,82 +663,120 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
     /* renamed from: com.android.framework.protobuf.BinaryWriter$1, reason: invalid class name */
     static /* synthetic */ class AnonymousClass1 {
-        static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType = new int[WireFormat.FieldType.values().length];
+        static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType =
+                new int[WireFormat.FieldType.values().length];
 
         static {
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.BOOL.ordinal()] = 1;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.BOOL.ordinal()] =
+                        1;
             } catch (NoSuchFieldError e) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FIXED32.ordinal()] = 2;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FIXED32.ordinal()] =
+                        2;
             } catch (NoSuchFieldError e2) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FIXED64.ordinal()] = 3;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FIXED64.ordinal()] =
+                        3;
             } catch (NoSuchFieldError e3) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.INT32.ordinal()] = 4;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.INT32.ordinal()] =
+                        4;
             } catch (NoSuchFieldError e4) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.INT64.ordinal()] = 5;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.INT64.ordinal()] =
+                        5;
             } catch (NoSuchFieldError e5) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SFIXED32.ordinal()] = 6;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SFIXED32.ordinal()] =
+                        6;
             } catch (NoSuchFieldError e6) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SFIXED64.ordinal()] = 7;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SFIXED64.ordinal()] =
+                        7;
             } catch (NoSuchFieldError e7) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SINT32.ordinal()] = 8;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SINT32.ordinal()] =
+                        8;
             } catch (NoSuchFieldError e8) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SINT64.ordinal()] = 9;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SINT64.ordinal()] =
+                        9;
             } catch (NoSuchFieldError e9) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.STRING.ordinal()] = 10;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.STRING.ordinal()] =
+                        10;
             } catch (NoSuchFieldError e10) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.UINT32.ordinal()] = 11;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.UINT32.ordinal()] =
+                        11;
             } catch (NoSuchFieldError e11) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.UINT64.ordinal()] = 12;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.UINT64.ordinal()] =
+                        12;
             } catch (NoSuchFieldError e12) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FLOAT.ordinal()] = 13;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FLOAT.ordinal()] =
+                        13;
             } catch (NoSuchFieldError e13) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.DOUBLE.ordinal()] = 14;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.DOUBLE.ordinal()] =
+                        14;
             } catch (NoSuchFieldError e14) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.MESSAGE.ordinal()] = 15;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.MESSAGE.ordinal()] =
+                        15;
             } catch (NoSuchFieldError e15) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.BYTES.ordinal()] = 16;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.BYTES.ordinal()] =
+                        16;
             } catch (NoSuchFieldError e16) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.ENUM.ordinal()] = 17;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.ENUM.ordinal()] =
+                        17;
             } catch (NoSuchFieldError e17) {
             }
         }
     }
 
-    static final void writeMapEntryField(Writer writer, int fieldNumber, WireFormat.FieldType fieldType, Object object) throws IOException {
-        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[fieldType.ordinal()]) {
+    static final void writeMapEntryField(
+            Writer writer, int fieldNumber, WireFormat.FieldType fieldType, Object object)
+            throws IOException {
+        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                fieldType.ordinal()]) {
             case 1:
                 writer.writeBool(fieldNumber, ((Boolean) object).booleanValue());
                 return;
@@ -773,7 +841,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeSInt64List_Internal(int fieldNumber, List<Long> list, boolean packed) throws IOException {
+    private final void writeSInt64List_Internal(int fieldNumber, List<Long> list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 10) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -791,7 +860,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         }
     }
 
-    private final void writeSInt64List_Internal(int fieldNumber, LongArrayList list, boolean packed) throws IOException {
+    private final void writeSInt64List_Internal(int fieldNumber, LongArrayList list, boolean packed)
+            throws IOException {
         if (packed) {
             requireSpace((list.size() * 10) + 10);
             int prevBytes = getTotalBytesWritten();
@@ -817,7 +887,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
     }
 
     @Override // com.android.framework.protobuf.Writer
-    public final void writeMessageList(int fieldNumber, List<?> list, Schema schema) throws IOException {
+    public final void writeMessageList(int fieldNumber, List<?> list, Schema schema)
+            throws IOException {
         for (int i = list.size() - 1; i >= 0; i--) {
             writeMessage(fieldNumber, list.get(i), schema);
         }
@@ -833,7 +904,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
     @Override // com.android.framework.protobuf.Writer
     @Deprecated
-    public final void writeGroupList(int fieldNumber, List<?> list, Schema schema) throws IOException {
+    public final void writeGroupList(int fieldNumber, List<?> list, Schema schema)
+            throws IOException {
         for (int i = list.size() - 1; i >= 0; i--) {
             writeGroup(fieldNumber, list.get(i), schema);
         }
@@ -1570,7 +1642,10 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
                     byte[] bArr3 = this.buffer;
                     int i4 = this.pos;
                     this.pos = i4 - 1;
-                    bArr3[i4] = (byte) ((c2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960);
+                    bArr3[i4] =
+                            (byte)
+                                    ((c2 >>> 6)
+                                            | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960);
                 } else if ((c2 < 55296 || 57343 < c2) && this.pos > this.offset + 1) {
                     byte[] bArr4 = this.buffer;
                     int i5 = this.pos;
@@ -1699,7 +1774,8 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         void finishCurrentBuffer() {
             if (this.allocatedBuffer != null) {
                 this.totalDoneBytes += bytesWrittenToCurrentBuffer();
-                this.allocatedBuffer.position((arrayPos() - this.allocatedBuffer.arrayOffset()) + 1);
+                this.allocatedBuffer.position(
+                        (arrayPos() - this.allocatedBuffer.arrayOffset()) + 1);
                 this.allocatedBuffer = null;
                 this.pos = 0L;
                 this.limitMinusOne = 0L;
@@ -2367,7 +2443,12 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
                     byte[] bArr4 = this.buffer;
                     long j4 = this.pos;
                     this.pos = j4 - 1;
-                    UnsafeUtil.putByte(bArr4, j4, (byte) ((c2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                    UnsafeUtil.putByte(
+                            bArr4,
+                            j4,
+                            (byte)
+                                    ((c2 >>> 6)
+                                            | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
                 } else if ((c2 < 55296 || 57343 < c2) && this.pos > this.offset + 1) {
                     byte[] bArr5 = this.buffer;
                     long j5 = this.pos;
@@ -2395,11 +2476,13 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
                                 byte[] bArr9 = this.buffer;
                                 long j9 = this.pos;
                                 this.pos = j9 - 1;
-                                UnsafeUtil.putByte(bArr9, j9, (byte) (((codePoint >>> 6) & 63) | 128));
+                                UnsafeUtil.putByte(
+                                        bArr9, j9, (byte) (((codePoint >>> 6) & 63) | 128));
                                 byte[] bArr10 = this.buffer;
                                 long j10 = this.pos;
                                 this.pos = j10 - 1;
-                                UnsafeUtil.putByte(bArr10, j10, (byte) (((codePoint >>> 12) & 63) | 128));
+                                UnsafeUtil.putByte(
+                                        bArr10, j10, (byte) (((codePoint >>> 12) & 63) | 128));
                                 byte[] bArr11 = this.buffer;
                                 long j11 = this.pos;
                                 this.pos = j11 - 1;
@@ -2426,7 +2509,12 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         @Override // com.android.framework.protobuf.ByteOutput
         public void write(byte[] value, int offset, int length) {
             if (offset < 0 || offset + length > value.length) {
-                throw new ArrayIndexOutOfBoundsException(String.format("value.length=%d, offset=%d, length=%d", Integer.valueOf(value.length), Integer.valueOf(offset), Integer.valueOf(length)));
+                throw new ArrayIndexOutOfBoundsException(
+                        String.format(
+                                "value.length=%d, offset=%d, length=%d",
+                                Integer.valueOf(value.length),
+                                Integer.valueOf(offset),
+                                Integer.valueOf(length)));
             }
             requireSpace(length);
             this.pos -= length;
@@ -2436,7 +2524,12 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
         @Override // com.android.framework.protobuf.ByteOutput
         public void writeLazy(byte[] value, int offset, int length) {
             if (offset < 0 || offset + length > value.length) {
-                throw new ArrayIndexOutOfBoundsException(String.format("value.length=%d, offset=%d, length=%d", Integer.valueOf(value.length), Integer.valueOf(offset), Integer.valueOf(length)));
+                throw new ArrayIndexOutOfBoundsException(
+                        String.format(
+                                "value.length=%d, offset=%d, length=%d",
+                                Integer.valueOf(value.length),
+                                Integer.valueOf(offset),
+                                Integer.valueOf(length)));
             }
             if (spaceLeft() < length) {
                 this.totalDoneBytes += length;
@@ -2718,17 +2811,28 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
         private void writeVarint32TwoBytes(int value) {
             this.pos -= 2;
-            this.buffer.putShort(this.pos + 1, (short) (((value & 16256) << 1) | (value & 127) | 128));
+            this.buffer.putShort(
+                    this.pos + 1, (short) (((value & 16256) << 1) | (value & 127) | 128));
         }
 
         private void writeVarint32ThreeBytes(int value) {
             this.pos -= 3;
-            this.buffer.putInt(this.pos, ((2080768 & value) << 10) | (((value & 16256) | 16384) << 9) | (((value & 127) | 128) << 8));
+            this.buffer.putInt(
+                    this.pos,
+                    ((2080768 & value) << 10)
+                            | (((value & 16256) | 16384) << 9)
+                            | (((value & 127) | 128) << 8));
         }
 
         private void writeVarint32FourBytes(int value) {
             this.pos -= 4;
-            this.buffer.putInt(this.pos + 1, ((266338304 & value) << 3) | (((2080768 & value) | 2097152) << 2) | (((value & 16256) | 16384) << 1) | (value & 127) | 128);
+            this.buffer.putInt(
+                    this.pos + 1,
+                    ((266338304 & value) << 3)
+                            | (((2080768 & value) | 2097152) << 2)
+                            | (((value & 16256) | 16384) << 1)
+                            | (value & 127)
+                            | 128);
         }
 
         private void writeVarint32FiveBytes(int value) {
@@ -2737,7 +2841,13 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
             this.pos = i - 1;
             byteBuffer.put(i, (byte) (value >>> 28));
             this.pos -= 4;
-            this.buffer.putInt(this.pos + 1, ((((value >>> 21) & 127) | 128) << 24) | ((((value >>> 14) & 127) | 128) << 16) | ((((value >>> 7) & 127) | 128) << 8) | (value & 127) | 128);
+            this.buffer.putInt(
+                    this.pos + 1,
+                    ((((value >>> 21) & 127) | 128) << 24)
+                            | ((((value >>> 14) & 127) | 128) << 16)
+                            | ((((value >>> 7) & 127) | 128) << 8)
+                            | (value & 127)
+                            | 128);
         }
 
         @Override // com.android.framework.protobuf.BinaryWriter
@@ -2794,27 +2904,68 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
 
         private void writeVarint64FiveBytes(long value) {
             this.pos -= 5;
-            this.buffer.putLong(this.pos - 2, ((34091302912L & value) << 28) | (((266338304 & value) | 268435456) << 27) | (((2080768 & value) | 2097152) << 26) | (((16256 & value) | 16384) << 25) | (((127 & value) | 128) << 24));
+            this.buffer.putLong(
+                    this.pos - 2,
+                    ((34091302912L & value) << 28)
+                            | (((266338304 & value) | 268435456) << 27)
+                            | (((2080768 & value) | 2097152) << 26)
+                            | (((16256 & value) | 16384) << 25)
+                            | (((127 & value) | 128) << 24));
         }
 
         private void writeVarint64SixBytes(long value) {
             this.pos -= 6;
-            this.buffer.putLong(this.pos - 1, ((4363686772736L & value) << 21) | (((34091302912L & value) | 34359738368L) << 20) | (((266338304 & value) | 268435456) << 19) | (((2080768 & value) | 2097152) << 18) | (((16256 & value) | 16384) << 17) | (((127 & value) | 128) << 16));
+            this.buffer.putLong(
+                    this.pos - 1,
+                    ((4363686772736L & value) << 21)
+                            | (((34091302912L & value) | 34359738368L) << 20)
+                            | (((266338304 & value) | 268435456) << 19)
+                            | (((2080768 & value) | 2097152) << 18)
+                            | (((16256 & value) | 16384) << 17)
+                            | (((127 & value) | 128) << 16));
         }
 
         private void writeVarint64SevenBytes(long value) {
             this.pos -= 7;
-            this.buffer.putLong(this.pos, ((558551906910208L & value) << 14) | (((4363686772736L & value) | 4398046511104L) << 13) | (((34091302912L & value) | 34359738368L) << 12) | (((266338304 & value) | 268435456) << 11) | (((2080768 & value) | 2097152) << 10) | (((16256 & value) | 16384) << 9) | (((127 & value) | 128) << 8));
+            this.buffer.putLong(
+                    this.pos,
+                    ((558551906910208L & value) << 14)
+                            | (((4363686772736L & value) | 4398046511104L) << 13)
+                            | (((34091302912L & value) | 34359738368L) << 12)
+                            | (((266338304 & value) | 268435456) << 11)
+                            | (((2080768 & value) | 2097152) << 10)
+                            | (((16256 & value) | 16384) << 9)
+                            | (((127 & value) | 128) << 8));
         }
 
         private void writeVarint64EightBytes(long value) {
             this.pos -= 8;
-            this.buffer.putLong(this.pos + 1, ((71494644084506624L & value) << 7) | (((558551906910208L & value) | 562949953421312L) << 6) | (((4363686772736L & value) | 4398046511104L) << 5) | (((34091302912L & value) | 34359738368L) << 4) | (((266338304 & value) | 268435456) << 3) | (((2080768 & value) | 2097152) << 2) | (((16256 & value) | 16384) << 1) | (127 & value) | 128);
+            this.buffer.putLong(
+                    this.pos + 1,
+                    ((71494644084506624L & value) << 7)
+                            | (((558551906910208L & value) | 562949953421312L) << 6)
+                            | (((4363686772736L & value) | 4398046511104L) << 5)
+                            | (((34091302912L & value) | 34359738368L) << 4)
+                            | (((266338304 & value) | 268435456) << 3)
+                            | (((2080768 & value) | 2097152) << 2)
+                            | (((16256 & value) | 16384) << 1)
+                            | (127 & value)
+                            | 128);
         }
 
         private void writeVarint64EightBytesWithSign(long value) {
             this.pos -= 8;
-            this.buffer.putLong(this.pos + 1, (((71494644084506624L & value) | 72057594037927936L) << 7) | (((558551906910208L & value) | 562949953421312L) << 6) | (((4363686772736L & value) | 4398046511104L) << 5) | (((34091302912L & value) | 34359738368L) << 4) | (((266338304 & value) | 268435456) << 3) | (((2080768 & value) | 2097152) << 2) | (((16256 & value) | 16384) << 1) | (127 & value) | 128);
+            this.buffer.putLong(
+                    this.pos + 1,
+                    (((71494644084506624L & value) | 72057594037927936L) << 7)
+                            | (((558551906910208L & value) | 562949953421312L) << 6)
+                            | (((4363686772736L & value) | 4398046511104L) << 5)
+                            | (((34091302912L & value) | 34359738368L) << 4)
+                            | (((266338304 & value) | 268435456) << 3)
+                            | (((2080768 & value) | 2097152) << 2)
+                            | (((16256 & value) | 16384) << 1)
+                            | (127 & value)
+                            | 128);
         }
 
         private void writeVarint64NineBytes(long value) {
@@ -2879,7 +3030,11 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
                     ByteBuffer byteBuffer3 = this.buffer;
                     int i4 = this.pos;
                     this.pos = i4 - 1;
-                    byteBuffer3.put(i4, (byte) ((c2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                    byteBuffer3.put(
+                            i4,
+                            (byte)
+                                    ((c2 >>> 6)
+                                            | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
                 } else if ((c2 < 55296 || 57343 < c2) && this.pos > 1) {
                     ByteBuffer byteBuffer4 = this.buffer;
                     int i5 = this.pos;
@@ -3597,7 +3752,11 @@ abstract class BinaryWriter extends ByteOutput implements Writer {
                     UnsafeUtil.putByte(j3, (byte) ((c2 & '?') | 128));
                     long j4 = this.pos;
                     this.pos = j4 - 1;
-                    UnsafeUtil.putByte(j4, (byte) ((c2 >>> 6) | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
+                    UnsafeUtil.putByte(
+                            j4,
+                            (byte)
+                                    ((c2 >>> 6)
+                                            | EncodeConstants.Resolution.MM_360_EXPORT_HEIGHT_960));
                 } else if ((c2 < 55296 || 57343 < c2) && this.pos > this.bufferOffset + 1) {
                     long j5 = this.pos;
                     this.pos = j5 - 1;

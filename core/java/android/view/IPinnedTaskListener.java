@@ -16,12 +16,11 @@ public interface IPinnedTaskListener extends IInterface {
 
     public static class Default implements IPinnedTaskListener {
         @Override // android.view.IPinnedTaskListener
-        public void onMovementBoundsChanged(boolean fromImeAdjustment) throws RemoteException {
-        }
+        public void onMovementBoundsChanged(boolean fromImeAdjustment) throws RemoteException {}
 
         @Override // android.view.IPinnedTaskListener
-        public void onImeVisibilityChanged(boolean imeVisible, int imeHeight) throws RemoteException {
-        }
+        public void onImeVisibilityChanged(boolean imeVisible, int imeHeight)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IPinnedTaskListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPinnedTaskListener {
+    public abstract static class Stub extends Binder implements IPinnedTaskListener {
         static final int TRANSACTION_onImeVisibilityChanged = 2;
         static final int TRANSACTION_onMovementBoundsChanged = 1;
 
@@ -70,7 +69,8 @@ public interface IPinnedTaskListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPinnedTaskListener.DESCRIPTOR);
             }
@@ -124,7 +124,8 @@ public interface IPinnedTaskListener extends IInterface {
             }
 
             @Override // android.view.IPinnedTaskListener
-            public void onImeVisibilityChanged(boolean imeVisible, int imeHeight) throws RemoteException {
+            public void onImeVisibilityChanged(boolean imeVisible, int imeHeight)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPinnedTaskListener.DESCRIPTOR);

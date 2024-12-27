@@ -13,27 +13,86 @@ public class EventLogTags {
     public static final int VIEWROOT_DRAW_EVENT = 60004;
     public static final int VIEW_ENQUEUE_INPUT_EVENT = 62002;
 
-    private EventLogTags() {
+    private EventLogTags() {}
+
+    public static void writeImfImeAnimStart(
+            String token,
+            int animationType,
+            float alpha,
+            String currentInsets,
+            String shownInsets,
+            String hiddenInsets) {
+        EventLog.writeEvent(
+                IMF_IME_ANIM_START,
+                token,
+                Integer.valueOf(animationType),
+                Float.valueOf(alpha),
+                currentInsets,
+                shownInsets,
+                hiddenInsets);
     }
 
-    public static void writeImfImeAnimStart(String token, int animationType, float alpha, String currentInsets, String shownInsets, String hiddenInsets) {
-        EventLog.writeEvent(IMF_IME_ANIM_START, token, Integer.valueOf(animationType), Float.valueOf(alpha), currentInsets, shownInsets, hiddenInsets);
+    public static void writeImfImeAnimFinish(
+            String token, int animationType, float alpha, int shown, String insets) {
+        EventLog.writeEvent(
+                IMF_IME_ANIM_FINISH,
+                token,
+                Integer.valueOf(animationType),
+                Float.valueOf(alpha),
+                Integer.valueOf(shown),
+                insets);
     }
 
-    public static void writeImfImeAnimFinish(String token, int animationType, float alpha, int shown, String insets) {
-        EventLog.writeEvent(IMF_IME_ANIM_FINISH, token, Integer.valueOf(animationType), Float.valueOf(alpha), Integer.valueOf(shown), insets);
+    public static void writeImfImeAnimCancel(
+            String token, int animationType, String pendingInsets) {
+        EventLog.writeEvent(
+                IMF_IME_ANIM_CANCEL, token, Integer.valueOf(animationType), pendingInsets);
     }
 
-    public static void writeImfImeAnimCancel(String token, int animationType, String pendingInsets) {
-        EventLog.writeEvent(IMF_IME_ANIM_CANCEL, token, Integer.valueOf(animationType), pendingInsets);
+    public static void writeImfImeRemoteAnimStart(
+            String token,
+            int displayid,
+            int direction,
+            float alpha,
+            float starty,
+            float endy,
+            String leash,
+            String insets,
+            String surfacePosition,
+            String imeFrame) {
+        EventLog.writeEvent(
+                IMF_IME_REMOTE_ANIM_START,
+                token,
+                Integer.valueOf(displayid),
+                Integer.valueOf(direction),
+                Float.valueOf(alpha),
+                Float.valueOf(starty),
+                Float.valueOf(endy),
+                leash,
+                insets,
+                surfacePosition,
+                imeFrame);
     }
 
-    public static void writeImfImeRemoteAnimStart(String token, int displayid, int direction, float alpha, float starty, float endy, String leash, String insets, String surfacePosition, String imeFrame) {
-        EventLog.writeEvent(IMF_IME_REMOTE_ANIM_START, token, Integer.valueOf(displayid), Integer.valueOf(direction), Float.valueOf(alpha), Float.valueOf(starty), Float.valueOf(endy), leash, insets, surfacePosition, imeFrame);
-    }
-
-    public static void writeImfImeRemoteAnimEnd(String token, int displayid, int direction, float endy, String leash, String insets, String surfacePosition, String imeFrame) {
-        EventLog.writeEvent(IMF_IME_REMOTE_ANIM_END, token, Integer.valueOf(displayid), Integer.valueOf(direction), Float.valueOf(endy), leash, insets, surfacePosition, imeFrame);
+    public static void writeImfImeRemoteAnimEnd(
+            String token,
+            int displayid,
+            int direction,
+            float endy,
+            String leash,
+            String insets,
+            String surfacePosition,
+            String imeFrame) {
+        EventLog.writeEvent(
+                IMF_IME_REMOTE_ANIM_END,
+                token,
+                Integer.valueOf(displayid),
+                Integer.valueOf(direction),
+                Float.valueOf(endy),
+                leash,
+                insets,
+                surfacePosition,
+                imeFrame);
     }
 
     public static void writeImfImeRemoteAnimCancel(String token, int displayid, String insets) {

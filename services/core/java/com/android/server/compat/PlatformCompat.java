@@ -18,6 +18,7 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.internal.compat.AndroidBuildClassifier;
 import com.android.internal.compat.ChangeReporter;
 import com.android.internal.compat.CompatibilityChangeConfig;
@@ -32,8 +33,8 @@ import com.android.internal.util.DumpUtils;
 import com.android.server.AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.PinnerService$$ExternalSyntheticOutline0;
-import com.android.server.compat.CompatChange;
 import com.android.server.pm.ApexManager;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -59,18 +60,31 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         AndroidBuildClassifier androidBuildClassifier = new AndroidBuildClassifier();
         this.mBuildClassifier = androidBuildClassifier;
         CompatConfig compatConfig = new CompatConfig(androidBuildClassifier, context);
-        compatConfig.initConfigFromLib(Environment.buildPath(Environment.getRootDirectory(), new String[]{"etc", "compatconfig"}));
-        compatConfig.initConfigFromLib(Environment.buildPath(Environment.getRootDirectory(), new String[]{"system_ext", "etc", "compatconfig"}));
+        compatConfig.initConfigFromLib(
+                Environment.buildPath(
+                        Environment.getRootDirectory(), new String[] {"etc", "compatconfig"}));
+        compatConfig.initConfigFromLib(
+                Environment.buildPath(
+                        Environment.getRootDirectory(),
+                        new String[] {"system_ext", "etc", "compatconfig"}));
         Iterator it = ApexManager.getInstance().getActiveApexInfos().iterator();
         while (it.hasNext()) {
-            compatConfig.initConfigFromLib(Environment.buildPath(((ApexManager.ActiveApexInfo) it.next()).apexDirectory, new String[]{"etc", "compatconfig"}));
+            compatConfig.initConfigFromLib(
+                    Environment.buildPath(
+                            ((ApexManager.ActiveApexInfo) it.next()).apexDirectory,
+                            new String[] {"etc", "compatconfig"}));
         }
-        compatConfig.initOverrides(new File("/data/misc/appcompat", "compat_framework_overrides.xml"), new File("/product/etc/appcompat", "compat_framework_overrides.xml"));
+        compatConfig.initOverrides(
+                new File("/data/misc/appcompat", "compat_framework_overrides.xml"),
+                new File("/product/etc/appcompat", "compat_framework_overrides.xml"));
         ChangeIdStateCache.invalidate();
         this.mCompatConfig = compatConfig;
     }
 
-    public PlatformCompat(Context context, CompatConfig compatConfig, AndroidBuildClassifier androidBuildClassifier) {
+    public PlatformCompat(
+            Context context,
+            CompatConfig compatConfig,
+            AndroidBuildClassifier androidBuildClassifier) {
         this.mContext = context;
         this.mCompatConfig = compatConfig;
         this.mBuildClassifier = androidBuildClassifier;
@@ -78,16 +92,23 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
     }
 
     public static ApplicationInfo getApplicationInfo(String str, int i) {
-        return ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class)).getApplicationInfo(Process.myUid(), i, 0L, str);
+        return ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class))
+                .getApplicationInfo(Process.myUid(), i, 0L, str);
     }
 
     public static void killPackage(String str) {
-        int packageUid = ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class)).getPackageUid(str, 0L, UserHandle.myUserId());
+        int packageUid =
+                ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class))
+                        .getPackageUid(str, 0L, UserHandle.myUserId());
         if (packageUid < 0) {
-            PinnerService$$ExternalSyntheticOutline0.m("Didn't find package ", str, " on device.", "Compatibility");
+            PinnerService$$ExternalSyntheticOutline0.m(
+                    "Didn't find package ", str, " on device.", "Compatibility");
             return;
         }
-        Slog.d("Compatibility", AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(packageUid, "Killing package ", str, " (UID ", ")."));
+        Slog.d(
+                "Compatibility",
+                AppStateTrackerImpl$MyHandler$$ExternalSyntheticOutline0.m(
+                        packageUid, "Killing package ", str, " (UID ", ")."));
         int appId = UserHandle.getAppId(packageUid);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -109,8 +130,11 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         while (it.hasNext()) {
             Long l = (Long) it.next();
             l.longValue();
-            if (this.mCompatConfig.mChanges.containsKey(l) && ((compatChange = (CompatChange) this.mCompatConfig.mChanges.get(l)) == null || !compatChange.getOverridable())) {
-                throw new SecurityException("Only change ids marked as Overridable can be overridden.");
+            if (this.mCompatConfig.mChanges.containsKey(l)
+                    && ((compatChange = (CompatChange) this.mCompatConfig.mChanges.get(l)) == null
+                            || !compatChange.getOverridable())) {
+                throw new SecurityException(
+                        "Only change ids marked as Overridable can be overridden.");
             }
         }
     }
@@ -122,7 +146,11 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         synchronized (compatConfig) {
             Long versionCodeOrNull = compatConfig.getVersionCodeOrNull(str);
             CompatChange compatChange = (CompatChange) compatConfig.mChanges.get(Long.valueOf(j));
-            removeOverrideUnsafe = compatChange != null ? compatConfig.removeOverrideUnsafe(compatChange, str, versionCodeOrNull) : false;
+            removeOverrideUnsafe =
+                    compatChange != null
+                            ? compatConfig.removeOverrideUnsafe(
+                                    compatChange, str, versionCodeOrNull)
+                            : false;
             if (removeOverrideUnsafe) {
                 compatConfig.saveOverrides();
                 ChangeIdStateCache.invalidate();
@@ -139,7 +167,11 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         synchronized (compatConfig) {
             Long versionCodeOrNull = compatConfig.getVersionCodeOrNull(str);
             CompatChange compatChange = (CompatChange) compatConfig.mChanges.get(Long.valueOf(j));
-            removeOverrideUnsafe = compatChange != null ? compatConfig.removeOverrideUnsafe(compatChange, str, versionCodeOrNull) : false;
+            removeOverrideUnsafe =
+                    compatChange != null
+                            ? compatConfig.removeOverrideUnsafe(
+                                    compatChange, str, versionCodeOrNull)
+                            : false;
             if (removeOverrideUnsafe) {
                 compatConfig.saveOverrides();
                 ChangeIdStateCache.invalidate();
@@ -162,7 +194,9 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
     public final boolean containsOverride(long j, String str) {
         CompatChange compatChange;
         boolean containsKey;
-        if (str == null || (compatChange = (CompatChange) this.mCompatConfig.mChanges.get(Long.valueOf(j))) == null) {
+        if (str == null
+                || (compatChange = (CompatChange) this.mCompatConfig.mChanges.get(Long.valueOf(j)))
+                        == null) {
             return false;
         }
         synchronized (compatChange) {
@@ -174,10 +208,13 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
     public final int disableTargetSdkChanges(String str, int i) {
         disableTargetSdkChanges_enforcePermission();
         CompatConfig compatConfig = this.mCompatConfig;
-        long[] allowedChangesSinceTargetSdkForPackage = compatConfig.getAllowedChangesSinceTargetSdkForPackage(i, str);
+        long[] allowedChangesSinceTargetSdkForPackage =
+                compatConfig.getAllowedChangesSinceTargetSdkForPackage(i, str);
         boolean z = false;
         for (long j : allowedChangesSinceTargetSdkForPackage) {
-            z |= compatConfig.addOverrideUnsafe(j, str, new PackageOverride.Builder().setEnabled(false).build());
+            z |=
+                    compatConfig.addOverrideUnsafe(
+                            j, str, new PackageOverride.Builder().setEnabled(false).build());
         }
         if (z) {
             compatConfig.saveOverrides();
@@ -188,10 +225,14 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         return length;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-        if (DumpUtils.checkDumpAndUsageStatsPermission(this.mContext, "platform_compat", printWriter)) {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.READ_COMPAT_CHANGE_CONFIG", "Cannot read compat change");
-            this.mContext.enforceCallingOrSelfPermission("android.permission.LOG_COMPAT_CHANGE", "Cannot read log compat change usage");
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        if (DumpUtils.checkDumpAndUsageStatsPermission(
+                this.mContext, "platform_compat", printWriter)) {
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.READ_COMPAT_CHANGE_CONFIG", "Cannot read compat change");
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.LOG_COMPAT_CHANGE", "Cannot read log compat change usage");
             CompatConfig compatConfig = this.mCompatConfig;
             if (compatConfig.mChanges.size() == 0) {
                 printWriter.println("No compat overrides.");
@@ -208,10 +249,13 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
     public final int enableTargetSdkChanges(String str, int i) {
         enableTargetSdkChanges_enforcePermission();
         CompatConfig compatConfig = this.mCompatConfig;
-        long[] allowedChangesSinceTargetSdkForPackage = compatConfig.getAllowedChangesSinceTargetSdkForPackage(i, str);
+        long[] allowedChangesSinceTargetSdkForPackage =
+                compatConfig.getAllowedChangesSinceTargetSdkForPackage(i, str);
         boolean z = false;
         for (long j : allowedChangesSinceTargetSdkForPackage) {
-            z |= compatConfig.addOverrideUnsafe(j, str, new PackageOverride.Builder().setEnabled(true).build());
+            z |=
+                    compatConfig.addOverrideUnsafe(
+                            j, str, new PackageOverride.Builder().setEnabled(true).build());
         }
         if (z) {
             compatConfig.saveOverrides();
@@ -250,7 +294,9 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
     public final boolean isChangeEnabledByPackageName(long j, String str, int i) {
         isChangeEnabledByPackageName_enforcePermission();
         ApplicationInfo applicationInfo = getApplicationInfo(str, i);
-        return applicationInfo == null ? this.mCompatConfig.willChangeBeEnabled(j, str) : isChangeEnabledInternal(j, applicationInfo);
+        return applicationInfo == null
+                ? this.mCompatConfig.willChangeBeEnabled(j, str)
+                : isChangeEnabledInternal(j, applicationInfo);
     }
 
     public final boolean isChangeEnabledByUid(long j, int i) {
@@ -258,7 +304,8 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         String[] packagesForUid = this.mContext.getPackageManager().getPackagesForUid(i);
         boolean z = true;
         if (packagesForUid == null || packagesForUid.length == 0) {
-            CompatChange compatChange = (CompatChange) this.mCompatConfig.mChanges.get(Long.valueOf(j));
+            CompatChange compatChange =
+                    (CompatChange) this.mCompatConfig.mChanges.get(Long.valueOf(j));
             if (compatChange == null) {
                 return true;
             }
@@ -281,7 +328,8 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
             compatConfig.getClass();
             isEnabled = true;
         } else {
-            isEnabled = compatChange.isEnabled(applicationInfo, compatConfig.mAndroidBuildClassifier);
+            isEnabled =
+                    compatChange.isEnabled(applicationInfo, compatConfig.mAndroidBuildClassifier);
         }
         int i = isEnabled ? 1 : 2;
         if (applicationInfo != null) {
@@ -318,7 +366,8 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
     public final CompatibilityChangeInfo[] listAllChanges() {
         listAllChanges_enforcePermission();
         CompatConfig compatConfig = this.mCompatConfig;
-        CompatibilityChangeInfo[] compatibilityChangeInfoArr = new CompatibilityChangeInfo[compatConfig.mChanges.size()];
+        CompatibilityChangeInfo[] compatibilityChangeInfoArr =
+                new CompatibilityChangeInfo[compatConfig.mChanges.size()];
         Iterator it = compatConfig.mChanges.values().iterator();
         int i = 0;
         while (it.hasNext()) {
@@ -329,31 +378,55 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
     }
 
     public final CompatibilityChangeInfo[] listUIChanges() {
-        return (CompatibilityChangeInfo[]) Arrays.stream(listAllChanges()).filter(new Predicate() { // from class: com.android.server.compat.PlatformCompat$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                PlatformCompat platformCompat = PlatformCompat.this;
-                CompatibilityChangeInfo compatibilityChangeInfo = (CompatibilityChangeInfo) obj;
-                platformCompat.getClass();
-                if (compatibilityChangeInfo.getLoggingOnly() || compatibilityChangeInfo.getId() == 149391281) {
-                    return false;
-                }
-                return compatibilityChangeInfo.getEnableSinceTargetSdk() <= 0 || (compatibilityChangeInfo.getEnableSinceTargetSdk() >= 29 && compatibilityChangeInfo.getEnableSinceTargetSdk() <= platformCompat.mBuildClassifier.platformTargetSdk());
-            }
-        }).toArray(new PlatformCompat$$ExternalSyntheticLambda1());
+        return (CompatibilityChangeInfo[])
+                Arrays.stream(listAllChanges())
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.android.server.compat.PlatformCompat$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        PlatformCompat platformCompat = PlatformCompat.this;
+                                        CompatibilityChangeInfo compatibilityChangeInfo =
+                                                (CompatibilityChangeInfo) obj;
+                                        platformCompat.getClass();
+                                        if (compatibilityChangeInfo.getLoggingOnly()
+                                                || compatibilityChangeInfo.getId() == 149391281) {
+                                            return false;
+                                        }
+                                        return compatibilityChangeInfo.getEnableSinceTargetSdk()
+                                                        <= 0
+                                                || (compatibilityChangeInfo
+                                                                        .getEnableSinceTargetSdk()
+                                                                >= 29
+                                                        && compatibilityChangeInfo
+                                                                        .getEnableSinceTargetSdk()
+                                                                <= platformCompat.mBuildClassifier
+                                                                        .platformTargetSdk());
+                                    }
+                                })
+                        .toArray(new PlatformCompat$$ExternalSyntheticLambda1());
     }
 
-    public final void putAllOverridesOnReleaseBuilds(CompatibilityOverridesByPackageConfig compatibilityOverridesByPackageConfig) {
+    public final void putAllOverridesOnReleaseBuilds(
+            CompatibilityOverridesByPackageConfig compatibilityOverridesByPackageConfig) {
         putAllOverridesOnReleaseBuilds_enforcePermission();
-        Iterator it = compatibilityOverridesByPackageConfig.packageNameToOverrides.values().iterator();
+        Iterator it =
+                compatibilityOverridesByPackageConfig.packageNameToOverrides.values().iterator();
         while (it.hasNext()) {
-            checkAllCompatOverridesAreOverridable(((CompatibilityOverrideConfig) it.next()).overrides.keySet());
+            checkAllCompatOverridesAreOverridable(
+                    ((CompatibilityOverrideConfig) it.next()).overrides.keySet());
         }
         CompatConfig compatConfig = this.mCompatConfig;
         synchronized (compatConfig) {
             try {
-                for (String str : compatibilityOverridesByPackageConfig.packageNameToOverrides.keySet()) {
-                    compatConfig.addPackageOverridesWithoutSaving((CompatibilityOverrideConfig) compatibilityOverridesByPackageConfig.packageNameToOverrides.get(str), str, true);
+                for (String str :
+                        compatibilityOverridesByPackageConfig.packageNameToOverrides.keySet()) {
+                    compatConfig.addPackageOverridesWithoutSaving(
+                            (CompatibilityOverrideConfig)
+                                    compatibilityOverridesByPackageConfig.packageNameToOverrides
+                                            .get(str),
+                            str,
+                            true);
                 }
                 compatConfig.saveOverrides();
                 ChangeIdStateCache.invalidate();
@@ -363,7 +436,8 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         }
     }
 
-    public final void putOverridesOnReleaseBuilds(CompatibilityOverrideConfig compatibilityOverrideConfig, String str) {
+    public final void putOverridesOnReleaseBuilds(
+            CompatibilityOverrideConfig compatibilityOverrideConfig, String str) {
         putOverridesOnReleaseBuilds_enforcePermission();
         checkAllCompatOverridesAreOverridable(compatibilityOverrideConfig.overrides.keySet());
         this.mCompatConfig.addPackageOverrides(compatibilityOverrideConfig, str, true);
@@ -373,21 +447,27 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         final CompatConfig compatConfig = this.mCompatConfig;
         compatConfig.getClass();
         final AtomicBoolean atomicBoolean = new AtomicBoolean(true);
-        CompatChange compatChange = (CompatChange) compatConfig.mChanges.computeIfAbsent(Long.valueOf(j), new Function() { // from class: com.android.server.compat.CompatConfig$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                CompatConfig compatConfig2 = CompatConfig.this;
-                AtomicBoolean atomicBoolean2 = atomicBoolean;
-                long j2 = j;
-                compatConfig2.getClass();
-                atomicBoolean2.set(false);
-                ChangeIdStateCache.invalidate();
-                return new CompatChange(j2);
-            }
-        });
+        CompatChange compatChange =
+                (CompatChange)
+                        compatConfig.mChanges.computeIfAbsent(
+                                Long.valueOf(j),
+                                new Function() { // from class:
+                                                 // com.android.server.compat.CompatConfig$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        CompatConfig compatConfig2 = CompatConfig.this;
+                                        AtomicBoolean atomicBoolean2 = atomicBoolean;
+                                        long j2 = j;
+                                        compatConfig2.getClass();
+                                        atomicBoolean2.set(false);
+                                        ChangeIdStateCache.invalidate();
+                                        return new CompatChange(j2);
+                                    }
+                                });
         synchronized (compatChange) {
             if (compatChange.mListener != null) {
-                throw new IllegalStateException("Listener for change " + compatChange.toString() + " already registered.");
+                throw new IllegalStateException(
+                        "Listener for change " + compatChange.toString() + " already registered.");
             }
             compatChange.mListener = changeListener;
         }
@@ -395,25 +475,37 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
     }
 
     public final void registerPackageReceiver(Context context) {
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.compat.PlatformCompat.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                Uri data;
-                String schemeSpecificPart;
-                if (intent == null || (data = intent.getData()) == null || (schemeSpecificPart = data.getSchemeSpecificPart()) == null) {
-                    return;
-                }
-                CompatConfig compatConfig = PlatformCompat.this.mCompatConfig;
-                Long versionCodeOrNull = compatConfig.getVersionCodeOrNull(schemeSpecificPart);
-                boolean z = false;
-                for (CompatChange compatChange : compatConfig.mChanges.values()) {
-                    z |= compatChange.recheckOverride(schemeSpecificPart, compatConfig.mOverrideValidator.getOverrideAllowedStateInternal(schemeSpecificPart, compatChange.getId(), true), versionCodeOrNull);
-                }
-                if (z) {
-                    ChangeIdStateCache.invalidate();
-                }
-            }
-        };
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class: com.android.server.compat.PlatformCompat.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        Uri data;
+                        String schemeSpecificPart;
+                        if (intent == null
+                                || (data = intent.getData()) == null
+                                || (schemeSpecificPart = data.getSchemeSpecificPart()) == null) {
+                            return;
+                        }
+                        CompatConfig compatConfig = PlatformCompat.this.mCompatConfig;
+                        Long versionCodeOrNull =
+                                compatConfig.getVersionCodeOrNull(schemeSpecificPart);
+                        boolean z = false;
+                        for (CompatChange compatChange : compatConfig.mChanges.values()) {
+                            z |=
+                                    compatChange.recheckOverride(
+                                            schemeSpecificPart,
+                                            compatConfig.mOverrideValidator
+                                                    .getOverrideAllowedStateInternal(
+                                                            schemeSpecificPart,
+                                                            compatChange.getId(),
+                                                            true),
+                                            versionCodeOrNull);
+                        }
+                        if (z) {
+                            ChangeIdStateCache.invalidate();
+                        }
+                    }
+                };
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
         intentFilter.addAction("android.intent.action.PACKAGE_REPLACED");
@@ -422,18 +514,32 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         context.registerReceiverForAllUsers(broadcastReceiver, intentFilter, null, null);
     }
 
-    public final void removeAllOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveByPackageConfig compatibilityOverridesToRemoveByPackageConfig) {
+    public final void removeAllOverridesOnReleaseBuilds(
+            CompatibilityOverridesToRemoveByPackageConfig
+                    compatibilityOverridesToRemoveByPackageConfig) {
         removeAllOverridesOnReleaseBuilds_enforcePermission();
-        Iterator it = compatibilityOverridesToRemoveByPackageConfig.packageNameToOverridesToRemove.values().iterator();
+        Iterator it =
+                compatibilityOverridesToRemoveByPackageConfig
+                        .packageNameToOverridesToRemove
+                        .values()
+                        .iterator();
         while (it.hasNext()) {
-            checkAllCompatOverridesAreOverridable(((CompatibilityOverridesToRemoveConfig) it.next()).changeIds);
+            checkAllCompatOverridesAreOverridable(
+                    ((CompatibilityOverridesToRemoveConfig) it.next()).changeIds);
         }
         CompatConfig compatConfig = this.mCompatConfig;
         synchronized (compatConfig) {
             try {
                 boolean z = false;
-                for (String str : compatibilityOverridesToRemoveByPackageConfig.packageNameToOverridesToRemove.keySet()) {
-                    z |= compatConfig.removePackageOverridesWithoutSaving((CompatibilityOverridesToRemoveConfig) compatibilityOverridesToRemoveByPackageConfig.packageNameToOverridesToRemove.get(str), str);
+                for (String str :
+                        compatibilityOverridesToRemoveByPackageConfig.packageNameToOverridesToRemove
+                                .keySet()) {
+                    z |=
+                            compatConfig.removePackageOverridesWithoutSaving(
+                                    (CompatibilityOverridesToRemoveConfig)
+                                            compatibilityOverridesToRemoveByPackageConfig
+                                                    .packageNameToOverridesToRemove.get(str),
+                                    str);
                 }
                 if (z) {
                     compatConfig.saveOverrides();
@@ -445,12 +551,14 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         }
     }
 
-    public final void removeOverridesOnReleaseBuilds(CompatibilityOverridesToRemoveConfig compatibilityOverridesToRemoveConfig, String str) {
+    public final void removeOverridesOnReleaseBuilds(
+            CompatibilityOverridesToRemoveConfig compatibilityOverridesToRemoveConfig, String str) {
         removeOverridesOnReleaseBuilds_enforcePermission();
         checkAllCompatOverridesAreOverridable(compatibilityOverridesToRemoveConfig.changeIds);
         CompatConfig compatConfig = this.mCompatConfig;
         synchronized (compatConfig) {
-            if (compatConfig.removePackageOverridesWithoutSaving(compatibilityOverridesToRemoveConfig, str)) {
+            if (compatConfig.removePackageOverridesWithoutSaving(
+                    compatibilityOverridesToRemoveConfig, str)) {
                 compatConfig.saveOverrides();
                 ChangeIdStateCache.invalidate();
             }
@@ -475,7 +583,8 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
         this.mChangeReporter.reportChange(i, j, 3, true);
     }
 
-    public final void setOverrides(CompatibilityChangeConfig compatibilityChangeConfig, String str) {
+    public final void setOverrides(
+            CompatibilityChangeConfig compatibilityChangeConfig, String str) {
         setOverrides_enforcePermission();
         HashMap hashMap = new HashMap();
         for (Long l : compatibilityChangeConfig.enabledChanges()) {
@@ -486,11 +595,13 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
             l2.getClass();
             hashMap.put(l2, new PackageOverride.Builder().setEnabled(false).build());
         }
-        this.mCompatConfig.addPackageOverrides(new CompatibilityOverrideConfig(hashMap), str, false);
+        this.mCompatConfig.addPackageOverrides(
+                new CompatibilityOverrideConfig(hashMap), str, false);
         killPackage(str);
     }
 
-    public final void setOverridesForTest(CompatibilityChangeConfig compatibilityChangeConfig, String str) {
+    public final void setOverridesForTest(
+            CompatibilityChangeConfig compatibilityChangeConfig, String str) {
         setOverridesForTest_enforcePermission();
         HashMap hashMap = new HashMap();
         for (Long l : compatibilityChangeConfig.enabledChanges()) {
@@ -501,6 +612,7 @@ public final class PlatformCompat extends IPlatformCompat.Stub {
             l2.longValue();
             hashMap.put(l2, new PackageOverride.Builder().setEnabled(false).build());
         }
-        this.mCompatConfig.addPackageOverrides(new CompatibilityOverrideConfig(hashMap), str, false);
+        this.mCompatConfig.addPackageOverrides(
+                new CompatibilityOverrideConfig(hashMap), str, false);
     }
 }

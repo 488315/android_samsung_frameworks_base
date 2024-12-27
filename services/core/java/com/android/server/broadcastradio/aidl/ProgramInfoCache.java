@@ -9,7 +9,9 @@ import android.hardware.radio.RadioManager;
 import android.hardware.radio.UniqueProgramIdentifier;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.server.utils.Slogf;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -28,7 +30,8 @@ public final class ProgramInfoCache {
         this.mFilter = filter;
     }
 
-    public ProgramInfoCache(ProgramList.Filter filter, boolean z, RadioManager.ProgramInfo... programInfoArr) {
+    public ProgramInfoCache(
+            ProgramList.Filter filter, boolean z, RadioManager.ProgramInfo... programInfoArr) {
         this.mProgramInfoMap = new ArrayMap();
         this.mFilter = filter;
         this.mComplete = z;
@@ -37,7 +40,8 @@ public final class ProgramInfoCache {
         }
     }
 
-    public static List buildChunks(boolean z, boolean z2, Collection collection, int i, Collection collection2, int i2) {
+    public static List buildChunks(
+            boolean z, boolean z2, Collection collection, int i, Collection collection2, int i2) {
         Iterator it;
         int i3;
         if (z) {
@@ -103,10 +107,15 @@ public final class ProgramInfoCache {
             if (i4 >= programInfoArr.length) {
                 break;
             }
-            RadioManager.ProgramInfo programInfoFromHalProgramInfo = ConversionUtils.programInfoFromHalProgramInfo(programInfoArr[i4]);
+            RadioManager.ProgramInfo programInfoFromHalProgramInfo =
+                    ConversionUtils.programInfoFromHalProgramInfo(programInfoArr[i4]);
             if (programInfoFromHalProgramInfo == null) {
-                Slogf.w("BcRadioAidlSrv.cache", "Program info %s in program list chunk is not valid", programListChunk.modified[i4]);
-            } else if (passesFilter(programInfoFromHalProgramInfo.getSelector().getPrimaryId()) && shouldIncludeInModified(programInfoFromHalProgramInfo)) {
+                Slogf.w(
+                        "BcRadioAidlSrv.cache",
+                        "Program info %s in program list chunk is not valid",
+                        programListChunk.modified[i4]);
+            } else if (passesFilter(programInfoFromHalProgramInfo.getSelector().getPrimaryId())
+                    && shouldIncludeInModified(programInfoFromHalProgramInfo)) {
                 putInfo(programInfoFromHalProgramInfo);
                 arraySet.add(programInfoFromHalProgramInfo);
             }
@@ -119,17 +128,29 @@ public final class ProgramInfoCache {
                 if (i3 >= programIdentifierArr.length) {
                     break;
                 }
-                ProgramSelector.Identifier identifierFromHalProgramIdentifier = ConversionUtils.identifierFromHalProgramIdentifier(programIdentifierArr[i3]);
+                ProgramSelector.Identifier identifierFromHalProgramIdentifier =
+                        ConversionUtils.identifierFromHalProgramIdentifier(
+                                programIdentifierArr[i3]);
                 if (identifierFromHalProgramIdentifier == null) {
-                    Slogf.w("BcRadioAidlSrv.cache", "Removed identifier %s in program list chunk is not valid", programListChunk.modified[i3]);
+                    Slogf.w(
+                            "BcRadioAidlSrv.cache",
+                            "Removed identifier %s in program list chunk is not valid",
+                            programListChunk.modified[i3]);
                 } else if (this.mProgramInfoMap.containsKey(identifierFromHalProgramIdentifier)) {
-                    arraySet2.addAll(((ArrayMap) this.mProgramInfoMap.get(identifierFromHalProgramIdentifier)).keySet());
+                    arraySet2.addAll(
+                            ((ArrayMap)
+                                            this.mProgramInfoMap.get(
+                                                    identifierFromHalProgramIdentifier))
+                                    .keySet());
                     this.mProgramInfoMap.remove(identifierFromHalProgramIdentifier);
                 }
                 i3++;
             }
         }
-        if (arraySet.isEmpty() && arraySet2.isEmpty() && this.mComplete == programListChunk.complete && !programListChunk.purge) {
+        if (arraySet.isEmpty()
+                && arraySet2.isEmpty()
+                && this.mComplete == programListChunk.complete
+                && !programListChunk.purge) {
             return null;
         }
         boolean z = programListChunk.complete;
@@ -137,7 +158,8 @@ public final class ProgramInfoCache {
         return buildChunks(programListChunk.purge, z, arraySet, i, arraySet2, i2);
     }
 
-    public List filterAndUpdateFromInternal(ProgramInfoCache programInfoCache, boolean z, int i, int i2) {
+    public List filterAndUpdateFromInternal(
+            ProgramInfoCache programInfoCache, boolean z, int i, int i2) {
         if (z) {
             this.mProgramInfoMap.clear();
         }
@@ -151,11 +173,13 @@ public final class ProgramInfoCache {
             arraySet2.addAll(((ArrayMap) this.mProgramInfoMap.valueAt(i3)).keySet());
         }
         for (int i4 = 0; i4 < programInfoCache.mProgramInfoMap.size(); i4++) {
-            if (passesFilter((ProgramSelector.Identifier) programInfoCache.mProgramInfoMap.keyAt(i4))) {
+            if (passesFilter(
+                    (ProgramSelector.Identifier) programInfoCache.mProgramInfoMap.keyAt(i4))) {
                 ArrayMap arrayMap = (ArrayMap) programInfoCache.mProgramInfoMap.valueAt(i4);
                 for (int i5 = 0; i5 < arrayMap.size(); i5++) {
                     arraySet2.remove(arrayMap.keyAt(i5));
-                    RadioManager.ProgramInfo programInfo = (RadioManager.ProgramInfo) arrayMap.valueAt(i5);
+                    RadioManager.ProgramInfo programInfo =
+                            (RadioManager.ProgramInfo) arrayMap.valueAt(i5);
                     if (shouldIncludeInModified(programInfo)) {
                         putInfo(programInfo);
                         arraySet.add(programInfo);
@@ -164,7 +188,8 @@ public final class ProgramInfoCache {
             }
         }
         for (int i6 = 0; i6 < arraySet2.size(); i6++) {
-            UniqueProgramIdentifier uniqueProgramIdentifier = (UniqueProgramIdentifier) arraySet2.valueAt(i6);
+            UniqueProgramIdentifier uniqueProgramIdentifier =
+                    (UniqueProgramIdentifier) arraySet2.valueAt(i6);
             ProgramSelector.Identifier primaryId = uniqueProgramIdentifier.getPrimaryId();
             if (this.mProgramInfoMap.containsKey(primaryId)) {
                 ((ArrayMap) this.mProgramInfoMap.get(primaryId)).remove(uniqueProgramIdentifier);
@@ -183,10 +208,14 @@ public final class ProgramInfoCache {
         if (filter == null) {
             return true;
         }
-        if (!filter.getIdentifierTypes().isEmpty() && !this.mFilter.getIdentifierTypes().contains(Integer.valueOf(identifier.getType()))) {
+        if (!filter.getIdentifierTypes().isEmpty()
+                && !this.mFilter
+                        .getIdentifierTypes()
+                        .contains(Integer.valueOf(identifier.getType()))) {
             return false;
         }
-        if (this.mFilter.getIdentifiers().isEmpty() || this.mFilter.getIdentifiers().contains(identifier)) {
+        if (this.mFilter.getIdentifiers().isEmpty()
+                || this.mFilter.getIdentifiers().contains(identifier)) {
             return this.mFilter.areCategoriesIncluded() || !identifier.isCategoryType();
         }
         return false;
@@ -197,14 +226,18 @@ public final class ProgramInfoCache {
         if (!this.mProgramInfoMap.containsKey(primaryId)) {
             this.mProgramInfoMap.put(primaryId, new ArrayMap());
         }
-        ((ArrayMap) this.mProgramInfoMap.get(primaryId)).put(new UniqueProgramIdentifier(programInfo.getSelector()), programInfo);
+        ((ArrayMap) this.mProgramInfoMap.get(primaryId))
+                .put(new UniqueProgramIdentifier(programInfo.getSelector()), programInfo);
     }
 
     public final boolean shouldIncludeInModified(RadioManager.ProgramInfo programInfo) {
         RadioManager.ProgramInfo programInfo2;
         ProgramSelector.Identifier primaryId = programInfo.getSelector().getPrimaryId();
         if (this.mProgramInfoMap.containsKey(primaryId)) {
-            programInfo2 = (RadioManager.ProgramInfo) ((ArrayMap) this.mProgramInfoMap.get(primaryId)).get(new UniqueProgramIdentifier(programInfo.getSelector()));
+            programInfo2 =
+                    (RadioManager.ProgramInfo)
+                            ((ArrayMap) this.mProgramInfoMap.get(primaryId))
+                                    .get(new UniqueProgramIdentifier(programInfo.getSelector()));
         } else {
             programInfo2 = null;
         }
@@ -254,9 +287,13 @@ public final class ProgramInfoCache {
             if (i2 >= programInfoArr.length) {
                 break;
             }
-            RadioManager.ProgramInfo programInfoFromHalProgramInfo = ConversionUtils.programInfoFromHalProgramInfo(programInfoArr[i2]);
+            RadioManager.ProgramInfo programInfoFromHalProgramInfo =
+                    ConversionUtils.programInfoFromHalProgramInfo(programInfoArr[i2]);
             if (programInfoFromHalProgramInfo == null) {
-                Slogf.e("BcRadioAidlSrv.cache", "Program info in program info %s in chunk is not valid", programListChunk.modified[i2]);
+                Slogf.e(
+                        "BcRadioAidlSrv.cache",
+                        "Program info in program info %s in chunk is not valid",
+                        programListChunk.modified[i2]);
             } else {
                 putInfo(programInfoFromHalProgramInfo);
             }
@@ -268,7 +305,9 @@ public final class ProgramInfoCache {
                 if (i >= programIdentifierArr.length) {
                     break;
                 }
-                this.mProgramInfoMap.remove(ConversionUtils.identifierFromHalProgramIdentifier(programIdentifierArr[i]));
+                this.mProgramInfoMap.remove(
+                        ConversionUtils.identifierFromHalProgramIdentifier(
+                                programIdentifierArr[i]));
                 i++;
             }
         }

@@ -6,7 +6,7 @@ import android.os.CancellationSignal;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import com.android.internal.view.ScrollCaptureViewHelper;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes5.dex */
@@ -17,13 +17,24 @@ public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> 
     private int mScrollDelta;
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
-    public /* bridge */ /* synthetic */ void onScrollRequested(ListView listView, Rect rect, Rect rect2, CancellationSignal cancellationSignal, Consumer consumer) {
-        onScrollRequested2(listView, rect, rect2, cancellationSignal, (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
+    public /* bridge */ /* synthetic */ void onScrollRequested(
+            ListView listView,
+            Rect rect,
+            Rect rect2,
+            CancellationSignal cancellationSignal,
+            Consumer consumer) {
+        onScrollRequested2(
+                listView,
+                rect,
+                rect2,
+                cancellationSignal,
+                (Consumer<ScrollCaptureViewHelper.ScrollResult>) consumer);
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
     public boolean onAcceptSession(ListView view) {
-        return view.isVisibleToUser() && (view.canScrollVertically(-1) || view.canScrollVertically(1));
+        return view.isVisibleToUser()
+                && (view.canScrollVertically(-1) || view.canScrollVertically(1));
     }
 
     @Override // com.android.internal.view.ScrollCaptureViewHelper
@@ -36,9 +47,20 @@ public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> 
     }
 
     /* renamed from: onScrollRequested, reason: avoid collision after fix types in other method */
-    public void onScrollRequested2(ListView listView, Rect scrollBounds, Rect requestRect, CancellationSignal signal, Consumer<ScrollCaptureViewHelper.ScrollResult> resultConsumer) {
+    public void onScrollRequested2(
+            ListView listView,
+            Rect scrollBounds,
+            Rect requestRect,
+            CancellationSignal signal,
+            Consumer<ScrollCaptureViewHelper.ScrollResult> resultConsumer) {
         Log.d(TAG, "-----------------------------------------------------------");
-        Log.d(TAG, "onScrollRequested(scrollBounds=" + scrollBounds + ", requestRect=" + requestRect + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                TAG,
+                "onScrollRequested(scrollBounds="
+                        + scrollBounds
+                        + ", requestRect="
+                        + requestRect
+                        + NavigationBarInflaterView.KEY_CODE_END);
         ScrollCaptureViewHelper.ScrollResult result = new ScrollCaptureViewHelper.ScrollResult();
         result.requestedArea = new Rect(requestRect);
         result.scrollDelta = this.mScrollDelta;
@@ -48,7 +70,9 @@ public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> 
             resultConsumer.accept(result);
             return;
         }
-        Rect requestedContainerBounds = ScrollCaptureViewSupport.transformFromRequestToContainer(this.mScrollDelta, scrollBounds, requestRect);
+        Rect requestedContainerBounds =
+                ScrollCaptureViewSupport.transformFromRequestToContainer(
+                        this.mScrollDelta, scrollBounds, requestRect);
         Rect recyclerLocalVisible = new Rect();
         listView.getLocalVisibleRect(recyclerLocalVisible);
         Rect adjustedContainerBounds = new Rect(requestedContainerBounds);
@@ -56,7 +80,9 @@ public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> 
         if (remainingHeight > 0) {
             adjustedContainerBounds.inset(0, (-remainingHeight) / 2);
         }
-        int scrollAmount = ScrollCaptureViewSupport.computeScrollAmount(recyclerLocalVisible, adjustedContainerBounds);
+        int scrollAmount =
+                ScrollCaptureViewSupport.computeScrollAmount(
+                        recyclerLocalVisible, adjustedContainerBounds);
         if (scrollAmount < 0) {
             Log.d(TAG, "About to scroll UP (content moves down within parent)");
         } else if (scrollAmount > 0) {
@@ -73,10 +99,15 @@ public class ListViewCaptureHelper implements ScrollCaptureViewHelper<ListView> 
         if (scrollDistance != 0) {
             Log.d(TAG, "Scroll delta is now " + this.mScrollDelta + " px");
         }
-        Rect requestedContainerBounds2 = new Rect(ScrollCaptureViewSupport.transformFromRequestToContainer(this.mScrollDelta, scrollBounds, requestRect));
+        Rect requestedContainerBounds2 =
+                new Rect(
+                        ScrollCaptureViewSupport.transformFromRequestToContainer(
+                                this.mScrollDelta, scrollBounds, requestRect));
         listView.getLocalVisibleRect(recyclerLocalVisible);
         if (requestedContainerBounds2.intersect(recyclerLocalVisible)) {
-            result.availableArea = ScrollCaptureViewSupport.transformFromContainerToRequest(this.mScrollDelta, scrollBounds, requestedContainerBounds2);
+            result.availableArea =
+                    ScrollCaptureViewSupport.transformFromContainerToRequest(
+                            this.mScrollDelta, scrollBounds, requestedContainerBounds2);
         }
         Log.d(TAG, "-----------------------------------------------------------");
         resultConsumer.accept(result);

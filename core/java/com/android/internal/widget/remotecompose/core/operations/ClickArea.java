@@ -5,6 +5,7 @@ import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteComposeOperation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -18,7 +19,14 @@ public class ClickArea implements RemoteComposeOperation {
     float mRight;
     float mTop;
 
-    public ClickArea(int id, int contentDescription, float left, float top, float right, float bottom, int metadata) {
+    public ClickArea(
+            int id,
+            int contentDescription,
+            float left,
+            float top,
+            float right,
+            float bottom,
+            int metadata) {
         this.mId = id;
         this.mContentDescription = contentDescription;
         this.mLeft = left;
@@ -30,11 +38,37 @@ public class ClickArea implements RemoteComposeOperation {
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void write(WireBuffer buffer) {
-        COMPANION.apply(buffer, this.mId, this.mContentDescription, this.mLeft, this.mTop, this.mRight, this.mBottom, this.mMetadata);
+        COMPANION.apply(
+                buffer,
+                this.mId,
+                this.mContentDescription,
+                this.mLeft,
+                this.mTop,
+                this.mRight,
+                this.mBottom,
+                this.mMetadata);
     }
 
     public String toString() {
-        return "CLICK_AREA <" + this.mId + " <" + this.mContentDescription + "> <" + this.mMetadata + ">+" + this.mLeft + " " + this.mTop + " " + this.mRight + " " + this.mBottom + "+ (" + (this.mRight - this.mLeft) + " x " + (this.mBottom - this.mTop) + " }";
+        return "CLICK_AREA <"
+                + this.mId
+                + " <"
+                + this.mContentDescription
+                + "> <"
+                + this.mMetadata
+                + ">+"
+                + this.mLeft
+                + " "
+                + this.mTop
+                + " "
+                + this.mRight
+                + " "
+                + this.mBottom
+                + "+ ("
+                + (this.mRight - this.mLeft)
+                + " x "
+                + (this.mBottom - this.mTop)
+                + " }";
     }
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
@@ -42,7 +76,14 @@ public class ClickArea implements RemoteComposeOperation {
         if (context.getMode() != RemoteContext.ContextMode.DATA) {
             return;
         }
-        context.addClickArea(this.mId, this.mContentDescription, this.mLeft, this.mTop, this.mRight, this.mBottom, this.mMetadata);
+        context.addClickArea(
+                this.mId,
+                this.mContentDescription,
+                this.mLeft,
+                this.mTop,
+                this.mRight,
+                this.mBottom,
+                this.mMetadata);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
@@ -51,8 +92,7 @@ public class ClickArea implements RemoteComposeOperation {
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {
@@ -64,7 +104,15 @@ public class ClickArea implements RemoteComposeOperation {
             return 64;
         }
 
-        public void apply(WireBuffer buffer, int id, int contentDescription, float left, float top, float right, float bottom, int metadata) {
+        public void apply(
+                WireBuffer buffer,
+                int id,
+                int contentDescription,
+                float left,
+                float top,
+                float right,
+                float bottom,
+                int metadata) {
             buffer.start(64);
             buffer.writeInt(id);
             buffer.writeInt(contentDescription);
@@ -84,7 +132,8 @@ public class ClickArea implements RemoteComposeOperation {
             float right = buffer.readFloat();
             float bottom = buffer.readFloat();
             int metadata = buffer.readInt();
-            ClickArea clickArea = new ClickArea(id, contentDescription, left, top, right, bottom, metadata);
+            ClickArea clickArea =
+                    new ClickArea(id, contentDescription, left, top, right, bottom, metadata);
             operations.add(clickArea);
         }
     }

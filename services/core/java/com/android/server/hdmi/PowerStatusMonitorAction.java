@@ -2,7 +2,7 @@ package com.android.server.hdmi;
 
 import android.hardware.hdmi.HdmiDeviceInfo;
 import android.util.SparseIntArray;
-import com.android.server.hdmi.HdmiControlService;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -63,7 +63,8 @@ public final class PowerStatusMonitorAction extends HdmiCecFeatureAction {
             }
             HdmiDeviceInfo hdmiDeviceInfo = (HdmiDeviceInfo) it.next();
             if (hdmiControlService.getCecVersion() < 6 || hdmiDeviceInfo.getCecVersion() < 6) {
-                this.mPowerStatus.append(hdmiDeviceInfo.getLogicalAddress(), hdmiDeviceInfo.getDevicePowerStatus());
+                this.mPowerStatus.append(
+                        hdmiDeviceInfo.getLogicalAddress(), hdmiDeviceInfo.getDevicePowerStatus());
             }
         }
         Iterator it2 = arrayList.iterator();
@@ -71,14 +72,19 @@ public final class PowerStatusMonitorAction extends HdmiCecFeatureAction {
             HdmiDeviceInfo hdmiDeviceInfo2 = (HdmiDeviceInfo) it2.next();
             if (hdmiControlService.getCecVersion() < 6 || hdmiDeviceInfo2.getCecVersion() < 6) {
                 final int logicalAddress = hdmiDeviceInfo2.getLogicalAddress();
-                this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), logicalAddress, 143), new HdmiControlService.SendMessageCallback() { // from class: com.android.server.hdmi.PowerStatusMonitorAction.1
-                    @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
-                    public final void onSendCompleted(int i) {
-                        if (i != 0) {
-                            PowerStatusMonitorAction.this.updatePowerStatus(logicalAddress, -1, true);
-                        }
-                    }
-                });
+                this.mService.sendCecCommand(
+                        HdmiCecMessage.build(getSourceAddress(), logicalAddress, 143),
+                        new HdmiControlService
+                                .SendMessageCallback() { // from class:
+                                                         // com.android.server.hdmi.PowerStatusMonitorAction.1
+                            @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
+                            public final void onSendCompleted(int i) {
+                                if (i != 0) {
+                                    PowerStatusMonitorAction.this.updatePowerStatus(
+                                            logicalAddress, -1, true);
+                                }
+                            }
+                        });
             }
         }
         this.mState = 1;

@@ -5,7 +5,9 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
+
 import com.android.server.VcnManagementService$$ExternalSyntheticLambda10;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +22,8 @@ public abstract class SubtypeUtils {
     public static LocaleList sCachedSystemLocales;
     public static final VcnManagementService$$ExternalSyntheticLambda10 sSubtypeToLocale = null;
 
-    public static boolean containsSubtypeOf(InputMethodInfo inputMethodInfo, Locale locale, boolean z, String str) {
+    public static boolean containsSubtypeOf(
+            InputMethodInfo inputMethodInfo, Locale locale, boolean z, String str) {
         if (locale == null) {
             return false;
         }
@@ -28,7 +31,10 @@ public abstract class SubtypeUtils {
         for (int i = 0; i < subtypeCount; i++) {
             InputMethodSubtype subtypeAt = inputMethodInfo.getSubtypeAt(i);
             if (!z) {
-                if (!TextUtils.equals(new Locale(LocaleUtils.getLanguageFromLocaleString(subtypeAt.getLocale())).getLanguage(), locale.getLanguage())) {
+                if (!TextUtils.equals(
+                        new Locale(LocaleUtils.getLanguageFromLocaleString(subtypeAt.getLocale()))
+                                .getLanguage(),
+                        locale.getLanguage())) {
                     continue;
                 }
                 return !TextUtils.isEmpty(str) ? true : true;
@@ -40,8 +46,7 @@ public abstract class SubtypeUtils {
                 if (!TextUtils.equals(localeObject.getCountry(), locale.getCountry())) {
                     continue;
                 }
-                if (!TextUtils.isEmpty(str) || str.equalsIgnoreCase(subtypeAt.getMode())) {
-                }
+                if (!TextUtils.isEmpty(str) || str.equalsIgnoreCase(subtypeAt.getMode())) {}
             } else {
                 continue;
             }
@@ -49,7 +54,8 @@ public abstract class SubtypeUtils {
         return false;
     }
 
-    public static InputMethodSubtype findLastResortApplicableSubtype(String str, String str2, List list) {
+    public static InputMethodSubtype findLastResortApplicableSubtype(
+            String str, String str2, List list) {
         InputMethodSubtype inputMethodSubtype = null;
         if (list.isEmpty()) {
             return null;
@@ -84,12 +90,14 @@ public abstract class SubtypeUtils {
         return inputMethodSubtype2 == null ? inputMethodSubtype : inputMethodSubtype2;
     }
 
-    public static ArrayList getImplicitlyApplicableSubtypes(LocaleList localeList, InputMethodInfo inputMethodInfo) {
+    public static ArrayList getImplicitlyApplicableSubtypes(
+            LocaleList localeList, InputMethodInfo inputMethodInfo) {
         ArrayList arrayList;
         InputMethodSubtype findLastResortApplicableSubtype;
         synchronized (sCacheLock) {
             try {
-                if (localeList.equals(sCachedSystemLocales) && sCachedInputMethodInfo == inputMethodInfo) {
+                if (localeList.equals(sCachedSystemLocales)
+                        && sCachedInputMethodInfo == inputMethodInfo) {
                     return new ArrayList(sCachedResult);
                 }
                 ArrayList arrayList2 = new ArrayList();
@@ -104,7 +112,8 @@ public abstract class SubtypeUtils {
                     int size = arrayList2.size();
                     ArrayMap arrayMap = new ArrayMap();
                     for (int i2 = 0; i2 < size; i2++) {
-                        InputMethodSubtype inputMethodSubtype = (InputMethodSubtype) arrayList2.get(i2);
+                        InputMethodSubtype inputMethodSubtype =
+                                (InputMethodSubtype) arrayList2.get(i2);
                         if (inputMethodSubtype.overridesImplicitlyEnabledSubtype()) {
                             String mode = inputMethodSubtype.getMode();
                             if (!arrayMap.containsKey(mode)) {
@@ -118,7 +127,8 @@ public abstract class SubtypeUtils {
                         ArrayMap arrayMap2 = new ArrayMap();
                         ArrayList arrayList3 = new ArrayList();
                         for (int i3 = 0; i3 < size; i3++) {
-                            InputMethodSubtype inputMethodSubtype2 = (InputMethodSubtype) arrayList2.get(i3);
+                            InputMethodSubtype inputMethodSubtype2 =
+                                    (InputMethodSubtype) arrayList2.get(i3);
                             String mode2 = inputMethodSubtype2.getMode();
                             if ("keyboard".equals(mode2)) {
                                 arrayList3.add(inputMethodSubtype2);
@@ -138,25 +148,34 @@ public abstract class SubtypeUtils {
                                 if (i4 >= size2) {
                                     int size3 = arrayList3.size();
                                     for (int i5 = 0; i5 < size3; i5++) {
-                                        InputMethodSubtype inputMethodSubtype3 = (InputMethodSubtype) arrayList3.get(i5);
-                                        if ("keyboard".equals(inputMethodSubtype3.getMode()) && inputMethodSubtype3.containsExtraValueKey("EnabledWhenDefaultIsNotAsciiCapable")) {
+                                        InputMethodSubtype inputMethodSubtype3 =
+                                                (InputMethodSubtype) arrayList3.get(i5);
+                                        if ("keyboard".equals(inputMethodSubtype3.getMode())
+                                                && inputMethodSubtype3.containsExtraValueKey(
+                                                        "EnabledWhenDefaultIsNotAsciiCapable")) {
                                             arrayList4.add(inputMethodSubtype3);
                                         }
                                     }
                                 } else {
-                                    if (((InputMethodSubtype) arrayList4.get(i4)).isAsciiCapable()) {
+                                    if (((InputMethodSubtype) arrayList4.get(i4))
+                                            .isAsciiCapable()) {
                                         break;
                                     }
                                     i4++;
                                 }
                             }
                         }
-                        if (arrayList4.isEmpty() && (findLastResortApplicableSubtype = findLastResortApplicableSubtype("keyboard", locale, arrayList2)) != null) {
+                        if (arrayList4.isEmpty()
+                                && (findLastResortApplicableSubtype =
+                                                findLastResortApplicableSubtype(
+                                                        "keyboard", locale, arrayList2))
+                                        != null) {
                             arrayList4.add(findLastResortApplicableSubtype);
                         }
                         Iterator it = arrayMap2.values().iterator();
                         while (it.hasNext()) {
-                            LocaleUtils.filterByLanguage((ArrayList) it.next(), localeList, arrayList4);
+                            LocaleUtils.filterByLanguage(
+                                    (ArrayList) it.next(), localeList, arrayList4);
                         }
                         arrayList = arrayList4;
                     }

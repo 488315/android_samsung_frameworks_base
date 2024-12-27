@@ -19,16 +19,13 @@ public interface IGetCredentialCallback extends IInterface {
 
     public static class Default implements IGetCredentialCallback {
         @Override // android.credentials.IGetCredentialCallback
-        public void onPendingIntent(PendingIntent pendingIntent) throws RemoteException {
-        }
+        public void onPendingIntent(PendingIntent pendingIntent) throws RemoteException {}
 
         @Override // android.credentials.IGetCredentialCallback
-        public void onResponse(GetCredentialResponse response) throws RemoteException {
-        }
+        public void onResponse(GetCredentialResponse response) throws RemoteException {}
 
         @Override // android.credentials.IGetCredentialCallback
-        public void onError(String errorType, String message) throws RemoteException {
-        }
+        public void onError(String errorType, String message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +33,7 @@ public interface IGetCredentialCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetCredentialCallback {
+    public abstract static class Stub extends Binder implements IGetCredentialCallback {
         static final int TRANSACTION_onError = 3;
         static final int TRANSACTION_onPendingIntent = 1;
         static final int TRANSACTION_onResponse = 2;
@@ -80,7 +77,8 @@ public interface IGetCredentialCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGetCredentialCallback.DESCRIPTOR);
             }
@@ -90,12 +88,15 @@ public interface IGetCredentialCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    PendingIntent _arg0 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg0 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     onPendingIntent(_arg0);
                     return true;
                 case 2:
-                    GetCredentialResponse _arg02 = (GetCredentialResponse) data.readTypedObject(GetCredentialResponse.CREATOR);
+                    GetCredentialResponse _arg02 =
+                            (GetCredentialResponse)
+                                    data.readTypedObject(GetCredentialResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onResponse(_arg02);
                     return true;

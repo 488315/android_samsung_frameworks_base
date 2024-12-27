@@ -6,6 +6,7 @@ import android.content.pm.ModuleInfo;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.util.ArrayMap;
+
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,7 +25,8 @@ public class ModuleInfoProvider {
         this.mModuleInfo = new ArrayMap();
     }
 
-    public ModuleInfoProvider(XmlResourceParser xmlResourceParser, Resources resources, ApexManager apexManager) {
+    public ModuleInfoProvider(
+            XmlResourceParser xmlResourceParser, Resources resources, ApexManager apexManager) {
         this.mContext = null;
         this.mApexManager = apexManager;
         this.mModuleInfo = new ArrayMap();
@@ -47,15 +49,16 @@ public class ModuleInfoProvider {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0020, code lost:
-    
-        android.util.Slog.w("PackageManager.ModuleInfoProvider", "Unexpected metadata element: " + r7.getName());
-        r6.mModuleInfo.clear();
-     */
+
+       android.util.Slog.w("PackageManager.ModuleInfoProvider", "Unexpected metadata element: " + r7.getName());
+       r6.mModuleInfo.clear();
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void loadModuleMetadata(android.content.res.XmlResourceParser r7, android.content.res.Resources r8) {
+    public final void loadModuleMetadata(
+            android.content.res.XmlResourceParser r7, android.content.res.Resources r8) {
         /*
             r6 = this;
             java.lang.String r0 = "PackageManager.ModuleInfoProvider"
@@ -133,6 +136,9 @@ public class ModuleInfoProvider {
             r6.mMetadataLoaded = r1
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ModuleInfoProvider.loadModuleMetadata(android.content.res.XmlResourceParser, android.content.res.Resources):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.ModuleInfoProvider.loadModuleMetadata(android.content.res.XmlResourceParser,"
+                    + " android.content.res.Resources):void");
     }
 }

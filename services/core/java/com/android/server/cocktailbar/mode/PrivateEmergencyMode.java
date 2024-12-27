@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Debug;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
+
 import com.samsung.android.emergencymode.SemEmergencyManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
@@ -36,7 +38,8 @@ public final class PrivateEmergencyMode extends AbsPrivateMode {
         }
         int intExtra = intent.getIntExtra("reason", 0);
         if (DEBUG) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(intExtra, "EMERGENCY_STATE_CHANGED : reason = ", "PrivateEmergencyMode");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    intExtra, "EMERGENCY_STATE_CHANGED : reason = ", "PrivateEmergencyMode");
         }
         if (intExtra == 2) {
             return 2;
@@ -46,7 +49,9 @@ public final class PrivateEmergencyMode extends AbsPrivateMode {
         }
         Slog.d("PrivateEmergencyMode", "start cocktailbarservice");
         Intent intent2 = new Intent("android.intent.action.MAIN");
-        intent2.setClassName(KnoxCustomManagerService.LAUNCHER_PACKAGE, "com.samsung.app.honeyspace.edge.CocktailBarService");
+        intent2.setClassName(
+                KnoxCustomManagerService.LAUNCHER_PACKAGE,
+                "com.samsung.app.honeyspace.edge.CocktailBarService");
         this.mContext.startServiceAsUser(intent2, new UserHandle(ActivityManager.getCurrentUser()));
         return 3;
     }

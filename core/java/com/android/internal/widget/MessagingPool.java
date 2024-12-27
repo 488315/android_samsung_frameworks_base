@@ -29,6 +29,5 @@ public class MessagingPool<T extends View> implements Pools.Pool<T> {
         return false;
     }
 
-    public void clear() {
-    }
+    public void clear() {}
 }

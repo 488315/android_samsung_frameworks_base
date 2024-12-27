@@ -9,6 +9,7 @@ import android.os.Message;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
@@ -31,8 +32,10 @@ import com.android.server.chimera.umr.KernelMemoryProxy$ReclaimerLog;
 import com.android.server.chimera.umr.UnifiedMemoryReclaimer;
 import com.android.server.wm.LaunchObserverRegistryImpl;
 import com.android.server.wm.LaunchObserverRegistryImpl$$ExternalSyntheticLambda0;
+
 import com.samsung.android.chimera.IChimera;
 import com.samsung.android.chimera.genie.MemRequest;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -74,7 +77,8 @@ public final class ChimeraManagerService extends IChimera.Stub {
             synchronized (repositoryFactory) {
                 try {
                     if (repositoryFactory.mSystemRepository == null) {
-                        repositoryFactory.mSystemRepository = new SystemRepository(context, activityManagerService);
+                        repositoryFactory.mSystemRepository =
+                                new SystemRepository(context, activityManagerService);
                     }
                     systemRepository2 = repositoryFactory.mSystemRepository;
                 } catch (Throwable th) {
@@ -86,7 +90,8 @@ public final class ChimeraManagerService extends IChimera.Stub {
             synchronized (repositoryFactory2) {
                 try {
                     if (repositoryFactory2.mSettingRepository == null) {
-                        repositoryFactory2.mSettingRepository = new SettingRepository(systemRepository2);
+                        repositoryFactory2.mSettingRepository =
+                                new SettingRepository(systemRepository2);
                     }
                     settingRepository = repositoryFactory2.mSettingRepository;
                 } catch (Throwable th2) {
@@ -97,11 +102,14 @@ public final class ChimeraManagerService extends IChimera.Stub {
             HandlerThread handlerThread = new HandlerThread("ObserverHandler");
             chimeraManager.mHandlerThread = handlerThread;
             handlerThread.start();
-            new ChimeraRecentAppManager(systemRepository2, settingRepository, handlerThread.getLooper());
-            chimeraManager.mChimeraStrategy = new ChimeraStrategy(systemRepository2, settingRepository);
+            new ChimeraRecentAppManager(
+                    systemRepository2, settingRepository, handlerThread.getLooper());
+            chimeraManager.mChimeraStrategy =
+                    new ChimeraStrategy(systemRepository2, settingRepository);
             chimeraManager.mAppManager = new ChimeraAppManager(systemRepository2);
             chimeraManager.mContext = context;
-            chimeraManager.mSystemEventListener = new SystemEventListener(context, handlerThread.getLooper(), systemRepository2);
+            chimeraManager.mSystemEventListener =
+                    new SystemEventListener(context, handlerThread.getLooper(), systemRepository2);
             AbnormalFgsDetector abnormalFgsDetector = new AbnormalFgsDetector();
             abnormalFgsDetector.mHeavyApps = new ArrayList();
             abnormalFgsDetector.mKillableHeavyApps = new ArrayList();
@@ -111,18 +119,26 @@ public final class ChimeraManagerService extends IChimera.Stub {
                 AbnormalFgsDetector.mSystemRepository = systemRepository2;
             }
             chimeraManager.mAbnormalFgsDetector = abnormalFgsDetector;
-            Heimdall heimdall = new Heimdall(handlerThread.getLooper(), context, activityManagerService);
+            Heimdall heimdall =
+                    new Heimdall(handlerThread.getLooper(), context, activityManagerService);
             chimeraManager.mHeimdall = heimdall;
-            HeimdallAlwaysRunningMonitor heimdallAlwaysRunningMonitor = HeimdallAlwaysRunningMonitor.INSTANCE;
+            HeimdallAlwaysRunningMonitor heimdallAlwaysRunningMonitor =
+                    HeimdallAlwaysRunningMonitor.INSTANCE;
             if (!heimdallAlwaysRunningMonitor.mIsInit) {
                 heimdallAlwaysRunningMonitor.mContext = context;
                 heimdallAlwaysRunningMonitor.mHeimdall = heimdall;
                 heimdallAlwaysRunningMonitor.mSystemRepository = systemRepository2;
-                ServiceThread serviceThread = new ServiceThread(10, "HeimdallAlwaysRunningMonitor", true);
+                ServiceThread serviceThread =
+                        new ServiceThread(10, "HeimdallAlwaysRunningMonitor", true);
                 heimdallAlwaysRunningMonitor.mServiceThread = serviceThread;
                 serviceThread.start();
-                heimdallAlwaysRunningMonitor.mHandler = heimdallAlwaysRunningMonitor.new OomAdjHandler();
-                if (heimdallAlwaysRunningMonitor.mContext.getPackageManager().getPackageInfo("com.salab.issuetracker", 0) != null) {
+                heimdallAlwaysRunningMonitor.mHandler =
+                        heimdallAlwaysRunningMonitor.new OomAdjHandler();
+                if (heimdallAlwaysRunningMonitor
+                                .mContext
+                                .getPackageManager()
+                                .getPackageInfo("com.salab.issuetracker", 0)
+                        != null) {
                     z = true;
                     heimdallAlwaysRunningMonitor.mIsIssueTrackerInstalled = z;
                     heimdallAlwaysRunningMonitor.mIsInit = true;
@@ -131,13 +147,18 @@ public final class ChimeraManagerService extends IChimera.Stub {
                 heimdallAlwaysRunningMonitor.mIsIssueTrackerInstalled = z;
                 heimdallAlwaysRunningMonitor.mIsInit = true;
             }
-            ((ArrayList) chimeraManager.mSystemEventListener.mMediaScanFinishedListeners).add(chimeraManager);
+            ((ArrayList) chimeraManager.mSystemEventListener.mMediaScanFinishedListeners)
+                    .add(chimeraManager);
             this.mChimeraManager = chimeraManager;
         }
         boolean z3 = UnifiedMemoryReclaimer.MODEL_UMR_ENABLED;
         try {
-            KernelMemoryProxy$ReclaimerLog.write("init: UnifiedMemoryReclaimer is disabled by config", true);
-            KernelMemoryProxy$ReclaimerLog.write("init: CORERUNE_UMR_ENABLED = true, MODEL_UMR_ENABLED = " + UnifiedMemoryReclaimer.MODEL_UMR_ENABLED, true);
+            KernelMemoryProxy$ReclaimerLog.write(
+                    "init: UnifiedMemoryReclaimer is disabled by config", true);
+            KernelMemoryProxy$ReclaimerLog.write(
+                    "init: CORERUNE_UMR_ENABLED = true, MODEL_UMR_ENABLED = "
+                            + UnifiedMemoryReclaimer.MODEL_UMR_ENABLED,
+                    true);
         } catch (Exception e) {
             KernelMemoryProxy$ReclaimerLog.write("init: failed by exception", true);
             e.printStackTrace();
@@ -147,7 +168,8 @@ public final class ChimeraManagerService extends IChimera.Stub {
             synchronized (repositoryFactory3) {
                 try {
                     if (repositoryFactory3.mSystemRepository == null) {
-                        repositoryFactory3.mSystemRepository = new SystemRepository(context, activityManagerService);
+                        repositoryFactory3.mSystemRepository =
+                                new SystemRepository(context, activityManagerService);
                     }
                     systemRepository = repositoryFactory3.mSystemRepository;
                 } catch (Throwable th3) {
@@ -170,7 +192,8 @@ public final class ChimeraManagerService extends IChimera.Stub {
             genieMemoryManager.mGenieConfigurations = new GenieConfigurations();
             genieMemoryManager.mMemoryReclaimer = new MemoryReclaimer();
             genieMemoryManager.mSystemRepository = systemRepository;
-            GenieMemoryManager.ModelEventReceiver modelEventReceiver = genieMemoryManager.new ModelEventReceiver();
+            GenieMemoryManager.ModelEventReceiver modelEventReceiver =
+                    genieMemoryManager.new ModelEventReceiver();
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction("com.samsung.GEN_AI_RECLAIM");
             intentFilter.addAction("AICORE_BROADCAST_ACTION_MODEL_LOADING");
@@ -201,7 +224,11 @@ public final class ChimeraManagerService extends IChimera.Stub {
         if (chimeraManager != null) {
             try {
                 Heimdall heimdall = chimeraManager.mHeimdall;
-                if (heimdall.DISABLED || heimdall.mHeimdallPhaseManager == null || (phaseHandler = heimdall.mPhaseHandler) == null || str == null || str2 == null) {
+                if (heimdall.DISABLED
+                        || heimdall.mHeimdallPhaseManager == null
+                        || (phaseHandler = heimdall.mPhaseHandler) == null
+                        || str == null
+                        || str2 == null) {
                     return;
                 }
                 int i3 = heimdall.mAnomalyType;
@@ -222,7 +249,8 @@ public final class ChimeraManagerService extends IChimera.Stub {
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (strArr != null && strArr.length != 0 && strArr.length != 0) {
             for (String str : strArr) {
                 if ("-enable_chimera".equals(str)) {
@@ -236,7 +264,12 @@ public final class ChimeraManagerService extends IChimera.Stub {
                         printWriter.println("GenieMemoryManager Config");
                         printWriter.println("Timeout: 5000");
                         printWriter.println("ThrottleTime: 600000");
-                        printWriter.println("Default Size Request: Samsung : " + GenieMemoryManager.DEFAULT_SAMSUNG_MODEL_SIZE + " kB Google : " + GenieMemoryManager.DEFAULT_GOOGLE_MODEL_SIZE + " kB");
+                        printWriter.println(
+                                "Default Size Request: Samsung : "
+                                        + GenieMemoryManager.DEFAULT_SAMSUNG_MODEL_SIZE
+                                        + " kB Google : "
+                                        + GenieMemoryManager.DEFAULT_GOOGLE_MODEL_SIZE
+                                        + " kB");
                         synchronized (GenieLogger.sLock) {
                             try {
                                 printWriter.println();
@@ -254,7 +287,11 @@ public final class ChimeraManagerService extends IChimera.Stub {
                                         printWriter.println();
                                     }
                                     printWriter.println();
-                                    printWriter.println("Total Requests : " + GenieLogger.sRequestCount + " | Reclaimed Requests" + GenieLogger.sReclaimedRequests);
+                                    printWriter.println(
+                                            "Total Requests : "
+                                                    + GenieLogger.sRequestCount
+                                                    + " | Reclaimed Requests"
+                                                    + GenieLogger.sReclaimedRequests);
                                 }
                             } finally {
                             }
@@ -298,7 +335,10 @@ public final class ChimeraManagerService extends IChimera.Stub {
                 }
                 printWriter.println(sb.toString());
             } else if (str2.equals("use_bg_keeping_policy")) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Chimera set ConservativePolicy mode: "), strArr[1], printWriter);
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Chimera set ConservativePolicy mode: "),
+                        strArr[1],
+                        printWriter);
                 boolean equals2 = "true".equals(strArr[1].toLowerCase());
                 if (equals2 != settingRepository.mIsConservativeMode) {
                     settingRepository.mIsConservativeMode = equals2;
@@ -306,32 +346,55 @@ public final class ChimeraManagerService extends IChimera.Stub {
                     chimeraManager.createPolicyHandler();
                 }
             } else if (str2.equals("enable_quick_reclaim")) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Chimera enable quick reclaim: "), strArr[1], printWriter);
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Chimera enable quick reclaim: "),
+                        strArr[1],
+                        printWriter);
                 boolean equalsIgnoreCase = "true".equalsIgnoreCase(strArr[1]);
                 if (equalsIgnoreCase != settingRepository.mQuickReclaimEnable) {
                     settingRepository.mQuickReclaimEnable = equalsIgnoreCase;
                     SystemEventListener systemEventListener = chimeraManager.mSystemEventListener;
                     if (equalsIgnoreCase) {
                         systemEventListener.addCameraDeviceStateCallback(chimeraManager.mContext);
-                        ((ArrayList) systemEventListener.mAppLaunchIntentListeners).add(chimeraManager.mPolicyHandler);
-                        LaunchObserverRegistryImpl launchObserverRegistryImpl = (LaunchObserverRegistryImpl) systemEventListener.provideLaunchObserverRegistry();
-                        launchObserverRegistryImpl.mHandler.sendMessage(PooledLambda.obtainMessage(new LaunchObserverRegistryImpl$$ExternalSyntheticLambda0(1), launchObserverRegistryImpl, systemEventListener.mAppLaunchObserver));
+                        ((ArrayList) systemEventListener.mAppLaunchIntentListeners)
+                                .add(chimeraManager.mPolicyHandler);
+                        LaunchObserverRegistryImpl launchObserverRegistryImpl =
+                                (LaunchObserverRegistryImpl)
+                                        systemEventListener.provideLaunchObserverRegistry();
+                        launchObserverRegistryImpl.mHandler.sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new LaunchObserverRegistryImpl$$ExternalSyntheticLambda0(1),
+                                        launchObserverRegistryImpl,
+                                        systemEventListener.mAppLaunchObserver));
                         boolean z = MARsPolicyManager.MARs_ENABLE;
                         MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.getClass();
                         if (!MARsPolicyManager.isChinaPolicyEnabled()) {
-                            systemEventListener.addCameraDeviceStateCallback(chimeraManager.mContext);
+                            systemEventListener.addCameraDeviceStateCallback(
+                                    chimeraManager.mContext);
                         }
                     } else {
                         Context context = chimeraManager.mContext;
                         systemEventListener.getClass();
-                        ((CameraManager) context.getSystemService("camera")).unregisterSemCameraDeviceStateCallback(systemEventListener.mSystemRepository.mCameraDeviceStateCallback);
-                        ((ArrayList) systemEventListener.mAppLaunchIntentListeners).remove(chimeraManager.mPolicyHandler);
-                        LaunchObserverRegistryImpl launchObserverRegistryImpl2 = (LaunchObserverRegistryImpl) systemEventListener.provideLaunchObserverRegistry();
-                        launchObserverRegistryImpl2.mHandler.sendMessage(PooledLambda.obtainMessage(new LaunchObserverRegistryImpl$$ExternalSyntheticLambda0(0), launchObserverRegistryImpl2, systemEventListener.mAppLaunchObserver));
+                        ((CameraManager) context.getSystemService("camera"))
+                                .unregisterSemCameraDeviceStateCallback(
+                                        systemEventListener
+                                                .mSystemRepository
+                                                .mCameraDeviceStateCallback);
+                        ((ArrayList) systemEventListener.mAppLaunchIntentListeners)
+                                .remove(chimeraManager.mPolicyHandler);
+                        LaunchObserverRegistryImpl launchObserverRegistryImpl2 =
+                                (LaunchObserverRegistryImpl)
+                                        systemEventListener.provideLaunchObserverRegistry();
+                        launchObserverRegistryImpl2.mHandler.sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new LaunchObserverRegistryImpl$$ExternalSyntheticLambda0(0),
+                                        launchObserverRegistryImpl2,
+                                        systemEventListener.mAppLaunchObserver));
                         boolean z2 = MARsPolicyManager.MARs_ENABLE;
                         MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.getClass();
                         if (!MARsPolicyManager.isChinaPolicyEnabled()) {
-                            systemEventListener.addCameraDeviceStateCallback(chimeraManager.mContext);
+                            systemEventListener.addCameraDeviceStateCallback(
+                                    chimeraManager.mContext);
                         }
                     }
                 }
@@ -355,7 +418,8 @@ public final class ChimeraManagerService extends IChimera.Stub {
                             pSITracker.getPSIValueListDump(printWriter, 0L, 0L);
                         } else {
                             try {
-                                pSITracker.getPSIValueListDump(printWriter, Long.parseLong(str4), Long.parseLong(str5));
+                                pSITracker.getPSIValueListDump(
+                                        printWriter, Long.parseLong(str4), Long.parseLong(str5));
                             } catch (NumberFormatException unused) {
                                 pSITracker.getPSIValueListDump(printWriter, 0L, 0L);
                             }
@@ -365,7 +429,10 @@ public final class ChimeraManagerService extends IChimera.Stub {
                     }
                 }
             } else if (str2.equals("enable_app_cache_reclaim")) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Chimera enable app cache reclaim: "), strArr[1], printWriter);
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Chimera enable app cache reclaim: "),
+                        strArr[1],
+                        printWriter);
                 boolean equalsIgnoreCase2 = "true".equalsIgnoreCase(strArr[1]);
                 if (equalsIgnoreCase2 != settingRepository.mIsAppCacheReclaimEnable) {
                     settingRepository.mIsAppCacheReclaimEnable = equalsIgnoreCase2;
@@ -384,7 +451,10 @@ public final class ChimeraManagerService extends IChimera.Stub {
                     if (str2.equals("umr")) {
                         UnifiedMemoryReclaimer.dumpInfo(printWriter);
                     } else if (str2.equals("set_subprockill")) {
-                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Chimera enable sub process kill: "), strArr[1], printWriter);
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("Chimera enable sub process kill: "),
+                                strArr[1],
+                                printWriter);
                         boolean equals3 = "true".equals(strArr[1].toLowerCase());
                         if (equals3 != settingRepository.mIsSubProcEnable) {
                             settingRepository.mIsSubProcEnable = equals3;
@@ -417,14 +487,20 @@ public final class ChimeraManagerService extends IChimera.Stub {
                     } catch (NumberFormatException e2) {
                         printWriter.println(e2.getMessage());
                     }
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("ProtectedCount On Lmkd : "), chimeraStrategy.mProtectedCountOnLmkdTrigger, printWriter);
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("ProtectedCount On Lmkd : "),
+                            chimeraStrategy.mProtectedCountOnLmkdTrigger,
+                            printWriter);
                 } else if (str6.equals("set_protected_count_on_home") && strArr.length > 1) {
                     try {
                         chimeraStrategy.mProtectedCountOnHomeTrigger = Integer.parseInt(strArr[1]);
                     } catch (NumberFormatException e3) {
                         printWriter.println(e3.getMessage());
                     }
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("ProtectedCount On Home : "), chimeraStrategy.mProtectedCountOnHomeTrigger, printWriter);
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("ProtectedCount On Home : "),
+                            chimeraStrategy.mProtectedCountOnHomeTrigger,
+                            printWriter);
                 }
             }
         }
@@ -450,12 +526,15 @@ public final class ChimeraManagerService extends IChimera.Stub {
                 AbnormalFgsDetector.printHeavyAppItems(printWriter, abnormalFgsDetector.mHeavyApps);
                 printWriter.println("]");
                 printWriter.print("KillableHeavyApps : [");
-                AbnormalFgsDetector.printHeavyAppItems(printWriter, abnormalFgsDetector.mKillableHeavyApps);
+                AbnormalFgsDetector.printHeavyAppItems(
+                        printWriter, abnormalFgsDetector.mKillableHeavyApps);
                 printWriter.println("]");
                 printWriter.print("AbnormalHeavyApps : [Current ");
-                AbnormalFgsDetector.printHeavyAppItems(printWriter, abnormalFgsDetector.mAbnormalHeavyApps);
+                AbnormalFgsDetector.printHeavyAppItems(
+                        printWriter, abnormalFgsDetector.mAbnormalHeavyApps);
                 printWriter.print(" Reported ");
-                AbnormalFgsDetector.printHeavyAppItems(printWriter, abnormalFgsDetector.mReportedAbnormalHeavyApps);
+                AbnormalFgsDetector.printHeavyAppItems(
+                        printWriter, abnormalFgsDetector.mReportedAbnormalHeavyApps);
                 printWriter.println("]");
             }
             if (heimdall != null) {
@@ -466,27 +545,27 @@ public final class ChimeraManagerService extends IChimera.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:25:0x00e7, code lost:
-    
-        r0 = new java.util.ArrayList();
-        r1 = 0;
-     */
+
+       r0 = new java.util.ArrayList();
+       r1 = 0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x00f1, code lost:
-    
-        if (r1 >= r4.size()) goto L46;
-     */
+
+       if (r1 >= r4.size()) goto L46;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x00f3, code lost:
-    
-        r0.add(new com.samsung.android.chimera.PSIAvailableMem(((java.lang.Long) r6.get(r1)).longValue(), ((java.lang.Long) r7.get(r1)).longValue(), ((java.lang.Long) r8.get(r1)).longValue(), ((java.lang.Long) r9.get(r1)).longValue()));
-        r1 = r1 + 1;
-     */
+
+       r0.add(new com.samsung.android.chimera.PSIAvailableMem(((java.lang.Long) r6.get(r1)).longValue(), ((java.lang.Long) r7.get(r1)).longValue(), ((java.lang.Long) r8.get(r1)).longValue(), ((java.lang.Long) r9.get(r1)).longValue()));
+       r1 = r1 + 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:?, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x00e4, code lost:
-    
-        if (r1 == null) goto L33;
-     */
+
+       if (r1 == null) goto L33;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -496,13 +575,19 @@ public final class ChimeraManagerService extends IChimera.Stub {
             Method dump skipped, instructions count: 304
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.ChimeraManagerService.getAvailableMemInfo(long, long):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.ChimeraManagerService.getAvailableMemInfo(long,"
+                    + " long):java.util.List");
     }
 
     public final ChimeraDataInfo getChimeraStat() {
         ChimeraManager chimeraManager = this.mChimeraManager;
         if (chimeraManager != null) {
-            return (ChimeraDataInfo) Optional.ofNullable(chimeraManager.mPolicyHandler).map(new ChimeraManager$$ExternalSyntheticLambda0()).orElse(new ChimeraDataInfo());
+            return (ChimeraDataInfo)
+                    Optional.ofNullable(chimeraManager.mPolicyHandler)
+                            .map(new ChimeraManager$$ExternalSyntheticLambda0())
+                            .orElse(new ChimeraDataInfo());
         }
         return null;
     }
@@ -520,7 +605,12 @@ public final class ChimeraManagerService extends IChimera.Stub {
             mGenieMemoryManager.setGenieSessionEnd();
             GenieMemoryManager genieMemoryManager = mGenieMemoryManager;
             genieMemoryManager.getClass();
-            genieMemoryManager.startUnloadTimerLocked((String) ((HashMap) GenieConfigurations.sGenAIPackageMap).get(genieMemoryManager.mContext.getPackageManager().getPackagesForUid(Binder.getCallingUid())[0]));
+            genieMemoryManager.startUnloadTimerLocked(
+                    (String)
+                            ((HashMap) GenieConfigurations.sGenAIPackageMap)
+                                    .get(
+                                            genieMemoryManager.mContext.getPackageManager()
+                                                    .getPackagesForUid(Binder.getCallingUid())[0]));
         }
     }
 

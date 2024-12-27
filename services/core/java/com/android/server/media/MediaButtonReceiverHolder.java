@@ -13,7 +13,8 @@ public final class MediaButtonReceiverHolder {
     public final PendingIntent mPendingIntent;
     public final int mUserId;
 
-    public MediaButtonReceiverHolder(int i, PendingIntent pendingIntent, ComponentName componentName, int i2) {
+    public MediaButtonReceiverHolder(
+            int i, PendingIntent pendingIntent, ComponentName componentName, int i2) {
         this.mUserId = i;
         this.mPendingIntent = pendingIntent;
         this.mComponentName = componentName;

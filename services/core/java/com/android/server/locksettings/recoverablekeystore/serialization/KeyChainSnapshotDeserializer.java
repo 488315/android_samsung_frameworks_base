@@ -6,8 +6,10 @@ import android.security.keystore.recovery.KeyDerivationParams;
 import android.security.keystore.recovery.WrappedApplicationKey;
 import android.util.Base64;
 import android.util.Xml;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.modules.utils.TypedXmlPullParser;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.cert.CertificateException;
@@ -90,7 +92,8 @@ public abstract class KeyChainSnapshotDeserializer {
                 try {
                     return builder.build();
                 } catch (NullPointerException e) {
-                    throw new KeyChainSnapshotParserException("Failed to build KeyChainSnapshot", e);
+                    throw new KeyChainSnapshotParserException(
+                            "Failed to build KeyChainSnapshot", e);
                 }
             }
             if (resolvePullParser.getEventType() == 2) {
@@ -310,7 +313,13 @@ public abstract class KeyChainSnapshotDeserializer {
                         str16 = str46;
                         try {
                             try {
-                                builder.setTrustedHardwareCertPath(CertificateFactory.getInstance("X.509").generateCertPath(new ByteArrayInputStream(readBlobTag(resolvePullParser, str15))));
+                                builder.setTrustedHardwareCertPath(
+                                        CertificateFactory.getInstance("X.509")
+                                                .generateCertPath(
+                                                        new ByteArrayInputStream(
+                                                                readBlobTag(
+                                                                        resolvePullParser,
+                                                                        str15))));
                                 str9 = str;
                                 str13 = str17;
                                 str44 = str15;
@@ -330,10 +339,12 @@ public abstract class KeyChainSnapshotDeserializer {
                                 str45 = str9;
                                 break;
                             } catch (CertificateException e2) {
-                                throw new KeyChainSnapshotParserException("Could not parse CertPath in tag " + str15, e2);
+                                throw new KeyChainSnapshotParserException(
+                                        "Could not parse CertPath in tag " + str15, e2);
                             }
                         } catch (CertificateException e3) {
-                            throw new KeyChainSnapshotParserException("Could not set trustedHardwareCertPath", e3);
+                            throw new KeyChainSnapshotParserException(
+                                    "Could not set trustedHardwareCertPath", e3);
                         }
                     case 4:
                         str2 = str37;
@@ -399,7 +410,8 @@ public abstract class KeyChainSnapshotDeserializer {
                                 break;
                             } else if (resolvePullParser.getEventType() == i2) {
                                 resolvePullParser.require(i2, str58, "applicationKey");
-                                WrappedApplicationKey.Builder builder2 = new WrappedApplicationKey.Builder();
+                                WrappedApplicationKey.Builder builder2 =
+                                        new WrappedApplicationKey.Builder();
                                 while (resolvePullParser.next() != i3) {
                                     if (resolvePullParser.getEventType() != 2) {
                                         i3 = 3;
@@ -463,13 +475,15 @@ public abstract class KeyChainSnapshotDeserializer {
                                                 str23 = str54;
                                                 str24 = str40;
                                                 i = 3;
-                                                builder2.setMetadata(readBlobTag(resolvePullParser, str22));
+                                                builder2.setMetadata(
+                                                        readBlobTag(resolvePullParser, str22));
                                                 break;
                                             case 1:
                                                 str23 = str54;
                                                 str24 = str40;
                                                 i = 3;
-                                                builder2.setEncryptedKeyMaterial(readBlobTag(resolvePullParser, str20));
+                                                builder2.setEncryptedKeyMaterial(
+                                                        readBlobTag(resolvePullParser, str20));
                                                 break;
                                             case 2:
                                                 str23 = str54;
@@ -482,7 +496,11 @@ public abstract class KeyChainSnapshotDeserializer {
                                                 break;
                                             default:
                                                 Locale locale = Locale.US;
-                                                throw new KeyChainSnapshotParserException(XmlUtils$$ExternalSyntheticOutline0.m(str54, name2, " in wrappedApplicationKey"));
+                                                throw new KeyChainSnapshotParserException(
+                                                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                                                str54,
+                                                                name2,
+                                                                " in wrappedApplicationKey"));
                                         }
                                         str54 = str23;
                                         str46 = str22;
@@ -515,7 +533,8 @@ public abstract class KeyChainSnapshotDeserializer {
                                     str38 = str61;
                                     str49 = str60;
                                 } catch (NullPointerException e4) {
-                                    throw new KeyChainSnapshotParserException("Failed to build WrappedApplicationKey", e4);
+                                    throw new KeyChainSnapshotParserException(
+                                            "Failed to build WrappedApplicationKey", e4);
                                 }
                             }
                         }
@@ -562,7 +581,10 @@ public abstract class KeyChainSnapshotDeserializer {
                             break;
                         } catch (NumberFormatException e5) {
                             Locale locale2 = Locale.US;
-                            throw new KeyChainSnapshotParserException(XmlUtils$$ExternalSyntheticOutline0.m("counterId expected long but got '", readText2, "'"), e5);
+                            throw new KeyChainSnapshotParserException(
+                                    XmlUtils$$ExternalSyntheticOutline0.m(
+                                            "counterId expected long but got '", readText2, "'"),
+                                    e5);
                         }
                     case 7:
                         resolvePullParser.require(2, (String) null, "keyChainProtectionParamsList");
@@ -577,15 +599,18 @@ public abstract class KeyChainSnapshotDeserializer {
                                 str8 = str51;
                                 str28 = str42;
                                 str7 = str50;
-                                resolvePullParser.require(3, (String) null, "keyChainProtectionParamsList");
+                                resolvePullParser.require(
+                                        3, (String) null, "keyChainProtectionParamsList");
                                 builder.setKeyChainProtectionParams(arrayList2);
                                 break;
                             } else if (resolvePullParser.getEventType() != 2) {
                                 str41 = str3;
                             } else {
                                 String str66 = str47;
-                                resolvePullParser.require(2, (String) null, "keyChainProtectionParams");
-                                KeyChainProtectionParams.Builder builder3 = new KeyChainProtectionParams.Builder();
+                                resolvePullParser.require(
+                                        2, (String) null, "keyChainProtectionParams");
+                                KeyChainProtectionParams.Builder builder3 =
+                                        new KeyChainProtectionParams.Builder();
                                 while (true) {
                                     String str67 = str44;
                                     if (resolvePullParser.next() == 3) {
@@ -594,7 +619,8 @@ public abstract class KeyChainSnapshotDeserializer {
                                         String str70 = str51;
                                         String str71 = str42;
                                         String str72 = str50;
-                                        resolvePullParser.require(3, (String) null, "keyChainProtectionParams");
+                                        resolvePullParser.require(
+                                                3, (String) null, "keyChainProtectionParams");
                                         try {
                                             arrayList2.add(builder3.build());
                                             str50 = str72;
@@ -606,7 +632,8 @@ public abstract class KeyChainSnapshotDeserializer {
                                             str51 = str70;
                                             str43 = str69;
                                         } catch (NullPointerException e6) {
-                                            throw new KeyChainSnapshotParserException("Failed to build KeyChainProtectionParams", e6);
+                                            throw new KeyChainSnapshotParserException(
+                                                    "Failed to build KeyChainProtectionParams", e6);
                                         }
                                     } else if (resolvePullParser.getEventType() != 2) {
                                         str44 = str67;
@@ -646,7 +673,8 @@ public abstract class KeyChainSnapshotDeserializer {
                                                 str31 = str51;
                                                 str32 = str42;
                                                 str33 = str50;
-                                                builder3.setLockScreenUiFormat(readIntTag(resolvePullParser, str40));
+                                                builder3.setLockScreenUiFormat(
+                                                        readIntTag(resolvePullParser, str40));
                                                 break;
                                             case 1:
                                                 str29 = str37;
@@ -654,7 +682,8 @@ public abstract class KeyChainSnapshotDeserializer {
                                                 str31 = str51;
                                                 str32 = str42;
                                                 str33 = str50;
-                                                builder3.setUserSecretType(readIntTag(resolvePullParser, str39));
+                                                builder3.setUserSecretType(
+                                                        readIntTag(resolvePullParser, str39));
                                                 break;
                                             case 2:
                                                 resolvePullParser.require(2, (String) null, str38);
@@ -665,7 +694,8 @@ public abstract class KeyChainSnapshotDeserializer {
                                                     str30 = str43;
                                                     if (resolvePullParser.next() != 3) {
                                                         if (resolvePullParser.getEventType() == 2) {
-                                                            String name4 = resolvePullParser.getName();
+                                                            String name4 =
+                                                                    resolvePullParser.getName();
                                                             name4.getClass();
                                                             switch (name4.hashCode()) {
                                                                 case -973274212:
@@ -707,17 +737,32 @@ public abstract class KeyChainSnapshotDeserializer {
                                                             }
                                                             switch (c5) {
                                                                 case 0:
-                                                                    i6 = readIntTag(resolvePullParser, str36);
+                                                                    i6 =
+                                                                            readIntTag(
+                                                                                    resolvePullParser,
+                                                                                    str36);
                                                                     break;
                                                                 case 1:
-                                                                    bArr = readBlobTag(resolvePullParser, str34);
+                                                                    bArr =
+                                                                            readBlobTag(
+                                                                                    resolvePullParser,
+                                                                                    str34);
                                                                     break;
                                                                 case 2:
-                                                                    i5 = readIntTag(resolvePullParser, str37);
+                                                                    i5 =
+                                                                            readIntTag(
+                                                                                    resolvePullParser,
+                                                                                    str37);
                                                                     break;
                                                                 default:
                                                                     Locale locale3 = Locale.US;
-                                                                    throw new KeyChainSnapshotParserException(XmlUtils$$ExternalSyntheticOutline0.m("Unexpected tag ", name4, " in keyDerivationParams"));
+                                                                    throw new KeyChainSnapshotParserException(
+                                                                            XmlUtils$$ExternalSyntheticOutline0
+                                                                                    .m(
+                                                                                            "Unexpected"
+                                                                                                + " tag ",
+                                                                                            name4,
+                                                                                            " in keyDerivationParams"));
                                                             }
                                                             str50 = str36;
                                                             str42 = str35;
@@ -729,26 +774,42 @@ public abstract class KeyChainSnapshotDeserializer {
                                                         str32 = str42;
                                                         str33 = str50;
                                                         if (bArr == null) {
-                                                            throw new KeyChainSnapshotParserException("salt was not set in keyDerivationParams");
+                                                            throw new KeyChainSnapshotParserException(
+                                                                    "salt was not set in"
+                                                                        + " keyDerivationParams");
                                                         }
                                                         str29 = str37;
                                                         int i7 = i5;
                                                         if (i7 == 1) {
-                                                            createSha256Params = KeyDerivationParams.createSha256Params(bArr);
+                                                            createSha256Params =
+                                                                    KeyDerivationParams
+                                                                            .createSha256Params(
+                                                                                    bArr);
                                                         } else {
                                                             if (i7 != 2) {
-                                                                throw new KeyChainSnapshotParserException("Unknown algorithm in keyDerivationParams");
+                                                                throw new KeyChainSnapshotParserException(
+                                                                        "Unknown algorithm in"
+                                                                            + " keyDerivationParams");
                                                             }
-                                                            createSha256Params = KeyDerivationParams.createScryptParams(bArr, i6);
+                                                            createSha256Params =
+                                                                    KeyDerivationParams
+                                                                            .createScryptParams(
+                                                                                    bArr, i6);
                                                         }
-                                                        resolvePullParser.require(3, (String) null, str38);
-                                                        builder3.setKeyDerivationParams(createSha256Params);
+                                                        resolvePullParser.require(
+                                                                3, (String) null, str38);
+                                                        builder3.setKeyDerivationParams(
+                                                                createSha256Params);
                                                         break;
                                                     }
                                                 }
                                             default:
                                                 Locale locale4 = Locale.US;
-                                                throw new KeyChainSnapshotParserException(XmlUtils$$ExternalSyntheticOutline0.m("Unexpected tag ", name3, " in keyChainProtectionParams"));
+                                                throw new KeyChainSnapshotParserException(
+                                                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                                                "Unexpected tag ",
+                                                                name3,
+                                                                " in keyChainProtectionParams"));
                                         }
                                         str50 = str33;
                                         str37 = str29;
@@ -795,7 +856,9 @@ public abstract class KeyChainSnapshotDeserializer {
                         break;
                     default:
                         Locale locale5 = Locale.US;
-                        throw new KeyChainSnapshotParserException(XmlUtils$$ExternalSyntheticOutline0.m("Unexpected tag ", name, " in keyChainSnapshot"));
+                        throw new KeyChainSnapshotParserException(
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        "Unexpected tag ", name, " in keyChainSnapshot"));
                 }
             }
             str52 = str53;
@@ -810,7 +873,8 @@ public abstract class KeyChainSnapshotDeserializer {
             return Base64.decode(readText, 0);
         } catch (IllegalArgumentException e) {
             Locale locale = Locale.US;
-            throw new KeyChainSnapshotParserException(str + " expected base64 encoded bytes but got '" + readText + "'", e);
+            throw new KeyChainSnapshotParserException(
+                    str + " expected base64 encoded bytes but got '" + readText + "'", e);
         }
     }
 
@@ -822,7 +886,8 @@ public abstract class KeyChainSnapshotDeserializer {
             return Integer.valueOf(readText).intValue();
         } catch (NumberFormatException e) {
             Locale locale = Locale.US;
-            throw new KeyChainSnapshotParserException(str + " expected int but got '" + readText + "'", e);
+            throw new KeyChainSnapshotParserException(
+                    str + " expected int but got '" + readText + "'", e);
         }
     }
 

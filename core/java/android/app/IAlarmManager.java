@@ -1,8 +1,6 @@
 package android.app;
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.IAlarmListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,6 +8,7 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.os.WorkSource;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -30,7 +29,19 @@ public interface IAlarmManager extends IInterface {
 
     void removeAll(String str) throws RemoteException;
 
-    void set(String str, int i, long j, long j2, long j3, int i2, PendingIntent pendingIntent, IAlarmListener iAlarmListener, String str2, WorkSource workSource, AlarmManager.AlarmClockInfo alarmClockInfo) throws RemoteException;
+    void set(
+            String str,
+            int i,
+            long j,
+            long j2,
+            long j3,
+            int i2,
+            PendingIntent pendingIntent,
+            IAlarmListener iAlarmListener,
+            String str2,
+            WorkSource workSource,
+            AlarmManager.AlarmClockInfo alarmClockInfo)
+            throws RemoteException;
 
     void setAutoPowerUp(String str) throws RemoteException;
 
@@ -40,8 +51,19 @@ public interface IAlarmManager extends IInterface {
 
     public static class Default implements IAlarmManager {
         @Override // android.app.IAlarmManager
-        public void set(String callingPackage, int type, long triggerAtTime, long windowLength, long interval, int flags, PendingIntent operation, IAlarmListener listener, String listenerTag, WorkSource workSource, AlarmManager.AlarmClockInfo alarmClock) throws RemoteException {
-        }
+        public void set(
+                String callingPackage,
+                int type,
+                long triggerAtTime,
+                long windowLength,
+                long interval,
+                int flags,
+                PendingIntent operation,
+                IAlarmListener listener,
+                String listenerTag,
+                WorkSource workSource,
+                AlarmManager.AlarmClockInfo alarmClock)
+                throws RemoteException {}
 
         @Override // android.app.IAlarmManager
         public boolean setTime(long millis) throws RemoteException {
@@ -49,16 +71,14 @@ public interface IAlarmManager extends IInterface {
         }
 
         @Override // android.app.IAlarmManager
-        public void setTimeZone(String zone) throws RemoteException {
-        }
+        public void setTimeZone(String zone) throws RemoteException {}
 
         @Override // android.app.IAlarmManager
-        public void remove(PendingIntent operation, IAlarmListener listener) throws RemoteException {
-        }
+        public void remove(PendingIntent operation, IAlarmListener listener)
+                throws RemoteException {}
 
         @Override // android.app.IAlarmManager
-        public void removeAll(String packageName) throws RemoteException {
-        }
+        public void removeAll(String packageName) throws RemoteException {}
 
         @Override // android.app.IAlarmManager
         public long getNextWakeFromIdleTime() throws RemoteException {
@@ -76,7 +96,8 @@ public interface IAlarmManager extends IInterface {
         }
 
         @Override // android.app.IAlarmManager
-        public boolean hasScheduleExactAlarm(String packageName, int userId) throws RemoteException {
+        public boolean hasScheduleExactAlarm(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -86,11 +107,11 @@ public interface IAlarmManager extends IInterface {
         }
 
         @Override // android.app.IAlarmManager
-        public void setAutoPowerUp(String time) throws RemoteException {
-        }
+        public void setAutoPowerUp(String time) throws RemoteException {}
 
         @Override // android.app.IAlarmManager
-        public List<AlarmManager.AlarmClockInfo> getNextAlarmClocks(int userId) throws RemoteException {
+        public List<AlarmManager.AlarmClockInfo> getNextAlarmClocks(int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -100,7 +121,7 @@ public interface IAlarmManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAlarmManager {
+    public abstract static class Stub extends Binder implements IAlarmManager {
         public static final String DESCRIPTOR = "android.app.IAlarmManager";
         static final int TRANSACTION_canScheduleExactAlarms = 8;
         static final int TRANSACTION_getConfigVersion = 10;
@@ -126,7 +147,9 @@ public interface IAlarmManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IAlarmManager asInterface(IBinder obj) {
@@ -182,7 +205,8 @@ public interface IAlarmManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -198,13 +222,18 @@ public interface IAlarmManager extends IInterface {
                     long _arg3 = data.readLong();
                     long _arg4 = data.readLong();
                     int _arg5 = data.readInt();
-                    PendingIntent _arg6 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg6 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     IAlarmListener _arg7 = IAlarmListener.Stub.asInterface(data.readStrongBinder());
                     String _arg8 = data.readString();
                     WorkSource _arg9 = (WorkSource) data.readTypedObject(WorkSource.CREATOR);
-                    AlarmManager.AlarmClockInfo _arg10 = (AlarmManager.AlarmClockInfo) data.readTypedObject(AlarmManager.AlarmClockInfo.CREATOR);
+                    AlarmManager.AlarmClockInfo _arg10 =
+                            (AlarmManager.AlarmClockInfo)
+                                    data.readTypedObject(AlarmManager.AlarmClockInfo.CREATOR);
                     data.enforceNoDataAvail();
-                    set(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10);
+                    set(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10);
                     reply.writeNoException();
                     return true;
                 case 2:
@@ -221,8 +250,10 @@ public interface IAlarmManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 4:
-                    PendingIntent _arg04 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    IAlarmListener _arg12 = IAlarmListener.Stub.asInterface(data.readStrongBinder());
+                    PendingIntent _arg04 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    IAlarmListener _arg12 =
+                            IAlarmListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     remove(_arg04, _arg12);
                     reply.writeNoException();
@@ -300,7 +331,19 @@ public interface IAlarmManager extends IInterface {
             }
 
             @Override // android.app.IAlarmManager
-            public void set(String callingPackage, int type, long triggerAtTime, long windowLength, long interval, int flags, PendingIntent operation, IAlarmListener listener, String listenerTag, WorkSource workSource, AlarmManager.AlarmClockInfo alarmClock) throws RemoteException {
+            public void set(
+                    String callingPackage,
+                    int type,
+                    long triggerAtTime,
+                    long windowLength,
+                    long interval,
+                    int flags,
+                    PendingIntent operation,
+                    IAlarmListener listener,
+                    String listenerTag,
+                    WorkSource workSource,
+                    AlarmManager.AlarmClockInfo alarmClock)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -414,7 +457,8 @@ public interface IAlarmManager extends IInterface {
             }
 
             @Override // android.app.IAlarmManager
-            public void remove(PendingIntent operation, IAlarmListener listener) throws RemoteException {
+            public void remove(PendingIntent operation, IAlarmListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -461,7 +505,8 @@ public interface IAlarmManager extends IInterface {
             }
 
             @Override // android.app.IAlarmManager
-            public AlarmManager.AlarmClockInfo getNextAlarmClock(int userId) throws RemoteException {
+            public AlarmManager.AlarmClockInfo getNextAlarmClock(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -469,7 +514,9 @@ public interface IAlarmManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    AlarmManager.AlarmClockInfo _result = (AlarmManager.AlarmClockInfo) _reply.readTypedObject(AlarmManager.AlarmClockInfo.CREATOR);
+                    AlarmManager.AlarmClockInfo _result =
+                            (AlarmManager.AlarmClockInfo)
+                                    _reply.readTypedObject(AlarmManager.AlarmClockInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -495,7 +542,8 @@ public interface IAlarmManager extends IInterface {
             }
 
             @Override // android.app.IAlarmManager
-            public boolean hasScheduleExactAlarm(String packageName, int userId) throws RemoteException {
+            public boolean hasScheduleExactAlarm(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -544,7 +592,8 @@ public interface IAlarmManager extends IInterface {
             }
 
             @Override // android.app.IAlarmManager
-            public List<AlarmManager.AlarmClockInfo> getNextAlarmClocks(int userId) throws RemoteException {
+            public List<AlarmManager.AlarmClockInfo> getNextAlarmClocks(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -552,7 +601,8 @@ public interface IAlarmManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    List<AlarmManager.AlarmClockInfo> _result = _reply.createTypedArrayList(AlarmManager.AlarmClockInfo.CREATOR);
+                    List<AlarmManager.AlarmClockInfo> _result =
+                            _reply.createTypedArrayList(AlarmManager.AlarmClockInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -562,15 +612,18 @@ public interface IAlarmManager extends IInterface {
         }
 
         protected void setTime_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SET_TIME, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SET_TIME, getCallingPid(), getCallingUid());
         }
 
         protected void setTimeZone_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SET_TIME_ZONE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SET_TIME_ZONE, getCallingPid(), getCallingUid());
         }
 
         protected void getConfigVersion_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DUMP, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DUMP, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

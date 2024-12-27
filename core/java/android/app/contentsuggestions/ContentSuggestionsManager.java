@@ -1,15 +1,14 @@
 package android.app.contentsuggestions;
 
 import android.annotation.SystemApi;
-import android.app.contentsuggestions.ContentSuggestionsManager;
-import android.app.contentsuggestions.IClassificationsCallback;
-import android.app.contentsuggestions.ISelectionsCallback;
 import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.util.SyncResultReceiver;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -59,25 +58,38 @@ public final class ContentSuggestionsManager {
         }
     }
 
-    public void suggestContentSelections(SelectionsRequest request, Executor callbackExecutor, SelectionsCallback callback) {
+    public void suggestContentSelections(
+            SelectionsRequest request, Executor callbackExecutor, SelectionsCallback callback) {
         if (this.mService == null) {
-            Log.e(TAG, "suggestContentSelections called, but no ContentSuggestionsManager configured");
+            Log.e(
+                    TAG,
+                    "suggestContentSelections called, but no ContentSuggestionsManager configured");
             return;
         }
         try {
-            this.mService.suggestContentSelections(this.mUser, request, new SelectionsCallbackWrapper(callback, callbackExecutor));
+            this.mService.suggestContentSelections(
+                    this.mUser, request, new SelectionsCallbackWrapper(callback, callbackExecutor));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void classifyContentSelections(ClassificationsRequest request, Executor callbackExecutor, ClassificationsCallback callback) {
+    public void classifyContentSelections(
+            ClassificationsRequest request,
+            Executor callbackExecutor,
+            ClassificationsCallback callback) {
         if (this.mService == null) {
-            Log.e(TAG, "classifyContentSelections called, but no ContentSuggestionsManager configured");
+            Log.e(
+                    TAG,
+                    "classifyContentSelections called, but no ContentSuggestionsManager"
+                            + " configured");
             return;
         }
         try {
-            this.mService.classifyContentSelections(this.mUser, request, new ClassificationsCallbackWrapper(callback, callbackExecutor));
+            this.mService.classifyContentSelections(
+                    this.mUser,
+                    request,
+                    new ClassificationsCallbackWrapper(callback, callbackExecutor));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -136,7 +148,9 @@ public final class ContentSuggestionsManager {
 
     public void setDefaultServiceEnabled(int userId, boolean enabled) {
         if (this.mService == null) {
-            Log.e(TAG, "setDefaultServiceEnabled called, but no ContentSuggestionsManager configured");
+            Log.e(
+                    TAG,
+                    "setDefaultServiceEnabled called, but no ContentSuggestionsManager configured");
             return;
         }
         try {
@@ -157,22 +171,28 @@ public final class ContentSuggestionsManager {
         }
 
         @Override // android.app.contentsuggestions.ISelectionsCallback
-        public void onContentSelectionsAvailable(final int statusCode, final List<ContentSelection> selections) {
+        public void onContentSelectionsAvailable(
+                final int statusCode, final List<ContentSelection> selections) {
             long identity = Binder.clearCallingIdentity();
             try {
-                this.mExecutor.execute(new Runnable() { // from class: android.app.contentsuggestions.ContentSuggestionsManager$SelectionsCallbackWrapper$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ContentSuggestionsManager.SelectionsCallbackWrapper.this.lambda$onContentSelectionsAvailable$0(statusCode, selections);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.app.contentsuggestions.ContentSuggestionsManager$SelectionsCallbackWrapper$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ContentSuggestionsManager.SelectionsCallbackWrapper.this
+                                        .lambda$onContentSelectionsAvailable$0(
+                                                statusCode, selections);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onContentSelectionsAvailable$0(int statusCode, List selections) {
+        public /* synthetic */ void lambda$onContentSelectionsAvailable$0(
+                int statusCode, List selections) {
             this.mCallback.onContentSelectionsAvailable(statusCode, selections);
         }
     }
@@ -188,22 +208,28 @@ public final class ContentSuggestionsManager {
         }
 
         @Override // android.app.contentsuggestions.IClassificationsCallback
-        public void onContentClassificationsAvailable(final int statusCode, final List<ContentClassification> classifications) {
+        public void onContentClassificationsAvailable(
+                final int statusCode, final List<ContentClassification> classifications) {
             long identity = Binder.clearCallingIdentity();
             try {
-                this.mExecutor.execute(new Runnable() { // from class: android.app.contentsuggestions.ContentSuggestionsManager$ClassificationsCallbackWrapper$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ContentSuggestionsManager.ClassificationsCallbackWrapper.this.lambda$onContentClassificationsAvailable$0(statusCode, classifications);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.app.contentsuggestions.ContentSuggestionsManager$ClassificationsCallbackWrapper$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ContentSuggestionsManager.ClassificationsCallbackWrapper.this
+                                        .lambda$onContentClassificationsAvailable$0(
+                                                statusCode, classifications);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onContentClassificationsAvailable$0(int statusCode, List classifications) {
+        public /* synthetic */ void lambda$onContentClassificationsAvailable$0(
+                int statusCode, List classifications) {
             this.mCallback.onContentClassificationsAvailable(statusCode, classifications);
         }
     }

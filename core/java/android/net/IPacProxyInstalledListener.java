@@ -14,8 +14,7 @@ public interface IPacProxyInstalledListener extends IInterface {
 
     public static class Default implements IPacProxyInstalledListener {
         @Override // android.net.IPacProxyInstalledListener
-        public void onPacProxyInstalled(Network network, ProxyInfo proxy) throws RemoteException {
-        }
+        public void onPacProxyInstalled(Network network, ProxyInfo proxy) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IPacProxyInstalledListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPacProxyInstalledListener {
+    public abstract static class Stub extends Binder implements IPacProxyInstalledListener {
         static final int TRANSACTION_onPacProxyInstalled = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IPacProxyInstalledListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPacProxyInstalledListener.DESCRIPTOR);
             }
@@ -98,7 +98,8 @@ public interface IPacProxyInstalledListener extends IInterface {
             }
 
             @Override // android.net.IPacProxyInstalledListener
-            public void onPacProxyInstalled(Network network, ProxyInfo proxy) throws RemoteException {
+            public void onPacProxyInstalled(Network network, ProxyInfo proxy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPacProxyInstalledListener.DESCRIPTOR);

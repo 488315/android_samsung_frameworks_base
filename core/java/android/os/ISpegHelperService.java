@@ -10,12 +10,14 @@ public interface ISpegHelperService extends IInterface {
 
     public static class Default implements ISpegHelperService {
         @Override // android.os.ISpegHelperService
-        public boolean createOrDeleteMarkerFiles(String path, boolean isCreate, int userId) throws RemoteException {
+        public boolean createOrDeleteMarkerFiles(String path, boolean isCreate, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.ISpegHelperService
-        public boolean storePrimaryProf(String pkgPath, String profilePath, int userId) throws RemoteException {
+        public boolean storePrimaryProf(String pkgPath, String profilePath, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -25,7 +27,7 @@ public interface ISpegHelperService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpegHelperService {
+    public abstract static class Stub extends Binder implements ISpegHelperService {
         static final int TRANSACTION_createOrDeleteMarkerFiles = 1;
         static final int TRANSACTION_storePrimaryProf = 2;
 
@@ -66,7 +68,8 @@ public interface ISpegHelperService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpegHelperService.DESCRIPTOR);
             }
@@ -115,7 +118,8 @@ public interface ISpegHelperService extends IInterface {
             }
 
             @Override // android.os.ISpegHelperService
-            public boolean createOrDeleteMarkerFiles(String path, boolean isCreate, int userId) throws RemoteException {
+            public boolean createOrDeleteMarkerFiles(String path, boolean isCreate, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -134,7 +138,8 @@ public interface ISpegHelperService extends IInterface {
             }
 
             @Override // android.os.ISpegHelperService
-            public boolean storePrimaryProf(String pkgPath, String profilePath, int userId) throws RemoteException {
+            public boolean storePrimaryProf(String pkgPath, String profilePath, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

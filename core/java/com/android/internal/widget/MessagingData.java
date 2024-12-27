@@ -1,6 +1,7 @@
 package com.android.internal.widget;
 
 import android.app.Person;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -14,11 +15,33 @@ final class MessagingData {
     private final int mUnreadCount;
     private final Person mUser;
 
-    MessagingData(Person user, boolean showSpinner, List<MessagingMessage> historicMessagingMessages, List<MessagingMessage> newMessagingMessages, List<List<MessagingMessage>> groups, List<Person> senders) {
-        this(user, showSpinner, 0, historicMessagingMessages, newMessagingMessages, groups, senders, null);
+    MessagingData(
+            Person user,
+            boolean showSpinner,
+            List<MessagingMessage> historicMessagingMessages,
+            List<MessagingMessage> newMessagingMessages,
+            List<List<MessagingMessage>> groups,
+            List<Person> senders) {
+        this(
+                user,
+                showSpinner,
+                0,
+                historicMessagingMessages,
+                newMessagingMessages,
+                groups,
+                senders,
+                null);
     }
 
-    MessagingData(Person user, boolean showSpinner, int unreadCount, List<MessagingMessage> historicMessagingMessages, List<MessagingMessage> newMessagingMessages, List<List<MessagingMessage>> groups, List<Person> senders, ConversationHeaderData conversationHeaderData) {
+    MessagingData(
+            Person user,
+            boolean showSpinner,
+            int unreadCount,
+            List<MessagingMessage> historicMessagingMessages,
+            List<MessagingMessage> newMessagingMessages,
+            List<List<MessagingMessage>> groups,
+            List<Person> senders,
+            ConversationHeaderData conversationHeaderData) {
         this.mUser = user;
         this.mShowSpinner = showSpinner;
         this.mUnreadCount = unreadCount;

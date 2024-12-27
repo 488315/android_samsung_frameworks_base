@@ -14,8 +14,7 @@ public interface ICommunicationDeviceDispatcher extends IInterface {
 
     public static class Default implements ICommunicationDeviceDispatcher {
         @Override // android.media.ICommunicationDeviceDispatcher
-        public void dispatchCommunicationDeviceChanged(int portId) throws RemoteException {
-        }
+        public void dispatchCommunicationDeviceChanged(int portId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ICommunicationDeviceDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICommunicationDeviceDispatcher {
+    public abstract static class Stub extends Binder implements ICommunicationDeviceDispatcher {
         static final int TRANSACTION_dispatchCommunicationDeviceChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ICommunicationDeviceDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICommunicationDeviceDispatcher.DESCRIPTOR);
             }

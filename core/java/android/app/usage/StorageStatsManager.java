@@ -8,6 +8,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.storage.CrateInfo;
 import android.os.storage.StorageManager;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Objects;
@@ -25,7 +26,8 @@ public class StorageStatsManager {
 
     public boolean isQuotaSupported(UUID storageUuid) {
         try {
-            return this.mService.isQuotaSupported(StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
+            return this.mService.isQuotaSupported(
+                    StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -38,7 +40,8 @@ public class StorageStatsManager {
 
     public boolean isReservedSupported(UUID storageUuid) {
         try {
-            return this.mService.isReservedSupported(StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
+            return this.mService.isReservedSupported(
+                    StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -46,7 +49,8 @@ public class StorageStatsManager {
 
     public long getTotalBytes(UUID storageUuid) throws IOException {
         try {
-            return this.mService.getTotalBytes(StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
+            return this.mService.getTotalBytes(
+                    StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             throw new RuntimeException(e);
@@ -62,7 +66,8 @@ public class StorageStatsManager {
 
     public long getFreeBytes(UUID storageUuid) throws IOException {
         try {
-            return this.mService.getFreeBytes(StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
+            return this.mService.getFreeBytes(
+                    StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             throw new RuntimeException(e);
@@ -78,7 +83,8 @@ public class StorageStatsManager {
 
     public long getCacheBytes(UUID storageUuid) throws IOException {
         try {
-            return this.mService.getCacheBytes(StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
+            return this.mService.getCacheBytes(
+                    StorageManager.convert(storageUuid), this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             throw new RuntimeException(e);
@@ -92,9 +98,14 @@ public class StorageStatsManager {
         return getCacheBytes(StorageManager.convert(uuid));
     }
 
-    public StorageStats queryStatsForPackage(UUID storageUuid, String packageName, UserHandle user) throws PackageManager.NameNotFoundException, IOException {
+    public StorageStats queryStatsForPackage(UUID storageUuid, String packageName, UserHandle user)
+            throws PackageManager.NameNotFoundException, IOException {
         try {
-            return this.mService.queryStatsForPackage(StorageManager.convert(storageUuid), packageName, user.getIdentifier(), this.mContext.getOpPackageName());
+            return this.mService.queryStatsForPackage(
+                    StorageManager.convert(storageUuid),
+                    packageName,
+                    user.getIdentifier(),
+                    this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(PackageManager.NameNotFoundException.class);
             e.maybeRethrow(IOException.class);
@@ -105,13 +116,15 @@ public class StorageStatsManager {
     }
 
     @Deprecated
-    public StorageStats queryStatsForPackage(String uuid, String packageName, UserHandle user) throws PackageManager.NameNotFoundException, IOException {
+    public StorageStats queryStatsForPackage(String uuid, String packageName, UserHandle user)
+            throws PackageManager.NameNotFoundException, IOException {
         return queryStatsForPackage(StorageManager.convert(uuid), packageName, user);
     }
 
     public StorageStats queryStatsForUid(UUID storageUuid, int uid) throws IOException {
         try {
-            return this.mService.queryStatsForUid(StorageManager.convert(storageUuid), uid, this.mContext.getOpPackageName());
+            return this.mService.queryStatsForUid(
+                    StorageManager.convert(storageUuid), uid, this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             throw new RuntimeException(e);
@@ -127,7 +140,10 @@ public class StorageStatsManager {
 
     public StorageStats queryStatsForUser(UUID storageUuid, UserHandle user) throws IOException {
         try {
-            return this.mService.queryStatsForUser(StorageManager.convert(storageUuid), user.getIdentifier(), this.mContext.getOpPackageName());
+            return this.mService.queryStatsForUser(
+                    StorageManager.convert(storageUuid),
+                    user.getIdentifier(),
+                    this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             throw new RuntimeException(e);
@@ -141,9 +157,13 @@ public class StorageStatsManager {
         return queryStatsForUser(StorageManager.convert(uuid), user);
     }
 
-    public ExternalStorageStats queryExternalStatsForUser(UUID storageUuid, UserHandle user) throws IOException {
+    public ExternalStorageStats queryExternalStatsForUser(UUID storageUuid, UserHandle user)
+            throws IOException {
         try {
-            return this.mService.queryExternalStatsForUser(StorageManager.convert(storageUuid), user.getIdentifier(), this.mContext.getOpPackageName());
+            return this.mService.queryExternalStatsForUser(
+                    StorageManager.convert(storageUuid),
+                    user.getIdentifier(),
+                    this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             throw new RuntimeException(e);
@@ -153,21 +173,28 @@ public class StorageStatsManager {
     }
 
     @Deprecated
-    public ExternalStorageStats queryExternalStatsForUser(String uuid, UserHandle user) throws IOException {
+    public ExternalStorageStats queryExternalStatsForUser(String uuid, UserHandle user)
+            throws IOException {
         return queryExternalStatsForUser(StorageManager.convert(uuid), user);
     }
 
     public long getCacheQuotaBytes(String volumeUuid, int uid) {
         try {
-            return this.mService.getCacheQuotaBytes(volumeUuid, uid, this.mContext.getOpPackageName());
+            return this.mService.getCacheQuotaBytes(
+                    volumeUuid, uid, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public Collection<CrateInfo> queryCratesForUid(UUID storageUuid, int uid) throws IOException, PackageManager.NameNotFoundException {
+    public Collection<CrateInfo> queryCratesForUid(UUID storageUuid, int uid)
+            throws IOException, PackageManager.NameNotFoundException {
         try {
-            ParceledListSlice<CrateInfo> crateInfoList = this.mService.queryCratesForUid(StorageManager.convert(storageUuid), uid, this.mContext.getOpPackageName());
+            ParceledListSlice<CrateInfo> crateInfoList =
+                    this.mService.queryCratesForUid(
+                            StorageManager.convert(storageUuid),
+                            uid,
+                            this.mContext.getOpPackageName());
             return ((ParceledListSlice) Objects.requireNonNull(crateInfoList)).getList();
         } catch (ParcelableException e) {
             e.maybeRethrow(PackageManager.NameNotFoundException.class);
@@ -178,9 +205,16 @@ public class StorageStatsManager {
         }
     }
 
-    public Collection<CrateInfo> queryCratesForPackage(UUID storageUuid, String packageName, UserHandle user) throws PackageManager.NameNotFoundException, IOException {
+    public Collection<CrateInfo> queryCratesForPackage(
+            UUID storageUuid, String packageName, UserHandle user)
+            throws PackageManager.NameNotFoundException, IOException {
         try {
-            ParceledListSlice<CrateInfo> crateInfoList = this.mService.queryCratesForPackage(StorageManager.convert(storageUuid), packageName, user.getIdentifier(), this.mContext.getOpPackageName());
+            ParceledListSlice<CrateInfo> crateInfoList =
+                    this.mService.queryCratesForPackage(
+                            StorageManager.convert(storageUuid),
+                            packageName,
+                            user.getIdentifier(),
+                            this.mContext.getOpPackageName());
             return ((ParceledListSlice) Objects.requireNonNull(crateInfoList)).getList();
         } catch (ParcelableException e) {
             e.maybeRethrow(PackageManager.NameNotFoundException.class);
@@ -191,9 +225,14 @@ public class StorageStatsManager {
         }
     }
 
-    public Collection<CrateInfo> queryCratesForUser(UUID storageUuid, UserHandle user) throws PackageManager.NameNotFoundException, IOException {
+    public Collection<CrateInfo> queryCratesForUser(UUID storageUuid, UserHandle user)
+            throws PackageManager.NameNotFoundException, IOException {
         try {
-            ParceledListSlice<CrateInfo> crateInfoList = this.mService.queryCratesForUser(StorageManager.convert(storageUuid), user.getIdentifier(), this.mContext.getOpPackageName());
+            ParceledListSlice<CrateInfo> crateInfoList =
+                    this.mService.queryCratesForUser(
+                            StorageManager.convert(storageUuid),
+                            user.getIdentifier(),
+                            this.mContext.getOpPackageName());
             return ((ParceledListSlice) Objects.requireNonNull(crateInfoList)).getList();
         } catch (ParcelableException e) {
             e.maybeRethrow(PackageManager.NameNotFoundException.class);

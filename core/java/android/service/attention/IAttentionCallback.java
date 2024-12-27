@@ -16,12 +16,10 @@ public interface IAttentionCallback extends IInterface {
 
     public static class Default implements IAttentionCallback {
         @Override // android.service.attention.IAttentionCallback
-        public void onSuccess(int result, long timestamp) throws RemoteException {
-        }
+        public void onSuccess(int result, long timestamp) throws RemoteException {}
 
         @Override // android.service.attention.IAttentionCallback
-        public void onFailure(int error) throws RemoteException {
-        }
+        public void onFailure(int error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IAttentionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAttentionCallback {
+    public abstract static class Stub extends Binder implements IAttentionCallback {
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -70,7 +68,8 @@ public interface IAttentionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAttentionCallback.DESCRIPTOR);
             }

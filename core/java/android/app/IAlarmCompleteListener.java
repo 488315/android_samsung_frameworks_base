@@ -12,8 +12,7 @@ public interface IAlarmCompleteListener extends IInterface {
 
     public static class Default implements IAlarmCompleteListener {
         @Override // android.app.IAlarmCompleteListener
-        public void alarmComplete(IBinder who) throws RemoteException {
-        }
+        public void alarmComplete(IBinder who) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IAlarmCompleteListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAlarmCompleteListener {
+    public abstract static class Stub extends Binder implements IAlarmCompleteListener {
         public static final String DESCRIPTOR = "android.app.IAlarmCompleteListener";
         static final int TRANSACTION_alarmComplete = 1;
 
@@ -60,7 +59,8 @@ public interface IAlarmCompleteListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

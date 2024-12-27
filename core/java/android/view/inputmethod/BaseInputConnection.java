@@ -18,6 +18,7 @@ import android.view.ContentInfo;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes4.dex */
@@ -40,7 +41,9 @@ public class BaseInputConnection implements InputConnection {
     }
 
     public BaseInputConnection(View targetView, boolean fullEditor) {
-        this.mIMM = (InputMethodManager) targetView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        this.mIMM =
+                (InputMethodManager)
+                        targetView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         this.mTargetView = targetView;
         this.mFallbackMode = !fullEditor;
     }
@@ -72,7 +75,11 @@ public class BaseInputConnection implements InputConnection {
                 } else {
                     int fl = text.getSpanFlags(o);
                     if ((fl & 307) != 289) {
-                        text.setSpan(o, text.getSpanStart(o), text.getSpanEnd(o), (fl & (-52)) | 256 | 33);
+                        text.setSpan(
+                                o,
+                                text.getSpanStart(o),
+                                text.getSpanEnd(o),
+                                (fl & (-52)) | 256 | 33);
                     }
                 }
             }
@@ -106,8 +113,7 @@ public class BaseInputConnection implements InputConnection {
         return false;
     }
 
-    public void endComposingRegionEditInternal() {
-    }
+    public void endComposingRegionEditInternal() {}
 
     @Override // android.view.inputmethod.InputConnection
     public void closeConnection() {
@@ -309,7 +315,12 @@ public class BaseInputConnection implements InputConnection {
                 b = cb;
             }
         }
-        if (a >= 0 && b >= 0 && (start = findIndexBackward(content, a, Math.max(beforeLength, 0))) != INVALID_INDEX && (end = findIndexForward(content, b, Math.max(afterLength, 0))) != INVALID_INDEX) {
+        if (a >= 0
+                && b >= 0
+                && (start = findIndexBackward(content, a, Math.max(beforeLength, 0)))
+                        != INVALID_INDEX
+                && (end = findIndexForward(content, b, Math.max(afterLength, 0)))
+                        != INVALID_INDEX) {
             int numDeleteBefore = a - start;
             if (numDeleteBefore > 0) {
                 content.delete(start, a);
@@ -449,7 +460,8 @@ public class BaseInputConnection implements InputConnection {
         } else {
             surroundingText = TextUtils.substring(content, startPos, endPos);
         }
-        return new SurroundingText(surroundingText, selStart - startPos, selEnd - startPos, startPos);
+        return new SurroundingText(
+                surroundingText, selStart - startPos, selEnd - startPos, startPos);
     }
 
     @Override // android.view.inputmethod.InputConnection
@@ -558,7 +570,9 @@ public class BaseInputConnection implements InputConnection {
     private void sendCurrentText() {
         Editable content;
         int N;
-        if (!this.mFallbackMode || (content = getEditable()) == null || (N = content.length()) == 0) {
+        if (!this.mFallbackMode
+                || (content = getEditable()) == null
+                || (N = content.length()) == 0) {
             return;
         }
         if (N == 1) {
@@ -590,18 +604,24 @@ public class BaseInputConnection implements InputConnection {
                 context = this.mIMM.getFallbackContextFromServedView();
             }
             if (context != null) {
-                TypedArray ta = context.getTheme().obtainStyledAttributes(new int[]{16843312});
+                TypedArray ta = context.getTheme().obtainStyledAttributes(new int[] {16843312});
                 CharSequence style = ta.getText(0);
                 ta.recycle();
                 if (style != null && (style instanceof Spanned)) {
-                    this.mDefaultComposingSpans = ((Spanned) style).getSpans(0, style.length(), Object.class);
+                    this.mDefaultComposingSpans =
+                            ((Spanned) style).getSpans(0, style.length(), Object.class);
                 }
             }
         }
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public boolean replaceText(int start, int end, CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    public boolean replaceText(
+            int start,
+            int end,
+            CharSequence text,
+            int newCursorPosition,
+            TextAttribute textAttribute) {
         Preconditions.checkArgumentNonnegative(start);
         Preconditions.checkArgumentNonnegative(end);
         Editable content = getEditable();
@@ -655,7 +675,8 @@ public class BaseInputConnection implements InputConnection {
         endBatchEdit();
     }
 
-    private void replaceTextInternal(int a, int b, CharSequence text, int newCursorPosition, boolean composing) {
+    private void replaceTextInternal(
+            int a, int b, CharSequence text, int newCursorPosition, boolean composing) {
         int newCursorPosition2;
         Spannable sp;
         Editable content = getEditable();
@@ -689,7 +710,11 @@ public class BaseInputConnection implements InputConnection {
             newCursorPosition2 = content.length();
         }
         Selection.setSelection(content, newCursorPosition2);
-        content.replace(a, b, SemBaseInputConnectionUtil.convertAllBrackets(text, newCursorPosition2, content, this.mTargetView));
+        content.replace(
+                a,
+                b,
+                SemBaseInputConnectionUtil.convertAllBrackets(
+                        text, newCursorPosition2, content, this.mTargetView));
         if (newCursorPosition == 0 && a == b) {
             Selection.setSelection(content, newCursorPosition2);
         }
@@ -712,8 +737,16 @@ public class BaseInputConnection implements InputConnection {
                 return false;
             }
         }
-        ClipData clip = new ClipData(inputContentInfo.getDescription(), new ClipData.Item(inputContentInfo.getContentUri()));
-        ContentInfo payload = new ContentInfo.Builder(clip, 2).setLinkUri(inputContentInfo.getLinkUri()).setExtras(opts).setInputContentInfo(inputContentInfo).build();
+        ClipData clip =
+                new ClipData(
+                        inputContentInfo.getDescription(),
+                        new ClipData.Item(inputContentInfo.getContentUri()));
+        ContentInfo payload =
+                new ContentInfo.Builder(clip, 2)
+                        .setLinkUri(inputContentInfo.getLinkUri())
+                        .setExtras(opts)
+                        .setInputContentInfo(inputContentInfo)
+                        .build();
         return this.mTargetView.performReceiveContent(payload) == null;
     }
 

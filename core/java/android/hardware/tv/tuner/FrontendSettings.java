@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FrontendSettings implements Parcelable {
-    public static final Parcelable.Creator<FrontendSettings> CREATOR = new Parcelable.Creator<FrontendSettings>() { // from class: android.hardware.tv.tuner.FrontendSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendSettings createFromParcel(Parcel _aidl_source) {
-            return new FrontendSettings(_aidl_source);
-        }
+    public static final Parcelable.Creator<FrontendSettings> CREATOR =
+            new Parcelable.Creator<FrontendSettings>() { // from class:
+                // android.hardware.tv.tuner.FrontendSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendSettings createFromParcel(Parcel _aidl_source) {
+                    return new FrontendSettings(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendSettings[] newArray(int _aidl_size) {
-            return new FrontendSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendSettings[] newArray(int _aidl_size) {
+                    return new FrontendSettings[_aidl_size];
+                }
+            };
     public static final int analog = 0;
     public static final int atsc = 1;
     public static final int atsc3 = 2;
@@ -257,47 +259,69 @@ public final class FrontendSettings implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                FrontendAnalogSettings _aidl_value = (FrontendAnalogSettings) _aidl_parcel.readTypedObject(FrontendAnalogSettings.CREATOR);
+                FrontendAnalogSettings _aidl_value =
+                        (FrontendAnalogSettings)
+                                _aidl_parcel.readTypedObject(FrontendAnalogSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                FrontendAtscSettings _aidl_value2 = (FrontendAtscSettings) _aidl_parcel.readTypedObject(FrontendAtscSettings.CREATOR);
+                FrontendAtscSettings _aidl_value2 =
+                        (FrontendAtscSettings)
+                                _aidl_parcel.readTypedObject(FrontendAtscSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                FrontendAtsc3Settings _aidl_value3 = (FrontendAtsc3Settings) _aidl_parcel.readTypedObject(FrontendAtsc3Settings.CREATOR);
+                FrontendAtsc3Settings _aidl_value3 =
+                        (FrontendAtsc3Settings)
+                                _aidl_parcel.readTypedObject(FrontendAtsc3Settings.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
-                FrontendDvbsSettings _aidl_value4 = (FrontendDvbsSettings) _aidl_parcel.readTypedObject(FrontendDvbsSettings.CREATOR);
+                FrontendDvbsSettings _aidl_value4 =
+                        (FrontendDvbsSettings)
+                                _aidl_parcel.readTypedObject(FrontendDvbsSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value4);
                 return;
             case 4:
-                FrontendDvbcSettings _aidl_value5 = (FrontendDvbcSettings) _aidl_parcel.readTypedObject(FrontendDvbcSettings.CREATOR);
+                FrontendDvbcSettings _aidl_value5 =
+                        (FrontendDvbcSettings)
+                                _aidl_parcel.readTypedObject(FrontendDvbcSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value5);
                 return;
             case 5:
-                FrontendDvbtSettings _aidl_value6 = (FrontendDvbtSettings) _aidl_parcel.readTypedObject(FrontendDvbtSettings.CREATOR);
+                FrontendDvbtSettings _aidl_value6 =
+                        (FrontendDvbtSettings)
+                                _aidl_parcel.readTypedObject(FrontendDvbtSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value6);
                 return;
             case 6:
-                FrontendIsdbsSettings _aidl_value7 = (FrontendIsdbsSettings) _aidl_parcel.readTypedObject(FrontendIsdbsSettings.CREATOR);
+                FrontendIsdbsSettings _aidl_value7 =
+                        (FrontendIsdbsSettings)
+                                _aidl_parcel.readTypedObject(FrontendIsdbsSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value7);
                 return;
             case 7:
-                FrontendIsdbs3Settings _aidl_value8 = (FrontendIsdbs3Settings) _aidl_parcel.readTypedObject(FrontendIsdbs3Settings.CREATOR);
+                FrontendIsdbs3Settings _aidl_value8 =
+                        (FrontendIsdbs3Settings)
+                                _aidl_parcel.readTypedObject(FrontendIsdbs3Settings.CREATOR);
                 _set(_aidl_tag, _aidl_value8);
                 return;
             case 8:
-                FrontendIsdbtSettings _aidl_value9 = (FrontendIsdbtSettings) _aidl_parcel.readTypedObject(FrontendIsdbtSettings.CREATOR);
+                FrontendIsdbtSettings _aidl_value9 =
+                        (FrontendIsdbtSettings)
+                                _aidl_parcel.readTypedObject(FrontendIsdbtSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value9);
                 return;
             case 9:
-                FrontendDtmbSettings _aidl_value10 = (FrontendDtmbSettings) _aidl_parcel.readTypedObject(FrontendDtmbSettings.CREATOR);
+                FrontendDtmbSettings _aidl_value10 =
+                        (FrontendDtmbSettings)
+                                _aidl_parcel.readTypedObject(FrontendDtmbSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value10);
                 return;
             case 10:
-                FrontendIptvSettings _aidl_value11 = (FrontendIptvSettings) _aidl_parcel.readTypedObject(FrontendIptvSettings.CREATOR);
+                FrontendIptvSettings _aidl_value11 =
+                        (FrontendIptvSettings)
+                                _aidl_parcel.readTypedObject(FrontendIptvSettings.CREATOR);
                 _set(_aidl_tag, _aidl_value11);
                 return;
             default:
@@ -355,7 +379,12 @@ public final class FrontendSettings implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextEvent implements Parcelable {
-    static final Parcelable.Creator<SemContextEvent> CREATOR = new Parcelable.Creator<SemContextEvent>() { // from class: com.samsung.android.hardware.context.SemContextEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextEvent createFromParcel(Parcel in) {
-            return new SemContextEvent(in);
-        }
+    static final Parcelable.Creator<SemContextEvent> CREATOR =
+            new Parcelable.Creator<
+                    SemContextEvent>() { // from class:
+                                         // com.samsung.android.hardware.context.SemContextEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextEvent createFromParcel(Parcel in) {
+                    return new SemContextEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextEvent[] newArray(int size) {
-            return new SemContextEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextEvent[] newArray(int size) {
+                    return new SemContextEvent[size];
+                }
+            };
     public Bundle context;
     private SemContextEventContext mEventContext;
     public SemContext semContext;
@@ -433,7 +436,9 @@ public class SemContextEvent implements Parcelable {
     private void readFromParcel(Parcel src) {
         this.timestamp = src.readLong();
         this.semContext = (SemContext) src.readParcelable(SemContext.class.getClassLoader());
-        this.mEventContext = (SemContextEventContext) src.readParcelable(SemContextEventContext.class.getClassLoader());
+        this.mEventContext =
+                (SemContextEventContext)
+                        src.readParcelable(SemContextEventContext.class.getClassLoader());
         this.context = src.readBundle(getClass().getClassLoader());
         this.version = src.readInt();
     }

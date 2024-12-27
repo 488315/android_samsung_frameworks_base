@@ -9,12 +9,13 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IVrListener extends IInterface {
-    void focusedActivityChanged(ComponentName componentName, boolean z, int i) throws RemoteException;
+    void focusedActivityChanged(ComponentName componentName, boolean z, int i)
+            throws RemoteException;
 
     public static class Default implements IVrListener {
         @Override // android.service.vr.IVrListener
-        public void focusedActivityChanged(ComponentName component, boolean running2dInVr, int pid) throws RemoteException {
-        }
+        public void focusedActivityChanged(ComponentName component, boolean running2dInVr, int pid)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +23,7 @@ public interface IVrListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVrListener {
+    public abstract static class Stub extends Binder implements IVrListener {
         public static final String DESCRIPTOR = "android.service.vr.IVrListener";
         static final int TRANSACTION_focusedActivityChanged = 1;
 
@@ -61,7 +62,8 @@ public interface IVrListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +73,8 @@ public interface IVrListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg1 = data.readBoolean();
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
@@ -99,7 +102,9 @@ public interface IVrListener extends IInterface {
             }
 
             @Override // android.service.vr.IVrListener
-            public void focusedActivityChanged(ComponentName component, boolean running2dInVr, int pid) throws RemoteException {
+            public void focusedActivityChanged(
+                    ComponentName component, boolean running2dInVr, int pid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

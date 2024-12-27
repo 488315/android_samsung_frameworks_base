@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.filter;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
@@ -8,6 +9,7 @@ import com.samsung.android.sume.core.descriptor.MFDescriptor;
 import com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor;
 import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.message.MessageProducer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,14 +34,16 @@ public class MediaFilterTracer extends DecorateFilter {
         this.messageProducer = messageProducer;
     }
 
-    public MediaFilterTracer(MediaFilter successor, MessageProducer messageProducer, MediaFilter parent) {
+    public MediaFilterTracer(
+            MediaFilter successor, MessageProducer messageProducer, MediaFilter parent) {
         this(successor, messageProducer);
         if (parent instanceof InstantFilter) {
             this.instantRun = true;
         }
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.filter.MediaFilter
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.filter.MediaFilter
     public void prepare() {
         Log.d(TAG, "prepare: successor=" + this.successor);
         makeReport(511);
@@ -47,7 +51,8 @@ public class MediaFilterTracer extends DecorateFilter {
         makeReport(512);
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.functional.Operator
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.functional.Operator
     public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
         Log.d(TAG, "run: successor=" + this.successor);
         makeReport(513, ibuf);
@@ -56,7 +61,8 @@ public class MediaFilterTracer extends DecorateFilter {
         return obuf2;
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.filter.MediaFilter
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.filter.MediaFilter
     public void release() {
         Log.d(TAG, "release: successor=" + this.successor);
         makeReport(515);
@@ -74,12 +80,20 @@ public class MediaFilterTracer extends DecorateFilter {
         final Message message = this.messageProducer.newMessage(code);
         message.put(Message.KEY_UNIT_ID, Integer.valueOf(this.successor.hashCode()));
         if (mediaBuffer != null) {
-            int contentId = ((Integer) mediaBuffer.getExtra(Message.KEY_CONTENTS_ID, Integer.valueOf(this.contentId))).intValue();
+            int contentId =
+                    ((Integer)
+                                    mediaBuffer.getExtra(
+                                            Message.KEY_CONTENTS_ID,
+                                            Integer.valueOf(this.contentId)))
+                            .intValue();
             message.put(Message.KEY_CONTENTS_ID, Integer.valueOf(contentId));
             int blockId = ((Integer) mediaBuffer.getExtra(Message.KEY_BLOCK_ID, -1)).intValue();
             if (blockId != -1) {
                 message.put(Message.KEY_BLOCK_ID, Integer.valueOf(blockId));
-                message.put(Message.KEY_NUM_BLOCKS, mediaBuffer.getExtra(Message.KEY_NUM_BLOCKS, Integer.valueOf(this.numBlocks)));
+                message.put(
+                        Message.KEY_NUM_BLOCKS,
+                        mediaBuffer.getExtra(
+                                Message.KEY_NUM_BLOCKS, Integer.valueOf(this.numBlocks)));
             }
             if (mediaBuffer.containsExtra(Message.KEY_IN_FILE)) {
                 message.put(Message.KEY_IN_FILE, mediaBuffer.getExtra(Message.KEY_IN_FILE));
@@ -103,34 +117,40 @@ public class MediaFilterTracer extends DecorateFilter {
             case 514:
                 message.put(Message.KEY_END_TIME_MS, Long.valueOf(currentInMillis));
                 if (this.instantRun) {
-                    this.messageHandlers.add(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            MediaFilterTracer.this.m9140x3bc8565(message, (Message) obj);
-                        }
-                    });
+                    this.messageHandlers.add(
+                            new Consumer() { // from class:
+                                             // com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    MediaFilterTracer.this.m9140x3bc8565(message, (Message) obj);
+                                }
+                            });
                     break;
                 }
                 break;
             case 515:
                 if (this.instantRun) {
-                    this.messageHandlers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            ((Consumer) obj).accept(Message.this);
-                        }
-                    });
+                    this.messageHandlers.forEach(
+                            new Consumer() { // from class:
+                                             // com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ((Consumer) obj).accept(Message.this);
+                                }
+                            });
                 }
                 message.put(Message.KEY_START_TIME_MS, Long.valueOf(currentInMillis));
                 break;
             case 516:
                 if (this.instantRun) {
-                    this.messageHandlers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda2
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            ((Consumer) obj).accept(Message.this);
-                        }
-                    });
+                    this.messageHandlers.forEach(
+                            new Consumer() { // from class:
+                                             // com.samsung.android.sume.core.filter.MediaFilterTracer$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ((Consumer) obj).accept(Message.this);
+                                }
+                            });
                 }
                 message.put(Message.KEY_END_TIME_MS, Long.valueOf(currentInMillis));
                 break;
@@ -140,7 +160,9 @@ public class MediaFilterTracer extends DecorateFilter {
 
     /* renamed from: lambda$makeReport$0$com-samsung-android-sume-core-filter-MediaFilterTracer, reason: not valid java name */
     /* synthetic */ void m9140x3bc8565(Message message, Message msg) {
-        msg.put(Message.KEY_CONTENTS_ID, message.get(Message.KEY_CONTENTS_ID, Integer.valueOf(this.contentId)));
+        msg.put(
+                Message.KEY_CONTENTS_ID,
+                message.get(Message.KEY_CONTENTS_ID, Integer.valueOf(this.contentId)));
     }
 
     private Map<String, Object> getShortDescription(MFDescriptor descriptor) {
@@ -153,10 +175,13 @@ public class MediaFilterTracer extends DecorateFilter {
             shortDescription.put("fw", nnfwDescriptor.getFw());
             shortDescription.put("hw", nnfwDescriptor.getHw());
             shortDescription.put("input-data-type", nnfwDescriptor.getInputFormat().getDataType());
-            shortDescription.put("input-color-format", nnfwDescriptor.getInputFormat().getColorFormat());
+            shortDescription.put(
+                    "input-color-format", nnfwDescriptor.getInputFormat().getColorFormat());
             shortDescription.put("input-shape", nnfwDescriptor.getInputFormat().getShape());
-            shortDescription.put("output-data-type", nnfwDescriptor.getOutputFormat().getDataType());
-            shortDescription.put("output-color-format", nnfwDescriptor.getOutputFormat().getColorFormat());
+            shortDescription.put(
+                    "output-data-type", nnfwDescriptor.getOutputFormat().getDataType());
+            shortDescription.put(
+                    "output-color-format", nnfwDescriptor.getOutputFormat().getColorFormat());
             shortDescription.put("output-shape", nnfwDescriptor.getOutputFormat().getShape());
         }
         return shortDescription;
@@ -164,7 +189,7 @@ public class MediaFilterTracer extends DecorateFilter {
 
     @Override // com.samsung.android.sume.core.message.MessageConsumer
     public int[] getConsumeMessage() {
-        return new int[]{7};
+        return new int[] {7};
     }
 
     @Override // com.samsung.android.sume.core.message.MessageConsumer

@@ -8,6 +8,7 @@ import android.content.pm.verify.domain.IDomainVerificationManager;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.ServiceSpecificException;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -23,7 +24,11 @@ public final class DomainVerificationManagerStub extends IDomainVerificationMana
     }
 
     public static RuntimeException rethrow(Exception exc) {
-        return exc instanceof PackageManager.NameNotFoundException ? new ServiceSpecificException(1) : exc instanceof RuntimeException ? (RuntimeException) exc : new RuntimeException(exc);
+        return exc instanceof PackageManager.NameNotFoundException
+                ? new ServiceSpecificException(1)
+                : exc instanceof RuntimeException
+                        ? (RuntimeException) exc
+                        : new RuntimeException(exc);
     }
 
     public final DomainVerificationInfo getDomainVerificationInfo(String str) {
@@ -85,15 +90,18 @@ public final class DomainVerificationManagerStub extends IDomainVerificationMana
                 throw new IllegalArgumentException("Caller is not allowed to set state code " + i);
             }
             domainVerificationService.mConnection.getClass();
-            return domainVerificationService.setDomainVerificationStatusInternal(Binder.getCallingUid(), fromString, domains, i);
+            return domainVerificationService.setDomainVerificationStatusInternal(
+                    Binder.getCallingUid(), fromString, domains, i);
         } catch (Exception e) {
             throw rethrow(e);
         }
     }
 
-    public final int setDomainVerificationUserSelection(String str, DomainSet domainSet, boolean z, int i) {
+    public final int setDomainVerificationUserSelection(
+            String str, DomainSet domainSet, boolean z, int i) {
         try {
-            return this.mService.setDomainVerificationUserSelection(UUID.fromString(str), domainSet.getDomains(), z, i);
+            return this.mService.setDomainVerificationUserSelection(
+                    UUID.fromString(str), domainSet.getDomains(), z, i);
         } catch (Exception e) {
             throw rethrow(e);
         }

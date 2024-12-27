@@ -2,10 +2,12 @@ package com.android.server.pm.permission;
 
 import android.content.pm.PermissionInfo;
 import android.os.UserHandle;
+
+import libcore.util.EmptyArray;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Objects;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -38,12 +40,22 @@ public final class Permission {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.pm.permission.Permission createOrUpdate(com.android.server.pm.permission.Permission r8, android.content.pm.PermissionInfo r9, com.android.server.pm.pkg.PackageState r10, java.util.Collection r11, boolean r12) {
+    public static com.android.server.pm.permission.Permission createOrUpdate(
+            com.android.server.pm.permission.Permission r8,
+            android.content.pm.PermissionInfo r9,
+            com.android.server.pm.pkg.PackageState r10,
+            java.util.Collection r11,
+            boolean r12) {
         /*
             Method dump skipped, instructions count: 273
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.permission.Permission.createOrUpdate(com.android.server.pm.permission.Permission, android.content.pm.PermissionInfo, com.android.server.pm.pkg.PackageState, java.util.Collection, boolean):com.android.server.pm.permission.Permission");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.permission.Permission.createOrUpdate(com.android.server.pm.permission.Permission,"
+                    + " android.content.pm.PermissionInfo, com.android.server.pm.pkg.PackageState,"
+                    + " java.util.Collection,"
+                    + " boolean):com.android.server.pm.permission.Permission");
     }
 
     public static Permission findPermissionTree(String str, Collection collection) {
@@ -51,7 +63,9 @@ public final class Permission {
         while (it.hasNext()) {
             Permission permission = (Permission) it.next();
             String str2 = permission.mPermissionInfo.name;
-            if (str.startsWith(str2) && str.length() > str2.length() && str.charAt(str2.length()) == '.') {
+            if (str.startsWith(str2)
+                    && str.length() > str2.length()
+                    && str.charAt(str2.length()) == '.') {
                 return permission;
             }
         }
@@ -61,9 +75,19 @@ public final class Permission {
     public final boolean addToTree(int i, PermissionInfo permissionInfo, Permission permission) {
         boolean z;
         PermissionInfo permissionInfo2 = this.mPermissionInfo;
-        if (permissionInfo2.protectionLevel == i && this.mReconciled && this.mUid == permission.mUid && Objects.equals(permissionInfo2.packageName, permission.mPermissionInfo.packageName)) {
+        if (permissionInfo2.protectionLevel == i
+                && this.mReconciled
+                && this.mUid == permission.mUid
+                && Objects.equals(
+                        permissionInfo2.packageName, permission.mPermissionInfo.packageName)) {
             PermissionInfo permissionInfo3 = this.mPermissionInfo;
-            if (permissionInfo3.icon == permissionInfo.icon && permissionInfo3.logo == permissionInfo.logo && permissionInfo3.protectionLevel == permissionInfo.protectionLevel && Objects.equals(permissionInfo3.name, permissionInfo.name) && Objects.equals(permissionInfo3.nonLocalizedLabel, permissionInfo.nonLocalizedLabel) && Objects.equals(permissionInfo3.packageName, permissionInfo.packageName)) {
+            if (permissionInfo3.icon == permissionInfo.icon
+                    && permissionInfo3.logo == permissionInfo.logo
+                    && permissionInfo3.protectionLevel == permissionInfo.protectionLevel
+                    && Objects.equals(permissionInfo3.name, permissionInfo.name)
+                    && Objects.equals(
+                            permissionInfo3.nonLocalizedLabel, permissionInfo.nonLocalizedLabel)
+                    && Objects.equals(permissionInfo3.packageName, permissionInfo.packageName)) {
                 z = false;
                 PermissionInfo permissionInfo4 = new PermissionInfo(permissionInfo);
                 this.mPermissionInfo = permissionInfo4;

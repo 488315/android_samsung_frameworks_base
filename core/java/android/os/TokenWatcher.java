@@ -1,8 +1,8 @@
 package android.os;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.IBinder;
 import android.util.Log;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,20 +14,20 @@ public abstract class TokenWatcher {
     private Handler mHandler;
     private String mTag;
     private Runnable mNotificationTask = new Runnable() { // from class: android.os.TokenWatcher.1
-        @Override // java.lang.Runnable
-        public void run() {
-            int value;
-            synchronized (TokenWatcher.this.mTokens) {
-                value = TokenWatcher.this.mNotificationQueue;
-                TokenWatcher.this.mNotificationQueue = -1;
-            }
-            if (value == 1) {
-                TokenWatcher.this.acquired();
-            } else if (value == 0) {
-                TokenWatcher.this.released();
-            }
-        }
-    };
+                @Override // java.lang.Runnable
+                public void run() {
+                    int value;
+                    synchronized (TokenWatcher.this.mTokens) {
+                        value = TokenWatcher.this.mNotificationQueue;
+                        TokenWatcher.this.mNotificationQueue = -1;
+                    }
+                    if (value == 1) {
+                        TokenWatcher.this.acquired();
+                    } else if (value == 0) {
+                        TokenWatcher.this.released();
+                    }
+                }
+            };
     private WeakHashMap<IBinder, Death> mTokens = new WeakHashMap<>();
     private int mNotificationQueue = -1;
     private volatile boolean mAcquired = false;
@@ -111,7 +111,13 @@ public abstract class TokenWatcher {
             a.add("Token count: " + this.mTokens.size());
             int i = 0;
             for (IBinder b : keys) {
-                a.add(NavigationBarInflaterView.SIZE_MOD_START + i + "] " + this.mTokens.get(b).tag + " - " + b);
+                a.add(
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + i
+                                + "] "
+                                + this.mTokens.get(b).tag
+                                + " - "
+                                + b);
                 i++;
             }
         }

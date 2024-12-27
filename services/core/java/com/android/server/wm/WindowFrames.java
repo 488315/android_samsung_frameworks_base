@@ -21,6 +21,9 @@ public final class WindowFrames {
     public boolean mForceReportingResized = false;
 
     public final boolean didFrameSizeChange() {
-        return (this.mLastFrame.width() == this.mFrame.width() && this.mLastFrame.height() == this.mFrame.height()) ? false : true;
+        return (this.mLastFrame.width() == this.mFrame.width()
+                        && this.mLastFrame.height() == this.mFrame.height())
+                ? false
+                : true;
     }
 }

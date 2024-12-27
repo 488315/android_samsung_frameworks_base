@@ -23,8 +23,7 @@ abstract class AllocatedBuffer {
 
     public abstract int remaining();
 
-    AllocatedBuffer() {
-    }
+    AllocatedBuffer() {}
 
     public static AllocatedBuffer wrap(byte[] bytes) {
         return wrapNoCheck(bytes, 0, bytes.length);
@@ -32,14 +31,20 @@ abstract class AllocatedBuffer {
 
     public static AllocatedBuffer wrap(byte[] bytes, int offset, int length) {
         if (offset < 0 || length < 0 || offset + length > bytes.length) {
-            throw new IndexOutOfBoundsException(String.format("bytes.length=%d, offset=%d, length=%d", Integer.valueOf(bytes.length), Integer.valueOf(offset), Integer.valueOf(length)));
+            throw new IndexOutOfBoundsException(
+                    String.format(
+                            "bytes.length=%d, offset=%d, length=%d",
+                            Integer.valueOf(bytes.length),
+                            Integer.valueOf(offset),
+                            Integer.valueOf(length)));
         }
         return wrapNoCheck(bytes, offset, length);
     }
 
     public static AllocatedBuffer wrap(final ByteBuffer buffer) {
         Internal.checkNotNull(buffer, "buffer");
-        return new AllocatedBuffer() { // from class: com.android.framework.protobuf.AllocatedBuffer.1
+        return new AllocatedBuffer() { // from class:
+                                       // com.android.framework.protobuf.AllocatedBuffer.1
             @Override // com.android.framework.protobuf.AllocatedBuffer
             public boolean hasNioBuffer() {
                 return true;
@@ -88,8 +93,10 @@ abstract class AllocatedBuffer {
         };
     }
 
-    private static AllocatedBuffer wrapNoCheck(final byte[] bytes, final int offset, final int length) {
-        return new AllocatedBuffer() { // from class: com.android.framework.protobuf.AllocatedBuffer.2
+    private static AllocatedBuffer wrapNoCheck(
+            final byte[] bytes, final int offset, final int length) {
+        return new AllocatedBuffer() { // from class:
+                                       // com.android.framework.protobuf.AllocatedBuffer.2
             private int position;
 
             @Override // com.android.framework.protobuf.AllocatedBuffer

@@ -17,7 +17,8 @@ import java.util.Date;
 public interface X509AttributeCertificate extends X509Extension {
     void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException;
 
-    void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException;
+    void checkValidity(Date date)
+            throws CertificateExpiredException, CertificateNotYetValidException;
 
     X509Attribute[] getAttributes();
 
@@ -41,5 +42,10 @@ public interface X509AttributeCertificate extends X509Extension {
 
     int getVersion();
 
-    void verify(PublicKey publicKey, String str) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException;
+    void verify(PublicKey publicKey, String str)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException;
 }

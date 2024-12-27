@@ -11,7 +11,8 @@ public class IncrementalMetrics {
     }
 
     public long getMillisSinceOldestPendingRead() {
-        return this.mData.getLong(IIncrementalService.METRICS_MILLIS_SINCE_OLDEST_PENDING_READ, -1L);
+        return this.mData.getLong(
+                IIncrementalService.METRICS_MILLIS_SINCE_OLDEST_PENDING_READ, -1L);
     }
 
     public boolean getReadLogsEnabled() {
@@ -27,7 +28,8 @@ public class IncrementalMetrics {
     }
 
     public long getMillisSinceLastDataLoaderBind() {
-        return this.mData.getLong(IIncrementalService.METRICS_MILLIS_SINCE_LAST_DATA_LOADER_BIND, -1L);
+        return this.mData.getLong(
+                IIncrementalService.METRICS_MILLIS_SINCE_LAST_DATA_LOADER_BIND, -1L);
     }
 
     public long getDataLoaderBindDelayMillis() {

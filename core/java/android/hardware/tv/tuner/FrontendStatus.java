@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FrontendStatus implements Parcelable {
-    public static final Parcelable.Creator<FrontendStatus> CREATOR = new Parcelable.Creator<FrontendStatus>() { // from class: android.hardware.tv.tuner.FrontendStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendStatus createFromParcel(Parcel _aidl_source) {
-            return new FrontendStatus(_aidl_source);
-        }
+    public static final Parcelable.Creator<FrontendStatus> CREATOR =
+            new Parcelable.Creator<
+                    FrontendStatus>() { // from class: android.hardware.tv.tuner.FrontendStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendStatus createFromParcel(Parcel _aidl_source) {
+                    return new FrontendStatus(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendStatus[] newArray(int _aidl_size) {
-            return new FrontendStatus[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendStatus[] newArray(int _aidl_size) {
+                    return new FrontendStatus[_aidl_size];
+                }
+            };
     public static final int agc = 14;
     public static final int allPlpInfo = 41;
     public static final int bandwidth = 25;
@@ -941,7 +943,9 @@ public final class FrontendStatus implements Parcelable {
                 _set(_aidl_tag, Long.valueOf(_aidl_value9));
                 return;
             case 9:
-                FrontendModulationStatus _aidl_value10 = (FrontendModulationStatus) _aidl_parcel.readTypedObject(FrontendModulationStatus.CREATOR);
+                FrontendModulationStatus _aidl_value10 =
+                        (FrontendModulationStatus)
+                                _aidl_parcel.readTypedObject(FrontendModulationStatus.CREATOR);
                 _set(_aidl_tag, _aidl_value10);
                 return;
             case 10:
@@ -989,11 +993,15 @@ public final class FrontendStatus implements Parcelable {
                 _set(_aidl_tag, Boolean.valueOf(_aidl_value21));
                 return;
             case 21:
-                FrontendStatusAtsc3PlpInfo[] _aidl_value22 = (FrontendStatusAtsc3PlpInfo[]) _aidl_parcel.createTypedArray(FrontendStatusAtsc3PlpInfo.CREATOR);
+                FrontendStatusAtsc3PlpInfo[] _aidl_value22 =
+                        (FrontendStatusAtsc3PlpInfo[])
+                                _aidl_parcel.createTypedArray(FrontendStatusAtsc3PlpInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value22);
                 return;
             case 22:
-                FrontendModulation[] _aidl_value23 = (FrontendModulation[]) _aidl_parcel.createTypedArray(FrontendModulation.CREATOR);
+                FrontendModulation[] _aidl_value23 =
+                        (FrontendModulation[])
+                                _aidl_parcel.createTypedArray(FrontendModulation.CREATOR);
                 _set(_aidl_tag, _aidl_value23);
                 return;
             case 23:
@@ -1005,15 +1013,20 @@ public final class FrontendStatus implements Parcelable {
                 _set(_aidl_tag, _aidl_value25);
                 return;
             case 25:
-                FrontendBandwidth _aidl_value26 = (FrontendBandwidth) _aidl_parcel.readTypedObject(FrontendBandwidth.CREATOR);
+                FrontendBandwidth _aidl_value26 =
+                        (FrontendBandwidth) _aidl_parcel.readTypedObject(FrontendBandwidth.CREATOR);
                 _set(_aidl_tag, _aidl_value26);
                 return;
             case 26:
-                FrontendGuardInterval _aidl_value27 = (FrontendGuardInterval) _aidl_parcel.readTypedObject(FrontendGuardInterval.CREATOR);
+                FrontendGuardInterval _aidl_value27 =
+                        (FrontendGuardInterval)
+                                _aidl_parcel.readTypedObject(FrontendGuardInterval.CREATOR);
                 _set(_aidl_tag, _aidl_value27);
                 return;
             case 27:
-                FrontendTransmissionMode _aidl_value28 = (FrontendTransmissionMode) _aidl_parcel.readTypedObject(FrontendTransmissionMode.CREATOR);
+                FrontendTransmissionMode _aidl_value28 =
+                        (FrontendTransmissionMode)
+                                _aidl_parcel.readTypedObject(FrontendTransmissionMode.CREATOR);
                 _set(_aidl_tag, _aidl_value28);
                 return;
             case 28:
@@ -1025,7 +1038,9 @@ public final class FrontendStatus implements Parcelable {
                 _set(_aidl_tag, Integer.valueOf(_aidl_value30));
                 return;
             case 30:
-                FrontendInterleaveMode[] _aidl_value31 = (FrontendInterleaveMode[]) _aidl_parcel.createTypedArray(FrontendInterleaveMode.CREATOR);
+                FrontendInterleaveMode[] _aidl_value31 =
+                        (FrontendInterleaveMode[])
+                                _aidl_parcel.createTypedArray(FrontendInterleaveMode.CREATOR);
                 _set(_aidl_tag, _aidl_value31);
                 return;
             case 31:
@@ -1037,7 +1052,8 @@ public final class FrontendStatus implements Parcelable {
                 _set(_aidl_tag, _aidl_value33);
                 return;
             case 33:
-                FrontendRollOff _aidl_value34 = (FrontendRollOff) _aidl_parcel.readTypedObject(FrontendRollOff.CREATOR);
+                FrontendRollOff _aidl_value34 =
+                        (FrontendRollOff) _aidl_parcel.readTypedObject(FrontendRollOff.CREATOR);
                 _set(_aidl_tag, _aidl_value34);
                 return;
             case 34:
@@ -1069,7 +1085,9 @@ public final class FrontendStatus implements Parcelable {
                 _set(_aidl_tag, _aidl_value41);
                 return;
             case 41:
-                FrontendScanAtsc3PlpInfo[] _aidl_value42 = (FrontendScanAtsc3PlpInfo[]) _aidl_parcel.createTypedArray(FrontendScanAtsc3PlpInfo.CREATOR);
+                FrontendScanAtsc3PlpInfo[] _aidl_value42 =
+                        (FrontendScanAtsc3PlpInfo[])
+                                _aidl_parcel.createTypedArray(FrontendScanAtsc3PlpInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value42);
                 return;
             case 42:
@@ -1151,7 +1169,12 @@ public final class FrontendStatus implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

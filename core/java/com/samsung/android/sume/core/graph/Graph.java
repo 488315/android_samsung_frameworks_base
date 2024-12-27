@@ -2,11 +2,13 @@ package com.samsung.android.sume.core.graph;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.cache.DiskCache;
 import com.samsung.android.sume.core.message.MessageSubscriber;
 import com.samsung.android.sume.core.types.OptionBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,26 +28,34 @@ public interface Graph<T> {
 
     default MediaBuffer run(final MediaBuffer buffer) {
         List<MediaBuffer> output = new ArrayList<>();
-        run(new ArrayList<MediaBuffer>() { // from class: com.samsung.android.sume.core.graph.Graph.1
-            {
-                add(buffer);
-            }
-        }, output);
+        run(
+                new ArrayList<
+                        MediaBuffer>() { // from class: com.samsung.android.sume.core.graph.Graph.1
+                    {
+                        add(buffer);
+                    }
+                },
+                output);
         Def.require(output.size() == 1);
         return output.get(0);
     }
 
     default void run(final MediaBuffer inputBuffer, final MediaBuffer outputBuffer) {
-        List<MediaBuffer> output = new ArrayList<MediaBuffer>() { // from class: com.samsung.android.sume.core.graph.Graph.2
-            {
-                add(outputBuffer);
-            }
-        };
-        run(new ArrayList<MediaBuffer>() { // from class: com.samsung.android.sume.core.graph.Graph.3
-            {
-                add(inputBuffer);
-            }
-        }, output);
+        List<MediaBuffer> output =
+                new ArrayList<
+                        MediaBuffer>() { // from class: com.samsung.android.sume.core.graph.Graph.2
+                    {
+                        add(outputBuffer);
+                    }
+                };
+        run(
+                new ArrayList<
+                        MediaBuffer>() { // from class: com.samsung.android.sume.core.graph.Graph.3
+                    {
+                        add(inputBuffer);
+                    }
+                },
+                output);
         Def.require(output.size() == 1);
     }
 
@@ -68,22 +78,24 @@ public interface Graph<T> {
         public static final int SUPPORT_ALPHA_CHANNEL = 5;
         public static final int TRACE_MEDIAFILTER = 8;
         private static final String TAG = Def.tagOf((Class<?>) Option.class);
-        public static final Parcelable.Creator<Option> CREATOR = new Parcelable.Creator<Option>() { // from class: com.samsung.android.sume.core.graph.Graph.Option.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Option createFromParcel(Parcel in) {
-                return new Option(in);
-            }
+        public static final Parcelable.Creator<Option> CREATOR =
+                new Parcelable.Creator<
+                        Option>() { // from class:
+                                    // com.samsung.android.sume.core.graph.Graph.Option.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Option createFromParcel(Parcel in) {
+                        return new Option(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Option[] newArray(int size) {
-                return new Option[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Option[] newArray(int size) {
+                        return new Option[size];
+                    }
+                };
 
-        public Option() {
-        }
+        public Option() {}
 
         protected Option(Parcel in) {
             super(in);

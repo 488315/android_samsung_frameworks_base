@@ -8,6 +8,7 @@ import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructStat;
+
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -22,19 +23,21 @@ import java.nio.channels.WritableByteChannel;
 
 /* loaded from: classes.dex */
 public class AssetFileDescriptor implements Parcelable, Closeable {
-    public static final Parcelable.Creator<AssetFileDescriptor> CREATOR = new Parcelable.Creator<AssetFileDescriptor>() { // from class: android.content.res.AssetFileDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssetFileDescriptor createFromParcel(Parcel in) {
-            return new AssetFileDescriptor(in);
-        }
+    public static final Parcelable.Creator<AssetFileDescriptor> CREATOR =
+            new Parcelable.Creator<AssetFileDescriptor>() { // from class:
+                // android.content.res.AssetFileDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssetFileDescriptor createFromParcel(Parcel in) {
+                    return new AssetFileDescriptor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssetFileDescriptor[] newArray(int size) {
-            return new AssetFileDescriptor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssetFileDescriptor[] newArray(int size) {
+                    return new AssetFileDescriptor[size];
+                }
+            };
     public static final long UNKNOWN_LENGTH = -1;
     private final Bundle mExtras;
     private final ParcelFileDescriptor mFd;
@@ -45,7 +48,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
         this(fd, startOffset, length, null);
     }
 
-    public AssetFileDescriptor(ParcelFileDescriptor fd, long startOffset, long length, Bundle extras) {
+    public AssetFileDescriptor(
+            ParcelFileDescriptor fd, long startOffset, long length, Bundle extras) {
         if (fd == null) {
             throw new IllegalArgumentException("fd must not be null");
         }
@@ -116,7 +120,13 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
     }
 
     public String toString() {
-        return "{AssetFileDescriptor: " + this.mFd + " start=" + this.mStartOffset + " len=" + this.mLength + "}";
+        return "{AssetFileDescriptor: "
+                + this.mFd
+                + " start="
+                + this.mStartOffset
+                + " len="
+                + this.mLength
+                + "}";
     }
 
     public static class AutoCloseInputStream extends ParcelFileDescriptor.AutoCloseInputStream {
@@ -141,17 +151,20 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             return this.mDelegateInputStream.available();
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read() throws IOException {
             return this.mDelegateInputStream.read();
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read(byte[] buffer, int offset, int count) throws IOException {
             return this.mDelegateInputStream.read(buffer, offset, count);
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read(byte[] buffer) throws IOException {
             return this.mDelegateInputStream.read(buffer);
         }
@@ -181,13 +194,15 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             return this.mDelegateInputStream.getChannel();
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream, java.io.Closeable, java.lang.AutoCloseable
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream, java.io.Closeable, java.lang.AutoCloseable
         public void close() throws IOException {
             this.mDelegateInputStream.close();
         }
     }
 
-    private static class NonSeekableAutoCloseInputStream extends ParcelFileDescriptor.AutoCloseInputStream {
+    private static class NonSeekableAutoCloseInputStream
+            extends ParcelFileDescriptor.AutoCloseInputStream {
         private long mRemaining;
 
         NonSeekableAutoCloseInputStream(AssetFileDescriptor fd) throws IOException {
@@ -207,7 +222,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             return Integer.MAX_VALUE;
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read() throws IOException {
             byte[] buffer = new byte[1];
             int result = read(buffer, 0, 1);
@@ -217,7 +233,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             return -1;
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read(byte[] buffer, int offset, int count) throws IOException {
             if (this.mRemaining < 0) {
                 return super.read(buffer, offset, count);
@@ -235,7 +252,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             return res;
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read(byte[] buffer) throws IOException {
             return read(buffer, 0, buffer.length);
         }
@@ -289,7 +307,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
         }
     }
 
-    private static class SeekableAutoCloseInputStream extends ParcelFileDescriptor.AutoCloseInputStream {
+    private static class SeekableAutoCloseInputStream
+            extends ParcelFileDescriptor.AutoCloseInputStream {
         private final long mFileOffset;
         private long mOffset;
         private OffsetCorrectFileChannel mOffsetCorrectFileChannel;
@@ -313,7 +332,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             return Integer.MAX_VALUE;
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read() throws IOException {
             byte[] buffer = new byte[1];
             int result = read(buffer, 0, 1);
@@ -323,7 +343,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             return -1;
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read(byte[] buffer, int offset, int count) throws IOException {
             int available = available();
             if (available <= 0) {
@@ -350,7 +371,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             }
         }
 
-        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream, java.io.InputStream
+        @Override // android.os.ParcelFileDescriptor.AutoCloseInputStream, java.io.FileInputStream,
+        // java.io.InputStream
         public int read(byte[] buffer) throws IOException {
             return read(buffer, 0, buffer.length);
         }
@@ -370,8 +392,7 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
         }
 
         @Override // java.io.InputStream
-        public void mark(int readlimit) {
-        }
+        public void mark(int readlimit) {}
 
         @Override // java.io.InputStream
         public boolean markSupported() {
@@ -379,8 +400,7 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
         }
 
         @Override // java.io.InputStream
-        public synchronized void reset() throws IOException {
-        }
+        public synchronized void reset() throws IOException {}
 
         @Override // java.io.FileInputStream
         public FileChannel getChannel() {
@@ -402,14 +422,16 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
         }
 
         private class OffsetCorrectFileChannel extends FileChannel {
-            private static final String METHOD_NOT_SUPPORTED_MESSAGE = "This Method is not supported in AutoCloseInputStream FileChannel.";
+            private static final String METHOD_NOT_SUPPORTED_MESSAGE =
+                    "This Method is not supported in AutoCloseInputStream FileChannel.";
             private final FileChannel mDelegate;
 
             OffsetCorrectFileChannel(FileChannel fc) {
                 this.mDelegate = fc;
             }
 
-            @Override // java.nio.channels.FileChannel, java.nio.channels.SeekableByteChannel, java.nio.channels.ReadableByteChannel
+            @Override // java.nio.channels.FileChannel, java.nio.channels.SeekableByteChannel,
+            // java.nio.channels.ReadableByteChannel
             public int read(ByteBuffer dst) throws IOException {
                 if (SeekableAutoCloseInputStream.this.available() <= 0) {
                     return -1;
@@ -426,8 +448,12 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
                 if (SeekableAutoCloseInputStream.this.available() <= 0) {
                     return -1L;
                 }
-                if (SeekableAutoCloseInputStream.this.mOffset + length > SeekableAutoCloseInputStream.this.mTotalSize) {
-                    length = (int) (SeekableAutoCloseInputStream.this.mTotalSize - SeekableAutoCloseInputStream.this.mOffset);
+                if (SeekableAutoCloseInputStream.this.mOffset + length
+                        > SeekableAutoCloseInputStream.this.mTotalSize) {
+                    length =
+                            (int)
+                                    (SeekableAutoCloseInputStream.this.mTotalSize
+                                            - SeekableAutoCloseInputStream.this.mOffset);
                 }
                 long bytesRead = this.mDelegate.read(dsts, offset, length);
                 if (bytesRead != -1) {
@@ -438,7 +464,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
 
             @Override // java.nio.channels.FileChannel
             public int read(ByteBuffer dst, long position) throws IOException {
-                if (position - SeekableAutoCloseInputStream.this.mFileOffset > SeekableAutoCloseInputStream.this.mTotalSize) {
+                if (position - SeekableAutoCloseInputStream.this.mFileOffset
+                        > SeekableAutoCloseInputStream.this.mTotalSize) {
                     return -1;
                 }
                 return this.mDelegate.read(dst, position);
@@ -451,7 +478,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
 
             @Override // java.nio.channels.FileChannel, java.nio.channels.SeekableByteChannel
             public FileChannel position(long newPosition) throws IOException {
-                SeekableAutoCloseInputStream.this.mOffset = newPosition - SeekableAutoCloseInputStream.this.mFileOffset;
+                SeekableAutoCloseInputStream.this.mOffset =
+                        newPosition - SeekableAutoCloseInputStream.this.mFileOffset;
                 return this.mDelegate.position(newPosition);
             }
 
@@ -461,23 +489,34 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             }
 
             @Override // java.nio.channels.FileChannel
-            public long transferTo(long position, long count, WritableByteChannel target) throws IOException {
-                if (position - SeekableAutoCloseInputStream.this.mFileOffset > SeekableAutoCloseInputStream.this.mTotalSize) {
+            public long transferTo(long position, long count, WritableByteChannel target)
+                    throws IOException {
+                if (position - SeekableAutoCloseInputStream.this.mFileOffset
+                        > SeekableAutoCloseInputStream.this.mTotalSize) {
                     return 0L;
                 }
-                if ((position - SeekableAutoCloseInputStream.this.mFileOffset) + count > SeekableAutoCloseInputStream.this.mTotalSize) {
-                    count = SeekableAutoCloseInputStream.this.mTotalSize - (position - SeekableAutoCloseInputStream.this.mFileOffset);
+                if ((position - SeekableAutoCloseInputStream.this.mFileOffset) + count
+                        > SeekableAutoCloseInputStream.this.mTotalSize) {
+                    count =
+                            SeekableAutoCloseInputStream.this.mTotalSize
+                                    - (position - SeekableAutoCloseInputStream.this.mFileOffset);
                 }
                 return this.mDelegate.transferTo(position, count, target);
             }
 
             @Override // java.nio.channels.FileChannel
-            public MappedByteBuffer map(FileChannel.MapMode mode, long position, long size) throws IOException {
-                if (position - SeekableAutoCloseInputStream.this.mFileOffset > SeekableAutoCloseInputStream.this.mTotalSize) {
-                    throw new IOException("Cannot map to buffer because position exceed current file size.");
+            public MappedByteBuffer map(FileChannel.MapMode mode, long position, long size)
+                    throws IOException {
+                if (position - SeekableAutoCloseInputStream.this.mFileOffset
+                        > SeekableAutoCloseInputStream.this.mTotalSize) {
+                    throw new IOException(
+                            "Cannot map to buffer because position exceed current file size.");
                 }
-                if ((position - SeekableAutoCloseInputStream.this.mFileOffset) + size > SeekableAutoCloseInputStream.this.mTotalSize) {
-                    size = SeekableAutoCloseInputStream.this.mTotalSize - (position - SeekableAutoCloseInputStream.this.mFileOffset);
+                if ((position - SeekableAutoCloseInputStream.this.mFileOffset) + size
+                        > SeekableAutoCloseInputStream.this.mTotalSize) {
+                    size =
+                            SeekableAutoCloseInputStream.this.mTotalSize
+                                    - (position - SeekableAutoCloseInputStream.this.mFileOffset);
                 }
                 return this.mDelegate.map(mode, position, size);
             }
@@ -487,7 +526,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
                 this.mDelegate.close();
             }
 
-            @Override // java.nio.channels.FileChannel, java.nio.channels.SeekableByteChannel, java.nio.channels.WritableByteChannel
+            @Override // java.nio.channels.FileChannel, java.nio.channels.SeekableByteChannel,
+            // java.nio.channels.WritableByteChannel
             public int write(ByteBuffer src) throws IOException {
                 throw new UnsupportedOperationException(METHOD_NOT_SUPPORTED_MESSAGE);
             }
@@ -503,7 +543,8 @@ public class AssetFileDescriptor implements Parcelable, Closeable {
             }
 
             @Override // java.nio.channels.FileChannel
-            public long transferFrom(ReadableByteChannel src, long position, long count) throws IOException {
+            public long transferFrom(ReadableByteChannel src, long position, long count)
+                    throws IOException {
                 throw new UnsupportedOperationException(METHOD_NOT_SUPPORTED_MESSAGE);
             }
 

@@ -2,6 +2,7 @@ package com.android.server.job.restrictions;
 
 import android.os.PowerManager;
 import android.util.IndentingPrintWriter;
+
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.job.Flags;
 import com.android.server.job.controllers.JobStatus;
@@ -30,7 +31,9 @@ public final class ThermalStatusRestriction extends JobRestriction {
         if (i >= 35) {
             return false;
         }
-        if (jobStatus.overrideState == 2 && "android".equals(jobStatus.sourcePackageName) && (jobStatus.job.getId() == 800 || jobStatus.job.getId() == 801)) {
+        if (jobStatus.overrideState == 2
+                && "android".equals(jobStatus.sourcePackageName)
+                && (jobStatus.job.getId() == 800 || jobStatus.job.getId() == 801)) {
             return false;
         }
         if (this.mThermalStatus >= 3 || this.mForceRestricted) {
@@ -42,11 +45,14 @@ public final class ThermalStatusRestriction extends JobRestriction {
                 return false;
             }
             if (jobStatus.shouldTreatAsExpeditedJob()) {
-                return jobStatus.getNumPreviousAttempts() > 0 || (this.mService.isCurrentlyRunningLocked(jobStatus) && this.mService.isJobInOvertimeLocked(jobStatus));
+                return jobStatus.getNumPreviousAttempts() > 0
+                        || (this.mService.isCurrentlyRunningLocked(jobStatus)
+                                && this.mService.isJobInOvertimeLocked(jobStatus));
             }
             Flags.thermalRestrictionsToFgsJobs();
             if (effectivePriority == 400) {
-                return !this.mService.isCurrentlyRunningLocked(jobStatus) || this.mService.isJobInOvertimeLocked(jobStatus);
+                return !this.mService.isCurrentlyRunningLocked(jobStatus)
+                        || this.mService.isJobInOvertimeLocked(jobStatus);
             }
             return true;
         }
@@ -58,7 +64,8 @@ public final class ThermalStatusRestriction extends JobRestriction {
             if (effectivePriority != 200) {
                 return false;
             }
-            if (this.mService.isCurrentlyRunningLocked(jobStatus) && !this.mService.isJobInOvertimeLocked(jobStatus)) {
+            if (this.mService.isCurrentlyRunningLocked(jobStatus)
+                    && !this.mService.isJobInOvertimeLocked(jobStatus)) {
                 return false;
             }
         }
@@ -67,19 +74,37 @@ public final class ThermalStatusRestriction extends JobRestriction {
 
     @Override // com.android.server.job.restrictions.JobRestriction
     public final void onSystemServicesReady() {
-        ((PowerManager) this.mService.getContext().getSystemService(PowerManager.class)).addThermalStatusListener(new PowerManager.OnThermalStatusChangedListener() { // from class: com.android.server.job.restrictions.ThermalStatusRestriction.1
-            @Override // android.os.PowerManager.OnThermalStatusChangedListener
-            public final void onThermalStatusChanged(int i) {
-                boolean z = (i >= 1 && i <= 3) || (ThermalStatusRestriction.this.mThermalStatus >= 1 && i < 1) || (ThermalStatusRestriction.this.mThermalStatus < 3 && i > 3);
-                ThermalStatusRestriction thermalStatusRestriction = ThermalStatusRestriction.this;
-                thermalStatusRestriction.mIncreased = thermalStatusRestriction.mThermalStatus < i;
-                ThermalStatusRestriction.this.mThermalStatus = i;
-                if (z) {
-                    SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("ThermalStatus changed to "), ThermalStatusRestriction.this.mThermalStatus, "ThermalStatusRestriction");
-                    ThermalStatusRestriction thermalStatusRestriction2 = ThermalStatusRestriction.this;
-                    thermalStatusRestriction2.mService.onRestrictionStateChanged(thermalStatusRestriction2, thermalStatusRestriction2.mIncreased);
-                }
-            }
-        });
+        ((PowerManager) this.mService.getContext().getSystemService(PowerManager.class))
+                .addThermalStatusListener(
+                        new PowerManager
+                                .OnThermalStatusChangedListener() { // from class:
+                                                                    // com.android.server.job.restrictions.ThermalStatusRestriction.1
+                            @Override // android.os.PowerManager.OnThermalStatusChangedListener
+                            public final void onThermalStatusChanged(int i) {
+                                boolean z =
+                                        (i >= 1 && i <= 3)
+                                                || (ThermalStatusRestriction.this.mThermalStatus
+                                                                >= 1
+                                                        && i < 1)
+                                                || (ThermalStatusRestriction.this.mThermalStatus < 3
+                                                        && i > 3);
+                                ThermalStatusRestriction thermalStatusRestriction =
+                                        ThermalStatusRestriction.this;
+                                thermalStatusRestriction.mIncreased =
+                                        thermalStatusRestriction.mThermalStatus < i;
+                                ThermalStatusRestriction.this.mThermalStatus = i;
+                                if (z) {
+                                    SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("ThermalStatus changed to "),
+                                            ThermalStatusRestriction.this.mThermalStatus,
+                                            "ThermalStatusRestriction");
+                                    ThermalStatusRestriction thermalStatusRestriction2 =
+                                            ThermalStatusRestriction.this;
+                                    thermalStatusRestriction2.mService.onRestrictionStateChanged(
+                                            thermalStatusRestriction2,
+                                            thermalStatusRestriction2.mIncreased);
+                                }
+                            }
+                        });
     }
 }

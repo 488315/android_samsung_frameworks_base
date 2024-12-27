@@ -2,6 +2,7 @@ package android.app.appfunctions;
 
 import android.app.appsearch.AppSearchSchema;
 import android.app.appsearch.GenericDocument;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -9,7 +10,8 @@ public class AppFunctionRuntimeMetadata extends GenericDocument {
     public static final String APP_FUNCTION_INDEXER_PACKAGE = "android";
     public static final String APP_FUNCTION_RUNTIME_METADATA_DB = "appfunctions-db";
     public static final String APP_FUNCTION_RUNTIME_NAMESPACE = "app_functions_runtime";
-    public static final String PROPERTY_APP_FUNCTION_STATIC_METADATA_QUALIFIED_ID = "appFunctionStaticMetadataQualifiedId";
+    public static final String PROPERTY_APP_FUNCTION_STATIC_METADATA_QUALIFIED_ID =
+            "appFunctionStaticMetadataQualifiedId";
     public static final String PROPERTY_ENABLED = "enabled";
     public static final String PROPERTY_FUNCTION_ID = "functionId";
     public static final String PROPERTY_PACKAGE_NAME = "packageName";
@@ -28,7 +30,8 @@ public class AppFunctionRuntimeMetadata extends GenericDocument {
     public static String getPackageNameFromSchema(String metadataSchemaType) {
         String[] split = metadataSchemaType.split("-");
         if (split.length > 2) {
-            throw new IllegalArgumentException("Invalid schema type: " + metadataSchemaType + " for app function runtime");
+            throw new IllegalArgumentException(
+                    "Invalid schema type: " + metadataSchemaType + " for app function runtime");
         }
         if (split.length < 2) {
             return "android";
@@ -41,7 +44,9 @@ public class AppFunctionRuntimeMetadata extends GenericDocument {
     }
 
     public static AppSearchSchema createAppFunctionRuntimeSchema(String packageName) {
-        return getAppFunctionRuntimeSchemaBuilder(getRuntimeSchemaNameForPackage(packageName)).addParentType(RUNTIME_SCHEMA_TYPE).build();
+        return getAppFunctionRuntimeSchemaBuilder(getRuntimeSchemaNameForPackage(packageName))
+                .addParentType(RUNTIME_SCHEMA_TYPE)
+                .build();
     }
 
     public static AppSearchSchema createParentAppFunctionRuntimeSchema() {
@@ -49,7 +54,30 @@ public class AppFunctionRuntimeMetadata extends GenericDocument {
     }
 
     private static AppSearchSchema.Builder getAppFunctionRuntimeSchemaBuilder(String schemaType) {
-        return new AppSearchSchema.Builder(schemaType).addProperty(new AppSearchSchema.StringPropertyConfig.Builder("functionId").setCardinality(2).setIndexingType(1).setTokenizerType(2).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder("packageName").setCardinality(2).setIndexingType(1).setTokenizerType(2).build()).addProperty(new AppSearchSchema.LongPropertyConfig.Builder("enabled").setCardinality(2).setIndexingType(1).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(PROPERTY_APP_FUNCTION_STATIC_METADATA_QUALIFIED_ID).setCardinality(2).setJoinableValueType(1).build());
+        return new AppSearchSchema.Builder(schemaType)
+                .addProperty(
+                        new AppSearchSchema.StringPropertyConfig.Builder("functionId")
+                                .setCardinality(2)
+                                .setIndexingType(1)
+                                .setTokenizerType(2)
+                                .build())
+                .addProperty(
+                        new AppSearchSchema.StringPropertyConfig.Builder("packageName")
+                                .setCardinality(2)
+                                .setIndexingType(1)
+                                .setTokenizerType(2)
+                                .build())
+                .addProperty(
+                        new AppSearchSchema.LongPropertyConfig.Builder("enabled")
+                                .setCardinality(2)
+                                .setIndexingType(1)
+                                .build())
+                .addProperty(
+                        new AppSearchSchema.StringPropertyConfig.Builder(
+                                        PROPERTY_APP_FUNCTION_STATIC_METADATA_QUALIFIED_ID)
+                                .setCardinality(2)
+                                .setJoinableValueType(1)
+                                .build());
     }
 
     public String getFunctionId() {
@@ -70,10 +98,18 @@ public class AppFunctionRuntimeMetadata extends GenericDocument {
 
     public static final class Builder extends GenericDocument.Builder<Builder> {
         public Builder(String packageName, String functionId) {
-            super(AppFunctionRuntimeMetadata.APP_FUNCTION_RUNTIME_NAMESPACE, AppFunctionRuntimeMetadata.getDocumentIdForAppFunction((String) Objects.requireNonNull(packageName), (String) Objects.requireNonNull(functionId)), AppFunctionRuntimeMetadata.getRuntimeSchemaNameForPackage(packageName));
+            super(
+                    AppFunctionRuntimeMetadata.APP_FUNCTION_RUNTIME_NAMESPACE,
+                    AppFunctionRuntimeMetadata.getDocumentIdForAppFunction(
+                            (String) Objects.requireNonNull(packageName),
+                            (String) Objects.requireNonNull(functionId)),
+                    AppFunctionRuntimeMetadata.getRuntimeSchemaNameForPackage(packageName));
             setPropertyString("packageName", packageName);
             setPropertyString("functionId", functionId);
-            setPropertyString(AppFunctionRuntimeMetadata.PROPERTY_APP_FUNCTION_STATIC_METADATA_QUALIFIED_ID, AppFunctionStaticMetadataHelper.getStaticMetadataQualifiedId(packageName, functionId));
+            setPropertyString(
+                    AppFunctionRuntimeMetadata.PROPERTY_APP_FUNCTION_STATIC_METADATA_QUALIFIED_ID,
+                    AppFunctionStaticMetadataHelper.getStaticMetadataQualifiedId(
+                            packageName, functionId));
         }
 
         public Builder(AppFunctionRuntimeMetadata original) {

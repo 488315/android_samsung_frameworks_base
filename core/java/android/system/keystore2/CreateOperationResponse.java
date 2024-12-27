@@ -3,25 +3,27 @@ package android.system.keystore2;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.system.keystore2.IKeystoreOperation;
 
 /* loaded from: classes3.dex */
 public class CreateOperationResponse implements Parcelable {
-    public static final Parcelable.Creator<CreateOperationResponse> CREATOR = new Parcelable.Creator<CreateOperationResponse>() { // from class: android.system.keystore2.CreateOperationResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateOperationResponse createFromParcel(Parcel _aidl_source) {
-            CreateOperationResponse _aidl_out = new CreateOperationResponse();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CreateOperationResponse> CREATOR =
+            new Parcelable.Creator<
+                    CreateOperationResponse>() { // from class:
+                                                 // android.system.keystore2.CreateOperationResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateOperationResponse createFromParcel(Parcel _aidl_source) {
+                    CreateOperationResponse _aidl_out = new CreateOperationResponse();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateOperationResponse[] newArray(int _aidl_size) {
-            return new CreateOperationResponse[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateOperationResponse[] newArray(int _aidl_size) {
+                    return new CreateOperationResponse[_aidl_size];
+                }
+            };
     public IKeystoreOperation iOperation;
     public OperationChallenge operationChallenge;
     public KeyParameters parameters;
@@ -68,7 +70,8 @@ public class CreateOperationResponse implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.operationChallenge = (OperationChallenge) _aidl_parcel.readTypedObject(OperationChallenge.CREATOR);
+            this.operationChallenge =
+                    (OperationChallenge) _aidl_parcel.readTypedObject(OperationChallenge.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

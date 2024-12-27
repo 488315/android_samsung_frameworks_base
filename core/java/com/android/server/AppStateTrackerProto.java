@@ -20,15 +20,13 @@ public final class AppStateTrackerProto {
         public static final long PACKAGE_NAME = 1138166333442L;
         public static final long UID = 1120986464257L;
 
-        public RunAnyInBackgroundRestrictedPackages() {
-        }
+        public RunAnyInBackgroundRestrictedPackages() {}
     }
 
     public final class ExemptedPackage {
         public static final long PACKAGE_NAME = 1138166333442L;
         public static final long USER_ID = 1120986464257L;
 
-        public ExemptedPackage() {
-        }
+        public ExemptedPackage() {}
     }
 }

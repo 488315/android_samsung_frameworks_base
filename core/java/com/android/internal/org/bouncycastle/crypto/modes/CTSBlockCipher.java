@@ -13,7 +13,8 @@ public class CTSBlockCipher extends BufferedBlockCipher {
 
     public CTSBlockCipher(BlockCipher cipher) {
         if (cipher instanceof StreamBlockCipher) {
-            throw new IllegalArgumentException("CTSBlockCipher can only accept ECB, or CBC ciphers");
+            throw new IllegalArgumentException(
+                    "CTSBlockCipher can only accept ECB, or CBC ciphers");
         }
         this.cipher = cipher;
         this.blockSize = cipher.getBlockSize();
@@ -37,7 +38,8 @@ public class CTSBlockCipher extends BufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processByte(byte in, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processByte(byte in, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         int resultLen = 0;
         if (this.bufOff == this.buf.length) {
             resultLen = this.cipher.processBlock(this.buf, 0, out, outOff);
@@ -52,7 +54,8 @@ public class CTSBlockCipher extends BufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         if (len < 0) {
             throw new IllegalArgumentException("Can't have a negative input length!");
         }
@@ -84,7 +87,8 @@ public class CTSBlockCipher extends BufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int doFinal(byte[] out, int outOff) throws DataLengthException, IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException, InvalidCipherTextException {
         if (this.bufOff + outOff > out.length) {
             throw new OutputLengthException("output buffer to small in doFinal");
         }

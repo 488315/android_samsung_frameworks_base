@@ -3,25 +3,28 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaT53AudioControlInfoRecord implements Parcelable {
-    public static final Parcelable.Creator<CdmaT53AudioControlInfoRecord> CREATOR = new Parcelable.Creator<CdmaT53AudioControlInfoRecord>() { // from class: android.hardware.radio.voice.CdmaT53AudioControlInfoRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaT53AudioControlInfoRecord createFromParcel(Parcel _aidl_source) {
-            CdmaT53AudioControlInfoRecord _aidl_out = new CdmaT53AudioControlInfoRecord();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaT53AudioControlInfoRecord> CREATOR =
+            new Parcelable.Creator<CdmaT53AudioControlInfoRecord>() { // from class:
+                // android.hardware.radio.voice.CdmaT53AudioControlInfoRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaT53AudioControlInfoRecord createFromParcel(Parcel _aidl_source) {
+                    CdmaT53AudioControlInfoRecord _aidl_out = new CdmaT53AudioControlInfoRecord();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaT53AudioControlInfoRecord[] newArray(int _aidl_size) {
-            return new CdmaT53AudioControlInfoRecord[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaT53AudioControlInfoRecord[] newArray(int _aidl_size) {
+                    return new CdmaT53AudioControlInfoRecord[_aidl_size];
+                }
+            };
     public byte upLink = 0;
     public byte downLink = 0;
 

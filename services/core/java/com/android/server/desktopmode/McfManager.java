@@ -12,12 +12,12 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.provider.Settings;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
-import com.android.server.desktopmode.SettingsHelper;
-import com.android.server.desktopmode.StateManager;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
@@ -28,12 +28,15 @@ import com.samsung.android.mcf.ble.BleScanCallback;
 import com.samsung.android.mcf.ble.BleScanFilter;
 import com.samsung.android.mcf.ble.BleScanSettings;
 import com.samsung.android.mcf.ble.BleScanner;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class McfManager {
-    public static final byte[] mScanFilterData = {66, 4, 0, HwConstants.IQ_CONFIG_POS_WIFI_ENABLED, 0, 0, 0, 0, 8};
+    public static final byte[] mScanFilterData = {
+        66, 4, 0, HwConstants.IQ_CONFIG_POS_WIFI_ENABLED, 0, 0, 0, 0, 8
+    };
     public static final byte[] mScanFilterDataMask = {-1, -1, 0, -1, 0, 0, 0, 0, 8};
     public final AnonymousClass3 mBleAdapterCallback;
     public final BleAdvertiserServiceManager mBleAdvertiserServiceManager;
@@ -57,28 +60,39 @@ public final class McfManager {
     public boolean mIsRequestingBindMcfAdapter = false;
     public long mWakeLockTimeout = 0;
     public boolean mRegisterIntent = false;
-    public final AnonymousClass1 mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.desktopmode.McfManager.1
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            if (DesktopModeFeature.DEBUG) {
-                Log.d("[DMS]McfManager", "onReceive intent.getAction():" + intent.getAction());
-            }
-            String action = intent.getAction();
-            if ("android.intent.action.AIRPLANE_MODE".equals(action)) {
-                McfManager.this.mMcfHandler.removeMessages(701);
-                McfHandler mcfHandler = McfManager.this.mMcfHandler;
-                mcfHandler.sendMessage(mcfHandler.obtainMessage(701));
-            } else if ("com.samsung.bluetooth.adapter.action.BLE_STATE_CHANGED".equals(action)) {
-                McfManager.this.mMcfHandler.removeMessages(EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_EXIT);
-                McfHandler mcfHandler2 = McfManager.this.mMcfHandler;
-                mcfHandler2.sendMessage(mcfHandler2.obtainMessage(EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_EXIT, intent));
-            } else if ("com.samsung.android.nearbyscanning".equals(action)) {
-                McfManager.this.mMcfHandler.removeMessages(EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_FORK);
-                McfHandler mcfHandler3 = McfManager.this.mMcfHandler;
-                mcfHandler3.sendMessage(mcfHandler3.obtainMessage(EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_FORK));
-            }
-        }
-    };
+    public final AnonymousClass1 mBroadcastReceiver =
+            new BroadcastReceiver() { // from class: com.android.server.desktopmode.McfManager.1
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    if (DesktopModeFeature.DEBUG) {
+                        Log.d(
+                                "[DMS]McfManager",
+                                "onReceive intent.getAction():" + intent.getAction());
+                    }
+                    String action = intent.getAction();
+                    if ("android.intent.action.AIRPLANE_MODE".equals(action)) {
+                        McfManager.this.mMcfHandler.removeMessages(701);
+                        McfHandler mcfHandler = McfManager.this.mMcfHandler;
+                        mcfHandler.sendMessage(mcfHandler.obtainMessage(701));
+                    } else if ("com.samsung.bluetooth.adapter.action.BLE_STATE_CHANGED"
+                            .equals(action)) {
+                        McfManager.this.mMcfHandler.removeMessages(
+                                EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_EXIT);
+                        McfHandler mcfHandler2 = McfManager.this.mMcfHandler;
+                        mcfHandler2.sendMessage(
+                                mcfHandler2.obtainMessage(
+                                        EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_EXIT,
+                                        intent));
+                    } else if ("com.samsung.android.nearbyscanning".equals(action)) {
+                        McfManager.this.mMcfHandler.removeMessages(
+                                EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_FORK);
+                        McfHandler mcfHandler3 = McfManager.this.mMcfHandler;
+                        mcfHandler3.sendMessage(
+                                mcfHandler3.obtainMessage(
+                                        EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_FORK));
+                    }
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class McfHandler extends Handler {
@@ -100,22 +114,31 @@ public final class McfManager {
                 }
                 if (mcfBleAdapter.isNetworkEnabled(1)) {
                     if (DesktopModeFeature.DEBUG) {
-                        Log.d("[DMS]McfManager", "handleMcfServiceStateChanged - BLE NETWORK is enabled");
+                        Log.d(
+                                "[DMS]McfManager",
+                                "handleMcfServiceStateChanged - BLE NETWORK is enabled");
                         return;
                     }
                     return;
                 } else {
                     if (DesktopModeFeature.DEBUG) {
-                        Log.i("[DMS]McfManager", "handleMcfServiceStateChanged - BLE NETWORK is not enabled. Need to check unbind");
+                        Log.i(
+                                "[DMS]McfManager",
+                                "handleMcfServiceStateChanged - BLE NETWORK is not enabled. Need to"
+                                    + " check unbind");
                     }
                     return;
                 }
             }
             if (i2 == 401) {
                 mcfManager.mBleScannerState = "BLE_SCANNER_STATE_SCAN_RESULT";
-                StateManager.InternalState state = ((StateManager) mcfManager.mStateManager).getState();
-                BleAdvertiserServiceManager bleAdvertiserServiceManager = mcfManager.mBleAdvertiserServiceManager;
-                if (!bleAdvertiserServiceManager.mBound && (i = state.mDesktopModeState.enabled) != 3 && i != 4) {
+                StateManager.InternalState state =
+                        ((StateManager) mcfManager.mStateManager).getState();
+                BleAdvertiserServiceManager bleAdvertiserServiceManager =
+                        mcfManager.mBleAdvertiserServiceManager;
+                if (!bleAdvertiserServiceManager.mBound
+                        && (i = state.mDesktopModeState.enabled) != 3
+                        && i != 4) {
                     if (DesktopModeFeature.DEBUG) {
                         Log.d("[DMS]McfManager", "handleMcfAdapterScannerScanResult bindService");
                     }
@@ -130,7 +153,8 @@ public final class McfManager {
                 McfAdapter mcfAdapter = (McfAdapter) message.obj;
                 boolean z2 = DesktopModeFeature.DEBUG;
                 if (z2) {
-                    DesktopModeService$$ExternalSyntheticOutline0.m(i3, "MSG_MCF_ADAPTER_SERVICE_CONNECTED retryCount=", "[DMS]McfManager");
+                    DesktopModeService$$ExternalSyntheticOutline0.m(
+                            i3, "MSG_MCF_ADAPTER_SERVICE_CONNECTED retryCount=", "[DMS]McfManager");
                 }
                 if (mcfAdapter != null) {
                     mcfManager.mBleScannerState = "BLE_SCANNER_STATE_MCF_ADAPTER_BIND";
@@ -141,7 +165,9 @@ public final class McfManager {
                 try {
                     if (mcfManager.mMcfAdapter == null) {
                         if (z2) {
-                            Log.d("[DMS]McfManager", "handleMcfAdapterServiceConnected mMcfAdapter null");
+                            Log.d(
+                                    "[DMS]McfManager",
+                                    "handleMcfAdapterServiceConnected mMcfAdapter null");
                             return;
                         }
                         return;
@@ -151,20 +177,31 @@ public final class McfManager {
                     }
                     if (mcfManager.mMcfBleAdapter == null) {
                         if (z2) {
-                            Log.d("[DMS]McfManager", "handleMcfAdapterServiceConnected getBleAdapter");
+                            Log.d(
+                                    "[DMS]McfManager",
+                                    "handleMcfAdapterServiceConnected getBleAdapter");
                         }
-                        mcfManager.mMcfBleAdapter = mcfManager.mMcfAdapter.getBleAdapter(35, mcfManager.mBleAdapterCallback);
+                        mcfManager.mMcfBleAdapter =
+                                mcfManager.mMcfAdapter.getBleAdapter(
+                                        35, mcfManager.mBleAdapterCallback);
                     }
                     McfBleAdapter mcfBleAdapter2 = mcfManager.mMcfBleAdapter;
                     if (mcfBleAdapter2 == null) {
                         if (z2) {
-                            Log.d("[DMS]McfManager", "handleMcfAdapterServiceConnected mMcfBleAdapter null");
+                            Log.d(
+                                    "[DMS]McfManager",
+                                    "handleMcfAdapterServiceConnected mMcfBleAdapter null");
                             return;
                         }
                         return;
                     } else {
                         if (mcfBleAdapter2.isNetworkEnabled(1)) {
-                            String settingsAsUser = DesktopModeSettings.getSettingsAsUser(mcfManager.mResolver, "ble_mac_address_list", (String) null, DesktopModeSettings.sCurrentUserId);
+                            String settingsAsUser =
+                                    DesktopModeSettings.getSettingsAsUser(
+                                            mcfManager.mResolver,
+                                            "ble_mac_address_list",
+                                            (String) null,
+                                            DesktopModeSettings.sCurrentUserId);
                             if (settingsAsUser != null) {
                                 strArr = settingsAsUser.split(",");
                             } else {
@@ -180,7 +217,8 @@ public final class McfManager {
                         mcfManager.mBleScannerState = "BLE_SCANNER_STATE_BLE_NETWORK_NOT_READY_YET";
                         McfHandler mcfHandler = mcfManager.mMcfHandler;
                         mcfHandler.removeMessages(301);
-                        mcfHandler.sendMessageDelayed(mcfHandler.obtainMessage(301, i3 + 1, 0, null), 3000L);
+                        mcfHandler.sendMessageDelayed(
+                                mcfHandler.obtainMessage(301, i3 + 1, 0, null), 3000L);
                         return;
                     }
                 } catch (Exception e) {
@@ -199,11 +237,16 @@ public final class McfManager {
                     long longValue = ((Long) message.obj).longValue();
                     mcfManager.getClass();
                     if (DesktopModeFeature.DEBUG) {
-                        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("handleBleAdvertiserServiceUnbind timeout ", longValue, ", mBleScannerState=");
+                        StringBuilder m =
+                                BatteryService$$ExternalSyntheticOutline0.m(
+                                        "handleBleAdvertiserServiceUnbind timeout ",
+                                        longValue,
+                                        ", mBleScannerState=");
                         m.append(mcfManager.mBleScannerState);
                         Log.w("[DMS]McfManager", m.toString());
                     }
-                    if (!mcfManager.mBleScannerState.equals("BLE_SCANNER_STATE_MCF_ADAPTER_UNBIND")) {
+                    if (!mcfManager.mBleScannerState.equals(
+                            "BLE_SCANNER_STATE_MCF_ADAPTER_UNBIND")) {
                         mcfManager.mBleScannerState = "BLE_SCANNER_STATE_SCAN_TIMEOUT";
                     }
                     mcfManager.mBleAdvertiserServiceTimeout = -1L;
@@ -220,7 +263,9 @@ public final class McfManager {
                     mcfManager.getClass();
                     if (str != null) {
                         if (DesktopModeFeature.DEBUG) {
-                            Log.d("[DMS]McfManager", "handleWirelessDexBleMacAddressChanged changed.");
+                            Log.d(
+                                    "[DMS]McfManager",
+                                    "handleWirelessDexBleMacAddressChanged changed.");
                         }
                         if (mcfManager.mMcfAdapter != null) {
                             BleScanner bleScanner = mcfManager.mBleScanner;
@@ -232,7 +277,8 @@ public final class McfManager {
                             mcfManager.mBleScannerState = "BLE_SCANNER_STATE_SCAN_FILTER_CHANGE";
                             McfHandler mcfHandler2 = mcfManager.mMcfHandler;
                             mcfHandler2.removeMessages(301);
-                            mcfHandler2.sendMessageDelayed(mcfHandler2.obtainMessage(301, 0, 0, null), 100L);
+                            mcfHandler2.sendMessageDelayed(
+                                    mcfHandler2.obtainMessage(301, 0, 0, null), 100L);
                             break;
                         } else {
                             mcfManager.initialize(1002);
@@ -241,7 +287,9 @@ public final class McfManager {
                     } else {
                         boolean z3 = DesktopModeFeature.DEBUG;
                         if (z3) {
-                            Log.d("[DMS]McfManager", "handleWirelessDexBleMacAddressChanged deleted.");
+                            Log.d(
+                                    "[DMS]McfManager",
+                                    "handleWirelessDexBleMacAddressChanged deleted.");
                         }
                         if (mcfManager.mRegisterIntent) {
                             if (z3) {
@@ -258,13 +306,16 @@ public final class McfManager {
                     boolean booleanValue = ((Boolean) message.obj).booleanValue();
                     if (mcfManager.bleMacAddressListExists()) {
                         if (!booleanValue) {
-                            BleAdvertiserServiceManager bleAdvertiserServiceManager2 = mcfManager.mBleAdvertiserServiceManager;
-                            if (!bleAdvertiserServiceManager2.mBound && McfManager.isNearbyScanningOn(mcfManager.mContext)) {
+                            BleAdvertiserServiceManager bleAdvertiserServiceManager2 =
+                                    mcfManager.mBleAdvertiserServiceManager;
+                            if (!bleAdvertiserServiceManager2.mBound
+                                    && McfManager.isNearbyScanningOn(mcfManager.mContext)) {
                                 McfBleAdapter mcfBleAdapter3 = mcfManager.mMcfBleAdapter;
                                 if (mcfBleAdapter3 != null) {
                                     z = mcfBleAdapter3.isNetworkEnabled(1);
                                 } else {
-                                    BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
+                                    BluetoothAdapter defaultAdapter =
+                                            BluetoothAdapter.getDefaultAdapter();
                                     z = defaultAdapter != null && defaultAdapter.semIsBleEnabled();
                                 }
                                 if (z) {
@@ -286,7 +337,12 @@ public final class McfManager {
                     switch (i2) {
                         case 701:
                             Context context = mcfManager.mContext;
-                            if (context == null || Settings.Global.getInt(context.getContentResolver(), "airplane_mode_on", 0) == 0) {
+                            if (context == null
+                                    || Settings.Global.getInt(
+                                                    context.getContentResolver(),
+                                                    "airplane_mode_on",
+                                                    0)
+                                            == 0) {
                                 mcfManager.initialize(1003);
                                 break;
                             }
@@ -294,9 +350,13 @@ public final class McfManager {
                         case EndpointMonitorConst.TRACE_EVENT_SCHED_PROCESS_EXIT /* 702 */:
                             Intent intent = (Intent) message.obj;
                             mcfManager.getClass();
-                            int intExtra = intent.getIntExtra("android.bluetooth.adapter.extra.STATE", 10);
+                            int intExtra =
+                                    intent.getIntExtra("android.bluetooth.adapter.extra.STATE", 10);
                             if (DesktopModeFeature.DEBUG) {
-                                DesktopModeService$$ExternalSyntheticOutline0.m(intExtra, "handleSemBleStateChanged STATE:", "[DMS]McfManager");
+                                DesktopModeService$$ExternalSyntheticOutline0.m(
+                                        intExtra,
+                                        "handleSemBleStateChanged STATE:",
+                                        "[DMS]McfManager");
                             }
                             if (intExtra == 15 || intExtra == 12) {
                                 mcfManager.initialize(1004);
@@ -310,7 +370,8 @@ public final class McfManager {
                             }
                             if (!McfManager.isNearbyScanningOn(mcfManager.mContext)) {
                                 mcfManager.unbindMcfAdapter();
-                                mcfManager.mBleScannerState = "BLE_SCANNER_STATE_MCF_ADAPTER_UNBIND";
+                                mcfManager.mBleScannerState =
+                                        "BLE_SCANNER_STATE_MCF_ADAPTER_UNBIND";
                                 mcfManager.tryBleAdvertiserServiceUnbind(0L);
                                 break;
                             } else {
@@ -326,101 +387,136 @@ public final class McfManager {
     /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.desktopmode.McfManager$3] */
     /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.desktopmode.McfManager$4] */
     /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.desktopmode.McfManager$5] */
-    public McfManager(Context context, ServiceThread serviceThread, IStateManager iStateManager, SettingsHelper settingsHelper, BleAdvertiserServiceManager bleAdvertiserServiceManager) {
-        StateManager.StateListener stateListener = new StateManager.StateListener() { // from class: com.android.server.desktopmode.McfManager.2
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onBootCompleted() {
-                McfManager.this.initialize(1001);
-            }
+    public McfManager(
+            Context context,
+            ServiceThread serviceThread,
+            IStateManager iStateManager,
+            SettingsHelper settingsHelper,
+            BleAdvertiserServiceManager bleAdvertiserServiceManager) {
+        StateManager.StateListener stateListener =
+                new StateManager
+                        .StateListener() { // from class:
+                                           // com.android.server.desktopmode.McfManager.2
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onBootCompleted() {
+                        McfManager.this.initialize(1001);
+                    }
 
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onDualModeStopLoadingScreen(boolean z) {
-                if (DesktopModeFeature.DEBUG) {
-                    Log.i("[DMS]McfManager", "onDualModeStopLoadingScreen enter=" + z);
-                }
-                McfManager mcfManager = McfManager.this;
-                mcfManager.mMcfHandler.removeMessages(103);
-                Boolean valueOf = Boolean.valueOf(z);
-                McfHandler mcfHandler = mcfManager.mMcfHandler;
-                mcfHandler.sendMessage(mcfHandler.obtainMessage(103, valueOf));
-            }
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onDualModeStopLoadingScreen(boolean z) {
+                        if (DesktopModeFeature.DEBUG) {
+                            Log.i("[DMS]McfManager", "onDualModeStopLoadingScreen enter=" + z);
+                        }
+                        McfManager mcfManager = McfManager.this;
+                        mcfManager.mMcfHandler.removeMessages(103);
+                        Boolean valueOf = Boolean.valueOf(z);
+                        McfHandler mcfHandler = mcfManager.mMcfHandler;
+                        mcfHandler.sendMessage(mcfHandler.obtainMessage(103, valueOf));
+                    }
 
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onPackageStateChanged(StateManager.InternalState internalState) {
-                if (DesktopModeFeature.DEBUG) {
-                    Log.i("[DMS]McfManager", "onPackageStateChanged state=" + internalState);
-                }
-                Boolean bool = (Boolean) internalState.mPackageState.get("com.sec.android.desktopmode.uiservice");
-                if (bool == null || !bool.booleanValue()) {
-                    return;
-                }
-                McfManager mcfManager = McfManager.this;
-                mcfManager.mMcfHandler.removeMessages(104);
-                McfHandler mcfHandler = mcfManager.mMcfHandler;
-                mcfHandler.sendMessage(mcfHandler.obtainMessage(104));
-            }
-        };
-        this.mBleAdapterCallback = new BleAdapterCallback() { // from class: com.android.server.desktopmode.McfManager.3
-            public final void onMcfServiceStateChanged(int i, int i2) {
-                if (DesktopModeFeature.DEBUG) {
-                    Log.i("[DMS]McfManager", "onMcfServiceStateChanged state " + i);
-                }
-                McfManager.this.mMcfHandler.removeMessages(201);
-                McfHandler mcfHandler = McfManager.this.mMcfHandler;
-                mcfHandler.sendMessage(mcfHandler.obtainMessage(201, Integer.valueOf(i)));
-            }
-        };
-        this.mMcfAdapterListener = new McfAdapter.McfAdapterListener() { // from class: com.android.server.desktopmode.McfManager.4
-            public final void onServiceConnected(McfAdapter mcfAdapter) {
-                if (DesktopModeFeature.DEBUG) {
-                    Log.i("[DMS]McfManager", "McfAdapterListener onServiceConnected");
-                }
-                McfManager.this.mMcfHandler.removeMessages(301);
-                McfHandler mcfHandler = McfManager.this.mMcfHandler;
-                mcfHandler.sendMessageDelayed(mcfHandler.obtainMessage(301, 0, 0, mcfAdapter), 100L);
-            }
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onPackageStateChanged(
+                            StateManager.InternalState internalState) {
+                        if (DesktopModeFeature.DEBUG) {
+                            Log.i(
+                                    "[DMS]McfManager",
+                                    "onPackageStateChanged state=" + internalState);
+                        }
+                        Boolean bool =
+                                (Boolean)
+                                        internalState.mPackageState.get(
+                                                "com.sec.android.desktopmode.uiservice");
+                        if (bool == null || !bool.booleanValue()) {
+                            return;
+                        }
+                        McfManager mcfManager = McfManager.this;
+                        mcfManager.mMcfHandler.removeMessages(104);
+                        McfHandler mcfHandler = mcfManager.mMcfHandler;
+                        mcfHandler.sendMessage(mcfHandler.obtainMessage(104));
+                    }
+                };
+        this.mBleAdapterCallback =
+                new BleAdapterCallback() { // from class:
+                                           // com.android.server.desktopmode.McfManager.3
+                    public final void onMcfServiceStateChanged(int i, int i2) {
+                        if (DesktopModeFeature.DEBUG) {
+                            Log.i("[DMS]McfManager", "onMcfServiceStateChanged state " + i);
+                        }
+                        McfManager.this.mMcfHandler.removeMessages(201);
+                        McfHandler mcfHandler = McfManager.this.mMcfHandler;
+                        mcfHandler.sendMessage(mcfHandler.obtainMessage(201, Integer.valueOf(i)));
+                    }
+                };
+        this.mMcfAdapterListener =
+                new McfAdapter
+                        .McfAdapterListener() { // from class:
+                                                // com.android.server.desktopmode.McfManager.4
+                    public final void onServiceConnected(McfAdapter mcfAdapter) {
+                        if (DesktopModeFeature.DEBUG) {
+                            Log.i("[DMS]McfManager", "McfAdapterListener onServiceConnected");
+                        }
+                        McfManager.this.mMcfHandler.removeMessages(301);
+                        McfHandler mcfHandler = McfManager.this.mMcfHandler;
+                        mcfHandler.sendMessageDelayed(
+                                mcfHandler.obtainMessage(301, 0, 0, mcfAdapter), 100L);
+                    }
 
-            public final void onServiceDisconnected() {
-                if (DesktopModeFeature.DEBUG) {
-                    Log.i("[DMS]McfManager", "McfAdapterListener onServiceDisconnected");
-                }
-                McfManager.this.mMcfHandler.removeMessages(FrameworkStatsLog.APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_ALARM_MANAGER_WHILE_IDLE);
-                McfHandler mcfHandler = McfManager.this.mMcfHandler;
-                mcfHandler.sendMessage(mcfHandler.obtainMessage(FrameworkStatsLog.APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_ALARM_MANAGER_WHILE_IDLE));
-            }
+                    public final void onServiceDisconnected() {
+                        if (DesktopModeFeature.DEBUG) {
+                            Log.i("[DMS]McfManager", "McfAdapterListener onServiceDisconnected");
+                        }
+                        McfManager.this.mMcfHandler.removeMessages(
+                                FrameworkStatsLog
+                                        .APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_ALARM_MANAGER_WHILE_IDLE);
+                        McfHandler mcfHandler = McfManager.this.mMcfHandler;
+                        mcfHandler.sendMessage(
+                                mcfHandler.obtainMessage(
+                                        FrameworkStatsLog
+                                                .APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_ALARM_MANAGER_WHILE_IDLE));
+                    }
 
-            public final void onServiceRemoteException() {
-                Log.e("[DMS]McfManager", "McfAdapterListener onServiceRemoteException");
-            }
-        };
-        this.mBleScanCallback = new BleScanCallback() { // from class: com.android.server.desktopmode.McfManager.5
-            public final void onScanFailed(int i) {
-                McfManager.this.mLastBleScanFailedErrorCode = i;
-                Log.e("[DMS]McfManager", "onScanFailed errorCode " + i);
-            }
+                    public final void onServiceRemoteException() {
+                        Log.e("[DMS]McfManager", "McfAdapterListener onServiceRemoteException");
+                    }
+                };
+        this.mBleScanCallback =
+                new BleScanCallback() { // from class: com.android.server.desktopmode.McfManager.5
+                    public final void onScanFailed(int i) {
+                        McfManager.this.mLastBleScanFailedErrorCode = i;
+                        Log.e("[DMS]McfManager", "onScanFailed errorCode " + i);
+                    }
 
-            public final void onScanResult(ScanResult scanResult) {
-                McfManager.this.mLastBleScanResult = scanResult.toString();
-                if (McfManager.this.mBleAdvertiserServiceTimeout != 60000 && DesktopModeFeature.DEBUG) {
-                    Log.i("[DMS]McfManager", "onScanResult result " + scanResult.toString());
-                }
-                McfManager.this.mMcfHandler.removeMessages(401);
-                McfHandler mcfHandler = McfManager.this.mMcfHandler;
-                mcfHandler.sendMessage(mcfHandler.obtainMessage(401));
-            }
-        };
-        SettingsHelper.OnSettingChangedListener onSettingChangedListener = new SettingsHelper.OnSettingChangedListener() { // from class: com.android.server.desktopmode.McfManager.6
-            @Override // com.android.server.desktopmode.SettingsHelper.OnSettingChangedListener
-            public final void onSettingChanged(String str) {
-                if (DesktopModeFeature.DEBUG) {
-                    Log.i("[DMS]McfManager", "mWirelessDeXBleAddressSettingChangedListener onSettingChanged value=" + str);
-                }
-                McfManager mcfManager = McfManager.this;
-                mcfManager.mMcfHandler.removeMessages(102);
-                McfHandler mcfHandler = mcfManager.mMcfHandler;
-                mcfHandler.sendMessage(mcfHandler.obtainMessage(102, str));
-            }
-        };
+                    public final void onScanResult(ScanResult scanResult) {
+                        McfManager.this.mLastBleScanResult = scanResult.toString();
+                        if (McfManager.this.mBleAdvertiserServiceTimeout != 60000
+                                && DesktopModeFeature.DEBUG) {
+                            Log.i(
+                                    "[DMS]McfManager",
+                                    "onScanResult result " + scanResult.toString());
+                        }
+                        McfManager.this.mMcfHandler.removeMessages(401);
+                        McfHandler mcfHandler = McfManager.this.mMcfHandler;
+                        mcfHandler.sendMessage(mcfHandler.obtainMessage(401));
+                    }
+                };
+        SettingsHelper.OnSettingChangedListener onSettingChangedListener =
+                new SettingsHelper.OnSettingChangedListener() { // from class:
+                    // com.android.server.desktopmode.McfManager.6
+                    @Override // com.android.server.desktopmode.SettingsHelper.OnSettingChangedListener
+                    public final void onSettingChanged(String str) {
+                        if (DesktopModeFeature.DEBUG) {
+                            Log.i(
+                                    "[DMS]McfManager",
+                                    "mWirelessDeXBleAddressSettingChangedListener onSettingChanged"
+                                        + " value="
+                                            + str);
+                        }
+                        McfManager mcfManager = McfManager.this;
+                        mcfManager.mMcfHandler.removeMessages(102);
+                        McfHandler mcfHandler = mcfManager.mMcfHandler;
+                        mcfHandler.sendMessage(mcfHandler.obtainMessage(102, str));
+                    }
+                };
         this.mContext = context;
         this.mResolver = context.getContentResolver();
         this.mMcfHandler = new McfHandler(serviceThread.getLooper());
@@ -428,7 +524,9 @@ public final class McfManager {
         ((StateManager) iStateManager).registerListener(stateListener);
         settingsHelper.registerListener(onSettingChangedListener);
         this.mBleAdvertiserServiceManager = bleAdvertiserServiceManager;
-        this.mWakeLock = ((PowerManager) context.getSystemService("power")).newWakeLock(1, "DesktopMode:McfManager");
+        this.mWakeLock =
+                ((PowerManager) context.getSystemService("power"))
+                        .newWakeLock(1, "DesktopMode:McfManager");
     }
 
     public static String bleStartScanReasonToString(int i) {
@@ -453,7 +551,9 @@ public final class McfManager {
     public static boolean isNearbyScanningOn(Context context) {
         if (context != null) {
             try {
-                return Settings.System.getInt(context.getContentResolver(), "nearby_scanning_enabled") == 1;
+                return Settings.System.getInt(
+                                context.getContentResolver(), "nearby_scanning_enabled")
+                        == 1;
             } catch (Settings.SettingNotFoundException e) {
                 if (DesktopModeFeature.DEBUG) {
                     Log.w("[DMS]McfManager", "SettingNotFoundException " + e);
@@ -464,7 +564,12 @@ public final class McfManager {
     }
 
     public final boolean bleMacAddressListExists() {
-        String settingsAsUser = DesktopModeSettings.getSettingsAsUser(this.mResolver, "ble_mac_address_list", (String) null, DesktopModeSettings.sCurrentUserId);
+        String settingsAsUser =
+                DesktopModeSettings.getSettingsAsUser(
+                        this.mResolver,
+                        "ble_mac_address_list",
+                        (String) null,
+                        DesktopModeSettings.sCurrentUserId);
         if (DesktopModeFeature.DEBUG) {
             Log.d("[DMS]McfManager", "bleMacAddressListExists bleMacAddress=" + settingsAsUser);
         }
@@ -479,12 +584,26 @@ public final class McfManager {
                     Log.d("[DMS]McfManager", "registerIntent");
                 }
                 this.mRegisterIntent = true;
-                this.mContext.registerReceiver(this.mBroadcastReceiver, GmsAlarmManager$$ExternalSyntheticOutline0.m("android.intent.action.AIRPLANE_MODE", "com.samsung.bluetooth.adapter.action.BLE_STATE_CHANGED", "com.samsung.android.nearbyscanning"), 2);
+                this.mContext.registerReceiver(
+                        this.mBroadcastReceiver,
+                        GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                                "android.intent.action.AIRPLANE_MODE",
+                                "com.samsung.bluetooth.adapter.action.BLE_STATE_CHANGED",
+                                "com.samsung.android.nearbyscanning"),
+                        2);
             }
-            if (this.mMcfAdapter == null && !this.mIsRequestingBindMcfAdapter && isNearbyScanningOn(this.mContext)) {
-                if (i != 1001 || (context = this.mContext) == null || Settings.Global.getInt(context.getContentResolver(), "airplane_mode_on", 0) == 0) {
+            if (this.mMcfAdapter == null
+                    && !this.mIsRequestingBindMcfAdapter
+                    && isNearbyScanningOn(this.mContext)) {
+                if (i != 1001
+                        || (context = this.mContext) == null
+                        || Settings.Global.getInt(
+                                        context.getContentResolver(), "airplane_mode_on", 0)
+                                == 0) {
                     if (DesktopModeFeature.DEBUG) {
-                        Log.i("[DMS]McfManager", "bindMcfAdapter reason=" + bleStartScanReasonToString(i));
+                        Log.i(
+                                "[DMS]McfManager",
+                                "bindMcfAdapter reason=" + bleStartScanReasonToString(i));
                     }
                     this.mBleStartScanReason = i;
                     if (McfAdapter.bindService(this.mContext, this.mMcfAdapterListener)) {
@@ -533,7 +652,9 @@ public final class McfManager {
                     for (String str : strArr) {
                         if (BluetoothAdapter.checkBluetoothAddress(str)) {
                             if (DesktopModeFeature.DEBUG) {
-                                Log.d("[DMS]McfManager", "tryBleScannerStartScan valid splitBleMac=" + str);
+                                Log.d(
+                                        "[DMS]McfManager",
+                                        "tryBleScannerStartScan valid splitBleMac=" + str);
                             }
                             BleScanFilter.Builder builder2 = new BleScanFilter.Builder();
                             builder2.setManufacturerData(117, mScanFilterData, mScanFilterDataMask);
@@ -542,18 +663,27 @@ public final class McfManager {
                             arrayList.add(build2);
                             arrayList2.add(build2);
                         } else {
-                            Log.e("[DMS]McfManager", "tryBleScannerStartScan invalid splitBleMac=" + str);
+                            Log.e(
+                                    "[DMS]McfManager",
+                                    "tryBleScannerStartScan invalid splitBleMac=" + str);
                         }
                     }
                 }
                 if (arrayList.isEmpty()) {
-                    Log.e("[DMS]McfManager", "tryBleScannerStartScan BLE_SCANNER_STATE_NO_SCAN_TARGET");
+                    Log.e(
+                            "[DMS]McfManager",
+                            "tryBleScannerStartScan BLE_SCANNER_STATE_NO_SCAN_TARGET");
                     this.mBleScannerState = "BLE_SCANNER_STATE_NO_SCAN_TARGET";
                     return;
                 }
-                boolean startScan = this.mBleScanner.startScan(arrayList, arrayList2, build, this.mBleScanCallback);
+                boolean startScan =
+                        this.mBleScanner.startScan(
+                                arrayList, arrayList2, build, this.mBleScanCallback);
                 if (DesktopModeFeature.DEBUG) {
-                    Log.i("[DMS]McfManager", "tryBleScannerStartScan BLE_SCANNER_STATE_START_SCAN_REQUEST " + startScan);
+                    Log.i(
+                            "[DMS]McfManager",
+                            "tryBleScannerStartScan BLE_SCANNER_STATE_START_SCAN_REQUEST "
+                                    + startScan);
                 }
                 this.mBleScannerState = "BLE_SCANNER_STATE_START_SCAN_REQUEST";
             }

@@ -14,15 +14,15 @@ import android.os.Trace;
 import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.pm.parsing.PackageParser2;
 import com.android.internal.util.Preconditions;
-import com.android.server.pm.ApexManager;
-import com.android.server.pm.MovePackageHelper;
-import com.android.server.pm.PackageInstallerSession;
+
 import com.samsung.android.core.pm.containerservice.PackageHelperExt;
 import com.samsung.android.rune.PMRune;
 import com.samsung.android.server.pm.PmLog;
 import com.samsung.android.server.pm.install.ThermalInstallThrottlingUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -73,7 +73,8 @@ public final class InstallingSession {
         public final Set mCurrentInstallRequests;
         public final PackageManagerService mPm;
 
-        public MultiPackageInstallingSession(List list, PackageManagerService packageManagerService) {
+        public MultiPackageInstallingSession(
+                List list, PackageManagerService packageManagerService) {
             ArrayList arrayList = (ArrayList) list;
             if (arrayList.size() == 0) {
                 throw new PackageManagerException("No child sessions found!", -20);
@@ -87,11 +88,26 @@ public final class InstallingSession {
         }
 
         public final String toString() {
-            return "MultiPackageInstallingSession{" + Integer.toHexString(System.identityHashCode(this)) + "}";
+            return "MultiPackageInstallingSession{"
+                    + Integer.toHexString(System.identityHashCode(this))
+                    + "}";
         }
     }
 
-    public InstallingSession(int i, File file, String str, PackageInstallerSession.AnonymousClass5 anonymousClass5, PackageInstaller.SessionParams sessionParams, InstallSource installSource, UserHandle userHandle, SigningDetails signingDetails, int i2, PackageLite packageLite, DomainSet domainSet, PackageManagerService packageManagerService, boolean z) {
+    public InstallingSession(
+            int i,
+            File file,
+            String str,
+            PackageInstallerSession.AnonymousClass5 anonymousClass5,
+            PackageInstaller.SessionParams sessionParams,
+            InstallSource installSource,
+            UserHandle userHandle,
+            SigningDetails signingDetails,
+            int i2,
+            PackageLite packageLite,
+            DomainSet domainSet,
+            PackageManagerService packageManagerService,
+            boolean z) {
         this.mIsMoveRequest = false;
         this.mPreferredInstallLocation = -1;
         this.mPm = packageManagerService;
@@ -104,9 +120,15 @@ public final class InstallingSession {
         this.mMoveInfo = null;
         String str2 = installSource.mInstallerPackageName;
         int i3 = sessionParams.installReason;
-        if (packageManagerService.snapshotComputer().checkUidPermission("android.permission.INSTALL_PACKAGES", i2) != 0) {
-            String deviceOwnerOrProfileOwnerPackage = packageManagerService.mProtectedPackages.getDeviceOwnerOrProfileOwnerPackage(UserHandle.getUserId(i2));
-            if (deviceOwnerOrProfileOwnerPackage != null && deviceOwnerOrProfileOwnerPackage.equals(str2)) {
+        if (packageManagerService
+                        .snapshotComputer()
+                        .checkUidPermission("android.permission.INSTALL_PACKAGES", i2)
+                != 0) {
+            String deviceOwnerOrProfileOwnerPackage =
+                    packageManagerService.mProtectedPackages.getDeviceOwnerOrProfileOwnerPackage(
+                            UserHandle.getUserId(i2));
+            if (deviceOwnerOrProfileOwnerPackage != null
+                    && deviceOwnerOrProfileOwnerPackage.equals(str2)) {
                 i3 = 1;
             } else if (i3 == 1) {
                 i3 = 0;
@@ -133,13 +155,24 @@ public final class InstallingSession {
         this.mIsInherit = sessionParams.mode == 2;
         this.mSessionId = i;
         this.mRequireUserAction = sessionParams.requireUserAction;
-        this.mApplicationEnabledSettingPersistent = sessionParams.applicationEnabledSettingPersistent;
+        this.mApplicationEnabledSettingPersistent =
+                sessionParams.applicationEnabledSettingPersistent;
         this.mPreVerifiedDomains = domainSet;
         this.mHasAppMetadataFile = z;
         this.mDexoptCompilerFilter = sessionParams.dexoptCompilerFilter;
     }
 
-    public InstallingSession(OriginInfo originInfo, MoveInfo moveInfo, MovePackageHelper.AnonymousClass1 anonymousClass1, int i, InstallSource installSource, String str, UserHandle userHandle, String str2, PackageLite packageLite, PackageManagerService packageManagerService) {
+    public InstallingSession(
+            OriginInfo originInfo,
+            MoveInfo moveInfo,
+            MovePackageHelper.AnonymousClass1 anonymousClass1,
+            int i,
+            InstallSource installSource,
+            String str,
+            UserHandle userHandle,
+            String str2,
+            PackageLite packageLite,
+            PackageManagerService packageManagerService) {
         this.mIsMoveRequest = false;
         this.mPreferredInstallLocation = -1;
         this.mPm = packageManagerService;
@@ -189,7 +222,9 @@ public final class InstallingSession {
             Method dump skipped, instructions count: 913
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.InstallingSession.handleReturnCode(com.android.server.pm.InstallRequest):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.InstallingSession.handleReturnCode(com.android.server.pm.InstallRequest):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:35:0x011c  */
@@ -208,7 +243,9 @@ public final class InstallingSession {
             Method dump skipped, instructions count: 581
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.InstallingSession.handleStartCopy(com.android.server.pm.InstallRequest):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.InstallingSession.handleStartCopy(com.android.server.pm.InstallRequest):void");
     }
 
     public final void installApexPackages(List list) {
@@ -218,7 +255,8 @@ public final class InstallingSession {
             return;
         }
         if (arrayList.size() != 1) {
-            throw new IllegalStateException("Only a non-staged install of a single APEX is supported");
+            throw new IllegalStateException(
+                    "Only a non-staged install of a single APEX is supported");
         }
         InstallRequest installRequest = (InstallRequest) arrayList.get(0);
         InstallArgs installArgs = installRequest.mInstallArgs;
@@ -242,20 +280,34 @@ public final class InstallingSession {
             throw new PackageManagerException(file.getAbsolutePath() + " is not a directory", -36);
         }
         if (listFiles.length != 1) {
-            throw new PackageManagerException("Expected exactly one .apex file under " + file.getAbsolutePath() + " got: " + listFiles.length, -37);
+            throw new PackageManagerException(
+                    "Expected exactly one .apex file under "
+                            + file.getAbsolutePath()
+                            + " got: "
+                            + listFiles.length,
+                    -37);
         }
-        PackageManagerServiceInjector packageManagerServiceInjector = packageManagerService.mInjector;
-        PackageParser2 packageParser2 = (PackageParser2) packageManagerServiceInjector.mScanningPackageParserProducer.produce(packageManagerServiceInjector.mPackageManager, packageManagerServiceInjector);
+        PackageManagerServiceInjector packageManagerServiceInjector =
+                packageManagerService.mInjector;
+        PackageParser2 packageParser2 =
+                (PackageParser2)
+                        packageManagerServiceInjector.mScanningPackageParserProducer.produce(
+                                packageManagerServiceInjector.mPackageManager,
+                                packageManagerServiceInjector);
         try {
             ApexManager apexManager = packageManagerService.mApexManager;
             File file2 = listFiles[0];
             ApexManager.ApexManagerImpl apexManagerImpl = (ApexManager.ApexManagerImpl) apexManager;
             apexManagerImpl.getClass();
             try {
-                ApexInfo installAndActivatePackage = apexManagerImpl.waitForApexService().installAndActivatePackage(file2.getAbsolutePath(), z);
+                ApexInfo installAndActivatePackage =
+                        apexManagerImpl
+                                .waitForApexService()
+                                .installAndActivatePackage(file2.getAbsolutePath(), z);
                 installRequest.mApexInfo = installAndActivatePackage;
                 installRequest.mApexModuleName = installAndActivatePackage.moduleName;
-                packageManagerService.mHandler.post(new InstallingSession$$ExternalSyntheticLambda2(this, list, 1));
+                packageManagerService.mHandler.post(
+                        new InstallingSession$$ExternalSyntheticLambda2(this, list, 1));
                 if (packageParser2 != null) {
                     packageParser2.close();
                 }
@@ -275,12 +327,19 @@ public final class InstallingSession {
         Trace.asyncTraceBegin(262144L, "queueInstall", System.identityHashCode(this));
         StringBuilder sb = new StringBuilder("START INSTALL PACKAGE: observer{");
         IPackageInstallObserver2 iPackageInstallObserver2 = this.mObserver;
-        sb.append(iPackageInstallObserver2 != null ? Integer.valueOf(iPackageInstallObserver2.hashCode()) : "null");
+        sb.append(
+                iPackageInstallObserver2 != null
+                        ? Integer.valueOf(iPackageInstallObserver2.hashCode())
+                        : "null");
         sb.append("}\n          stagedDir{");
         OriginInfo originInfo = this.mOriginInfo;
         sb.append(originInfo.mFile);
         sb.append("}\n");
-        sb.append((!PMRune.PM_INSTALL_TO_SDCARD || originInfo.mCid == null) ? "" : AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder("          stagedCid{"), originInfo.mCid, "}\n"));
+        sb.append(
+                (!PMRune.PM_INSTALL_TO_SDCARD || originInfo.mCid == null)
+                        ? ""
+                        : AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("          stagedCid{"), originInfo.mCid, "}\n"));
         sb.append("          pkg{");
         PackageLite packageLite = this.mPackageLite;
         sb.append(packageLite != null ? packageLite.getPackageName() : "null");
@@ -291,22 +350,33 @@ public final class InstallingSession {
         sb.append(this.mInstallSource.mInstallerPackageName);
         sb.append("}");
         PmLog.logDebugInfoAndLogcat(sb.toString());
-        this.mPm.mHandler.postDelayed(new InstallingSession$$ExternalSyntheticLambda0(this, 1), ThermalInstallThrottlingUtils.getInstallDelayByThermal(this.mDataLoaderType));
+        this.mPm.mHandler.postDelayed(
+                new InstallingSession$$ExternalSyntheticLambda0(this, 1),
+                ThermalInstallThrottlingUtils.getInstallDelayByThermal(this.mDataLoaderType));
     }
 
     public final void installStage(List list) {
         PackageManagerService packageManagerService = this.mPm;
-        MultiPackageInstallingSession multiPackageInstallingSession = new MultiPackageInstallingSession(list, packageManagerService);
+        MultiPackageInstallingSession multiPackageInstallingSession =
+                new MultiPackageInstallingSession(list, packageManagerService);
         this.mTraceMethod = "installStageMultiPackage";
         this.mTraceCookie = System.identityHashCode(multiPackageInstallingSession);
-        Trace.asyncTraceBegin(262144L, "installStageMultiPackage", System.identityHashCode(multiPackageInstallingSession));
-        Trace.asyncTraceBegin(262144L, "queueInstall", System.identityHashCode(multiPackageInstallingSession));
+        Trace.asyncTraceBegin(
+                262144L,
+                "installStageMultiPackage",
+                System.identityHashCode(multiPackageInstallingSession));
+        Trace.asyncTraceBegin(
+                262144L, "queueInstall", System.identityHashCode(multiPackageInstallingSession));
         StringBuilder sb = new StringBuilder("START INSTALL MULTI PACKAGE:\n");
-        for (InstallingSession installingSession : multiPackageInstallingSession.mChildInstallingSessions) {
+        for (InstallingSession installingSession :
+                multiPackageInstallingSession.mChildInstallingSessions) {
             StringBuilder sb2 = new StringBuilder("          observer{");
             IPackageInstallObserver2 iPackageInstallObserver2 = installingSession.mObserver;
             Object obj = "null";
-            sb2.append(iPackageInstallObserver2 != null ? Integer.valueOf(iPackageInstallObserver2.hashCode()) : "null");
+            sb2.append(
+                    iPackageInstallObserver2 != null
+                            ? Integer.valueOf(iPackageInstallObserver2.hashCode())
+                            : "null");
             sb2.append("}\n");
             sb.append(sb2.toString());
             sb.append("          stagedDir{" + installingSession.mOriginInfo.mFile + "}\n");
@@ -318,14 +388,22 @@ public final class InstallingSession {
             sb3.append(obj);
             sb3.append("}\n");
             sb.append(sb3.toString());
-            sb.append("          Request from{" + installingSession.mInstallSource.mInstallerPackageName + "}\n");
+            sb.append(
+                    "          Request from{"
+                            + installingSession.mInstallSource.mInstallerPackageName
+                            + "}\n");
         }
         Iterator it = ((ArrayList) list).iterator();
         while (it.hasNext()) {
-            sb.append("          pkg{" + ((InstallingSession) it.next()).mPackageLite.getPackageName() + "}\n");
+            sb.append(
+                    "          pkg{"
+                            + ((InstallingSession) it.next()).mPackageLite.getPackageName()
+                            + "}\n");
         }
         PmLog.logDebugInfoAndLogcat(sb.toString());
-        packageManagerService.mHandler.postDelayed(new InstallingSession$$ExternalSyntheticLambda4(multiPackageInstallingSession, 0), ThermalInstallThrottlingUtils.getInstallDelayByThermal(this.mDataLoaderType));
+        packageManagerService.mHandler.postDelayed(
+                new InstallingSession$$ExternalSyntheticLambda4(multiPackageInstallingSession, 0),
+                ThermalInstallThrottlingUtils.getInstallDelayByThermal(this.mDataLoaderType));
     }
 
     public final void processApkInstallRequests(List list, boolean z) {
@@ -338,11 +416,16 @@ public final class InstallingSession {
             while (it.hasNext()) {
                 InstallRequest installRequest = (InstallRequest) it.next();
                 if (AsecInstallHelper.installOnExternalAsec(installRequest.getInstallFlags())) {
-                    String extractCidFromCodePath = AsecInstallHelper.extractCidFromCodePath(installRequest.getCodePath());
+                    String extractCidFromCodePath =
+                            AsecInstallHelper.extractCidFromCodePath(installRequest.getCodePath());
                     if (installRequest.mReturnCode != 1) {
                         PackageHelperExt.destroySdDir(extractCidFromCodePath);
                     } else if (!PackageHelperExt.isContainerMounted(extractCidFromCodePath)) {
-                        String mountSdDir = PackageHelperExt.mountSdDir(extractCidFromCodePath, AsecInstallHelper.getEncryptKey(), 1000);
+                        String mountSdDir =
+                                PackageHelperExt.mountSdDir(
+                                        extractCidFromCodePath,
+                                        AsecInstallHelper.getEncryptKey(),
+                                        1000);
                         if (mountSdDir != null) {
                             AsecInstallHelper.setMountPath(mountSdDir, installRequest);
                         } else {
@@ -354,7 +437,8 @@ public final class InstallingSession {
             InstallPackageHelper installPackageHelper = packageManagerService.mInstallPackageHelper;
             installPackageHelper.getClass();
             try {
-                PackageManagerTracedLock packageManagerTracedLock = installPackageHelper.mPm.mInstallLock;
+                PackageManagerTracedLock packageManagerTracedLock =
+                        installPackageHelper.mPm.mInstallLock;
                 packageManagerTracedLock.mLock.lock();
                 try {
                     Trace.traceBegin(262144L, "installPackages");
@@ -364,23 +448,33 @@ public final class InstallingSession {
                     Iterator it2 = list.iterator();
                     while (it2.hasNext()) {
                         InstallRequest installRequest2 = (InstallRequest) it2.next();
-                        RemovePackageHelper removePackageHelper = packageManagerService.mRemovePackageHelper;
+                        RemovePackageHelper removePackageHelper =
+                                packageManagerService.mRemovePackageHelper;
                         MoveInfo moveInfo4 = this.mMoveInfo;
                         if (moveInfo4 != null) {
                             int i = installRequest2.mReturnCode;
                             String str = moveInfo4.mFromCodePath;
                             String str2 = moveInfo4.mPackageName;
                             if (i == 1) {
-                                removePackageHelper.cleanUpForMoveInstall(moveInfo4.mFromUuid, str2, str);
+                                removePackageHelper.cleanUpForMoveInstall(
+                                        moveInfo4.mFromUuid, str2, str);
                             } else {
-                                removePackageHelper.cleanUpForMoveInstall(moveInfo4.mToUuid, str2, str);
+                                removePackageHelper.cleanUpForMoveInstall(
+                                        moveInfo4.mToUuid, str2, str);
                             }
-                        } else if (AsecInstallHelper.installOnExternalAsec(installRequest2.getInstallFlags())) {
-                            String extractCidFromCodePath2 = AsecInstallHelper.extractCidFromCodePath(installRequest2.getCodePath());
+                        } else if (AsecInstallHelper.installOnExternalAsec(
+                                installRequest2.getInstallFlags())) {
+                            String extractCidFromCodePath2 =
+                                    AsecInstallHelper.extractCidFromCodePath(
+                                            installRequest2.getCodePath());
                             if (installRequest2.mReturnCode != 1) {
                                 PackageHelperExt.destroySdDir(extractCidFromCodePath2);
-                            } else if (!PackageHelperExt.isContainerMounted(extractCidFromCodePath2)) {
-                                PackageHelperExt.mountSdDir(extractCidFromCodePath2, AsecInstallHelper.getEncryptKey(), Process.myUid());
+                            } else if (!PackageHelperExt.isContainerMounted(
+                                    extractCidFromCodePath2)) {
+                                PackageHelperExt.mountSdDir(
+                                        extractCidFromCodePath2,
+                                        AsecInstallHelper.getEncryptKey(),
+                                        Process.myUid());
                             }
                         } else if (installRequest2.mReturnCode != 1) {
                             removePackageHelper.removeCodePath(installRequest2.getCodeFile());
@@ -400,26 +494,37 @@ public final class InstallingSession {
                     if (installRequest3.isInstallMove()) {
                         String str3 = null;
                         InstallArgs installArgs = installRequest3.mInstallArgs;
-                        String str4 = (installArgs == null || (moveInfo3 = installArgs.mMoveInfo) == null) ? null : moveInfo3.mToUuid;
-                        String str5 = (installArgs == null || (moveInfo2 = installArgs.mMoveInfo) == null) ? null : moveInfo2.mPackageName;
+                        String str4 =
+                                (installArgs == null || (moveInfo3 = installArgs.mMoveInfo) == null)
+                                        ? null
+                                        : moveInfo3.mToUuid;
+                        String str5 =
+                                (installArgs == null || (moveInfo2 = installArgs.mMoveInfo) == null)
+                                        ? null
+                                        : moveInfo2.mPackageName;
                         if (installArgs != null && (moveInfo = installArgs.mMoveInfo) != null) {
                             str3 = moveInfo.mFromCodePath;
                         }
-                        packageManagerService.mRemovePackageHelper.cleanUpForMoveInstall(str4, str5, str3);
+                        packageManagerService.mRemovePackageHelper.cleanUpForMoveInstall(
+                                str4, str5, str3);
                     } else if (AsecInstallHelper.installOnExternalAsec(this.mInstallFlags)) {
-                        String extractCidFromCodePath3 = AsecInstallHelper.extractCidFromCodePath(installRequest3.getCodePath());
+                        String extractCidFromCodePath3 =
+                                AsecInstallHelper.extractCidFromCodePath(
+                                        installRequest3.getCodePath());
                         if (extractCidFromCodePath3 != null) {
                             PackageHelperExt.destroySdDir(extractCidFromCodePath3);
                         }
                     } else {
-                        packageManagerService.mRemovePackageHelper.removeCodePath(installRequest3.getCodeFile());
+                        packageManagerService.mRemovePackageHelper.removeCodePath(
+                                installRequest3.getCodeFile());
                     }
                 }
             }
         }
         Iterator it4 = list.iterator();
         while (it4.hasNext()) {
-            packageManagerService.mInstallPackageHelper.restoreAndPostInstall((InstallRequest) it4.next());
+            packageManagerService.mInstallPackageHelper.restoreAndPostInstall(
+                    (InstallRequest) it4.next());
         }
     }
 
@@ -436,18 +541,26 @@ public final class InstallingSession {
             }
         }
         if (!arrayList.isEmpty() && !arrayList2.isEmpty()) {
-            throw new IllegalStateException("Attempted to do a multi package install of both APEXes and APKs");
+            throw new IllegalStateException(
+                    "Attempted to do a multi package install of both APEXes and APKs");
         }
         if (arrayList.isEmpty()) {
             processApkInstallRequests(list, z);
         } else if (z) {
-            new Thread(new InstallingSession$$ExternalSyntheticLambda2(this, arrayList, 0), "installApexPackages").start();
+            new Thread(
+                            new InstallingSession$$ExternalSyntheticLambda2(this, arrayList, 0),
+                            "installApexPackages")
+                    .start();
         } else {
             this.mPm.notifyInstallObserver((InstallRequest) arrayList.get(0));
         }
     }
 
     public final String toString() {
-        return "InstallingSession{" + Integer.toHexString(System.identityHashCode(this)) + " file=" + this.mOriginInfo.mFile + "}";
+        return "InstallingSession{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " file="
+                + this.mOriginInfo.mFile
+                + "}";
     }
 }

@@ -7,6 +7,7 @@ import android.view.InputApplicationHandle;
 import android.view.InputChannel;
 import android.view.InputEventReceiver;
 import android.view.InputWindowHandle;
+
 import com.android.internal.policy.TaskResizingAlgorithm;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -37,8 +38,7 @@ public final class TaskPositioner implements IBinder.DeathRecipient {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.TaskPositioner$1, reason: invalid class name */
-    public final class AnonymousClass1 {
-    }
+    public final class AnonymousClass1 {}
 
     public TaskPositioner(WindowManagerService windowManagerService) {
         this.mService = windowManagerService;
@@ -73,12 +73,32 @@ public final class TaskPositioner implements IBinder.DeathRecipient {
         this.mWindowDragBounds.set(this.mWindowOriginalBounds);
         int i3 = rect.right;
         int i4 = this.mMinVisibleWidth;
-        this.mWindowDragBounds.offsetTo(Math.min(Math.max(this.mWindowOriginalBounds.left + round, (rect.left + i4) - this.mWindowOriginalBounds.width()), i3 - i4), Math.min(Math.max(this.mWindowOriginalBounds.top + round2, rect.top), rect.bottom - this.mMinVisibleHeight));
+        this.mWindowDragBounds.offsetTo(
+                Math.min(
+                        Math.max(
+                                this.mWindowOriginalBounds.left + round,
+                                (rect.left + i4) - this.mWindowOriginalBounds.width()),
+                        i3 - i4),
+                Math.min(
+                        Math.max(this.mWindowOriginalBounds.top + round2, rect.top),
+                        rect.bottom - this.mMinVisibleHeight));
         return false;
     }
 
     public void resizeDrag(float f, float f2) {
-        this.mWindowDragBounds.set(TaskResizingAlgorithm.resizeDrag(f, f2, this.mStartDragX, this.mStartDragY, this.mWindowOriginalBounds, this.mCtrlType, this.mMinVisibleWidth, this.mMinVisibleHeight, this.mMaxVisibleSize, this.mPreserveOrientation, this.mStartOrientationWasLandscape));
+        this.mWindowDragBounds.set(
+                TaskResizingAlgorithm.resizeDrag(
+                        f,
+                        f2,
+                        this.mStartDragX,
+                        this.mStartDragY,
+                        this.mWindowOriginalBounds,
+                        this.mCtrlType,
+                        this.mMinVisibleWidth,
+                        this.mMinVisibleHeight,
+                        this.mMaxVisibleSize,
+                        this.mPreserveOrientation,
+                        this.mStartOrientationWasLandscape));
     }
 
     public final void startDrag(float f, float f2) {
@@ -92,13 +112,16 @@ public final class TaskPositioner implements IBinder.DeathRecipient {
         this.mWindowOriginalBounds.set(rect);
         if (this.mResizing) {
             notifyMoveLocked(f, f2);
-            this.mService.mH.post(new Runnable() { // from class: com.android.server.wm.TaskPositioner$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    TaskPositioner taskPositioner = TaskPositioner.this;
-                    taskPositioner.mService.mAtmService.resizeTask(taskPositioner.mTask.mTaskId, rect, 3);
-                }
-            });
+            this.mService.mH.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.TaskPositioner$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            TaskPositioner taskPositioner = TaskPositioner.this;
+                            taskPositioner.mService.mAtmService.resizeTask(
+                                    taskPositioner.mTask.mTaskId, rect, 3);
+                        }
+                    });
         }
         this.mWindowDragBounds.set(rect);
     }

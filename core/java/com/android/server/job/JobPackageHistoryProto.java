@@ -17,7 +17,6 @@ public final class JobPackageHistoryProto {
         public static final long TIME_SINCE_EVENT_MS = 1112396529666L;
         public static final long UID = 1120986464259L;
 
-        public HistoryEvent() {
-        }
+        public HistoryEvent() {}
     }
 }

@@ -24,8 +24,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.widget.MessagingLinearLayout;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -34,7 +35,8 @@ import java.util.List;
 
 @RemoteViews.RemoteView
 /* loaded from: classes5.dex */
-public class MessagingGroup extends NotificationOptimizedLinearLayout implements MessagingLinearLayout.MessagingChild {
+public class MessagingGroup extends NotificationOptimizedLinearLayout
+        implements MessagingLinearLayout.MessagingChild {
     public static final int IMAGE_DISPLAY_LOCATION_AT_END = 1;
     public static final int IMAGE_DISPLAY_LOCATION_EXTERNAL = 2;
     public static final int IMAGE_DISPLAY_LOCATION_INLINE = 0;
@@ -80,8 +82,7 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     private int mTextColor;
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface ImageDisplayLocation {
-    }
+    private @interface ImageDisplayLocation {}
 
     public MessagingGroup(Context context) {
         super(context);
@@ -144,19 +145,27 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         this.mImageContainer = (ViewGroup) findViewById(R.id.messaging_group_icon_container);
         this.mSendingSpinner = (ProgressBar) findViewById(R.id.messaging_group_sending_progress);
         this.mMessagingIconContainer = (ViewGroup) findViewById(R.id.message_icon_container);
-        this.mContentContainer = (LinearLayout) findViewById(R.id.messaging_group_content_container);
-        this.mSendingSpinnerContainer = findViewById(R.id.messaging_group_sending_progress_container);
+        this.mContentContainer =
+                (LinearLayout) findViewById(R.id.messaging_group_content_container);
+        this.mSendingSpinnerContainer =
+                findViewById(R.id.messaging_group_sending_progress_container);
         Resources res = getResources();
         DisplayMetrics displayMetrics = res.getDisplayMetrics();
         this.mDisplaySize.x = displayMetrics.widthPixels;
         this.mDisplaySize.y = displayMetrics.heightPixels;
-        this.mSenderTextPaddingSingleLine = res.getDimensionPixelSize(R.dimen.messaging_group_singleline_sender_padding_end);
-        this.mConversationContentStart = res.getDimensionPixelSize(R.dimen.conversation_content_start);
-        this.mNonConversationContentStart = res.getDimensionPixelSize(R.dimen.notification_content_margin_start);
-        this.mNonConversationPaddingStart = res.getDimensionPixelSize(R.dimen.messaging_layout_icon_padding_start);
+        this.mSenderTextPaddingSingleLine =
+                res.getDimensionPixelSize(R.dimen.messaging_group_singleline_sender_padding_end);
+        this.mConversationContentStart =
+                res.getDimensionPixelSize(R.dimen.conversation_content_start);
+        this.mNonConversationContentStart =
+                res.getDimensionPixelSize(R.dimen.notification_content_margin_start);
+        this.mNonConversationPaddingStart =
+                res.getDimensionPixelSize(R.dimen.messaging_layout_icon_padding_start);
         this.mConversationAvatarSize = res.getDimensionPixelSize(R.dimen.messaging_avatar_size);
-        this.mNonConversationAvatarSize = res.getDimensionPixelSize(R.dimen.notification_icon_circle_size);
-        this.mNotificationTextMarginTop = res.getDimensionPixelSize(R.dimen.notification_text_margin_top);
+        this.mNonConversationAvatarSize =
+                res.getDimensionPixelSize(R.dimen.notification_icon_circle_size);
+        this.mNotificationTextMarginTop =
+                res.getDimensionPixelSize(R.dimen.notification_text_margin_top);
     }
 
     public void updateClipRect() {
@@ -166,7 +175,11 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
             if (this.mSingleLine) {
                 top = 0;
             } else {
-                top = (getDistanceFromParent(this.mSenderView, this.mContentContainer) - getDistanceFromParent(this.mMessageContainer, this.mContentContainer)) + this.mSenderView.getHeight();
+                top =
+                        (getDistanceFromParent(this.mSenderView, this.mContentContainer)
+                                        - getDistanceFromParent(
+                                                this.mMessageContainer, this.mContentContainer))
+                                + this.mSenderView.getHeight();
             }
             int size = Math.max(this.mDisplaySize.x, this.mDisplaySize.y);
             clipRect = new Rect(-size, top, size, size);
@@ -194,7 +207,11 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         }
         this.mSenderName = nameOverride;
         if (this.mSingleLine && !TextUtils.isEmpty(nameOverride)) {
-            nameOverride = this.mContext.getResources().getString(R.string.conversation_single_line_name_display, nameOverride);
+            nameOverride =
+                    this.mContext
+                            .getResources()
+                            .getString(
+                                    R.string.conversation_single_line_name_display, nameOverride);
         }
         this.mSenderView.lambda$setTextAsync$0(nameOverride);
         this.mNeedsGeneratedAvatar = sender.getIcon() == null;
@@ -220,10 +237,16 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
 
     private int calculateSendingTextColor() {
         TypedValue alphaValue = new TypedValue();
-        this.mContext.getResources().getValue(R.dimen.notification_secondary_text_disabled_alpha, alphaValue, true);
+        this.mContext
+                .getResources()
+                .getValue(R.dimen.notification_secondary_text_disabled_alpha, alphaValue, true);
         float alpha = alphaValue.getFloat();
         int textAlpha = (int) (Color.alpha(this.mTextColor) * alpha);
-        return Color.argb(textAlpha, Color.red(this.mTextColor), Color.green(this.mTextColor), Color.blue(this.mTextColor));
+        return Color.argb(
+                textAlpha,
+                Color.red(this.mTextColor),
+                Color.green(this.mTextColor),
+                Color.blue(this.mTextColor));
     }
 
     public void setAvatar(Icon icon) {
@@ -238,14 +261,22 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     static MessagingGroup createGroup(MessagingLinearLayout layout) {
         MessagingGroup createdGroup = sInstancePool.acquire();
         if (createdGroup == null) {
-            createdGroup = (MessagingGroup) LayoutInflater.from(layout.getContext()).inflate(R.layout.notification_template_messaging_group, (ViewGroup) layout, false);
+            createdGroup =
+                    (MessagingGroup)
+                            LayoutInflater.from(layout.getContext())
+                                    .inflate(
+                                            R.layout.notification_template_messaging_group,
+                                            (ViewGroup) layout,
+                                            false);
             createdGroup.addOnLayoutChangeListener(MessagingLayout.MESSAGING_PROPERTY_ANIMATOR);
         }
         layout.addView(createdGroup);
         return createdGroup;
     }
 
-    public void removeMessage(final MessagingMessage messagingMessage, ArrayList<MessagingLinearLayout.MessagingChild> toRecycle) {
+    public void removeMessage(
+            final MessagingMessage messagingMessage,
+            ArrayList<MessagingLinearLayout.MessagingChild> toRecycle) {
         final View view = messagingMessage.getView();
         boolean wasShown = view.isShown();
         final ViewGroup messageParent = (ViewGroup) view.getParent();
@@ -255,18 +286,23 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         messageParent.removeView(view);
         if (wasShown && !MessagingLinearLayout.isGone(view)) {
             messageParent.addTransientView(view, 0);
-            performRemoveAnimation(view, new Runnable() { // from class: com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MessagingGroup.lambda$removeMessage$0(ViewGroup.this, view, messagingMessage);
-                }
-            });
+            performRemoveAnimation(
+                    view,
+                    new Runnable() { // from class:
+                                     // com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MessagingGroup.lambda$removeMessage$0(
+                                    ViewGroup.this, view, messagingMessage);
+                        }
+                    });
         } else {
             toRecycle.add(messagingMessage);
         }
     }
 
-    static /* synthetic */ void lambda$removeMessage$0(ViewGroup messageParent, View view, MessagingMessage messagingMessage) {
+    static /* synthetic */ void lambda$removeMessage$0(
+            ViewGroup messageParent, View view, MessagingMessage messagingMessage) {
         messageParent.removeTransientView(view);
         messagingMessage.recycle();
     }
@@ -302,12 +338,15 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     }
 
     public void removeGroupAnimated(final Runnable endAction) {
-        performRemoveAnimation(this, new Runnable() { // from class: com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                MessagingGroup.this.lambda$removeGroupAnimated$1(endAction);
-            }
-        });
+        performRemoveAnimation(
+                this,
+                new Runnable() { // from class:
+                                 // com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MessagingGroup.this.lambda$removeGroupAnimated$1(endAction);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -324,7 +363,8 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     }
 
     private void performRemoveAnimation(View view, int disappearTranslation, Runnable endAction) {
-        MessagingPropertyAnimator.startLocalTranslationTo(view, disappearTranslation, MessagingLayout.FAST_OUT_LINEAR_IN);
+        MessagingPropertyAnimator.startLocalTranslationTo(
+                view, disappearTranslation, MessagingLayout.FAST_OUT_LINEAR_IN);
         MessagingPropertyAnimator.fadeOut(view, endAction);
     }
 
@@ -349,10 +389,12 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
                 return 0;
             }
             View childAt = this.mMessageContainer.getChildAt(i);
-            if (childAt.getVisibility() != 8 && (childAt instanceof MessagingLinearLayout.MessagingChild)) {
+            if (childAt.getVisibility() != 8
+                    && (childAt instanceof MessagingLinearLayout.MessagingChild)) {
                 int type = ((MessagingLinearLayout.MessagingChild) childAt).getMeasuredType();
                 boolean tooSmall = type == 2;
-                MessagingLinearLayout.LayoutParams lp = (MessagingLinearLayout.LayoutParams) childAt.getLayoutParams();
+                MessagingLinearLayout.LayoutParams lp =
+                        (MessagingLinearLayout.LayoutParams) childAt.getLayoutParams();
                 if (tooSmall || lp.hide) {
                     return hasNormal ? 1 : 2;
                 }
@@ -384,18 +426,21 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     }
 
     private void updateMaxDisplayedLines() {
-        this.mMessageContainer.setMaxDisplayedLines(this.mSingleLine ? 1 : this.mRequestedMaxDisplayedLines);
+        this.mMessageContainer.setMaxDisplayedLines(
+                this.mSingleLine ? 1 : this.mRequestedMaxDisplayedLines);
     }
 
     @Override // com.android.internal.widget.MessagingLinearLayout.MessagingChild
     public void hideAnimated() {
         setIsHidingAnimated(true);
-        removeGroupAnimated(new Runnable() { // from class: com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                MessagingGroup.this.lambda$hideAnimated$2();
-            }
-        });
+        removeGroupAnimated(
+                new Runnable() { // from class:
+                                 // com.android.internal.widget.MessagingGroup$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MessagingGroup.this.lambda$hideAnimated$2();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -424,13 +469,19 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     }
 
     private void updateSenderVisibility() {
-        boolean hidden = ((this.mIsFirstGroupInLayout || this.mSingleLine) && this.mCanHideSenderIfFirst) || TextUtils.isEmpty(this.mSenderName);
+        boolean hidden =
+                ((this.mIsFirstGroupInLayout || this.mSingleLine) && this.mCanHideSenderIfFirst)
+                        || TextUtils.isEmpty(this.mSenderName);
         this.mSenderView.setVisibility(hidden ? 8 : 0);
     }
 
     @Override // com.android.internal.widget.MessagingLinearLayout.MessagingChild
     public boolean hasDifferentHeightWhenFirst() {
-        return (!this.mCanHideSenderIfFirst || this.mSingleLine || TextUtils.isEmpty(this.mSenderName)) ? false : true;
+        return (!this.mCanHideSenderIfFirst
+                        || this.mSingleLine
+                        || TextUtils.isEmpty(this.mSenderName))
+                ? false
+                : true;
     }
 
     private void setIsHidingAnimated(boolean isHiding) {
@@ -447,15 +498,21 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         return false;
     }
 
-    public Icon getAvatarSymbolIfMatching(CharSequence avatarName, String avatarSymbol, int layoutColor) {
-        if (this.mAvatarName.equals(avatarName) && this.mAvatarSymbol.equals(avatarSymbol) && layoutColor == this.mLayoutColor) {
+    public Icon getAvatarSymbolIfMatching(
+            CharSequence avatarName, String avatarSymbol, int layoutColor) {
+        if (this.mAvatarName.equals(avatarName)
+                && this.mAvatarSymbol.equals(avatarSymbol)
+                && layoutColor == this.mLayoutColor) {
             return this.mAvatarIcon;
         }
         return null;
     }
 
-    public void setCreatedAvatar(Icon cachedIcon, CharSequence avatarName, String avatarSymbol, int layoutColor) {
-        if (!this.mAvatarName.equals(avatarName) || !this.mAvatarSymbol.equals(avatarSymbol) || layoutColor != this.mLayoutColor) {
+    public void setCreatedAvatar(
+            Icon cachedIcon, CharSequence avatarName, String avatarSymbol, int layoutColor) {
+        if (!this.mAvatarName.equals(avatarName)
+                || !this.mAvatarSymbol.equals(avatarSymbol)
+                || layoutColor != this.mLayoutColor) {
             setAvatar(cachedIcon);
             this.mAvatarSymbol = avatarSymbol;
             setLayoutColor(layoutColor);
@@ -473,15 +530,20 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     public void setLayoutColor(int layoutColor) {
         if (layoutColor != this.mLayoutColor) {
             this.mLayoutColor = layoutColor;
-            this.mSendingSpinner.setIndeterminateTintList(ColorStateList.valueOf(this.mLayoutColor));
+            this.mSendingSpinner.setIndeterminateTintList(
+                    ColorStateList.valueOf(this.mLayoutColor));
         }
     }
 
     private void updateMessageColor() {
         if (this.mMessages != null) {
-            int color = this.mSendingSpinnerContainer.getVisibility() == 0 ? this.mSendingTextColor : this.mTextColor;
+            int color =
+                    this.mSendingSpinnerContainer.getVisibility() == 0
+                            ? this.mSendingTextColor
+                            : this.mTextColor;
             for (MessagingMessage message : this.mMessages) {
-                boolean isRemoteInputHistory = message.getMessage() != null && message.getMessage().isRemoteInputHistory();
+                boolean isRemoteInputHistory =
+                        message.getMessage() != null && message.getMessage().isRemoteInputHistory();
                 message.setColor(isRemoteInputHistory ? color : this.mTextColor);
             }
         }
@@ -502,8 +564,11 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
             } else {
                 if (removeFromParentIfDifferent(message, this.mMessageContainer)) {
                     ViewGroup.LayoutParams layoutParams = message.getView().getLayoutParams();
-                    if (layoutParams != null && !(layoutParams instanceof MessagingLinearLayout.LayoutParams)) {
-                        message.getView().setLayoutParams(this.mMessageContainer.generateDefaultLayoutParams());
+                    if (layoutParams != null
+                            && !(layoutParams instanceof MessagingLinearLayout.LayoutParams)) {
+                        message.getView()
+                                .setLayoutParams(
+                                        this.mMessageContainer.generateDefaultLayoutParams());
                     }
                     this.mMessageContainer.addView(message.getView(), textMessageIndex);
                 }
@@ -518,7 +583,8 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
             }
         }
         if (isolatedMessage != null) {
-            if (this.mImageDisplayLocation == 1 && removeFromParentIfDifferent(isolatedMessage, this.mImageContainer)) {
+            if (this.mImageDisplayLocation == 1
+                    && removeFromParentIfDifferent(isolatedMessage, this.mImageContainer)) {
                 this.mImageContainer.removeAllViews();
                 this.mImageContainer.addView(isolatedMessage.getView());
             } else if (this.mImageDisplayLocation == 2) {
@@ -535,7 +601,8 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     }
 
     private void updateImageContainerVisibility() {
-        this.mImageContainer.setVisibility((this.mIsolatedMessage == null || this.mImageDisplayLocation != 1) ? 8 : 0);
+        this.mImageContainer.setVisibility(
+                (this.mIsolatedMessage == null || this.mImageDisplayLocation != 1) ? 8 : 0);
     }
 
     private boolean removeFromParentIfDifferent(MessagingMessage message, ViewGroup newParent) {
@@ -550,29 +617,39 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         return false;
     }
 
-    @Override // com.android.internal.widget.NotificationOptimizedLinearLayout, android.widget.LinearLayout, android.view.ViewGroup, android.view.View
+    @Override // com.android.internal.widget.NotificationOptimizedLinearLayout,
+              // android.widget.LinearLayout, android.view.ViewGroup, android.view.View
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         if (!this.mAddedMessages.isEmpty()) {
             final boolean firstLayout = this.mFirstLayout;
-            getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.internal.widget.MessagingGroup.1
-                @Override // android.view.ViewTreeObserver.OnPreDrawListener
-                public boolean onPreDraw() {
-                    Iterator it = MessagingGroup.this.mAddedMessages.iterator();
-                    while (it.hasNext()) {
-                        MessagingMessage message = (MessagingMessage) it.next();
-                        if (message.getView().isShown()) {
-                            MessagingPropertyAnimator.fadeIn(message.getView());
-                            if (!firstLayout) {
-                                MessagingPropertyAnimator.startLocalTranslationFrom(message.getView(), message.getView().getHeight(), MessagingLayout.LINEAR_OUT_SLOW_IN);
-                            }
-                        }
-                    }
-                    MessagingGroup.this.mAddedMessages.clear();
-                    MessagingGroup.this.getViewTreeObserver().removeOnPreDrawListener(this);
-                    return true;
-                }
-            });
+            getViewTreeObserver()
+                    .addOnPreDrawListener(
+                            new ViewTreeObserver
+                                    .OnPreDrawListener() { // from class:
+                                                           // com.android.internal.widget.MessagingGroup.1
+                                @Override // android.view.ViewTreeObserver.OnPreDrawListener
+                                public boolean onPreDraw() {
+                                    Iterator it = MessagingGroup.this.mAddedMessages.iterator();
+                                    while (it.hasNext()) {
+                                        MessagingMessage message = (MessagingMessage) it.next();
+                                        if (message.getView().isShown()) {
+                                            MessagingPropertyAnimator.fadeIn(message.getView());
+                                            if (!firstLayout) {
+                                                MessagingPropertyAnimator.startLocalTranslationFrom(
+                                                        message.getView(),
+                                                        message.getView().getHeight(),
+                                                        MessagingLayout.LINEAR_OUT_SLOW_IN);
+                                            }
+                                        }
+                                    }
+                                    MessagingGroup.this.mAddedMessages.clear();
+                                    MessagingGroup.this
+                                            .getViewTreeObserver()
+                                            .removeOnPreDrawListener(this);
+                                    return true;
+                                }
+                            });
         }
         this.mFirstLayout = false;
         updateClipRect();
@@ -583,7 +660,8 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
             int result = 1;
             for (int i = 0; i < this.mMessages.size() && i < otherGroup.mMessages.size(); i++) {
                 MessagingMessage ownMessage = this.mMessages.get((this.mMessages.size() - 1) - i);
-                MessagingMessage otherMessage = otherGroup.mMessages.get((otherGroup.mMessages.size() - 1) - i);
+                MessagingMessage otherMessage =
+                        otherGroup.mMessages.get((otherGroup.mMessages.size() - 1) - i);
                 if (ownMessage.sameAs(otherMessage)) {
                     result++;
                 } else {
@@ -641,11 +719,13 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
     public void setSingleLine(boolean z) {
         if (z != this.mSingleLine) {
             this.mSingleLine = z;
-            ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams) this.mMessageContainer.getLayoutParams();
+            ViewGroup.MarginLayoutParams marginLayoutParams =
+                    (ViewGroup.MarginLayoutParams) this.mMessageContainer.getLayoutParams();
             marginLayoutParams.topMargin = z ? 0 : this.mNotificationTextMarginTop;
             this.mMessageContainer.setLayoutParams(marginLayoutParams);
             this.mContentContainer.setOrientation(!z ? 1 : 0);
-            ((ViewGroup.MarginLayoutParams) this.mSenderView.getLayoutParams()).setMarginEnd(z ? this.mSenderTextPaddingSingleLine : 0);
+            ((ViewGroup.MarginLayoutParams) this.mSenderView.getLayoutParams())
+                    .setMarginEnd(z ? this.mSenderTextPaddingSingleLine : 0);
             this.mSenderView.setSingleLine(z);
             updateMaxDisplayedLines();
             updateClipRect();
@@ -661,7 +741,8 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
         int i;
         if (this.mIsInConversation != isInConversation) {
             this.mIsInConversation = isInConversation;
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) this.mMessagingIconContainer.getLayoutParams();
+            ViewGroup.MarginLayoutParams layoutParams =
+                    (ViewGroup.MarginLayoutParams) this.mMessagingIconContainer.getLayoutParams();
             if (this.mIsInConversation) {
                 i = this.mConversationContentStart;
             } else {
@@ -672,7 +753,10 @@ public class MessagingGroup extends NotificationOptimizedLinearLayout implements
             int imagePaddingStart = isInConversation ? 0 : this.mNonConversationPaddingStart;
             this.mMessagingIconContainer.setPaddingRelative(imagePaddingStart, 0, 0, 0);
             ViewGroup.LayoutParams avatarLayoutParams = this.mAvatarView.getLayoutParams();
-            int size = this.mIsInConversation ? this.mConversationAvatarSize : this.mNonConversationAvatarSize;
+            int size =
+                    this.mIsInConversation
+                            ? this.mConversationAvatarSize
+                            : this.mNonConversationAvatarSize;
             avatarLayoutParams.height = size;
             avatarLayoutParams.width = size;
             this.mAvatarView.setLayoutParams(avatarLayoutParams);

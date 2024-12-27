@@ -1,18 +1,15 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiRecordSources;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public abstract class HdmiRecordListener {
     public abstract HdmiRecordSources.RecordSource onOneTouchRecordSourceRequested(int i);
 
-    public void onOneTouchRecordResult(int recorderAddress, int result) {
-    }
+    public void onOneTouchRecordResult(int recorderAddress, int result) {}
 
-    public void onTimerRecordingResult(int recorderAddress, TimerStatusData data) {
-    }
+    public void onTimerRecordingResult(int recorderAddress, TimerStatusData data) {}
 
     @SystemApi
     public static class TimerStatusData {
@@ -47,8 +44,7 @@ public abstract class HdmiRecordListener {
             return ((((value >> 4) & 15) * 10) + value) & 15;
         }
 
-        private TimerStatusData() {
-        }
+        private TimerStatusData() {}
 
         public boolean isOverlapped() {
             return this.mOverlapped;
@@ -64,14 +60,16 @@ public abstract class HdmiRecordListener {
 
         public int getProgrammedInfo() {
             if (!isProgrammed()) {
-                throw new IllegalStateException("No programmed info. Call getNotProgammedError() instead.");
+                throw new IllegalStateException(
+                        "No programmed info. Call getNotProgammedError() instead.");
             }
             return this.mProgrammedInfo;
         }
 
         public int getNotProgammedError() {
             if (isProgrammed()) {
-                throw new IllegalStateException("Has no not-programmed error. Call getProgrammedInfo() instead.");
+                throw new IllegalStateException(
+                        "Has no not-programmed error. Call getProgrammedInfo() instead.");
             }
             return this.mNotProgrammedError;
         }
@@ -89,6 +87,5 @@ public abstract class HdmiRecordListener {
         }
     }
 
-    public void onClearTimerRecordingResult(int recorderAddress, int result) {
-    }
+    public void onClearTimerRecordingResult(int recorderAddress, int result) {}
 }

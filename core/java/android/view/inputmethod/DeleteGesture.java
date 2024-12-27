@@ -3,23 +3,26 @@ package android.view.inputmethod;
 import android.graphics.RectF;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class DeleteGesture extends PreviewableHandwritingGesture implements Parcelable {
-    public static final Parcelable.Creator<DeleteGesture> CREATOR = new Parcelable.Creator<DeleteGesture>() { // from class: android.view.inputmethod.DeleteGesture.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DeleteGesture createFromParcel(Parcel source) {
-            return new DeleteGesture(source);
-        }
+    public static final Parcelable.Creator<DeleteGesture> CREATOR =
+            new Parcelable.Creator<
+                    DeleteGesture>() { // from class: android.view.inputmethod.DeleteGesture.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DeleteGesture createFromParcel(Parcel source) {
+                    return new DeleteGesture(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DeleteGesture[] newArray(int size) {
-            return new DeleteGesture[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DeleteGesture[] newArray(int size) {
+                    return new DeleteGesture[size];
+                }
+            };
     private RectF mArea;
     private int mGranularity;
 
@@ -88,7 +91,8 @@ public final class DeleteGesture extends PreviewableHandwritingGesture implement
             return false;
         }
         DeleteGesture that = (DeleteGesture) o;
-        if (this.mGranularity == that.mGranularity && Objects.equals(this.mFallbackText, that.mFallbackText)) {
+        if (this.mGranularity == that.mGranularity
+                && Objects.equals(this.mFallbackText, that.mFallbackText)) {
             return Objects.equals(this.mArea, that.mArea);
         }
         return false;

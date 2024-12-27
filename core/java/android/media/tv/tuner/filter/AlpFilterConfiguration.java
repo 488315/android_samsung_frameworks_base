@@ -1,6 +1,7 @@
 package android.media.tv.tuner.filter;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -19,8 +20,7 @@ public final class AlpFilterConfiguration extends FilterConfiguration {
     private final int mPacketType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LengthType {
-    }
+    public @interface LengthType {}
 
     private AlpFilterConfiguration(Settings settings, int packetType, int lengthType) {
         super(settings);

@@ -1,6 +1,7 @@
 package com.samsung.android.knox.analytics.model;
 
 import com.samsung.android.knox.analytics.database.Contract;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -77,7 +78,6 @@ public class Event extends JSONObject {
         static final String ID = "id";
         static final String VID = "vid";
 
-        private Fields() {
-        }
+        private Fields() {}
     }
 }

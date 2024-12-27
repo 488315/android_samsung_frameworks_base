@@ -4,9 +4,11 @@ import android.content.Context;
 import android.location.LocationConstants;
 import android.location.util.identity.CallerIdentity;
 import android.os.Binder;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.location.LocationPermissions;
 import com.android.server.location.nsflp.NSPermissionHelper;
+
 import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,14 +29,18 @@ public final class SystemLocationPermissionsHelper {
 
     public SystemLocationPermissionsHelper(Context context, SystemAppOpsHelper systemAppOpsHelper) {
         this.mAppOps = systemAppOpsHelper;
-        systemAppOpsHelper.mListeners.add(new LocationPermissionsHelper$$ExternalSyntheticLambda0(this));
+        systemAppOpsHelper.mListeners.add(
+                new LocationPermissionsHelper$$ExternalSyntheticLambda0(this));
         this.mContext = context;
     }
 
     public final boolean hasLocationPermissions(int i, CallerIdentity callerIdentity) {
         String str;
         if (i == 0) {
-            ((ConcurrentHashMap) this.mPauseReasonByCaller).put(Integer.valueOf(callerIdentity.getUid()), LocationConstants.PAUSED_BY.PERMISSION_NONE);
+            ((ConcurrentHashMap) this.mPauseReasonByCaller)
+                    .put(
+                            Integer.valueOf(callerIdentity.getUid()),
+                            LocationConstants.PAUSED_BY.PERMISSION_NONE);
             return false;
         }
         if (i == 1) {
@@ -47,12 +53,20 @@ public final class SystemLocationPermissionsHelper {
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            if (!(this.mContext.checkPermission(str, callerIdentity.getPid(), callerIdentity.getUid()) == 0)) {
-                ((ConcurrentHashMap) this.mPauseReasonByCaller).put(Integer.valueOf(callerIdentity.getUid()), LocationConstants.PAUSED_BY.PERMISSION_CHECK);
+            if (!(this.mContext.checkPermission(
+                            str, callerIdentity.getPid(), callerIdentity.getUid())
+                    == 0)) {
+                ((ConcurrentHashMap) this.mPauseReasonByCaller)
+                        .put(
+                                Integer.valueOf(callerIdentity.getUid()),
+                                LocationConstants.PAUSED_BY.PERMISSION_CHECK);
                 return false;
             }
             if (this.mFreezedUids.contains(Integer.valueOf(callerIdentity.getUid()))) {
-                ((ConcurrentHashMap) this.mPauseReasonByCaller).put(Integer.valueOf(callerIdentity.getUid()), LocationConstants.PAUSED_BY.FREEZE);
+                ((ConcurrentHashMap) this.mPauseReasonByCaller)
+                        .put(
+                                Integer.valueOf(callerIdentity.getUid()),
+                                LocationConstants.PAUSED_BY.FREEZE);
                 return false;
             }
             int asAppOp = LocationPermissions.asAppOp(i);
@@ -60,11 +74,20 @@ public final class SystemLocationPermissionsHelper {
             Preconditions.checkState(systemAppOpsHelper.mAppOps != null);
             clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                boolean z = systemAppOpsHelper.mAppOps.checkOpNoThrow(asAppOp, callerIdentity.getUid(), callerIdentity.getPackageName()) == 0;
+                boolean z =
+                        systemAppOpsHelper.mAppOps.checkOpNoThrow(
+                                        asAppOp,
+                                        callerIdentity.getUid(),
+                                        callerIdentity.getPackageName())
+                                == 0;
                 if (z) {
-                    ((ConcurrentHashMap) this.mPauseReasonByCaller).remove(Integer.valueOf(callerIdentity.getUid()));
+                    ((ConcurrentHashMap) this.mPauseReasonByCaller)
+                            .remove(Integer.valueOf(callerIdentity.getUid()));
                 } else {
-                    ((ConcurrentHashMap) this.mPauseReasonByCaller).put(Integer.valueOf(callerIdentity.getUid()), LocationConstants.PAUSED_BY.APP_OPS);
+                    ((ConcurrentHashMap) this.mPauseReasonByCaller)
+                            .put(
+                                    Integer.valueOf(callerIdentity.getUid()),
+                                    LocationConstants.PAUSED_BY.APP_OPS);
                 }
                 return z;
             } finally {

@@ -6,9 +6,11 @@ import android.util.AtomicFile;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
-import com.android.server.power.stats.AggregatedPowerStats;
-import com.android.server.power.stats.PowerStatsSpan;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +29,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -50,31 +51,36 @@ public final class PowerStatsStore {
         }
     }
 
-    public PowerStatsStore(File file, long j, Handler handler, PowerStatsSpan.SectionReader sectionReader) {
+    public PowerStatsStore(
+            File file, long j, Handler handler, PowerStatsSpan.SectionReader sectionReader) {
         this.mSystemDir = file;
         File file2 = new File(file, "power-stats");
         this.mStoreDir = file2;
         this.mLockFile = new File(file2, ".lock");
         this.mMaxStorageBytes = j;
         this.mSectionReader = sectionReader;
-        handler.post(new Runnable() { // from class: com.android.server.power.stats.PowerStatsStore$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                PowerStatsStore powerStatsStore = PowerStatsStore.this;
-                powerStatsStore.getClass();
-                File file3 = new File(powerStatsStore.mSystemDir, "battery-usage-stats");
-                if (file3.exists()) {
-                    FileUtils.deleteContentsAndDir(file3);
-                }
-            }
-        });
+        handler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.power.stats.PowerStatsStore$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        PowerStatsStore powerStatsStore = PowerStatsStore.this;
+                        powerStatsStore.getClass();
+                        File file3 = new File(powerStatsStore.mSystemDir, "battery-usage-stats");
+                        if (file3.exists()) {
+                            FileUtils.deleteContentsAndDir(file3);
+                        }
+                    }
+                });
     }
 
     public static PowerStatsSpan createPowerStatsSpan(AggregatedPowerStats aggregatedPowerStats) {
         PowerStatsSpan.Metadata metadata;
         ArrayList arrayList = (ArrayList) aggregatedPowerStats.mClockUpdates;
         if (arrayList.isEmpty()) {
-            Slog.w("PowerStatsStore", "No clock updates in aggregated power stats " + aggregatedPowerStats);
+            Slog.w(
+                    "PowerStatsStore",
+                    "No clock updates in aggregated power stats " + aggregatedPowerStats);
             return null;
         }
         int i = 0;
@@ -87,15 +93,23 @@ public final class PowerStatsStore {
             if (i >= size) {
                 break;
             }
-            AggregatedPowerStats.ClockUpdate clockUpdate = (AggregatedPowerStats.ClockUpdate) arrayList.get(i);
-            long j3 = i == arrayList.size() + (-1) ? aggregatedPowerStats.mDurationMs - j2 : clockUpdate.monotonicTime - j;
-            ((ArrayList) metadata.mTimeFrames).add(new PowerStatsSpan.TimeFrame(clockUpdate.monotonicTime, clockUpdate.currentTime, j3));
+            AggregatedPowerStats.ClockUpdate clockUpdate =
+                    (AggregatedPowerStats.ClockUpdate) arrayList.get(i);
+            long j3 =
+                    i == arrayList.size() + (-1)
+                            ? aggregatedPowerStats.mDurationMs - j2
+                            : clockUpdate.monotonicTime - j;
+            ((ArrayList) metadata.mTimeFrames)
+                    .add(
+                            new PowerStatsSpan.TimeFrame(
+                                    clockUpdate.monotonicTime, clockUpdate.currentTime, j3));
             j2 += j3;
             i++;
             j = clockUpdate.monotonicTime;
             arrayList = arrayList;
         }
-        AggregatedPowerStatsSection aggregatedPowerStatsSection = new AggregatedPowerStatsSection(aggregatedPowerStats);
+        AggregatedPowerStatsSection aggregatedPowerStatsSection =
+                new AggregatedPowerStatsSection(aggregatedPowerStats);
         if (!((ArrayList) metadata.mSections).contains("aggregated-power-stats")) {
             ((ArrayList) metadata.mSections).add("aggregated-power-stats");
         }
@@ -108,7 +122,8 @@ public final class PowerStatsStore {
         indentingPrintWriter.increaseIndent();
         Iterator it = getTableOfContents().iterator();
         while (it.hasNext()) {
-            PowerStatsSpan loadPowerStatsSpan = loadPowerStatsSpan(((PowerStatsSpan.Metadata) it.next()).mId, new String[0]);
+            PowerStatsSpan loadPowerStatsSpan =
+                    loadPowerStatsSpan(((PowerStatsSpan.Metadata) it.next()).mId, new String[0]);
             if (loadPowerStatsSpan != null) {
                 loadPowerStatsSpan.dump(indentingPrintWriter);
             }
@@ -129,14 +144,19 @@ public final class PowerStatsStore {
                 String name = file.getName();
                 if (name.endsWith(".pss")) {
                     try {
-                        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+                        BufferedInputStream bufferedInputStream =
+                                new BufferedInputStream(new FileInputStream(file));
                         try {
-                            newBinaryPullParser.setInput(bufferedInputStream, StandardCharsets.UTF_8.name());
-                            PowerStatsSpan.Metadata read = PowerStatsSpan.Metadata.read(newBinaryPullParser);
+                            newBinaryPullParser.setInput(
+                                    bufferedInputStream, StandardCharsets.UTF_8.name());
+                            PowerStatsSpan.Metadata read =
+                                    PowerStatsSpan.Metadata.read(newBinaryPullParser);
                             if (read != null) {
                                 arrayList.add(read);
                             } else {
-                                Slog.e("PowerStatsStore", "Removing incompatible PowerStatsSpan file: " + name);
+                                Slog.e(
+                                        "PowerStatsStore",
+                                        "Removing incompatible PowerStatsSpan file: " + name);
                                 file.delete();
                             }
                             bufferedInputStream.close();
@@ -165,11 +185,20 @@ public final class PowerStatsStore {
         TypedXmlPullParser newBinaryPullParser = Xml.newBinaryPullParser();
         lockStoreDirectory();
         try {
-            File file = new File(this.mStoreDir, String.format(Locale.ENGLISH, "%019d", Long.valueOf(j)).concat(".pss"));
+            File file =
+                    new File(
+                            this.mStoreDir,
+                            String.format(Locale.ENGLISH, "%019d", Long.valueOf(j)).concat(".pss"));
             try {
-                BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+                BufferedInputStream bufferedInputStream =
+                        new BufferedInputStream(new FileInputStream(file));
                 try {
-                    PowerStatsSpan read = PowerStatsSpan.read(bufferedInputStream, newBinaryPullParser, this.mSectionReader, strArr);
+                    PowerStatsSpan read =
+                            PowerStatsSpan.read(
+                                    bufferedInputStream,
+                                    newBinaryPullParser,
+                                    this.mSectionReader,
+                                    strArr);
                     bufferedInputStream.close();
                     return read;
                 } catch (Throwable th) {
@@ -195,7 +224,8 @@ public final class PowerStatsStore {
         try {
             this.mLockFile.getParentFile().mkdirs();
             this.mLockFile.createNewFile();
-            this.mJvmLock = FileChannel.open(this.mLockFile.toPath(), StandardOpenOption.WRITE).lock();
+            this.mJvmLock =
+                    FileChannel.open(this.mLockFile.toPath(), StandardOpenOption.WRITE).lock();
         } catch (IOException e) {
             Slog.e("PowerStatsStore", "Cannot lock snapshot directory", e);
         }
@@ -250,16 +280,27 @@ public final class PowerStatsStore {
                 Slog.e("PowerStatsStore", "Could not create a directory for power stats store");
                 return;
             }
-            new AtomicFile(new File(this.mStoreDir, String.format(Locale.ENGLISH, "%019d", Long.valueOf(powerStatsSpan.mMetadata.mId)).concat(".pss"))).write(new Consumer() { // from class: com.android.server.power.stats.PowerStatsStore$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    try {
-                        PowerStatsSpan.this.writeXml((FileOutputStream) obj, Xml.newBinarySerializer());
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
+            new AtomicFile(
+                            new File(
+                                    this.mStoreDir,
+                                    String.format(
+                                                    Locale.ENGLISH,
+                                                    "%019d",
+                                                    Long.valueOf(powerStatsSpan.mMetadata.mId))
+                                            .concat(".pss")))
+                    .write(
+                            new Consumer() { // from class:
+                                             // com.android.server.power.stats.PowerStatsStore$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    try {
+                                        PowerStatsSpan.this.writeXml(
+                                                (FileOutputStream) obj, Xml.newBinarySerializer());
+                                    } catch (Exception e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            });
             this.mTableOfContents = null;
             removeOldSpansLocked();
         } finally {

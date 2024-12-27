@@ -6,8 +6,7 @@ import android.graphics.PointF;
 public class PointFEvaluator implements TypeEvaluator<PointF> {
     private PointF mPoint;
 
-    public PointFEvaluator() {
-    }
+    public PointFEvaluator() {}
 
     public PointFEvaluator(PointF reuse) {
         this.mPoint = reuse;

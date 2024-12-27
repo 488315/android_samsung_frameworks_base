@@ -23,13 +23,15 @@ public final class PowerServiceSettingsAndConfigurationDumpProto {
     public static final long IS_DECOUPLE_HAL_INTERACTIVE_MODE_FROM_DISPLAY_CONFIG = 1133871366146L;
     public static final long IS_DOUBLE_TAP_WAKE_ENABLED = 1133871366178L;
     public static final long IS_DOZE_AFTER_SCREEN_OFF_CONFIG = 1133871366162L;
-    public static final long IS_MAXIMUM_SCREEN_OFF_TIMEOUT_FROM_DEVICE_ADMIN_ENFORCED_LOCKED = 1133871366169L;
+    public static final long IS_MAXIMUM_SCREEN_OFF_TIMEOUT_FROM_DEVICE_ADMIN_ENFORCED_LOCKED =
+            1133871366169L;
     public static final long IS_SUSPEND_WHEN_SCREEN_OFF_DUE_TO_PROXIMITY_CONFIG = 1133871366150L;
     public static final long IS_THEATER_MODE_ENABLED = 1133871366149L;
     public static final long IS_USER_INACTIVE_OVERRIDE_FROM_WINDOW_MANAGER = 1133871366174L;
     public static final long IS_VR_MODE_ENABLED = 1133871366179L;
     public static final long IS_WAKE_UP_WHEN_PLUGGED_OR_UNPLUGGED_CONFIG = 1133871366147L;
-    public static final long IS_WAKE_UP_WHEN_PLUGGED_OR_UNPLUGGED_IN_THEATER_MODE_CONFIG = 1133871366148L;
+    public static final long IS_WAKE_UP_WHEN_PLUGGED_OR_UNPLUGGED_IN_THEATER_MODE_CONFIG =
+            1133871366148L;
     public static final long MAXIMUM_SCREEN_DIM_DURATION_CONFIG_MS = 1120986464276L;
     public static final long MAXIMUM_SCREEN_DIM_RATIO_CONFIG = 1108101562389L;
     public static final long MAXIMUM_SCREEN_OFF_TIMEOUT_FROM_DEVICE_ADMIN_MS = 1120986464280L;
@@ -48,8 +50,7 @@ public final class PowerServiceSettingsAndConfigurationDumpProto {
         public static final long IS_STAY_ON_WHILE_PLUGGED_IN_USB = 1133871366146L;
         public static final long IS_STAY_ON_WHILE_PLUGGED_IN_WIRELESS = 1133871366147L;
 
-        public StayOnWhilePluggedInProto() {
-        }
+        public StayOnWhilePluggedInProto() {}
     }
 
     public final class ScreenBrightnessSettingLimitsProto {
@@ -57,7 +58,6 @@ public final class PowerServiceSettingsAndConfigurationDumpProto {
         public static final long SETTING_MAXIMUM_FLOAT = 1108101562373L;
         public static final long SETTING_MINIMUM_FLOAT = 1108101562372L;
 
-        public ScreenBrightnessSettingLimitsProto() {
-        }
+        public ScreenBrightnessSettingLimitsProto() {}
     }
 }

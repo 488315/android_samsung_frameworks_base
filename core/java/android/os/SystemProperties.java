@@ -3,8 +3,12 @@ package android.os;
 import android.annotation.SystemApi;
 import android.util.Log;
 import android.util.MutableInt;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
+import libcore.util.HexEncoding;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,7 +17,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
-import libcore.util.HexEncoding;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -58,7 +61,11 @@ public class SystemProperties {
     @FastNative
     private static native long native_get_long(String str, long j);
 
-    private static native void native_init$ravenwood(Map<String, String> map, Predicate<String> predicate, Predicate<String> predicate2, Runnable runnable);
+    private static native void native_init$ravenwood(
+            Map<String, String> map,
+            Predicate<String> predicate,
+            Predicate<String> predicate2,
+            Runnable runnable);
 
     private static native void native_report_sysprop_change();
 
@@ -66,16 +73,23 @@ public class SystemProperties {
 
     private static native void native_set(String str, String str2);
 
-    private static void onKeyAccess(String key) {
-    }
+    private static void onKeyAccess(String key) {}
 
-    public static void init$ravenwood(Map<String, String> values, Predicate<String> keyReadablePredicate, Predicate<String> keyWritablePredicate) {
-        native_init$ravenwood(values, keyReadablePredicate, keyWritablePredicate, new Runnable() { // from class: android.os.SystemProperties$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SystemProperties.callChangeCallbacks();
-            }
-        });
+    public static void init$ravenwood(
+            Map<String, String> values,
+            Predicate<String> keyReadablePredicate,
+            Predicate<String> keyWritablePredicate) {
+        native_init$ravenwood(
+                values,
+                keyReadablePredicate,
+                keyWritablePredicate,
+                new Runnable() { // from class:
+                                 // android.os.SystemProperties$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SystemProperties.callChangeCallbacks();
+                    }
+                });
         synchronized (sChangeCallbacks) {
             sChangeCallbacks.clear();
         }
@@ -118,8 +132,11 @@ public class SystemProperties {
     }
 
     public static void set(String key, String val) {
-        if (val != null && !key.startsWith("ro.") && val.getBytes(StandardCharsets.UTF_8).length > 91) {
-            throw new IllegalArgumentException("value of system property '" + key + "' is longer than 91 bytes: " + val);
+        if (val != null
+                && !key.startsWith("ro.")
+                && val.getBytes(StandardCharsets.UTF_8).length > 91) {
+            throw new IllegalArgumentException(
+                    "value of system property '" + key + "' is longer than 91 bytes: " + val);
         }
         native_set(key, val);
     }
@@ -181,8 +198,7 @@ public class SystemProperties {
         }
     }
 
-    private SystemProperties() {
-    }
+    private SystemProperties() {}
 
     public static Handle find(String name) {
         long nativeHandle = native_find(name);

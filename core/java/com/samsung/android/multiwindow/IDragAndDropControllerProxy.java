@@ -9,14 +9,14 @@ import android.view.ThreadedRenderer;
 
 /* loaded from: classes6.dex */
 public interface IDragAndDropControllerProxy extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.multiwindow.IDragAndDropControllerProxy";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.multiwindow.IDragAndDropControllerProxy";
 
     void show(int i) throws RemoteException;
 
     public static class Default implements IDragAndDropControllerProxy {
         @Override // com.samsung.android.multiwindow.IDragAndDropControllerProxy
-        public void show(int displayId) throws RemoteException {
-        }
+        public void show(int displayId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IDragAndDropControllerProxy extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDragAndDropControllerProxy {
+    public abstract static class Stub extends Binder implements IDragAndDropControllerProxy {
         static final int TRANSACTION_show = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IDragAndDropControllerProxy extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDragAndDropControllerProxy.DESCRIPTOR);
             }

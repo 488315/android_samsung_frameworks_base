@@ -3,6 +3,7 @@ package android.hardware.display;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -26,8 +27,7 @@ public final class DisplayViewport {
     public final Rect physicalFrame = new Rect();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ViewportType {
-    }
+    public @interface ViewportType {}
 
     public void copyFrom(DisplayViewport viewport) {
         this.valid = viewport.valid;
@@ -57,7 +57,17 @@ public final class DisplayViewport {
             return false;
         }
         DisplayViewport other = (DisplayViewport) o;
-        return this.valid == other.valid && this.isActive == other.isActive && this.displayId == other.displayId && this.orientation == other.orientation && this.logicalFrame.equals(other.logicalFrame) && this.physicalFrame.equals(other.physicalFrame) && this.deviceWidth == other.deviceWidth && this.deviceHeight == other.deviceHeight && TextUtils.equals(this.uniqueId, other.uniqueId) && Objects.equals(this.physicalPort, other.physicalPort) && this.type == other.type;
+        return this.valid == other.valid
+                && this.isActive == other.isActive
+                && this.displayId == other.displayId
+                && this.orientation == other.orientation
+                && this.logicalFrame.equals(other.logicalFrame)
+                && this.physicalFrame.equals(other.physicalFrame)
+                && this.deviceWidth == other.deviceWidth
+                && this.deviceHeight == other.deviceHeight
+                && TextUtils.equals(this.uniqueId, other.uniqueId)
+                && Objects.equals(this.physicalPort, other.physicalPort)
+                && this.type == other.type;
     }
 
     public int hashCode() {
@@ -77,7 +87,29 @@ public final class DisplayViewport {
     }
 
     public String toString() {
-        return "DisplayViewport{type=" + typeToString(this.type) + ", valid=" + this.valid + ", isActive=" + this.isActive + ", displayId=" + this.displayId + ", uniqueId='" + this.uniqueId + "', physicalPort=" + this.physicalPort + ", orientation=" + this.orientation + ", logicalFrame=" + this.logicalFrame + ", physicalFrame=" + this.physicalFrame + ", deviceWidth=" + this.deviceWidth + ", deviceHeight=" + this.deviceHeight + "}";
+        return "DisplayViewport{type="
+                + typeToString(this.type)
+                + ", valid="
+                + this.valid
+                + ", isActive="
+                + this.isActive
+                + ", displayId="
+                + this.displayId
+                + ", uniqueId='"
+                + this.uniqueId
+                + "', physicalPort="
+                + this.physicalPort
+                + ", orientation="
+                + this.orientation
+                + ", logicalFrame="
+                + this.logicalFrame
+                + ", physicalFrame="
+                + this.physicalFrame
+                + ", deviceWidth="
+                + this.deviceWidth
+                + ", deviceHeight="
+                + this.deviceHeight
+                + "}";
     }
 
     public static String typeToString(int viewportType) {

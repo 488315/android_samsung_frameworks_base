@@ -18,16 +18,13 @@ public interface IAODDozeCallback extends IInterface {
 
     public static class Default implements IAODDozeCallback {
         @Override // com.samsung.android.aod.IAODDozeCallback
-        public void onDozeAcquired() throws RemoteException {
-        }
+        public void onDozeAcquired() throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODDozeCallback
-        public void onDozeReleased() throws RemoteException {
-        }
+        public void onDozeReleased() throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODDozeCallback
-        public void onAODToastRequested(AODToast toast) throws RemoteException {
-        }
+        public void onAODToastRequested(AODToast toast) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +32,7 @@ public interface IAODDozeCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAODDozeCallback {
+    public abstract static class Stub extends Binder implements IAODDozeCallback {
         static final int TRANSACTION_onAODToastRequested = 3;
         static final int TRANSACTION_onDozeAcquired = 1;
         static final int TRANSACTION_onDozeReleased = 2;
@@ -79,7 +76,8 @@ public interface IAODDozeCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAODDozeCallback.DESCRIPTOR);
             }

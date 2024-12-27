@@ -8,6 +8,7 @@ import android.os.IInterface;
 import android.os.ServiceManager;
 import android.util.Log;
 import android.util.Slog;
+
 import vendor.samsung.hardware.security.hermes.ISehHermesCommand;
 import vendor.samsung.hardware.security.hermes.SehCommandResult;
 import vendor.samsung.hardware.security.hermes.extension.ISehHermesExtension;
@@ -16,7 +17,9 @@ import vendor.samsung.hardware.security.hermes.extension.SehSelftestParameter;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class HermesHalAdapter {
-    public static final String HERMES_AIDL_INTERFACE = AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), ISehHermesCommand.DESCRIPTOR, "/default");
+    public static final String HERMES_AIDL_INTERFACE =
+            AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                    new StringBuilder(), ISehHermesCommand.DESCRIPTOR, "/default");
     public IWeaver aidlWeaver;
     public ISehHermesCommand hc;
     public ISehHermesExtension hce;
@@ -83,7 +86,8 @@ public final class HermesHalAdapter {
             if (service == null) {
                 return getSecureHWInfo();
             }
-            SehCommandResult secureHWInfo = ((ISehHermesCommand.Stub.Proxy) service).getSecureHWInfo();
+            SehCommandResult secureHWInfo =
+                    ((ISehHermesCommand.Stub.Proxy) service).getSecureHWInfo();
             if (secureHWInfo.result == 0) {
                 return secureHWInfo.msg;
             }
@@ -99,7 +103,9 @@ public final class HermesHalAdapter {
         try {
             ISehHermesCommand service = getService();
             this.hc = service;
-            return service != null ? ((ISehHermesCommand.Stub.Proxy) service).provisioning().result : provisioning();
+            return service != null
+                    ? ((ISehHermesCommand.Stub.Proxy) service).provisioning().result
+                    : provisioning();
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -111,7 +117,9 @@ public final class HermesHalAdapter {
         try {
             ISehHermesCommand service = getService();
             this.hc = service;
-            return service != null ? ((ISehHermesCommand.Stub.Proxy) service).secnvmPowerOff().result : secnvmPowerOff();
+            return service != null
+                    ? ((ISehHermesCommand.Stub.Proxy) service).secnvmPowerOff().result
+                    : secnvmPowerOff();
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -124,7 +132,9 @@ public final class HermesHalAdapter {
             this.hc = getService();
             this.hce = getExtAidlService();
             ISehHermesCommand iSehHermesCommand = this.hc;
-            return iSehHermesCommand != null ? ((ISehHermesCommand.Stub.Proxy) iSehHermesCommand).secnvmPowerOn().result : secnvmPowerOn();
+            return iSehHermesCommand != null
+                    ? ((ISehHermesCommand.Stub.Proxy) iSehHermesCommand).secnvmPowerOn().result
+                    : secnvmPowerOn();
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -162,7 +172,9 @@ public final class HermesHalAdapter {
         try {
             ISehHermesCommand service = getService();
             this.hc = service;
-            return service != null ? ((ISehHermesCommand.Stub.Proxy) service).terminateService().result : terminateService();
+            return service != null
+                    ? ((ISehHermesCommand.Stub.Proxy) service).terminateService().result
+                    : terminateService();
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -176,7 +188,8 @@ public final class HermesHalAdapter {
             ISehHermesExtension extAidlService = getExtAidlService();
             this.hce = extAidlService;
             if (extAidlService != null) {
-                SehCommandResult updateCOSpatch = ((ISehHermesExtension.Stub.Proxy) extAidlService).updateCOSpatch();
+                SehCommandResult updateCOSpatch =
+                        ((ISehHermesExtension.Stub.Proxy) extAidlService).updateCOSpatch();
                 if (updateCOSpatch.result == 0) {
                     return updateCOSpatch.msg;
                 }
@@ -186,7 +199,8 @@ public final class HermesHalAdapter {
             if (iSehHermesCommand == null) {
                 return updateCryptoFW();
             }
-            SehCommandResult updateCryptoFW = ((ISehHermesCommand.Stub.Proxy) iSehHermesCommand).updateCryptoFW();
+            SehCommandResult updateCryptoFW =
+                    ((ISehHermesCommand.Stub.Proxy) iSehHermesCommand).updateCryptoFW();
             if (updateCryptoFW.result == 0) {
                 return updateCryptoFW.msg;
             }
@@ -202,7 +216,9 @@ public final class HermesHalAdapter {
         try {
             ISehHermesCommand service = getService();
             this.hc = service;
-            return service != null ? ((ISehHermesCommand.Stub.Proxy) service).verifyProvisioning().result : verifyProvisioning();
+            return service != null
+                    ? ((ISehHermesCommand.Stub.Proxy) service).verifyProvisioning().result
+                    : verifyProvisioning();
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -243,7 +259,10 @@ public final class HermesHalAdapter {
         try {
             ISehHermesCommand service = getService();
             this.hc = service;
-            return service != null ? new String(((ISehHermesCommand.Stub.Proxy) service).getBigdataLog().msg, "euc-kr") : getPdpData();
+            return service != null
+                    ? new String(
+                            ((ISehHermesCommand.Stub.Proxy) service).getBigdataLog().msg, "euc-kr")
+                    : getPdpData();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -252,7 +271,9 @@ public final class HermesHalAdapter {
 
     public final synchronized ISehHermesExtension getExtAidlService() {
         try {
-            ISehHermesExtension asInterface = ISehHermesExtension.Stub.asInterface(ServiceManager.getService(HERMES_AIDL_INTERFACE).getExtension());
+            ISehHermesExtension asInterface =
+                    ISehHermesExtension.Stub.asInterface(
+                            ServiceManager.getService(HERMES_AIDL_INTERFACE).getExtension());
             this.hce = asInterface;
             if (asInterface == null) {
                 Log.w("HERMES#HalAdapter", "getExtAidlService: ext halService is null");
@@ -268,7 +289,9 @@ public final class HermesHalAdapter {
 
     public final synchronized ISehHermesCommand getService() {
         try {
-            ISehHermesCommand asInterface = ISehHermesCommand.Stub.asInterface(ServiceManager.getService(HERMES_AIDL_INTERFACE));
+            ISehHermesCommand asInterface =
+                    ISehHermesCommand.Stub.asInterface(
+                            ServiceManager.getService(HERMES_AIDL_INTERFACE));
             this.hc = asInterface;
             if (asInterface == null) {
                 Log.w("HERMES#HalAdapter", "getService: halService is null");

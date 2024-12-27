@@ -1,9 +1,9 @@
 package android.os;
 
-import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Array;
@@ -13,19 +13,20 @@ import java.util.function.BinaryOperator;
 
 /* loaded from: classes3.dex */
 public class BundleMerger implements Parcelable {
-    public static final Parcelable.Creator<BundleMerger> CREATOR = new Parcelable.Creator<BundleMerger>() { // from class: android.os.BundleMerger.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BundleMerger createFromParcel(Parcel in) {
-            return new BundleMerger(in);
-        }
+    public static final Parcelable.Creator<BundleMerger> CREATOR =
+            new Parcelable.Creator<BundleMerger>() { // from class: android.os.BundleMerger.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BundleMerger createFromParcel(Parcel in) {
+                    return new BundleMerger(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BundleMerger[] newArray(int size) {
-            return new BundleMerger[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BundleMerger[] newArray(int size) {
+                    return new BundleMerger[size];
+                }
+            };
     public static final int STRATEGY_ARRAY_APPEND = 50;
     public static final int STRATEGY_ARRAY_LIST_APPEND = 60;
     public static final int STRATEGY_BOOLEAN_AND = 30;
@@ -43,8 +44,7 @@ public class BundleMerger implements Parcelable {
     private final ArrayMap<String, Integer> mStrategies;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Strategy {
-    }
+    public @interface Strategy {}
 
     public BundleMerger() {
         this.mDefaultStrategy = 0;
@@ -86,11 +86,14 @@ public class BundleMerger implements Parcelable {
     }
 
     public int getMergeStrategy(String key) {
-        return this.mStrategies.getOrDefault(key, Integer.valueOf(this.mDefaultStrategy)).intValue();
+        return this.mStrategies
+                .getOrDefault(key, Integer.valueOf(this.mDefaultStrategy))
+                .intValue();
     }
 
     public BinaryOperator<Bundle> asBinaryOperator() {
-        return new BinaryOperator() { // from class: android.os.BundleMerger$$ExternalSyntheticLambda0
+        return new BinaryOperator() { // from class:
+                                      // android.os.BundleMerger$$ExternalSyntheticLambda0
             @Override // java.util.function.BiFunction
             public final Object apply(Object obj, Object obj2) {
                 return BundleMerger.this.merge((Bundle) obj, (Bundle) obj2);
@@ -122,7 +125,17 @@ public class BundleMerger implements Parcelable {
             try {
                 res.putObject(key, merge(strategy, firstValue, lastValue));
             } catch (Exception e) {
-                Log.w(TAG, "Failed to merge key " + key + " with " + firstValue + " and " + lastValue + " using strategy " + strategy, e);
+                Log.w(
+                        TAG,
+                        "Failed to merge key "
+                                + key
+                                + " with "
+                                + firstValue
+                                + " and "
+                                + lastValue
+                                + " using strategy "
+                                + strategy,
+                        e);
             }
         }
         return res;
@@ -136,7 +149,11 @@ public class BundleMerger implements Parcelable {
             return first;
         }
         if (first.getClass() != last.getClass()) {
-            throw new IllegalArgumentException("Merging requires consistent classes; first " + first.getClass() + " last " + last.getClass());
+            throw new IllegalArgumentException(
+                    "Merging requires consistent classes; first "
+                            + first.getClass()
+                            + " last "
+                            + last.getClass());
         }
         switch (strategy) {
             case 0:

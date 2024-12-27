@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IDreamService extends IInterface {
-    void attach(IBinder iBinder, boolean z, boolean z2, IRemoteCallback iRemoteCallback) throws RemoteException;
+    void attach(IBinder iBinder, boolean z, boolean z2, IRemoteCallback iRemoteCallback)
+            throws RemoteException;
 
     void comeToFront() throws RemoteException;
 
@@ -19,20 +20,21 @@ public interface IDreamService extends IInterface {
 
     public static class Default implements IDreamService {
         @Override // android.service.dreams.IDreamService
-        public void attach(IBinder windowToken, boolean canDoze, boolean isPreviewMode, IRemoteCallback started) throws RemoteException {
-        }
+        public void attach(
+                IBinder windowToken,
+                boolean canDoze,
+                boolean isPreviewMode,
+                IRemoteCallback started)
+                throws RemoteException {}
 
         @Override // android.service.dreams.IDreamService
-        public void detach() throws RemoteException {
-        }
+        public void detach() throws RemoteException {}
 
         @Override // android.service.dreams.IDreamService
-        public void wakeUp() throws RemoteException {
-        }
+        public void wakeUp() throws RemoteException {}
 
         @Override // android.service.dreams.IDreamService
-        public void comeToFront() throws RemoteException {
-        }
+        public void comeToFront() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -40,7 +42,7 @@ public interface IDreamService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDreamService {
+    public abstract static class Stub extends Binder implements IDreamService {
         public static final String DESCRIPTOR = "android.service.dreams.IDreamService";
         static final int TRANSACTION_attach = 1;
         static final int TRANSACTION_comeToFront = 4;
@@ -88,7 +90,8 @@ public interface IDreamService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -101,7 +104,8 @@ public interface IDreamService extends IInterface {
                     IBinder _arg0 = data.readStrongBinder();
                     boolean _arg1 = data.readBoolean();
                     boolean _arg2 = data.readBoolean();
-                    IRemoteCallback _arg3 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg3 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     attach(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -136,7 +140,12 @@ public interface IDreamService extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamService
-            public void attach(IBinder windowToken, boolean canDoze, boolean isPreviewMode, IRemoteCallback started) throws RemoteException {
+            public void attach(
+                    IBinder windowToken,
+                    boolean canDoze,
+                    boolean isPreviewMode,
+                    IRemoteCallback started)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

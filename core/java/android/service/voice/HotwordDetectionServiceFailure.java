@@ -4,25 +4,29 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class HotwordDetectionServiceFailure implements Parcelable {
-    public static final Parcelable.Creator<HotwordDetectionServiceFailure> CREATOR = new Parcelable.Creator<HotwordDetectionServiceFailure>() { // from class: android.service.voice.HotwordDetectionServiceFailure.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HotwordDetectionServiceFailure[] newArray(int size) {
-            return new HotwordDetectionServiceFailure[size];
-        }
+    public static final Parcelable.Creator<HotwordDetectionServiceFailure> CREATOR =
+            new Parcelable.Creator<
+                    HotwordDetectionServiceFailure>() { // from class:
+                                                        // android.service.voice.HotwordDetectionServiceFailure.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HotwordDetectionServiceFailure[] newArray(int size) {
+                    return new HotwordDetectionServiceFailure[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HotwordDetectionServiceFailure createFromParcel(Parcel in) {
-            return new HotwordDetectionServiceFailure(in.readInt(), in.readString8());
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HotwordDetectionServiceFailure createFromParcel(Parcel in) {
+                    return new HotwordDetectionServiceFailure(in.readInt(), in.readString8());
+                }
+            };
     public static final int ERROR_CODE_BINDING_DIED = 2;
     public static final int ERROR_CODE_BIND_FAILURE = 1;
     public static final int ERROR_CODE_COPY_AUDIO_DATA_FAILURE = 3;
@@ -36,8 +40,7 @@ public final class HotwordDetectionServiceFailure implements Parcelable {
     private String mErrorMessage;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HotwordDetectionServiceErrorCode {
-    }
+    public @interface HotwordDetectionServiceErrorCode {}
 
     public HotwordDetectionServiceFailure(int errorCode, String errorMessage) {
         this.mErrorCode = 0;
@@ -85,6 +88,10 @@ public final class HotwordDetectionServiceFailure implements Parcelable {
     }
 
     public String toString() {
-        return "HotwordDetectionServiceFailure { errorCode = " + this.mErrorCode + ", errorMessage = " + this.mErrorMessage + " }";
+        return "HotwordDetectionServiceFailure { errorCode = "
+                + this.mErrorCode
+                + ", errorMessage = "
+                + this.mErrorMessage
+                + " }";
     }
 }

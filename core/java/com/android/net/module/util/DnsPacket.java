@@ -2,7 +2,7 @@ package com.android.net.module.util;
 
 import android.text.TextUtils;
 import android.text.format.DateFormat;
-import com.android.net.module.util.DnsPacketUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -31,8 +31,7 @@ public abstract class DnsPacket {
     protected final List<DnsRecord>[] mRecords;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RecordType {
-    }
+    public @interface RecordType {}
 
     public static class ParseException extends RuntimeException {
         public String reason;
@@ -91,7 +90,13 @@ public abstract class DnsPacket {
         }
 
         public String toString() {
-            return "DnsHeader{id=" + this.mId + ", flags=" + this.mFlags + ", recordCounts=" + Arrays.toString(this.mRecordCount) + '}';
+            return "DnsHeader{id="
+                    + this.mId
+                    + ", flags="
+                    + this.mFlags
+                    + ", recordCounts="
+                    + Arrays.toString(this.mRecordCount)
+                    + '}';
         }
 
         public boolean equals(Object o) {
@@ -102,7 +107,9 @@ public abstract class DnsPacket {
                 return false;
             }
             DnsHeader other = (DnsHeader) o;
-            return this.mId == other.mId && this.mFlags == other.mFlags && Arrays.equals(this.mRecordCount, other.mRecordCount);
+            return this.mId == other.mId
+                    && this.mFlags == other.mFlags
+                    && Arrays.equals(this.mRecordCount, other.mRecordCount);
         }
 
         public int hashCode() {
@@ -132,12 +139,14 @@ public abstract class DnsPacket {
         public final int rType;
         public final long ttl;
 
-        protected DnsRecord(int rType, ByteBuffer buf) throws BufferUnderflowException, ParseException {
+        protected DnsRecord(int rType, ByteBuffer buf)
+                throws BufferUnderflowException, ParseException {
             Objects.requireNonNull(buf);
             this.rType = rType;
             this.dName = DnsPacketUtils.DnsRecordParser.parseName(buf, 0, true);
             if (this.dName.length() > 255) {
-                throw new ParseException("Parse name fail, name size is too long: " + this.dName.length());
+                throw new ParseException(
+                        "Parse name fail, name size is too long: " + this.dName.length());
             }
             this.nsType = Short.toUnsignedInt(buf.getShort());
             this.nsClass = Short.toUnsignedInt(buf.getShort());
@@ -152,7 +161,8 @@ public abstract class DnsPacket {
             this.mRdata = null;
         }
 
-        public static DnsRecord parse(int rType, ByteBuffer buf) throws BufferUnderflowException, ParseException {
+        public static DnsRecord parse(int rType, ByteBuffer buf)
+                throws BufferUnderflowException, ParseException {
             Objects.requireNonNull(buf);
             int oldPos = buf.position();
             DnsPacketUtils.DnsRecordParser.parseName(buf, 0, true);
@@ -166,12 +176,16 @@ public abstract class DnsPacket {
             }
         }
 
-        public static DnsRecord makeAOrAAAARecord(int rType, String dName, int nsClass, long ttl, InetAddress address) throws IOException {
+        public static DnsRecord makeAOrAAAARecord(
+                int rType, String dName, int nsClass, long ttl, InetAddress address)
+                throws IOException {
             int nsType = address.getAddress().length == 4 ? 1 : 28;
             return new DnsRecord(rType, dName, nsType, nsClass, ttl, address, null);
         }
 
-        public static DnsRecord makeCNameRecord(int rType, String dName, int nsClass, long ttl, String domainName) throws IOException {
+        public static DnsRecord makeCNameRecord(
+                int rType, String dName, int nsClass, long ttl, String domainName)
+                throws IOException {
             return new DnsRecord(rType, dName, 5, nsClass, ttl, null, domainName);
         }
 
@@ -195,7 +209,15 @@ public abstract class DnsPacket {
             this.ttl = 0L;
         }
 
-        private DnsRecord(int rType, String dName, int nsType, int nsClass, long ttl, InetAddress address, String rDataStr) throws IOException {
+        private DnsRecord(
+                int rType,
+                String dName,
+                int nsType,
+                int nsClass,
+                long ttl,
+                InetAddress address,
+                String rDataStr)
+                throws IOException {
             this.rType = rType;
             this.dName = requireHostName(dName);
             this.nsType = nsType;
@@ -203,7 +225,10 @@ public abstract class DnsPacket {
             if (rType < 0 || rType >= 4 || rType == 0) {
                 throw new IllegalArgumentException("Unexpected record type: " + rType);
             }
-            this.mRdata = nsType == 5 ? DnsPacketUtils.DnsRecordParser.domainNameToLabels(rDataStr) : address.getAddress();
+            this.mRdata =
+                    nsType == 5
+                            ? DnsPacketUtils.DnsRecordParser.domainNameToLabels(rDataStr)
+                            : address.getAddress();
             this.ttl = ttl;
         }
 
@@ -240,15 +265,39 @@ public abstract class DnsPacket {
                 return false;
             }
             DnsRecord other = (DnsRecord) o;
-            return this.rType == other.rType && this.nsType == other.nsType && this.nsClass == other.nsClass && this.ttl == other.ttl && TextUtils.equals(this.dName, other.dName) && Arrays.equals(this.mRdata, other.mRdata);
+            return this.rType == other.rType
+                    && this.nsType == other.nsType
+                    && this.nsClass == other.nsClass
+                    && this.ttl == other.ttl
+                    && TextUtils.equals(this.dName, other.dName)
+                    && Arrays.equals(this.mRdata, other.mRdata);
         }
 
         public int hashCode() {
-            return (Objects.hash(this.dName) * 31) + (((int) (this.ttl & (-1))) * 37) + (((int) (this.ttl >> 32)) * 41) + (this.nsType * 43) + (this.nsClass * 47) + (this.rType * 53) + Arrays.hashCode(this.mRdata);
+            return (Objects.hash(this.dName) * 31)
+                    + (((int) (this.ttl & (-1))) * 37)
+                    + (((int) (this.ttl >> 32)) * 41)
+                    + (this.nsType * 43)
+                    + (this.nsClass * 47)
+                    + (this.rType * 53)
+                    + Arrays.hashCode(this.mRdata);
         }
 
         public String toString() {
-            return "DnsRecord{rType=" + this.rType + ", dName='" + this.dName + DateFormat.QUOTE + ", nsType=" + this.nsType + ", nsClass=" + this.nsClass + ", ttl=" + this.ttl + ", mRdata=" + Arrays.toString(this.mRdata) + '}';
+            return "DnsRecord{rType="
+                    + this.rType
+                    + ", dName='"
+                    + this.dName
+                    + DateFormat.QUOTE
+                    + ", nsType="
+                    + this.nsType
+                    + ", nsClass="
+                    + this.nsClass
+                    + ", ttl="
+                    + this.ttl
+                    + ", mRdata="
+                    + Arrays.toString(this.mRdata)
+                    + '}';
         }
     }
 
@@ -285,7 +334,11 @@ public abstract class DnsPacket {
         this.mRecords[3] = new ArrayList();
         for (int i = 0; i < 4; i++) {
             if (this.mHeader.mRecordCount[i] != this.mRecords[i].size()) {
-                throw new IllegalArgumentException("Record count mismatch: expected " + this.mHeader.mRecordCount[i] + " but was " + this.mRecords[i]);
+                throw new IllegalArgumentException(
+                        "Record count mismatch: expected "
+                                + this.mHeader.mRecordCount[i]
+                                + " but was "
+                                + this.mRecords[i]);
             }
         }
     }
@@ -302,7 +355,11 @@ public abstract class DnsPacket {
     }
 
     public String toString() {
-        return "DnsPacket{header=" + this.mHeader + ", records='" + Arrays.toString(this.mRecords) + '}';
+        return "DnsPacket{header="
+                + this.mHeader
+                + ", records='"
+                + Arrays.toString(this.mRecords)
+                + '}';
     }
 
     public boolean equals(Object o) {
@@ -313,7 +370,8 @@ public abstract class DnsPacket {
             return false;
         }
         DnsPacket other = (DnsPacket) o;
-        return Objects.equals(this.mHeader, other.mHeader) && Arrays.deepEquals(this.mRecords, other.mRecords);
+        return Objects.equals(this.mHeader, other.mHeader)
+                && Arrays.deepEquals(this.mRecords, other.mRecords);
     }
 
     public int hashCode() {

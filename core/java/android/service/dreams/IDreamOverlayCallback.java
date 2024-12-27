@@ -16,12 +16,10 @@ public interface IDreamOverlayCallback extends IInterface {
 
     public static class Default implements IDreamOverlayCallback {
         @Override // android.service.dreams.IDreamOverlayCallback
-        public void onExitRequested() throws RemoteException {
-        }
+        public void onExitRequested() throws RemoteException {}
 
         @Override // android.service.dreams.IDreamOverlayCallback
-        public void onRedirectWake(boolean redirect) throws RemoteException {
-        }
+        public void onRedirectWake(boolean redirect) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IDreamOverlayCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDreamOverlayCallback {
+    public abstract static class Stub extends Binder implements IDreamOverlayCallback {
         static final int TRANSACTION_onExitRequested = 1;
         static final int TRANSACTION_onRedirectWake = 2;
 
@@ -70,7 +68,8 @@ public interface IDreamOverlayCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDreamOverlayCallback.DESCRIPTOR);
             }

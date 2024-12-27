@@ -36,7 +36,8 @@ public final class BroadcastConstants {
     public int MAX_CONSECUTIVE_NORMAL_DISPATCHES = 10;
     public int MAX_RUNNING_ACTIVE_BROADCASTS = DEFAULT_MAX_RUNNING_ACTIVE_BROADCASTS;
     public int MAX_CORE_RUNNING_BLOCKING_BROADCASTS = DEFAULT_MAX_CORE_RUNNING_BLOCKING_BROADCASTS;
-    public int MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS = DEFAULT_MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS;
+    public int MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS =
+            DEFAULT_MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS;
     public int MAX_PENDING_BROADCASTS = DEFAULT_MAX_PENDING_BROADCASTS;
     public long DELAY_NORMAL_MILLIS = 500;
     public long DELAY_CACHED_MILLIS = 120000;
@@ -70,8 +71,10 @@ public final class BroadcastConstants {
         DEFAULT_ALLOW_BG_ACTIVITY_START_TIMEOUT = j;
         DEFAULT_MAX_RUNNING_PROCESS_QUEUES = ActivityManager.isLowRamDeviceStatic() ? 2 : 4;
         DEFAULT_MAX_RUNNING_ACTIVE_BROADCASTS = ActivityManager.isLowRamDeviceStatic() ? 8 : 16;
-        DEFAULT_MAX_CORE_RUNNING_BLOCKING_BROADCASTS = ActivityManager.isLowRamDeviceStatic() ? 8 : 16;
-        DEFAULT_MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS = ActivityManager.isLowRamDeviceStatic() ? 32 : 64;
+        DEFAULT_MAX_CORE_RUNNING_BLOCKING_BROADCASTS =
+                ActivityManager.isLowRamDeviceStatic() ? 8 : 16;
+        DEFAULT_MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS =
+                ActivityManager.isLowRamDeviceStatic() ? 32 : 64;
         DEFAULT_MAX_PENDING_BROADCASTS = ActivityManager.isLowRamDeviceStatic() ? 128 : 256;
         DEFAULT_MAX_HISTORY_COMPLETE_SIZE = ActivityManager.isLowRamDeviceStatic() ? 64 : 256;
         DEFAULT_MAX_HISTORY_SUMMARY_SIZE = ActivityManager.isLowRamDeviceStatic() ? 256 : 1024;
@@ -83,46 +86,85 @@ public final class BroadcastConstants {
     }
 
     public static int getDeviceConfigInt(int i, String str) {
-        return SystemProperties.getInt("persist.sys.activity_manager_native_boot.".concat(str), SystemProperties.getInt("persist.device_config.activity_manager_native_boot.".concat(str), i));
+        return SystemProperties.getInt(
+                "persist.sys.activity_manager_native_boot.".concat(str),
+                SystemProperties.getInt(
+                        "persist.device_config.activity_manager_native_boot.".concat(str), i));
     }
 
     public static long getDeviceConfigLong(long j, String str) {
-        return SystemProperties.getLong("persist.sys.activity_manager_native_boot.".concat(str), SystemProperties.getLong("persist.device_config.activity_manager_native_boot.".concat(str), j));
+        return SystemProperties.getLong(
+                "persist.sys.activity_manager_native_boot.".concat(str),
+                SystemProperties.getLong(
+                        "persist.device_config.activity_manager_native_boot.".concat(str), j));
     }
 
     public final void startObserving(Handler handler, ContentResolver contentResolver) {
         this.mResolver = contentResolver;
         this.mSettingsObserver = new SettingsObserver(handler);
-        this.mResolver.registerContentObserver(Settings.Global.getUriFor(this.mSettingsKey), false, this.mSettingsObserver);
+        this.mResolver.registerContentObserver(
+                Settings.Global.getUriFor(this.mSettingsKey), false, this.mSettingsObserver);
         updateSettingsConstants();
-        DeviceConfig.addOnPropertiesChangedListener("activity_manager_native_boot", new HandlerExecutor(handler), new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.am.BroadcastConstants$$ExternalSyntheticLambda0
-            public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                BroadcastConstants.this.updateDeviceConfigConstants$1();
-            }
-        });
+        DeviceConfig.addOnPropertiesChangedListener(
+                "activity_manager_native_boot",
+                new HandlerExecutor(handler),
+                new DeviceConfig
+                        .OnPropertiesChangedListener() { // from class:
+                                                         // com.android.server.am.BroadcastConstants$$ExternalSyntheticLambda0
+                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                        BroadcastConstants.this.updateDeviceConfigConstants$1();
+                    }
+                });
         updateDeviceConfigConstants$1();
     }
 
     public final void updateDeviceConfigConstants$1() {
         synchronized (this) {
-            this.MAX_RUNNING_PROCESS_QUEUES = getDeviceConfigInt(DEFAULT_MAX_RUNNING_PROCESS_QUEUES, "bcast_max_running_process_queues");
-            this.EXTRA_RUNNING_URGENT_PROCESS_QUEUES = getDeviceConfigInt(1, "bcast_extra_running_urgent_process_queues");
-            this.MAX_CONSECUTIVE_URGENT_DISPATCHES = getDeviceConfigInt(3, "bcast_max_consecutive_urgent_dispatches");
-            this.MAX_CONSECUTIVE_NORMAL_DISPATCHES = getDeviceConfigInt(10, "bcast_max_consecutive_normal_dispatches");
-            this.MAX_RUNNING_ACTIVE_BROADCASTS = getDeviceConfigInt(DEFAULT_MAX_RUNNING_ACTIVE_BROADCASTS, "bcast_max_running_active_broadcasts");
-            this.MAX_CORE_RUNNING_BLOCKING_BROADCASTS = getDeviceConfigInt(DEFAULT_MAX_CORE_RUNNING_BLOCKING_BROADCASTS, "bcast_max_core_running_blocking_broadcasts");
-            this.MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS = getDeviceConfigInt(DEFAULT_MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS, "bcast_max_core_running_non_blocking_broadcasts");
-            this.MAX_PENDING_BROADCASTS = getDeviceConfigInt(DEFAULT_MAX_PENDING_BROADCASTS, "bcast_max_pending_broadcasts");
+            this.MAX_RUNNING_PROCESS_QUEUES =
+                    getDeviceConfigInt(
+                            DEFAULT_MAX_RUNNING_PROCESS_QUEUES, "bcast_max_running_process_queues");
+            this.EXTRA_RUNNING_URGENT_PROCESS_QUEUES =
+                    getDeviceConfigInt(1, "bcast_extra_running_urgent_process_queues");
+            this.MAX_CONSECUTIVE_URGENT_DISPATCHES =
+                    getDeviceConfigInt(3, "bcast_max_consecutive_urgent_dispatches");
+            this.MAX_CONSECUTIVE_NORMAL_DISPATCHES =
+                    getDeviceConfigInt(10, "bcast_max_consecutive_normal_dispatches");
+            this.MAX_RUNNING_ACTIVE_BROADCASTS =
+                    getDeviceConfigInt(
+                            DEFAULT_MAX_RUNNING_ACTIVE_BROADCASTS,
+                            "bcast_max_running_active_broadcasts");
+            this.MAX_CORE_RUNNING_BLOCKING_BROADCASTS =
+                    getDeviceConfigInt(
+                            DEFAULT_MAX_CORE_RUNNING_BLOCKING_BROADCASTS,
+                            "bcast_max_core_running_blocking_broadcasts");
+            this.MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS =
+                    getDeviceConfigInt(
+                            DEFAULT_MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS,
+                            "bcast_max_core_running_non_blocking_broadcasts");
+            this.MAX_PENDING_BROADCASTS =
+                    getDeviceConfigInt(
+                            DEFAULT_MAX_PENDING_BROADCASTS, "bcast_max_pending_broadcasts");
             this.DELAY_NORMAL_MILLIS = getDeviceConfigLong(500L, "bcast_delay_normal_millis");
             this.DELAY_CACHED_MILLIS = getDeviceConfigLong(120000L, "bcast_delay_cached_millis");
             this.DELAY_URGENT_MILLIS = getDeviceConfigLong(-120000L, "bcast_delay_urgent_millis");
-            this.DELAY_FOREGROUND_PROC_MILLIS = getDeviceConfigLong(-120000L, "bcast_delay_foreground_proc_millis");
-            this.DELAY_PERSISTENT_PROC_MILLIS = getDeviceConfigLong(-120000L, "bcast_delay_persistent_proc_millis");
+            this.DELAY_FOREGROUND_PROC_MILLIS =
+                    getDeviceConfigLong(-120000L, "bcast_delay_foreground_proc_millis");
+            this.DELAY_PERSISTENT_PROC_MILLIS =
+                    getDeviceConfigLong(-120000L, "bcast_delay_persistent_proc_millis");
             this.MAX_HISTORY_COMPLETE_SIZE = ActivityManager.isLowRamDeviceStatic() ? 256 : 1024;
             this.MAX_HISTORY_SUMMARY_SIZE = ActivityManager.isLowRamDeviceStatic() ? 512 : 2048;
-            this.CORE_DEFER_UNTIL_ACTIVE = SystemProperties.getBoolean("persist.sys.activity_manager_native_boot.".concat("bcast_core_defer_until_active"), SystemProperties.getBoolean("persist.device_config.activity_manager_native_boot.".concat("bcast_core_defer_until_active"), true));
-            this.PENDING_COLD_START_CHECK_INTERVAL_MILLIS = getDeviceConfigLong(30000L, "pending_cold_start_check_interval_millis");
-            this.MAX_FROZEN_OUTGOING_BROADCASTS = getDeviceConfigInt(32, "max_frozen_outgoing_broadcasts");
+            this.CORE_DEFER_UNTIL_ACTIVE =
+                    SystemProperties.getBoolean(
+                            "persist.sys.activity_manager_native_boot."
+                                    .concat("bcast_core_defer_until_active"),
+                            SystemProperties.getBoolean(
+                                    "persist.device_config.activity_manager_native_boot."
+                                            .concat("bcast_core_defer_until_active"),
+                                    true));
+            this.PENDING_COLD_START_CHECK_INTERVAL_MILLIS =
+                    getDeviceConfigLong(30000L, "pending_cold_start_check_interval_millis");
+            this.MAX_FROZEN_OUTGOING_BROADCASTS =
+                    getDeviceConfigInt(32, "max_frozen_outgoing_broadcasts");
         }
         BroadcastRecord.CORE_DEFER_UNTIL_ACTIVE = this.CORE_DEFER_UNTIL_ACTIVE;
     }
@@ -131,11 +173,18 @@ public final class BroadcastConstants {
         synchronized (this) {
             try {
                 try {
-                    this.mParser.setString(Settings.Global.getString(this.mResolver, this.mSettingsKey));
+                    this.mParser.setString(
+                            Settings.Global.getString(this.mResolver, this.mSettingsKey));
                     this.TIMEOUT = this.mParser.getLong("bcast_timeout", this.TIMEOUT);
-                    this.ALLOW_BG_ACTIVITY_START_TIMEOUT = this.mParser.getLong("bcast_allow_bg_activity_start_timeout", this.ALLOW_BG_ACTIVITY_START_TIMEOUT);
+                    this.ALLOW_BG_ACTIVITY_START_TIMEOUT =
+                            this.mParser.getLong(
+                                    "bcast_allow_bg_activity_start_timeout",
+                                    this.ALLOW_BG_ACTIVITY_START_TIMEOUT);
                 } catch (IllegalArgumentException e) {
-                    Slog.e("BroadcastConstants", "Bad broadcast settings in key '" + this.mSettingsKey + "'", e);
+                    Slog.e(
+                            "BroadcastConstants",
+                            "Bad broadcast settings in key '" + this.mSettingsKey + "'",
+                            e);
                 }
             } catch (Throwable th) {
                 throw th;

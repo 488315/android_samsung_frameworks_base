@@ -19,8 +19,7 @@ public interface ICloEventObserver extends IInterface {
         }
 
         @Override // android.net.ICloEventObserver
-        public void onUpdatedGroRlEnvironment(String str) throws RemoteException {
-        }
+        public void onUpdatedGroRlEnvironment(String str) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -57,7 +56,8 @@ public interface ICloEventObserver extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ICloEventObserver.DESCRIPTOR);
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(ICloEventObserver.DESCRIPTOR);
             if (queryLocalInterface != null && (queryLocalInterface instanceof ICloEventObserver)) {
                 return (ICloEventObserver) queryLocalInterface;
             }
@@ -72,7 +72,8 @@ public interface ICloEventObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(ICloEventObserver.DESCRIPTOR);
             }

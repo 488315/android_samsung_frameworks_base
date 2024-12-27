@@ -83,7 +83,8 @@ public class MediaCasStateException extends IllegalStateException {
                 diagnosticInfo = "Rebooting";
                 break;
         }
-        throw new MediaCasStateException(err, msg, String.format("%s (err=%d)", diagnosticInfo, Integer.valueOf(err)));
+        throw new MediaCasStateException(
+                err, msg, String.format("%s (err=%d)", diagnosticInfo, Integer.valueOf(err)));
     }
 
     public int getErrorCode() {

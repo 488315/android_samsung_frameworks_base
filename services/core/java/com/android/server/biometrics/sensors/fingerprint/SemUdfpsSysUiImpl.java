@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.server.biometrics.BiometricHandlerProvider;
 import com.android.server.biometrics.SemBiometricFeature;
 import com.android.server.biometrics.SemBiometricSysUiManager;
@@ -15,13 +16,12 @@ import com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSynthetic
 import com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSyntheticLambda5;
 import com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSyntheticLambda6;
 import com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSyntheticLambda8;
-import com.android.server.biometrics.sensors.fingerprint.SemUdfpsHelper;
-import com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiListener {
-    static final String DB_UDFPS_HIDE_AUTH_GUIDE_LAYER_PACKAGES = "config_biometric_udfps_flag_hide_auth_guide_layer_packages";
+    static final String DB_UDFPS_HIDE_AUTH_GUIDE_LAYER_PACKAGES =
+            "config_biometric_udfps_flag_hide_auth_guide_layer_packages";
     public int mAuthFailCount;
     public final Context mContext;
     public Bundle mCustomIconAttribute;
@@ -47,7 +47,8 @@ public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiLi
         void onSysUiError(int i, int i2);
     }
 
-    public SemUdfpsSysUiImpl(Context context, IBinder iBinder, String str, int i, boolean z, boolean z2) {
+    public SemUdfpsSysUiImpl(
+            Context context, IBinder iBinder, String str, int i, boolean z, boolean z2) {
         this.mContext = context;
         this.mToken = iBinder;
         this.mPackageName = str;
@@ -59,10 +60,17 @@ public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiLi
     public final void checkGuideLayerAndTouchBlock(int i) {
         boolean z = false;
         if (!this.mHideAuthenticationGuide) {
-            String stringForUser = Settings.Secure.getStringForUser(this.mContext.getContentResolver(), DB_UDFPS_HIDE_AUTH_GUIDE_LAYER_PACKAGES, 0);
+            String stringForUser =
+                    Settings.Secure.getStringForUser(
+                            this.mContext.getContentResolver(),
+                            DB_UDFPS_HIDE_AUTH_GUIDE_LAYER_PACKAGES,
+                            0);
             String[] split = !TextUtils.isEmpty(stringForUser) ? stringForUser.split(";") : null;
             if (split == null || split.length < 1) {
-                split = this.mContext.getResources().getStringArray(R.array.config_protectedNetworks);
+                split =
+                        this.mContext
+                                .getResources()
+                                .getStringArray(R.array.config_protectedNetworks);
             }
             if (split != null) {
                 int length = split.length;
@@ -71,7 +79,9 @@ public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiLi
                     if (i2 < length) {
                         String str = split[i2];
                         if (str != null && str.contentEquals(this.mPackageName)) {
-                            Slog.i("Biometrics/SemUdfpsSysUiImpl", "ClientExtImpl: specific allowlist attr");
+                            Slog.i(
+                                    "Biometrics/SemUdfpsSysUiImpl",
+                                    "ClientExtImpl: specific allowlist attr");
                             this.mHideAuthenticationGuide = true;
                             break;
                         }
@@ -102,7 +112,9 @@ public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiLi
             if (this.mIsBiometricPrompt) {
                 SemBiometricSysUiManager semBiometricSysUiManager = this.mSysUiManager;
                 semBiometricSysUiManager.getClass();
-                semBiometricSysUiManager.handleRequest(new SemBiometricSysUiManager$$ExternalSyntheticLambda6(semBiometricSysUiManager, 202, i2, (Bundle) null));
+                semBiometricSysUiManager.handleRequest(
+                        new SemBiometricSysUiManager$$ExternalSyntheticLambda6(
+                                semBiometricSysUiManager, 202, i2, (Bundle) null));
             } else {
                 this.mSysUiManager.sendCommand(null, this.mSysUiSessionId, 202, i2);
             }
@@ -126,7 +138,9 @@ public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiLi
             SemBiometricSysUiManager semBiometricSysUiManager = this.mSysUiManager;
             int i = this.mSysUiSessionId;
             semBiometricSysUiManager.getClass();
-            semBiometricSysUiManager.handleRequest(new SemBiometricSysUiManager$$ExternalSyntheticLambda10(semBiometricSysUiManager, i, 2, z, null));
+            semBiometricSysUiManager.handleRequest(
+                    new SemBiometricSysUiManager$$ExternalSyntheticLambda10(
+                            semBiometricSysUiManager, i, 2, z, null));
             setTspModeControl();
             return;
         }
@@ -166,31 +180,39 @@ public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiLi
 
     @Override // com.android.server.biometrics.SemBiometricSysUiManager.SysUiListener
     public final void onDismissed(int i, byte[] bArr) {
-        getHandler().post(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                SemUdfpsSysUiImpl.SysUiCallback sysUiCallback = SemUdfpsSysUiImpl.this.mSysUiCallback;
-                if (sysUiCallback != null) {
-                    sysUiCallback.onSysUiDismissed();
-                }
-            }
-        });
+        getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemUdfpsSysUiImpl.SysUiCallback sysUiCallback =
+                                        SemUdfpsSysUiImpl.this.mSysUiCallback;
+                                if (sysUiCallback != null) {
+                                    sysUiCallback.onSysUiDismissed();
+                                }
+                            }
+                        });
     }
 
     @Override // com.android.server.biometrics.SemBiometricSysUiManager.SysUiListener
     public final void onError(final int i, final int i2) {
-        getHandler().post(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SemUdfpsSysUiImpl semUdfpsSysUiImpl = SemUdfpsSysUiImpl.this;
-                int i3 = i;
-                int i4 = i2;
-                SemUdfpsSysUiImpl.SysUiCallback sysUiCallback = semUdfpsSysUiImpl.mSysUiCallback;
-                if (sysUiCallback != null) {
-                    sysUiCallback.onSysUiError(i3, i4);
-                }
-            }
-        });
+        getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemUdfpsSysUiImpl semUdfpsSysUiImpl = SemUdfpsSysUiImpl.this;
+                                int i3 = i;
+                                int i4 = i2;
+                                SemUdfpsSysUiImpl.SysUiCallback sysUiCallback =
+                                        semUdfpsSysUiImpl.mSysUiCallback;
+                                if (sysUiCallback != null) {
+                                    sysUiCallback.onSysUiError(i3, i4);
+                                }
+                            }
+                        });
     }
 
     public final void setSysUiListener(SysUiCallback sysUiCallback) {
@@ -237,7 +259,17 @@ public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiLi
             boolean z = this.mIsRequireTouchBlock;
             int i3 = this.mUserId;
             semBiometricSysUiManager.getClass();
-            semBiometricSysUiManager.handleRequest(new SemBiometricSysUiManager$$ExternalSyntheticLambda5(semBiometricSysUiManager, i, i2, z, i3, this.mPackageName, 0L, bundle, null));
+            semBiometricSysUiManager.handleRequest(
+                    new SemBiometricSysUiManager$$ExternalSyntheticLambda5(
+                            semBiometricSysUiManager,
+                            i,
+                            i2,
+                            z,
+                            i3,
+                            this.mPackageName,
+                            0L,
+                            bundle,
+                            null));
         }
         this.mUdfpsTspManager.enable(this.mHashCode);
     }
@@ -247,10 +279,13 @@ public final class SemUdfpsSysUiImpl implements SemBiometricSysUiManager.SysUiLi
             SemBiometricSysUiManager semBiometricSysUiManager = this.mSysUiManager;
             int i = this.mSysUiSessionId;
             semBiometricSysUiManager.getClass();
-            semBiometricSysUiManager.handleRequest(new SemBiometricSysUiManager$$ExternalSyntheticLambda8(semBiometricSysUiManager, i));
+            semBiometricSysUiManager.handleRequest(
+                    new SemBiometricSysUiManager$$ExternalSyntheticLambda8(
+                            semBiometricSysUiManager, i));
         }
         this.mUdfpsTspManager.disable(this.mHashCode);
-        if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL && SemBiometricFeature.FP_FEATURE_HW_LIGHT_SOURCE) {
+        if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL
+                && SemBiometricFeature.FP_FEATURE_HW_LIGHT_SOURCE) {
             boolean z = SemUdfpsHelper.DEBUG;
             SemUdfpsHelper.InstanceHolder.INSTANCE.mOpticalImpl.setHwLightMode("0");
         }

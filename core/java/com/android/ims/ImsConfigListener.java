@@ -18,20 +18,18 @@ public interface ImsConfigListener extends IInterface {
 
     public static class Default implements ImsConfigListener {
         @Override // com.android.ims.ImsConfigListener
-        public void onGetFeatureResponse(int feature, int network, int value, int status) throws RemoteException {
-        }
+        public void onGetFeatureResponse(int feature, int network, int value, int status)
+                throws RemoteException {}
 
         @Override // com.android.ims.ImsConfigListener
-        public void onSetFeatureResponse(int feature, int network, int value, int status) throws RemoteException {
-        }
+        public void onSetFeatureResponse(int feature, int network, int value, int status)
+                throws RemoteException {}
 
         @Override // com.android.ims.ImsConfigListener
-        public void onGetVideoQuality(int status, int quality) throws RemoteException {
-        }
+        public void onGetVideoQuality(int status, int quality) throws RemoteException {}
 
         @Override // com.android.ims.ImsConfigListener
-        public void onSetVideoQuality(int status) throws RemoteException {
-        }
+        public void onSetVideoQuality(int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -39,7 +37,7 @@ public interface ImsConfigListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ImsConfigListener {
+    public abstract static class Stub extends Binder implements ImsConfigListener {
         public static final String DESCRIPTOR = "com.android.ims.ImsConfigListener";
         static final int TRANSACTION_onGetFeatureResponse = 1;
         static final int TRANSACTION_onGetVideoQuality = 3;
@@ -87,7 +85,8 @@ public interface ImsConfigListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -145,7 +144,8 @@ public interface ImsConfigListener extends IInterface {
             }
 
             @Override // com.android.ims.ImsConfigListener
-            public void onGetFeatureResponse(int feature, int network, int value, int status) throws RemoteException {
+            public void onGetFeatureResponse(int feature, int network, int value, int status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -160,7 +160,8 @@ public interface ImsConfigListener extends IInterface {
             }
 
             @Override // com.android.ims.ImsConfigListener
-            public void onSetFeatureResponse(int feature, int network, int value, int status) throws RemoteException {
+            public void onSetFeatureResponse(int feature, int network, int value, int status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

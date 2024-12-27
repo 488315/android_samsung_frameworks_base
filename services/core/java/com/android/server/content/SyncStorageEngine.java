@@ -32,6 +32,7 @@ import android.util.SparseArray;
 import android.util.Xml;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.IntPair;
 import com.android.modules.utils.TypedXmlPullParser;
@@ -42,8 +43,11 @@ import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupManagerConstants;
-import com.android.server.content.SyncManager;
+
 import com.samsung.android.knox.SemPersonaManager;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,7 +58,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -136,10 +139,15 @@ public final class SyncStorageEngine {
             this.syncable = -1;
             this.backoffTime = -1L;
             this.backoffDelay = -1L;
-            SyncManager.AnonymousClass7 anonymousClass7 = SyncStorageEngine.mPeriodicSyncAddedListener;
+            SyncManager.AnonymousClass7 anonymousClass7 =
+                    SyncStorageEngine.mPeriodicSyncAddedListener;
             if (anonymousClass7 != null) {
                 Bundle bundle = new Bundle();
-                SyncManager.this.updateOrAddPeriodicSync(endPoint, 86400L, SyncStorageEngine.calculateDefaultFlexTime(86400L), bundle);
+                SyncManager.this.updateOrAddPeriodicSync(
+                        endPoint,
+                        86400L,
+                        SyncStorageEngine.calculateDefaultFlexTime(86400L),
+                        bundle);
             }
         }
 
@@ -159,7 +167,15 @@ public final class SyncStorageEngine {
         }
 
         public final String toString() {
-            return this.target + ", enabled=" + this.enabled + ", syncable=" + this.syncable + ", backoff=" + this.backoffTime + ", delay=" + this.delayUntil;
+            return this.target
+                    + ", enabled="
+                    + this.enabled
+                    + ", syncable="
+                    + this.syncable
+                    + ", backoff="
+                    + this.backoffTime
+                    + ", delay="
+                    + this.delayUntil;
         }
     }
 
@@ -178,7 +194,8 @@ public final class SyncStorageEngine {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EndPoint {
-        public static final EndPoint USER_ALL_PROVIDER_ALL_ACCOUNTS_ALL = new EndPoint(null, null, -1);
+        public static final EndPoint USER_ALL_PROVIDER_ALL_ACCOUNTS_ALL =
+                new EndPoint(null, null, -1);
         public final Account account;
         public final String provider;
         public final int userId;
@@ -276,21 +293,21 @@ public final class SyncStorageEngine {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:182:0x02dc, code lost:
-    
-        if (r10 == null) goto L132;
-     */
+
+       if (r10 == null) goto L132;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:183:0x02de, code lost:
-    
-        r10.close();
-     */
+
+       r10.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:189:0x02f0, code lost:
-    
-        if (r10 == null) goto L132;
-     */
+
+       if (r10 == null) goto L132;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0333, code lost:
-    
-        android.util.Slog.w("SyncManager", "Unknown stats token: " + r4);
-     */
+
+       android.util.Slog.w("SyncManager", "Unknown stats token: " + r4);
+    */
     /* JADX WARN: Removed duplicated region for block: B:180:0x02c9 A[Catch: all -> 0x02cd, TRY_ENTER, TryCatch #16 {all -> 0x02cd, blocks: (B:180:0x02c9, B:184:0x02d0, B:187:0x02e4), top: B:5:0x00e9 }] */
     /* JADX WARN: Removed duplicated region for block: B:184:0x02d0 A[Catch: all -> 0x02cd, TRY_LEAVE, TryCatch #16 {all -> 0x02cd, blocks: (B:180:0x02c9, B:184:0x02d0, B:187:0x02e4), top: B:5:0x00e9 }] */
     /* JADX WARN: Removed duplicated region for block: B:195:0x0448 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -306,7 +323,10 @@ public final class SyncStorageEngine {
             Method dump skipped, instructions count: 1100
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.content.SyncStorageEngine.<init>(android.content.Context, java.io.File, android.os.Looper):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.content.SyncStorageEngine.<init>(android.content.Context,"
+                    + " java.io.File, android.os.Looper):void");
     }
 
     public static long calculateDefaultFlexTime(long j) {
@@ -324,26 +344,43 @@ public final class SyncStorageEngine {
         String attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "type");
         try {
             if ("long".equals(attributeValue2)) {
-                bundle.putLong(attributeValue, typedXmlPullParser.getAttributeLong((String) null, "value1"));
+                bundle.putLong(
+                        attributeValue,
+                        typedXmlPullParser.getAttributeLong((String) null, "value1"));
             } else if ("integer".equals(attributeValue2)) {
-                bundle.putInt(attributeValue, typedXmlPullParser.getAttributeInt((String) null, "value1"));
+                bundle.putInt(
+                        attributeValue,
+                        typedXmlPullParser.getAttributeInt((String) null, "value1"));
             } else if ("double".equals(attributeValue2)) {
-                bundle.putDouble(attributeValue, typedXmlPullParser.getAttributeDouble((String) null, "value1"));
+                bundle.putDouble(
+                        attributeValue,
+                        typedXmlPullParser.getAttributeDouble((String) null, "value1"));
             } else if ("float".equals(attributeValue2)) {
-                bundle.putFloat(attributeValue, typedXmlPullParser.getAttributeFloat((String) null, "value1"));
+                bundle.putFloat(
+                        attributeValue,
+                        typedXmlPullParser.getAttributeFloat((String) null, "value1"));
             } else if ("boolean".equals(attributeValue2)) {
-                bundle.putBoolean(attributeValue, typedXmlPullParser.getAttributeBoolean((String) null, "value1"));
+                bundle.putBoolean(
+                        attributeValue,
+                        typedXmlPullParser.getAttributeBoolean((String) null, "value1"));
             } else if ("string".equals(attributeValue2)) {
-                bundle.putString(attributeValue, typedXmlPullParser.getAttributeValue((String) null, "value1"));
+                bundle.putString(
+                        attributeValue,
+                        typedXmlPullParser.getAttributeValue((String) null, "value1"));
             } else if ("account".equals(attributeValue2)) {
-                bundle.putParcelable(attributeValue, new Account(typedXmlPullParser.getAttributeValue((String) null, "value1"), typedXmlPullParser.getAttributeValue((String) null, "value2")));
+                bundle.putParcelable(
+                        attributeValue,
+                        new Account(
+                                typedXmlPullParser.getAttributeValue((String) null, "value1"),
+                                typedXmlPullParser.getAttributeValue((String) null, "value2")));
             }
         } catch (XmlPullParserException e) {
             Slog.e("SyncManager", "error parsing bundle value", e);
         }
     }
 
-    public static PeriodicSync parsePeriodicSync(TypedXmlPullParser typedXmlPullParser, AuthorityInfo authorityInfo) {
+    public static PeriodicSync parsePeriodicSync(
+            TypedXmlPullParser typedXmlPullParser, AuthorityInfo authorityInfo) {
         long j;
         Bundle bundle = new Bundle();
         try {
@@ -352,11 +389,16 @@ public final class SyncStorageEngine {
                 j = typedXmlPullParser.getAttributeLong((String) null, "flex");
             } catch (XmlPullParserException e) {
                 long calculateDefaultFlexTime = calculateDefaultFlexTime(attributeLong);
-                Slog.e("SyncManager", "Error formatting value parsed for periodic sync flex, using default: " + calculateDefaultFlexTime, e);
+                Slog.e(
+                        "SyncManager",
+                        "Error formatting value parsed for periodic sync flex, using default: "
+                                + calculateDefaultFlexTime,
+                        e);
                 j = calculateDefaultFlexTime;
             }
             EndPoint endPoint = authorityInfo.target;
-            PeriodicSync periodicSync = new PeriodicSync(endPoint.account, endPoint.provider, bundle, attributeLong, j);
+            PeriodicSync periodicSync =
+                    new PeriodicSync(endPoint.account, endPoint.provider, bundle, attributeLong, j);
             authorityInfo.periodicSyncs.add(periodicSync);
             return periodicSync;
         } catch (XmlPullParserException e2) {
@@ -366,14 +408,15 @@ public final class SyncStorageEngine {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:35:0x0080, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void readSyncStatusStatsLocked(android.util.proto.ProtoInputStream r2, android.content.SyncStatusInfo.Stats r3) {
+    public static void readSyncStatusStatsLocked(
+            android.util.proto.ProtoInputStream r2, android.content.SyncStatusInfo.Stats r3) {
         /*
         L0:
             int r0 = r2.nextField()
@@ -447,10 +490,14 @@ public final class SyncStorageEngine {
         L80:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.content.SyncStorageEngine.readSyncStatusStatsLocked(android.util.proto.ProtoInputStream, android.content.SyncStatusInfo$Stats):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.content.SyncStorageEngine.readSyncStatusStatsLocked(android.util.proto.ProtoInputStream,"
+                    + " android.content.SyncStatusInfo$Stats):void");
     }
 
-    public static void writeStatusStatsLocked(ProtoOutputStream protoOutputStream, SyncStatusInfo.Stats stats) {
+    public static void writeStatusStatsLocked(
+            ProtoOutputStream protoOutputStream, SyncStatusInfo.Stats stats) {
         protoOutputStream.write(1112396529665L, stats.totalElapsedTime);
         protoOutputStream.write(1120986464258L, stats.numSyncs);
         protoOutputStream.write(1120986464259L, stats.numFailures);
@@ -499,7 +546,9 @@ public final class SyncStorageEngine {
                 if (authorityLocked == null) {
                     return null;
                 }
-                return Pair.create(Long.valueOf(authorityLocked.backoffTime), Long.valueOf(authorityLocked.backoffDelay));
+                return Pair.create(
+                        Long.valueOf(authorityLocked.backoffTime),
+                        Long.valueOf(authorityLocked.backoffDelay));
             } catch (Throwable th) {
                 throw th;
             }
@@ -513,7 +562,11 @@ public final class SyncStorageEngine {
             this.mYear = this.mCal.get(1);
             this.mCal.clear();
             this.mCal.set(1, this.mYear);
-            this.mYearInDays = (int) (this.mCal.getTimeInMillis() / BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
+            this.mYearInDays =
+                    (int)
+                            (this.mCal.getTimeInMillis()
+                                    / BackupManagerConstants
+                                            .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
         }
         return i + this.mYearInDays;
     }
@@ -529,7 +582,13 @@ public final class SyncStorageEngine {
                 }
                 arrayList = new ArrayList();
                 for (SyncInfo syncInfo : arrayList2) {
-                    arrayList.add(!z ? SyncInfo.createAccountRedacted(syncInfo.authorityId, syncInfo.authority, syncInfo.startTime) : new SyncInfo(syncInfo));
+                    arrayList.add(
+                            !z
+                                    ? SyncInfo.createAccountRedacted(
+                                            syncInfo.authorityId,
+                                            syncInfo.authority,
+                                            syncInfo.startTime)
+                                    : new SyncInfo(syncInfo));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -614,7 +673,8 @@ public final class SyncStorageEngine {
                 int size = this.mSyncStatus.size();
                 for (int i = 0; i < size; i++) {
                     SyncStatusInfo syncStatusInfo = (SyncStatusInfo) this.mSyncStatus.valueAt(i);
-                    AuthorityInfo authorityInfo = (AuthorityInfo) this.mAuthorities.get(syncStatusInfo.authorityId);
+                    AuthorityInfo authorityInfo =
+                            (AuthorityInfo) this.mAuthorities.get(syncStatusInfo.authorityId);
                     if (authorityInfo != null && authorityInfo.target.matchesSpec(endPoint)) {
                         return syncStatusInfo;
                     }
@@ -627,14 +687,15 @@ public final class SyncStorageEngine {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0042, code lost:
-    
-        r6 = true;
-     */
+
+       r6 = true;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean getSyncAutomatically(android.accounts.Account r9, java.lang.String r10, int r11) {
+    public final boolean getSyncAutomatically(
+            android.accounts.Account r9, java.lang.String r10, int r11) {
         /*
             r8 = this;
             android.util.SparseArray r0 = r8.mAuthorities
@@ -702,7 +763,10 @@ public final class SyncStorageEngine {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L1b
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.content.SyncStorageEngine.getSyncAutomatically(android.accounts.Account, java.lang.String, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.content.SyncStorageEngine.getSyncAutomatically(android.accounts.Account,"
+                    + " java.lang.String, int):boolean");
     }
 
     public final boolean isSyncActive(EndPoint endPoint) {
@@ -737,8 +801,11 @@ public final class SyncStorageEngine {
                 int size = this.mSyncStatus.size();
                 for (int i = 0; i < size; i++) {
                     SyncStatusInfo syncStatusInfo = (SyncStatusInfo) this.mSyncStatus.valueAt(i);
-                    AuthorityInfo authorityInfo = (AuthorityInfo) this.mAuthorities.get(syncStatusInfo.authorityId);
-                    if (authorityInfo != null && authorityInfo.target.matchesSpec(endPoint) && syncStatusInfo.pending) {
+                    AuthorityInfo authorityInfo =
+                            (AuthorityInfo) this.mAuthorities.get(syncStatusInfo.authorityId);
+                    if (authorityInfo != null
+                            && authorityInfo.target.matchesSpec(endPoint)
+                            && syncStatusInfo.pending) {
                         return true;
                     }
                 }
@@ -751,12 +818,17 @@ public final class SyncStorageEngine {
 
     public final void markPending(EndPoint endPoint, boolean z) {
         synchronized (this.mAuthorities) {
-            getOrCreateSyncStatusLocked(getOrCreateAuthorityLocked(endPoint, -1, true).ident).pending = z;
+            getOrCreateSyncStatusLocked(getOrCreateAuthorityLocked(endPoint, -1, true).ident)
+                            .pending =
+                    z;
         }
         reportChange(2, endPoint);
     }
 
-    public final AuthorityInfo parseAuthority(TypedXmlPullParser typedXmlPullParser, int i, AccountAuthorityValidator accountAuthorityValidator) {
+    public final AuthorityInfo parseAuthority(
+            TypedXmlPullParser typedXmlPullParser,
+            int i,
+            AccountAuthorityValidator accountAuthorityValidator) {
         int i2;
         int i3;
         String str;
@@ -769,9 +841,12 @@ public final class SyncStorageEngine {
             i2 = -1;
         }
         if (i2 >= 0) {
-            String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "authority");
-            boolean attributeBoolean = typedXmlPullParser.getAttributeBoolean((String) null, "enabled", true);
-            String attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "syncable");
+            String attributeValue =
+                    typedXmlPullParser.getAttributeValue((String) null, "authority");
+            boolean attributeBoolean =
+                    typedXmlPullParser.getAttributeBoolean((String) null, "enabled", true);
+            String attributeValue2 =
+                    typedXmlPullParser.getAttributeValue((String) null, "syncable");
             String attributeValue3 = typedXmlPullParser.getAttributeValue((String) null, "account");
             String attributeValue4 = typedXmlPullParser.getAttributeValue((String) null, "type");
             int attributeInt = typedXmlPullParser.getAttributeInt((String) null, "user", 0);
@@ -785,9 +860,17 @@ public final class SyncStorageEngine {
             if (Log.isLoggable("SyncManagerFile", 2)) {
                 str = "SyncManager";
                 i3 = i2;
-                StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("Adding authority: account=", attributeValue3, " accountType=", attributeValue4, " auth=");
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, attributeValue, " package=", attributeValue5, " class=");
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(attributeInt, attributeValue6, " user=", " enabled=", m);
+                StringBuilder m =
+                        InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                "Adding authority: account=",
+                                attributeValue3,
+                                " accountType=",
+                                attributeValue4,
+                                " auth=");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        m, attributeValue, " package=", attributeValue5, " class=");
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        attributeInt, attributeValue6, " user=", " enabled=", m);
                 m.append(attributeBoolean);
                 m.append(" syncable=");
                 m.append(attributeValue2);
@@ -803,29 +886,54 @@ public final class SyncStorageEngine {
                 if (attributeValue3 != null && attributeValue != null) {
                     Account account = new Account(attributeValue3, attributeValue4);
                     EndPoint endPoint = new EndPoint(account, attributeValue, attributeInt);
-                    Account[] accountArr = (Account[]) accountAuthorityValidator.mAccountsCache.get(attributeInt);
+                    Account[] accountArr =
+                            (Account[]) accountAuthorityValidator.mAccountsCache.get(attributeInt);
                     if (accountArr == null) {
-                        accountArr = accountAuthorityValidator.mAccountManager.getAccountsAsUser(attributeInt);
+                        accountArr =
+                                accountAuthorityValidator.mAccountManager.getAccountsAsUser(
+                                        attributeInt);
                         accountAuthorityValidator.mAccountsCache.put(attributeInt, accountArr);
                     }
                     if (ArrayUtils.contains(accountArr, account)) {
-                        ArrayMap arrayMap = (ArrayMap) accountAuthorityValidator.mProvidersPerUserCache.get(attributeInt);
+                        ArrayMap arrayMap =
+                                (ArrayMap)
+                                        accountAuthorityValidator.mProvidersPerUserCache.get(
+                                                attributeInt);
                         if (arrayMap == null) {
                             arrayMap = new ArrayMap();
-                            accountAuthorityValidator.mProvidersPerUserCache.put(attributeInt, arrayMap);
+                            accountAuthorityValidator.mProvidersPerUserCache.put(
+                                    attributeInt, arrayMap);
                         }
                         if (!arrayMap.containsKey(attributeValue)) {
-                            arrayMap.put(attributeValue, Boolean.valueOf(accountAuthorityValidator.mPackageManager.resolveContentProviderAsUser(attributeValue, 786432, attributeInt) != null));
+                            arrayMap.put(
+                                    attributeValue,
+                                    Boolean.valueOf(
+                                            accountAuthorityValidator.mPackageManager
+                                                            .resolveContentProviderAsUser(
+                                                                    attributeValue,
+                                                                    786432,
+                                                                    attributeInt)
+                                                    != null));
                         }
                         if (((Boolean) arrayMap.get(attributeValue)).booleanValue()) {
-                            AuthorityInfo orCreateAuthorityLocked = getOrCreateAuthorityLocked(endPoint, i3, false);
+                            AuthorityInfo orCreateAuthorityLocked =
+                                    getOrCreateAuthorityLocked(endPoint, i3, false);
                             if (i > 0) {
                                 orCreateAuthorityLocked.periodicSyncs.clear();
                             }
                             authorityInfo = orCreateAuthorityLocked;
                         }
                     }
-                    EventLog.writeEvent(1397638484, "35028827", -1, "account:" + account + " provider:" + attributeValue + " user:" + attributeInt);
+                    EventLog.writeEvent(
+                            1397638484,
+                            "35028827",
+                            -1,
+                            "account:"
+                                    + account
+                                    + " provider:"
+                                    + attributeValue
+                                    + " user:"
+                                    + attributeInt);
                 }
             }
             if (authorityInfo != null) {
@@ -864,7 +972,10 @@ public final class SyncStorageEngine {
             Slog.e("SyncManager", "error parsing the user for listen-for-tickles", e);
             i = 0;
         }
-        this.mMasterSyncAutomatically.put(i, Boolean.valueOf(typedXmlPullParser.getAttributeBoolean((String) null, "enabled", true)));
+        this.mMasterSyncAutomatically.put(
+                i,
+                Boolean.valueOf(
+                        typedXmlPullParser.getAttributeBoolean((String) null, "enabled", true)));
     }
 
     public final void readDayStatsLocked(InputStream inputStream) {
@@ -877,14 +988,20 @@ public final class SyncStorageEngine {
             }
             if (nextField == 1) {
                 long start = protoInputStream.start(2246267895809L);
-                DayStats dayStats = protoInputStream.nextField(1120986464257L) ? new DayStats(protoInputStream.readInt(1120986464257L)) : new DayStats(0);
+                DayStats dayStats =
+                        protoInputStream.nextField(1120986464257L)
+                                ? new DayStats(protoInputStream.readInt(1120986464257L))
+                                : new DayStats(0);
                 while (true) {
                     int nextField2 = protoInputStream.nextField();
                     if (nextField2 == -1) {
                         break;
                     }
                     if (nextField2 == 1) {
-                        Slog.w("SyncManager", "Failed to read the day via fast-path; some data might not have been read.");
+                        Slog.w(
+                                "SyncManager",
+                                "Failed to read the day via fast-path; some data might not have"
+                                    + " been read.");
                         DayStats dayStats2 = new DayStats(protoInputStream.readInt(1120986464257L));
                         dayStats2.successCount = dayStats.successCount;
                         dayStats2.successTime = dayStats.successTime;
@@ -924,7 +1041,10 @@ public final class SyncStorageEngine {
             int i2 = 1;
             if (nextField == 1) {
                 long start = protoInputStream.start(2246267895809L);
-                SyncStatusInfo syncStatusInfo = protoInputStream.nextField(1120986464258L) ? new SyncStatusInfo(protoInputStream.readInt(1120986464258L)) : new SyncStatusInfo(0);
+                SyncStatusInfo syncStatusInfo =
+                        protoInputStream.nextField(1120986464258L)
+                                ? new SyncStatusInfo(protoInputStream.readInt(1120986464258L))
+                                : new SyncStatusInfo(0);
                 ArrayList arrayList = new ArrayList();
                 int i3 = 0;
                 int i4 = 0;
@@ -933,35 +1053,50 @@ public final class SyncStorageEngine {
                     if (nextField2 != i) {
                         switch (nextField2) {
                             case 2:
-                                Slog.w("SyncManager", "Failed to read the authority id via fast-path; some data might not have been read.");
-                                syncStatusInfo = new SyncStatusInfo(protoInputStream.readInt(1120986464258L), syncStatusInfo);
+                                Slog.w(
+                                        "SyncManager",
+                                        "Failed to read the authority id via fast-path; some data"
+                                            + " might not have been read.");
+                                syncStatusInfo =
+                                        new SyncStatusInfo(
+                                                protoInputStream.readInt(1120986464258L),
+                                                syncStatusInfo);
                                 break;
                             case 3:
-                                syncStatusInfo.lastSuccessTime = protoInputStream.readLong(1112396529667L);
+                                syncStatusInfo.lastSuccessTime =
+                                        protoInputStream.readLong(1112396529667L);
                                 break;
                             case 4:
-                                syncStatusInfo.lastSuccessSource = protoInputStream.readInt(1120986464260L);
+                                syncStatusInfo.lastSuccessSource =
+                                        protoInputStream.readInt(1120986464260L);
                                 break;
                             case 5:
-                                syncStatusInfo.lastFailureTime = protoInputStream.readLong(1112396529669L);
+                                syncStatusInfo.lastFailureTime =
+                                        protoInputStream.readLong(1112396529669L);
                                 break;
                             case 6:
-                                syncStatusInfo.lastFailureSource = protoInputStream.readInt(1120986464262L);
+                                syncStatusInfo.lastFailureSource =
+                                        protoInputStream.readInt(1120986464262L);
                                 break;
                             case 7:
-                                syncStatusInfo.lastFailureMesg = protoInputStream.readString(1138166333447L);
+                                syncStatusInfo.lastFailureMesg =
+                                        protoInputStream.readString(1138166333447L);
                                 break;
                             case 8:
-                                syncStatusInfo.initialFailureTime = protoInputStream.readLong(1112396529672L);
+                                syncStatusInfo.initialFailureTime =
+                                        protoInputStream.readLong(1112396529672L);
                                 break;
                             case 9:
-                                syncStatusInfo.pending = protoInputStream.readBoolean(1133871366153L);
+                                syncStatusInfo.pending =
+                                        protoInputStream.readBoolean(1133871366153L);
                                 break;
                             case 10:
-                                syncStatusInfo.initialize = protoInputStream.readBoolean(1133871366154L);
+                                syncStatusInfo.initialize =
+                                        protoInputStream.readBoolean(1133871366154L);
                                 break;
                             case 11:
-                                syncStatusInfo.addPeriodicSyncTime(protoInputStream.readLong(2211908157451L));
+                                syncStatusInfo.addPeriodicSyncTime(
+                                        protoInputStream.readLong(2211908157451L));
                                 break;
                             case 12:
                                 long start2 = protoInputStream.start(2246267895820L);
@@ -970,7 +1105,8 @@ public final class SyncStorageEngine {
                                 while (true) {
                                     int nextField3 = protoInputStream.nextField();
                                     if (nextField3 == i) {
-                                        Pair pair = str == null ? null : new Pair(Long.valueOf(j), str);
+                                        Pair pair =
+                                                str == null ? null : new Pair(Long.valueOf(j), str);
                                         if (pair != null) {
                                             arrayList.add(pair);
                                         }
@@ -987,28 +1123,35 @@ public final class SyncStorageEngine {
                                     }
                                 }
                             case 13:
-                                syncStatusInfo.lastTodayResetTime = protoInputStream.readLong(1112396529677L);
+                                syncStatusInfo.lastTodayResetTime =
+                                        protoInputStream.readLong(1112396529677L);
                                 break;
                             case 14:
                                 long start3 = protoInputStream.start(1146756268046L);
-                                readSyncStatusStatsLocked(protoInputStream, syncStatusInfo.totalStats);
+                                readSyncStatusStatsLocked(
+                                        protoInputStream, syncStatusInfo.totalStats);
                                 protoInputStream.end(start3);
                                 break;
                             case 15:
                                 long start4 = protoInputStream.start(1146756268047L);
-                                readSyncStatusStatsLocked(protoInputStream, syncStatusInfo.todayStats);
+                                readSyncStatusStatsLocked(
+                                        protoInputStream, syncStatusInfo.todayStats);
                                 protoInputStream.end(start4);
                                 break;
                             case 16:
                                 long start5 = protoInputStream.start(1146756268048L);
-                                readSyncStatusStatsLocked(protoInputStream, syncStatusInfo.yesterdayStats);
+                                readSyncStatusStatsLocked(
+                                        protoInputStream, syncStatusInfo.yesterdayStats);
                                 protoInputStream.end(start5);
                                 break;
                             case 17:
                                 long readLong = protoInputStream.readLong(2211908157457L);
                                 long[] jArr = syncStatusInfo.perSourceLastSuccessTimes;
                                 if (i3 == jArr.length) {
-                                    Slog.w("SyncManager", "Attempted to read more per source last success times than expected; data might be corrupted.");
+                                    Slog.w(
+                                            "SyncManager",
+                                            "Attempted to read more per source last success times"
+                                                + " than expected; data might be corrupted.");
                                 } else {
                                     jArr[i3] = readLong;
                                     i3++;
@@ -1018,7 +1161,10 @@ public final class SyncStorageEngine {
                                 long readLong2 = protoInputStream.readLong(2211908157458L);
                                 long[] jArr2 = syncStatusInfo.perSourceLastFailureTimes;
                                 if (i4 == jArr2.length) {
-                                    Slog.w("SyncManager", "Attempted to read more per source last failure times than expected; data might be corrupted.");
+                                    Slog.w(
+                                            "SyncManager",
+                                            "Attempted to read more per source last failure times"
+                                                + " than expected; data might be corrupted.");
                                 } else {
                                     jArr2[i4] = readLong2;
                                     i4++;
@@ -1045,9 +1191,9 @@ public final class SyncStorageEngine {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0059, code lost:
-    
-        android.util.Slog.w("SyncManager", "Unknown status token: " + r1);
-     */
+
+       android.util.Slog.w("SyncManager", "Unknown status token: " + r1);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1146,13 +1292,16 @@ public final class SyncStorageEngine {
         Lb2:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.content.SyncStorageEngine.readStatusLocked():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.content.SyncStorageEngine.readStatusLocked():void");
     }
 
     public final void removeAuthorityLocked(Account account, String str, int i, boolean z) {
         AuthorityInfo authorityInfo;
         AccountInfo accountInfo = (AccountInfo) this.mAccounts.get(new AccountAndUser(account, i));
-        if (accountInfo == null || (authorityInfo = (AuthorityInfo) accountInfo.authorities.remove(str)) == null) {
+        if (accountInfo == null
+                || (authorityInfo = (AuthorityInfo) accountInfo.authorities.remove(str)) == null) {
             return;
         }
         SyncManager.AnonymousClass7 anonymousClass7 = this.mAuthorityRemovedListener;
@@ -1176,7 +1325,9 @@ public final class SyncStorageEngine {
                 while (it.hasNext()) {
                     AccountInfo accountInfo = (AccountInfo) it.next();
                     AccountAndUser accountAndUser = accountInfo.accountAndUser;
-                    if (accountAndUser.userId == i && (accountArr == null || !ArrayUtils.contains(accountArr, accountAndUser.account))) {
+                    if (accountAndUser.userId == i
+                            && (accountArr == null
+                                    || !ArrayUtils.contains(accountArr, accountAndUser.account))) {
                         if (Log.isLoggable("SyncManager", 2)) {
                             Slog.v("SyncManager", "Account removed: " + accountInfo.accountAndUser);
                         }
@@ -1192,7 +1343,8 @@ public final class SyncStorageEngine {
                         size--;
                         int keyAt = sparseArray.keyAt(size);
                         AuthorityInfo authorityInfo2 = (AuthorityInfo) sparseArray.valueAt(size);
-                        SyncManager.AnonymousClass7 anonymousClass7 = this.mAuthorityRemovedListener;
+                        SyncManager.AnonymousClass7 anonymousClass7 =
+                                this.mAuthorityRemovedListener;
                         if (anonymousClass7 != null) {
                             anonymousClass7.onAuthorityRemoved(authorityInfo2.target);
                         }
@@ -1208,7 +1360,8 @@ public final class SyncStorageEngine {
                         int size3 = this.mSyncHistory.size();
                         while (size3 > 0) {
                             size3--;
-                            if (((SyncHistoryItem) this.mSyncHistory.get(size3)).authorityId == keyAt) {
+                            if (((SyncHistoryItem) this.mSyncHistory.get(size3)).authorityId
+                                    == keyAt) {
                                 this.mSyncHistory.remove(size3);
                             }
                         }
@@ -1231,10 +1384,16 @@ public final class SyncStorageEngine {
                 arrayList = null;
                 while (beginBroadcast > 0) {
                     beginBroadcast--;
-                    long longValue = ((Long) this.mChangeListeners.getBroadcastCookie(beginBroadcast)).longValue();
+                    long longValue =
+                            ((Long) this.mChangeListeners.getBroadcastCookie(beginBroadcast))
+                                    .longValue();
                     int first = IntPair.first(longValue);
                     int userId = UserHandle.getUserId(first);
-                    if ((IntPair.second(longValue) & i) != 0 && i2 == userId && (str == null || !this.mPackageManagerInternal.filterAppAccess(first, i2, str, true))) {
+                    if ((IntPair.second(longValue) & i) != 0
+                            && i2 == userId
+                            && (str == null
+                                    || !this.mPackageManagerInternal.filterAppAccess(
+                                            first, i2, str, true))) {
                         if (arrayList == null) {
                             arrayList = new ArrayList(beginBroadcast);
                         }
@@ -1265,7 +1424,12 @@ public final class SyncStorageEngine {
         String str;
         Account account = endPoint.account;
         int i2 = endPoint.userId;
-        reportChange(i, i2, (account == null || (str = endPoint.provider) == null) ? null : ContentResolver.getSyncAdapterPackageAsUser(account.type, str, i2));
+        reportChange(
+                i,
+                i2,
+                (account == null || (str = endPoint.provider) == null)
+                        ? null
+                        : ContentResolver.getSyncAdapterPackageAsUser(account.type, str, i2));
     }
 
     public final void resetTodayStats(boolean z) {
@@ -1276,7 +1440,8 @@ public final class SyncStorageEngine {
             try {
                 int size = this.mSyncStatus.size();
                 for (int i = 0; i < size; i++) {
-                    ((SyncStatusInfo) this.mSyncStatus.valueAt(i)).maybeResetTodayStats(this.mIsClockValid, z);
+                    ((SyncStatusInfo) this.mSyncStatus.valueAt(i))
+                            .maybeResetTodayStats(this.mIsClockValid, z);
                 }
                 writeStatusLocked();
             } catch (Throwable th) {
@@ -1288,14 +1453,18 @@ public final class SyncStorageEngine {
     public final void setBackoff(EndPoint endPoint, long j, long j2) {
         boolean backoffLocked;
         if (Log.isLoggable("SyncManager", 2)) {
-            Slog.v("SyncManager", "setBackoff: " + endPoint + " -> nextSyncTime " + j + ", nextDelay " + j2);
+            Slog.v(
+                    "SyncManager",
+                    "setBackoff: " + endPoint + " -> nextSyncTime " + j + ", nextDelay " + j2);
         }
         synchronized (this.mAuthorities) {
             try {
                 Account account = endPoint.account;
                 if (account != null && endPoint.provider != null) {
-                    AuthorityInfo orCreateAuthorityLocked = getOrCreateAuthorityLocked(endPoint, -1, true);
-                    if (orCreateAuthorityLocked.backoffTime == j && orCreateAuthorityLocked.backoffDelay == j2) {
+                    AuthorityInfo orCreateAuthorityLocked =
+                            getOrCreateAuthorityLocked(endPoint, -1, true);
+                    if (orCreateAuthorityLocked.backoffTime == j
+                            && orCreateAuthorityLocked.backoffDelay == j2) {
                         backoffLocked = false;
                     } else {
                         orCreateAuthorityLocked.backoffTime = j;
@@ -1303,7 +1472,8 @@ public final class SyncStorageEngine {
                         backoffLocked = true;
                     }
                 }
-                backoffLocked = setBackoffLocked(account, endPoint.userId, endPoint.provider, j, j2);
+                backoffLocked =
+                        setBackoffLocked(account, endPoint.userId, endPoint.provider, j, j2);
             } catch (Throwable th) {
                 throw th;
             }
@@ -1316,7 +1486,9 @@ public final class SyncStorageEngine {
     public final boolean setBackoffLocked(Account account, int i, String str, long j, long j2) {
         boolean z = false;
         for (AccountInfo accountInfo : this.mAccounts.values()) {
-            if (account == null || account.equals(accountInfo.accountAndUser.account) || i == accountInfo.accountAndUser.userId) {
+            if (account == null
+                    || account.equals(accountInfo.accountAndUser.account)
+                    || i == accountInfo.accountAndUser.userId) {
                 for (AuthorityInfo authorityInfo : accountInfo.authorities.values()) {
                     if (str == null || str.equals(authorityInfo.target.provider)) {
                         if (authorityInfo.backoffTime != j || authorityInfo.backoffDelay != j2) {
@@ -1334,20 +1506,33 @@ public final class SyncStorageEngine {
     public final void setIsSyncable(Account account, int i, String str, int i2, int i3, int i4) {
         SyncManager.AnonymousClass7 anonymousClass7;
         EndPoint endPoint = new EndPoint(account, str, i);
-        this.mLogger.log("Set syncable ", endPoint.toSafeString(), " value=", Integer.toString(i2), " cuid=", Integer.valueOf(i3), " cpid=", Integer.valueOf(i4));
+        this.mLogger.log(
+                "Set syncable ",
+                endPoint.toSafeString(),
+                " value=",
+                Integer.toString(i2),
+                " cuid=",
+                Integer.valueOf(i3),
+                " cpid=",
+                Integer.valueOf(i4));
         synchronized (this.mAuthorities) {
             int i5 = -1;
             try {
-                AuthorityInfo orCreateAuthorityLocked = getOrCreateAuthorityLocked(endPoint, -1, false);
+                AuthorityInfo orCreateAuthorityLocked =
+                        getOrCreateAuthorityLocked(endPoint, -1, false);
                 if (i2 >= -1) {
                     i5 = i2;
                 }
                 if (Log.isLoggable("SyncManager", 2)) {
-                    Slog.d("SyncManager", "setIsSyncable: " + orCreateAuthorityLocked.toString() + " -> " + i5);
+                    Slog.d(
+                            "SyncManager",
+                            "setIsSyncable: " + orCreateAuthorityLocked.toString() + " -> " + i5);
                 }
                 if (orCreateAuthorityLocked.syncable == i5) {
                     if (Log.isLoggable("SyncManager", 2)) {
-                        Slog.d("SyncManager", "setIsSyncable: already set to " + i5 + ", doing nothing");
+                        Slog.d(
+                                "SyncManager",
+                                "setIsSyncable: already set to " + i5 + ", doing nothing");
                     }
                     return;
                 }
@@ -1355,14 +1540,26 @@ public final class SyncStorageEngine {
                 writeAccountInfoLocked();
                 if (i5 == 1) {
                     Bundle bundle = new Bundle();
-                    if (Process.myUid() != 1000 || (anonymousClass7 = this.mSyncRequestListener) == null) {
-                        SyncRequest.Builder extras = new SyncRequest.Builder().syncOnce().setExtras(bundle);
+                    if (Process.myUid() != 1000
+                            || (anonymousClass7 = this.mSyncRequestListener) == null) {
+                        SyncRequest.Builder extras =
+                                new SyncRequest.Builder().syncOnce().setExtras(bundle);
                         EndPoint endPoint2 = orCreateAuthorityLocked.target;
                         extras.setSyncAdapter(endPoint2.account, endPoint2.provider);
                         ContentResolver.requestSync(extras.build());
                     } else {
                         EndPoint endPoint3 = orCreateAuthorityLocked.target;
-                        SyncManager.this.scheduleSync(endPoint3.account, endPoint3.userId, -5, endPoint3.provider, bundle, -2, 0, i3, i4, null);
+                        SyncManager.this.scheduleSync(
+                                endPoint3.account,
+                                endPoint3.userId,
+                                -5,
+                                endPoint3.provider,
+                                bundle,
+                                -2,
+                                0,
+                                i3,
+                                i4,
+                                null);
                     }
                 }
                 reportChange(1, endPoint);
@@ -1373,7 +1570,15 @@ public final class SyncStorageEngine {
 
     public final void setMasterSyncAutomatically(int i, int i2, int i3, int i4, boolean z) {
         SyncManager.AnonymousClass7 anonymousClass7;
-        this.mLogger.log("Set master enabled=", Boolean.valueOf(z), " user=", Integer.valueOf(i), " cuid=", Integer.valueOf(i3), " cpid=", Integer.valueOf(i4));
+        this.mLogger.log(
+                "Set master enabled=",
+                Boolean.valueOf(z),
+                " user=",
+                Integer.valueOf(i),
+                " cuid=",
+                Integer.valueOf(i3),
+                " cpid=",
+                Integer.valueOf(i4));
         synchronized (this.mAuthorities) {
             try {
                 Boolean bool = (Boolean) this.mMasterSyncAutomatically.get(i);
@@ -1382,10 +1587,12 @@ public final class SyncStorageEngine {
                     writeAccountInfoLocked();
                     if (z) {
                         Bundle bundle = new Bundle();
-                        if (Process.myUid() != 1000 || (anonymousClass7 = this.mSyncRequestListener) == null) {
+                        if (Process.myUid() != 1000
+                                || (anonymousClass7 = this.mSyncRequestListener) == null) {
                             ContentResolver.requestSync(null, null, bundle);
                         } else {
-                            SyncManager.this.scheduleSync(null, i, -7, null, bundle, -2, i2, i3, i4, null);
+                            SyncManager.this.scheduleSync(
+                                    null, i, -7, null, bundle, -2, i2, i3, i4, null);
                         }
                     }
                     reportChange(1, i, null);
@@ -1398,18 +1605,38 @@ public final class SyncStorageEngine {
         }
     }
 
-    public final void setSyncAutomatically(Account account, int i, String str, boolean z, int i2, int i3, int i4) {
+    public final void setSyncAutomatically(
+            Account account, int i, String str, boolean z, int i2, int i3, int i4) {
         SyncManager.AnonymousClass7 anonymousClass7;
         if (Log.isLoggable("SyncManager", 2)) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m("SyncManager", StorageManagerService$$ExternalSyntheticOutline0.m(i, "setSyncAutomatically:  provider ", str, ", user ", " -> "), z);
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    "SyncManager",
+                    StorageManagerService$$ExternalSyntheticOutline0.m(
+                            i, "setSyncAutomatically:  provider ", str, ", user ", " -> "),
+                    z);
         }
-        this.mLogger.log("Set sync auto account=", account.toSafeString(), " user=", Integer.valueOf(i), " authority=", str, " value=", Boolean.toString(z), " cuid=", Integer.valueOf(i3), " cpid=", Integer.valueOf(i4));
+        this.mLogger.log(
+                "Set sync auto account=",
+                account.toSafeString(),
+                " user=",
+                Integer.valueOf(i),
+                " authority=",
+                str,
+                " value=",
+                Boolean.toString(z),
+                " cuid=",
+                Integer.valueOf(i3),
+                " cpid=",
+                Integer.valueOf(i4));
         synchronized (this.mAuthorities) {
             try {
-                AuthorityInfo orCreateAuthorityLocked = getOrCreateAuthorityLocked(new EndPoint(account, str, i), -1, false);
+                AuthorityInfo orCreateAuthorityLocked =
+                        getOrCreateAuthorityLocked(new EndPoint(account, str, i), -1, false);
                 if (orCreateAuthorityLocked.enabled == z) {
                     if (Log.isLoggable("SyncManager", 2)) {
-                        Slog.d("SyncManager", "setSyncAutomatically: already set to " + z + ", doing nothing");
+                        Slog.d(
+                                "SyncManager",
+                                "setSyncAutomatically: already set to " + z + ", doing nothing");
                     }
                     return;
                 }
@@ -1420,10 +1647,12 @@ public final class SyncStorageEngine {
                 writeAccountInfoLocked();
                 if (z) {
                     Bundle bundle = new Bundle();
-                    if (Process.myUid() != 1000 || (anonymousClass7 = this.mSyncRequestListener) == null) {
+                    if (Process.myUid() != 1000
+                            || (anonymousClass7 = this.mSyncRequestListener) == null) {
                         ContentResolver.requestSync(account, str, bundle);
                     } else {
-                        SyncManager.this.scheduleSync(account, i, -6, str, bundle, -2, i2, i3, i4, null);
+                        SyncManager.this.scheduleSync(
+                                account, i, -6, str, bundle, -2, i2, i3, i4, null);
                     }
                 }
                 reportChange(1, orCreateAuthorityLocked.target);
@@ -1448,11 +1677,13 @@ public final class SyncStorageEngine {
         try {
             TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
             resolveSerializer.startDocument((String) null, Boolean.TRUE);
-            resolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+            resolveSerializer.setFeature(
+                    "http://xmlpull.org/v1/doc/features.html#indent-output", true);
             resolveSerializer.startTag((String) null, "accounts");
             resolveSerializer.attributeInt((String) null, "version", 3);
             resolveSerializer.attributeInt((String) null, "nextAuthorityId", this.mNextAuthorityId);
-            resolveSerializer.attributeInt((String) null, "offsetInSeconds", this.mSyncRandomOffset);
+            resolveSerializer.attributeInt(
+                    (String) null, "offsetInSeconds", this.mSyncRandomOffset);
             int size = this.mMasterSyncAutomatically.size();
             for (int i = 0; i < size; i++) {
                 int keyAt = this.mMasterSyncAutomatically.keyAt(i);
@@ -1582,11 +1813,13 @@ public final class SyncStorageEngine {
             protoOutputStream.end(start5);
             int length = syncStatusInfo.perSourceLastSuccessTimes.length;
             for (int i4 = 0; i4 < length; i4++) {
-                protoOutputStream.write(2211908157457L, syncStatusInfo.perSourceLastSuccessTimes[i4]);
+                protoOutputStream.write(
+                        2211908157457L, syncStatusInfo.perSourceLastSuccessTimes[i4]);
             }
             int length2 = syncStatusInfo.perSourceLastFailureTimes.length;
             for (int i5 = 0; i5 < length2; i5++) {
-                protoOutputStream.write(2211908157458L, syncStatusInfo.perSourceLastFailureTimes[i5]);
+                protoOutputStream.write(
+                        2211908157458L, syncStatusInfo.perSourceLastFailureTimes[i5]);
             }
             protoOutputStream.end(start);
         }

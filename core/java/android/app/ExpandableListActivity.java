@@ -8,27 +8,30 @@ import android.widget.ExpandableListView;
 
 @Deprecated
 /* loaded from: classes.dex */
-public class ExpandableListActivity extends Activity implements View.OnCreateContextMenuListener, ExpandableListView.OnChildClickListener, ExpandableListView.OnGroupCollapseListener, ExpandableListView.OnGroupExpandListener {
+public class ExpandableListActivity extends Activity
+        implements View.OnCreateContextMenuListener,
+                ExpandableListView.OnChildClickListener,
+                ExpandableListView.OnGroupCollapseListener,
+                ExpandableListView.OnGroupExpandListener {
     ExpandableListAdapter mAdapter;
     boolean mFinishedStart = false;
     ExpandableListView mList;
 
     @Override // android.app.Activity, android.view.View.OnCreateContextMenuListener
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-    }
+    public void onCreateContextMenu(
+            ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {}
 
     @Override // android.widget.ExpandableListView.OnChildClickListener
-    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+    public boolean onChildClick(
+            ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         return false;
     }
 
     @Override // android.widget.ExpandableListView.OnGroupCollapseListener
-    public void onGroupCollapse(int groupPosition) {
-    }
+    public void onGroupCollapse(int groupPosition) {}
 
     @Override // android.widget.ExpandableListView.OnGroupExpandListener
-    public void onGroupExpand(int groupPosition) {
-    }
+    public void onGroupExpand(int groupPosition) {}
 
     @Override // android.app.Activity
     protected void onRestoreInstanceState(Bundle state) {
@@ -42,7 +45,9 @@ public class ExpandableListActivity extends Activity implements View.OnCreateCon
         View emptyView = findViewById(16908292);
         this.mList = (ExpandableListView) findViewById(16908298);
         if (this.mList == null) {
-            throw new RuntimeException("Your content must have a ExpandableListView whose id attribute is 'android.R.id.list'");
+            throw new RuntimeException(
+                    "Your content must have a ExpandableListView whose id attribute is"
+                            + " 'android.R.id.list'");
         }
         if (emptyView != null) {
             this.mList.setEmptyView(emptyView);
@@ -88,7 +93,8 @@ public class ExpandableListActivity extends Activity implements View.OnCreateCon
         return this.mList.getSelectedPosition();
     }
 
-    public boolean setSelectedChild(int groupPosition, int childPosition, boolean shouldExpandGroup) {
+    public boolean setSelectedChild(
+            int groupPosition, int childPosition, boolean shouldExpandGroup) {
         return this.mList.setSelectedChild(groupPosition, childPosition, shouldExpandGroup);
     }
 

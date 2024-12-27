@@ -9,6 +9,7 @@ import com.android.framework.protobuf.Internal;
 import com.android.framework.protobuf.InvalidProtocolBufferException;
 import com.android.framework.protobuf.MessageLiteOrBuilder;
 import com.android.framework.protobuf.Parser;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -40,23 +41,22 @@ public final class UpdatableDriverProto {
         List<Denylist> getDenylistsList();
     }
 
-    private UpdatableDriverProto() {
-    }
+    private UpdatableDriverProto() {}
 
-    public static void registerAllExtensions(ExtensionRegistryLite registry) {
-    }
+    public static void registerAllExtensions(ExtensionRegistryLite registry) {}
 
-    public static final class Denylist extends GeneratedMessageLite<Denylist, Builder> implements DenylistOrBuilder {
+    public static final class Denylist extends GeneratedMessageLite<Denylist, Builder>
+            implements DenylistOrBuilder {
         private static final Denylist DEFAULT_INSTANCE;
         public static final int PACKAGE_NAMES_FIELD_NUMBER = 2;
         private static volatile Parser<Denylist> PARSER = null;
         public static final int VERSION_CODE_FIELD_NUMBER = 1;
         private int bitField0_;
-        private Internal.ProtobufList<String> packageNames_ = GeneratedMessageLite.emptyProtobufList();
+        private Internal.ProtobufList<String> packageNames_ =
+                GeneratedMessageLite.emptyProtobufList();
         private long versionCode_;
 
-        private Denylist() {
-        }
+        private Denylist() {}
 
         @Override // android.updatabledriver.UpdatableDriverProto.DenylistOrBuilder
         public boolean hasVersionCode() {
@@ -142,39 +142,48 @@ public final class UpdatableDriverProto {
             return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data);
         }
 
-        public static Denylist parseFrom(ByteBuffer data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
-            return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
+        public static Denylist parseFrom(ByteBuffer data, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
+            return (Denylist)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
         }
 
         public static Denylist parseFrom(ByteString data) throws InvalidProtocolBufferException {
             return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data);
         }
 
-        public static Denylist parseFrom(ByteString data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
-            return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
+        public static Denylist parseFrom(ByteString data, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
+            return (Denylist)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
         }
 
         public static Denylist parseFrom(byte[] data) throws InvalidProtocolBufferException {
             return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data);
         }
 
-        public static Denylist parseFrom(byte[] data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
-            return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
+        public static Denylist parseFrom(byte[] data, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
+            return (Denylist)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
         }
 
         public static Denylist parseFrom(InputStream input) throws IOException {
             return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input);
         }
 
-        public static Denylist parseFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
-            return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+        public static Denylist parseFrom(InputStream input, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
+            return (Denylist)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input, extensionRegistry);
         }
 
         public static Denylist parseDelimitedFrom(InputStream input) throws IOException {
             return (Denylist) parseDelimitedFrom(DEFAULT_INSTANCE, input);
         }
 
-        public static Denylist parseDelimitedFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public static Denylist parseDelimitedFrom(
+                InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
             return (Denylist) parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
         }
 
@@ -182,8 +191,11 @@ public final class UpdatableDriverProto {
             return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input);
         }
 
-        public static Denylist parseFrom(CodedInputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
-            return (Denylist) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+        public static Denylist parseFrom(
+                CodedInputStream input, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
+            return (Denylist)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input, extensionRegistry);
         }
 
         public static Builder newBuilder() {
@@ -194,7 +206,8 @@ public final class UpdatableDriverProto {
             return DEFAULT_INSTANCE.createBuilder(prototype);
         }
 
-        public static final class Builder extends GeneratedMessageLite.Builder<Denylist, Builder> implements DenylistOrBuilder {
+        public static final class Builder extends GeneratedMessageLite.Builder<Denylist, Builder>
+                implements DenylistOrBuilder {
             private Builder() {
                 super(Denylist.DEFAULT_INSTANCE);
             }
@@ -223,7 +236,8 @@ public final class UpdatableDriverProto {
 
             @Override // android.updatabledriver.UpdatableDriverProto.DenylistOrBuilder
             public List<String> getPackageNamesList() {
-                return Collections.unmodifiableList(((Denylist) this.instance).getPackageNamesList());
+                return Collections.unmodifiableList(
+                        ((Denylist) this.instance).getPackageNamesList());
             }
 
             @Override // android.updatabledriver.UpdatableDriverProto.DenylistOrBuilder
@@ -273,7 +287,8 @@ public final class UpdatableDriverProto {
         }
 
         @Override // com.android.framework.protobuf.GeneratedMessageLite
-        protected final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke method, Object arg0, Object arg1) {
+        protected final Object dynamicMethod(
+                GeneratedMessageLite.MethodToInvoke method, Object arg0, Object arg1) {
             switch (method) {
                 case NEW_MUTABLE_INSTANCE:
                     return new Denylist();
@@ -281,7 +296,10 @@ public final class UpdatableDriverProto {
                     return new Builder();
                 case BUILD_MESSAGE_INFO:
                     Object[] objects = {"bitField0_", "versionCode_", "packageNames_"};
-                    return newMessageInfo(DEFAULT_INSTANCE, "\u0001\u0002\u0000\u0001\u0001\u0002\u0002\u0000\u0001\u0000\u0001ဂ\u0000\u0002\u001a", objects);
+                    return newMessageInfo(
+                            DEFAULT_INSTANCE,
+                            "\u0001\u0002\u0000\u0001\u0001\u0002\u0002\u0000\u0001\u0000\u0001ဂ\u0000\u0002\u001a",
+                            objects);
                 case GET_DEFAULT_INSTANCE:
                     return DEFAULT_INSTANCE;
                 case GET_PARSER:
@@ -290,7 +308,9 @@ public final class UpdatableDriverProto {
                         synchronized (Denylist.class) {
                             parser = PARSER;
                             if (parser == null) {
-                                parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                                parser =
+                                        new GeneratedMessageLite.DefaultInstanceBasedParser(
+                                                DEFAULT_INSTANCE);
                                 PARSER = parser;
                             }
                         }
@@ -320,14 +340,14 @@ public final class UpdatableDriverProto {
         }
     }
 
-    public static final class Denylists extends GeneratedMessageLite<Denylists, Builder> implements DenylistsOrBuilder {
+    public static final class Denylists extends GeneratedMessageLite<Denylists, Builder>
+            implements DenylistsOrBuilder {
         private static final Denylists DEFAULT_INSTANCE;
         public static final int DENYLISTS_FIELD_NUMBER = 1;
         private static volatile Parser<Denylists> PARSER;
         private Internal.ProtobufList<Denylist> denylists_ = emptyProtobufList();
 
-        private Denylists() {
-        }
+        private Denylists() {}
 
         @Override // android.updatabledriver.UpdatableDriverProto.DenylistsOrBuilder
         public List<Denylist> getDenylistsList() {
@@ -401,39 +421,48 @@ public final class UpdatableDriverProto {
             return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data);
         }
 
-        public static Denylists parseFrom(ByteBuffer data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
-            return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
+        public static Denylists parseFrom(ByteBuffer data, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
+            return (Denylists)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
         }
 
         public static Denylists parseFrom(ByteString data) throws InvalidProtocolBufferException {
             return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data);
         }
 
-        public static Denylists parseFrom(ByteString data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
-            return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
+        public static Denylists parseFrom(ByteString data, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
+            return (Denylists)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
         }
 
         public static Denylists parseFrom(byte[] data) throws InvalidProtocolBufferException {
             return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data);
         }
 
-        public static Denylists parseFrom(byte[] data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
-            return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
+        public static Denylists parseFrom(byte[] data, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
+            return (Denylists)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, data, extensionRegistry);
         }
 
         public static Denylists parseFrom(InputStream input) throws IOException {
             return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input);
         }
 
-        public static Denylists parseFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
-            return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+        public static Denylists parseFrom(
+                InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
+            return (Denylists)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input, extensionRegistry);
         }
 
         public static Denylists parseDelimitedFrom(InputStream input) throws IOException {
             return (Denylists) parseDelimitedFrom(DEFAULT_INSTANCE, input);
         }
 
-        public static Denylists parseDelimitedFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public static Denylists parseDelimitedFrom(
+                InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
             return (Denylists) parseDelimitedFrom(DEFAULT_INSTANCE, input, extensionRegistry);
         }
 
@@ -441,8 +470,11 @@ public final class UpdatableDriverProto {
             return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input);
         }
 
-        public static Denylists parseFrom(CodedInputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
-            return (Denylists) GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input, extensionRegistry);
+        public static Denylists parseFrom(
+                CodedInputStream input, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
+            return (Denylists)
+                    GeneratedMessageLite.parseFrom(DEFAULT_INSTANCE, input, extensionRegistry);
         }
 
         public static Builder newBuilder() {
@@ -453,7 +485,8 @@ public final class UpdatableDriverProto {
             return DEFAULT_INSTANCE.createBuilder(prototype);
         }
 
-        public static final class Builder extends GeneratedMessageLite.Builder<Denylists, Builder> implements DenylistsOrBuilder {
+        public static final class Builder extends GeneratedMessageLite.Builder<Denylists, Builder>
+                implements DenylistsOrBuilder {
             private Builder() {
                 super(Denylists.DEFAULT_INSTANCE);
             }
@@ -529,7 +562,8 @@ public final class UpdatableDriverProto {
         }
 
         @Override // com.android.framework.protobuf.GeneratedMessageLite
-        protected final Object dynamicMethod(GeneratedMessageLite.MethodToInvoke method, Object arg0, Object arg1) {
+        protected final Object dynamicMethod(
+                GeneratedMessageLite.MethodToInvoke method, Object arg0, Object arg1) {
             switch (method) {
                 case NEW_MUTABLE_INSTANCE:
                     return new Denylists();
@@ -537,7 +571,10 @@ public final class UpdatableDriverProto {
                     return new Builder();
                 case BUILD_MESSAGE_INFO:
                     Object[] objects = {"denylists_", Denylist.class};
-                    return newMessageInfo(DEFAULT_INSTANCE, "\u0001\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0001\u0000\u0001\u001b", objects);
+                    return newMessageInfo(
+                            DEFAULT_INSTANCE,
+                            "\u0001\u0001\u0000\u0000\u0001\u0001\u0001\u0000\u0001\u0000\u0001\u001b",
+                            objects);
                 case GET_DEFAULT_INSTANCE:
                     return DEFAULT_INSTANCE;
                 case GET_PARSER:
@@ -546,7 +583,9 @@ public final class UpdatableDriverProto {
                         synchronized (Denylists.class) {
                             parser = PARSER;
                             if (parser == null) {
-                                parser = new GeneratedMessageLite.DefaultInstanceBasedParser(DEFAULT_INSTANCE);
+                                parser =
+                                        new GeneratedMessageLite.DefaultInstanceBasedParser(
+                                                DEFAULT_INSTANCE);
                                 PARSER = parser;
                             }
                         }

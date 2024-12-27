@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class ContextHubInfo implements Parcelable {
-    public static final Parcelable.Creator<ContextHubInfo> CREATOR = new Parcelable.Creator<ContextHubInfo>() { // from class: android.hardware.contexthub.ContextHubInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextHubInfo createFromParcel(Parcel _aidl_source) {
-            ContextHubInfo _aidl_out = new ContextHubInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ContextHubInfo> CREATOR =
+            new Parcelable.Creator<
+                    ContextHubInfo>() { // from class: android.hardware.contexthub.ContextHubInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextHubInfo createFromParcel(Parcel _aidl_source) {
+                    ContextHubInfo _aidl_out = new ContextHubInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextHubInfo[] newArray(int _aidl_size) {
-            return new ContextHubInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextHubInfo[] newArray(int _aidl_size) {
+                    return new ContextHubInfo[_aidl_size];
+                }
+            };
     public String name;
     public String[] supportedPermissions;
     public String toolchain;

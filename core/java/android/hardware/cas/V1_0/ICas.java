@@ -10,9 +10,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -75,7 +78,8 @@ public interface ICas extends IBase {
 
     int setPrivateData(ArrayList<Byte> arrayList) throws RemoteException;
 
-    int setSessionPrivateData(ArrayList<Byte> arrayList, ArrayList<Byte> arrayList2) throws RemoteException;
+    int setSessionPrivateData(ArrayList<Byte> arrayList, ArrayList<Byte> arrayList2)
+            throws RemoteException;
 
     @Override // android.internal.hidl.base.V1_0.IBase
     boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException;
@@ -134,7 +138,8 @@ public interface ICas extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -207,7 +212,8 @@ public interface ICas extends IBase {
         }
 
         @Override // android.hardware.cas.V1_0.ICas
-        public int setSessionPrivateData(ArrayList<Byte> sessionId, ArrayList<Byte> pvtData) throws RemoteException {
+        public int setSessionPrivateData(ArrayList<Byte> sessionId, ArrayList<Byte> pvtData)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ICas.kInterfaceName);
             _hidl_request.writeInt8Vector(sessionId);
@@ -225,7 +231,8 @@ public interface ICas extends IBase {
         }
 
         @Override // android.hardware.cas.V1_0.ICas
-        public int processEcm(ArrayList<Byte> sessionId, ArrayList<Byte> ecm) throws RemoteException {
+        public int processEcm(ArrayList<Byte> sessionId, ArrayList<Byte> ecm)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ICas.kInterfaceName);
             _hidl_request.writeInt8Vector(sessionId);
@@ -296,7 +303,8 @@ public interface ICas extends IBase {
         }
 
         @Override // android.hardware.cas.V1_0.ICas
-        public int refreshEntitlements(int refreshType, ArrayList<Byte> refreshData) throws RemoteException {
+        public int refreshEntitlements(int refreshType, ArrayList<Byte> refreshData)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ICas.kInterfaceName);
             _hidl_request.writeInt32(refreshType);
@@ -389,7 +397,9 @@ public interface ICas extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -417,7 +427,8 @@ public interface ICas extends IBase {
         }
 
         @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
@@ -471,8 +482,9 @@ public interface ICas extends IBase {
         }
     }
 
-    public static abstract class Stub extends HwBinder implements ICas {
-        @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements ICas {
+        @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
@@ -483,8 +495,7 @@ public interface ICas extends IBase {
         }
 
         @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
         @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
@@ -493,21 +504,89 @@ public interface ICas extends IBase {
 
         @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{14, 101, 107, -95, -70, -63, 20, SprAttributeBase.TYPE_ANIMATOR_SET, -95, SprAttributeBase.TYPE_SHADOW, -106, -17, 117, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 105, -46, 75, 0, 13, -126, 14, -11, 101, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 1, 80, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, -7, 115, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, 84, -62}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                14,
+                                101,
+                                107,
+                                -95,
+                                -70,
+                                -63,
+                                20,
+                                SprAttributeBase.TYPE_ANIMATOR_SET,
+                                -95,
+                                SprAttributeBase.TYPE_SHADOW,
+                                -106,
+                                -17,
+                                117,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+                                105,
+                                -46,
+                                75,
+                                0,
+                                13,
+                                -126,
+                                14,
+                                -11,
+                                101,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80,
+                                1,
+                                80,
+                                MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH,
+                                -7,
+                                115,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT,
+                                84,
+                                -62
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
         @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
         @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        public final void ping() {}
 
         @Override // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
@@ -523,7 +602,8 @@ public interface ICas extends IBase {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -545,7 +625,9 @@ public interface ICas extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, final HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, final HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(ICas.kInterfaceName);
@@ -557,15 +639,17 @@ public interface ICas extends IBase {
                     return;
                 case 2:
                     _hidl_request.enforceInterface(ICas.kInterfaceName);
-                    openSession(new openSessionCallback() { // from class: android.hardware.cas.V1_0.ICas.Stub.1
-                        @Override // android.hardware.cas.V1_0.ICas.openSessionCallback
-                        public void onValues(int status, ArrayList<Byte> sessionId) {
-                            _hidl_reply.writeStatus(0);
-                            _hidl_reply.writeInt32(status);
-                            _hidl_reply.writeInt8Vector(sessionId);
-                            _hidl_reply.send();
-                        }
-                    });
+                    openSession(
+                            new openSessionCallback() { // from class:
+                                // android.hardware.cas.V1_0.ICas.Stub.1
+                                @Override // android.hardware.cas.V1_0.ICas.openSessionCallback
+                                public void onValues(int status, ArrayList<Byte> sessionId) {
+                                    _hidl_reply.writeStatus(0);
+                                    _hidl_reply.writeInt32(status);
+                                    _hidl_reply.writeInt8Vector(sessionId);
+                                    _hidl_reply.send();
+                                }
+                            });
                     return;
                 case 3:
                     _hidl_request.enforceInterface(ICas.kInterfaceName);
@@ -670,7 +754,8 @@ public interface ICas extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

@@ -10,13 +10,16 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.internal.R;
 import com.android.internal.hidden_from_bootclasspath.android.os.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes5.dex */
-public class SetScreenLockDialogActivity extends AlertActivity implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
+public class SetScreenLockDialogActivity extends AlertActivity
+        implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
     public static final String EXTRA_LAUNCH_REASON = "launch_reason";
     public static final String EXTRA_ORIGIN_USER_ID = "origin_user_id";
     public static final int LAUNCH_REASON_DISABLE_QUIET_MODE = 1;
@@ -28,13 +31,14 @@ public class SetScreenLockDialogActivity extends AlertActivity implements Dialog
     private int mReason;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LaunchReason {
-    }
+    public @interface LaunchReason {}
 
     @Override // com.android.internal.app.AlertActivity, android.app.Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!Flags.allowPrivateProfile() || !android.multiuser.Flags.showSetScreenLockDialog() || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
+        if (!Flags.allowPrivateProfile()
+                || !android.multiuser.Flags.showSetScreenLockDialog()
+                || !android.multiuser.Flags.enablePrivateSpaceFeatures()) {
             finish();
             return;
         }
@@ -57,7 +61,10 @@ public class SetScreenLockDialogActivity extends AlertActivity implements Dialog
         }
         Log.d(TAG, "Launching screen lock setup dialog due to " + this.mReason);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.set_up_screen_lock_title).setOnDismissListener(this).setPositiveButton(R.string.set_up_screen_lock_action_label, this).setNegativeButton(17039360, this);
+        builder.setTitle(R.string.set_up_screen_lock_title)
+                .setOnDismissListener(this)
+                .setPositiveButton(R.string.set_up_screen_lock_action_label, this)
+                .setNegativeButton(17039360, this);
         setLaunchUserSpecificMessage(builder);
         AlertDialog dialog = builder.create();
         dialog.create();
@@ -88,15 +95,19 @@ public class SetScreenLockDialogActivity extends AlertActivity implements Dialog
             builder.setMessage(R.string.private_space_set_up_screen_lock_message);
             return;
         }
-        UserManager userManager = (UserManager) getApplicationContext().getSystemService(UserManager.class);
-        if (userManager != null && (userInfo = userManager.getUserInfo(this.mOriginUserId)) != null && userInfo.isPrivateProfile()) {
+        UserManager userManager =
+                (UserManager) getApplicationContext().getSystemService(UserManager.class);
+        if (userManager != null
+                && (userInfo = userManager.getUserInfo(this.mOriginUserId)) != null
+                && userInfo.isPrivateProfile()) {
             builder.setMessage(R.string.private_space_set_up_screen_lock_message);
         }
     }
 
     public static Intent createBaseIntent(int launchReason) {
         Intent intent = new Intent();
-        intent.setComponent(new ComponentName("android", SetScreenLockDialogActivity.class.getName()));
+        intent.setComponent(
+                new ComponentName("android", SetScreenLockDialogActivity.class.getName()));
         intent.setFlags(276824064);
         intent.putExtra(EXTRA_LAUNCH_REASON, launchReason);
         return intent;

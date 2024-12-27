@@ -15,13 +15,15 @@ public class UrlQuerySanitizer {
     private boolean mPreferFirstRepeatedParameter;
     private static final ValueSanitizer sAllIllegal = new IllegalCharacterValueSanitizer(0);
     private static final ValueSanitizer sAllButNulLegal = new IllegalCharacterValueSanitizer(1535);
-    private static final ValueSanitizer sAllButWhitespaceLegal = new IllegalCharacterValueSanitizer(1532);
+    private static final ValueSanitizer sAllButWhitespaceLegal =
+            new IllegalCharacterValueSanitizer(1532);
     private static final ValueSanitizer sURLLegal = new IllegalCharacterValueSanitizer(404);
     private static final ValueSanitizer sUrlAndSpaceLegal = new IllegalCharacterValueSanitizer(405);
     private static final ValueSanitizer sAmpLegal = new IllegalCharacterValueSanitizer(128);
     private static final ValueSanitizer sAmpAndSpaceLegal = new IllegalCharacterValueSanitizer(129);
     private static final ValueSanitizer sSpaceLegal = new IllegalCharacterValueSanitizer(1);
-    private static final ValueSanitizer sAllButNulAndAngleBracketsLegal = new IllegalCharacterValueSanitizer(1439);
+    private static final ValueSanitizer sAllButNulAndAngleBracketsLegal =
+            new IllegalCharacterValueSanitizer(1439);
     private static final Pattern plusOrPercent = Pattern.compile("[+%]");
     private final HashMap<String, ValueSanitizer> mSanitizers = new HashMap<>();
     private final HashMap<String, String> mEntries = new HashMap<>();
@@ -68,7 +70,8 @@ public class UrlQuerySanitizer {
         private int mFlags;
         private static final String JAVASCRIPT_PREFIX = "javascript:";
         private static final String VBSCRIPT_PREFIX = "vbscript:";
-        private static final int MIN_SCRIPT_PREFIX_LENGTH = Math.min(JAVASCRIPT_PREFIX.length(), VBSCRIPT_PREFIX.length());
+        private static final int MIN_SCRIPT_PREFIX_LENGTH =
+                Math.min(JAVASCRIPT_PREFIX.length(), VBSCRIPT_PREFIX.length());
 
         public IllegalCharacterValueSanitizer(int flags) {
             this.mFlags = flags;
@@ -240,8 +243,7 @@ public class UrlQuerySanitizer {
         return sAllButNulAndAngleBracketsLegal;
     }
 
-    public UrlQuerySanitizer() {
-    }
+    public UrlQuerySanitizer() {}
 
     public UrlQuerySanitizer(String url) {
         setAllowUnregisteredParamaters(true);
@@ -269,7 +271,9 @@ public class UrlQuerySanitizer {
                 if (assignmentIndex < 0) {
                     parseEntry(attributeValuePair, "");
                 } else {
-                    parseEntry(attributeValuePair.substring(0, assignmentIndex), attributeValuePair.substring(assignmentIndex + 1));
+                    parseEntry(
+                            attributeValuePair.substring(0, assignmentIndex),
+                            attributeValuePair.substring(assignmentIndex + 1));
                 }
             }
         }

@@ -12,8 +12,7 @@ public interface IInputDevicesChangedListener extends IInterface {
 
     public static class Default implements IInputDevicesChangedListener {
         @Override // android.hardware.input.IInputDevicesChangedListener
-        public void onInputDevicesChanged(int[] deviceIdAndGeneration) throws RemoteException {
-        }
+        public void onInputDevicesChanged(int[] deviceIdAndGeneration) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,9 @@ public interface IInputDevicesChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputDevicesChangedListener {
-        public static final String DESCRIPTOR = "android.hardware.input.IInputDevicesChangedListener";
+    public abstract static class Stub extends Binder implements IInputDevicesChangedListener {
+        public static final String DESCRIPTOR =
+                "android.hardware.input.IInputDevicesChangedListener";
         static final int TRANSACTION_onInputDevicesChanged = 1;
 
         public Stub() {
@@ -60,7 +60,8 @@ public interface IInputDevicesChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

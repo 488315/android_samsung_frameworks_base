@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -18,19 +20,20 @@ import java.util.Objects;
 @Deprecated
 /* loaded from: classes.dex */
 public final class Slice implements Parcelable {
-    public static final Parcelable.Creator<Slice> CREATOR = new Parcelable.Creator<Slice>() { // from class: android.app.slice.Slice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Slice createFromParcel(Parcel in) {
-            return new Slice(in);
-        }
+    public static final Parcelable.Creator<Slice> CREATOR =
+            new Parcelable.Creator<Slice>() { // from class: android.app.slice.Slice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Slice createFromParcel(Parcel in) {
+                    return new Slice(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Slice[] newArray(int size) {
-            return new Slice[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Slice[] newArray(int size) {
+                    return new Slice[size];
+                }
+            };
     public static final String EXTRA_RANGE_VALUE = "android.app.slice.extra.RANGE_VALUE";
     public static final String EXTRA_TOGGLE_STATE = "android.app.slice.extra.TOGGLE_STATE";
     public static final String HINT_ACTIONS = "actions";
@@ -69,12 +72,10 @@ public final class Slice implements Parcelable {
     private Uri mUri;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SliceHint {
-    }
+    public @interface SliceHint {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SliceSubtype {
-    }
+    public @interface SliceSubtype {}
 
     Slice(ArrayList<SliceItem> items, String[] hints, Uri uri, SliceSpec spec) {
         this.mHints = hints;
@@ -147,7 +148,12 @@ public final class Slice implements Parcelable {
         }
 
         public Builder(Builder parent) {
-            this.mUri = parent.mUri.buildUpon().appendPath("_gen").appendPath(String.valueOf(this.mItems.size())).build();
+            this.mUri =
+                    parent.mUri
+                            .buildUpon()
+                            .appendPath("_gen")
+                            .appendPath(String.valueOf(this.mItems.size()))
+                            .build();
         }
 
         public Builder setCallerNeeded(boolean callerNeeded) {
@@ -166,7 +172,13 @@ public final class Slice implements Parcelable {
 
         public Builder addSubSlice(Slice slice, String subType) {
             Objects.requireNonNull(slice);
-            this.mItems.add(new SliceItem(slice, "slice", subType, (String[]) slice.getHints().toArray(new String[slice.getHints().size()])));
+            this.mItems.add(
+                    new SliceItem(
+                            slice,
+                            "slice",
+                            subType,
+                            (String[])
+                                    slice.getHints().toArray(new String[slice.getHints().size()])));
             return this;
         }
 
@@ -175,7 +187,13 @@ public final class Slice implements Parcelable {
             Objects.requireNonNull(s);
             List<String> hints = s.getHints();
             s.mSpec = null;
-            this.mItems.add(new SliceItem(action, s, "action", subType, (String[]) hints.toArray(new String[hints.size()])));
+            this.mItems.add(
+                    new SliceItem(
+                            action,
+                            s,
+                            "action",
+                            subType,
+                            (String[]) hints.toArray(new String[hints.size()])));
             return this;
         }
 
@@ -202,7 +220,12 @@ public final class Slice implements Parcelable {
         }
 
         public Builder addLong(long value, String subType, List<String> hints) {
-            this.mItems.add(new SliceItem(Long.valueOf(value), SliceItem.FORMAT_LONG, subType, (String[]) hints.toArray(new String[hints.size()])));
+            this.mItems.add(
+                    new SliceItem(
+                            Long.valueOf(value),
+                            SliceItem.FORMAT_LONG,
+                            subType,
+                            (String[]) hints.toArray(new String[hints.size()])));
             return this;
         }
 
@@ -213,7 +236,11 @@ public final class Slice implements Parcelable {
         }
 
         public Slice build() {
-            return new Slice(this.mItems, (String[]) this.mHints.toArray(new String[this.mHints.size()]), this.mUri, this.mSpec);
+            return new Slice(
+                    this.mItems,
+                    (String[]) this.mHints.toArray(new String[this.mHints.size()]),
+                    this.mUri,
+                    this.mSpec);
         }
     }
 

@@ -4,7 +4,9 @@ import android.annotation.NonNull;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -18,19 +20,21 @@ public final class PlaybackMetrics implements Parcelable {
     public static final int CONTENT_TYPE_MAIN = 1;
     public static final int CONTENT_TYPE_OTHER = 3;
     public static final int CONTENT_TYPE_UNKNOWN = 0;
-    public static final Parcelable.Creator<PlaybackMetrics> CREATOR = new Parcelable.Creator<PlaybackMetrics>() { // from class: android.media.metrics.PlaybackMetrics.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackMetrics[] newArray(int size) {
-            return new PlaybackMetrics[size];
-        }
+    public static final Parcelable.Creator<PlaybackMetrics> CREATOR =
+            new Parcelable.Creator<
+                    PlaybackMetrics>() { // from class: android.media.metrics.PlaybackMetrics.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackMetrics[] newArray(int size) {
+                    return new PlaybackMetrics[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackMetrics createFromParcel(Parcel in) {
-            return new PlaybackMetrics(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackMetrics createFromParcel(Parcel in) {
+                    return new PlaybackMetrics(in);
+                }
+            };
     public static final int DRM_TYPE_CLEARKEY = 6;
     public static final int DRM_TYPE_NONE = 0;
     public static final int DRM_TYPE_OTHER = 1;
@@ -71,26 +75,38 @@ public final class PlaybackMetrics implements Parcelable {
     private final int mVideoFramesPlayed;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentType {
-    }
+    public @interface ContentType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DrmType {
-    }
+    public @interface DrmType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PlaybackType {
-    }
+    public @interface PlaybackType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StreamSource {
-    }
+    public @interface StreamSource {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StreamType {
-    }
+    public @interface StreamType {}
 
-    public PlaybackMetrics(long mediaDurationMillis, int streamSource, int streamType, int playbackType, int drmType, int contentType, String playerName, String playerVersion, long[] experimentIds, int videoFramesPlayed, int videoFramesDropped, int audioUnderrunCount, long networkBytesRead, long localBytesRead, long networkTransferDurationMillis, byte[] drmSessionId, Bundle extras) {
+    public PlaybackMetrics(
+            long mediaDurationMillis,
+            int streamSource,
+            int streamType,
+            int playbackType,
+            int drmType,
+            int contentType,
+            String playerName,
+            String playerVersion,
+            long[] experimentIds,
+            int videoFramesPlayed,
+            int videoFramesDropped,
+            int audioUnderrunCount,
+            long networkBytesRead,
+            long localBytesRead,
+            long networkTransferDurationMillis,
+            byte[] drmSessionId,
+            Bundle extras) {
         this.mMediaDurationMillis = mediaDurationMillis;
         this.mStreamSource = streamSource;
         this.mStreamType = streamType;
@@ -100,7 +116,8 @@ public final class PlaybackMetrics implements Parcelable {
         this.mPlayerName = playerName;
         this.mPlayerVersion = playerVersion;
         this.mExperimentIds = experimentIds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExperimentIds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExperimentIds);
         this.mVideoFramesPlayed = videoFramesPlayed;
         this.mVideoFramesDropped = videoFramesDropped;
         this.mAudioUnderrunCount = audioUnderrunCount;
@@ -180,7 +197,39 @@ public final class PlaybackMetrics implements Parcelable {
     }
 
     public String toString() {
-        return "PlaybackMetrics { mediaDurationMillis = " + this.mMediaDurationMillis + ", streamSource = " + this.mStreamSource + ", streamType = " + this.mStreamType + ", playbackType = " + this.mPlaybackType + ", drmType = " + this.mDrmType + ", contentType = " + this.mContentType + ", playerName = " + this.mPlayerName + ", playerVersion = " + this.mPlayerVersion + ", experimentIds = " + Arrays.toString(this.mExperimentIds) + ", videoFramesPlayed = " + this.mVideoFramesPlayed + ", videoFramesDropped = " + this.mVideoFramesDropped + ", audioUnderrunCount = " + this.mAudioUnderrunCount + ", networkBytesRead = " + this.mNetworkBytesRead + ", localBytesRead = " + this.mLocalBytesRead + ", networkTransferDurationMillis = " + this.mNetworkTransferDurationMillis + "drmSessionId = " + Arrays.toString(this.mDrmSessionId) + " }";
+        return "PlaybackMetrics { mediaDurationMillis = "
+                + this.mMediaDurationMillis
+                + ", streamSource = "
+                + this.mStreamSource
+                + ", streamType = "
+                + this.mStreamType
+                + ", playbackType = "
+                + this.mPlaybackType
+                + ", drmType = "
+                + this.mDrmType
+                + ", contentType = "
+                + this.mContentType
+                + ", playerName = "
+                + this.mPlayerName
+                + ", playerVersion = "
+                + this.mPlayerVersion
+                + ", experimentIds = "
+                + Arrays.toString(this.mExperimentIds)
+                + ", videoFramesPlayed = "
+                + this.mVideoFramesPlayed
+                + ", videoFramesDropped = "
+                + this.mVideoFramesDropped
+                + ", audioUnderrunCount = "
+                + this.mAudioUnderrunCount
+                + ", networkBytesRead = "
+                + this.mNetworkBytesRead
+                + ", localBytesRead = "
+                + this.mLocalBytesRead
+                + ", networkTransferDurationMillis = "
+                + this.mNetworkTransferDurationMillis
+                + "drmSessionId = "
+                + Arrays.toString(this.mDrmSessionId)
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -191,14 +240,45 @@ public final class PlaybackMetrics implements Parcelable {
             return false;
         }
         PlaybackMetrics that = (PlaybackMetrics) o;
-        if (this.mMediaDurationMillis == that.mMediaDurationMillis && this.mStreamSource == that.mStreamSource && this.mStreamType == that.mStreamType && this.mPlaybackType == that.mPlaybackType && this.mDrmType == that.mDrmType && this.mContentType == that.mContentType && Objects.equals(this.mPlayerName, that.mPlayerName) && Objects.equals(this.mPlayerVersion, that.mPlayerVersion) && Arrays.equals(this.mExperimentIds, that.mExperimentIds) && this.mVideoFramesPlayed == that.mVideoFramesPlayed && this.mVideoFramesDropped == that.mVideoFramesDropped && this.mAudioUnderrunCount == that.mAudioUnderrunCount && this.mNetworkBytesRead == that.mNetworkBytesRead && this.mLocalBytesRead == that.mLocalBytesRead && this.mNetworkTransferDurationMillis == that.mNetworkTransferDurationMillis && Arrays.equals(this.mDrmSessionId, that.mDrmSessionId)) {
+        if (this.mMediaDurationMillis == that.mMediaDurationMillis
+                && this.mStreamSource == that.mStreamSource
+                && this.mStreamType == that.mStreamType
+                && this.mPlaybackType == that.mPlaybackType
+                && this.mDrmType == that.mDrmType
+                && this.mContentType == that.mContentType
+                && Objects.equals(this.mPlayerName, that.mPlayerName)
+                && Objects.equals(this.mPlayerVersion, that.mPlayerVersion)
+                && Arrays.equals(this.mExperimentIds, that.mExperimentIds)
+                && this.mVideoFramesPlayed == that.mVideoFramesPlayed
+                && this.mVideoFramesDropped == that.mVideoFramesDropped
+                && this.mAudioUnderrunCount == that.mAudioUnderrunCount
+                && this.mNetworkBytesRead == that.mNetworkBytesRead
+                && this.mLocalBytesRead == that.mLocalBytesRead
+                && this.mNetworkTransferDurationMillis == that.mNetworkTransferDurationMillis
+                && Arrays.equals(this.mDrmSessionId, that.mDrmSessionId)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mMediaDurationMillis), Integer.valueOf(this.mStreamSource), Integer.valueOf(this.mStreamType), Integer.valueOf(this.mPlaybackType), Integer.valueOf(this.mDrmType), Integer.valueOf(this.mContentType), this.mPlayerName, this.mPlayerVersion, Integer.valueOf(Arrays.hashCode(this.mExperimentIds)), Integer.valueOf(this.mVideoFramesPlayed), Integer.valueOf(this.mVideoFramesDropped), Integer.valueOf(this.mAudioUnderrunCount), Long.valueOf(this.mNetworkBytesRead), Long.valueOf(this.mLocalBytesRead), Long.valueOf(this.mNetworkTransferDurationMillis), Integer.valueOf(Arrays.hashCode(this.mDrmSessionId)));
+        return Objects.hash(
+                Long.valueOf(this.mMediaDurationMillis),
+                Integer.valueOf(this.mStreamSource),
+                Integer.valueOf(this.mStreamType),
+                Integer.valueOf(this.mPlaybackType),
+                Integer.valueOf(this.mDrmType),
+                Integer.valueOf(this.mContentType),
+                this.mPlayerName,
+                this.mPlayerVersion,
+                Integer.valueOf(Arrays.hashCode(this.mExperimentIds)),
+                Integer.valueOf(this.mVideoFramesPlayed),
+                Integer.valueOf(this.mVideoFramesDropped),
+                Integer.valueOf(this.mAudioUnderrunCount),
+                Long.valueOf(this.mNetworkBytesRead),
+                Long.valueOf(this.mLocalBytesRead),
+                Long.valueOf(this.mNetworkTransferDurationMillis),
+                Integer.valueOf(Arrays.hashCode(this.mDrmSessionId)));
     }
 
     @Override // android.os.Parcelable
@@ -267,7 +347,8 @@ public final class PlaybackMetrics implements Parcelable {
         this.mPlayerName = playerName;
         this.mPlayerVersion = playerVersion;
         this.mExperimentIds = experimentIds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExperimentIds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExperimentIds);
         this.mVideoFramesPlayed = videoFramesPlayed;
         this.mVideoFramesDropped = videoFramesDropped;
         this.mAudioUnderrunCount = audioUnderrunCount;
@@ -383,7 +464,25 @@ public final class PlaybackMetrics implements Parcelable {
         }
 
         public PlaybackMetrics build() {
-            PlaybackMetrics o = new PlaybackMetrics(this.mMediaDurationMillis, this.mStreamSource, this.mStreamType, this.mPlaybackType, this.mDrmType, this.mContentType, this.mPlayerName, this.mPlayerVersion, idsToLongArray(), this.mVideoFramesPlayed, this.mVideoFramesDropped, this.mAudioUnderrunCount, this.mNetworkBytesRead, this.mLocalBytesRead, this.mNetworkTransferDurationMillis, this.mDrmSessionId, this.mMetricsBundle);
+            PlaybackMetrics o =
+                    new PlaybackMetrics(
+                            this.mMediaDurationMillis,
+                            this.mStreamSource,
+                            this.mStreamType,
+                            this.mPlaybackType,
+                            this.mDrmType,
+                            this.mContentType,
+                            this.mPlayerName,
+                            this.mPlayerVersion,
+                            idsToLongArray(),
+                            this.mVideoFramesPlayed,
+                            this.mVideoFramesDropped,
+                            this.mAudioUnderrunCount,
+                            this.mNetworkBytesRead,
+                            this.mLocalBytesRead,
+                            this.mNetworkTransferDurationMillis,
+                            this.mDrmSessionId,
+                            this.mMetricsBundle);
             return o;
         }
 

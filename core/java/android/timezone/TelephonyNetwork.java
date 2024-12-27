@@ -7,7 +7,8 @@ public final class TelephonyNetwork {
     private final com.android.i18n.timezone.TelephonyNetwork mDelegate;
 
     TelephonyNetwork(com.android.i18n.timezone.TelephonyNetwork delegate) {
-        this.mDelegate = (com.android.i18n.timezone.TelephonyNetwork) Objects.requireNonNull(delegate);
+        this.mDelegate =
+                (com.android.i18n.timezone.TelephonyNetwork) Objects.requireNonNull(delegate);
     }
 
     public String getMcc() {

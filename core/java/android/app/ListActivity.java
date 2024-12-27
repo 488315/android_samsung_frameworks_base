@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -16,20 +17,20 @@ public class ListActivity extends Activity {
     private Handler mHandler = new Handler();
     private boolean mFinishedStart = false;
     private Runnable mRequestFocus = new Runnable() { // from class: android.app.ListActivity.1
-        @Override // java.lang.Runnable
-        public void run() {
-            ListActivity.this.mList.focusableViewAvailable(ListActivity.this.mList);
-        }
-    };
-    private AdapterView.OnItemClickListener mOnClickListener = new AdapterView.OnItemClickListener() { // from class: android.app.ListActivity.2
-        @Override // android.widget.AdapterView.OnItemClickListener
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-            ListActivity.this.onListItemClick((ListView) parent, v, position, id);
-        }
-    };
+                @Override // java.lang.Runnable
+                public void run() {
+                    ListActivity.this.mList.focusableViewAvailable(ListActivity.this.mList);
+                }
+            };
+    private AdapterView.OnItemClickListener mOnClickListener =
+            new AdapterView.OnItemClickListener() { // from class: android.app.ListActivity.2
+                @Override // android.widget.AdapterView.OnItemClickListener
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    ListActivity.this.onListItemClick((ListView) parent, v, position, id);
+                }
+            };
 
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-    }
+    protected void onListItemClick(ListView l, View v, int position, long id) {}
 
     @Override // android.app.Activity
     protected void onRestoreInstanceState(Bundle state) {
@@ -49,7 +50,8 @@ public class ListActivity extends Activity {
         View emptyView = findViewById(16908292);
         this.mList = (ListView) findViewById(16908298);
         if (this.mList == null) {
-            throw new RuntimeException("Your content must have a ListView whose id attribute is 'android.R.id.list'");
+            throw new RuntimeException(
+                    "Your content must have a ListView whose id attribute is 'android.R.id.list'");
         }
         if (emptyView != null) {
             this.mList.setEmptyView(emptyView);

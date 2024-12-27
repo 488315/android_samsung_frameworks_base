@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ICocktailBarShowCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.cocktailbar.ICocktailBarShowCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.cocktailbar.ICocktailBarShowCallback";
 
     void onShown(IBinder iBinder) throws RemoteException;
 
     public static class Default implements ICocktailBarShowCallback {
         @Override // com.samsung.android.cocktailbar.ICocktailBarShowCallback
-        public void onShown(IBinder windowToken) throws RemoteException {
-        }
+        public void onShown(IBinder windowToken) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ICocktailBarShowCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICocktailBarShowCallback {
+    public abstract static class Stub extends Binder implements ICocktailBarShowCallback {
         static final int TRANSACTION_onShown = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ICocktailBarShowCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICocktailBarShowCallback.DESCRIPTOR);
             }

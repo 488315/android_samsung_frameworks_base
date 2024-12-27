@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.crypto.modes.gcm;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.lang.reflect.Array;
 
 /* loaded from: classes5.dex */

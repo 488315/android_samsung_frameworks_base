@@ -2,7 +2,6 @@ package com.android.server.biometrics;
 
 import android.os.RemoteException;
 import android.util.Slog;
-import com.android.server.biometrics.BiometricService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -23,7 +22,8 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda4 im
         switch (this.$r8$classId) {
             case 0:
                 BiometricService biometricService = (BiometricService) this.f$0;
-                AuthSession authSessionIfCurrent = biometricService.getAuthSessionIfCurrent(this.f$1);
+                AuthSession authSessionIfCurrent =
+                        biometricService.getAuthSessionIfCurrent(this.f$1);
                 if (authSessionIfCurrent != null) {
                     Slog.e("BiometricService", "Session: " + authSessionIfCurrent);
                     try {
@@ -32,7 +32,8 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda4 im
                         Slog.e("BiometricService/AuthSession", "Remote Exception: " + e);
                     }
                     if (i != 2 && i != 3) {
-                        authSessionIfCurrent.mStatusBarService.hideAuthenticationDialog(authSessionIfCurrent.mRequestId);
+                        authSessionIfCurrent.mStatusBarService.hideAuthenticationDialog(
+                                authSessionIfCurrent.mRequestId);
                         AuthSession authSession = biometricService.mAuthSession;
                         if (authSession != null) {
                             authSession.destroy();
@@ -49,13 +50,16 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda4 im
                     break;
                 }
             default:
-                BiometricService.BiometricServiceWrapper biometricServiceWrapper = (BiometricService.BiometricServiceWrapper) this.f$0;
+                BiometricService.BiometricServiceWrapper biometricServiceWrapper =
+                        (BiometricService.BiometricServiceWrapper) this.f$0;
                 long j = this.f$1;
                 BiometricService biometricService2 = BiometricService.this;
                 AuthSession authSessionIfCurrent2 = biometricService2.getAuthSessionIfCurrent(j);
                 if (authSessionIfCurrent2 != null) {
                     if (authSessionIfCurrent2.onCancelAuthSession(false)) {
-                        Slog.d("BiometricService", "handleCancelAuthentication: AuthSession finished");
+                        Slog.d(
+                                "BiometricService",
+                                "handleCancelAuthentication: AuthSession finished");
                         AuthSession authSession2 = biometricService2.mAuthSession;
                         if (authSession2 != null) {
                             authSession2.destroy();
@@ -64,7 +68,9 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda4 im
                         break;
                     }
                 } else {
-                    Slog.w("BiometricService", "handleCancelAuthentication: AuthSession is not current");
+                    Slog.w(
+                            "BiometricService",
+                            "handleCancelAuthentication: AuthSession is not current");
                     break;
                 }
                 break;

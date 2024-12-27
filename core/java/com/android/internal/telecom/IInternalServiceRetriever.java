@@ -5,11 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.telecom.IDeviceIdleControllerAdapter;
 
 /* loaded from: classes5.dex */
 public interface IInternalServiceRetriever extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telecom.IInternalServiceRetriever";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telecom.IInternalServiceRetriever";
 
     IDeviceIdleControllerAdapter getDeviceIdleController() throws RemoteException;
 
@@ -25,7 +25,7 @@ public interface IInternalServiceRetriever extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInternalServiceRetriever {
+    public abstract static class Stub extends Binder implements IInternalServiceRetriever {
         static final int TRANSACTION_getDeviceIdleController = 1;
 
         public Stub() {
@@ -63,7 +63,8 @@ public interface IInternalServiceRetriever extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInternalServiceRetriever.DESCRIPTOR);
             }
@@ -106,7 +107,9 @@ public interface IInternalServiceRetriever extends IInterface {
                     _data.writeInterfaceToken(IInternalServiceRetriever.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    IDeviceIdleControllerAdapter _result = IDeviceIdleControllerAdapter.Stub.asInterface(_reply.readStrongBinder());
+                    IDeviceIdleControllerAdapter _result =
+                            IDeviceIdleControllerAdapter.Stub.asInterface(
+                                    _reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

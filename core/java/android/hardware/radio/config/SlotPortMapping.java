@@ -3,25 +3,28 @@ package android.hardware.radio.config;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SlotPortMapping implements Parcelable {
-    public static final Parcelable.Creator<SlotPortMapping> CREATOR = new Parcelable.Creator<SlotPortMapping>() { // from class: android.hardware.radio.config.SlotPortMapping.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SlotPortMapping createFromParcel(Parcel _aidl_source) {
-            SlotPortMapping _aidl_out = new SlotPortMapping();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SlotPortMapping> CREATOR =
+            new Parcelable.Creator<SlotPortMapping>() { // from class:
+                // android.hardware.radio.config.SlotPortMapping.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SlotPortMapping createFromParcel(Parcel _aidl_source) {
+                    SlotPortMapping _aidl_out = new SlotPortMapping();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SlotPortMapping[] newArray(int _aidl_size) {
-            return new SlotPortMapping[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SlotPortMapping[] newArray(int _aidl_size) {
+                    return new SlotPortMapping[_aidl_size];
+                }
+            };
     public int physicalSlotId = 0;
     public int portId = 0;
 

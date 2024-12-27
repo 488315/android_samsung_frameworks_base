@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.satellite;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehSatCall implements Parcelable {
-    public static final Parcelable.Creator<SehSatCall> CREATOR = new Parcelable.Creator<SehSatCall>() { // from class: vendor.samsung.hardware.radio.satellite.SehSatCall.1
-        @Override // android.os.Parcelable.Creator
-        public SehSatCall createFromParcel(Parcel _aidl_source) {
-            SehSatCall _aidl_out = new SehSatCall();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSatCall> CREATOR =
+            new Parcelable.Creator<
+                    SehSatCall>() { // from class:
+                                    // vendor.samsung.hardware.radio.satellite.SehSatCall.1
+                @Override // android.os.Parcelable.Creator
+                public SehSatCall createFromParcel(Parcel _aidl_source) {
+                    SehSatCall _aidl_out = new SehSatCall();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSatCall[] newArray(int _aidl_size) {
-            return new SehSatCall[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSatCall[] newArray(int _aidl_size) {
+                    return new SehSatCall[_aidl_size];
+                }
+            };
     public String alpha;
     public String number;
     public int index = 0;

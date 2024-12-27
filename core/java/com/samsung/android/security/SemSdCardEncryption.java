@@ -7,8 +7,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.storage.IStorageManager;
 import android.util.Log;
+
 import com.samsung.android.media.AudioParameter;
-import com.samsung.android.security.IDirEncryptService;
+
 import java.io.File;
 
 /* loaded from: classes6.dex */
@@ -38,7 +39,8 @@ public class SemSdCardEncryption {
     public static final int POLICY_CAN_NOT_BE_SET_UNDER_BUSY_STATE = 15;
     public static final int POLICY_NOT_SAVED = 9;
     public static final int POLICY_SAVED = 8;
-    public static final String SD_CARD_ENCRYPTION_ACTION = "com.sec.app.action.START_SDCARD_ENCRYPTION";
+    public static final String SD_CARD_ENCRYPTION_ACTION =
+            "com.sec.app.action.START_SDCARD_ENCRYPTION";
     public static final String STATUS_BUSY = "busy";
     public static final String STATUS_DONE = "done";
     public static final String STATUS_FREE = "free";
@@ -48,7 +50,8 @@ public class SemSdCardEncryption {
     private Context mContext;
     private DirEncryptionWrapper mDew;
     private IDirEncryptService m_InstDirEncSvc;
-    private static final boolean IS_SUPPORT_SDCARD_SLOT = new File("/sys/class/sec/sdinfo").exists();
+    private static final boolean IS_SUPPORT_SDCARD_SLOT =
+            new File("/sys/class/sec/sdinfo").exists();
     public static int SECURITY_POLICY_NOTIFICATION_ID = -889275714;
     private static boolean mPolicyChanged = false;
 
@@ -58,8 +61,7 @@ public class SemSdCardEncryption {
         public static final int FREE = 0;
         public static final int READY = 1;
 
-        private Status() {
-        }
+        private Status() {}
     }
 
     public static final class EncryptionState {
@@ -69,8 +71,7 @@ public class SemSdCardEncryption {
         public static final int ENCRYPTING = 0;
         public static final int SET_ADMIN = -1;
 
-        private EncryptionState() {
-        }
+        private EncryptionState() {}
     }
 
     public static final class Error {
@@ -86,8 +87,7 @@ public class SemSdCardEncryption {
         public static final int PWD_UPDATE = 2;
         public static final int UNMOUNT = 8;
 
-        private Error() {
-        }
+        private Error() {}
     }
 
     public SemSdCardEncryption(Context context) {

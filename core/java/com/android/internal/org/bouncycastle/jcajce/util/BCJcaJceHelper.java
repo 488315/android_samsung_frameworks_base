@@ -1,9 +1,11 @@
 package com.android.internal.org.bouncycastle.jcajce.util;
 
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
 import java.security.Security;
+
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
@@ -31,8 +33,10 @@ public class BCJcaJceHelper extends ProviderJcaJceHelper {
         super(getBouncyCastleProvider());
     }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.util.ProviderJcaJceHelper, com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public Cipher createCipher(String algorithm) throws NoSuchAlgorithmException, NoSuchPaddingException {
+    @Override // com.android.internal.org.bouncycastle.jcajce.util.ProviderJcaJceHelper,
+              // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
+    public Cipher createCipher(String algorithm)
+            throws NoSuchAlgorithmException, NoSuchPaddingException {
         try {
             return super.createCipher(algorithm);
         } catch (NoSuchAlgorithmException originalException) {
@@ -40,8 +44,10 @@ public class BCJcaJceHelper extends ProviderJcaJceHelper {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.util.ProviderJcaJceHelper, com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
-    public SecretKeyFactory createSecretKeyFactory(String algorithm) throws NoSuchAlgorithmException {
+    @Override // com.android.internal.org.bouncycastle.jcajce.util.ProviderJcaJceHelper,
+              // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
+    public SecretKeyFactory createSecretKeyFactory(String algorithm)
+            throws NoSuchAlgorithmException {
         try {
             return super.createSecretKeyFactory(algorithm);
         } catch (NoSuchAlgorithmException originalException) {
@@ -49,7 +55,8 @@ public class BCJcaJceHelper extends ProviderJcaJceHelper {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.util.ProviderJcaJceHelper, com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
+    @Override // com.android.internal.org.bouncycastle.jcajce.util.ProviderJcaJceHelper,
+              // com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper
     public Mac createMac(String algorithm) throws NoSuchAlgorithmException {
         try {
             return super.createMac(algorithm);

@@ -23,21 +23,23 @@ public class GnssSignalType implements Parcelable {
     public static final String CODE_TYPE_X = "X";
     public static final String CODE_TYPE_Y = "Y";
     public static final String CODE_TYPE_Z = "Z";
-    public static final Parcelable.Creator<GnssSignalType> CREATOR = new Parcelable.Creator<GnssSignalType>() { // from class: android.hardware.gnss.GnssSignalType.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssSignalType createFromParcel(Parcel _aidl_source) {
-            GnssSignalType _aidl_out = new GnssSignalType();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GnssSignalType> CREATOR =
+            new Parcelable.Creator<
+                    GnssSignalType>() { // from class: android.hardware.gnss.GnssSignalType.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssSignalType createFromParcel(Parcel _aidl_source) {
+                    GnssSignalType _aidl_out = new GnssSignalType();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssSignalType[] newArray(int _aidl_size) {
-            return new GnssSignalType[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssSignalType[] newArray(int _aidl_size) {
+                    return new GnssSignalType[_aidl_size];
+                }
+            };
     public String codeType;
     public int constellation = 0;
     public double carrierFrequencyHz = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;

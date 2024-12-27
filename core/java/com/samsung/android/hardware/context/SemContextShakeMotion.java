@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextShakeMotion extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextShakeMotion> CREATOR = new Parcelable.Creator<SemContextShakeMotion>() { // from class: com.samsung.android.hardware.context.SemContextShakeMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextShakeMotion createFromParcel(Parcel in) {
-            return new SemContextShakeMotion(in);
-        }
+    public static final Parcelable.Creator<SemContextShakeMotion> CREATOR =
+            new Parcelable.Creator<
+                    SemContextShakeMotion>() { // from class:
+                                               // com.samsung.android.hardware.context.SemContextShakeMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextShakeMotion createFromParcel(Parcel in) {
+                    return new SemContextShakeMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextShakeMotion[] newArray(int size) {
-            return new SemContextShakeMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextShakeMotion[] newArray(int size) {
+                    return new SemContextShakeMotion[size];
+                }
+            };
     public static final int NONE = 0;
     public static final int START = 1;
     public static final int STOP = 2;

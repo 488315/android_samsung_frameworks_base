@@ -2,7 +2,9 @@ package com.att.iqi.lib.metrics.mm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.att.iqi.lib.Metric;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -21,17 +23,18 @@ public class MM07 extends Metric {
     public static final byte IQ_SDP_MEDIA_VIDEO = 2;
     private final HashMap mMediaStats;
     public static final Metric.ID ID = new Metric.ID("MM07");
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.mm.MM07.1
-        @Override // android.os.Parcelable.Creator
-        public MM07 createFromParcel(Parcel parcel) {
-            return new MM07(parcel);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.mm.MM07.1
+                @Override // android.os.Parcelable.Creator
+                public MM07 createFromParcel(Parcel parcel) {
+                    return new MM07(parcel);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public MM07[] newArray(int i) {
-            return new MM07[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public MM07[] newArray(int i) {
+                    return new MM07[i];
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class RtpStats {

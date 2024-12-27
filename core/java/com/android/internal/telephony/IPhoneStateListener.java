@@ -24,6 +24,7 @@ import android.telephony.ims.MediaQualityStatus;
 import android.telephony.satellite.NtnSignalStrength;
 import android.telephony.satellite.SemSatelliteServiceState;
 import android.telephony.satellite.SemSatelliteSignalStrength;
+
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,8 @@ public interface IPhoneStateListener extends IInterface {
 
     void onCarrierRoamingNtnModeChanged(boolean z) throws RemoteException;
 
-    void onCarrierRoamingNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException;
+    void onCarrierRoamingNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength)
+            throws RemoteException;
 
     void onCellInfoChanged(List<CellInfo> list) throws RemoteException;
 
@@ -65,7 +67,8 @@ public interface IPhoneStateListener extends IInterface {
 
     void onDataActivity(int i) throws RemoteException;
 
-    void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dataConnectionRealTimeInfo) throws RemoteException;
+    void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dataConnectionRealTimeInfo)
+            throws RemoteException;
 
     void onDataConnectionStateChanged(int i, int i2) throws RemoteException;
 
@@ -97,15 +100,19 @@ public interface IPhoneStateListener extends IInterface {
 
     void onPreciseCallStateChanged(PreciseCallState preciseCallState) throws RemoteException;
 
-    void onPreciseDataConnectionStateChanged(PreciseDataConnectionState preciseDataConnectionState) throws RemoteException;
+    void onPreciseDataConnectionStateChanged(PreciseDataConnectionState preciseDataConnectionState)
+            throws RemoteException;
 
     void onRadioPowerStateChanged(int i) throws RemoteException;
 
-    void onRegistrationFailed(CellIdentity cellIdentity, String str, int i, int i2, int i3) throws RemoteException;
+    void onRegistrationFailed(CellIdentity cellIdentity, String str, int i, int i2, int i3)
+            throws RemoteException;
 
-    void onSemSatelliteServiceStateChanged(SemSatelliteServiceState semSatelliteServiceState) throws RemoteException;
+    void onSemSatelliteServiceStateChanged(SemSatelliteServiceState semSatelliteServiceState)
+            throws RemoteException;
 
-    void onSemSatelliteSignalStrengthChanged(SemSatelliteSignalStrength semSatelliteSignalStrength) throws RemoteException;
+    void onSemSatelliteSignalStrengthChanged(SemSatelliteSignalStrength semSatelliteSignalStrength)
+            throws RemoteException;
 
     void onServiceStateChanged(ServiceState serviceState) throws RemoteException;
 
@@ -123,188 +130,167 @@ public interface IPhoneStateListener extends IInterface {
 
     public static class Default implements IPhoneStateListener {
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onServiceStateChanged(ServiceState serviceState) throws RemoteException {
-        }
+        public void onServiceStateChanged(ServiceState serviceState) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onSignalStrengthChanged(int asu) throws RemoteException {
-        }
+        public void onSignalStrengthChanged(int asu) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onMessageWaitingIndicatorChanged(boolean mwi) throws RemoteException {
-        }
+        public void onMessageWaitingIndicatorChanged(boolean mwi) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCallForwardingIndicatorChanged(boolean cfi) throws RemoteException {
-        }
+        public void onCallForwardingIndicatorChanged(boolean cfi) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCellLocationChanged(CellIdentity location) throws RemoteException {
-        }
+        public void onCellLocationChanged(CellIdentity location) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onLegacyCallStateChanged(int state, String incomingNumber) throws RemoteException {
-        }
+        public void onLegacyCallStateChanged(int state, String incomingNumber)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCallStateChanged(int state) throws RemoteException {
-        }
+        public void onCallStateChanged(int state) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onDataConnectionStateChanged(int state, int networkType) throws RemoteException {
-        }
+        public void onDataConnectionStateChanged(int state, int networkType)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onDataActivity(int direction) throws RemoteException {
-        }
+        public void onDataActivity(int direction) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onSignalStrengthsChanged(SignalStrength signalStrength) throws RemoteException {
-        }
+        public void onSignalStrengthsChanged(SignalStrength signalStrength)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCellInfoChanged(List<CellInfo> cellInfo) throws RemoteException {
-        }
+        public void onCellInfoChanged(List<CellInfo> cellInfo) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onPreciseCallStateChanged(PreciseCallState callState) throws RemoteException {
-        }
+        public void onPreciseCallStateChanged(PreciseCallState callState) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onPreciseDataConnectionStateChanged(PreciseDataConnectionState dataConnectionState) throws RemoteException {
-        }
+        public void onPreciseDataConnectionStateChanged(
+                PreciseDataConnectionState dataConnectionState) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dcRtInfo) throws RemoteException {
-        }
+        public void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dcRtInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onSrvccStateChanged(int state) throws RemoteException {
-        }
+        public void onSrvccStateChanged(int state) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onVoiceActivationStateChanged(int activationState) throws RemoteException {
-        }
+        public void onVoiceActivationStateChanged(int activationState) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onDataActivationStateChanged(int activationState) throws RemoteException {
-        }
+        public void onDataActivationStateChanged(int activationState) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onOemHookRawEvent(byte[] rawData) throws RemoteException {
-        }
+        public void onOemHookRawEvent(byte[] rawData) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCarrierNetworkChange(boolean active) throws RemoteException {
-        }
+        public void onCarrierNetworkChange(boolean active) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onUserMobileDataStateChanged(boolean enabled) throws RemoteException {
-        }
+        public void onUserMobileDataStateChanged(boolean enabled) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) throws RemoteException {
-        }
+        public void onDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onPhoneCapabilityChanged(PhoneCapability capability) throws RemoteException {
-        }
+        public void onPhoneCapabilityChanged(PhoneCapability capability) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onActiveDataSubIdChanged(int subId) throws RemoteException {
-        }
+        public void onActiveDataSubIdChanged(int subId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onRadioPowerStateChanged(int state) throws RemoteException {
-        }
+        public void onRadioPowerStateChanged(int state) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCallStatesChanged(List<CallState> callStateList) throws RemoteException {
-        }
+        public void onCallStatesChanged(List<CallState> callStateList) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onEmergencyNumberListChanged(Map emergencyNumberList) throws RemoteException {
-        }
+        public void onEmergencyNumberListChanged(Map emergencyNumberList) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onOutgoingEmergencyCall(EmergencyNumber placedEmergencyNumber, int subscriptionId) throws RemoteException {
-        }
+        public void onOutgoingEmergencyCall(
+                EmergencyNumber placedEmergencyNumber, int subscriptionId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onOutgoingEmergencySms(EmergencyNumber sentEmergencyNumber, int subscriptionId) throws RemoteException {
-        }
+        public void onOutgoingEmergencySms(EmergencyNumber sentEmergencyNumber, int subscriptionId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCallDisconnectCauseChanged(int disconnectCause, int preciseDisconnectCause) throws RemoteException {
-        }
+        public void onCallDisconnectCauseChanged(int disconnectCause, int preciseDisconnectCause)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onImsCallDisconnectCauseChanged(ImsReasonInfo imsReasonInfo) throws RemoteException {
-        }
+        public void onImsCallDisconnectCauseChanged(ImsReasonInfo imsReasonInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onRegistrationFailed(CellIdentity cellIdentity, String chosenPlmn, int domain, int causeCode, int additionalCauseCode) throws RemoteException {
-        }
+        public void onRegistrationFailed(
+                CellIdentity cellIdentity,
+                String chosenPlmn,
+                int domain,
+                int causeCode,
+                int additionalCauseCode)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onBarringInfoChanged(BarringInfo barringInfo) throws RemoteException {
-        }
+        public void onBarringInfoChanged(BarringInfo barringInfo) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onPhysicalChannelConfigChanged(List<PhysicalChannelConfig> configs) throws RemoteException {
-        }
+        public void onPhysicalChannelConfigChanged(List<PhysicalChannelConfig> configs)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onDataEnabledChanged(boolean enabled, int reason) throws RemoteException {
-        }
+        public void onDataEnabledChanged(boolean enabled, int reason) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onAllowedNetworkTypesChanged(int reason, long allowedNetworkType) throws RemoteException {
-        }
+        public void onAllowedNetworkTypesChanged(int reason, long allowedNetworkType)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onLinkCapacityEstimateChanged(List<LinkCapacityEstimate> linkCapacityEstimateList) throws RemoteException {
-        }
+        public void onLinkCapacityEstimateChanged(
+                List<LinkCapacityEstimate> linkCapacityEstimateList) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onMediaQualityStatusChanged(MediaQualityStatus mediaQualityStatus) throws RemoteException {
-        }
+        public void onMediaQualityStatusChanged(MediaQualityStatus mediaQualityStatus)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCallBackModeStarted(int type) throws RemoteException {
-        }
+        public void onCallBackModeStarted(int type) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCallBackModeStopped(int type, int reason) throws RemoteException {
-        }
+        public void onCallBackModeStopped(int type, int reason) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onSimultaneousCallingStateChanged(int[] subIds) throws RemoteException {
-        }
+        public void onSimultaneousCallingStateChanged(int[] subIds) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCarrierRoamingNtnModeChanged(boolean active) throws RemoteException {
-        }
+        public void onCarrierRoamingNtnModeChanged(boolean active) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCarrierRoamingNtnEligibleStateChanged(boolean eligible) throws RemoteException {
-        }
+        public void onCarrierRoamingNtnEligibleStateChanged(boolean eligible)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCarrierRoamingNtnAvailableServicesChanged(int[] availableServices) throws RemoteException {
-        }
+        public void onCarrierRoamingNtnAvailableServicesChanged(int[] availableServices)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onCarrierRoamingNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException {
-        }
+        public void onCarrierRoamingNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onSemSatelliteServiceStateChanged(SemSatelliteServiceState serviceState) throws RemoteException {
-        }
+        public void onSemSatelliteServiceStateChanged(SemSatelliteServiceState serviceState)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneStateListener
-        public void onSemSatelliteSignalStrengthChanged(SemSatelliteSignalStrength signalStrength) throws RemoteException {
-        }
+        public void onSemSatelliteSignalStrengthChanged(SemSatelliteSignalStrength signalStrength)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -312,8 +298,9 @@ public interface IPhoneStateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPhoneStateListener {
-        public static final String DESCRIPTOR = "com.android.internal.telephony.IPhoneStateListener";
+    public abstract static class Stub extends Binder implements IPhoneStateListener {
+        public static final String DESCRIPTOR =
+                "com.android.internal.telephony.IPhoneStateListener";
         static final int TRANSACTION_onActiveDataSubIdChanged = 23;
         static final int TRANSACTION_onAllowedNetworkTypesChanged = 35;
         static final int TRANSACTION_onBarringInfoChanged = 32;
@@ -486,7 +473,8 @@ public interface IPhoneStateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -543,7 +531,8 @@ public interface IPhoneStateListener extends IInterface {
                     onDataActivity(_arg09);
                     return true;
                 case 10:
-                    SignalStrength _arg010 = (SignalStrength) data.readTypedObject(SignalStrength.CREATOR);
+                    SignalStrength _arg010 =
+                            (SignalStrength) data.readTypedObject(SignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     onSignalStrengthsChanged(_arg010);
                     return true;
@@ -553,17 +542,22 @@ public interface IPhoneStateListener extends IInterface {
                     onCellInfoChanged(_arg011);
                     return true;
                 case 12:
-                    PreciseCallState _arg012 = (PreciseCallState) data.readTypedObject(PreciseCallState.CREATOR);
+                    PreciseCallState _arg012 =
+                            (PreciseCallState) data.readTypedObject(PreciseCallState.CREATOR);
                     data.enforceNoDataAvail();
                     onPreciseCallStateChanged(_arg012);
                     return true;
                 case 13:
-                    PreciseDataConnectionState _arg013 = (PreciseDataConnectionState) data.readTypedObject(PreciseDataConnectionState.CREATOR);
+                    PreciseDataConnectionState _arg013 =
+                            (PreciseDataConnectionState)
+                                    data.readTypedObject(PreciseDataConnectionState.CREATOR);
                     data.enforceNoDataAvail();
                     onPreciseDataConnectionStateChanged(_arg013);
                     return true;
                 case 14:
-                    DataConnectionRealTimeInfo _arg014 = (DataConnectionRealTimeInfo) data.readTypedObject(DataConnectionRealTimeInfo.CREATOR);
+                    DataConnectionRealTimeInfo _arg014 =
+                            (DataConnectionRealTimeInfo)
+                                    data.readTypedObject(DataConnectionRealTimeInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDataConnectionRealTimeInfoChanged(_arg014);
                     return true;
@@ -598,12 +592,15 @@ public interface IPhoneStateListener extends IInterface {
                     onUserMobileDataStateChanged(_arg020);
                     return true;
                 case 21:
-                    TelephonyDisplayInfo _arg021 = (TelephonyDisplayInfo) data.readTypedObject(TelephonyDisplayInfo.CREATOR);
+                    TelephonyDisplayInfo _arg021 =
+                            (TelephonyDisplayInfo)
+                                    data.readTypedObject(TelephonyDisplayInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDisplayInfoChanged(_arg021);
                     return true;
                 case 22:
-                    PhoneCapability _arg022 = (PhoneCapability) data.readTypedObject(PhoneCapability.CREATOR);
+                    PhoneCapability _arg022 =
+                            (PhoneCapability) data.readTypedObject(PhoneCapability.CREATOR);
                     data.enforceNoDataAvail();
                     onPhoneCapabilityChanged(_arg022);
                     return true;
@@ -629,13 +626,15 @@ public interface IPhoneStateListener extends IInterface {
                     onEmergencyNumberListChanged(_arg026);
                     return true;
                 case 27:
-                    EmergencyNumber _arg027 = (EmergencyNumber) data.readTypedObject(EmergencyNumber.CREATOR);
+                    EmergencyNumber _arg027 =
+                            (EmergencyNumber) data.readTypedObject(EmergencyNumber.CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     onOutgoingEmergencyCall(_arg027, _arg13);
                     return true;
                 case 28:
-                    EmergencyNumber _arg028 = (EmergencyNumber) data.readTypedObject(EmergencyNumber.CREATOR);
+                    EmergencyNumber _arg028 =
+                            (EmergencyNumber) data.readTypedObject(EmergencyNumber.CREATOR);
                     int _arg14 = data.readInt();
                     data.enforceNoDataAvail();
                     onOutgoingEmergencySms(_arg028, _arg14);
@@ -647,12 +646,14 @@ public interface IPhoneStateListener extends IInterface {
                     onCallDisconnectCauseChanged(_arg029, _arg15);
                     return true;
                 case 30:
-                    ImsReasonInfo _arg030 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg030 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onImsCallDisconnectCauseChanged(_arg030);
                     return true;
                 case 31:
-                    CellIdentity _arg031 = (CellIdentity) data.readTypedObject(CellIdentity.CREATOR);
+                    CellIdentity _arg031 =
+                            (CellIdentity) data.readTypedObject(CellIdentity.CREATOR);
                     String _arg16 = data.readString();
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
@@ -666,7 +667,8 @@ public interface IPhoneStateListener extends IInterface {
                     onBarringInfoChanged(_arg032);
                     return true;
                 case 33:
-                    List<PhysicalChannelConfig> _arg033 = data.createTypedArrayList(PhysicalChannelConfig.CREATOR);
+                    List<PhysicalChannelConfig> _arg033 =
+                            data.createTypedArrayList(PhysicalChannelConfig.CREATOR);
                     data.enforceNoDataAvail();
                     onPhysicalChannelConfigChanged(_arg033);
                     return true;
@@ -683,12 +685,14 @@ public interface IPhoneStateListener extends IInterface {
                     onAllowedNetworkTypesChanged(_arg035, _arg18);
                     return true;
                 case 36:
-                    List<LinkCapacityEstimate> _arg036 = data.createTypedArrayList(LinkCapacityEstimate.CREATOR);
+                    List<LinkCapacityEstimate> _arg036 =
+                            data.createTypedArrayList(LinkCapacityEstimate.CREATOR);
                     data.enforceNoDataAvail();
                     onLinkCapacityEstimateChanged(_arg036);
                     return true;
                 case 37:
-                    MediaQualityStatus _arg037 = (MediaQualityStatus) data.readTypedObject(MediaQualityStatus.CREATOR);
+                    MediaQualityStatus _arg037 =
+                            (MediaQualityStatus) data.readTypedObject(MediaQualityStatus.CREATOR);
                     data.enforceNoDataAvail();
                     onMediaQualityStatusChanged(_arg037);
                     return true;
@@ -724,17 +728,22 @@ public interface IPhoneStateListener extends IInterface {
                     onCarrierRoamingNtnAvailableServicesChanged(_arg043);
                     return true;
                 case 44:
-                    NtnSignalStrength _arg044 = (NtnSignalStrength) data.readTypedObject(NtnSignalStrength.CREATOR);
+                    NtnSignalStrength _arg044 =
+                            (NtnSignalStrength) data.readTypedObject(NtnSignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     onCarrierRoamingNtnSignalStrengthChanged(_arg044);
                     return true;
                 case 45:
-                    SemSatelliteServiceState _arg045 = (SemSatelliteServiceState) data.readTypedObject(SemSatelliteServiceState.CREATOR);
+                    SemSatelliteServiceState _arg045 =
+                            (SemSatelliteServiceState)
+                                    data.readTypedObject(SemSatelliteServiceState.CREATOR);
                     data.enforceNoDataAvail();
                     onSemSatelliteServiceStateChanged(_arg045);
                     return true;
                 case 46:
-                    SemSatelliteSignalStrength _arg046 = (SemSatelliteSignalStrength) data.readTypedObject(SemSatelliteSignalStrength.CREATOR);
+                    SemSatelliteSignalStrength _arg046 =
+                            (SemSatelliteSignalStrength)
+                                    data.readTypedObject(SemSatelliteSignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     onSemSatelliteSignalStrengthChanged(_arg046);
                     return true;
@@ -820,7 +829,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onLegacyCallStateChanged(int state, String incomingNumber) throws RemoteException {
+            public void onLegacyCallStateChanged(int state, String incomingNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -845,7 +855,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onDataConnectionStateChanged(int state, int networkType) throws RemoteException {
+            public void onDataConnectionStateChanged(int state, int networkType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -870,7 +881,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onSignalStrengthsChanged(SignalStrength signalStrength) throws RemoteException {
+            public void onSignalStrengthsChanged(SignalStrength signalStrength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -894,7 +906,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onPreciseCallStateChanged(PreciseCallState callState) throws RemoteException {
+            public void onPreciseCallStateChanged(PreciseCallState callState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -906,7 +919,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onPreciseDataConnectionStateChanged(PreciseDataConnectionState dataConnectionState) throws RemoteException {
+            public void onPreciseDataConnectionStateChanged(
+                    PreciseDataConnectionState dataConnectionState) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -918,7 +932,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dcRtInfo) throws RemoteException {
+            public void onDataConnectionRealTimeInfoChanged(DataConnectionRealTimeInfo dcRtInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1002,7 +1017,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) throws RemoteException {
+            public void onDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1014,7 +1030,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onPhoneCapabilityChanged(PhoneCapability capability) throws RemoteException {
+            public void onPhoneCapabilityChanged(PhoneCapability capability)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1062,7 +1079,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onEmergencyNumberListChanged(Map emergencyNumberList) throws RemoteException {
+            public void onEmergencyNumberListChanged(Map emergencyNumberList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1074,7 +1092,9 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onOutgoingEmergencyCall(EmergencyNumber placedEmergencyNumber, int subscriptionId) throws RemoteException {
+            public void onOutgoingEmergencyCall(
+                    EmergencyNumber placedEmergencyNumber, int subscriptionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1087,7 +1107,9 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onOutgoingEmergencySms(EmergencyNumber sentEmergencyNumber, int subscriptionId) throws RemoteException {
+            public void onOutgoingEmergencySms(
+                    EmergencyNumber sentEmergencyNumber, int subscriptionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1100,7 +1122,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onCallDisconnectCauseChanged(int disconnectCause, int preciseDisconnectCause) throws RemoteException {
+            public void onCallDisconnectCauseChanged(
+                    int disconnectCause, int preciseDisconnectCause) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1113,7 +1136,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onImsCallDisconnectCauseChanged(ImsReasonInfo imsReasonInfo) throws RemoteException {
+            public void onImsCallDisconnectCauseChanged(ImsReasonInfo imsReasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1125,7 +1149,13 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onRegistrationFailed(CellIdentity cellIdentity, String chosenPlmn, int domain, int causeCode, int additionalCauseCode) throws RemoteException {
+            public void onRegistrationFailed(
+                    CellIdentity cellIdentity,
+                    String chosenPlmn,
+                    int domain,
+                    int causeCode,
+                    int additionalCauseCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1153,7 +1183,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onPhysicalChannelConfigChanged(List<PhysicalChannelConfig> configs) throws RemoteException {
+            public void onPhysicalChannelConfigChanged(List<PhysicalChannelConfig> configs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1178,7 +1209,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onAllowedNetworkTypesChanged(int reason, long allowedNetworkType) throws RemoteException {
+            public void onAllowedNetworkTypesChanged(int reason, long allowedNetworkType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1191,7 +1223,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onLinkCapacityEstimateChanged(List<LinkCapacityEstimate> linkCapacityEstimateList) throws RemoteException {
+            public void onLinkCapacityEstimateChanged(
+                    List<LinkCapacityEstimate> linkCapacityEstimateList) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1203,7 +1236,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onMediaQualityStatusChanged(MediaQualityStatus mediaQualityStatus) throws RemoteException {
+            public void onMediaQualityStatusChanged(MediaQualityStatus mediaQualityStatus)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1264,7 +1298,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onCarrierRoamingNtnEligibleStateChanged(boolean eligible) throws RemoteException {
+            public void onCarrierRoamingNtnEligibleStateChanged(boolean eligible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1276,7 +1311,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onCarrierRoamingNtnAvailableServicesChanged(int[] availableServices) throws RemoteException {
+            public void onCarrierRoamingNtnAvailableServicesChanged(int[] availableServices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1288,7 +1324,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onCarrierRoamingNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException {
+            public void onCarrierRoamingNtnSignalStrengthChanged(
+                    NtnSignalStrength ntnSignalStrength) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1300,7 +1337,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onSemSatelliteServiceStateChanged(SemSatelliteServiceState serviceState) throws RemoteException {
+            public void onSemSatelliteServiceStateChanged(SemSatelliteServiceState serviceState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1312,7 +1350,8 @@ public interface IPhoneStateListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneStateListener
-            public void onSemSatelliteSignalStrengthChanged(SemSatelliteSignalStrength signalStrength) throws RemoteException {
+            public void onSemSatelliteSignalStrengthChanged(
+                    SemSatelliteSignalStrength signalStrength) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

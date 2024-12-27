@@ -1,16 +1,18 @@
 package android.webkit;
 
 import android.text.TextUtils;
-import com.google.android.mms.ContentType;
-import java.util.regex.Pattern;
+
 import libcore.content.type.MimeMap;
+
+import com.google.android.mms.ContentType;
+
+import java.util.regex.Pattern;
 
 /* loaded from: classes4.dex */
 public class MimeTypeMap {
     private static final MimeTypeMap sMimeTypeMap = new MimeTypeMap();
 
-    private MimeTypeMap() {
-    }
+    private MimeTypeMap() {}
 
     public static String getFileExtensionFromUrl(String url) {
         int dotPos;
@@ -25,7 +27,9 @@ public class MimeTypeMap {
             }
             int filenamePos = url.lastIndexOf(47);
             String filename = filenamePos >= 0 ? url.substring(filenamePos + 1) : url;
-            if (!filename.isEmpty() && Pattern.matches("[a-zA-Z_0-9\\.\\-\\(\\)\\%]+", filename) && (dotPos = filename.lastIndexOf(46)) >= 0) {
+            if (!filename.isEmpty()
+                    && Pattern.matches("[a-zA-Z_0-9\\.\\-\\(\\)\\%]+", filename)
+                    && (dotPos = filename.lastIndexOf(46)) >= 0) {
                 return filename.substring(dotPos + 1);
             }
             return "";

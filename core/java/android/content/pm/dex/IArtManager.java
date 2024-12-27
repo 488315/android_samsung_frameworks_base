@@ -1,6 +1,5 @@
 package android.content.pm.dex;
 
-import android.content.pm.dex.ISnapshotRuntimeProfileCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -11,15 +10,27 @@ import android.os.RemoteException;
 public interface IArtManager extends IInterface {
     boolean isRuntimeProfilingEnabled(int i, String str) throws RemoteException;
 
-    void snapshotRuntimeProfile(int i, String str, String str2, ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback, String str3) throws RemoteException;
+    void snapshotRuntimeProfile(
+            int i,
+            String str,
+            String str2,
+            ISnapshotRuntimeProfileCallback iSnapshotRuntimeProfileCallback,
+            String str3)
+            throws RemoteException;
 
     public static class Default implements IArtManager {
         @Override // android.content.pm.dex.IArtManager
-        public void snapshotRuntimeProfile(int profileType, String packageName, String codePath, ISnapshotRuntimeProfileCallback callback, String callingPackage) throws RemoteException {
-        }
+        public void snapshotRuntimeProfile(
+                int profileType,
+                String packageName,
+                String codePath,
+                ISnapshotRuntimeProfileCallback callback,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.content.pm.dex.IArtManager
-        public boolean isRuntimeProfilingEnabled(int profileType, String callingPackage) throws RemoteException {
+        public boolean isRuntimeProfilingEnabled(int profileType, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
@@ -29,7 +40,7 @@ public interface IArtManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IArtManager {
+    public abstract static class Stub extends Binder implements IArtManager {
         public static final String DESCRIPTOR = "android.content.pm.dex.IArtManager";
         static final int TRANSACTION_isRuntimeProfilingEnabled = 2;
         static final int TRANSACTION_snapshotRuntimeProfile = 1;
@@ -71,7 +82,8 @@ public interface IArtManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -84,7 +96,9 @@ public interface IArtManager extends IInterface {
                     int _arg0 = data.readInt();
                     String _arg1 = data.readString();
                     String _arg2 = data.readString();
-                    ISnapshotRuntimeProfileCallback _arg3 = ISnapshotRuntimeProfileCallback.Stub.asInterface(data.readStrongBinder());
+                    ISnapshotRuntimeProfileCallback _arg3 =
+                            ISnapshotRuntimeProfileCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg4 = data.readString();
                     data.enforceNoDataAvail();
                     snapshotRuntimeProfile(_arg0, _arg1, _arg2, _arg3, _arg4);
@@ -120,7 +134,13 @@ public interface IArtManager extends IInterface {
             }
 
             @Override // android.content.pm.dex.IArtManager
-            public void snapshotRuntimeProfile(int profileType, String packageName, String codePath, ISnapshotRuntimeProfileCallback callback, String callingPackage) throws RemoteException {
+            public void snapshotRuntimeProfile(
+                    int profileType,
+                    String packageName,
+                    String codePath,
+                    ISnapshotRuntimeProfileCallback callback,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -139,7 +159,8 @@ public interface IArtManager extends IInterface {
             }
 
             @Override // android.content.pm.dex.IArtManager
-            public boolean isRuntimeProfilingEnabled(int profileType, String callingPackage) throws RemoteException {
+            public boolean isRuntimeProfilingEnabled(int profileType, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

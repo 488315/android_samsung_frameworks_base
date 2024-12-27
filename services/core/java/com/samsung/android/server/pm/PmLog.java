@@ -4,7 +4,9 @@ import android.os.Environment;
 import android.os.FileUtils;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.internal.util.FastPrintWriter;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,7 +21,11 @@ public abstract class PmLog {
         try {
             FastPrintWriter fastPrintWriter = new FastPrintWriter(new FileOutputStream(file, true));
             try {
-                fastPrintWriter.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis())) + ": " + str);
+                fastPrintWriter.println(
+                        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+                                        .format(new Date(System.currentTimeMillis()))
+                                + ": "
+                                + str);
                 FileUtils.setPermissions(file.toString(), 508, -1, -1);
                 if (file.length() > 3145728) {
                     file.renameTo(new File(file.getPath() + ".old"));

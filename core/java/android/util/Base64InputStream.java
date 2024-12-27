@@ -1,6 +1,5 @@
 package android.util;
 
-import android.util.Base64;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +47,8 @@ public class Base64InputStream extends FilterInputStream {
         throw new UnsupportedOperationException();
     }
 
-    @Override // java.io.FilterInputStream, java.io.InputStream, java.io.Closeable, java.lang.AutoCloseable
+    @Override // java.io.FilterInputStream, java.io.InputStream, java.io.Closeable,
+              // java.lang.AutoCloseable
     public void close() throws IOException {
         this.in.close();
         this.inputBuffer = null;

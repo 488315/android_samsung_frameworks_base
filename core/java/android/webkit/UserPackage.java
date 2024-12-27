@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +20,16 @@ public class UserPackage {
         this.mPackageInfo = packageInfo;
     }
 
-    public static List<UserPackage> getPackageInfosAllUsers(Context context, String packageName, int packageFlags) {
+    public static List<UserPackage> getPackageInfosAllUsers(
+            Context context, String packageName, int packageFlags) {
         List<UserInfo> users = getAllUsers(context);
         List<UserPackage> userPackages = new ArrayList<>(users.size());
         for (UserInfo user : users) {
             PackageInfo packageInfo = null;
             try {
-                packageInfo = context.getPackageManager().getPackageInfoAsUser(packageName, packageFlags, user.id);
+                packageInfo =
+                        context.getPackageManager()
+                                .getPackageInfoAsUser(packageName, packageFlags, user.id);
             } catch (PackageManager.NameNotFoundException e) {
             }
             userPackages.add(new UserPackage(user, packageInfo));
@@ -41,7 +45,11 @@ public class UserPackage {
     }
 
     public boolean isInstalledPackage() {
-        return (this.mPackageInfo == null || (this.mPackageInfo.applicationInfo.flags & 8388608) == 0 || (this.mPackageInfo.applicationInfo.privateFlags & 1) != 0) ? false : true;
+        return (this.mPackageInfo == null
+                        || (this.mPackageInfo.applicationInfo.flags & 8388608) == 0
+                        || (this.mPackageInfo.applicationInfo.privateFlags & 1) != 0)
+                ? false
+                : true;
     }
 
     public static boolean hasCorrectTargetSdkVersion(PackageInfo packageInfo) {

@@ -1,6 +1,7 @@
 package com.android.internal.app;
 
 import android.content.Intent;
+
 import com.android.internal.logging.InstanceId;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.nano.MetricsProto;
@@ -11,7 +12,8 @@ public interface ChooserActivityLogger {
 
     void log(UiEventLogger.UiEventEnum uiEventEnum, InstanceId instanceId);
 
-    void logShareStarted(int i, String str, String str2, int i2, int i3, boolean z, int i4, String str3);
+    void logShareStarted(
+            int i, String str, String str2, int i2, int i3, boolean z, int i4, String str3);
 
     void logShareTargetSelected(int i, String str, int i2, boolean z);
 
@@ -36,7 +38,11 @@ public interface ChooserActivityLogger {
     }
 
     default void logSharesheetExpansionChanged(boolean isCollapsed) {
-        log(isCollapsed ? SharesheetStandardEvent.SHARESHEET_COLLAPSED : SharesheetStandardEvent.SHARESHEET_EXPANDED, getInstanceId());
+        log(
+                isCollapsed
+                        ? SharesheetStandardEvent.SHARESHEET_COLLAPSED
+                        : SharesheetStandardEvent.SHARESHEET_EXPANDED,
+                getInstanceId());
     }
 
     default void logSharesheetAppShareRankingTimeout() {
@@ -68,7 +74,8 @@ public interface ChooserActivityLogger {
         SHARESHEET_APP_TARGET_SELECTED(233),
         SHARESHEET_STANDARD_TARGET_SELECTED(234),
         SHARESHEET_COPY_TARGET_SELECTED(235),
-        SHARESHEET_NEARBY_TARGET_SELECTED(MetricsProto.MetricsEvent.PROVISIONING_COPY_ACCOUNT_STATUS),
+        SHARESHEET_NEARBY_TARGET_SELECTED(
+                MetricsProto.MetricsEvent.PROVISIONING_COPY_ACCOUNT_STATUS),
         SHARESHEET_EDIT_TARGET_SELECTED(669);
 
         private final int mId;

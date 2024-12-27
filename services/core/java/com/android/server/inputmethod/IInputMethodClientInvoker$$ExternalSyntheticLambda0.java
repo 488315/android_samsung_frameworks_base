@@ -4,13 +4,15 @@ import android.os.RemoteException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class IInputMethodClientInvoker$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class IInputMethodClientInvoker$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ IInputMethodClientInvoker f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ IInputMethodClientInvoker$$ExternalSyntheticLambda0(IInputMethodClientInvoker iInputMethodClientInvoker, int i, int i2, int i3) {
+    public /* synthetic */ IInputMethodClientInvoker$$ExternalSyntheticLambda0(
+            IInputMethodClientInvoker iInputMethodClientInvoker, int i, int i2, int i3) {
         this.$r8$classId = i3;
         this.f$0 = iInputMethodClientInvoker;
         this.f$1 = i;

@@ -7,7 +7,8 @@ import com.android.internal.org.bouncycastle.crypto.params.DESedeParameters;
 public class DESedeKeyGenerator extends DESKeyGenerator {
     private static final int MAX_IT = 20;
 
-    @Override // com.android.internal.org.bouncycastle.crypto.generators.DESKeyGenerator, com.android.internal.org.bouncycastle.crypto.CipherKeyGenerator
+    @Override // com.android.internal.org.bouncycastle.crypto.generators.DESKeyGenerator,
+              // com.android.internal.org.bouncycastle.crypto.CipherKeyGenerator
     public void init(KeyGenerationParameters param) {
         this.random = param.getRandom();
         this.strength = (param.getStrength() + 7) / 8;
@@ -20,7 +21,8 @@ public class DESedeKeyGenerator extends DESKeyGenerator {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.generators.DESKeyGenerator, com.android.internal.org.bouncycastle.crypto.CipherKeyGenerator
+    @Override // com.android.internal.org.bouncycastle.crypto.generators.DESKeyGenerator,
+              // com.android.internal.org.bouncycastle.crypto.CipherKeyGenerator
     public byte[] generateKey() {
         byte[] newKey = new byte[this.strength];
         int count = 0;
@@ -28,11 +30,14 @@ public class DESedeKeyGenerator extends DESKeyGenerator {
             this.random.nextBytes(newKey);
             DESedeParameters.setOddParity(newKey);
             count++;
-            if (count >= 20 || (!DESedeParameters.isWeakKey(newKey, 0, newKey.length) && DESedeParameters.isRealEDEKey(newKey, 0))) {
+            if (count >= 20
+                    || (!DESedeParameters.isWeakKey(newKey, 0, newKey.length)
+                            && DESedeParameters.isRealEDEKey(newKey, 0))) {
                 break;
             }
         }
-        if (DESedeParameters.isWeakKey(newKey, 0, newKey.length) || !DESedeParameters.isRealEDEKey(newKey, 0)) {
+        if (DESedeParameters.isWeakKey(newKey, 0, newKey.length)
+                || !DESedeParameters.isRealEDEKey(newKey, 0)) {
             throw new IllegalStateException("Unable to generate DES-EDE key");
         }
         return newKey;

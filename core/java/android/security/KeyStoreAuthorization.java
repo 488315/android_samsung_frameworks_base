@@ -19,7 +19,8 @@ public class KeyStoreAuthorization {
     }
 
     private IKeystoreAuthorization getService() {
-        return IKeystoreAuthorization.Stub.asInterface(ServiceManager.checkService("android.security.authorization"));
+        return IKeystoreAuthorization.Stub.asInterface(
+                ServiceManager.checkService("android.security.authorization"));
     }
 
     public int addAuthToken(HardwareAuthToken authToken) {

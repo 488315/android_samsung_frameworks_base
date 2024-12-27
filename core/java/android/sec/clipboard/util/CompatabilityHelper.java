@@ -2,6 +2,7 @@ package android.sec.clipboard.util;
 
 import android.os.FileUtils;
 import android.sec.clipboard.data.ClipboardConstants;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,10 +25,13 @@ public class CompatabilityHelper {
         }
         if (original.contains(OLD_CLIPBOARD_ROOT_PATH)) {
             if (original.startsWith("/data/clipboard/")) {
-                String result = original.replace(OLD_CLIPBOARD_ROOT_PATH, ClipboardConstants.CLIPBOARD_ROOT_PATH);
+                String result =
+                        original.replace(
+                                OLD_CLIPBOARD_ROOT_PATH, ClipboardConstants.CLIPBOARD_ROOT_PATH);
                 return result;
             }
-            String result2 = "/data/semclipboard/" + original.substring(OLD_CLIPBOARD_ROOT_PATH.length());
+            String result2 =
+                    "/data/semclipboard/" + original.substring(OLD_CLIPBOARD_ROOT_PATH.length());
             return result2;
         }
         return original;
@@ -53,7 +57,9 @@ public class CompatabilityHelper {
                 }
             }
         }
-        if (!OLD_CLIPBOARD_ROOT_PATH.equals(rootDir.getPath()) && !ClipboardConstants.CLIPBOARD_ROOT_PATH.equals(rootDir.getPath()) && !rootDir.delete()) {
+        if (!OLD_CLIPBOARD_ROOT_PATH.equals(rootDir.getPath())
+                && !ClipboardConstants.CLIPBOARD_ROOT_PATH.equals(rootDir.getPath())
+                && !rootDir.delete()) {
             Log.d(TAG, "Failed to delete root .");
         }
     }
@@ -63,7 +69,9 @@ public class CompatabilityHelper {
         boolean process = false;
         File targetDir = new File(targetPath);
         File srcDir = new File(srcPath);
-        if (srcDir.exists() && (srcDirlistFiles = srcDir.listFiles()) != null && srcDirlistFiles.length > 0) {
+        if (srcDir.exists()
+                && (srcDirlistFiles = srcDir.listFiles()) != null
+                && srcDirlistFiles.length > 0) {
             process = true;
             copyDir(srcDir, targetDir);
             recursiveDelete(srcDir);

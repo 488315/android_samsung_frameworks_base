@@ -11,8 +11,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.IRecoverySystemProgressListener;
-import android.os.IVold;
 import android.provider.Settings;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.RestrictionPolicy;
@@ -25,6 +23,10 @@ import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
+
+import sun.security.pkcs.PKCS7;
+import sun.security.pkcs.SignerInfo;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,16 +57,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import sun.security.pkcs.PKCS7;
-import sun.security.pkcs.SignerInfo;
 
 /* loaded from: classes3.dex */
 public class RecoverySystem {
-    private static final String ACTION_EUICC_FACTORY_RESET = "com.android.internal.action.EUICC_FACTORY_RESET";
-    private static final String ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS = "com.android.internal.action.EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS";
+    private static final String ACTION_EUICC_FACTORY_RESET =
+            "com.android.internal.action.EUICC_FACTORY_RESET";
+    private static final String ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS =
+            "com.android.internal.action.EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS";
     private static final long DEFAULT_EUICC_FACTORY_RESET_TIMEOUT_MILLIS = 30000;
     private static final long DEFAULT_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS = 45000;
-    private static final String LAST_CACHE_SUDDEN_RESET_LOG_PATH = "/data/log/recovery_last_sudden_reset.log";
+    private static final String LAST_CACHE_SUDDEN_RESET_LOG_PATH =
+            "/data/log/recovery_last_sudden_reset.log";
     private static final String LAST_INSTALL_PATH = "last_install";
     private static final String LAST_PREFIX = "last_";
     private static final String LAST_RECOVERY_MODE = "dev.lastrecoverymode";
@@ -77,21 +80,17 @@ public class RecoverySystem {
     private static final long PUBLISH_PROGRESS_INTERVAL_MS = 500;
     private static final int RESCUEPARTY_LOG_MAX_LENGTH = 524288;
 
-    @SystemApi
-    public static final int RESUME_ON_REBOOT_REBOOT_ERROR_INVALID_PACKAGE_NAME = 2000;
+    @SystemApi public static final int RESUME_ON_REBOOT_REBOOT_ERROR_INVALID_PACKAGE_NAME = 2000;
 
-    @SystemApi
-    public static final int RESUME_ON_REBOOT_REBOOT_ERROR_LSKF_NOT_CAPTURED = 3000;
+    @SystemApi public static final int RESUME_ON_REBOOT_REBOOT_ERROR_LSKF_NOT_CAPTURED = 3000;
     public static final int RESUME_ON_REBOOT_REBOOT_ERROR_NONE = 0;
 
     @SystemApi
     public static final int RESUME_ON_REBOOT_REBOOT_ERROR_PROVIDER_PREPARATION_FAILURE = 5000;
 
-    @SystemApi
-    public static final int RESUME_ON_REBOOT_REBOOT_ERROR_SLOT_MISMATCH = 4000;
+    @SystemApi public static final int RESUME_ON_REBOOT_REBOOT_ERROR_SLOT_MISMATCH = 4000;
 
-    @SystemApi
-    public static final int RESUME_ON_REBOOT_REBOOT_ERROR_UNSPECIFIED = 1000;
+    @SystemApi public static final int RESUME_ON_REBOOT_REBOOT_ERROR_UNSPECIFIED = 1000;
     private static final String SUDDEN_RESET_LAST_KMSG_NAME = "recovery_sudden_reset_last_kmsg.log";
     private static final String TAG = "RecoverySystem";
     private static final String TMP_RECOVERY_LOG_PATH = "/efs/recovery/tmp_recovery.log";
@@ -113,10 +112,10 @@ public class RecoverySystem {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResumeOnRebootRebootErrorCode {
-    }
+    public @interface ResumeOnRebootRebootErrorCode {}
 
-    private static HashSet<X509Certificate> getTrustedCerts(File keystore) throws IOException, GeneralSecurityException {
+    private static HashSet<X509Certificate> getTrustedCerts(File keystore)
+            throws IOException, GeneralSecurityException {
         HashSet<X509Certificate> trusted = new HashSet<>();
         if (keystore == null) {
             keystore = DEFAULT_KEYSTORE;
@@ -155,7 +154,9 @@ public class RecoverySystem {
                         byte[] bytes = new byte[8];
                         int len = inputStream.read(bytes);
                         if (len <= 0) {
-                            Log.e("RecoverySystem", "!@RecoverySystem failed to read super_used_size");
+                            Log.e(
+                                    "RecoverySystem",
+                                    "!@RecoverySystem failed to read super_used_size");
                             inputStream.close();
                         } else {
                             String str = new String(bytes);
@@ -177,7 +178,9 @@ public class RecoverySystem {
         }
     }
 
-    public static void verifyPackage(File packageFile, final ProgressListener listener, File deviceCertsZipFile) throws IOException, GeneralSecurityException {
+    public static void verifyPackage(
+            File packageFile, final ProgressListener listener, File deviceCertsZipFile)
+            throws IOException, GeneralSecurityException {
         byte[] eocd;
         final long fileLen = packageFile.length();
         final RandomAccessFile raf = new RandomAccessFile(packageFile, "r");
@@ -211,7 +214,10 @@ public class RecoverySystem {
                 i++;
                 b = 80;
             }
-            PKCS7 block = new PKCS7(new ByteArrayInputStream(eocd2, (commentSize + 22) - signatureStart, signatureStart));
+            PKCS7 block =
+                    new PKCS7(
+                            new ByteArrayInputStream(
+                                    eocd2, (commentSize + 22) - signatureStart, signatureStart));
             X509Certificate[] certificates = block.getCertificates();
             if (certificates == null || certificates.length == 0) {
                 throw new SignatureException("signature contains no certificates");
@@ -224,7 +230,9 @@ public class RecoverySystem {
             }
             SignerInfo signerInfo = signerInfos[0];
             boolean verified = false;
-            HashSet<X509Certificate> trusted = getTrustedCerts(deviceCertsZipFile == null ? DEFAULT_KEYSTORE : deviceCertsZipFile);
+            HashSet<X509Certificate> trusted =
+                    getTrustedCerts(
+                            deviceCertsZipFile == null ? DEFAULT_KEYSTORE : deviceCertsZipFile);
             Iterator<X509Certificate> it = trusted.iterator();
             while (true) {
                 if (!it.hasNext()) {
@@ -243,45 +251,52 @@ public class RecoverySystem {
                 throw new SignatureException("signature doesn't match any trusted key");
             }
             raf.seek(0L);
-            SignerInfo verifyResult = block.verify(signerInfo, new InputStream() { // from class: android.os.RecoverySystem.1
-                long lastPublishTime;
-                long toRead;
-                long soFar = 0;
-                int lastPercent = 0;
+            SignerInfo verifyResult =
+                    block.verify(
+                            signerInfo,
+                            new InputStream() { // from class: android.os.RecoverySystem.1
+                                long lastPublishTime;
+                                long toRead;
+                                long soFar = 0;
+                                int lastPercent = 0;
 
-                {
-                    this.toRead = (fileLen - commentSize) - 2;
-                    this.lastPublishTime = startTimeMillis;
-                }
+                                {
+                                    this.toRead = (fileLen - commentSize) - 2;
+                                    this.lastPublishTime = startTimeMillis;
+                                }
 
-                @Override // java.io.InputStream
-                public int read() throws IOException {
-                    throw new UnsupportedOperationException();
-                }
+                                @Override // java.io.InputStream
+                                public int read() throws IOException {
+                                    throw new UnsupportedOperationException();
+                                }
 
-                @Override // java.io.InputStream
-                public int read(byte[] b2, int off, int len) throws IOException {
-                    if (this.soFar >= this.toRead || Thread.currentThread().isInterrupted()) {
-                        return -1;
-                    }
-                    int size = len;
-                    if (this.soFar + size > this.toRead) {
-                        size = (int) (this.toRead - this.soFar);
-                    }
-                    int read = raf.read(b2, off, size);
-                    this.soFar += read;
-                    if (listener != null) {
-                        long now = System.currentTimeMillis();
-                        int p = (int) ((this.soFar * 100) / this.toRead);
-                        if (p > this.lastPercent && now - this.lastPublishTime > RecoverySystem.PUBLISH_PROGRESS_INTERVAL_MS) {
-                            this.lastPercent = p;
-                            this.lastPublishTime = now;
-                            listener.onProgress(this.lastPercent);
-                        }
-                    }
-                    return read;
-                }
-            });
+                                @Override // java.io.InputStream
+                                public int read(byte[] b2, int off, int len) throws IOException {
+                                    if (this.soFar >= this.toRead
+                                            || Thread.currentThread().isInterrupted()) {
+                                        return -1;
+                                    }
+                                    int size = len;
+                                    if (this.soFar + size > this.toRead) {
+                                        size = (int) (this.toRead - this.soFar);
+                                    }
+                                    int read = raf.read(b2, off, size);
+                                    this.soFar += read;
+                                    if (listener != null) {
+                                        long now = System.currentTimeMillis();
+                                        int p = (int) ((this.soFar * 100) / this.toRead);
+                                        if (p > this.lastPercent
+                                                && now - this.lastPublishTime
+                                                        > RecoverySystem
+                                                                .PUBLISH_PROGRESS_INTERVAL_MS) {
+                                            this.lastPercent = p;
+                                            this.lastPublishTime = now;
+                                            listener.onProgress(this.lastPercent);
+                                        }
+                                    }
+                                    return read;
+                                }
+                            });
             boolean interrupted = Thread.interrupted();
             if (listener != null) {
                 listener.onProgress(100);
@@ -309,7 +324,9 @@ public class RecoverySystem {
     }
 
     @SystemApi
-    public static void processPackage(Context context, File packageFile, ProgressListener listener, Handler handler) throws IOException {
+    public static void processPackage(
+            Context context, File packageFile, ProgressListener listener, Handler handler)
+            throws IOException {
         Handler progressHandler;
         String filename = packageFile.getCanonicalPath();
         if (!filename.startsWith("/data/")) {
@@ -345,21 +362,25 @@ public class RecoverySystem {
         @Override // android.os.IRecoverySystemProgressListener
         public void onProgress(final int progress) {
             final long now = System.currentTimeMillis();
-            this.val$progressHandler.post(new Runnable() { // from class: android.os.RecoverySystem.2.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (progress > AnonymousClass2.this.lastProgress && now - AnonymousClass2.this.lastPublishTime > RecoverySystem.PUBLISH_PROGRESS_INTERVAL_MS) {
-                        AnonymousClass2.this.lastProgress = progress;
-                        AnonymousClass2.this.lastPublishTime = now;
-                        AnonymousClass2.this.val$listener.onProgress(progress);
-                    }
-                }
-            });
+            this.val$progressHandler.post(
+                    new Runnable() { // from class: android.os.RecoverySystem.2.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (progress > AnonymousClass2.this.lastProgress
+                                    && now - AnonymousClass2.this.lastPublishTime
+                                            > RecoverySystem.PUBLISH_PROGRESS_INTERVAL_MS) {
+                                AnonymousClass2.this.lastProgress = progress;
+                                AnonymousClass2.this.lastPublishTime = now;
+                                AnonymousClass2.this.val$listener.onProgress(progress);
+                            }
+                        }
+                    });
         }
     }
 
     @SystemApi
-    public static void processPackage(Context context, File packageFile, ProgressListener listener) throws IOException {
+    public static void processPackage(Context context, File packageFile, ProgressListener listener)
+            throws IOException {
         processPackage(context, packageFile, listener, null);
     }
 
@@ -373,22 +394,29 @@ public class RecoverySystem {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void installPackage(android.content.Context r17, java.io.File r18, boolean r19) throws java.io.IOException {
+    public static void installPackage(android.content.Context r17, java.io.File r18, boolean r19)
+            throws java.io.IOException {
         /*
             Method dump skipped, instructions count: 777
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.RecoverySystem.installPackage(android.content.Context, java.io.File, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.RecoverySystem.installPackage(android.content.Context,"
+                    + " java.io.File, boolean):void");
     }
 
     @SystemApi
-    public static void prepareForUnattendedUpdate(Context context, String updateToken, IntentSender intentSender) throws IOException {
+    public static void prepareForUnattendedUpdate(
+            Context context, String updateToken, IntentSender intentSender) throws IOException {
         if (updateToken == null) {
             throw new NullPointerException("updateToken == null");
         }
-        KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(KeyguardManager.class);
+        KeyguardManager keyguardManager =
+                (KeyguardManager) context.getSystemService(KeyguardManager.class);
         if (keyguardManager == null || !keyguardManager.isDeviceSecure()) {
-            throw new IOException("Failed to request LSKF because the device doesn't have a lock screen. ");
+            throw new IOException(
+                    "Failed to request LSKF because the device doesn't have a lock screen. ");
         }
         RecoverySystem rs = (RecoverySystem) context.getSystemService("recovery");
         if (!rs.requestLskf(context.getPackageName(), intentSender)) {
@@ -405,7 +433,8 @@ public class RecoverySystem {
     }
 
     @SystemApi
-    public static void rebootAndApply(Context context, String updateToken, String reason) throws IOException {
+    public static void rebootAndApply(Context context, String updateToken, String reason)
+            throws IOException {
         if (updateToken == null) {
             throw new NullPointerException("updateToken == null");
         }
@@ -422,7 +451,8 @@ public class RecoverySystem {
     }
 
     @SystemApi
-    public static int rebootAndApply(Context context, String reason, boolean slotSwitch) throws IOException {
+    public static int rebootAndApply(Context context, String reason, boolean slotSwitch)
+            throws IOException {
         RecoverySystem rs = (RecoverySystem) context.getSystemService(RecoverySystem.class);
         return rs.rebootWithLskf(context.getPackageName(), reason, slotSwitch);
     }
@@ -466,26 +496,46 @@ public class RecoverySystem {
         rebootWipeUserData(context, shutdown, context.getPackageName(), false, false);
     }
 
-    public static void rebootWipeUserData(Context context, boolean shutdown, String reason, boolean force) throws IOException {
+    public static void rebootWipeUserData(
+            Context context, boolean shutdown, String reason, boolean force) throws IOException {
         rebootWipeUserData(context, shutdown, reason, force, false);
     }
 
-    public static void rebootWipeUserData(Context context, boolean shutdown, String reason, boolean force, boolean wipeEuicc) throws IOException {
+    public static void rebootWipeUserData(
+            Context context, boolean shutdown, String reason, boolean force, boolean wipeEuicc)
+            throws IOException {
         rebootWipeUserData(context, shutdown, reason, force, wipeEuicc, false);
     }
 
-    public static void rebootWipeUserData(Context context, boolean shutdown, String reason, boolean force, boolean wipeEuicc, boolean keepMemtagMode) throws IOException {
+    public static void rebootWipeUserData(
+            Context context,
+            boolean shutdown,
+            String reason,
+            boolean force,
+            boolean wipeEuicc,
+            boolean keepMemtagMode)
+            throws IOException {
         rebootWipeUserData(context, shutdown, reason, force, wipeEuicc, keepMemtagMode, null);
     }
 
-    public static void rebootWipeUserData(Context context, boolean shutdown, String reason, boolean force, boolean wipeEuicc, boolean keepMemtagMode, String extraCmd) throws IOException {
+    public static void rebootWipeUserData(
+            Context context,
+            boolean shutdown,
+            String reason,
+            boolean force,
+            boolean wipeEuicc,
+            boolean keepMemtagMode,
+            String extraCmd)
+            throws IOException {
         String shutdownArg;
         String reasonArg;
         String memtagArg;
         String extraCmdArg;
         RestrictionPolicy restrPol;
         Log.i("RecoverySystem", "rebootWipeUserData++");
-        if (force || (restrPol = EnterpriseDeviceManager.getInstance().getRestrictionPolicy()) == null || restrPol.isFactoryResetAllowed()) {
+        if (force
+                || (restrPol = EnterpriseDeviceManager.getInstance().getRestrictionPolicy()) == null
+                || restrPol.isFactoryResetAllowed()) {
             UserManager um = (UserManager) context.getSystemService("user");
             if (!force && um.hasUserRestriction(UserManager.DISALLOW_FACTORY_RESET)) {
                 AuditLog.logEvent(43, new Object[0]);
@@ -498,13 +548,21 @@ public class RecoverySystem {
             Log.i("RecoverySystem", "rebootWipeUserData: sendOrderedBroadcastAsUser");
             Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR_NOTIFICATION);
             intent.addFlags(285212672);
-            context.sendOrderedBroadcastAsUser(intent, UserHandle.SYSTEM, Manifest.permission.MASTER_CLEAR, new BroadcastReceiver() { // from class: android.os.RecoverySystem.3
-                @Override // android.content.BroadcastReceiver
-                public void onReceive(Context context2, Intent intent2) {
-                    Log.i("RecoverySystem", "rebootWipeUserData: onReceive");
-                    ConditionVariable.this.open();
-                }
-            }, new Handler(hthread.getLooper()), 0, null, null);
+            context.sendOrderedBroadcastAsUser(
+                    intent,
+                    UserHandle.SYSTEM,
+                    Manifest.permission.MASTER_CLEAR,
+                    new BroadcastReceiver() { // from class: android.os.RecoverySystem.3
+                        @Override // android.content.BroadcastReceiver
+                        public void onReceive(Context context2, Intent intent2) {
+                            Log.i("RecoverySystem", "rebootWipeUserData: onReceive");
+                            ConditionVariable.this.open();
+                        }
+                    },
+                    new Handler(hthread.getLooper()),
+                    0,
+                    null,
+                    null);
             Log.i("RecoverySystem", "rebootWipeUserData: wait intent to complete");
             condition.block();
             Log.i("RecoverySystem", "rebootWipeUserData: continue..");
@@ -523,7 +581,9 @@ public class RecoverySystem {
             if (TextUtils.isEmpty(reason)) {
                 reasonArg = null;
             } else {
-                String timeStamp = DateFormat.format("yyyy-MM-ddTHH:mm:ssZ", System.currentTimeMillis()).toString();
+                String timeStamp =
+                        DateFormat.format("yyyy-MM-ddTHH:mm:ssZ", System.currentTimeMillis())
+                                .toString();
                 String reasonArg2 = "--reason=" + sanitizeArg(reason + "," + timeStamp);
                 reasonArg = reasonArg2;
             }
@@ -540,10 +600,22 @@ public class RecoverySystem {
                 extraCmdArg = extraCmdArg2;
             }
             try {
-                Log.d("RecoverySystem", "!@[RecoverySystem] rebootWipeUserData: wipeDataArg:[--wipe_data], extraCmdArg:[" + extraCmdArg + NavigationBarInflaterView.SIZE_MOD_END);
+                Log.d(
+                        "RecoverySystem",
+                        "!@[RecoverySystem] rebootWipeUserData: wipeDataArg:[--wipe_data],"
+                            + " extraCmdArg:["
+                                + extraCmdArg
+                                + NavigationBarInflaterView.SIZE_MOD_END);
                 String wipeDataArg = memtagArg;
                 try {
-                    bootCommand(context, shutdownArg, "--wipe_data", extraCmdArg, reasonArg, localeArg, wipeDataArg);
+                    bootCommand(
+                            context,
+                            shutdownArg,
+                            "--wipe_data",
+                            extraCmdArg,
+                            reasonArg,
+                            localeArg,
+                            wipeDataArg);
                 } catch (IOException e) {
                     ioE = e;
                     AuditLog.logEvent(42, ioE.getMessage());
@@ -571,30 +643,39 @@ public class RecoverySystem {
         }
         final CountDownLatch euiccFactoryResetLatch = new CountDownLatch(1);
         final AtomicBoolean wipingSucceeded = new AtomicBoolean(false);
-        BroadcastReceiver euiccWipeFinishReceiver = new BroadcastReceiver() { // from class: android.os.RecoverySystem.4
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
-                if (RecoverySystem.ACTION_EUICC_FACTORY_RESET.equals(intent.getAction())) {
-                    if (getResultCode() != 0) {
-                        int detailedCode = intent.getIntExtra(EuiccManager.EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE, 0);
-                        Log.e("RecoverySystem", "Error wiping euicc data, Detailed code = " + detailedCode);
-                    } else {
-                        Log.d("RecoverySystem", "Successfully wiped euicc data.");
-                        wipingSucceeded.set(true);
+        BroadcastReceiver euiccWipeFinishReceiver =
+                new BroadcastReceiver() { // from class: android.os.RecoverySystem.4
+                    @Override // android.content.BroadcastReceiver
+                    public void onReceive(Context context2, Intent intent) {
+                        if (RecoverySystem.ACTION_EUICC_FACTORY_RESET.equals(intent.getAction())) {
+                            if (getResultCode() != 0) {
+                                int detailedCode =
+                                        intent.getIntExtra(
+                                                EuiccManager
+                                                        .EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE,
+                                                0);
+                                Log.e(
+                                        "RecoverySystem",
+                                        "Error wiping euicc data, Detailed code = " + detailedCode);
+                            } else {
+                                Log.d("RecoverySystem", "Successfully wiped euicc data.");
+                                wipingSucceeded.set(true);
+                            }
+                            euiccFactoryResetLatch.countDown();
+                        }
                     }
-                    euiccFactoryResetLatch.countDown();
-                }
-            }
-        };
+                };
         Intent intent = new Intent(ACTION_EUICC_FACTORY_RESET);
         intent.setPackage(packageName);
-        PendingIntent callbackIntent = PendingIntent.getBroadcastAsUser(context, 0, intent, 201326592, UserHandle.SYSTEM);
+        PendingIntent callbackIntent =
+                PendingIntent.getBroadcastAsUser(context, 0, intent, 201326592, UserHandle.SYSTEM);
         IntentFilter filterConsent = new IntentFilter();
         filterConsent.addAction(ACTION_EUICC_FACTORY_RESET);
         HandlerThread euiccHandlerThread = new HandlerThread("euiccWipeFinishReceiverThread");
         euiccHandlerThread.start();
         Handler euiccHandler = new Handler(euiccHandlerThread.getLooper());
-        context.getApplicationContext().registerReceiver(euiccWipeFinishReceiver, filterConsent, null, euiccHandler);
+        context.getApplicationContext()
+                .registerReceiver(euiccWipeFinishReceiver, filterConsent, null, euiccHandler);
         euiccManager.eraseSubscriptions(callbackIntent);
         try {
         } catch (InterruptedException e) {
@@ -603,7 +684,11 @@ public class RecoverySystem {
             e = th;
         }
         try {
-            waitingTimeMillis = Settings.Global.getLong(context.getContentResolver(), Settings.Global.EUICC_FACTORY_RESET_TIMEOUT_MILLIS, 30000L);
+            waitingTimeMillis =
+                    Settings.Global.getLong(
+                            context.getContentResolver(),
+                            Settings.Global.EUICC_FACTORY_RESET_TIMEOUT_MILLIS,
+                            30000L);
             if (waitingTimeMillis < 5000) {
                 waitingTimeMillis = 5000;
             } else if (waitingTimeMillis > 60000) {
@@ -642,17 +727,25 @@ public class RecoverySystem {
     private static void removeEuiccInvisibleSubs(Context context, EuiccManager euiccManager) {
         ContentResolver cr = context.getContentResolver();
         if (Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) == 0) {
-            Log.i("RecoverySystem", "Skip removing eUICC invisible profiles as it is not provisioned.");
+            Log.i(
+                    "RecoverySystem",
+                    "Skip removing eUICC invisible profiles as it is not provisioned.");
             return;
         }
         if (euiccManager == null || !euiccManager.isEnabled()) {
-            Log.i("RecoverySystem", "Skip removing eUICC invisible profiles as eUICC manager is not available.");
+            Log.i(
+                    "RecoverySystem",
+                    "Skip removing eUICC invisible profiles as eUICC manager is not available.");
             return;
         }
-        SubscriptionManager subscriptionManager = (SubscriptionManager) context.getSystemService(SubscriptionManager.class);
-        List<SubscriptionInfo> availableSubs = subscriptionManager.getAvailableSubscriptionInfoList();
+        SubscriptionManager subscriptionManager =
+                (SubscriptionManager) context.getSystemService(SubscriptionManager.class);
+        List<SubscriptionInfo> availableSubs =
+                subscriptionManager.getAvailableSubscriptionInfoList();
         if (availableSubs == null || availableSubs.isEmpty()) {
-            Log.i("RecoverySystem", "Skip removing eUICC invisible profiles as no available profiles found.");
+            Log.i(
+                    "RecoverySystem",
+                    "Skip removing eUICC invisible profiles as no available profiles found.");
             return;
         }
         List<SubscriptionInfo> invisibleSubs = new ArrayList<>();
@@ -664,43 +757,71 @@ public class RecoverySystem {
         removeEuiccInvisibleSubs(context, invisibleSubs, euiccManager);
     }
 
-    private static boolean removeEuiccInvisibleSubs(Context context, List<SubscriptionInfo> subscriptionInfos, EuiccManager euiccManager) {
+    private static boolean removeEuiccInvisibleSubs(
+            Context context, List<SubscriptionInfo> subscriptionInfos, EuiccManager euiccManager) {
         if (subscriptionInfos != null && !subscriptionInfos.isEmpty()) {
             final CountDownLatch removeSubsLatch = new CountDownLatch(subscriptionInfos.size());
             final AtomicInteger removedSubsCount = new AtomicInteger(0);
-            BroadcastReceiver removeEuiccSubsReceiver = new BroadcastReceiver() { // from class: android.os.RecoverySystem.5
-                @Override // android.content.BroadcastReceiver
-                public void onReceive(Context context2, Intent intent) {
-                    if (RecoverySystem.ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS.equals(intent.getAction())) {
-                        if (getResultCode() != 0) {
-                            int detailedCode = intent.getIntExtra(EuiccManager.EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE, 0);
-                            Log.e("RecoverySystem", "Error removing euicc opportunistic profile, Detailed code = " + detailedCode);
-                        } else {
-                            Log.e("RecoverySystem", "Successfully remove euicc opportunistic profile.");
-                            removedSubsCount.incrementAndGet();
+            BroadcastReceiver removeEuiccSubsReceiver =
+                    new BroadcastReceiver() { // from class: android.os.RecoverySystem.5
+                        @Override // android.content.BroadcastReceiver
+                        public void onReceive(Context context2, Intent intent) {
+                            if (RecoverySystem.ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS.equals(
+                                    intent.getAction())) {
+                                if (getResultCode() != 0) {
+                                    int detailedCode =
+                                            intent.getIntExtra(
+                                                    EuiccManager
+                                                            .EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE,
+                                                    0);
+                                    Log.e(
+                                            "RecoverySystem",
+                                            "Error removing euicc opportunistic profile, Detailed"
+                                                + " code = "
+                                                    + detailedCode);
+                                } else {
+                                    Log.e(
+                                            "RecoverySystem",
+                                            "Successfully remove euicc opportunistic profile.");
+                                    removedSubsCount.incrementAndGet();
+                                }
+                                removeSubsLatch.countDown();
+                            }
                         }
-                        removeSubsLatch.countDown();
-                    }
-                }
-            };
+                    };
             Intent intent = new Intent(ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS);
             intent.setPackage("android");
-            PendingIntent callbackIntent = PendingIntent.getBroadcastAsUser(context, 0, intent, 201326592, UserHandle.SYSTEM);
+            PendingIntent callbackIntent =
+                    PendingIntent.getBroadcastAsUser(
+                            context, 0, intent, 201326592, UserHandle.SYSTEM);
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(ACTION_EUICC_REMOVE_INVISIBLE_SUBSCRIPTIONS);
             HandlerThread euiccHandlerThread = new HandlerThread("euiccRemovingSubsReceiverThread");
             euiccHandlerThread.start();
             Handler euiccHandler = new Handler(euiccHandlerThread.getLooper());
-            context.getApplicationContext().registerReceiver(removeEuiccSubsReceiver, intentFilter, null, euiccHandler);
+            context.getApplicationContext()
+                    .registerReceiver(removeEuiccSubsReceiver, intentFilter, null, euiccHandler);
             for (SubscriptionInfo subscriptionInfo : subscriptionInfos) {
-                Log.i("RecoverySystem", "Remove invisible subscription " + subscriptionInfo.getSubscriptionId() + " from card " + subscriptionInfo.getCardId());
-                euiccManager.createForCardId(subscriptionInfo.getCardId()).deleteSubscription(subscriptionInfo.getSubscriptionId(), callbackIntent);
+                Log.i(
+                        "RecoverySystem",
+                        "Remove invisible subscription "
+                                + subscriptionInfo.getSubscriptionId()
+                                + " from card "
+                                + subscriptionInfo.getCardId());
+                euiccManager
+                        .createForCardId(subscriptionInfo.getCardId())
+                        .deleteSubscription(subscriptionInfo.getSubscriptionId(), callbackIntent);
             }
             try {
-                long waitingTimeMillis = Settings.Global.getLong(context.getContentResolver(), Settings.Global.EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS, DEFAULT_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS);
+                long waitingTimeMillis =
+                        Settings.Global.getLong(
+                                context.getContentResolver(),
+                                Settings.Global.EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS,
+                                DEFAULT_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS);
                 if (waitingTimeMillis < MIN_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS) {
                     waitingTimeMillis = MIN_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS;
-                } else if (waitingTimeMillis > MAX_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS) {
+                } else if (waitingTimeMillis
+                        > MAX_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS) {
                     waitingTimeMillis = MAX_EUICC_REMOVING_INVISIBLE_PROFILES_TIMEOUT_MILLIS;
                 }
                 if (!removeSubsLatch.await(waitingTimeMillis, TimeUnit.MILLISECONDS)) {
@@ -723,7 +844,8 @@ public class RecoverySystem {
         return true;
     }
 
-    public static void rebootPromptAndWipeUserData(Context context, String reason) throws IOException {
+    public static void rebootPromptAndWipeUserData(Context context, String reason)
+            throws IOException {
         boolean checkpointing = false;
         IVold vold = null;
         try {
@@ -756,7 +878,8 @@ public class RecoverySystem {
         bootCommand(context, null, "--prompt_and_wipe_data", reasonArg, localeArg);
     }
 
-    public static void rebootPromptAndWipeAppData(Context context, String reason) throws IOException {
+    public static void rebootPromptAndWipeAppData(Context context, String reason)
+            throws IOException {
         boolean checkpointing = false;
         IVold vold = null;
         try {
@@ -803,7 +926,8 @@ public class RecoverySystem {
     }
 
     @SystemApi
-    public static void rebootWipeAb(Context context, File packageFile, String reason) throws IOException {
+    public static void rebootWipeAb(Context context, File packageFile, String reason)
+            throws IOException {
         String reasonArg = null;
         if (!TextUtils.isEmpty(reason)) {
             reasonArg = "--reason=" + sanitizeArg(reason);
@@ -818,7 +942,8 @@ public class RecoverySystem {
         rebootRecoveryWithCommand("--wipe_data\n--reformat_data=ext4");
     }
 
-    public static void rebootWipeCustomerPartition(Context context, String arg, String reason) throws IOException {
+    public static void rebootWipeCustomerPartition(Context context, String arg, String reason)
+            throws IOException {
         String reasonArg = null;
         if (!TextUtils.isEmpty(reason)) {
             reasonArg = "--reason=" + sanitizeArg(reason);
@@ -832,7 +957,10 @@ public class RecoverySystem {
             String reason = arg.substring(idx + 1);
             return reason;
         } catch (StringIndexOutOfBoundsException e) {
-            Log.e("RecoverySystem", "StringIndexOutOfBoundsException when splitting recovery cause:", e);
+            Log.e(
+                    "RecoverySystem",
+                    "StringIndexOutOfBoundsException when splitting recovery cause:",
+                    e);
             return null;
         }
     }
@@ -869,9 +997,13 @@ public class RecoverySystem {
                                 }
                             }
                         }
-                        Log.i("RecoverySystem", "!@[RecoverySystem] bootCommand: before fsync syscall!!");
+                        Log.i(
+                                "RecoverySystem",
+                                "!@[RecoverySystem] bootCommand: before fsync syscall!!");
                         command.getFD().sync();
-                        Log.i("RecoverySystem", "!@[RecoverySystem] bootCommand: after fsync syscall!!");
+                        Log.i(
+                                "RecoverySystem",
+                                "!@[RecoverySystem] bootCommand: after fsync syscall!!");
                         command.close();
                         retryCount--;
                         if (COMMAND_FILE.exists()) {
@@ -889,7 +1021,9 @@ public class RecoverySystem {
                     }
                 }
                 if (!COMMAND_FILE.exists()) {
-                    Log.i("RecoverySystem", "!@[RecoverySystem] bootCommand: command file absent, throw exception");
+                    Log.i(
+                            "RecoverySystem",
+                            "!@[RecoverySystem] bootCommand: command file absent, throw exception");
                     throw new IOException("Reboot failed (unable to create command file)");
                 }
                 PowerManager pm = (PowerManager) context.getSystemService("power");
@@ -905,9 +1039,14 @@ public class RecoverySystem {
                     if (recovery_cause == null) {
                         recovery_cause = "bootCommand()";
                     }
-                    Log.d("RecoverySystem", "!@[RecoverySystem] bootCommand: [reset tracking] write to recovery_cause : " + recovery_cause);
+                    Log.d(
+                            "RecoverySystem",
+                            "!@[RecoverySystem] bootCommand: [reset tracking] write to"
+                                + " recovery_cause : "
+                                    + recovery_cause);
                     try {
-                        FileOutputStream fos = new FileOutputStream("/sys/class/sec/sec_debug/recovery_cause");
+                        FileOutputStream fos =
+                                new FileOutputStream("/sys/class/sec/sec_debug/recovery_cause");
                         try {
                             String content = "RecoverySystem " + recovery_cause;
                             fos.write(content.getBytes(StandardCharsets.UTF_8));
@@ -921,7 +1060,10 @@ public class RecoverySystem {
                             throw th2;
                         }
                     } catch (IOException e) {
-                        Log.e("RecoverySystem", "IOException when writing /sys/class/sec/sec_debug/recovery_cause:", e);
+                        Log.e(
+                                "RecoverySystem",
+                                "IOException when writing /sys/class/sec/sec_debug/recovery_cause:",
+                                e);
                     }
                     pm.reboot("recovery");
                 }
@@ -934,7 +1076,9 @@ public class RecoverySystem {
     public static String handleAftermath(Context context) {
         synchronized (mShutdownIsInProgressLock) {
             if (mShutdownIsInProgress.booleanValue()) {
-                Log.i("RecoverySystem", "!@[RecoverySystem] handleAftermath: disabled, as shutdown in progress");
+                Log.i(
+                        "RecoverySystem",
+                        "!@[RecoverySystem] handleAftermath: disabled, as shutdown in progress");
                 return null;
             }
             Log.i("RecoverySystem", "!@[RecoverySystem] handleAftermath");
@@ -958,31 +1102,47 @@ public class RecoverySystem {
                     byte[] mode = new byte[21];
                     int bytes = reFis.read(mode);
                     if (bytes > 0) {
-                        String lastRecoveryMode = new String(mode, 0, bytes, StandardCharsets.UTF_8);
+                        String lastRecoveryMode =
+                                new String(mode, 0, bytes, StandardCharsets.UTF_8);
                         Log.i("RecoverySystem", "last_recovery_mode : " + lastRecoveryMode);
                         SystemProperties.set(LAST_RECOVERY_MODE, lastRecoveryMode);
                     }
                     if (!reFile.delete()) {
-                        Log.i("RecoverySystem", "Failed to delete /cache/recovery/last_recovery_mode");
+                        Log.i(
+                                "RecoverySystem",
+                                "Failed to delete /cache/recovery/last_recovery_mode");
                     }
                     reFis.close();
                 } catch (FileNotFoundException e4) {
-                    Log.e("RecoverySystem", "FileNotFoundException when open /cache/recovery/last_recovery_mode:", e4);
+                    Log.e(
+                            "RecoverySystem",
+                            "FileNotFoundException when open /cache/recovery/last_recovery_mode:",
+                            e4);
                     if (reFis != null) {
                         reFis.close();
                     }
                 } catch (IOException e5) {
-                    Log.e("RecoverySystem", "IOException when read /cache/recovery/last_recovery_mode:", e5);
+                    Log.e(
+                            "RecoverySystem",
+                            "IOException when read /cache/recovery/last_recovery_mode:",
+                            e5);
                     if (reFis != null) {
                         reFis.close();
                     }
                 }
-                copyFile(new File(RECOVERY_DIR, "last_history"), new File("/data/log/recovery_history.log"));
-                copyFile(new File(RECOVERY_DIR, "last_extra_history"), new File("/data/log/recovery_extra_history.log"));
-                copyFile(new File(RECOVERY_DIR, "last_recovery"), new File("/data/log/recovery.log"));
+                copyFile(
+                        new File(RECOVERY_DIR, "last_history"),
+                        new File("/data/log/recovery_history.log"));
+                copyFile(
+                        new File(RECOVERY_DIR, "last_extra_history"),
+                        new File("/data/log/recovery_extra_history.log"));
+                copyFile(
+                        new File(RECOVERY_DIR, "last_recovery"),
+                        new File("/data/log/recovery.log"));
                 if (RECOVERY_RESCUEPARTY_FILE.exists()) {
                     try {
-                        RandomAccessFile raf = new RandomAccessFile(RECOVERY_RESCUEPARTY_FILE, "rw");
+                        RandomAccessFile raf =
+                                new RandomAccessFile(RECOVERY_RESCUEPARTY_FILE, "rw");
                         try {
                             if (raf.length() > 524288) {
                                 raf.setLength(524288L);
@@ -994,7 +1154,9 @@ public class RecoverySystem {
                     } catch (IOException e6) {
                         Log.e("RecoverySystem", "IOException with rescueparty_log :", e6);
                     }
-                    copyFile(new File(RECOVERY_DIR, "rescueparty_log"), new File("/data/log/rescueparty_log"));
+                    copyFile(
+                            new File(RECOVERY_DIR, "rescueparty_log"),
+                            new File("/data/log/rescueparty_log"));
                 }
                 boolean reservePackage = BLOCK_MAP_FILE.exists();
                 if (!reservePackage && UNCRYPT_PACKAGE_FILE.exists()) {
@@ -1015,12 +1177,16 @@ public class RecoverySystem {
                 Log.i("RecoverySystem", "copy sudden_reset_log to /data/log/");
                 File tmpSuddenResetLastKmsg = new File(RECOVERY_DIR, SUDDEN_RESET_LAST_KMSG_NAME);
                 if (tmpSuddenResetLastKmsg.exists()) {
-                    copyFile(tmpSuddenResetLastKmsg, new File("/data/log", SUDDEN_RESET_LAST_KMSG_NAME));
+                    copyFile(
+                            tmpSuddenResetLastKmsg,
+                            new File("/data/log", SUDDEN_RESET_LAST_KMSG_NAME));
                 }
                 File tmpRecoveryLogFile = new File(TMP_RECOVERY_LOG_PATH);
                 if (tmpRecoveryLogFile.exists()) {
                     copyFile(tmpRecoveryLogFile, new File(LAST_CACHE_SUDDEN_RESET_LOG_PATH));
-                    copyFile(new File("/proc/last_kmsg"), new File("/data/log", SUDDEN_RESET_LAST_KMSG_NAME));
+                    copyFile(
+                            new File("/proc/last_kmsg"),
+                            new File("/data/log", SUDDEN_RESET_LAST_KMSG_NAME));
                     if (tmpRecoveryLogFile.delete()) {
                         Log.i("RecoverySystem", "Deleted: /efs/recovery/tmp_recovery.log");
                     } else {
@@ -1029,7 +1195,14 @@ public class RecoverySystem {
                 }
                 String[] names = RECOVERY_DIR.list();
                 for (int i = 0; names != null && i < names.length; i++) {
-                    if (!names[i].startsWith(LAST_PREFIX) && !names[i].equals(LAST_INSTALL_PATH) && ((!reservePackage || !names[i].equals(BLOCK_MAP_FILE.getName())) && ((!reservePackage || !names[i].equals(UNCRYPT_PACKAGE_FILE.getName())) && !names[i].equals(RECOVERY_RESCUEPARTY_FILE.getName()) && !names[i].equals(COMMAND_FILE.getName())))) {
+                    if (!names[i].startsWith(LAST_PREFIX)
+                            && !names[i].equals(LAST_INSTALL_PATH)
+                            && ((!reservePackage || !names[i].equals(BLOCK_MAP_FILE.getName()))
+                                    && ((!reservePackage
+                                                    || !names[i].equals(
+                                                            UNCRYPT_PACKAGE_FILE.getName()))
+                                            && !names[i].equals(RECOVERY_RESCUEPARTY_FILE.getName())
+                                            && !names[i].equals(COMMAND_FILE.getName())))) {
                         recursiveDelete(new File(RECOVERY_DIR, names[i]));
                     }
                 }
@@ -1039,7 +1212,10 @@ public class RecoverySystem {
                     try {
                         reFis.close();
                     } catch (IOException e8) {
-                        Log.e("RecoverySystem", "IOException when close last_recovery_mode file:", e8);
+                        Log.e(
+                                "RecoverySystem",
+                                "IOException when close last_recovery_mode file:",
+                                e8);
                     }
                 }
                 throw th;
@@ -1101,7 +1277,10 @@ public class RecoverySystem {
         Log.i("RecoverySystem", TextUtils.formatSimple("Package<%s> requesting LSKF", packageName));
         try {
             boolean validRequest = this.mService.requestLskf(packageName, sender);
-            Log.i("RecoverySystem", TextUtils.formatSimple("LSKF Request isValid = %b", Boolean.valueOf(validRequest)));
+            Log.i(
+                    "RecoverySystem",
+                    TextUtils.formatSimple(
+                            "LSKF Request isValid = %b", Boolean.valueOf(validRequest)));
             return validRequest;
         } catch (RemoteException | SecurityException e) {
             throw new IOException("could not request LSKF capture", e);
@@ -1124,7 +1303,8 @@ public class RecoverySystem {
         }
     }
 
-    private int rebootWithLskf(String packageName, String reason, boolean slotSwitch) throws IOException {
+    private int rebootWithLskf(String packageName, String reason, boolean slotSwitch)
+            throws IOException {
         try {
             return this.mService.rebootWithLskf(packageName, reason, slotSwitch);
         } catch (RemoteException | SecurityException e) {
@@ -1132,7 +1312,8 @@ public class RecoverySystem {
         }
     }
 
-    private int rebootWithLskfAssumeSlotSwitch(String packageName, String reason) throws IOException {
+    private int rebootWithLskfAssumeSlotSwitch(String packageName, String reason)
+            throws IOException {
         try {
             return this.mService.rebootWithLskfAssumeSlotSwitch(packageName, reason);
         } catch (RemoteException | RuntimeException e) {

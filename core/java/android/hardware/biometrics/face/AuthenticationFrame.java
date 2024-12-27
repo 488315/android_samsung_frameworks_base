@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AuthenticationFrame implements Parcelable {
-    public static final Parcelable.Creator<AuthenticationFrame> CREATOR = new Parcelable.Creator<AuthenticationFrame>() { // from class: android.hardware.biometrics.face.AuthenticationFrame.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationFrame createFromParcel(Parcel _aidl_source) {
-            AuthenticationFrame _aidl_out = new AuthenticationFrame();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AuthenticationFrame> CREATOR =
+            new Parcelable.Creator<AuthenticationFrame>() { // from class:
+                // android.hardware.biometrics.face.AuthenticationFrame.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationFrame createFromParcel(Parcel _aidl_source) {
+                    AuthenticationFrame _aidl_out = new AuthenticationFrame();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationFrame[] newArray(int _aidl_size) {
-            return new AuthenticationFrame[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationFrame[] newArray(int _aidl_size) {
+                    return new AuthenticationFrame[_aidl_size];
+                }
+            };
     public BaseFrame data;
 
     @Override // android.os.Parcelable

@@ -88,7 +88,9 @@ public abstract class AbstractWindowedCursor extends AbstractCursor {
     protected void checkPosition() {
         super.checkPosition();
         if (this.mWindow == null) {
-            throw new StaleDataException("Attempting to access a closed CursorWindow.Most probable cause: cursor is deactivated prior to calling this method.");
+            throw new StaleDataException(
+                    "Attempting to access a closed CursorWindow.Most probable cause: cursor is"
+                            + " deactivated prior to calling this method.");
         }
     }
 

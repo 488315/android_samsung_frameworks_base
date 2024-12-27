@@ -2,10 +2,10 @@ package android.view.textclassifier;
 
 /* loaded from: classes4.dex */
 public final class Log {
-    static final boolean ENABLE_FULL_LOGGING = android.util.Log.isLoggable(TextClassifier.LOG_TAG, 2);
+    static final boolean ENABLE_FULL_LOGGING =
+            android.util.Log.isLoggable(TextClassifier.LOG_TAG, 2);
 
-    private Log() {
-    }
+    private Log() {}
 
     public static void v(String tag, String msg) {
         if (ENABLE_FULL_LOGGING) {

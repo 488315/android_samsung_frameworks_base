@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.List;
@@ -56,7 +57,8 @@ public class FragmentController {
 
     @Deprecated
     public void restoreAllState(Parcelable state, List<Fragment> nonConfigList) {
-        this.mHost.mFragmentManager.restoreAllState(state, new FragmentManagerNonConfig(nonConfigList, null));
+        this.mHost.mFragmentManager.restoreAllState(
+                state, new FragmentManagerNonConfig(nonConfigList, null));
     }
 
     public void restoreAllState(Parcelable state, FragmentManagerNonConfig nonConfig) {
@@ -109,7 +111,8 @@ public class FragmentController {
         this.mHost.mFragmentManager.dispatchMultiWindowModeChanged(isInMultiWindowMode);
     }
 
-    public void dispatchMultiWindowModeChanged(boolean isInMultiWindowMode, Configuration newConfig) {
+    public void dispatchMultiWindowModeChanged(
+            boolean isInMultiWindowMode, Configuration newConfig) {
         this.mHost.mFragmentManager.dispatchMultiWindowModeChanged(isInMultiWindowMode, newConfig);
     }
 
@@ -118,8 +121,10 @@ public class FragmentController {
         this.mHost.mFragmentManager.dispatchPictureInPictureModeChanged(isInPictureInPictureMode);
     }
 
-    public void dispatchPictureInPictureModeChanged(boolean isInPictureInPictureMode, Configuration newConfig) {
-        this.mHost.mFragmentManager.dispatchPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
+    public void dispatchPictureInPictureModeChanged(
+            boolean isInPictureInPictureMode, Configuration newConfig) {
+        this.mHost.mFragmentManager.dispatchPictureInPictureModeChanged(
+                isInPictureInPictureMode, newConfig);
     }
 
     public void dispatchConfigurationChanged(Configuration newConfig) {

@@ -9,7 +9,8 @@ import android.sec.enterprise.content.SecContentProviderURI;
 
 /* loaded from: classes3.dex */
 public interface ISystemUIAdapterCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback";
+    public static final String DESCRIPTOR =
+            "android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback";
 
     void excludeExternalStorageForFailedPasswordsWipe(boolean z) throws RemoteException;
 
@@ -71,120 +72,95 @@ public interface ISystemUIAdapterCallback extends IInterface {
 
     public static class Default implements ISystemUIAdapterCallback {
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setStatusBarHidden(boolean hidden) throws RemoteException {
-        }
+        public void setStatusBarHidden(boolean hidden) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setNavigationBarHidden(boolean hidden) throws RemoteException {
-        }
+        public void setNavigationBarHidden(boolean hidden) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setKioskModeEnabled(boolean enable) throws RemoteException {
-        }
+        public void setKioskModeEnabled(boolean enable) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setMaximumFailedPasswordsForDisable(int num, String pkgName) throws RemoteException {
-        }
+        public void setMaximumFailedPasswordsForDisable(int num, String pkgName)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setMaximumFailedPasswordsForProfileDisable(int num) throws RemoteException {
-        }
+        public void setMaximumFailedPasswordsForProfileDisable(int num) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setPwdChangeRequested(int flag) throws RemoteException {
-        }
+        public void setPwdChangeRequested(int flag) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void excludeExternalStorageForFailedPasswordsWipe(boolean exclude) throws RemoteException {
-        }
+        public void excludeExternalStorageForFailedPasswordsWipe(boolean exclude)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setPasswordLockDelay(int time) throws RemoteException {
-        }
+        public void setPasswordLockDelay(int time) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setMultifactorAuthEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setMultifactorAuthEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setPasswordVisibilityEnabled(boolean allow) throws RemoteException {
-        }
+        public void setPasswordVisibilityEnabled(boolean allow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setSettingsChangeAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setSettingsChangeAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setStatusBarExpansionAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setStatusBarExpansionAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setAirplaneModeAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setAirplaneModeAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setCellularDataAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setCellularDataAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setWifiTetheringAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setWifiTetheringAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setCameraAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setCameraAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setFaceRecognitionEvenCameraBlockedAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setFaceRecognitionEvenCameraBlockedAllowed(boolean isAllow)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setBluetoothAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setBluetoothAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setNFCStateChangeAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setNFCStateChangeAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setRoamingAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setRoamingAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setWifiStateChangeAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setWifiStateChangeAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setWifiAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setWifiAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setLocationProviderAllowed(String provider, boolean isAllow) throws RemoteException {
-        }
+        public void setLocationProviderAllowed(String provider, boolean isAllow)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setGPSStateChangeAllowed(boolean isAllow) throws RemoteException {
-        }
+        public void setGPSStateChangeAllowed(boolean isAllow) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setLockedIccIds(String[] iccIds) throws RemoteException {
-        }
+        public void setLockedIccIds(String[] iccIds) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setLockscreenInvisibleOverlay(boolean configured) throws RemoteException {
-        }
+        public void setLockscreenInvisibleOverlay(boolean configured) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setLockscreenWallpaper(boolean configured) throws RemoteException {
-        }
+        public void setLockscreenWallpaper(boolean configured) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setApplicationNameControlEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setApplicationNameControlEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-        public void setAdminLock(boolean enabled, boolean licenseExpired) throws RemoteException {
-        }
+        public void setAdminLock(boolean enabled, boolean licenseExpired) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -192,7 +168,7 @@ public interface ISystemUIAdapterCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISystemUIAdapterCallback {
+    public abstract static class Stub extends Binder implements ISystemUIAdapterCallback {
         static final int TRANSACTION_excludeExternalStorageForFailedPasswordsWipe = 7;
         static final int TRANSACTION_setAdminLock = 29;
         static final int TRANSACTION_setAirplaneModeAllowed = 13;
@@ -314,7 +290,8 @@ public interface ISystemUIAdapterCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISystemUIAdapterCallback.DESCRIPTOR);
             }
@@ -529,7 +506,8 @@ public interface ISystemUIAdapterCallback extends IInterface {
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-            public void setMaximumFailedPasswordsForDisable(int num, String pkgName) throws RemoteException {
+            public void setMaximumFailedPasswordsForDisable(int num, String pkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
@@ -566,7 +544,8 @@ public interface ISystemUIAdapterCallback extends IInterface {
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-            public void excludeExternalStorageForFailedPasswordsWipe(boolean exclude) throws RemoteException {
+            public void excludeExternalStorageForFailedPasswordsWipe(boolean exclude)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
@@ -686,7 +665,8 @@ public interface ISystemUIAdapterCallback extends IInterface {
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-            public void setFaceRecognitionEvenCameraBlockedAllowed(boolean isAllow) throws RemoteException {
+            public void setFaceRecognitionEvenCameraBlockedAllowed(boolean isAllow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
@@ -758,7 +738,8 @@ public interface ISystemUIAdapterCallback extends IInterface {
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-            public void setLocationProviderAllowed(String provider, boolean isAllow) throws RemoteException {
+            public void setLocationProviderAllowed(String provider, boolean isAllow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);
@@ -831,7 +812,8 @@ public interface ISystemUIAdapterCallback extends IInterface {
             }
 
             @Override // android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback
-            public void setAdminLock(boolean enabled, boolean licenseExpired) throws RemoteException {
+            public void setAdminLock(boolean enabled, boolean licenseExpired)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISystemUIAdapterCallback.DESCRIPTOR);

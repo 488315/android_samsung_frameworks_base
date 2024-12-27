@@ -7,8 +7,10 @@ import android.security.KeyStoreOperation;
 import android.security.keystore.KeyInfo;
 import android.security.keystore.KeyProperties;
 import android.security.keystore.KeyStoreCryptoOperation;
-import android.security.keystore2.KeyStoreCryptoOperationChunkedStreamer;
 import android.system.keystore2.Authorization;
+
+import libcore.util.EmptyArray;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 import java.security.AlgorithmParameters;
@@ -30,6 +32,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.crypto.AEADBadTagException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -42,7 +45,6 @@ import javax.crypto.ShortBufferException;
 import javax.crypto.spec.OAEPParameterSpec;
 import javax.crypto.spec.PSource;
 import javax.crypto.spec.SecretKeySpec;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes3.dex */
 abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStoreCryptoOperation {
@@ -73,13 +75,17 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
 
     protected abstract void initAlgorithmSpecificParameters() throws InvalidKeyException;
 
-    protected abstract void initAlgorithmSpecificParameters(AlgorithmParameters algorithmParameters) throws InvalidAlgorithmParameterException;
+    protected abstract void initAlgorithmSpecificParameters(AlgorithmParameters algorithmParameters)
+            throws InvalidAlgorithmParameterException;
 
-    protected abstract void initAlgorithmSpecificParameters(AlgorithmParameterSpec algorithmParameterSpec) throws InvalidAlgorithmParameterException;
+    protected abstract void initAlgorithmSpecificParameters(
+            AlgorithmParameterSpec algorithmParameterSpec)
+            throws InvalidAlgorithmParameterException;
 
     protected abstract void initKey(int i, Key key) throws InvalidKeyException;
 
-    protected abstract void loadAlgorithmSpecificParametersFromBeginResult(KeyParameter[] keyParameterArr);
+    protected abstract void loadAlgorithmSpecificParametersFromBeginResult(
+            KeyParameter[] keyParameterArr);
 
     AndroidKeyStoreCipherSpiBase() {
         this.mKeymasterPurposeOverride = -1;
@@ -94,35 +100,59 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final void engineInit(int opmode, Key key, SecureRandom random) throws InvalidKeyException {
+    protected final void engineInit(int opmode, Key key, SecureRandom random)
+            throws InvalidKeyException {
         resetAll();
-        if (!(key instanceof AndroidKeyStorePrivateKey) && ((key instanceof PrivateKey) || (key instanceof PublicKey))) {
+        if (!(key instanceof AndroidKeyStorePrivateKey)
+                && ((key instanceof PrivateKey) || (key instanceof PublicKey))) {
             try {
                 StrictMode.noteSlowCall("engineInit");
                 this.mCipher = Cipher.getInstance(getTransform());
                 String transform = getTransform();
                 if ("RSA/ECB/OAEPWithSHA-224AndMGF1Padding".equals(transform)) {
-                    OAEPParameterSpec spec = new OAEPParameterSpec(KeyProperties.DIGEST_SHA224, "MGF1", new MGF1ParameterSpec("SHA-1"), PSource.PSpecified.DEFAULT);
+                    OAEPParameterSpec spec =
+                            new OAEPParameterSpec(
+                                    KeyProperties.DIGEST_SHA224,
+                                    "MGF1",
+                                    new MGF1ParameterSpec("SHA-1"),
+                                    PSource.PSpecified.DEFAULT);
                     this.mCipher.init(opmode, key, spec, random);
                     return;
                 }
                 if ("RSA/ECB/OAEPWithSHA-256AndMGF1Padding".equals(transform)) {
-                    OAEPParameterSpec spec2 = new OAEPParameterSpec("SHA-256", "MGF1", new MGF1ParameterSpec("SHA-1"), PSource.PSpecified.DEFAULT);
+                    OAEPParameterSpec spec2 =
+                            new OAEPParameterSpec(
+                                    "SHA-256",
+                                    "MGF1",
+                                    new MGF1ParameterSpec("SHA-1"),
+                                    PSource.PSpecified.DEFAULT);
                     this.mCipher.init(opmode, key, spec2, random);
                     return;
                 } else if ("RSA/ECB/OAEPWithSHA-384AndMGF1Padding".equals(transform)) {
-                    OAEPParameterSpec spec3 = new OAEPParameterSpec(KeyProperties.DIGEST_SHA384, "MGF1", new MGF1ParameterSpec("SHA-1"), PSource.PSpecified.DEFAULT);
+                    OAEPParameterSpec spec3 =
+                            new OAEPParameterSpec(
+                                    KeyProperties.DIGEST_SHA384,
+                                    "MGF1",
+                                    new MGF1ParameterSpec("SHA-1"),
+                                    PSource.PSpecified.DEFAULT);
                     this.mCipher.init(opmode, key, spec3, random);
                     return;
                 } else if ("RSA/ECB/OAEPWithSHA-512AndMGF1Padding".equals(transform)) {
-                    OAEPParameterSpec spec4 = new OAEPParameterSpec(KeyProperties.DIGEST_SHA512, "MGF1", new MGF1ParameterSpec("SHA-1"), PSource.PSpecified.DEFAULT);
+                    OAEPParameterSpec spec4 =
+                            new OAEPParameterSpec(
+                                    KeyProperties.DIGEST_SHA512,
+                                    "MGF1",
+                                    new MGF1ParameterSpec("SHA-1"),
+                                    PSource.PSpecified.DEFAULT);
                     this.mCipher.init(opmode, key, spec4, random);
                     return;
                 } else {
                     this.mCipher.init(opmode, key, random);
                     return;
                 }
-            } catch (InvalidAlgorithmParameterException | NoSuchAlgorithmException | NoSuchPaddingException e) {
+            } catch (InvalidAlgorithmParameterException
+                    | NoSuchAlgorithmException
+                    | NoSuchPaddingException e) {
                 throw new InvalidKeyException(e);
             }
         }
@@ -144,9 +174,12 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected final void engineInit(
+            int opmode, Key key, AlgorithmParameters params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         resetAll();
-        if (!(key instanceof AndroidKeyStorePrivateKey) && ((key instanceof PrivateKey) || (key instanceof PublicKey))) {
+        if (!(key instanceof AndroidKeyStorePrivateKey)
+                && ((key instanceof PrivateKey) || (key instanceof PublicKey))) {
             try {
                 StrictMode.noteSlowCall("engineInit");
                 this.mCipher = Cipher.getInstance(getTransform());
@@ -170,9 +203,12 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final void engineInit(int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected final void engineInit(
+            int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         resetAll();
-        if (!(key instanceof AndroidKeyStorePrivateKey) && ((key instanceof PrivateKey) || (key instanceof PublicKey))) {
+        if (!(key instanceof AndroidKeyStorePrivateKey)
+                && ((key instanceof PrivateKey) || (key instanceof PublicKey))) {
             try {
                 StrictMode.noteSlowCall("engineInit");
                 this.mCipher = Cipher.getInstance(getTransform());
@@ -243,7 +279,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
         this.mCachedException = null;
     }
 
-    private void ensureKeystoreOperationInitialized(Authorization[] keyCharacteristics) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    private void ensureKeystoreOperationInitialized(Authorization[] keyCharacteristics)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         int purpose;
         if (this.mMainDataStreamer != null || this.mCachedException != null) {
             return;
@@ -261,14 +298,22 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
         parameters.add(KeyStore2ParameterUtils.makeEnum(536870913, purpose));
         try {
             StrictMode.noteDiskRead();
-            this.mOperation = this.mKey.getSecurityLevel().createOperation(this.mKey.getKeyIdDescriptor(), parameters);
-            this.mOperationChallenge = KeyStoreCryptoOperationUtils.getOrMakeOperationChallenge(this.mOperation, this.mKey);
+            this.mOperation =
+                    this.mKey
+                            .getSecurityLevel()
+                            .createOperation(this.mKey.getKeyIdDescriptor(), parameters);
+            this.mOperationChallenge =
+                    KeyStoreCryptoOperationUtils.getOrMakeOperationChallenge(
+                            this.mOperation, this.mKey);
             loadAlgorithmSpecificParametersFromBeginResult(this.mOperation.getParameters());
             this.mMainDataStreamer = createMainDataStreamer(this.mOperation);
-            this.mAdditionalAuthenticationDataStreamer = createAdditionalAuthenticationDataStreamer(this.mOperation);
+            this.mAdditionalAuthenticationDataStreamer =
+                    createAdditionalAuthenticationDataStreamer(this.mOperation);
             this.mAdditionalAuthenticationDataStreamerClosed = false;
         } catch (KeyStoreException keyStoreException) {
-            GeneralSecurityException e = KeyStoreCryptoOperationUtils.getExceptionForCipherInit(this.mKey, keyStoreException);
+            GeneralSecurityException e =
+                    KeyStoreCryptoOperationUtils.getExceptionForCipherInit(
+                            this.mKey, keyStoreException);
             if (e instanceof InvalidKeyException) {
                 throw ((InvalidKeyException) e);
             }
@@ -280,10 +325,12 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     protected KeyStoreCryptoOperationStreamer createMainDataStreamer(KeyStoreOperation operation) {
-        return new KeyStoreCryptoOperationChunkedStreamer(new KeyStoreCryptoOperationChunkedStreamer.MainDataStream(operation), 0);
+        return new KeyStoreCryptoOperationChunkedStreamer(
+                new KeyStoreCryptoOperationChunkedStreamer.MainDataStream(operation), 0);
     }
 
-    protected KeyStoreCryptoOperationStreamer createAdditionalAuthenticationDataStreamer(KeyStoreOperation operation) {
+    protected KeyStoreCryptoOperationStreamer createAdditionalAuthenticationDataStreamer(
+            KeyStoreOperation operation) {
         return null;
     }
 
@@ -318,11 +365,15 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     private void flushAAD() throws KeyStoreException {
-        if (this.mAdditionalAuthenticationDataStreamer != null && !this.mAdditionalAuthenticationDataStreamerClosed) {
+        if (this.mAdditionalAuthenticationDataStreamer != null
+                && !this.mAdditionalAuthenticationDataStreamerClosed) {
             try {
-                byte[] output = this.mAdditionalAuthenticationDataStreamer.doFinal(EmptyArray.BYTE, 0, 0, null);
+                byte[] output =
+                        this.mAdditionalAuthenticationDataStreamer.doFinal(
+                                EmptyArray.BYTE, 0, 0, null);
                 if (output != null && output.length > 0) {
-                    throw new ProviderException("AAD update unexpectedly returned data: " + output.length + " bytes");
+                    throw new ProviderException(
+                            "AAD update unexpectedly returned data: " + output.length + " bytes");
                 }
             } finally {
                 this.mAdditionalAuthenticationDataStreamerClosed = true;
@@ -331,7 +382,9 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final int engineUpdate(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) throws ShortBufferException {
+    protected final int engineUpdate(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
+            throws ShortBufferException {
         if (this.mCipher != null) {
             return this.mCipher.update(input, inputOffset, inputLen, output);
         }
@@ -344,11 +397,16 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             System.arraycopy(outputCopy, 0, output, outputOffset, outputCopy.length);
             return outputCopy.length;
         }
-        throw new ShortBufferException("Output buffer too short. Produced: " + outputCopy.length + ", available: " + outputAvailable);
+        throw new ShortBufferException(
+                "Output buffer too short. Produced: "
+                        + outputCopy.length
+                        + ", available: "
+                        + outputAvailable);
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final int engineUpdate(ByteBuffer input, ByteBuffer output) throws ShortBufferException {
+    protected final int engineUpdate(ByteBuffer input, ByteBuffer output)
+            throws ShortBufferException {
         byte[] inputArray;
         if (this.mCipher != null) {
             return this.mCipher.update(input, output);
@@ -361,7 +419,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
         }
         int inputSize = input.remaining();
         if (input.hasArray()) {
-            inputArray = engineUpdate(input.array(), input.arrayOffset() + input.position(), inputSize);
+            inputArray =
+                    engineUpdate(input.array(), input.arrayOffset() + input.position(), inputSize);
             input.position(input.position() + inputSize);
         } else {
             byte[] outputArray = new byte[inputSize];
@@ -374,7 +433,11 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             try {
                 output.put(inputArray);
             } catch (BufferOverflowException e) {
-                throw new ShortBufferException("Output buffer too small. Produced: " + outputSize + ", available: " + outputBufferAvailable);
+                throw new ShortBufferException(
+                        "Output buffer too small. Produced: "
+                                + outputSize
+                                + ", available: "
+                                + outputBufferAvailable);
             }
         }
         return outputSize;
@@ -393,15 +456,19 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
         try {
             ensureKeystoreOperationInitialized(getKeyCharacteristics(this.mKey));
             if (this.mAdditionalAuthenticationDataStreamerClosed) {
-                throw new IllegalStateException("AAD can only be provided before Cipher.update is invoked");
+                throw new IllegalStateException(
+                        "AAD can only be provided before Cipher.update is invoked");
             }
             if (this.mAdditionalAuthenticationDataStreamer == null) {
                 throw new IllegalStateException("This cipher does not support AAD");
             }
             try {
-                byte[] output = this.mAdditionalAuthenticationDataStreamer.update(input, inputOffset, inputLen);
+                byte[] output =
+                        this.mAdditionalAuthenticationDataStreamer.update(
+                                input, inputOffset, inputLen);
                 if (output != null && output.length > 0) {
-                    throw new ProviderException("AAD update unexpectedly produced output: " + output.length + " bytes");
+                    throw new ProviderException(
+                            "AAD update unexpectedly produced output: " + output.length + " bytes");
                 }
             } catch (KeyStoreException e) {
                 this.mCachedException = e;
@@ -442,7 +509,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen) throws IllegalBlockSizeException, BadPaddingException {
+    protected final byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen)
+            throws IllegalBlockSizeException, BadPaddingException {
         if (this.mCipher != null) {
             if (input == null && inputLen == 0) {
                 return this.mCipher.doFinal();
@@ -450,7 +518,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             return this.mCipher.doFinal(input, inputOffset, inputLen);
         }
         if (this.mCachedException != null) {
-            throw ((IllegalBlockSizeException) new IllegalBlockSizeException().initCause(this.mCachedException));
+            throw ((IllegalBlockSizeException)
+                    new IllegalBlockSizeException().initCause(this.mCachedException));
         }
         try {
             ensureKeystoreOperationInitialized(getKeyCharacteristics(this.mKey));
@@ -466,7 +535,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
                     case -30:
                         throw ((AEADBadTagException) new AEADBadTagException().initCause(e));
                     default:
-                        throw ((IllegalBlockSizeException) new IllegalBlockSizeException().initCause(e));
+                        throw ((IllegalBlockSizeException)
+                                new IllegalBlockSizeException().initCause(e));
                 }
             }
         } catch (InvalidAlgorithmParameterException | InvalidKeyException e2) {
@@ -475,7 +545,9 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final int engineDoFinal(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException {
+    protected final int engineDoFinal(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
+            throws ShortBufferException, IllegalBlockSizeException, BadPaddingException {
         if (this.mCipher != null) {
             return this.mCipher.doFinal(input, inputOffset, inputLen, output);
         }
@@ -488,11 +560,16 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             System.arraycopy(outputCopy, 0, output, outputOffset, outputCopy.length);
             return outputCopy.length;
         }
-        throw new ShortBufferException("Output buffer too short. Produced: " + outputCopy.length + ", available: " + outputAvailable);
+        throw new ShortBufferException(
+                "Output buffer too short. Produced: "
+                        + outputCopy.length
+                        + ", available: "
+                        + outputAvailable);
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final int engineDoFinal(ByteBuffer input, ByteBuffer output) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException {
+    protected final int engineDoFinal(ByteBuffer input, ByteBuffer output)
+            throws ShortBufferException, IllegalBlockSizeException, BadPaddingException {
         byte[] inputArray;
         if (this.mCipher != null) {
             return this.mCipher.doFinal(input, output);
@@ -505,7 +582,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
         }
         int inputSize = input.remaining();
         if (input.hasArray()) {
-            inputArray = engineDoFinal(input.array(), input.arrayOffset() + input.position(), inputSize);
+            inputArray =
+                    engineDoFinal(input.array(), input.arrayOffset() + input.position(), inputSize);
             input.position(input.position() + inputSize);
         } else {
             byte[] outputArray = new byte[inputSize];
@@ -518,14 +596,19 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             try {
                 output.put(inputArray);
             } catch (BufferOverflowException e) {
-                throw new ShortBufferException("Output buffer too small. Produced: " + outputSize + ", available: " + outputBufferAvailable);
+                throw new ShortBufferException(
+                        "Output buffer too small. Produced: "
+                                + outputSize
+                                + ", available: "
+                                + outputBufferAvailable);
             }
         }
         return outputSize;
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final byte[] engineWrap(Key key) throws IllegalBlockSizeException, InvalidKeyException {
+    protected final byte[] engineWrap(Key key)
+            throws IllegalBlockSizeException, InvalidKeyException {
         if (this.mCipher != null) {
             return this.mCipher.wrap(key);
         }
@@ -533,7 +616,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             throw new IllegalStateException("Not initilized");
         }
         if (!isEncrypting()) {
-            throw new IllegalStateException("Cipher must be initialized in Cipher.WRAP_MODE to wrap keys");
+            throw new IllegalStateException(
+                    "Cipher must be initialized in Cipher.WRAP_MODE to wrap keys");
         }
         if (key == null) {
             throw new NullPointerException("key == null");
@@ -547,10 +631,13 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             if (encoded == null) {
                 try {
                     SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(key.getAlgorithm());
-                    SecretKeySpec spec = (SecretKeySpec) keyFactory.getKeySpec((SecretKey) key, SecretKeySpec.class);
+                    SecretKeySpec spec =
+                            (SecretKeySpec)
+                                    keyFactory.getKeySpec((SecretKey) key, SecretKeySpec.class);
                     encoded = spec.getEncoded();
                 } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-                    throw new InvalidKeyException("Failed to wrap key because it does not export its key material", e);
+                    throw new InvalidKeyException(
+                            "Failed to wrap key because it does not export its key material", e);
                 }
             }
         } else if (key instanceof PrivateKey) {
@@ -560,10 +647,13 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             if (encoded == null) {
                 try {
                     KeyFactory keyFactory2 = KeyFactory.getInstance(key.getAlgorithm());
-                    PKCS8EncodedKeySpec spec2 = (PKCS8EncodedKeySpec) keyFactory2.getKeySpec(key, PKCS8EncodedKeySpec.class);
+                    PKCS8EncodedKeySpec spec2 =
+                            (PKCS8EncodedKeySpec)
+                                    keyFactory2.getKeySpec(key, PKCS8EncodedKeySpec.class);
                     encoded = spec2.getEncoded();
                 } catch (NoSuchAlgorithmException | InvalidKeySpecException e2) {
-                    throw new InvalidKeyException("Failed to wrap key because it does not export its key material", e2);
+                    throw new InvalidKeyException(
+                            "Failed to wrap key because it does not export its key material", e2);
                 }
             }
         } else if (key instanceof PublicKey) {
@@ -573,17 +663,21 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             if (encoded == null) {
                 try {
                     KeyFactory keyFactory3 = KeyFactory.getInstance(key.getAlgorithm());
-                    X509EncodedKeySpec spec3 = (X509EncodedKeySpec) keyFactory3.getKeySpec(key, X509EncodedKeySpec.class);
+                    X509EncodedKeySpec spec3 =
+                            (X509EncodedKeySpec)
+                                    keyFactory3.getKeySpec(key, X509EncodedKeySpec.class);
                     encoded = spec3.getEncoded();
                 } catch (NoSuchAlgorithmException | InvalidKeySpecException e3) {
-                    throw new InvalidKeyException("Failed to wrap key because it does not export its key material", e3);
+                    throw new InvalidKeyException(
+                            "Failed to wrap key because it does not export its key material", e3);
                 }
             }
         } else {
             throw new InvalidKeyException("Unsupported key type: " + key.getClass().getName());
         }
         if (encoded == null) {
-            throw new InvalidKeyException("Failed to wrap key because it does not export its key material");
+            throw new InvalidKeyException(
+                    "Failed to wrap key because it does not export its key material");
         }
         try {
             return engineDoFinal(encoded, 0, encoded.length);
@@ -593,7 +687,9 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
     }
 
     @Override // javax.crypto.CipherSpi
-    protected final Key engineUnwrap(byte[] wrappedKey, String wrappedKeyAlgorithm, int wrappedKeyType) throws InvalidKeyException, NoSuchAlgorithmException {
+    protected final Key engineUnwrap(
+            byte[] wrappedKey, String wrappedKeyAlgorithm, int wrappedKeyType)
+            throws InvalidKeyException, NoSuchAlgorithmException {
         if (this.mCipher != null) {
             return this.mCipher.unwrap(wrappedKey, wrappedKeyAlgorithm, wrappedKeyType);
         }
@@ -601,7 +697,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
             throw new IllegalStateException("Not initilized");
         }
         if (isEncrypting()) {
-            throw new IllegalStateException("Cipher must be initialized in Cipher.WRAP_MODE to wrap keys");
+            throw new IllegalStateException(
+                    "Cipher must be initialized in Cipher.WRAP_MODE to wrap keys");
         }
         if (wrappedKey == null) {
             throw new NullPointerException("wrappedKey == null");
@@ -615,19 +712,22 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
                     try {
                         return keyFactory.generatePublic(new X509EncodedKeySpec(encoded));
                     } catch (InvalidKeySpecException e) {
-                        throw new InvalidKeyException("Failed to create public key from its X.509 encoded form", e);
+                        throw new InvalidKeyException(
+                                "Failed to create public key from its X.509 encoded form", e);
                     }
                 case 2:
                     KeyFactory keyFactory2 = KeyFactory.getInstance(wrappedKeyAlgorithm);
                     try {
                         return keyFactory2.generatePrivate(new PKCS8EncodedKeySpec(encoded));
                     } catch (InvalidKeySpecException e2) {
-                        throw new InvalidKeyException("Failed to create private key from its PKCS#8 encoded form", e2);
+                        throw new InvalidKeyException(
+                                "Failed to create private key from its PKCS#8 encoded form", e2);
                     }
                 case 3:
                     return new SecretKeySpec(encoded, wrappedKeyAlgorithm);
                 default:
-                    throw new InvalidParameterException("Unsupported wrappedKeyType: " + wrappedKeyType);
+                    throw new InvalidParameterException(
+                            "Unsupported wrappedKeyType: " + wrappedKeyType);
             }
         } catch (BadPaddingException | IllegalBlockSizeException e3) {
             throw new InvalidKeyException("Failed to unwrap key", e3);
@@ -709,7 +809,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
 
     protected final int getKeySecurityLevel() {
         try {
-            KeyFactory keyFactory = KeyFactory.getInstance(this.mKey.getAlgorithm(), AndroidKeyStoreSpi.NAME);
+            KeyFactory keyFactory =
+                    KeyFactory.getInstance(this.mKey.getAlgorithm(), AndroidKeyStoreSpi.NAME);
             KeyInfo keyInfo = (KeyInfo) keyFactory.getKeySpec(this.mKey, KeyInfo.class);
             return keyInfo.getSecurityLevel();
         } catch (Exception e) {
@@ -718,7 +819,8 @@ abstract class AndroidKeyStoreCipherSpiBase extends CipherSpi implements KeyStor
         }
     }
 
-    protected void addAlgorithmSpecificParametersToBegin(List<KeyParameter> parameters, Authorization[] keyCharacteristics) {
+    protected void addAlgorithmSpecificParametersToBegin(
+            List<KeyParameter> parameters, Authorization[] keyCharacteristics) {
         addAlgorithmSpecificParametersToBegin(parameters);
     }
 }

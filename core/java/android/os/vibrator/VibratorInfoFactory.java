@@ -14,6 +14,5 @@ public final class VibratorInfoFactory {
         return new MultiVibratorInfo(id, vibratorInfos);
     }
 
-    private VibratorInfoFactory() {
-    }
+    private VibratorInfoFactory() {}
 }

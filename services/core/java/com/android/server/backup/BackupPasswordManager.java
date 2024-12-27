@@ -2,14 +2,18 @@ package com.android.server.backup;
 
 import android.content.Context;
 import android.util.Slog;
+
 import com.android.server.backup.utils.PasswordUtils;
+
+import libcore.util.HexEncoding;
+
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.SecureRandom;
+
 import javax.crypto.SecretKey;
-import libcore.util.HexEncoding;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -77,7 +81,8 @@ public final class BackupPasswordManager {
                 try {
                     byte[] bArr = new byte[dataInputStream.readInt()];
                     dataInputStream.readFully(bArr);
-                    BackupPasswordHash backupPasswordHash = new BackupPasswordHash(dataInputStream.readUTF(), bArr);
+                    BackupPasswordHash backupPasswordHash =
+                            new BackupPasswordHash(dataInputStream.readUTF(), bArr);
                     dataInputStream.close();
                     fileInputStream.close();
                     this.mPasswordHash = backupPasswordHash.hash;
@@ -98,7 +103,11 @@ public final class BackupPasswordManager {
         if (str2 == null || str2.length() == 0) {
             return false;
         }
-        SecretKey buildCharArrayKey = PasswordUtils.buildCharArrayKey(str, str2.toCharArray(), this.mPasswordSalt, 10000);
-        return this.mPasswordHash.equalsIgnoreCase(buildCharArrayKey != null ? HexEncoding.encodeToString(buildCharArrayKey.getEncoded(), true) : null);
+        SecretKey buildCharArrayKey =
+                PasswordUtils.buildCharArrayKey(str, str2.toCharArray(), this.mPasswordSalt, 10000);
+        return this.mPasswordHash.equalsIgnoreCase(
+                buildCharArrayKey != null
+                        ? HexEncoding.encodeToString(buildCharArrayKey.getEncoded(), true)
+                        : null);
     }
 }

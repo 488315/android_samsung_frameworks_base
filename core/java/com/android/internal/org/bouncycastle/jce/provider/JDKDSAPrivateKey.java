@@ -11,6 +11,7 @@ import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.crypto.params.DSAPrivateKeyParameters;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAttributeCarrierImpl;
 import com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,8 +29,7 @@ public class JDKDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrie
     DSAParams dsaSpec;
     BigInteger x;
 
-    protected JDKDSAPrivateKey() {
-    }
+    protected JDKDSAPrivateKey() {}
 
     JDKDSAPrivateKey(DSAPrivateKey key) {
         this.x = key.getX();
@@ -42,7 +42,8 @@ public class JDKDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrie
     }
 
     JDKDSAPrivateKey(PrivateKeyInfo info) throws IOException {
-        DSAParameter params = DSAParameter.getInstance(info.getPrivateKeyAlgorithm().getParameters());
+        DSAParameter params =
+                DSAParameter.getInstance(info.getPrivateKeyAlgorithm().getParameters());
         ASN1Integer derX = ASN1Integer.getInstance(info.parsePrivateKey());
         this.x = derX.getValue();
         this.dsaSpec = new DSAParameterSpec(params.getP(), params.getQ(), params.getG());
@@ -50,7 +51,11 @@ public class JDKDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrie
 
     JDKDSAPrivateKey(DSAPrivateKeyParameters params) {
         this.x = params.getX();
-        this.dsaSpec = new DSAParameterSpec(params.getParameters().getP(), params.getParameters().getQ(), params.getParameters().getG());
+        this.dsaSpec =
+                new DSAParameterSpec(
+                        params.getParameters().getP(),
+                        params.getParameters().getQ(),
+                        params.getParameters().getG());
     }
 
     @Override // java.security.Key
@@ -66,7 +71,15 @@ public class JDKDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrie
     @Override // java.security.Key
     public byte[] getEncoded() {
         try {
-            PrivateKeyInfo info = new PrivateKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_dsa, new DSAParameter(this.dsaSpec.getP(), this.dsaSpec.getQ(), this.dsaSpec.getG())), new ASN1Integer(getX()));
+            PrivateKeyInfo info =
+                    new PrivateKeyInfo(
+                            new AlgorithmIdentifier(
+                                    X9ObjectIdentifiers.id_dsa,
+                                    new DSAParameter(
+                                            this.dsaSpec.getP(),
+                                            this.dsaSpec.getQ(),
+                                            this.dsaSpec.getG())),
+                            new ASN1Integer(getX()));
             return info.getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
             return null;
@@ -88,11 +101,15 @@ public class JDKDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrie
             return false;
         }
         DSAPrivateKey other = (DSAPrivateKey) o;
-        return getX().equals(other.getX()) && getParams().getG().equals(other.getParams().getG()) && getParams().getP().equals(other.getParams().getP()) && getParams().getQ().equals(other.getParams().getQ());
+        return getX().equals(other.getX())
+                && getParams().getG().equals(other.getParams().getG())
+                && getParams().getP().equals(other.getParams().getP())
+                && getParams().getQ().equals(other.getParams().getQ());
     }
 
     public int hashCode() {
-        return ((getX().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode()) ^ getParams().getQ().hashCode();
+        return ((getX().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode())
+                ^ getParams().getQ().hashCode();
     }
 
     @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
@@ -112,7 +129,11 @@ public class JDKDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrie
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         this.x = (BigInteger) in.readObject();
-        this.dsaSpec = new DSAParameterSpec((BigInteger) in.readObject(), (BigInteger) in.readObject(), (BigInteger) in.readObject());
+        this.dsaSpec =
+                new DSAParameterSpec(
+                        (BigInteger) in.readObject(),
+                        (BigInteger) in.readObject(),
+                        (BigInteger) in.readObject());
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.attrCarrier.readObject(in);
     }

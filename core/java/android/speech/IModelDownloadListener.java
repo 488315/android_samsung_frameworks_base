@@ -20,20 +20,16 @@ public interface IModelDownloadListener extends IInterface {
 
     public static class Default implements IModelDownloadListener {
         @Override // android.speech.IModelDownloadListener
-        public void onProgress(int completedPercent) throws RemoteException {
-        }
+        public void onProgress(int completedPercent) throws RemoteException {}
 
         @Override // android.speech.IModelDownloadListener
-        public void onSuccess() throws RemoteException {
-        }
+        public void onSuccess() throws RemoteException {}
 
         @Override // android.speech.IModelDownloadListener
-        public void onScheduled() throws RemoteException {
-        }
+        public void onScheduled() throws RemoteException {}
 
         @Override // android.speech.IModelDownloadListener
-        public void onError(int error) throws RemoteException {
-        }
+        public void onError(int error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,7 +37,7 @@ public interface IModelDownloadListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IModelDownloadListener {
+    public abstract static class Stub extends Binder implements IModelDownloadListener {
         static final int TRANSACTION_onError = 4;
         static final int TRANSACTION_onProgress = 1;
         static final int TRANSACTION_onScheduled = 3;
@@ -88,7 +84,8 @@ public interface IModelDownloadListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IModelDownloadListener.DESCRIPTOR);
             }

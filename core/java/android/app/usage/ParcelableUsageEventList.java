@@ -1,6 +1,5 @@
 package android.app.usage;
 
-import android.app.usage.UsageEvents;
 import android.content.res.Configuration;
 import android.os.BadParcelableException;
 import android.os.Binder;
@@ -8,6 +7,7 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,19 +18,21 @@ public final class ParcelableUsageEventList implements Parcelable {
     private static final String TAG = "ParcelableUsageEventList";
     private List<UsageEvents.Event> mList;
     private static final int MAX_IPC_SIZE = IBinder.getSuggestedMaxIpcSizeBytes();
-    public static final Parcelable.Creator<ParcelableUsageEventList> CREATOR = new Parcelable.Creator<ParcelableUsageEventList>() { // from class: android.app.usage.ParcelableUsageEventList.2
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableUsageEventList createFromParcel(Parcel in) {
-            return new ParcelableUsageEventList(in);
-        }
+    public static final Parcelable.Creator<ParcelableUsageEventList> CREATOR =
+            new Parcelable.Creator<ParcelableUsageEventList>() { // from class:
+                // android.app.usage.ParcelableUsageEventList.2
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableUsageEventList createFromParcel(Parcel in) {
+                    return new ParcelableUsageEventList(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableUsageEventList[] newArray(int size) {
-            return new ParcelableUsageEventList[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableUsageEventList[] newArray(int size) {
+                    return new ParcelableUsageEventList[size];
+                }
+            };
 
     public ParcelableUsageEventList(List<UsageEvents.Event> list) {
         if (list == null) {
@@ -69,7 +71,8 @@ public final class ParcelableUsageEventList implements Parcelable {
                         count++;
                     }
                 } catch (RemoteException e) {
-                    throw new BadParcelableException("Failure retrieving array; only received " + i + " of " + N, e);
+                    throw new BadParcelableException(
+                            "Failure retrieving array; only received " + i + " of " + N, e);
                 }
             } finally {
                 reply.recycle();
@@ -97,38 +100,45 @@ public final class ParcelableUsageEventList implements Parcelable {
             }
             if (i < N) {
                 dest.writeInt(0);
-                Binder retriever = new Binder() { // from class: android.app.usage.ParcelableUsageEventList.1
-                    @Override // android.os.Binder
-                    protected boolean onTransact(int code, Parcel data, Parcel reply, int flags2) throws RemoteException {
-                        if (code != 1) {
-                            return super.onTransact(code, data, reply, flags2);
-                        }
-                        if (ParcelableUsageEventList.this.mList == null) {
-                            throw new IllegalArgumentException("Attempt to transfer null list, did transfer finish?");
-                        }
-                        int i2 = data.readInt();
-                        try {
-                            reply.writeNoException();
-                            int count = 0;
-                            while (i2 < N && reply.dataSize() < 65536) {
-                                reply.writeInt(1);
-                                UsageEvents.Event event2 = (UsageEvents.Event) ParcelableUsageEventList.this.mList.get(i2);
-                                ParcelableUsageEventList.this.writeEventToParcel(event2, reply, flags);
-                                i2++;
-                                count++;
+                Binder retriever =
+                        new Binder() { // from class: android.app.usage.ParcelableUsageEventList.1
+                            @Override // android.os.Binder
+                            protected boolean onTransact(
+                                    int code, Parcel data, Parcel reply, int flags2)
+                                    throws RemoteException {
+                                if (code != 1) {
+                                    return super.onTransact(code, data, reply, flags2);
+                                }
+                                if (ParcelableUsageEventList.this.mList == null) {
+                                    throw new IllegalArgumentException(
+                                            "Attempt to transfer null list, did transfer finish?");
+                                }
+                                int i2 = data.readInt();
+                                try {
+                                    reply.writeNoException();
+                                    int count = 0;
+                                    while (i2 < N && reply.dataSize() < 65536) {
+                                        reply.writeInt(1);
+                                        UsageEvents.Event event2 =
+                                                (UsageEvents.Event)
+                                                        ParcelableUsageEventList.this.mList.get(i2);
+                                        ParcelableUsageEventList.this.writeEventToParcel(
+                                                event2, reply, flags);
+                                        i2++;
+                                        count++;
+                                    }
+                                    if (i2 >= N) {
+                                        ParcelableUsageEventList.this.mList = null;
+                                    } else {
+                                        reply.writeInt(0);
+                                    }
+                                    return true;
+                                } catch (RuntimeException e) {
+                                    ParcelableUsageEventList.this.mList = null;
+                                    throw e;
+                                }
                             }
-                            if (i2 >= N) {
-                                ParcelableUsageEventList.this.mList = null;
-                            } else {
-                                reply.writeInt(0);
-                            }
-                            return true;
-                        } catch (RuntimeException e) {
-                            ParcelableUsageEventList.this.mList = null;
-                            throw e;
-                        }
-                    }
-                };
+                        };
                 dest.writeStrongBinder(retriever);
             }
         }

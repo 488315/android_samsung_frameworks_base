@@ -2,12 +2,11 @@ package android.content.pm.dex;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.content.pm.dex.ArtManager;
-import android.content.pm.dex.ISnapshotRuntimeProfileCallback;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,10 +25,9 @@ public class ArtManager {
     private final Context mContext;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ProfileType {
-    }
+    public @interface ProfileType {}
 
-    public static abstract class SnapshotRuntimeProfileCallback {
+    public abstract static class SnapshotRuntimeProfileCallback {
         public abstract void onError(int i);
 
         public abstract void onSuccess(ParcelFileDescriptor parcelFileDescriptor);
@@ -40,11 +38,18 @@ public class ArtManager {
         this.mArtManager = manager;
     }
 
-    public void snapshotRuntimeProfile(int profileType, String packageName, String codePath, Executor executor, SnapshotRuntimeProfileCallback callback) {
+    public void snapshotRuntimeProfile(
+            int profileType,
+            String packageName,
+            String codePath,
+            Executor executor,
+            SnapshotRuntimeProfileCallback callback) {
         Slog.d(TAG, "Requesting profile snapshot for " + packageName + ":" + codePath);
-        SnapshotRuntimeProfileCallbackDelegate delegate = new SnapshotRuntimeProfileCallbackDelegate(callback, executor);
+        SnapshotRuntimeProfileCallbackDelegate delegate =
+                new SnapshotRuntimeProfileCallbackDelegate(callback, executor);
         try {
-            this.mArtManager.snapshotRuntimeProfile(profileType, packageName, codePath, delegate, this.mContext.getOpPackageName());
+            this.mArtManager.snapshotRuntimeProfile(
+                    profileType, packageName, codePath, delegate, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -52,18 +57,21 @@ public class ArtManager {
 
     public boolean isRuntimeProfilingEnabled(int profileType) {
         try {
-            return this.mArtManager.isRuntimeProfilingEnabled(profileType, this.mContext.getOpPackageName());
+            return this.mArtManager.isRuntimeProfilingEnabled(
+                    profileType, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static class SnapshotRuntimeProfileCallbackDelegate extends ISnapshotRuntimeProfileCallback.Stub {
+    static class SnapshotRuntimeProfileCallbackDelegate
+            extends ISnapshotRuntimeProfileCallback.Stub {
         private final SnapshotRuntimeProfileCallback mCallback;
         private final Executor mExecutor;
 
-        private SnapshotRuntimeProfileCallbackDelegate(SnapshotRuntimeProfileCallback callback, Executor executor) {
+        private SnapshotRuntimeProfileCallbackDelegate(
+                SnapshotRuntimeProfileCallback callback, Executor executor) {
             this.mCallback = callback;
             this.mExecutor = executor;
         }
@@ -75,12 +83,15 @@ public class ArtManager {
 
         @Override // android.content.pm.dex.ISnapshotRuntimeProfileCallback
         public void onSuccess(final ParcelFileDescriptor profileReadFd) {
-            this.mExecutor.execute(new Runnable() { // from class: android.content.pm.dex.ArtManager$SnapshotRuntimeProfileCallbackDelegate$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ArtManager.SnapshotRuntimeProfileCallbackDelegate.this.lambda$onSuccess$0(profileReadFd);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.content.pm.dex.ArtManager$SnapshotRuntimeProfileCallbackDelegate$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ArtManager.SnapshotRuntimeProfileCallbackDelegate.this
+                                    .lambda$onSuccess$0(profileReadFd);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -90,12 +101,15 @@ public class ArtManager {
 
         @Override // android.content.pm.dex.ISnapshotRuntimeProfileCallback
         public void onError(final int errCode) {
-            this.mExecutor.execute(new Runnable() { // from class: android.content.pm.dex.ArtManager$SnapshotRuntimeProfileCallbackDelegate$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ArtManager.SnapshotRuntimeProfileCallbackDelegate.this.lambda$onError$1(errCode);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.content.pm.dex.ArtManager$SnapshotRuntimeProfileCallbackDelegate$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ArtManager.SnapshotRuntimeProfileCallbackDelegate.this.lambda$onError$1(
+                                    errCode);
+                        }
+                    });
         }
     }
 

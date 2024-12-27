@@ -8,12 +8,12 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.MergedConfiguration;
-import android.view.IScrollCaptureResponseListener;
-import android.view.InsetsSourceControl;
 import android.view.inputmethod.ImeTracker;
 import android.window.ActivityWindowInfo;
 import android.window.ClientWindowFrames;
+
 import com.android.internal.os.IResultReceiver;
+
 import com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo;
 
 /* loaded from: classes4.dex */
@@ -32,21 +32,26 @@ public interface IWindow extends IInterface {
 
     void dispatchSPenGestureEvent(InputEvent[] inputEventArr) throws RemoteException;
 
-    void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo smartClipRemoteRequestInfo) throws RemoteException;
+    void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo smartClipRemoteRequestInfo)
+            throws RemoteException;
 
-    void dispatchWallpaperCommand(String str, int i, int i2, int i3, Bundle bundle, boolean z) throws RemoteException;
+    void dispatchWallpaperCommand(String str, int i, int i2, int i3, Bundle bundle, boolean z)
+            throws RemoteException;
 
-    void dispatchWallpaperOffsets(float f, float f2, float f3, float f4, float f5, boolean z) throws RemoteException;
+    void dispatchWallpaperOffsets(float f, float f2, float f3, float f4, float f5, boolean z)
+            throws RemoteException;
 
     void dispatchWindowShown() throws RemoteException;
 
     void dumpWindow(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
 
-    void executeCommand(String str, String str2, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    void executeCommand(String str, String str2, ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
     void hideInsets(int i, boolean z, ImeTracker.Token token) throws RemoteException;
 
-    void insetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array array) throws RemoteException;
+    void insetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array array)
+            throws RemoteException;
 
     void invalidateForScreenShot(boolean z) throws RemoteException;
 
@@ -54,9 +59,21 @@ public interface IWindow extends IInterface {
 
     void requestAppKeyboardShortcuts(IResultReceiver iResultReceiver, int i) throws RemoteException;
 
-    void requestScrollCapture(IScrollCaptureResponseListener iScrollCaptureResponseListener) throws RemoteException;
+    void requestScrollCapture(IScrollCaptureResponseListener iScrollCaptureResponseListener)
+            throws RemoteException;
 
-    void resized(ClientWindowFrames clientWindowFrames, boolean z, MergedConfiguration mergedConfiguration, InsetsState insetsState, boolean z2, boolean z3, int i, int i2, boolean z4, ActivityWindowInfo activityWindowInfo) throws RemoteException;
+    void resized(
+            ClientWindowFrames clientWindowFrames,
+            boolean z,
+            MergedConfiguration mergedConfiguration,
+            InsetsState insetsState,
+            boolean z2,
+            boolean z3,
+            int i,
+            int i2,
+            boolean z4,
+            ActivityWindowInfo activityWindowInfo)
+            throws RemoteException;
 
     void showInsets(int i, boolean z, ImeTracker.Token token) throws RemoteException;
 
@@ -64,92 +81,94 @@ public interface IWindow extends IInterface {
 
     public static class Default implements IWindow {
         @Override // android.view.IWindow
-        public void executeCommand(String command, String parameters, ParcelFileDescriptor descriptor) throws RemoteException {
-        }
+        public void executeCommand(
+                String command, String parameters, ParcelFileDescriptor descriptor)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void resized(ClientWindowFrames frames, boolean reportDraw, MergedConfiguration newMergedConfiguration, InsetsState insetsState, boolean forceLayout, boolean alwaysConsumeSystemBars, int displayId, int syncSeqId, boolean dragResizing, ActivityWindowInfo activityWindowInfo) throws RemoteException {
-        }
+        public void resized(
+                ClientWindowFrames frames,
+                boolean reportDraw,
+                MergedConfiguration newMergedConfiguration,
+                InsetsState insetsState,
+                boolean forceLayout,
+                boolean alwaysConsumeSystemBars,
+                int displayId,
+                int syncSeqId,
+                boolean dragResizing,
+                ActivityWindowInfo activityWindowInfo)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void insetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array activeControls) throws RemoteException {
-        }
+        public void insetsControlChanged(
+                InsetsState insetsState, InsetsSourceControl.Array activeControls)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken) throws RemoteException {
-        }
+        public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken) throws RemoteException {
-        }
+        public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void moved(int newX, int newY) throws RemoteException {
-        }
+        public void moved(int newX, int newY) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchAppVisibility(boolean visible) throws RemoteException {
-        }
+        public void dispatchAppVisibility(boolean visible) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchGetNewSurface() throws RemoteException {
-        }
+        public void dispatchGetNewSurface() throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void closeSystemDialogs(String reason) throws RemoteException {
-        }
+        public void closeSystemDialogs(String reason) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchWallpaperOffsets(float x, float y, float xStep, float yStep, float zoom, boolean sync) throws RemoteException {
-        }
+        public void dispatchWallpaperOffsets(
+                float x, float y, float xStep, float yStep, float zoom, boolean sync)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchWallpaperCommand(String action, int x, int y, int z, Bundle extras, boolean sync) throws RemoteException {
-        }
+        public void dispatchWallpaperCommand(
+                String action, int x, int y, int z, Bundle extras, boolean sync)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchDragEvent(DragEvent event) throws RemoteException {
-        }
+        public void dispatchDragEvent(DragEvent event) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchWindowShown() throws RemoteException {
-        }
+        public void dispatchWindowShown() throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId) throws RemoteException {
-        }
+        public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void requestScrollCapture(IScrollCaptureResponseListener callbacks) throws RemoteException {
-        }
+        public void requestScrollCapture(IScrollCaptureResponseListener callbacks)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dumpWindow(ParcelFileDescriptor pfd) throws RemoteException {
-        }
+        public void dumpWindow(ParcelFileDescriptor pfd) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo request) throws RemoteException {
-        }
+        public void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo request)
+                throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchLetterboxDirectionChanged(int direction) throws RemoteException {
-        }
+        public void dispatchLetterboxDirectionChanged(int direction) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchSPenGestureEvent(InputEvent[] events) throws RemoteException {
-        }
+        public void dispatchSPenGestureEvent(InputEvent[] events) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void dispatchDragEventUpdated(DragEvent event) throws RemoteException {
-        }
+        public void dispatchDragEventUpdated(DragEvent event) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void invalidateForScreenShot(boolean forceMode) throws RemoteException {
-        }
+        public void invalidateForScreenShot(boolean forceMode) throws RemoteException {}
 
         @Override // android.view.IWindow
-        public void windowFocusInTaskChanged(boolean hasFocus) throws RemoteException {
-        }
+        public void windowFocusInTaskChanged(boolean hasFocus) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -157,7 +176,7 @@ public interface IWindow extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWindow {
+    public abstract static class Stub extends Binder implements IWindow {
         public static final String DESCRIPTOR = "android.view.IWindow";
         static final int TRANSACTION_closeSystemDialogs = 9;
         static final int TRANSACTION_dispatchAppVisibility = 7;
@@ -259,7 +278,8 @@ public interface IWindow extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -271,41 +291,52 @@ public interface IWindow extends IInterface {
                 case 1:
                     String _arg0 = data.readString();
                     String _arg1 = data.readString();
-                    ParcelFileDescriptor _arg2 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg2 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     executeCommand(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    ClientWindowFrames _arg02 = (ClientWindowFrames) data.readTypedObject(ClientWindowFrames.CREATOR);
+                    ClientWindowFrames _arg02 =
+                            (ClientWindowFrames) data.readTypedObject(ClientWindowFrames.CREATOR);
                     boolean _arg12 = data.readBoolean();
-                    MergedConfiguration _arg22 = (MergedConfiguration) data.readTypedObject(MergedConfiguration.CREATOR);
+                    MergedConfiguration _arg22 =
+                            (MergedConfiguration) data.readTypedObject(MergedConfiguration.CREATOR);
                     InsetsState _arg3 = (InsetsState) data.readTypedObject(InsetsState.CREATOR);
                     boolean _arg4 = data.readBoolean();
                     boolean _arg5 = data.readBoolean();
                     int _arg6 = data.readInt();
                     int _arg7 = data.readInt();
                     boolean _arg8 = data.readBoolean();
-                    ActivityWindowInfo _arg9 = (ActivityWindowInfo) data.readTypedObject(ActivityWindowInfo.CREATOR);
+                    ActivityWindowInfo _arg9 =
+                            (ActivityWindowInfo) data.readTypedObject(ActivityWindowInfo.CREATOR);
                     data.enforceNoDataAvail();
-                    resized(_arg02, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
+                    resized(
+                            _arg02, _arg12, _arg22, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8,
+                            _arg9);
                     return true;
                 case 3:
                     InsetsState _arg03 = (InsetsState) data.readTypedObject(InsetsState.CREATOR);
-                    InsetsSourceControl.Array _arg13 = (InsetsSourceControl.Array) data.readTypedObject(InsetsSourceControl.Array.CREATOR);
+                    InsetsSourceControl.Array _arg13 =
+                            (InsetsSourceControl.Array)
+                                    data.readTypedObject(InsetsSourceControl.Array.CREATOR);
                     data.enforceNoDataAvail();
                     insetsControlChanged(_arg03, _arg13);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
                     boolean _arg14 = data.readBoolean();
-                    ImeTracker.Token _arg23 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg23 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     data.enforceNoDataAvail();
                     showInsets(_arg04, _arg14, _arg23);
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
                     boolean _arg15 = data.readBoolean();
-                    ImeTracker.Token _arg24 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg24 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     data.enforceNoDataAvail();
                     hideInsets(_arg05, _arg15, _arg24);
                     return true;
@@ -357,23 +388,30 @@ public interface IWindow extends IInterface {
                     dispatchWindowShown();
                     return true;
                 case 14:
-                    IResultReceiver _arg012 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg012 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     int _arg19 = data.readInt();
                     data.enforceNoDataAvail();
                     requestAppKeyboardShortcuts(_arg012, _arg19);
                     return true;
                 case 15:
-                    IScrollCaptureResponseListener _arg013 = IScrollCaptureResponseListener.Stub.asInterface(data.readStrongBinder());
+                    IScrollCaptureResponseListener _arg013 =
+                            IScrollCaptureResponseListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestScrollCapture(_arg013);
                     return true;
                 case 16:
-                    ParcelFileDescriptor _arg014 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg014 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     dumpWindow(_arg014);
                     return true;
                 case 17:
-                    SmartClipRemoteRequestInfo _arg015 = (SmartClipRemoteRequestInfo) data.readTypedObject(SmartClipRemoteRequestInfo.CREATOR);
+                    SmartClipRemoteRequestInfo _arg015 =
+                            (SmartClipRemoteRequestInfo)
+                                    data.readTypedObject(SmartClipRemoteRequestInfo.CREATOR);
                     data.enforceNoDataAvail();
                     dispatchSmartClipRemoteRequest(_arg015);
                     return true;
@@ -424,7 +462,9 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void executeCommand(String command, String parameters, ParcelFileDescriptor descriptor) throws RemoteException {
+            public void executeCommand(
+                    String command, String parameters, ParcelFileDescriptor descriptor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -438,7 +478,18 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void resized(ClientWindowFrames frames, boolean reportDraw, MergedConfiguration newMergedConfiguration, InsetsState insetsState, boolean forceLayout, boolean alwaysConsumeSystemBars, int displayId, int syncSeqId, boolean dragResizing, ActivityWindowInfo activityWindowInfo) throws RemoteException {
+            public void resized(
+                    ClientWindowFrames frames,
+                    boolean reportDraw,
+                    MergedConfiguration newMergedConfiguration,
+                    InsetsState insetsState,
+                    boolean forceLayout,
+                    boolean alwaysConsumeSystemBars,
+                    int displayId,
+                    int syncSeqId,
+                    boolean dragResizing,
+                    ActivityWindowInfo activityWindowInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -459,7 +510,9 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void insetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array activeControls) throws RemoteException {
+            public void insetsControlChanged(
+                    InsetsState insetsState, InsetsSourceControl.Array activeControls)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -472,7 +525,8 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken) throws RemoteException {
+            public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -486,7 +540,8 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken) throws RemoteException {
+            public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -548,7 +603,9 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void dispatchWallpaperOffsets(float x, float y, float xStep, float yStep, float zoom, boolean sync) throws RemoteException {
+            public void dispatchWallpaperOffsets(
+                    float x, float y, float xStep, float yStep, float zoom, boolean sync)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -565,7 +622,9 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void dispatchWallpaperCommand(String action, int x, int y, int z, Bundle extras, boolean sync) throws RemoteException {
+            public void dispatchWallpaperCommand(
+                    String action, int x, int y, int z, Bundle extras, boolean sync)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -605,7 +664,8 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId) throws RemoteException {
+            public void requestAppKeyboardShortcuts(IResultReceiver receiver, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -618,7 +678,8 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void requestScrollCapture(IScrollCaptureResponseListener callbacks) throws RemoteException {
+            public void requestScrollCapture(IScrollCaptureResponseListener callbacks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -642,7 +703,8 @@ public interface IWindow extends IInterface {
             }
 
             @Override // android.view.IWindow
-            public void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo request) throws RemoteException {
+            public void dispatchSmartClipRemoteRequest(SmartClipRemoteRequestInfo request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

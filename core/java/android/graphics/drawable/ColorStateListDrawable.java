@@ -6,7 +6,6 @@ import android.graphics.BlendMode;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.util.MathUtils;
 
 /* loaded from: classes.dex */
@@ -127,7 +126,8 @@ public class ColorStateListDrawable extends Drawable implements Drawable.Callbac
         if (this.mState.mColor == null) {
             return false;
         }
-        int color = this.mState.mColor.getColorForState(state, this.mState.mColor.getDefaultColor());
+        int color =
+                this.mState.mColor.getColorForState(state, this.mState.mColor.getDefaultColor());
         if (this.mState.mAlpha != -1) {
             color = (16777215 & color) | (MathUtils.constrain(this.mState.mAlpha, 0, 255) << 24);
         }
@@ -162,7 +162,8 @@ public class ColorStateListDrawable extends Drawable implements Drawable.Callbac
 
     @Override // android.graphics.drawable.Drawable
     public Drawable.ConstantState getConstantState() {
-        this.mState.mChangingConfigurations |= getChangingConfigurations() & (~this.mState.getChangingConfigurations());
+        this.mState.mChangingConfigurations |=
+                getChangingConfigurations() & (~this.mState.getChangingConfigurations());
         return this.mState;
     }
 
@@ -233,20 +234,25 @@ public class ColorStateListDrawable extends Drawable implements Drawable.Callbac
 
         @Override // android.graphics.drawable.Drawable.ConstantState
         public int getChangingConfigurations() {
-            return this.mChangingConfigurations | (this.mColor != null ? this.mColor.getChangingConfigurations() : 0) | (this.mTint != null ? this.mTint.getChangingConfigurations() : 0);
+            return this.mChangingConfigurations
+                    | (this.mColor != null ? this.mColor.getChangingConfigurations() : 0)
+                    | (this.mTint != null ? this.mTint.getChangingConfigurations() : 0);
         }
 
         public boolean isStateful() {
-            return (this.mColor != null && this.mColor.isStateful()) || (this.mTint != null && this.mTint.isStateful());
+            return (this.mColor != null && this.mColor.isStateful())
+                    || (this.mTint != null && this.mTint.isStateful());
         }
 
         public boolean hasFocusStateSpecified() {
-            return (this.mColor != null && this.mColor.hasFocusStateSpecified()) || (this.mTint != null && this.mTint.hasFocusStateSpecified());
+            return (this.mColor != null && this.mColor.hasFocusStateSpecified())
+                    || (this.mTint != null && this.mTint.hasFocusStateSpecified());
         }
 
         @Override // android.graphics.drawable.Drawable.ConstantState
         public boolean canApplyTheme() {
-            return (this.mColor != null && this.mColor.canApplyTheme()) || (this.mTint != null && this.mTint.canApplyTheme());
+            return (this.mColor != null && this.mColor.canApplyTheme())
+                    || (this.mTint != null && this.mTint.canApplyTheme());
         }
     }
 

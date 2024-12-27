@@ -14,18 +14,21 @@ import android.hardware.face.IFaceServiceReceiver;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.biometrics.Utils;
 import com.android.server.biometrics.sensors.AuthenticationConsumer;
 import com.android.server.biometrics.sensors.EnrollClient;
 import com.android.server.biometrics.sensors.LockoutResetDispatcher;
 import com.android.server.biometrics.sensors.LockoutTracker;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class AidlResponseHandler$$ExternalSyntheticLambda0 implements Consumer {
+public final /* synthetic */ class AidlResponseHandler$$ExternalSyntheticLambda0
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -48,8 +51,10 @@ public final /* synthetic */ class AidlResponseHandler$$ExternalSyntheticLambda0
                 int i3 = aidlResponseHandler.mSensorId;
                 int i4 = aidlResponseHandler.mUserId;
                 LockoutTracker lockoutTracker = aidlResponseHandler.mLockoutTracker;
-                LockoutResetDispatcher lockoutResetDispatcher = aidlResponseHandler.mLockoutResetDispatcher;
-                aidlResponseHandler.mAuthSessionCoordinator.resetLockoutFor(i4, Utils.getCurrentStrength(i3), -1L);
+                LockoutResetDispatcher lockoutResetDispatcher =
+                        aidlResponseHandler.mLockoutResetDispatcher;
+                aidlResponseHandler.mAuthSessionCoordinator.resetLockoutFor(
+                        i4, Utils.getCurrentStrength(i3), -1L);
                 lockoutTracker.setLockoutModeForUser(i4, 0);
                 lockoutResetDispatcher.notifyLockoutResetCallbacks(i3);
                 break;
@@ -63,7 +68,10 @@ public final /* synthetic */ class AidlResponseHandler$$ExternalSyntheticLambda0
                     int[] iArr = new int[hashMap.size()];
                     boolean[] zArr = new boolean[hashMap.size()];
                     for (byte b : bArr) {
-                        hashMap.put(Integer.valueOf(AidlConversionUtils.convertAidlToFrameworkFeature(b)), Boolean.TRUE);
+                        hashMap.put(
+                                Integer.valueOf(
+                                        AidlConversionUtils.convertAidlToFrameworkFeature(b)),
+                                Boolean.TRUE);
                     }
                     int i5 = 0;
                     for (Map.Entry entry : hashMap.entrySet()) {
@@ -72,9 +80,19 @@ public final /* synthetic */ class AidlResponseHandler$$ExternalSyntheticLambda0
                         i5++;
                     }
                     boolean booleanValue = ((Boolean) hashMap.get(1)).booleanValue();
-                    Slog.d("FaceGetFeatureClient", "Updating attention value for user: " + faceGetFeatureClient.mUserId + " to value: " + booleanValue);
-                    Settings.Secure.putIntForUser(faceGetFeatureClient.mContext.getContentResolver(), "face_unlock_attention_required", booleanValue ? 1 : 0, faceGetFeatureClient.mUserId);
-                    IFaceServiceReceiver iFaceServiceReceiver = faceGetFeatureClient.mListener.mFaceServiceReceiver;
+                    Slog.d(
+                            "FaceGetFeatureClient",
+                            "Updating attention value for user: "
+                                    + faceGetFeatureClient.mUserId
+                                    + " to value: "
+                                    + booleanValue);
+                    Settings.Secure.putIntForUser(
+                            faceGetFeatureClient.mContext.getContentResolver(),
+                            "face_unlock_attention_required",
+                            booleanValue ? 1 : 0,
+                            faceGetFeatureClient.mUserId);
+                    IFaceServiceReceiver iFaceServiceReceiver =
+                            faceGetFeatureClient.mListener.mFaceServiceReceiver;
                     if (iFaceServiceReceiver != null) {
                         iFaceServiceReceiver.onFeatureGet(true, iArr, zArr);
                     }
@@ -89,11 +107,14 @@ public final /* synthetic */ class AidlResponseHandler$$ExternalSyntheticLambda0
                 EnrollmentFrame enrollmentFrame = (EnrollmentFrame) obj2;
                 FaceEnrollClient faceEnrollClient = (FaceEnrollClient) obj;
                 if (enrollmentFrame == null) {
-                    Slog.e("AidlResponseHandler", "Received null enrollment frame for face enroll client.");
+                    Slog.e(
+                            "AidlResponseHandler",
+                            "Received null enrollment frame for face enroll client.");
                     break;
                 } else {
                     Cell cell = enrollmentFrame.cell;
-                    FaceEnrollCell faceEnrollCell = cell == null ? null : new FaceEnrollCell(cell.x, cell.y, cell.z);
+                    FaceEnrollCell faceEnrollCell =
+                            cell == null ? null : new FaceEnrollCell(cell.x, cell.y, cell.z);
                     byte b2 = enrollmentFrame.stage;
                     switch (b2) {
                         case 1:
@@ -155,19 +176,44 @@ public final /* synthetic */ class AidlResponseHandler$$ExternalSyntheticLambda0
                             }
                     }
                     BaseFrame baseFrame = enrollmentFrame.data;
-                    FaceEnrollFrame faceEnrollFrame = new FaceEnrollFrame(faceEnrollCell, i, new FaceDataFrame(AidlConversionUtils.toFrameworkAcquiredInfo(baseFrame.acquiredInfo), baseFrame.vendorCode, baseFrame.pan, baseFrame.tilt, baseFrame.distance, baseFrame.isCancellable));
+                    FaceEnrollFrame faceEnrollFrame =
+                            new FaceEnrollFrame(
+                                    faceEnrollCell,
+                                    i,
+                                    new FaceDataFrame(
+                                            AidlConversionUtils.toFrameworkAcquiredInfo(
+                                                    baseFrame.acquiredInfo),
+                                            baseFrame.vendorCode,
+                                            baseFrame.pan,
+                                            baseFrame.tilt,
+                                            baseFrame.distance,
+                                            baseFrame.isCancellable));
                     faceEnrollClient.getClass();
                     int acquiredInfo = faceEnrollFrame.getData().getAcquiredInfo();
                     int vendorCode = faceEnrollFrame.getData().getVendorCode();
                     faceEnrollClient.onAcquiredInternal(acquiredInfo, vendorCode, false);
                     if (acquiredInfo == 22) {
-                        if (Utils.listContains(vendorCode, faceEnrollClient.mEnrollIgnoreListVendor)) {
-                        }
-                    } else if (Utils.listContains(acquiredInfo, faceEnrollClient.mEnrollIgnoreList)) {
+                        if (Utils.listContains(
+                                vendorCode, faceEnrollClient.mEnrollIgnoreListVendor)) {}
+                    } else if (Utils.listContains(
+                            acquiredInfo, faceEnrollClient.mEnrollIgnoreList)) {
                     }
                     try {
-                        faceEnrollClient.mAuthenticationStateListeners.onAuthenticationHelp(new AuthenticationHelpInfo.Builder(BiometricSourceType.FACE, EnrollClient.getRequestReasonFromFaceEnrollReason(faceEnrollClient.mEnrollReason), FaceManager.getEnrollHelpMessage(faceEnrollClient.mContext, acquiredInfo, vendorCode), acquiredInfo == 22 ? vendorCode + 1000 : acquiredInfo).build());
-                        IFaceServiceReceiver iFaceServiceReceiver2 = faceEnrollClient.mListener.mFaceServiceReceiver;
+                        faceEnrollClient.mAuthenticationStateListeners.onAuthenticationHelp(
+                                new AuthenticationHelpInfo.Builder(
+                                                BiometricSourceType.FACE,
+                                                EnrollClient.getRequestReasonFromFaceEnrollReason(
+                                                        faceEnrollClient.mEnrollReason),
+                                                FaceManager.getEnrollHelpMessage(
+                                                        faceEnrollClient.mContext,
+                                                        acquiredInfo,
+                                                        vendorCode),
+                                                acquiredInfo == 22
+                                                        ? vendorCode + 1000
+                                                        : acquiredInfo)
+                                        .build());
+                        IFaceServiceReceiver iFaceServiceReceiver2 =
+                                faceEnrollClient.mListener.mFaceServiceReceiver;
                         if (iFaceServiceReceiver2 != null) {
                             iFaceServiceReceiver2.onEnrollmentFrame(faceEnrollFrame);
                             break;

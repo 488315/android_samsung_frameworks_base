@@ -14,7 +14,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.widget.RemoteViews;
-import com.android.internal.appwidget.IAppWidgetHost;
+
 import java.util.List;
 import java.util.Map;
 
@@ -22,13 +22,23 @@ import java.util.Map;
 public interface IAppWidgetService extends IInterface {
     int allocateAppWidgetId(String str, int i) throws RemoteException;
 
-    boolean bindAppWidgetId(String str, int i, int i2, ComponentName componentName, Bundle bundle) throws RemoteException;
+    boolean bindAppWidgetId(String str, int i, int i2, ComponentName componentName, Bundle bundle)
+            throws RemoteException;
 
-    boolean bindRemoteViewsService(String str, int i, Intent intent, IApplicationThread iApplicationThread, IBinder iBinder, IServiceConnection iServiceConnection, long j) throws RemoteException;
+    boolean bindRemoteViewsService(
+            String str,
+            int i,
+            Intent intent,
+            IApplicationThread iApplicationThread,
+            IBinder iBinder,
+            IServiceConnection iServiceConnection,
+            long j)
+            throws RemoteException;
 
     void changeHostIds(String str, int[] iArr, int i) throws RemoteException;
 
-    IntentSender createAppWidgetConfigIntentSender(String str, int i, int i2) throws RemoteException;
+    IntentSender createAppWidgetConfigIntentSender(String str, int i, int i2)
+            throws RemoteException;
 
     void deleteAllHosts() throws RemoteException;
 
@@ -36,7 +46,8 @@ public interface IAppWidgetService extends IInterface {
 
     void deleteHost(String str, int i) throws RemoteException;
 
-    List<AppWidgetProviderInfo> getAllProvidersForProfile(int i, int i2, boolean z) throws RemoteException;
+    List<AppWidgetProviderInfo> getAllProvidersForProfile(int i, int i2, boolean z)
+            throws RemoteException;
 
     Map getAllWidgets(String str, int i) throws RemoteException;
 
@@ -50,11 +61,14 @@ public interface IAppWidgetService extends IInterface {
 
     RemoteViews getAppWidgetViews(String str, int i) throws RemoteException;
 
-    ParceledListSlice getInstalledProvidersForProfile(int i, int i2, String str) throws RemoteException;
+    ParceledListSlice getInstalledProvidersForProfile(int i, int i2, String str)
+            throws RemoteException;
 
-    Bundle getTemplateWidgetPreview(String str, ComponentName componentName, int i, int i2, int i3) throws RemoteException;
+    Bundle getTemplateWidgetPreview(String str, ComponentName componentName, int i, int i2, int i3)
+            throws RemoteException;
 
-    RemoteViews getWidgetPreview(String str, ComponentName componentName, int i, int i2) throws RemoteException;
+    RemoteViews getWidgetPreview(String str, ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
     boolean hasBindAppWidgetPermission(String str, int i) throws RemoteException;
 
@@ -70,15 +84,20 @@ public interface IAppWidgetService extends IInterface {
 
     void notifyProviderInheritance(ComponentName[] componentNameArr) throws RemoteException;
 
-    void partiallyUpdateAppWidgetIds(String str, int[] iArr, RemoteViews remoteViews) throws RemoteException;
+    void partiallyUpdateAppWidgetIds(String str, int[] iArr, RemoteViews remoteViews)
+            throws RemoteException;
 
-    void removeTemplateWidgetPreview(ComponentName componentName, int i, int i2) throws RemoteException;
+    void removeTemplateWidgetPreview(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
     void removeWidgetPreview(ComponentName componentName, int i) throws RemoteException;
 
-    boolean requestPinAppWidget(String str, ComponentName componentName, Bundle bundle, IntentSender intentSender) throws RemoteException;
+    boolean requestPinAppWidget(
+            String str, ComponentName componentName, Bundle bundle, IntentSender intentSender)
+            throws RemoteException;
 
-    IntentSender semCreateAppWidgetConfigIntentSender(String str, int i, int i2) throws RemoteException;
+    IntentSender semCreateAppWidgetConfigIntentSender(String str, int i, int i2)
+            throws RemoteException;
 
     void semSetSkipPackageChanged(String str) throws RemoteException;
 
@@ -86,11 +105,15 @@ public interface IAppWidgetService extends IInterface {
 
     void setBindAppWidgetPermission(String str, int i, boolean z) throws RemoteException;
 
-    boolean setTemplateWidgetPreview(ComponentName componentName, int i, int i2, RemoteViews[] remoteViewsArr) throws RemoteException;
+    boolean setTemplateWidgetPreview(
+            ComponentName componentName, int i, int i2, RemoteViews[] remoteViewsArr)
+            throws RemoteException;
 
-    boolean setWidgetPreview(ComponentName componentName, int i, RemoteViews remoteViews) throws RemoteException;
+    boolean setWidgetPreview(ComponentName componentName, int i, RemoteViews remoteViews)
+            throws RemoteException;
 
-    ParceledListSlice startListening(IAppWidgetHost iAppWidgetHost, String str, int i, int[] iArr) throws RemoteException;
+    ParceledListSlice startListening(IAppWidgetHost iAppWidgetHost, String str, int i, int[] iArr)
+            throws RemoteException;
 
     void stopListening(String str, int i) throws RemoteException;
 
@@ -98,19 +121,22 @@ public interface IAppWidgetService extends IInterface {
 
     void updateAppWidgetOptions(String str, int i, Bundle bundle) throws RemoteException;
 
-    void updateAppWidgetProvider(ComponentName componentName, RemoteViews remoteViews) throws RemoteException;
+    void updateAppWidgetProvider(ComponentName componentName, RemoteViews remoteViews)
+            throws RemoteException;
 
-    void updateAppWidgetProviderInfo(ComponentName componentName, String str) throws RemoteException;
+    void updateAppWidgetProviderInfo(ComponentName componentName, String str)
+            throws RemoteException;
 
     public static class Default implements IAppWidgetService {
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public ParceledListSlice startListening(IAppWidgetHost host, String callingPackage, int hostId, int[] appWidgetIds) throws RemoteException {
+        public ParceledListSlice startListening(
+                IAppWidgetHost host, String callingPackage, int hostId, int[] appWidgetIds)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void stopListening(String callingPackage, int hostId) throws RemoteException {
-        }
+        public void stopListening(String callingPackage, int hostId) throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
         public int allocateAppWidgetId(String callingPackage, int hostId) throws RemoteException {
@@ -118,110 +144,129 @@ public interface IAppWidgetService extends IInterface {
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void deleteAppWidgetId(String callingPackage, int appWidgetId) throws RemoteException {
-        }
+        public void deleteAppWidgetId(String callingPackage, int appWidgetId)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void deleteHost(String packageName, int hostId) throws RemoteException {
-        }
+        public void deleteHost(String packageName, int hostId) throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void deleteAllHosts() throws RemoteException {
-        }
+        public void deleteAllHosts() throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public RemoteViews getAppWidgetViews(String callingPackage, int appWidgetId) throws RemoteException {
+        public RemoteViews getAppWidgetViews(String callingPackage, int appWidgetId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public int[] getAppWidgetIdsForHost(String callingPackage, int hostId) throws RemoteException {
+        public int[] getAppWidgetIdsForHost(String callingPackage, int hostId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void setAppWidgetHidden(String callingPackage, int hostId) throws RemoteException {
-        }
+        public void setAppWidgetHidden(String callingPackage, int hostId) throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public IntentSender createAppWidgetConfigIntentSender(String callingPackage, int appWidgetId, int intentFlags) throws RemoteException {
+        public IntentSender createAppWidgetConfigIntentSender(
+                String callingPackage, int appWidgetId, int intentFlags) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public IntentSender semCreateAppWidgetConfigIntentSender(String callingPackage, int appWidgetId, int intentFlags) throws RemoteException {
+        public IntentSender semCreateAppWidgetConfigIntentSender(
+                String callingPackage, int appWidgetId, int intentFlags) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void semSetSkipPackageChanged(String packageName) throws RemoteException {
-        }
+        public void semSetSkipPackageChanged(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void changeHostIds(String callingPackage, int[] appWidgetIds, int hostId) throws RemoteException {
-        }
+        public void changeHostIds(String callingPackage, int[] appWidgetIds, int hostId)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void updateAppWidgetIds(String callingPackage, int[] appWidgetIds, RemoteViews views) throws RemoteException {
-        }
+        public void updateAppWidgetIds(String callingPackage, int[] appWidgetIds, RemoteViews views)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void updateAppWidgetOptions(String callingPackage, int appWidgetId, Bundle extras) throws RemoteException {
-        }
+        public void updateAppWidgetOptions(String callingPackage, int appWidgetId, Bundle extras)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public Bundle getAppWidgetOptions(String callingPackage, int appWidgetId) throws RemoteException {
+        public Bundle getAppWidgetOptions(String callingPackage, int appWidgetId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void partiallyUpdateAppWidgetIds(String callingPackage, int[] appWidgetIds, RemoteViews views) throws RemoteException {
-        }
+        public void partiallyUpdateAppWidgetIds(
+                String callingPackage, int[] appWidgetIds, RemoteViews views)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void updateAppWidgetProvider(ComponentName provider, RemoteViews views) throws RemoteException {
-        }
+        public void updateAppWidgetProvider(ComponentName provider, RemoteViews views)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void updateAppWidgetProviderInfo(ComponentName provider, String metadataKey) throws RemoteException {
-        }
+        public void updateAppWidgetProviderInfo(ComponentName provider, String metadataKey)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void notifyAppWidgetViewDataChanged(String packageName, int[] appWidgetIds, int viewId) throws RemoteException {
-        }
+        public void notifyAppWidgetViewDataChanged(
+                String packageName, int[] appWidgetIds, int viewId) throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public ParceledListSlice getInstalledProvidersForProfile(int categoryFilter, int profileId, String packageName) throws RemoteException {
+        public ParceledListSlice getInstalledProvidersForProfile(
+                int categoryFilter, int profileId, String packageName) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public AppWidgetProviderInfo getAppWidgetInfo(String callingPackage, int appWidgetId) throws RemoteException {
+        public AppWidgetProviderInfo getAppWidgetInfo(String callingPackage, int appWidgetId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public boolean hasBindAppWidgetPermission(String packageName, int userId) throws RemoteException {
+        public boolean hasBindAppWidgetPermission(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void setBindAppWidgetPermission(String packageName, int userId, boolean permission) throws RemoteException {
-        }
+        public void setBindAppWidgetPermission(String packageName, int userId, boolean permission)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public boolean bindAppWidgetId(String callingPackage, int appWidgetId, int providerProfileId, ComponentName providerComponent, Bundle options) throws RemoteException {
+        public boolean bindAppWidgetId(
+                String callingPackage,
+                int appWidgetId,
+                int providerProfileId,
+                ComponentName providerComponent,
+                Bundle options)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public boolean bindRemoteViewsService(String callingPackage, int appWidgetId, Intent intent, IApplicationThread caller, IBinder token, IServiceConnection connection, long flags) throws RemoteException {
+        public boolean bindRemoteViewsService(
+                String callingPackage,
+                int appWidgetId,
+                Intent intent,
+                IApplicationThread caller,
+                IBinder token,
+                IServiceConnection connection,
+                long flags)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void notifyProviderInheritance(ComponentName[] componentNames) throws RemoteException {
-        }
+        public void notifyProviderInheritance(ComponentName[] componentNames)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
         public int[] getAppWidgetIds(ComponentName providerComponent) throws RemoteException {
@@ -234,7 +279,12 @@ public interface IAppWidgetService extends IInterface {
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public boolean requestPinAppWidget(String packageName, ComponentName providerComponent, Bundle extras, IntentSender resultIntent) throws RemoteException {
+        public boolean requestPinAppWidget(
+                String packageName,
+                ComponentName providerComponent,
+                Bundle extras,
+                IntentSender resultIntent)
+                throws RemoteException {
             return false;
         }
 
@@ -244,8 +294,8 @@ public interface IAppWidgetService extends IInterface {
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void noteAppWidgetTapped(String callingPackage, int appWidgetId) throws RemoteException {
-        }
+        public void noteAppWidgetTapped(String callingPackage, int appWidgetId)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
         public Map getAllWidgets(String pkgName, int userId) throws RemoteException {
@@ -253,40 +303,62 @@ public interface IAppWidgetService extends IInterface {
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public List<AppWidgetProviderInfo> getAllProvidersForProfile(int categoryFilter, int profileId, boolean checkCrossProfile) throws RemoteException {
+        public List<AppWidgetProviderInfo> getAllProvidersForProfile(
+                int categoryFilter, int profileId, boolean checkCrossProfile)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public boolean setWidgetPreview(ComponentName providerComponent, int widgetCategories, RemoteViews preview) throws RemoteException {
+        public boolean setWidgetPreview(
+                ComponentName providerComponent, int widgetCategories, RemoteViews preview)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public RemoteViews getWidgetPreview(String callingPackage, ComponentName providerComponent, int profileId, int widgetCategory) throws RemoteException {
+        public RemoteViews getWidgetPreview(
+                String callingPackage,
+                ComponentName providerComponent,
+                int profileId,
+                int widgetCategory)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void removeWidgetPreview(ComponentName providerComponent, int widgetCategories) throws RemoteException {
-        }
+        public void removeWidgetPreview(ComponentName providerComponent, int widgetCategories)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public boolean setTemplateWidgetPreview(ComponentName providerComponent, int templateSize, int templateStyle, RemoteViews[] preview) throws RemoteException {
+        public boolean setTemplateWidgetPreview(
+                ComponentName providerComponent,
+                int templateSize,
+                int templateStyle,
+                RemoteViews[] preview)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public Bundle getTemplateWidgetPreview(String callingPackage, ComponentName providerComponent, int profileId, int templateSize, int templateStyle) throws RemoteException {
+        public Bundle getTemplateWidgetPreview(
+                String callingPackage,
+                ComponentName providerComponent,
+                int profileId,
+                int templateSize,
+                int templateStyle)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public void removeTemplateWidgetPreview(ComponentName providerComponent, int templateSize, int templateStyle) throws RemoteException {
-        }
+        public void removeTemplateWidgetPreview(
+                ComponentName providerComponent, int templateSize, int templateStyle)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetService
-        public boolean isTemplatePreviewUpdateAvailable(ComponentName providerComponent) throws RemoteException {
+        public boolean isTemplatePreviewUpdateAvailable(ComponentName providerComponent)
+                throws RemoteException {
             return false;
         }
 
@@ -296,7 +368,7 @@ public interface IAppWidgetService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppWidgetService {
+    public abstract static class Stub extends Binder implements IAppWidgetService {
         public static final String DESCRIPTOR = "com.android.internal.appwidget.IAppWidgetService";
         static final int TRANSACTION_allocateAppWidgetId = 3;
         static final int TRANSACTION_bindAppWidgetId = 25;
@@ -455,7 +527,8 @@ public interface IAppWidgetService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -535,7 +608,8 @@ public interface IAppWidgetService extends IInterface {
                     int _arg19 = data.readInt();
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
-                    IntentSender _result5 = createAppWidgetConfigIntentSender(_arg09, _arg19, _arg22);
+                    IntentSender _result5 =
+                            createAppWidgetConfigIntentSender(_arg09, _arg19, _arg22);
                     reply.writeNoException();
                     reply.writeTypedObject(_result5, 1);
                     return true;
@@ -544,7 +618,8 @@ public interface IAppWidgetService extends IInterface {
                     int _arg110 = data.readInt();
                     int _arg23 = data.readInt();
                     data.enforceNoDataAvail();
-                    IntentSender _result6 = semCreateAppWidgetConfigIntentSender(_arg010, _arg110, _arg23);
+                    IntentSender _result6 =
+                            semCreateAppWidgetConfigIntentSender(_arg010, _arg110, _arg23);
                     reply.writeNoException();
                     reply.writeTypedObject(_result6, 1);
                     return true;
@@ -595,14 +670,16 @@ public interface IAppWidgetService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 18:
-                    ComponentName _arg017 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg017 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     RemoteViews _arg116 = (RemoteViews) data.readTypedObject(RemoteViews.CREATOR);
                     data.enforceNoDataAvail();
                     updateAppWidgetProvider(_arg017, _arg116);
                     reply.writeNoException();
                     return true;
                 case 19:
-                    ComponentName _arg018 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg018 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg117 = data.readString();
                     data.enforceNoDataAvail();
                     updateAppWidgetProviderInfo(_arg018, _arg117);
@@ -621,7 +698,8 @@ public interface IAppWidgetService extends IInterface {
                     int _arg119 = data.readInt();
                     String _arg29 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result8 = getInstalledProvidersForProfile(_arg020, _arg119, _arg29);
+                    ParceledListSlice _result8 =
+                            getInstalledProvidersForProfile(_arg020, _arg119, _arg29);
                     reply.writeNoException();
                     reply.writeTypedObject(_result8, 1);
                     return true;
@@ -653,7 +731,8 @@ public interface IAppWidgetService extends IInterface {
                     String _arg024 = data.readString();
                     int _arg123 = data.readInt();
                     int _arg211 = data.readInt();
-                    ComponentName _arg32 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg32 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Bundle _arg4 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result11 = bindAppWidgetId(_arg024, _arg123, _arg211, _arg32, _arg4);
@@ -664,23 +743,29 @@ public interface IAppWidgetService extends IInterface {
                     String _arg025 = data.readString();
                     int _arg124 = data.readInt();
                     Intent _arg212 = (Intent) data.readTypedObject(Intent.CREATOR);
-                    IApplicationThread _arg33 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg33 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg42 = data.readStrongBinder();
-                    IServiceConnection _arg5 = IServiceConnection.Stub.asInterface(data.readStrongBinder());
+                    IServiceConnection _arg5 =
+                            IServiceConnection.Stub.asInterface(data.readStrongBinder());
                     long _arg6 = data.readLong();
                     data.enforceNoDataAvail();
-                    boolean _result12 = bindRemoteViewsService(_arg025, _arg124, _arg212, _arg33, _arg42, _arg5, _arg6);
+                    boolean _result12 =
+                            bindRemoteViewsService(
+                                    _arg025, _arg124, _arg212, _arg33, _arg42, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeBoolean(_result12);
                     return true;
                 case 27:
-                    ComponentName[] _arg026 = (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
+                    ComponentName[] _arg026 =
+                            (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     notifyProviderInheritance(_arg026);
                     reply.writeNoException();
                     return true;
                 case 28:
-                    ComponentName _arg027 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg027 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int[] _result13 = getAppWidgetIds(_arg027);
                     reply.writeNoException();
@@ -696,7 +781,8 @@ public interface IAppWidgetService extends IInterface {
                     return true;
                 case 30:
                     String _arg029 = data.readString();
-                    ComponentName _arg126 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg126 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Bundle _arg213 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     IntentSender _arg34 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     data.enforceNoDataAvail();
@@ -728,12 +814,14 @@ public interface IAppWidgetService extends IInterface {
                     int _arg129 = data.readInt();
                     boolean _arg214 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    List<AppWidgetProviderInfo> _result18 = getAllProvidersForProfile(_arg032, _arg129, _arg214);
+                    List<AppWidgetProviderInfo> _result18 =
+                            getAllProvidersForProfile(_arg032, _arg129, _arg214);
                     reply.writeNoException();
                     reply.writeTypedList(_result18, 1);
                     return true;
                 case 35:
-                    ComponentName _arg033 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg033 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg130 = data.readInt();
                     RemoteViews _arg215 = (RemoteViews) data.readTypedObject(RemoteViews.CREATOR);
                     data.enforceNoDataAvail();
@@ -743,7 +831,8 @@ public interface IAppWidgetService extends IInterface {
                     return true;
                 case 36:
                     String _arg034 = data.readString();
-                    ComponentName _arg131 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg131 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg216 = data.readInt();
                     int _arg35 = data.readInt();
                     data.enforceNoDataAvail();
@@ -752,17 +841,20 @@ public interface IAppWidgetService extends IInterface {
                     reply.writeTypedObject(_result20, 1);
                     return true;
                 case 37:
-                    ComponentName _arg035 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg035 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg132 = data.readInt();
                     data.enforceNoDataAvail();
                     removeWidgetPreview(_arg035, _arg132);
                     reply.writeNoException();
                     return true;
                 case 38:
-                    ComponentName _arg036 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg036 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg133 = data.readInt();
                     int _arg217 = data.readInt();
-                    RemoteViews[] _arg36 = (RemoteViews[]) data.createTypedArray(RemoteViews.CREATOR);
+                    RemoteViews[] _arg36 =
+                            (RemoteViews[]) data.createTypedArray(RemoteViews.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result21 = setTemplateWidgetPreview(_arg036, _arg133, _arg217, _arg36);
                     reply.writeNoException();
@@ -770,17 +862,20 @@ public interface IAppWidgetService extends IInterface {
                     return true;
                 case 39:
                     String _arg037 = data.readString();
-                    ComponentName _arg134 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg134 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg218 = data.readInt();
                     int _arg37 = data.readInt();
                     int _arg43 = data.readInt();
                     data.enforceNoDataAvail();
-                    Bundle _result22 = getTemplateWidgetPreview(_arg037, _arg134, _arg218, _arg37, _arg43);
+                    Bundle _result22 =
+                            getTemplateWidgetPreview(_arg037, _arg134, _arg218, _arg37, _arg43);
                     reply.writeNoException();
                     reply.writeTypedObject(_result22, 1);
                     return true;
                 case 40:
-                    ComponentName _arg038 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg038 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg135 = data.readInt();
                     int _arg219 = data.readInt();
                     data.enforceNoDataAvail();
@@ -788,7 +883,8 @@ public interface IAppWidgetService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 41:
-                    ComponentName _arg039 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg039 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result23 = isTemplatePreviewUpdateAvailable(_arg039);
                     reply.writeNoException();
@@ -816,7 +912,9 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public ParceledListSlice startListening(IAppWidgetHost host, String callingPackage, int hostId, int[] appWidgetIds) throws RemoteException {
+            public ParceledListSlice startListening(
+                    IAppWidgetHost host, String callingPackage, int hostId, int[] appWidgetIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -827,7 +925,8 @@ public interface IAppWidgetService extends IInterface {
                     _data.writeIntArray(appWidgetIds);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -852,7 +951,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public int allocateAppWidgetId(String callingPackage, int hostId) throws RemoteException {
+            public int allocateAppWidgetId(String callingPackage, int hostId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -870,7 +970,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void deleteAppWidgetId(String callingPackage, int appWidgetId) throws RemoteException {
+            public void deleteAppWidgetId(String callingPackage, int appWidgetId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -916,7 +1017,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public RemoteViews getAppWidgetViews(String callingPackage, int appWidgetId) throws RemoteException {
+            public RemoteViews getAppWidgetViews(String callingPackage, int appWidgetId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -934,7 +1036,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public int[] getAppWidgetIdsForHost(String callingPackage, int hostId) throws RemoteException {
+            public int[] getAppWidgetIdsForHost(String callingPackage, int hostId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -952,7 +1055,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void setAppWidgetHidden(String callingPackage, int hostId) throws RemoteException {
+            public void setAppWidgetHidden(String callingPackage, int hostId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -968,7 +1072,9 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public IntentSender createAppWidgetConfigIntentSender(String callingPackage, int appWidgetId, int intentFlags) throws RemoteException {
+            public IntentSender createAppWidgetConfigIntentSender(
+                    String callingPackage, int appWidgetId, int intentFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -978,7 +1084,8 @@ public interface IAppWidgetService extends IInterface {
                     _data.writeInt(intentFlags);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    IntentSender _result = (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _result =
+                            (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -987,7 +1094,9 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public IntentSender semCreateAppWidgetConfigIntentSender(String callingPackage, int appWidgetId, int intentFlags) throws RemoteException {
+            public IntentSender semCreateAppWidgetConfigIntentSender(
+                    String callingPackage, int appWidgetId, int intentFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -997,7 +1106,8 @@ public interface IAppWidgetService extends IInterface {
                     _data.writeInt(intentFlags);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    IntentSender _result = (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _result =
+                            (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1021,7 +1131,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void changeHostIds(String callingPackage, int[] appWidgetIds, int hostId) throws RemoteException {
+            public void changeHostIds(String callingPackage, int[] appWidgetIds, int hostId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1038,7 +1149,9 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void updateAppWidgetIds(String callingPackage, int[] appWidgetIds, RemoteViews views) throws RemoteException {
+            public void updateAppWidgetIds(
+                    String callingPackage, int[] appWidgetIds, RemoteViews views)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1055,7 +1168,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void updateAppWidgetOptions(String callingPackage, int appWidgetId, Bundle extras) throws RemoteException {
+            public void updateAppWidgetOptions(
+                    String callingPackage, int appWidgetId, Bundle extras) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1072,7 +1186,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public Bundle getAppWidgetOptions(String callingPackage, int appWidgetId) throws RemoteException {
+            public Bundle getAppWidgetOptions(String callingPackage, int appWidgetId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1090,7 +1205,9 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void partiallyUpdateAppWidgetIds(String callingPackage, int[] appWidgetIds, RemoteViews views) throws RemoteException {
+            public void partiallyUpdateAppWidgetIds(
+                    String callingPackage, int[] appWidgetIds, RemoteViews views)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1107,7 +1224,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void updateAppWidgetProvider(ComponentName provider, RemoteViews views) throws RemoteException {
+            public void updateAppWidgetProvider(ComponentName provider, RemoteViews views)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1123,7 +1241,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void updateAppWidgetProviderInfo(ComponentName provider, String metadataKey) throws RemoteException {
+            public void updateAppWidgetProviderInfo(ComponentName provider, String metadataKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1139,7 +1258,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void notifyAppWidgetViewDataChanged(String packageName, int[] appWidgetIds, int viewId) throws RemoteException {
+            public void notifyAppWidgetViewDataChanged(
+                    String packageName, int[] appWidgetIds, int viewId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1156,7 +1276,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public ParceledListSlice getInstalledProvidersForProfile(int categoryFilter, int profileId, String packageName) throws RemoteException {
+            public ParceledListSlice getInstalledProvidersForProfile(
+                    int categoryFilter, int profileId, String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1166,7 +1287,8 @@ public interface IAppWidgetService extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(21, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1175,7 +1297,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public AppWidgetProviderInfo getAppWidgetInfo(String callingPackage, int appWidgetId) throws RemoteException {
+            public AppWidgetProviderInfo getAppWidgetInfo(String callingPackage, int appWidgetId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1184,7 +1307,9 @@ public interface IAppWidgetService extends IInterface {
                     _data.writeInt(appWidgetId);
                     this.mRemote.transact(22, _data, _reply, 0);
                     _reply.readException();
-                    AppWidgetProviderInfo _result = (AppWidgetProviderInfo) _reply.readTypedObject(AppWidgetProviderInfo.CREATOR);
+                    AppWidgetProviderInfo _result =
+                            (AppWidgetProviderInfo)
+                                    _reply.readTypedObject(AppWidgetProviderInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1193,7 +1318,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public boolean hasBindAppWidgetPermission(String packageName, int userId) throws RemoteException {
+            public boolean hasBindAppWidgetPermission(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1211,7 +1337,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void setBindAppWidgetPermission(String packageName, int userId, boolean permission) throws RemoteException {
+            public void setBindAppWidgetPermission(
+                    String packageName, int userId, boolean permission) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1228,7 +1355,13 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public boolean bindAppWidgetId(String callingPackage, int appWidgetId, int providerProfileId, ComponentName providerComponent, Bundle options) throws RemoteException {
+            public boolean bindAppWidgetId(
+                    String callingPackage,
+                    int appWidgetId,
+                    int providerProfileId,
+                    ComponentName providerComponent,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1249,7 +1382,15 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public boolean bindRemoteViewsService(String callingPackage, int appWidgetId, Intent intent, IApplicationThread caller, IBinder token, IServiceConnection connection, long flags) throws RemoteException {
+            public boolean bindRemoteViewsService(
+                    String callingPackage,
+                    int appWidgetId,
+                    Intent intent,
+                    IApplicationThread caller,
+                    IBinder token,
+                    IServiceConnection connection,
+                    long flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1272,7 +1413,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void notifyProviderInheritance(ComponentName[] componentNames) throws RemoteException {
+            public void notifyProviderInheritance(ComponentName[] componentNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1304,7 +1446,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public boolean isBoundWidgetPackage(String packageName, int userId) throws RemoteException {
+            public boolean isBoundWidgetPackage(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1322,7 +1465,12 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public boolean requestPinAppWidget(String packageName, ComponentName providerComponent, Bundle extras, IntentSender resultIntent) throws RemoteException {
+            public boolean requestPinAppWidget(
+                    String packageName,
+                    ComponentName providerComponent,
+                    Bundle extras,
+                    IntentSender resultIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1358,7 +1506,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void noteAppWidgetTapped(String callingPackage, int appWidgetId) throws RemoteException {
+            public void noteAppWidgetTapped(String callingPackage, int appWidgetId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1390,7 +1539,9 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public List<AppWidgetProviderInfo> getAllProvidersForProfile(int categoryFilter, int profileId, boolean checkCrossProfile) throws RemoteException {
+            public List<AppWidgetProviderInfo> getAllProvidersForProfile(
+                    int categoryFilter, int profileId, boolean checkCrossProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1400,7 +1551,8 @@ public interface IAppWidgetService extends IInterface {
                     _data.writeBoolean(checkCrossProfile);
                     this.mRemote.transact(34, _data, _reply, 0);
                     _reply.readException();
-                    List<AppWidgetProviderInfo> _result = _reply.createTypedArrayList(AppWidgetProviderInfo.CREATOR);
+                    List<AppWidgetProviderInfo> _result =
+                            _reply.createTypedArrayList(AppWidgetProviderInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1409,7 +1561,9 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public boolean setWidgetPreview(ComponentName providerComponent, int widgetCategories, RemoteViews preview) throws RemoteException {
+            public boolean setWidgetPreview(
+                    ComponentName providerComponent, int widgetCategories, RemoteViews preview)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1428,7 +1582,12 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public RemoteViews getWidgetPreview(String callingPackage, ComponentName providerComponent, int profileId, int widgetCategory) throws RemoteException {
+            public RemoteViews getWidgetPreview(
+                    String callingPackage,
+                    ComponentName providerComponent,
+                    int profileId,
+                    int widgetCategory)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1448,7 +1607,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void removeWidgetPreview(ComponentName providerComponent, int widgetCategories) throws RemoteException {
+            public void removeWidgetPreview(ComponentName providerComponent, int widgetCategories)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1464,7 +1624,12 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public boolean setTemplateWidgetPreview(ComponentName providerComponent, int templateSize, int templateStyle, RemoteViews[] preview) throws RemoteException {
+            public boolean setTemplateWidgetPreview(
+                    ComponentName providerComponent,
+                    int templateSize,
+                    int templateStyle,
+                    RemoteViews[] preview)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1484,7 +1649,13 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public Bundle getTemplateWidgetPreview(String callingPackage, ComponentName providerComponent, int profileId, int templateSize, int templateStyle) throws RemoteException {
+            public Bundle getTemplateWidgetPreview(
+                    String callingPackage,
+                    ComponentName providerComponent,
+                    int profileId,
+                    int templateSize,
+                    int templateStyle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1505,7 +1676,9 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public void removeTemplateWidgetPreview(ComponentName providerComponent, int templateSize, int templateStyle) throws RemoteException {
+            public void removeTemplateWidgetPreview(
+                    ComponentName providerComponent, int templateSize, int templateStyle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1522,7 +1695,8 @@ public interface IAppWidgetService extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetService
-            public boolean isTemplatePreviewUpdateAvailable(ComponentName providerComponent) throws RemoteException {
+            public boolean isTemplatePreviewUpdateAvailable(ComponentName providerComponent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -16,12 +16,12 @@ public interface ISpatializerHeadTrackingModeCallback extends IInterface {
 
     public static class Default implements ISpatializerHeadTrackingModeCallback {
         @Override // android.media.ISpatializerHeadTrackingModeCallback
-        public void dispatchSpatializerActualHeadTrackingModeChanged(int mode) throws RemoteException {
-        }
+        public void dispatchSpatializerActualHeadTrackingModeChanged(int mode)
+                throws RemoteException {}
 
         @Override // android.media.ISpatializerHeadTrackingModeCallback
-        public void dispatchSpatializerDesiredHeadTrackingModeChanged(int mode) throws RemoteException {
-        }
+        public void dispatchSpatializerDesiredHeadTrackingModeChanged(int mode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +29,8 @@ public interface ISpatializerHeadTrackingModeCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpatializerHeadTrackingModeCallback {
+    public abstract static class Stub extends Binder
+            implements ISpatializerHeadTrackingModeCallback {
         static final int TRANSACTION_dispatchSpatializerActualHeadTrackingModeChanged = 1;
         static final int TRANSACTION_dispatchSpatializerDesiredHeadTrackingModeChanged = 2;
 
@@ -41,7 +42,8 @@ public interface ISpatializerHeadTrackingModeCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISpatializerHeadTrackingModeCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISpatializerHeadTrackingModeCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISpatializerHeadTrackingModeCallback)) {
                 return (ISpatializerHeadTrackingModeCallback) iin;
             }
@@ -70,7 +72,8 @@ public interface ISpatializerHeadTrackingModeCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpatializerHeadTrackingModeCallback.DESCRIPTOR);
             }
@@ -111,7 +114,8 @@ public interface ISpatializerHeadTrackingModeCallback extends IInterface {
             }
 
             @Override // android.media.ISpatializerHeadTrackingModeCallback
-            public void dispatchSpatializerActualHeadTrackingModeChanged(int mode) throws RemoteException {
+            public void dispatchSpatializerActualHeadTrackingModeChanged(int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISpatializerHeadTrackingModeCallback.DESCRIPTOR);
@@ -123,7 +127,8 @@ public interface ISpatializerHeadTrackingModeCallback extends IInterface {
             }
 
             @Override // android.media.ISpatializerHeadTrackingModeCallback
-            public void dispatchSpatializerDesiredHeadTrackingModeChanged(int mode) throws RemoteException {
+            public void dispatchSpatializerDesiredHeadTrackingModeChanged(int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISpatializerHeadTrackingModeCallback.DESCRIPTOR);

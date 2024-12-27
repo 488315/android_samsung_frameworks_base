@@ -12,6 +12,7 @@ public final /* synthetic */ class ShortcutDumpFiles$$ExternalSyntheticLambda0 i
 
     @Override // java.util.function.Consumer
     public final void accept(Object obj) {
-        ((PrintWriter) obj).println(StandardCharsets.UTF_8.decode(ByteBuffer.wrap(this.f$0)).toString());
+        ((PrintWriter) obj)
+                .println(StandardCharsets.UTF_8.decode(ByteBuffer.wrap(this.f$0)).toString());
     }
 }

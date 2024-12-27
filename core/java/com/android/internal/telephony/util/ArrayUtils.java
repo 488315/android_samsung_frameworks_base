@@ -7,8 +7,7 @@ import java.util.Objects;
 
 /* loaded from: classes5.dex */
 public final class ArrayUtils {
-    private ArrayUtils() {
-    }
+    private ArrayUtils() {}
 
     public static <T> T[] appendElement(Class<T> cls, T[] tArr, T t) {
         return (T[]) appendElement(cls, tArr, t, false);
@@ -71,8 +70,7 @@ public final class ArrayUtils {
         public static final Object[] OBJECT = new Object[0];
         public static final String[] STRING = new String[0];
 
-        private EmptyArray() {
-        }
+        private EmptyArray() {}
     }
 
     public static boolean contains(char[] array, char value) {

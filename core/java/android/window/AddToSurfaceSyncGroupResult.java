@@ -3,26 +3,27 @@ package android.window;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.window.ISurfaceSyncGroup;
-import android.window.ITransactionReadyCallback;
 
 /* loaded from: classes4.dex */
 public class AddToSurfaceSyncGroupResult implements Parcelable {
-    public static final Parcelable.Creator<AddToSurfaceSyncGroupResult> CREATOR = new Parcelable.Creator<AddToSurfaceSyncGroupResult>() { // from class: android.window.AddToSurfaceSyncGroupResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AddToSurfaceSyncGroupResult createFromParcel(Parcel _aidl_source) {
-            AddToSurfaceSyncGroupResult _aidl_out = new AddToSurfaceSyncGroupResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AddToSurfaceSyncGroupResult> CREATOR =
+            new Parcelable.Creator<
+                    AddToSurfaceSyncGroupResult>() { // from class:
+                                                     // android.window.AddToSurfaceSyncGroupResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AddToSurfaceSyncGroupResult createFromParcel(Parcel _aidl_source) {
+                    AddToSurfaceSyncGroupResult _aidl_out = new AddToSurfaceSyncGroupResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AddToSurfaceSyncGroupResult[] newArray(int _aidl_size) {
-            return new AddToSurfaceSyncGroupResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AddToSurfaceSyncGroupResult[] newArray(int _aidl_size) {
+                    return new AddToSurfaceSyncGroupResult[_aidl_size];
+                }
+            };
     public ISurfaceSyncGroup mParentSyncGroup;
     public ITransactionReadyCallback mTransactionReadyCallback;
 
@@ -52,14 +53,16 @@ public class AddToSurfaceSyncGroupResult implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.mParentSyncGroup = ISurfaceSyncGroup.Stub.asInterface(_aidl_parcel.readStrongBinder());
+            this.mParentSyncGroup =
+                    ISurfaceSyncGroup.Stub.asInterface(_aidl_parcel.readStrongBinder());
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.mTransactionReadyCallback = ITransactionReadyCallback.Stub.asInterface(_aidl_parcel.readStrongBinder());
+                this.mTransactionReadyCallback =
+                        ITransactionReadyCallback.Stub.asInterface(_aidl_parcel.readStrongBinder());
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

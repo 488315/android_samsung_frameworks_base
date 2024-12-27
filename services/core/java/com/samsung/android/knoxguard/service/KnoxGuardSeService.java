@@ -13,6 +13,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.widget.ILockSettings;
 import com.android.internal.widget.IRemoteLockMonitorCallback;
@@ -23,6 +24,7 @@ import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupManagerConstants;
 import com.android.server.clipboard.ClipboardService;
+
 import com.samsung.android.knoxguard.IKnoxGuardManager;
 import com.samsung.android.knoxguard.service.receiver.AlarmReceiver;
 import com.samsung.android.knoxguard.service.receiver.IntentRelayReceiver;
@@ -31,14 +33,16 @@ import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.knoxguard.service.utils.IntegritySeUtil;
 import com.samsung.android.knoxguard.service.utils.Utils;
 import com.samsung.android.server.pm.mm.MaintenanceModeManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -81,9 +85,15 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     /* renamed from: com.samsung.android.knoxguard.service.KnoxGuardSeService$1, reason: invalid class name */
     public final class AnonymousClass1 extends AppOpsManager.OnOpChangedInternalListener {
         public final void onOpChanged(int i, String str) {
-            if ("com.samsung.android.kgclient".equals(str) && Constants.PROTECTED_APP_OPS_LIST.contains(Integer.valueOf(i))) {
+            if ("com.samsung.android.kgclient".equals(str)
+                    && Constants.PROTECTED_APP_OPS_LIST.contains(Integer.valueOf(i))) {
                 try {
-                    IntegritySeUtil.enableAppOpIfNotAllowed(KnoxGuardSeService.mContext.getPackageManager().getPackageInfo("com.samsung.android.kgclient", 0), (AppOpsManager) KnoxGuardSeService.mContext.getSystemService("appops"), i);
+                    IntegritySeUtil.enableAppOpIfNotAllowed(
+                            KnoxGuardSeService.mContext
+                                    .getPackageManager()
+                                    .getPackageInfo("com.samsung.android.kgclient", 0),
+                            (AppOpsManager) KnoxGuardSeService.mContext.getSystemService("appops"),
+                            i);
                 } catch (Throwable th) {
                     Slog.e(KnoxGuardSeService.TAG, "Error - appOps : " + th.getMessage());
                 }
@@ -94,15 +104,23 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.knoxguard.service.KnoxGuardSeService$2, reason: invalid class name */
     public final class AnonymousClass2 extends IRemoteLockMonitorCallback.Stub {
-        public final void changeRemoteLockState(RemoteLockInfo remoteLockInfo) throws RemoteException {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("changeRemoteLockState data = "), remoteLockInfo.lockType, KnoxGuardSeService.TAG);
+        public final void changeRemoteLockState(RemoteLockInfo remoteLockInfo)
+                throws RemoteException {
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("changeRemoteLockState data = "),
+                    remoteLockInfo.lockType,
+                    KnoxGuardSeService.TAG);
         }
 
         public final int checkRemoteLockPassword(byte[] bArr) {
             String str = KnoxGuardSeService.TAG;
             Slog.i(str, "checkRemoteLockPassword");
             try {
-                int intResult = KnoxGuardSeService.getIntResult(KnoxGuardNative.verifyHOTPPinRefactor(new String(bArr, StandardCharsets.UTF_8)), true);
+                int intResult =
+                        KnoxGuardSeService.getIntResult(
+                                KnoxGuardNative.verifyHOTPPinRefactor(
+                                        new String(bArr, StandardCharsets.UTF_8)),
+                                true);
                 KnoxGuardSeService.mFailureCount = intResult;
                 if (intResult == 0) {
                     Slog.i(str, "[HOTP] pin is correct!");
@@ -110,7 +128,11 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
                     KnoxGuardSeService.unregisterUserPresentReceiver();
                     KnoxGuardSeService.unlockCompleted();
                 } else {
-                    Slog.e(str, "[HOTP] pin is wrong!!! current failure count (" + KnoxGuardSeService.mFailureCount + ")");
+                    Slog.e(
+                            str,
+                            "[HOTP] pin is wrong!!! current failure count ("
+                                    + KnoxGuardSeService.mFailureCount
+                                    + ")");
                     KnoxGuardSeService.setRemoteLockToLockscreen(true);
                 }
             } catch (Throwable th) {
@@ -132,7 +154,14 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         private boolean mSkipPin;
         private boolean mSkipSupport;
 
-        public KGLockscreenInfo(String str, String str2, String str3, String str4, boolean z, boolean z2, Bundle bundle) {
+        public KGLockscreenInfo(
+                String str,
+                String str2,
+                String str3,
+                String str4,
+                boolean z,
+                boolean z2,
+                Bundle bundle) {
             this.mClientName = str;
             this.mMessage = str4;
             this.mPhoneNumber = str2;
@@ -231,7 +260,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         Slog.i(TAG, "bindAndSetToLockScreen");
         try {
             if (mLockSettingsService == null) {
-                mLockSettingsService = ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
+                mLockSettingsService =
+                        ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
             }
             mLockSettingsService.registerRemoteLockCallback(3, mRemoteLockMonitorCallback);
             setRemoteLockToLockscreen(true);
@@ -243,13 +273,13 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:26:0x005a, code lost:
-    
-        if (r5 == 0) goto L48;
-     */
+
+       if (r5 == 0) goto L48;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x006b, code lost:
-    
-        if (r5 == 0) goto L48;
-     */
+
+       if (r5 == 0) goto L48;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v12 */
     /* JADX WARN: Type inference failed for: r2v13 */
@@ -377,7 +407,10 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         L86:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knoxguard.service.KnoxGuardSeService.deserialize(byte[], java.lang.Class):java.lang.Object");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.knoxguard.service.KnoxGuardSeService.deserialize(byte[],"
+                    + " java.lang.Class):java.lang.Object");
     }
 
     public static byte[] getByteArrayResult(KgErrWrapper kgErrWrapper) {
@@ -416,7 +449,10 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         String str = TAG;
         Slog.i(str, "getKGVaultData");
         try {
-            byte[] byteArrayResult = getByteArrayResult(KnoxGuardNative.tz_getLockObject(KnoxGuardNative.KGTA_PARAM_DEFAULT), false);
+            byte[] byteArrayResult =
+                    getByteArrayResult(
+                            KnoxGuardNative.tz_getLockObject(KnoxGuardNative.KGTA_PARAM_DEFAULT),
+                            false);
             if (byteArrayResult == null) {
                 return null;
             }
@@ -477,10 +513,12 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         } catch (Throwable th) {
             Slog.e(TAG, "initializeFailureCount error : " + th.getMessage());
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("mFailureCount : "), mFailureCount, TAG);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("mFailureCount : "), mFailureCount, TAG);
     }
 
-    public static void registerReceiver(Context context, BroadcastReceiver broadcastReceiver, IntentFilter intentFilter) {
+    public static void registerReceiver(
+            Context context, BroadcastReceiver broadcastReceiver, IntentFilter intentFilter) {
         if (MaintenanceModeManager.isInMaintenanceMode()) {
             context.registerReceiverForAllUsers(broadcastReceiver, intentFilter, null, null);
         } else {
@@ -488,7 +526,11 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         }
     }
 
-    public static void registerReceiver(Context context, BroadcastReceiver broadcastReceiver, IntentFilter intentFilter, int i) {
+    public static void registerReceiver(
+            Context context,
+            BroadcastReceiver broadcastReceiver,
+            IntentFilter intentFilter,
+            int i) {
         if (MaintenanceModeManager.isInMaintenanceMode()) {
             context.registerReceiverForAllUsers(broadcastReceiver, intentFilter, null, null, i);
         } else {
@@ -565,7 +607,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         Slog.i(str, "setRemoteLockToLockscreen");
         try {
             if (mLockSettingsService == null) {
-                mLockSettingsService = ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
+                mLockSettingsService =
+                        ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
             }
             if (mFailureCount < 0) {
                 initializeFailureCount();
@@ -584,10 +627,16 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
             }
             if (Utils.isTabletDevice()) {
                 string = mContext.getString(R.string.permdesc_manageOngoingCalls);
-                format = String.format(mContext.getString(R.string.permdesc_manageFingerprint), "Device Services");
+                format =
+                        String.format(
+                                mContext.getString(R.string.permdesc_manageFingerprint),
+                                "Device Services");
             } else {
                 string = mContext.getString(R.string.permdesc_manageNetworkPolicy);
-                format = String.format(mContext.getString(R.string.permdesc_invokeCarrierSetup), "Device Services");
+                format =
+                        String.format(
+                                mContext.getString(R.string.permdesc_invokeCarrierSetup),
+                                "Device Services");
             }
             RemoteLockInfo.Builder builder = new RemoteLockInfo.Builder(3, z);
             String str2 = mClientName;
@@ -609,7 +658,16 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
             if (str5 != null && !str5.equalsIgnoreCase("")) {
                 format = mMessage;
             }
-            RemoteLockInfo build = emailAddress.setMessage(format).setAllowFailCount(1).setLockTimeOut(lockoutDelayTime).setBlockCount(0).setSkipPinContainer(mSkipPin).setSkipSupportContainer(mSkipSupport).setBundle(mBundle).build();
+            RemoteLockInfo build =
+                    emailAddress
+                            .setMessage(format)
+                            .setAllowFailCount(1)
+                            .setLockTimeOut(lockoutDelayTime)
+                            .setBlockCount(0)
+                            .setSkipPinContainer(mSkipPin)
+                            .setSkipSupportContainer(mSkipSupport)
+                            .setBundle(mBundle)
+                            .build();
             boolean performLockscreen = Utils.performLockscreen(mLockSettingsService, build, z);
             if (!z || performLockscreen) {
                 return;
@@ -663,7 +721,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         Slog.i(TAG, "unbindFromLockScreen");
         try {
             if (mLockSettingsService == null) {
-                mLockSettingsService = ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
+                mLockSettingsService =
+                        ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
             }
             mLockSettingsService.unregisterRemoteLockCallback(3, mRemoteLockMonitorCallback);
             setRemoteLockToLockscreen(false);
@@ -677,7 +736,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public static void unlockCompleted() {
         Slog.d(TAG, "onUnlockedByPasscode");
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        IntentRelayManager.sendRequestedIntent(mContext, "com.samsung.kgclient.android.intent.action.MANUAL_UNLOCK", null);
+        IntentRelayManager.sendRequestedIntent(
+                mContext, "com.samsung.kgclient.android.intent.action.MANUAL_UNLOCK", null);
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
@@ -698,14 +758,17 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         bindAndSetToLockScreen();
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         String str = TAG;
         Slog.i(str, "call dump");
         if (DumpUtils.checkDumpPermission(mContext, str, printWriter)) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             printWriter.println(str + " state: ");
             try {
-                Cursor query = mContext.getContentResolver().query(Constants.KG_LOG_URI, null, null, null, null);
+                Cursor query =
+                        mContext.getContentResolver()
+                                .query(Constants.KG_LOG_URI, null, null, null, null);
                 if (query != null) {
                     while (query.moveToNext()) {
                         try {
@@ -728,7 +791,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final String generateHotpDHRequest() {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "generateHotpDHRequest");
-        return getStringResult(KnoxGuardNative.tz_generateHotpDhRequest(KnoxGuardNative.KGTA_PARAM_DEFAULT));
+        return getStringResult(
+                KnoxGuardNative.tz_generateHotpDhRequest(KnoxGuardNative.KGTA_PARAM_DEFAULT));
     }
 
     public final boolean getBooleanValueFromJson(String str, String str2, boolean z) {
@@ -747,13 +811,16 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final String getClientData() {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "getClientData");
-        return getStringResult(KnoxGuardNative.tz_getClientData(KnoxGuardNative.KGTA_PARAM_DEFAULT));
+        return getStringResult(
+                KnoxGuardNative.tz_getClientData(KnoxGuardNative.KGTA_PARAM_DEFAULT));
     }
 
     public final ConnectivityManager getConnectivityManagerService() {
         Slog.i(TAG, "call getConnectivityManagerService");
-        if (ServiceManager.getService("connectivity") != null && this.mConnectivityManagerService == null) {
-            this.mConnectivityManagerService = (ConnectivityManager) mContext.getSystemService("connectivity");
+        if (ServiceManager.getService("connectivity") != null
+                && this.mConnectivityManagerService == null) {
+            this.mConnectivityManagerService =
+                    (ConnectivityManager) mContext.getSystemService("connectivity");
         }
         return this.mConnectivityManagerService;
     }
@@ -761,7 +828,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final String getHotpChallenge() {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "getHotpChallenge");
-        return getStringResult(KnoxGuardNative.tz_getHotpChallenge(KnoxGuardNative.KGTA_PARAM_DEFAULT));
+        return getStringResult(
+                KnoxGuardNative.tz_getHotpChallenge(KnoxGuardNative.KGTA_PARAM_DEFAULT));
     }
 
     public final String getKGID() {
@@ -779,10 +847,15 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final Bundle getKGServiceInfo() {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "getKGServiceInfo");
-        IntegritySeUtil.IntegritySeResult checkKGClientIntegrityAndEnableComponentsWithFlag = IntegritySeUtil.checkKGClientIntegrityAndEnableComponentsWithFlag(mContext, KnoxGuardNative.getTAState(), false);
+        IntegritySeUtil.IntegritySeResult checkKGClientIntegrityAndEnableComponentsWithFlag =
+                IntegritySeUtil.checkKGClientIntegrityAndEnableComponentsWithFlag(
+                        mContext, KnoxGuardNative.getTAState(), false);
         Bundle bundle = new Bundle();
         bundle.putInt(KEY_LOCK_RESULT, mLockResult);
-        bundle.putString(KEY_INTEGRITY_RESULT, IntegritySeUtil.getFailedIntegrityResult(checkKGClientIntegrityAndEnableComponentsWithFlag));
+        bundle.putString(
+                KEY_INTEGRITY_RESULT,
+                IntegritySeUtil.getFailedIntegrityResult(
+                        checkKGClientIntegrityAndEnableComponentsWithFlag));
         bundle.putBoolean(KEY_IS_MAINTENANCE_MODE_SUPPORTED, true);
         return bundle;
     }
@@ -794,7 +867,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final String getLockAction() {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "getLockAction");
-        return getStringResult(KnoxGuardNative.tz_getLockAction(KnoxGuardNative.KGTA_PARAM_DEFAULT));
+        return getStringResult(
+                KnoxGuardNative.tz_getLockAction(KnoxGuardNative.KGTA_PARAM_DEFAULT));
     }
 
     public final String getNonce(String str, String str2) {
@@ -836,8 +910,10 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
                         if (substring.equalsIgnoreCase("15")) {
                             str2 = textFromFile2.substring(0, 2);
                         } else {
-                            if (!substring.equalsIgnoreCase("02") && !substring.equalsIgnoreCase("45")) {
-                                if (!substring.equalsIgnoreCase(Constants.OTP_BIT_KG_COMPLETED) && !substring.equalsIgnoreCase("90")) {
+                            if (!substring.equalsIgnoreCase("02")
+                                    && !substring.equalsIgnoreCase("45")) {
+                                if (!substring.equalsIgnoreCase(Constants.OTP_BIT_KG_COMPLETED)
+                                        && !substring.equalsIgnoreCase("90")) {
                                     if (substring.equalsIgnoreCase("FE")) {
                                         str2 = textFromFile2.substring(4, 6);
                                     }
@@ -846,10 +922,16 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
                             }
                             str2 = textFromFile2.substring(3, 5);
                         }
-                        str = ((("c" + str2) + textFromFile.substring(18, 20)) + textFromFile.substring(20, 28)) + textFromFile.substring(28, 30);
+                        str =
+                                ((("c" + str2) + textFromFile.substring(18, 20))
+                                                + textFromFile.substring(20, 28))
+                                        + textFromFile.substring(28, 30);
                     }
                     str2 = "";
-                    str = ((("c" + str2) + textFromFile.substring(18, 20)) + textFromFile.substring(20, 28)) + textFromFile.substring(28, 30);
+                    str =
+                            ((("c" + str2) + textFromFile.substring(18, 20))
+                                            + textFromFile.substring(20, 28))
+                                    + textFromFile.substring(28, 30);
                 } else {
                     str = "c";
                 }
@@ -876,7 +958,9 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final boolean getSfPolicyValue(String str) {
         try {
             if (sfPolicyCache == null) {
-                sfPolicyCache = getStringResult(KnoxGuardNative.tz_getSfPolicy(KnoxGuardNative.KGTA_PARAM_DEFAULT));
+                sfPolicyCache =
+                        getStringResult(
+                                KnoxGuardNative.tz_getSfPolicy(KnoxGuardNative.KGTA_PARAM_DEFAULT));
             }
             return getBooleanValueFromJson(sfPolicyCache, str, true);
         } catch (Throwable th) {
@@ -906,7 +990,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     }
 
     public final int getTAStateSetError(boolean z) {
-        int intResult = getIntResult(KnoxGuardNative.tz_getTAState(KnoxGuardNative.KGTA_PARAM_DEFAULT), z);
+        int intResult =
+                getIntResult(KnoxGuardNative.tz_getTAState(KnoxGuardNative.KGTA_PARAM_DEFAULT), z);
         AnyMotionDetector$$ExternalSyntheticOutline0.m(intResult, "getTAState : ", TAG);
         if (intResult < 0 || intResult > 5) {
             return 5;
@@ -948,13 +1033,19 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     }
 
     public final boolean isRetryLockActivationRequired(int i) {
-        return getTAVersion() >= 3 ? Utils.isSingleOtpBitFusedAndStateIsNotCompleted(i) : Utils.isOtpBitFusedWithActive() || 3 == i || 2 == i;
+        return getTAVersion() >= 3
+                ? Utils.isSingleOtpBitFusedAndStateIsNotCompleted(i)
+                : Utils.isOtpBitFusedWithActive() || 3 == i || 2 == i;
     }
 
     public final boolean isSfPolicyRequired() {
-        String stringSystemProperty = Utils.getStringSystemProperty(Constants.KG_OTP_BIT_SYSTEM_PROPERTY, Constants.OTP_BIT_KG_UNKNOWN);
-        if ("0".equals(stringSystemProperty) || Constants.OTP_BIT_KG_UNKNOWN.equals(stringSystemProperty)) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m("isSfPolicyRequired: not fused (", stringSystemProperty, ")", TAG);
+        String stringSystemProperty =
+                Utils.getStringSystemProperty(
+                        Constants.KG_OTP_BIT_SYSTEM_PROPERTY, Constants.OTP_BIT_KG_UNKNOWN);
+        if ("0".equals(stringSystemProperty)
+                || Constants.OTP_BIT_KG_UNKNOWN.equals(stringSystemProperty)) {
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "isSfPolicyRequired: not fused (", stringSystemProperty, ")", TAG);
             return false;
         }
         if (!Constants.IS_FIRST_API_SUPPORT_SF_POLICY && getTAVersion() < 4) {
@@ -978,16 +1069,25 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             String[] strArr = Constants.strState;
-            String stringSystemProperty = Utils.getStringSystemProperty(Constants.KG_SYSTEM_PROPERTY, strArr[5]);
+            String stringSystemProperty =
+                    Utils.getStringSystemProperty(Constants.KG_SYSTEM_PROPERTY, strArr[5]);
             if (getTAVersion() >= 3) {
                 z = Utils.isSingleOtpBitFusedAndStateIsNotCompleted(stringSystemProperty);
             } else {
-                if (!stringSystemProperty.equals(strArr[2]) && !stringSystemProperty.equals(strArr[3]) && !stringSystemProperty.equals(strArr[5]) && !Utils.isOtpBitFusedWithActive()) {
+                if (!stringSystemProperty.equals(strArr[2])
+                        && !stringSystemProperty.equals(strArr[3])
+                        && !stringSystemProperty.equals(strArr[5])
+                        && !Utils.isOtpBitFusedWithActive()) {
                     z = false;
                 }
                 z = true;
             }
-            Slog.i(TAG, "call isVpnExceptionRequired, state : " + stringSystemProperty + " , result : " + z);
+            Slog.i(
+                    TAG,
+                    "call isVpnExceptionRequired, state : "
+                            + stringSystemProperty
+                            + " , result : "
+                            + z);
             Binder.restoreCallingIdentity(clearCallingIdentity);
             return z;
         } catch (Throwable th) {
@@ -996,7 +1096,15 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         }
     }
 
-    public final int lockScreen(String str, String str2, String str3, String str4, String str5, boolean z, boolean z2, Bundle bundle) {
+    public final int lockScreen(
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            boolean z,
+            boolean z2,
+            Bundle bundle) {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "lockScreen");
         mClientName = str2;
@@ -1006,7 +1114,11 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         mSkipPin = z;
         mSkipSupport = z2;
         mBundle = bundle;
-        int intResult = getIntResult(KnoxGuardNative.lockScreenRefactor(str, str2, str3, str4, str5, z, z2, bundle), true);
+        int intResult =
+                getIntResult(
+                        KnoxGuardNative.lockScreenRefactor(
+                                str, str2, str3, str4, str5, z, z2, bundle),
+                        true);
         Utils.setKGSystemProperty();
         bindAndSetToLockScreen();
         return intResult;
@@ -1020,7 +1132,10 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         Utils.checkCallerAndKgPermission(mContext);
         String str5 = TAG;
         Slog.d(str5, "provisionCert");
-        if (!TextUtils.isEmpty(str) && !TextUtils.isEmpty(str2) && !TextUtils.isEmpty(str3) && !TextUtils.isEmpty(str4)) {
+        if (!TextUtils.isEmpty(str)
+                && !TextUtils.isEmpty(str2)
+                && !TextUtils.isEmpty(str3)
+                && !TextUtils.isEmpty(str4)) {
             return getIntResult(KnoxGuardNative.provisionCert(str, str2, str3, str4), true);
         }
         Slog.e(str5, "provisionCert failed: input null");
@@ -1030,7 +1145,11 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final void registerAlarmReceiver(Context context, int i) {
         Slog.i(TAG, "call registerAlarmReceiver");
         if (isRetryLockActivationRequired(i)) {
-            registerReceiver(context, new AlarmReceiver(), BatteryService$$ExternalSyntheticOutline0.m(Constants.INTENT_RETRY_LOCK), 4);
+            registerReceiver(
+                    context,
+                    new AlarmReceiver(),
+                    BatteryService$$ExternalSyntheticOutline0.m(Constants.INTENT_RETRY_LOCK),
+                    4);
         }
     }
 
@@ -1061,7 +1180,12 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
             intentFilter.addDataScheme("package");
             intentFilter.addDataSchemeSpecificPart("com.samsung.android.kgclient", 0);
             intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
-            ActivityManagerService$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.PACKAGE_CHANGED", "android.intent.action.PACKAGE_REPLACED", "android.intent.action.PACKAGE_REMOVED", "android.intent.action.PACKAGE_DATA_CLEARED");
+            ActivityManagerService$$ExternalSyntheticOutline0.m(
+                    intentFilter,
+                    "android.intent.action.PACKAGE_CHANGED",
+                    "android.intent.action.PACKAGE_REPLACED",
+                    "android.intent.action.PACKAGE_REMOVED",
+                    "android.intent.action.PACKAGE_DATA_CLEARED");
             intentFilter.addAction("android.intent.action.PACKAGE_RESTARTED");
             registerReceiver(context, systemSeReceiver, intentFilter);
         }
@@ -1092,7 +1216,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                ((ConnectivityManager) mContext.getSystemService("connectivity")).setAirplaneMode(z);
+                ((ConnectivityManager) mContext.getSystemService("connectivity"))
+                        .setAirplaneMode(z);
             } catch (Exception e) {
                 Slog.w(TAG, "Exception : " + e.getMessage());
             }
@@ -1104,7 +1229,9 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final int setCheckingState() {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "setCheckingState");
-        int intResult = getIntResult(KnoxGuardNative.tz_userChecking(KnoxGuardNative.KGTA_PARAM_DEFAULT), true);
+        int intResult =
+                getIntResult(
+                        KnoxGuardNative.tz_userChecking(KnoxGuardNative.KGTA_PARAM_DEFAULT), true);
         Utils.setKGSystemProperty();
         return intResult;
     }
@@ -1115,26 +1242,65 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         return getIntResult(KnoxGuardNative.setClientDataRefactor(str), true);
     }
 
-    public final void setRemoteLockToLockscreen(int i, boolean z, String str, String str2, String str3, boolean z2, String str4, int i2, long j, int i3, boolean z3, Bundle bundle) {
+    public final void setRemoteLockToLockscreen(
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            String str3,
+            boolean z2,
+            String str4,
+            int i2,
+            long j,
+            int i3,
+            boolean z3,
+            Bundle bundle) {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.i(TAG, "call setRemoteLockToLockscreen");
-        Utils.setRemoteLockToLockscreen(mContext, i, z, str, str2, str3, z2, str4, i2, j, i3, z3, bundle, true);
+        Utils.setRemoteLockToLockscreen(
+                mContext, i, z, str, str2, str3, z2, str4, i2, j, i3, z3, bundle, true);
     }
 
-    public final void setRemoteLockToLockscreenWithSkipSupport(int i, boolean z, String str, String str2, String str3, boolean z2, String str4, int i2, long j, int i3, boolean z3, Bundle bundle, boolean z4) {
+    public final void setRemoteLockToLockscreenWithSkipSupport(
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            String str3,
+            boolean z2,
+            String str4,
+            int i2,
+            long j,
+            int i3,
+            boolean z3,
+            Bundle bundle,
+            boolean z4) {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.i(TAG, "call setRemoteLockToLockscreen with skipSupportContainer");
-        Utils.setRemoteLockToLockscreen(mContext, i, z, str, str2, str3, z2, str4, i2, j, i3, z3, bundle, z4);
+        Utils.setRemoteLockToLockscreen(
+                mContext, i, z, str, str2, str3, z2, str4, i2, j, i3, z3, bundle, z4);
     }
 
     public final boolean shouldBlockCustomRom() {
         String[] strArr = Constants.strState;
-        String stringSystemProperty = Utils.getStringSystemProperty(Constants.KG_SYSTEM_PROPERTY, strArr[5]);
+        String stringSystemProperty =
+                Utils.getStringSystemProperty(Constants.KG_SYSTEM_PROPERTY, strArr[5]);
         boolean z = true;
-        if (getTAVersion() < 3 ? !(stringSystemProperty.equals(strArr[0]) || stringSystemProperty.equals(strArr[2]) || stringSystemProperty.equals(strArr[3]) || Utils.isOtpBitFusedWithActive()) : !(Utils.isSingleOtpBitFusedAndStateIsNotCompleted(stringSystemProperty) || stringSystemProperty.equals(strArr[0]) || stringSystemProperty.equals(strArr[2]) || stringSystemProperty.equals(strArr[3]) || stringSystemProperty.equals(strArr[5]))) {
+        if (getTAVersion() < 3
+                ? !(stringSystemProperty.equals(strArr[0])
+                        || stringSystemProperty.equals(strArr[2])
+                        || stringSystemProperty.equals(strArr[3])
+                        || Utils.isOtpBitFusedWithActive())
+                : !(Utils.isSingleOtpBitFusedAndStateIsNotCompleted(stringSystemProperty)
+                        || stringSystemProperty.equals(strArr[0])
+                        || stringSystemProperty.equals(strArr[2])
+                        || stringSystemProperty.equals(strArr[3])
+                        || stringSystemProperty.equals(strArr[5]))) {
             z = false;
         }
-        Slog.i(TAG, "call shouldBlockCustomRom, state : " + stringSystemProperty + " , result : " + z);
+        Slog.i(
+                TAG,
+                "call shouldBlockCustomRom, state : " + stringSystemProperty + " , result : " + z);
         return z;
     }
 
@@ -1143,16 +1309,24 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             String[] strArr = Constants.strState;
-            String stringSystemProperty = Utils.getStringSystemProperty(Constants.KG_SYSTEM_PROPERTY, strArr[5]);
+            String stringSystemProperty =
+                    Utils.getStringSystemProperty(Constants.KG_SYSTEM_PROPERTY, strArr[5]);
             if (getTAVersion() >= 3) {
                 z = Utils.isSingleOtpBitFusedAndStateIsNotCompleted(stringSystemProperty);
             } else {
-                if (!stringSystemProperty.equals(strArr[2]) && !stringSystemProperty.equals(strArr[3]) && !Utils.isOtpBitFusedWithActive()) {
+                if (!stringSystemProperty.equals(strArr[2])
+                        && !stringSystemProperty.equals(strArr[3])
+                        && !Utils.isOtpBitFusedWithActive()) {
                     z = false;
                 }
                 z = true;
             }
-            Slog.i(TAG, "call showInstallmentStatus, state : " + stringSystemProperty + " , result : " + z);
+            Slog.i(
+                    TAG,
+                    "call showInstallmentStatus, state : "
+                            + stringSystemProperty
+                            + " , result : "
+                            + z);
             Binder.restoreCallingIdentity(clearCallingIdentity);
             return z;
         } catch (Throwable th) {
@@ -1180,7 +1354,9 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "unlockScreen");
         unbindFromLockScreen();
-        int intResult = getIntResult(KnoxGuardNative.tz_unlockScreen(KnoxGuardNative.KGTA_PARAM_DEFAULT), true);
+        int intResult =
+                getIntResult(
+                        KnoxGuardNative.tz_unlockScreen(KnoxGuardNative.KGTA_PARAM_DEFAULT), true);
         mFailureCount = 0;
         Utils.setKGSystemProperty();
         return intResult;
@@ -1200,7 +1376,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
 
     public final int verifyHOTPDHChallenge(String str, String str2, String str3) {
         Utils.checkCallerAndKgPermission(mContext);
-        int intResult = getIntResult(KnoxGuardNative.verifyHotpDHChallengeRefactor(str, str2, str3), true);
+        int intResult =
+                getIntResult(KnoxGuardNative.verifyHotpDHChallengeRefactor(str, str2, str3), true);
         Slog.d(TAG, "verifyHOTPDHChallenge result : " + intResult);
         Utils.setKGSystemProperty();
         return intResult;
@@ -1287,7 +1464,9 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
             com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0.m(r0, r1, r6)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knoxguard.service.KnoxGuardSeService.verifyKgRot():java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.knoxguard.service.KnoxGuardSeService.verifyKgRot():java.lang.String");
     }
 
     public final String verifyPolicy(String str, String str2) {
@@ -1299,7 +1478,8 @@ public final class KnoxGuardSeService extends IKnoxGuardManager.Stub {
     public final String verifyRegistrationInfo(String str, String str2) {
         Utils.checkCallerAndKgPermission(mContext);
         Slog.d(TAG, "verifyRegistrationInfo");
-        String stringResult = getStringResult(KnoxGuardNative.verifyRegistrationInfoRefactor(str, str2));
+        String stringResult =
+                getStringResult(KnoxGuardNative.verifyRegistrationInfoRefactor(str, str2));
         Utils.setKGSystemProperty();
         return stringResult;
     }

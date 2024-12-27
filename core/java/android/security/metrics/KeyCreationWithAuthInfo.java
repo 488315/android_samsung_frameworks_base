@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class KeyCreationWithAuthInfo implements Parcelable {
-    public static final Parcelable.Creator<KeyCreationWithAuthInfo> CREATOR = new Parcelable.Creator<KeyCreationWithAuthInfo>() { // from class: android.security.metrics.KeyCreationWithAuthInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyCreationWithAuthInfo createFromParcel(Parcel _aidl_source) {
-            KeyCreationWithAuthInfo _aidl_out = new KeyCreationWithAuthInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeyCreationWithAuthInfo> CREATOR =
+            new Parcelable.Creator<
+                    KeyCreationWithAuthInfo>() { // from class:
+                                                 // android.security.metrics.KeyCreationWithAuthInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyCreationWithAuthInfo createFromParcel(Parcel _aidl_source) {
+                    KeyCreationWithAuthInfo _aidl_out = new KeyCreationWithAuthInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyCreationWithAuthInfo[] newArray(int _aidl_size) {
-            return new KeyCreationWithAuthInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyCreationWithAuthInfo[] newArray(int _aidl_size) {
+                    return new KeyCreationWithAuthInfo[_aidl_size];
+                }
+            };
     public int log10_auth_key_timeout_seconds = 0;
     public int security_level;
     public int user_auth_type;

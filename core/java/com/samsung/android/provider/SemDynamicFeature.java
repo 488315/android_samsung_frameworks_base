@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -41,7 +42,11 @@ public final class SemDynamicFeature {
 
     private static boolean isBetaBinaryType() {
         String id = Build.DISPLAY;
-        String binaryType = GnssSignalType.CODE_TYPE_Z.equals(id.substring(id.length() + (-4), id.length() + (-3)).toUpperCase()) ? GnssSignalType.CODE_TYPE_Z : GnssSignalType.CODE_TYPE_C;
+        String binaryType =
+                GnssSignalType.CODE_TYPE_Z.equals(
+                                id.substring(id.length() + (-4), id.length() + (-3)).toUpperCase())
+                        ? GnssSignalType.CODE_TYPE_Z
+                        : GnssSignalType.CODE_TYPE_C;
         if (GnssSignalType.CODE_TYPE_Z.equals(binaryType)) {
             return true;
         }
@@ -107,19 +112,22 @@ public final class SemDynamicFeature {
     }
 
     public static final class Properties implements Parcelable {
-        public static final Parcelable.Creator<Properties> CREATOR = new Parcelable.Creator<Properties>() { // from class: com.samsung.android.provider.SemDynamicFeature.Properties.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Properties createFromParcel(Parcel source) {
-                return new Properties(source);
-            }
+        public static final Parcelable.Creator<Properties> CREATOR =
+                new Parcelable.Creator<
+                        Properties>() { // from class:
+                                        // com.samsung.android.provider.SemDynamicFeature.Properties.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Properties createFromParcel(Parcel source) {
+                        return new Properties(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Properties[] newArray(int size) {
-                return new Properties[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Properties[] newArray(int size) {
+                        return new Properties[size];
+                    }
+                };
         public static final String PROPERTY_CARGO = "PROPERTY_CARGO";
         private ArrayList<Feature> features;
         private String mNamespace;

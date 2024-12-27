@@ -2,7 +2,9 @@ package com.android.server.display.mode;
 
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,7 +17,10 @@ public final class VotesStorage {
     public final SparseArray mVotesByDisplay = new SparseArray();
     public final VotesStatsReporter mVotesStatsReporter;
 
-    public VotesStorage(DisplayModeDirector$$ExternalSyntheticLambda0 displayModeDirector$$ExternalSyntheticLambda0, VotesStatsReporter votesStatsReporter) {
+    public VotesStorage(
+            DisplayModeDirector$$ExternalSyntheticLambda0
+                    displayModeDirector$$ExternalSyntheticLambda0,
+            VotesStatsReporter votesStatsReporter) {
         this.mListener = displayModeDirector$$ExternalSyntheticLambda0;
         this.mVotesStatsReporter = votesStatsReporter;
     }
@@ -26,7 +31,9 @@ public final class VotesStorage {
         synchronized (this.mStorageLock) {
             for (int i2 = 0; i2 < this.mVotesByDisplay.size(); i2++) {
                 try {
-                    sparseArray.put(this.mVotesByDisplay.keyAt(i2), ((SparseArray) this.mVotesByDisplay.valueAt(i2)).clone());
+                    sparseArray.put(
+                            this.mVotesByDisplay.keyAt(i2),
+                            ((SparseArray) this.mVotesByDisplay.valueAt(i2)).clone());
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -74,7 +81,8 @@ public final class VotesStorage {
             try {
                 this.mVotesByDisplay.clear();
                 for (int i = 0; i < sparseArray.size(); i++) {
-                    this.mVotesByDisplay.put(sparseArray.keyAt(i), (SparseArray) sparseArray.valueAt(i));
+                    this.mVotesByDisplay.put(
+                            sparseArray.keyAt(i), (SparseArray) sparseArray.valueAt(i));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -86,7 +94,9 @@ public final class VotesStorage {
         SparseArray sparseArray;
         boolean z;
         if (this.mLoggingEnabled) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "updateVoteLocked(displayId=", ", priority=");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "updateVoteLocked(displayId=", ", priority=");
             m.append(Vote.priorityToString(i2));
             m.append(", vote=");
             m.append(vote);
@@ -94,7 +104,12 @@ public final class VotesStorage {
             Slog.i("VotesStorage", m.toString());
         }
         if (i2 < 0 || i2 > 24) {
-            Slog.w("VotesStorage", "Received a vote with an invalid priority, ignoring: priority=" + Vote.priorityToString(i2) + ", vote=" + vote);
+            Slog.w(
+                    "VotesStorage",
+                    "Received a vote with an invalid priority, ignoring: priority="
+                            + Vote.priorityToString(i2)
+                            + ", vote="
+                            + vote);
             return;
         }
         synchronized (this.mStorageLock) {

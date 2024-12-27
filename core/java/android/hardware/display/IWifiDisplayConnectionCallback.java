@@ -5,11 +5,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IWifiDisplayConnectionCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.display.IWifiDisplayConnectionCallback";
+    public static final String DESCRIPTOR =
+            "android.hardware.display.IWifiDisplayConnectionCallback";
 
     void onFailure(int i) throws RemoteException;
 
@@ -17,12 +19,10 @@ public interface IWifiDisplayConnectionCallback extends IInterface {
 
     public static class Default implements IWifiDisplayConnectionCallback {
         @Override // android.hardware.display.IWifiDisplayConnectionCallback
-        public void onSuccess(List<SemWifiDisplayParameter> parameters) throws RemoteException {
-        }
+        public void onSuccess(List<SemWifiDisplayParameter> parameters) throws RemoteException {}
 
         @Override // android.hardware.display.IWifiDisplayConnectionCallback
-        public void onFailure(int reason) throws RemoteException {
-        }
+        public void onFailure(int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IWifiDisplayConnectionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWifiDisplayConnectionCallback {
+    public abstract static class Stub extends Binder implements IWifiDisplayConnectionCallback {
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -71,7 +71,8 @@ public interface IWifiDisplayConnectionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWifiDisplayConnectionCallback.DESCRIPTOR);
             }
@@ -81,7 +82,8 @@ public interface IWifiDisplayConnectionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<SemWifiDisplayParameter> _arg0 = data.createTypedArrayList(SemWifiDisplayParameter.CREATOR);
+                    List<SemWifiDisplayParameter> _arg0 =
+                            data.createTypedArrayList(SemWifiDisplayParameter.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;

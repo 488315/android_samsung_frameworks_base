@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import android.graphics.Point;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -46,7 +47,8 @@ public final /* synthetic */ class TaskFragment$$ExternalSyntheticLambda13 imple
                 int[] iArr = (int[]) this.f$0;
                 int[] iArr2 = (int[]) this.f$1;
                 ActivityRecord activityRecord = (ActivityRecord) obj;
-                if (!activityRecord.finishing && (minDimensions = activityRecord.getMinDimensions()) != null) {
+                if (!activityRecord.finishing
+                        && (minDimensions = activityRecord.getMinDimensions()) != null) {
                     iArr[0] = Math.max(iArr[0], minDimensions.x);
                     iArr2[0] = Math.max(iArr2[0], minDimensions.y);
                     break;

@@ -1,6 +1,7 @@
 package android.view.inputmethod;
 
 import android.os.RemoteException;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
@@ -9,7 +10,11 @@ public class InputMethodManagerGlobal {
         return IInputMethodManagerGlobalInvoker.isAvailable();
     }
 
-    public static void startProtoDump(byte[] protoDump, int source, String where, Consumer<RemoteException> exceptionHandler) {
+    public static void startProtoDump(
+            byte[] protoDump,
+            int source,
+            String where,
+            Consumer<RemoteException> exceptionHandler) {
         IInputMethodManagerGlobalInvoker.startProtoDump(protoDump, source, where, exceptionHandler);
     }
 

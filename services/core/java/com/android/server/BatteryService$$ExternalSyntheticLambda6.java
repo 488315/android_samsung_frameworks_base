@@ -7,8 +7,9 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.util.Slog;
-import com.android.server.BatteryService;
+
 import com.android.server.battery.BattUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -38,7 +39,8 @@ public final /* synthetic */ class BatteryService$$ExternalSyntheticLambda6 impl
                 }
                 Iterator it = batteryService.mChargingPolicyChangeListeners.iterator();
                 while (it.hasNext()) {
-                    ((BatteryManagerInternal.ChargingPolicyChangeListener) it.next()).onChargingPolicyChanged(i);
+                    ((BatteryManagerInternal.ChargingPolicyChangeListener) it.next())
+                            .onChargingPolicyChanged(i);
                 }
                 return;
             case 1:
@@ -50,7 +52,8 @@ public final /* synthetic */ class BatteryService$$ExternalSyntheticLambda6 impl
                 Intent intent = new Intent("android.intent.action.BATTERY_LEVEL_CHANGED");
                 intent.addFlags(16777216);
                 intent.putParcelableArrayListExtra("android.os.extra.EVENTS", arrayList);
-                batteryService2.mContext.sendBroadcastAsUser(intent, UserHandle.ALL, "android.permission.BATTERY_STATS");
+                batteryService2.mContext.sendBroadcastAsUser(
+                        intent, UserHandle.ALL, "android.permission.BATTERY_STATS");
                 batteryService2.mLastBatteryLevelChangedSentMs = SystemClock.elapsedRealtime();
                 return;
             default:
@@ -61,28 +64,53 @@ public final /* synthetic */ class BatteryService$$ExternalSyntheticLambda6 impl
                     return;
                 }
                 try {
-                    j = context.getSharedPreferences("battery_service_prefs", 0).getLong("shutdown_time", -1L);
-                    Slog.d("[SS]BattUtils", "[loadSharedPreferencesAsLong]preferenceName:battery_service_prefs ,key:shutdown_time ,value:" + j);
+                    j =
+                            context.getSharedPreferences("battery_service_prefs", 0)
+                                    .getLong("shutdown_time", -1L);
+                    Slog.d(
+                            "[SS]BattUtils",
+                            "[loadSharedPreferencesAsLong]preferenceName:battery_service_prefs"
+                                + " ,key:shutdown_time ,value:"
+                                    + j);
                 } catch (Exception e) {
                     Slog.e("[SS]BattUtils", "[loadSharedPreferencesAsLong]Exception");
                     e.printStackTrace();
                     j = -1;
                 }
-                BatteryService$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m("[processLongestPowerOffDuration]bootTime:", currentNetworkTimeMillis, " ,shutdownTime:"), j, "[SS]BattFunctions");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "[processLongestPowerOffDuration]bootTime:",
+                                currentNetworkTimeMillis,
+                                " ,shutdownTime:"),
+                        j,
+                        "[SS]BattFunctions");
                 if (j == -1) {
-                    Slog.w("[SS]BattFunctions", "[processLongestPowerOffDuration]Not Exist saved shutdownTime");
+                    Slog.w(
+                            "[SS]BattFunctions",
+                            "[processLongestPowerOffDuration]Not Exist saved shutdownTime");
                     return;
                 }
                 if (currentNetworkTimeMillis < j) {
-                    Slog.e("[SS]BattFunctions", "[processLongestPowerOffDuration]boot time is later than shutdontime");
+                    Slog.e(
+                            "[SS]BattFunctions",
+                            "[processLongestPowerOffDuration]boot time is later than shutdontime");
                     return;
                 }
                 long j2 = (currentNetworkTimeMillis - j) / 60000;
-                long readNodeAsLong = BattUtils.readNodeAsLong("/efs/FactoryApp/longest_power_off_duration");
-                BatteryService$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m("[processLongestPowerOffDuration]currentPowerOffDuration:", j2, " ,longestPowerOffDuration:"), readNodeAsLong, "[SS]BattFunctions");
+                long readNodeAsLong =
+                        BattUtils.readNodeAsLong("/efs/FactoryApp/longest_power_off_duration");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "[processLongestPowerOffDuration]currentPowerOffDuration:",
+                                j2,
+                                " ,longestPowerOffDuration:"),
+                        readNodeAsLong,
+                        "[SS]BattFunctions");
                 if (readNodeAsLong < j2) {
                     BattUtils.writeNode(j2, "/efs/FactoryApp/longest_power_off_duration");
-                    Slog.i("[SS]BattFunctions", "[processLongestPowerOffDuration]longestPowerOffDuration updated");
+                    Slog.i(
+                            "[SS]BattFunctions",
+                            "[processLongestPowerOffDuration]longestPowerOffDuration updated");
                 }
                 BattUtils.saveSharedPreferencesAsLong(context, -1L);
                 return;

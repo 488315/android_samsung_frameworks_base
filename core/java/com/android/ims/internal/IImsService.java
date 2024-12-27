@@ -14,13 +14,7 @@ import android.telephony.ims.aidl.IImsRcsFeature;
 import android.telephony.ims.aidl.IImsRegistration;
 import android.telephony.ims.aidl.IImsSmsListener;
 import android.telephony.ims.aidl.ISipTransport;
-import com.android.ims.internal.IImsCallSession;
-import com.android.ims.internal.IImsCallSessionListener;
-import com.android.ims.internal.IImsEcbm;
-import com.android.ims.internal.IImsMultiEndpoint;
-import com.android.ims.internal.IImsRegistrationListener;
-import com.android.ims.internal.IImsUt;
-import com.android.ims.internal.ISecImsMmTelEventListener;
+
 import com.android.internal.telephony.PublishDialog;
 
 /* loaded from: classes5.dex */
@@ -31,7 +25,8 @@ public interface IImsService extends IInterface {
 
     void acknowledgeSmsWithPdu(int i, int i2, int i3, byte[] bArr) throws RemoteException;
 
-    void addRegistrationListener(int i, int i2, IImsRegistrationListener iImsRegistrationListener) throws RemoteException;
+    void addRegistrationListener(int i, int i2, IImsRegistrationListener iImsRegistrationListener)
+            throws RemoteException;
 
     void changeAudioPath(int i, int i2) throws RemoteException;
 
@@ -39,7 +34,9 @@ public interface IImsService extends IInterface {
 
     ImsCallProfile createCallProfile(int i, int i2, int i3) throws RemoteException;
 
-    IImsCallSession createCallSession(int i, ImsCallProfile imsCallProfile, IImsCallSessionListener iImsCallSessionListener) throws RemoteException;
+    IImsCallSession createCallSession(
+            int i, ImsCallProfile imsCallProfile, IImsCallSessionListener iImsCallSessionListener)
+            throws RemoteException;
 
     android.telephony.ims.aidl.IImsRcsFeature createRcsFeature(int i) throws RemoteException;
 
@@ -75,7 +72,12 @@ public interface IImsService extends IInterface {
 
     void onSmsReady(int i) throws RemoteException;
 
-    int open(int i, int i2, PendingIntent pendingIntent, IImsRegistrationListener iImsRegistrationListener) throws RemoteException;
+    int open(
+            int i,
+            int i2,
+            PendingIntent pendingIntent,
+            IImsRegistrationListener iImsRegistrationListener)
+            throws RemoteException;
 
     boolean queryCapabilityConfiguration(int i, int i2, int i3) throws RemoteException;
 
@@ -87,13 +89,16 @@ public interface IImsService extends IInterface {
 
     void sendPublishDialog(int i, PublishDialog publishDialog) throws RemoteException;
 
-    void sendSms(int i, int i2, int i3, String str, String str2, boolean z, byte[] bArr) throws RemoteException;
+    void sendSms(int i, int i2, int i3, String str, String str2, boolean z, byte[] bArr)
+            throws RemoteException;
 
-    void setRegistrationListener(int i, IImsRegistrationListener iImsRegistrationListener) throws RemoteException;
+    void setRegistrationListener(int i, IImsRegistrationListener iImsRegistrationListener)
+            throws RemoteException;
 
     void setRetryCount(int i, int i2, int i3) throws RemoteException;
 
-    void setSecImsMmTelEventListener(int i, ISecImsMmTelEventListener iSecImsMmTelEventListener) throws RemoteException;
+    void setSecImsMmTelEventListener(int i, ISecImsMmTelEventListener iSecImsMmTelEventListener)
+            throws RemoteException;
 
     void setSmsListener(int i, IImsSmsListener iImsSmsListener) throws RemoteException;
 
@@ -117,16 +122,21 @@ public interface IImsService extends IInterface {
 
     public static class Default implements IImsService {
         @Override // com.android.ims.internal.IImsService
-        public int open(int phoneId, int serviceClass, PendingIntent incomingCallIntent, IImsRegistrationListener listener) throws RemoteException {
+        public int open(
+                int phoneId,
+                int serviceClass,
+                PendingIntent incomingCallIntent,
+                IImsRegistrationListener listener)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void close(int serviceId) throws RemoteException {
-        }
+        public void close(int serviceId) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public boolean isConnected(int serviceId, int serviceType, int callType) throws RemoteException {
+        public boolean isConnected(int serviceId, int serviceType, int callType)
+                throws RemoteException {
             return false;
         }
 
@@ -136,25 +146,30 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void setRegistrationListener(int serviceId, IImsRegistrationListener listener) throws RemoteException {
-        }
+        public void setRegistrationListener(int serviceId, IImsRegistrationListener listener)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void addRegistrationListener(int phoneId, int serviceClass, IImsRegistrationListener listener) throws RemoteException {
-        }
+        public void addRegistrationListener(
+                int phoneId, int serviceClass, IImsRegistrationListener listener)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public ImsCallProfile createCallProfile(int serviceId, int serviceType, int callType) throws RemoteException {
+        public ImsCallProfile createCallProfile(int serviceId, int serviceType, int callType)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.IImsService
-        public IImsCallSession createCallSession(int serviceId, ImsCallProfile profile, IImsCallSessionListener listener) throws RemoteException {
+        public IImsCallSession createCallSession(
+                int serviceId, ImsCallProfile profile, IImsCallSessionListener listener)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.IImsService
-        public IImsCallSession getPendingCallSession(int serviceId, String callId) throws RemoteException {
+        public IImsCallSession getPendingCallSession(int serviceId, String callId)
+                throws RemoteException {
             return null;
         }
 
@@ -169,12 +184,10 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void turnOnIms(int phoneId) throws RemoteException {
-        }
+        public void turnOnIms(int phoneId) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void turnOffIms(int phoneId) throws RemoteException {
-        }
+        public void turnOffIms(int phoneId) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
         public IImsEcbm getEcbmInterface(int serviceId) throws RemoteException {
@@ -182,8 +195,8 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void setUiTTYMode(int serviceId, int uiTtyMode, Message onComplete) throws RemoteException {
-        }
+        public void setUiTTYMode(int serviceId, int uiTtyMode, Message onComplete)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
         public IImsMultiEndpoint getMultiEndpointInterface(int serviceId) throws RemoteException {
@@ -196,11 +209,11 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void changeAudioPath(int phoneId, int direction) throws RemoteException {
-        }
+        public void changeAudioPath(int phoneId, int direction) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public int startLocalRingBackTone(int streamType, int volume, int toneType) throws RemoteException {
+        public int startLocalRingBackTone(int streamType, int volume, int toneType)
+                throws RemoteException {
             return 0;
         }
 
@@ -210,12 +223,10 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void setVideoCrtAudio(int phoneId, boolean on) throws RemoteException {
-        }
+        public void setVideoCrtAudio(int phoneId, boolean on) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void sendDtmfEvent(int phoneId, String dtmfEvent) throws RemoteException {
-        }
+        public void sendDtmfEvent(int phoneId, String dtmfEvent) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
         public String getTrn(String srcMsisdn, String dstMsisdn) throws RemoteException {
@@ -223,8 +234,8 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void sendPublishDialog(int phoneId, PublishDialog publishDialog) throws RemoteException {
-        }
+        public void sendPublishDialog(int phoneId, PublishDialog publishDialog)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
         public boolean isCmcEmergencyCallSupported(int phoneId) throws RemoteException {
@@ -232,16 +243,13 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void triggerAutoConfigurationForApp(int phoneId) throws RemoteException {
-        }
+        public void triggerAutoConfigurationForApp(int phoneId) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void setTtyMode(int phoneId, int mode) throws RemoteException {
-        }
+        public void setTtyMode(int phoneId, int mode) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void notifyEpsFallbackResult(int phoneId, int result) throws RemoteException {
-        }
+        public void notifyEpsFallbackResult(int phoneId, int result) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
         public int getE911CallCount(int phoneId) throws RemoteException {
@@ -249,40 +257,42 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void setSecImsMmTelEventListener(int phoneId, ISecImsMmTelEventListener listener) throws RemoteException {
-        }
+        public void setSecImsMmTelEventListener(int phoneId, ISecImsMmTelEventListener listener)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void sendSms(int phoneId, int token, int messageRef, String format, String smsc, boolean isRetry, byte[] pdu) throws RemoteException {
-        }
+        public void sendSms(
+                int phoneId,
+                int token,
+                int messageRef,
+                String format,
+                String smsc,
+                boolean isRetry,
+                byte[] pdu)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void setRetryCount(int phoneId, int token, int retryCount) throws RemoteException {
-        }
+        public void setRetryCount(int phoneId, int token, int retryCount) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void onMemoryAvailable(int phoneId, int token) throws RemoteException {
-        }
+        public void onMemoryAvailable(int phoneId, int token) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void setSmsc(int phoneId, String smsc) throws RemoteException {
-        }
+        public void setSmsc(int phoneId, String smsc) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void acknowledgeSms(int phoneId, int token, int messageRef, int result) throws RemoteException {
-        }
+        public void acknowledgeSms(int phoneId, int token, int messageRef, int result)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void acknowledgeSmsReport(int phoneId, int token, int messageRef, int result) throws RemoteException {
-        }
+        public void acknowledgeSmsReport(int phoneId, int token, int messageRef, int result)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void setSmsListener(int phoneId, IImsSmsListener listener) throws RemoteException {
-        }
+        public void setSmsListener(int phoneId, IImsSmsListener listener) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public void onSmsReady(int phoneId) throws RemoteException {
-        }
+        public void onSmsReady(int phoneId) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
         public String getSmsFormat(int phoneId) throws RemoteException {
@@ -290,22 +300,23 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void acknowledgeSmsWithPdu(int phoneId, int token, int messageRef, byte[] data) throws RemoteException {
-        }
+        public void acknowledgeSmsWithPdu(int phoneId, int token, int messageRef, byte[] data)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
-        public boolean queryCapabilityConfiguration(int capability, int radioTech, int slotId) throws RemoteException {
+        public boolean queryCapabilityConfiguration(int capability, int radioTech, int slotId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.ims.internal.IImsService
-        public android.telephony.ims.aidl.IImsRcsFeature createRcsFeature(int slotId) throws RemoteException {
+        public android.telephony.ims.aidl.IImsRcsFeature createRcsFeature(int slotId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void removeImsFeature(int slotId, int featureType) throws RemoteException {
-        }
+        public void removeImsFeature(int slotId, int featureType) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsService
         public ISipTransport getSipTransport(int phoneId) throws RemoteException {
@@ -313,8 +324,7 @@ public interface IImsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsService
-        public void sendMmsProcType(int phoneId, boolean enable) throws RemoteException {
-        }
+        public void sendMmsProcType(int phoneId, boolean enable) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -322,7 +332,7 @@ public interface IImsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsService {
+    public abstract static class Stub extends Binder implements IImsService {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsService";
         static final int TRANSACTION_acknowledgeSms = 35;
         static final int TRANSACTION_acknowledgeSmsReport = 36;
@@ -493,7 +503,8 @@ public interface IImsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -505,8 +516,10 @@ public interface IImsService extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    PendingIntent _arg2 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    IImsRegistrationListener _arg3 = IImsRegistrationListener.Stub.asInterface(data.readStrongBinder());
+                    PendingIntent _arg2 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    IImsRegistrationListener _arg3 =
+                            IImsRegistrationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result = open(_arg0, _arg1, _arg2, _arg3);
                     reply.writeNoException();
@@ -536,7 +549,8 @@ public interface IImsService extends IInterface {
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    IImsRegistrationListener _arg13 = IImsRegistrationListener.Stub.asInterface(data.readStrongBinder());
+                    IImsRegistrationListener _arg13 =
+                            IImsRegistrationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setRegistrationListener(_arg05, _arg13);
                     reply.writeNoException();
@@ -544,7 +558,8 @@ public interface IImsService extends IInterface {
                 case 6:
                     int _arg06 = data.readInt();
                     int _arg14 = data.readInt();
-                    IImsRegistrationListener _arg23 = IImsRegistrationListener.Stub.asInterface(data.readStrongBinder());
+                    IImsRegistrationListener _arg23 =
+                            IImsRegistrationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addRegistrationListener(_arg06, _arg14, _arg23);
                     reply.writeNoException();
@@ -560,8 +575,10 @@ public interface IImsService extends IInterface {
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    ImsCallProfile _arg16 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
-                    IImsCallSessionListener _arg25 = IImsCallSessionListener.Stub.asInterface(data.readStrongBinder());
+                    ImsCallProfile _arg16 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    IImsCallSessionListener _arg25 =
+                            IImsCallSessionListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     IImsCallSession _result5 = createCallSession(_arg08, _arg16, _arg25);
                     reply.writeNoException();
@@ -675,7 +692,8 @@ public interface IImsService extends IInterface {
                     return true;
                 case 24:
                     int _arg023 = data.readInt();
-                    PublishDialog _arg114 = (PublishDialog) data.readTypedObject(PublishDialog.CREATOR);
+                    PublishDialog _arg114 =
+                            (PublishDialog) data.readTypedObject(PublishDialog.CREATOR);
                     data.enforceNoDataAvail();
                     sendPublishDialog(_arg023, _arg114);
                     reply.writeNoException();
@@ -716,7 +734,8 @@ public interface IImsService extends IInterface {
                     return true;
                 case 30:
                     int _arg029 = data.readInt();
-                    ISecImsMmTelEventListener _arg117 = ISecImsMmTelEventListener.Stub.asInterface(data.readStrongBinder());
+                    ISecImsMmTelEventListener _arg117 =
+                            ISecImsMmTelEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setSecImsMmTelEventListener(_arg029, _arg117);
                     reply.writeNoException();
@@ -775,7 +794,8 @@ public interface IImsService extends IInterface {
                     return true;
                 case 37:
                     int _arg036 = data.readInt();
-                    IImsSmsListener _arg124 = IImsSmsListener.Stub.asInterface(data.readStrongBinder());
+                    IImsSmsListener _arg124 =
+                            IImsSmsListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setSmsListener(_arg036, _arg124);
                     reply.writeNoException();
@@ -861,7 +881,12 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public int open(int phoneId, int serviceClass, PendingIntent incomingCallIntent, IImsRegistrationListener listener) throws RemoteException {
+            public int open(
+                    int phoneId,
+                    int serviceClass,
+                    PendingIntent incomingCallIntent,
+                    IImsRegistrationListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -896,7 +921,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public boolean isConnected(int serviceId, int serviceType, int callType) throws RemoteException {
+            public boolean isConnected(int serviceId, int serviceType, int callType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -932,7 +958,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void setRegistrationListener(int serviceId, IImsRegistrationListener listener) throws RemoteException {
+            public void setRegistrationListener(int serviceId, IImsRegistrationListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -948,7 +975,9 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void addRegistrationListener(int phoneId, int serviceClass, IImsRegistrationListener listener) throws RemoteException {
+            public void addRegistrationListener(
+                    int phoneId, int serviceClass, IImsRegistrationListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -965,7 +994,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public ImsCallProfile createCallProfile(int serviceId, int serviceType, int callType) throws RemoteException {
+            public ImsCallProfile createCallProfile(int serviceId, int serviceType, int callType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -975,7 +1005,8 @@ public interface IImsService extends IInterface {
                     _data.writeInt(callType);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    ImsCallProfile _result = (ImsCallProfile) _reply.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _result =
+                            (ImsCallProfile) _reply.readTypedObject(ImsCallProfile.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -984,7 +1015,9 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public IImsCallSession createCallSession(int serviceId, ImsCallProfile profile, IImsCallSessionListener listener) throws RemoteException {
+            public IImsCallSession createCallSession(
+                    int serviceId, ImsCallProfile profile, IImsCallSessionListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -994,7 +1027,8 @@ public interface IImsService extends IInterface {
                     _data.writeStrongInterface(listener);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    IImsCallSession _result = IImsCallSession.Stub.asInterface(_reply.readStrongBinder());
+                    IImsCallSession _result =
+                            IImsCallSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1003,7 +1037,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public IImsCallSession getPendingCallSession(int serviceId, String callId) throws RemoteException {
+            public IImsCallSession getPendingCallSession(int serviceId, String callId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1012,7 +1047,8 @@ public interface IImsService extends IInterface {
                     _data.writeString(callId);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    IImsCallSession _result = IImsCallSession.Stub.asInterface(_reply.readStrongBinder());
+                    IImsCallSession _result =
+                            IImsCallSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1038,7 +1074,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public android.telephony.ims.aidl.IImsConfig getConfig(int slotId) throws RemoteException {
+            public android.telephony.ims.aidl.IImsConfig getConfig(int slotId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1046,7 +1083,8 @@ public interface IImsService extends IInterface {
                     _data.writeInt(slotId);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    android.telephony.ims.aidl.IImsConfig _result = IImsConfig.Stub.asInterface(_reply.readStrongBinder());
+                    android.telephony.ims.aidl.IImsConfig _result =
+                            IImsConfig.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1102,7 +1140,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void setUiTTYMode(int serviceId, int uiTtyMode, Message onComplete) throws RemoteException {
+            public void setUiTTYMode(int serviceId, int uiTtyMode, Message onComplete)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1119,7 +1158,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public IImsMultiEndpoint getMultiEndpointInterface(int serviceId) throws RemoteException {
+            public IImsMultiEndpoint getMultiEndpointInterface(int serviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1127,7 +1167,8 @@ public interface IImsService extends IInterface {
                     _data.writeInt(serviceId);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    IImsMultiEndpoint _result = IImsMultiEndpoint.Stub.asInterface(_reply.readStrongBinder());
+                    IImsMultiEndpoint _result =
+                            IImsMultiEndpoint.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1144,7 +1185,8 @@ public interface IImsService extends IInterface {
                     _data.writeInt(slotId);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    IImsRegistration _result = IImsRegistration.Stub.asInterface(_reply.readStrongBinder());
+                    IImsRegistration _result =
+                            IImsRegistration.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1169,7 +1211,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public int startLocalRingBackTone(int streamType, int volume, int toneType) throws RemoteException {
+            public int startLocalRingBackTone(int streamType, int volume, int toneType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1254,7 +1297,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void sendPublishDialog(int phoneId, PublishDialog publishDialog) throws RemoteException {
+            public void sendPublishDialog(int phoneId, PublishDialog publishDialog)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1351,7 +1395,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void setSecImsMmTelEventListener(int phoneId, ISecImsMmTelEventListener listener) throws RemoteException {
+            public void setSecImsMmTelEventListener(int phoneId, ISecImsMmTelEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1367,7 +1412,15 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void sendSms(int phoneId, int token, int messageRef, String format, String smsc, boolean isRetry, byte[] pdu) throws RemoteException {
+            public void sendSms(
+                    int phoneId,
+                    int token,
+                    int messageRef,
+                    String format,
+                    String smsc,
+                    boolean isRetry,
+                    byte[] pdu)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1388,7 +1441,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void setRetryCount(int phoneId, int token, int retryCount) throws RemoteException {
+            public void setRetryCount(int phoneId, int token, int retryCount)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1437,7 +1491,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void acknowledgeSms(int phoneId, int token, int messageRef, int result) throws RemoteException {
+            public void acknowledgeSms(int phoneId, int token, int messageRef, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1455,7 +1510,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void acknowledgeSmsReport(int phoneId, int token, int messageRef, int result) throws RemoteException {
+            public void acknowledgeSmsReport(int phoneId, int token, int messageRef, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1473,7 +1529,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void setSmsListener(int phoneId, IImsSmsListener listener) throws RemoteException {
+            public void setSmsListener(int phoneId, IImsSmsListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1521,7 +1578,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public void acknowledgeSmsWithPdu(int phoneId, int token, int messageRef, byte[] data) throws RemoteException {
+            public void acknowledgeSmsWithPdu(int phoneId, int token, int messageRef, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1539,7 +1597,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public boolean queryCapabilityConfiguration(int capability, int radioTech, int slotId) throws RemoteException {
+            public boolean queryCapabilityConfiguration(int capability, int radioTech, int slotId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1558,7 +1617,8 @@ public interface IImsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsService
-            public android.telephony.ims.aidl.IImsRcsFeature createRcsFeature(int slotId) throws RemoteException {
+            public android.telephony.ims.aidl.IImsRcsFeature createRcsFeature(int slotId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1566,7 +1626,8 @@ public interface IImsService extends IInterface {
                     _data.writeInt(slotId);
                     this.mRemote.transact(42, _data, _reply, 0);
                     _reply.readException();
-                    android.telephony.ims.aidl.IImsRcsFeature _result = IImsRcsFeature.Stub.asInterface(_reply.readStrongBinder());
+                    android.telephony.ims.aidl.IImsRcsFeature _result =
+                            IImsRcsFeature.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1599,7 +1660,8 @@ public interface IImsService extends IInterface {
                     _data.writeInt(phoneId);
                     this.mRemote.transact(44, _data, _reply, 0);
                     _reply.readException();
-                    ISipTransport _result = ISipTransport.Stub.asInterface(_reply.readStrongBinder());
+                    ISipTransport _result =
+                            ISipTransport.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

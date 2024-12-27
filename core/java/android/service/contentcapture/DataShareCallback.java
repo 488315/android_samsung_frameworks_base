@@ -1,6 +1,7 @@
 package android.service.contentcapture;
 
 import android.annotation.SystemApi;
+
 import java.util.concurrent.Executor;
 
 @SystemApi

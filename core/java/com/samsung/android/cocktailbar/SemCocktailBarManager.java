@@ -8,8 +8,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.widget.RemoteViews;
-import com.samsung.android.cocktailbar.CocktailInfo;
-import com.samsung.android.cocktailbar.ICocktailBarService;
+
 import com.samsung.android.util.SemLog;
 
 /* loaded from: classes5.dex */
@@ -18,21 +17,16 @@ public class SemCocktailBarManager {
     public static final int COCKTAIL_CATEGORY_GLOBAL = 1;
     public static final int COCKTAIL_CATEGORY_SECURE = 16;
 
-    @Deprecated
-    public static final int COCKTAIL_DISPLAY_POLICY_ALL = 143;
+    @Deprecated public static final int COCKTAIL_DISPLAY_POLICY_ALL = 143;
     public static final int COCKTAIL_DISPLAY_POLICY_GENERAL = 1;
 
-    @Deprecated
-    public static final int COCKTAIL_DISPLAY_POLICY_LOCKSCREEN = 2;
+    @Deprecated public static final int COCKTAIL_DISPLAY_POLICY_LOCKSCREEN = 2;
 
-    @Deprecated
-    public static final int COCKTAIL_DISPLAY_POLICY_NOT_PROVISION = 128;
+    @Deprecated public static final int COCKTAIL_DISPLAY_POLICY_NOT_PROVISION = 128;
 
-    @Deprecated
-    public static final int COCKTAIL_DISPLAY_POLICY_SCOVER = 4;
+    @Deprecated public static final int COCKTAIL_DISPLAY_POLICY_SCOVER = 4;
 
-    @Deprecated
-    public static final int COCKTAIL_DISPLAY_POLICY_TABLE_MODE = 8;
+    @Deprecated public static final int COCKTAIL_DISPLAY_POLICY_TABLE_MODE = 8;
     public static final int COCKTAIL_VISIBILITY_HIDE = 2;
     public static final int COCKTAIL_VISIBILITY_SHOW = 1;
     public static final int INVALID_COCKTAIL_ID = 0;
@@ -101,21 +95,39 @@ public class SemCocktailBarManager {
         }
     }
 
-    public void updateCocktail(int cocktailId, int displayPolicy, int category, RemoteViews contentView, RemoteViews helpView) {
+    public void updateCocktail(
+            int cocktailId,
+            int displayPolicy,
+            int category,
+            RemoteViews contentView,
+            RemoteViews helpView) {
         if (getService() == null) {
             SemLog.w(TAG, "updateCocktail : service is not running " + cocktailId);
             return;
         }
         Configuration configuration = this.mContext.getResources().getConfiguration();
         try {
-            CocktailInfo cocktailInfo = new CocktailInfo.Builder(this.mContext).setOrientation(configuration.orientation).setDiplayPolicy(displayPolicy).setCategory(category).setContentView(contentView).setHelpView(helpView).build();
+            CocktailInfo cocktailInfo =
+                    new CocktailInfo.Builder(this.mContext)
+                            .setOrientation(configuration.orientation)
+                            .setDiplayPolicy(displayPolicy)
+                            .setCategory(category)
+                            .setContentView(contentView)
+                            .setHelpView(helpView)
+                            .build();
             this.mService.updateCocktail(this.mPackageName, cocktailInfo, cocktailId);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);
         }
     }
 
-    public void updateCocktail(int cocktailId, int displayPolicy, int category, Class<? extends SemAbsCocktailLoadablePanel> panelClass, Bundle contentInfo, RemoteViews helpView) {
+    public void updateCocktail(
+            int cocktailId,
+            int displayPolicy,
+            int category,
+            Class<? extends SemAbsCocktailLoadablePanel> panelClass,
+            Bundle contentInfo,
+            RemoteViews helpView) {
         if (getService() == null) {
             SemLog.w(TAG, "updateCocktail : service is not running " + cocktailId);
             return;
@@ -123,7 +135,15 @@ public class SemCocktailBarManager {
         ComponentName classInfo = new ComponentName(getContext(), panelClass);
         Configuration configuration = this.mContext.getResources().getConfiguration();
         try {
-            CocktailInfo cocktailInfo = new CocktailInfo.Builder(this.mContext).setOrientation(configuration.orientation).setDiplayPolicy(displayPolicy).setCategory(category).setHelpView(helpView).setContentInfo(contentInfo).setClassloader(classInfo).build();
+            CocktailInfo cocktailInfo =
+                    new CocktailInfo.Builder(this.mContext)
+                            .setOrientation(configuration.orientation)
+                            .setDiplayPolicy(displayPolicy)
+                            .setCategory(category)
+                            .setHelpView(helpView)
+                            .setContentInfo(contentInfo)
+                            .setClassloader(classInfo)
+                            .build();
             this.mService.updateCocktail(this.mPackageName, cocktailInfo, cocktailId);
         } catch (RemoteException e) {
             throw new RuntimeException("CocktailBarService dead?", e);

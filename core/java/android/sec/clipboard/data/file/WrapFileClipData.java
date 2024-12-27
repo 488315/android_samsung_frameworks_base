@@ -4,10 +4,12 @@ import android.sec.clipboard.util.CompatabilityHelper;
 import android.sec.clipboard.util.FileHelper;
 import android.sec.clipboard.util.Log;
 import android.text.TextUtils;
+
 import com.samsung.android.content.clipboard.data.SemClipData;
 import com.samsung.android.content.clipboard.data.SemHtmlClipData;
 import com.samsung.android.content.clipboard.data.SemImageClipData;
 import com.samsung.android.content.clipboard.data.SemTextClipData;
+
 import java.io.File;
 import java.io.Serializable;
 
@@ -77,9 +79,18 @@ public class WrapFileClipData implements Serializable {
     }
 
     private Object loadData() {
-        if (this.mPath != null && this.mPath.getAbsolutePath().contains(CompatabilityHelper.OLD_CLIPBOARD_ROOT_PATH)) {
-            this.mPath = new File(CompatabilityHelper.replacePathForCompatability(this.mPath.getAbsolutePath()));
-            this.mDir = new File(CompatabilityHelper.replacePathForCompatability(this.mDir.getAbsolutePath()));
+        if (this.mPath != null
+                && this.mPath
+                        .getAbsolutePath()
+                        .contains(CompatabilityHelper.OLD_CLIPBOARD_ROOT_PATH)) {
+            this.mPath =
+                    new File(
+                            CompatabilityHelper.replacePathForCompatability(
+                                    this.mPath.getAbsolutePath()));
+            this.mDir =
+                    new File(
+                            CompatabilityHelper.replacePathForCompatability(
+                                    this.mDir.getAbsolutePath()));
         }
         return FileHelper.getInstance().loadObjectFile(this.mPath);
     }

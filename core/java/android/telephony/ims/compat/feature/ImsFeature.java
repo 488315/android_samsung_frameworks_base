@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.IInterface;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.ims.internal.IImsFeatureStatusCallback;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -24,13 +26,13 @@ public abstract class ImsFeature {
     public static final int STATE_NOT_AVAILABLE = 0;
     public static final int STATE_READY = 2;
     protected Context mContext;
-    private final Set<IImsFeatureStatusCallback> mStatusCallbacks = Collections.newSetFromMap(new WeakHashMap());
+    private final Set<IImsFeatureStatusCallback> mStatusCallbacks =
+            Collections.newSetFromMap(new WeakHashMap());
     private int mState = 0;
     private int mSlotId = -1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsState {
-    }
+    public @interface ImsState {}
 
     public abstract IInterface getBinder();
 

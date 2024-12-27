@@ -10,15 +10,13 @@ public final class AppErrorsProto {
         public static final long ENTRIES = 2246267895810L;
         public static final long PROCESS_NAME = 1138166333441L;
 
-        public ProcessCrashTime() {
-        }
+        public ProcessCrashTime() {}
 
         public final class Entry {
             public static final long LAST_CRASHED_AT_MS = 1112396529666L;
             public static final long UID = 1120986464257L;
 
-            public Entry() {
-            }
+            public Entry() {}
         }
     }
 
@@ -26,8 +24,7 @@ public final class AppErrorsProto {
         public static final long ENTRIES = 2246267895810L;
         public static final long PROCESS_NAME = 1138166333441L;
 
-        public BadProcess() {
-        }
+        public BadProcess() {}
 
         public final class Entry {
             public static final long CRASHED_AT_MS = 1112396529666L;
@@ -36,8 +33,7 @@ public final class AppErrorsProto {
             public static final long STACK = 1138166333445L;
             public static final long UID = 1120986464257L;
 
-            public Entry() {
-            }
+            public Entry() {}
         }
     }
 }

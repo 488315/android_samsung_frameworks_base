@@ -16,12 +16,10 @@ public interface IImsStateCallback extends IInterface {
 
     public static class Default implements IImsStateCallback {
         @Override // com.android.internal.telephony.IImsStateCallback
-        public void onUnavailable(int reason) throws RemoteException {
-        }
+        public void onUnavailable(int reason) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IImsStateCallback
-        public void onAvailable() throws RemoteException {
-        }
+        public void onAvailable() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IImsStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsStateCallback {
+    public abstract static class Stub extends Binder implements IImsStateCallback {
         static final int TRANSACTION_onAvailable = 2;
         static final int TRANSACTION_onUnavailable = 1;
 
@@ -70,7 +68,8 @@ public interface IImsStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsStateCallback.DESCRIPTOR);
             }

@@ -6,26 +6,31 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.DelegateRequest;
-import android.telephony.ims.aidl.ISipDelegate;
-import android.telephony.ims.aidl.ISipDelegateMessageCallback;
-import android.telephony.ims.aidl.ISipDelegateStateCallback;
 
 /* loaded from: classes4.dex */
 public interface ISipTransport extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.ISipTransport";
 
-    void createSipDelegate(int i, DelegateRequest delegateRequest, ISipDelegateStateCallback iSipDelegateStateCallback, ISipDelegateMessageCallback iSipDelegateMessageCallback) throws RemoteException;
+    void createSipDelegate(
+            int i,
+            DelegateRequest delegateRequest,
+            ISipDelegateStateCallback iSipDelegateStateCallback,
+            ISipDelegateMessageCallback iSipDelegateMessageCallback)
+            throws RemoteException;
 
     void destroySipDelegate(ISipDelegate iSipDelegate, int i) throws RemoteException;
 
     public static class Default implements ISipTransport {
         @Override // android.telephony.ims.aidl.ISipTransport
-        public void createSipDelegate(int subId, DelegateRequest request, ISipDelegateStateCallback dc, ISipDelegateMessageCallback mc) throws RemoteException {
-        }
+        public void createSipDelegate(
+                int subId,
+                DelegateRequest request,
+                ISipDelegateStateCallback dc,
+                ISipDelegateMessageCallback mc)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipTransport
-        public void destroySipDelegate(ISipDelegate delegate, int reason) throws RemoteException {
-        }
+        public void destroySipDelegate(ISipDelegate delegate, int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +38,7 @@ public interface ISipTransport extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISipTransport {
+    public abstract static class Stub extends Binder implements ISipTransport {
         static final int TRANSACTION_createSipDelegate = 1;
         static final int TRANSACTION_destroySipDelegate = 2;
 
@@ -74,7 +79,8 @@ public interface ISipTransport extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISipTransport.DESCRIPTOR);
             }
@@ -85,9 +91,12 @@ public interface ISipTransport extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    DelegateRequest _arg1 = (DelegateRequest) data.readTypedObject(DelegateRequest.CREATOR);
-                    ISipDelegateStateCallback _arg2 = ISipDelegateStateCallback.Stub.asInterface(data.readStrongBinder());
-                    ISipDelegateMessageCallback _arg3 = ISipDelegateMessageCallback.Stub.asInterface(data.readStrongBinder());
+                    DelegateRequest _arg1 =
+                            (DelegateRequest) data.readTypedObject(DelegateRequest.CREATOR);
+                    ISipDelegateStateCallback _arg2 =
+                            ISipDelegateStateCallback.Stub.asInterface(data.readStrongBinder());
+                    ISipDelegateMessageCallback _arg3 =
+                            ISipDelegateMessageCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     createSipDelegate(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -119,7 +128,12 @@ public interface ISipTransport extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipTransport
-            public void createSipDelegate(int subId, DelegateRequest request, ISipDelegateStateCallback dc, ISipDelegateMessageCallback mc) throws RemoteException {
+            public void createSipDelegate(
+                    int subId,
+                    DelegateRequest request,
+                    ISipDelegateStateCallback dc,
+                    ISipDelegateMessageCallback mc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipTransport.DESCRIPTOR);
@@ -134,7 +148,8 @@ public interface ISipTransport extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipTransport
-            public void destroySipDelegate(ISipDelegate delegate, int reason) throws RemoteException {
+            public void destroySipDelegate(ISipDelegate delegate, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipTransport.DESCRIPTOR);

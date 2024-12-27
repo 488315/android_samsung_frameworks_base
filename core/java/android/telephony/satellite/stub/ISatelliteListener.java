@@ -16,9 +16,11 @@ public interface ISatelliteListener extends IInterface {
 
     void onRegistrationFailure(int i) throws RemoteException;
 
-    void onSatelliteCapabilitiesChanged(SatelliteCapabilities satelliteCapabilities) throws RemoteException;
+    void onSatelliteCapabilitiesChanged(SatelliteCapabilities satelliteCapabilities)
+            throws RemoteException;
 
-    void onSatelliteDatagramReceived(SatelliteDatagram satelliteDatagram, int i) throws RemoteException;
+    void onSatelliteDatagramReceived(SatelliteDatagram satelliteDatagram, int i)
+            throws RemoteException;
 
     void onSatelliteModemStateChanged(int i) throws RemoteException;
 
@@ -32,44 +34,38 @@ public interface ISatelliteListener extends IInterface {
 
     public static class Default implements ISatelliteListener {
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onSatelliteProvisionStateChanged(boolean provisioned) throws RemoteException {
-        }
+        public void onSatelliteProvisionStateChanged(boolean provisioned) throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onSatelliteDatagramReceived(SatelliteDatagram datagram, int pendingCount) throws RemoteException {
-        }
+        public void onSatelliteDatagramReceived(SatelliteDatagram datagram, int pendingCount)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onPendingDatagrams() throws RemoteException {
-        }
+        public void onPendingDatagrams() throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onSatellitePositionChanged(PointingInfo pointingInfo) throws RemoteException {
-        }
+        public void onSatellitePositionChanged(PointingInfo pointingInfo) throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onSatelliteModemStateChanged(int state) throws RemoteException {
-        }
+        public void onSatelliteModemStateChanged(int state) throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException {
-        }
+        public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onSatelliteCapabilitiesChanged(SatelliteCapabilities capabilities) throws RemoteException {
-        }
+        public void onSatelliteCapabilitiesChanged(SatelliteCapabilities capabilities)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onSatelliteSupportedStateChanged(boolean supported) throws RemoteException {
-        }
+        public void onSatelliteSupportedStateChanged(boolean supported) throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onRegistrationFailure(int causeCode) throws RemoteException {
-        }
+        public void onRegistrationFailure(int causeCode) throws RemoteException {}
 
         @Override // android.telephony.satellite.stub.ISatelliteListener
-        public void onTerrestrialNetworkAvailableChanged(boolean isAvailable) throws RemoteException {
-        }
+        public void onTerrestrialNetworkAvailableChanged(boolean isAvailable)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -77,7 +73,7 @@ public interface ISatelliteListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteListener {
+    public abstract static class Stub extends Binder implements ISatelliteListener {
         static final int TRANSACTION_onNtnSignalStrengthChanged = 6;
         static final int TRANSACTION_onPendingDatagrams = 3;
         static final int TRANSACTION_onRegistrationFailure = 9;
@@ -142,7 +138,8 @@ public interface ISatelliteListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteListener.DESCRIPTOR);
             }
@@ -157,7 +154,8 @@ public interface ISatelliteListener extends IInterface {
                     onSatelliteProvisionStateChanged(_arg0);
                     return true;
                 case 2:
-                    SatelliteDatagram _arg02 = (SatelliteDatagram) data.readTypedObject(SatelliteDatagram.CREATOR);
+                    SatelliteDatagram _arg02 =
+                            (SatelliteDatagram) data.readTypedObject(SatelliteDatagram.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     onSatelliteDatagramReceived(_arg02, _arg1);
@@ -176,12 +174,15 @@ public interface ISatelliteListener extends IInterface {
                     onSatelliteModemStateChanged(_arg04);
                     return true;
                 case 6:
-                    NtnSignalStrength _arg05 = (NtnSignalStrength) data.readTypedObject(NtnSignalStrength.CREATOR);
+                    NtnSignalStrength _arg05 =
+                            (NtnSignalStrength) data.readTypedObject(NtnSignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     onNtnSignalStrengthChanged(_arg05);
                     return true;
                 case 7:
-                    SatelliteCapabilities _arg06 = (SatelliteCapabilities) data.readTypedObject(SatelliteCapabilities.CREATOR);
+                    SatelliteCapabilities _arg06 =
+                            (SatelliteCapabilities)
+                                    data.readTypedObject(SatelliteCapabilities.CREATOR);
                     data.enforceNoDataAvail();
                     onSatelliteCapabilitiesChanged(_arg06);
                     return true;
@@ -222,7 +223,8 @@ public interface ISatelliteListener extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
-            public void onSatelliteProvisionStateChanged(boolean provisioned) throws RemoteException {
+            public void onSatelliteProvisionStateChanged(boolean provisioned)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
@@ -234,7 +236,8 @@ public interface ISatelliteListener extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
-            public void onSatelliteDatagramReceived(SatelliteDatagram datagram, int pendingCount) throws RemoteException {
+            public void onSatelliteDatagramReceived(SatelliteDatagram datagram, int pendingCount)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
@@ -258,7 +261,8 @@ public interface ISatelliteListener extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
-            public void onSatellitePositionChanged(PointingInfo pointingInfo) throws RemoteException {
+            public void onSatellitePositionChanged(PointingInfo pointingInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
@@ -282,7 +286,8 @@ public interface ISatelliteListener extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
-            public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException {
+            public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
@@ -294,7 +299,8 @@ public interface ISatelliteListener extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
-            public void onSatelliteCapabilitiesChanged(SatelliteCapabilities capabilities) throws RemoteException {
+            public void onSatelliteCapabilitiesChanged(SatelliteCapabilities capabilities)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);
@@ -330,7 +336,8 @@ public interface ISatelliteListener extends IInterface {
             }
 
             @Override // android.telephony.satellite.stub.ISatelliteListener
-            public void onTerrestrialNetworkAvailableChanged(boolean isAvailable) throws RemoteException {
+            public void onTerrestrialNetworkAvailableChanged(boolean isAvailable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteListener.DESCRIPTOR);

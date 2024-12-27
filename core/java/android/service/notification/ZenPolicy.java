@@ -8,7 +8,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Contacts;
 import android.util.proto.ProtoOutputStream;
+
 import com.samsung.android.knox.analytics.database.Contract;
+
 import java.io.ByteArrayOutputStream;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -27,36 +29,61 @@ public final class ZenPolicy implements Parcelable {
     public static final int CONVERSATION_SENDERS_IMPORTANT = 2;
     public static final int CONVERSATION_SENDERS_NONE = 3;
     public static final int CONVERSATION_SENDERS_UNSET = 0;
-    public static final Parcelable.Creator<ZenPolicy> CREATOR = new Parcelable.Creator<ZenPolicy>() { // from class: android.service.notification.ZenPolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ZenPolicy createFromParcel(Parcel source) {
-            ZenPolicy policy;
-            if (Flags.modesApi()) {
-                policy = new ZenPolicy(ZenPolicy.trimList(source.readArrayList(Integer.class.getClassLoader(), Integer.class), 9), ZenPolicy.trimList(source.readArrayList(Integer.class.getClassLoader(), Integer.class), 7), source.readInt(), source.readInt(), source.readInt(), source.readInt());
-            } else {
-                policy = new ZenPolicy();
-                policy.mPriorityCategories = ZenPolicy.trimList(source.readArrayList(Integer.class.getClassLoader(), Integer.class), 9);
-                policy.mVisualEffects = ZenPolicy.trimList(source.readArrayList(Integer.class.getClassLoader(), Integer.class), 7);
-                policy.mPriorityMessages = source.readInt();
-                policy.mPriorityCalls = source.readInt();
-                policy.mConversationSenders = source.readInt();
-            }
-            policy.appBypassDndFlag = source.readInt();
-            policy.mAppsToBypassDnd = source.readArrayList(String.class.getClassLoader());
-            policy.exceptionContactsFlag = source.readInt();
-            policy.mExceptionContacts = source.readArrayList(String.class.getClassLoader());
-            policy.mIsContactsOverridden = source.readBoolean();
-            policy.mIsAppBypassDndOverridden = source.readBoolean();
-            return policy;
-        }
+    public static final Parcelable.Creator<ZenPolicy> CREATOR =
+            new Parcelable.Creator<
+                    ZenPolicy>() { // from class: android.service.notification.ZenPolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ZenPolicy createFromParcel(Parcel source) {
+                    ZenPolicy policy;
+                    if (Flags.modesApi()) {
+                        policy =
+                                new ZenPolicy(
+                                        ZenPolicy.trimList(
+                                                source.readArrayList(
+                                                        Integer.class.getClassLoader(),
+                                                        Integer.class),
+                                                9),
+                                        ZenPolicy.trimList(
+                                                source.readArrayList(
+                                                        Integer.class.getClassLoader(),
+                                                        Integer.class),
+                                                7),
+                                        source.readInt(),
+                                        source.readInt(),
+                                        source.readInt(),
+                                        source.readInt());
+                    } else {
+                        policy = new ZenPolicy();
+                        policy.mPriorityCategories =
+                                ZenPolicy.trimList(
+                                        source.readArrayList(
+                                                Integer.class.getClassLoader(), Integer.class),
+                                        9);
+                        policy.mVisualEffects =
+                                ZenPolicy.trimList(
+                                        source.readArrayList(
+                                                Integer.class.getClassLoader(), Integer.class),
+                                        7);
+                        policy.mPriorityMessages = source.readInt();
+                        policy.mPriorityCalls = source.readInt();
+                        policy.mConversationSenders = source.readInt();
+                    }
+                    policy.appBypassDndFlag = source.readInt();
+                    policy.mAppsToBypassDnd = source.readArrayList(String.class.getClassLoader());
+                    policy.exceptionContactsFlag = source.readInt();
+                    policy.mExceptionContacts = source.readArrayList(String.class.getClassLoader());
+                    policy.mIsContactsOverridden = source.readBoolean();
+                    policy.mIsAppBypassDndOverridden = source.readBoolean();
+                    return policy;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ZenPolicy[] newArray(int size) {
-            return new ZenPolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ZenPolicy[] newArray(int size) {
+                    return new ZenPolicy[size];
+                }
+            };
     public static final int FIELD_ALLOW_CHANNELS = 8;
     public static final int FIELD_CALLS = 2;
     public static final int FIELD_CONVERSATIONS = 4;
@@ -120,32 +147,25 @@ public final class ZenPolicy implements Parcelable {
     private List<Integer> mVisualEffects;
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface ChannelType {
-    }
+    private @interface ChannelType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConversationSenders {
-    }
+    public @interface ConversationSenders {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModifiableField {
-    }
+    public @interface ModifiableField {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PeopleType {
-    }
+    public @interface PeopleType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PriorityCategory {
-    }
+    public @interface PriorityCategory {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VisualEffect {
-    }
+    public @interface VisualEffect {}
 
     public ZenPolicy() {
         this.mPriorityMessages = 0;
@@ -162,7 +182,13 @@ public final class ZenPolicy implements Parcelable {
         this.mExceptionContacts = new ArrayList<>();
     }
 
-    public ZenPolicy(List<Integer> priorityCategories, List<Integer> visualEffects, int priorityMessages, int priorityCalls, int conversationSenders, int allowChannels) {
+    public ZenPolicy(
+            List<Integer> priorityCategories,
+            List<Integer> visualEffects,
+            int priorityMessages,
+            int priorityCalls,
+            int conversationSenders,
+            int allowChannels) {
         this.mPriorityMessages = 0;
         this.mPriorityCalls = 0;
         this.mConversationSenders = 0;
@@ -344,7 +370,13 @@ public final class ZenPolicy implements Parcelable {
 
         public ZenPolicy build() {
             if (Flags.modesApi()) {
-                return new ZenPolicy(new ArrayList(this.mZenPolicy.mPriorityCategories), new ArrayList(this.mZenPolicy.mVisualEffects), this.mZenPolicy.mPriorityMessages, this.mZenPolicy.mPriorityCalls, this.mZenPolicy.mConversationSenders, this.mZenPolicy.mAllowChannels);
+                return new ZenPolicy(
+                        new ArrayList(this.mZenPolicy.mPriorityCategories),
+                        new ArrayList(this.mZenPolicy.mVisualEffects),
+                        this.mZenPolicy.mPriorityMessages,
+                        this.mZenPolicy.mPriorityCalls,
+                        this.mZenPolicy.mConversationSenders,
+                        this.mZenPolicy.mAllowChannels);
             }
             return this.mZenPolicy.copy();
         }
@@ -477,9 +509,9 @@ public final class ZenPolicy implements Parcelable {
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:8:0x001c, code lost:
-        
-            return r0;
-         */
+
+           return r0;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -520,7 +552,10 @@ public final class ZenPolicy implements Parcelable {
             L1c:
                 return r0
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.service.notification.ZenPolicy.Builder.allowCategory(int, boolean):android.service.notification.ZenPolicy$Builder");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.service.notification.ZenPolicy.Builder.allowCategory(int,"
+                        + " boolean):android.service.notification.ZenPolicy$Builder");
         }
 
         public Builder allowAppsToBypassDnd(String appList) {
@@ -594,9 +629,9 @@ public final class ZenPolicy implements Parcelable {
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:9:0x0020, code lost:
-        
-            return r0;
-         */
+
+           return r0;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -639,7 +674,10 @@ public final class ZenPolicy implements Parcelable {
             L20:
                 return r0
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.service.notification.ZenPolicy.Builder.showVisualEffect(int, boolean):android.service.notification.ZenPolicy$Builder");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.service.notification.ZenPolicy.Builder.showVisualEffect(int,"
+                        + " boolean):android.service.notification.ZenPolicy$Builder");
         }
 
         public Builder allowPriorityChannels(boolean allow) {
@@ -677,7 +715,31 @@ public final class ZenPolicy implements Parcelable {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder(ZenPolicy.class.getSimpleName()).append('{').append("priorityCategories=[").append(priorityCategoriesToString()).append("], visualEffects=[").append(visualEffectsToString()).append("], priorityCallsSenders=").append(peopleTypeToString(this.mPriorityCalls)).append(", priorityMessagesSenders=").append(peopleTypeToString(this.mPriorityMessages)).append(", priorityConversationSenders=").append(conversationTypeToString(this.mConversationSenders)).append(", appBypassDndFlag=").append(appBypassDndFlagToString(this.appBypassDndFlag)).append(", appsToBypassDnd=").append(appsToBypassDndToString(this.mAppsToBypassDnd)).append(", exceptionContactsFlag=").append(exceptionContactsFlagToString(this.exceptionContactsFlag)).append(", exceptionContacts=").append(appsToBypassDndToString(this.mExceptionContacts)).append(", isContactsOverridden=").append(Boolean.toString(this.mIsContactsOverridden)).append(", isAppBypassDndOverridden=").append(Boolean.toString(this.mIsAppBypassDndOverridden));
+        StringBuilder sb =
+                new StringBuilder(ZenPolicy.class.getSimpleName())
+                        .append('{')
+                        .append("priorityCategories=[")
+                        .append(priorityCategoriesToString())
+                        .append("], visualEffects=[")
+                        .append(visualEffectsToString())
+                        .append("], priorityCallsSenders=")
+                        .append(peopleTypeToString(this.mPriorityCalls))
+                        .append(", priorityMessagesSenders=")
+                        .append(peopleTypeToString(this.mPriorityMessages))
+                        .append(", priorityConversationSenders=")
+                        .append(conversationTypeToString(this.mConversationSenders))
+                        .append(", appBypassDndFlag=")
+                        .append(appBypassDndFlagToString(this.appBypassDndFlag))
+                        .append(", appsToBypassDnd=")
+                        .append(appsToBypassDndToString(this.mAppsToBypassDnd))
+                        .append(", exceptionContactsFlag=")
+                        .append(exceptionContactsFlagToString(this.exceptionContactsFlag))
+                        .append(", exceptionContacts=")
+                        .append(appsToBypassDndToString(this.mExceptionContacts))
+                        .append(", isContactsOverridden=")
+                        .append(Boolean.toString(this.mIsContactsOverridden))
+                        .append(", isAppBypassDndOverridden=")
+                        .append(Boolean.toString(this.mIsAppBypassDndOverridden));
         if (Flags.modesApi()) {
             sb.append(", allowChannels=").append(channelTypeToString(this.mAllowChannels));
         }
@@ -752,7 +814,10 @@ public final class ZenPolicy implements Parcelable {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < this.mPriorityCategories.size(); i++) {
             if (this.mPriorityCategories.get(i).intValue() != 0) {
-                builder.append(indexToCategory(i)).append("=").append(stateToString(this.mPriorityCategories.get(i).intValue())).append(" ");
+                builder.append(indexToCategory(i))
+                        .append("=")
+                        .append(stateToString(this.mPriorityCategories.get(i).intValue()))
+                        .append(" ");
             }
         }
         return builder.toString();
@@ -762,7 +827,10 @@ public final class ZenPolicy implements Parcelable {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < this.mVisualEffects.size(); i++) {
             if (this.mVisualEffects.get(i).intValue() != 0) {
-                builder.append(indexToVisualEffect(i)).append("=").append(stateToString(this.mVisualEffects.get(i).intValue())).append(" ");
+                builder.append(indexToVisualEffect(i))
+                        .append("=")
+                        .append(stateToString(this.mVisualEffects.get(i).intValue()))
+                        .append(" ");
             }
         }
         return builder.toString();
@@ -906,7 +974,18 @@ public final class ZenPolicy implements Parcelable {
             return true;
         }
         ZenPolicy other = (ZenPolicy) o;
-        boolean eq = Objects.equals(other.mPriorityCategories, this.mPriorityCategories) && Objects.equals(other.mVisualEffects, this.mVisualEffects) && other.mPriorityCalls == this.mPriorityCalls && other.mPriorityMessages == this.mPriorityMessages && other.mConversationSenders == this.mConversationSenders && other.appBypassDndFlag == this.appBypassDndFlag && other.exceptionContactsFlag == this.exceptionContactsFlag && Objects.equals(other.mAppsToBypassDnd, this.mAppsToBypassDnd) && Objects.equals(other.mExceptionContacts, this.mExceptionContacts) && other.mIsContactsOverridden == this.mIsContactsOverridden && other.mIsAppBypassDndOverridden == this.mIsAppBypassDndOverridden;
+        boolean eq =
+                Objects.equals(other.mPriorityCategories, this.mPriorityCategories)
+                        && Objects.equals(other.mVisualEffects, this.mVisualEffects)
+                        && other.mPriorityCalls == this.mPriorityCalls
+                        && other.mPriorityMessages == this.mPriorityMessages
+                        && other.mConversationSenders == this.mConversationSenders
+                        && other.appBypassDndFlag == this.appBypassDndFlag
+                        && other.exceptionContactsFlag == this.exceptionContactsFlag
+                        && Objects.equals(other.mAppsToBypassDnd, this.mAppsToBypassDnd)
+                        && Objects.equals(other.mExceptionContacts, this.mExceptionContacts)
+                        && other.mIsContactsOverridden == this.mIsContactsOverridden
+                        && other.mIsAppBypassDndOverridden == this.mIsAppBypassDndOverridden;
         if (Flags.modesApi()) {
             return eq && other.mAllowChannels == this.mAllowChannels;
         }
@@ -915,9 +994,20 @@ public final class ZenPolicy implements Parcelable {
 
     public int hashCode() {
         if (Flags.modesApi()) {
-            return Objects.hash(this.mPriorityCategories, this.mVisualEffects, Integer.valueOf(this.mPriorityCalls), Integer.valueOf(this.mPriorityMessages), Integer.valueOf(this.mConversationSenders), Integer.valueOf(this.mAllowChannels));
+            return Objects.hash(
+                    this.mPriorityCategories,
+                    this.mVisualEffects,
+                    Integer.valueOf(this.mPriorityCalls),
+                    Integer.valueOf(this.mPriorityMessages),
+                    Integer.valueOf(this.mConversationSenders),
+                    Integer.valueOf(this.mAllowChannels));
         }
-        return Objects.hash(this.mPriorityCategories, this.mVisualEffects, Integer.valueOf(this.mPriorityCalls), Integer.valueOf(this.mPriorityMessages), Integer.valueOf(this.mConversationSenders));
+        return Objects.hash(
+                this.mPriorityCategories,
+                this.mVisualEffects,
+                Integer.valueOf(this.mPriorityCalls),
+                Integer.valueOf(this.mPriorityMessages),
+                Integer.valueOf(this.mConversationSenders));
     }
 
     private int getZenPolicyPriorityCategoryState(int category) {
@@ -991,20 +1081,25 @@ public final class ZenPolicy implements Parcelable {
             return;
         }
         for (int category = 0; category < this.mPriorityCategories.size(); category++) {
-            if (this.mPriorityCategories.get(category).intValue() != 2 && (newState = policyToApply.mPriorityCategories.get(category).intValue()) != 0) {
+            if (this.mPriorityCategories.get(category).intValue() != 2
+                    && (newState = policyToApply.mPriorityCategories.get(category).intValue())
+                            != 0) {
                 this.mPriorityCategories.set(category, Integer.valueOf(newState));
                 if (category == 2 && this.mPriorityMessages < policyToApply.mPriorityMessages) {
                     this.mPriorityMessages = policyToApply.mPriorityMessages;
                 } else if (category == 3 && this.mPriorityCalls < policyToApply.mPriorityCalls) {
                     this.mPriorityCalls = policyToApply.mPriorityCalls;
-                } else if (category == 8 && this.mConversationSenders < policyToApply.mConversationSenders) {
+                } else if (category == 8
+                        && this.mConversationSenders < policyToApply.mConversationSenders) {
                     this.mConversationSenders = policyToApply.mConversationSenders;
                 }
             }
         }
         for (int visualEffect = 0; visualEffect < this.mVisualEffects.size(); visualEffect++) {
-            if (this.mVisualEffects.get(visualEffect).intValue() != 2 && policyToApply.mVisualEffects.get(visualEffect).intValue() != 0) {
-                this.mVisualEffects.set(visualEffect, policyToApply.mVisualEffects.get(visualEffect));
+            if (this.mVisualEffects.get(visualEffect).intValue() != 2
+                    && policyToApply.mVisualEffects.get(visualEffect).intValue() != 0) {
+                this.mVisualEffects.set(
+                        visualEffect, policyToApply.mVisualEffects.get(visualEffect));
             }
         }
         int visualEffect2 = policyToApply.getAppBypassDndFlag();

@@ -14,7 +14,8 @@ public class NetworkWatchlistInstallReceiver extends ConfigUpdateInstallReceiver
     @Override // com.android.server.updates.ConfigUpdateInstallReceiver
     public final void postInstall(Context context) {
         try {
-            ((NetworkWatchlistManager) context.getSystemService(NetworkWatchlistManager.class)).reloadWatchlist();
+            ((NetworkWatchlistManager) context.getSystemService(NetworkWatchlistManager.class))
+                    .reloadWatchlist();
         } catch (Exception unused) {
             Slog.wtf("NetworkWatchlistInstallReceiver", "Unable to reload watchlist");
         }

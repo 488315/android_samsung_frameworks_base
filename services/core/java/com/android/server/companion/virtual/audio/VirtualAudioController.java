@@ -12,14 +12,17 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.modules.expresslog.Counter;
 import com.android.server.companion.virtual.GenericWindowPolicyController;
+
 import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class VirtualAudioController implements GenericWindowPolicyController.RunningAppsChangedListener {
+public final class VirtualAudioController
+        implements GenericWindowPolicyController.RunningAppsChangedListener {
     public final AudioPlaybackDetector mAudioPlaybackDetector;
     public final AudioRecordingDetector mAudioRecordingDetector;
     public IAudioConfigChangedCallback mConfigChangedCallback;
@@ -27,12 +30,14 @@ public final class VirtualAudioController implements GenericWindowPolicyControll
     public GenericWindowPolicyController mGenericWindowPolicyController;
     public IAudioRoutingCallback mRoutingCallback;
     public final Handler mHandler = new Handler(Looper.getMainLooper());
-    public final VirtualAudioController$$ExternalSyntheticLambda0 mUpdateAudioRoutingRunnable = new Runnable() { // from class: com.android.server.companion.virtual.audio.VirtualAudioController$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            VirtualAudioController.this.notifyAppsNeedingAudioRoutingChanged();
-        }
-    };
+    public final VirtualAudioController$$ExternalSyntheticLambda0 mUpdateAudioRoutingRunnable =
+            new Runnable() { // from class:
+                             // com.android.server.companion.virtual.audio.VirtualAudioController$$ExternalSyntheticLambda0
+                @Override // java.lang.Runnable
+                public final void run() {
+                    VirtualAudioController.this.notifyAppsNeedingAudioRoutingChanged();
+                }
+            };
     public final Object mLock = new Object();
     public final ArraySet mRunningAppUids = new ArraySet();
     public ArraySet mPlayingAppUids = new ArraySet();
@@ -44,7 +49,9 @@ public final class VirtualAudioController implements GenericWindowPolicyControll
         this.mAudioPlaybackDetector = new AudioPlaybackDetector(context);
         this.mAudioRecordingDetector = new AudioRecordingDetector(context);
         if (Flags.metricsCollection()) {
-            Counter.logIncrementWithUid("virtual_devices.value_virtual_audio_created_count", attributionSource.getUid());
+            Counter.logIncrementWithUid(
+                    "virtual_devices.value_virtual_audio_created_count",
+                    attributionSource.getUid());
         }
     }
 
@@ -52,8 +59,10 @@ public final class VirtualAudioController implements GenericWindowPolicyControll
         ArraySet arraySet2 = new ArraySet();
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) it.next();
-            if (arraySet.contains(Integer.valueOf(audioPlaybackConfiguration.getClientUid())) && audioPlaybackConfiguration.getPlayerState() == 2) {
+            AudioPlaybackConfiguration audioPlaybackConfiguration =
+                    (AudioPlaybackConfiguration) it.next();
+            if (arraySet.contains(Integer.valueOf(audioPlaybackConfiguration.getClientUid()))
+                    && audioPlaybackConfiguration.getPlayerState() == 2) {
                 arraySet2.add(Integer.valueOf(audioPlaybackConfiguration.getClientUid()));
             }
         }
@@ -91,7 +100,10 @@ public final class VirtualAudioController implements GenericWindowPolicyControll
                 try {
                     iAudioRoutingCallback.onAppsNeedingAudioRoutingChanged(iArr);
                 } catch (RemoteException e) {
-                    Slog.e("VirtualAudioController", "RemoteException when calling updateReroutingApps", e);
+                    Slog.e(
+                            "VirtualAudioController",
+                            "RemoteException when calling updateReroutingApps",
+                            e);
                 }
             }
         }
@@ -107,17 +119,25 @@ public final class VirtualAudioController implements GenericWindowPolicyControll
                 this.mRunningAppUids.clear();
                 this.mRunningAppUids.addAll(arraySet);
                 ArraySet arraySet2 = this.mPlayingAppUids;
-                ArraySet findPlayingAppUids = findPlayingAppUids(this.mRunningAppUids, ((AudioManager) this.mContext.getSystemService(AudioManager.class)).getActivePlaybackConfigurations());
+                ArraySet findPlayingAppUids =
+                        findPlayingAppUids(
+                                this.mRunningAppUids,
+                                ((AudioManager) this.mContext.getSystemService(AudioManager.class))
+                                        .getActivePlaybackConfigurations());
                 this.mPlayingAppUids = findPlayingAppUids;
                 if (!findPlayingAppUids.isEmpty()) {
-                    Slog.i("VirtualAudioController", "Audio is playing, do not change rerouted apps");
+                    Slog.i(
+                            "VirtualAudioController",
+                            "Audio is playing, do not change rerouted apps");
                     return;
                 }
                 if (arraySet2.isEmpty()) {
                     notifyAppsNeedingAudioRoutingChanged();
                     return;
                 }
-                Slog.i("VirtualAudioController", "The last playing app removed, delay change rerouted apps");
+                Slog.i(
+                        "VirtualAudioController",
+                        "The last playing app removed, delay change rerouted apps");
                 if (this.mHandler.hasCallbacks(this.mUpdateAudioRoutingRunnable)) {
                     this.mHandler.removeCallbacks(this.mUpdateAudioRoutingRunnable);
                 }
@@ -128,7 +148,10 @@ public final class VirtualAudioController implements GenericWindowPolicyControll
         }
     }
 
-    public final void startListening(GenericWindowPolicyController genericWindowPolicyController, IAudioRoutingCallback iAudioRoutingCallback, IAudioConfigChangedCallback iAudioConfigChangedCallback) {
+    public final void startListening(
+            GenericWindowPolicyController genericWindowPolicyController,
+            IAudioRoutingCallback iAudioRoutingCallback,
+            IAudioConfigChangedCallback iAudioConfigChangedCallback) {
         this.mGenericWindowPolicyController = genericWindowPolicyController;
         synchronized (genericWindowPolicyController.mGenericWindowPolicyControllerLock) {
             genericWindowPolicyController.mRunningAppsChangedListeners.add(this);
@@ -144,10 +167,12 @@ public final class VirtualAudioController implements GenericWindowPolicyControll
         if (iAudioConfigChangedCallback != null) {
             AudioPlaybackDetector audioPlaybackDetector = this.mAudioPlaybackDetector;
             audioPlaybackDetector.mAudioPlaybackCallback = this;
-            audioPlaybackDetector.mAudioManager.registerAudioPlaybackCallback(audioPlaybackDetector, null);
+            audioPlaybackDetector.mAudioManager.registerAudioPlaybackCallback(
+                    audioPlaybackDetector, null);
             AudioRecordingDetector audioRecordingDetector = this.mAudioRecordingDetector;
             audioRecordingDetector.mAudioRecordingCallback = this;
-            audioRecordingDetector.mAudioManager.registerAudioRecordingCallback(audioRecordingDetector, null);
+            audioRecordingDetector.mAudioManager.registerAudioRecordingCallback(
+                    audioRecordingDetector, null);
         }
     }
 
@@ -158,14 +183,17 @@ public final class VirtualAudioController implements GenericWindowPolicyControll
         AudioPlaybackDetector audioPlaybackDetector = this.mAudioPlaybackDetector;
         if (audioPlaybackDetector.mAudioPlaybackCallback != null) {
             audioPlaybackDetector.mAudioPlaybackCallback = null;
-            audioPlaybackDetector.mAudioManager.unregisterAudioPlaybackCallback(audioPlaybackDetector);
+            audioPlaybackDetector.mAudioManager.unregisterAudioPlaybackCallback(
+                    audioPlaybackDetector);
         }
         AudioRecordingDetector audioRecordingDetector = this.mAudioRecordingDetector;
         if (audioRecordingDetector.mAudioRecordingCallback != null) {
             audioRecordingDetector.mAudioRecordingCallback = null;
-            audioRecordingDetector.mAudioManager.unregisterAudioRecordingCallback(audioRecordingDetector);
+            audioRecordingDetector.mAudioManager.unregisterAudioRecordingCallback(
+                    audioRecordingDetector);
         }
-        GenericWindowPolicyController genericWindowPolicyController = this.mGenericWindowPolicyController;
+        GenericWindowPolicyController genericWindowPolicyController =
+                this.mGenericWindowPolicyController;
         if (genericWindowPolicyController != null) {
             genericWindowPolicyController.unregisterRunningAppsChangedListener(this);
             this.mGenericWindowPolicyController = null;

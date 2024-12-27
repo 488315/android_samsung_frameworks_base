@@ -2,9 +2,11 @@ package android.net.vcn;
 
 import android.os.PersistableBundle;
 import android.util.ArraySet;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,8 +41,24 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         CAPABILITIES_MATCH_CRITERIA_DEFAULT = Collections.unmodifiableMap(capsMatchCriteria);
     }
 
-    private VcnCellUnderlyingNetworkTemplate(int meteredMatchCriteria, int minEntryUpstreamBandwidthKbps, int minExitUpstreamBandwidthKbps, int minEntryDownstreamBandwidthKbps, int minExitDownstreamBandwidthKbps, Set<String> allowedNetworkPlmnIds, Set<Integer> allowedSpecificCarrierIds, int roamingMatchCriteria, int opportunisticMatchCriteria, Map<Integer, Integer> capabilitiesMatchCriteria) {
-        super(2, meteredMatchCriteria, minEntryUpstreamBandwidthKbps, minExitUpstreamBandwidthKbps, minEntryDownstreamBandwidthKbps, minExitDownstreamBandwidthKbps);
+    private VcnCellUnderlyingNetworkTemplate(
+            int meteredMatchCriteria,
+            int minEntryUpstreamBandwidthKbps,
+            int minExitUpstreamBandwidthKbps,
+            int minEntryDownstreamBandwidthKbps,
+            int minExitDownstreamBandwidthKbps,
+            Set<String> allowedNetworkPlmnIds,
+            Set<Integer> allowedSpecificCarrierIds,
+            int roamingMatchCriteria,
+            int opportunisticMatchCriteria,
+            Map<Integer, Integer> capabilitiesMatchCriteria) {
+        super(
+                2,
+                meteredMatchCriteria,
+                minEntryUpstreamBandwidthKbps,
+                minExitUpstreamBandwidthKbps,
+                minEntryDownstreamBandwidthKbps,
+                minExitDownstreamBandwidthKbps);
         this.mAllowedNetworkPlmnIds = new ArraySet(allowedNetworkPlmnIds);
         this.mAllowedSpecificCarrierIds = new ArraySet(allowedSpecificCarrierIds);
         this.mRoamingMatchCriteria = roamingMatchCriteria;
@@ -69,13 +87,16 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         }
     }
 
-    private static void validateCapabilitiesMatchCriteria(Map<Integer, Integer> capabilitiesMatchCriteria) {
+    private static void validateCapabilitiesMatchCriteria(
+            Map<Integer, Integer> capabilitiesMatchCriteria) {
         Objects.requireNonNull(capabilitiesMatchCriteria, "capabilitiesMatchCriteria is null");
         boolean requiredCapabilityFound = false;
         for (Map.Entry<Integer, Integer> entry : capabilitiesMatchCriteria.entrySet()) {
             int capability = entry.getKey().intValue();
             int matchCriteria = entry.getValue().intValue();
-            Preconditions.checkArgument(CAPABILITIES_MATCH_CRITERIA_DEFAULT.containsKey(Integer.valueOf(capability)), "NetworkCapability " + capability + "out of range");
+            Preconditions.checkArgument(
+                    CAPABILITIES_MATCH_CRITERIA_DEFAULT.containsKey(Integer.valueOf(capability)),
+                    "NetworkCapability " + capability + "out of range");
             validateMatchCriteria(matchCriteria, "capability " + capability);
             boolean z = true;
             if (matchCriteria != 1) {
@@ -98,30 +119,64 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         int minExitDownstreamBandwidthKbps = in.getInt("mMinExitDownstreamBandwidthKbps", 0);
         PersistableBundle plmnIdsBundle = in.getPersistableBundle(ALLOWED_NETWORK_PLMN_IDS_KEY);
         Objects.requireNonNull(plmnIdsBundle, "plmnIdsBundle is null");
-        Set<String> allowedNetworkPlmnIds = new ArraySet<>(PersistableBundleUtils.toList(plmnIdsBundle, PersistableBundleUtils.STRING_DESERIALIZER));
-        PersistableBundle specificCarrierIdsBundle = in.getPersistableBundle(ALLOWED_SPECIFIC_CARRIER_IDS_KEY);
+        Set<String> allowedNetworkPlmnIds =
+                new ArraySet<>(
+                        PersistableBundleUtils.toList(
+                                plmnIdsBundle, PersistableBundleUtils.STRING_DESERIALIZER));
+        PersistableBundle specificCarrierIdsBundle =
+                in.getPersistableBundle(ALLOWED_SPECIFIC_CARRIER_IDS_KEY);
         Objects.requireNonNull(specificCarrierIdsBundle, "specificCarrierIdsBundle is null");
-        Set<Integer> allowedSpecificCarrierIds = new ArraySet<>(PersistableBundleUtils.toList(specificCarrierIdsBundle, PersistableBundleUtils.INTEGER_DESERIALIZER));
-        PersistableBundle capabilitiesMatchCriteriaBundle = in.getPersistableBundle(CAPABILITIES_MATCH_CRITERIA_KEY);
+        Set<Integer> allowedSpecificCarrierIds =
+                new ArraySet<>(
+                        PersistableBundleUtils.toList(
+                                specificCarrierIdsBundle,
+                                PersistableBundleUtils.INTEGER_DESERIALIZER));
+        PersistableBundle capabilitiesMatchCriteriaBundle =
+                in.getPersistableBundle(CAPABILITIES_MATCH_CRITERIA_KEY);
         if (capabilitiesMatchCriteriaBundle == null) {
             capabilitiesMatchCriteria = CAPABILITIES_MATCH_CRITERIA_DEFAULT;
         } else {
-            capabilitiesMatchCriteria = PersistableBundleUtils.toMap(capabilitiesMatchCriteriaBundle, PersistableBundleUtils.INTEGER_DESERIALIZER, PersistableBundleUtils.INTEGER_DESERIALIZER);
+            capabilitiesMatchCriteria =
+                    PersistableBundleUtils.toMap(
+                            capabilitiesMatchCriteriaBundle,
+                            PersistableBundleUtils.INTEGER_DESERIALIZER,
+                            PersistableBundleUtils.INTEGER_DESERIALIZER);
         }
         int roamingMatchCriteria = in.getInt(ROAMING_MATCH_KEY);
         int opportunisticMatchCriteria = in.getInt(OPPORTUNISTIC_MATCH_KEY);
-        return new VcnCellUnderlyingNetworkTemplate(meteredMatchCriteria, minEntryUpstreamBandwidthKbps, minExitUpstreamBandwidthKbps, minEntryDownstreamBandwidthKbps, minExitDownstreamBandwidthKbps, allowedNetworkPlmnIds, allowedSpecificCarrierIds, roamingMatchCriteria, opportunisticMatchCriteria, capabilitiesMatchCriteria);
+        return new VcnCellUnderlyingNetworkTemplate(
+                meteredMatchCriteria,
+                minEntryUpstreamBandwidthKbps,
+                minExitUpstreamBandwidthKbps,
+                minEntryDownstreamBandwidthKbps,
+                minExitDownstreamBandwidthKbps,
+                allowedNetworkPlmnIds,
+                allowedSpecificCarrierIds,
+                roamingMatchCriteria,
+                opportunisticMatchCriteria,
+                capabilitiesMatchCriteria);
     }
 
     @Override // android.net.vcn.VcnUnderlyingNetworkTemplate
     public PersistableBundle toPersistableBundle() {
         PersistableBundle result = super.toPersistableBundle();
-        PersistableBundle plmnIdsBundle = PersistableBundleUtils.fromList(new ArrayList(this.mAllowedNetworkPlmnIds), PersistableBundleUtils.STRING_SERIALIZER);
+        PersistableBundle plmnIdsBundle =
+                PersistableBundleUtils.fromList(
+                        new ArrayList(this.mAllowedNetworkPlmnIds),
+                        PersistableBundleUtils.STRING_SERIALIZER);
         result.putPersistableBundle(ALLOWED_NETWORK_PLMN_IDS_KEY, plmnIdsBundle);
-        PersistableBundle specificCarrierIdsBundle = PersistableBundleUtils.fromList(new ArrayList(this.mAllowedSpecificCarrierIds), PersistableBundleUtils.INTEGER_SERIALIZER);
+        PersistableBundle specificCarrierIdsBundle =
+                PersistableBundleUtils.fromList(
+                        new ArrayList(this.mAllowedSpecificCarrierIds),
+                        PersistableBundleUtils.INTEGER_SERIALIZER);
         result.putPersistableBundle(ALLOWED_SPECIFIC_CARRIER_IDS_KEY, specificCarrierIdsBundle);
-        PersistableBundle capabilitiesMatchCriteriaBundle = PersistableBundleUtils.fromMap(this.mCapabilitiesMatchCriteria, PersistableBundleUtils.INTEGER_SERIALIZER, PersistableBundleUtils.INTEGER_SERIALIZER);
-        result.putPersistableBundle(CAPABILITIES_MATCH_CRITERIA_KEY, capabilitiesMatchCriteriaBundle);
+        PersistableBundle capabilitiesMatchCriteriaBundle =
+                PersistableBundleUtils.fromMap(
+                        this.mCapabilitiesMatchCriteria,
+                        PersistableBundleUtils.INTEGER_SERIALIZER,
+                        PersistableBundleUtils.INTEGER_SERIALIZER);
+        result.putPersistableBundle(
+                CAPABILITIES_MATCH_CRITERIA_KEY, capabilitiesMatchCriteriaBundle);
         result.putInt(ROAMING_MATCH_KEY, this.mRoamingMatchCriteria);
         result.putInt(OPPORTUNISTIC_MATCH_KEY, this.mOpportunisticMatchCriteria);
         return result;
@@ -174,7 +229,13 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
 
     @Override // android.net.vcn.VcnUnderlyingNetworkTemplate
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), this.mAllowedNetworkPlmnIds, this.mAllowedSpecificCarrierIds, this.mCapabilitiesMatchCriteria, Integer.valueOf(this.mRoamingMatchCriteria), Integer.valueOf(this.mOpportunisticMatchCriteria));
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()),
+                this.mAllowedNetworkPlmnIds,
+                this.mAllowedSpecificCarrierIds,
+                this.mCapabilitiesMatchCriteria,
+                Integer.valueOf(this.mRoamingMatchCriteria),
+                Integer.valueOf(this.mOpportunisticMatchCriteria));
     }
 
     @Override // android.net.vcn.VcnUnderlyingNetworkTemplate
@@ -183,7 +244,11 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
             return false;
         }
         VcnCellUnderlyingNetworkTemplate rhs = (VcnCellUnderlyingNetworkTemplate) other;
-        return Objects.equals(this.mAllowedNetworkPlmnIds, rhs.mAllowedNetworkPlmnIds) && Objects.equals(this.mAllowedSpecificCarrierIds, rhs.mAllowedSpecificCarrierIds) && Objects.equals(this.mCapabilitiesMatchCriteria, rhs.mCapabilitiesMatchCriteria) && this.mRoamingMatchCriteria == rhs.mRoamingMatchCriteria && this.mOpportunisticMatchCriteria == rhs.mOpportunisticMatchCriteria;
+        return Objects.equals(this.mAllowedNetworkPlmnIds, rhs.mAllowedNetworkPlmnIds)
+                && Objects.equals(this.mAllowedSpecificCarrierIds, rhs.mAllowedSpecificCarrierIds)
+                && Objects.equals(this.mCapabilitiesMatchCriteria, rhs.mCapabilitiesMatchCriteria)
+                && this.mRoamingMatchCriteria == rhs.mRoamingMatchCriteria
+                && this.mOpportunisticMatchCriteria == rhs.mOpportunisticMatchCriteria;
     }
 
     @Override // android.net.vcn.VcnUnderlyingNetworkTemplate
@@ -196,10 +261,13 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         }
         pw.println("mCapabilitiesMatchCriteria: " + this.mCapabilitiesMatchCriteria);
         if (this.mRoamingMatchCriteria != 0) {
-            pw.println("mRoamingMatchCriteria: " + getMatchCriteriaString(this.mRoamingMatchCriteria));
+            pw.println(
+                    "mRoamingMatchCriteria: " + getMatchCriteriaString(this.mRoamingMatchCriteria));
         }
         if (this.mOpportunisticMatchCriteria != 0) {
-            pw.println("mOpportunisticMatchCriteria: " + getMatchCriteriaString(this.mOpportunisticMatchCriteria));
+            pw.println(
+                    "mOpportunisticMatchCriteria: "
+                            + getMatchCriteriaString(this.mOpportunisticMatchCriteria));
         }
     }
 
@@ -216,7 +284,8 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         private int mMinExitDownstreamBandwidthKbps = 0;
 
         public Builder() {
-            this.mCapabilitiesMatchCriteria.putAll(VcnCellUnderlyingNetworkTemplate.CAPABILITIES_MATCH_CRITERIA_DEFAULT);
+            this.mCapabilitiesMatchCriteria.putAll(
+                    VcnCellUnderlyingNetworkTemplate.CAPABILITIES_MATCH_CRITERIA_DEFAULT);
         }
 
         public Builder setMetered(int matchCriteria) {
@@ -251,15 +320,19 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
             return this;
         }
 
-        public Builder setMinUpstreamBandwidthKbps(int minEntryUpstreamBandwidthKbps, int minExitUpstreamBandwidthKbps) {
-            VcnUnderlyingNetworkTemplate.validateMinBandwidthKbps(minEntryUpstreamBandwidthKbps, minExitUpstreamBandwidthKbps);
+        public Builder setMinUpstreamBandwidthKbps(
+                int minEntryUpstreamBandwidthKbps, int minExitUpstreamBandwidthKbps) {
+            VcnUnderlyingNetworkTemplate.validateMinBandwidthKbps(
+                    minEntryUpstreamBandwidthKbps, minExitUpstreamBandwidthKbps);
             this.mMinEntryUpstreamBandwidthKbps = minEntryUpstreamBandwidthKbps;
             this.mMinExitUpstreamBandwidthKbps = minExitUpstreamBandwidthKbps;
             return this;
         }
 
-        public Builder setMinDownstreamBandwidthKbps(int minEntryDownstreamBandwidthKbps, int minExitDownstreamBandwidthKbps) {
-            VcnUnderlyingNetworkTemplate.validateMinBandwidthKbps(minEntryDownstreamBandwidthKbps, minExitDownstreamBandwidthKbps);
+        public Builder setMinDownstreamBandwidthKbps(
+                int minEntryDownstreamBandwidthKbps, int minExitDownstreamBandwidthKbps) {
+            VcnUnderlyingNetworkTemplate.validateMinBandwidthKbps(
+                    minEntryDownstreamBandwidthKbps, minExitDownstreamBandwidthKbps);
             this.mMinEntryDownstreamBandwidthKbps = minEntryDownstreamBandwidthKbps;
             this.mMinExitDownstreamBandwidthKbps = minExitDownstreamBandwidthKbps;
             return this;
@@ -302,7 +375,17 @@ public final class VcnCellUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         }
 
         public VcnCellUnderlyingNetworkTemplate build() {
-            return new VcnCellUnderlyingNetworkTemplate(this.mMeteredMatchCriteria, this.mMinEntryUpstreamBandwidthKbps, this.mMinExitUpstreamBandwidthKbps, this.mMinEntryDownstreamBandwidthKbps, this.mMinExitDownstreamBandwidthKbps, this.mAllowedNetworkPlmnIds, this.mAllowedSpecificCarrierIds, this.mRoamingMatchCriteria, this.mOpportunisticMatchCriteria, this.mCapabilitiesMatchCriteria);
+            return new VcnCellUnderlyingNetworkTemplate(
+                    this.mMeteredMatchCriteria,
+                    this.mMinEntryUpstreamBandwidthKbps,
+                    this.mMinExitUpstreamBandwidthKbps,
+                    this.mMinEntryDownstreamBandwidthKbps,
+                    this.mMinExitDownstreamBandwidthKbps,
+                    this.mAllowedNetworkPlmnIds,
+                    this.mAllowedSpecificCarrierIds,
+                    this.mRoamingMatchCriteria,
+                    this.mOpportunisticMatchCriteria,
+                    this.mCapabilitiesMatchCriteria);
         }
     }
 }

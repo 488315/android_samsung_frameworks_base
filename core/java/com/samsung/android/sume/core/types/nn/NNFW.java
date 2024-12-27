@@ -2,6 +2,7 @@ package com.samsung.android.sume.core.types.nn;
 
 import com.samsung.android.sume.core.types.NumericEnum;
 import com.samsung.android.sume.core.types.Vendor;
+
 import java.security.InvalidParameterException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,11 +13,11 @@ import java.util.function.Supplier;
 
 /* loaded from: classes6.dex */
 public enum NNFW implements NumericEnum {
-    NONE(0, new Vendor[]{Vendor.NONE}),
-    SNPE(1, new Vendor[]{Vendor.QCOM}),
-    EDEN(2, new Vendor[]{Vendor.SLSI}),
-    TFLITE(3, new Vendor[]{Vendor.SLSI, Vendor.QCOM}),
-    SNAP(4, new Vendor[]{Vendor.SLSI, Vendor.QCOM});
+    NONE(0, new Vendor[] {Vendor.NONE}),
+    SNPE(1, new Vendor[] {Vendor.QCOM}),
+    EDEN(2, new Vendor[] {Vendor.SLSI}),
+    TFLITE(3, new Vendor[] {Vendor.SLSI, Vendor.QCOM}),
+    SNAP(4, new Vendor[] {Vendor.SLSI, Vendor.QCOM});
 
     private final int value;
 
@@ -43,31 +44,48 @@ public enum NNFW implements NumericEnum {
     }
 
     public static NNFW fromExtension(final String ext) {
-        return (NNFW) Collections.unmodifiableMap(new HashMap<String, NNFW>() { // from class: com.samsung.android.sume.core.types.nn.NNFW.1
-            {
-                put("dlc", NNFW.SNPE);
-                put("tflite", NNFW.TFLITE);
-                put("tf", NNFW.SNAP);
-                put("pb", NNFW.SNAP);
-            }
-        }).entrySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.types.nn.NNFW$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((String) ((Map.Entry) obj).getKey()).equals(ext);
-                return equals;
-            }
-        }).map(new Function() { // from class: com.samsung.android.sume.core.types.nn.NNFW$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return (NNFW) ((Map.Entry) obj).getValue();
-            }
-        }).findFirst().orElseThrow(new Supplier() { // from class: com.samsung.android.sume.core.types.nn.NNFW$$ExternalSyntheticLambda2
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return NNFW.lambda$fromExtension$1(ext);
-            }
-        });
+        return (NNFW)
+                Collections.unmodifiableMap(
+                                new HashMap<
+                                        String,
+                                        NNFW>() { // from class:
+                                                  // com.samsung.android.sume.core.types.nn.NNFW.1
+                                    {
+                                        put("dlc", NNFW.SNPE);
+                                        put("tflite", NNFW.TFLITE);
+                                        put("tf", NNFW.SNAP);
+                                        put("pb", NNFW.SNAP);
+                                    }
+                                })
+                        .entrySet()
+                        .stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.types.nn.NNFW$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        boolean equals;
+                                        equals = ((String) ((Map.Entry) obj).getKey()).equals(ext);
+                                        return equals;
+                                    }
+                                })
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.types.nn.NNFW$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return (NNFW) ((Map.Entry) obj).getValue();
+                                    }
+                                })
+                        .findFirst()
+                        .orElseThrow(
+                                new Supplier() { // from class:
+                                                 // com.samsung.android.sume.core.types.nn.NNFW$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        return NNFW.lambda$fromExtension$1(ext);
+                                    }
+                                });
     }
 
     static /* synthetic */ InvalidParameterException lambda$fromExtension$1(String ext) {

@@ -7,8 +7,7 @@ public class IWSpeechRecognizerWrapper {
     private static final String TAG = IWSpeechRecognizerWrapper.class.getSimpleName();
     private static MMUIRecognizer uniqueInstance;
 
-    private IWSpeechRecognizerWrapper() {
-    }
+    private IWSpeechRecognizerWrapper() {}
 
     public static synchronized MMUIRecognizer getInstance() {
         synchronized (IWSpeechRecognizerWrapper.class) {

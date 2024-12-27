@@ -7,6 +7,7 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -52,16 +53,13 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
     private final String mNumber;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EmergencyCallRouting {
-    }
+    public @interface EmergencyCallRouting {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EmergencyNumberSources {
-    }
+    public @interface EmergencyNumberSources {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EmergencyServiceCategories {
-    }
+    public @interface EmergencyServiceCategories {}
 
     static {
         EMERGENCY_SERVICE_CATEGORY_SET.add(1);
@@ -84,22 +82,32 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         EMERGENCY_NUMBER_SOURCE_PRECEDENCE[3] = 128;
         EMERGENCY_NUMBER_SOURCE_PRECEDENCE[4] = 16;
         EMERGENCY_NUMBER_SOURCE_PRECEDENCE[5] = 4;
-        CREATOR = new Parcelable.Creator<EmergencyNumber>() { // from class: android.telephony.emergency.EmergencyNumber.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public EmergencyNumber createFromParcel(Parcel in) {
-                return new EmergencyNumber(in);
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        EmergencyNumber>() { // from class:
+                                             // android.telephony.emergency.EmergencyNumber.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public EmergencyNumber createFromParcel(Parcel in) {
+                        return new EmergencyNumber(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public EmergencyNumber[] newArray(int size) {
-                return new EmergencyNumber[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public EmergencyNumber[] newArray(int size) {
+                        return new EmergencyNumber[size];
+                    }
+                };
     }
 
-    public EmergencyNumber(String number, String countryIso, String mnc, int emergencyServiceCategories, List<String> emergencyUrns, int emergencyNumberSources, int emergencyCallRouting) {
+    public EmergencyNumber(
+            String number,
+            String countryIso,
+            String mnc,
+            int emergencyServiceCategories,
+            List<String> emergencyUrns,
+            int emergencyNumberSources,
+            int emergencyCallRouting) {
         this.mNumber = number;
         this.mCountryIso = countryIso;
         this.mMnc = mnc;
@@ -179,7 +187,8 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         if (categories == 0) {
             return serviceUnspecified();
         }
-        return serviceUnspecified() || (this.mEmergencyServiceCategoryBitmask & categories) == categories;
+        return serviceUnspecified()
+                || (this.mEmergencyServiceCategoryBitmask & categories) == categories;
     }
 
     public int getEmergencyNumberSourceBitmask() {
@@ -222,9 +231,11 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         if (this.mEmergencyCallRouting != 0) {
             sb.append(", routing=").append(routingToString(this.mEmergencyCallRouting));
         }
-        sb.append(", categories=").append(categoriesToString(this.mEmergencyServiceCategoryBitmask));
+        sb.append(", categories=")
+                .append(categoriesToString(this.mEmergencyServiceCategoryBitmask));
         if (this.mEmergencyUrns != null && !this.mEmergencyUrns.isEmpty()) {
-            sb.append(", urns=").append((String) this.mEmergencyUrns.stream().collect(Collectors.joining(",")));
+            sb.append(", urns=")
+                    .append((String) this.mEmergencyUrns.stream().collect(Collectors.joining(",")));
         }
         sb.append(NavigationBarInflaterView.SIZE_MOD_END);
         return sb.toString();
@@ -297,11 +308,24 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
             return false;
         }
         EmergencyNumber other = (EmergencyNumber) o;
-        return this.mNumber.equals(other.mNumber) && this.mCountryIso.equals(other.mCountryIso) && this.mMnc.equals(other.mMnc) && this.mEmergencyServiceCategoryBitmask == other.mEmergencyServiceCategoryBitmask && this.mEmergencyUrns.equals(other.mEmergencyUrns) && this.mEmergencyNumberSourceBitmask == other.mEmergencyNumberSourceBitmask && this.mEmergencyCallRouting == other.mEmergencyCallRouting;
+        return this.mNumber.equals(other.mNumber)
+                && this.mCountryIso.equals(other.mCountryIso)
+                && this.mMnc.equals(other.mMnc)
+                && this.mEmergencyServiceCategoryBitmask == other.mEmergencyServiceCategoryBitmask
+                && this.mEmergencyUrns.equals(other.mEmergencyUrns)
+                && this.mEmergencyNumberSourceBitmask == other.mEmergencyNumberSourceBitmask
+                && this.mEmergencyCallRouting == other.mEmergencyCallRouting;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mNumber, this.mCountryIso, this.mMnc, Integer.valueOf(this.mEmergencyServiceCategoryBitmask), this.mEmergencyUrns, Integer.valueOf(this.mEmergencyNumberSourceBitmask), Integer.valueOf(this.mEmergencyCallRouting));
+        return Objects.hash(
+                this.mNumber,
+                this.mCountryIso,
+                this.mMnc,
+                Integer.valueOf(this.mEmergencyServiceCategoryBitmask),
+                this.mEmergencyUrns,
+                Integer.valueOf(this.mEmergencyNumberSourceBitmask),
+                Integer.valueOf(this.mEmergencyCallRouting));
     }
 
     private int getDisplayPriorityScore() {
@@ -347,11 +371,18 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         if (getMnc().compareTo(emergencyNumber.getMnc()) != 0) {
             return getMnc().compareTo(emergencyNumber.getMnc());
         }
-        if (getEmergencyServiceCategoryBitmask() != emergencyNumber.getEmergencyServiceCategoryBitmask()) {
-            return getEmergencyServiceCategoryBitmask() > emergencyNumber.getEmergencyServiceCategoryBitmask() ? -1 : 1;
+        if (getEmergencyServiceCategoryBitmask()
+                != emergencyNumber.getEmergencyServiceCategoryBitmask()) {
+            return getEmergencyServiceCategoryBitmask()
+                            > emergencyNumber.getEmergencyServiceCategoryBitmask()
+                    ? -1
+                    : 1;
         }
-        if (getEmergencyUrns().toString().compareTo(emergencyNumber.getEmergencyUrns().toString()) != 0) {
-            return getEmergencyUrns().toString().compareTo(emergencyNumber.getEmergencyUrns().toString());
+        if (getEmergencyUrns().toString().compareTo(emergencyNumber.getEmergencyUrns().toString())
+                != 0) {
+            return getEmergencyUrns()
+                    .toString()
+                    .compareTo(emergencyNumber.getEmergencyUrns().toString());
         }
         if (getEmergencyCallRouting() != emergencyNumber.getEmergencyCallRouting()) {
             return getEmergencyCallRouting() > emergencyNumber.getEmergencyCallRouting() ? -1 : 1;
@@ -359,19 +390,29 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         return 0;
     }
 
-    public static void mergeSameNumbersInEmergencyNumberList(List<EmergencyNumber> emergencyNumberList) {
+    public static void mergeSameNumbersInEmergencyNumberList(
+            List<EmergencyNumber> emergencyNumberList) {
         mergeSameNumbersInEmergencyNumberList(emergencyNumberList, false);
     }
 
-    public static void mergeSameNumbersInEmergencyNumberList(List<EmergencyNumber> emergencyNumberList, boolean mergeServiceCategoriesAndUrns) {
+    public static void mergeSameNumbersInEmergencyNumberList(
+            List<EmergencyNumber> emergencyNumberList, boolean mergeServiceCategoriesAndUrns) {
         if (emergencyNumberList == null) {
             return;
         }
         Set<Integer> duplicatedEmergencyNumberPosition = new HashSet<>();
         for (int i = 0; i < emergencyNumberList.size(); i++) {
             for (int j = 0; j < i; j++) {
-                if (areSameEmergencyNumbers(emergencyNumberList.get(i), emergencyNumberList.get(j), mergeServiceCategoriesAndUrns)) {
-                    emergencyNumberList.set(i, mergeSameEmergencyNumbers(emergencyNumberList.get(i), emergencyNumberList.get(j), mergeServiceCategoriesAndUrns));
+                if (areSameEmergencyNumbers(
+                        emergencyNumberList.get(i),
+                        emergencyNumberList.get(j),
+                        mergeServiceCategoriesAndUrns)) {
+                    emergencyNumberList.set(
+                            i,
+                            mergeSameEmergencyNumbers(
+                                    emergencyNumberList.get(i),
+                                    emergencyNumberList.get(j),
+                                    mergeServiceCategoriesAndUrns));
                     duplicatedEmergencyNumberPosition.add(Integer.valueOf(j));
                 }
             }
@@ -385,28 +426,44 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         Collections.sort(emergencyNumberList);
     }
 
-    public static boolean areSameEmergencyNumbers(EmergencyNumber first, EmergencyNumber second, boolean ignoreServiceCategoryAndUrns) {
-        if (!first.getNumber().equals(second.getNumber()) || !first.getCountryIso().equals(second.getCountryIso()) || !first.getMnc().equals(second.getMnc())) {
+    public static boolean areSameEmergencyNumbers(
+            EmergencyNumber first, EmergencyNumber second, boolean ignoreServiceCategoryAndUrns) {
+        if (!first.getNumber().equals(second.getNumber())
+                || !first.getCountryIso().equals(second.getCountryIso())
+                || !first.getMnc().equals(second.getMnc())) {
             return false;
         }
-        if (ignoreServiceCategoryAndUrns || (first.getEmergencyServiceCategoryBitmask() == second.getEmergencyServiceCategoryBitmask() && first.getEmergencyUrns().equals(second.getEmergencyUrns()))) {
+        if (ignoreServiceCategoryAndUrns
+                || (first.getEmergencyServiceCategoryBitmask()
+                                == second.getEmergencyServiceCategoryBitmask()
+                        && first.getEmergencyUrns().equals(second.getEmergencyUrns()))) {
             return !(second.isFromSources(32) ^ first.isFromSources(32));
         }
         return false;
     }
 
-    public static EmergencyNumber mergeSameEmergencyNumbers(EmergencyNumber first, EmergencyNumber second) {
+    public static EmergencyNumber mergeSameEmergencyNumbers(
+            EmergencyNumber first, EmergencyNumber second) {
         if (areSameEmergencyNumbers(first, second, false)) {
             int routing = first.getEmergencyCallRouting();
             if (second.isFromSources(16)) {
                 routing = second.getEmergencyCallRouting();
             }
-            return new EmergencyNumber(first.getNumber(), first.getCountryIso(), first.getMnc(), first.getEmergencyServiceCategoryBitmask(), first.getEmergencyUrns(), second.getEmergencyNumberSourceBitmask() | first.getEmergencyNumberSourceBitmask(), routing);
+            return new EmergencyNumber(
+                    first.getNumber(),
+                    first.getCountryIso(),
+                    first.getMnc(),
+                    first.getEmergencyServiceCategoryBitmask(),
+                    first.getEmergencyUrns(),
+                    second.getEmergencyNumberSourceBitmask()
+                            | first.getEmergencyNumberSourceBitmask(),
+                    routing);
         }
         return null;
     }
 
-    private static List<String> mergeEmergencyUrns(List<String> firstEmergencyUrns, List<String> secondEmergencyUrns) {
+    private static List<String> mergeEmergencyUrns(
+            List<String> firstEmergencyUrns, List<String> secondEmergencyUrns) {
         List<String> mergedUrns = new ArrayList<>();
         mergedUrns.addAll(firstEmergencyUrns);
         for (String urn : secondEmergencyUrns) {
@@ -417,13 +474,17 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         return mergedUrns;
     }
 
-    private static void fillServiceCategoryAndUrns(EmergencyNumber num, SparseIntArray serviceCategoryArray, SparseArray<List<String>> urnsArray) {
+    private static void fillServiceCategoryAndUrns(
+            EmergencyNumber num,
+            SparseIntArray serviceCategoryArray,
+            SparseArray<List<String>> urnsArray) {
         int numberSrc = num.getEmergencyNumberSourceBitmask();
         for (int i : EMERGENCY_NUMBER_SOURCE_PRECEDENCE) {
             Integer source = Integer.valueOf(i);
             if ((source.intValue() & numberSrc) == source.intValue()) {
                 if (!num.isInEmergencyServiceCategories(0)) {
-                    serviceCategoryArray.put(source.intValue(), num.getEmergencyServiceCategoryBitmask());
+                    serviceCategoryArray.put(
+                            source.intValue(), num.getEmergencyServiceCategoryBitmask());
                 }
                 urnsArray.put(source.intValue(), num.getEmergencyUrns());
                 return;
@@ -431,7 +492,8 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         }
     }
 
-    public static EmergencyNumber mergeSameEmergencyNumbers(EmergencyNumber first, EmergencyNumber second, boolean mergeServiceCategoriesAndUrns) {
+    public static EmergencyNumber mergeSameEmergencyNumbers(
+            EmergencyNumber first, EmergencyNumber second, boolean mergeServiceCategoriesAndUrns) {
         if (!mergeServiceCategoriesAndUrns) {
             return mergeSameEmergencyNumbers(first, second);
         }
@@ -462,10 +524,18 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
         }
         for (int sourceOfUrn : EMERGENCY_NUMBER_SOURCE_PRECEDENCE) {
             if (urnsArray.contains(sourceOfUrn)) {
-                mergedEmergencyUrns = mergeEmergencyUrns(mergedEmergencyUrns, urnsArray.get(sourceOfUrn));
+                mergedEmergencyUrns =
+                        mergeEmergencyUrns(mergedEmergencyUrns, urnsArray.get(sourceOfUrn));
             }
         }
-        return new EmergencyNumber(first.getNumber(), first.getCountryIso(), first.getMnc(), serviceCategory, mergedEmergencyUrns, first.getEmergencyNumberSourceBitmask() | second.getEmergencyNumberSourceBitmask(), routing);
+        return new EmergencyNumber(
+                first.getNumber(),
+                first.getCountryIso(),
+                first.getMnc(),
+                serviceCategory,
+                mergedEmergencyUrns,
+                first.getEmergencyNumberSourceBitmask() | second.getEmergencyNumberSourceBitmask(),
+                routing);
     }
 
     public static boolean validateEmergencyNumberAddress(String address) {

@@ -11,6 +11,7 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.util.BoostFramework;
 import android.util.Slog;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.MemInfoReader;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -18,6 +19,7 @@ import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -35,7 +37,8 @@ public final class GPUMemoryReclaimer {
     public final Dump mDump;
     public final Utils mUtils;
     public final VendorPlugin mVendorPlugin;
-    public static boolean FEATURE_ENABLED = SystemProperties.getBoolean("ro.sys.kernelmemory.gmr.enabled", false);
+    public static boolean FEATURE_ENABLED =
+            SystemProperties.getBoolean("ro.sys.kernelmemory.gmr.enabled", false);
     public static String __VendorPluginName = null;
     public static Boolean __EnabledSwapOut = null;
     public static Boolean __EnabledSwapIn = null;
@@ -66,7 +69,8 @@ public final class GPUMemoryReclaimer {
             reclaimableTasks.sort(new GPUMemoryReclaimer$Dump$$ExternalSyntheticLambda0());
             printWriter2.println("MemInfo");
             ArrayList arrayList = new ArrayList();
-            arrayList.add(new ArrayList(Arrays.asList("pid", "name", "resident", "reclaimed", "raw")));
+            arrayList.add(
+                    new ArrayList(Arrays.asList("pid", "name", "resident", "reclaimed", "raw")));
             Iterator it2 = reclaimableTasks.iterator();
             long j = 0;
             long j2 = 0;
@@ -90,13 +94,22 @@ public final class GPUMemoryReclaimer {
                     try {
                         it = it2;
                         try {
-                            arrayList.add(new ArrayList(Arrays.asList(Integer.toString(i), str, Long.toString(j3), Long.toString(j4), Arrays.toString(jArr))));
+                            arrayList.add(
+                                    new ArrayList(
+                                            Arrays.asList(
+                                                    Integer.toString(i),
+                                                    str,
+                                                    Long.toString(j3),
+                                                    Long.toString(j4),
+                                                    Arrays.toString(jArr))));
                             j += j3;
                             j2 += j4;
                             printWriter2 = printWriter;
                         } catch (Exception e) {
                             e = e;
-                            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "pid=", " : cannot find GPU memory info: ");
+                            StringBuilder m =
+                                    BatteryService$$ExternalSyntheticOutline0.m(
+                                            i, "pid=", " : cannot find GPU memory info: ");
                             m.append(e.toString());
                             String sb = m.toString();
                             printWriter2 = printWriter;
@@ -107,7 +120,9 @@ public final class GPUMemoryReclaimer {
                     } catch (Exception e2) {
                         e = e2;
                         it = it2;
-                        StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i, "pid=", " : cannot find GPU memory info: ");
+                        StringBuilder m2 =
+                                BatteryService$$ExternalSyntheticOutline0.m(
+                                        i, "pid=", " : cannot find GPU memory info: ");
                         m2.append(e.toString());
                         String sb2 = m2.toString();
                         printWriter2 = printWriter;
@@ -122,7 +137,14 @@ public final class GPUMemoryReclaimer {
                 gPUMemoryReclaimer2 = gPUMemoryReclaimer;
                 it2 = it;
             }
-            arrayList.add(new ArrayList(Arrays.asList("TOTAL", PackageManagerShellCommandDataLoader.STDIN_PATH, Long.toString(j), Long.toString(j2), "")));
+            arrayList.add(
+                    new ArrayList(
+                            Arrays.asList(
+                                    "TOTAL",
+                                    PackageManagerShellCommandDataLoader.STDIN_PATH,
+                                    Long.toString(j),
+                                    Long.toString(j2),
+                                    "")));
             int[] iArr = new int[((ArrayList) arrayList.get(0)).size()];
             Arrays.fill(iArr, 0);
             Iterator it3 = arrayList.iterator();
@@ -159,13 +181,15 @@ public final class GPUMemoryReclaimer {
         public final BoostFramework mPerf;
         public final /* synthetic */ GPUMemoryReclaimer this$0;
 
-        public KGSLPlugin(GPUMemoryReclaimer gPUMemoryReclaimer, GPUMemoryReclaimer gPUMemoryReclaimer2) {
+        public KGSLPlugin(
+                GPUMemoryReclaimer gPUMemoryReclaimer, GPUMemoryReclaimer gPUMemoryReclaimer2) {
             String concat = "GMR ".concat(KGSLPlugin.class.getSimpleName());
             this.TAG = concat;
             this.self = gPUMemoryReclaimer2;
             BoostFramework boostFramework = new BoostFramework();
             this.mPerf = boostFramework;
-            if (Boolean.parseBoolean(boostFramework.perfGetProp("vendor.perf.bgt.enable", "false"))) {
+            if (Boolean.parseBoolean(
+                    boostFramework.perfGetProp("vendor.perf.bgt.enable", "false"))) {
                 this.mIsInitialized = true;
             } else {
                 this.mPerf = null;
@@ -176,9 +200,15 @@ public final class GPUMemoryReclaimer {
                 long maxReclaimSize = GPUMemoryReclaimer.getMaxReclaimSize();
                 int i = OsConstants._SC_PAGESIZE;
                 FileUtils.stringToFile(file, String.valueOf(maxReclaimSize / Os.sysconf(i)));
-                Slog.i(concat, "GMR: Success write max reclaim limit: " + (GPUMemoryReclaimer.getMaxReclaimSize() / Os.sysconf(i)));
+                Slog.i(
+                        concat,
+                        "GMR: Success write max reclaim limit: "
+                                + (GPUMemoryReclaimer.getMaxReclaimSize() / Os.sysconf(i)));
             } catch (IOException unused) {
-                Slog.e(this.TAG, "GMR: Failed to write max recaim limit to /sys/class/kgsl/kgsl/max_reclaim_limit");
+                Slog.e(
+                        this.TAG,
+                        "GMR: Failed to write max recaim limit to"
+                            + " /sys/class/kgsl/kgsl/max_reclaim_limit");
             }
         }
 
@@ -194,16 +224,22 @@ public final class GPUMemoryReclaimer {
 
         @Override // com.android.server.chimera.GPUMemoryReclaimer.VendorPlugin
         public final long[] getMeminfoRaw(int i) {
-            String m = VibrationParam$1$$ExternalSyntheticOutline0.m(i, "/sys/class/kgsl/kgsl/proc/");
-            String m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m, "/gpumem_mapped");
-            String m$12 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m, "/gpumem_unmapped");
-            String m$13 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m, "/gpumem_reclaimed");
+            String m =
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "/sys/class/kgsl/kgsl/proc/");
+            String m$1 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m, "/gpumem_mapped");
+            String m$12 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            m, "/gpumem_unmapped");
+            String m$13 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            m, "/gpumem_reclaimed");
             this.self.mUtils.getClass();
             long parseLong = Long.parseLong(Utils.readFileToString(m$1));
             this.self.mUtils.getClass();
             long parseLong2 = Long.parseLong(Utils.readFileToString(m$12));
             this.self.mUtils.getClass();
-            return new long[]{parseLong, parseLong2, Long.parseLong(Utils.readFileToString(m$13))};
+            return new long[] {parseLong, parseLong2, Long.parseLong(Utils.readFileToString(m$13))};
         }
 
         @Override // com.android.server.chimera.GPUMemoryReclaimer.VendorPlugin
@@ -214,7 +250,8 @@ public final class GPUMemoryReclaimer {
                 if (listFiles != null) {
                     for (File file : listFiles) {
                         if (file.isDirectory()) {
-                            ReclaimableTask reclaimableTask = new ReclaimableTask(Integer.parseInt(file.getName()), this);
+                            ReclaimableTask reclaimableTask =
+                                    new ReclaimableTask(Integer.parseInt(file.getName()), this);
                             if (reclaimableTask.mIsSuccess) {
                                 arrayList.add(reclaimableTask);
                             }
@@ -233,7 +270,7 @@ public final class GPUMemoryReclaimer {
             if (boostFramework == null) {
                 return -1;
             }
-            boostFramework.perfLockAcquire(10, new int[]{1115815936, i});
+            boostFramework.perfLockAcquire(10, new int[] {1115815936, i});
             return 0;
         }
 
@@ -243,7 +280,7 @@ public final class GPUMemoryReclaimer {
             if (boostFramework == null) {
                 return -1;
             }
-            boostFramework.perfLockAcquire(10, new int[]{1115832320, i});
+            boostFramework.perfLockAcquire(10, new int[] {1115832320, i});
             return 0;
         }
     }
@@ -316,7 +353,8 @@ public final class GPUMemoryReclaimer {
         public final String TAG = "GMR ".concat(SGPUPlugin.class.getSimpleName());
         public final /* synthetic */ GPUMemoryReclaimer this$0;
 
-        public SGPUPlugin(GPUMemoryReclaimer gPUMemoryReclaimer, GPUMemoryReclaimer gPUMemoryReclaimer2) {
+        public SGPUPlugin(
+                GPUMemoryReclaimer gPUMemoryReclaimer, GPUMemoryReclaimer gPUMemoryReclaimer2) {
             this.self = gPUMemoryReclaimer2;
             this.mIsInitialized = true;
         }
@@ -333,10 +371,17 @@ public final class GPUMemoryReclaimer {
 
         @Override // com.android.server.chimera.GPUMemoryReclaimer.VendorPlugin
         public final long[] getMeminfoRaw(int i) {
-            String m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/sys/kernel/gpu/proc/", "/summary");
+            String m =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "/sys/kernel/gpu/proc/", "/summary");
             this.self.mUtils.getClass();
             String[] split = Utils.readFileToString(m).split("\\s+");
-            return new long[]{Long.parseLong(split[1]), Long.parseLong(split[3]), Long.parseLong(split[5]), Long.parseLong(split[7])};
+            return new long[] {
+                Long.parseLong(split[1]),
+                Long.parseLong(split[3]),
+                Long.parseLong(split[5]),
+                Long.parseLong(split[7])
+            };
         }
 
         @Override // com.android.server.chimera.GPUMemoryReclaimer.VendorPlugin
@@ -347,7 +392,8 @@ public final class GPUMemoryReclaimer {
                 if (listFiles != null) {
                     for (File file : listFiles) {
                         if (file.isDirectory()) {
-                            ReclaimableTask reclaimableTask = new ReclaimableTask(Integer.parseInt(file.getName()), this);
+                            ReclaimableTask reclaimableTask =
+                                    new ReclaimableTask(Integer.parseInt(file.getName()), this);
                             if (reclaimableTask.mIsSuccess) {
                                 arrayList.add(reclaimableTask);
                             }
@@ -396,7 +442,8 @@ public final class GPUMemoryReclaimer {
                 }
             }
             this.self.mUtils.getClass();
-            long parseLong = Long.parseLong(Utils.readFileToString("/sys/kernel/gpu/proc/" + i + "/swap"));
+            long parseLong =
+                    Long.parseLong(Utils.readFileToString("/sys/kernel/gpu/proc/" + i + "/swap"));
             this.self.mUtils.getClass();
             MemInfoReader memInfoReader = new MemInfoReader();
             memInfoReader.readMemInfo();
@@ -426,7 +473,10 @@ public final class GPUMemoryReclaimer {
         public final /* synthetic */ GPUMemoryReclaimer this$0;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public SwapInHandler(GPUMemoryReclaimer gPUMemoryReclaimer, GPUMemoryReclaimer gPUMemoryReclaimer2, int i) {
+        public SwapInHandler(
+                GPUMemoryReclaimer gPUMemoryReclaimer,
+                GPUMemoryReclaimer gPUMemoryReclaimer2,
+                int i) {
             super(gPUMemoryReclaimer.mSwapInThread.getLooper());
             this.$r8$classId = i;
             switch (i) {
@@ -454,7 +504,8 @@ public final class GPUMemoryReclaimer {
                             break;
                         }
                     } catch (Exception unused) {
-                        VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("failed to handleMessage "), message.what, "GMR");
+                        VaultKeeperService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("failed to handleMessage "), message.what, "GMR");
                         return;
                     }
                     break;
@@ -468,7 +519,8 @@ public final class GPUMemoryReclaimer {
                             break;
                         }
                     } catch (Exception unused2) {
-                        VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("failed to handleMessage "), message.what, "GMR");
+                        VaultKeeperService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("failed to handleMessage "), message.what, "GMR");
                     }
                     break;
             }
@@ -536,7 +588,8 @@ public final class GPUMemoryReclaimer {
             Slog.i("GMR", "  feature enable: " + FEATURE_ENABLED);
             StringBuilder sb = new StringBuilder("  vendor_plugin: ");
             if (__VendorPluginName == null) {
-                __VendorPluginName = SystemProperties.get("ro.sys.kernelmemory.gmr.vendor_plugin", "");
+                __VendorPluginName =
+                        SystemProperties.get("ro.sys.kernelmemory.gmr.vendor_plugin", "");
             }
             sb.append(__VendorPluginName);
             Slog.i("GMR", sb.toString());
@@ -544,7 +597,8 @@ public final class GPUMemoryReclaimer {
             Slog.i("GMR", "  enabled_swap_in: " + isEnabledSwapIn());
             Slog.i("GMR", "  async: " + isAsync());
             if (__VendorPluginName == null) {
-                __VendorPluginName = SystemProperties.get("ro.sys.kernelmemory.gmr.vendor_plugin", "");
+                __VendorPluginName =
+                        SystemProperties.get("ro.sys.kernelmemory.gmr.vendor_plugin", "");
             }
             String str = __VendorPluginName;
             if ("kgsl".equals(str)) {
@@ -585,28 +639,37 @@ public final class GPUMemoryReclaimer {
 
     public static final long getMaxReclaimSize() {
         if (__MaxReclaimSize == 0) {
-            __MaxReclaimSize = SystemProperties.getLong("ro.sys.kernelmemory.gmr.max_size", 536870912L);
+            __MaxReclaimSize =
+                    SystemProperties.getLong("ro.sys.kernelmemory.gmr.max_size", 536870912L);
         }
         return __MaxReclaimSize;
     }
 
     public static final Boolean isAsync() {
         if (__Async == null) {
-            __Async = Boolean.valueOf(SystemProperties.getBoolean("ro.sys.kernelmemory.gmr.async", false));
+            __Async =
+                    Boolean.valueOf(
+                            SystemProperties.getBoolean("ro.sys.kernelmemory.gmr.async", false));
         }
         return __Async;
     }
 
     public static final Boolean isEnabledSwapIn() {
         if (__EnabledSwapIn == null) {
-            __EnabledSwapIn = Boolean.valueOf(SystemProperties.getBoolean("ro.sys.kernelmemory.gmr.enabled_swap_in", true));
+            __EnabledSwapIn =
+                    Boolean.valueOf(
+                            SystemProperties.getBoolean(
+                                    "ro.sys.kernelmemory.gmr.enabled_swap_in", true));
         }
         return __EnabledSwapIn;
     }
 
     public static final Boolean isEnabledSwapOut() {
         if (__EnabledSwapOut == null) {
-            __EnabledSwapOut = Boolean.valueOf(SystemProperties.getBoolean("ro.sys.kernelmemory.gmr.enabled_swap_out", true));
+            __EnabledSwapOut =
+                    Boolean.valueOf(
+                            SystemProperties.getBoolean(
+                                    "ro.sys.kernelmemory.gmr.enabled_swap_out", true));
         }
         return __EnabledSwapOut;
     }
@@ -624,7 +687,8 @@ public final class GPUMemoryReclaimer {
             printWriter.println("  feature enable: " + FEATURE_ENABLED);
             StringBuilder sb = new StringBuilder("  vendor_plugin: ");
             if (__VendorPluginName == null) {
-                __VendorPluginName = SystemProperties.get("ro.sys.kernelmemory.gmr.vendor_plugin", "");
+                __VendorPluginName =
+                        SystemProperties.get("ro.sys.kernelmemory.gmr.vendor_plugin", "");
             }
             sb.append(__VendorPluginName);
             printWriter.println(sb.toString());

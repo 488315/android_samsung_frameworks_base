@@ -14,8 +14,7 @@ public interface IVcnUnderlyingNetworkPolicyListener extends IInterface {
 
     public static class Default implements IVcnUnderlyingNetworkPolicyListener {
         @Override // android.net.vcn.IVcnUnderlyingNetworkPolicyListener
-        public void onPolicyChanged() throws RemoteException {
-        }
+        public void onPolicyChanged() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,8 @@ public interface IVcnUnderlyingNetworkPolicyListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVcnUnderlyingNetworkPolicyListener {
+    public abstract static class Stub extends Binder
+            implements IVcnUnderlyingNetworkPolicyListener {
         static final int TRANSACTION_onPolicyChanged = 1;
 
         public Stub() {
@@ -34,7 +34,8 @@ public interface IVcnUnderlyingNetworkPolicyListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IVcnUnderlyingNetworkPolicyListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IVcnUnderlyingNetworkPolicyListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IVcnUnderlyingNetworkPolicyListener)) {
                 return (IVcnUnderlyingNetworkPolicyListener) iin;
             }
@@ -61,7 +62,8 @@ public interface IVcnUnderlyingNetworkPolicyListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVcnUnderlyingNetworkPolicyListener.DESCRIPTOR);
             }

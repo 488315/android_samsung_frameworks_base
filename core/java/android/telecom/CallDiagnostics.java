@@ -1,9 +1,9 @@
 package android.telecom;
 
 import android.annotation.SystemApi;
-import android.telecom.Call;
 import android.telephony.CallQuality;
 import android.telephony.ims.ImsReasonInfo;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -25,14 +25,14 @@ public abstract class CallDiagnostics {
     public interface Listener {
         void onClearDiagnosticMessage(CallDiagnostics callDiagnostics, int i);
 
-        void onDisplayDiagnosticMessage(CallDiagnostics callDiagnostics, int i, CharSequence charSequence);
+        void onDisplayDiagnosticMessage(
+                CallDiagnostics callDiagnostics, int i, CharSequence charSequence);
 
         void onSendDeviceToDeviceMessage(CallDiagnostics callDiagnostics, int i, int i2);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MessageType {
-    }
+    public @interface MessageType {}
 
     public abstract void onCallDetailsChanged(Call.Details details);
 

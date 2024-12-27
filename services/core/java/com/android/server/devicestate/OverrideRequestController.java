@@ -3,8 +3,11 @@ package com.android.server.devicestate;
 import android.hardware.display.DisplayManagerInternal;
 import android.os.IBinder;
 import android.util.Slog;
+
 import com.android.server.LocalServices;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,7 +19,9 @@ public final class OverrideRequestController {
     public boolean mStickyRequest;
     public boolean mStickyRequestsAllowed;
 
-    public OverrideRequestController(DeviceStateManagerService$$ExternalSyntheticLambda1 deviceStateManagerService$$ExternalSyntheticLambda1) {
+    public OverrideRequestController(
+            DeviceStateManagerService$$ExternalSyntheticLambda1
+                    deviceStateManagerService$$ExternalSyntheticLambda1) {
         this.mListener = deviceStateManagerService$$ExternalSyntheticLambda1;
     }
 
@@ -50,8 +55,10 @@ public final class OverrideRequestController {
     public final void cancelRequestLocked(OverrideRequest overrideRequest, int i) {
         this.mListener.onStatusChanged(overrideRequest, 2, i);
         if (CoreRune.FW_FLEXIBLE_DUAL_MODE) {
-            if (overrideRequest.mRequestedState.getIdentifier() == 4 || overrideRequest.mRequestedState.getIdentifier() == 5) {
-                ((DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class)).setForceListenProcess(overrideRequest.mPid);
+            if (overrideRequest.mRequestedState.getIdentifier() == 4
+                    || overrideRequest.mRequestedState.getIdentifier() == 5) {
+                ((DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class))
+                        .setForceListenProcess(overrideRequest.mPid);
             }
         }
     }
@@ -62,7 +69,14 @@ public final class OverrideRequestController {
         printWriter.println();
         printWriter.println("Override Request active: " + z);
         if (z) {
-            printWriter.println("Request: mPid=" + overrideRequest.mPid + ", mRequestedState=" + overrideRequest.mRequestedState.getIdentifier() + ", mFlags=" + overrideRequest.mFlags + ", mStatus=ACTIVE");
+            printWriter.println(
+                    "Request: mPid="
+                            + overrideRequest.mPid
+                            + ", mRequestedState="
+                            + overrideRequest.mRequestedState.getIdentifier()
+                            + ", mFlags="
+                            + overrideRequest.mFlags
+                            + ", mStatus=ACTIVE");
         }
     }
 

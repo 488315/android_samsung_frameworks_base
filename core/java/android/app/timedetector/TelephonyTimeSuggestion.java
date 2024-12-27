@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ShellCommand;
 import android.text.format.DateFormat;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,19 +14,21 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class TelephonyTimeSuggestion implements Parcelable {
-    public static final Parcelable.Creator<TelephonyTimeSuggestion> CREATOR = new Parcelable.Creator<TelephonyTimeSuggestion>() { // from class: android.app.timedetector.TelephonyTimeSuggestion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyTimeSuggestion createFromParcel(Parcel in) {
-            return TelephonyTimeSuggestion.createFromParcel(in);
-        }
+    public static final Parcelable.Creator<TelephonyTimeSuggestion> CREATOR =
+            new Parcelable.Creator<TelephonyTimeSuggestion>() { // from class:
+                // android.app.timedetector.TelephonyTimeSuggestion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyTimeSuggestion createFromParcel(Parcel in) {
+                    return TelephonyTimeSuggestion.createFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyTimeSuggestion[] newArray(int size) {
-            return new TelephonyTimeSuggestion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyTimeSuggestion[] newArray(int size) {
+                    return new TelephonyTimeSuggestion[size];
+                }
+            };
     private ArrayList<String> mDebugInfo;
     private final int mSlotIndex;
     private final UnixEpochTime mUnixEpochTime;
@@ -40,7 +43,8 @@ public final class TelephonyTimeSuggestion implements Parcelable {
     public static TelephonyTimeSuggestion createFromParcel(Parcel in) {
         int slotIndex = in.readInt();
         UnixEpochTime unixEpochTime = (UnixEpochTime) in.readParcelable(null, UnixEpochTime.class);
-        TelephonyTimeSuggestion suggestion = new Builder(slotIndex).setUnixEpochTime(unixEpochTime).build();
+        TelephonyTimeSuggestion suggestion =
+                new Builder(slotIndex).setUnixEpochTime(unixEpochTime).build();
         ArrayList<String> debugInfo = in.readArrayList(null, String.class);
         if (debugInfo != null) {
             suggestion.addDebugInfo(debugInfo);
@@ -49,7 +53,8 @@ public final class TelephonyTimeSuggestion implements Parcelable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public static TelephonyTimeSuggestion parseCommandLineArg(ShellCommand cmd) throws IllegalArgumentException {
+    public static TelephonyTimeSuggestion parseCommandLineArg(ShellCommand cmd)
+            throws IllegalArgumentException {
         char c;
         Integer slotIndex = null;
         Long elapsedRealtimeMillis = null;
@@ -96,10 +101,12 @@ public final class TelephonyTimeSuggestion implements Parcelable {
                         break;
                     case 1:
                     case 2:
-                        elapsedRealtimeMillis = Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
+                        elapsedRealtimeMillis =
+                                Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
                         break;
                     case 3:
-                        unixEpochTimeMillis = Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
+                        unixEpochTimeMillis =
+                                Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
                         break;
                     default:
                         throw new IllegalArgumentException("Unknown option: " + opt);
@@ -114,8 +121,13 @@ public final class TelephonyTimeSuggestion implements Parcelable {
                 if (unixEpochTimeMillis == null) {
                     throw new IllegalArgumentException("No unixEpochTimeMillis specified.");
                 }
-                UnixEpochTime timeSignal = new UnixEpochTime(elapsedRealtimeMillis.longValue(), unixEpochTimeMillis.longValue());
-                Builder builder = new Builder(slotIndex.intValue()).setUnixEpochTime(timeSignal).addDebugInfo("Command line injection");
+                UnixEpochTime timeSignal =
+                        new UnixEpochTime(
+                                elapsedRealtimeMillis.longValue(), unixEpochTimeMillis.longValue());
+                Builder builder =
+                        new Builder(slotIndex.intValue())
+                                .setUnixEpochTime(timeSignal)
+                                .addDebugInfo("Command line injection");
                 return builder.build();
             }
         }
@@ -151,7 +163,9 @@ public final class TelephonyTimeSuggestion implements Parcelable {
     }
 
     public List<String> getDebugInfo() {
-        return this.mDebugInfo == null ? Collections.emptyList() : Collections.unmodifiableList(this.mDebugInfo);
+        return this.mDebugInfo == null
+                ? Collections.emptyList()
+                : Collections.unmodifiableList(this.mDebugInfo);
     }
 
     public void addDebugInfo(String debugInfo) {
@@ -176,7 +190,8 @@ public final class TelephonyTimeSuggestion implements Parcelable {
             return false;
         }
         TelephonyTimeSuggestion that = (TelephonyTimeSuggestion) o;
-        if (this.mSlotIndex == that.mSlotIndex && Objects.equals(this.mUnixEpochTime, that.mUnixEpochTime)) {
+        if (this.mSlotIndex == that.mSlotIndex
+                && Objects.equals(this.mUnixEpochTime, that.mUnixEpochTime)) {
             return true;
         }
         return false;
@@ -187,7 +202,14 @@ public final class TelephonyTimeSuggestion implements Parcelable {
     }
 
     public String toString() {
-        return "TelephonyTimeSuggestion{mSlotIndex='" + this.mSlotIndex + DateFormat.QUOTE + ", mUnixEpochTime=" + this.mUnixEpochTime + ", mDebugInfo=" + this.mDebugInfo + '}';
+        return "TelephonyTimeSuggestion{mSlotIndex='"
+                + this.mSlotIndex
+                + DateFormat.QUOTE
+                + ", mUnixEpochTime="
+                + this.mUnixEpochTime
+                + ", mDebugInfo="
+                + this.mDebugInfo
+                + '}';
     }
 
     public static final class Builder {

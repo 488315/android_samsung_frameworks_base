@@ -18,8 +18,10 @@ import android.os.Parcelable;
 import android.system.OsConstants;
 import android.util.Log;
 import android.view.flags.Flags;
+
 import dalvik.system.CloseGuard;
 import dalvik.system.VMRuntime;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -27,26 +29,27 @@ import java.lang.annotation.RetentionPolicy;
 public class Surface implements Parcelable {
     public static final int CHANGE_FRAME_RATE_ALWAYS = 1;
     public static final int CHANGE_FRAME_RATE_ONLY_IF_SEAMLESS = 0;
-    public static final Parcelable.Creator<Surface> CREATOR = new Parcelable.Creator<Surface>() { // from class: android.view.Surface.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Surface createFromParcel(Parcel source) {
-            try {
-                Surface s = new Surface();
-                s.readFromParcel(source);
-                return s;
-            } catch (Exception e) {
-                Log.e(Surface.TAG, "Exception creating surface from parcel", e);
-                return null;
-            }
-        }
+    public static final Parcelable.Creator<Surface> CREATOR =
+            new Parcelable.Creator<Surface>() { // from class: android.view.Surface.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Surface createFromParcel(Parcel source) {
+                    try {
+                        Surface s = new Surface();
+                        s.readFromParcel(source);
+                        return s;
+                    } catch (Exception e) {
+                        Log.e(Surface.TAG, "Exception creating surface from parcel", e);
+                        return null;
+                    }
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Surface[] newArray(int size) {
-            return new Surface[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Surface[] newArray(int size) {
+                    return new Surface[size];
+                }
+            };
     public static final int FRAME_RATE_CATEGORY_DEFAULT = 0;
     public static final int FRAME_RATE_CATEGORY_HIGH = 5;
     public static final int FRAME_RATE_CATEGORY_HIGH_HINT = 4;
@@ -83,32 +86,29 @@ public class Surface implements Parcelable {
     private final Canvas mCanvas = new CompatibleCanvas();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ChangeFrameRateStrategy {
-    }
+    public @interface ChangeFrameRateStrategy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrameRateCategory {
-    }
+    public @interface FrameRateCategory {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrameRateCompatibility {
-    }
+    public @interface FrameRateCompatibility {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Rotation {
-    }
+    public @interface Rotation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScalingMode {
-    }
+    public @interface ScalingMode {}
 
     private static native void nativeAllocateBuffers(long j);
 
-    private static native int nativeAttachAndQueueBufferWithColorSpace(long j, HardwareBuffer hardwareBuffer, int i);
+    private static native int nativeAttachAndQueueBufferWithColorSpace(
+            long j, HardwareBuffer hardwareBuffer, int i);
 
     private static native long nativeCreateFromSurfaceControl(long j);
 
-    private static native long nativeCreateFromSurfaceTexture(SurfaceTexture surfaceTexture) throws OutOfResourcesException;
+    private static native long nativeCreateFromSurfaceTexture(SurfaceTexture surfaceTexture)
+            throws OutOfResourcesException;
 
     private static native void nativeDestroy(long j);
 
@@ -128,7 +128,8 @@ public class Surface implements Parcelable {
 
     private static native boolean nativeIsValid(long j);
 
-    private static native long nativeLockCanvas(long j, Canvas canvas, Rect rect) throws OutOfResourcesException;
+    private static native long nativeLockCanvas(long j, Canvas canvas, Rect rect)
+            throws OutOfResourcesException;
 
     private static native long nativeReadFromParcel(long j, Parcel parcel);
 
@@ -254,12 +255,16 @@ public class Surface implements Parcelable {
         Point point;
         synchronized (this.mLock) {
             checkNotReleasedLocked();
-            point = new Point(nativeGetWidth(this.mNativeObject), nativeGetHeight(this.mNativeObject));
+            point =
+                    new Point(
+                            nativeGetWidth(this.mNativeObject),
+                            nativeGetHeight(this.mNativeObject));
         }
         return point;
     }
 
-    public Canvas lockCanvas(Rect inOutDirty) throws OutOfResourcesException, IllegalArgumentException {
+    public Canvas lockCanvas(Rect inOutDirty)
+            throws OutOfResourcesException, IllegalArgumentException {
         Canvas canvas;
         synchronized (this.mLock) {
             checkNotReleasedLocked();
@@ -285,10 +290,18 @@ public class Surface implements Parcelable {
 
     private void unlockSwCanvasAndPost(Canvas canvas) {
         if (canvas != this.mCanvas) {
-            throw new IllegalArgumentException("canvas object must be the same instance that was previously returned by lockCanvas");
+            throw new IllegalArgumentException(
+                    "canvas object must be the same instance that was previously returned by"
+                        + " lockCanvas");
         }
         if (this.mNativeObject != this.mLockedObject) {
-            Log.w(TAG, "WARNING: Surface's mNativeObject (0x" + Long.toHexString(this.mNativeObject) + ") != mLockedObject (0x" + Long.toHexString(this.mLockedObject) + NavigationBarInflaterView.KEY_CODE_END);
+            Log.w(
+                    TAG,
+                    "WARNING: Surface's mNativeObject (0x"
+                            + Long.toHexString(this.mNativeObject)
+                            + ") != mLockedObject (0x"
+                            + Long.toHexString(this.mLockedObject)
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         if (this.mLockedObject == 0) {
             throw new IllegalStateException("Surface was not locked");
@@ -308,7 +321,10 @@ public class Surface implements Parcelable {
             if (this.mHwuiContext == null) {
                 this.mHwuiContext = new HwuiContext(false);
             }
-            lockCanvas = this.mHwuiContext.lockCanvas(nativeGetWidth(this.mNativeObject), nativeGetHeight(this.mNativeObject));
+            lockCanvas =
+                    this.mHwuiContext.lockCanvas(
+                            nativeGetWidth(this.mNativeObject),
+                            nativeGetHeight(this.mNativeObject));
         }
         return lockCanvas;
     }
@@ -324,7 +340,10 @@ public class Surface implements Parcelable {
             if (this.mHwuiContext == null) {
                 this.mHwuiContext = new HwuiContext(true);
             }
-            lockCanvas = this.mHwuiContext.lockCanvas(nativeGetWidth(this.mNativeObject), nativeGetHeight(this.mNativeObject));
+            lockCanvas =
+                    this.mHwuiContext.lockCanvas(
+                            nativeGetWidth(this.mNativeObject),
+                            nativeGetHeight(this.mNativeObject));
         }
         return lockCanvas;
     }
@@ -360,7 +379,8 @@ public class Surface implements Parcelable {
         }
         long surfaceControlPtr = other.mNativeObject;
         if (surfaceControlPtr == 0) {
-            throw new NullPointerException("null SurfaceControl native object. Are you using a released SurfaceControl?");
+            throw new NullPointerException(
+                    "null SurfaceControl native object. Are you using a released SurfaceControl?");
         }
         long newNativeObject = nativeGetFromSurfaceControl(this.mNativeObject, surfaceControlPtr);
         updateNativeObject(newNativeObject);
@@ -374,7 +394,8 @@ public class Surface implements Parcelable {
         if (blastBufferQueuePtr == 0) {
             throw new NullPointerException("Null BLASTBufferQueue native object");
         }
-        long newNativeObject = nativeGetFromBlastBufferQueue(this.mNativeObject, blastBufferQueuePtr);
+        long newNativeObject =
+                nativeGetFromBlastBufferQueue(this.mNativeObject, blastBufferQueuePtr);
         updateNativeObject(newNativeObject);
     }
 
@@ -384,7 +405,8 @@ public class Surface implements Parcelable {
         }
         long surfaceControlPtr = other.mNativeObject;
         if (surfaceControlPtr == 0) {
-            throw new NullPointerException("null SurfaceControl native object. Are you using a released SurfaceControl?");
+            throw new NullPointerException(
+                    "null SurfaceControl native object. Are you using a released SurfaceControl?");
         }
         long newNativeObject = nativeCreateFromSurfaceControl(surfaceControlPtr);
         synchronized (this.mLock) {
@@ -449,7 +471,13 @@ public class Surface implements Parcelable {
     public String toString() {
         String str;
         synchronized (this.mLock) {
-            str = "Surface(name=" + this.mName + " mNativeObject=" + this.mNativeObject + ")/@0x" + Integer.toHexString(System.identityHashCode(this));
+            str =
+                    "Surface(name="
+                            + this.mName
+                            + " mNativeObject="
+                            + this.mNativeObject
+                            + ")/@0x"
+                            + Integer.toHexString(System.identityHashCode(this));
         }
         return str;
     }
@@ -508,9 +536,13 @@ public class Surface implements Parcelable {
             if (colorSpace == null) {
                 colorSpace = ColorSpace.get(ColorSpace.Named.SRGB);
             }
-            int err = nativeAttachAndQueueBufferWithColorSpace(this.mNativeObject, buffer, colorSpace.getId());
+            int err =
+                    nativeAttachAndQueueBufferWithColorSpace(
+                            this.mNativeObject, buffer, colorSpace.getId());
             if (err != 0) {
-                throw new RuntimeException("Failed to attach and queue buffer to Surface (bad object?), native error: " + err);
+                throw new RuntimeException(
+                        "Failed to attach and queue buffer to Surface (bad object?), native error: "
+                                + err);
             }
         }
     }
@@ -523,7 +555,8 @@ public class Surface implements Parcelable {
         if (this.mIsSharedBufferModeEnabled != enabled) {
             int error = nativeSetSharedBufferModeEnabled(this.mNativeObject, enabled);
             if (error != 0) {
-                throw new RuntimeException("Failed to set shared buffer mode on Surface (bad object?)");
+                throw new RuntimeException(
+                        "Failed to set shared buffer mode on Surface (bad object?)");
             }
             this.mIsSharedBufferModeEnabled = enabled;
         }
@@ -550,7 +583,9 @@ public class Surface implements Parcelable {
     public void setFrameRate(float frameRate, int compatibility, int changeFrameRateStrategy) {
         synchronized (this.mLock) {
             checkNotReleasedLocked();
-            int error = nativeSetFrameRate(this.mNativeObject, frameRate, compatibility, changeFrameRateStrategy);
+            int error =
+                    nativeSetFrameRate(
+                            this.mNativeObject, frameRate, compatibility, changeFrameRateStrategy);
             if (error == (-OsConstants.EINVAL)) {
                 throw new IllegalArgumentException("Invalid argument to Surface.setFrameRate()");
             }
@@ -565,7 +600,8 @@ public class Surface implements Parcelable {
             checkNotReleasedLocked();
             int error = nativeSetFrameRate(this.mNativeObject, 0.0f, 0, 0);
             if (error != 0) {
-                throw new RuntimeException("Failed to clear the frame rate on Surface. Native error: " + error);
+                throw new RuntimeException(
+                        "Failed to clear the frame rate on Surface. Native error: " + error);
             }
         }
     }
@@ -575,8 +611,7 @@ public class Surface implements Parcelable {
     }
 
     public static class OutOfResourcesException extends RuntimeException {
-        public OutOfResourcesException() {
-        }
+        public OutOfResourcesException() {}
 
         public OutOfResourcesException(String name) {
             super(name);
@@ -607,7 +642,9 @@ public class Surface implements Parcelable {
 
         @Override // android.graphics.Canvas
         public void setMatrix(Matrix matrix) {
-            if (Surface.this.mCompatibleMatrix == null || this.mOrigMatrix == null || this.mOrigMatrix.equals(matrix)) {
+            if (Surface.this.mCompatibleMatrix == null
+                    || this.mOrigMatrix == null
+                    || this.mOrigMatrix.equals(matrix)) {
                 super.setMatrix(matrix);
                 return;
             }
@@ -654,11 +691,16 @@ public class Surface implements Parcelable {
 
         void unlockAndPost(Canvas canvas) {
             if (canvas != this.mCanvas) {
-                throw new IllegalArgumentException("canvas object must be the same instance that was previously returned by lockCanvas");
+                throw new IllegalArgumentException(
+                        "canvas object must be the same instance that was previously returned by"
+                            + " lockCanvas");
             }
             this.mRenderNode.endRecording();
             this.mCanvas = null;
-            this.mHardwareRenderer.createRenderRequest().setVsyncTime(System.nanoTime()).syncAndDraw();
+            this.mHardwareRenderer
+                    .createRenderRequest()
+                    .setVsyncTime(System.nanoTime())
+                    .syncAndDraw();
         }
 
         void updateSurface() {

@@ -16,7 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.util.Comparator;
 
 /* loaded from: classes5.dex */
@@ -71,14 +73,19 @@ public class MediaRouteChooserDialog extends AlertDialog {
     @Override // android.app.AlertDialog, android.app.Dialog
     protected void onCreate(Bundle savedInstanceState) {
         int i;
-        setView(LayoutInflater.from(getContext()).inflate(R.layout.media_route_chooser_dialog, (ViewGroup) null));
+        setView(
+                LayoutInflater.from(getContext())
+                        .inflate(R.layout.media_route_chooser_dialog, (ViewGroup) null));
         if (this.mRouteTypes == 4) {
             i = R.string.media_route_chooser_title_for_remote_display;
         } else {
             i = R.string.media_route_chooser_title;
         }
         setTitle(i);
-        setIcon(isLightTheme(getContext()) ? R.drawable.ic_media_route_off_holo_light : R.drawable.ic_media_route_off_holo_dark);
+        setIcon(
+                isLightTheme(getContext())
+                        ? R.drawable.ic_media_route_off_holo_light
+                        : R.drawable.ic_media_route_off_holo_dark);
         super.onCreate(savedInstanceState);
         View emptyView = findViewById(16908292);
         this.mAdapter = new RouteAdapter(getContext());
@@ -86,11 +93,13 @@ public class MediaRouteChooserDialog extends AlertDialog {
         this.mListView.setAdapter((ListAdapter) this.mAdapter);
         this.mListView.setOnItemClickListener(this.mAdapter);
         this.mListView.setEmptyView(emptyView);
-        this.mExtendedSettingsButton = (Button) findViewById(R.id.media_route_extended_settings_button);
+        this.mExtendedSettingsButton =
+                (Button) findViewById(R.id.media_route_extended_settings_button);
         updateExtendedSettingsButton();
         if (!this.mShowProgressBarWhenEmpty) {
             findViewById(R.id.media_route_progress_bar).setVisibility(8);
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) emptyView.getLayoutParams();
+            LinearLayout.LayoutParams params =
+                    (LinearLayout.LayoutParams) emptyView.getLayoutParams();
             params.gravity = 17;
             emptyView.setLayoutParams(params);
         }
@@ -99,7 +108,8 @@ public class MediaRouteChooserDialog extends AlertDialog {
     private void updateExtendedSettingsButton() {
         if (this.mExtendedSettingsButton != null) {
             this.mExtendedSettingsButton.setOnClickListener(this.mExtendedSettingsClickListener);
-            this.mExtendedSettingsButton.setVisibility(this.mExtendedSettingsClickListener != null ? 0 : 8);
+            this.mExtendedSettingsButton.setVisibility(
+                    this.mExtendedSettingsClickListener != null ? 0 : 8);
         }
     }
 
@@ -129,7 +139,8 @@ public class MediaRouteChooserDialog extends AlertDialog {
         return context.getTheme().resolveAttribute(16844176, value, true) && value.data != 0;
     }
 
-    private final class RouteAdapter extends ArrayAdapter<MediaRouter.RouteInfo> implements AdapterView.OnItemClickListener {
+    private final class RouteAdapter extends ArrayAdapter<MediaRouter.RouteInfo>
+            implements AdapterView.OnItemClickListener {
         private final LayoutInflater mInflater;
 
         public RouteAdapter(Context context) {
@@ -193,8 +204,7 @@ public class MediaRouteChooserDialog extends AlertDialog {
     }
 
     private final class MediaRouterCallback extends MediaRouter.SimpleCallback {
-        private MediaRouterCallback() {
-        }
+        private MediaRouterCallback() {}
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
         public void onRouteAdded(MediaRouter router, MediaRouter.RouteInfo info) {
@@ -220,8 +230,7 @@ public class MediaRouteChooserDialog extends AlertDialog {
     private static final class RouteComparator implements Comparator<MediaRouter.RouteInfo> {
         public static final RouteComparator sInstance = new RouteComparator();
 
-        private RouteComparator() {
-        }
+        private RouteComparator() {}
 
         @Override // java.util.Comparator
         public int compare(MediaRouter.RouteInfo lhs, MediaRouter.RouteInfo rhs) {

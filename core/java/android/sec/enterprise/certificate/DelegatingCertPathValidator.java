@@ -2,7 +2,9 @@ package android.sec.enterprise.certificate;
 
 import android.sec.enterprise.auditlog.AuditEvents;
 import android.util.Log;
+
 import com.samsung.android.security.mdf.MdfUtils;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -39,15 +41,18 @@ public final class DelegatingCertPathValidator extends CertPathValidatorSpi {
     }
 
     @Override // java.security.cert.CertPathValidatorSpi
-    public CertPathValidatorResult engineValidate(CertPath cp, CertPathParameters params) throws CertPathValidatorException, InvalidAlgorithmParameterException {
+    public CertPathValidatorResult engineValidate(CertPath cp, CertPathParameters params)
+            throws CertPathValidatorException, InvalidAlgorithmParameterException {
         if (DEBUG) {
             Log.d(TAG, "engineValidate");
         }
         if (!(params instanceof PKIXParameters)) {
-            throw new InvalidAlgorithmParameterException("inappropriate params, must be an instance of PKIXParameters");
+            throw new InvalidAlgorithmParameterException(
+                    "inappropriate params, must be an instance of PKIXParameters");
         }
         if (!DelegatingCertPathValidatorHelper.isChainTrustedByMdm(cp.getCertificates())) {
-            throw new CertPathValidatorException("A certificate from chain is not trusted by MDM policy");
+            throw new CertPathValidatorException(
+                    "A certificate from chain is not trusted by MDM policy");
         }
         PKIXRevocationChecker revChecker = (PKIXRevocationChecker) engineGetRevocationChecker();
         Set<PKIXRevocationChecker.Option> opt = revChecker.getOptions();
@@ -57,7 +62,12 @@ public final class DelegatingCertPathValidator extends CertPathValidatorSpi {
                 CertPathValidatorResult ret = this.mDelegate.validate(cp, params);
                 return ret;
             } catch (CertPathValidatorException e) {
-                MdfUtils.logMdf(String.format(AuditEvents.AUDIT_CERT_PATH_VALIDATOR_FAILED, e.getMessage()), "", false, 3, "CertPathValidator");
+                MdfUtils.logMdf(
+                        String.format(AuditEvents.AUDIT_CERT_PATH_VALIDATOR_FAILED, e.getMessage()),
+                        "",
+                        false,
+                        3,
+                        "CertPathValidator");
                 throw e;
             }
         } finally {

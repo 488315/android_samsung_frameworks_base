@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class KeystoreArguments implements Parcelable {
-    public static final Parcelable.Creator<KeystoreArguments> CREATOR = new Parcelable.Creator<KeystoreArguments>() { // from class: android.security.KeystoreArguments.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeystoreArguments createFromParcel(Parcel in) {
-            return new KeystoreArguments(in);
-        }
+    public static final Parcelable.Creator<KeystoreArguments> CREATOR =
+            new Parcelable.Creator<
+                    KeystoreArguments>() { // from class: android.security.KeystoreArguments.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeystoreArguments createFromParcel(Parcel in) {
+                    return new KeystoreArguments(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeystoreArguments[] newArray(int size) {
-            return new KeystoreArguments[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeystoreArguments[] newArray(int size) {
+                    return new KeystoreArguments[size];
+                }
+            };
     public byte[][] args;
 
     public KeystoreArguments() {

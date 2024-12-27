@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.hardware.soundtrigger.V2_3.OptionalModelParameterRange$$ExternalSyntheticOutline0;
 import android.util.LongArray;
 import android.util.Slog;
+
 import com.android.internal.compat.AndroidBuildClassifier;
 import com.android.internal.compat.CompatibilityOverrideConfig;
 import com.android.internal.compat.CompatibilityOverridesToRemoveConfig;
@@ -17,6 +18,9 @@ import com.android.server.compat.config.XmlParser;
 import com.android.server.compat.overrides.ChangeOverrides;
 import com.android.server.compat.overrides.Overrides;
 import com.android.server.compat.overrides.XmlWriter;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,8 +32,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -52,24 +56,32 @@ public final class CompatConfig {
         this.mChanges.put(Long.valueOf(compatChange.getId()), compatChange);
     }
 
-    public final boolean addOverrideUnsafe(final long j, String str, PackageOverride packageOverride) {
+    public final boolean addOverrideUnsafe(
+            final long j, String str, PackageOverride packageOverride) {
         String str2;
         final AtomicBoolean atomicBoolean = new AtomicBoolean(true);
-        OverrideAllowedState overrideAllowedStateInternal = this.mOverrideValidator.getOverrideAllowedStateInternal(str, j, false);
+        OverrideAllowedState overrideAllowedStateInternal =
+                this.mOverrideValidator.getOverrideAllowedStateInternal(str, j, false);
         overrideAllowedStateInternal.enforce(j, str);
         Long versionCodeOrNull = getVersionCodeOrNull(str);
-        CompatChange compatChange = (CompatChange) this.mChanges.computeIfAbsent(Long.valueOf(j), new Function() { // from class: com.android.server.compat.CompatConfig$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                AtomicBoolean atomicBoolean2 = atomicBoolean;
-                long j2 = j;
-                atomicBoolean2.set(false);
-                return new CompatChange(j2);
-            }
-        });
+        CompatChange compatChange =
+                (CompatChange)
+                        this.mChanges.computeIfAbsent(
+                                Long.valueOf(j),
+                                new Function() { // from class:
+                                                 // com.android.server.compat.CompatConfig$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        AtomicBoolean atomicBoolean2 = atomicBoolean;
+                                        long j2 = j;
+                                        atomicBoolean2.set(false);
+                                        return new CompatChange(j2);
+                                    }
+                                });
         synchronized (compatChange) {
             if (compatChange.getLoggingOnly()) {
-                throw new IllegalArgumentException("Can't add overrides for a logging only change " + compatChange.toString());
+                throw new IllegalArgumentException(
+                        "Can't add overrides for a logging only change " + compatChange.toString());
             }
             compatChange.mRawOverrides.put(str, packageOverride);
             compatChange.recheckOverride(str, overrideAllowedStateInternal, versionCodeOrNull);
@@ -91,21 +103,30 @@ public final class CompatConfig {
         return atomicBoolean.get();
     }
 
-    public final synchronized void addPackageOverrides(CompatibilityOverrideConfig compatibilityOverrideConfig, String str, boolean z) {
+    public final synchronized void addPackageOverrides(
+            CompatibilityOverrideConfig compatibilityOverrideConfig, String str, boolean z) {
         addPackageOverridesWithoutSaving(compatibilityOverrideConfig, str, z);
         saveOverrides();
         ChangeIdStateCache.invalidate();
     }
 
-    public final void addPackageOverridesWithoutSaving(CompatibilityOverrideConfig compatibilityOverrideConfig, String str, boolean z) {
+    public final void addPackageOverridesWithoutSaving(
+            CompatibilityOverrideConfig compatibilityOverrideConfig, String str, boolean z) {
         for (Long l : compatibilityOverrideConfig.overrides.keySet()) {
             if (z) {
                 l.getClass();
                 if (!this.mChanges.containsKey(l)) {
-                    Slog.w("CompatConfig", "Trying to add overrides for unknown Change ID " + l + ". Skipping Change ID.");
+                    Slog.w(
+                            "CompatConfig",
+                            "Trying to add overrides for unknown Change ID "
+                                    + l
+                                    + ". Skipping Change ID.");
                 }
             }
-            addOverrideUnsafe(l.longValue(), str, (PackageOverride) compatibilityOverrideConfig.overrides.get(l));
+            addOverrideUnsafe(
+                    l.longValue(),
+                    str,
+                    (PackageOverride) compatibilityOverrideConfig.overrides.get(l));
         }
     }
 
@@ -121,7 +142,10 @@ public final class CompatConfig {
         LongArray longArray = new LongArray();
         for (CompatChange compatChange : this.mChanges.values()) {
             if (compatChange.getEnableSinceTargetSdk() == i) {
-                if (this.mOverrideValidator.getOverrideAllowedStateInternal(str, compatChange.getId(), false).state == 0) {
+                if (this.mOverrideValidator.getOverrideAllowedStateInternal(
+                                        str, compatChange.getId(), false)
+                                .state
+                        == 0) {
                     longArray.add(compatChange.getId());
                 }
             }
@@ -131,7 +155,11 @@ public final class CompatConfig {
 
     public final Long getVersionCodeOrNull(String str) {
         try {
-            return Long.valueOf(this.mContext.getPackageManager().getApplicationInfo(str, 4194304).longVersionCode);
+            return Long.valueOf(
+                    this.mContext
+                            .getPackageManager()
+                            .getApplicationInfo(str, 4194304)
+                            .longVersionCode);
         } catch (PackageManager.NameNotFoundException unused) {
             return null;
         }
@@ -189,7 +217,17 @@ public final class CompatConfig {
                                 booleanValue = bool3.booleanValue();
                                 str = str3;
                             }
-                            concurrentHashMap.put(valueOf, new CompatChange(j, str2, intValue, intValue2, booleanValue2, booleanValue3, str, booleanValue));
+                            concurrentHashMap.put(
+                                    valueOf,
+                                    new CompatChange(
+                                            j,
+                                            str2,
+                                            intValue,
+                                            intValue2,
+                                            booleanValue2,
+                                            booleanValue3,
+                                            str,
+                                            booleanValue));
                         } catch (Throwable th) {
                             th = th;
                             Throwable th2 = th;
@@ -203,9 +241,14 @@ public final class CompatConfig {
                     }
                     try {
                         bufferedInputStream.close();
-                    } catch (IOException | DatatypeConfigurationException | XmlPullParserException e2) {
+                    } catch (IOException
+                            | DatatypeConfigurationException
+                            | XmlPullParserException e2) {
                         e = e2;
-                        Slog.e("CompatConfig", "Encountered an error while reading/parsing compat config file", e);
+                        Slog.e(
+                                "CompatConfig",
+                                "Encountered an error while reading/parsing compat config file",
+                                e);
                     }
                 } catch (Throwable th4) {
                     th = th4;
@@ -247,9 +290,12 @@ public final class CompatConfig {
         if (file.exists()) {
             try {
                 try {
-                    BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+                    BufferedInputStream bufferedInputStream =
+                            new BufferedInputStream(new FileInputStream(file));
                     try {
-                        Overrides read = com.android.server.compat.overrides.XmlParser.read(bufferedInputStream);
+                        Overrides read =
+                                com.android.server.compat.overrides.XmlParser.read(
+                                        bufferedInputStream);
                         if (read == null) {
                             Slog.w("CompatConfig", "Parsing " + file.getPath() + " failed");
                             bufferedInputStream.close();
@@ -258,9 +304,14 @@ public final class CompatConfig {
                         for (ChangeOverrides changeOverrides : read.getChangeOverrides()) {
                             Long l = changeOverrides.changeId;
                             long longValue = l == null ? 0L : l.longValue();
-                            CompatChange compatChange = (CompatChange) this.mChanges.get(Long.valueOf(longValue));
+                            CompatChange compatChange =
+                                    (CompatChange) this.mChanges.get(Long.valueOf(longValue));
                             if (compatChange == null) {
-                                Slog.w("CompatConfig", "Change ID " + longValue + " not found. Skipping overrides for it.");
+                                Slog.w(
+                                        "CompatConfig",
+                                        "Change ID "
+                                                + longValue
+                                                + " not found. Skipping overrides for it.");
                             } else {
                                 compatChange.loadOverrides(changeOverrides);
                             }
@@ -287,7 +338,8 @@ public final class CompatConfig {
         String str2;
         long id = compatChange.getId();
         boolean z = false;
-        OverrideAllowedState overrideAllowedStateInternal = this.mOverrideValidator.getOverrideAllowedStateInternal(str, id, false);
+        OverrideAllowedState overrideAllowedStateInternal =
+                this.mOverrideValidator.getOverrideAllowedStateInternal(str, id, false);
         synchronized (compatChange) {
             if (compatChange.mRawOverrides.containsKey(str)) {
                 overrideAllowedStateInternal.enforce(compatChange.getId(), str);
@@ -304,7 +356,10 @@ public final class CompatConfig {
             } else {
                 str2 = "";
             }
-            Slog.d("CompatConfig", OptionalModelParameterRange$$ExternalSyntheticOutline0.m(sb, str2, " for ", str, " to default value."));
+            Slog.d(
+                    "CompatConfig",
+                    OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                            sb, str2, " for ", str, " to default value."));
         }
         return z;
     }
@@ -326,16 +381,24 @@ public final class CompatConfig {
         }
     }
 
-    public final boolean removePackageOverridesWithoutSaving(CompatibilityOverridesToRemoveConfig compatibilityOverridesToRemoveConfig, String str) {
+    public final boolean removePackageOverridesWithoutSaving(
+            CompatibilityOverridesToRemoveConfig compatibilityOverridesToRemoveConfig, String str) {
         boolean z = false;
         for (Long l : compatibilityOverridesToRemoveConfig.changeIds) {
             l.getClass();
             if (this.mChanges.containsKey(l)) {
                 Long versionCodeOrNull = getVersionCodeOrNull(str);
                 CompatChange compatChange = (CompatChange) this.mChanges.get(l);
-                z |= compatChange != null ? removeOverrideUnsafe(compatChange, str, versionCodeOrNull) : false;
+                z |=
+                        compatChange != null
+                                ? removeOverrideUnsafe(compatChange, str, versionCodeOrNull)
+                                : false;
             } else {
-                Slog.w("CompatConfig", "Trying to remove overrides for unknown Change ID " + l + ". Skipping Change ID.");
+                Slog.w(
+                        "CompatConfig",
+                        "Trying to remove overrides for unknown Change ID "
+                                + l
+                                + ". Skipping Change ID.");
             }
         }
         return z;
@@ -359,7 +422,12 @@ public final class CompatConfig {
                         if (this.mBackupOverridesFile.exists()) {
                             this.mOverridesFile.delete();
                         } else if (!this.mOverridesFile.renameTo(this.mBackupOverridesFile)) {
-                            Slog.e("CompatConfig", "Couldn't rename file " + this.mOverridesFile + " to " + this.mBackupOverridesFile);
+                            Slog.e(
+                                    "CompatConfig",
+                                    "Couldn't rename file "
+                                            + this.mOverridesFile
+                                            + " to "
+                                            + this.mBackupOverridesFile);
                             return;
                         }
                     }
@@ -388,7 +456,9 @@ public final class CompatConfig {
                             throw th;
                         }
                     } catch (IOException e2) {
-                        Slog.e("CompatConfig", "Could not create override config file: " + e2.toString());
+                        Slog.e(
+                                "CompatConfig",
+                                "Could not create override config file: " + e2.toString());
                     }
                 }
             } finally {

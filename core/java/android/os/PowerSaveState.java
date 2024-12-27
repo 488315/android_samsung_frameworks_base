@@ -1,22 +1,22 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class PowerSaveState implements Parcelable {
-    public static final Parcelable.Creator<PowerSaveState> CREATOR = new Parcelable.Creator<PowerSaveState>() { // from class: android.os.PowerSaveState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PowerSaveState createFromParcel(Parcel source) {
-            return new PowerSaveState(source);
-        }
+    public static final Parcelable.Creator<PowerSaveState> CREATOR =
+            new Parcelable.Creator<PowerSaveState>() { // from class: android.os.PowerSaveState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PowerSaveState createFromParcel(Parcel source) {
+                    return new PowerSaveState(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PowerSaveState[] newArray(int size) {
-            return new PowerSaveState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PowerSaveState[] newArray(int size) {
+                    return new PowerSaveState[size];
+                }
+            };
     public final boolean batterySaverEnabled;
     public final float brightnessFactor;
     public final boolean globalBatterySaverEnabled;

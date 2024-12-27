@@ -9,7 +9,9 @@ import android.icu.text.DateFormatSymbols;
 import android.icu.text.MeasureFormat;
 import android.icu.util.Measure;
 import android.icu.util.MeasureUnit;
+
 import com.android.internal.R;
+
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -23,39 +25,31 @@ import java.util.TimeZone;
 /* loaded from: classes4.dex */
 public class DateUtils {
 
-    @Deprecated
-    public static final String ABBREV_MONTH_FORMAT = "%b";
+    @Deprecated public static final String ABBREV_MONTH_FORMAT = "%b";
     public static final String ABBREV_WEEKDAY_FORMAT = "%a";
     public static final long DAY_IN_MILLIS = 86400000;
 
-    @Deprecated
-    public static final int FORMAT_12HOUR = 64;
+    @Deprecated public static final int FORMAT_12HOUR = 64;
 
-    @Deprecated
-    public static final int FORMAT_24HOUR = 128;
+    @Deprecated public static final int FORMAT_24HOUR = 128;
     public static final int FORMAT_ABBREV_ALL = 524288;
     public static final int FORMAT_ABBREV_MONTH = 65536;
     public static final int FORMAT_ABBREV_RELATIVE = 262144;
     public static final int FORMAT_ABBREV_TIME = 16384;
     public static final int FORMAT_ABBREV_WEEKDAY = 32768;
 
-    @Deprecated
-    public static final int FORMAT_CAP_AMPM = 256;
+    @Deprecated public static final int FORMAT_CAP_AMPM = 256;
 
-    @Deprecated
-    public static final int FORMAT_CAP_MIDNIGHT = 4096;
+    @Deprecated public static final int FORMAT_CAP_MIDNIGHT = 4096;
 
-    @Deprecated
-    public static final int FORMAT_CAP_NOON = 1024;
+    @Deprecated public static final int FORMAT_CAP_NOON = 1024;
 
-    @Deprecated
-    public static final int FORMAT_CAP_NOON_MIDNIGHT = 5120;
+    @Deprecated public static final int FORMAT_CAP_NOON_MIDNIGHT = 5120;
     public static final int FORMAT_NO_MIDNIGHT = 2048;
     public static final int FORMAT_NO_MONTH_DAY = 32;
     public static final int FORMAT_NO_NOON = 512;
 
-    @Deprecated
-    public static final int FORMAT_NO_NOON_MIDNIGHT = 2560;
+    @Deprecated public static final int FORMAT_NO_NOON_MIDNIGHT = 2560;
     public static final int FORMAT_NO_YEAR = 8;
     public static final int FORMAT_NUMERIC_DATE = 131072;
     public static final int FORMAT_SHOW_DATE = 16;
@@ -63,27 +57,20 @@ public class DateUtils {
     public static final int FORMAT_SHOW_WEEKDAY = 2;
     public static final int FORMAT_SHOW_YEAR = 4;
 
-    @Deprecated
-    public static final int FORMAT_UTC = 8192;
+    @Deprecated public static final int FORMAT_UTC = 8192;
     public static final long HOUR_IN_MILLIS = 3600000;
 
-    @Deprecated
-    public static final String HOUR_MINUTE_24 = "%H:%M";
+    @Deprecated public static final String HOUR_MINUTE_24 = "%H:%M";
 
-    @Deprecated
-    public static final int LENGTH_LONG = 10;
+    @Deprecated public static final int LENGTH_LONG = 10;
 
-    @Deprecated
-    public static final int LENGTH_MEDIUM = 20;
+    @Deprecated public static final int LENGTH_MEDIUM = 20;
 
-    @Deprecated
-    public static final int LENGTH_SHORT = 30;
+    @Deprecated public static final int LENGTH_SHORT = 30;
 
-    @Deprecated
-    public static final int LENGTH_SHORTER = 40;
+    @Deprecated public static final int LENGTH_SHORTER = 40;
 
-    @Deprecated
-    public static final int LENGTH_SHORTEST = 50;
+    @Deprecated public static final int LENGTH_SHORTEST = 50;
     public static final long MINUTE_IN_MILLIS = 60000;
     public static final String MONTH_DAY_FORMAT = "%-d";
     public static final String MONTH_FORMAT = "%B";
@@ -94,8 +81,7 @@ public class DateUtils {
     public static final String YEAR_FORMAT = "%Y";
     public static final String YEAR_FORMAT_TWO_DIGITS = "%g";
 
-    @Deprecated
-    public static final long YEAR_IN_MILLIS = 31449600000L;
+    @Deprecated public static final long YEAR_IN_MILLIS = 31449600000L;
     private static String sElapsedFormatHMMSS;
     private static String sElapsedFormatMMSS;
     private static Configuration sLastConfig;
@@ -103,11 +89,9 @@ public class DateUtils {
     private static Time sThenTime;
     private static final Object sLock = new Object();
 
-    @Deprecated
-    public static final int[] sameYearTable = null;
+    @Deprecated public static final int[] sameYearTable = null;
 
-    @Deprecated
-    public static final int[] sameMonthTable = null;
+    @Deprecated public static final int[] sameMonthTable = null;
 
     @Deprecated
     public static String getDayOfWeekString(int dayOfWeek, int abbrev) {
@@ -159,16 +143,26 @@ public class DateUtils {
         return getRelativeTimeSpanString(time, now, minResolution, 65556);
     }
 
-    public static CharSequence getRelativeTimeSpanString(long time, long now, long minResolution, int flags) {
-        return RelativeDateTimeFormatter.getRelativeTimeSpanString(Locale.getDefault(), TimeZone.getDefault(), time, now, minResolution, flags);
+    public static CharSequence getRelativeTimeSpanString(
+            long time, long now, long minResolution, int flags) {
+        return RelativeDateTimeFormatter.getRelativeTimeSpanString(
+                Locale.getDefault(), TimeZone.getDefault(), time, now, minResolution, flags);
     }
 
-    public static CharSequence getRelativeDateTimeString(Context c, long time, long minResolution, long transitionResolution, int flags) {
+    public static CharSequence getRelativeDateTimeString(
+            Context c, long time, long minResolution, long transitionResolution, int flags) {
         int flags2 = flags;
         if ((flags2 & 193) == 1) {
             flags2 |= DateFormat.is24HourFormat(c) ? 128 : 64;
         }
-        return RelativeDateTimeFormatter.getRelativeDateTimeString(Locale.getDefault(), TimeZone.getDefault(), time, System.currentTimeMillis(), minResolution, transitionResolution, flags2);
+        return RelativeDateTimeFormatter.getRelativeDateTimeString(
+                Locale.getDefault(),
+                TimeZone.getDefault(),
+                time,
+                System.currentTimeMillis(),
+                minResolution,
+                transitionResolution,
+                flags2);
     }
 
     private static void initFormatStrings() {
@@ -222,11 +216,18 @@ public class DateUtils {
         return formatter.format(new Measure(Integer.valueOf(seconds), MeasureUnit.SECOND));
     }
 
-    public static String semFormatElapsedTime(StringBuilder recycle, long elapsedMilliSeconds, boolean showZeroHour, int millisCount) {
+    public static String semFormatElapsedTime(
+            StringBuilder recycle,
+            long elapsedMilliSeconds,
+            boolean showZeroHour,
+            int millisCount) {
         String baseFormat;
         long hours = 0;
         long minutes = 0;
-        long milliSeconds = (long) ((elapsedMilliSeconds / Math.pow(10.0d, 3 - millisCount)) % Math.pow(10.0d, millisCount));
+        long milliSeconds =
+                (long)
+                        ((elapsedMilliSeconds / Math.pow(10.0d, 3 - millisCount))
+                                % Math.pow(10.0d, millisCount));
         long elapsedSeconds = elapsedMilliSeconds / 1000;
         if (elapsedSeconds >= 3600) {
             hours = elapsedSeconds / 3600;
@@ -248,9 +249,15 @@ public class DateUtils {
         if (!showZeroHour && hours <= 0) {
             String baseFormat2 = sElapsedFormatMMSS;
             if (millisCount <= 0) {
-                return f.format(baseFormat2, Long.valueOf(minutes), Long.valueOf(seconds)).toString();
+                return f.format(baseFormat2, Long.valueOf(minutes), Long.valueOf(seconds))
+                        .toString();
             }
-            return f.format(baseFormat2 + ".%3$0" + millisCount + XmlTags.ATTR_DESCRIPTION, Long.valueOf(minutes), Long.valueOf(seconds), Long.valueOf(milliSeconds)).toString();
+            return f.format(
+                            baseFormat2 + ".%3$0" + millisCount + XmlTags.ATTR_DESCRIPTION,
+                            Long.valueOf(minutes),
+                            Long.valueOf(seconds),
+                            Long.valueOf(milliSeconds))
+                    .toString();
         }
         if (showZeroHour) {
             baseFormat = sElapsedFormatHMMSS.replace("%1$d", "%1$02d");
@@ -258,9 +265,20 @@ public class DateUtils {
             baseFormat = sElapsedFormatHMMSS;
         }
         if (millisCount > 0) {
-            return f.format(baseFormat + ".%4$0" + millisCount + XmlTags.ATTR_DESCRIPTION, Long.valueOf(hours), Long.valueOf(minutes), Long.valueOf(seconds), Long.valueOf(milliSeconds)).toString();
+            return f.format(
+                            baseFormat + ".%4$0" + millisCount + XmlTags.ATTR_DESCRIPTION,
+                            Long.valueOf(hours),
+                            Long.valueOf(minutes),
+                            Long.valueOf(seconds),
+                            Long.valueOf(milliSeconds))
+                    .toString();
         }
-        return f.format(baseFormat, Long.valueOf(hours), Long.valueOf(minutes), Long.valueOf(seconds)).toString();
+        return f.format(
+                        baseFormat,
+                        Long.valueOf(hours),
+                        Long.valueOf(minutes),
+                        Long.valueOf(seconds))
+                .toString();
     }
 
     public static String formatElapsedTime(long elapsedSeconds) {
@@ -288,19 +306,28 @@ public class DateUtils {
         java.util.Formatter f = new java.util.Formatter(sb, Locale.getDefault());
         initFormatStrings();
         if (hours > 0) {
-            return f.format(sElapsedFormatHMMSS, Long.valueOf(hours), Long.valueOf(minutes), Long.valueOf(seconds)).toString();
+            return f.format(
+                            sElapsedFormatHMMSS,
+                            Long.valueOf(hours),
+                            Long.valueOf(minutes),
+                            Long.valueOf(seconds))
+                    .toString();
         }
-        return f.format(sElapsedFormatMMSS, Long.valueOf(minutes), Long.valueOf(seconds)).toString();
+        return f.format(sElapsedFormatMMSS, Long.valueOf(minutes), Long.valueOf(seconds))
+                .toString();
     }
 
-    public static final CharSequence formatSameDayTime(long then, long now, int dateStyle, int timeStyle) {
+    public static final CharSequence formatSameDayTime(
+            long then, long now, int dateStyle, int timeStyle) {
         java.text.DateFormat f;
         Calendar thenCal = new GregorianCalendar();
         thenCal.setTimeInMillis(then);
         Date thenDate = thenCal.getTime();
         Calendar nowCal = new GregorianCalendar();
         nowCal.setTimeInMillis(now);
-        if (thenCal.get(1) == nowCal.get(1) && thenCal.get(2) == nowCal.get(2) && thenCal.get(5) == nowCal.get(5)) {
+        if (thenCal.get(1) == nowCal.get(1)
+                && thenCal.get(2) == nowCal.get(2)
+                && thenCal.get(5) == nowCal.get(5)) {
             f = java.text.DateFormat.getTimeInstance(timeStyle);
         } else {
             f = java.text.DateFormat.getDateInstance(dateStyle);
@@ -318,19 +345,33 @@ public class DateUtils {
         LocalDateTime oneLocalDateTime = LocalDateTime.ofInstant(oneInstant, zoneId);
         Instant twoInstant = Instant.ofEpochMilli(twoMillis);
         LocalDateTime twoLocalDateTime = LocalDateTime.ofInstant(twoInstant, zoneId);
-        return oneLocalDateTime.getYear() == twoLocalDateTime.getYear() && oneLocalDateTime.getMonthValue() == twoLocalDateTime.getMonthValue() && oneLocalDateTime.getDayOfMonth() == twoLocalDateTime.getDayOfMonth();
+        return oneLocalDateTime.getYear() == twoLocalDateTime.getYear()
+                && oneLocalDateTime.getMonthValue() == twoLocalDateTime.getMonthValue()
+                && oneLocalDateTime.getDayOfMonth() == twoLocalDateTime.getDayOfMonth();
     }
 
-    public static String formatDateRange(Context context, long startMillis, long endMillis, int flags) {
+    public static String formatDateRange(
+            Context context, long startMillis, long endMillis, int flags) {
         java.util.Formatter f = new java.util.Formatter(new StringBuilder(50), Locale.getDefault());
         return formatDateRange(context, f, startMillis, endMillis, flags).toString();
     }
 
-    public static java.util.Formatter formatDateRange(Context context, java.util.Formatter formatter, long startMillis, long endMillis, int flags) {
+    public static java.util.Formatter formatDateRange(
+            Context context,
+            java.util.Formatter formatter,
+            long startMillis,
+            long endMillis,
+            int flags) {
         return formatDateRange(context, formatter, startMillis, endMillis, flags, null);
     }
 
-    public static java.util.Formatter formatDateRange(Context context, java.util.Formatter formatter, long startMillis, long endMillis, int flags, String timeZone) {
+    public static java.util.Formatter formatDateRange(
+            Context context,
+            java.util.Formatter formatter,
+            long startMillis,
+            long endMillis,
+            int flags,
+            String timeZone) {
         if ((flags & 193) == 1) {
             flags |= DateFormat.is24HourFormat(context) ? 128 : 64;
         }
@@ -347,7 +388,8 @@ public class DateUtils {
         return formatDateRange(context, millis, millis, flags);
     }
 
-    public static CharSequence getRelativeTimeSpanString(Context c, long millis, boolean withPreposition) {
+    public static CharSequence getRelativeTimeSpanString(
+            Context c, long millis, boolean withPreposition) {
         String result;
         int flags;
         long now = System.currentTimeMillis();

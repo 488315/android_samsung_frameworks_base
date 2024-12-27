@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextTemperatureAlert extends SContextEventContext {
-    public static final Parcelable.Creator<SContextTemperatureAlert> CREATOR = new Parcelable.Creator<SContextTemperatureAlert>() { // from class: android.hardware.scontext.SContextTemperatureAlert.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextTemperatureAlert createFromParcel(Parcel in) {
-            return new SContextTemperatureAlert(in);
-        }
+    public static final Parcelable.Creator<SContextTemperatureAlert> CREATOR =
+            new Parcelable.Creator<SContextTemperatureAlert>() { // from class:
+                // android.hardware.scontext.SContextTemperatureAlert.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextTemperatureAlert createFromParcel(Parcel in) {
+                    return new SContextTemperatureAlert(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextTemperatureAlert[] newArray(int size) {
-            return new SContextTemperatureAlert[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextTemperatureAlert[] newArray(int size) {
+                    return new SContextTemperatureAlert[size];
+                }
+            };
     private Bundle mContext;
 
     SContextTemperatureAlert() {
@@ -34,7 +36,8 @@ public class SContextTemperatureAlert extends SContextEventContext {
         return this.mContext.getInt("Action");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

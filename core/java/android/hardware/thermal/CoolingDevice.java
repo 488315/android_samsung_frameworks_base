@@ -3,26 +3,29 @@ package android.hardware.thermal;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CoolingDevice implements Parcelable {
-    public static final Parcelable.Creator<CoolingDevice> CREATOR = new Parcelable.Creator<CoolingDevice>() { // from class: android.hardware.thermal.CoolingDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CoolingDevice createFromParcel(Parcel _aidl_source) {
-            CoolingDevice _aidl_out = new CoolingDevice();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CoolingDevice> CREATOR =
+            new Parcelable.Creator<
+                    CoolingDevice>() { // from class: android.hardware.thermal.CoolingDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CoolingDevice createFromParcel(Parcel _aidl_source) {
+                    CoolingDevice _aidl_out = new CoolingDevice();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CoolingDevice[] newArray(int _aidl_size) {
-            return new CoolingDevice[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CoolingDevice[] newArray(int _aidl_size) {
+                    return new CoolingDevice[_aidl_size];
+                }
+            };
     public String name;
     public int type;
     public long value = 0;

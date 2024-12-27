@@ -1,6 +1,7 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -16,12 +17,9 @@ public interface NumberVerificationCallback {
     public static final int REASON_UNSPECIFIED = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NumberVerificationFailureReason {
-    }
+    public @interface NumberVerificationFailureReason {}
 
-    default void onCallReceived(String phoneNumber) {
-    }
+    default void onCallReceived(String phoneNumber) {}
 
-    default void onVerificationFailed(int reason) {
-    }
+    default void onVerificationFailed(int reason) {}
 }

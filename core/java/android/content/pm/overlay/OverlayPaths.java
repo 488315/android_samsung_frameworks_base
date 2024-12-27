@@ -12,8 +12,7 @@ public class OverlayPaths {
     public static class Builder {
         final OverlayPaths mPaths = new OverlayPaths();
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(OverlayPaths base) {
             this.mPaths.mResourceDirs.addAll(base.getResourceDirs());
@@ -72,7 +71,11 @@ public class OverlayPaths {
     }
 
     public String toString() {
-        return "OverlayPaths { resourceDirs = " + this.mResourceDirs + ", overlayPaths = " + this.mOverlayPaths + " }";
+        return "OverlayPaths { resourceDirs = "
+                + this.mResourceDirs
+                + ", overlayPaths = "
+                + this.mOverlayPaths
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -83,7 +86,8 @@ public class OverlayPaths {
             return false;
         }
         OverlayPaths that = (OverlayPaths) o;
-        if (Objects.equals(this.mResourceDirs, that.mResourceDirs) && Objects.equals(this.mOverlayPaths, that.mOverlayPaths)) {
+        if (Objects.equals(this.mResourceDirs, that.mResourceDirs)
+                && Objects.equals(this.mOverlayPaths, that.mOverlayPaths)) {
             return true;
         }
         return false;
@@ -95,6 +99,5 @@ public class OverlayPaths {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -1,6 +1,5 @@
 package android.hardware.location;
 
-import android.hardware.location.IActivityRecognitionHardware;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,12 +9,13 @@ import android.os.RemoteException;
 @Deprecated
 /* loaded from: classes2.dex */
 public interface IActivityRecognitionHardwareWatcher extends IInterface {
-    void onInstanceChanged(IActivityRecognitionHardware iActivityRecognitionHardware) throws RemoteException;
+    void onInstanceChanged(IActivityRecognitionHardware iActivityRecognitionHardware)
+            throws RemoteException;
 
     public static class Default implements IActivityRecognitionHardwareWatcher {
         @Override // android.hardware.location.IActivityRecognitionHardwareWatcher
-        public void onInstanceChanged(IActivityRecognitionHardware instance) throws RemoteException {
-        }
+        public void onInstanceChanged(IActivityRecognitionHardware instance)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,8 +23,10 @@ public interface IActivityRecognitionHardwareWatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityRecognitionHardwareWatcher {
-        public static final String DESCRIPTOR = "android.hardware.location.IActivityRecognitionHardwareWatcher";
+    public abstract static class Stub extends Binder
+            implements IActivityRecognitionHardwareWatcher {
+        public static final String DESCRIPTOR =
+                "android.hardware.location.IActivityRecognitionHardwareWatcher";
         static final int TRANSACTION_onInstanceChanged = 1;
 
         public Stub() {
@@ -62,7 +64,8 @@ public interface IActivityRecognitionHardwareWatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -72,7 +75,8 @@ public interface IActivityRecognitionHardwareWatcher extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IActivityRecognitionHardware _arg0 = IActivityRecognitionHardware.Stub.asInterface(data.readStrongBinder());
+                    IActivityRecognitionHardware _arg0 =
+                            IActivityRecognitionHardware.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onInstanceChanged(_arg0);
                     reply.writeNoException();
@@ -99,7 +103,8 @@ public interface IActivityRecognitionHardwareWatcher extends IInterface {
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardwareWatcher
-            public void onInstanceChanged(IActivityRecognitionHardware instance) throws RemoteException {
+            public void onInstanceChanged(IActivityRecognitionHardware instance)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

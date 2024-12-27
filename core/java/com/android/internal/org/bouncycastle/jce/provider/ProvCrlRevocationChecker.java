@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.jce.provider;
 import com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationChecker;
 import com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationCheckerParameters;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
+
 import java.security.cert.CertPathValidatorException;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
@@ -19,8 +20,7 @@ class ProvCrlRevocationChecker implements PKIXCertRevocationChecker {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationChecker
-    public void setParameter(String name, Object value) {
-    }
+    public void setParameter(String name, Object value) {}
 
     @Override // com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationChecker
     public void initialize(PKIXCertRevocationCheckerParameters params) {
@@ -39,13 +39,23 @@ class ProvCrlRevocationChecker implements PKIXCertRevocationChecker {
     @Override // com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationChecker
     public void check(Certificate certificate) throws CertPathValidatorException {
         try {
-            RFC3280CertPathUtilities.checkCRLs(this.params, this.params.getParamsPKIX(), this.currentDate, this.params.getValidDate(), (X509Certificate) certificate, this.params.getSigningCert(), this.params.getWorkingPublicKey(), this.params.getCertPath().getCertificates(), this.helper);
+            RFC3280CertPathUtilities.checkCRLs(
+                    this.params,
+                    this.params.getParamsPKIX(),
+                    this.currentDate,
+                    this.params.getValidDate(),
+                    (X509Certificate) certificate,
+                    this.params.getSigningCert(),
+                    this.params.getWorkingPublicKey(),
+                    this.params.getCertPath().getCertificates(),
+                    this.helper);
         } catch (AnnotatedException e) {
             Throwable cause = e;
             if (e.getCause() != null) {
                 cause = e.getCause();
             }
-            throw new CertPathValidatorException(e.getMessage(), cause, this.params.getCertPath(), this.params.getIndex());
+            throw new CertPathValidatorException(
+                    e.getMessage(), cause, this.params.getCertPath(), this.params.getIndex());
         }
     }
 }

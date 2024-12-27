@@ -13,7 +13,8 @@ public interface IDownloadCallback extends IInterface {
 
     void onDownloadCompleted(PersistableBundle persistableBundle) throws RemoteException;
 
-    void onDownloadFailed(int i, String str, PersistableBundle persistableBundle) throws RemoteException;
+    void onDownloadFailed(int i, String str, PersistableBundle persistableBundle)
+            throws RemoteException;
 
     void onDownloadProgress(long j) throws RemoteException;
 
@@ -21,20 +22,18 @@ public interface IDownloadCallback extends IInterface {
 
     public static class Default implements IDownloadCallback {
         @Override // android.app.ondeviceintelligence.IDownloadCallback
-        public void onDownloadStarted(long bytesToDownload) throws RemoteException {
-        }
+        public void onDownloadStarted(long bytesToDownload) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IDownloadCallback
-        public void onDownloadProgress(long bytesDownloaded) throws RemoteException {
-        }
+        public void onDownloadProgress(long bytesDownloaded) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IDownloadCallback
-        public void onDownloadFailed(int failureStatus, String errorMessage, PersistableBundle errorParams) throws RemoteException {
-        }
+        public void onDownloadFailed(
+                int failureStatus, String errorMessage, PersistableBundle errorParams)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IDownloadCallback
-        public void onDownloadCompleted(PersistableBundle downloadParams) throws RemoteException {
-        }
+        public void onDownloadCompleted(PersistableBundle downloadParams) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +41,7 @@ public interface IDownloadCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDownloadCallback {
+    public abstract static class Stub extends Binder implements IDownloadCallback {
         static final int TRANSACTION_onDownloadCompleted = 5;
         static final int TRANSACTION_onDownloadFailed = 4;
         static final int TRANSACTION_onDownloadProgress = 3;
@@ -89,7 +88,8 @@ public interface IDownloadCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDownloadCallback.DESCRIPTOR);
             }
@@ -111,12 +111,14 @@ public interface IDownloadCallback extends IInterface {
                 case 4:
                     int _arg03 = data.readInt();
                     String _arg1 = data.readString();
-                    PersistableBundle _arg2 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg2 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onDownloadFailed(_arg03, _arg1, _arg2);
                     return true;
                 case 5:
-                    PersistableBundle _arg04 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg04 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onDownloadCompleted(_arg04);
                     return true;
@@ -166,7 +168,9 @@ public interface IDownloadCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IDownloadCallback
-            public void onDownloadFailed(int failureStatus, String errorMessage, PersistableBundle errorParams) throws RemoteException {
+            public void onDownloadFailed(
+                    int failureStatus, String errorMessage, PersistableBundle errorParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDownloadCallback.DESCRIPTOR);
@@ -180,7 +184,8 @@ public interface IDownloadCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IDownloadCallback
-            public void onDownloadCompleted(PersistableBundle downloadParams) throws RemoteException {
+            public void onDownloadCompleted(PersistableBundle downloadParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDownloadCallback.DESCRIPTOR);

@@ -3,11 +3,12 @@ package com.android.server.wm;
 import android.os.Trace;
 import android.util.ArraySet;
 import android.window.TaskSnapshot;
+
 import com.android.server.DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0;
 import com.android.server.pm.UserManagerInternal;
-import com.android.server.wm.SnapshotPersistQueue;
 import com.android.server.wm.SnapshotPersistQueue.DeleteWriteQueueItem;
 import com.android.server.wm.SnapshotPersistQueue.StoreWriteQueueItem;
+
 import java.io.File;
 import java.util.Arrays;
 
@@ -24,7 +25,11 @@ public final class TaskSnapshotPersister {
         public final ArraySet mPersistentTaskIds;
         public final int[] mRunningUserIds;
 
-        public RemoveObsoleteFilesQueueItem(ArraySet arraySet, int[] iArr, BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider) {
+        public RemoveObsoleteFilesQueueItem(
+                ArraySet arraySet,
+                int[] iArr,
+                BaseAppSnapshotPersister$PersistInfoProvider
+                        baseAppSnapshotPersister$PersistInfoProvider) {
             super(baseAppSnapshotPersister$PersistInfoProvider, iArr.length > 0 ? iArr[0] : 0);
             this.mPersistentTaskIds = new ArraySet(arraySet);
             this.mRunningUserIds = Arrays.copyOf(iArr, iArr.length);
@@ -32,12 +37,15 @@ public final class TaskSnapshotPersister {
 
         public int getTaskId(String str) {
             int lastIndexOf;
-            if ((!str.endsWith(".proto") && !str.endsWith(".jpg")) || (lastIndexOf = str.lastIndexOf(46)) == -1) {
+            if ((!str.endsWith(".proto") && !str.endsWith(".jpg"))
+                    || (lastIndexOf = str.lastIndexOf(46)) == -1) {
                 return -1;
             }
             String substring = str.substring(0, lastIndexOf);
             if (substring.endsWith("_reduced")) {
-                substring = DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0.m(8, 0, substring);
+                substring =
+                        DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0.m(
+                                8, 0, substring);
             }
             try {
                 return Integer.parseInt(substring);
@@ -62,7 +70,10 @@ public final class TaskSnapshotPersister {
             ArraySet arraySet;
             Trace.traceBegin(32L, "RemoveObsoleteFilesQueueItem");
             synchronized (TaskSnapshotPersister.this.mLock) {
-                arraySet = new ArraySet(TaskSnapshotPersister.this.mPersistedTaskIdsSinceLastRemoveObsolete);
+                arraySet =
+                        new ArraySet(
+                                TaskSnapshotPersister.this
+                                        .mPersistedTaskIdsSinceLastRemoveObsolete);
             }
             for (int i : this.mRunningUserIds) {
                 File directory = this.mPersistInfoProvider.getDirectory(i);
@@ -70,7 +81,8 @@ public final class TaskSnapshotPersister {
                 if (list != null) {
                     for (String str : list) {
                         int taskId = getTaskId(str);
-                        if (!this.mPersistentTaskIds.contains(Integer.valueOf(taskId)) && !arraySet.contains(Integer.valueOf(taskId))) {
+                        if (!this.mPersistentTaskIds.contains(Integer.valueOf(taskId))
+                                && !arraySet.contains(Integer.valueOf(taskId))) {
                             new File(directory, str).delete();
                         }
                     }
@@ -80,7 +92,10 @@ public final class TaskSnapshotPersister {
         }
     }
 
-    public TaskSnapshotPersister(SnapshotPersistQueue snapshotPersistQueue, BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider) {
+    public TaskSnapshotPersister(
+            SnapshotPersistQueue snapshotPersistQueue,
+            BaseAppSnapshotPersister$PersistInfoProvider
+                    baseAppSnapshotPersister$PersistInfoProvider) {
         this.mSnapshotPersistQueue = snapshotPersistQueue;
         this.mPersistInfoProvider = baseAppSnapshotPersister$PersistInfoProvider;
         this.mLock = snapshotPersistQueue.mLock;
@@ -91,9 +106,14 @@ public final class TaskSnapshotPersister {
             this.mPersistedTaskIdsSinceLastRemoveObsolete.add(Integer.valueOf(i));
             synchronized (this.mLock) {
                 SnapshotPersistQueue snapshotPersistQueue = this.mSnapshotPersistQueue;
-                BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider = this.mPersistInfoProvider;
+                BaseAppSnapshotPersister$PersistInfoProvider
+                        baseAppSnapshotPersister$PersistInfoProvider = this.mPersistInfoProvider;
                 snapshotPersistQueue.getClass();
-                snapshotPersistQueue.addToQueueInternal(snapshotPersistQueue.new StoreWriteQueueItem(i, i2, taskSnapshot, baseAppSnapshotPersister$PersistInfoProvider), false);
+                snapshotPersistQueue.addToQueueInternal(
+                        snapshotPersistQueue
+                        .new StoreWriteQueueItem(
+                                i, i2, taskSnapshot, baseAppSnapshotPersister$PersistInfoProvider),
+                        false);
             }
         }
     }
@@ -103,9 +123,14 @@ public final class TaskSnapshotPersister {
             this.mPersistedTaskIdsSinceLastRemoveObsolete.remove(Integer.valueOf(i));
             synchronized (this.mLock) {
                 SnapshotPersistQueue snapshotPersistQueue = this.mSnapshotPersistQueue;
-                BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider = this.mPersistInfoProvider;
+                BaseAppSnapshotPersister$PersistInfoProvider
+                        baseAppSnapshotPersister$PersistInfoProvider = this.mPersistInfoProvider;
                 snapshotPersistQueue.getClass();
-                snapshotPersistQueue.addToQueueInternal(snapshotPersistQueue.new DeleteWriteQueueItem(i, i2, baseAppSnapshotPersister$PersistInfoProvider), false);
+                snapshotPersistQueue.addToQueueInternal(
+                        snapshotPersistQueue
+                        .new DeleteWriteQueueItem(
+                                i, i2, baseAppSnapshotPersister$PersistInfoProvider),
+                        false);
             }
         }
     }

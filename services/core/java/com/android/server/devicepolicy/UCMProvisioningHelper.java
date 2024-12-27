@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.util.Log;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.SemPersonaManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,7 +31,13 @@ public final class UCMProvisioningHelper {
         public final /* synthetic */ Object val$mutex;
         public final /* synthetic */ boolean[] val$success;
 
-        public /* synthetic */ AnonymousClass1(UCMProvisioningHelper uCMProvisioningHelper, boolean[] zArr, int[] iArr, Object obj, boolean[] zArr2, int i) {
+        public /* synthetic */ AnonymousClass1(
+                UCMProvisioningHelper uCMProvisioningHelper,
+                boolean[] zArr,
+                int[] iArr,
+                Object obj,
+                boolean[] zArr2,
+                int i) {
             this.$r8$classId = i;
             this.this$0 = uCMProvisioningHelper;
             this.val$success = zArr;
@@ -43,11 +51,15 @@ public final class UCMProvisioningHelper {
             switch (this.$r8$classId) {
                 case 0:
                     String action = intent.getAction();
-                    DualAppManagerService$$ExternalSyntheticOutline0.m("UCM Managed Profile Started Service onReceived is called: ", action, "UCMProvisioningHelper");
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            "UCM Managed Profile Started Service onReceived is called: ",
+                            action,
+                            "UCMProvisioningHelper");
                     this.this$0.mContext.unregisterReceiver(this);
                     UCMProvisioningHelper uCMProvisioningHelper = this.this$0;
                     uCMProvisioningHelper.mContext.unbindService(uCMProvisioningHelper.connection);
-                    if ("com.samsung.android.knox.ucm.action.UCM_STARTED_PROVISIONING_SUCCESS".equals(action)) {
+                    if ("com.samsung.android.knox.ucm.action.UCM_STARTED_PROVISIONING_SUCCESS"
+                            .equals(action)) {
                         this.val$success[0] = true;
                     } else {
                         this.val$success[0] = false;
@@ -60,17 +72,28 @@ public final class UCMProvisioningHelper {
                     return;
                 default:
                     String action2 = intent.getAction();
-                    DualAppManagerService$$ExternalSyntheticOutline0.m("UCM Managed Profile Completed Service onReceived is called: ", action2, "UCMProvisioningHelper");
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            "UCM Managed Profile Completed Service onReceived is called: ",
+                            action2,
+                            "UCMProvisioningHelper");
                     this.this$0.mContext.unregisterReceiver(this);
                     UCMProvisioningHelper uCMProvisioningHelper2 = this.this$0;
-                    uCMProvisioningHelper2.mContext.unbindService(uCMProvisioningHelper2.connection);
-                    if ("com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_SUCCESS".equals(action2)) {
+                    uCMProvisioningHelper2.mContext.unbindService(
+                            uCMProvisioningHelper2.connection);
+                    if ("com.samsung.android.knox.ucm.action.UCM_COMPLETED_PROVISIONING_SUCCESS"
+                            .equals(action2)) {
                         this.val$success[0] = true;
                         Bundle bundle = UCMProvisioningHelper.ucmProfile;
                         if (bundle == null || !bundle.getBoolean("ucm-config")) {
                             StringBuilder sb = new StringBuilder("resetUCMProfile: ");
-                            SemPersonaManager semPersonaManager = (SemPersonaManager) context.getSystemService("persona");
-                            sb.append((semPersonaManager != null ? Integer.valueOf(semPersonaManager.resetUCMProfile()) : null).intValue());
+                            SemPersonaManager semPersonaManager =
+                                    (SemPersonaManager) context.getSystemService("persona");
+                            sb.append(
+                                    (semPersonaManager != null
+                                                    ? Integer.valueOf(
+                                                            semPersonaManager.resetUCMProfile())
+                                                    : null)
+                                            .intValue());
                             Log.i("UCMProvisioningHelper", sb.toString());
                         }
                     } else {
@@ -135,7 +158,8 @@ public final class UCMProvisioningHelper {
             Log.d("UCMProvisioningHelper", "isUCMConfigured from provisioning params");
             return true;
         }
-        SemPersonaManager semPersonaManager = (SemPersonaManager) context.getSystemService("persona");
+        SemPersonaManager semPersonaManager =
+                (SemPersonaManager) context.getSystemService("persona");
         Bundle uCMProfile = semPersonaManager != null ? semPersonaManager.getUCMProfile() : null;
         ucmProfile = uCMProfile;
         if (uCMProfile == null || !uCMProfile.getBoolean("ucm-config")) {

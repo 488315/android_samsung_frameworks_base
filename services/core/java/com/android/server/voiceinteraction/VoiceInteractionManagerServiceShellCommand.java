@@ -3,8 +3,9 @@ package com.android.server.voiceinteraction;
 import android.os.Bundle;
 import android.os.ShellCommand;
 import android.util.Slog;
+
 import com.android.internal.app.IVoiceInteractionSessionShowCallback;
-import com.android.server.voiceinteraction.VoiceInteractionManagerService;
+
 import java.io.PrintWriter;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +16,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public final class VoiceInteractionManagerServiceShellCommand extends ShellCommand {
     public final VoiceInteractionManagerService.VoiceInteractionManagerServiceStub mService;
 
-    public VoiceInteractionManagerServiceShellCommand(VoiceInteractionManagerService.VoiceInteractionManagerServiceStub voiceInteractionManagerServiceStub) {
+    public VoiceInteractionManagerServiceShellCommand(
+            VoiceInteractionManagerService.VoiceInteractionManagerServiceStub
+                    voiceInteractionManagerServiceStub) {
         this.mService = voiceInteractionManagerServiceStub;
     }
 
@@ -35,13 +38,18 @@ public final class VoiceInteractionManagerServiceShellCommand extends ShellComma
                 boolean parseBoolean = Boolean.parseBoolean(getNextArgRequired());
                 Slog.i("VoiceInteractionManager", "setDebugHotwordLogging(): " + parseBoolean);
                 try {
-                    VoiceInteractionManagerService.VoiceInteractionManagerServiceStub voiceInteractionManagerServiceStub = this.mService;
+                    VoiceInteractionManagerService.VoiceInteractionManagerServiceStub
+                            voiceInteractionManagerServiceStub = this.mService;
                     synchronized (voiceInteractionManagerServiceStub) {
                         try {
                             if (voiceInteractionManagerServiceStub.mImpl == null) {
-                                Slog.w("VoiceInteractionManager", "setTemporaryLogging without running voice interaction service");
+                                Slog.w(
+                                        "VoiceInteractionManager",
+                                        "setTemporaryLogging without running voice interaction"
+                                            + " service");
                             } else {
-                                voiceInteractionManagerServiceStub.mImpl.setDebugHotwordLoggingLocked(parseBoolean);
+                                voiceInteractionManagerServiceStub.mImpl
+                                        .setDebugHotwordLoggingLocked(parseBoolean);
                             }
                         } catch (Throwable th) {
                             throw th;
@@ -66,20 +74,27 @@ public final class VoiceInteractionManagerServiceShellCommand extends ShellComma
                 final CountDownLatch countDownLatch = new CountDownLatch(1);
                 final AtomicInteger atomicInteger = new AtomicInteger();
                 try {
-                    if (!this.mService.showSessionForActiveService(new Bundle(), 0, null, new IVoiceInteractionSessionShowCallback.Stub() { // from class: com.android.server.voiceinteraction.VoiceInteractionManagerServiceShellCommand.1
-                        public final void onFailed() {
-                            Slog.w("VoiceInteractionManager", "onFailed()");
-                            outPrintWriter.println("callback failed");
-                            atomicInteger.set(1);
-                            countDownLatch.countDown();
-                        }
+                    if (!this.mService.showSessionForActiveService(
+                            new Bundle(),
+                            0,
+                            null,
+                            new IVoiceInteractionSessionShowCallback
+                                    .Stub() { // from class:
+                                              // com.android.server.voiceinteraction.VoiceInteractionManagerServiceShellCommand.1
+                                public final void onFailed() {
+                                    Slog.w("VoiceInteractionManager", "onFailed()");
+                                    outPrintWriter.println("callback failed");
+                                    atomicInteger.set(1);
+                                    countDownLatch.countDown();
+                                }
 
-                        public final void onShown() {
-                            Slog.d("VoiceInteractionManager", "onShown()");
-                            atomicInteger.set(0);
-                            countDownLatch.countDown();
-                        }
-                    }, null)) {
+                                public final void onShown() {
+                                    Slog.d("VoiceInteractionManager", "onShown()");
+                                    atomicInteger.set(0);
+                                    countDownLatch.countDown();
+                                }
+                            },
+                            null)) {
                         outPrintWriter.println("showSessionForActiveService() returned false");
                     } else if (!countDownLatch.await(5000L, TimeUnit.MILLISECONDS)) {
                         outPrintWriter.printf("Callback not called in %d ms\n", 5000L);
@@ -131,8 +146,10 @@ public final class VoiceInteractionManagerServiceShellCommand extends ShellComma
             outPrintWriter.println("    Force a restart of a hotword detection service");
             outPrintWriter.println("");
             outPrintWriter.println("  set-debug-hotword-logging [true|false]");
-            outPrintWriter.println("    Temporarily enable or disable debug logging for hotword result.");
-            outPrintWriter.println("    The debug logging will be reset after one hour from last enable.");
+            outPrintWriter.println(
+                    "    Temporarily enable or disable debug logging for hotword result.");
+            outPrintWriter.println(
+                    "    The debug logging will be reset after one hour from last enable.");
             outPrintWriter.println("");
             outPrintWriter.close();
         } catch (Throwable th) {

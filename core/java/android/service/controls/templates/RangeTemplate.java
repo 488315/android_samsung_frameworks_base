@@ -16,7 +16,13 @@ public final class RangeTemplate extends ControlTemplate {
     private final float mMinValue;
     private final float mStepValue;
 
-    public RangeTemplate(String templateId, float minValue, float maxValue, float currentValue, float stepValue, CharSequence formatString) {
+    public RangeTemplate(
+            String templateId,
+            float minValue,
+            float maxValue,
+            float currentValue,
+            float stepValue,
+            CharSequence formatString) {
         super(templateId);
         this.mMinValue = minValue;
         this.mMaxValue = maxValue;
@@ -78,16 +84,26 @@ public final class RangeTemplate extends ControlTemplate {
 
     private void validate() {
         if (Float.compare(this.mMinValue, this.mMaxValue) > 0) {
-            throw new IllegalArgumentException(String.format("minValue=%f > maxValue=%f", Float.valueOf(this.mMinValue), Float.valueOf(this.mMaxValue)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "minValue=%f > maxValue=%f",
+                            Float.valueOf(this.mMinValue), Float.valueOf(this.mMaxValue)));
         }
         if (Float.compare(this.mMinValue, this.mCurrentValue) > 0) {
-            throw new IllegalArgumentException(String.format("minValue=%f > currentValue=%f", Float.valueOf(this.mMinValue), Float.valueOf(this.mCurrentValue)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "minValue=%f > currentValue=%f",
+                            Float.valueOf(this.mMinValue), Float.valueOf(this.mCurrentValue)));
         }
         if (Float.compare(this.mCurrentValue, this.mMaxValue) > 0) {
-            throw new IllegalArgumentException(String.format("currentValue=%f > maxValue=%f", Float.valueOf(this.mCurrentValue), Float.valueOf(this.mMaxValue)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "currentValue=%f > maxValue=%f",
+                            Float.valueOf(this.mCurrentValue), Float.valueOf(this.mMaxValue)));
         }
         if (this.mStepValue <= 0.0f) {
-            throw new IllegalArgumentException(String.format("stepValue=%f <= 0", Float.valueOf(this.mStepValue)));
+            throw new IllegalArgumentException(
+                    String.format("stepValue=%f <= 0", Float.valueOf(this.mStepValue)));
         }
     }
 }

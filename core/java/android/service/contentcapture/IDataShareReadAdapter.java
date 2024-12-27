@@ -19,16 +19,13 @@ public interface IDataShareReadAdapter extends IInterface {
 
     public static class Default implements IDataShareReadAdapter {
         @Override // android.service.contentcapture.IDataShareReadAdapter
-        public void start(ParcelFileDescriptor fd) throws RemoteException {
-        }
+        public void start(ParcelFileDescriptor fd) throws RemoteException {}
 
         @Override // android.service.contentcapture.IDataShareReadAdapter
-        public void error(int errorCode) throws RemoteException {
-        }
+        public void error(int errorCode) throws RemoteException {}
 
         @Override // android.service.contentcapture.IDataShareReadAdapter
-        public void finish() throws RemoteException {
-        }
+        public void finish() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +33,7 @@ public interface IDataShareReadAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDataShareReadAdapter {
+    public abstract static class Stub extends Binder implements IDataShareReadAdapter {
         static final int TRANSACTION_error = 2;
         static final int TRANSACTION_finish = 3;
         static final int TRANSACTION_start = 1;
@@ -80,7 +77,8 @@ public interface IDataShareReadAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDataShareReadAdapter.DESCRIPTOR);
             }
@@ -90,7 +88,9 @@ public interface IDataShareReadAdapter extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     start(_arg0);
                     return true;

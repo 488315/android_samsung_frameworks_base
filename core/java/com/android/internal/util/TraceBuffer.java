@@ -1,6 +1,7 @@
 package com.android.internal.util;
 
 import android.util.proto.ProtoOutputStream;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,9 +28,9 @@ public class TraceBuffer<P, S extends P, T extends P> {
         void write(S s, Queue<T> queue, OutputStream outputStream) throws IOException;
     }
 
-    private static class ProtoOutputStreamProvider implements ProtoProvider<ProtoOutputStream, ProtoOutputStream, ProtoOutputStream> {
-        private ProtoOutputStreamProvider() {
-        }
+    private static class ProtoOutputStreamProvider
+            implements ProtoProvider<ProtoOutputStream, ProtoOutputStream, ProtoOutputStream> {
+        private ProtoOutputStreamProvider() {}
 
         @Override // com.android.internal.util.TraceBuffer.ProtoProvider
         public int getItemSize(ProtoOutputStream proto) {
@@ -42,7 +43,11 @@ public class TraceBuffer<P, S extends P, T extends P> {
         }
 
         @Override // com.android.internal.util.TraceBuffer.ProtoProvider
-        public void write(ProtoOutputStream encapsulatingProto, Queue<ProtoOutputStream> buffer, OutputStream os) throws IOException {
+        public void write(
+                ProtoOutputStream encapsulatingProto,
+                Queue<ProtoOutputStream> buffer,
+                OutputStream os)
+                throws IOException {
             os.write(encapsulatingProto.getBytes());
             for (ProtoOutputStream protoOutputStream : buffer) {
                 byte[] protoBytes = protoOutputStream.getBytes();
@@ -59,7 +64,8 @@ public class TraceBuffer<P, S extends P, T extends P> {
         this(bufferCapacity, new ProtoOutputStreamProvider(), protoDequeuedCallback);
     }
 
-    public TraceBuffer(int bufferCapacity, ProtoProvider protoProvider, Consumer<T> protoDequeuedCallback) {
+    public TraceBuffer(
+            int bufferCapacity, ProtoProvider protoProvider, Consumer<T> protoDequeuedCallback) {
         this.mBuffer = new ArrayDeque();
         this.mBufferCapacity = bufferCapacity;
         this.mProtoProvider = protoProvider;
@@ -82,7 +88,11 @@ public class TraceBuffer<P, S extends P, T extends P> {
     public synchronized void add(T proto) {
         int protoLength = this.mProtoProvider.getItemSize(proto);
         if (protoLength > this.mBufferCapacity) {
-            throw new IllegalStateException("Trace object too large for the buffer. Buffer size:" + this.mBufferCapacity + " Object size: " + protoLength);
+            throw new IllegalStateException(
+                    "Trace object too large for the buffer. Buffer size:"
+                            + this.mBufferCapacity
+                            + " Object size: "
+                            + protoLength);
         }
         discardOldest(protoLength);
         this.mBuffer.add(proto);
@@ -90,14 +100,17 @@ public class TraceBuffer<P, S extends P, T extends P> {
     }
 
     public synchronized boolean contains(final byte[] other) {
-        return this.mBuffer.stream().anyMatch(new Predicate() { // from class: com.android.internal.util.TraceBuffer$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean lambda$contains$0;
-                lambda$contains$0 = TraceBuffer.this.lambda$contains$0(other, obj);
-                return lambda$contains$0;
-            }
-        });
+        return this.mBuffer.stream()
+                .anyMatch(
+                        new Predicate() { // from class:
+                                          // com.android.internal.util.TraceBuffer$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                boolean lambda$contains$0;
+                                lambda$contains$0 = TraceBuffer.this.lambda$contains$0(other, obj);
+                                return lambda$contains$0;
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -105,7 +118,8 @@ public class TraceBuffer<P, S extends P, T extends P> {
         return Arrays.equals(this.mProtoProvider.getBytes(p), other);
     }
 
-    public synchronized void writeTraceToFile(File traceFile, S encapsulatingProto) throws IOException {
+    public synchronized void writeTraceToFile(File traceFile, S encapsulatingProto)
+            throws IOException {
         traceFile.delete();
         OutputStream os = new FileOutputStream(traceFile);
         try {
@@ -147,6 +161,11 @@ public class TraceBuffer<P, S extends P, T extends P> {
     }
 
     public synchronized String getStatus() {
-        return "Buffer size: " + this.mBufferCapacity + " bytes\nBuffer usage: " + this.mBufferUsedSize + " bytes\nElements in the buffer: " + this.mBuffer.size();
+        return "Buffer size: "
+                + this.mBufferCapacity
+                + " bytes\nBuffer usage: "
+                + this.mBufferUsedSize
+                + " bytes\nElements in the buffer: "
+                + this.mBuffer.size();
     }
 }

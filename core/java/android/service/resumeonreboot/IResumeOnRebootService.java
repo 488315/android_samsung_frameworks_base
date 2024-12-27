@@ -17,12 +17,13 @@ public interface IResumeOnRebootService extends IInterface {
 
     public static class Default implements IResumeOnRebootService {
         @Override // android.service.resumeonreboot.IResumeOnRebootService
-        public void wrapSecret(byte[] unwrappedBlob, long lifeTimeInMillis, RemoteCallback resultCallback) throws RemoteException {
-        }
+        public void wrapSecret(
+                byte[] unwrappedBlob, long lifeTimeInMillis, RemoteCallback resultCallback)
+                throws RemoteException {}
 
         @Override // android.service.resumeonreboot.IResumeOnRebootService
-        public void unwrap(byte[] wrappedBlob, RemoteCallback resultCallback) throws RemoteException {
-        }
+        public void unwrap(byte[] wrappedBlob, RemoteCallback resultCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +31,7 @@ public interface IResumeOnRebootService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResumeOnRebootService {
+    public abstract static class Stub extends Binder implements IResumeOnRebootService {
         static final int TRANSACTION_unwrap = 2;
         static final int TRANSACTION_wrapSecret = 1;
 
@@ -71,7 +72,8 @@ public interface IResumeOnRebootService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IResumeOnRebootService.DESCRIPTOR);
             }
@@ -83,13 +85,15 @@ public interface IResumeOnRebootService extends IInterface {
                 case 1:
                     byte[] _arg0 = data.createByteArray();
                     long _arg1 = data.readLong();
-                    RemoteCallback _arg2 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg2 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     wrapSecret(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
                     byte[] _arg02 = data.createByteArray();
-                    RemoteCallback _arg12 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg12 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     unwrap(_arg02, _arg12);
                     return true;
@@ -115,7 +119,9 @@ public interface IResumeOnRebootService extends IInterface {
             }
 
             @Override // android.service.resumeonreboot.IResumeOnRebootService
-            public void wrapSecret(byte[] unwrappedBlob, long lifeTimeInMillis, RemoteCallback resultCallback) throws RemoteException {
+            public void wrapSecret(
+                    byte[] unwrappedBlob, long lifeTimeInMillis, RemoteCallback resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IResumeOnRebootService.DESCRIPTOR);
@@ -129,7 +135,8 @@ public interface IResumeOnRebootService extends IInterface {
             }
 
             @Override // android.service.resumeonreboot.IResumeOnRebootService
-            public void unwrap(byte[] wrappedBlob, RemoteCallback resultCallback) throws RemoteException {
+            public void unwrap(byte[] wrappedBlob, RemoteCallback resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IResumeOnRebootService.DESCRIPTOR);

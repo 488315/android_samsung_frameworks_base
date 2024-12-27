@@ -7,40 +7,55 @@ import android.graphics.drawable.Drawable;
 import android.os.Trace;
 import android.util.Slog;
 import android.widget.ImageView;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class UserSwitchingDialog$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class UserSwitchingDialog$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
     public final /* synthetic */ Runnable f$1;
 
-    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(UserSwitchingDialog userSwitchingDialog, UserController$$ExternalSyntheticLambda3 userController$$ExternalSyntheticLambda3) {
+    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(
+            UserSwitchingDialog userSwitchingDialog,
+            UserController$$ExternalSyntheticLambda3 userController$$ExternalSyntheticLambda3) {
         this.$r8$classId = 1;
         this.f$0 = userSwitchingDialog;
         this.f$1 = userController$$ExternalSyntheticLambda3;
     }
 
-    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(UserSwitchingDialog userSwitchingDialog, UserSwitchingDialog$$ExternalSyntheticLambda0 userSwitchingDialog$$ExternalSyntheticLambda0) {
+    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(
+            UserSwitchingDialog userSwitchingDialog,
+            UserSwitchingDialog$$ExternalSyntheticLambda0
+                    userSwitchingDialog$$ExternalSyntheticLambda0) {
         this.$r8$classId = 3;
         this.f$0 = userSwitchingDialog;
         this.f$1 = userSwitchingDialog$$ExternalSyntheticLambda0;
     }
 
-    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(UserSwitchingDialog userSwitchingDialog, UserSwitchingDialog$$ExternalSyntheticLambda0 userSwitchingDialog$$ExternalSyntheticLambda0, int i) {
+    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(
+            UserSwitchingDialog userSwitchingDialog,
+            UserSwitchingDialog$$ExternalSyntheticLambda0
+                    userSwitchingDialog$$ExternalSyntheticLambda0,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = userSwitchingDialog;
         this.f$1 = userSwitchingDialog$$ExternalSyntheticLambda0;
     }
 
-    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(UserSwitchingDialog userSwitchingDialog, Runnable runnable) {
+    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(
+            UserSwitchingDialog userSwitchingDialog, Runnable runnable) {
         this.$r8$classId = 0;
         this.f$0 = userSwitchingDialog;
         this.f$1 = runnable;
     }
 
-    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(String str, UserSwitchingDialog$$ExternalSyntheticLambda4 userSwitchingDialog$$ExternalSyntheticLambda4) {
+    public /* synthetic */ UserSwitchingDialog$$ExternalSyntheticLambda0(
+            String str,
+            UserSwitchingDialog$$ExternalSyntheticLambda4
+                    userSwitchingDialog$$ExternalSyntheticLambda4) {
         this.$r8$classId = 5;
         this.f$0 = str;
         this.f$1 = userSwitchingDialog$$ExternalSyntheticLambda4;
@@ -73,21 +88,39 @@ public final /* synthetic */ class UserSwitchingDialog$$ExternalSyntheticLambda0
                 Runnable runnable3 = this.f$1;
                 userSwitchingDialog3.asyncTraceEnd(1, "showAnimation");
                 userSwitchingDialog3.asyncTraceBegin(2, "spinnerAnimation");
-                UserSwitchingDialog$$ExternalSyntheticLambda0 userSwitchingDialog$$ExternalSyntheticLambda0 = new UserSwitchingDialog$$ExternalSyntheticLambda0(userSwitchingDialog3, (UserSwitchingDialog$$ExternalSyntheticLambda0) runnable3, 4);
+                UserSwitchingDialog$$ExternalSyntheticLambda0
+                        userSwitchingDialog$$ExternalSyntheticLambda0 =
+                                new UserSwitchingDialog$$ExternalSyntheticLambda0(
+                                        userSwitchingDialog3,
+                                        (UserSwitchingDialog$$ExternalSyntheticLambda0) runnable3,
+                                        4);
                 ImageView imageView = (ImageView) userSwitchingDialog3.findViewById(R.id.sensitive);
                 if (imageView != null) {
                     Drawable drawable = imageView.getDrawable();
                     if (drawable instanceof AnimatedVectorDrawable) {
                         animatedVectorDrawable = (AnimatedVectorDrawable) drawable;
-                        if (userSwitchingDialog3.mDisableAnimations && animatedVectorDrawable != null) {
-                            final UserSwitchingDialog$$ExternalSyntheticLambda4 userSwitchingDialog$$ExternalSyntheticLambda4 = new UserSwitchingDialog$$ExternalSyntheticLambda4(userSwitchingDialog3, new AtomicBoolean(true), userSwitchingDialog$$ExternalSyntheticLambda0);
-                            userSwitchingDialog3.mHandler.postDelayed(new UserSwitchingDialog$$ExternalSyntheticLambda0("spinner", userSwitchingDialog$$ExternalSyntheticLambda4), 1000L);
-                            animatedVectorDrawable.registerAnimationCallback(new Animatable2.AnimationCallback() { // from class: com.android.server.am.UserSwitchingDialog.1
-                                @Override // android.graphics.drawable.Animatable2.AnimationCallback
-                                public final void onAnimationEnd(Drawable drawable2) {
-                                    userSwitchingDialog$$ExternalSyntheticLambda4.run();
-                                }
-                            });
+                        if (userSwitchingDialog3.mDisableAnimations
+                                && animatedVectorDrawable != null) {
+                            final UserSwitchingDialog$$ExternalSyntheticLambda4
+                                    userSwitchingDialog$$ExternalSyntheticLambda4 =
+                                            new UserSwitchingDialog$$ExternalSyntheticLambda4(
+                                                    userSwitchingDialog3,
+                                                    new AtomicBoolean(true),
+                                                    userSwitchingDialog$$ExternalSyntheticLambda0);
+                            userSwitchingDialog3.mHandler.postDelayed(
+                                    new UserSwitchingDialog$$ExternalSyntheticLambda0(
+                                            "spinner",
+                                            userSwitchingDialog$$ExternalSyntheticLambda4),
+                                    1000L);
+                            animatedVectorDrawable.registerAnimationCallback(
+                                    new Animatable2
+                                            .AnimationCallback() { // from class:
+                                                                   // com.android.server.am.UserSwitchingDialog.1
+                                        @Override // android.graphics.drawable.Animatable2.AnimationCallback
+                                        public final void onAnimationEnd(Drawable drawable2) {
+                                            userSwitchingDialog$$ExternalSyntheticLambda4.run();
+                                        }
+                                    });
                             animatedVectorDrawable.start();
                             break;
                         } else {
@@ -97,8 +130,7 @@ public final /* synthetic */ class UserSwitchingDialog$$ExternalSyntheticLambda0
                     }
                 }
                 animatedVectorDrawable = null;
-                if (userSwitchingDialog3.mDisableAnimations) {
-                }
+                if (userSwitchingDialog3.mDisableAnimations) {}
                 userSwitchingDialog$$ExternalSyntheticLambda0.run();
             case 3:
                 UserSwitchingDialog userSwitchingDialog4 = (UserSwitchingDialog) this.f$0;

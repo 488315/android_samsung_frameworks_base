@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextBounceShortMotion extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextBounceShortMotion> CREATOR = new Parcelable.Creator<SemContextBounceShortMotion>() { // from class: com.samsung.android.hardware.context.SemContextBounceShortMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextBounceShortMotion createFromParcel(Parcel in) {
-            return new SemContextBounceShortMotion(in);
-        }
+    public static final Parcelable.Creator<SemContextBounceShortMotion> CREATOR =
+            new Parcelable.Creator<
+                    SemContextBounceShortMotion>() { // from class:
+                                                     // com.samsung.android.hardware.context.SemContextBounceShortMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextBounceShortMotion createFromParcel(Parcel in) {
+                    return new SemContextBounceShortMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextBounceShortMotion[] newArray(int size) {
-            return new SemContextBounceShortMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextBounceShortMotion[] newArray(int size) {
+                    return new SemContextBounceShortMotion[size];
+                }
+            };
     public static final int LEFT = 2;
     public static final int NONE = 0;
     public static final int RIGHT = 1;

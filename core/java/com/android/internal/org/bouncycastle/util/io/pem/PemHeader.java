@@ -27,7 +27,8 @@ public class PemHeader {
             return false;
         }
         PemHeader other = (PemHeader) o;
-        return other == this || (isEqual(this.name, other.name) && isEqual(this.value, other.value));
+        return other == this
+                || (isEqual(this.name, other.name) && isEqual(this.value, other.value));
     }
 
     private int getHashCode(String s) {

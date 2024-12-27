@@ -7,8 +7,10 @@ import android.telephony.PreciseCallState;
 import android.telephony.RadioAccessFamily;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.telephony.util.ArrayUtils;
+
 import java.util.List;
 import java.util.Locale;
 
@@ -26,16 +28,19 @@ public class SemTelephonyUtils {
 
     static {
         boolean z = true;
-        if (!SystemProperties.getBoolean("ro.product_ship", true) && !SystemProperties.getBoolean("persist.ril.override.product_ship", false)) {
+        if (!SystemProperties.getBoolean("ro.product_ship", true)
+                && !SystemProperties.getBoolean("persist.ril.override.product_ship", false)) {
             z = false;
         }
         SHIP_BUILD = z;
         ONEUI_VERSION = SystemProperties.get("ro.build.version.oneui", "");
-        KOR_DOMESTIC_PROP_FOR_DS = new String[]{"ril.simtype"};
+        KOR_DOMESTIC_PROP_FOR_DS = new String[] {"ril.simtype"};
     }
 
     private static String getNetworkTypeCapability(String networkTypeCapability, int ntcType) {
-        if (TextUtils.isEmpty(networkTypeCapability) || networkTypeCapability.length() != 15 || ntcType > 3) {
+        if (TextUtils.isEmpty(networkTypeCapability)
+                || networkTypeCapability.length() != 15
+                || ntcType > 3) {
             return "---";
         }
         String[] ntcValue = networkTypeCapability.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
@@ -58,7 +63,8 @@ public class SemTelephonyUtils {
         return getNetworkTypeCapability(networkTypeCapability, 3);
     }
 
-    public static boolean isMainOperatorSpecific(String networkTypeCapability, String... mainOperators) {
+    public static boolean isMainOperatorSpecific(
+            String networkTypeCapability, String... mainOperators) {
         String mainOperator = getMainOperator(networkTypeCapability);
         for (String x : mainOperators) {
             if (x.equals(mainOperator)) {
@@ -68,7 +74,8 @@ public class SemTelephonyUtils {
         return false;
     }
 
-    public static boolean isSubOperatorSpecific(String networkTypeCapability, String... subOperators) {
+    public static boolean isSubOperatorSpecific(
+            String networkTypeCapability, String... subOperators) {
         String subOperator = getSubOperator(networkTypeCapability);
         for (String x : subOperators) {
             if (x.equals(subOperator)) {
@@ -93,11 +100,13 @@ public class SemTelephonyUtils {
     }
 
     public static boolean isUsaGlobalModel(String networkTypeCapability) {
-        return isGlobalModel(networkTypeCapability) && "USA".equals(getCountry(networkTypeCapability));
+        return isGlobalModel(networkTypeCapability)
+                && "USA".equals(getCountry(networkTypeCapability));
     }
 
     public static boolean isChnGlobalModel(String networkTypeCapability) {
-        return isGlobalModel(networkTypeCapability) && isCountrySpecific(networkTypeCapability, "CHN", "HKG", "TPE");
+        return isGlobalModel(networkTypeCapability)
+                && isCountrySpecific(networkTypeCapability, "CHN", "HKG", "TPE");
     }
 
     public static Object maskPii(Object pii) {
@@ -145,29 +154,45 @@ public class SemTelephonyUtils {
     }
 
     public static String toReadableNetworkTypeString(int networkTypeBitmask) {
-        return toHexString(networkTypeBitmask) + NavigationBarInflaterView.KEY_CODE_START + RadioAccessFamily.getNetworkTypeFromRaf(networkTypeBitmask) + NavigationBarInflaterView.KEY_CODE_END;
+        return toHexString(networkTypeBitmask)
+                + NavigationBarInflaterView.KEY_CODE_START
+                + RadioAccessFamily.getNetworkTypeFromRaf(networkTypeBitmask)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static String toReadableNetworkTypeString(long networkTypeBitmask) {
-        return toHexString(Long.valueOf(networkTypeBitmask)) + NavigationBarInflaterView.KEY_CODE_START + RadioAccessFamily.getNetworkTypeFromRaf((int) networkTypeBitmask) + NavigationBarInflaterView.KEY_CODE_END;
+        return toHexString(Long.valueOf(networkTypeBitmask))
+                + NavigationBarInflaterView.KEY_CODE_START
+                + RadioAccessFamily.getNetworkTypeFromRaf((int) networkTypeBitmask)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static String preciseCallStateToString(PreciseCallState preciseCallState) {
         StringBuilder sb = new StringBuilder("{");
         if (preciseCallState.getRingingCallState() > 0) {
-            sb.append("RingingCallState: ").append(preciseCallState.getRingingCallState()).append(" ");
+            sb.append("RingingCallState: ")
+                    .append(preciseCallState.getRingingCallState())
+                    .append(" ");
         }
         if (preciseCallState.getForegroundCallState() > 0) {
-            sb.append("ForegroundCallState: ").append(preciseCallState.getForegroundCallState()).append(" ");
+            sb.append("ForegroundCallState: ")
+                    .append(preciseCallState.getForegroundCallState())
+                    .append(" ");
         }
         if (preciseCallState.getBackgroundCallState() > 0) {
-            sb.append("BackgroundCallState: ").append(preciseCallState.getBackgroundCallState()).append(" ");
+            sb.append("BackgroundCallState: ")
+                    .append(preciseCallState.getBackgroundCallState())
+                    .append(" ");
         }
         if (preciseCallState.getDisconnectCause() != -1) {
-            sb.append("DisconnectCause: ").append(preciseCallState.getDisconnectCause()).append(" ");
+            sb.append("DisconnectCause: ")
+                    .append(preciseCallState.getDisconnectCause())
+                    .append(" ");
         }
         if (preciseCallState.getPreciseDisconnectCause() != -1) {
-            sb.append("PreciseDisconnectCause: ").append(preciseCallState.getPreciseDisconnectCause()).append(" ");
+            sb.append("PreciseDisconnectCause: ")
+                    .append(preciseCallState.getPreciseDisconnectCause())
+                    .append(" ");
         }
         sb.append("}");
         return sb.toString();
@@ -190,7 +215,9 @@ public class SemTelephonyUtils {
             sb.append("networkType: ").append(callState.getNetworkType()).append(", ");
             sb.append("imsCallType: ").append(callState.getImsCallType()).append(", ");
             sb.append("imsCallSessionId: ").append(callState.getImsCallSessionId()).append(", ");
-            sb.append("imsCallServiceType: ").append(callState.getImsCallServiceType()).append("] ");
+            sb.append("imsCallServiceType: ")
+                    .append(callState.getImsCallServiceType())
+                    .append("] ");
         }
         sb.append("}");
         return sb.toString();

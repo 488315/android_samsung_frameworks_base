@@ -21,7 +21,10 @@ public abstract class UCMStorageHelper {
         }
         Log.d("UCMStorageHelper", "isCallerValidPlatformApp ".concat(nameForUid));
         try {
-            return AppGlobals.getPackageManager().checkSignatures("android", nameForUid, UserHandle.getUserId(callingUid)) == 0;
+            return AppGlobals.getPackageManager()
+                            .checkSignatures(
+                                    "android", nameForUid, UserHandle.getUserId(callingUid))
+                    == 0;
         } catch (Exception e) {
             e.printStackTrace();
             return false;

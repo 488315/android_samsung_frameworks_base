@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes6.dex */
@@ -54,27 +55,45 @@ public class MaintenanceModeOutroActivity extends Activity {
 
     private void setContentView(Configuration config) {
         ActionBar actionBar;
-        MaintenanceModeUtils.configureLayout(this, this.mResources, config, this.mIsTablet, this.mIsFold, R.layout.activity_maintenance_mode_outro, R.layout.activity_maintenance_mode_outro_land, R.id.maintenance_mode_outro_body_container);
+        MaintenanceModeUtils.configureLayout(
+                this,
+                this.mResources,
+                config,
+                this.mIsTablet,
+                this.mIsFold,
+                R.layout.activity_maintenance_mode_outro,
+                R.layout.activity_maintenance_mode_outro_land,
+                R.id.maintenance_mode_outro_body_container);
         if (this.mCallingPackage != null && (actionBar = getActionBar()) != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         if (this.mIsTablet) {
             ImageView imageView = (ImageView) findViewById(R.id.maintenance_mode_outro_imageview);
-            imageView.setMaxWidth(this.mResources.getDimensionPixelSize(R.dimen.maintenance_mode_image_max_width_tablet));
+            imageView.setMaxWidth(
+                    this.mResources.getDimensionPixelSize(
+                            R.dimen.maintenance_mode_image_max_width_tablet));
             TextView outroTextView = (TextView) findViewById(R.id.maintenance_mode_outro_textview);
             outroTextView.setText(R.string.maintenance_mode_outro_textview_message_tablet);
         }
         this.mExitButton = (Button) findViewById(R.id.maintenance_mode_outro_exit_button);
         if (this.mIsTablet) {
-            this.mExitButton.setWidth(this.mResources.getDimensionPixelSize(R.dimen.maintenance_mode_body_button_width_tablet));
+            this.mExitButton.setWidth(
+                    this.mResources.getDimensionPixelSize(
+                            R.dimen.maintenance_mode_body_button_width_tablet));
         }
-        this.mExitButton.setTextSize(0, MaintenanceModeUtils.getFontSize(this.mContext, R.dimen.maintenance_mode_common_button_text_size));
-        this.mExitButton.setOnClickListener(new View.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda3
-            @Override // android.view.View.OnClickListener
-            public final void onClick(View view) {
-                MaintenanceModeOutroActivity.this.lambda$setContentView$0(view);
-            }
-        });
+        this.mExitButton.setTextSize(
+                0,
+                MaintenanceModeUtils.getFontSize(
+                        this.mContext, R.dimen.maintenance_mode_common_button_text_size));
+        this.mExitButton.setOnClickListener(
+                new View
+                        .OnClickListener() { // from class:
+                                             // com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda3
+                    @Override // android.view.View.OnClickListener
+                    public final void onClick(View view) {
+                        MaintenanceModeOutroActivity.this.lambda$setContentView$0(view);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -95,7 +114,9 @@ public class MaintenanceModeOutroActivity extends Activity {
         this.mViewWindowParams.screenOrientation = 1;
         this.mViewWindowParams.layoutInDisplayCutoutMode = 1;
         this.mViewWindowParams.setFitInsetsSides(0);
-        this.mProgressView = LayoutInflater.from(this).inflate(R.layout.view_maintenance_mode_dump, (ViewGroup) null);
+        this.mProgressView =
+                LayoutInflater.from(this)
+                        .inflate(R.layout.view_maintenance_mode_dump, (ViewGroup) null);
     }
 
     @Override // android.app.Activity
@@ -121,17 +142,32 @@ public class MaintenanceModeOutroActivity extends Activity {
         } else {
             i = R.string.maintenance_mode_outro_dialog_message_phone;
         }
-        AlertDialog.Builder builder2 = builder.setMessage(i).setPositiveButton(R.string.maintenance_mode_dialog_button_text_restart, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda0
-            @Override // android.content.DialogInterface.OnClickListener
-            public final void onClick(DialogInterface dialogInterface, int i2) {
-                MaintenanceModeOutroActivity.this.lambda$showDialog$4(dialogInterface, i2);
-            }
-        }).setNegativeButton(R.string.maintenance_mode_dialog_button_text_cancel, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda1
-            @Override // android.content.DialogInterface.OnClickListener
-            public final void onClick(DialogInterface dialogInterface, int i2) {
-                MaintenanceModeOutroActivity.lambda$showDialog$5(dialogInterface, i2);
-            }
-        });
+        AlertDialog.Builder builder2 =
+                builder.setMessage(i)
+                        .setPositiveButton(
+                                R.string.maintenance_mode_dialog_button_text_restart,
+                                new DialogInterface
+                                        .OnClickListener() { // from class:
+                                                             // com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda0
+                                    @Override // android.content.DialogInterface.OnClickListener
+                                    public final void onClick(
+                                            DialogInterface dialogInterface, int i2) {
+                                        MaintenanceModeOutroActivity.this.lambda$showDialog$4(
+                                                dialogInterface, i2);
+                                    }
+                                })
+                        .setNegativeButton(
+                                R.string.maintenance_mode_dialog_button_text_cancel,
+                                new DialogInterface
+                                        .OnClickListener() { // from class:
+                                                             // com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda1
+                                    @Override // android.content.DialogInterface.OnClickListener
+                                    public final void onClick(
+                                            DialogInterface dialogInterface, int i2) {
+                                        MaintenanceModeOutroActivity.lambda$showDialog$5(
+                                                dialogInterface, i2);
+                                    }
+                                });
         AlertDialog dialog = builder2.create();
         dialog.getWindow().setGravity(80);
         dialog.show();
@@ -139,12 +175,14 @@ public class MaintenanceModeOutroActivity extends Activity {
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$showDialog$4(DialogInterface dialog, int which) {
-        Runnable runningJob = new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                MaintenanceModeOutroActivity.this.lambda$showDialog$3();
-            }
-        };
+        Runnable runningJob =
+                new Runnable() { // from class:
+                                 // com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MaintenanceModeOutroActivity.this.lambda$showDialog$3();
+                    }
+                };
         MaintenanceModeUtils.confirmSecureLock(this, runningJob);
     }
 
@@ -152,18 +190,24 @@ public class MaintenanceModeOutroActivity extends Activity {
     public /* synthetic */ void lambda$showDialog$3() {
         this.mExitButton.setClickable(false);
         this.mWm.addView(this.mProgressView, this.mViewWindowParams);
-        new Thread(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                MaintenanceModeOutroActivity.this.lambda$showDialog$1();
-            }
-        }).start();
-        this.mRootView.postDelayed(new Runnable() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda5
-            @Override // java.lang.Runnable
-            public final void run() {
-                MaintenanceModeOutroActivity.this.lambda$showDialog$2();
-            }
-        }, 120000L);
+        new Thread(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda4
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                MaintenanceModeOutroActivity.this.lambda$showDialog$1();
+                            }
+                        })
+                .start();
+        this.mRootView.postDelayed(
+                new Runnable() { // from class:
+                                 // com.samsung.android.core.pm.mm.MaintenanceModeOutroActivity$$ExternalSyntheticLambda5
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        MaintenanceModeOutroActivity.this.lambda$showDialog$2();
+                    }
+                },
+                120000L);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -172,8 +216,7 @@ public class MaintenanceModeOutroActivity extends Activity {
         this.mExitButton.setClickable(true);
     }
 
-    static /* synthetic */ void lambda$showDialog$5(DialogInterface dialog, int which) {
-    }
+    static /* synthetic */ void lambda$showDialog$5(DialogInterface dialog, int which) {}
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: exitMaintenanceMode, reason: merged with bridge method [inline-methods] */

@@ -8,12 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IGetDownloadableSubscriptionMetadataCallback extends IInterface {
-    void onComplete(GetDownloadableSubscriptionMetadataResult getDownloadableSubscriptionMetadataResult) throws RemoteException;
+    void onComplete(
+            GetDownloadableSubscriptionMetadataResult getDownloadableSubscriptionMetadataResult)
+            throws RemoteException;
 
     public static class Default implements IGetDownloadableSubscriptionMetadataCallback {
         @Override // android.service.euicc.IGetDownloadableSubscriptionMetadataCallback
-        public void onComplete(GetDownloadableSubscriptionMetadataResult result) throws RemoteException {
-        }
+        public void onComplete(GetDownloadableSubscriptionMetadataResult result)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +23,10 @@ public interface IGetDownloadableSubscriptionMetadataCallback extends IInterface
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetDownloadableSubscriptionMetadataCallback {
-        public static final String DESCRIPTOR = "android.service.euicc.IGetDownloadableSubscriptionMetadataCallback";
+    public abstract static class Stub extends Binder
+            implements IGetDownloadableSubscriptionMetadataCallback {
+        public static final String DESCRIPTOR =
+                "android.service.euicc.IGetDownloadableSubscriptionMetadataCallback";
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -60,7 +64,8 @@ public interface IGetDownloadableSubscriptionMetadataCallback extends IInterface
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +75,10 @@ public interface IGetDownloadableSubscriptionMetadataCallback extends IInterface
             }
             switch (code) {
                 case 1:
-                    GetDownloadableSubscriptionMetadataResult _arg0 = (GetDownloadableSubscriptionMetadataResult) data.readTypedObject(GetDownloadableSubscriptionMetadataResult.CREATOR);
+                    GetDownloadableSubscriptionMetadataResult _arg0 =
+                            (GetDownloadableSubscriptionMetadataResult)
+                                    data.readTypedObject(
+                                            GetDownloadableSubscriptionMetadataResult.CREATOR);
                     data.enforceNoDataAvail();
                     onComplete(_arg0);
                     return true;
@@ -96,7 +104,8 @@ public interface IGetDownloadableSubscriptionMetadataCallback extends IInterface
             }
 
             @Override // android.service.euicc.IGetDownloadableSubscriptionMetadataCallback
-            public void onComplete(GetDownloadableSubscriptionMetadataResult result) throws RemoteException {
+            public void onComplete(GetDownloadableSubscriptionMetadataResult result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

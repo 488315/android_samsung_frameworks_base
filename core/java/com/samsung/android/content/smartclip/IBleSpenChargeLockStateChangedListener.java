@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IBleSpenChargeLockStateChangedListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.content.smartclip.IBleSpenChargeLockStateChangedListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.content.smartclip.IBleSpenChargeLockStateChangedListener";
 
     void onChanged(boolean z) throws RemoteException;
 
     public static class Default implements IBleSpenChargeLockStateChangedListener {
         @Override // com.samsung.android.content.smartclip.IBleSpenChargeLockStateChangedListener
-        public void onChanged(boolean isLocked) throws RemoteException {
-        }
+        public void onChanged(boolean isLocked) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,8 @@ public interface IBleSpenChargeLockStateChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBleSpenChargeLockStateChangedListener {
+    public abstract static class Stub extends Binder
+            implements IBleSpenChargeLockStateChangedListener {
         static final int TRANSACTION_onChanged = 1;
 
         public Stub() {
@@ -34,7 +35,8 @@ public interface IBleSpenChargeLockStateChangedListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IBleSpenChargeLockStateChangedListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IBleSpenChargeLockStateChangedListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IBleSpenChargeLockStateChangedListener)) {
                 return (IBleSpenChargeLockStateChangedListener) iin;
             }
@@ -61,7 +63,8 @@ public interface IBleSpenChargeLockStateChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBleSpenChargeLockStateChangedListener.DESCRIPTOR);
             }

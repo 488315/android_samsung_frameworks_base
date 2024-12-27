@@ -8,9 +8,11 @@ public final class AdservicesProtoEnums {
     public static final int API_ACCESS_RESULT_ALLOWED_APP_ALLOWS_ALL = 3;
     public static final int API_ACCESS_RESULT_ALLOWED_APP_ALLOWS_SPECIFIC_ID = 4;
     public static final int API_ACCESS_RESULT_ALLOWED_BY_DEFAULT_APP_DOES_NOT_HAVE_CONFIG = 1;
-    public static final int API_ACCESS_RESULT_ALLOWED_BY_DEFAULT_APP_HAS_CONFIG_WITHOUT_API_SECTION = 2;
+    public static final int
+            API_ACCESS_RESULT_ALLOWED_BY_DEFAULT_APP_HAS_CONFIG_WITHOUT_API_SECTION = 2;
     public static final int API_ACCESS_RESULT_DISALLOWED_APP_CONFIG_PARSING_ERROR = 6;
-    public static final int API_ACCESS_RESULT_DISALLOWED_APP_DOES_HAS_CONFIG_WITHOUT_API_SECTION = 8;
+    public static final int API_ACCESS_RESULT_DISALLOWED_APP_DOES_HAS_CONFIG_WITHOUT_API_SECTION =
+            8;
     public static final int API_ACCESS_RESULT_DISALLOWED_APP_DOES_NOT_EXIST = 5;
     public static final int API_ACCESS_RESULT_DISALLOWED_APP_DOES_NOT_HAVE_CONFIG = 7;
     public static final int API_ACCESS_RESULT_DISALLOWED_BY_APP = 9;

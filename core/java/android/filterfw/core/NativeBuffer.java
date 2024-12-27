@@ -39,7 +39,10 @@ public class NativeBuffer {
             }
             throw new RuntimeException("Failed to copy NativeBuffer to mutable instance!");
         } catch (Exception e) {
-            throw new RuntimeException("Unable to allocate a copy of " + getClass() + "! Make sure the class has a default constructor!");
+            throw new RuntimeException(
+                    "Unable to allocate a copy of "
+                            + getClass()
+                            + "! Make sure the class has a default constructor!");
         }
     }
 
@@ -98,7 +101,9 @@ public class NativeBuffer {
     }
 
     protected void assertReadable() {
-        if (this.mDataPointer == 0 || this.mSize == 0 || (this.mAttachedFrame != null && !this.mAttachedFrame.hasNativeAllocation())) {
+        if (this.mDataPointer == 0
+                || this.mSize == 0
+                || (this.mAttachedFrame != null && !this.mAttachedFrame.hasNativeAllocation())) {
             throw new NullPointerException("Attempting to read from null data frame!");
         }
     }

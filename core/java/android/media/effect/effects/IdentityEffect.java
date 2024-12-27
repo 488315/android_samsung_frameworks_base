@@ -23,10 +23,10 @@ public class IdentityEffect extends FilterEffect {
 
     @Override // android.media.effect.Effect
     public void setParameter(String parameterKey, Object value) {
-        throw new IllegalArgumentException("Unknown parameter " + parameterKey + " for IdentityEffect!");
+        throw new IllegalArgumentException(
+                "Unknown parameter " + parameterKey + " for IdentityEffect!");
     }
 
     @Override // android.media.effect.Effect
-    public void release() {
-    }
+    public void release() {}
 }

@@ -52,7 +52,8 @@ public final class PerPackageReadTimeouts {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class VersionCodes {
-        public static final VersionCodes ALL_VERSION_CODES = new VersionCodes(Long.MIN_VALUE, Long.MAX_VALUE);
+        public static final VersionCodes ALL_VERSION_CODES =
+                new VersionCodes(Long.MIN_VALUE, Long.MAX_VALUE);
         public final long maxVersionCode;
         public final long minVersionCode;
 
@@ -62,7 +63,8 @@ public final class PerPackageReadTimeouts {
         }
     }
 
-    public PerPackageReadTimeouts(String str, byte[] bArr, VersionCodes versionCodes, Timeouts timeouts) {
+    public PerPackageReadTimeouts(
+            String str, byte[] bArr, VersionCodes versionCodes, Timeouts timeouts) {
         this.packageName = str;
         this.sha256certificate = bArr;
         this.versionCodes = versionCodes;

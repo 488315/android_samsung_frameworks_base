@@ -6,6 +6,7 @@ import android.media.MediaMetrics;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +21,8 @@ public final class WhitelistHelper {
         if (packageNames == null && components == null) {
             return;
         }
-        if ((packageNames != null && packageNames.isEmpty()) || (components != null && components.isEmpty())) {
+        if ((packageNames != null && packageNames.isEmpty())
+                || (components != null && components.isEmpty())) {
             throw new IllegalArgumentException("Packages or Components cannot be empty.");
         }
         this.mWhitelistedPackages = new ArrayMap<>();
@@ -63,7 +65,9 @@ public final class WhitelistHelper {
 
     public boolean isWhitelisted(String packageName) {
         Objects.requireNonNull(packageName);
-        return this.mWhitelistedPackages != null && this.mWhitelistedPackages.containsKey(packageName) && this.mWhitelistedPackages.get(packageName) == null;
+        return this.mWhitelistedPackages != null
+                && this.mWhitelistedPackages.containsKey(packageName)
+                && this.mWhitelistedPackages.get(packageName) == null;
     }
 
     public boolean isWhitelisted(ComponentName componentName) {

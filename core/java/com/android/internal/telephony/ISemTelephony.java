@@ -10,7 +10,7 @@ import android.telephony.CellIdentity;
 import android.telephony.CellInfo;
 import android.telephony.VendorConfigurationState;
 import android.telephony.satellite.SemSatelliteState;
-import com.android.internal.telephony.IIntegerConsumer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -21,7 +21,8 @@ public interface ISemTelephony extends IInterface {
 
     boolean changeIccSimPersoPassword(String str, String str2) throws RemoteException;
 
-    boolean changeIccSimPersoPasswordForSubId(int i, String str, String str2) throws RemoteException;
+    boolean changeIccSimPersoPasswordForSubId(int i, String str, String str2)
+            throws RemoteException;
 
     String checkCallControl(int i, String str) throws RemoteException;
 
@@ -95,7 +96,8 @@ public interface ISemTelephony extends IInterface {
 
     int invokeOemRilRequestRawForPhone(int i, byte[] bArr, byte[] bArr2) throws RemoteException;
 
-    int invokeOemRilRequestRawForSubscriber(int i, byte[] bArr, byte[] bArr2) throws RemoteException;
+    int invokeOemRilRequestRawForSubscriber(int i, byte[] bArr, byte[] bArr2)
+            throws RemoteException;
 
     boolean isEmergencyNumberBySubId(int i, String str, boolean z) throws RemoteException;
 
@@ -113,7 +115,8 @@ public interface ISemTelephony extends IInterface {
 
     SemSatelliteState semGetSatelliteState(int i) throws RemoteException;
 
-    void semRequestSatelliteMode(int i, boolean z, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void semRequestSatelliteMode(int i, boolean z, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
     int sendRequestToRIL(byte[] bArr, byte[] bArr2, int i, int i2) throws RemoteException;
 
@@ -125,7 +128,8 @@ public interface ISemTelephony extends IInterface {
 
     void setEPSLOCI(byte[] bArr) throws RemoteException;
 
-    void setGbaBootstrappingParams(int i, byte[] bArr, String str, String str2) throws RemoteException;
+    void setGbaBootstrappingParams(int i, byte[] bArr, String str, String str2)
+            throws RemoteException;
 
     boolean setIccSimPersoEnabled(boolean z, String str) throws RemoteException;
 
@@ -157,41 +161,45 @@ public interface ISemTelephony extends IInterface {
 
     public static class Default implements ISemTelephony {
         @Override // com.android.internal.telephony.ISemTelephony
-        public CellIdentity getCellLocationBySubId(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public CellIdentity getCellLocationBySubId(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public CellIdentity getCellLocationForPhone(int phoneId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public CellIdentity getCellLocationForPhone(
+                int phoneId, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public List<CellInfo> getAllCellInfoBySubId(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public List<CellInfo> getAllCellInfoBySubId(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public List<CellInfo> getAllCellInfoForPhone(int phoneId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public List<CellInfo> getAllCellInfoForPhone(
+                int phoneId, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public void dialForSubscriber(int subId, String number) throws RemoteException {
-        }
+        public void dialForSubscriber(int subId, String number) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public boolean isEmergencyNumberBySubId(int subId, String number, boolean exactMatch) throws RemoteException {
+        public boolean isEmergencyNumberBySubId(int subId, String number, boolean exactMatch)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public void reloadTestEmergencyNumber() throws RemoteException {
-        }
+        public void reloadTestEmergencyNumber() throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public void setAllowDataDuringCall(int enable) throws RemoteException {
-        }
+        public void setAllowDataDuringCall(int enable) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISemTelephony
         public boolean isVideoCall() throws RemoteException {
@@ -209,7 +217,8 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public boolean setTransmitPowerWithFlag(int powerLevel, boolean enable) throws RemoteException {
+        public boolean setTransmitPowerWithFlag(int powerLevel, boolean enable)
+                throws RemoteException {
             return false;
         }
 
@@ -224,12 +233,14 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public String getActivationDay(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getActivationDay(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public int getNetworkStatusDisplayOption(String callingPackage, String callingFeatureId) throws RemoteException {
+        public int getNetworkStatusDisplayOption(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return 0;
         }
 
@@ -244,11 +255,11 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public void sendVolteState(int subId, boolean isVolteOn) throws RemoteException {
-        }
+        public void sendVolteState(int subId, boolean isVolteOn) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public boolean setNrMode(int phoneId, int mode, boolean force, String callingPackage) throws RemoteException {
+        public boolean setNrMode(int phoneId, int mode, boolean force, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
@@ -288,12 +299,12 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public void requestModemActivityInfo(ResultReceiver result, String callingPackage) throws RemoteException {
-        }
+        public void requestModemActivityInfo(ResultReceiver result, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public void semRequestSatelliteMode(int phoneId, boolean enable, IIntegerConsumer callback) throws RemoteException {
-        }
+        public void semRequestSatelliteMode(int phoneId, boolean enable, IIntegerConsumer callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISemTelephony
         public SemSatelliteState semGetSatelliteState(int phoneId) throws RemoteException {
@@ -311,7 +322,8 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public int sendRequestToRIL(byte[] data, byte[] response, int what, int phoneId) throws RemoteException {
+        public int sendRequestToRIL(byte[] data, byte[] response, int what, int phoneId)
+                throws RemoteException {
             return 0;
         }
 
@@ -326,8 +338,7 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public void setEPSLOCI(byte[] newEpsloci) throws RemoteException {
-        }
+        public void setEPSLOCI(byte[] newEpsloci) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISemTelephony
         public boolean isSimFDNEnabledForSubscriber(int subId) throws RemoteException {
@@ -355,22 +366,26 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public boolean changeIccSimPersoPassword(String oldPassword, String newPassword) throws RemoteException {
+        public boolean changeIccSimPersoPassword(String oldPassword, String newPassword)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public boolean changeIccSimPersoPasswordForSubId(int subId, String oldPassword, String newPassword) throws RemoteException {
+        public boolean changeIccSimPersoPasswordForSubId(
+                int subId, String oldPassword, String newPassword) throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public boolean setIccSimPersoEnabled(boolean enabled, String password) throws RemoteException {
+        public boolean setIccSimPersoEnabled(boolean enabled, String password)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public boolean setIccSimPersoEnabledForSubId(int subId, boolean enabled, String password) throws RemoteException {
+        public boolean setIccSimPersoEnabledForSubId(int subId, boolean enabled, String password)
+                throws RemoteException {
             return false;
         }
 
@@ -400,12 +415,14 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public int invokeOemRilRequestRawForPhone(int phoneId, byte[] request, byte[] response) throws RemoteException {
+        public int invokeOemRilRequestRawForPhone(int phoneId, byte[] request, byte[] response)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public int invokeOemRilRequestRawForSubscriber(int subId, byte[] request, byte[] response) throws RemoteException {
+        public int invokeOemRilRequestRawForSubscriber(int subId, byte[] request, byte[] response)
+                throws RemoteException {
             return 0;
         }
 
@@ -415,12 +432,14 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public String getSecondaryImei(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getSecondaryImei(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public String getSatelliteImei(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getSatelliteImei(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
@@ -430,7 +449,8 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public byte[] sms_NSRI_encryptsms(int in_len, String potherphonenumber, byte[] message) throws RemoteException {
+        public byte[] sms_NSRI_encryptsms(int in_len, String potherphonenumber, byte[] message)
+                throws RemoteException {
             return null;
         }
 
@@ -440,7 +460,8 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public byte[] sms_NSRI_decryptsmsintxside(int in_len, String potherphonenumber, byte[] message) throws RemoteException {
+        public byte[] sms_NSRI_decryptsmsintxside(
+                int in_len, String potherphonenumber, byte[] message) throws RemoteException {
             return null;
         }
 
@@ -460,8 +481,8 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public void setGbaBootstrappingParams(int subId, byte[] rand, String btid, String keyLifetime) throws RemoteException {
-        }
+        public void setGbaBootstrappingParams(
+                int subId, byte[] rand, String btid, String keyLifetime) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISemTelephony
         public byte[] getCurrentUATI() throws RemoteException {
@@ -469,7 +490,9 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemTelephony
-        public String getMobileQualityInformation(int phoneId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getMobileQualityInformation(
+                int phoneId, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
@@ -499,7 +522,7 @@ public interface ISemTelephony extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemTelephony {
+    public abstract static class Stub extends Binder implements ISemTelephony {
         static final int TRANSACTION_NSRI_requestProc = 61;
         static final int TRANSACTION_changeIccSimPersoPassword = 42;
         static final int TRANSACTION_changeIccSimPersoPasswordForSubId = 43;
@@ -741,7 +764,8 @@ public interface ISemTelephony extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             byte[] _arg2;
             byte[] _arg22;
             if (code >= 1 && code <= 16777215) {
@@ -953,7 +977,8 @@ public interface ISemTelephony extends IInterface {
                     reply.writeTypedObject(_result23, 1);
                     return true;
                 case 28:
-                    ResultReceiver _arg025 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg025 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     String _arg115 = data.readString();
                     data.enforceNoDataAvail();
                     requestModemActivityInfo(_arg025, _arg115);
@@ -961,7 +986,8 @@ public interface ISemTelephony extends IInterface {
                 case 29:
                     int _arg026 = data.readInt();
                     boolean _arg116 = data.readBoolean();
-                    IIntegerConsumer _arg29 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg29 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     semRequestSatelliteMode(_arg026, _arg116, _arg29);
                     reply.writeNoException();
@@ -1061,7 +1087,8 @@ public interface ISemTelephony extends IInterface {
                     String _arg120 = data.readString();
                     String _arg211 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result36 = changeIccSimPersoPasswordForSubId(_arg037, _arg120, _arg211);
+                    boolean _result36 =
+                            changeIccSimPersoPasswordForSubId(_arg037, _arg120, _arg211);
                     reply.writeNoException();
                     reply.writeBoolean(_result36);
                     return true;
@@ -1292,7 +1319,9 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public CellIdentity getCellLocationBySubId(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public CellIdentity getCellLocationBySubId(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1302,7 +1331,8 @@ public interface ISemTelephony extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    CellIdentity _result = (CellIdentity) _reply.readTypedObject(CellIdentity.CREATOR);
+                    CellIdentity _result =
+                            (CellIdentity) _reply.readTypedObject(CellIdentity.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1311,7 +1341,9 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public CellIdentity getCellLocationForPhone(int phoneId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public CellIdentity getCellLocationForPhone(
+                    int phoneId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1321,7 +1353,8 @@ public interface ISemTelephony extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    CellIdentity _result = (CellIdentity) _reply.readTypedObject(CellIdentity.CREATOR);
+                    CellIdentity _result =
+                            (CellIdentity) _reply.readTypedObject(CellIdentity.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1330,7 +1363,9 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public List<CellInfo> getAllCellInfoBySubId(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public List<CellInfo> getAllCellInfoBySubId(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1349,7 +1384,9 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public List<CellInfo> getAllCellInfoForPhone(int phoneId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public List<CellInfo> getAllCellInfoForPhone(
+                    int phoneId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1384,7 +1421,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public boolean isEmergencyNumberBySubId(int subId, String number, boolean exactMatch) throws RemoteException {
+            public boolean isEmergencyNumberBySubId(int subId, String number, boolean exactMatch)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1481,7 +1519,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public boolean setTransmitPowerWithFlag(int powerLevel, boolean enable) throws RemoteException {
+            public boolean setTransmitPowerWithFlag(int powerLevel, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1516,7 +1555,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public boolean setTransmitPowerExt(long powerLevel, boolean enable) throws RemoteException {
+            public boolean setTransmitPowerExt(long powerLevel, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1534,7 +1574,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public String getActivationDay(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getActivationDay(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1552,7 +1593,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public int getNetworkStatusDisplayOption(String callingPackage, String callingFeatureId) throws RemoteException {
+            public int getNetworkStatusDisplayOption(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1621,7 +1663,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public boolean setNrMode(int phoneId, int mode, boolean force, String callingPackage) throws RemoteException {
+            public boolean setNrMode(int phoneId, int mode, boolean force, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1744,7 +1787,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public VendorConfigurationState getVendorConfigState(int phoneId) throws RemoteException {
+            public VendorConfigurationState getVendorConfigState(int phoneId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1752,7 +1796,9 @@ public interface ISemTelephony extends IInterface {
                     _data.writeInt(phoneId);
                     this.mRemote.transact(27, _data, _reply, 0);
                     _reply.readException();
-                    VendorConfigurationState _result = (VendorConfigurationState) _reply.readTypedObject(VendorConfigurationState.CREATOR);
+                    VendorConfigurationState _result =
+                            (VendorConfigurationState)
+                                    _reply.readTypedObject(VendorConfigurationState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1761,7 +1807,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public void requestModemActivityInfo(ResultReceiver result, String callingPackage) throws RemoteException {
+            public void requestModemActivityInfo(ResultReceiver result, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemTelephony.DESCRIPTOR);
@@ -1774,7 +1821,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public void semRequestSatelliteMode(int phoneId, boolean enable, IIntegerConsumer callback) throws RemoteException {
+            public void semRequestSatelliteMode(
+                    int phoneId, boolean enable, IIntegerConsumer callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1799,7 +1847,8 @@ public interface ISemTelephony extends IInterface {
                     _data.writeInt(phoneId);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    SemSatelliteState _result = (SemSatelliteState) _reply.readTypedObject(SemSatelliteState.CREATOR);
+                    SemSatelliteState _result =
+                            (SemSatelliteState) _reply.readTypedObject(SemSatelliteState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1840,7 +1889,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public int sendRequestToRIL(byte[] data, byte[] response, int what, int phoneId) throws RemoteException {
+            public int sendRequestToRIL(byte[] data, byte[] response, int what, int phoneId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1995,7 +2045,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public boolean changeIccSimPersoPassword(String oldPassword, String newPassword) throws RemoteException {
+            public boolean changeIccSimPersoPassword(String oldPassword, String newPassword)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2013,7 +2064,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public boolean changeIccSimPersoPasswordForSubId(int subId, String oldPassword, String newPassword) throws RemoteException {
+            public boolean changeIccSimPersoPasswordForSubId(
+                    int subId, String oldPassword, String newPassword) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2032,7 +2084,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public boolean setIccSimPersoEnabled(boolean enabled, String password) throws RemoteException {
+            public boolean setIccSimPersoEnabled(boolean enabled, String password)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2050,7 +2103,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public boolean setIccSimPersoEnabledForSubId(int subId, boolean enabled, String password) throws RemoteException {
+            public boolean setIccSimPersoEnabledForSubId(
+                    int subId, boolean enabled, String password) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2154,7 +2208,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public int invokeOemRilRequestRawForPhone(int phoneId, byte[] request, byte[] response) throws RemoteException {
+            public int invokeOemRilRequestRawForPhone(int phoneId, byte[] request, byte[] response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2174,7 +2229,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public int invokeOemRilRequestRawForSubscriber(int subId, byte[] request, byte[] response) throws RemoteException {
+            public int invokeOemRilRequestRawForSubscriber(
+                    int subId, byte[] request, byte[] response) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2212,7 +2268,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public String getSecondaryImei(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getSecondaryImei(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2230,7 +2287,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public String getSatelliteImei(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getSatelliteImei(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2265,7 +2323,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public byte[] sms_NSRI_encryptsms(int in_len, String potherphonenumber, byte[] message) throws RemoteException {
+            public byte[] sms_NSRI_encryptsms(int in_len, String potherphonenumber, byte[] message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2302,7 +2361,8 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public byte[] sms_NSRI_decryptsmsintxside(int in_len, String potherphonenumber, byte[] message) throws RemoteException {
+            public byte[] sms_NSRI_decryptsmsintxside(
+                    int in_len, String potherphonenumber, byte[] message) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2371,7 +2431,9 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public void setGbaBootstrappingParams(int subId, byte[] rand, String btid, String keyLifetime) throws RemoteException {
+            public void setGbaBootstrappingParams(
+                    int subId, byte[] rand, String btid, String keyLifetime)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2405,7 +2467,9 @@ public interface ISemTelephony extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemTelephony
-            public String getMobileQualityInformation(int phoneId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getMobileQualityInformation(
+                    int phoneId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

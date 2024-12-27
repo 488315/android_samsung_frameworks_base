@@ -1,22 +1,22 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class HWParamParcel implements Parcelable {
-    public static final Parcelable.Creator<HWParamParcel> CREATOR = new Parcelable.Creator<HWParamParcel>() { // from class: android.os.HWParamParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HWParamParcel createFromParcel(Parcel in) {
-            return new HWParamParcel(in);
-        }
+    public static final Parcelable.Creator<HWParamParcel> CREATOR =
+            new Parcelable.Creator<HWParamParcel>() { // from class: android.os.HWParamParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HWParamParcel createFromParcel(Parcel in) {
+                    return new HWParamParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HWParamParcel[] newArray(int size) {
-            return new HWParamParcel[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HWParamParcel[] newArray(int size) {
+                    return new HWParamParcel[size];
+                }
+            };
     String appID;
     String compID;
     String compManufacture;
@@ -91,7 +91,16 @@ public class HWParamParcel implements Parcelable {
         writeToParcel(out);
     }
 
-    public void setData(int type, String compID, String feature, String hitType, String compVer, String compManufacture, String developMap, String customMap, String privateMap) {
+    public void setData(
+            int type,
+            String compID,
+            String feature,
+            String hitType,
+            String compVer,
+            String compManufacture,
+            String developMap,
+            String customMap,
+            String privateMap) {
         this.type = type;
         this.compID = compID;
         this.feature = feature;
@@ -104,7 +113,17 @@ public class HWParamParcel implements Parcelable {
         this.appID = "";
     }
 
-    public void setData(int type, String compID, String feature, String hitType, String compVer, String compManufacture, String developMap, String customMap, String privateMap, String appID) {
+    public void setData(
+            int type,
+            String compID,
+            String feature,
+            String hitType,
+            String compVer,
+            String compManufacture,
+            String developMap,
+            String customMap,
+            String privateMap,
+            String appID) {
         this.type = type;
         this.compID = compID;
         this.feature = feature;

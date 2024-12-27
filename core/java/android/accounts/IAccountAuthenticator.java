@@ -1,7 +1,6 @@
 package android.accounts;
 
 import android.Manifest;
-import android.accounts.IAccountAuthenticatorResponse;
 import android.app.ActivityThread;
 import android.os.Binder;
 import android.os.Bundle;
@@ -13,90 +12,168 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IAccountAuthenticator extends IInterface {
-    void addAccount(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, String str2, String[] strArr, Bundle bundle) throws RemoteException;
+    void addAccount(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            String str,
+            String str2,
+            String[] strArr,
+            Bundle bundle)
+            throws RemoteException;
 
-    void addAccountFromCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, Bundle bundle) throws RemoteException;
+    void addAccountFromCredentials(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            Account account,
+            Bundle bundle)
+            throws RemoteException;
 
-    void confirmCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, Bundle bundle) throws RemoteException;
+    void confirmCredentials(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            Account account,
+            Bundle bundle)
+            throws RemoteException;
 
-    void editProperties(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str) throws RemoteException;
+    void editProperties(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str)
+            throws RemoteException;
 
-    void finishSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, Bundle bundle) throws RemoteException;
+    void finishSession(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, Bundle bundle)
+            throws RemoteException;
 
-    void getAccountCredentialsForCloning(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account) throws RemoteException;
+    void getAccountCredentialsForCloning(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account)
+            throws RemoteException;
 
-    void getAccountRemovalAllowed(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account) throws RemoteException;
+    void getAccountRemovalAllowed(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account)
+            throws RemoteException;
 
-    void getAuthToken(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException;
+    void getAuthToken(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            Account account,
+            String str,
+            Bundle bundle)
+            throws RemoteException;
 
-    void getAuthTokenLabel(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str) throws RemoteException;
+    void getAuthTokenLabel(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str)
+            throws RemoteException;
 
-    void hasFeatures(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String[] strArr) throws RemoteException;
+    void hasFeatures(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            Account account,
+            String[] strArr)
+            throws RemoteException;
 
-    void isCredentialsUpdateSuggested(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str) throws RemoteException;
+    void isCredentialsUpdateSuggested(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            Account account,
+            String str)
+            throws RemoteException;
 
-    void startAddAccountSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, String str, String str2, String[] strArr, Bundle bundle) throws RemoteException;
+    void startAddAccountSession(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            String str,
+            String str2,
+            String[] strArr,
+            Bundle bundle)
+            throws RemoteException;
 
-    void startUpdateCredentialsSession(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException;
+    void startUpdateCredentialsSession(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            Account account,
+            String str,
+            Bundle bundle)
+            throws RemoteException;
 
-    void updateCredentials(IAccountAuthenticatorResponse iAccountAuthenticatorResponse, Account account, String str, Bundle bundle) throws RemoteException;
+    void updateCredentials(
+            IAccountAuthenticatorResponse iAccountAuthenticatorResponse,
+            Account account,
+            String str,
+            Bundle bundle)
+            throws RemoteException;
 
     public static class Default implements IAccountAuthenticator {
         @Override // android.accounts.IAccountAuthenticator
-        public void addAccount(IAccountAuthenticatorResponse response, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws RemoteException {
-        }
+        public void addAccount(
+                IAccountAuthenticatorResponse response,
+                String accountType,
+                String authTokenType,
+                String[] requiredFeatures,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void confirmCredentials(IAccountAuthenticatorResponse response, Account account, Bundle options) throws RemoteException {
-        }
+        public void confirmCredentials(
+                IAccountAuthenticatorResponse response, Account account, Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void getAuthToken(IAccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws RemoteException {
-        }
+        public void getAuthToken(
+                IAccountAuthenticatorResponse response,
+                Account account,
+                String authTokenType,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void getAuthTokenLabel(IAccountAuthenticatorResponse response, String authTokenType) throws RemoteException {
-        }
+        public void getAuthTokenLabel(IAccountAuthenticatorResponse response, String authTokenType)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void updateCredentials(IAccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws RemoteException {
-        }
+        public void updateCredentials(
+                IAccountAuthenticatorResponse response,
+                Account account,
+                String authTokenType,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void editProperties(IAccountAuthenticatorResponse response, String accountType) throws RemoteException {
-        }
+        public void editProperties(IAccountAuthenticatorResponse response, String accountType)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void hasFeatures(IAccountAuthenticatorResponse response, Account account, String[] features) throws RemoteException {
-        }
+        public void hasFeatures(
+                IAccountAuthenticatorResponse response, Account account, String[] features)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void getAccountRemovalAllowed(IAccountAuthenticatorResponse response, Account account) throws RemoteException {
-        }
+        public void getAccountRemovalAllowed(
+                IAccountAuthenticatorResponse response, Account account) throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void getAccountCredentialsForCloning(IAccountAuthenticatorResponse response, Account account) throws RemoteException {
-        }
+        public void getAccountCredentialsForCloning(
+                IAccountAuthenticatorResponse response, Account account) throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void addAccountFromCredentials(IAccountAuthenticatorResponse response, Account account, Bundle accountCredentials) throws RemoteException {
-        }
+        public void addAccountFromCredentials(
+                IAccountAuthenticatorResponse response, Account account, Bundle accountCredentials)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void startAddAccountSession(IAccountAuthenticatorResponse response, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws RemoteException {
-        }
+        public void startAddAccountSession(
+                IAccountAuthenticatorResponse response,
+                String accountType,
+                String authTokenType,
+                String[] requiredFeatures,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void startUpdateCredentialsSession(IAccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws RemoteException {
-        }
+        public void startUpdateCredentialsSession(
+                IAccountAuthenticatorResponse response,
+                Account account,
+                String authTokenType,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void finishSession(IAccountAuthenticatorResponse response, String accountType, Bundle sessionBundle) throws RemoteException {
-        }
+        public void finishSession(
+                IAccountAuthenticatorResponse response, String accountType, Bundle sessionBundle)
+                throws RemoteException {}
 
         @Override // android.accounts.IAccountAuthenticator
-        public void isCredentialsUpdateSuggested(IAccountAuthenticatorResponse response, Account account, String statusToken) throws RemoteException {
-        }
+        public void isCredentialsUpdateSuggested(
+                IAccountAuthenticatorResponse response, Account account, String statusToken)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -104,7 +181,7 @@ public interface IAccountAuthenticator extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccountAuthenticator {
+    public abstract static class Stub extends Binder implements IAccountAuthenticator {
         public static final String DESCRIPTOR = "android.accounts.IAccountAuthenticator";
         static final int TRANSACTION_addAccount = 1;
         static final int TRANSACTION_addAccountFromCredentials = 10;
@@ -132,7 +209,9 @@ public interface IAccountAuthenticator extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IAccountAuthenticator asInterface(IBinder obj) {
@@ -192,7 +271,8 @@ public interface IAccountAuthenticator extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -202,7 +282,8 @@ public interface IAccountAuthenticator extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IAccountAuthenticatorResponse _arg0 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg0 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     String _arg2 = data.readString();
                     String[] _arg3 = data.createStringArray();
@@ -211,14 +292,16 @@ public interface IAccountAuthenticator extends IInterface {
                     addAccount(_arg0, _arg1, _arg2, _arg3, _arg4);
                     return true;
                 case 2:
-                    IAccountAuthenticatorResponse _arg02 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg02 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg12 = (Account) data.readTypedObject(Account.CREATOR);
                     Bundle _arg22 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     confirmCredentials(_arg02, _arg12, _arg22);
                     return true;
                 case 3:
-                    IAccountAuthenticatorResponse _arg03 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg03 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg13 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg23 = data.readString();
                     Bundle _arg32 = (Bundle) data.readTypedObject(Bundle.CREATOR);
@@ -226,13 +309,15 @@ public interface IAccountAuthenticator extends IInterface {
                     getAuthToken(_arg03, _arg13, _arg23, _arg32);
                     return true;
                 case 4:
-                    IAccountAuthenticatorResponse _arg04 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg04 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg14 = data.readString();
                     data.enforceNoDataAvail();
                     getAuthTokenLabel(_arg04, _arg14);
                     return true;
                 case 5:
-                    IAccountAuthenticatorResponse _arg05 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg05 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg15 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg24 = data.readString();
                     Bundle _arg33 = (Bundle) data.readTypedObject(Bundle.CREATOR);
@@ -240,39 +325,45 @@ public interface IAccountAuthenticator extends IInterface {
                     updateCredentials(_arg05, _arg15, _arg24, _arg33);
                     return true;
                 case 6:
-                    IAccountAuthenticatorResponse _arg06 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg06 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg16 = data.readString();
                     data.enforceNoDataAvail();
                     editProperties(_arg06, _arg16);
                     return true;
                 case 7:
-                    IAccountAuthenticatorResponse _arg07 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg07 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg17 = (Account) data.readTypedObject(Account.CREATOR);
                     String[] _arg25 = data.createStringArray();
                     data.enforceNoDataAvail();
                     hasFeatures(_arg07, _arg17, _arg25);
                     return true;
                 case 8:
-                    IAccountAuthenticatorResponse _arg08 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg08 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg18 = (Account) data.readTypedObject(Account.CREATOR);
                     data.enforceNoDataAvail();
                     getAccountRemovalAllowed(_arg08, _arg18);
                     return true;
                 case 9:
-                    IAccountAuthenticatorResponse _arg09 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg09 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg19 = (Account) data.readTypedObject(Account.CREATOR);
                     data.enforceNoDataAvail();
                     getAccountCredentialsForCloning(_arg09, _arg19);
                     return true;
                 case 10:
-                    IAccountAuthenticatorResponse _arg010 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg010 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg110 = (Account) data.readTypedObject(Account.CREATOR);
                     Bundle _arg26 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     addAccountFromCredentials(_arg010, _arg110, _arg26);
                     return true;
                 case 11:
-                    IAccountAuthenticatorResponse _arg011 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg011 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg111 = data.readString();
                     String _arg27 = data.readString();
                     String[] _arg34 = data.createStringArray();
@@ -281,7 +372,8 @@ public interface IAccountAuthenticator extends IInterface {
                     startAddAccountSession(_arg011, _arg111, _arg27, _arg34, _arg42);
                     return true;
                 case 12:
-                    IAccountAuthenticatorResponse _arg012 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg012 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg112 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg28 = data.readString();
                     Bundle _arg35 = (Bundle) data.readTypedObject(Bundle.CREATOR);
@@ -289,14 +381,16 @@ public interface IAccountAuthenticator extends IInterface {
                     startUpdateCredentialsSession(_arg012, _arg112, _arg28, _arg35);
                     return true;
                 case 13:
-                    IAccountAuthenticatorResponse _arg013 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg013 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     String _arg113 = data.readString();
                     Bundle _arg29 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     finishSession(_arg013, _arg113, _arg29);
                     return true;
                 case 14:
-                    IAccountAuthenticatorResponse _arg014 = IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
+                    IAccountAuthenticatorResponse _arg014 =
+                            IAccountAuthenticatorResponse.Stub.asInterface(data.readStrongBinder());
                     Account _arg114 = (Account) data.readTypedObject(Account.CREATOR);
                     String _arg210 = data.readString();
                     data.enforceNoDataAvail();
@@ -324,7 +418,13 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void addAccount(IAccountAuthenticatorResponse response, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws RemoteException {
+            public void addAccount(
+                    IAccountAuthenticatorResponse response,
+                    String accountType,
+                    String authTokenType,
+                    String[] requiredFeatures,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -340,7 +440,9 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void confirmCredentials(IAccountAuthenticatorResponse response, Account account, Bundle options) throws RemoteException {
+            public void confirmCredentials(
+                    IAccountAuthenticatorResponse response, Account account, Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -354,7 +456,12 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void getAuthToken(IAccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws RemoteException {
+            public void getAuthToken(
+                    IAccountAuthenticatorResponse response,
+                    Account account,
+                    String authTokenType,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -369,7 +476,9 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void getAuthTokenLabel(IAccountAuthenticatorResponse response, String authTokenType) throws RemoteException {
+            public void getAuthTokenLabel(
+                    IAccountAuthenticatorResponse response, String authTokenType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -382,7 +491,12 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void updateCredentials(IAccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws RemoteException {
+            public void updateCredentials(
+                    IAccountAuthenticatorResponse response,
+                    Account account,
+                    String authTokenType,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -397,7 +511,8 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void editProperties(IAccountAuthenticatorResponse response, String accountType) throws RemoteException {
+            public void editProperties(IAccountAuthenticatorResponse response, String accountType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -410,7 +525,9 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void hasFeatures(IAccountAuthenticatorResponse response, Account account, String[] features) throws RemoteException {
+            public void hasFeatures(
+                    IAccountAuthenticatorResponse response, Account account, String[] features)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -424,7 +541,9 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void getAccountRemovalAllowed(IAccountAuthenticatorResponse response, Account account) throws RemoteException {
+            public void getAccountRemovalAllowed(
+                    IAccountAuthenticatorResponse response, Account account)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -437,7 +556,9 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void getAccountCredentialsForCloning(IAccountAuthenticatorResponse response, Account account) throws RemoteException {
+            public void getAccountCredentialsForCloning(
+                    IAccountAuthenticatorResponse response, Account account)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -450,7 +571,11 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void addAccountFromCredentials(IAccountAuthenticatorResponse response, Account account, Bundle accountCredentials) throws RemoteException {
+            public void addAccountFromCredentials(
+                    IAccountAuthenticatorResponse response,
+                    Account account,
+                    Bundle accountCredentials)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -464,7 +589,13 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void startAddAccountSession(IAccountAuthenticatorResponse response, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws RemoteException {
+            public void startAddAccountSession(
+                    IAccountAuthenticatorResponse response,
+                    String accountType,
+                    String authTokenType,
+                    String[] requiredFeatures,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -480,7 +611,12 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void startUpdateCredentialsSession(IAccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws RemoteException {
+            public void startUpdateCredentialsSession(
+                    IAccountAuthenticatorResponse response,
+                    Account account,
+                    String authTokenType,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -495,7 +631,11 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void finishSession(IAccountAuthenticatorResponse response, String accountType, Bundle sessionBundle) throws RemoteException {
+            public void finishSession(
+                    IAccountAuthenticatorResponse response,
+                    String accountType,
+                    Bundle sessionBundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -509,7 +649,9 @@ public interface IAccountAuthenticator extends IInterface {
             }
 
             @Override // android.accounts.IAccountAuthenticator
-            public void isCredentialsUpdateSuggested(IAccountAuthenticatorResponse response, Account account, String statusToken) throws RemoteException {
+            public void isCredentialsUpdateSuggested(
+                    IAccountAuthenticatorResponse response, Account account, String statusToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -524,59 +666,74 @@ public interface IAccountAuthenticator extends IInterface {
         }
 
         protected void addAccount_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void confirmCredentials_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void getAuthToken_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void getAuthTokenLabel_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void updateCredentials_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void editProperties_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void hasFeatures_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void getAccountRemovalAllowed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
-        protected void getAccountCredentialsForCloning_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+        protected void getAccountCredentialsForCloning_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void addAccountFromCredentials_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void startAddAccountSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void startUpdateCredentialsSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void finishSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         protected void isCredentialsUpdateSuggested_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCOUNT_MANAGER, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

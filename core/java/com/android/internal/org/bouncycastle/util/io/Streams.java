@@ -11,8 +11,7 @@ public final class Streams {
 
     public static void drain(InputStream inStr) throws IOException {
         byte[] bs = new byte[BUFFER_SIZE];
-        while (inStr.read(bs, 0, bs.length) >= 0) {
-        }
+        while (inStr.read(bs, 0, bs.length) >= 0) {}
     }
 
     public static byte[] readAll(InputStream inStr) throws IOException {
@@ -31,7 +30,8 @@ public final class Streams {
         return readFully(inStr, buf, 0, buf.length);
     }
 
-    public static int readFully(InputStream inStr, byte[] buf, int off, int len) throws IOException {
+    public static int readFully(InputStream inStr, byte[] buf, int off, int len)
+            throws IOException {
         int totalRead = 0;
         while (totalRead < len) {
             int numRead = inStr.read(buf, off + totalRead, len - totalRead);
@@ -55,7 +55,8 @@ public final class Streams {
         }
     }
 
-    public static long pipeAllLimited(InputStream inStr, long limit, OutputStream outStr) throws IOException {
+    public static long pipeAllLimited(InputStream inStr, long limit, OutputStream outStr)
+            throws IOException {
         long total = 0;
         byte[] bs = new byte[BUFFER_SIZE];
         while (true) {
@@ -71,7 +72,8 @@ public final class Streams {
         }
     }
 
-    public static void writeBufTo(ByteArrayOutputStream buf, OutputStream output) throws IOException {
+    public static void writeBufTo(ByteArrayOutputStream buf, OutputStream output)
+            throws IOException {
         buf.writeTo(output);
     }
 }

@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehGsmSmsMessage implements Parcelable {
-    public static final Parcelable.Creator<SehGsmSmsMessage> CREATOR = new Parcelable.Creator<SehGsmSmsMessage>() { // from class: vendor.samsung.hardware.radio.messaging.SehGsmSmsMessage.1
-        @Override // android.os.Parcelable.Creator
-        public SehGsmSmsMessage createFromParcel(Parcel _aidl_source) {
-            SehGsmSmsMessage _aidl_out = new SehGsmSmsMessage();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehGsmSmsMessage> CREATOR =
+            new Parcelable.Creator<
+                    SehGsmSmsMessage>() { // from class:
+                                          // vendor.samsung.hardware.radio.messaging.SehGsmSmsMessage.1
+                @Override // android.os.Parcelable.Creator
+                public SehGsmSmsMessage createFromParcel(Parcel _aidl_source) {
+                    SehGsmSmsMessage _aidl_out = new SehGsmSmsMessage();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehGsmSmsMessage[] newArray(int _aidl_size) {
-            return new SehGsmSmsMessage[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehGsmSmsMessage[] newArray(int _aidl_size) {
+                    return new SehGsmSmsMessage[_aidl_size];
+                }
+            };
     public String pdu;
     public String smscPdu;
 

@@ -8,7 +8,9 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGpsGeofenceHardware extends IInterface {
-    boolean addCircularHardwareGeofence(int i, double d, double d2, double d3, int i2, int i3, int i4, int i5) throws RemoteException;
+    boolean addCircularHardwareGeofence(
+            int i, double d, double d2, double d3, int i2, int i3, int i4, int i5)
+            throws RemoteException;
 
     boolean isHardwareGeofenceSupported() throws RemoteException;
 
@@ -25,7 +27,16 @@ public interface IGpsGeofenceHardware extends IInterface {
         }
 
         @Override // android.location.IGpsGeofenceHardware
-        public boolean addCircularHardwareGeofence(int geofenceId, double latitude, double longitude, double radius, int lastTransition, int monitorTransition, int notificationResponsiveness, int unknownTimer) throws RemoteException {
+        public boolean addCircularHardwareGeofence(
+                int geofenceId,
+                double latitude,
+                double longitude,
+                double radius,
+                int lastTransition,
+                int monitorTransition,
+                int notificationResponsiveness,
+                int unknownTimer)
+                throws RemoteException {
             return false;
         }
 
@@ -40,7 +51,8 @@ public interface IGpsGeofenceHardware extends IInterface {
         }
 
         @Override // android.location.IGpsGeofenceHardware
-        public boolean resumeHardwareGeofence(int geofenceId, int monitorTransition) throws RemoteException {
+        public boolean resumeHardwareGeofence(int geofenceId, int monitorTransition)
+                throws RemoteException {
             return false;
         }
 
@@ -50,7 +62,7 @@ public interface IGpsGeofenceHardware extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGpsGeofenceHardware {
+    public abstract static class Stub extends Binder implements IGpsGeofenceHardware {
         public static final String DESCRIPTOR = "android.location.IGpsGeofenceHardware";
         static final int TRANSACTION_addCircularHardwareGeofence = 2;
         static final int TRANSACTION_isHardwareGeofenceSupported = 1;
@@ -101,7 +113,8 @@ public interface IGpsGeofenceHardware extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -125,7 +138,9 @@ public interface IGpsGeofenceHardware extends IInterface {
                     int _arg6 = data.readInt();
                     int _arg7 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result2 = addCircularHardwareGeofence(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+                    boolean _result2 =
+                            addCircularHardwareGeofence(
+                                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
                     reply.writeNoException();
                     reply.writeBoolean(_result2);
                     return true;
@@ -189,7 +204,16 @@ public interface IGpsGeofenceHardware extends IInterface {
             }
 
             @Override // android.location.IGpsGeofenceHardware
-            public boolean addCircularHardwareGeofence(int geofenceId, double latitude, double longitude, double radius, int lastTransition, int monitorTransition, int notificationResponsiveness, int unknownTimer) throws RemoteException {
+            public boolean addCircularHardwareGeofence(
+                    int geofenceId,
+                    double latitude,
+                    double longitude,
+                    double radius,
+                    int lastTransition,
+                    int monitorTransition,
+                    int notificationResponsiveness,
+                    int unknownTimer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -301,7 +325,8 @@ public interface IGpsGeofenceHardware extends IInterface {
             }
 
             @Override // android.location.IGpsGeofenceHardware
-            public boolean resumeHardwareGeofence(int geofenceId, int monitorTransition) throws RemoteException {
+            public boolean resumeHardwareGeofence(int geofenceId, int monitorTransition)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

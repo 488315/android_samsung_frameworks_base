@@ -8,6 +8,7 @@ import android.net.NetworkCapabilities;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -45,7 +46,9 @@ public class NetworkMonitorParameters implements Parcelable {
 
     @Override // android.os.Parcelable
     public int describeContents() {
-        return describeContents(this.linkProperties) | describeContents(this.networkAgentConfig) | describeContents(this.networkCapabilities);
+        return describeContents(this.linkProperties)
+                | describeContents(this.networkAgentConfig)
+                | describeContents(this.networkCapabilities);
     }
 
     public boolean equals(Object obj) {
@@ -56,11 +59,20 @@ public class NetworkMonitorParameters implements Parcelable {
             return false;
         }
         NetworkMonitorParameters networkMonitorParameters = (NetworkMonitorParameters) obj;
-        return Objects.deepEquals(this.networkAgentConfig, networkMonitorParameters.networkAgentConfig) && Objects.deepEquals(this.networkCapabilities, networkMonitorParameters.networkCapabilities) && Objects.deepEquals(this.linkProperties, networkMonitorParameters.linkProperties);
+        return Objects.deepEquals(
+                        this.networkAgentConfig, networkMonitorParameters.networkAgentConfig)
+                && Objects.deepEquals(
+                        this.networkCapabilities, networkMonitorParameters.networkCapabilities)
+                && Objects.deepEquals(this.linkProperties, networkMonitorParameters.linkProperties);
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.networkAgentConfig, this.networkCapabilities, this.linkProperties).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.networkAgentConfig,
+                                this.networkCapabilities,
+                                this.linkProperties)
+                        .toArray());
     }
 
     public final void readFromParcel(Parcel parcel) {
@@ -71,11 +83,15 @@ public class NetworkMonitorParameters implements Parcelable {
                 throw new BadParcelableException("Parcelable too small");
             }
             if (parcel.dataPosition() - dataPosition < readInt) {
-                this.networkAgentConfig = (NetworkAgentConfig) parcel.readTypedObject(NetworkAgentConfig.CREATOR);
+                this.networkAgentConfig =
+                        (NetworkAgentConfig) parcel.readTypedObject(NetworkAgentConfig.CREATOR);
                 if (parcel.dataPosition() - dataPosition < readInt) {
-                    this.networkCapabilities = (NetworkCapabilities) parcel.readTypedObject(NetworkCapabilities.CREATOR);
+                    this.networkCapabilities =
+                            (NetworkCapabilities)
+                                    parcel.readTypedObject(NetworkCapabilities.CREATOR);
                     if (parcel.dataPosition() - dataPosition < readInt) {
-                        this.linkProperties = (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR);
+                        this.linkProperties =
+                                (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR);
                         if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }
@@ -106,7 +122,8 @@ public class NetworkMonitorParameters implements Parcelable {
         stringJoiner.add("networkAgentConfig: " + Objects.toString(this.networkAgentConfig));
         stringJoiner.add("networkCapabilities: " + Objects.toString(this.networkCapabilities));
         stringJoiner.add("linkProperties: " + Objects.toString(this.linkProperties));
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("NetworkMonitorParameters"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("NetworkMonitorParameters"));
     }
 
     @Override // android.os.Parcelable
@@ -118,6 +135,7 @@ public class NetworkMonitorParameters implements Parcelable {
         parcel.writeTypedObject(this.linkProperties, i);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

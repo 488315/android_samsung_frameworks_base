@@ -34,16 +34,13 @@ public interface IRemoteViewsFactory extends IInterface {
 
     public static class Default implements IRemoteViewsFactory {
         @Override // com.android.internal.widget.IRemoteViewsFactory
-        public void onDataSetChanged() throws RemoteException {
-        }
+        public void onDataSetChanged() throws RemoteException {}
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
-        public void onDataSetChangedAsync() throws RemoteException {
-        }
+        public void onDataSetChangedAsync() throws RemoteException {}
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
-        public void onDestroy(Intent intent) throws RemoteException {
-        }
+        public void onDestroy(Intent intent) throws RemoteException {}
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public int getCount() throws RemoteException {
@@ -81,7 +78,8 @@ public interface IRemoteViewsFactory extends IInterface {
         }
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
-        public RemoteViews.RemoteCollectionItems getRemoteCollectionItems(int capSize) throws RemoteException {
+        public RemoteViews.RemoteCollectionItems getRemoteCollectionItems(int capSize)
+                throws RemoteException {
             return null;
         }
 
@@ -91,7 +89,7 @@ public interface IRemoteViewsFactory extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteViewsFactory {
+    public abstract static class Stub extends Binder implements IRemoteViewsFactory {
         public static final String DESCRIPTOR = "com.android.internal.widget.IRemoteViewsFactory";
         static final int TRANSACTION_getCount = 4;
         static final int TRANSACTION_getItemId = 8;
@@ -160,7 +158,8 @@ public interface IRemoteViewsFactory extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -400,7 +399,8 @@ public interface IRemoteViewsFactory extends IInterface {
             }
 
             @Override // com.android.internal.widget.IRemoteViewsFactory
-            public RemoteViews.RemoteCollectionItems getRemoteCollectionItems(int capSize) throws RemoteException {
+            public RemoteViews.RemoteCollectionItems getRemoteCollectionItems(int capSize)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -408,7 +408,10 @@ public interface IRemoteViewsFactory extends IInterface {
                     _data.writeInt(capSize);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    RemoteViews.RemoteCollectionItems _result = (RemoteViews.RemoteCollectionItems) _reply.readTypedObject(RemoteViews.RemoteCollectionItems.CREATOR);
+                    RemoteViews.RemoteCollectionItems _result =
+                            (RemoteViews.RemoteCollectionItems)
+                                    _reply.readTypedObject(
+                                            RemoteViews.RemoteCollectionItems.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

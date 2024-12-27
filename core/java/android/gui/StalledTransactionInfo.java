@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class StalledTransactionInfo implements Parcelable {
-    public static final Parcelable.Creator<StalledTransactionInfo> CREATOR = new Parcelable.Creator<StalledTransactionInfo>() { // from class: android.gui.StalledTransactionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StalledTransactionInfo createFromParcel(Parcel _aidl_source) {
-            StalledTransactionInfo _aidl_out = new StalledTransactionInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<StalledTransactionInfo> CREATOR =
+            new Parcelable.Creator<
+                    StalledTransactionInfo>() { // from class: android.gui.StalledTransactionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StalledTransactionInfo createFromParcel(Parcel _aidl_source) {
+                    StalledTransactionInfo _aidl_out = new StalledTransactionInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StalledTransactionInfo[] newArray(int _aidl_size) {
-            return new StalledTransactionInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StalledTransactionInfo[] newArray(int _aidl_size) {
+                    return new StalledTransactionInfo[_aidl_size];
+                }
+            };
     public long bufferId = 0;
     public long frameNumber = 0;
     public String layerName;

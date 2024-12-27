@@ -13,6 +13,7 @@ import android.telephony.MbmsDownloadSession;
 import android.telephony.MbmsGroupCallSession;
 import android.telephony.MbmsStreamingSession;
 import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -81,8 +82,10 @@ public class MbmsUtils {
             return null;
         }
         try {
-            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), 128);
-            if (appInfo.metaData == null || (serviceComponent = appInfo.metaData.getString(metaDataKey)) == null) {
+            ApplicationInfo appInfo =
+                    context.getPackageManager().getApplicationInfo(context.getPackageName(), 128);
+            if (appInfo.metaData == null
+                    || (serviceComponent = appInfo.metaData.getString(metaDataKey)) == null) {
                 return null;
             }
             return ComponentName.unflattenFromString(serviceComponent);
@@ -91,7 +94,8 @@ public class MbmsUtils {
         }
     }
 
-    public static android.content.pm.ServiceInfo getMiddlewareServiceInfo(Context context, String serviceAction) {
+    public static android.content.pm.ServiceInfo getMiddlewareServiceInfo(
+            Context context, String serviceAction) {
         List<ResolveInfo> services;
         PackageManager packageManager = context.getPackageManager();
         Intent queryIntent = new Intent();
@@ -114,9 +118,11 @@ public class MbmsUtils {
         return services.get(0).serviceInfo;
     }
 
-    public static int startBinding(Context context, String serviceAction, ServiceConnection serviceConnection) {
+    public static int startBinding(
+            Context context, String serviceAction, ServiceConnection serviceConnection) {
         Intent bindIntent = new Intent();
-        android.content.pm.ServiceInfo mbmsServiceInfo = getMiddlewareServiceInfo(context, serviceAction);
+        android.content.pm.ServiceInfo mbmsServiceInfo =
+                getMiddlewareServiceInfo(context, serviceAction);
         if (mbmsServiceInfo == null) {
             return 1;
         }
@@ -126,7 +132,8 @@ public class MbmsUtils {
     }
 
     public static File getEmbmsTempFileDirForService(Context context, String serviceId) {
-        String sanitizedServiceId = serviceId.replaceAll("[^a-zA-Z0-9_]", Session.SESSION_SEPARATION_CHAR_CHILD);
+        String sanitizedServiceId =
+                serviceId.replaceAll("[^a-zA-Z0-9_]", Session.SESSION_SEPARATION_CHAR_CHILD);
         File embmsTempFileDir = MbmsTempFileProvider.getEmbmsTempFileDir(context);
         return new File(embmsTempFileDir, sanitizedServiceId);
     }

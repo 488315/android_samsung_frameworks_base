@@ -25,8 +25,7 @@ public final class RemoteSystemCaptionsManagerService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteServiceConnection implements ServiceConnection {
-        public RemoteServiceConnection() {
-        }
+        public RemoteServiceConnection() {}
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -35,13 +34,17 @@ public final class RemoteSystemCaptionsManagerService {
                     if (RemoteSystemCaptionsManagerService.this.mVerbose) {
                         Slog.v("RemoteSystemCaptionsManagerService", "onServiceConnected()");
                     }
-                    RemoteSystemCaptionsManagerService remoteSystemCaptionsManagerService = RemoteSystemCaptionsManagerService.this;
-                    if (!remoteSystemCaptionsManagerService.mDestroyed && remoteSystemCaptionsManagerService.mBinding) {
+                    RemoteSystemCaptionsManagerService remoteSystemCaptionsManagerService =
+                            RemoteSystemCaptionsManagerService.this;
+                    if (!remoteSystemCaptionsManagerService.mDestroyed
+                            && remoteSystemCaptionsManagerService.mBinding) {
                         remoteSystemCaptionsManagerService.mBinding = false;
                         remoteSystemCaptionsManagerService.mService = iBinder;
                         return;
                     }
-                    Slog.wtf("RemoteSystemCaptionsManagerService", "onServiceConnected() dispatched after unbindService");
+                    Slog.wtf(
+                            "RemoteSystemCaptionsManagerService",
+                            "onServiceConnected() dispatched after unbindService");
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -55,7 +58,8 @@ public final class RemoteSystemCaptionsManagerService {
                     if (RemoteSystemCaptionsManagerService.this.mVerbose) {
                         Slog.v("RemoteSystemCaptionsManagerService", "onServiceDisconnected()");
                     }
-                    RemoteSystemCaptionsManagerService remoteSystemCaptionsManagerService = RemoteSystemCaptionsManagerService.this;
+                    RemoteSystemCaptionsManagerService remoteSystemCaptionsManagerService =
+                            RemoteSystemCaptionsManagerService.this;
                     remoteSystemCaptionsManagerService.mBinding = true;
                     remoteSystemCaptionsManagerService.mService = null;
                 } catch (Throwable th) {
@@ -65,10 +69,13 @@ public final class RemoteSystemCaptionsManagerService {
         }
     }
 
-    public RemoteSystemCaptionsManagerService(Context context, ComponentName componentName, boolean z, int i) {
+    public RemoteSystemCaptionsManagerService(
+            Context context, ComponentName componentName, boolean z, int i) {
         this.mContext = context;
         this.mUserId = i;
         this.mVerbose = z;
-        this.mIntent = new Intent("android.service.systemcaptions.SystemCaptionsManagerService").setComponent(componentName);
+        this.mIntent =
+                new Intent("android.service.systemcaptions.SystemCaptionsManagerService")
+                        .setComponent(componentName);
     }
 }

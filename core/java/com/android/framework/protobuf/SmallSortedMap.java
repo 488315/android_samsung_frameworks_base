@@ -1,7 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.FieldSet;
-import java.lang.Comparable;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.ArrayList;
@@ -30,28 +28,32 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         return put((SmallSortedMap<K, V>) obj, (Comparable) obj2);
     }
 
-    static <FieldDescriptorType extends FieldSet.FieldDescriptorLite<FieldDescriptorType>> SmallSortedMap<FieldDescriptorType, Object> newFieldMap(int i) {
-        return (SmallSortedMap<FieldDescriptorType, Object>) new SmallSortedMap<FieldDescriptorType, Object>(i) { // from class: com.android.framework.protobuf.SmallSortedMap.1
-            @Override // com.android.framework.protobuf.SmallSortedMap
-            public void makeImmutable() {
-                if (!isImmutable()) {
-                    for (int i2 = 0; i2 < getNumArrayEntries(); i2++) {
-                        Map.Entry<FieldDescriptorType, Object> entry = getArrayEntryAt(i2);
-                        if (((FieldSet.FieldDescriptorLite) entry.getKey()).isRepeated()) {
-                            List value = (List) entry.getValue();
-                            entry.setValue(Collections.unmodifiableList(value));
+    static <FieldDescriptorType extends FieldSet.FieldDescriptorLite<FieldDescriptorType>>
+            SmallSortedMap<FieldDescriptorType, Object> newFieldMap(int i) {
+        return (SmallSortedMap<FieldDescriptorType, Object>)
+                new SmallSortedMap<FieldDescriptorType, Object>(
+                        i) { // from class: com.android.framework.protobuf.SmallSortedMap.1
+                    @Override // com.android.framework.protobuf.SmallSortedMap
+                    public void makeImmutable() {
+                        if (!isImmutable()) {
+                            for (int i2 = 0; i2 < getNumArrayEntries(); i2++) {
+                                Map.Entry<FieldDescriptorType, Object> entry = getArrayEntryAt(i2);
+                                if (((FieldSet.FieldDescriptorLite) entry.getKey()).isRepeated()) {
+                                    List value = (List) entry.getValue();
+                                    entry.setValue(Collections.unmodifiableList(value));
+                                }
+                            }
+                            for (Map.Entry<FieldDescriptorType, Object> entry2 :
+                                    getOverflowEntries()) {
+                                if (((FieldSet.FieldDescriptorLite) entry2.getKey()).isRepeated()) {
+                                    List value2 = (List) entry2.getValue();
+                                    entry2.setValue(Collections.unmodifiableList(value2));
+                                }
+                            }
                         }
+                        super.makeImmutable();
                     }
-                    for (Map.Entry<FieldDescriptorType, Object> entry2 : getOverflowEntries()) {
-                        if (((FieldSet.FieldDescriptorLite) entry2.getKey()).isRepeated()) {
-                            List value2 = (List) entry2.getValue();
-                            entry2.setValue(Collections.unmodifiableList(value2));
-                        }
-                    }
-                }
-                super.makeImmutable();
-            }
-        };
+                };
     }
 
     static <K extends Comparable<K>, V> SmallSortedMap<K, V> newInstanceForTest(int arraySize) {
@@ -309,7 +311,8 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
 
         @Override // java.util.Map.Entry
         public int hashCode() {
-            return (this.key == null ? 0 : this.key.hashCode()) ^ (this.value != null ? this.value.hashCode() : 0);
+            return (this.key == null ? 0 : this.key.hashCode())
+                    ^ (this.value != null ? this.value.hashCode() : 0);
         }
 
         public String toString() {
@@ -322,10 +325,10 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
     }
 
     private class EntrySet extends AbstractSet<Map.Entry<K, V>> {
-        private EntrySet() {
-        }
+        private EntrySet() {}
 
-        @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
+        @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable,
+                  // java.util.Set
         public Iterator<Map.Entry<K, V>> iterator() {
             return new EntryIterator();
         }
@@ -373,7 +376,9 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
             super();
         }
 
-        @Override // com.android.framework.protobuf.SmallSortedMap.EntrySet, java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
+        @Override // com.android.framework.protobuf.SmallSortedMap.EntrySet,
+                  // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable,
+                  // java.util.Set
         public Iterator<Map.Entry<K, V>> iterator() {
             return new DescendingEntryIterator();
         }
@@ -391,7 +396,8 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
         @Override // java.util.Iterator
         public boolean hasNext() {
             if (this.pos + 1 >= SmallSortedMap.this.entryList.size()) {
-                return !SmallSortedMap.this.overflowEntries.isEmpty() && getOverflowIterator().hasNext();
+                return !SmallSortedMap.this.overflowEntries.isEmpty()
+                        && getOverflowIterator().hasNext();
             }
             return true;
         }
@@ -426,7 +432,8 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
 
         private Iterator<Map.Entry<K, V>> getOverflowIterator() {
             if (this.lazyOverflowIterator == null) {
-                this.lazyOverflowIterator = SmallSortedMap.this.overflowEntries.entrySet().iterator();
+                this.lazyOverflowIterator =
+                        SmallSortedMap.this.overflowEntries.entrySet().iterator();
             }
             return this.lazyOverflowIterator;
         }
@@ -442,7 +449,8 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
 
         @Override // java.util.Iterator
         public boolean hasNext() {
-            return (this.pos > 0 && this.pos <= SmallSortedMap.this.entryList.size()) || getOverflowIterator().hasNext();
+            return (this.pos > 0 && this.pos <= SmallSortedMap.this.entryList.size())
+                    || getOverflowIterator().hasNext();
         }
 
         @Override // java.util.Iterator
@@ -463,38 +471,44 @@ class SmallSortedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
 
         private Iterator<Map.Entry<K, V>> getOverflowIterator() {
             if (this.lazyOverflowIterator == null) {
-                this.lazyOverflowIterator = SmallSortedMap.this.overflowEntriesDescending.entrySet().iterator();
+                this.lazyOverflowIterator =
+                        SmallSortedMap.this.overflowEntriesDescending.entrySet().iterator();
             }
             return this.lazyOverflowIterator;
         }
     }
 
     private static class EmptySet {
-        private static final Iterator<Object> ITERATOR = new Iterator<Object>() { // from class: com.android.framework.protobuf.SmallSortedMap.EmptySet.1
-            @Override // java.util.Iterator
-            public boolean hasNext() {
-                return false;
-            }
+        private static final Iterator<Object> ITERATOR =
+                new Iterator<
+                        Object>() { // from class:
+                                    // com.android.framework.protobuf.SmallSortedMap.EmptySet.1
+                    @Override // java.util.Iterator
+                    public boolean hasNext() {
+                        return false;
+                    }
 
-            @Override // java.util.Iterator
-            public Object next() {
-                throw new NoSuchElementException();
-            }
+                    @Override // java.util.Iterator
+                    public Object next() {
+                        throw new NoSuchElementException();
+                    }
 
-            @Override // java.util.Iterator
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-        };
-        private static final Iterable<Object> ITERABLE = new Iterable<Object>() { // from class: com.android.framework.protobuf.SmallSortedMap.EmptySet.2
-            @Override // java.lang.Iterable
-            public Iterator<Object> iterator() {
-                return EmptySet.ITERATOR;
-            }
-        };
+                    @Override // java.util.Iterator
+                    public void remove() {
+                        throw new UnsupportedOperationException();
+                    }
+                };
+        private static final Iterable<Object> ITERABLE =
+                new Iterable<
+                        Object>() { // from class:
+                                    // com.android.framework.protobuf.SmallSortedMap.EmptySet.2
+                    @Override // java.lang.Iterable
+                    public Iterator<Object> iterator() {
+                        return EmptySet.ITERATOR;
+                    }
+                };
 
-        private EmptySet() {
-        }
+        private EmptySet() {}
 
         static <T> Iterable<T> iterable() {
             return (Iterable<T>) ITERABLE;

@@ -3,11 +3,13 @@ package com.android.server.alarm;
 import android.app.IAlarmListener;
 import android.app.PendingIntent;
 import android.content.Intent;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda8 implements Predicate {
+public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda8
+        implements Predicate {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
     public final /* synthetic */ Object f$1;
@@ -18,7 +20,8 @@ public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda8
         this.f$1 = "com.google.android.intent.action.GCM_RECONNECT";
     }
 
-    public /* synthetic */ AlarmManagerService$$ExternalSyntheticLambda8(PendingIntent pendingIntent, IAlarmListener iAlarmListener) {
+    public /* synthetic */ AlarmManagerService$$ExternalSyntheticLambda8(
+            PendingIntent pendingIntent, IAlarmListener iAlarmListener) {
         this.$r8$classId = 0;
         this.f$0 = pendingIntent;
         this.f$1 = iAlarmListener;
@@ -34,7 +37,8 @@ public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda8
                 Intent intent = AlarmManagerService.NEXT_ALARM_CLOCK_CHANGED_INTENT;
                 PendingIntent pendingIntent2 = alarm.operation;
                 if (pendingIntent2 == null) {
-                    if (iAlarmListener != null && alarm.listener.asBinder().equals(iAlarmListener.asBinder())) {
+                    if (iAlarmListener != null
+                            && alarm.listener.asBinder().equals(iAlarmListener.asBinder())) {
                         break;
                     }
                 } else {
@@ -47,7 +51,10 @@ public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda8
                 Alarm alarm2 = (Alarm) obj;
                 Intent intent2 = AlarmManagerService.NEXT_ALARM_CLOCK_CHANGED_INTENT;
                 PendingIntent pendingIntent3 = alarm2.operation;
-                if (pendingIntent3 != null && str.equals(pendingIntent3.getCreatorPackage()) && alarm2.operation.getIntent() != null && str2.equals(alarm2.operation.getIntent().getAction())) {
+                if (pendingIntent3 != null
+                        && str.equals(pendingIntent3.getCreatorPackage())
+                        && alarm2.operation.getIntent() != null
+                        && str2.equals(alarm2.operation.getIntent().getAction())) {
                     break;
                 }
                 break;

@@ -46,8 +46,7 @@ public interface IPersistentDataBlockService extends IInterface {
         }
 
         @Override // android.service.persistentdata.IPersistentDataBlockService
-        public void wipe() throws RemoteException {
-        }
+        public void wipe() throws RemoteException {}
 
         @Override // android.service.persistentdata.IPersistentDataBlockService
         public int getDataBlockSize() throws RemoteException {
@@ -60,8 +59,7 @@ public interface IPersistentDataBlockService extends IInterface {
         }
 
         @Override // android.service.persistentdata.IPersistentDataBlockService
-        public void setOemUnlockEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setOemUnlockEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.service.persistentdata.IPersistentDataBlockService
         public boolean getOemUnlockEnabled() throws RemoteException {
@@ -104,8 +102,9 @@ public interface IPersistentDataBlockService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPersistentDataBlockService {
-        public static final String DESCRIPTOR = "android.service.persistentdata.IPersistentDataBlockService";
+    public abstract static class Stub extends Binder implements IPersistentDataBlockService {
+        public static final String DESCRIPTOR =
+                "android.service.persistentdata.IPersistentDataBlockService";
         static final int TRANSACTION_deactivateFactoryResetProtection = 12;
         static final int TRANSACTION_getDataBlockSize = 4;
         static final int TRANSACTION_getFlashLockState = 8;
@@ -179,7 +178,8 @@ public interface IPersistentDataBlockService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

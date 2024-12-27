@@ -2,7 +2,9 @@ package com.samsung.android.graphics.spr.document.attribute.impl;
 
 import android.graphics.Matrix;
 import android.graphics.Shader;
+
 import com.samsung.android.graphics.spr.document.SprInputStream;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -12,7 +14,9 @@ public abstract class SprGradientBase implements Cloneable {
     public static final byte SPREAD_TYPE_PAD = 1;
     public static final byte SPREAD_TYPE_REFLECT = 2;
     public static final byte SPREAD_TYPE_REPEAT = 3;
-    static final Shader.TileMode[] sTileModeArray = {Shader.TileMode.CLAMP, Shader.TileMode.CLAMP, Shader.TileMode.MIRROR, Shader.TileMode.REPEAT};
+    static final Shader.TileMode[] sTileModeArray = {
+        Shader.TileMode.CLAMP, Shader.TileMode.CLAMP, Shader.TileMode.MIRROR, Shader.TileMode.REPEAT
+    };
     public int[] colors;
     public float[] positions;
     public byte spreadMode = 0;

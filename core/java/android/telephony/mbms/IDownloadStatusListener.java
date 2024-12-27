@@ -8,12 +8,13 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface IDownloadStatusListener extends IInterface {
-    void onStatusUpdated(DownloadRequest downloadRequest, FileInfo fileInfo, int i) throws RemoteException;
+    void onStatusUpdated(DownloadRequest downloadRequest, FileInfo fileInfo, int i)
+            throws RemoteException;
 
     public static class Default implements IDownloadStatusListener {
         @Override // android.telephony.mbms.IDownloadStatusListener
-        public void onStatusUpdated(DownloadRequest request, FileInfo fileInfo, int status) throws RemoteException {
-        }
+        public void onStatusUpdated(DownloadRequest request, FileInfo fileInfo, int status)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +22,7 @@ public interface IDownloadStatusListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDownloadStatusListener {
+    public abstract static class Stub extends Binder implements IDownloadStatusListener {
         public static final String DESCRIPTOR = "android.telephony.mbms.IDownloadStatusListener";
         static final int TRANSACTION_onStatusUpdated = 1;
 
@@ -60,7 +61,8 @@ public interface IDownloadStatusListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +72,8 @@ public interface IDownloadStatusListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    DownloadRequest _arg0 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    DownloadRequest _arg0 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
                     FileInfo _arg1 = (FileInfo) data.readTypedObject(FileInfo.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
@@ -99,7 +102,8 @@ public interface IDownloadStatusListener extends IInterface {
             }
 
             @Override // android.telephony.mbms.IDownloadStatusListener
-            public void onStatusUpdated(DownloadRequest request, FileInfo fileInfo, int status) throws RemoteException {
+            public void onStatusUpdated(DownloadRequest request, FileInfo fileInfo, int status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -9,14 +9,14 @@ import android.service.euicc.EuiccProfileInfo;
 
 /* loaded from: classes5.dex */
 public interface IGetProfileCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.euicc.IGetProfileCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.euicc.IGetProfileCallback";
 
     void onComplete(int i, EuiccProfileInfo euiccProfileInfo) throws RemoteException;
 
     public static class Default implements IGetProfileCallback {
         @Override // com.android.internal.telephony.euicc.IGetProfileCallback
-        public void onComplete(int resultCode, EuiccProfileInfo profile) throws RemoteException {
-        }
+        public void onComplete(int resultCode, EuiccProfileInfo profile) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IGetProfileCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetProfileCallback {
+    public abstract static class Stub extends Binder implements IGetProfileCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IGetProfileCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGetProfileCallback.DESCRIPTOR);
             }
@@ -73,7 +74,8 @@ public interface IGetProfileCallback extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    EuiccProfileInfo _arg1 = (EuiccProfileInfo) data.readTypedObject(EuiccProfileInfo.CREATOR);
+                    EuiccProfileInfo _arg1 =
+                            (EuiccProfileInfo) data.readTypedObject(EuiccProfileInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onComplete(_arg0, _arg1);
                     return true;
@@ -99,7 +101,8 @@ public interface IGetProfileCallback extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IGetProfileCallback
-            public void onComplete(int resultCode, EuiccProfileInfo profile) throws RemoteException {
+            public void onComplete(int resultCode, EuiccProfileInfo profile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGetProfileCallback.DESCRIPTOR);

@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioHalVolumeGroup implements Parcelable {
-    public static final Parcelable.Creator<AudioHalVolumeGroup> CREATOR = new Parcelable.Creator<AudioHalVolumeGroup>() { // from class: android.media.audio.common.AudioHalVolumeGroup.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalVolumeGroup createFromParcel(Parcel _aidl_source) {
-            AudioHalVolumeGroup _aidl_out = new AudioHalVolumeGroup();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioHalVolumeGroup> CREATOR =
+            new Parcelable.Creator<AudioHalVolumeGroup>() { // from class:
+                // android.media.audio.common.AudioHalVolumeGroup.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalVolumeGroup createFromParcel(Parcel _aidl_source) {
+                    AudioHalVolumeGroup _aidl_out = new AudioHalVolumeGroup();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalVolumeGroup[] newArray(int _aidl_size) {
-            return new AudioHalVolumeGroup[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalVolumeGroup[] newArray(int _aidl_size) {
+                    return new AudioHalVolumeGroup[_aidl_size];
+                }
+            };
     public static final int INDEX_DEFERRED_TO_AUDIO_SERVICE = -1;
     public String name;
     public AudioHalVolumeCurve[] volumeCurves;
@@ -86,7 +89,9 @@ public class AudioHalVolumeGroup implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.volumeCurves = (AudioHalVolumeCurve[]) _aidl_parcel.createTypedArray(AudioHalVolumeCurve.CREATOR);
+                this.volumeCurves =
+                        (AudioHalVolumeCurve[])
+                                _aidl_parcel.createTypedArray(AudioHalVolumeCurve.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -118,7 +123,12 @@ public class AudioHalVolumeGroup implements Parcelable {
             return false;
         }
         AudioHalVolumeGroup that = (AudioHalVolumeGroup) other;
-        if (Objects.deepEquals(this.name, that.name) && Objects.deepEquals(Integer.valueOf(this.minIndex), Integer.valueOf(that.minIndex)) && Objects.deepEquals(Integer.valueOf(this.maxIndex), Integer.valueOf(that.maxIndex)) && Objects.deepEquals(this.volumeCurves, that.volumeCurves)) {
+        if (Objects.deepEquals(this.name, that.name)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.minIndex), Integer.valueOf(that.minIndex))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxIndex), Integer.valueOf(that.maxIndex))
+                && Objects.deepEquals(this.volumeCurves, that.volumeCurves)) {
             return true;
         }
         return false;
@@ -126,7 +136,13 @@ public class AudioHalVolumeGroup implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.name, Integer.valueOf(this.minIndex), Integer.valueOf(this.maxIndex), this.volumeCurves).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.name,
+                                Integer.valueOf(this.minIndex),
+                                Integer.valueOf(this.maxIndex),
+                                this.volumeCurves)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

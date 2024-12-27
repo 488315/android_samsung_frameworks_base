@@ -23,7 +23,9 @@ public class TransitionDataSource extends DataSource<DataSourceInstance, Void, V
 
     @Override // android.tracing.perfetto.DataSource
     public DataSourceInstance createInstance(ProtoInputStream configStream, int instanceIndex) {
-        return new DataSourceInstance(this, instanceIndex) { // from class: android.tracing.transition.TransitionDataSource.1
+        return new DataSourceInstance(
+                this,
+                instanceIndex) { // from class: android.tracing.transition.TransitionDataSource.1
             @Override // android.tracing.perfetto.DataSourceInstance
             protected void onStart(StartCallbackArguments args) {
                 TransitionDataSource.this.mOnStartStaticCallback.run();

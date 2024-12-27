@@ -64,7 +64,9 @@ public class SubtitleView extends View {
         this.mSpacingMult = 1.0f;
         this.mSpacingAdd = 0.0f;
         this.mInnerPaddingX = 0;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TextView, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.TextView, defStyleAttr, defStyleRes);
         CharSequence text = "";
         int textSize = 15;
         int n = a.getIndexCount();
@@ -87,10 +89,14 @@ public class SubtitleView extends View {
         }
         a.recycle();
         Resources res = getContext().getResources();
-        this.mCornerRadius = res.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_corner_radius);
-        this.mOutlineWidth = res.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_outline_width);
-        this.mShadowRadius = res.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_shadow_radius);
-        this.mShadowOffsetX = res.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_shadow_offset);
+        this.mCornerRadius =
+                res.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_corner_radius);
+        this.mOutlineWidth =
+                res.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_outline_width);
+        this.mShadowRadius =
+                res.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_shadow_radius);
+        this.mShadowOffsetX =
+                res.getDimensionPixelSize(com.android.internal.R.dimen.subtitle_shadow_offset);
         this.mShadowOffsetY = this.mShadowOffsetX;
         this.mTextPaint = new TextPaint();
         this.mTextPaint.setAntiAlias(true);
@@ -194,7 +200,13 @@ public class SubtitleView extends View {
         }
         this.mHasMeasurements = true;
         this.mLastMeasuredWidth = maxWidth2;
-        this.mLayout = StaticLayout.Builder.obtain(this.mText, 0, this.mText.length(), this.mTextPaint, maxWidth2).setAlignment(this.mAlignment).setLineSpacing(this.mSpacingAdd, this.mSpacingMult).setUseLineSpacingFromFallbacks(true).build();
+        this.mLayout =
+                StaticLayout.Builder.obtain(
+                                this.mText, 0, this.mText.length(), this.mTextPaint, maxWidth2)
+                        .setAlignment(this.mAlignment)
+                        .setLineSpacing(this.mSpacingAdd, this.mSpacingMult)
+                        .setUseLineSpacingFromFallbacks(true)
+                        .build();
         return true;
     }
 
@@ -208,8 +220,10 @@ public class SubtitleView extends View {
             style = CaptioningManager.CaptionStyle.PRESETS[styleId];
         }
         CaptioningManager.CaptionStyle defStyle = CaptioningManager.CaptionStyle.DEFAULT;
-        this.mForegroundColor = style.hasForegroundColor() ? style.foregroundColor : defStyle.foregroundColor;
-        this.mBackgroundColor = style.hasBackgroundColor() ? style.backgroundColor : defStyle.backgroundColor;
+        this.mForegroundColor =
+                style.hasForegroundColor() ? style.foregroundColor : defStyle.foregroundColor;
+        this.mBackgroundColor =
+                style.hasBackgroundColor() ? style.backgroundColor : defStyle.backgroundColor;
         this.mEdgeType = style.hasEdgeType() ? style.edgeType : defStyle.edgeType;
         this.mEdgeColor = style.hasEdgeColor() ? style.edgeColor : defStyle.edgeColor;
         this.mHasMeasurements = false;
@@ -256,7 +270,8 @@ public class SubtitleView extends View {
                 layout.drawText(c, i2, i2);
             }
         } else if (edgeType == 2) {
-            textPaint.setShadowLayer(this.mShadowRadius, this.mShadowOffsetX, this.mShadowOffsetY, this.mEdgeColor);
+            textPaint.setShadowLayer(
+                    this.mShadowRadius, this.mShadowOffsetX, this.mShadowOffsetY, this.mEdgeColor);
         } else if (edgeType == 3 || edgeType == 4) {
             boolean raised = edgeType == 3;
             int colorDown = -1;

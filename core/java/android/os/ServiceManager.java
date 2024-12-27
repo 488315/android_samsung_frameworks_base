@@ -2,13 +2,14 @@ package android.os;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.os.LazyService;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.os.BinderInternal;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.StatLogger;
+
 import java.util.Map;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
@@ -28,11 +29,15 @@ public final class ServiceManager {
     private static final Object sLock = new Object();
     private static Map<String, IBinder> sCache = new ArrayMap();
     private static final Binder dummyBinder = new Binder();
-    private static final long GET_SERVICE_SLOW_THRESHOLD_US_CORE = SystemProperties.getInt("debug.servicemanager.slow_call_core_ms", 10) * 1000;
-    private static final long GET_SERVICE_SLOW_THRESHOLD_US_NON_CORE = SystemProperties.getInt("debug.servicemanager.slow_call_ms", 50) * 1000;
-    private static final int GET_SERVICE_LOG_EVERY_CALLS_CORE = SystemProperties.getInt("debug.servicemanager.log_calls_core", 100);
-    private static final int GET_SERVICE_LOG_EVERY_CALLS_NON_CORE = SystemProperties.getInt("debug.servicemanager.log_calls", 200);
-    public static final StatLogger sStatLogger = new StatLogger(new String[]{"getService()"});
+    private static final long GET_SERVICE_SLOW_THRESHOLD_US_CORE =
+            SystemProperties.getInt("debug.servicemanager.slow_call_core_ms", 10) * 1000;
+    private static final long GET_SERVICE_SLOW_THRESHOLD_US_NON_CORE =
+            SystemProperties.getInt("debug.servicemanager.slow_call_ms", 50) * 1000;
+    private static final int GET_SERVICE_LOG_EVERY_CALLS_CORE =
+            SystemProperties.getInt("debug.servicemanager.log_calls_core", 100);
+    private static final int GET_SERVICE_LOG_EVERY_CALLS_NON_CORE =
+            SystemProperties.getInt("debug.servicemanager.log_calls", 200);
+    public static final StatLogger sStatLogger = new StatLogger(new String[] {"getService()"});
     private static LazyService lazyServiceManager = null;
     private static Context _context = null;
 
@@ -57,7 +62,8 @@ public final class ServiceManager {
     public static void addService(String name, Class type) {
         if (lazyServiceManager == null) {
             try {
-                LazyService.DefaultServiceCreator creator = new LazyService.DefaultServiceCreator(type);
+                LazyService.DefaultServiceCreator creator =
+                        new LazyService.DefaultServiceCreator(type);
                 addService(name, creator.createService(_context));
                 return;
             } catch (NoSuchMethodException e) {
@@ -95,7 +101,9 @@ public final class ServiceManager {
         if (sServiceManager != null) {
             return sServiceManager;
         }
-        sServiceManager = ServiceManagerNative.asInterface(Binder.allowBlocking(BinderInternal.getContextObject()));
+        sServiceManager =
+                ServiceManagerNative.asInterface(
+                        Binder.allowBlocking(BinderInternal.getContextObject()));
         return sServiceManager;
     }
 
@@ -115,7 +123,10 @@ public final class ServiceManager {
     public static IBinder getService$ravenwood(String name) {
         IBinder iBinder;
         synchronized (ServiceManager.class) {
-            iBinder = (IBinder) ((Map) Preconditions.requireNonNullViaRavenwoodRule(sCache$ravenwood)).get(name);
+            iBinder =
+                    (IBinder)
+                            ((Map) Preconditions.requireNonNullViaRavenwoodRule(sCache$ravenwood))
+                                    .get(name);
         }
         return iBinder;
     }
@@ -136,7 +147,8 @@ public final class ServiceManager {
         addService(name, service, allowIsolated, 8);
     }
 
-    public static void addService(String name, IBinder service, boolean allowIsolated, int dumpPriority) {
+    public static void addService(
+            String name, IBinder service, boolean allowIsolated, int dumpPriority) {
         try {
             getIServiceManager().addService(name, service, allowIsolated, dumpPriority);
         } catch (RemoteException e) {
@@ -144,9 +156,11 @@ public final class ServiceManager {
         }
     }
 
-    public static void addService$ravenwood(String name, IBinder service, boolean allowIsolated, int dumpPriority) {
+    public static void addService$ravenwood(
+            String name, IBinder service, boolean allowIsolated, int dumpPriority) {
         synchronized (ServiceManager.class) {
-            ((Map) Preconditions.requireNonNullViaRavenwoodRule(sCache$ravenwood)).put(name, service);
+            ((Map) Preconditions.requireNonNullViaRavenwoodRule(sCache$ravenwood))
+                    .put(name, service);
         }
     }
 
@@ -194,7 +208,8 @@ public final class ServiceManager {
         return null;
     }
 
-    public static void registerForNotifications(String name, IServiceCallback callback) throws RemoteException {
+    public static void registerForNotifications(String name, IServiceCallback callback)
+            throws RemoteException {
         getIServiceManager().registerForNotifications(name, callback);
     }
 
@@ -250,7 +265,8 @@ public final class ServiceManager {
                     long nowUptime = SystemClock.uptimeMillis();
                     if (time >= slowThreshold) {
                         try {
-                            if (nowUptime > sLastSlowLogUptime + 5000 || sLastSlowLogActualTime < time) {
+                            if (nowUptime > sLastSlowLogUptime + 5000
+                                    || sLastSlowLogActualTime < time) {
                                 EventLogTags.writeServiceManagerSlow(time / 1000, name);
                                 sLastSlowLogUptime = nowUptime;
                                 sLastSlowLogActualTime = time;
@@ -265,8 +281,12 @@ public final class ServiceManager {
                     } else {
                         logInterval = GET_SERVICE_LOG_EVERY_CALLS_NON_CORE;
                     }
-                    if (sGetServiceAccumulatedCallCount >= logInterval && nowUptime >= sLastStatsLogUptime + 5000) {
-                        EventLogTags.writeServiceManagerStats(sGetServiceAccumulatedCallCount, sGetServiceAccumulatedUs / 1000, (int) (nowUptime - sLastStatsLogUptime));
+                    if (sGetServiceAccumulatedCallCount >= logInterval
+                            && nowUptime >= sLastStatsLogUptime + 5000) {
+                        EventLogTags.writeServiceManagerStats(
+                                sGetServiceAccumulatedCallCount,
+                                sGetServiceAccumulatedUs / 1000,
+                                (int) (nowUptime - sLastStatsLogUptime));
                         sGetServiceAccumulatedCallCount = 0;
                         sGetServiceAccumulatedUs = 0;
                         sLastStatsLogUptime = nowUptime;

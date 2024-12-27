@@ -7,19 +7,28 @@ import android.telecom.PhoneAccountHandle;
 
 /* loaded from: classes4.dex */
 public final class VisualVoicemailSms implements Parcelable {
-    public static final Parcelable.Creator<VisualVoicemailSms> CREATOR = new Parcelable.Creator<VisualVoicemailSms>() { // from class: android.telephony.VisualVoicemailSms.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualVoicemailSms createFromParcel(Parcel in) {
-            return new Builder().setPhoneAccountHandle((PhoneAccountHandle) in.readParcelable(null, PhoneAccountHandle.class)).setPrefix(in.readString()).setFields(in.readBundle()).setMessageBody(in.readString()).build();
-        }
+    public static final Parcelable.Creator<VisualVoicemailSms> CREATOR =
+            new Parcelable.Creator<
+                    VisualVoicemailSms>() { // from class: android.telephony.VisualVoicemailSms.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualVoicemailSms createFromParcel(Parcel in) {
+                    return new Builder()
+                            .setPhoneAccountHandle(
+                                    (PhoneAccountHandle)
+                                            in.readParcelable(null, PhoneAccountHandle.class))
+                            .setPrefix(in.readString())
+                            .setFields(in.readBundle())
+                            .setMessageBody(in.readString())
+                            .build();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualVoicemailSms[] newArray(int size) {
-            return new VisualVoicemailSms[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualVoicemailSms[] newArray(int size) {
+                    return new VisualVoicemailSms[size];
+                }
+            };
     private final Bundle mFields;
     private final String mMessageBody;
     private final PhoneAccountHandle mPhoneAccountHandle;

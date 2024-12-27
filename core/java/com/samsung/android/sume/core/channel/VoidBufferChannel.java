@@ -6,8 +6,7 @@ import com.samsung.android.sume.core.format.MediaFormat;
 /* loaded from: classes6.dex */
 public class VoidBufferChannel implements BufferChannel {
     @Override // com.samsung.android.sume.core.channel.Channel
-    public void send(MediaBuffer data) {
-    }
+    public void send(MediaBuffer data) {}
 
     /* JADX WARN: Can't rename method to resolve collision */
     @Override // com.samsung.android.sume.core.channel.Channel
@@ -16,12 +15,10 @@ public class VoidBufferChannel implements BufferChannel {
     }
 
     @Override // com.samsung.android.sume.core.channel.Channel
-    public void close() {
-    }
+    public void close() {}
 
     @Override // com.samsung.android.sume.core.channel.Channel
-    public void cancel() {
-    }
+    public void cancel() {}
 
     @Override // com.samsung.android.sume.core.channel.Channel
     public boolean isClosedForSend() {

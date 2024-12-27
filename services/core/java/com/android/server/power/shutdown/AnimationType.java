@@ -20,7 +20,8 @@ final class AnimationType {
         MAIN_LOOP = animationType3;
         AnimationType animationType4 = new AnimationType("SUB_LOOP", 3);
         SUB_LOOP = animationType4;
-        $VALUES = new AnimationType[]{animationType, animationType2, animationType3, animationType4};
+        $VALUES =
+                new AnimationType[] {animationType, animationType2, animationType3, animationType4};
     }
 
     public static AnimationType valueOf(String str) {

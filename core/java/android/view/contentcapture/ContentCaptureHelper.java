@@ -5,6 +5,7 @@ import android.os.Build;
 import android.provider.DeviceConfig;
 import android.util.ArraySet;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -28,7 +29,11 @@ public final class ContentCaptureHelper {
 
     public static void setLoggingLevel() {
         int defaultLevel = getDefaultLoggingLevel();
-        int level = DeviceConfig.getInt(Context.CONTENT_CAPTURE_MANAGER_SERVICE, ContentCaptureManager.DEVICE_CONFIG_PROPERTY_LOGGING_LEVEL, defaultLevel);
+        int level =
+                DeviceConfig.getInt(
+                        Context.CONTENT_CAPTURE_MANAGER_SERVICE,
+                        ContentCaptureManager.DEVICE_CONFIG_PROPERTY_LOGGING_LEVEL,
+                        defaultLevel);
         setLoggingLevel(level);
     }
 

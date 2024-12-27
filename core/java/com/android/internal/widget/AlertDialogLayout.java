@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -23,7 +24,8 @@ public class AlertDialogLayout extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    public AlertDialogLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AlertDialogLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -87,7 +89,9 @@ public class AlertDialogLayout extends LinearLayout {
             if (heightMode == 0) {
                 childHeightSpec = 0;
             } else {
-                childHeightSpec = View.MeasureSpec.makeMeasureSpec(Math.max(0, heightSize - usedHeight), heightMode);
+                childHeightSpec =
+                        View.MeasureSpec.makeMeasureSpec(
+                                Math.max(0, heightSize - usedHeight), heightMode);
             }
             middlePanel.measure(widthMeasureSpec, childHeightSpec);
             middleHeight = middlePanel.getMeasuredHeight();
@@ -112,7 +116,8 @@ public class AlertDialogLayout extends LinearLayout {
         if (middlePanel != null && remainingHeight > 0) {
             int heightToGive2 = remainingHeight;
             int remainingHeight3 = remainingHeight - heightToGive2;
-            int childHeightSpec3 = View.MeasureSpec.makeMeasureSpec(middleHeight + heightToGive2, heightMode);
+            int childHeightSpec3 =
+                    View.MeasureSpec.makeMeasureSpec(middleHeight + heightToGive2, heightMode);
             middlePanel.measure(widthMeasureSpec, childHeightSpec3);
             usedHeight = (usedHeight - middleHeight) + middlePanel.getMeasuredHeight();
             int childHeightSpec4 = middlePanel.getMeasuredState();
@@ -133,7 +138,9 @@ public class AlertDialogLayout extends LinearLayout {
             middlePanel = middlePanel2;
         }
         int i2 = getPaddingLeft();
-        int widthSizeAndState = resolveSizeAndState(maxWidth + i2 + getPaddingRight(), widthMeasureSpec, childState);
+        int widthSizeAndState =
+                resolveSizeAndState(
+                        maxWidth + i2 + getPaddingRight(), widthMeasureSpec, childState);
         int heightSizeAndState = resolveSizeAndState(usedHeight, heightMeasureSpec, 0);
         setMeasuredDimension(widthSizeAndState, heightSizeAndState);
         if (widthMode != 1073741824) {
@@ -223,7 +230,9 @@ public class AlertDialogLayout extends LinearLayout {
                 int absoluteGravity = Gravity.getAbsoluteGravity(layoutGravity, layoutDirection);
                 switch (absoluteGravity & 7) {
                     case 1:
-                        int childLeft2 = ((((childSpace - childWidth) / 2) + paddingLeft) + lp.leftMargin) - lp.rightMargin;
+                        int childLeft2 =
+                                ((((childSpace - childWidth) / 2) + paddingLeft) + lp.leftMargin)
+                                        - lp.rightMargin;
                         childLeft = childLeft2;
                         break;
                     case 5:

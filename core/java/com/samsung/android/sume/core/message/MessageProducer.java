@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.message;
 
 import android.util.Pair;
+
 import java.util.Map;
 
 /* loaded from: classes6.dex */

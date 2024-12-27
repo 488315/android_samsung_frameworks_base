@@ -3,7 +3,7 @@ package com.android.server.wm;
 import android.graphics.Rect;
 import android.util.Slog;
 import android.util.SparseArray;
-import com.android.server.wm.DexSizeCompatController;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -33,11 +33,21 @@ public final class SizeCompatPolicyManager {
         }
         DisplayContent displayContent = task2.mDisplayContent;
         if (displayContent == null) {
-            Slog.w("SizeCompatPolicy", "ensureConfiguration: DisplayContent is null. task=" + task2);
+            Slog.w(
+                    "SizeCompatPolicy",
+                    "ensureConfiguration: DisplayContent is null. task=" + task2);
             return;
         }
         Rect bounds = displayContent.getBounds();
-        Rect taskBounds = compatPolicy.getTaskBounds(bounds, topOrientationInTask, DexSizeCompatController.DexSizeCompatPolicy.isRotatable(compatPolicy.getTopOrientationInTask()) ? DexSizeCompatController.LazyHolder.sInstance.mDefaultScale : compatPolicy.mUserScale, true);
+        Rect taskBounds =
+                compatPolicy.getTaskBounds(
+                        bounds,
+                        topOrientationInTask,
+                        DexSizeCompatController.DexSizeCompatPolicy.isRotatable(
+                                        compatPolicy.getTopOrientationInTask())
+                                ? DexSizeCompatController.LazyHolder.sInstance.mDefaultScale
+                                : compatPolicy.mUserScale,
+                        true);
         int width = taskBounds.width();
         int height = taskBounds.height();
         Rect bounds2 = task2.getBounds();
@@ -55,7 +65,8 @@ public final class SizeCompatPolicyManager {
         task2.setBounds(taskBounds);
     }
 
-    public static DexSizeCompatController.DexSizeCompatPolicy getCompatPolicy(Task task, boolean z) {
+    public static DexSizeCompatController.DexSizeCompatPolicy getCompatPolicy(
+            Task task, boolean z) {
         DexSizeCompatController.DexSizeCompatPolicy dexSizeCompatPolicy;
         if (task == null || (dexSizeCompatPolicy = task.mSizeCompatPolicy) == null) {
             return null;
@@ -66,23 +77,29 @@ public final class SizeCompatPolicyManager {
         return null;
     }
 
-    public final void setCompatPolicy(Task task, DexSizeCompatController.DexSizeCompatPolicy dexSizeCompatPolicy) {
-        final DexSizeCompatController.DexSizeCompatPolicy dexSizeCompatPolicy2 = task.mSizeCompatPolicy;
+    public final void setCompatPolicy(
+            Task task, DexSizeCompatController.DexSizeCompatPolicy dexSizeCompatPolicy) {
+        final DexSizeCompatController.DexSizeCompatPolicy dexSizeCompatPolicy2 =
+                task.mSizeCompatPolicy;
         if (dexSizeCompatPolicy2 == dexSizeCompatPolicy) {
             return;
         }
         if (dexSizeCompatPolicy2 != null) {
-            Consumer consumer = new Consumer() { // from class: com.android.server.wm.SizeCompatPolicy$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    DexSizeCompatController.DexSizeCompatPolicy dexSizeCompatPolicy3 = DexSizeCompatController.DexSizeCompatPolicy.this;
-                    dexSizeCompatPolicy3.getClass();
-                    SizeCompatAttributes sizeCompatAttributes = ((ActivityRecord) obj).mSizeCompatAttributes;
-                    if (sizeCompatAttributes != null) {
-                        sizeCompatAttributes.cleanUp(dexSizeCompatPolicy3);
-                    }
-                }
-            };
+            Consumer consumer =
+                    new Consumer() { // from class:
+                                     // com.android.server.wm.SizeCompatPolicy$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            DexSizeCompatController.DexSizeCompatPolicy dexSizeCompatPolicy3 =
+                                    DexSizeCompatController.DexSizeCompatPolicy.this;
+                            dexSizeCompatPolicy3.getClass();
+                            SizeCompatAttributes sizeCompatAttributes =
+                                    ((ActivityRecord) obj).mSizeCompatAttributes;
+                            if (sizeCompatAttributes != null) {
+                                sizeCompatAttributes.cleanUp(dexSizeCompatPolicy3);
+                            }
+                        }
+                    };
             Task task2 = dexSizeCompatPolicy2.mTask;
             task2.forAllActivities(consumer);
             task2.mSizeCompatPolicy = null;

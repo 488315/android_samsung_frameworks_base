@@ -2,8 +2,7 @@ package android.view;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
-import android.view.SurfaceControl;
-import android.view.WindowManager;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +45,10 @@ public class ViewRootSurfaceController {
         for (Map.Entry<Integer, Integer> entry : this.mMetaDataMaps.entrySet()) {
             int metaData = entry.getKey().intValue();
             if (canApplyMetaData(metaData)) {
-                t.setMetadata(this.mViewRoot.getSurfaceControl(), metaData, this.mMetaDataMaps.get(Integer.valueOf(metaData)).intValue());
+                t.setMetadata(
+                        this.mViewRoot.getSurfaceControl(),
+                        metaData,
+                        this.mMetaDataMaps.get(Integer.valueOf(metaData)).intValue());
             }
         }
         t.apply();
@@ -75,7 +77,11 @@ public class ViewRootSurfaceController {
         WindowManager.LayoutParams lp = this.mViewRoot.mWindowAttributes;
         SurfaceControl sc = this.mViewRoot.getSurfaceControl();
         if (lp.type < 2000 || (lp.privateFlags & 1048576) != 0) {
-            Log.e(TAG, NavigationBarInflaterView.SIZE_MOD_START + this.mInstanceTag + "]: updateSkipScreenshot not allowed on this window");
+            Log.e(
+                    TAG,
+                    NavigationBarInflaterView.SIZE_MOD_START
+                            + this.mInstanceTag
+                            + "]: updateSkipScreenshot not allowed on this window");
         } else {
             t.setSkipScreenshot(sc, this.mSkipScreenshot).apply();
         }
@@ -103,7 +109,12 @@ public class ViewRootSurfaceController {
         writer.print(innerPrefix + "mMetaDataMaps=");
         if (this.mMetaDataMaps.size() > 0) {
             for (Map.Entry<Integer, Integer> entry : this.mMetaDataMaps.entrySet()) {
-                writer.print(" [" + entry.getKey() + ", " + entry.getValue() + NavigationBarInflaterView.SIZE_MOD_END);
+                writer.print(
+                        " ["
+                                + entry.getKey()
+                                + ", "
+                                + entry.getValue()
+                                + NavigationBarInflaterView.SIZE_MOD_END);
             }
         } else {
             writer.print(" <empty>");

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class KeyDescriptor implements Parcelable {
-    public static final Parcelable.Creator<KeyDescriptor> CREATOR = new Parcelable.Creator<KeyDescriptor>() { // from class: android.system.keystore2.KeyDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyDescriptor createFromParcel(Parcel _aidl_source) {
-            KeyDescriptor _aidl_out = new KeyDescriptor();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeyDescriptor> CREATOR =
+            new Parcelable.Creator<
+                    KeyDescriptor>() { // from class: android.system.keystore2.KeyDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyDescriptor createFromParcel(Parcel _aidl_source) {
+                    KeyDescriptor _aidl_out = new KeyDescriptor();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyDescriptor[] newArray(int _aidl_size) {
-            return new KeyDescriptor[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyDescriptor[] newArray(int _aidl_size) {
+                    return new KeyDescriptor[_aidl_size];
+                }
+            };
     public String alias;
     public byte[] blob;
     public int domain = 0;

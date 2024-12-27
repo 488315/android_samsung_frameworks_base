@@ -1,7 +1,7 @@
 package com.android.server.pm;
 
 import android.content.pm.PackagePartitions;
-import com.android.server.pm.ApexManager;
+
 import java.io.File;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +26,8 @@ public class ScanPartition extends PackagePartitions.SystemPartition {
             i = 1048576;
         } else {
             if (i2 != 5) {
-                throw new IllegalStateException("Unable to determine scan flag for " + systemPartition.getFolder());
+                throw new IllegalStateException(
+                        "Unable to determine scan flag for " + systemPartition.getFolder());
             }
             i = 2097152;
         }
@@ -34,7 +35,8 @@ public class ScanPartition extends PackagePartitions.SystemPartition {
         this.apexInfo = null;
     }
 
-    public ScanPartition(File file, ScanPartition scanPartition, ApexManager.ActiveApexInfo activeApexInfo) {
+    public ScanPartition(
+            File file, ScanPartition scanPartition, ApexManager.ActiveApexInfo activeApexInfo) {
         super(file, scanPartition);
         int i = scanPartition.scanFlag;
         this.apexInfo = activeApexInfo;

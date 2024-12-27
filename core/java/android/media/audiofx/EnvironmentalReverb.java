@@ -1,6 +1,5 @@
 package android.media.audiofx;
 
-import android.media.audiofx.AudioEffect;
 import java.util.StringTokenizer;
 
 /* loaded from: classes2.dex */
@@ -26,126 +25,146 @@ public class EnvironmentalReverb extends AudioEffect {
         void onParameterChange(EnvironmentalReverb environmentalReverb, int i, int i2, int i3);
     }
 
-    public EnvironmentalReverb(int priority, int audioSession) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public EnvironmentalReverb(int priority, int audioSession)
+            throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
         super(EFFECT_TYPE_ENV_REVERB, EFFECT_TYPE_NULL, priority, audioSession);
         this.mParamListener = null;
         this.mBaseParamListener = null;
         this.mParamListenerLock = new Object();
     }
 
-    public void setRoomLevel(short room) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setRoomLevel(short room)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = shortToByteArray(room);
         checkStatus(setParameter(0, param));
     }
 
-    public short getRoomLevel() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getRoomLevel()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[2];
         checkStatus(getParameter(0, param));
         return byteArrayToShort(param);
     }
 
-    public void setRoomHFLevel(short roomHF) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setRoomHFLevel(short roomHF)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = shortToByteArray(roomHF);
         checkStatus(setParameter(1, param));
     }
 
-    public short getRoomHFLevel() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getRoomHFLevel()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[2];
         checkStatus(getParameter(1, param));
         return byteArrayToShort(param);
     }
 
-    public void setDecayTime(int decayTime) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setDecayTime(int decayTime)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = intToByteArray(decayTime);
         checkStatus(setParameter(2, param));
     }
 
-    public int getDecayTime() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public int getDecayTime()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[4];
         checkStatus(getParameter(2, param));
         return byteArrayToInt(param);
     }
 
-    public void setDecayHFRatio(short decayHFRatio) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setDecayHFRatio(short decayHFRatio)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = shortToByteArray(decayHFRatio);
         checkStatus(setParameter(3, param));
     }
 
-    public short getDecayHFRatio() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getDecayHFRatio()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[2];
         checkStatus(getParameter(3, param));
         return byteArrayToShort(param);
     }
 
-    public void setReflectionsLevel(short reflectionsLevel) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setReflectionsLevel(short reflectionsLevel)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = shortToByteArray(reflectionsLevel);
         checkStatus(setParameter(4, param));
     }
 
-    public short getReflectionsLevel() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getReflectionsLevel()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[2];
         checkStatus(getParameter(4, param));
         return byteArrayToShort(param);
     }
 
-    public void setReflectionsDelay(int reflectionsDelay) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setReflectionsDelay(int reflectionsDelay)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = intToByteArray(reflectionsDelay);
         checkStatus(setParameter(5, param));
     }
 
-    public int getReflectionsDelay() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public int getReflectionsDelay()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[4];
         checkStatus(getParameter(5, param));
         return byteArrayToInt(param);
     }
 
-    public void setReverbLevel(short reverbLevel) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setReverbLevel(short reverbLevel)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = shortToByteArray(reverbLevel);
         checkStatus(setParameter(6, param));
     }
 
-    public short getReverbLevel() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getReverbLevel()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[2];
         checkStatus(getParameter(6, param));
         return byteArrayToShort(param);
     }
 
-    public void setReverbDelay(int reverbDelay) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setReverbDelay(int reverbDelay)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = intToByteArray(reverbDelay);
         checkStatus(setParameter(7, param));
     }
 
-    public int getReverbDelay() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public int getReverbDelay()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[4];
         checkStatus(getParameter(7, param));
         return byteArrayToInt(param);
     }
 
-    public void setDiffusion(short diffusion) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setDiffusion(short diffusion)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = shortToByteArray(diffusion);
         checkStatus(setParameter(8, param));
     }
 
-    public short getDiffusion() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getDiffusion()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[2];
         checkStatus(getParameter(8, param));
         return byteArrayToShort(param);
     }
 
-    public void setDensity(short density) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setDensity(short density)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = shortToByteArray(density);
         checkStatus(setParameter(9, param));
     }
 
-    public short getDensity() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getDensity()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[2];
         checkStatus(getParameter(9, param));
         return byteArrayToShort(param);
     }
 
     private class BaseParameterListener implements AudioEffect.OnParameterChangeListener {
-        private BaseParameterListener() {
-        }
+        private BaseParameterListener() {}
 
         @Override // android.media.audiofx.AudioEffect.OnParameterChangeListener
         public void onParameterChange(AudioEffect effect, int status, byte[] param, byte[] value) {
@@ -195,8 +214,7 @@ public class EnvironmentalReverb extends AudioEffect {
         public short roomHFLevel;
         public short roomLevel;
 
-        public Settings() {
-        }
+        public Settings() {}
 
         public Settings(String settings) {
             StringTokenizer st = new StringTokenizer(settings, "=;");
@@ -206,7 +224,8 @@ public class EnvironmentalReverb extends AudioEffect {
             }
             String key = st.nextToken();
             if (!key.equals(EnvironmentalReverb.TAG)) {
-                throw new IllegalArgumentException("invalid settings for EnvironmentalReverb: " + key);
+                throw new IllegalArgumentException(
+                        "invalid settings for EnvironmentalReverb: " + key);
             }
             try {
                 String key2 = st.nextToken();
@@ -265,11 +284,32 @@ public class EnvironmentalReverb extends AudioEffect {
         }
 
         public String toString() {
-            return new String("EnvironmentalReverb;roomLevel=" + Short.toString(this.roomLevel) + ";roomHFLevel=" + Short.toString(this.roomHFLevel) + ";decayTime=" + Integer.toString(this.decayTime) + ";decayHFRatio=" + Short.toString(this.decayHFRatio) + ";reflectionsLevel=" + Short.toString(this.reflectionsLevel) + ";reflectionsDelay=" + Integer.toString(this.reflectionsDelay) + ";reverbLevel=" + Short.toString(this.reverbLevel) + ";reverbDelay=" + Integer.toString(this.reverbDelay) + ";diffusion=" + Short.toString(this.diffusion) + ";density=" + Short.toString(this.density));
+            return new String(
+                    "EnvironmentalReverb;roomLevel="
+                            + Short.toString(this.roomLevel)
+                            + ";roomHFLevel="
+                            + Short.toString(this.roomHFLevel)
+                            + ";decayTime="
+                            + Integer.toString(this.decayTime)
+                            + ";decayHFRatio="
+                            + Short.toString(this.decayHFRatio)
+                            + ";reflectionsLevel="
+                            + Short.toString(this.reflectionsLevel)
+                            + ";reflectionsDelay="
+                            + Integer.toString(this.reflectionsDelay)
+                            + ";reverbLevel="
+                            + Short.toString(this.reverbLevel)
+                            + ";reverbDelay="
+                            + Integer.toString(this.reverbDelay)
+                            + ";diffusion="
+                            + Short.toString(this.diffusion)
+                            + ";density="
+                            + Short.toString(this.density));
         }
     }
 
-    public Settings getProperties() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public Settings getProperties()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         byte[] param = new byte[PROPERTY_SIZE];
         checkStatus(getParameter(10, param));
         Settings settings = new Settings();
@@ -286,8 +326,20 @@ public class EnvironmentalReverb extends AudioEffect {
         return settings;
     }
 
-    public void setProperties(Settings settings) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
-        byte[] param = concatArrays(shortToByteArray(settings.roomLevel), shortToByteArray(settings.roomHFLevel), intToByteArray(settings.decayTime), shortToByteArray(settings.decayHFRatio), shortToByteArray(settings.reflectionsLevel), intToByteArray(settings.reflectionsDelay), shortToByteArray(settings.reverbLevel), intToByteArray(settings.reverbDelay), shortToByteArray(settings.diffusion), shortToByteArray(settings.density));
+    public void setProperties(Settings settings)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+        byte[] param =
+                concatArrays(
+                        shortToByteArray(settings.roomLevel),
+                        shortToByteArray(settings.roomHFLevel),
+                        intToByteArray(settings.decayTime),
+                        shortToByteArray(settings.decayHFRatio),
+                        shortToByteArray(settings.reflectionsLevel),
+                        intToByteArray(settings.reflectionsDelay),
+                        shortToByteArray(settings.reverbLevel),
+                        intToByteArray(settings.reverbDelay),
+                        shortToByteArray(settings.diffusion),
+                        shortToByteArray(settings.density));
         checkStatus(setParameter(10, param));
     }
 }

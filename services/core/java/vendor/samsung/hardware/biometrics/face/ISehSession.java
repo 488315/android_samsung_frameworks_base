@@ -10,7 +10,8 @@ import android.os.RemoteException;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public interface ISehSession extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$biometrics$face$ISehSession".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$biometrics$face$ISehSession".replace('$', '.');
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements ISehSession {
@@ -78,7 +79,8 @@ public interface ISehSession extends IInterface {
                 try {
                     obtain.writeInterfaceToken(ISehSession.DESCRIPTOR);
                     if (!this.mRemote.transact(14, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method getWrappedDataFromMemory is unimplemented.");
+                        throw new RemoteException(
+                                "Method getWrappedDataFromMemory is unimplemented.");
                     }
                     obtain2.readException();
                     return (Ashmem) obtain2.readTypedObject(Ashmem.CREATOR);

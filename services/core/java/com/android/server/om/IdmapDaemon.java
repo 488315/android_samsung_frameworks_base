@@ -7,8 +7,9 @@ import android.os.SystemClock;
 import android.os.SystemService;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.server.FgThread;
-import com.android.server.om.IdmapDaemon;
+
 import java.io.File;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -42,26 +43,39 @@ public final class IdmapDaemon {
                         if (IdmapDaemon.this.mOpenedCount.decrementAndGet() != 0) {
                             return;
                         }
-                        FgThread.getHandler().postDelayed(new Runnable() { // from class: com.android.server.om.IdmapDaemon$Connection$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                IdmapDaemon.Connection connection = IdmapDaemon.Connection.this;
-                                synchronized (IdmapDaemon.this.mIdmapToken) {
-                                    try {
-                                        if (IdmapDaemon.this.mService == null || IdmapDaemon.this.mOpenedCount.get() != 0) {
-                                            return;
-                                        }
-                                        try {
-                                            SystemService.stop("idmap2d");
-                                        } catch (RuntimeException e) {
-                                            Slog.w("OverlayManager", "Failed to disable idmap2 daemon", e);
-                                        }
-                                        IdmapDaemon.this.mService = null;
-                                    } finally {
-                                    }
-                                }
-                            }
-                        }, IdmapDaemon.this.mIdmapToken, 10000L);
+                        FgThread.getHandler()
+                                .postDelayed(
+                                        new Runnable() { // from class:
+                                            // com.android.server.om.IdmapDaemon$Connection$$ExternalSyntheticLambda0
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                IdmapDaemon.Connection connection =
+                                                        IdmapDaemon.Connection.this;
+                                                synchronized (IdmapDaemon.this.mIdmapToken) {
+                                                    try {
+                                                        if (IdmapDaemon.this.mService == null
+                                                                || IdmapDaemon.this.mOpenedCount
+                                                                                .get()
+                                                                        != 0) {
+                                                            return;
+                                                        }
+                                                        try {
+                                                            SystemService.stop("idmap2d");
+                                                        } catch (RuntimeException e) {
+                                                            Slog.w(
+                                                                    "OverlayManager",
+                                                                    "Failed to disable idmap2"
+                                                                        + " daemon",
+                                                                    e);
+                                                        }
+                                                        IdmapDaemon.this.mService = null;
+                                                    } finally {
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        IdmapDaemon.this.mIdmapToken,
+                                        10000L);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -97,7 +111,16 @@ public final class IdmapDaemon {
                 return service;
             }
         } while (elapsedRealtime <= j);
-        throw new TimeoutException(TextUtils.formatSimple("Failed to connect to '%s' in %d/%d ms (spent %d/%d ms)", new Object[]{"idmap", 5000, 30000, Long.valueOf((uptimeMillis - uptimeMillis2) + 5000), Long.valueOf((elapsedRealtime - j) + 30000)}));
+        throw new TimeoutException(
+                TextUtils.formatSimple(
+                        "Failed to connect to '%s' in %d/%d ms (spent %d/%d ms)",
+                        new Object[] {
+                            "idmap",
+                            5000,
+                            30000,
+                            Long.valueOf((uptimeMillis - uptimeMillis2) + 5000),
+                            Long.valueOf((elapsedRealtime - j) + 30000)
+                        }));
     }
 
     public final Connection connect() {
@@ -119,16 +142,32 @@ public final class IdmapDaemon {
         }
     }
 
-    public final String createIdmap(String str, int i, String str2, String str3, int i2, boolean z) {
+    public final String createIdmap(
+            String str, int i, String str2, String str3, int i2, boolean z) {
         Connection connect = connect();
         try {
             IIdmap2 iIdmap2 = connect.mIdmap2;
             if (iIdmap2 != null) {
-                String createIdmap = iIdmap2.createIdmap(str, str2, TextUtils.emptyIfNull(str3), i, z, i2);
+                String createIdmap =
+                        iIdmap2.createIdmap(str, str2, TextUtils.emptyIfNull(str3), i, z, i2);
                 connect.close();
                 return createIdmap;
             }
-            Slog.w("OverlayManager", "idmap2d service is not ready for createIdmap(\"" + str + "\", \"" + str2 + "\", \"" + str3 + "\", " + i + ", " + z + ", " + i2 + ")");
+            Slog.w(
+                    "OverlayManager",
+                    "idmap2d service is not ready for createIdmap(\""
+                            + str
+                            + "\", \""
+                            + str2
+                            + "\", \""
+                            + str3
+                            + "\", "
+                            + i
+                            + ", "
+                            + z
+                            + ", "
+                            + i2
+                            + ")");
             connect.close();
             return null;
         } catch (Throwable th) {
@@ -151,7 +190,9 @@ public final class IdmapDaemon {
                 connect.close();
                 return targetPath;
             }
-            Slog.w("OverlayManager", "idmap2d service is not ready for getTargetPath(\"" + str + ")");
+            Slog.w(
+                    "OverlayManager",
+                    "idmap2d service is not ready for getTargetPath(\"" + str + ")");
             connect.close();
             return null;
         } catch (Throwable th) {
@@ -174,7 +215,9 @@ public final class IdmapDaemon {
                     connect.close();
                     return isFile;
                 }
-                Slog.w("OverlayManager", "idmap2d service is not ready for idmapExists(\"" + str + "\", " + i + ")");
+                Slog.w(
+                        "OverlayManager",
+                        "idmap2d service is not ready for idmapExists(\"" + str + "\", " + i + ")");
                 connect.close();
                 return false;
             } finally {
@@ -194,7 +237,9 @@ public final class IdmapDaemon {
                 connect.close();
                 return removeIdmap;
             }
-            Slog.w("OverlayManager", "idmap2d service is not ready for removeIdmap(\"" + str + "\", " + i + ")");
+            Slog.w(
+                    "OverlayManager",
+                    "idmap2d service is not ready for removeIdmap(\"" + str + "\", " + i + ")");
             connect.close();
             return false;
         } catch (Throwable th) {
@@ -207,16 +252,32 @@ public final class IdmapDaemon {
         }
     }
 
-    public final boolean verifyIdmap(String str, int i, String str2, String str3, int i2, boolean z) {
+    public final boolean verifyIdmap(
+            String str, int i, String str2, String str3, int i2, boolean z) {
         Connection connect = connect();
         try {
             IIdmap2 iIdmap2 = connect.mIdmap2;
             if (iIdmap2 != null) {
-                boolean verifyIdmap = iIdmap2.verifyIdmap(str, str2, TextUtils.emptyIfNull(str3), i, z, i2);
+                boolean verifyIdmap =
+                        iIdmap2.verifyIdmap(str, str2, TextUtils.emptyIfNull(str3), i, z, i2);
                 connect.close();
                 return verifyIdmap;
             }
-            Slog.w("OverlayManager", "idmap2d service is not ready for verifyIdmap(\"" + str + "\", \"" + str2 + "\", \"" + str3 + "\", " + i + ", " + z + ", " + i2 + ")");
+            Slog.w(
+                    "OverlayManager",
+                    "idmap2d service is not ready for verifyIdmap(\""
+                            + str
+                            + "\", \""
+                            + str2
+                            + "\", \""
+                            + str3
+                            + "\", "
+                            + i
+                            + ", "
+                            + z
+                            + ", "
+                            + i2
+                            + ")");
             connect.close();
             return false;
         } catch (Throwable th) {

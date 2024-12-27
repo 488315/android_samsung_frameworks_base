@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import com.android.internal.view.menu.MenuBuilder;
 
 /* loaded from: classes5.dex */
 public class SubMenuBuilder extends MenuBuilder implements SubMenu {
@@ -60,7 +59,8 @@ public class SubMenuBuilder extends MenuBuilder implements SubMenu {
 
     @Override // com.android.internal.view.menu.MenuBuilder
     boolean dispatchMenuItemSelected(MenuBuilder menu, MenuItem item) {
-        return super.dispatchMenuItemSelected(menu, item) || this.mParentMenu.dispatchMenuItemSelected(menu, item);
+        return super.dispatchMenuItemSelected(menu, item)
+                || this.mParentMenu.dispatchMenuItemSelected(menu, item);
     }
 
     @Override // android.view.SubMenu

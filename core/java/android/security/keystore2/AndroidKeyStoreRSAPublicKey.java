@@ -3,6 +3,7 @@ package android.security.keystore2;
 import android.security.KeyStoreSecurityLevel;
 import android.system.keystore2.KeyDescriptor;
 import android.system.keystore2.KeyMetadata;
+
 import java.math.BigInteger;
 import java.security.interfaces.RSAPublicKey;
 
@@ -11,22 +12,44 @@ public class AndroidKeyStoreRSAPublicKey extends AndroidKeyStorePublicKey implem
     private final BigInteger mModulus;
     private final BigInteger mPublicExponent;
 
-    public AndroidKeyStoreRSAPublicKey(KeyDescriptor descriptor, KeyMetadata metadata, byte[] x509EncodedForm, KeyStoreSecurityLevel securityLevel, BigInteger modulus, BigInteger publicExponent) {
+    public AndroidKeyStoreRSAPublicKey(
+            KeyDescriptor descriptor,
+            KeyMetadata metadata,
+            byte[] x509EncodedForm,
+            KeyStoreSecurityLevel securityLevel,
+            BigInteger modulus,
+            BigInteger publicExponent) {
         super(descriptor, metadata, x509EncodedForm, "RSA", securityLevel);
         this.mModulus = modulus;
         this.mPublicExponent = publicExponent;
     }
 
-    public AndroidKeyStoreRSAPublicKey(KeyDescriptor descriptor, KeyMetadata metadata, KeyStoreSecurityLevel securityLevel, RSAPublicKey info) {
-        this(descriptor, metadata, info.getEncoded(), securityLevel, info.getModulus(), info.getPublicExponent());
+    public AndroidKeyStoreRSAPublicKey(
+            KeyDescriptor descriptor,
+            KeyMetadata metadata,
+            KeyStoreSecurityLevel securityLevel,
+            RSAPublicKey info) {
+        this(
+                descriptor,
+                metadata,
+                info.getEncoded(),
+                securityLevel,
+                info.getModulus(),
+                info.getPublicExponent());
         if (!"X.509".equalsIgnoreCase(info.getFormat())) {
-            throw new IllegalArgumentException("Unsupported key export format: " + info.getFormat());
+            throw new IllegalArgumentException(
+                    "Unsupported key export format: " + info.getFormat());
         }
     }
 
     @Override // android.security.keystore2.AndroidKeyStorePublicKey
     public AndroidKeyStorePrivateKey getPrivateKey() {
-        return new AndroidKeyStoreRSAPrivateKey(getUserKeyDescriptor(), getKeyIdDescriptor().nspace, getAuthorizations(), getSecurityLevel(), this.mModulus);
+        return new AndroidKeyStoreRSAPrivateKey(
+                getUserKeyDescriptor(),
+                getKeyIdDescriptor().nspace,
+                getAuthorizations(),
+                getSecurityLevel(),
+                this.mModulus);
     }
 
     @Override // java.security.interfaces.RSAKey

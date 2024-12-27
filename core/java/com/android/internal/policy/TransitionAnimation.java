@@ -31,9 +31,11 @@ import android.view.animation.PathInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.window.ScreenCapture;
+
 import com.android.internal.R;
-import com.android.internal.policy.AttributeCache;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.nio.ByteBuffer;
 import java.util.List;
 
@@ -50,7 +52,8 @@ public class TransitionAnimation {
     private static final int THUMBNAIL_TRANSITION_ENTER_SCALE_UP = 0;
     private static final int THUMBNAIL_TRANSITION_EXIT_SCALE_DOWN = 3;
     private static final int THUMBNAIL_TRANSITION_EXIT_SCALE_UP = 1;
-    static final Interpolator TOUCH_RESPONSE_INTERPOLATOR = new PathInterpolator(0.3f, 0.0f, 0.1f, 1.0f);
+    static final Interpolator TOUCH_RESPONSE_INTERPOLATOR =
+            new PathInterpolator(0.3f, 0.0f, 0.1f, 1.0f);
     public static final int WALLPAPER_TRANSITION_CHANGE = 1;
     public static final int WALLPAPER_TRANSITION_CLOSE = 3;
     public static final int WALLPAPER_TRANSITION_INTRA_CLOSE = 5;
@@ -68,28 +71,34 @@ public class TransitionAnimation {
     private final Interpolator mLinearOutSlowInInterpolator;
     private final String mTag;
     private final LogDecelerateInterpolator mInterpolator = new LogDecelerateInterpolator(100, 0);
-    private final Interpolator mTouchResponseInterpolator = new PathInterpolator(0.3f, 0.0f, 0.1f, 1.0f);
-    private final Interpolator mClipHorizontalInterpolator = new PathInterpolator(0.0f, 0.0f, 0.4f, 1.0f);
+    private final Interpolator mTouchResponseInterpolator =
+            new PathInterpolator(0.3f, 0.0f, 0.1f, 1.0f);
+    private final Interpolator mClipHorizontalInterpolator =
+            new PathInterpolator(0.0f, 0.0f, 0.4f, 1.0f);
     private final Rect mTmpFromClipRect = new Rect();
     private final Rect mTmpToClipRect = new Rect();
     private final Rect mTmpRect = new Rect();
     private int mDisplayId = -1;
-    private final Interpolator mThumbnailFadeInInterpolator = new Interpolator() { // from class: com.android.internal.policy.TransitionAnimation$$ExternalSyntheticLambda0
-        @Override // android.animation.TimeInterpolator
-        public final float getInterpolation(float f) {
-            float lambda$new$0;
-            lambda$new$0 = TransitionAnimation.this.lambda$new$0(f);
-            return lambda$new$0;
-        }
-    };
-    private final Interpolator mThumbnailFadeOutInterpolator = new Interpolator() { // from class: com.android.internal.policy.TransitionAnimation$$ExternalSyntheticLambda1
-        @Override // android.animation.TimeInterpolator
-        public final float getInterpolation(float f) {
-            float lambda$new$1;
-            lambda$new$1 = TransitionAnimation.this.lambda$new$1(f);
-            return lambda$new$1;
-        }
-    };
+    private final Interpolator mThumbnailFadeInInterpolator =
+            new Interpolator() { // from class:
+                                 // com.android.internal.policy.TransitionAnimation$$ExternalSyntheticLambda0
+                @Override // android.animation.TimeInterpolator
+                public final float getInterpolation(float f) {
+                    float lambda$new$0;
+                    lambda$new$0 = TransitionAnimation.this.lambda$new$0(f);
+                    return lambda$new$0;
+                }
+            };
+    private final Interpolator mThumbnailFadeOutInterpolator =
+            new Interpolator() { // from class:
+                                 // com.android.internal.policy.TransitionAnimation$$ExternalSyntheticLambda1
+                @Override // android.animation.TimeInterpolator
+                public final float getInterpolation(float f) {
+                    float lambda$new$1;
+                    lambda$new$1 = TransitionAnimation.this.lambda$new$1(f);
+                    return lambda$new$1;
+                }
+            };
     private final boolean mLowRamRecentsEnabled = ActivityManager.isLowRamDeviceStatic();
 
     public TransitionAnimation(Context context, boolean debug, String tag) {
@@ -99,9 +108,11 @@ public class TransitionAnimation {
         this.mDecelerateInterpolator = AnimationUtils.loadInterpolator(context, 17563651);
         this.mFastOutLinearInInterpolator = AnimationUtils.loadInterpolator(context, 17563663);
         this.mLinearOutSlowInInterpolator = AnimationUtils.loadInterpolator(context, 17563662);
-        this.mClipRevealTranslationY = (int) (this.mContext.getResources().getDisplayMetrics().density * 8.0f);
+        this.mClipRevealTranslationY =
+                (int) (this.mContext.getResources().getDisplayMetrics().density * 8.0f);
         this.mConfigShortAnimTime = context.getResources().getInteger(17694720);
-        TypedArray windowStyle = this.mContext.getTheme().obtainStyledAttributes(R.styleable.Window);
+        TypedArray windowStyle =
+                this.mContext.getTheme().obtainStyledAttributes(R.styleable.Window);
         this.mDefaultWindowAnimationStyleResId = windowStyle.getResourceId(8, 0);
         windowStyle.recycle();
     }
@@ -130,7 +141,8 @@ public class TransitionAnimation {
         }
         boolean toShade = (transitionFlags & 1) != 0;
         boolean subtle = (transitionFlags & 8) != 0;
-        return createHiddenByKeyguardExit(this.mContext, this.mInterpolator, onWallpaper, toShade, subtle);
+        return createHiddenByKeyguardExit(
+                this.mContext, this.mInterpolator, onWallpaper, toShade, subtle);
     }
 
     public Animation loadKeyguardUnoccludeAnimation() {
@@ -171,7 +183,8 @@ public class TransitionAnimation {
 
     public Animation createCrossProfileAppsThumbnailAnimationLocked(Rect appRect) {
         Animation animation = loadCrossProfileAppThumbnailEnterAnimation();
-        return prepareThumbnailAnimationWithDuration(animation, appRect.width(), appRect.height(), 0L, null);
+        return prepareThumbnailAnimationWithDuration(
+                animation, appRect.width(), appRect.height(), 0L, null);
     }
 
     public Animation loadAnimationRes(String packageName, int resId) {
@@ -223,7 +236,9 @@ public class TransitionAnimation {
     public int getDefaultAnimationResId(int animAttr, int transit) {
         AttributeCache.Entry ent;
         int resId = 0;
-        if (animAttr >= 0 && (ent = getCachedAnimations("android", this.mDefaultWindowAnimationStyleResId)) != null) {
+        if (animAttr >= 0
+                && (ent = getCachedAnimations("android", this.mDefaultWindowAnimationStyleResId))
+                        != null) {
             resId = ent.array.getResourceId(animAttr, 0);
         }
         int resId2 = updateToTranslucentAnimIfNeeded(resId, transit);
@@ -233,14 +248,21 @@ public class TransitionAnimation {
         return resId2;
     }
 
-    private Animation loadAnimationAttr(String packageName, int animStyleResId, int animAttr, boolean translucent, int transit) {
+    private Animation loadAnimationAttr(
+            String packageName,
+            int animStyleResId,
+            int animAttr,
+            boolean translucent,
+            int transit) {
         if (animStyleResId == 0) {
             return null;
         }
         int resId = 0;
         Context context = this.mContext;
         if (animAttr >= 0) {
-            AttributeCache.Entry ent = getCachedAnimations(packageName != null ? packageName : "android", animStyleResId);
+            AttributeCache.Entry ent =
+                    getCachedAnimations(
+                            packageName != null ? packageName : "android", animStyleResId);
             if (ent != null) {
                 context = ent.context;
                 resId = ent.array.getResourceId(animAttr, 0);
@@ -263,21 +285,29 @@ public class TransitionAnimation {
         return loadAnimationSafely(context, resId, this.mTag);
     }
 
-    public Animation loadAnimationAttr(String packageName, int animStyleResId, int animAttr, boolean translucent) {
+    public Animation loadAnimationAttr(
+            String packageName, int animStyleResId, int animAttr, boolean translucent) {
         return loadAnimationAttr(packageName, animStyleResId, animAttr, translucent, -1);
     }
 
     public Animation loadDefaultAnimationAttr(int animAttr, boolean translucent) {
-        return loadAnimationAttr("android", this.mDefaultWindowAnimationStyleResId, animAttr, translucent);
+        return loadAnimationAttr(
+                "android", this.mDefaultWindowAnimationStyleResId, animAttr, translucent);
     }
 
     public Animation loadDefaultAnimationAttr(int animAttr, int transit) {
-        return loadAnimationAttr("android", this.mDefaultWindowAnimationStyleResId, animAttr, false, transit);
+        return loadAnimationAttr(
+                "android", this.mDefaultWindowAnimationStyleResId, animAttr, false, transit);
     }
 
     private AttributeCache.Entry getCachedAnimations(WindowManager.LayoutParams lp) {
         if (this.mDebug) {
-            Slog.v(this.mTag, "Loading animations: layout params pkg=" + (lp != null ? lp.packageName : null) + " resId=0x" + (lp != null ? Integer.toHexString(lp.windowAnimations) : null));
+            Slog.v(
+                    this.mTag,
+                    "Loading animations: layout params pkg="
+                            + (lp != null ? lp.packageName : null)
+                            + " resId=0x"
+                            + (lp != null ? Integer.toHexString(lp.windowAnimations) : null));
         }
         if (lp == null || lp.windowAnimations == 0) {
             return null;
@@ -295,7 +325,12 @@ public class TransitionAnimation {
 
     private AttributeCache.Entry getCachedAnimations(String packageName, int resId) {
         if (this.mDebug) {
-            Slog.v(this.mTag, "Loading animations: package=" + packageName + " resId=0x" + Integer.toHexString(resId));
+            Slog.v(
+                    this.mTag,
+                    "Loading animations: package="
+                            + packageName
+                            + " resId=0x"
+                            + Integer.toHexString(resId));
         }
         if (packageName != null) {
             if (((-16777216) & resId) == 16777216) {
@@ -318,7 +353,8 @@ public class TransitionAnimation {
         return resId;
     }
 
-    public Animation createRelaunchAnimation(Rect containingFrame, Rect contentInsets, Rect startRect) {
+    public Animation createRelaunchAnimation(
+            Rect containingFrame, Rect contentInsets, Rect startRect) {
         setupDefaultNextAppTransitionStartRect(startRect, this.mTmpFromClipRect);
         int left = this.mTmpFromClipRect.left;
         int top = this.mTmpFromClipRect.top;
@@ -333,10 +369,16 @@ public class TransitionAnimation {
         if (fromWidth <= toWidth && fromHeight <= toHeight) {
             set.addAnimation(new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect));
         } else {
-            set.addAnimation(new ScaleAnimation(fromWidth / toWidth, 1.0f, fromHeight / toHeight, 1.0f));
+            set.addAnimation(
+                    new ScaleAnimation(fromWidth / toWidth, 1.0f, fromHeight / toHeight, 1.0f));
             translateAdjustment = (int) ((contentInsets.top * fromHeight) / toHeight);
         }
-        TranslateAnimation translate = new TranslateAnimation(left - containingFrame.left, 0.0f, (top - containingFrame.top) - translateAdjustment, 0.0f);
+        TranslateAnimation translate =
+                new TranslateAnimation(
+                        left - containingFrame.left,
+                        0.0f,
+                        (top - containingFrame.top) - translateAdjustment,
+                        0.0f);
         set.addAnimation(translate);
         set.setDuration(336L);
         set.setZAdjustment(1);
@@ -345,18 +387,33 @@ public class TransitionAnimation {
 
     private void setupDefaultNextAppTransitionStartRect(Rect startRect, Rect rect) {
         if (startRect == null) {
-            Slog.e(this.mTag, "Starting rect for app requested, but none available", new Throwable());
+            Slog.e(
+                    this.mTag,
+                    "Starting rect for app requested, but none available",
+                    new Throwable());
             rect.setEmpty();
         } else {
             rect.set(startRect);
         }
     }
 
-    public Animation createClipRevealAnimationLocked(int transit, int wallpaperTransit, boolean enter, Rect appFrame, Rect displayFrame, Rect startRect) {
-        return createClipRevealAnimationLockedCompat(getTransitCompatType(transit, wallpaperTransit), enter, appFrame, displayFrame, startRect);
+    public Animation createClipRevealAnimationLocked(
+            int transit,
+            int wallpaperTransit,
+            boolean enter,
+            Rect appFrame,
+            Rect displayFrame,
+            Rect startRect) {
+        return createClipRevealAnimationLockedCompat(
+                getTransitCompatType(transit, wallpaperTransit),
+                enter,
+                appFrame,
+                displayFrame,
+                startRect);
     }
 
-    public Animation createClipRevealAnimationLockedCompat(int transit, boolean enter, Rect appFrame, Rect displayFrame, Rect startRect) {
+    public Animation createClipRevealAnimationLockedCompat(
+            int transit, boolean enter, Rect appFrame, Rect displayFrame, Rect startRect) {
         long duration;
         float f;
         boolean z;
@@ -379,7 +436,8 @@ public class TransitionAnimation {
                 float t2 = this.mTmpRect.top / displayFrame.height();
                 t = t2;
             }
-            int translationY2 = this.mClipRevealTranslationY + ((int) ((displayFrame.height() / 7.0f) * t));
+            int translationY2 =
+                    this.mClipRevealTranslationY + ((int) ((displayFrame.height() / 7.0f) * t));
             int translationX2 = 0;
             int centerX = this.mTmpRect.centerX();
             int centerY = this.mTmpRect.centerY();
@@ -414,12 +472,17 @@ public class TransitionAnimation {
                 cutOff = true;
                 clipStartX = clipStartX3;
             }
-            long duration2 = calculateClipRevealTransitionDuration(cutOff, translationX, translationY, displayFrame);
-            Animation clipAnimLR = new ClipRectLRAnimation(clipStartX, this.mTmpRect.width() + clipStartX, 0, appWidth);
+            long duration2 =
+                    calculateClipRevealTransitionDuration(
+                            cutOff, translationX, translationY, displayFrame);
+            Animation clipAnimLR =
+                    new ClipRectLRAnimation(
+                            clipStartX, this.mTmpRect.width() + clipStartX, 0, appWidth);
             clipAnimLR.setInterpolator(this.mClipHorizontalInterpolator);
             boolean cutOff3 = cutOff;
             clipAnimLR.setDuration((long) (duration2 / 2.5f));
-            TranslateAnimation translate = new TranslateAnimation(translationX, 0.0f, translationY, 0.0f);
+            TranslateAnimation translate =
+                    new TranslateAnimation(translationX, 0.0f, translationY, 0.0f);
             if (cutOff3) {
                 interpolator = this.mTouchResponseInterpolator;
             } else {
@@ -428,7 +491,15 @@ public class TransitionAnimation {
             translate.setInterpolator(interpolator);
             translate.setDuration(duration2);
             int clipStartX4 = translationYCorrection;
-            Animation clipAnimTB = new ClipRectTBAnimation(clipStartY, clipStartY + this.mTmpRect.height(), 0, appHeight, clipStartX4, 0, this.mLinearOutSlowInInterpolator);
+            Animation clipAnimTB =
+                    new ClipRectTBAnimation(
+                            clipStartY,
+                            clipStartY + this.mTmpRect.height(),
+                            0,
+                            appHeight,
+                            clipStartX4,
+                            0,
+                            this.mLinearOutSlowInInterpolator);
             clipAnimTB.setInterpolator(this.mTouchResponseInterpolator);
             clipAnimTB.setDuration(duration2);
             long alphaDuration = duration2 / 4;
@@ -475,11 +546,18 @@ public class TransitionAnimation {
         return anim;
     }
 
-    public Animation createScaleUpAnimationLocked(int transit, int wallpaperTransit, boolean enter, Rect containingFrame, Rect startRect) {
-        return createScaleUpAnimationLockedCompat(getTransitCompatType(transit, wallpaperTransit), enter, containingFrame, startRect);
+    public Animation createScaleUpAnimationLocked(
+            int transit,
+            int wallpaperTransit,
+            boolean enter,
+            Rect containingFrame,
+            Rect startRect) {
+        return createScaleUpAnimationLockedCompat(
+                getTransitCompatType(transit, wallpaperTransit), enter, containingFrame, startRect);
     }
 
-    public Animation createScaleUpAnimationLockedCompat(int transit, boolean enter, Rect containingFrame, Rect startRect) {
+    public Animation createScaleUpAnimationLockedCompat(
+            int transit, boolean enter, Rect containingFrame, Rect startRect) {
         Animation alpha;
         long duration;
         setupDefaultNextAppTransitionStartRect(startRect, this.mTmpRect);
@@ -488,7 +566,14 @@ public class TransitionAnimation {
         if (enter) {
             float scaleW = this.mTmpRect.width() / appWidth;
             float scaleH = this.mTmpRect.height() / appHeight;
-            Animation scale = new ScaleAnimation(scaleW, 1.0f, scaleH, 1.0f, computePivot(this.mTmpRect.left, scaleW), computePivot(this.mTmpRect.top, scaleH));
+            Animation scale =
+                    new ScaleAnimation(
+                            scaleW,
+                            1.0f,
+                            scaleH,
+                            1.0f,
+                            computePivot(this.mTmpRect.left, scaleW),
+                            computePivot(this.mTmpRect.top, scaleH));
             scale.setInterpolator(this.mDecelerateInterpolator);
             Animation alpha2 = new AlphaAnimation(0.0f, 1.0f);
             alpha2.setInterpolator(this.mThumbnailFadeOutInterpolator);
@@ -519,11 +604,30 @@ public class TransitionAnimation {
         return alpha;
     }
 
-    public Animation createThumbnailEnterExitAnimationLocked(boolean enter, boolean scaleUp, Rect containingFrame, int transit, int wallpaperTransit, HardwareBuffer thumbnailHeader, Rect startRect) {
-        return createThumbnailEnterExitAnimationLockedCompat(enter, scaleUp, containingFrame, getTransitCompatType(transit, wallpaperTransit), thumbnailHeader, startRect);
+    public Animation createThumbnailEnterExitAnimationLocked(
+            boolean enter,
+            boolean scaleUp,
+            Rect containingFrame,
+            int transit,
+            int wallpaperTransit,
+            HardwareBuffer thumbnailHeader,
+            Rect startRect) {
+        return createThumbnailEnterExitAnimationLockedCompat(
+                enter,
+                scaleUp,
+                containingFrame,
+                getTransitCompatType(transit, wallpaperTransit),
+                thumbnailHeader,
+                startRect);
     }
 
-    public Animation createThumbnailEnterExitAnimationLockedCompat(boolean enter, boolean scaleUp, Rect containingFrame, int transit, HardwareBuffer thumbnailHeader, Rect startRect) {
+    public Animation createThumbnailEnterExitAnimationLockedCompat(
+            boolean enter,
+            boolean scaleUp,
+            Rect containingFrame,
+            int transit,
+            HardwareBuffer thumbnailHeader,
+            Rect startRect) {
         Animation a;
         int appWidth = containingFrame.width();
         int appHeight = containingFrame.height();
@@ -537,7 +641,14 @@ public class TransitionAnimation {
             case 0:
                 float scaleW = thumbWidth / appWidth;
                 float scaleH = thumbHeight / appHeight;
-                a = new ScaleAnimation(scaleW, 1.0f, scaleH, 1.0f, computePivot(this.mTmpRect.left, scaleW), computePivot(this.mTmpRect.top, scaleH));
+                a =
+                        new ScaleAnimation(
+                                scaleW,
+                                1.0f,
+                                scaleH,
+                                1.0f,
+                                computePivot(this.mTmpRect.left, scaleW),
+                                computePivot(this.mTmpRect.top, scaleH));
                 break;
             case 1:
                 if (transit == 14) {
@@ -553,7 +664,14 @@ public class TransitionAnimation {
             case 3:
                 float scaleW2 = thumbWidth / appWidth;
                 float scaleH2 = thumbHeight / appHeight;
-                Animation scale = new ScaleAnimation(1.0f, scaleW2, 1.0f, scaleH2, computePivot(this.mTmpRect.left, scaleW2), computePivot(this.mTmpRect.top, scaleH2));
+                Animation scale =
+                        new ScaleAnimation(
+                                1.0f,
+                                scaleW2,
+                                1.0f,
+                                scaleH2,
+                                computePivot(this.mTmpRect.left, scaleW2),
+                                computePivot(this.mTmpRect.top, scaleH2));
                 Animation alpha = new AlphaAnimation(1.0f, 0.0f);
                 AnimationSet set = new AnimationSet(true);
                 set.addAnimation(scale);
@@ -567,7 +685,18 @@ public class TransitionAnimation {
         return prepareThumbnailAnimation(a, appWidth, appHeight, transit);
     }
 
-    public Animation createAspectScaledThumbnailEnterExitAnimationLocked(boolean enter, boolean scaleUp, int orientation, int transit, Rect containingFrame, Rect contentInsets, Rect surfaceInsets, Rect stableInsets, boolean freeform, Rect startRect, Rect defaultStartRect) {
+    public Animation createAspectScaledThumbnailEnterExitAnimationLocked(
+            boolean enter,
+            boolean scaleUp,
+            int orientation,
+            int transit,
+            Rect containingFrame,
+            Rect contentInsets,
+            Rect surfaceInsets,
+            Rect stableInsets,
+            boolean freeform,
+            Rect startRect,
+            Rect defaultStartRect) {
         int appHeight;
         Animation clipAnim;
         Animation translateAnim;
@@ -588,11 +717,15 @@ public class TransitionAnimation {
             case 0:
             case 3:
                 if (freeform && scaleUp) {
-                    a = createAspectScaledThumbnailEnterFreeformAnimationLocked(containingFrame, surfaceInsets, startRect, defaultStartRect);
+                    a =
+                            createAspectScaledThumbnailEnterFreeformAnimationLocked(
+                                    containingFrame, surfaceInsets, startRect, defaultStartRect);
                     appHeight = appHeight2;
                     break;
                 } else if (freeform) {
-                    a = createAspectScaledThumbnailExitFreeformAnimationLocked(containingFrame, surfaceInsets, startRect, defaultStartRect);
+                    a =
+                            createAspectScaledThumbnailExitFreeformAnimationLocked(
+                                    containingFrame, surfaceInsets, startRect, defaultStartRect);
                     appHeight = appHeight2;
                     break;
                 } else {
@@ -603,15 +736,29 @@ public class TransitionAnimation {
                     this.mTmpToClipRect.offsetTo(0, 0);
                     this.mTmpFromClipRect.inset(contentInsets);
                     if (shouldScaleDownThumbnailTransition(orientation)) {
-                        float scale = thumbWidth / ((appWidth - contentInsets.left) - contentInsets.right);
+                        float scale =
+                                thumbWidth
+                                        / ((appWidth - contentInsets.left) - contentInsets.right);
                         int unscaledThumbHeight = (int) (thumbHeight / scale);
-                        this.mTmpFromClipRect.bottom = this.mTmpFromClipRect.top + unscaledThumbHeight;
-                        Animation scaleAnim = new ScaleAnimation(scaleUp ? scale : 1.0f, scaleUp ? 1.0f : scale, scaleUp ? scale : 1.0f, scaleUp ? 1.0f : scale, containingFrame.width() / 2.0f, (containingFrame.height() / 2.0f) + contentInsets.top);
+                        this.mTmpFromClipRect.bottom =
+                                this.mTmpFromClipRect.top + unscaledThumbHeight;
+                        Animation scaleAnim =
+                                new ScaleAnimation(
+                                        scaleUp ? scale : 1.0f,
+                                        scaleUp ? 1.0f : scale,
+                                        scaleUp ? scale : 1.0f,
+                                        scaleUp ? 1.0f : scale,
+                                        containingFrame.width() / 2.0f,
+                                        (containingFrame.height() / 2.0f) + contentInsets.top);
                         float targetX = this.mTmpRect.left - containingFrame.left;
                         int unscaledThumbHeight2 = containingFrame.width();
-                        float x = (containingFrame.width() / 2.0f) - ((unscaledThumbHeight2 / 2.0f) * scale);
+                        float x =
+                                (containingFrame.width() / 2.0f)
+                                        - ((unscaledThumbHeight2 / 2.0f) * scale);
                         float targetY = this.mTmpRect.top - containingFrame.top;
-                        float y = (containingFrame.height() / 2.0f) - ((containingFrame.height() / 2.0f) * scale);
+                        float y =
+                                (containingFrame.height() / 2.0f)
+                                        - ((containingFrame.height() / 2.0f) * scale);
                         if (this.mLowRamRecentsEnabled && contentInsets.top == 0 && scaleUp) {
                             appHeight = appHeight2;
                             this.mTmpFromClipRect.top += stableInsets.top;
@@ -622,15 +769,23 @@ public class TransitionAnimation {
                         float scale2 = targetX - x;
                         float startY = targetY - y;
                         if (!scaleUp) {
-                            clipRectAnimation = new ClipRectAnimation(this.mTmpToClipRect, this.mTmpFromClipRect);
+                            clipRectAnimation =
+                                    new ClipRectAnimation(
+                                            this.mTmpToClipRect, this.mTmpFromClipRect);
                         } else {
-                            clipRectAnimation = new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect);
+                            clipRectAnimation =
+                                    new ClipRectAnimation(
+                                            this.mTmpFromClipRect, this.mTmpToClipRect);
                         }
                         Animation clipAnim2 = clipRectAnimation;
                         if (scaleUp) {
-                            translateAnim2 = createCurvedMotion(scale2, 0.0f, startY - contentInsets.top, 0.0f);
+                            translateAnim2 =
+                                    createCurvedMotion(
+                                            scale2, 0.0f, startY - contentInsets.top, 0.0f);
                         } else {
-                            translateAnim2 = createCurvedMotion(0.0f, scale2, 0.0f, startY - contentInsets.top);
+                            translateAnim2 =
+                                    createCurvedMotion(
+                                            0.0f, scale2, 0.0f, startY - contentInsets.top);
                         }
                         set.addAnimation(clipAnim2);
                         set.addAnimation(scaleAnim);
@@ -640,14 +795,28 @@ public class TransitionAnimation {
                         this.mTmpFromClipRect.bottom = this.mTmpFromClipRect.top + thumbHeightI;
                         this.mTmpFromClipRect.right = this.mTmpFromClipRect.left + thumbWidthI;
                         if (scaleUp) {
-                            clipAnim = new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect);
+                            clipAnim =
+                                    new ClipRectAnimation(
+                                            this.mTmpFromClipRect, this.mTmpToClipRect);
                         } else {
-                            clipAnim = new ClipRectAnimation(this.mTmpToClipRect, this.mTmpFromClipRect);
+                            clipAnim =
+                                    new ClipRectAnimation(
+                                            this.mTmpToClipRect, this.mTmpFromClipRect);
                         }
                         if (scaleUp) {
-                            translateAnim = createCurvedMotion(thumbStartX, 0.0f, thumbStartY - contentInsets.top, 0.0f);
+                            translateAnim =
+                                    createCurvedMotion(
+                                            thumbStartX,
+                                            0.0f,
+                                            thumbStartY - contentInsets.top,
+                                            0.0f);
                         } else {
-                            translateAnim = createCurvedMotion(0.0f, thumbStartX, 0.0f, thumbStartY - contentInsets.top);
+                            translateAnim =
+                                    createCurvedMotion(
+                                            0.0f,
+                                            thumbStartX,
+                                            0.0f,
+                                            thumbStartY - contentInsets.top);
                         }
                         set.addAnimation(clipAnim);
                         set.addAnimation(translateAnim);
@@ -682,10 +851,18 @@ public class TransitionAnimation {
             default:
                 throw new RuntimeException("Invalid thumbnail transition state");
         }
-        return prepareThumbnailAnimationWithDuration(a, appWidth, appHeight, 336L, this.mTouchResponseInterpolator);
+        return prepareThumbnailAnimationWithDuration(
+                a, appWidth, appHeight, 336L, this.mTouchResponseInterpolator);
     }
 
-    public Animation createThumbnailAspectScaleAnimationLocked(Rect appRect, Rect contentInsets, HardwareBuffer thumbnailHeader, int orientation, Rect startRect, Rect defaultStartRect, boolean scaleUp) {
+    public Animation createThumbnailAspectScaleAnimationLocked(
+            Rect appRect,
+            Rect contentInsets,
+            HardwareBuffer thumbnailHeader,
+            int orientation,
+            Rect startRect,
+            Rect defaultStartRect,
+            boolean scaleUp) {
         float pivotY;
         float fromY;
         float pivotX;
@@ -738,7 +915,11 @@ public class TransitionAnimation {
             this.mTmpToClipRect.right = (int) (this.mTmpToClipRect.right / scaleW);
             this.mTmpToClipRect.bottom = (int) (this.mTmpToClipRect.bottom / scaleW);
             if (contentInsets != null) {
-                this.mTmpToClipRect.inset((int) ((-contentInsets.left) * scaleW), (int) ((-contentInsets.top) * scaleW), (int) ((-contentInsets.right) * scaleW), (int) ((-contentInsets.bottom) * scaleW));
+                this.mTmpToClipRect.inset(
+                        (int) ((-contentInsets.left) * scaleW),
+                        (int) ((-contentInsets.top) * scaleW),
+                        (int) ((-contentInsets.right) * scaleW),
+                        (int) ((-contentInsets.bottom) * scaleW));
             }
             Animation clipAnim2 = new ClipRectAnimation(this.mTmpFromClipRect, this.mTmpToClipRect);
             clipAnim2.setInterpolator(TOUCH_RESPONSE_INTERPOLATOR);
@@ -766,7 +947,8 @@ public class TransitionAnimation {
             set2.addAnimation(translate2);
             clipAnim = set2;
         }
-        return prepareThumbnailAnimationWithDuration(clipAnim, appWidth, appRect.height(), 0L, null);
+        return prepareThumbnailAnimationWithDuration(
+                clipAnim, appWidth, appRect.height(), 0L, null);
     }
 
     public HardwareBuffer createCrossProfileAppsThumbnail(Drawable thumbnailDrawable, Rect frame) {
@@ -775,15 +957,23 @@ public class TransitionAnimation {
         Picture picture = new Picture();
         Canvas canvas = picture.beginRecording(width, height);
         canvas.drawColor(Color.argb(0.6f, 0.0f, 0.0f, 0.0f));
-        int thumbnailSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.cross_profile_apps_thumbnail_size);
-        thumbnailDrawable.setBounds((width - thumbnailSize) / 2, (height - thumbnailSize) / 2, (width + thumbnailSize) / 2, (height + thumbnailSize) / 2);
+        int thumbnailSize =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.cross_profile_apps_thumbnail_size);
+        thumbnailDrawable.setBounds(
+                (width - thumbnailSize) / 2,
+                (height - thumbnailSize) / 2,
+                (width + thumbnailSize) / 2,
+                (height + thumbnailSize) / 2);
         thumbnailDrawable.setTint(this.mContext.getColor(17170443));
         thumbnailDrawable.draw(canvas);
         picture.endRecording();
         return Bitmap.createBitmap(picture).getHardwareBuffer();
     }
 
-    private Animation prepareThumbnailAnimation(Animation a, int appWidth, int appHeight, int transit) {
+    private Animation prepareThumbnailAnimation(
+            Animation a, int appWidth, int appHeight, int transit) {
         int duration;
         switch (transit) {
             case 6:
@@ -794,17 +984,22 @@ public class TransitionAnimation {
                 duration = 336;
                 break;
         }
-        return prepareThumbnailAnimationWithDuration(a, appWidth, appHeight, duration, this.mDecelerateInterpolator);
+        return prepareThumbnailAnimationWithDuration(
+                a, appWidth, appHeight, duration, this.mDecelerateInterpolator);
     }
 
-    private Animation createAspectScaledThumbnailEnterFreeformAnimationLocked(Rect frame, Rect surfaceInsets, Rect startRect, Rect defaultStartRect) {
+    private Animation createAspectScaledThumbnailEnterFreeformAnimationLocked(
+            Rect frame, Rect surfaceInsets, Rect startRect, Rect defaultStartRect) {
         getNextAppTransitionStartRect(startRect, defaultStartRect, this.mTmpRect);
-        return createAspectScaledThumbnailFreeformAnimationLocked(this.mTmpRect, frame, surfaceInsets, true);
+        return createAspectScaledThumbnailFreeformAnimationLocked(
+                this.mTmpRect, frame, surfaceInsets, true);
     }
 
-    private Animation createAspectScaledThumbnailExitFreeformAnimationLocked(Rect frame, Rect surfaceInsets, Rect startRect, Rect defaultStartRect) {
+    private Animation createAspectScaledThumbnailExitFreeformAnimationLocked(
+            Rect frame, Rect surfaceInsets, Rect startRect, Rect defaultStartRect) {
         getNextAppTransitionStartRect(startRect, defaultStartRect, this.mTmpRect);
-        return createAspectScaledThumbnailFreeformAnimationLocked(frame, this.mTmpRect, surfaceInsets, false);
+        return createAspectScaledThumbnailFreeformAnimationLocked(
+                frame, this.mTmpRect, surfaceInsets, false);
     }
 
     private void getNextAppTransitionStartRect(Rect startRect, Rect defaultStartRect, Rect rect) {
@@ -816,7 +1011,8 @@ public class TransitionAnimation {
         }
     }
 
-    private AnimationSet createAspectScaledThumbnailFreeformAnimationLocked(Rect sourceFrame, Rect destFrame, Rect surfaceInsets, boolean enter) {
+    private AnimationSet createAspectScaledThumbnailFreeformAnimationLocked(
+            Rect sourceFrame, Rect destFrame, Rect surfaceInsets, boolean enter) {
         float sourceWidth = sourceFrame.width();
         float sourceHeight = sourceFrame.height();
         float destWidth = destFrame.width();
@@ -828,14 +1024,21 @@ public class TransitionAnimation {
         int surfaceInsetsV = surfaceInsets != null ? surfaceInsets.top + surfaceInsets.bottom : 0;
         float scaleHCenter = ((enter ? destWidth : sourceWidth) + surfaceInsetsH) / 2.0f;
         float scaleVCenter = ((enter ? destHeight : sourceHeight) + surfaceInsetsV) / 2.0f;
-        ScaleAnimation scale = enter ? new ScaleAnimation(scaleH, 1.0f, scaleV, 1.0f, scaleHCenter, scaleVCenter) : new ScaleAnimation(1.0f, scaleH, 1.0f, scaleV, scaleHCenter, scaleVCenter);
+        ScaleAnimation scale =
+                enter
+                        ? new ScaleAnimation(scaleH, 1.0f, scaleV, 1.0f, scaleHCenter, scaleVCenter)
+                        : new ScaleAnimation(
+                                1.0f, scaleH, 1.0f, scaleV, scaleHCenter, scaleVCenter);
         int sourceHCenter = sourceFrame.left + (sourceFrame.width() / 2);
         int sourceVCenter = sourceFrame.top + (sourceFrame.height() / 2);
         int destHCenter = destFrame.left + (destFrame.width() / 2);
         int destVCenter = destFrame.top + (destFrame.height() / 2);
         int fromX = enter ? sourceHCenter - destHCenter : destHCenter - sourceHCenter;
         int fromY = enter ? sourceVCenter - destVCenter : destVCenter - sourceVCenter;
-        TranslateAnimation translation = enter ? new TranslateAnimation(fromX, 0.0f, fromY, 0.0f) : new TranslateAnimation(0.0f, fromX, 0.0f, fromY);
+        TranslateAnimation translation =
+                enter
+                        ? new TranslateAnimation(fromX, 0.0f, fromY, 0.0f)
+                        : new TranslateAnimation(0.0f, fromX, 0.0f, fromY);
         set.addAnimation(scale);
         set.addAnimation(translation);
         return set;
@@ -881,11 +1084,15 @@ public class TransitionAnimation {
         return 0;
     }
 
-    private static long calculateClipRevealTransitionDuration(boolean cutOff, float translationX, float translationY, Rect displayFrame) {
+    private static long calculateClipRevealTransitionDuration(
+            boolean cutOff, float translationX, float translationY, Rect displayFrame) {
         if (!cutOff) {
             return 336L;
         }
-        float fraction = Math.max(Math.abs(translationX) / displayFrame.width(), Math.abs(translationY) / displayFrame.height());
+        float fraction =
+                Math.max(
+                        Math.abs(translationX) / displayFrame.width(),
+                        Math.abs(translationY) / displayFrame.height());
         return (long) ((84.0f * fraction) + 336.0f);
     }
 
@@ -902,7 +1109,8 @@ public class TransitionAnimation {
         return 3;
     }
 
-    public static Animation prepareThumbnailAnimationWithDuration(Animation a, int appWidth, int appHeight, long duration, Interpolator interpolator) {
+    public static Animation prepareThumbnailAnimationWithDuration(
+            Animation a, int appWidth, int appHeight, long duration, Interpolator interpolator) {
         if (a == null) {
             return null;
         }
@@ -938,7 +1146,12 @@ public class TransitionAnimation {
         }
     }
 
-    public static Animation createHiddenByKeyguardExit(Context context, LogDecelerateInterpolator interpolator, boolean onWallpaper, boolean goingToNotificationShade, boolean subtleAnimation) {
+    public static Animation createHiddenByKeyguardExit(
+            Context context,
+            LogDecelerateInterpolator interpolator,
+            boolean onWallpaper,
+            boolean goingToNotificationShade,
+            boolean subtleAnimation) {
         int resource;
         if (goingToNotificationShade) {
             return AnimationUtils.loadAnimation(context, R.anim.lock_screen_behind_enter_fade_in);
@@ -958,7 +1171,10 @@ public class TransitionAnimation {
         return set;
     }
 
-    public static void configureScreenshotLayer(SurfaceControl.Transaction t, SurfaceControl layer, ScreenCapture.ScreenshotHardwareBuffer buffer) {
+    public static void configureScreenshotLayer(
+            SurfaceControl.Transaction t,
+            SurfaceControl layer,
+            ScreenCapture.ScreenshotHardwareBuffer buffer) {
         t.setBuffer(layer, buffer.getHardwareBuffer());
         t.setDataSpace(layer, buffer.getColorSpace().getDataSpace());
         if (buffer.containsHdrLayers()) {
@@ -970,7 +1186,8 @@ public class TransitionAnimation {
         return (hardwareBuffer.getUsage() & 16384) == 16384;
     }
 
-    public static float getBorderLuma(HardwareBuffer hwBuffer, ColorSpace colorSpace, SurfaceControl sourceSurfaceControl) {
+    public static float getBorderLuma(
+            HardwareBuffer hwBuffer, ColorSpace colorSpace, SurfaceControl sourceSurfaceControl) {
         if (hasProtectedContent(hwBuffer)) {
             return getBorderLuma(sourceSurfaceControl, hwBuffer.getWidth(), hwBuffer.getHeight());
         }
@@ -978,7 +1195,8 @@ public class TransitionAnimation {
     }
 
     public static float getBorderLuma(SurfaceControl surfaceControl, int w, int h) {
-        ScreenCapture.ScreenshotHardwareBuffer buffer = ScreenCapture.captureLayers(surfaceControl, new Rect(0, 0, w, h), 1.0f);
+        ScreenCapture.ScreenshotHardwareBuffer buffer =
+                ScreenCapture.captureLayers(surfaceControl, new Rect(0, 0, w, h), 1.0f);
         if (buffer == null) {
             return 0.0f;
         }
@@ -992,8 +1210,11 @@ public class TransitionAnimation {
 
     public static float getBorderLuma(HardwareBuffer hwBuffer, ColorSpace colorSpace) {
         int format;
-        if (hwBuffer != null && (format = hwBuffer.getFormat()) == 1 && !hasProtectedContent(hwBuffer)) {
-            ImageReader ir = ImageReader.newInstance(hwBuffer.getWidth(), hwBuffer.getHeight(), format, 1);
+        if (hwBuffer != null
+                && (format = hwBuffer.getFormat()) == 1
+                && !hasProtectedContent(hwBuffer)) {
+            ImageReader ir =
+                    ImageReader.newInstance(hwBuffer.getWidth(), hwBuffer.getHeight(), format, 1);
             ir.getSurface().attachAndQueueBufferWithColorSpace(hwBuffer, colorSpace);
             Image image = ir.acquireLatestImage();
             if (image == null || image.getPlaneCount() < 1) {
@@ -1044,7 +1265,8 @@ public class TransitionAnimation {
         return 0.0f;
     }
 
-    private static int getPixelLuminance(ByteBuffer buffer, int x, int y, int pixelStride, int rowStride) {
+    private static int getPixelLuminance(
+            ByteBuffer buffer, int x, int y, int pixelStride, int rowStride) {
         int color = buffer.getInt((y * rowStride) + (x * pixelStride));
         int r = color & 255;
         int g = (color >> 8) & 255;

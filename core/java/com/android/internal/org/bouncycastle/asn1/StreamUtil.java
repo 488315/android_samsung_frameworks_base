@@ -8,8 +8,7 @@ import java.nio.channels.FileChannel;
 
 /* loaded from: classes5.dex */
 class StreamUtil {
-    StreamUtil() {
-    }
+    StreamUtil() {}
 
     static int findLimit(InputStream in) {
         if (in instanceof LimitedInputStream) {

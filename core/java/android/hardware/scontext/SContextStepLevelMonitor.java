@@ -13,19 +13,21 @@ public class SContextStepLevelMonitor extends SContextEventContext {
     private static final int[] NO_INTS = new int[0];
     private static final double[] NO_DOUBLES = new double[0];
     private static final long[] NO_LONGS = new long[0];
-    public static final Parcelable.Creator<SContextStepLevelMonitor> CREATOR = new Parcelable.Creator<SContextStepLevelMonitor>() { // from class: android.hardware.scontext.SContextStepLevelMonitor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextStepLevelMonitor createFromParcel(Parcel in) {
-            return new SContextStepLevelMonitor(in);
-        }
+    public static final Parcelable.Creator<SContextStepLevelMonitor> CREATOR =
+            new Parcelable.Creator<SContextStepLevelMonitor>() { // from class:
+                // android.hardware.scontext.SContextStepLevelMonitor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextStepLevelMonitor createFromParcel(Parcel in) {
+                    return new SContextStepLevelMonitor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextStepLevelMonitor[] newArray(int size) {
-            return new SContextStepLevelMonitor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextStepLevelMonitor[] newArray(int size) {
+                    return new SContextStepLevelMonitor[size];
+                }
+            };
 
     SContextStepLevelMonitor() {
         this.mContext = new Bundle();
@@ -106,7 +108,8 @@ public class SContextStepLevelMonitor extends SContextEventContext {
         return this.mInfo.getInt("Mode");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
         this.mInfo = context.getBundle("DataBundle");

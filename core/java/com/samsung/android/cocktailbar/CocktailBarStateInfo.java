@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class CocktailBarStateInfo implements Parcelable, Cloneable {
-    public static final Parcelable.Creator<CocktailBarStateInfo> CREATOR = new Parcelable.Creator<CocktailBarStateInfo>() { // from class: com.samsung.android.cocktailbar.CocktailBarStateInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CocktailBarStateInfo createFromParcel(Parcel in) {
-            return new CocktailBarStateInfo(in);
-        }
+    public static final Parcelable.Creator<CocktailBarStateInfo> CREATOR =
+            new Parcelable.Creator<
+                    CocktailBarStateInfo>() { // from class:
+                                              // com.samsung.android.cocktailbar.CocktailBarStateInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CocktailBarStateInfo createFromParcel(Parcel in) {
+                    return new CocktailBarStateInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CocktailBarStateInfo[] newArray(int size) {
-            return new CocktailBarStateInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CocktailBarStateInfo[] newArray(int size) {
+                    return new CocktailBarStateInfo[size];
+                }
+            };
     public static final int FLAG_CHANGE_ACTIVATE = 64;
     public static final int FLAG_CHANGE_LOCK_STATE = 8;
     public static final int FLAG_CHANGE_MODE = 16;
@@ -30,14 +33,11 @@ public class CocktailBarStateInfo implements Parcelable, Cloneable {
     public static final int LOCK_STATE_RESTRICT = 4;
     public static final int LOCK_STATE_SHOW = 1;
 
-    @Deprecated
-    public static final int MODE_IMMERSIVE = 2;
+    @Deprecated public static final int MODE_IMMERSIVE = 2;
 
-    @Deprecated
-    public static final int MODE_MULTITASKING = 1;
+    @Deprecated public static final int MODE_MULTITASKING = 1;
 
-    @Deprecated
-    public static final int MODE_UNKNOWN = 0;
+    @Deprecated public static final int MODE_UNKNOWN = 0;
     public static final int POSITION_BOTTOM = 4;
     public static final int POSITION_LEFT = 1;
     public static final int POSITION_RIGHT = 2;

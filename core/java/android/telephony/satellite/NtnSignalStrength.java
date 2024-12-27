@@ -3,25 +3,29 @@ package android.telephony.satellite;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class NtnSignalStrength implements Parcelable {
-    public static final Parcelable.Creator<NtnSignalStrength> CREATOR = new Parcelable.Creator<NtnSignalStrength>() { // from class: android.telephony.satellite.NtnSignalStrength.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NtnSignalStrength createFromParcel(Parcel in) {
-            return new NtnSignalStrength(in);
-        }
+    public static final Parcelable.Creator<NtnSignalStrength> CREATOR =
+            new Parcelable.Creator<
+                    NtnSignalStrength>() { // from class:
+                                           // android.telephony.satellite.NtnSignalStrength.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NtnSignalStrength createFromParcel(Parcel in) {
+                    return new NtnSignalStrength(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NtnSignalStrength[] newArray(int size) {
-            return new NtnSignalStrength[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NtnSignalStrength[] newArray(int size) {
+                    return new NtnSignalStrength[size];
+                }
+            };
     public static final int NTN_SIGNAL_STRENGTH_GOOD = 3;
     public static final int NTN_SIGNAL_STRENGTH_GREAT = 4;
     public static final int NTN_SIGNAL_STRENGTH_MODERATE = 2;
@@ -30,8 +34,7 @@ public final class NtnSignalStrength implements Parcelable {
     private int mLevel;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NtnSignalStrengthLevel {
-    }
+    public @interface NtnSignalStrengthLevel {}
 
     public NtnSignalStrength(int level) {
         this.mLevel = level;

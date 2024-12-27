@@ -5,7 +5,9 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.util.Slog;
+
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -41,23 +43,29 @@ public final class LockScreenFilter implements IFilter {
             Context context = this.mContext;
             if (context != null) {
                 if (this.mLockClockFaceObserver != null) {
-                    context.getContentResolver().unregisterContentObserver(this.mLockClockFaceObserver);
+                    context.getContentResolver()
+                            .unregisterContentObserver(this.mLockClockFaceObserver);
                     this.mLockClockFaceObserver = null;
                 }
                 if (this.mLockClockFaceSubObserver != null) {
-                    this.mContext.getContentResolver().unregisterContentObserver(this.mLockClockFaceSubObserver);
+                    this.mContext
+                            .getContentResolver()
+                            .unregisterContentObserver(this.mLockClockFaceSubObserver);
                     this.mLockClockFaceSubObserver = null;
                 }
             }
         } catch (IllegalArgumentException unused) {
-            Slog.e("MARs:LockScreenFilter", "IllegalArgumentException occurred in unregisterContentObserver()");
+            Slog.e(
+                    "MARs:LockScreenFilter",
+                    "IllegalArgumentException occurred in unregisterContentObserver()");
         }
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
     public final int filter(int i, int i2, int i3, String str) {
         String str2;
-        if ((this.isLockTypeClockFace || this.isLockTypeClockFaceSub) && "com.samsung.android.app.clockface".equals(str)) {
+        if ((this.isLockTypeClockFace || this.isLockTypeClockFaceSub)
+                && "com.samsung.android.app.clockface".equals(str)) {
             return 13;
         }
         if (this.mKeyguardPkgUid == i2 && (str2 = this.mKeyguardPkg) != null && str2.equals(str)) {
@@ -128,7 +136,9 @@ public final class LockScreenFilter implements IFilter {
             r8.isLockTypeClockFace = r0
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.mars.filter.filter.LockScreenFilter.getLockClockFace():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.mars.filter.filter.LockScreenFilter.getLockClockFace():void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:15:0x0036 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -189,7 +199,9 @@ public final class LockScreenFilter implements IFilter {
             r8.isLockTypeClockFaceSub = r0
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.mars.filter.filter.LockScreenFilter.getLockClockFaceSub():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.mars.filter.filter.LockScreenFilter.getLockClockFaceSub():void");
     }
 
     /* JADX WARN: Type inference failed for: r4v8, types: [com.android.server.am.mars.filter.filter.LockScreenFilter$1] */
@@ -200,51 +212,71 @@ public final class LockScreenFilter implements IFilter {
         if (context != null) {
             if (this.mLockClockFaceObserver == null) {
                 final int i = 0;
-                this.mLockClockFaceObserver = new ContentObserver(this, new Handler()) { // from class: com.android.server.am.mars.filter.filter.LockScreenFilter.1
-                    public final /* synthetic */ LockScreenFilter this$0;
+                this.mLockClockFaceObserver =
+                        new ContentObserver(
+                                this,
+                                new Handler()) { // from class:
+                                                 // com.android.server.am.mars.filter.filter.LockScreenFilter.1
+                            public final /* synthetic */ LockScreenFilter this$0;
 
-                    {
-                        this.this$0 = this;
-                    }
+                            {
+                                this.this$0 = this;
+                            }
 
-                    @Override // android.database.ContentObserver
-                    public final void onChange(boolean z, Uri uri) {
-                        switch (i) {
-                            case 0:
-                                this.this$0.getLockClockFace();
-                                break;
-                            default:
-                                this.this$0.getLockClockFaceSub();
-                                break;
-                        }
-                    }
-                };
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z, Uri uri) {
+                                switch (i) {
+                                    case 0:
+                                        this.this$0.getLockClockFace();
+                                        break;
+                                    default:
+                                        this.this$0.getLockClockFaceSub();
+                                        break;
+                                }
+                            }
+                        };
             }
             if (this.mLockClockFaceSubObserver == null) {
                 final int i2 = 1;
-                this.mLockClockFaceSubObserver = new ContentObserver(this, new Handler()) { // from class: com.android.server.am.mars.filter.filter.LockScreenFilter.1
-                    public final /* synthetic */ LockScreenFilter this$0;
+                this.mLockClockFaceSubObserver =
+                        new ContentObserver(
+                                this,
+                                new Handler()) { // from class:
+                                                 // com.android.server.am.mars.filter.filter.LockScreenFilter.1
+                            public final /* synthetic */ LockScreenFilter this$0;
 
-                    {
-                        this.this$0 = this;
-                    }
+                            {
+                                this.this$0 = this;
+                            }
 
-                    @Override // android.database.ContentObserver
-                    public final void onChange(boolean z, Uri uri) {
-                        switch (i2) {
-                            case 0:
-                                this.this$0.getLockClockFace();
-                                break;
-                            default:
-                                this.this$0.getLockClockFaceSub();
-                                break;
-                        }
-                    }
-                };
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z, Uri uri) {
+                                switch (i2) {
+                                    case 0:
+                                        this.this$0.getLockClockFace();
+                                        break;
+                                    default:
+                                        this.this$0.getLockClockFaceSub();
+                                        break;
+                                }
+                            }
+                        };
             }
             try {
-                this.mContext.getContentResolver().registerContentObserver(Uri.parse("content://com.samsung.android.app.clockpack.provider/lock_settings/lock_clock_type"), false, this.mLockClockFaceObserver);
-                this.mContext.getContentResolver().registerContentObserver(Uri.parse("content://com.samsung.android.app.clockpack.provider/lock_settings/lock_sub_clock_type"), false, this.mLockClockFaceSubObserver);
+                this.mContext
+                        .getContentResolver()
+                        .registerContentObserver(
+                                Uri.parse(
+                                        "content://com.samsung.android.app.clockpack.provider/lock_settings/lock_clock_type"),
+                                false,
+                                this.mLockClockFaceObserver);
+                this.mContext
+                        .getContentResolver()
+                        .registerContentObserver(
+                                Uri.parse(
+                                        "content://com.samsung.android.app.clockpack.provider/lock_settings/lock_sub_clock_type"),
+                                false,
+                                this.mLockClockFaceSubObserver);
             } catch (Exception e) {
                 e.printStackTrace();
             }

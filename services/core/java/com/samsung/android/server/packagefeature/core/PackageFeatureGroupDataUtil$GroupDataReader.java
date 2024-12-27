@@ -1,10 +1,12 @@
 package com.samsung.android.server.packagefeature.core;
 
 import android.util.Base64;
+
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.server.packagefeature.PackageFeatureData;
 import com.samsung.android.server.util.CoreEncryptor;
 import com.samsung.android.server.util.CoreLogger;
+
 import java.io.BufferedReader;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -93,7 +95,9 @@ public final class PackageFeatureGroupDataUtil$GroupDataReader implements AutoCl
         L56:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.packagefeature.core.PackageFeatureGroupDataUtil$GroupDataReader.close():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.packagefeature.core.PackageFeatureGroupDataUtil$GroupDataReader.close():void");
     }
 
     public final PackageFeatureGroupData getPackageFeatureGroupDataInner() {

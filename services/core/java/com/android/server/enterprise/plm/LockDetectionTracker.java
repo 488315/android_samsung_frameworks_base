@@ -4,8 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import com.android.server.enterprise.plm.SystemStateTracker;
+
 import com.android.server.enterprise.plm.common.PlmMessage;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,7 +19,10 @@ public final class LockDetectionTracker {
     public final List mLockDetectionEventCallbacks;
 
     public LockDetectionTracker() {
-        new Handler(Looper.getMainLooper()) { // from class: com.android.server.enterprise.plm.LockDetectionTracker.1
+        new Handler(
+                Looper
+                        .getMainLooper()) { // from class:
+                                            // com.android.server.enterprise.plm.LockDetectionTracker.1
             @Override // android.os.Handler
             public final void handleMessage(Message message) {
                 boolean z = true;
@@ -40,9 +44,11 @@ public final class LockDetectionTracker {
                     Log.d("LockDetection:", "verify credential failure");
                     z = false;
                 }
-                Iterator it = ((ArrayList) lockDetectionTracker.mLockDetectionEventCallbacks).iterator();
+                Iterator it =
+                        ((ArrayList) lockDetectionTracker.mLockDetectionEventCallbacks).iterator();
                 while (it.hasNext()) {
-                    SystemStateTracker.LockStateListener lockStateListener = (SystemStateTracker.LockStateListener) it.next();
+                    SystemStateTracker.LockStateListener lockStateListener =
+                            (SystemStateTracker.LockStateListener) it.next();
                     Boolean valueOf = Boolean.valueOf(z);
                     Integer valueOf2 = Integer.valueOf(i2);
                     SystemStateTracker systemStateTracker = SystemStateTracker.this;

@@ -24,7 +24,9 @@ public class FilterContext {
             throw new NullPointerException("Attempting to set null FrameManager!");
         }
         if (manager.getContext() != null) {
-            throw new IllegalArgumentException("Attempting to set FrameManager which is already bound to another FilterContext!");
+            throw new IllegalArgumentException(
+                    "Attempting to set FrameManager which is already bound to another"
+                            + " FilterContext!");
         }
         this.mFrameManager = manager;
         this.mFrameManager.setContext(this);

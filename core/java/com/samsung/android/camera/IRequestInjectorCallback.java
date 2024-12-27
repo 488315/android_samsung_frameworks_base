@@ -11,12 +11,19 @@ import android.os.RemoteException;
 public interface IRequestInjectorCallback extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.camera.IRequestInjectorCallback";
 
-    void onCaptureResult(CameraMetadataNative cameraMetadataNative, String str, String str2, int i, long j) throws RemoteException;
+    void onCaptureResult(
+            CameraMetadataNative cameraMetadataNative, String str, String str2, int i, long j)
+            throws RemoteException;
 
     public static class Default implements IRequestInjectorCallback {
         @Override // com.samsung.android.camera.IRequestInjectorCallback
-        public void onCaptureResult(CameraMetadataNative result, String clientName, String cameraId, int requestId, long frameNumber) throws RemoteException {
-        }
+        public void onCaptureResult(
+                CameraMetadataNative result,
+                String clientName,
+                String cameraId,
+                int requestId,
+                long frameNumber)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +31,7 @@ public interface IRequestInjectorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRequestInjectorCallback {
+    public abstract static class Stub extends Binder implements IRequestInjectorCallback {
         static final int TRANSACTION_onCaptureResult = 1;
 
         public Stub() {
@@ -62,7 +69,8 @@ public interface IRequestInjectorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRequestInjectorCallback.DESCRIPTOR);
             }
@@ -72,7 +80,9 @@ public interface IRequestInjectorCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CameraMetadataNative _arg0 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg0 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     String _arg1 = data.readString();
                     String _arg2 = data.readString();
                     int _arg3 = data.readInt();
@@ -102,7 +112,13 @@ public interface IRequestInjectorCallback extends IInterface {
             }
 
             @Override // com.samsung.android.camera.IRequestInjectorCallback
-            public void onCaptureResult(CameraMetadataNative result, String clientName, String cameraId, int requestId, long frameNumber) throws RemoteException {
+            public void onCaptureResult(
+                    CameraMetadataNative result,
+                    String clientName,
+                    String cameraId,
+                    int requestId,
+                    long frameNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRequestInjectorCallback.DESCRIPTOR);

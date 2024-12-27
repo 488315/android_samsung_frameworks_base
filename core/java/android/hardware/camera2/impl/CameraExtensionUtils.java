@@ -8,7 +8,9 @@ import android.util.IntArray;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
+
 import com.android.internal.camera.flags.Flags;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,14 +68,19 @@ public final class CameraExtensionUtils {
         return surfaceInfo;
     }
 
-    public static Surface getPostviewSurface(OutputConfiguration outputConfig, HashMap<Integer, List<Size>> supportedPostviewSizes, int captureFormat) {
+    public static Surface getPostviewSurface(
+            OutputConfiguration outputConfig,
+            HashMap<Integer, List<Size>> supportedPostviewSizes,
+            int captureFormat) {
         if (outputConfig == null) {
             return null;
         }
         SurfaceInfo surfaceInfo = querySurface(outputConfig.getSurface());
         if (Flags.extension10Bit()) {
             Size postviewSize = new Size(surfaceInfo.mWidth, surfaceInfo.mHeight);
-            if (supportedPostviewSizes.get(Integer.valueOf(surfaceInfo.mFormat)).contains(postviewSize)) {
+            if (supportedPostviewSizes
+                    .get(Integer.valueOf(surfaceInfo.mFormat))
+                    .contains(postviewSize)) {
                 return outputConfig.getSurface();
             }
             throw new IllegalArgumentException("Postview size not supported!");
@@ -83,16 +90,22 @@ public final class CameraExtensionUtils {
                 return null;
             }
             Size postviewSize2 = new Size(surfaceInfo.mWidth, surfaceInfo.mHeight);
-            if (supportedPostviewSizes.get(Integer.valueOf(surfaceInfo.mFormat)).contains(postviewSize2)) {
+            if (supportedPostviewSizes
+                    .get(Integer.valueOf(surfaceInfo.mFormat))
+                    .contains(postviewSize2)) {
                 return outputConfig.getSurface();
             }
             throw new IllegalArgumentException("Postview size not supported!");
         }
-        throw new IllegalArgumentException("Postview format should be equivalent to  the capture format!");
+        throw new IllegalArgumentException(
+                "Postview format should be equivalent to  the capture format!");
     }
 
-    public static Surface getBurstCaptureSurface(List<OutputConfiguration> outputConfigs, HashMap<Integer, List<Size>> supportedCaptureSizes) {
-        IntArray supportedCaptureOutputFormats = new IntArray(SUPPORTED_CAPTURE_OUTPUT_FORMATS.length);
+    public static Surface getBurstCaptureSurface(
+            List<OutputConfiguration> outputConfigs,
+            HashMap<Integer, List<Size>> supportedCaptureSizes) {
+        IntArray supportedCaptureOutputFormats =
+                new IntArray(SUPPORTED_CAPTURE_OUTPUT_FORMATS.length);
         supportedCaptureOutputFormats.addAll(SUPPORTED_CAPTURE_OUTPUT_FORMATS);
         if (Flags.extension10Bit()) {
             supportedCaptureOutputFormats.add(54);
@@ -103,7 +116,9 @@ public final class CameraExtensionUtils {
                 if (surfaceInfo.mFormat == supportedFormat) {
                     Size captureSize = new Size(surfaceInfo.mWidth, surfaceInfo.mHeight);
                     if (supportedCaptureSizes.containsKey(Integer.valueOf(supportedFormat))) {
-                        if (supportedCaptureSizes.get(Integer.valueOf(surfaceInfo.mFormat)).contains(captureSize)) {
+                        if (supportedCaptureSizes
+                                .get(Integer.valueOf(surfaceInfo.mFormat))
+                                .contains(captureSize)) {
                             return config.getSurface();
                         }
                         throw new IllegalArgumentException("Capture size not supported!");
@@ -115,13 +130,21 @@ public final class CameraExtensionUtils {
         return null;
     }
 
-    public static Surface getRepeatingRequestSurface(List<OutputConfiguration> outputConfigs, List<Size> supportedPreviewSizes) {
+    public static Surface getRepeatingRequestSurface(
+            List<OutputConfiguration> outputConfigs, List<Size> supportedPreviewSizes) {
         for (OutputConfiguration config : outputConfigs) {
             SurfaceInfo surfaceInfo = querySurface(config.getSurface());
-            if (surfaceInfo.mFormat == 34 || (surfaceInfo.mUsage & 2048) != 0 || surfaceInfo.mFormat == 1) {
-                Size repeatingRequestSurfaceSize = new Size(surfaceInfo.mWidth, surfaceInfo.mHeight);
-                if (supportedPreviewSizes == null || !supportedPreviewSizes.contains(repeatingRequestSurfaceSize)) {
-                    throw new IllegalArgumentException("Repeating request surface size " + repeatingRequestSurfaceSize + " not supported!");
+            if (surfaceInfo.mFormat == 34
+                    || (surfaceInfo.mUsage & 2048) != 0
+                    || surfaceInfo.mFormat == 1) {
+                Size repeatingRequestSurfaceSize =
+                        new Size(surfaceInfo.mWidth, surfaceInfo.mHeight);
+                if (supportedPreviewSizes == null
+                        || !supportedPreviewSizes.contains(repeatingRequestSurfaceSize)) {
+                    throw new IllegalArgumentException(
+                            "Repeating request surface size "
+                                    + repeatingRequestSurfaceSize
+                                    + " not supported!");
                 }
                 return config.getSurface();
             }
@@ -129,7 +152,8 @@ public final class CameraExtensionUtils {
         return null;
     }
 
-    public static Map<String, CameraMetadataNative> getCharacteristicsMapNative(Map<String, CameraCharacteristics> charsMap) {
+    public static Map<String, CameraMetadataNative> getCharacteristicsMapNative(
+            Map<String, CameraCharacteristics> charsMap) {
         HashMap<String, CameraMetadataNative> ret = new HashMap<>();
         for (Map.Entry<String, CameraCharacteristics> entry : charsMap.entrySet()) {
             ret.put(entry.getKey(), entry.getValue().getNativeMetadata());

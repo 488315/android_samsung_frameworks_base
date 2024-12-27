@@ -4,10 +4,12 @@ import java.util.function.Consumer;
 
 /* compiled from: D8$$SyntheticClass */
 /* loaded from: classes3.dex */
-public final /* synthetic */ class VoiceInteractionService$$ExternalSyntheticLambda0 implements Consumer {
+public final /* synthetic */ class VoiceInteractionService$$ExternalSyntheticLambda0
+        implements Consumer {
     public final /* synthetic */ VoiceInteractionService f$0;
 
-    public /* synthetic */ VoiceInteractionService$$ExternalSyntheticLambda0(VoiceInteractionService voiceInteractionService) {
+    public /* synthetic */ VoiceInteractionService$$ExternalSyntheticLambda0(
+            VoiceInteractionService voiceInteractionService) {
         this.f$0 = voiceInteractionService;
     }
 

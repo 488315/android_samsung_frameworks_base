@@ -5,11 +5,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface INativePermissionController extends IInterface {
-    public static final String DESCRIPTOR = "com.android.media.permission.INativePermissionController";
+    public static final String DESCRIPTOR =
+            "com.android.media.permission.INativePermissionController";
 
     void populatePackagesForUids(List<UidPackageState> list) throws RemoteException;
 
@@ -19,16 +21,14 @@ public interface INativePermissionController extends IInterface {
 
     public static class Default implements INativePermissionController {
         @Override // com.android.media.permission.INativePermissionController
-        public void populatePackagesForUids(List<UidPackageState> initialPackageStates) throws RemoteException {
-        }
+        public void populatePackagesForUids(List<UidPackageState> initialPackageStates)
+                throws RemoteException {}
 
         @Override // com.android.media.permission.INativePermissionController
-        public void updatePackagesForUid(UidPackageState newPackageState) throws RemoteException {
-        }
+        public void updatePackagesForUid(UidPackageState newPackageState) throws RemoteException {}
 
         @Override // com.android.media.permission.INativePermissionController
-        public void populatePermissionState(byte perm, int[] uids) throws RemoteException {
-        }
+        public void populatePermissionState(byte perm, int[] uids) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +36,7 @@ public interface INativePermissionController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INativePermissionController {
+    public abstract static class Stub extends Binder implements INativePermissionController {
         static final int TRANSACTION_populatePackagesForUids = 1;
         static final int TRANSACTION_populatePermissionState = 3;
         static final int TRANSACTION_updatePackagesForUid = 2;
@@ -62,7 +62,8 @@ public interface INativePermissionController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(INativePermissionController.DESCRIPTOR);
             }
@@ -72,13 +73,15 @@ public interface INativePermissionController extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<UidPackageState> _arg0 = data.createTypedArrayList(UidPackageState.CREATOR);
+                    List<UidPackageState> _arg0 =
+                            data.createTypedArrayList(UidPackageState.CREATOR);
                     data.enforceNoDataAvail();
                     populatePackagesForUids(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    UidPackageState _arg02 = (UidPackageState) data.readTypedObject(UidPackageState.CREATOR);
+                    UidPackageState _arg02 =
+                            (UidPackageState) data.readTypedObject(UidPackageState.CREATOR);
                     data.enforceNoDataAvail();
                     updatePackagesForUid(_arg02);
                     reply.writeNoException();
@@ -112,7 +115,8 @@ public interface INativePermissionController extends IInterface {
             }
 
             @Override // com.android.media.permission.INativePermissionController
-            public void populatePackagesForUids(List<UidPackageState> initialPackageStates) throws RemoteException {
+            public void populatePackagesForUids(List<UidPackageState> initialPackageStates)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -127,7 +131,8 @@ public interface INativePermissionController extends IInterface {
             }
 
             @Override // com.android.media.permission.INativePermissionController
-            public void updatePackagesForUid(UidPackageState newPackageState) throws RemoteException {
+            public void updatePackagesForUid(UidPackageState newPackageState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

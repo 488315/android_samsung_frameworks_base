@@ -1,7 +1,9 @@
 package com.android.server.devicepolicy;
 
 import android.content.pm.IPackageDeleteObserver;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.util.concurrent.CountDownLatch;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,7 +18,8 @@ public final class NonRequiredPackageDeleteObserver extends IPackageDeleteObserv
 
     public final void packageDeleted(String str, int i) {
         if (i != 1) {
-            BootReceiver$$ExternalSyntheticOutline0.m("Failed to delete package: ", str, "DevicePolicyManager");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "Failed to delete package: ", str, "DevicePolicyManager");
             this.mFailed = true;
         }
         this.mLatch.countDown();

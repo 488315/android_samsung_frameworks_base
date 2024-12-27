@@ -3,24 +3,27 @@ package android.content;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class RestrictionEntry implements Parcelable {
-    public static final Parcelable.Creator<RestrictionEntry> CREATOR = new Parcelable.Creator<RestrictionEntry>() { // from class: android.content.RestrictionEntry.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RestrictionEntry createFromParcel(Parcel source) {
-            return new RestrictionEntry(source);
-        }
+    public static final Parcelable.Creator<RestrictionEntry> CREATOR =
+            new Parcelable.Creator<
+                    RestrictionEntry>() { // from class: android.content.RestrictionEntry.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RestrictionEntry createFromParcel(Parcel source) {
+                    return new RestrictionEntry(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RestrictionEntry[] newArray(int size) {
-            return new RestrictionEntry[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RestrictionEntry[] newArray(int size) {
+                    return new RestrictionEntry[size];
+                }
+            };
     public static final int TYPE_BOOLEAN = 1;
     public static final int TYPE_BUNDLE = 7;
     public static final int TYPE_BUNDLE_ARRAY = 8;
@@ -69,14 +72,17 @@ public class RestrictionEntry implements Parcelable {
         setIntValue(selectedInt);
     }
 
-    private RestrictionEntry(String key, RestrictionEntry[] restrictionEntries, boolean isBundleArray) {
+    private RestrictionEntry(
+            String key, RestrictionEntry[] restrictionEntries, boolean isBundleArray) {
         this.mKey = key;
         if (isBundleArray) {
             this.mType = 8;
             if (restrictionEntries != null) {
                 for (RestrictionEntry restriction : restrictionEntries) {
                     if (restriction.getType() != 7) {
-                        throw new IllegalArgumentException("bundle_array restriction can only have nested restriction entries of type bundle");
+                        throw new IllegalArgumentException(
+                                "bundle_array restriction can only have nested restriction entries"
+                                        + " of type bundle");
                     }
                 }
             }
@@ -86,11 +92,13 @@ public class RestrictionEntry implements Parcelable {
         setRestrictions(restrictionEntries);
     }
 
-    public static RestrictionEntry createBundleEntry(String key, RestrictionEntry[] restrictionEntries) {
+    public static RestrictionEntry createBundleEntry(
+            String key, RestrictionEntry[] restrictionEntries) {
         return new RestrictionEntry(key, restrictionEntries, false);
     }
 
-    public static RestrictionEntry createBundleArrayEntry(String key, RestrictionEntry[] restrictionEntries) {
+    public static RestrictionEntry createBundleArrayEntry(
+            String key, RestrictionEntry[] restrictionEntries) {
         return new RestrictionEntry(key, restrictionEntries, true);
     }
 
@@ -197,13 +205,25 @@ public class RestrictionEntry implements Parcelable {
         if (this.mType != other.mType || !this.mKey.equals(other.mKey)) {
             return false;
         }
-        if (this.mCurrentValues == null && other.mCurrentValues == null && this.mRestrictions == null && other.mRestrictions == null && Objects.equals(this.mCurrentValue, other.mCurrentValue)) {
+        if (this.mCurrentValues == null
+                && other.mCurrentValues == null
+                && this.mRestrictions == null
+                && other.mRestrictions == null
+                && Objects.equals(this.mCurrentValue, other.mCurrentValue)) {
             return true;
         }
-        if (this.mCurrentValue == null && other.mCurrentValue == null && this.mRestrictions == null && other.mRestrictions == null && Arrays.equals(this.mCurrentValues, other.mCurrentValues)) {
+        if (this.mCurrentValue == null
+                && other.mCurrentValue == null
+                && this.mRestrictions == null
+                && other.mRestrictions == null
+                && Arrays.equals(this.mCurrentValues, other.mCurrentValues)) {
             return true;
         }
-        return this.mCurrentValue == null && other.mCurrentValue == null && this.mCurrentValue == null && other.mCurrentValue == null && Arrays.equals(this.mRestrictions, other.mRestrictions);
+        return this.mCurrentValue == null
+                && other.mCurrentValue == null
+                && this.mCurrentValue == null
+                && other.mCurrentValue == null
+                && Arrays.equals(this.mRestrictions, other.mRestrictions);
     }
 
     public int hashCode() {
@@ -234,7 +254,8 @@ public class RestrictionEntry implements Parcelable {
         this.mChoiceValues = in.readStringArray();
         this.mCurrentValue = in.readString();
         this.mCurrentValues = in.readStringArray();
-        Parcelable[] parcelables = (Parcelable[]) in.readParcelableArray(null, RestrictionEntry.class);
+        Parcelable[] parcelables =
+                (Parcelable[]) in.readParcelableArray(null, RestrictionEntry.class);
         if (parcelables != null) {
             this.mRestrictions = new RestrictionEntry[parcelables.length];
             for (int i = 0; i < parcelables.length; i++) {
@@ -262,6 +283,28 @@ public class RestrictionEntry implements Parcelable {
     }
 
     public String toString() {
-        return "RestrictionEntry{mType=" + this.mType + ", mKey='" + this.mKey + DateFormat.QUOTE + ", mTitle='" + this.mTitle + DateFormat.QUOTE + ", mDescription='" + this.mDescription + DateFormat.QUOTE + ", mChoiceEntries=" + Arrays.toString(this.mChoiceEntries) + ", mChoiceValues=" + Arrays.toString(this.mChoiceValues) + ", mCurrentValue='" + this.mCurrentValue + DateFormat.QUOTE + ", mCurrentValues=" + Arrays.toString(this.mCurrentValues) + ", mRestrictions=" + Arrays.toString(this.mRestrictions) + '}';
+        return "RestrictionEntry{mType="
+                + this.mType
+                + ", mKey='"
+                + this.mKey
+                + DateFormat.QUOTE
+                + ", mTitle='"
+                + this.mTitle
+                + DateFormat.QUOTE
+                + ", mDescription='"
+                + this.mDescription
+                + DateFormat.QUOTE
+                + ", mChoiceEntries="
+                + Arrays.toString(this.mChoiceEntries)
+                + ", mChoiceValues="
+                + Arrays.toString(this.mChoiceValues)
+                + ", mCurrentValue='"
+                + this.mCurrentValue
+                + DateFormat.QUOTE
+                + ", mCurrentValues="
+                + Arrays.toString(this.mCurrentValues)
+                + ", mRestrictions="
+                + Arrays.toString(this.mRestrictions)
+                + '}';
     }
 }

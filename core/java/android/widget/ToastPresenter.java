@@ -24,11 +24,14 @@ import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.IAccessibilityManager;
+
 import com.android.internal.R;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes4.dex */
@@ -54,11 +57,19 @@ public class ToastPresenter {
 
     public static View getTextToastView(Context context, CharSequence text) {
         TypedValue outValue = new TypedValue();
-        boolean isDeviceDefault = context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, outValue, true) && outValue.data != 0;
-        View view = isDeviceDefault ? LayoutInflater.from(context).inflate(17367430, (ViewGroup) null) : LayoutInflater.from(context).inflate(17367475, (ViewGroup) null);
+        boolean isDeviceDefault =
+                context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, outValue, true)
+                        && outValue.data != 0;
+        View view =
+                isDeviceDefault
+                        ? LayoutInflater.from(context).inflate(17367430, (ViewGroup) null)
+                        : LayoutInflater.from(context).inflate(17367475, (ViewGroup) null);
         TextView textView = (TextView) view.findViewById(16908299);
         textView.lambda$setTextAsync$0(text);
-        semCheckMaxFontScale(context, textView, context.getResources().getDimensionPixelSize(R.dimen.sem_toast_text_size));
+        semCheckMaxFontScale(
+                context,
+                textView,
+                context.getResources().getDimensionPixelSize(R.dimen.sem_toast_text_size));
         return view;
     }
 
@@ -76,7 +87,11 @@ public class ToastPresenter {
         return view;
     }
 
-    public ToastPresenter(Context context, IAccessibilityManager accessibilityManager, INotificationManager notificationManager, String packageName) {
+    public ToastPresenter(
+            Context context,
+            IAccessibilityManager accessibilityManager,
+            INotificationManager notificationManager,
+            String packageName) {
         this.mContext = new WeakReference<>(context);
         this.mResources = context.getResources();
         this.mNotificationManager = notificationManager;
@@ -117,7 +132,16 @@ public class ToastPresenter {
         return params;
     }
 
-    private void adjustLayoutParams(WindowManager.LayoutParams params, IBinder windowToken, int duration, int gravity, int xOffset, int yOffset, float horizontalMargin, float verticalMargin, boolean removeWindowAnimations) {
+    private void adjustLayoutParams(
+            WindowManager.LayoutParams params,
+            IBinder windowToken,
+            int duration,
+            int gravity,
+            int xOffset,
+            int yOffset,
+            float horizontalMargin,
+            float verticalMargin,
+            boolean removeWindowAnimations) {
         Configuration config = this.mResources.getConfiguration();
         int absGravity = Gravity.getAbsoluteGravity(gravity, config.getLayoutDirection());
         params.gravity = absGravity;
@@ -132,15 +156,18 @@ public class ToastPresenter {
         params.horizontalMargin = horizontalMargin;
         params.verticalMargin = verticalMargin;
         params.packageName = this.mContextPackageName;
-        params.hideTimeoutMilliseconds = duration == 1 ? LONG_DURATION_TIMEOUT : SHORT_DURATION_TIMEOUT;
+        params.hideTimeoutMilliseconds =
+                duration == 1 ? LONG_DURATION_TIMEOUT : SHORT_DURATION_TIMEOUT;
         params.token = windowToken;
         if (removeWindowAnimations && params.windowAnimations == 16973828) {
             params.windowAnimations = 0;
         }
     }
 
-    public void updateLayoutParams(int xOffset, int yOffset, float horizontalMargin, float verticalMargin, int gravity) {
-        Preconditions.checkState(this.mView != null, "Toast must be showing to update its layout parameters.");
+    public void updateLayoutParams(
+            int xOffset, int yOffset, float horizontalMargin, float verticalMargin, int gravity) {
+        Preconditions.checkState(
+                this.mView != null, "Toast must be showing to update its layout parameters.");
         Configuration config = this.mResources.getConfiguration();
         this.mParams.gravity = Gravity.getAbsoluteGravity(gravity, config.getLayoutDirection());
         this.mParams.x = xOffset;
@@ -150,7 +177,8 @@ public class ToastPresenter {
         this.mView.setLayoutParams(this.mParams);
     }
 
-    private void setShowForAllUsersIfApplicable(WindowManager.LayoutParams params, String packageName) {
+    private void setShowForAllUsersIfApplicable(
+            WindowManager.LayoutParams params, String packageName) {
         if (isCrossUserPackage(packageName)) {
             params.privateFlags = 16;
         }
@@ -161,19 +189,54 @@ public class ToastPresenter {
         return ArrayUtils.contains(packages, packageName);
     }
 
-    public void show(View view, IBinder token, IBinder windowToken, int duration, int gravity, int xOffset, int yOffset, float horizontalMargin, float verticalMargin, ITransientNotificationCallback callback) {
-        show(view, token, windowToken, duration, gravity, xOffset, yOffset, horizontalMargin, verticalMargin, callback, false);
+    public void show(
+            View view,
+            IBinder token,
+            IBinder windowToken,
+            int duration,
+            int gravity,
+            int xOffset,
+            int yOffset,
+            float horizontalMargin,
+            float verticalMargin,
+            ITransientNotificationCallback callback) {
+        show(
+                view,
+                token,
+                windowToken,
+                duration,
+                gravity,
+                xOffset,
+                yOffset,
+                horizontalMargin,
+                verticalMargin,
+                callback,
+                false);
     }
 
-    public void show(View view, IBinder token, IBinder windowToken, int duration, int gravity, int xOffset, int yOffset, float horizontalMargin, float verticalMargin, ITransientNotificationCallback callback, boolean removeWindowAnimations) {
+    public void show(
+            View view,
+            IBinder token,
+            IBinder windowToken,
+            int duration,
+            int gravity,
+            int xOffset,
+            int yOffset,
+            float horizontalMargin,
+            float verticalMargin,
+            ITransientNotificationCallback callback,
+            boolean removeWindowAnimations) {
         boolean isDeskTopMode;
         int yOffset2;
         int yOffset3;
         boolean z = false;
-        Preconditions.checkState(this.mView == null, "Only one toast at a time is allowed, call hide() first.");
+        Preconditions.checkState(
+                this.mView == null, "Only one toast at a time is allowed, call hide() first.");
         this.mView = view;
         this.mToken = token;
-        SemDesktopModeManager desktopModeManager = (SemDesktopModeManager) this.mContext.get().getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
+        SemDesktopModeManager desktopModeManager =
+                (SemDesktopModeManager)
+                        this.mContext.get().getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
         if (desktopModeManager == null) {
             isDeskTopMode = false;
         } else {
@@ -197,14 +260,26 @@ public class ToastPresenter {
             yOffset3 = yOffset4;
         }
         semPrintDebugMessage(this.mView);
-        adjustLayoutParams(this.mParams, windowToken, duration, gravity, xOffset, yOffset3, horizontalMargin, verticalMargin, removeWindowAnimations);
+        adjustLayoutParams(
+                this.mParams,
+                windowToken,
+                duration,
+                gravity,
+                xOffset,
+                yOffset3,
+                horizontalMargin,
+                verticalMargin,
+                removeWindowAnimations);
         addToastView();
         trySendAccessibilityEvent(this.mView, this.mPackageName);
         if (callback != null) {
             try {
                 callback.onToastShown();
             } catch (RemoteException e) {
-                Log.w(TAG, "Error calling back " + this.mPackageName + " to notify onToastShow()", e);
+                Log.w(
+                        TAG,
+                        "Error calling back " + this.mPackageName + " to notify onToastShow()",
+                        e);
             }
         }
     }
@@ -224,7 +299,10 @@ public class ToastPresenter {
             try {
                 callback.onToastHidden();
             } catch (RemoteException e2) {
-                Log.w(TAG, "Error calling back " + this.mPackageName + " to notify onToastHide()", e2);
+                Log.w(
+                        TAG,
+                        "Error calling back " + this.mPackageName + " to notify onToastHide()",
+                        e2);
             }
         }
         this.mView = null;
@@ -247,7 +325,9 @@ public class ToastPresenter {
         if (context == null) {
             return;
         }
-        AccessibilityManager accessibilityManager = new AccessibilityManager(context, this.mAccessibilityManagerService, context.getUserId());
+        AccessibilityManager accessibilityManager =
+                new AccessibilityManager(
+                        context, this.mAccessibilityManagerService, context.getUserId());
         if (!accessibilityManager.isEnabled()) {
             accessibilityManager.removeClient();
             return;
@@ -279,16 +359,26 @@ public class ToastPresenter {
         } catch (WindowManager.BadTokenException e) {
             Log.w(TAG, "Error while attempting to show toast from " + this.mPackageName, e);
         } catch (WindowManager.InvalidDisplayException e2) {
-            Log.w(TAG, "Cannot show toast from " + this.mPackageName + " on display it was scheduled on.", e2);
+            Log.w(
+                    TAG,
+                    "Cannot show toast from "
+                            + this.mPackageName
+                            + " on display it was scheduled on.",
+                    e2);
         }
     }
 
     private int semGetNavigationBarHeight() {
-        boolean hasNavigationBar = this.mView.getContext().getResources().getBoolean(R.bool.config_showNavigationBar);
+        boolean hasNavigationBar =
+                this.mView.getContext().getResources().getBoolean(R.bool.config_showNavigationBar);
         if (!hasNavigationBar) {
             return 0;
         }
-        int navigationBarHeight = this.mView.getContext().getResources().getDimensionPixelSize(R.dimen.navigation_bar_height);
+        int navigationBarHeight =
+                this.mView
+                        .getContext()
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.navigation_bar_height);
         return navigationBarHeight;
     }
 
@@ -300,15 +390,23 @@ public class ToastPresenter {
         }
         Context context = this.mContext.get();
         this.mContext.get();
-        FingerprintManager fpm = (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
+        FingerprintManager fpm =
+                (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
         boolean isFingerPrintInDisplay = false;
         int fingerIconHeight = 0;
-        int mFingerOffsetY = this.mContext.get().getResources().getDimensionPixelSize(R.dimen.sem_toast_fingerPrint_y_offset);
+        int mFingerOffsetY =
+                this.mContext
+                        .get()
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.sem_toast_fingerPrint_y_offset);
         if (fpm != null) {
             fingerIconHeight = fpm.semGetIconBottomMargin();
             isFingerPrintInDisplay = FingerprintManager.semGetSensorPosition() == 2;
         }
-        if (!isFingerPrintInDisplay || fingerIconHeight <= 0 || defaultOffsetY != yOffset || defaultGravity != gravity) {
+        if (!isFingerPrintInDisplay
+                || fingerIconHeight <= 0
+                || defaultOffsetY != yOffset
+                || defaultGravity != gravity) {
             return yOffset;
         }
         int adjustedYOffset = (fingerIconHeight + mFingerOffsetY) - semGetNavigationBarHeight();
@@ -322,9 +420,21 @@ public class ToastPresenter {
             if (text.length() > 0) {
                 char firstChar = (char) (text.charAt(0) + 1);
                 if (text.length() > 3) {
-                    Log.v(TAG, "Text: " + firstChar + ((Object) text.subSequence(1, 4)) + " in " + this);
+                    Log.v(
+                            TAG,
+                            "Text: "
+                                    + firstChar
+                                    + ((Object) text.subSequence(1, 4))
+                                    + " in "
+                                    + this);
                 } else {
-                    Log.v(TAG, "Text: " + firstChar + ((Object) text.subSequence(1, text.length())) + " in " + this);
+                    Log.v(
+                            TAG,
+                            "Text: "
+                                    + firstChar
+                                    + ((Object) text.subSequence(1, text.length()))
+                                    + " in "
+                                    + this);
                 }
             }
         }

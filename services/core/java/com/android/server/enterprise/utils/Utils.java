@@ -18,6 +18,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
@@ -31,10 +32,12 @@ import com.android.server.enterprise.adapter.IPersonaManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PackageManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -56,10 +59,74 @@ import java.util.List;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class Utils {
-    public static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-    public static final String[] standardPermissions = {"com.samsung.android.knox.permission.KNOX_APN", "com.samsung.android.knox.permission.KNOX_INVENTORY", "com.samsung.android.knox.permission.KNOX_APP_MGMT", "com.samsung.android.knox.permission.KNOX_KIOSK_MODE", "com.samsung.android.knox.permission.KNOX_BLUETOOTH", "com.samsung.android.knox.permission.KNOX_LDAP", "com.samsung.android.knox.permission.KNOX_BLUETOOTH_SECUREMODE", "com.samsung.android.knox.permission.KNOX_LOCATION", "com.samsung.android.knox.permission.KNOX_BROWSER_PROXY", "com.samsung.android.knox.permission.KNOX_LOCKSCREEN", "com.samsung.android.knox.permission.KNOX_BROWSER_SETTINGS", "com.samsung.android.knox.permission.KNOX_MULTI_USER_MGMT", "com.samsung.android.knox.permission.KNOX_CERT_PROVISIONING", "com.samsung.android.knox.permission.KNOX_PHONE_RESTRICTION", "com.samsung.android.knox.permission.KNOX_CLIPBOARD", "com.samsung.android.knox.permission.KNOX_DATE_TIME", "com.samsung.android.knox.permission.KNOX_REMOTE_CONTROL", KnoxCustomManagerService.KNOX_DEX_PERMISSION, "com.samsung.android.knox.permission.KNOX_RESTRICTION_MGMT", "com.samsung.android.knox.permission.KNOX_EMAIL", "com.samsung.android.knox.permission.KNOX_ROAMING", "com.samsung.android.knox.permission.KNOX_ENTERPRISE_DEVICE_ADMIN", "com.samsung.android.knox.permission.KNOX_SECURITY", "com.samsung.android.knox.permission.KNOX_EXCHANGE", "com.samsung.android.knox.permission.KNOX_SENSITIVE_DATA_PROTECTION", "com.samsung.android.knox.permission.KNOX_FIREWALL", "com.samsung.android.knox.permission.KNOX_SPDCONTROL", "com.samsung.android.knox.permission.KNOX_GEOFENCING", "com.samsung.android.knox.permission.KNOX_VPN", "com.samsung.android.knox.permission.KNOX_GLOBALPROXY", "com.samsung.android.knox.permission.KNOX_WIFI", "com.samsung.android.knox.permission.KNOX_HW_CONTROL", "com.samsung.android.knox.permission.KNOX_ENHANCED_ATTESTATION"};
-    public static final String[] premiumPermissions = {"com.samsung.android.knox.permission.KNOX_ADVANCED_APP_MGMT", "com.samsung.android.knox.permission.KNOX_DLP_MGMT", "com.samsung.android.knox.permission.KNOX_ADVANCED_RESTRICTION", "com.samsung.android.knox.permission.KNOX_EBILLING", "com.samsung.android.knox.permission.KNOX_ADVANCED_SECURITY", "com.samsung.android.knox.permission.KNOX_NPA", "com.samsung.android.knox.permission.KNOX_AUDIT_LOG", "com.samsung.android.knox.permission.KNOX_SEAMS_MGMT", "com.samsung.android.knox.permission.KNOX_CCM_KEYSTORE", "com.samsung.android.knox.permission.KNOX_TIMA_KEYSTORE", "com.samsung.android.knox.permission.KNOX_CERTIFICATE", "com.samsung.android.knox.permission.KNOX_TIMA_KEYSTORE_PER_APP", "com.samsung.android.knox.permission.KNOX_CERTIFICATE_ENROLLMENT", "com.samsung.android.knox.permission.KNOX_UCM_MGMT", "com.samsung.android.knox.permission.KNOX_CONTAINER", "com.samsung.android.knox.permission.KNOX_VPN_CONTAINER", "com.samsung.android.knox.permission.KNOX_CONTAINER_RCP", "com.samsung.android.knox.permission.KNOX_VPN_GENERIC", "com.samsung.android.knox.permission.KNOX_MOBILE_THREAT_DEFENSE", "com.samsung.android.knox.permission.KNOX_DEVICE_CONFIGURATION", "com.samsung.android.knox.permission.KNOX_HDM", "com.samsung.android.knox.permission.KNOX_CRITICAL_COMMUNICATIONS"};
-    public static final String[] customPermissions = {"com.samsung.android.knox.permission.CUSTOM_PROKIOSK", "com.samsung.android.knox.permission.CUSTOM_SETTING", "com.samsung.android.knox.permission.CUSTOM_SYSTEM", KnoxCustomManagerService.KNOX_CUSTOM_DEX_PERMISSION};
+    public static final char[] HEX_DIGITS = {
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+    };
+    public static final String[] standardPermissions = {
+        "com.samsung.android.knox.permission.KNOX_APN",
+        "com.samsung.android.knox.permission.KNOX_INVENTORY",
+        "com.samsung.android.knox.permission.KNOX_APP_MGMT",
+        "com.samsung.android.knox.permission.KNOX_KIOSK_MODE",
+        "com.samsung.android.knox.permission.KNOX_BLUETOOTH",
+        "com.samsung.android.knox.permission.KNOX_LDAP",
+        "com.samsung.android.knox.permission.KNOX_BLUETOOTH_SECUREMODE",
+        "com.samsung.android.knox.permission.KNOX_LOCATION",
+        "com.samsung.android.knox.permission.KNOX_BROWSER_PROXY",
+        "com.samsung.android.knox.permission.KNOX_LOCKSCREEN",
+        "com.samsung.android.knox.permission.KNOX_BROWSER_SETTINGS",
+        "com.samsung.android.knox.permission.KNOX_MULTI_USER_MGMT",
+        "com.samsung.android.knox.permission.KNOX_CERT_PROVISIONING",
+        "com.samsung.android.knox.permission.KNOX_PHONE_RESTRICTION",
+        "com.samsung.android.knox.permission.KNOX_CLIPBOARD",
+        "com.samsung.android.knox.permission.KNOX_DATE_TIME",
+        "com.samsung.android.knox.permission.KNOX_REMOTE_CONTROL",
+        KnoxCustomManagerService.KNOX_DEX_PERMISSION,
+        "com.samsung.android.knox.permission.KNOX_RESTRICTION_MGMT",
+        "com.samsung.android.knox.permission.KNOX_EMAIL",
+        "com.samsung.android.knox.permission.KNOX_ROAMING",
+        "com.samsung.android.knox.permission.KNOX_ENTERPRISE_DEVICE_ADMIN",
+        "com.samsung.android.knox.permission.KNOX_SECURITY",
+        "com.samsung.android.knox.permission.KNOX_EXCHANGE",
+        "com.samsung.android.knox.permission.KNOX_SENSITIVE_DATA_PROTECTION",
+        "com.samsung.android.knox.permission.KNOX_FIREWALL",
+        "com.samsung.android.knox.permission.KNOX_SPDCONTROL",
+        "com.samsung.android.knox.permission.KNOX_GEOFENCING",
+        "com.samsung.android.knox.permission.KNOX_VPN",
+        "com.samsung.android.knox.permission.KNOX_GLOBALPROXY",
+        "com.samsung.android.knox.permission.KNOX_WIFI",
+        "com.samsung.android.knox.permission.KNOX_HW_CONTROL",
+        "com.samsung.android.knox.permission.KNOX_ENHANCED_ATTESTATION"
+    };
+    public static final String[] premiumPermissions = {
+        "com.samsung.android.knox.permission.KNOX_ADVANCED_APP_MGMT",
+        "com.samsung.android.knox.permission.KNOX_DLP_MGMT",
+        "com.samsung.android.knox.permission.KNOX_ADVANCED_RESTRICTION",
+        "com.samsung.android.knox.permission.KNOX_EBILLING",
+        "com.samsung.android.knox.permission.KNOX_ADVANCED_SECURITY",
+        "com.samsung.android.knox.permission.KNOX_NPA",
+        "com.samsung.android.knox.permission.KNOX_AUDIT_LOG",
+        "com.samsung.android.knox.permission.KNOX_SEAMS_MGMT",
+        "com.samsung.android.knox.permission.KNOX_CCM_KEYSTORE",
+        "com.samsung.android.knox.permission.KNOX_TIMA_KEYSTORE",
+        "com.samsung.android.knox.permission.KNOX_CERTIFICATE",
+        "com.samsung.android.knox.permission.KNOX_TIMA_KEYSTORE_PER_APP",
+        "com.samsung.android.knox.permission.KNOX_CERTIFICATE_ENROLLMENT",
+        "com.samsung.android.knox.permission.KNOX_UCM_MGMT",
+        "com.samsung.android.knox.permission.KNOX_CONTAINER",
+        "com.samsung.android.knox.permission.KNOX_VPN_CONTAINER",
+        "com.samsung.android.knox.permission.KNOX_CONTAINER_RCP",
+        "com.samsung.android.knox.permission.KNOX_VPN_GENERIC",
+        "com.samsung.android.knox.permission.KNOX_MOBILE_THREAT_DEFENSE",
+        "com.samsung.android.knox.permission.KNOX_DEVICE_CONFIGURATION",
+        "com.samsung.android.knox.permission.KNOX_HDM",
+        "com.samsung.android.knox.permission.KNOX_CRITICAL_COMMUNICATIONS"
+    };
+    public static final String[] customPermissions = {
+        "com.samsung.android.knox.permission.CUSTOM_PROKIOSK",
+        "com.samsung.android.knox.permission.CUSTOM_SETTING",
+        "com.samsung.android.knox.permission.CUSTOM_SYSTEM",
+        KnoxCustomManagerService.KNOX_CUSTOM_DEX_PERMISSION
+    };
     public static final int MY_PID = Process.myPid();
 
     /* JADX WARN: Removed duplicated region for block: B:15:0x004b  */
@@ -70,7 +137,8 @@ public abstract class Utils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean comparePackageSignature(int r7, android.content.Context r8, java.lang.String r9, java.lang.String r10) {
+    public static boolean comparePackageSignature(
+            int r7, android.content.Context r8, java.lang.String r9, java.lang.String r10) {
         /*
             r0 = 0
             if (r10 == 0) goto L8a
@@ -161,7 +229,10 @@ public abstract class Utils {
             android.util.Log.d(r7, r8)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.utils.Utils.comparePackageSignature(int, android.content.Context, java.lang.String, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.utils.Utils.comparePackageSignature(int,"
+                    + " android.content.Context, java.lang.String, java.lang.String):boolean");
     }
 
     public static boolean compareSystemSignature(Context context, Signature[] signatureArr) {
@@ -191,7 +262,9 @@ public abstract class Utils {
     }
 
     public static List convertStringToList(String str) {
-        return !TextUtils.isEmpty(str) ? new ArrayList(Arrays.asList(str.split(","))) : new ArrayList();
+        return !TextUtils.isEmpty(str)
+                ? new ArrayList(Arrays.asList(str.split(",")))
+                : new ArrayList();
     }
 
     public static Context createContextAsUser(Context context, String str, int i, int i2) {
@@ -201,7 +274,9 @@ public abstract class Utils {
             try {
                 return context.createPackageContextAsUser(str, i, new UserHandle(i2));
             } catch (PackageManager.NameNotFoundException e) {
-                Log.e("EnterpriseUtils", "Package name " + str + " could not be found! " + e.getMessage());
+                Log.e(
+                        "EnterpriseUtils",
+                        "Package name " + str + " could not be found! " + e.getMessage());
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return null;
             }
@@ -212,7 +287,8 @@ public abstract class Utils {
 
     public static Object deserializeObject(byte[] bArr) {
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(bArr));
+            ObjectInputStream objectInputStream =
+                    new ObjectInputStream(new ByteArrayInputStream(bArr));
             Object readObject = objectInputStream.readObject();
             objectInputStream.close();
             return readObject;
@@ -222,8 +298,11 @@ public abstract class Utils {
     }
 
     public static int getAdminUidForEthernetOnly(EdmStorageProvider edmStorageProvider) {
-        int adminByField = edmStorageProvider.getAdminByField("DEX_POLICY", "ethernetOnlyEnabled", Integer.toString(1));
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(adminByField, "getAdminUidForEthernetOnly - ", "EnterpriseUtils");
+        int adminByField =
+                edmStorageProvider.getAdminByField(
+                        "DEX_POLICY", "ethernetOnlyEnabled", Integer.toString(1));
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                adminByField, "getAdminUidForEthernetOnly - ", "EnterpriseUtils");
         return adminByField;
     }
 
@@ -235,7 +314,9 @@ public abstract class Utils {
             try {
                 Iterator it = userManager.getUsers().iterator();
                 while (it.hasNext()) {
-                    arrayList.add(Integer.valueOf(((UserInfo) it.next()).getUserHandle().getIdentifier()));
+                    arrayList.add(
+                            Integer.valueOf(
+                                    ((UserInfo) it.next()).getUserHandle().getIdentifier()));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -301,7 +382,9 @@ public abstract class Utils {
                     break;
                 }
                 byte[] encodedPubKey = getEncodedPubKey(signatureArr[i]);
-                if (encodedPubKey != null && (digest = MessageDigest.getInstance("SHA-256").digest(encodedPubKey)) != null) {
+                if (encodedPubKey != null
+                        && (digest = MessageDigest.getInstance("SHA-256").digest(encodedPubKey))
+                                != null) {
                     StringBuilder sb = new StringBuilder(digest.length * 2);
                     for (int i2 = 0; i2 < digest.length; i2++) {
                         String hexString = Integer.toHexString(digest[i2]);
@@ -332,11 +415,16 @@ public abstract class Utils {
         if (contextInfo.mParent) {
             return 0;
         }
-        IPersonaManagerAdapter iPersonaManagerAdapter = (IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
+        IPersonaManagerAdapter iPersonaManagerAdapter =
+                (IPersonaManagerAdapter)
+                        AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
         int i = contextInfo.mContainerId;
         ((PersonaManagerAdapter) iPersonaManagerAdapter).getClass();
         if (SemPersonaManager.isKnoxId(i)) {
-            GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("getCallingOrCurrentUserId(): move: cxtInfo.mContainerId = "), contextInfo.mContainerId, "EnterpriseUtils");
+            GestureWakeup$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("getCallingOrCurrentUserId(): move: cxtInfo.mContainerId = "),
+                    contextInfo.mContainerId,
+                    "EnterpriseUtils");
             return contextInfo.mContainerId;
         }
         if (MY_PID != Binder.getCallingPid()) {
@@ -356,18 +444,30 @@ public abstract class Utils {
         }
         if (contextInfo.mParent) {
             int i = EnterpriseDeviceManagerService.$r8$clinit;
-            return ((EnterpriseDeviceManagerServiceImpl) ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance)).mPseudoAdminUid;
+            return ((EnterpriseDeviceManagerServiceImpl)
+                            ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance))
+                    .mPseudoAdminUid;
         }
-        IPersonaManagerAdapter iPersonaManagerAdapter = (IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
+        IPersonaManagerAdapter iPersonaManagerAdapter =
+                (IPersonaManagerAdapter)
+                        AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
         int i2 = contextInfo.mContainerId;
         ((PersonaManagerAdapter) iPersonaManagerAdapter).getClass();
-        return SemPersonaManager.isKnoxId(i2) ? UserHandle.getUid(contextInfo.mContainerId, contextInfo.mCallerUid) : contextInfo.mCallerUid;
+        return SemPersonaManager.isKnoxId(i2)
+                ? UserHandle.getUid(contextInfo.mContainerId, contextInfo.mCallerUid)
+                : contextInfo.mCallerUid;
     }
 
     public static byte[] getEncodedPubKey(Signature signature) {
         Certificate generateCertificate;
         PublicKey publicKey;
-        if (signature == null || (generateCertificate = CertificateFactory.getInstance("X.509").generateCertificate(new ByteArrayInputStream(signature.toByteArray()))) == null || (publicKey = generateCertificate.getPublicKey()) == null) {
+        if (signature == null
+                || (generateCertificate =
+                                CertificateFactory.getInstance("X.509")
+                                        .generateCertificate(
+                                                new ByteArrayInputStream(signature.toByteArray())))
+                        == null
+                || (publicKey = generateCertificate.getPublicKey()) == null) {
             return null;
         }
         return publicKey.getEncoded();
@@ -377,18 +477,31 @@ public abstract class Utils {
         Integer asInteger;
         ContentValues contentValues = new ContentValues();
         contentValues.put("proxyUid", Integer.valueOf(i));
-        ArrayList arrayList = (ArrayList) edmStorageProvider.getValues("PROXY_ADMIN_INFO", new String[]{"adminUid"}, contentValues);
-        return (arrayList.isEmpty() || (asInteger = ((ContentValues) arrayList.get(0)).getAsInteger("adminUid")) == null) ? i : asInteger.intValue();
+        ArrayList arrayList =
+                (ArrayList)
+                        edmStorageProvider.getValues(
+                                "PROXY_ADMIN_INFO", new String[] {"adminUid"}, contentValues);
+        return (arrayList.isEmpty()
+                        || (asInteger = ((ContentValues) arrayList.get(0)).getAsInteger("adminUid"))
+                                == null)
+                ? i
+                : asInteger.intValue();
     }
 
     public static boolean hasPermission(Context context, String str, String[] strArr) {
         for (String str2 : strArr) {
-            if (context != null && str != null && !str.isEmpty() && str2 != null && !str2.isEmpty()) {
+            if (context != null
+                    && str != null
+                    && !str.isEmpty()
+                    && str2 != null
+                    && !str2.isEmpty()) {
                 IPackageManager packageManager = AppGlobals.getPackageManager();
                 int callingUid = Binder.getCallingUid();
                 if (packageManager != null) {
                     try {
-                        if (packageManager.checkPermission(str2, str, UserHandle.getUserId(callingUid)) == 0) {
+                        if (packageManager.checkPermission(
+                                        str2, str, UserHandle.getUserId(callingUid))
+                                == 0) {
                             return true;
                         }
                     } catch (RemoteException e) {
@@ -403,14 +516,19 @@ public abstract class Utils {
     }
 
     public static boolean isDexActivated(Context context) {
-        SemDesktopModeManager semDesktopModeManager = (SemDesktopModeManager) context.getSystemService("desktopmode");
-        return semDesktopModeManager != null && semDesktopModeManager.getDesktopModeState().enabled == 4;
+        SemDesktopModeManager semDesktopModeManager =
+                (SemDesktopModeManager) context.getSystemService("desktopmode");
+        return semDesktopModeManager != null
+                && semDesktopModeManager.getDesktopModeState().enabled == 4;
     }
 
     public static boolean isEthernetOnlyApplied(EdmStorageProvider edmStorageProvider) {
         boolean z = false;
         try {
-            Iterator it = edmStorageProvider.getBooleanListAsUser(0, "DEX_POLICY", "ethernetOnlyApplied").iterator();
+            Iterator it =
+                    edmStorageProvider
+                            .getBooleanListAsUser(0, "DEX_POLICY", "ethernetOnlyApplied")
+                            .iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -421,9 +539,11 @@ public abstract class Utils {
                 }
             }
         } catch (Exception e) {
-            OomAdjuster$$ExternalSyntheticOutline0.m(e, new StringBuilder("isEthernetOnlyApplied : failed "), "EnterpriseUtils");
+            OomAdjuster$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("isEthernetOnlyApplied : failed "), "EnterpriseUtils");
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isEthernetOnlyApplied - ", "EnterpriseUtils", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isEthernetOnlyApplied - ", "EnterpriseUtils", z);
         return z;
     }
 
@@ -544,11 +664,15 @@ public abstract class Utils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void writePropertyValue(java.lang.String r11, java.lang.String r12, java.lang.String r13) {
+    public static void writePropertyValue(
+            java.lang.String r11, java.lang.String r12, java.lang.String r13) {
         /*
             Method dump skipped, instructions count: 250
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.utils.Utils.writePropertyValue(java.lang.String, java.lang.String, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.utils.Utils.writePropertyValue(java.lang.String,"
+                    + " java.lang.String, java.lang.String):void");
     }
 }

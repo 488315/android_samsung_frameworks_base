@@ -8,19 +8,20 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes.dex */
 public final class ActivityId implements Parcelable {
-    public static final Parcelable.Creator<ActivityId> CREATOR = new Parcelable.Creator<ActivityId>() { // from class: android.app.assist.ActivityId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityId createFromParcel(Parcel parcel) {
-            return new ActivityId(parcel);
-        }
+    public static final Parcelable.Creator<ActivityId> CREATOR =
+            new Parcelable.Creator<ActivityId>() { // from class: android.app.assist.ActivityId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityId createFromParcel(Parcel parcel) {
+                    return new ActivityId(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityId[] newArray(int size) {
-            return new ActivityId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityId[] newArray(int size) {
+                    return new ActivityId[size];
+                }
+            };
     private final IBinder mActivityId;
     private final int mTaskId;
 
@@ -54,7 +55,11 @@ public final class ActivityId implements Parcelable {
     }
 
     public String toString() {
-        return "ActivityId { taskId = " + this.mTaskId + ", activityId = " + this.mActivityId + " }";
+        return "ActivityId { taskId = "
+                + this.mTaskId
+                + ", activityId = "
+                + this.mActivityId
+                + " }";
     }
 
     public boolean equals(Object o) {

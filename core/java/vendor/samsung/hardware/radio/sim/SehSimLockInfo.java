@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehSimLockInfo implements Parcelable {
-    public static final Parcelable.Creator<SehSimLockInfo> CREATOR = new Parcelable.Creator<SehSimLockInfo>() { // from class: vendor.samsung.hardware.radio.sim.SehSimLockInfo.1
-        @Override // android.os.Parcelable.Creator
-        public SehSimLockInfo createFromParcel(Parcel _aidl_source) {
-            SehSimLockInfo _aidl_out = new SehSimLockInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSimLockInfo> CREATOR =
+            new Parcelable.Creator<
+                    SehSimLockInfo>() { // from class:
+                                        // vendor.samsung.hardware.radio.sim.SehSimLockInfo.1
+                @Override // android.os.Parcelable.Creator
+                public SehSimLockInfo createFromParcel(Parcel _aidl_source) {
+                    SehSimLockInfo _aidl_out = new SehSimLockInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSimLockInfo[] newArray(int _aidl_size) {
-            return new SehSimLockInfo[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSimLockInfo[] newArray(int _aidl_size) {
+                    return new SehSimLockInfo[_aidl_size];
+                }
+            };
     public int numberOfLockTypes = 0;
     public int lockType = 0;
     public int lockKey = 0;

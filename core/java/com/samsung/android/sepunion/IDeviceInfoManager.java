@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -19,67 +20,111 @@ public interface IDeviceInfoManager extends IInterface {
 
     int getNumPendingIntentAsUser(int i, String str, int i2) throws RemoteException;
 
-    void registerPendingIntent(IntentFilter intentFilter, PendingIntent pendingIntent, int i, List<String> list, String str, int i2) throws RemoteException;
+    void registerPendingIntent(
+            IntentFilter intentFilter,
+            PendingIntent pendingIntent,
+            int i,
+            List<String> list,
+            String str,
+            int i2)
+            throws RemoteException;
 
-    void registerPendingIntentForCustomEventAsUser(String str, PendingIntent pendingIntent, Bundle bundle, String str2, int i) throws RemoteException;
+    void registerPendingIntentForCustomEventAsUser(
+            String str, PendingIntent pendingIntent, Bundle bundle, String str2, int i)
+            throws RemoteException;
 
-    void registerPendingIntentForIntentAsUser(IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i) throws RemoteException;
+    void registerPendingIntentForIntentAsUser(
+            IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i)
+            throws RemoteException;
 
-    void registerPendingIntentForIntentForAllUsers(IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i) throws RemoteException;
+    void registerPendingIntentForIntentForAllUsers(
+            IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i)
+            throws RemoteException;
 
-    void registerPendingIntentForUriAsUser(Uri uri, PendingIntent pendingIntent, String str, int i) throws RemoteException;
+    void registerPendingIntentForUriAsUser(Uri uri, PendingIntent pendingIntent, String str, int i)
+            throws RemoteException;
 
-    void unregisterPendingIntent(IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i) throws RemoteException;
+    void unregisterPendingIntent(
+            IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i)
+            throws RemoteException;
 
-    void unregisterPendingIntentForCustomEventAsUser(String str, PendingIntent pendingIntent, Bundle bundle, String str2, int i) throws RemoteException;
+    void unregisterPendingIntentForCustomEventAsUser(
+            String str, PendingIntent pendingIntent, Bundle bundle, String str2, int i)
+            throws RemoteException;
 
-    void unregisterPendingIntentForIntentAsUser(IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i) throws RemoteException;
+    void unregisterPendingIntentForIntentAsUser(
+            IntentFilter intentFilter, PendingIntent pendingIntent, String str, int i)
+            throws RemoteException;
 
-    void unregisterPendingIntentForUriAsUser(Uri uri, PendingIntent pendingIntent, String str, int i) throws RemoteException;
+    void unregisterPendingIntentForUriAsUser(
+            Uri uri, PendingIntent pendingIntent, String str, int i) throws RemoteException;
 
     public static class Default implements IDeviceInfoManager {
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void registerPendingIntentForUriAsUser(Uri uri, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
-        }
+        public void registerPendingIntentForUriAsUser(
+                Uri uri, PendingIntent intent, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void registerPendingIntentForIntentAsUser(IntentFilter filter, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
-        }
+        public void registerPendingIntentForIntentAsUser(
+                IntentFilter filter, PendingIntent intent, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void registerPendingIntentForIntentForAllUsers(IntentFilter filter, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
-        }
+        public void registerPendingIntentForIntentForAllUsers(
+                IntentFilter filter, PendingIntent intent, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void registerPendingIntent(IntentFilter filter, PendingIntent pendingIntent, int flag, List<String> conditions, String callingPackage, int userId) throws RemoteException {
-        }
+        public void registerPendingIntent(
+                IntentFilter filter,
+                PendingIntent pendingIntent,
+                int flag,
+                List<String> conditions,
+                String callingPackage,
+                int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void unregisterPendingIntent(IntentFilter filter, PendingIntent pendingIntent, String callingPackage, int userId) throws RemoteException {
-        }
+        public void unregisterPendingIntent(
+                IntentFilter filter, PendingIntent pendingIntent, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void registerPendingIntentForCustomEventAsUser(String event, PendingIntent intent, Bundle bundle, String callingPackage, int userId) throws RemoteException {
-        }
+        public void registerPendingIntentForCustomEventAsUser(
+                String event,
+                PendingIntent intent,
+                Bundle bundle,
+                String callingPackage,
+                int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void unregisterPendingIntentForUriAsUser(Uri uri, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
-        }
+        public void unregisterPendingIntentForUriAsUser(
+                Uri uri, PendingIntent intent, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void unregisterPendingIntentForIntentAsUser(IntentFilter filter, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
-        }
+        public void unregisterPendingIntentForIntentAsUser(
+                IntentFilter filter, PendingIntent intent, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void unregisterPendingIntentForCustomEventAsUser(String event, PendingIntent intent, Bundle bundle, String callingPackage, int userId) throws RemoteException {
-        }
+        public void unregisterPendingIntentForCustomEventAsUser(
+                String event,
+                PendingIntent intent,
+                Bundle bundle,
+                String callingPackage,
+                int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public void clearPendingIntentAsUser(String callingPackage, int userId) throws RemoteException {
-        }
+        public void clearPendingIntentAsUser(String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IDeviceInfoManager
-        public int getNumPendingIntentAsUser(int type, String callingPackage, int userId) throws RemoteException {
+        public int getNumPendingIntentAsUser(int type, String callingPackage, int userId)
+                throws RemoteException {
             return 0;
         }
 
@@ -89,7 +134,7 @@ public interface IDeviceInfoManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceInfoManager {
+    public abstract static class Stub extends Binder implements IDeviceInfoManager {
         static final int TRANSACTION_clearPendingIntentAsUser = 10;
         static final int TRANSACTION_getNumPendingIntentAsUser = 11;
         static final int TRANSACTION_registerPendingIntent = 4;
@@ -157,7 +202,8 @@ public interface IDeviceInfoManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDeviceInfoManager.DESCRIPTOR);
             }
@@ -168,7 +214,8 @@ public interface IDeviceInfoManager extends IInterface {
             switch (code) {
                 case 1:
                     Uri _arg0 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    PendingIntent _arg1 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg1 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg2 = data.readString();
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
@@ -176,7 +223,8 @@ public interface IDeviceInfoManager extends IInterface {
                     return true;
                 case 2:
                     IntentFilter _arg02 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
-                    PendingIntent _arg12 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg12 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg22 = data.readString();
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
@@ -184,7 +232,8 @@ public interface IDeviceInfoManager extends IInterface {
                     return true;
                 case 3:
                     IntentFilter _arg03 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
-                    PendingIntent _arg13 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg13 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg23 = data.readString();
                     int _arg33 = data.readInt();
                     data.enforceNoDataAvail();
@@ -192,7 +241,8 @@ public interface IDeviceInfoManager extends IInterface {
                     return true;
                 case 4:
                     IntentFilter _arg04 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
-                    PendingIntent _arg14 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg14 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     int _arg24 = data.readInt();
                     List<String> _arg34 = data.createStringArrayList();
                     String _arg4 = data.readString();
@@ -202,7 +252,8 @@ public interface IDeviceInfoManager extends IInterface {
                     return true;
                 case 5:
                     IntentFilter _arg05 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
-                    PendingIntent _arg15 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg15 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg25 = data.readString();
                     int _arg35 = data.readInt();
                     data.enforceNoDataAvail();
@@ -210,16 +261,19 @@ public interface IDeviceInfoManager extends IInterface {
                     return true;
                 case 6:
                     String _arg06 = data.readString();
-                    PendingIntent _arg16 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg16 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     Bundle _arg26 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     String _arg36 = data.readString();
                     int _arg42 = data.readInt();
                     data.enforceNoDataAvail();
-                    registerPendingIntentForCustomEventAsUser(_arg06, _arg16, _arg26, _arg36, _arg42);
+                    registerPendingIntentForCustomEventAsUser(
+                            _arg06, _arg16, _arg26, _arg36, _arg42);
                     return true;
                 case 7:
                     Uri _arg07 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    PendingIntent _arg17 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg17 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg27 = data.readString();
                     int _arg37 = data.readInt();
                     data.enforceNoDataAvail();
@@ -227,7 +281,8 @@ public interface IDeviceInfoManager extends IInterface {
                     return true;
                 case 8:
                     IntentFilter _arg08 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
-                    PendingIntent _arg18 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg18 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg28 = data.readString();
                     int _arg38 = data.readInt();
                     data.enforceNoDataAvail();
@@ -235,12 +290,14 @@ public interface IDeviceInfoManager extends IInterface {
                     return true;
                 case 9:
                     String _arg09 = data.readString();
-                    PendingIntent _arg19 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg19 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     Bundle _arg29 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     String _arg39 = data.readString();
                     int _arg43 = data.readInt();
                     data.enforceNoDataAvail();
-                    unregisterPendingIntentForCustomEventAsUser(_arg09, _arg19, _arg29, _arg39, _arg43);
+                    unregisterPendingIntentForCustomEventAsUser(
+                            _arg09, _arg19, _arg29, _arg39, _arg43);
                     return true;
                 case 10:
                     String _arg010 = data.readString();
@@ -279,7 +336,9 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void registerPendingIntentForUriAsUser(Uri uri, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
+            public void registerPendingIntentForUriAsUser(
+                    Uri uri, PendingIntent intent, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -294,7 +353,9 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void registerPendingIntentForIntentAsUser(IntentFilter filter, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
+            public void registerPendingIntentForIntentAsUser(
+                    IntentFilter filter, PendingIntent intent, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -309,7 +370,9 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void registerPendingIntentForIntentForAllUsers(IntentFilter filter, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
+            public void registerPendingIntentForIntentForAllUsers(
+                    IntentFilter filter, PendingIntent intent, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -324,7 +387,14 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void registerPendingIntent(IntentFilter filter, PendingIntent pendingIntent, int flag, List<String> conditions, String callingPackage, int userId) throws RemoteException {
+            public void registerPendingIntent(
+                    IntentFilter filter,
+                    PendingIntent pendingIntent,
+                    int flag,
+                    List<String> conditions,
+                    String callingPackage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -341,7 +411,12 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void unregisterPendingIntent(IntentFilter filter, PendingIntent pendingIntent, String callingPackage, int userId) throws RemoteException {
+            public void unregisterPendingIntent(
+                    IntentFilter filter,
+                    PendingIntent pendingIntent,
+                    String callingPackage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -356,7 +431,13 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void registerPendingIntentForCustomEventAsUser(String event, PendingIntent intent, Bundle bundle, String callingPackage, int userId) throws RemoteException {
+            public void registerPendingIntentForCustomEventAsUser(
+                    String event,
+                    PendingIntent intent,
+                    Bundle bundle,
+                    String callingPackage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -372,7 +453,9 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void unregisterPendingIntentForUriAsUser(Uri uri, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
+            public void unregisterPendingIntentForUriAsUser(
+                    Uri uri, PendingIntent intent, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -387,7 +470,9 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void unregisterPendingIntentForIntentAsUser(IntentFilter filter, PendingIntent intent, String callingPackage, int userId) throws RemoteException {
+            public void unregisterPendingIntentForIntentAsUser(
+                    IntentFilter filter, PendingIntent intent, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -402,7 +487,13 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void unregisterPendingIntentForCustomEventAsUser(String event, PendingIntent intent, Bundle bundle, String callingPackage, int userId) throws RemoteException {
+            public void unregisterPendingIntentForCustomEventAsUser(
+                    String event,
+                    PendingIntent intent,
+                    Bundle bundle,
+                    String callingPackage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -418,7 +509,8 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public void clearPendingIntentAsUser(String callingPackage, int userId) throws RemoteException {
+            public void clearPendingIntentAsUser(String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInfoManager.DESCRIPTOR);
@@ -431,7 +523,8 @@ public interface IDeviceInfoManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IDeviceInfoManager
-            public int getNumPendingIntentAsUser(int type, String callingPackage, int userId) throws RemoteException {
+            public int getNumPendingIntentAsUser(int type, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

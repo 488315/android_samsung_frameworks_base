@@ -1,12 +1,11 @@
 package com.android.server.pm;
 
-import com.android.server.pm.PackageInstallerSession;
-import com.android.server.pm.StagingManager;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class PackageInstallerSession$$ExternalSyntheticLambda3 implements Predicate {
+public final /* synthetic */ class PackageInstallerSession$$ExternalSyntheticLambda3
+        implements Predicate {
     public final /* synthetic */ int $r8$classId;
 
     public /* synthetic */ PackageInstallerSession$$ExternalSyntheticLambda3(int i) {
@@ -21,7 +20,9 @@ public final /* synthetic */ class PackageInstallerSession$$ExternalSyntheticLam
             case 1:
                 return !((PackageInstallerSession) obj).isApexSession();
             default:
-                return ((PackageInstallerSession.StagedSession) ((StagingManager.StagedSession) obj)).isApexSession();
+                return ((PackageInstallerSession.StagedSession)
+                                ((StagingManager.StagedSession) obj))
+                        .isApexSession();
         }
     }
 }

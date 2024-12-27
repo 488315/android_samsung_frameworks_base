@@ -5,10 +5,14 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
+
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes2.dex */
@@ -31,41 +34,45 @@ public final class BrightnessConfiguration implements Parcelable {
     private static final String ATTR_MODEL_UPPER_BOUND = "model-upper-bound";
     private static final String ATTR_NITS = "nits";
     private static final String ATTR_PACKAGE_NAME = "package-name";
-    public static final Parcelable.Creator<BrightnessConfiguration> CREATOR = new Parcelable.Creator<BrightnessConfiguration>() { // from class: android.hardware.display.BrightnessConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BrightnessConfiguration createFromParcel(Parcel in) {
-            float[] lux = in.createFloatArray();
-            float[] nits = in.createFloatArray();
-            Builder builder = new Builder(lux, nits);
-            int n = in.readInt();
-            for (int i = 0; i < n; i++) {
-                String packageName = in.readString();
-                BrightnessCorrection correction = BrightnessCorrection.CREATOR.createFromParcel(in);
-                builder.addCorrectionByPackageName(packageName, correction);
-            }
-            int n2 = in.readInt();
-            for (int i2 = 0; i2 < n2; i2++) {
-                int category = in.readInt();
-                BrightnessCorrection correction2 = BrightnessCorrection.CREATOR.createFromParcel(in);
-                builder.addCorrectionByCategory(category, correction2);
-            }
-            String description = in.readString();
-            builder.setDescription(description);
-            boolean shouldCollectColorSamples = in.readBoolean();
-            builder.setShouldCollectColorSamples(shouldCollectColorSamples);
-            builder.setShortTermModelTimeoutMillis(in.readLong());
-            builder.setShortTermModelLowerLuxMultiplier(in.readFloat());
-            builder.setShortTermModelUpperLuxMultiplier(in.readFloat());
-            return builder.build();
-        }
+    public static final Parcelable.Creator<BrightnessConfiguration> CREATOR =
+            new Parcelable.Creator<BrightnessConfiguration>() { // from class:
+                // android.hardware.display.BrightnessConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BrightnessConfiguration createFromParcel(Parcel in) {
+                    float[] lux = in.createFloatArray();
+                    float[] nits = in.createFloatArray();
+                    Builder builder = new Builder(lux, nits);
+                    int n = in.readInt();
+                    for (int i = 0; i < n; i++) {
+                        String packageName = in.readString();
+                        BrightnessCorrection correction =
+                                BrightnessCorrection.CREATOR.createFromParcel(in);
+                        builder.addCorrectionByPackageName(packageName, correction);
+                    }
+                    int n2 = in.readInt();
+                    for (int i2 = 0; i2 < n2; i2++) {
+                        int category = in.readInt();
+                        BrightnessCorrection correction2 =
+                                BrightnessCorrection.CREATOR.createFromParcel(in);
+                        builder.addCorrectionByCategory(category, correction2);
+                    }
+                    String description = in.readString();
+                    builder.setDescription(description);
+                    boolean shouldCollectColorSamples = in.readBoolean();
+                    builder.setShouldCollectColorSamples(shouldCollectColorSamples);
+                    builder.setShortTermModelTimeoutMillis(in.readLong());
+                    builder.setShortTermModelLowerLuxMultiplier(in.readFloat());
+                    builder.setShortTermModelUpperLuxMultiplier(in.readFloat());
+                    return builder.build();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BrightnessConfiguration[] newArray(int size) {
-            return new BrightnessConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BrightnessConfiguration[] newArray(int size) {
+                    return new BrightnessConfiguration[size];
+                }
+            };
     public static final long SHORT_TERM_TIMEOUT_UNSET = -1;
     private static final String TAG_BRIGHTNESS_CORRECTION = "brightness-correction";
     private static final String TAG_BRIGHTNESS_CORRECTIONS = "brightness-corrections";
@@ -82,7 +89,16 @@ public final class BrightnessConfiguration implements Parcelable {
     private final float mShortTermModelUpperLuxMultiplier;
     private final boolean mShouldCollectColorSamples;
 
-    private BrightnessConfiguration(float[] lux, float[] nits, Map<String, BrightnessCorrection> correctionsByPackageName, Map<Integer, BrightnessCorrection> correctionsByCategory, String description, boolean shouldCollectColorSamples, long shortTermModelTimeout, float shortTermModelLowerLuxMultiplier, float shortTermModelUpperLuxMultiplier) {
+    private BrightnessConfiguration(
+            float[] lux,
+            float[] nits,
+            Map<String, BrightnessCorrection> correctionsByPackageName,
+            Map<Integer, BrightnessCorrection> correctionsByCategory,
+            String description,
+            boolean shouldCollectColorSamples,
+            long shortTermModelTimeout,
+            float shortTermModelLowerLuxMultiplier,
+            float shortTermModelUpperLuxMultiplier) {
         this.mLux = lux;
         this.mNits = nits;
         this.mCorrectionsByPackageName = correctionsByPackageName;
@@ -95,7 +111,9 @@ public final class BrightnessConfiguration implements Parcelable {
     }
 
     public Pair<float[], float[]> getCurve() {
-        return Pair.create(Arrays.copyOf(this.mLux, this.mLux.length), Arrays.copyOf(this.mNits, this.mNits.length));
+        return Pair.create(
+                Arrays.copyOf(this.mLux, this.mLux.length),
+                Arrays.copyOf(this.mNits, this.mNits.length));
     }
 
     public BrightnessCorrection getCorrectionByPackageName(String packageName) {
@@ -131,14 +149,16 @@ public final class BrightnessConfiguration implements Parcelable {
         dest.writeFloatArray(this.mLux);
         dest.writeFloatArray(this.mNits);
         dest.writeInt(this.mCorrectionsByPackageName.size());
-        for (Map.Entry<String, BrightnessCorrection> entry : this.mCorrectionsByPackageName.entrySet()) {
+        for (Map.Entry<String, BrightnessCorrection> entry :
+                this.mCorrectionsByPackageName.entrySet()) {
             String packageName = entry.getKey();
             BrightnessCorrection correction = entry.getValue();
             dest.writeString(packageName);
             correction.writeToParcel(dest, flags);
         }
         dest.writeInt(this.mCorrectionsByCategory.size());
-        for (Map.Entry<Integer, BrightnessCorrection> entry2 : this.mCorrectionsByCategory.entrySet()) {
+        for (Map.Entry<Integer, BrightnessCorrection> entry2 :
+                this.mCorrectionsByCategory.entrySet()) {
             int category = entry2.getKey().intValue();
             BrightnessCorrection correction2 = entry2.getValue();
             dest.writeInt(category);
@@ -163,13 +183,19 @@ public final class BrightnessConfiguration implements Parcelable {
             if (i != 0) {
                 sb.append(", ");
             }
-            sb.append(NavigationBarInflaterView.KEY_CODE_START).append(this.mLux[i]).append(", ").append(this.mNits[i]).append(NavigationBarInflaterView.KEY_CODE_END);
+            sb.append(NavigationBarInflaterView.KEY_CODE_START)
+                    .append(this.mLux[i])
+                    .append(", ")
+                    .append(this.mNits[i])
+                    .append(NavigationBarInflaterView.KEY_CODE_END);
         }
         sb.append("], {");
-        for (Map.Entry<String, BrightnessCorrection> entry : this.mCorrectionsByPackageName.entrySet()) {
+        for (Map.Entry<String, BrightnessCorrection> entry :
+                this.mCorrectionsByPackageName.entrySet()) {
             sb.append("'" + entry.getKey() + "': " + entry.getValue() + ", ");
         }
-        for (Map.Entry<Integer, BrightnessCorrection> entry2 : this.mCorrectionsByCategory.entrySet()) {
+        for (Map.Entry<Integer, BrightnessCorrection> entry2 :
+                this.mCorrectionsByCategory.entrySet()) {
             sb.append(entry2.getKey() + ": " + entry2.getValue() + ", ");
         }
         sb.append("}, '");
@@ -181,21 +207,35 @@ public final class BrightnessConfiguration implements Parcelable {
             sb.append(", shortTermModelTimeout = " + this.mShortTermModelTimeout);
         }
         if (!Float.isNaN(this.mShortTermModelLowerLuxMultiplier)) {
-            sb.append(", shortTermModelLowerLuxMultiplier = " + this.mShortTermModelLowerLuxMultiplier);
+            sb.append(
+                    ", shortTermModelLowerLuxMultiplier = "
+                            + this.mShortTermModelLowerLuxMultiplier);
         }
         if (!Float.isNaN(this.mShortTermModelLowerLuxMultiplier)) {
-            sb.append(", shortTermModelUpperLuxMultiplier = " + this.mShortTermModelUpperLuxMultiplier);
+            sb.append(
+                    ", shortTermModelUpperLuxMultiplier = "
+                            + this.mShortTermModelUpperLuxMultiplier);
         }
         sb.append("'}");
         return sb.toString();
     }
 
     public int hashCode() {
-        int result = (((((((1 * 31) + Arrays.hashCode(this.mLux)) * 31) + Arrays.hashCode(this.mNits)) * 31) + this.mCorrectionsByPackageName.hashCode()) * 31) + this.mCorrectionsByCategory.hashCode();
+        int result =
+                (((((((1 * 31) + Arrays.hashCode(this.mLux)) * 31) + Arrays.hashCode(this.mNits))
+                                                * 31)
+                                        + this.mCorrectionsByPackageName.hashCode())
+                                * 31)
+                        + this.mCorrectionsByCategory.hashCode();
         if (this.mDescription != null) {
             result = (result * 31) + this.mDescription.hashCode();
         }
-        return (((((((result * 31) + Boolean.hashCode(this.mShouldCollectColorSamples)) * 31) + Long.hashCode(this.mShortTermModelTimeout)) * 31) + Float.hashCode(this.mShortTermModelLowerLuxMultiplier)) * 31) + Float.hashCode(this.mShortTermModelUpperLuxMultiplier);
+        return (((((((result * 31) + Boolean.hashCode(this.mShouldCollectColorSamples)) * 31)
+                                                + Long.hashCode(this.mShortTermModelTimeout))
+                                        * 31)
+                                + Float.hashCode(this.mShortTermModelLowerLuxMultiplier))
+                        * 31)
+                + Float.hashCode(this.mShortTermModelUpperLuxMultiplier);
     }
 
     public boolean equals(Object o) {
@@ -206,7 +246,19 @@ public final class BrightnessConfiguration implements Parcelable {
             return false;
         }
         BrightnessConfiguration other = (BrightnessConfiguration) o;
-        return Arrays.equals(this.mLux, other.mLux) && Arrays.equals(this.mNits, other.mNits) && this.mCorrectionsByPackageName.equals(other.mCorrectionsByPackageName) && this.mCorrectionsByCategory.equals(other.mCorrectionsByCategory) && Objects.equals(this.mDescription, other.mDescription) && this.mShouldCollectColorSamples == other.mShouldCollectColorSamples && this.mShortTermModelTimeout == other.mShortTermModelTimeout && checkFloatEquals(this.mShortTermModelLowerLuxMultiplier, other.mShortTermModelLowerLuxMultiplier) && checkFloatEquals(this.mShortTermModelUpperLuxMultiplier, other.mShortTermModelUpperLuxMultiplier);
+        return Arrays.equals(this.mLux, other.mLux)
+                && Arrays.equals(this.mNits, other.mNits)
+                && this.mCorrectionsByPackageName.equals(other.mCorrectionsByPackageName)
+                && this.mCorrectionsByCategory.equals(other.mCorrectionsByCategory)
+                && Objects.equals(this.mDescription, other.mDescription)
+                && this.mShouldCollectColorSamples == other.mShouldCollectColorSamples
+                && this.mShortTermModelTimeout == other.mShortTermModelTimeout
+                && checkFloatEquals(
+                        this.mShortTermModelLowerLuxMultiplier,
+                        other.mShortTermModelLowerLuxMultiplier)
+                && checkFloatEquals(
+                        this.mShortTermModelUpperLuxMultiplier,
+                        other.mShortTermModelUpperLuxMultiplier);
     }
 
     private boolean checkFloatEquals(float one, float two) {
@@ -226,7 +278,8 @@ public final class BrightnessConfiguration implements Parcelable {
         }
         serializer.endTag(null, TAG_BRIGHTNESS_CURVE);
         serializer.startTag(null, TAG_BRIGHTNESS_CORRECTIONS);
-        for (Map.Entry<String, BrightnessCorrection> entry : this.mCorrectionsByPackageName.entrySet()) {
+        for (Map.Entry<String, BrightnessCorrection> entry :
+                this.mCorrectionsByPackageName.entrySet()) {
             String packageName = entry.getKey();
             BrightnessCorrection correction = entry.getValue();
             serializer.startTag(null, TAG_BRIGHTNESS_CORRECTION);
@@ -234,7 +287,8 @@ public final class BrightnessConfiguration implements Parcelable {
             correction.saveToXml(serializer);
             serializer.endTag(null, TAG_BRIGHTNESS_CORRECTION);
         }
-        for (Map.Entry<Integer, BrightnessCorrection> entry2 : this.mCorrectionsByCategory.entrySet()) {
+        for (Map.Entry<Integer, BrightnessCorrection> entry2 :
+                this.mCorrectionsByCategory.entrySet()) {
             int category = entry2.getKey().intValue();
             BrightnessCorrection correction2 = entry2.getValue();
             serializer.startTag(null, TAG_BRIGHTNESS_CORRECTION);
@@ -251,15 +305,18 @@ public final class BrightnessConfiguration implements Parcelable {
             serializer.attributeLong(null, ATTR_MODEL_TIMEOUT, this.mShortTermModelTimeout);
         }
         if (!Float.isNaN(this.mShortTermModelLowerLuxMultiplier)) {
-            serializer.attributeFloat(null, ATTR_MODEL_LOWER_BOUND, this.mShortTermModelLowerLuxMultiplier);
+            serializer.attributeFloat(
+                    null, ATTR_MODEL_LOWER_BOUND, this.mShortTermModelLowerLuxMultiplier);
         }
         if (!Float.isNaN(this.mShortTermModelUpperLuxMultiplier)) {
-            serializer.attributeFloat(null, ATTR_MODEL_UPPER_BOUND, this.mShortTermModelUpperLuxMultiplier);
+            serializer.attributeFloat(
+                    null, ATTR_MODEL_UPPER_BOUND, this.mShortTermModelUpperLuxMultiplier);
         }
         serializer.endTag(null, TAG_BRIGHTNESS_PARAMS);
     }
 
-    public static BrightnessConfiguration loadFromXml(TypedXmlPullParser parser) throws IOException, XmlPullParserException {
+    public static BrightnessConfiguration loadFromXml(TypedXmlPullParser parser)
+            throws IOException, XmlPullParserException {
         int configDepth;
         String description = null;
         List<Float> luxList = new ArrayList<>();
@@ -292,7 +349,8 @@ public final class BrightnessConfiguration implements Parcelable {
                             String packageName = parser.getAttributeValue(str, ATTR_PACKAGE_NAME);
                             int configDepth3 = configDepth2;
                             int category = parser.getAttributeInt(str, ATTR_CATEGORY, -1);
-                            BrightnessCorrection correction = BrightnessCorrection.loadFromXml(parser);
+                            BrightnessCorrection correction =
+                                    BrightnessCorrection.loadFromXml(parser);
                             if (packageName != null) {
                                 correctionsByPackageName.put(packageName, correction);
                             } else if (category != -1) {
@@ -306,13 +364,16 @@ public final class BrightnessConfiguration implements Parcelable {
                 } else {
                     configDepth = configDepth2;
                     if (TAG_BRIGHTNESS_PARAMS.equals(parser.getName())) {
-                        shouldCollectColorSamples = parser.getAttributeBoolean(null, ATTR_COLLECT_COLOR, false);
+                        shouldCollectColorSamples =
+                                parser.getAttributeBoolean(null, ATTR_COLLECT_COLOR, false);
                         Long timeout = loadLongFromXml(parser, ATTR_MODEL_TIMEOUT);
                         if (timeout != null) {
                             shortTermModelTimeout = timeout.longValue();
                         }
-                        shortTermModelLowerLuxMultiplier = loadFloatFromXml(parser, ATTR_MODEL_LOWER_BOUND);
-                        shortTermModelUpperLuxMultiplier = loadFloatFromXml(parser, ATTR_MODEL_UPPER_BOUND);
+                        shortTermModelLowerLuxMultiplier =
+                                loadFloatFromXml(parser, ATTR_MODEL_LOWER_BOUND);
+                        shortTermModelUpperLuxMultiplier =
+                                loadFloatFromXml(parser, ATTR_MODEL_UPPER_BOUND);
                         configDepth2 = configDepth;
                     }
                 }
@@ -335,7 +396,8 @@ public final class BrightnessConfiguration implements Parcelable {
             builder.addCorrectionByPackageName(packageName2, correction2);
             description = description2;
         }
-        Iterator<Map.Entry<Integer, BrightnessCorrection>> it = correctionsByCategory.entrySet().iterator();
+        Iterator<Map.Entry<Integer, BrightnessCorrection>> it =
+                correctionsByCategory.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Integer, BrightnessCorrection> entry2 = it.next();
             int category2 = entry2.getKey().intValue();
@@ -388,7 +450,8 @@ public final class BrightnessConfiguration implements Parcelable {
             if (lux[0] != 0.0f) {
                 throw new IllegalArgumentException("Initial control point must be for 0 lux");
             }
-            Preconditions.checkArrayElementsInRange(lux, 0.0f, Float.MAX_VALUE, BrightnessConfiguration.ATTR_LUX);
+            Preconditions.checkArrayElementsInRange(
+                    lux, 0.0f, Float.MAX_VALUE, BrightnessConfiguration.ATTR_LUX);
             Preconditions.checkArrayElementsInRange(nits, 0.0f, Float.MAX_VALUE, "nits");
             checkMonotonic(lux, true, BrightnessConfiguration.ATTR_LUX);
             checkMonotonic(nits, false, "nits");
@@ -406,7 +469,8 @@ public final class BrightnessConfiguration implements Parcelable {
             return 20;
         }
 
-        public Builder addCorrectionByPackageName(String packageName, BrightnessCorrection correction) {
+        public Builder addCorrectionByPackageName(
+                String packageName, BrightnessCorrection correction) {
             Objects.requireNonNull(packageName, "packageName must not be null");
             Objects.requireNonNull(correction, "correction must not be null");
             if (this.mCorrectionsByPackageName.size() >= getMaxCorrectionsByPackageName()) {
@@ -460,7 +524,16 @@ public final class BrightnessConfiguration implements Parcelable {
             if (this.mCurveLux == null || this.mCurveNits == null) {
                 throw new IllegalStateException("A curve must be set!");
             }
-            return new BrightnessConfiguration(this.mCurveLux, this.mCurveNits, this.mCorrectionsByPackageName, this.mCorrectionsByCategory, this.mDescription, this.mShouldCollectColorSamples, this.mShortTermModelTimeout, this.mShortTermModelLowerLuxMultiplier, this.mShortTermModelUpperLuxMultiplier);
+            return new BrightnessConfiguration(
+                    this.mCurveLux,
+                    this.mCurveNits,
+                    this.mCorrectionsByPackageName,
+                    this.mCorrectionsByCategory,
+                    this.mDescription,
+                    this.mShouldCollectColorSamples,
+                    this.mShortTermModelTimeout,
+                    this.mShortTermModelLowerLuxMultiplier,
+                    this.mShortTermModelUpperLuxMultiplier);
         }
 
         private static void checkMonotonic(float[] vals, boolean strictlyIncreasing, String name) {

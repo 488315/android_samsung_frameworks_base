@@ -2,6 +2,7 @@ package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
 import android.util.Range;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -17,7 +18,17 @@ public class FrontendInfo {
     private final Range<Integer> mSymbolRateRange;
     private final int mType;
 
-    private FrontendInfo(int id, int type, long minFrequency, long maxFrequency, int minSymbolRate, int maxSymbolRate, long acquireRange, int exclusiveGroupId, int[] statusCaps, FrontendCapabilities frontendCap) {
+    private FrontendInfo(
+            int id,
+            int type,
+            long minFrequency,
+            long maxFrequency,
+            int minSymbolRate,
+            int maxSymbolRate,
+            long acquireRange,
+            int exclusiveGroupId,
+            int[] statusCaps,
+            FrontendCapabilities frontendCap) {
         long maxFrequency2;
         this.mId = id;
         this.mType = type;
@@ -27,7 +38,8 @@ public class FrontendInfo {
             maxFrequency2 = 2147483647L;
         }
         this.mFrequencyRange = new Range<>(Long.valueOf(minFrequency), Long.valueOf(maxFrequency2));
-        this.mSymbolRateRange = new Range<>(Integer.valueOf(minSymbolRate), Integer.valueOf(maxSymbolRate));
+        this.mSymbolRateRange =
+                new Range<>(Integer.valueOf(minSymbolRate), Integer.valueOf(maxSymbolRate));
         this.mAcquireRange = acquireRange;
         this.mExclusiveGroupId = exclusiveGroupId;
         this.mStatusCaps = statusCaps;
@@ -44,7 +56,9 @@ public class FrontendInfo {
 
     @Deprecated
     public Range<Integer> getFrequencyRange() {
-        return new Range<>(Integer.valueOf((int) this.mFrequencyRange.getLower().longValue()), Integer.valueOf((int) this.mFrequencyRange.getUpper().longValue()));
+        return new Range<>(
+                Integer.valueOf((int) this.mFrequencyRange.getLower().longValue()),
+                Integer.valueOf((int) this.mFrequencyRange.getUpper().longValue()));
     }
 
     public Range<Long> getFrequencyRangeLong() {
@@ -84,7 +98,13 @@ public class FrontendInfo {
             return false;
         }
         FrontendInfo info = (FrontendInfo) o;
-        if (this.mId == info.getId() && this.mType == info.getType() && Objects.equals(this.mFrequencyRange, info.getFrequencyRangeLong()) && Objects.equals(this.mSymbolRateRange, info.getSymbolRateRange()) && this.mAcquireRange == info.getAcquireRangeLong() && this.mExclusiveGroupId == info.getExclusiveGroupId() && Arrays.equals(this.mStatusCaps, info.getStatusCapabilities())) {
+        if (this.mId == info.getId()
+                && this.mType == info.getType()
+                && Objects.equals(this.mFrequencyRange, info.getFrequencyRangeLong())
+                && Objects.equals(this.mSymbolRateRange, info.getSymbolRateRange())
+                && this.mAcquireRange == info.getAcquireRangeLong()
+                && this.mExclusiveGroupId == info.getExclusiveGroupId()
+                && Arrays.equals(this.mStatusCaps, info.getStatusCapabilities())) {
             return true;
         }
         return false;

@@ -1,7 +1,5 @@
 package android.hardware.radio.modem;
 
-import android.hardware.radio.modem.IRadioModemIndication;
-import android.hardware.radio.modem.IRadioModemResponse;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioModem extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$modem$IRadioModem".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$modem$IRadioModem".replace('$', '.');
     public static final String HASH = "8586a5528f0085c15cff4b6628f1b8153aca29ad";
     public static final int VERSION = 3;
 
@@ -56,80 +55,72 @@ public interface IRadioModem extends IInterface {
 
     void setRadioPower(int i, boolean z, boolean z2, boolean z3) throws RemoteException;
 
-    void setResponseFunctions(IRadioModemResponse iRadioModemResponse, IRadioModemIndication iRadioModemIndication) throws RemoteException;
+    void setResponseFunctions(
+            IRadioModemResponse iRadioModemResponse, IRadioModemIndication iRadioModemIndication)
+            throws RemoteException;
 
     public static class Default implements IRadioModem {
         @Override // android.hardware.radio.modem.IRadioModem
-        public void enableModem(int serial, boolean on) throws RemoteException {
-        }
+        public void enableModem(int serial, boolean on) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void getBasebandVersion(int serial) throws RemoteException {
-        }
+        public void getBasebandVersion(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void getDeviceIdentity(int serial) throws RemoteException {
-        }
+        public void getDeviceIdentity(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void getHardwareConfig(int serial) throws RemoteException {
-        }
+        public void getHardwareConfig(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void getModemActivityInfo(int serial) throws RemoteException {
-        }
+        public void getModemActivityInfo(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void getModemStackStatus(int serial) throws RemoteException {
-        }
+        public void getModemStackStatus(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void getRadioCapability(int serial) throws RemoteException {
-        }
+        public void getRadioCapability(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void nvReadItem(int serial, int itemId) throws RemoteException {
-        }
+        public void nvReadItem(int serial, int itemId) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void nvResetConfig(int serial, int resetType) throws RemoteException {
-        }
+        public void nvResetConfig(int serial, int resetType) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void nvWriteCdmaPrl(int serial, byte[] prl) throws RemoteException {
-        }
+        public void nvWriteCdmaPrl(int serial, byte[] prl) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void nvWriteItem(int serial, NvWriteItem item) throws RemoteException {
-        }
+        public void nvWriteItem(int serial, NvWriteItem item) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void requestShutdown(int serial) throws RemoteException {
-        }
+        public void requestShutdown(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void responseAcknowledgement() throws RemoteException {
-        }
+        public void responseAcknowledgement() throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void sendDeviceState(int serial, int deviceStateType, boolean state) throws RemoteException {
-        }
+        public void sendDeviceState(int serial, int deviceStateType, boolean state)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void setRadioCapability(int serial, RadioCapability rc) throws RemoteException {
-        }
+        public void setRadioCapability(int serial, RadioCapability rc) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void setRadioPower(int serial, boolean powerOn, boolean forEmergencyCall, boolean preferredForEmergencyCall) throws RemoteException {
-        }
+        public void setRadioPower(
+                int serial,
+                boolean powerOn,
+                boolean forEmergencyCall,
+                boolean preferredForEmergencyCall)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void setResponseFunctions(IRadioModemResponse radioModemResponse, IRadioModemIndication radioModemIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                IRadioModemResponse radioModemResponse, IRadioModemIndication radioModemIndication)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
-        public void getImei(int serial) throws RemoteException {
-        }
+        public void getImei(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModem
         public int getInterfaceVersion() {
@@ -147,7 +138,7 @@ public interface IRadioModem extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioModem {
+    public abstract static class Stub extends Binder implements IRadioModem {
         static final int TRANSACTION_enableModem = 1;
         static final int TRANSACTION_getBasebandVersion = 2;
         static final int TRANSACTION_getDeviceIdentity = 3;
@@ -191,7 +182,8 @@ public interface IRadioModem extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -288,7 +280,8 @@ public interface IRadioModem extends IInterface {
                     return true;
                 case 15:
                     int _arg014 = data.readInt();
-                    RadioCapability _arg17 = (RadioCapability) data.readTypedObject(RadioCapability.CREATOR);
+                    RadioCapability _arg17 =
+                            (RadioCapability) data.readTypedObject(RadioCapability.CREATOR);
                     data.enforceNoDataAvail();
                     setRadioCapability(_arg014, _arg17);
                     return true;
@@ -301,8 +294,10 @@ public interface IRadioModem extends IInterface {
                     setRadioPower(_arg015, _arg18, _arg22, _arg3);
                     return true;
                 case 17:
-                    IRadioModemResponse _arg016 = IRadioModemResponse.Stub.asInterface(data.readStrongBinder());
-                    IRadioModemIndication _arg19 = IRadioModemIndication.Stub.asInterface(data.readStrongBinder());
+                    IRadioModemResponse _arg016 =
+                            IRadioModemResponse.Stub.asInterface(data.readStrongBinder());
+                    IRadioModemIndication _arg19 =
+                            IRadioModemIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg016, _arg19);
                     return true;
@@ -526,7 +521,8 @@ public interface IRadioModem extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(13, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method responseAcknowledgement is unimplemented.");
+                        throw new RemoteException(
+                                "Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -534,7 +530,8 @@ public interface IRadioModem extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModem
-            public void sendDeviceState(int serial, int deviceStateType, boolean state) throws RemoteException {
+            public void sendDeviceState(int serial, int deviceStateType, boolean state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -567,7 +564,12 @@ public interface IRadioModem extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModem
-            public void setRadioPower(int serial, boolean powerOn, boolean forEmergencyCall, boolean preferredForEmergencyCall) throws RemoteException {
+            public void setRadioPower(
+                    int serial,
+                    boolean powerOn,
+                    boolean forEmergencyCall,
+                    boolean preferredForEmergencyCall)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -585,7 +587,10 @@ public interface IRadioModem extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModem
-            public void setResponseFunctions(IRadioModemResponse radioModemResponse, IRadioModemIndication radioModemIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    IRadioModemResponse radioModemResponse,
+                    IRadioModemIndication radioModemIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

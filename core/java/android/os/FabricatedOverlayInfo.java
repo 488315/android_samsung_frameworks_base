@@ -1,24 +1,25 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class FabricatedOverlayInfo implements Parcelable {
-    public static final Parcelable.Creator<FabricatedOverlayInfo> CREATOR = new Parcelable.Creator<FabricatedOverlayInfo>() { // from class: android.os.FabricatedOverlayInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FabricatedOverlayInfo createFromParcel(Parcel _aidl_source) {
-            FabricatedOverlayInfo _aidl_out = new FabricatedOverlayInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FabricatedOverlayInfo> CREATOR =
+            new Parcelable.Creator<
+                    FabricatedOverlayInfo>() { // from class: android.os.FabricatedOverlayInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FabricatedOverlayInfo createFromParcel(Parcel _aidl_source) {
+                    FabricatedOverlayInfo _aidl_out = new FabricatedOverlayInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FabricatedOverlayInfo[] newArray(int _aidl_size) {
-            return new FabricatedOverlayInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FabricatedOverlayInfo[] newArray(int _aidl_size) {
+                    return new FabricatedOverlayInfo[_aidl_size];
+                }
+            };
     public String overlayName;
     public String packageName;
     public String path;

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IDeviceStateManagerCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.devicestate.IDeviceStateManagerCallback";
+    public static final String DESCRIPTOR =
+            "android.hardware.devicestate.IDeviceStateManagerCallback";
 
     void onDeviceStateInfoChanged(DeviceStateInfo deviceStateInfo) throws RemoteException;
 
@@ -18,16 +19,13 @@ public interface IDeviceStateManagerCallback extends IInterface {
 
     public static class Default implements IDeviceStateManagerCallback {
         @Override // android.hardware.devicestate.IDeviceStateManagerCallback
-        public void onDeviceStateInfoChanged(DeviceStateInfo info) throws RemoteException {
-        }
+        public void onDeviceStateInfoChanged(DeviceStateInfo info) throws RemoteException {}
 
         @Override // android.hardware.devicestate.IDeviceStateManagerCallback
-        public void onRequestActive(IBinder token) throws RemoteException {
-        }
+        public void onRequestActive(IBinder token) throws RemoteException {}
 
         @Override // android.hardware.devicestate.IDeviceStateManagerCallback
-        public void onRequestCanceled(IBinder token) throws RemoteException {
-        }
+        public void onRequestCanceled(IBinder token) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +33,7 @@ public interface IDeviceStateManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceStateManagerCallback {
+    public abstract static class Stub extends Binder implements IDeviceStateManagerCallback {
         static final int TRANSACTION_onDeviceStateInfoChanged = 1;
         static final int TRANSACTION_onRequestActive = 2;
         static final int TRANSACTION_onRequestCanceled = 3;
@@ -79,7 +77,8 @@ public interface IDeviceStateManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDeviceStateManagerCallback.DESCRIPTOR);
             }
@@ -89,7 +88,8 @@ public interface IDeviceStateManagerCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    DeviceStateInfo _arg0 = (DeviceStateInfo) data.readTypedObject(DeviceStateInfo.CREATOR);
+                    DeviceStateInfo _arg0 =
+                            (DeviceStateInfo) data.readTypedObject(DeviceStateInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDeviceStateInfoChanged(_arg0);
                     return true;

@@ -4,8 +4,6 @@ import android.graphics.Rect;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
-import com.samsung.android.multiwindow.IDragAndDropClient;
-import com.samsung.android.multiwindow.IDragAndDropControllerProxy;
 
 /* loaded from: classes6.dex */
 public class DragAndDropHelper {
@@ -20,35 +18,42 @@ public class DragAndDropHelper {
 
     private DragAndDropHelper(boolean shellDropTargetVisibility, Rect hiddenDropTargetArea) {
         this.mHiddenDropTargetArea = new Rect();
-        this.mDeathRecipient = new IBinder.DeathRecipient() { // from class: com.samsung.android.multiwindow.DragAndDropHelper.1
-            @Override // android.os.IBinder.DeathRecipient
-            public void binderDied() {
-                DragAndDropHelper.this.dismiss();
-            }
-        };
-        this.mStub = new IDragAndDropClient.Stub() { // from class: com.samsung.android.multiwindow.DragAndDropHelper.2
-            @Override // com.samsung.android.multiwindow.IDragAndDropClient
-            public void onConnected(IBinder serverProxy, int displayId) throws RemoteException {
-                serverProxy.linkToDeath(DragAndDropHelper.this.mDeathRecipient, 0);
-                DragAndDropHelper.this.mServerProxy = IDragAndDropControllerProxy.Stub.asInterface(serverProxy);
-                DragAndDropHelper.this.mDisplayId = displayId;
-            }
+        this.mDeathRecipient =
+                new IBinder
+                        .DeathRecipient() { // from class:
+                                            // com.samsung.android.multiwindow.DragAndDropHelper.1
+                    @Override // android.os.IBinder.DeathRecipient
+                    public void binderDied() {
+                        DragAndDropHelper.this.dismiss();
+                    }
+                };
+        this.mStub =
+                new IDragAndDropClient
+                        .Stub() { // from class: com.samsung.android.multiwindow.DragAndDropHelper.2
+                    @Override // com.samsung.android.multiwindow.IDragAndDropClient
+                    public void onConnected(IBinder serverProxy, int displayId)
+                            throws RemoteException {
+                        serverProxy.linkToDeath(DragAndDropHelper.this.mDeathRecipient, 0);
+                        DragAndDropHelper.this.mServerProxy =
+                                IDragAndDropControllerProxy.Stub.asInterface(serverProxy);
+                        DragAndDropHelper.this.mDisplayId = displayId;
+                    }
 
-            @Override // com.samsung.android.multiwindow.IDragAndDropClient
-            public void onDisconnected() {
-                DragAndDropHelper.this.dismiss();
-            }
+                    @Override // com.samsung.android.multiwindow.IDragAndDropClient
+                    public void onDisconnected() {
+                        DragAndDropHelper.this.dismiss();
+                    }
 
-            @Override // com.samsung.android.multiwindow.IDragAndDropClient
-            public boolean getInitialDropTargetVisible() {
-                return DragAndDropHelper.this.mInitialDropTargetVisible;
-            }
+                    @Override // com.samsung.android.multiwindow.IDragAndDropClient
+                    public boolean getInitialDropTargetVisible() {
+                        return DragAndDropHelper.this.mInitialDropTargetVisible;
+                    }
 
-            @Override // com.samsung.android.multiwindow.IDragAndDropClient
-            public Rect getHiddenDropTargetArea() {
-                return DragAndDropHelper.this.mHiddenDropTargetArea;
-            }
-        };
+                    @Override // com.samsung.android.multiwindow.IDragAndDropClient
+                    public Rect getHiddenDropTargetArea() {
+                        return DragAndDropHelper.this.mHiddenDropTargetArea;
+                    }
+                };
         this.mInitialDropTargetVisible = shellDropTargetVisibility;
         this.mHiddenDropTargetArea.set(hiddenDropTargetArea);
     }
@@ -93,7 +98,8 @@ public class DragAndDropHelper {
         }
 
         public DragAndDropHelper build() {
-            return new DragAndDropHelper(this.mInitialDropTargetVisible, this.mHiddenDropTargetArea);
+            return new DragAndDropHelper(
+                    this.mInitialDropTargetVisible, this.mHiddenDropTargetArea);
         }
     }
 }
