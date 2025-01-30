@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/top_level" android:background="@color/widget_setting_window_background_color" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:gravity="center" android:layout_gravity="start" android:id="@id/select_conversation_title" android:layout_width="wrap_content" android:layout_height="64.0dip" android:text="@string/select_conversation_title" style="@style/PeopleWidgetSetting_Topbar" />
+    <androidx.core.widget.NestedScrollView android:id="@id/scroll_view" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/scroll_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip">
+            <LinearLayout android:orientation="vertical" android:id="@id/priority" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="35.0dip">
+                <TextView android:id="@id/priority_header" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/priority_conversations" style="@style/PeopleWidgetSetting_Title" />
+                <LinearLayout android:orientation="vertical" android:id="@id/priority_tiles" android:background="@drawable/widget_setting_content_area_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:clipToOutline="true" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/recent" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:gravity="start" android:id="@id/recent_header" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/recent_conversations" style="@style/PeopleWidgetSetting_Title" />
+                <LinearLayout android:orientation="vertical" android:id="@id/recent_tiles" android:background="@drawable/widget_setting_content_area_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:clipToOutline="true" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

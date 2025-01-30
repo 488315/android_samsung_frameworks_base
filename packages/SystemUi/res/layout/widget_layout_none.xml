@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/root" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:layout_width="@dimen/widget_launcher_layout_none_widget_layout_width" android:layout_height="@dimen/widget_launcher_layout_none_widget_layout_height" android:layout_marginTop="@dimen/widget_launcher_layout_none_widget_layout_top_margin" android:src="@drawable/cover_launcher_no_apps_widget" android:layout_marginStart="@dimen/widget_launcher_layout_none_widget_layout_left_margin" />
+    <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="@dimen/widget_launcher_layout_none_icon_text_layout_top_margin"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <ImageView android:gravity="center" android:layout_width="@dimen/widget_launcher_layout_none_icon_layout_width" android:layout_height="@dimen/widget_launcher_layout_none_icon_layout_height" android:layout_marginTop="@dimen/widget_launcher_layout_none_icon_layout_top_margin" android:src="@drawable/cover_launcher_app_icons" />
+        <TextView android:textSize="@dimen/widget_launcher_layout_none_text_size" android:textColor="@color/cover_launcher_text_color" android:focusable="true" android:layout_width="@dimen/widget_launcher_layout_none_text_layout_width" android:layout_height="wrap_content" android:text="@string/no_apps_selected" android:maxLines="3" android:fontFamily="sec" android:textDirection="locale" android:textAlignment="viewStart" android:layout_marginStart="@dimen/widget_launcher_layout_none_text_layout_left_margin" android:textFontWeight="400" />
+    </LinearLayout>
+</LinearLayout>

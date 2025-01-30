@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.media.QSMediaCornerRoundedView android:id="@id/media_carousel_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.viewpager.widget.ViewPager android:id="@id/sec_media_carousel_view_pager" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <com.android.systemui.qs.SecPageIndicator android:layout_gravity="center|top" android:id="@id/sec_media_page_indicator" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="10.0dip" />
+</com.android.systemui.media.QSMediaCornerRoundedView>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="drawable" name="forced_resizable_background">#59000000</item>
+    <item type="drawable" name="ic_sysbar_back_dark_theme" />
+    <item type="drawable" name="ic_sysbar_back_ime_dark_theme" />
+    <item type="drawable" name="ic_sysbar_back_ime_theme" />
+    <item type="drawable" name="ic_sysbar_back_theme" />
+    <item type="drawable" name="ic_sysbar_docked_dark_theme" />
+    <item type="drawable" name="ic_sysbar_docked_theme" />
+    <item type="drawable" name="ic_sysbar_home_dark_theme" />
+    <item type="drawable" name="ic_sysbar_home_theme" />
+    <item type="drawable" name="ic_sysbar_recent_dark_theme" />
+    <item type="drawable" name="ic_sysbar_recent_theme" />
+    <item type="drawable" name="indicator_code_lock_point_area_default_holo" />
+    <item type="drawable" name="indicator_code_lock_point_area_default_holo_black" />
+    <item type="drawable" name="indicator_code_lock_point_area_green_holo" />
+    <item type="drawable" name="indicator_code_lock_point_area_green_holo_black" />
+    <item type="drawable" name="indicator_code_lock_point_area_red_holo" />
+    <item type="drawable" name="indicator_code_lock_point_area_red_holo_black" />
+    <item type="drawable" name="material_ic_keyboard_arrow_next_black_24dp">@drawable/material_ic_keyboard_arrow_right_black_24dp</item>
+    <item type="drawable" name="material_ic_keyboard_arrow_previous_black_24dp">@drawable/material_ic_keyboard_arrow_left_black_24dp</item>
+    <item type="drawable" name="notification_number_text_color">#ffffffff</item>
+    <item type="drawable" name="notification_template_icon_bg">#3333b5e5</item>
+    <item type="drawable" name="notification_template_icon_low_bg">#0cffffff</item>
+    <item type="drawable" name="pin_number_bg_image" />
+    <item type="drawable" name="pin_number_bg_image_black" />
+    <item type="drawable" name="pin_number_image_0" />
+    <item type="drawable" name="pin_number_image_0_black" />
+    <item type="drawable" name="pin_number_image_1" />
+    <item type="drawable" name="pin_number_image_1_black" />
+    <item type="drawable" name="pin_number_image_2" />
+    <item type="drawable" name="pin_number_image_2_black" />
+    <item type="drawable" name="pin_number_image_3" />
+    <item type="drawable" name="pin_number_image_3_black" />
+    <item type="drawable" name="pin_number_image_4" />
+    <item type="drawable" name="pin_number_image_4_black" />
+    <item type="drawable" name="pin_number_image_5" />
+    <item type="drawable" name="pin_number_image_5_black" />
+    <item type="drawable" name="pin_number_image_6" />
+    <item type="drawable" name="pin_number_image_6_black" />
+    <item type="drawable" name="pin_number_image_7" />
+    <item type="drawable" name="pin_number_image_7_black" />
+    <item type="drawable" name="pin_number_image_8" />
+    <item type="drawable" name="pin_number_image_8_black" />
+    <item type="drawable" name="pin_number_image_9" />
+    <item type="drawable" name="pin_number_image_9_black" />
+    <item type="drawable" name="qs_detail_header_progress">@android:drawable/switch_thumb_activated_holo_light</item>
+    <item type="drawable" name="system_bar_background">@color/system_bar_background_opaque</item>
+    <item type="drawable" name="unblock_hw_sensor_all">@drawable/ic_videocam_off</item>
+    <item type="drawable" name="unblock_hw_sensor_all_second">@drawable/ic_mic_off</item>
+    <item type="drawable" name="unblock_hw_sensor_camera">@drawable/ic_videocam_off</item>
+    <item type="drawable" name="unblock_hw_sensor_microphone">@drawable/ic_mic_off</item>
+</resources>

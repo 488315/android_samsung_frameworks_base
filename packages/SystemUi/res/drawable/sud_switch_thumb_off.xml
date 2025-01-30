@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:left="@dimen/sud_switch_thumb_margin" android:top="@dimen/sud_switch_thumb_margin" android:right="@dimen/sud_switch_thumb_margin" android:bottom="@dimen/sud_switch_thumb_margin">
+        <shape android:shape="oval">
+            <size android:height="@dimen/sud_switch_thumb_size" android:width="@dimen/sud_switch_thumb_size" />
+            <solid android:color="@color/sud_switch_thumb_off" />
+        </shape>
+    </item>
+</layer-list>

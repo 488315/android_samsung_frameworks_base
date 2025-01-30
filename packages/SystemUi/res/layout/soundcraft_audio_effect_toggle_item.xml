@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/item_root" android:padding="8.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:layout_marginBottom="6.0dip" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/item_icon" android:layout_width="28.0dip" android:layout_height="28.0dip" android:layout_margin="4.0dip" android:src="@drawable/ic_audio_bluetooth" android:scaleType="fitCenter" />
+    <TextView android:textSize="17.0dip" android:textColor="#ffffffff" android:layout_gravity="center" android:id="@id/item_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Options" android:layout_weight="1.0" />
+    <androidx.appcompat.widget.SwitchCompat android:theme="@style/Theme.AppCompat.DayNight" android:gravity="center" android:layout_gravity="center" android:id="@id/item_switch" android:focusable="false" android:clickable="true" android:layout_width="35.0dip" android:layout_height="20.0dip" android:importantForAccessibility="no" />
+</LinearLayout>

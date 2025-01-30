@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="config_changeVolumeRowTintWhenInactive">false</bool>
+    <bool name="config_showLowMediaVolumeIcon">true</bool>
+    <bool name="config_volumeDialogUseBackgroundBlur">true</bool>
+    <bool name="log_access_confirmation_learn_more_as_link">false</bool>
+    <bool name="config_unblockHwSensorIconEnableTint">true</bool>
+</resources>

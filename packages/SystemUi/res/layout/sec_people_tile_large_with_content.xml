@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <include layout="@layout/people_tile_punctuation_background_large" />
+        <include layout="@layout/people_tile_emoji_background_large" />
+        <LinearLayout android:layout_gravity="top" android:orientation="vertical" android:id="@id/content" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="vertical" android:id="@id/main_content" android:paddingTop="@dimen/widget_main_content_padding_14dp" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="@dimen/widget_main_content_padding_10dp" android:paddingEnd="@dimen/widget_main_content_padding_10dp">
+                <FrameLayout android:gravity="start|center|top" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <FrameLayout android:gravity="start|center|top" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentStart="true">
+                        <ImageView android:id="@id/person_icon" android:layout_width="@dimen/max_people_avatar_size_for_large_content" android:layout_height="@dimen/max_people_avatar_size_for_large_content" />
+                        <ImageView android:layout_gravity="end|center|top" android:id="@id/availability" android:background="@drawable/availability_dot_10dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    </FrameLayout>
+                    <TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Title" android:textSize="10.0dip" android:ellipsize="end" android:gravity="end" android:layout_gravity="end" android:id="@id/messages_count" android:background="@drawable/people_space_messages_count_background" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:paddingStart="4.0dip" android:paddingEnd="4.0dip" android:layout_alignParentEnd="true" />
+                    <ImageView android:layout_gravity="end|center|top" android:id="@id/predefined_icon" android:layout_width="@dimen/larger_predefined_icon" android:layout_height="@dimen/larger_predefined_icon" android:tint="?android:textColorTertiary" />
+                </FrameLayout>
+                <LinearLayout android:layout_gravity="top" android:orientation="vertical" android:paddingTop="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:textAppearance="@style/PeopleWidgetName" android:textSize="@dimen/name_text_size_for_large" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:gravity="start|center" android:layout_gravity="start|center|top" android:id="@id/name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/empty_user_name" android:singleLine="true" />
+                    <TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Title" android:textSize="12.0dip" android:textColor="?android:textColorSecondary" android:ellipsize="end" android:gravity="center_vertical" android:layout_gravity="center" android:id="@id/subtext" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_user_name" android:singleLine="true" />
+                    <TextView android:textAppearance="@style/PeopleWidgetContent" android:textSize="@dimen/content_text_size_for_large" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:id="@id/text_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_status" android:maxLines="2" android:singleLine="false" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:id="@id/image_content" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingHorizontal="@dimen/widget_image_content_padding">
+                <ImageView android:gravity="center" android:id="@id/image" android:background="@drawable/people_space_content_background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

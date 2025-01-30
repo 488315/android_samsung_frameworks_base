@@ -1,0 +1,27 @@
+package com.samsung.systemui.splugins.navigationbar;
+
+/* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+/* loaded from: classes3.dex */
+public enum IconType {
+    TYPE_BACK,
+    TYPE_BACK_LAND,
+    TYPE_BACK_ALT,
+    TYPE_BACK_ALT_LAND,
+    TYPE_HOME,
+    TYPE_RECENT,
+    TYPE_DOCKED,
+    TYPE_IME,
+    TYPE_MENU,
+    TYPE_SHOW_PIN,
+    TYPE_HIDE_PIN,
+    TYPE_A11Y,
+    TYPE_BACK_CAR,
+    TYPE_BACK_LAND_CAR,
+    TYPE_BACK_ALT_CAR,
+    TYPE_BACK_ALT_LAND_CAR,
+    TYPE_HOME_CAR,
+    TYPE_GESTURE_HINT,
+    TYPE_GESTURE_HINT_VI,
+    TYPE_GESTURE_HANDLE_HINT,
+    TYPE_SECONDARY_HOME_HANDLE
+}

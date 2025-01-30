@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/item" android:background="@drawable/grid_background" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/icon" android:focusable="false" android:clickable="false" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginTop="4.0dip" android:layout_marginBottom="8.0dip" android:scaleType="fitXY" android:layout_centerHorizontal="true" android:importantForAccessibility="no" />
+    <TextView android:textSize="@dimen/app_picker_grid_icon_title_size" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:maxLines="2" android:layout_below="@id/icon" android:layout_centerHorizontal="true" android:importantForAccessibility="no" android:textAlignment="center" />
+    <CheckBox android:id="@id/check_widget" android:background="@drawable/btn_check_material_background" android:layout_width="32.0dip" android:layout_height="32.0dip" android:button="@drawable/btn_check_material_anim" android:layout_marginStart="2.0dip" android:buttonTint="@color/grid_check_button_tint_selector" />
+</RelativeLayout>

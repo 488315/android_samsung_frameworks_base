@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/dialog_bg" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/broadcast_dialog_margin">
+        <ImageView android:layout_gravity="center" android:id="@id/dialog_icon" android:layout_width="@dimen/broadcast_dialog_icon_size" android:layout_height="@dimen/broadcast_dialog_icon_size" android:layout_marginTop="@dimen/broadcast_dialog_icon_margin_top" android:layout_marginBottom="@dimen/broadcast_dialog_title_img_margin_top" android:src="@drawable/settings_input_antenna" />
+        <TextView android:gravity="center" android:layout_gravity="center" android:id="@id/dialog_title" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/BroadcastDialogTitleStyle" />
+        <TextView android:gravity="center" android:layout_gravity="center" android:id="@id/dialog_subtitle" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/BroadcastDialogBodyStyle" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/broadcast_dialog_margin" android:layout_marginHorizontal="@dimen/broadcast_dialog_margin">
+        <Button android:id="@id/switch_broadcast" android:layout_marginBottom="@dimen/broadcast_dialog_btn_margin_bottom" style="@style/BroadcastDialogButtonStyle" />
+        <Button android:id="@id/change_output" android:layout_marginBottom="@dimen/broadcast_dialog_btn_margin_bottom" android:text="@string/bt_le_audio_broadcast_dialog_different_output" style="@style/BroadcastDialogButtonStyle" />
+        <Button android:id="@id/cancel" android:text="@android:string/cancel" style="@style/BroadcastDialogButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

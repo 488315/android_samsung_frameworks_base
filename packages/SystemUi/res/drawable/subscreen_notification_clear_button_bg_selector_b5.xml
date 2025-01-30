@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true" android:state_pressed="false">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <stroke android:width="0.0dip" android:color="#ff000000" />
+                    <solid android:color="@color/subscreen_notification_clear_button_background_color_b5" />
+                    <corners android:radius="13.0dip" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <solid android:color="@color/subscreen_notification_clear_button_focused_color_b5" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item android:drawable="@drawable/subscreen_notification_button_background_b5" />
+</selector>

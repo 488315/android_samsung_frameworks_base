@@ -1,0 +1,26 @@
+package com.android.systemui.controls.management.adapter;
+
+import android.view.View;
+import androidx.recyclerview.widget.RecyclerView;
+import com.android.systemui.controls.management.model.MainModel;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+/* loaded from: classes.dex */
+public abstract class Holder extends RecyclerView.ViewHolder {
+
+    /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+    public enum UpdateReq {
+        UPDATE_DIM_STATUS
+    }
+
+    public /* synthetic */ Holder(View view, DefaultConstructorMarker defaultConstructorMarker) {
+        this(view);
+    }
+
+    public abstract void bindData(MainModel mainModel);
+
+    private Holder(View view) {
+        super(view);
+    }
+}

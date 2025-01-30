@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="UserDetailView">
+        <item name="numColumns">4</item>
+    </style>
+</resources>

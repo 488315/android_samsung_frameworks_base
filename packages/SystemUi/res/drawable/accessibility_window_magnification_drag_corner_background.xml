@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="@dimen/magnification_window_drag_corner_size" android:width="@dimen/magnification_window_drag_corner_size" />
+    <stroke android:width="@dimen/magnification_window_drag_corner_stroke" android:color="@android:color/black" />
+    <solid android:color="@color/magnification_drag_corner_background" />
+</shape>

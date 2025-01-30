@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/side_cover_background" android:clickable="true" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:background="@drawable/sec_global_actions_button_bg_side_cover" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:layout_marginTop="3.0dip" android:layout_marginBottom="3.0dip">
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/sec_global_actions_cover_icon" android:clickable="false" android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_marginLeft="2.0dip" android:layout_marginTop="2.0dip" android:layout_marginRight="12.0dip" android:layout_marginBottom="2.0dip" />
+        <LinearLayout android:layout_gravity="center_vertical" android:id="@id/sec_global_actions_cover_text_background" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="16.0dip">
+            <TextView android:textSize="15.0dip" android:textColor="#fffafafa" android:gravity="center_vertical" android:id="@id/sec_global_actions_cover_text" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAlignment="center" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

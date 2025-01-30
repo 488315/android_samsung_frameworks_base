@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.appcompat.widget.Toolbar android:layout_gravity="bottom" android:id="@id/toolbar" android:layout_width="fill_parent" android:layout_height="@dimen/basic_interaction_action_bar_height" />
+    <LinearLayout android:gravity="center_horizontal" android:background="@color/control_activity_background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="1.0">
+        <ScrollView android:orientation="vertical" android:id="@id/main_layout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="@integer/controls_basic_width_percentage">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <FrameLayout android:id="@id/fragment_container" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

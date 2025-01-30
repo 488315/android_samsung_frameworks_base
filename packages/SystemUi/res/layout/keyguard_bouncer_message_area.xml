@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.keyguard.BouncerKeyguardMessageArea android:ellipsize="marquee" android:gravity="center" android:id="@id/bouncer_message_area" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/keyguard_lock_padding" android:singleLine="true" style="@style/Keyguard.TextView" />
+</merge>

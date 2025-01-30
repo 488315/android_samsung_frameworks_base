@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:shape="rectangle" android:color="@color/subscreen_notification_tip_button_ripple_color_b5"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <stroke android:width="0.0dip" android:color="#ff000000" />
+            <solid android:color="@color/subscreen_notification_tip_button_background_b5" />
+            <corners android:radius="22.0dip" />
+            <padding android:left="20.0dip" android:top="8.0dip" android:right="20.0dip" android:bottom="7.5dip" />
+        </shape>
+    </item>
+</ripple>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="pip_edu_text_non_scroll_show_duration">10500</integer>
+    <integer name="pip_edu_text_scroll_times">2</integer>
+    <integer name="pip_edu_text_start_scroll_delay">2000</integer>
+    <integer name="pip_edu_text_view_exit_animation_duration">300</integer>
+    <integer name="pip_edu_text_window_exit_animation_duration">1000</integer>
+    <integer name="tv_window_menu_fade_animation_duration">500</integer>
+</resources>

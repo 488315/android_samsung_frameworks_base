@@ -1,0 +1,105 @@
+package com.android.systemui.keyguard;
+
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
+
+/* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+/* loaded from: classes.dex */
+public final class ViewMediatorProvider {
+    public final Function0 adjustStatusBarLocked;
+    public final Function0 alarmManager;
+    public final Function0 cancelKeyguardExitAnimMsg;
+    public final Function0 dismissMsg;
+    public final Function0 doKeyguardLaterLocked;
+    public final Function1 doKeyguardLocked;
+    public final Function0 getDelayedShowingSequence;
+    public final Function1 getLockTimeout;
+    public final Function0 getStateCallbackCount;
+    public final Function0 getSurfaceBehindRemoteAnimationFinishedCallback;
+    public final Function0 handleHide;
+    public final Function0 handler;
+    public final Function0 hasPendingLock;
+    public final Function0 hideLocked;
+    public final Function0 hideMsg;
+    public final Function0 increaseDelayedShowingSeq;
+    public final Function0 isBootCompleted;
+    public final Function0 isExternallyEnabled;
+    public final Function0 isKeyguardDonePending;
+    public final Function0 isShowing;
+    public final Function0 isWakeAndUnlocking;
+    public final Function0 keyguardDOnePendingTimeoutMsg;
+    public final Function0 keyguardDoneDrawingMsg;
+    public final Function0 keyguardDoneMsg;
+    public final Function0 keyguardTimeoutMsg;
+    public final Function0 lock;
+    public final Function0 notifyFinishedGoingToSleepMsg;
+    public final Function0 notifyStartedGoingToSleepMsg;
+    public final Function0 notifyStartedWakingUoMsg;
+    public final Function1 playSound;
+    public final Function0 resetMsg;
+    public final Function0 resetPendingLock;
+    public final Function0 resetPendingReset;
+    public final Function0 resetStateLocked;
+    public final Function0 resetSurfaceBehindRemoteAnimationFinishedCallback;
+    public final Function1 setHiding;
+    public final Function0 setOccludedMsg;
+    public final Function2 setShowingLocked;
+    public final Function0 showKeyguardWakeLock;
+    public final Function0 showMsg;
+    public final Function0 startKeyguardExitAnimMsg;
+    public final Function0 systemReadyMsg;
+    public final Function0 tryKeyguardDone;
+    public final Function1 updatePhoneState;
+    public final Function0 userPresentIntent;
+    public final Function0 verityUnlockMsg;
+
+    public ViewMediatorProvider(Function0 function0, Function0 function02, Function0 function03, Function0 function04, Function0 function05, Function0 function06, Function0 function07, Function0 function08, Function0 function09, Function0 function010, Function0 function011, Function0 function012, Function0 function013, Function0 function014, Function0 function015, Function0 function016, Function0 function017, Function0 function018, Function0 function019, Function0 function020, Function0 function021, Function0 function022, Function0 function023, Function0 function024, Function0 function025, Function0 function026, Function0 function027, Function0 function028, Function0 function029, Function0 function030, Function0 function031, Function0 function032, Function0 function033, Function0 function034, Function0 function035, Function0 function036, Function0 function037, Function0 function038, Function2 function2, Function1 function1, Function1 function12, Function0 function039, Function0 function040, Function1 function13, Function0 function041, Function0 function042, Function1 function14, Function1 function15) {
+        this.showMsg = function0;
+        this.hideMsg = function02;
+        this.resetMsg = function03;
+        this.verityUnlockMsg = function04;
+        this.notifyFinishedGoingToSleepMsg = function05;
+        this.keyguardDoneMsg = function06;
+        this.keyguardDoneDrawingMsg = function07;
+        this.setOccludedMsg = function08;
+        this.keyguardTimeoutMsg = function09;
+        this.dismissMsg = function010;
+        this.startKeyguardExitAnimMsg = function011;
+        this.keyguardDOnePendingTimeoutMsg = function012;
+        this.notifyStartedWakingUoMsg = function013;
+        this.notifyStartedGoingToSleepMsg = function014;
+        this.systemReadyMsg = function015;
+        this.cancelKeyguardExitAnimMsg = function016;
+        this.lock = function017;
+        this.handler = function018;
+        this.alarmManager = function019;
+        this.showKeyguardWakeLock = function020;
+        this.userPresentIntent = function021;
+        this.isWakeAndUnlocking = function022;
+        this.hasPendingLock = function023;
+        this.isShowing = function024;
+        this.isExternallyEnabled = function026;
+        this.isBootCompleted = function028;
+        this.isKeyguardDonePending = function029;
+        this.getDelayedShowingSequence = function030;
+        this.getSurfaceBehindRemoteAnimationFinishedCallback = function031;
+        this.resetSurfaceBehindRemoteAnimationFinishedCallback = function032;
+        this.resetStateLocked = function033;
+        this.adjustStatusBarLocked = function034;
+        this.doKeyguardLaterLocked = function035;
+        this.handleHide = function036;
+        this.hideLocked = function037;
+        this.tryKeyguardDone = function038;
+        this.setShowingLocked = function2;
+        this.doKeyguardLocked = function1;
+        this.playSound = function12;
+        this.resetPendingLock = function039;
+        this.resetPendingReset = function040;
+        this.setHiding = function13;
+        this.increaseDelayedShowingSeq = function041;
+        this.getStateCallbackCount = function042;
+        this.getLockTimeout = function14;
+        this.updatePhoneState = function15;
+    }
+}

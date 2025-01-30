@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list android:height="@dimen/bouncer_user_switcher_icon_size_plus_margin" android:width="@dimen/bouncer_user_switcher_icon_size_plus_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/user_switcher_fullscreen_bg" />
+        </shape>
+    </item>
+    <item android:id="@id/ring">
+        <shape android:shape="oval">
+            <stroke android:width="@dimen/user_switcher_icon_selected_width" android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <item android:id="@id/user_avatar" android:height="@dimen/bouncer_user_switcher_icon_size" android:width="@dimen/bouncer_user_switcher_icon_size" android:drawable="@drawable/user_avatar_bg" android:left="@dimen/user_switcher_icon_large_margin" android:top="@dimen/user_switcher_icon_large_margin" android:right="@dimen/user_switcher_icon_large_margin" android:bottom="@dimen/user_switcher_icon_large_margin" />
+</layer-list>

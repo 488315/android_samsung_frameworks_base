@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bar_side_margin">0.0dip</dimen>
+    <dimen name="basic_panel_bottom_margin">70.0dip</dimen>
+    <dimen name="basic_panel_top_margin">20.0dip</dimen>
+    <dimen name="biometric_auth_pattern_view_max_size">348.0dip</dimen>
+    <dimen name="biometric_auth_pattern_view_size">248.0dip</dimen>
+    <dimen name="biometric_dialog_button_negative_max_width">140.0dip</dimen>
+    <dimen name="biometric_dialog_button_positive_max_width">116.0dip</dimen>
+    <dimen name="bouncer_user_switcher_view_mode_user_switcher_bottom_margin">0.0dip</dimen>
+    <dimen name="bouncer_user_switcher_view_mode_view_flipper_bottom_margin">0.0dip</dimen>
+    <item type="dimen" name="bouncer_user_switcher_y_trans">@dimen/status_bar_height</item>
+    <dimen name="brightness_bar_height">72.0dip</dimen>
+    <dimen name="brightness_bar_height_fold">76.0dip</dimen>
+    <dimen name="brightness_bar_width">350.0dip</dimen>
+    <dimen name="brightness_detail_padding">9.0dip</dimen>
+    <dimen name="brightness_slider_min_width">312.0dip</dimen>
+    <dimen name="brightness_slider_top_margin">0.0dip</dimen>
+    <dimen name="brightness_tile_between_margin">12.0dip</dimen>
+    <dimen name="brightness_tile_layout_bottom_margin">0.0dip</dimen>
+    <dimen name="brightness_tile_layout_height">70.0dip</dimen>
+    <dimen name="brightness_tile_layout_height_fold">74.0dip</dimen>
+    <dimen name="brightness_tile_layout_left_margin">0.0dip</dimen>
+    <dimen name="brightness_tile_layout_right_margin">20.0dip</dimen>
+    <dimen name="bubble_padding_top">4.0dip</dimen>
+    <dimen name="controls_content_margin_horizontal">16.0dip</dimen>
+    <dimen name="controls_management_favorites_top_margin">8.0dip</dimen>
+    <dimen name="controls_management_footer_height">56.0dip</dimen>
+    <dimen name="controls_management_footer_top_margin">4.0dip</dimen>
+    <dimen name="controls_management_indicator_top_margin">8.0dip</dimen>
+    <dimen name="controls_management_list_margin">4.0dip</dimen>
+    <dimen name="controls_management_titles_margin">8.0dip</dimen>
+    <dimen name="controls_management_top_padding">12.0dip</dimen>
+    <dimen name="controls_management_zone_top_margin">24.0dip</dimen>
+    <dimen name="docked_divider_handle_height">16.0dip</dimen>
+    <dimen name="docked_divider_handle_touchable_region_height">98.0dip</dimen>
+    <dimen name="docked_divider_handle_touchable_region_width">30.0dip</dimen>
+    <dimen name="docked_divider_handle_width">2.0dip</dimen>
+    <dimen name="flex_panel_floating_icon_left_margin">13.0dip</dimen>
+    <dimen name="flex_panel_floating_icon_tip_bottom_margin">43.0dip</dimen>
+    <item type="dimen" name="fold_sub_num_pad_key_bottom_margin_ratio">0.006</item>
+    <item type="dimen" name="fold_sub_num_pad_key_side_margin_ratio">0.07</item>
+    <item type="dimen" name="fold_sub_num_pad_key_size_ratio">0.174</item>
+    <dimen name="global_actions_button_padding">26.0dip</dimen>
+    <dimen name="global_actions_button_size">72.0dip</dimen>
+    <dimen name="global_actions_power_dialog_item_bottom_margin">35.0dip</dimen>
+    <dimen name="global_actions_power_dialog_item_height">130.0dip</dimen>
+    <dimen name="grid_layout_bottom_margin">7.0dip</dimen>
+    <dimen name="grid_layout_text_height">30.0dip</dimen>
+    <dimen name="grid_layout_text_size">4.0dip</dimen>
+    <dimen name="grid_layout_text_width">58.0dip</dimen>
+    <dimen name="grid_menu_icon_size">28.0dip</dimen>
+    <dimen name="grid_menu_layout_size">40.0dip</dimen>
+    <dimen name="keyguard_eca_bottom_margin">2.0dip</dimen>
+    <dimen name="keyguard_eca_top_margin">0.0dip</dimen>
+    <dimen name="keyguard_password_height">26.0dip</dimen>
+    <dimen name="keyguard_usim_text_margin_top">4.0dip</dimen>
+    <dimen name="kg_biometric_view_text_margin">6.0dip</dimen>
+    <dimen name="kg_emergency_carrier_button_font_size_tablet">13.0sp</dimen>
+    <dimen name="kg_fold_sub_pin_container_margin_bottom">9.0dip</dimen>
+    <dimen name="kg_message_area_width_tablet">420.0dip</dimen>
+    <dimen name="kg_password_container_margin_bottom">14.0dip</dimen>
+    <dimen name="kg_pattern_eca_margin_bottom_tablet">16.0dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_height_tablet">255.0dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_margin_bottom">10.0dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_margin_bottom_tablet">16.0dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_width_tablet">255.0dip</dimen>
+    <dimen name="kg_pattern_message_area_margin_bottom_tablet">18.0dip</dimen>
+    <dimen name="kg_pin_container_margin_bottom">12.0dip</dimen>
+    <dimen name="kg_pin_klondike_font_size_tablet">9.0dip</dimen>
+    <dimen name="kg_pin_num_pad_font_size_tablet">26.0dip</dimen>
+    <dimen name="kg_prev_help_text_font_size">14.0dip</dimen>
+    <dimen name="kg_prev_message_area_margin_bottom">4.0dip</dimen>
+    <dimen name="kg_prev_sub_help_text_font_size">13.0dip</dimen>
+    <item type="dimen" name="kg_security_input_box_width_tablet">@dimen/kg_message_area_width_tablet</item>
+    <dimen name="kg_security_view_side_margin">74.0dip</dimen>
+    <dimen name="kg_strong_auth_timeout_popup_size_tablet">524.0dip</dimen>
+    <dimen name="large_dialog_width">348.0dip</dimen>
+    <dimen name="material_time_picker_minimum_screen_height">450.0dip</dimen>
+    <dimen name="material_time_picker_minimum_screen_width">600.0dip</dimen>
+    <dimen name="media_panel_button_margin">48.0dip</dimen>
+    <dimen name="media_panel_play_pause_margin">49.0dip</dimen>
+    <dimen name="media_panel_width">472.0dip</dimen>
+    <dimen name="mr_controller_volume_group_list_item_height">61.0dip</dimen>
+    <dimen name="mr_controller_volume_group_list_item_icon_size">18.0dip</dimen>
+    <dimen name="mr_controller_volume_group_list_max_height">132.0dip</dimen>
+    <dimen name="mtrl_alert_dialog_background_inset_bottom">24.0dip</dimen>
+    <dimen name="mtrl_alert_dialog_background_inset_top">24.0dip</dimen>
+    <dimen name="mtrl_calendar_days_of_week_height">20.0dip</dimen>
+    <dimen name="mtrl_calendar_header_content_padding">4.0dip</dimen>
+    <dimen name="mtrl_calendar_header_height_fullscreen">96.0dip</dimen>
+    <dimen name="mtrl_calendar_header_toggle_margin_bottom">0.0dip</dimen>
+    <dimen name="mtrl_calendar_header_toggle_margin_top">0.0dip</dimen>
+    <dimen name="mtrl_calendar_landscape_header_width">104.0dip</dimen>
+    <dimen name="mtrl_calendar_selection_baseline_to_top_fullscreen">68.0dip</dimen>
+    <dimen name="mtrl_calendar_selection_text_baseline_to_bottom_fullscreen">28.0dip</dimen>
+    <dimen name="mtrl_calendar_selection_text_baseline_to_top">64.0dip</dimen>
+    <dimen name="mtrl_calendar_text_input_padding_top">32.0dip</dimen>
+    <dimen name="mtrl_calendar_title_baseline_to_top">24.0dip</dimen>
+    <dimen name="mtrl_calendar_title_baseline_to_top_fullscreen">32.0dip</dimen>
+    <item type="dimen" name="navigation_bar_size">@android:dimen/notification_big_picture_max_height</item>
+    <dimen name="num_pad_row_margin_bottom">3.0dip</dimen>
+    <dimen name="paged_tile_bar_height">117.0dip</dimen>
+    <dimen name="paged_tile_bar_indicator_bottom_margin">2.0dip</dimen>
+    <dimen name="paged_tile_bar_indicator_top_margin">4.0dip</dimen>
+    <dimen name="paged_tile_bar_top_padding">12.0dip</dimen>
+    <dimen name="paged_tile_layout_height">104.0dip</dimen>
+    <dimen name="qqs_layout_margin_top">8.0dip</dimen>
+    <item type="dimen" name="qs_brightness_bar_side_padding_ratio">0.0</item>
+    <dimen name="qs_brightness_margin_bottom">12.0dip</dimen>
+    <dimen name="qs_brightness_margin_top">0.0dip</dimen>
+    <item type="dimen" name="qs_brightness_slider_radius_tablet">0.0239</item>
+    <item type="dimen" name="qs_button_container_height_ratio">0.1362</item>
+    <item type="dimen" name="qs_button_container_height_ratio_fold">0.083192</item>
+    <item type="dimen" name="qs_button_container_height_ratio_fold_sub">0.1576</item>
+    <item type="dimen" name="qs_button_container_height_ratio_tablet">0.0504</item>
+    <item type="dimen" name="qs_button_container_width_ratio">0.0558</item>
+    <item type="dimen" name="qs_button_container_width_ratio_fold">0.0545</item>
+    <item type="dimen" name="qs_button_container_width_ratio_fold_sub">0.0487</item>
+    <item type="dimen" name="qs_button_container_width_ratio_tablet">0.0348</item>
+    <item type="dimen" name="qs_container_bottom_margin_ratio">0.0357</item>
+    <item type="dimen" name="qs_container_bottom_margin_ratio_tablet">0.0174</item>
+    <item type="dimen" name="qs_date_button_container_height_ratio">0.1167</item>
+    <item type="dimen" name="qs_date_button_continer_height_ratio_fold">0.08</item>
+    <item type="dimen" name="qs_date_button_continer_height_ratio_tablet">0.0748</item>
+    <item type="dimen" name="qs_date_button_side_padding_ratio">0.0</item>
+    <dimen name="qs_detail_content_height_fold">380.0dip</dimen>
+    <dimen name="qs_detail_content_maxheight">270.0dip</dimen>
+    <dimen name="qs_detail_content_minheight">190.0dip</dimen>
+    <dimen name="qs_detail_extended_text_container_width">560.0dip</dimen>
+    <dimen name="qs_detail_side_padding">0.0dip</dimen>
+    <dimen name="qs_footer_padding">14.0dip</dimen>
+    <item type="dimen" name="qs_header_tile_layout_side_padding_ratio">0.0</item>
+    <item type="dimen" name="qs_header_top_margin_ratio">0.0176</item>
+    <item type="dimen" name="qs_label_height_ratio">0.1055</item>
+    <item type="dimen" name="qs_label_height_ratio_fold">0.0764</item>
+    <item type="dimen" name="qs_label_height_ratio_fold_sub">0.1331</item>
+    <item type="dimen" name="qs_label_height_ratio_tablet">0.0517</item>
+    <item type="dimen" name="qs_media_device_bar_side_padding_ratio">0.0</item>
+    <item type="dimen" name="qs_media_player_collapsed_height_ratio">0.237</item>
+    <item type="dimen" name="qs_media_player_expand_height_ratio">0.314</item>
+    <item type="dimen" name="qs_multi_sim_bar_height_ratio">0.2305</item>
+    <item type="dimen" name="qs_multi_sim_bar_height_ratio_fold">0.1714</item>
+    <item type="dimen" name="qs_multi_sim_bar_height_ratio_fold_sub">0.2</item>
+    <item type="dimen" name="qs_multi_sim_bar_slot_divider_padding_ratio">0.163</item>
+    <item type="dimen" name="qs_panel_padding_top">@dimen/qqs_layout_margin_top</item>
+    <item type="dimen" name="qs_panel_side_padding_ratio">0.0</item>
+    <item type="dimen" name="qs_qs_footer_height_ratio">0.0297</item>
+    <item type="dimen" name="qs_qs_footer_height_ratio_fold">0.0391</item>
+    <item type="dimen" name="qs_qs_footer_height_ratio_tablet">0.022</item>
+    <dimen name="qs_security_footer_background_inset">12.0dip</dimen>
+    <item type="dimen" name="qs_security_footer_single_line_height">@android:dimen/secondary_waterfall_display_bottom_edge_size</item>
+    <item type="dimen" name="qs_system_icon_height_ratio_tablet">0.0352</item>
+    <item type="dimen" name="qs_tile_expanded_height_ratio">0.25</item>
+    <item type="dimen" name="qs_tile_expanded_height_ratio_fold">0.1714</item>
+    <item type="dimen" name="qs_tile_expanded_height_ratio_fold_sub">0.2893</item>
+    <item type="dimen" name="qs_tile_expanded_height_ratio_tablet">0.1288</item>
+    <item type="dimen" name="qs_tile_expanded_width">0.1012</item>
+    <item type="dimen" name="qs_tile_expanded_width_fold_sub">0.094</item>
+    <item type="dimen" name="qs_tile_expanded_width_tablet">0.0663</item>
+    <item type="dimen" name="qs_tile_layout_height_ratio">0.6904</item>
+    <item type="dimen" name="qs_tile_layout_height_ratio_fold">0.6563</item>
+    <item type="dimen" name="qs_tile_layout_height_ratio_has_mde">0.5832</item>
+    <item type="dimen" name="qs_tile_layout_height_ratio_has_mde_fold">0.6215</item>
+    <item type="dimen" name="qs_tile_layout_height_ratio_has_mde_fold_sub">0.4893</item>
+    <item type="dimen" name="qs_tile_layout_height_ratio_has_mde_tablet">0.4493</item>
+    <item type="dimen" name="qs_tile_layout_height_ratio_tablet">0.4493</item>
+    <item type="dimen" name="qs_tile_page_top_bottom_margin_ratio">0.01</item>
+    <item type="dimen" name="qs_tile_side_padding_ratio">0.0</item>
+    <item type="dimen" name="qs_tile_side_padding_ratio_fold_sub">0.0</item>
+    <item type="dimen" name="qs_tile_side_padding_ratio_tablet">0.0174</item>
+    <item type="dimen" name="qs_tile_touch_area_height_ratio">0.1527</item>
+    <item type="dimen" name="qs_tile_touch_area_height_ratio_fold">0.0865</item>
+    <item type="dimen" name="qs_tile_touch_area_height_ratio_fold_sub">0.1672</item>
+    <item type="dimen" name="qs_tile_touch_area_height_ratio_tablet">0.0823</item>
+    <item type="dimen" name="qs_tile_touch_area_width_ratio">0.0725</item>
+    <item type="dimen" name="qs_tile_touch_area_width_ratio_fold_sub">0.0696</item>
+    <item type="dimen" name="qs_tile_touch_area_width_ratio_tablet">0.0514</item>
+    <item type="dimen" name="qs_upper_cabinet_height_ratio_tablet">0.2349</item>
+    <dimen name="qspanel_layout_detail_divider_width">520.0dip</dimen>
+    <dimen name="rear_display_animation_height">180.0dip</dimen>
+    <dimen name="rear_display_animation_width">246.0dip</dimen>
+    <dimen name="rear_display_title_bottom_padding">0.0dip</dimen>
+    <dimen name="rear_display_title_top_padding">4.0dip</dimen>
+    <dimen name="scrim_size">594.0dip</dimen>
+    <dimen name="scroll_wheel_dashthickness">20.0dip</dimen>
+    <dimen name="scroll_wheel_margin">17.0dip</dimen>
+    <dimen name="scroll_wheel_width">40.0dip</dimen>
+    <item type="dimen" name="sec_brightness_detail_slider_width">@dimen/match_parent</item>
+    <dimen name="sec_fgs_max_height">138.0dip</dimen>
+    <dimen name="sec_min_nav_bar_height">0.0dip</dimen>
+    <dimen name="sec_qqs_media_player_top_margin">10.0dip</dimen>
+    <dimen name="sec_qs_detail_buttons_height">68.0dip</dimen>
+    <dimen name="sec_qs_detail_header_bottom_margin">15.0dip</dimen>
+    <dimen name="sec_qs_detail_header_height">56.0dip</dimen>
+    <dimen name="sec_qs_detail_items_side_padding_tablet">10.0dip</dimen>
+    <dimen name="sec_qs_detail_items_side_top_margin">10.0dip</dimen>
+    <dimen name="sec_qs_media_player_action_button_collapsed_margin_size">14.0dip</dimen>
+    <dimen name="sec_qs_panel_buttons_height">40.0dip</dimen>
+    <dimen name="sec_qs_panel_buttons_top_margin">4.0dip</dimen>
+    <dimen name="sec_qs_panel_page_indicator_container_height">6.0dip</dimen>
+    <item type="dimen" name="sec_settings_content_width_ratio">7.5</item>
+    <item type="dimen" name="sec_settings_side_width_ratio">1.25</item>
+    <dimen name="sec_style_qs_header_date_buttons_end_padding">8.0dip</dimen>
+    <dimen name="sesl_action_bar_default_height">56.0dip</dimen>
+    <dimen name="sesl_action_bar_height_with_padding">56.0dip</dimen>
+    <dimen name="sesl_action_bar_top_padding">0.0dip</dimen>
+    <dimen name="sesl_action_item_show_button_background_inset_vertical">5.0dip</dimen>
+    <dimen name="sesl_color_picker_color_swatch_view_container_margin_bottom">0.0dip</dimen>
+    <dimen name="sesl_color_picker_color_swatch_view_height">194.0dip</dimen>
+    <dimen name="sesl_color_picker_color_swatch_view_width">194.0dip</dimen>
+    <dimen name="sesl_color_picker_dialog_padding_bottom">38.0dip</dimen>
+    <dimen name="sesl_color_picker_dialog_padding_left">24.0dip</dimen>
+    <dimen name="sesl_color_picker_dialog_padding_top">30.0dip</dimen>
+    <dimen name="sesl_color_picker_gradient_wheel_cursor_radius">9.5dip</dimen>
+    <dimen name="sesl_color_picker_main_content_width">520.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_spectrum_view_height">190.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_spectrum_view_width">218.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_swatch_view_container_margin_top">10.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_swatch_view_height">190.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_swatch_view_height_background">212.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_swatch_view_margin_top_background">9.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_swatch_view_width">194.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_swatch_view_width_background">238.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_dialog_extra_horizontal_margin">0.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_dialog_padding_bottom">0.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_dialog_padding_top">6.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_main_content_width">600.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_selected_color_extra_margin">0.5dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_used_color_item_gap_margin">14.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_used_color_item_size">36.0dip</dimen>
+    <dimen name="sesl_color_picker_opacity_seekbar_background_width">257.5dip</dimen>
+    <dimen name="sesl_color_picker_opacity_seekbar_margin_bottom">20.0dip</dimen>
+    <dimen name="sesl_color_picker_opacity_seekbar_margin_top">20.0dip</dimen>
+    <dimen name="sesl_color_picker_rgb_layout_margin">15.0dip</dimen>
+    <dimen name="sesl_color_picker_seekbar_edittext_margin_left">20.0dip</dimen>
+    <dimen name="sesl_color_picker_seekbar_height">30.0dip</dimen>
+    <dimen name="sesl_color_picker_seekbar_width">268.0dip</dimen>
+    <dimen name="sesl_color_picker_selected_color_focus_width">129.0dip</dimen>
+    <dimen name="sesl_color_picker_selected_color_group_width">258.0dip</dimen>
+    <dimen name="sesl_color_picker_selected_color_item_margin">18.0dip</dimen>
+    <dimen name="sesl_color_picker_selected_color_text_width">71.0dip</dimen>
+    <dimen name="sesl_color_picker_spectrum_cursor_paint_size">20.0dip</dimen>
+    <dimen name="sesl_color_picker_spectrum_size">194.0dip</dimen>
+    <dimen name="sesl_color_picker_used_color_divider_container_height">20.0dip</dimen>
+    <dimen name="sesl_color_picker_used_color_group_width">260.0dip</dimen>
+    <dimen name="sesl_color_picker_used_color_item_gap_margin">8.399994dip</dimen>
+    <dimen name="sesl_color_picker_used_color_item_size">36.0dip</dimen>
+    <dimen name="sesl_dialog_body_text_padding_bottom">12.0dip</dimen>
+    <dimen name="sesl_dialog_button_bar_margin_bottom">8.0dip</dimen>
+    <dimen name="sesl_dialog_button_bar_padding_bottom">4.0dip</dimen>
+    <dimen name="sesl_dialog_title_padding_bottom">2.0dip</dimen>
+    <dimen name="sesl_dialog_title_padding_top">12.0dip</dimen>
+    <dimen name="sesl_select_dialog_padding_bottom">12.0dip</dimen>
+    <dimen name="sesl_spectrum_rect_top">12.0dip</dimen>
+    <dimen name="sesl_swatch_rect_top">11.0dip</dimen>
+    <dimen name="sesl_toolbar_title_text_size">19.0sp</dimen>
+    <dimen name="sesl_toolbar_title_text_size_with_subtitle">19.0dip</dimen>
+    <dimen name="split_divider_handle_height">23.5dip</dimen>
+    <dimen name="split_divider_handle_width">3.5dip</dimen>
+    <dimen name="sud_card_title_padding_bottom">0.0dip</dimen>
+    <dimen name="sud_card_title_padding_end">32.0dip</dimen>
+    <dimen name="sud_card_title_padding_start">56.0dip</dimen>
+    <dimen name="sud_card_title_padding_top">24.0dip</dimen>
+    <dimen name="sud_content_loading_frame_padding_bottom">24.0dip</dimen>
+    <dimen name="sud_content_loading_frame_padding_end">0.0dip</dimen>
+    <dimen name="sud_content_loading_frame_padding_start">0.0dip</dimen>
+    <dimen name="sud_decor_padding_top">0.0dip</dimen>
+    <dimen name="sud_glif_button_min_height">36.0dip</dimen>
+    <dimen name="sud_glif_card_height">560.0dip</dimen>
+    <dimen name="sud_glif_card_width">672.0dip</dimen>
+    <dimen name="sud_glif_content_padding_top">32.0dip</dimen>
+    <dimen name="sud_glif_content_padding_top_material_you">32.0dip</dimen>
+    <dimen name="sud_glif_description_margin_top">8.0dip</dimen>
+    <dimen name="sud_glif_footer_bar_min_height">52.0dip</dimen>
+    <dimen name="sud_glif_footer_bar_min_height_material_you">52.0dip</dimen>
+    <dimen name="sud_glif_footer_bar_padding_end_material_you">28.0dip</dimen>
+    <dimen name="sud_glif_footer_bar_padding_start_material_you">16.0dip</dimen>
+    <dimen name="sud_glif_footer_bar_padding_vertical_material_you">0.0dip</dimen>
+    <dimen name="sud_glif_footer_padding_end">28.0dip</dimen>
+    <dimen name="sud_glif_footer_padding_start">16.0dip</dimen>
+    <dimen name="sud_glif_footer_padding_vertical">0.0dip</dimen>
+    <dimen name="sud_glif_header_title_margin_bottom">0.0dip</dimen>
+    <dimen name="sud_glif_header_title_margin_top">24.0dip</dimen>
+    <dimen name="sud_glif_icon_margin_top">32.0dip</dimen>
+    <dimen name="sud_glif_margin_end">32.0dip</dimen>
+    <dimen name="sud_glif_margin_end_material_you">32.0dip</dimen>
+    <dimen name="sud_glif_margin_start">32.0dip</dimen>
+    <dimen name="sud_glif_margin_start_material_you">32.0dip</dimen>
+    <item type="dimen" name="sud_illustration_aspect_ratio">0.0</item>
+    <item type="dimen" name="tablet_num_pad_key_size_ratio">0.075</item>
+    <dimen name="tile_expanded_width">74.0dip</dimen>
+    <dimen name="tile_expanded_width_fold_sub">75.0dip</dimen>
+    <dimen name="touchpad_media_panel_artist_text_left_margin">16.0dip</dimen>
+    <dimen name="touchpad_media_panel_bottom_margin">70.0dip</dimen>
+    <dimen name="touchpad_media_panel_button_left_margin">24.0dip</dimen>
+    <dimen name="touchpad_media_panel_left_margin">20.0dip</dimen>
+    <dimen name="touchpad_media_panel_right_margin">44.0dip</dimen>
+    <dimen name="touchpad_media_panel_title_text_left_margin">16.0dip</dimen>
+    <dimen name="video_call_effects_mic_mode_divider_padding">15.0dip</dimen>
+    <dimen name="video_call_effects_mic_mode_sub_text_start_padding">15.0dip</dimen>
+    <dimen name="volume_row_slider_height">128.0dip</dimen>
+    <dimen name="wallet_card_carousel_container_top_margin">24.0dip</dimen>
+    <dimen name="basic_panel_width">56.0dip</dimen>
+    <dimen name="controls_activity_view_top_offset">25.0dip</dimen>
+    <dimen name="expand_panel_height">256.0dip</dimen>
+    <dimen name="grid_view_bottom_margin">14.0dip</dimen>
+    <dimen name="grid_view_top_margin">14.0dip</dimen>
+    <dimen name="paged_tile_bar_width">395.0dip</dimen>
+    <dimen name="qs_media_album_size">42.0dip</dimen>
+    <item type="dimen" name="qs_multi_sim_bar_height_ratio_tablet">0.1321</item>
+    <dimen name="sesl_color_picker_color_one_ui_3_swatch_view_container_margin_left">1.0dip</dimen>
+    <dimen name="sesl_color_picker_color_one_ui_3_swatch_view_container_margin_right">20.0dip</dimen>
+    <dimen name="sesl_color_picker_dialog_extra_horizontal_margin">0.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_color_swatch_view_margin_right_background">18.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_edittext_margin_bottom">6.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_main_content_height">216.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_seekbar_layout_width">338.0dip</dimen>
+    <dimen name="sesl_color_picker_oneui_3_used_color_group_margin">19.0dip</dimen>
+    <dimen name="sesl_color_picker_opacity_margin_bottom">16.0dip</dimen>
+    <dimen name="sesl_color_picker_seekbar_edittext_margin_right">22.0dip</dimen>
+    <dimen name="sesl_color_picker_seekbar_margin_bottom">18.0dip</dimen>
+    <dimen name="touchpad_media_panel_play_pause_margin">16.0dip</dimen>
+    <dimen name="touchpad_media_panel_prev_next_icon_size">24.0dip</dimen>
+    <dimen name="volume_tool_tip_top_margin">12.0dip</dimen>
+</resources>

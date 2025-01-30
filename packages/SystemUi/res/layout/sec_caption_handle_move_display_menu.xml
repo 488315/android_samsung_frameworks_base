@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@drawable/sec_decor_caption_menu_background" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:id="@id/background_container" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.android.wm.shell.windowdecor.WindowMenuAddDisplayItemView android:gravity="center" android:id="@id/move_display_window" android:background="@drawable/sec_decor_caption_move_display_button_ripple" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/sec_decor_button_operation_move_display">
+            <ImageView android:id="@id/add_display_image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sec_decor_button_move_display" />
+            <TextView android:textSize="@dimen/sec_dex_decor_menu_text_size" android:id="@id/add_display_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sec_decor_button_operation_move_display" android:layout_marginStart="@dimen/sec_decor_move_display_handle_menu_text_padding" />
+        </com.android.wm.shell.windowdecor.WindowMenuAddDisplayItemView>
+    </FrameLayout>
+</FrameLayout>

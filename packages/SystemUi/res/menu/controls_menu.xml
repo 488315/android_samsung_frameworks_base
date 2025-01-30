@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@id/devices_to_show" android:title="@string/controls_menu_devices_to_show" app:showAsAction="never" />
+    <item android:id="@id/manage_apps" android:title="@string/controls_menu_manage_apps" app:showAsAction="never" />
+    <item android:id="@id/settings" android:title="@string/controls_menu_settings" app:showAsAction="never" />
+</menu>

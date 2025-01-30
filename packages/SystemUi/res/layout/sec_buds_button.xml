@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:tag="expand_anim" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="2.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/buds_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:layout_marginEnd="12.0dip">
+        <FrameLayout android:id="@id/buds_icon_container" android:layout_width="@dimen/buds_icon_size" android:layout_height="@dimen/buds_icon_size" android:layout_marginStart="20.0dip">
+            <ImageView android:id="@id/buds_icon" android:layout_width="@dimen/buds_icon_size" android:layout_height="@dimen/buds_icon_size" android:src="@drawable/ic_buds" android:tint="@color/qs_tile_no_round_icon_color" />
+        </FrameLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/buds_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="@dimen/buds_text_container_start_padding" android:paddingEnd="@dimen/buds_text_container_end_padding">
+            <TextView android:textSize="@dimen/sec_style_qs_tile_text_size" android:textColor="@color/qs_tile_label" android:ellipsize="marquee" android:id="@id/buds_text" android:padding="@dimen/sec_style_qs_tile_label_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:fontFamily="sec" android:textFontWeight="400" />
+            <TextView android:textSize="@dimen/sec_style_qs_tile_second_text_size" android:textColor="@color/qs_tile_label" android:ellipsize="marquee" android:id="@id/buds_batteries" android:padding="@dimen/sec_style_qs_tile_label_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:fontFamily="sec" android:textFontWeight="400" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/margin_view" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+</LinearLayout>

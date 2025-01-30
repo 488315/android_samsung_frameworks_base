@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.power.WirelessMisalignView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/misalign_backgroundArea" android:background="@color/misalign_subdisplay_background_color" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <ImageView android:id="@id/center_align_image" android:visibility="gone" android:layout_width="@dimen/wireless_center_misalign_image_size" android:layout_height="@dimen/wireless_center_misalign_image_size" android:src="@drawable/overlay_center_alignment" android:layout_centerHorizontal="true" />
+    <RelativeLayout android:id="@id/misalign_text_container" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/misalign_subdisplay_margin_bottom" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_marginHorizontal="@dimen/misalign_subdisplay_margin_horizontal">
+        <TextView android:textSize="@dimen/misalign_subdisplay_text_size" android:textColor="@color/wireless_center_misalign_text_color" android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/wireless_misalign_flip_subdisplay_content" android:fontFamily="sec" android:textFontWeight="400" />
+    </RelativeLayout>
+    <Button android:id="@id/misalign_ok_button" android:layout_marginBottom="@dimen/misalign_subdisplay_button_margin_bottom" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" style="@style/PowerUiRaisedBtnStyle" />
+</com.android.systemui.power.WirelessMisalignView>

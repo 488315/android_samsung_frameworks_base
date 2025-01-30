@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<actions
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <action attribute="moment_type" category="effects" component="com.android.systemui/com.android.systemui.edgelighting.routine.EdgeLightingRoutineProvider" component_type="provider" config_activity="com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity" correct_param="1" description="@string/edge_lighting_action_description" enabled_label_format="@string/edge_lighting_style_for_tile" icon="@drawable/ic_routines_edge_light" label="@string/edge_lighting_action_label" tag="edge_lighting" />
+</actions>

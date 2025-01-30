@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.common.split.DividerView android:layout_width="fill_parent" android:layout_height="fill_parent" multi_split:isCellDivider="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:multi_split="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:id="@id/divider_bar" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <View android:id="@id/docked_divider_background" style="@style/DockedDividerBackground" />
+        <com.android.wm.shell.common.split.DividerHandleView android:layout_gravity="center|top" android:id="@id/docked_divider_handle" android:background="@null" android:layout_width="@dimen/multi_split_divider_handle_touchable_region_horizontal_width" android:layout_height="@dimen/multi_split_divider_handle_touchable_region_horizontal_height" android:layout_marginTop="13.0dip" android:contentDescription="@string/accessibility_divider" multi_split:handleType="multiSplitCellDividerHandle" multi_split:isHorizontalDivision="true" style="@style/DockedDividerHandle" />
+        <com.android.wm.shell.common.split.DividerRoundedCorner android:id="@id/divider_rounded_corner" android:layout_width="fill_parent" android:layout_height="fill_parent" multi_split:handleType="multiSplitDividerHandle" multi_split:isHorizontalDivision="true" style="@style/DockedDividerHandle" />
+    </FrameLayout>
+</com.android.wm.shell.common.split.DividerView>

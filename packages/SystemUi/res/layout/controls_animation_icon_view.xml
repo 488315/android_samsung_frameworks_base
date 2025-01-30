@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.airbnb.lottie.LottieAnimationView android:id="@id/icon_custom_animation_view" android:paddingTop="@dimen/control_padding_adjustment" android:focusable="false" android:clickable="false" android:layout_width="@dimen/control_custom_icon_size" android:layout_height="@dimen/control_custom_icon_size" app:lottie_autoPlay="true" app:lottie_loop="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" />

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/sesl_color_picker_seekbar_edittext_margin_left"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layoutDirection="ltr">
+        <EditText android:gravity="end" android:id="@id/sesl_color_seek_bar_opacity_value_edit_view" android:background="@null" android:layout_width="@dimen/sesl_color_picker_perecent_edit_text_width" android:layout_height="wrap_content" android:maxLength="3" android:inputType="number" style="@style/SeekbarProgressText" />
+        <TextView android:gravity="start" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="%" style="@style/SeekbarProgressText" />
+    </LinearLayout>
+</LinearLayout>

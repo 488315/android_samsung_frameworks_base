@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@color/qs_edit_panel_available_background_color" android:layout_width="fill_parent" android:layout_height="@dimen/qs_edit_buttons_height" android:paddingHorizontal="@dimen/qs_edit_done_reset_button_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.qs.customize.BottomButtonFrameLayout android:id="@id/reset_button" android:background="@drawable/qs_setting_edit_transparent_button_ripple" android:focusable="true" android:clickable="true" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <TextView android:textSize="@dimen/qs_edit_button_text_size" android:textColor="@color/qs_edit_tile_available_label_color" android:ellipsize="end" android:gravity="center" android:layout_gravity="center" android:id="@id/button_text" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/quick_settings_reset" android:fontFamily="sec" android:textFontWeight="600" />
+    </com.android.systemui.qs.customize.BottomButtonFrameLayout>
+    <View android:gravity="center_vertical" android:id="@id/qs_customizer_button_divider" android:background="@color/qs_edit_panel_button_divider_color" android:layout_width="1.0dip" android:layout_height="16.0dip" />
+    <com.android.systemui.qs.customize.BottomButtonFrameLayout android:id="@id/done_button" android:background="@drawable/qs_setting_edit_transparent_button_ripple" android:focusable="true" android:clickable="true" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <TextView android:textSize="@dimen/qs_edit_button_text_size" android:textColor="@color/qs_edit_tile_available_label_color" android:ellipsize="end" android:gravity="center" android:layout_gravity="center" android:id="@id/button_text" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/sec_quick_settings_done" android:fontFamily="sec" android:textFontWeight="600" />
+    </com.android.systemui.qs.customize.BottomButtonFrameLayout>
+</LinearLayout>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d element saýlanyldy</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element saýlanyldy</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d sekunt</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sekunt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Telefonyňyzy täzeden işletmek üçin, Ýan düwmäni we Ses peseldiş düwmesini birlikde %d sekuntdan köp basyp saklaň.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefonyňyzy täzeden işletmek üçin, Ýan düwmäni we Ses peseldiş düwmesini birlikde %d sekuntdan köp basyp saklaň.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d synanyşyk galdy</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d synanyşyk galdy</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">Bu telefonyň gulpuny açmaga %1$d synanyşyk edildi. Ýene %2$d sagatdan synanyşyň.</item>
+        <item quantity="one">Bu telefonyň gulpuny açmaga %d synanyşyk edildi. Ýene 1 sagatdan synanyşyň.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">Bu telefonyň gulpuny açmaga %1$d synanyşyk edildi. Ýene %2$d minutdan synanyşyň.</item>
+        <item quantity="one">Bu telefonyň gulpuny açmaga %d synanyşyk edildi. Ýene 1 minutdan synanyşyň.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">Bu telefonyň gulpuny açmaga %1$d synanyşyk edildi. Ýene %2$d sekuntdan synanyşyň.</item>
+        <item quantity="one">Bu telefonyň gulpuny açmaga %d synanyşyk edildi. Ýene 1 sekuntdan synanyň.</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">Barmak yzy bilen gulp açmaga %d synanyşyk edildi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Barmak yzy bilen gulp açmaga %d synanyşyk edildi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">Biometrika tassyklamak üçin %d nädogry synanyşyk.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Biometrikany tassyklamak üçin, %d nädogry synanyşyk edildi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">Ýüzüňizi tassyklamak üçin, %d nädogry synanyşyk edildi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ýüzüňizi tassyklamak üçin, %d nädogry synanyşyk edildi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">Barmak yzlaryňyzy tassyklamak üçin %d nädogry synanyşyk.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Barmak yzlaryňyzy tassyklamak üçin, %d nädogry synanyşyk edildi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Ýene 1 sagat %d minutdan synan</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ýene 1 sagat %d minutdan synan</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Biometrikaňyzy ýene %d sekuntdan synanyşyň</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Biometrikaňyzy ýene %d sekuntdan synanyşyň</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Ýüz tanaýyşy ýene %d sekuntdan synanyşyň</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ýüz tanaýyşy ýene %d sekuntdan synanyşyň</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Barmak yzyňyzy ýene %d sekuntdan synanyşyň</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Barmak yzyňyzy ýene %d sekuntdan synanyşyň</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Ýene %d sagatdan synan</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ýene %d sagatdan synan</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Ýene %d sagat 1 minutdan synan</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ýene %d sagat 1 minutdan synan</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Ýene %d minutdan synan</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ýene %d minutdan synan</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Ýene %d sekuntdan synan</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ýene %d sekuntdan synan</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">%d sekuntdan ýene synanyşyň.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ýene %d sekuntdan synanyş.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d synanyşyk galdy</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d synanyşyk galdy</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d habarnama</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d habarnama</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d düwme gerekli.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d düwme gerekli.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d sagatlyk</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sagatlyk</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">%d düwmeden köp goşup bolmaýar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d düwmeden köp goşup bolmaýar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Düwme aýryp bolmaýar. Çalt panelinde iň azyndan %d düwme bolmaly.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Düwme aýryp bolmaýar. Çalt panelinde iň azyndan %d düwme bolmaly.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d effekt</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d effekt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Galaxy AI kämil intellekt aýratynlyklaryny ulanmak üçin, siz azyndan %d ýaşan bolmaly.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Galaxy AI kämil intellekt aýratynlyklaryny ulanmak üçin, siz azyndan %d ýaşan bolmaly.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

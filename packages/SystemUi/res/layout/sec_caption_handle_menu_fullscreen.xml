@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/handle_menu" android:background="@drawable/sec_decor_caption_menu_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:id="@id/button_container" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <com.android.wm.shell.windowdecor.WindowMenuItemView android:id="@id/freeform_window" android:padding="@dimen/decor_button_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sec_decor_button_freeform" android:contentDescription="@string/sec_decor_button_text_freeform" android:paddingStart="@dimen/decor_button_padding_large" />
+        <com.android.wm.shell.windowdecor.WindowMenuItemView android:id="@id/split_window" android:padding="@dimen/decor_button_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sec_decor_button_split_topbottom" android:contentDescription="@string/sec_decor_button_text_split" />
+        <com.android.wm.shell.windowdecor.WindowMenuItemView android:id="@id/close_window" android:padding="@dimen/decor_button_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sec_decor_button_close" android:contentDescription="@string/sec_decor_button_text_close" android:paddingEnd="@dimen/decor_button_padding_large" />
+    </LinearLayout>
+</FrameLayout>

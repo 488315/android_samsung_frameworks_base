@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.screenshot.sep.widget.SemScreenshotLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/white_bg" android:background="#99ffffff" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.android.systemui.screenshot.sep.ScreenshotSelectorView android:id="@id/global_screenshot_selector" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:pointerIcon="cell" />
+</com.android.systemui.screenshot.sep.widget.SemScreenshotLayout>

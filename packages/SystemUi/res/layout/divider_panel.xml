@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.common.split.DividerPanelView android:background="@drawable/mw_divider_panel_buttons_background" android:elevation="@dimen/mw_divider_panel_elevation"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@id/divider_panel_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="10.0dip" android:paddingEnd="10.0dip">
+        <com.airbnb.lottie.LottieAnimationView android:id="@id/rotating_icon" android:visibility="gone" android:contentDescription="@string/divider_panel_rotate_clockwise" android:tooltipText="@string/divider_panel_rotate_clockwise" style="@style/DividerPanelButton" />
+        <com.airbnb.lottie.LottieAnimationView android:id="@id/switching_icon" android:contentDescription="@string/divider_panel_switch_window" android:tooltipText="@string/divider_panel_switch_window" style="@style/DividerPanelButton" />
+        <com.airbnb.lottie.LottieAnimationView android:id="@id/add_app_pair_icon" android:contentDescription="@string/add_app_pair_to" android:tooltipText="@string/add_app_pair_to" style="@style/DividerPanelButton" />
+    </LinearLayout>
+</com.android.wm.shell.common.split.DividerPanelView>

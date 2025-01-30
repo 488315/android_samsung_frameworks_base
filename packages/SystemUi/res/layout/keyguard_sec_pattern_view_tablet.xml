@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.KeyguardSecPatternView android:gravity="bottom|center" android:orientation="vertical" android:id="@id/keyguard_pattern_view" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="bottom" android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/bottom_container" android:clipChildren="false" android:clipToPadding="false" android:layout_width="@dimen/kg_message_area_width_tablet" android:layout_height="fill_parent" android:splitMotionEvents="true">
+            <LinearLayout android:id="@id/split_touch_top_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/message_area" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.0">
+                <include layout="@layout/keyguard_prev_info_message_tablet" />
+                <include layout="@layout/keyguard_prev_forgot_password_tablet" />
+                <include layout="@layout/keyguard_hint_message_area_tablet" />
+                <include android:gravity="center" android:layout_gravity="bottom|center" android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/keyguard_sec_bouncer_message_area_tablet" />
+                <include android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/kg_sub_message_margin_top_tablet" layout="@layout/keyguard_sub_message_area_tablet" />
+            </LinearLayout>
+            <LinearLayout android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.0">
+                <LinearLayout android:layout_gravity="bottom|center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <FrameLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <com.android.keyguard.SecLockPatternView android:gravity="center" android:layout_gravity="bottom|center" android:id="@id/lockPatternView" android:layout_width="@dimen/kg_pattern_lock_pattern_view_width_tablet" android:layout_height="@dimen/kg_pattern_lock_pattern_view_height_tablet" android:layout_marginBottom="@dimen/kg_pattern_lock_pattern_view_margin_bottom_tablet" android:defaultFocusHighlightEnabled="false" style="@style/keyguard_pattern_view_style" />
+                    </FrameLayout>
+                    <include android:gravity="center_horizontal" android:layout_gravity="bottom|center" android:id="@id/keyguard_selector_fade_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/kg_pattern_eca_margin_bottom_tablet" android:baselineAligned="false" layout="@layout/keyguard_emergency_button_tablet" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</com.android.keyguard.KeyguardSecPatternView>

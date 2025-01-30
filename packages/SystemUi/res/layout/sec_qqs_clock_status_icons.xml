@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:theme="@style/Theme.SystemUI.QuickSettings.Header" android:id="@id/quick_qs_status_icons" android:tag="expand_anim" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="@dimen/sec_style_qs_header_status_bar_height" android:paddingStart="@dimen/sec_style_qs_header_status_bar_side_padding" android:paddingEnd="@dimen/sec_style_qs_header_status_bar_side_padding"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:systemui="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:tag="open_anim" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="start|center" android:id="@id/leftLayout" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <com.android.systemui.statusbar.policy.QSClockHeaderView android:textAppearance="@style/SecQuickStatusBarHeaderTextStyle" android:id="@id/header_clock" android:tag="header_clock" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:paddingStart="@dimen/status_bar_left_clock_starting_padding" android:paddingEnd="@dimen/status_bar_left_clock_end_padding" systemui:showDark="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="end|center" android:id="@id/rightLayout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <com.android.systemui.statusbar.phone.StatusIconContainer android:id="@id/statusIcons" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:paddingEnd="@dimen/signal_cluster_battery_padding" />
+            <com.android.systemui.battery.BatteryMeterView android:id="@id/batteryRemainingIcon" android:layout_width="wrap_content" android:layout_height="fill_parent" android:paddingEnd="2.0dip" systemui:textAppearance="@style/TextAppearance.QS.Status" />
+            <include layout="@layout/sec_ongoing_privacy_chip" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

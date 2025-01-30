@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list android:gravity="center"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center">
+        <shape android:shape="oval">
+            <stroke android:width="1.0sp" android:color="@color/tv_pip_edu_text_home_icon" />
+            <solid android:color="@android:color/transparent" />
+            <size android:height="@dimen/pip_menu_edu_text_home_icon_outline" android:width="@dimen/pip_menu_edu_text_home_icon_outline" />
+        </shape>
+    </item>
+    <item android:gravity="center" android:height="@dimen/pip_menu_edu_text_home_icon" android:width="@dimen/pip_menu_edu_text_home_icon">
+        <vector android:height="24.0sp" android:width="24.0sp" android:viewportWidth="24.0" android:viewportHeight="24.0">
+            <path android:fillColor="@color/tv_pip_edu_text_home_icon" android:pathData="M12,3L4,9v12h5v-7h6v7h5V9z" />
+        </vector>
+    </item>
+</layer-list>

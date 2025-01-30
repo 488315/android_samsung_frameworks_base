@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qp.SubroomBrightnessButtonSettingsView android:id="@id/brightness_image_button_wrapper" style="@style/SubscreenButtonWrapperStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/brightness_background" style="@style/SubscreenImageWrapperStyle">
+        <ImageView android:id="@id/brightness_image_view" android:src="@drawable/subroom_quick_panel_icon_brightness" android:contentDescription="@string/subscreen_brightness_button_talkback_label" style="@style/SubscreenButtonImage" />
+    </LinearLayout>
+</com.android.systemui.qp.SubroomBrightnessButtonSettingsView>

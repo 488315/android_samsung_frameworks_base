@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:background="@drawable/keyguard_strong_auth_timeout_popup_drawable" android:paddingLeft="@dimen/kg_strong_auth_timeout_popup_padding_left_right" android:paddingTop="@dimen/kg_strong_auth_timeout_popup_padding_top_bottom" android:paddingRight="@dimen/kg_strong_auth_timeout_popup_padding_left_right" android:paddingBottom="@dimen/kg_strong_auth_timeout_popup_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/strong_auth_popup_message" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/keyguard_strong_auth_popup_text_style" />
+</LinearLayout>

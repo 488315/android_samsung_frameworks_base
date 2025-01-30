@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.power.UnintentionalLcdOnView android:background="#d9000000"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <FrameLayout android:orientation="vertical" android:layout_width="181.0dip" android:layout_height="fill_parent" android:layout_marginStart="155.0dip" android:layout_marginEnd="16.0dip">
+            <TextView android:textSize="19.0dip" android:textColor="#fffafafa" android:id="@id/unintentional_title" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="44.0dip" android:text="@string/unintentional_lcd_on_alert_title" android:fontFamily="roboto-medium" android:textAlignment="viewStart" />
+            <TextView android:textSize="15.0dip" android:textColor="#fffafafa" android:id="@id/unintentional_body" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="225.0dip" android:fontFamily="roboto-regular" android:textAlignment="viewStart" />
+        </FrameLayout>
+        <FrameLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="56.0dip">
+            <ImageView android:layout_gravity="center" android:id="@id/locker_image_circle" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="13.0dip" android:src="@drawable/sc_unintentional_lock_backgroud_shape" android:alpha="0.0" android:scaleX="0.0" android:scaleY="0.0" />
+            <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:layout_width="62.0dip" android:layout_height="wrap_content" android:layout_marginTop="168.50998dip">
+                <ImageView android:layout_gravity="center" android:id="@id/unintentional_locker_img_cue_mtrl_L" android:layout_width="8.069977dip" android:layout_height="14.339996dip" android:src="@drawable/ic_4_arrow_cue_l" android:rotation="270.0" />
+                <ImageView android:layout_gravity="center" android:id="@id/unintentional_locker_img_cue_mtrl_L2" android:layout_width="8.069977dip" android:layout_height="14.339996dip" android:src="@drawable/ic_4_arrow_cue_l" android:alpha="0.6" android:rotation="270.0" />
+                <ImageView android:layout_gravity="center" android:id="@id/unintentional_locker_img_cue_mtrl_L3" android:layout_width="8.069977dip" android:layout_height="14.339996dip" android:src="@drawable/ic_4_arrow_cue_l" android:alpha="0.3" android:rotation="270.0" />
+            </LinearLayout>
+            <FrameLayout android:layout_width="62.0dip" android:layout_height="62.0dip" android:layout_marginTop="222.0dip">
+                <ImageView android:layout_gravity="center" android:id="@id/locker_img_view" android:layout_width="43.0dip" android:layout_height="43.0dip" android:src="@drawable/unintentional_locker_image_one" />
+                <ImageView android:layout_gravity="center" android:id="@id/locker_image_ring" android:layout_width="62.0dip" android:layout_height="62.0dip" android:src="@drawable/sc_draw_circular_outline" />
+            </FrameLayout>
+        </FrameLayout>
+    </FrameLayout>
+</com.android.systemui.power.UnintentionalLcdOnView>

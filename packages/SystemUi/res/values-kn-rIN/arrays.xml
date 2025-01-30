@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>ಹೌದು</item>
+        <item>ಹೌದು, ದಯವಿಟ್ಟು</item>
+        <item>ಸರಿ</item>
+        <item>ಇಲ್ಲ</item>
+        <item>ಬೇಡ ಧನ್ಯವಾದಗಳು</item>
+        <item>ಬೇಡ</item>
+        <item>ಧನ್ಯವಾದಗಳು</item>
+        <item>ಗೌರವ ಸಲ್ಲಿಕೆ</item>
+        <item>ಪ್ರಗತಿಯಲ್ಲಿದೆ</item>
+        <item>ಏನಾಗುತ್ತಿದೆ?</item>
+        <item>ನಂತರ</item>
+        <item>ಉತ್ತಮ</item>
+        <item>ನಾನು ಒಪ್ಪುತ್ತೇನೆ</item>
+        <item>ಅದ್ಭುತ!</item>
+        <item>ಏನು?</item>
+        <item>OMG!</item>
+    </string-array>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/wallpaper_area" android:layout_width="fill_parent" android:layout_height="fill_parent" android:importantForAccessibility="no" />
+    <FrameLayout android:background="@color/panel_background_blur_color" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:gravity="bottom|center" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="100.0">
+        <LinearLayout android:gravity="bottom|center" android:orientation="vertical" android:id="@id/main_floating_area" android:background="@drawable/flex_panel_background_expand" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/basic_panel_bottom_margin" android:layout_weight="88.9">
+            <LinearLayout android:orientation="vertical" android:id="@id/edit_panel_view" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <LinearLayout android:gravity="bottom|center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="88.9">
+                    <View android:layout_gravity="center_horizontal" android:id="@id/edit_panel_divider" android:background="@color/edit_panel_dividing_line_color" android:layout_width="0.0dip" android:layout_height="0.5dip" android:layout_weight="79.0" />
+                </LinearLayout>
+                <LinearLayout android:gravity="center|top" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:weightSum="88.9">
+                    <android.widget.GridLayout android:gravity="bottom|center|left" android:id="@id/gridLayout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="79.0" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/upper_area" android:layout_width="fill_parent" android:layout_height="@dimen/grid_area_height">
+                <GridView android:id="@id/gridView" android:layout_width="wrap_content" android:layout_height="@dimen/grid_area_height" />
+            </LinearLayout>
+            <com.android.wm.shell.controlpanel.widget.BrightnessVolumeView android:id="@id/brightness_volume_view" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="@dimen/grid_area_height" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

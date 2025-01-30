@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/sub_display_volume_view" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@id/sub_display_dual_volume_icon_label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="12.0dip" android:layout_marginEnd="12.0dip">
+        <ImageButton android:id="@id/volume_row_icon_with_label" android:background="@null" android:layout_width="14.0dip" android:layout_height="36.0dip" android:src="@drawable/ic_fc_dual_bt" android:scaleType="fitCenter" />
+        <TextView android:textSize="27.0sp" android:textColor="#fffafafa" android:ellipsize="marquee" android:id="@id/volume_row_header" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:fontFamily="sec-roboto-regular" android:layout_marginStart="6.0dip" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.systemui.volume.view.icon.VolumeIcon android:layout_gravity="center" android:id="@id/volume_row_icon" android:background="@null" android:layout_width="64.0dip" android:layout_height="64.0dip" android:scaleType="fitCenter" />
+        <SeekBar android:id="@id/volume_row_slider" android:layout_width="fill_parent" android:layout_height="wrap_content" android:progressDrawable="@drawable/volume_subdisplay_seekbar_progress_drawable" android:paddingHorizontal="12.0dip" android:paddingVertical="16.0dip" />
+    </LinearLayout>
+</com.android.systemui.volume.view.subscreen.simple.SubDisplayVolumeRowView>

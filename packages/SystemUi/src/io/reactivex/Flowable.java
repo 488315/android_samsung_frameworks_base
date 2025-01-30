@@ -1,0 +1,7 @@
+package io.reactivex;
+
+/* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+/* loaded from: classes3.dex */
+public abstract class Flowable {
+    public static final int BUFFER_SIZE = Math.max(1, Integer.getInteger("rx2.buffer-size", 128).intValue());
+}

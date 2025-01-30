@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">%d days ago</item>
+        <item quantity="one">%d day ago</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">%d min ago</item>
+        <item quantity="one">%d min ago</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">%d yr ago</item>
+        <item quantity="one">%d yr ago</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">Selected %d items</item>
+        <item quantity="zero">Selected %d items</item>
+        <item quantity="one">Selected %d items</item>
+        <item quantity="two">Selected %d items</item>
+        <item quantity="few">Selected %d items</item>
+        <item quantity="many">Selected %d items</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d seconds</item>
+        <item quantity="zero">%d seconds</item>
+        <item quantity="one">%d second</item>
+        <item quantity="two">%d seconds</item>
+        <item quantity="few">%d seconds</item>
+        <item quantity="many">%d seconds</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Press and hold the Side button and Volume down button at the same time for more than %d seconds to restart your phone.</item>
+        <item quantity="zero">Press and hold the Side button and Volume down button at the same time for more than %d seconds to restart your phone.</item>
+        <item quantity="one">Press and hold the Side button and Volume down button at the same time for more than %d second to restart your phone.</item>
+        <item quantity="two">Press and hold the Side button and Volume down button at the same time for more than %d seconds to restart your phone.</item>
+        <item quantity="few">Press and hold the Side button and Volume down button at the same time for more than %d seconds to restart your phone.</item>
+        <item quantity="many">Press and hold the Side button and Volume down button at the same time for more than %d seconds to restart your phone.</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">There are %d attempts left</item>
+        <item quantity="zero">There are %d attempts left</item>
+        <item quantity="one">There is %d attempt left</item>
+        <item quantity="two">There are %d attempts left</item>
+        <item quantity="few">There are %d attempts left</item>
+        <item quantity="many">There are %d attempts left</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">There have been %1$d attempts to unlock this phone. Try again in %2$d hours.</item>
+        <item quantity="one">There have been %d attempts to unlock this phone. Try again in 1 hour.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">There have been %1$d attempts to unlock this phone. Try again in %2$d minutes.</item>
+        <item quantity="one">There have been %d attempts to unlock this phone. Try again in 1 minute.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">There have been %1$d attempts to unlock this phone. Try again in %2$d seconds.</item>
+        <item quantity="one">There have been %d attempts to unlock this phone. Try again in 1 second.</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">There were %d attempts to unlock with fingerprints.</item>
+        <item quantity="zero">There were %d attempts to unlock with fingerprints.</item>
+        <item quantity="one">There was %d attempt to unlock with fingerprints.</item>
+        <item quantity="two">There were %d attempts to unlock with fingerprints.</item>
+        <item quantity="few">There were %d attempts to unlock with fingerprints.</item>
+        <item quantity="many">There were %d attempts to unlock with fingerprints.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">There were %d incorrect attempts to verify biometrics.</item>
+        <item quantity="zero">There were %d incorrect attempts to verify biometrics.</item>
+        <item quantity="one">There were %d incorrect attempt to verify biometrics.</item>
+        <item quantity="two">There were %d incorrect attempts to verify biometrics.</item>
+        <item quantity="few">There were %d incorrect attempts to verify biometrics.</item>
+        <item quantity="many">there were %d incorrect attempts to verify biometrics.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">There were %d incorrect attempts to verify your face.</item>
+        <item quantity="zero">There were %d incorrect attempts to verify your face.</item>
+        <item quantity="one">There were %d incorrect attempt to verify your face.</item>
+        <item quantity="two">There were %d incorrect attempts to verify your face.</item>
+        <item quantity="few">There were %d incorrect attempts to verify your face.</item>
+        <item quantity="many">There were %d incorrect attempts to verify your face.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">There were %d incorrect attempts to verify fingerprints.</item>
+        <item quantity="zero">There were %d incorrect attempts to verify fingerprints.</item>
+        <item quantity="one">There were %d incorrect attempt to verify fingerprints.</item>
+        <item quantity="two">There were %d incorrect attempts to verify fingerprints.</item>
+        <item quantity="few">There were %d incorrect attempts to verify fingerprints.</item>
+        <item quantity="many">There were %d incorrect attempts to verify fingerprints.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Try again in 1 hour %d minutes</item>
+        <item quantity="zero">Try again in 1 hour %d minutes</item>
+        <item quantity="one">Try again in 1 hour %d minute</item>
+        <item quantity="two">Try again in 1 hour %d minutes</item>
+        <item quantity="few">Try again in 1 hour %d minutes</item>
+        <item quantity="many">Try again in 1 hour %d minutes</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Try your biometrics again in %d seconds</item>
+        <item quantity="zero">Try your biometrics again in %d seconds</item>
+        <item quantity="one">Try your biometrics again in %d second</item>
+        <item quantity="two">Try your biometrics again in %d seconds</item>
+        <item quantity="few">Try your biometrics again in %d seconds</item>
+        <item quantity="many">Try your biometrics again in %d seconds</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Try face recognition again in %d seconds</item>
+        <item quantity="zero">Try face recognition again in %d seconds</item>
+        <item quantity="one">Try face recognition again in %d second</item>
+        <item quantity="two">Try face recognition again in %d seconds</item>
+        <item quantity="few">Try face recognition again in %d seconds</item>
+        <item quantity="many">Try face recognition again in %d seconds</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Try your fingerprint again in %d seconds</item>
+        <item quantity="zero">Try your fingerprint again in %d seconds</item>
+        <item quantity="one">Try your fingerprint again in %d second</item>
+        <item quantity="two">Try your fingerprint again in %d seconds</item>
+        <item quantity="few">Try your fingerprint again in %d seconds</item>
+        <item quantity="many">Try your fingerprint again in %d seconds</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Try again in %d hours</item>
+        <item quantity="zero">Try again in %d hours</item>
+        <item quantity="one">Try again in %d hour</item>
+        <item quantity="two">Try again in %d hours</item>
+        <item quantity="few">Try again in %d hours</item>
+        <item quantity="many">Try again in %d hours</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Try again in %d hours 1 minute</item>
+        <item quantity="zero">Try again in %d hours 1 minute</item>
+        <item quantity="one">Try again in %d hour 1 minute</item>
+        <item quantity="two">Try again in %d hours 1 minute</item>
+        <item quantity="few">Try again in %d hours 1 minute</item>
+        <item quantity="many">Try again in %d hours 1 minute</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Try again in %d minutes</item>
+        <item quantity="zero">Try again in %d minutes</item>
+        <item quantity="one">Try again in %d minute</item>
+        <item quantity="two">Try again in %d minutes</item>
+        <item quantity="few">Try again in %d minutes</item>
+        <item quantity="many">Try again in %d minutes</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Try again in %d seconds</item>
+        <item quantity="zero">Try again in %d seconds</item>
+        <item quantity="one">Try again in %d second</item>
+        <item quantity="two">Try again in %d seconds</item>
+        <item quantity="few">Try again in %d seconds</item>
+        <item quantity="many">Try again in %d seconds</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Try again in %d seconds.</item>
+        <item quantity="zero">Try again in %d seconds.</item>
+        <item quantity="one">Try again in %d second.</item>
+        <item quantity="two">Try again in %d seconds.</item>
+        <item quantity="few">Try again in %d seconds.</item>
+        <item quantity="many">Try again in %d seconds.</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">There are %d attempts left</item>
+        <item quantity="zero">There are %d attempts left</item>
+        <item quantity="one">There is %d attempt left</item>
+        <item quantity="two">There are %d attempts left</item>
+        <item quantity="few">There are %d attempts left</item>
+        <item quantity="many">There are %d attempts left</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d notifications</item>
+        <item quantity="zero">%d notifications</item>
+        <item quantity="one">%d notification</item>
+        <item quantity="two">%d notifications</item>
+        <item quantity="few">%d notifications</item>
+        <item quantity="many">%d notifications</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">Requires %d buttons.</item>
+        <item quantity="zero">requires %d buttons.</item>
+        <item quantity="one">Requires %d button.</item>
+        <item quantity="two">Requires %d buttons.</item>
+        <item quantity="few">Requires %d buttons.</item>
+        <item quantity="many">Requires %d buttons.</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">For %d hours</item>
+        <item quantity="zero">For %d hours</item>
+        <item quantity="one">For %d hour</item>
+        <item quantity="two">For %d hours</item>
+        <item quantity="few">For %d hours</item>
+        <item quantity="many">For %d hours</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">"Can't add more than %d buttons."</item>
+        <item quantity="zero">"Can't add more than %d buttons."</item>
+        <item quantity="one">"Can't add more than %d button."</item>
+        <item quantity="two">"Can't add more than %d buttons."</item>
+        <item quantity="few">"Can't add more than %d buttons."</item>
+        <item quantity="many">"Can't add more than %d buttons."</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">"Can't remove button. Quick panel needs to have at least %d buttons."</item>
+        <item quantity="zero">"Can't remove button. Quick panel needs to have at least %d buttons."</item>
+        <item quantity="one">"Can't remove button. Quick panel needs to have at least %d button."</item>
+        <item quantity="two">"Can't remove button. Quick panel needs to have at least %d buttons."</item>
+        <item quantity="few">"Can't remove button. Quick panel needs to have at least %d buttons."</item>
+        <item quantity="many">"Can't remove button. Quick panel needs to have at least %d buttons."</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d effects</item>
+        <item quantity="zero">%d effects</item>
+        <item quantity="one">%d effect</item>
+        <item quantity="two">%d effects</item>
+        <item quantity="few">%d effects</item>
+        <item quantity="many">%d effects</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">"You need to be at least %d years old to use Galaxy AI's advanced intelligence features."</item>
+        <item quantity="zero">"You need to be at least %d years old to use Galaxy AI's advanced intelligence features."</item>
+        <item quantity="one">"You need to be at least %d year old to use Galaxy AI's advanced intelligence features."</item>
+        <item quantity="two">"You need to be at least %d years old to use Galaxy AI's advanced intelligence features."</item>
+        <item quantity="few">"You need to be at least %d years old to use Galaxy AI's advanced intelligence features."</item>
+        <item quantity="many">"You need to be at least %d years old to use Galaxy AI's advanced intelligence features."</item>
+    </plurals>
+</resources>

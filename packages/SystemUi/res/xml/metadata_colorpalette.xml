@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="3.0">
+    <AppMetaData IsStandAlone="true" Name="NotificationPanel" PackageNameSuffix="lock" TargetApi="34" TargetPackageName="com.android.systemui" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property DefaultValue="100" DestAttribName="theme_designer_quick_star_blur_level" UID="4-blur-level" ValueType="Integer" />
+        <Property DefaultValue="#d9252525" DestAttribName="open_theme_qp_bg_color" POption="AlwaysOverriden" UID="4-1-2" ValueType="BgColor" />
+        <Property Comment="On" DefaultValue="#d9252525" DestAttribName="qs_tile_icon_on_dim_tint_color" POption="AlwaysOverriden" UID="4-2-1" ValueType="TintColor" />
+        <Property Comment="Off" DefaultValue="#ffffffff" DestAttribName="qs_tile_icon_off_tint_color" POption="AlwaysOverriden" UID="4-2-2" ValueType="TintColor" />
+        <Property Comment="On" DefaultValue="#ffffffff" DestAttribName="qs_tile_round_background_on" POption="AlwaysOverriden" UID="4-2-3" ValueType="TintColor" />
+        <Property Comment="Off" DefaultValue="#40000000" DestAttribName="qs_tile_round_background_off" POption="AlwaysOverriden" UID="4-2-4" ValueType="TintColor" />
+        <Property DefaultValue="#1a000000" DestAttribName="qs_tile_round_background_dim" Opacity="50" UID="4-2-5" ValueRef="4-2-3" ValueType="TintColor" />
+        <Property DefaultValue="#e5fafafa" DestAttribName="open_theme_notification_bg_color" UID="4-4-1" ValueType="TintColor" />
+        <Property DefaultValue="#ff959595" DestAttribName="animated_brightness_icon_color" UID="4-8-1" ValueType="TintColor" />
+        <Property DefaultValue="#ff6b6b6b" DestAttribName="tw_check_box_tint" UID="4-8-2" ValueType="Color" />
+        <Property DefaultValue="#ff171717" DestAttribName="subroom_qp_seekbar_icon_color" UID="4-8-2" ValueType="Color" />
+        <Property Comment="Progress" DefaultValue="#fffdfdfd" DestAttribName="tw_progress_color_control_activated" POption="FixedOpacity|AlwaysOverriden" UID="4-8-5" ValueRef="4-2-3" ValueType="Color" />
+        <Property DefaultValue="#66252525" DestAttribName="qs_edit_panel_tile_icon_color" POption="AlwaysOverriden" UID="4-13-1" ValueRef="4-2-2" ValueType="TextColor" />
+        <Property DefaultValue="#664e6ec4" DestAttribName="qs_edit_panel_tile_icon_background_color" POption="AlwaysOverriden" UID="4-13-2" ValueRef="4-2-4" ValueType="TextColor" />
+        <Property DefaultValue="#1a000000" DestAttribName="notification_panel_theme_ripple_color" UID="4-16" ValueRef="1-52-2" ValueType="BgColor" />
+        <Property DestAttribName="qs_detail_item_device_icon_tint_color" UID="4-21-13" ValueRef="1-32-5" ValueType="TintColor" />
+        <Property DefaultValue="#ff387aff" DestAttribName="sec_wifi_icon_blue_color" UID="4-21-17" ValueRef="1-A" ValueType="TintColor" />
+        <Property DefaultValue="#fffcfcff" DestAttribName="sec_wifi_icon_gray_color" UID="4-21-18" ValueRef="1-5-1-1" ValueType="TintColor" />
+        <Property DefaultValue="#ff252525" DestAttribName="open_theme_notification_title_text_color" POption="AlwaysOverriden" UID="4-22-1" ValueType="TextColor" />
+        <Property DefaultValue="#cc252525" DestAttribName="open_theme_notification_content_text_color" Opacity="80" UID="4-22-2" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property DefaultValue="#ff888fa2" DestAttribName="open_theme_noti_header_color" UID="4-22-20" ValueType="TintColor" />
+        <Property DestAttribName="qs_flashlight_thumb_color" UID="4-23-1" ValueRef="1-18-1" ValueType="TintColor" />
+        <Property DestAttribName="qs_flashlight_thumb_stroke_color" UID="4-23-1-2" ValueRef="1-A" ValueType="TintColor" />
+        <Property DestAttribName="qs_flashlight_seekbar_tickmark_color" Opacity="40" UID="4-23-2" ValueRef="1-A" ValueType="TintColor" />
+        <Property DestAttribName="qs_flashlight_seekbar_progress_color" Opacity="40" UID="4-23-3" ValueRef="1-22-2" ValueType="TintColor" />
+        <Property DefaultValue="false" DestAttribName="theme_designer_quick_panel_turned_on" UID="4-99-1" ValueType="Bool" />
+        <Property DefaultValue="#ff0381fe" DestAttribName="qp_notification_primary_color" UID="4-99-2" ValueRef="4-22-20" ValueType="TintColor" />
+        <Property DefaultValue="#ff252528" DestAttribName="qp_notification_title_color" UID="4-99-3" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property DefaultValue="#ff252528" DestAttribName="qp_notification_content_color" UID="4-99-4" ValueRef="4-22-2" ValueType="TextColor" />
+        <Property DefaultValue="#ccffffff" DestAttribName="qp_notification_guts_color" UID="4-99-5" ValueRef="4-1-2" ValueType="TintColor" />
+        <Property DefaultValue="#ccffffff" DestAttribName="qp_notification_background_color" UID="4-99-6" ValueRef="4-4-1" ValueType="TintColor" />
+        <Property Comment="On" DefaultValue="#ff000000" DestAttribName="subscreen_qs_tile_icon_on_color" POption="AlwaysOverriden" UID="4-2-1" ValueType="TintColor" />
+        <Property Comment="Off" DefaultValue="#99ffffff" DestAttribName="subscreen_qs_tile_icon_off_color" POption="AlwaysOverriden" UID="4-2-2" ValueType="TintColor" />
+        <Property Comment="On" DefaultValue="#ffffffff" DestAttribName="subscreen_qs_tile_round_background_on" POption="AlwaysOverriden" UID="4-2-3" ValueType="TintColor" />
+        <Property Comment="Off" DefaultValue="#40ffffff" DestAttribName="subscreen_qs_tile_round_background_off" POption="AlwaysOverriden" UID="4-2-4" ValueType="TintColor" />
+        <Property DefaultValue="#66ffffff" DestAttribName="subscreen_qs_tile_round_background_dim" Opacity="50" UID="4-2-5" ValueRef="4-2-3" ValueType="TintColor" />
+    </AppMetaData>
+</ThemeMetaData>

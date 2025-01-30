@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="integer" name="controls_basic_width_percentage">0.9</item>
+    <integer name="ksh_max_column">2</integer>
+</resources>

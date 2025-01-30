@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/settingslib_ripple_color"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <layer-list android:paddingStart="0.0dip" android:paddingEnd="24.0dip" android:paddingMode="stack">
+            <item android:top="8.0dip" android:bottom="8.0dip">
+                <shape>
+                    <corners android:radius="28.0dip" />
+                    <solid android:color="@android:color/system_accent1_100" />
+                    <size android:height="@dimen/settingslib_spinner_height" />
+                </shape>
+            </item>
+            <item android:gravity="end|center" android:height="18.0dip" android:width="18.0dip" android:drawable="@drawable/settingslib_arrow_drop_down" android:end="12.0dip" />
+        </layer-list>
+    </item>
+</ripple>

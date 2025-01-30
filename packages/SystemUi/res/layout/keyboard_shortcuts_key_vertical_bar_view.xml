@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="@dimen/ksh_item_text_size" android:textColor="?android:textColorPrimary" android:gravity="center" android:padding="@dimen/ksh_item_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="0.0dip" android:layout_marginRight="0.0dip" android:text="|" android:singleLine="true" android:textAllCaps="true" style="@style/ShortcutItemBackground"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

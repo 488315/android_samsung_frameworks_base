@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center" android:id="@id/edit_button" android:background="@drawable/sec_qs_edit_button_background" android:visibility="visible" android:clipChildren="false" android:clipToPadding="false" android:layout_width="@dimen/sec_style_qs_tile_icon_size" android:layout_height="@dimen/sec_style_qs_tile_icon_size"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/edit_icon" android:layout_width="14.0dip" android:layout_height="14.0dip" android:src="@drawable/ic_quickpanel_edit" android:tint="@color/qs_edit_button_icon_color" />
+</FrameLayout>

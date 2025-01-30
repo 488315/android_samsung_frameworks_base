@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="vertical" android:id="@id/nav_buttons" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:gravity="end|center" android:layout_gravity="bottom" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <view android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/prev_btn_area" android:focusable="true" android:layout_width="@dimen/suw_back_width" android:layout_height="fill_parent" android:layout_alignParentStart="true" class="com.android.systemui.navigationbar.SamsungNavigationBarSetupWizardView$NavigationBarSetupWizardButton">
+                <ImageView android:id="@id/prev_btn_arrow" android:paddingRight="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </view>
+            <view android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/prev_ime_area" android:focusable="true" android:visibility="invisible" android:layout_width="@dimen/navigation_key_width" android:layout_height="fill_parent" android:layout_marginEnd="@dimen/navigation_side_padding" android:layout_alignParentEnd="true" class="com.android.systemui.navigationbar.SamsungNavigationBarSetupWizardView$NavigationBarSetupWizardButton">
+                <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="@dimen/suw_back_width" android:layout_height="fill_parent">
+                    <ImageView android:id="@id/ime_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_samsung_sysbar_back_ime" android:tint="@color/navbar_icon_color_dark" />
+                </LinearLayout>
+            </view>
+            <view android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/a11y_area" android:focusable="true" android:visibility="invisible" android:layout_width="@dimen/navigation_extra_key_width" android:layout_height="fill_parent" android:layout_marginEnd="6.0dip" android:layout_alignParentEnd="true" class="com.android.systemui.navigationbar.SamsungNavigationBarSetupWizardView$NavigationBarSetupWizardButton">
+                <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <ImageView android:id="@id/a11y_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_samsung_sysbar_accessibility_button" android:tint="@color/navbar_icon_color_dark" />
+                </LinearLayout>
+            </view>
+        </RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

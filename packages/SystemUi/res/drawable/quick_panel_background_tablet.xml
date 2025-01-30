@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape>
+        <solid android:color="@color/sec_panel_background_color_tablet" />
+        <corners android:topLeftRadius="@dimen/keyguard_indication_dls_default_notification_start" android:topRightRadius="@dimen/keyguard_indication_dls_default_notification_start" android:bottomLeftRadius="@dimen/keyguard_indication_dls_default_notification_start" android:bottomRightRadius="@dimen/keyguard_indication_dls_default_notification_start" />
+    </shape>
+</inset>

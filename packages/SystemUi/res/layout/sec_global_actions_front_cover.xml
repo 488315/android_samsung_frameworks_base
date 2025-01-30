@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center" android:orientation="vertical" android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="5.5dip" android:layout_marginBottom="5.5dip" android:layout_marginStart="6.0dip" android:layout_marginEnd="6.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/front_cover_back_button" android:background="@drawable/globalaction_back_ripple" android:layout_width="46.0px" android:layout_height="46.0px" android:layout_marginTop="20.0px" android:src="@drawable/ic_globalactions_back" android:contentDescription="@string/subscreen_globalactions_back_button_content_description" android:layout_marginStart="16.0px" />
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/sec_global_actions_front_cover_item" android:layout_width="@dimen/sec_global_actions_front_cover_width" android:layout_height="fill_parent" />
+    <FrameLayout android:gravity="center_horizontal" android:id="@id/sec_global_actions_front_cover_confirm" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</FrameLayout>

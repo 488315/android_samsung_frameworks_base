@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">%dদিন আগেয়ে</item>
+        <item quantity="one">%d দিন আগেয়ে</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">%d মিনিট আগেয়ে</item>
+        <item quantity="one">%d মিনিট আগেয়ে</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">%d বছৰ আগেয়ে</item>
+        <item quantity="one">%d বছৰ আগেয়ে</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d টা আইটেম চয়ন কৰিছে</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা আইটেম চয়ন কৰিছে</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d ছেকেণ্ড</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ছেকেণ্ড</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">আপোনাৰ ফোন পুনৰাৰম্ভ কৰিবলৈ কাষৰ বুটাম আৰু ভলিউম কমোৱা বুটামটো একে সময়তে %d ছেকেণ্ডতকৈ বেছি সময়ৰ বাবে দবাওক আৰু ধৰি ৰাখক।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপোনাৰ ফোন পুনৰাৰম্ভ কৰিবলৈ কাষৰ বুটাম আৰু ভলিউম কমোৱা বুটামটো একে সময়তে %d ছেকেণ্ডতকৈ বেছি সময়ৰ বাবে দবাওক আৰু ধৰি ৰাখক।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d টা প্ৰয়াস বাকী আছে</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা প্ৰয়াস বাকী আছে</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">এই ফোনটো আনলক কৰিবলৈ %1$d বাৰ প্ৰয়াস কৰা হৈছে। %2$d ঘণ্টাত পুনঃচেষ্টা কৰক।</item>
+        <item quantity="one">এই ফোনটো আনলক কৰিবলৈ %d বাৰ প্ৰয়াস কৰা হৈছে। 1 ঘণ্টাত পুনঃচেষ্টা কৰক।</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">এই ফোনটো আনলক কৰিবলৈ %1$d বাৰ প্ৰয়াস কৰা হৈছে। %2$d মিনিটৰ ভিতৰত পুনঃচেষ্টা কৰক।</item>
+        <item quantity="one">এই ফোনটো আনলক কৰিবলৈ %d বাৰ প্ৰয়াস কৰা হৈছে। 1 মিনিটত পুনঃচেষ্টা কৰক।</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">এই ফোন আনলক কৰিবলৈ %1$d বাৰ প্ৰয়াস কৰা হৈছে। %2$d ছেকেণ্ডত পুনঃচেষ্টা কৰক।</item>
+        <item quantity="one">এই ফোন আনলক কৰিবলৈ %d বাৰ প্ৰয়াস কৰা হৈছে। 1 ছেকেণ্ডত পুনঃচেষ্টা কৰক।</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">আঙুলিৰ ছাপেৰে আনলক কৰিবলৈ %d টা প্ৰয়াস।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আঙুলিৰ ছাপেৰে আনলক কৰিবলৈ %d টা প্ৰয়াস।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">"বায়'মেট্ৰিক সত্যাপন কৰিবলৈ %d টা অশুদ্ধ প্ৰয়াস।"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"বায়'মেট্ৰিক সত্যাপন কৰিবলৈ %d টা অশুদ্ধ প্ৰয়াস।"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">আপোনাৰ মুখখন সত্যাপন কৰিবলৈ %d টা অশুদ্ধ প্ৰয়াস।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আপোনাৰ মুখখন সত্যাপন কৰিবলৈ %d টা অশুদ্ধ প্ৰয়াস।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">আঙুলিৰ ছাপ সত্যাপন কৰিবলৈ %d টা অশুদ্ধ প্ৰয়াস।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">আঙুলিৰ ছাপ সত্যাপন কৰিবলৈ %d টা অশুদ্ধ প্ৰয়াস।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">1 ঘণ্টা %d মিনিটত পুনঃচেষ্টা কৰক</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1 ঘণ্টা %d মিনিটত পুনঃচেষ্টা কৰক</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">"%d ছেকেণ্ডত আপোনাৰ বায়'মেট্ৰিকসমূহ পুনৰ চেষ্টা কৰক"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"%d ছেকেণ্ডত আপোনাৰ বায়'মেট্ৰিকসমূহ পুনৰ চেষ্টা কৰক"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">%d ছেকেণ্ডত মুখ চিনাক্তকৰণ পুনৰ চেষ্টা কৰক</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ছেকেণ্ডত মুখ চিনাক্তকৰণ পুনৰ চেষ্টা কৰক</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">%d ছেকেণ্ডত আপোনাৰ আঙুলিৰ ছাপ পুনৰ চেষ্টা কৰক</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ছেকেণ্ডত আপোনাৰ আঙুলিৰ ছাপ পুনৰ চেষ্টা কৰক</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">%d ঘণ্টাত পুনঃচেষ্টা কৰক</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ঘণ্টাত পুনঃচেষ্টা কৰক</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">%d ঘণ্টা 1 মিনিটত পুনঃচেষ্টা কৰক</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ঘণ্টা 1 মিনিটত পুনঃচেষ্টা কৰক</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">%d মিনিটত পুনঃচেষ্টা কৰক</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d মিনিটত পুনঃচেষ্টা কৰক</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">%d ছেকেণ্ডত পুনঃচেষ্টা কৰক</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ছেকেণ্ডত পুনঃচেষ্টা কৰক</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">%d ছেকেণ্ডত পুনঃচেষ্টা কৰক।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ছেকেণ্ডত পুনঃচেষ্টা কৰক।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d টা প্ৰয়াস বাকী আছে</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা প্ৰয়াস বাকী আছে</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d new notifications</item>
+        <item quantity="one">%d new notification</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d টা জাননী</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা জাননী</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d টা বুটামৰ আৱশ্যক।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা বুটামৰ আৱশ্যক।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d ঘণ্টাৰ বাবে</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ঘণ্টাৰ বাবে</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">%d টা বুটামতকৈ অধিক যোগ কৰিব নোৱাৰে।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা বুটামতকৈ অধিক যোগ কৰিব নোৱাৰে।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">বুটাম আঁতৰাব নোৱাৰে। ক্ষিপ্ৰ পেনেলত কমেও %d টা বুটাম থাকিব লাগিব।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">বুটাম আঁতৰাব নোৱাৰে। ক্ষিপ্ৰ পেনেলত কমেও %d টা বুটাম থাকিব লাগিব।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d টা প্ৰভাৱ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d টা প্ৰভাৱ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">"Galaxy AI-ৰ অগ্ৰণী ইণ্টেলিজেন্স সুবিধাসমূহ ব্যৱহাৰ কৰিবলৈ আপুনি কমেও %d বছৰ বয়সৰ হ'ব লাগিব।"</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Galaxy AI-ৰ অগ্ৰণী ইণ্টেলিজেন্স সুবিধাসমূহ ব্যৱহাৰ কৰিবলৈ আপুনি কমেও %d বছৰ বয়সৰ হ'ব লাগিব।"</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

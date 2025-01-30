@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/control_action_background_ripple"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/background">
+        <shape>
+            <solid android:color="@color/control_custom_default_background" />
+            <corners android:radius="@dimen/control_custom_corner_radius" />
+        </shape>
+    </item>
+    <item android:id="@id/clip_layer">
+        <clip android:clipOrientation="horizontal">
+            <shape>
+                <solid android:color="@android:color/transparent" />
+                <corners android:radius="@dimen/control_custom_corner_radius" />
+            </shape>
+        </clip>
+    </item>
+</ripple>

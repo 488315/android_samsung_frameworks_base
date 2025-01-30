@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.AlphaOptimizedFrameLayout android:background="@drawable/qs_footer_action_circle" android:visibility="gone" android:layout_width="@dimen/qs_footer_action_button_size" android:layout_height="@dimen/qs_footer_action_button_size"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.QS.SecurityFooter" android:textSize="18.0sp" android:textColor="?android:textColorPrimary" android:layout_gravity="center" android:id="@id/number" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <ImageView android:layout_gravity="end|bottom|center" android:id="@id/new_dot" android:layout_width="12.0dip" android:layout_height="12.0dip" android:src="@drawable/fgs_dot" android:scaleType="fitCenter" android:contentDescription="@string/fgs_dot_content_description" />
+</com.android.systemui.statusbar.AlphaOptimizedFrameLayout>

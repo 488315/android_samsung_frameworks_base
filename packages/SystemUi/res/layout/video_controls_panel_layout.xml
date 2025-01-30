@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/wallpaper_area" android:layout_width="fill_parent" android:layout_height="fill_parent" android:importantForAccessibility="no" />
+    <FrameLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="horizontal" android:id="@id/media_background_area" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <include android:gravity="center" android:id="@id/video_controls_area" layout="@layout/floating_video_controls_panel" />
+        </LinearLayout>
+    </FrameLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="left" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <LinearLayout android:id="@id/ratio_button" android:paddingLeft="24.0dip" android:paddingTop="24.0dip" android:layout_width="76.0dip" android:layout_height="48.0dip">
+                <LinearLayout android:id="@id/ratio_set_button_layout" android:background="@drawable/ratio_button_background" android:layout_width="wrap_content" android:layout_height="24.0dip">
+                    <TextView android:textSize="12.0sp" android:textColor="#fffafaff" android:layout_gravity="center" android:id="@id/ratio_button_text" android:layout_width="52.0dip" android:layout_height="wrap_content" android:text="16:9" android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:id="@id/ratio_set_button" android:paddingLeft="24.0dip" android:paddingTop="24.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <LinearLayout android:id="@id/ratio_set_button_layout" android:background="@drawable/ratio_button_background" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <LinearLayout android:id="@id/ratio_set_button_text_layout" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                        <TextView android:textSize="12.0sp" android:textStyle="bold" android:textColor="#fffafaff" android:layout_gravity="center" android:id="@id/ratio_set_button_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:layout_marginTop="9.0dip" android:layout_marginRight="10.0dip" android:layout_marginBottom="9.0dip" android:text="Screen ratio" android:textAlignment="center" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="5.5dip" android:layout_height="wrap_content" />
+                    <LinearLayout android:id="@id/ratio_set_button_text_16_9_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.5dip" android:layout_marginBottom="4.5dip">
+                        <TextView android:textSize="12.0sp" android:textColor="#fffafaff" android:layout_gravity="center" android:id="@id/ratio_set_button_text_16_9" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="4.5dip" android:layout_marginTop="4.5dip" android:layout_marginRight="4.5dip" android:layout_marginBottom="4.5dip" android:text="16:9" android:textAlignment="center" />
+                    </LinearLayout>
+                    <LinearLayout android:id="@id/ratio_set_button_text_215_9_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.5dip" android:layout_marginBottom="4.5dip">
+                        <TextView android:textSize="12.0sp" android:textColor="#fffafaff" android:layout_gravity="center" android:id="@id/ratio_set_button_text_215_9" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="4.5dip" android:layout_marginTop="4.5dip" android:layout_marginRight="4.5dip" android:layout_marginBottom="4.5dip" android:text="21.5:9" android:textAlignment="center" />
+                    </LinearLayout>
+                    <LinearLayout android:id="@id/ratio_set_button_text_18_9_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.5dip" android:layout_marginBottom="4.5dip">
+                        <TextView android:textSize="12.0sp" android:textColor="#fffafaff" android:layout_gravity="center" android:id="@id/ratio_set_button_text_18_9" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="4.5dip" android:layout_marginTop="4.5dip" android:layout_marginRight="4.5dip" android:layout_marginBottom="4.5dip" android:text="18:9" android:textAlignment="center" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="7.5dip" android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="right" android:orientation="vertical" android:paddingTop="24.0dip" android:paddingRight="24.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:id="@id/close_button" android:background="@drawable/fab_close" android:paddingTop="24.0dip" android:paddingRight="24.0dip" android:layout_width="24.0dip" android:layout_height="24.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

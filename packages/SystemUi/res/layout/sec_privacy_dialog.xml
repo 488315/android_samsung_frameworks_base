@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/background_blur" android:background="@drawable/sec_qs_dialog_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/root" android:background="@drawable/sec_qs_dialog_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:divider="@drawable/sec_privacy_dialog_divider" android:showDividers="middle" android:dividerPadding="@dimen/sec_privacy_dialog_divider_padding" android:backgroundTint="@color/transparent" />
+</FrameLayout>

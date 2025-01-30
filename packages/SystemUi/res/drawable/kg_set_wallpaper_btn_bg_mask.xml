@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/white" />
+    <corners android:radius="@dimen/kg_set_as_wallpaper_button_radius" />
+    <padding android:left="@dimen/kg_set_as_wallpaper_button_padding_side" android:top="@dimen/kg_set_as_wallpaper_button_padding_top" android:right="@dimen/kg_set_as_wallpaper_button_padding_side" android:bottom="@dimen/kg_set_as_wallpaper_button_padding_top" />
+</shape>

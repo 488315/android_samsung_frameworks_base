@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pip_menu_arrow_elevation">1.0dip</dimen>
+    <dimen name="pip_menu_arrow_size">12.0dip</dimen>
+    <dimen name="pip_menu_background_corner_radius">6.0dip</dimen>
+    <dimen name="pip_menu_border_corner_radius">4.0dip</dimen>
+    <dimen name="pip_menu_border_width">4.0dip</dimen>
+    <dimen name="pip_menu_button_start_end_offset">30.0dip</dimen>
+    <dimen name="pip_menu_edu_text_home_icon">9.0sp</dimen>
+    <dimen name="pip_menu_edu_text_home_icon_outline">14.0sp</dimen>
+    <dimen name="pip_menu_edu_text_view_height">24.0dip</dimen>
+    <dimen name="pip_menu_elevation_all_actions_menu">4.0dip</dimen>
+    <dimen name="pip_menu_elevation_move_menu">7.0dip</dimen>
+    <dimen name="pip_menu_elevation_no_menu">1.0dip</dimen>
+    <dimen name="pip_menu_outer_space">24.0dip</dimen>
+    <dimen name="pip_menu_outer_space_frame">20.0dip</dimen>
+    <dimen name="tv_window_menu_button_margin">4.0dip</dimen>
+    <dimen name="tv_window_menu_button_radius">20.0dip</dimen>
+    <dimen name="tv_window_menu_button_size">48.0dip</dimen>
+    <dimen name="tv_window_menu_icon_size">20.0dip</dimen>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="1.3299866dip" android:width="23.0dip" />
+    <corners android:radius="0.6600001dip" />
+    <solid android:color="@color/panel_menu_icon_color" />
+</shape>

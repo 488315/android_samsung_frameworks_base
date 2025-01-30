@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:layout_gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="8.0dip">
+        <com.android.systemui.qp.RTLViewPager android:id="@id/viewPager" android:layout_width="fill_parent" android:layout_height="@dimen/subscreen_quick_settings_page_height" android:layout_marginBottom="@dimen/subscreen_quick_settings_page_height_bottom_margin" android:layout_centerInParent="true" />
+        <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:orientation="horizontal" android:id="@id/pager_dots" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/sec_qs_page_indicator_container_height" android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+</LinearLayout>

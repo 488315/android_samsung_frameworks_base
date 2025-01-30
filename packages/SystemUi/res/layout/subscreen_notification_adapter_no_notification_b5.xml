@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/subscreen_notification_main_layout_background_b5" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textSize="@dimen/subscreen_noti_no_notification_text_size_b5" android:textColor="@color/subscreen_no_notification_text_color_b5" android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/subcreen_no_notification" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="29.0dip" android:layout_marginBottom="29.0dip" android:text="@string/empty_shade_text" android:fontFamily="sec" android:textFontWeight="400" />
+    </LinearLayout>
+</LinearLayout>

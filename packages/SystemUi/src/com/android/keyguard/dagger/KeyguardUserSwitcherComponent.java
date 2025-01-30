@@ -1,0 +1,16 @@
+package com.android.keyguard.dagger;
+
+import com.android.systemui.statusbar.policy.KeyguardUserSwitcherController;
+import com.android.systemui.statusbar.policy.KeyguardUserSwitcherView;
+
+/* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+/* loaded from: classes.dex */
+public interface KeyguardUserSwitcherComponent {
+
+    /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+    public interface Factory {
+        KeyguardUserSwitcherComponent build(KeyguardUserSwitcherView keyguardUserSwitcherView);
+    }
+
+    KeyguardUserSwitcherController getKeyguardUserSwitcherController();
+}

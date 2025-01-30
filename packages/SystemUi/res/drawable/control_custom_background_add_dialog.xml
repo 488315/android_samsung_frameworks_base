@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/background">
+        <shape>
+            <stroke android:width="@dimen/control_add_dialog_card_stroke" android:color="@color/control_add_dialog_card_stroke" />
+            <solid android:color="@color/control_favorite_default_background" />
+            <corners android:radius="@dimen/control_custom_corner_radius" />
+        </shape>
+    </item>
+</layer-list>

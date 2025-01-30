@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/preffered_slot_button" android:layout_width="wrap_content" android:layout_height="fill_parent" android:paddingStart="@dimen/qs_multisim_preffered_slot_button_padding_horizon" android:paddingEnd="@dimen/qs_multisim_preffered_slot_button_padding_horizon"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/qs_multisim_preffered_slot_text_line1_text_size" android:gravity="center" android:id="@id/slot_button_category_text_line" android:layout_width="wrap_content" android:layout_height="@dimen/qs_multisim_preffered_slot_category_text_height" android:singleLine="true" android:includeFontPadding="false" android:fontFamily="sec" android:textFontWeight="600" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/slot_button_ims_data_info_line" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="@dimen/qs_multisim_preffered_slot_ims_data_info_line_height">
+            <ImageView android:id="@id/slot_button_preferred_sim_image_for_data_info" android:layout_width="@dimen/qs_multisim_preffered_slot_image_width" android:layout_height="fill_parent" />
+            <com.android.systemui.statusbar.phone.StatusIconContainer android:gravity="center" android:orientation="horizontal" android:id="@id/slotNetworkIcons" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1.0" android:layout_marginStart="@dimen/qs_multisim_preffered_slot_text_line_margin_start" />
+        </LinearLayout>
+    </FrameLayout>
+    <FrameLayout android:id="@id/slot_button_sim_name_frame" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/slot_button_sim_name_and_image_line" android:layout_width="wrap_content" android:layout_height="@dimen/qs_multisim_preffered_slot_sim_name_and_image_height">
+            <ImageView android:id="@id/slot_button_preferred_sim_image_for_sim_name" android:layout_width="@dimen/qs_multisim_preffered_slot_image_width" android:layout_height="fill_parent" />
+            <TextView android:textSize="@dimen/qs_multisim_preffered_slot_text_line2_text_size" android:gravity="start|center" android:id="@id/slot_button_sim_name_text" android:layout_width="wrap_content" android:layout_height="fill_parent" android:singleLine="true" android:fontFamily="sec" android:layout_marginStart="@dimen/qs_multisim_preffered_slot_text_line_margin_start" android:textFontWeight="400" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="@dimen/qs_multisim_preffered_slot_primary_sim_text_height">
+            <TextView android:textSize="@dimen/qs_multisim_preffered_slot_text_line2_text_size" android:textColor="@color/qs_multisim_primary_sim_text_color" android:gravity="center_vertical" android:id="@id/slot_button_primary_sim_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/qs_multisim_primary_sim" android:fontFamily="sec" android:paddingEnd="@dimen/qs_multisim_primary_text_padding_end" android:textFontWeight="600" />
+            <TextView android:textSize="@dimen/qs_multisim_preffered_slot_text_line2_text_size" android:gravity="center_vertical" android:id="@id/slot_button_sim_name_or_ask_text" android:layout_width="wrap_content" android:layout_height="fill_parent" android:singleLine="true" android:fontFamily="sec" android:textFontWeight="400" />
+        </LinearLayout>
+    </FrameLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="@dimen/qs_multisim_preffered_slot_carrier_name_height">
+        <TextView android:textSize="@dimen/qs_multisim_preffered_slot_text_line3_text_size" android:id="@id/slot_button_carrier_name_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:fontFamily="sec" android:textFontWeight="400" />
+    </LinearLayout>
+</LinearLayout>

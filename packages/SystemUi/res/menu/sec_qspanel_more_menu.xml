@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@android:drawable/ic_menu_preferences" android:id="@id/qs_edit" android:title="@string/sec_more_button_menu_edit" />
+    <item android:icon="@android:drawable/ic_menu_preferences" android:id="@id/qspanel_layout" android:title="@string/sec_more_button_menu_qspanel_layout" />
+    <item android:icon="@android:drawable/ic_menu_preferences" android:id="@id/noti_settings" android:title="@string/sec_more_button_menu_noti_settings" />
+    <item android:icon="@android:drawable/ic_menu_preferences" android:id="@id/contact_us" android:title="@string/sec_more_button_menu_contact_us" />
+</menu>

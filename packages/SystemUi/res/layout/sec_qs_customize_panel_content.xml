@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@id/edit_status_bar_view" android:layout_width="fill_parent" android:layout_height="0.0dip" />
+    <include android:id="@id/qs_customizer_top_summary" layout="@layout/qs_customize_panel_summary" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/customize_container" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <View android:id="@id/qs_active_empty_header" android:background="@drawable/qs_edit_panel_active_top_bg" android:layout_width="wrap_content" android:layout_height="@dimen/qs_edit_panel_indicator_layout_height" android:layout_marginHorizontal="20.0dip" />
+            <LinearLayout android:gravity="top" android:orientation="vertical" android:id="@id/qs_active_page_parent" android:background="@color/qs_edit_ripple_bg_color" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="3.0" android:layout_marginHorizontal="20.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+                        <FrameLayout android:layout_gravity="start" android:id="@id/active_page_area_left" android:background="@android:color/transparent" android:layout_width="10.0dip" android:layout_height="fill_parent" />
+                        <include android:id="@id/qs_customizer_active_pager" layout="@layout/qs_paged_customizer_tile_layout" />
+                        <FrameLayout android:layout_gravity="end" android:id="@id/active_page_area_right" android:background="@android:color/transparent" android:layout_width="10.0dip" android:layout_height="fill_parent" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="top" android:id="@id/qs_active_paged_indicator_container" android:background="@drawable/qs_edit_panel_active_bottom_bg" android:layout_width="fill_parent" android:layout_height="@dimen/qs_edit_panel_indicator_layout_height" android:layout_marginHorizontal="20.0dip">
+                <com.android.systemui.qs.SecPageIndicator android:gravity="center" android:id="@id/qs_active_paged_indicator" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView android:textSize="@dimen/qs_edit_available_text" android:textColor="@color/qs_edit_tile_available_label_color" android:gravity="center" android:id="@id/qs_edit_available_text" android:background="@drawable/qs_edit_panel_available_background" android:clickable="false" android:layout_width="fill_parent" android:layout_height="@dimen/qs_edit_available_text_height" android:layout_marginTop="10.0dip" android:text="@string/qs_edit_available_title" />
+            <LinearLayout android:gravity="bottom" android:orientation="vertical" android:id="@id/qs_available_page_parent" android:background="@color/qs_edit_panel_available_background_color" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="2.0">
+                <LinearLayout android:orientation="vertical" android:id="@id/qs_customizer_available_pager_container" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <include android:id="@id/qs_customizer_available_pager" layout="@layout/qs_paged_customizer_tile_layout" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="top" android:id="@id/qs_available_paged_indicator_container" android:background="@color/qs_edit_panel_available_background_color" android:layout_width="fill_parent" android:layout_height="@dimen/qs_edit_available_area_indicator_bottom">
+                <com.android.systemui.qs.SecPageIndicator android:gravity="center" android:id="@id/qs_available_paged_indicator" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <include android:layout_gravity="bottom" android:id="@id/qs_customize_panel_buttons_parent" layout="@layout/qs_customize_panel_buttons" />
+    <View android:id="@id/edit_navigation_bar_view" android:background="@color/qs_edit_panel_available_background_color" android:layout_width="fill_parent" android:layout_height="0.0dip" />
+</LinearLayout>

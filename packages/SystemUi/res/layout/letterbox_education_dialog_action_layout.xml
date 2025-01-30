@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="@dimen/letterbox_education_dialog_action_width" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/letterbox_education_dialog_action_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" />
+    <TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Body1" android:textSize="14.0sp" android:textColor="?android:textColorSecondary" android:id="@id/letterbox_education_dialog_action_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lineSpacingExtra="4.0sp" android:fontFamily="@android:string/config_wimaxServiceClassname" android:textAlignment="center" />
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <com.android.systemui.widget.SystemUITextView android:gravity="center_vertical" android:id="@id/digit_text" android:layout_width="wrap_content" android:layout_height="wrap_content" sysui:originColor="origin_pin_digit_text_color" sysui:reduceTransparency="true" sysui:themeBlackColor="theme_pin_digit_text_color_black" sysui:themeColor="theme_pin_digit_text_color" sysui:themePolicyIgnorable="true" sysui:wallpaperColorIgnorable="true" sysui:whitebgColor="whitebg_keyguard_text_color" style="@style/SECNumPadKeyTablet" />
+    <com.android.systemui.widget.SystemUITextView android:gravity="center_vertical" android:id="@id/klondike_text" android:layout_width="wrap_content" android:layout_height="wrap_content" sysui:originColor="origin_pin_klondike_text_color" sysui:reduceTransparency="true" sysui:themeBlackColor="theme_pin_klondike_text_color_black" sysui:themeColor="theme_pin_klondike_text_color" sysui:themePolicyIgnorable="true" sysui:wallpaperColorIgnorable="true" sysui:whitebgColor="whitebg_keyguard_text_color" style="@style/SECKlondikeTablet" />
+</merge>

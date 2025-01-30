@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d آئٹمز کا انتخاب کیا گیا</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d آئٹم کا انتخاب کیا گیا</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d سیکنڈز</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d سیکنڈ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">اپنا فون ری اسٹارٹ کرنے کیلئے، سائیڈ بٹن اور والیوم ڈاؤن بٹن کو ایک ہی وقت میں دبائیں اور %d سے زیادہ سیکنڈ تک پکڑے رہیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">اپنا فون ری اسٹارٹ کرنے کیلئے، سائیڈ بٹن اور والیوم ڈاؤن بٹن کو ایک ہی وقت میں دبائیں اور %d سے زیادہ سیکنڈ تک پکڑے رہیں۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d کوششیں بچی ہیں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d کوشش بچی ہے</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">اس فون کو انلاک کرنے کے لیے %1$d کوششیں کی گئی ہیں۔ %2$d گھنٹے میں دوبارہ کوشش کریں۔</item>
+        <item quantity="one">اس فون کو انلاک کرنے کی %d کوششیں ہوچکی ہیں۔ 1 گھنٹہ میں دوبارہ کوشش کریں۔</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">اس فون کو انلاک کرنے کے لیے %1$d کوششیں کی گئی ہیں۔ %2$d منٹ میں دوبارہ کوشش کریں۔</item>
+        <item quantity="one">اس فون کو انلاک کرنے کی %d کوششیں ہوچکی ہیں۔ 1 منٹ میں دوبارہ کوشش کریں۔</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">اس فون کو انلاک کرنے کے لیے %1$d کوششیں کی گئی ہیں۔ %2$d سیکنڈ میں دوبارہ کوشش کریں۔</item>
+        <item quantity="one">اس فون کو انلاک کرنے کی %d کوششیں ہوچکی ہیں۔ 1 سیکنڈ میں دوبارہ کوشش کریں۔</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">فنگر پرنٹس سے ان لاک کرنے کی %d کوششیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">فنگر پرنٹس سے ان لاک کرنے کی %d کوشش۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">بایومیٹرکس کی توثیق کی %d غلط کوششیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">بایومیٹرکس کی توثیق کی %d غلط کوشش۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">چہرے کی توثیق کی %d غلط کوششیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">چہرے کی توثیق کی %d غلط کوشش۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">فنگرپرنٹس کی توثیق کی %d غلط کوششیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">فنگرپرنٹس کی توثیق کی %d غلط کوشش۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">1 گھنٹے %d منٹ میں دوبارہ کوشش کریں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1 گھنٹے %d منٹ میں دوبارہ کوشش کریں</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">%d سیکنڈز میں دوبارہ اپنا بایومیٹرکس آزمائیں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d سیکنڈ میں دوبارہ اپنا بایومیٹرکس آزمائیں</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">چہرہ شناخت %d سیکنڈز میں دوبارہ آزمائیں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">چہرہ شناخت %d سیکنڈ میں دوبارہ آزمائیں</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">%d سیکنڈز میں دوبارہ اپنا فنگرپرنٹس آزمائیں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d سیکنڈ میں دوبارہ اپنا فنگربرنٹ آزمائیں</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">%d گھنٹے میں دوبارہ کوشش کریں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d گھنٹے میں دوبارہ کوشش کریں</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">%d گھنٹے 1 منٹ میں دوبارہ کوشش کریں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d گھنٹے 1 منٹ میں دوبارہ کوشش کریں</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">%d منٹ میں دوبارہ کوشش کریں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d منٹ میں دوبارہ کوشش کریں</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">%d سیکنڈ بعد دوبارہ کوشش کریں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d سیکنڈ بعد دوبارہ کوشش کریں</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">%d سیکنڈز میں دوبارہ کوشش کریں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d سیکنڈ میں دوبارہ کوشش کریں۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d کوششیں بچی ہیں</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d کوشش بچی ہے</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d نوٹیفکیشنز</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d نوٹیفکیشن</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d بٹنز مطلوب ہیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d بٹن مطلوب ہے۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d گھنٹے کیلئے</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d گھنٹے کیلئے</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">%d سے زیادہ بٹنز شامل نہیں کر سکتے۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d سے زیادہ بٹن شامل نہیں کر سکتے۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">بٹن کو نہیں ہٹا سکتے۔ فوری پینل کو کم از کم %d بٹنز کی ضرورت ہیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">بٹن کو نہیں ہٹا سکتے۔ فوری پینل کو کم از کم %d بٹن کی ضرورت ہے۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d ایفیکٹس</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ایفیکٹ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">آپ کی عمر کم از کم %d برس ہونے پر ہی آپ Galaxy AI کی اعلی انٹیلی جنس کی خصوصیات کا استعمال کر سکتے ہیں۔</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">آپ کی عمر کم از کم %d برس ہونے پر ہی آپ Galaxy AI کی اعلی انٹیلی جنس کی خصوصیات کا استعمال کر سکتے ہیں۔</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

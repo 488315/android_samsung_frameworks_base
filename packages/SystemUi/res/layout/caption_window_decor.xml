@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.windowdecor.WindowDecorLinearLayout android:gravity="end" android:id="@id/caption" android:background="@drawable/caption_decor_title" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button android:layout_gravity="end|center" android:id="@id/back_button" android:background="@drawable/decor_back_button_dark" android:duplicateParentState="true" android:contentDescription="@string/back_button_text" style="@style/CaptionButtonStyle" />
+    <Space android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1.0" android:elevation="2.0dip" />
+    <Button android:layout_gravity="end|center" android:id="@id/minimize_window" android:background="@drawable/decor_minimize_button_dark" android:duplicateParentState="true" android:contentDescription="@string/minimize_button_text" style="@style/CaptionButtonStyle" />
+    <Button android:layout_gravity="end|center" android:id="@id/maximize_window" android:background="@drawable/decor_maximize_button_dark" android:duplicateParentState="true" android:contentDescription="@string/maximize_button_text" style="@style/CaptionButtonStyle" />
+    <Button android:id="@id/close_window" android:background="@drawable/decor_close_button_dark" android:duplicateParentState="true" android:contentDescription="@string/close_button_text" style="@style/CaptionButtonStyle" />
+</com.android.wm.shell.windowdecor.WindowDecorLinearLayout>

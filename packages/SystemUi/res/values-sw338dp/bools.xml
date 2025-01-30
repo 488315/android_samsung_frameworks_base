@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="max_screen_zoom_lock_icon_policy">false</bool>
+</resources>

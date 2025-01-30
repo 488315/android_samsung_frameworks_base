@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:background="@color/qs_edit_ripple_bg_color" android:focusable="false" android:visibility="gone" android:clickable="false" android:layout_width="fill_parent" android:layout_height="1.0dip" android:paddingHorizontal="15.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:background="#29ffffff" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</LinearLayout>

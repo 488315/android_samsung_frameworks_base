@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/desktop_mode_decor_menu_background" android:layout_width="@dimen/desktop_mode_handle_menu_width" android:layout_height="@dimen/desktop_mode_handle_menu_more_actions_pill_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button android:id="@id/screenshot_button" android:text="@string/screenshot_text" android:contentDescription="@string/screenshot_text" android:drawableStart="@drawable/desktop_mode_ic_handle_menu_screenshot" android:drawableTint="@color/desktop_mode_caption_menu_buttons_color_inactive" style="@style/DesktopModeHandleMenuActionButton" />
+    <Button android:id="@id/select_button" android:text="@string/select_text" android:contentDescription="@string/select_text" android:drawableStart="@drawable/desktop_mode_ic_handle_menu_select" android:drawableTint="@color/desktop_mode_caption_menu_buttons_color_inactive" style="@style/DesktopModeHandleMenuActionButton" />
+    <Button android:id="@id/close_button" android:text="@string/close_text" android:contentDescription="@string/close_text" android:drawableStart="@drawable/desktop_mode_ic_handle_menu_close" android:drawableTint="@color/desktop_mode_caption_menu_buttons_color_inactive" style="@style/DesktopModeHandleMenuActionButton" />
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/notification_panel_theme_ripple_color"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/mask">
+        <inset android:insetLeft="@android:dimen/autofill_save_title_start_padding" android:insetRight="@android:dimen/autofill_save_title_start_padding" android:insetTop="@android:dimen/autofill_save_title_start_padding" android:insetBottom="@android:dimen/autofill_save_title_start_padding">
+            <shape>
+                <corners android:radius="@dimen/notification_panel_background_radius" />
+                <solid android:color="@android:color/white" />
+            </shape>
+        </inset>
+    </item>
+</ripple>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:startColor="@color/sec_cover_media_player_play_last_song_foreground_start_color" android:endColor="@color/sec_cover_media_player_play_last_song_foreground_end_color" android:type="radial" android:gradientRadius="100.0%p" />
+    <size android:height="823.0px" android:width="823.0px" />
+</shape>

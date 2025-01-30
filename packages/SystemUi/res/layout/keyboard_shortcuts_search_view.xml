@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@drawable/shortcut_dialog_bg" android:layout_width="@dimen/ksh_layout_width" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="?android:textAppearanceLarge" android:textColor="?android:textColorPrimary" android:layout_gravity="center_horizontal" android:id="@id/shortcut_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="40.0dip" android:text="@string/keyboard_shortcut_search_list_title" />
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <EditText android:textColor="?android:textColorPrimary" android:textColorHint="?android:textColorTertiary" android:layout_gravity="start|center" android:id="@id/keyboard_shortcuts_search" android:background="@drawable/shortcut_search_background" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:layout_marginBottom="24.0dip" android:hint="@string/keyboard_shortcut_search_list_hint" android:singleLine="true" android:drawablePadding="15.0dip" android:inputType="text" android:drawableStart="@drawable/ic_shortcutlist_search" android:textDirection="locale" android:textAlignment="viewStart" android:layout_marginStart="49.0dip" android:layout_marginEnd="49.0dip" />
+        <ImageView android:layout_gravity="end|center" android:id="@id/keyboard_shortcuts_search_cancel" android:padding="16.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_shortcutlist_search_button_cancel" android:contentDescription="@string/keyboard_shortcut_clear_text" android:layout_marginEnd="49.0dip" />
+    </FrameLayout>
+    <HorizontalScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <View android:layout_width="0.0dip" android:layout_height="0.0dip" android:layout_marginStart="37.0dip" />
+            <Button android:id="@id/shortcut_system" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/keyboard_shortcut_search_category_system" android:layout_marginStart="12.0dip" style="@style/ShortCutButton" />
+            <Button android:id="@id/shortcut_input" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/keyboard_shortcut_search_category_input" android:layout_marginStart="12.0dip" style="@style/ShortCutButton" />
+            <Button android:id="@id/shortcut_open_apps" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/keyboard_shortcut_search_category_open_apps" android:layout_marginStart="12.0dip" style="@style/ShortCutButton" />
+            <Button android:id="@id/shortcut_specific_app" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/keyboard_shortcut_search_category_current_app" android:layout_marginStart="12.0dip" style="@style/ShortCutButton" />
+        </LinearLayout>
+    </HorizontalScrollView>
+    <TextView android:textAppearance="?android:textAppearanceMedium" android:textColor="?android:textColorPrimary" android:layout_gravity="center_horizontal" android:id="@id/shortcut_search_no_result" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="50.0dip" android:text="@string/keyboard_shortcut_search_list_no_result" />
+    <ScrollView android:id="@id/keyboard_shortcuts_scroll_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:layout_marginStart="25.0dip" android:layout_marginEnd="25.0dip">
+        <LinearLayout android:orientation="vertical" android:id="@id/keyboard_shortcuts_container" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </ScrollView>
+    <View android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+</LinearLayout>

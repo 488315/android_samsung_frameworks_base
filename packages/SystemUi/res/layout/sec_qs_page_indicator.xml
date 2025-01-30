@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@id/page_indicator_container" android:layout_width="fill_parent" android:layout_height="@dimen/sec_qs_page_indicator_container_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.qs.SecPageIndicator android:gravity="center" android:layout_gravity="center" android:id="@id/page_indicator" android:focusable="true" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:importantForAccessibility="yes" />
+</LinearLayout>

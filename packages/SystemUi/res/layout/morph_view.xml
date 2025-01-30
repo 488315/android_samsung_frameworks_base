@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:gravity="center" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:id="@id/toast_root" android:background="@drawable/toast_morph_bg" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" android:layout_marginHorizontal="@dimen/morph_side_margin">
+        <LinearLayout android:gravity="center" android:id="@id/toast_icon_root" android:layout_width="@dimen/toast_height" android:layout_height="@dimen/toast_height">
+            <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:orientation="horizontal" android:id="@id/noti_icon_bg" android:background="@drawable/squircle" android:layout_width="@dimen/noti_icon_bg_size" android:layout_height="@dimen/noti_icon_bg_size">
+                <ImageView android:id="@id/toast_app_icon" android:layout_width="@dimen/noti_icon_bg_size" android:layout_height="@dimen/noti_icon_bg_size" android:scaleType="fitXY" />
+                <ImageView android:id="@id/toast_small_icon" android:layout_width="@dimen/noti_icon_size" android:layout_height="@dimen/noti_icon_size" android:scaleType="fitXY" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/toast_text_layout" android:layout_width="wrap_content" android:layout_height="fill_parent" android:paddingStart="@dimen/toast_text_layout_start_padding" android:paddingEnd="@dimen/toast_text_layout_end_padding">
+            <LinearLayout android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:textSize="13.0sp" android:textStyle="bold" android:textColor="@color/toast_text_color" android:layout_gravity="center_vertical" android:id="@id/toast_title_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="@dimen/toast_title_max_width" android:maxLines="1" android:singleLine="true" android:fontFamily="sec" android:paddingEnd="@dimen/noti_text_end_padding" android:textFontWeight="600" />
+                <TextView android:textSize="13.0sp" android:textColor="@color/toast_text_color" android:ellipsize="end" android:layout_gravity="center_vertical" android:id="@id/toast_sub_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:singleLine="true" android:fontFamily="sec" android:paddingStart="@dimen/noti_text_center_padding" android:paddingEnd="@dimen/noti_text_end_padding" android:textFontWeight="400" />
+            </LinearLayout>
+            <TextView android:textSize="13.0sp" android:textColor="@color/verification_code_color" android:layout_gravity="center_vertical" android:id="@id/verification_code" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:singleLine="true" android:drawableLeft="@drawable/edge_lighting_screen_icon_copy" android:fontFamily="sec" android:drawableTint="@color/verification_code_color" android:textFontWeight="400" />
+            <ImageView android:layout_gravity="center_vertical" android:id="@id/expand_button" android:visibility="gone" android:layout_width="@dimen/noti_expand_button_size" android:layout_height="@dimen/noti_expand_button_size" android:src="@drawable/ic_expand_notification" android:scaleType="fitXY" android:contentDescription="@string/content_description_expand_button" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

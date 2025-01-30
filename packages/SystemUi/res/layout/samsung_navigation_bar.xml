@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.navigationbar.SamsungNavigationBarView android:id="@id/navigation_bar_view" android:background="@drawable/system_bar_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.navigationbar.SamsungNavigationBarSetupWizardView android:id="@id/navigation_setupwizard" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.android.systemui.navigationbar.SamsungNavigationBarInflaterView android:id="@id/navigation_inflater" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</com.android.systemui.navigationbar.SamsungNavigationBarView>

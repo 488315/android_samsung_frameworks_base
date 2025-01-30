@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.compatui.BoundsCompatUILayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:id="@id/bounds_compat_arrow_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <LinearLayout android:gravity="center" android:id="@id/bounds_compat_ui_left" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <ImageButton android:layout_gravity="center" android:id="@id/bounds_compat_align_left_button" android:background="@drawable/hidden_visual_cue_rotate_btn" android:visibility="invisible" android:clickable="true" android:layout_width="@dimen/bounds_compat_button_size" android:layout_height="@dimen/bounds_compat_button_size" android:src="@drawable/ic_aspect_ratio_left" android:importantForAccessibility="yes" />
+        </LinearLayout>
+        <TextView android:id="@id/bounds_compat_ui_main" android:background="#3f00ff00" android:visibility="invisible" android:layout_width="@dimen/bounds_compat_ui_main_fixed_width" android:layout_height="fill_parent" />
+        <LinearLayout android:gravity="center" android:id="@id/bounds_compat_ui_right" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <ImageButton android:layout_gravity="center" android:id="@id/bounds_compat_align_right_button" android:background="@drawable/hidden_visual_cue_rotate_btn" android:visibility="invisible" android:clickable="true" android:layout_width="@dimen/bounds_compat_button_size" android:layout_height="@dimen/bounds_compat_button_size" android:src="@drawable/ic_aspect_ratio_right" android:importantForAccessibility="yes" />
+        </LinearLayout>
+    </LinearLayout>
+    <FrameLayout android:layout_gravity="bottom|center|right" android:id="@id/bounds_compat_switchable_button_container" android:layout_width="@dimen/bounds_compat_button_size" android:layout_height="@dimen/bounds_compat_button_size" android:layout_marginTop="@null" android:layout_marginBottom="@android:dimen/notification_action_disabled_content_alpha">
+        <ImageButton android:layout_gravity="center" android:id="@id/bounds_compat_fixed_aspect_ratio_shortcut_button" android:background="@drawable/hidden_visual_cue_rotate_btn" android:visibility="invisible" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/ic_aspect_ratio_full_screen_apps" android:contentDescription="@string/aspect_ratio_settings_content_description" android:importantForAccessibility="yes" />
+        <ImageButton android:layout_gravity="center" android:id="@id/bounds_compat_restart_button" android:background="@drawable/hidden_visual_cue_rotate_btn" android:visibility="invisible" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/ic_restart_fullscreen" android:contentDescription="@string/restart_button_content_description" android:importantForAccessibility="yes" />
+        <ImageButton android:layout_gravity="center" android:id="@id/bounds_compat_rotation_on_button" android:background="@drawable/hidden_visual_cue_rotate_btn" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/ic_rotate_device_on" />
+        <ImageButton android:layout_gravity="center" android:id="@id/bounds_compat_rotation_off_button" android:background="@drawable/hidden_visual_cue_rotate_btn" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/ic_rotate_device_off" />
+    </FrameLayout>
+</com.android.wm.shell.compatui.BoundsCompatUILayout>

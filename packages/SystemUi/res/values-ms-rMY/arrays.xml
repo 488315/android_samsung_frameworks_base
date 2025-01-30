@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Ya</item>
+        <item>Ya, baiklah</item>
+        <item>OK</item>
+        <item>Enggan</item>
+        <item>Tdk, terima kasih</item>
+        <item>Tidak</item>
+        <item>Terima kasih</item>
+        <item>Terima kasih banyak-banyak</item>
+        <item>Dalam perjalanan</item>
+        <item>Apa khabar?</item>
+        <item>Kemudian</item>
+        <item>Bagus</item>
+        <item>Saya setuju</item>
+        <item>Hebat!</item>
+        <item>Apa?</item>
+        <item>OMG!</item>
+    </string-array>
+</resources>

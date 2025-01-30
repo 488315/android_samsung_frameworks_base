@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="52.0dip" android:paddingStart="20.0dip" android:paddingVertical="10.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/qs_edit_popup_text_size" android:layout_gravity="center" android:id="@id/textView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" android:fontFamily="sec" android:fontWeight="400" />
+    <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="10.0dip" android:layout_marginEnd="15.0dip">
+        <ImageView android:id="@id/checked" android:layout_width="16.0dip" android:layout_height="wrap_content" android:src="@drawable/qs_setting_edit_popup_check" android:tint="@color/qs_edit_content_text_color" />
+    </LinearLayout>
+</LinearLayout>

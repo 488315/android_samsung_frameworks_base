@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bouncer_user_switcher_view_mode_user_switcher_bottom_margin">155.0dip</dimen>
+    <dimen name="bouncer_user_switcher_view_mode_view_flipper_bottom_margin">85.0dip</dimen>
+    <dimen name="keyguard_clock_top_margin">80.0dip</dimen>
+    <dimen name="keyguard_status_view_bottom_margin">70.0dip</dimen>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/media_device_bar" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="@dimen/qspanel_media_quickcontrol_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:tag="expand_anim" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:tag="open_anim" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="start|center" android:id="@id/device_touch_area" android:clipChildren="false" android:clipToPadding="false" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <com.android.systemui.qs.common.BasicButton android:textSize="@dimen/qspanel_media_quickcontrol_text_size" android:textColor="@color/sec_media_devices_buttons_text_color" android:gravity="center" android:id="@id/quickcontrol_title" android:background="@drawable/media_devices_bar_button_ripple_background" android:clickable="true" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/qspanel_quickcontrol_button_text" android:singleLine="true" android:fontFamily="sec" android:paddingStart="@dimen/qspanel_media_quickcontrol_text_padding_start" android:paddingEnd="@dimen/qspanel_media_quickcontrol_text_padding_start" android:fontWeight="400" />
+            </LinearLayout>
+            <LinearLayout android:gravity="end|center" android:id="@id/media_touch_area" android:clipChildren="false" android:clipToPadding="false" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <com.android.systemui.qs.common.BasicButton android:textSize="@dimen/qspanel_media_quickcontrol_text_size" android:textColor="@color/sec_media_devices_buttons_text_color" android:gravity="center" android:id="@id/media_title" android:background="@drawable/media_devices_bar_button_ripple_background" android:clickable="true" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/sec_qs_media_player_media_output" android:singleLine="true" android:fontFamily="sec" android:paddingStart="@dimen/qspanel_media_quickcontrol_text_padding_start" android:paddingEnd="@dimen/qspanel_media_quickcontrol_text_padding_start" android:fontWeight="400" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

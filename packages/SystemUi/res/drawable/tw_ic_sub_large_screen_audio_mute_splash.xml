@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="1.7999878dip" android:width="26.5dip" />
+    <solid android:color="@color/sub_large_display_volume_icon_color" />
+</shape>

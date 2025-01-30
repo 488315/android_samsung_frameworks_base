@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">For %d dager siden</item>
+        <item quantity="one">For %d dag siden</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">For %d min. siden</item>
+        <item quantity="one">For %d min. siden</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">For %d år siden</item>
+        <item quantity="one">For %d år siden</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d elementer er valgt</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element er valgt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d sekunder</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sekund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Trykk på og hold sideknappen og Volum ned-knappen samtidig i mer enn %d sekunder for å starte telefonen på nytt.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Trykk på og hold sideknappen og Volum ned-knappen samtidig i mer enn %d sekund for å starte telefonen på nytt.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d forsøk gjenstår</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d forsøk gjenstår</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">Det er gjort %1$d forsøk på å låse opp denne telefonen. Prøv igjen om %2$d timer.</item>
+        <item quantity="one">Det er gjort %d forsøk på å låse opp denne telefonen. Prøv igjen om 1 time.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">Det er gjort %1$d forsøk på å låse opp denne telefonen. Prøv igjen om %2$d minutter.</item>
+        <item quantity="one">Det er gjort %d forsøk på å låse opp denne telefonen. Prøv igjen om 1 minutt.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">Det er gjort %1$d forsøk på å låse opp denne telefonen. Prøv igjen om %2$d sekunder.</item>
+        <item quantity="one">Det er gjort %d forsøk på å låse opp denne telefonen. Prøv igjen om 1 sekund.</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d forsøk på å låse opp med fingeravtrykk.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d forsøk på å låse opp med fingeravtrykk.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d feilaktige forsøk på å bekrefte biometri.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d feilaktig forsøk på å bekrefte biometri.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d feilaktige forsøk på å bekrefte ansiktet.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d feilaktig forsøk på å bekrefte ansiktet.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d feilaktige forsøk på å bekrefte fingeravtrykk.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d feilaktig forsøk på å bekrefte fingeravtrykk.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Prøv igjen om 1 time og %d minutter</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv igjen om 1 time og %d minutt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Prøv biometri igjen om %d sekunder</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv biometri igjen om %d sekund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Prøv ansiktsgjenkjenning igjen om %d sekunder</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv ansiktsgjenkjenning igjen om %d sekund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Prøv fingeravtrykket igjen om %d sekunder</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv fingeravtrykket igjen om %d sekund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Prøv igjen om %d timer</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv igjen om %d time</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Prøv igjen om %d timer og 1 minutt</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv igjen om %d time og 1 minutt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Prøv igjen om %d minutter</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv igjen om %d minutt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Prøv igjen om %d sekunder</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv igjen om %d sekund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Prøv igjen om %d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prøv igjen om %d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d forsøk gjenstår</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d forsøk gjenstår</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d nye varsler</item>
+        <item quantity="one">%d nytt varsel</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d varsler</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d varsel</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d knapper er obligatoriske.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d knapp er obligatorisk.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">I %d timer</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">I %d time</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Kan ikke legge til mer enn %d knapper.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kan ikke legge til mer enn %d knapp.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Kan ikke fjerne knappen. Hurtigpanelet må ha minst %d knapper.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kan ikke fjerne knappen. Hurtigpanelet må ha minst %d knapp.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d effekter</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d effekt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Du må være minst %d år gammel for å bruke funksjoner for avansert intelligens i Galaxy AI.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Du må være minst %d år gammel for å bruke funksjoner for avansert intelligens i Galaxy AI.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

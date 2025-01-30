@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/root_view" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/preview_root_view" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:id="@id/background_image_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+        <ImageView android:id="@id/background_image_view_lock" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <ImageView android:id="@id/background_image_view_home" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/wallpaper_setting_description_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/kg_preview_setting_description_text_side_margin" android:layout_marginEnd="@dimen/kg_preview_setting_description_text_side_margin">
+                <TextView android:id="@id/wallpaper_setting_description" android:layout_width="wrap_content" android:layout_height="wrap_content" android:breakStrategy="balanced" style="@style/wallpaper_setting_description" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <FrameLayout android:layout_gravity="center_horizontal" android:id="@id/preview_container" android:background="@drawable/preview_container_background_drawable" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:elevation="@dimen/kg_preview_container_shadow_elevation">
+                    <FrameLayout android:layout_gravity="center_horizontal" android:id="@id/preview_area" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                    <ImageView android:layout_gravity="center" android:id="@id/captured_image_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                </FrameLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/bottom_container" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                    <LinearLayout android:orientation="vertical" android:id="@id/option_container" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginLeft="@dimen/kg_option_container_margin_side" android:layout_marginRight="@dimen/kg_option_container_margin_side" android:layout_weight="1.0">
+                        <TextView android:gravity="center" android:layout_gravity="center" android:id="@id/wallpaper_description" android:layout_width="fill_parent" android:layout_height="fill_parent" style="@style/wallpaper_description_text_style" />
+                    </LinearLayout>
+                    <LinearLayout android:gravity="center" android:layout_gravity="center_horizontal" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/kg_set_as_wallpaper_button_view_margin_bottom" android:minWidth="@dimen/kg_preview_button_container_min_width">
+                        <Button android:textColor="@color/kg_set_as_wallpaper_text_color" android:ellipsize="end" android:layout_gravity="end" android:id="@id/set_as_wallpaper_button" android:background="@drawable/kg_set_wallpaper_btn_bg" android:layout_width="@dimen/kg_set_as_wallpaper_button_view_width" android:layout_height="wrap_content" android:minHeight="@dimen/kg_set_as_wallpaper_button_min_height" android:text="@string/kg_set_on_lock_screen_button" android:singleLine="true" android:layout_weight="1.0" android:layout_marginStart="@dimen/kg_set_as_wallpaper_button_margin" android:layout_marginEnd="@dimen/kg_set_as_wallpaper_button_margin" style="@style/set_as_wallpaper_text_style" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <ProgressBar android:layout_gravity="center" android:id="@id/preview_progress_bar" android:visibility="gone" android:layout_width="@dimen/kg_preview_progress_size" android:layout_height="@dimen/kg_preview_progress_size" android:indeterminate="true" />
+</FrameLayout>

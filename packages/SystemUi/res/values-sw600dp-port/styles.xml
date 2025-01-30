@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AuthCredentialHeaderStyle">
+        <item name="android:layout_gravity">top</item>
+        <item name="android:paddingTop">80.0dip</item>
+        <item name="android:paddingBottom">10.0dip</item>
+        <item name="android:paddingStart">120.0dip</item>
+        <item name="android:paddingEnd">120.0dip</item>
+    </style>
+    <style name="TextAppearance.AuthNonBioCredential.Title" parent="@style/TextAppearance.AuthNonBioCredential">
+        <item name="android:textSize">36.0sp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_marginTop">24.0dip</item>
+        <item name="android:fontFamily">google-sans</item>
+    </style>
+</resources>

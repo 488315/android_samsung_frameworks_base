@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="11.0dip" android:textColor="@color/ksh_indicator_label_text_color" android:ellipsize="marquee" android:gravity="center" android:focusable="false" android:layout_width="@dimen/ksh_indicator_label_width" android:layout_height="wrap_content" android:maxWidth="@dimen/ksh_indicator_label_width" android:minWidth="@dimen/ksh_indicator_label_width" android:maxLines="1" android:fontFamily="sec" android:paddingHorizontal="10.0dip" android:textFontWeight="400"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

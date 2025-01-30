@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/wireless_center_misalign_text_title_size" android:textColor="@color/wireless_center_misalign_text_color" android:id="@id/misalign_text_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/wireless_misalign_text_title" android:layout_centerHorizontal="true" android:fontFamily="sec" android:textFontWeight="500" />
+    <TextView android:textSize="@dimen/wireless_center_misalign_text_content_size" android:textColor="@color/wireless_center_misalign_text_color" android:gravity="center" android:id="@id/misalign_text_content" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/wireless_center_misalign_text_content_margin_top" android:text="@string/wireless_misalign_text_content" android:layout_below="@id/misalign_text_title" android:layout_centerHorizontal="true" android:fontFamily="sec" android:textFontWeight="400" />
+</RelativeLayout>

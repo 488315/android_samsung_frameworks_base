@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="can_use_one_handed_bouncer">true</bool>
+    <bool name="config_skinnyNotifsInLandscape">false</bool>
+    <bool name="small_tablet_landscape_lock_icon_policy">false</bool>
+    <bool name="suc_footer_bar_button_align_end">true</bool>
+</resources>

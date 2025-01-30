@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="control_action_icon_size">34.0dip</dimen>
+    <dimen name="control_battery_gauge_font_size">12.0dip</dimen>
+    <dimen name="control_battery_icon_size">24.0dip</dimen>
+    <dimen name="control_custom_base_item_size">125.0dip</dimen>
+    <dimen name="control_custom_icon_shadow_size">21.0dip</dimen>
+    <dimen name="control_custom_icon_size">42.0dip</dimen>
+    <dimen name="control_custom_text_size">13.0sp</dimen>
+    <dimen name="control_status_icon_size">24.0dip</dimen>
+</resources>

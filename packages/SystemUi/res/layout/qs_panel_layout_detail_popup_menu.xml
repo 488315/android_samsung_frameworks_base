@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/item_list" android:layout_width="fill_parent" android:layout_height="wrap_content" android:clipToOutline="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="horizontal" android:id="@id/always_layout" android:background="@drawable/btn_borderless_rect" android:paddingTop="@dimen/sec_qs_layout_detail_popup_menu_padding" android:paddingBottom="@dimen/sec_qs_layout_detail_popup_menu_padding" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/sec_qs_layout_detail_popup_menu_start_padding" android:paddingEnd="@dimen/sec_qs_layout_detail_popup_menu_end_padding">
+        <TextView android:id="@id/always" android:text="@string/qs_panel_detail_popup_menu_always_text" style="@style/QSDetailPopupMenuText" />
+        <ImageView android:id="@id/always_checked" style="@style/QSDetailPopupImage" />
+    </RelativeLayout>
+    <RelativeLayout android:orientation="horizontal" android:id="@id/expanded_layout" android:background="@drawable/btn_borderless_rect" android:paddingTop="@dimen/sec_qs_layout_detail_popup_menu_padding" android:paddingBottom="@dimen/sec_qs_layout_detail_popup_menu_padding" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/sec_qs_layout_detail_popup_menu_start_padding" android:paddingEnd="@dimen/sec_qs_layout_detail_popup_menu_end_padding">
+        <TextView android:id="@id/when_expanded" android:text="@string/qs_panel_detail_popup_menu_when_expanded_text" style="@style/QSDetailPopupMenuText" />
+        <ImageView android:id="@id/expanded_checked" style="@style/QSDetailPopupImage" />
+    </RelativeLayout>
+    <RelativeLayout android:orientation="horizontal" android:id="@id/never_layout" android:background="@drawable/btn_borderless_rect" android:paddingTop="@dimen/sec_qs_layout_detail_popup_menu_padding" android:paddingBottom="@dimen/sec_qs_layout_detail_popup_menu_padding" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/sec_qs_layout_detail_popup_menu_start_padding" android:paddingEnd="@dimen/sec_qs_layout_detail_popup_menu_end_padding">
+        <TextView android:id="@id/dont_show" android:text="@string/qs_panel_detail_popup_menu_dont_show_text" style="@style/QSDetailPopupMenuText" />
+        <ImageView android:id="@id/never_checked" style="@style/QSDetailPopupImage" />
+    </RelativeLayout>
+</LinearLayout>

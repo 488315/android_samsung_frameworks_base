@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConstraintSet
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Constraint android:id="@id/sizing_view" android:layout_width="fill_parent" android:layout_height="@dimen/qs_media_session_height_collapsed" />
+    <Constraint android:id="@id/media_cover1_container" android:layout_marginBottom="@dimen/qs_media_padding" android:layout_marginEnd="@dimen/qs_media_rec_album_side_margin" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/media_cover2_container" app:layout_constraintHorizontal_bias="1.0" app:layout_constraintHorizontal_chainStyle="packed" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.5" style="@style/MediaPlayer.Recommendation.AlbumContainer" />
+    <Constraint android:id="@id/media_title1" android:visibility="gone" />
+    <Constraint android:id="@id/media_subtitle1" android:visibility="gone" />
+    <Constraint android:id="@id/media_cover2_container" android:layout_marginBottom="@dimen/qs_media_padding" android:layout_marginEnd="@dimen/qs_media_rec_album_side_margin" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/media_cover3_container" app:layout_constraintStart_toEndOf="@id/media_cover1_container" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.5" style="@style/MediaPlayer.Recommendation.AlbumContainer" />
+    <Constraint android:id="@id/media_title2" android:visibility="gone" />
+    <Constraint android:id="@id/media_subtitle2" android:visibility="gone" />
+    <Constraint android:id="@id/media_cover3_container" android:layout_marginBottom="@dimen/qs_media_padding" android:layout_marginEnd="@dimen/qs_media_padding" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/media_cover2_container" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.5" style="@style/MediaPlayer.Recommendation.AlbumContainer" />
+    <Constraint android:id="@id/media_title3" android:visibility="gone" />
+    <Constraint android:id="@id/media_subtitle3" android:visibility="gone" />
+</ConstraintSet>

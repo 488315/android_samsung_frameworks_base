@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/pip_menu_background_corner_radius" />
+    <solid android:color="@color/tv_pip_menu_background" />
+    <stroke android:width="@dimen/pip_menu_border_width" android:color="@color/tv_pip_menu_background" />
+</shape>

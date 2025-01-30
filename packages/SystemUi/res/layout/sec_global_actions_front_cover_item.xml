@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/sec_global_actions_cover_item_wrapped" android:layout_width="fill_parent" android:layout_height="fill_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/sec_global_actions_cover_background" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:gravity="top" android:id="@id/sec_global_actions_icon" android:background="@drawable/sec_global_actions_front_cover_item_ripple" android:layout_width="86.0px" android:layout_height="86.0px" android:layout_margin="6.0px" />
+        <TextView android:textSize="30.0px" android:textColor="#fffafafa" android:gravity="center" android:id="@id/sec_global_actions_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0px" android:singleLine="true" android:fontFamily="sec" android:textAlignment="center" android:textFontWeight="400" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <com.airbnb.lottie.LottieAnimationView android:id="@id/sec_global_actions_cover_anim" android:visibility="gone" android:layout_width="57.0px" android:layout_height="wrap_content" app:lottie_autoPlay="true" app:lottie_fileName="open_and_unlock.json" app:lottie_loop="false" />
+        <TextView android:textSize="24.0px" android:textColor="#fffafafa" android:id="@id/sec_global_actions_cover_text" android:paddingTop="8.0px" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="sec" android:textAlignment="center" android:textFontWeight="400" />
+    </LinearLayout>
+</LinearLayout>

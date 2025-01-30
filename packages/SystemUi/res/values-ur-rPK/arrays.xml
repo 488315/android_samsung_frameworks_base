@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>ہاں</item>
+        <item>جی ہاں، براہ کرم</item>
+        <item>ٹھیک ہے</item>
+        <item>مجھے اس کی چاہت نہیں</item>
+        <item>نہیں شکریہ</item>
+        <item>مجھے یہ پسند نہیں</item>
+        <item>شکریہ</item>
+        <item>بہت زیادہ تعریف</item>
+        <item>راستے میں ہوں</item>
+        <item>کیسے ہو؟</item>
+        <item>بعد میں</item>
+        <item>عمدہ</item>
+        <item>میں متفق ہوں</item>
+        <item>بہت اچھا!</item>
+        <item>کیا؟</item>
+        <item>OMG!</item>
+    </string-array>
+</resources>

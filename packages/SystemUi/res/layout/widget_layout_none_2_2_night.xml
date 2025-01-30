@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:orientation="vertical" android:id="@id/root" android:background="@drawable/widget_layout_background_shape_night" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="@dimen/widget_launcher_2_2_layout_none_text_size" android:textColor="@color/cover_launcher_text_color" android:gravity="center" android:layout_gravity="center" android:layout_width="fill_parent" android:layout_height="@dimen/widget_launcher_2_2_layout_none_text_layout_height" android:layout_margin="@dimen/widget_launcher_2_2_layout_none_text_layout_margin" android:text="@string/controls_no_apps_selected" android:fontFamily="sec" android:textFontWeight="400" />
+</FrameLayout>

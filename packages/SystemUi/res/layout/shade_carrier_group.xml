@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.shade.carrier.ShadeCarrierGroup android:gravity="start|center" android:orientation="horizontal" android:id="@id/qs_mobile" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.util.AutoMarqueeTextView android:textAppearance="@style/TextAppearance.QS.Status.SamsungCarriers" android:gravity="center_vertical" android:id="@id/no_carrier_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="48.0dip" android:minHeight="48.0dip" android:singleLine="true" android:marqueeRepeatLimit="marquee_forever" android:textDirection="locale" />
+    <include android:id="@id/carrier1" android:layout_weight="1.0" layout="@layout/shade_carrier" />
+    <TextView android:textColor="@color/shade_carrier_divider_dot" android:id="@id/shade_carrier_divider1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/shade_carrier_divider" />
+    <include android:id="@id/carrier2" android:visibility="gone" android:layout_weight="1.0" layout="@layout/shade_carrier" />
+    <TextView android:textColor="@color/shade_carrier_divider_dot" android:id="@id/shade_carrier_divider2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/shade_carrier_divider" />
+    <include android:id="@id/carrier3" android:visibility="gone" android:layout_weight="1.0" layout="@layout/shade_carrier" />
+</com.android.systemui.shade.carrier.ShadeCarrierGroup>

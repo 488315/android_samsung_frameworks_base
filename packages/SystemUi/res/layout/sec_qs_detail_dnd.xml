@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.AlphaOptimizedLinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.QS.DetailEmpty" android:layout_gravity="center_vertical" android:id="@id/dnd_summary" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/sec_qs_detail_items_side_padding" android:layout_marginRight="@dimen/sec_qs_detail_items_side_padding" android:text="@string/quick_settings_dnd_summary" />
+    <View android:id="@id/qs_toggle_divider" android:background="@color/qs_toggle_divider_color" android:visibility="gone" android:layout_width="@dimen/qs_toggle_divider_width" android:layout_height="@dimen/qs_toggle_divider_height" android:layout_marginStart="@dimen/qs_toggle_divider_margin" />
+    <LinearLayout android:orientation="vertical" android:id="@id/dnd_menu_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</com.android.keyguard.AlphaOptimizedLinearLayout>

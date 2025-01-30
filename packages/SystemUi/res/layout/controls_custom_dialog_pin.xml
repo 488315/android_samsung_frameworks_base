@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingLeft="24.0dip" android:paddingTop="18.0dip" android:paddingRight="24.0dip" android:paddingBottom="24.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.textfield.TextInputLayout android:id="@id/controls_pin_input_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="0.0dip" app:hintEnabled="false">
+        <com.google.android.material.textfield.TextInputEditText android:id="@id/controls_pin_input" android:longClickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="36.0dip" android:inputType="numberPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="32.0dip" android:layout_marginTop="8.0dip">
+        <CheckBox android:id="@id/controls_pin_use_alpha" android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_marginStart="-4.0dip" />
+        <TextView android:textSize="16.0sp" android:id="@id/controls_pin_use_alpha_text" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

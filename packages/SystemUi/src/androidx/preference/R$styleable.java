@@ -1,0 +1,22 @@
+package androidx.preference;
+
+import android.R;
+
+/* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+/* loaded from: classes.dex */
+public final class R$styleable {
+    public static final int[] CheckBoxPreference = {R.attr.summaryOn, R.attr.summaryOff, R.attr.disableDependentsState, com.android.systemui.R.attr.disableDependentsState, com.android.systemui.R.attr.summaryOff, com.android.systemui.R.attr.summaryOn};
+    public static final int[] DialogPreference = {R.attr.dialogTitle, R.attr.dialogMessage, R.attr.dialogIcon, R.attr.positiveButtonText, R.attr.negativeButtonText, R.attr.dialogLayout, com.android.systemui.R.attr.dialogIcon, com.android.systemui.R.attr.dialogLayout, com.android.systemui.R.attr.dialogMessage, com.android.systemui.R.attr.dialogTitle, com.android.systemui.R.attr.negativeButtonText, com.android.systemui.R.attr.positiveButtonText};
+    public static final int[] EditTextPreference = {com.android.systemui.R.attr.useSimpleSummaryProvider};
+    public static final int[] ListPreference = {R.attr.entries, R.attr.entryValues, com.android.systemui.R.attr.entries, com.android.systemui.R.attr.entryValues, com.android.systemui.R.attr.useSimpleSummaryProvider};
+    public static final int[] MultiSelectListPreference = {R.attr.entries, R.attr.entryValues, com.android.systemui.R.attr.entries, com.android.systemui.R.attr.entryValues};
+    public static final int[] Preference = {R.attr.icon, R.attr.persistent, R.attr.enabled, R.attr.layout, R.attr.title, R.attr.selectable, R.attr.key, R.attr.summary, R.attr.order, R.attr.widgetLayout, R.attr.dependency, R.attr.defaultValue, R.attr.shouldDisableView, R.attr.fragment, R.attr.singleLineTitle, R.attr.iconSpaceReserved, com.android.systemui.R.attr.allowDividerAbove, com.android.systemui.R.attr.allowDividerBelow, com.android.systemui.R.attr.defaultValue, com.android.systemui.R.attr.dependency, com.android.systemui.R.attr.enableCopying, com.android.systemui.R.attr.enabled, com.android.systemui.R.attr.fragment, com.android.systemui.R.attr.icon, com.android.systemui.R.attr.iconSpaceReserved, com.android.systemui.R.attr.isDotVisible, com.android.systemui.R.attr.isPreferenceVisible, com.android.systemui.R.attr.key, com.android.systemui.R.attr.layout, com.android.systemui.R.attr.order, com.android.systemui.R.attr.persistent, com.android.systemui.R.attr.selectable, com.android.systemui.R.attr.shouldDisableView, com.android.systemui.R.attr.singleLineTitle, com.android.systemui.R.attr.summary, com.android.systemui.R.attr.title, com.android.systemui.R.attr.widgetLayout};
+    public static final int[] PreferenceFragment = {R.attr.layout, R.attr.divider, R.attr.dividerHeight, com.android.systemui.R.attr.allowDividerAfterLastItem};
+    public static final int[] PreferenceFragmentCompat = {R.attr.layout, R.attr.divider, R.attr.dividerHeight, com.android.systemui.R.attr.allowDividerAfterLastItem};
+    public static final int[] PreferenceGroup = {R.attr.orderingFromXml, com.android.systemui.R.attr.initialExpandedChildrenCount, com.android.systemui.R.attr.orderingFromXml};
+    public static final int[] PreferenceImageView = {R.attr.maxWidth, R.attr.maxHeight, com.android.systemui.R.attr.maxHeight, com.android.systemui.R.attr.maxWidth};
+    public static final int[] RingtonePreference = {R.attr.ringtoneType, R.attr.showDefault, R.attr.showSilent};
+    public static final int[] SeekBarPreference = {R.attr.layout, R.attr.max, com.android.systemui.R.attr.adjustable, com.android.systemui.R.attr.min, com.android.systemui.R.attr.seekBarIncrement, com.android.systemui.R.attr.showSeekBarValue, com.android.systemui.R.attr.updatesContinuously};
+    public static final int[] SwitchPreference = {R.attr.summaryOn, R.attr.summaryOff, R.attr.disableDependentsState, R.attr.switchTextOn, R.attr.switchTextOff, com.android.systemui.R.attr.disableDependentsState, com.android.systemui.R.attr.summaryOff, com.android.systemui.R.attr.summaryOn, com.android.systemui.R.attr.switchTextOff, com.android.systemui.R.attr.switchTextOn};
+    public static final int[] SwitchPreferenceCompat = {R.attr.summaryOn, R.attr.summaryOff, R.attr.disableDependentsState, R.attr.switchTextOn, R.attr.switchTextOff, com.android.systemui.R.attr.disableDependentsState, com.android.systemui.R.attr.summaryOff, com.android.systemui.R.attr.summaryOn, com.android.systemui.R.attr.switchTextOff, com.android.systemui.R.attr.switchTextOn};
+}

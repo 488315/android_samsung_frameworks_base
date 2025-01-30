@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d element seçilib</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element seçilib</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d saniyə</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saniyə</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Telefonu yenidən başlatmaq üçün Yan düyməyə və Səs səviyyəsini azaltma düyməsinə eyni anda basıb %d saniyə saxlayın.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Telefonu yenidən başlatmaq üçün Yan düyməyə və Səs səviyyəsini azaltma düyməsinə eyni anda basıb %d saniyə saxlayın.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d cəhd qalıb</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d cəhd qalıb</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">Bu telefonu kiliddən açmaq üçün %1$d cəhd edildi. %2$d saata yenidən cəhd edin.</item>
+        <item quantity="one">Bu telefonu kiliddən açmaq üçün %d cəhd edildi. 1 saata yenidən cəhd edin.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">Bu telefonu kiliddən açmaq üçün %1$d cəhd edildi. %2$d dəqiqəyə yenidən cəhd edin.</item>
+        <item quantity="one">Bu telefonu kiliddən açmaq üçün %d cəhd edildi. 1 dəqiqəyə yenidən cəhd edin.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">Bu telefonu kiliddən açmaq üçün %1$d cəhd edildi. %2$d saniyə sonra yenidən cəhd edin.</item>
+        <item quantity="one">Bu telefonu kiliddən açmaq üçün %d cəhd edildi. 1 saniyə sonra yenidən cəhd edin.</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">Kilidi barmaq izi ilə açmağa %d dəfə cəhd edilib.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kilidi barmaq izi ilə açmağa %d dəfə cəhd edilib.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">Biometrik məlumatların təsdiqlənməsi üzrə %d yanlış cəhd.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Biometrik məlumatların təsdiqlənməsi üzrə %d yanlış cəhd.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">Üzünüzün təsdiqlənməsi üzrə %d yanlış cəhd.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Üzünüzün təsdiqlənməsi üzrə %d yanlış cəhd.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">Barmaq izlərinin təsdiqlənməsi üzrə %d yanlış cəhd.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Barmaq izlərinin təsdiqlənməsi üzrə %d yanlış cəhd.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">1 saat %d dəqiqə sonra yenidən cəhd edin</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1 saat %d dəqiqə sonra yenidən cəhd edin</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">%d saniyəyə bioölçüləri bir daha sınayın</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saniyəyə bioölçüləri bir daha sınayın</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">%d saniyəyə üz tanınmasını yenidən sınayın</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saniyəyə üz tanınmasını yenidən sınayın</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">%d saniyəyə barmaq izlərini bir daha sınayın</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saniyəyə barmaq izlərini bir daha sınayın</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">%d saat sonra yenidən cəhd edin</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saat sonra yenidən cəhd edin</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">%d saat 1 dəqiqə sonra yenidən cəhd edin</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saat 1 dəqiqə sonra yenidən cəhd edin</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">%d dəqiqə sonra yenidən cəhd edin</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d dəqiqə sonra yenidən cəhd edin</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">%d saniyə sonra yenidən cəhd edin</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saniyə sonra yenidən cəhd edin</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">%d saniyəyə yenidən cəhd edin.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saniyəyə yenidən cəhd edin.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d cəhd qalıb</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d cəhd qalıb</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d bildiriş</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d bildiriş</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d düymə tələb olunur.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d düymə tələb olunur.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d saatlıq</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saatlıq</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Ən çoxu %d düymə əlavə etmək olar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ən çoxu %d düymə əlavə etmək olar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Düyməni silmək olmur. Cəld paneldə ən azı %d düymə olmalıdır.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Düyməni silmək olmur. Cəld paneldə ən azı %d düymə olmalıdır.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d effekt</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d effekt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Galaxy AI-nin qabaqcıl intellekt funksiyalarından istifadə etmək üçün ən azı %d yaşında olmalısınız.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Galaxy AI-nin qabaqcıl intellekt funksiyalarından istifadə etmək üçün ən azı %d yaşında olmalısınız.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

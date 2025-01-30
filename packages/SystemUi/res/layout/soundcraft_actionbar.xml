@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qs.bar.soundcraft.view.actionbar.SoundCraftActionBarView android:id="@id/action_bar" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/layout_edit_action_min_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:layout_gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/action_arrow" android:background="@drawable/qs_setting_edit_content_ripple" android:clickable="true" android:layout_width="@dimen/edit_action_layout_arrow_width" android:layout_height="@dimen/edit_action_layout_arrow_height">
+            <ImageView android:id="@id/iv_action_arrow" android:layout_width="wrap_content" android:layout_height="@dimen/edit_action_iv_arrow_height" android:src="@drawable/qs_setting_edit_actionbar_arrow_auto_mirror" android:adjustViewBounds="true" android:tint="@color/qs_edit_content_text_color" android:layout_marginVertical="3.0dip" />
+        </LinearLayout>
+        <TextView android:textSize="21.0sp" android:textStyle="bold" android:textColor="@color/qs_edit_content_text_color" android:id="@id/action_bar_text" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/tooltip_quick_settings_edit" android:fontFamily="sec" android:layout_marginStart="3.0dip" android:textFontWeight="500" />
+    </LinearLayout>
+</com.android.systemui.qs.bar.soundcraft.view.actionbar.SoundCraftActionBarView>

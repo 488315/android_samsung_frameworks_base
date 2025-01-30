@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textAppearance="?android:textAppearanceMedium" android:textColor="@null" android:ellipsize="marquee" android:gravity="center_vertical" android:id="@android:id/text1" android:layout_width="fill_parent" android:layout_height="@dimen/screenrecord_spinner_height" android:singleLine="true" android:paddingStart="@dimen/screenrecord_spinner_text_padding_start" android:paddingEnd="@dimen/screenrecord_spinner_text_padding_end"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" />

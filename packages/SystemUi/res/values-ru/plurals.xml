@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">%d дн. назад</item>
+        <item quantity="one">%d дн. назад</item>
+        <item quantity="few">%d дн. назад</item>
+        <item quantity="many">%d дн. назад</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">%d мин. назад</item>
+        <item quantity="one">%d мин. назад</item>
+        <item quantity="few">%d мин. назад</item>
+        <item quantity="many">%d мин. назад</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">%d г. назад</item>
+        <item quantity="one">%d г. назад</item>
+        <item quantity="few">%d г. назад</item>
+        <item quantity="many">%d лет назад</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">Выбрано %d элемента</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Выбран %d элемент</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Выбрано %d элемента</item>
+        <item quantity="many">Выбрано %d элементов</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d секунды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d секунда</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d секунды</item>
+        <item quantity="many">%d секунд</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Чтобы перезапустить телефон, одновременно нажмите боковую кнопку и кнопку уменьшения громкости и удерживайте их не менее %d секунды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Чтобы перезапустить телефон, одновременно нажмите боковую кнопку и кнопку уменьшения громкости и удерживайте их не менее %d секунды.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Чтобы перезапустить телефон, одновременно нажмите боковую кнопку и кнопку уменьшения громкости и удерживайте их не менее %d секунд.</item>
+        <item quantity="many">Чтобы перезапустить телефон, одновременно нажмите боковую кнопку и кнопку уменьшения громкости и удерживайте их не менее %d секунд.</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">Осталось %d попытки</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Осталась %d попытка</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Осталось %d попытки</item>
+        <item quantity="many">Осталось %d попыток</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">Предпринято несколько (%1$d) неудачных попыток разблокировки телефона. Повторите попытку через %2$d ч.</item>
+        <item quantity="one">Предпринято несколько (%d) неудачных попыток разблокировки телефона. Повторите попытку через 1 час.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">Предпринято несколько (%1$d) неудачных попыток разблокировки телефона. Повторите попытку через %2$d мин.</item>
+        <item quantity="one">Предпринято несколько (%d) неудачных попыток разблокировки телефона. Повторите попытку через 1 минуту.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">Предпринято несколько неудачных попыток разблокировки телефона (%1$d). Повторите попытку через %2$d сек.</item>
+        <item quantity="one">Предпринято несколько неудачных попыток разблокировки телефона (%d). Повторите попытку через 1 секунду.</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d попытки для разблокировки с помощью отпечатка пальца.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d попытка для разблокировки с помощью отпечатка пальца.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d попытки для разблокировки с помощью отпечатка пальца.</item>
+        <item quantity="many">%d попыток для разблокировки с помощью отпечатка пальца.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d неудачной попытки подтвердить биометрические данные.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d неудачная попытка подтвердить биометрические данные.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d неудачные попытки подтвердить биометрические данные.</item>
+        <item quantity="many">%d неудачных попыток подтвердить биометрические данные.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d неудачной попытки подтвердить данные лица.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d неудачная попытка подтвердить данные лица.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d неудачные попытки подтвердить данные лица.</item>
+        <item quantity="many">%d неудачных попыток подтвердить данные лица.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d неудачной попытки подтвердить отпечатки пальцев.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d неудачная попытка подтвердить отпечатки пальцев.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d неудачные попытки подтвердить отпечатки пальцев.</item>
+        <item quantity="many">%d неудачных попыток подтвердить отпечатки пальцев.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Повторите попытку через 1 час %d минуты</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Повторите попытку через 1 час %d минуту</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Повторите попытку через 1 час %d минуты</item>
+        <item quantity="many">Повторите попытку через 1 час %d минут</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Попытку ввода биометрических данных можно повторить через %d секунды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Попытку ввода биометрических данных можно повторить через %d секунду</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Попытку ввода биометрических данных можно повторить через %d секунды</item>
+        <item quantity="many">Попытку ввода биометрических данных можно повторить через %d секунд</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Функцию распознавания лица можно будет снова использовать через %d секунды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Функцию распознавания лица можно будет снова использовать через %d секунду</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Функцию распознавания лица можно будет снова использовать через %d секунды</item>
+        <item quantity="many">Функцию распознавания лица можно будет снова использовать через %d секунд</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Попытку ввода отпечатка пальца можно повторить через %d секунды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Попытку ввода отпечатка пальца можно повторить через %d секунду</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Попытку ввода отпечатка пальца можно повторить через %d секунды</item>
+        <item quantity="many">Попытку ввода отпечатка пальца можно повторить через %d секунд</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Повторите попытку через %d часа</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Повторите попытку через %d час</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Повторите попытку через %d часа</item>
+        <item quantity="many">Повторите попытку через %d часов</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Повторите попытку через %d часа 1 минуту</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Повторите попытку через %d час 1 минуту</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Повторите попытку через %d часа 1 минуту</item>
+        <item quantity="many">Повторите попытку через %d часов 1 минуту</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Повторите попытку через %d минуты</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Повторите попытку через %d минуту</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Повторите попытку через %d минуты</item>
+        <item quantity="many">Повторите попытку через %d минут</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Попробуйте еще раз через %d секунды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Попробуйте еще раз через %d секунду</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Попробуйте еще раз через %d секунды</item>
+        <item quantity="many">Попробуйте еще раз через %d секунд</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Повторите попытку через %d секунды.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Повторите попытку через %d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Повторите попытку через %d секунды.</item>
+        <item quantity="many">Повторите попытку через %d секунд.</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">Осталось %d попытки</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Осталась %d попытка</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Осталось %d попытки</item>
+        <item quantity="many">Осталось %d попыток</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d нового уведомления</item>
+        <item quantity="one">%d новое уведомление</item>
+        <item quantity="few">%d новых уведомления</item>
+        <item quantity="many">%d новых уведомлений</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d уведомления</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d уведомление</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d уведомления</item>
+        <item quantity="many">%d уведомлений</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">Необходимо %d кнопки.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Необходима %d кнопка.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Необходимо %d кнопки.</item>
+        <item quantity="many">Необходимо %d кнопок.</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">На %d часа</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">На %d час</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">На %d часа</item>
+        <item quantity="many">На %d часов</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Невозможно добавить больше %d кнопки.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Невозможно добавить больше %d кнопки.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Невозможно добавить больше %d кнопок.</item>
+        <item quantity="many">Невозможно добавить больше %d кнопок.</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Невозможно удалить кнопку. На панели быстрого доступа должно остаться хотя бы %d кнопки.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Невозможно удалить кнопку. На панели быстрого доступа должна остаться хотя бы %d кнопка.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Невозможно удалить кнопку. На панели быстрого доступа должно остаться хотя бы %d кнопки.</item>
+        <item quantity="many">Невозможно удалить кнопку. На панели быстрого доступа должно остаться хотя бы %d кнопок.</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d эффекта</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d эффект</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d эффекта</item>
+        <item quantity="many">%d эффектов</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Использовать интеллектуальные инструменты Galaxy AI могут только пользователи, которым исполнилось %d года.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Использовать интеллектуальные инструменты Galaxy AI могут только пользователи, которым исполнился %d год.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Использовать интеллектуальные инструменты Galaxy AI могут только пользователи, которым исполнилось %d года.</item>
+        <item quantity="many">Использовать интеллектуальные инструменты Galaxy AI могут только пользователи, которым исполнилось %d лет.</item>
+    </plurals>
+</resources>

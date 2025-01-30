@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="kg_arrow_view_side_margin_tablet_ratio">0.15</item>
+    <dimen name="kg_message_area_width_tablet">320.0dip</dimen>
+    <item type="dimen" name="kg_security_input_box_width_tablet">@dimen/kg_message_area_width_tablet</item>
+</resources>

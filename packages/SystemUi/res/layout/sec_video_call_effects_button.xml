@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/video_call_effects_button" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:paddingStart="16.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/video_call_effects_icon_container" android:layout_width="@dimen/video_call_effects_mic_mode_icon_bg_size" android:layout_height="@dimen/video_call_effects_mic_mode_icon_bg_size">
+        <ImageView android:id="@id/video_call_effects_icon_bg" android:layout_width="@dimen/video_call_effects_mic_mode_icon_bg_size" android:layout_height="@dimen/video_call_effects_mic_mode_icon_bg_size" android:src="@drawable/quickpanel_icon_video_call_effects_background" />
+        <ImageView android:layout_gravity="center" android:id="@id/video_call_effects_icon" android:layout_width="@dimen/video_call_effects_mic_mode_icon_size" android:layout_height="@dimen/video_call_effects_mic_mode_icon_size" android:src="@drawable/quickpanel_icon_video_call_effects" />
+    </FrameLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/video_call_effects_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="8.0dip" android:paddingEnd="12.0dip">
+        <TextView android:textSize="12.0sp" android:textColor="@color/qs_tile_label" android:id="@id/video_call_effects_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sec_qs_video_call_effects" android:singleLine="true" android:fontFamily="sec" android:textFontWeight="400" />
+        <TextView android:textSize="10.0sp" android:textColor="@color/qs_tile_sub_label" android:id="@id/video_call_effects_number" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4" android:fontFamily="sec" android:textFontWeight="400" />
+    </LinearLayout>
+</LinearLayout>

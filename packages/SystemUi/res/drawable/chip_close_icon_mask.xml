@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:tint="?colorButtonNormal" android:shape="oval"
+          xmlns:android="http://schemas.android.com/apk/res/android" />
+    </item>
+    <item>
+        <vector android:height="@dimen/chip_close_icon_size" android:width="@dimen/chip_close_icon_size" android:viewportWidth="20.0" android:viewportHeight="20.0"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+            <path android:fillColor="#ffdb332a" android:pathData="M3.4,10.6h13.1c0.3,0 0.6,-0.3 0.6,-0.6s-0.3,-0.6 -0.6,-0.6H3.4c-0.3,0 -0.6,0.3 -0.6,0.6S3.1,10.6 3.4,10.6z" />
+        </vector>
+    </item>
+</layer-list>

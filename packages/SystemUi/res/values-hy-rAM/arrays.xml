@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Այո</item>
+        <item>Այո, խնդրում եմ</item>
+        <item>OK</item>
+        <item>Ոչ</item>
+        <item>Ոչ, շնորհակալ եմ</item>
+        <item>Չէ</item>
+        <item>Շնորհակալ եմ</item>
+        <item>Շատ երախտապարտ եմ</item>
+        <item>Իմ ճանապարհին</item>
+        <item>Ի՞նչ է պատահել:</item>
+        <item>Ավելի ուշ</item>
+        <item>Հիանալի</item>
+        <item>Համաձայն եմ</item>
+        <item>Հիանալի՜ է:</item>
+        <item>Ի՞նչ:</item>
+        <item>Աստվա՜ծ իմ:</item>
+    </string-array>
+</resources>

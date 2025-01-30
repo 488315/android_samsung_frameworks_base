@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.AlphaOptimizedFrameLayout android:visibility="gone" android:layout_width="@dimen/qs_footer_action_button_size" android:layout_height="@dimen/qs_footer_action_button_size"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/icon" android:layout_width="@dimen/qs_footer_icon_size" android:layout_height="@dimen/qs_footer_icon_size" android:scaleType="centerInside" />
+</com.android.systemui.statusbar.AlphaOptimizedFrameLayout>

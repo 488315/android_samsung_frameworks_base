@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="kg_table_mode_pattern_message_margin_bottom">178.0dip</dimen>
+    <dimen name="kg_table_mode_pin_message_margin_bottom">155.0dip</dimen>
+</resources>

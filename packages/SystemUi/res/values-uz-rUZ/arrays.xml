@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Ha</item>
+        <item>Ha, iltimos</item>
+        <item>OK</item>
+        <item>Yo‘q</item>
+        <item>Yo‘q rahmat</item>
+        <item>Kerak emas</item>
+        <item>Rahmat</item>
+        <item>Juda olqishlanadi</item>
+        <item>Yo‘limda</item>
+        <item>Ishlar qalay?</item>
+        <item>Keyinroq</item>
+        <item>Yaxshi</item>
+        <item>Roziman</item>
+        <item>Ajoyib!</item>
+        <item>Nima?</item>
+        <item>OBG!</item>
+    </string-array>
+</resources>

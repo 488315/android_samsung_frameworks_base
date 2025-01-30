@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/cover_launcher_widget_icon_badge_color" />
+    <stroke android:width="@dimen/widget_launcher_item_icon_badge_stroke_width" android:color="@color/cover_launcher_widget_icon_badge_stroke_color" />
+    <corners android:radius="@dimen/widget_launcher_2_2_item_icon_badge_radius" />
+</shape>

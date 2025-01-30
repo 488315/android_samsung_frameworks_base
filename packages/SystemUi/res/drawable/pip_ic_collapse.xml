@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="24.0dip" android:width="24.0dip" android:viewportWidth="24.0" android:viewportHeight="24.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/tv_pip_menu_focus_border" android:pathData="M12,12V4h2v4.6L20.6,2 22,3.4 15.4,10H20v2zM3.4,22L2,20.6 8.6,14H4v-2h8v8h-2v-4.6z" />
+</vector>

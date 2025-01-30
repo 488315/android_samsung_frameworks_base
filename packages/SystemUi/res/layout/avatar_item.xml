@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView android:layout_gravity="center" android:id="@id/avatar_image" android:background="@drawable/avatar_selector" android:padding="@dimen/sec_avatar_picker_padding" android:layout_width="0.0dip" android:layout_height="@dimen/sec_avatar_size_in_picker" android:maxWidth="@dimen/sec_avatar_size_in_picker" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintDimensionRatio="1" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

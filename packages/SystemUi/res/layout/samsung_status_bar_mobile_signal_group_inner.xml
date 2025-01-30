@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:systemui="http://schemas.android.com/apk/res-auto">
+    <com.android.keyguard.AlphaOptimizedLinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/mobile_group" android:layout_width="wrap_content" android:layout_height="fill_parent">
+        <FrameLayout android:layout_gravity="center_vertical" android:id="@id/inout_container" android:layout_width="wrap_content" android:layout_height="17.0dip">
+            <ImageView android:id="@id/mobile_in" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_activity_down" android:paddingEnd="2.0dip" />
+            <ImageView android:id="@id/mobile_out" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_activity_up" android:paddingEnd="2.0dip" />
+        </FrameLayout>
+        <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:id="@id/mobile_type" android:layout_width="wrap_content" android:layout_height="wrap_content" android:adjustViewBounds="true" />
+            <com.android.systemui.statusbar.AnimatedImageView android:id="@id/data_activity" android:layout_width="wrap_content" android:layout_height="wrap_content" android:adjustViewBounds="true" systemui:hasOverlappingRendering="false" />
+        </FrameLayout>
+        <ImageView android:id="@id/voice_no_service" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <Space android:id="@id/mobile_roaming_space" android:visibility="gone" android:layout_width="@dimen/roaming_icon_start_padding" android:layout_height="fill_parent" />
+        <FrameLayout android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <com.android.systemui.statusbar.AnimatedImageView android:id="@id/mobile_signal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:adjustViewBounds="true" systemui:hasOverlappingRendering="false" />
+            <ImageView android:id="@id/mobile_roaming" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/stat_sys_roaming" android:adjustViewBounds="true" android:contentDescription="@string/data_connection_roaming" />
+        </FrameLayout>
+        <ImageView android:id="@id/mobile_roaming_large" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/stat_sys_roaming_large" android:contentDescription="@string/data_connection_roaming" />
+    </com.android.keyguard.AlphaOptimizedLinearLayout>
+</merge>

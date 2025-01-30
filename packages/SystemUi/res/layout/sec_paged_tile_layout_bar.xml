@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/tile_layout_container" android:tag="expand_anim" android:paddingTop="@dimen/paged_tile_bar_top_padding" android:paddingBottom="@dimen/paged_tile_bar_indicator_bottom_margin" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <com.android.systemui.qs.SecPageIndicator android:layout_gravity="center|top" android:id="@id/panel_page_indicator" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/paged_tile_bar_top_padding" />
+    </LinearLayout>
+</LinearLayout>

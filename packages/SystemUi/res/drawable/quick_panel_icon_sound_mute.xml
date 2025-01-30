@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_000" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_001" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_002" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_003" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_004" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_005" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_006" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_007" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_mute_008" />
+</animation-list>

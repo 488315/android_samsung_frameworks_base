@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.compatui.RestartDialogLayout style="@style/LetterboxDialog"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:id="@id/letterbox_restart_dialog_container" android:background="@drawable/letterbox_restart_dialog_background" android:layout_width="0.0dip" android:layout_height="wrap_content" android:alpha="0.0" android:layout_marginHorizontal="@dimen/letterbox_restart_dialog_margin" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintWidth_max="@dimen/letterbox_restart_dialog_width">
+        <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:padding="24.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:layout_width="@dimen/letterbox_restart_dialog_title_icon_width" android:layout_height="@dimen/letterbox_restart_dialog_title_icon_height" android:src="@drawable/letterbox_restart_header_ic_arrows" android:importantForAccessibility="no" />
+                <TextView android:textAppearance="@style/RestartDialogTitleText" android:id="@id/letterbox_restart_dialog_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/letterbox_restart_dialog_title" android:textAlignment="center" android:layout_marginVertical="16.0dip" />
+                <TextView android:textAppearance="@style/RestartDialogBodyText" android:id="@id/letterbox_restart_dialog_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/letterbox_restart_dialog_description" android:textAlignment="center" />
+                <LinearLayout android:layout_gravity="center_vertical" android:orientation="horizontal" android:id="@id/letterbox_restart_dialog_checkbox_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginVertical="18.0dip" android:paddingVertical="14.0dip">
+                    <CheckBox android:id="@id/letterbox_restart_dialog_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@drawable/letterbox_restart_checkbox_button" />
+                    <TextView android:textAppearance="@style/RestartDialogCheckboxText" android:id="@id/letterbox_restart_dialog_checkbox_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/letterbox_restart_dialog_checkbox_title" android:textAlignment="textStart" android:layout_marginStart="12.0dip" />
+                </LinearLayout>
+                <FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/letterbox_restart_dialog_button_height">
+                    <Button android:textAppearance="@style/RestartDialogDismissButton" android:layout_gravity="start" android:id="@id/letterbox_restart_dialog_dismiss_button" android:background="@drawable/letterbox_restart_dismiss_button_background_ripple" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="@dimen/letterbox_restart_dialog_button_width" android:minHeight="@dimen/letterbox_restart_dialog_button_height" android:text="@string/letterbox_restart_cancel" android:contentDescription="@string/letterbox_restart_cancel" />
+                    <Button android:textAppearance="@style/RestartDialogConfirmButton" android:layout_gravity="end" android:id="@id/letterbox_restart_dialog_restart_button" android:background="@drawable/letterbox_restart_button_background_ripple" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="@dimen/letterbox_restart_dialog_button_width" android:minHeight="@dimen/letterbox_restart_dialog_button_height" android:text="@string/letterbox_restart_restart" android:contentDescription="@string/letterbox_restart_restart" />
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</com.android.wm.shell.compatui.RestartDialogLayout>

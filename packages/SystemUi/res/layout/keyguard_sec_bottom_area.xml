@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView android:id="@id/keyguard_bottom_shortcut_area" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="ltr" android:elevation="5.0dip" android:outlineProvider="none"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/keyguard_upper_indication_text_view" />
+    <LinearLayout android:gravity="center" android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/keyguard_indication_area" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.systemui.statusbar.phone.KeyguardIndicationTextView android:textAppearance="?android:textAppearance" android:ellipsize="end" android:gravity="bottom|center" android:layout_gravity="center|top" android:id="@id/keyguard_indication_text_bottom" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="sec" android:accessibilityLiveRegion="polite" android:textFontWeight="400" sysui:originColor="origin_keyguard_indication_area_text_color" sysui:originShadowColor="keyguard_text_shadow_color" sysui:themeBlackColor="theme_keyguard_message_area_text_color_black" sysui:themeBlackShadowColor="theme_clock_shadow_color_black" sysui:themeColor="theme_keyguard_message_area_text_color" sysui:themeShadowColor="theme_clock_shadow_color" sysui:wallpaperArea="bottom" sysui:whitebgColor="whitebg_keyguard_indication_area_text_color" sysui:whitebgShadowColor="whitebg_keyguard_shadow_color" style="@style/keyguard_indication_text_style"
+          xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto" />
+        <include layout="@layout/keyguard_usim_text_area_view" />
+        <include layout="@layout/keyguard_life_style_view_area" />
+        <include layout="@layout/keyguard_indication_text_view" />
+    </LinearLayout>
+    <include layout="@layout/keyguard_bottom_doze_area" />
+    <include layout="@layout/keyguard_sec_affordance_view_right" />
+    <include layout="@layout/keyguard_sec_affordance_view_left" />
+</com.android.systemui.statusbar.phone.KeyguardSecBottomAreaView>

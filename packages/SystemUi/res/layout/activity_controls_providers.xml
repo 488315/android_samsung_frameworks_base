@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/controls_management_root" android:background="@color/control_activity_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar android:id="@id/toolbar" android:background="@color/transparent" android:layout_width="fill_parent" android:layout_height="@dimen/basic_interaction_action_bar_height" />
+    <LinearLayout android:gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="1.0" android:layout_weight="1.0">
+        <ScrollView android:orientation="vertical" android:id="@id/main_layout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:fillViewport="true" android:layout_weight="@integer/controls_basic_width_percentage">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                    <TextView android:textAppearance="@style/TextAppearance.Control.Fragment_Subtitle" android:id="@id/subtitle" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginHorizontal="@dimen/basic_interaction_side_margin_without_accesibility_stroke_width" android:paddingHorizontal="@dimen/accessibility_focus_highlight_stroke_width" />
+                    <androidx.recyclerview.widget.RecyclerView android:orientation="vertical" android:id="@id/controls_provider_list" android:background="@color/control_activity_contents_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" />
+                </LinearLayout>
+                <LinearLayout android:layout_gravity="bottom|center|right" android:id="@id/button_layout" android:visibility="gone" android:clickable="true" android:layout_width="wrap_content" android:layout_height="56.0dip">
+                    <Button android:textAppearance="@style/TextAppearance.Font_Semi_Bold" android:textSize="17.0sp" android:textColor="@color/flat_button_color_selector" android:layout_gravity="center" android:id="@id/button_start" android:background="@drawable/flat_button_ripple" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/controls_custom_providers_button" android:layout_marginHorizontal="24.0dip" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

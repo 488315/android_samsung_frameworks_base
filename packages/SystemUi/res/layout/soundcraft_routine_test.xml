@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qs.bar.soundcraft.view.routine.RoutineTestView android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/routine_test_root" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="20.0dip" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Routine Test" />
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:id="@id/routine_test_start_button" android:padding="3.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5.0dip" android:text="start" />
+        <Button android:id="@id/routine_test_update_button" android:padding="3.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5.0dip" android:text="update" />
+        <Button android:id="@id/routine_test_stop_button" android:padding="3.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="5.0dip" android:text="stop" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Routine Count : " />
+        <TextView android:textColor="#ffffffff" android:id="@id/routine_test_routine_count_text" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </LinearLayout>
+</com.android.systemui.qs.bar.soundcraft.view.routine.RoutineTestView>

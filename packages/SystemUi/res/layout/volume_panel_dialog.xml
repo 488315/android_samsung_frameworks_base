@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/volume_panel_dialog" android:layout_width="@dimen/large_dialog_width" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_top_padding" android:layout_marginBottom="@dimen/dialog_bottom_padding" style="@style/Widget.SliceView.Panel">
+        <TextView android:textAppearance="@style/TextAppearance.Dialog.Title" android:ellipsize="end" android:gravity="center" android:id="@id/volume_panel_dialog_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sound_settings" />
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView android:id="@id/volume_panel_parent_layout" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:minHeight="304.0dip" android:layout_weight="1.0" android:overScrollMode="never" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/button_layout" android:focusable="false" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/dialog_button_vertical_padding" android:layout_marginBottom="@dimen/dialog_bottom_padding" android:baselineAligned="false" android:layout_marginStart="@dimen/dialog_side_padding" android:layout_marginEnd="@dimen/dialog_side_padding">
+        <LinearLayout android:layout_gravity="start|center" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <Button android:ellipsize="end" android:id="@id/settings_button" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/volume_panel_dialog_settings_button" android:maxLines="1" style="@style/Widget.Dialog.Button.BorderButton" />
+        </LinearLayout>
+        <LinearLayout android:layout_gravity="end|center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/dialog_button_horizontal_padding">
+            <Button android:ellipsize="end" android:id="@id/done_button" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/inline_done_button" android:maxLines="1" style="@style/Widget.Dialog.Button" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

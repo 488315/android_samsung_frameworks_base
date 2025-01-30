@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/noti_toast_bg_color" />
+    <corners android:radius="@dimen/noti_icon_bg_radius" />
+</shape>

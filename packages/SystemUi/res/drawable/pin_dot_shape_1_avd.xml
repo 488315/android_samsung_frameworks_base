@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector android:drawable="@drawable/$pin_dot_shape_1_avd__0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <target android:name="_R_G_L_1_G_D_0_P_0" android:animation="@drawable/$pin_dot_shape_1_avd__1" />
+    <target android:name="_R_G_L_1_G" android:animation="@drawable/$pin_dot_shape_1_avd__2" />
+    <target android:name="_R_G_L_0_G" android:animation="@drawable/$pin_dot_shape_1_avd__3" />
+    <target android:name="_R_G_L_0_G" android:animation="@drawable/$pin_dot_shape_1_avd__4" />
+    <target android:name="_R_G_L_0_G" android:animation="@drawable/$pin_dot_shape_1_avd__5" />
+    <target android:name="time_group" android:animation="@drawable/$pin_dot_shape_1_avd__6" />
+</animated-vector>

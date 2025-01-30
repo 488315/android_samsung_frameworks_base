@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qs.SecQSSwitchPreference android:orientation="vertical" android:id="@id/SecQSSwitchPreferenceLayout" android:paddingTop="@dimen/sec_qs_detail_item_category_padding_top_bottom" android:paddingBottom="@dimen/sec_qs_detail_item_category_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.keyguard.AlphaOptimizedLinearLayout android:id="@id/switchPreferenceLinearLayout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.keyguard.AlphaOptimizedLinearLayout android:layout_gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <TextView android:textAppearance="@style/TextAppearance.QS.DetailCatetoryItem" android:textSize="@dimen/subscreen_brightness_level_text_size" android:textColor="@color/subscreen_title_switch_text_color" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:importantForAccessibility="no" android:fontFamily="sec" android:textFontWeight="400" />
+            <TextView android:textAppearance="@style/QSDetailItemSummary" android:id="@id/title_summary" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </com.android.keyguard.AlphaOptimizedLinearLayout>
+        <androidx.appcompat.widget.SwitchCompat android:theme="@style/Theme.AppCompat.DayNight" android:id="@id/title_switch" android:background="@drawable/subscreen_ripple_drawable" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="no" />
+    </com.android.keyguard.AlphaOptimizedLinearLayout>
+</com.android.systemui.qs.SecQSSwitchPreference>

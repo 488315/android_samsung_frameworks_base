@@ -1,0 +1,17 @@
+package com.android.systemui.log;
+
+/* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+/* loaded from: classes.dex */
+public interface ConstantStringsLogger {
+    /* renamed from: d */
+    void mo153d(String str);
+
+    /* renamed from: e */
+    void mo154e(String str);
+
+    /* renamed from: v */
+    void mo155v(String str);
+
+    /* renamed from: w */
+    void mo156w(String str);
+}

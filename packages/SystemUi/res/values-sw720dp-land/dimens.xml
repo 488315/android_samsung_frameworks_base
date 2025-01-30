@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="controls_panel_corner_radius">40.0dip</dimen>
+    <dimen name="keyguard_split_shade_top_margin">72.0dip</dimen>
+    <dimen name="lockscreen_shade_keyguard_transition_vertical_offset">93.0dip</dimen>
+    <dimen name="lockscreen_shade_max_over_scroll_amount">42.0dip</dimen>
+    <dimen name="notification_panel_margin_bottom">64.0dip</dimen>
+    <dimen name="qs_content_horizontal_padding">40.0dip</dimen>
+    <dimen name="qs_horizontal_margin">40.0dip</dimen>
+    <dimen name="qs_media_rec_album_size">112.0dip</dimen>
+    <dimen name="qs_media_session_height_expanded">184.0dip</dimen>
+    <dimen name="qs_tiles_page_horizontal_margin">20.0dip</dimen>
+    <dimen name="split_shade_notifications_scrim_margin_bottom">24.0dip</dimen>
+    <dimen name="status_view_margin_horizontal">24.0dip</dimen>
+</resources>

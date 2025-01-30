@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_000" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_001" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_002" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_003" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_004" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_005" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_006" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_007" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_008" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_009" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_on_010" />
+</animation-list>

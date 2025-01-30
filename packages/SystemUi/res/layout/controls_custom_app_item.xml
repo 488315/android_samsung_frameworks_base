@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:background="?android:selectableItemBackground" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/icon_layout" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:layout_gravity="start|center" android:id="@android:id/icon" android:layout_width="@dimen/controls_custom_app_icon_size" android:layout_height="@dimen/controls_custom_app_icon_size" android:layout_marginStart="@dimen/controls_custom_app_icon_start_margin" />
+        <View android:id="@id/badge" android:background="@drawable/sesl_dot_badge" android:visibility="gone" android:layout_width="@dimen/basic_interaction_badge_size" android:layout_height="@dimen/basic_interaction_badge_size" android:layout_marginTop="@dimen/basic_interaction_badge_top_end_margin_size" android:layout_alignTop="@android:id/icon" android:layout_marginEnd="@dimen/basic_interaction_badge_top_end_margin_size" android:layout_alignEnd="@android:id/icon" />
+    </RelativeLayout>
+    <FrameLayout android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <LinearLayout android:gravity="center_vertical" android:layout_gravity="start|center|top" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="@dimen/basic_interaction_app_list_icon_to_string_margin">
+            <LinearLayout android:gravity="center_vertical" android:layout_gravity="start|center|top" android:orientation="vertical" android:id="@id/app_info_container" android:paddingTop="@dimen/control_provider_title_top_bottom_padding" android:paddingBottom="@dimen/control_provider_title_top_bottom_padding" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginEnd="12.0dip">
+                <TextView android:textAppearance="@style/TextAppearance.Font_Regular" android:textSize="17.0sp" android:textColor="@color/control_manage_apps_app_name" android:ellipsize="end" android:id="@android:id/title" android:fadingEdge="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" />
+                <TextView android:textAppearance="@style/TextAppearance.Font_Regular" android:textSize="13.0sp" android:textColor="@color/control_devices_added" android:ellipsize="end" android:id="@id/favorites" android:fadingEdge="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" />
+            </LinearLayout>
+            <View android:id="@id/switch_divider" android:background="@color/basic_interaction_vertical_divider" android:layout_width="@dimen/basic_interaction_vertical_divider_width" android:layout_height="22.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:id="@id/on_off_switch_layout" android:layout_width="wrap_content" android:layout_height="fill_parent" android:paddingStart="13.0dip" android:paddingEnd="28.0dip">
+                <androidx.appcompat.widget.SwitchCompat android:theme="@android:style/Theme.DeviceDefault.Light" android:id="@id/on_off_switch" android:focusable="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <View android:layout_gravity="start|bottom|center" android:id="@id/list_divider" android:background="@color/basic_interaction_thumbnail_list_divider" android:layout_width="fill_parent" android:layout_height="@dimen/basic_interaction_divider_height" android:layout_marginStart="16.0dip" android:layout_marginEnd="@dimen/basic_interaction_divider_side_margin" />
+    </FrameLayout>
+</LinearLayout>

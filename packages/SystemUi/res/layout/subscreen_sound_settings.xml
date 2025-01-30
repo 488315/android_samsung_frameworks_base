@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qp.SubroomSoundSettingsView android:id="@id/sound_image_button_wrapper" style="@style/SubscreenButtonWrapperStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/sound_background" style="@style/SubscreenImageWrapperStyle">
+        <ImageView android:id="@id/sound_image_view" android:src="@drawable/quick_panel_icon_sound" style="@style/SubscreenButtonImage" />
+    </LinearLayout>
+</com.android.systemui.qp.SubroomSoundSettingsView>

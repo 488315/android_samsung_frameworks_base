@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector android:drawable="@drawable/$qs_location_icon_off__4"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <target android:name="_R_G_L_0_G_D_1_P_0" android:animation="@drawable/$qs_location_icon_off__0" />
+    <target android:name="_R_G_L_0_G_D_1_P_1" android:animation="@drawable/$qs_location_icon_off__1" />
+    <target android:name="_R_G_L_0_G_D_2_P_0" android:animation="@drawable/$qs_location_icon_off__2" />
+    <target android:name="time_group" android:animation="@drawable/$qs_location_icon_off__3" />
+</animated-vector>

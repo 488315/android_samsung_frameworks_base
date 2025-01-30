@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource-map>
+    <color>
+        <match overlay="open_theme_qp_bg_color">
+            <original>sec_panel_background_color</original>
+            <original>sec_brightness_mirror_background_color</original>
+            <original>sec_panel_background_color_tablet</original>
+        </match>
+        <match overlay="open_theme_notification_bg_color">
+            <original>sec_qs_media_player_background_color</original>
+            <original>sec_qs_media_player_guts_background_color</original>
+            <original>notification_app_icon_color</original>
+        </match>
+        <match overlay="open_theme_notification_title_text_color">
+            <original>media_primary_text</original>
+            <original>media_secondary_text</original>
+            <original>media_tertiary_text</original>
+            <original>media_toggle_button_collapsed_color</original>
+            <original>notification_header_expand_button</original>
+        </match>
+        <match overlay="sesl_dialog_title_text_color_light">
+            <original>sec_fgs_manager_app_item_app_label_text_color</original>
+        </match>
+        <match overlay="sesl_secondary_text_color_light">
+            <original>sec_fgs_manager_app_item_app_item_duration_text_color</original>
+        </match>
+        <match overlay="sesl_btn_background_color_light">
+            <original>basic_list_button_ripple_background_color</original>
+        </match>
+        <match overlay="sesl_btn_default_text_color_light">
+            <original>sec_fgs_manager_app_item_stop_button_text_color</original>
+        </match>
+        <match overlay="sesl_action_bar_text_color_title_light">
+            <original>sec_fgs_manager_app_item_no_active_apps_text_color</original>
+        </match>
+        <match overlay="ksh_dialog_content_text_color">
+            <original>ksh_help_popup_content_text_color</original>
+        </match>
+        <match overlay="ksh_dialog_title_text_color">
+            <original>ksh_title_text_color</original>
+        </match>
+        <match overlay="ksh_subheader_title_text_color">
+            <original>ksh_application_group_color</original>
+        </match>
+        <match overlay="ksh_subheader_divider_bg_color">
+            <original>ksh_subheader_divider_color</original>
+        </match>
+        <match overlay="sesl_action_bar_text_color_title_light">
+            <original>control_no_apps_title</original>
+            <original>basic_interaction_main_switch_on_background</original>
+            <original>basic_interaction_no_item_text</original>
+        </match>
+        <match overlay="sesl_action_bar_text_color_subtitle_light">
+            <original>control_activity_subtitle</original>
+            <original>control_manage_apps_description</original>
+            <original>control_no_apps_description</original>
+        </match>
+        <match overlay="sesl_list_divider_color_light">
+            <original>basic_interaction_thumbnail_list_divider</original>
+            <original>basic_interaction_vertical_divider</original>
+        </match>
+        <match overlay="sesl_btn_background_color_light">
+            <original>control_contained_button_background</original>
+        </match>
+        <match overlay="sesl_btn_default_text_color_light">
+            <original>control_contained_button_text</original>
+        </match>
+        <match overlay="sesl_background_color_light">
+            <original>control_activity_contents_background</original>
+        </match>
+        <match overlay="sesl_switchbar_off_background_color_light">
+            <original>control_settings_activity_background</original>
+            <original>basic_interaction_main_switch_off_background</original>
+        </match>
+        <match overlay="sesl_switchbar_off_text_color_light">
+            <original>basic_interaction_main_switch_off_text</original>
+        </match>
+        <match overlay="sesl_primary_color_light">
+            <original>basic_interaction_main_switch_on_text</original>
+            <original>sec_wifi_icon_blue_color</original>
+        </match>
+        <match overlay="qs_detail_header_on_text_color">
+            <original>sec_wifi_icon_gray_color</original>
+        </match>
+        <match overlay="sesl_primary_text_color_light">
+            <original>basic_interaction_expand_button</original>
+            <original>control_manage_apps_app_name</original>
+            <original>control_manage_apps_category_title</original>
+            <original>control_manage_reorder_category_title</original>
+        </match>
+        <match overlay="sesl_secondary_text_color_light">
+            <original>control_devices_added</original>
+            <original>control_main_subheader_text</original>
+            <original>control_subheader_text</original>
+        </match>
+        <match overlay="sesl_primary_dark_color_light">
+            <original>control_spinner_item_text_color</original>
+        </match>
+        <match overlay="qs_tile_icon_on_dim_tint_color">
+            <original>subscreen_qs_tile_icon_on_color</original>
+        </match>
+        <match overlay="qs_tile_icon_off_tint_color">
+            <original>subscreen_qs_tile_icon_off_color</original>
+        </match>
+        <match overlay="qs_tile_round_background_on">
+            <original>subscreen_qs_tile_round_background_on</original>
+        </match>
+        <match overlay="qs_tile_round_background_off">
+            <original>subscreen_qs_tile_round_background_off</original>
+        </match>
+        <match overlay="qs_tile_round_background_dim">
+            <original>subscreen_qs_tile_round_background_dim</original>
+        </match>
+    </color>
+</resource-map>

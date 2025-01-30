@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout android:id="@id/notification_stack_scroller" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginTop="@dimen/notification_panel_margin_top" android:layout_marginBottom="@dimen/notification_panel_margin_bottom" android:importantForAccessibility="no" android:layout_marginHorizontal="@dimen/notification_panel_margin_horizontal" systemui:layout_constraintEnd_toEndOf="parent" systemui:layout_constraintStart_toStartOf="parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:systemui="http://schemas.android.com/apk/res-auto" />

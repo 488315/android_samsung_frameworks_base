@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">pred %d dňami</item>
+        <item quantity="one">pred %d dňom</item>
+        <item quantity="few">pred %d dňami</item>
+        <item quantity="many">pred %d dňa</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">pred %d min</item>
+        <item quantity="one">pred %d min</item>
+        <item quantity="few">pred %d min</item>
+        <item quantity="many">pred %d min</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">pred %d rokmi</item>
+        <item quantity="one">pred %d rokom</item>
+        <item quantity="few">pred %d rokmi</item>
+        <item quantity="many">pred %d roka</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">Bolo vybratých %d položiek</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Bola vybratá %d položka</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Boli vybraté %d položky</item>
+        <item quantity="many">Bolo vybratej %d položky</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d sekúnd</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sekunda</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d sekundy</item>
+        <item quantity="many">%d sekundy</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Súčasným stlačením a podržaním bočného tlačidla a tlačidla zníženia hlasitosti na dlhšie než %d sekúnd reštartujete telefón.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Súčasným stlačením a podržaním bočného tlačidla a tlačidla zníženia hlasitosti na dlhšie než %d sekundu reštartujete telefón.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Súčasným stlačením a podržaním bočného tlačidla a tlačidla zníženia hlasitosti na dlhšie než %d sekundy reštartujete telefón.</item>
+        <item quantity="many">Súčasným stlačením a podržaním bočného tlačidla a tlačidla zníženia hlasitosti na dlhšie než %d sekundy reštartujete telefón.</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">Zostáva %d pokusov</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Zostáva %d pokus</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Zostávajú %d pokusy</item>
+        <item quantity="many">Zostáva %d pokusu</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">%1$d-krát ste sa pokúsili odomknúť tento telefón. Skúste to znova po uplynutí %2$d hodín.</item>
+        <item quantity="one">%d-krát ste sa pokúsili odomknúť tento telefón. Skúste to znova po uplynutí 1 hodiny.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">%1$d-krát ste sa pokúsili odomknúť tento telefón. Skúste to znova po uplynutí %2$d minút.</item>
+        <item quantity="one">%d-krát ste sa pokúsili odomknúť tento telefón. Skúste to znova po uplynutí 1 minúty.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">%1$d-krát ste sa pokúsili odomknúť tento telefón. Skúste to znova po uplynutí %2$d sekúnd.</item>
+        <item quantity="one">%d-krát ste sa pokúsili odomknúť tento telefón. Skúste to znova za 1 sekundu.</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d pokusov o odomknutie pomocou odtlačkov prstov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d pokus o odomknutie pomocou odtlačkov prstov.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d pokusy o odomknutie pomocou odtlačkov prstov.</item>
+        <item quantity="many">%d pokusu o odomknutie pomocou odtlačkov prstov.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d nesprávnych pokusov o overenie biometrických údajov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d nesprávny pokus o overenie biometrických údajov.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d nesprávne pokusy o overenie biometrických údajov.</item>
+        <item quantity="many">%d nesprávneho pokusu o overenie biometrických údajov.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d nesprávnych pokusov o overenie tváre.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d nesprávny pokus o overenie tváre.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d nesprávne pokusy o overenie tváre.</item>
+        <item quantity="many">%d nesprávneho pokusu o overenie tváre.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d nesprávnych pokusov o overenie odtlačkov prstov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d nesprávny pokus o overenie odtlačkov prstov.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d nesprávne pokusy o overenie odtlačkov prstov.</item>
+        <item quantity="many">%d nesprávneho pokusu o overenie odtlačkov prstov.</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Skúste to znova o 1 hodinu a %d minút</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste to znova o 1 hodinu a %d minútu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste to znova o 1 hodinu a %d minúty</item>
+        <item quantity="many">Skúste to znova o 1 hodinu a %d minúty</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Skúste použiť svoje biometrické údaje znova za %d sekúnd</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste použiť svoje biometrické údaje znova za %d sekundu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste použiť svoje biometrické údaje znova za %d sekundy</item>
+        <item quantity="many">Skúste použiť svoje biometrické údaje znova za %d sekundy</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Skúste použiť rozpoznávanie tváre znova za %d sekúnd</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste použiť rozpoznávanie tváre znova za %d sekundu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste použiť rozpoznávanie tváre znova za %d sekundy</item>
+        <item quantity="many">Skúste použiť rozpoznávanie tváre znova za %d sekundy</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">Skúste použiť svoj odtlačok prsta znova za %d sekúnd</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste použiť svoj odtlačok prsta znova za %d sekundu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste použiť svoj odtlačok prsta znova za %d sekundy</item>
+        <item quantity="many">Skúste použiť svoj odtlačok prsta znova za %d sekundy</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Skúste to znova o %d hodín</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste to znova o %d hodinu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste to znova o %d hodiny</item>
+        <item quantity="many">Skúste to znova o %d hodiny</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Skúste to znova o %d hodín a 1 minútu</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste to znova o %d hodinu a 1 minútu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste to znova o %d hodiny a 1 minútu</item>
+        <item quantity="many">Skúste to znova o %d hodiny a 1 minútu</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Skúste to znova o %d minút</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste to znova o %d minútu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste to znova o %d minúty</item>
+        <item quantity="many">Skúste to znova o %d minúty</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Skúste to znova o %d sekúnd</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste to znova o %d sekundu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste to znova o %d sekundy</item>
+        <item quantity="many">Skúste to znova o %d sekundy</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Skúste to znova za %d sekúnd.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Skúste to znova za %d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Skúste to znova za %d sekundy.</item>
+        <item quantity="many">Skúste to znova za %d sekundy.</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">Zostáva %d pokusov</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Zostáva %d pokus</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Zostávajú %d pokusy</item>
+        <item quantity="many">Zostáva %d pokusu</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d nových upozornení</item>
+        <item quantity="one">%d nové upozornenie</item>
+        <item quantity="few">%d nové upozornenia</item>
+        <item quantity="many">%d new notifications</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d oznámení</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d oznámenie</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d oznámenia</item>
+        <item quantity="many">%d oznámenia</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">Vyžaduje sa %d tlačidiel.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Vyžaduje sa %d tlačidlo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Vyžadujú sa %d tlačidlá.</item>
+        <item quantity="many">Vyžaduje sa %d tlačidla.</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">Na %d hodín</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Na %d hodinu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Na %d hodiny</item>
+        <item quantity="many">Na %d hodiny</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Nedá sa pridať viac než %d tlačidiel.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nedá sa pridať viac než %d tlačidlo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nedajú sa pridať viac než %d tlačidlá.</item>
+        <item quantity="many">Nedá sa pridať viac než %d tlačidla.</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Tlačidlo sa nedá odstrániť. Rýchly panel musí obsahovať aspoň %d tlačidiel.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tlačidlo sa nedá odstrániť. Rýchly panel musí obsahovať aspoň %d tlačidlo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Tlačidlo sa nedá odstrániť. Rýchly panel musí obsahovať aspoň %d tlačidlá.</item>
+        <item quantity="many">Tlačidlo sa nedá odstrániť. Rýchly panel musí obsahovať aspoň %d tlačidla.</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d efektov</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d efekt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d efekty</item>
+        <item quantity="many">%d efektu</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Ak chcete používať funkcie pokročilej inteligencie v službe Galaxy AI, musíte mať aspoň %d rokov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ak chcete používať funkcie pokročilej inteligencie v službe Galaxy AI, musíte mať aspoň %d rok.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Ak chcete používať funkcie pokročilej inteligencie v službe Galaxy AI, musíte mať aspoň %d roky.</item>
+        <item quantity="many">Ak chcete používať funkcie pokročilej inteligencie v službe Galaxy AI, musíte mať aspoň %d roka.</item>
+    </plurals>
+</resources>

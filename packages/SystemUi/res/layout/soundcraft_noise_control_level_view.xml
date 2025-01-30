@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:id="@id/item_root" android:paddingTop="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:layout_gravity="center_horizontal" android:id="@id/divider" android:background="@color/mic_mode_detail_divider_color" android:layout_width="fill_parent" android:layout_height="@dimen/qs_toggle_divider_height" android:layout_marginStart="15.0dip" android:layout_marginEnd="15.0dip" />
+    <LinearLayout android:orientation="vertical" android:id="@id/noise_canceling_bar_container" android:paddingTop="14.0dip" android:paddingBottom="19.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textSize="17.0sp" android:textColor="#fffafaff" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="23.0dip" android:text="Noise canceling level" android:fontFamily="sec-400" android:layout_marginStart="19.0dip" android:layout_marginEnd="19.0dip" android:letterSpacing="0.0" />
+        <RelativeLayout android:id="@id/seekbar_container" android:paddingTop="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0">
+            <SeekBar android:id="@id/noise_canceling_seekbar" android:background="@null" android:layout_width="fill_parent" android:layout_height="43.0dip" android:progressDrawable="@drawable/sec_soundcraft_noise_level_progress_drawable" android:thumb="@null" android:layout_centerVertical="true" android:layout_alignParentStart="true" android:layout_alignParentEnd="true" android:splitTrack="false" />
+            <ImageView android:id="@id/noise_canceling_seekbar_icon" android:layout_width="21.119995dip" android:layout_height="21.119995dip" android:src="@drawable/soundcraft_ic_buds3_anc_on_unselelcted" android:layout_centerVertical="true" android:contentDescription="@null" android:layout_marginStart="23.439972dip" android:layout_alignParentStart="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

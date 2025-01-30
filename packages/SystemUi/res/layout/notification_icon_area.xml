@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.AlphaOptimizedLinearLayout android:id="@id/notification_icon_area_inner" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/notification_count_text_size" android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/notificationCounts" android:layout_width="wrap_content" android:layout_height="@dimen/notification_count_icon_size" android:minWidth="@dimen/notification_count_icon_size" android:includeFontPadding="false" android:fontFamily="sec-roboto-medium" android:layout_alignParentStart="true" />
+    <com.android.systemui.statusbar.phone.NotificationIconContainer android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/notificationIcons" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_alignParentStart="true" />
+</com.android.keyguard.AlphaOptimizedLinearLayout>

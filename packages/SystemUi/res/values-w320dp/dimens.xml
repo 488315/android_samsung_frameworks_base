@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="control_action_icon_size">28.0dip</dimen>
+    <dimen name="control_custom_icon_shadow_size">16.0dip</dimen>
+    <dimen name="control_custom_icon_size">32.0dip</dimen>
+    <dimen name="control_status_icon_size">18.0dip</dimen>
+</resources>

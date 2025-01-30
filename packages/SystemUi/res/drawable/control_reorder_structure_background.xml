@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/control_reorder_structure_background" />
+            <corners android:radius="@dimen/basic_interaction_list_radius" />
+            <stroke android:width="@dimen/basic_interaction_reorder_background_stroke" android:color="@color/basic_interaction_reorder_background_stroke" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/control_reorder_structure_background" />
+            <corners android:radius="@dimen/basic_interaction_list_radius" />
+        </shape>
+    </item>
+</selector>

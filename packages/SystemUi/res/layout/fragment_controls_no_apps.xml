@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true" app:layout_behavior="@string/sesl_appbar_scrolling_view_behavior"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.android.systemui.controls.ui.view.CentralDescriptionView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/no_apps_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:animateLayoutChanges="true" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent">
+            <com.android.systemui.shared.shadow.DoubleShadowTextView android:textAppearance="@style/TextAppearance.Font_Regular" android:textSize="14.0sp" android:textColor="@color/control_no_apps_description" android:id="@id/no_apps_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/controls_no_apps_context" android:lineSpacingExtra="4.0sp" android:textAlignment="center" app:ambientShadowAlpha="0.0" app:ambientShadowBlur="@dimen/shadow_radius" app:ambientShadowOffsetX="@dimen/shadow_difference" app:ambientShadowOffsetY="@dimen/shadow_difference" app:keyShadowAlpha="0.2" app:keyShadowBlur="@dimen/shadow_radius" app:keyShadowOffsetX="@dimen/shadow_difference" app:keyShadowOffsetY="@dimen/shadow_difference" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.android.systemui.controls.ui.view.CentralDescriptionView>
+</androidx.core.widget.NestedScrollView>

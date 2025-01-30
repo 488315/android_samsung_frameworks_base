@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center" android:height="@dimen/sec_widget_list_icon_create_width" android:width="@dimen/sec_widget_list_icon_create_width">
+        <bitmap android:gravity="center" android:src="@drawable/sec_display_tw_list_icon_minus" android:tint="@color/sec_display_ic_minus_mtrl_color" />
+    </item>
+</layer-list>

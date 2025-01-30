@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/widget_setting_content_background_color" />
+    <stroke android:width="@dimen/widget_setting_contents_area_stroke" android:color="@color/widget_content_stroke_color" />
+    <corners android:radius="@dimen/widget_setting_list_card_conner_radius" />
+</shape>

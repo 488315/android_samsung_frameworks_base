@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center" android:height="@dimen/dnd_drop_freeform_dim_height" android:width="@dimen/dnd_drop_freeform_dim_width">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/dnd_drop_freeform_corner_radius_size" />
+            <solid android:color="@color/dnd_target_blur_bg_color" />
+            <stroke android:color="@color/dnd_target_blur_bg_color" />
+        </shape>
+    </item>
+</layer-list>

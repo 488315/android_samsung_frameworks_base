@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="abc_slice_duration_days">
+        <item quantity="other">pred %d dnevi</item>
+        <item quantity="one">pred %d dnem</item>
+        <item quantity="two">pred %d dnevoma</item>
+        <item quantity="few">pred %d dnevi</item>
+    </plurals>
+    <plurals name="abc_slice_duration_min">
+        <item quantity="other">pred %d minutami</item>
+        <item quantity="one">pred %d minuto</item>
+        <item quantity="two">pred %d minutama</item>
+        <item quantity="few">pred %d minutami</item>
+    </plurals>
+    <plurals name="abc_slice_duration_years">
+        <item quantity="other">pred %d leti</item>
+        <item quantity="one">pred %d letom</item>
+        <item quantity="two">pred %d letoma</item>
+        <item quantity="few">pred %d leti</item>
+    </plurals>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">Izbranih je %d elementov</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Izbran je %d element</item>
+        <item quantity="two">Izbrana sta %d elementa</item>
+        <item quantity="few">Izbrani so %d elementi</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d sekund</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sekunda</item>
+        <item quantity="two">%d sekundi</item>
+        <item quantity="few">%d sekunde</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">Če želite znova zagnati telefon, za več kot %d sekund hkrati pritisnite ter pridržite stranski gumb in gumb za znižanje glasnosti.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Če želite znova zagnati telefon, za več kot %d sekundo hkrati pritisnite ter pridržite stranski gumb in gumb za znižanje glasnosti.</item>
+        <item quantity="two">Če želite znova zagnati telefon, za več kot %d sekundi hkrati pritisnite ter pridržite stranski gumb in gumb za znižanje glasnosti.</item>
+        <item quantity="few">Če želite znova zagnati telefon, za več kot %d sekunde hkrati pritisnite ter pridržite stranski gumb in gumb za znižanje glasnosti.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">Še %d poskusov</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Še %d poskus</item>
+        <item quantity="two">Še %d poskusa</item>
+        <item quantity="few">Še %d poskusi</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">%1$d-krat ste poskusili odkleniti ta telefon. Poskusite znova čez %2$d h.</item>
+        <item quantity="one">%d-krat ste poskusili odkleniti ta telefon. Poskusite znova čez 1 uro.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">%1$d-krat ste poskusili odkleniti ta telefon. Poskusite znova čez %2$d min.</item>
+        <item quantity="one">%d-krat ste poskusili odkleniti ta telefon. Poskusite znova čez 1 minuto.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">%1$d-krat ste poskusili odkleniti ta telefon. Poskusite znova čez %2$d s.</item>
+        <item quantity="one">%d-krat ste poskusili odkleniti ta telefon. Poskusite znova čez 1 s.</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">%d poskusov za odklepanje s prstnimi odtisi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d poskus za odklepanje s prstnimi odtisi.</item>
+        <item quantity="two">%d poskusa za odklepanje s prstnimi odtisi.</item>
+        <item quantity="few">%d poskusi za odklepanje s prstnimi odtisi.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">%d napačnih poskusov preverjanja biometričnih podatkov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d napačen poskus preverjanja biometričnih podatkov.</item>
+        <item quantity="two">%d napačna poskusa preverjanja biometričnih podatkov.</item>
+        <item quantity="few">%d napačni poskusi preverjanja biometričnih podatkov.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">%d napačnih poskusov preverjanja obraza.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d napačen poskus preverjanja obraza.</item>
+        <item quantity="two">%d napačna poskusa preverjanja obraza.</item>
+        <item quantity="few">%d napačni poskusi preverjanja obraza.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">%d napačnih poskusov preverjanja prstnih odtisov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d napačen poskus preverjanja prstnih odtisov.</item>
+        <item quantity="two">%d napačna poskusa preverjanja prstnih odtisov.</item>
+        <item quantity="few">%d napačni poskusi preverjanja prstnih odtisov.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">Poskusite znova čez 1 uro %d minut</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Poskusite znova čez 1 uro %d minuto</item>
+        <item quantity="two">Poskusite znova čez 1 uro %d minuti</item>
+        <item quantity="few">Poskusite znova čez 1 uro %d minute</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">Z biometričnimi podatki znova poskusite čez %d sekund</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Z biometričnimi podatki znova poskusite čez %d sekundo</item>
+        <item quantity="two">Z biometričnimi podatki znova poskusite čez %d sekundi</item>
+        <item quantity="few">Z biometričnimi podatki znova poskusite čez %d sekunde</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">Prepoznavo obraza poskusite znova uporabiti čez %d sekund</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Prepoznavo obraza poskusite znova uporabiti čez %d sekundo</item>
+        <item quantity="two">Prepoznavo obraza poskusite znova uporabiti čez %d sekundi</item>
+        <item quantity="few">Prepoznavo obraza poskusite znova uporabiti čez %d sekunde</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">S prstnim odtisom znova poskusite čez %d sekund</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">S prstnim odtisom znova poskusite čez %d sekundo</item>
+        <item quantity="two">S prstnim odtisom znova poskusite čez %d sekundi</item>
+        <item quantity="few">S prstnim odtisom znova poskusite čez %d sekunde</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">Poskusite znova čez %d ur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Poskusite znova čez %d uro</item>
+        <item quantity="two">Poskusite znova čez %d uri</item>
+        <item quantity="few">Poskusite znova čez %d ure</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">Poskusite znova čez %d ur 1 minuto</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Poskusite znova čez %d uro 1 minuto</item>
+        <item quantity="two">Poskusite znova čez %d uri 1 minuto</item>
+        <item quantity="few">Poskusite znova čez %d ure 1 minuto</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">Poskusite znova čez %d minut</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Poskusite znova čez %d minuto</item>
+        <item quantity="two">Poskusite znova čez %d minuti</item>
+        <item quantity="few">Poskusite znova čez %d minute</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">Poskusite znova čez %d sekund</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Poskusite znova čez %d sekundo</item>
+        <item quantity="two">Poskusite znova čez %d sekundi</item>
+        <item quantity="few">Poskusite znova čez %d sekunde</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">Poskusite znova čez %d sekund.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Poskusite znova čez %d sekundo.</item>
+        <item quantity="two">Poskusite znova čez %d sekundi.</item>
+        <item quantity="few">Poskusite znova čez %d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">Še %d poskusov</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Še %d poskus</item>
+        <item quantity="two">Še %d poskusa</item>
+        <item quantity="few">Še %d poskusi</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="mtrl_badge_content_description">
+        <item quantity="other">%d novih obvestil</item>
+        <item quantity="one">%d novo obvestilo</item>
+        <item quantity="two">%d novi obvestili</item>
+        <item quantity="few">%d nova obvestila</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d obvestil</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d obvestilo</item>
+        <item quantity="two">%d obvestili</item>
+        <item quantity="few">%d obvestila</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">Potrebnih je %d gumbov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Potreben je %d gumb.</item>
+        <item quantity="two">Potrebna sta %d gumba.</item>
+        <item quantity="few">Potrebni so %d gumbi.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">Za %d ur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Za %d uro</item>
+        <item quantity="two">Za %d uri</item>
+        <item quantity="few">Za %d ure</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">Dodate lahko največ %d gumbov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Dodate lahko največ %d gumb.</item>
+        <item quantity="two">Dodate lahko največ %d gumba.</item>
+        <item quantity="few">Dodate lahko največ %d gumbe.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">Gumba ni mogoče odstraniti. Na hitrem zaslonu mora biti vsaj %d gumbov.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Gumba ni mogoče odstraniti. Na hitrem zaslonu mora biti vsaj %d gumb.</item>
+        <item quantity="two">Gumba ni mogoče odstraniti. Na hitrem zaslonu morata biti vsaj %d gumba.</item>
+        <item quantity="few">Gumba ni mogoče odstraniti. Na hitrem zaslonu morajo biti vsaj %d gumbi.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d učinkov</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d učinek</item>
+        <item quantity="two">%d učinka</item>
+        <item quantity="few">%d učinki</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">Če želiš uporabljati funkcije napredne inteligence, ki jih ponuja Galaxy AI, moraš biti star(-a) vsaj %d let.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Če želiš uporabljati funkcije napredne inteligence, ki jih ponuja Galaxy AI, moraš biti star(-a) vsaj %d leto.</item>
+        <item quantity="two">Če želiš uporabljati funkcije napredne inteligence, ki jih ponuja Galaxy AI, moraš biti star(-a) vsaj %d leti.</item>
+        <item quantity="few">Če želiš uporabljati funkcije napredne inteligence, ki jih ponuja Galaxy AI, moraš biti star(-a) vsaj %d leta.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

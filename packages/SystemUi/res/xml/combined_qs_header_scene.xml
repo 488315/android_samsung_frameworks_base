@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition android:id="@id/header_transition" motion:constraintSetEnd="@id/qs_header_constraint" motion:constraintSetStart="@id/qqs_header_constraint" motion:layoutDuringTransition="honorRequest">
+        <KeyFrameSet>
+            <KeyPosition motion:curveFit="linear" motion:framePosition="@integer/fade_out_complete_frame" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/date" motion:percentX="0.0" motion:percentY="@dimen/percent_displacement_at_fade_out" motion:sizePercent="0.0" />
+            <KeyPosition motion:curveFit="linear" motion:framePosition="50" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/date" motion:percentX="1.0" motion:percentY="0.5" motion:sizePercent="1.0" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="14" motion:motionTarget="@id/date" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_in_start_frame" motion:motionTarget="@id/date" />
+            <KeyPosition motion:curveFit="linear" motion:framePosition="@integer/fade_out_complete_frame" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/quick_qs_network_speed_container" motion:percentX="0.0" motion:percentY="@dimen/percent_displacement_at_fade_out" motion:sizePercent="0.0" />
+            <KeyPosition motion:curveFit="linear" motion:framePosition="50" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/quick_qs_network_speed_container" motion:percentX="1.0" motion:percentY="0.5" motion:sizePercent="1.0" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_out_complete_frame" motion:motionTarget="@id/quick_qs_network_speed_container" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_in_start_frame" motion:motionTarget="@id/quick_qs_network_speed_container" />
+            <KeyPosition motion:curveFit="linear" motion:framePosition="@integer/fade_out_complete_frame" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/statusIcons" motion:percentX="0.0" motion:percentY="@dimen/percent_displacement_at_fade_out" motion:sizePercent="0.0" />
+            <KeyPosition motion:curveFit="linear" motion:framePosition="50" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/statusIcons" motion:percentX="1.0" motion:percentY="0.5" motion:sizePercent="1.0" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_out_complete_frame" motion:motionTarget="@id/statusIcons" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_in_start_frame" motion:motionTarget="@id/statusIcons" />
+            <KeyPosition motion:curveFit="linear" motion:framePosition="@integer/fade_out_complete_frame" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/batteryRemainingIcon" motion:percentHeight="1.0" motion:percentWidth="1.0" motion:percentX="0.0" motion:percentY="@dimen/percent_displacement_at_fade_out" />
+            <KeyPosition motion:curveFit="linear" motion:framePosition="50" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/batteryRemainingIcon" motion:percentHeight="1.0" motion:percentWidth="1.0" motion:percentX="1.0" motion:percentY="0.5" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_out_complete_frame" motion:motionTarget="@id/batteryRemainingIcon" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_in_start_frame" motion:motionTarget="@id/batteryRemainingIcon" />
+            <KeyPosition motion:curveFit="linear" motion:framePosition="50" motion:keyPositionType="deltaRelative" motion:motionTarget="@id/carrier_group" motion:percentHeight="1.0" motion:percentWidth="1.0" motion:percentX="1.0" motion:percentY="0.5" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="0" motion:motionTarget="@id/carrier_group" />
+            <KeyAttribute android:alpha="0.0" motion:framePosition="@integer/fade_in_start_frame" motion:motionTarget="@id/carrier_group" />
+        </KeyFrameSet>
+    </Transition>
+    <Transition android:id="@id/large_screen_header_transition" motion:constraintSetEnd="@id/large_screen_header_constraint" motion:constraintSetStart="@id/large_screen_header_constraint" />
+    <Include motion:constraintSet="@xml/large_screen_shade_header" />
+    <Include motion:constraintSet="@xml/qs_header" />
+    <Include motion:constraintSet="@xml/qqs_header" />
+</MotionScene>

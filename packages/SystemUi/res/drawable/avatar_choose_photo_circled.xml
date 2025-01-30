@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <stroke android:width="2.0dip" android:color="?android:colorPrimary" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/ic_avatar_choose_photo" android:left="@dimen/avatar_picker_icon_inset" android:top="@dimen/avatar_picker_icon_inset" android:right="@dimen/avatar_picker_icon_inset" android:bottom="@dimen/avatar_picker_icon_inset" />
+</layer-list>

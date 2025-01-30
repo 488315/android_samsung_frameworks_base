@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="controls_item_number_of_favorites">
+        <item quantity="other">%d అంశాలు ఎంచుకోబడ్డాయి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d అంశం ఎంచుకోబడింది</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="cross_fade_sec">
+        <item quantity="other">%d సెకన్లు</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d సెకను</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="globalactions_force_restart_message">
+        <item quantity="other">మీ ఫోన్‌ని పునఃప్రారంభించడానికి %d సెకన్ల కంటే ఎక్కువ సమయం ప్రక్కన ఉన్న బటన్ మరియు వాల్యూమ్ తగ్గింపు బటన్‌ని ఒకేసారి నొక్కి, పట్టుకోండి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీ ఫోన్‌ని పునఃప్రారంభించడానికి %d సెకను కంటే ఎక్కువ సమయం ప్రక్కన ఉన్న బటన్ మరియు వాల్యూమ్ తగ్గింపు బటన్‌ని ఒకేసారి నొక్కి, పట్టుకోండి.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_attempt_left">
+        <item quantity="other">%d ప్రయత్నాలు మిగిలి ఉన్నాయి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ప్రయత్నం మిగిలి ఉంది</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_hours_left_phone">
+        <item quantity="other">ఈ ఫోన్‌ను అన్‌లాక్ చేయడానికి %1$d ప్రయత్నాలు ఉన్నాయి. %2$d గంటలలో మళ్లీ ప్రయత్నించండి.</item>
+        <item quantity="one">ఈ ఫోన్‌ని అన్‌లాక్ చేయడానికి %d ప్రయత్నాలు ఉన్నాయి. 1 గంటలో మళ్లీ ప్రయత్నించండి.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_mins_left_phone">
+        <item quantity="other">ఈ ఫోన్‌ను అన్‌లాక్ చేయడానికి %1$d ప్రయత్నాలు ఉన్నాయి. %2$d నిమిషాల్లో మళ్లీ ప్రయత్నించండి.</item>
+        <item quantity="one">ఈ ఫోన్‌ని అన్‌లాక్ చేయడానికి %d ప్రయత్నాలు ఉన్నాయి. 1 నిమిషంలో మళ్లీ ప్రయత్నించండి.</item>
+    </plurals>
+    <plurals name="kg_knox_guard_incorrect_pin_remaining_seconds_left_phone">
+        <item quantity="other">ఈ ఫోన్‌ను అన్‌లాక్ చేయడానికి %1$d ప్రయత్నాలు మిగిలి ఉన్నాయి. %2$d సెకన్లలో మళ్లీ ప్రయత్నించండి.</item>
+        <item quantity="one">ఈ ఫోన్‌ని అన్‌లాక్ చేయడానికి %d ప్రయత్నాలు ఉన్నాయి. 1 సెకనులో మళ్లీ ప్రయత్నించండి.</item>
+    </plurals>
+    <plurals name="kg_secure_attempts_to_unlock_with_fingerprints">
+        <item quantity="other">వేలిముద్రలతో అన్‌లాక్ చేయడానికి %d సార్లు ప్రయత్నాలు చేసారు.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">వేలిముద్రలతో అన్‌లాక్ చేయడానికి %d సారి ప్రయత్నాలు చేసారు.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_biometrics">
+        <item quantity="other">బయోమెట్రిక్స్‌ను ధృవీకరించడానికి %d చెల్లని ప్రయత్నాలు చేసారు.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">బయోమెట్రిక్స్‌ని ధృవీకరించడానికి %d చెల్లని ప్రయత్నం చేసారు.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_face">
+        <item quantity="other">మీ ముఖాన్ని ధృవీకరించడానికి %d చెల్లని ప్రయత్నాలు చేసారు.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీ ముఖాన్ని ధృవీకరించడానికి %d చెల్లని ప్రయత్నం చేసారు.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_by_fingerprint">
+        <item quantity="other">వేలిముద్రలను ధృవీకరించడానికి %d చెల్లని ప్రయత్నాలు చేసారు.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">వేలిముద్రలను ధృవీకరించడానికి %d చెల్లని ప్రయత్నం చేసారు.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_1_hour_and_min">
+        <item quantity="other">1 గంట %d నిమిషాల్లో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">1 గంట %d నిమిషంలో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_biometric">
+        <item quantity="other">%d సెకన్లలో మీ బయోమెట్రిక్స్‌ని మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d సెకనులో మీ బయోమెట్రిక్స్‌ని మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_face">
+        <item quantity="other">%d సెకన్లలో మీ ముఖ గుర్తింపుని మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d సెకనులో మీ ముఖ గుర్తింపుని మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_fingerprint">
+        <item quantity="other">%d సెకన్లలో మీ వేలిముద్రని మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d సెకనులో మీ వేలిముద్రని మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour">
+        <item quantity="other">%d గంటలలో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d గంటలో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_hour_and_1_min">
+        <item quantity="other">%d గంటల 1 నిమిషంలో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d గంట 1 నిమిషంలో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_min">
+        <item quantity="other">%d నిమిషాల్లో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d నిమిషంలో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_attempts_countdown_sec">
+        <item quantity="other">%d సెకన్లలో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d సెకనులో మళ్లీ ప్రయత్నించండి</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_too_many_failed_countdown">
+        <item quantity="other">%d సెకన్ల తర్వాత మళ్లీ ప్రయత్నించండి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d సెకనులో మళ్లీ ప్రయత్నించండి.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="kg_ucm_attempt_left">
+        <item quantity="other">%d ప్రయత్నాలు మిగిలి ఉన్నాయి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ప్రయత్నం మిగిలి ఉంది</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="plural_notification_count">
+        <item quantity="other">%d నోటిఫికేషన్‌లు</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d నోటిఫికేషన్</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_add_minimum">
+        <item quantity="other">%d బటన్‌లు అవసరం.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d బటన్ అవసరం.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_dnd_detail_fhl_hours_option">
+        <item quantity="other">%d గంటల పాటు</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d గంట పాటు</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_add_maximum">
+        <item quantity="other">%d కంటే ఎక్కువ బటన్‌లను జోడించలేరు.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d కంటే ఎక్కువ బటన్‌ని జోడించలేరు.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_unable_remove_minimum">
+        <item quantity="other">బటన్‌ని తీసివేయలేరు. త్వరిత ప్యానెల్ కనీసం %d బటన్‌లను కలిగి ఉండాలి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">బటన్‌ని తీసివేయలేరు. త్వరిత ప్యానెల్ కనీసం %d బటన్‌ని కలిగి ఉండాలి.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sec_qs_video_call_effects_num">
+        <item quantity="other">%d ప్రభావాలు</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ప్రభావం</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="subscreen_notification_smart_reply_child_account_dialog_content">
+        <item quantity="other">మీరు Galaxy AI యొక్క ఆధునిక ఇంటెలిజెన్స్ ఫీచర్‌లను ఉపయోగించడానికి కనీసం %d సంవత్సరాల వయస్సును కలిగి ఉండాలి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీరు Galaxy AI యొక్క ఆధునిక ఇంటెలిజెన్స్ ఫీచర్‌లను ఉపయోగించడానికి కనీసం %d సంవత్సరం వయస్సును కలిగి ఉండాలి.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

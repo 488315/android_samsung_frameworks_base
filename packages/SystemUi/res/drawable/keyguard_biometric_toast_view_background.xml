@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/biometric_toast_bg_color" />
+            <corners android:radius="@dimen/kg_biometric_toast_view_radius" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_00" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_01" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_02" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_03" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_04" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_05" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_06" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_07" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_08" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_10" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_11" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_12" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_13" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_14" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_15" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_16" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_17" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_18" />
+    <item android:duration="17" android:drawable="@drawable/lock_ic_lock_mtrl_19" />
+</animation-list>

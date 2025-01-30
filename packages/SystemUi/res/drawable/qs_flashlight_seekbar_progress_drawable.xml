@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center_vertical" android:height="@dimen/qs_flashlight_seekbar_progress_drawable_height" android:start="@dimen/qs_flashlight_seekbar_progress_drawable_padding" android:end="@dimen/qs_flashlight_seekbar_progress_drawable_padding">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/qs_flashlight_seekbar_progress_color" />
+            <corners android:radius="@dimen/qs_flashlight_seekbar_progress_drawable_radius" />
+            <size android:height="@dimen/qs_flashlight_seekbar_progress_drawable_height" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objectAnimator android:interpolator="@interpolator/tv_privacy_chip_expand_interpolator" android:duration="@integer/privacy_chip_animation_millis" android:valueTo="0" android:valueType="floatType" android:propertyName="collapseProgress"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

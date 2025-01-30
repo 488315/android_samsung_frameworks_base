@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/volume_panel_expand_view_radius" />
+    <solid android:color="@color/volume_expand_panel_bg_color_reduce_transparency" />
+</shape>

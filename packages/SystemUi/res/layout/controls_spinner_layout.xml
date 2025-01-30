@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginEnd="@dimen/basic_interaction_side_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.controls.ui.view.ControlsSpinner android:id="@id/controls_spinner" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+    <LinearLayout android:layout_gravity="center_vertical" android:id="@id/launch_button_layout" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <Button android:textAppearance="@style/TextAppearance.Font_Semi_Bold" android:textSize="15.0sp" android:textColor="@color/basic_interaction_contained_button_text" android:id="@id/launch_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/controls_custom_open_app" style="@style/ControlContainedButton_Basic" />
+    </LinearLayout>
+</LinearLayout>

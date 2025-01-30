@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.volume.view.VolumeRowView android:id="@id/volume_row_view" android:background="@android:color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_gravity="center" android:id="@id/volume_seekbar_container" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:layout_gravity="center" android:id="@id/volume_panel_blur" android:background="@drawable/volume_seekbar_bg_blur" android:visibility="invisible" android:layout_width="@dimen/volume_seekbar_width" android:layout_height="@dimen/volume_seekbar_height" android:foreground="@drawable/volume_seekbar_fg" />
+        <FrameLayout android:layout_gravity="center" android:id="@id/volume_seekbar_background" android:background="@drawable/volume_seekbar_bg" android:layout_width="@dimen/volume_seekbar_width" android:layout_height="@dimen/volume_seekbar_height" android:outlineProvider="background">
+            <com.android.systemui.volume.view.VolumeSeekBar android:layout_gravity="center" android:id="@id/volume_seekbar" android:background="@null" android:layout_width="@dimen/volume_seekbar_height" android:layout_height="fill_parent" android:progressDrawable="@drawable/volume_seekbar_drawable" android:thumb="@null" android:rotation="270.0" android:layoutDirection="ltr" />
+        </FrameLayout>
+        <FrameLayout android:layout_gravity="center" android:id="@id/volume_seekbar_outline_stroke" android:background="@drawable/volume_seekbar_bg_outline" android:visibility="gone" android:layout_width="@dimen/volume_seekbar_outline_width" android:layout_height="@dimen/volume_seekbar_outline_height" />
+    </FrameLayout>
+    <ImageView android:layout_gravity="center|top" android:id="@id/volume_panel_bluetooth_device_icon" android:visibility="gone" android:clickable="false" android:layout_width="@dimen/volume_icon_size" android:layout_height="@dimen/volume_icon_size" android:layout_marginTop="4.0dip" android:scaleType="centerInside" />
+    <LinearLayout android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/volume_icon_area" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/volume_panel_icon_margin_bottom">
+        <ImageView android:layout_gravity="center_horizontal" android:id="@id/volume_panel_status_icon" android:visibility="gone" android:layout_width="@dimen/volume_status_icon_size" android:layout_height="@dimen/volume_status_icon_size" android:src="@drawable/ic_volume_control_dnd" android:scaleType="centerInside" android:tint="@color/volume_icon_color" />
+        <com.android.systemui.volume.view.icon.VolumeIcon android:layout_gravity="center_horizontal" android:id="@id/volume_button" android:layout_width="@dimen/volume_icon_touch_size" android:layout_height="@dimen/volume_icon_touch_size" />
+    </LinearLayout>
+</com.android.systemui.volume.view.VolumeRowView>

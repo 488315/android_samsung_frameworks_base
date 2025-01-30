@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="num_pad_key_ratio">1.51</string>
+    <string name="sec_bottom_bar_tiles_default" />
+    <string name="sec_top_bar_tiles_default">Wifi,Bluetooth,AllShareCast,DeviceControl</string>
+    <string name="toast_rotation_locked">Screen is now locked in landscape orientation.</string>
+</resources>

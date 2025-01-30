@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="kg_lock_icon_top_margin_tablet">0.0dip</dimen>
+    <dimen name="kg_message_area_width_tablet">420.0dip</dimen>
+    <dimen name="kg_password_eca_margin_bottom_tablet">8.0dip</dimen>
+    <dimen name="kg_pattern_eca_margin_bottom_tablet">2.2999878dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_height_tablet">213.0dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_width_tablet">213.0dip</dimen>
+    <dimen name="kg_pattern_message_area_margin_bottom_tablet">10.0dip</dimen>
+    <dimen name="kg_security_password_input_box_margin_bottom_tablet">14.0dip</dimen>
+</resources>

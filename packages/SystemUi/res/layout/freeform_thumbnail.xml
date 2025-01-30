@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.freeform.FreeformThumbnailView android:id="@id/freeform_thumbnail_view" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/freeform_thumbnail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:foreground="@drawable/freeform_preview_outline" android:clipToOutline="true">
+        <ImageView android:background="@drawable/freeform_preview_outline" android:layout_width="fill_parent" android:layout_height="fill_parent" android:elevation="15.0dip" android:clipToOutline="true" />
+        <ImageView android:id="@id/freeform_thumbnail_img" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_margin="@dimen/freeform_thumbnail_outline_stroke" />
+    </FrameLayout>
+</com.android.wm.shell.freeform.FreeformThumbnailView>

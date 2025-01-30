@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <solid android:color="?android:^attr-private/colorAccentPrimaryVariant" />
+    <corners android:radius="@dimen/accessibility_floating_tooltip_text_corner_radius" />
+    <stroke android:width="@dimen/accessibility_floating_menu_stroke_width" android:color="@color/accessibility_floating_menu_stroke" />
+</shape>

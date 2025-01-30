@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Já</item>
+        <item>Já, takk</item>
+        <item>Ókei</item>
+        <item>Nei</item>
+        <item>Nei, takk</item>
+        <item>Neibb</item>
+        <item>Takk</item>
+        <item>Kærar þakkir</item>
+        <item>Er á leiðinni</item>
+        <item>Hvað er að frétta?</item>
+        <item>Síðar</item>
+        <item>Flott</item>
+        <item>Ég samþykki</item>
+        <item>Frábært!</item>
+        <item>Ha?</item>
+        <item>OMG!</item>
+    </string-array>
+</resources>

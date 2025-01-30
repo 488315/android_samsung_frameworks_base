@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Ja</item>
+        <item>Ja, prosza</item>
+        <item>OK</item>
+        <item>Niy</item>
+        <item>Niy, dziynki</item>
+        <item>Żŏdne</item>
+        <item>Dziynki</item>
+        <item>Szczyre podziynkow.</item>
+        <item>Na ceście</item>
+        <item>Co słychać?</item>
+        <item>Niyskorzij</item>
+        <item>Roztōmiłe</item>
+        <item>Dŏwōm przizwolynie</item>
+        <item>Świetnie!</item>
+        <item>Słuchōm?</item>
+        <item>Niyźle!</item>
+    </string-array>
+</resources>

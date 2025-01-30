@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="bottom|center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@id/media_image_view" android:background="@drawable/media_panel_image_background" android:layout_width="@dimen/touchpad_media_panel_image_width" android:layout_height="@dimen/touchpad_media_panel_image_height" android:contentDescription="@string/cover_art" />
+        <LinearLayout android:orientation="horizontal" android:id="@id/media_text_left_margin_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout android:layout_gravity="left" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <TextView android:textSize="@dimen/touchpad_media_panel_artist_text_size" android:textColor="@color/touchpad_media_panel_artist_text_color" android:id="@id/artist_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="216.0dip" android:text="" android:singleLine="true" android:textAlignment="viewStart" />
+            <TextView android:textSize="@dimen/touchpad_media_panel_title_text_size" android:textStyle="bold" android:textColor="@color/touchpad_media_panel_title_text_color" android:id="@id/title_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="216.0dip" android:text="" android:singleLine="true" android:textAlignment="viewStart" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/media_text_right_margin_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="right" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="right" android:id="@id/action_resume" android:background="@drawable/icon_background" android:layout_width="@dimen/touchpad_media_panel_play_pause_icon_size" android:layout_height="@dimen/touchpad_media_panel_play_pause_icon_size" android:contentDescription="@string/action_resume">
+                <ImageView android:id="@id/resume_image" android:focusable="false" android:layout_width="@dimen/touchpad_media_panel_play_pause_icon_size" android:layout_height="@dimen/touchpad_media_panel_play_pause_icon_size" android:src="@drawable/ic_play_circle" android:tint="@color/seekbar_color_expand" />
+            </LinearLayout>
+            <LinearLayout android:gravity="right" android:id="@id/action_pause" android:background="@drawable/icon_background" android:visibility="gone" android:layout_width="@dimen/touchpad_media_panel_play_pause_icon_size" android:layout_height="@dimen/touchpad_media_panel_play_pause_icon_size" android:contentDescription="@string/action_pause">
+                <ImageView android:id="@id/pause_image" android:focusable="false" android:layout_width="@dimen/touchpad_media_panel_play_pause_icon_size" android:layout_height="@dimen/touchpad_media_panel_play_pause_icon_size" android:src="@drawable/ic_pause_circle" android:tint="@color/seekbar_color_expand" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/touchpad_media_panel_bottom_margin" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

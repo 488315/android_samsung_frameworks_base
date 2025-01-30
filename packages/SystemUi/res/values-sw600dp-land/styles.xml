@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.AuthNonBioCredential.Description" parent="@style/TextAppearance.AuthNonBioCredential">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:layout_marginTop">16.0dip</item>
+        <item name="android:fontFamily">google-sans</item>
+    </style>
+    <style name="TextAppearance.AuthNonBioCredential.Subtitle" parent="@style/TextAppearance.AuthNonBioCredential">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:layout_marginTop">16.0dip</item>
+        <item name="android:fontFamily">google-sans</item>
+    </style>
+    <style name="TextAppearance.AuthNonBioCredential.Title" parent="@style/TextAppearance.AuthNonBioCredential">
+        <item name="android:textSize">36.0sp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_marginTop">16.0dip</item>
+        <item name="android:fontFamily">google-sans</item>
+    </style>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/volume_warning_side_view_contents" android:clipChildren="false" android:layout_width="@dimen/volume_warning_side_view_container_width" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TypoVolumeWarningSideViewText" android:gravity="center_vertical" android:id="@id/volume_warning_side_view_dialog_text_view" android:layout_width="@dimen/volume_warning_side_view_text_width" android:layout_height="@dimen/volume_warning_side_view_text_height" />
+    <RelativeLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/volume_warning_side_view_dialog_buttons" android:layout_width="@dimen/volume_warning_side_view_buttons_width" android:layout_height="fill_parent">
+        <Button android:textAppearance="@style/TypoVolumeWarningSideViewButton" android:id="@id/negative_button" android:background="@drawable/volume_warning_side_view_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/volume_warning_side_view_button_min_height" android:text="@string/no" android:layout_marginEnd="@dimen/volume_warning_side_view_button_space" android:layout_toStartOf="@id/positive_button" />
+        <Button android:textAppearance="@style/TypoVolumeWarningSideViewButton" android:id="@id/positive_button" android:background="@drawable/volume_warning_side_view_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/volume_warning_side_view_button_min_height" android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <TextView android:textAppearance="@style/TypoVolumeWarningSideViewToastText" android:gravity="center" android:id="@id/volume_warning_side_view_toast_text_view" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/volume_warning_side_view_text_height" android:text="@string/volume_limiter_open_cover_toast" />
+</LinearLayout>

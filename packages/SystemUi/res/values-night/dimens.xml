@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="control_add_dialog_card_stroke">0.0dip</dimen>
+    <item type="dimen" name="controls_custom_icon_alpha_off">0.75</item>
+    <dimen name="popup_menu_bg_stroke_width">3.0px</dimen>
+    <dimen name="screenshot_bg_protection_height">375.0dip</dimen>
+</resources>

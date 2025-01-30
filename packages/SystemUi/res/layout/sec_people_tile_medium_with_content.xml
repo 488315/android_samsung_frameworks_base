@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ImageView android:id="@id/people_widget_background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitXY" />
+    <LinearLayout android:theme="@android:style/Theme.DeviceDefault.DayNight" android:layout_gravity="center" android:orientation="vertical" android:id="@id/item" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <include layout="@layout/people_tile_punctuation_background_medium" />
+            <include layout="@layout/sec_people_status_scrim_layout" />
+            <LinearLayout android:layout_gravity="top" android:orientation="horizontal" android:id="@id/content" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <LinearLayout android:id="@id/main_content" android:paddingTop="@dimen/widget_main_content_padding_14dp" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingStart="@dimen/widget_main_content_padding_14dp" android:paddingEnd="@dimen/widget_main_content_padding_10dp">
+                    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                        <FrameLayout android:gravity="top" android:layout_gravity="top" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="@dimen/avatar_size_for_medium">
+                            <FrameLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent">
+                                <ImageView android:layout_gravity="start" android:id="@id/person_icon" android:layout_width="@dimen/avatar_size_for_medium" android:layout_height="@dimen/avatar_size_for_medium" />
+                                <ImageView android:layout_gravity="end|center|top" android:id="@id/availability" android:background="@drawable/availability_dot_10dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+                            </FrameLayout>
+                            <TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Title" android:textSize="8.0sp" android:ellipsize="end" android:gravity="end" android:layout_gravity="end" android:id="@id/messages_count" android:background="@drawable/people_space_messages_count_background" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:paddingStart="4.0dip" android:paddingEnd="4.0dip" />
+                            <ImageView android:gravity="end" android:layout_gravity="end" android:id="@id/predefined_icon" android:layout_width="@dimen/regular_predefined_icon" android:layout_height="@dimen/regular_predefined_icon" android:tint="?android:textColorTertiary" />
+                        </FrameLayout>
+                        <LinearLayout android:layout_gravity="top" android:orientation="vertical" android:paddingTop="4.0dip" android:paddingBottom="6.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                            <TextView android:textAppearance="@style/PeopleWidgetName" android:textSize="@dimen/name_text_size_for_medium_content" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:gravity="start|center" android:layout_gravity="start|center" android:id="@id/name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/empty_user_name" android:maxLines="1" />
+                            <TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.Toolbar.Title" android:textSize="12.0sp" android:textColor="?android:textColorSecondary" android:ellipsize="end" android:id="@id/subtext" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_user_name" android:maxLines="1" />
+                            <TextView android:textAppearance="@style/PeopleWidgetContent" android:textSize="@dimen/content_text_size_for_medium" android:textColor="?android:textColorPrimary" android:ellipsize="end" android:id="@id/text_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/empty_status" android:maxLines="2" android:singleLine="false" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout android:id="@id/image_content" android:layout_width="fill_parent" android:layout_height="fill_parent" android:paddingVertical="@dimen/widget_image_content_padding">
+                    <ImageView android:gravity="center" android:id="@id/image" android:background="@drawable/people_space_content_background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="centerCrop" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

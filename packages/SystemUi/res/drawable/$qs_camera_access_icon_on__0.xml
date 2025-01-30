@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$qs_camera_access_icon_on__0__0" android:duration="167" android:startOffset="0" android:valueFrom="M7.44 10.61 C7.44,10.61 -10.96,-7.79 -10.96,-7.79 C-10.96,-7.79 -9.56,-9.19 -9.56,-9.19 C-9.56,-9.19 8.84,9.21 8.84,9.21 C8.84,9.21 7.44,10.61 7.44,10.61c " android:valueTo="M7.44 10.62 C7.44,10.62 7.45,10.62 7.45,10.62 C7.45,10.62 8.85,9.22 8.85,9.22 C8.85,9.22 8.84,9.22 8.84,9.22 C8.84,9.22 7.44,10.62 7.44,10.62c " android:valueType="pathType" android:propertyName="pathData" />
+</set>

@@ -1,0 +1,18 @@
+package androidx.picker3.widget;
+
+import android.util.Log;
+
+/* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
+/* loaded from: classes.dex */
+public abstract /* synthetic */ class SeslColorSpectrumView$$ExternalSyntheticOutline0 {
+    /* renamed from: m */
+    public static void m43m(String str, int i, String str2) {
+        Log.i(str2, str + i);
+    }
+
+    /* renamed from: m */
+    public static void m44m(StringBuilder sb, float f, String str) {
+        sb.append(f);
+        Log.d(str, sb.toString());
+    }
+}

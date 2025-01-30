@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/qs_edit_summary_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="@dimen/qs_edit_summary_text" android:textColor="@color/qs_edit_panel_summary_color" android:ellipsize="marquee" android:gravity="center" android:id="@id/qs_edit_summary" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/qs_edit_summary" android:singleLine="true" android:layout_centerInParent="true" android:marqueeRepeatLimit="marquee_forever" />
+    <TextView android:textSize="@dimen/qs_edit_summary_text" android:textColor="@color/qs_edit_panel_summary_color" android:ellipsize="marquee" android:gravity="center" android:id="@id/qs_edit_more_summary" android:visibility="gone" android:clickable="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@plurals/sec_qs_add_minimum" android:singleLine="true" android:layout_centerInParent="true" android:marqueeRepeatLimit="marquee_forever" />
+</LinearLayout>

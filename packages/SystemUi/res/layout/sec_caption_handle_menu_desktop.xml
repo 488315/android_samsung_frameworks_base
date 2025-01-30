@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center" android:orientation="vertical" android:background="@drawable/sec_decor_caption_menu_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:clipToOutline="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/primary_button_set" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.wm.shell.windowdecor.WindowMenuDexItemView android:gravity="center" android:id="@id/minimize_window" android:layout_width="fill_parent" android:layout_height="wrap_content" android:contentDescription="@string/sec_decor_button_text_minimize" />
+        <com.android.wm.shell.windowdecor.WindowMenuDexItemView android:gravity="center" android:id="@id/maximize_window" android:layout_width="fill_parent" android:layout_height="wrap_content" android:contentDescription="@string/sec_decor_button_text_maximize" />
+        <com.android.wm.shell.windowdecor.WindowMenuDexItemView android:gravity="center" android:id="@id/close_window" android:layout_width="fill_parent" android:layout_height="wrap_content" android:contentDescription="@string/sec_decor_button_text_close" />
+    </LinearLayout>
+    <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/secondary_button_set" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.wm.shell.windowdecor.WindowMenuDexItemView android:gravity="center" android:id="@id/opacity_window" android:layout_width="fill_parent" android:layout_height="wrap_content" android:contentDescription="@string/sec_decor_button_text_opacity" />
+        <com.android.wm.shell.windowdecor.WindowMenuDexItemView android:gravity="center" android:id="@id/window_pin_window" android:layout_width="fill_parent" android:layout_height="wrap_content" android:contentDescription="@string/sec_decor_button_text_window_pin" />
+        <com.android.wm.shell.windowdecor.WindowMenuDexItemView android:gravity="center" android:id="@id/rotate_window" android:layout_width="fill_parent" android:layout_height="wrap_content" android:contentDescription="@string/sec_decor_button_text_rotate" />
+    </LinearLayout>
+</LinearLayout>

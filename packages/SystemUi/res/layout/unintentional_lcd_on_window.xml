@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.power.UnintentionalLcdOnView android:background="#d9000000"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="bottom" android:layout_gravity="center_horizontal" android:orientation="vertical" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginStart="24.0dip" android:layout_marginEnd="24.0dip">
+            <TextView android:textSize="4.1999817mm" android:textColor="#fffafafa" android:layout_gravity="center_horizontal" android:id="@id/unintentional_title" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/unintentional_lcd_on_alert_title" android:fontFamily="roboto-medium" android:textAlignment="center" />
+            <TextView android:textSize="3.149994mm" android:textColor="#fffafafa" android:layout_gravity="center_horizontal" android:id="@id/unintentional_body" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="18.0dip" android:fontFamily="roboto-regular" android:textAlignment="center" android:autoSizeStepGranularity="6.0px" />
+        </LinearLayout>
+        <FrameLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="2.0" android:layout_marginStart="24.0dip" android:layout_marginEnd="24.0dip">
+            <ImageView android:layout_gravity="center" android:id="@id/locker_image_circle" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="113.0dip" android:src="@drawable/unintentional_lock_backgroud_shape" android:alpha="0.0" android:scaleX="0.0" android:scaleY="0.0" />
+            <ImageView android:layout_gravity="center" android:id="@id/unintentional_locker_img_cue_mtrl_L" android:layout_width="9.0dip" android:layout_height="16.0dip" android:layout_marginBottom="130.0dip" android:src="@drawable/ic_4_arrow_cue_l" android:alpha="0.3" android:rotation="270.0" />
+            <ImageView android:layout_gravity="center" android:id="@id/unintentional_locker_img_cue_mtrl_L2" android:layout_width="9.0dip" android:layout_height="16.0dip" android:layout_marginBottom="100.0dip" android:src="@drawable/ic_4_arrow_cue_l" android:alpha="0.6" android:rotation="270.0" />
+            <ImageView android:layout_gravity="center" android:id="@id/unintentional_locker_img_cue_mtrl_L3" android:layout_width="9.0dip" android:layout_height="16.0dip" android:layout_marginBottom="70.0dip" android:src="@drawable/ic_4_arrow_cue_l" android:rotation="270.0" />
+            <ImageView android:layout_gravity="center" android:id="@id/locker_img_view" android:layout_width="48.0dip" android:layout_height="48.0dip" android:src="@drawable/unintentional_locker_image_one" />
+            <ImageView android:layout_gravity="center" android:id="@id/locker_image_ring" android:focusable="true" android:layout_width="68.0dip" android:layout_height="68.0dip" android:src="@drawable/draw_circular_outline" />
+            <TextView android:textSize="2.625mm" android:textColor="#fffafafa" android:gravity="center_horizontal" android:layout_gravity="center" android:id="@id/unintentional_drag_to_unlock" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="73.0dip" android:text="@string/unintentional_lcd_on_alert_window_body_drag_to_unlock" android:fontFamily="roboto-regular" />
+        </FrameLayout>
+    </LinearLayout>
+</com.android.systemui.power.UnintentionalLcdOnView>
