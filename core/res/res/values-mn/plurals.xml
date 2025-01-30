@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Таны SIM түгжигдэхээс өмнө танд %d оролдлого хийх боломж үлдлээ.</item>
+        <item quantity="one">Таны SIM түгжигдэхээс өмнө танд %d оролдлого хийх боломж үлдлээ.</item>
+    </plurals>
+</resources>

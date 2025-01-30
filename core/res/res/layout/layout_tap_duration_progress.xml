@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/tap_layout" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/tap_background" android:layout_width="@dimen/tap_duration_progress_size" android:layout_height="@dimen/tap_duration_progress_size" android:src="@drawable/tap_duration_progress_background" />
+    <ImageView android:layout_gravity="center" android:id="@id/tap_circle" android:layout_width="@dimen/tap_duration_progress_size" android:layout_height="@dimen/tap_duration_progress_size" android:src="@drawable/tap_duration_progress_circle" />
+    <ImageView android:layout_gravity="center" android:id="@id/tap_arrow" android:layout_width="@dimen/tap_duration_progress_size" android:layout_height="@dimen/tap_duration_progress_size" android:src="@drawable/tap_duration_progress_arrow" />
+    <ProgressBar android:layout_gravity="center" android:id="@id/tap_progress" android:layout_width="@dimen/tap_duration_progress_size" android:layout_height="@dimen/tap_duration_progress_size" android:max="360" android:indeterminate="false" android:progressDrawable="@drawable/tap_duration_progress" style="?progressBarStyleHorizontal" />
+    <ImageView android:layout_gravity="center" android:id="@id/tap_stand_by" android:layout_width="@dimen/tap_duration_progress_size" android:layout_height="@dimen/tap_duration_progress_size" android:src="@drawable/circle_stand_by" />
+    <ImageView android:layout_gravity="center" android:id="@id/tap_hold" android:layout_width="@dimen/tap_duration_progress_size" android:layout_height="@dimen/tap_duration_progress_size" android:src="@drawable/circle_hold" />
+</FrameLayout>

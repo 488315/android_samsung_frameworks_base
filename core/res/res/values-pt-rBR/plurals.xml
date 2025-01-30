@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Seu tablet está instável porque um chip que continha aplicativos instalados foi removido. O tablet será reiniciado em %d segundos para voltar ao normal. Salve os dados não salvos antes de o tablet ser reiniciado.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Seu tablet está instável porque um chip que continha aplicativos instalados foi removido. O tablet será reiniciado em %d segundo para voltar ao normal. Salve os dados não salvos antes de o tablet ser reiniciado.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Seu tablet será reiniciado em %d segundos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Seu tablet será reiniciado em %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d aplicativos foram fechados automaticamente porque estavam causando o aquecimento do seu telefone. Você poderá abri-los novamente mais tarde, depois que o telefone esfriar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicativo foi fechado automaticamente porque estava causando o aquecimento do seu telefone. Você poderá abri-lo novamente mais tarde, depois que o telefone esfriar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d aplicativos foram fechados automaticamente porque estavam causando o aquecimento do seu tablet. Você poderá abri-los novamente mais tarde, depois que o tablet esfriar.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicativo foi fechado automaticamente porque estava causando o aquecimento do seu tablet. Você poderá abri-lo novamente mais tarde, depois que o tablet esfriar.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplicativos fechados</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicativo fechado</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Não é possível exibir mais de %d aplicativos na tela ao mesmo tempo. O aplicativo mais antigo foi minimizado.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Não é possível exibir mais de %d aplicativo na tela ao mesmo tempo. O aplicativo mais antigo foi minimizado.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Abra o aplicativo que você deseja atribuir e mantenha pressionada a chave do aplicativo por %d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Abra o aplicativo que você deseja atribuir e mantenha pressionada a chave do aplicativo por %d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s está causando o aquecimento do seu telefone. Ele será fechado automaticamente em %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está causando o aquecimento do seu telefone. Ele será fechado automaticamente em %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s está causando o aquecimento do seu tablet. Ele será fechado automaticamente em %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está causando o aquecimento do seu tablet. Ele será fechado automaticamente em %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Faça backup ilimitado de dados na Samsung Cloud por até %d dias ou restaure os dados dos quais você fez backup.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Faça backup ilimitado de dados na Samsung Cloud por até %d dia ou restaure os dados dos quais você fez backup.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s está causando o aquecimento do seu telefone. Você pode fechá-lo agora ou ele será fechado automaticamente em %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está causando o aquecimento do seu telefone. Você pode fechá-lo agora ou ele será fechado automaticamente em %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s está causando o aquecimento do seu tablet. Você pode fechá-lo agora ou ele será fechado automaticamente em %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está causando o aquecimento do seu tablet. Você pode fechá-lo agora ou ele será fechado automaticamente em %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Tentativas restantes: %d. Caso o código correto não seja digitado, o chip será bloqueado.</item>
+        <item quantity="one">Tentativas restantes: %d. Caso o código correto não seja digitado, o chip será bloqueado.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d itens</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d item</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">A rede Wi-Fi à qual você deseja se conectar só pode estar conectada a %d aparelhos de cada vez. Desconecte outros aparelhos dessa rede e tente novamente.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A rede Wi-Fi à qual você deseja se conectar só pode estar conectada a %d aparelho de cada vez. Desconecte outros aparelhos dessa rede e tente novamente.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d horas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d hora</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

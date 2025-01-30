@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Bluetooth Share" TargetApi="19" TargetPackageName="com.android.bluetooth" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Transfer Histry List Background" DefaultValue="#fff2f2f2" DestAttribName="widget_round_and_bgcolor" UID="38_1-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:background="?activatedBackgroundIndicator" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="?listPreferredItemHeightSmall"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="start|center" android:id="@id/icon" android:layout_width="@dimen/resolver_icon_size" android:layout_height="@dimen/resolver_icon_size" android:layout_marginTop="12.0dip" android:layout_marginBottom="12.0dip" android:scaleType="fitCenter" android:layout_marginStart="@dimen/resolver_icon_margin" android:layout_marginEnd="@dimen/resolver_icon_margin" />
+    <LinearLayout android:gravity="start|center" android:layout_gravity="start|center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingEnd="@dimen/resolver_edge_margin"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView android:textSize="16.0sp" android:textColor="?textColorPrimary" android:ellipsize="marquee" android:layout_gravity="start|center" android:id="@id/text1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:minLines="1" android:fontFamily="@string/config_bodyFontFamily" />
+        <TextView android:textSize="14.0sp" android:textColor="?textColorSecondary" android:ellipsize="marquee" android:layout_gravity="start|center" android:id="@id/text2" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="2" android:minLines="1" android:fontFamily="@string/config_bodyFontFamily" />
+    </LinearLayout>
+</LinearLayout>

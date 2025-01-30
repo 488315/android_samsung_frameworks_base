@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Jūsų planšetinis kompiuteris veikia nestabiliai, nes išimta SD kortelė su įdiegtomis programomis. Jūsų planšetinis kompiuteris bus paleistas iš naujo po %d sek., kad vėl veiktų normaliai. Prieš paleidžiant planšetinį kompiuterį iš naujo išsaugokite visus neišsaugotus duomenis.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Jūsų planšetinis kompiuteris veikia nestabiliai, nes išimta SD kortelė su įdiegtomis programomis. Jūsų planšetinis kompiuteris bus paleistas iš naujo po %d sek., kad vėl veiktų normaliai. Prieš paleidžiant planšetinį kompiuterį iš naujo išsaugokite visus neišsaugotus duomenis.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Jūsų planšetinis kompiuteris veikia nestabiliai, nes išimta SD kortelė su įdiegtomis programomis. Jūsų planšetinis kompiuteris bus paleistas iš naujo po %d sek., kad vėl veiktų normaliai. Prieš paleidžiant planšetinį kompiuterį iš naujo išsaugokite visus neišsaugotus duomenis.</item>
+        <item quantity="many">Jūsų planšetinis kompiuteris veikia nestabiliai, nes išimta SD kortelė su įdiegtomis programomis. Jūsų planšetinis kompiuteris bus paleistas iš naujo po %d sek., kad vėl veiktų normaliai. Prieš paleidžiant planšetinį kompiuterį iš naujo išsaugokite visus neišsaugotus duomenis.</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Planšetė bus paleista iš naujo po %d s</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Planšetė bus paleista iš naujo po %d s</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Planšetė bus paleista iš naujo po %d s</item>
+        <item quantity="many">Planšetė bus paleista iš naujo po %d s</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d programų buvo uždaryta automatiškai, nes dėl jų telefonas kaista. Jas galėsite atidaryti vėliau, kai telefonas atvės.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d programa buvo uždaryta automatiškai, nes dėl jos telefonas kaista. Ją galėsite atidaryti vėliau, kai telefonas atvės.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d programos buvo uždarytos automatiškai, nes dėl jų telefonas kaista. Jas galėsite atidaryti vėliau, kai telefonas atvės.</item>
+        <item quantity="many">%d programų buvo uždaryta automatiškai, nes dėl jų telefonas kaista. Jas galėsite atidaryti vėliau, kai telefonas atvės.</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d programų buvo uždaryta automatiškai, nes dėl jų planšetinis kompiuteris kaista. Ją galėsite atidaryti vėliau, kai planšetinis kompiuteris atvės.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d programa buvo uždaryta automatiškai, nes dėl jos planšetinis kompiuteris kaista. Ją galėsite atidaryti vėliau, kai planšetinis kompiuteris atvės.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d programos buvo uždarytos automatiškai, nes dėl jų planšetinis kompiuteris kaista. Jas galėsite atidaryti vėliau, kai planšetinis kompiuteris atvės.</item>
+        <item quantity="many">%d programų buvo uždaryta automatiškai, nes dėl jų planšetinis kompiuteris kaista. Ją galėsite atidaryti vėliau, kai planšetinis kompiuteris atvės.</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">Uždaryta %d programų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Uždaryta %d programa</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Uždarytos %d programos</item>
+        <item quantity="many">Uždaryta %d programų</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Ekrane vienu metu negali būti rodoma daugiau nei %d programų. Seniausia programa sumažinta.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ekrane vienu metu negali būti rodoma daugiau nei %d programa. Seniausia programa sumažinta.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Ekrane vienu metu negali būti rodoma daugiau nei %d programos. Seniausia programa sumažinta.</item>
+        <item quantity="many">Ekrane vienu metu negali būti rodoma daugiau nei %d programų. Seniausia programa sumažinta.</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Atidarykite norimą priskirti programą, tada paspauskite ir %d sek. palaikykite programos mygtuką.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Atidarykite norimą priskirti programą, tada paspauskite ir %d sek. palaikykite programos mygtuką.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Atidarykite norimą priskirti programą, tada paspauskite ir %d sek. palaikykite programos mygtuką.</item>
+        <item quantity="many">Atidarykite norimą priskirti programą, tada paspauskite ir %d sek. palaikykite programos mygtuką.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Dėl %1$s jūsų telefonas kaista. Ji bus automatiškai uždaryta po %2$d sek.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Dėl %1$s jūsų telefonas kaista. Ji bus automatiškai uždaryta po %2$d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Dėl %1$s jūsų telefonas kaista. Ji bus automatiškai uždaryta po %2$d sek.</item>
+        <item quantity="many">Dėl %1$s jūsų telefonas kaista. Ji bus automatiškai uždaryta po %2$d sek.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Dėl %1$s jūsų planšetinis kompiuteris kaista. Ji bus automatiškai uždaryta po %2$d sek.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Dėl %1$s jūsų planšetinis kompiuteris kaista. Ji bus automatiškai uždaryta po %2$d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Dėl %1$s jūsų planšetinis kompiuteris kaista. Ji bus automatiškai uždaryta po %2$d sek.</item>
+        <item quantity="many">Dėl %1$s jūsų planšetinis kompiuteris kaista. Ji bus automatiškai uždaryta po %2$d sek.</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Kurkite neriboto duomenų kiekio atsargines kopijas „Samsung Cloud“ iki %d d. arba atkurkite duomenis iš jau skurtų kopijų.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kurkite neriboto duomenų kiekio atsargines kopijas „Samsung Cloud“ iki %d d. arba atkurkite duomenis iš jau skurtų kopijų.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Kurkite neriboto duomenų kiekio atsargines kopijas „Samsung Cloud“ iki %d d. arba atkurkite duomenis iš jau skurtų kopijų.</item>
+        <item quantity="many">Kurkite neriboto duomenų kiekio atsargines kopijas „Samsung Cloud“ iki %d d. arba atkurkite duomenis iš jau skurtų kopijų.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Dėl %1$s telefonas kaista. Ją galite uždaryti dabar arba ji bus uždaryta automatiškai po %2$d sek.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Dėl %1$s telefonas kaista. Ją galite uždaryti dabar arba ji bus uždaryta automatiškai po %2$d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Dėl %1$s telefonas kaista. Ją galite uždaryti dabar arba ji bus uždaryta automatiškai po %2$d sek.</item>
+        <item quantity="many">Dėl %1$s telefonas kaista. Ją galite uždaryti dabar arba ji bus uždaryta automatiškai po %2$d sek.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Dėl %1$s planšetinis kompiuteris kaista. Ją galite uždaryti dabar arba ji bus uždaryta automatiškai po %2$d sek.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Dėl %1$s planšetinis kompiuteris kaista. Ją galite uždaryti dabar arba ji bus uždaryta automatiškai po %2$d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Dėl %1$s planšetinis kompiuteris kaista. Ją galite uždaryti dabar arba ji bus uždaryta automatiškai po %2$d sek.</item>
+        <item quantity="many">Dėl %1$s planšetinis kompiuteris kaista. Ją galite uždaryti dabar arba ji bus uždaryta automatiškai po %2$d sek.</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Liko %d bandymų. Tada SIM kortelė bus užrakinta.</item>
+        <item quantity="one">Liko %d bandymas. Tada SIM kortelė bus užrakinta.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elementų</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d elementas</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d elementai</item>
+        <item quantity="many">%d elementų</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">„Wi-Fi“ tinklas, prie kurio norite prisijungti, vienu metu gali būtų prijungtas tik prie %d įrenginių. Atjunkite kitus įrenginius nuo šio tinklo, tada bandykite dar kartą.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">„Wi-Fi“ tinklas, prie kurio norite prisijungti, vienu metu gali būtų prijungtas tik prie %d įrenginio. Atjunkite kitus įrenginius nuo šio tinklo, tada bandykite dar kartą.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">„Wi-Fi“ tinklas, prie kurio norite prisijungti, vienu metu gali būtų prijungtas tik prie %d įrenginių. Atjunkite kitus įrenginius nuo šio tinklo, tada bandykite dar kartą.</item>
+        <item quantity="many">„Wi-Fi“ tinklas, prie kurio norite prisijungti, vienu metu gali būtų prijungtas tik prie %d įrenginių. Atjunkite kitus įrenginius nuo šio tinklo, tada bandykite dar kartą.</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d val.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d val.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d val.</item>
+        <item quantity="many">%d val.</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d min.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d min.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d min.</item>
+        <item quantity="many">%d min.</item>
+    </plurals>
+</resources>

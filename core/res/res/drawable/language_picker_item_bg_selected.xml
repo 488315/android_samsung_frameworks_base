@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="-5.0dip" android:right="-5.0dip" android:bottom="-5.0dip">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/language_picker_item_selected_bg" />
+            <stroke android:width="2.0dip" android:color="@color/language_picker_item_selected_stroke" />
+        </shape>
+    </item>
+</layer-list>

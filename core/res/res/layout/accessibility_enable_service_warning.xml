@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:scrollbarStyle="outsideOverlay" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textDirection="locale"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="24.0dip" android:paddingEnd="24.0dip">
+            <ImageView android:id="@id/accessibility_permissionDialog_icon" android:layout_width="36.0dip" android:layout_height="36.0dip" android:layout_marginTop="16.0dip" android:layout_marginBottom="16.0dip" android:scaleType="fitCenter" />
+            <TextView android:textSize="20.0sp" android:textColor="?textColorPrimary" android:gravity="center" android:id="@id/accessibility_permissionDialog_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="google-sans-medium" />
+            <TextView android:textSize="16.0sp" android:textColor="?textColorPrimary" android:id="@id/accessibility_permissionDialog_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:layout_marginBottom="32.0dip" android:text="@string/accessibility_service_warning_description" android:fontFamily="sans-serif" />
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:id="@id/accessibility_controlScreen_icon" android:layout_width="18.0dip" android:layout_height="18.0dip" android:layout_marginRight="12.0dip" android:src="@drawable/ic_visibility" android:scaleType="fitCenter" />
+                <TextView android:textSize="16.0sp" android:textColor="?textColorPrimary" android:id="@id/accessibility_controlScreen_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/accessibility_service_screen_control_title" android:layout_weight="1.0" android:fontFamily="sans-serif" />
+            </LinearLayout>
+            <TextView android:textSize="14.0sp" android:textColor="?textColorSecondary" android:id="@id/accessibility_controlScreen_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="24.0dip" android:text="@string/accessibility_service_screen_control_description" android:fontFamily="sans-serif" android:paddingStart="30.0dip" />
+            <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:id="@id/accessibility_performAction_icon" android:layout_width="18.0dip" android:layout_height="18.0dip" android:src="@drawable/ic_pan_tool" android:scaleType="fitCenter" android:layout_marginEnd="12.0dip" />
+                <TextView android:textSize="16.0sp" android:textColor="?textColorPrimary" android:id="@id/accessibility_performAction_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/accessibility_service_action_perform_title" android:layout_weight="1.0" android:fontFamily="sans-serif" />
+            </LinearLayout>
+            <TextView android:textSize="14.0sp" android:textColor="?textColorSecondary" android:id="@id/accessibility_performAction_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="24.0dip" android:text="@string/accessibility_service_action_perform_description" android:fontFamily="sans-serif" android:paddingStart="30.0dip" />
+        </LinearLayout>
+        <View android:background="@color/chooser_row_divider" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+        <Button android:id="@id/accessibility_permission_enable_allow_button" android:background="?selectableItemBackground" android:layout_width="fill_parent" android:layout_height="56.0dip" android:text="@string/accessibility_dialog_button_allow" style="?buttonBarPositiveButtonStyle" />
+        <View android:background="@color/chooser_row_divider" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+        <Button android:id="@id/accessibility_permission_enable_deny_button" android:background="?selectableItemBackground" android:layout_width="fill_parent" android:layout_height="56.0dip" android:text="@string/accessibility_dialog_button_deny" style="?buttonBarPositiveButtonStyle" />
+    </LinearLayout>
+</ScrollView>

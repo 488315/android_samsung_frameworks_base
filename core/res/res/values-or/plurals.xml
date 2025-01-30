@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ଅସ୍ଥିର ହୋଇଛି କାରଣ ଏକ SD କାର୍ଡ ଯେଉଁଥିରେ ସଂସ୍ଥାପନ ହୋଇଥିବା ଆପସ୍ ଥିଲା ଅପସାରଣ ହୋଇଛି। ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ସାମାନ୍ୟ ହେବାକୁ %d ସେକେଣ୍ତରେ ପୁନଃଆରମ୍ଭ ହେବ। ଟ୍ୟାବଲେଟ୍ ପୁନଃଆରମ୍ଭ କରିବା ପୂର୍ବରୁ ଯେକୌଣସି ଅସଞ୍ଚିତ ଡାଟା ସଞ୍ଚୟ କରନ୍ତୁ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ଅସ୍ଥିର ହୋଇଛି କାରଣ ଏକ SD କାର୍ଡ ଯେଉଁଥିରେ ସଂସ୍ଥାପନ ହୋଇଥିବା ଆପସ୍ ଥିଲା ଅପସାରଣ ହୋଇଛି। ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ସାମାନ୍ୟ ହେବାକୁ %d ସେକେଣ୍ତରେ ପୁନଃଆରମ୍ଭ ହେବ। ଟ୍ୟାବଲେଟ୍ ପୁନଃଆରମ୍ଭ କରିବା ପୂର୍ବରୁ ଯେକୌଣସି ଅସଞ୍ଚିତ ଡାଟା ସଞ୍ଚୟ କରନ୍ତୁ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">%d ସେକେଣ୍ଡରେ ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ପୁନଃଆରମ୍ଭ ହେବ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ସେକେଣ୍ଡରେ ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ପୁନଃଆରମ୍ଭ ହେବ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%dଟି ଆପ୍ଲିକେସନ୍ କାରଣରୁ ଆପଣଙ୍କ ଫୋନ୍ ଅଧିକ ଉତ୍ତପ୍ତ ହେଉଥିବାରୁ ସେଗୁଡିକ ଅଟୋମେଟିକାଲି ଭାବେ ବନ୍ଦ ହୋଇଛି। ଆପଣ ଏହାକୁ ପୁନଃ ଆପଣଙ୍କ ଫୋନ୍ ଥଣ୍ତା ହେବା ପରେ ଖୋଲିପାରିବେ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%dଟି ଆପ୍ଲିକେସନ୍ କାରଣରୁ ଆପଣଙ୍କ ଫୋନ୍ ଅଧିକ ଉତ୍ତପ୍ତ ହେଉଥିବାରୁ ଏହା ଅଟୋମେଟିକାଲି ଭାବେ ବନ୍ଦ ହୋଇଛି। ଆପଣ ଏହାକୁ ପୁନଃ ଆପଣଙ୍କ ଫୋନ୍ ଥଣ୍ତା ହେବା ପରେ ଖୋଲିପାରିବେ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%dଟି ଆପ୍ଲିକେସନ୍ କାରଣରୁ ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ଅଧିକ ଉତ୍ତପ୍ତ ହେଉଥିବାରୁ ଏହା ଅଟୋମେଟିକାଲି ଭାବେ ବନ୍ଦ ହୋଇଛି। ଆପଣ ଏହାକୁ ପୁନଃ ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ଥଣ୍ତା ହେବା ପରେ ଖୋଲିପାରିବେ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%dଟି ଆପ୍ଲିକେସନ୍ କାରଣରୁ ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ଅଧିକ ଉତ୍ତପ୍ତ ହେଉଥିବାରୁ ଏହା ଅଟୋମେଟିକାଲି ଭାବେ ବନ୍ଦ ହୋଇଛି। ଆପଣ ଏହାକୁ ପୁନଃ ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ଥଣ୍ତା ହେବା ପରେ ଖୋଲିପାରିବେ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%dଟି ଆପ୍ଲିକେସନ୍‌ ବନ୍ଦ ହୋଇଛି</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%dଟି ଆପ୍ଲିକେସନ୍ ବନ୍ଦ ହୋଇଛି</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ସ୍କ୍ରିନରେ ଏକା ସମୟରେ %dଟି ରୁ ଅଧିକ ଆପ୍ଲିକେସନ୍ ଦେଖାଇ ପାରିବେ ନାହିଁ। ପୁରାତନ ଆପ୍ଲିକେସନ୍‌ ସର୍ବନିମ୍ନ ହୋଇଛି।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ସ୍କ୍ରିନରେ ଏକା ସମୟରେ %dଟି ରୁ ଅଧିକ ଆପ୍ଲିକେସନ୍ ଦେଖାଇ ପାରିବେ ନାହିଁ। ପୁରାତନ ଆପ୍ଲିକେସନ୍‌ ସର୍ବନିମ୍ନ ହୋଇଛି।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">ଆପଣ ନ୍ୟସ୍ତ କରିବାକୁ ଚାହୁଁଥିବା ଆପ୍ଲିକେସନ୍‌ ଖୋଲନ୍ତୁ, %d ସେକେଣ୍ଡ ପାଇଁ ଆପ୍ଲିକେସନ୍‌ କୀ ଦବାଇ ଧରି ରଖନ୍ତୁ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଆପଣ ନ୍ୟସ୍ତ କରିବାକୁ ଚାହୁଁଥିବା ଆପ୍ଲିକେସନ୍‌ ଖୋଲନ୍ତୁ, %d ସେକେଣ୍ତ ପାଇଁ ଆପ୍ଲିକେସନ୍‌ କୀ ଦବାଇ ଧରି ରଖନ୍ତୁ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s ଆପଣଙ୍କ ଫୋନକୁ ଅଧିକ ଉତ୍ତପ୍ତ କରୁଛି। ଏହା ଅଟୋମେଟିକାଲି %2$d ସେକେଣ୍ଡରେ ବନ୍ଦ ହେବ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ଆପଣଙ୍କ ଫୋନକୁ ଅଧିକ ଉତ୍ତପ୍ତ କରୁଛି। ଏହା ଅଟୋମେଟିକାଲି %2$d ସେକେଣ୍ଡରେ ବନ୍ଦ ହେବ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s ଆପଣଙ୍କ ଟ୍ୟାବଲେଟକୁ ଅଧିକ ଉତ୍ତପ୍ତ କରୁଛି। ଏହା ଅଟୋମେଟିକାଲି %2$d ସେକେଣ୍ଡରେ ବନ୍ଦ ହେବ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ଆପଣଙ୍କ ଟ୍ୟାବଲେଟକୁ ଅଧିକ ଉତ୍ତପ୍ତ କରୁଛି। ଏହା ଅଟୋମେଟିକାଲି %2$d ସେକେଣ୍ଡରେ ବନ୍ଦ ହେବ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d ଦିନ ପର୍ଯ୍ୟନ୍ତ Samsung Cloudକୁ ଅସୀମିତ ଡାଟା ବ୍ୟାକ୍ ଅପ୍ ନିଅନ୍ତୁ କିମ୍ୱା ଆପଣ ବ୍ୟାକ୍ ଅପ୍ ନେଇଥିବା ଡାଟା ରିଷ୍ଟୋର୍ କରନ୍ତୁ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ଦିନ ପର୍ଯ୍ୟନ୍ତ Samsung Cloudକୁ ଅସୀମିତ ଡାଟା ବ୍ୟାକ୍ ଅପ୍ ନିଅନ୍ତୁ କିମ୍ୱା ଆପଣ ବ୍ୟାକ୍ ଅପ୍ ନେଇଥିବା ଡାଟା ରିଷ୍ଟୋର୍ କରନ୍ତୁ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s କାରଣରୁ ଆପଣଙ୍କ ଫୋନ୍ ଅଧିକ ଉତ୍ତପ୍ତ ହୋଇଛି। ଆପଣ ଏହାକୁ ବର୍ତ୍ତମାନ ବନ୍ଦ କରିପାରିବେ, କିମ୍ୱା ଏହା ଅଟୋମେଟିକାଲି ଭାବେ %2$d ସେକେଣ୍ଡରେ ବନ୍ଦ ହେବ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s କାରଣରୁ ଆପଣଙ୍କ ଫୋନ୍ ଅଧିକ ଉତ୍ତପ୍ତ ହୋଇଛି। ଆପଣ ଏହାକୁ ବର୍ତ୍ତମାନ ବନ୍ଦ କରିପାରିବେ, କିମ୍ୱା ଏହା ଅଟୋମେଟିକାଲି ଭାବେ %2$d ସେକେଣ୍ତରେ ବନ୍ଦ ହେବ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s କାରଣରୁ ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ଅଧିକ ଉତ୍ତପ୍ତ ହୋଇଛି। ଆପଣ ଏହାକୁ ବର୍ତ୍ତମାନ ବନ୍ଦ କରିପାରିବେ, କିମ୍ୱା ଏହା ଅଟୋମେଟିକାଲି ଭାବେ %2$d ସେକେଣ୍ଡରେ ବନ୍ଦ ହେବ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s କାରଣରୁ ଆପଣଙ୍କ ଟ୍ୟାବଲେଟ୍ ଅଧିକ ଉତ୍ତପ୍ତ ହୋଇଛି। ଆପଣ ଏହାକୁ ବର୍ତ୍ତମାନ ବନ୍ଦ କରିପାରିବେ, କିମ୍ୱା ଏହା ଅଟୋମେଟିକାଲି ଭାବେ %2$d ସେକେଣ୍ତରେ ବନ୍ଦ ହେବ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">ଆଉ %dଟି ପ୍ରୟାସ ପରେ SIM ଲକ୍‍ ହୋଇଯିବ।</item>
+        <item quantity="one">ଆଉ %dଟି ପ୍ରୟାସ ପରେ SIM ଲକ୍‍ ହୋଇଯିବ।</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%dଟି ଆଇଟମ୍‌</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%dଟି ଆଇଟମ୍</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">ଆପଣ କନେକ୍ଟ କରିବାକୁ ଚାହୁଁଥିବା Wi-Fi ନେଟୱାର୍କ୍‌ କେବଳ ଥରେ %dଟି ଡିଭାଇସ୍ ସହ କନେକ୍ଟ ହୋଇପାରିବ। ସେହି ନେଟୱାର୍କରୁ ଅନ୍ୟ କୌଣସି ଡିଭାଇସ୍ ବିଚ୍ଛିନ୍ନ କରି, ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">ଆପଣ କନେକ୍ଟ କରିବାକୁ ଚାହୁଁଥିବା Wi-Fi ନେଟୱାର୍କ୍‌ କେବଳ ଥରେ %dଟି ଡିଭାଇସ୍ ସହ କନେକ୍ଟ ହୋଇପାରିବ। ସେହି ନେଟୱାର୍କରୁ ଅନ୍ୟ କୌଣସି ଡିଭାଇସ୍ ବିଚ୍ଛିନ୍ନ କରି, ପୁନଃଚେଷ୍ଟା କରନ୍ତୁ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ଘଣ୍ଟା</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ଘଣ୍ଟା</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d ମିନିଟ୍</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ମିନିଟ୍‌</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

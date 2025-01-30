@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.7">
+    <AppMetaData Name="Gallery" TargetApi="19" TargetPackageName="com.sec.android.gallery3d" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Primary color: Change Primary color" DefaultValue="#fffafafa" DestAttribName="gallery_color_primary" DestQualifiers="" UID="21-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Primary dark color: Change Primary dark color" DefaultValue="#ffcccccc" DestAttribName="gallery_color_primary_dark" DestQualifiers="" UID="21-B" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Common component color" DefaultValue="#ffcccccc" DestAttribName="gallery_common_component_color" DestQualifiers="" UID="21-C" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Color Control Activated" DefaultValue="#ffed920f" DestAttribName="gallery_color_control_activated" DestQualifiers="" UID="21-D" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Status bar background color" DefaultValue="#ff000000" DestAttribName="gallery_status_bar_background_color" DestQualifiers="" UID="21-S-1" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="Status bar icon color (light / dark)" DefaultValue="true" DestAttribName="is_light_status_bar" DestQualifiers="" UID="21-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="ActionBar Background color: Change Gallery actionbar background color" DefaultValue="#ff000000" DestAttribName="actionbar_bg_color" DestQualifiers="" UID="21-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Back Icon Color: Change Gallery drawer/back icon color" DefaultValue="#fffafafa" DestAttribName="actionbar_back_icon_color" DestQualifiers="" UID="21-1-4" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Back Icon Image" DefaultValue="" DestAttribName="tw_ic_ab_back_mtrl_with_inset" DestQualifiers="sw360dp-xxxhdpi" UID="21-1-6" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Actionbar Button Text Color: Change Gallery actionbar button text color" DefaultValue="#fffafafa" DestAttribName="actionbar_menu_text_enabled" DestQualifiers="" UID="21-1-7" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Title text color: Change Gallery actionbar title color" DefaultValue="#e6252525" DestAttribName="actionbar_title_color" DestQualifiers="" UID="21-1-10" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Trash description text color" DefaultValue="#ff505050" DestAttribName="trash_header_description_color" DestQualifiers="" UID="21-1-11-1" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Check Box on Tint color: Change Check Box on Tint color" DefaultValue="#fffafafa" DestAttribName="expansion_view_checkbox_on_tint_color" DestQualifiers="" UID="21-1-13" ValueRef="1-4-1" ValueType="Color" />
+        <Property Comment="Check box on image" DefaultValue="" DestAttribName="check_box_on_image" DestQualifiers="sw360dp-xxxhdpi" UID="21-1-13-1" ValueRef="1-49-7-1" ValueType="Image" />
+        <Property Comment="Check Box off Tint color: Change Check Box off Tint color" DefaultValue="#cc8f8f8f" DestAttribName="photo_cover_checkbox_default_tint_color" DestQualifiers="" UID="21-1-14" ValueRef="1-4-2" ValueType="Color" />
+        <Property Comment="Check box off image" DefaultValue="" DestAttribName="check_box_off_image" DestQualifiers="sw360dp-xxxhdpi" UID="21-1-14-1" ValueRef="1-49-8-1" ValueType="Image" />
+        <Property Comment="Check Box on Tint color" DefaultValue="#fffafafa" DestAttribName="thumbnail_checkbox_on_color" DestQualifiers="" UID="21-1-15" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Check Box off Tint color" DefaultValue="#fffafafa" DestAttribName="thumbnail_checkbox_off_color" DestQualifiers="" UID="21-1-15-1" ValueRef="1-6-2" ValueType="Color" />
+        <Property Comment="Tab background color" DefaultValue="#ff000000" DestAttribName="tab_background" DestQualifiers="" UID="21-1-16" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Unselected text color" DefaultValue="#ffcccccc" DestAttribName="tab_text_color_normal" DestQualifiers="" UID="21-1-18" ValueRef="1-12-3" ValueType="TextColor" />
+        <Property Comment="Selected text color" DefaultValue="#fffafafa" DestAttribName="tab_text_color_selected" DestQualifiers="" UID="21-1-19" ValueRef="1-12-4" ValueType="TextColor" />
+        <Property Comment="Tab Selected Line Color" DefaultValue="#fffafafa" DestAttribName="tab_indicator_line_selected" DestQualifiers="" UID="21-1-20" ValueRef="1-12-5" ValueType="Color" />
+        <Property Comment="Tab Selected Line Image" DefaultValue="" DestAttribName="tab_indicator_line_drawable" DestQualifiers="" UID="21-1-21" ValueRef="1-12-6" ValueType="Image" />
+        <Property Comment="Bottom bar text color" DefaultValue="#ff636363" DestAttribName="bottom_bar_menu_text_color" DestQualifiers="" UID="21-1-22" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Bottom bar icon color" DefaultValue="#ff454545" DestAttribName="bottom_bar_menu_icon_color" DestQualifiers="" UID="21-1-23" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Extended bar, Smart album icon image color" DefaultValue="#fffafafa" DestAttribName="smart_album_icon_image_color" DestQualifiers="" UID="21-1-27" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="move to album, bottombar secondary text color" DefaultValue="#fffafafa" DestAttribName="move_bar_secondary_text_color" DestQualifiers="" UID="21-1-28" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="move to album, bottombar button text color" DefaultValue="#fffafafa" DestAttribName="move_bar_button_text_color" DestQualifiers="" UID="21-1-29" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="move to album, bottombar bg color" DefaultValue="#fffafafa" DestAttribName="move_bar_background_color" DestQualifiers="" UID="21-1-30" ValueRef="1-9-1" ValueType="Color" />
+        <Property Comment="bottom tab menu icon color" DefaultValue="#fffafafa" DestAttribName="bottom_tab_menu_icon_color" DestQualifiers="" UID="21-1-31" ValueRef="1-12-5" ValueType="Color" />
+        <Property Comment="Background color: Change Gallery background color" DefaultValue="#ff000000" DestAttribName="default_background" DestQualifiers="" UID="21-2-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Today, location text color: Change Today, location text color" DefaultValue="#d9fafafa" DestAttribName="time_view_title_color" DestQualifiers="" UID="21-2-2" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Location text, icon tint color" DefaultValue="#b3252525" DestAttribName="gallery_ic_timeview_location_tint_color" DestQualifiers="" UID="21-2-2-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Selected item divider color" DefaultValue="#ff737373" DestAttribName="common_header_subtitle_line" DestQualifiers="" UID="21-2-8" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Card view folder name text color" DefaultValue="#ffe5e5e5" DestAttribName="card_view_folder_name_text_color" DestQualifiers="" UID="21-2-9" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Card view folder name secondary text color" DefaultValue="#ff666666" DestAttribName="card_view_folder_name_secondary_text_color" DestQualifiers="" UID="21-2-10" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Split album view - divider color" DefaultValue="#4d272727" DestAttribName="more_album_divider_color" DestQualifiers="" UID="21-2-14" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="album folder border color" DefaultValue="#1f000000" DestAttribName="album_border_color" DestQualifiers="" Opacity="25" UID="21-2-15" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="thumbnail border color" DefaultValue="#1f000000" DestAttribName="thumbnail_border_color" DestQualifiers="" Opacity="25" UID="21-2-15-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="syncview progress icon color" DefaultValue="#ff909090" DestAttribName="syncview_icon_color_progress" DestQualifiers="" UID="21-2-18" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="syncview complete icon color" DefaultValue="#ff909090" DestAttribName="syncview_icon_color_complete" DestQualifiers="" UID="21-2-19" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="syncview text color" DefaultValue="#ff505050" DestAttribName="syncview_text_color" DestQualifiers="" UID="21-2-20" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="syncview text color" DefaultValue="#ff0072de" DestAttribName="one_drive_tip_card_button_color" DestQualifiers="" UID="21-2-21" ValueRef="1-48-5" ValueType="TextColor" />
+        <Property Comment="New Icon Tint Color: Change New Icon Tint Color" DefaultValue="#cced920f" DestAttribName="album_view_new_mark_tint_color" DestQualifiers="" UID="21-3-1" ValueRef="1-33-1" ValueType="Color" />
+        <Property Comment="new badge icon bg on thumbnail" DefaultValue="" DestAttribName="new_album_label_background" DestQualifiers="sw360dp-xxxhdpi" UID="21-3-2" ValueRef="1-33-2" ValueType="Image" />
+        <Property Comment="new badge text color" DefaultValue="#fffafafa" DestAttribName="album_view_new_mark_text_color" DestQualifiers="" UID="21-3-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="Stroke Color: Change Stroke Color" DefaultValue="#ffed920f" DestAttribName="album_selected_border_color" DestQualifiers="" UID="21-4-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Search bar background color" DefaultValue="" DestAttribName="search_bar_background_color" DestQualifiers="" UID="21-5-1" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="Search bar hint text color" DefaultValue="" DestAttribName="search_bar_hint_text_color" DestQualifiers="" UID="21-5-2" ValueRef="1-59-4" ValueType="Color" />
+        <Property Comment="Search bar back icon tint color" DefaultValue="" DestAttribName="search_bar_back_icon_tint_color" DestQualifiers="" UID="21-5-3" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Gallery status bar fw background color" DefaultValue="#fff2f2f2" DestAttribName="gallery_status_bar_fw_background_color" DestQualifiers="" UID="21-5-4" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="Gallery status bar fw icon color" DefaultValue="" DestAttribName="gallery_status_bar_fw_icon_color" DestQualifiers="" UID="21-5-5" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Default fw background" DefaultValue="#fff2f2f2" DestAttribName="default_fw_background" DestQualifiers="" UID="21-5-6" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Gallery navigation bar fw background color" DefaultValue="#fff2f2f2" DestAttribName="gallery_navigation_bar_fw_background_color" DestQualifiers="" UID="21-5-7" ValueRef="1-69-1" ValueType="Color" />
+        <Property Comment="Gallery navigation bar fw icon color" DefaultValue="" DestAttribName="gallery_navigation_bar_fw_icon_color" DestQualifiers="" UID="21-5-8" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Search bar back icon image" DefaultValue="" DestAttribName="search_bar_back_icon_image" DestQualifiers="sw360dp-xxxhdpi" UID="21-5-9" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Search card divider color" DefaultValue="#29000000" DestAttribName="search_card_divider_color" DestQualifiers="" UID="21-6-4" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="search card header title" DefaultValue="#ff252525" DestAttribName="search_card_header_title" DestQualifiers="" UID="21-7-5" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Search card header count" DefaultValue="#ffa5a5a5" DestAttribName="search_card_header_count" DestQualifiers="" UID="21-7-6" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Search people header background color" DefaultValue="#fff3f3f3" DestAttribName="search_people_header_background_color" DestQualifiers="" UID="21-7-9" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Search people header text color" DefaultValue="#ff252525" DestAttribName="search_people_header_text_color" DestQualifiers="" UID="21-7-10" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Search category arrow color" DefaultValue="#ff252525" DestAttribName="search_category_arrow_color" DestQualifiers="" UID="21-7-13" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Search category item title color" DefaultValue="#ff252525" DestAttribName="search_category_item_title_color" DestQualifiers="" UID="21-7-14" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Search category item count color" DefaultValue="#ff909090" DestAttribName="search_category_item_count_color" DestQualifiers="" UID="21-7-15" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Search category shot mode icon color" DefaultValue="#ff252525" DestAttribName="search_category_shot_mode_icon_color" DestQualifiers="" UID="21-7-16" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Search category shot mode background" DefaultValue="#0d686868" DestAttribName="search_category_shot_mode_background" DestQualifiers="" Opacity="20" UID="21-7-17" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Search count header text color" DefaultValue="#ff000000" DestAttribName="search_count_header_text_color" DestQualifiers="" UID="21-7-18" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Card view screen background color" DefaultValue="#ffebebeb" DestAttribName="gallery_search_view_bg_color" DestQualifiers="" UID="21-8-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="No item text color" DefaultValue="#ff000000" DestAttribName="search_noitem_text_color" DestQualifiers="" UID="21-8-3" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Search Matched Text Color" DefaultValue="#ff000000" DestAttribName="search_matched_text_color" DestQualifiers="" UID="21-8-5" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Search Recommend Icon Color" DefaultValue="#ff464646" DestAttribName="search_recommend_icon_color" DestQualifiers="" UID="21-8-6" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Filter Panel Keywoard Text Unselected Color" DefaultValue="#ff252525" DestAttribName="filter_panel_keyword_text_unselected_color" DestQualifiers="" UID="21-8-8" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="No item text color" DefaultValue="#ff86898b" DestAttribName="list_search_divider_color" DestQualifiers="" UID="21-8-9" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Shring Invitation Requester Text color" DefaultValue="#ff909090" DestAttribName="sharing_invitation_requester_text_color" DestQualifiers="" UID="21-8-10" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Shring Invitation Date Text color" DefaultValue="#ffef5650" DestAttribName="sharing_invitation_date_text_color" DestQualifiers="" UID="21-8-11" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Clear Search History Text Color" DefaultValue="#ffed920f" DestAttribName="search_clear_history_button_text_color" DestQualifiers="" UID="21-8-13" ValueRef="21-D" ValueType="Color" />
+        <Property Comment="Search List BG Color" DefaultValue="#fffafafa" DestAttribName="recommended_bg_color" DestQualifiers="" UID="21-8-14" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Default Background image" DefaultValue="" DestAttribName="default_background_image" DestQualifiers="sw360dp-xxxhdpi" UID="21-8-14-1" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="Search People Tag Edit Text Color" DefaultValue="#d9fafafa" DestAttribName="gallery_search_header_view_title_color" DestQualifiers="" UID="21-8-15" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Tag chip text color (Selected)" DefaultValue="#ffffffff" DestAttribName="search_filter_result_selected_text_color" DestQualifiers="" UID="21-8-16" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Tag chip BG (Selected)" DefaultValue="#ff252525" DestAttribName="search_filter_result_selected_solid_color" DestQualifiers="" UID="21-8-17" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Tag chip BG color (Unselected)" DefaultValue="#fff2f2f2" DestAttribName="search_filter_result_unselected_solid_color" DestQualifiers="" UID="21-8-19" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Tag chip text color (Unselected)" DefaultValue="#ff2f2f2f" DestAttribName="search_filter_result_unselected_text_color" DestQualifiers="" UID="21-8-20" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Menu Search People No Icon Color" DefaultValue="#ff404040" DestAttribName="menu_search_people_no_icon_color" DestQualifiers="" UID="21-8-21" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Menu Search People Yes Icon Color" DefaultValue="#ff00b149" DestAttribName="menu_search_people_yes_icon_color" DestQualifiers="" UID="21-8-22" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Input text color" DefaultValue="" DestAttribName="input_text_color" DestQualifiers="" UID="21-8-23" ValueRef="1-59-3" ValueType="Color" />
+        <Property Comment="search filter icon color" DefaultValue="#ff252525" DestAttribName="search_filter_icon_color" DestQualifiers="" UID="21-8-24" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="search filter selected icon color" DefaultValue="#fffafafa" DestAttribName="search_filter_selected_icon_color" DestQualifiers="" UID="21-8-25" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="search tag chip stroke color" DefaultValue="#33000000" DestAttribName="search_tag_chip_stroke_color" DestQualifiers="" UID="21-8-26" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="search tag chip bg color" DefaultValue="#ffffffff" DestAttribName="search_tag_chip_bg_color" DestQualifiers="" UID="21-8-27" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="search tag chip text color" DefaultValue="#ff252525" DestAttribName="search_tag_chip_text_color" DestQualifiers="" UID="21-8-28" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="recent search chip bg color" DefaultValue="#0d252525" DestAttribName="search_history_chip_color" DestQualifiers="" UID="21-8-29" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="recent search text color" DefaultValue="#ff4d4d4d" DestAttribName="search_history_text_color" DestQualifiers="" UID="21-8-30" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="recent search remove icon color" DefaultValue="#ff4d4d4d" DestAttribName="search_history_delete_icon_color" DestQualifiers="" UID="21-8-31" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="No Item Text Color" DefaultValue="#99fafafa" DestAttribName="noitem_text_color_for_grace" DestQualifiers="" UID="21-9-1" ValueRef="1-53-1" ValueType="TextColor" />
+        <Property Comment="No Item Sub Text Color" DefaultValue="#99979797" DestAttribName="noitem_sub_text_color" DestQualifiers="" UID="21-9-2" ValueRef="1-53-2" ValueType="TextColor" />
+        <Property Comment="Dialog body text color" DefaultValue="#ff000000" DestAttribName="dialog_content_text_color" DestQualifiers="" UID="21-11-1" ValueRef="1-9-4" ValueType="TextColor" />
+        <Property Comment="Badge Icon Image" DefaultValue="" DestAttribName="dialog_background_image" DestQualifiers="xxhdpi" UID="21-11-2" ValueRef="1-9-2" ValueType="BgImage" />
+        <Property Comment="Badge Icon Color" DefaultValue="#ff000000" DestAttribName="dialog_background_color" DestQualifiers="" UID="21-11-2-1" ValueRef="1-9-1" ValueType="Color" />
+        <Property Comment="dialog title text color" DefaultValue="#ff000000" DestAttribName="dialog_title_text_color" DestQualifiers="" UID="21-11-3" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="dialog main text color" DefaultValue="#ff000000" DestAttribName="dialog_main_text_color" DestQualifiers="" UID="21-11-4" ValueRef="1-9-6" ValueType="TextColor" />
+        <Property Comment="dialog content sub text color" DefaultValue="#ff000000" DestAttribName="dialog_content_sub_text_color" DestQualifiers="" UID="21-11-5" ValueRef="1-9-4" ValueType="TextColor" />
+        <Property Comment="dialog checkbox on color" DefaultValue="#ff252525" DestAttribName="dialog_checkbox_on_color" DestQualifiers="" UID="21-11-6" ValueRef="1-6-1" ValueType="Color" />
+        <Property Comment="dialog checkbox off color" DefaultValue="#cc8f8f8f" DestAttribName="dialog_checkbox_off_color" DestQualifiers="" UID="21-11-7" ValueRef="1-6-2" ValueType="Color" />
+        <Property Comment="dialog checkbox on image" DefaultValue="" DestAttribName="dialog_checkbox_on_image" DestQualifiers="xxhdpi" UID="21-11-8" ValueRef="1-6-1-1" ValueType="Image" />
+        <Property Comment="dialog checkbox off image" DefaultValue="" DestAttribName="dialog_checkbox_off_image" DestQualifiers="xxhdpi" UID="21-11-9" ValueRef="1-6-2-1" ValueType="Image" />
+        <Property Comment="date_picker_date_area_color" DefaultValue="#0d000000" DestAttribName="date_picker_date_area_color" DestQualifiers="" UID="21-11-17" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="date_picker_active_date_title_text_color" DefaultValue="#ff252525" DestAttribName="date_picker_active_date_title_text_color" DestQualifiers="" UID="21-11-18" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="date_picker_active_date_text_color" DefaultValue="#ff0381fe" DestAttribName="date_picker_active_date_text_color" DestQualifiers="" UID="21-11-19" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="date_picker_inactive_date_text_color" DefaultValue="#ff858585" DestAttribName="date_picker_inactive_date_text_color" DestQualifiers="" UID="21-11-20" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Reorder Icon Tint Color: Change Reorder Icon Tint Color" DefaultValue="#00000000" DestAttribName="list_album_reorder_color" DestQualifiers="" UID="21-13-2" ValueRef="1-49-8" ValueType="Color" />
+        <Property Comment="Search Recommend Header Text Color" DefaultValue="#ff909090" DestAttribName="search_recommend_header_text_color" DestQualifiers="" UID="21-13-7" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Spinner Text Color" DefaultValue="#ff252525" DestAttribName="drawer_item_text_normal" DestQualifiers="" UID="21-14-3" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="Map view GPS Icon Tint Color" DefaultValue="#ff000000" DestAttribName="map_view_gps_icon_tint_color" DestQualifiers="" UID="21-17-1" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Sync Icon Tinto Color" DefaultValue="#ff000000" DestAttribName="sync_icon_tint_color" DestQualifiers="" UID="21-19-3" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Open source license title text color" DefaultValue="#ff000000" DestAttribName="open_source_license_title_text_color" DestQualifiers="" UID="21-19-4" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Open source license back icon tint color" DefaultValue="#ff000000" DestAttribName="open_source_license_back_icon_tint_color" DestQualifiers="" UID="21-19-5" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Open source license back icon image" DefaultValue="" DestAttribName="open_source_license_back_icon_image" DestQualifiers="sw360dp-xxxhdpi" UID="21-19-6" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Open source license toolbar bg color" DefaultValue="#ff000000" DestAttribName="open_source_license_toolbar_bg_color" DestQualifiers="" UID="21-19-7" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Open source license text color" DefaultValue="#ff252525" DestAttribName="open_source_license_text_color" DestQualifiers="" UID="21-19-8" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Open source license bg color" DefaultValue="#fffcfcfc" DestAttribName="open_source_license_bg_color" DestQualifiers="" UID="21-19-9" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Badge Icon Tint Color" DefaultValue="#fff56a0d" DestAttribName="count_view_bg_color" DestQualifiers="" UID="21-21-1" ValueRef="1-33-1" ValueType="Color" />
+        <Property Comment="Badge Icon Image" DefaultValue="" DestAttribName="tw_noti_badge_mtrl" DestQualifiers="xxhdpi" UID="21-21-2" ValueRef="1-33-2" ValueType="Image" />
+        <Property Comment="Badge Text Color" DefaultValue="#fffafafa" DestAttribName="header_count_text_color" DestQualifiers="" UID="21-21-3" ValueRef="1-33-3" ValueType="Color" />
+        <Property Comment="revitalized card title color" DefaultValue="#ff000000" DestAttribName="revitalized_card_title_color" DestQualifiers="" UID="21-21-9" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="revitalized card resolution text color" DefaultValue="#ff252525" DestAttribName="revitalized_card_resolution_text_color" DestQualifiers="" UID="21-21-10" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="revitalized card sub divider" DefaultValue="#ff929292" DestAttribName="revitalized_card_sub_divider" DestQualifiers="" UID="21-21-11" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="delete duplicate button bg color" DefaultValue="#ff0381fe" DestAttribName="delete_duplicate_button_bg_color" DestQualifiers="" UID="21-21-20" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="delete duplicate button text color" DefaultValue="#fffafafa" DestAttribName="delete_duplicate_button_text_color" DestQualifiers="" UID="21-21-21" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="duplicate header count text color" DefaultValue="#ff0381fe" DestAttribName="duplicate_header_count_text_color" DestQualifiers="" UID="21-21-22" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="duplicate header size text color" DefaultValue="#ff252525" DestAttribName="duplicate_header_size_text_color" DestQualifiers="" UID="21-21-23" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="duplicate divider file name text color" DefaultValue="#ff8c8c8c" DestAttribName="duplicate_divider_file_name_text_color" DestQualifiers="" UID="21-21-24" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="duplicate divider file size text color" DefaultValue="#ff252525" DestAttribName="duplicate_divider_file_size_text_color" DestQualifiers="" UID="21-21-25" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="duplicate header description text color" DefaultValue="#ff252525" DestAttribName="duplicate_header_description_text_color" DestQualifiers="" UID="21-21-26" ValueRef="1-3-3" ValueType="Color" />
+        <Property Comment="Add Icon Tint Color" DefaultValue="#ff36be1f" DestAttribName="add_icon_tint_color_new" DestQualifiers="" UID="21-22-1" ValueRef="1-17-1" ValueType="Color" />
+        <Property Comment="Add Icon Image" DefaultValue="" DestAttribName="album_choice_add_icon" DestQualifiers="xxhdpi" UID="21-22-2" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="Add Icon Circle BG Tint Color" DefaultValue="#fffafafa" DestAttribName="add_icon_circle_color" DestQualifiers="" UID="21-22-3" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="Photo ID Selected BG Color" DefaultValue="#ffed920f" DestAttribName="photo_id_selected_bg_color" DestQualifiers="" UID="21-22-4" ValueRef="1-4-1" ValueType="Color" />
+        <Property DefaultValue="#fffafafa" DestAttribName="photo_id_background_color" DestQualifiers="" UID="21-23-3-1" ValueRef="1-32-3-1" ValueType="Color" />
+        <Property Comment="Shared Album View Add Icon Image" DefaultValue="" DestAttribName="shared_album_add_icon_image" DestQualifiers="sw360dp-xxxhdpi" UID="21-54-7" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="Shared Album View Add Icon Color" DefaultValue="" DestAttribName="shared_album_add_icon_color" DestQualifiers="" UID="21-54-7-1" ValueRef="1-17-1" ValueType="Color" />
+        <Property DefaultValue="#80252525" DestAttribName="add_to_shared_album_folder_name_text_color" DestQualifiers="" UID="21-54-8" ValueRef="1-1-3" ValueType="Color" />
+        <Property DefaultValue="#80252525" DestAttribName="add_to_shared_album_group_name_text_color" DestQualifiers="" UID="21-54-9" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Shared tab Sub title grouping bg color" DefaultValue="#ff1f1f1f" DestAttribName="shared_sub_title_icon_bg_color" DestQualifiers="" UID="21-54-10" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Shared tab Sub title grouping icon color" DefaultValue="#99fafafa" DestAttribName="shared_sub_title_icon_tint_color" DestQualifiers="" UID="21-54-11" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Shared View Create button Icon Color" DefaultValue="#fffafafa" DestAttribName="shared_create_button_tint_color" DestQualifiers="" UID="21-55-4" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Shared View Create button Text Color" DefaultValue="#fffafafa" DestAttribName="shared_create_button_text_color" DestQualifiers="" UID="21-55-5" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Shared View Sub Text Color" DefaultValue="#fffafafa" DestAttribName="shared_sub_text_color" DestQualifiers="" UID="21-55-6" ValueRef="1-53-2" ValueType="Color" />
+        <Property Comment="Shared Empty View Create button Text Color" DefaultValue="#ffed920f" DestAttribName="shared_create_button_background_color" DestQualifiers="" UID="21-55-7" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Main Switch On BG Color" DefaultValue="#0d000000" DestAttribName="setting_main_switch_on_bg_color" DestQualifiers="" UID="21-62-1" ValueRef="1-40-1" ValueType="Color" />
+        <Property Comment="Main Switch Off BG Color" DefaultValue="#fffcfcfc" DestAttribName="setting_main_switch_off_bg_color" DestQualifiers="" UID="21-62-2" ValueRef="1-40-2" ValueType="Color" />
+        <Property Comment="Master Switch On Text Color" DefaultValue="#ff0072de" DestAttribName="setting_main_switch_on_text_color" DestQualifiers="" UID="21-62-3" ValueRef="1-40-3" ValueType="Color" />
+        <Property Comment="Master Switch Off Text Color" DefaultValue="#ff252525" DestAttribName="setting_main_switch_off_text_color" DestQualifiers="" UID="21-62-4" ValueRef="1-40-4" ValueType="Color" />
+        <Property Comment="Setting Show Location Info Pref Description text color" DefaultValue="#ff505050" DestAttribName="show_location_info_description_text_color" DestQualifiers="" UID="21-62-5" ValueRef="1-3-3" ValueType="Color" />
+        <Property Comment="Setting Show Location Info Pref Description link text color" DefaultValue="#ff3b3b3b" DestAttribName="four_square_link_text_color" DestQualifiers="" UID="21-62-6" ValueRef="1-3-4" ValueType="Color" />
+        <Property Comment="Settings value text color" DefaultValue="#ff0072de" DestAttribName="settings_value_text_color" DestQualifiers="" UID="21-62-7" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="About Gallery update button background color(UID-GUI guide 2.6)" DefaultValue="#ff0381fe" DestAttribName="about_page_update_button_bg_color" DestQualifiers="" UID="21-67-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="About Gallery update button text color(UID-GUI guide 2.6)" DefaultValue="#fffafafa" DestAttribName="about_page_update_button_text_color" DestQualifiers="" UID="21-67-2" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="About Gallery app version text color" DefaultValue="#ff979797" DestAttribName="about_page_version_text_color" DestQualifiers="" UID="21-67-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About Gallery update available text color" DefaultValue="#ff979797" DestAttribName="about_page_available_text_color" DestQualifiers="" UID="21-67-4" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About Gallery below button Bg color" DefaultValue="#ffebebeb" DestAttribName="about_page_below_button_color" DestQualifiers="" UID="21-67-5" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="About Gallery below button Text color" DefaultValue="#ff252525" DestAttribName="about_page_below_button_text_color" DestQualifiers="" UID="21-67-6" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="About Gallery BG color" DefaultValue="#fffcfcfc" DestAttribName="about_page_background_color" DestQualifiers="" UID="21-67-7" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="About Gallery App Info Icon color" DefaultValue="#ff010101" DestAttribName="about_page_app_info_icon_color" DestQualifiers="" UID="21-67-8" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Navigation Bar BG Color" DefaultValue="#ff000000" DestAttribName="gallery_navigation_bar_background_color" DestQualifiers="" UID="21-68-1" ValueRef="1-69-1" ValueType="Color" />
+        <Property Comment="Navigation Bar Button Color" DefaultValue="true" DestAttribName="gallery_window_light_navigation_bar" DestQualifiers="" UID="21-68-2" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Sharing Pictures Group Detail Button Color" DefaultValue="#ff252525" DestAttribName="sharing_pictures_group_detail_button_color" DestQualifiers="" UID="21-68-3" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Go to top Icon BG Color" DefaultValue="#ff343434" DestAttribName="gallery_go_to_top_icon_background_color" DestQualifiers="" UID="21-69-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Go to top Icon BG Circle Stroke Color" DefaultValue="#335e5e5e" DestAttribName="gallery_go_to_top_icon_out_circle_stroke_color" DestQualifiers="" Opacity="20" UID="21-69-2" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Go to top Icon top line Color" DefaultValue="#4daaaaaa" DestAttribName="gallery_go_to_top_icon_top_line_color" DestQualifiers="" Opacity="30" UID="21-69-3" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Go to top Icon bottom arrow Color" DefaultValue="#fffafafa" DestAttribName="gallery_go_to_top_icon_bottom_arrow_color" DestQualifiers="" UID="21-69-4" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Progressbar seekbar background color" DefaultValue="#ff252525" DestAttribName="progressbar_bg_color" DestQualifiers="" UID="21-70-1" ValueRef="1-20-2" ValueType="Color" />
+        <Property Comment="Progressbar seekbar progress color" DefaultValue="#ff252525" DestAttribName="progressbar_progress_color" DestQualifiers="" UID="21-70-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Setting update app card view bg color" DefaultValue="#ffed920f" DestAttribName="update_app_card_view_bg_color" DestQualifiers="" UID="21-71-1" ValueRef="1-48-2" ValueType="Color" />
+        <Property Comment="Setting update app card view cancel button color" DefaultValue="#fffafafa" DestAttribName="update_app_card_view_cancel_button_color" DestQualifiers="" UID="21-71-2" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="Setting update app card view text color" DefaultValue="#fffafafa" DestAttribName="update_app_card_view_text_color" DestQualifiers="" UID="21-71-3" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="gallery_splash_background" DefaultValue="#fffafafa" DestAttribName="gallery_splash_background" DestQualifiers="" UID="21-72-1" ValueRef="1-1-1-1" ValueType="Color" />
+        <Property Comment="gallery_splash_app_name_text_color" DefaultValue="#fffafafa" DestAttribName="gallery_splash_app_name_text_color" DestQualifiers="" UID="21-72-2" ValueRef="1-1-3-1" ValueType="Color" />
+        <Property Comment="splash app icon" DestAttribName="gallery_splash_ic" DestQualifiers="xxxhdpi" UID="21-72-3" ValueRef="8-4-1-7" ValueType="Image" />
+        <Property Comment="memory_pictures_background_color" DefaultValue="#fff2f2f2" DestAttribName="memory_pictures_background_color" DestQualifiers="" UID="21-73-2" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="memory_pictures_title_color" DefaultValue="#ff252525" DestAttribName="memory_pictures_title_color" DestQualifiers="" UID="21-73-5" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="memory_pictures_subtitle_color" DefaultValue="#ff909090" DestAttribName="memory_pictures_subtitle_color" DestQualifiers="" UID="21-73-6" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="memory_pictures_related_view_background_color" DefaultValue="#fffcfcfc" DestAttribName="memory_pictures_related_view_background_color" DestQualifiers="" UID="21-73-10" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="memory_pictures_related_title_color" DefaultValue="#ff252525" DestAttribName="memory_pictures_related_title_color" DestQualifiers="" UID="21-73-11" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="memory_pictures_related_subtitle_color" DefaultValue="#ff909090" DestAttribName="memory_pictures_related_subtitle_color" DestQualifiers="" UID="21-73-12" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="memories_view_item_menu_icon" DefaultValue="#ff252525" DestAttribName="memories_view_item_menu_icon" DestQualifiers="" UID="21-73-13" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="memories_title_color" DefaultValue="#ff252525" DestAttribName="memories_title_color" DestQualifiers="" UID="21-73-14" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="memories_subtitle_color" DefaultValue="#ff909090" DestAttribName="memories_subtitle_color" DestQualifiers="" UID="21-73-15" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="memory_pictures_summary_divider" DefaultValue="#ffd2d2d2" DestAttribName="memory_pictures_summary_divider" DestQualifiers="" UID="21-73-16" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="memory_pictures_status_bar_color" DefaultValue="#fff2f2f2" DestAttribName="memory_pictures_status_bar_color" DestQualifiers="" UID="21-74-1" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="memory_pictures_toolbar_bg_color" DefaultValue="#fff2f2f2" DestAttribName="memory_pictures_toolbar_bg_color" DestQualifiers="" UID="21-74-3" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="memory_pictures_navigation_bg_color" DefaultValue="#fff2f2f2" DestAttribName="memory_pictures_navigation_bg_color" DestQualifiers="" UID="21-74-4" ValueRef="1-69-1" ValueType="Color" />
+        <Property Comment="memory_pictures_bottom_navigation_view_bg_color" DefaultValue="#fff2f2f2" DestAttribName="memory_pictures_bottom_navigation_view_bg_color" DestQualifiers="" UID="21-74-8" ValueRef="1-69-1" ValueType="Color" />
+        <Property Comment="memory_pictures_option_view_bg_color" DefaultValue="#f2ffffff" DestAttribName="memory_pictures_option_view_bg_color" DestQualifiers="" Opacity="95" UID="21-74-9" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="memory_pictures_option_view_icon_color" DefaultValue="#ff252525" DestAttribName="memory_pictures_option_view_icon_color" DestQualifiers="" UID="21-74-10" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="memory_pictures_option_text_color" DefaultValue="#ff636363" DestAttribName="memory_pictures_option_text_color" DestQualifiers="" UID="21-74-11" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="story_hide_rule_add_button_background_color" DefaultValue="#0f000000" DestAttribName="story_hide_rule_add_button_background_color" DestQualifiers="" UID="21-75-1" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="story_hide_rule_add_button_text_color" DefaultValue="#ff252525" DestAttribName="story_hide_rule_add_button_text_color" DestQualifiers="" UID="21-75-2" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="permission_content_icon_color" DefaultValue="#ff505050" DestAttribName="permission_content_icon_color" DestQualifiers="" UID="21-76-1" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="permission_content_type_text_color" DefaultValue="#ff252525" DestAttribName="permission_content_type_text_color" DestQualifiers="" UID="21-76-2" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="permission_content_description_text_color" DefaultValue="#ff8c8c8c" DestAttribName="permission_content_description_text_color" DestQualifiers="" UID="21-76-3" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="permission_notice_title_text_color" DefaultValue="#ff010101" DestAttribName="permission_notice_title_text_color" DestQualifiers="" UID="21-76-4" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="permission_notice_description_text_color" DefaultValue="#ff252525" DestAttribName="permission_notice_description_text_color" DestQualifiers="" UID="21-76-5" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="drawer_background_color" DefaultValue="#fff2f2f2" DestAttribName="drawer_background_color" DestQualifiers="" UID="21-77-1" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="drawer_navigation_button_color" DefaultValue="#ff252525" DestAttribName="drawer_navigation_button_color" DestQualifiers="" UID="21-77-2" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="drawer_tab_icon_color" DefaultValue="#ff797979" DestAttribName="drawer_tab_icon_color" DestQualifiers="" UID="21-77-3" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="drawer_tab_title_text_color" DefaultValue="#ff252525" DestAttribName="drawer_tab_title_text_color" DestQualifiers="" UID="21-77-4" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="drawer_tab_settings_button_color" DefaultValue="#ff797979" DestAttribName="drawer_tab_settings_button_color" DestQualifiers="" UID="21-77-5" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="drawer_tab_count_text_color" DefaultValue="#ff909090" DestAttribName="drawer_tab_count_text_color" DestQualifiers="" UID="21-77-6" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="drawer_tab_divider_color" DefaultValue="#ff979797" DestAttribName="drawer_tab_divider_color" DestQualifiers="" UID="21-77-7" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="fast scroll default" DefaultValue="#ff343434" DestAttribName="fast_scroll_thumb_default_color" DestQualifiers="" UID="21-78-1" ValueRef="1-37-1" ValueType="Color" />
+        <Property Comment="fast scroll tap" DefaultValue="#ff343434" DestAttribName="fast_scroll_thumb_tap_color" DestQualifiers="" UID="21-78-2" ValueRef="1-37-2" ValueType="Color" />
+        <Property Comment="year tag small bg" DefaultValue="#d8343434" DestAttribName="fast_scroll_year_label_fill_color" DestQualifiers="" UID="21-78-3" ValueRef="1-60-1" ValueType="Color" />
+        <Property Comment="year tag small text color" DefaultValue="#ffdadada" DestAttribName="quick_scroll_year_view_popup_color" DestQualifiers="" UID="21-78-4" ValueRef="1-60-2" ValueType="Color" />
+        <Property Comment="year tag big bg" DefaultValue="#ff343434" DestAttribName="fast_scroll_label_fill_color" DestQualifiers="" UID="21-78-5" ValueRef="1-60-1" ValueType="Color" />
+        <Property Comment="year tag bit text color" DefaultValue="#fffafafa" DestAttribName="quick_scroll_text_color" DestQualifiers="" UID="21-78-6" ValueRef="1-60-2" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

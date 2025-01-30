@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="My_Files" TargetApi="19" TargetPackageName="com.sec.android.app.myfiles" UID="My_Files" VersionCode="7" VersionName="2.0.0">
+        <Include RefName="SESL" />
+        <Property Comment="Primary color (hidden menu)" DefaultValue="#ff0381fe" DestAttribName="color_primary,color_primary_app" DestQualifiers="sw360dp-xxxhdpi" UID="17-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="PrimaryDark color (hidden menu)" DefaultValue="#ff0072de" DestAttribName="color_primary_dark" DestQualifiers="sw360dp-xxxhdpi" UID="17-B" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Color control activated (hidden menu)" DefaultValue="#ff0072de" DestAttribName="color_control_activated" DestQualifiers="sw360dp-xxxhdpi" UID="17-D" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="actionbar_bg_color_theme" DestQualifiers="sw360dp-xxxhdpi" UID="17-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Extended Action bar BG color" DefaultValue="#fff6f6f6" DestAttribName="status_bar_bg_color_gray" DestQualifiers="sw360dp-xxxhdpi" UID="17-1-1-1" ValueRef="1-1-1-1" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#ff252525" DestAttribName="actionbar_title_text_color_theme" DestQualifiers="sw360dp-xxxhdpi" UID="17-1-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub text " DefaultValue="#ff636363" DestAttribName="actionbar_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-1-3-3" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Button/Text color" DefaultValue="#ff010101" DestAttribName="actionbar_icon_back_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-1-4" ValueRef="1-11-1" ValueType="TextColor" />
+        <Property Comment="Select all On color" DefaultValue="#ff0381fe" DestAttribName="actionbar_checkbox_on_enabled" DestQualifiers="sw360dp-xxxhdpi" UID="17-1-6" ValueRef="1-49-7" ValueType="Color" />
+        <Property Comment="Select all Off color" DefaultValue="#ff8c8c8c" DestAttribName="actionbar_checkbox_off_enabled" DestQualifiers="sw360dp-xxxhdpi" UID="17-1-7" ValueRef="1-49-8" ValueType="Color" />
+        <Property Comment="Select all On image" DefaultValue="" DestAttribName="gallery_btn_check_bg" DestQualifiers="sw360dp-xxxhdpi" ImageSize="32X32" Opacity="" UID="17-1-11" ValueRef="1-49-7-1" ValueType="Image" />
+        <Property Comment="Select all Off image" DefaultValue="" DestAttribName="gallery_btn_uncheck_bg" DestQualifiers="sw360dp-xxxhdpi" ImageSize="32X32" Opacity="" UID="17-1-12" ValueRef="1-49-8-1" ValueType="Image" />
+        <Property Comment="Select all text color" DefaultValue="#66fafafa" DestAttribName="action_bar_select_all_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-1-13" ValueRef="1-49-6" ValueType="Color" />
+        <Property Comment="Selection mode Background color" DefaultValue="#fff6f6f6" DestAttribName="light_theme_background_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-2-3" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Selected item text color" DefaultValue="#ff4a4a4a" DestAttribName="bottom_selection_item_count_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-2-4" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Account and Last sync info text color" DefaultValue="#ff454545" DestAttribName="select_all_bottom_bar_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-2-5" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Clip-board BG color" DefaultValue="#ffcfd5dd" DestAttribName="bottom_selection_layout_background" DestQualifiers="sw360dp-xxxhdpi" UID="17-2-8" ValueRef="17-A" ValueType="Color" />
+        <Property Comment="Selected item and Size information text color" DefaultValue="#ff4a4a4a" DestAttribName="bottom_selection_item_count_size_text_color_tablet" DestQualifiers="sw360dp-xxxhdpi" UID="17-2-10" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Bottom bar text color" DefaultValue="#ff252525" DestAttribName="bottom_operation_text_done_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-2-12" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Arrow icon color (Card)" DefaultValue="#ff747474" DestAttribName="sa_home_storage_file_list_header_icon_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-2" ValueRef="1-16-1" ValueType="Color" />
+        <Property Comment="Main text color" DefaultValue="#ff010101" DestAttribName="sa_sub_list_header_title_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-3" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff909090" DestAttribName="storage_analysis_duplicate_group_header_subtext_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-4" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Arrow icon color (List)" DefaultValue="#ff909090" DestAttribName="analyze_storage_category_btn_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-5" ValueRef="1-16-1" ValueType="Color" />
+        <Property Comment="Total(empty) storage color" DefaultValue="#ffe4e4e4" DestAttribName="storage_analysis_progressbar_background_color" DestQualifiers="sw360dp-xxxhdpi" Opacity="40" UID="17-3-12" ValueRef="1-22-1" ValueType="Color" />
+        <Property Comment="Usage main text color" DefaultValue="#ff010101" DestAttribName="sa_home_storage_name_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-13" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Usage sub text color" DefaultValue="#ff505050" DestAttribName="sa_home_used_space_size_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-18" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Usage detail item text color" DefaultValue="#ff252525" DestAttribName="sa_home_storage_usage_detail_name_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-19" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Usage detail item number color" DefaultValue="#ff010101" DestAttribName="sa_home_storage_usage_detail_size_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-20" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Page indicator color- Unselected page color (default opacity 유지)" DefaultValue="#ff010101" DestAttribName="sa_home_indicator_icon_color" DestQualifiers="sw360dp-xxxhdpi" Opacity="" UID="17-3-22" ValueRef="1-9-3" ValueType="Color" />
+        <Property Comment="No detected text color" DefaultValue="#ff909090" DestAttribName="storage_analysis_list_no_item_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-24" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="(In chunking) Sub header text color" DefaultValue="#ff838383" DestAttribName="storage_analysis_group_header_title_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-25" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Information icon tint color" DefaultValue="#ff010101" DestAttribName="analyze_storage_app_info_btn_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-3-26" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Tips Card background color" DefaultValue="#fffcfcfc" DestAttribName="tip_card_background" DestQualifiers="sw360dp-xxxhdpi" UID="17-4-1" ValueRef="1-48-2" ValueType="Color" />
+        <Property Comment="Text / button color" DefaultValue="#ff505050" DestAttribName="tip_card_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-4-2" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="Action button Text color" DefaultValue="#ff252525" DestAttribName="tip_card_btn_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-4-4" ValueRef="1-48-5" ValueType="Color" />
+        <Property Comment="Icon tint color" DefaultValue="#fff56a0d" DestAttribName="about_my_files_n_badge_bg_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-5-1" ValueRef="1-33-1" ValueType="TintColor" />
+        <Property Comment="Icon image (NinePatch only)" DefaultValue="" DestAttribName="tw_noti_badge_mtrl" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" UID="17-5-2" ValueRef="1-33-2" ValueType="Image" />
+        <Property Comment="Text color" DefaultValue="#fffafafa" DestAttribName="overlay_icon_tint_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-5-3" ValueRef="1-33-3" ValueType="Color" />
+        <Property Comment="Sort Header text color" DefaultValue="#ff838383" DestAttribName="sort_by_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-6-1" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="navigation_view_bg_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-7-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Home icon color" DefaultValue="#ff929292" DestAttribName="path_indicator_root_btn_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-7-2" ValueRef="1-12-3" ValueType="Color" />
+        <Property Comment="Text color" DefaultValue="#ff717171" DestAttribName="navigation_view_item_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-7-3" ValueRef="1-12-3" ValueType="Color" />
+        <Property Comment="▶ Icon color" DefaultValue="#ffb7b7b7" DestAttribName="navigation_view_subtitle_arrow_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-7-4" ValueRef="1-12-3" ValueType="Color" />
+        <Property Comment="Current folder text color" DefaultValue="#ffbd7800" DestAttribName="path_indicator_sa_btn_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-7-5" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Description text color" DefaultValue="#a3333333" DestAttribName="trash_expire_notify_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-7-6" ValueRef="1-3-3" ValueType="Color" />
+        <Property Comment="Favorite on icon tint color" DefaultValue="#ffffcc00" DestAttribName="favorite_on_icon_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-7-7" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Card BG" DefaultValue="#fffcfcfc" DestAttribName="recent_item_background_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-8-1" ValueRef="1-9-1" ValueType="Color" />
+        <Property Comment="Card BG stroke" DefaultValue="#ffcacaca" DestAttribName="recent_rounded_border_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-8-2" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Time text" DefaultValue="#ff8c8c8c" DestAttribName="recent_from_info_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-8-3" ValueRef="1-9-6" ValueType="Color" />
+        <Property Comment="Files name text color" DefaultValue="#ff8c8c8c" DestAttribName="recent_item_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-8-4" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="More button BG" DefaultValue="#0f000000" DestAttribName="recent_more_icon_background_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-8-5" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="More button icon" DefaultValue="#ff252525" DestAttribName="recent_more_icon_dot_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-8-6" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="More text" DefaultValue="#ff252525" DestAttribName="recent_more_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-8-7" ValueRef="1-9-6" ValueType="Color" />
+        <Property Comment="Main text color" DefaultValue="#ff010101" DestAttribName="basic_list_item_text1" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Sub text color" DefaultValue="#ff8c8c8c" DestAttribName="basic_list_item_text2" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-2" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Sub header text color" DefaultValue="#ff8c8c8c" DestAttribName="basic_subtitle_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-3" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="List divider color" DefaultValue="#14000000" DestAttribName="basic_divider_line_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-5" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Sub header expandable icon tint color" DefaultValue="#ff838383" DestAttribName="search_group_indicator_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-8" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Input primary color" DefaultValue="#ff0072de" DestAttribName="search_result_text_color_activated" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-9" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Search clear icon tint color" DefaultValue="#ff808080" DestAttribName="search_history_recent_item_delete_btn_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-11" ValueRef="1-16-1" ValueType="TintColor" />
+        <Property Comment="Suggested file extension name" DefaultValue="#ff252525" DestAttribName="search_history_file_type_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-13" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Clear search history button text color" DefaultValue="#ff0072de" DestAttribName="clear_recent_history_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-15" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="storage_analysis_graph_info_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-16" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Setting value text color" DefaultValue="#ff0072de" DestAttribName="set_value_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-20" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Chips background color" DefaultValue="#fffcfcfc" DestAttribName="search_history_file_type_bg_color" DestQualifiers="sw360dp-xxxhdpi" Opacity="" UID="17-12-21" ValueRef="1-4-2" ValueType="Color" />
+        <Property Comment="Chips text color" DefaultValue="#ff252525" DestAttribName="search_filter_item_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-22" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Selected Chips stroke color" DefaultValue="#ff0072de" DestAttribName="search_filter_item_bg_color_selected" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-23" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Search Background color" DefaultValue="#fffcfcfc" DestAttribName="search_bg_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-24" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Back icon tint color" DefaultValue="#ff252525" DestAttribName="back_icon_tint_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-25" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Hint text color" DefaultValue="#ff7a7a7a" DestAttribName="search_hint_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-26" ValueRef="1-59-10" ValueType="Color" />
+        <Property Comment="Input text color" DefaultValue="#ff252525" DestAttribName="search_input_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-27" ValueRef="1-59-12" ValueType="Color" />
+        <Property Comment="Icon tint color" DefaultValue="#ff404040" DestAttribName="search_mic_and_clear_icon_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-28" ValueRef="1-59-11" ValueType="Color" />
+        <Property Comment="Search history text color" DefaultValue="#ff252525" DestAttribName="search_filter_selected_item_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-29" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Search history chips background color" DefaultValue="#fff2f2f2" DestAttribName="search_history_recent_item_bg_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-30" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Tablet Main text color" DefaultValue="#ff010101" DestAttribName="drawer_list_item_text1,split_list_item_text1" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-31" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Tablet Sub text color" DefaultValue="#ff8c8c8c" DestAttribName="drawer_list_item_text2,split_list_item_text2" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-32" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="list_open/shrink icon tint color" DefaultValue="#ff9c9c9c" DestAttribName="list_ic_arrow" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-33" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Drawer Icon tint color" DefaultValue="#ff252525" DestAttribName="navigation_rail_drawer_icon" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-34" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Drawer BG" DefaultValue="#ffeaeaea" DestAttribName="basic_sliding_pane_drawer_background" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-35" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Settings icon tint color" DefaultValue="#ff929292" DestAttribName="navigation_rail_settings_icon" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-36" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="drawer_background_color_for_theme" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-37" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="More icon tint color" DefaultValue="#ff010101" DestAttribName="storage_more_option_icon_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-39" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="Title text color (Content area)" DefaultValue="#ff8c8c8c" DestAttribName="home_sub_header_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-12-40" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Images icon color" DefaultValue="#fff28072" DestAttribName="image" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-1" ValueRef="9-3-2-1" ValueType="Color" />
+        <Property Comment="Videos icon color" DefaultValue="#ffc696f2" DestAttribName="video" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-2" ValueRef="9-3-2-2" ValueType="Color" />
+        <Property Comment="Audio icon color" DefaultValue="#ff8bb0fc" DestAttribName="music" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-3" ValueRef="9-3-2-3" ValueType="Color" />
+        <Property Comment="Documents icon color" DefaultValue="#ffceaf80" DestAttribName="document" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-4" ValueRef="9-3-2-4" ValueType="Color" />
+        <Property Comment="Downloads icon color" DefaultValue="#ff5acbd0" DestAttribName="download_history" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-5" ValueRef="9-3-2-1" ValueType="Color" />
+        <Property Comment="Installation files icon color" DefaultValue="#ffa6d734" DestAttribName="installation_files" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-6" ValueRef="9-3-2-2" ValueType="Color" />
+        <Property Comment="Compressed icon color" DefaultValue="#ff92a6be" DestAttribName="compressed" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-8" ValueRef="9-3-2-3" ValueType="Color" />
+        <Property Comment="Favorites icon color" DefaultValue="#ffffcc00" DestAttribName="favorites" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-9" ValueRef="9-3-2-4" ValueType="Color" />
+        <Property Comment="Internal storage icon color" DefaultValue="#ff69a9f1" DestAttribName="device_storage" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-10" ValueRef="9-3-2-1" ValueType="Color" />
+        <Property Comment="SD card icon color" DefaultValue="#ffc1d255" DestAttribName="sd_card" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-11" ValueRef="9-3-2-2" ValueType="Color" />
+        <Property Comment="USB storage icon color " DefaultValue="#fff8a369" DestAttribName="usb_storage" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-12" ValueRef="9-3-2-3" ValueType="Color" />
+        <Property Comment="Samsung Cloud Drive icon color" DefaultValue="#ff4772e6" DestAttribName="samsung_drive" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-13" ValueRef="9-3-2-4" ValueType="Color" />
+        <Property Comment="Network storage icon color" DefaultValue="#ffe87092" DestAttribName="network_storage" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-16" ValueRef="9-3-2-1" ValueType="Color" />
+        <Property Comment="Folder icon color" DefaultValue="#ff92a6be" DestAttribName="recent" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-17" ValueRef="9-3-2-4" ValueType="Color" />
+        <Property Comment="Analyze storage icon color" DefaultValue="#ffbd7800" DestAttribName="analyze_storage" DestQualifiers="sw360dp-xxxhdpi" UID="17-14-18" ValueRef="9-3-2-1" ValueType="Color" />
+        <Property Comment="On color" DefaultValue="#ff0381fe" DestAttribName="list_item_checkbox_on_enabled" DestQualifiers="sw360dp-xxxhdpi" UID="17-15-1" ValueRef="1-6-1" ValueType="Color" />
+        <Property Comment="Off color" DefaultValue="#ff8c8c8c" DestAttribName="list_item_checkbox_off_enabled" DestQualifiers="sw360dp-xxxhdpi" UID="17-15-2" ValueRef="1-6-2" ValueType="Color" />
+        <Property Comment="Sub header text color" DefaultValue="#ff252525" DestAttribName="storage_analysis_list_sub_header_title_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-16-1" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff4d4d4d" DestAttribName="basic_dialog_body_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-17-4" ValueRef="1-9-9" ValueType="Color" />
+        <Property Comment="Title text color" DefaultValue="#ff010101" DestAttribName="dialog_title_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-17-6" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Body text color" DefaultValue="#ff252525" DestAttribName="dialog_body_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-17-7" ValueRef="1-9-3" ValueType="Color" />
+        <Property Comment="Description text color" DefaultValue="#ff4d4d4d" DestAttribName="home_storage_analysis_info_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-18-1" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Button text color" DefaultValue="#ff010101" DestAttribName="contained_button_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-18-2" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Button bg color" DefaultValue="#0f000000" DestAttribName="contained_button_bg_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-18-3" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Icon tint color " DefaultValue="#fffafafa" DestAttribName="icon_tint_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-19-1" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Main title text " DefaultValue="#ff4d4d4d" DestAttribName="no_item_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-20-1" ValueRef="1-53-1" ValueType="Color" />
+        <Property Comment="Sub description text" DefaultValue="#ff8c8c8c" DestAttribName="no_item_sub_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-20-2" ValueRef="1-53-2" ValueType="Color" />
+        <Property Comment="Update button bg color" DefaultValue="#ff0381fe" DestAttribName="about_btn_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-21-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="about_page_update_btn_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-21-3" ValueRef="1-8-3" ValueType="Color" />
+        <Property Comment="Button bg color" DefaultValue="#ffebebeb" DestAttribName="about_page_open_source_license_button" DestQualifiers="sw360dp-xxxhdpi" UID="17-21-4" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Button text color" DefaultValue="#ff010101" DestAttribName="about_page_open_license_button_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-21-5" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="BG color" DefaultValue="#fffcfcfc" DestAttribName="about_page_background_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-21-6" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Main text color" DefaultValue="#ff010101" DestAttribName="about_page_app_name_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-21-7" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Sub text color" DefaultValue="#ff8c8c8c" DestAttribName="about_page_app_version_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-21-8" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="list_background_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-22-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff8c8c8c" DestAttribName="details_dialog_list_item_text2" DestQualifiers="sw360dp-xxxhdpi" UID="17-22-2" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Background color" DefaultValue="#fff6f6f6" DestAttribName="splash_screen_bg" DestQualifiers="sw360dp-xxxhdpi" UID="17-23-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Title text color" DefaultValue="#ff252525" DestAttribName="splash_text_color" DestQualifiers="sw360dp-xxxhdpi" UID="17-23-2" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="App icon" DefaultValue="" DestAttribName="ic_launcher_myfiles" DestQualifiers="sw360dp-xxxhdpi" ImageSize="60X60" UID="17-23-3" ValueRef="8-4-1-14" ValueType="Image" />
+        <Property Comment="Selected text color" DefaultValue="#ff252525" DestAttribName="storage_indicator_item_text_selected" DestQualifiers="sw360dp-xxxhdpi" UID="17-24-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Unselected text color" DefaultValue="#ff858585" DestAttribName="storage_indicator_item_text" DestQualifiers="sw360dp-xxxhdpi" UID="17-24-2" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Selected mark tint color" DefaultValue="#cd717171" DestAttribName="storage_indicator_item_stroke" DestQualifiers="sw360dp-xxxhdpi" UID="17-24-3" ValueRef="1-13-3" ValueType="Color" />
+        <Property Comment="Selected image (ninepatch only)" DefaultValue="" DestAttribName="storage_indicator_item_selected" DestQualifiers="sw360dp-xxxhdpi" UID="17-24-4" ValueRef="1-13-5" ValueType="Image" />
+    </AppMetaData>
+</ThemeMetaData>

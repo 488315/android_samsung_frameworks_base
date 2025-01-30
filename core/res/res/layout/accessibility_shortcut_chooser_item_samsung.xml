@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="start|center" android:paddingTop="14.0dip" android:paddingBottom="14.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="6.0dip" android:paddingEnd="6.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/accessibility_shortcut_target_icon" android:layout_width="36.0dip" android:layout_height="36.0dip" android:scaleType="fitCenter" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textAppearance="?textAppearanceListItemSmall" android:textColor="?textColorAlertDialogListItem" android:ellipsize="marquee" android:id="@id/accessibility_shortcut_target_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="5" android:layout_weight="1.0" android:fontFamily="sec" android:layout_marginStart="16.0dip" android:textFontWeight="400" />
+        <TextView android:textAppearance="?textAppearanceSmall" android:textColor="?textColorSecondary" android:id="@id/accessibility_shortcut_target_status" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" android:fontFamily="sec" android:layout_marginStart="16.0dip" android:textFontWeight="400" />
+    </LinearLayout>
+</LinearLayout>

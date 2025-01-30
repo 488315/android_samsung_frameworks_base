@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">သင့္တက္ဘလက္တြင္ ထည့္သြင္းထားသည့္ အက္ပ္မ်ားပါရွိေသာ SD ကတ္ကို ဖယ္ရွားခဲ့ေသာေၾကာင့္ သင့္တက္ဘလက္က တည္ၿငိမ္မႈမရွိပါ။ သင့္တက္ဘလက္ ပုံမွန္ျပန္ျဖစ္ရန္အတြက္ %d စကၠန႔္အၾကာမွာ ျပန္စတင္ပါမည္။ တက္ဘလက္ ျပန္မစတင္မီ သိမ္းဆည္းမထားသည့္ ေဒတာမွန္သမွ်ကို သိမ္းဆည္းပါ။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">ဤတက္ဘလက္သည္ %d စကၠန္႔အၾကာမွာ ျပန္စတင္ပါမည</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">အက္ပ္ %d ခုသည္ ဖုန္းကို အပူလြန္ကဲမႈ ျဖစ္ေစေသာေၾကာင့္ ၎တို႔အား အလိုအေလ်ာက္ ပိတ္ခဲ့သည္။ ၎တို႔ကို တက္ဘလက္မ်ား ေအးလာသည့္အခါ ျပန္ဖြင့္ႏုိင္ပါသည္။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">အက္ပ္ %d ခုသည္ တက္ဘလက္ကို အပူလြန္ကဲမႈ ျဖစ္ေစေသာေၾကာင့္ ၎တို႔အား အလိုအေလ်ာက္ ပိတ္ခဲ့သည္။ ၎တို႔ကို တက္ဘလက္မ်ား ေအးလာသည့္အခါ ျပန္ဖြင့္ႏုိင္ပါသည္။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">အက္ပ္ %d ခု ပိတ္ထားသည္</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">ဖန္သားျပင္ေပၚ၌ အက္ပ္ %d ခုထက္ ပိုၿပီး တစ္ၿပိဳင္နက္ ျပသ၍မရပါ။ အေဟာင္းဆုံးအက္ပ္ကို ခ်ံဳ႕ထားသည္။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">သင္ သတ္မွတ္လိုေသာ အက္ပ္ကိုဖြင့္ပါ၊ ထို႔ေနာက္ အက္ပ္ကီးကို %d စကၠန႔္ၾကာ ဖိ၍ႏွိပ္ပါ။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s က ဖုန္းကို အပူလြန္ကဲမႈ ျဖစ္ေစပါသည္။ ၎ကို %2$d စကၠန္႔အၾကာတြင္ အလိုအေလ်ာက္ ပိတ္ပါမည္။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s က တက္ဘလက္ကို အပူလြန္ကဲမႈ ျဖစ္ေစပါသည္။ ၎ကို %2$d စကၠန္႔အၾကာတြင္ အလိုအေလ်ာက္ ပိတ္ပါမည္။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Samsung Cloud တြင္ %d ရက္ၾကာအထိ ေဒတာမ်ားကို အကန္႔အသတ္မရွိ အရံသိမ္းပါ (သို႔) သင္အရံသိမ္းထားေသာ ေဒတာမ်ားကို နဂိုအတိုင္း ျပန္ထားပါ။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s က ဖုန္းကို အပူလြန္ကဲမႈ ျဖစ္ေစပါသည္။ ၎ကို ယခု ပိတ္ႏိုင္ပါသည္၊ (သို႔) ၎အား %2$d အၾကာမွာ အလိုအေလ်ာက္ ပိတ္ပါမည္။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s က တက္ဘလက္ကို အပူလြန္ကဲမႈ ျဖစ္ေစပါသည္။ ၎ကို ယခု ပိတ္ႏိုင္ပါသည္၊ (သို႔) ၎အား %2$d အၾကာမွာ အလိုအေလ်ာက္ ပိတ္ပါမည္။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">အရာ၀တၱဳ %d ခု</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">သင္ခ်ိတ္ဆက္လိုေသာ Wi-Fi ကြန္ရက္ကို တစ္ႀကိမ္လွ်င္ ကိရိယာ %d လံုးႏွင့္သာ ခ်ိတ္ဆက္ႏိုင္သည္။ အျခားမည္သည့္ ကိရိယာကိုမဆို ထိုကြန္ရက္မွျဖဳတ္ၿပီး ထပ္မံႀကိဳးစားၾကည့္ပါ။</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d နာရီ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d မိနစ္</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">N/A</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/sem_chooser_header_multi_select" android:background="@color/sem_resolver_bg_color" android:paddingBottom="9.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="22.0dip" android:paddingEnd="22.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textAppearance="?windowTitleStyle" android:textSize="21.0dip" android:textStyle="bold" android:textColor="@color/sem_resolver_title_text_color" android:gravity="start" android:layout_gravity="start" android:id="@id/sem_chooser_main_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4 selected" android:fontFamily="sec-roboto-light" />
+    <LinearLayout android:gravity="center_vertical" android:id="@id/sem_chooser_sub_title" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <TextView android:textAppearance="?windowTitleStyle" android:textSize="12.0dip" android:textColor="@color/sem_resolver_top_panel_text_color" android:gravity="start" android:id="@id/sem_title_content_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1.56MB" android:fontFamily="sec-roboto-light" />
+        <TextView android:textAppearance="?windowTitleStyle" android:textSize="12.0dip" android:textColor="@color/sem_resolver_top_panel_text_color" android:gravity="start" android:id="@id/sem_chooser_location_text" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="sec-roboto-light" android:paddingStart="5.0dip" />
+        <include layout="@layout/sem_chooser_title_settings_button_layout" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:tint="?textColorSecondary" android:height="12.0dip" android:width="12.0dip" android:autoMirrored="true" android:viewportWidth="36.0" android:viewportHeight="36.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <clip-path android:pathData="M7.8068,26.6894L15.5011,18.9966L19.9116,23.4324C20.1657,23.6541 20.5314,23.6682 20.7502,23.4494C20.866,23.3322 21.2768,21.5293 21.8175,18.3683L27.5325,11.4944L28.1932,12.1551C28.3994,12.3612 28.6704,12.4657 28.9415,12.4657C29.2126,12.4657 29.4836,12.3612 29.6898,12.1551C30.1034,11.7414 30.1034,11.0708 29.6898,10.6572L22.3427,3.3102C21.9291,2.8966 21.2584,2.8966 20.8448,3.3102C20.4311,3.7239 20.4311,4.3931 20.8448,4.8067L21.4476,5.411L14.6343,11.1442C12.9387,11.3405 9.6986,12.1 9.5842,12.2158C9.3654,12.4374 9.3795,12.8045 9.6026,13.0614L14.0088,17.4944L6.3102,25.1929C5.8966,25.6066 5.8966,26.2758 6.3102,26.6894C6.5164,26.8969 6.7874,27 7.0585,27C7.3296,27 7.6006,26.8969 7.8068,26.6894Z" />
+        <path android:fillColor="#ff000000" android:pathData="M0,0h36v36h-36z" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+    </group>
+</vector>

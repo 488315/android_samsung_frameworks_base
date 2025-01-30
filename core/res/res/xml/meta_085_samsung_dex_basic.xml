@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Samsung DeX Basic" TargetApi="28" TargetPackageName="com.sec.android.desktopmode.uiservice" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="primary_color" DefaultValue="#ffff6c39" DestAttribName="opentheme_dex_primary_color" UID="85-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="primary_dark_color" DefaultValue="#ffff6c39" DestAttribName="opentheme_dex_primary_dark_color" UID="85-B" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="color_control_activated" DefaultValue="#ccff6c39" DestAttribName="opentheme_dex_color_control_activated" UID="85-D" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="quick_button_divider_color" DefaultValue="#ffe6e6e6" DestAttribName="opentheme_quick_button_divider_color" UID="85-1-1" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="quick_button_detail_background_color" DefaultValue="#fff2f2f2" DestAttribName="opentheme_quick_button_detail_background_color" UID="85-2-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="quick_button_detail_contents_area_background_color" DefaultValue="#fffcfcfc" DestAttribName="opentheme_quick_button_detail_contents_area_background_color" UID="85-2-2" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="quick_button_detail_description_text_color" DefaultValue="#ff6b6f72" DestAttribName="opentheme_quick_button_detail_description_text_color" UID="85-2-3" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="quick_button_detail_web_link_text_color" DefaultValue="#ff0072de" DestAttribName="opentheme_quick_button_detail_web_link_text_color" UID="85-2-4" ValueRef="1-3-4-D" ValueType="TextColor" />
+        <Property Comment="quick_button_detail_wireless_connect_list_main_text_color" DefaultValue="#ff252525" DestAttribName="opentheme_quick_button_detail_wireless_connect_list_main_text_color" UID="85-3-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="quick_button_detail_wireless_connect_list_description_text_color" DefaultValue="#ff505050" DestAttribName="opentheme_quick_button_detail_wireless_connect_list_description_text_color" UID="85-3-2" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="quick_button_detail_wireless_connect_list_device_icon_tint_color" DefaultValue="#ff252525" DestAttribName="opentheme_quick_button_detail_wireless_connect_list_device_icon_tint_color" UID="85-3-4" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="quick_button_detail_wireless_connect_list_device_point_text_color" DefaultValue="#ff0072de" DestAttribName="opentheme_quick_button_detail_wireless_connect_list_device_point_text_color" UID="85-3-5" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="quick_button_detail_wireless_connect_list_device_main_text_color" DefaultValue="#ff505050" DestAttribName="opentheme_quick_button_detail_wireless_connect_list_device_main_text_color" UID="85-3-6" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="quick_button_detail_wireless_connect_list_device_sub_text_color" DefaultValue="#ff909090" DestAttribName="opentheme_quick_button_detail_wireless_connect_list_device_sub_text_color" UID="85-3-7" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="quick_button_detail_wireless_connect_list_no_item_main_text_color" DefaultValue="#ad252525" DestAttribName="opentheme_quick_button_detail_wireless_connect_list_no_item_main_text_color" UID="85-4-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="quick_button_detail_wireless_connect_list_no_item_description_text_color" DefaultValue="#ad252525" DestAttribName="opentheme_quick_button_detail_wireless_connect_list_no_item_description_text_color" UID="85-4-2" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="quick_button_select_device_background_color" DefaultValue="#fffcfcfc" DestAttribName="opentheme_quick_button_select_device_background_color" UID="85-5-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="quick_button_select_device_main_text_color" DefaultValue="#ff333333" DestAttribName="opentheme_quick_button_select_device_main_text_color" UID="85-5-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="welcome_page_title_text_color" DefaultValue="#ffff6c39" DestAttribName="opentheme_welcome_page_title_text_color" UID="85-6-1" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="welcome_page_description_text_color" DefaultValue="#ff505050" DestAttribName="opentheme_welcome_page_description_text_color" UID="85-6-2" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="welcome_page_divider_color" DefaultValue="#42252525" DestAttribName="opentheme_welcome_page_divider_color" UID="85-6-3" ValueRef="1-19-4" ValueType="Color" />
+        <Property Comment="welcome_page_button_bg_color" DefaultValue="#fffafafa" DestAttribName="opentheme_welcome_page_button_bg_color" UID="85-6-4" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="welcome_page_button_text_color" DefaultValue="#fffafafa" DestAttribName="opentheme_welcome_page_button_text_color" UID="85-6-5" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="welcome_page_background_color" DefaultValue="#fffcfcfc" DestAttribName="opentheme_welcome_page_background_color" UID="85-6-6" ValueRef="1-18-1" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

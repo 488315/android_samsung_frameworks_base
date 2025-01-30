@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Voice call_KR" TargetApi="21" TargetPackageName="com.samsung.android.app.telephonyui" UID="Voice call_KR" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Action bar Background color" DefaultValue="#fff2f2f2" DestAttribName="ot_actionbar_bgcolor" DestQualifiers="" UID="143-3-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Action bar Background image" DefaultValue="" DestAttribName="ot_actionbar_bgimage" DestQualifiers="" UID="143-3-2" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="Action bar Title text color" DefaultValue="#ff252525" DestAttribName="ot_actionbar_title_text_color" DestQualifiers="" UID="143-3-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Action bar Back icon tint color" DefaultValue="" DestAttribName="ot_actionbar_back_icon_tint_color" DestQualifiers="" UID="143-3-4" ValueRef="1-11-3" ValueType="TintColor" />
+        <Property Comment="Action bar Back icon image" DefaultValue="" DestAttribName="ot_actionbar_back_icon_image" DestQualifiers="" UID="143-3-5" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Action bar 560dpi Background color" DefaultValue="" DestAttribName="ot_actionbar_560dpi_bgcolor" DestQualifiers="" UID="143-3-2-2" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Action bar 560dpi Background color horizeontal" DefaultValue="" DestAttribName="ot_actionbar_560dpi_bgcolor_horizontal" DestQualifiers="" UID="143-3-2-3" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Search bar Background color" DefaultValue="#ff15b76d" DestAttribName="ot_searchbar_bgcolor" DestQualifiers="" UID="143-4-1" ValueRef="1-59-1" ValueType="BgColor" />
+        <Property Comment="Search bar Cursor color" DefaultValue="#ff15b76d" DestAttribName="ot_searchbar_cursorcolor" DestQualifiers="" UID="143-4-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Search bar Icon tint color" DefaultValue="#ff15b76d" DestAttribName="ot_searchbar_icon_tintcolor" DestQualifiers="" UID="143-4-4" ValueRef="1-11-1" ValueType="TintColor" />
+        <Property Comment="Search bar 560dpi Background color" DefaultValue="#ff15b76d" DestAttribName="ot_searchbar_560dpi_bgcolor" DestQualifiers="" UID="143-4-2-2" ValueRef="1-59-1" ValueType="BgColor" />
+        <Property Comment="List Button background tint color" DefaultValue="" DestAttribName="ot_list_button_bg_tint_color" DestQualifiers="" UID="143-5-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="List Button text color" DefaultValue="" DestAttribName="ot_list_button_textcolor" DestQualifiers="" UID="143-5-2" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="List Main text color" DefaultValue="" DestAttribName="ot_list_main_textcolor" DestQualifiers="" UID="143-5-3" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="List Sub text color" DefaultValue="" DestAttribName="ot_list_sub_textcolor" DestQualifiers="" UID="143-5-4" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="List Background color" DefaultValue="" DestAttribName="ot_list_bgcolor" DestQualifiers="" UID="143-5-5" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="List Divider color" DefaultValue="" DestAttribName="ot_list_divider_color" DestQualifiers="" UID="143-5-7" ValueRef="1-2" ValueType="BgColor" />
+        <Property Comment="List Caller ID masking code template 1" DefaultValue="" DestAttribName="ot_list_caller_id_masking_code_tmpl_1" DestQualifiers="" UID="143-5-8" ValueRef="1-32-1" ValueType="Integer" />
+        <Property Comment="List Caller ID default image 1" DefaultValue="" DestAttribName="ot_list_caller_id_default_image_1" UID="143-5-9" ValueRef="1-32-2-1" ValueType="Image" />
+        <Property Comment="List Caller ID default image 2" DefaultValue="" DestAttribName="ot_list_caller_id_default_image_2" UID="143-5-9-2" ValueRef="1-32-2-2" ValueType="Image" />
+        <Property Comment="List Caller ID default image 3" DefaultValue="" DestAttribName="ot_list_caller_id_default_image_3" UID="143-5-9-3" ValueRef="1-32-2-3" ValueType="Image" />
+        <Property Comment="List Caller ID default image 4" DefaultValue="" DestAttribName="ot_list_caller_id_default_image_4" UID="143-5-9-4" ValueRef="1-32-2-4" ValueType="Image" />
+        <Property Comment="List Caller ID bg tint color 1" DefaultValue="" DestAttribName="ot_list_caller_id_bg_tint_color_1" UID="143-5-10" ValueRef="1-32-3-1" ValueType="BgColor" />
+        <Property Comment="List Caller ID bg tint color 2" DefaultValue="" DestAttribName="ot_list_caller_id_bg_tint_color_2" UID="143-5-10-2" ValueRef="1-32-3-2" ValueType="BgColor" />
+        <Property Comment="List Caller ID bg tint color 3" DefaultValue="" DestAttribName="ot_list_caller_id_bg_tint_color_3" UID="143-5-10-3" ValueRef="1-32-3-3" ValueType="BgColor" />
+        <Property Comment="List Caller ID bg tint color 4" DefaultValue="" DestAttribName="ot_list_caller_id_bg_tint_color_4" UID="143-5-10-4" ValueRef="1-32-3-4" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">وضعیت تبلت شما ناپایدار است چون کارت حافظه‌ای که برنامه‌ها روی آن نصب بودند، خارج شده است. تبلت برای بازگشت به حالت عادی، %d ثانیه دیگر راه‌اندازی مجدد می‌شود. قبل از آنکه تبلت راه‌اندازی مجدد شود، اطلاعات ذخیره نشده خود را ذخیره کنید.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">وضعیت تبلت شما ناپایدار است چون کارت حافظه‌ای که برنامه‌ها روی آن نصب بودند، خارج شده است. تبلت برای بازگشت به حالت عادی، %d ثانیه دیگر راه‌اندازی مجدد می‌شود. قبل از آنکه تبلت راه‌اندازی مجدد شود، اطلاعات ذخیره نشده خود را ذخیره کنید.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">تبلت %d ثانیه دیگر خاموش و روشن می‌شود</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">تبلت %d ثانیه دیگر خاموش و روشن می‌شود</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d برنامه به طور خودکار بسته شد چون باعث داغ شدن تلفنتان شده بودند. می‌توانید بعداً، بعد از خنک شدن تلفن، آنها را دوباره باز کنید.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d برنامه به طور خودکار بسته شد چون باعث داغ شدن تلفنتان شده بود. می‌توانید بعداً، بعد از خنک شدن تلفن، آن را دوباره باز کنید.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d برنامه بسته شد چون باعث داغ شدن تبلتتان شده بودند. می‌توانید بعداً، بعد از خنک شدن تبلت، آنها را دوباره باز کنید.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d برنامه به طور خودکار بسته شد چون باعث داغ شدن تبلتتان شده بود. می‌توانید بعداً، بعد از خنک شدن تبلت، آن را دوباره باز کنید.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d برنامه بسته شد</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d برنامه بسته شد</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">نمایش بیشتر از %d برنامه در صفحه به طور همزمان ممکن نیست. قدیمی‌ترین برنامه کوچک می‌شود.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">نمایش بیشتر از %d برنامه در صفحه به طور همزمان ممکن نیست. قدیمی‌ترین برنامه کوچک می‌شود.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">برنامه‌ای را که می‌خواهید اختصاص دهید باز کنید، سپس کلید برنامه را به مدت %d‏ ثانیه فشار دهید و نگهدارید.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">برنامه‌ای را که می‌خواهید اختصاص دهید باز کنید، سپس کلید برنامه را به مدت %d‏ ثانیه فشار دهید و نگهدارید.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s باعث داغ شدن بیش از حد گوشی شما می‌شود. ظرف %2$d‎ ثانیه به‌طور خودکار بسته می‌شود.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s باعث داغ شدن بیش از حد گوشی شما می‌شود. ظرف %2$d‎ ثانیه به‌طور خودکار بسته می‌شود.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s باعث داغ شدن بیش از حد تبلت شما می‌شود. ظرف %2$d‎ ثانیه به‌طور خودکار بسته می‌شود.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s باعث داغ شدن بیش از حد تبلت شما می‌شود. ظرف %2$d‎ ثانیه به‌طور خودکار بسته می‌شود.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">از اطلاعات نامحدود حداکثر تا %d روز در Samsung Cloud پشتیبان‌گیری کنید یا اطلاعاتی را که پشتیبان‌گیری کرده‌اید بازیابی کنید.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">از اطلاعات نامحدود حداکثر تا %d روز در Samsung Cloud پشتیبان‌گیری کنید یا اطلاعاتی را که پشتیبان‌گیری کرده‌اید بازیابی کنید.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s باعث داغ شدن تلفن شما شده است. می‌توانید هم‌اکنون آن را ببندید یا خودش %2$d ثانیه دیگر به طور خودکار بسته خواهد شد.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s باعث داغ شدن تلفن شما شده است. می‌توانید هم‌اکنون آن را ببندید یا خودش %2$d ثانیه دیگر به طور خودکار بسته خواهد شد.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s باعث داغ شدن تبلت شما شده است. می‌توانید هم‌اکنون آن را ببندید یا خودش %2$d ثانیه دیگر به طور خودکار بسته خواهد شد.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s باعث داغ شدن تبلت شما شده است. می‌توانید هم‌اکنون آن را ببندید یا خودش %2$d ثانیه دیگر به طور خودکار بسته خواهد شد.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">%d بار دیگر می‌توانید تلاش کنید و پس از آن سیم‌کارت قفل می‌شود.</item>
+        <item quantity="one">%d بار دیگر می‌توانید تلاش کنید و پس از آن سیم‌کارت قفل می‌شود.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d مورد</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d مورد</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">شبکه Wi-Fi که می‌خواهید به آن متصل شوید فقط می‌تواند همزمان به %d دستگاه متصل شود. پس از قطع اتصال همه دستگاه‌های دیگر از آن شبکه، دوباره امتحان کنید.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">شبکه Wi-Fi که می‌خواهید به آن متصل شوید فقط می‌تواند همزمان به %d دستگاه متصل شود. پس از قطع اتصال همه دستگاه‌های دیگر از آن شبکه، دوباره امتحان کنید.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ساعت</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ساعت</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d دقیقه</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d دقیقه</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

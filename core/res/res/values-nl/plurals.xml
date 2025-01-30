@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Uw tablet is onstabiel omdat een SD-kaart waarop apps zijn geïnstalleerd, is verwijderd. Uw tablet wordt over %d seconden opnieuw gestart om weer normaal te werken. Sla niet-opgeslagen gegevens op voordat de tablet opnieuw wordt gestart.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Uw tablet is onstabiel omdat een SD-kaart waarop apps zijn geïnstalleerd, is verwijderd. Uw tablet wordt over %d seconde opnieuw gestart om weer normaal te werken. Sla niet-opgeslagen gegevens op voordat de tablet opnieuw wordt gestart.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Uw tablet start opnieuw over %d seconden</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Uw tablet start opnieuw over %d seconde</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d apps zijn automatisch gesloten omdat uw telefoon hierdoor oververhit raakte. U kunt de apps later opnieuw openen nadat uw telefoon is afgekoeld.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app is automatisch gesloten omdat uw telefoon hierdoor oververhit raakte. U kunt de app later opnieuw openen nadat uw telefoon is afgekoeld.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d apps zijn automatisch gesloten omdat uw tablet hierdoor oververhit raakte. U kunt de apps later opnieuw openen nadat uw tablet is afgekoeld.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app is automatisch gesloten omdat uw tablet hierdoor oververhit raakte. U kunt de app later opnieuw openen nadat uw tablet is afgekoeld.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d apps gesloten</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app gesloten</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Er kunnen niet meer dan %d apps tegelijk op het scherm worden weergegeven. De oudste apps worden geminimaliseerd.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Er kan niet meer dan %d app tegelijk op het scherm worden weergegeven. De oudste apps worden geminimaliseerd.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Open de app die u wilt toewijzen en houd de app-toets %d seconden vast.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Open de app die u wilt toewijzen en houd de app-toets %d seconde vast.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s is er de oorzaak van dat uw telefoon oververhit raakt. De app wordt automatisch gesloten over %2$d seconden.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s is er de oorzaak van dat uw telefoon oververhit raakt. De app wordt automatisch gesloten over %2$d seconde.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s is er de oorzaak van dat uw tablet oververhit raakt. De app wordt automatisch gesloten over %2$d seconden.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s is er de oorzaak van dat uw tablet oververhit raakt. De app wordt automatisch gesloten over %2$d seconde.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Maak een back-up van een onbeperkte hoeveelheid gegevens naar Samsung Cloud voor maximaal %d dagen of herstel gegevens uit een eerdere back-up.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Maak een back-up van een onbeperkte hoeveelheid gegevens naar Samsung Cloud voor maximaal %d dag of herstel gegevens uit een eerdere back-up.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s is er de oorzaak van dat uw telefoon oververhit raakt. Sluit de app nu of deze wordt automatisch gesloten over %2$d seconden.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s is er de oorzaak van dat uw telefoon oververhit raakt. Sluit de app nu of deze wordt automatisch gesloten over %2$d seconde.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s is er de oorzaak van dat uw tablet oververhit raakt. Sluit de app nu of deze wordt automatisch gesloten over %2$d seconden.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s is er de oorzaak van dat uw tablet oververhit raakt. Sluit de app nu of deze wordt automatisch gesloten over %2$d seconde.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Je hebt nog %d pogingen over voordat de simkaart wordt vergrendeld.</item>
+        <item quantity="one">Je hebt nog %d poging over voordat de simkaart wordt vergrendeld.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d items</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d item</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Het Wi-Fi-netwerk waarmee u verbinding wilt maken, kan met slechts %d apparaten tegelijk zijn verbonden. Verbreek de verbinding tussen andere apparaten en dat netwerk, en probeer het opnieuw.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Het Wi-Fi-netwerk waarmee u verbinding wilt maken, kan met slechts %d apparaat tegelijk zijn verbonden. Verbreek de verbinding tussen andere apparaten en dat netwerk, en probeer het opnieuw.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d uur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d uur</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minuten</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuut</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

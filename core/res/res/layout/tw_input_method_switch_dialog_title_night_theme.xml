@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:layout_marginBottom="8.0dip" android:layout_marginStart="@dimen/tw_inputmethod_switch_dialog_title_margin" android:layout_marginEnd="10.0dip">
+        <com.android.internal.widget.DialogTitle android:ellipsize="end" android:id="@id/alertTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/select_input_method" android:singleLine="true" style="@style/DialogWindowTitle.DeviceDefault" />
+    </LinearLayout>
+</LinearLayout>

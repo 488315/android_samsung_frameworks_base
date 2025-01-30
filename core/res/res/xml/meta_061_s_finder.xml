@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="5.1">
+    <AppMetaData Name="SFinder" TargetApi="21" TargetPackageName="com.samsung.android.app.galaxyfinder" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Search bar background color" DestAttribName="searchview_background_color" DestQualifiers="" UID="61-1-1" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="Search bar hint text color" DefaultValue="#e6fafafa" DestAttribName="searchview_hint_text_color" DestQualifiers="" UID="61-1-2" ValueRef="1-59-4" ValueType="Color" />
+        <Property Comment="Search bar icon tint color" DefaultValue="#fffafafa" DestAttribName="searchview_common_tint_color" DestQualifiers="" UID="61-1-3" ValueRef="1-59-8" ValueType="TintColor" />
+        <Property Comment="Suggested settings background color" DefaultValue="#61fcfcfc" DestAttribName="suggestion_settings_card_item_bg_color" DestQualifiers="" UID="61-1-4" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Suggested settings hash icon tint color" DefaultValue="#ff252525" DestAttribName="suggestion_settings_card_item_icon_color" DestQualifiers="" UID="61-1-5" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Suggested settings text tint color" DefaultValue="#ff252525" DestAttribName="suggestion_settings_card_item_text_color" DestQualifiers="" UID="61-1-6" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="History item tint color" DefaultValue="#ff252525" DestAttribName="history_item_icon_color" DestQualifiers="" UID="61-1-7" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="text color" DefaultValue="#ff252525" DestAttribName="history_item_text_color" DestQualifiers="" UID="61-1-8" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="History item delete icon tint color" DefaultValue="#ff404040" DestAttribName="history_item_delete_color" DestQualifiers="" UID="61-1-9" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Keyword suggestion item tint color" DefaultValue="#ff252525" DestAttribName="prediction_word_icon_color" DestQualifiers="" UID="61-2-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Primary text color dark" DefaultValue="#ff359bff" DestAttribName="color_primary_dark" DestQualifiers="" UID="61-3-1" ValueRef="1-59-9" ValueType="Color" />
+        <Property Comment="Apps label color" DefaultValue="#ff252525" DestAttribName="suggestion_item_name_color" DestQualifiers="" UID="61-3-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Keyword suggestion text color" DefaultValue="#ff252525" DestAttribName="prediction_word_text_color" DestQualifiers="" UID="61-3-3" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Input text color" DefaultValue="#fffafafa" DestAttribName="searchview_text_color" DestQualifiers="" UID="61-3-4" ValueRef="1-59-3" ValueType="Color" />
+        <Property Comment="Expand button" DefaultValue="#ff252525" DestAttribName="result_view_footer_show_more_button_text_color" DestQualifiers="" Opacity="80" UID="61-3-5" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="CTA button background color" DefaultValue="#b30381fe" DestAttribName="prediction_see_more_results_button_background_color" DestQualifiers="" Opacity="90" UID="61-3-6" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="CTA button text" DefaultValue="#fffcfcfc" DestAttribName="prediction_see_more_results_button_text_color" DestQualifiers="" UID="61-3-7" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Contents suggestion title text color" DefaultValue="#e6252525" DestAttribName="prediction_app_suggestion_header_text_color" DestQualifiers="" Opacity="80" UID="61-3-8" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="CTA button loading progress color 1" DefaultValue="#ff06b485" DestAttribName="progress_color1" DestQualifiers="" UID="61-3-9" ValueRef="1-59-3" ValueType="Color" />
+        <Property Comment="CTA button loading progress color 2" DefaultValue="#ff0381fe" DestAttribName="progress_color2" DestQualifiers="" Opacity="80" UID="61-3-10" ValueRef="1-59-3" ValueType="Color" />
+        <Property Comment="Finder tips text color" DefaultValue="#ff252525" DestAttribName="permission_normal_card_view_body_text_color" DestQualifiers="" UID="61-4-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Finder tips text button color" DefaultValue="#ff010101" DestAttribName="permission_normal_card_view_close_text_color" DestQualifiers="" UID="61-4-2" ValueRef="1-9-15" ValueType="TextColor" />
+        <Property Comment="Finder tips background color" DefaultValue="#8cfafafa" DestAttribName="background_oem_card_color" DestQualifiers="" UID="61-4-3" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Input primary text color" DefaultValue="#ff0381fe" DestAttribName="searchview_result_text_color" DestQualifiers="" UID="61-5-1" ValueRef="1-59-9" ValueType="TextColor" />
+        <Property Comment="Search result app label" DefaultValue="#ff252525" DestAttribName="result_view_app_name_color" DestQualifiers="" UID="61-6-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Search result total count text color" DefaultValue="#8c252525" DestAttribName="result_view_app_total_count_color" DestQualifiers="" Opacity="50" UID="61-6-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Result title text color" DefaultValue="#ff252525" DestAttribName="result_view_primary_text_color" DestQualifiers="" UID="61-6-3" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Result body text color" DefaultValue="#ff646464" DestAttribName="result_view_secondary_text_color" DestQualifiers="" UID="61-6-4" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Primary text color" DefaultValue="#ff0381fe" DestAttribName="color_primary" DestQualifiers="" UID="61-6-5" ValueRef="1-59-9" ValueType="TextColor" />
+        <Property Comment="Result card text color" DefaultValue="#ff747474" DestAttribName="result_view_sub_header_color" DestQualifiers="" UID="61-6-6" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Result card background color" DefaultValue="#b0fafafa" DestAttribName="background_chunk_shape_color" DestQualifiers="" Opacity="69" UID="61-6-7" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Divider color" DefaultValue="#ff252525" DestAttribName="common_card_divider_color" DestQualifiers="" UID="61-6-8" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Hash tag result button hash icon color" DefaultValue="#ff252525" DestAttribName="tag_result_icon_color" DestQualifiers="" UID="61-6-9" ValueRef="1-7-2" ValueType="BgColor" />
+        <Property Comment="Hash tag result button primary text color" DefaultValue="#ff0381fe" DestAttribName="tag_result_primary_text_color" DestQualifiers="" UID="61-6-10" ValueRef="1-59-9" ValueType="TextColor" />
+        <Property Comment="Hash tag result button text color" DefaultValue="#ff252525" DestAttribName="tag_result_text_color" DestQualifiers="" UID="61-6-11" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="No recent searches text color" DefaultValue="#ff999999" DestAttribName="no_recent_searches_text_color" DestQualifiers="" Opacity="60" UID="61-6-12" ValueRef="7-7-2" ValueType="TextColor" />
+        <Property Comment="Result body sub text color" DefaultValue="#80252525" DestAttribName="result_view_third_text_color" DestQualifiers="" UID="61-6-13" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Result third text color" DefaultValue="#ffb0b0b0" DestAttribName="result_view_third_text2_color" DestQualifiers="" Opacity="80" UID="61-6-14" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Hash tag result button background color" DefaultValue="#61fcfcfc" DestAttribName="tag_result_item_background_color" DestQualifiers="" UID="61-6-15" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Search in app text color" DefaultValue="#ff252525" DestAttribName="result_view_header_search_detail_text_color" DestQualifiers="" UID="61-6-16" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Widget results card background color" DefaultValue="#61fcfcfc" DestAttribName="result_view_widget_item_background_color" DestQualifiers="" UID="61-7-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Widget results card title text color" DefaultValue="#1a252525" DestAttribName="result_view_widget_image_item_background_color" DestQualifiers="" Opacity="10" UID="61-7-2" ValueRef="1-60-1" ValueType="TextColor" />
+        <Property Comment="Widget results card title primary text color" DefaultValue="#ff252525" DestAttribName="result_view_widget_item_title_text_color" DestQualifiers="" UID="61-7-3" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Widget results card title icon color" DefaultValue="#ff0381fe" DestAttribName="result_view_widget_item_title_primary_text_color" DestQualifiers="" UID="61-7-4" ValueRef="1-59-9" ValueType="TextColor" />
+        <Property Comment="Widget results card title icon color" DefaultValue="#99000000" DestAttribName="result_view_widget_item_title_icon_color" DestQualifiers="" Opacity="60" UID="61-7-5" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Plugin message title color" DefaultValue="#ff252525" DestAttribName="plugin_honeyboard_main_text_color_for_open_theme" DestQualifiers="" UID="61-8-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Plugin message subtitle color" DefaultValue="#99252525" DestAttribName="plugin_honeyboard_sub_text_color_for_open_theme" DestQualifiers="" UID="61-8-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Plugin no result text color" DefaultValue="#ff484848" DestAttribName="plugin_honeyboard_common_no_results_text_color_for_open_theme" DestQualifiers="" UID="61-8-3" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="about_page_button_text_color" DestQualifiers="" UID="61-9-1" ValueRef="1-8-3" ValueType="TextColor" />
+        <Property Comment="About page background color" DefaultValue="#fffcfcfc" DestAttribName="about_page_background_color" DestQualifiers="" UID="61-9-2" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="About page app name color" DefaultValue="#ff252525" DestAttribName="about_page_title_color" DestQualifiers="" UID="61-9-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About page version description color" DefaultValue="#ff909090" DestAttribName="about_page_version_description_color" DestQualifiers="" UID="61-9-4" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About page app info icon tint color" DefaultValue="#ff454545" DestAttribName="about_info_icon_color" DestQualifiers="" UID="61-9-5" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Description text color" DefaultValue="#ff252525" DestAttribName="settings_description_text_color" DestQualifiers="" UID="61-10-1" ValueRef="1-1-4" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

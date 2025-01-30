@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Þú átt %d tilraunir eftir áður en SIM-kortinu verður læst.</item>
+        <item quantity="one">Þú átt %d tilraun eftir áður en SIM-kortinu verður læst.</item>
+    </plurals>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/status_bar_latest_event_content" android:tag="bigPicture" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/notification_template_header" />
+    <include layout="@layout/notification_template_right_icon" />
+    <LinearLayout android:layout_gravity="top" android:orientation="vertical" android:id="@id/notification_action_list_margin_target" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:id="@id/notification_main_column" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_content_margin_top" android:layout_marginStart="@dimen/notification_content_margin_start" android:layout_marginEnd="@dimen/notification_content_margin_end">
+            <include layout="@layout/notification_template_part_line1" />
+            <include android:layout_width="fill_parent" android:layout_height="@dimen/notification_progress_bar_height" android:layout_marginTop="@dimen/notification_progress_margin_top" layout="@layout/notification_template_progress" />
+            <include layout="@layout/notification_template_text_multiline" />
+        </LinearLayout>
+        <ImageView android:id="@id/big_picture" android:background="@drawable/notification_big_picture_outline" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginTop="8.0dip" android:scaleType="centerCrop" android:adjustViewBounds="true" android:layout_weight="1.0" android:layout_marginStart="@dimen/notification_content_margin_start" android:layout_marginEnd="@dimen/notification_content_margin_end" android:clipToOutline="true" />
+        <ViewStub android:id="@id/notification_material_reply_container" android:layout="@layout/notification_material_reply_text" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <include android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_smart_reply_container_margin_top" android:layout_marginStart="@dimen/notification_content_margin_start" android:layout_marginEnd="@dimen/notification_content_margin_end" layout="@layout/notification_template_smart_reply_container" />
+        <include layout="@layout/notification_material_action_list" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Jūsu planšetdatora darbība nav stabila, jo ir izņemta SD karte, kurā ir instalētas programmas. Lai atjaunotu normālu darbību, jūsu planšetdators pēc %d sekundēm tiks restartēts. Pirms planšetdatora restartēšanas saglabājiet visus datus.</item>
+        <item quantity="zero">Jūsu planšetdatora darbība nav stabila, jo ir izņemta SD karte, kurā ir instalētas programmas. Lai atjaunotu normālu darbību, jūsu planšetdators pēc %d sekundēm tiks restartēts. Pirms planšetdatora restartēšanas saglabājiet visus datus.</item>
+        <item quantity="one">Jūsu planšetdatora darbība nav stabila, jo ir izņemta SD karte, kurā ir instalētas programmas. Lai atjaunotu normālu darbību, jūsu planšetdators pēc %d sekundes tiks restartēts. Pirms planšetdatora restartēšanas saglabājiet visus datus.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Planšetdators tiks rest. pēc %d sek.</item>
+        <item quantity="zero">Planšetdators tiks rest. pēc %d sek.</item>
+        <item quantity="one">Planšetdators tiks rest. pēc %d sek.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d programmas tika aizvērtas automātiski, jo tās izraisīja tālruņa pārkaršanu. Vēlāk, kad planšetdators būs atdzisis, varēsit tās atkal atvērt.</item>
+        <item quantity="zero">%d programmas tika aizvērtas automātiski, jo tās izraisīja tālruņa pārkaršanu. Vēlāk, kad planšetdators būs atdzisis, varēsit tās atkal atvērt.</item>
+        <item quantity="one">%d programma tika aizvērta automātiski, jo tā izraisīja tālruņa pārkaršanu. Vēlāk, kad tālrunis būs atdzisis, varēsit to atkal atvērt.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d programmas tika aizvērtas automātiski, jo tās izraisa planšetdatora pārkaršanu. Vēlāk, kad planšetdators būs atdzisis, varēsit tās atkal atvērt.</item>
+        <item quantity="zero">%d programmas tika aizvērtas automātiski, jo tās izraisa planšetdatora pārkaršanu. Vēlāk, kad planšetdators būs atdzisis, varēsit tās atkal atvērt.</item>
+        <item quantity="one">%d programma tika aizvērta automātiski, jo tā izraisa planšetdatora pārkaršanu. Vēlāk, kad planšetdators būs atdzisis, varēsit to atkal atvērt.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">Aizvērtas %d programmas</item>
+        <item quantity="zero">Aizvērtas %d programmas</item>
+        <item quantity="one">Aizvērta %d programma</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Vienlaikus ekrānā var parādīt ne vairāk kā %d programmas. Vecākā programma ir minimizēta.</item>
+        <item quantity="zero">Vienlaikus ekrānā var parādīt ne vairāk kā %d programmas. Vecākā programma ir minimizēta.</item>
+        <item quantity="one">Vienlaikus ekrānā var parādīt ne vairāk kā %d programmu. Vecākā programma ir minimizēta.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Atveriet programmu, kuru vēlaties piešķirt, pēc tam nospiediet un %d sekundes turiet programmas taustiņu.</item>
+        <item quantity="zero">Atveriet programmu, kuru vēlaties piešķirt, pēc tam nospiediet un %d sekundes turiet programmas taustiņu.</item>
+        <item quantity="one">Atveriet programmu, kuru vēlaties piešķirt, pēc tam nospiediet un %d sekundi turiet programmas taustiņu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Programma %1$s izraisa tālruņa pārkaršanu. Tā tiks automātiski aizvērta pēc %2$d sekundēm.</item>
+        <item quantity="zero">Programma %1$s izraisa tālruņa pārkaršanu. Tā tiks automātiski aizvērta pēc %2$d sekundēm.</item>
+        <item quantity="one">Programma %1$s izraisa tālruņa pārkaršanu. Tā tiks automātiski aizvērta pēc %2$d sekundes.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Programma %1$s izraisa planšetdatora pārkaršanu. Tā tiks automātiski aizvērta pēc %2$d sekundēm.</item>
+        <item quantity="zero">Programma %1$s izraisa planšetdatora pārkaršanu. Tā tiks automātiski aizvērta pēc %2$d sekundēm.</item>
+        <item quantity="one">Programma %1$s izraisa planšetdatora pārkaršanu. Tā tiks automātiski aizvērta pēc %2$d sekundes.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Dublējiet neierobežotu datu apjomu Samsung Cloud krātuvē līdz pat %d dienām vai atjaunojiet dublētos datus.</item>
+        <item quantity="zero">Dublējiet neierobežotu datu apjomu Samsung Cloud krātuvē līdz pat %d dienām vai atjaunojiet dublētos datus.</item>
+        <item quantity="one">Dublējiet neierobežotu datu apjomu Samsung Cloud krātuvē līdz pat %d dienai vai atjaunojiet dublētos datus.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Programma %1$s izraisa tālruņa pārkaršanu. Varat to aizvērt tūlīt, vai tā tiks automātiski aizvērta pēc %2$d sekundēm.</item>
+        <item quantity="zero">Programma %1$s izraisa tālruņa pārkaršanu. Varat to aizvērt tūlīt, vai tā tiks automātiski aizvērta pēc %2$d sekundēm.</item>
+        <item quantity="one">Programma %1$s izraisa tālruņa pārkaršanu. Varat to aizvērt tūlīt, vai tā tiks automātiski aizvērta pēc %2$d sekundes.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Programma %1$s izraisa planšetdatora pārkaršanu. Varat to aizvērt tūlīt, vai tā tiks automātiski aizvērta pēc %2$d sekundēm.</item>
+        <item quantity="zero">Programma %1$s izraisa planšetdatora pārkaršanu. Varat to aizvērt tūlīt, vai tā tiks automātiski aizvērta pēc %2$d sekundēm.</item>
+        <item quantity="one">Programma %1$s izraisa planšetdatora pārkaršanu. Varat to aizvērt tūlīt, vai tā tiks automātiski aizvērta pēc %2$d sekundes.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Varat mēģināt vēl %d reizes. Pēdējā mēģinājuma kļūdas gadījumā SIM karte tiks bloķēta.</item>
+        <item quantity="one">Varat mēģināt vēl %d reizi. Pēdējā mēģinājuma kļūdas gadījumā SIM karte tiks bloķēta.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d objekti</item>
+        <item quantity="zero">%d objekti</item>
+        <item quantity="one">%d objekts</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Wi-Fi tīklam, ar kuru vēlaties izveidot savienojumu, vienlaikus var pievienot tikai %d ierīces. Atvienojiet visas citas ierīces no šī tīkla un pēc tam mēģiniet vēlreiz.</item>
+        <item quantity="zero">Wi-Fi tīklam, ar kuru vēlaties izveidot savienojumu, vienlaikus var pievienot tikai %d ierīces. Atvienojiet visas citas ierīces no šī tīkla un pēc tam mēģiniet vēlreiz.</item>
+        <item quantity="one">Wi-Fi tīklam, ar kuru vēlaties izveidot savienojumu, vienlaikus var pievienot tikai %d ierīci. Atvienojiet visas citas ierīces no šī tīkla un pēc tam mēģiniet vēlreiz.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d stundas</item>
+        <item quantity="zero">%d stundas</item>
+        <item quantity="one">%d stunda</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minūtes</item>
+        <item quantity="zero">%d minūtes</item>
+        <item quantity="one">%d minūte</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

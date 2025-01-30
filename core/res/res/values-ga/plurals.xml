@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Tá do tháibléad éagobhsaí mar gur baineadh cárta SD a raibh feidhmchláir suiteáilte air. Atosófar do tháibléad i gceann %d soicind le filleadh ar ghnáthfheidhmíocht. Sábháil aon sonraí nach bhfuil sábháilte sula n-atosófar an táibléad.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tá do tháibléad éagobhsaí mar gur baineadh cárta SD a raibh feidhmchláir suiteáilte air. Atosófar do tháibléad i gceann %d soicind le filleadh ar ghnáthfheidhmíocht. Sábháil aon sonraí nach bhfuil sábháilte sula n-atosófar an táibléad.</item>
+        <item quantity="two">Tá do tháibléad éagobhsaí mar gur baineadh cárta SD a raibh feidhmchláir suiteáilte air. Atosófar do tháibléad i gceann %d shoicind le filleadh ar ghnáthfheidhmíocht. Sábháil aon sonraí nach bhfuil sábháilte sula n-atosófar an táibléad.</item>
+        <item quantity="few">Tá do tháibléad éagobhsaí mar gur baineadh cárta SD a raibh feidhmchláir suiteáilte air. Atosófar do tháibléad i gceann %d shoicind le filleadh ar ghnáthfheidhmíocht. Sábháil aon sonraí nach bhfuil sábháilte sula n-atosófar an táibléad.</item>
+        <item quantity="many">Tá do tháibléad éagobhsaí mar gur baineadh cárta SD a raibh feidhmchláir suiteáilte air. Atosófar do tháibléad i gceann %d soicind le filleadh ar ghnáthfheidhmíocht. Sábháil aon sonraí nach bhfuil sábháilte sula n-atosófar an táibléad.</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Atosófar do tháibléad i %d soicind</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Atosófar do tháibléad in %d soicind</item>
+        <item quantity="two">Atosófar do tháibléad in %d shoicind</item>
+        <item quantity="few">Atosófar do tháibléad i %d shoicind</item>
+        <item quantity="many">Atosófar do tháibléad i %d soicind</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">"Dúnadh %d feidhmchlár go huathoibríoch mar go raibh d'fhón ag éirí róthe dá mbarr. Beidh tú in ann iad a oscailt arís níos moille tar éis do d'fhón fuarú."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Dúnadh %d fheidhmchlár go huathoibríoch mar go raibh d'fhón ag éirí róthe dá bharr. Beidh tú in ann é a oscailt arís níos moille tar éis do d'fhón fuarú."</item>
+        <item quantity="two">"Dúnadh %d fheidhmchlár go huathoibríoch mar go raibh d'fhón ag éirí róthe dá mbarr. Beidh tú in ann iad a oscailt arís níos moille tar éis do d'fhón fuarú."</item>
+        <item quantity="few">"Dúnadh %d fheidhmchlár go huathoibríoch mar go raibh d'fhón ag éirí róthe dá mbarr. Beidh tú in ann iad a oscailt arís níos moille tar éis do d'fhón fuarú."</item>
+        <item quantity="many">"Dúnadh %d bhfeidhmchlár go huathoibríoch mar go raibh d'fhón ag éirí róthe dá mbarr. Beidh tú in ann iad a oscailt arís níos moille tar éis do d'fhón fuarú."</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">Dúnadh %d feidhmchlár go huathoibríoch mar go raibh do tháibléad ag éirí róthe dá mbarr. Beidh tú in ann iad a oscailt arís níos moille tar éis do do tháibléad fuarú.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Dúnadh %d fheidhmchlár go huathoibríoch mar go raibh do tháibléad ag éirí róthe dá bharr. Beidh tú in ann é a oscailt arís níos moille tar éis do do tháibléad fuarú.</item>
+        <item quantity="two">Dúnadh %d fheidhmchlár go huathoibríoch mar go raibh do tháibléad ag éirí róthe dá mbarr. Beidh tú in ann iad a oscailt arís níos moille tar éis do do tháibléad fuarú.</item>
+        <item quantity="few">Dúnadh %d fheidhmchlár go huathoibríoch mar go raibh do tháibléad ag éirí róthe dá mbarr. Beidh tú in ann iad a oscailt arís níos moille tar éis do do tháibléad fuarú.</item>
+        <item quantity="many">Dúnadh %d bhfeidhmchlár go huathoibríoch mar go raibh do tháibléad ag éirí róthe dá mbarr. Beidh tú in ann iad a oscailt arís níos moille tar éis do do tháibléad fuarú.</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d feidhmchlár dúnta</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d fheidhmchlár dúnta</item>
+        <item quantity="two">%d fheidhmchlár dúnta</item>
+        <item quantity="few">%d fheidhmchlár dúnta</item>
+        <item quantity="many">%d bhfeidhmchlár dúnta</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Ní féidir níos mó ná %d feidhmchlár a thaispeáint ar an scáileán ag an am céanna. Tá an feidhmchlár is sine íoslaghdaithe.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ní féidir níos mó ná %d fheidhmchlár a thaispeáint ar an scáileán ag an am céanna. Tá an feidhmchlár is sine íoslaghdaithe.</item>
+        <item quantity="two">Ní féidir níos mó ná %d fheidhmchlár a thaispeáint ar an scáileán ag an am céanna. Tá an feidhmchlár is sine íoslaghdaithe.</item>
+        <item quantity="few">Ní féidir níos mó ná %d fheidhmchlár a thaispeáint ar an scáileán ag an am céanna. Tá an feidhmchlár is sine íoslaghdaithe.</item>
+        <item quantity="many">Ní féidir níos mó ná %d bhfeidhmchlár a thaispeáint ar an scáileán ag an am céanna. Tá an feidhmchlár is sine íoslaghdaithe.</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Oscail an feidhmchlár is mian leat a shannadh, ansin brúigh agus coinnigh eochair an fheidhmchláir go ceann %d soicind.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Oscail an feidhmchlár is mian leat a shannadh, ansin brúigh agus coinnigh eochair an fheidhmchláir go ceann %d soicind.</item>
+        <item quantity="two">Oscail an feidhmchlár is mian leat a shannadh, ansin brúigh agus coinnigh eochair an fheidhmchláir go ceann %d shoicind.</item>
+        <item quantity="few">Oscail an feidhmchlár is mian leat a shannadh, ansin brúigh agus coinnigh eochair an fheidhmchláir go ceann %d shoicind.</item>
+        <item quantity="many">Oscail an feidhmchlár is mian leat a shannadh, ansin brúigh agus coinnigh eochair an fheidhmchláir go ceann %d soicind.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">"Tá d'fhón ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d soicind é."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Tá d'fhón ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d soicind é."</item>
+        <item quantity="two">"Tá d'fhón ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d shoicind é."</item>
+        <item quantity="few">"Tá d'fhón ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d shoicind é."</item>
+        <item quantity="many">"Tá d'fhón ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d soicind é."</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Tá do tháibléad ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d soicind é.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tá do tháibléad ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d soicind é.</item>
+        <item quantity="two">Tá do tháibléad ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d shoicind é.</item>
+        <item quantity="few">Tá do tháibléad ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d shoicind é.</item>
+        <item quantity="many">Tá do tháibléad ag éirí róthe de bharr %1$s. Dúnfar go huathoibríoch i gceann %2$d soicind é.</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Cúltacaigh sonraí neamhtheoranta chuig Samsung Cloud go ceann suas le %d lá nó aischuir sonraí atá cúltacaithe agat.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Cúltacaigh sonraí neamhtheoranta chuig Samsung Cloud go ceann suas le %d lá nó aischuir sonraí atá cúltacaithe agat.</item>
+        <item quantity="two">Cúltacaigh sonraí neamhtheoranta chuig Samsung Cloud go ceann suas le %d lá nó aischuir sonraí atá cúltacaithe agat.</item>
+        <item quantity="few">Cúltacaigh sonraí neamhtheoranta chuig Samsung Cloud go ceann suas le %d lá nó aischuir sonraí atá cúltacaithe agat.</item>
+        <item quantity="many">Cúltacaigh sonraí neamhtheoranta chuig Samsung Cloud go ceann suas le %d lá nó aischuir sonraí atá cúltacaithe agat.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">"Tá d'fhón ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d soicind."</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">"Tá d'fhón ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d soicind."</item>
+        <item quantity="two">"Tá d'fhón ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d shoicind."</item>
+        <item quantity="few">"Tá d'fhón ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d shoicind."</item>
+        <item quantity="many">"Tá d'fhón ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d soicind."</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Tá do tháibléad ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d soicind.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tá do tháibléad ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d soicind.</item>
+        <item quantity="two">Tá do tháibléad ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d shoicind.</item>
+        <item quantity="few">Tá do tháibléad ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d shoicind.</item>
+        <item quantity="many">Tá do tháibléad ag éirí róthe de bharr %1$s. Is féidir leat é a dhúnadh anois, nó dúnfar go huathoibríoch é i gceann %2$d soicind.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d mír</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d mhír</item>
+        <item quantity="two">%d mhír</item>
+        <item quantity="few">%d mhír</item>
+        <item quantity="many">%d mír</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">An líonra Wi-Fi ar mian leat nascadh leis, ní féidir é a nascadh ach le %d gléas ag an am céanna. Dínasc aon ghléasanna eile ón líonra sin, ansin triail arís.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">An líonra Wi-Fi ar mian leat nascadh leis, ní féidir é a nascadh ach le %d ghléas ag am amháin. Dínasc aon ghléasanna eile ón líonra sin, ansin triail arís.</item>
+        <item quantity="two">An líonra Wi-Fi ar mian leat nascadh leis, ní féidir é a nascadh ach le %d ghléas ag an am céanna. Dínasc aon ghléasanna eile ón líonra sin, ansin triail arís.</item>
+        <item quantity="few">An líonra Wi-Fi ar mian leat nascadh leis, ní féidir é a nascadh ach le %d ghléas ag an am céanna. Dínasc aon ghléasanna eile ón líonra sin, ansin triail arís.</item>
+        <item quantity="many">An líonra Wi-Fi ar mian leat nascadh leis, ní féidir é a nascadh ach le %d ngléas ag an am céanna. Dínasc aon ghléasanna eile ón líonra sin, ansin triail arís.</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d uair an chloig</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d uair an chloig</item>
+        <item quantity="two">%d uair an chloig</item>
+        <item quantity="few">%d uair an chloig</item>
+        <item quantity="many">%d n-uair an chloig</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d nóiméad</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d nóiméad</item>
+        <item quantity="two">%d nóiméad</item>
+        <item quantity="few">%d nóiméad</item>
+        <item quantity="many">%d nóiméad</item>
+    </plurals>
+</resources>

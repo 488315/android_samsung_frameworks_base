@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Планшетіңіз тұрақсыз, себебі қолданбалар орнатылған SD карта алып тасталған. Планшетіңіз қалыпты жағдайға оралу мақсатында %d секундтан кейін өшіп қайта қосылады. Планшет өшіп қайта қосылғанға дейін, кез келген сақталмаған деректерді сақтаңыз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Планшетіңіз тұрақсыз, себебі қолданбалар орнатылған SD карта алып тасталған. Планшетіңіз қалыпты жағдайға оралу мақсатында %d секундтан кейін өшіп қайта қосылады. Планшет өшіп қайта қосылғанға дейін, кез келген сақталмаған деректерді сақтаңыз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Планшет %d сек соң өшіп қайта қосылады</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Планшет %d сек соң өшіп қайта қосылады</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d қолданбалары телефоныңыз қатты қызып кетуі себебінен автоматты түрде жабылады. Оларды кейінірек телефоныңыз салқындағаннан кейін қайтадан ашуыңызға болады.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d қолданбасы телефоныңыздың қатты қызып кетуі себебінен автоматты түрде жабылады. Оны кейінірек телефоныңыз салқындағаннан кейін қайтадан аша аласыз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d қолданба автоматты түрде жабылды, себебі олар планшетіңіздің қатты қызып кетуін туындатып жатқан еді. Оларды кейінірек планшетіңіз салқындағаннан кейін қайтадан ашуыңызға болады.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d қолданба автоматты түрде жабылды, себебі ол планшетіңіздің қатты қызып кетуін туындатып жатқан еді. Оны кейінірек планшетіңіз салқындағаннан кейін қайтадан ашуыңызға болады.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d қолданба жабылды</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d қолданба жабылды</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Экранда бір уақытта %d қолданбадан артық көрсету мүмкін емес. Ең ескі қолданба кішірейтілді.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Экранда бір уақытта %d қолданбадан артық көрсету мүмкін емес. Ең ескі қолданба кішірейтілді.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Тағайындағыңыз келетін қолданбаны ашыңыз, содан кейін қолданба пернесін %d секунд басып тұрыңыз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Тағайындағыңыз келетін қолданбаны ашыңыз, содан кейін қолданба пернесін %d секунд басып тұрыңыз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s қолданбасы телефоныңыздың қатты қызып кетуін туындатып жатыр. Ол %2$d секундтан кейін автоматты түрде жабылады.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s қолданбасы телефоныңыздың қатты қызып кетуін туындатып жатыр. Ол %2$d секундтан кейін автоматты түрде жабылады.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s қолданбасы планшетіңіздің қатты қызып кетуін туындатып жатыр. Ол %2$d секундтан кейін автоматты түрде жабылады.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s қолданбасы планшетіңіздің қатты қызып кетуін туындатып жатыр. Ол %2$d секундтан кейін автоматты түрде жабылады.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Samsung Cloud бұлтына шексіз деректердің сақтық көшірмесін %d күнге дейін жасаңыз немесе сақтық көшірмесі жасалған деректерді қалпына келтіріңіз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Samsung Cloud бұлтына шексіз деректердің сақтық көшірмесін %d күнге дейін жасаңыз немесе сақтық көшірмесі жасалған деректерді қалпына келтіріңіз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s қолданбасы телефоныңыздың қатты қызып кетуін туындатып жатыр. Оны қазір жабуыңызға болады немесе ол %2$d секундтан кейін автоматты түрде жабылады.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s қолданбасы телефоныңыздың қатты қызып кетуін туындатып жатыр. Оны қазір жабуыңызға болады немесе ол %2$d секундтан кейін автоматты түрде жабылады.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s қолданбасы планшетіңіздің қатты қызып кетуін туындатып жатыр. Оны қазір жабуыңызға болады немесе ол %2$d секундтан кейін автоматты түрде жабылады.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s қолданбасы планшетіңіздің қатты қызып кетуін туындатып жатыр. Оны қазір жабуыңызға болады немесе ол %2$d секундтан кейін автоматты түрде жабылады.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d элемент</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d элемент</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Қосқыңыз келетін Wi-Fi желісі бір уақытта тек %d құрылғыға қосыла алады. Кез келген басқа құрылғыларды сол желіден ажыратып, әрекетті қайталап көріңіз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Қосқыңыз келетін Wi-Fi желісі бір уақытта тек %d құрылғыға қосыла алады. Кез келген басқа құрылғыларды сол желіден ажыратып, әрекетті қайталап көріңіз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d сағат</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d сағат</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d минут</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d минут</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

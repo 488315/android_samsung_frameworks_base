@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">SD कार्ड जिसमें एप्स स्थापित किए गए थे, उसे निकाल दिए जाने के कारण आपका टैबलेट अस्थिर है। सामान्य स्थिति में वापस आने के लिए आपका टैबलेट %d सेकंड में पुनः चालू होगा। इससे पहले कि टैबलेट पुनः चालू हो कोई भी डाटा जो सुरक्षित नहीं किया गया है, उसे सुरक्षित कर लें।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">SD कार्ड जिसमें एप्स स्थापित किए गए थे, उसे निकाल दिए जाने के कारण आपका टैबलेट अस्थिर है। सामान्य स्थिति में वापस आने के लिए आपका टैबलेट %d सेकंड में पुनः चालू होगा। इससे पहले कि टैबलेट पुनः चालू हो कोई भी डाटा जो सुरक्षित नहीं किया गया है, उसे सुरक्षित कर लें।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">आपका टैबलेट %d सेकंड में पुनः चालू होगा</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">आपका टैबलेट %d सेकंड में पुनः चालू होगा</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">आपके फोन को बहुत अधिक गर्म करने के कारण %d एप्स स्वचालित रूप से बंद हो गए थे। आपके फोन के ठंडा होने के बाद आप उन्हें फिर से खोल सकते हैं।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">आपके फोन को बहुत अधिक गर्म करने के कारण %d एप स्वचालित रूप से बंद हो गया था। आपके फोन के ठंडा होने के बाद आप इसे फिर से खोल सकते हैं।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">आपके टैबलेट को बहुत अधिक गर्म करने के कारण %d एप्स स्वचालित रूप से बंद हो गए थे। आपके टैबलेट के ठंडा होने के बाद आप उन्हें फिर से खोल सकते हैं।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">आपके टैबलेट को बहुत अधिक गर्म करने के कारण %d एप स्वचालित रूप से बंद हो गया था। आपके टैबलेट के ठंडा होने के बाद आप इसे फिर से खोल सकते हैं।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d एप्स बंद किए गए</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d एप बंद किया गया</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">एक ही समय में स्क्रीन पर %d से अधिक एप्स दिखाए नहीं जा सकते हैं। सबसे पुराने एप को छोटा किया गया।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">एक ही समय में स्क्रीन पर %d से अधिक एप दिखाए नहीं जा सकते हैं। सबसे पुराने एप को छोटा किया गया।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">वह एप खोलें जिसे आप असाइन करना चाहते हैं, फिर एप बटन को %d सेकंड के लिए दबाकर रखें।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">वह एप खोलें जिसे आप असाइन करना चाहते हैं, फिर एप बटन को %d सेकंड के लिए दबाकर रखें।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s की वजह से आपका फोन बहुत गर्म हो रहा है। यह %2$d सेकंड में स्वचालित रूप से बंद हो जाएगा।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s की वजह से आपका फोन बहुत गर्म हो रहा है। यह %2$d सेकंड में स्वचालित रूप से बंद हो जाएगा।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s की वजह से आपका टैबलेट बहुत गर्म हो रहा है। यह %2$d सेकंड में स्वचालित रूप से बंद हो जाएगा।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s की वजह से आपका टैबलेट बहुत गर्म हो रहा है। यह %2$d सेकंड में स्वचालित रूप से बंद हो जाएगा।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">अधिकतम %d दिनों के लिए सैमसंग क्लाउड पर असीमित डाटा का बैकअप लें या आपके द्वारा बैकअप किए गए डाटा को रीस्टोर करें।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">अधिकतम %d दिन के लिए सैमसंग क्लाउड पर असीमित डाटा का बैकअप लें या आपके द्वारा बैकअप किए गए डाटा को रीस्टोर करें।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s आपके फोन को बहुत अधिक गर्म कर रहा है। आप इसे अभी बंद कर सकते हैं या %2$d सेकंड में यह स्वचालित रूप से बंद हो जाएगा।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s आपके फोन को बहुत अधिक गर्म कर रहा है। आप इसे अभी बंद कर सकते हैं या %2$d सेकंड में यह स्वचालित रूप से बंद हो जाएगा।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s आपके टैबलेट को बहुत अधिक गर्म कर रहा है। आप इसे अभी बंद कर सकते हैं या %2$d सेकंड में यह स्वचालित रूप से बंद हो जाएगा।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s आपके टैबलेट को बहुत अधिक गर्म कर रहा है। आप इसे अभी बंद कर सकते हैं या %2$d सेकंड में यह स्वचालित रूप से बंद हो जाएगा।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">सिम के लॉक हो जाने से पहले आपके पास %d प्रयास शेष हैं.</item>
+        <item quantity="one">सिम के लॉक हो जाने से पहले आपके पास %d प्रयास शेष हैं.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d मदें</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d मद</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">आप जिस Wi-Fi नेटवर्क से कनेक्ट होना चाहते हैं, वह एक समय में केवल %d डिवाइसेस से कनेक्ट हो सकता है। उस नेटवर्क से किसी भी अन्य डिवाइसेस को डिस्कनेक्ट करें, इसके बाद फिर से प्रयास करें।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">आप जिस Wi-Fi नेटवर्क से कनेक्ट होना चाहते हैं, वह एक समय में केवल %d डिवाइस से कनेक्ट हो सकता है। उस नेटवर्क से किसी भी अन्य डिवाइसेस को डिस्कनेक्ट करें, इसके बाद फिर से प्रयास करें।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d घंटे</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d घंटा</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d मिनट</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d मिनट</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

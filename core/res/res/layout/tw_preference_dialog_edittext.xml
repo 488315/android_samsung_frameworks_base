@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" android:overScrollMode="ifContentScrolls"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/edittext_container" android:paddingTop="@dimen/sem_preference_dialog_edittext_top_padding" android:paddingBottom="@dimen/sem_preference_dialog_edittext_bottom_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/sem_preference_dialog_edittext_start_padding" android:paddingEnd="@dimen/sem_dialog_padding">
+        <TextView android:textSize="@dimen/sem_preference_dialog_edittext_message_text_size" android:textColor="@color/tw_dialog_horizontal_progress_text_color_material_light" android:id="@id/message" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/sem_preference_dialog_edittext_message_padding" style="?textAppearanceSmall" />
+    </LinearLayout>
+</ScrollView>

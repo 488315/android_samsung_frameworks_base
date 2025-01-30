@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton android:id="@id/overflow" android:background="?^attr-private/floatingToolbarPopupOverflowBackground" android:paddingTop="@dimen/sem_floating_popup_overflow_vertical_padding" android:paddingBottom="@dimen/sem_floating_popup_overflow_vertical_padding" android:layout_width="@dimen/sem_floating_popup_height" android:layout_height="@dimen/sem_floating_popup_height" android:scaleType="centerInside" android:tint="?^attr-private/floatingToolbarForegroundColor" android:paddingStart="@dimen/sem_floating_popup_overflow_start_padding" android:paddingEnd="@dimen/sem_floating_popup_overflow_end_padding"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

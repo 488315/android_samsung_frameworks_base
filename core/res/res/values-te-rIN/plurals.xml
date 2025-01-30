@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">మీ టాబ్లెట్ నుండి అప్లికేషన్‌లను ఇన్‌స్టాల్ చేసిన SD కార్డ్ తీసివేయబడినందున ఇది అస్థిరంగా ఉంది. సాధారణ స్థితికి వెళ్లడానికి మీ టాబ్లెట్ %d సెకన్లలో పునఃప్రారంభించబడుతుంది. టాబ్లెట్ పునఃప్రారంభించబడటానికి ముందు సేవ్ చేయని డేటా ఏదైనా ఉంటే సేవ్ చేయండి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీ టాబ్లెట్ నుండి అప్లికేషన్‌లను ఇన్‌స్టాల్ చేసిన SD కార్డ్ తీసివేయబడినందున ఇది అస్థిరంగా ఉంది. సాధారణ స్థితికి వెళ్లడానికి మీ టాబ్లెట్ %d సెకనులో పునఃప్రారంభించబడుతుంది. టాబ్లెట్ పునఃప్రారంభించబడటానికి ముందు సేవ్ చేయని డేటా ఏదైనా ఉంటే సేవ్ చేయండి.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">%d సెకన్లలో మీ టాబ్లెట్ పునఃప్రారంభించబడుతుంది</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d సెకనులో మీ టాబ్లెట్ పునఃప్రారంభించబడుతుంది</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d అప్లికేషన్‌లు మీ ఫోన్ ఎక్కువ వేడెక్కేలా చేస్తున్నందున అవి స్వయంచాలంకగా మూసివేయబడ్డాయి. మీరు మీ ఫోన్ చల్లబడిన తర్వాత వాటిని మళ్లీ తెరవవచ్చు.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d అప్లికేషన్ మీ ఫోన్ ఎక్కువ వేడెక్కేలా చేస్తున్నందున అది స్వయంచాలకంగా మూసివేయబడింది. మీరు మీ ఫోన్ చల్లబడిన తర్వాత దీన్ని మళ్లీ తెరవవచ్చు.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d అప్లికేషన్‌లు మీ టాబ్లెట్ ఎక్కువ వేడెక్కేలా చేస్తున్నందున అవి స్వయంచాలంకగా మూసివేయబడ్డాయి. మీరు మీ టాబ్లెట్ చల్లబడిన తర్వాత వాటిని మళ్లీ తెరవవచ్చు.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d అప్లికేషన్ మీ టాబ్లెట్ ఎక్కువ వేడెక్కేలా చేస్తున్నందున అది స్వయంచాలంకగా మూసివేయబడింది. మీరు మీ టాబ్లెట్ చల్లబడిన తర్వాత దాన్ని మళ్లీ తెరవవచ్చు.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d అప్లికేషన్‌లు మూసివేయబడ్డాయి</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d అప్లికేషన్ మూసివేయబడింది</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">స్క్రీన్‌లో ఒకేసారి %d కంటే ఎక్కువ అప్లికేషన్‌లను చూపలేరు. అత్యంత పాత అప్లికేషన్ కనిష్టీకరించబడింది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">స్క్రీన్‌లో ఒకేసారి %d కంటే ఎక్కువ అప్లికేషన్‌ను చూపలేరు. అత్యంత పాత అప్లికేషన్ కనిష్టీకరించబడింది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">మీరు కేటాయించాలనుకుంటున్న అప్లికేషన్‌ని తెరిచి, ఆపై %d సెకన్ల పాటు అప్లికేషన్ కీని నొక్కి, పట్టుకోండి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీరు కేటాయించాలనుకుంటున్న అప్లికేషన్‌ని తెరిచి, ఆపై %d సెకను పాటు అప్లికేషన్ కీని నొక్కి, పట్టుకోండి.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s మీ ఫోన్ ఎక్కువ వేడెక్కేలా చేస్తోంది. ఇది %2$d సెకన్లలో స్వయంచాలకంగా మూసివేయబడుతుంది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s మీ ఫోన్ ఎక్కువ వేడెక్కేలా చేస్తోంది. ఇది %2$d సెకనులో స్వయంచాలకంగా మూసివేయబడుతుంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s మీ టాబ్లెట్ ఎక్కువ వేడెక్కేలా చేస్తోంది. ఇది %2$d సెకన్లలో స్వయంచాలకంగా మూసివేయబడుతుంది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s మీ టాబ్లెట్ ఎక్కువ వేడెక్కేలా చేస్తోంది. ఇది %2$d సెకనులో స్వయంచాలకంగా మూసివేయబడుతుంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">గరిష్టంగా %d రోజుల పాటు Samsung Cloudకు అపరిమిత డేటాని బ్యాకప్ చేయండి లేదా మీరు బ్యాకప్ చేసిన డేటాని పునరుద్ధరించండి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">గరిష్టంగా %d రోజు పాటు Samsung Cloudకు అపరిమిత డేటాని బ్యాకప్ చేయండి లేదా మీరు బ్యాకప్ చేసిన డేటాని పునరుద్ధరించండి.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s మీ ఫోన్ ఎక్కువ వేడెక్కేలా చేస్తోంది. మీరు ఇప్పుడు దీన్ని మూసివేయవచ్చు లేదా ఇది స్వయంచాలకంగా %2$d సెకన్లలో మూసివేయబడుతుంది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s మీ ఫోన్ ఎక్కువ వేడెక్కేలా చేస్తోంది. మీరు ఇప్పుడు దీన్ని మూసివేయవచ్చు లేదా ఇది స్వయంచాలకంగా %2$d సెకనులో మూసివేయబడుతుంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s మీ టాబ్లెట్ ఎక్కువ వేడెక్కేలా చేస్తోంది. మీరు ఇప్పుడు దీన్ని మూసివేయవచ్చు లేదా ఇది స్వయంచాలకంగా %2$d సెకన్లలో మూసివేయబడుతుంది.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s మీ టాబ్లెట్ ఎక్కువ వేడెక్కేలా చేస్తోంది. మీరు ఇప్పుడు దీన్ని మూసివేయవచ్చు లేదా ఇది స్వయంచాలకంగా %2$d సెకనులో మూసివేయబడుతుంది.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d అంశాలు</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d అంశం</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">మీరు కనెక్ట్ అవ్వాలనుకుంటున్న Wi-Fi నెట్‌వర్క్ ఒకసారి %d పరికరాలకు మాత్రమే కనెక్ట్ చేయబడుతుంది. ఆ నెట్‌వర్క్ కనెక్ట్ చేయబడి ఉన్న ఇతర పరికరాలను డిస్‌కనెక్ట్ చేసి, ఆపై మళ్లీ ప్రయత్నించండి.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">మీరు కనెక్ట్ అవ్వాలనుకుంటున్న Wi-Fi నెట్‌వర్క్ ఒకసారి %d పరికరానికి మాత్రమే కనెక్ట్ చేయబడుతుంది. ఆ నెట్‌వర్క్ కనెక్ట్ చేయబడి ఉన్న ఇతర పరికరాలను డిస్‌కనెక్ట్ చేసి, ఆపై మళ్లీ ప్రయత్నించండి.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d గంటలు</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d గంట</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d నిమిషాలు</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d నిమిషం</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

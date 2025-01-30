@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="task_bar_dpi">240.0</item>
+    <dimen name="task_bar_height">56.0dip</dimen>
+</resources>

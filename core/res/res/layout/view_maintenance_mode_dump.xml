@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/maintenance_mode_background" android:paddingTop="@dimen/maintenance_mode_view_body_padding_top_bottom" android:paddingBottom="@dimen/maintenance_mode_view_body_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/maintenance_mode_view_dump_container" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:paddingBottom="@dimen/maintenance_mode_view_progress_padding_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ProgressBar android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:indeterminate="true" style="@style/Widget.DeviceDefault.ProgressBar.Large" />
+        </LinearLayout>
+        <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/maintenance_mode_view_body_padding_left_right" android:paddingRight="@dimen/maintenance_mode_view_body_padding_left_right" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/maintenance_mode_common_view_text_size" android:gravity="center" android:id="@id/maintenance_mode_view_dump_textview" style="@style/TextAppearance.MaintenanceMode.Body" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

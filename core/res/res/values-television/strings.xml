@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="config_sensorStateChangedActivity">com.android.systemui/com.android.systemui.sensorprivacy.television.TvSensorPrivacyChangedActivity</string>
+    <string name="config_sensorUseStartedActivity">com.android.systemui/com.android.systemui.sensorprivacy.television.TvUnblockSensorActivity</string>
+    <string name="config_sensorUseStartedActivity_hwToggle">com.android.systemui/com.android.systemui.sensorprivacy.television.TvUnblockSensorActivity</string>
+    <string name="config_usbConfirmActivity">com.android.systemui/com.android.systemui.usb.tv.TvUsbConfirmActivity</string>
+    <string name="config_usbPermissionActivity">com.android.systemui/com.android.systemui.usb.tv.TvUsbPermissionActivity</string>
+    <string name="sensor_privacy_start_use_camera_notification_content_title">Camera is blocked</string>
+    <string name="sensor_privacy_start_use_mic_notification_content_title">Microphone is blocked</string>
+</resources>

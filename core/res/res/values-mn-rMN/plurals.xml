@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Таны таблетаас хэрэглүүрүүд суурилуулсан SD картыг арилгасан учир тогтворгүй байна. Таны таблет хэвийн болохын тулд %d секундийн дараа дахин эхэлнэ. Таблет дахин эхлэхээс өмнө хадгалаагүй өгөгдөл байвал хадгална уу.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Таны таблетаас хэрэглүүрүүд суурилуулсан SD картыг арилгасан учир тогтворгүй байна. Таны таблет хэвийн болохын тулд %d секундийн дараа дахин эхэлнэ. Таблет дахин эхлэхээс өмнө хадгалаагүй өгөгдөл байвал хадгална уу.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Таны таблет %d секунд дараа дахн эхлнэ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Таны таблет %d секунд дараа дахн эхлнэ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d хэрэглүүрүүд таны утсанд хэт халалт үүсгэж байсан учраас тэднийг автоматаар хаасан. Та утсаа хөрсний дараа тэднийг дахин нээх боломжтой.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d хэрэглүүр таны утсанд хэт халалт үүсгэж байсан учраас түүнийг автоматаар хаасан. Та утсаа хөрсний дараа түүнийг дахин нээх боломжтой.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d хэрэглүүрүүд таны таблетад хэт халалт үүсгэж байсан тул тэднийг автоматаар хаасан. Та таблетаа хөрсний дараа тэднийг дахин нээх боломжтой.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d хэрэглүүр таны таблетад хэт халалт үүсгэж байсан учраас автоматаар хаасан. Та таблетаа хөрсний дараа үүнийг дахин нээж болно.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d хэрэглүүрийг хаасан</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d хэрэглүүрийг хаасан</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Дэлгэцэд нэгэн зэрэг %d-с их хэрэглүүр харуулах боломжгүй. Хуучин хэрэглүүрийг жижгэрүүлсэн.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Дэлгэцэд нэгэн зэрэг %d-с их хэрэглүүр харуулах боломжгүй. Хуучин хэрэглүүрийг жижгэрүүлсэн.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Хуваарилахыг хүссэн хэрэглүүрийг нээж дараа нь хэрэглүүрийн товчлуурыг %d секунд удаан дарна уу.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Хуваарилахыг хүссэн хэрэглүүрийг нээж дараа нь хэрэглүүрийн товчлуурыг %d секунд удаан дарна уу.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s таны утас хэт халах шалтгаан болж байна. Энэ %2$d секундийн дотор автоматаар хаагдах болно.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s таны утас хэт халах шалтгаан болж байна. Энэ %2$d секундийн дотор автоматаар хаагдах болно.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s таны таблет хэт халах шалтгаан болж байна. Энэ %2$d секундийн дотор автоматаар хаагдах болно.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s таны таблет хэт халах шалтгаан болж байна. Энэ %2$d секундийн дотор автоматаар хаагдах болно.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d өдөр хүртэл Samsung Cloud-д хязгааргүй өгөгдөл нөөцлөх буюу нөөцөлсөн өгөгдлөө сэргээх.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d өдөр хүртэл Samsung Cloud-д хязгааргүй өгөгдөл нөөцлөх буюу нөөцөлсөн өгөгдлөө сэргээх.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s таны утсанд хэт халалт үүсгэж байна. Та үүнийг одоо хаах боломжтой, эсвэл энэ нь %2$d секундийн дараа автоматаар хаагдана.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s таны утсанд хэт халалт үүсгэж байна. Та үүнийг одоо хаах боломжтой, эсвэл энэ нь %2$d секундийн дараа автоматаар хаагдана.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s таны таблетад хэт халалт үүсгэж байна. Та үүнийг одоо хаах боломжтой, эсвэл энэ нь %2$d секундийн дараа автоматаар хаагдана.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s таны таблетад хэт халалт үүсгэж байна. Та үүнийг одоо хаах боломжтой, эсвэл энэ нь %2$d секундийн дараа автоматаар хаагдана.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d зүйлс</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d зүйлс</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Таны холбогдохыг хүсэж буй Wi-Fi сүлжээнд нэгэн зэрэг зөвхөн %d төхөөрөмж холбогдох боломжтой. Тухайн сүлжээнээс бусад төхөөрөмжийг салгаад дахин оролдоно уу.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Таны холбогдохыг хүсэж буй Wi-Fi сүлжээнд нэгэн зэрэг зөвхөн %d төхөөрөмж холбогдох боломжтой. Тухайн сүлжээнээс бусад төхөөрөмжийг салгаад дахин оролдоно уу.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d цаг</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d цаг</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d минут</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d минут</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

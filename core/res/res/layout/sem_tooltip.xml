@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="?^attr-private/tooltipFrameBackground" android:layout_width="wrap_content" android:layout_height="wrap_content" android:elevation="@dimen/sem_hover_tooltip_popup_elevation"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.Small" android:textSize="@dimen/sem_hover_popup_text_size" android:textColor="?^attr-private/tooltipForegroundColor" android:ellipsize="end" android:id="@id/message" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="3" android:fontFamily="sec" android:textFontWeight="400" />
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">सिम लॉक होण्यापूर्वी आपल्याकडे %d प्रयत्न उर्वरित आहेत.</item>
+        <item quantity="one">सिम लॉक होण्‍यापूर्वी आपल्‍याकडे %d प्रयत्न उर्वरित आहे.</item>
+    </plurals>
+</resources>

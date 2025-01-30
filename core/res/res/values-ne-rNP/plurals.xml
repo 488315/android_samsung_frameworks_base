@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">एपहरू स्थापना गरिएको SD कार्ड निकालिएको हुनाले तपाईको ट्याबलेट अस्थिर भएको छ। सामान्य अवस्थामा फर्किनका लागि तपाईको ट्याबलेट %d सेकेन्डमा पुनः सुरु हुने छ। सेव नगरिएको कुनै पनि डाटा छ भने ट्याबलेट पुनः सुरु हुनुअघि त्यसलाई सेव गर्नुहोस्।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">एपहरू स्थापना गरिएको SD कार्ड निकालिएको हुनाले तपाईको ट्याबलेट अस्थिर भएको छ। सामान्य अवस्थामा फर्किनका लागि तपाईको ट्याबलेट %d सेकेन्डमा पुनः सुरु हुने छ। सेव नगरिएको कुनै पनि डाटा छ भने ट्याबलेट पुनः सुरु हुनुअघि त्यसलाई सेव गर्नुहोस्।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">तपाईको ट्याबलेट %d सेकेन्डमा पुनः सुरु हुने छ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">तपाईको ट्याबलेट %d सेकेन्डमा पुनः सुरु हुने छ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d एपहरूले गर्दा तपाईको फोन धेरै तातो भइरहेको हुनाले तिनीहरूलाई बन्द गरिएको छ। तपाईको फोन चिसो भएपछि तपाई ती एपहरू फेरि खोल्न सक्नुहुन्छ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d एपले गर्दा तपाईको फोन धेरै तातो भइरहेको हुनाले त्यसलाई बन्द गरिएको छ। तपाईको फोन चिसो भएपछि तपाई त्यो एप फेरि खोल्न सक्नुहुन्छ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d एपहरूले गर्दा तपाईको ट्याबलेट धेरै तातो भइरहेको हुनाले तिनीहरूलाई स्वतः बन्द गरिएको छ। पछि तपाईको ट्याबलेट चिसो भएपछि तपाई ती एपहरू फेरि खोल्न सक्नुहुन्छ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d एपले गर्दा तपाईको ट्याबलेट धेरै तातो भइरहेको हुनाले त्यो एप स्वतः बन्द गरिएको छ। पछि तपाईको ट्याबलेट सेलाएपछि तपाई त्यो एप फेरि खोल्न सक्नुहुन्छ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d एपहरू बन्द गरिए</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d एप बन्द गरियो</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">एकै समयमा स्क्रीनमा %d भन्दा बढी एपहरू देखाउन सकिँदैन। सबैभन्दा पुरानो एप सानो बनाइयो।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">एकै समयमा स्क्रीनमा %d भन्दा बढी एप देखाउन सकिँदैन। सबैभन्दा पुरानो एप सानो बनाइयो।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">आफूले असाइन गर्न चाहेको एप खोल्नुहोस्, त्यसपछि %d सेकेन्डसम्म एप की थिचेर होल्ड गर्नुहोस्।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">आफूले असाइन गर्न चाहेको एप खोल्नुहोस्, त्यसपछि %d सेकेन्डसम्म एप की थिचेर होल्ड गर्नुहोस्।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s ले गर्दा तपाईंको फोन धेरै तातो भइर‍हेको छ। %2$d सेकेन्डमा यो एप स्वतः बन्द गरिने छ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ले गर्दा तपाईंको फोन धेरै तातो भइर‍हेको छ। %2$d सेकेन्डमा यो एप स्वतः बन्द गरिने छ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s ले गर्दा तपाईंको ट्याब्लेट धेरै तातो भइर‍हेको छ। %2$d सेकेन्डमा यो एप स्वतः बन्द गरिने छ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ले गर्दा तपाईंको ट्याब्लेट धेरै तातो भइर‍हेको छ। %2$d सेकेन्डमा यो एप स्वतः बन्द गरिने छ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Samsung Cloud मा %d दिनसम्मका लागि असीमित डाटा ब्याक अप गर्नुहोस् वा तपाईंले ब्याक अप गर्नुभएको डाटा रिस्टोर गर्नुहोस्।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Samsung Cloud मा %d दिनसम्मका लागि असीमित डाटा ब्याक अप गर्नुहोस् वा तपाईंले ब्याक अप गर्नुभएको डाटा रिस्टोर गर्नुहोस्।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s ले गर्दा तपाईको फोन धेरै तातो भइरहेको छ। तपाई यसलाई अहिले नै बन्द गर्न सक्नुहुन्छ, नत्र %2$d सेकेन्डमा त्यो एपलाई स्वतः बन्द गरिने छ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ले गर्दा तपाईको फोन धेरै तातो भइरहेको छ। तपाई यसलाई अहिले नै बन्द गर्न सक्नुहुन्छ, नत्र %2$d सेकेन्डमा त्यो एपलाई स्वतः बन्द गरिने छ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s ले गर्दा तपाईको ट्याबलेट धेरै तातो भइरहेको छ। तपाई यसलाई अहिले नै बन्द गर्न सक्नुहुन्छ, नत्र %2$d सेकेन्डमा त्यो एपलाई स्वतः बन्द गरिने छ।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s ले गर्दा तपाईको ट्याबलेट धेरै तातो भइरहेको छ। तपाई यसलाई अहिले नै बन्द गर्न सक्नुहुन्छ, नत्र %2$d सेकेन्डमा त्यो एपलाई स्वतः बन्द गरिने छ।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d वस्तुहरू</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d वस्तु</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">तपाई जुन Wi-Fi नेटवर्कमा जोड्न चाहनुहुन्छ त्यसमा एक पटकमा %d वटा यन्त्रहरू मात्र जोड्न सकिन्छ। त्यो नेटवर्कको कुनै पनि अन्य यन्त्रको जडान विच्छेद गरी फेरि प्रयास गर्नुहोस्।</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">तपाई जुन Wi-Fi नेटवर्कमा जोड्न चाहनुहुन्छ त्यसमा एक पटकमा %d यन्त्र मात्र जोड्न सकिन्छ। त्यो नेटवर्कको कुनै पनि अन्य यन्त्रको जडान विच्छेद गरी फेरि प्रयास गर्नुहोस्।</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d घण्टा</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d घण्टा</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d मिनट</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d मिनट</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

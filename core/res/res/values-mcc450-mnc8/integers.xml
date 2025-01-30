@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="config_mobile_mtu">1450</integer>
+    <integer name="default_reserved_data_coding_scheme">4</integer>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.internal.widget.ResolverDrawerLayout android:id="@id/contentPanel" android:layout_width="fill_parent" android:layout_height="fill_parent" android:maxCollapsedHeight="200.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="?colorBackgroundFloating" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="5.0" android:elevation="8.0dip" android:layout_alwaysShow="true">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.5">
+            <ImageView android:layout_gravity="start|center|top" android:id="@id/icon" android:layout_width="60.0dip" android:layout_height="60.0dip" android:layout_marginTop="10.0dip" android:src="@drawable/resolver_icon_placeholder" android:scaleType="fitCenter" android:layout_marginStart="10.0dip" android:layout_marginEnd="5.0dip" />
+            <TextView android:textAppearance="?textAppearanceLarge" android:gravity="start|center" android:id="@id/title" android:layout_width="0.0dip" android:layout_height="?listPreferredItemHeight" android:layout_weight="1.0" android:paddingEnd="16.0dip" android:layout_marginStart="16.0dip" />
+            <LinearLayout android:id="@id/profile_button" android:paddingTop="4.0dip" android:paddingBottom="4.0dip" android:focusable="true" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="48.0dip" android:layout_marginTop="4.0dip" android:paddingStart="8.0dip" android:paddingEnd="8.0dip" android:layout_marginEnd="4.0dip" style="?borderlessButtonStyle">
+                <ImageView android:layout_gravity="start|center" android:id="@id/icon" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginTop="12.0dip" android:layout_marginBottom="12.0dip" android:scaleType="fitCenter" android:layout_marginEnd="?listPreferredItemPaddingEnd" />
+                <TextView android:textAppearance="?textAppearanceButton" android:textColor="?textColorPrimary" android:ellipsize="marquee" android:layout_gravity="start|center" android:id="@id/text1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:minLines="1" android:layout_marginEnd="?listPreferredItemPaddingEnd" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="end|center" android:orientation="horizontal" android:id="@id/button_bar" android:paddingTop="8.0dip" android:paddingBottom="8.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.5" android:measureWithLargestChild="true" android:layoutDirection="locale" android:paddingStart="12.0dip" android:paddingEnd="12.0dip" android:elevation="8.0dip" android:layout_alwaysShow="true" style="?buttonBarStyle">
+            <Button android:enabled="false" android:layout_gravity="start" android:id="@id/button_once" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/alert_dialog_button_bar_height" android:text="@string/activity_resolver_use_once" android:maxLines="2" android:onClick="onButtonClick" style="?buttonBarButtonStyle" />
+            <Button android:enabled="false" android:layout_gravity="end" android:id="@id/button_always" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="@dimen/alert_dialog_button_bar_height" android:text="@string/activity_resolver_use_always" android:maxLines="2" android:onClick="onButtonClick" style="?buttonBarButtonStyle" />
+        </LinearLayout>
+        <FrameLayout android:id="@id/stub" android:background="?colorBackgroundFloating" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alwaysShow="true" />
+        <TabHost android:id="@id/profile_tabhost" android:background="?colorBackgroundFloating" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:layout_alwaysShow="true">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TabWidget android:id="@id/tabs" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                <View android:id="@id/resolver_tab_divider" android:background="?colorBackgroundFloating" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginBottom="8.0dip" android:foreground="?dividerVertical" />
+                <FrameLayout android:id="@id/tabcontent" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.android.internal.app.ResolverViewPager android:id="@id/profile_pager" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+        <View android:background="?dividerVertical" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    </LinearLayout>
+</com.android.internal.widget.ResolverDrawerLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">A túa tableta é inestable porque se retirou unha tarxeta SD que tiña aplicacións instaladas. A tableta reiniciarase en %d segundos para volver ao estado normal. Antes de que se reinicie, garda os datos que aínda non gardases.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A túa tableta é inestable porque se retirou unha tarxeta SD que tiña aplicacións instaladas. A tableta reiniciarase en %d segundo para volver ao estado normal. Antes de que se reinicie, garda os datos que aínda non gardases.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">A túa tableta reiniciarase en %d segundos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A túa tableta reiniciarase en %d segundo</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">Pecháronse automaticamente %d aplicacións porque estaban a facer que o teléfono quecese en exceso. Volve abrilas máis tarde cando o teléfono arrefríe.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Pechouse automaticamente %d aplicación porque estaba a facer que o teléfono quecese en exceso. Volve abrila máis tarde cando o teléfono arrefríe.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">Pecháronse automaticamente %d aplicacións porque estaban facendo que a tableta quecese demasiado. Volve abrilas máis tarde cando a tableta arrefríe.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Pechouse automaticamente %d aplicación porque estaba facendo que a tableta quecese demasiado. Volve abrila máis tarde cando a tableta arrefríe.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplicacións pechadas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicación pechada</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Non se poden mostrar máis de %d aplicacións na pantalla ao mesmo tempo. A aplicación máis antiga minimizouse.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Non se pode mostrar máis de %d aplicación na pantalla ao mesmo tempo. A aplicación máis antiga minimizouse.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Abre a aplicación que queiras asignar e, a continuación, mantén pulsada a tecla da aplicación durante %d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Abre a aplicación que queiras asignar e, a continuación, mantén pulsada a tecla da aplicación durante %d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s está facendo que o teléfono queza demasiado. Pecharase automaticamente en %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está facendo que o teléfono queza demasiado. Pecharase automaticamente en %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s está facendo que a tableta queza demasiado. Pecharase automaticamente en %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está facendo que a tableta queza demasiado. Pecharase automaticamente en %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Fai copias de seguridade de datos ilimitados en Samsung Cloud durante un máximo de %d días ou restaura os datos dos que fixeches copias de seguridade.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Fai copias de seguridade de datos ilimitados en Samsung Cloud durante un máximo de %d día ou restaura os datos dos que fixeches copias de seguridade.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s está facendo que o teléfono queza demasiado. Pecha a aplicación agora ou pecharase automaticamente en %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está facendo que o teléfono queza demasiado. Pecha a aplicación agora ou pecharase automaticamente en %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s está facendo que a tableta queza demasiado. Pecha a aplicación agora ou pecharase automaticamente en %2$d segundos.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s está facendo que a tableta queza demasiado. Pecha a aplicación agora ou pecharase automaticamente en %2$d segundo.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elementos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d elemento</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">A rede Wi-Fi á que te queres conectar só pode estar conectada a %d dispositivos simultaneamente. Desconecta os outros dispositivos desa rede e téntao outra vez.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">A rede Wi-Fi á que te queres conectar só pode estar conectada a %d dispositivo simultaneamente. Desconecta os outros dispositivos desa rede e téntao outra vez.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d horas</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d hora</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutos</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuto</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

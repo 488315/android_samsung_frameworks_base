@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="SPlanner" TargetApi="21" TargetPackageName="com.samsung.android.calendar" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Primary color" DefaultValue="#ff00a884" DestAttribName="primary" POption="FixedOpacity|AlwaysOverriden" UID="16-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Primary dark color" DefaultValue="#ff009e7c" DestAttribName="primary_dark" UID="16-B" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Common component color" DefaultValue="#ff737373" DestAttribName="color_common_component" UID="16-C" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Color control activated" DefaultValue="#ff009e7c" DestAttribName="color_control_activated" UID="16-D" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Status bar background color" DefaultValue="#fff2f2f2" DestAttribName="common_actionbar_status_bar_color" UID="16-S-1" ValueRef="1-51" ValueType="BgColor" />
+        <Property Comment="Status bar icon color (light / dark)" DefaultValue="true" DestAttribName="sem_window_light_status_bar" UID="16-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Action bar background color" DefaultValue="#fff2f2f2" DestAttribName="common_actionbar_background_color,theme_color" UID="16-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Action bar title text color" DefaultValue="#ff252525" DestAttribName="common_actionbar_activity_title_text_color" UID="16-1-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Action bar Text, icon color" DefaultValue="#ff252525" DestAttribName="common_actionbar_menu_text_color,common_actionbar_back_icon_tint_color,common_actionbar_today_number_text_color" UID="16-1-3-2" ValueRef="1-3-1" ValueType="TintColor" />
+        <Property Comment="Action bar back icon image" DefaultValue="" DestAttribName="actionbar_back_icon" DestQualifiers="sw360dp-xxxhdpi" UID="16-1-7" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Status timeline title text color" DefaultValue="#ff252525" DestAttribName="participant_schedule_toolbar_text_color" UID="16-1-8" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="bottom background color" DefaultValue="#fff2f2f2" DestAttribName="common_bottom_navigation_background_color" UID="16-1-12" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="bottom text only - text color" DefaultValue="#ff009e7c" DestAttribName="common_bottom_navigation_text_only_text_color" UID="16-1-16" ValueRef="1-12-4" ValueType="TextColor" />
+        <Property Comment="rounded corners stroke color" DefaultValue="#00d6d6d6" DestAttribName="theme_rounded_corners_stroke_color" Opacity="0" POption="AlwaysOverriden" UID="16-1-30" ValueType="Color" />
+        <Property Comment="View common background color" DefaultValue="#fffcfcfc" DestAttribName="common_window_background_color,theme_content_area_color" UID="16-2-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="View common icon color - invitation" DefaultValue="#ffadaeaf" DestAttribName="events_popup_view_ic_invitation_color" UID="16-2-3" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="Sunday text color" DefaultValue="#ffe51c23" DestAttribName="common_sunday_number_text_color" POption="AlwaysOverriden" UID="16-3-1" ValueRef="1-23-8" ValueType="TextColor" />
+        <Property Comment="Sunday dimm text color" DefaultValue="#ffe51c23" DestAttribName="" Opacity="40" UID="16-3-1-1" ValueRef="16-3-1" ValueType="TextColor" />
+        <Property Comment="Weekday text color" DefaultValue="#ff252525" DestAttribName="common_weekday_number_text_color,common_month_number_text_color" POption="AlwaysOverriden" UID="16-3-2" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Weekday dimm text color" DefaultValue="#ff252525" DestAttribName="" Opacity="40" UID="16-3-2-1" ValueRef="16-3-2" ValueType="TextColor" />
+        <Property Comment="Saturday text color (china delta)" DefaultValue="#ff0082be" DestAttribName="common_saturday_number_text_color" UID="16-100-1-2" ValueRef="16-A" ValueType="TextColor" />
+        <Property Comment="Handwriting Toolbar background color" DefaultValue="#fffafafa" DestAttribName="handwriting_toolbar_bg_color" UID="16-4-1" ValueRef="1-10-1" ValueType="BgColor" />
+        <Property Comment="Handwriting Toolbar background image" DefaultValue="" DestAttribName="handwriting_toolbar_bg" DestQualifiers="xxxhdpi" UID="16-4-1-1" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property Comment="Handwriting Toolbar background stroke color" DefaultValue="#ff4c4c4c" DestAttribName="handwriting_toolbar_bg_stroke_color" UID="16-4-2" ValueRef="1-10-2" ValueType="BgColor" />
+        <Property Comment="Handwriting Toolbar icon color" DefaultValue="#ff4c4c4c" DestAttribName="handwriting_toolbar_icon_color" UID="16-4-3" ValueRef="1-10-3" ValueType="TintColor" />
+        <Property Comment="Handwriting Toolbar icon selected bg color" DefaultValue="#ffe8e8e8" DestAttribName="handwriting_toolbar_icon_selected_color" UID="16-4-3-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Handwriting Toolbar icon ripple effect color" DefaultValue="#14000000" DestAttribName="handwriting_toolbar_icon_selected_ripple_color,handwriting_toolbar_icon_unselected_ripple_color" UID="16-4-3-2" ValueRef="1-52-2" ValueType="BgColor" />
+        <Property Comment="Handwriting Tipcard background color" DefaultValue="#ff474747" DestAttribName="handwriting_tipcard_bg_color" UID="16-4-4" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Handwriting Tipcard text / icon color" DefaultValue="#fffafafa" DestAttribName="calendar_handwriting_tipcard_text_color" UID="16-4-5" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Handwriting Toolbar eraser icon color" DefaultValue="#ffdadada" DestAttribName="handwriting_toolbar_icon_eraser_color" UID="16-4-6" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="Quick Add EditText BG stroke color" DefaultValue="#ffebebeb" DestAttribName="quick_add_stroke_color" UID="16-5-1" ValueRef="1-59-4" ValueType="Color" />
+        <Property Comment="Quick Add Highlight color" DefaultValue="#ff0381fe" DestAttribName="quick_add_time_highlight_color" UID="16-5-2" ValueRef="16-A" ValueType="BgColor" />
+        <Property Comment="Quick Add Done Button inactivated background color" DefaultValue="#ffd4d4d4" DestAttribName="quick_add_fab_disable_background_color" UID="16-5-3" ValueRef="1-22-4" ValueType="BgColor" />
+        <Property Comment="Quick Add Hint text color" DefaultValue="#ffa9a9a9" DestAttribName="quick_add_hint_text_color" UID="16-5-4" ValueRef="1-59-4" ValueType="TextColor" />
+        <Property Comment="Quick Add Check icon color" DefaultValue="#fffafafa" DestAttribName="quick_add_check_icon_enabled_color" UID="16-5-5" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="FAB background color" DefaultValue="#ff00a884" DestAttribName="floating_action_button_background_color" UID="16-6-1" ValueRef="16-A" ValueType="BgColor" />
+        <Property Comment="FAB background image" DefaultValue="thumbnail_floating_action_button_bg" DestAttribName="floating_action_button_background" DestQualifiers="sw360dp-xxxhdpi" ImageSize="56X56" UID="16-6-2" ValueRef="1-8-2" ValueType="BgImage" />
+        <Property Comment="FAB icon tint color" DefaultValue="#fffafafa" DestAttribName="floating_action_button_tint_color" UID="16-6-3" ValueRef="1-8-3" ValueType="TintColor" />
+        <Property Comment="Today text color" DefaultValue="#fffafafa" DestAttribName="common_today_number_text_color" POption="AlwaysOverriden" UID="16-8-3" ValueType="TextColor" />
+        <Property Comment="Today circle color" DefaultValue="#ff00a884" DestAttribName="common_today_circle_color" POption="AlwaysOverriden" UID="16-8-3-1" ValueType="Color" />
+        <Property Comment="Today weekend circle color" DefaultValue="#fffc5157" DestAttribName="common_today_holiday_circle_color" POption="AlwaysOverriden" UID="16-8-3-2" ValueType="Color" />
+        <Property Comment="Month Focus BG stroke color" DefaultValue="#ff00a884" DestAttribName="common_selected_marker_color" UID="16-8-5-1" ValueRef="16-8-3-1" ValueType="Color" />
+        <Property Comment="Month Long press BG color" DefaultValue="#ff646464" DestAttribName="month_selected_drag_mode_color" UID="16-8-6" ValueRef="16-3-2" ValueType="Color" />
+        <Property Comment="GPS icon tint color - Location picker" DefaultValue="#ff808080" DestAttribName="location_picker_current_icon_color" UID="16-10-1" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="GPS icon tint color - TimeZone" DefaultValue="#fffafafa" DestAttribName="timezone_current_icon_color" UID="16-10-1-1" ValueRef="1-11-1" ValueType="TintColor" />
+        <Property Comment="Search app bar BG color - TimeZone" DefaultValue="#fff2f2f2" DestAttribName="timezone_search_view_background_color" UID="16-10-5" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="powered by description text color" DefaultValue="#ff505050" DestAttribName="location_picker_search_powered_by_text_color" UID="16-10-6" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="Radio button on color - based color_control_activated" DefaultValue="#ff009e7c" DestAttribName="location_picker_search_radio_selected_tint_color" UID="16-10-7" ValueRef="1-4-1" ValueType="TintColor" />
+        <Property Comment="Radio button on image" DefaultValue="" DestAttribName="common_radio_button_on_image" DestQualifiers="sw360dp-xxxhdpi" UID="16-10-7-1" ValueRef="1-4-1-1" ValueType="BgImage" />
+        <Property Comment="Radio button off color - based color_control_activated" DefaultValue="#ff009e7c" DestAttribName="location_picker_search_radio_unselected_tint_color" UID="16-10-8" ValueRef="1-4-2" ValueType="TintColor" />
+        <Property Comment="Radio button off image" DefaultValue="" DestAttribName="common_radio_button_off_image" DestQualifiers="sw360dp-xxxhdpi" UID="16-10-8-1" ValueRef="1-4-2-1" ValueType="BgImage" />
+        <Property Comment="History icon tint color" DefaultValue="#ff454545" DestAttribName="location_picker_search_list_icon_tint_color" UID="16-10-9" ValueRef="1-3-1" ValueType="TintColor" />
+        <Property Comment="History delete icon tint color" DefaultValue="#ff404040" DestAttribName="location_picker_search_delete_icon_tint_color" UID="16-10-10" ValueRef="1-C" ValueType="TintColor" />
+        <Property Comment="Keyword, Address Text color" DefaultValue="#ff009e7c" DestAttribName="location_picker_search_radio_button_text_color" UID="16-10-11" ValueRef="1-12-4" ValueType="TextColor" />
+        <Property Comment="Search view background color" DefaultValue="#0c000000" DestAttribName="common_location_search_view_background_color" UID="16-10-12" ValueRef="1-59-1" ValueType="BgColor" />
+        <Property Comment="Search view hint text color (has background)" DefaultValue="" DestAttribName="common_search_view_hint_text_color" UID="16-10-13" ValueRef="1-59-4" ValueType="TextColor" />
+        <Property Comment="Search view hint text color (not have background)" DefaultValue="" DestAttribName="common_search_view_focused_hint_text_color" UID="16-10-14" ValueRef="1-59-10" ValueType="TextColor" />
+        <Property Comment="Search view input text color" DefaultValue="" DestAttribName="common_search_view_text_color" UID="16-10-15" ValueRef="1-59-12" ValueType="TextColor" />
+        <Property Comment="Search view icon tint color" DefaultValue="" DestAttribName="common_search_view_icon_tint_color" UID="16-10-16" ValueRef="1-59-11" ValueType="TintColor" />
+        <Property Comment="Search suggestion item background color" DefaultValue="#0ffafafa" DestAttribName="search_suggestion_item_background_color" UID="16-10-17" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Search suggestion item background stroke color" DefaultValue="#66252525" DestAttribName="search_common_item_stroke_color" UID="16-10-18" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Search suggestion item text color" DefaultValue="#ff636363" DestAttribName="search_common_item_text_color" UID="16-10-19" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Search history item background color" DefaultValue="#0d252525" DestAttribName="search_history_item_background_color" UID="16-10-20" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Search history item text color" DefaultValue="#ff4d4d4d" DestAttribName="search_history_item_text_color" UID="16-10-21" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Event add button BG color - based color_control_activated" DefaultValue="#4c009e7c" DestAttribName="timeline_add_button_color" Opacity="40" UID="16-12-1" ValueRef="24-E" ValueType="BgColor" />
+        <Property Comment="Event add button BG stroke color - based color_control_activated" DefaultValue="#ff009e7c" DestAttribName="timeline_add_border_color" UID="16-12-2" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Event add button icon tint color" DefaultValue="#ff009e7c" DestAttribName="timeline_add_icon_tint_color" UID="16-12-4" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Unselected text color" DefaultValue="#ff252525" DestAttribName="weekly_button_text_color_default" UID="16-25-2" ValueRef="16-3-2" ValueType="TextColor" />
+        <Property Comment="Unselected Sunday text color" DefaultValue="#ccb1181d" DestAttribName="weekly_button_text_color_sunday" UID="16-25-2-1" ValueRef="16-3-1" ValueType="TextColor" />
+        <Property Comment="Unselected Saturday text color (china delta)" DefaultValue="#ff1943b0" DestAttribName="weekly_button_text_color_saturday" UID="16-100-4-1" ValueRef="16-3-2" ValueType="TextColor" />
+        <Property Comment="Repeate sub text color" DefaultValue="#ff909090" DestAttribName="repeat_duration_title_text_color" UID="16-25-4" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Repeate on button text color" DefaultValue="#ff676767" DestAttribName="repeat_on_button_text_color" UID="16-25-5" ValueRef="24-D" ValueType="TextColor" />
+        <Property Comment="No event text color" DefaultValue="#ad252525" DestAttribName="common_no_item_text_color,common_no_item_sub_text_color" UID="16-36-3" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="No event sticker tint color" DefaultValue="#ff252525" DestAttribName="no_item_sticker_button_color" UID="16-36-4" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="Event exist BG color" DefaultValue="#fff4f4f4" DestAttribName="month_event_exist_background_color" UID="16-36-5" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Edit event call button tint color" DefaultValue="#ff15b76d" DestAttribName="edit_card_birthday_call_icon_color" UID="16-37-1" ValueRef="24-E" ValueType="TintColor" />
+        <Property Comment="Edit event List icon tint color (on)" DefaultValue="#ff00a884" DestAttribName="edit_card_icon_on_tint_color" UID="16-37-2" ValueRef="16-A" ValueType="TintColor" />
+        <Property Comment="Edit event List icon tint color (+ button)" DefaultValue="#ff252525" DestAttribName="edit_card_add_image_tint_color" UID="16-37-2-1" ValueRef="1-11-1" ValueType="TintColor" />
+        <Property Comment="Edit event message button tint color" DefaultValue="#ff11b2ec" DestAttribName="edit_card_birthday_message_icon_color" UID="16-37-4" ValueRef="16-A" ValueType="TintColor" />
+        <Property Comment="Edit event email button tint color" DefaultValue="#ff9c9c9c" DestAttribName="edit_card_birthday_email_icon_color" UID="16-37-5" ValueRef="16-A" ValueType="TintColor" />
+        <Property Comment="Invitee btn bg color" DefaultValue="#fffdfdfd" DestAttribName="edit_card_common_chips_background_color,edit_card_common_chips_button_background_color" UID="16-37-6-1" ValueRef="1-10-1" ValueType="BgColor" />
+        <Property Comment="Invitee btn stroke color" DefaultValue="#b2c8c8c8" DestAttribName="edit_card_common_chips_stroke_color,edit_card_common_chips_button_stroke_color" UID="16-37-6-2" ValueRef="1-10-2" ValueType="Color" />
+        <Property Comment="Invitee btn text color" DefaultValue="#ff252525" DestAttribName="edit_card_common_chips_text_color" UID="16-37-7" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="Add Icon tint color" DefaultValue="" DestAttribName="common_add_icon_tint_color,calendar_alert_add_tint_color" UID="16-38-1" ValueRef="1-17-1" ValueType="TintColor" />
+        <Property Comment="Add Icon image" DefaultValue="" DestAttribName="tw_list_icon_add,calendar_alert_add" DestQualifiers="sw360dp-xxxhdpi" ImageSize="32X32" UID="16-38-2" ValueRef="1-17-2" ValueType="BgImage" />
+        <Property Comment="Sub app bar background color" DefaultValue="#ff000000" DestAttribName="common_sub_app_bar_background_color" UID="16-40-1" ValueRef="1-39-1" ValueType="BgColor" />
+        <Property Comment="Sub app bar text color" DefaultValue="#fffafafa" DestAttribName="common_sub_app_bar_text_color" UID="16-40-2" ValueRef="1-39-2" ValueType="TextColor" />
+        <Property Comment="Sub header Divider color" DefaultValue="#fff2f2f2" DestAttribName="common_list_sub_header_background_color" UID="16-41-1" ValueRef="1-19-1" ValueType="BgColor" />
+        <Property Comment="Sub header Text color" DefaultValue="#ff252525" DestAttribName="common_list_sub_header_text_color" UID="16-41-2" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="select all checkbox ON tint color - based color_control_activated" DefaultValue="#ff009e7c" DestAttribName="common_select_all_check_box_on_tint_color" UID="16-42-4" ValueRef="1-49-7" ValueType="TintColor" />
+        <Property Comment="select all checkbox ON Image" DefaultValue="" DestAttribName="select_all_checkbox_on" DestQualifiers="" UID="16-42-4-1" ValueRef="1-49-7-1" ValueType="Image" />
+        <Property Comment="select all checkbox OFF tint color" DefaultValue="#cc8f8f8f" DestAttribName="common_select_all_check_box_off_tint_color" UID="16-42-5" ValueRef="1-49-8" ValueType="TintColor" />
+        <Property Comment="select all checkbox OFF Image" DefaultValue="" DestAttribName="select_all_checkbox_off" DestQualifiers="" UID="16-42-5-1" ValueRef="1-49-8-1" ValueType="Image" />
+        <Property Comment="List main text color" DefaultValue="#ff252525" DestAttribName="common_list_main_text_color,theme_text_color" UID="16-44-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="List sub text color" DefaultValue="#ff86898b" DestAttribName="common_list_secondary_text_color" UID="16-44-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="List Selected background color" DefaultValue="#14009e7c" DestAttribName="common_list_selected_background_color" UID="16-44-10" ValueRef="1-13-4" ValueType="BgColor" />
+        <Property Comment="Background color (Light)" DefaultValue="#0f000000" DestAttribName="common_button_background_color" UID="16-45-3" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Text color (Light)" DefaultValue="#ff252525" DestAttribName="common_button_text_color" UID="16-45-4" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Search view background color" DefaultValue="#0c000000" DestAttribName="common_search_view_background_color" UID="16-46-1" ValueRef="1-59-1" ValueType="BgColor" />
+        <Property Comment="No item text color" DefaultValue="#66fafafa" DestAttribName="common_no_results_text_color" UID="16-46-3" ValueRef="16-36-3" ValueType="TextColor" />
+        <Property Comment="Call number link text color" DefaultValue="#ff00a884" DestAttribName="common_text_input_link_text_color" UID="16-46-4" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="weather setting description text color" DefaultValue="#ff505050" DestAttribName="common_description_text_color" UID="16-46-10" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Background color (Dark)" DefaultValue="#0f000000" DestAttribName="common_button_background_dark_color" UID="16-46-11" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Text color (Dark)" DefaultValue="#ff252525" DestAttribName="common_button_text_dark_color" UID="16-46-12" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="List spinner icon tint color" DefaultValue="#ff252525" DestAttribName="common_list_spinner_arrow_tint_color" UID="16-47-2" ValueRef="1-3-1" ValueType="TintColor" />
+        <Property Comment="List spinner text color" DefaultValue="#ff252525" DestAttribName="common_list_spinner_text_color" UID="16-47-4" ValueRef="1-16-1" ValueType="TextColor" />
+        <Property Comment="Dialog spinner icon tint color" DefaultValue="#ff252525" DestAttribName="common_dialog_spinner_arrow_tint_color" UID="16-47-8" ValueRef="1-24-2" ValueType="TintColor" />
+        <Property Comment="Dialog spinner text color" DefaultValue="#ff252525" DestAttribName="common_dialog_spinner_text_color" UID="16-47-9" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="Month view week divider color" DefaultValue="#0f000000" DestAttribName="common_week_number_divider_color,events_popup_view_divider_color,timeline_week_bottom_Line,participant_schedule_title_bottom_line_color,month_event_list_divider_color" Opacity="70" UID="16-48-2" ValueRef="16-3-2" ValueType="Color" />
+        <Property Comment="Month view week text color" DefaultValue="#b2252525" DestAttribName="common_week_number_text_color,timeline_week_num_text_color" Opacity="70" UID="16-48-3" ValueRef="16-3-2" ValueType="TextColor" />
+        <Property Comment="Month view sub text color" DefaultValue="#ff979797" DestAttribName="common_views_sub_text_color" UID="16-48-4" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Month sticker icon color" DefaultValue="#ffa2a2a2" DestAttribName="add_sticker_button_color" UID="16-48-5" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="Month timeline mode change icon" DefaultValue="#ff000000" DestAttribName="event_popup_mode_toggle_button_color" UID="16-48-6" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="More event text color" DefaultValue="#fffafafa" DestAttribName="month_more_event_color" UID="16-48-7" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Time event BG color" DefaultValue="#fff4f4f4" DestAttribName="month_event_text_background_color" UID="16-48-8" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Checkbox checked tint color" DefaultValue="#ff53c259" DestAttribName="common_checkbox_checked_tint_color" UID="16-49-1" ValueRef="16-D" ValueType="TintColor" />
+        <Property Comment="Dialog Description text color for add event calendars" DefaultValue="#ff505050" DestAttribName="common_dialog_single_choice_description_text_color" UID="16-50-1" ValueRef="1-9-9" ValueType="TextColor" />
+        <Property Comment="Dialog title text color" DefaultValue="#ff252525" DestAttribName="common_dialog_title_text_color" UID="16-50-2" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="month goto picker title color" DefaultValue="#ff454545" DestAttribName="month_picker_header_text_color" UID="16-50-3" ValueRef="1-41-3" ValueType="Color" />
+        <Property Comment="Dialog Main text color" DefaultValue="#ff252525" DestAttribName="common_dialog_main_text_color" UID="16-50-10" ValueRef="1-9-6" ValueType="TextColor" />
+        <Property Comment="Dialog Sub Text Color" DefaultValue="#ff979797" DestAttribName="common_dialog_secondary_text_color" UID="16-50-11" ValueRef="1-9-7" ValueType="TextColor" />
+        <Property Comment="Dialog Body text color" DefaultValue="#ff252525" DestAttribName="common_dialog_body_text_color" UID="16-50-12" ValueRef="1-9-4" ValueType="TextColor" />
+        <Property Comment="Dialog Background color" DefaultValue="#fffcfcfc" DestAttribName="common_dialog_window_background_color" UID="16-50-13" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="month goto picker unselected background color" DefaultValue="#ffe6e6e6" DestAttribName="month_picker_unselected_bg_color" UID="16-50-14" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="month goto picker unselected text color" DefaultValue="#ff252525" DestAttribName="month_picker_unselected_text_color" UID="16-50-15" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="month goto picker selected background color" DefaultValue="#ff00a884" DestAttribName="month_picker_selected_bg_color" UID="16-50-16" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="month goto picker selected text color" DefaultValue="#fffafafa" DestAttribName="month_picker_selected_text_color" UID="16-50-17" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Delete confirm dialog cancel button text color" DefaultValue="#ff010101" DestAttribName="delete_confirm_dialog_normal_action_color" UID="16-50-18" ValueRef="1-9-15" ValueType="TextColor" />
+        <Property Comment="Delete confirm dialog delete button text color" DefaultValue="#ffdb332a" DestAttribName="delete_confirm_dialog_strong_action_color" UID="16-50-19" ValueRef="1-9-16" ValueType="TextColor" />
+        <Property Comment="Drop down list main text color" DefaultValue="#ff000000" DestAttribName="common_dropdown_list_text_color" UID="16-57-1" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="Drop down list background color" DefaultValue="#fffcfcfc" DestAttribName="common_dropdown_list_background_color" UID="16-57-2" ValueRef="1-10-1" ValueType="BgColor" />
+        <Property Comment="Drop down list background image" DefaultValue="" DestAttribName="common_popup_background,more_options_background,duration_popup_view_background" DestQualifiers="sw360dp-xxxhdpi" UID="16-57-2-1" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property Comment="Drop down list background stroke color" DefaultValue="#ffcccccc" DestAttribName="common_dropdown_list_stroke_color" UID="16-57-3" ValueRef="1-10-2" ValueType="BgColor" />
+        <Property Comment="S planner BG image" DefaultValue="s_planner_bg" DestAttribName="s_planner_bg" DestQualifiers="mipmap-xxhdpi" ImageSize="48X48" UID="16-60-1" ValueType="Image" />
+        <Property Comment="is use splaner live icon" DestAttribName="liveicon_from_theme" POption="AlwaysOverriden" UID="16-60-1-1" ValueRef="16-60-1" ValueType="MetaInfo" />
+        <Property Comment="S Planner date text color" DefaultValue="#ff00665e" DestAttribName="tw_live_icon_date_text_color" UID="16-60-3" ValueType="TextColor" />
+        <Property Comment="Add event Background color" DefaultValue="#fffafafa" DestAttribName="detail_window_background_color" UID="16-61-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Add event Divider color" DefaultValue="#ffe6e6e6" DestAttribName="common_list_divider_color,edit_card_divider_color" UID="16-61-2" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="sticker icon tint" DefaultValue="#ff4b4b4b" DestAttribName="edit_card_sticker_icon_tint_color" UID="16-61-7" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="add event input title hint text field text color" DefaultValue="#ff949494" DestAttribName="edit_title_text_input_hint_text_color,edit_input_hint_text_color" UID="16-61-8" ValueRef="24-D" ValueType="TextColor" />
+        <Property Comment="Add event date time selected background color" DefaultValue="#fffcfcfc" DestAttribName="edit_card_date_time_button_selected_background_color,date_picker_selection_circle_color" UID="16-61-9" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Add event date time selected text color" DefaultValue="#ff252525" DestAttribName="edit_card_date_time_button_selected_text_color,date_picker_selected_day_number_text_color" UID="16-61-10" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Repeat discription text color" DefaultValue="#ff505050" DestAttribName="repeat_description_text_color" UID="16-61-13" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="about_calendar_update_button_text_color,subscription_reset_button_text_color" UID="16-62-2" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Update button bg color" DefaultValue="#ff00a884" DestAttribName="about_calendar_update_button_background_color,subscription_reset_button_background" UID="16-62-3" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Update application text color" DefaultValue="#ff252525" DestAttribName="about_calendar_app_name_text_color" UID="16-62-5" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Update sub text color" DefaultValue="#ff909090" DestAttribName="about_calendar_app_version_text_color,about_calendar_available_text_color" UID="16-62-6" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Update window background color" DefaultValue="#fffcfcfc" DestAttribName="about_calendar_background_color" UID="16-62-9" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Update icon tint color" DefaultValue="#ff454545" DestAttribName="about_calendar_app_info_icon_tint_color" UID="16-62-10" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="Main switch ON background color - based color_control_activated" DefaultValue="#ff009e7c" DestAttribName="common_master_on_background_color,common_main_switch_on_background_color" UID="16-63-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Main switch OFF background color" DefaultValue="#fffcfcfc" DestAttribName="common_master_off_background_color,common_main_switch_off_background_color" UID="16-63-1-1" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Main switch ON text color" DefaultValue="#fffafafa" DestAttribName="common_master_on_text_color,common_main_switch_on_text_color" UID="16-63-4-1" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Main switch OFF text color" DefaultValue="#ff252525" DestAttribName="common_master_off_text_color,common_main_switch_off_text_color" UID="16-63-4-2" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="drawer bg" DefaultValue="#fffcfcfc" DestAttribName="drawer_background_color" UID="16-64-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Setting icon tint color" DefaultValue="#ff797979" DestAttribName="drawer_setting_icon_tint_color" UID="16-64-2" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="text color" DefaultValue="#ff252525" DestAttribName="drawer_switcher_text_color_default" UID="16-64-3" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="divider color" DefaultValue="#ff979797" DestAttribName="drawer_divider" UID="16-64-5" ValueRef="1-19-4" ValueType="Color" />
+        <Property Comment="Sub text color" DefaultValue="#ff8c8c8c" DestAttribName="drawer_manage_calendar_group_sub_text_color" UID="16-64-6" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="grounp indicator icon tint color" DefaultValue="#78252525" DestAttribName="drawer_manage_calendar_group_indicator_color,drawer_my_phone_icon_tint_color,edit_card_group_calendar_color,drawer_icon_tint_color" UID="16-64-7" ValueRef="1-C" ValueType="TintColor" />
+        <Property Comment="Selected BG color" DefaultValue="#0d000000" DestAttribName="drawer_background_color_checked" UID="16-64-20" ValueRef="1-13-4" ValueType="BgColor" />
+        <Property Comment="Widget setting text color title" DefaultValue="#ff252525" DestAttribName="widget_setting_text_color_title" UID="16-96-8" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Location Seek Bar Tickmark Solid Color" DefaultValue="#ff9c9c9c" DestAttribName="location_seek_bar_tickmark_solid_color" UID="16-96-10" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Location Seek Bar Progress Solid Color" DefaultValue="#4c979797" DestAttribName="location_seek_bar_progress_solid_color" Opacity="40" UID="16-96-11" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="week view divider color" DefaultValue="#14000000" DestAttribName="timeline_grid_line_color" Opacity="30" UID="16-65-1" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="week view dot line color" DefaultValue="#ffd2d2d2" DestAttribName="timeline_grid_dash_line_color" Opacity="30" UID="16-65-3" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="week view current time color" DefaultValue="#ffff5252" DestAttribName="timeline_current_time_color" UID="16-65-4" ValueRef="16-3-1" ValueType="Color" />
+        <Property Comment="sticker picker top sticker item price text color" DefaultValue="#ff009e7c" DestAttribName="top_sticker_item_price_text_color,top_sticker_more_button_color,sticker_picker_tab_enable_color" UID="16-66-1" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="sticker picker unselected tab color" DefaultValue="#ff6a6a6a" DestAttribName="sticker_picker_icon_tint_color" UID="16-66-1-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="sticker picker background color" DefaultValue="#fff0f0f0" DestAttribName="sticker_picker_background_color" UID="16-66-2" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="sticker picker tray tab background color" DefaultValue="#fff2f2f2" DestAttribName="common_main_tab_background_color" UID="16-66-3" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="sticker picker top sticker title text color" DefaultValue="#ff252525" DestAttribName="top_sticker_title_text_color,top_sticker_item_title_text_color" UID="16-66-4" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="sticker picker divider color" DefaultValue="#ffcdcdcd" DestAttribName="top_sticker_divider_color" UID="16-66-5" ValueRef="1-2-1" ValueType="TintColor" />
+        <Property Comment="sticker picker error text color" DefaultValue="#ff484848" DestAttribName="top_sticker_error_text_color" UID="16-66-6" ValueRef="1-53-1" ValueType="TextColor" />
+        <Property Comment="sticker picker error button text color" DefaultValue="#ffa6a6a6" DestAttribName="top_sticker_network_setting_button_text_color" UID="16-66-7" ValueRef="1-53-1" ValueType="TextColor" />
+        <Property Comment="sticker picker error button stroke color" DefaultValue="#ffa6a6a6" DestAttribName="top_sticker_network_setting_button_stroke_color" UID="16-66-8" ValueRef="1-53-1" ValueType="TintColor" />
+        <Property Comment="sticker picker re order tint color" DefaultValue="#ff808080" DestAttribName="common_re_oder_icon_tint_color" UID="16-66-9" ValueRef="1-3-2" ValueType="TintColor" />
+        <Property Comment="sticker picker no item text color" DefaultValue="#7f252525" DestAttribName="sticker_picker_empty_text_color" UID="16-66-10" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="sticker picker no item icon color" DefaultValue="#cccccccc" DestAttribName="sticker_picker_empty_icon_tint_color" UID="16-66-11" ValueRef="24-B" ValueType="TintColor" />
+        <Property Comment="emoticon search result bubble BG" DefaultValue="#fffcfcfc" DestAttribName="sticker_prediction_background_color" UID="16-66-12" ValueRef="1-10-1" ValueType="BgColor" />
+        <Property Comment="emoticon search result bubble BG stroke color" DefaultValue="#ffcccccc" DestAttribName="sticker_prediction_stroke_color" UID="16-66-12-1" ValueRef="1-10-2" ValueType="Color" />
+        <Property Comment="emoticon search result bubble BG image" DefaultValue="" DestAttribName="sticker_prediction_popup_background" DestQualifiers="xxxhdpi" UID="16-66-12-2" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property Comment="emoticon search result bubble text color" DefaultValue="#ff252525" DestAttribName="sticker_prediction_title_text_color" UID="16-66-13" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="bottom text and icon - icon color" DefaultValue="#ff454545" DestAttribName="common_bottom_navigation_icon_tint_color" UID="16-67-1" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="bottom text and icon - text color" DefaultValue="#ff636363" DestAttribName="common_bottom_navigation_text_color" UID="16-67-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="badge background tint color" DefaultValue="#fff56a0d" DestAttribName="common_badge_background_color" UID="16-68-1" ValueRef="1-33-1" ValueType="TintColor" />
+        <Property Comment="badge background image" DefaultValue="" DestAttribName="common_badge_background,drawer_badge_background" DestQualifiers="sw360dp-xxxhdpi" UID="16-68-2" ValueRef="1-33-2" ValueType="Image" />
+        <Property Comment="badge text color" DefaultValue="#fffafafa" DestAttribName="common_badge_text_color" UID="16-68-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="dot badge background tint color" DefaultValue="#fff56a0d" DestAttribName="common_dot_badge_background_color,sticker_update_notification_color" UID="16-68-4" ValueRef="1-33-4" ValueType="TintColor" />
+        <Property Comment="Notification popup background color" DefaultValue="#fffafafa" DestAttribName="head_up_notification_bg" POption="FixedOpacity" UID="16-69-1" ValueRef="4-4-2" ValueType="BgColor" />
+        <Property Comment="Notification popup header color" DefaultValue="#ff00a884" DestAttribName="head_up_notification_header_color" UID="16-69-2" ValueRef="4-22-2" ValueType="TextColor" />
+        <Property Comment="Notification popup title text color" DefaultValue="#ff252525" DestAttribName="head_up_notification_title_text_color" UID="16-69-3" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property Comment="Notification popup body text color" DefaultValue="#e6252525" DestAttribName="head_up_notification_condition_text_color" UID="16-69-4" ValueRef="4-22-2" ValueType="TextColor" />
+        <Property Comment="Notification popup action button text color" DefaultValue="#ff00a884" DestAttribName="head_up_notification_action_button_text_color" UID="16-69-5" ValueRef="4-22-11" ValueType="TextColor" />
+        <Property Comment="Notification popup action button divider" DefaultValue="#ffe6e6e6" DestAttribName="head_up_notification_divider_color" UID="16-69-6" ValueRef="4-22-12" ValueType="Color" />
+        <Property Comment="Alert type divider color" DefaultValue="#ffbfbfbf" DestAttribName="notification_type_dash_line_color" UID="16-70-1" ValueRef="1-2" ValueType="TintColor" />
+        <Property Comment="Divider color (App bar BG)" DefaultValue="#ffd4d4d4" DestAttribName="common_actionbar_divider_color" UID="16-70-2" ValueRef="1-19-2" ValueType="BgColor" />
+        <Property Comment="Ringtone picker slider icon tint color" DefaultValue="#ff00a884" DestAttribName="ringtone_picker_seek_bar_icon_tint_color" UID="16-71-1" ValueRef="1-22-5" ValueType="TintColor" />
+        <Property Comment="Ringtone picker bar progress color" DefaultValue="#ff00a884" DestAttribName="ringtone_picker_seek_bar_progress_color" UID="16-71-2" ValueRef="1-20-2" ValueType="TintColor" />
+        <Property Comment="Ringtone picker bar background color" DefaultValue="#4c00a884" DestAttribName="ringtone_picker_seek_bar_background_color" UID="16-71-3" ValueRef="1-20-1" ValueType="BgColor" />
+        <Property Comment="Card background color" DefaultValue="#ff00a884" DestAttribName="update_card_background_color" UID="16-90-2" ValueRef="1-48-2" ValueType="BgColor" />
+        <Property Comment="Card title text color" DefaultValue="#fffafafa" DestAttribName="update_card_text_color" UID="16-90-5" ValueRef="1-48-4" ValueType="TextColor" />
+        <Property Comment="Card action button text color" DefaultValue="#fffafafa" DestAttribName="update_card_action_button_text_color" UID="16-90-7" ValueRef="1-48-5" ValueType="TextColor" />
+        <Property Comment="add event input text field text color" DefaultValue="#ff000000" DestAttribName="common_text_input_text_color" UID="16-91-1" ValueRef="1-23-5" ValueType="TextColor" />
+        <Property Comment="add event input text field text color (hint)" DefaultValue="#ff6b6b6b" DestAttribName="common_text_input_hint_text_color" UID="16-91-2" ValueRef="1-23-4" ValueType="TextColor" />
+        <Property Comment="add event input hint text field text color (disable)" DefaultValue="#54252525" DestAttribName="common_text_input_disabled_text_color" UID="16-91-3" ValueRef="1-23-4-1" ValueType="TextColor" />
+        <Property Comment="ripple color - control area" DefaultValue="#14000000" DestAttribName="common_control_area_ripple_color" UID="16-93-1" ValueRef="1-52-1" ValueType="Color" />
+        <Property Comment="ripple color - content area" DefaultValue="#19000000" DestAttribName="common_list_ripple_color,common_controller_ripple_color,common_button_ripple_color,common_fab_ripple_color,common_master_switch_ripple_color,common_main_switch_ripple_color" UID="16-93-2" ValueRef="1-52-2" ValueType="Color" />
+        <Property Comment="bottom navigation bar background color" DefaultValue="#fff2f2f2" DestAttribName="common_actionbar_navigate_bar_color" UID="16-94-1" ValueRef="1-69-1" ValueType="BgColor" />
+        <Property Comment="bottom navigation bar icon color (Light/Dark)" DefaultValue="true" DestAttribName="sem_window_light_navigation_bar" UID="16-94-2" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="time text color" DefaultValue="#ff989898" DestAttribName="month_event_brick_time_text_color" UID="16-95-5" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Date picker dialog : Lunar button stroke color" DefaultValue="#ff717171" DestAttribName="date_time_picker_lunar_button_background_color" UID="16-100-6-1" ValueRef="1-2" ValueType="TextColor" />
+        <Property Comment="Date picker dialog : Lunar button text color" DefaultValue="#ff252525" DestAttribName="date_time_picker_lunar_button_text_color" UID="16-100-6-2" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Tab selected text color (lunar)" DefaultValue="#b2fafafa" DestAttribName="tab_indicator_start_end_selected_lunar_text_color" UID="16-100-6-3" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Tab Unselected Text Color (lunar)" DefaultValue="#b26e6e6e" DestAttribName="tab_indicator_start_end_unselected_lunar_text_color" UID="16-100-6-4" ValueRef="1-7-1" ValueType="TextColor" />
+        <Property Comment="Drawer Icon Tint Color" DefaultValue="#ff00b149" DestAttribName="subscription_ic_add_tint_color" UID="16-100-7-1" ValueRef="16-64-7" ValueType="TintColor" />
+        <Property Comment="Subscriptions Subscription text color" DefaultValue="#ff858585" DestAttribName="subscription_header_item_title_color" UID="16-100-27-1" ValueRef="1-19-3" ValueType="TextColor" />
+        <Property Comment="Subscriptions Category text color" DefaultValue="#ff979797" DestAttribName="subscription_category_item_name_text_color" UID="16-100-27-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Subscriptions Title Text Color" DefaultValue="#ff252525" DestAttribName="subscription_list_item_title_text_color" UID="16-100-27-3" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Subscriptions Description Text Color" DefaultValue="#ff909090" DestAttribName="subscription_list_item_detail_text_color" UID="16-100-27-4" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Subscriptions Team name Text Color" DefaultValue="#ff252525" DestAttribName="subscription_team_name_text_color" UID="16-100-27-5" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Subscriptions Score Sub Text Color" DefaultValue="#ff8c8e8f" DestAttribName="subscription_score_sub_text_color" UID="16-100-27-6" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Subscriptions Score Text Color" DefaultValue="#ff252525" DestAttribName="subscription_score_text_color" UID="16-100-27-7" ValueRef="1-3-1" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

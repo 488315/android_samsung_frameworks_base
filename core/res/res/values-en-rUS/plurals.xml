@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Your tablet is unstable because an SD card that had apps installed on it was removed. Your tablet will restart in %d seconds to return to normal. Save any unsaved data before the tablet restarts.</item>
+        <item quantity="zero">Your tablet is unstable because an SD card that had apps installed on it was removed. Your tablet will restart in %d seconds to return to normal. Save any unsaved data before the tablet restarts.</item>
+        <item quantity="one">Your tablet is unstable because an SD card that had apps installed on it was removed. Your tablet will restart in %d second to return to normal. Save any unsaved data before the tablet restarts.</item>
+        <item quantity="two">Your tablet is unstable because an SD card that had apps installed on it was removed. Your tablet will restart in %d seconds to return to normal. Save any unsaved data before the tablet restarts.</item>
+        <item quantity="few">Your tablet is unstable because an SD card that had apps installed on it was removed. Your tablet will restart in %d seconds to return to normal. Save any unsaved data before the tablet restarts.</item>
+        <item quantity="many">Your tablet is unstable because an SD card that had apps installed on it was removed. Your tablet will restart in %d seconds to return to normal. Save any unsaved data before the tablet restarts.</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Your tablet will restart in %d seconds</item>
+        <item quantity="zero">Your tablet will restart in %d seconds</item>
+        <item quantity="one">Your tablet will restart in %d second</item>
+        <item quantity="two">Your tablet will restart in %d seconds</item>
+        <item quantity="few">Your tablet will restart in %d seconds</item>
+        <item quantity="many">Your tablet will restart in %d seconds</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+        <item quantity="zero">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+        <item quantity="one">%d app was closed automatically because it was causing your phone to overheat. You can open it again later after your phone cools down.</item>
+        <item quantity="two">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+        <item quantity="few">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+        <item quantity="many">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+        <item quantity="zero">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+        <item quantity="one">%d app was closed automatically because it was causing your tablet to overheat. You can open it again later after your tablet cools down.</item>
+        <item quantity="two">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+        <item quantity="few">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+        <item quantity="many">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d apps closed</item>
+        <item quantity="zero">%d apps closed</item>
+        <item quantity="one">%d app closed</item>
+        <item quantity="two">%d apps closed</item>
+        <item quantity="few">%d apps closed</item>
+        <item quantity="many">%d apps closed</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">"Can't show more than %d apps on screen at the same time. Oldest app minimized."</item>
+        <item quantity="zero">"Can't show more than %d apps on screen at the same time. Oldest app minimized."</item>
+        <item quantity="one">"Can't show more than %d app on screen at the same time. Oldest app minimized."</item>
+        <item quantity="two">"Can't show more than %d apps on screen at the same time. Oldest app minimized."</item>
+        <item quantity="few">"Can't show more than %d apps on screen at the same time. Oldest app minimized."</item>
+        <item quantity="many">"Can't show more than %d apps on screen at the same time. Oldest app minimized."</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+        <item quantity="zero">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+        <item quantity="one">Open the app you want to assign, then press and hold the app key for %d second.</item>
+        <item quantity="two">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+        <item quantity="few">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+        <item quantity="many">Open the app you want to assign, then press and hold the app key for %d seconds.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="zero">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="one">%1$s is causing your phone to overheat. It will be automatically closed in %2$d second.</item>
+        <item quantity="two">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="few">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="many">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="zero">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="one">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d second.</item>
+        <item quantity="two">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="few">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="many">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">"Back up unlimited data to Samsung Cloud for up to %d days or restore data you've backed up."</item>
+        <item quantity="zero">"Back up unlimited data to Samsung Cloud for up to %d days or restore data you've backed up."</item>
+        <item quantity="one">"Back up unlimited data to Samsung Cloud for up to %d day or restore data you've backed up."</item>
+        <item quantity="two">"Back up unlimited data to Samsung Cloud for up to %d days or restore data you've backed up."</item>
+        <item quantity="few">"Back up unlimited data to Samsung Cloud for up to %d days or restore data you've backed up."</item>
+        <item quantity="many">"Back up unlimited data to Samsung Cloud for up to %d days or restore data you've backed up."</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="zero">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="one">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d second.</item>
+        <item quantity="two">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="few">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="many">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="zero">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="one">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d second.</item>
+        <item quantity="two">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="few">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="many">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d items</item>
+        <item quantity="zero">%d items</item>
+        <item quantity="one">%d item</item>
+        <item quantity="two">%d items</item>
+        <item quantity="few">%d items</item>
+        <item quantity="many">%d items</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">The &lt;cst>Wi-Fi&lt;/cst> network you want to connect to can only be connected to %d devices at a time. Disconnect any other devices from that network, then try again.</item>
+        <item quantity="zero">The &lt;cst>Wi-Fi&lt;/cst> network you want to connect to can only be connected to %d devices at a time. Disconnect any other devices from that network, then try again.</item>
+        <item quantity="one">The &lt;cst>Wi-Fi&lt;/cst> network you want to connect to can only be connected to %d device at a time. Disconnect any other devices from that network, then try again.</item>
+        <item quantity="two">The &lt;cst>Wi-Fi&lt;/cst> network you want to connect to can only be connected to %d devices at a time. Disconnect any other devices from that network, then try again.</item>
+        <item quantity="few">The &lt;cst>Wi-Fi&lt;/cst> network you want to connect to can only be connected to %d devices at a time. Disconnect any other devices from that network, then try again.</item>
+        <item quantity="many">The &lt;cst>Wi-Fi&lt;/cst> network you want to connect to can only be connected to %d devices at a time. Disconnect any other devices from that network, then try again.</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d hours</item>
+        <item quantity="zero">%d hours</item>
+        <item quantity="one">%d hour</item>
+        <item quantity="two">%d hours</item>
+        <item quantity="few">%d hours</item>
+        <item quantity="many">%d hours</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutes</item>
+        <item quantity="zero">%d minutes</item>
+        <item quantity="one">%d minute</item>
+        <item quantity="two">%d minutes</item>
+        <item quantity="few">%d minutes</item>
+        <item quantity="many">%d minutes</item>
+    </plurals>
+</resources>

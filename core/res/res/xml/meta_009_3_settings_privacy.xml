@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Settings Privacy" TargetApi="19" TargetPackageName="com.samsung.android.privacydashboard" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Physical activity icon" DefaultValue="#ff9dd31d" DestAttribName="ic_activity_recognition_color" UID="9_3-2-1" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Calendar icon" DefaultValue="#ff11abb8" DestAttribName="ic_calendar_color" UID="9_3-2-3" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Call log icon" DefaultValue="#ff00af9a" DestAttribName="ic_call_log_color" UID="9_3-2-4" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Camera icon" DefaultValue="#fff28072" DestAttribName="ic_camera_color" UID="9_3-2-5" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Contacts icon" DefaultValue="#ffffa746" DestAttribName="ic_contacts_color" UID="9_3-2-6" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Location icon" DefaultValue="#ff71bd67" DestAttribName="ic_location_color" UID="9_3-2-7" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Microphone icon" DefaultValue="#ff818afe" DestAttribName="ic_microphone_color" UID="9_3-2-8" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Call icon" DefaultValue="#ff00af9a" DestAttribName="ic_phone_calls_color" UID="9_3-2-9" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Body sensors icon" DefaultValue="#ffe87092" DestAttribName="ic_sensors_color" UID="9_3-2-10" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Message icon" DefaultValue="#ff53a4ff" DestAttribName="ic_sms_color" UID="9_3-2-11" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Storage icon" DefaultValue="#fffdba44" DestAttribName="ic_storage_color" UID="9_3-2-12" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Image icon" DefaultValue="#ffc40453" DestAttribName="ic_visual_color" UID="9_3-2-13" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Image icon" DefaultValue="#ffc40453" DestAttribName="ic_nearby_color" UID="9_3-2-14" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="List main text color" DefaultValue="#ff252525" DestAttribName="text_title" UID="9_3-3-3" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="List sub text color" DefaultValue="#ff8c8c8c" DestAttribName="text_sub_title" UID="9_3-3-4" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff9e9e9e" DestAttribName="permission_detail_sub_header_color" UID="9_3-4-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Subheader" DefaultValue="#ff909090" DestAttribName="permission_detail_day_color" UID="9_3-4-3" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Subheader divider" DefaultValue="#ff979797" DestAttribName="permission_detail_dotted_color" UID="9_3-4-4" ValueRef="1-1-4" ValueType="TintColor" />
+        <Property Comment="Timeline color" DefaultValue="#ffe3e3e3" DestAttribName="permission_detail_upper_line_color" UID="9_3-4-5" ValueRef="1-1-4" ValueType="TintColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff717171" DestAttribName="permission_detail_description_text_color" UID="9_3-4-7" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Time text color" DefaultValue="#ff909090" DestAttribName="permission_detail_timestamp_color" UID="9_3-4-8" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="See all button" DefaultValue="#ff858585" DestAttribName="permission_detail_see_all_text_color" UID="9_3-4-10" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="permission_detail_background" UID="9_3-4-11" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Text color" DefaultValue="#ff4d4d4d" DestAttribName="permission_detail_no_items_text_color" UID="9_3-5-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff8c8c8c" DestAttribName="permission_detail_no_items_sub_text_color" UID="9_3-5-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Main text color" DefaultValue="#ff505050" DestAttribName="permission_ftu_title_text_color" UID="9_3-7-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff252525" DestAttribName="permission_ftu_description_text_color" UID="9_3-7-2" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Button text color" DefaultValue="#fffafafa" DestAttribName="round_button_text_color" UID="9_3-7-3" ValueRef="1-E" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

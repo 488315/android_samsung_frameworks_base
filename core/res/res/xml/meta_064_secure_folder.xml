@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="SecureFolder" TargetApi="26" TargetPackageName="com.samsung.knox.securefolder" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="text color of App icon" DefaultValue="#fffafafa" DestAttribName="home_title_color" DestQualifiers="" POption="AlwaysOverriden" UID="64-2-1" ValueRef="8-5-2" ValueType="TextColor" />
+        <Property Comment="background image of App title" DefaultValue="" DestAttribName="title_background" DestQualifiers="nodpi" POption="NinePatch" UID="64-2-2" ValueRef="8-5-3" ValueType="BgImage" />
+        <Property Comment="shadow on/off of App title" DefaultValue="true" DestAttribName="enable_text_shadow" DestQualifiers="" UID="64-2-3" ValueRef="8-5-4" ValueType="Bool" />
+        <Property Comment="shadow color of App title" DefaultValue="#99000000" DestAttribName="text_shadow_color" DestQualifiers="" POption="AlwaysOverriden" UID="64-2-4" ValueRef="8-5-5" ValueType="TextColor" />
+        <Property Comment="Normal icon image" DefaultValue="" DestAttribName="homescreen_menu_page_navi_home_f" DestQualifiers="xxxhdpi" ImageSize="17x17" UID="64-3-1" ValueRef="8-8-1" ValueType="Image" />
+        <Property Comment="Selected Icon Image" DefaultValue="" DestAttribName="homescreen_menu_page_navi_home_select_f" DestQualifiers="xxxhdpi" ImageSize="17x17" UID="64-3-2" ValueRef="8-8-2" ValueType="Image" />
+        <Property Comment="tint color of badge" DefaultValue="" DestAttribName="badge_bg_color" DestQualifiers="" UID="64-4-1" ValueRef="1-33-1" ValueType="BgColor" />
+        <Property Comment="background image of badge. should be 9 patch image" DefaultValue="" DestAttribName="counter_bubble" DestQualifiers="xxxhdpi" POption="NinePatch" UID="64-4-2" ValueRef="1-33-2" ValueType="BgImage" />
+        <Property Comment="text color of badge" DefaultValue="#fffafafa" DestAttribName="badge_text_color" DestQualifiers="" UID="64-4-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="tint color of dot badge" DefaultValue="#fff56a0d" DestAttribName="dot_badge_tint_color" DestQualifiers="" UID="64-5-1" ValueRef="1-33-4" ValueType="BgColor" />
+        <Property Comment="bg Color" DefaultValue="#fff6f6f6" DestAttribName="basic_window_bg" DestQualifiers="" UID="64-6-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="App name text color" DefaultValue="#ff252525" DestAttribName="about_app_name_text_color" DestQualifiers="" UID="64-6-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Version info text color" DefaultValue="#ff252525" DestAttribName="version_color" DestQualifiers="" UID="64-6-4" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Update button BG" DefaultValue="#ff0074d4" DestAttribName="update_text_primaryDark" DestQualifiers="" UID="64-6-6" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="update_text" DestQualifiers="" UID="64-6-7" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="about_link_color" DestQualifiers="" UID="64-6-8" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Button bg color" DefaultValue="#1a000000" DestAttribName="about_link_bg_color" DestQualifiers="" UID="64-6-9" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Info icon tint color" DefaultValue="#ff454545" DestAttribName="app_info_button_color" DestQualifiers="" UID="64-6-10" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Navigation bar icor" DefaultValue="true" DestAttribName="window_light_navigation_bar" UID="64-6-11" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="bg color" DefaultValue="#fff6f6f6" DestAttribName="customize_bg_color" DestQualifiers="" UID="64-8-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="title_text_color" DestQualifiers="" UID="64-8-2" ValueRef="1-1-3-1" ValueType="TextColor" />
+        <Property Comment="Body text color" DefaultValue="#ff505050" DestAttribName="uninstall_dialog_body_msg_color" DestQualifiers="" UID="64-9-1" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="Option main text color" DefaultValue="#ff252525" DestAttribName="uninstall_dialog_move_media_files_txt_color" DestQualifiers="" UID="64-9-2" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="Option sub text color" DefaultValue="#ff979797" DestAttribName="sf_uninstall_backup_dialog_loc_text_color" DestQualifiers="" UID="64-9-3" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Body text color" DefaultValue="#ff252525" DestAttribName="add_file_confirmation_dialog_message_color" DestQualifiers="" UID="64-10-1" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="Permission category text color" DefaultValue="#ff505050" DestAttribName="permission_category_text_color" DestQualifiers="" UID="64-11-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Permission icon tint color" DefaultValue="#ff505050" DestAttribName="permission_icon_tint_color" DestQualifiers="" UID="64-11-2" ValueRef="1-C" ValueType="BgColor" />
+        <Property Comment="Permission button text color" DefaultValue="#fffafafa" DestAttribName="primary_button_text_color" DestQualifiers="" UID="64-11-3" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Permission button background color" DefaultValue="#ff0074d4" DestAttribName="primary_button_background_color" DestQualifiers="" UID="64-11-4" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Permission item sub title color" DefaultValue="#ff252525" DestAttribName="permission_item_main_text_color" DestQualifiers="" UID="64-11-5" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Permission item description color" DefaultValue="#ff8c8c8c" DestAttribName="permission_item_sub_text_color" DestQualifiers="" UID="64-11-6" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Permission title color" DefaultValue="#ff010101" DestAttribName="permission_action_bar_text_color" DestQualifiers="" UID="64-11-7" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Set lock pattern header text color" DefaultValue="#ff505050" DestAttribName="lock_pattern_body_text_color" DestQualifiers="" UID="64-12-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Set lock pattern dot normal" DefaultValue="#ff444444" DestAttribName="set_lock_pattern_view_regular_color_light" DestQualifiers="" UID="64-12-4" ValueRef="24-A" ValueType="BgColor" />
+        <Property Comment="Set lock pattern dot success" DefaultValue="#ff00828e" DestAttribName="set_lock_pattern_view_success_color_light" DestQualifiers="" UID="64-12-5" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Set lock pattern dot failed" DefaultValue="#fff4511e" DestAttribName="set_lock_pattern_view_error_color_light" DestQualifiers="" UID="64-12-6" ValueRef="24-G" ValueType="BgColor" />
+        <Property Comment="Settings lock type description text color" DefaultValue="#ff252525" DestAttribName="multi_line_preference_text_color" DestQualifiers="" UID="64-13-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Welcome title text color" DefaultValue="#ff010101" DestAttribName="welcome_header_text_color" DestQualifiers="" UID="64-14-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Welcome sub title text color" DefaultValue="#ff252525" DestAttribName="welcome_sub_header_text_color" DestQualifiers="" UID="64-14-2" ValueRef="1-3-4" ValueType="TextColor" />
+        <Property Comment="Welcome description text color" DefaultValue="#ff8c8c8c" DestAttribName="welcome_summary_text_color" DestQualifiers="" UID="64-14-3" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Welcome icon color" DefaultValue="#ff505050" DestAttribName="welcome_icon_color" DestQualifiers="" UID="64-14-4" ValueRef="1-1-3" ValueType="BgColor" />
+        <Property Comment="Welcome Terms and conditions text color" DefaultValue="#ff505050" DestAttribName="welcome_terms_and_condition_color" DestQualifiers="" UID="64-14-5" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Welcome wel link text color" DefaultValue="#ff252525" DestAttribName="welcome_terms_and_condition_highlight_text_color" DestQualifiers="" UID="64-14-6" ValueRef="1-3-4" ValueType="TextColor" />
+        <Property Comment="Welcome background color" DefaultValue="#fffcfcfc" DestAttribName="background_white_color_from_s" DestQualifiers="" UID="64-14-7" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Search bar bg color" DefaultValue="#fffafafa" DestAttribName="search_view_background" DestQualifiers="" UID="64-15-1" ValueRef="1-59-1" ValueType="BgColor" />
+        <Property Comment="Add apps search view hint text color" DefaultValue="#ff7a7a7a" DestAttribName="search_hint_text_color" DestQualifiers="" UID="64-15-2" ValueRef="1-59-4" ValueType="TextColor" />
+        <Property Comment="Add apps search view icon color" DefaultValue="#ff404040" DestAttribName="search_icon_color" DestQualifiers="" UID="64-15-3" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Add apps search view input text color" DefaultValue="#ff252525" DestAttribName="search_text_color" DestQualifiers="" UID="64-15-4" ValueRef="1-39-2" ValueType="TextColor" />
+        <Property Comment="Translate search bar bg color" DefaultValue="#33fcfcfc" DestAttribName="translate_search_view_background" DestQualifiers="" UID="64-16-1" ValueRef="1-59-1" ValueType="BgColor" />
+        <Property Comment="App list background" DefaultValue="#bffafafa" DestAttribName="translate_search_list_background" DestQualifiers="" UID="64-16-2" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="No item" DefaultValue="#ff999999" DestAttribName="translate_search_empty_text" DestQualifiers="" UID="64-16-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Search input text color" DefaultValue="#fffafafa" DestAttribName="translate_search_text_color" DestQualifiers="" UID="64-16-4" ValueRef="1-59-3" ValueType="TextColor" />
+        <Property Comment="Search hint text color" DefaultValue="#99fafafa" DestAttribName="translate_search_hint_text_color" DestQualifiers="" UID="64-16-5" ValueRef="1-59-4" ValueType="TextColor" />
+        <Property Comment="Pin setting description" DefaultValue="#ff505050" DestAttribName="lock_page_header_text_color" DestQualifiers="" UID="64-17-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Pin setting check description" DefaultValue="#ff505050" DestAttribName="confirm_text_color" DestQualifiers="" UID="64-17-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Pin setting icon" DefaultValue="#ff8c8c8c" DestAttribName="pass_toggle_icon_tint" DestQualifiers="" UID="64-17-3" ValueRef="24-A" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

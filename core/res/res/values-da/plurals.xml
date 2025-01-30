@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Din tablet er ustabil, fordi et SD-kort med installerede apps er blevet fjernet. Din tablet genstarter om %d sekunder for at vende tilbage til normal tilstand. Gem data, der ikke er gemt, før tabletten genstarter.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Din tablet er ustabil, fordi et SD-kort med installerede apps er blevet fjernet. Din tablet genstarter om %d sekund for at vende tilbage til normal tilstand. Gem data, der ikke er gemt, før tabletten genstarter.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Tabletten genstarter om %d sekunder</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tabletten genstarter om %d sekund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d apps blev lukket automatisk, fordi de får din telefon til at blive overophedet. Du kan åbne dem igen senere, når din telefon er kølet af.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app blev lukket automatisk, fordi den får din telefon til at blive overophedet. Du kan åbne den igen senere, når din telefon er kølet af.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d apps blev lukket automatisk, fordi de får din tablet til at blive overophedet. Du kan åbne dem igen senere, når din tablet er kølet af.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app blev lukket automatisk, fordi den får din tablet til at blive overophedet. Du kan åbne den igen senere, når din tablet er kølet af.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">Der er blevet lukket %d apps</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Der er blevet lukket %d app</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Der kan ikke vises mere end %d apps på skærmen ad gangen. Den ældste app er minimeret.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Der kan ikke vises mere end %d app på skærmen ad gangen. Den ældste app er minimeret.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Åbn den app, du vil tildele, og tryk og hold på apptasten i %d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Åbn den app, du vil tildele, og tryk og hold på apptasten i %d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s får din telefon til at blive overophedet. Den vil blive slukket automatisk om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s får din telefon til at blive overophedet. Den vil blive slukket automatisk om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s får din tablet til at blive overophedet. Den vil blive slukket automatisk om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s får din tablet til at blive overophedet. Den vil blive slukket automatisk om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Sikkerhedskopier en ubegrænset mængde data til Samsung Cloud i op til %d dage, eller gendan dine sikkerhedskopierede data.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Sikkerhedskopier en ubegrænset mængde data til Samsung Cloud i op til %d dag, eller gendan dine sikkerhedskopierede data.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s får din telefon til at blive overophedet. Du kan lukke den nu, og ellers vil den blive lukket automatisk om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s får din telefon til at blive overophedet. Du kan lukke den nu, og ellers vil den blive lukket automatisk om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s får din tablet til at blive overophedet. Du kan lukke den nu, og ellers vil den blive lukket automatisk om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s får din tablet til at blive overophedet. Du kan lukke den nu, og ellers vil den blive lukket automatisk om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Du har %d forsøg tilbage, før SIM-kortet bliver låst.</item>
+        <item quantity="one">Du har %d forsøg tilbage, før SIM-kortet bliver låst.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elementer</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Det Wi-Fi-netværk, du gerne vil oprette forbindelse til, kan kun være forbundet til %d enheder ad gangen. Afbryd eventuelle andre enheders forbindelse til det pågældende netværk, og prøv derefter igen.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Det Wi-Fi-netværk, du gerne vil oprette forbindelse til, kan kun være forbundet til %d enhed ad gangen. Afbryd eventuelle andre enheders forbindelse til det pågældende netværk, og prøv derefter igen.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d timer</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d time</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutter</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minut</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

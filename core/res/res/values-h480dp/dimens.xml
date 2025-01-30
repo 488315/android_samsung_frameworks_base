@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="resolver_button_bar_spacing">8.0dip</dimen>
+    <dimen name="resolver_empty_state_container_padding_bottom">48.0dip</dimen>
+    <item type="dimen" name="resolver_title_padding_bottom">@dimen/resolver_edge_margin</item>
+    <dimen name="sem_chooser_gallery_image_height">260.0dip</dimen>
+    <dimen name="sem_chooser_gallery_image_height_for_tab">230.0dip</dimen>
+    <item type="dimen" name="sem_chooser_gallery_image_top_padding">0.07</item>
+    <dimen name="sem_chooser_horizontal_max_collapsed_height">138.0dip</dimen>
+    <item type="dimen" name="sem_dialog_min_width_major">@dimen/sem_dialog_width_with_large_screen</item>
+</resources>

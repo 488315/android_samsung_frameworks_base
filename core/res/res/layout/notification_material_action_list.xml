@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="bottom" android:id="@id/actions_container" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="end" android:orientation="horizontal" android:id="@id/actions_container_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/notification_action_list_margin_top">
+        <com.android.internal.widget.NotificationActionListLayout android:gravity="center" android:layout_gravity="center_vertical" android:orientation="horizontal" android:id="@id/actions" android:background="@color/notification_action_list_background_color" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="@dimen/notification_action_list_height" android:divider="@drawable/notification_action_button_divider" android:layout_weight="1.0" android:showDividers="middle" />
+        <LinearLayout android:gravity="top" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginVertical="@dimen/notification_bubble_snooze_button_margin">
+            <ImageView android:layout_gravity="end|center" android:id="@id/bubble_button" android:background="@drawable/notification_bubble_snooze_button_background" android:padding="@dimen/notification_bubble_snooze_button_padding" android:visibility="gone" android:layout_width="@dimen/notification_actions_icon_size" android:layout_height="@dimen/notification_actions_icon_size" android:scaleType="centerInside" android:layout_marginEnd="@dimen/notification_bubble_snooze_button_margin" />
+            <ImageView android:layout_gravity="end|center" android:id="@id/snooze_button" android:background="@drawable/notification_bubble_snooze_button_background" android:padding="@dimen/notification_bubble_snooze_button_padding" android:visibility="gone" android:layout_width="@dimen/notification_actions_icon_size" android:layout_height="@dimen/notification_actions_icon_size" android:scaleType="centerInside" android:layout_marginEnd="@dimen/notification_bubble_snooze_button_margin" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

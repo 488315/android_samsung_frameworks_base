@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="0.8">
+        <include android:id="@id/language_picker_item" layout="@layout/language_picker_item" />
+    </FrameLayout>
+    <LinearLayout android:gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="?listPreferredItemHeight" android:layout_weight="0.2">
+        <ImageView android:id="@id/imageView" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_check_24dp" app:tint="?^attr-private/colorAccentPrimaryVariant" />
+    </LinearLayout>
+</LinearLayout>

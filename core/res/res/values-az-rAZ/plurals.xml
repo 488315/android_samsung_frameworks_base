@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Proqramlar quraşdırılan SD kart çıxarıldığından tabletiniz qeyri-sabitdir. Tabletiniz normala işinə qayıtmaq üçün %d saniyəyə sönüb yanacaq. Tabletin sönməsindən öncə saxlanmamış məlumatınızı saxlayın.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Proqramlar quraşdırılan SD kart çıxarıldığından tabletiniz qeyri-sabitdir. Tabletiniz normala işinə qayıtmaq üçün %d saniyəyə sönüb yanacaq. Tabletin sönməsindən öncə saxlanmamış məlumatınızı saxlayın.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Tabletiniz %d saniyəyə sönüb yanacaq.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tabletiniz %d saniyəyə sönüb yanacaq.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d proqram telefonun həddən artıq qızmasına səbəb olduğu üçün avtomatik bağlandı. Telefon soyuduqdan sonra onları yenidən aça bilərsiniz.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d proqram telefonun həddən artıq qızmasına səbəb olduğu üçün avtomatik bağlandı. Telefon soyuduqdan sonra onu yenidən aça bilərsiniz.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d proqram tabletinizin qızmasına səbəb olduğu üçün avtomatik olaraq bağlandı. Tabletiniz soyuduqdan sonra yenidən aça bilərsiniz.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d proqram tabletinizin qızmasına səbəb olduğu üçün avtomatik olaraq bağlandı. Tabletiniz soyuduqdan sonra onu yenidən aça bilərsiniz.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d proqram bağlandı</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d proqram bağlandı</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Eyni anda ekranda %d-dan çox proqram göstərmək olmur. Ən köhnə proqram kiçildildi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Eyni anda ekranda %d-dan çox proqram göstərmək olmur. Ən köhnə proqram kiçildildi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Təyin etmək istədiyiniz proqramı açın, sonra proqram düyməsinə basıb %d saniyə saxlayın.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Təyin etmək istədiyiniz proqramı açın, sonra proqram düyməsinə basıb %d saniyə saxlayın.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s telefonunuzun isinməsinə səbəb olur. O, %2$d saniyə sonra avtomatik olaraq bağlanacaq.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s telefonunuzun isinməsinə səbəb olur. O, %2$d saniyə sonra avtomatik olaraq bağlanacaq.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s tabletinizin isinməsinə səbəb olur. O, %2$d saniyə sonra avtomatik olaraq bağlanacaq.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s tabletinizin isinməsinə səbəb olur. O, %2$d saniyə sonra avtomatik olaraq bağlanacaq.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">%d gün müddətinədək limitsiz miqdarda verilənləri Samsung Cloud-a nüsxələyin və ya nüsxələdiyiniz verilənləri bərpa edin.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d gün müddətinədək limitsiz miqdarda verilənləri Samsung Cloud-a nüsxələyin və ya nüsxələdiyiniz verilənləri bərpa edin.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s telefonun qızmasına səbəb olur. Siz onu indi bağlaya bilərsiniz, yaxud o, %2$d saniyə sonra avtomatik bağlanacaq.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s telefonun qızmasına səbəb olur. Siz onu indi bağlaya bilərsiniz, yaxud o, %2$d saniyə sonra avtomatik bağlanacaq.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s tabletin qızmasına səbəb olur. Siz onu indi bağlaya bilərsiniz, yaxud o, %2$d saniyə sonra avtomatik bağlanacaq.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s tabletin qızmasına səbəb olur. Siz onu indi bağlaya bilərsiniz, yaxud o, %2$d saniyə sonra avtomatik bağlanacaq.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d element</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Qoşulmaq istədiyiniz Wi-Fi şəbəkəsinə eyni anda yalnız %d cihaz qoşula bilər. Cihazlardan birinin şəbəkə ilə əlaqəsini kəsin və yenidən cəhd edin.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Qoşulmaq istədiyiniz Wi-Fi şəbəkəsinə eyni anda yalnız %d cihaz qoşula bilər. Cihazlardan birinin şəbəkə ilə əlaqəsini kəsin və yenidən cəhd edin.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d saat</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d saat</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d dəqiqə</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d dəqiqə</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

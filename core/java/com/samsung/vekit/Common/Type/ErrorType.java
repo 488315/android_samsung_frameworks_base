@@ -1,0 +1,15 @@
+package com.samsung.vekit.Common.Type;
+
+/* loaded from: classes6.dex */
+public enum ErrorType {
+    PLAYER_START_FAILED,
+    PLAYER_PAUSE_FAILED,
+    STOPPED_ON_CODEC_RECLAIMED,
+    STOPPED_ON_ERROR,
+    PLAYER_PAUSE_EXPORT_FAILED,
+    PLAYER_RESUME_EXPORT_FAILED,
+    VIDEO_ENCODE_FAIL,
+    AUDIO_RENDER_FAIL,
+    VIDEO_SEEK_FAIL,
+    AUDIO_SEEK_FAIL
+}

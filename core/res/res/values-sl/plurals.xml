@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Tablični računalnik ni stabilen, ker je bila kartica SD, na kateri so bile nameščene aplikacije, odstranjena. Tablični računalnik se bo znova zagnal čez %d sekund, da bo začel delovati kot običajno. Pred vnovičnim zagonom tabličnega računalnika shranite morebitne neshranjene podatke.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tablični računalnik ni stabilen, ker je bila kartica SD, na kateri so bile nameščene aplikacije, odstranjena. Tablični računalnik se bo znova zagnal čez %d sekundo, da bo začel delovati kot običajno. Pred vnovičnim zagonom tabličnega računalnika shranite morebitne neshranjene podatke.</item>
+        <item quantity="two">Tablični računalnik ni stabilen, ker je bila kartica SD, na kateri so bile nameščene aplikacije, odstranjena. Tablični računalnik se bo znova zagnal čez %d sekundi, da bo začel delovati kot običajno. Pred vnovičnim zagonom tabličnega računalnika shranite morebitne neshranjene podatke.</item>
+        <item quantity="few">Tablični računalnik ni stabilen, ker je bila kartica SD, na kateri so bile nameščene aplikacije, odstranjena. Tablični računalnik se bo znova zagnal čez %d sekunde, da bo začel delovati kot običajno. Pred vnovičnim zagonom tabličnega računalnika shranite morebitne neshranjene podatke.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Tab. rač. se bo znova zagnal čez %d s</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tab. rač. se bo znova zagnal čez %d s</item>
+        <item quantity="two">Tab. rač. se bo znova zagnal čez %d s</item>
+        <item quantity="few">Tab. rač. se bo znova zagnal čez %d s</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d aplikacij se je samodejno zaprlo, ker so povzročale pregrevanje telefona. Ko se telefon ohladi, jih lahko znova odprete.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacija se je samodejno zaprla, ker je povzročala pregrevanje telefona. Ko se telefon ohladi, jo lahko znova odprete.</item>
+        <item quantity="two">%d aplikaciji sta se samodejno zaprli, ker sta povzročali pregrevanje telefona. Ko se telefon ohladi, ju lahko znova odprete.</item>
+        <item quantity="few">%d aplikacije so se samodejno zaprle, ker so povzročale pregrevanje telefona. Ko se telefon ohladi, jih lahko znova odprete.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d aplikacij se je samodejno zaprlo, ker so povzročale pregrevanje tabličnega računalnika. Ko se tablični računalnik ohladi, jih lahko znova odprete.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacija se je samodejno zaprla, ker je povzročala pregrevanje tabličnega računalnika. Ko se tablični računalnik ohladi, jo lahko znova odprete.</item>
+        <item quantity="two">%d aplikaciji sta se samodejno zaprli, ker sta povzročali pregrevanje tabličnega računalnika. Ko se tablični računalnik ohladi, ju lahko znova odprete.</item>
+        <item quantity="few">%d aplikacije so se samodejno zaprle, ker so povzročale pregrevanje tabličnega računalnika. Ko se tablični računalnik ohladi, jih lahko znova odprete.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplikacij je zaprtih</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacija je zaprta</item>
+        <item quantity="two">%d aplikaciji sta zaprti</item>
+        <item quantity="few">%d aplikacije so zaprte</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Hkrati je lahko na zaslonu prikazanih največ %d aplikacij. Najstarejša aplikacija je bila pomanjšana.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Hkrati je lahko na zaslonu prikazana največ %d aplikacija. Najstarejša aplikacija je bila pomanjšana.</item>
+        <item quantity="two">Hkrati sta lahko na zaslonu prikazani največ %d aplikaciji. Najstarejša aplikacija je bila pomanjšana.</item>
+        <item quantity="few">Hkrati so lahko na zaslonu prikazane največ %d aplikacije. Najstarejša aplikacija je bila pomanjšana.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Odprite aplikacijo, ki jo želite dodeliti, nato pa pritisnite in %d sekund držite tipko za aplikacije.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Odprite aplikacijo, ki jo želite dodeliti, nato pa pritisnite in %d sekundo držite tipko za aplikacije.</item>
+        <item quantity="two">Odprite aplikacijo, ki jo želite dodeliti, nato pa pritisnite in %d sekundi držite tipko za aplikacije.</item>
+        <item quantity="few">Odprite aplikacijo, ki jo želite dodeliti, nato pa pritisnite in %d sekunde držite tipko za aplikacije.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Aplikacija %1$s povzroča pregrevanje telefona. Čez %2$d sekund se bo samodejno zaprla.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s povzroča pregrevanje telefona. Čez %2$d sekundo se bo samodejno zaprla.</item>
+        <item quantity="two">Aplikacija %1$s povzroča pregrevanje telefona. Čez %2$d sekundi se bo samodejno zaprla.</item>
+        <item quantity="few">Aplikacija %1$s povzroča pregrevanje telefona. Čez %2$d sekunde se bo samodejno zaprla.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Aplikacija %1$s povzroča pregrevanje tabličnega računalnika. Čez %2$d sekund se bo samodejno zaprla.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s povzroča pregrevanje tabličnega računalnika. Čez %2$d sekundo se bo samodejno zaprla.</item>
+        <item quantity="two">Aplikacija %1$s povzroča pregrevanje tabličnega računalnika. Čez %2$d sekundi se bo samodejno zaprla.</item>
+        <item quantity="few">Aplikacija %1$s povzroča pregrevanje tabličnega računalnika. Čez %2$d sekunde se bo samodejno zaprla.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Varnostno kopirajte neomejeno količino podatkov v Samsung Cloud za do %d dni ali obnovite podatke, ki ste jih varnostno kopirali.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Varnostno kopirajte neomejeno količino podatkov v Samsung Cloud za do %d dan ali obnovite podatke, ki ste jih varnostno kopirali.</item>
+        <item quantity="two">Varnostno kopirajte neomejeno količino podatkov v Samsung Cloud za do %d dneva ali obnovite podatke, ki ste jih varnostno kopirali.</item>
+        <item quantity="few">Varnostno kopirajte neomejeno količino podatkov v Samsung Cloud za do %d dni ali obnovite podatke, ki ste jih varnostno kopirali.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Aplikacija %1$s povzroča pregrevanje telefona. Aplikacijo lahko zaprete zdaj ali pa se bo čez %2$d sekund samodejno zaprla.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s povzroča pregrevanje telefona. Aplikacijo lahko zaprete zdaj ali pa se bo čez %2$d sekundo samodejno zaprla.</item>
+        <item quantity="two">Aplikacija %1$s povzroča pregrevanje telefona. Aplikacijo lahko zaprete zdaj ali pa se bo čez %2$d sekundi samodejno zaprla.</item>
+        <item quantity="few">Aplikacija %1$s povzroča pregrevanje telefona. Aplikacijo lahko zaprete zdaj ali pa se bo čez %2$d sekunde samodejno zaprla.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Aplikacija %1$s povzroča pregrevanje tabličnega računalnika. Aplikacijo lahko zaprete zdaj ali pa se bo čez %2$d sekund samodejno zaprla.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s povzroča pregrevanje tabličnega računalnika. Aplikacijo lahko zaprete zdaj ali pa se bo čez %2$d sekundo samodejno zaprla.</item>
+        <item quantity="two">Aplikacija %1$s povzroča pregrevanje tabličnega računalnika. Aplikacijo lahko zaprete zdaj ali pa se bo čez %2$d sekundi samodejno zaprla.</item>
+        <item quantity="few">Aplikacija %1$s povzroča pregrevanje tabličnega računalnika. Aplikacijo lahko zaprete zdaj ali pa se bo čez %2$d sekunde samodejno zaprla.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Na voljo imate še %d poskusov. Potem se bo kartica SIM zaklenila.</item>
+        <item quantity="one">Na voljo imate še %d poskus. Potem se bo kartica SIM zaklenila.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elementov</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element</item>
+        <item quantity="two">%d elementa</item>
+        <item quantity="few">%d elementi</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Omrežje Wi-Fi, s katerim se želite povezati, je lahko povezano samo s/z %d napravami hkrati. Prekinite povezavo drugih naprav s tem omrežjem in poskusite znova.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Omrežje Wi-Fi, s katerim se želite povezati, je lahko povezano samo z %d napravo hkrati. Prekinite povezavo drugih naprav s tem omrežjem in poskusite znova.</item>
+        <item quantity="two">Omrežje Wi-Fi, s katerim se želite povezati, je lahko povezano samo z %d napravama hkrati. Prekinite povezavo drugih naprav s tem omrežjem in poskusite znova.</item>
+        <item quantity="few">Omrežje Wi-Fi, s katerim se želite povezati, je lahko povezano samo s %d napravami hkrati. Prekinite povezavo drugih naprav s tem omrežjem in poskusite znova.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ura</item>
+        <item quantity="two">%d uri</item>
+        <item quantity="few">%d ure</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minut</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuta</item>
+        <item quantity="two">%d minuti</item>
+        <item quantity="few">%d minute</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

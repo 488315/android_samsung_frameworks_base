@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Планшети шумо бинобар бароварда шудани корти SD-и дорои барномаҳои насбшуда ноустувор кор мекунад. Планшет барои ба ҳолати муқаррарӣ баргаштан баъди %d сония аз нав ба кор дароварда мешавад. Ҳамаи иттилооти захира накардаатонро пеш аз дубора ба кор даромадани планшет захира кунед.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Планшети шумо бинобар бароварда шудани корти SD-и дорои барномаҳои насбшуда ноустувор кор мекунад. Планшет барои ба ҳолати муқаррарӣ баргаштан баъди %d сония аз нав ба кор дароварда мешавад. Ҳамаи иттилооти захира накардаатонро пеш аз дубора ба кор даромадани планшет захира кунед.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Плншт бъди %d сония аз нав ба кор мдрд</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Плншт бъди %d сония аз нав ба кор мдрд</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d барнома ба таври худкор хомӯш карда шуд, зеро онҳо сабаби бениҳоят гарм шудани телефон шуданд. Шумо метавонед онҳоро баъди хунуктар шудани телефон дубора кушоед.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d барнома ба таври худкор хомӯш карда шуд, зеро он сабаби бениҳоят гарм шудани телефон шуд. Шумо метавонед онро баъди хунуктар шудани телефон дубора кушоед.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d барнома ба таври худкор хомӯш карда шуд, зеро онҳо сабаби бениҳоят гарм шудани планшет буданд. Шумо метавонед онҳоро баъди хунуктар шудани планшет дубора кушоед.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d барнома ба таври худкор хомӯш карда шуд, зеро он сабаби бениҳоят гарм шудани планшет буд. Шумо метавонед онро баъди хунуктар шудани планшет дубора кушоед.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d барнома пӯшида шуд</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d барнома пӯшида шуд</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Якбора дар экран беш аз %d барнома нишон додан ғайриимкон аст. Барномаи куҳнатарин печонда шуд.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Якбора дар экран беш аз %d барнома нишон додан ғайриимкон аст. Барномаи куҳнатарин печонда шуд.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Барномаеро кушоед, ки таъйин кардан мехоҳед, баъд тугмаи барномаро пахш карда, давоми %d сония нигоҳ доред.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Барномаеро кушоед, ки таъйин кардан мехоҳед, баъд тугмаи барномаро пахш карда, давоми %d сония нигоҳ доред.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s сабаби бениҳоят гарм шудани телефони шумо аст. Он баъди %2$d сония ба таври худкор пӯшида мешавад.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s сабаби бениҳоят гарм шудани телефони шумо аст. Он баъди %2$d сония ба таври худкор пӯшида мешавад.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s сабаби бениҳоят гарм шудани планшети шумо аст. Он баъди %2$d сония ба таври худкор пӯшида мешавад.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s сабаби бениҳоят гарм шудани планшети шумо аст. Он баъди %2$d сония ба таври худкор пӯшида мешавад.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Миқдори номаҳдуди иттилоотро ба Samsung Cloud бо муҳлати то %d рӯз нусхаи эҳтиётӣ гиред ё иттилооти нусхаи эҳтиётӣ гирифтаатонро барқарор кунед.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Миқдори номаҳдуди иттилоотро ба Samsung Cloud бо муҳлати то %d рӯз нусхаи эҳтиётӣ гиред ё иттилооти нусхаи эҳтиётӣ гирифтаатонро барқарор кунед.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s сабаби бениҳоят гарм шудани телефони шумо аст. Шумо метавонед онро ҳозир бипӯшед ё он баъди %2$d сония ба таври худкор пӯшида мешавад.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s сабаби бениҳоят гарм шудани телефони шумо аст. Шумо метавонед онро ҳозир бипӯшед ё он баъди %2$d сония ба таври худкор пӯшида мешавад.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s сабаби бениҳоят гарм шудани планшети шумо аст. Шумо метавонед онро ҳозир бипӯшед ё он баъди %2$d сония ба таври худкор пӯшида мешавад.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s сабаби бениҳоят гарм шудани планшети шумо аст. Шумо метавонед онро ҳозир бипӯшед ё он баъди %2$d сония ба таври худкор пӯшида мешавад.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ҷузъ</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ҷузъ</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Ба он шабакаи Wi-Fi, ки пайваст шудан мехоҳед, якбора танҳо %d дастгоҳ пайваст кардан мумкин аст. Дигар дастгоҳҳоро аз ин шабака ҷудо карда, кӯшишро такрор кунед.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ба он шабакаи Wi-Fi, ки пайваст шудан мехоҳед, якбора танҳо %d дастгоҳ пайваст кардан мумкин аст. Дигар дастгоҳҳоро аз ин шабака ҷудо карда, кӯшишро такрор кунед.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d соат</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d соат</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d дақиқа</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d дақиқа</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

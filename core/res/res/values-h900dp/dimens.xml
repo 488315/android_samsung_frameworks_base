@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="sem_chooser_gallery_image_top_padding">0.16</item>
+</resources>

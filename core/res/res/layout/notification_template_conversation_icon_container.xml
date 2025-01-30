@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:gravity="start|center|top" android:id="@id/conversation_icon_container" android:paddingTop="@dimen/notification_icon_circle_start" android:clipChildren="false" android:clipToPadding="false" android:layout_width="@dimen/conversation_content_start" android:layout_height="fill_parent" android:importantForAccessibility="no"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_gravity="start|center|top" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="@dimen/notification_icon_circle_start" android:layout_marginEnd="@dimen/notification_icon_circle_end">
+        <com.android.internal.widget.CachingIconView android:id="@id/conversation_icon" android:layout_width="@dimen/conversation_avatar_size" android:layout_height="@dimen/conversation_avatar_size" android:scaleType="centerCrop" android:importantForAccessibility="no" />
+        <ViewStub android:id="@id/conversation_face_pile" android:layout="@layout/conversation_face_pile_layout" android:layout_width="@dimen/conversation_avatar_size" android:layout_height="@dimen/conversation_avatar_size" />
+        <FrameLayout android:id="@id/conversation_icon_badge" android:clipChildren="false" android:clipToPadding="false" android:layout_width="@dimen/conversation_icon_size_badged" android:layout_height="@dimen/conversation_icon_size_badged" android:layout_marginLeft="@dimen/conversation_badge_side_margin" android:layout_marginTop="@dimen/conversation_badge_side_margin">
+            <com.android.internal.widget.CachingIconView android:layout_gravity="center" android:id="@id/conversation_icon_badge_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/conversation_badge_background" android:scaleType="center" android:forceHasOverlappingRendering="false" />
+            <com.android.internal.widget.CachingIconView android:layout_gravity="center" android:id="@id/icon" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="3.0dip" android:forceHasOverlappingRendering="false" />
+            <com.android.internal.widget.CachingIconView android:layout_gravity="center" android:id="@id/conversation_icon_badge_ring" android:visibility="gone" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/conversation_badge_ring" android:scaleType="center" android:forceHasOverlappingRendering="false" />
+        </FrameLayout>
+    </FrameLayout>
+</FrameLayout>

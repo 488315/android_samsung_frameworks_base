@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Spjaldtölvan er óstöðug vegna þess að SD-kort þar sem forrit voru uppsett var fjarlægt. Spjaldtölvan verður endurræst eftir %d sekúndur til að færa hana aftur í venjulegt horf. Vista skal öll gögn áður en spjaldtölvan er endurræst.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Spjaldtölvan er óstöðug vegna þess að SD-kort þar sem forrit voru uppsett var fjarlægt. Spjaldtölvan verður endurræst eftir %d sekúndu til að færa hana aftur í venjulegt horf. Vista skal öll gögn áður en spjaldtölvan er endurræst.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Spjaldtölvan endurr. eftir %d sekúndur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Spjaldtölvan endurr. eftir %d sekúndu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d forritum var lokað sjálfkrafa vegna þess að þau ofhituðu símann. Þú getur opnað þau aftur þegar síminn hefur kólnað.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d forriti var lokað sjálfkrafa vegna þess að það ofhitaði símann. Þú getur opnað það aftur þegar síminn hefur kólnað.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d forritum var lokað sjálfkrafa vegna þess að þau ollu því að spjaldtölvan ofhitnaði. Þú getur opnað þau aftur síðar þegar spjaldtölvan hefur kólnað.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d forriti var lokað sjálfkrafa vegna þess að það olli því að spjaldtölvan ofhitnaði. Þú getur opnað það aftur síðar þegar spjaldtölvan hefur kólnað.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d forritum lokað</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d forriti lokað</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Ekki er hægt að sýna fleiri en %d forrit á skjánum samtímis. Elsta forritið er smækkað.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ekki er hægt að sýna fleiri en %d forrit á skjánum samtímis. Elsta forritið er smækkað.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Opnaðu forritið sem þú ætlar að úthluta og haltu síðan fingri á forritalyklinum í %d sekúndur.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Opnaðu forritið sem þú ætlar að úthluta og haltu síðan fingri á forritalyklinum í %d sekúndu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s veldur því að síminn ofhitnar. Forritinu verður lokað sjálfkrafa eftir %2$d sekúndur.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s veldur því að síminn ofhitnar. Forritinu verður lokað sjálfkrafa eftir %2$d sekúndu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s veldur því að spjaldtölvan ofhitnar. Forritinu verður lokað sjálfkrafa eftir %2$d sekúndur.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s veldur því að spjaldtölvan ofhitnar. Forritinu verður lokað sjálfkrafa eftir %2$d sekúndu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Afritaðu ótakmarkað gagnamagn yfir í Samsung Cloud í allt að %d daga eða endurheimtu gögn sem þú hefur tekið öryggisafrit af.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Afritaðu ótakmarkað gagnamagn yfir í Samsung Cloud í allt að %d dag eða endurheimtu gögn sem þú hefur tekið öryggisafrit af.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s veldur því að síminn ofhitnar. Þú getur lokað forritinu núna, að öðrum kosti verður því lokað sjálfkrafa eftir %2$d sekúndur.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s veldur því að síminn ofhitnar. Þú getur lokað forritinu núna, að öðrum kosti verður því lokað sjálfkrafa eftir %2$d sekúndu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s veldur því að spjaldtölvan ofhitnar. Þú getur lokað forritinu núna, að öðrum kosti verður því lokað sjálfkrafa eftir %2$d sekúndur.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s veldur því að spjaldtölvan ofhitnar. Þú getur lokað forritinu núna, að öðrum kosti verður því lokað sjálfkrafa eftir %2$d sekúndu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d atriði</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d atriði</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Wi-Fi netið sem þú ert að reyna að tengjast við getur aðeins tengst %d tækjum í einu. Aftengdu önnur tæki frá netinu og reyndu svo aftur.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Wi-Fi netið sem þú ert að reyna að tengjast við getur aðeins tengst %d tæki í einu. Aftengdu önnur tæki frá netinu og reyndu svo aftur.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d klukkustundir</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d klukkustund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d mínútur</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d mínúta</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

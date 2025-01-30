@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Tablet je nestabilan jer ste uklonili SD karticu na kojoj su instalirane aplikacije. Tablet će se ponovno pokrenuti za %d sekundi da bi se vratio u normalno stanje. Sačuvajte sve nesačuvane podatke prije nego što se tablet ponovno pokrene.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tablet je nestabilan jer ste uklonili SD karticu na kojoj su instalirane aplikacije. Tablet će se ponovno pokrenuti za %d sekundu da bi se vratio u normalno stanje. Sačuvajte sve nesačuvane podatke prije nego što se tablet ponovno pokrene.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Tablet je nestabilan jer ste uklonili SD karticu na kojoj su instalirane aplikacije. Tablet će se ponovno pokrenuti za %d sekunde da bi se vratio u normalno stanje. Sačuvajte sve nesačuvane podatke prije nego što se tablet ponovno pokrene.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Tablet će se ponovno pokrenuti za %d s</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tablet će se ponovno pokrenuti za %d s</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Tablet će se ponovno pokrenuti za %d s</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d aplikacija je automatski zatvoreno jer su uzrokovale pregrijavanje telefona. Možete ih ponovno otvoriti kada se telefon ohladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacija je automatski zatvorena jer je uzrokovala pregrijavanje telefona. Možete je ponovno otvoriti kada se telefon ohladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikacije su automatski zatvorene jer su uzrokovale pregrijavanje telefona. Možete ih ponovno otvoriti kada se telefon ohladi.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d aplikacija je automatski zatvoreno jer su uzrokovale pregrijavanje tableta. Možete ih ponovno otvoriti kada se tablet ohladi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacija je automatski zatvorena jer je uzrokovala pregrijavanje tableta. Možete je ponovno otvoriti kada se tablet ohladi.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikacije su automatski zatvorene jer su uzrokovale pregrijavanje tableta. Možete ih ponovno otvoriti kada se tablet ohladi.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplikacija je zatvoreno</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplikacija je zatvorena</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplikacije su zatvorene</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Ne može se istovremeno prikazati više od %d aplikacija na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Ne može se istovremeno prikazati više od %d aplikacije na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Ne može se istovremeno prikazati više od %d aplikacije na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Otvorite aplikaciju koju želite dodijeliti, zatim pritisnite i zadržite tipku aplikacije %d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Otvorite aplikaciju koju želite dodijeliti, zatim pritisnite i zadržite tipku aplikacije %d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Otvorite aplikaciju koju želite dodijeliti, zatim pritisnite i zadržite tipku aplikacije %d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Aplikacija %1$s uzrokuje pregrijavanje telefona. Automatski će se zatvoriti za %2$d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s uzrokuje pregrijavanje telefona. Automatski će se zatvoriti za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacija %1$s uzrokuje pregrijavanje telefona. Automatski će se zatvoriti za %2$d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Aplikacija %1$s uzrokuje pregrijavanje tableta. Automatski će se zatvoriti za %2$d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s uzrokuje pregrijavanje tableta. Automatski će se zatvoriti za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacija %1$s uzrokuje pregrijavanje tableta. Automatski će se zatvoriti za %2$d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Kreirajte sigurnosnu kopiju neograničenih podataka na usluzi Samsung Cloud do %d dana ili obnovite podatke koje ste sigurnosno kopirali.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Kreirajte sigurnosnu kopiju neograničenih podataka na usluzi Samsung Cloud do %d dan ili obnovite podatke koje ste sigurnosno kopirali.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Kreirajte sigurnosnu kopiju neograničenih podataka na usluzi Samsung Cloud do %d dana ili obnovite podatke koje ste sigurnosno kopirali.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Aplikacija %1$s uzrokuje pregrijavanje telefona. Odmah zatvorite aplikaciju ili će se ona automatski zatvoriti za %2$d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s uzrokuje pregrijavanje telefona. Odmah zatvorite aplikaciju ili će se ona automatski zatvoriti za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacija %1$s uzrokuje pregrijavanje telefona. Odmah zatvorite aplikaciju ili će se ona automatski zatvoriti za %2$d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Aplikacija %1$s uzrokuje pregrijavanje tableta. Odmah zatvorite aplikaciju ili će se ona automatski zatvoriti za %2$d sekundi.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplikacija %1$s uzrokuje pregrijavanje tableta. Odmah zatvorite aplikaciju ili će se ona automatski zatvoriti za %2$d sekundu.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplikacija %1$s uzrokuje pregrijavanje tableta. Odmah zatvorite aplikaciju ili će se ona automatski zatvoriti za %2$d sekunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Imate još %d pokušaja prije nego se SIM kartica zaključa.</item>
+        <item quantity="one">Imate još %d pokušaj prije nego se SIM kartica zaključa.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d stavki</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d stavka</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d stavke</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Wi-Fi mrežu s kojom se želite povezati moguće je povezati samo s %d uređaja istovremeno. Prekinite vezu sa svim drugim uređajima od te mreže, zatim pokušajte ponovno.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Wi-Fi mrežu s kojom se želite povezati moguće je povezati samo s %d uređajem istovremeno. Prekinite vezu sa svim drugim uređajima od te mreže, zatim pokušajte ponovno.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Wi-Fi mrežu s kojom se želite povezati moguće je povezati samo s %d uređaja istovremeno. Prekinite vezu sa svim drugim uređajima od te mreže, zatim pokušajte ponovno.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d sati</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d sat</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d sata</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minuta</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minuta</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d minute</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

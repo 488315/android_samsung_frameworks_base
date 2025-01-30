@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Calculator_CN" TargetApi="19" TargetPackageName="com.sec.android.app.popupcalculator" VersionCode="1" VersionName="">
+        <Property Comment="Mortgage Period dialog bg color" DefaultValue="#fffafafa" DestAttribName="mtg_period_dialog_bg" UID="149-41-1" ValueRef="1-10-1" ValueType="BgColor" />
+        <Property Comment="Mortgage Period dialog title text color" DefaultValue="#ff454545" DestAttribName="mtg_period_dialog_title_text_color" UID="149-41-3" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="Mortgage Period dialog year picker text color" DefaultValue="#ff0074d4" DestAttribName="mtg_number_picker_select" UID="149-45-11" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Mortgage Period dialog button text color" DefaultValue="#ff0074d4" DestAttribName="mtg_period_dialog_btn_text" UID="149-45-12" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Mortgage calculate button text Color" DefaultValue="#fffafafa" DestAttribName="mtg_calculate_btn_text_color" UID="149-13-3" ValueRef="15-6-3" ValueType="TextColor" />
+        <Property Comment="Mortgage calculate button BgColor" DefaultValue="#ff54a37b" DestAttribName="mtg_calculate_btn_stroke_color" UID="149-13-5" ValueRef="15-6-4" ValueType="BgColor" />
+        <Property Comment="Mortgage calculate current commercial rate text color" DefaultValue="#99555555" DestAttribName="mtg_text_color_2" UID="149-13-2" ValueRef="1-1-4" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

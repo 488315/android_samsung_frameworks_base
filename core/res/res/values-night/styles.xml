@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DeviceDefault.Settings" parent="@style/Theme.DeviceDefault">
+        <item name="colorBackground">@color/primary_dark_device_default_settings</item>
+        <item name="textAppearanceButton">@style/TextAppearance.Material.Widget.Button</item>
+        <item name="actionBarStyle">@style/Widget.Material.ActionBar.Solid</item>
+        <item name="colorControlActivated">@color/tw_color_control_activated</item>
+        <item name="colorPrimary">@color/primary_dark_device_default_settings</item>
+        <item name="colorPrimaryDark">@color/primary_dark_device_default_settings</item>
+        <item name="navigationBarColor">@color/black</item>
+        <item name="toolbarStyle">@style/Widget.Material.Toolbar</item>
+        <item name="colorEdgeEffect">@color/edge_effect_device_default_dark</item>
+        <item name="windowLightStatusBar">false</item>
+        <item name="windowLightNavigationBar">false</item>
+        <item name="buttonCornerRadius">@dimen/sem_button_corner_radius</item>
+        <item name="colorListDivider">@color/list_divider_color_dark</item>
+        <item name="opacityListDivider">@color/list_divider_opacity_device_default_dark</item>
+    </style>
+    <style name="Theme.DeviceDefault.DayNight" parent="@style/Theme.DeviceDefault" />
+    <style name="ThemeOverlay.DeviceDefault.Accent.DayNight" parent="@style/ThemeOverlay.DeviceDefault.Accent" />
+    <style name="Theme.DeviceDefault.AutofillHalfScreenDialogButton" parent="@style/Theme.DeviceDefault.Panel">
+        <item name="textColorPrimary">@color/system_neutral1_100</item>
+        <item name="textColorSecondary">@color/system_neutral2_100</item>
+        <item name="selectableItemBackground">@color/transparent</item>
+        <item name="colorAccentPrimary">@color/system_accent1_700</item>
+        <item name="colorAccentPrimaryVariant">@color/system_accent1_200</item>
+        <item name="colorListDivider">@color/white</item>
+    </style>
+    <style name="Theme.DeviceDefault.AutofillHalfScreenDialogList" parent="@style/Theme.DeviceDefault.DayNight">
+        <item name="colorForeground">@color/white</item>
+    </style>
+    <style name="Theme.DeviceDefault.Dialog.Alert.DayNight" parent="@style/Theme.DeviceDefault.Dialog.Alert" />
+    <style name="Theme.DeviceDefault.Dialog.AppError" parent="@style/Theme.DeviceDefault.Dialog.Alert" />
+    <style name="Theme.DeviceDefault.Resolver" parent="@style/Theme.DeviceDefault.ResolverCommon">
+        <item name="colorBackground">@color/tw_dialog_window_background_color_material_dark</item>
+        <item name="backgroundDimAmount">0.65</item>
+        <item name="disabledAlpha">0.4</item>
+        <item name="textColorPrimary">@color/tw_chooser_primary_text_material</item>
+        <item name="textColorSecondary">@color/tw_secondary_text_material_dark</item>
+        <item name="windowBackground">@color/transparent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowIsTranslucent">true</item>
+        <item name="windowContentOverlay">@null</item>
+        <item name="windowTitleStyle">@style/DialogWindowTitle.DeviceDefault</item>
+        <item name="tabWidgetStyle">@style/Widget.DeviceDefault.TabWidget</item>
+        <item name="windowFullscreen">true</item>
+        <item name="backgroundDimEnabled">true</item>
+        <item name="windowSoftInputMode">adjustNothing</item>
+        <item name="activatedBackgroundIndicator">@drawable/activated_background_material</item>
+        <item name="homeAsUpIndicator">@drawable/sem_chooser_ic_ab_back_button</item>
+        <item name="buttonBarStyle">@style/DeviceDefault.ButtonBar.AlertDialog</item>
+        <item name="windowTranslucentNavigation">false</item>
+        <item name="colorControlActivated">@color/tw_color_control_activated</item>
+        <item name="colorControlHighlight">#33ffffff</item>
+        <item name="colorPrimaryDark">@color/sem_color_primary_dark_light</item>
+        <item name="switchStyle">@style/Switch.Chooser</item>
+        <item name="statusBarColor">@color/transparent</item>
+        <item name="navigationBarColor">@color/sem_round_and_bgcolor_dark</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.DeviceDefault.Button.Dialog.Positive</item>
+        <item name="colorBackgroundFloating">@color/sem_resolver_bg_color</item>
+        <item name="windowLightNavigationBar">false</item>
+        <item name="windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="iconfactoryBadgeSize">@dimen/resolver_badge_size</item>
+        <item name="iconfactoryIconSize">@dimen/resolver_icon_size</item>
+        <item name="semButtonTextColor">@color/sem_chooser_btn_text_color_dark</item>
+        <item name="semResolverChipButtonBackground">@drawable/sem_chooser_btn_default_dark</item>
+    </style>
+    <style name="Theme.DeviceDefault.Settings.DialogBase" parent="@style/Theme.Material.BaseDialog">
+        <item name="alertDialogTheme">@style/Theme.DeviceDefault.Dialog.Alert</item>
+        <item name="colorPrimary">@color/primary_dark_device_default_settings</item>
+        <item name="colorPrimaryDark">@color/primary_dark_device_default_settings</item>
+        <item name="colorAccent">@color/accent_device_default_dark</item>
+        <item name="colorSecondary">@color/secondary_device_default_settings</item>
+        <item name="colorError">@color/error_color_device_default_dark</item>
+    </style>
+    <style name="Theme.DeviceDefault.SystemUI" parent="@style/Theme.DeviceDefault">
+        <item name="alertDialogTheme">@style/Theme.DeviceDefault.Dialog.Alert</item>
+        <item name="colorControlNormal">?textColorPrimary</item>
+        <item name="colorPrimaryDark">@color/primary_dark_device_default_settings</item>
+        <item name="colorAccent">@color/accent_device_default_dark</item>
+        <item name="colorSecondary">@color/secondary_device_default_settings</item>
+        <item name="colorError">@color/error_color_device_default_dark</item>
+        <item name="forceDarkAllowed">false</item>
+    </style>
+    <style name="Theme.DeviceDefault.SystemUI.Dialog" parent="@style/Theme.DeviceDefault.Dialog" />
+    <style name="Theme.MaintenanceMode" parent="@style/Theme.DeviceDefault.DayNight">
+        <item name="windowBackground">@color/maintenance_mode_background</item>
+        <item name="actionBarSize">@dimen/maintenance_mode_action_bar_size</item>
+        <item name="statusBarColor">@color/maintenance_mode_background</item>
+        <item name="navigationBarColor">@color/maintenance_mode_background</item>
+        <item name="windowLightStatusBar">false</item>
+        <item name="windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+    <style name="Theme.UnknownSource" parent="@style/Theme.DeviceDefault.NoActionBar">
+        <item name="windowBackground">@color/unknownsource_background</item>
+        <item name="statusBarColor">@color/unknownsource_background</item>
+        <item name="navigationBarColor">@color/unknownsource_background</item>
+        <item name="windowLightStatusBar">true</item>
+        <item name="titleTextColor">@color/unknownsource_text_color_primary</item>
+        <item name="windowLightNavigationBar">false</item>
+        <item name="windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="windowSplashScreenBackground">@color/unknownsource_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@color/transparent</item>
+    </style>
+    <style name="dexRestartDialogStyle" parent="@style/Theme.DeviceDefault.Dialog.Alert">
+        <item name="windowCloseOnTouchOutside">false</item>
+        <item name="windowContentTransitions">false</item>
+        <item name="windowActivityTransitions">false</item>
+    </style>
+</resources>

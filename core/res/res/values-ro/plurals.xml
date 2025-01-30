@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Tableta dvs. este instabilă deoarece a fost scos un card SD pe care erau instalate aplicații. Tableta va reporni peste %d secunde, pentru a reveni la normal. Salvați toate datele nesalvate înainte de repornirea tabletei.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tableta dvs. este instabilă deoarece a fost scos un card SD pe care erau instalate aplicații. Tableta va reporni peste %d secundă, pentru a reveni la normal. Salvați toate datele nesalvate înainte de repornirea tabletei.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Tableta dvs. este instabilă deoarece a fost scos un card SD pe care erau instalate aplicații. Tableta va reporni peste %d secunde, pentru a reveni la normal. Salvați toate datele nesalvate înainte de repornirea tabletei.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Tableta va reporni peste %d secunde</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tableta va reporni peste %d secundă</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Tableta va reporni peste %d secunde</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d aplicații au fost închise automat, deoarece provocau supraîncălzirea telefonului. Le puteți deschide din nou mai târziu, după ce telefonul se răcește.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicație a fost închisă automat, deoarece provoca supraîncălzirea telefonului. O puteți deschide din nou mai târziu, după ce telefonul se răcește.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplicații au fost închise automat, deoarece provocau supraîncălzirea telefonului. Le puteți deschide din nou mai târziu, după ce telefonul se răcește.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d aplicații au fost închise automat, deoarece provocau supraîncălzirea tabletei. Le puteți deschide din nou mai târziu, după ce tableta se răcește.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicație a fost închisă automat, deoarece provoca supraîncălzirea tabletei. O puteți deschide din nou mai târziu, după ce tableta se răcește.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplicații au fost închise automat, deoarece provocau supraîncălzirea tabletei. Le puteți deschide din nou mai târziu, după ce tableta se răcește.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d aplicații închise</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d aplicație închisă</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d aplicații închise</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Nu se pot afișa mai mult de %d aplicații simultan pe ecran. Cea mai veche aplicație minimizată.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Nu se poate afișa mai mult de %d aplicație simultan pe ecran. Cea mai veche aplicație minimizată.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Nu se pot afișa mai mult de %d aplicații simultan pe ecran. Cea mai veche aplicație minimizată.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Deschideți aplicația pe care doriți să o asociați, apoi mențineți apăsată tasta aplicației timp de %d secunde.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Deschideți aplicația pe care doriți să o asociați, apoi mențineți apăsată tasta aplicației timp de %d secundă.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Deschideți aplicația pe care doriți să o asociați, apoi mențineți apăsată tasta aplicației timp de %d secunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Aplicația %1$s provoacă supraîncălzirea telefonului dvs. Se va închide automat peste %2$d secunde.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplicația %1$s provoacă supraîncălzirea telefonului dvs. Se va închide automat peste %2$d secundă.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplicația %1$s provoacă supraîncălzirea telefonului dvs. Se va închide automat peste %2$d secunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Aplicația %1$s provoacă supraîncălzirea tabletei dvs. Se va închide automat peste %2$d secunde.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Aplicația %1$s provoacă supraîncălzirea tabletei dvs. Se va închide automat peste %2$d secundă.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Aplicația %1$s provoacă supraîncălzirea tabletei dvs. Se va închide automat peste %2$d secunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Faceți backup unui număr nelimitat de date în Samsung Cloud pentru până la %d zile sau restabiliți datele pentru care ați făcut backup.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Faceți backup unui număr nelimitat de date în Samsung Cloud pentru până la %d zi sau restabiliți datele pentru care ați făcut backup.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Faceți backup unui număr nelimitat de date în Samsung Cloud pentru până la %d zile sau restabiliți datele pentru care ați făcut backup.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s provoacă supraîncălzirea telefonului dvs. Îl puteți închide acum sau se va închide automat peste %2$d secunde.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s provoacă supraîncălzirea telefonului dvs. Îl puteți închide acum sau se va închide automat peste %2$d secundă.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%1$s provoacă supraîncălzirea telefonului dvs. Îl puteți închide acum sau se va închide automat peste %2$d secunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s provoacă supraîncălzirea tabletei dvs. Îl puteți închide acum sau se va închide automat peste %2$d secunde.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s provoacă supraîncălzirea tabletei dvs. Îl puteți închide acum sau se va închide automat peste %2$d secundă.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%1$s provoacă supraîncălzirea tabletei dvs. Îl puteți închide acum sau se va închide automat peste %2$d secunde.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Ți-au mai rămas %d de încercări până la blocarea cardului SIM.</item>
+        <item quantity="one">Ți-a mai rămas %d încercare până la blocarea cardului SIM.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d elemente</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d element</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d elemente</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Rețeaua Wi-Fi la care doriți să vă conectați permite doar conectarea a %d dispozitive simultan. Deconectați toate celelalte dispozitive de la rețeaua respectivă, apoi încercați din nou.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Rețeaua Wi-Fi la care doriți să vă conectați permite doar conectarea a %d dispozitiv simultan. Deconectați toate celelalte dispozitive de la rețeaua respectivă, apoi încercați din nou.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Rețeaua Wi-Fi la care doriți să vă conectați permite doar conectarea a %d dispozitive simultan. Deconectați toate celelalte dispozitive de la rețeaua respectivă, apoi încercați din nou.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d ore</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d oră</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d ore</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minute</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minut</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d minute</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>

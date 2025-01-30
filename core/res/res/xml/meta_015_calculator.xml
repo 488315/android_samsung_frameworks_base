@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Calculator" TargetApi="19" TargetPackageName="com.sec.android.app.popupcalculator" VersionCode="1" VersionName="">
+        <Property Comment="IStatus bar background color" DestAttribName="status_bar_background_color" UID="15-S-1" ValueRef="1-51" ValueType="BgColor" />
+        <Property Comment="Icon color (True – Dark / False - Light)" DefaultValue="true" DestAttribName="status_bar_icon_color" UID="15-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="calc_edit_bg,windowBackground,converter_tab_layout_default" UID="15-4-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Button color " DefaultValue="#ff555555" DestAttribName="history_normal" Opacity="85" POption="AlwaysOverriden;FixedOpacity" UID="15-4-2" ValueRef="15-4-4" ValueType="BgColor" />
+        <Property Comment="Scroll bar history" DefaultValue="#ffdedede" DestAttribName="history_scroll_bar_bg" UID="15-9-5" ValueRef="1-36" ValueType="BgColor" />
+        <Property Comment="Input number text color" DefaultValue="#ff555555" DestAttribName="number" UID="15-4-4" ValueType="TextColor" />
+        <Property Comment="Estimated result text color" DefaultValue="#99555555" DestAttribName="real_time_result" Opacity="40" UID="15-4-5" ValueRef="15-4-4" ValueType="TextColor" />
+        <Property Comment="Input symbol color" DefaultValue="#ff569415" DestAttribName="symbols" POption="" UID="15-4-6" ValueType="TextColor" />
+        <Property Comment="Backspace icon color" DefaultValue="#ff569415" DestAttribName="back_key" UID="15-4-7" ValueRef="15-4-6" ValueType="TextColor" />
+        <Property Comment="Cursor color" DefaultValue="#ff80cbc4" DestAttribName="calc_cursor" UID="15-4-8" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Keypad button Background color " DefaultValue="#b3eeeeee" DestAttribName="calc_keypad_number_button_bg,calc_keypad_symbol_button_bg,calc_btn_background_stroke_color" POption="AlwaysOverriden;FixedOpacity" UID="15-5-1" ValueType="BgColor" />
+        <Property Comment="Divider color" DefaultValue="#50dfdfdf" DestAttribName="keypad_divider, keypad_divider_land" POption="" UID="15-5-5" ValueRef="1-2" ValueType="BgColor" />
+        <Property Comment="number color " DefaultValue="#ff555555" DestAttribName="keypad_number,keypad_func" POption="AlwaysOverriden" UID="15-6-1" ValueRef="15-4-6" ValueType="TextColor" />
+        <Property Comment="symbol color" DefaultValue="#ff569415" DestAttribName="keypad_symbol,back_key_unit_converter" POption="AlwaysOverriden" UID="15-6-2" ValueRef="15-4-6" ValueType="TextColor" />
+        <Property Comment="‘C’ key color" DefaultValue="#ffdb332a" DestAttribName="keypad_clear" POption="FixedOpacity" UID="15-6-2-1" ValueRef="24-G" ValueType="TextColor" />
+        <Property Comment="= color " DefaultValue="#fffafafa" DestAttribName="keypad_equal" POption="AlwaysOverriden" UID="15-6-3" ValueRef="15-4-1" ValueType="TextColor" />
+        <Property Comment="= background color " DefaultValue="#ff68b31a" DestAttribName="keypad_equal_bg" POption="AlwaysOverriden;FixedOpacity" UID="15-6-4" ValueRef="15-4-6" ValueType="BgColor" />
+        <Property Comment="Result text color" DefaultValue="#ff569415" DestAttribName="result" POption="FixedOpacity;Mandatory" UID="15-8-1" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Result number text color (Primary dark)" DefaultValue="#ff569415" DestAttribName="history_result" POption="FixedOpacity;Mandatory" UID="15-9-1" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Clear History button text color" DefaultValue="#fffafafa" DestAttribName="history_btn_clear" UID="15-9-2" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Estimated result text color" DefaultValue="#ff555555" DestAttribName="history_expression" UID="15-9-3" ValueRef="15-4-4" ValueType="TextColor" />
+        <Property Comment="Clear History button BG color" DefaultValue="#ff569415" DestAttribName="history_btn_bg" UID="15-9-4" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Navigation background color" DefaultValue="#fffcfcfc" DestAttribName="navigationBarColor,colorPrimaryDark" UID="15-10-1" ValueRef="1-69-1" ValueType="Color" />
+        <Property Comment="Icon image theme (Dark / Light)" DefaultValue="true" DestAttribName="light_navigationbar_icon_color" UID="15-10-2" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Title of action bar" DefaultValue="#ff252525" DestAttribName="title_actionbar" UID="15-11-6" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Title of sub tab(default)" DefaultValue="#ff858585" DestAttribName="calc_tab_title_default" UID="15-11-9" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Title of sub tab(selected)" DefaultValue="#ff252525" DestAttribName="calc_tab_title_selected" UID="15-11-8" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Back icon image" DestAttribName="calculator_btn_back" UID="15-11-7-1" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Back icon tint color" DestAttribName="back_actionbar_tint" UID="15-11-7-2" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Selected mark tint color" DefaultValue="#cc717171" DestAttribName="border_tab_layout_selected" Opacity="10" UID="15-11-10" ValueRef="1-13-3" ValueType="Color" />
+        <Property Comment="Unit text color" DefaultValue="#ff555555" DestAttribName="converter_area_text,converter_sub_total_text" UID="15-11-1" ValueRef="15-4-4" ValueType="TextColor" />
+        <Property Comment="Spinner icon color" DefaultValue="#ff3b3b3b" DestAttribName="converter_spinner_icon" UID="15-11-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Input text color" DestAttribName="converter_text_color" UID="15-11-3" ValueRef="15-4-4" ValueType="TextColor" />
+        <Property Comment="Result text color" DestAttribName="converter_btn_select,converter_result_text_color" UID="15-11-4" ValueRef="15-4-4" ValueType="TextColor" />
+        <Property Comment="Divider color" DefaultValue="#ffe6e6e6" DestAttribName="converter_edit_divider" POption="" UID="15-11-5" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="dropdown_spinner_background" UID="15-11-11" ValueRef="1-9-1" ValueType="TextColor" />
+        <Property Comment="Spinner – Selected text color" DefaultValue="#ff569415" DestAttribName="converter_spinner_select" UID="15-11-12" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Spinner – Unselected text color" DefaultValue="#ff000000" DestAttribName="converter_spinner_default" UID="15-11-13" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="Selected mark icon image" DestAttribName="tw_dropdown_ic_check" UID="15-11-15" ValueRef="1-10-10" ValueType="Image" />
+        <Property Comment="Stroke for dropdown menu " DefaultValue="#ffcccccc" DestAttribName="converter_spinner_dropdown_stroke" UID="15-11-16" ValueRef="1-C" ValueType="TextColor" />
+        <Property Comment="Background color" DestAttribName="action_bar_title_bg" UID="15-11-17" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Background color" DestAttribName="tab_layout_bg" UID="15-11-18" ValueRef="1-13-1" ValueType="BgColor" />
+        <Property Comment="Cursor color" DestAttribName="converter_cursor" UID="15-11-19" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Tip button icon color" DestAttribName="converter_tip_icon" UID="15-11-20" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Tip button text color" DestAttribName="converter_tip_number" UID="15-11-21" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Tip button bg color" DestAttribName="tab_layout_background_selected" UID="15-11-22" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Dialog picker text color" DestAttribName="converter_tip_number_picker_text" UID="15-11-23" ValueRef="1-42-1" ValueType="TextColor" />
+        <Property Comment="Dialog picker text dim color" DestAttribName="converter_tip_number_picker_text_dim" UID="15-11-24" ValueRef="1-42-2" ValueType="TextColor" />
+        <Property Comment="Dialog Background color" DefaultValue="#fffcfcfc" DestAttribName="converter_tip_number_picker_dialog_bg" UID="15-11-25" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="Dialog number picker's image background" DestAttribName="tip_number_picker_dialog_bg" UID="15-11-26" ValueRef="1-9-2" ValueType="Image" />
+        <Property Comment="Title text color" DestAttribName="converter_tip_number_picker_dialog_title_text" UID="15-11-27" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="Button text color" DefaultValue="#ff010101" DestAttribName="converter_tip_btn_done" UID="15-11-28" ValueRef="1-9-15" ValueType="TextColor" />
+        <Property Comment="Button divider" DefaultValue="#ffe6e6e6" DestAttribName="converter_tip_dialog_button_divider" UID="15-11-29" ValueRef="1-9-8" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

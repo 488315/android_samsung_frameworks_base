@@ -1,0 +1,36 @@
+package android.sec.enterprise;
+
+import android.sec.enterprise.EnterpriseDeviceManager;
+import android.sec.enterprise.content.SecContentProviderURI;
+import android.util.Log;
+
+/* loaded from: classes3.dex */
+public class RoamingPolicy {
+    private static String TAG = SecContentProviderURI.ROAMINGPOLICY;
+
+    public boolean isRoamingPushEnabled() {
+        try {
+            IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
+            if (lService != null) {
+                return lService.isRoamingPushEnabled();
+            }
+            return true;
+        } catch (Exception e) {
+            Log.m94d(TAG, "PXY-isRoamingPushEnabled returning default value");
+            return true;
+        }
+    }
+
+    public boolean isRoamingDataEnabled() {
+        try {
+            IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
+            if (lService != null) {
+                return lService.isRoamingDataEnabled();
+            }
+            return true;
+        } catch (Exception e) {
+            Log.m94d(TAG, "PXY-isRoamingDataEnabled returning default value");
+            return true;
+        }
+    }
+}

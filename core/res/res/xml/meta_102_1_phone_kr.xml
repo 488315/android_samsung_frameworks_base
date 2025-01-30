@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Phone_KR" TargetApi="28" TargetPackageName="com.samsung.android.dialer" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Expand and Detail / RCS message color" DefaultValue="#ff3b7cf3" DestAttribName="ims_message_rcs_chatting_plus_icon_color" UID="102_1-21-1" ValueRef="13-46-3" ValueType="TintColor" />
+    </AppMetaData>
+</ThemeMetaData>

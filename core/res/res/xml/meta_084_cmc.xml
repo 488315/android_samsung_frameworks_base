@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="CMC" TargetApi="19" TargetPackageName="com.samsung.android.mdecservice" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Include RefName="Settings" />
+        <Property Comment="Welcome text color" DefaultValue="#ff010101" DestAttribName="welcome_header_text_color" DestQualifiers="" UID="84-1-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff979797" DestAttribName="term_and_condition_text_secondery" DestQualifiers="" UID="84-1-2" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="link text color" DefaultValue="#ff3b3b3b" DestAttribName="tnc_pp_bold_text_color" DestQualifiers="" UID="84-1-3" ValueRef="1-3-4-D" ValueType="TextColor" />
+        <Property Comment="agree button text color" DefaultValue="#ffffffff" DestAttribName="agree_button_text_color" DestQualifiers="" UID="84-1-4" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="welcome subheader text color" DefaultValue="#ff252525" DestAttribName="welcome_sunheader_text_color" DestQualifiers="" UID="84-1-6" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="welcome page summary text color" DefaultValue="#ff8f8f8f" DestAttribName="welcomePageSummaryColor" DestQualifiers="" UID="84-1-7" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Content area: Background color (port)" DefaultValue="#fffafafa" DestAttribName="layout_foreground_color" UID="84-2-3" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="samsung account and primary device summary text color" DefaultValue="#ff0072de" DestAttribName="cmc_samsung_account_and_primary_device_summary_color" DestQualifiers="" UID="84-2-4" ValueRef="1-1-5" ValueType="TextColor" />
+        <Property Comment="Suggestion Tip card bg color" DefaultValue="#bc4297ff" DestAttribName="tip_card_background_color" DestQualifiers="" UID="84-3-1" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="Suggestion text color" DefaultValue="#fffafafa" DestAttribName="suggestion_text_color" UID="84-3-4" ValueRef="1-48-4" ValueType="TextColor" />
+        <Property Comment="Selection mode On color" DefaultValue="#ff4297ff" DestAttribName="cmc_all_checkbox" UID="84-4-1" ValueRef="1-49-7" ValueType="Color" />
+        <Property Comment="Selection mode On image" DestAttribName="cmc_all_checkbox_bg" UID="84-4-1-1" ValueRef="1-49-7-1" ValueType="Image" />
+        <Property Comment="Selection mode Off color" DefaultValue="#cc8f8f8f" DestAttribName="cmc_all_checkbox_dim" UID="84-4-2" ValueRef="1-49-8" ValueType="Color" />
+        <Property Comment="welcome page agree button bgcolor" DefaultValue="#ff4297ff" DestAttribName="cmc_sec_widget_switchbar_checked_background_color" DestQualifiers="" UID="84-1-5" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Selection mode Off image" DestAttribName="cmc_all_checkbox_dim_bg" UID="84-4-2-1" ValueRef="1-49-8-1" ValueType="Image" />
+        <Property Comment="Select button All text color" DefaultValue="#ff252525" DestAttribName="cmc_all_checkbox_selection_text_color" DestQualifiers="" UID="84-4-3" ValueRef="1-49-6" ValueType="TextColor" />
+        <Property Comment="Selection mode list On color" DefaultValue="#ff4297ff" DestAttribName="cmc_list_checkbox" UID="84-4-4" ValueRef="1-6-1" ValueType="Color" />
+        <Property Comment="Selection mode list On image" DestAttribName="cmc_list_checkbox_bg" UID="84-4-4-1" ValueRef="1-6-1-1" ValueType="Image" />
+        <Property Comment="Selection mode list Off color" DefaultValue="#cc8f8f8f" DestAttribName="cmc_list_checkbox_dim" UID="84-4-5" ValueRef="1-6-2" ValueType="Color" />
+        <Property Comment="Selection mode list Off image" DestAttribName="cmc_list_checkbox_dim_bg" UID="84-4-5-1" ValueRef="1-6-2-1" ValueType="Image" />
+        <Property Comment="bottom bar button text icon color" DefaultValue="#ff454545" DestAttribName="bottom_bar_button_text_icon_color" UID="84-4-6" ValueRef="1-14-3" ValueType="Color" />
+        <Property Comment="CMC Bottom bar BG color" DefaultValue="#fff2f2f2" DestAttribName="cmc_window_background_color" UID="84-4-7" ValueRef="1-14-1" ValueType="BgColor" />
+        <Property Comment="About Main text color" DefaultValue="#ff252525" DestAttribName="about_page_app_name_text_color" DestQualifiers="" UID="84-5-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About page info icon tint color" DefaultValue="#ff505050" DestAttribName="body_text_color" DestQualifiers="" UID="84-5-2" ValueRef="1-11-1" ValueType="TintColor" />
+        <Property Comment="Button bg color" DefaultValue="#ffe4e4e4" DestAttribName="about_page_tnc_pp_oslicences_button_text_color" DestQualifiers="" UID="84-5-3" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="about_page_button_text_color" DestQualifiers="" UID="84-5-4" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="about page bgcolor" DefaultValue="#fffcfcfc" DestAttribName="cmc_about_page_background_color" DestQualifiers="" UID="84-5-5" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="cmc navigation background color" DestAttribName="cmc_navigation_bar_bg_color" UID="84-6-1" ValueRef="1-69-1" ValueType="BgColor" />
+        <Property Comment="Bottom navigation icon image theme" DefaultValue="true" DestAttribName="use_light_status_navi_bar2" DestQualifiers="" UID="84-6-2" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="master ON BG color" DefaultValue="#ff4297ff" DestAttribName="cmc_widget_switchbar_checked_background_color" DestQualifiers="" UID="84-7-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="master OFF BG color" DefaultValue="#fffafafa" DestAttribName="cmc_widget_switchbar_background_color" DestQualifiers="" UID="84-7-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Sub app bar master ON text color" DefaultValue="#ff0072de" DestAttribName="switch_widget_text_color_on" DestQualifiers="" UID="84-7-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Sub app bar master OFF text color" DefaultValue="#ff252525" DestAttribName="master_switch_widget_text_color_off" DestQualifiers="" UID="84-7-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Open source licences title text color" DefaultValue="#ff505050" DestAttribName="cmc_open_sources_title_text_color" DestQualifiers="" UID="84-8-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Open source licences back icon tint color" DestAttribName="cmc_open_sources_back_icon_tint_color" DestQualifiers="" UID="84-8-2" ValueRef="1-11-3" ValueType="TintColor" />
+        <Property Comment="Back icon image" DestAttribName="cmc_open_sources_back_icon_image" UID="84-8-3" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Open source licences actionbar background color" DestAttribName="cmc_open_sources_actionbar_bg_color" DestQualifiers="" UID="84-8-4" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Open source licences body text color" DestAttribName="cmc_open_sources_body_text_color" DestQualifiers="" UID="84-8-5" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Open source licences body background color" DestAttribName="cmc_open_sources_body_bg_color" DestQualifiers="" UID="84-8-6" ValueRef="1-18-1" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

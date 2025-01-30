@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Մնաց %d փորձ, որից հետո SIM քարտն արգելափակվելու է:</item>
+        <item quantity="one">Մնաց %d փորձ, որից հետո SIM քարտն արգելափակվելու է:</item>
+    </plurals>
+</resources>

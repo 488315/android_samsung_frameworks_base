@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">சிம் பூட்டப்படுவதற்கு முன், நீங்கள் %d முறை முயற்சிக்கலாம்.</item>
+        <item quantity="one">சிம் பூட்டப்படுவதற்கு முன், நீங்கள் %d முறை முயற்சிக்கலாம்.</item>
+    </plurals>
+</resources>

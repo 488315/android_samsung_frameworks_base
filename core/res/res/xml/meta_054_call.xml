@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="SecInCallUI" PackageNameSuffix="InCallUI" TargetApi="21" TargetPackageName="com.samsung.android.incallui" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Answer icon Tint color." DefaultValue="#ff15b76d" DestAttribName="theme_incoming_call_accept_icon_tint" DestQualifiers="" POption="FixedOpacity;AlwaysOverriden" UID="54-2-4" ValueType="Color" />
+        <Property Comment="Reject icon tint color." DefaultValue="#fff64141" DestAttribName="theme_incoming_call_reject_icon_tint" DestQualifiers="" POption="FixedOpacity;AlwaysOverriden" UID="54-2-5" ValueType="Color" />
+        <Property Comment="Answer Button Cicle Background image." DefaultValue="phone_bg_btn" DestAttribName="theme_incoming_call_accept_circle_bg_image" DestQualifiers="" ImageSize="64X64" UID="54-2-6" ValueType="BgImage" />
+        <Property Comment="Answer Button Circle Background color." DefaultValue="#fffafafa" DestAttribName="theme_incoming_call_accept_circle_bg_color" DestQualifiers="" POption="AlwaysOverriden" UID="54-2-6-2" ValueType="BgColor" />
+        <Property Comment="Reject Button Cicle Background image." DefaultValue="phone_bg_btn" DestAttribName="theme_incoming_call_reject_circle_bg_image" DestQualifiers="" ImageSize="64X64" UID="54-2-7" ValueType="BgImage" />
+        <Property Comment="Reject Button Circle Background color." DefaultValue="#fffafafa" DestAttribName="theme_incoming_call_reject_circle_bg_color" DestQualifiers="" POption="AlwaysOverriden" UID="54-2-7-2" ValueType="BgColor" />
+        <Property Comment="Disconnect icon tint color." DefaultValue="#fffafafa" DestAttribName="theme_during_call_disconnect_icon_tint" DestQualifiers="" POption="FixedOpacity;AlwaysOverriden" UID="54-4-3" ValueType="Color" />
+        <Property Comment="Disconnect Button Cicle Background image." DefaultValue="phone_bg_btn" DestAttribName="theme_during_call_disconnect_circle_image" DestQualifiers="" ImageSize="64X64" UID="54-4-4" ValueType="BgImage" />
+        <Property Comment="Disconnect Button Circle Background color." DefaultValue="#fff64141" DestAttribName="theme_during_call_disconnect_circle_bg_color" DestQualifiers="" POption="AlwaysOverriden" UID="54-4-4-2" ValueType="BgColor" />
+        <Property Comment="End call default button icon color." DefaultValue="#ff454545" DestAttribName="theme_end_call_default_btn_icon_color" DestQualifiers="" POption="AlwaysOverriden" UID="54-6-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="End call default button text color." DefaultValue="#ff454545" DestAttribName="theme_end_call_default_btn_text_color" DestQualifiers="" UID="54-6-1-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="End call circle button icon color." DefaultValue="#fffafafa" DestAttribName="theme_end_call_circle_btn_icon_color" DestQualifiers="" POption="AlwaysOverriden" UID="54-6-2" ValueRef="1-8-3" ValueType="Color" />
+        <Property Comment="End call circle button background color." DefaultValue="#ff15b76d" DestAttribName="theme_end_call_circle_btn_bg_color_default_call,theme_end_call_circle_btn_bg_color_unavailable_call,theme_end_call_circle_btn_bg_color_default_msg,theme_end_call_circle_btn_bg_color_rcs_msg,theme_end_call_circle_btn_bg_color_kor_rcs_msg" DestQualifiers="" UID="54-6-3" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="End call background color." DefaultValue="#fff64141" DestAttribName="theme_end_call_background_color" DestQualifiers="" POption="AlwaysOverriden" UID="54-7-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="End call text color." DefaultValue="#fff64141" DestAttribName="theme_end_call_text_color_caller_info,theme_end_call_text_color_call_state" DestQualifiers="" POption="AlwaysOverriden" UID="54-7-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Open source license title text color" DefaultValue="#ff000000" DestAttribName="theme_open_source_license_title_text_color" UID="54-8-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Open source license back icon tint color" DefaultValue="#ff000000" DestAttribName="theme_open_source_license_back_icon_tint_color" UID="54-8-2" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Open source license back icon image" DestAttribName="theme_open_source_license_action_bar_icon" UID="54-8-3" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Open source license title background color" DefaultValue="#fffafafa" DestAttribName="theme_open_source_license_action_bar_background_color" UID="54-8-4" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Open source license body_text color" DefaultValue="#ff000000" DestAttribName="theme_open_source_license_text_color" UID="54-8-5" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Open source license body_background color" DefaultValue="#fffafafa" DestAttribName="theme_open_source_license_background_color" UID="54-8-6" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Open source license body scroll bar color" DefaultValue="#ffdedede" DestAttribName="theme_open_source_license_scroll_bar_color" UID="54-8-7" ValueRef="1-36" ValueType="Color" />
+    </AppMetaData>
+    <AppMetaData IsStandAlone="true" Name="CallBGProvider" PackageNameSuffix="callbg" TargetApi="29" TargetPackageName="com.samsung.android.callbgprovider" VersionCode="1" VersionName="1.0">
+        <Property Comment="Select Wallpaper Type: Select Wallpaper Type" DefaultValue="0" DestAttribName="" UID="Background_Sel" ValueType="Integer" />
+        <Property Comment="Call Screen Background Image" DefaultValue="" DestAttribName="theme_callbg" ImageSize="853.33x853.33" UID="54-3-1" ValueType="Image" />
+        <Property DefaultValue="" DestAttribName="video_callbg" POption="Video" UID="54-3-2" ValueType="FilePath" />
+        <Property DefaultValue="" DestAttribName="thumbnail_callbg" ImageSize="240X426.66" POption="FIXEDSIZE|IsPreview" UID="54-3-3-thumbnail" ValueType="Image" />
+    </AppMetaData>
+</ThemeMetaData>

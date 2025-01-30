@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.7">
+    <AppMetaData Name="SecSoundPicker" TargetApi="29" TargetPackageName="com.samsung.android.secsoundpicker" UID="SecSoundPicker" VersionCode="1" VersionName="1.0.0">
+        <Include RefName="SESL" />
+        <Property Comment="Navigation and Status bar icon color" DefaultValue="true" DestAttribName="use_light_status_navi_bar" UID="80-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Delete icon tint color" DefaultValue="#ffd30000" DestAttribName="ic_tw_list_icon_delete_mtrl_color" POption="AlwaysOverriden" UID="80-2-1" ValueRef="1-17-3" ValueType="TintColor" />
+        <Property Comment="Delete icon image" DestAttribName="ic_tw_list_icon_delete_mtrl" DestQualifiers="xxxhdpi" ImageSize="32X32" UID="80-2-2" ValueRef="1-17-4" ValueType="Image" />
+    </AppMetaData>
+</ThemeMetaData>

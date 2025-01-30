@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Devices panel" TargetApi="19" TargetPackageName="com.android.systemui" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Location text" DefaultValue="#8c252525" DestAttribName="control_main_subheader_text" UID="89-1-1" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Selected mark icon image" DefaultValue="" DestAttribName="ic_spinner_app_selected" UID="89-2-1" ValueRef="1-10-10" ValueType="Image" />
+        <Property Comment="Primary dark color" DefaultValue="#ff252525" DestAttribName="control_spinner_item_text_color" UID="89-2-2" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="control_activity_subtitle" UID="89-3-1" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Text color" DefaultValue="#ff252525" DestAttribName="control_no_apps_title" UID="89-3-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff333333" DestAttribName="control_no_apps_description" UID="89-3-3" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Create button background color" DefaultValue="#ff3695dd" DestAttribName="control_contained_button_background" UID="89-3-4" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Button text color" DefaultValue="#fffafafa" DestAttribName="control_contained_button_text" UID="89-3-5" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Background color" DefaultValue="#fffcfcfc" DestAttribName="control_activity_contents_background" UID="89-4-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#ff252525" DestAttribName="control_manage_apps_app_name" UID="89-4-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff909090" DestAttribName="control_devices_added" UID="89-4-3" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Vertical divider color" DefaultValue="#ffc4c4c4" DestAttribName="basic_interaction_vertical_divider" UID="89-4-4" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Divider color" DefaultValue="#ffe6e6e6" DestAttribName="basic_interaction_thumbnail_list_divider" POption="AlwaysOverriden" UID="89-4-5" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="control_manage_apps_description" UID="89-4-6" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Location Background color" DefaultValue="#12000000" DestAttribName="control_structure_background" Opacity="7" UID="89-4-7" ValueRef="4-3-1" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#ff252525" DestAttribName="control_manage_apps_category_title" UID="89-4-8" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Location text" DefaultValue="#8c252525" DestAttribName="control_subheader_text" UID="89-4-9" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Location Background color" DefaultValue="#12000000" DestAttribName="control_reorder_structure_background" Opacity="7" UID="89-5-1" ValueRef="4-3-1" ValueType="BgColor" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="control_manage_reorder_category_title" UID="89-5-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Reorder icon tint color" DefaultValue="#ff747474" DestAttribName="basic_interaction_expand_button" UID="89-5-3" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="Background color" DefaultValue="#fffafafa" DestAttribName="control_settings_activity_background" UID="89-6-1" ValueRef="1-39-1" ValueType="BgColor" />
+        <Property Comment="Main ON background color" DefaultValue="#ffaad2fa" DestAttribName="basic_interaction_main_switch_on_background" Opacity="10" UID="89-6-2" ValueRef="1-1-3" ValueType="BgColor" />
+        <Property Comment="Main Off background color" DefaultValue="#fffafafa" DestAttribName="basic_interaction_main_switch_off_background" UID="89-6-2-1" ValueRef="1-39-1" ValueType="BgColor" />
+        <Property Comment="Main ON text color" DefaultValue="#ff0072de" DestAttribName="basic_interaction_main_switch_on_text" UID="89-6-3" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="Main Off text color" DefaultValue="#ff252525" DestAttribName="basic_interaction_main_switch_off_text" UID="89-6-3-1" ValueRef="1-39-2" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

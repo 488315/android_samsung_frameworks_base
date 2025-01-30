@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/sem_resolver_item_ripple_background" />
+    <item android:drawable="@drawable/sem_resolver_item_background_shape_material" />
+</layer-list>

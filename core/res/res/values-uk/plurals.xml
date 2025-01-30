@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Планшет працює нестабільно, оскільки вилучено SD-карту, на яку встановлено програми. Для відновлення нормальної роботи планшет буде перезавантажено через %d секунди. Збережіть усі незбереженні дані, перш ніж планшет буде перезавантажено.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Планшет працює нестабільно, оскільки вилучено SD-карту, на яку встановлено програми. Для відновлення нормальної роботи планшет буде перезавантажено через %d секунду. Збережіть усі незбереженні дані, перш ніж планшет буде перезавантажено.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Планшет працює нестабільно, оскільки вилучено SD-карту, на яку встановлено програми. Для відновлення нормальної роботи планшет буде перезавантажено через %d секунди. Збережіть усі незбереженні дані, перш ніж планшет буде перезавантажено.</item>
+        <item quantity="many">Планшет працює нестабільно, оскільки вилучено SD-карту, на яку встановлено програми. Для відновлення нормальної роботи планшет буде перезавантажено через %d секунд. Збережіть усі незбереженні дані, перш ніж планшет буде перезавантажено.</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Перезавантаження через %d секунди</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Перезавантаження через %d секунду</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Перезавантаження через %d секунди</item>
+        <item quantity="many">Перезавантаження через %d секунд</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">Робота %d програми призводила до перегрівання телефону, тому їх було автоматично закрито. Ви можете знову відкрити ці програми, після того як телефон охолоне.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Робота %d програми призводила до перегрівання телефону, тому її було автоматично закрито. Ви можете знову відкрити цю програму, після того як телефон охолоне.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Робота %d програм призводила до перегрівання телефону, тому їх було автоматично закрито. Ви можете знову відкрити ці програми, після того як телефон охолоне.</item>
+        <item quantity="many">Робота %d програм призводила до перегрівання телефону, тому їх було автоматично закрито. Ви можете знову відкрити ці програми, після того як телефон охолоне.</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">Робота %d програми призводила до перегрівання планшета, тому їх було автоматично закрито. Ви можете знову відкрити ці програми, після того як планшет охолоне.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Робота %d програми призводила до перегрівання планшета, тому її було автоматично закрито. Ви можете знову відкрити цю програму, після того як планшет охолоне.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Робота %d програм призводила до перегрівання планшета, тому їх було автоматично закрито. Ви можете знову відкрити ці програми, після того як планшет охолоне.</item>
+        <item quantity="many">Робота %d програм призводила до перегрівання планшета, тому їх було автоматично закрито. Ви можете знову відкрити ці програми, після того як планшет охолоне.</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">Закрито %d програми</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Закрито %d програму</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Закрито %d програми</item>
+        <item quantity="many">Закрито %d програм</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Неможливо одночасно відобразити більше %d програми на екрані. Програму, запущену раніше інших, згорнуто.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Неможливо одночасно відобразити більше %d програми на екрані. Програму, запущену раніше інших, згорнуто.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Неможливо одночасно відобразити більше %d програм на екрані. Програму, запущену раніше інших, згорнуто.</item>
+        <item quantity="many">Неможливо одночасно відобразити більше %d програм на екрані. Програму, запущену раніше інших, згорнуто.</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Відкрийте програму, яку потрібно призначити, а потім натисніть клавішу програми та утримуйте її протягом %d секунд.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Відкрийте програму, яку потрібно призначити, а потім натисніть клавішу програми та утримуйте її протягом %d секунди.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Відкрийте програму, яку потрібно призначити, а потім натисніть клавішу програми та утримуйте її протягом %d секунд.</item>
+        <item quantity="many">Відкрийте програму, яку потрібно призначити, а потім натисніть клавішу програми та утримуйте її протягом %d секунд.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">Робота програми «%1$s» призводить до перегрівання телефона. Програму буде автоматично закрито через %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Робота програми «%1$s» призводить до перегрівання телефона. Програму буде автоматично закрито через %2$d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Робота програми «%1$s» призводить до перегрівання телефона. Програму буде автоматично закрито через %2$d секунди.</item>
+        <item quantity="many">Робота програми «%1$s» призводить до перегрівання телефона. Програму буде автоматично закрито через %2$d секунд.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">Робота програми «%1$s» призводить до перегрівання планшета. Програму буде автоматично закрито через %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Робота програми «%1$s» призводить до перегрівання планшета. Програму буде автоматично закрито через %2$d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Робота програми «%1$s» призводить до перегрівання планшета. Програму буде автоматично закрито через %2$d секунди.</item>
+        <item quantity="many">Робота програми «%1$s» призводить до перегрівання планшета. Програму буде автоматично закрито через %2$d секунд.</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Створюйте резервні копії необмеженого обсягу даних у Samsung Cloud строком на %d дня або відновлюйте вже наявні резервні копії.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Створюйте резервні копії необмеженого обсягу даних у Samsung Cloud строком на %d день або відновлюйте вже наявні резервні копії.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Створюйте резервні копії необмеженого обсягу даних у Samsung Cloud строком на %d дні або відновлюйте вже наявні резервні копії.</item>
+        <item quantity="many">Створюйте резервні копії необмеженого обсягу даних у Samsung Cloud строком на %d днів або відновлюйте вже наявні резервні копії.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">Робота програми «%1$s» призводить до перегрівання телефону. Закрийте програму зараз, або її буде автоматично закрито через %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Робота програми «%1$s» призводить до перегрівання телефону. Закрийте програму зараз, або її буде автоматично закрито через %2$d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Робота програми «%1$s» призводить до перегрівання телефону. Закрийте програму зараз, або її буде автоматично закрито через %2$d секунди.</item>
+        <item quantity="many">Робота програми «%1$s» призводить до перегрівання телефону. Закрийте програму зараз, або її буде автоматично закрито через %2$d секунд.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">Робота програми «%1$s» призводить до перегрівання планшета. Закрийте програму зараз, або її буде автоматично закрито через %2$d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Робота програми «%1$s» призводить до перегрівання планшета. Закрийте програму зараз, або її буде автоматично закрито через %2$d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Робота програми «%1$s» призводить до перегрівання планшета. Закрийте програму зараз, або її буде автоматично закрито через %2$d секунди.</item>
+        <item quantity="many">Робота програми «%1$s» призводить до перегрівання планшета. Закрийте програму зараз, або її буде автоматично закрито через %2$d секунд.</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">У вас залишилося %d спроби. Після цього SIM-карту буде заблоковано.</item>
+        <item quantity="one">У вас залишилась %d спроба. Після цього SIM-карту буде заблоковано.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d об’єкта</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d об’єкт</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d об’єкта</item>
+        <item quantity="many">%d об’єктів</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">До вибраної мережі Wi-Fi одночасно може підключатися не більше ніж %d пристрою. Відключіть інші пристрої від мережі та спробуйте ще раз.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">До вибраної мережі Wi-Fi одночасно може підключатися не більше ніж %d пристрій. Відключіть інші пристрої від мережі та спробуйте ще раз.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">До вибраної мережі Wi-Fi одночасно може підключатися не більше ніж %d пристрої. Відключіть інші пристрої від мережі та спробуйте ще раз.</item>
+        <item quantity="many">До вибраної мережі Wi-Fi одночасно може підключатися не більше ніж %d пристроїв. Відключіть інші пристрої від мережі та спробуйте ще раз.</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d години</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d година</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d години</item>
+        <item quantity="many">%d годин</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d хвилини</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d хвилина</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d хвилини</item>
+        <item quantity="many">%d хвилин</item>
+    </plurals>
+</resources>

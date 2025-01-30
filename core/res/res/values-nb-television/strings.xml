@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sensor_privacy_start_use_camera_notification_content_title">Kameraet er blokkert</string>
+    <string name="sensor_privacy_start_use_mic_notification_content_title">Mikrofonen er blokkert</string>
+</resources>

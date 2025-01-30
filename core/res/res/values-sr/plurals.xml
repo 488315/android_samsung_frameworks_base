@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Tablet je nestabilan jer je SD kartica na kojoj su bile instalirane aplikacije uklonjena. Tablet će se restartovati za %d sekundi kako bi se vratio u normalno stanje. Sačuvajte nesačuvane podatke pre nego što se tablet restartuje.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tablet je nestabilan jer je SD kartica na kojoj su bile instalirane aplikacije uklonjena. Tablet će se restartovati za %d sekundu kako bi se vratio u normalno stanje. Sačuvajte nesačuvane podatke pre nego što se tablet restartuje.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Tablet je nestabilan jer je SD kartica na kojoj su bile instalirane aplikacije uklonjena. Tablet će se restartovati za %d sekunde kako bi se vratio u normalno stanje. Sačuvajte nesačuvane podatke pre nego što se tablet restartuje.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Tablet će se restartovati za %d sekundi</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Tablet će se restartovati za %d sekundu</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Tablet će se restartovati za %d sekunde</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+        <item quantity="zero">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+        <item quantity="one">%d app was closed automatically because it was causing your phone to overheat. You can open it again later after your phone cools down.</item>
+        <item quantity="two">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+        <item quantity="few">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+        <item quantity="many">%d apps were closed automatically because they were causing your phone to overheat. You can open them again later after your phone cools down.</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+        <item quantity="zero">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+        <item quantity="one">%d app was closed automatically because it was causing your tablet to overheat. You can open it again later after your tablet cools down.</item>
+        <item quantity="two">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+        <item quantity="few">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+        <item quantity="many">%d apps were closed automatically because they were causing your tablet to overheat. You can open them again later after your tablet cools down.</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d apps closed</item>
+        <item quantity="zero">%d apps closed</item>
+        <item quantity="one">%d app closed</item>
+        <item quantity="two">%d apps closed</item>
+        <item quantity="few">%d apps closed</item>
+        <item quantity="many">%d apps closed</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Istovremeno možete da prikazujete najviše %d aplikacija na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Istovremeno možete da prikazujete najviše %d aplikaciju na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Istovremeno možete da prikazujete najviše %d aplikacije na ekranu. Najstarija aplikacija je umanjena.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Отворите апликацију коју желите да доделите, а затим притисните и задржите тастер апликације на %d секунди.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Отворите апликацију коју желите да доделите, а затим притисните и задржите тастер апликације на %d секунду.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Отворите апликацију коју желите да доделите, а затим притисните и задржите тастер апликације на %d секунде.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="zero">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="one">%1$s is causing your phone to overheat. It will be automatically closed in %2$d second.</item>
+        <item quantity="two">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="few">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="many">%1$s is causing your phone to overheat. It will be automatically closed in %2$d seconds.</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="zero">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="one">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d second.</item>
+        <item quantity="two">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="few">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+        <item quantity="many">%1$s is causing your tablet to overheat. It will be automatically closed in %2$d seconds.</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Бекапујте неограничену количину података на Samsung Cloud и чувајте их до %d дана или вратите податке које сте бекаповали.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Бекапујте неограничену количину података на Samsung Cloud и чувајте их до %d дан или вратите податке које сте бекаповали.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Бекапујте неограничену количину података на Samsung Cloud и чувајте их до %d дана или вратите податке које сте бекаповали.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="zero">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="one">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d second.</item>
+        <item quantity="two">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="few">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="many">%1$s is causing your phone to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="zero">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="one">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d second.</item>
+        <item quantity="two">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="few">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+        <item quantity="many">%1$s is causing your tablet to overheat. You can close it now, or it will be closed automatically in %2$d seconds.</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Имате још %d покушаја пре него што се SIM картица закључа.</item>
+        <item quantity="one">Имате још %d покушај пре него што се SIM картица закључа.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d ставки</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d ставка</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">%d ставке</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Само %d уређаја може истовремено да се повеже на Wi-Fi мрежу на коју желите да се повежете. Прекините везу свих других уређаја са том мрежом и покушајте поново.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Само %d уређај може истовремено да се повеже на Wi-Fi мрежу на коју желите да се повежете. Прекините везу свих других уређаја са том мрежом и покушајте поново.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">Само %d уређаја могу истовремено да се повежу на Wi-Fi мрежу на коју желите да се повежете. Прекините везу свих других уређаја са том мрежом и покушајте поново.</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d hours</item>
+        <item quantity="zero">%d hours</item>
+        <item quantity="one">%d hour</item>
+        <item quantity="two">%d hours</item>
+        <item quantity="few">%d hours</item>
+        <item quantity="many">%d hours</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minutes</item>
+        <item quantity="zero">%d minutes</item>
+        <item quantity="one">%d minute</item>
+        <item quantity="two">%d minutes</item>
+        <item quantity="few">%d minutes</item>
+        <item quantity="many">%d minutes</item>
+    </plurals>
+</resources>

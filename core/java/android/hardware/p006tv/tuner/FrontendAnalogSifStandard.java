@@ -1,0 +1,34 @@
+package android.hardware.p006tv.tuner;
+
+/* loaded from: classes2.dex */
+public @interface FrontendAnalogSifStandard {
+    public static final int AUTO = 1;
+
+    /* renamed from: BG */
+    public static final int f247BG = 2;
+    public static final int BG_A2 = 4;
+    public static final int BG_NICAM = 8;
+
+    /* renamed from: DK */
+    public static final int f248DK = 32;
+    public static final int DK1_A2 = 64;
+    public static final int DK2_A2 = 128;
+    public static final int DK3_A2 = 256;
+    public static final int DK_NICAM = 512;
+
+    /* renamed from: I */
+    public static final int f249I = 16;
+    public static final int I_NICAM = 32768;
+
+    /* renamed from: L */
+    public static final int f250L = 1024;
+    public static final int L_NICAM = 65536;
+    public static final int L_PRIME = 131072;
+
+    /* renamed from: M */
+    public static final int f251M = 2048;
+    public static final int M_A2 = 8192;
+    public static final int M_BTSC = 4096;
+    public static final int M_EIAJ = 16384;
+    public static final int UNDEFINED = 0;
+}

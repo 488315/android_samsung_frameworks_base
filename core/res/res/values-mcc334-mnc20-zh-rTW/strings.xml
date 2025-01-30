@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="config_pdp_reject_dialog_title" />
+    <string name="config_pdp_reject_multi_conn_to_same_pdn_not_allowed">指定的 APN 不允許有多個 PDN 連線 -55-</string>
+    <string name="config_pdp_reject_service_not_subscribed">未訂閱服務 -33-</string>
+    <string name="config_pdp_reject_user_authentication_failed">驗證失敗 -29-</string>
+</resources>

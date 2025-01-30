@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">អ្នកនៅសល់ការព្យាយាម %d ដងទៀត មុនពេលស៊ីមត្រូវចាក់សោ។</item>
+        <item quantity="one">អ្នកនៅសល់ការព្យាយាម %d ដងទៀត មុនពេលស៊ីមត្រូវចាក់សោ។</item>
+    </plurals>
+</resources>

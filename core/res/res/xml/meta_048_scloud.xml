@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.7">
+    <AppMetaData Name="sCloud" TargetApi="19" TargetPackageName="com.samsung.android.scloud" VersionCode="1">
+        <Include RefName="SESL" />
+        <Property DestAttribName="o100_8ba5ea_1_d" UID="48-B" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Main text color" DestAttribName="o100_252525_24_a" UID="48-C" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Sub text color" DestAttribName="o100_979797_24_b,sub_text_color" UID="48-D" ValueRef="24-B" ValueType="TextColor" />
+        <Property DestAttribName="o100_f2f2f2_1_1_1,window_bg_color_with_progress" UID="48-F" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property DestAttribName="o100_fcfcfc_1_1_1,window_bg_color" UID="48-G" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property DestAttribName="o100_fafafa_1_1_1,actionbar_bg_color" UID="48-H" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Dashboard Gallery Icon Color" DestAttribName="o100_c10040_9_3_1_1" UID="48-1-1" ValueRef="9-3-2-1" ValueType="Color" />
+        <Property Comment="Dashboard Other Synced data Icon Color" DestAttribName="o100_69a9f1_9_3_1_2" UID="48-1-2" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Dashboard Drive Icon Color" DestAttribName="o100_c17adf_9_3_1_3" UID="48-1-3" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Dashboard BNR Icon Color" DestAttribName="o100_aad544_9_3_1_4,dashboard_backup_icon_tint_color,dashboard_restore_icon_tint_color" UID="48-1-4" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property DestAttribName="sep10_shape_bg_color,content_background_color" UID="48-1-5" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Dashboard Graph BG line" DestAttribName="o100_d2d2d2_o18_1_a,dashboard_graph_bg_color" Opacity="18" UID="48-1-6" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Dashboard Graph ongoing line" DestAttribName="o100_0074d4_1_a,dashboard_graph_ongoing_color" UID="48-1-7" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="OD Agreement Icon1" DestAttribName="o100_fbc261_9_3_1_4" UID="48-1-9" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="OD Agreement Icon2" DestAttribName="o100_42a1ec_9_3_1_2" UID="48-1-10" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="OD Agreement Icon3" DestAttribName="o100_f28072_9_3_1_1" UID="48-1-11" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="OD Agreement Icon4" DestAttribName="o100_4772e6_9_3_1_4" UID="48-1-12" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Bar background color" DestAttribName="o100_e2e2e2_1_20_1" UID="48-3-1" ValueRef="1-20-1" ValueType="Color" />
+        <Property Comment="Bar" DestAttribName="o100_8ba5ea_1_20_2" UID="48-3-2" ValueRef="1-20-2" ValueType="Color" />
+        <Property Comment="Selected mark icon image" DestAttribName="cloud_backingup_ic_check" UID="48-3-3" ValueRef="1-10-10" ValueType="BgImage" />
+        <Property Comment="Backup and Restore Expire date text color" DestAttribName="o100_eb543f_1_33_1" UID="48-3-4" ValueRef="24-G" ValueType="TextColor" />
+        <Property Comment="Storage Main First Product Color" DestAttribName="o100_3199e1_1_a" UID="48-4-1" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="Storage Main Third product Color" DestAttribName="o100_6a5cd3_1_a" UID="48-4-2" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="Storage Plan Sub Text Color" DestAttribName="o100_8f8f8f_24_b" UID="48-4-3" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Storage Plan Date Text Color" DestAttribName="o100_5a5a5a_24_b" UID="48-4-4" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Storage Plan Upgrade Button Color" DestAttribName="o100_fafafa_24_b" UID="48-4-5" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Storage No purchases text color" DestAttribName="o100_a6a6a6_24_b" UID="48-5-1" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Retry Icon Color" DestAttribName="o100_fafafa_1_48_5" UID="48-5-2" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Drive Recent Icon Color" DestAttribName="o100_46c8c1_9_3_1_1" UID="48-6-1" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Drive Favorites Icon Color" DestAttribName="o100_ffbf00_9_3_1_2" UID="48-6-2" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Drive Images Icon Color" DestAttribName="o100_81dd5d_9_3_1_3" UID="48-6-3" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Drive Audio Icon Color" DestAttribName="o100_53b8f5_9_3_1_4" UID="48-6-4" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Drive Video Icon Color" DestAttribName="o100_9d86f3_9_3_1_1" UID="48-6-5" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Drive Documents Icon Color" DestAttribName="o100_f8a759_9_3_1_2" UID="48-6-6" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Drive Error Icon Color" DestAttribName="o100_ff6565_24_g" UID="48-6-7" ValueRef="24-G" ValueType="TintColor" />
+        <Property Comment="Drive Tab Unselected Text Color" DestAttribName="o40_4d72d1_1_a" Opacity="40" UID="48-7-1" ValueRef="1-A" ValueType="TintColor" />
+        <Property DestAttribName="selected_tab_background" UID="48-7-2" ValueRef="1-13-5" ValueType="BgImage" />
+        <Property Comment="Drive Upload Cancel Icon Color" DestAttribName="o100_000000_1_7_2" UID="48-7-3" ValueRef="1-7-2" ValueType="TintColor" />
+        <Property Comment="Drive Tab Selected Text Color" DestAttribName="o100_0074d4_1_13_4" UID="48-7-4" ValueRef="1-13-4" ValueType="TintColor" />
+        <Property Comment="Drive Tab Unselected Text Color" DestAttribName="drive_tab_unselected_text_color" UID="48-7-5" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Drive Main Selected Mode Bottom Icon and Text Color" DestAttribName="o100_737373_1_1_3" UID="48-8-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Drive Root Path Indicator Color" DestAttribName="o50_979797_1_12_3" Opacity="50" UID="48-9-1" ValueRef="1-12-3" ValueType="TextColor" />
+        <Property Comment="Drive Path Text Color" DestAttribName="o100_808080_1_12_3" UID="48-9-2" ValueRef="1-12-3" ValueType="TextColor" />
+        <Property Comment="Drive File box background color" DestAttribName="o100_f2f2f2_24_d" UID="48-10-1" ValueRef="24-D" ValueType="TextColor" />
+        <Property Comment="Drive File Info Text Color" DestAttribName="o100_3b3b3b_24_a" UID="48-10-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Backup Restore Info Text Color" DestAttribName="o100_505050_24_b" UID="48-11-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Backup Restore Additional Button Color" DestAttribName="o100_8e8e8e_1_c" UID="48-11-2" ValueRef="1-C" ValueType="TextColor" />
+        <Property Comment="Vertical Divider Color" DestAttribName="o100_e6e6e6_1_2" UID="48-11-3" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Select all text color" DestAttribName="o100_252525_1_1_3" UID="48-12-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property DestAttribName="o96_252525_1_1_3" UID="48-12-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property DestAttribName="o100_000000_1_3_1" UID="48-13-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property DestAttribName="o100_454545_1_1_3,app_info_icon_color" UID="48-14-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property DestAttribName="o100_454545_1_1_3_t,extended_actionbar_title_text_color" UID="48-14-2" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="About page create button background color" DestAttribName="o100_0074d4_1_48_2" UID="48-14-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="About page create button text color" DestAttribName="o100_0074d4_1_48_5_t" UID="48-14-4" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="About page bottom button background color" DestAttribName="o100_ebebeb_1_7_1_d" UID="48-14-5" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="About page bottom button text color" DestAttribName="o100_252525_1_7_2_d" UID="48-14-6" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="About page background" DestAttribName="about_page_background" UID="48-14-7" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Sub Header Text Color" DestAttribName="sub_header_text_color" UID="48-15-1" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Master Switch Off Text Color" DestAttribName="o100_252525_1_39_2" UID="48-16-1" ValueRef="1-39-2" ValueType="TextColor" />
+        <Property DestAttribName="sep10_master_switch_off_bg_color" UID="48-16-2" ValueRef="1-39-1" ValueType="BgColor" />
+        <Property DestAttribName="o100_ebebeb_1_7_1" UID="48-17-1" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Gallery Download Data Button Text Color" DestAttribName="o100_252525_1_7_2" UID="48-17-2" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Migration Agreement Bottom Scroll Down Arrow Color" DestAttribName="o30_000000_1_7_1" Opacity="30" UID="48-18-1" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Not available cloud image" DestAttribName="o00_000000_1_7_1" UID="48-19-1" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Not available exclamation mark" DestAttribName="o00_000000_24_E" UID="48-19-2" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Go to top background" DestAttribName="o100_f2f2f2_1_18_1" UID="48-20-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Go to top outline" DestAttribName="o20_252525_o20_24_e" Opacity="20" UID="48-20-2" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Go to top upper" DestAttribName="o100_a9a9a9_o20_24_e" Opacity="20" UID="48-20-3" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Go to top lower" DestAttribName="o100_797979_24_e" UID="48-20-4" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Backup Dropdown background color" DestAttribName="backup_dropdown_background_color" UID="48-22-1" ValueRef="1-10-1" ValueType="Color" />
+        <Property Comment="Backup Dropdown background image" DestAttribName="backup_dropdown_background_image" UID="48-22-1-1" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property Comment="Backup Dropdown background stroke color" DestAttribName="backup_dropdown_background_stroke_color" UID="48-22-2" ValueRef="1-10-2" ValueType="Color" />
+        <Property Comment="Backup Dropdown Text Color" DestAttribName="backup_dropdown_text_color" UID="48-22-3" ValueRef="1-10-3" ValueType="Color" />
+        <Property Comment="Backup Dropdown Selected mark icon image" DestAttribName="backup_dropdown_selected_mark_icon_image" UID="48-22-4" ValueRef="1-10-10" ValueType="BgImage" />
+        <Property Comment="Termination Notice Bottom Button Background Color" DestAttribName="termination_notice_bottom_button_background_color" UID="48-23-1" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Termination Notice Bottom Button Text Color" DestAttribName="termination_notice_bottom_button_text_color" UID="48-23-2" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="Download Notice Body Text Color" DestAttribName="download_notice_body_text_color" UID="48-23-3" ValueRef="1-9-3" ValueType="Color" />
+        <Property Comment="Download Notice Title Text Color" DestAttribName="download_notice_title_text_color" UID="48-23-4" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Checkbox on Color" DestAttribName="checkbox_on_color" UID="48-24-1" ValueRef="1-6-1" ValueType="Color" />
+        <Property Comment="Checkbox on Image" DestAttribName="ic_checkbox_on" UID="48-24-1-1" ValueRef="1-6-1-1" ValueType="BgImage" />
+        <Property Comment="Checkbox off Color" DestAttribName="checkbox_off_color" UID="48-24-2" ValueRef="1-6-2" ValueType="Color" />
+        <Property Comment="Checkbox off Image" DestAttribName="ic_checkbox_off" UID="48-24-2-1" ValueRef="1-6-2-1" ValueType="BgImage" />
+        <Property Comment="ActionBar Back Icon tint color" DestAttribName="action_bar_back_icon_tint_color" UID="48-25-1" ValueRef="1-11-3" ValueType="TintColor" />
+        <Property Comment="ActionBar Back Icon Image" DestAttribName="ic_tw_ic_ab_back_mtrl" UID="48-25-2" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Primary Color" DestAttribName="o100_4d72d1_1_a,primary_color" UID="48-A" ValueRef="1-A" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

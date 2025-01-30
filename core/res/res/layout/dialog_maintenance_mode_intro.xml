@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:id="@id/maintenance_mode_intro_dialog_scrollview" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_marginTop="@dimen/maintenance_mode_dialog_margin_top" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="@dimen/maintenance_mode_common_text_size" android:id="@id/maintenance_mode_intro_dialog_textview" android:layout_marginStart="@dimen/maintenance_mode_common_margin" android:layout_marginEnd="@dimen/maintenance_mode_common_margin" style="@style/TextAppearance.MaintenanceMode.Dialog.Body" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/maintenance_mode_intro_dialog_checkbox_layout" android:paddingTop="@dimen/maintenance_mode_dialog_checkbox_padding_top_bottom" android:paddingBottom="@dimen/maintenance_mode_dialog_checkbox_padding_top_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/maintenance_mode_dialog_checkbox_layout_margin_top">
+            <CheckedTextView android:textAppearance="@style/TextAppearance.MaintenanceMode.Main" android:textSize="@dimen/maintenance_mode_common_checkbox_text_size" android:gravity="center_vertical" android:id="@id/maintenance_mode_intro_dialog_checked_textview" android:focusable="true" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/maintenance_mode_intro_dialog_checkbox_text" android:drawablePadding="@dimen/maintenance_mode_dialog_checkbox_margin" android:drawableStart="@drawable/sem_checkedtextview_check_material_anim" android:paddingEnd="@dimen/maintenance_mode_dialog_checkbox_margin" android:layout_marginStart="@dimen/maintenance_mode_dialog_checkbox_margin" android:layout_marginEnd="@dimen/maintenance_mode_common_margin" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

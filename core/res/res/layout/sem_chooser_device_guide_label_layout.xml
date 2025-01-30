@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content" app:layout_alwaysShow="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <View android:gravity="center_vertical" android:layout_gravity="center_vertical" android:orientation="vertical" android:background="@color/chooser_row_divider" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:id="@id/sem_chooser_device_guide_parent" android:background="@color/sem_resolver_bg_color" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="5.0dip" android:paddingEnd="5.0dip">
+        <TextView android:textAppearance="?textAppearanceSmall" android:textSize="@dimen/sem_chooser_device_guide_label_text_size" android:textColor="@color/sem_resolver_item_sub_text_color" android:layout_gravity="center" android:id="@id/sem_chooser_device_guide_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sem_chooser_device_guide_label_text" android:singleLine="true" />
+    </LinearLayout>
+</FrameLayout>

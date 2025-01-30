@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="SDcardBlockUnmount_message">
+        <item quantity="other">Surfplattan är instabil eftersom ett SD-kort med installerade appar har tagits bort. Surfplattan startar om om %d sekunder för att kunna fungera normalt. Spara alla data som inte har sparats innan surfplattan startas om.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Surfplattan är instabil eftersom ett SD-kort med installerade appar har tagits bort. Surfplattan startar om om %d sekund för att kunna fungera normalt. Spara alla data som inte har sparats innan surfplattan startas om.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="SDcardBlockUnmount_title">
+        <item quantity="other">Surfplattan startar om om %d sekunder</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Surfplattan startar om om %d sekund</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_phone">
+        <item quantity="other">%d appar har stängts automatiskt eftersom de gjorde att telefonen överhettades. Du kan öppna apparna igen när telefonen har svalnat.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app har stängts automatiskt eftersom den gjorde att telefonen överhettades. Du kan öppna appen igen när telefonen har svalnat.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_content_v2_tablet">
+        <item quantity="other">%d appar har stängts automatiskt eftersom de gjorde att surfplattan överhettades. Du kan öppna apparna igen när surfplattan har svalnat.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app har stängts automatiskt eftersom den gjorde att surfplattan överhettades. Du kan öppna appen igen när surfplattan har svalnat.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="app_kills_title_v2">
+        <item quantity="other">%d appar har stängts</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d app har stängts</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="dex_max_count_text">
+        <item quantity="other">Det går inte att visa fler än %d appar på skärmen samtidigt. Den äldsta appen minimeras.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Det går inte att visa fler än %d app på skärmen samtidigt. Den äldsta appen minimeras.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="hot_key_guide_message">
+        <item quantity="other">Öppna appen som du vill tilldela och håll sedan ned appknappen i %d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Öppna appen som du vill tilldela och håll sedan ned appknappen i %d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_phone">
+        <item quantity="other">%1$s gör att telefonen överhettas. Den stängs automatiskt om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s gör att telefonen överhettas. Den stängs automatiskt om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="ltb_warning_content_v2_tablet">
+        <item quantity="other">%1$s gör att surfplattan överhettas. Den stängs automatiskt om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s gör att surfplattan överhettas. Den stängs automatiskt om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="maintenance_mode_backup_cloud_menu_sub_textview_message_default">
+        <item quantity="other">Säkerhetskopiera obegränsade data till Samsung Cloud i upp till %d dagar eller återställ de data som du har säkerhetskopierat.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Säkerhetskopiera obegränsade data till Samsung Cloud i upp till %d dag eller återställ de data som du har säkerhetskopierat.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_phone">
+        <item quantity="other">%1$s gör att telefonen överhettas. Du kan stänga appen nu, annars stängs den automatiskt om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s gör att telefonen överhettas. Du kan stänga appen nu, annars stängs den automatiskt om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="overheat_warning_content_v2_tablet">
+        <item quantity="other">%1$s gör att surfplattan överhettas. Du kan stänga appen nu, annars stängs den automatiskt om %2$d sekunder.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%1$s gör att surfplattan överhettas. Du kan stänga appen nu, annars stängs den automatiskt om %2$d sekund.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="pinpuk_attempts">
+        <item quantity="other">Du har %d försök kvar innan SIM-kortet låses.</item>
+        <item quantity="one">Du har %d försök kvar innan SIM-kortet låses.</item>
+    </plurals>
+    <plurals name="sem_chooser_preview_items">
+        <item quantity="other">%d objekt</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d objekt</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="wifi_kt_iptv_connection_fail_toast_content">
+        <item quantity="other">Wi-Fi-nätverket du vill ansluta till kan bara vara anslutet till %d enheter i taget. Koppla bort alla andra enheter från nätverket och försök sedan igen.</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">Wi-Fi-nätverket du vill ansluta till kan bara vara anslutet till %d enhet i taget. Koppla bort alla andra enheter från nätverket och försök sedan igen.</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_hours">
+        <item quantity="other">%d timmar</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d timme</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+    <plurals name="zen_mode_duration_time_minutes">
+        <item quantity="other">%d minuter</item>
+        <item quantity="zero">N/A</item>
+        <item quantity="one">%d minut</item>
+        <item quantity="two">N/A</item>
+        <item quantity="few">N/A</item>
+        <item quantity="many">N/A</item>
+    </plurals>
+</resources>
